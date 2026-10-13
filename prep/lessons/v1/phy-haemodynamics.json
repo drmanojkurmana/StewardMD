@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "phy-haemodynamics",
+ "subject": "physiology",
+ "title": "Haemodynamics and microcirculation: core principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Blood flow follows the same logic as current in a circuit. Flow equals **pressure gradient** divided by **resistance**. In a tube, resistance depends on viscosity, tube length and radius. Poiseuille's law states that resistance falls steeply as radius rises, because flow scales with the fourth power of radius. Halving the radius therefore cuts laminar flow sixteen-fold. Length and viscosity act in direct proportion to resistance.",
+   "say": "Blood flow follows the same logic as current in an electrical circuit. Flow equals the pressure gradient divided by resistance. In a tube, resistance depends on viscosity, length and radius. Poiseuille's law tells us that flow scales with the fourth power of radius. Halving the radius therefore cuts laminar flow sixteen-fold. Length and viscosity change resistance in direct proportion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on resistance",
+     "Effect on flow"
+    ],
+    "rows": [
+     [
+      "Radius",
+      "Inversely, to the fourth power",
+      "Directly, to the fourth power"
+     ],
+     [
+      "Length",
+      "Directly",
+      "Inversely"
+     ],
+     [
+      "Viscosity",
+      "Directly",
+      "Inversely"
+     ],
+     [
+      "Pressure gradient",
+      "None",
+      "Directly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flow is normally **laminar** and silent. It becomes **turbulent** when the Reynolds number rises above about 2000. Reynolds number rises with blood density, vessel diameter and velocity, and falls with viscosity. Turbulence explains the sounds heard during blood pressure measurement. Anaemia lowers viscosity and can produce flow noises. Pressure of the fluid itself has little bearing on turbulence.",
+   "say": "Normal blood flow is laminar and silent. It becomes turbulent when the Reynolds number rises above about two thousand. The number increases with density, diameter and velocity, and falls with viscosity. Turbulence in a narrowed artery produces the sounds used in blood pressure measurement. Pressure alone has little effect on turbulence.",
+   "vis": null
+  },
+  {
+   "tx": "Blood pressure has three key values. **Mean arterial pressure** is not a simple average. It equals diastolic pressure plus one third of the **pulse pressure**. Mean pressure equals cardiac output multiplied by total peripheral resistance. Diastolic pressure mainly reflects peripheral resistance, while systolic pressure reflects stroke volume and arterial stiffness. Windkessel elastic recoil keeps diastolic pressure up in young, compliant aorta.",
+   "say": "Blood pressure has three key values. Mean arterial pressure is diastolic pressure plus one third of the pulse pressure. It also equals cardiac output multiplied by total peripheral resistance. Diastolic pressure mainly reflects peripheral resistance, while systolic pressure reflects stroke volume and arterial stiffness. The elastic recoil of the aorta keeps diastolic pressure up in young people.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Main determinant",
+     "Clinical clue"
+    ],
+    "rows": [
+     [
+      "Mean arterial pressure",
+      "Cardiac output and resistance",
+      "Perfusion of organs"
+     ],
+     [
+      "Diastolic pressure",
+      "Peripheral resistance",
+      "Rises with vasoconstriction"
+     ],
+     [
+      "Systolic pressure",
+      "Stroke volume and stiffness",
+      "Rises with ageing"
+     ],
+     [
+      "Pulse pressure",
+      "Stiffness and stroke volume",
+      "Widens in old age"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Arterioles are the main **resistance vessels**. Veins are **capacitance vessels** because they hold most of the blood volume, roughly sixty to seventy percent. Their walls contain less smooth muscle and elastic tissue than arteries. Capillaries are the **exchange vessels**. They have the largest total cross-sectional area, so flow is slowest there. Their walls are a single endothelial layer.",
+   "say": "Arterioles are the main resistance vessels. Veins act as capacitance vessels, holding most of the blood volume. Their walls contain less smooth muscle and elastic tissue than arteries. Capillaries are the exchange vessels. They have the largest total cross-sectional area, so flow is slowest there.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arterioles",
+     "points": [
+      "Main resistance vessels",
+      "Control regional flow",
+      "Smooth muscle rich"
+     ]
+    },
+    "right": {
+     "title": "Veins",
+     "points": [
+      "Capacitance vessels",
+      "Hold most blood volume",
+      "Have valves"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Capillary exchange follows **Starling forces**. Net filtration pressure equals capillary hydrostatic pressure minus plasma oncotic pressure, adjusted for interstitial forces. At the arteriolar end, filtration favours fluid leaving the capillary. At the venular end, oncotic pressure wins and fluid returns. Excess interstitial fluid drains through lymphatics. Lymph flow rises when capillary pressure increases, plasma oncotic pressure falls, or capillary permeability increases.",
+   "say": "Capillary exchange follows Starling forces. At the arteriolar end, hydrostatic pressure favours filtration out of the capillary. At the venular end, oncotic pressure pulls fluid back in. Excess interstitial fluid drains through lymphatics. Lymph flow rises when capillary pressure increases, plasma oncotic pressure falls, or capillary permeability increases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arteriolar end: filtration"
+     },
+     {
+      "id": "v",
+      "label": "Venular end: reabsorption"
+     },
+     {
+      "id": "l",
+      "label": "Lymphatic drainage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "v",
+      "Fluid balance"
+     ],
+     [
+      "v",
+      "l",
+      "Excess fluid"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "b0de54ba-9c5e-48d8-bcb2-90e3f69c74ff",
+  "4e02550e-0029-4dc1-a697-86f34e63ec40",
+  "09692eda-4a95-4613-9855-ed141332239b"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Ganong's Review of Medical Physiology (Barrett KE)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 201
+ }
+}

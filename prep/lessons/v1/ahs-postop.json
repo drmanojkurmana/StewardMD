@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "ahs-postop",
+ "subject": "adult-health-surgery",
+ "title": "Postoperative complications: recognising and acting on the common threats",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Early **anastomotic leak** after bowel surgery presents with fever, tachycardia, abdominal pain and cloudy or bilious drain output. Raised white cell count and C-reactive protein support the diagnosis. Contrast CT is the preferred test when renal function allows, because it shows free fluid, gas or collections. Sepsis from a leak needs prompt drainage or re-operation, not discharge. Creatinine guides contrast safety.",
+   "say": "Early anastomotic leak after bowel surgery presents with fever, tachycardia, abdominal pain and cloudy or bilious drain output. Raised white cell count and C-reactive protein support the diagnosis. Contrast CT is the preferred test when renal function allows, because it shows free fluid, gas or collections. Sepsis from a leak needs prompt drainage or re-operation, not discharge home. Creatinine guides contrast safety.",
+   "vis": null
+  },
+  {
+   "tx": "**Postoperative atrial fibrillation** is common after thoracic surgery and usually appears on days 2 to 4. Triggers include pain, fluid shifts, electrolyte disturbance and pulmonary causes. A fast ventricular rate reduces output, so rate control with intravenous agents and close monitoring comes first. Assess stroke risk and anticoagulation. Immediate cardioversion is reserved for instability, such as chest pain or shock.",
+   "say": "Postoperative atrial fibrillation is common after thoracic surgery and usually appears on days 2 to 4. Triggers include pain, fluid shifts, electrolyte disturbance and pulmonary causes. A fast ventricular rate reduces output, so rate control with intravenous agents and close monitoring comes first. Assess stroke risk and anticoagulation. Immediate cardioversion is reserved for instability, such as chest pain or shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable patient",
+     "points": [
+      "Alert, no chest pain",
+      "Rate control first",
+      "Assess anticoagulation"
+     ]
+    },
+    "right": {
+     "title": "Unstable patient",
+     "points": [
+      "Hypotension or shock",
+      "Chest pain or confusion",
+      "Synchronised cardioversion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Venous thromboembolism** is a major cause of death after arthroplasty and abdominal surgery. Sudden breathlessness, pleuritic pain and hypoxia suggest pulmonary embolism. In a haemodynamically stable patient with hypoxia, CT pulmonary angiogram is the investigation of choice. Calf swelling makes a leg source likely, and duplex ultrasound can confirm it. Treat with anticoagulation once the diagnosis is supported.",
+   "say": "Venous thromboembolism is a major cause of death after arthroplasty and abdominal surgery. Sudden breathlessness, pleuritic pain and hypoxia suggest pulmonary embolism. In a haemodynamically stable patient with hypoxia, CT pulmonary angiogram is the investigation of choice. Calf swelling makes a leg source likely, and duplex ultrasound can confirm it. Treat with anticoagulation once the diagnosis is supported.",
+   "vis": null
+  },
+  {
+   "tx": "**Postoperative haemorrhage** presents with hypotension, tachycardia, pallor and a falling haemoglobin. Early in the first day, a normal INR and platelet count point to surgical bleeding rather than coagulopathy. Crossmatch blood, resuscitate and seek urgent surgical review to find the source. A rapidly enlarging tense neck swelling after thyroidectomy is a neck haematoma that compresses the airway and needs immediate opening of the wound.",
+   "say": "Postoperative haemorrhage presents with hypotension, tachycardia, pallor and a falling haemoglobin. Early in the first day, a normal INR and platelet count point to surgical bleeding rather than coagulopathy. Crossmatch blood, resuscitate and seek urgent surgical review to find the source. A rapidly enlarging tense neck swelling after thyroidectomy is a neck haematoma that compresses the airway and needs immediate opening of the wound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tense neck swelling"
+     },
+     {
+      "id": "b",
+      "label": "Stridor and falling SpO2"
+     },
+     {
+      "id": "c",
+      "label": "Open wound at bedside"
+     },
+     {
+      "id": "d",
+      "label": "Theatre for haemostasis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery (Williams and Bulstrode)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

@@ -1,0 +1,78 @@
+{
+ "v": 1,
+ "module": "son-breast-her2",
+ "subject": "ss-medical-oncology",
+ "title": "HER2-positive breast cancer: targeted therapy and cardiac safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "HER2 (human epidermal growth factor receptor 2) is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. **Trastuzumab** is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is **cardiotoxicity**, so heart function, usually tracked through **left ventricular ejection fraction** (LVEF) monitoring, must be followed throughout therapy. **Pertuzumab** adds a second layer of HER2 blockade on top of trastuzumab.",
+   "say": "HER2 is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. Trastuzumab is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is cardiotoxicity, so heart function, usually tracked by measuring left ventricular ejection fraction, must be followed throughout therapy. Pertuzumab adds a second layer of HER2 blockade on top of trastuzumab.",
+   "vis": null
+  },
+  {
+   "tx": "Cardiac surveillance is central to anti-HER2 therapy. Assess **LVEF** (left ventricular ejection fraction) by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during treatment for dual blockade and trastuzumab-based regimens. A fall in LVEF below the protocol threshold requires holding the drug and reassessing. Indian practice follows the same principle, so monitoring should not be skipped in resource-limited centres.",
+   "say": "Cardiac surveillance is central to anti-HER2 therapy. Assess left ventricular ejection fraction by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during dual blockade and trastuzumab-based regimens. A fall below the protocol threshold requires holding the drug and reassessing cardiac function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time point",
+     "Assessment",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Before treatment",
+      "Baseline LVEF",
+      "Record as reference"
+     ],
+     [
+      "Every 3 months",
+      "Repeat LVEF",
+      "Continue if stable"
+     ],
+     [
+      "LVEF falls",
+      "Repeat imaging",
+      "Hold and reassess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trastuzumab emtansine (T-DM1), studied in **KATHERINE**, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume according to protocol dose modification. Hepatotoxicity also needs regular liver function monitoring.",
+   "say": "Trastuzumab emtansine, studied in KATHERINE, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume per protocol dose modification.",
+   "vis": null
+  },
+  {
+   "tx": "Neoadjuvant therapy aims for a **pathological complete response** (pCR), meaning no invasive cancer left in breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease after neoadjuvant therapy identifies patients who need intensified adjuvant treatment.",
+   "say": "Neoadjuvant therapy aims for a pathological complete response, meaning no invasive cancer left in the breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease identifies patients needing intensified adjuvant treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1e285a356b61",
+  "q_9ebf74454b24",
+  "q_0c2091b3b00d"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on early and locally advanced breast cancer (NG101)",
+  "ESMO Clinical Practice Guidelines for early breast cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 70
+ }
+}

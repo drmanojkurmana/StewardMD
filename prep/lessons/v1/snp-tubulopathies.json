@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "snp-tubulopathies",
+ "subject": "ss-nephrology",
+ "title": "Inherited tubulopathies: salt handling defects and key syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Inherited tubulopathies are **monogenic transporter defects** of the renal tubule. Hypokalaemia with metabolic alkalosis tells you the tubule is wasting salt and potassium. Bartter syndrome affects the thick ascending limb and is normotensive with hypercalciuria. Gitelman syndrome affects the distal convoluted tubule and causes **hypomagnesaemia** with hypocalciuria. Liddle syndrome is a gain of **epithelial sodium channel** function, causing hypertension with suppressed renin and aldosterone.",
+   "say": "Inherited tubulopathies are monogenic transporter defects of the renal tubule. Hypokalaemia with metabolic alkalosis tells you the tubule is wasting salt and potassium. Bartter syndrome affects the thick ascending limb and is normotensive, with hypercalciuria. Gitelman syndrome affects the distal convoluted tubule and causes hypomagnesaemia with hypocalciuria. Liddle syndrome is a gain of epithelial sodium channel function, causing hypertension with suppressed renin and aldosterone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Bartter",
+     "Gitelman",
+     "Liddle"
+    ],
+    "rows": [
+     [
+      "Tubular site",
+      "Thick ascending limb",
+      "Distal convoluted tubule",
+      "Collecting duct sodium channel"
+     ],
+     [
+      "Serum magnesium",
+      "Normal or low",
+      "Low",
+      "Normal"
+     ],
+     [
+      "Urinary calcium",
+      "High",
+      "Low",
+      "Normal"
+     ],
+     [
+      "Blood pressure",
+      "Normal or low",
+      "Normal or low",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vomiting and covert diuretic use can mimic Bartter syndrome, so a **spot urine chloride** is the key discriminator. Bartter syndrome usually shows urine chloride above 35 mmol per litre because the salt loss is renal. Vomiting drives chloride out through the stomach, so urine chloride falls below 25 mmol per litre. Diuretic misuse also gives high urine chloride, so a urinary screen for diuretics is worth ordering.",
+   "say": "Vomiting and covert diuretic use can mimic Bartter syndrome, so a spot urine chloride is the key discriminator. Bartter syndrome usually shows urine chloride above 35 millimoles per litre because the salt loss is renal. Vomiting removes chloride through the stomach, so urine chloride falls below 25 millimoles per litre. Diuretic misuse also gives high urine chloride, so a urinary screen for diuretics is worth ordering.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hypokalaemic alkalosis"
+     },
+     {
+      "id": "b",
+      "label": "Spot urine chloride"
+     },
+     {
+      "id": "c",
+      "label": "Above 35 mmol per litre"
+     },
+     {
+      "id": "d",
+      "label": "Below 25 mmol per litre"
+     },
+     {
+      "id": "e",
+      "label": "Renal salt loss: Bartter or diuretic"
+     },
+     {
+      "id": "f",
+      "label": "Vomiting"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "high"
+     ],
+     [
+      "b",
+      "d",
+      "low"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bartter syndrome management targets the **prostaglandin E2 excess** that drives salt loss and renal injury. Potassium and salt replacement correct the deficits. In neonates, indomethacin at 1 to 3 mg per kg per 24 hours is used to counter prostaglandin E2. Potassium sparing agents such as amiloride can be added. Note that Bartter-like syndromes from aminoglycosides often resolve over weeks to months after stopping the drug.",
+   "say": "Bartter syndrome management targets the prostaglandin E2 excess that drives salt loss and renal injury. Potassium and salt replacement correct the deficits. In neonates, indomethacin at 1 to 3 milligrams per kilogram per 24 hours is used to counter prostaglandin E2. Potassium sparing agents such as amiloride can be added. Bartter-like syndromes caused by aminoglycosides often resolve over weeks to months after the drug is stopped.",
+   "vis": null
+  },
+  {
+   "tx": "Gitelman syndrome is autosomal recessive from **SLC12A3** mutations affecting the sodium chloride cotransporter. Hypomagnesaemia drives potassium wasting, so **magnesium replacement** is central to correcting potassium. Oral sodium chloride addresses the transporter defect, and magnesium chloride is preferred because it also replaces the chloride lost in urine. Affected individuals usually have normal or low blood pressure and muscle cramps, and the risk to each child of an affected couple is one in four.",
+   "say": "Gitelman syndrome is autosomal recessive, caused by mutations in the gene that encodes the sodium chloride cotransporter. Hypomagnesaemia drives potassium wasting, so magnesium replacement is central to correcting potassium. Oral sodium chloride addresses the transporter defect, and magnesium chloride is preferred because it also replaces the chloride lost in urine. Affected people usually have normal or low blood pressure and muscle cramps, and each child of two carriers has a one in four risk.",
+   "vis": null
+  },
+  {
+   "tx": "Cystinosis is an autosomal recessive **lysosomal storage** disorder from CTNS mutations, causing cystine accumulation. It produces a renal Fanconi syndrome with phosphate and bicarbonate wasting, and corneal crystals causing photophobia. **Cysteamine** depletes intracellular cystine and is given orally, with topical eye drops for the cornea. Even after a successful kidney transplant, extrarenal cystine persists, so systemic cysteamine must continue.",
+   "say": "Cystinosis is an autosomal recessive lysosomal storage disorder caused by CTNS mutations, which leads to cystine accumulation. It produces a renal Fanconi syndrome with phosphate and bicarbonate wasting, and corneal crystals that cause photophobia. Cysteamine depletes intracellular cystine and is given orally, with topical eye drops for the cornea. Even after a successful kidney transplant, extrarenal cystine persists, so systemic cysteamine must continue.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_307e723581d6",
+  "q_01ef7d6a5d4b",
+  "q_07f3560c797b"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

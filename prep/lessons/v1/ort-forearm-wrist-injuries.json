@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "ort-forearm-wrist-injuries",
+ "subject": "orthopaedics",
+ "title": "Forearm and wrist injuries: high-yield lesson",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **forearm ring** is formed by the radius and ulna, joined by the interosseous membrane and two radioulnar joints. Because of this, a shaft fracture of one bone often disrupts the joints at either end. Forearm injuries are therefore assessed as a ring, and the wrist and elbow must both be imaged on every forearm film.",
+   "say": "The forearm works as a ring formed by the radius and ulna, joined by the interosseous membrane and two radioulnar joints. Because of this, a fracture of one bone often disrupts a joint at either end. Always image both the wrist and the elbow on every forearm film.",
+   "vis": null
+  },
+  {
+   "tx": "In a **Galeazzi injury**, a fracture of the distal third of the radial shaft is combined with dislocation of the **distal radioulnar joint**. It follows a fall on the outstretched hand or a direct blow. It is a fracture of necessity in adults, and anatomical plate fixation is the treatment of choice. Missing the joint injury leads to chronic pain and weak grip.",
+   "say": "In a Galeazzi injury, the distal third of the radial shaft fractures and the distal radioulnar joint dislocates. It follows a fall on the outstretched hand or a direct blow. In adults it is a fracture of necessity, and anatomical plate fixation of the radius is the treatment of choice. Missing the joint injury leads to chronic pain and weak grip.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Galeazzi",
+     "points": [
+      "Distal third radial shaft",
+      "DRUJ dislocated",
+      "Fracture of necessity in adults",
+      "Plate fixation of radius"
+     ]
+    },
+    "right": {
+     "title": "Monteggia",
+     "points": [
+      "Proximal third ulnar fracture",
+      "Radial head dislocated",
+      "Posterior interosseous nerve risk",
+      "Open reduction ulna in adults"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Bado classification** of Monteggia fractures depends on the direction of the radial head dislocation. Type I, the most common at about 60 percent, has an ulnar shaft fracture with anterior radial head dislocation after a hyperpronation injury. Type II has posterior dislocation. Type III is a lateral dislocation. Type IV is a radius and ulna fracture with anterior dislocation.",
+   "say": "The Bado classification of Monteggia fractures depends on which way the radial head dislocates. Type one is the commonest, at about sixty percent, with an ulnar fracture and anterior radial head dislocation after a hyperpronation injury. Type two dislocates posteriorly, type three laterally, and type four has a radius and ulna fracture with anterior dislocation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bado type",
+     "Radial head",
+     "Share of cases"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Anterior",
+      "About 60 percent"
+     ],
+     [
+      "Type II",
+      "Posterior",
+      "About 15 percent"
+     ],
+     [
+      "Type III",
+      "Lateral",
+      "About 20 percent"
+     ],
+     [
+      "Type IV",
+      "Anterior, radius also fractured",
+      "About 5 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **Colles fracture** is a distal radius fracture with dorsal tilt, typically from a fall on the outstretched hand. The classic **dinner fork deformity** results. Finger stiffness is the commonest complication, followed by malunion. A Colles fracture usually unites but malunites. By contrast, a **Smith fracture** has volar displacement, and the wrist is flexed on landing.",
+   "say": "A Colles fracture is a distal radius fracture with dorsal tilt, usually from a fall on the outstretched hand, and it gives the classic dinner fork deformity. Finger stiffness is the commonest complication, followed by malunion. A Smith fracture is the reverse, with volar displacement after a fall with the wrist flexed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Colles",
+     "points": [
+      "Dorsal displacement and tilt",
+      "Dinner fork deformity",
+      "Finger stiffness commonest",
+      "Malunion common"
+     ]
+    },
+    "right": {
+     "title": "Smith",
+     "points": [
+      "Volar displacement and tilt",
+      "Garden spade deformity",
+      "Wrist flexed on landing",
+      "Casted with forearm supinated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "ee4ff249-f7d8-4f63-8c39-a7960d316ae4",
+  "0c8c3eb8-fe38-40fd-8659-7f5b2e7ab808",
+  "18b4892c-20b0-4238-b466-1cab0acc87eb"
+ ],
+ "src": [
+  "kb-reference-galeazzi-fracture"
+ ],
+ "refs": [
+  "Chapter X in Apley's System of Orthopaedics and Fractures (Solomon L, Warwick D, Nayagam S)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 594,
+  "itemN": 171
+ }
+}

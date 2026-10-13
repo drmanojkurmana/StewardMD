@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "scc-coagulation",
+ "subject": "ss-critical-care",
+ "title": "Coagulopathy and haematology in the ICU: key concepts for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Thrombotic microangiopathy** (TMA) is defined by microangiopathic haemolytic anaemia with schistocytes, thrombocytopenia and end-organ injury. Think of it as a family of disorders sharing endothelial injury and microthrombi. The two main groups are **thrombotic thrombocytopenic purpura** (TTP), driven by ADAMTS13 deficiency, and complement-mediated TMA. Recognising the pattern early matters because treatment differs sharply between them.",
+   "say": "Thrombotic microangiopathy is defined by microangiopathic haemolytic anaemia with schistocytes, thrombocytopenia and end-organ injury. Think of it as a family of disorders sharing endothelial injury and microthrombi. The two main groups are thrombotic thrombocytopenic purpura, driven by ADAMTS13 deficiency, and complement-mediated TMA. Recognising the pattern early matters because treatment differs sharply between them.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "TTP",
+     "Complement TMA"
+    ],
+    "rows": [
+     [
+      "Core defect",
+      "ADAMTS13 deficiency",
+      "Complement dysregulation"
+     ],
+     [
+      "Key test",
+      "ADAMTS13 activity",
+      "Complement genetics"
+     ],
+     [
+      "First treatment",
+      "Plasma exchange",
+      "Complement inhibition"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In TTP, a severely low **ADAMTS13 activity** (below 10 per cent) with an inhibitor confirms immune-mediated disease. Samples for ADAMTS13 must be drawn before plasma exchange or any plasma infusion, otherwise results are falsely normal. The **PLASMIC score** helps estimate pretest probability, with higher scores favouring ADAMTS13 deficiency.",
+   "say": "In TTP, a severely low ADAMTS13 activity, below 10 per cent, with an inhibitor confirms immune-mediated disease. Samples for ADAMTS13 must be drawn before plasma exchange or any plasma infusion, otherwise results are falsely normal. The PLASMIC score helps estimate pretest probability, with higher scores favouring ADAMTS13 deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "Initial TTP treatment is daily **therapeutic plasma exchange** (TPE) with fresh frozen plasma or solvent-detergent plasma, alongside corticosteroids. Methylprednisolone 1 g intravenously daily for three days, or oral prednisolone 1 mg/kg/day, is the usual steroid regimen. **Rituximab** is added to suppress anti-ADAMTS13 antibodies, and hepatitis B screening is mandatory first. **Caplacizumab** is given as an intravenous bolus before the first TPE, then daily subcutaneously, and continued for about 30 days after stopping TPE.",
+   "say": "Initial TTP treatment is daily therapeutic plasma exchange with fresh frozen plasma or solvent-detergent plasma, alongside corticosteroids. Methylprednisolone one gram intravenously daily for three days, or oral prednisolone one milligram per kilogram per day, is the usual steroid regimen. Rituximab is added to suppress anti-ADAMTS13 antibodies, and hepatitis B screening is mandatory first. Caplacizumab is given as an intravenous bolus before the first plasma exchange, then daily subcutaneously, and continued for about thirty days after stopping plasma exchange.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hep B screen"
+     },
+     {
+      "id": "b",
+      "label": "Caplacizumab IV bolus"
+     },
+     {
+      "id": "c",
+      "label": "Daily TPE plus steroids"
+     },
+     {
+      "id": "d",
+      "label": "Rituximab"
+     },
+     {
+      "id": "e",
+      "label": "Remission"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Remission** in TTP means platelets above 150 x 10^9/L with LDH below 1.5 times the upper limit of normal, and sustained clinical improvement. Caplacizumab should not be stopped while ADAMTS13 remains below 10 per cent, because early cessation raises relapse risk. Rituximab is best given after a TPE session so it is not removed by the procedure. Plasma infusion can bridge a delay in TPE, with volume status monitored.",
+   "say": "Remission in TTP means platelets above 150 times 10 to the 9 per litre with LDH below 1.5 times the upper limit of normal, and sustained clinical improvement. Caplacizumab should not be stopped while ADAMTS13 remains below 10 per cent, because early cessation raises relapse risk. Rituximab is best given after a plasma exchange session so it is not removed by the procedure. Plasma infusion can bridge a delay in plasma exchange, with volume status monitored.",
+   "vis": null
+  },
+  {
+   "tx": "**Heparin-induced thrombocytopenia** (HIT) is an immune reaction in which antibodies against platelet factor 4 bound to heparin activate platelets through FcγRIIa receptors. The **4Ts score** estimates pretest probability using platelet fall, timing, thrombosis and alternative causes. A positive immunoassay alone is not diagnostic, since antibodies often occur without clinical disease. Management stops all heparin and switches to a non-heparin anticoagulant, with warfarin avoided until platelets recover.",
+   "say": "Heparin-induced thrombocytopenia is an immune reaction in which antibodies against platelet factor 4 bound to heparin activate platelets through FcγRIIa receptors. The 4Ts score estimates pretest probability using platelet fall, timing, thrombosis and alternative causes. A positive immunoassay alone is not diagnostic, since antibodies often occur without clinical disease. Management stops all heparin and switches to a non-heparin anticoagulant, with warfarin avoided until platelets recover.",
+   "vis": null
+  },
+  {
+   "tx": "In the ICU, **overt DIC** is scored with the ISTH tool using **platelet count**, **prolonged prothrombin time**, **fibrinogen** and **D-dimer**. The **sepsis-induced coagulopathy** score is an earlier screen that combines **platelets**, **PT ratio** and the **SOFA** score. For bleeding on a **factor Xa inhibitor**, **andexanet alfa** is the reversal agent to consider, with local protocols guiding its use.",
+   "say": "In the ICU, overt DIC is scored with the ISTH tool using platelet count, prolonged prothrombin time, fibrinogen and D-dimer. The sepsis-induced coagulopathy score is an earlier screen that combines platelets, PT ratio and the SOFA score. For bleeding on a factor Xa inhibitor, andexanet alfa is the reversal agent to consider, with local protocols guiding its use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Tool or agent"
+    ],
+    "rows": [
+     [
+      "Overt DIC",
+      "ISTH overt score"
+     ],
+     [
+      "Early sepsis coagulopathy",
+      "Sepsis-induced coagulopathy score"
+     ],
+     [
+      "Factor Xa inhibitor bleeding",
+      "Andexanet alfa"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_335eea0286aa",
+  "q_a90b4366babf",
+  "q_154f520efb30"
+ ],
+ "src": [],
+ "refs": [
+  "ISTH guidance on thrombotic thrombocytopenic purpura diagnosis and management",
+  "ISTH guidance on heparin-induced thrombocytopenia",
+  "ISTH overt DIC scoring criteria",
+  "Harrison's Principles of Internal Medicine (Dan L. Longo et al., editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 44
+ }
+}

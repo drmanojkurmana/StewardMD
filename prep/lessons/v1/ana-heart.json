@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "ana-heart",
+ "subject": "anatomy",
+ "title": "Heart, pericardium and coronary circulation: key anatomy for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The heart sits in the middle mediastinum inside the **pericardium**, a two-layered sac. The tough outer layer is the **fibrous pericardium**. The inner **serous pericardium** has a parietal layer lining the fibrous sac and a visceral layer (epicardium) fused to the heart. Pain-sensitive structures are the fibrous and parietal layers, supplied by the phrenic nerve. The visceral layer is pain-insensitive, supplied by autonomic nerves.",
+   "say": "The heart sits inside the pericardium, a two-layered sac. The tough outer layer is the fibrous pericardium. The inner serous pericardium has a parietal layer lining the fibrous sac and a visceral layer fused to the heart. Pain-sensitive structures are the fibrous and parietal layers, supplied by the phrenic nerve. The visceral layer is pain-insensitive, supplied by autonomic nerves.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Pain sensitive",
+     "Nerve supply"
+    ],
+    "rows": [
+     [
+      "Fibrous pericardium",
+      "Yes",
+      "Phrenic nerve"
+     ],
+     [
+      "Parietal serous layer",
+      "Yes",
+      "Phrenic nerve"
+     ],
+     [
+      "Visceral serous layer",
+      "No",
+      "Autonomic nerves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **right atrium** receives the SVC, IVC and coronary sinus. Its inner wall has the **crista terminalis**, a muscular ridge separating the smooth sinus venarum from the trabeculated appendage. The **Koch's triangle** lies between the tendon of Todaro, the septal tricuspid cusp and the coronary sinus opening. The AV node sits at its apex, and the **SA node** lies at the upper crista terminalis near the SVC.",
+   "say": "The right atrium receives the SVC, IVC and coronary sinus. Its inner wall has the crista terminalis, a muscular ridge separating the smooth sinus venarum from the trabeculated appendage. Koch's triangle lies between the tendon of Todaro, the septal tricuspid cusp and the coronary sinus opening. The AV node sits at its apex, and the SA node lies at the upper crista terminalis near the SVC.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "SA node",
+      "sub": "upper crista terminalis"
+     },
+     {
+      "id": "b",
+      "label": "Koch's triangle"
+     },
+     {
+      "id": "c",
+      "label": "AV node",
+      "sub": "apex of triangle"
+     },
+     {
+      "id": "d",
+      "label": "Bundle of His"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **coronary sinus** is the largest cardiac vein. It lies in the posterior part of the coronary sulcus and opens into the right atrium, guarded by the incomplete Thebesian valve. Its tributaries are the great, middle and small cardiac veins, the posterior vein of the left ventricle, the oblique vein of the left atrium and the right marginal vein. The anterior cardiac veins and venae cordis minimi drain directly into the chambers.",
+   "say": "The coronary sinus is the largest cardiac vein. It lies in the posterior part of the coronary sulcus and opens into the right atrium, guarded by the incomplete Thebesian valve. Its tributaries include the great, middle and small cardiac veins. The anterior cardiac veins and venae cordis minimi drain directly into the chambers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vein",
+     "Location"
+    ],
+    "rows": [
+     [
+      "Great cardiac",
+      "Anterior interventricular groove"
+     ],
+     [
+      "Middle cardiac",
+      "Posterior interventricular groove"
+     ],
+     [
+      "Small cardiac",
+      "Atrioventricular groove"
+     ],
+     [
+      "Anterior cardiac",
+      "Opens directly into right atrium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coronary **dominance** depends on which artery gives the posterior interventricular branch. In **right dominance**, seen in about 67 to 90 percent of people, the right coronary artery gives it. In **left dominance**, seen in about 10 to 15 percent, the circumflex branch of the left coronary artery gives it. The left coronary artery arises from the left posterior aortic sinus and supplies more tissue overall.",
+   "say": "Coronary dominance depends on which artery gives the posterior interventricular branch. In right dominance, seen in about 67 to 90 percent of people, the right coronary artery gives it. In left dominance, seen in about 10 to 15 percent, the circumflex branch gives it. The left coronary artery arises from the left posterior aortic sinus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right dominance",
+     "points": [
+      "Common type",
+      "Right coronary gives PIV branch",
+      "About 67 to 90 percent"
+     ]
+    },
+    "right": {
+     "title": "Left dominance",
+     "points": [
+      "Less common",
+      "Circumflex gives PIV branch",
+      "About 10 to 15 percent"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "fa0746c5-8e85-448f-bc10-9c9a19880f61",
+  "eb8d94ba-a58a-48d9-aec6-506e97c0b5f3",
+  "97c3a038-d1b1-48d1-abea-8dbc2aaacd9c"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Anatomy by Regions",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 251
+ }
+}

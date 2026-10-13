@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "phy-regional-circulation",
+ "subject": "physiology",
+ "title": "Regional circulation, shock and exercise",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Coronary flow is set mainly by **local arteriolar vasodilation** in response to myocardial oxygen need. Falling oxygen tension leads to breakdown of ATP, release of **adenosine**, and vasodilation. Coronary flow is largely driven by the pressure gradient, and it is squeezed during systole in the left ventricle. Flow is therefore greatest in diastole on the left, whereas on the right it peaks in systole.",
+   "say": "Coronary flow is set mainly by local arteriolar vasodilation in response to myocardial oxygen need. Falling oxygen tension leads to breakdown of ATP, release of adenosine, and vasodilation. Coronary flow is largely driven by the pressure gradient, and it is squeezed during systole in the left ventricle. Flow is therefore greatest in diastole on the left, whereas on the right it peaks in systole.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low O2 or high demand"
+     },
+     {
+      "id": "b",
+      "label": "ATP breakdown"
+     },
+     {
+      "id": "c",
+      "label": "Adenosine release"
+     },
+     {
+      "id": "d",
+      "label": "Arteriolar vasodilation"
+     },
+     {
+      "id": "e",
+      "label": "Increased coronary flow"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Myocardial **oxygen demand** is set by the work of the heart. It rises with heart rate, contractility, afterload, preload and intramyocardial tension, and falls with greater wall thickness. Haemoglobin concentration affects oxygen supply rather than demand. In exam questions, tachycardia and raised afterload are the classic reasons for ischaemia when supply cannot keep pace.",
+   "say": "Myocardial oxygen demand is set by the work of the heart. It rises with heart rate, contractility, afterload, preload and intramyocardial tension, and falls with greater wall thickness. Haemoglobin concentration affects oxygen supply rather than demand. In exam questions, tachycardia and raised afterload are the classic reasons for ischaemia when supply cannot keep pace.",
+   "vis": null
+  },
+  {
+   "tx": "In **haemorrhagic shock**, sympathetic activity compensates for falling venous return. Generalised vasoconstriction raises total peripheral resistance, heart rate and contractility rise, and renin release retains sodium and water. Fluid also shifts from the interstitial and intracellular spaces into the vessels. Respiratory rate increases too, so the compensatory response is a rise in heart rate, not a fall.",
+   "say": "In haemorrhagic shock, sympathetic activity compensates for falling venous return. Generalised vasoconstriction raises total peripheral resistance, heart rate and contractility rise, and renin release retains sodium and water. Fluid also shifts from the interstitial and intracellular spaces into the vessels. Respiratory rate increases too, so the compensatory response is a rise in heart rate, not a fall.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensatory responses",
+     "points": [
+      "Vasoconstriction, raised peripheral resistance",
+      "Tachycardia and higher contractility",
+      "Renin release, sodium and water retention",
+      "Fluid shift into vessels"
+     ]
+    },
+    "right": {
+     "title": "Not expected in acute bleed",
+     "points": [
+      "Falling heart rate",
+      "Reduced myocardial contractility"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During **exercise**, sympathetic drive raises heart rate and stroke volume, so cardiac output rises mainly through heart rate. Mean arterial pressure rises, while diastolic pressure stays flat or falls. Active muscle flow can increase about 25-fold, with metabolites such as potassium and adenosine causing vasodilation. Splanchnic, renal and inactive muscle flow fall, while cerebral flow stays essentially unchanged.",
+   "say": "During exercise, sympathetic drive raises heart rate and stroke volume, so cardiac output rises mainly through heart rate. Mean arterial pressure rises, while diastolic pressure stays flat or falls. Active muscle flow can increase about 25-fold, with metabolites such as potassium and adenosine causing vasodilation. Splanchnic, renal and inactive muscle flow fall, while cerebral flow stays essentially unchanged.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Region",
+     "Quiet standing (mL/min)",
+     "Exercise (mL/min)"
+    ],
+    "rows": [
+     [
+      "Cardiac output",
+      "5900",
+      "24000"
+     ],
+     [
+      "Active skeletal muscle",
+      "650",
+      "20850"
+     ],
+     [
+      "Brain",
+      "750",
+      "750"
+     ],
+     [
+      "Kidney, liver, GI tract",
+      "3100",
+      "600"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On **standing**, about 300 to 500 mL of blood pools in the leg veins, reducing venous return and cardiac output. Baroreceptor unloading raises sympathetic tone, so heart rate and peripheral resistance increase. Syncope and **postural hypotension** occur when this reflex fails. On lying down, blood returns from the legs, and pulmonary blood volume can rise by up to 400 mL, which is why orthopnoea appears in heart failure.",
+   "say": "On standing, about 300 to 500 millilitres of blood pools in the leg veins, reducing venous return and cardiac output. Baroreceptor unloading raises sympathetic tone, so heart rate and peripheral resistance increase. Syncope and postural hypotension occur when this reflex fails. On lying down, blood returns from the legs, and pulmonary blood volume can rise by up to 400 millilitres, which is why orthopnoea appears in heart failure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "23dabcd0-f855-49fb-bdb6-3478a318a50f",
+  "46de09ac-b772-428f-b41b-deab210c7cbf",
+  "4f7aa537-da22-4b49-bd76-438853c99651"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett, Barman, Boitano, Brooks)",
+  "Cardiovascular Physiology (Mohrman, Heller)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 181
+ }
+}

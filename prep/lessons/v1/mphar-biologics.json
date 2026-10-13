@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "mphar-biologics",
+ "subject": "mrcp-pharmacology",
+ "title": "Biologics, immunosuppressants and DMARD monitoring",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Disease-modifying drugs for rheumatoid arthritis and lupus are often **immunosuppressants** that dampen lymphocyte proliferation. Methotrexate is a folate analogue that inhibits **dihydrofolate reductase**, limiting purine and thymidylate synthesis. Mycophenolate inhibits **inosine monophosphate dehydrogenase**, blocking de novo guanine synthesis, which lymphocytes depend on heavily. Calcineurin inhibitors such as ciclosporin act differently, blocking interleukin-2 driven T-cell activation.",
+   "say": "Many disease-modifying drugs for rheumatoid arthritis and lupus are immunosuppressants that dampen lymphocyte proliferation. Methotrexate is a folate analogue that inhibits dihydrofolate reductase, limiting purine and thymidylate synthesis. Mycophenolate inhibits inosine monophosphate dehydrogenase, blocking de novo guanine synthesis, which lymphocytes depend on heavily. Calcineurin inhibitors such as ciclosporin act differently, blocking interleukin-2 driven T-cell activation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Main target",
+     "Key monitoring"
+    ],
+    "rows": [
+     [
+      "Methotrexate",
+      "Dihydrofolate reductase",
+      "Full blood count, liver and renal function"
+     ],
+     [
+      "Mycophenolate",
+      "IMP dehydrogenase",
+      "Full blood count, pregnancy prevention"
+     ],
+     [
+      "Ciclosporin",
+      "Calcineurin",
+      "Trough levels, renal function, blood pressure"
+     ],
+     [
+      "Azathioprine",
+      "Purine synthesis via thioguanine",
+      "TPMT status, full blood count"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pre-treatment screening is essential before any biologic. Latent **tuberculosis** can reactivate because anti-TNF agents impair granuloma maintenance. Screen with an **interferon-gamma release assay** or tuberculin skin test, plus a chest X-ray. Hepatitis B status should also be checked. If latent infection is found, treat it before starting the biologic, with specialist input.",
+   "say": "Pre-treatment screening is essential before any biologic. Latent tuberculosis can reactivate because anti-TNF agents impair granuloma maintenance. Screen with an interferon-gamma release assay or tuberculin skin test, plus a chest X-ray. Hepatitis B status should also be checked. If latent infection is found, treat it before starting the biologic, with specialist input.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Symptoms and chest X-ray"
+     },
+     {
+      "id": "b",
+      "label": "Interferon-gamma release assay"
+     },
+     {
+      "id": "c",
+      "label": "Latent infection found"
+     },
+     {
+      "id": "d",
+      "label": "Treat latent TB first"
+     },
+     {
+      "id": "e",
+      "label": "Start biologic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "positive"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hydroxychloroquine can cause irreversible **retinal toxicity**, usually a parafoveal or pericentral pattern. Risk rises with cumulative dose above about 5 mg/kg/day of real body weight, duration beyond five years, and renal impairment. Baseline assessment is needed, then annual screening after five years in those without major risk factors, using optical coherence tomography and visual fields.",
+   "say": "Hydroxychloroquine can cause irreversible retinal toxicity, usually a parafoveal or pericentral pattern. Risk rises with cumulative dose above about 5 mg per kilogram per day of real body weight, duration beyond five years, and renal impairment. Baseline assessment is needed, then annual screening after five years in those without major risk factors, using optical coherence tomography and visual fields.",
+   "vis": null
+  },
+  {
+   "tx": "Mycophenolate and leflunomide are teratogenic, so pregnancy planning matters. Mycophenolate causes miscarriage and congenital malformations and must be stopped at least **six weeks** before conception, with a pregnancy-compatible agent such as azathioprine used instead. Leflunomide has a long half-life because of enterohepatic recirculation, so **cholestyramine** washout is given and a plasma level confirmed before conceiving.",
+   "say": "Mycophenolate and leflunomide are teratogenic, so pregnancy planning matters. Mycophenolate causes miscarriage and congenital malformations and must be stopped at least six weeks before conception, with a pregnancy-compatible agent such as azathioprine used instead. Leflunomide has a long half-life because of enterohepatic recirculation, so cholestyramine washout is given and a plasma level confirmed before conceiving.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mycophenolate",
+     "points": [
+      "Stop six weeks before conception",
+      "Use effective contraception",
+      "Switch to azathioprine or ciclosporin"
+     ]
+    },
+    "right": {
+     "title": "Leflunomide",
+     "points": [
+      "Long half-life",
+      "Cholestyramine washout",
+      "Confirm low plasma level"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Certain **drug interactions** change how immunosuppressants behave and need active management. Allopurinol blocks **xanthine oxidase**, so azathioprine breakdown is diverted towards toxic **thioguanine** nucleotides, which usually calls for a sharp dose reduction. Clarithromycin inhibits **CYP3A4**, raising **ciclosporin** concentrations and increasing the risk of kidney injury and hypertension. Repeat **trough levels** and renal function after starting either combination.",
+   "say": "Certain drug interactions change how immunosuppressants behave in the body. Allopurinol blocks an enzyme called xanthine oxidase, which normally helps clear azathioprine's breakdown products. Those products are pushed towards the harmful thioguanine pathway, so the azathioprine dose usually needs a sharp cut. Clarithromycin blocks the CYP3A4 enzyme instead, pushing ciclosporin levels up and threatening the kidneys and blood pressure. After starting either combination, recheck trough levels and kidney function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Interacting drug",
+     "Mechanism",
+     "Practical step"
+    ],
+    "rows": [
+     [
+      "Allopurinol with azathioprine",
+      "Xanthine oxidase inhibition",
+      "Reduce azathioprine dose substantially"
+     ],
+     [
+      "Clarithromycin with ciclosporin",
+      "CYP3A4 inhibition",
+      "Monitor trough levels and renal function"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guidance on rheumatoid arthritis and biologic therapy",
+  "British Society for Rheumatology guidelines on hydroxychloroquine retinopathy screening",
+  "British Society for Rheumatology guidance on pregnancy and immunosuppressants"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 22
+ }
+}

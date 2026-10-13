@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "mendo-thyroid",
+ "subject": "mrcp-endocrinology",
+ "title": "Thyroid disease: core principles for the MRCP and NEET-PG exam",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Thyroid disease spans a wide range, from **overt hypothyroidism** and **thyrotoxicosis** to subtle compensated or subclinical states. In practice, the first step is a reliable **TSH**, because it is the most sensitive marker in adults without pituitary disease. A low TSH needs free thyroxine and free tri-iodothyronine measured together in the same sample, since T3-predominant thyrotoxicosis can be missed by FT4 alone.",
+   "say": "Thyroid disease spans a wide range, from overt hypothyroidism and thyrotoxicosis to subtle compensated or subclinical states. In practice, the first step is a reliable TSH, because it is the most sensitive marker in adults without pituitary disease. A low TSH needs free thyroxine and free tri-iodothyronine measured together in the same sample, since T3-predominant thyrotoxicosis can be missed by free thyroxine alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TSH pattern",
+     "Next test",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Raised TSH",
+      "Free thyroxine, same sample",
+      "Confirms primary hypothyroidism"
+     ],
+     [
+      "Suppressed TSH",
+      "Free T4 and free T3, same sample",
+      "Detects overt or T3-predominant thyrotoxicosis"
+     ],
+     [
+      "Pituitary disease suspected",
+      "Free hormones first",
+      "TSH cannot be trusted alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once **overt hypothyroidism** is confirmed, **levothyroxine** is the usual replacement. Younger adults without heart disease generally take a full weight-based dose, whereas older people or those with **coronary artery disease** begin with a small daily amount and rise gradually. The dose is then refined by rechecking **TSH** after several weeks.",
+   "say": "Once overt hypothyroidism is confirmed, levothyroxine is the usual replacement. Younger adults without heart disease can generally take a full weight-based dose, whereas older people or those with coronary artery disease should begin with a small daily amount and increase it slowly. Thyroid stimulating hormone is then rechecked after several weeks to fine-tune the dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Overt hypothyroidism confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Under 65 and no heart disease?"
+     },
+     {
+      "id": "c",
+      "label": "Full weight-based dose"
+     },
+     {
+      "id": "d",
+      "label": "Low start, slow increase"
+     },
+     {
+      "id": "e",
+      "label": "Recheck TSH after several weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Titrate levothyroxine against **TSH**, and be patient. After a very high pre-treatment TSH or prolonged untreated illness, TSH may take up to 6 months to normalise, while free thyroxine often settles sooner. Raising the dose early on a raised TSH alone risks overtreatment and thyrotoxicosis. Monitor every 3 months until two results within range are seen, then yearly.",
+   "say": "Titrate levothyroxine against TSH, and be patient. After a very high pre-treatment TSH or prolonged untreated illness, TSH may take up to 6 months to normalise, while free thyroxine often settles sooner. Raising the dose early on a raised TSH alone risks overtreatment and thyrotoxicosis. Monitor every 3 months until two results within range are seen, then yearly.",
+   "vis": null
+  },
+  {
+   "tx": "Before acting on an odd result, ask about **biotin** use. High-dose biotin interferes with many streptavidin-based immunoassays, producing falsely low TSH or falsely high hormone levels that mimic thyrotoxicosis or central disease. NICE advises asking all adults with suspected thyroid dysfunction. Retest after stopping the supplement, and avoid testing during acute illness unless thyroid dysfunction is suspected.",
+   "say": "Before acting on an odd result, ask about biotin use. High-dose biotin interferes with many streptavidin-based immunoassays, producing falsely low TSH or falsely high hormone levels that mimic thyrotoxicosis or central disease. NICE advises asking all adults with suspected thyroid dysfunction. Retest after stopping the supplement, and avoid testing during acute illness unless thyroid dysfunction is suspected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pitfall",
+     "points": [
+      "Biotin falsely alters results",
+      "Non-thyroidal illness lowers TSH",
+      "Early titration overtreats"
+     ]
+    },
+    "right": {
+     "title": "Action",
+     "points": [
+      "Ask about supplements",
+      "Retest after stopping biotin",
+      "Wait for stable results"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Choose therapy for **Graves' disease** by severity, goitre size and patient factors. Antithyroid drugs suit mild uncomplicated disease. A large goitre causing **compression** with breathlessness or dysphagia favours thyroidectomy for rapid relief. Radioactive iodine is usually avoided before puberty and can worsen thyroid eye disease. Beta-blockade controls symptoms meanwhile.",
+   "say": "Choose therapy for Graves disease by severity, goitre size and patient factors. Antithyroid drugs suit mild uncomplicated disease. A large goitre causing compression with breathlessness or dysphagia favours thyroidectomy for rapid relief. Radioactive iodine is usually avoided before puberty and can worsen thyroid eye disease. Beta-blockade controls symptoms in the meantime.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Preferred option"
+    ],
+    "rows": [
+     [
+      "Mild uncomplicated Graves",
+      "Antithyroid drug such as carbimazole"
+     ],
+     [
+      "Compressive goitre",
+      "Thyroidectomy"
+     ],
+     [
+      "Child or thyroid eye disease",
+      "Avoid radioiodine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-brain-lung-thyroid-syndrome",
+  "kb-reference-gestational-thyroid",
+  "kb-reference-hashimoto-encephalopathy"
+ ],
+ "refs": [
+  "NICE NG145 Thyroid disease: assessment and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 2490,
+  "itemN": 24
+ }
+}

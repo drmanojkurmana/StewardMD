@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "phm-peptic-ulcer",
+ "subject": "pharmacology",
+ "title": "Drugs for peptic ulcer and acid disorders",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Gastric acid is secreted by **parietal cells**, and the final step is driven by the H+ K+ ATPase, the proton pump. Drugs for acid disorders act at different points: H2 blockers reduce histamine-driven secretion, proton pump inhibitors block the pump itself, and antacids neutralise acid already present. Mucosal protectives such as sucralfate and colloidal bismuth shield the ulcer base. Misoprostol, a prostaglandin E1 analogue, reduces acid and protects the mucosa.",
+   "say": "Gastric acid is secreted by parietal cells, and the final step is driven by the H plus K plus ATPase, the proton pump. Drugs for acid disorders act at different points. H2 blockers reduce histamine driven secretion, proton pump inhibitors block the pump itself, and antacids neutralise acid already present. Mucosal protectives such as sucralfate and colloidal bismuth shield the ulcer base. Misoprostol, a prostaglandin E1 analogue, reduces acid and protects the mucosa.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Histamine"
+     },
+     {
+      "id": "b",
+      "label": "H2 receptor"
+     },
+     {
+      "id": "c",
+      "label": "Parietal cell"
+     },
+     {
+      "id": "d",
+      "label": "H+ K+ ATPase"
+     },
+     {
+      "id": "e",
+      "label": "Acid"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Zollinger-Ellison syndrome** is caused by a gastrinoma that drives acid hypersecretion. Proton pump inhibitors are the drug of choice, with doses of 40 to 120 mg a day titrated to control acid output, and they have reduced the need for total gastrectomy. Famotidine can be used but is less appropriate. Antacids and anticholinergics are not adequate control agents here.",
+   "say": "Zollinger-Ellison syndrome is caused by a gastrinoma that drives acid hypersecretion. Proton pump inhibitors are the drug of choice, with doses of 40 to 120 milligrams a day titrated to control acid output, and they have reduced the need for total gastrectomy. Famotidine can be used but is less appropriate. Antacids and anticholinergics are not adequate control agents here.",
+   "vis": null
+  },
+  {
+   "tx": "**Sucralfate** is a sucrose sulphate aluminium complex that is not an acid neutraliser. In acid below pH 4 it polymerises into a viscous gel that binds the ulcer base and adsorbs pepsin and bile. Because it needs acid to work, antacids given together raise gastric pH and block its action. Sucralfate and ranitidine together are therefore an irrational combination for acid peptic disease, and sucralfate should be separated from antacids.",
+   "say": "Sucralfate is a sucrose sulphate aluminium complex that is not an acid neutraliser. In acid below pH 4 it polymerises into a viscous gel that binds the ulcer base and adsorbs pepsin and bile. Because it needs acid to work, antacids given together raise gastric pH and block its action. Sucralfate and ranitidine together are therefore an irrational combination for acid peptic disease, and sucralfate should be separated from antacids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sucralfate",
+     "points": [
+      "Ulcer protectant, not antisecretory",
+      "Works only at pH below 4",
+      "Avoid concurrent antacids"
+     ]
+    },
+    "right": {
+     "title": "Antacids",
+     "points": [
+      "Neutralise acid directly",
+      "Aluminium salts cause constipation",
+      "Magnesium salts cause diarrhoea"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cimetidine** has anti-androgenic effects, raises prolactin, and slows oestrogen breakdown in the liver, so it can cause **gynaecomastia**, loss of libido and impotence. It also inhibits several cytochrome P450 enzymes. Ranitidine and famotidine lack these effects. Omeprazole is not an H2 blocker, and misoprostol is a prostaglandin analogue used for NSAID related ulcer. Rebound acid hypersecretion can follow stopping a PPI, so tapering is advised.",
+   "say": "Cimetidine has anti-androgenic effects, raises prolactin, and slows oestrogen breakdown in the liver, so it can cause gynaecomastia, loss of libido and impotence. It also inhibits several cytochrome P450 enzymes. Ranitidine and famotidine lack these effects. Omeprazole is not an H2 blocker, and misoprostol is a prostaglandin analogue used for NSAID related ulcer. Rebound acid hypersecretion can follow stopping a PPI, so tapering is advised.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8d7336c0-9c1f-4642-8ad3-af9d070141c6",
+  "ed1cdc74-f90c-4937-89f4-f86485378eaa",
+  "0a723bc2-c3dd-430a-814d-85fffead627e"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung and Trevor's Pharmacology: Examination and Board Review (Katzung B G, Trevor A J)",
+  "Essentials of Medical Pharmacology (Tripathi K D)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 152
+ }
+}

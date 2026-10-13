@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "mcc-cc-anaemia",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic anaemia: classification and approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Chronic anaemia is a gradual fall in **haemoglobin** over months, and the **mean corpuscular volume** (MCV) is the first sorting tool. A low MCV, meaning small red cells, usually reflects **iron deficiency**, thalassaemia trait or anaemia of chronic disease. A normal MCV suggests chronic inflammation, kidney disease or early mixed causes. A high MCV, meaning large red cells, raises concern for **vitamin B12** or folate deficiency, alcohol, liver disease or certain drugs.",
+   "say": "Chronic anaemia is a gradual fall in haemoglobin over months, and the mean corpuscular volume is the first sorting tool. A low volume, meaning small red cells, usually reflects iron deficiency, thalassaemia trait or anaemia of chronic disease. A normal volume suggests chronic inflammation, kidney disease or early mixed causes. A high volume, meaning large red cells, raises concern for vitamin B12 or folate deficiency, alcohol, liver disease or certain drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MCV",
+     "Likely causes",
+     "First clue"
+    ],
+    "rows": [
+     [
+      "Low",
+      "Iron deficiency, thalassaemia trait",
+      "Ferritin and iron studies"
+     ],
+     [
+      "Normal",
+      "Inflammation, chronic kidney disease",
+      "Raised inflammatory markers"
+     ],
+     [
+      "High",
+      "B12 or folate deficiency, drugs",
+      "B12, folate, neuropathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Iron deficiency** in an adult is a sign of bleeding until proven otherwise. Low ferritin, low transferrin saturation and microcytosis confirm it. Heavy menstrual loss is a common cause in women, but in postmenopausal women and men the gastrointestinal tract must be examined, including upper and lower endoscopy, because colorectal malignancy can present this way. Oral iron treats the deficit but never replaces the search for the source.",
+   "say": "Iron deficiency in an adult is a sign of bleeding until proven otherwise. Low ferritin, low transferrin saturation and microcytosis confirm it. Heavy menstrual loss is a common cause in women, but in postmenopausal women and men the gastrointestinal tract must be examined, including upper and lower endoscopy, because colorectal malignancy can present this way. Oral iron treats the deficit but never replaces the search for the source.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low ferritin and MCV"
+     },
+     {
+      "id": "b",
+      "label": "Women: menstrual loss"
+     },
+     {
+      "id": "c",
+      "label": "Postmenopausal or men: endoscopy"
+     },
+     {
+      "id": "d",
+      "label": "Treat iron and source"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vitamin B12 deficiency** causes macrocytic anaemia, hypersegmented neutrophils and neuropathy with posterior column signs such as reduced vibration sense and a positive Romberg test. Causes include gastric surgery, malabsorption and long-term metformin. When neurological features are present, treatment should be prompt and parenteral cyanocobalamin is the usual first choice. Oral folic acid alone can mask the anaemia while the nerve damage progresses.",
+   "say": "Vitamin B12 deficiency causes macrocytic anaemia, hypersegmented neutrophils and neuropathy with posterior column signs such as reduced vibration sense and a positive Romberg test. Causes include gastric surgery, malabsorption and long-term metformin. When neurological features are present, treatment should be prompt, and intramuscular cyanocobalamin is the usual first choice. Oral folic acid alone can mask the anaemia while the nerve damage progresses.",
+   "vis": null
+  },
+  {
+   "tx": "**Thalassaemia trait** is a key mimic. A person of Mediterranean or South Asian ancestry with microcytosis, a raised red cell count and normal ferritin probably has trait rather than iron deficiency. Iron therapy is not indicated. Haemoglobin electrophoresis or HPLC confirms the diagnosis by showing an altered haemoglobin A2 or F pattern. Family history strengthens the suspicion.",
+   "say": "Thalassaemia trait is a key mimic. A person of Mediterranean or South Asian ancestry with microcytosis, a raised red cell count and normal ferritin probably has trait rather than iron deficiency. Iron therapy is not indicated. Haemoglobin electrophoresis or HPLC confirms the diagnosis by showing an altered haemoglobin A2 or F pattern. Family history strengthens the suspicion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Iron deficiency",
+     "points": [
+      "Low ferritin",
+      "Low transferrin saturation",
+      "Treat with iron"
+     ]
+    },
+    "right": {
+     "title": "Thalassaemia trait",
+     "points": [
+      "Normal ferritin",
+      "Raised red cell count",
+      "Confirm with electrophoresis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anaemia of chronic inflammation** is normocytic or mildly microcytic and occurs in rheumatoid arthritis, infection and malignancy. Raised cytokines increase hepcidin, which traps iron in macrophages. Ferritin is raised as an acute-phase reactant, so it does not show stores. Management is to treat the underlying disease and reassess counts. Transfusion, iron or erythropoiesis-stimulating agents are not first-line here.",
+   "say": "Anaemia of chronic inflammation is normocytic or mildly microcytic and occurs in rheumatoid arthritis, infection and malignancy. Raised cytokines increase hepcidin, which traps iron in macrophages. Ferritin is raised as an acute-phase reactant, so it does not show stores. Management is to treat the underlying disease and reassess counts. Transfusion, iron or erythropoiesis-stimulating agents are not first-line here.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Dan L. Longo et al., editors)",
+  "Chapter on Anemia in Davidson's Principles and Practice of Medicine (Nicki R. Colledge et al., editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

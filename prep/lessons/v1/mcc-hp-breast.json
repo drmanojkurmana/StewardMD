@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "module": "mcc-hp-breast",
+ "subject": "mcc-health-promotion",
+ "title": "Breast cancer screening in average-risk women",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "For an average-risk woman, screening is a **preference-sensitive decision**. Mammography can find cancers earlier and modestly lower breast cancer mortality, but it also causes **false positives**, recall, anxiety, unnecessary biopsies and overdiagnosis. Shared decision-making lets the woman weigh these harms against benefits according to her own values, especially when conflicting advice is circulating.",
+   "say": "For an average-risk woman, screening is a preference-sensitive decision. Mammography can find cancers earlier and modestly lower breast cancer mortality. It also causes false positives, recall, anxiety, unnecessary biopsies and overdiagnosis. Shared decision-making lets the woman weigh these harms against benefits according to her own values, especially when conflicting advice is circulating.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Possible benefits",
+     "points": [
+      "Earlier detection",
+      "Modest mortality reduction",
+      "Smaller cancers at diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Possible harms",
+     "points": [
+      "False positive recall",
+      "Unnecessary biopsy",
+      "Overdiagnosis and anxiety"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Screening is not a test for women with symptoms, a palpable lump or a suspicious finding. These women enter **triple assessment**: clinical examination, imaging and **core needle biopsy**. Tissue diagnosis is needed before any treatment, and systemic signs such as raised alkaline phosphatase do not replace breast assessment. Urgent referral is required when a new lump is found.",
+   "say": "Screening is not a test for women with symptoms, a palpable lump or a suspicious finding. These women enter triple assessment: clinical examination, imaging and core needle biopsy. Tissue diagnosis is needed before any treatment, and systemic signs such as raised alkaline phosphatase do not replace breast assessment. Urgent referral is required when a new lump is found.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Abnormal finding"
+     },
+     {
+      "id": "b",
+      "label": "Clinical exam"
+     },
+     {
+      "id": "c",
+      "label": "Imaging"
+     },
+     {
+      "id": "d",
+      "label": "Core biopsy"
+     },
+     {
+      "id": "e",
+      "label": "Histology diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening benefit is not fixed by age alone. In later life, the decision rests on **life expectancy** and fitness for treatment. Frailty, serious comorbidity and goals centred on comfort all lower the likely gain, whereas **false positives** and invasive **work-up** remain possible harms. Stopping screening can be a sound choice reached through a shared, individualised conversation.",
+   "say": "Screening benefit is not fixed by age alone. In later life, the decision rests on life expectancy and fitness for treatment. Frailty, serious comorbidity and goals centred on comfort all lower the likely gain, whereas false positives and invasive work-up remain possible harms. Stopping screening can be a sound choice reached through a shared, individualised conversation.",
+   "vis": null
+  },
+  {
+   "tx": "A new focal asymmetry on screening needs **diagnostic mammography** and targeted ultrasound, because it may be a summation effect or a true lesion. A spiculated mass with pleomorphic calcification needs image-guided core biopsy, not reassurance. Anticoagulation such as warfarin is a planning issue for biopsy, not a reason to delay tissue sampling.",
+   "say": "A new focal asymmetry on screening needs diagnostic mammography and targeted ultrasound, because it may be a summation effect or a true lesion. A spiculated mass with pleomorphic calcification needs image-guided core biopsy, not reassurance. Anticoagulation such as warfarin is a planning issue for biopsy, not a reason to delay tissue sampling.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

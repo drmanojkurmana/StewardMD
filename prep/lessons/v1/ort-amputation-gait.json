@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "ort-amputation-gait",
+ "subject": "orthopaedics",
+ "title": "Amputations, prosthetics and gait: high-yield essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Amputation is indicated when a limb is **dead** (peripheral vascular disease, severe trauma, burns, frostbite), **dangerous** (malignancy, potentially lethal sepsis such as gas gangrene, crush injury), or a **damned nuisance** (pain, gross malformation, recurrent sepsis, severe loss of function). Peripheral vascular disease causes about 90 percent of amputations. Diabetes is the commonest cause of non-traumatic lower-limb amputation in the US, largely through neuropathy.",
+   "say": "Amputation is indicated when a limb is dead, dangerous, or a damned nuisance. Dead limbs come from peripheral vascular disease, severe trauma, burns, and frostbite. Dangerous limbs have malignancy, potentially lethal sepsis such as gas gangrene, or crush injury. A damned nuisance means pain, gross malformation, recurrent sepsis, or severe loss of function. Peripheral vascular disease causes about ninety percent of amputations. Diabetes is the commonest cause of non-traumatic lower-limb amputation in the United States, mainly through neuropathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Dead",
+      "Vascular disease, severe trauma, burns, frostbite"
+     ],
+     [
+      "Dangerous",
+      "Malignancy, gas gangrene, crush injury"
+     ],
+     [
+      "Damned nuisance",
+      "Pain, malformation, recurrent sepsis, loss of function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ideal stump lengths were once fixed. Above knee is 25 to 30 cm from the greater trochanter, below knee is about 15 cm from the tibial tubercle, above elbow is 20 cm from the greater tuberosity, and below elbow is 18 cm from the olecranon. The **viability of tissue** now decides the level, since modern prostheses allow shorter or longer stumps. For an adult non-ischaemic below-knee stump, bone length of 12.5 to 17.5 cm is usual, and a stump under 12.5 cm without quadriceps is inefficient.",
+   "say": "Ideal stump lengths were once fixed. Above knee is twenty five to thirty centimetres from the greater trochanter. Below knee is about fifteen centimetres from the tibial tubercle. Above elbow is twenty centimetres from the greater tuberosity, and below elbow is eighteen centimetres from the olecranon. Today the viability of tissue decides the level, because modern prostheses allow flexible stump lengths. In an adult non-ischaemic below-knee stump, bone length of twelve point five to seventeen point five centimetres is usual.",
+   "vis": null
+  },
+  {
+   "tx": "Prosthetic feet matter in exams. The **SACH foot** has a wooden core, a solid rubber foot and a cushioned heel, but no ankle or subtalar movement, so squatting and uneven ground are hard. The **Jaipur foot**, developed by P.K. Sethi and Ram Chandra Sharma in 1969, is modified to look like a normal foot, permit forefoot and midfoot movement, and allow barefoot walking. Neither is electrically operated. The **patellar tendon bearing** prosthesis loads the patellar tendon rather than the tibial crest.",
+   "say": "Prosthetic feet matter in exams. The SACH foot has a wooden core, a solid rubber foot, and a cushioned heel, but no ankle or subtalar movement, so squatting and uneven ground are difficult. The Jaipur foot, developed by P.K. Sethi and Ram Chandra Sharma in 1969, looks like a normal foot, allows forefoot and midfoot movement, and suits barefoot walking. Neither is electrically operated. The patellar tendon bearing prosthesis loads the patellar tendon rather than the tibial crest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SACH foot",
+     "points": [
+      "Solid ankle, cushion heel",
+      "No ankle or subtalar movement",
+      "Poor for uneven ground and barefoot use"
+     ]
+    },
+    "right": {
+     "title": "Jaipur foot",
+     "points": [
+      "Looks like a normal foot",
+      "Forefoot and midfoot movement",
+      "Suits Indian lifestyle and barefoot walking"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gait disorders are classed by cause. **Antalgic gait** is a limp that shortens the stance phase on the painful side to reduce load. **Trendelenburg gait** results from abductor weakness, so the pelvis drops on the opposite side and the trunk lurches towards the weak side. **High stepping gait** follows common peroneal nerve injury at the fibular neck, with foot drop, and is managed with an ankle-foot orthosis. Crutches are used on the opposite side to an injured leg, and on the same side for hip pathology.",
+   "say": "Gait disorders are classed by cause. Antalgic gait is a limp that shortens the stance phase on the painful side. Trendelenburg gait results from abductor weakness, so the pelvis drops on the opposite side and the trunk lurches towards the weak side. High stepping gait follows common peroneal nerve injury at the fibular neck, with foot drop, and is managed with an ankle-foot orthosis. Crutches go on the opposite side to an injured leg, and on the same side for hip pathology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Antalgic",
+      "sub": "short stance on painful side"
+     },
+     {
+      "id": "b",
+      "label": "Trendelenburg",
+      "sub": "abductor weakness, trunk lurches"
+     },
+     {
+      "id": "c",
+      "label": "High stepping",
+      "sub": "foot drop, ankle-foot orthosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "compare"
+     ],
+     [
+      "b",
+      "c",
+      "compare"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-healing stumps and the phantom limb need attention. A **phantom limb** is the feeling that the removed limb is still present; phantom pain is burning or shooting pain in the missing part. A **stump neuroma** causes local tenderness at the end of the stump. Contractures are prevented by avoiding pillows under the knee and by prone lying. Gabapentin, amitriptyline, mirror therapy and desensitisation treat phantom pain. Ideal stumps are well healed, non-tender, non-adherent and sensate.",
+   "say": "Non-healing stumps and the phantom limb need attention. A phantom limb is the feeling that the removed limb is still present. Phantom pain is burning or shooting pain in the missing part. A stump neuroma causes local tenderness at the end of the stump. Contractures are prevented by avoiding pillows under the knee and by prone lying. Gabapentin, amitriptyline, mirror therapy, and desensitisation treat phantom pain. Ideal stumps are well healed, non-tender, non-adherent, and sensate.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "85cba41c-16ba-4757-aabc-8a884f620982",
+  "d2deb63b-cdb4-4f02-aa24-809ea2b5e209",
+  "4565ee32-3e1b-403e-b9dd-3b87b2941560"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 9 in Apley's System of Orthopaedics and Fractures (Solomon L, Warwick D, Nayagam S)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

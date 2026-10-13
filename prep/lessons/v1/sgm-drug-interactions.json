@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "sgm-drug-interactions",
+ "subject": "ss-general-medicine",
+ "title": "Drug interactions and cytochrome P450",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Cytochrome P450 (CYP) enzymes are **monooxygenases** found mainly in the liver, with a single heme group in the active site. They need NADPH and molecular oxygen to work. Their main job is phase I biotransformation, converting lipophilic drugs into more hydrophilic metabolites so the kidney or bile can clear them. CYP3A4 and CYP2D6 are the isoforms most important for clinical drug interactions.",
+   "say": "Cytochrome P450 enzymes are monooxygenases found mainly in the liver. Each one carries a single heme group in its active site. They need NADPH and molecular oxygen to work. Their main job is phase I biotransformation, turning lipophilic drugs into more hydrophilic metabolites so that the kidney or bile can clear them. CYP3A4 and CYP2D6 are the isoforms most important for clinical drug interactions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Cofactors",
+      "NADPH and oxygen"
+     ],
+     [
+      "Prosthetic group",
+      "One heme unit"
+     ],
+     [
+      "Main role",
+      "Phase I oxidation"
+     ],
+     [
+      "Key isoforms",
+      "CYP3A4, CYP2D6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most drug interactions with CYP enzymes work through **inhibition** or **induction**. Inhibition slows clearance, so the substrate concentration climbs and toxicity can follow. Induction speeds up metabolism, so plasma levels drop and a treatment may fail. A **potent inducer** can lower the effect of an anticoagulant, so the INR may fall. Strong **CYP3A4 inhibitors** are a frequent cause of unexpected toxicity.",
+   "say": "Most CYP-related interactions happen through inhibition or induction. When an enzyme is blocked, the drug is cleared more slowly, its levels build up, and toxicity may appear. When an enzyme is boosted, the drug is broken down faster, levels fall, and treatment can fail. A potent inducer can weaken the effect of an anticoagulant, so the INR may drop. Strong CYP3A4 inhibitors are a common reason for unexpected toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inhibition",
+     "points": [
+      "Slows clearance",
+      "Raises substrate levels",
+      "Risk of toxicity",
+      "Example: strong CYP3A4 inhibitor class"
+     ]
+    },
+    "right": {
+     "title": "Induction",
+     "points": [
+      "Speeds clearance",
+      "Lowers substrate levels",
+      "Risk of treatment failure",
+      "Example: potent enzyme inducer class"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Warfarin is a **narrow therapeutic index** drug, and its effect depends on several CYP pathways. S-warfarin, the more potent enantiomer, is cleared mainly by CYP2C9. Its effect is measured by the INR, with a usual target of 2 to 3 for atrial fibrillation or DVT and 2.5 to 3.5 for a mechanical mitral valve. Inducers lower the INR, while inhibitors such as trimethoprim-sulfamethoxazole and azoles raise it and increase bleeding.",
+   "say": "Warfarin has a narrow therapeutic index, and its effect depends on several CYP pathways. S-warfarin, the more potent enantiomer, is cleared mainly by CYP2C9. Its effect is measured by the INR, with a usual target of 2 to 3 for atrial fibrillation or deep vein thrombosis, and 2.5 to 3.5 for a mechanical mitral valve. Inducers lower the INR, while inhibitors such as trimethoprim-sulfamethoxazole and azoles raise it and increase bleeding risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inducer added"
+     },
+     {
+      "id": "b",
+      "label": "Faster S-warfarin clearance"
+     },
+     {
+      "id": "c",
+      "label": "INR falls"
+     },
+     {
+      "id": "d",
+      "label": "Check INR and adjust dose"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Some interactions cause **QT prolongation**, which can lead to torsades de pointes. Drugs that inhibit CYP3A4 can raise levels of QT-prolonging agents, and this risk is higher with hepatic dysfunction or electrolyte disturbance. P-glycoprotein is an efflux transporter in the gut and blood-brain barrier, so its inhibition raises drug absorption. Grapefruit juice inhibits intestinal CYP3A4, so systemic levels of sensitive substrates such as simvastatin can rise, increasing myopathy risk.",
+   "say": "Some interactions cause QT prolongation, which can lead to torsades de pointes. Drugs that inhibit CYP3A4 can raise levels of QT-prolonging agents, and this risk is higher with hepatic dysfunction or electrolyte disturbance. P-glycoprotein is an efflux transporter in the gut and blood-brain barrier, so inhibiting it raises drug absorption. Grapefruit juice inhibits intestinal CYP3A4, so systemic levels of sensitive substrates such as simvastatin can rise, increasing the risk of myopathy.",
+   "vis": null
+  },
+  {
+   "tx": "Genetic **polymorphisms** divide patients into poor, intermediate, extensive and ultrarapid metabolizers. CYP2D6 has the most allelic variants. Poor metabolizers carry two non-functional alleles and may have toxicity from standard doses. Ultrarapid metabolizers, often with gene duplication, can convert codeine to morphine too quickly, risking fatal respiratory depression. Poor metabolizers are about 6 to 10 percent of White populations.",
+   "say": "Genetic polymorphisms divide patients into poor, intermediate, extensive and ultrarapid metabolizers. CYP2D6 has the most allelic variants. Poor metabolizers carry two non-functional alleles and may have toxicity from standard doses. Ultrarapid metabolizers, often with gene duplication, convert codeine to morphine too quickly, which risks fatal respiratory depression. Poor metabolizers make up about 6 to 10 percent of White populations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phenotype",
+     "Enzyme activity",
+     "Clinical risk"
+    ],
+    "rows": [
+     [
+      "Poor",
+      "Absent",
+      "Toxicity at usual dose"
+     ],
+     [
+      "Intermediate",
+      "Reduced",
+      "Variable response"
+     ],
+     [
+      "Extensive",
+      "Normal",
+      "Expected response"
+     ],
+     [
+      "Ultrarapid",
+      "Very high",
+      "Treatment failure or overdose"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_1566d529aaf3",
+  "q_5a6b6f2069ad",
+  "q_1cd56428cc35"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton LL, Hilal-Dandan R, Knollmann BC, editors)",
+  "Katzung's Basic and Clinical Pharmacology (Katzung BG, Trevor AJ, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "sur-abdominal-trauma",
+ "subject": "surgery",
+ "title": "Abdominal, pelvic and genitourinary trauma: key principles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Blunt abdominal trauma is often hard to judge by examination alone. The **spleen** is the organ most often ruptured in blunt injury, especially after a left upper quadrant blow. Hypotension in a young, previously healthy patient with suspected splenic injury is a surgical emergency. Free intraperitoneal blood causes diffuse pain, guarding and rebound tenderness. Kehr sign, shoulder tip pain from diaphragmatic irritation, points to haemoperitoneum.",
+   "say": "Blunt abdominal trauma is often hard to judge by examination alone. The spleen is the organ most often ruptured in blunt injury, especially after a blow to the left upper quadrant. Hypotension in a young, previously healthy patient with a suspected splenic injury is a surgical emergency. Free blood in the abdomen causes diffuse pain, guarding and rebound tenderness. Kehr sign, shoulder tip pain from diaphragmatic irritation, points to haemoperitoneum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Left upper quadrant tenderness",
+      "Minor focal splenic injury"
+     ],
+     [
+      "Left shoulder tip pain",
+      "Diaphragmatic irritation"
+     ],
+     [
+      "Diffuse pain with rebound",
+      "Free intraperitoneal blood"
+     ],
+     [
+      "Hypotension in young adult",
+      "Surgical emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Investigation depends on stability. If the patient is haemodynamically unstable and cannot be moved, **FAST ultrasound** is the test of choice. If the patient is stable and can be transported, **CT abdomen** is the best study. CT grades organ injury and shows contrast blush, which predicts ongoing bleeding. Peritoneal air or extraluminal gas on imaging should prompt surgical exploration.",
+   "say": "Investigation depends on stability. If the patient is unstable and cannot be moved, FAST ultrasound is the test of choice. If the patient is stable and can be transported, CT of the abdomen is the best study. CT grades organ injury and can show contrast blush, which predicts ongoing bleeding. Air outside the bowel on imaging should prompt surgical exploration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Blunt abdominal trauma"
+     },
+     {
+      "id": "b",
+      "label": "Haemodynamically unstable?"
+     },
+     {
+      "id": "c",
+      "label": "FAST ultrasound"
+     },
+     {
+      "id": "d",
+      "label": "CT abdomen"
+     },
+     {
+      "id": "e",
+      "label": "Laparotomy if indicated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e",
+      "Peritonitis or air"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most solid organ injuries are managed without surgery when the patient is stable. About 70 to 90 percent of children and 50 to 80 percent of adults with blunt splenic injury are managed non-operatively. Stable patients with high-grade splenic injury may need **angioembolisation**. Unstable patients need splenectomy or splenic repair if feasible. Splenectomy is also needed when other injuries need urgent attention or bleeding continues.",
+   "say": "Most solid organ injuries are managed without surgery when the patient is stable. Most children and many adults with blunt splenic injury recover without an operation. Stable patients with high grade splenic injury may need angioembolisation, a procedure that blocks the bleeding vessel. Unstable patients need splenectomy or splenic repair where feasible. Splenectomy is also needed when other injuries need urgent attention or bleeding continues.",
+   "vis": null
+  },
+  {
+   "tx": "Hepatic bleeding is controlled in theatre with the **Pringle manoeuvre**. The surgeon compresses the hepatoduodenal ligament, clamping the hepatic artery and portal vein. It does not stop backflow from the inferior vena cava and hepatic veins. Small tears are sutured, and deep tracks may be plugged or packed. Laparotomy is usually by a generous midline or bucket-handle incision, and the surgeon should not hesitate to extend it as needed.",
+   "say": "Liver bleeding is controlled in theatre with the Pringle manoeuvre. The surgeon compresses the hepatoduodenal ligament, clamping the hepatic artery and portal vein. It does not stop backflow from the inferior vena cava and hepatic veins. Small tears are sutured, and deep tracks may be plugged or packed. Laparotomy is usually by a generous midline or bucket-handle incision, which can be extended as needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pringle manoeuvre",
+     "points": [
+      "Clamps hepatic artery and portal vein",
+      "Compresses hepatoduodenal ligament",
+      "Does not stop IVC or hepatic vein backflow"
+     ]
+    },
+    "right": {
+     "title": "Liver wound care",
+     "points": [
+      "Suture small tears",
+      "Plug deep tracks",
+      "Pack with a mop"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genitourinary trauma follows the pelvis. Pelvic fracture is the usual cause of **extraperitoneal bladder rupture**, which accounts for about 80 percent of bladder injuries. Intraperitoneal rupture follows a blow to a full bladder and causes peritonitis. Blood at the urethral meatus means urethral injury until proven otherwise. Do not pass a Foley catheter before a retrograde urethrogram. Extraperitoneal bladder rupture often heals with catheter drainage alone, while intraperitoneal rupture needs surgical repair.",
+   "say": "Genitourinary trauma follows the pelvis. Pelvic fracture is the usual cause of extraperitoneal bladder rupture, which accounts for about 80 percent of bladder injuries. Intraperitoneal rupture follows a blow to a full bladder and causes peritonitis. Blood at the urethral meatus means urethral injury until proven otherwise. Do not pass a Foley catheter before a retrograde urethrogram. Extraperitoneal rupture often heals with catheter drainage, while intraperitoneal rupture needs surgical repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Injury",
+     "Typical cause",
+     "Key management"
+    ],
+    "rows": [
+     [
+      "Extraperitoneal bladder",
+      "Pelvic fracture",
+      "Catheter drainage"
+     ],
+     [
+      "Intraperitoneal bladder",
+      "Blow to full bladder",
+      "Surgical repair"
+     ],
+     [
+      "Urethral injury",
+      "Pelvic fracture",
+      "Retrograde urethrogram first"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "ad31757e-6dc7-4da3-b8de-bbb2f61a58aa",
+  "15ea7e77-c8c7-4673-89f5-f1f1749f2d24",
+  "1e6b146b-fa7f-446e-af5a-98ede9b2b469"
+ ],
+ "src": [],
+ "refs": [
+  "Tintinalli's Emergency Medicine: A Comprehensive Study Guide (Tintinalli JE et al., eds)",
+  "Schwartz's Principles of Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 242
+ }
+}

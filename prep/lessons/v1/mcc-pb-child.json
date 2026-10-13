@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "mcc-pb-child",
+ "subject": "mcc-professional-behaviours",
+ "title": "Child maltreatment: recognition, reporting and key mimics",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Child maltreatment covers **physical abuse**, **sexual abuse**, neglect and emotional abuse. Clinicians must recognise injury patterns that do not fit the history. A **sentinel injury** such as a bruise in a non-mobile infant, or a fracture in a child who cannot walk, should prompt concern. Irritability, unexplained bruises and fractures of different ages are classic warning signs. The lesson covers recognition, reporting and mimics of abuse, and does not cover adult-related or forensic court procedures.",
+   "say": "Child maltreatment covers physical abuse, sexual abuse, neglect and emotional abuse. Clinicians must recognise injury patterns that do not fit the history. A sentinel injury, such as a bruise in a non-mobile infant or a fracture in a child who cannot walk, should prompt concern. Irritability, unexplained bruises and fractures of different ages are classic warning signs. This lesson covers recognition, reporting and mimics of abuse only.",
+   "vis": null
+  },
+  {
+   "tx": "Bruises of different ages in a non-mobile infant, or **sentinel injuries** over the cheeks, ear or trunk, are high-risk patterns. Normal platelets and clotting studies argue against a primary bleeding disorder. A **skeletal survey** should be considered in suspected physical abuse of infants. Report concerns through the national child helpline or local child protection pathway, as set out in local guidance. The duty to report rests with the individual clinician and cannot be delegated.",
+   "say": "Bruises of different ages in a non-mobile infant, or sentinel injuries over the cheeks, ear or trunk, are high-risk patterns. Normal platelets and clotting studies argue against a primary bleeding disorder. A skeletal survey should be considered in suspected physical abuse of infants. Report concerns through the national child helpline or local child protection pathway, as set out in local guidance. The duty to report rests with the individual clinician and cannot be delegated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Concerning injury pattern"
+     },
+     {
+      "id": "b",
+      "label": "Exclude mimics"
+     },
+     {
+      "id": "c",
+      "label": "Skeletal survey"
+     },
+     {
+      "id": "d",
+      "label": "Report to child protection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypernatraemia with a raised chloride and urea can signal excess sodium intake or water loss. Recurrent episodes that resolve only when the caregiver is present, and not in hospital, suggest an externally driven cause. This is a **fabricated or induced illness** pattern. Admit for observed feeding and notify child protection, rather than discharging the child with the caregiver after correcting the sodium.",
+   "say": "Hypernatraemia with a raised chloride and urea can signal excess sodium intake or water loss. Recurrent episodes that resolve only when the caregiver is present, and not in hospital, suggest an externally driven cause. This is a fabricated or induced illness pattern. Admit for observed feeding and notify child protection, rather than discharging the child with the caregiver after correcting the sodium.",
+   "vis": null
+  },
+  {
+   "tx": "Neglect and **growth faltering** often coexist with caregiver strain. A child whose weight has fallen below the previous growth curve needs a full feeding history, examination for dysmorphism, and a dietitian review. Address caregiver stress through social work and support services. Removal from home is reserved for immediate danger, not for poor growth alone. Multidisciplinary care is the safest first step in most cases.",
+   "say": "Neglect and growth faltering often coexist with caregiver strain. A child whose weight has fallen below the previous growth curve needs a full feeding history, examination for dysmorphism, and a dietitian review. Address caregiver stress through social work and support services. Removal from home is reserved for immediate danger, not for poor growth alone. Multidisciplinary care is the safest first step in most cases.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG76 Child maltreatment: when to suspect maltreatment"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

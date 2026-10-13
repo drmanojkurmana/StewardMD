@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "wh-postnatal",
+ "subject": "womens-health",
+ "title": "Postnatal care and breastfeeding: key warning signs and management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Postnatal care aims to detect **postpartum pre-eclampsia** and infection early, as **eclampsia** can still occur after delivery. Women with headache, visual blurring, high blood pressure or brisk reflexes need urgent assessment, bloods, and **magnesium sulfate** for seizure prophylaxis when severe features are present. Check blood pressure, platelets, liver enzymes and creatinine on the same day.",
+   "say": "Postnatal care aims to detect postpartum pre-eclampsia and infection early, because eclampsia can still occur after delivery. Women with headache, visual blurring, high blood pressure or brisk reflexes need urgent assessment. Check bloods including platelets, liver enzymes and creatinine on the same day. When severe features are present, magnesium sulfate is given for seizure prophylaxis, and the woman should be reviewed by the obstetric team without delay.",
+   "vis": null
+  },
+  {
+   "tx": "Exclusive breastfeeding for the first six months is recommended, with effective **latch** and frequent emptying of both breasts. Pain on feeding is common in the first weeks, but persistent pain, cracked nipples or a poorly attached baby need review. Mothers should be reassured that a healthy, well-gaining infant usually means feeding is working, even when the mother feels discomfort.",
+   "say": "Exclusive breastfeeding is recommended for the first six months. Effective latch and frequent emptying of both breasts protect supply and comfort. Some pain in the first weeks is common, but persistent pain, cracked nipples or a poorly attached baby need review. A well-gaining infant usually means feeding is working, even when the mother feels discomfort.",
+   "vis": null
+  },
+  {
+   "tx": "Breast infection ranges from **lactational mastitis** to a **breast abscess**. Mastitis is diffuse, with redness, warmth and fever, and it is managed by continued emptying and antibiotics. A fluctuant, localised lump suggests an abscess, which needs **ultrasound-guided aspiration** or drainage, because antibiotics alone penetrate the collection poorly.",
+   "say": "Breast infection ranges from lactational mastitis to a breast abscess. Mastitis is diffuse, with redness, warmth and fever. It is managed by continued emptying of the breast and antibiotics. A fluctuant, localised lump suggests an abscess, which needs ultrasound-guided aspiration or drainage, because antibiotics alone penetrate the collection poorly. Breastfeeding can usually continue from the unaffected side while an abscess is treated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Lactational mastitis",
+     "Breast abscess"
+    ],
+    "rows": [
+     [
+      "Lump",
+      "Diffuse, not collected",
+      "Fluctuant, localised"
+     ],
+     [
+      "Main treatment",
+      "Antibiotics and emptying",
+      "Ultrasound-guided aspiration"
+     ],
+     [
+      "Feeding",
+      "Continue, emptying affected side",
+      "Continue from unaffected side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painful nipples with burning pain after feeds, pale flattened nipples and white oral patches in the infant that do not wipe off suggest **candidal infection**. Both mother and infant should be treated together, using **topical antifungal** therapy, so the infection is not passed back and forth. Feeding usually continues, since the infant is gaining weight.",
+   "say": "Burning nipple pain after feeds, with pale flattened nipples and white oral patches in the infant that do not wipe off, suggests candidal infection. Both mother and infant should be treated with topical antifungal therapy, so the infection is not passed back and forth. Feeding usually continues, since the infant is gaining weight. Treating only one partner risks reinfection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nipple pain and oral patches"
+     },
+     {
+      "id": "b",
+      "label": "Treat mother topically"
+     },
+     {
+      "id": "c",
+      "label": "Treat infant mouth"
+     },
+     {
+      "id": "d",
+      "label": "Prevent reinfection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Perinatal **depression** is common, and intrusive thoughts of harm to the baby need careful assessment. A high **Edinburgh Postnatal Depression Scale** score, or any disclosure of harm, requires a **same-day risk assessment** by a mental health specialist. Medication takes weeks to act, so it does not address immediate risk; safety planning and specialist review come first.",
+   "say": "Perinatal depression is common, and intrusive thoughts of harm to the baby need careful assessment. A high Edinburgh Postnatal Depression Scale score, or any disclosure of harm, requires a same-day risk assessment by a mental health specialist. Medication takes weeks to act, so it does not address immediate risk. Safety planning and specialist review come first, and treatment is chosen after the risk is understood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High EPDS or harm thoughts"
+     },
+     {
+      "id": "b",
+      "label": "Same-day risk assessment"
+     },
+     {
+      "id": "c",
+      "label": "Safety planning"
+     },
+     {
+      "id": "d",
+      "label": "Treatment choice"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

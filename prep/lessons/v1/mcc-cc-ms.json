@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "mcc-cc-ms",
+ "subject": "mcc-chronic-care",
+ "title": "Multiple sclerosis: diagnosis, phenotypes and key clinical features",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Multiple sclerosis (MS)** is an autoimmune CNS disease causing inflammatory **demyelination**, gliosis and axonal loss. Diagnosis requires lesions disseminated in both time and space, meaning separate CNS sites and attacks at different times. Typical onset is age 20 to 40, and women are affected roughly three times as often as men. Subacute deficits disseminated in time and space, such as optic neuritis, should suggest demyelination.",
+   "say": "Multiple sclerosis is an autoimmune disease of the central nervous system causing inflammatory demyelination, gliosis and axonal loss. Diagnosis requires lesions disseminated in both time and space, meaning separate central nervous system sites and attacks at different times. Typical onset is between age 20 and 40, and women are affected roughly three times as often as men. Subacute deficits disseminated in time and space, such as optic neuritis, should suggest demyelination.",
+   "vis": null
+  },
+  {
+   "tx": "The most common presenting symptoms are **sensory loss**, seen in about 37 percent, and **optic neuritis**, seen in about 36 percent. Limb weakness and paraesthesia follow. Optic neuritis typically causes monocular blurred vision, dimness, colour desaturation, pain on eye movement and an afferent pupillary defect with a normal disc. Uveitis is uncommon and should prompt thought of sarcoidosis or lymphoma.",
+   "say": "The most common presenting symptoms are sensory loss, seen in about 37 percent of patients, and optic neuritis, seen in about 36 percent. Limb weakness and paraesthesia follow. Optic neuritis typically causes blurred vision in one eye, dimness, colour desaturation, pain on eye movement and an afferent pupillary defect with a normal optic disc. Uveitis is uncommon and should prompt thought of sarcoidosis or lymphoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding in MS"
+    ],
+    "rows": [
+     [
+      "Visual",
+      "Monocular dimness, colour desaturation"
+     ],
+     [
+      "Pupil",
+      "Afferent defect, normal disc"
+     ],
+     [
+      "Eye pain",
+      "Worse on eye movement"
+     ],
+     [
+      "Uveitis",
+      "Uncommon, consider sarcoidosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A bilateral **internuclear ophthalmoplegia** from a medial longitudinal fasciculus lesion is highly suggestive of MS. **Lhermitte's symptom** is an electric shock on neck flexion, but it is not specific to MS. **Uhthoff's symptom** is transient worsening with raised core temperature from a hot shower, exercise or fever, and reflects temperature-dependent conduction block.",
+   "say": "A bilateral internuclear ophthalmoplegia, caused by a lesion of the medial longitudinal fasciculus, is highly suggestive of multiple sclerosis. Lhermitte's symptom is an electric shock on neck flexion, but it is not specific to multiple sclerosis. Uhthoff's symptom is transient worsening with raised core temperature from a hot shower, exercise or fever, and reflects temperature-dependent conduction block.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lhermitte and Uhthoff",
+     "points": [
+      "Lhermitte: shock on neck flexion",
+      "Not specific, also cervical cord disease",
+      "Uhthoff: heat-triggered worsening",
+      "Reflects conduction block, not new lesion"
+     ]
+    },
+    "right": {
+     "title": "Bilateral INO",
+     "points": [
+      "Impaired adduction both eyes",
+      "Nystagmus in abducting eye",
+      "Medial longitudinal fasciculus lesion",
+      "Highly suggestive of MS"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Paroxysmal symptoms such as tonic spasms and sensory bursts last 10 seconds to 2 minutes, occur 5 to 40 times daily and do not alter consciousness. **Trigeminal neuralgia** in a young patient, especially with bilateral or atypical features or sensory loss, should raise suspicion of MS. On MRI, look for **Dawson's fingers**, lesions perpendicular to the ventricles, and a central vein sign on T2* imaging.",
+   "say": "Paroxysmal symptoms such as tonic spasms and sensory bursts last 10 seconds to 2 minutes, occur 5 to 40 times daily and do not alter consciousness. Trigeminal neuralgia in a young patient, especially with bilateral or atypical features or sensory loss, should raise suspicion of multiple sclerosis. On MRI, look for Dawson's fingers, which are lesions perpendicular to the ventricles, and a central vein sign on T2 star imaging.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnostic support comes from MRI brain and cord with contrast, CSF showing two or more **oligoclonal bands** absent from paired serum in over 90 percent of patients, and evoked potentials showing marked latency delay. Most MRI lesions and disease activity are clinically silent. Exclude infection before high-dose steroids, and test for **AQP4** and **MOG** antibodies, which point to mimics such as NMOSD and MOGAD.",
+   "say": "Diagnostic support comes from MRI of the brain and cord with contrast, cerebrospinal fluid showing two or more oligoclonal bands absent from paired serum in over 90 percent of patients, and evoked potentials showing marked latency delay. Most MRI lesions and disease activity are clinically silent. Exclude infection before high-dose steroids, and test for AQP4 and MOG antibodies, which point to mimics such as neuromyelitis optica spectrum disorder and MOG antibody disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected demyelination"
+     },
+     {
+      "id": "b",
+      "label": "Exclude infection"
+     },
+     {
+      "id": "c",
+      "label": "MRI and CSF bands"
+     },
+     {
+      "id": "d",
+      "label": "AQP4 and MOG tests"
+     },
+     {
+      "id": "e",
+      "label": "Diagnose MS or mimic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three **course subtypes** organise MS. Roughly 90 percent begin with **relapsing-remitting** disease, marked by attacks followed by partial or full recovery. Secondary progressive disease always follows relapsing disease, with steady worsening that may continue alongside relapses. About 10 percent have **primary progressive** disease from onset. Disability is scored on the **EDSS**, a scale from 0 to 10, where higher scores reflect greater impairment and walking difficulty.",
+   "say": "Three course subtypes organise multiple sclerosis. Roughly 90 percent begin with relapsing-remitting disease, marked by attacks followed by partial or full recovery. Secondary progressive disease always follows relapsing disease, with steady worsening that may continue alongside relapses. About 10 percent have primary progressive disease from onset. Disability is scored on the Expanded Disability Status Scale, from 0 to 10, where higher scores reflect greater impairment and walking difficulty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Approximate share",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Relapsing-remitting",
+      "About 90 percent",
+      "Attacks followed by recovery between episodes"
+     ],
+     [
+      "Secondary progressive",
+      "Always follows relapsing disease",
+      "Steady worsening, with or without relapses"
+     ],
+     [
+      "Primary progressive",
+      "About 10 percent",
+      "Steady worsening from onset"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-diseases-ms",
+  "kb-reference-marburg-multiple-sclerosis",
+  "kb-reference-tumefactive-demyelination"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Jameson et al.)",
+  "NICE guideline NG220: Multiple sclerosis in adults"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 2499,
+  "itemN": 6
+ }
+}

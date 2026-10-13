@@ -1,0 +1,115 @@
+{
+ "v": 1,
+ "module": "snp-haemodialysis-complications",
+ "subject": "ss-nephrology",
+ "title": "Complications of haemodialysis: intradialytic and acute complications",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Dialysis disequilibrium syndrome occurs when urea and other solutes are removed faster from blood than from brain. The brain osmolality stays high, so water shifts in and causes cerebral oedema. It typically appears during or just after the first sessions, with **headache**, nausea, restlessness, confusion and, in severe cases, seizures. Prevention is the key exam point: use short, gentle initial sessions, low blood flow, and a higher dialysate sodium. Mannitol or hypertonic saline are reserved for refractory cases.",
+   "say": "Dialysis disequilibrium syndrome happens when urea and other solutes leave the blood faster than they leave the brain. The brain stays relatively hyperosmolar, so water moves in and causes cerebral oedema. It usually appears during or just after the first sessions, with headache, nausea, restlessness, confusion and sometimes seizures. Prevention is the key exam point: use short, gentle initial sessions, low blood flow and a higher dialysate sodium. Mannitol or hypertonic saline are reserved for refractory cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Dialysis disequilibrium syndrome"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "First or early sessions"
+     ],
+     [
+      "Key symptom",
+      "Headache and confusion"
+     ],
+     [
+      "Main cause",
+      "Rapid urea removal"
+     ],
+     [
+      "First step",
+      "Modify prescription"
+     ],
+     [
+      "Refractory option",
+      "Mannitol or hypertonic saline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intradialytic hypotension is the most common acute complication. Fluid removal beyond the refilling capacity of the vascular bed drops blood pressure. A **nadir systolic pressure below 90 mm Hg** is independently linked to higher mortality. Management includes reducing ultrafiltration, cooling the dialysate, and reviewing antihypertensives. Muscle cramps, often during late ultrafiltration, respond to hypertonic saline or dextrose and to reducing ultrafiltration, not to loop diuretics.",
+   "say": "Intradialytic hypotension is the most common acute complication. Fluid removal faster than the vascular bed can refill drops blood pressure. A nadir systolic pressure below 90 mm Hg is independently linked to higher mortality. Management includes reducing ultrafiltration, cooling the dialysate and reviewing antihypertensive drugs. Muscle cramps, often during late ultrafiltration, respond to hypertonic saline or dextrose, not to loop diuretics.",
+   "vis": null
+  },
+  {
+   "tx": "**Air embolism** most often enters through the **venous line** or a disconnected circuit. Clues include sudden breathlessness, chest pain, falling blood pressure and a drop in **end-tidal CO2**. Immediately stop the pump, clamp the line and give **high-flow oxygen**. Position the patient in the **left lateral decubitus Trendelenburg** posture so air settles in the right atrial apex, away from the pulmonary outflow. **Transoesophageal echocardiography** is the most sensitive confirmation test.",
+   "say": "Air embolism most often enters through the venous line or a disconnected circuit. Clues include sudden breathlessness, chest pain, falling blood pressure and a drop in end-tidal CO2. Immediately stop the pump, clamp the line and give high-flow oxygen. Position the patient in the left lateral decubitus Trendelenburg posture so air settles in the right atrial apex, away from the pulmonary outflow. Transoesophageal echocardiography is the most sensitive confirmation test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stop pump and clamp line"
+     },
+     {
+      "id": "b",
+      "label": "High-flow oxygen"
+     },
+     {
+      "id": "c",
+      "label": "Left lateral Trendelenburg"
+     },
+     {
+      "id": "d",
+      "label": "Support and monitor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Haemolysis during dialysis classically produces a dark, port-wine venous line and pink plasma after centrifugation. Typical causes include hypotonic or contaminated dialysate, overheating and toxic chemicals such as chloramines. Hepatitis B remains a key infection risk, so **HBsAg-positive patients** should be isolated and given dedicated machines. Long-term amyloid deposits built from **beta-2 microglobulin** cause carpal tunnel syndrome and subchondral cysts. Biopsy with Congo red staining confirms the diagnosis.",
+   "say": "Haemolysis during dialysis gives a dark, port-wine venous line and pink plasma after centrifugation. Typical causes include hypotonic or contaminated dialysate, overheating and toxic chemicals such as chloramines. Hepatitis B remains a key infection risk, so patients who are HBsAg positive, meaning hepatitis B surface antigen positive, should be isolated and given dedicated machines. Long-term dialysis-related amyloidosis from beta-2 microglobulin causes carpal tunnel syndrome and subchondral cysts. Biopsy with Congo red staining confirms the diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_078729d180f3",
+  "q_bb792cf546a4",
+  "q_f76a116462c2"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 43
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "scc-viral-pandemic",
+ "subject": "ss-critical-care",
+ "title": "Viral pneumonia and pandemic critical care",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Severe **influenza** is managed with **antiviral therapy** started as early as possible after symptom onset, but treatment should still be considered in severe or deteriorating illness even when presentation is later. Dosing follows local licensed guidance, with adjustment for **renal impairment**. Antivirals are never a substitute for **ICU support** such as oxygen, **ventilation** and haemodynamic care. Consider **bacterial co-infection** in ventilated patients and review cultures.",
+   "say": "Severe influenza is managed with antiviral therapy started as early as possible after symptom onset, but treatment should still be considered in severe or deteriorating illness even when presentation is later. Dosing follows local licensed guidance, with adjustment for renal impairment. Antivirals are never a substitute for ICU support such as oxygen, ventilation and haemodynamic care. Consider bacterial co-infection in ventilated patients and review cultures.",
+   "vis": null
+  },
+  {
+   "tx": "During a pandemic, demand can exceed **surge capacity** of beds, ventilators and staff. **Crisis standards of care** allow temporary change in how scarce resources are allocated, using transparent, pre-agreed criteria rather than first-come first-served decisions. Ventilator allocation should be guided by likelihood of benefit, not by age alone. Ethical frameworks emphasise fairness, consistency and documentation.",
+   "say": "During a pandemic, demand can exceed surge capacity of beds, ventilators and staff. Crisis standards of care allow temporary change in how scarce resources are allocated, using transparent, pre-agreed criteria rather than first-come first-served decisions. Ventilator allocation should be guided by likelihood of benefit, not by age alone. Ethical frameworks emphasise fairness, consistency and documentation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Usual care",
+     "points": [
+      "First come first served",
+      "Individual bedside judgement",
+      "Standard staffing ratios"
+     ]
+    },
+    "right": {
+     "title": "Crisis standards",
+     "points": [
+      "Pre-agreed transparent criteria",
+      "Likelihood of benefit guides use",
+      "Ethics review and documentation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ventilator-associated pneumonia, or **VAP**, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
+   "say": "Ventilator-associated pneumonia, or VAP, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intubation"
+     },
+     {
+      "id": "b",
+      "label": "Secretion pooling"
+     },
+     {
+      "id": "c",
+      "label": "Microaspiration"
+     },
+     {
+      "id": "d",
+      "label": "New infiltrate"
+     },
+     {
+      "id": "e",
+      "label": "Culture and treat"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empiric antibiotics for suspected VAP should be started promptly after respiratory cultures are obtained, not delayed for results. Choice depends on prior antibiotic exposure within ninety days and local resistance data, which raise the risk of multidrug-resistant organisms such as **Pseudomonas aeruginosa** and MRSA. Necrotising pneumonia usually needs at least fourteen days of treatment. Narrow the regimen once cultures return.",
+   "say": "Empiric antibiotics for suspected VAP should be started promptly after respiratory cultures are obtained, not delayed for results. Choice depends on prior antibiotic exposure within ninety days and local resistance data, which raise the risk of multidrug-resistant organisms such as Pseudomonas aeruginosa and MRSA. Necrotising pneumonia usually needs at least fourteen days of treatment. Narrow the regimen once cultures return.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1dfe95600f87",
+  "q_93d8c89cebdf",
+  "q_0a17fd1fbd2f"
+ ],
+ "src": [],
+ "refs": [
+  "RECOVERY Collaborative Group, dexamethasone trial, New England Journal of Medicine",
+  "NICE COVID-19 rapid guideline: managing COVID-19"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 18
+ }
+}

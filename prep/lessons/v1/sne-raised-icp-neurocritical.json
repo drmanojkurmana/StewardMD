@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "sne-raised-icp-neurocritical",
+ "subject": "ss-neurology",
+ "title": "Raised intracranial pressure and neurocritical care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **Monro-Kellie doctrine** states that the rigid skull contains brain, blood and cerebrospinal fluid, and their total volume stays constant. If one component grows, another must shrink or intracranial pressure rises. Compliance is the reserve that buffers small volume changes, and once it is exhausted, small additions produce steep pressure rises.",
+   "say": "The Monro-Kellie doctrine states that the rigid skull contains brain, blood and cerebrospinal fluid, and their total volume stays constant. If one component grows, another must shrink or intracranial pressure rises. Compliance is the reserve that buffers small volume changes. Once that reserve is used up, even small additions produce steep pressure rises.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Typical role in raised ICP"
+    ],
+    "rows": [
+     [
+      "Brain tissue",
+      "Oedema or mass expands volume"
+     ],
+     [
+      "Blood",
+      "Venous congestion increases cerebral blood volume"
+     ],
+     [
+      "CSF",
+      "Can be drained to create room"
+     ],
+     [
+      "Skull",
+      "Fixed, so no space to expand"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cerebral perfusion pressure** equals mean arterial pressure minus intracranial pressure. Indian and international severe TBI guidance targets a CPP of about 60 to 70 mm Hg, avoiding values below 60. Autoregulation holds cerebral blood flow steady across a mean arterial pressure range of roughly 50 to 150 mm Hg by changing vascular tone.",
+   "say": "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. Guidance for severe traumatic brain injury targets a CPP of about 60 to 70 mm Hg and avoids values below 60. Autoregulation keeps cerebral blood flow steady across a mean arterial pressure range of roughly 50 to 150 mm Hg by changing vascular tone.",
+   "vis": null
+  },
+  {
+   "tx": "**Cushing triad** is hypertension with bradycardia and irregular respiration. It signals impending herniation and brainstem compromise. Indications for ICP monitoring include a GCS of 8 or less after severe TBI. Intubation is indicated at the same GCS threshold or when herniation signs appear.",
+   "say": "Cushing triad is hypertension with bradycardia and irregular respiration. It signals impending herniation and brainstem compromise. ICP monitoring is indicated after severe traumatic brain injury with a GCS of 8 or less. Intubation is indicated at the same threshold or when signs of herniation appear.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rising ICP"
+     },
+     {
+      "id": "b",
+      "label": "Falling CPP"
+     },
+     {
+      "id": "c",
+      "label": "Hypertension"
+     },
+     {
+      "id": "d",
+      "label": "Bradycardia"
+     },
+     {
+      "id": "e",
+      "label": "Irregular breathing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **external ventricular drain** is the gold standard for ICP monitoring because it measures pressure accurately and allows therapeutic CSF drainage. Lumbar puncture is contraindicated when imaging shows midline shift, mass effect or obstruction, because pressure changes can trigger herniation. Optic nerve sheath diameter on ultrasound is measured 3 mm behind the globe as a bedside screen.",
+   "say": "An external ventricular drain is the gold standard for ICP monitoring because it measures pressure accurately and allows therapeutic CSF drainage. Lumbar puncture is contraindicated when imaging shows midline shift, mass effect or obstruction, because pressure changes can trigger herniation. Optic nerve sheath diameter on ultrasound is measured 3 mm behind the globe as a bedside screen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Invasive monitoring",
+     "points": [
+      "Ventricular drain gives accurate readings",
+      "Allows therapeutic CSF drainage",
+      "Parenchymal probes are alternatives"
+     ]
+    },
+    "right": {
+     "title": "Safety before lumbar puncture",
+     "points": [
+      "Avoid if midline shift is present",
+      "Image first to exclude mass effect",
+      "Risk of downward herniation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Osmotherapy** lowers ICP by drawing water out of brain tissue. **Mannitol** is effective, but serum osmolality above 320 mOsm raises the risk of renal injury and dehydration. **Hypertonic saline** avoids rebound oedema, though serum sodium must be monitored closely. Corticosteroids suit vasogenic oedema from tumours or abscesses, while acetazolamide reduces CSF production in idiopathic intracranial hypertension.",
+   "say": "Osmotherapy lowers intracranial pressure by drawing water out of brain tissue. Mannitol is effective, but serum osmolality above 320 mOsm raises the risk of renal injury and dehydration. Hypertonic saline avoids rebound oedema, though serum sodium must be monitored closely. Corticosteroids suit vasogenic oedema from tumours or abscesses, while acetazolamide reduces CSF production in idiopathic intracranial hypertension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Key point",
+     "Main caution"
+    ],
+    "rows": [
+     [
+      "Mannitol",
+      "Osmotic diuretic",
+      "Osmolality above 320 mOsm, renal injury"
+     ],
+     [
+      "Hypertonic saline",
+      "No rebound oedema",
+      "Hypernatraemia, monitor sodium"
+     ],
+     [
+      "Corticosteroids",
+      "Vasogenic oedema from tumour",
+      "Not first line for trauma"
+     ],
+     [
+      "Acetazolamide",
+      "Reduces CSF production",
+      "Used in idiopathic intracranial hypertension"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_3d01684b5da1",
+  "q_7d4c3c7108f5",
+  "q_e29e666d3527"
+ ],
+ "src": [],
+ "refs": [
+  "Brain Trauma Foundation Guidelines for the Management of Severe Traumatic Brain Injury"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 47
+ }
+}

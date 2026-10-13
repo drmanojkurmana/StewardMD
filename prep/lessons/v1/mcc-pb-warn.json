@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "mcc-pb-warn",
+ "subject": "mcc-professional-behaviours",
+ "title": "Duty to warn and protect",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **duty to protect** arises when a patient poses a serious threat of violence to an identifiable person. Confidentiality is the default, and clinicians may breach it only in narrow circumstances. The aim is to protect the potential victim while disclosing no more than necessary. Clinicians should act on concrete information, not on vague feelings or general distress. This topic is high yield for NEET-PG, INI-CET and FMGE because viva questions and MCQs test when disclosure is justified.",
+   "say": "A duty to protect arises when a patient poses a serious threat of violence to an identifiable person. Confidentiality is the default, and clinicians may breach it only in narrow circumstances. The aim is to protect the potential victim while disclosing no more than necessary. Clinicians should act on concrete information, not on vague feelings or general distress. This topic is high yield for NEET-PG, INI-CET and FMGE, because viva questions and MCQs test when disclosure is justified.",
+   "vis": null
+  },
+  {
+   "tx": "Disclosure is justified when several features converge. The **victim** should be identifiable, the threat serious and the **imminence** of harm clear. Access to a weapon, a fixed plan and recent treatment discontinuation raise concern. Past violence adds weight but is not essential. A general statement about hurting people, without a target or timeframe, usually calls for risk assessment and close follow-up rather than breach. Weigh the factors together.",
+   "say": "Disclosure is justified when several features converge. The victim should be identifiable, the threat serious and the imminence of harm clear. Access to a weapon, a fixed plan and recent treatment discontinuation raise concern. Past violence adds weight but is not essential. A general statement about hurting people, without a target or timeframe, usually calls for risk assessment and close follow-up rather than breach. Weigh the factors together.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Favours disclosure",
+     "Favours monitoring"
+    ],
+    "rows": [
+     [
+      "Identifiable victim",
+      "Named person or clear target",
+      "Unnamed or general group"
+     ],
+     [
+      "Intent and plan",
+      "Stated intent with method or timing",
+      "Vague remark with no plan"
+     ],
+     [
+      "Means",
+      "Access to a weapon",
+      "No access to weapons"
+     ],
+     [
+      "Imminence",
+      "Near-term action expressed",
+      "No timeframe given"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Work through the decision in order. First confirm that the threat is credible and that a specific person is at risk. If there is no **identifiable victim**, the duty to protect is usually not engaged, and the clinician should still assess and monitor. If a victim is identified and the threat is serious and imminent, the clinician may disclose only what is needed to prevent harm, to the potential victim and to police. Document each decision.",
+   "say": "Work through the decision in order. First confirm that the threat is credible and that a specific person is at risk. If there is no identifiable victim, the duty to protect is usually not engaged, and the clinician should still assess and monitor. If a victim is identified and the threat is serious and imminent, the clinician may disclose only what is needed to prevent harm, to the potential victim and to police. Document each decision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Credible threat heard"
+     },
+     {
+      "id": "n2",
+      "label": "Identifiable victim?"
+     },
+     {
+      "id": "n3",
+      "label": "Serious and imminent?"
+     },
+     {
+      "id": "n4",
+      "label": "Limited disclosure to victim and police"
+     },
+     {
+      "id": "n5",
+      "label": "Assess, document, follow up"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "yes"
+     ],
+     [
+      "n3",
+      "n4",
+      "yes"
+     ],
+     [
+      "n2",
+      "n5",
+      "no"
+     ],
+     [
+      "n3",
+      "n5",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confidentiality is a core duty, but a **duty to protect** may justify limited disclosure when a patient poses a serious threat to an identifiable person. In many US states, courts following Tarasoff-type rulings have recognised this obligation, though the details differ by jurisdiction. Indian case law is less settled, so follow institutional policy and seek legal advice. Apply the **minimum necessary principle**: disclose only what is needed, and record your reasoning.",
+   "say": "Confidentiality is a core duty, but a duty to protect may justify limited disclosure when a patient poses a serious threat to an identifiable person. In many US states, courts following Tarasoff-type rulings have recognised this obligation, though the details differ by jurisdiction. Indian case law is less settled, so follow institutional policy and seek legal advice. Apply the minimum necessary principle: disclose only what is needed, and record your reasoning.",
+   "vis": null
+  },
+  {
+   "tx": "Two related duties can look alike but differ in trigger and recipient. The **duty to protect** concerns violence risk from an adult patient toward an identifiable person. **Mandatory reporting** applies when a child shows signs of abuse or discloses it, and must go to child protection services even if parents object. Intimate partner violence and HIV partner notification follow their own pathways, usually involving safety planning and public health processes.",
+   "say": "Two related duties can look alike but differ in trigger and recipient. The duty to protect concerns violence risk from an adult patient toward an identifiable person. Mandatory reporting applies when a child shows signs of abuse or discloses it, and must go to child protection services even if parents object. Intimate partner violence and HIV partner notification follow their own pathways, usually involving safety planning and public health processes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Duty to protect",
+     "points": [
+      "Triggered by serious threat to a person",
+      "Disclosure to victim and police",
+      "Consent may be overridden if imminent"
+     ]
+    },
+    "right": {
+     "title": "Mandatory reporting",
+     "points": [
+      "Triggered by suspected child abuse",
+      "Report to child protection services",
+      "Applies regardless of parental consent"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "rad-brachytherapy",
+ "subject": "radiology",
+ "title": "Brachytherapy and therapeutic radioisotopes",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Brachytherapy** places a sealed radioactive source directly into or next to the tumour, so the dose falls off steeply and nearby normal tissue is spared. It is broadly divided into interstitial, where sources go into tissue, and **intracavitary**, where sources sit inside a natural body cavity such as the uterus or vagina. Teletherapy, by contrast, delivers beams from a distance.",
+   "say": "Brachytherapy places a sealed radioactive source directly into or next to the tumour, so the dose falls off steeply and nearby normal tissue is spared. It is broadly divided into interstitial, where sources go into tissue, and intracavitary, where sources sit inside a natural body cavity such as the uterus or vagina. Teletherapy, by contrast, delivers beams from a distance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Placement",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Interstitial",
+      "Inside tissue",
+      "Prostate seeds"
+     ],
+     [
+      "Intracavitary",
+      "Natural cavity",
+      "Cervix tandem"
+     ],
+     [
+      "Teletherapy",
+      "Beam from distance",
+      "Linear accelerator"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sources are either **temporary** (removed after treatment) or **permanent** (left in place and decaying away). Iridium-192, caesium-137, cobalt-60 and radium-226 are temporary sources. Iodine-125, palladium-103, gold-198 and caesium-131 are permanent seeds. Iodine-125 and palladium-103 are the classic seeds for early prostate cancer.",
+   "say": "Sources are either temporary, removed after treatment, or permanent, left in place and decaying away. Iridium-192, caesium-137, cobalt-60 and radium-226 are temporary sources. Iodine-125, palladium-103, gold-198 and caesium-131 are permanent seeds. Iodine-125 and palladium-103 are the classic seeds for early prostate cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Common isotopes"
+    ],
+    "rows": [
+     [
+      "Temporary",
+      "Iridium-192, caesium-137, cobalt-60, radium-226"
+     ],
+     [
+      "Permanent",
+      "Iodine-125, palladium-103, gold-198, caesium-131"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dose rate defines the **LDR** (up to 2 Gy per hour), **MDR** (2 to 12 Gy per hour) and **HDR** (above 12 Gy per hour) classes. LDR suits oral cavity, oropharynx, sarcoma and prostate. HDR, usually with iridium-192, is used for cervix, oesophagus, lung, breast and prostate. Pulsed dose rate mimics LDR using hourly pulses.",
+   "say": "Dose rate defines the LDR class, up to 2 Gy per hour, the MDR class, 2 to 12 Gy per hour, and the HDR class, above 12 Gy per hour. LDR suits oral cavity, oropharynx, sarcoma and prostate. HDR, usually with iridium-192, is used for cervix, oesophagus, lung, breast and prostate. Pulsed dose rate mimics LDR using hourly pulses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Dose rate",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "LDR",
+      "Up to 2 Gy/h",
+      "Prostate, oral cavity"
+     ],
+     [
+      "MDR",
+      "2 to 12 Gy/h",
+      "Intermediate"
+     ],
+     [
+      "HDR",
+      "Above 12 Gy/h",
+      "Cervix, oesophagus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Radioiodine** I-131 is a beta emitter with a half-life of about 8 days, used for ablating differentiated thyroid cancer and hyperthyroidism because the thyroid takes up iodine avidly. For bone metastases, **strontium-89** (50 days), samarium-153, rhenium-186 and phosphorus-32 relieve pain. I-131 is not a bone pain agent.",
+   "say": "Radioiodine I-131 is a beta emitter with a half-life of about 8 days, used for ablating differentiated thyroid cancer and hyperthyroidism because the thyroid takes up iodine avidly. For bone metastases, strontium-89, with a half-life of about 50 days, samarium-153, rhenium-186 and phosphorus-32 relieve pain. I-131 is not a bone pain agent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Systemic bone pain agents",
+     "points": [
+      "Strontium-89",
+      "Samarium-153",
+      "Rhenium-186",
+      "Phosphorus-32"
+     ]
+    },
+    "right": {
+     "title": "Radioiodine I-131",
+     "points": [
+      "Thyroid ablation",
+      "Beta emitter",
+      "Half-life about 8 days",
+      "Not for bone pain"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "4af62e66-a273-477a-aad3-80b14a3cb410",
+  "a03bb4ee-9e57-4886-8457-fa5b000af304",
+  "11ba17c8-5276-44fb-9b24-7c266c8734ba"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Dennis L. Kasper et al.)",
+  "Grainger & Allison's Diagnostic Radiology",
+  "Review of Radiology by Sumer Sethi"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 127
+ }
+}

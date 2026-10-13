@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "mcc-hp-adolescent",
+ "subject": "mcc-health-promotion",
+ "title": "Adolescent health and risk behaviours",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Adolescent health is shaped by **risk behaviours** that often start in the teenage years, including self-harm, substance use, unsafe sex and eating disorders. Early recognition matters because many problems first appear as mood change, withdrawal or falling school performance. A structured, non-judgemental approach allows the clinician to ask about these behaviours directly.",
+   "say": "Adolescent health is shaped by risk behaviours that often start in the teenage years, including self-harm, substance use, unsafe sex and eating disorders. Early recognition matters because many problems first appear as mood change, withdrawal or falling school performance. A structured, non-judgemental approach allows the clinician to ask about these behaviours directly.",
+   "vis": null
+  },
+  {
+   "tx": "Suicidal thoughts in a teenager with depression need a **suicide risk assessment** today, even when no specific plan is stated. The assessment covers risk factors, protective factors and access to means. Safety planning follows, and the level of care depends on the result. Absence of a plan does not remove the need for assessment.",
+   "say": "Suicidal thoughts in a teenager with depression need a suicide risk assessment today, even when no specific plan is stated. The assessment covers risk factors, protective factors and access to means. Safety planning follows, and the level of care depends on the result. Absence of a plan does not remove the need for assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Disclosed thoughts"
+     },
+     {
+      "id": "b",
+      "label": "Structured risk assessment"
+     },
+     {
+      "id": "c",
+      "label": "Safety plan and means"
+     },
+     {
+      "id": "d",
+      "label": "Level of care"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iron deficiency anaemia from heavy menstrual bleeding is common in adolescent girls. Typical findings are low haemoglobin, low **ferritin** and a low mean cell volume. Oral iron is the first-line treatment, and the cause of blood loss must be investigated. Transfusion is reserved for haemodynamic instability or very severe anaemia.",
+   "say": "Iron deficiency anaemia from heavy menstrual bleeding is common in adolescent girls. Typical findings are low haemoglobin, low ferritin and a low mean cell volume. Oral iron is the first-line treatment, and the cause of blood loss must be investigated. Transfusion is reserved for haemodynamic instability or very severe anaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Typical result",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Haemoglobin",
+      "Low",
+      "Anaemia present"
+     ],
+     [
+      "Ferritin",
+      "Low",
+      "Iron stores depleted"
+     ],
+     [
+      "Mean cell volume",
+      "Low",
+      "Microcytic red cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Young people who smoke or vape need **motivational counselling** combined with nicotine replacement where dependence is present. Daily use, morning cravings and failed quit attempts indicate dependence. Counselling targets triggers and builds coping skills. Vaping is not risk free, and it should be addressed directly rather than dismissed.",
+   "say": "Young people who smoke or vape need motivational counselling combined with nicotine replacement where dependence is present. Daily use, morning cravings and failed quit attempts indicate dependence. Counselling targets triggers and builds coping skills. Vaping is not risk free, and it should be addressed directly rather than dismissed.",
+   "vis": null
+  },
+  {
+   "tx": "Sexually transmitted infections such as **chlamydia** are often silent in young people, so opportunistic urine testing is recommended for sexually active adolescents. Treatment with a recommended antibiotic such as doxycycline clears the infection. Partners must be tested and treated to prevent reinfection. Confidential care is maintained as the young person consents.",
+   "say": "Sexually transmitted infections such as chlamydia are often silent in young people, so opportunistic urine testing is recommended for sexually active adolescents. Treatment with a recommended antibiotic such as doxycycline clears the infection. Partners must be tested and treated to prevent reinfection. Confidential care is maintained as the young person consents.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline on Self-harm (NG225)",
+  "NICE Clinical Guideline on Eating disorders in children and young people",
+  "NICE Clinical Guideline on Tobacco: preventing uptake, promoting quitting and treating dependence"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

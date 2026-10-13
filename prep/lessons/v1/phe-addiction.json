@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "phe-addiction",
+ "subject": "population-health-and-ethics",
+ "title": "Population approaches to addiction",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Population approaches shift the average level of risk across an entire community, rather than focusing only on the heaviest users. A **population-level strategy** can prevent more harm than intensive help for a few, because small shifts in drinking or drug use across everyone add up. Individual treatment is vital but only reaches people who come forward. Levers such as **availability**, **price** and **access** shape how much of a substance people consume.",
+   "say": "Population approaches shift the average level of risk across a whole community, not just the heaviest users. A population-level strategy can prevent more harm than intensive help for a few, since small shifts across everyone add up. Individual treatment is still vital, but it only reaches people who come forward. Availability, price and access are the main levers, shaping how much of a substance people consume. In exams, favour the measure that acts on the whole community.",
+   "vis": null
+  },
+  {
+   "tx": "Price and access are the strongest **population levers** for tobacco and alcohol. Raising **excise tax** makes cigarettes less affordable, which lowers uptake among young people and prompts some current smokers to quit. Restricting late-night takeaway **trading hours** cuts access at the time harm peaks. These measures reach every consumer at once. By contrast, individual counselling helps a handful of motivated people and rarely shifts the wider community pattern.",
+   "say": "Price and access are the strongest population levers for tobacco and alcohol. A higher excise tax on cigarettes makes them less affordable, so fewer young people start and some current smokers are prompted to quit. Limiting late-night takeaway trading hours reduces access at the time harm peaks. These measures reach every consumer at once. Individual counselling, by contrast, helps a handful of motivated people and rarely changes the wider community pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Individual approaches",
+     "points": [
+      "Reach only those who present",
+      "Benefit a few patients",
+      "Leave community pattern largely unchanged"
+     ]
+    },
+    "right": {
+     "title": "Population approaches",
+     "points": [
+      "Act on every consumer at once",
+      "Shift the whole distribution",
+      "Use price and access levers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Harm reduction uses the same logic for illicit drugs. Take-home **naloxone** reverses opioid toxicity by displacing opioids from mu receptors and restoring breathing. Most overdoses occur in the presence of others, so widening bystander access with peer training prevents deaths across a community. Needle and syringe programmes reduce sharing of injecting equipment, which interrupts transmission of hepatitis C and HIV. Punitive measures such as higher penalties or arrests do not reduce overdose deaths in the same way.",
+   "say": "Harm reduction uses the same logic for illicit drugs. Take-home naloxone reverses opioid toxicity by displacing opioids from mu receptors and restoring breathing. Most overdoses occur in the presence of others, so widening bystander access with peer training prevents deaths across a community. Needle and syringe programmes reduce sharing of injecting equipment, which interrupts transmission of hepatitis C and HIV. Punitive measures such as higher penalties or arrests do not reduce overdose deaths in the same way.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Main effect",
+     "Population reach"
+    ],
+    "rows": [
+     [
+      "Take-home naloxone",
+      "Reverses overdose",
+      "Wide, bystander-based"
+     ],
+     [
+      "Sterile injecting equipment",
+      "Cuts blood-borne transmission",
+      "Injecting networks"
+     ],
+     [
+      "Opioid agonist treatment",
+      "Reduces illicit use and risky injecting",
+      "Treated people and community"
+     ],
+     [
+      "Higher drug penalties",
+      "Little effect on overdose deaths",
+      "Broad but ineffective"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Opioid agonist treatment lowers overdose deaths through a clear mechanism. It provides a regulated, predictable opioid dose, which reduces reliance on unpredictable illicit supply. Fewer people inject, so exposure to contaminated or potent drugs falls. This is particularly relevant where **fentanyl** appears in the supply, since potent unknown opioids cause rapid respiratory depression. Treatment does not remove dependence in one step, and it does not replace naloxone supply.",
+   "say": "Opioid agonist treatment lowers overdose deaths through a clear mechanism. It provides a regulated, predictable opioid dose, which reduces reliance on unpredictable illicit supply. Fewer people inject, so exposure to contaminated or potent drugs falls. This is particularly relevant where fentanyl appears in the supply, since potent unknown opioids cause rapid respiratory depression. Treatment does not remove dependence in one step, and it does not replace naloxone supply.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Regulated opioid dose"
+     },
+     {
+      "id": "b",
+      "label": "Less illicit use"
+     },
+     {
+      "id": "c",
+      "label": "Less injecting"
+     },
+     {
+      "id": "d",
+      "label": "Fewer overdoses"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Tobacco Control Programme, India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

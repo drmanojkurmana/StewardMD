@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "obg-gyn-procedures",
+ "subject": "obstetrics-gynaecology",
+ "title": "Gynaecological procedures and imaging: key principles for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Laparoscopy** is contraindicated in severe cardiopulmonary disease, extensive peritoneal adhesions, haemodynamic instability, generalised peritonitis, pregnancy beyond 16 weeks and large pelvic tumours. Trocars placed in the iliac fossae can injure the **inferior epigastric artery**, while a central trocar can injure the bladder. The uterus can be perforated by a uterine sound.",
+   "say": "Laparoscopy is contraindicated in severe cardiopulmonary disease, extensive peritoneal adhesions, haemodynamic instability, generalised peritonitis, pregnancy beyond sixteen weeks and large pelvic tumours. Trocars placed in the iliac fossae can injure the inferior epigastric artery, while a central trocar can injure the bladder. The uterus can be perforated by a uterine sound.",
+   "vis": null
+  },
+  {
+   "tx": "**Ureteric injury** is most likely after **Wertheim's radical hysterectomy**, because the medial half of the cardinal ligament is divided close to the ureter, and adhesions are common in cancer surgery. Vaginal hysterectomy carries a higher risk than an open abdominal approach. Prevention includes preoperative urography or ureteric catheters, and intraoperative palpation of the ureters along their pelvic course.",
+   "say": "Ureteric injury is most likely after Wertheim's radical hysterectomy, because the medial half of the cardinal ligament is divided close to the ureter, and adhesions are common in cancer surgery. Vaginal hysterectomy carries a higher risk than an open abdominal approach. Prevention includes preoperative urography or ureteric catheters, and intraoperative palpation of the ureters along their pelvic course.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Wertheim's hysterectomy",
+      "sub": "Highest risk"
+     },
+     {
+      "id": "b",
+      "label": "Vaginal hysterectomy",
+      "sub": "Higher than open"
+     },
+     {
+      "id": "c",
+      "label": "Open abdominal hysterectomy",
+      "sub": "Lower risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "then"
+     ],
+     [
+      "b",
+      "c",
+      "then"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-operative ureteric injury** may present with falling urine output and progressive flank pain. Initial assessment uses CT urogram and urinalysis. If a ureteric catheter can be passed under cystoscopic guidance, it is left for about 4 to 6 weeks. If injury is recognised during surgery, **ureteric reimplantation into the bladder** is the usual procedure of choice, especially near the bladder.",
+   "say": "Post-operative ureteric injury may present with falling urine output and progressive flank pain. Initial assessment uses a CT urogram and urinalysis. If a ureteric catheter can be passed under cystoscopic guidance, it is left for about four to six weeks. If injury is recognised during surgery, ureteric reimplantation into the bladder is the usual procedure of choice, especially near the bladder.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Injury recognised"
+     },
+     {
+      "id": "b",
+      "label": "CT urogram and urinalysis"
+     },
+     {
+      "id": "c",
+      "label": "Cystoscopic stent passed"
+     },
+     {
+      "id": "d",
+      "label": "Catheter left 4 to 6 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endometrial sampling** for histopathology is best done by **Pipelle endometrial aspiration**, rather than dilatation and curettage. If the endometrium looks thick on imaging but histology is inadequate or atrophic, hysteroscopy is needed to exclude polyps. Hysterosalpingography is done in the follicular phase, between the end of menstruation and ovulation, around day 10. Absolute contraindications include pregnancy, pelvic inflammatory disease and genital tuberculosis.",
+   "say": "Endometrial sampling for histopathology is best done by Pipelle endometrial aspiration, rather than dilatation and curettage. If the endometrium looks thick on imaging but histology is inadequate or atrophic, hysteroscopy is needed to exclude polyps. Hysterosalpingography is done in the follicular phase, between the end of menstruation and ovulation, around day 10. Absolute contraindications include pregnancy, pelvic inflammatory disease and genital tuberculosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "241acf50-6f3c-4190-a635-e4f895238496",
+  "f453b8a8-00ef-4aa3-b360-7589731941bb",
+  "912fcc74-f9cc-4030-8f38-726a5e5bf647"
+ ],
+ "src": [],
+ "refs": [
+  "D.C. Dutta's Textbook of Gynaecology",
+  "Williams Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 127
+ }
+}

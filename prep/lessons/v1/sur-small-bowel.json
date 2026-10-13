@@ -1,0 +1,171 @@
+{
+ "v": 1,
+ "module": "sur-small-bowel",
+ "subject": "surgery",
+ "title": "Small intestine and mesentery: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Meckel diverticulum** is the most common congenital small bowel anomaly and a remnant of the vitello-intestinal duct. It sits on the **antimesenteric** border of the ileum, about 2 feet (around 60 cm) proximal to the ileocaecal valve. The classic mnemonic is the rule of 2: 2 inches long, 2 feet from the valve, 2 percent of people affected, and often symptomatic before age 2.",
+   "say": "Meckel diverticulum is the most common congenital small bowel anomaly and a remnant of the vitello-intestinal duct. It sits on the antimesenteric border of the ileum, about 2 feet proximal to the ileocaecal valve. The rule of 2 covers 2 inches long, 2 feet from the valve, and about 2 percent of people affected, often symptomatic before age 2.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Meckel diverticulum"
+    ],
+    "rows": [
+     [
+      "Border",
+      "Antimesenteric"
+     ],
+     [
+      "Position",
+      "About 2 feet from ileocaecal valve"
+     ],
+     [
+      "Ectopic mucosa",
+      "Gastric most often, pancreatic or colonic less often"
+     ],
+     [
+      "Commonest complication",
+      "Painless bleeding from ectopic gastric mucosa"
+     ],
+     [
+      "Diagnosis",
+      "Tc-99m pertechnetate scan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Tc-99m pertechnetate scan** detects ectopic gastric mucosa, which takes up pertechnetate. Its sensitivity is increased by **pentagastrin**, **H2 blockers such as cimetidine**, and **glucagon**. Metoclopramide is not among the agents that boost this scan, so it is the exception in exam questions.",
+   "say": "The Tc-99m pertechnetate scan detects ectopic gastric mucosa in Meckel diverticulum. Its sensitivity is increased by pentagastrin, H2 blockers such as cimetidine, and glucagon. Metoclopramide does not increase sensitivity and is the exception in exam questions.",
+   "vis": null
+  },
+  {
+   "tx": "**Ileocaecal tuberculosis** appears in two patterns. **Hyperplastic** disease is usually primary, thickening the wall and narrowing the lumen, which can lead to subacute obstruction. **Ulcerative** disease is usually secondary to pulmonary infection and produces transverse ulcers in the terminal ileum. Barium imaging typically shows a pulled-up caecum and a widened ileocaecal angle.",
+   "say": "Ileocaecal tuberculosis appears in two patterns. The hyperplastic form is usually primary and thickens the wall, narrowing the lumen. The ulcerative form is usually secondary to lung disease and causes transverse ulcers in the terminal ileum. Barium imaging typically shows a pulled-up caecum and a widened ileocaecal angle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperplastic TB",
+     "points": [
+      "Usually primary",
+      "Thickened wall, narrow lumen",
+      "Often causes subacute obstruction",
+      "Ileocaecal region"
+     ]
+    },
+    "right": {
+     "title": "Ulcerative TB",
+     "points": [
+      "Usually secondary to pulmonary TB",
+      "Transverse ulcers in terminal ileum",
+      "Diarrhoea and weight loss",
+      "Surgery mainly for perforation or obstruction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acute mesenteric ischaemia** is most often caused by an **embolus** to the superior mesenteric artery. Other causes include thrombosis, vasculitis, and venous thrombosis. Gangrenous small bowel needs **resection and primary anastomosis**. For anastomosis, the single layer seromuscular Lembert suture is the teaching answer, while a second look operation after 24 to 48 hours checks viability.",
+   "say": "Acute mesenteric ischaemia is most often caused by an embolus to the superior mesenteric artery. Other causes include thrombosis, vasculitis, and venous thrombosis. Gangrenous small bowel needs resection and primary anastomosis, with a single layer seromuscular Lembert suture as the teaching answer. A second look operation after 24 to 48 hours checks viability.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Embolus to SMA"
+     },
+     {
+      "id": "b",
+      "label": "Bowel ischaemia"
+     },
+     {
+      "id": "c",
+      "label": "Gangrene"
+     },
+     {
+      "id": "d",
+      "label": "Resect and anastomose"
+     },
+     {
+      "id": "e",
+      "label": "Second look 24 to 48 h"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Carcinoid tumours** arise from enterochromaffin cells and are most common in the **distal ileum**, close to the ileocaecal valve. Carcinoid syndrome with flushing, diarrhoea and bronchospasm arises mainly when serotonin escapes hepatic metabolism, usually after liver metastases. Diagnosis uses urinary **5-HIAA**, and **octreotide** is the drug of choice. The tumour is not always benign.",
+   "say": "Carcinoid tumours arise from enterochromaffin cells and are most common in the distal ileum near the ileocaecal valve. Carcinoid syndrome, with flushing, diarrhoea and bronchospasm, usually follows liver metastases. Diagnosis uses urinary 5-HIAA, and octreotide is the drug of choice. These tumours are not always benign.",
+   "vis": null
+  },
+  {
+   "tx": "**Crohn disease** shows transmural inflammation, **skip lesions**, cobblestone mucosa, and **fistulae**. Aphthous ulcers are the earliest lesion, and the characteristic string sign of Kantor on barium follows strictures. Surgery is palliative, not curative, and recurrence is common, so the principle is to preserve healthy bowel. In Crohn stricturoplasty, bowel length is preserved. Short bowel syndrome usually follows resection beyond about 70 percent.",
+   "say": "Crohn disease shows transmural inflammation, skip lesions, cobblestone mucosa, and fistulae. Aphthous ulcers are the earliest lesion, and the string sign of Kantor follows strictures on barium. Surgery is palliative, so recurrence is common. Short bowel syndrome usually follows resection beyond about 70 percent, and vitamin B12 deficiency is the most common deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crohn disease",
+     "points": [
+      "Transmural, skip lesions",
+      "Cobblestone mucosa, fistulae",
+      "Aphthous ulcers earliest",
+      "Surgery palliative"
+     ]
+    },
+    "right": {
+     "title": "Ulcerative colitis",
+     "points": [
+      "Mucosal, continuous",
+      "Crypt abscesses, pseudopolyps",
+      "Surgery curative (proctocolectomy)",
+      "Colon and rectum"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "4246d36e-38dc-4855-a10c-734530d407c0",
+  "6346f3cb-919e-4950-a3c1-dd1e4e94f454",
+  "6daef954-06d3-41ea-beed-dd468c87e3bf"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 261
+ }
+}

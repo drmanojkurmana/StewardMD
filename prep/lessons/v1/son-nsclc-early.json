@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "son-nsclc-early",
+ "subject": "ss-medical-oncology",
+ "title": "Early stage and locally advanced NSCLC: surgery, chemoradiation and adjuvant or perioperative therapy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Early stage and locally advanced **non-small cell lung cancer** (NSCLC) is usually treated with curative intent. Surgical resection is the cornerstone for resectable disease. **Lobectomy** with mediastinal nodal assessment is the standard operation, because it gives better local control than sublobar resection in most fit patients. Sublobar resection is reserved for patients with poor lung reserve or small peripheral tumours. Patient fitness and pulmonary function guide the choice.",
+   "say": "Early stage and locally advanced non-small cell lung cancer is usually treated with curative intent. Surgical resection is the cornerstone for resectable disease. Lobectomy with mediastinal nodal assessment is the standard operation, because it gives better local control than sublobar resection in most fit patients. Sublobar resection is reserved for patients with poor lung reserve or small peripheral tumours. Patient fitness and pulmonary function guide the choice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Option",
+     "Typical use",
+     "Key limitation"
+    ],
+    "rows": [
+     [
+      "Lobectomy plus nodal dissection",
+      "Fit patients, standard care",
+      "Needs adequate reserve"
+     ],
+     [
+      "Sublobar resection",
+      "Poor reserve, small peripheral tumour",
+      "Higher local recurrence"
+     ],
+     [
+      "Pneumonectomy",
+      "Central tumours not amenable to lobectomy",
+      "Highest morbidity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical approach matters. **Video-assisted thoracoscopic surgery** (VATS) lobectomy is preferred for early disease when feasible. Tumours above about 6 cm, or with significant bronchial involvement, often need open thoracotomy. Uniportal and robotic approaches are alternatives in experienced centres. A utility incision should be under 8 cm and avoid rib spreading, as per standard VATS definitions. Indian practice often uses open surgery more widely because of resource constraints.",
+   "say": "Surgical approach matters. Video-assisted thoracoscopic surgery lobectomy is preferred for early disease when feasible. Tumours above about 6 cm, or with significant bronchial involvement, often need open thoracotomy. Uniportal and robotic approaches are alternatives in experienced centres. A utility incision should be under 8 cm and avoid rib spreading, as per standard definitions. Indian practice often uses open surgery more widely because of resource constraints.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Resectable NSCLC"
+     },
+     {
+      "id": "b",
+      "label": "Tumour under 6 cm, no major bronchial involvement"
+     },
+     {
+      "id": "c",
+      "label": "VATS lobectomy"
+     },
+     {
+      "id": "d",
+      "label": "Large or central tumour"
+     },
+     {
+      "id": "e",
+      "label": "Open thoracotomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neoadjuvant and perioperative **immunotherapy** can be considered for resectable disease without **driver mutations**, typically stage II to IIIB. Pre-operative **platinum chemotherapy** combined with a PD-1 inhibitor improved pathological response and event-free outcomes. Pembrolizumab given both before and after surgery improved event-free and overall survival. Many guidelines now list these approaches, but cost limits access in India, so careful patient selection matters.",
+   "say": "Neoadjuvant and perioperative immunotherapy can be considered for resectable disease without driver mutations, typically stage two to three B. Pre-operative platinum chemotherapy combined with a PD-1 inhibitor improved pathological response and event-free outcomes. Pembrolizumab given both before and after surgery improved event-free and overall survival. Many guidelines now list these approaches, but cost limits access in India, so careful patient selection matters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neoadjuvant chemoimmunotherapy",
+     "points": [
+      "PD-1 inhibitor plus platinum before surgery",
+      "Better pathological response"
+     ]
+    },
+    "right": {
+     "title": "Perioperative pembrolizumab",
+     "points": [
+      "Pembrolizumab before and after surgery",
+      "Better event-free and overall survival"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For unresectable stage III disease, **concurrent chemoradiation** is the standard approach, with radiotherapy delivered alongside platinum-based chemotherapy. In patients who have not progressed after chemoradiation, **consolidative anti-PD-L1 immunotherapy** for up to one year improved progression-free and overall survival in the PACIFIC trial. For medically inoperable stage I tumours, **stereotactic body radiotherapy** (SBRT) is the preferred ablative option, giving high local control in peripheral lesions.",
+   "say": "For unresectable stage three disease, concurrent chemoradiation is the standard approach, with radiotherapy delivered alongside platinum-based chemotherapy. In patients who have not progressed after chemoradiation, consolidative anti-PD-L1 immunotherapy for up to one year improved progression-free and overall survival in the PACIFIC trial. For medically inoperable stage one tumours, stereotactic body radiotherapy is the preferred ablative option, giving high local control in peripheral lesions.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_bdeb4a423cfe",
+  "q_4992f0ab4b27",
+  "q_6a6652f295c7"
+ ],
+ "src": [],
+ "refs": [
+  "NCCN Guidelines: Non-Small Cell Lung Cancer"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

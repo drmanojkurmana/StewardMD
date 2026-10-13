@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "mcc-ac-dvt",
+ "subject": "mcc-acute-care",
+ "title": "Deep vein thrombosis of the leg: diagnosis and treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Suspect **deep vein thrombosis** when a patient has unilateral leg swelling, pain and tenderness along the deep veins, especially after surgery, immobility, cancer, pregnancy or oestrogen use. Ask about **pulmonary embolism** symptoms such as breathlessness, chest pain or syncope in every patient. Persistent, worsening calf cramp over days is the typical history, and a whole-leg swollen limb makes ordinary DVT less likely, except in phlegmasia cerulea dolens.",
+   "say": "Suspect deep vein thrombosis when a patient has swelling in one leg, with pain and tenderness along the deep veins. It is especially likely after surgery, immobility, cancer, pregnancy, or oestrogen use. Always ask about pulmonary embolism symptoms such as breathlessness, chest pain, or syncope. The typical history is a calf cramp that persists and worsens over days. A whole-leg swollen limb makes ordinary DVT less likely, except in phlegmasia cerulea dolens.",
+   "vis": null
+  },
+  {
+   "tx": "Estimate probability with the **Wells DVT score**. Score one point each for active cancer, paralysis or recent cast, bedridden three days or more or major surgery within 12 weeks, deep vein tenderness, whole-leg swelling, calf swelling of 3 cm or more, pitting oedema, collateral superficial veins and previous DVT. Subtract two if an alternative diagnosis is at least as likely. A score of 2 or more means DVT likely; 1 or less means unlikely.",
+   "say": "Estimate the probability using the Wells DVT score. Give one point each for active cancer, paralysis or a recent cast, being bedridden for three days or more or major surgery within twelve weeks, deep vein tenderness, whole-leg swelling, calf swelling of 3 centimetres or more, pitting oedema, collateral superficial veins, and previous DVT. Subtract two if an alternative diagnosis is at least as likely. A score of 2 or more means DVT is likely. A score of 1 or less means it is unlikely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wells score",
+     "Likelihood",
+     "First test"
+    ],
+    "rows": [
+     [
+      "2 or more",
+      "DVT likely",
+      "Compression ultrasound"
+     ],
+     [
+      "1 or less",
+      "DVT unlikely",
+      "High-sensitivity D-dimer"
+     ],
+     [
+      "Negative D-dimer",
+      "DVT excluded",
+      "No imaging needed"
+     ],
+     [
+      "Positive D-dimer",
+      "Needs imaging",
+      "Compression ultrasound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **DVT unlikely** patients, a negative high-sensitivity **D-dimer** excludes thrombosis; a positive result leads to compression ultrasound. In **DVT likely** patients, skip D-dimer and go straight to compression ultrasound. If a proximal scan is negative but suspicion stays high, repeat ultrasound in about one week or check D-dimer. D-dimer is unreliable in pregnancy, cancer, after surgery, in inpatients and in the elderly.",
+   "say": "In patients with unlikely DVT, a negative high-sensitivity D-dimer excludes thrombosis. A positive result leads to compression ultrasound. In patients with likely DVT, skip D-dimer and go straight to compression ultrasound. If a proximal scan is negative but suspicion stays high, repeat the ultrasound in about one week or check D-dimer. D-dimer is unreliable in pregnancy, cancer, after surgery, in inpatients, and in the elderly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Wells score"
+     },
+     {
+      "id": "b",
+      "label": "D-dimer"
+     },
+     {
+      "id": "c",
+      "label": "Compression US"
+     },
+     {
+      "id": "d",
+      "label": "DVT excluded"
+     },
+     {
+      "id": "e",
+      "label": "Treat DVT"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "unlikely"
+     ],
+     [
+      "a",
+      "c",
+      "likely"
+     ],
+     [
+      "b",
+      "d",
+      "negative"
+     ],
+     [
+      "b",
+      "c",
+      "positive"
+     ],
+     [
+      "c",
+      "e",
+      "confirmed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Set the **duration** by provoking factor. Everyone gets at least 3 months. Stop after 3 to 6 months if a major transient factor such as surgery, trauma or immobilisation was present. Unprovoked DVT or chronic risk factors suggest extended anticoagulation if bleeding risk is acceptable, reviewed yearly. Beyond 6 months, apixaban 2.5 mg twice daily or rivaroxaban 10 mg daily is used. Antiphospholipid syndrome needs warfarin, not DOACs.",
+   "say": "Set the duration by the provoking factor. Everyone receives at least 3 months. Stop after 3 to 6 months if a major transient factor such as surgery, trauma, or immobilisation was present. For unprovoked DVT or chronic risk factors, extended anticoagulation is suggested if bleeding risk is acceptable, reviewed yearly. Beyond 6 months, apixaban 2.5 milligrams twice daily or rivaroxaban 10 milligrams daily is used. Antiphospholipid syndrome needs warfarin, not DOACs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Provoked (transient)",
+     "points": [
+      "Stop at 3 to 6 months",
+      "Major surgery, trauma or immobility",
+      "Reassess at end of course"
+     ]
+    },
+    "right": {
+     "title": "Unprovoked or chronic risk",
+     "points": [
+      "Consider indefinite treatment",
+      "Review yearly for bleeding",
+      "Apixaban 2.5 mg twice daily beyond 6 months"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-deep-vein-thrombosis",
+  "kb-diseases-dvt",
+  "kb-reference-deep-venous-thrombosis-and-pulmonary"
+ ],
+ "refs": [
+  "Chapter 290 Deep-Venous Thrombosis and Pulmonary Thromboembolism in Harrison's Principles of Internal Medicine (Loscalzo et al. (Editors))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 5,
+  "kbWords": 2499,
+  "itemN": 9
+ }
+}

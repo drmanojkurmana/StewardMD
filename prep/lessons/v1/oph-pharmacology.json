@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "oph-pharmacology",
+ "subject": "ophthalmology",
+ "title": "Ocular pharmacology and drug toxicity",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Mydriatics and cycloplegics act by blocking **muscarinic** receptors on the iris sphincter and ciliary muscle, giving dilatation and paralysis of accommodation. Atropine is the strongest and longest acting, lasting seven to ten days. Tropicamide is the shortest acting mydriatic and has little cycloplegic effect, so it suits ophthalmoscopy. Phenylephrine is a sympathomimetic mydriatic with no cycloplegia.",
+   "say": "Mydriatics and cycloplegics work by blocking muscarinic receptors on the iris sphincter and the ciliary muscle. This gives dilatation and paralysis of accommodation. Atropine is the strongest and longest acting, lasting seven to ten days. Tropicamide is the shortest acting mydriatic and has little cycloplegic effect, so it suits ophthalmoscopy. Phenylephrine is a sympathomimetic mydriatic with no cycloplegia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Cycloplegia",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Atropine",
+      "Strongest",
+      "7 to 10 days"
+     ],
+     [
+      "Homatropine",
+      "Moderate",
+      "1 to 3 days"
+     ],
+     [
+      "Cyclopentolate",
+      "Moderate",
+      "About 1 day"
+     ],
+     [
+      "Tropicamide",
+      "Weak",
+      "About 6 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a child with **convergent squint** needing refraction, total cycloplegia is needed because accommodation is high. Atropine 1% ointment three times daily for three days is preferred in children under five. Ointment causes fewer systemic effects than drops. Under the age of five, atropine is the drug of choice, while cyclopentolate suits older children.",
+   "say": "In a child with convergent squint needing refraction, total cycloplegia is needed because accommodation is high. Atropine one percent ointment three times daily for three days is preferred in children under five. Ointment causes fewer systemic effects than drops. Under the age of five, atropine is the drug of choice, while cyclopentolate suits older children.",
+   "vis": null
+  },
+  {
+   "tx": "Chloroquine and hydroxychloroquine cause **bull's eye maculopathy** through retinal pigment epithelium toxicity. Early signs are mottling and a blunted foveal reflex. Screening uses visual fields and OCT. Ethambutol causes optic neuropathy, not bull's eye lesion. Chloroquine also causes corneal deposits, which are usually harmless and reversible.",
+   "say": "Chloroquine and hydroxychloroquine cause bull's eye maculopathy through retinal pigment epithelium toxicity. Early signs are mottling and a blunted foveal reflex. Screening uses visual fields and OCT. Ethambutol causes optic neuropathy rather than a bull's eye lesion. Chloroquine also causes corneal deposits, which are usually harmless and reversible.",
+   "vis": null
+  },
+  {
+   "tx": "Amiodarone causes **corneal verticillata**, a whorl-like epithelial opacity that is usually harmless and reversible. Management is to observe and, if needed, stop the drug, with lubricants for glare. Topiramate can cause acute angle closure from ciliochoroidal effusion, treated by stopping the drug and lowering pressure. Vigabatrin causes visual field constriction.",
+   "say": "Amiodarone causes corneal verticillata, a whorl-like epithelial opacity that is usually harmless and reversible. Management is to observe and, if needed, stop the drug, with lubricants for glare. Topiramate can cause acute angle closure from ciliochoroidal effusion, treated by stopping the drug and lowering pressure. Vigabatrin causes visual field constriction.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "5eedb863-22b2-489f-998e-1cca11e00f66",
+  "ab6afaa2-088d-49df-b4b1-55a7e75326d5",
+  "f2607fa8-7ef1-4d12-b0c8-99cb601afd00"
+ ],
+ "src": [],
+ "refs": [
+  "Vaughan and Asbury's General Ophthalmology (Riordan-Eva and Cunningham, Eds)",
+  "Kanski's Clinical Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 176
+ }
+}

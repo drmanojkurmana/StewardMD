@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sid-host-response",
+ "subject": "ss-infectious-diseases",
+ "title": "Host defence and sepsis immunology in asplenia",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Asplenia predisposes to infection with **encapsulated organisms**, because their polysaccharide capsule resists direct phagocytosis unless opsonised. The three classic pathogens for exams are the organisms listed here. Fulminant infection with these bacteria can progress from fever to shock very rapidly, so every febrile asplenic patient needs urgent assessment and treatment.",
+   "say": "Asplenia predisposes to infection with encapsulated organisms, because their polysaccharide capsule resists direct phagocytosis unless opsonised. The three classic pathogens for exams are listed in the table. Fulminant infection with these bacteria can progress from fever to shock very rapidly, so every febrile asplenic patient needs urgent assessment and treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Typical presentation",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Streptococcus pneumoniae",
+      "Pneumonia, meningitis, bacteraemia",
+      "Commonest cause of overwhelming infection"
+     ],
+     [
+      "Neisseria meningitidis",
+      "Fulminant meningococcal sepsis",
+      "Covered by a specific vaccine"
+     ],
+     [
+      "Haemophilus influenzae type b",
+      "Meningitis, epiglottitis",
+      "Covered by childhood vaccination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sepsis is driven by a **cytokine storm**, a surge of inflammatory mediators such as tumour necrosis factor and interleukin 6 that injures organs. The same process is followed by **immunoparalysis**, a state of suppressed monocyte function and reduced antigen presentation. This leaves the patient open to secondary infection long after the first infection seems controlled, which is why late deaths occur.",
+   "say": "Sepsis is driven by a cytokine storm, a surge of inflammatory mediators such as tumour necrosis factor and interleukin 6 that injures organs. The same process is followed by immunoparalysis, a state of suppressed monocyte function and reduced antigen presentation. This leaves the patient open to secondary infection long after the first infection seems controlled, which is why late deaths occur.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Infection"
+     },
+     {
+      "id": "n2",
+      "label": "Cytokine surge"
+     },
+     {
+      "id": "n3",
+      "label": "Organ injury"
+     },
+     {
+      "id": "n4",
+      "label": "Immunoparalysis"
+     },
+     {
+      "id": "n5",
+      "label": "Secondary infection"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When sepsis is suspected, start **broad-spectrum antibiotics** within 1 hour, and take blood cultures first only if this does not cause delay. For septic shock, guidelines recommend early fluid resuscitation and vasopressors, with lactate measured to guide treatment. Asplenic patients with fever and rigors should be treated as high risk, even when they look only mildly unwell.",
+   "say": "When sepsis is suspected, start broad-spectrum antibiotics within 1 hour, and take blood cultures first only if this does not cause delay. For septic shock, guidelines recommend early fluid resuscitation and vasopressors, with lactate measured to guide treatment. Asplenic patients with fever and rigors should be treated as high risk, even when they look only mildly unwell.",
+   "vis": null
+  },
+  {
+   "tx": "Prevention is the central exam point in **asplenia**. Vaccinate against **pneumococcus**, **meningococcus** and **Haemophilus influenzae type b** before elective splenectomy where feasible, and give a **pneumococcal polysaccharide booster** about five years later. In **sickle cell disease**, **penicillin prophylaxis** protects against **encapsulated organisms** during early childhood, with timing set by local guidance.",
+   "say": "Prevention is the central exam point in asplenia. Vaccinate against pneumococcus, meningococcus and Haemophilus influenzae type b before elective splenectomy where that is feasible, and give a polysaccharide pneumococcal booster about five years later. In sickle cell disease, penicillin prophylaxis protects against encapsulated organisms during early childhood, with the timing set by local guidance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Elective splenectomy",
+      "Vaccinate before surgery where feasible"
+     ],
+     [
+      "Pneumococcal booster",
+      "Repeat about five years after splenectomy"
+     ],
+     [
+      "Sickle cell disease",
+      "Penicillin prophylaxis in early childhood per local guidance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_4f4c252c0530",
+  "q_5798c230a55d",
+  "q_e8a8684df7b8"
+ ],
+ "src": [],
+ "refs": [
+  "Surviving Sepsis Campaign International Guidelines",
+  "Sepsis-3 consensus definitions for sepsis and septic shock"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 14
+ }
+}

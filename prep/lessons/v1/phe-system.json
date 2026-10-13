@@ -1,0 +1,102 @@
+{
+ "v": 1,
+ "module": "phe-system",
+ "subject": "population-health-and-ethics",
+ "title": "Australian health system: Medicare and PBS",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Australia funds most health care through **Medicare**, a universal public scheme. Medicare Benefits Schedule items pay rebates for doctor and some allied services. The **Pharmaceutical Benefits Scheme** (PBS) subsidises listed medicines, so patients pay a capped co-payment rather than the full price. Both are federal programmes, and the exam tests which pathway funds which service.",
+   "say": "Australia funds most health care through Medicare, a universal public scheme. Medicare Benefits Schedule items pay rebates for doctor and some allied services. The Pharmaceutical Benefits Scheme, called the PBS, subsidises listed medicines, so patients pay a capped co-payment rather than the full price. Both are federal programmes, and the exam tests which pathway funds which service.",
+   "vis": null
+  },
+  {
+   "tx": "Medicare rebates for allied health need a **GP management plan** or **team care arrangement** for patients with chronic or complex conditions. The GP assesses, sets goals and documents the team. Without this written plan, sessions with a dietitian, podiatrist or diabetes educator are not rebated. Plans are time limited and reviewed regularly.",
+   "say": "Medicare rebates for allied health need a GP management plan or team care arrangement for patients with chronic or complex conditions. The GP assesses, sets goals and documents the team. Without this written plan, sessions with a dietitian, podiatrist or diabetes educator are not rebated. Plans are time limited and reviewed regularly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "GP assessment"
+     },
+     {
+      "id": "b",
+      "label": "Written plan"
+     },
+     {
+      "id": "c",
+      "label": "Team care"
+     },
+     {
+      "id": "d",
+      "label": "Rebated sessions"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Safety Net** protects families from high cumulative costs. Co-payments for all PBS scripts for a family count towards a threshold, and must be recorded through the pharmacy. Once the threshold is reached, the rest of the year's PBS scripts cost less. Concession card holders have a lower threshold than general patients.",
+   "say": "The Safety Net protects families from high cumulative costs. Co-payments for all PBS scripts for a family count towards a threshold, and must be recorded through the pharmacy. Once the threshold is reached, the rest of the year's PBS scripts cost less. Concession card holders have a lower threshold than general patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General patients",
+     "points": [
+      "Higher Safety Net threshold",
+      "Family scripts combined",
+      "Pharmacy must record"
+     ]
+    },
+    "right": {
+     "title": "Concession holders",
+     "points": [
+      "Lower Safety Net threshold",
+      "Family scripts combined",
+      "Pharmacy must record"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For long-term users, cumulative co-payments build up across the year, so recording every script matters. A **mental health treatment plan** is the separate GP pathway for rebated psychology sessions. Private health insurance does not replace PBS subsidies or Medicare rebates. Medicare rebates are paid per service, not per year.",
+   "say": "For long-term users, cumulative co-payments build up across the year, so recording every script matters. A mental health treatment plan is the separate GP pathway for rebated psychology sessions. Private health insurance does not replace PBS subsidies or Medicare rebates. Medicare rebates are paid per service, not per year.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Medicare Benefits Schedule, Australian Government Department of Health and Aged Care",
+  "Pharmaceutical Benefits Scheme, Australian Government Department of Health and Aged Care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 5
+ }
+}

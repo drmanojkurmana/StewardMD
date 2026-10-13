@@ -1,11 +1,14 @@
 name: Tokós UI
+# view-transitions.js installs a capture-phase click interceptor for the whole app: an edit
+# there alone broke the Tokos same-tick clinic contract (Oct 2026) without touching any path
+# above, so it must re-run this suite too.
 on:
   pull_request:
     branches: [main]
-    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
+    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'view-transitions.js', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
   push:
     branches: [main]
-    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
+    paths: ['tokos*', 'tokos/**', 'home.js', 'swipe-back.js', 'index.html', 'view-transitions.js', 'test/run-tokos-ui.mjs', 'test/run-tokos-app-ui.mjs', '.github/workflows/tokos-ui.yml']
 permissions:
   contents: read
 jobs:

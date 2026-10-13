@@ -1,0 +1,108 @@
+{
+ "v": 1,
+ "module": "ahs-back-pain",
+ "subject": "adult-health-surgery",
+ "title": "Back pain and spinal injury: red flags, imaging and cord syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Most **low back pain** is mechanical and settles within weeks. Red flags change the plan. Ask about **cauda equina** features: urinary retention, saddle numbness, reduced anal tone and bilateral leg symptoms. Any of these is a surgical emergency needing urgent MRI and spinal surgical referral. Reduced bladder sensation with a large residual volume confirms sphincter involvement and should not be deferred to a routine clinic.",
+   "say": "Most low back pain is mechanical and settles within weeks. Red flags change the plan. Ask about cauda equina features: urinary retention, saddle numbness, reduced anal tone and bilateral leg symptoms. Any of these is a surgical emergency needing urgent MRI and spinal surgical referral. A large residual bladder volume confirms sphincter involvement and should not be deferred to a routine clinic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low back pain"
+     },
+     {
+      "id": "b",
+      "label": "Red flags present?"
+     },
+     {
+      "id": "c",
+      "label": "Urgent MRI and surgical referral"
+     },
+     {
+      "id": "d",
+      "label": "Activity and simple analgesia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acute **mechanical back pain** without red flags, normal neurology and a negative straight leg raise, imaging does not improve outcome. Advise staying active, reassurance and simple analgesia. Bed rest is harmful. Long-term opioids are not indicated for acute mechanical pain. Spinal fusion has no role at this stage.",
+   "say": "In acute mechanical back pain without red flags, normal neurology and a negative straight leg raise, imaging does not improve outcome. Advise staying active, reassurance and simple analgesia. Bed rest is harmful. Long-term opioids are not indicated for acute mechanical pain. Spinal fusion has no role at this stage.",
+   "vis": null
+  },
+  {
+   "tx": "A fall onto the head in an older patient on **warfarin** with midline lower cervical tenderness needs imaging even with a normal neurological examination and a GCS of 15. Older bone is fragile and anticoagulation raises bleeding risk. **CT cervical spine** is the appropriate first investigation because it shows fracture pattern and alignment more sensitively than plain films. Keep the neck immobilised until injury is excluded.",
+   "say": "A fall onto the head in an older patient on warfarin with midline lower cervical tenderness needs imaging even with a normal neurological examination and a Glasgow Coma Scale of fifteen. Older bone is fragile and anticoagulation raises bleeding risk. CT of the cervical spine is the appropriate first investigation because it shows fracture pattern and alignment more sensitively than plain films. Keep the neck immobilised until injury is excluded.",
+   "vis": null
+  },
+  {
+   "tx": "**Spinal cord syndromes** follow the anatomy of the lesion. In a **hemisection**, ipsilateral motor and proprioceptive loss occurs below the wound, while contralateral pain and temperature loss occurs because spinothalamic fibres cross within a few segments. In **central cord syndrome**, upper limbs are affected more than legs, typically after hyperextension in an older patient with cervical spondylosis.",
+   "say": "Spinal cord syndromes follow the anatomy of the lesion. In a hemisection, ipsilateral motor and proprioceptive loss occurs below the wound, while contralateral pain and temperature loss occurs because spinothalamic fibres cross within a few segments. In central cord syndrome, the upper limbs are affected more than the legs, typically after hyperextension in an older patient with cervical spondylosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left hemisection",
+     "points": [
+      "Ipsilateral limb weakness",
+      "Ipsilateral proprioception loss",
+      "Contralateral pain and temperature loss"
+     ]
+    },
+    "right": {
+     "title": "Central cord syndrome",
+     "points": [
+      "Arm weakness greater than leg",
+      "Bilateral hand sensory loss",
+      "Often hyperextension injury in spondylosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fever, back pain, **diabetes** and raised inflammatory markers with bilateral leg weakness and urinary difficulty suggest a **spinal epidural abscess**. This is a neurological emergency. Blood-borne spread forms an epidural collection that compresses neural tissue. Urgent contrast MRI of the whole spine is needed, with immediate antibiotics and neurosurgical review. Plain films and bone scan are not adequate.",
+   "say": "Fever, back pain, diabetes and raised inflammatory markers with bilateral leg weakness and urinary difficulty suggest a spinal epidural abscess. This is a neurological emergency. Blood-borne spread forms an epidural collection that compresses neural tissue. Urgent contrast MRI of the whole spine is needed, with immediate antibiotics and neurosurgical review. Plain films and a bone scan are not adequate.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Low back pain and sciatica in over 16s: assessment and management (NG59)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

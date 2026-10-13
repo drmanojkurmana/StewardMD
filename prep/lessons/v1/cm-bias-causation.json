@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "cm-bias-causation",
+ "subject": "community-medicine",
+ "title": "Bias, Confounding, and Association and Causation",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "An **association** exists when two variables occur together more often than chance predicts. Associations are either **spurious**, meaning not real, or real. Real associations are direct (one to one causal, or multifactorial) or indirect, where a third factor links both. Descriptive studies suggest hypotheses; analytic and experimental studies test them.",
+   "say": "An association exists when two variables occur together more often than chance would predict. Associations are either spurious, meaning not real, or real. Real associations are direct, either one to one causal or multifactorial, or indirect, where a third factor links both. Descriptive studies suggest hypotheses, while analytic and experimental studies test them.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Meaning",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Spurious",
+      "No true link exists",
+      "Chance clustering of cases"
+     ],
+     [
+      "Indirect",
+      "Common third factor",
+      "Altitude and goitre via iodine deficiency"
+     ],
+     [
+      "Direct one to one",
+      "Change in cause followed by change in effect",
+      "Smoking and lung cancer"
+     ],
+     [
+      "Multifactorial",
+      "Several factors act together",
+      "Coronary heart disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confounding is removed mainly by **matching**, which distributes known confounders equally between groups. Randomisation is the second best method and is the basis of trials. Restriction, stratification and multivariate analysis are other options. Blinding does not remove confounding; it controls observer and subject bias.",
+   "say": "Confounding is removed mainly by matching, which distributes known confounders equally between groups. Randomisation is the second best method and is the basis of trials. Restriction, stratification and multivariate analysis are other options. Blinding does not remove confounding; it controls observer and subject bias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Works by"
+    ],
+    "rows": [
+     [
+      "Matching",
+      "Equal distribution of known confounders"
+     ],
+     [
+      "Randomisation",
+      "Balances known and unknown factors"
+     ],
+     [
+      "Restriction",
+      "Limits study to one level"
+     ],
+     [
+      "Multivariate analysis",
+      "Statistically adjusts for confounders"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Selection bias** arises when the study population does not represent the target population, for example **Berkson bias** in hospital-based case-control studies, or **Neyman bias** where mild or fatal cases are missed. **Information bias** includes **recall bias** in case-control studies and **interviewer bias**. Blinding reduces recall and interviewer bias.",
+   "say": "Selection bias arises when the study population does not represent the target population, for example Berkson bias in hospital-based case-control studies, or Neyman bias where mild or fatal cases are missed. Information bias includes recall bias in case-control studies and interviewer bias. Blinding reduces recall and interviewer bias.",
+   "vis": null
+  },
+  {
+   "tx": "The **web of causation**, proposed by McMahon and Pugh, suits chronic diseases with several interacting factors. Removing a single important link may control disease. In NCDs such as coronary heart disease, causes are multifactorial, and individual factors carry unequal weight. The **ecological fallacy** occurs when group level associations are wrongly applied to individuals.",
+   "say": "The web of causation, proposed by McMahon and Pugh, suits chronic diseases with several interacting factors. Removing a single important link may control disease. In non communicable diseases such as coronary heart disease, causes are multifactorial, and individual factors carry unequal weight. The ecological fallacy occurs when group level associations are wrongly applied to individuals.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6928b534-f71f-4e09-9579-39c90b725383",
+  "0650e106-7e54-4fca-943c-3626d6fece86",
+  "360d12e9-e134-4e24-8509-8eebb3deb80d"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine (Book)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 110
+ }
+}

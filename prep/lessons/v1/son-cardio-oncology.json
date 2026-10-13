@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "son-cardio-oncology",
+ "subject": "ss-medical-oncology",
+ "title": "Cardio-oncology: Cardiotoxicity Patterns and Surveillance",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Anthracyclines such as doxorubicin cause **dose-dependent** cardiomyopathy, and the risk rises as the cumulative dose climbs. Dexrazoxane is a **cardioprotective** agent given before each anthracycline dose in selected higher-risk patients, such as those needing high cumulative doses. It acts through **iron chelation** and reduces topoisomerase IIbeta-mediated myocyte injury. The decision balances cancer curability against the risk of secondary haematological malignancy.",
+   "say": "Anthracyclines such as doxorubicin cause dose-dependent cardiomyopathy, and the risk rises as the cumulative dose climbs. Dexrazoxane is a cardioprotective agent given before each anthracycline dose in selected higher-risk patients, such as those needing high cumulative doses. It acts through iron chelation and reduces topoisomerase IIbeta-mediated myocyte injury. The decision balances cancer curability against the risk of secondary haematological malignancy, and it is made jointly by cardio-oncology and oncology teams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Strategy",
+     "When used",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Dexrazoxane",
+      "Higher-risk patients needing more anthracycline",
+      "Given before each dose"
+     ],
+     [
+      "Liposomal doxorubicin",
+      "Continued anthracycline needed",
+      "Lower cardiac drug exposure"
+     ],
+     [
+      "ACE inhibitor or beta-blocker",
+      "Troponin rise or strain fall",
+      "Started alongside chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trastuzumab causes **type 2** cardiotoxicity, which is not dose-dependent and is usually **reversible** after interruption. Current guidance flags a fall in LVEF of 10 points or more, to below 50 percent, as a reason to hold treatment. Repeat imaging within two to four weeks guides whether treatment can resume. An ACE inhibitor or beta-blocker supports recovery.",
+   "say": "Trastuzumab causes type 2 cardiotoxicity, which is not dose-dependent and is usually reversible after interruption. Current guidance flags a fall in LVEF of 10 points or more, to below 50 percent, as a reason to hold treatment. Repeat imaging within two to four weeks guides whether treatment can resume. An ACE inhibitor or beta-blocker supports recovery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Baseline LVEF"
+     },
+     {
+      "id": "n2",
+      "label": "Fall of 10 points or more"
+     },
+     {
+      "id": "n3",
+      "label": "LVEF below 50 percent"
+     },
+     {
+      "id": "n4",
+      "label": "Hold drug and start ACE inhibitor or beta-blocker"
+     },
+     {
+      "id": "n5",
+      "label": "Repeat echo in 2 to 4 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Global longitudinal strain uses speckle-tracking echocardiography to measure **myocardial deformation**, and it often falls before LVEF does. A relative fall above 15 percent from baseline is significant. A **high-sensitivity troponin** above the 99th percentile during anthracycline therapy signals myocyte injury. Serial measurements should use the same vendor and method, because absolute strain values vary between machines.",
+   "say": "Global longitudinal strain uses speckle-tracking echocardiography to measure myocardial deformation, and it often falls before LVEF does. A relative fall above 15 percent from baseline is significant. A high-sensitivity troponin above the 99th percentile during anthracycline therapy signals myocyte injury. Serial measurements should use the same vendor and method, because absolute strain values vary between machines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Early signal",
+     "Action guide"
+    ],
+    "rows": [
+     [
+      "Global longitudinal strain",
+      "Relative fall above 15 percent",
+      "Closer review and cardioprotection"
+     ],
+     [
+      "High-sensitivity troponin",
+      "Rise above 99th percentile",
+      "Start therapy and test serially"
+     ],
+     [
+      "LVEF",
+      "Fall of 10 points or more",
+      "Interrupt and reassess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune checkpoint inhibitor myocarditis can be **fulminant**, with conduction block and heart failure. Troponin often rises out of proportion to LVEF. Overlap with **myositis** or myasthenia-like features raises mortality. Management is permanent discontinuation and prompt high-dose intravenous corticosteroids, with added immunosuppression for steroid-refractory disease. TNF-alpha inhibitors are avoided.",
+   "say": "Immune checkpoint inhibitor myocarditis can be fulminant, with conduction block and heart failure. Troponin often rises out of proportion to LVEF. Overlap with myositis or myasthenia-like features raises mortality. Management is permanent discontinuation and prompt high-dose intravenous corticosteroids, with added immunosuppression for steroid-refractory disease. TNF-alpha inhibitors are avoided.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Suspected myocarditis"
+     },
+     {
+      "id": "a2",
+      "label": "Troponin, CK and ECG"
+     },
+     {
+      "id": "a3",
+      "label": "Permanently stop checkpoint inhibitor"
+     },
+     {
+      "id": "a4",
+      "label": "High-dose IV corticosteroids"
+     },
+     {
+      "id": "a5",
+      "label": "Escalate if troponin does not fall"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two drug toxicities can mimic cardiac disease. Fluoropyrimidines such as capecitabine cause **coronary vasospasm** with normal arteries, so the drug must stop and nitrates or calcium channel blockers are used. VEGF pathway inhibitors such as bevacizumab cause **hypertension** managed with standard antihypertensives. Severe hypertension warrants withholding the drug until it is controlled.",
+   "say": "Two drug toxicities can mimic cardiac disease. Fluoropyrimidines such as capecitabine cause coronary vasospasm with normal arteries, so the drug must stop and nitrates or calcium channel blockers are used. VEGF pathway inhibitors such as bevacizumab cause hypertension managed with standard antihypertensives. Severe hypertension warrants withholding the drug until it is controlled.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fluoropyrimidine vasospasm",
+     "points": [
+      "Capecitabine or 5-fluorouracil",
+      "Angina or transient ST elevation",
+      "Normal coronary arteries",
+      "Stop the drug permanently",
+      "Nitrates or calcium channel blockers"
+     ]
+    },
+    "right": {
+     "title": "VEGF inhibitor hypertension",
+     "points": [
+      "Bevacizumab and similar agents",
+      "Altered nitric oxide and vascular tone",
+      "ACE inhibitor or calcium channel blocker",
+      "Withhold if severe or persistent",
+      "Restart often possible once controlled"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**QTc prolongation** is a further cardio-oncology concern. Some tyrosine kinase inhibitors and antiemetic agents can lengthen the corrected QT interval, so a baseline **ECG** and serial tracings are sensible. Correcting abnormal blood chemistry and reviewing other QT-prolonging medicines lowers arrhythmic risk. Current European guidance favours a structured **risk assessment** that combines troponin, natriuretic peptides, strain imaging and multidisciplinary review.",
+   "say": "QTc prolongation is a further concern in cardio-oncology. Some tyrosine kinase inhibitors and antiemetic agents can lengthen the corrected QT interval, so a baseline electrocardiogram and repeated tracings are sensible. Correcting abnormal blood chemistry and reviewing other medicines that prolong the QT interval lowers the risk of arrhythmia. Current European guidance favours a structured risk assessment that combines troponin, natriuretic peptides, strain imaging and review by a multidisciplinary team.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-40942453c053",
+  "mk-5be58f27b47a",
+  "mk-642b8613bebf"
+ ],
+ "src": [],
+ "refs": [
+  "2022 ESC Guidelines on cardio-oncology (Lyon AR et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

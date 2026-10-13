@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "rad-teletherapy",
+ "subject": "radiology",
+ "title": "External beam radiotherapy techniques",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**External beam radiotherapy** (teletherapy) is the most common method of delivering radiation, with the source kept at a distance from the patient. Sources are either radioisotopes such as **Cobalt-60** or **Cesium-137**, or machines such as the **linear accelerator**, which produces high energy X-rays by accelerating electrons. Cobalt-60 emits gamma rays at about 1.25 MeV average energy and has a half-life of about 5.2 to 5.3 years, so sources must be replaced every few years.",
+   "say": "External beam radiotherapy, also called teletherapy, is the most common way of delivering radiation, with the source kept at a distance from the patient. Sources are either radioisotopes such as Cobalt-60 or Cesium-137, or machines such as the linear accelerator, which produces high energy X-rays by accelerating electrons. Cobalt-60 emits gamma rays at about 1.25 MeV average energy and has a half-life of about 5.2 to 5.3 years, so sources must be replaced every few years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source",
+     "Radiation",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Cobalt-60",
+      "Gamma rays",
+      "Half-life about 5.3 years"
+     ],
+     [
+      "Cesium-137",
+      "Gamma rays",
+      "Half-life about 30 years"
+     ],
+     [
+      "Linear accelerator",
+      "High energy X-rays",
+      "Electrons accelerated in a straight line"
+     ],
+     [
+      "Iridium-192",
+      "Gamma rays",
+      "Used in brachytherapy, not teletherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Megavoltage beams operate above 1000 kV, so they carry MeV energies. Beams of 4 to 25 MV penetrate well to deep sites. Higher kinetic energy gives greater **penetration**, so 18 MV photons penetrate more deeply than 5 MV photons. The **skin sparing effect** arises because megavoltage photons deposit their maximum dose below the surface, at the **build-up region**, so the skin receives a lower dose than the tumour beneath it.",
+   "say": "Megavoltage beams operate above 1000 kV, so they carry MeV energies. Beams of 4 to 25 MV penetrate well to deep sites. Higher kinetic energy gives greater penetration, so 18 MV photons penetrate more deeply than 5 MV photons. The skin sparing effect arises because megavoltage photons deposit their maximum dose below the surface, in the build-up region, so the skin receives a lower dose than the tumour beneath it.",
+   "vis": null
+  },
+  {
+   "tx": "**Proton therapy** exploits the **Bragg peak**. Protons lose most of their energy at the end of their range, so the dose peaks at a set depth and falls off sharply beyond it, sparing tissue behind the tumour. Electron beams have limited penetration and suit superficial lesions, such as Kaposi sarcoma, and **intraoperative radiotherapy**, where electron beams are preferred for pancreatic carcinoma. Electron therapy is not used in stereotactic radiosurgery.",
+   "say": "Proton therapy exploits the Bragg peak. Protons lose most of their energy at the end of their range, so the dose peaks at a set depth and falls off sharply beyond it, sparing tissue behind the tumour. Electron beams have limited penetration and suit superficial lesions, such as Kaposi sarcoma, and intraoperative radiotherapy, where electron beams are preferred for pancreatic carcinoma. Electron therapy is not used in stereotactic radiosurgery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proton beam",
+     "points": [
+      "Dose peaks at Bragg peak",
+      "Sharp fall-off beyond target",
+      "Used for chordoma"
+     ]
+    },
+    "right": {
+     "title": "Electron beam",
+     "points": [
+      "Limited penetration",
+      "Superficial tumours",
+      "Preferred in intraoperative radiotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stereotactic radiosurgery** delivers a precise, high dose to a small intracranial target in a single fraction, using a rigidly fixed frame. The **gamma knife** focuses about 201 Cobalt-60 beams on one point. Classical indications are arteriovenous malformations, acoustic neuromas, pituitary adenomas, meningiomas and trigeminal neuralgia. Linear accelerators and proton beams can also deliver radiosurgery, and the main risks are radiation necrosis and injury to nearby structures.",
+   "say": "Stereotactic radiosurgery delivers a precise, high dose to a small intracranial target in a single fraction, using a rigidly fixed frame. The gamma knife focuses about 201 Cobalt-60 beams on one point. Classical indications are arteriovenous malformations, acoustic neuromas, pituitary adenomas, meningiomas and trigeminal neuralgia. Linear accelerators and proton beams can also deliver radiosurgery, and the main risks are radiation necrosis and injury to nearby structures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rigid frame fixed to skull"
+     },
+     {
+      "id": "b",
+      "label": "CT and 3D planning"
+     },
+     {
+      "id": "c",
+      "label": "Many beams to one focal point"
+     },
+     {
+      "id": "d",
+      "label": "Single high dose fraction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern planned techniques shape the dose. **3D conformal radiotherapy** shapes beams to the tumour outline. **IMRT** modulates beam intensity using a multileaf collimator to conform dose to complex shapes, and is most suited to prostate cancer among the options. **IGRT** uses imaging during treatment to correct position. **Respiratory gating** delivers beam only during a chosen phase of the breathing cycle, reducing the internal target volume and dose to normal tissue.",
+   "say": "Modern planned techniques shape the dose. 3D conformal radiotherapy shapes beams to the tumour outline. IMRT modulates beam intensity using a multileaf collimator to conform dose to complex shapes, and is most suited to prostate cancer among the options. IGRT uses imaging during treatment to correct position. Respiratory gating delivers beam only during a chosen phase of the breathing cycle, reducing the internal target volume and dose to normal tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Key feature",
+     "Classic use"
+    ],
+    "rows": [
+     [
+      "3D conformal",
+      "Beams shaped to tumour",
+      "General planning"
+     ],
+     [
+      "IMRT",
+      "Intensity modulated beams",
+      "Prostate cancer"
+     ],
+     [
+      "IGRT",
+      "Image guided positioning",
+      "Moving or small targets"
+     ],
+     [
+      "Respiratory gating",
+      "Beam on in chosen breathing phase",
+      "Tumour motion with breathing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Total body irradiation** treats the whole body, usually before bone marrow transplantation, and is delivered by external beam. Exam tip: the most common method of radiation delivery is teletherapy, and in Indian NEET-PG style questions the correct isotope for teletherapy is Cobalt-60, not Iridium-192, which belongs to brachytherapy. Recall that Cobalt-60 half-life is 5.2 to 5.3 years and that the dose rate is measured in rad per minute or monitor units per minute.",
+   "say": "Total body irradiation treats the whole body, usually before bone marrow transplantation, and is delivered by external beam. Exam tip: the most common method of radiation delivery is teletherapy, and in Indian NEET-PG style questions the correct isotope for teletherapy is Cobalt-60, not Iridium-192, which belongs to brachytherapy. Recall that Cobalt-60 half-life is 5.2 to 5.3 years and that the dose rate is measured in rad per minute or monitor units per minute.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "d7532b75-98c2-4d1a-bcda-c043e732e34f",
+  "b2644dd1-8b7a-4c88-bef5-dd4115a62727",
+  "bf0ced2f-6d87-464b-9173-be63e8d41f48"
+ ],
+ "src": [],
+ "refs": [
+  "Biomedical Physics in Radiotherapy for Cancer (Barry Allen, 2012)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 109
+ }
+}

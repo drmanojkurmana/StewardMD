@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "son-molecular-dx",
+ "subject": "ss-medical-oncology",
+ "title": "Molecular diagnostics and predictive biomarkers: an overview for oncology exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Molecular diagnostics tests tumour DNA, RNA or protein to guide diagnosis, prognosis and **therapy selection**. Modern oncology relies on tissue and blood based assays rather than single serum markers alone. Biomarkers are rarely definitive on their own, so results must be read alongside histopathology and imaging.",
+   "say": "Molecular diagnostics tests tumour DNA, RNA or protein to guide diagnosis, prognosis and therapy selection. Modern oncology relies on tissue and blood based assays rather than single serum markers alone. Biomarkers are rarely definitive on their own, so results must be read alongside histopathology and imaging.",
+   "vis": null
+  },
+  {
+   "tx": "Predictive biomarkers tell you whether a patient is likely to respond to a specific drug, whereas prognostic markers describe the expected course of disease. Examples include **PD-L1 expression** for immune checkpoint inhibitors and **HER2 status** for anti-HER2 therapy. Keep the two concepts separate in exam answers.",
+   "say": "Predictive biomarkers tell you whether a patient is likely to respond to a specific drug, whereas prognostic markers describe the expected course of disease. Examples include PD-L1 expression for immune checkpoint inhibitors and HER2 status for anti-HER2 therapy. Keep the two concepts separate in exam answers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Main use",
+     "Typical sample"
+    ],
+    "rows": [
+     [
+      "NGS panel",
+      "Multiple genes at once",
+      "Tumour tissue"
+     ],
+     [
+      "FISH",
+      "Gene amplification or fusion",
+      "Tissue section"
+     ],
+     [
+      "PCR",
+      "Known point mutations",
+      "Tissue or blood"
+     ],
+     [
+      "ctDNA",
+      "Monitoring and minimal residual disease",
+      "Plasma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Next generation sequencing screens many genes for mutations, copy number changes and fusions in one run. **Tumour mutational burden** and **microsatellite instability** are genome-wide measures derived from such panels. PCR and FISH remain useful when only one or two targets are needed, for example KRAS or HER2 amplification.",
+   "say": "Next generation sequencing screens many genes for mutations, copy number changes and fusions in one run. Tumour mutational burden and microsatellite instability are genome-wide measures derived from such panels. PCR and FISH remain useful when only one or two targets are needed, for example KRAS or HER2 amplification.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tumour tissue"
+     },
+     {
+      "id": "b",
+      "label": "DNA extraction"
+     },
+     {
+      "id": "c",
+      "label": "NGS library"
+     },
+     {
+      "id": "d",
+      "label": "Variant report"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Liquid biopsy measures **circulating tumour DNA** in plasma and can detect residual disease after surgery or treatment, often called **minimal residual disease**. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
+   "say": "Liquid biopsy measures circulating tumour DNA in plasma and can detect residual disease after surgery or treatment, often called minimal residual disease. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_6292e0370b95",
+  "q_5fec25403e0f",
+  "q_a330be0f580a"
+ ],
+ "src": [],
+ "refs": [
+  "ESMO Scale for Clinical Actionability of Molecular Targets (ESCAT) framework"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

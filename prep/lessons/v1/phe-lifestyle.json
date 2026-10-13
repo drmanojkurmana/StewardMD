@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "phe-lifestyle",
+ "subject": "population-health-and-ethics",
+ "title": "Smoking, alcohol and lifestyle prevention",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Tobacco dependence has a **physical** and a **behavioural** side. Nicotine acts on nicotinic receptors, so quitting brings withdrawal, craving and low mood. Many people who try to stop unaided return to smoking, so practical help matters. The most effective plan pairs **pharmacotherapy**, such as nicotine replacement therapy, with **behavioural support**, such as structured counselling. Together these approaches improve the odds of lasting abstinence.",
+   "say": "Tobacco dependence has a physical and a behavioural side. Nicotine acts on nicotinic receptors, so quitting brings withdrawal, craving and low mood. Many people who try to stop unaided return to smoking, so practical help matters. The most effective plan pairs pharmacotherapy, such as nicotine replacement therapy, with behavioural support, such as structured counselling. Together these approaches improve the odds of lasting abstinence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Purpose",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Pharmacotherapy",
+      "Eases withdrawal and craving",
+      "Nicotine replacement therapy"
+     ],
+     [
+      "Behavioural support",
+      "Addresses triggers and coping skills",
+      "Structured counselling, quitline"
+     ],
+     [
+      "Combined",
+      "Greatest chance of sustained quitting",
+      "Both delivered together"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Harmful drinking is shown by a pattern that exceeds safe limits and causes harm, even without dependence. Raised **GGT**, raised **MCV** and raised **ALT** together, with mild hepatomegaly, suggest alcohol-related liver injury. Ethanol injures hepatocytes and affects marrow and membranes. A **brief intervention** with agreed drinking reduction goals is the first step for a motivated patient without withdrawal. Reducing intake is the main modifiable factor that halts progression.",
+   "say": "Harmful drinking is shown by a pattern that exceeds safe limits and causes harm, even without dependence. Raised GGT, raised MCV and raised ALT together, with mild hepatomegaly, suggest alcohol-related liver injury. Ethanol injures hepatocytes and affects marrow and membranes. A brief intervention with agreed drinking reduction goals is the first step for a motivated patient without withdrawal. Reducing intake is the main modifiable factor that halts progression.",
+   "vis": null
+  },
+  {
+   "tx": "Confusion, unsteady gait and **horizontal nystagmus** form the classic triad of **Wernicke encephalopathy**. Long-term alcohol use and poor intake predispose to **thiamine deficiency**. Check capillary glucose, but a normal value excludes hypoglycaemia as the cause. Give intravenous thiamine promptly, before glucose, to avoid precipitating or worsening the lesion. Thiamine is a cofactor in glucose metabolism, and deficiency injures periventricular and brainstem structures.",
+   "say": "Confusion, unsteady gait and horizontal nystagmus form the classic triad of Wernicke encephalopathy. Long-term alcohol use and poor intake predispose to thiamine deficiency. Check capillary glucose, but a normal value excludes hypoglycaemia as the cause. Give intravenous thiamine promptly, before glucose, to avoid precipitating or worsening the lesion. Thiamine is a cofactor in glucose metabolism, and deficiency injures periventricular and brainstem structures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Triad: confusion, ataxia, nystagmus"
+     },
+     {
+      "id": "b",
+      "label": "Check glucose"
+     },
+     {
+      "id": "c",
+      "label": "IV thiamine promptly"
+     },
+     {
+      "id": "d",
+      "label": "Then glucose if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoking impairs wound healing mainly through **reduced tissue oxygen delivery**. Carbon monoxide reduces the oxygen-carrying capacity of haemoglobin, and nicotine causes peripheral vasoconstriction. Poorly perfused wound edges lack the oxygen needed for fibroblast function, collagen deposition and infection defence. In cardiovascular prevention, a former smoker still needs risk assessment, since smoking history is one of the combined exposures that drive **absolute risk**.",
+   "say": "Smoking impairs wound healing mainly through reduced tissue oxygen delivery. Carbon monoxide reduces the oxygen-carrying capacity of haemoglobin, and nicotine causes peripheral vasoconstriction. Poorly perfused wound edges lack the oxygen needed for fibroblast function, collagen deposition and infection defence. In cardiovascular prevention, a former smoker still needs risk assessment, since smoking history is one of the combined exposures that drive absolute risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smoking effect",
+     "points": [
+      "Carbon monoxide cuts oxygen carriage",
+      "Nicotine narrows peripheral vessels"
+     ]
+    },
+    "right": {
+     "title": "Result at wound",
+     "points": [
+      "Poor fibroblast function",
+      "Weak collagen deposition",
+      "Reduced infection defence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lifestyle prevention begins with estimating **absolute cardiovascular risk** rather than reacting to a single abnormal result. Consider a former smoker who drinks alcohol daily, has a sedentary job, raised total cholesterol, low **HDL cholesterol** and a family history of early heart disease. The estimate combines age, sex, smoking status, blood pressure, lipids and family history. This overall picture, not one number alone, shapes how intensively behaviour change and any further treatment should be pursued.",
+   "say": "Lifestyle prevention begins with estimating absolute cardiovascular risk rather than reacting to a single abnormal result. Consider a former smoker who drinks alcohol daily, has a sedentary job, raised total cholesterol, low HDL cholesterol and a family history of early heart disease. The estimate combines age, sex, smoking status, blood pressure, lipids and family history. This overall picture, not one number alone, shapes how intensively behaviour change and any further treatment should be pursued.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Smoking: stopping smoking (NG209)",
+  "NICE Alcohol-use disorders: diagnosis, assessment and management of harmful drinking and alcohol dependence (CG115)",
+  "NICE Cardiovascular disease: risk assessment and reduction (CG181)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

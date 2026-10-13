@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "ped-mixed",
+ "subject": "paediatrics",
+ "title": "Paediatrics mixed rapid review: high-yield differentiators",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Recurrent painless gross haematuria in a school-age child, with sterile urine and normal **C3**, points away from infection and post-streptococcal disease. IgA nephropathy is the commonest cause of recurrent macroscopic haematuria following an upper respiratory infection, and it typically shows normal complement levels. Wilms tumour is a renal embryonal tumour that presents with a palpable abdominal mass rather than isolated haematuria in this pattern.",
+   "say": "A six year old boy with recurrent painless gross haematuria, sterile urine and normal C3 levels most likely has IgA nephropathy. Post-streptococcal glomerulonephritis usually lowers C3, and urinary tract infection would show pus cells. Wilms tumour presents with an abdominal mass rather than this pattern of haematuria.",
+   "vis": null
+  },
+  {
+   "tx": "In paediatric exam questions, the **first sign of puberty in girls** is thelarche, which is breast budding. Pubarche, the appearance of pubic hair, often follows or occurs around the same time. Menarche is a late event, usually two to two and a half years after thelarche, and the growth spurt peaks near menarche.",
+   "say": "The first sign of puberty in girls is thelarche, which means breast budding. Pubarche comes next or around the same time, menarche is a late event, and the growth spurt peaks near menarche.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thelarche"
+     },
+     {
+      "id": "b",
+      "label": "Pubarche"
+     },
+     {
+      "id": "c",
+      "label": "Growth spurt"
+     },
+     {
+      "id": "d",
+      "label": "Menarche"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A child with fever, rash, cough, wheeze, marked eosinophilia and a blast population that is **myeloperoxidase negative** and CD19 and CD10 positive has a lymphoid blast picture. The eosinophilia is reactive and driven by the clonal lymphoid blasts. This points to acute lymphoblastic leukaemia with hypereosinophilic syndrome rather than a myeloid or biphenotypic leukaemia.",
+   "say": "In this child the blasts are myeloperoxidase negative and express CD19 and CD10, which indicates a lymphoid lineage. The marked eosinophilia is reactive, so the most likely diagnosis is acute lymphoblastic leukaemia with hypereosinophilic syndrome.",
+   "vis": null
+  },
+  {
+   "tx": "In neonatal resuscitation, if the heart rate stays below **100 per minute** after 60 seconds of effective positive pressure ventilation with room air, ventilation is judged inadequate. The next step is to consider tracheal intubation and check airway and chest rise. Supplemental oxygen is added only if there is no response to effective ventilation, and CPAP is not the rescue for bradycardia.",
+   "say": "If a newborn's heart rate stays below one hundred per minute after sixty seconds of positive pressure ventilation with room air, ventilation is considered inadequate. The next step is to consider tracheal intubation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PPV with room air"
+     },
+     {
+      "id": "b",
+      "label": "HR under 100 at 60 s"
+     },
+     {
+      "id": "c",
+      "label": "Check airway and chest rise"
+     },
+     {
+      "id": "d",
+      "label": "Consider intubation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic triads are useful for quick recall. Wiskott-Aldrich syndrome presents with **thrombocytopenia, eczema and recurrent infections**. Pierre Robin sequence has cleft palate, micrognathia and glossoptosis. Ape syndrome shows pansynostosis, and Bolognini's sign of crepitus on abdominal pressure is seen in congenital pyloric stenosis. Williams syndrome causes supravalvular aortic stenosis with hypercalcaemia.",
+   "say": "Wiskott-Aldrich syndrome presents with thrombocytopenia, eczema and recurrent infections. Pierre Robin sequence has cleft palate, micrognathia and glossoptosis. Williams syndrome is linked with supravalvular aortic stenosis and hypercalcaemia.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "177d2d4c-8688-4383-8a6c-45e08ff5a4af",
+  "1c35a64f-8bb4-45b2-994c-d72cfe175fa6",
+  "24ed022a-ef24-435b-aac2-b59ad45563a0"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Longo et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 257
+ }
+}

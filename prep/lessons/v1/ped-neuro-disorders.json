@@ -1,0 +1,102 @@
+{
+ "v": 1,
+ "module": "ped-neuro-disorders",
+ "subject": "paediatrics",
+ "title": "Tuberous sclerosis complex: genetics, features and red flags",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Mutations that switch off **TSC1** or **TSC2** drive this disorder. Their protein products, **hamartin** and **tuberin**, act as a partnered brake on the **mTOR** cascade, which governs cell size and division. Once that restraint disappears, cells keep multiplying and form benign growths across several organs. Lesions typically arise when a second change disables the surviving copy within a single cell. Disease caused by TSC2 tends to run more severe.",
+   "say": "Mutations that switch off TSC1 or TSC2 drive this disorder. Their protein products, hamartin and tuberin, act as a partnered brake on the mTOR cascade, which governs cell size and division. Once that restraint disappears, cells keep multiplying and form benign growths across several organs. Lesions typically arise when a second change disables the surviving copy within a single cell. Disease caused by TSC2 tends to run more severe.",
+   "vis": null
+  },
+  {
+   "tx": "Skin findings are the key diagnostic clues. **Hypomelanotic macules**, best seen under Wood's lamp, are often the earliest sign and may be present at birth. **Facial angiofibromas** appear in childhood and grow until adolescence. **Shagreen patches** and **periungual fibromas** complete the picture. Adenoma sebaceum is an older term for the facial angiofibromas.",
+   "say": "Skin findings are the key diagnostic clues. Hypomelanotic macules, best seen under Wood's lamp, are often the earliest sign and may be present at birth. Facial angiofibromas appear in childhood and grow until adolescence. Shagreen patches and periungual fibromas complete the picture. Adenoma sebaceum is an older term for the facial angiofibromas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical timing",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Hypomelanotic macules",
+      "Birth or infancy",
+      "Seen best under Wood's lamp"
+     ],
+     [
+      "Facial angiofibromas",
+      "Childhood, grow to adolescence",
+      "Nasolabial folds, cheeks, chin"
+     ],
+     [
+      "Shagreen patches",
+      "Usually first decade",
+      "Lumbosacral area common"
+     ],
+     [
+      "Periungual fibromas",
+      "Variable",
+      "Around nails"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brain involvement in tuberous sclerosis shows up as **cortical tubers**, **subependymal nodules** and **subependymal giant cell astrocytomas** (SEGA). A SEGA tends to sit close to the foramen of Monro, so it can block cerebrospinal fluid flow and produce hydrocephalus. Seizures, frequently **infantile spasms**, alongside behavioural and psychiatric problems, account for much of the illness seen in children.",
+   "say": "Brain involvement in tuberous sclerosis appears as cortical tubers, subependymal nodules and subependymal giant cell astrocytomas, known as SEGA. A SEGA tends to sit near the foramen of Monro, so it can block cerebrospinal fluid flow and cause hydrocephalus. Seizures, often infantile spasms, together with behavioural and psychiatric problems, account for much of the illness in children.",
+   "vis": null
+  },
+  {
+   "tx": "Do not confuse TSC with other phakomatoses. **Neurofibromatosis type 1**, **Sturge-Weber syndrome** and **Birt-Hogg-Dube syndrome** should be considered when the picture fits poorly. Sturge-Weber is characterised by a facial port-wine stain in the trigeminal distribution with seizures and glaucoma, not by hypomelanotic macules.",
+   "say": "Do not confuse TSC with other phakomatoses. Neurofibromatosis type 1, Sturge-Weber syndrome and Birt-Hogg-Dube syndrome should be considered when the picture fits poorly. Sturge-Weber is characterised by a facial port-wine stain in the trigeminal distribution with seizures and glaucoma, not by hypomelanotic macules.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tuberous sclerosis",
+     "points": [
+      "Hypomelanotic macules, angiofibromas",
+      "SEGA near foramen of Monro",
+      "Infantile spasms common"
+     ]
+    },
+    "right": {
+     "title": "Sturge-Weber syndrome",
+     "points": [
+      "Facial port-wine stain",
+      "Leptomeningeal angioma",
+      "Seizures and glaucoma"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "83b30a08-593a-4c22-b14a-dc5462cb5307",
+  "1c71191e-8eeb-483c-8ce0-18f8b119e63e",
+  "5eca40b1-7194-40aa-bdbe-994aa0d9e1c4"
+ ],
+ "src": [
+  "kb-reference-tuberous-sclerosis-complex"
+ ],
+ "refs": [
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 317,
+  "itemN": 313
+ }
+}

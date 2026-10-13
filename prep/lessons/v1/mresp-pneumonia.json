@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "mresp-pneumonia",
+ "subject": "mrcp-respiratory",
+ "title": "Pneumonia in adults: diagnosis and management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Start with a **CRB65** score in primary care. Confusion, a respiratory rate of 30 or more, low blood pressure and age 65 or over each score one point. A score of 0 suggests a low risk of death, so most adults can be treated at home with **safety netting** advice. Frailty, comorbidities and pregnancy can change the picture, so the score supports but does not replace **clinical judgement**.",
+   "say": "Start with the CRB65 score in primary care. Confusion, a respiratory rate of 30 or more, low blood pressure and age 65 or over each score one point. A score of 0 suggests a low risk of death, so most adults can be treated at home with safety netting advice. Frailty, comorbidities and pregnancy can change the picture, so the score supports but does not replace clinical judgement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Points"
+    ],
+    "rows": [
+     [
+      "Confusion",
+      "1"
+     ],
+     [
+      "Respiratory rate 30 or more",
+      "1"
+     ],
+     [
+      "Low blood pressure",
+      "1"
+     ],
+     [
+      "Age 65 or over",
+      "1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start with **oral therapy** where the person can swallow tablets, absorbs medicines reliably and is clinically stable. Reserve **intravenous** dosing for those who vomit, cannot keep fluids down, or show septic features. Recheck the patient within **48 hours** of starting intravenous treatment. Once improving, step down to an oral agent and let culture findings guide narrowing.",
+   "say": "Start with oral therapy where the person can swallow tablets, absorbs medicines reliably and is clinically stable. Reserve intravenous dosing for those who vomit, cannot keep fluids down, or show septic features. Recheck the patient within 48 hours of starting intravenous treatment. Once improving, step down to an oral agent and let culture findings guide narrowing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Assess severity"
+     },
+     {
+      "id": "n2",
+      "label": "Can take oral medicines?"
+     },
+     {
+      "id": "n3",
+      "label": "Oral course"
+     },
+     {
+      "id": "n4",
+      "label": "Intravenous start"
+     },
+     {
+      "id": "n5",
+      "label": "Review at 48 h"
+     },
+     {
+      "id": "n6",
+      "label": "Step down to oral"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3",
+      "Yes"
+     ],
+     [
+      "n2",
+      "n4",
+      "No"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microbiology is **selective**, not routine. For moderate or high severity disease, sputum culture is useful when a good sample is likely, and blood cultures are reserved for specific indications. A **pneumococcal urinary antigen** test can support narrowing. Legionella urinary antigen testing is reserved for people with risk factors such as recent water system or travel exposure.",
+   "say": "Microbiology is selective, not routine. For moderate or high severity disease, sputum culture is useful when a good sample is likely, and blood cultures are reserved for specific indications. A pneumococcal urinary antigen test can support narrowing. Legionella urinary antigen testing is reserved for people with risk factors such as recent water system or travel exposure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Selective testing",
+     "points": [
+      "Sputum culture if a good sample is likely",
+      "Blood cultures for specific indications",
+      "Pneumococcal antigen to support narrowing",
+      "Legionella antigen if risk factors"
+     ]
+    },
+    "right": {
+     "title": "Avoid routine testing",
+     "points": [
+      "Routine blood cultures for everyone",
+      "Sputum culture regardless of sample quality",
+      "Delaying the first antibiotic dose for results"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Use **CURB65** in hospital to decide place of care. It adds raised urea above 7 mmol/litre to the CRB65 features. A score of 0 or 1 is low risk and usually suits home or community care. A score of 2 is intermediate, so consider a short hospital assessment, virtual ward or same-day unit after shared decision making. A score of 3 to 5 is high risk and usually needs inpatient care, with critical care review if deteriorating.",
+   "say": "Use CURB65 in hospital to decide place of care. It adds raised urea above 7 mmol per litre to the CRB65 features. A score of 0 or 1 is low risk and usually suits home or community care. A score of 2 is intermediate, so consider a short hospital assessment, virtual ward or same-day unit after shared decision making. A score of 3 to 5 is high risk and usually needs inpatient care, with critical care review if deteriorating.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CURB65 score",
+     "Risk band",
+     "Typical place"
+    ],
+    "rows": [
+     [
+      "0 or 1",
+      "Low",
+      "Home or community"
+     ],
+     [
+      "2",
+      "Intermediate",
+      "Short assessment, shared decision"
+     ],
+     [
+      "3 to 5",
+      "High",
+      "Inpatient, review critical care need"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lung ultrasound is a **point-of-care** tool that helps when heart failure or another diagnosis could mimic pneumonia, such as in a sick patient with raised BNP. It can also show pleural complications. It supports the clinical picture rather than replacing the chest X-ray. Remember that CRP alone does not confirm pneumonia, and treatment decisions should rest on the full assessment.",
+   "say": "Lung ultrasound is a point-of-care tool that helps when heart failure or another diagnosis could mimic pneumonia, such as in a sick patient with raised BNP. It can also show pleural complications. It supports the clinical picture rather than replacing the chest X-ray. Remember that CRP alone does not confirm pneumonia, and treatment decisions should rest on the full assessment.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG250: Pneumonia in adults: diagnosis and management",
+  "Lim WS et al. British Thoracic Society guidelines for the management of community acquired pneumonia in adults. Thorax 2009"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 14
+ }
+}

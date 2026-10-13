@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "ent-pharynx-anatomy",
+ "subject": "ent",
+ "title": "Anatomy of the pharynx and oral cavity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The pharynx is a muscular tube behind the nose, mouth and larynx. It is divided into **nasopharynx**, **oropharynx** and **hypopharynx** (laryngopharynx). The nasopharynx lies above the soft palate and its cavity always stays open. Its lining is ciliated columnar epithelium, while the oropharynx and hypopharynx are lined by stratified squamous epithelium.",
+   "say": "The pharynx is a muscular tube behind the nose, mouth and larynx. It is divided into the nasopharynx, oropharynx and hypopharynx, also called the laryngopharynx. The nasopharynx lies above the soft palate and its cavity always stays open. Its lining is ciliated columnar epithelium, while the oropharynx and hypopharynx are lined by stratified squamous epithelium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Level",
+     "Lining"
+    ],
+    "rows": [
+     [
+      "Nasopharynx",
+      "Above soft palate",
+      "Ciliated columnar"
+     ],
+     [
+      "Oropharynx",
+      "Opposite C2 and upper C3",
+      "Stratified squamous"
+     ],
+     [
+      "Hypopharynx",
+      "Below oropharynx to C6",
+      "Stratified squamous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Waldeyer's ring is a circle of subepithelial lymphoid tissue guarding the pharyngeal entrance. It includes the **pharyngeal tonsil** (adenoids), two tubal tonsils of Gerlach, two palatine tonsils and the lingual tonsils, plus lateral pharyngeal bands. The submandibular nodes are not part of the ring.",
+   "say": "Waldeyer's ring is a circle of subepithelial lymphoid tissue guarding the pharyngeal entrance. It includes the pharyngeal tonsil, also called adenoids, the tubal tonsils of Gerlach, the palatine tonsils, the lingual tonsils and lateral pharyngeal bands. The submandibular nodes are not part of the ring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tonsil",
+     "Site"
+    ],
+    "rows": [
+     [
+      "Pharyngeal (adenoid)",
+      "Nasopharynx roof and posterior wall"
+     ],
+     [
+      "Tubal (Gerlach)",
+      "Nasopharynx, lateral wall near tube opening"
+     ],
+     [
+      "Palatine",
+      "Oropharynx, between the pillars"
+     ],
+     [
+      "Lingual",
+      "Base of tongue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **fossa of Rosenmuller** lies behind the torus tubarius, the elevation around the pharyngeal opening of the Eustachian tube. This fossa is the commonest site of nasopharyngeal carcinoma. The **Passavant ridge** is formed when the upper palatopharyngeus fibres fuse with superior constrictor fibres; it rises on the posterior wall when the soft palate elevates.",
+   "say": "The fossa of Rosenmuller lies behind the torus tubarius, the elevation around the pharyngeal opening of the Eustachian tube. This fossa is the commonest site of nasopharyngeal carcinoma. The Passavant ridge is formed when the upper palatopharyngeus fibres fuse with superior constrictor fibres, and it rises on the posterior wall when the soft palate elevates.",
+   "vis": null
+  },
+  {
+   "tx": "The inferior constrictor has two parts. The thyropharyngeus has oblique fibres and the cricopharyngeus has transverse fibres, leaving a weak triangular gap called **Killian dehiscence**. It is the commonest site of pharyngeal pouch herniation. The **piriform fossa** lies beside the larynx, bounded medially by the aryepiglottic fold and laterally by the thyrohyoid membrane and thyroid cartilage.",
+   "say": "The inferior constrictor has two parts. The thyropharyngeus has oblique fibres and the cricopharyngeus has transverse fibres, leaving a weak triangular gap called Killian dehiscence. It is the commonest site of pharyngeal pouch herniation. The piriform fossa lies beside the larynx, bounded medially by the aryepiglottic fold and laterally by the thyrohyoid membrane and thyroid cartilage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thyropharyngeus"
+     },
+     {
+      "id": "b",
+      "label": "Killian gap"
+     },
+     {
+      "id": "c",
+      "label": "Cricopharyngeus"
+     },
+     {
+      "id": "d",
+      "label": "Pharyngeal pouch"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **parapharyngeal space** is a pyramidal space lateral to the pharynx, also called the lateral pharyngeal space. It holds the carotid vessels, the jugular vein, the last four cranial nerves and the sympathetic chain. The **retropharyngeal space**, the space of Gillette, lies behind the pharynx and is the danger space of the neck. Its nodes include the node of Rouviere at the atlas level.",
+   "say": "The parapharyngeal space is a pyramidal space lateral to the pharynx, also called the lateral pharyngeal space. It holds the carotid vessels, the jugular vein, the last four cranial nerves and the sympathetic chain. The retropharyngeal space, the space of Gillette, lies behind the pharynx and is the danger space of the neck. Its nodes include the node of Rouviere at the atlas level.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "014a8f69-0522-4e00-b728-eff3ad7a0b77",
+  "4e5b932f-b4af-4520-a837-af06b82158dc",
+  "bcfd4182-1aa6-45a8-9f9d-92d8ea7c8af5"
+ ],
+ "src": [],
+ "refs": [
+  "Scott-Brown's Otorhinolaryngology, Head and Neck Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 95
+ }
+}

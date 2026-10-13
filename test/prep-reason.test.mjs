@@ -67,7 +67,7 @@ test("shardLinks: the 75 floor, strongest first; relOf: union across targets, 8 
   const sh = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "m", fs.readdirSync(join(FIX, "api", "v1", "links", "m")).find((f) => f.startsWith("ana-gametogenesis-"))), "utf8"));
   const ls = R.shardLinks(sh, "fx-reason-1");
   assert.equal(ls.length, 1);
-  assert.deepEqual(ls[0], { k: "kb", id: "fibromuscular_dysplasia", title: "Fibromuscular dysplasia", c: 92, sec: "causes" });
+  assert.deepEqual(ls[0], { k: "kb", id: "fibromuscular_dysplasia", title: "Fibromuscular dysplasia", c: 92, v: "k", sec: "causes" });
   assert.deepEqual(R.shardLinks(sh, "fx-reason-old1"), [], "an unlinked item has no links");
   assert.deepEqual(R.shardLinks({ T: [["kb", "a", "A"]], e: { i: [[0, 74, "s"]] } }, "i"), [], "74 is not shown");
   assert.deepEqual(R.shardLinks(null, "i"), []);
@@ -112,7 +112,7 @@ test("slotHtml: Learn more rows, the one action per kind, related rows, empty wh
     lesson: { key: "ana-placenta" }, cards: true, related: [{ mid: "m", id: "q", stem: "Why is the sky blue?" }],
     next: { kind: "review", label: "Review the concept", id: "zika_virus", target: "Zika virus" }, sid: "anatomy", mid: "ana-placenta" };
   const h = R.slotHtml(d);
-  assert.match(h, /Learn more/);
+  assert.match(h, /Know more/);
   assert.match(h, /data-act="r-kb" data-id="zika_virus"/);
   assert.match(h, /data-act="r-drug" data-t="Metformin"/);
   assert.match(h, /data-act="r-proto" data-id="p"/);
@@ -196,12 +196,12 @@ test("lessonLinks: tiers from via, the step rides along, the 75 floor, strongest
 test("slotHtml: per-item lessons with Read-the-lesson rows and steps, the module fallback stays", () => {
   const lessons = [{ key: "m1", title: "Liver Masses", tier: "topic", step: "" }, { key: "c9", title: "Adenoma Imaging", tier: "specific", step: "2" }];
   const h = R.slotHtml({ lessons, sid: "s", mid: "m1" });
-  assert.match(h, /Read the lesson: Liver Masses/);
+  assert.match(h, /Lesson: Liver Masses/);
   assert.match(h, /data-act="l-open" data-s="s" data-m="m1" data-l="c9" data-step="2"/);
   assert.ok(!/data-l="m1" data-step/.test(h), "no step, no attribute");
   const fb = R.slotHtml({ lesson: { key: "m1" }, sid: "s", mid: "m1" });
   assert.match(fb, /data-act="l-open" data-s="s" data-m="m1" data-l="m1"/);
-  assert.ok(!/Read the lesson/.test(fb), "the untitled fallback keeps its old row");
+  assert.match(fb, /Revise this topic/, "the untitled fallback keeps its plain row");
   assert.equal(R.slotHtml({ lessons: [], lesson: null }), "");
   const rv = R.slotHtml({ lessons, next: { kind: "revise", label: "Revise this topic", lkey: "c9", step: "2", target: "Lesson" }, sid: "s", mid: "m1" });
   assert.match(rv, /data-act="l-open"[^>]*data-l="c9" data-step="2"><b>Revise this topic<\/b>/);
@@ -216,8 +216,8 @@ test("fill: every gaps slot resolves by its own data-i without remember()", asyn
   const G = {
     fetch: (url) => {
       const u = String(url);
-      if (u.endsWith("/v1/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
-      const m = /\/v1\/links\/(m\/[^/]+\.json)$/.exec(u);
+      if (u.endsWith("/v2/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
+      const m = /\/v2\/links\/(m\/[^/]+\.json)$/.exec(u);
       const sh = m && shards[m[1].slice(2)];
       return Promise.resolve(sh ? { ok: true, json: () => Promise.resolve(sh) } : { ok: false, status: 404 });
     },
@@ -252,9 +252,261 @@ test("fill: every gaps slot resolves by its own data-i without remember()", asyn
   assert.equal(s1.getAttribute("data-done"), "1", "first gaps slot fills with no remember()");
   assert.equal(s5.getAttribute("data-done"), "1", "second gaps slot fills with no remember()");
   assert.equal(s3.getAttribute("data-done"), "1", "third gaps slot fills with no remember()");
-  assert.match(s1.innerHTML, /Learn more/, "index links render");
+  assert.match(s1.innerHTML, /Know more/, "index links render");
   assert.match(s1.innerHTML, /Fibromuscular [Dd]ysplasia/);
   assert.match(s1.innerHTML, /Related questions/);
   assert.match(s5.innerHTML, /Zika [Vv]irus/);
   assert.match(s3.innerHTML, /data-act="r-practise" data-i="fx-reason-3"/, "practise keeps the slot's item");
+});
+
+test("kmSlot: old items get slot, reasoning items return empty, no duplicate", () => {
+  assert.equal(R.has(byId["fx-reason-old1"]), false, "old1 is not reasoning");
+  assert.equal(R.has(byId["fx-reason-old2"]), false, "old2 is not reasoning");
+  assert.equal(R.has(byId["fx-reason-1"]), true, "reason-1 is reasoning");
+
+  const sOld1 = R.kmSlot(byId["fx-reason-old1"]);
+  assert.match(sOld1, /class="pn-km"/);
+  assert.match(sOld1, /data-i="fx-reason-old1"/);
+  assert.match(sOld1, /data-m="ana-gametogenesis"/);
+
+  const sOld2 = R.kmSlot(byId["fx-reason-old2"]);
+  assert.match(sOld2, /class="pn-km"/);
+  assert.match(sOld2, /data-i="fx-reason-old2"/);
+  assert.match(sOld2, /data-m="ana-placenta"/);
+
+  const sReason = R.kmSlot(byId["fx-reason-1"]);
+  assert.equal(sReason, "", "reasoning item gets empty string (no duplicate row)");
+  assert.equal(R.kmSlot(null), "");
+});
+
+test("knowMoreHtml: exactly 1 target shows the Know more header and one direct button", () => {
+  const hKb = R.knowMoreHtml({ targets: [{ k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' }] });
+  assert.match(hKb, /<h3 class="pn-km-h">Know more<\/h3>/, "header shows with a single target");
+  assert.match(hKb, /class="pn-km-row"/);
+  assert.doesNotMatch(hKb, /pn-km-duo/);
+  assert.match(hKb, /<b>Knowledge Library: Heart failure<\/b>/);
+  assert.match(hKb, /data-act="r-kb" data-id="heart_failure"/);
+  assert.equal((hKb.match(/<button /g) || []).length, 1);
+
+  const hLsTopic = R.knowMoreHtml({ targets: [{ k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' }] });
+  assert.match(hLsTopic, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(hLsTopic, /<b>Lesson: Heart failure<\/b>/);
+
+  const hLsSpec = R.knowMoreHtml({ targets: [{ k: "ls", key: "hf_echo", title: "Echo in HF", tier: "specific", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf_echo"' }] });
+  assert.match(hLsSpec, /<b>Lesson: Echo in HF<\/b>/);
+
+  const hDr = R.knowMoreHtml({ targets: [{ k: "dr", id: "furosemide", title: "furosemide", act: "r-drug", attrs: ' data-t="furosemide"' }] });
+  assert.match(hDr, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(hDr, /<b>Drug: furosemide<\/b>/);
+
+  const hPr = R.knowMoreHtml({ targets: [{ k: "pr", id: "hf_guideline", title: "Acute HF Management", act: "r-proto", attrs: ' data-id="hf_guideline"' }] });
+  assert.match(hPr, /<b>Protocol: Acute HF Management<\/b>/);
+
+  const hCd = R.knowMoreHtml({ targets: [{ k: "cd", mid: "med-heart-failure", title: "Cards for this topic", act: "k-open", attrs: ' data-s="medicine" data-m="med-heart-failure"' }] });
+  assert.match(hCd, /<b>Flashcards: Cards for this topic<\/b>/);
+  assert.equal(R.knowMoreHtml({ targets: [] }), "");
+});
+
+test("knowMoreHtml: 2 targets render side-by-side duo buttons under the header", () => {
+  const targets = [
+    { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
+    { k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' }
+  ];
+  const hDuo = R.knowMoreHtml({ targets });
+  assert.match(hDuo, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(hDuo, /class="pn-km-row pn-km-duo"/);
+  assert.match(hDuo, /Knowledge Library: Heart failure/);
+  assert.match(hDuo, /Lesson: Heart failure/);
+  assert.equal((hDuo.match(/<button /g) || []).length, 2, "exactly two buttons");
+  assert.doesNotMatch(hDuo, /pn-km-more/, "two targets need no More button");
+
+  const targetsSame = [
+    { k: "kb", id: "hf", title: "Heart failure", act: "r-kb", attrs: ' data-id="hf"' },
+    { k: "kb", id: "cardiomyopathy", title: "Cardiomyopathy", act: "r-kb", attrs: ' data-id="cardiomyopathy"' }
+  ];
+  const hSame = R.knowMoreHtml({ targets: targetsSame, allTargets: targetsSame, iid: "item2" });
+  assert.match(hSame, /class="pn-km-row pn-km-duo"/, "two of one kind still sit side by side");
+  assert.equal((hSame.match(/<button /g) || []).length, 2);
+});
+
+test("kmTargets: the Nucleus360 floor fires only when nothing else exists", () => {
+  const n360 = { id: "pancreatic-adenocarcinoma", title: "Pancreatic adenocarcinoma" };
+  const lone = R.kmTargets({ links: [], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "surgery", mid: "sur-pancreas", n360 });
+  assert.equal(lone.rowTargets.length, 1, "one floor target");
+  assert.deepEqual([lone.rowTargets[0].k, lone.rowTargets[0].act], ["n360", "n360-topic"]);
+  assert.match(lone.rowTargets[0].attrs, /data-t="pancreatic-adenocarcinoma"/);
+  assert.equal(R.kmKindLabel(lone.rowTargets[0]), "Nucleus360");
+  assert.equal(R.kmTargetLabel(lone.rowTargets[0]), "Cover this topic with Nucleus360");
+  const hFloor = R.knowMoreHtml({ targets: lone.rowTargets });
+  assert.match(hFloor, /data-act="n360-topic"/);
+  assert.match(hFloor, /Cover this topic with Nucleus360/);
+  const withKb = R.kmTargets({ links: [{ k: "kb", id: "x", title: "X" }], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "s", mid: "m", n360 });
+  assert.ok(withKb.rowTargets.every((t) => t.k !== "n360"), "real targets suppress the floor");
+  const bare = R.kmTargets({ links: [], okLessons: [], lesson: null, cards: false, itemCards: false, sid: "s", mid: "m" });
+  assert.deepEqual(bare.rowTargets, [], "no floor without a mapped walkthrough");
+});
+
+test("knowMoreHtml: >2 targets or several of one kind render single Know more button opening sheet", () => {
+  // >2 targets
+  const targets3 = [
+    { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
+    { k: "ls", key: "hf", title: "Heart failure", tier: "topic", act: "l-open", attrs: ' data-s="medicine" data-m="med-heart-failure" data-l="hf"' },
+    { k: "dr", id: "furosemide", title: "furosemide", act: "r-drug", attrs: ' data-t="furosemide"' }
+  ];
+  const h3 = R.knowMoreHtml({ targets: targets3, allTargets: targets3, iid: "item1" });
+  assert.match(h3, /<h3 class="pn-km-h">Know more<\/h3>/);
+  assert.match(h3, /class="pn-km-row pn-km-duo"/, "the top two stay visible");
+  assert.match(h3, /Knowledge Library: Heart failure/);
+  assert.match(h3, /Lesson: Heart failure/);
+  assert.doesNotMatch(h3, /Drug: furosemide/, "the third target lives in the sheet");
+  assert.match(h3, /class="pn-km-btn pn-km-more"/);
+  assert.match(h3, /data-act="r-km-sheet"/);
+  assert.match(h3, /data-i="item1"/);
+  assert.match(h3, /<b>More \(3\)<\/b>/);
+  assert.equal((h3.match(/<button /g) || []).length, 3, "two direct buttons plus More");
+});
+
+test("knowMoreSheetBodyHtml: groups all targets in kind order with module chapter first", () => {
+  const allTargets = [
+    { k: "dr", id: "furosemide", title: "Furosemide", act: "r-drug", attrs: ' data-t="furosemide"' },
+    { k: "ls", key: "hf_echo", title: "Echo in HF", tier: "specific", act: "l-open", attrs: ' data-l="hf_echo"' },
+    { k: "ls", key: "hf", title: "Heart failure chapter", tier: "topic", act: "l-open", attrs: ' data-l="hf"' },
+    { k: "kb", id: "heart_failure", title: "Heart failure", act: "r-kb", attrs: ' data-id="heart_failure"' },
+    { k: "pr", id: "hf_proto", title: "Acute HF", act: "r-proto", attrs: ' data-id="hf_proto"' },
+    { k: "cd", mid: "med-heart-failure", title: "Cards for this topic", act: "k-open", attrs: ' data-m="med-heart-failure"' }
+  ];
+  const body = R.knowMoreSheetBodyHtml({ allTargets });
+  const at = (s) => { const idx = body.indexOf(s); assert.ok(idx >= 0, "has " + s); return idx; };
+  // Check group order: Knowledge Library < Lessons < Drugs < Protocols < Flashcards
+  assert.ok(at("Knowledge Library") < at("Lessons") && at("Lessons") < at("Drugs") &&
+    at("Drugs") < at("Protocols") && at("Protocols") < at("Flashcards"), "kind order preserved");
+
+  // Check lesson ordering: topic tier before specific tier
+  assert.ok(at("Lesson: Heart failure chapter") < at("Lesson: Echo in HF"), "topic chapter comes before specific lesson");
+});
+
+test("fill: old item with links resolves .pn-km, offline caching works, low confidence hidden, no links hidden", async () => {
+  const src = fs.readFileSync(join(ROOT, "prep-reason.js"), "utf8");
+  const ptr = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "index.json"), "utf8"));
+  const shards = {};
+  for (const f of fs.readdirSync(join(FIX, "api", "v1", "links", "m")))
+    shards[f] = JSON.parse(fs.readFileSync(join(FIX, "api", "v1", "links", "m", f), "utf8"));
+
+  const testShard = {
+    v: 1, m: "med-test-mod", s: "medicine", ver: "fix",
+    T: [
+      ["kb", "target_high", "High confidence target"],
+      ["kb", "target_low", "Low confidence target"]
+    ],
+    e: {
+      "old-with-links": [[0, 85, "k"]],
+      "old-low-only": [[1, 60, "k"]],
+      "old-empty": []
+    },
+    x: {}, mod: {}
+  };
+  ptr.m["med-test-mod"] = "medicine/12345678";
+  shards["med-test-mod-12345678.json"] = testShard;
+
+  let networkDown = false;
+  const G = {
+    fetch: (url) => {
+      if (networkDown) return Promise.reject(new Error("Network offline"));
+      const u = String(url);
+      if (u.endsWith("/v2/links/index.json")) return Promise.resolve({ ok: true, json: () => Promise.resolve(ptr) });
+      const m = /\/v2\/links\/(m\/[^/]+\.json)$/.exec(u);
+      const sh = m && shards[m[1].slice(2)];
+      return Promise.resolve(sh ? { ok: true, json: () => Promise.resolve(sh) } : { ok: false, status: 404 });
+    },
+  };
+  new Function("window", src)(G);
+  const PR = G.PREP_REASON;
+
+  const makeSlot = (iid, mid) => {
+    const attrs = { "data-i": iid, "data-s": "medicine", "data-m": mid, class: "pn-km" };
+    const styleObj = { display: "" };
+    return {
+      className: "pn-km",
+      style: styleObj,
+      getAttribute: (k) => attrs[k] || null,
+      setAttribute: (k, v) => { attrs[k] = String(v); },
+      removeAttribute: (k) => { delete attrs[k]; },
+      innerHTML: ""
+    };
+  };
+
+  const sLinked = makeSlot("old-with-links", "med-test-mod");
+  const sLow = makeSlot("old-low-only", "med-test-mod");
+  const sNoLink = makeSlot("old-empty", "med-test-mod");
+
+  const byIid = { "old-with-links": sLinked, "old-low-only": sLow, "old-empty": sNoLink };
+  const root = {
+    querySelectorAll: () => [sLinked, sLow, sNoLink],
+    querySelector: (sel) => { const m = /data-i="([^"]+)"/.exec(sel); return (m && byIid[m[1]]) || null; }
+  };
+
+  const cache = new Map();
+  const H = {
+    root: () => root,
+    run_: () => ({ items: [
+      { id: "old-with-links", q: "Question 1", a: 0, o: ["a", "b"], exp: "Plain exp", _s: "medicine", _m: "med-test-mod" },
+      { id: "old-low-only", q: "Question 2", a: 0, o: ["a", "b"], exp: "Plain exp", _s: "medicine", _m: "med-test-mod" },
+      { id: "old-empty", q: "Question 3", a: 0, o: ["a", "b"], exp: "Plain exp", _s: "medicine", _m: "med-test-mod" }
+    ] }),
+    subjectOfModule: () => "medicine",
+    bankApi: "https://x/api/prep/bank/",
+    cacheGet: (k) => (cache.has(k) ? cache.get(k) : null),
+    cachePut: (k, v) => { cache.set(k, v); }
+  };
+
+  PR.fill(H);
+  for (let i = 0; i < 200 && [sLinked, sLow, sNoLink].some((s) => s.getAttribute("data-done") !== "1"); i++)
+    await new Promise((r) => setTimeout(r, 10));
+
+  assert.equal(sLinked.getAttribute("data-done"), "1");
+  assert.equal(sLinked.style.display, "");
+  assert.match(sLinked.innerHTML, /High confidence target/, "high confidence target rendered");
+  assert.doesNotMatch(sLinked.innerHTML, /Low confidence target/);
+
+  // Low confidence (< 75): excluded, so row is hidden
+  assert.equal(sLow.getAttribute("data-done"), "1");
+  assert.equal(sLow.style.display, "none", "low confidence slot is hidden");
+  assert.equal(sLow.innerHTML, "");
+
+  // No links: hidden and quiet, no placeholder
+  assert.equal(sNoLink.getAttribute("data-done"), "1");
+  assert.equal(sNoLink.style.display, "none", "unlinked item slot is hidden");
+  assert.equal(sNoLink.innerHTML, "");
+
+  // Test offline caching: now kill the network, fill another slot from cache
+  networkDown = true;
+  assert.ok(cache.has("v2/links/index.json"), "index was cached");
+  assert.ok(cache.has("v2/links/m/med-test-mod-12345678.json"), "shard was cached");
+
+  const sOffline = makeSlot("old-with-links", "med-test-mod");
+  root.querySelectorAll = () => [sOffline];
+  root.querySelector = (sel) => (/data-i="old-with-links"/.test(sel) ? sOffline : null);
+
+  // Clear memory cache so it must read from H.cacheGet
+  PR._r.ptr = null;
+  PR.fill(H);
+  for (let i = 0; i < 200 && sOffline.getAttribute("data-done") !== "1"; i++)
+    await new Promise((r) => setTimeout(r, 10));
+
+  assert.equal(sOffline.getAttribute("data-done"), "1", "offline slot resolved from cacheGet");
+  assert.match(sOffline.innerHTML, /High confidence target/, "cached content rendered while offline");
+});
+
+
+test("titleRelevant: SGLT2 namesake fails, the module topic passes (owner screenshot 2026-10-13)", () => {
+  const hay = "A 62-year-old woman with heart failure with reduced ejection fraction LVEF 30% on ARNI and bisoprolol non-diabetic which additional drug class reduces death SGLT2 inhibitor (dapagliflozin) med-heart-failure heart failure";
+  assert.equal(R.titleRelevant("Familial Renal Glucosuria", hay), false);
+  assert.equal(R.titleRelevant("Heart failure", hay), true);
+  assert.equal(R.titleRelevant("Dapagliflozin", hay), true);
+});
+
+test("shardLinks keeps via so the module topic (kt) can lead the next action", () => {
+  const sh = { T: [["kb", "renal_glucosuria", "Familial Renal Glucosuria"], ["kb", "heart_failure", "Heart failure"]], e: { i1: [[0, 95, "a"], [1, 75, "kt"]] } };
+  const ls = R.shardLinks ? R.shardLinks(sh, "i1") : null;
+  if (ls) { assert.equal(ls.find((l) => l.id === "heart_failure").v, "kt"); }
 });

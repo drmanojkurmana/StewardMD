@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "module": "mic-antibodies-complement",
+ "subject": "microbiology",
+ "title": "Immunoglobulins and complement: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Immunoglobulins, or antibodies, are glycoproteins made by plasma cells. Each molecule is Y shaped, with two identical **heavy chains** and two identical **light chains** joined by disulfide bonds. The heavy chain constant region decides the class, or isotype. Five classes exist: IgG, IgM, IgA, IgD and IgE. The variable region at the tips of the arms binds antigen, and this part forms the **Fab** fragment.",
+   "say": "Immunoglobulins, also called antibodies, are Y shaped molecules made of two heavy chains and two light chains. The constant region of the heavy chain decides the class. There are five classes: IgG, IgM, IgA, IgD and IgE. The variable region at the tips of the arms binds antigen, and this arm portion is called the Fab fragment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Share of normal serum",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "IgG",
+      "About 80 percent",
+      "Only class that crosses the placenta"
+     ],
+     [
+      "IgA",
+      "About 15 percent",
+      "Main secretory antibody"
+     ],
+     [
+      "IgM",
+      "About 5 percent",
+      "First antibody in primary response"
+     ],
+     [
+      "IgD",
+      "About 0.2 percent",
+      "Mainly a B cell surface receptor"
+     ],
+     [
+      "IgE",
+      "Trace",
+      "Mediates type I hypersensitivity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **primary response** to a first antigen exposure produces IgM first, followed later by IgG. In a **secondary response**, memory cells give a fast, large IgG response that lasts longer. IgM cannot cross the placenta, so IgM in a newborn suggests intrauterine infection, for example toxoplasmosis, rubella, syphilis, cytomegalovirus or HIV. The fetus begins making IgM by about 20 weeks.",
+   "say": "In a primary response, IgM appears first and then IgG follows. In a secondary response, memory cells make a fast and large IgG response that lasts longer. IgM cannot cross the placenta, so finding IgM in a newborn suggests intrauterine infection, such as toxoplasmosis, rubella, syphilis, cytomegalovirus or HIV.",
+   "vis": null
+  },
+  {
+   "tx": "**IgA** is the main antibody in secretions such as saliva, tears, milk and gut fluid. Secretory IgA is a dimer joined by a **J chain** and carries a **secretory component** made by epithelial cells. This component protects IgA from bacterial proteases. IgA does not fix complement. IgG is the only antibody that crosses the placenta, giving natural passive immunity to the newborn.",
+   "say": "IgA is the main antibody in secretions. Secretory IgA is a dimer linked by a J chain and carries a secretory component made by epithelial cells, which protects it from bacterial proteases. IgA does not fix complement. IgG is the only antibody that crosses the placenta, giving the newborn passive immunity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serum IgA",
+     "points": [
+      "Monomer",
+      "Mainly in blood",
+      "Lacks secretory component"
+     ]
+    },
+    "right": {
+     "title": "Secretory IgA",
+     "points": [
+      "Dimer with J chain",
+      "Found in mucosal secretions",
+      "Carries secretory component"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**IgE** is present only in trace amounts in serum and binds mast cells through its Fc region. It mediates type I hypersensitivity, including asthma and anaphylaxis, and it rises in intestinal parasitic infection. IgE is heat labile, being inactivated at 56 degrees Celsius for one hour, and it has the shortest half-life, about 2 to 3 days. IgD is mainly a B cell surface receptor.",
+   "say": "IgE exists in only trace amounts in serum and binds mast cells. It drives type I hypersensitivity, including asthma and anaphylaxis, and levels rise in intestinal parasitic infection. It is heat labile and has a short half-life of about two to three days. IgD mainly acts as a B cell surface receptor.",
+   "vis": null
+  },
+  {
+   "tx": "The **classical pathway** starts when C1 binds antibody bound to antigen, mainly IgG or IgM. The **alternative pathway** starts by spontaneous C3b binding to an activator and does not need antibody. The **lectin pathway** starts when mannose binding lectin binds microbial sugars. All three converge on C3 cleavage and the **membrane attack complex**, made of C5b to C9. C1 esterase inhibitor controls the early classical steps.",
+   "say": "The classical pathway starts with C1 binding antibody that is attached to antigen. The alternative pathway starts by spontaneous C3b binding to an activator and does not need antibody. The lectin pathway starts when mannose binding lectin binds microbial sugars. All three pathways meet at C3 cleavage and form the membrane attack complex. C1 esterase inhibitor controls early classical activation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Classical"
+     },
+     {
+      "id": "b",
+      "label": "Alternative"
+     },
+     {
+      "id": "c",
+      "label": "Lectin"
+     },
+     {
+      "id": "d",
+      "label": "C3 cleavage"
+     },
+     {
+      "id": "e",
+      "label": "Membrane attack complex"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complement fragments have distinct roles. **C3a** and **C5a** are anaphylatoxins that release histamine, and C5a is the most powerful chemotactic agent. **C3b** is the main opsonin. The membrane attack complex, made of the terminal components C5 to C9, lyses microbes with thin cell walls. Deficiency of C5 to C8 raises the risk of Neisseria infection, meningococcal and gonococcal.",
+   "say": "Complement fragments have distinct roles. C3a and C5a are anaphylatoxins that release histamine, and C5a is the strongest chemotactic agent. C3b acts as the main opsonin. The membrane attack complex kills microbes with thin cell walls. Deficiency of C5 to C8 increases the risk of Neisseria infections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fragment",
+     "Main role"
+    ],
+    "rows": [
+     [
+      "C3a",
+      "Anaphylatoxin, releases histamine"
+     ],
+     [
+      "C5a",
+      "Anaphylatoxin and chemotaxis"
+     ],
+     [
+      "C3b",
+      "Opsonin"
+     ],
+     [
+      "C5b to C9",
+      "Membrane attack complex, lysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "11e545d9-739c-48c1-879d-85fdb1a0f836",
+  "1c95fa62-12c7-4902-a0d9-2cddeb4b47c8",
+  "0579b2d1-d33e-4989-8b92-1543528b313a"
+ ],
+ "src": [],
+ "refs": [
+  "Jawetz, Melnick and Adelberg's Medical Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 370
+ }
+}

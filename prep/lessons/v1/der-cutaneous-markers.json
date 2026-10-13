@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "der-cutaneous-markers",
+ "subject": "dermatology",
+ "title": "Cutaneous markers of systemic disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Skin often reveals hidden internal disease. **Acanthosis nigricans** is a velvety, brown to black thickening in flexures such as the neck, axillae and groin. Its commonest link is **obesity with insulin resistance**, but it can flag an endocrinopathy or an internal malignancy, especially gastric or other gastrointestinal adenocarcinoma. A sudden or rapid appearance in an older adult should prompt a search for cancer.",
+   "say": "Skin often reveals hidden internal disease. Acanthosis nigricans is a velvety, brown to black thickening in flexures such as the neck, axillae and groin. Its commonest link is obesity with insulin resistance, but it can flag an endocrinopathy or an internal malignancy, especially gastric or other gastrointestinal adenocarcinoma. A sudden or rapid appearance in an older adult should prompt a search for cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Acanthosis nigricans"
+    ],
+    "rows": [
+     [
+      "Site",
+      "Neck, axillae, groin"
+     ],
+     [
+      "Commonest cause",
+      "Obesity and insulin resistance"
+     ],
+     [
+      "Malignant link",
+      "Gastric and GI adenocarcinoma"
+     ],
+     [
+      "Endocrine link",
+      "Acromegaly, Cushing, PCOS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sweet syndrome** is an acute febrile neutrophilic dermatosis. It presents with painful, red-brown oedematous plaques on the head, neck and upper limbs, with fever and neutrophilia. About 10% of cases have an associated malignancy, most often **acute myelogenous leukaemia**. Treatment of choice is systemic corticosteroids, which work very well.",
+   "say": "Sweet syndrome is an acute febrile neutrophilic dermatosis. It presents with painful, red-brown oedematous plaques on the head, neck and upper limbs, with fever and neutrophilia. About 10 percent of cases have an associated malignancy, most often acute myelogenous leukaemia. Treatment of choice is systemic corticosteroids, which work very well.",
+   "vis": null
+  },
+  {
+   "tx": "**Pyoderma gangrenosum** is a neutrophilic ulcer with undermined, violaceous borders. It is strongly linked to **ulcerative colitis**, and also occurs in Crohn disease. Lymphadenopathy is not a feature of Sweet syndrome, which helps separate the two in exams. Diagnosis is clinical after excluding infection, and steroids are the mainstay of treatment.",
+   "say": "Pyoderma gangrenosum is a neutrophilic ulcer with undermined, violaceous borders. It is strongly linked to ulcerative colitis, and also occurs in Crohn disease. Lymphadenopathy is not a feature of Sweet syndrome, which helps separate the two in exams. Diagnosis is clinical after excluding infection, and steroids are the mainstay of treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pyoderma gangrenosum",
+     "points": [
+      "Ulcer with undermined edges",
+      "Linked to ulcerative colitis",
+      "Clinical diagnosis after excluding infection"
+     ]
+    },
+    "right": {
+     "title": "Sweet syndrome",
+     "points": [
+      "Painful red-brown plaques",
+      "Fever and neutrophilia",
+      "Dense dermal neutrophils"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Necrobiosis lipoidica** is a granulomatous, collagen-degenerating lesion, most often on the shins, and is strongly linked to **diabetes mellitus**. **Diabetic dermopathy** shows atrophic brown scaly patches on the legs. Pigmented pretibial papules and shin spots are other diabetic markers. Leser-Trelat sign refers to sudden eruption of seborrhoeic keratoses, classically signalling an internal malignancy.",
+   "say": "Necrobiosis lipoidica is a granulomatous lesion with collagen degeneration, most often on the shins, and is strongly linked to diabetes mellitus. Diabetic dermopathy shows atrophic brown scaly patches on the legs. Pigmented pretibial papules and shin spots are other diabetic markers. Leser-Trelat sign refers to sudden eruption of seborrhoeic keratoses, classically signalling an internal malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diabetes mellitus"
+     },
+     {
+      "id": "b",
+      "label": "Necrobiosis lipoidica"
+     },
+     {
+      "id": "c",
+      "label": "Diabetic dermopathy"
+     },
+     {
+      "id": "d",
+      "label": "Shin spots"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eruptive xanthomas** and **xanthoma disseminatum** are lipid-laden histiocytic lesions. Xanthoma disseminatum is a normolipaemic, histiocytic disorder with a classic triad of skin xanthomas, mucosal xanthomas and **diabetes insipidus**. Pellagra, from niacin deficiency, gives Casal necklace. Phrynoderma reflects vitamin A deficiency, and acrodermatitis enteropathica reflects zinc deficiency.",
+   "say": "Eruptive xanthomas and xanthoma disseminatum are lipid-laden histiocytic lesions. Xanthoma disseminatum is a normolipaemic histiocytic disorder with a classic triad of skin xanthomas, mucosal xanthomas and diabetes insipidus. Pellagra, from niacin deficiency, gives Casal necklace. Phrynoderma reflects vitamin A deficiency, and acrodermatitis enteropathica reflects zinc deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Key marker"
+    ],
+    "rows": [
+     [
+      "Xanthoma disseminatum",
+      "Triad with diabetes insipidus"
+     ],
+     [
+      "Pellagra",
+      "Casal necklace"
+     ],
+     [
+      "Phrynoderma",
+      "Vitamin A deficiency"
+     ],
+     [
+      "Acrodermatitis enteropathica",
+      "Zinc deficiency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Porphyria cutanea tarda** causes photosensitive blistering on the dorsal hands and face, often with alcohol use or liver damage. Sarcoidosis gives **lupus pernio**, a violaceous infiltrate of the nose and cheeks. In HIV, **seborrhoeic dermatitis** becomes more common and severe as CD4 counts fall. Proximal subungual onychomycosis is also an AIDS marker.",
+   "say": "Porphyria cutanea tarda causes photosensitive blistering on the dorsal hands and face, often with alcohol use or liver damage. Sarcoidosis gives lupus pernio, a violaceous infiltrate of the nose and cheeks. In HIV, seborrhoeic dermatitis becomes more common and severe as CD4 counts fall. Proximal subungual onychomycosis is also an AIDS marker.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "404aed9d-7bb7-4437-aa22-432f9fd368cf",
+  "0635d195-0096-455e-b696-e801cecfe21e",
+  "0b05e7b2-2a2e-4195-95d6-626ed75d96f7"
+ ],
+ "src": [],
+ "refs": [
+  "IADVL's Concise Textbook of Dermatology",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 78
+ }
+}

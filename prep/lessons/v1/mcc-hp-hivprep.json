@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "mcc-hp-hivprep",
+ "subject": "mcc-health-promotion",
+ "title": "HIV prevention: PrEP and PEP",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pre-exposure prophylaxis**, or PrEP, is offered to HIV-negative people at ongoing risk so they take **antiretrovirals** before any exposure. In India, the national programme supports daily **tenofovir disoproxil with emtricitabine** as the usual combination. Confirm HIV-negative status before starting, and repeat HIV testing at regular intervals while on treatment. Protection depends on taking the tablet every day.",
+   "say": "Pre-exposure prophylaxis, or PrEP, is offered to HIV-negative people at ongoing risk, so they take antiretrovirals before any exposure. In India, the national programme supports daily tenofovir disoproxil with emtricitabine as the usual combination. Confirm HIV-negative status before starting, and repeat HIV testing at regular intervals while on treatment. Protection depends on taking the tablet every day.",
+   "vis": null
+  },
+  {
+   "tx": "Monitor **renal function** with **creatinine** and urinalysis, because tenofovir can injure the proximal renal tubule. A transient rise should be repeated before any change is made. A persistent fall in kidney function, judged by a sustained decline in **eGFR**, prompts review of the regimen. Hepatitis B coinfection needs particular care, since both drugs treat hepatitis B and abrupt withdrawal can trigger a flare.",
+   "say": "Monitor renal function with creatinine and urinalysis, because tenofovir can injure the proximal renal tubule. A transient rise should be repeated before any change is made. A persistent fall in kidney function, judged by a sustained decline in eGFR, prompts review of the regimen. Hepatitis B coinfection needs particular care, since both drugs treat hepatitis B and abrupt withdrawal can trigger a flare.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Suggested action"
+    ],
+    "rows": [
+     [
+      "Creatinine rise or proteinuria",
+      "Repeat tests and reassess"
+     ],
+     [
+      "Sustained decline in eGFR",
+      "Review regimen with a specialist"
+     ],
+     [
+      "Hepatitis B surface antigen positive",
+      "Do not stop abruptly; refer for HBV care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-exposure prophylaxis**, or **PEP**, is a short course of **antiretroviral** drugs started after a single possible exposure to HIV. It should begin as early as possible, and the window is limited, so delay is harmful. The regimen is a fixed combination recommended by national guidance, and the first dose should not wait for test results. A **baseline HIV test** is drawn at the same visit, and **follow-up testing** is arranged later to confirm the outcome.",
+   "say": "Post-exposure prophylaxis, or PEP, is a short course of antiretroviral drugs started after a single possible exposure to HIV. It should begin as early as possible, because the window is limited and waiting causes harm. The regimen is a fixed combination recommended by national guidance. The first dose should not wait for test results. A baseline HIV test is taken at the same visit, and follow-up testing is arranged later to confirm the outcome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "E",
+      "label": "Possible HIV exposure"
+     },
+     {
+      "id": "S",
+      "label": "Start PEP as early as possible"
+     },
+     {
+      "id": "R",
+      "label": "Baseline HIV test, no delay to dose"
+     },
+     {
+      "id": "C",
+      "label": "Complete the full antiretroviral course"
+     },
+     {
+      "id": "F",
+      "label": "Follow-up HIV testing"
+     }
+    ],
+    "edges": [
+     [
+      "E",
+      "S"
+     ],
+     [
+      "S",
+      "R"
+     ],
+     [
+      "R",
+      "C"
+     ],
+     [
+      "C",
+      "F"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute HIV** can occur in someone on PrEP. Fever, rash, myalgia and generalised lymphadenopathy after a recent exposure suggest seroconversion. In the window period the antibody test can be non-reactive, so **HIV RNA viral load** testing is needed. Missed doses and adherence should be explored, because PrEP failure is usually linked to inconsistent use.",
+   "say": "Acute HIV can occur in someone taking PrEP. Fever, rash, muscle pain and generalised lymphadenopathy after a recent exposure suggest seroconversion. During the window period the antibody test can be non-reactive, so HIV RNA viral load testing is needed. Explore missed doses and adherence, because PrEP failure is usually linked to inconsistent use.",
+   "vis": null
+  },
+  {
+   "tx": "Sustained **viral suppression** on antiretroviral therapy prevents sexual HIV transmission, a principle called undetectable equals untransmittable. The usual threshold is an undetectable viral load maintained for at least six months. Condoms still protect against other sexually transmitted infections, so keep counselling, testing and adherence support in place for both partners.",
+   "say": "Sustained viral suppression on antiretroviral therapy prevents sexual HIV transmission, a principle called undetectable equals untransmittable. The usual threshold is an undetectable viral load maintained for at least six months. Condoms still protect against other sexually transmitted infections, so keep counselling, testing and adherence support in place for both partners.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sustained undetectable",
+     "points": [
+      "HIV RNA not detected on ART",
+      "No sexual HIV transmission",
+      "Condoms still advised for STIs"
+     ]
+    },
+    "right": {
+     "title": "Detectable or unknown",
+     "points": [
+      "Viral load not suppressed",
+      "Transmission risk persists",
+      "Use PrEP or PEP as indicated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Guidelines for HIV Care and Treatment (NACO, 2021)",
+  "Preexposure Prophylaxis for the Prevention of HIV Infection in the United States (CDC, 2021 Update)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

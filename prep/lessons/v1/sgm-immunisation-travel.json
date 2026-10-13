@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "sgm-immunisation-travel",
+ "subject": "ss-general-medicine",
+ "title": "Adult immunisation and travel medicine: key vaccines and travel prophylaxis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Adult immunisation follows a **schedule** that is reviewed every year, with catch-up doses for anyone who missed earlier vaccines. Risk factors such as diabetes, chronic lung or kidney disease, pregnancy, asplenia and immunosuppression change which vaccines are needed. Always check previous records before giving a dose, and use the **Indian** national schedule for practice in India while noting where US guidance differs.",
+   "say": "Adult immunisation follows a schedule that is reviewed every year, with catch-up doses for anyone who missed earlier vaccines. Risk factors such as diabetes, chronic lung or kidney disease, pregnancy, asplenia and immunosuppression change which vaccines are needed. Always check previous records before giving a dose. Use the Indian national schedule for practice in India, while noting where US guidance differs.",
+   "vis": null
+  },
+  {
+   "tx": "Vaccines are either **live attenuated** or **inactivated**. Live vaccines such as measles, mumps, rubella, varicella and yellow fever are generally avoided in severe immunosuppression, including high-dose steroids, untreated HIV with low CD4 counts, and active chemotherapy. Inactivated and recombinant vaccines are safe in these patients, though the immune response may be weaker.",
+   "say": "Vaccines are either live attenuated or inactivated. Live vaccines such as measles, mumps, rubella, varicella and yellow fever are generally avoided in severe immunosuppression. This includes high-dose steroids, untreated HIV with low CD4 counts, and active chemotherapy. Inactivated and recombinant vaccines are safe in these patients, although the immune response may be weaker.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine type",
+     "Examples",
+     "Immunosuppressed use"
+    ],
+    "rows": [
+     [
+      "Live attenuated",
+      "Yellow fever, MMR, varicella",
+      "Usually avoided"
+     ],
+     [
+      "Inactivated",
+      "Influenza, pneumococcal conjugate",
+      "Safe"
+     ],
+     [
+      "Recombinant",
+      "Recombinant zoster, hepatitis B",
+      "Safe"
+     ],
+     [
+      "Conjugate",
+      "Typhoid conjugate, Hib",
+      "Safe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adults with **asplenia** or immune compromise need pneumococcal conjugate vaccine followed by polysaccharide vaccine as per the schedule. Recombinant zoster vaccine is given in two doses to adults aged 50 and above, and to those with immune compromise. Influenza vaccine is given every year, and HPV vaccine is offered as a catch-up in eligible young adults, with schedules varying by country.",
+   "say": "Adults with asplenia or immune compromise need pneumococcal conjugate vaccine, followed by polysaccharide vaccine as per the schedule. Recombinant zoster vaccine is given in two doses to adults aged 50 and above, and to those with immune compromise. Influenza vaccine is given every year. HPV vaccine is offered as a catch-up in eligible young adults, with schedules varying by country.",
+   "vis": null
+  },
+  {
+   "tx": "Typhoid vaccination is advised for travellers to endemic areas such as India, especially for stays longer than a few weeks. Available options include the **Vi polysaccharide** vaccine and the **typhoid conjugate vaccine**, and the oral Ty21a live vaccine is avoided in immunocompromised people. Prior culture-confirmed typhoid does not give reliable lifelong protection, so re-vaccination is usually considered.",
+   "say": "Typhoid vaccination is advised for travellers to endemic areas such as India, especially for stays longer than a few weeks. Available options include the Vi polysaccharide vaccine and the typhoid conjugate vaccine. The oral Ty21a live vaccine is avoided in immunocompromised people. Prior culture-confirmed typhoid does not give reliable lifelong protection, so re-vaccination is usually considered.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vi polysaccharide",
+     "points": [
+      "Injectable",
+      "Single dose",
+      "Usable from age 2 years"
+     ]
+    },
+    "right": {
+     "title": "Oral Ty21a",
+     "points": [
+      "Live attenuated",
+      "Multiple capsules",
+      "Avoid in immunocompromised"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_d2546a29014e",
+  "q_91ab56545905",
+  "q_d7c05566c6cb"
+ ],
+ "src": [],
+ "refs": [
+  "Advisory Committee on Immunization Practices adult immunisation schedule",
+  "WHO position papers on yellow fever and typhoid vaccines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 6
+ }
+}

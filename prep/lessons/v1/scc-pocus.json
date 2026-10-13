@@ -1,0 +1,131 @@
+{
+ "v": 1,
+ "module": "scc-pocus",
+ "subject": "ss-critical-care",
+ "title": "Point of care ultrasound in critical care: core applications",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Point of care ultrasound** (POCUS) is a bedside tool used by the treating clinician to answer focused questions quickly. In critical care, the RUSH protocol (Rapid Ultrasound for Shock and Hypotension) organises the exam into pump, tank and pipes. The **pump** is the heart, the **tank** is the volume status (including the IVC), and the **pipes** are the great vessels and abdominal aorta. Examining in this sequence helps classify shock into its likely causes.",
+   "say": "Point of care ultrasound is a bedside tool that the treating clinician uses to answer focused questions quickly. In critical care, the RUSH protocol, which stands for Rapid Ultrasound for Shock and Hypotension, organises the exam into pump, tank and pipes. The pump is the heart, the tank is the volume status including the inferior vena cava, and the pipes are the great vessels and the abdominal aorta. Examining in this sequence helps classify shock into its likely causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "What is assessed",
+     "Shock pattern suggested"
+    ],
+    "rows": [
+     [
+      "Pump",
+      "LV and RV function, pericardium",
+      "Cardiogenic or obstructive"
+     ],
+     [
+      "Tank",
+      "IVC size and collapsibility, lungs",
+      "Hypovolaemic or distributive"
+     ],
+     [
+      "Pipes",
+      "Aorta, abdominal vessels, free fluid",
+      "Vascular or abdominal bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **BLUE protocol** targets acute respiratory failure and uses lung sliding, **B lines** and lung point findings. **Lung sliding** is the shimmering movement of the pleura with respiration and rules out pneumothorax when present. **B lines** are vertical, comet-tail artefacts that indicate interstitial or alveolar fluid, as in pulmonary oedema. A **lung point**, where normal sliding meets absent sliding, is pathognomonic for pneumothorax.",
+   "say": "The BLUE protocol targets acute respiratory failure and uses lung sliding, B lines and lung point findings. Lung sliding is the shimmering movement of the pleura with breathing and, when present, rules out pneumothorax. B lines are vertical comet tail artefacts that indicate interstitial or alveolar fluid, as seen in pulmonary oedema. A lung point, where normal sliding meets absent sliding, is pathognomonic for pneumothorax.",
+   "vis": null
+  },
+  {
+   "tx": "The **inferior vena cava** (IVC) is assessed for size and respiratory variation as a surrogate for right atrial pressure. A small, collapsing IVC suggests low preload and fluid responsiveness, while a plethoric, non-collapsing IVC suggests raised venous pressure. The **VExUS score** combines IVC dilatation with hepatic, portal and renal venous Doppler patterns to grade venous congestion before fluid is given. Dilated, non-collapsing IVC favours congestion.",
+   "say": "The inferior vena cava is assessed for size and respiratory variation as a surrogate for right atrial pressure. A small, collapsing vena cava suggests low preload and fluid responsiveness, while a plethoric, non-collapsing one suggests raised venous pressure. The VExUS score combines vena cava dilatation with hepatic, portal and renal venous Doppler patterns to grade venous congestion before fluid is given.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fluid responsive",
+     "points": [
+      "IVC small",
+      "Marked respiratory collapse",
+      "Low preload suspected"
+     ]
+    },
+    "right": {
+     "title": "Venous congestion",
+     "points": [
+      "IVC dilated",
+      "Little or no collapse",
+      "Consider before more fluid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**LVOT VTI** (left ventricular outflow tract velocity time integral) estimates stroke volume. Stroke volume equals the LVOT cross-sectional area multiplied by the VTI, where area is pi times the square of the radius. Cardiac output is stroke volume multiplied by heart rate. **Tamponade** is suggested by a large effusion with right atrial systolic collapse, right ventricular diastolic collapse and a plethoric IVC. Unstable patients need urgent pericardiocentesis or surgical drainage.",
+   "say": "LVOT VTI, the left ventricular outflow tract velocity time integral, estimates stroke volume. Stroke volume equals the LVOT cross-sectional area multiplied by the VTI, where area is pi times the square of the radius. Cardiac output is stroke volume multiplied by heart rate. Tamponade is suggested by a large effusion with right atrial systolic collapse, right ventricular diastolic collapse and a plethoric vena cava. Unstable patients need urgent pericardiocentesis or surgical drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "LVOT area"
+     },
+     {
+      "id": "b",
+      "label": "Stroke volume"
+     },
+     {
+      "id": "c",
+      "label": "Cardiac output"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "x VTI"
+     ],
+     [
+      "b",
+      "c",
+      "x HR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**FAST** and **eFAST** scans look for free fluid in the pericardium, Morison pouch, splenorenal and pelvic spaces, and for pneumothorax. The **diaphragm ultrasound** measures excursion and thickening during breathing to assess respiratory muscle function, useful in weaning. **Ultrasound guided vascular access** reduces cannulation attempts and complications, with real time needle visualisation during insertion into the internal jugular or femoral vein.",
+   "say": "FAST and eFAST scans look for free fluid in the pericardium, Morison pouch, splenorenal and pelvic spaces, and for pneumothorax. Diaphragm ultrasound measures excursion and thickening during breathing to assess respiratory muscle function, which is useful when weaning. Ultrasound guided vascular access reduces cannulation attempts and complications through real time needle visualisation during insertion into the internal jugular or femoral vein.",
+   "vis": null
+  },
+  {
+   "tx": "Point of care echo also detects **RV dilatation** with septal flattening, which suggests acute pulmonary embolism or pressure overload, while a flattened septum in both systole and diastole points to combined loading. **B lines** and **E/e'** above 14 suggest raised left atrial pressure, relevant before weaning from ventilation. Findings are always interpreted alongside the clinical picture, since normal echo does not exclude embolism.",
+   "say": "Point of care echo also detects right ventricular dilatation with septal flattening, which suggests acute pulmonary embolism or pressure overload, while a flattened septum in both systole and diastole points to combined loading. B lines and an E over e prime ratio above 14 suggest raised left atrial pressure, which is relevant before weaning from ventilation. Findings are always interpreted alongside the clinical picture, since a normal echo does not exclude embolism.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e31ad8259fe2",
+  "q_47a113f68aa7",
+  "q_5dba94c83ad9"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 74
+ }
+}

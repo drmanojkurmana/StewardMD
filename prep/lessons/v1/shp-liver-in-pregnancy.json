@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "shp-liver-in-pregnancy",
+ "subject": "ss-hepatology",
+ "title": "Liver disease in pregnancy: key syndromes for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Intrahepatic cholestasis of pregnancy (ICP)** presents in the third trimester with intense itch, often on the palms and soles, and no primary rash. The diagnostic hallmark is raised fasting serum **bile acids**. A total bile acid level of 100 micromol/L or more is linked with the highest risk of fetal death, so it guides timing of delivery. Recurrence is common in later pregnancies. Genetic variants such as ABCB4 justify counselling.",
+   "say": "Intrahepatic cholestasis of pregnancy presents in the third trimester with intense itch, often on the palms and soles, and no primary rash. The diagnostic hallmark is raised fasting serum bile acids. A total bile acid level of 100 micromol per litre or more is linked with the highest risk of fetal death, so it guides timing of delivery. Recurrence is common in later pregnancies. Genetic variants such as ABCB4 justify counselling.",
+   "vis": null
+  },
+  {
+   "tx": "Hormones such as estrogen and progesterone are thought to impair bile acid transport, especially in genetically susceptible women. **Ursodeoxycholic acid (UDCA)** is the first-line drug at 10 to 15 mg/kg/day. It relieves maternal itch and lowers bile acids, but it has not been shown to improve perinatal outcomes. Serial bile acid testing is useful if symptoms persist despite a normal early result.",
+   "say": "Hormones such as estrogen and progesterone are thought to impair bile acid transport, especially in genetically susceptible women. Ursodeoxycholic acid is the first-line drug at 10 to 15 mg per kg per day. It relieves maternal itch and lowers bile acids, but it has not been shown to improve perinatal outcomes. Serial bile acid testing is useful if symptoms persist despite a normal early result.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Third trimester itch"
+     },
+     {
+      "id": "b",
+      "label": "Raised fasting bile acids"
+     },
+     {
+      "id": "c",
+      "label": "Start UDCA 10-15 mg/kg/day"
+     },
+     {
+      "id": "d",
+      "label": "Plan delivery by bile acid level and gestation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HELLP syndrome** is haemolysis, elevated liver enzymes and low platelets, usually in late pregnancy and often with preeclampsia. **Acute fatty liver of pregnancy (AFLP)** is a rarer, life-threatening microvesicular steatosis, usually in the third trimester. The Swansea criteria require six of fourteen features, including vomiting, abdominal pain, polyuria, encephalopathy, raised bilirubin, hypoglycaemia and coagulopathy. Prompt delivery is the definitive treatment once the mother is stabilised.",
+   "say": "HELLP syndrome is haemolysis, elevated liver enzymes and low platelets, usually in late pregnancy and often with preeclampsia. Acute fatty liver of pregnancy is a rarer, life-threatening microvesicular steatosis, usually in the third trimester. The Swansea criteria require six of fourteen features, including vomiting, abdominal pain, polyuria, encephalopathy, raised bilirubin, hypoglycaemia and coagulopathy. Prompt delivery is the definitive treatment once the mother is stabilised.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "HELLP",
+     "AFLP"
+    ],
+    "rows": [
+     [
+      "Main picture",
+      "Haemolysis, raised enzymes, low platelets",
+      "Liver failure with fat in hepatocytes"
+     ],
+     [
+      "Usual timing",
+      "Late pregnancy, often with preeclampsia",
+      "Third trimester"
+     ],
+     [
+      "Key treatment",
+      "Delivery once stabilised",
+      "Prompt delivery once stabilised"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infants of mothers with **acute fatty liver of pregnancy** may carry an inherited defect in **long-chain 3-hydroxyacyl-CoA dehydrogenase (LCHAD)** deficiency, a fatty acid oxidation disorder. The newborn should be screened and monitored for **hypoglycaemia**. In **hepatitis E**, pregnant women face high mortality, particularly in the third trimester, so close monitoring is essential. In **hepatitis B**, antiviral therapy may be considered in late pregnancy to reduce transmission, alongside infant vaccination.",
+   "say": "Infants of mothers with acute fatty liver of pregnancy may carry an inherited defect called long-chain 3-hydroxyacyl-CoA dehydrogenase, or LCHAD, deficiency. This is a fatty acid oxidation disorder. The newborn should be screened and monitored for hypoglycaemia. In hepatitis E, pregnant women face high mortality, particularly in the third trimester, so close monitoring is essential. In hepatitis B, antiviral therapy may be considered in late pregnancy to reduce transmission, alongside infant vaccination.",
+   "vis": null
+  },
+  {
+   "tx": "**Budd-Chiari syndrome** is hepatic venous outflow obstruction and is more likely in pregnancy because of the hypercoagulable state. Presentation includes abdominal pain, ascites and hepatomegaly. Doppler ultrasound is the first test. Anticoagulation is the mainstay, with intervention reserved for specific cases. In India, the NEET-PG and INI-CET exam point is to recognise the triad of pain, ascites and hepatomegaly early.",
+   "say": "Budd-Chiari syndrome is hepatic venous outflow obstruction and is more likely in pregnancy because of the hypercoagulable state. Presentation includes abdominal pain, ascites and hepatomegaly. Doppler ultrasound is the first test. Anticoagulation is the mainstay, with intervention reserved for specific cases. For Indian exams, recognise the triad of pain, ascites and hepatomegaly early.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_6bbf9d22932a",
+  "q_2cd5e1323f44",
+  "q_2e25458acc8e"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham FG et al.)",
+  "NICE guideline on intrahepatic cholestasis of pregnancy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

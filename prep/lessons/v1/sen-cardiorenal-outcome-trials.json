@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "sen-cardiorenal-outcome-trials",
+ "subject": "ss-endocrinology",
+ "title": "Cardiovascular and renal outcome trials in diabetes",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Regulators now expect **cardiovascular safety** evidence before approving any new glucose-lowering drug. Outcome trials check whether an agent lowers **major adverse cardiovascular events**, a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke. Two classes have stood out: **SGLT2 inhibitors** and **GLP-1 receptor agonists**. Both delivered cardiovascular benefit beyond glucose control, so they are favoured in people with established atherosclerotic disease, heart failure or chronic kidney disease.",
+   "say": "Regulators now expect cardiovascular safety evidence before approving any new glucose-lowering drug. Outcome trials check whether an agent lowers major adverse cardiovascular events, a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke. Two classes have stood out: SGLT2 inhibitors and GLP-1 receptor agonists. Both delivered cardiovascular benefit beyond glucose control, so they are favoured in people with established atherosclerotic disease, heart failure or chronic kidney disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Drug class",
+     "Main cardiovascular finding"
+    ],
+    "rows": [
+     [
+      "EMPA-REG OUTCOME",
+      "SGLT2 inhibitor",
+      "Lower cardiovascular death"
+     ],
+     [
+      "CANVAS",
+      "SGLT2 inhibitor",
+      "Fewer major adverse events, signal for amputation"
+     ],
+     [
+      "DECLARE-TIMI 58",
+      "SGLT2 inhibitor",
+      "Reduced heart failure hospitalisation"
+     ],
+     [
+      "LEADER",
+      "GLP-1 agonist",
+      "Lower all-cause and cardiovascular death"
+     ],
+     [
+      "SUSTAIN-6",
+      "GLP-1 agonist",
+      "Fewer non-fatal stroke and infarction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Regulators introduced a **cardiovascular safety mandate**, requiring new glucose-lowering drugs to show they did not add excess cardiovascular risk. Trials built for this purpose were usually designed as **non-inferiority** comparisons against placebo, with **major adverse cardiovascular events** as the primary endpoint. **REWIND** enrolled a broader population, including people without prior cardiovascular disease, and still reported fewer major events with a once-weekly GLP-1 receptor agonist. **SELECT** took a different route, studying semaglutide in people with obesity and established cardiovascular disease but without diabetes.",
+   "say": "Regulators brought in a cardiovascular safety mandate, so new glucose-lowering drugs had to prove they did not add cardiovascular risk. These trials were usually built as non-inferiority comparisons against placebo, with major adverse cardiovascular events as the main endpoint. REWIND recruited a wider group, including people with no earlier heart or vascular disease, and still recorded fewer major events with a once-weekly GLP-1 receptor agonist. SELECT looked at a different question, testing semaglutide in people with obesity and established cardiovascular disease who did not have diabetes.",
+   "vis": null
+  },
+  {
+   "tx": "**FLOW** tested semaglutide in patients with type 2 diabetes and chronic kidney disease, and it reduced major kidney events. **SOUL** tested oral semaglutide and showed fewer major adverse cardiovascular events. Read these trials as extensions of the class effect, not as proof that every agent behaves the same. Newer trial data may change the order of preference, so check the current Indian and international guidance before prescribing.",
+   "say": "FLOW tested semaglutide in patients with type 2 diabetes and chronic kidney disease, and it reduced major kidney events. SOUL tested oral semaglutide and showed fewer major adverse cardiovascular events. Read these trials as extensions of the class effect, not as proof that every agent behaves the same. Newer trial data may change the order of preference, so check the current Indian and international guidance before prescribing.",
+   "vis": null
+  },
+  {
+   "tx": "In practice, an exam answer depends on the scenario. A patient with heart failure or albuminuric kidney disease favours an **SGLT2 inhibitor**. A patient with established atherosclerotic disease favours a **GLP-1 receptor agonist** with proven cardiovascular benefit. Metformin remains a low-cost first-line drug. Avoid choosing a drug only because it lowers HbA1c, because the outcome trials answer a different question about organ protection.",
+   "say": "In practice, an exam answer depends on the scenario. A patient with heart failure or albuminuric kidney disease favours an SGLT2 inhibitor. A patient with established atherosclerotic disease favours a GLP-1 receptor agonist with proven cardiovascular benefit. Metformin remains a low-cost first-line drug. Avoid choosing a drug only because it lowers HbA1c, because the outcome trials answer a different question about organ protection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Type 2 diabetes with CVD or CKD"
+     },
+     {
+      "id": "b",
+      "label": "Heart failure or albuminuric CKD?"
+     },
+     {
+      "id": "c",
+      "label": "SGLT2 inhibitor"
+     },
+     {
+      "id": "d",
+      "label": "Atherosclerotic disease?"
+     },
+     {
+      "id": "e",
+      "label": "GLP-1 receptor agonist"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ],
+     [
+      "d",
+      "e",
+      "Yes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_02c44b48bb3c",
+  "q_04029c955c02",
+  "q_0e79dc3659b0"
+ ],
+ "src": [],
+ "refs": [
+  "American Diabetes Association Standards of Care in Diabetes",
+  "US Food and Drug Administration guidance on cardiovascular safety evaluation of diabetes drugs"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "sid-sot",
+ "subject": "ss-infectious-diseases",
+ "title": "Infections in solid organ transplant recipients",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Cytomegalovirus** is the most important viral infection after transplant. Valganciclovir prophylaxis is commonly given to high-risk recipients, such as a seronegative recipient of a seropositive donor. Alternatively, **pre-emptive** monitoring uses regular quantitative PCR and treats only when viral load crosses a threshold. Myelosuppression is the main limitation of valganciclovir, so blood counts must be followed closely.",
+   "say": "Cytomegalovirus is the most important viral infection after transplant. Valganciclovir prophylaxis is commonly given to high-risk recipients, such as a seronegative recipient of a seropositive donor. Alternatively, pre-emptive monitoring uses regular quantitative PCR and treats only when viral load crosses a threshold. Myelosuppression is the main limitation of valganciclovir, so blood counts must be followed closely.",
+   "vis": null
+  },
+  {
+   "tx": "**BK polyomavirus** causes haemorrhagic cystitis and BK-associated nephropathy, mainly in kidney recipients. Screening urine and plasma PCR helps detect it early. The key management step is reducing immunosuppression, not giving antivirals. Ureteric stenosis and graft loss can follow if the infection is missed. Donor and recipient serostatus both matter for risk.",
+   "say": "BK polyomavirus causes haemorrhagic cystitis and BK-associated nephropathy, mainly in kidney recipients. Screening urine and plasma PCR helps detect it early. The key management step is reducing immunosuppression, not giving antivirals. Ureteric stenosis and graft loss can follow if the infection is missed. Donor and recipient serostatus both matter for risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Urine or plasma PCR positive"
+     },
+     {
+      "id": "b",
+      "label": "Reduce immunosuppression"
+     },
+     {
+      "id": "c",
+      "label": "Repeat PCR monitoring"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy if creatinine rises"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**EBV-related post-transplant lymphoproliferative disorder** arises when T-cell surveillance fails to control EBV-infected B cells. Presentation includes fever, lymphadenopathy and rising EBV DNA load. The first step is reducing immunosuppression. Diagnosis needs tissue biopsy with histopathology, immunophenotyping and clonality testing, not just imaging or blood tests.",
+   "say": "EBV-related post-transplant lymphoproliferative disorder arises when T-cell surveillance fails to control EBV-infected B cells. Presentation includes fever, lymphadenopathy and rising EBV DNA load. The first step is reducing immunosuppression. Diagnosis needs tissue biopsy with histopathology, immunophenotyping and clonality testing, not just imaging or blood tests.",
+   "vis": null
+  },
+  {
+   "tx": "**Strongyloides** screening is essential before transplant in patients from endemic areas, including much of India. Hyperinfection can develop under corticosteroid or other immunosuppressive therapy and carries high mortality. **Serology** is the usual screening tool, and treatment with an appropriate anthelmintic is considered in high-risk patients, guided by local expertise. **Pneumocystis** prophylaxis is given in the early post-transplant period, and the chosen agent also offers some protection against **Nocardia**.",
+   "say": "Strongyloides screening is essential before transplant in patients from endemic areas, including much of India. Hyperinfection can develop under corticosteroid or other immunosuppressive therapy and carries high mortality. Serology is the usual screening tool, and treatment with an appropriate anthelmintic is considered in high-risk patients, guided by local expertise. Pneumocystis prophylaxis is given in the early post-transplant period, and the chosen agent also offers some protection against Nocardia.",
+   "vis": null
+  },
+  {
+   "tx": "**Tacrolimus** inhibits calcineurin, which blocks NFAT from entering the nucleus and so stops IL-2 transcription. Azole antifungals such as voriconazole inhibit CYP3A4 and raise tacrolimus levels, so the dose should be reduced and levels monitored. Phenytoin and rifampicin induce CYP3A4 and lower levels, risking rejection. Always check trough levels after any interacting drug starts or stops.",
+   "say": "Tacrolimus inhibits calcineurin, which blocks NFAT from entering the nucleus and so stops IL-2 transcription. Azole antifungals such as voriconazole inhibit CYP3A4 and raise tacrolimus levels, so the dose should be reduced and levels monitored. Phenytoin and rifampicin induce CYP3A4 and lower levels, risking rejection. Always check trough levels after any interacting drug starts or stops.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inhibitors",
+     "points": [
+      "Voriconazole",
+      "Clarithromycin",
+      "Diltiazem",
+      "Raise tacrolimus levels"
+     ]
+    },
+    "right": {
+     "title": "Inducers",
+     "points": [
+      "Phenytoin",
+      "Rifampicin",
+      "Lower tacrolimus levels",
+      "Risk of rejection"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_1849cc4d7d4b",
+  "q_4cbeff81929e",
+  "q_59e38d2466f8"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for the Care of Kidney Transplant Recipients"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 45
+ }
+}

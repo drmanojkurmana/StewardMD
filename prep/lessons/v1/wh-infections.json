@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "wh-infections",
+ "subject": "womens-health",
+ "title": "Infections in pregnancy: key principles for exam practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Infections in pregnancy can harm the mother and the fetus, so recognising them early matters. **Asymptomatic bacteriuria** is bacteria in urine without symptoms, and it should be treated in pregnancy because it can progress to pyelonephritis and is linked to preterm birth. Treatment is guided by culture sensitivities, and the usual approach is a course of oral antibiotics with a test of cure afterwards.",
+   "say": "Infections in pregnancy can harm both the mother and the fetus, so recognising them early matters. Asymptomatic bacteriuria means bacteria in the urine without symptoms. It should be treated in pregnancy because it can progress to pyelonephritis and is linked to preterm birth. Treatment is guided by culture sensitivities, usually with a course of oral antibiotics followed by a test of cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Main route to fetus",
+     "Key risk"
+    ],
+    "rows": [
+     [
+      "Syphilis",
+      "Transplacental",
+      "Congenital syphilis, stillbirth"
+     ],
+     [
+      "Listeria",
+      "Transplacental after maternal bacteraemia",
+      "Miscarriage, neonatal sepsis"
+     ],
+     [
+      "Parvovirus B19",
+      "Transplacental",
+      "Fetal anaemia, hydrops"
+     ],
+     [
+      "Varicella",
+      "Transplacental",
+      "Congenital varicella syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Syphilis** in pregnancy is diagnosed when treponemal and non-treponemal tests are both reactive. Treponema pallidum crosses the placenta, and the fetus can be infected from about the second trimester. Benzathine benzylpenicillin is the treatment of choice, because it treats the fetus through the placenta. Notify public health and assess the partner.",
+   "say": "Syphilis in pregnancy is diagnosed when treponemal and non-treponemal tests are both reactive. Treponema pallidum crosses the placenta and can infect the fetus from about the second trimester. Benzathine benzylpenicillin is the treatment of choice because it treats the fetus through the placenta. Public health should be notified and the partner assessed.",
+   "vis": null
+  },
+  {
+   "tx": "**Parvovirus B19** infects erythroid progenitor cells and suppresses fetal red cell production. Severe fetal anaemia causes high-output cardiac failure, hydrops and, if untreated, fetal death. A positive maternal IgM with fetal hydrops needs urgent fetal medicine referral for Doppler assessment of the middle cerebral artery, with cordocentesis or intrauterine transfusion if anaemia is confirmed.",
+   "say": "Parvovirus B19 infects erythroid progenitor cells and suppresses fetal red cell production. Severe fetal anaemia causes high-output cardiac failure, hydrops and, if untreated, fetal death. A positive maternal IgM with fetal hydrops needs urgent fetal medicine referral for Doppler assessment of the middle cerebral artery, with cordocentesis or intrauterine transfusion if anaemia is confirmed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Maternal parvovirus IgM positive"
+     },
+     {
+      "id": "b",
+      "label": "Fetal hydrops on scan"
+     },
+     {
+      "id": "c",
+      "label": "Fetal medicine referral"
+     },
+     {
+      "id": "d",
+      "label": "MCA Doppler assessment"
+     },
+     {
+      "id": "e",
+      "label": "Intrauterine transfusion if anaemic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Listeria monocytogenes** causes maternal bacteraemia with fever and myalgia, often after eating soft cheese or chilled ready meals. The organism is intracellular and crosses the placenta, so it can lead to miscarriage, stillbirth, preterm birth or neonatal sepsis. Suspected infection needs urgent blood cultures and prompt intravenous antibiotics chosen with local microbiology and obstetric guidance.",
+   "say": "Listeria monocytogenes causes maternal bacteraemia with fever and myalgia, often after eating soft cheese or chilled ready meals. The organism is intracellular and crosses the placenta, so it can lead to miscarriage, stillbirth, preterm birth or neonatal sepsis. Suspected infection needs urgent blood cultures and prompt intravenous antibiotics chosen with local microbiology and obstetric guidance.",
+   "vis": null
+  },
+  {
+   "tx": "**Varicella** exposure in a non-immune pregnant woman needs urgent action, because the incubation window is time-limited. **Varicella zoster immunoglobulin** given soon after exposure can reduce severity and lower the risk of congenital varicella syndrome. Live vaccine is contraindicated in pregnancy, and the vaccine can be given after delivery if she remains non-immune.",
+   "say": "Varicella exposure in a non-immune pregnant woman needs urgent action because the incubation window is time-limited. Varicella zoster immunoglobulin given soon after exposure can reduce severity and lower the risk of congenital varicella syndrome. Live vaccine is contraindicated in pregnancy and can be given after delivery if she remains non-immune.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pregnant, non-immune, exposed",
+     "points": [
+      "Give immunoglobulin urgently",
+      "Do not give live vaccine",
+      "Monitor for varicella"
+     ]
+    },
+    "right": {
+     "title": "Postnatal, non-immune",
+     "points": [
+      "Live vaccine can be offered",
+      "Avoid pregnancy after vaccination",
+      "Check varicella status"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hepatitis B** in pregnancy needs a newborn plan regardless of maternal health or partner vaccination. Perinatal transmission occurs mainly at birth, so the infant needs hepatitis B immunoglobulin plus the vaccine series, usually within 24 hours. Together they give passive and active protection and prevent chronic infection.",
+   "say": "Hepatitis B in pregnancy needs a newborn plan regardless of maternal health or partner vaccination. Perinatal transmission occurs mainly at birth, so the infant needs hepatitis B immunoglobulin plus the vaccine series, usually within 24 hours. Together they give passive and active protection and prevent chronic infection.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on antenatal care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

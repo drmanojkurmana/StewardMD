@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "sne-eeg",
+ "subject": "ss-neurology",
+ "title": "EEG Patterns in Encephalopathy and Epilepsy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Electroencephalography records **cortical electrical activity** through scalp electrodes. The normal awake adult shows a **posterior dominant alpha rhythm**, best seen with eyes closed and attenuating on eye opening. **Beta** activity is faster and appears with active thinking, whereas **theta** and **delta** are slower and normally dominate drowsiness, young children and deep sleep. Recognising this normal background comes first, before calling any abnormality.",
+   "say": "Electroencephalography records cortical electrical activity through scalp electrodes. The normal awake adult shows a posterior dominant alpha rhythm, best seen with eyes closed and attenuating on eye opening. Beta activity is faster and appears with active thinking, whereas theta and delta are slower and normally dominate drowsiness, young children and deep sleep. Recognising this normal background comes first, before calling any abnormality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rhythm",
+     "Relative speed",
+     "Typical state"
+    ],
+    "rows": [
+     [
+      "Alpha",
+      "Mid-range, posterior",
+      "Awake, eyes closed"
+     ],
+     [
+      "Beta",
+      "Faster than alpha",
+      "Active thinking"
+     ],
+     [
+      "Theta",
+      "Slower than alpha",
+      "Drowsiness, young children"
+     ],
+     [
+      "Delta",
+      "Slowest band",
+      "Deep sleep, pathology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**3 Hz spike and wave** discharges are the hallmark of **absence seizures** in children. They appear as generalised, synchronous, symmetrical bursts with a regular frequency close to 3 per second, usually triggered by hyperventilation. Clinically the child stares and pauses briefly, with rapid return to normal afterwards.",
+   "say": "Three hertz spike and wave discharges are the hallmark of absence seizures in children. They appear as generalised, synchronous, symmetrical bursts with a regular frequency close to three per second, usually triggered by hyperventilation. Clinically the child stares and pauses briefly, with rapid return to normal afterwards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hyperventilation"
+     },
+     {
+      "id": "b",
+      "label": "3 Hz spike wave"
+     },
+     {
+      "id": "c",
+      "label": "Brief staring pause"
+     },
+     {
+      "id": "d",
+      "label": "Rapid recovery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypsarrhythmia** is a chaotic, high-amplitude, disorganised background with multifocal spikes, typical of **infantile spasms** (West syndrome). **Burst suppression** shows alternating high-voltage bursts and flat periods, seen in deep anaesthesia, hypoxic injury and severe encephalopathy. Both carry a poor prognosis when persistent.",
+   "say": "Hypsarrhythmia is a chaotic, high-amplitude, disorganised background with multifocal spikes, typical of infantile spasms, also called West syndrome. Burst suppression shows alternating high-voltage bursts and flat periods, seen in deep anaesthesia, hypoxic injury and severe encephalopathy. Both carry a poor prognosis when persistent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypsarrhythmia",
+     "points": [
+      "Chaotic high amplitude",
+      "Multifocal spikes",
+      "Infantile spasms"
+     ]
+    },
+    "right": {
+     "title": "Burst suppression",
+     "points": [
+      "Alternating bursts and flat periods",
+      "Deep anaesthesia or hypoxia",
+      "Poor prognosis if persistent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Periodic lateralised epileptiform discharges** (PLEDs) and **generalised periodic discharges** (GPDs) are repeating complexes seen in acute brain injury and encephalopathy. They may reflect ongoing subclinical seizures, so **video EEG monitoring** is used to detect non-convulsive status. **Centrotemporal spikes** in children are benign rolandic discharges and need no treatment.",
+   "say": "Periodic lateralised epileptiform discharges and generalised periodic discharges are repeating complexes seen in acute brain injury and encephalopathy. They may reflect ongoing subclinical seizures, so video EEG monitoring is used to detect non-convulsive status. Centrotemporal spikes in children are benign rolandic discharges and need no treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Photic stimulation** and **hyperventilation** are standard activation procedures during routine EEG. Photic stimulation can provoke photoparoxysmal responses in photosensitive epilepsy. Sleep deprivation is another activator that raises yield. Activation should be done carefully, with monitoring, because it can trigger seizures.",
+   "say": "Photic stimulation and hyperventilation are standard activation procedures during routine EEG. Photic stimulation can provoke photoparoxysmal responses in photosensitive epilepsy. Sleep deprivation is another activator that raises yield. Activation should be done carefully, with monitoring, because it can trigger seizures.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_acaa85fe2e64",
+  "q_717cc866fefd",
+  "q_5aa7e4e61229"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "phy-cardiac-cycle",
+ "subject": "physiology",
+ "title": "Cardiac cycle and cardiac output",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **cardiac cycle** is the sequence of atrial and ventricular events from one heartbeat to the next. At a normal rate of about 72 per minute, one cycle lasts roughly 0.8 seconds. Ventricular systole lasts about 0.3 seconds and ventricular diastole about 0.5 seconds. Atrial systole is only about 0.1 seconds, so most ventricular filling happens passively during diastole. Shorter cycles at high heart rates mainly shorten diastole, which is why very fast rates reduce filling.",
+   "say": "The cardiac cycle is the sequence of atrial and ventricular events from one heartbeat to the next. At a normal rate of about 72 per minute, one cycle lasts roughly 0.8 seconds. Ventricular systole lasts about 0.3 seconds and ventricular diastole about 0.5 seconds. Atrial systole is only about 0.1 seconds, so most ventricular filling happens passively during diastole. Shorter cycles at high heart rates mainly shorten diastole, which is why very fast rates reduce filling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Approximate duration"
+    ],
+    "rows": [
+     [
+      "Cardiac cycle",
+      "0.8 s"
+     ],
+     [
+      "Ventricular systole",
+      "0.3 s"
+     ],
+     [
+      "Ventricular diastole",
+      "0.5 s"
+     ],
+     [
+      "Atrial systole",
+      "0.1 s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ventricular systole** has two parts. **Isovolumetric contraction** raises pressure with all valves shut, so volume stays fixed. Then the **ejection phase** begins once aortic and pulmonary pressures are exceeded and the semilunar valves open. **Isovolumetric relaxation** follows, with both AV and semilunar valves closed and pressure falling without volume change. Then rapid filling, diastasis and atrial kick complete diastole.",
+   "say": "Ventricular systole has two parts. Isovolumetric contraction raises pressure with all valves shut, so volume stays fixed. Then the ejection phase begins once aortic and pulmonary pressures are exceeded and the semilunar valves open. Isovolumetric relaxation follows, with both AV and semilunar valves closed and pressure falling without volume change. Then rapid filling, diastasis and atrial kick complete diastole.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Isovolumetric contraction"
+     },
+     {
+      "id": "b",
+      "label": "Ejection"
+     },
+     {
+      "id": "c",
+      "label": "Isovolumetric relaxation"
+     },
+     {
+      "id": "d",
+      "label": "Rapid filling"
+     },
+     {
+      "id": "e",
+      "label": "Diastasis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **first heart sound (S1)** marks the start of ventricular systole, when the mitral and tricuspid valves close. The **second heart sound (S2)** marks the end of systole, when the aortic and pulmonary valves close. S1 is longer and lower pitched, with duration about 0.1 to 0.17 seconds. S2 is shorter and higher pitched, about 0.1 to 0.14 seconds. A physiological third sound comes from rapid filling in young people, and a fourth sound signals a stiff ventricle.",
+   "say": "The first heart sound marks the start of ventricular systole, when the mitral and tricuspid valves close. The second heart sound marks the end of systole, when the aortic and pulmonary valves close. S1 is longer and lower pitched, lasting about 0.1 to 0.17 seconds. S2 is shorter and higher pitched, lasting about 0.1 to 0.14 seconds. A physiological third sound comes from rapid filling in young people, and a fourth sound signals a stiff ventricle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "S1",
+     "points": [
+      "AV valves close",
+      "Start of systole",
+      "Lower pitch, longer",
+      "About 0.1 to 0.17 s"
+     ]
+    },
+    "right": {
+     "title": "S2",
+     "points": [
+      "Semilunar valves close",
+      "End of systole",
+      "Higher pitch, shorter",
+      "About 0.1 to 0.14 s"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stroke volume** is the blood ejected per beat, found by subtracting the **end-systolic volume** from the **end-diastolic volume**. **Ejection fraction** expresses that stroke volume as a proportion of end-diastolic volume, and a reduced value flags impaired systolic function. **Cardiac output** is stroke volume multiplied by heart rate. The **Frank-Starling law** describes how greater myocardial stretch before contraction produces a stronger beat, though only up to a physiological limit.",
+   "say": "Stroke volume is the blood ejected per beat, found by taking the end-systolic volume away from the end-diastolic volume. Ejection fraction expresses that stroke volume as a share of the end-diastolic volume, and a low value points to weakened systolic function. Cardiac output is stroke volume multiplied by heart rate. The Frank-Starling law describes how greater stretch of the heart muscle before contraction produces a stronger beat, though only up to a physiological limit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant",
+     "Raised by",
+     "Lowered by"
+    ],
+    "rows": [
+     [
+      "Preload",
+      "Venous return, venoconstriction",
+      "Standing, haemorrhage"
+     ],
+     [
+      "Afterload",
+      "Hypertension, aortic stenosis",
+      "Vasodilators, exercise"
+     ],
+     [
+      "Contractility",
+      "Sympathetic drive, catecholamines",
+      "Acidosis, heart failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fick principle** estimates cardiac output as oxygen consumption divided by the arteriovenous oxygen difference. Cardiac output equals oxygen consumption divided by arterial minus mixed venous oxygen content. **Cardiac index** is cardiac output divided by body surface area, normally about 3 litres per minute per square metre. Myocardial oxygen demand rises with heart rate and systemic pressure, and the heart extracts about 75 to 80 percent of delivered oxygen even at rest.",
+   "say": "Fick principle estimates cardiac output as oxygen consumption divided by the arteriovenous oxygen difference. Cardiac index is cardiac output divided by body surface area, normally about 3 litres per minute per square metre. Myocardial oxygen demand rises with heart rate and systemic pressure, and the heart extracts about 75 to 80 percent of delivered oxygen even at rest.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0b5588f1-4753-4f92-8ef0-c8f222a3fbcc",
+  "062648c4-2ebd-4411-8174-7d50dfdc8685",
+  "07487aa9-73be-41e4-ad75-86876c19a101"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology",
+  "Textbook of Medical Physiology (Ahuja Publishing House)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 230
+ }
+}

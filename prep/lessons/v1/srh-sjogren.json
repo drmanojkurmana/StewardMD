@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "srh-sjogren",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Sjogren disease: sicca, antibodies, glandular biopsy and lymphoma surveillance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Sjogren disease is a chronic autoimmune exocrinopathy in which lymphocytes infiltrate lacrimal and salivary glands. It presents with **keratoconjunctivitis sicca** (dry eyes) and **xerostomia** (dry mouth). Systemic features include fatigue, arthralgia, Raynaud phenomenon, parotid swelling and cutaneous vasculitis. Most patients have a slow, benign course, but lymphoma is the key threat.",
+   "say": "Sjogren disease is a chronic autoimmune condition in which lymphocytes infiltrate the lacrimal and salivary glands. It presents with keratoconjunctivitis sicca, meaning dry eyes, and xerostomia, meaning dry mouth. Systemic features include fatigue, arthralgia, Raynaud phenomenon, parotid swelling and cutaneous vasculitis. Most patients have a slow, benign course, but lymphoma is the key threat.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnosis rests on objective sicca plus supportive serology. Anti-Ro/SSA and anti-La/SSB antibodies are characteristic, alongside a positive **ANA** and **rheumatoid factor**. Schirmer test of 5 mm or less in 5 minutes supports diagnosis, and unstimulated whole saliva flow of 0.1 mL per minute or less scores. **Labial minor salivary gland biopsy** with focus score 1 or more per 4 mm squared is the most specific test.",
+   "say": "Diagnosis rests on objective sicca plus supportive serology. Anti-Ro SSA and anti-La SSB antibodies are characteristic, alongside a positive ANA and rheumatoid factor. A Schirmer test of 5 millimetres or less in 5 minutes supports the diagnosis, and unstimulated whole saliva flow of 0.1 millilitres per minute or less scores. Labial minor salivary gland biopsy with a focus score of 1 or more per 4 millimetres squared is the most specific test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Positive threshold",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Schirmer I",
+      "5 mm or less in 5 min",
+      "Tear flow"
+     ],
+     [
+      "Unstimulated saliva",
+      "0.1 mL/min or less",
+      "Salivary hypofunction"
+     ],
+     [
+      "Ocular staining",
+      "Score 5 or more",
+      "Van Bijsterveld 4 or more"
+     ],
+     [
+      "Labial biopsy",
+      "Focus score 1 or more",
+      "Per 4 mm squared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lymphoma risk is the dominant long-term hazard. Sjogren carries the highest lymphoma risk of any autoimmune disease, mostly extranodal **MALT lymphoma**. Red flags include persistent unilateral parotid enlargement, a lymph node mass above 7 cm, new cytopenias, low C4, cryoglobulins and palpable purpura. Such features demand urgent investigation, not assumption of flare.",
+   "say": "Lymphoma risk is the dominant long-term hazard. Sjogren carries the highest lymphoma risk of any autoimmune disease, mostly extranodal MALT lymphoma. Red flags include persistent unilateral parotid enlargement, a lymph node mass above 7 centimetres, new cytopenias, low C4, cryoglobulins and palpable purpura. Such features demand urgent investigation rather than assumption of a flare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Persistent parotid swelling"
+     },
+     {
+      "id": "b",
+      "label": "Lymph node above 7 cm or cytopenias"
+     },
+     {
+      "id": "c",
+      "label": "Urgent workup for B-cell lymphoma"
+     },
+     {
+      "id": "d",
+      "label": "Biopsy and staging"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal and pregnancy issues matter. Interstitial nephritis may be silent, presenting only with **distal renal tubular acidosis**, which can progress to nephrocalcinosis if untreated. In pregnancy, anti-Ro antibodies risk neonatal lupus and **congenital heart block**, so fetal surveillance is needed. Consider HIV or HCV sicca, sarcoidosis and IgG4-related disease as mimics.",
+   "say": "Renal and pregnancy issues matter. Interstitial nephritis may be silent, presenting only with distal renal tubular acidosis, which can progress to nephrocalcinosis if untreated. In pregnancy, anti-Ro antibodies carry a risk of neonatal lupus and congenital heart block, so fetal surveillance is needed. Consider HIV or HCV sicca, sarcoidosis and IgG4-related disease as mimics.",
+   "vis": null
+  },
+  {
+   "tx": "Management is symptomatic and multidisciplinary. Treat dry eyes with artificial tears, topical **ciclosporin** or lifitegrast, and punctal occlusion, trying plugs before cautery. Treat dry mouth with saliva substitutes and secretagogues such as **pilocarpine** or cevimeline. Hydroxychloroquine helps arthralgia and fatigue. Refractory systemic disease with vasculitis may need rituximab.",
+   "say": "Management is symptomatic and multidisciplinary. Treat dry eyes with artificial tears, topical ciclosporin or lifitegrast, and punctal occlusion, trying plugs before cautery. Treat dry mouth with saliva substitutes and secretagogues such as pilocarpine or cevimeline. Hydroxychloroquine helps arthralgia and fatigue. Refractory systemic disease with vasculitis may need rituximab.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_94804cfbdb68",
+  "q_e43b0254873f",
+  "q_3f9421e35a1a"
+ ],
+ "src": [
+  "kb-reference-sjogren-syndrome",
+  "kb-reference-sj-gren-s-disease",
+  "kb-reference-neuronal-ceroid-lipofuscinosis-cln3"
+ ],
+ "refs": [
+  "2016 ACR-EULAR classification criteria for Sjogren syndrome"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 2480,
+  "itemN": 28
+ }
+}

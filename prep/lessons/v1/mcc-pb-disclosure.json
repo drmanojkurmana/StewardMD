@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "mcc-pb-disclosure",
+ "subject": "mcc-professional-behaviours",
+ "title": "Error disclosure and CMPA",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Open disclosure means telling a patient promptly and honestly what went wrong, what its effects are, and what will happen next, together with a sincere **apology**. It applies to harm from errors and to adverse events, whether or not a complaint has been made. The duty is continuing: the patient should be kept informed as the facts emerge.",
+   "say": "Open disclosure means telling a patient promptly and honestly what went wrong, what its effects are, and what will happen next, together with a sincere apology. It applies to harm from errors and to adverse events, whether or not a complaint has been made. The duty is continuing, so the patient should be kept informed as the facts emerge.",
+   "vis": null
+  },
+  {
+   "tx": "Disclosure is owed to the patient if they have capacity. If a patient lacks **capacity**, information goes to the legally authorised substitute decision-maker, who acts in the patient's best interests and known wishes. Patients may choose support people, and cultural safety means respecting their own definition of family and community. Explain in plain language.",
+   "say": "Disclosure is owed to the patient if they have capacity. If a patient lacks capacity, information goes to the legally authorised substitute decision-maker, who acts in the patient's best interests and known wishes. Patients may choose support people, and cultural safety means respecting their own definition of family and community. Explain in plain language.",
+   "vis": null
+  },
+  {
+   "tx": "The medical record is a legal and clinical document. Corrections must be made by a **dated late entry** that labels the change, so the original and correction both remain visible. Never erase, delete or rewrite an original entry. Record facts objectively: what was done, what was found and what was disclosed, without blame or speculation about cause.",
+   "say": "The medical record is a legal and clinical document. Corrections must be made by a dated late entry that labels the change, so the original and correction both remain visible. Never erase, delete or rewrite an original entry. Record facts objectively: what was done, what was found and what was disclosed, without blame or speculation about cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do",
+     "points": [
+      "Add dated late entry",
+      "Label the correction",
+      "Record facts objectively"
+     ]
+    },
+    "right": {
+     "title": "Do not",
+     "points": [
+      "Erase or rewrite original",
+      "Delete from chart",
+      "Assign blame or speculate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "System errors such as **transcription errors** are latent failures. Report them through the internal incident system so that process changes can prevent recurrence. Individual blame is not the goal. Correct the record through documented processes, and never silently change or delete an entry without informing the appropriate people.",
+   "say": "System errors such as transcription errors are latent failures. Report them through the internal incident system so that process changes can prevent recurrence. Individual blame is not the goal. Correct the record through documented processes, and never silently change or delete an entry without informing the appropriate people.",
+   "vis": null
+  },
+  {
+   "tx": "Honest communication after a medication mishap is central to **open disclosure**. When a dosing slip, such as an excessive **enoxaparin** dose, produces harm, the clinician should inform the patient and family without delay, even before the root-cause review concludes. Only verified facts should be shared at first, and updates follow as the investigation proceeds. Documentation of every conversation is essential.",
+   "say": "Honest communication after a medication mishap is central to open disclosure. When a dosing slip, such as an excessive enoxaparin dose, produces harm, the clinician should inform the patient and family without delay, even before the root-cause review concludes. Only verified facts should be shared at first, and updates follow as the investigation proceeds. Documentation of every conversation is essential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Harm identified"
+     },
+     {
+      "id": "n2",
+      "label": "Confirm verified facts"
+     },
+     {
+      "id": "n3",
+      "label": "Inform patient and family promptly"
+     },
+     {
+      "id": "n4",
+      "label": "Continue root-cause review"
+     },
+     {
+      "id": "n5",
+      "label": "Share updates as review progresses"
+     },
+     {
+      "id": "n6",
+      "label": "Document every conversation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ],
+     [
+      "n5",
+      "n6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disclosure should not wait for a complaint, a legal claim or the completion of a full review. Once harm from an error is recognised, the patient is entitled to clear information and an apology, and the **duty of candour** applies. Support for the clinician, such as peer contact and wellbeing services, runs alongside accountability rather than replacing it. Documenting the conversation accurately protects both patient and clinician.",
+   "say": "Telling the patient should not be delayed until a complaint arrives, a legal claim is lodged, or a full review is finished. As soon as harm from an error is recognised, the patient is owed clear information and an apology, and the duty of candour applies. Clinicians also need support, such as peer contact and wellbeing services, but that support sits alongside accountability and does not replace it. Recording the conversation accurately protects both the patient and the clinician.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

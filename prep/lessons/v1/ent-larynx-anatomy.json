@@ -1,0 +1,101 @@
+{
+ "v": 1,
+ "module": "ent-larynx-anatomy",
+ "subject": "ent",
+ "title": "Anatomy and physiology of the larynx",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Every intrinsic laryngeal muscle is supplied by the **recurrent laryngeal nerve** except the cricothyroid, which gets its motor supply from the external branch of the **superior laryngeal nerve**. Sensation above the vocal folds comes from the internal branch of the superior laryngeal nerve, while sensation below the vocal folds comes from the recurrent laryngeal nerve. Galen's anastomosis is a purely sensory link between the two nerves.",
+   "say": "Every intrinsic laryngeal muscle is supplied by the recurrent laryngeal nerve except the cricothyroid, which is supplied by the external branch of the superior laryngeal nerve. Sensation above the vocal folds comes from the internal branch of the superior laryngeal nerve, and below them from the recurrent laryngeal nerve. Galen's anastomosis is purely sensory.",
+   "vis": null
+  },
+  {
+   "tx": "The **posterior cricoarytenoid** is the only abductor of the vocal folds, widening the rima glottidis. The lateral cricoarytenoid, interarytenoid and thyroarytenoid adduct the folds. The cricothyroid is the tensor, stretching the vocal ligament by tipping the thyroid forward. The vocalis, the internal part of thyroarytenoid, also tenses the cord. The thyroarytenoid relaxes the cord.",
+   "say": "The posterior cricoarytenoid is the only abductor of the vocal folds, widening the glottis. The lateral cricoarytenoid, interarytenoid and thyroarytenoid adduct the folds. The cricothyroid is the main tensor, stretching the vocal ligament, and the vocalis also tenses the cord.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action",
+     "Muscle",
+     "Nerve"
+    ],
+    "rows": [
+     [
+      "Abduction",
+      "Posterior cricoarytenoid",
+      "Recurrent laryngeal"
+     ],
+     [
+      "Adduction",
+      "Lateral cricoarytenoid, interarytenoid, thyroarytenoid",
+      "Recurrent laryngeal"
+     ],
+     [
+      "Tension",
+      "Cricothyroid, vocalis",
+      "Superior laryngeal (external branch) for cricothyroid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phonation follows the **myoelastic theory**: the vocal folds are brought together, and expiratory air pushed through the rima glottidis sets the vocal ligaments vibrating. Pitch rises with greater vocal fold tension and length, mainly through the cricothyroid. The vocal folds are pale because the mucosa is thin, poorly vascularised and lacks submucosa and lymphatics. The **Reinke space** is the potential subepithelial space over the vocal ligament; its oedema causes Reinke oedema.",
+   "say": "Phonation follows the myoelastic theory. The vocal folds are brought together and expiratory air pushed through the glottis makes the ligaments vibrate. Pitch rises with tension, mainly from the cricothyroid. The vocal folds look pale because their blood supply is poor. Reinke space is the subepithelial space over the vocal ligament, and its oedema causes Reinke oedema.",
+   "vis": null
+  },
+  {
+   "tx": "In adults the **glottis** is the narrowest part of the airway, whereas in children the **subglottis** is narrowest because the cricoid is small. The infant larynx lies high, at C2 to C4, so the epiglottis meets the soft palate during suckling and allows nasal breathing while milk passes over the sides. The infant epiglottis is omega shaped, soft and patulous.",
+   "say": "In adults the glottis is the narrowest part of the airway, but in children the subglottis is narrowest because the cricoid is small. The infant larynx sits high, so the epiglottis meets the soft palate during suckling and allows breathing while feeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult larynx",
+     "points": [
+      "Glottis narrowest",
+      "Larynx lower, around C3 to C6",
+      "Larger in males"
+     ]
+    },
+    "right": {
+     "title": "Infant larynx",
+     "points": [
+      "Subglottis narrowest",
+      "Larynx high, around C2 to C4",
+      "Epiglottis omega shaped"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **laryngocele** is an air-filled dilatation of the laryngeal saccule, which opens from the ventricle. It is internal if confined within the thyroid cartilage and external if it herniates through the **thyrohyoid membrane** as a neck swelling that enlarges on coughing or Valsalva. Raised transglottic pressure, as in trumpet players, is a cause. Small lesions are treated by laryngoscopic decompression, and larger ones by excision.",
+   "say": "A laryngocele is an air-filled dilatation of the laryngeal saccule. It is internal if confined within the thyroid cartilage and external if it herniates through the thyrohyoid membrane as a neck swelling that enlarges on coughing or Valsalva. Small lesions are decompressed endoscopically, and larger ones excised.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2f7a7175-b99e-499b-9d1b-b007768c5e69",
+  "2fcc95e5-d91f-4d3b-97a5-1f7b222c4727",
+  "8015f6a1-62e4-4900-86bd-5991560db4d2"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra PL, Dhingra S. Diseases of Ear, Nose and Throat and Head and Neck Surgery (Dhingra)",
+  "Chaurasia BD. Human Anatomy, Regional and Applied Dissection and Clinical, Vol 3 (Chaurasia)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 139
+ }
+}

@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "wh-menstrual",
+ "subject": "womens-health",
+ "title": "Menstrual Disorders and Pelvic Pain: Core Principles for Exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Amenorrhea** is absence of menses. It is **primary** if bleeding has never occurred, and **secondary** when established cycles stop for 3 to 6 months. Primary amenorrhea is rare, under 1% of women. Pregnancy is the commonest cause of amenorrhea and must be excluded with a **beta-hCG** in every case, whatever the history offered.",
+   "say": "Amenorrhea is the absence of menses. It is primary if bleeding has never occurred, and secondary when established cycles stop for three to six months. Primary amenorrhea is rare, under one percent of women. Pregnancy is the commonest cause of amenorrhea and must be excluded with a beta hCG in every case, whatever the history offered.",
+   "vis": null
+  },
+  {
+   "tx": "A normal cycle recurs every 21 to 35 days, lasts 4 to 7 days, and loses up to about 80 mL of blood. **Abnormal uterine bleeding** (AUB) has replaced the older term dysfunctional uterine bleeding. The PALM-COEIN scheme sorts causes into structural and non-structural groups, so every heavy or irregular bleed is classified against it.",
+   "say": "A normal cycle recurs every 21 to 35 days, lasts 4 to 7 days, and loses up to about 80 mL of blood. Abnormal uterine bleeding has replaced the older term dysfunctional uterine bleeding. The PALM-COEIN scheme sorts causes into structural and non-structural groups, so every heavy or irregular bleed is classified against it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Structural (PALM)",
+      "Polyp, adenomyosis, leiomyoma, malignancy or hyperplasia"
+     ],
+     [
+      "Non-structural (COEIN)",
+      "Coagulopathy, ovulatory dysfunction, endometrial, iatrogenic, not yet classified"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Work-up of **ovulatory disorders** begins with three basic checks: a **pregnancy test**, a **serum FSH** measurement that helps separate an ovarian cause from a **central (hypothalamic or pituitary)** cause, and screening for **androgen excess**. FSH tracks ovarian failure more reliably than LH, since it mirrors lost inhibitory signalling and fluctuates less. **AMH** is typically reduced in **primary ovarian insufficiency** as well.",
+   "say": "Work-up of ovulatory disorders begins with three basic checks. First, a pregnancy test. Second, a serum FSH measurement, which helps separate an ovarian cause from a central, hypothalamic or pituitary, cause. Third, screening for androgen excess. FSH tracks ovarian failure more reliably than LH, since it mirrors lost inhibitory signalling and fluctuates less. AMH is typically reduced in primary ovarian insufficiency as well.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnancy test"
+     },
+     {
+      "id": "b",
+      "label": "Serum FSH level"
+     },
+     {
+      "id": "c",
+      "label": "Androgen screen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Functional hypothalamic amenorrhoea** is a **diagnosis of exclusion**, usually linked to energy expenditure outstripping intake or to marked psychological stress. Typical findings are **suppressed GnRH**, low gonadotropins and normal **prolactin**. Clinicians must actively screen for eating disorders, overtraining and chronic illness. **Primary ovarian insufficiency** (POI) describes ovarian failure arising before 40 years of age and explains roughly one in ten cases of secondary amenorrhoea.",
+   "say": "Functional hypothalamic amenorrhoea is a diagnosis of exclusion. It is usually linked to energy expenditure outstripping intake, or to heavy psychological stress. Hormone levels show suppressed GnRH, low gonadotropins and normal prolactin. Clinicians must actively look for eating disorders, overtraining and chronic illness. Primary ovarian insufficiency describes ovarian failure before the age of 40, and it accounts for roughly one in ten cases of secondary amenorrhoea.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Functional hypothalamic amenorrhoea",
+     "points": [
+      "Diagnosis of exclusion",
+      "Energy deficit or significant stress",
+      "Low gonadotropins with normal prolactin",
+      "Eating disorders and overtraining must be ruled out"
+     ]
+    },
+    "right": {
+     "title": "Primary ovarian insufficiency",
+     "points": [
+      "Ovarian failure before age 40",
+      "Around one in ten cases of secondary amenorrhoea",
+      "Raised FSH and LH from lost feedback",
+      "Can wax and wane, so repeat testing may be needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Up to 60% of **pelvic pain** is gastrointestinal in origin, from appendicitis, diverticulitis or inflammatory bowel disease. In reproductive-age women, pregnancy must be excluded first. **Pelvic inflammatory disease** is often caused by Chlamydia trachomatis or Neisseria gonorrhoeae. **Fitz-Hugh-Curtis syndrome** is perihepatitis complicating PID and presents with right upper quadrant pain.",
+   "say": "Up to 60 percent of pelvic pain is gastrointestinal in origin, from appendicitis, diverticulitis or inflammatory bowel disease. In reproductive-age women, pregnancy must be excluded first. Pelvic inflammatory disease is often caused by Chlamydia trachomatis or Neisseria gonorrhoeae. Fitz Hugh Curtis syndrome is perihepatitis complicating PID and presents with right upper quadrant pain.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-menstrual-disorders-and-pelvic-pain"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 900,
+  "itemN": 4
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "ort-arthritis",
+ "subject": "orthopaedics",
+ "title": "Arthritis and joint replacement: high-yield orthopaedic essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Osteoarthritis** is a degenerative joint disease. It favours weight-bearing joints such as the hip, knee, and spine, plus the distal and proximal interphalangeal joints and the base of the thumb. The **metacarpophalangeal** joints, wrist, elbow, and ankle are usually spared. Pain is the earliest symptom, typically worse after activity and relieved by rest.",
+   "say": "Osteoarthritis is a degenerative joint disease. It favours weight-bearing joints such as the hip, knee, and spine, plus the distal and proximal interphalangeal joints and the base of the thumb. The metacarpophalangeal joints, wrist, elbow, and ankle are usually spared. Pain is the earliest symptom, typically worse after activity and relieved by rest.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Joint",
+     "Status in OA"
+    ],
+    "rows": [
+     [
+      "Hip and knee",
+      "Commonly involved"
+     ],
+     [
+      "DIP and PIP",
+      "Commonly involved"
+     ],
+     [
+      "Base of thumb (first CMC)",
+      "Commonly involved"
+     ],
+     [
+      "Wrist, elbow, MCP, ankle",
+      "Usually spared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Kellgren-Lawrence grading** stages osteoarthritis on radiographs. Grade 0 is normal, grade 1 shows minimal osteophytes with a normal joint space, grade 2 shows definite osteophytes with possible narrowing, grade 3 shows definite narrowing, and grade 4 shows large osteophytes, marked narrowing, sclerosis, and deformity. **Heberden nodes** sit at the DIP joint and **Bouchard nodes** at the PIP joint.",
+   "say": "Kellgren-Lawrence grading stages osteoarthritis on radiographs. Grade 0 is normal, grade 1 shows minimal osteophytes with a normal joint space, grade 2 shows definite osteophytes with possible narrowing, grade 3 shows definite narrowing, and grade 4 shows large osteophytes, marked narrowing, sclerosis, and deformity. Heberden nodes sit at the DIP joint and Bouchard nodes at the PIP joint.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Radiographic picture"
+    ],
+    "rows": [
+     [
+      "0",
+      "Normal"
+     ],
+     [
+      "1",
+      "Minimal osteophytes, normal space"
+     ],
+     [
+      "2",
+      "Definite osteophytes, possible narrowing"
+     ],
+     [
+      "3",
+      "Definite osteophytes and narrowing"
+     ],
+     [
+      "4",
+      "Large osteophytes, sclerosis, deformity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the knee, the **medial compartment** narrows first, producing asymmetrical loss of joint space and a **genu varus** deformity. Surgical planning follows the stage. For severe, symptomatic disease that has failed medical therapy, arthroplasty is preferred. In younger patients with early disease and preserved movement, a **high tibial osteotomy** may be used to shift load away from the damaged compartment.",
+   "say": "In the knee, the medial compartment narrows first, producing asymmetrical loss of joint space and a genu varus deformity. Surgical planning follows the stage. For severe, symptomatic disease that has failed medical therapy, arthroplasty is preferred. In younger patients with early disease and preserved movement, a high tibial osteotomy may be used to shift load away from the damaged compartment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Symptomatic OA failing medical therapy"
+     },
+     {
+      "id": "b",
+      "label": "Early disease, good movement"
+     },
+     {
+      "id": "c",
+      "label": "Total knee arthroplasty"
+     },
+     {
+      "id": "d",
+      "label": "High tibial osteotomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Total hip arthroplasty** is the best option for severe osteoarthritis with functional disability, because it relieves pain and restores daily function. In cemented hip replacement, **aseptic loosening** is the main late problem. Polyethylene wear debris is the most common culprit, since it is produced in the largest numbers, although metal and cement particles can also cause osteolysis.",
+   "say": "Total hip arthroplasty is the best option for severe osteoarthritis with functional disability, because it relieves pain and restores daily function. In cemented hip replacement, aseptic loosening is the main late problem. Polyethylene wear debris is the most common culprit, since it is produced in the largest numbers, although metal and cement particles can also cause osteolysis.",
+   "vis": null
+  },
+  {
+   "tx": "**Rheumatoid arthritis** begins in the **synovium**, causing symmetrical small joint involvement, especially the metacarpophalangeal joints, with the distal interphalangeal joints characteristically spared. Radiographs show juxta-articular osteopenia early, then erosions and joint space narrowing, without the osteophytes seen in osteoarthritis. Classic hand deformities include the swan neck, boutonniere, and ulnar deviation.",
+   "say": "Rheumatoid arthritis begins in the synovium, causing symmetrical small joint involvement, especially the metacarpophalangeal joints, with the distal interphalangeal joints characteristically spared. Radiographs show juxta-articular osteopenia early, then erosions and joint space narrowing, without the osteophytes seen in osteoarthritis. Classic hand deformities include the swan neck, boutonniere, and ulnar deviation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osteoarthritis",
+     "points": [
+      "Degenerative process",
+      "Osteophytes present",
+      "Hips, knees, DIP, PIP",
+      "ESR and CRP usually normal"
+     ]
+    },
+    "right": {
+     "title": "Rheumatoid arthritis",
+     "points": [
+      "Inflammatory synovial process",
+      "Osteophytes absent",
+      "MCP joints, DIP spared",
+      "ESR, CRP and RF raised"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Gout** typically affects the first metatarsophalangeal joint, and **tophi** are its pathognomonic lesion, formed by aggregates of urate crystals surrounded by macrophages and giant cells. **Pseudogout** from **CPPD** crystals usually involves larger joints such as the knee, and shows **chondrocalcinosis** on radiographs. **Ankylosing spondylitis** shows sacroiliitis and a **bamboo spine**, and HLA-B27 is present in over 90 percent of cases but is not specific.",
+   "say": "Gout typically affects the first metatarsophalangeal joint, and tophi are its pathognomonic lesion, formed by aggregates of urate crystals surrounded by macrophages and giant cells. Pseudogout from CPPD crystals usually involves larger joints such as the knee, and shows chondrocalcinosis on radiographs. Ankylosing spondylitis shows sacroiliitis and a bamboo spine, and HLA-B27 is present in over 90 percent of cases but is not specific.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Gout",
+      "First MTP joint, tophi"
+     ],
+     [
+      "Pseudogout",
+      "Knee, chondrocalcinosis, CPPD"
+     ],
+     [
+      "Ankylosing spondylitis",
+      "Sacroiliitis, bamboo spine, HLA-B27"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "3c6c16c2-f8de-4ef5-b6ee-465581ff7719",
+  "9f570a42-ab0c-4469-87c1-c44f4abd6bbd",
+  "1e9a8d96-3093-4d45-a5ad-bc7919c3af55"
+ ],
+ "src": [],
+ "refs": [
+  "Kellgren JH, Lawrence JS. Radiological assessment of osteo-arthrosis. Ann Rheum Dis (1957)",
+  "Modified New York criteria for ankylosing spondylitis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 264
+ }
+}

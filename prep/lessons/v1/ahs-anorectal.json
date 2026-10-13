@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "ahs-anorectal",
+ "subject": "adult-health-surgery",
+ "title": "Anorectal disorders: fissure, haemorrhoids, abscess and fistula",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Anal **fissure** is a tear in the anoderm, most often posterior midline. Classic features are sharp pain on defecation, bright red blood on paper and constipation with hard stools. Chronic fissure is usually present beyond six weeks. Painful spasm of the **internal anal sphincter** reduces blood flow to the ulcer, so it fails to heal. First-line care is fibre, fluid and stool softeners, with sitz baths and avoidance of straining.",
+   "say": "An anal fissure is a tear in the lining of the anal canal, most often in the posterior midline. Classic features are sharp pain on defecation, bright red blood on the paper and constipation with hard stools. A fissure lasting beyond six weeks is called chronic. Spasm of the internal anal sphincter reduces blood flow to the ulcer, so it fails to heal. First-line care is fibre, fluid and stool softeners, with sitz baths and avoidance of straining.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Acute fissure",
+     "Chronic fissure"
+    ],
+    "rows": [
+     [
+      "Duration",
+      "Under six weeks",
+      "Over six weeks"
+     ],
+     [
+      "Appearance",
+      "Clean, superficial tear",
+      "Ulcer with sentinel tag"
+     ],
+     [
+      "Management",
+      "Fibre, fluid, softeners",
+      "Add topical agents or sphincter treatment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **anorectal abscess** presents with pain, swelling, warmth and fever, often with a fluctuant swelling near the anal verge. Diabetes and immunosuppression raise risk. Pus cannot resolve with antibiotics alone, so **incision and drainage** under anaesthesia is the definitive step. Antibiotics are adjuncts only when there is spreading cellulitis, systemic sepsis or diabetes with severe disease.",
+   "say": "An anorectal abscess presents with pain, swelling, warmth and fever, often with a fluctuant swelling near the anal verge. Diabetes and immunosuppression increase the risk. Pus cannot resolve with antibiotics alone, so incision and drainage under anaesthesia is the definitive step. Antibiotics are only an adjunct when there is spreading cellulitis, systemic sepsis or severe disease in a diabetic patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Painful fluctuant swelling"
+     },
+     {
+      "id": "b",
+      "label": "Confirm collection"
+     },
+     {
+      "id": "c",
+      "label": "Incision and drainage"
+     },
+     {
+      "id": "d",
+      "label": "Assess for fistula"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemorrhoids** are enlarged vascular cushions. Internal haemorrhoids are graded by prolapse: grade I does not prolapse, grade II prolapses on straining and reduces spontaneously, and grade III needs manual reduction. Painless bright red bleeding is typical. Grade II disease that fails fibre and fluid is treated with **rubber band ligation**, which causes the cushion to slough and fixes the mucosa.",
+   "say": "Haemorrhoids are enlarged vascular cushions in the anal canal. Internal haemorrhoids are graded by prolapse. Grade one does not prolapse, grade two prolapses on straining and reduces spontaneously, and grade three needs manual reduction. Painless bright red bleeding is typical. Grade two disease that fails fibre and fluid is treated with rubber band ligation, which causes the cushion to slough and fixes the mucosa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Prolapse",
+     "Usual treatment"
+    ],
+    "rows": [
+     [
+      "I",
+      "None",
+      "Fibre, fluid, topical care"
+     ],
+     [
+      "II",
+      "On straining, reduces itself",
+      "Rubber band ligation"
+     ],
+     [
+      "III",
+      "Needs manual reduction",
+      "Ligation or haemorrhoidectomy"
+     ],
+     [
+      "IV",
+      "Permanently prolapsed",
+      "Haemorrhoidectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding from the back passage is not always haemorrhoidal. Adults in middle age or later, or anyone with **iron deficiency anaemia**, should be presumed to have colonic bleeding until shown otherwise. Low haemoglobin, small red cells and low **ferritin** point to chronic blood loss. **Colonoscopy** surveys the entire colon for neoplasia, a major cause. Visible haemorrhoids cannot account for the anaemia.",
+   "say": "Bleeding from the back passage is not always haemorrhoidal. Adults in middle age or later, or anyone with iron deficiency anaemia, should be presumed to have colonic bleeding until shown otherwise. Low haemoglobin, small red cells and low ferritin point to chronic blood loss. Colonoscopy surveys the entire colon for neoplasia, which is a major cause. Visible haemorrhoids cannot account for the anaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemorrhoidal bleeding",
+     "points": [
+      "Painless, bright red",
+      "Occurs on or after straining",
+      "No anaemia expected"
+     ]
+    },
+    "right": {
+     "title": "Iron deficiency anaemia",
+     "points": [
+      "Low haemoglobin and ferritin",
+      "Small red cells",
+      "Needs colonoscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **fistula-in-ano** is an abnormal tract between the anal canal and the perianal skin, usually after an abscess. Crohn disease causes complex fistulas that branch through the sphincter complex. Before treatment, **MRI pelvis with fistula protocol** defines the tract and its relation to the sphincter. Active Crohn disease with low albumin or weight loss needs medical control first.",
+   "say": "A fistula in ano is an abnormal tract between the anal canal and the perianal skin, usually following an abscess. Crohn disease causes complex fistulas that branch through the sphincter complex. Before treatment, MRI pelvis with a fistula protocol defines the tract and its relation to the sphincter. Active Crohn disease with low albumin or weight loss needs medical control first.",
+   "vis": null
+  },
+  {
+   "tx": "Exam synthesis: a **posterior midline fissure** usually responds to conservative care such as stool softeners, bulk and topical agents, so start there. An **anorectal abscess** needs drainage. **Grade II haemorrhoids** are typically treated with band ligation. **Iron deficiency** in this setting warrants colonoscopy. A **Crohn fistula** requires MRI mapping to define its course. If pain blocks examination, plan an examination under anaesthesia.",
+   "say": "For exams, remember this quick summary. A posterior midline fissure usually responds to conservative care such as stool softeners, bulk and topical agents, so start there. An anorectal abscess needs drainage. Grade two haemorrhoids are typically treated with band ligation. Iron deficiency in this setting warrants colonoscopy. A Crohn fistula requires MRI mapping to define its course. If pain blocks examination, plan an examination under anaesthesia.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery (Williams NS, Bulstrode CJK, O'Connell PR, eds)",
+  "NICE Clinical Knowledge Summaries: Haemorrhoids"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

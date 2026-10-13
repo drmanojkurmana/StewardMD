@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mneph-glomerular",
+ "subject": "mrcp-nephrology",
+ "title": "Glomerulonephritis and nephritic syndromes: recognising the pattern",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Nephritic syndrome is a **glomerular inflammation** picture with haematuria, often with red cell casts, hypertension, oedema and a falling glomerular filtration rate. Proteinuria is usually below nephrotic range. Clinically, the key is to recognise that the kidney is inflamed rather than simply leaking protein. Think of it as a presentation that prompts urgent serology and sometimes urgent biopsy.",
+   "say": "Nephritic syndrome is a glomerular inflammation picture. It presents with haematuria, often with red cell casts, hypertension, oedema and a falling glomerular filtration rate. Proteinuria is usually below the nephrotic range. The key clinical point is that the kidney is inflamed rather than simply leaking protein, which prompts urgent serology and sometimes urgent biopsy.",
+   "vis": null
+  },
+  {
+   "tx": "Use the **complement pattern** to narrow the cause. Post-streptococcal disease gives low C3 with normal C4 and recovery within about eight weeks. Membranoproliferative disease and cryoglobulinaemia give low C4. Persistently low C3 with normal C4 suggests **C3 glomerulopathy**, where the alternative pathway is dysregulated. Lupus nephritis gives low C3 and C4 together.",
+   "say": "Use the complement pattern to narrow the cause. Post-streptococcal disease gives low C3 with normal C4, and C3 usually recovers within about eight weeks. Membranoproliferative disease and cryoglobulinaemia give low C4. Persistently low C3 with normal C4 suggests C3 glomerulopathy, where the alternative pathway is dysregulated. Lupus nephritis gives low C3 and C4 together.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "C3",
+     "C4"
+    ],
+    "rows": [
+     [
+      "Post-streptococcal GN",
+      "Low, recovers in about 8 weeks",
+      "Normal"
+     ],
+     [
+      "Cryoglobulinaemic MPGN",
+      "Mildly low",
+      "Low"
+     ],
+     [
+      "C3 glomerulopathy",
+      "Persistently low",
+      "Normal"
+     ],
+     [
+      "Lupus nephritis",
+      "Low",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anti-GBM disease** is a rapidly progressive glomerulonephritis with autoantibodies against the alpha-3 chain of type IV collagen. Linear IgG along the basement membrane on biopsy distinguishes it from immune complex disease. When pulmonary haemorrhage coexists, the term Goodpasture syndrome applies. Treatment is urgent, with **plasma exchange** removing circulating antibody alongside immunosuppression.",
+   "say": "Anti-GBM disease is a rapidly progressive glomerulonephritis with autoantibodies against the alpha-3 chain of type IV collagen. Linear IgG along the basement membrane on biopsy distinguishes it from immune complex disease. When pulmonary haemorrhage coexists, the term Goodpasture syndrome applies. Treatment is urgent, with plasma exchange removing circulating antibody alongside immunosuppression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haemoptysis and rising creatinine"
+     },
+     {
+      "id": "b",
+      "label": "Anti-GBM positive, linear IgG"
+     },
+     {
+      "id": "c",
+      "label": "Urgent plasma exchange"
+     },
+     {
+      "id": "d",
+      "label": "Immunosuppression and dialysis as needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ANCA-associated vasculitis** causes necrotising crescentic glomerulonephritis with few immune deposits, so immunofluorescence is often negative or scanty. Proteinase 3 antibodies give cytoplasmic staining and link to granulomatosis with polyangiitis. Myeloperoxidase antibodies give perinuclear staining. Induction uses glucocorticoids with rituximab or cyclophosphamide, with plasma exchange for severe renal impairment or alveolar haemorrhage.",
+   "say": "ANCA-associated vasculitis causes necrotising crescentic glomerulonephritis with few immune deposits, so immunofluorescence is often negative or scanty. Proteinase 3 antibodies give cytoplasmic staining and link to granulomatosis with polyangiitis. Myeloperoxidase antibodies give perinuclear staining. Induction uses glucocorticoids with rituximab or cyclophosphamide, with plasma exchange for severe renal impairment or alveolar haemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proteinase 3 ANCA",
+     "points": [
+      "Cytoplasmic staining",
+      "Linked to granulomatosis with polyangiitis"
+     ]
+    },
+    "right": {
+     "title": "Myeloperoxidase ANCA",
+     "points": [
+      "Perinuclear staining",
+      "Linked to microscopic polyangiitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Several **nephritic mimics** can look like primary glomerulonephritis. **IgA nephropathy** shows dominant mesangial IgA deposits and frequently appears a few days after an upper airway infection. **Alport syndrome** results from a type IV collagen defect and presents with haematuria, hearing loss and eye changes. **Membranous nephropathy** is more often a nephrotic picture, yet older adults still need malignancy screening.",
+   "say": "Several nephritic mimics can look like primary glomerulonephritis. IgA nephropathy shows dominant mesangial IgA deposits and frequently appears a few days after an upper airway infection. Alport syndrome results from a type IV collagen defect and presents with haematuria, hearing loss and eye changes. Membranous nephropathy is more often a nephrotic picture, yet older adults still need malignancy screening.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for Glomerulonephritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

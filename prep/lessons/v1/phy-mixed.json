@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "phy-mixed",
+ "subject": "physiology",
+ "title": "Mixed practice: physiology rapid review",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **lymphoid organs** are split into central and secondary sites. The thymus is the site where T cells develop, and bone marrow is where B cells mature. Secondary organs, where adaptive immune responses start, include the **spleen** and lymph nodes, so the spleen is the correct answer to the secondary organ question.",
+   "say": "Lymphoid organs are split into central and secondary sites. The thymus is where T cells develop, and bone marrow is where B cells mature. Secondary organs, where adaptive immune responses start, include the spleen and lymph nodes, so the spleen is the correct answer to the secondary organ question.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Thymus",
+      "sub": "T cell development"
+     },
+     {
+      "id": "c2",
+      "label": "Bone marrow",
+      "sub": "B cell maturation"
+     },
+     {
+      "id": "s1",
+      "label": "Lymph nodes"
+     },
+     {
+      "id": "s2",
+      "label": "Spleen"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "s1"
+     ],
+     [
+      "c2",
+      "s2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Kidney biomarkers include **cystatin C**, **NGAL**, **KIM-1** and **IL-18**. NGAL is neutrophil gelatinase associated lipocalin, KIM-1 is kidney injury molecule 1, and IL-18 is interleukin 18. In the question about biomarkers, the odd one out is the one that is not a kidney marker, so identify the option that does not belong.",
+   "say": "Kidney biomarkers include cystatin C, NGAL, KIM-1 and IL-18. NGAL is neutrophil gelatinase associated lipocalin, KIM-1 is kidney injury molecule 1, and IL-18 is interleukin 18. In the biomarker question, the odd one out is the option that does not belong to the kidney marker group.",
+   "vis": null
+  },
+  {
+   "tx": "During the cell cycle, **S phase** is when DNA is replicated, so DNA content doubles here. It lies between G1 and G2. The mitotic phase divides the already duplicated material, and G1 and G2 are gap phases where the cell grows and prepares for the next step.",
+   "say": "During the cell cycle, S phase is when DNA is replicated, so DNA content doubles here. It lies between G1 and G2. The mitotic phase divides the duplicated material, while G1 and G2 are gap phases where the cell grows and prepares for the next step.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "G1",
+      "sub": "Growth"
+     },
+     {
+      "id": "s",
+      "label": "S phase",
+      "sub": "DNA doubles"
+     },
+     {
+      "id": "g2",
+      "label": "G2",
+      "sub": "Preparation"
+     },
+     {
+      "id": "m",
+      "label": "M phase",
+      "sub": "Division"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "s"
+     ],
+     [
+      "s",
+      "g2"
+     ],
+     [
+      "g2",
+      "m"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The endothelium-derived relaxing factor is **nitric oxide (NO)**, made by **nitric oxide synthase**. NO diffuses into smooth muscle and raises **cGMP**, which relaxes the muscle. Some vasodilation may also come from neuronal sources, but the classic answer is NO acting through cGMP.",
+   "say": "The endothelium-derived relaxing factor is nitric oxide, made by nitric oxide synthase. Nitric oxide diffuses into smooth muscle and raises cGMP, which relaxes the muscle. Some vasodilation may also come from neuronal sources, but the classic answer is nitric oxide acting through cGMP.",
+   "vis": null
+  },
+  {
+   "tx": "**Paneth cells** sit at the base of intestinal crypts, below the stem cells. They store **zinc** and lysozyme in their granules, and release defensins and phospholipase A2. This means they contribute to **innate immunity** and are not absent from the gut, so options claiming no innate role or abundance in the oesophagus are wrong.",
+   "say": "Paneth cells sit at the base of intestinal crypts, below the stem cells. They store zinc and lysozyme in their granules, and release defensins and phospholipase A2. This means they contribute to innate immunity, so options claiming no innate role or abundance in the oesophagus are wrong.",
+   "vis": null
+  },
+  {
+   "tx": "The **ductus arteriosus** stays open in fetal life because **prostaglandin E2** and E1 act on EP4 receptors to keep the vessel dilated. After birth, falling prostaglandin levels and rising oxygen tension trigger constriction. **Functional closure** occurs within about 15 hours, while **anatomic closure** in term neonates takes 10 to 25 days, when the vessel becomes a fibrous remnant called the ligamentum arteriosum.",
+   "say": "The ductus arteriosus stays open in fetal life because prostaglandin E2 and E1 act on EP4 receptors to keep the vessel dilated. After birth, falling prostaglandin levels and rising oxygen tension trigger constriction. Functional closure occurs within about 15 hours. Anatomic closure in term neonates takes 10 to 25 days, when the vessel becomes a fibrous remnant called the ligamentum arteriosum.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0d512c73-c36b-45b6-8f75-dbe388ac8078",
+  "0e7bff04-6fed-47f6-8b3d-25b49f73a8fe",
+  "16c97344-f80a-4ec7-885b-6448422b57ca"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Harrison's Principles of Internal Medicine (Kasper DL et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 429
+ }
+}

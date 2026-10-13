@@ -1,0 +1,98 @@
+{
+ "v": 1,
+ "module": "ans-fluids-transfusion",
+ "subject": "anaesthesia",
+ "title": "Perioperative fluids and blood transfusion",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Perioperative fluid therapy starts with **maintenance requirements**. The 4-2-1 rule gives 4 mL per kg per hour for the first 10 kg, 2 mL per kg per hour for the next 10 kg, and 1 mL per kg per hour for each kg beyond 20. A 60 kg adult therefore needs 100 mL per hour, or 2400 mL per day. Pre-operative fasting deficits are added on top of maintenance.",
+   "say": "Perioperative fluid therapy starts with maintenance requirements. The 4-2-1 rule gives 4 mL per kg per hour for the first 10 kg, 2 mL per kg per hour for the next 10 kg, and 1 mL per kg per hour for each kilogram beyond 20. A 60 kg adult therefore needs 100 mL per hour, or 2400 mL per day. Pre-operative fasting deficits are added on top of maintenance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Weight band",
+     "Rate per hour"
+    ],
+    "rows": [
+     [
+      "First 10 kg",
+      "4 mL per kg"
+     ],
+     [
+      "Next 10 kg",
+      "2 mL per kg"
+     ],
+     [
+      "Each kg beyond 20",
+      "1 mL per kg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Massive transfusion** is more than 10 units of packed red cells within 24 hours. Stored blood causes **citrate toxicity**, which binds ionised calcium and produces hypocalcaemia, and it also brings potassium, acidosis and hypothermia. Early fresh frozen plasma and platelets in a 1:1 ratio with packed cells are recommended, and calcium should be replaced for symptomatic hypocalcaemia.",
+   "say": "Massive transfusion means more than 10 units of packed red cells within 24 hours. Stored blood causes citrate toxicity, which binds ionised calcium and produces hypocalcaemia. It also brings potassium, acidosis and hypothermia. Early fresh frozen plasma and platelets in a one to one ratio with packed cells are recommended, and calcium should be replaced for symptomatic hypocalcaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Cause"
+    ],
+    "rows": [
+     [
+      "Hypocalcaemia",
+      "Citrate binds calcium"
+     ],
+     [
+      "Hyperkalaemia",
+      "Potassium leaks from stored cells"
+     ],
+     [
+      "Metabolic acidosis",
+      "Lactate and citric acid load"
+     ],
+     [
+      "Hypothermia",
+      "Blood stored at 4 degrees"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transfusion reactions** need quick recognition. Haemolytic reactions cause fever, chills, oozing from IV sites, hypotension and oliguria, with a positive Coombs test. Stop the transfusion, support blood pressure with fluids, and keep urine output up. **TRALI** presents with hypoxaemia and bilateral infiltrates without volume overload, and needs ventilatory support. TACO is treated with diuretics, and mild allergic reactions with antihistamines.",
+   "say": "Transfusion reactions need quick recognition. Haemolytic reactions cause fever, chills, oozing from IV sites, hypotension and oliguria, with a positive Coombs test. Stop the transfusion, support blood pressure with fluids, and keep urine output up. TRALI presents with hypoxaemia and bilateral infiltrates without volume overload, and needs ventilatory support. TACO is treated with diuretics, and mild allergic reactions with antihistamines.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypothermia** is most dangerous for the heart, which can fibrillate or arrest when core temperature falls below about 24 degrees. It also causes coagulopathy, DIC and renal failure. In a hypovolaemic patient, IV fluid adequacy is judged by blood pressure, pulse rate, urine output and central venous pressure. Warm fluids and forced-air warming are used to prevent heat loss.",
+   "say": "Hypothermia is most dangerous for the heart, which can fibrillate or arrest when core temperature falls below about 24 degrees. It also causes coagulopathy, disseminated intravascular coagulation and renal failure. In a hypovolaemic patient, fluid adequacy is judged by blood pressure, pulse rate, urine output and central venous pressure. Warm fluids and forced-air warming help prevent heat loss.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "b0450136-d514-4810-a6e0-9d8014775d60",
+  "0d2e3f63-564b-4eb7-9792-33d692c71b8d",
+  "1f34928e-feaa-4fa1-9230-4d7904279b33"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia (Miller RD, editor)",
+  "Morgan and Mikhail's Clinical Anesthesiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 59
+ }
+}

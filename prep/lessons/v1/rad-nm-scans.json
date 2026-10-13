@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "rad-nm-scans",
+ "subject": "radiology",
+ "title": "Nuclear medicine scans and PET: choosing the right tracer",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Nuclear medicine relies on a **radiotracer**, a radioactive label joined to a molecule the body handles in a predictable way. A **gamma camera** or **PET scanner** then records where that molecule travels and how much collects in each tissue. Because the images reflect physiology, **function** often shows abnormality before any structural change is visible on conventional imaging.",
+   "say": "Nuclear medicine relies on a radiotracer: a radioactive marker joined to a molecule whose handling by the body is well understood. A gamma camera or PET scanner then tracks where that molecule ends up and how concentrated it becomes in each organ. Since these images show physiology, abnormal function can appear well before the anatomy looks wrong on standard scans.",
+   "vis": null
+  },
+  {
+   "tx": "PET uses positron emitters with short half-lives, such as carbon-11, nitrogen-13, oxygen-15, fluorine-18 and rubidium-82. The most used tracer is **FDG**, a glucose analogue labelled with fluorine-18. It makes up more than 95 percent of clinical PET use, mainly in oncology and neurology.",
+   "say": "PET uses positron emitters with short half-lives, such as carbon-11, nitrogen-13, oxygen-15, fluorine-18 and rubidium-82. The most used tracer is FDG, a glucose analogue labelled with fluorine-18. It accounts for more than 95 percent of clinical PET use, mainly in oncology and neurology.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tracer",
+     "Main clinical use"
+    ],
+    "rows": [
+     [
+      "FDG (F-18)",
+      "Oncology staging, metabolic activity"
+     ],
+     [
+      "PSMA ligand",
+      "Prostate cancer restaging"
+     ],
+     [
+      "DOTATATE",
+      "Neuroendocrine tumours"
+     ],
+     [
+      "Rubidium-82",
+      "Myocardial perfusion PET"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal scans separate function from anatomy. **DTPA** is filtered by the glomeruli and not reabsorbed, so it measures GFR-type function and shows obstruction on diuretic renography. **MAG3** is preferred for tubular function and is useful in young infants. **DMSA** binds renal cortex and is best for scarring and differential function.",
+   "say": "Renal scans separate function from anatomy. DTPA is filtered by the glomeruli and not reabsorbed, so it shows overall function and obstruction on diuretic renography. MAG3 is preferred for tubular function and is useful in young infants. DMSA binds the renal cortex and is best for scarring and differential function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Best used for"
+    ],
+    "rows": [
+     [
+      "DTPA",
+      "Overall function, obstruction, emergency"
+     ],
+     [
+      "MAG3",
+      "Tubular function, neonates"
+     ],
+     [
+      "DMSA",
+      "Cortical scarring, split function, anatomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Scarring after pyelonephritis or reflux is best shown by **DMSA** scanning. It should be delayed about four to six months after the acute infection, so acute inflammatory defects are not mistaken for scars. Acute pyelonephritis is also detected well by DMSA.",
+   "say": "Scarring after pyelonephritis or reflux is best shown by DMSA scanning. It should be delayed about four to six months after the acute infection, so that acute inflammatory defects are not mistaken for scars. DMSA is also sensitive for acute pyelonephritis.",
+   "vis": null
+  },
+  {
+   "tx": "For **anuria** with a normal ultrasound, a DTPA renogram gives the best information about renal function and obstruction. Pyelography is invasive and does not measure function. In diuretic renography, a non-obstructed system washes out within about 10 minutes after frusemide, while an obstructed one does not.",
+   "say": "For anuria with a normal ultrasound, a DTPA renogram gives the best information about renal function and obstruction. Pyelography is invasive and does not measure function. After frusemide, a non-obstructed system washes out within about ten minutes, while an obstructed one does not.",
+   "vis": null
+  },
+  {
+   "tx": "Bone scanning uses **Tc-99m MDP**, which shows osteoblastic activity. Metastases and superscans appear as hot spots, and a superscan is seen with diffuse disease such as renal failure or hyperparathyroidism. Cold spots are seen in myeloma and lesions with no osteoblastic response.",
+   "say": "Bone scanning uses Tc-99m MDP, which shows osteoblastic activity. Metastases and superscans appear as hot spots, and a superscan is seen with diffuse disease such as renal failure or hyperparathyroidism. Cold spots are seen in myeloma and lesions without osteoblastic response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Typical cause"
+    ],
+    "rows": [
+     [
+      "Hot spot",
+      "Metastasis, Paget disease, osteomyelitis"
+     ],
+     [
+      "Superscan",
+      "Renal failure, hyperparathyroidism, diffuse metastases"
+     ],
+     [
+      "Cold spot",
+      "Myeloma, cysts, fibrous defects"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "08fbcc61-7de1-4806-9153-048032b3489e",
+  "9239ec8d-6a3e-4068-a8f3-29a6730a08dd",
+  "97693991-de85-410d-9017-bea5a289a364"
+ ],
+ "src": [],
+ "refs": [
+  "Genitourinary Radiology: The Requisites"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 288
+ }
+}

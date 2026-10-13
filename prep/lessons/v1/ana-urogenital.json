@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "ana-urogenital",
+ "subject": "anatomy",
+ "title": "Development of the urogenital system",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The urogenital system arises from **intermediate mesoderm**. Excretory units and gonads both develop from this layer. The kidney develops in three successive stages: **pronephros**, **mesonephros** and **metanephros**. Only the metanephros forms the permanent kidney in humans. The pronephros and most of the mesonephros regress early, while parts of the mesonephros persist as genital structures in males and females.",
+   "say": "The urogenital system arises from intermediate mesoderm. Excretory units and gonads both develop from this layer. The kidney develops in three successive stages: pronephros, mesonephros and metanephros. Only the metanephros forms the permanent kidney in humans. The pronephros and most of the mesonephros regress early, while parts of the mesonephros persist as genital structures in males and females.",
+   "vis": null
+  },
+  {
+   "tx": "The **ureteric bud** is an outgrowth from the mesonephric duct near its entry into the cloaca. It gives rise to the ureter, renal pelvis, calyces and collecting tubules. The **metanephric blastema** is the cap of tissue over each bud. It forms the nephrons, including glomeruli, proximal and distal convoluted tubules and loop of Henle. Collecting system from the bud, secretory unit from the blastema.",
+   "say": "The ureteric bud is an outgrowth from the mesonephric duct near its entry into the cloaca. It gives rise to the ureter, renal pelvis, calyces and collecting tubules. The metanephric blastema is the cap of tissue over each bud. It forms the nephrons, including glomeruli, proximal and distal convoluted tubules and loop of Henle. The collecting system comes from the bud, and the secretory unit comes from the blastema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source",
+     "Gives rise to"
+    ],
+    "rows": [
+     [
+      "Ureteric bud",
+      "Ureter, pelvis, calyces, collecting tubules"
+     ],
+     [
+      "Metanephric blastema",
+      "Glomeruli, convoluted tubules, loop of Henle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mesonephric duct** is the main genital duct in males. It forms the epididymis, ductus deferens, ejaculatory ducts and seminal vesicles. The **paramesonephric duct** is the main genital duct in females. It forms the uterine tubes, uterus and upper vagina. In males it regresses, leaving the appendix of the testis and the prostatic utricle. Lower vagina comes from the urogenital sinus.",
+   "say": "The mesonephric duct is the main genital duct in males. It forms the epididymis, ductus deferens, ejaculatory ducts and seminal vesicles. The paramesonephric duct is the main genital duct in females. It forms the uterine tubes, uterus and upper vagina. In males it regresses, leaving the appendix of the testis and the prostatic utricle. The lower vagina comes from the urogenital sinus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mesonephric duct",
+     "points": [
+      "Male genital ducts",
+      "Ureter and renal collecting system",
+      "Trigone of bladder",
+      "Female remnant: duct of epoophoron"
+     ]
+    },
+    "right": {
+     "title": "Paramesonephric duct",
+     "points": [
+      "Female uterine tubes and uterus",
+      "Upper vagina",
+      "Male remnant: appendix of testis",
+      "Male remnant: prostatic utricle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **urogenital sinus** comes from the anterior part of the cloaca after the urorectal septum divides it. It forms the urinary bladder, most of the urethra and the vestibule of the vagina. The **trigone** of the bladder is an exception: it comes from mesoderm, through incorporation of the caudal mesonephric ducts. Urachus, a remnant of allantois, becomes the median umbilical ligament. Incomplete closure may leave a urachal cyst, sinus or fistula.",
+   "say": "The urogenital sinus comes from the anterior part of the cloaca after the urorectal septum divides it. It forms the urinary bladder, most of the urethra and the vestibule of the vagina. The trigone of the bladder is an exception: it comes from mesoderm, through incorporation of the caudal mesonephric ducts. The urachus, a remnant of the allantois, becomes the median umbilical ligament. Incomplete closure may leave a urachal cyst, sinus or fistula.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c",
+      "label": "Cloaca"
+     },
+     {
+      "id": "s",
+      "label": "Urogenital sinus"
+     },
+     {
+      "id": "b",
+      "label": "Bladder and urethra"
+     },
+     {
+      "id": "u",
+      "label": "Urachus"
+     },
+     {
+      "id": "m",
+      "label": "Median umbilical ligament"
+     }
+    ],
+    "edges": [
+     [
+      "c",
+      "s",
+      "urorectal septum"
+     ],
+     [
+      "s",
+      "b"
+     ],
+     [
+      "u",
+      "m",
+      "normal closure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Testes develop near the kidneys and descend later. The **gubernaculum** is a mesenchymal cord attached to the caudal pole of the gonad. The **processus vaginalis** is a peritoneal evagination that follows the gubernaculum into the scrotal swelling. Testes reach the inguinal region around 12 weeks, and enter the scrotum late in fetal life. In the female, the gubernaculum forms the ovarian and round ligaments.",
+   "say": "Testes develop near the kidneys and descend later. The gubernaculum is a mesenchymal cord attached to the caudal pole of the gonad. The processus vaginalis is a peritoneal evagination that follows the gubernaculum into the scrotal swelling. Testes reach the inguinal region around 12 weeks, and enter the scrotum late in fetal life. In the female, the gubernaculum forms the ovarian and round ligaments.",
+   "vis": null
+  },
+  {
+   "tx": "Fusion of the caudal poles of the two kidneys produces a **horseshoe kidney**. The fused mass is stopped from ascending by the inferior mesenteric artery. Renal agenesis is due to defective ureteric bud or metanephric tissue, and the adrenal gland stays in its normal position. In the uterus, a **bicornuate uterus** follows failed fusion of the paramesonephric ducts. Hypospadias results from incomplete fusion of the urethral folds on the genital tubercle.",
+   "say": "Fusion of the caudal poles of the two kidneys produces a horseshoe kidney. The fused mass is stopped from ascending by the inferior mesenteric artery. Renal agenesis is due to defective ureteric bud or metanephric tissue, and the adrenal gland stays in its normal position. In the uterus, a bicornuate uterus follows failed fusion of the paramesonephric ducts. Hypospadias results from incomplete fusion of the urethral folds on the genital tubercle.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1bc458b5-3e0a-4917-b4f2-3706ac313940",
+  "42f0f188-de2f-4c88-b044-5604ee143585",
+  "55e1a17b-851b-4884-93f3-f3bc475b7c20"
+ ],
+ "src": [],
+ "refs": [
+  "Inderbir Singh's Human Embryology",
+  "Williams Gynecology",
+  "Langman's Medical Embryology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 237
+ }
+}

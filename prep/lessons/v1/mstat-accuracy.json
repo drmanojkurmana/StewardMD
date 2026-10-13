@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "mstat-accuracy",
+ "subject": "mrcp-statistics",
+ "title": "Sensitivity, specificity and screening",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sensitivity** is the proportion of people with the disease who test positive. **Specificity** is the proportion without the disease who test negative. Both are properties of the test itself and do not change with how common the disease is. A highly sensitive test has few false negatives, so a negative result helps rule disease out, summarised by SnNout. A highly specific test has few false positives, so a positive result helps rule disease in, summarised by SpPIn.",
+   "say": "Sensitivity is the proportion of people with the disease who test positive. Specificity is the proportion without the disease who test negative. Both belong to the test itself and do not change with how common the disease is. A highly sensitive test has few false negatives, so a negative result helps rule disease out, summarised by SnNout. A highly specific test has few false positives, so a positive result helps rule disease in, summarised by SpPIn.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Property",
+     "Measures",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "Diseased people testing positive",
+      "Ruling out, SnNout"
+     ],
+     [
+      "Specificity",
+      "Healthy people testing negative",
+      "Ruling in, SpPIn"
+     ],
+     [
+      "Positive predictive value",
+      "Positives who truly have disease",
+      "Depends on prevalence"
+     ],
+     [
+      "Negative predictive value",
+      "Negatives who truly lack disease",
+      "Depends on prevalence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Positive predictive value** depends on **prevalence** as well as on **sensitivity** and **specificity**. When a condition is uncommon, the large healthy group generates many **false positives**, and these can outnumber the **true positives** even when the test performs well. Sketching a hypothetical cohort in a two by two grid makes this pattern easy to see and check for yourself.",
+   "say": "Positive predictive value depends on prevalence as well as on sensitivity and specificity. When a condition is uncommon, the large healthy group generates many false positives, and these can outnumber the true positives even when the test performs well. Sketching a hypothetical cohort in a two by two grid makes this pattern easy to see and check for yourself.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Disease present",
+     "Disease absent"
+    ],
+    "rows": [
+     [
+      "Test positive",
+      "True positives (few)",
+      "False positives (many)"
+     ],
+     [
+      "Test negative",
+      "False negatives (few)",
+      "True negatives (most)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **likelihood ratio** shows how much a result changes the odds of disease, and it does not depend on prevalence. The positive likelihood ratio equals sensitivity divided by one minus specificity. Post-test odds equal pre-test odds multiplied by the likelihood ratio. Convert the pre-test probability to odds, multiply, then convert back to a probability. A positive likelihood ratio of 4 applied to a pre-test probability of 50% gives a post-test probability of 80%.",
+   "say": "A likelihood ratio shows how much a result changes the odds of disease, and it does not depend on prevalence. The positive likelihood ratio equals sensitivity divided by one minus specificity. Post-test odds equal pre-test odds multiplied by the likelihood ratio. Convert the pre-test probability to odds, multiply, then convert back to a probability. A positive likelihood ratio of four applied to a pre-test probability of fifty percent gives a post-test probability of eighty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pre-test probability"
+     },
+     {
+      "id": "b",
+      "label": "Convert to odds"
+     },
+     {
+      "id": "c",
+      "label": "Multiply by LR"
+     },
+     {
+      "id": "d",
+      "label": "Convert to probability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Serial** testing, where all tests must be positive, raises **specificity** but lowers **sensitivity**. **Parallel** testing, where any positive counts, does the reverse. Under conditional independence, joint sensitivity for a serial pair is the product of the individual sensitivities. Two tests with sensitivity and specificity of 90% each give serial sensitivity of 81% and serial specificity of about 99%. The choice depends on whether missed cases or unnecessary investigation is the greater harm.",
+   "say": "Serial testing, where all tests must be positive, raises specificity but lowers sensitivity. Parallel testing, where any positive counts, does the reverse. Under conditional independence, joint sensitivity for a serial pair is the product of the individual sensitivities. Two tests each with ninety percent sensitivity and specificity give serial sensitivity of eighty-one percent and serial specificity of about ninety-nine percent. The choice depends on whether missed cases or unnecessary investigation is the greater harm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Test 1 positive"
+     },
+     {
+      "id": "t2",
+      "label": "Test 2 positive"
+     },
+     {
+      "id": "r",
+      "label": "Called positive"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2",
+      "must also be"
+     ],
+     [
+      "t2",
+      "r"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening should be judged on **mortality**, not on survival from diagnosis. **Lead-time bias** occurs when early detection lengthens survival measured from diagnosis without changing the date of death, so survival looks better. **Overdiagnosis** detects disease that would never have caused harm, inflating incidence without reducing deaths. Absolute measures matter too: moving cancer mortality from 4 in 100 to 3 in 100 is a 25% relative reduction but a number needed to screen of 100.",
+   "say": "Screening should be judged on mortality, not on survival from diagnosis. Lead-time bias occurs when early detection lengthens survival measured from diagnosis without changing the date of death, so survival looks better. Overdiagnosis detects disease that would never have caused harm, inflating incidence without reducing deaths. Absolute measures matter too: moving cancer mortality from four in a hundred to three in a hundred is a twenty-five percent relative reduction but a number needed to screen of one hundred.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Survival from diagnosis",
+     "points": [
+      "Inflated by lead-time bias",
+      "Date of death unchanged",
+      "Can look better without benefit"
+     ]
+    },
+    "right": {
+     "title": "Population mortality",
+     "points": [
+      "Counts actual deaths",
+      "Avoids lead-time distortion",
+      "Preferred outcome for screening"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Sackett DL et al. Clinical Epidemiology: A Basic Science for Clinical Medicine",
+  "Altman DG, Bland JM. Diagnostic tests 1: sensitivity and specificity. BMJ 1994"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}

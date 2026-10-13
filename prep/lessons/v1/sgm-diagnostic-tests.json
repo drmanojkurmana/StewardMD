@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "sgm-diagnostic-tests",
+ "subject": "ss-general-medicine",
+ "title": "Evaluation of Diagnostic Tests",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **diagnostic test** is judged by how well it separates people with a disease from those without it. Its core properties are **sensitivity**, the proportion of diseased people who test positive, and **specificity**, the proportion of healthy people who test negative. A sensitive test is useful for ruling out disease when negative, while a specific test is useful for ruling in disease when positive. Both are intrinsic to the test and do not change with the population tested.",
+   "say": "A diagnostic test is judged by how well it separates people with a disease from those without it. Its core properties are sensitivity, the proportion of diseased people who test positive, and specificity, the proportion of healthy people who test negative. A sensitive test helps rule disease out when negative, while a specific test helps rule disease in when positive. Both are intrinsic to the test and do not change with the population being tested.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Formula",
+     "Exam use"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "True positives over all diseased",
+      "SnNout: rule out when negative"
+     ],
+     [
+      "Specificity",
+      "True negatives over all healthy",
+      "SpPin: rule in when positive"
+     ],
+     [
+      "Accuracy",
+      "Correct results over all tested",
+      "Weighted by prevalence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Predictive values** answer a different question: given a result, how likely is the disease? The **positive predictive value** (PPV) is the chance of disease after a positive test, and the **negative predictive value** (NPV) is the chance of health after a negative test. Unlike sensitivity and specificity, predictive values depend strongly on **prevalence**. As prevalence falls, PPV drops even when specificity stays high, so a screening test in a low-prevalence group produces many false positives.",
+   "say": "Predictive values answer a different question: given a result, how likely is the disease? The positive predictive value is the chance of disease after a positive test, and the negative predictive value is the chance of health after a negative test. Unlike sensitivity and specificity, predictive values depend strongly on prevalence. As prevalence falls, the positive predictive value drops even when specificity stays high, so a screening test in a low-prevalence group produces many false positives.",
+   "vis": null
+  },
+  {
+   "tx": "The **likelihood ratio** combines sensitivity and specificity into a single figure that does not depend on how common the disease is in the population tested. The **positive likelihood ratio** is sensitivity divided by the false positive fraction, while the **negative likelihood ratio** is the false negative fraction divided by specificity. A large positive value strengthens the case for disease, whereas a value close to zero strengthens the case against it. Clinicians multiply the **pretest odds** by the appropriate ratio to reach a revised, **posttest probability**.",
+   "say": "The likelihood ratio combines sensitivity and specificity into a single figure that does not depend on how common the disease is in the population tested. The positive likelihood ratio is sensitivity divided by the false positive fraction, while the negative likelihood ratio is the false negative fraction divided by specificity. A large positive value strengthens the case for disease, whereas a value close to zero strengthens the case against it. Clinicians multiply the pretest odds by the appropriate ratio to reach a revised posttest probability.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sensitivity and specificity"
+     },
+     {
+      "id": "b",
+      "label": "Compute positive and negative ratios"
+     },
+     {
+      "id": "c",
+      "label": "Multiply pretest odds by ratio"
+     },
+     {
+      "id": "d",
+      "label": "Posttest probability"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bayes theorem** links **pretest probability** to **posttest probability**. Convert the pretest probability into pretest odds, multiply by the **likelihood ratio** to obtain posttest odds, then convert back into a probability. The **Fagan nomogram** performs this graphically, so a straight line drawn from the pretest probability through the likelihood ratio reads off the posttest probability. The **ROC curve** plots sensitivity against one minus specificity across cut-offs, and the **area under the curve** summarises overall accuracy: values near chance indicate little discrimination, whereas values near perfect indicate excellent discrimination.",
+   "say": "Bayes theorem links pretest probability to posttest probability. Convert the pretest probability into pretest odds, multiply by the likelihood ratio to obtain posttest odds, then convert back into a probability. The Fagan nomogram performs this graphically, so a straight line drawn from the pretest probability through the likelihood ratio reads off the posttest probability. The ROC curve plots sensitivity against one minus specificity across cut-offs, and the area under the curve summarises overall accuracy. Values near chance indicate little discrimination, whereas values near perfect indicate excellent discrimination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Pretest probability"
+     },
+     {
+      "id": "n2",
+      "label": "Pretest odds"
+     },
+     {
+      "id": "n3",
+      "label": "Posttest odds"
+     },
+     {
+      "id": "n4",
+      "label": "Posttest probability"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "convert to odds"
+     ],
+     [
+      "n2",
+      "n3",
+      "multiply by likelihood ratio"
+     ],
+     [
+      "n3",
+      "n4",
+      "convert back to probability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Screening** aims to detect disease early, but it can mislead. **Lead-time bias** makes survival appear longer simply because diagnosis is moved earlier, without any change in the course of disease. **Length-time bias** occurs because slowly progressing cases, which have a longer detectable preclinical phase, are over-represented among screen-detected cases. Both biases inflate apparent benefit, so a valid screening programme must be judged by mortality reduction in randomised trials, not by survival figures alone.",
+   "say": "Screening aims to detect disease early, but it can mislead. Lead-time bias makes survival appear longer simply because diagnosis is moved earlier, without any change in the course of disease. Length-time bias occurs because slowly progressing cases, which have a longer detectable preclinical phase, are over-represented among screen-detected cases. Both biases inflate apparent benefit, so a valid screening programme must be judged by mortality reduction in randomised trials, not by survival figures alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lead-time bias",
+     "points": [
+      "Diagnosis moved earlier",
+      "Survival looks longer",
+      "Course unchanged"
+     ]
+    },
+    "right": {
+     "title": "Length-time bias",
+     "points": [
+      "Slow cases over-detected",
+      "Indolent disease favoured",
+      "Inflates apparent benefit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before answering an exam question on a **diagnostic test**, pin down the denominator, because each measure divides by a different group. **Sensitivity** uses people who truly have the disease, **specificity** uses people who are truly healthy, **positive predictive value** uses everyone with a positive result, and **negative predictive value** uses everyone with a negative result. Mixing these groups up is one of the most common errors in this topic.",
+   "say": "Before you answer any question on a diagnostic test, find the denominator first. Each measure divides by a different group. Sensitivity looks only at people who really have the disease. Specificity looks only at people who are really healthy. Positive predictive value looks at everyone who tests positive, and negative predictive value looks at everyone who tests negative. Keep these four groups separate and most calculation errors disappear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Denominator"
+    ],
+    "rows": [
+     [
+      "Sensitivity",
+      "People with the disease"
+     ],
+     [
+      "Specificity",
+      "People without the disease"
+     ],
+     [
+      "Positive predictive value",
+      "All positive results"
+     ],
+     [
+      "Negative predictive value",
+      "All negative results"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_f6a3e6b07026",
+  "q_2c47e86db2d5",
+  "q_414b5a1997b6"
+ ],
+ "src": [],
+ "refs": [
+  "Fletcher RH, Fletcher SW. Clinical Epidemiology: The Essentials (Lippincott Williams and Wilkins)",
+  "Park K. Park's Textbook of Preventive and Social Medicine (Banarsidas Bhanot)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 3
+ }
+}

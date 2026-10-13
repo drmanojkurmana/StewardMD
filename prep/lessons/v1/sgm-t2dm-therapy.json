@@ -1,0 +1,87 @@
+{
+ "v": 1,
+ "module": "sgm-t2dm-therapy",
+ "subject": "ss-general-medicine",
+ "title": "Pharmacotherapy of type 2 diabetes: metformin, SGLT2 inhibitors, GLP-1 receptor agonists and cardiorenal protection",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Metformin is the usual first-line oral agent in **type 2 diabetes** and is preferred for most patients without contraindications. It lowers hepatic glucose output and does not cause weight gain or intrinsic hypoglycaemia. Its main adverse effects are gastrointestinal, and it can cause **vitamin B12 deficiency** with long-term use, so periodic B12 checks are sensible. Renal function must be checked before dosing and the dose reduced as eGFR falls.",
+   "say": "Metformin is the usual first line oral agent in type 2 diabetes and is preferred for most patients without contraindications. It lowers hepatic glucose output and does not cause weight gain or intrinsic hypoglycaemia. Its main adverse effects are gastrointestinal, and it can cause vitamin B12 deficiency with long term use, so periodic B12 checks are sensible. Renal function must be checked before dosing and the dose reduced as eGFR falls.",
+   "vis": null
+  },
+  {
+   "tx": "**SGLT2 inhibitors** such as empagliflozin act in the proximal tubule to promote glucose excretion in urine. Trials including EMPA-REG OUTCOME and CANVAS showed reduced cardiovascular death and slower progression of kidney disease, so they are chosen for cardiorenal protection regardless of baseline HbA1c. Key risks include genital mycotic infection, volume depletion and euglycaemic ketoacidosis, which should be counselled about.",
+   "say": "SGLT2 inhibitors such as empagliflozin act in the proximal tubule to promote glucose excretion in urine. Trials including EMPA REG OUTCOME and CANVAS showed reduced cardiovascular death and slower progression of kidney disease, so they are chosen for cardiorenal protection regardless of baseline HbA1c. Key risks include genital mycotic infection, volume depletion and euglycaemic ketoacidosis, which should be counselled about.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent class",
+     "Main benefit",
+     "Key caution"
+    ],
+    "rows": [
+     [
+      "Metformin",
+      "Glucose lowering, weight neutral",
+      "B12 deficiency, GI upset"
+     ],
+     [
+      "SGLT2 inhibitor",
+      "Cardiorenal protection",
+      "Genital infection, ketoacidosis"
+     ],
+     [
+      "GLP-1 receptor agonist",
+      "Weight loss, CV benefit",
+      "GI upset, thyroid tumour warning"
+     ],
+     [
+      "Pioglitazone",
+      "Insulin sensitisation",
+      "Fluid retention, heart failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**GLP-1 receptor agonists** such as semaglutide and liraglutide enhance glucose-dependent insulin secretion, suppress glucagon and slow gastric emptying. The LEADER trial showed cardiovascular benefit with liraglutide, and the SUSTAIN programme established HbA1c lowering with semaglutide. Oral semaglutide, studied in the SOUL trial, reduced major adverse cardiovascular events. They are contraindicated in patients with a personal or family history of medullary thyroid carcinoma.",
+   "say": "GLP 1 receptor agonists such as semaglutide and liraglutide enhance glucose dependent insulin secretion, suppress glucagon and slow gastric emptying. The LEADER trial showed cardiovascular benefit with liraglutide, and the SUSTAIN programme established HbA1c lowering with semaglutide. Oral semaglutide, studied in the SOUL trial, reduced major adverse cardiovascular events. They are contraindicated in patients with a personal or family history of medullary thyroid carcinoma.",
+   "vis": null
+  },
+  {
+   "tx": "Sulfonylureas stimulate insulin release and carry a real **hypoglycaemia** risk, especially with long-acting agents such as glibenclamide in older adults or those with kidney impairment. Gliclazide is the safer choice in this group. Pioglitazone improves insulin sensitivity but causes fluid retention, so it should be avoided in heart failure. DPP-4 inhibitors are weight neutral with modest HbA1c lowering. Under ADA standards, the choice should follow comorbidities such as ASCVD, heart failure and CKD.",
+   "say": "Sulfonylureas stimulate insulin release and carry a real hypoglycaemia risk, especially with long acting agents such as glibenclamide in older adults or those with kidney impairment. Gliclazide is the safer choice in this group. Pioglitazone improves insulin sensitivity but causes fluid retention, so it should be avoided in heart failure. DPP 4 inhibitors are weight neutral with modest HbA1c lowering. Under ADA standards, the choice should follow comorbidities such as ASCVD, heart failure and CKD.",
+   "vis": null
+  },
+  {
+   "tx": "Current guidance from the American Diabetes Association and Indian bodies favours **comorbidity-led** selection over relying on HbA1c alone. Patients with established heart failure, chronic kidney disease or atherosclerotic disease are usually offered an **SGLT2 inhibitor** or a **GLP-1 receptor agonist** with proven benefit. Avoiding **therapeutic inertia**, meaning HbA1c left above target without any treatment change, is essential. Insulin is considered when HbA1c reaches 10 percent or more, or when catabolic features appear. Review renal function, retinal status and thyroid symptoms during follow-up.",
+   "say": "Current guidance from the American Diabetes Association and Indian bodies favours comorbidity led selection over relying on HbA1c alone. Patients with established heart failure, chronic kidney disease or atherosclerotic disease are usually offered an SGLT2 inhibitor or a GLP-1 receptor agonist with proven benefit. Avoiding therapeutic inertia, meaning HbA1c left above target without any treatment change, is essential. Insulin is considered when HbA1c reaches 10 percent or more, or when catabolic features appear. Review renal function, retinal status and thyroid symptoms during follow-up.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_c8e77dab1462",
+  "q_fec5ed697c4d",
+  "q_9388314cfd3a"
+ ],
+ "src": [],
+ "refs": [
+  "ADA Standards of Care in Diabetes"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

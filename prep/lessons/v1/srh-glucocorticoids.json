@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "srh-glucocorticoids",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Glucocorticoids in rheumatology: key principles for exam practice",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Glucocorticoids are the mainstay of rheumatology treatment for rapid control of inflammation. **Pulse methylprednisolone** is given intravenously, usually as 500 mg to 1 g daily for three days, in severe disease such as threatened vision loss in giant cell arteritis or severe lupus nephritis. Oral prednisolone is the usual long-term route. Roughly 5 mg of prednisolone is equivalent to 4 mg of methylprednisolone and 20 mg of hydrocortisone. Doses should always be tapered rather than stopped abruptly.",
+   "say": "Glucocorticoids are the mainstay of rheumatology treatment for rapid control of inflammation. Pulse methylprednisolone is given intravenously, usually as 500 mg to 1 g daily for three days, in severe disease such as threatened vision loss in giant cell arteritis or severe lupus nephritis. Oral prednisolone is the usual long-term route. Roughly 5 mg of prednisolone is equivalent to 4 mg of methylprednisolone and 20 mg of hydrocortisone. Doses should always be tapered rather than stopped abruptly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Approximate equivalent dose",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Hydrocortisone",
+      "20 mg",
+      "Physiological replacement"
+     ],
+     [
+      "Prednisolone",
+      "5 mg",
+      "Long-term anti-inflammatory"
+     ],
+     [
+      "Methylprednisolone",
+      "4 mg",
+      "Pulse therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic glucocorticoid exposure causes **HPA axis suppression**. Evidence indicates that prednisone at 5 mg daily or more for at least four weeks can suppress the axis, so these patients need stress dosing and sick-day rules. Any patient on steroids for longer than this should be assumed suppressed until proven otherwise. The HPA axis may take months to recover after stopping treatment.",
+   "say": "Chronic glucocorticoid exposure causes HPA axis suppression. Evidence indicates that prednisone at 5 mg daily or more for at least four weeks can suppress the axis, so these patients need stress dosing and sick-day rules. Any patient on steroids for longer than this should be assumed suppressed until proven otherwise. The HPA axis may take months to recover after stopping treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Steroid sparing agents cut the long-term glucocorticoid burden. **Methotrexate** is usually the first conventional choice for rheumatoid arthritis and polymyalgia rheumatica. **Tocilizumab**, an interleukin-6 blocker, is used in giant cell arteritis and often allows a faster steroid taper. Before starting any biologic, screen for latent **tuberculosis**, **hepatitis B** and **hepatitis C**.",
+   "say": "Steroid sparing agents cut the long-term glucocorticoid burden. Methotrexate is usually the first conventional choice for rheumatoid arthritis and polymyalgia rheumatica. Tocilizumab, an interleukin-6 blocker, is used in giant cell arteritis and often allows a faster steroid taper. Before starting any biologic, screen for latent tuberculosis, hepatitis B and hepatitis C.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conventional agents",
+     "points": [
+      "Methotrexate for rheumatoid arthritis",
+      "Methotrexate for polymyalgia rheumatica",
+      "Monitor blood counts and liver function"
+     ]
+    },
+    "right": {
+     "title": "Biologic agents",
+     "points": [
+      "Tocilizumab for giant cell arteritis",
+      "Allows a faster steroid taper",
+      "Screen for TB and hepatitis before starting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term **glucocorticoid induced osteoporosis** is a major harm of steroid therapy. Patients on sustained oral steroids should receive **calcium and vitamin D**, and a **bisphosphonate** is added when fracture risk is judged to be high. Those on high-dose immunosuppression also need **Pneumocystis jirovecii** prophylaxis, with the agent chosen according to local guidance. **Avascular necrosis** is a late complication, particularly after pulse therapy.",
+   "say": "Long term steroid use can cause glucocorticoid induced osteoporosis, which is a major harm of this treatment. Patients on sustained oral steroids should receive calcium and vitamin D, and a bisphosphonate is added when fracture risk is judged to be high. Those on high dose immunosuppression also need Pneumocystis jirovecii prophylaxis, with the agent chosen according to local guidance. Avascular necrosis is a late complication, particularly after pulse therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Steroid **adrenal crisis** is a medical emergency in patients on chronic steroids. Presentation includes hypotension unresponsive to fluids, hypoglycaemia, fever, vomiting and altered sensorium. Treatment is immediate intravenous hydrocortisone, usually 100 mg, followed by fluids and glucose. Patients should receive stress dosing during surgery, serious infection or illness, and carry an emergency injection kit.",
+   "say": "Steroid adrenal crisis is a medical emergency in patients on chronic steroids. Presentation includes hypotension unresponsive to fluids, hypoglycaemia, fever, vomiting and altered sensorium. Treatment is immediate intravenous hydrocortisone, usually 100 mg, followed by fluids and glucose. Patients should receive stress dosing during surgery, serious infection or illness, and carry an emergency injection kit.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected crisis"
+     },
+     {
+      "id": "b",
+      "label": "IV hydrocortisone 100 mg"
+     },
+     {
+      "id": "c",
+      "label": "Fluids and glucose"
+     },
+     {
+      "id": "d",
+      "label": "Find and treat trigger"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Steroid **hyperglycaemia** and **avascular necrosis** are common adverse effects to counsel about. High-dose steroids raise blood glucose, so monitor glucose during pulse therapy and treat as needed. Avascular necrosis of the femoral head is linked mainly to high cumulative doses and pulses, and presents with groin or hip pain. Counsel patients on these risks and review regularly during tapering.",
+   "say": "Steroid hyperglycaemia and avascular necrosis are common adverse effects to counsel about. High-dose steroids raise blood glucose, so monitor glucose during pulse therapy and treat as needed. Avascular necrosis of the femoral head is linked mainly to high cumulative doses and pulses, and presents with groin or hip pain. Counsel patients on these risks and review regularly during tapering.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_226544a2a1f6",
+  "q_f9e7f6cf5738",
+  "q_f57c6fb06639"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on Giant cell arteritis: diagnosis and management",
+  "ACR 2020 Guideline for the Management of Giant Cell Arteritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

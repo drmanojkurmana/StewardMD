@@ -1,0 +1,184 @@
+{
+ "v": 1,
+ "module": "phy-higher-functions",
+ "subject": "physiology",
+ "title": "Sleep, EEG, Learning, Memory and Speech",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **EEG** records electrical activity of the brain from the scalp. Each rhythm has a typical frequency and amplitude. **Beta** waves are high frequency and low amplitude, seen in alert, concentrating adults. **Alpha** waves run at about 8 to 12 Hz and are seen when awake, relaxed, eyes closed, with the mind wandering. They are most marked over the parieto-occipital region and fall with attention.",
+   "say": "The EEG records electrical activity of the brain from the scalp. Beta waves are high frequency and low amplitude, seen in alert adults who are concentrating. Alpha waves run at about eight to twelve hertz. They appear when a person is awake, relaxed, with eyes closed and the mind wandering. They are most marked over the parieto-occipital region and disappear with attention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rhythm",
+     "Frequency",
+     "Typical state"
+    ],
+    "rows": [
+     [
+      "Beta",
+      "Above 13 Hz",
+      "Alert, concentrating"
+     ],
+     [
+      "Alpha",
+      "8 to 12 Hz",
+      "Awake, eyes closed, relaxed"
+     ],
+     [
+      "Theta",
+      "4 to 7 Hz",
+      "Drowsiness, stage 1 and 2 sleep"
+     ],
+     [
+      "Delta",
+      "Below 4 Hz",
+      "Deep sleep, stages 3 and 4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sleep has two types. **NREM** sleep, also called slow wave sleep, has four stages. Stage 1 shows low amplitude, relatively high frequency activity and is the easiest to rouse from. Stage 2 is marked by **sleep spindles**, bursts of 12 to 14 Hz activity, and **K complexes**, high amplitude biphasic waves. Stages 3 and 4 show slow, large delta waves, with stage 4 the deepest and hardest to wake from.",
+   "say": "Sleep has two types. NREM sleep, also called slow wave sleep, has four stages. Stage one is light and easiest to rouse from. Stage two is marked by sleep spindles, bursts of about twelve to fourteen hertz, and K complexes, which are high amplitude waves. Stages three and four show slow, large delta waves, and stage four is the deepest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Stage 1",
+      "sub": "Low amplitude, drowsy"
+     },
+     {
+      "id": "s2",
+      "label": "Stage 2",
+      "sub": "Spindles, K complexes"
+     },
+     {
+      "id": "s3",
+      "label": "Stage 3",
+      "sub": "Delta waves begin"
+     },
+     {
+      "id": "s4",
+      "label": "Stage 4",
+      "sub": "Deepest, most delta"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Memory is classified by time. **Immediate** memory lasts seconds and uses ongoing electrical activity. **Short-term** or working memory lasts seconds to minutes. **Recent** memory, over days to weeks, depends on the medial temporal structures and protein phosphorylation. **Remote** memory is stored in the cortex. Conversion of short-term to long-term memory takes place in the **hippocampus**. Long-term memory involves structural changes at synapses, and **long-term potentiation** is a key cellular mechanism.",
+   "say": "Memory is classified by time. Immediate memory lasts seconds. Working memory lasts seconds to minutes. Recent memory lasts days to weeks and depends on medial temporal structures. Remote memory is stored in the cortex. The hippocampus converts short-term memory into long-term memory. Long-term memory involves structural changes at synapses, and long-term potentiation is a key mechanism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Duration",
+     "Key site"
+    ],
+    "rows": [
+     [
+      "Immediate",
+      "Seconds",
+      "Brainstem, frontoparietal network"
+     ],
+     [
+      "Working",
+      "Seconds to minutes",
+      "Frontal association cortex"
+     ],
+     [
+      "Recent",
+      "Days to weeks",
+      "Medial temporal structures"
+     ],
+     [
+      "Remote",
+      "Months to years",
+      "Cortex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Speech depends on two areas. **Wernicke's area** lies at the posterior superior temporal gyrus and handles comprehension. Lesions cause fluent aphasia with poor comprehension. **Broca's area**, in the inferior frontal gyrus, controls the motor part of speech. Lesions cause non-fluent, motor or expressive aphasia, with preserved comprehension. The arcuate fasciculus links the two areas. Right-sided dominance for visuospatial function and the left hemisphere for language are key exam points.",
+   "say": "Speech depends on two areas. Wernicke's area, at the posterior superior temporal gyrus, handles comprehension, and its lesions cause fluent aphasia. Broca's area, in the inferior frontal gyrus, controls the motor part of speech, and its lesions cause non-fluent, expressive aphasia with preserved comprehension. The arcuate fasciculus links them.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w",
+      "label": "Wernicke's area",
+      "sub": "Comprehension"
+     },
+     {
+      "id": "a",
+      "label": "Arcuate fasciculus",
+      "sub": "Link"
+     },
+     {
+      "id": "b",
+      "label": "Broca's area",
+      "sub": "Motor speech"
+     }
+    ],
+    "edges": [
+     [
+      "w",
+      "a"
+     ],
+     [
+      "a",
+      "b"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Right-sided lesions cause visuospatial defects, anosognosia and prosopagnosia, the inability to recognise known faces. Left-sided lesions cause dyscalculia and dysgraphia. Learning by repeated exposure to a neutral stimulus is **habituation**, while a conditioned reflex is a learned response to a paired stimulus. Procedural memory, for skills and habits, depends on the striatum. Dyscalculia belongs to the left hemisphere, a classic exam trap.",
+   "say": "Right-sided lesions cause visuospatial defects, anosognosia and prosopagnosia. Left-sided lesions cause dyscalculia and dysgraphia. Learning by repeated exposure to a neutral stimulus is habituation. A conditioned reflex is a learned response to a paired stimulus. Procedural memory for skills depends on the striatum.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "701014b6-fe6b-4b72-93ae-404f513bc6aa",
+  "fa0bc2aa-0444-4800-a89c-260bae9f16e4",
+  "8db0d1bb-b0b7-488b-86df-b52828e72cf1"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (22nd and 23rd editions)",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 218
+ }
+}

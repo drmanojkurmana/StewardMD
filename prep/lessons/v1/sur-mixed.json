@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "sur-mixed",
+ "subject": "surgery",
+ "title": "Mixed practice: surgery rapid review",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "This mixed review covers high-yield surgical facts that recur in exams. Each step gives one **key principle** with its classic clue. Focus on recognising the pattern quickly, since exam questions often test a single feature. Work through each step and link the clinical clue to the correct management or diagnosis.",
+   "say": "This mixed review covers high-yield surgical facts that recur in exams. Each step gives one key principle with its classic clue. Focus on recognising the pattern quickly, since exam questions often test a single feature. Work through each step and link the clinical clue to the correct management or diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Necrotising fasciitis presents with rapid spread, dusky red erythema, bullae and anaesthesia after a penetrating wound, with systemic signs. The **most important step** is urgent surgical exploration and debridement down to fascia. Antibiotics matter but do not replace surgery. Acute osteomyelitis is slower and does not fit this rapid picture.",
+   "say": "Necrotising fasciitis presents with rapid spread, dusky red erythema, bullae and anaesthesia after a penetrating wound, with systemic signs. The most important step is urgent surgical exploration and debridement down to fascia. Antibiotics matter but do not replace surgery. Acute osteomyelitis is slower and does not fit this rapid picture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rapid spread with systemic signs"
+     },
+     {
+      "id": "b",
+      "label": "Urgent surgical exploration"
+     },
+     {
+      "id": "c",
+      "label": "Debridement to fascia"
+     },
+     {
+      "id": "d",
+      "label": "Antibiotics alongside"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Burns resuscitation uses **crystalloid**, with Ringer's lactate or Hartmann's solution as the usual choice, following the Parkland approach. Albumin and dextran are not first-line. Urine output of 0.5 ml/kg/h in adults is the reliable marker of organ perfusion. CVP cannot be used alone to judge volume status.",
+   "say": "Burns resuscitation uses crystalloid, with Ringer's lactate or Hartmann's solution as the usual choice, following the Parkland approach. Albumin and dextran are not first-line. Urine output of 0.5 ml/kg/h in adults is the reliable marker of organ perfusion. CVP cannot be used alone to judge volume status.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fluid choice",
+     "points": [
+      "Crystalloid first-line",
+      "Ringer's lactate or Hartmann's",
+      "Urine output guides volume"
+     ]
+    },
+    "right": {
+     "title": "Points to avoid",
+     "points": [
+      "Dextran not first-line",
+      "CVP used alone",
+      "Hypotension is a late sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sign and test recall: the **Brodie-Trendelenburg test** identifies sapheno-femoral incompetence and separates it from perforator incompetence. Howship-Romberg sign points to an obturator hernia. The stomach appearance 'upside down' on barium meal suggests mesenteroaxial gastric volvulus. Early gastric cancer is confined to mucosa and submucosa.",
+   "say": "Sign and test recall: the Brodie-Trendelenburg test identifies sapheno-femoral incompetence and separates it from perforator incompetence. Howship-Romberg sign points to an obturator hernia. The stomach appearance upside down on barium meal suggests mesenteroaxial gastric volvulus. Early gastric cancer is confined to mucosa and submucosa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "Brodie-Trendelenburg test",
+      "Sapheno-femoral incompetence"
+     ],
+     [
+      "Howship-Romberg sign",
+      "Obturator hernia"
+     ],
+     [
+      "Upside-down stomach",
+      "Mesenteroaxial volvulus"
+     ],
+     [
+      "Confined to mucosa and submucosa",
+      "Early gastric cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Penile fracture with rupture of tunica albuginea and an **intact Buck's fascia** gives a haematoma confined to the penile shaft, producing the eggplant deformity. If Buck's fascia is disrupted, the haematoma spreads to scrotum and perineum. Surgery means evacuation and suturing the tunica. Bleeding gastric ulcers are usually treated by endoscopic control first, then excision with vagotomy if needed.",
+   "say": "Penile fracture with rupture of tunica albuginea and an intact Buck's fascia gives a haematoma confined to the penile shaft, producing the eggplant deformity. If Buck's fascia is disrupted, the haematoma spreads to scrotum and perineum. Surgery means evacuation and suturing the tunica. Bleeding gastric ulcers are usually treated by endoscopic control first, then excision with vagotomy if needed.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "010afab7-24cc-43dc-9a41-9813251a680b",
+  "f4c2b598-ce2f-4d0f-9b1c-3f06425628e2",
+  "007bc056-c507-4c74-92e3-053387b9886d"
+ ],
+ "src": [],
+ "refs": [
+  "Sabiston Textbook of Surgery",
+  "Bailey and Love's Short Practice of Surgery (Williams, N.S. et al, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 311
+ }
+}

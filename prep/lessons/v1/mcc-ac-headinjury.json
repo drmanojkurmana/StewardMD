@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mcc-ac-headinjury",
+ "subject": "mcc-acute-care",
+ "title": "Head injury: acute management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Severity of a **traumatic brain injury** is graded with the **Glasgow Coma Scale** after resuscitation. Mild is 13 to 15, moderate 9 to 12, and severe 3 to 8. Record eye, verbal and motor scores separately, because the motor score carries the most weight. A falling trend matters more than a single reading.",
+   "say": "Severity of a traumatic brain injury is graded with the Glasgow Coma Scale after resuscitation. Mild is 13 to 15, moderate 9 to 12, and severe 3 to 8. Record the eye, verbal and motor scores separately, because the motor score carries the most weight. A falling trend matters more than a single reading.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity",
+     "GCS after resuscitation",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "13 to 15",
+      "Selective CT and observation"
+     ],
+     [
+      "Moderate",
+      "9 to 12",
+      "Urgent CT and close monitoring"
+     ],
+     [
+      "Severe",
+      "3 to 8",
+      "Airway protection and urgent CT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Order a **non-contrast CT head** within 1 hour when the **GCS is 12 or less** on first assessment, when GCS is below 15 at 2 hours, or with suspected skull fracture or basal skull signs. Use NICE 2023 criteria, derived from the Canadian CT Head Rule. Assume a cervical spine injury until cleared, and check CT cervical spine when indicated.",
+   "say": "Order a non-contrast CT head within 1 hour when the GCS is 12 or less on first assessment, when GCS is below 15 at 2 hours, or with suspected skull fracture or basal skull signs. These criteria come from NICE 2023, derived from the Canadian CT Head Rule. Assume a cervical spine injury until cleared, and check CT cervical spine when indicated.",
+   "vis": null
+  },
+  {
+   "tx": "Prevent **secondary brain injury** by avoiding **hypoxia** and **hypotension**. Keep SpO2 above 90 percent and systolic pressure at 100 mmHg or more for those aged 50 to 69, or 110 mmHg or more for those aged 15 to 49 or over 70, per BTF 4th edition. Use 0.9 percent sodium chloride, and in bleeding severe injury keep MAP at 80 mmHg or more.",
+   "say": "Prevent secondary brain injury by avoiding hypoxia and hypotension. Keep SpO2 above 90 percent and systolic pressure at 100 millimetres of mercury or more for those aged 50 to 69, or 110 or more for those aged 15 to 49 or over 70, per the BTF 4th edition. Use 0.9 percent sodium chloride, and in bleeding severe injury keep mean arterial pressure at 80 or more.",
+   "vis": null
+  },
+  {
+   "tx": "**Tranexamic acid** is given early, ideally within **3 hours** of injury, for mild to moderate head injury: a loading dose followed by an infusion over eight hours. Where the GCS is 12 or less and there is no bleeding outside the skull, a single **2 g** bolus within **2 hours** is an alternative. If an anticoagulant is causing intracranial bleeding, reversal must start without delay; the agent in use determines the antidote, so identify it first.",
+   "say": "Tranexamic acid is given early, ideally within three hours of injury, for mild to moderate head injury. It is a loading dose followed by an infusion over eight hours. Where the Glasgow Coma Scale is 12 or less and there is no bleeding outside the skull, a single two gram bolus within two hours is an alternative. If an anticoagulant is causing intracranial bleeding, reversal must start without delay. The agent the patient is taking determines the antidote, so identify it first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intracranial bleed on anticoagulant"
+     },
+     {
+      "id": "b",
+      "label": "Identify the agent"
+     },
+     {
+      "id": "c",
+      "label": "Warfarin: 4-factor PCC plus IV vitamin K"
+     },
+     {
+      "id": "d",
+      "label": "Dabigatran: idarucizumab"
+     },
+     {
+      "id": "e",
+      "label": "Apixaban or rivaroxaban: andexanet alfa"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Warfarin"
+     ],
+     [
+      "b",
+      "d",
+      "Dabigatran"
+     ],
+     [
+      "b",
+      "e",
+      "Factor Xa inhibitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treat **raised ICP** above 22 mmHg in tiers. First tier is sedation, head up 30 degrees, normocapnia and osmotherapy with **mannitol** or **hypertonic saline**, which is preferred when hypotensive. Aim for CPP 60 to 70 mmHg. Avoid prophylactic hyperventilation to PaCO2 25 mmHg or less, and do not give corticosteroids.",
+   "say": "Treat raised intracranial pressure above 22 mmHg in tiers. The first tier is sedation, head up 30 degrees, normocapnia and osmotherapy with mannitol or hypertonic saline, with hypertonic saline preferred when hypotensive. Aim for cerebral perfusion pressure of 60 to 70 mmHg. Avoid prophylactic hyperventilation to PaCO2 25 or less, and do not give corticosteroids.",
+   "vis": null
+  },
+  {
+   "tx": "Give **phenytoin** seizure prophylaxis for 7 days after severe TBI, since it has guideline support. Treat any seizure promptly, because status epilepticus drives secondary injury. Discuss every surgically significant CT abnormality with neurosurgery, and also discuss GCS 8 or less after resuscitation, falling GCS, penetrating injury or CSF leak.",
+   "say": "Give phenytoin seizure prophylaxis for 7 days after severe TBI, since it has guideline support. Treat any seizure promptly, because status epilepticus drives secondary injury. Discuss every surgically significant CT abnormality with neurosurgery, and also discuss GCS 8 or less after resuscitation, a falling GCS, penetrating injury or CSF leak.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-traumatic-brain-injury",
+  "kb-reference-concussion-and-other-traumatic-brain",
+  "kb-reference-traumatic-brain-injury"
+ ],
+ "refs": [
+  "NICE guideline on head injury (2023)",
+  "Brain Trauma Foundation Guidelines for the Management of Severe Traumatic Brain Injury, 4th edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 2497,
+  "itemN": 10
+ }
+}

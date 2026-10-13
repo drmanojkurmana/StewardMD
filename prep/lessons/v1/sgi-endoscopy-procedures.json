@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "sgi-endoscopy-procedures",
+ "subject": "ss-gastroenterology",
+ "title": "Diagnostic and therapeutic endoscopy: an exam-focused overview",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Endoscopic resection is used for early neoplasia. **Endoscopic mucosal resection** (EMR) removes lesions confined to the mucosa, often after lifting with submucosal injection and snaring. **Endoscopic submucosal dissection** (ESD) uses a knife to dissect the submucosa, allowing en bloc removal of larger or fibrotic lesions. ESD has higher perforation risk and longer procedure time than EMR.",
+   "say": "Endoscopic resection is used for early neoplasia. Endoscopic mucosal resection removes lesions confined to the mucosa, often after lifting with submucosal injection and snaring. Endoscopic submucosal dissection uses a knife to dissect the submucosa, allowing en bloc removal of larger or fibrotic lesions. Endoscopic submucosal dissection has a higher perforation risk and longer procedure time than mucosal resection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EMR",
+     "points": [
+      "Mucosal lesions only",
+      "Snare-based",
+      "Shorter procedure",
+      "Lower perforation risk"
+     ]
+    },
+    "right": {
+     "title": "ESD",
+     "points": [
+      "Larger or fibrotic lesions",
+      "Knife dissection",
+      "Higher perforation risk",
+      "En bloc removal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**ERCP** (endoscopic retrograde cholangiopancreatography) treats stones, strictures and leaks in the biliary and pancreatic ducts. Its most feared complication is **post-ERCP pancreatitis**, which is lessened by rectal non-steroidal anti-inflammatory suppositories and by placing a **pancreatic duct stent** in high-risk patients. Other key complications include **bleeding**, **perforation** and **cholangitis**. Ascending cholangitis with shock needs urgent biliary drainage.",
+   "say": "ERCP treats stones, strictures and leaks within the bile and pancreatic ducts. The complication you must not miss is pancreatitis after the procedure. Rectal anti-inflammatory suppositories and a pancreatic duct stent in higher-risk patients reduce that risk. Bleeding, perforation and infection in the bile ducts are the other main concerns. A patient with cholangitis and shock needs the bile duct drained urgently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Post-ERCP pancreatitis",
+      "Most common and most feared; reduced by rectal anti-inflammatory suppositories and pancreatic stenting in high-risk patients"
+     ],
+     [
+      "Bleeding",
+      "Often follows sphincterotomy; usually controlled with endoscopic haemostasis"
+     ],
+     [
+      "Perforation",
+      "Can be duodenal or biliary; needs prompt recognition and treatment"
+     ],
+     [
+      "Cholangitis",
+      "Ascending infection; with shock, urgent biliary drainage is required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endoscopic ultrasound** (EUS) gives the most accurate local staging for oesophageal, pancreatic and rectal cancers. **EUS-guided fine needle aspiration or biopsy** samples lesions adjacent to the gut wall, such as pancreatic masses and lymph nodes. Enteral stents and **PEG tubes** provide palliation for obstruction and feeding access respectively. PEG is placed by a pull or push technique through the anterior abdominal wall.",
+   "say": "Endoscopic ultrasound gives the most accurate local staging for oesophageal, pancreatic and rectal cancers. EUS guided fine needle aspiration or biopsy samples lesions adjacent to the gut wall, such as pancreatic masses and lymph nodes. Enteral stents and PEG tubes provide palliation for obstruction and feeding access respectively. PEG is placed by a pull or push technique through the anterior abdominal wall.",
+   "vis": null
+  },
+  {
+   "tx": "Capsule endoscopy is the main test for **obscure GI bleeding** after negative upper and lower endoscopy. It is purely diagnostic, with no biopsy or haemostasis. In suspected strictures, as in Crohn's disease, a **patency capsule** should be given first to exclude **capsule retention**, which occurs in about 2.6 percent of Crohn's patients. Symptomatic retention needs endoscopic or surgical removal.",
+   "say": "Capsule endoscopy is the main test for obscure GI bleeding after negative upper and lower endoscopy. It is purely diagnostic, with no biopsy or haemostasis. In suspected strictures, as in Crohn's disease, a patency capsule should be given first to exclude capsule retention, which occurs in about 2.6 percent of Crohn's patients. Symptomatic retention needs endoscopic or surgical removal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected stricture"
+     },
+     {
+      "id": "b",
+      "label": "Patency capsule"
+     },
+     {
+      "id": "c",
+      "label": "Passes?"
+     },
+     {
+      "id": "d",
+      "label": "Video capsule"
+     },
+     {
+      "id": "e",
+      "label": "Retained: remove"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_bf22170aa425",
+  "q_c268262f9b12",
+  "q_2ad31750c98e"
+ ],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline on Acute upper gastrointestinal bleeding in over 16s",
+  "British Society of Gastroenterology Guidelines on Endoscopic Haemostasis",
+  "ASGE Guideline on Antithrombotic Agents and Endoscopy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 79
+ }
+}

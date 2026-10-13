@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "mic-bacterial-genetics",
+ "subject": "microbiology",
+ "title": "Bacterial genetics and antimicrobial resistance",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Bacteria change their genetic makeup in two main ways. **Mutation** is a change in the base sequence of resident genes. **Horizontal gene transfer** moves DNA between bacteria, and it is the main reason resistance spreads quickly. Intrinsic resistance is different: it is an innate feature of a species, passed to daughter cells during division, such as anaerobes being resistant to aminoglycosides.",
+   "say": "Bacteria change their genetic makeup in two main ways. Mutation is a change in the base sequence of resident genes. Horizontal gene transfer moves DNA between bacteria, and it is the main reason resistance spreads quickly. Intrinsic resistance is different. It is an innate feature of a species, passed to daughter cells during division. For example, anaerobes are resistant to aminoglycosides.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Type of resistance",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Mutation of resident genes",
+      "Acquired",
+      "Tuberculosis to streptomycin"
+     ],
+     [
+      "Plasmid or transposon transfer",
+      "Acquired, horizontal",
+      "Multidrug resistance in gram-negative bacilli"
+     ],
+     [
+      "Innate species feature",
+      "Intrinsic, vertical",
+      "Anaerobes and aminoglycosides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "There are three classic routes of horizontal transfer. **Transformation** is uptake of free naked DNA from the medium, first shown by Griffith in pneumococci. **Transduction** is transfer of DNA carried inside a bacteriophage coat. **Conjugation** needs direct cell contact through a sex pilus and is the commonest route for **R factor** plasmids carrying several resistance genes.",
+   "say": "There are three classic routes of horizontal transfer. Transformation is uptake of free naked DNA from the medium, first shown by Griffith in pneumococci. Transduction is transfer of DNA carried inside a bacteriophage coat. Conjugation needs direct cell contact through a sex pilus and is the commonest route for R factor plasmids carrying several resistance genes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transformation and transduction",
+     "points": [
+      "Free DNA taken up directly",
+      "Transduction uses a phage as carrier",
+      "Transformation studied in pneumococcus and Haemophilus"
+     ]
+    },
+    "right": {
+     "title": "Conjugation",
+     "points": [
+      "Needs direct cell to cell contact",
+      "Uses a sex pilus",
+      "Spreads multidrug resistance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Plasmids** are extrachromosomal DNA that carry resistance genes and can move between species. **Transposons** are short, jumping DNA segments with inverted repeats at their ends; they are not replicative and do not need DNA homology to move. Lysogenic conversion is different: the phage DNA itself becomes part of the host genome. The classic example is toxin gene acquisition in Corynebacterium diphtheriae, which makes it toxigenic.",
+   "say": "Plasmids are extrachromosomal DNA that carry resistance genes and can move between species. Transposons are short, jumping DNA segments with inverted repeats at their ends. They are not replicative and do not need DNA homology to move. Lysogenic conversion is different. The phage DNA itself becomes part of the host genome. The classic example is toxin gene acquisition in Corynebacterium diphtheriae.",
+   "vis": null
+  },
+  {
+   "tx": "Resistance to beta-lactams is mostly due to **beta-lactamase** enzymes that break the lactam ring. An **ESBL** hydrolyses extended spectrum cephalosporins, and a **carbapenemase** such as **NDM-1** hydrolyses carbapenems. MRSA carries the mecA gene, which codes for PBP2a, a low affinity penicillin binding protein. Because of this, MRSA resists all beta-lactams, including carbapenems, and is treated with vancomycin or alternatives such as linezolid.",
+   "say": "Resistance to beta-lactams is mostly due to beta-lactamase enzymes that break the lactam ring. An ESBL hydrolyses extended spectrum cephalosporins. A carbapenemase such as NDM-1 hydrolyses carbapenems. MRSA carries the mecA gene, which codes for PBP2a, a low affinity penicillin binding protein. Because of this, MRSA resists all beta-lactams, including carbapenems. It is treated with vancomycin or alternatives such as linezolid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "mecA gene"
+     },
+     {
+      "id": "b",
+      "label": "PBP2a made"
+     },
+     {
+      "id": "c",
+      "label": "Low beta-lactam affinity"
+     },
+     {
+      "id": "d",
+      "label": "MRSA resists all beta-lactams"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Susceptibility testing measures whether an organism is inhibited by a drug. The **Kirby-Bauer disc diffusion** method uses Mueller Hinton agar and measures zones of inhibition. The **E test** gives the **MIC**, the minimum inhibitory concentration. For MRSA screening, cefoxitin disc diffusion is preferred over oxacillin, since it predicts mecA presence more accurately. PCR for mecA and latex agglutination for PBP2a are confirmatory methods.",
+   "say": "Susceptibility testing measures whether an organism is inhibited by a drug. The Kirby-Bauer disc diffusion method uses Mueller Hinton agar and measures zones of inhibition. The E test gives the minimum inhibitory concentration. For MRSA screening, cefoxitin disc diffusion is preferred over oxacillin, since it predicts mecA presence more accurately. PCR for mecA and latex agglutination for PBP2a are confirmatory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Result given",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Kirby-Bauer disc diffusion",
+      "Zone of inhibition",
+      "Routine testing"
+     ],
+     [
+      "E test",
+      "MIC value",
+      "Quantitative testing"
+     ],
+     [
+      "Cefoxitin disc",
+      "Zone size",
+      "MRSA screening"
+     ],
+     [
+      "PCR for mecA",
+      "Gene present or absent",
+      "Confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PCR** amplifies a small amount of DNA into large quantities. Each cycle has three steps: denaturation at about 95 degrees, primer annealing at about 55 degrees, and extension at about 72 degrees. **Real time PCR** uses fluorescent reporters to measure product formed in each cycle, so it avoids gel electrophoresis and is most valuable in virology. Probes and PCR are used to detect resistance genes directly.",
+   "say": "PCR amplifies a small amount of DNA into large quantities. Each cycle has three steps: denaturation at about 95 degrees, primer annealing at about 55 degrees, and extension at about 72 degrees. Real time PCR uses fluorescent reporters to measure product formed in each cycle, so it avoids gel electrophoresis. It is most valuable in virology. Probes and PCR are used to detect resistance genes directly.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2b2e6019-e620-4394-8493-55c14e6e28aa",
+  "40fafd34-3232-44d3-983e-f00992a41c72",
+  "5796ec13-1a66-4072-9648-7be79e8308e9"
+ ],
+ "src": [],
+ "refs": [
+  "Essentials of Medical Pharmacology (K.D. Tripathi, Sixth Edition)",
+  "Jawetz, Melnick and Adelberg's Medical Microbiology (27th Edition)",
+  "Ananthanarayan and Paniker's Textbook of Microbiology (7th Edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 222
+ }
+}

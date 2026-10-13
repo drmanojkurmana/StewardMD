@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "mcc-ac-glucose",
+ "subject": "mcc-acute-care",
+ "title": "Hypoglycaemia and glucose emergencies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hypoglycaemia** is defined by a low **plasma glucose** that produces symptoms, or by any low reading accompanied by **neuroglycopenic** features. Symptoms fall into two groups. **Adrenergic** warning signs include sweating, tremor and palpitations, while **neuroglycopenic** features include confusion, drowsiness and coma. Recognising both groups matters because adrenergic signs alert the patient early, allowing treatment before the brain is affected.",
+   "say": "Hypoglycaemia is defined by a low plasma glucose that produces symptoms, or by any low reading accompanied by neuroglycopenic features. Symptoms fall into two groups. Adrenergic warning signs include sweating, tremor and palpitations, while neuroglycopenic features include confusion, drowsiness and coma. Recognising both groups matters, because adrenergic signs alert the patient early, allowing treatment before the brain is affected.",
+   "vis": null
+  },
+  {
+   "tx": "Treat by route according to consciousness and access. An **alert patient who can swallow** takes oral fast-acting carbohydrate, then glucose is rechecked. An **unresponsive patient** without intravenous access receives **intramuscular glucagon**. If intravenous access exists, a **dextrose bolus** is used. Glucagon works by stimulating hepatic glycogenolysis and gluconeogenesis.",
+   "say": "Treat by route according to consciousness and access. An alert patient who can swallow takes oral fast-acting carbohydrate, then glucose is rechecked. An unresponsive patient without intravenous access receives intramuscular glucagon. If intravenous access exists, a dextrose bolus is used. Glucagon works by stimulating hepatic glycogenolysis and gluconeogenesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "First treatment"
+    ],
+    "rows": [
+     [
+      "Alert and swallowing safely",
+      "Oral fast-acting carbohydrate, then recheck"
+     ],
+     [
+      "Unresponsive, no IV access",
+      "Intramuscular glucagon"
+     ],
+     [
+      "Unresponsive, IV access present",
+      "Intravenous dextrose bolus"
+     ],
+     [
+      "Drowsy but airway protected",
+      "Oral carbohydrate only if swallowing is safe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Consider **drug and kidney factors** that prolong hypoglycaemia. **Sulfonylureas** and **insulin** stimulate or deliver glucose-lowering action that can outlast the first treatment. **Renal impairment** slows clearance of insulin and sulfonylureas, so glucose can fall again. Beta-blockers blunt adrenergic warning signs, so neuroglycopenic confusion may occur without sweating or tremor.",
+   "say": "Consider drug and kidney factors that prolong hypoglycaemia. Sulfonylureas and insulin can have a glucose-lowering effect that outlasts the first treatment. Renal impairment slows clearance of insulin and sulfonylureas, so glucose can fall again. Beta-blockers blunt adrenergic warning signs, so confusion may occur without sweating or tremor.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sulfonylurea or insulin"
+     },
+     {
+      "id": "b",
+      "label": "Reduced clearance"
+     },
+     {
+      "id": "c",
+      "label": "Glucose falls again"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use **factitious hypoglycaemia** as a diagnosis to consider when insulin is high but **C-peptide is suppressed**. Endogenous insulin is released with equal amounts of C-peptide, so a low C-peptide with high insulin points to an external source. Sulfonylurea screening is also useful in this setting. Insulinoma is the main endogenous cause and typically shows high C-peptide.",
+   "say": "Use factitious hypoglycaemia as a diagnosis to consider when insulin is high but C-peptide is suppressed. Endogenous insulin is released with equal amounts of C-peptide, so a low C-peptide with high insulin points to an external source. Sulfonylurea screening is also useful here. Insulinoma is the main endogenous cause and typically shows raised C-peptide.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exogenous insulin",
+     "points": [
+      "Insulin high",
+      "C-peptide suppressed",
+      "Often access to insulin"
+     ]
+    },
+    "right": {
+     "title": "Insulinoma",
+     "points": [
+      "Insulin high",
+      "C-peptide raised",
+      "Endogenous source"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before discharge, confirm that glucose is stable after the **first treatment** and that the cause has been identified. Patients on sulfonylureas with **renal impairment** or poor intake may need observation with serial glucose checks rather than discharge after one normal reading. Review the insulin or sulfonylurea dose and give carbohydrate advice with clinic follow-up.",
+   "say": "Before discharge, confirm that glucose is stable after the first treatment and that the cause has been identified. Patients on sulfonylureas with renal impairment or poor intake may need observation with serial glucose checks, rather than discharge after one normal reading. Review the insulin or sulfonylurea dose and give carbohydrate advice with clinic follow-up.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG17 Type 1 diabetes in adults: diagnosis and management",
+  "Joint British Diabetes Societies Guideline on the management of hypoglycaemia in adults",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

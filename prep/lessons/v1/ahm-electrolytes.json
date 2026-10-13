@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "ahm-electrolytes",
+ "subject": "adult-health-medicine",
+ "title": "Sodium and potassium disorders: assessment and emergency management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Start with **serum osmolality**, because it separates true hyponatraemia from pseudohyponatraemia and translocational causes. Low sodium with low osmolality means true hypotonic hyponatraemia. Normal measured osmolality with low sodium suggests pseudohyponatraemia from raised lipids or proteins. Raised glucose draws water out of cells and lowers sodium, so correct sodium for glucose before deciding. Then check volume status and **urine sodium** to sort the cause.",
+   "say": "Start with serum osmolality, because it separates true hyponatraemia from pseudohyponatraemia and translocational causes. Low sodium with low osmolality means true hypotonic hyponatraemia. Normal measured osmolality with low sodium suggests pseudohyponatraemia from raised lipids or proteins. Raised glucose draws water out of cells and lowers sodium, so correct sodium for glucose before deciding. Then check volume status and urine sodium to sort the cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Likely cause",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "Low sodium, normal osmolality",
+      "Pseudohyponatraemia",
+      "Very high lipids or proteins"
+     ],
+     [
+      "Low sodium, high osmolality",
+      "Translocational",
+      "Marked hyperglycaemia"
+     ],
+     [
+      "Low sodium, low osmolality, very low urine sodium",
+      "Volume depletion",
+      "Vomiting, dry and tachycardic"
+     ],
+     [
+      "Low sodium, low osmolality, raised urine sodium, euvolaemic",
+      "SIADH or diuretic effect",
+      "No fluid overload, drug history"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Volume depletion with very low urine sodium means the kidneys are retaining salt and water. Vomiting and poor intake reduce effective circulating volume. This triggers **antidiuretic hormone** release and avid renal water retention, so serum sodium falls. Treatment is isotonic saline to restore volume. Thiazide-induced natriuresis, by contrast, produces a raised urine sodium, which helps distinguish the two.",
+   "say": "Volume depletion with very low urine sodium means the kidneys are retaining salt and water. Vomiting and poor intake reduce effective circulating volume. This triggers antidiuretic hormone release and avid renal water retention, so serum sodium falls. Treatment is isotonic saline to restore volume. Thiazide-induced natriuresis, by contrast, produces a raised urine sodium, which helps distinguish the two.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vomiting, poor intake"
+     },
+     {
+      "id": "b",
+      "label": "Low effective volume"
+     },
+     {
+      "id": "c",
+      "label": "ADH release"
+     },
+     {
+      "id": "d",
+      "label": "Water retention"
+     },
+     {
+      "id": "e",
+      "label": "Low serum sodium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correction of **chronic hyponatraemia** must be gradual, because the brain has already lost osmolytes to adapt. A rapid rise in sodium, particularly after **hypertonic saline**, risks **osmotic demyelination syndrome**, classically affecting the pons. In high-risk patients, the daily rise should be tightly capped in line with local guidance. Hypertonic saline is reserved for severe symptoms such as seizures or coma.",
+   "say": "Correction of chronic hyponatraemia has to be gradual, since the brain has already lost osmolytes to adapt. A rapid sodium rise, particularly after hypertonic saline, can trigger osmotic demyelination syndrome, classically affecting the pons. In high-risk patients the daily rise should be tightly limited, following local guidance. Reserve hypertonic saline for severe symptoms such as seizures or coma.",
+   "vis": null
+  },
+  {
+   "tx": "In **hyperkalaemia**, ECG changes such as tall peaked T waves, a widened QRS and absent P waves signal membrane toxicity. Give intravenous **calcium gluconate** first to stabilise the myocardium within minutes. Then shift potassium into cells with insulin and glucose, or salbutamol, and remove it with binders or dialysis. Calcium does not lower potassium, it only protects the heart. Normal glucose means insulin and glucose are not the first step.",
+   "say": "In hyperkalaemia, ECG changes such as tall peaked T waves, a widened QRS and absent P waves signal membrane toxicity. Give intravenous calcium gluconate first to stabilise the myocardium within minutes. Then shift potassium into cells with insulin and glucose, or salbutamol, and remove it with binders or dialysis. Calcium does not lower potassium, it only protects the heart. Normal glucose means insulin and glucose are not the first step.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ECG changes"
+     },
+     {
+      "id": "b",
+      "label": "IV calcium gluconate"
+     },
+     {
+      "id": "c",
+      "label": "Shift K into cells"
+     },
+     {
+      "id": "d",
+      "label": "Remove potassium"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **hypokalaemia**, potassium is lost through vomiting, diarrhoea and diuretics such as thiazides. ECG clues include flattened T waves and prominent U waves. Arrhythmia risk is high, so replace potassium with cardiac monitoring, and correct any co-existing sodium and magnesium deficit. Drug-induced hyponatraemia from thiazides or ACE inhibitors is managed by stopping the offending drug and reviewing volume status, rather than by fluid restriction.",
+   "say": "In hypokalaemia, potassium is lost through vomiting, diarrhoea and diuretics such as thiazides. ECG clues include flattened T waves and prominent U waves. Arrhythmia risk is high, so replace potassium with cardiac monitoring, and correct any co-existing sodium and magnesium deficit. Drug-induced hyponatraemia from thiazides or ACE inhibitors is managed by stopping the offending drug and reviewing volume status.",
+   "vis": null
+  },
+  {
+   "tx": "Before you sit the exam, rehearse the common traps. In **SIADH**, plasma osmolality is low, urine sodium stays raised, and there are no signs of oedema or dehydration. **Primary polydipsia** produces persistently dilute urine. **Pseudohyponatraemia** shows a normal measured osmolality. For **hyperkalaemia** with **chronic kidney disease** on an ACE inhibitor, give intravenous calcium first to protect the myocardium.",
+   "say": "Before you sit the exam, rehearse the common traps. In SIADH, plasma osmolality is low, urine sodium stays raised, and there are no signs of oedema or dehydration. Primary polydipsia produces persistently dilute urine. Pseudohyponatraemia shows a normal measured osmolality. For hyperkalaemia with chronic kidney disease on an ACE inhibitor, give intravenous calcium first to protect the myocardium.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

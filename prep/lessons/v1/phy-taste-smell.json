@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "phy-taste-smell",
+ "subject": "physiology",
+ "title": "Taste and smell: receptors, pathways and clinical losses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Taste and smell are the two **chemoreceptive** senses. Taste buds on the tongue detect dissolved chemicals, while olfactory receptors in the nasal roof detect airborne odorants. Both send information to the brain, but their routes differ. Smell is the only major sense whose pathway has no relay in the thalamus, and it reaches the cortex through the olfactory bulb. Taste is relayed through the thalamus to the cortex.",
+   "say": "Taste and smell are the two chemoreceptive senses. Taste buds on the tongue detect dissolved chemicals, while olfactory receptors in the nasal roof detect airborne odorants. Both send information to the brain, but their routes differ. Smell is the only major sense whose pathway has no relay in the thalamus, and it reaches the cortex through the olfactory bulb. Taste is relayed through the thalamus to the cortex.",
+   "vis": null
+  },
+  {
+   "tx": "There are five basic tastes: sweet, sour, salty, bitter and **umami**. Umami, the savoury taste of L-glutamate, was the last to be accepted as a distinct taste. Each taste uses a different transduction mechanism. Sweet and bitter use G protein coupled receptors, salt uses amiloride sensitive sodium channels, and sour uses hydrogen ion entry. Umami uses a modified metabotropic glutamate receptor, mGluR4.",
+   "say": "There are five basic tastes: sweet, sour, salty, bitter and umami. Umami, the savoury taste of L-glutamate, was the last to be accepted as a distinct taste. Each taste uses a different transduction mechanism. Sweet and bitter use G protein coupled receptors, salt uses amiloride sensitive sodium channels, and sour uses hydrogen ion entry. Umami uses a modified metabotropic glutamate receptor, mGluR4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Taste",
+     "Main mechanism"
+    ],
+    "rows": [
+     [
+      "Sweet",
+      "G protein coupled, cAMP rise"
+     ],
+     [
+      "Bitter",
+      "G protein coupled, calcium rise"
+     ],
+     [
+      "Salty",
+      "Amiloride sensitive sodium channel"
+     ],
+     [
+      "Sour",
+      "Hydrogen ion entry, potassium closure"
+     ],
+     [
+      "Umami",
+      "Modified mGluR4 receptor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Taste buds sit in the walls of papillae. **Fungiform** papillae are numerous near the tip and margins. **Circumvallate** papillae form a V near the base and are the largest. **Foliate** papillae lie on the posterior lateral edge. Filiform papillae are the most numerous but carry no taste buds. Taste sensitivity is not confined to fixed zones, so the old tongue map is no longer accepted.",
+   "say": "Taste buds sit in the walls of papillae. Fungiform papillae are numerous near the tip and margins. Circumvallate papillae form a V near the base and are the largest. Foliate papillae lie on the posterior lateral edge. Filiform papillae are the most numerous but carry no taste buds. Taste sensitivity is not confined to fixed zones, so the old tongue map is no longer accepted.",
+   "vis": null
+  },
+  {
+   "tx": "Olfactory receptor cells are **bipolar neurons**, so the receptor is itself a nerve cell. About 10 to 20 million of them sit in the olfactory epithelium of the roof of the nasal cavity. Their axons pass through the cribriform plate and form glomeruli in the olfactory bulb. Inside each glomerulus, the axons contact mitral cell dendrites. Mitral cells are the principal output neurons, while granule and periglomerular cells act as local interneurons.",
+   "say": "Olfactory receptor cells are bipolar neurons, so the receptor is itself a nerve cell. About 10 to 20 million of them sit in the olfactory epithelium of the roof of the nasal cavity. Their axons pass through the cribriform plate and form glomeruli in the olfactory bulb. Inside each glomerulus, the axons contact mitral cell dendrites. Mitral cells are the principal output neurons, while granule and periglomerular cells act as local interneurons.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Olfactory receptor neuron"
+     },
+     {
+      "id": "n2",
+      "label": "Cribriform plate"
+     },
+     {
+      "id": "n3",
+      "label": "Glomerulus"
+     },
+     {
+      "id": "n4",
+      "label": "Mitral cell"
+     },
+     {
+      "id": "n5",
+      "label": "Olfactory cortex"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smell losses are classed as **transport**, **sensory** or **neural**. Rhinitis and nasal polyps cause transport loss. Drugs, radiation and toxins cause sensory loss. Neural losses occur in Alzheimer disease, alcoholism, hypothyroidism and Kallmann syndrome. Hyposmia means reduced smell, anosmia means absent smell, and parosmia means distorted smell. Ageusia means absent taste. There is no proven treatment for sensorineural loss, though spontaneous recovery often occurs.",
+   "say": "Smell losses are classed as transport, sensory or neural. Rhinitis and nasal polyps cause transport loss. Drugs, radiation and toxins cause sensory loss. Neural losses occur in Alzheimer disease, alcoholism, hypothyroidism and Kallmann syndrome. Hyposmia means reduced smell, anosmia means absent smell, and parosmia means distorted smell. Ageusia means absent taste. There is no proven treatment for sensorineural loss, though spontaneous recovery often occurs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Example causes"
+    ],
+    "rows": [
+     [
+      "Transport loss",
+      "Rhinitis, nasal polyps, neoplasm"
+     ],
+     [
+      "Sensory loss",
+      "Drugs, radiation, toxin exposure"
+     ],
+     [
+      "Neural loss",
+      "Alzheimer, alcoholism, Kallmann syndrome"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "474c328c-5f55-4822-bde3-3c0e167a5281",
+  "c2e3ed98-67df-4812-9cdf-6358a6212689",
+  "5d9461fa-e5bb-43cf-9aaa-d56066a4bbf8"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Ganong's Review of Medical Physiology (Barrett KE)",
+  "Chapter 14 in Principles of Neural Science (Kandel ER et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 62
+ }
+}

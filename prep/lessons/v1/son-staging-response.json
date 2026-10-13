@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "son-staging-response",
+ "subject": "ss-medical-oncology",
+ "title": "Staging, performance status and response assessment in oncology",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Cancer **staging** describes how far a tumour has spread and guides treatment and prognosis. The TNM system, now in its eighth edition, scores the **primary tumour** (T), regional **lymph nodes** (N) and **distant metastasis** (M). Nodal category N1 means one to three regional nodes involved, while N2 means four or more in colorectal cancer. M1 denotes distant metastasis, and M0 means none detected.",
+   "say": "Cancer staging describes how far a tumour has spread and guides treatment and prognosis. The TNM system, now in its eighth edition, scores the primary tumour, regional lymph nodes and distant metastasis. For colorectal cancer, N1 means one to three regional nodes involved, while N2 means four or more. M1 denotes distant metastasis, and M0 means none detected.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Meaning",
+     "Example"
+    ],
+    "rows": [
+     [
+      "T",
+      "Primary tumour extent",
+      "T4 breaches serosa or organs"
+     ],
+     [
+      "N",
+      "Regional nodes involved",
+      "N2 means four or more nodes"
+     ],
+     [
+      "M",
+      "Distant metastasis",
+      "M1 means spread present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Performance status** describes how well a patient manages daily life and predicts how well they will tolerate treatment. The **ECOG** scale runs from zero, fully active, to four, completely bedbound. The **Karnofsky** score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+   "say": "Performance status describes how well a patient manages daily life and predicts how well they will tolerate treatment. The ECOG scale runs from zero, fully active, to four, completely bedbound. The Karnofsky score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+   "vis": null
+  },
+  {
+   "tx": "**RECIST 1.1** defines response in solid tumours using measurable lesions. A target lesion is measurable if it is at least 10 mm on CT or MRI, and lymph nodes are measurable if the short axis is at least 15 mm. **Complete response** means all target lesions vanish, **partial response** means a 30 percent fall in the sum of diameters, and **progressive disease** means a 20 percent rise plus an absolute increase of 5 mm.",
+   "say": "RECIST 1.1 defines response in solid tumours using measurable lesions. A target lesion is measurable if it is at least 10 millimetres on CT or MRI, and lymph nodes need a short axis of at least 15 millimetres. Complete response means all target lesions vanish. Partial response means a 30 percent fall in the sum of diameters. Progressive disease means a 20 percent rise plus an absolute increase of 5 millimetres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Response",
+     "Criterion",
+     "Threshold"
+    ],
+    "rows": [
+     [
+      "Complete",
+      "Target lesions disappear",
+      "All gone"
+     ],
+     [
+      "Partial",
+      "Sum of diameters falls",
+      "At least 30 percent"
+     ],
+     [
+      "Progressive",
+      "Sum of diameters rises",
+      "At least 20 percent plus 5 mm"
+     ],
+     [
+      "Stable",
+      "Neither criterion met",
+      "Between the two"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pseudoprogression** is an apparent enlargement of lesions or new lesions on immunotherapy that later regresses, most often in the first months. **iRECIST** adds rules so that a patient with unconfirmed progression continues treatment and is reimaged after about four to eight weeks. Confirmation on repeat scans is therefore required before stopping immunotherapy for progression.",
+   "say": "Pseudoprogression is an apparent enlargement of lesions or new lesions on immunotherapy that later regresses, most often in the first months. iRECIST adds rules so that a patient with unconfirmed progression continues treatment and is reimaged after about four to eight weeks. Confirmation on repeat scans is therefore needed before stopping immunotherapy for progression.",
+   "vis": null
+  },
+  {
+   "tx": "Metabolic response uses **PERCIST** with FDG PET, where a fall in standardised uptake value marks response. **Lugano classification** applies PET to lymphoma and uses the **Deauville five point score**, where scores 1 to 3 indicate a negative scan and 4 to 5 a positive one. In hepatocellular carcinoma, **mRECIST** measures enhancing viable tumour rather than total size, reflecting the response of the tumour to locoregional therapy.",
+   "say": "Metabolic response uses PERCIST with FDG PET, where a fall in standardised uptake value marks response. The Lugano classification applies PET to lymphoma and uses the Deauville five point score, where scores 1 to 3 indicate a negative scan and 4 to 5 a positive one. In hepatocellular carcinoma, mRECIST measures enhancing viable tumour rather than total size.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Deauville scoring",
+     "points": [
+      "Score 1 to 3 is negative",
+      "Score 4 to 5 is positive",
+      "Used in lymphoma"
+     ]
+    },
+    "right": {
+     "title": "mRECIST in liver cancer",
+     "points": [
+      "Measures enhancing viable tumour",
+      "Used after locoregional therapy",
+      "Applies to hepatocellular carcinoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Response Assessment in Neuro-Oncology** (RANO) grades brain tumour response using contrast enhancement, **T2 or FLAIR** signal and clinical status. A **complete response** needs enhancement to vanish with steroids withdrawn and neurological function stable or better. Clinicians should remember **pseudoprogression** after chemoradiotherapy, where early enlargement or new enhancement can mislead, so repeat imaging is needed before progression is declared.",
+   "say": "Response Assessment in Neuro-Oncology, known as RANO, grades brain tumour response using contrast enhancement, T2 or FLAIR signal and clinical status. A complete response needs enhancement to vanish with steroids withdrawn and neurological function stable or better. Clinicians should remember pseudoprogression after chemoradiotherapy, where early enlargement or new enhancement can mislead, so repeat imaging is needed before progression is declared.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_9e05384bd2f6",
+  "q_fbe999d2fd8d",
+  "q_73a71bb61cf1"
+ ],
+ "src": [],
+ "refs": [
+  "Amin MB et al. AJCC Cancer Staging Manual, Eighth Edition (American Joint Committee on Cancer)",
+  "Eisenhauer EA et al. New response evaluation criteria in solid tumours: revised RECIST guideline version 1.1 (European Journal of Cancer)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 41
+ }
+}

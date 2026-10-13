@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "oph-visual-pathway",
+ "subject": "ophthalmology",
+ "title": "Visual pathway lesions and visual fields",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The visual pathway runs from the **retina** through the optic nerve, optic chiasm, optic tract, lateral geniculate body and optic radiations to the visual cortex. Where a lesion sits along this route determines the field defect and whether the pupillary light reflex is affected. Localising the lesion is the core skill tested in exams, so learn the sequence first.",
+   "say": "The visual pathway runs from the retina through the optic nerve, optic chiasm, optic tract, lateral geniculate body and optic radiations to the visual cortex. Where a lesion sits along this route determines the field defect and whether the pupillary light reflex is affected. Localising the lesion is the core skill tested in exams, so learn the sequence first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site of lesion",
+     "Typical field defect"
+    ],
+    "rows": [
+     [
+      "Optic nerve",
+      "Monocular blindness"
+     ],
+     [
+      "Optic chiasm (central)",
+      "Bitemporal hemianopia"
+     ],
+     [
+      "Optic tract",
+      "Incongruous homonymous hemianopia"
+     ],
+     [
+      "Optic radiations",
+      "Homonymous hemianopia, sometimes macular sparing"
+     ],
+     [
+      "Visual cortex",
+      "Congruous homonymous defect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **bitemporal hemianopia** is the classic sign of a central chiasmal lesion. The most common cause is a **pituitary adenoma**, which compresses the chiasm from below and damages the nasal fibres. Craniopharyngioma and suprasellar meningioma also produce this pattern. Pituitary tumours are the commonest cause overall, so always check fields in a patient with headache and a sellar mass.",
+   "say": "A bitemporal hemianopia is the classic sign of a central chiasmal lesion. The most common cause is a pituitary adenoma, which compresses the chiasm from below and damages the nasal fibres. Craniopharyngioma and suprasellar meningioma also produce this pattern. Pituitary tumours are the commonest cause overall, so always check fields in a patient with headache and a sellar mass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chiasmal lesion",
+     "points": [
+      "Bitemporal field loss",
+      "Usually spares vertical midline",
+      "Partial descending optic atrophy",
+      "Pupillary reflex paralysis, bitemporal"
+     ]
+    },
+    "right": {
+     "title": "Post-chiasmal lesion",
+     "points": [
+      "Homonymous field loss",
+      "Pupil spared beyond optic tract",
+      "No optic atrophy beyond geniculate body"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lesions of the **optic tract** cause an incongruous homonymous hemianopia and produce **Wernicke's hemianopic pupil**, where the light reflex is lost when light falls on the temporal retina of the affected side. Lesions beyond the lateral geniculate body, including the optic radiations and visual cortex, leave the pupillary reflex normal because the pupillary fibres have already left the tract.",
+   "say": "Lesions of the optic tract cause an incongruous homonymous hemianopia and produce Wernicke's hemianopic pupil, where the light reflex is lost when light falls on the temporal retina of the affected side. Lesions beyond the lateral geniculate body, including the optic radiations and visual cortex, leave the pupillary reflex normal because the pupillary fibres have already left the tract.",
+   "vis": null
+  },
+  {
+   "tx": "Within the **optic radiations**, fibres are split by their course. Inferior fibres in the temporal lobe (Meyer's loop) carry the upper visual field, so a temporal lesion gives a **superior quadrantanopia**. Superior fibres in the parietal lobe carry the lower field, giving an inferior quadrantanopia. Complete parieto-occipital damage gives a full homonymous hemianopia, often with **macular sparing** due to dual MCA and PCA supply.",
+   "say": "Within the optic radiations, fibres are split by their course. Inferior fibres in the temporal lobe, known as Meyer's loop, carry the upper visual field, so a temporal lesion gives a superior quadrantanopia. Superior fibres in the parietal lobe carry the lower field, giving an inferior quadrantanopia. Complete parieto-occipital damage gives a full homonymous hemianopia, often with macular sparing due to dual MCA and PCA supply.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Field defect"
+    ],
+    "rows": [
+     [
+      "Temporal lobe (Meyer's loop)",
+      "Contralateral superior quadrantanopia"
+     ],
+     [
+      "Parietal lobe",
+      "Contralateral inferior quadrantanopia"
+     ],
+     [
+      "Posterior cerebral artery occlusion",
+      "Contralateral homonymous hemianopia, macular sparing"
+     ],
+     [
+      "Tip of occipital cortex",
+      "Homonymous macular defect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **cortical blindness**, bilateral occipital infarction removes vision while pupillary light reflexes stay normal. Patients may deny blindness, which is **Anton syndrome**, and may perceive moving but not static targets, the **Riddoch phenomenon**. Visual evoked responses are extinguished, which separates cortical blindness from hysteria, where these responses are normal.",
+   "say": "In cortical blindness, bilateral occipital infarction removes vision while pupillary light reflexes stay normal. Patients may deny blindness, which is Anton syndrome, and may perceive moving but not static targets, the Riddoch phenomenon. Visual evoked responses are extinguished, which separates cortical blindness from hysteria, where these responses are normal.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "a16cf903-8cc9-402c-8ffe-bbeb31681365",
+  "d3630361-0abe-4885-b857-0c9c3fa65dbe",
+  "0768f355-af2e-4c34-97c0-6ff57d8a9b30"
+ ],
+ "src": [
+  "kb-reference-gonadotroph-pituitary-adenoma"
+ ],
+ "refs": [
+  "Khurana, Comprehensive Ophthalmology (4th edition)",
+  "Adams and Victor's Principles of Neurology (Ropper and Samuels, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 594,
+  "itemN": 159
+ }
+}

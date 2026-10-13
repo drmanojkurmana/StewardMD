@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "mh-rural",
+ "subject": "mental-health",
+ "title": "Rural mental health: recognising medical emergencies and safety risks in remote practice",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Lithium toxicity** is a medical emergency that often follows vomiting, diarrhoea or poor fluid intake. Dehydration and falling kidney function reduce lithium clearance, so levels rise. Coarse tremor, ataxia, confusion or drowsiness signal neurotoxicity even when the serum level seems only modestly raised. Hold lithium, check the level and creatinine, and arrange transfer if neurological features are present.",
+   "say": "Lithium toxicity is a medical emergency that often follows vomiting, diarrhoea or poor fluid intake. Dehydration and falling kidney function reduce lithium clearance, so levels rise. Coarse tremor, ataxia, confusion or drowsiness signal neurotoxicity even when the serum level seems only modestly raised. Hold lithium, check the level and creatinine, and arrange transfer if neurological features are present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vomiting or diarrhoea"
+     },
+     {
+      "id": "b",
+      "label": "Volume depletion"
+     },
+     {
+      "id": "c",
+      "label": "Reduced lithium clearance"
+     },
+     {
+      "id": "d",
+      "label": "Raised serum level"
+     },
+     {
+      "id": "e",
+      "label": "Neurotoxicity: tremor, ataxia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suicide risk is often higher in rural areas, and easy access to **firearms** or **pesticides** raises the **lethality** of any plan. A patient with current **hopelessness**, **suicidal ideation** and access to **lethal means** needs a same-day **risk assessment**. Work with the patient and family to agree a **firearm safety plan**, removing or securing weapons. Medication alone does not address this immediate danger. Arrange **review** within days rather than weeks.",
+   "say": "Suicide risk is often higher in rural areas, and easy access to firearms or pesticides raises the lethality of any plan. A patient with current hopelessness, suicidal ideation and access to lethal means needs a same-day risk assessment. Work with the patient and family to agree a firearm safety plan, removing or securing weapons. Medication alone does not address this immediate danger. Arrange review within days rather than weeks.",
+   "vis": null
+  },
+  {
+   "tx": "**Fitness to drive** is a safety question in psychiatry. **Acute psychosis**, **sedation** from antipsychotics and poor **insight** all reduce attention, judgement and reaction time. Patients in safety-critical work, such as driving haul trucks or mustering vehicles, should stop driving until a clinician confirms the condition is stable and treatment effects are known. Document the decision and explain it clearly to the patient and employer, following the local driving guidance.",
+   "say": "Fitness to drive is a safety question in psychiatry. Acute psychosis, sedation from antipsychotics and poor insight all reduce attention, judgement and reaction time. Patients in safety-critical work, such as driving haul trucks or mustering vehicles, should stop driving until a clinician confirms the condition is stable and treatment effects are known. Document the decision and explain it clearly to the patient and employer, following the local driving guidance.",
+   "vis": null
+  },
+  {
+   "tx": "Depression in older or medically unwell patients may hide a physical cause. Recent falls, word-finding difficulty and apathy in a 72-year-old, with a frontal mass on CT, call for **urgent MRI brain** and neurosurgical referral rather than antidepressants. Overt primary **hypothyroidism** also mimics depression, with high TSH and low free T4 producing fatigue, weight gain and constipation. Check thyroid function and start levothyroxine where confirmed.",
+   "say": "Depression in older or medically unwell patients may hide a physical cause. Recent falls, word-finding difficulty and apathy in a 72-year-old, with a frontal mass on CT, call for urgent MRI brain and neurosurgical referral rather than antidepressants. Overt primary hypothyroidism also mimics depression, with high TSH and low free T4 producing fatigue, weight gain and constipation. Check thyroid function and start levothyroxine where confirmed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "Possible cause",
+     "Next step"
+    ],
+    "rows": [
+     [
+      "Apathy, falls, word-finding trouble",
+      "Intracranial lesion",
+      "Urgent MRI and referral"
+     ],
+     [
+      "Fatigue, weight gain, cold, constipation",
+      "Primary hypothyroidism",
+      "Check TSH and free T4"
+     ],
+     [
+      "Low mood with poor sleep alone",
+      "Primary depression",
+      "Assess risk, then treat"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on psychosis and schizophrenia in adults (CG178)",
+  "NICE guideline on bipolar disorder (CG185)",
+  "NICE guideline on self-harm (NG225)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "module": "ahm-palliative",
+ "subject": "adult-health-medicine",
+ "title": "Palliative Care: Core Principles in Symptom Management and Decision-Making",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Palliative care aims to relieve suffering and improve quality of life for patients with life-limiting illness, whatever the stage of disease. It is delivered alongside disease-directed treatment and is not limited to the dying. Assessment covers **physical**, **psychological**, **social** and **spiritual** domains. Comfort goals should be agreed with the patient and family early, and reviewed as illness changes.",
+   "say": "Palliative care aims to relieve suffering and improve quality of life for patients with life-limiting illness, whatever the stage of disease. It is delivered alongside disease-directed treatment and is not limited to the dying. Assessment covers physical, psychological, social and spiritual domains. Comfort goals should be agreed with the patient and family early, and reviewed as illness changes.",
+   "vis": null
+  },
+  {
+   "tx": "Refractory breathlessness at rest in advanced cancer is managed first with non-drug measures such as positioning and a fan, which act through the face and airflow. A **low-dose oral opioid** such as morphine reduces the central perception of breathlessness. Anxiety should be treated with a benzodiazepine when present. Investigations for reversible causes are only needed if they change management and fit the patient's wishes.",
+   "say": "Refractory breathlessness at rest in advanced cancer is managed first with non-drug measures such as positioning and a fan, which act through the face and airflow. A low-dose oral opioid such as morphine reduces the central perception of breathlessness. Anxiety should be treated with a benzodiazepine when present. Investigations for reversible causes are only needed if they change management and fit the patient's wishes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Breathlessness at rest"
+     },
+     {
+      "id": "b",
+      "label": "Positioning and fan"
+     },
+     {
+      "id": "c",
+      "label": "Low-dose oral opioid"
+     },
+     {
+      "id": "d",
+      "label": "Treat anxiety if present"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Opioid-induced constipation** is near universal with regular opioids, because tolerance to the gut effect does not usually develop. Prophylactic laxatives should be started with every regular opioid. A stimulant such as senna is combined with an osmotic such as macrogol. Constipation with abdominal distension, colic or vomiting needs assessment for obstruction, and a **faecal impaction** must be excluded on rectal examination.",
+   "say": "Opioid-induced constipation is near universal with regular opioids, because tolerance to the gut effect does not usually develop. Prophylactic laxatives should be started with every regular opioid. A stimulant such as senna is combined with an osmotic such as macrogol. Constipation with abdominal distension, colic or vomiting needs assessment for obstruction, and a faecal impaction must be excluded on rectal examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Likely cause",
+     "Action"
+    ],
+    "rows": [
+     [
+      "No stool, bloating, soft abdomen",
+      "Opioid effect",
+      "Start senna with macrogol"
+     ],
+     [
+      "Vomiting, distension, colic",
+      "Possible obstruction",
+      "Assess urgently for obstruction"
+     ],
+     [
+      "Hard stool on rectal exam",
+      "Faecal impaction",
+      "Disimpaction then regular laxatives"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypercalcaemia of malignancy** presents with confusion, thirst, polyuria and constipation. A corrected calcium above 3.0 mmol/L is severe. Tumour-derived factors stimulate bone resorption. Management starts with rehydration using intravenous saline, followed by a **bisphosphonate** to reduce bone resorption. Renal function must be checked, because dehydration and falling glomerular filtration worsen the cycle. Opioid doses may need review if renal function is impaired.",
+   "say": "Hypercalcaemia of malignancy presents with confusion, thirst, polyuria and constipation. A corrected calcium above 3.0 mmol/L is severe. Tumour-derived factors stimulate bone resorption. Management starts with rehydration using intravenous saline, followed by a bisphosphonate to reduce bone resorption. Renal function must be checked, because dehydration and falling glomerular filtration worsen the cycle. Opioid doses may need review if renal function is impaired.",
+   "vis": null
+  },
+  {
+   "tx": "**Metastatic spinal cord compression** is an oncological emergency. Back pain at a vertebral level, followed by weakness, a sensory level, sphincter disturbance or brisk reflexes, calls for urgent **MRI of the whole spine**. Where neurological deficits are present, **anti-oedema measures** should begin without waiting for imaging. Definitive management is either surgical decompression or radiotherapy, chosen by a multidisciplinary team. Decisions should reflect the patient's goals, and a legally recognised substitute decision-maker must be involved if capacity is lacking.",
+   "say": "Metastatic spinal cord compression is an oncological emergency. Back pain at a vertebral level, followed by weakness, a sensory level, sphincter disturbance or brisk reflexes, calls for urgent MRI of the whole spine. If neurological deficits are present, anti-oedema measures should begin without delay rather than waiting for the scan. Definitive management is either surgical decompression or radiotherapy, chosen by a multidisciplinary team. Decisions should reflect the patient's goals, and a legally recognised substitute decision-maker must be involved if capacity is lacking.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Guideline NG31 Care of dying adults in the last days of life",
+  "Oxford Textbook of Palliative Medicine (Bruera E, Higginson IJ, Von Roenn JH, Cherny NI, editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

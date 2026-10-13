@@ -1,0 +1,175 @@
+{
+ "v": 1,
+ "module": "son-apl",
+ "subject": "ss-medical-oncology",
+ "title": "Acute promyelocytic leukaemia: recognition and emergency management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute promyelocytic leukaemia is a **subtype of AML** driven by the **PML-RARA** fusion from t(15;17). Blasts often show heavy granules and classic faggot cells with bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers **disseminated intravascular coagulation**. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
+   "say": "Acute promyelocytic leukaemia is a subtype of acute myeloid leukaemia driven by the PML-RARA fusion from the translocation between chromosomes 15 and 17. Blasts often show heavy granules and classic faggot cells, which are bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers disseminated intravascular coagulation. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
+   "vis": null
+  },
+  {
+   "tx": "Treat as an emergency before the genetic result returns. Start **all-trans retinoic acid (ATRA)** as soon as APL is suspected, without waiting for FISH or PML-RARA confirmation. Give supportive care with platelets, cryoprecipitate and fresh frozen plasma to keep fibrinogen and platelets at safe levels. Early haemorrhagic death is the main threat in the first days, so delay in starting ATRA is dangerous.",
+   "say": "Treat this as an emergency before the genetic result returns. Start all-trans retinoic acid as soon as APL is suspected, without waiting for FISH or PML-RARA confirmation. Give supportive care with platelets, cryoprecipitate and fresh frozen plasma to keep fibrinogen and platelets at safe levels. Early haemorrhagic death is the main threat in the first days, so any delay in starting ATRA is dangerous.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect APL"
+     },
+     {
+      "id": "b",
+      "label": "Start ATRA"
+     },
+     {
+      "id": "c",
+      "label": "Support DIC"
+     },
+     {
+      "id": "d",
+      "label": "Confirm PML-RARA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For low and intermediate risk disease, many centres now induce remission with **all-trans retinoic acid** plus **arsenic trioxide**, and selected patients avoid conventional anthracycline chemotherapy. Arsenic trioxide targets the **PML-RARA** fusion protein, while ATRA drives maturation of promyelocytes. Consolidation follows once remission is achieved, and **QT prolongation** requires regular electrocardiogram monitoring.",
+   "say": "For low and intermediate risk disease, many centres now induce remission with all-trans retinoic acid plus arsenic trioxide, and selected patients avoid conventional anthracycline chemotherapy. Arsenic trioxide breaks down the abnormal fusion protein, while retinoic acid pushes promyelocytes to mature. Consolidation follows once remission is achieved. Regular electrocardiogram monitoring is essential because arsenic can prolong the QT interval.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Role",
+     "Key toxicity"
+    ],
+    "rows": [
+     [
+      "ATRA",
+      "Drives maturation of promyelocytes",
+      "Differentiation syndrome"
+     ],
+     [
+      "Arsenic trioxide",
+      "Degrades PML-RARA protein",
+      "QT prolongation"
+     ],
+     [
+      "Anthracycline",
+      "Added for high risk disease",
+      "Cardiotoxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Differentiation syndrome** is the key complication of **ATRA** and **arsenic trioxide**. Look for fever, breathlessness, lung infiltrates, rapid weight gain, pleural or pericardial effusions and hypotension. Treatment is prompt corticosteroid therapy and temporary interruption of the causative drug when severe. Because arsenic also causes **QTc prolongation**, serial electrocardiograms are essential, and interacting medicines should be reviewed.",
+   "say": "Differentiation syndrome is the key complication of all-trans retinoic acid and arsenic trioxide. Watch for fever, breathlessness, lung infiltrates, rapid weight gain, effusions and low blood pressure. Treat promptly with corticosteroids and pause the causative drug if the syndrome is severe. Arsenic also prolongs the QTc interval, so serial electrocardiograms are essential and interacting medicines should be reviewed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect differentiation syndrome"
+     },
+     {
+      "id": "b",
+      "label": "Start corticosteroids"
+     },
+     {
+      "id": "c",
+      "label": "Pause ATRA or arsenic if severe"
+     },
+     {
+      "id": "d",
+      "label": "Serial ECG for QTc"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Sanz score** sorts **acute promyelocytic leukaemia** into risk groups at diagnosis, mainly using the **white cell count** and the **platelet count**. Low risk patients have a modest white count and relatively preserved platelets. Intermediate risk shows a modest white count with lower platelets, while high risk means a raised white count whatever the platelet level. High risk patients also receive an **anthracycline** alongside **ATRA** during induction, so the white count is the key feature to recall.",
+   "say": "The Sanz score sorts acute promyelocytic leukaemia into risk groups at diagnosis, mainly using the white cell count and the platelet count. Low risk patients have a modest white count and relatively preserved platelets. Intermediate risk shows a modest white count with lower platelets, while high risk means a raised white count whatever the platelet level. High risk patients also receive an anthracycline alongside ATRA during induction, so the white count is the key feature to recall.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sanz group",
+     "White cell count",
+     "Platelet count"
+    ],
+    "rows": [
+     [
+      "Low",
+      "Modest",
+      "Relatively preserved"
+     ],
+     [
+      "Intermediate",
+      "Modest",
+      "Lower"
+     ],
+     [
+      "High",
+      "Raised",
+      "Any level"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_0e1f9f828acd",
+  "q_5cae54fdd0e7",
+  "q_6c3962a142ea"
+ ],
+ "src": [],
+ "refs": [
+  "Sanz MA et al. Acute promyelocytic leukemia: ELN recommendations (Blood, 2019)",
+  "ELN 2022 recommendations for diagnosis and management of AML (Döhner H et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

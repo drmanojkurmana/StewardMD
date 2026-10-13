@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "mopht-orbital",
+ "subject": "mrcp-ophthalmology",
+ "title": "Orbital and periorbital disease: triage and key diagnoses",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Start by separating **preseptal** from **orbital cellulitis**. The orbital septum is a fibrous barrier. Infection in front of it causes lid swelling, but eye movements, vision and pupils are normal. Infection behind it threatens sight and needs urgent care. Look for pain on eye movement, proptosis, ophthalmoplegia, reduced acuity and a relative afferent pupillary defect. Fever and raised inflammatory markers favour the orbital form.",
+   "say": "Start by separating preseptal from orbital cellulitis. The orbital septum is a fibrous barrier. Infection in front of it causes lid swelling, but eye movements, vision and pupils are normal. Infection behind it threatens sight and needs urgent care. Look for pain on eye movement, proptosis, ophthalmoplegia, reduced acuity and a relative afferent pupillary defect. Fever and raised inflammatory markers favour the orbital form.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Preseptal",
+     "Orbital"
+    ],
+    "rows": [
+     [
+      "Eye movement",
+      "Normal and painless",
+      "Painful or restricted"
+     ],
+     [
+      "Proptosis",
+      "Absent",
+      "Present"
+     ],
+     [
+      "Vision",
+      "Normal",
+      "May be reduced"
+     ],
+     [
+      "Source",
+      "Skin or lid trauma",
+      "Often sinus, especially ethmoid"
+     ],
+     [
+      "Urgent action",
+      "Oral antibiotics, review",
+      "Urgent contrast CT and IV antibiotics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In orbital cellulitis, **contrast CT** of the orbits and sinuses is the key test. It shows subperiosteal or orbital abscess and the paranasal sinus source. Children are most often affected, and the ethmoid sinuses are the usual origin. Start intravenous antibiotics promptly and involve ENT, because abscesses may need surgical drainage. Lumbar puncture is not needed before imaging in this setting.",
+   "say": "In orbital cellulitis, contrast CT of the orbits and sinuses is the key test. It shows subperiosteal or orbital abscess and the paranasal sinus source. Children are most often affected, and the ethmoid sinuses are the usual origin. Start intravenous antibiotics promptly and involve ENT, because abscesses may need surgical drainage. Lumbar puncture is not needed before imaging in this setting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected orbital cellulitis"
+     },
+     {
+      "id": "b",
+      "label": "Urgent contrast CT"
+     },
+     {
+      "id": "c",
+      "label": "IV antibiotics"
+     },
+     {
+      "id": "d",
+      "label": "ENT input"
+     },
+     {
+      "id": "e",
+      "label": "Drain if abscess"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thyroid eye disease** is the commonest cause of adult proptosis. TSH receptor antibodies drive inflammation of orbital fibroblasts and extraocular muscles. Activity is judged with the clinical activity score, and severity by proptosis and eye movement. **Smoking** worsens the course and reduces response to immunosuppression, so stopping it is a key intervention. Optic neuropathy is a red flag needing urgent treatment.",
+   "say": "Thyroid eye disease is the commonest cause of adult proptosis. TSH receptor antibodies drive inflammation of orbital fibroblasts and extraocular muscles. Activity is judged with the clinical activity score, and severity by proptosis and eye movement. Smoking worsens the course and reduces response to immunosuppression, so stopping it is a key intervention. Optic neuropathy is a red flag needing urgent treatment.",
+   "vis": null
+  },
+  {
+   "tx": "**Carotid-cavernous fistula** is an abnormal channel linking the internal carotid artery with the cavernous sinus, typically following head injury. Arterial inflow drains into orbital veins, producing pulsating exophthalmos, conjunctival swelling, high intraocular pressure, an audible murmur and limited ocular motility. Diagnosis relies on angiography, and **endovascular embolisation** should be pursued quickly when sight is at risk. Surgical decompression of the orbit and corticosteroids do not address the underlying defect.",
+   "say": "Carotid-cavernous fistula is an abnormal channel linking the internal carotid artery with the cavernous sinus, typically following head injury. Arterial inflow drains into orbital veins, producing pulsating exophthalmos, conjunctival swelling, high intraocular pressure, an audible murmur and limited ocular motility. Diagnosis relies on angiography, and endovascular embolisation should be pursued quickly when sight is at risk. Surgical decompression of the orbit and corticosteroids do not address the underlying defect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical feature",
+     "points": [
+      "Pulsating exophthalmos",
+      "Conjunctival swelling and murmur",
+      "Raised intraocular pressure"
+     ]
+    },
+    "right": {
+     "title": "Management",
+     "points": [
+      "Angiographic confirmation",
+      "Endovascular embolisation",
+      "Orbital surgery is not curative"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Herpes zoster ophthalmicus** affects the ophthalmic division of the trigeminal nerve. A rash on the nasal tip, the Hutchinson sign, signals nasociliary involvement and a high risk of keratitis, scleritis and uveitis. Start oral antiviral therapy such as **valaciclovir** promptly, with same-day ophthalmology review. Topical steroids should only be started under specialist supervision, not as first-line.",
+   "say": "Herpes zoster ophthalmicus affects the ophthalmic division of the trigeminal nerve. A rash on the nasal tip, the Hutchinson sign, signals nasociliary involvement and a high risk of keratitis, scleritis and uveitis. Start oral antiviral therapy such as valaciclovir promptly, with same-day ophthalmology review. Topical steroids should only be started under specialist supervision, not as first-line.",
+   "vis": null
+  },
+  {
+   "tx": "**Giant cell arteritis** must be considered in patients over 50 with headache, scalp tenderness, jaw claudication and sudden visual loss. Raised ESR or CRP supports it. Visual loss is an emergency, and the fellow eye is at risk. Start high-dose oral prednisolone immediately without waiting for temporal artery biopsy, which remains useful afterwards. Idiopathic orbital inflammation responds to steroids, with biopsy reserved for atypical cases.",
+   "say": "Giant cell arteritis must be considered in patients over 50 with headache, scalp tenderness, jaw claudication and sudden visual loss. Raised ESR or CRP supports it. Visual loss is an emergency, and the fellow eye is at risk. Start high-dose oral prednisolone immediately without waiting for temporal artery biopsy, which remains useful afterwards. Idiopathic orbital inflammation responds to steroids, with biopsy reserved for atypical cases.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

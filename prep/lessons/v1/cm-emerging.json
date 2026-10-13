@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "cm-emerging",
+ "subject": "community-medicine",
+ "title": "Emerging infections, hospital infections and antimicrobial resistance",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **International Health Regulations** (IHR) oblige countries to notify WHO of certain events. Immediately notifiable diseases are **smallpox, human influenza, wild polio and SARS**. Cholera, plague and yellow fever are also notifiable. HIV/AIDS is not covered by the IHR, and this is a frequent exam trap.",
+   "say": "The International Health Regulations oblige countries to notify WHO of certain events. Immediately notifiable diseases are smallpox, human influenza, wild polio and SARS. Cholera, plague and yellow fever are also notifiable. HIV AIDS is not covered by the regulations, and this is a frequent exam trap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Diseases or events"
+    ],
+    "rows": [
+     [
+      "Immediately notifiable",
+      "Smallpox, human influenza, wild polio, SARS"
+     ],
+     [
+      "Potentially notifiable",
+      "Cholera, plague, yellow fever, dengue, viral haemorrhagic fevers"
+     ],
+     [
+      "Other events",
+      "Chemical, radiological, unknown-origin illness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **Public Health Emergency of International Concern** (PHEIC) is declared by WHO under the IHR when an event is serious, unusual and spreads across borders. COVID-19 was declared a PHEIC on 30 January 2020 and called a pandemic on 11 March 2020. WHO named the disease COVID-19 on 11 February 2020.",
+   "say": "A Public Health Emergency of International Concern is declared by WHO under the regulations when an event is serious, unusual and spreads across borders. COVID-19 was declared a PHEIC on 30 January 2020 and called a pandemic on 11 March 2020. WHO named the disease COVID-19 on 11 February 2020.",
+   "vis": null
+  },
+  {
+   "tx": "**Hospital acquired infections** (nosocomial) develop after at least **48 hours** of hospitalisation, and *Staphylococcus aureus* is the commonest cause. Hand contact is the most common transmission route, so **hand hygiene** is the single most important preventive measure. Alcohol hand rub is preferred unless hands are visibly soiled, when soap and water is needed.",
+   "say": "Hospital acquired infections, also called nosocomial, develop after at least 48 hours of hospitalisation, and Staphylococcus aureus is the commonest cause. Hand contact is the most common transmission route, so hand hygiene is the single most important preventive measure. Alcohol hand rub is preferred unless hands are visibly soiled, when soap and water is needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hands contaminated"
+     },
+     {
+      "id": "b",
+      "label": "Visibly soiled?"
+     },
+     {
+      "id": "c",
+      "label": "Soap and water"
+     },
+     {
+      "id": "d",
+      "label": "Alcohol hand rub"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antimicrobial resistance** (AMR) is worsened by overuse of antibiotics. Extensive vancomycin prophylaxis has led to vancomycin-resistant *Staphylococcus aureus*. MRSA control focuses on preventing hand transfer, not on giving vancomycin to all patients. India's **Kayakalp** initiative, launched in 2015, rewards hospital hygiene and environmental sanitation.",
+   "say": "Antimicrobial resistance is worsened by overuse of antibiotics. Extensive vancomycin prophylaxis has led to vancomycin resistant Staphylococcus aureus. MRSA control focuses on preventing hand transfer, not on giving vancomycin to all patients. India's Kayakalp initiative, launched in 2015, rewards hospital hygiene and environmental sanitation.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "cecd1a3f-ceb0-4082-9d4f-e7cdfbb85ba4",
+  "140fe22a-9d88-4941-9f00-8364af255721",
+  "511f78bf-4aff-4924-9948-db4d15ebd29a"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K. Park)",
+  "WHO International Health Regulations (2005)",
+  "CDC Bioterrorism Agent Categories"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 70
+ }
+}

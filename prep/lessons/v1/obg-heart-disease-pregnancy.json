@@ -1,0 +1,88 @@
+{
+ "v": 1,
+ "module": "obg-heart-disease-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Heart disease in pregnancy: key risks and management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Pregnancy carries the greatest danger in **Eisenmenger syndrome**, where pulmonary hypertension reverses a left to right shunt and causes cyanosis. Maternal mortality is around 50 percent. Right ventricular failure is the commonest cause of death. WPW syndrome is not a contraindication, though supraventricular tachycardia is more frequent. If Eisenmenger syndrome is diagnosed in the first trimester, termination is advised.",
+   "say": "Pregnancy carries the greatest danger in Eisenmenger syndrome, where pulmonary hypertension reverses a left to right shunt and causes cyanosis. Maternal mortality is around 50 percent. Right ventricular failure is the commonest cause of death. WPW syndrome is not a contraindication, although supraventricular tachycardia is more frequent. If Eisenmenger syndrome is diagnosed in the first trimester, termination is advised.",
+   "vis": null
+  },
+  {
+   "tx": "Anticoagulation in a woman with a **mechanical valve** needs careful planning. Warfarin carries an embryopathy risk of about 6 percent, highest when the mean daily dose exceeds 5 mg. Warfarin is usually stopped once pregnancy is confirmed and replaced by **low molecular weight heparin** until about 12 weeks. It is restarted to 36 weeks, then heparin is given near term because its effect can be reversed with protamine.",
+   "say": "Anticoagulation in a woman with a mechanical valve needs careful planning. Warfarin carries an embryopathy risk of about 6 percent, highest when the mean daily dose exceeds 5 milligrams. Warfarin is usually stopped once pregnancy is confirmed and replaced by low molecular weight heparin until about 12 weeks. It is restarted to 36 weeks, then heparin is given near term because its effect can be reversed with protamine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnancy confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Heparin to 12 weeks"
+     },
+     {
+      "id": "c",
+      "label": "Warfarin to 36 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Heparin near term"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Labour analgesia should avoid sudden falls in preload and afterload. A well-dosed **epidural** is preferred, and single shot spinal anaesthesia is not recommended. In mitral stenosis, the aim is to avoid tachycardia, so segmental epidural is used. **Phenylephrine** is the preferred vasopressor. Opioid PCA is poor because pain raises catecholamines and hypoventilation causes carbon dioxide retention.",
+   "say": "Labour analgesia should avoid sudden falls in preload and afterload. A well dosed epidural is preferred, and single shot spinal anaesthesia is not recommended. In mitral stenosis, the aim is to avoid tachycardia, so segmental epidural is used. Phenylephrine is the preferred vasopressor. Opioid patient controlled analgesia is poor because pain raises catecholamines and hypoventilation causes carbon dioxide retention.",
+   "vis": null
+  },
+  {
+   "tx": "Peripartum cardiomyopathy presents as heart failure in the last month of pregnancy or within **5 months** of delivery, with no other cause. Ejection fraction below 45 percent supports the diagnosis. Vaginal delivery with epidural is preferred, and anticoagulation is needed because of thromboembolic risk. Maternal pushing is limited and the second stage is shortened. Recurrence in later pregnancies is possible.",
+   "say": "Peripartum cardiomyopathy presents as heart failure in the last month of pregnancy or within 5 months of delivery, with no other cause. An ejection fraction below 45 percent supports the diagnosis. Vaginal delivery with epidural is preferred, and anticoagulation is needed because of thromboembolic risk. Maternal pushing is limited and the second stage is shortened. Recurrence in later pregnancies is possible.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ae4619e4-548d-4872-bf57-b2fabe15d3ef",
+  "cfe534ae-6bf7-4f47-becd-4e73177d06a3",
+  "ae33e5ed-73b2-4a8e-9cab-94283c1767c3"
+ ],
+ "src": [],
+ "refs": [
+  "Cardiovascular Disease in Pregnancy. In M.H. Crawford (Ed), Current Diagnosis and Treatment: Cardiology",
+  "Cardiovascular Disease. In F.G. Cunningham and others (Eds), Williams Obstetrics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 123
+ }
+}

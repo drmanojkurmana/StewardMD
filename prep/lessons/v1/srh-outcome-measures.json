@@ -1,0 +1,155 @@
+{
+ "v": 1,
+ "module": "srh-outcome-measures",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Disease activity and outcome measures in rheumatology",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Disease activity measures turn a patient's status into a number so treatment targets can be checked over time. **CDAI** sums tender joint count, swollen joint count and two 0 to 10 global scores, with no laboratory input. Joint counts are out of 28. Remission is 2.8 or less, low activity up to 10, moderate up to 22 and high above 22. It suits clinics where ESR or CRP may mislead.",
+   "say": "Disease activity measures turn a patient's status into a number so treatment targets can be checked over time. The Clinical Disease Activity Index, CDAI, sums the tender joint count, the swollen joint count and two zero to ten global scores, with no laboratory input. Joint counts are out of 28. Remission is 2.8 or less, low activity runs up to 10, moderate up to 22 and high is above 22. It suits clinics where ESR or CRP may mislead.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index",
+     "Remission",
+     "Low",
+     "Moderate",
+     "High"
+    ],
+    "rows": [
+     [
+      "CDAI",
+      "2.8 or less",
+      "up to 10",
+      "up to 22",
+      "above 22"
+     ],
+     [
+      "SDAI",
+      "3.3 or less",
+      "up to 11",
+      "up to 26",
+      "above 26"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SDAI** adds serum CRP in mg/dL to the same four components. CRP in mg/L must be converted first, otherwise the total is inflated many-fold. Because CRP is present, SDAI can differ from CDAI when inflammation is mildly raised. **Boolean remission** is stricter still: four items must each be at or below a small threshold, including CRP of 1 mg/dL or less and patient global of 1 or less.",
+   "say": "SDAI adds serum CRP in milligrams per decilitre to the same four components. CRP reported in milligrams per litre must be converted first, otherwise the total is inflated many-fold. Because CRP is present, SDAI can differ from CDAI when inflammation is mildly raised. Boolean remission is stricter still, with four items that must each sit at or below a small threshold, including CRP of 1 milligram per decilitre or less and a patient global of 1 or less.",
+   "vis": null
+  },
+  {
+   "tx": "**ACR response** categories are the usual yardstick in rheumatoid arthritis trials. An **ACR20** reply needs a 20 per cent gain in tender and swollen joint counts, alongside a matching improvement in at least three of five other core domains, such as global assessments, pain, disability scores and an inflammatory marker. The higher tiers, ACR50 and ACR70, demand larger relative shifts, and each tier also includes the one below it.",
+   "say": "ACR response levels are the standard yardstick in rheumatoid arthritis trials. To reach ACR20, a patient needs a twenty per cent fall in tender and swollen joint counts, plus a similar gain in at least three of five other core domains. Those domains cover global assessments, pain, disability and an inflammatory marker. ACR50 and ACR70 set steeper thresholds, and every higher tier also satisfies the lower ones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Tender and swollen joints down 20%"
+     },
+     {
+      "id": "n2",
+      "label": "Three of five other domains improve 20%"
+     },
+     {
+      "id": "n3",
+      "label": "ACR20 achieved"
+     },
+     {
+      "id": "n4",
+      "label": "Joints down 50% and domains at 50%"
+     },
+     {
+      "id": "n5",
+      "label": "ACR50 achieved"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**EULAR response** combines the change in DAS28 from baseline with the end-of-treatment score. A fall above 1.2 ending at 3.2 or below is a **good response**. A fall above 1.2 ending between 3.2 and 5.1 is moderate, and a fall of 0.6 to 1.2 ending up to 5.1 is also moderate. **DAS28 remission** is below 2.6 and is a separate treatment target.",
+   "say": "EULAR response combines the change in DAS28 from baseline with the end-of-treatment score. A fall above 1.2 ending at 3.2 or below is a good response. A fall above 1.2 ending between 3.2 and 5.1 is moderate, and a fall of 0.6 to 1.2 ending up to 5.1 is also moderate. DAS28 remission is below 2.6 and is a separate treatment target.",
+   "vis": null
+  },
+  {
+   "tx": "In **axial spondyloarthritis**, ASDAS-CRP is the preferred variant when CRP is available. Bands are inactive below 1.3, moderate from 1.3 to 2.1, high above 2.1 up to 3.5 and very high above 3.5. A fall of 1.1 or more is clinically important improvement, and a fall of 2.0 or more is major improvement. Response is judged on both the change and the final band.",
+   "say": "In axial spondyloarthritis, ASDAS with CRP is the preferred variant when CRP is available. Bands are inactive below 1.3, moderate from 1.3 to 2.1, high above 2.1 up to 3.5 and very high above 3.5. A fall of 1.1 or more is clinically important improvement, and a fall of 2.0 or more is major improvement. Response is judged on both the change and the final band.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ASDAS band",
+     "Range"
+    ],
+    "rows": [
+     [
+      "Inactive",
+      "below 1.3"
+     ],
+     [
+      "Moderate",
+      "1.3 to 2.1"
+     ],
+     [
+      "High",
+      "2.1 to 3.5"
+     ],
+     [
+      "Very high",
+      "above 3.5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SLEDAI-2K** is a weighted index of 24 items scored over the previous 10 days. Arthritis and proteinuria score 4 each, while low complement and raised anti-dsDNA score 2 each. Past flares are not carried forward into the current score. **PASI** is a relative measure of psoriasis, with PASI 75 and PASI 90 as key biologic endpoints, and **minimal disease activity** in psoriatic arthritis needs five of seven domains within threshold.",
+   "say": "SLEDAI-2K is a weighted index of twenty-four items scored over the previous ten days. Arthritis and proteinuria score four points each, while low complement and raised anti-dsDNA score two points each. Past flares are not carried forward into the current score. PASI is a relative measure of psoriasis, with PASI 75 and PASI 90 as key biologic endpoints. Minimal disease activity in psoriatic arthritis needs five of seven domains within threshold.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-aa8fd1210b29",
+  "mk-bc83d52d55fc",
+  "mk-de4db7217451"
+ ],
+ "src": [],
+ "refs": [
+  "Felson DT et al. ACR20/50/70 improvement criteria (American College of Rheumatology)",
+  "Gladman DD et al. SLEDAI-2K (Journal of Rheumatology)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

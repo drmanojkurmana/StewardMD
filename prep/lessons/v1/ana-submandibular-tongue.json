@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "ana-submandibular-tongue",
+ "subject": "anatomy",
+ "title": "Submandibular region, oral cavity and tongue: nerves, glands and tongue muscles",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **submandibular gland** is a walnut-sized, roughly J-shaped salivary gland in the anterior part of the digastric triangle. It is divided by the **mylohyoid muscle** into a large superficial part and a small deep part, which are continuous around the posterior border of mylohyoid. Its duct, **Wharton duct**, opens on the sublingual papilla beside the frenulum.",
+   "say": "The submandibular gland is a walnut-sized, roughly J-shaped salivary gland in the anterior part of the digastric triangle. The mylohyoid muscle divides it into a large superficial part and a small deep part, which are continuous around the posterior border of mylohyoid. Its duct, Wharton duct, opens on the sublingual papilla beside the frenulum of the tongue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Relation"
+    ],
+    "rows": [
+     [
+      "Superficial part",
+      "Lies in the anterior digastric triangle"
+     ],
+     [
+      "Deep part",
+      "Lies on hyoglossus, deep to mylohyoid"
+     ],
+     [
+      "Deep part above",
+      "Lingual nerve and submandibular ganglion"
+     ],
+     [
+      "Deep part below",
+      "Hypoglossal nerve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parasympathetic secretomotor fibres reach the **submandibular ganglion** through the chorda tympani, a branch of the facial nerve, which joins the lingual nerve. Postganglionic fibres then pass to the submandibular and sublingual glands. The mylohyoid nerve is a motor branch of the inferior alveolar nerve and carries no secretomotor fibres, so it is the usual exam exception.",
+   "say": "Parasympathetic secretomotor fibres reach the submandibular ganglion through the chorda tympani, a branch of the facial nerve, which joins the lingual nerve. Postganglionic fibres then pass to the submandibular and sublingual glands. The mylohyoid nerve is a motor branch of the inferior alveolar nerve and carries no secretomotor fibres, so it is the usual exam exception.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Facial nerve"
+     },
+     {
+      "id": "b",
+      "label": "Chorda tympani"
+     },
+     {
+      "id": "c",
+      "label": "Lingual nerve"
+     },
+     {
+      "id": "d",
+      "label": "Submandibular ganglion"
+     },
+     {
+      "id": "e",
+      "label": "Gland"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hypoglossal nerve** supplies all intrinsic and extrinsic muscles of the tongue, including genioglossus, hyoglossus, styloglossus and the intrinsic muscles. The exception is **palatoglossus**, which is supplied by the cranial accessory nerve through the pharyngeal plexus. Genioglossus protrudes the tongue. Hyoglossus depresses it and styloglossus retracts it.",
+   "say": "The hypoglossal nerve supplies all intrinsic and extrinsic muscles of the tongue, including genioglossus, hyoglossus, styloglossus and the intrinsic muscles. The exception is palatoglossus, which is supplied by the cranial accessory nerve through the pharyngeal plexus. Genioglossus protrudes the tongue. Hyoglossus depresses it and styloglossus retracts it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle",
+     "Main action",
+     "Nerve"
+    ],
+    "rows": [
+     [
+      "Genioglossus",
+      "Protrudes tongue",
+      "Hypoglossal"
+     ],
+     [
+      "Hyoglossus",
+      "Depresses tongue",
+      "Hypoglossal"
+     ],
+     [
+      "Styloglossus",
+      "Retracts tongue",
+      "Hypoglossal"
+     ],
+     [
+      "Palatoglossus",
+      "Elevates posterior tongue",
+      "Accessory via pharyngeal plexus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a **hypoglossal nerve lesion**, the ipsilateral half of the tongue weakens and atrophies, with fasciculations seen on examination. On protrusion the tip deviates towards the **lesion side**, because the unopposed genioglossus of the normal side pushes the tongue across. This is a lower motor neuron lesion. Ipsilateral deviation is therefore the key sign.",
+   "say": "In a hypoglossal nerve lesion, the ipsilateral half of the tongue weakens and atrophies, with fasciculations seen on examination. On protrusion the tip deviates towards the lesion side, because the unopposed genioglossus of the normal side pushes the tongue across. This is a lower motor neuron lesion, so ipsilateral deviation is the key sign.",
+   "vis": null
+  },
+  {
+   "tx": "Sensation follows a split. The **lingual nerve**, a branch of the mandibular division of the trigeminal nerve, gives general sensation to the anterior two-thirds. Taste to the anterior two-thirds comes via the chorda tympani. The **glossopharyngeal nerve** supplies general and taste sensation to the posterior third, including circumvallate papillae. The internal laryngeal branch of vagus supplies the posterior most part.",
+   "say": "Sensation follows a split. The lingual nerve, a branch of the mandibular division of the trigeminal nerve, gives general sensation to the anterior two-thirds. Taste to the anterior two-thirds comes via the chorda tympani. The glossopharyngeal nerve supplies general and taste sensation to the posterior third, including circumvallate papillae. The internal laryngeal branch of vagus supplies the posterior most part.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Region",
+     "General sensation",
+     "Taste"
+    ],
+    "rows": [
+     [
+      "Anterior two-thirds",
+      "Lingual nerve",
+      "Chorda tympani"
+     ],
+     [
+      "Posterior third",
+      "Glossopharyngeal",
+      "Glossopharyngeal"
+     ],
+     [
+      "Posterior most part",
+      "Internal laryngeal of vagus",
+      "Internal laryngeal of vagus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "06c8472c-cefa-4f07-a7c1-8870d3e103e0",
+  "ed5d1e81-3675-4430-bc5e-bcb0e8b26443",
+  "29c1bd29-de8f-4b84-9c58-0281073415a0"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Anatomy by Regions",
+  "BD Chaurasia's Human Anatomy, Volume 3 (Chaurasia)",
+  "Gray's Anatomy for Students"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 285
+ }
+}

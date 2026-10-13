@@ -1,0 +1,121 @@
+{
+ "v": 1,
+ "module": "cm-waste-disposal",
+ "subject": "community-medicine",
+ "title": "Solid waste, excreta and sewage disposal",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Sewage** is waste water from a community containing solid and liquid excreta, derived from houses, streets, yards, factories and industries. Sullage is waste water without human excreta, such as kitchen and bathroom water. Sewage is about 99.9 percent water. Exams test the strength of sewage, which is expressed through **BOD**, **COD** and suspended solids.",
+   "say": "Sewage is waste water from a community containing solid and liquid excreta, drawn from houses, streets, yards, factories and industries. Sullage is waste water without human excreta, such as kitchen and bathroom water. Sewage is about 99.9 percent water. Exam questions test the strength of sewage, which is expressed through BOD, COD and suspended solids.",
+   "vis": null
+  },
+  {
+   "tx": "A **septic tank** is a watertight masonry tank for household sewage where there is no public sewer. Designed retention is about 24 hours. Minimum capacity is at least 500 gallons, length is usually twice the breadth, and liquid depth is about 1.2 m. Sewage undergoes anaerobic digestion inside, then aerobic oxidation in the subsoil. Desludge at least once a year.",
+   "say": "A septic tank is a watertight masonry tank for household sewage where there is no public sewer. Designed retention is about 24 hours. Minimum capacity is at least 500 gallons, length is usually twice the breadth, and recommended liquid depth is about 1.2 metres. Sewage undergoes anaerobic digestion inside, then aerobic oxidation in the subsoil. Desludge at least once a year.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sewage enters"
+     },
+     {
+      "id": "b",
+      "label": "Anaerobic digestion in tank"
+     },
+     {
+      "id": "c",
+      "label": "Aerobic oxidation in subsoil"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oxidation ponds** are a cheap method for small communities. They are shallow open pools about 1 to 1.5 m deep, needing algae, bacteria and sunlight. Bacteria oxidise organic matter into carbon dioxide, ammonia and water, and algae use these products. The **activated sludge process** is aerobic; its heart is the aeration tank, where effluent mixes with returned sludge for about 6 to 8 hours.",
+   "say": "Oxidation ponds are a cheap method for small communities. They are shallow open pools about 1 to 1.5 metres deep, needing algae, bacteria and sunlight. Bacteria oxidise organic matter into carbon dioxide, ammonia and water, and algae use these products. The activated sludge process is aerobic; its heart is the aeration tank, where effluent mixes with returned sludge for about 6 to 8 hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oxidation pond",
+     "points": [
+      "Cheap, for small communities",
+      "Shallow pool, 1 to 1.5 m",
+      "Needs algae, bacteria, sunlight"
+     ]
+    },
+    "right": {
+     "title": "Activated sludge",
+     "points": [
+      "Aerobic process",
+      "Heart is the aeration tank",
+      "Aeration about 6 to 8 hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Composting** combines disposal of refuse and night soil or sludge, suited where land is available. Bacteria break organic matter into humus-like compost; the heat destroys fly eggs and pathogens. **Controlled tipping**, or sanitary landfill, is the most satisfactory refuse method where suitable land exists. Trench method needs about one acre per year for 10,000 people at 2 m depth.",
+   "say": "Composting combines disposal of refuse and night soil or sludge, suited where land is available. Bacteria break organic matter into humus-like compost; the heat destroys fly eggs and pathogens. Controlled tipping, or sanitary landfill, is the most satisfactory refuse method where suitable land exists. The trench method needs about one acre per year for 10,000 people at 2 metres depth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Composting",
+      "Refuse plus night soil or sludge"
+     ],
+     [
+      "Controlled tipping",
+      "Most satisfactory where land exists"
+     ],
+     [
+      "Trench method",
+      "About 1 acre per year for 10,000"
+     ],
+     [
+      "Burial",
+      "Suited to small camps"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "f2743ef1-ea7f-4e68-be92-61f3f88e1b4e",
+  "2661e15a-3b0c-45c7-a2d3-be77b9aa8eae",
+  "df3a251b-6f1d-4ee1-a372-cbf649d78b24"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (K Park, 23rd edition)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 78
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "v": 1,
+ "module": "shp-paediatric-systemic-liver",
+ "subject": "ss-hepatology",
+ "title": "Paediatric hepatology: biliary atresia, choledochal cyst and systemic liver disease",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Biliary atresia** is progressive fibro-obliterative destruction of extrahepatic bile ducts presenting with conjugated hyperbilirubinaemia and pale stools in the neonatal period. The **Kasai portoenterostomy** creates a bile drainage channel from the porta hepatis to a Roux loop. Surgery performed before about 8 weeks of age gives the best chance of bile flow. Delay leads to established cirrhosis and the need for transplantation.",
+   "say": "Biliary atresia is a progressive fibro-obliterative destruction of the extrahepatic bile ducts. It presents in the neonatal period with conjugated hyperbilirubinaemia and pale stools. The Kasai portoenterostomy creates a bile drainage channel from the porta hepatis to a Roux loop. Surgery performed before about eight weeks of age gives the best chance of bile flow. Delay leads to established cirrhosis and the need for transplantation.",
+   "vis": null
+  },
+  {
+   "tx": "A **choledochal cyst** is a congenital cystic dilatation of the biliary tree, often with an anomalous **pancreaticobiliary junction**. Per Babbitt, the long common channel lets pancreatic enzymes reflux into the bile duct, injuring its wall. Cysts are commoner in Asian populations and show a female predominance of about 4:1. The Todani classification divides them into types I to V.",
+   "say": "A choledochal cyst is a congenital cystic dilatation of the biliary tree, often with an anomalous pancreaticobiliary junction. According to Babbitt, the long common channel lets pancreatic enzymes reflux into the bile duct, injuring its wall. Cysts are commoner in Asian populations and show a female predominance of about four to one. The Todani classification divides them into types one to five.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Todani type",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "I",
+      "Fusiform or saccular dilatation of the common bile duct"
+     ],
+     [
+      "II",
+      "Diverticulum from the common bile duct"
+     ],
+     [
+      "IV",
+      "Intra and extrahepatic dilatation"
+     ],
+     [
+      "V",
+      "Caroli disease, intrahepatic cystic dilatation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis starts with **ultrasonography**, which is the preferred initial test in children. MRCP then maps the full biliary anatomy, including the distal duct and pancreatic duct. Ultrasound may miss the cause of duct dilatation in about a third of cases. Excision of the cyst with hepaticojejunostomy is the recommended surgery, as it lowers the risks of fibrosis, cholangitis and **cholangiocarcinoma**.",
+   "say": "Diagnosis starts with ultrasonography, which is the preferred initial test in children. MRCP then maps the full biliary anatomy, including the distal duct and pancreatic duct. Ultrasound may miss the cause of duct dilatation in about a third of cases. Excision of the cyst with hepaticojejunostomy is the recommended surgery, as it lowers the risks of fibrosis, cholangitis and cholangiocarcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ultrasound"
+     },
+     {
+      "id": "b",
+      "label": "MRCP"
+     },
+     {
+      "id": "c",
+      "label": "Confirm Todani type"
+     },
+     {
+      "id": "d",
+      "label": "Excise cyst and reconstruct"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Consider the **neonatal jaundice** workup. Persistent jaundice beyond two weeks needs fractionated bilirubin testing to detect conjugated cholestasis early. Pale stools and dark urine are red flags. Early referral is vital because delayed Kasai surgery worsens prognosis. This structured approach helps identify biliary atresia and choledochal cysts in time.",
+   "say": "Consider the neonatal jaundice workup. Persistent jaundice beyond two weeks needs fractionated bilirubin testing to detect conjugated cholestasis early. Pale stools and dark urine are red flags. Early referral is vital because delayed Kasai surgery worsens prognosis. This structured approach helps identify biliary atresia and choledochal cysts in time.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_260f898f1900",
+  "q_f2fa15653c3e",
+  "q_3c75624d31c1"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 16
+ }
+}

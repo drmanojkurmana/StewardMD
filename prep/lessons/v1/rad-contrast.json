@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "rad-contrast",
+ "subject": "radiology",
+ "title": "Contrast media and reactions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Contrast osmolality depends on the ratio of iodine atoms to particles in solution. **Ionic monomers** (ratio 3:2) are high osmolar. **Non-ionic monomers** such as iohexol (ratio 3:1) are low osmolar, and **non-ionic dimers** such as iodixanol (ratio 6:1) are the least osmolar and nearly isotonic. Low osmolar agents are preferred in at-risk patients.",
+   "say": "Contrast osmolality depends on the ratio of iodine atoms to particles in solution. Ionic monomers, with a ratio of 3 to 2, are high osmolar. Non-ionic monomers such as iohexol, with a ratio of 3 to 1, are low osmolar. Non-ionic dimers such as iodixanol, with a ratio of 6 to 1, are the least osmolar and nearly isotonic. Low osmolar agents are preferred in at-risk patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Example",
+     "Ratio",
+     "Osmolality"
+    ],
+    "rows": [
+     [
+      "Ionic monomer",
+      "Amidotrizoate",
+      "3:2",
+      "High"
+     ],
+     [
+      "Non-ionic monomer",
+      "Iohexol",
+      "3:1",
+      "Low"
+     ],
+     [
+      "Non-ionic dimer",
+      "Iodixanol",
+      "6:1",
+      "Lowest, near isotonic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Contrast-associated acute kidney injury** is defined by KDIGO criteria within 48 h: a creatinine rise of at least 0.3 mg/dL, a rise of at least 50 percent from baseline, or urine output at most 0.5 mL/kg per h for 6 h. Risk is greatest when eGFR is below 30 mL/min per 1.73 m2. Assess renal function first, hydrate at-risk patients, and limit the dose. Bicarbonate and acetylcysteine have not beaten normal saline in recent meta-analyses.",
+   "say": "Contrast-associated acute kidney injury is defined by KDIGO criteria within 48 hours. These are a creatinine rise of at least 0.3 mg/dL, a rise of at least 50 percent from baseline, or urine output at most 0.5 mL/kg per hour for 6 hours. Risk is greatest when eGFR is below 30 mL/min per 1.73 m2. Assess renal function first, hydrate at-risk patients and limit the dose. Bicarbonate and acetylcysteine have not outperformed normal saline in recent meta-analyses.",
+   "vis": null
+  },
+  {
+   "tx": "**Gadolinium** does not cause contrast-induced nephropathy. However, linear group 1 and 3 agents can cause **nephrogenic systemic fibrosis** in severe renal impairment, with eGFR below 30 or dialysis. Macrocyclic group 2 agents are much safer and are preferred in at-risk patients. Brain gadolinium deposition occurs with normal kidneys too, mainly with linear agents, but has no proven neurotoxic correlate.",
+   "say": "Gadolinium does not cause contrast-induced nephropathy. However, linear group 1 and 3 agents can cause nephrogenic systemic fibrosis in severe renal impairment, with eGFR below 30 or on dialysis. Macrocyclic group 2 agents are much safer and are preferred in at-risk patients. Brain gadolinium deposition occurs even with normal kidneys, mainly with linear agents, but has no proven neurotoxic correlate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Linear agents",
+     "points": [
+      "Groups 1 and 3",
+      "Higher fibrosis risk",
+      "Avoid if eGFR below 30"
+     ]
+    },
+    "right": {
+     "title": "Macrocyclic agents",
+     "points": [
+      "Group 2",
+      "Much safer",
+      "Preferred in at-risk patients"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anaphylactoid reactions** are non-IgE, mast-cell mediated reactions driven by vasoactive amines such as histamine. Shellfish or iodine allergy is a poor predictor. The strongest predictor is a **prior contrast reaction**, carrying about fivefold risk, along with asthma, atopy and other drug or food allergies. Premedication with steroids needs at least 4 to 5 hours to work, and shorter regimens offer no proven protection.",
+   "say": "Anaphylactoid reactions are non-IgE, mast-cell mediated reactions driven by vasoactive amines such as histamine. Shellfish or iodine allergy is a poor predictor. The strongest predictor is a prior contrast reaction, carrying about fivefold risk, along with asthma, atopy and other drug or food allergies. Steroid premedication needs at least 4 to 5 hours to work, and shorter regimens offer no proven protection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prior contrast reaction"
+     },
+     {
+      "id": "b",
+      "label": "Premedicate 4-5 h"
+     },
+     {
+      "id": "c",
+      "label": "Switch agent if needed"
+     },
+     {
+      "id": "d",
+      "label": "Give contrast"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Barium sulphate** is the GI contrast of choice for barium studies. It is cheap, dense, insoluble and not absorbed, so it can be used anywhere in the bowel. **Gastrografin**, a water-soluble iodinated agent, is used where barium is unsafe, such as suspected perforation or peritonitis, because barium leaking into the peritoneum causes severe inflammation. Extravasation of iodinated contrast can cause compartment syndrome, needing urgent fasciotomy.",
+   "say": "Barium sulphate is the gastrointestinal contrast of choice for barium studies. It is cheap, dense, insoluble and not absorbed, so it can be used anywhere in the bowel. Gastrografin, a water-soluble iodinated agent, is used where barium is unsafe, such as suspected perforation or peritonitis, because leaked barium causes severe peritoneal inflammation. Extravasation of iodinated contrast can cause compartment syndrome, which needs urgent fasciotomy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "2d2b4ff8-7f6c-4eed-86ff-cdc42586d0c2",
+  "d5070ff9-a3de-4f6c-a9ba-12918fa6ef04",
+  "53b6975e-2235-4d2a-ad0e-b9d7ba21f503"
+ ],
+ "src": [
+  "kb-reference-neuroimaging-in-neurologic-disorders"
+ ],
+ "refs": [
+  "ACR Manual on Contrast Media",
+  "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 698,
+  "itemN": 86
+ }
+}

@@ -7,7 +7,7 @@
  *    PLAB 1, AMC CAT MCQ, MCCQE Part I official, USMLE Step 2 CK provisional; MRCP Part 1, MRCP Part 2 Written,
  *    MRCS Part A provisional);
  *  - every profile carries a calibration block (status, items studied, sources, date; aggregate stats only, no item
- *    text) and the one coming format reports bankStatus coming: the Tests tab shows its format with no test buttons;
+ *    text), every profile's bank status, and the Tests tab plan scope (only the plan exam, pooled exams strict);
  *  - client and server read one source: prep.js MOCKS equals the pre-flag literal, functions/_prep-arena.js SCHEMES and
  *    functions/_prep-core.js EXAM_PROFILES equal what they were, and prep-profiles.js is the up-to-date compile;
  *  - assemble(): eligible items only, no duplicate id or stem, official quotas never filled from other subjects (shrink,
@@ -121,12 +121,8 @@ test("official numbers as checked in the stored bulletins (2026-10-10)", () => {
   assert.equal(ma.tab, "mrcs"); assert.equal(ma.blueprint.kind, "none");
 });
 
-test("bank status: twelve banked exams available, one new format coming", () => {
-  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
-  for (const id of ["usmle-step2-ck"]) {
-    assert.equal(A.bankStatus(A.profile(id)), "coming", id);
-    assert.match(A.profile(id).bank.note, /no .* in the bank yet/);
-  }
+test("bank status: thirteen banked exams available", () => {
+  for (const id of ["neet-pg", "ini-cet", "fmge", "neet-ss", "ini-ss", "usmle-step1", "usmle-step2-ck", "plab-1", "mrcs-part-a", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written"]) assert.equal(A.bankStatus(A.profile(id)), "available", id);
   assert.equal(A.bankStatus(null), "available"); assert.equal(A.bankStatus({}), "available");
 });
 
@@ -154,11 +150,12 @@ test("calibration: status and counts per profile, aggregate stats only", () => {
   assert.ok(names.every((f) => f.endsWith(".json")), "no .jsonl calibration files in the repo");
   for (const id of A.profileIds()) assert.doesNotMatch(JSON.stringify(A.profile(id).calibration), /cal-plab1|cal_id|item_ref/);
 });
-
 /* Plan scope (owner 2026-10-12): the Tests tab shows ONLY the selected plan's exam. The old contract listed every
  * coming exam under "More exam formats" with the "Format available, question bank coming." wall; cross-exam cards
- * are removed, and a selected coming exam gets one short clean state instead. */
-test("Tests tab: only the plan exam; a coming exam shows one short state, no test buttons", () => {
+ * are removed, and a selected coming exam gets one short clean state instead. Step 2 CK's bank has landed, so no
+ * profile is coming now: the plan exams below all show their own tests, and the coming-state path has no live
+ * instance (it returns with the next coming exam). */
+test("Tests tab: only the plan exam; banked plans show their own tests", () => {
   const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
   const mkH = (exam, pl) => ({
     store: () => ({ t2h: [], t2d: {}, pl: pl || null }), exam: () => ({ id: exam }),
@@ -172,11 +169,10 @@ test("Tests tab: only the plan exam; a coming exam shows one short state, no tes
   assert.ok(!usmle.includes('data-p="usmle-step2-ck"'), "the unselected step is gone");
   for (const id of ["plab-1", "amc-mcq", "mccqe-1", "mrcp-part1", "mrcp-part2-written", "mrcs-part-a"]) assert.ok(!usmle.includes('data-p="' + id + '"'), id + " not listed");
   const ck = G.PREP_TESTS.testsHtml(mkH("usmle", { exam: "usmle-step2-ck" }));
-  assert.ok(ck.includes('data-p="usmle-step2-ck"'), "the selected coming exam shown");
-  assert.ok(ck.includes("No questions for this exam in the bank yet."), "one short line");
-  assert.ok(!ck.includes("Format available, question bank coming."), "no bold wall of grey text");
-  assert.ok(ck.includes("<summary>Exam format</summary>"), "format notes behind an info row");
-  assert.ok(!ck.includes('data-p="usmle-step2-ck" data-k='), "no test buttons without a bank");
+  assert.ok(ck.includes('data-p="usmle-step2-ck"'), "the selected step shown");
+  assert.ok(ck.includes('data-p="usmle-step2-ck" data-k='), "Step 2 CK keeps its test buttons when chosen");
+  assert.ok(!ck.includes('data-p="usmle-step1"'), "the unselected step is gone");
+  assert.ok(!ck.includes("More exam formats"), "no cross-exam section");
   const pg = G.PREP_TESTS.testsHtml(mkH("neet-pg"));
   assert.ok(!pg.includes("More exam formats") && !pg.includes('data-p="plab-1"'), "no cross-exam cards on NEET-PG either");
 });
@@ -204,6 +200,27 @@ test("Tests tab: newly banked plan exams show only their own tests", () => {
     assert.ok(!html.includes("More exam formats"), id + " has no cross-exam section");
     for (const other of ALL) if (other !== id) assert.ok(!html.includes('data-p="' + other + '"'), other + " not listed on the " + id + " plan");
   }
+});
+
+/* Exam-owned pools (bank-step2ck): Step 2 CK draws only its tagged items through the Tests tab assembler;
+ * every other exam drops pool-owned items, so the ck2 bank never leaks into other exams' tests. */
+test("Tests tab pools: strict pool for Step 2 CK, foreign pools dropped elsewhere", () => {
+  const src = fs.readFileSync(new URL("prep-tests.js", ROOT), "utf8");
+  const mkH = (exam) => ({
+    store: () => ({ t2h: [], t2d: {} }), exam: () => ({ id: exam }),
+    ico: () => "", row: () => "", fmt: (n) => String(n), planToday: () => ({ due: 0, left: 0, weak: [] }), pure: P
+  });
+  const G = { location: { search: "" }, localStorage: { getItem: () => null }, PREP_ASSESS: A };
+  new Function("window", src)(G);
+  G.PREP_TESTS.testsHtml(mkH("neet-pg"));
+  const items = [
+    { id: "a", ex: ["usmle-step2-ck"] },
+    { id: "b" },
+    { id: "c", ex: ["usmle"] },
+    { id: "d", ex: ["usmle-step2-ck"], flags: ["x"] },
+  ];
+  assert.deepEqual(G.PREP_TESTS.poolItems(items, A.profile("usmle-step2-ck")).map((it) => it.id), ["a"], "strict pool keeps only usable tagged items");
+  assert.deepEqual(G.PREP_TESTS.poolItems(items, A.profile("neet-pg")).map((it) => it.id), ["b", "c"], "other exams drop pool-owned items, keep untagged and legacy tags");
 });
 
 test("client and server read the same profiles: MOCKS, SCHEMES, EXAM_PROFILES unchanged", async () => {

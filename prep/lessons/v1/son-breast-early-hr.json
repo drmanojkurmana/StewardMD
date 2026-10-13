@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "son-breast-early-hr",
+ "subject": "ss-medical-oncology",
+ "title": "Adjuvant endocrine and targeted therapy in early HR-positive, HER2-negative breast cancer",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hormone receptor positive early breast cancer means the tumour carries **oestrogen receptors**, so oestrogen fuels its growth. Adjuvant endocrine therapy forms the backbone of treatment and considerably cuts the risk of recurrence. The two main options are **tamoxifen**, which blocks the receptor, and **aromatase inhibitors** such as anastrozole, letrozole and exemestane, which reduce peripheral oestrogen production. The right choice depends on menopausal status and whether ovarian suppression is needed.",
+   "say": "Hormone receptor positive early breast cancer means the tumour carries oestrogen receptors, so oestrogen fuels its growth. Adjuvant endocrine therapy forms the backbone of treatment and considerably cuts the risk of recurrence. The two main options are tamoxifen, which blocks the receptor, and aromatase inhibitors such as anastrozole, letrozole and exemestane, which reduce peripheral oestrogen production. The right choice depends on menopausal status and whether ovarian suppression is needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Mechanism",
+     "Key use"
+    ],
+    "rows": [
+     [
+      "Tamoxifen",
+      "Blocks oestrogen receptor, active metabolite via CYP2D6",
+      "Premenopausal or postmenopausal"
+     ],
+     [
+      "Aromatase inhibitor",
+      "Blocks peripheral oestrogen synthesis",
+      "Postmenopausal, or premenopausal with ovarian suppression"
+     ],
+     [
+      "Ovarian suppression",
+      "Stops ovarian oestrogen output",
+      "Premenopausal women given an aromatase inhibitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aromatase inhibitors work only when ovarian oestrogen is suppressed, so in a **premenopausal** woman they must be paired with **ovarian function suppression**, usually a GnRH agonist such as goserelin. The SOFT and TEXT trials support this approach in high-risk premenopausal women. Tamoxifen alone is an alternative when AI use is not possible.",
+   "say": "Aromatase inhibitors work only when ovarian oestrogen is suppressed, so in a premenopausal woman they must be paired with ovarian function suppression, usually a GnRH agonist such as goserelin. The SOFT and TEXT trials support this approach in high-risk premenopausal women. Tamoxifen alone is an alternative when AI use is not possible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Premenopausal"
+     },
+     {
+      "id": "b",
+      "label": "Ovarian suppression"
+     },
+     {
+      "id": "c",
+      "label": "Add aromatase inhibitor"
+     },
+     {
+      "id": "d",
+      "label": "Lower oestrogen"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aromatase inhibitor **arthralgia** is common and a leading reason for stopping. Management includes exercise, acupuncture and duloxetine, and if symptoms persist a switch to another AI or to **tamoxifen** keeps endocrine benefit. Bone density must be checked, since AIs cause accelerated bone loss, and **bisphosphonates** may be added in postmenopausal women.",
+   "say": "Aromatase inhibitor arthralgia is common and a leading reason for stopping. Management includes exercise, acupuncture and duloxetine, and if symptoms persist a switch to another AI or to tamoxifen keeps endocrine benefit. Bone density must be checked, since AIs cause accelerated bone loss, and bisphosphonates may be added in postmenopausal women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Symptom control",
+     "points": [
+      "Exercise and acupuncture",
+      "Duloxetine option",
+      "Calcium and vitamin D"
+     ]
+    },
+    "right": {
+     "title": "Switching strategy",
+     "points": [
+      "Switch to another AI",
+      "Or switch to tamoxifen",
+      "Keep endocrine therapy going"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tamoxifen interacts with **CYP2D6**, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
+   "say": "Tamoxifen interacts with CYP2D6, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
+   "vis": null
+  },
+  {
+   "tx": "CDK4/6 inhibitors added to adjuvant endocrine therapy improve **invasive disease-free survival** in high-risk node-positive disease. Abemaciclib for 2 years is used in patients with 4 or more positive nodes, or 1 to 3 nodes with grade 3 or tumour 5 cm or more, based on the monarchE trial. Diarrhoea is the key toxicity: start loperamide early and hold the drug if it persists.",
+   "say": "CDK4/6 inhibitors added to adjuvant endocrine therapy improve invasive disease-free survival in high-risk node-positive disease. Abemaciclib for 2 years is used in patients with 4 or more positive nodes, or 1 to 3 nodes with grade 3 or tumour 5 cm or more, based on the monarchE trial. Diarrhoea is the key toxicity: start loperamide early and hold the drug if it persists.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Drug",
+      "Abemaciclib, 2 years"
+     ],
+     [
+      "Eligibility",
+      "4 or more nodes, or 1 to 3 nodes with high-risk features"
+     ],
+     [
+      "Key toxicity",
+      "Diarrhoea, start loperamide early"
+     ],
+     [
+      "Other trial",
+      "Ribociclib, NATALEE trial"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_23b7a02f3022",
+  "q_ac33925cbd09",
+  "q_06dcefec86d2"
+ ],
+ "src": [],
+ "refs": [
+  "Early Breast Cancer: ESMO Clinical Practice Guideline",
+  "NICE Early and locally advanced breast cancer guideline NG101",
+  "monarchE trial publication",
+  "SOFT and TEXT trials publications"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

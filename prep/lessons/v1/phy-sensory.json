@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "phy-sensory",
+ "subject": "physiology",
+ "title": "Sensory receptors and somatosensory pathways",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Sensory receptors convert stimulus energy into a **receptor potential**. This is a local, graded potential. Its size rises with stimulus strength. Unlike an action potential, it does not follow the all or none rule and it decrements with distance. If it reaches threshold, it triggers action potentials in the afferent fibre. Receptors also differ in **adaptation**. Rapidly adapting receptors signal change, while slowly adapting receptors signal ongoing stimulus.",
+   "say": "Sensory receptors convert stimulus energy into a receptor potential. This is a local, graded potential. Its size rises with stimulus strength. Unlike an action potential, it does not follow the all or none rule, and it decrements with distance. If it reaches threshold, it triggers action potentials in the afferent fibre. Receptors also differ in adaptation. Rapidly adapting receptors signal change, while slowly adapting receptors signal ongoing stimulus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapidly adapting",
+     "points": [
+      "Meissner corpuscle",
+      "Pacinian corpuscle",
+      "Hair follicle receptors",
+      "Signal change and vibration"
+     ]
+    },
+    "right": {
+     "title": "Slowly adapting",
+     "points": [
+      "Merkel disc",
+      "Ruffini ending",
+      "Muscle spindle and Golgi tendon organ",
+      "Signal sustained stimulus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Two laws explain how sensation relates to stimulus. **Weber-Fechner law** states that perceived magnitude is proportional to the logarithm of stimulus intensity. Heavier weights need a bigger absolute increase to be noticed. **Muller's doctrine** of specific nerve energies states that a pathway produces the sensation for which its receptor is specialised, however it is stimulated. The **law of projection** adds that the conscious sensation is referred to the receptor's location, which explains phantom limb pain.",
+   "say": "Two laws explain how sensation relates to stimulus. Weber-Fechner law states that perceived magnitude is proportional to the logarithm of stimulus intensity. Heavier weights need a bigger absolute increase to be noticed. Muller's doctrine of specific nerve energies states that a pathway produces the sensation for which its receptor is specialised, however it is stimulated. The law of projection adds that the conscious sensation is referred to the receptor's location, which explains phantom limb pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor",
+     "Main sensation",
+     "Adaptation"
+    ],
+    "rows": [
+     [
+      "Meissner corpuscle",
+      "Light touch, texture, slow vibration",
+      "Rapid"
+     ],
+     [
+      "Merkel disc",
+      "Two point discrimination, sustained touch",
+      "Slow"
+     ],
+     [
+      "Pacinian corpuscle",
+      "Deep pressure, fast vibration",
+      "Rapid"
+     ],
+     [
+      "Ruffini ending",
+      "Sustained deep pressure",
+      "Slow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **dorsal column-medial lemniscus** pathway carries fine touch, vibration, proprioception and two point discrimination. Its fibres are large and myelinated. They ascend ipsilaterally in the dorsal columns and decussate in the medulla. Fibres from the lower body lie medially, and those from the upper body lie laterally. Lesions below the decussation cause ipsilateral loss. Lesions above it cause contralateral loss. The Romberg test assesses this pathway.",
+   "say": "The dorsal column medial lemniscus pathway carries fine touch, vibration, proprioception and two point discrimination. Its fibres are large and myelinated. They ascend on the same side in the dorsal columns and decussate in the medulla. Fibres from the lower body lie medially, and those from the upper body lie laterally. Lesions below the decussation cause loss on the same side. Lesions above it cause loss on the opposite side. The Romberg test assesses this pathway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Receptor"
+     },
+     {
+      "id": "b",
+      "label": "Dorsal column"
+     },
+     {
+      "id": "c",
+      "label": "Medulla decussation"
+     },
+     {
+      "id": "d",
+      "label": "Medial lemniscus"
+     },
+     {
+      "id": "e",
+      "label": "Thalamus VPL"
+     },
+     {
+      "id": "f",
+      "label": "Postcentral gyrus"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **anterolateral system** carries pain, temperature, itch and crude touch. It decussates within a segment or two of entry, so lesions cause loss on the opposite side. Lateral spinothalamic fibres carry pain and temperature. Anterior fibres carry crude touch and pressure. Fibres from the sacral region lie laterally, while those from the cervical region lie medially. Pain and temperature are not carried by the dorsal columns.",
+   "say": "The anterolateral system carries pain, temperature, itch and crude touch. It decussates within a segment or two of entry, so lesions cause loss on the opposite side. Lateral spinothalamic fibres carry pain and temperature. Anterior fibres carry crude touch and pressure. Fibres from the sacral region lie laterally, while those from the cervical region lie medially. Pain and temperature are not carried by the dorsal columns.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral spinothalamic",
+     "points": [
+      "Pain",
+      "Temperature",
+      "Lies laterally in cord"
+     ]
+    },
+    "right": {
+     "title": "Anterior spinothalamic",
+     "points": [
+      "Crude touch",
+      "Pressure",
+      "Lies anteriorly in cord"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cortical processing is localised. The **primary somatosensory cortex** lies in the postcentral gyrus, corresponding to Brodmann areas 3, 1 and 2. Its representation is disproportionate: the hand and face have far larger areas than the trunk. Lesions cause contralateral loss of touch, pressure, two point discrimination, **stereognosis** and proprioception. Pain sensation is not lost after primary lesions. Area 3b matters most for texture and shape discrimination.",
+   "say": "Cortical processing is localised. The primary somatosensory cortex lies in the postcentral gyrus, corresponding to Brodmann areas 3, 1 and 2. Its representation is disproportionate. The hand and face have far larger areas than the trunk. Lesions cause contralateral loss of touch, pressure, two point discrimination, stereognosis and proprioception. Pain sensation is not lost after primary lesions. Area 3b matters most for texture and shape discrimination.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f76ecf80-ea0c-4a98-9b26-0cf4434f91c2",
+  "01cff514-c71d-4189-9fd2-18e22ca0e598",
+  "044f759c-06d7-41e2-8aad-670154751a8c"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology (Barrett KE, Barman SM, Boitano S, Brooks HL, eds)",
+  "Guyton and Hall Textbook of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 197
+ }
+}

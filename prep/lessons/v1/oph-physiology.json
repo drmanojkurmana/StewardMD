@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "oph-physiology",
+ "subject": "ophthalmology",
+ "title": "Physiology of vision: acuity, colour, and retinal function",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Visual acuity is tested with a **Snellen chart** placed at 6 metres. A letter that subtends 5 minutes of arc at the nodal point is read at 6/6, meaning the patient sees at 6 metres what a normal eye sees at 6 metres. The **LogMAR** scale is the research-preferred alternative. The breadth of each stroke subtends 1 minute of arc, and the whole letter subtends 5 minutes.",
+   "say": "Visual acuity is tested with a Snellen chart placed at 6 metres. A letter that subtends 5 minutes of arc at the nodal point is read at 6/6, meaning the patient sees at 6 metres what a normal eye sees at 6 metres. The LogMAR scale is the research-preferred alternative. The breadth of each stroke subtends 1 minute of arc, and the whole letter subtends 5 minutes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Notation",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "6/6",
+      "Normal acuity, same as 20/20"
+     ],
+     [
+      "6/12",
+      "Sees at 6 m what normal sees at 12 m"
+     ],
+     [
+      "6/24",
+      "Sees at 6 m what normal sees at 24 m"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Colour vision is tested mainly with **Ishihara plates**, which screen for **red-green** defects. The Farnsworth-Munsell 100 hue test is the most sensitive test for congenital and acquired defects. The Hardy-Rand-Ritler plates detect blue-yellow anomalies. The Nagel anomaloscope quantifies red-green mixing.",
+   "say": "Colour vision is tested mainly with Ishihara plates, which screen for red-green defects. The Farnsworth-Munsell 100 hue test is the most sensitive test for congenital and acquired defects. The Hardy-Rand-Ritler plates detect blue-yellow anomalies. The Nagel anomaloscope quantifies red-green mixing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Defect",
+     "Cone affected",
+     "Type"
+    ],
+    "rows": [
+     [
+      "Protanopia",
+      "Red",
+      "Red-green"
+     ],
+     [
+      "Deuteranopia",
+      "Green",
+      "Red-green, most common"
+     ],
+     [
+      "Tritanopia",
+      "Blue",
+      "Blue-yellow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Colour sensation arises from **cones** in photopic vision. Normal colour vision is **trichromatic**, the basis of the Young-Helmholtz theory. Rods do not mediate colour. The **rhodopsin** cycle begins when light converts 11-cis retinal to all-trans retinal, which then dissociates from opsin. Regeneration of rhodopsin is the **visual cycle**.",
+   "say": "Colour sensation arises from cones in photopic vision. Normal colour vision is trichromatic, the basis of the Young-Helmholtz theory. Rods do not mediate colour. The rhodopsin cycle begins when light converts 11-cis retinal to all-trans retinal, which then dissociates from opsin. Regeneration of rhodopsin is the visual cycle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Light"
+     },
+     {
+      "id": "b",
+      "label": "11-cis to all-trans retinal"
+     },
+     {
+      "id": "c",
+      "label": "Opsin released"
+     },
+     {
+      "id": "d",
+      "label": "Regeneration to rhodopsin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **electroretinogram** (ERG) records retinal potentials to a flash. The **a-wave** is negative and comes from photoreceptors. The **b-wave** is a large positive wave from bipolar cells, with Muller cells contributing. The **c-wave** reflects pigment epithelium activity in the dark-adapted eye. A flash ERG misses small macular lesions.",
+   "say": "The electroretinogram records retinal potentials to a flash. The a-wave is negative and comes from photoreceptors. The b-wave is a large positive wave from bipolar cells, with Muller cells contributing. The c-wave reflects pigment epithelium activity in the dark-adapted eye. A flash ERG misses small macular lesions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wave",
+     "Origin",
+     "Sign"
+    ],
+    "rows": [
+     [
+      "a",
+      "Rods and cones",
+      "Negative"
+     ],
+     [
+      "b",
+      "Bipolar cells, Muller cells",
+      "Positive"
+     ],
+     [
+      "c",
+      "Pigment epithelium",
+      "Positive"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "98de2af9-d5f2-42bf-b2e2-55fb369a5216",
+  "9547e546-1bf9-48dd-996f-36cae7879724",
+  "de25a62b-4c67-4a26-91c2-ac06c34405c4"
+ ],
+ "src": [],
+ "refs": [
+  "Khurana, Comprehensive Ophthalmology",
+  "Ganong's Review of Medical Physiology",
+  "Vaughan and Asbury's General Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 176
+ }
+}

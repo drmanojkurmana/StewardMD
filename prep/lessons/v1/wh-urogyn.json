@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "wh-urogyn",
+ "subject": "womens-health",
+ "title": "Prolapse and incontinence: key principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pelvic organ prolapse is descent of the pelvic organs into or through the vagina. It often presents as a vaginal bulge, dragging discomfort or difficulty emptying the bladder or bowel. Stage describes how far the organ descends. **Stress urinary incontinence** is leakage on coughing, sneezing or lifting, caused by urethral sphincter weakness rather than bladder overactivity. Always ask about both together, because each can hide the other.",
+   "say": "Pelvic organ prolapse is descent of the pelvic organs into or through the vagina. It often presents as a vaginal bulge, dragging discomfort or difficulty emptying the bladder or bowel. Staging describes how far the organ descends. Stress urinary incontinence is leakage on coughing, sneezing or lifting, caused by urethral sphincter weakness rather than bladder overactivity. Always ask about both together, because each can hide the other.",
+   "vis": null
+  },
+  {
+   "tx": "Prolapse can obstruct the ureters or bladder outlet. Stage 3 prolapse with a weak stream, raised creatinine and bilateral hydronephrosis suggests **obstructive uropathy**. This is urgent. Ongoing back pressure reduces glomerular filtration and can cause permanent renal damage. Urgent urology review for decompression comes before any elective pessary or pelvic floor programme.",
+   "say": "Prolapse can obstruct the ureters or bladder outlet. Stage 3 prolapse with a weak stream, raised creatinine and bilateral hydronephrosis suggests obstructive uropathy. This is urgent. Ongoing back pressure reduces glomerular filtration and can cause permanent renal damage. Urgent urology review for decompression comes before any elective pessary or pelvic floor programme.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolapse"
+     },
+     {
+      "id": "b",
+      "label": "Ureter kinked"
+     },
+     {
+      "id": "c",
+      "label": "Hydronephrosis"
+     },
+     {
+      "id": "d",
+      "label": "Renal damage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **pessary** is a removable device placed in the vagina to support prolapsed organs. It suits women who decline surgery, have high anaesthetic risk or want a device they can remove. Before surgery for anterior prolapse, reduce the prolapse and test for occult **stress incontinence**, because a cystocele can hide urethral sphincter weakness. Urodynamic studies with the prolapse reduced answer this.",
+   "say": "A pessary is a removable device placed in the vagina to support prolapsed organs. It suits women who decline surgery, have high anaesthetic risk or want a device they can remove. Before surgery for anterior prolapse, reduce the prolapse and test for occult stress incontinence, because a cystocele can hide urethral sphincter weakness. Urodynamic studies with the prolapse reduced answer this.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Best choice"
+    ],
+    "rows": [
+     [
+      "Stage 2 prolapse, declines surgery",
+      "Removable pessary"
+     ],
+     [
+      "High anaesthetic risk",
+      "Pessary first"
+     ],
+     [
+      "Anterior prolapse planned for repair",
+      "Urodynamics with prolapse reduced"
+     ],
+     [
+      "Continuous watery leak after hysterectomy",
+      "Suspect vesicovaginal fistula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous watery leakage after pelvic surgery, with normal voiding and raised **vaginal fluid creatinine** but normal serum creatinine, suggests a **vesicovaginal fistula**. Urine enters the vagina from a bladder injury. Separately, retention after prolapse or posterior repair often reflects temporary detrusor underactivity and oedema. Drain the bladder, reinsert a catheter and retry a trial without catheter.",
+   "say": "Continuous watery leakage after pelvic surgery, with normal voiding and raised vaginal fluid creatinine but normal serum creatinine, suggests a vesicovaginal fistula. Urine enters the vagina from a bladder injury. Separately, retention after prolapse or posterior repair often reflects temporary detrusor underactivity and oedema. Drain the bladder, reinsert a catheter and retry a trial without catheter.",
+   "vis": null
+  },
+  {
+   "tx": "Recurrent or failed continence surgery needs a clear plan. **Urodynamic studies** with pressure-flow measurement separate stress leakage from detrusor overactivity or obstruction. Raised creatinine with anaemia and a poor stream in a woman with advanced prolapse calls for renal imaging, such as ultrasound, before deciding on surgery. Ultrasound detects dilatation without iodinated contrast and is a sensible first step.",
+   "say": "Recurrent or failed continence surgery needs a clear plan. Urodynamic studies with pressure-flow measurement separate stress leakage from detrusor overactivity or obstruction. Raised creatinine with anaemia and a poor stream in a woman with advanced prolapse calls for renal imaging, such as ultrasound, before deciding on surgery. Ultrasound detects dilatation without iodinated contrast and is a sensible first step.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

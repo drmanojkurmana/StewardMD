@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "sgm-localisation",
+ "subject": "ss-general-medicine",
+ "title": "Neuroanatomical localisation and neurological examination",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Localisation starts with one question: where is the lesion along the neuraxis? **Upper motor neurons** lie in the cortex and descending tracts; **lower motor neurons** are the anterior horn cells and peripheral nerves. UMN lesions give spasticity, hyperreflexia, clonus, extensor plantar responses and a Hoffmann sign, with no fasciculation or atrophy. LMN lesions give flaccidity, fasciculation, atrophy and reduced reflexes. Fasciculation is absent in pure UMN disease.",
+   "say": "Localisation starts with one question: where is the lesion along the neuraxis? Upper motor neurons lie in the cortex and descending tracts. Lower motor neurons are the anterior horn cells and peripheral nerves. Upper motor neuron lesions give spasticity, hyperreflexia, clonus, extensor plantar responses and a Hoffmann sign. Lower motor neuron lesions give flaccidity, fasciculation, atrophy and reduced reflexes. Fasciculation is absent in pure upper motor neuron disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "UMN lesion",
+     "LMN lesion"
+    ],
+    "rows": [
+     [
+      "Tone",
+      "Increased, spastic",
+      "Reduced, flaccid"
+     ],
+     [
+      "Reflexes",
+      "Brisk, clonus",
+      "Reduced or absent"
+     ],
+     [
+      "Plantar",
+      "Extensor",
+      "Flexor or absent"
+     ],
+     [
+      "Wasting",
+      "Minimal, disuse",
+      "Marked"
+     ],
+     [
+      "Fasciculation",
+      "Absent",
+      "Present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crossing matters. Fibres of the **corticospinal tract** decussate in the lower medulla, so a cortical or internal capsule lesion causes weakness on the opposite side of the body. Facial UMN fibres also cross, so a lesion above the pyramids spares the forehead while the lower face is weak on the opposite side. In **crossed hemiplegia**, a brainstem lesion produces ipsilateral cranial nerve signs with contralateral limb weakness.",
+   "say": "Crossing matters. Fibres of the corticospinal tract decussate in the lower medulla, so a cortical or internal capsule lesion causes weakness on the opposite side of the body. Facial upper motor neuron fibres also cross, so a lesion above the pyramids spares the forehead while the lower face is weak on the opposite side. In crossed hemiplegia, a brainstem lesion produces ipsilateral cranial nerve signs with contralateral limb weakness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cortex or capsule"
+     },
+     {
+      "id": "b",
+      "label": "Pyramidal decussation"
+     },
+     {
+      "id": "c",
+      "label": "Contralateral limb weakness"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brainstem syndromes follow a pattern. **Weber syndrome** is a midbrain lesion with ipsilateral third nerve palsy and contralateral hemiplegia. **Lateral medullary (Wallenberg) syndrome** involves the posterior inferior cerebellar artery and gives ipsilateral facial pain and temperature loss, ipsilateral Horner syndrome, ipsilateral ataxia, and contralateral body pain and temperature loss. **Horner syndrome** is ptosis, miosis and anhidrosis from a sympathetic lesion.",
+   "say": "Brainstem syndromes follow a pattern. Weber syndrome is a midbrain lesion with ipsilateral third nerve palsy and contralateral hemiplegia. Lateral medullary, or Wallenberg, syndrome involves the posterior inferior cerebellar artery and gives ipsilateral facial pain and temperature loss, ipsilateral Horner syndrome, ipsilateral ataxia, and contralateral body pain and temperature loss. Horner syndrome is ptosis, miosis and anhidrosis from a sympathetic lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Weber syndrome",
+     "points": [
+      "Midbrain lesion",
+      "Ipsilateral third nerve palsy",
+      "Contralateral hemiplegia"
+     ]
+    },
+    "right": {
+     "title": "Lateral medullary syndrome",
+     "points": [
+      "Posterior inferior cerebellar artery",
+      "Ipsilateral face pain and temperature loss",
+      "Ipsilateral Horner and ataxia",
+      "Contralateral body pain and temperature loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dermatomes and cortical signs help place the lesion. Each spinal level maps to a skin territory, so a sensory level on the trunk points to the cord segment. **Gerstmann syndrome** from a dominant parietal lesion, usually the angular gyrus, gives agraphia, acalculia, finger agnosia and left-right confusion. Examination should check tone, reflexes, plantar response, power in myotomes, and sensation across dermatomes, then match the pattern to one anatomical level.",
+   "say": "Dermatomes and cortical signs help place the lesion. Each spinal level maps to a skin territory, so a sensory level on the trunk points to the cord segment. Gerstmann syndrome from a dominant parietal lesion, usually the angular gyrus, gives agraphia, acalculia, finger agnosia and left-right confusion. Examination should check tone, reflexes, plantar response, power in myotomes, and sensation across dermatomes, then match the pattern to one anatomical level.",
+   "vis": null
+  },
+  {
+   "tx": "Localise in a fixed order. First decide whether the picture is an **upper motor neuron** or **lower motor neuron** pattern. Next, check whether the deficits **cross the midline**. Then match the **cranial nerve** signs, tract involvement and **dermatome** distribution to a single level. The correct answer in exam questions is the site that accounts for every finding, not merely the one behind the presenting complaint.",
+   "say": "Localise in a fixed order. First decide whether the picture points to an upper or lower motor neuron pattern. Next, check whether the deficits cross the midline. Then match cranial nerve signs, tract involvement and dermatome distribution to one level. A single lesion should explain the whole picture. In NEET-PG style questions, pick the level that accounts for every finding, rather than the one that only explains the presenting complaint.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_9095317aec02",
+  "q_26b2461d4cd1",
+  "q_6248dd31478f"
+ ],
+ "src": [],
+ "refs": [
+  "Bradley's Neurology in Clinical Practice (Editors: Daroff, Jankovic)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 13
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "mcc-cc-sleep",
+ "subject": "mcc-chronic-care",
+ "title": "Sleep apnoea and sleep disorders: a practical approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Suspect **obstructive sleep apnoea** in patients with loud snoring, witnessed breathing pauses, morning headaches and excessive daytime sleepiness, especially with obesity or hypertension. Ask about driving, because untreated sleepiness causes crashes. Examine the upper airway, neck size and BMI. Children present differently, with mouth breathing, restless sleep and enlarged tonsils. Sleepiness is measured with the Epworth scale, but it does not confirm the diagnosis.",
+   "say": "Suspect obstructive sleep apnoea in patients with loud snoring, witnessed breathing pauses, morning headaches and excessive daytime sleepiness, especially with obesity or hypertension. Ask about driving, because untreated sleepiness causes crashes. Examine the upper airway, neck size and body mass index. Children present differently, with mouth breathing, restless sleep and enlarged tonsils. The Epworth scale measures sleepiness but does not confirm the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Loud snoring and apnoeas",
+      "Suggests upper airway collapse during sleep"
+     ],
+     [
+      "Obesity and neck size",
+      "Major modifiable risk factor"
+     ],
+     [
+      "Morning headaches",
+      "Points to nocturnal hypoxaemia or hypercapnia"
+     ],
+     [
+      "Sleepiness while driving",
+      "Raises urgency and crash risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Confirm the diagnosis with **polysomnography**, which records airflow, oxygen saturation, respiratory effort and sleep stages overnight. The **apnoea-hypopnoea index** counts events per hour and grades severity from mild to severe. Home sleep testing may suffice in uncomplicated cases, but it is avoided where **hypoventilation** or other lung disease is suspected.",
+   "say": "Confirm the diagnosis with polysomnography, which records airflow, oxygen saturation, respiratory effort and sleep stages overnight. The apnoea-hypopnoea index counts events per hour and grades severity from mild to severe. Home sleep testing may suffice in uncomplicated cases, but it is avoided where hypoventilation or other lung disease is suspected.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clinical suspicion"
+     },
+     {
+      "id": "b",
+      "label": "Polysomnography"
+     },
+     {
+      "id": "c",
+      "label": "Grade by AHI"
+     },
+     {
+      "id": "d",
+      "label": "Start treatment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For symptomatic moderate to severe obstructive sleep apnoea, **continuous positive airway pressure**, or CPAP, is first-line. It splints the pharyngeal airway open. Weight loss, positional measures and oral appliances are adjuncts. Use **bilevel positive airway pressure**, or BiPAP, when CPAP fails, when CPAP is not tolerated, or when hypoventilation is present, because it gives separate inspiratory and expiratory pressures.",
+   "say": "For symptomatic moderate to severe obstructive sleep apnoea, continuous positive airway pressure, or CPAP, is first-line. It splints the airway open. Weight loss, positional measures and oral appliances are adjuncts. Use bilevel positive airway pressure, or BiPAP, when CPAP fails, when CPAP is not tolerated, or when hypoventilation is present, because it gives separate inspiratory and expiratory pressures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CPAP",
+     "points": [
+      "Single fixed pressure",
+      "First-line for OSA",
+      "Splints airway open",
+      "Adherence is key"
+     ]
+    },
+    "right": {
+     "title": "BiPAP",
+     "points": [
+      "Higher inspiratory pressure",
+      "Used if CPAP fails",
+      "Supports ventilation",
+      "Needed for hypoventilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Persistent hypercapnia despite CPAP suggests **obesity hypoventilation syndrome**. Look for a raised serum bicarbonate and raised haemoglobin with a sustained daytime saturation below normal. Check an arterial blood gas on room air to confirm hypercapnia. Treatment is BiPAP with ventilatory support, which corrects both the obstruction and the hypoventilation, and weight reduction remains essential.",
+   "say": "Persistent hypercapnia despite CPAP suggests obesity hypoventilation syndrome. Look for raised serum bicarbonate and raised haemoglobin with sustained daytime desaturation. Check an arterial blood gas on room air to confirm hypercapnia. Treatment is BiPAP with ventilatory support, which corrects both the obstruction and the hypoventilation. Weight reduction remains essential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Raised bicarbonate",
+      "Compensation for chronic hypercapnia"
+     ],
+     [
+      "Raised haemoglobin",
+      "Secondary polycythaemia from hypoxaemia"
+     ],
+     [
+      "Room air blood gas",
+      "Direct test of carbon dioxide retention"
+     ],
+     [
+      "BiPAP with support",
+      "Treats obstruction and hypoventilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In chronic **insomnia**, first-line treatment is **cognitive behavioural therapy for insomnia**, or CBT-I, which targets conditioned arousal and poor sleep habits. Avoid long-term hypnotics. Benzodiazepines and zopiclone cause tolerance, dependence, next-day sedation and falls in older adults. For long-term users, taper slowly alongside CBT-I rather than stopping abruptly, and never escalate the dose.",
+   "say": "In chronic insomnia, first-line treatment is cognitive behavioural therapy for insomnia, or CBT-I, which targets conditioned arousal and poor sleep habits. Avoid long-term hypnotics. Benzodiazepines and zopiclone cause tolerance, dependence, next-day sedation and falls in older adults. For long-term users, taper slowly alongside CBT-I rather than stopping abruptly, and never escalate the dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Long-term hypnotic"
+     },
+     {
+      "id": "b",
+      "label": "Assess falls and harms"
+     },
+     {
+      "id": "c",
+      "label": "Slow taper"
+     },
+     {
+      "id": "d",
+      "label": "CBT-I"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several disorders need a specific drug. In **narcolepsy with cataplexy**, sodium oxybate tackles the sudden loss of muscle tone, while modafinil targets daytime sleepiness. In **restless legs syndrome**, first treat any **iron deficiency**, since iron supports dopamine production. Should iron fail, **dopamine agonists** such as pramipexole may help, yet clinicians must watch for **augmentation**, where symptoms arrive earlier each day.",
+   "say": "Several disorders need a specific drug. In narcolepsy with cataplexy, sodium oxybate tackles the sudden loss of muscle tone, while modafinil targets daytime sleepiness. In restless legs syndrome, first treat any iron deficiency, since iron supports dopamine production. Should iron fail, dopamine agonists such as pramipexole may help, yet clinicians must watch for augmentation, where symptoms arrive earlier each day.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Key feature",
+     "Preferred treatment"
+    ],
+    "rows": [
+     [
+      "Narcolepsy",
+      "Sleep onset in REM sleep",
+      "Modafinil for sleepiness"
+     ],
+     [
+      "Cataplexy",
+      "Brief weakness with laughter",
+      "Sodium oxybate at night"
+     ],
+     [
+      "Restless legs",
+      "Urge to move at rest",
+      "Iron, then pramipexole"
+     ],
+     [
+      "Shift work disorder",
+      "Misaligned circadian timing",
+      "Scheduled sleep and timed light"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

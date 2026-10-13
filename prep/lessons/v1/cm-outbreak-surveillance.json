@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "cm-outbreak-surveillance",
+ "subject": "community-medicine",
+ "title": "Outbreak investigation and surveillance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An **epidemic** signals a shift in the balance between agent, host and environment. Investigation aims to define its magnitude by time, place and person, find the causative factors, identify the cause and recommend prevention. The first step is **verification of diagnosis**, done on the spot and quickly. A clinical look at a sample of cases may suffice, and laboratory results should not delay the epidemiological work.",
+   "say": "An epidemic signals a shift in the balance between agent, host and environment. Investigation aims to define its magnitude by time, place and person, find the causative factors, identify the cause and recommend prevention. The first step is verification of diagnosis, done on the spot and quickly. A clinical look at a sample of cases may suffice, and laboratory results should not delay the epidemiological work.",
+   "vis": null
+  },
+  {
+   "tx": "Once the diagnosis is verified, confirm that the epidemic truly exists by comparing current frequency with the same period in previous years. An **epidemic threshold** is an arbitrary limit set at two standard errors above the endemic level. Then define the **population at risk**, obtaining a map of the area and calculating an appropriate denominator.",
+   "say": "Once the diagnosis is verified, confirm that the epidemic truly exists by comparing current frequency with the same period in previous years. An epidemic threshold is an arbitrary limit set at two standard errors above the endemic level. Then define the population at risk, obtaining a map of the area and calculating an appropriate denominator.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Verify diagnosis"
+     },
+     {
+      "id": "b",
+      "label": "Confirm epidemic"
+     },
+     {
+      "id": "c",
+      "label": "Define population at risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Define key case terms. The **index case** is the first case that comes to the attention of the investigator or clinician, and it need not be the true first case. The **primary case** is the first case introduced into the population being studied. Secondary cases arise from the primary case. The **incubation period** runs from entry of the organism to first signs, and the median incubation is the time by which half of cases appear.",
+   "say": "Define key case terms. The index case is the first case that comes to the attention of the investigator or clinician, and it need not be the true first case. The primary case is the first case introduced into the population being studied. Secondary cases arise from the primary case. The incubation period runs from entry of the organism to first signs, and the median incubation is the time by which half of cases appear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Index case",
+      "First case seen by the investigator"
+     ],
+     [
+      "Primary case",
+      "First case introduced into the population"
+     ],
+     [
+      "Secondary case",
+      "Case arising from the primary case"
+     ],
+     [
+      "Incubation period",
+      "Entry of organism to first signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Surveillance** is the continuous scrutiny of factors affecting occurrence and distribution of disease. **Passive surveillance** relies on cases reported to the health system, and most Indian national programmes use it. **Active surveillance** collects data by going out to the community, as with house-to-house malaria slide collection under NVBDCP. **Sentinel surveillance** uses selected sites to find missing cases and supplement notifications, as in the National AIDS Control Programme.",
+   "say": "Surveillance is the continuous scrutiny of factors affecting occurrence and distribution of disease. Passive surveillance relies on cases reported to the health system, and most Indian national programmes use it. Active surveillance collects data by going out to the community, as with house-to-house malaria slide collection under NVBDCP. Sentinel surveillance uses selected sites to find missing cases and supplement notifications, as in the National AIDS Control Programme.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Passive",
+     "points": [
+      "Reported by patients to facilities",
+      "Main mode in Indian programmes"
+     ]
+    },
+    "right": {
+     "title": "Active",
+     "points": [
+      "Health system goes to the community",
+      "Example: house-to-house malaria slides"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Monitoring is the routine measurement and analysis aimed at detecting changes in environment or health status, whereas surveillance is the continuous scrutiny of disease occurrence. Under IDSP, **regular surveillance** covers diseases such as malaria, cholera, typhoid, tuberculosis, measles and polio, but not road traffic accidents. For NCDs, the WHO **STEPS** approach measures risk factors through questionnaire, physical and biochemical steps.",
+   "say": "Monitoring is the routine measurement and analysis aimed at detecting changes in environment or health status, whereas surveillance is the continuous scrutiny of disease occurrence. Under IDSP, regular surveillance covers diseases such as malaria, cholera, typhoid, tuberculosis, measles and polio, but not road traffic accidents. For NCDs, the WHO STEPS approach measures risk factors through questionnaire, physical and biochemical steps.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "133910cc-48fc-40c8-9278-6e8c19219f14",
+  "32d23b60-ac0e-41c0-897c-cd61beeac19b",
+  "78038aea-4723-4d29-bd86-7a8a4124e5cc"
+ ],
+ "src": [],
+ "refs": [
+  "Park K. Park's Textbook of Preventive and Social Medicine",
+  "Integrated Disease Surveillance Programme, National Centre for Disease Control, India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 109
+ }
+}

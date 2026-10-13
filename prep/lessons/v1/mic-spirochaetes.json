@@ -1,0 +1,88 @@
+{
+ "v": 1,
+ "module": "mic-spirochaetes",
+ "subject": "microbiology",
+ "title": "Spirochaetes: Syphilis, Relapsing Fever, Lyme Disease and Leptospirosis",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Spirochaetes are slender, corkscrew-shaped bacteria with **periplasmic flagella** that give them motility. Key pathogens in this module are **Treponema pallidum**, which causes syphilis, **Borrelia** species, which cause relapsing fever and Lyme disease, and **Leptospira interrogans**, which causes leptospirosis and Weil disease. Treponemes cannot be grown on artificial media, so diagnosis relies on microscopy and serology.",
+   "say": "Spirochaetes are slender, corkscrew shaped bacteria that move using periplasmic flagella. The key pathogens are Treponema pallidum, which causes syphilis, Borrelia species, which cause relapsing fever and Lyme disease, and Leptospira interrogans, which causes leptospirosis and Weil disease. Treponemes cannot be grown on artificial media, so diagnosis depends on microscopy and serology.",
+   "vis": null
+  },
+  {
+   "tx": "Syphilis serology has two classes. **Nontreponemal tests** (VDRL and RPR) are quantitative and track disease activity, so they are used for screening and monitoring. **Treponemal tests** (FTA-ABS, TPHA) are specific and confirm a reactive screen, but they stay positive for life after treatment, so they cannot monitor therapy. In India, VDRL is the preferred test for monitoring; a titre below 1:8 may be a biological false positive.",
+   "say": "Syphilis serology has two classes. Nontreponemal tests, VDRL and RPR, are quantitative and track disease activity, so they serve for screening and monitoring. Treponemal tests, FTA-ABS and TPHA, are specific and confirm a reactive screen, but they stay positive for life after treatment and cannot monitor therapy. In India, VDRL is preferred for monitoring, and a titre below 1:8 may be a biological false positive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Type",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "VDRL / RPR",
+      "Nontreponemal, quantitative",
+      "Screening, monitoring therapy"
+     ],
+     [
+      "FTA-ABS / TPHA",
+      "Treponemal, specific",
+      "Confirmation of reactive screen"
+     ],
+     [
+      "CSF VDRL",
+      "Nontreponemal on CSF",
+      "Neurosyphilis, highly specific but insensitive"
+     ],
+     [
+      "Dark-field microscopy",
+      "Direct demonstration",
+      "Moist primary or secondary lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **fourfold fall** in VDRL or RPR titre, for example 1:16 to 1:4, indicates an adequate response to treatment. Early syphilis is treated with benzathine penicillin. Congenital syphilis is best prevented by treating the mother before the **16th week of pregnancy**. Neurosyphilis is suspected when a patient with past genital ulcer has neurological symptoms, and CSF mononuclear pleocytosis with raised protein supports it.",
+   "say": "A fourfold fall in VDRL or RPR titre, for example from 1:16 to 1:4, shows an adequate response to treatment. Early syphilis is treated with benzathine penicillin. Congenital syphilis is best prevented by treating the mother before the sixteenth week of pregnancy. Neurosyphilis is suspected when a patient with a past genital ulcer develops neurological symptoms, and CSF mononuclear pleocytosis with raised protein supports the diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Leptospira interrogans** spreads through water contaminated with the urine of rats, dogs, cattle and pigs, entering through cuts, abrasions or intact mucosa. Incubation is 2 to 20 days. Weil disease is the icteric form, with jaundice, renal failure and haemorrhage, and the **microscopic agglutination test** is the serotype-specific test for diagnosis. Dark-field microscopy can show leptospires in urine, and the bacteria persist in the kidney tubules and eye.",
+   "say": "Leptospira interrogans spreads through water contaminated with the urine of rats, dogs, cattle and pigs, entering through cuts, abrasions or intact mucosa. Incubation lasts 2 to 20 days. Weil disease is the icteric form, with jaundice, renal failure and haemorrhage. The microscopic agglutination test is the serotype-specific test used for diagnosis. Dark-field microscopy can show leptospires in urine, and the organisms persist in the renal tubules and eye.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6ba03ef5-762f-4b6c-8f24-90d22587e092",
+  "8e464fbd-e1b7-4b5a-bccd-ba573cf3be93",
+  "8887c186-cd04-4da8-a161-030a42f464ab"
+ ],
+ "src": [
+  "kb-reference-relapsing-fever",
+  "kb-reference-louse-borne-relapsing-fever",
+  "kb-reference-syphilis"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Longo et al.)",
+  "Jawetz, Melnick, & Adelberg's Medical Microbiology (Brooks, Ed)",
+  "Anantnarayan's Textbook of Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 2500,
+  "itemN": 264
+ }
+}

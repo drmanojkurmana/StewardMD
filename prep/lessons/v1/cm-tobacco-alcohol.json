@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "cm-tobacco-alcohol",
+ "subject": "community-medicine",
+ "title": "Tobacco, alcohol and lifestyle risk factors: high-yield essentials for India",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Lifestyle **risk factors** drive most premature noncommunicable disease in India. The main modifiable ones are tobacco use, harmful alcohol use, physical inactivity and unhealthy diet. Each one has its own measurement tool, national programme or legislation, and examiners often test these links directly. This lesson covers those essentials for NEET-PG, INI-CET and FMGE, using the Indian framework first.",
+   "say": "Lifestyle risk factors drive most premature noncommunicable disease in India. The main modifiable ones are tobacco use, harmful alcohol use, physical inactivity and unhealthy diet. Each one has its own measurement tool, national programme or legislation, and examiners often test these links directly. This lesson covers those essentials for NEET-PG, INI-CET and FMGE, using the Indian framework first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk factor",
+     "Key measure or framework"
+    ],
+    "rows": [
+     [
+      "Tobacco",
+      "COTPA 2003, National Tobacco Control Programme, WHO FCTC"
+     ],
+     [
+      "Alcohol",
+      "WHO AUDIT questionnaire"
+     ],
+     [
+      "Physical inactivity",
+      "WHO activity guidance, Fit India"
+     ],
+     [
+      "Unhealthy diet",
+      "Eat Right India"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**COTPA 2003**, the Cigarettes and Other Tobacco Products Act, regulates production, sale, advertising and use of tobacco in India. It bans smoking in public places, restricts sale to minors and near educational institutions, and mandates pictorial health warnings. India also takes part in the **WHO Framework Convention on Tobacco Control**. Its MPOWER package lists six measures: monitor, protect, offer cessation help, warn, enforce bans, and raise taxes.",
+   "say": "COTPA 2003, the Cigarettes and Other Tobacco Products Act, regulates production, sale, advertising and use of tobacco in India. It bans smoking in public places, restricts sale to minors and near educational institutions, and mandates pictorial health warnings. India also takes part in the WHO Framework Convention on Tobacco Control. Its MPOWER package lists six measures: monitor, protect, offer cessation help, warn, enforce bans, and raise taxes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "M",
+      "label": "Monitor"
+     },
+     {
+      "id": "P",
+      "label": "Protect"
+     },
+     {
+      "id": "O",
+      "label": "Offer help"
+     },
+     {
+      "id": "W",
+      "label": "Warn"
+     },
+     {
+      "id": "E",
+      "label": "Enforce"
+     },
+     {
+      "id": "R",
+      "label": "Raise tax"
+     }
+    ],
+    "edges": [
+     [
+      "M",
+      "P"
+     ],
+     [
+      "P",
+      "O"
+     ],
+     [
+      "O",
+      "W"
+     ],
+     [
+      "W",
+      "E"
+     ],
+     [
+      "E",
+      "R"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smoking exposure is quantified with the **pack-year**. One pack-year equals smoking twenty cigarettes a day for one year. The formula is packs per day multiplied by years smoked. Clinicians and researchers use it to grade cumulative exposure, for example in lung cancer and COPD risk. Remember that a past smoker has quit, and a current smoker is still using tobacco, even occasionally.",
+   "say": "Smoking exposure is quantified with the pack-year. One pack-year equals smoking twenty cigarettes a day for one year. The formula is packs per day multiplied by years smoked. Clinicians and researchers use it to grade cumulative exposure, for example in lung cancer and COPD risk. Remember that a past smoker has quit, and a current smoker is still using tobacco, even occasionally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Term",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Pack-year",
+      "Packs per day multiplied by years smoked"
+     ],
+     [
+      "Current smoker",
+      "Still smokes, daily or occasionally"
+     ],
+     [
+      "Past smoker",
+      "Has quit and no longer smokes"
+     ],
+     [
+      "Smokeless user",
+      "Chews or dips tobacco without burning it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Indian examiners favour **reverse smoking**, where the lit end of a cigar, called chutta, is held inside the mouth. It is linked with carcinoma of the hard palate, most notably in coastal Andhra Pradesh. Smokeless tobacco, including chewing forms, is a major cause of oral cancer and oral submucous fibrosis. Both habits are high-yield for oral cancer questions.",
+   "say": "Indian examiners favour reverse smoking, where the lit end of a cigar, called chutta, is held inside the mouth. It is linked with carcinoma of the hard palate, most notably in coastal Andhra Pradesh. Smokeless tobacco, including chewing forms, is a major cause of oral cancer and oral submucous fibrosis. Both habits are high-yield for oral cancer questions.",
+   "vis": null
+  },
+  {
+   "tx": "Current guidance advises adults to build up a **weekly total of moderate aerobic activity**, spread across several days, with **vigorous activity** counting for more per minute. Sustained bouts count toward the total, while brief bursts add little. Under **Eat Right India**, the focus is on cutting back on **salt, sugar and oil** while eating more fruits, vegetables and whole grains. **Fit India** encourages people of every age to move daily.",
+   "say": "Physical activity guidance for adults centres on building a weekly total of moderate aerobic exercise, spread over several days. Vigorous activity earns more credit per minute of effort. Sustained efforts count toward that total, whereas very short bursts contribute little. On the diet side, Eat Right India asks people to reduce salt, sugar and oil, and to eat more fruits, vegetables and whole grains. Fit India complements this by encouraging everyone, whatever their age, to be active every day.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "22665af5-5f41-4c1e-a4dc-0806b7545888",
+  "e1fef0c7-ed9f-4970-921a-92a16e90873d",
+  "fe1778db-1d2c-4099-a7ba-4240d793e6b5"
+ ],
+ "src": [],
+ "refs": [
+  "Cigarettes and Other Tobacco Products Act, 2003 (COTPA), India",
+  "WHO Framework Convention on Tobacco Control",
+  "K. Park's Textbook of Preventive and Social Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

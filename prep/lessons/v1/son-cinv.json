@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "son-cinv",
+ "subject": "ss-medical-oncology",
+ "title": "Chemotherapy induced nausea and vomiting: risk, prophylaxis and key agents",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "For high emetogenic risk regimens, a three drug approach is standard: a **NK1 antagonist** such as aprepitant or fosaprepitant, a **5-HT3 antagonist** such as palonosetron, and dexamethasone. Aprepitant blocks substance P signalling in the brainstem and gut. Fosaprepitant is the intravenous prodrug of aprepitant. Olanzapine is an effective add-on in refractory cases. Dexamethasone is given as a steroid partner and its dose is reduced when combined with NK1 antagonists in many protocols.",
+   "say": "For high emetogenic risk regimens, a three drug approach is standard. This uses an NK1 antagonist such as aprepitant or fosaprepitant, a 5-HT3 antagonist such as palonosetron, and dexamethasone. Aprepitant blocks substance P signalling in the brainstem and gut. Fosaprepitant is the intravenous prodrug of aprepitant. Olanzapine is an effective add-on in refractory cases. Dexamethasone acts as a steroid partner, and its dose is often reduced when it is combined with an NK1 antagonist.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High risk regimen"
+     },
+     {
+      "id": "b",
+      "label": "NK1 antagonist"
+     },
+     {
+      "id": "c",
+      "label": "5-HT3 antagonist"
+     },
+     {
+      "id": "d",
+      "label": "Dexamethasone"
+     },
+     {
+      "id": "e",
+      "label": "Add olanzapine if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Palonosetron is a **second generation** 5-HT3 antagonist with a long half-life. It is more effective than ondansetron for delayed CINV, so it suits moderate emetogenic regimens and multi-day protocols. 5-HT3 antagonists act on vagal afferents in the gut and on the chemoreceptor trigger zone. Their efficacy in delayed emesis is limited because several neurotransmitters, not only serotonin, drive late symptoms. This is why NK1 antagonists are added for delayed control.",
+   "say": "Palonosetron is a second generation 5-HT3 antagonist with a long half-life. It is more effective than ondansetron for delayed CINV, so it suits moderate emetogenic regimens and multi-day protocols. 5-HT3 antagonists act on vagal afferents in the gut and on the chemoreceptor trigger zone. Their efficacy in delayed emesis is limited because several neurotransmitters, not only serotonin, drive late symptoms. This is why NK1 antagonists are added for delayed control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ondansetron",
+     "points": [
+      "First generation",
+      "Shorter half-life",
+      "Weaker delayed control"
+     ]
+    },
+    "right": {
+     "title": "Palonosetron",
+     "points": [
+      "Second generation",
+      "Long half-life",
+      "Better delayed control"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Aprepitant is an oral **NK1 antagonist** that reaches peak plasma levels about 4 hours after a dose. It is a **CYP3A4** inhibitor and inducer, so it can reduce the effect of **oral contraceptives**, and backup contraception counselling is essential. It can also lower the **INR** in patients on **warfarin**, so monitoring is advised about one week after starting. **Fosaprepitant** should not be mixed with calcium containing intravenous fluids such as Ringer lactate because of precipitation risk.",
+   "say": "Aprepitant is an oral NK1 antagonist that reaches peak plasma levels about 4 hours after a dose. It inhibits and induces CYP3A4, so it can weaken the effect of oral contraceptives, and backup contraception counselling is essential. It can also lower the INR in patients on warfarin, so monitoring is advised about one week after starting. Fosaprepitant should not be mixed with calcium containing intravenous fluids such as Ringer lactate, because of precipitation risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Issue",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Oral contraceptives",
+      "Use backup contraception"
+     ],
+     [
+      "Warfarin",
+      "Check INR about one week after starting"
+     ],
+     [
+      "Calcium containing fluids",
+      "Avoid mixing with fosaprepitant"
+     ],
+     [
+      "Pimozide",
+      "Contraindicated because of QT risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Olanzapine** is a useful add-on for **refractory CINV** and for **anticipatory nausea** when standard agents fail. Smokers may need higher doses, because tobacco smoke **induces CYP1A2** and speeds clearance. Its main hazard is in older adults with **dementia-related psychosis**, where it raises the risk of death and stroke. Sedation and drowsiness also limit daytime use, so counsel patients before starting it.",
+   "say": "Olanzapine is a useful add-on when refractory chemotherapy induced nausea and vomiting persists, and it can help with anticipatory nausea when standard agents fail. Smokers may need higher doses, because tobacco smoke induces CYP1A2 and speeds clearance of the drug. Its main hazard is in older adults with dementia-related psychosis, where it raises the risk of death and stroke. Sedation and drowsiness also limit daytime use, so counsel patients before starting it.",
+   "vis": null
+  },
+  {
+   "tx": "Exam focus centres on the **emetogenic risk classes**, which guide how much prophylaxis a patient needs. High risk regimens usually receive an **NK1 antagonist** such as aprepitant, given with a **5-HT3 antagonist** and **dexamethasone**. Aprepitant interacts with CYP3A4, so review co-prescribed drugs. **Olanzapine** is a useful add-on, though caution applies in dementia and smokers. For **breakthrough emesis**, select a rescue drug from a different class than the prophylactic agents.",
+   "say": "Focus on the emetogenic risk classes, since they set how much prophylaxis a patient needs. High risk regimens usually call for an NK1 antagonist such as aprepitant, paired with a 5-HT3 antagonist and dexamethasone. Aprepitant is taken orally and interacts with CYP3A4 substrates, so review the medication list. Olanzapine works well as an add-on, but use it cautiously in dementia and in people who smoke. When breakthrough emesis occurs, choose a rescue drug from a different class from the prophylactic agents. Preventing nausea beats treating it after the fact.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_f863e8ae333a",
+  "q_214203ccae51",
+  "q_43e7451f0123"
+ ],
+ "src": [],
+ "refs": [
+  "Hesketh PJ et al. Antiemesis: ASCO Guideline Update (Journal of Clinical Oncology)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

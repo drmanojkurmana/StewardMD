@@ -1,0 +1,126 @@
+{
+ "v": 1,
+ "module": "minf-uti",
+ "subject": "mrcp-infectious-diseases",
+ "title": "Urinary tract infections: cystitis, prostatitis and pyelonephritis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **urinary tract infection** is symptomatic infection somewhere along the urinary tract. Bacteria in urine without symptoms is **asymptomatic bacteriuria**, which is not a UTI and generally should not be treated. The exceptions are pregnancy, and before urological procedures that injure the mucosa, such as lithotripsy or transurethral prostate resection. Testing without symptoms drives overdiagnosis, so culture is sent only when a urinary source is suspected.",
+   "say": "A urinary tract infection means symptomatic infection somewhere along the urinary tract. Bacteria in urine without symptoms is called asymptomatic bacteriuria. This is not a urinary tract infection and generally should not be treated. The exceptions are pregnancy, and before urological procedures that injure the mucosa, such as lithotripsy or transurethral prostate resection. Testing without symptoms drives overdiagnosis, so culture is sent only when a urinary source is suspected.",
+   "vis": null
+  },
+  {
+   "tx": "**Cystitis** causes dysuria, frequency, urgency, suprapubic discomfort, new nocturia, hesitancy or visible blood in urine. Fever, rigors or unilateral flank pain are not consistent with uncomplicated cystitis and suggest infection beyond the bladder. Fever is the key feature separating cystitis from **pyelonephritis**. Mild pyelonephritis may show only low-grade fever, while severe disease causes high fever, rigors, nausea, vomiting and flank pain.",
+   "say": "Cystitis causes dysuria, frequency, urgency, suprapubic discomfort, new nocturia, hesitancy or visible blood in urine. Fever, rigors or unilateral flank pain are not consistent with uncomplicated cystitis and suggest infection beyond the bladder. Fever is the key feature separating cystitis from pyelonephritis. Mild pyelonephritis may show only low-grade fever, while severe disease causes high fever, rigors, nausea, vomiting and flank pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cystitis",
+     "points": [
+      "Dysuria and frequency",
+      "Suprapubic discomfort",
+      "No systemic signs"
+     ]
+    },
+    "right": {
+     "title": "Pyelonephritis",
+     "points": [
+      "Fever and rigors",
+      "Flank or costovertebral pain",
+      "Nausea and vomiting in severe cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Escherichia coli** is the predominant uropathogen, causing roughly 75 to 90 percent of acute cystitis isolates. **Staphylococcus saprophyticus** causes about 5 to 15 percent, more often in younger women. Isolating Staphylococcus aureus or Salmonella from urine should prompt concern for bacteraemia, because these virulent organisms typically reach the urinary tract by haematogenous spread, which accounts for under 2 percent of UTIs.",
+   "say": "Escherichia coli is the predominant uropathogen, causing roughly 75 to 90 percent of acute cystitis isolates. Staphylococcus saprophyticus causes about 5 to 15 percent, more often in younger women. Isolating Staphylococcus aureus or Salmonella from urine should prompt concern for bacteraemia, because these virulent organisms typically reach the urinary tract by haematogenous spread, which accounts for under 2 percent of urinary tract infections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Approximate share of acute cystitis",
+     "Clinical note"
+    ],
+    "rows": [
+     [
+      "Escherichia coli",
+      "75 to 90 percent",
+      "Most common cause in all UTI syndromes"
+     ],
+     [
+      "Staphylococcus saprophyticus",
+      "5 to 15 percent",
+      "More frequent in younger women"
+     ],
+     [
+      "Staphylococcus aureus or Salmonella",
+      "Uncommon",
+      "Raise concern for bacteraemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **catheterised patients**, bacteriuria and pyuria are almost inevitable, so an abnormal urinalysis alone cannot diagnose CAUTI. Localising or systemic symptoms must be present and other causes excluded. Bacteriuria thresholds differ by context: for women with cystitis symptoms, a count above 10 to the power 2 per mL is more sensitive than the classic 10 to the power 5, while CAUTI uses at least 10 to the power 3 CFU per mL. Pyuria above 10 WBC per HPF is nonspecific.",
+   "say": "In catheterised patients, bacteriuria and pyuria are almost inevitable, so an abnormal urinalysis alone cannot diagnose catheter associated infection. Localising or systemic symptoms must be present and other causes excluded. Bacteriuria thresholds differ by context. For women with cystitis symptoms, a count above 10 to the power 2 per mL is more sensitive than the classic 10 to the power 5, while catheter associated infection uses at least 10 to the power 3 CFU per mL. Pyuria above 10 WBC per HPF is nonspecific.",
+   "vis": null
+  },
+  {
+   "tx": "Recurrent **UTI** is not automatically **complicated**. Each episode is judged on its own, but **relapse** within two weeks points to a sequestered focus that needs searching for. Severe **pyelonephritis** with **obstruction** is a urological emergency. The blocked ureter needs urgent **decompression** by stent or nephrostomy, alongside intravenous antibiotics and fluids, because drugs alone cannot sterilise urine trapped behind the blockage.",
+   "say": "Recurrent urinary tract infection is not automatically complicated. Each episode can be uncomplicated on its own, but recurrence within two weeks is usually relapse from a hidden focus, so search for one. Severe pyelonephritis with obstruction is a urological emergency. The blocked ureter needs urgent decompression by stent or nephrostomy, together with intravenous antibiotics and fluids, since drugs alone cannot sterilise urine trapped behind the blockage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Obstruction on imaging"
+     },
+     {
+      "id": "b",
+      "label": "Urgent decompression"
+     },
+     {
+      "id": "c",
+      "label": "IV antibiotics and fluids"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-urinary-tract-infections-cystitis-prostati"
+ ],
+ "refs": [
+  "NICE guideline NG112 Urinary tract infection (lower): antimicrobial prescribing",
+  "NICE guideline NG111 Pyelonephritis (acute): antimicrobial prescribing",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 900,
+  "itemN": 19
+ }
+}

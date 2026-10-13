@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "mendo-pituitary",
+ "subject": "mrcp-endocrinology",
+ "title": "Pituitary disorders: neurohypophysis and water balance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The neurohypophysis releases **arginine vasopressin** (AVP, also called ADH) and oxytocin. AVP conserves water by acting on V2 receptors in collecting-duct principal cells, which insert aquaporin-2 channels. Maximum antidiuresis occurs at plasma AVP of roughly 1 to 3 pg/mL, giving urine osmolality up to about 1200 mosmol/L. Antidiuresis is the first-line defence, and thirst only engages once that capacity is exceeded.",
+   "say": "The neurohypophysis releases arginine vasopressin, also called ADH, and oxytocin. Vasopressin conserves water by acting on V2 receptors in the collecting duct, which insert aquaporin-2 water channels. Maximum antidiuresis occurs at plasma vasopressin of roughly 1 to 3 picograms per millilitre, giving urine osmolality up to about 1200 mosmol per litre. Antidiuresis is the first-line defence, and thirst only switches on once that capacity is exceeded.",
+   "vis": null
+  },
+  {
+   "tx": "Polyuria is practically defined by a 24-hour urine volume above about 40 to 50 mL/kg and or more than 3 L/d on unrestricted intake. Serum sodium helps discriminate. A **low sodium** below 135 mmol/L suggests **primary polydipsia**, where excess drinking dilutes the blood. A **high sodium** suggests AVP deficiency or resistance. Paired urine osmolality and a water deprivation or desmopressin challenge then separate the causes.",
+   "say": "Polyuria is practically defined by a 24-hour urine volume above about 40 to 50 millilitres per kilogram, or more than 3 litres a day on unrestricted intake. Serum sodium helps discriminate. A low sodium below 135 millimoles per litre suggests primary polydipsia, where excess drinking dilutes the blood. A high sodium suggests vasopressin deficiency or resistance. Paired urine osmolality and a water deprivation or desmopressin challenge then separate the causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Central AVP deficiency",
+     "Nephrogenic AVP resistance",
+     "Primary polydipsia"
+    ],
+    "rows": [
+     [
+      "Serum sodium",
+      "High or upper normal",
+      "High or upper normal",
+      "Low"
+     ],
+     [
+      "Urine osmolality after deprivation",
+      "Low",
+      "Low",
+      "Rises appropriately"
+     ],
+     [
+      "Response to desmopressin",
+      "Marked rise",
+      "Little or no rise",
+      "Little change"
+     ],
+     [
+      "Typical cause",
+      "Surgery, trauma, tumour",
+      "Lithium, hypercalcaemia",
+      "Psychogenic excess intake"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Copeptin** is a **stable surrogate** for **AVP** release, so it has largely replaced direct hormone measurement. Read it against the clinical picture. A **baseline copeptin** above the resistance cut-off points towards impaired renal responsiveness, whereas a rise after **hypertonic saline**, at high sodium, separates central deficiency from **primary polydipsia**. Pituitary imaging then adds supportive, not decisive, evidence.",
+   "say": "Copeptin is a stable surrogate for vasopressin release, so it has largely replaced direct hormone measurement. Read it alongside the clinical picture. A baseline level above the resistance cut-off points towards impaired kidney responsiveness, whereas a rise after hypertonic saline, at high sodium, separates central deficiency from primary polydipsia. Pituitary imaging then adds supportive, not decisive, evidence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test setting",
+     "Copeptin cut-off",
+     "Points towards"
+    ],
+    "rows": [
+     [
+      "Baseline measurement",
+      "Above 21.4 pmol/L",
+      "AVP resistance"
+     ],
+     [
+      "After hypertonic saline, sodium 150 mmol/L or more",
+      "Above 4.9 pmol/L",
+      "AVP deficiency rather than primary polydipsia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Central AVP deficiency** follows destruction of vasopressin neurons from trauma, tumours, surgery, infection or autoimmune hypophysitis. In pregnancy, placental vasopressinase clears AVP three to fourfold faster, causing gestational deficiency that usually remits after delivery. Desmopressin, a synthetic analogue that resists this peptidase, is the replacement of choice. Glucocorticoid status must be checked first in any patient with pituitary disease.",
+   "say": "Central vasopressin deficiency follows destruction of vasopressin neurons from trauma, tumours, surgery, infection or autoimmune hypophysitis. In pregnancy, placental vasopressinase clears vasopressin three to four times faster, causing gestational deficiency that usually remits after delivery. Desmopressin, a synthetic analogue that resists this enzyme, is the replacement of choice. Glucocorticoid status must be checked first in any patient with pituitary disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Polyuria confirmed"
+     },
+     {
+      "id": "b",
+      "label": "Check sodium and copeptin"
+     },
+     {
+      "id": "c",
+      "label": "Central deficiency"
+     },
+     {
+      "id": "d",
+      "label": "Start desmopressin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mimics must be excluded before diagnosing SIAD. **Pseudohyponatraemia** from high lipids or protein and **translocational hyponatraemia** from glucose or mannitol are not truly hypotonic. Hypovolaemic or hypervolaemic causes, adrenal insufficiency and hypothyroidism also lower sodium. Adipsic hypernatraemia, from anterior hypothalamic osmoreceptor damage, is the opposite problem, where thirst is lost and obligatory losses go unreplaced.",
+   "say": "Mimics must be excluded before diagnosing syndrome of inappropriate antidiuretic hormone secretion. Pseudohyponatraemia from high lipids or protein, and translocational hyponatraemia from glucose or mannitol, are not truly hypotonic. Hypovolaemic or hypervolaemic causes, adrenal insufficiency and hypothyroidism also lower sodium. Adipsic hypernatraemia, from damage to the anterior hypothalamic osmoreceptors, is the opposite problem, where thirst is lost and losses go unreplaced.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-disorders-of-the-neurohypophysis"
+ ],
+ "refs": [
+  "Chapter 4 in Williams Textbook of Endocrinology (Melmed et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 900,
+  "itemN": 24
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "shm-acute-lymphoblastic-leukaemia",
+ "subject": "ss-haematology",
+ "title": "Acute lymphoblastic leukaemia: classification, risk and key therapies",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Acute lymphoblastic leukaemia** (ALL) is a malignancy of immature lymphoid progenitors. Lymphoblasts crowd out normal marrow, causing anaemia, neutropenia and thrombocytopenia. A bone marrow biopsy is essential to confirm acute leukaemia and separate ALL from AML. Flow cytometry then assigns lineage: B-lineage cells express CD19, CD22, CD79a and PAX5, while T-lineage cells express cytoplasmic or surface CD3. A marker is called positive when more than 20 percent of cells stain.",
+   "say": "Acute lymphoblastic leukaemia is a malignancy of immature lymphoid progenitors. Lymphoblasts crowd out normal marrow, causing anaemia, neutropenia and thrombocytopenia. A bone marrow biopsy is essential to confirm acute leukaemia and separate ALL from AML. Flow cytometry then assigns lineage. B-lineage cells express CD19, CD22, CD79a and PAX5, while T-lineage cells express cytoplasmic or surface CD3. A marker is called positive when more than 20 percent of cells stain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "B-ALL",
+     "T-ALL"
+    ],
+    "rows": [
+     [
+      "Key markers",
+      "CD19, CD22, CD79a, PAX5",
+      "CD3, CD7, CD2, CD5"
+     ],
+     [
+      "Common finding",
+      "CD10 common",
+      "Early precursor often lacks CD1a and CD8"
+     ],
+     [
+      "Diagnostic step",
+      "Flow cytometry",
+      "Flow cytometry"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Philadelphia-positive ALL** carries t(9;22) producing BCR::ABL1, confirmed by karyotype, FISH or RT-PCR. It needs a **tyrosine kinase inhibitor** from induction onwards, such as dasatinib or imatinib in paediatric-inspired protocols or ponatinib in adults. **Ph-like ALL** is BCR::ABL1 negative but shares similar lesions, such as CRLF2 or ABL-class fusions, and needs molecular testing to identify. Misclassifying it as Ph-positive is a classic trap.",
+   "say": "Philadelphia-positive ALL carries the t(9;22) translocation producing BCR::ABL1, confirmed by karyotype, FISH or RT-PCR. It needs a tyrosine kinase inhibitor from induction onwards, such as dasatinib or imatinib in paediatric-inspired protocols, or ponatinib in adults. Ph-like ALL is BCR::ABL1 negative but shares similar lesions, such as CRLF2 or ABL-class fusions, and needs molecular testing to identify. Misclassifying it as Ph-positive is a classic trap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ph-positive B-ALL",
+     "points": [
+      "BCR::ABL1 confirmed",
+      "TKI from induction",
+      "Dasatinib or imatinib paediatric",
+      "Ponatinib adults"
+     ]
+    },
+    "right": {
+     "title": "Ph-like ALL",
+     "points": [
+      "BCR::ABL1 negative",
+      "Similar lesions",
+      "CRLF2 or ABL-class fusions",
+      "Needs molecular testing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Minimal residual disease** (MRD) is the most important prognostic factor during therapy. A molecular complete remission after induction means MRD of 0.01 percent or less and predicts disease-free survival near 70 percent, compared with under 40 percent when MRD is positive. In paediatric B-ALL, end-induction MRD of 0.01 percent or higher escalates a standard-risk patient to high-risk therapy. Persistent MRD is an indication for blinatumomab.",
+   "say": "Minimal residual disease is the most important prognostic factor during therapy. A molecular complete remission after induction means MRD of 0.01 percent or less, and predicts disease-free survival near 70 percent. When MRD is positive, disease-free survival falls below 40 percent. In paediatric B-ALL, end-induction MRD of 0.01 percent or higher escalates a standard-risk patient to high-risk therapy. Persistent MRD is an indication for blinatumomab.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "End of induction MRD"
+     },
+     {
+      "id": "b",
+      "label": "Below 0.01%: standard path"
+     },
+     {
+      "id": "c",
+      "label": "0.01% or above: high-risk path"
+     },
+     {
+      "id": "d",
+      "label": "Persistent MRD: blinatumomab"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Low"
+     ],
+     [
+      "a",
+      "c",
+      "High"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blinatumomab**, a bispecific T-cell engager targeting CD19, is used for CD19-positive relapsed disease and for persistent MRD. In ECOG 1910, adding blinatumomab consolidation to chemotherapy in MRD-negative adults improved survival. **Inotuzumab ozogamicin**, an anti-CD22 antibody-drug conjugate, suits CD22-positive disease but carries a risk of sinusoidal obstruction syndrome, so ursodiol is given when bridging to transplant. CAR-T tisagenlecleucel is licensed for patients aged 25 or younger with relapsed B-ALL.",
+   "say": "Blinatumomab, a bispecific T-cell engager targeting CD19, is used for CD19-positive relapsed disease and for persistent MRD. In ECOG 1910, adding blinatumomab consolidation to chemotherapy in MRD-negative adults improved survival. Inotuzumab ozogamicin, an anti-CD22 antibody-drug conjugate, suits CD22-positive disease but carries a risk of sinusoidal obstruction syndrome, so ursodiol is given when bridging to transplant. CAR-T tisagenlecleucel is licensed for patients aged 25 or younger with relapsed B-ALL.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_037e5aa8cc95",
+  "q_4d2ec4621ccb",
+  "q_7dc6517eb827"
+ ],
+ "src": [
+  "kb-oncotree-all",
+  "kb-oncotree-pediatric-all",
+  "kb-reference-acute-lymphoid-leukemia"
+ ],
+ "refs": [
+  "NCCN Guidelines Version 2.2026 Acute Lymphoblastic Leukemia",
+  "NCCN Clinical Practice Guidelines in Oncology Pediatric Acute Lymphoblastic Leukemia Version 1.2026"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 2433,
+  "itemN": 35
+ }
+}

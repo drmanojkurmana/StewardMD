@@ -1,0 +1,167 @@
+{
+ "v": 1,
+ "module": "mbsci-anatomy",
+ "subject": "mrcp-basic-science",
+ "title": "Clinical anatomy: nerve injuries, vascular territories and hernia anatomy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Clinical anatomy questions usually ask you to localise a lesion from its signs. Start by asking which **nerve**, **artery** or **anatomical compartment** could produce the exact combination of motor, sensory and autonomic findings. The fastest route is to recall the territory each structure supplies and then match the pattern.",
+   "say": "Clinical anatomy questions usually ask you to localise a lesion from its signs. Start by asking which nerve, artery or anatomical compartment could produce the exact combination of motor, sensory and autonomic findings. The fastest route is to recall the territory each structure supplies and then match the pattern.",
+   "vis": null
+  },
+  {
+   "tx": "The **radial nerve** arises from the posterior cord and winds through the spiral groove of the humerus. Mid-shaft fractures can damage it there, causing wrist drop and loss of extension at the metacarpophalangeal joints. Sensory loss falls on the dorsum of the first web space. The **axillary nerve** injures at the surgical neck, typically after anterior shoulder dislocation, and spares the forearm.",
+   "say": "The radial nerve arises from the posterior cord and winds through the spiral groove of the humerus. Mid-shaft fractures can damage it there, causing wrist drop and loss of extension at the metacarpophalangeal joints. Sensory loss falls on the dorsum of the first web space. The axillary nerve injures at the surgical neck, typically after anterior shoulder dislocation, and spares the forearm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nerve",
+     "Typical cause",
+     "Key motor loss",
+     "Key sensory loss"
+    ],
+    "rows": [
+     [
+      "Radial",
+      "Humeral shaft fracture",
+      "Wrist and finger extensors",
+      "Dorsum of first web space"
+     ],
+     [
+      "Axillary",
+      "Anterior shoulder dislocation",
+      "Deltoid and teres minor",
+      "Skin over lower deltoid"
+     ],
+     [
+      "Long thoracic",
+      "Axillary clearance",
+      "Serratus anterior",
+      "None"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **anterior spinal artery** supplies the anterior two-thirds of the cord, including the corticospinal and spinothalamic tracts. Its occlusion, for example after thoracic aortic surgery, causes paraparesis and loss of pain and temperature below the level. Dorsal column function, carrying joint position and vibration, is preserved because the **posterior spinal arteries** supply those columns.",
+   "say": "The anterior spinal artery supplies the anterior two-thirds of the cord, including the corticospinal and spinothalamic tracts. Its occlusion, for example after thoracic aortic surgery, causes paraparesis and loss of pain and temperature below the level. Dorsal column function, carrying joint position and vibration, is preserved because the posterior spinal arteries supply those columns.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior spinal artery",
+     "points": [
+      "Anterior two-thirds of cord",
+      "Corticospinal and spinothalamic tracts",
+      "Paraparesis and pain loss"
+     ]
+    },
+    "right": {
+     "title": "Posterior spinal arteries",
+     "points": [
+      "Dorsal columns",
+      "Joint position and vibration",
+      "Usually spared in infarction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Femoral hernias pass through the **femoral canal**, the medial compartment of the femoral sheath below the inguinal ligament. The canal lies medial to the femoral vein and is bounded by the lacunar ligament medially. Its narrow neck makes strangulation a real risk. Femoral hernias are more common in women and present as a tender groin lump medial to the femoral vein.",
+   "say": "Femoral hernias pass through the femoral canal, the medial compartment of the femoral sheath below the inguinal ligament. The canal lies medial to the femoral vein and is bounded by the lacunar ligament medially. Its narrow neck makes strangulation a real risk. Femoral hernias are more common in women and present as a tender groin lump medial to the femoral vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Femoral artery"
+     },
+     {
+      "id": "b",
+      "label": "Femoral vein"
+     },
+     {
+      "id": "c",
+      "label": "Femoral canal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "lateral to medial"
+     ],
+     [
+      "b",
+      "c",
+      "medial compartment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **left recurrent laryngeal nerve** hooks under the aortic arch and ascends in the tracheo-oesophageal groove. The right nerve loops under the subclavian artery. Both are at risk during thyroid surgery. Left hilar or mediastinal disease, or an arch aneurysm, can paralyse the left cord. Injury gives an ipsilateral paralysed cord with hoarseness and aspiration risk, and the pupillary and eyelid findings of Horner are not part of this picture.",
+   "say": "The left recurrent laryngeal nerve hooks under the aortic arch and ascends in the tracheo-oesophageal groove. The right nerve loops under the subclavian artery. Both are at risk during thyroid surgery. Left hilar or mediastinal disease, or an arch aneurysm, can paralyse the left cord. Injury gives an ipsilateral paralysed cord with hoarseness and aspiration risk, and the pupillary and eyelid findings of Horner are not part of this picture.",
+   "vis": null
+  },
+  {
+   "tx": "The **oculosympathetic pathway** carries sympathetic fibres from the hypothalamus, down the brainstem and spinal cord, and out to the eye and face. A break anywhere along this route produces **Horner syndrome**, with a small pupil, a drooping upper lid and reduced sweating on the same side. Apical lung masses, known as **Pancoast tumours**, are a classic cause because they can reach the sympathetic chain in the neck.",
+   "say": "Think of the oculosympathetic pathway as a three-neuron relay that carries sympathetic signals from the hypothalamus, down through the brainstem and spinal cord, and up to the eye and face. Any break along this route causes Horner syndrome, with a small pupil, a droopy upper eyelid and less sweating on one side. Tumours at the lung apex, called Pancoast tumours, are a classic culprit because they can reach the sympathetic chain in the neck.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hypothalamus"
+     },
+     {
+      "id": "n2",
+      "label": "Brainstem and spinal cord"
+     },
+     {
+      "id": "n3",
+      "label": "Sympathetic chain in neck"
+     },
+     {
+      "id": "n4",
+      "label": "Eye and face"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Standring's Gray's Anatomy for Students (Drake, Vogl, Mitchell)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

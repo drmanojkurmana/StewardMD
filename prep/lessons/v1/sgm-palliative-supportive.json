@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "sgm-palliative-supportive",
+ "subject": "ss-general-medicine",
+ "title": "Supportive and palliative care: pain ladder, CINV and aprepitant essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **WHO analgesic ladder** gives a stepwise plan for cancer pain. The first rung relies on **non-opioid analgesics**, optionally joined by **adjuvant drugs** for specific pain types. If pain persists, a **weak opioid** is introduced on the second rung. Severe pain moves the patient to a **strong opioid** such as morphine. Medicines are preferably given orally, scheduled by the clock rather than on demand, and individualised, since no fixed dose fits everyone. Dose is adjusted continually to balance relief and adverse effects.",
+   "say": "The WHO analgesic ladder gives a stepwise plan for cancer pain. The first rung relies on non-opioid analgesics, optionally joined by adjuvant drugs for specific pain types. If pain persists, a weak opioid is introduced on the second rung. Severe pain moves the patient to a strong opioid such as morphine. Medicines are preferably given orally, scheduled by the clock rather than on demand, and individualised, since no fixed dose fits everyone. Dose is adjusted continually to balance relief and adverse effects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Drug class",
+     "Example"
+    ],
+    "rows": [
+     [
+      "1",
+      "Non-opioid analgesic",
+      "Non-opioid agent, plus adjuvant if needed"
+     ],
+     [
+      "2",
+      "Weak opioid",
+      "Low-potency opioid added to step one"
+     ],
+     [
+      "3",
+      "Strong opioid",
+      "Morphine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Opioid rotation** means switching from one opioid to another when pain control is poor or side effects are intolerable. The goal is better analgesia with fewer adverse effects, not a reduction in total dose by itself. Use **morphine equivalents** to convert doses, and reduce the calculated dose by about 25 to 50 percent when switching because of incomplete cross-tolerance. Breakthrough pain is treated with a rapid-acting dose of the same opioid, usually about one-sixth of the total daily dose.",
+   "say": "Opioid rotation means switching from one opioid to another when pain control is poor or side effects are intolerable. The goal is better analgesia with fewer adverse effects, not a reduction in total dose by itself. Use morphine equivalents to convert doses, and reduce the calculated dose by about 25 to 50 percent when switching because of incomplete cross-tolerance. Breakthrough pain is treated with a rapid-acting dose of the same opioid, usually about one-sixth of the total daily dose.",
+   "vis": null
+  },
+  {
+   "tx": "**Chemotherapy-induced nausea and vomiting** is prevented by matching the regimen to emetogenic risk. For highly emetogenic chemotherapy, the **NK1 antagonist** aprepitant is added to a 5-HT3 antagonist and dexamethasone. Oral aprepitant is 125 mg given one hour before chemotherapy on day 1, followed by 80 mg on days 2 and 3. Fosaprepitant is an intravenous prodrug, 150 mg, for patients who cannot take oral medicines. Aprepitant is a dose-dependent CYP3A4 inhibitor and inducer, so dexamethasone is reduced and oral contraceptives may fail.",
+   "say": "Chemotherapy-induced nausea and vomiting is prevented by matching the regimen to emetogenic risk. For highly emetogenic chemotherapy, the NK1 antagonist aprepitant is added to a 5-HT3 antagonist and dexamethasone. Oral aprepitant is 125 mg given one hour before chemotherapy on day 1, followed by 80 mg on days 2 and 3. Fosaprepitant is an intravenous prodrug, 150 mg, for patients who cannot take oral medicines. Aprepitant is a dose-dependent CYP3A4 inhibitor and inducer, so dexamethasone is reduced and oral contraceptives may fail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HECT"
+     },
+     {
+      "id": "b",
+      "label": "5-HT3 antagonist"
+     },
+     {
+      "id": "c",
+      "label": "Aprepitant 125 mg"
+     },
+     {
+      "id": "d",
+      "label": "Dexamethasone reduced"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Olanzapine** is a second-generation antipsychotic metabolised mainly by CYP1A2, with a half-life of about 30 hours, so steady state takes roughly one week. It has fewer extrapyramidal effects because it dissociates rapidly from D2 receptors. Start at 5 to 10 mg daily and aim for 10 mg within a few days in schizophrenia. In dementia-related psychosis, older patients face a higher risk of death and cerebrovascular events. Smoking cessation induces less CYP1A2 activity, so the dose may need reducing.",
+   "say": "Olanzapine is a second-generation antipsychotic metabolised mainly by CYP1A2, with a half-life of about 30 hours, so steady state takes roughly one week. It has fewer extrapyramidal effects because it dissociates rapidly from D2 receptors. Start at 5 to 10 mg daily and aim for 10 mg within a few days in schizophrenia. In dementia-related psychosis, older patients face a higher risk of death and cerebrovascular events. Smoking cessation reduces CYP1A2 induction, so the dose may need reducing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Olanzapine essentials",
+     "points": [
+      "Mainly CYP1A2",
+      "Half-life about 30 hours",
+      "Steady state about 1 week",
+      "Rapid D2 dissociation"
+     ]
+    },
+    "right": {
+     "title": "Key safety points",
+     "points": [
+      "Start 5 to 10 mg daily",
+      "Dementia: death and stroke risk",
+      "Smoking cessation: reduce dose",
+      "Avoid IM with parenteral benzodiazepine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cancer and supportive care also covers **mucositis**, **cancer cachexia** and **G-CSF** for neutropenia, and end-of-life care including **palliative sedation** and management of the death rattle. Note that the WHO ladder is less valid when patients cannot report pain, so use observational tools. Palliative sedation is reserved for refractory symptoms near death, and the death rattle is often treated with anticholinergic agents and positioning, with family counselling.",
+   "say": "Cancer and supportive care also covers mucositis, cancer cachexia and G-CSF for neutropenia, and end-of-life care including palliative sedation and management of the death rattle. Note that the WHO ladder is less valid when patients cannot report pain, so use observational tools. Palliative sedation is reserved for refractory symptoms near death, and the death rattle is often treated with anticholinergic agents and positioning, with family counselling.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_29c2120d0aab",
+  "q_75f15df875cd",
+  "q_91d6c06050a8"
+ ],
+ "src": [],
+ "refs": [
+  "WHO Guidelines for the Pharmacological and Radiotherapeutic Management of Cancer Pain in Adults and Adolescents",
+  "NCCN Guidelines: Antiemesis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 39
+ }
+}

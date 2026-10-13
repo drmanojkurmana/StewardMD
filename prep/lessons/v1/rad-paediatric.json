@@ -1,0 +1,103 @@
+{
+ "v": 1,
+ "module": "rad-paediatric",
+ "subject": "radiology",
+ "title": "Paediatric radiology: high-yield neonatal and childhood signs",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **double bubble sign** is a classic plain abdominal radiograph finding in newborns: two air-filled gas shadows, the stomach and the dilated proximal duodenum, with no distal bowel gas. The classic cause is **duodenal atresia**, which is strongly linked to Down syndrome and polyhydramnios. Other causes include duodenal web, annular pancreas, malrotation with Ladd's bands, and preduodenal portal vein.",
+   "say": "The double bubble sign is a classic plain abdominal radiograph finding in newborns. It shows two air-filled shadows, the stomach and the dilated proximal duodenum, with no distal bowel gas. The classic cause is duodenal atresia, which is strongly linked to Down syndrome and polyhydramnios. Other causes include duodenal web, annular pancreas, malrotation with Ladd's bands, and preduodenal portal vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Typical cause"
+    ],
+    "rows": [
+     [
+      "Single bubble",
+      "Congenital hypertrophic pyloric stenosis"
+     ],
+     [
+      "Double bubble",
+      "Duodenal atresia, web, annular pancreas"
+     ],
+     [
+      "Triple bubble",
+      "Jejunal or proximal ileal atresia"
+     ],
+     [
+      "Multiple bubbles",
+      "Ileal atresia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multiple air-fluid levels and dilated loops in a newborn point to a **distal** obstruction, most often **ileal atresia**. A barium or contrast enema then shows a **microcolon**, an unused narrow colon. Ileal atresia is associated with cystic fibrosis, and it can be suspected on antenatal ultrasound as a dilated proximal bowel segment.",
+   "say": "Multiple air-fluid levels and dilated loops in a newborn point to a distal obstruction, most often ileal atresia. A contrast enema then shows a microcolon, which is an unused narrow colon. Ileal atresia is associated with cystic fibrosis, and it can be suspected on antenatal ultrasound as a dilated proximal bowel segment.",
+   "vis": null
+  },
+  {
+   "tx": "In **Hirschsprung disease**, the contrast enema shows a **transition zone** between a narrow, aganglionic distal rectum or sigmoid and a dilated proximal colon. A microcolon or meconium plug with a normal calibre colon suggests a different diagnosis. **Necrotising enterocolitis** is staged, and **pneumatosis intestinalis**, which is intramural gas, marks stage IIb disease.",
+   "say": "In Hirschsprung disease, the contrast enema shows a transition zone between a narrow aganglionic distal segment and a dilated proximal colon. A microcolon or a meconium plug with normal calibre colon suggests a different diagnosis. Necrotising enterocolitis is staged, and pneumatosis intestinalis, which is intramural gas, marks stage two B disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Narrow distal segment"
+     },
+     {
+      "id": "b",
+      "label": "Transition zone"
+     },
+     {
+      "id": "c",
+      "label": "Dilated proximal colon"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **battered baby syndrome**, or non-accidental injury, the commonest intracranial finding is a **subdural haematoma**, caused by rupture of bridging veins during shaking or impact. Radiology also helps with **SCIWORA**, spinal cord injury without radiological abnormality, in which plain films and CT may be normal and MRI is needed. Early high-dose methylprednisolone is considered in SCIWORA.",
+   "say": "In battered baby syndrome, or non-accidental injury, the commonest intracranial finding is a subdural haematoma, caused by rupture of bridging veins during shaking or impact. Radiology also helps with SCIWORA, spinal cord injury without radiological abnormality, in which plain films and CT may be normal and MRI is needed.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "334e6d47-5c33-41dc-a356-c35431c7df81",
+  "80cffab3-3a2c-4fe3-9adf-666dcc3e940c",
+  "2f0d31e0-ac1b-4aae-8537-84cbbcf35b95"
+ ],
+ "src": [],
+ "refs": [
+  "Pediatric Radiological Signs (Donoghue and Bjornstad)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 198
+ }
+}

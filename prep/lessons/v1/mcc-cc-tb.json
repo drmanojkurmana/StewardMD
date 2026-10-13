@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "mcc-cc-tb",
+ "subject": "mcc-chronic-care",
+ "title": "Latent and active tuberculosis: diagnosis and management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Tuberculosis** infection and disease are different states. In **latent tuberculosis infection**, Mycobacterium tuberculosis persists in a non-replicating form, the person has no symptoms, and the chest radiograph is normal. In **active tuberculosis**, bacilli replicate, symptoms such as cough, night sweats and weight loss develop, and the person can transmit the infection. Only active disease is infectious, so distinguishing the two decides whether treatment is urgent and whether isolation is needed.",
+   "say": "Tuberculosis infection and disease are different states. In latent tuberculosis infection, Mycobacterium tuberculosis persists in a non-replicating form. The person has no symptoms and the chest radiograph is normal. In active tuberculosis, bacilli replicate, symptoms such as cough, night sweats and weight loss develop, and the person can transmit the infection to others. Only active disease is infectious, so telling the two apart decides whether treatment is urgent and whether isolation is needed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Latent infection",
+     "points": [
+      "No symptoms",
+      "Normal chest radiograph",
+      "Sputum negative",
+      "Not infectious",
+      "Treat to prevent reactivation"
+     ]
+    },
+    "right": {
+     "title": "Active disease",
+     "points": [
+      "Cough, fever, night sweats",
+      "Often cavitary upper lobe lesion",
+      "Sputum smear or culture positive",
+      "Infectious via aerosols",
+      "Needs multidrug treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnosis of active disease rests on **sputum** testing. Smear microscopy for acid-fast bacilli is quick, culture is the reference standard and allows drug susceptibility testing, and a **nucleic acid amplification test** detects Mycobacterium tuberculosis DNA and rifampicin resistance within hours. An **interferon-gamma release assay** supports latent infection screening but cannot separate latent from active disease, so it must be paired with a chest radiograph and clinical review.",
+   "say": "Diagnosis of active disease rests on sputum testing. Smear microscopy for acid-fast bacilli is quick. Culture is the reference standard and allows drug susceptibility testing. A nucleic acid amplification test detects Mycobacterium tuberculosis DNA and rifampicin resistance within hours. An interferon-gamma release assay supports screening for latent infection, but it cannot separate latent from active disease, so it must be paired with a chest radiograph and clinical review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "Sputum smear",
+      "Quick check for bacillary load"
+     ],
+     [
+      "Sputum culture",
+      "Reference standard, drug susceptibility"
+     ],
+     [
+      "Molecular test",
+      "Rapid result, detects rifampicin resistance"
+     ],
+     [
+      "Interferon-gamma assay",
+      "Screens latent infection, not active disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standard first-line treatment for new pulmonary tuberculosis in India follows the National Tuberculosis Elimination Programme. The **intensive phase** uses rifampicin, isoniazid, pyrazinamide and ethambutol for two months. The **continuation phase** then uses rifampicin and isoniazid for four months. Treatment is usually delivered as a fixed-dose combination under directly observed therapy, and the total course lasts six months, longer for complicated or resistant disease.",
+   "say": "Standard first-line treatment for new pulmonary tuberculosis in India follows the National Tuberculosis Elimination Programme. The intensive phase uses rifampicin, isoniazid, pyrazinamide and ethambutol for two months. The continuation phase then uses rifampicin and isoniazid for four months. Treatment is usually given as a fixed-dose combination under directly observed therapy. The total course lasts six months, and longer for complicated or resistant disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Intensive phase",
+      "sub": "Four drugs for 2 months"
+     },
+     {
+      "id": "b",
+      "label": "Continuation phase",
+      "sub": "Two drugs for 4 months"
+     },
+     {
+      "id": "c",
+      "label": "Cure review",
+      "sub": "Sputum conversion and outcome"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infectious patients need infection control and public health involvement. Those with cavitary, smear-positive disease should be placed in **airborne isolation** until sputum conversion, and household contacts should be screened. Notification to public health services is mandatory in India. A patient with capacity who wishes to leave hospital should be counselled about risks, and public health should be involved before discharge, since interrupted treatment risks relapse and drug resistance.",
+   "say": "Infectious patients need infection control and public health involvement. Those with cavitary, smear-positive disease should be placed in airborne isolation until sputum conversion, and household contacts should be screened. Notification to public health services is mandatory in India. A patient with capacity who wishes to leave hospital should be counselled about the risks, and public health should be involved before discharge, because interrupted treatment risks relapse and drug resistance.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Tuberculosis Elimination Programme (India) treatment guidelines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,91 @@
+{
+ "v": 1,
+ "module": "obg-mixed",
+ "subject": "obstetrics-gynaecology",
+ "title": "Obstetrics and Gynaecology mixed rapid review",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Hormone therapy after menopause gives clear benefits for symptoms and bone. It **increases bone mineral density** and lowers the risk of hip and vertebral fracture. The risks are definite for **venous thromboembolism** and gallbladder disease, and estrogen alone raises endometrial cancer risk. Long-term estrogen-progestin raises breast cancer risk after about five years. Hip fracture protection is therefore a benefit, not a risk of therapy.",
+   "say": "Hormone therapy after menopause gives clear benefits for symptoms and bone. It increases bone mineral density and lowers the risk of hip and vertebral fracture. The risks are definite for venous thromboembolism and gallbladder disease, and estrogen alone raises endometrial cancer risk. Long-term estrogen-progestin raises breast cancer risk after about five years. So protection against hip fracture is a benefit rather than a risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benefits",
+     "points": [
+      "Relief of menopausal symptoms",
+      "Higher bone mineral density",
+      "Fewer hip fractures"
+     ]
+    },
+    "right": {
+     "title": "Risks",
+     "points": [
+      "Venous thromboembolism",
+      "Gallbladder disease",
+      "Breast cancer after five years of combined therapy",
+      "Endometrial cancer with estrogen alone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fetal lung maturity is judged by the **lecithin to sphingomyelin ratio** in amniotic fluid. Lecithin is the surfactant component, so a higher ratio means more mature lungs. A ratio **above 2** indicates maturity, while a ratio below 2 carries a raised risk of respiratory distress syndrome. Amniocentesis is needed to obtain the fluid for this test.",
+   "say": "Fetal lung maturity is judged by the lecithin to sphingomyelin ratio in amniotic fluid. Lecithin is the surfactant component, so a higher ratio means more mature lungs. A ratio above 2 indicates maturity, while a ratio below 2 carries a raised risk of respiratory distress syndrome. Amniocentesis is needed to obtain the fluid for this test.",
+   "vis": null
+  },
+  {
+   "tx": "Folic acid dosing depends on prevention setting. For **primary prevention** of neural tube defects, the dose is 400 micrograms daily. After a previous child with a neural tube defect, **secondary prevention** uses 4000 micrograms daily. This high dose starts in the periconceptional period, from one month before to three months after conception. Indian and US practice both follow this dosing principle.",
+   "say": "Folic acid dosing depends on the prevention setting. For primary prevention of neural tube defects, the dose is 400 micrograms daily. After a previous child with a neural tube defect, secondary prevention uses 4000 micrograms daily. This high dose starts in the periconceptional period, from one month before to three months after conception. Indian and US practice both follow this dosing principle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Daily dose",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Primary prevention",
+      "400 micrograms",
+      "Periconception"
+     ],
+     [
+      "Previous affected child",
+      "4000 micrograms",
+      "One month before to three months after conception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **one hour glucose challenge test**, a value above 140 mg/dl is suspicious and needs a formal glucose tolerance test. This screens for **gestational diabetes**. The 140 mg/dl cut-off is the one used in this review. Accurate screening depends on following this threshold before moving to the full test.",
+   "say": "In the one hour glucose challenge test, a value above 140 milligrams per decilitre is suspicious and needs a formal glucose tolerance test. This screens for gestational diabetes. The 140 cut-off is the threshold used in this review. Accurate screening depends on following this threshold before moving to the full test.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1bd770c2-c9da-4ee9-a612-5c55b47f6c3c",
+  "4cb20df6-6726-4827-921a-ce3be9fccf96",
+  "a4d33071-7df6-4920-8e4f-a7156e777105"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham and others, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 74
+ }
+}

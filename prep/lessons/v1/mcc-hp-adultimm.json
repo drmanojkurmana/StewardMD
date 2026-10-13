@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mcc-hp-adultimm",
+ "subject": "mcc-health-promotion",
+ "title": "Adult immunisation: key principles for exams",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Adult immunisation builds on the **schedule** that applies to each person, using their age, medical conditions, occupation, travel plans and past vaccines. Before any vaccine, check for a **contraindication**, such as a severe allergy to a component or moderate to severe acute illness. Mild illness alone is not usually a reason to defer. Records matter, so document each dose and the date.",
+   "say": "Adult immunisation builds on the schedule that applies to each person. Use their age, medical conditions, occupation, travel plans and past vaccines to decide. Before any vaccine, check for a contraindication, such as a severe allergy to a vaccine component or moderate to severe acute illness. Mild illness alone is not usually a reason to defer. Record each dose and its date.",
+   "vis": null
+  },
+  {
+   "tx": "Live attenuated vaccines, such as MMR, varicella and yellow fever, are avoided in **pregnancy** and in significant **immunosuppression**. Inactivated and recombinant vaccines are generally safe in both settings. Live vaccines can be given on the same day, or separated by at least 28 days. Advanced HIV with a low CD4 count is a reason to avoid live vaccines.",
+   "say": "Live attenuated vaccines, such as MMR, varicella and yellow fever, are avoided in pregnancy and in significant immunosuppression. Inactivated and recombinant vaccines are generally safe in both settings. Live vaccines can be given on the same day, or separated by at least 28 days. Advanced HIV with a low CD4 count is a reason to avoid live vaccines.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine type",
+     "Examples",
+     "Pregnancy",
+     "Immunosuppression"
+    ],
+    "rows": [
+     [
+      "Live attenuated",
+      "MMR, varicella, yellow fever",
+      "Avoid",
+      "Usually avoid"
+     ],
+     [
+      "Inactivated",
+      "Hepatitis B, influenza, pneumococcal",
+      "Generally safe",
+      "Generally safe"
+     ],
+     [
+      "Recombinant non-live",
+      "Recombinant zoster",
+      "Generally safe",
+      "Recommended"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Zoster prevention in immunosuppressed adults uses the **recombinant zoster vaccine**, which is non-live and can be given while on drugs such as methotrexate. Live zoster vaccine is no longer used. Canadian practice gives two intramuscular doses, 2 to 6 months apart. Vaccination before starting chemotherapy or biologics gives a better antibody response.",
+   "say": "Zoster prevention in immunosuppressed adults uses the recombinant zoster vaccine, which is non-live and can be given while on drugs such as methotrexate. Live zoster vaccine is no longer used. Canadian practice gives two intramuscular doses, two to six months apart. Vaccination before starting chemotherapy or biologics gives a better antibody response.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess immune status"
+     },
+     {
+      "id": "b",
+      "label": "Non-live recombinant vaccine"
+     },
+     {
+      "id": "c",
+      "label": "Dose 1 then dose 2 at 2 to 6 months"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tetanus prophylaxis depends on **wound type** and vaccine history. A tetanus-prone wound is deep, dirty or contaminated, such as a rusty nail or soil injury. Unknown or fewer than three doses means a toxoid-containing vaccine plus **tetanus immune globulin** for tetanus-prone wounds. Booster timing after a wound is five years for tetanus-prone wounds and ten years for clean minor wounds.",
+   "say": "Tetanus prophylaxis depends on wound type and vaccine history. A tetanus-prone wound is deep, dirty or contaminated, such as a rusty nail or soil injury. If history is unknown or there are fewer than three doses, give a toxoid-containing vaccine plus tetanus immune globulin for tetanus-prone wounds. After a wound, a booster is due after five years for tetanus-prone wounds and after ten years for clean minor wounds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wound",
+     "History unknown or under 3 doses",
+     "3 or more doses"
+    ],
+    "rows": [
+     [
+      "Clean, minor",
+      "Vaccine",
+      "Booster if over 10 years"
+     ],
+     [
+      "Tetanus-prone",
+      "Vaccine plus immune globulin",
+      "Booster if over 5 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rabies exposure from an unvaccinated person needs wound washing, **rabies immune globulin** infiltrated around the wound, and vaccine. Those with a completed pre-exposure or post-exposure series need only two vaccine doses, on day 0 and day 3, with no immune globulin. Pre-exposure vaccination does not remove the need for post-exposure care. Wound washing with soap and water is always the first step.",
+   "say": "Rabies exposure from an unvaccinated person needs wound washing, rabies immune globulin infiltrated around the wound, and vaccine. People with a completed pre-exposure or post-exposure series need only two vaccine doses, on day 0 and day 3, with no immune globulin. Pre-exposure vaccination does not remove the need for post-exposure care. Wound washing with soap and water is always the first step.",
+   "vis": null
+  },
+  {
+   "tx": "Travel vaccines follow the destination and timing. Hajj pilgrims need a **quadrivalent meningococcal ACWY** vaccine, given at least 10 days before arrival. Hepatitis A vaccine should be given before travel, with a booster later. **Yellow fever** certificates are valid for life after a single dose, so no booster is needed. Pregnant travellers needing yellow fever vaccine are assessed individually.",
+   "say": "Travel vaccines follow the destination and timing. Hajj pilgrims need a quadrivalent meningococcal ACWY vaccine, given at least 10 days before arrival. Hepatitis A vaccine should be given before travel, with a booster later. Yellow fever certificates are valid for life after a single dose, so no booster is needed. Pregnant travellers who need yellow fever vaccine are assessed individually.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-2d1eb4c9d422",
+  "mk-bdcecb05e70a",
+  "mk-ccec656bba03"
+ ],
+ "src": [],
+ "refs": [
+  "Public Health Agency of Canada, Canadian Immunization Guide",
+  "National Advisory Committee on Immunization, Canadian Immunization Guide chapters on tetanus, rabies and zoster"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 25
+ }
+}

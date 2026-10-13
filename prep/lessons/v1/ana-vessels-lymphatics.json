@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "ana-vessels-lymphatics",
+ "subject": "anatomy",
+ "title": "Blood vessels and lymphatics of the head and neck",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **common carotid artery** ends at the upper border of the thyroid cartilage, about the level of C3 or C4, by dividing into internal and external carotid arteries. The external carotid lies anterior to the internal carotid and has eight branches grouped as anterior, posterior, medial and terminal. The internal carotid has no branches in the neck, which is a frequent exam point.",
+   "say": "The common carotid artery ends at the upper border of the thyroid cartilage, about the level of C3 or C4, dividing into the internal and external carotid arteries. The external carotid lies anterior to the internal carotid and has eight branches, grouped as anterior, posterior, medial and terminal. The internal carotid has no branches in the neck, which is a frequent exam point.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cc",
+      "label": "Common carotid"
+     },
+     {
+      "id": "ec",
+      "label": "External carotid"
+     },
+     {
+      "id": "ic",
+      "label": "Internal carotid"
+     },
+     {
+      "id": "nb",
+      "label": "No neck branches"
+     }
+    ],
+    "edges": [
+     [
+      "cc",
+      "ec"
+     ],
+     [
+      "cc",
+      "ic"
+     ],
+     [
+      "ic",
+      "nb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **external carotid** branches are anterior: superior thyroid, lingual and facial; posterior: occipital and posterior auricular; medial: ascending pharyngeal only; terminal: maxillary and superficial temporal. The **facial artery** is the chief artery of the face and the submandibular gland is supplied mainly through facial branches. Ophthalmic artery is NOT an external carotid branch; it arises from the cerebral part of the internal carotid.",
+   "say": "The external carotid branches are anterior: superior thyroid, lingual and facial; posterior: occipital and posterior auricular; medial: ascending pharyngeal only; and terminal: maxillary and superficial temporal. The facial artery is the chief artery of the face. The ophthalmic artery is not an external carotid branch; it arises from the cerebral part of the internal carotid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Branches"
+    ],
+    "rows": [
+     [
+      "Anterior",
+      "Superior thyroid, lingual, facial"
+     ],
+     [
+      "Posterior",
+      "Occipital, posterior auricular"
+     ],
+     [
+      "Medial",
+      "Ascending pharyngeal"
+     ],
+     [
+      "Terminal",
+      "Maxillary, superficial temporal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **vertebral artery** arises from the posterosuperior aspect of the first part of the subclavian artery, not from the internal carotid. It passes through the foramina transversaria of the upper six cervical vertebrae and enters the skull through the foramen magnum, not the condylar canal. **Subclavian steal** occurs when the proximal subclavian is blocked: the affected arm draws blood retrogradely down the ipsilateral vertebral artery, fed from the contralateral vertebral.",
+   "say": "The vertebral artery arises from the posterosuperior aspect of the first part of the subclavian artery, not from the internal carotid. It passes through the foramina transversaria of the upper six cervical vertebrae and enters the skull through the foramen magnum. In subclavian steal, a proximal subclavian block makes the arm draw blood retrogradely down the ipsilateral vertebral artery, fed from the contralateral vertebral.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Proximal subclavian blocked"
+     },
+     {
+      "id": "b2",
+      "label": "Low pressure distal subclavian"
+     },
+     {
+      "id": "b3",
+      "label": "Contralateral vertebral feeds"
+     },
+     {
+      "id": "b4",
+      "label": "Retrograde ipsilateral vertebral flow"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **internal jugular vein** is the main venous drainage of the brain and neck. It begins at the jugular foramen as the continuation of the sigmoid sinus and joins the subclavian vein behind the sternal end of the clavicle to form the brachiocephalic vein. Its surface marking runs from a point medial to the ear lobule to the medial end of the clavicle. The **external jugular vein** is formed by the posterior auricular vein and the posterior division of the retromandibular vein, and drains into the subclavian vein.",
+   "say": "The internal jugular vein is the main venous drainage of the brain and neck. It begins at the jugular foramen as the continuation of the sigmoid sinus and joins the subclavian vein behind the sternal end of the clavicle to form the brachiocephalic vein. Its surface marking runs from a point medial to the ear lobule to the medial end of the clavicle. The external jugular vein is formed by the posterior auricular vein and the posterior division of the retromandibular vein.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Internal jugular vein",
+     "points": [
+      "Starts at jugular foramen",
+      "Receives facial and lingual veins",
+      "Joins subclavian to form brachiocephalic",
+      "Thoracic duct opens near its union on left"
+     ]
+    },
+    "right": {
+     "title": "External jugular vein",
+     "points": [
+      "Formed by posterior auricular and retromandibular posterior division",
+      "Lies superficial to sternocleidomastoid",
+      "Drains into subclavian vein",
+      "Connects to internal jugular via oblique jugular vein"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neck **levels** matter for **node staging**. Level IA is submental, IB submandibular, II upper jugular, III middle jugular, IV lower jugular, V posterior triangle, VI central and VII superior mediastinal. The **jugulodigastric node** lies near the digastric muscle and is often the first node enlarged by tonsillar disease, so clinicians check it early.",
+   "say": "Neck levels matter for node staging. Level IA is submental, IB submandibular, II upper jugular, III middle jugular, IV lower jugular, V posterior triangle, VI central and VII superior mediastinal. The jugulodigastric node lies near the digastric muscle and is often the first node enlarged by tonsillar disease, so clinicians check it early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Region"
+    ],
+    "rows": [
+     [
+      "IA",
+      "Submental"
+     ],
+     [
+      "IB",
+      "Submandibular"
+     ],
+     [
+      "II",
+      "Upper jugular"
+     ],
+     [
+      "III",
+      "Middle jugular"
+     ],
+     [
+      "IV",
+      "Lower jugular"
+     ],
+     [
+      "V",
+      "Posterior triangle"
+     ],
+     [
+      "VI",
+      "Central"
+     ],
+     [
+      "VII",
+      "Superior mediastinal"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "d4421534-c18e-4cb3-af91-91534eb7aac1",
+  "3798066d-f9d7-4624-860d-fb9c3d8ba811",
+  "417e4104-370f-4905-b3f8-ef4fc6fa06c6"
+ ],
+ "src": [],
+ "refs": [
+  "BD Chaurasia's Human Anatomy, Volume 1",
+  "Snell's Clinical Anatomy by Regions"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 106
+ }
+}

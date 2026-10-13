@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "mcc-hp-wellbaby",
+ "subject": "mcc-health-promotion",
+ "title": "Well-baby assessment: key checks and early-life red flags",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **well-baby assessment** checks growth, feeding, development and examination in the first weeks and months of life. Each visit should screen for conditions that are easy to miss, such as **developmental dysplasia of the hip**, congenital hypothyroidism and anaemia. Careful history, including birth presentation and family history, guides which examinations are needed.",
+   "say": "A well-baby assessment checks growth, feeding, development and examination in the first weeks and months of life. Each visit should screen for conditions that are easy to miss, such as developmental dysplasia of the hip, congenital hypothyroidism and anaemia. Careful history, including birth presentation and family history, guides which examinations are needed.",
+   "vis": null
+  },
+  {
+   "tx": "Neonatal jaundice needs urgent attention when the bilirubin is very high or the infant looks unwell. Haemolytic disease, such as **ABO incompatibility** with a positive direct antiglobulin test, requires **urgent phototherapy** and serial bilirubin checks. Lethargy, poor feeding or jaundice to the knees in an older newborn suggests bilirubin neurotoxicity and needs immediate admission.",
+   "say": "Neonatal jaundice needs urgent attention when the bilirubin is very high or the infant looks unwell. Haemolytic disease, such as ABO incompatibility with a positive direct antiglobulin test, requires urgent phototherapy and serial bilirubin checks. Lethargy, poor feeding or jaundice to the knees in an older newborn suggests bilirubin neurotoxicity and needs immediate admission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Jaundice in newborn"
+     },
+     {
+      "id": "b",
+      "label": "Positive DAT or very high bilirubin"
+     },
+     {
+      "id": "c",
+      "label": "Urgent phototherapy and monitoring"
+     },
+     {
+      "id": "d",
+      "label": "Lethargy or poor feeding"
+     },
+     {
+      "id": "e",
+      "label": "Admit immediately"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vitamin K prophylaxis** prevents late vitamin K deficiency bleeding, because newborns have low stores and limited gut flora. Parents may decline. The clinician should explain the bleeding risk, offer the option again, and document an **informed refusal**. Child protection referral is not appropriate for a competent, well parent who has made an informed choice.",
+   "say": "Vitamin K prophylaxis prevents late vitamin K deficiency bleeding, because newborns have low stores and limited gut flora. Parents may decline. The clinician should explain the bleeding risk, offer the option again, and document an informed refusal. Child protection referral is not appropriate for a competent, well parent who has made an informed choice.",
+   "vis": null
+  },
+  {
+   "tx": "Anaemia in infancy is most often caused by **iron deficiency**. Exclusively breastfed infants are at risk after about four to six months, because breast milk has low iron and stores run out. Iron-rich complementary foods and **oral iron supplementation** treat and prevent it. Check haemoglobin, MCV and ferritin to confirm the diagnosis before treating.",
+   "say": "Anaemia in infancy is most often caused by iron deficiency. Exclusively breastfed infants are at risk after about four to six months, because breast milk has low iron and stores run out. Iron-rich complementary foods and oral iron supplementation treat and prevent it. Check haemoglobin, MCV and ferritin to confirm the diagnosis before treating.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Iron deficiency pattern"
+    ],
+    "rows": [
+     [
+      "Haemoglobin",
+      "Low"
+     ],
+     [
+      "MCV",
+      "Low"
+     ],
+     [
+      "Ferritin",
+      "Low"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safe sleep counselling lowers the risk of **sudden infant death** and suffocation. Infants should sleep **supine** on a firm, bare surface, with no soft bedding, pillows or bumpers. Bed-sharing is hazardous, especially when a tired parent may fall asleep while feeding in an adult bed. Room-sharing without bed-sharing is the advised alternative.",
+   "say": "Safe sleep counselling lowers the risk of sudden infant death and suffocation. Infants should sleep supine on a firm, bare surface, with no soft bedding, pillows or bumpers. Bed-sharing is hazardous, especially when a tired parent may fall asleep while feeding in an adult bed. Room-sharing without bed-sharing is the advised alternative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe practice",
+     "points": [
+      "Supine on firm, bare surface",
+      "Room-share, no bed-share",
+      "Keep the cot free of soft items"
+     ]
+    },
+    "right": {
+     "title": "Hazards",
+     "points": [
+      "Soft bedding and bumpers",
+      "Pillows and sofas",
+      "Side or prone sleeping"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital hypothyroidism presents with poor feeding, constipation, prolonged jaundice and a large fontanelle. A raised TSH with low free T4 on repeat testing confirms the diagnosis. **Levothyroxine** must start without delay, because thyroid hormone is needed for brain development and untreated disease causes irreversible intellectual impairment.",
+   "say": "Congenital hypothyroidism presents with poor feeding, constipation, prolonged jaundice and a large fontanelle. A raised TSH with low free T4 on repeat testing confirms the diagnosis. Levothyroxine must start without delay, because thyroid hormone is needed for brain development and untreated disease causes irreversible intellectual impairment.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on Jaundice in newborn babies under 28 days (NG98)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

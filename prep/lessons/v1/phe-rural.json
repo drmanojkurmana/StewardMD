@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "phe-rural",
+ "subject": "population-health-and-ethics",
+ "title": "Rural and remote health: core principles for the exam",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "When primary PCI cannot happen within the time window, **fibrinolysis** is the reperfusion option for a STEMI. The stable patient with ST elevation and a long transfer time should receive fibrinolysis, followed by transfer for angiography. Early treatment matters because benefit falls as time from symptom onset rises.",
+   "say": "When primary PCI cannot happen within the time window, fibrinolysis is the reperfusion option for a STEMI. The stable patient with ST elevation and a long transfer time should receive fibrinolysis, followed by transfer for angiography. Early treatment matters because benefit falls as time from symptom onset rises.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "STEMI diagnosed"
+     },
+     {
+      "id": "b",
+      "label": "PCI within window?"
+     },
+     {
+      "id": "c",
+      "label": "Yes: primary PCI"
+     },
+     {
+      "id": "d",
+      "label": "No: fibrinolysis"
+     },
+     {
+      "id": "e",
+      "label": "Transfer for angiography"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hyperkalaemia with ECG changes is an emergency that needs **immediate cardiac protection**, then **shifting potassium into cells** with insulin and glucose. **Definitive removal**, usually by dialysis for acute kidney injury, is arranged afterwards. Oral binders and routine review are not enough for an unstable rhythm.",
+   "say": "Hyperkalaemia with ECG changes is an emergency that needs immediate cardiac protection, then shifting potassium into cells with insulin and glucose. Definitive removal, usually by dialysis for acute kidney injury, is arranged afterwards. Oral binders and routine review are not enough for an unstable rhythm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Peaked T waves",
+      "Urgent cardiac membrane protection"
+     ],
+     [
+      "Potassium shift",
+      "Insulin with glucose"
+     ],
+     [
+      "Removal",
+      "Dialysis referral"
+     ],
+     [
+      "Outpatient review",
+      "Not appropriate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iron deficiency in an adult man or a postmenopausal woman is a red flag for **occult blood loss**, so a source search is needed. In a premenopausal woman with heavy periods, the likely source is menstrual loss, but investigation is still required. Oral iron treats the deficiency, while the source is found and managed.",
+   "say": "Iron deficiency in an adult man or a postmenopausal woman is a red flag for occult blood loss, so a source search is needed. In a premenopausal woman with heavy periods, the likely source is menstrual loss, but investigation is still required. Oral iron treats the deficiency, while the source is found and managed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Premenopausal woman",
+     "points": [
+      "Heavy menstrual loss likely",
+      "Oral iron replaces stores",
+      "Gynaecology review for cause"
+     ]
+    },
+    "right": {
+     "title": "Adult man or older woman",
+     "points": [
+      "Look for gut bleeding",
+      "Gastroscopy and colonoscopy",
+      "Oral iron while investigating"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In a child with mild dehydration, **oral rehydration solution** is the first line. Sodium and glucose co-transport increases water and electrolyte absorption from the gut. Severe dehydration, shock or failure to drink calls for intravenous fluids and urgent transfer. Antibiotics are not routine for uncomplicated watery diarrhoea.",
+   "say": "In a child with mild dehydration, oral rehydration solution is the first line. Sodium and glucose co-transport increases water and electrolyte absorption from the gut. Severe dehydration, shock or failure to drink calls for intravenous fluids and urgent transfer. Antibiotics are not routine for uncomplicated watery diarrhoea.",
+   "vis": null
+  },
+  {
+   "tx": "Remote clinicians sometimes face errors with limited backup, so **open disclosure** becomes a core duty. When a patient is harmed, or simply exposed to risk, by a mistake, even a minor one, the clinician should tell them promptly and honestly. Acknowledge the event, apologise sincerely, and explain what went wrong. Agree on a **follow-up plan** together, and keep the patient informed as new facts emerge.",
+   "say": "Remote clinicians often face errors with little backup, so open disclosure becomes a core duty. If a patient is harmed, or only exposed to risk, by a mistake, even a small one, you should tell them promptly and honestly. Acknowledge the event, apologise sincerely, and explain what went wrong. Then agree on a follow-up plan together, and keep the patient informed as new facts come to light.",
+   "vis": null
+  },
+  {
+   "tx": "A **mandatory report** to child protection is required when a child discloses ongoing sexual abuse. Secrecy cannot be promised, and the aunt should not be told first if she may be involved. Counselling alone leaves the child at risk. Safety of the child comes before the request for confidentiality.",
+   "say": "A mandatory report to child protection is required when a child discloses ongoing sexual abuse. Secrecy cannot be promised, and the aunt should not be told first if she may be involved. Counselling alone leaves the child at risk. Safety of the child comes before the request for confidentiality.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG185 Acute coronary syndromes"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

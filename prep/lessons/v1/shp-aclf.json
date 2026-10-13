@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "shp-aclf",
+ "subject": "ss-hepatology",
+ "title": "Acute-on-chronic liver failure: definitions, scores and management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Acute-on-chronic liver failure** (ACLF) is an acute decompensation of cirrhosis with failure of two or more organ systems, leading to high short-term mortality. It is distinct from **acute liver failure**, which occurs in a previously healthy liver and is defined by liver dysfunction within 26 weeks without pre-existing disease. Recognising the chronic background is the first step in the exam question.",
+   "say": "Acute-on-chronic liver failure, or ACLF, is an acute decompensation of cirrhosis with failure of two or more organ systems, leading to high short-term mortality. It is distinct from acute liver failure, which occurs in a previously healthy liver and is defined by liver dysfunction within 26 weeks without pre-existing disease. Recognising the chronic background is the first step in the exam question.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "ACLF",
+     "Acute liver failure"
+    ],
+    "rows": [
+     [
+      "Pre-existing liver disease",
+      "Cirrhosis present",
+      "Usually absent"
+     ],
+     [
+      "Time frame",
+      "Acute decompensation",
+      "Within 26 weeks"
+     ],
+     [
+      "Organ failures",
+      "Two or more",
+      "Mainly hepatic injury with encephalopathy"
+     ],
+     [
+      "Main concern",
+      "Short-term mortality",
+      "Cerebral oedema and coagulopathy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **EASL-CLIF** system, organ failure is graded by the **CLIF Organ Failure** score, which covers liver, kidney, brain, coagulation, circulation, and respiration. A higher total predicts worse outcome. Kidney failure is the most common organ failure in ACLF and is a strong predictor of death. Note that the NACSELD criteria count only extrahepatic organ failures.",
+   "say": "In the EASL-CLIF system, organ failure is graded by the CLIF Organ Failure score, which covers liver, kidney, brain, coagulation, circulation, and respiration. A higher total predicts worse outcome. Kidney failure is the most common organ failure in ACLF and is a strong predictor of death. The NACSELD criteria count only extrahepatic organ failures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EASL-CLIF",
+     "points": [
+      "Six organs graded",
+      "Liver, kidney, brain, coagulation, circulation, lungs",
+      "Higher score, higher mortality"
+     ]
+    },
+    "right": {
+     "title": "NACSELD",
+     "points": [
+      "Counts extrahepatic failures only",
+      "Focus on number of systems",
+      "Less used for trial grading"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sepsis** is the commonest precipitant of ACLF, and spontaneous bacterial peritonitis must be sought with diagnostic paracentesis in any febrile patient with ascites. Infection impairs Kupffer cell clearance, which increases susceptibility to organisms such as E. coli and Candida. **Albumin** given with antibiotics helps prevent accelerated renal dysfunction. Around 40 to 50 percent of ACLF cases have no clear trigger.",
+   "say": "Sepsis is the commonest precipitant of ACLF, and spontaneous bacterial peritonitis must be sought with diagnostic paracentesis in any febrile patient with ascites. Infection impairs Kupffer cell clearance, which increases susceptibility to organisms such as E. coli and Candida. Albumin given with antibiotics helps prevent accelerated renal dysfunction. Around 40 to 50 percent of ACLF cases have no clear trigger.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Febrile cirrhotic with ascites"
+     },
+     {
+      "id": "b",
+      "label": "Diagnostic paracentesis"
+     },
+     {
+      "id": "c",
+      "label": "Antibiotics plus IV albumin"
+     },
+     {
+      "id": "d",
+      "label": "Reassess organ failures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "SBP confirmed"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Supportive care targets the failing organs. **Hypoglycaemia** is treated with continuous infusion of 10 or 20 percent glucose rather than a single bolus. Hepatic encephalopathy Grade 3 requires a **head CT** to exclude cerebral oedema or bleeding. Continuous renal replacement is preferred over intermittent haemodialysis in unstable patients awaiting transplant.",
+   "say": "Supportive care targets the failing organs. Hypoglycaemia is treated with continuous infusion of 10 or 20 percent glucose rather than a single bolus. Hepatic encephalopathy Grade 3 requires a head CT to exclude cerebral oedema or bleeding. Continuous renal replacement is preferred over intermittent haemodialysis in unstable patients awaiting transplant.",
+   "vis": null
+  },
+  {
+   "tx": "Transplant is the only definitive cure. A **CLIF Organ Failure** score above 64 justifies immediate transplant assessment, and an **INR** above 6.5 in acute liver failure is a listing criterion. **Plasma exchange** and **G-CSF** are used in selected ACLF patients, but evidence is limited. Futility is judged when multi-organ failure persists despite support with no transplant option.",
+   "say": "Transplant is the only definitive cure. A CLIF Organ Failure score above 64 justifies immediate transplant assessment, and an INR above 6.5 in acute liver failure is a listing criterion. Plasma exchange and G-CSF are used in selected ACLF patients, but evidence is limited. Futility is judged when multi-organ failure persists despite support with no transplant option.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1f4f7b71bb32",
+  "q_4d7f2a3648c9",
+  "q_364b7aaf6125"
+ ],
+ "src": [],
+ "refs": [
+  "EASL-CLIF Consortium, Acute-on-chronic liver failure guidelines (EASL)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

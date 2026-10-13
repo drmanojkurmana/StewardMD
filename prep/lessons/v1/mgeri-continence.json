@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "mgeri-continence",
+ "subject": "mrcp-geriatrics",
+ "title": "Continence, nutrition and pressure care",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Pressure ulcers are staged by the **deepest tissue** visibly damaged, not by size. Category 1 is intact skin with non-blanching redness. Category 2 is partial-thickness loss with a shallow open ulcer and no slough. Category 3 is full-thickness loss where subcutaneous fat may show, but bone, tendon and muscle are not exposed. Category 4 extends to these deeper structures. Slough or eschar hiding the base makes a wound **unstageable**.",
+   "say": "Pressure ulcers are staged by the deepest tissue visibly damaged, not by size. Category 1 is intact skin with non-blanching redness. Category 2 is partial-thickness loss with a shallow open ulcer and no slough. Category 3 is full-thickness loss where subcutaneous fat may show, but bone, tendon and muscle are not exposed. Category 4 extends to these deeper structures. Slough or eschar hiding the base makes a wound unstageable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Depth of damage"
+    ],
+    "rows": [
+     [
+      "1",
+      "Intact skin, non-blanching redness"
+     ],
+     [
+      "2",
+      "Partial thickness, shallow open ulcer"
+     ],
+     [
+      "3",
+      "Full thickness, fat may be visible"
+     ],
+     [
+      "4",
+      "Full thickness, bone, tendon or muscle exposed"
+     ],
+     [
+      "Unstageable",
+      "Base hidden by slough or eschar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refeeding syndrome happens when carbohydrate feeding after prolonged starvation drives **insulin-mediated** intracellular uptake of phosphate, potassium and magnesium. High-risk patients include those with BMI below 16 kg/m2, little or no intake for over 10 days, or low electrolytes before feeding. NICE advises giving **thiamine** before feeding, starting at no more than 10 kcal/kg/day and monitoring electrolytes closely.",
+   "say": "Refeeding syndrome happens when carbohydrate feeding after prolonged starvation drives insulin mediated intracellular uptake of phosphate, potassium and magnesium. High risk patients include those with BMI below 16 kg/m2, little or no intake for over 10 days, or low electrolytes before feeding. NICE advises giving thiamine before feeding, starting at no more than 10 kcal/kg/day and monitoring electrolytes closely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged starvation"
+     },
+     {
+      "id": "b",
+      "label": "Thiamine given"
+     },
+     {
+      "id": "c",
+      "label": "Low calorie start"
+     },
+     {
+      "id": "d",
+      "label": "Monitor electrolytes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Urinary incontinence must be matched to its type. **Stress** incontinence means leakage on coughing, sneezing or lifting, and its first-line treatment is **supervised pelvic floor muscle training**. **Urge** incontinence, with urgency and frequency, is treated with an antimuscarinic or mirabegron. Surgery such as a mid-urethral sling is reserved for symptoms that persist after conservative care.",
+   "say": "Urinary incontinence must be matched to its type. Stress incontinence means leakage on coughing, sneezing or lifting, and its first-line treatment is supervised pelvic floor muscle training. Urge incontinence, with urgency and frequency, is treated with an antimuscarinic or mirabegron. Surgery such as a mid-urethral sling is reserved for symptoms that persist after conservative care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stress incontinence",
+     "points": [
+      "Leakage on cough or lift",
+      "Pelvic floor training first",
+      "Sling if conservative care fails"
+     ]
+    },
+    "right": {
+     "title": "Urge incontinence",
+     "points": [
+      "Urgency and frequency",
+      "Antimuscarinic or mirabegron",
+      "Check urine and residual volume"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Faecal impaction is a common, **reversible** cause of incontinence and retention in older people. A loaded rectum compresses the bladder neck, causing overflow leakage, dribbling and frequency. Liquid stool can leak around a hard mass. Before any urological investigation, check for constipation with a rectal examination. Treat with disimpaction, relieve retention with a catheter if needed, then start a regular bowel regimen.",
+   "say": "Faecal impaction is a common, reversible cause of incontinence and retention in older people. A loaded rectum compresses the bladder neck, causing overflow leakage, dribbling and frequency. Liquid stool can leak around a hard mass. Before any urological investigation, check for constipation with a rectal examination. Treat with disimpaction, relieve retention with a catheter if needed, then start a regular bowel regimen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rectal exam"
+     },
+     {
+      "id": "b",
+      "label": "Disimpact"
+     },
+     {
+      "id": "c",
+      "label": "Relieve retention"
+     },
+     {
+      "id": "d",
+      "label": "Regular laxative"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antimuscarinics such as **oxybutynin** and **tolterodine** cross into the brain and can worsen cognition, and they oppose cholinesterase inhibitors like donepezil. In people with dementia, **mirabegron**, a beta-3 agonist, is a sensible alternative, but it can raise blood pressure. Check blood pressure and renal function before and after starting. Avoid antimuscarinics in faecal impaction or retention.",
+   "say": "Antimuscarinics such as oxybutynin and tolterodine cross into the brain and can worsen cognition, and they oppose cholinesterase inhibitors like donepezil. In people with dementia, mirabegron, a beta-3 agonist, is a sensible alternative, but it can raise blood pressure. Check blood pressure and renal function before and after starting. Avoid antimuscarinics in faecal impaction or retention.",
+   "vis": null
+  },
+  {
+   "tx": "After a **post-obstructive diuresis** following relief of prolonged retention, urine output can be very high. Chart urine output hourly, replace losses with appropriate intravenous fluid and monitor potassium and sodium. Excess polyuria can cause hypovolaemia, hypokalaemia and worsening renal function, so do not simply restrict fluids or clamp the catheter.",
+   "say": "After a post obstructive diuresis following relief of prolonged retention, urine output can be very high. Chart urine output hourly, replace losses with appropriate intravenous fluid and monitor potassium and sodium. Excess polyuria can cause hypovolaemia, hypokalaemia and worsening renal function, so do not simply restrict fluids or clamp the catheter.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE CG171 Urinary incontinence and pelvic organ prolapse in women"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

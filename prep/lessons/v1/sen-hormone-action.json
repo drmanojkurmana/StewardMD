@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "sen-hormone-action",
+ "subject": "ss-endocrinology",
+ "title": "Hormone synthesis, receptors and signalling: core principles for NEET-PG",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Hormones act through **receptors**, and where the receptor sits decides the speed and mechanism of action. Peptide hormones bind **G protein coupled receptors** on the cell surface, triggering second messengers such as cyclic AMP. Steroid and thyroid hormones are lipophilic and cross the membrane to bind intracellular **nuclear receptors**, which alter gene transcription. Ligand binding is the initiating event for every GPCR cascade, and the heterotrimeric G protein links the receptor to downstream effectors.",
+   "say": "Hormones act through receptors, and where the receptor sits decides the speed and mechanism of action. Peptide hormones bind G protein coupled receptors on the cell surface, triggering second messengers such as cyclic AMP. Steroid and thyroid hormones are lipophilic and cross the membrane to bind intracellular nuclear receptors, which alter gene transcription. Ligand binding is the initiating event for every GPCR cascade, and the heterotrimeric G protein links the receptor to downstream effectors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Peptide hormone",
+     "Steroid or thyroid hormone"
+    ],
+    "rows": [
+     [
+      "Receptor site",
+      "Cell surface",
+      "Intracellular"
+     ],
+     [
+      "Typical signal",
+      "Second messenger",
+      "Gene transcription"
+     ],
+     [
+      "Onset",
+      "Rapid",
+      "Slower, hours to days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid hormone synthesis starts with iodide trapping by the **sodium-iodide symporter**. **Thyroid peroxidase** then oxidises iodide and organifies it onto tyrosyl residues of thyroglobulin, forming MIT and DIT, which couple into T3 and T4. Peripheral conversion of T4 to the active T3 is done by **deiodinases** type I and II, so low free T3 with normal free T4 points towards peripheral conversion problems. Type III deiodinase inactivates hormone instead.",
+   "say": "Thyroid hormone synthesis starts with iodide trapping by the sodium-iodide symporter. Thyroid peroxidase then oxidises iodide and organifies it onto tyrosyl residues of thyroglobulin, forming MIT and DIT, which couple into T3 and T4. Peripheral conversion of T4 to the active T3 is done by deiodinases type I and II, so low free T3 with normal free T4 points towards peripheral conversion problems. Type III deiodinase inactivates hormone instead.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Iodide trapping"
+     },
+     {
+      "id": "n2",
+      "label": "Oxidation and organification"
+     },
+     {
+      "id": "n3",
+      "label": "Coupling to T3 and T4"
+     },
+     {
+      "id": "n4",
+      "label": "Peripheral deiodination"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "symporter then TPO"
+     ],
+     [
+      "n2",
+      "n3",
+      "MIT and DIT"
+     ],
+     [
+      "n3",
+      "n4",
+      "T4 to T3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid hormone receptors are nuclear receptors. When **T3** binds, the receptor changes shape, releases **co-repressors** and recruits **co-activators**, which switches gene transcription on. Pituitary negative feedback is mainly mediated by the TR beta2 isoform, which suppresses TRH and TSH. TSH itself acts on a Gs-coupled receptor, raising cAMP in follicular cells. Feedback failure at the hypothalamus or pituitary gives a central defect in the axis.",
+   "say": "Thyroid hormone receptors are nuclear receptors. When T3 binds, the receptor changes shape, releases co-repressors and recruits co-activators, which switches gene transcription on. Pituitary negative feedback is mainly mediated by the TR beta2 isoform, which suppresses TRH and TSH. TSH itself acts on a Gs-coupled receptor, raising cAMP in follicular cells. Feedback failure at the hypothalamus or pituitary gives a central defect in the axis.",
+   "vis": null
+  },
+  {
+   "tx": "Binding protein and assay issues can mislead thyroid interpretation. In **thyroxine-binding globulin** deficiency, total T4 is low while free T4 stays normal, so the correct response is observation, not replacement. High-dose **biotin** interferes with many immunoassays, causing falsely low TSH and falsely high T4 and T3 in a euthyroid patient. Always check for biotin before diagnosing hyperthyroidism.",
+   "say": "Binding protein and assay issues can mislead thyroid interpretation. In thyroxine-binding globulin deficiency, total T4 is low while free T4 stays normal, so the correct response is observation, not replacement. High-dose biotin interferes with many immunoassays, causing falsely low TSH and falsely high T4 and T3 in a euthyroid patient. Always check for biotin before diagnosing hyperthyroidism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genuine hyperthyroidism",
+     "points": [
+      "TSH suppressed",
+      "Free T4 and T3 raised",
+      "Clinical features present",
+      "Thyroid uptake often raised"
+     ]
+    },
+    "right": {
+     "title": "Biotin interference",
+     "points": [
+      "TSH falsely low",
+      "Free T4 and T3 falsely high",
+      "Patient euthyroid clinically",
+      "Stop biotin and repeat assay"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In G protein signalling, a **GPCR** activates a Gs or Gi alpha subunit, which changes adenylyl cyclase activity and cAMP levels. Protein kinase A is the main effector of cAMP. Disturbances of this pathway cause disease: activating **GNAS** mutations produce McCune-Albright syndrome, and GNAS loss of function produces pseudohypoparathyroidism. PDE4D and PRKAR1A variants produce acrodysostosis, where PKA signalling is disturbed downstream of the receptor.",
+   "say": "In G protein signalling, a GPCR activates a Gs or Gi alpha subunit, which changes adenylyl cyclase activity and cAMP levels. Protein kinase A is the main effector of cAMP. Disturbances of this pathway cause disease: activating GNAS mutations produce McCune-Albright syndrome, and GNAS loss of function produces pseudohypoparathyroidism. PDE4D and PRKAR1A variants produce acrodysostosis, where PKA signalling is disturbed downstream of the receptor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Gene",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "McCune-Albright",
+      "GNAS activating",
+      "Constant cAMP"
+     ],
+     [
+      "Pseudohypoparathyroidism 1a",
+      "GNAS loss",
+      "Reduced Gs signalling"
+     ],
+     [
+      "Acrodysostosis",
+      "PDE4D or PRKAR1A",
+      "Disturbed PKA signalling"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_20f2a18f38a2",
+  "q_a3be08fa6a4a",
+  "q_bc296a8d1616"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Textbook of Endocrinology (Melmed et al.)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

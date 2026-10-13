@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "snp-transplant-rejection",
+ "subject": "ss-nephrology",
+ "title": "Allograft rejection and dysfunction: a high-yield lesson",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Allograft rejection** is the immune injury of a transplanted organ by the recipient's immune system. It is classified by the main effector arm: **T cell mediated rejection** (TCMR), driven by cytotoxic and helper T cells with mononuclear infiltrates and tubulitis, and **antibody mediated rejection** (AMR), driven by donor specific antibodies (DSA) against HLA or non-HLA antigens. Hyperacute rejection is the fastest form, occurring within minutes to hours of reperfusion from preformed antibodies.",
+   "say": "Allograft rejection is the immune injury of a transplanted organ by the recipient's immune system. It is classified by the main effector arm. T cell mediated rejection is driven by cytotoxic and helper T cells, with mononuclear infiltrates and tubulitis. Antibody mediated rejection is driven by donor specific antibodies against HLA or non-HLA antigens. Hyperacute rejection is the fastest form, occurring within minutes to hours of reperfusion, caused by preformed antibodies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Main driver",
+     "Typical timing",
+     "Key histology"
+    ],
+    "rows": [
+     [
+      "Hyperacute",
+      "Preformed antibodies",
+      "Minutes to hours",
+      "Vascular thrombosis, necrosis"
+     ],
+     [
+      "Acute TCMR",
+      "T cells",
+      "Weeks to months",
+      "Mononuclear infiltrate, tubulitis"
+     ],
+     [
+      "Acute AMR",
+      "DSA and complement",
+      "Days to weeks",
+      "Capillaritis, C4d positive"
+     ],
+     [
+      "Chronic AMR",
+      "DSA, multiple mechanisms",
+      "Months to years",
+      "Transplant glomerulopathy, multilayering"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnosis in the Indian and global setting depends on a combination of tests, not creatinine alone. The **Banff classification** grades biopsies using scores for tubulitis, arteritis, glomerulitis, peritubular capillaritis and C4d. **C4d staining** in peritubular capillaries shows complement activation and supports AMR. Assess **donor specific antibodies** and **microvascular inflammation** (MVI), a combined glomerular and peritubular capillary score that predicts AMR and graft loss.",
+   "say": "Diagnosis depends on a combination of tests, not creatinine alone. The Banff classification grades biopsies using scores for tubulitis, arteritis, glomerulitis, peritubular capillaritis and C4d. C4d staining in peritubular capillaries shows complement activation and supports antibody mediated rejection. Assess donor specific antibodies and microvascular inflammation, a combined glomerular and peritubular capillary score that predicts antibody mediated rejection and graft loss.",
+   "vis": null
+  },
+  {
+   "tx": "Treatment of acute rejection differs by type. **Acute TCMR** responds usually to pulsed methylprednisolone, and resistant cases may need anti-thymocyte globulin. **Acute AMR** needs a combined approach: **plasmapheresis** to remove antibody, **intravenous immunoglobulin** (IVIG) to modulate antibody and complement, and rituximab in selected cases. Steroids alone are insufficient for AMR, which is why it carries a worse prognosis than TCMR.",
+   "say": "Treatment of acute rejection differs by type. Acute T cell mediated rejection usually responds to pulsed methylprednisolone, and resistant cases may need anti-thymocyte globulin. Acute antibody mediated rejection needs a combined approach: plasmapheresis to remove antibody, intravenous immunoglobulin to modulate antibody and complement, and rituximab in selected cases. Steroids alone are insufficient, which is why this form carries a worse prognosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute TCMR",
+     "points": [
+      "Pulsed methylprednisolone first line",
+      "Anti-thymocyte globulin if resistant",
+      "Good response in most"
+     ]
+    },
+    "right": {
+     "title": "Acute AMR",
+     "points": [
+      "Plasmapheresis to remove antibody",
+      "IVIG and sometimes rituximab",
+      "Steroids alone insufficient"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chronic active AMR** is defined by ongoing DSA, evidence of chronic tissue injury and the presence of peritubular capillary C4d or MVI. **Transplant glomerulopathy** is a key lesion, showing double contours of the glomerular basement membrane and severe multilayering of peritubular capillary basement membranes. Chronic allograft arteriopathy shows arterial intimal fibrosis with mononuclear cells. Note that C4d is not always required, since C4d negative cases exist.",
+   "say": "Chronic active antibody mediated rejection is defined by ongoing donor specific antibodies, evidence of chronic tissue injury, and peritubular capillary C4d or microvascular inflammation. Transplant glomerulopathy is a key lesion, showing double contours of the glomerular basement membrane and severe multilayering of peritubular capillary basement membranes. Chronic allograft arteriopathy shows arterial intimal fibrosis with mononuclear cells. C4d is not always required, since C4d negative cases exist.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DSA present"
+     },
+     {
+      "id": "b",
+      "label": "Chronic tissue injury"
+     },
+     {
+      "id": "c",
+      "label": "C4d or MVI"
+     },
+     {
+      "id": "d",
+      "label": "Chronic active AMR"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic allograft nephropathy**, now termed **interstitial fibrosis and tubular atrophy** (IFTA), is a graft failure pattern beyond one year without a single acute cause such as toxicity or rejection. Calcineurin inhibitor toxicity, non-adherence and recurrent disease contribute. **Donor derived cell free DNA** (dd-cfDNA) is a non-invasive marker of graft injury; a rising fraction suggests injury and prompts biopsy or treatment review. Low tacrolimus levels can point to non-adherence.",
+   "say": "Chronic allograft nephropathy, now termed interstitial fibrosis and tubular atrophy, is a graft failure pattern beyond one year without a single acute cause such as toxicity or rejection. Calcineurin inhibitor toxicity, non-adherence and recurrent disease contribute. Donor derived cell free DNA is a non-invasive marker of graft injury. A rising fraction suggests injury and prompts biopsy or treatment review. Low tacrolimus levels can point to non-adherence.",
+   "vis": null
+  },
+  {
+   "tx": "Exam focus: **Hyperacute rejection** is immediate and preformed-antibody driven, so it is prevented by crossmatching. **Cardiac allograft vasculopathy** is diffuse intimal proliferation, detected best by intravascular ultrasound, and retransplantation is the definitive treatment for advanced disease. Post-transplant lymphoproliferative disorder is mostly Epstein-Barr virus driven; reduce immunosuppression first and use rituximab in aggressive cases. BK nephropathy is treated by reducing immunosuppression.",
+   "say": "Exam focus. Hyperacute rejection is immediate and preformed antibody driven, so it is prevented by crossmatching. Cardiac allograft vasculopathy is diffuse intimal proliferation, detected best by intravascular ultrasound, and retransplantation is the definitive treatment for advanced disease. Post-transplant lymphoproliferative disorder is mostly Epstein-Barr virus driven. Reduce immunosuppression first and use rituximab in aggressive cases. BK nephropathy is treated by reducing immunosuppression.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_81e5e4ad8b50",
+  "q_c7fb0d51c39f",
+  "q_412d9b6218f6"
+ ],
+ "src": [],
+ "refs": [
+  "Banff Classification of Allograft Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 54
+ }
+}

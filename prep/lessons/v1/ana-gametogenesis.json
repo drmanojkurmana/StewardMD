@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "ana-gametogenesis",
+ "subject": "anatomy",
+ "title": "Gametogenesis and fertilisation: key sequences and milestones",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Capacitation** occurs in the female tract and prepares the sperm to fertilise. The **acrosome reaction** releases enzymes that help the sperm pass the **zona pellucida**. The zona pellucida prevents polyspermy. After one sperm enters, the **cortical reaction** hardens the zona and blocks other sperm. The second meiotic division then completes and the female pronucleus forms.",
+   "say": "Capacitation occurs in the female tract and prepares the sperm to fertilise. The acrosome reaction releases enzymes that help the sperm pass the zona pellucida. The zona pellucida prevents polyspermy. After one sperm enters, the cortical reaction hardens the zona and blocks other sperm. The second meiotic division then completes and the female pronucleus forms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Capacitation"
+     },
+     {
+      "id": "b",
+      "label": "Acrosome reaction"
+     },
+     {
+      "id": "c",
+      "label": "Zona penetration"
+     },
+     {
+      "id": "d",
+      "label": "Cortical reaction"
+     },
+     {
+      "id": "e",
+      "label": "Female pronucleus"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cleavage** divides the zygote into smaller **blastomeres** without growth in size. The 16-cell **morula** forms around day 3, and compaction creates an inner cell mass. The advanced morula of more than 32 cells enters the uterine cavity around day 4. Fluid then collects to form the **blastocyst**, which lies inside the zona pellucida until implantation.",
+   "say": "Cleavage divides the zygote into smaller blastomeres without growth in overall size. The sixteen cell morula forms around day three, and compaction creates an inner cell mass. The advanced morula of more than thirty two cells enters the uterine cavity around day four. Fluid then collects to form the blastocyst, which remains inside the zona pellucida until implantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Cell count",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Two cell",
+      "2",
+      "Day 1"
+     ],
+     [
+      "Morula",
+      "16",
+      "About day 3"
+     ],
+     [
+      "Advanced morula",
+      "More than 32",
+      "Enters uterus day 4"
+     ],
+     [
+      "Blastocyst",
+      "Fluid filled",
+      "Late day 4 onwards"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nondisjunction** is failure of homologous chromosomes or sister chromatids to separate, producing gametes with an abnormal number of chromosomes. Imprinting silences one parental allele of certain genes, so only one functional copy exists. Remember that a classification question on chromosome types depends on centromere position: acrocentric has the centromere near one tip.",
+   "say": "Nondisjunction is failure of homologous chromosomes or sister chromatids to separate, producing gametes with an abnormal chromosome number. Imprinting silences one parental copy of certain genes, so only one functional allele exists. Centromere position classifies chromosomes, and an acrocentric chromosome has its centromere near one tip.",
+   "vis": null
+  },
+  {
+   "tx": "In Indian exams, expect questions on the embryonic period, which runs from fertilisation to the end of **week 8**, and on the **zona pellucida**, which disappears around the time of implantation. Know that primordial germ cells appear in the yolk sac wall at week 4 and migrate to the gonads by week 6.",
+   "say": "In Indian exams, expect questions on the embryonic period, which runs from fertilisation to the end of week eight, and on the zona pellucida, which disappears around the time of implantation. Know that primordial germ cells appear in the yolk sac wall at week four and migrate to the gonads by week six.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "21eb2fed-e0af-46bf-95ed-71de73a8bb60",
+  "22a3a765-ba72-4e54-ba29-8c8abe15be66",
+  "3761d425-1996-4438-b8ee-dc77c1e16d81"
+ ],
+ "src": [],
+ "refs": [
+  "Human Embryology, Inderbir Singh, Tenth edition",
+  "Human Embryology, Inderbir Singh (Dr. Inderbir Singh's Human Embryology)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 149
+ }
+}

@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "phe-nip",
+ "subject": "population-health-and-ethics",
+ "title": "National Immunisation Program: Key Principles for Exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Vaccines are either **live attenuated** or **inactivated**. Live vaccines such as MMR, varicella and yellow fever replicate in the host, so they are avoided in pregnancy and in people with significant immunosuppression, such as high-dose corticosteroids. Inactivated vaccines such as influenza, pertussis-containing and hepatitis B vaccines cannot replicate and are generally safe in these groups.",
+   "say": "Vaccines are either live attenuated or inactivated. Live vaccines such as MMR, varicella and yellow fever replicate in the host. They are avoided in pregnancy and in significant immunosuppression, such as high dose corticosteroids. Inactivated vaccines, such as influenza, pertussis containing and hepatitis B vaccines, cannot replicate and are generally safe in these groups.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Live attenuated",
+     "Inactivated"
+    ],
+    "rows": [
+     [
+      "Replicates in host",
+      "Yes",
+      "No"
+     ],
+     [
+      "Examples",
+      "MMR, varicella, yellow fever",
+      "Influenza, pertussis, hepatitis B"
+     ],
+     [
+      "Pregnancy",
+      "Avoid",
+      "Generally safe"
+     ],
+     [
+      "Immunosuppression",
+      "Usually avoid",
+      "Generally safe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In pregnancy, the **Tdap or dTpa** vaccine is given late in the pregnancy, during the third trimester, so that **maternal IgG** crosses the placenta. This gives the newborn passive protection against pertussis during early infancy, before the infant's own doses take effect. The vaccine should not be postponed until after delivery, and pertussis testing is unnecessary when the woman is well.",
+   "say": "In pregnancy, the Tdap or dTpa vaccine is given late in the pregnancy, during the third trimester, so that maternal antibody crosses the placenta. The newborn gains passive protection against pertussis during early infancy, before its own doses take effect. Postponing the vaccine until after delivery is not advised, and pertussis testing is unnecessary when the woman is well.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Third trimester dTpa"
+     },
+     {
+      "id": "b",
+      "label": "IgG crosses placenta"
+     },
+     {
+      "id": "c",
+      "label": "Newborn passive protection"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exposure to **varicella** in pregnancy needs a quick check of immunity. If varicella IgG is negative, the woman is susceptible, and **varicella-zoster immunoglobulin** given promptly can reduce severe disease. Live varicella vaccine is contraindicated in pregnancy and cannot give timely protection after exposure. Platelet count does not change this decision.",
+   "say": "Exposure to varicella in pregnancy needs a quick check of immunity. If varicella IgG is negative, the woman is susceptible, and varicella zoster immunoglobulin given promptly can reduce severe disease. Live varicella vaccine is contraindicated in pregnancy and cannot give timely protection after exposure. Platelet count does not change this decision.",
+   "vis": null
+  },
+  {
+   "tx": "Missed doses should be caught up as soon as possible. Doses already given are counted and never repeated. Mild illness without fever is not a contraindication, so vaccines can be given at the same visit. For **annual influenza vaccination**, inactivated vaccine is recommended for older adults and people with chronic kidney disease or diabetes, and it is safe in these groups.",
+   "say": "Missed doses should be caught up as soon as possible. Doses already given are counted and never repeated. Mild illness without fever is not a contraindication, so vaccines can be given at the same visit. Annual inactivated influenza vaccination is recommended for older adults and people with chronic kidney disease or diabetes, and it is safe in these groups.",
+   "vis": null
+  },
+  {
+   "tx": "If a **cold chain** breach occurs, such as a power outage, the first action is to quarantine the affected vaccines and seek immunisation advice before use. Heat or freezing can damage antigens even before expiry, so expiry dates alone cannot decide usability. Record the temperature event and follow programme guidance on whether to use or discard the stock.",
+   "say": "If a cold chain breach occurs, such as a power outage, the first action is to quarantine the affected vaccines and seek immunisation advice before use. Heat or freezing can damage antigens even before expiry, so expiry dates alone cannot decide usability. Record the temperature event and follow programme guidance on whether to use or discard the stock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Temperature breach"
+     },
+     {
+      "id": "b",
+      "label": "Quarantine vaccines"
+     },
+     {
+      "id": "c",
+      "label": "Seek advice"
+     },
+     {
+      "id": "d",
+      "label": "Record and decide"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

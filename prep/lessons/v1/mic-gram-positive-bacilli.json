@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "mic-gram-positive-bacilli",
+ "subject": "microbiology",
+ "title": "Corynebacterium, Bacillus and Listeria: High-Yield Essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Corynebacterium diphtheriae** is a Gram-positive, non-motile, non-capsulated, non-sporing rod. It arranges in a Chinese letter or cuneiform pattern. Its **metachromatic granules**, also called volutin or Babes-Ernst granules, are made of polymetaphosphate. They are best seen with special stains such as Albert's, Neisser's or Ponder's stain, rather than routine methylene blue.",
+   "say": "Corynebacterium diphtheriae is a Gram-positive, non-motile, non-capsulated, non-sporing rod. It arranges in a Chinese letter or cuneiform pattern. Its metachromatic granules, also called volutin or Babes-Ernst granules, are made of polymetaphosphate. They are best seen with special stains such as Albert's, Neisser's or Ponder's stain, rather than routine methylene blue.",
+   "vis": null
+  },
+  {
+   "tx": "Diphtheria is mainly a disease caused by the **diphtheria toxin**. The toxin is produced by strains carrying a lysogenic beta-prophage. It is an AB toxin. The A fragment inactivates elongation factor 2 by ADP-ribosylation, which stops protein synthesis. Myocarditis is the commonest cause of death, and nerve involvement such as palatal paralysis and polyneuritis is usually reversible.",
+   "say": "Diphtheria is mainly a disease caused by the diphtheria toxin. The toxin is produced by strains carrying a lysogenic beta-prophage. It is an AB toxin. The A fragment inactivates elongation factor 2 by ADP-ribosylation, which stops protein synthesis. Myocarditis is the commonest cause of death, and nerve involvement such as palatal paralysis and polyneuritis is usually reversible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lysogenic phage"
+     },
+     {
+      "id": "b",
+      "label": "Toxin released"
+     },
+     {
+      "id": "c",
+      "label": "A fragment enters cell"
+     },
+     {
+      "id": "d",
+      "label": "EF-2 inactivated"
+     },
+     {
+      "id": "e",
+      "label": "Protein synthesis stops"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Culture needs selective media. **Potassium tellurite** blood agar is the key selective medium. Diphtheria bacilli reduce tellurite to metallic tellurium, so colonies look grey or black. Loeffler's serum slope gives the earliest growth, within 6 to 8 hours. Tellurite media are especially useful for carriers and convalescents, where diphtheria bacilli are outnumbered.",
+   "say": "Culture needs selective media. Potassium tellurite blood agar is the key selective medium. Diphtheria bacilli reduce tellurite to metallic tellurium, so colonies look grey or black. Loeffler's serum slope gives the earliest growth, within 6 to 8 hours. Tellurite media are especially useful for carriers and convalescents, where diphtheria bacilli are outnumbered.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medium",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "Loeffler's serum slope",
+      "Earliest growth"
+     ],
+     [
+      "Potassium tellurite agar",
+      "Definitive isolation"
+     ],
+     [
+      "Blood agar",
+      "Separates strep and staph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxigenicity is tested by the **Elek gel precipitation test**, which detects toxin production. Virulence testing in guinea pigs and tissue culture cytotoxicity also detect toxin. Immunisation prevents disease because antitoxin neutralises toxin, but it does not stop carriage. A fully vaccinated child can still carry a non-toxigenic strain. Such carriers give negative toxigenicity results.",
+   "say": "Toxigenicity is tested by the Elek gel precipitation test, which detects toxin production. Virulence testing in guinea pigs and tissue culture cytotoxicity also detect toxin. Immunisation prevents disease because antitoxin neutralises toxin, but it does not stop carriage. A fully vaccinated child can still carry a non-toxigenic strain. Such carriers give negative toxigenicity results.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Toxin-based tests",
+     "points": [
+      "Elek gel precipitation",
+      "Guinea pig pathogenicity",
+      "Tissue culture cytotoxicity"
+     ]
+    },
+    "right": {
+     "title": "Carriage facts",
+     "points": [
+      "Vaccine targets the toxin, not the organism",
+      "Carriers may be non-toxigenic",
+      "Mass immunisation does not stop carriage"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "12fa8531-6ede-4c76-86be-8534dbdbf66e",
+  "b4842793-4947-4a7b-8340-829b57732672",
+  "1fdf51de-9042-4e1d-a98a-1e52cf5f1dbd"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 418
+ }
+}

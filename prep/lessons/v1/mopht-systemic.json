@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mopht-systemic",
+ "subject": "mrcp-ophthalmology",
+ "title": "Systemic disease and the eye: high-yield patterns for MRCP and PG exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Many **systemic diseases** first declare themselves in the eye. Recognising the pattern lets you act fast. Painful unilateral red eye with photophobia suggests **anterior uveitis**, which links strongly to HLA-B27 spondyloarthritis. Sudden painless visual loss in an older patient with headache and jaw pain is **giant cell arteritis** until proven otherwise. Check ESR and CRP at once.",
+   "say": "Many systemic diseases first show themselves in the eye, so recognising the pattern lets you act fast. A painful, unilateral red eye with photophobia suggests anterior uveitis, which is strongly linked to HLA-B27 spondyloarthritis. Sudden painless visual loss in an older patient with headache and jaw pain is giant cell arteritis until proven otherwise. Check ESR and CRP at once.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Eye presentation",
+     "Likely systemic link",
+     "First clue"
+    ],
+    "rows": [
+     [
+      "Painful red eye, photophobia",
+      "Spondyloarthritis, HLA-B27",
+      "Back stiffness"
+     ],
+     [
+      "Sudden painless vision loss, over 50",
+      "Giant cell arteritis",
+      "Jaw pain, raised ESR"
+     ],
+     [
+      "Mouth and genital ulcers with uveitis",
+      "Behcet disease, HLA-B51",
+      "Pathergy positive"
+     ],
+     [
+      "Fatigable ptosis and diplopia",
+      "Myasthenia gravis",
+      "Ice pack improves ptosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Giant cell arteritis** is a medical emergency. Start high-dose oral prednisolone as soon as suspicion is high, without waiting for a **temporal artery biopsy**. Biopsy stays informative for days to weeks after steroids begin. Fellow-eye involvement can follow within days, so delay risks the second eye.",
+   "say": "Giant cell arteritis is a medical emergency. Start high-dose oral prednisolone as soon as suspicion is high, without waiting for a temporal artery biopsy. Biopsy stays informative for days to weeks after steroids begin. Fellow-eye involvement can follow within days, so delay risks the second eye.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sudden visual loss, headache, jaw pain"
+     },
+     {
+      "id": "b",
+      "label": "Raised ESR and CRP"
+     },
+     {
+      "id": "c",
+      "label": "Start high-dose prednisolone now"
+     },
+     {
+      "id": "d",
+      "label": "Temporal artery biopsy later"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ocular myasthenia** gives fatigable ptosis and diplopia with normal pupils and no limb weakness. The ice pack test is supportive. Acetylcholine receptor antibodies help confirm the diagnosis, but seronegative cases exist. In **Graves thyroid eye disease**, the active phase needs immunosuppression, typically intravenous methylprednisolone, and smoking cessation.",
+   "say": "Ocular myasthenia gives fatigable ptosis and diplopia with normal pupils and no limb weakness. The ice pack test is supportive. Acetylcholine receptor antibodies help confirm the diagnosis, but seronegative cases exist. In Graves thyroid eye disease, the active phase needs immunosuppression, typically intravenous methylprednisolone, and smoking cessation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ocular myasthenia",
+     "points": [
+      "Fatigable ptosis and diplopia",
+      "Normal pupils",
+      "Ice pack improves ptosis",
+      "Acetylcholine receptor antibodies"
+     ]
+    },
+    "right": {
+     "title": "Thyroid eye disease",
+     "points": [
+      "Painful swollen lids, proptosis",
+      "Active phase needs immunosuppression",
+      "Smoking worsens outcome",
+      "Surgery only once stable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ethambutol** toxicity causes a retrobulbar optic neuropathy with red-green colour loss and central scotomas. The fundus may look normal early. Check visual acuity and colour vision before starting and regularly during treatment. **Hydroxychloroquine** retinopathy is dose and duration dependent, with parafoveal damage on OCT. Stop the drug promptly when toxicity is suspected.",
+   "say": "Ethambutol toxicity causes a retrobulbar optic neuropathy with red-green colour loss and central scotomas. The fundus may look normal early. Check visual acuity and colour vision before starting and regularly during treatment. Hydroxychloroquine retinopathy is dose and duration dependent, with parafoveal damage on OCT. Stop the drug promptly when toxicity is suspected.",
+   "vis": null
+  },
+  {
+   "tx": "**Malignant hypertension** with papilloedema, haemorrhages and acute kidney injury is an emergency. Lower blood pressure in a controlled manner over hours to days under monitoring, since rapid falls can cause ischaemia. **Idiopathic intracranial hypertension** affects obese women with headache and transient visual obscurations, and needs papilloedema monitoring and weight loss.",
+   "say": "Malignant hypertension with papilloedema, haemorrhages and acute kidney injury is an emergency. Lower blood pressure in a controlled manner over hours to days under monitoring, since rapid falls can cause ischaemia. Idiopathic intracranial hypertension affects obese women with headache and transient visual obscurations, and needs papilloedema monitoring and weight loss.",
+   "vis": null
+  },
+  {
+   "tx": "In **granulomatosis with polyangiitis**, scleritis may be necrotising and is a warning sign of systemic vasculitis. Severe organ involvement needs high-dose corticosteroids with a cytotoxic agent or rituximab, with renal and ophthalmology teams involved. For **diabetic macular oedema** with central involvement, NICE recommends anti-VEGF first-line, with laser or steroid as alternatives.",
+   "say": "In granulomatosis with polyangiitis, scleritis may be necrotising and is a warning sign of systemic vasculitis. Severe organ involvement needs high-dose corticosteroids with a cytotoxic agent or rituximab, with renal and ophthalmology teams involved. For diabetic macular oedema with central involvement, NICE recommends anti-VEGF first-line, with laser or steroid as alternatives.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Oxford Handbook of Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 26
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "ahs-bladder",
+ "subject": "adult-health-surgery",
+ "title": "Bladder and haematuria: key principles for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Painless visible haematuria** is a red flag until proven otherwise. In adults it must be investigated for urological malignancy, even when a urine culture is negative. Infection, stones and anticoagulation are common contributors, but they do not explain the bleeding away. The exam question is usually about recognising this pattern and choosing the right next investigation.",
+   "say": "Painless visible haematuria is a red flag until proven otherwise. In adults it must be investigated for urological malignancy, even when a urine culture is negative. Infection, stones and anticoagulation are common contributors, but they do not explain the bleeding away. The exam question is usually about recognising this pattern and choosing the right next investigation.",
+   "vis": null
+  },
+  {
+   "tx": "Work out the cause from the context. A **therapeutic INR** on warfarin does not rule out a bleeding lesion, so anticoagulation should not be blamed alone. Cyclophosphamide can cause **haemorrhagic cystitis** through its metabolite acrolein, which damages the urothelium. Mesna binds acrolein in the urine and is the agent used to reduce this toxicity.",
+   "say": "Work out the cause from the context. A therapeutic INR on warfarin does not rule out a bleeding lesion, so anticoagulation should not be blamed alone. Cyclophosphamide can cause haemorrhagic cystitis through its metabolite acrolein, which damages the urothelium. Mesna binds acrolein in the urine and is the agent used to reduce this toxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Context",
+     "Likely explanation",
+     "Key action"
+    ],
+    "rows": [
+     [
+      "Older woman on warfarin, INR in range",
+      "Lesion bleeding under anticoagulation",
+      "Urological evaluation"
+     ],
+     [
+      "Cyclophosphamide, negative culture",
+      "Drug-induced haemorrhagic cystitis",
+      "Mesna prophylaxis"
+     ],
+     [
+      "Smoker, painless bleeding",
+      "Urothelial tumour",
+      "Cystoscopy and upper tract imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute urinary retention with a **distended bladder** needs urgent decompression. Parkinson disease, drugs and outflow obstruction are common causes. Pass a urethral catheter first, because it relieves pressure and protects the detrusor and kidneys. Imaging and cystoscopy can follow once the patient is stable.",
+   "say": "Acute urinary retention with a distended bladder needs urgent decompression. Parkinson disease, drugs and outflow obstruction are common causes. Pass a urethral catheter first, because it relieves pressure and protects the detrusor and kidneys. Imaging and cystoscopy can follow once the patient is stable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Retention with firm bladder"
+     },
+     {
+      "id": "b",
+      "label": "Urethral catheter drainage"
+     },
+     {
+      "id": "c",
+      "label": "Check creatinine and cause"
+     },
+     {
+      "id": "d",
+      "label": "Investigate outflow obstruction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose imaging with care. Iodinated contrast for a CT urogram can worsen kidney function when creatinine is raised, so **renal ultrasound** and **cystoscopy** are safer first steps in that setting. Cystoscopy allows direct inspection of the urothelium and biopsy of suspicious lesions. Urine cytology alone is not enough to exclude a tumour.",
+   "say": "Choose imaging with care. Iodinated contrast for a CT urogram can worsen kidney function when creatinine is raised, so renal ultrasound and cystoscopy are safer first steps in that setting. Cystoscopy allows direct inspection of the urothelium and biopsy of suspicious lesions. Urine cytology alone is not enough to exclude a tumour.",
+   "vis": null
+  },
+  {
+   "tx": "After **transurethral resection of the prostate**, bleeding can produce clots that block the catheter and distend the bladder. Tachycardia and borderline blood pressure suggest significant blood loss. The immediate step is a **three-way catheter** with continuous bladder irrigation to clear clots and keep the catheter patent. Reassurance or oral drugs are inadequate here.",
+   "say": "After transurethral resection of the prostate, bleeding can produce clots that block the catheter and distend the bladder. Tachycardia and borderline blood pressure suggest significant blood loss. The immediate step is a three-way catheter with continuous bladder irrigation to clear clots and keep the catheter patent. Reassurance or oral drugs are inadequate here.",
+   "vis": null
+  },
+  {
+   "tx": "Exam tip: **haemorrhagic cystitis** with a negative culture points to a drug cause, not infection. Mesna is the agent that neutralises acrolein. Oral antibiotics, allopurinol and prednisolone do not address this mechanism. Use the clinical picture, including counts, creatinine and timing of the cycle, to reach the answer.",
+   "say": "Exam tip: haemorrhagic cystitis with a negative culture points to a drug cause, not infection. Mesna is the agent that neutralises acrolein. Oral antibiotics, allopurinol and prednisolone do not address this mechanism. Use the clinical picture, including counts, creatinine and timing of the cycle, to reach the answer.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG12: Suspected cancer: recognition and referral",
+  "Campbell-Walsh-Wein Urology (Wein AJ et al., eds.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "v": 1,
+ "module": "fmt-ethics-negligence",
+ "subject": "forensic-medicine",
+ "title": "Medical Ethics, Consent and Negligence: High-Yield Essentials for Indian Exams",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Medical ethics governs how a doctor behaves toward patients, colleagues and society. The **Declaration of Geneva** is the modernised form of the Hippocratic Oath, maintained by the World Medical Association. The **Declaration of Helsinki** (1975) governs human experimentation and clinical trials. The Declaration of Tokyo covers torture and cruel treatment of detainees, and the Declaration of Oslo covers therapeutic abortion. Know which declaration matches which topic, because exams test this mapping directly.",
+   "say": "Medical ethics governs how a doctor behaves toward patients, colleagues and society. The Declaration of Geneva is the modernised form of the Hippocratic Oath, maintained by the World Medical Association. The Declaration of Helsinki, adopted in 1975, governs human experimentation and clinical trials. The Declaration of Tokyo covers torture and cruel treatment of detainees, and the Declaration of Oslo covers therapeutic abortion. Know which declaration matches which topic, because exams test this mapping directly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Declaration",
+     "Core topic"
+    ],
+    "rows": [
+     [
+      "Geneva",
+      "Modernised Hippocratic Oath"
+     ],
+     [
+      "Helsinki",
+      "Human experimentation and trials"
+     ],
+     [
+      "Tokyo",
+      "Torture and detention"
+     ],
+     [
+      "Oslo",
+      "Therapeutic abortion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Informed consent** must be obtained for each specific procedure, not as a blanket form signed on admission. Such blanket consent has little value in court. Concealing or giving false facts breaks the duty to inform. **Implied consent** is unwritten but legally valid, and covers routine examination such as inspection, palpation, percussion and auscultation. In an emergency the law implies consent, so surgery to save life can proceed without a formal signature. Consent for a child below 12 years is taken from a parent or guardian.",
+   "say": "Informed consent must be obtained for each specific procedure, not as a blanket form signed on admission. Such blanket consent has little value in court. Concealing or giving false facts breaks the duty to inform. Implied consent is unwritten but legally valid, and covers routine examination such as inspection, palpation, percussion and auscultation. In an emergency the law implies consent, so surgery to save life can proceed without a formal signature. Consent for a child below 12 years is taken from a parent or guardian.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Emergency, life at risk"
+     },
+     {
+      "id": "b",
+      "label": "Relatives absent"
+     },
+     {
+      "id": "c",
+      "label": "Consent implied by law"
+     },
+     {
+      "id": "d",
+      "label": "Life-saving surgery proceeds"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Consent is not always from the patient alone. For **sterilisation** of a married person, consent of both husband and wife is required. For **artificial insemination**, both spouses must consent in writing after a detailed explanation. Donor and recipient identities must stay confidential, the doctor performing the insemination should not be involved in the childbirth, and semen must be obtained by masturbation, not intercourse. A **loco parentis** consent is given by a person in charge of a child, such as a school teacher during a picnic, when parents are not available.",
+   "say": "Consent is not always from the patient alone. For sterilisation of a married person, consent of both husband and wife is required. For artificial insemination, both spouses must consent in writing after a detailed explanation. Donor and recipient identities must stay confidential, the doctor performing the insemination should not be involved in the childbirth, and semen must be obtained by masturbation, not intercourse. A loco parentis consent is given by a person in charge of a child, such as a school teacher during a picnic, when parents are not available.",
+   "vis": null
+  },
+  {
+   "tx": "Professional misconduct is conduct that a panel of respectable peers would judge disgraceful or dishonourable. Under the state and national medical councils, a guilty doctor may receive a warning or have the name erased from the medical register. The **National Medical Commission** now oversees medical education and professional conduct in India. A **code of conduct** lists practices a doctor must avoid. Known misconduct areas include adultery, unlawful abortion, advertising, association with unqualified persons, addiction, alcohol misuse and fee splitting.",
+   "say": "Professional misconduct is conduct that a panel of respectable peers would judge disgraceful or dishonourable. Under the state and national medical councils, a guilty doctor may receive a warning or have the name erased from the medical register. The National Medical Commission now oversees medical education and professional conduct in India. A code of conduct lists practices a doctor must avoid. Known misconduct areas include adultery, unlawful abortion, advertising, association with unqualified persons, addiction, alcohol misuse and fee splitting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Misconduct",
+     "points": [
+      "Judged by peers",
+      "Removal or warning possible"
+     ]
+    },
+    "right": {
+     "title": "Criminal negligence",
+     "points": [
+      "Section 304A IPC",
+      "Up to 2 years imprisonment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Professional secrecy** is an implied duty not to disclose patient information. Privileged communication is a justified exception. Examples include disclosure when a judge asks in court, compulsory reporting of births, deaths and communicable diseases, and disclosure when public safety is at risk, such as a bus driver with epilepsy. Suspected crime and the patient's own civil or criminal suits also allow disclosure. A doctor should not answer insurance company queries without patient consent. A bus driver with hepatitis A is not an example of privileged communication.",
+   "say": "Professional secrecy is an implied duty not to disclose patient information. Privileged communication is a justified exception. Examples include disclosure when a judge asks in court, compulsory reporting of births, deaths and communicable diseases, and disclosure when public safety is at risk, such as a bus driver with epilepsy. Suspected crime and the patient's own civil or criminal suits also allow disclosure. A doctor should not answer insurance company queries without patient consent.",
+   "vis": null
+  },
+  {
+   "tx": "Negligence has several legal doctrines. **Res ipsa loquitur** means the fact speaks for itself, so the patient need not prove negligence and the doctor must defend himself. **Vicarious liability** makes the hospital and senior staff answerable for junior staff in civil cases, but not in criminal cases. **Contributory negligence** is only a partial defence in civil cases, and cannot defeat a criminal charge. Under **Section 304A IPC**, causing death by rash or negligent act carries up to 2 years imprisonment, or fine, or both.",
+   "say": "Negligence has several legal doctrines. Res ipsa loquitur means the fact speaks for itself, so the patient need not prove negligence and the doctor must defend himself. Vicarious liability makes the hospital and senior staff answerable for junior staff in civil cases, but not in criminal cases. Contributory negligence is only a partial defence in civil cases, and cannot defeat a criminal charge. Under Section 304A IPC, causing death by rash or negligent act carries up to 2 years imprisonment, or fine, or both.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Doctrine",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Res ipsa loquitur",
+      "Fact speaks for itself, doctor defends"
+     ],
+     [
+      "Vicarious liability",
+      "Civil cases only, master answers for servant"
+     ],
+     [
+      "Contributory negligence",
+      "Partial civil defence only"
+     ],
+     [
+      "Section 304A IPC",
+      "Up to 2 years, fine or both"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "0d266096-61c5-4609-8e16-19db23cd4323",
+  "0df23a6f-1bc8-4e64-9aba-039c47b03f02",
+  "27e13907-9d37-4a44-bf62-5c51da5a4008"
+ ],
+ "src": [],
+ "refs": [
+  "Declaration of Helsinki (1975)",
+  "Indian Penal Code, Sections 87, 92, 304A"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 266
+ }
+}

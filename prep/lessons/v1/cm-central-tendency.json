@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "cm-central-tendency",
+ "subject": "community-medicine",
+ "title": "Central tendency, dispersion and the normal distribution",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A **measure of central tendency** tells us where the middle of a data set lies. The three main ones are the mean, median and mode. The **mean** is the sum of all values divided by the number of values. The **median** is the middle value after arranging data in order. The **mode** is the most frequent value.",
+   "say": "A measure of central tendency tells us where the middle of a data set lies. The three main ones are the mean, median and mode. The mean is the sum of all values divided by the number of values. The median is the middle value after arranging data in order. The mode is the most frequent value.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "How it is found",
+     "Best used when"
+    ],
+    "rows": [
+     [
+      "Mean",
+      "Sum divided by count",
+      "Data are symmetric, no outliers"
+     ],
+     [
+      "Median",
+      "Middle value of ordered data",
+      "Outliers or skewed data"
+     ],
+     [
+      "Mode",
+      "Most frequent value",
+      "Categorical or most common value needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Outliers** are unusually high or low values. They pull the mean towards them. In the presence of outliers, the **median** is the preferred measure of central tendency because it is not affected by extreme values. The range is a measure of dispersion, not central tendency, so it is never the answer here.",
+   "say": "Outliers are unusually high or low values. They pull the mean towards them. In the presence of outliers, the median is the preferred measure of central tendency because it is not affected by extreme values. The range is a measure of dispersion, not central tendency, so it is never the answer here.",
+   "vis": null
+  },
+  {
+   "tx": "**Dispersion** describes how spread out values are around the central value. The **range** is the difference between the largest and smallest value. The **standard deviation** is the root-mean-square deviation from the mean, and it is the square root of the variance. A larger standard deviation means greater spread. The **coefficient of variation** is the ratio of standard deviation to mean, expressed as a percentage, and it is used to compare data sets with different units.",
+   "say": "Dispersion describes how spread out values are around the central value. The range is the difference between the largest and smallest value. The standard deviation is the root-mean-square deviation from the mean, and it is the square root of the variance. A larger standard deviation means greater spread. The coefficient of variation is the ratio of standard deviation to mean, expressed as a percentage, and it is used to compare data sets with different units.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Range",
+      "Largest minus smallest value"
+     ],
+     [
+      "Standard deviation",
+      "Square root of variance"
+     ],
+     [
+      "Variance",
+      "Square of standard deviation"
+     ],
+     [
+      "Coefficient of variation",
+      "SD divided by mean, unit free"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **normal distribution** is bell shaped and symmetric. Mean, median and mode coincide at the centre. Within one standard deviation of the mean lies about 68 percent of values. Within two standard deviations lies about 95 percent, and within three lies about 99.7 percent. The **standard normal deviate**, or z score, has mean 0 and standard deviation 1. Z score is applied to normal distributions.",
+   "say": "The normal distribution is bell shaped and symmetric. Mean, median and mode coincide at the centre. Within one standard deviation of the mean lies about 68 percent of values. Within two standard deviations lies about 95 percent, and within three lies about 99.7 percent. The standard normal deviate, or z score, has mean 0 and standard deviation 1. Z score is applied to normal distributions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Range around mean",
+     "Share of values"
+    ],
+    "rows": [
+     [
+      "Mean plus or minus 1 SD",
+      "About 68 percent"
+     ],
+     [
+      "Mean plus or minus 2 SD",
+      "About 95 percent"
+     ],
+     [
+      "Mean plus or minus 3 SD",
+      "About 99.7 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **standard error of the mean** measures how far a sample mean is likely to be from the true population mean. It equals the standard deviation divided by the square root of the sample size. It is a measure of chance variation, not a mistake. It falls as sample size rises. In a sample of 25 children with SD 2, the standard error is 2 divided by 5, which is 0.4.",
+   "say": "The standard error of the mean measures how far a sample mean is likely to be from the true population mean. It equals the standard deviation divided by the square root of the sample size. It is a measure of chance variation, not a mistake. It falls as sample size rises. In a sample of 25 children with SD 2, the standard error is 2 divided by 5, which is 0.4.",
+   "vis": null
+  },
+  {
+   "tx": "**Percentiles** divide data into 100 equal parts, so there are 99 percentiles. The median is the 50th percentile and the second quartile. Quartiles split data into four parts. The **interquartile range** is the difference between the third and first quartiles and holds the middle 50 percent of values. **Skewness** shows asymmetry: in positive skew, mean exceeds median.",
+   "say": "Percentiles divide data into 100 equal parts, so there are 99 percentiles. The median is the 50th percentile and the second quartile. Quartiles split data into four parts. The interquartile range is the difference between the third and first quartiles and holds the middle 50 percent of values. Skewness shows asymmetry: in positive skew, mean exceeds median.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "03d5a061-1c7e-49ef-b1c2-553d2e73cd66",
+  "15dab884-9c18-47f2-80bd-94f4ab32b5f6",
+  "8346f038-1c07-4db1-be9a-3c101e5aada7"
+ ],
+ "src": [],
+ "refs": [
+  "Park PSM, 22nd edition, Park's Textbook of Preventive and Social Medicine",
+  "Dawson B, Trapp RG (Eds), Basic and Clinical Biostatistics"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 346
+ }
+}

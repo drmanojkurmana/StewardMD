@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "srh-csdmards",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Conventional synthetic DMARDs and their toxicity",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Conventional synthetic DMARDs** such as methotrexate, leflunomide, sulfasalazine and hydroxychloroquine form the first line of disease-modifying therapy in rheumatoid arthritis. **Methotrexate** is the anchor drug. Folic acid supplementation, usually 5 mg weekly on a day other than the methotrexate dose, reduces mucosal and hepatic toxicity without loss of efficacy. Methotrexate is a known teratogen and should be stopped one to three months before conception.",
+   "say": "Conventional synthetic DMARDs such as methotrexate, leflunomide, sulfasalazine and hydroxychloroquine form the first line of disease-modifying therapy in rheumatoid arthritis. Methotrexate is the anchor drug. Folic acid supplementation, usually 5 mg weekly on a day other than the methotrexate dose, reduces mucosal and hepatic toxicity without loss of efficacy. Methotrexate is a known teratogen and should be stopped one to three months before conception.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Key toxicity to remember",
+     "Practical monitoring"
+    ],
+    "rows": [
+     [
+      "Methotrexate",
+      "Pneumonitis, hepatotoxicity, marrow suppression",
+      "Blood counts, liver function, chest symptoms"
+     ],
+     [
+      "Leflunomide",
+      "Hepatotoxicity, teratogenicity",
+      "Liver enzymes; cholestyramine washout before conception"
+     ],
+     [
+      "Sulfasalazine",
+      "Reversible oligospermia, rash",
+      "Full blood count and liver function"
+     ],
+     [
+      "Hydroxychloroquine",
+      "Retinopathy",
+      "Baseline eye check, annual review after five years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methotrexate pneumonitis** is a dreaded, dose-independent reaction that can appear at any time. Presentation is dry cough, dyspnoea and fever, and it demands stopping the drug at once. Co-prescription with **trimethoprim** or co-trimoxazole raises the risk of severe marrow suppression, so this combination should be avoided or closely monitored. Hepatotoxicity is assessed through regular liver function tests.",
+   "say": "Methotrexate pneumonitis is a dreaded reaction that can appear at any time and is not simply dose related. Presentation is dry cough, dyspnoea and fever, and it demands stopping the drug at once. Co-prescription with trimethoprim or co-trimoxazole raises the risk of severe marrow suppression, so this combination should be avoided or closely monitored. Hepatotoxicity is assessed through regular liver function tests.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cough, dyspnoea, fever"
+     },
+     {
+      "id": "b",
+      "label": "Stop methotrexate"
+     },
+     {
+      "id": "c",
+      "label": "Chest imaging and specialist review"
+     },
+     {
+      "id": "d",
+      "label": "Avoid co-trimoxazole combination"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Prevent recurrence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Leflunomide** carries a long half-life and a teratogenic active metabolite. Before conception, a **cholestyramine** washout is used to accelerate its elimination, given as 8 g three times daily for 11 days, followed by a blood test confirming low plasma levels. Sulfasalazine commonly causes reversible oligospermia in men, which resolves after stopping. Hydroxychloroquine needs baseline and annual retinal screening after five years of use.",
+   "say": "Leflunomide carries a long half-life and a teratogenic active metabolite. Before conception, a cholestyramine washout is used to accelerate its elimination, given as 8 g three times daily for 11 days, followed by a blood test confirming low plasma levels. Sulfasalazine commonly causes reversible oligospermia in men, which resolves after stopping. Hydroxychloroquine needs baseline and annual retinal screening after five years of use.",
+   "vis": null
+  },
+  {
+   "tx": "**Monitoring** ties the whole chapter together. Full blood count, renal and liver function should be checked regularly for every conventional DMARD, with more frequent checks in the first few months. Before any biologic, screen for latent **tuberculosis** and hepatitis B. Live vaccines are avoided during immunosuppression, while inactivated influenza vaccine remains safe. Remember that TNF inhibitors are contraindicated in NYHA class III or IV heart failure.",
+   "say": "Monitoring ties the whole chapter together. Full blood count, renal and liver function should be checked regularly for every conventional DMARD, with more frequent checks in the first few months. Before any biologic, screen for latent tuberculosis and hepatitis B. Live vaccines are avoided during immunosuppression, while inactivated influenza vaccine remains safe. Remember that TNF inhibitors are contraindicated in NYHA class III or IV heart failure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_ec8ebb8345cb",
+  "q_c1d4a7410f63",
+  "q_0cac70baa54f"
+ ],
+ "src": [],
+ "refs": [
+  "EULAR recommendations for the management of rheumatoid arthritis",
+  "ACR/EULAR guideline for the management of rheumatoid arthritis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "v": 1,
+ "module": "cm-committees-policies",
+ "subject": "community-medicine",
+ "title": "Health committees, policies and plans: India's key landmarks",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **Mudaliar Committee** (1961) was the Health Survey and Planning Committee. The **Chadha Committee** (1963) recommended one basic health worker per 10,000 population for the maintenance phase of the National Malaria Eradication Programme, with family planning health assistants supervising three or four of them. The **Mukherji Committee** advised delinking malaria from family planning and stressed basic health services. The **Jungalwalla Committee** looked at integration of health services and recommended equal pay for equal work and a ban on private practice by government doctors.",
+   "say": "The Mudaliar Committee, in 1961, was the Health Survey and Planning Committee. The Chadha Committee, in 1963, recommended one basic health worker per 10,000 population for the maintenance phase of the National Malaria Eradication Programme. Family planning health assistants were to supervise three or four of these workers. The Mukherji Committee advised delinking malaria from family planning and stressed basic health services. The Jungalwalla Committee looked at integration of health services and recommended equal pay for equal work and a ban on private practice by government doctors.",
+   "vis": null
+  },
+  {
+   "tx": "The **Shrivastav Committee** (1975), formally the Group on Medical Education and Support Manpower, aimed to reorient medical education to national needs and to design a curriculum for health assistants. Its most important recommendation was that primary care should be delivered within the community by trained local workers. Its acceptance in 1977 led to the **Rural Health Scheme**. It also proposed a Medical and Health Education Commission on the lines of the UGC, and a ROME (reorientation of medical education) scheme followed from it.",
+   "say": "The Shrivastav Committee, formally the Group on Medical Education and Support Manpower, was set up in 1974 and reported in 1975. It aimed to reorient medical education to national needs and to design a curriculum for health assistants. Its most important recommendation was that primary care should be delivered within the community by trained local workers. Government accepted its basic recommendations in 1977, which led to the Rural Health Scheme. It also proposed a Medical and Health Education Commission on the lines of the University Grants Commission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Shrivastav 1975"
+     },
+     {
+      "id": "b",
+      "label": "Community workers"
+     },
+     {
+      "id": "c",
+      "label": "Accepted 1977"
+     },
+     {
+      "id": "d",
+      "label": "Rural Health Scheme"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Kartar Singh Committee** dealt with multipurpose workers under health and family planning, and it recommended a three-tier Panchayati Raj system, a model that the **Balwant Rai Mehta Committee** is more commonly linked with. The **Bajaj Committee** (1985) was the Expert Committee for Health Manpower Planning, and it proposed an Educational Commission for Health Sciences on UGC lines. Note the exam trap: Bajaj was not a 1946 committee.",
+   "say": "The Kartar Singh Committee dealt with multipurpose workers under health and family planning. The Balwant Rai Mehta Committee is more commonly linked with the three-tier Panchayati Raj system. The Bajaj Committee, set up in 1985, was the Expert Committee for Health Manpower Planning. It proposed an Educational Commission for Health Sciences on the lines of the University Grants Commission. Bajaj was not a 1946 committee.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bajaj 1985",
+     "points": [
+      "Health manpower focus",
+      "ECHS on UGC lines",
+      "Health science universities"
+     ]
+    },
+    "right": {
+     "title": "Bhore 1946",
+     "points": [
+      "PHC concept",
+      "Integration of services",
+      "3 million plan"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Institutions guide planning today. **NITI Aayog** was created on 1 January 2015 as a think tank that gives strategic direction to central and state governments and monitors programme implementation. The **Five Year Plans** set sectoral priorities, while the **Finance Commission**, under the Constitution, divides revenue between the Centre and States. Knowing which body does what is a frequent exam point.",
+   "say": "Institutions guide planning today. NITI Aayog was created on 1 January 2015 as a think tank that gives strategic direction to central and state governments and monitors programme implementation. The Five Year Plans set sectoral priorities. The Finance Commission, under the Constitution, divides revenue between the Centre and States. Knowing which body does what is a frequent exam point.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9d99b5b0-1654-439b-9e07-03f062f675f2",
+  "5a13458f-da6a-491a-bdca-3950e00e97ac",
+  "0c304257-8feb-4fcc-8091-43bab29ccb38"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine, K Park, 23rd edition",
+  "National Health Policy 2002, Government of India",
+  "National Health Policy 2017, Government of India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 105
+ }
+}

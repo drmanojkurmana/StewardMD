@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "mresp-tb",
+ "subject": "mrcp-respiratory",
+ "title": "Respiratory tuberculosis: diagnosis, latent infection and drug-resistant treatment",
+ "minutes": 4,
+ "steps": [
+  {
+   "tx": "Respiratory TB is a major exam topic. A positive **interferon-gamma release assay** or Mantoux test shows infection only, not disease. The first job is to decide whether the patient has **latent TB** or **active TB**, using symptoms, chest X-ray and microbiology.",
+   "say": "Respiratory TB is a major exam topic. A positive interferon-gamma release assay or Mantoux test shows infection only, not disease. The first job is to decide whether the patient has latent TB or active TB, using symptoms, chest X-ray and microbiology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Positive IGRA or Mantoux"
+     },
+     {
+      "id": "b",
+      "label": "Clinical review and chest X-ray"
+     },
+     {
+      "id": "c",
+      "label": "Active TB excluded?"
+     },
+     {
+      "id": "d",
+      "label": "Treat latent TB"
+     },
+     {
+      "id": "e",
+      "label": "Full active TB treatment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pleural **TB** typically gives a lymphocyte-predominant exudate with few bacilli on microscopy. Fluid culture is often negative, so **pleural biopsy** with histology and culture is the higher-yield test. **Adenosine deaminase** in the fluid is a useful supporting test when it would change management.",
+   "say": "Pleural TB typically gives a lymphocyte-predominant exudate with few bacilli on microscopy. Fluid culture is often negative, so pleural biopsy with histology and culture is the higher-yield test. Adenosine deaminase in the fluid is a useful supporting test when it would change management.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role in pleural TB"
+    ],
+    "rows": [
+     [
+      "Fluid microscopy and culture",
+      "Often negative, paucibacillary"
+     ],
+     [
+      "Adenosine deaminase",
+      "Supportive, changes management"
+     ],
+     [
+      "Pleural biopsy",
+      "Higher yield, histology and culture"
+     ],
+     [
+      "Serum ACE or CSF tests",
+      "Do not confirm pleural TB"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tuberculous meningitis** causes harm mainly through inflammation and cerebral oedema, which raise intracranial pressure. Treatment is standard four-drug therapy with **adjunctive dexamethasone**, tapered over about eight weeks. Hydrocephalus may need neurosurgical management. Anti-TB treatment must never be interrupted, and early initiation clearly improves outcome.",
+   "say": "Tuberculous meningitis causes harm mainly through inflammation and cerebral oedema, which raise intracranial pressure. Treatment is standard four-drug therapy with adjunctive dexamethasone, tapered over about eight weeks. Hydrocephalus may need neurosurgical management. Anti-TB treatment must never be interrupted, and early initiation clearly improves outcome.",
+   "vis": null
+  },
+  {
+   "tx": "**Lymph node TB** is a common extrapulmonary form, often presenting as painless cervical nodes with central necrosis. Ultrasound guides **biopsy** of the most suspicious node for microscopy, culture and histology. Sputum is often negative when disease is confined to nodes, so sampling the node is the key step.",
+   "say": "Lymph node TB is a common extrapulmonary form, often presenting as painless cervical nodes with central necrosis. Ultrasound guides biopsy of the most suspicious node for microscopy, culture and histology. Sputum is often negative when disease is confined to nodes, so sampling the node is the key step.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG33: Tuberculosis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 18
+ }
+}

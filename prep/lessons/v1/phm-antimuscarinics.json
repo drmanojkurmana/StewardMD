@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "phm-antimuscarinics",
+ "subject": "pharmacology",
+ "title": "Antimuscarinic drugs: receptors, uses and toxicity",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Antimuscarinic drugs are **competitive antagonists** at muscarinic acetylcholine receptors. They block the parasympathetic effects of acetylcholine on the eye, gut, bladder, bronchi, glands and heart. Atropine is the prototype, and scopolamine (hyoscine) is closely related. Quaternary agents such as glycopyrrolate and ipratropium act mainly peripherally because they do not cross the blood brain barrier.",
+   "say": "Antimuscarinic drugs are competitive antagonists at muscarinic acetylcholine receptors. They block the parasympathetic effects of acetylcholine on the eye, gut, bladder, bronchi, glands and heart. Atropine is the prototype, and scopolamine, also called hyoscine, is closely related. Quaternary agents such as glycopyrrolate and ipratropium act mainly peripherally because they do not cross the blood brain barrier.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Tertiary amine",
+     "Quaternary amine"
+    ],
+    "rows": [
+     [
+      "Examples",
+      "Atropine, hyoscine",
+      "Glycopyrrolate, ipratropium"
+     ],
+     [
+      "Lipid solubility",
+      "High",
+      "Low"
+     ],
+     [
+      "Central effects",
+      "Present",
+      "Absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the eye, these drugs produce **mydriasis** by blocking the sphincter pupillae, and **cycloplegia** by paralysing the ciliary muscle. For fundoscopy only dilation is needed, so phenylephrine, an adrenergic agent with no cycloplegic action, is preferred. Tropicamide is the shortest acting mydriatic and is the usual cycloplegic choice in adults. Atropine is the strongest and longest acting cycloplegic, and is the agent of choice in young children.",
+   "say": "In the eye, these drugs produce mydriasis by blocking the sphincter pupillae, and cycloplegia by paralysing the ciliary muscle. For fundoscopy only dilation is needed, so phenylephrine, an adrenergic agent with no cycloplegic action, is preferred. Tropicamide is the shortest acting mydriatic and is the usual cycloplegic choice in adults. Atropine is the strongest and longest acting cycloplegic, and is the agent of choice in young children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Typical duration",
+     "Key use"
+    ],
+    "rows": [
+     [
+      "Atropine",
+      "7 to 14 days",
+      "Strongest cycloplegic, children"
+     ],
+     [
+      "Homatropine",
+      "1 to 3 days",
+      "Intermediate cycloplegic"
+     ],
+     [
+      "Cyclopentolate",
+      "About 1 day",
+      "Refraction testing"
+     ],
+     [
+      "Tropicamide",
+      "About 6 hours",
+      "Shortest, adult fundoscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Atropine poisoning, including belladonna and datura seed ingestion, causes the classic toxidrome. Patients become hot, dry and flushed, with dilated pupils, urinary retention, decreased bowel sounds, tachycardia, delirium and hallucinations. Children are especially vulnerable, and hyperthermia is the most dangerous effect. Treatment includes cooling, a dark quiet room, and **physostigmine** which reverses central and peripheral effects.",
+   "say": "Atropine poisoning, including belladonna and datura seed ingestion, causes the classic toxidrome. Patients become hot, dry and flushed, with dilated pupils, urinary retention, decreased bowel sounds, tachycardia, delirium and hallucinations. Children are especially vulnerable, and hyperthermia is the most dangerous effect. Treatment includes cooling, a dark quiet room, and physostigmine, which reverses central and peripheral effects.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ingestion of seeds or drug"
+     },
+     {
+      "id": "b",
+      "label": "Hot dry flushed skin"
+     },
+     {
+      "id": "c",
+      "label": "Delirium and hyperthermia"
+     },
+     {
+      "id": "d",
+      "label": "Cool, dark room, physostigmine"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In organophosphate poisoning, atropine is given to block muscarinic overstimulation, mainly excess bronchial secretions. The **endpoint** of atropinisation is dried pulmonary secretions and adequate oxygenation, not heart rate or pupil size. Tachycardia and mydriasis must not be used to stop further doses. Atropine antagonises muscarinic but not nicotinic receptors, so it does not reactivate acetylcholinesterase.",
+   "say": "In organophosphate poisoning, atropine is given to block muscarinic overstimulation, mainly excess bronchial secretions. The endpoint of atropinisation is dried pulmonary secretions and adequate oxygenation, not heart rate or pupil size. Tachycardia and mydriasis must not be used to stop further doses. Atropine antagonises muscarinic but not nicotinic receptors, so it does not reactivate acetylcholinesterase.",
+   "vis": null
+  },
+  {
+   "tx": "In the bladder, antimuscarinics treat **overactive bladder** and detrusor instability by blocking M3 receptors on the detrusor. Oxybutynin, tolterodine, darifenacin, solifenacin, trospium and flavoxate are the usual agents. Oxybutynin is the shortest acting, while solifenacin is the longest acting in this group. Darifenacin is the preferred M3 selective agent for hyperhidrosis. Duloxetine is not used for detrusor instability.",
+   "say": "In the bladder, antimuscarinics treat overactive bladder and detrusor instability by blocking M3 receptors on the detrusor. Oxybutynin, tolterodine, darifenacin, solifenacin, trospium and flavoxate are the usual agents. Oxybutynin is the shortest acting, while solifenacin is the longest acting in this group. Darifenacin is the preferred M3 selective agent for hyperhidrosis. Duloxetine is not used for detrusor instability.",
+   "vis": null
+  },
+  {
+   "tx": "Antimuscarinics have important cautions. They are **contraindicated in narrow angle glaucoma**, because they can precipitate acute angle closure. In asthma, a patient on a beta blocker will not respond to beta 2 agonists, so ipratropium is a useful alternative. Ipratropium is short acting, while tiotropium is long acting and used in COPD. Glycopyrrolate is preferred as a premedicant to reduce secretions without central effects.",
+   "say": "Antimuscarinics have important cautions. They are contraindicated in narrow angle glaucoma, because they can precipitate acute angle closure. In asthma, a patient on a beta blocker will not respond to beta 2 agonists, so ipratropium is a useful alternative. Ipratropium is short acting, while tiotropium is long acting and used in COPD. Glycopyrrolate is preferred as a premedicant to reduce secretions without central effects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atropine",
+     "points": [
+      "Central and peripheral effects",
+      "Cycloplegia and mydriasis",
+      "Caution in narrow angle glaucoma"
+     ]
+    },
+    "right": {
+     "title": "Glycopyrrolate",
+     "points": [
+      "Quaternary, no CNS effects",
+      "Preferred premedicant",
+      "Reduces secretions"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "3d19f885-0f36-4004-ab1e-8c8d8c13b842",
+  "39fd5267-36ab-480e-85b0-8e8c32ce6774",
+  "fece3900-14b7-45a8-968f-e26b7d17bf9d"
+ ],
+ "src": [],
+ "refs": [
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, Chabner, Knollmann, Eds)",
+  "KD Tripathi Essentials of Medical Pharmacology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 198
+ }
+}

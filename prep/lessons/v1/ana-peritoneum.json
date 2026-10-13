@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "ana-peritoneum",
+ "subject": "anatomy",
+ "title": "Peritoneum and peritoneal spaces: lesser sac, foramen of Winslow and key recesses",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **peritoneum** is a serous membrane lining the abdominal cavity. Its parietal layer lines the abdominal wall and is somatically innervated, so it is pain sensitive. Its visceral layer covers organs, is autonomically innervated, and is not pain sensitive. Anterior parietal peritoneum is more sensitive than pelvic peritoneum.",
+   "say": "The peritoneum is a serous membrane lining the abdominal cavity. Its parietal layer lines the abdominal wall and is supplied by somatic nerves, so it is pain sensitive. Its visceral layer covers the organs, is supplied by autonomic nerves, and is not pain sensitive. Anterior parietal peritoneum is more sensitive than pelvic peritoneum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parietal peritoneum",
+     "points": [
+      "Lines abdominal wall and diaphragm underside",
+      "Somatic innervation, pain sensitive",
+      "Loosely attached, easily stripped"
+     ]
+    },
+    "right": {
+     "title": "Visceral peritoneum",
+     "points": [
+      "Covers outer surface of organs",
+      "Autonomic innervation, not pain sensitive",
+      "Firmly adherent, cannot be stripped"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **lesser sac** (omental bursa) is the left posterior intraperitoneal space, also called the left subhepatic space. It communicates with the greater sac through the **epiploic foramen** (foramen of Winslow). This slit-like opening lies at the level of the 12th thoracic vertebra and is about 3 cm long.",
+   "say": "The lesser sac, also called the omental bursa, is the left posterior intraperitoneal space, also known as the left subhepatic space. It communicates with the greater sac through the epiploic foramen, also called the foramen of Winslow. This slit-like opening lies at the level of the twelfth thoracic vertebra and is about three centimetres long.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lesser sac"
+     },
+     {
+      "id": "b",
+      "label": "Epiploic foramen T12"
+     },
+     {
+      "id": "c",
+      "label": "Greater sac"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Boundaries of the **foramen of Winslow** are a useful exam list. Anteriorly lies the free margin of the lesser omentum, which holds the portal vein, hepatic artery proper and bile duct. Posteriorly lie the IVC, right suprarenal gland and T12. Superiorly is the caudate lobe, and inferiorly the first part of duodenum with the hepatic artery.",
+   "say": "The boundaries of the foramen of Winslow are a useful list for exams. Anteriorly lies the free margin of the lesser omentum, which holds the portal vein, hepatic artery proper and bile duct. Posteriorly lie the inferior vena cava, the right suprarenal gland and the twelfth thoracic vertebra. Superiorly is the caudate lobe of the liver, and inferiorly the first part of the duodenum and the hepatic artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Boundary",
+     "Structures"
+    ],
+    "rows": [
+     [
+      "Anterior",
+      "Free edge of lesser omentum: portal vein, hepatic artery, bile duct"
+     ],
+     [
+      "Posterior",
+      "IVC, right suprarenal gland, T12 vertebra"
+     ],
+     [
+      "Superior",
+      "Caudate lobe of liver"
+     ],
+     [
+      "Inferior",
+      "First part of duodenum, hepatic artery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **greater omentum** is a four layered peritoneal apron hanging from the greater curvature of the stomach. It develops from the caudal part of the dorsal mesogastrium and stores fat. It is called the policeman of the abdomen because it wraps around inflamed organs and localises infection. The **lesser omentum** derives from the dorsal part of the ventral mesogastrium.",
+   "say": "The greater omentum is a four layered peritoneal apron hanging from the greater curvature of the stomach. It develops from the caudal part of the dorsal mesogastrium and stores fat. It is called the policeman of the abdomen because it wraps around inflamed organs and localises infection. The lesser omentum derives from the dorsal part of the ventral mesogastrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Embryological origin"
+    ],
+    "rows": [
+     [
+      "Greater omentum",
+      "Caudal dorsal mesogastrium"
+     ],
+     [
+      "Lesser omentum",
+      "Dorsal part of ventral mesogastrium"
+     ],
+     [
+      "Falciform and coronary ligaments",
+      "Ventral part of ventral mesogastrium"
+     ],
+     [
+      "Gastrosplenic and lienorenal ligaments",
+      "Cranial dorsal mesogastrium"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4b202811-14cb-4088-b18b-e3d1b5dea501",
+  "b92e71f8-4654-48a5-a23d-c3d939e40ff6",
+  "406fd27f-5c84-4863-a5e4-0cb1388ca73c"
+ ],
+ "src": [],
+ "refs": [
+  "Last's Anatomy",
+  "Chapter Serous Membranes of the Abdominal Cavity in The Big Picture: Gross Anatomy (Moon D.A., Foreman K.B., Albeine K.H., Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 128
+ }
+}

@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "ana-cerebrum",
+ "subject": "anatomy",
+ "title": "Cerebral hemispheres, cortex and white matter: key anatomy for exams",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **cerebral cortex** is the outer grey matter of each hemisphere and is usually described as six layers. The **motor cortex** lies in the precentral gyrus (Brodmann area 4) and the premotor and supplementary areas lie in front of it (areas 6 and 8). The motor map is an upside down **homunculus**, with the leg and perineum on the medial surface in the paracentral lobule.",
+   "say": "The cerebral cortex is the outer grey matter of each hemisphere and is usually described as six layers. The motor cortex lies in the precentral gyrus, which is Brodmann area 4, and the premotor and supplementary areas lie in front of it, areas 6 and 8. The motor map is an upside down homunculus, with the leg and perineum on the medial surface in the paracentral lobule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Area",
+     "Site",
+     "Function"
+    ],
+    "rows": [
+     [
+      "Area 4",
+      "Precentral gyrus",
+      "Primary motor"
+     ],
+     [
+      "Areas 6 and 8",
+      "Front of precentral gyrus",
+      "Premotor and supplementary"
+     ],
+     [
+      "Areas 3, 1, 2",
+      "Postcentral gyrus",
+      "Primary somatosensory"
+     ],
+     [
+      "Area 17",
+      "Calcarine sulcus",
+      "Primary visual"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Language areas are almost always in the **dominant left hemisphere**. **Broca area** (areas 44 and 45) lies in the posterior inferior frontal gyrus and controls expressive speech; its lesion causes motor aphasia with preserved comprehension. **Wernicke area** lies in the posterior superior temporal gyrus and its lesion causes fluent receptive aphasia.",
+   "say": "Language areas are almost always in the dominant left hemisphere. Broca area, areas 44 and 45, lies in the posterior inferior frontal gyrus and controls expressive speech. Its lesion causes motor aphasia with preserved comprehension. Wernicke area lies in the posterior superior temporal gyrus, and its lesion causes fluent receptive aphasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broca area",
+     "points": [
+      "Inferior frontal gyrus",
+      "Areas 44 and 45",
+      "Expressive speech",
+      "Lesion: non-fluent motor aphasia"
+     ]
+    },
+    "right": {
+     "title": "Wernicke area",
+     "points": [
+      "Superior temporal gyrus",
+      "Posterior part",
+      "Comprehension",
+      "Lesion: fluent receptive aphasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **corpus callosum** is the largest commissure and joins the two hemispheres, linking homotopic and heterogeneous cortical areas. The genu forms the forceps minor joining the frontal lobes, and the splenium forms the forceps major joining the occipital lobes. The **tapetum** is part of the corpus callosum that covers the lateral ventricle. The anterior commissure is the first commissure to develop.",
+   "say": "The corpus callosum is the largest commissure and joins the two hemispheres, linking matching and differing cortical areas. The genu forms the forceps minor joining the frontal lobes, and the splenium forms the forceps major joining the occipital lobes. The tapetum is part of the corpus callosum that covers the lateral ventricle. The anterior commissure is the first commissure to develop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g",
+      "label": "Genu",
+      "sub": "Forceps minor"
+     },
+     {
+      "id": "b",
+      "label": "Body"
+     },
+     {
+      "id": "s",
+      "label": "Splenium",
+      "sub": "Forceps major"
+     }
+    ],
+    "edges": [
+     [
+      "g",
+      "b"
+     ],
+     [
+      "b",
+      "s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **internal capsule** is made of projection fibres and is V shaped with an anterior limb, genu, posterior limb, retrolenticular and sublenticular parts. The genu carries corticobulbar (corticonuclear) and corticospinal fibres for head and neck, plus superior thalamic radiations and frontopontine fibres. The posterior limb carries the main corticospinal fibres for the limbs. Lesions of the genu can cause contralateral lower face weakness.",
+   "say": "The internal capsule is made of projection fibres and is V shaped, with an anterior limb, genu, posterior limb, retrolenticular and sublenticular parts. The genu carries corticobulbar, also called corticonuclear, and corticospinal fibres for head and neck, plus superior thalamic radiations and frontopontine fibres. The posterior limb carries the main corticospinal fibres for the limbs. Lesions of the genu can cause contralateral lower face weakness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Part",
+     "Key contents"
+    ],
+    "rows": [
+     [
+      "Anterior limb",
+      "Frontopontine fibres"
+     ],
+     [
+      "Genu",
+      "Corticobulbar, corticospinal (head and neck), superior thalamic radiation"
+     ],
+     [
+      "Posterior limb",
+      "Corticospinal (limbs), thalamic sensory fibres"
+     ],
+     [
+      "Retrolenticular",
+      "Optic radiation, posterior thalamic radiation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Association fibres** connect areas within the same hemisphere. The superior longitudinal fasciculus, cingulum and uncinate fasciculus are association tracts, whereas the corpus callosum is a commissural fibre. The **Gerstmann syndrome** arises from lesions of the dominant angular gyrus (area 39) and includes acalculia, finger agnosia, left right confusion and agraphia. The lunate sulcus is an occipital sulcus.",
+   "say": "Association fibres connect areas within the same hemisphere. The superior longitudinal fasciculus, cingulum and uncinate fasciculus are association tracts, whereas the corpus callosum is a commissural fibre. Gerstmann syndrome arises from lesions of the dominant angular gyrus, area 39, and includes acalculia, finger agnosia, left right confusion and agraphia. The lunate sulcus is an occipital sulcus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "d73b45d2-ef66-4141-a7d2-9295ce8c8811",
+  "d56ef1b6-1267-4df8-8a37-db8b3f23dc66",
+  "05b418ce-3a90-4d9f-a20b-b67a4aa6a442"
+ ],
+ "src": [],
+ "refs": [
+  "Ganong's Review of Medical Physiology",
+  "Standring's Gray's Anatomy (Standring S, ed.)",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 133
+ }
+}

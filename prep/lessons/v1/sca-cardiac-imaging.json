@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "sca-cardiac-imaging",
+ "subject": "ss-cardiology",
+ "title": "Echocardiography and cardiac imaging: choosing and reading the key tests",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Transthoracic **echocardiography** is the first-line imaging test for cardiac structure and function. It gives **ejection fraction**, regional wall motion, valve severity and estimated pulmonary pressure. In chronic coronary syndrome it is done at rest to look for LV dysfunction and valve disease, especially aortic stenosis, before any stress test is chosen.",
+   "say": "Transthoracic echocardiography is the first line imaging test for cardiac structure and function. It gives ejection fraction, regional wall motion, valve severity and estimated pulmonary pressure. In chronic coronary syndrome it is done at rest to look for left ventricular dysfunction and valve disease, especially aortic stenosis, before any stress test is chosen.",
+   "vis": null
+  },
+  {
+   "tx": "Ejection fraction is calculated from end-diastolic and end-systolic volumes. **LVEF** is (EDV minus ESV) divided by EDV, multiplied by 100. The biplane method of disks, a modified Simpson's rule, is the current standard 2D method. M-mode assumes global symmetry, so it fails after a regional aneurysm.",
+   "say": "Ejection fraction is calculated from end diastolic and end systolic volumes. LVEF is end diastolic volume minus end systolic volume, divided by end diastolic volume, multiplied by 100. The biplane method of disks, a modified Simpson's rule, is the current standard two dimensional method. M mode assumes global symmetry, so it fails after a regional aneurysm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Use",
+     "Limitation"
+    ],
+    "rows": [
+     [
+      "Biplane disks",
+      "Standard 2D quantification",
+      "Needs good endocardial views"
+     ],
+     [
+      "M-mode",
+      "Quick bedside estimate",
+      "Assumes symmetric LV"
+     ],
+     [
+      "3D echo",
+      "Accurate volumes",
+      "Needs adequate imaging"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aortic stenosis severity uses Doppler. Peak velocity of 3.0 m/s or more indicates at least moderate disease, and above 4.0 m/s is usually severe. The **continuity equation** gives valve area, where area below 1.0 cm2 is severe and below 0.6 cm2 is critical. Gradients underestimate severity when LV function is poor, so valve area is preferred.",
+   "say": "Aortic stenosis severity uses Doppler. Peak velocity of 3.0 metres per second or more indicates at least moderate disease, and above 4.0 metres per second is usually severe. The continuity equation gives valve area, where area below 1.0 square centimetre is severe and below 0.6 is critical. Gradients underestimate severity when left ventricular function is poor, so valve area is preferred.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vmax 3.0 m/s"
+     },
+     {
+      "id": "b",
+      "label": "Vmax 4.0 m/s or more"
+     },
+     {
+      "id": "c",
+      "label": "AVA below 1.0 cm2"
+     },
+     {
+      "id": "d",
+      "label": "Severe AS"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low-flow, low-gradient aortic stenosis with reduced EF can be **pseudo-severe**. **Dobutamine stress echo** raises flow: in true severe disease the gradient rises above 40 mmHg with a small valve area, while in pseudo-severe disease the area enlarges. Diastolic dysfunction is judged by E/e prime, LA volume and TR velocity.",
+   "say": "Low flow, low gradient aortic stenosis with reduced ejection fraction can be pseudo severe. Dobutamine stress echo raises flow. In true severe disease the gradient rises above 40 mmHg with a small valve area, while in pseudo severe disease the area enlarges. Diastolic dysfunction is judged by E over e prime, left atrial volume and tricuspid regurgitant velocity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True severe AS",
+     "points": [
+      "Gradient rises above 40 mmHg",
+      "Valve area stays small",
+      "Stroke volume rises with dobutamine"
+     ]
+    },
+    "right": {
+     "title": "Pseudo-severe AS",
+     "points": [
+      "Gradient stays low",
+      "Valve area increases",
+      "Often small stroke volume"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stress imaging is used when pre-test likelihood is moderate. **Stress echo**, SPECT or PET perfusion, and stress CMR assess ischaemia. High-risk findings include ischaemia of 10% or more of the LV, or 3 or more of 16 segments on stress echo. Beta-blockers are withheld before stress echo because they blunt the heart rate response and cause false negatives.",
+   "say": "Stress imaging is used when pre-test likelihood is moderate. Stress echo, SPECT or PET perfusion, and stress CMR assess ischaemia. High-risk findings include ischaemia of 10 percent or more of the left ventricle, or 3 or more of 16 segments on stress echo. Beta blockers are withheld before stress echo because they blunt the heart rate response and can cause false negatives.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_6e5d74ea62c7",
+  "q_03de267bace7",
+  "q_24c54c2026f5"
+ ],
+ "src": [
+  "kb-clinical-protocols-chronic-coronary-syndrome",
+  "kb-diseases-aortic-stenosis"
+ ],
+ "refs": [
+  "ESC Guidelines for the management of chronic coronary syndromes (2024)",
+  "Harrison's Principles of Internal Medicine, 22nd edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 1606,
+  "itemN": 43
+ }
+}

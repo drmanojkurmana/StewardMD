@@ -1,0 +1,166 @@
+{
+ "v": 1,
+ "module": "wh-labour",
+ "subject": "womens-health",
+ "title": "Normal and abnormal labour",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Labour is the process by which the **uterus** expels the fetus, placenta and membranes through a dilating cervix. Normal labour is divided into three stages. The first stage runs from the onset of regular contractions to full cervical dilatation of 10 cm. The second stage ends with delivery of the baby. The third stage ends with delivery of the placenta. Abnormal labour is recognised by deviation from these expected time frames and progress.",
+   "say": "Labour is the process by which the uterus expels the fetus, placenta and membranes through a dilating cervix. Normal labour has three stages. The first stage runs from regular contractions to full dilatation of ten centimetres. The second stage ends with delivery of the baby. The third stage ends with delivery of the placenta. Abnormal labour is recognised when progress or timing departs from these expected patterns.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Starts",
+     "Ends"
+    ],
+    "rows": [
+     [
+      "First",
+      "Regular contractions with cervical change",
+      "Full dilatation, 10 cm"
+     ],
+     [
+      "Second",
+      "Full dilatation",
+      "Delivery of the baby"
+     ],
+     [
+      "Third",
+      "Delivery of the baby",
+      "Delivery of the placenta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal wellbeing is monitored with **cardiotocography**. Recurrent late decelerations that follow contractions, together with reduced variability, indicate **uteroplacental insufficiency** and fetal compromise. Oxytocin-driven **uterine hyperstimulation** is a common and reversible cause. Initial management includes stopping oxytocin, repositioning the woman off the supine position and correcting maternal hypotension, for example from an epidural.",
+   "say": "Fetal wellbeing is monitored with cardiotocography. Recurrent late decelerations that follow contractions, together with reduced variability, indicate uteroplacental insufficiency and fetal compromise. Oxytocin driven uterine hyperstimulation is a common and reversible cause. Initial management includes stopping oxytocin, repositioning the woman off her back and correcting maternal hypotension, for example from an epidural.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Late decelerations with low variability"
+     },
+     {
+      "id": "b",
+      "label": "Stop oxytocin"
+     },
+     {
+      "id": "c",
+      "label": "Reposition and correct hypotension"
+     },
+     {
+      "id": "d",
+      "label": "Reassess CTG and scalp sampling if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shoulder dystocia is an obstetric emergency in which the anterior shoulder is impacted behind the pubic symphysis after the head delivers. Management follows a structured sequence. Call for help, perform McRoberts manoeuvre with suprapubic pressure, and then consider posterior arm delivery. The **McRoberts manoeuvre** flattens lumbosacral lordosis and widens the pelvic outlet. Rotational manoeuvres are used if these fail.",
+   "say": "Shoulder dystocia is an obstetric emergency in which the anterior shoulder becomes impacted behind the pubic symphysis after the head delivers. Management follows a structured sequence. Call for help, perform the McRoberts manoeuvre with suprapubic pressure, and then consider delivery of the posterior arm. The McRoberts manoeuvre flattens the lower spinal curve and widens the pelvic outlet. Rotational manoeuvres are used if these fail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Head delivered, shoulders impacted"
+     },
+     {
+      "id": "b",
+      "label": "Call for help and McRoberts"
+     },
+     {
+      "id": "c",
+      "label": "Suprapubic pressure"
+     },
+     {
+      "id": "d",
+      "label": "Posterior arm delivery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intrapartum infection, or **chorioamnionitis**, is suspected with maternal fever, uterine tenderness, maternal tachycardia, a raised white cell count and raised CRP, especially after prolonged rupture of membranes. Ascending bacteria infect the amnion, chorion and decidua. Management is prompt intravenous broad-spectrum antibiotics and expedited delivery. Sepsis signs must be treated urgently in parallel.",
+   "say": "Intrapartum infection, called chorioamnionitis, is suspected with maternal fever, uterine tenderness, maternal tachycardia, a raised white cell count and raised C reactive protein, especially after prolonged rupture of membranes. Bacteria ascend and infect the membranes and decidua. Management is prompt intravenous broad spectrum antibiotics and expedited delivery. Sepsis signs must be treated urgently in parallel.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suspicion features",
+     "points": [
+      "Maternal fever",
+      "Uterine tenderness",
+      "Raised white cell count and CRP"
+     ]
+    },
+    "right": {
+     "title": "Management",
+     "points": [
+      "IV broad spectrum antibiotics",
+      "Expedite delivery",
+      "Treat maternal sepsis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Previous caesarean scar rupture is a feared complication of trial of labour. Sudden severe constant abdominal pain, cessation of contractions, fetal bradycardia and a presenting part that moves upwards suggest rupture. Immediate **emergency caesarean section** is required. Pre-eclampsia with severe features needs **intravenous magnesium sulfate** for seizure prophylaxis, as it reduces neuronal excitability.",
+   "say": "Previous caesarean scar rupture is a feared complication of a trial of labour. Sudden severe constant abdominal pain, stopping of contractions, fetal bradycardia and a presenting part that moves upwards suggest rupture. Immediate emergency caesarean section is required. Women with pre-eclampsia with severe features need intravenous magnesium sulfate for seizure prophylaxis, because it reduces neuronal excitability.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Intrapartum care guideline (CG190)",
+  "Williams Obstetrics (Cunningham F G et al, eds)",
+  "Dutta's Textbook of Obstetrics (Dutta D C)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

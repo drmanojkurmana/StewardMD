@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "ana-implantation-placenta",
+ "subject": "anatomy",
+ "title": "Implantation, placenta and fetal membranes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Implantation of the **blastocyst** begins around day 6 after fertilisation and is complete by about day 9 to 12. The trophoblast over the embryoblast pole invades the endometrium. The outer cell mass forms the trophoblast, while the inner cell mass forms the embryoblast. Implantation is classically placed in the superior, posterior or lateral uterine wall.",
+   "say": "Implantation of the blastocyst begins around day 6 after fertilisation and is complete by about day 9 to 12. The trophoblast over the embryoblast pole invades the endometrium. The outer cell mass forms the trophoblast, while the inner cell mass forms the embryoblast. Implantation is classically placed in the superior, posterior or lateral uterine wall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fertilisation"
+     },
+     {
+      "id": "b",
+      "label": "Blastocyst"
+     },
+     {
+      "id": "c",
+      "label": "Adplantation"
+     },
+     {
+      "id": "d",
+      "label": "Invasion by day 9"
+     },
+     {
+      "id": "e",
+      "label": "Plug by day 12"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **syncytiotrophoblast** is the outer, multinucleated layer that invades the endometrium and produces **hCG**. The cytotrophoblast is the inner, mitotically active layer. Together they form the trophoblast. Syncytiotrophoblast is the principal source of protein and steroid hormones in pregnancy, and hCG is secreted by it.",
+   "say": "The syncytiotrophoblast is the outer, multinucleated layer that invades the endometrium and produces hCG. The cytotrophoblast is the inner, mitotically active layer. Together they form the trophoblast. Syncytiotrophoblast is the principal source of protein and steroid hormones in pregnancy, and hCG is secreted by it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Feature",
+     "Main role"
+    ],
+    "rows": [
+     [
+      "Syncytiotrophoblast",
+      "Multinucleated, no cell borders",
+      "Invades, secretes hCG"
+     ],
+     [
+      "Cytotrophoblast",
+      "Mitotically active inner layer",
+      "Source of new cells"
+     ],
+     [
+      "Extraembryonic mesoderm",
+      "Core of villi",
+      "Carries fetal vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chorionic villi develop in stages. Primary villi appear first, then secondary villi with a mesodermal core. Tertiary villi, which contain fetal blood vessels, develop around day 17 to 21. The **placental barrier** separates maternal and fetal blood, and the **intervillous space** contains only maternal blood. Human placenta is discoid, haemochorial and deciduate.",
+   "say": "Chorionic villi develop in stages. Primary villi appear first, then secondary villi with a mesodermal core. Tertiary villi, which contain fetal blood vessels, develop around day 17 to 21. The placental barrier separates maternal and fetal blood, and the intervillous space contains only maternal blood. Human placenta is discoid, haemochorial and deciduate.",
+   "vis": null
+  },
+  {
+   "tx": "The **decidua basalis** is the maternal part of the placenta, while the decidua capsularis and parietalis are not placental. The definitive chorion consists of extraembryonic somatic mesoderm, cytotrophoblast and syncytiotrophoblast. The chorion frondosum persists and forms the placenta with the basal decidua, while the chorion laeve regresses.",
+   "say": "The decidua basalis is the maternal part of the placenta, while the decidua capsularis and parietalis are not placental. The definitive chorion consists of extraembryonic somatic mesoderm, cytotrophoblast and syncytiotrophoblast. The chorion frondosum persists and forms the placenta with the basal decidua, while the chorion laeve regresses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Placental contribution",
+     "points": [
+      "Decidua basalis: maternal part",
+      "Chorion frondosum: fetal part"
+     ]
+    },
+    "right": {
+     "title": "Non-placental parts",
+     "points": [
+      "Decidua capsularis",
+      "Decidua parietalis",
+      "Chorion laeve regresses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **umbilical cord** at term is about 50 to 60 cm long and contains two umbilical arteries and one umbilical vein, embedded in Wharton's jelly. The right umbilical vein regresses early, leaving the left. A single umbilical artery is about 1 percent of cases and is linked to diabetes, twins and congenital anomalies. The cord is covered by amnion.",
+   "say": "The umbilical cord at term is about 50 to 60 cm long and contains two umbilical arteries and one umbilical vein, embedded in Wharton's jelly. The right umbilical vein regresses early, leaving the left. A single umbilical artery is about 1 percent of cases and is linked to diabetes, twins and congenital anomalies. The cord is covered by amnion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Count",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Umbilical arteries",
+      "2",
+      "Fetus to placenta"
+     ],
+     [
+      "Umbilical vein",
+      "1 (left)",
+      "Placenta to fetus"
+     ],
+     [
+      "Remnants",
+      "Allantois, yolk sac duct",
+      "Within Wharton's jelly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **yolk sac** is derived from hypoblast cells and is first seen in the second week. Primitive red cells arise in the extraembryonic yolk sac mesoderm, with hepatic haematopoiesis taking over by about week 6. Hofbauer cells, the tissue macrophages of the placenta, are found in chorionic villi. Amniotic fluid is about 98 to 99 percent water.",
+   "say": "The yolk sac is derived from hypoblast cells and is first seen in the second week. Primitive red cells arise in the extraembryonic yolk sac mesoderm, with hepatic haematopoiesis taking over by about week 6. Hofbauer cells, the tissue macrophages of the placenta, are found in chorionic villi. Amniotic fluid is about 98 to 99 percent water.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0b4eb9c6-b179-4d57-800d-b5c21dc42c5c",
+  "49793b5b-c265-4826-ba6e-b9e91c3a812b",
+  "4fcc8ab1-7fd9-419b-8cde-c9eabb8a8904"
+ ],
+ "src": [],
+ "refs": [
+  "Human Embryology, Inderbir Singh (Tenth Edition)",
+  "Williams Obstetrics (Cunningham F.G. et al., Eds)",
+  "Textbook of Obstetrics (Dutta)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 96
+ }
+}

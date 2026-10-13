@@ -1,0 +1,161 @@
+{
+ "v": 1,
+ "module": "sur-plastic",
+ "subject": "surgery",
+ "title": "Skin grafts, flaps and cleft surgery timing",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Skin grafts are tissues moved without their own blood supply, so they must **revascularise** at the new site. Split-thickness grafts contain epidermis and part of the dermis, and are thinner, about 0.3 to 0.5 mm. Full-thickness grafts contain epidermis and the whole dermis, about 1 to 1.15 mm, and are used on small areas like eyelids and fingers where contraction must be minimal.",
+   "say": "Skin grafts are tissues moved without their own blood supply, so they must revascularise at the new site. Split-thickness grafts contain epidermis and part of the dermis, and are about 0.3 to 0.5 millimetres thick. Full-thickness grafts contain epidermis and the whole dermis, about 1 to 1.15 millimetres thick, and are used on small areas like eyelids and fingers where contraction must be minimal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Split-thickness",
+     "Full-thickness"
+    ],
+    "rows": [
+     [
+      "Layers",
+      "Epidermis plus part of dermis",
+      "Epidermis plus whole dermis"
+     ],
+     [
+      "Thickness",
+      "0.3 to 0.5 mm",
+      "1 to 1.15 mm"
+     ],
+     [
+      "Contraction",
+      "More",
+      "Less"
+     ],
+     [
+      "Take",
+      "More reliable",
+      "Less reliable"
+     ],
+     [
+      "Donor site",
+      "Heals spontaneously",
+      "Must be closed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Graft survival follows a timeline. Up to 48 hours the graft lives by **plasma imbibition**, where it absorbs nutrients by free diffusion. Between about 2 and 5 days, **inosculation** joins graft and recipient vessels. Revascularisation then follows after about 5 days. Skin is not grafted onto bone, tendon or fat, which lack a good bed; flaps are used there instead.",
+   "say": "Graft survival follows a timeline. Up to 48 hours the graft lives by plasma imbibition, where it absorbs nutrients by free diffusion. Inosculation joins graft and recipient vessels and is complete by about 4 to 5 days. Revascularisation follows after about 5 days. Skin is not grafted onto bone, tendon or fat, which lack a good bed, so flaps are used there instead.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "0 to 48 h",
+      "sub": "Plasma imbibition"
+     },
+     {
+      "id": "b",
+      "label": "2 to 5 days",
+      "sub": "Inosculation"
+     },
+     {
+      "id": "c",
+      "label": "After 5 days",
+      "sub": "Revascularisation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cleft lip repair timing follows the **Millard rule of ten**: about 10 lb weight, 10 weeks of age and haemoglobin of 10 g per dL. Lip repair uses Millard's rotation-advancement technique, which is the most widely used method. For the lip, Karapandzic's neuromuscular flap preserves function, and Webster-Bernard uses a lateral nasolabial flap. Von Langenbeck was a two-stage palate repair, now less favoured.",
+   "say": "Cleft lip repair timing follows the Millard rule of ten: about 10 pounds weight, 10 weeks of age and haemoglobin of 10 grams per decilitre. Lip repair uses Millard's rotation-advancement technique, the most widely used method. For the lip, Karapandzic's neuromuscular flap preserves function, and Webster-Bernard uses a lateral nasolabial flap. Von Langenbeck was a two-stage palate repair, now less favoured.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Item",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Millard criteria",
+      "10 lb, 10 weeks, Hb 10 g per dL"
+     ],
+     [
+      "Lip technique",
+      "Millard rotation-advancement"
+     ],
+     [
+      "Functional lip flap",
+      "Karapandzic neuromuscular"
+     ],
+     [
+      "Lateral flap",
+      "Webster-Bernard nasolabial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hand infections matter for exam questions. A **felon** is a closed pulp-space infection of the fingertip, usually from Staphylococcus aureus, and is the commonest hand infection. Pain is throbbing because the pulp has little room to swell. Drainage is by incision. Thumb and index finger infections spread to the thenar space, middle and ring finger infections to the mid-palmar space, and little finger infections to the space of Parona. Acute tenosynovitis is the most serious complication.",
+   "say": "Hand infections matter for exam questions. A felon is a closed pulp-space infection of the fingertip, usually from Staphylococcus aureus, and is the commonest hand infection. Pain is throbbing because the pulp has little room to swell. Drainage is by incision. Thumb and index finger infections spread to the thenar space, middle and ring finger infections to the mid-palmar space, and little finger infections to the space of Parona. Acute tenosynovitis is the most serious complication.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Origin finger",
+     "Spread space"
+    ],
+    "rows": [
+     [
+      "Thumb and index",
+      "Thenar space"
+     ],
+     [
+      "Middle and ring",
+      "Mid-palmar space"
+     ],
+     [
+      "Little finger",
+      "Space of Parona"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "adedd3ae-7bc3-4463-b53c-eb8d79804631",
+  "116826ec-2dd9-4fbf-9db4-847dbd1c7a9d",
+  "87e676fc-d3c8-4972-a66c-1441fc2089ca"
+ ],
+ "src": [],
+ "refs": [
+  "Schwartz's Principles of Surgery, 8th edition",
+  "Bailey and Love's Short Practice of Surgery (Williams, Bailey and Love)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 285
+ }
+}

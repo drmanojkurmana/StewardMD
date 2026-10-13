@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "module": "scc-brain-death",
+ "subject": "ss-critical-care",
+ "title": "Brain death and organ donation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Brain death** is the irreversible loss of all brain and brainstem function, including the brainstem, while the heart may still beat on a ventilator. It is a legal and clinical death diagnosis, distinct from **coma**, where brainstem reflexes persist. Organ donation after brain death depends on a formal, documented declaration before any procurement begins. Life-saving care always comes first, and donation is considered only after the patient is confirmed dead.",
+   "say": "Brain death is the irreversible loss of all brain and brainstem function, although the heart may still beat on a ventilator. It is both a legal and a clinical diagnosis, and it is distinct from coma, where brainstem reflexes persist. Organ donation after brain death depends on a formal, documented declaration before any procurement begins. Life-saving care always comes first, and donation is considered only after the patient is confirmed dead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Coma",
+     "points": [
+      "Brainstem reflexes present",
+      "Potential for recovery",
+      "Not a death diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Brain death",
+     "points": [
+      "Brainstem reflexes absent",
+      "Irreversible loss of function",
+      "Legal death diagnosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before testing, confirm that the **core temperature** is above 36 degrees Celsius and systolic pressure is above 100 mm Hg. Exclude confounders such as severe hypothermia, sedatives, neuromuscular blockers and metabolic derangement. Drugs must be cleared for at least five **half-lives** before the examination. Failure to exclude these factors can produce a false positive result, so the team should document each check.",
+   "say": "Before testing, confirm that the core temperature is above 36 degrees Celsius and the systolic pressure is above 100 mm Hg. Exclude confounders such as severe hypothermia, sedatives, neuromuscular blockers and metabolic derangement. Drugs must be cleared for at least five half-lives before the examination. Failure to exclude these factors can produce a false positive result, so the team should document each check.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Precondition",
+     "Threshold",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Core temperature",
+      "Above 36 C",
+      "Hypothermia mimics brain death"
+     ],
+     [
+      "Systolic pressure",
+      "Above 100 mm Hg",
+      "Hypotension lowers brain perfusion"
+     ],
+     [
+      "Sedative clearance",
+      "Five half-lives",
+      "Avoids drug-induced suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The clinical examination tests the **brainstem reflexes**. The pupils must be fixed and non-reactive, corneal, oculocephalic and gag reflexes absent, and there should be no response to deep suction. In the oculovestibular test, absence means no eye movement toward the irrigated ear after cold water, observed for at least one minute. Spinal reflexes, such as knee jerks or withdrawal movements, do not exclude brain death.",
+   "say": "The clinical examination tests the brainstem reflexes. The pupils must be fixed and non-reactive, corneal, oculocephalic and gag reflexes absent, and there should be no response to deep suction. In the oculovestibular test, absence means no eye movement toward the irrigated ear after cold water, observed for at least one minute. Spinal reflexes, such as knee jerks or withdrawal movements, do not exclude brain death.",
+   "vis": null
+  },
+  {
+   "tx": "The **apnoea test** is the final clinical step. Preoxygenate with 100 percent oxygen for at least 10 minutes, then disconnect the ventilator while maintaining oxygen flow. A positive test shows no respiratory effort with PaCO2 above 60 mm Hg or a rise of at least 20 mm Hg above baseline. Stop the test early if systolic pressure falls below 90 mm Hg or saturation drops below 85 percent for more than 30 seconds.",
+   "say": "The apnoea test is the final clinical step. Preoxygenate with 100 percent oxygen for at least 10 minutes, then disconnect the ventilator while maintaining oxygen flow. A positive test shows no respiratory effort with PaCO2 above 60 mm Hg or a rise of at least 20 mm Hg above baseline. Stop the test early if systolic pressure falls below 90 mm Hg or saturation drops below 85 percent for more than 30 seconds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Preoxygenate 100 percent for 10 min"
+     },
+     {
+      "id": "b",
+      "label": "Disconnect, keep oxygen flow"
+     },
+     {
+      "id": "c",
+      "label": "Abort if SBP below 90 mm Hg"
+     },
+     {
+      "id": "d",
+      "label": "PaCO2 above 60 or rise 20"
+     },
+     {
+      "id": "e",
+      "label": "Positive: brain death confirmed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "unsafe"
+     ],
+     [
+      "b",
+      "d",
+      "safe"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the clinical examination cannot be completed, for example after apnoea intolerance, an **ancillary test** is needed. Four-vessel cerebral angiography is the gold standard for showing absent cerebral blood flow. Radionuclide scans show absent intracranial uptake, the so-called hollow skull sign. Transcranial Doppler shows small peaked systolic waves or absent diastolic flow. Cerebral perfusion pressure, mean arterial pressure minus intracranial pressure, guides donor management.",
+   "say": "When the clinical examination cannot be completed, an ancillary test is needed. Four-vessel cerebral angiography is the gold standard for showing absent cerebral blood flow. Radionuclide scans show absent intracranial uptake, the so-called hollow skull sign. Transcranial Doppler shows small peaked systolic waves or absent diastolic flow. Cerebral perfusion pressure, mean arterial pressure minus intracranial pressure, guides donor management.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_25033906075e",
+  "q_bbaffe9281d8",
+  "q_ca7ebfbcab49"
+ ],
+ "src": [],
+ "refs": [
+  "American Academy of Neurology 2010 practice parameter on determining brain death in adults",
+  "Transplantation of Human Organs Act, India (as amended)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 34
+ }
+}

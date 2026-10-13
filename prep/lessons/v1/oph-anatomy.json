@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "module": "oph-anatomy",
+ "subject": "ophthalmology",
+ "title": "Anatomy and embryology of the eye: high-yield essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Cornea has a clear layer structure. The **epithelium** regenerates, and **limbal stem cells** at the corneal margin maintain it. **Bowman's layer** is the non-regenerative layer, and the **endothelium** is metabolically active, with about 3000 cells per mm squared. The cornea is avascular and takes nutrition mainly from the aqueous humour.",
+   "say": "Cornea has a clear layer structure. The epithelium regenerates, and limbal stem cells at the corneal margin maintain it. Bowman's layer is the non-regenerative layer, and the endothelium is metabolically active, with about 3000 cells per mm squared. The cornea is avascular and takes nutrition mainly from the aqueous humour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Regenerative layer",
+      "Epithelium, renewed from limbal stem cells"
+     ],
+     [
+      "Non-regenerative layer",
+      "Bowman's layer"
+     ],
+     [
+      "Metabolically active",
+      "Endothelium, about 3000 cells per mm squared"
+     ],
+     [
+      "Nutrition",
+      "Mainly aqueous humour, as cornea is avascular"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aqueous humour is made by the **ciliary processes**. It flows from the posterior chamber through the pupil into the anterior chamber, then leaves through the angle. The angle is formed by the iris root, ciliary body band, scleral spur, **trabecular meshwork** and **Schwalbe's line**, the end of Descemet's membrane. Drainage then reaches the **canal of Schlemm**, which empties into episcleral veins.",
+   "say": "Aqueous humour is made by the ciliary processes. It flows from the posterior chamber through the pupil into the anterior chamber, then leaves through the angle. The angle is formed by the iris root, ciliary body band, scleral spur, trabecular meshwork and Schwalbe's line, the end of Descemet's membrane. Drainage then reaches the canal of Schlemm, which empties into episcleral veins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ciliary processes"
+     },
+     {
+      "id": "b",
+      "label": "Posterior chamber"
+     },
+     {
+      "id": "c",
+      "label": "Anterior chamber"
+     },
+     {
+      "id": "d",
+      "label": "Trabecular meshwork"
+     },
+     {
+      "id": "e",
+      "label": "Canal of Schlemm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extraocular muscles have precise insertions and nerve supply. The **superior oblique** is the longest and thinnest muscle, supplied by the trochlear nerve. The **lateral rectus** is supplied by the abducens nerve. The other recti and the inferior oblique are supplied by the oculomotor nerve. All recti arise from the apex of the orbit except the inferior oblique, which arises from the orbital floor near the lacrimal fossa.",
+   "say": "Extraocular muscles have precise insertions and nerve supply. The superior oblique is the longest and thinnest muscle, supplied by the trochlear nerve. The lateral rectus is supplied by the abducens nerve. The other recti and the inferior oblique are supplied by the oculomotor nerve. All recti arise from the apex of the orbit except the inferior oblique, which arises from the orbital floor near the lacrimal fossa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle",
+     "Nerve",
+     "Origin"
+    ],
+    "rows": [
+     [
+      "Superior oblique",
+      "Trochlear",
+      "Apex, above and medial to optic foramen"
+     ],
+     [
+      "Lateral rectus",
+      "Abducens",
+      "Apex of orbit"
+     ],
+     [
+      "Superior, medial, inferior rectus",
+      "Oculomotor",
+      "Apex of orbit"
+     ],
+     [
+      "Inferior oblique",
+      "Oculomotor",
+      "Orbital floor near lacrimal fossa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The retina has ten layers, and the **fovea** is a pit where most inner layers are absent. The **macula** lies about 3 mm temporal to the disc, which is two disc diameters. The **foveola** has only cones, and it is the thinnest part of the retina. The **blind spot** corresponds to the optic disc, which contains no photoreceptors. Deep haemorrhages lie in the outer plexiform or inner nuclear layers, while flame-shaped superficial haemorrhages lie in the nerve fibre layer.",
+   "say": "The retina has ten layers, and the fovea is a pit where most inner layers are absent. The macula lies about 3 mm temporal to the disc, which is two disc diameters. The foveola has only cones, and it is the thinnest part of the retina. The blind spot corresponds to the optic disc, which contains no photoreceptors. Deep haemorrhages lie in the outer plexiform or inner nuclear layers, while flame-shaped superficial haemorrhages lie in the nerve fibre layer.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8c2ca529-dee1-47a3-b781-0ac1883ff4ef",
+  "9f8d8531-cb22-47ea-87c4-f97def5bb075",
+  "fc7caec4-0208-4d96-8fd4-4f3a9037209b"
+ ],
+ "src": [],
+ "refs": [
+  "Vaughan and Asbury's General Ophthalmology (Riordan-Eva P, Cunningham ET Jr, eds.), chapter Anatomy and Embryology of the Eye"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 536
+ }
+}

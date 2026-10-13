@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "ped-gi-disorders",
+ "subject": "paediatrics",
+ "title": "Paediatric gastrointestinal disorders: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hypertrophic pyloric stenosis** causes progressive thickening of the pyloric muscle, obstructing gastric outlet. It typically presents between 3 and 6 weeks of age and is more common in firstborn males. Vomiting is non-bilious because the obstruction lies above the biliary entry. Persistent vomiting causes loss of chloride and hydrogen ions, producing a **hypochloraemic, hypokalaemic metabolic alkalosis**. Ultrasound is the investigation of choice.",
+   "say": "Hypertrophic pyloric stenosis causes progressive thickening of the pyloric muscle, which obstructs the gastric outlet. It typically presents between 3 and 6 weeks of age and is more common in firstborn males. Vomiting is non-bilious because the obstruction lies above the biliary entry. Persistent vomiting causes loss of chloride and hydrogen ions, producing a hypochloraemic, hypokalaemic metabolic alkalosis. Ultrasound is the investigation of choice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Pyloric stenosis"
+    ],
+    "rows": [
+     [
+      "Age",
+      "3 to 6 weeks"
+     ],
+     [
+      "Sex",
+      "Firstborn males"
+     ],
+     [
+      "Vomitus",
+      "Non-bilious"
+     ],
+     [
+      "Acid-base",
+      "Hypochloraemic alkalosis"
+     ],
+     [
+      "Test",
+      "Ultrasound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correct dehydration and the **hypochloraemic, hypokalaemic alkalosis** with intravenous fluids and potassium before any operation. Pyloromyotomy is then performed, and prognosis is excellent. Bilious vomiting should prompt a search for malrotation with volvulus, which is a surgical emergency rather than pyloric stenosis.",
+   "say": "Correct dehydration and the hypochloraemic, hypokalaemic alkalosis with intravenous fluids and potassium before any operation. Pyloromyotomy is then performed, and prognosis is excellent. Bilious vomiting should prompt a search for malrotation with volvulus, which is a surgical emergency rather than pyloric stenosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Intussusception** is telescoping of one bowel loop into the next, most often in infants and toddlers. Think of it when a child has bouts of severe colic with the legs pulled up, alternating with quiet, floppy spells. Look for a **sausage-shaped mass** and check the stool for **redcurrant jelly** appearance, though many children show only some features. **Ultrasound** is first line, and enema reduction works both diagnostically and therapeutically in stable children.",
+   "say": "Intussusception happens when one bowel segment slides into the adjacent segment below it, most often in infants and toddlers. Children typically have episodes of severe colic with the knees drawn up, separated by quieter, floppy periods. A sausage-shaped lump may be felt, and the stool can look like redcurrant jelly, although many children never show every feature. Ultrasound is the first test to order, and an enema can both confirm and treat the problem when the child is stable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Episodic colic and vomiting"
+     },
+     {
+      "id": "n2",
+      "label": "Ultrasound target sign"
+     },
+     {
+      "id": "n3",
+      "label": "Peritonitis or shock?"
+     },
+     {
+      "id": "n4",
+      "label": "Air or contrast enema"
+     },
+     {
+      "id": "n5",
+      "label": "Urgent surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4",
+      "No"
+     ],
+     [
+      "n3",
+      "n5",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In intussusception, a pathological **lead point** such as a Meckel diverticulum, polyp or duplication cyst is more likely in older children and in recurrent cases. Infants more often have hypertrophied lymphoid tissue, frequently after a viral infection. Henoch-Schonlein purpura can also trigger it. Failing to seek a lead point in these children is a key exam pitfall.",
+   "say": "In intussusception, a pathological lead point such as a Meckel diverticulum, polyp or duplication cyst is more likely in older children and in recurrent cases. Infants more often have hypertrophied lymphoid tissue, frequently after a viral infection. Henoch-Schonlein purpura can also trigger it. Failing to seek a lead point in these children is a key exam pitfall.",
+   "vis": null
+  },
+  {
+   "tx": "**Tracheo-oesophageal fistula** presents with frothing, excessive salivation and choking at first feed, often with polyhydramnios antenatally. A nasogastric tube that cannot pass confirms the diagnosis. It is part of the VACTERL association, where TE stands for tracheo-oesophageal fistula. Malrotation with volvulus presents with bilious vomiting and needs an upper GI series, which is the procedure of choice.",
+   "say": "Tracheo-oesophageal fistula presents with frothing, excessive salivation and choking at first feed, often with polyhydramnios antenatally. A nasogastric tube that cannot pass confirms the diagnosis. It is part of the VACTERL association, where TE stands for tracheo-oesophageal fistula. Malrotation with volvulus presents with bilious vomiting and needs an upper GI series, which is the procedure of choice.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "77e9cbef-8dcc-4c4e-b388-25f07da145d8",
+  "a6924cd4-7855-4da9-a723-ddc86bc9ac19",
+  "aec6e303-6e35-48e1-81a9-9481521f0000"
+ ],
+ "src": [
+  "kb-reference-intussusception",
+  "kb-reference-intussusception-pediatric",
+  "kb-reference-pyloric-stenosis"
+ ],
+ "refs": [
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 1227,
+  "itemN": 253
+ }
+}

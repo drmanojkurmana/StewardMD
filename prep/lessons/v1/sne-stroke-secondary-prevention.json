@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "sne-stroke-secondary-prevention",
+ "subject": "ss-neurology",
+ "title": "Secondary prevention of stroke",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Early after a minor ischaemic stroke or a high-risk TIA, **dual antiplatelet therapy** can reduce early recurrence. CHANCE gave aspirin with clopidogrel for a short initial period, then clopidogrel alone. POINT tested a longer combination course in a similar group. Because **bleeding risk** rises with two antiplatelet agents, the duration and timing of treatment matter.",
+   "say": "Early after a minor ischaemic stroke or a high-risk TIA, dual antiplatelet therapy can reduce the chance of recurrence. In the CHANCE trial, aspirin and clopidogrel were given for a short initial period, then clopidogrel alone. POINT tested a longer combination course in a similar group of patients. Because bleeding risk rises with two antiplatelet agents, the duration and timing of treatment matter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Eligible patients",
+     "Regimen"
+    ],
+    "rows": [
+     [
+      "CHANCE",
+      "Minor stroke or high-risk TIA, treated early",
+      "Aspirin plus clopidogrel initially, then clopidogrel alone"
+     ],
+     [
+      "POINT",
+      "Minor stroke or high-risk TIA, treated early",
+      "Aspirin plus clopidogrel for a longer course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Statin therapy is a cornerstone after ischaemic stroke. In SPARCL, patients with a recent stroke or TIA and no known coronary disease received **atorvastatin 80 mg** daily or placebo, and recurrent stroke fell. The trade-off is a small rise in **haemorrhagic stroke**, so overall benefit still favours treatment in most patients. Review adherence and lipid control at every follow-up visit.",
+   "say": "Statin therapy is a cornerstone after ischaemic stroke. In the SPARCL trial, patients with a recent stroke or TIA and no known coronary disease received atorvastatin 80 milligrams daily or placebo, and recurrent stroke fell. The trade-off is a small rise in haemorrhagic stroke, so the overall benefit still favours treatment in most patients. Review adherence and lipid control at every follow-up visit.",
+   "vis": null
+  },
+  {
+   "tx": "For cryptogenic stroke, a search for other causes comes first. In younger patients with a high-risk **patent foramen ovale** and no other source, device closure plus antiplatelet therapy reduced recurrence in RESPECT and CLOSE. In NAVIGATE ESUS, rivaroxaban 20 mg daily did not beat aspirin for embolic stroke of undetermined source, and bleeding was higher, so anticoagulation is not routine here.",
+   "say": "For cryptogenic stroke, a search for other causes comes first. In younger patients with a high-risk patent foramen ovale and no other source, device closure plus antiplatelet therapy reduced recurrence in the RESPECT and CLOSE trials. In NAVIGATE ESUS, rivaroxaban 20 milligrams daily did not beat aspirin for embolic stroke of undetermined source, and bleeding was higher, so anticoagulation is not routine here.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PFO closure",
+     "points": [
+      "Usually younger patients",
+      "High-risk patent foramen ovale",
+      "No other cause found",
+      "Benefit in RESPECT and CLOSE"
+     ]
+    },
+    "right": {
+     "title": "ESUS rivaroxaban",
+     "points": [
+      "NAVIGATE ESUS trial",
+      "Rivaroxaban 20 mg daily",
+      "No overall gain over aspirin",
+      "Higher bleeding"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Symptomatic intracranial stenosis carries a high early recurrence risk. SAMMPRIS compared **stenting** with intensive medical care for severe stenosis and stopped early because stenting caused more early stroke or death. WASID found **warfarin** no better than aspirin and more prone to haemorrhage. Aggressive medical management, including antiplatelet therapy and risk factor control, remains the standard approach.",
+   "say": "Symptomatic intracranial stenosis carries a high early recurrence risk. The SAMMPRIS trial compared stenting with intensive medical care for severe stenosis and stopped early, because stenting caused more early stroke or death. The WASID trial found warfarin no better than aspirin and more prone to haemorrhage. Aggressive medical management, including antiplatelet therapy and risk factor control, remains the standard approach.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Comparison",
+     "Key lesson"
+    ],
+    "rows": [
+     [
+      "SAMMPRIS",
+      "Stenting versus intensive medical care",
+      "Stenting caused more early stroke or death"
+     ],
+     [
+      "WASID",
+      "Warfarin versus aspirin",
+      "Warfarin gave no gain and more bleeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood pressure lowering is one of the most effective **modifiable risk factor** interventions after stroke. The PROGRESS trial tested a **combined blood pressure regimen** and found fewer recurrent strokes, with benefit extending to people without known hypertension. Most current guidance aims for a target below 130/80 mmHg, although exact thresholds differ between guidelines, so check the version your exam follows.",
+   "say": "Blood pressure lowering is one of the most effective modifiable risk factor interventions after stroke. The PROGRESS trial tested a combined blood pressure regimen and found fewer recurrent strokes, with benefit extending to people without known hypertension. Most current guidance aims for a target below 130 over 80 millimetres of mercury, although exact thresholds differ between guidelines, so check the version your exam follows.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_d9604a5de53a",
+  "q_607c67819067",
+  "q_750e3ef24d86"
+ ],
+ "src": [],
+ "refs": [
+  "SPARCL trial, Amarenco et al, New England Journal of Medicine (2006)",
+  "CHANCE trial, Wang et al, New England Journal of Medicine (2013)",
+  "ELAN trial, Fischer et al, New England Journal of Medicine (2023)",
+  "PROGRESS Collaborative Group, The Lancet (2001)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 48
+ }
+}

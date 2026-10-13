@@ -1,0 +1,95 @@
+{
+ "v": 1,
+ "module": "sca-hfpef",
+ "subject": "ss-cardiology",
+ "title": "Heart failure with preserved ejection fraction: diagnosis, phenotypes and therapy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**HFpEF** is heart failure with a left ventricular ejection fraction of 50% or more, with symptoms and signs plus objective evidence of raised filling pressures. It accounts for roughly half of all heart failure cases. Diagnosis rests on **transthoracic echocardiography**, which assesses diastolic function and structure. **Natriuretic peptides** support the diagnosis, but a normal level at rest does not exclude it, since exertional filling pressures may rise first. Exclude mimics such as valvular disease, especially aortic stenosis, and constrictive pericarditis.",
+   "say": "HFpEF is heart failure with a left ventricular ejection fraction of 50 percent or more, with symptoms and signs plus objective evidence of raised filling pressures. It accounts for roughly half of all heart failure cases. Diagnosis rests on transthoracic echocardiography, which assesses diastolic function and structure. Natriuretic peptides support the diagnosis, but a normal level at rest does not exclude it, since exertional filling pressures may rise first. Exclude mimics such as valvular disease, especially aortic stenosis, and constrictive pericarditis.",
+   "vis": null
+  },
+  {
+   "tx": "Obesity drives a distinct **obesity phenotype** of HFpEF, with systemic inflammation, microvascular dysfunction and right ventricular involvement that is more marked than in lean patients. Hypertension, older age, female sex and atrial fibrillation are also common. In African American and Hispanic patients, obesity and hypertension carry a disproportionate burden. Exercise haemodynamics can unmask early disease, with rising pulmonary capillary wedge pressure during exertion despite normal rest values.",
+   "say": "Obesity drives a distinct obesity phenotype of HFpEF, with systemic inflammation, microvascular dysfunction and right ventricular involvement that is more marked than in lean patients. Hypertension, older age, female sex and atrial fibrillation are also common. In African American and Hispanic patients, obesity and hypertension carry a disproportionate burden. Exercise haemodynamics can unmask early disease, with rising pulmonary capillary wedge pressure during exertion despite normal rest values.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obesity phenotype",
+     "points": [
+      "Inflammation and microvascular dysfunction",
+      "Marked right ventricular involvement",
+      "Strong link with diabetes"
+     ]
+    },
+    "right": {
+     "title": "Other HFpEF features",
+     "points": [
+      "Hypertension and older age",
+      "Female sex",
+      "Atrial fibrillation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Start an **SGLT2 inhibitor** such as empagliflozin, which reduced heart failure hospitalisation in EMPEROR-Preserved and slowed renal decline. **Sacubitril-valsartan** in PARAGON-HF showed only a trend, so its benefit is less certain. Aim for a clinic systolic pressure below 130 mm Hg. For atrial fibrillation, use **rate control**, choosing diltiazem where a nondihydropyridine agent suits the patient.",
+   "say": "Start a sodium-glucose cotransporter two inhibitor such as empagliflozin, which reduced heart failure hospitalisation in EMPEROR-Preserved and slowed renal decline. Sacubitril-valsartan in PARAGON-HF showed only a trend, so its benefit is less certain. Aim for a clinic systolic pressure below 130 millimetres of mercury. For atrial fibrillation, use rate control, choosing diltiazem where a nondihydropyridine agent suits the patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Trial or use",
+     "Key message"
+    ],
+    "rows": [
+     [
+      "Empagliflozin",
+      "EMPEROR-Preserved",
+      "Fewer hospitalisations, slower renal decline"
+     ],
+     [
+      "Sacubitril-valsartan",
+      "PARAGON-HF",
+      "Trend only, less certain"
+     ],
+     [
+      "Diltiazem",
+      "Rate control in AF",
+      "Nondihydropyridine option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weight reduction is now a treatment target in **obese HFpEF**. Incretin-based agents, including **GLP-1 receptor agonists** and newer dual **GIP and GLP-1** agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop **diuretics** remain the first choice for congestion, with **torsemide** often preferred for its more predictable oral absorption.",
+   "say": "Weight reduction is now a treatment target in obese HFpEF. Incretin-based agents, including GLP-1 receptor agonists and newer dual GIP and GLP-1 agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop diuretics remain the first choice for congestion, with torsemide often preferred for its more predictable oral absorption.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1df2318be841",
+  "q_c8094fdd3a70",
+  "q_7fb1e985b356"
+ ],
+ "src": [],
+ "refs": [
+  "Heidenreich PA et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 41
+ }
+}

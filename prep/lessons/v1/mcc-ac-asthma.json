@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "mcc-ac-asthma",
+ "subject": "mcc-acute-care",
+ "title": "Severe asthma: recognition and acute management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Severe asthma exacerbation is a **medical emergency** that does not settle with initial bronchodilators. Grade severity first using speech, respiratory rate, heart rate, SpO2 on air and peak expiratory flow (PEF). Severe features include inability to speak in full sentences, SpO2 below 92% on air, respiratory rate above 30 per minute, a quiet chest, and PEF or FEV1 below 50% of predicted. A **quiet chest** with poor air entry is a warning sign of worsening obstruction, not improvement.",
+   "say": "Severe asthma exacerbation is a medical emergency that does not settle with initial bronchodilators. Grade severity first using speech, respiratory rate, heart rate, oxygen saturation on air and peak expiratory flow. Severe features include inability to speak in full sentences, saturation below 92 percent on air, respiratory rate above 30 per minute, a quiet chest, and peak flow or FEV1 below 50 percent of predicted. A quiet chest with poor air entry is a warning sign of worsening obstruction, not improvement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Key features",
+     "SpO2 on air"
+    ],
+    "rows": [
+     [
+      "Mild",
+      "Talks in sentences, can lie down",
+      "94% or more"
+     ],
+     [
+      "Moderate",
+      "Talks in phrases, prefers sitting",
+      "92% or more"
+     ],
+     [
+      "Severe",
+      "Cannot speak or lie down, RR above 30",
+      "Below 92%"
+     ],
+     [
+      "Life-threatening",
+      "Drowsy, confused, exhausted, silent chest",
+      "Below 92%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start **inhaled salbutamol** early, given by pMDI and spacer with one puff at a time. Mild attacks need 4 puffs of 100 mcg; moderate attacks need 4 to 6 puffs with **ipratropium** 4 puffs of 20 mcg; severe attacks need 6 to 10 puffs with ipratropium. Repeat up to three times, 20 to 30 minutes apart. Give oxygen only if SpO2 is below 92%, aiming for 92 to 95% (GINA 2026). Never withhold oxygen because an oximeter is unavailable.",
+   "say": "Start inhaled salbutamol early, given by pMDI and spacer with one puff at a time. Mild attacks need 4 puffs of 100 micrograms; moderate attacks need 4 to 6 puffs with ipratropium 4 puffs of 20 micrograms; severe attacks need 6 to 10 puffs with ipratropium. Repeat up to three times, 20 to 30 minutes apart. Give oxygen only if saturation is below 92 percent, aiming for 92 to 95 percent according to GINA 2026. Never withhold oxygen because an oximeter is unavailable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess grade"
+     },
+     {
+      "id": "b",
+      "label": "Salbutamol + ipratropium"
+     },
+     {
+      "id": "c",
+      "label": "Oxygen if SpO2 below 92%"
+     },
+     {
+      "id": "d",
+      "label": "Reassess at 20 to 30 min"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Give **systemic corticosteroids** early, with oral prednisolone 40 to 50 mg within the first hour. Check serum potassium and glucose in severe attacks, because beta2-agonists and steroids can cause hypokalaemia. Chest X-ray is not routine; request it for suspected pneumothorax, consolidation, failure to respond, or need for ventilation. Continue the patient's inhaled corticosteroid throughout the admission.",
+   "say": "Give systemic corticosteroids early, with oral prednisolone 40 to 50 mg within the first hour. Check serum potassium and glucose in severe attacks, because beta two agonists and steroids can cause hypokalaemia. Chest X-ray is not routine; request it for suspected pneumothorax, consolidation, failure to respond, or need for ventilation. Continue the patient's inhaled corticosteroid throughout the admission.",
+   "vis": null
+  },
+  {
+   "tx": "A **raised PaCO2** in asthma signals near-fatal disease, not recovery, and needs ICU care and possible ventilation. Admit any life-threatening or near-fatal feature. Before discharge, complete the steroid course, start or step up ICS-containing controller therapy, check inhaler technique, give a written action plan, and review in 2 to 7 days. Address red flags for fatal asthma, such as prior intubation, poor adherence and psychosocial problems.",
+   "say": "A raised carbon dioxide level in asthma signals near-fatal disease, not recovery, and needs intensive care and possible ventilation. Admit any life-threatening or near-fatal feature. Before discharge, complete the steroid course, start or step up inhaled corticosteroid controller therapy, check inhaler technique, give a written action plan, and review in 2 to 7 days. Address red flags for fatal asthma, such as prior intubation, poor adherence and psychosocial problems.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-acute-asthma-adult",
+  "kb-clinical-protocols-acute-asthma-child",
+  "kb-reference-pediatric-status-asthmaticus"
+ ],
+ "refs": [
+  "Global Initiative for Asthma (GINA) 2026 report",
+  "Scottish Intercollegiate Guidelines Network (SIGN) 158: British guideline on the management of asthma"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 2500,
+  "itemN": 12
+ }
+}

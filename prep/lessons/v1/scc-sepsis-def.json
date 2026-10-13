@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "scc-sepsis-def",
+ "subject": "ss-critical-care",
+ "title": "Sepsis definitions and pathophysiology",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Sepsis** is defined under Sepsis-3 as life-threatening organ dysfunction caused by a dysregulated host response to infection. Organ dysfunction is identified by an acute rise in the **SOFA score** of 2 points or more from baseline. Sepsis-3 replaced the older SIRS-based definition because SIRS criteria lacked specificity, flagging many non-infectious inflammatory states as sepsis.",
+   "say": "Sepsis, under Sepsis-3, is life-threatening organ dysfunction caused by a dysregulated host response to infection. Organ dysfunction is identified by an acute rise in the SOFA score of 2 points or more from baseline. Sepsis-3 replaced the older SIRS-based definition because SIRS criteria lacked specificity, flagging many non-infectious inflammatory states as sepsis.",
+   "vis": null
+  },
+  {
+   "tx": "The **SOFA score** grades six organ systems, namely respiration, coagulation, liver, cardiovascular, central nervous system and renal function, each on a scale from 0 to 4. The **qSOFA** tool relies on three bedside observations: a raised respiratory rate, altered mentation and low systolic pressure. qSOFA works as a rapid risk screen rather than a diagnostic test, so a positive result prompts closer assessment.",
+   "say": "Clinicians score six organ systems with the SOFA tool: breathing, clotting, liver, circulation, brain function and kidneys, each rated from 0 to 4. The qSOFA screen uses three quick checks at the bedside: a raised breathing rate, a change in alertness and low systolic pressure. It flags risk quickly, but it does not confirm a diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Components",
+     "Use"
+    ],
+    "rows": [
+     [
+      "SOFA",
+      "Six organ systems, each graded 0 to 4",
+      "Quantifies organ dysfunction"
+     ],
+     [
+      "qSOFA",
+      "Raised respiratory rate, altered mentation, low systolic pressure",
+      "Bedside risk screen"
+     ],
+     [
+      "SIRS",
+      "Temperature, heart rate, respiratory rate, white cell count",
+      "Older criteria, low specificity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Septic shock** is sepsis with vasopressor need to keep MAP at or above 65 mmHg and a **lactate** above 2 mmol/L despite adequate fluid resuscitation. The lactate rise reflects tissue hypoperfusion and anaerobic metabolism. Mitochondrial dysfunction also impairs oxygen use, so lactate can rise even when delivery looks adequate.",
+   "say": "Septic shock is sepsis with vasopressor need to keep mean arterial pressure at or above 65 mmHg and a lactate above 2 mmol/L despite adequate fluid resuscitation. The lactate rise reflects tissue hypoperfusion and anaerobic metabolism. Mitochondrial dysfunction also impairs oxygen use, so lactate can rise even when delivery looks adequate.",
+   "vis": null
+  },
+  {
+   "tx": "Pathophysiology involves a **cytokine storm** of pro-inflammatory mediators, followed by **immunoparalysis** in many patients. The **endothelial glycocalyx** is degraded, causing capillary leak and interstitial oedema that widen the oxygen-diffusion distance. Microvascular thrombosis with consumption of platelets and clotting factors produces **sepsis-induced coagulopathy**.",
+   "say": "Pathophysiology involves a cytokine storm of pro-inflammatory mediators, followed by immunoparalysis in many patients. The endothelial glycocalyx is degraded, causing capillary leak and interstitial oedema that widen the oxygen-diffusion distance. Microvascular thrombosis with consumption of platelets and clotting factors produces sepsis-induced coagulopathy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infection"
+     },
+     {
+      "id": "b",
+      "label": "Cytokine storm"
+     },
+     {
+      "id": "c",
+      "label": "Glycocalyx loss"
+     },
+     {
+      "id": "d",
+      "label": "Capillary leak"
+     },
+     {
+      "id": "e",
+      "label": "Microthrombi"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sepsis phenotypes and distributive physiology matter for management. Distributive septic shock shows low systemic vascular resistance with high cardiac output and warm peripheral skin. Sepsis-induced cardiomyopathy can convert it to a **mixed shock** pattern, which point-of-care ultrasound helps identify. Fluids should be targeted and reassessed dynamically rather than given as fixed large volumes.",
+   "say": "Sepsis phenotypes and distributive physiology matter for management. Distributive septic shock shows low systemic vascular resistance with high cardiac output and warm peripheral skin. Sepsis-induced cardiomyopathy can convert it to a mixed shock pattern, which point-of-care ultrasound helps identify. Fluids should be targeted and reassessed dynamically rather than given as fixed large volumes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Distributive septic shock",
+     "points": [
+      "Low systemic vascular resistance",
+      "High cardiac output",
+      "Warm peripheral skin"
+     ]
+    },
+    "right": {
+     "title": "Mixed shock",
+     "points": [
+      "Sepsis plus cardiac dysfunction",
+      "Low cardiac index on echo",
+      "Needs tailored management"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_6940f9901961",
+  "q_7c4d14d8fc2c",
+  "q_24dbf8c60ddd"
+ ],
+ "src": [],
+ "refs": [
+  "Singer M, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA 2016",
+  "Evans L, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

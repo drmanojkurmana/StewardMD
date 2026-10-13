@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "phe-epidemiology",
+ "subject": "population-health-and-ethics",
+ "title": "Epidemiology: measures and study design",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Epidemiology asks how often disease occurs and why. **Prevalence** is the number of existing cases divided by the population at one point in time. It answers how common a condition is now and suits service planning. **Incidence** counts new cases over a defined follow-up period, so it captures risk. Cumulative incidence is the proportion who develop disease in a set time. Confusing these two measures is a common examination trap.",
+   "say": "Epidemiology asks how often disease occurs and why. Prevalence is the number of existing cases divided by the population at one point in time. It answers how common a condition is now and suits service planning. Incidence counts new cases over a defined follow-up period, so it captures risk. Cumulative incidence is the proportion who develop disease in a set time. Confusing these two measures is a common examination trap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Numerator",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Point prevalence",
+      "Existing cases at one time",
+      "Burden and service planning"
+     ],
+     [
+      "Cumulative incidence",
+      "New cases over follow-up",
+      "Individual risk"
+     ],
+     [
+      "Incidence rate",
+      "New cases per person-time",
+      "Dynamic cohorts"
+     ],
+     [
+      "Odds ratio",
+      "Odds of exposure in cases",
+      "Case-control studies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Study designs form a hierarchy by how well they control bias. A **randomised controlled trial** allocates exposure by chance and gives the strongest causal evidence. **Cohort** studies follow exposed and unexposed groups forward over time. **Case-control** studies select people by outcome and look back at exposure, suiting rare diseases. A **cross-sectional** survey measures exposure and outcome at one moment, giving prevalence but not temporality.",
+   "say": "Study designs form a hierarchy by how well they control bias. A randomised controlled trial allocates exposure by chance and gives the strongest causal evidence. Cohort studies follow exposed and unexposed groups forward over time. Case-control studies select people by outcome and look back at exposure, suiting rare diseases. A cross-sectional survey measures exposure and outcome at one moment, giving prevalence but not temporality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Analytical designs",
+     "points": [
+      "Follow people over time",
+      "Cohort gives relative risk",
+      "Case-control gives odds ratio",
+      "Case-control suits rare outcomes"
+     ]
+    },
+    "right": {
+     "title": "Descriptive or allocative",
+     "points": [
+      "Cross-sectional gives prevalence",
+      "Trials allocate by chance",
+      "Trials give strongest causation",
+      "Case series describes only"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bias and confounding distort results in different ways. **Confounding** arises when a third factor links exposure and outcome, such as smoking linking coffee and lung cancer. **Selection bias**, including Berkson bias, occurs when the sample is chosen in a way that depends on exposure and disease. **Recall bias** is common in case-control studies because cases remember exposures differently. Randomisation and matching help control confounding, while restriction and multivariable adjustment handle it in analysis.",
+   "say": "Bias and confounding distort results in different ways. Confounding arises when a third factor links exposure and outcome, such as smoking linking coffee and lung cancer. Selection bias, including Berkson bias, occurs when the sample is chosen in a way that depends on exposure and disease. Recall bias is common in case-control studies because cases remember exposures differently. Randomisation and matching help control confounding, while restriction and multivariable adjustment handle it in analysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Third factor"
+     },
+     {
+      "id": "b",
+      "label": "Linked to exposure"
+     },
+     {
+      "id": "c",
+      "label": "Causes outcome"
+     },
+     {
+      "id": "d",
+      "label": "Spurious association"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sensitivity and specificity describe a test's accuracy, but predictive values depend on **prevalence**. Positive predictive value falls when the disease is rare, so screening asymptomatic people produces many false positives. A highly sensitive test with a negative result helps rule disease out, the SnNout principle. A highly specific test with a positive result helps rule disease in, the SpPin principle. Clinicians should interpret results with pre-test probability in mind.",
+   "say": "Sensitivity and specificity describe a test's accuracy, but predictive values depend on prevalence. Positive predictive value falls when the disease is rare, so screening asymptomatic people produces many false positives. A highly sensitive test with a negative result helps rule disease out, the SnNout principle. A highly specific test with a positive result helps rule disease in, the SpPin principle. Clinicians should interpret results with pre-test probability in mind.",
+   "vis": null
+  },
+  {
+   "tx": "Screening programmes should meet standard criteria before they are introduced. The condition should be an important health problem, with an accepted treatment and a detectable latent stage. Screening must be acceptable and cost effective. Two sources of spurious benefit are **lead-time bias**, where diagnosis is earlier but survival is not prolonged, and **length-time bias**, where slowly progressing cases are over-detected. Both can make screening look more effective than it truly is.",
+   "say": "Screening programmes should meet standard criteria before they are introduced. The condition should be an important health problem, with an accepted treatment and a detectable latent stage. Screening must be acceptable and cost effective. Two sources of spurious benefit are lead-time bias, where diagnosis is earlier but survival is not prolonged, and length-time bias, where slowly progressing cases are over-detected. Both can make screening look more effective than it truly is.",
+   "vis": null
+  },
+  {
+   "tx": "Measures of association depend on design. A **relative risk** compares incidence in exposed and unexposed groups in cohort studies. An **odds ratio** is used in case-control studies, and approximates relative risk when the outcome is rare. Interrupted time series analysis evaluates a population-wide intervention using repeated measures before and after. Choose the design and measure that match the question, and read the study's limitations critically.",
+   "say": "Measures of association depend on design. A relative risk compares incidence in exposed and unexposed groups in cohort studies. An odds ratio is used in case-control studies, and approximates relative risk when the outcome is rare. Interrupted time series analysis evaluates a population-wide intervention using repeated measures before and after. Choose the design and measure that match the question, and read the study's limitations critically.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Rothman KJ, Greenland S, Lash TL. Modern Epidemiology (Rothman, Greenland, Lash)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

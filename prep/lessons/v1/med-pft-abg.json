@@ -1,0 +1,106 @@
+{
+ "v": 1,
+ "module": "med-pft-abg",
+ "subject": "medicine",
+ "title": "Pulmonary function tests and arterial blood gases",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "A **normal** FEV1/FVC ratio does not exclude obstruction. When residual volume rises, FVC falls and the ratio can look normal, an artefact. Lung volumes should scale together, roughly 85 to 115 percent predicted in health. Diffusion (DLCO) helps localise the cause. It is low in fibrosis, emphysema, pulmonary vascular disease and anaemia. It is normal or raised in asthma, polycythaemia and pulmonary haemorrhage.",
+   "say": "A normal FEV1 over FVC ratio does not exclude obstruction. When residual volume rises, FVC falls and the ratio can look normal, which is an artefact. Lung volumes should scale together, roughly 85 to 115 percent predicted in health. Diffusion, measured as DLCO, helps localise the cause. It is low in fibrosis, emphysema, pulmonary vascular disease and anaemia. It is normal or raised in asthma, polycythaemia and pulmonary haemorrhage.",
+   "vis": null
+  },
+  {
+   "tx": "Lung volumes are measured by **helium dilution** or **body plethysmography**. Dilution cannot reach trapped gas, so it underestimates volumes in bullous or obstructive disease. Plethysmography is preferred in those patients. Arterial blood gas then tests gas exchange. The **alveolar gas equation** estimates PAO2, and the A-a gradient shows whether the defect is in the lungs or in ventilation. A normal PaO2 on room air is about 95 mmHg in a healthy adult.",
+   "say": "Lung volumes are measured by helium dilution or body plethysmography. Dilution cannot reach trapped gas, so it underestimates volumes in bullous or obstructive disease. Plethysmography is preferred in those patients. Arterial blood gas then tests gas exchange. The alveolar gas equation estimates PAO2, and the A minus a gradient shows whether the defect is in the lungs or in ventilation. A normal PaO2 on room air is about 95 mmHg in a healthy adult.",
+   "vis": null
+  },
+  {
+   "tx": "Hypoxaemia has four mechanisms: low inspired oxygen, **hypoventilation**, **V/Q mismatch** and **shunt**. Hypoxaemia that corrects with modest oxygen points to V/Q mismatch, the commonest cause in COPD. Hypoxaemia that persists despite supplemental oxygen suggests true **shunt**, because shunted blood barely responds to added oxygen. In ventilatory failure, a PaCO2 above 45 mmHg with acidaemia defines acute type II failure.",
+   "say": "Hypoxaemia has four mechanisms. These are low inspired oxygen, hypoventilation, V/Q mismatch and shunt. Hypoxaemia that corrects with modest oxygen points to V/Q mismatch, the commonest cause in COPD. Hypoxaemia that persists despite supplemental oxygen suggests true shunt, because shunted blood barely responds to added oxygen. In ventilatory failure, a PaCO2 above 45 mmHg with acidaemia defines acute type II failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hypoxaemia on supplemental O2?"
+     },
+     {
+      "id": "n2",
+      "label": "Corrects: V/Q mismatch"
+     },
+     {
+      "id": "n3",
+      "label": "Persists: true shunt"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2",
+      "Corrects"
+     ],
+     [
+      "n1",
+      "n3",
+      "Persists"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a **restrictive** disorder, the lung or chest wall is stiff or the muscles are weak. Pulmonary fibrosis lowers TLC, FVC and DLCO but keeps the ratio high. Kyphoscoliosis and obesity lower TLC and FRC. Myasthenia gravis lowers TLC and raises RV. In **acute asthma**, airway narrowing scoops the flow-volume loop, with raised RV and a PaCO2 that is normal or low. A normal or rising PaCO2 in a distressed asthmatic signals impending respiratory failure.",
+   "say": "In a restrictive disorder, the lung or chest wall is stiff, or the muscles are weak. Pulmonary fibrosis lowers TLC, FVC and DLCO but keeps the ratio high. Kyphoscoliosis and obesity lower TLC and FRC. Myasthenia gravis lowers TLC and raises RV. In acute asthma, airway narrowing scoops the flow-volume loop, with raised RV and a PaCO2 that is normal or low. A normal or rising PaCO2 in a distressed asthmatic signals impending respiratory failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Restrictive",
+     "points": [
+      "FEV1/FVC normal or raised",
+      "TLC reduced",
+      "FVC reduced",
+      "Fibrosis lowers DLCO"
+     ]
+    },
+    "right": {
+     "title": "Obstructive",
+     "points": [
+      "FEV1/FVC below 0.7",
+      "TLC normal or raised",
+      "Air trapping raises RV",
+      "Emphysema lowers DLCO"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "08817250-85d9-4f13-b5ec-4bfa4166f1dd",
+  "1e453c17-ba16-4cd8-964d-527c9db80c97",
+  "134600af-9f98-429f-8e57-c514cddb7d31"
+ ],
+ "src": [
+  "kb-reference-disturbances-of-respiratory-function",
+  "kb-reference-chronic-obstructive-pulmonary-disease",
+  "kb-diseases-asthma-exac"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "GOLD Report: Global Strategy for Diagnosis, Management and Prevention of COPD"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 2497,
+  "itemN": 118
+ }
+}

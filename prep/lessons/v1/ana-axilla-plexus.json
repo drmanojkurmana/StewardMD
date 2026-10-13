@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "ana-axilla-plexus",
+ "subject": "anatomy",
+ "title": "Axilla and Brachial Plexus: High-Yield Anatomy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **axilla** is a pyramidal space between the upper arm and the chest wall. Its apex is bounded by the first rib, the clavicle and the upper border of the subscapularis. The **axillary artery** runs through it and is divided into three parts by the pectoralis minor muscle. Knowing these boundaries helps you localise the contents during surgery and nerve blocks.",
+   "say": "The axilla is a pyramidal space between the upper arm and the chest wall. Its apex is bounded by the first rib, the clavicle and the upper border of the subscapularis. The axillary artery runs through it and is divided into three parts by the pectoralis minor muscle. Knowing these boundaries helps you localise the contents during surgery and nerve blocks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Artery part",
+     "Relation to pectoralis minor"
+    ],
+    "rows": [
+     [
+      "First part",
+      "Medial to the muscle"
+     ],
+     [
+      "Second part",
+      "Deep to the muscle"
+     ],
+     [
+      "Third part",
+      "Lateral to the muscle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **brachial plexus** is formed by the anterior rami of C5 to T1. It passes through roots, then **trunks**, then **divisions**, and finally **cords**, which are named by their relation to the axillary artery. Roots give the long thoracic and dorsal scapular nerves, the upper trunk gives the suprascapular nerve and nerve to subclavius, and the cords give the terminal branches.",
+   "say": "The brachial plexus is formed by the anterior rami of C5 to T1. It passes through roots, then trunks, then divisions, and finally cords, which are named by their relation to the axillary artery. Roots give the long thoracic and dorsal scapular nerves, the upper trunk gives the suprascapular nerve and nerve to subclavius, and the cords give the terminal branches.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r",
+      "label": "Roots C5 to T1"
+     },
+     {
+      "id": "t",
+      "label": "Trunks"
+     },
+     {
+      "id": "d",
+      "label": "Divisions"
+     },
+     {
+      "id": "c",
+      "label": "Cords"
+     }
+    ],
+    "edges": [
+     [
+      "r",
+      "t"
+     ],
+     [
+      "t",
+      "d"
+     ],
+     [
+      "d",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long thoracic nerve** arises from the roots C5 to C7 and supplies serratus anterior. Its injury, for example after axillary clearance in breast cancer surgery, causes **winging of the scapula**, with the medial border prominent and inability to abduct the arm beyond 90 degrees. The **thoracodorsal nerve** from the posterior cord supplies latissimus dorsi.",
+   "say": "Long thoracic nerve arises from the roots C5 to C7 and supplies serratus anterior. Its injury, for example after axillary clearance in breast cancer surgery, causes winging of the scapula, with the medial border prominent and inability to abduct the arm beyond 90 degrees. The thoracodorsal nerve from the posterior cord supplies latissimus dorsi.",
+   "vis": null
+  },
+  {
+   "tx": "**Erb palsy** involves the upper trunk, C5 and C6, at Erb's point, and is typical of birth injury or a fall on the shoulder. The arm hangs adducted and medially rotated, the forearm is extended and pronated, giving the waiter's tip or porter's tip hand. **Klumpke palsy** involves the lower trunk, C8 and T1, from hyperabduction, and causes claw hand with medial forearm sensory loss and possible Horner syndrome.",
+   "say": "Erb palsy involves the upper trunk, C5 and C6, at Erb's point, and is typical of birth injury or a fall on the shoulder. The arm hangs adducted and medially rotated, the forearm is extended and pronated, giving the waiter's tip or porter's tip hand. Klumpke palsy involves the lower trunk, C8 and T1, from hyperabduction, and causes claw hand with medial forearm sensory loss and possible Horner syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Erb palsy",
+     "points": [
+      "Upper trunk, C5 and C6",
+      "Arm adducted, medially rotated",
+      "Forearm extended and pronated",
+      "Birth injury or fall on shoulder"
+     ]
+    },
+    "right": {
+     "title": "Klumpke palsy",
+     "points": [
+      "Lower trunk, C8 and T1",
+      "Claw hand",
+      "Medial forearm sensory loss",
+      "Horner syndrome possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **cervical rib** or an anomalous scalene muscle can compress the **lower trunk** of the brachial plexus and the subclavian vessels in the **thoracic outlet**, giving neurological and vascular symptoms. Lymph from the upper limb drains to the **lateral group** of axillary nodes, while the **apical group**, which is infraclavicular, is level III. Breast cancer spreads readily to these nodes.",
+   "say": "A cervical rib or an anomalous scalene muscle can compress the lower trunk of the brachial plexus and the subclavian vessels in the thoracic outlet, giving neurological and vascular symptoms. Lymph from the upper limb drains to the lateral group of axillary nodes, while the apical group, which is infraclavicular, is level III. Breast cancer spreads readily to these nodes.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "729eb369-a896-4d13-814e-8fa35886ac4c",
+  "83ac558a-2e46-4b92-bf6d-ea2b8a6fc990",
+  "084aa1d7-88f7-4945-b1f9-0f97f065f484"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 266
+ }
+}

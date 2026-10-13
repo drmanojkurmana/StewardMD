@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "cm-mental-health",
+ "subject": "community-medicine",
+ "title": "Mental Health Programmes, Mental Healthcare Act and Substance Use",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **National Mental Health Programme** (NMHP) was launched by the Government of India in 1982. Its aims are prevention and treatment of mental and neurological disorders, use of mental health technology to improve general health services, and application of mental health principles in national development. Its objectives are to ensure availability and accessibility of minimum mental health care, to encourage application of mental health knowledge in general health care, and to promote community participation in service development.",
+   "say": "The National Mental Health Programme was launched by the Government of India in 1982. Its aims are prevention and treatment of mental and neurological disorders, use of mental health technology to improve general health services, and application of mental health principles in national development. Its objectives are to ensure availability and accessibility of minimum mental health care, to encourage application of mental health knowledge in general health care, and to promote community participation in service development. Protecting patient rights is a function of regulatory bodies, not an NMHP objective.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Content"
+    ],
+    "rows": [
+     [
+      "Launched",
+      "1982"
+     ],
+     [
+      "Aims",
+      "Prevention and treatment; technology use; national development"
+     ],
+     [
+      "Objectives",
+      "Minimum care for all; general health integration; community participation"
+     ],
+     [
+      "Not an objective",
+      "Using modern technologies in hospitals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **District Mental Health Programme** (DMHP) was launched under NMHP in 1996 and is based on the Bellary Model. Its components are early detection and treatment, training of general physicians and health workers, IEC for public awareness, and monitoring through simple record keeping. Screening is not listed as a DMHP component in this framing. The NMHP was re-strategised in 2003 to extend DMHP to 100 districts.",
+   "say": "The District Mental Health Programme was launched under the National Mental Health Programme in 1996 and is based on the Bellary Model. Its components are early detection and treatment, training of general physicians and health workers, public awareness through information, education and communication, and monitoring through simple record keeping. The programme was extended to one hundred districts after the 2003 re-strategising.",
+   "vis": null
+  },
+  {
+   "tx": "The **Mental Healthcare Act 2017** replaced the Mental Health Act 1987. It guarantees free legal services, decriminalises **suicide attempt**, and bars seclusion as a routine measure. Electroconvulsive therapy requires muscle relaxants and anaesthesia. It creates Central and State Mental Health Authorities and Mental Health Review Boards chaired by a District Judge. Mental health practitioners are not liable for unforeseen events.",
+   "say": "The Mental Healthcare Act 2017 replaced the Mental Health Act 1987. It guarantees free legal services, decriminalises suicide attempt, and bars seclusion as a routine measure. Electroconvulsive therapy needs muscle relaxants and anaesthesia. It creates Central and State Mental Health Authorities and Mental Health Review Boards chaired by a District Judge.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mental Health Act 1987",
+     "points": [
+      "Passed 22 May 1987",
+      "Older framework",
+      "Less rights focused"
+     ]
+    },
+    "right": {
+     "title": "Mental Healthcare Act 2017",
+     "points": [
+      "Decriminalises suicide attempt",
+      "Free legal services",
+      "Review Boards with District Judge"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tele MANAS** is a national tele-mental health helpline in India, offering counselling and referral support. Suicide prevention relies on recognising warning signs such as hopelessness, withdrawal, giving away possessions, and sudden calm after prolonged distress. Early referral to a psychiatrist or de-addiction centre improves outcomes in high-risk individuals.",
+   "say": "Tele MANAS is a national tele-mental health helpline in India, offering counselling and referral support. Suicide prevention relies on recognising warning signs such as hopelessness, withdrawal, giving away possessions, and sudden calm after prolonged distress. Early referral to a psychiatrist or de-addiction centre improves outcomes.",
+   "vis": null
+  },
+  {
+   "tx": "**Drug dependence** and substance use are assessed in the context of **NDPS** law, which governs narcotic drugs and psychotropic substances. Cannabis preparations include bhang, ganja and charas, with **THC** as the main psychoactive agent. Amotivation syndrome, marked by apathy and loss of drive, is a recognised complication of chronic cannabis abuse, alongside flashback phenomenon.",
+   "say": "Drug dependence and substance use are assessed in the context of NDPS law, which governs narcotic drugs and psychotropic substances. Cannabis preparations include bhang, ganja and charas, with THC as the main psychoactive agent. Amotivation syndrome, marked by apathy and loss of drive, is a recognised complication of chronic cannabis abuse, alongside flashback phenomenon.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cannabis use"
+     },
+     {
+      "id": "b",
+      "label": "Chronic abuse"
+     },
+     {
+      "id": "c",
+      "label": "Amotivation"
+     },
+     {
+      "id": "d",
+      "label": "Apathy, low drive"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mental disorders arise from **organic**, **hereditary** and **socio-environmental** causes. Organic causes include cerebral atherosclerosis, neoplasm and endocrine disorders. Socio-environmental factors include poverty, broken homes, frustration, neglect and urbanisation. Early childhood and adolescence are high-risk periods. Maximum DALY loss in mental disorders is due to unipolar depressive disorders.",
+   "say": "Mental disorders arise from organic, hereditary and socio-environmental causes. Organic causes include cerebral atherosclerosis, neoplasm and endocrine disorders. Socio-environmental factors include poverty, broken homes, frustration, neglect and urbanisation. Unipolar depressive disorders cause the greatest disability-adjusted life year loss among mental disorders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause type",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Organic",
+      "Cerebral atherosclerosis, endocrine disease"
+     ],
+     [
+      "Hereditary",
+      "Schizophrenia"
+     ],
+     [
+      "Socio-environmental",
+      "Poverty, broken homes, neglect"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "8931f540-98fe-454c-b724-e7171cb10e34",
+  "b0db9327-c7b2-4a06-bdd7-6c67645e0b82",
+  "c3cbc758-268b-40a8-8e04-06ee4bad9483"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Mental Healthcare Act 2017"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

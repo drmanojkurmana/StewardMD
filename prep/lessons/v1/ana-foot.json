@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "ana-foot",
+ "subject": "anatomy",
+ "title": "Foot and arches: anatomy essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The foot is built around **arches** that absorb load and spring during gait. There are two longitudinal arches, medial and lateral, and one transverse arch across the metatarsal bases. The medial longitudinal arch is the highest and the most tested. Its summit is the superior surface of the talus, and its piers are the calcaneal tuberosity behind and the heads of the first three metatarsals in front.",
+   "say": "The foot is built around arches that absorb load and spring during gait. There are two longitudinal arches, medial and lateral, and one transverse arch across the metatarsal bases. The medial longitudinal arch is the highest and the most tested. Its summit is the superior surface of the talus, and its piers are the calcaneal tuberosity behind and the heads of the first three metatarsals in front.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Medial arch",
+     "Lateral arch"
+    ],
+    "rows": [
+     [
+      "Anterior pillar",
+      "Talus, navicular, cuneiforms, metatarsals 1 to 3",
+      "Cuboid, metatarsals 4 and 5"
+     ],
+     [
+      "Posterior pillar",
+      "Medial half of calcaneum",
+      "Lateral half of calcaneum"
+     ],
+     [
+      "Main joint",
+      "Talocalcaneonavicular",
+      "Calcaneocuboid"
+     ],
+     [
+      "Height",
+      "Highest and most important",
+      "Lower and flatter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The arches are held up by **intersegmental ties**, **tie beams** and **slings**. The **plantar calcaneonavicular (spring) ligament** is the key tie. Its upper surface is fibrocartilage-covered and supports the head of the talus, so weakness here leads to flat foot. The plantar aponeurosis acts as a tie beam, and tibialis posterior, flexor hallucis longus and flexor digitorum longus form slings.",
+   "say": "The arches are held up by intersegmental ties, tie beams and slings. The plantar calcaneonavicular spring ligament is the key tie. Its upper surface is covered by fibrocartilage and supports the head of the talus, so weakness here leads to flat foot. The plantar aponeurosis acts as a tie beam, and tibialis posterior, flexor hallucis longus and flexor digitorum longus form slings.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Spring ligament"
+     },
+     {
+      "id": "b",
+      "label": "Supports talar head"
+     },
+     {
+      "id": "c",
+      "label": "Medial arch height"
+     },
+     {
+      "id": "d",
+      "label": "Weakness: flat foot"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "a",
+      "d",
+      "if weak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sole has four muscle layers. The **first layer** contains flexor digitorum brevis, abductor hallucis and abductor digiti minimi, lying beneath the plantar aponeurosis. The **second layer** holds the tendons of flexor hallucis longus and flexor digitorum longus, flexor digitorum accessorius and the four lumbricals. The **third layer** holds flexor hallucis brevis, flexor digiti minimi brevis and adductor hallucis. The **fourth layer** holds the interossei, and the tendons of tibialis posterior and peroneus longus.",
+   "say": "The sole has four muscle layers. The first layer contains flexor digitorum brevis, abductor hallucis and abductor digiti minimi, lying beneath the plantar aponeurosis. The second layer holds the tendons of flexor hallucis longus and flexor digitorum longus, flexor digitorum accessorius and the four lumbricals. The third layer holds flexor hallucis brevis, flexor digiti minimi brevis and adductor hallucis. The fourth layer holds the interossei, and the tendons of tibialis posterior and peroneus longus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Key contents"
+    ],
+    "rows": [
+     [
+      "1",
+      "Flexor digitorum brevis, abductor hallucis, abductor digiti minimi"
+     ],
+     [
+      "2",
+      "FHL and FDL tendons, flexor digitorum accessorius, four lumbricals"
+     ],
+     [
+      "3",
+      "Flexor hallucis brevis, flexor digiti minimi brevis, adductor hallucis"
+     ],
+     [
+      "4",
+      "Interossei (3 plantar, 4 dorsal), tibialis posterior and peroneus longus tendons"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Foot movements occur at specific joints. **Inversion** tilts the sole medially and **eversion** tilts it laterally. Both occur mainly at the **subtalar joint**, with the midtarsal joints contributing. Inversion is produced by tibialis anterior and tibialis posterior, with flexor digitorum longus and flexor hallucis longus as accessory inverters. Eversion is produced by peroneus longus, peroneus brevis and peroneus tertius. Peroneus tertius is an evertor, so it is not an inverter.",
+   "say": "Foot movements occur at specific joints. Inversion tilts the sole medially and eversion tilts it laterally. Both occur mainly at the subtalar joint, with the midtarsal joints contributing. Inversion is produced by tibialis anterior and tibialis posterior, with flexor digitorum longus and flexor hallucis longus as accessory inverters. Eversion is produced by peroneus longus, peroneus brevis and peroneus tertius. Peroneus tertius is an evertor, so it is not an inverter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Movement",
+     "Joint",
+     "Main muscles"
+    ],
+    "rows": [
+     [
+      "Inversion",
+      "Subtalar (plus midtarsal)",
+      "Tibialis anterior, tibialis posterior"
+     ],
+     [
+      "Eversion",
+      "Subtalar (plus midtarsal)",
+      "Peroneus longus, brevis, tertius"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Know the **nerves** and **bones** that examiners test. The **lateral plantar nerve**, a terminal branch of the tibial nerve, supplies the skin of the fifth toe and the lateral half of the fourth toe, so glass injury there gives numbness of the small toe. It also supplies lumbricals 2 to 4. The first lumbrical is supplied by the medial plantar nerve. The **talus** is the only foot bone with no muscle attachments, since it carries only ligaments.",
+   "say": "Know the nerves and bones that examiners test. The lateral plantar nerve, a terminal branch of the tibial nerve, supplies the skin of the fifth toe and the lateral half of the fourth toe, so glass injury there gives numbness of the small toe. It also supplies lumbricals 2 to 4. The first lumbrical is supplied by the medial plantar nerve. The talus is the only foot bone with no muscle attachments, since it carries only ligaments.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "3c1acb1e-131a-4dd2-a721-bccac0f92c20",
+  "ceb94a3d-8a2e-4154-a1b5-bb33f636d5f2",
+  "d078b80e-2fd4-491b-b629-d2c32a84eaf0"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter Lower Limb in The Big Picture: Gross Anatomy (Moon, Foreman, Albeine (Eds))"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 91
+ }
+}

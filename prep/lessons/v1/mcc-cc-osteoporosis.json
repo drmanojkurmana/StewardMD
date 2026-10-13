@@ -1,0 +1,102 @@
+{
+ "v": 1,
+ "module": "mcc-cc-osteoporosis",
+ "subject": "mcc-chronic-care",
+ "title": "Osteoporosis treatment: choosing and monitoring pharmacotherapy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Osteoporosis treatment starts with the **fracture risk** rather than the T-score alone. A prior low-trauma fracture, a hip or vertebral fracture, or a high estimated risk tips the decision toward drug therapy. Before any antiresorptive is started, check **calcium**, **25-hydroxyvitamin D**, renal function and dental health. Correct deficiency first, because starting treatment in a vitamin D deficient patient risks symptomatic hypocalcaemia.",
+   "say": "Osteoporosis treatment starts with fracture risk rather than the T-score alone. A prior low-trauma fracture, a hip or vertebral fracture, or a high estimated risk pushes the decision toward drug therapy. Before any antiresorptive is started, check calcium, 25-hydroxyvitamin D, renal function and dental health. Correct any deficiency first, because starting treatment in a vitamin D deficient patient risks symptomatic hypocalcaemia.",
+   "vis": null
+  },
+  {
+   "tx": "Long-term **glucocorticoid** therapy is a major **secondary cause** of osteoporosis, acting by suppressing bone formation and increasing bone resorption. Bone protection should be considered for any patient on sustained steroid treatment, especially when fracture risk is already raised. Never stop steroids abruptly. Management includes **calcium**, **vitamin D** and an **antiresorptive** agent where indicated. Rare **atypical femur fracture** is an important adverse effect of long-term antiresorptive use.",
+   "say": "Long-term glucocorticoid therapy is a major secondary cause of osteoporosis, acting by suppressing bone formation and increasing bone resorption. Bone protection should be considered for any patient on sustained steroid treatment, especially when fracture risk is already raised. Never stop steroids abruptly. Management includes calcium, vitamin D and an antiresorptive agent where indicated. Rare atypical femur fracture is an important adverse effect of long-term antiresorptive use.",
+   "vis": null
+  },
+  {
+   "tx": "Falls drive most fractures in older people with weak bone. Assess gait, vision, sedative use and blood pressure medicines. Structured **balance and strength exercise** reduces falls, and withdrawing sedatives lowers risk further. Suspect **atypical femur fracture** in a patient on long-term bisphosphonates who develops new thigh pain with a transverse subtrochanteric fracture. Stop the drug and arrange orthopaedic review.",
+   "say": "Falls drive most fractures in older people with weak bone. Assess gait, vision, sedative use and blood pressure medicines. Structured balance and strength exercise reduces falls, and withdrawing sedatives lowers risk further. Suspect atypical femur fracture in a patient on long-term bisphosphonates who develops new thigh pain with a transverse subtrochanteric fracture. Stop the drug and arrange orthopaedic review.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Long-term bisphosphonate"
+     },
+     {
+      "id": "b",
+      "label": "New thigh pain"
+     },
+     {
+      "id": "c",
+      "label": "Transverse subtrochanteric fracture"
+     },
+     {
+      "id": "d",
+      "label": "Stop drug and refer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral bisphosphonates are poorly absorbed. Take them fasting with plain water, not with juice, coffee or calcium-rich food, and stay upright for at least 30 minutes. Lying down soon after dosing, especially with heartburn, can injure the oesophagus. **Calcium and vitamin D** support mineralisation but do not reduce fracture risk on their own, so they accompany rather than replace antiresorptive therapy.",
+   "say": "Oral bisphosphonates are poorly absorbed. Take them fasting with plain water, not with juice, coffee or calcium-rich food, and stay upright for at least 30 minutes. Lying down soon after dosing, especially with heartburn, can injure the oesophagus. Calcium and vitamin D support mineralisation but do not reduce fracture risk on their own, so they accompany rather than replace antiresorptive therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Correct administration",
+     "points": [
+      "Fasting with plain water",
+      "Stay upright 30 minutes",
+      "Wait before food or drink"
+     ]
+    },
+    "right": {
+     "title": "Common errors",
+     "points": [
+      "Taking with juice or coffee",
+      "Lying down after dosing",
+      "Ignoring heartburn symptoms"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE CG146 Osteoporosis: assessing the risk of fragility fracture",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

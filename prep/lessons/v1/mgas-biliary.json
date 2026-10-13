@@ -1,0 +1,165 @@
+{
+ "v": 1,
+ "module": "mgas-biliary",
+ "subject": "mrcp-gastroenterology",
+ "title": "Gallbladder and biliary disease: high-yield essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Gallstones are classified mainly as **cholesterol** stones, which form when bile is supersaturated with cholesterol, and **pigment** stones, which form when excess bilirubin is present. Pigment stones are seen in chronic haemolysis such as sickle cell disease. Most gallstones are silent, and only symptomatic stones need intervention.",
+   "say": "Gallstones are classified mainly as cholesterol stones and pigment stones. Cholesterol stones form when bile is supersaturated with cholesterol. Pigment stones form when excess bilirubin is present, as seen in chronic haemolysis such as sickle cell disease. Most gallstones are silent, and only symptomatic stones need intervention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stone type",
+     "Mechanism",
+     "Exam clue"
+    ],
+    "rows": [
+     [
+      "Cholesterol",
+      "Bile supersaturated with cholesterol",
+      "Commonest in the UK"
+     ],
+     [
+      "Pigment",
+      "Excess bilirubin",
+      "Haemolysis, sickle cell"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Biliary colic** is transient obstruction of the cystic duct or gallbladder neck by a stone, causing pain that typically lasts one to five hours. **Acute cholecystitis** is persistent inflammation, usually after the cystic duct stays blocked, with fever and a positive Murphy's sign. Pain lasting beyond several hours points towards cholecystitis.",
+   "say": "Biliary colic is transient obstruction of the cystic duct or gallbladder neck by a stone, causing pain that typically lasts one to five hours. Acute cholecystitis is persistent inflammation, usually after the cystic duct stays blocked, with fever and a positive Murphy's sign. Pain lasting beyond several hours points towards cholecystitis.",
+   "vis": null
+  },
+  {
+   "tx": "Acute calculous cholecystitis in fit patients is managed with antibiotics and early **laparoscopic cholecystectomy**, ideally within one week of diagnosis, following NICE guidance. Percutaneous cholecystostomy is reserved for patients too unwell for surgery. Ultrasound findings of wall thickening and pericholecystic fluid support the diagnosis.",
+   "say": "Acute calculous cholecystitis in fit patients is managed with antibiotics and early laparoscopic cholecystectomy, ideally within one week of diagnosis, following NICE guidance. Percutaneous cholecystostomy is reserved for patients too unwell for surgery. Ultrasound findings of wall thickening and pericholecystic fluid support the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected cholecystitis"
+     },
+     {
+      "id": "b",
+      "label": "Antibiotics and ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Fit for surgery?"
+     },
+     {
+      "id": "d",
+      "label": "Laparoscopic cholecystectomy within one week"
+     },
+     {
+      "id": "e",
+      "label": "Percutaneous cholecystostomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "c",
+      "e",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ascending cholangitis** is infection of obstructed bile, usually from a common bile duct stone. Charcot's triad is fever, jaundice and right upper quadrant pain. Adding hypotension and confusion gives Reynolds' pentad, which signals severe disease. Severe cholangitis needs resuscitation, intravenous antibiotics and **urgent biliary drainage**, usually by ERCP.",
+   "say": "Ascending cholangitis is infection of obstructed bile, usually from a common bile duct stone. Charcot's triad is fever, jaundice and right upper quadrant pain. Adding hypotension and confusion gives Reynolds' pentad, which signals severe disease. Severe cholangitis needs resuscitation, intravenous antibiotics and urgent biliary drainage, usually by ERCP.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Charcot's triad",
+     "points": [
+      "Fever",
+      "Jaundice",
+      "Right upper quadrant pain"
+     ]
+    },
+    "right": {
+     "title": "Reynolds' pentad",
+     "points": [
+      "Charcot's triad",
+      "Hypotension",
+      "Confusion, signals severe sepsis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Primary sclerosing cholangitis** causes fibrous inflammation of intrahepatic and extrahepatic bile ducts, strongly linked to ulcerative colitis and typically in young men. MRCP shows multifocal strictures with beading. **Primary biliary cholangitis** is autoimmune destruction of small intrahepatic ducts, mostly in middle-aged women, with positive anti-mitochondrial antibodies. Ursodeoxycholic acid is first-line for PBC.",
+   "say": "Primary sclerosing cholangitis causes fibrous inflammation of intrahepatic and extrahepatic bile ducts, strongly linked to ulcerative colitis and typically in young men. MRCP shows multifocal strictures with beading. Primary biliary cholangitis is autoimmune destruction of small intrahepatic ducts, mostly in middle-aged women, with positive anti-mitochondrial antibodies. Ursodeoxycholic acid is first-line for PBC.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Sclerosing",
+     "Biliary"
+    ],
+    "rows": [
+     [
+      "Typical patient",
+      "Young men, ulcerative colitis",
+      "Middle-aged women"
+     ],
+     [
+      "Antibody",
+      "Usually negative AMA",
+      "Anti-mitochondrial positive"
+     ],
+     [
+      "Key test or treatment",
+      "MRCP beading",
+      "Ursodeoxycholic acid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painless obstructive jaundice accompanied by a **palpable, non-tender gallbladder** should raise suspicion of a **malignant obstruction**, most often a tumour of the pancreatic head. This pattern is known as Courvoisier's law. In contrast, gallstone disease typically produces a shrunken, impalpable gallbladder because repeated inflammation has fibrosed its wall. Ultrasound followed by CT then helps localise the level of blockage and plan further investigation.",
+   "say": "Painless obstructive jaundice accompanied by a palpable, non-tender gallbladder should raise suspicion of a malignant obstruction, most often a tumour of the pancreatic head. This pattern is known as Courvoisier's law. In contrast, gallstone disease typically produces a shrunken, impalpable gallbladder because repeated inflammation has fibrosed its wall. Ultrasound followed by CT then helps localise the level of blockage and plan further investigation.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Clinical Guideline CG188: Gallstone disease",
+  "Tokyo Guidelines 2018: Diagnostic criteria and severity grading of acute cholangitis"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

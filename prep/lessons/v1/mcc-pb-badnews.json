@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "mcc-pb-badnews",
+ "subject": "mcc-professional-behaviours",
+ "title": "Breaking bad news",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Breaking bad news is a staged process, not a single event. Before disclosing, the clinician should **explore the patient's understanding** and find out what information they want. Ask who they want present, and whether they want to hear details or only the main message. Patients with capacity decide what they wish to know, even when a relative is sitting beside them. Clarify this before any probable diagnosis is named.",
+   "say": "Breaking bad news is a staged process, not a single event. Before disclosing, the clinician should explore the patient's understanding and find out what information they want. Ask who they want present, and whether they want details or only the main message. Patients with capacity decide what they wish to know, even when a relative is sitting beside them. Clarify this before any probable diagnosis is named.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Set up privacy"
+     },
+     {
+      "id": "b",
+      "label": "Ask what they know"
+     },
+     {
+      "id": "c",
+      "label": "Ask what they want to know"
+     },
+     {
+      "id": "d",
+      "label": "Share the news"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose the setting and people before speaking. A **private room** with time to sit down is preferred for serious news. Ask the patient whom they want present, and do not let a relative make decisions unless the patient has delegated them or lacks capacity. Where language is a barrier, arrange a **qualified medical interpreter** rather than a family member, because family translation risks filtered or inaccurate information.",
+   "say": "Choose the setting and people before speaking. A private room with time to sit down is preferred for serious news. Ask the patient whom they want present, and do not let a relative make decisions unless the patient has delegated them or lacks capacity. Where language is a barrier, arrange a qualified medical interpreter rather than a family member, because family translation risks filtered or inaccurate information.",
+   "vis": null
+  },
+  {
+   "tx": "Uncertainty must be stated honestly. When a result is suspicious but not diagnostic, say exactly what is known and what is not, then outline the next steps such as biopsy or repeat imaging. Avoid predicting an outcome you cannot support. Anxiety eases when a clear plan is given. When a patient is distressed and asks whether they will die, **acknowledge the emotion** and explore the specific worry before offering prognosis or statistics.",
+   "say": "Uncertainty must be stated honestly. When a result is suspicious but not diagnostic, say exactly what is known and what is not, then outline the next steps such as biopsy or repeat imaging. Avoid predicting an outcome you cannot support. Anxiety eases when a clear plan is given. When a patient is distressed and asks whether they will die, acknowledge the emotion and explore the specific worry before offering prognosis or statistics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Helpful response",
+     "points": [
+      "Name the feeling",
+      "Ask what worries them",
+      "Give a clear next step",
+      "Share prognosis only when asked"
+     ]
+    },
+    "right": {
+     "title": "Unhelpful response",
+     "points": [
+      "Change the subject",
+      "Quote survival figures at once",
+      "Predict an outcome",
+      "Refer the question elsewhere"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Where an error has harmed a patient, such as an overdose of a **potassium-sparing diuretic** causing hyperkalaemia and rising creatinine, the patient should hear about it directly. Disclose openly, apologise, and explain the next steps. Relatives may be told only with the patient's agreement, unless the patient lacks capacity. Document the conversation accurately and record what was said and agreed.",
+   "say": "Where an error has harmed a patient, such as an overdose of a potassium-sparing diuretic causing hyperkalaemia and rising creatinine, the patient should hear about it directly. Disclose openly, apologise, and explain the next steps. Relatives may be told only with the patient's agreement, unless the patient lacks capacity. Document the conversation accurately and record what was said and agreed.",
+   "vis": null
+  },
+  {
+   "tx": "Some conditions carry implications for relatives, such as a prolonged **corrected QT interval** in a young person who has died suddenly. The diagnosis may be inherited. Refer for genetic counselling and family screening, and explain to relatives that they may share the risk. Use plain language and check understanding, because family members often need time and repeated explanation to absorb news about hereditary disease.",
+   "say": "Some conditions carry implications for relatives, such as a prolonged corrected QT interval in a young person who has died suddenly. The diagnosis may be inherited. Refer for genetic counselling and family screening, and explain to relatives that they may share the risk. Use plain language and check understanding, because family members often need time and repeated explanation to absorb news about hereditary disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify inherited risk"
+     },
+     {
+      "id": "b",
+      "label": "Refer genetic counselling"
+     },
+     {
+      "id": "c",
+      "label": "Offer family screening"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

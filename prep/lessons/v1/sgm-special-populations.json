@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "sgm-special-populations",
+ "subject": "ss-general-medicine",
+ "title": "Prescribing in renal, hepatic and pregnancy states",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Renal dosing begins with an estimate of kidney function. The **Cockcroft-Gault** equation estimates creatinine clearance in millilitres per minute, using age, weight and serum creatinine, and it remains the usual basis for drug dosing in India. Women receive a sex-specific correction within the same calculation. **eGFR** is preferred by KDIGO for staging chronic kidney disease, so the two measures answer different questions. Always check whether a label quotes clearance or eGFR before adjusting.",
+   "say": "Renal dosing begins with estimating kidney function. The Cockcroft Gault equation gives creatinine clearance in millilitres per minute, using age, weight and serum creatinine. It is the usual basis for drug dosing in India. Women receive a sex-specific correction inside the same calculation. For staging chronic kidney disease, KDIGO guidance favours eGFR instead. Before adjusting any dose, check whether the drug label quotes clearance or eGFR.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Measure",
+     "Main use"
+    ],
+    "rows": [
+     [
+      "Cockcroft-Gault clearance",
+      "Drug dosing in India"
+     ],
+     [
+      "eGFR",
+      "Staging CKD"
+     ],
+     [
+      "Female correction",
+      "Applied within the calculation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dose adjustment is not a simple proportion of the clearance lost. Most drugs need a longer **dosing interval** or a lower **maintenance dose**, chosen from the drug's own label. Renally cleared antibiotics often need reduction when clearance falls below 30 mL/min. Avoid nephrotoxic agents such as aminoglycosides and NSAIDs where possible. Drugs with a narrow therapeutic index need level monitoring.",
+   "say": "Dose adjustment is not a simple proportion of the clearance lost. Most drugs need a longer dosing interval or a lower maintenance dose, chosen from the drug's own label. Renally cleared antibiotics often need reduction when creatinine clearance falls below 30 millilitres per minute. Avoid nephrotoxic agents such as aminoglycosides and nonsteroidal anti-inflammatory drugs where possible. Drugs with a narrow therapeutic index need level monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Loading dose",
+      "Usually unchanged"
+     ],
+     [
+      "Maintenance dose",
+      "Reduce or extend interval"
+     ],
+     [
+      "Narrow index drug",
+      "Monitor levels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In liver disease, dosing follows the **Child-Pugh** classification. Five parameters are graded: **bilirubin**, **albumin**, **INR**, **ascites** and **encephalopathy**. The summed points place the patient in class A, B or C, reflecting mild, moderate or severe impairment. Class A usually needs no change, class B calls for cautious reduction, and class C is generally avoided or managed with specialist input. Hepatic dosing is less standardised than renal dosing, so check the label and seek hepatology advice.",
+   "say": "In liver disease, dosing follows the Child-Pugh classification. Five parameters are graded: bilirubin, albumin, INR, ascites and encephalopathy. The summed points place the patient in class A, B or C, reflecting mild, moderate or severe impairment. Class A usually needs no change. Class B calls for cautious reduction. Class C is generally avoided or managed with specialist input. Hepatic dosing is less standardised than renal dosing, so check the label and seek hepatology advice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Child-Pugh class",
+     "Severity",
+     "Dosing approach"
+    ],
+    "rows": [
+     [
+      "A",
+      "Mild",
+      "Usually standard dose"
+     ],
+     [
+      "B",
+      "Moderate",
+      "Reduce cautiously"
+     ],
+     [
+      "C",
+      "Severe",
+      "Avoid or specialist input"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy labelling now uses **narrative risk summaries** rather than the older letter categories, so clinicians read the actual evidence for each agent. Known **teratogens** should be reviewed before conception, and where a safer option exists it is usually preferred. Some agents need detailed counselling and documented **contraception** plans. Most small, weakly protein bound drugs enter **breast milk**, so infant exposure should be checked before prescribing.",
+   "say": "Pregnancy labelling now uses narrative risk summaries rather than the older letter categories, so clinicians read the actual evidence for each agent. Known teratogens should be reviewed before conception, and where a safer option exists it is usually preferred. Some agents need detailed counselling and documented contraception plans. Most small, weakly protein bound drugs enter breast milk, so infant exposure should be checked before prescribing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Plan pregnancy"
+     },
+     {
+      "id": "b",
+      "label": "Review teratogens"
+     },
+     {
+      "id": "c",
+      "label": "Switch if needed"
+     },
+     {
+      "id": "d",
+      "label": "Monitor fetus"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_a1838dfe49e2",
+  "q_4921ba783beb",
+  "q_478a96309824"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+  "NICE NG203 Chronic kidney disease",
+  "NICE NG28 Type 2 diabetes in adults"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 7
+ }
+}

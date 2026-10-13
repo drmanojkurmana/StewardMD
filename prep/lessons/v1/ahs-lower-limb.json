@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "ahs-lower-limb",
+ "subject": "adult-health-surgery",
+ "title": "Hip, femur and knee injuries: high-yield principles for NEET-PG and INI-CET",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Hip and femur injuries in older adults are time-critical. A **displaced intracapsular femoral neck fracture** disrupts the blood supply to the femoral head, so **avascular necrosis** is a major risk. Surgery, usually fixation or arthroplasty, is needed promptly once the patient is medically fit. Pain on internal rotation and inability to straight-leg raise after a fall suggest hip pathology even when plain films look normal.",
+   "say": "Hip and femur injuries in older adults are time-critical. A displaced intracapsular femoral neck fracture disrupts the blood supply to the femoral head, so avascular necrosis is a major risk. Surgery, usually fixation or arthroplasty, is needed promptly once the patient is medically fit. Pain on internal rotation and inability to straight-leg raise after a fall suggest hip pathology even when plain films look normal.",
+   "vis": null
+  },
+  {
+   "tx": "When plain radiographs are normal but a hip fracture is suspected, **MRI** is the best next investigation. Early intracapsular fractures can be radiographically occult. MRI shows bone marrow oedema and fracture lines that X-rays miss, and it is highly sensitive. Repeating plain films in two weeks is not the right first step, because it delays diagnosis and surgery.",
+   "say": "When plain radiographs are normal but a hip fracture is suspected, MRI is the best next investigation. Early intracapsular fractures can be radiographically occult. MRI shows bone marrow oedema and fracture lines that X-rays miss, and it is highly sensitive. Repeating plain films in two weeks is not the right first step, because it delays diagnosis and surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Likely meaning"
+    ],
+    "rows": [
+     [
+      "Normal X-ray, groin pain, cannot bear weight",
+      "Occult hip fracture"
+     ],
+     [
+      "Pain on internal rotation",
+      "Intracapsular hip pathology"
+     ],
+     [
+      "Inability to straight-leg raise",
+      "Hip joint or capsular injury"
+     ],
+     [
+      "MRI result",
+      "Confirms fracture and oedema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A long lie on the floor, often more than several hours, can cause **rhabdomyolysis**. Muscle breakdown releases **myoglobin**, potassium and phosphate. Very high creatine kinase, dark urine and rising creatinine point to rhabdomyolysis with acute kidney injury. Early, adequate intravenous fluids and monitoring of urine output protect the kidneys. Hyperkalaemia needs urgent ECG monitoring and treatment.",
+   "say": "A long lie on the floor, often more than several hours, can cause rhabdomyolysis. Muscle breakdown releases myoglobin, potassium and phosphate. Very high creatine kinase, dark urine and rising creatinine point to rhabdomyolysis with acute kidney injury. Early, adequate intravenous fluids and monitoring of urine output protect the kidneys. Hyperkalaemia needs urgent ECG monitoring and treatment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prolonged lie"
+     },
+     {
+      "id": "b",
+      "label": "Muscle breakdown"
+     },
+     {
+      "id": "c",
+      "label": "Myoglobin and potassium release"
+     },
+     {
+      "id": "d",
+      "label": "Kidney injury and hyperkalaemia"
+     },
+     {
+      "id": "e",
+      "label": "IV fluids and monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A knee injury with **gross instability** may be a **knee dislocation**. A cool, pale foot, absent distal pulses and reduced ankle-brachial index mean **arterial compromise**, most often from popliteal artery injury. This is a limb-threatening emergency. Urgent vascular surgical referral and angiography are needed, because ischaemia can cause irreversible damage within hours. Intact sensation does not exclude vascular injury.",
+   "say": "A knee injury with gross instability may be a knee dislocation. A cool, pale foot, absent distal pulses and reduced ankle-brachial index mean arterial compromise, most often from popliteal artery injury. This is a limb-threatening emergency. Urgent vascular surgical referral and angiography are needed, because ischaemia can cause irreversible damage within hours. Intact sensation does not exclude vascular injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Knee dislocation alone",
+     "points": [
+      "Gross instability",
+      "Ligament disruption",
+      "Reduced limb function"
+     ]
+    },
+    "right": {
+     "title": "With vascular compromise",
+     "points": [
+      "Cool pale foot",
+      "Absent distal pulses",
+      "Urgent vascular referral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute knee pain with a pivoting injury, a pop and rapid effusion suggests an **anterior cruciate ligament** tear. A positive Lachman test supports this, and normal X-rays exclude fracture as the main cause. **MRI** of the knee is the best next investigation. It shows ligaments, menisci and cartilage without radiation. Patellar dislocation in adolescents may leave a visible osteochondral flake on X-ray and needs separate assessment.",
+   "say": "Acute knee pain with a pivoting injury, a pop and rapid effusion suggests an anterior cruciate ligament tear. A positive Lachman test supports this, and normal X-rays exclude fracture as the main cause. MRI of the knee is the best next investigation. It shows ligaments, menisci and cartilage without radiation. Patellar dislocation in adolescents may leave a visible osteochondral flake on X-ray and needs separate assessment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Suggests"
+    ],
+    "rows": [
+     [
+      "Pivot injury with a pop",
+      "ACL rupture"
+     ],
+     [
+      "Rapid effusion within hours",
+      "Haemarthrosis"
+     ],
+     [
+      "Positive Lachman or anterior drawer",
+      "ACL laxity"
+     ],
+     [
+      "Bone flake on medial patellar edge",
+      "Osteochondral fracture after patellar dislocation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In a child or adolescent with a limp, hip or knee pain and an obese body habitus, **slipped capital femoral epiphysis** must be excluded. Reduced internal rotation and external rotation of the leg on hip flexion are classic signs. Management is **non-weight-bearing** with urgent orthopaedic referral, because displacement can compromise the femoral head blood supply and cause avascular necrosis. Manipulation or steroid injection is not appropriate.",
+   "say": "In a child or adolescent with a limp, hip or knee pain and an obese body habitus, slipped capital femoral epiphysis must be excluded. Reduced internal rotation and external rotation of the leg on hip flexion are classic signs. Management is non-weight-bearing with urgent orthopaedic referral, because displacement can compromise the femoral head blood supply and cause avascular necrosis. Manipulation or steroid injection is not appropriate.",
+   "vis": null
+  },
+  {
+   "tx": "Before surgery for a hip fracture, check haemoglobin, renal function and clotting. Anaemia reduces the reserve to tolerate operative blood loss, so **crossmatched blood** should be prepared without delaying surgery. Normal creatinine and INR mean no major coagulopathy barrier. Surgery should not be postponed simply until haemoglobin normalises. Raised creatinine or potassium needs correction and monitoring first.",
+   "say": "Before surgery for a hip fracture, check haemoglobin, renal function and clotting. Anaemia reduces the reserve to tolerate operative blood loss, so crossmatched blood should be prepared without delaying surgery. Normal creatinine and INR mean no major coagulopathy barrier. Surgery should not be postponed simply until haemoglobin normalises. Raised creatinine or potassium needs correction and monitoring first.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE CKS: Knee injury",
+  "Apley and Solomon's System of Orthopaedics and Trauma (Apley and Solomon)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "sid-amr-epi",
+ "subject": "ss-infectious-diseases",
+ "title": "Antimicrobial resistance epidemiology and One Health",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Antimicrobial resistance occurs when **bacteria** evolve to survive the drugs meant to kill them. Resistance moves between humans, animals and the environment, so **surveillance** must cover all three settings. The WHO **priority pathogens** list ranks resistant bacteria by urgency, and the critical group includes multidrug-resistant Gram-negative organisms such as Acinetobacter baumannii and Enterobacterales. Examiners often test this list, so learn which pathogens are critical.",
+   "say": "Antimicrobial resistance happens when bacteria evolve so that the drugs meant to kill them stop working. Resistance moves between humans, animals and the environment, so surveillance has to cover all three. The World Health Organization priority pathogens list ranks resistant bacteria by urgency, and the critical group includes multidrug-resistant Gram-negative organisms such as Acinetobacter baumannii. Examiners often ask about this list, so learn which pathogens are critical.",
+   "vis": null
+  },
+  {
+   "tx": "The WHO **AWaRe** classification sorts antibiotics into three groups. Access agents are first-line choices with lower resistance potential. Watch agents carry a higher resistance risk and need careful, targeted use. Reserve agents are last-resort drugs kept for multidrug-resistant infections. National guidance aims for most empirical prescribing to come from the Access group.",
+   "say": "The World Health Organization AWaRe classification sorts antibiotics into three groups. Access agents are first-line choices with lower resistance potential. Watch agents carry a higher resistance risk and need careful, targeted use. Reserve agents are last-resort drugs kept for multidrug-resistant infections. National guidance aims for most empirical prescribing to come from the Access group.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Resistance risk",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Access",
+      "Lower",
+      "First-line empirical use"
+     ],
+     [
+      "Watch",
+      "Higher",
+      "Restricted, targeted use"
+     ],
+     [
+      "Reserve",
+      "Highest",
+      "Last-resort resistant infections"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**One Health** recognises that human, animal and environmental health are closely linked. Antibiotic use in food animals, particularly for **growth promotion**, can select **resistant bacteria** that reach people through food, water and direct contact. The **National Action Plan on AMR** therefore addresses veterinary use alongside human prescribing, so that control measures span every sector.",
+   "say": "One Health recognises that human, animal and environmental health are closely linked. Antibiotic use in food animals, particularly for growth promotion, can select resistant bacteria that reach people through food, water and direct contact. The National Action Plan on AMR therefore addresses veterinary use alongside human prescribing, so that control measures span every sector.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h",
+      "label": "Human health"
+     },
+     {
+      "id": "a",
+      "label": "Animal health"
+     },
+     {
+      "id": "e",
+      "label": "Environment"
+     },
+     {
+      "id": "o",
+      "label": "One Health action"
+     }
+    ],
+    "edges": [
+     [
+      "h",
+      "o"
+     ],
+     [
+      "a",
+      "o"
+     ],
+     [
+      "e",
+      "o"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**GLASS** is the WHO Global Antimicrobial Resistance and Use Surveillance System, collecting resistance and use data from countries worldwide. ICMR's AMRSN is the national counterpart that contributes Indian data to this global picture. Use data show how antibiotics are consumed, while resistance data show which bacteria survive. Together they guide policy and stewardship.",
+   "say": "GLASS is the World Health Organization Global Antimicrobial Resistance and Use Surveillance System, collecting resistance and use data from countries worldwide. The Indian Council of Medical Research AMRSN network is the national counterpart that contributes Indian data to this global picture. Use data show how antibiotics are consumed, while resistance data show which bacteria survive. Together they guide policy and stewardship.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GLASS (WHO)",
+     "points": [
+      "Global collection",
+      "Resistance and use data",
+      "Country reporting"
+     ]
+    },
+    "right": {
+     "title": "ICMR AMRSN",
+     "points": [
+      "National network",
+      "Sentinel hospital sites",
+      "Contributes Indian data"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_1da5b9dcefd1",
+  "q_2b176afd3f57",
+  "q_a34f1b2089d0"
+ ],
+ "src": [],
+ "refs": [
+  "National Action Plan on Antimicrobial Resistance 2017 (Ministry of Health and Family Welfare, India)",
+  "WHO Global Action Plan on Antimicrobial Resistance 2015",
+  "WHO Bacterial Priority Pathogens List 2017",
+  "WHO AWaRe Antibiotic Book 2022"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

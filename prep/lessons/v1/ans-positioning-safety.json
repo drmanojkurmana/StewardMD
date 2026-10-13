@@ -1,0 +1,124 @@
+{
+ "v": 1,
+ "module": "ans-positioning-safety",
+ "subject": "anaesthesia",
+ "title": "Patient positioning and operating room safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Patient position changes **vital capacity** and lung mechanics. In **Trendelenburg** (head down), abdominal viscera push the diaphragm cephalad, so vital capacity, functional residual capacity, total lung volume and lung compliance all fall. Respiratory rate is not affected. Trendelenburg also keeps a left ventricular air bubble away from coronary ostia in air embolism, and it can raise intraocular and intracranial pressure.",
+   "say": "In Trendelenburg position, the head is lowered. Abdominal viscera push the diaphragm upwards, so vital capacity, functional residual capacity, total lung volume and lung compliance all fall. Respiratory rate is not affected. Trendelenburg also keeps a left ventricular air bubble away from the coronary ostia in air embolism, and it can raise intraocular and intracranial pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Trendelenburg effect"
+    ],
+    "rows": [
+     [
+      "Vital capacity",
+      "Falls"
+     ],
+     [
+      "Functional residual capacity",
+      "Falls"
+     ],
+     [
+      "Lung compliance",
+      "Falls"
+     ],
+     [
+      "Respiratory rate",
+      "Unchanged"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sitting position** is used for posterior fossa surgery and cervical laminectomy. It reduces bleeding and improves venous drainage, but carries the risk of **venous air embolism**, the most serious complication. Postural hypotension affects about one third of patients. Pneumocephalus, macroglossia and quadriplegia are other reported complications, while tongue oedema is not a recognised hallmark.",
+   "say": "The sitting position is used for posterior fossa surgery and cervical laminectomy. It reduces bleeding and improves venous drainage, but carries the risk of venous air embolism, the most serious complication. Postural hypotension affects about one third of patients. Pneumocephalus, macroglossia and quadriplegia are other reported complications.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Operative site above heart"
+     },
+     {
+      "id": "b",
+      "label": "Air enters veins"
+     },
+     {
+      "id": "c",
+      "label": "Falling end-tidal CO2"
+     },
+     {
+      "id": "d",
+      "label": "Hypotension and mill-wheel murmur"
+     },
+     {
+      "id": "e",
+      "label": "Flood field, lower head, support circulation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **venous air embolism**, precordial Doppler is the most practical early monitor, though transoesophageal echocardiography is more sensitive. Treatment includes flooding the surgical site with saline, rescue head-down or left lateral positioning, stopping nitrous oxide and giving inotropic support. Quadriplegia results from cervical spine ischaemia when the neck is over-flexed, so keep at least two finger-breadths between chin and neck.",
+   "say": "In venous air embolism, precordial Doppler is the most practical early monitor, though transoesophageal echocardiography is more sensitive. Treatment includes flooding the surgical site with saline, rescue head-down or left lateral positioning, and inotropic support. Keep at least two finger-breadths between chin and neck to prevent quadriplegia.",
+   "vis": null
+  },
+  {
+   "tx": "**Airway fire** needs three elements: heat or ignition, an oxidiser (O2, air or N2O) and fuel. Volatile agents are non-combustible, but the laser tube is covered with reflecting layers. Laser surgery uses a low-volume, high-pressure cuff filled with water and dye, which also acts as an extinguisher. In a fire, stop O2 and N2O, pour saline, remove the tube and reintubate.",
+   "say": "An airway fire needs heat or ignition, an oxidiser such as oxygen, air or nitrous oxide, and fuel. Volatile agents are non-combustible. In laser surgery, a low-volume, high-pressure cuff filled with water and dye is used, and the water acts as an extinguisher. In a fire, stop oxygen and nitrous oxide, pour saline, remove the tube and reintubate.",
+   "vis": null
+  },
+  {
+   "tx": "**Scavenging** removes waste anaesthetic gases from the operating theatre. The maximum permissible N2O concentration in theatre is 25 ppm, while halogenated agents must stay below 2 ppm. For a patient in the beach chair position, the arm cuff overestimates cerebral pressure, so the transducer should be zeroed at the external auditory meatus to judge cerebral perfusion.",
+   "say": "Scavenging removes waste anaesthetic gases from the operating theatre. The maximum permissible nitrous oxide concentration in theatre is 25 ppm, while halogenated agents must stay below 2 ppm. In the beach chair position, the arm cuff overestimates cerebral pressure, so zero the transducer at the external auditory meatus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "ba36da3d-db90-4a5e-9b2d-bbcacb3b1657",
+  "8521d3bf-35b8-4312-be43-d52f01f57e24",
+  "3c8db1d8-e8e7-4c53-989c-d7b006f0596a"
+ ],
+ "src": [],
+ "refs": [
+  "Gregory's Pediatric Anesthesia (2012)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 27
+ }
+}

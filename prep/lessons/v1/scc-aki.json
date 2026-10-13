@@ -1,0 +1,99 @@
+{
+ "v": 1,
+ "module": "scc-aki",
+ "subject": "ss-critical-care",
+ "title": "Acute kidney injury in critical illness: staging, causes and key management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**KDIGO criteria** flag acute kidney injury when serum creatinine climbs or urine volume drops. The most severe band, **stage 3**, applies when creatinine reaches three times the pre-illness value, or passes 4.0 mg/dL, or when dialysis is begun. Very low urine output lasting a full day, or no urine for half a day, also qualifies. Compare against the latest steady value recorded before the illness, since a reassuring first result can still hide evolving injury.",
+   "say": "KDIGO criteria flag acute kidney injury when creatinine rises or urine output falls. The most severe band, stage 3, applies when creatinine reaches three times the pre-illness value, or climbs past 4.0 milligrams per decilitre, or when dialysis is started. Very low urine output lasting a full day, or no urine for half a day, also qualifies. Always compare with the latest steady value recorded before the illness. A reassuring first blood test does not rule out evolving injury, because the blood level responds slowly to damage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Stage 3 threshold"
+    ],
+    "rows": [
+     [
+      "Serum creatinine",
+      "Three times baseline, or 4.0 mg/dL or more"
+     ],
+     [
+      "Urine output",
+      "Under 0.3 mL/kg/h for 24 hours or longer"
+     ],
+     [
+      "Absent urine",
+      "No urine for 12 hours or longer"
+     ],
+     [
+      "Dialysis",
+      "Kidney replacement therapy started"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classify the **cause** as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, excluded early by bladder scan and renal ultrasound. Urine sodium or **FeNa** below 1% supports prerenal states, but is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
+   "say": "Classify the cause as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, which is excluded early with a bladder scan and renal ultrasound. Urine sodium or FENa below 1 percent supports a prerenal state, but it is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prerenal",
+     "points": [
+      "Hypovolaemia or sepsis",
+      "Cardiorenal or hepatorenal",
+      "NSAIDs and RAS blockers",
+      "FeNa below 1 percent"
+     ]
+    },
+    "right": {
+     "title": "Intrinsic and postrenal",
+     "points": [
+      "Acute tubular injury",
+      "Interstitial nephritis or GN",
+      "Obstruction on ultrasound",
+      "FeNa unreliable in sepsis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Give **buffered crystalloid** only for hypovolaemia or likely fluid responsiveness. Ringer lactate or Plasma-Lyte is preferred over 0.9% saline, given in boluses with reassessment after each. Never use hydroxyethyl starch, which raises the need for dialysis. Target MAP above 65 mmHg and add a vasopressor if fluids fail. Avoid repeated boluses in an oliguric patient who is already euvolaemic or overloaded.",
+   "say": "Give buffered crystalloid only for hypovolaemia or likely fluid responsiveness. Ringer lactate or Plasma-Lyte is preferred over 0.9 percent saline, given in boluses with reassessment after each. Never use hydroxyethyl starch, which raises the need for dialysis. Target a mean arterial pressure above 65 mmHg and add a vasopressor if fluids fail. Avoid repeated boluses in an oliguric patient who is already euvolaemic or overloaded.",
+   "vis": null
+  },
+  {
+   "tx": "Use **loop diuretics** only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
+   "say": "Use loop diuretics only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1291bcc53e1f",
+  "q_2b0124ee78da",
+  "q_3be7f0f0af1c"
+ ],
+ "src": [
+  "kb-clinical-protocols-acute-kidney-injury"
+ ],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 661,
+  "itemN": 46
+ }
+}

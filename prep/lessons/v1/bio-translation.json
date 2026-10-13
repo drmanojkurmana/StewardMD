@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "bio-translation",
+ "subject": "biochemistry",
+ "title": "Genetic code, translation and protein targeting",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **genetic code** is read in triplets called **codons**. Each codon is a three-base word in mRNA. There are 64 codons. Three of them are stop codons, and the remaining 61 code for 20 amino acids. Because there are more codons than amino acids, the code is **degenerate**. One amino acid can therefore be specified by more than one codon. Methionine and tryptophan are the only amino acids with a single codon.",
+   "say": "The genetic code is read in triplets called codons. Each codon is a three base word in messenger RNA. There are sixty four codons. Three are stop codons, and the remaining sixty one code for twenty amino acids. Because there are more codons than amino acids, the code is degenerate. One amino acid can be specified by more than one codon. Methionine and tryptophan are the only amino acids with a single codon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Meaning",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Degenerate",
+      "Several codons, one amino acid",
+      "Explains silent mutations"
+     ],
+     [
+      "Unambiguous",
+      "One codon, one amino acid",
+      "Ambiguity is not allowed"
+     ],
+     [
+      "Universal",
+      "Nearly the same in all life",
+      "Few mitochondrial exceptions"
+     ],
+     [
+      "Comma-less, non-overlapping",
+      "Read from a fixed start",
+      "No punctuation between codons"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three codons are **stop codons**: UAA, UAG and UGA. They do not code for any amino acid. UAG is the amber codon, UGA is the opal codon and UAA is the ochre codon. The start codon is AUG, which codes for methionine in eukaryotes and N-formyl methionine in prokaryotes. GUG can rarely act as an initiator. In mitochondria, UGA codes for tryptophan.",
+   "say": "Three codons are stop codons: U A A, U A G and U G A. They do not code for any amino acid. U A G is the amber codon, U G A is the opal codon and U A A is the ochre codon. The start codon is A U G, which codes for methionine in eukaryotes and N formyl methionine in prokaryotes. G U G can rarely act as an initiator. In mitochondria, U G A codes for tryptophan.",
+   "vis": null
+  },
+  {
+   "tx": "**Translation** has three phases. In **initiation**, the small ribosomal subunit, the initiator tRNA and the mRNA assemble at the AUG start codon. In **elongation**, a new aminoacyl tRNA enters the A site. The **peptidyl transferase** centre, which is an rRNA ribozyme in the large subunit, forms the peptide bond. In **termination**, a release factor binds a stop codon, and the polypeptide is released from the P site.",
+   "say": "Translation has three phases. In initiation, the small ribosomal subunit, the initiator tRNA and the messenger RNA assemble at the A U G start codon. In elongation, a new aminoacyl tRNA enters the A site. The peptidyl transferase centre, which is an R N A ribozyme in the large subunit, forms the peptide bond. In termination, a release factor binds a stop codon, and the polypeptide is released from the P site.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i",
+      "label": "Initiation",
+      "sub": "Small subunit at AUG"
+     },
+     {
+      "id": "e",
+      "label": "Elongation",
+      "sub": "A site entry, peptide bond"
+     },
+     {
+      "id": "t",
+      "label": "Termination",
+      "sub": "Stop codon, release factor"
+     }
+    ],
+    "edges": [
+     [
+      "i",
+      "e"
+     ],
+     [
+      "e",
+      "t"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **aminoacyl tRNA synthetase** charges each tRNA with its correct amino acid, using ATP. This enzyme is the main proofreading step that checks the match between amino acid and tRNA. The **wobble hypothesis** explains why the third base of a codon can pair loosely with the anticodon. This allows fewer tRNA species than codons. Every mature tRNA ends in the sequence CCA at its 3 prime end.",
+   "say": "The aminoacyl tRNA synthetase charges each tRNA with its correct amino acid, using ATP. This enzyme is the main proofreading step that checks the match between amino acid and tRNA. The wobble hypothesis explains why the third base of a codon can pair loosely with the anticodon. This allows fewer tRNA species than codons. Every mature tRNA ends in the sequence C C A at its three prime end.",
+   "vis": null
+  },
+  {
+   "tx": "A **point mutation** changes one base. A **transition** swaps a purine for a purine, or a pyrimidine for a pyrimidine. A **transversion** swaps a purine for a pyrimidine, or the reverse. A **frameshift** comes from insertion or deletion of bases not in multiples of three. A **nonsense** mutation creates a stop codon. A **silent** mutation changes the codon but not the amino acid. Deletions or insertions of three bases do not shift the frame.",
+   "say": "A point mutation changes one base. A transition swaps a purine for a purine, or a pyrimidine for a pyrimidine. A transversion swaps a purine for a pyrimidine, or the reverse. A frameshift comes from insertion or deletion of bases not in multiples of three. A nonsense mutation creates a stop codon. A silent mutation changes the codon but not the amino acid. Deletions or insertions of three bases do not shift the frame.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mutation",
+     "Effect",
+     "Typical example"
+    ],
+    "rows": [
+     [
+      "Silent",
+      "Same amino acid",
+      "Degeneracy allows it"
+     ],
+     [
+      "Missense",
+      "Different amino acid",
+      "One amino acid swapped"
+     ],
+     [
+      "Nonsense",
+      "Premature stop",
+      "Stop codon formed"
+     ],
+     [
+      "Frameshift",
+      "Reading frame shifted",
+      "Base insertion or deletion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Protein targeting** uses signal sequences. A **signal recognition particle** binds the signal peptide on the nascent chain in the cytosol and pauses translation. It then guides the ribosome to the rough endoplasmic reticulum. Misfolded or unwanted proteins are tagged with **ubiquitin**. The tagged proteins are then degraded by the **proteasome**, an ATP dependent process. Impaired ubiquitination causes accumulation of misfolded proteins.",
+   "say": "Protein targeting uses signal sequences. A signal recognition particle binds the signal peptide on the nascent chain in the cytosol and pauses translation. It then guides the ribosome to the rough endoplasmic reticulum. Misfolded or unwanted proteins are tagged with ubiquitin. The tagged proteins are then degraded by the proteasome, an A T P dependent process. Impaired ubiquitination causes accumulation of misfolded proteins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Signal peptide"
+     },
+     {
+      "id": "r",
+      "label": "SRP binds, pause"
+     },
+     {
+      "id": "e",
+      "label": "Rough ER targeting"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "r"
+     ],
+     [
+      "r",
+      "e"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "4f64a560-3dc1-4c36-84f2-c92b1b071963",
+  "738ec1fa-e427-4bf6-9b51-4c1a511e0c75",
+  "a9770605-4dff-4db5-99bb-159ceeacd81c"
+ ],
+ "src": [],
+ "refs": [
+  "Harper's Illustrated Biochemistry (Bender, Botham, Weil, Kennelly, Murray, Rodwell, Eds)",
+  "Lippincott's Illustrated Reviews: Biochemistry"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 318
+ }
+}

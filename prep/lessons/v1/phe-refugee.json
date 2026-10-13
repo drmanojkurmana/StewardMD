@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "phe-refugee",
+ "subject": "population-health-and-ethics",
+ "title": "Refugee and migrant health: first-contact screening and care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Refugees and migrants often arrive with **latent tuberculosis**, under-immunised children and language barriers that hide symptoms. A structured initial health check is the first priority. Screening for infection without symptoms or radiographic change points to latent rather than active disease. The aim is to find treatable problems early and link people to ongoing primary care.",
+   "say": "Refugees and migrants often arrive with latent tuberculosis, under-immunised children and language barriers that hide symptoms. A structured initial health check is the first priority. Screening for infection without symptoms or radiographic change points to latent rather than active disease. The aim is to find treatable problems early and link people to ongoing primary care.",
+   "vis": null
+  },
+  {
+   "tx": "A positive **interferon-gamma release assay** shows infection, but it does not separate latent from active disease. Active tuberculosis needs symptoms, abnormal chest imaging or microbiological proof. A well patient with a normal chest X-ray has latent infection. Preventive therapy then targets the future reactivation risk, and the four-drug regimen is reserved for active disease.",
+   "say": "A positive interferon-gamma release assay shows infection, but it does not separate latent from active disease. Active tuberculosis needs symptoms, abnormal chest imaging or microbiological proof. A well patient with a normal chest X-ray has latent infection. Preventive therapy then targets the future reactivation risk, and the four-drug regimen is reserved for active disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Latent TB",
+     "Active TB"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Absent",
+      "Cough, fever, weight loss"
+     ],
+     [
+      "Chest X-ray",
+      "Normal",
+      "Often abnormal"
+     ],
+     [
+      "Sputum",
+      "Negative",
+      "May be positive"
+     ],
+     [
+      "Management",
+      "Preventive therapy",
+      "Four-drug treatment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A refugee child with an unclear record needs a **catch-up immunisation schedule** for age, started at the same visit. Parental recall is partial, so it cannot confirm status. Delay leaves her exposed to vaccine-preventable disease. Serology is only used for selected antigens in specific circumstances, not as a routine gate before every dose.",
+   "say": "A refugee child with an unclear record needs a catch-up immunisation schedule for age, started at the same visit. Parental recall is partial, so it cannot confirm status. Delay leaves her exposed to vaccine-preventable disease. Serology is only used for selected antigens in specific circumstances, not as a routine gate before every dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unclear record"
+     },
+     {
+      "id": "b",
+      "label": "Do not delay"
+     },
+     {
+      "id": "c",
+      "label": "Catch-up for age"
+     },
+     {
+      "id": "d",
+      "label": "Serology selectively"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "if indicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Language barriers change what a clinician hears. A **professional interpreter** should be booked rather than a family member, because relatives may alter, omit or soften disclosure. Sexual health and safety at home are sensitive topics. A private consultation allows honest history and protects confidentiality, and it supports identifying possible abuse or coercion.",
+   "say": "Language barriers change what a clinician hears. A professional interpreter should be booked rather than a family member, because relatives may alter, omit or soften disclosure. Sexual health and safety at home are sensitive topics. A private consultation allows honest history and protects confidentiality, and it supports identifying possible abuse or coercion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Family interpreter",
+     "points": [
+      "Can edit or omit answers",
+      "Breaches privacy",
+      "Unsuitable for sensitive topics"
+     ]
+    },
+    "right": {
+     "title": "Professional interpreter",
+     "points": [
+      "Accurate, neutral translation",
+      "Supports private consultation",
+      "Preserves confidentiality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Refugees face **health inequity** from displacement, trauma and barriers to care. Mental health screening, including for post-traumatic stress, should be part of the first visit. Ethically, clinicians must respect autonomy while ensuring safety. Information about the patient must be shared only with consent or where legally required, and the patient should understand what is being tested.",
+   "say": "Refugees face health inequity from displacement, trauma and barriers to care. Mental health screening, including for post-traumatic stress, should be part of the first visit. Ethically, clinicians must respect autonomy while ensuring safety. Information about the patient must be shared only with consent or where legally required, and the patient should understand what is being tested.",
+   "vis": null
+  },
+  {
+   "tx": "Summarise the approach: screen systematically, distinguish **latent from active infection**, complete immunisation without waiting for perfect records, and use professional interpreters for private history. Each step reduces missed disease and protects vulnerable people. Follow-up and linkage to ongoing primary care complete the initial health check.",
+   "say": "Summarise the approach: screen systematically, distinguish latent from active infection, complete immunisation without waiting for perfect records, and use professional interpreters for private history. Each step reduces missed disease and protects vulnerable people. Follow-up and linkage to ongoing primary care complete the initial health check.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 3
+ }
+}

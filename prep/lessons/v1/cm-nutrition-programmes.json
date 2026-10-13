@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "cm-nutrition-programmes",
+ "subject": "community-medicine",
+ "title": "Nutritional assessment and nutrition programmes: ICDS, growth monitoring and mid-day meals",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Growth monitoring is the cornerstone of child nutrition assessment. The **Road to Health chart**, first designed by David Morley and later modified by WHO, is a visible display of a child's physical growth. It is plotted mainly as **weight-for-age**, because weight is the most sensitive indicator of growth; a child can lose weight without losing height. The space between the two growth curves is called the road to health, and the direction of growth matters more than the position of dots.",
+   "say": "Growth monitoring is the cornerstone of child nutrition assessment. The Road to Health chart, first designed by David Morley and later modified by WHO, is a visible display of a child's physical growth. It is plotted mainly as weight-for-age, because weight is the most sensitive indicator of growth. A child can lose weight without losing height. The space between the two growth curves is called the road to health, and the direction of growth matters more than the position of dots.",
+   "vis": null
+  },
+  {
+   "tx": "Under ICDS, the MGRS-based chart is used by Anganwadi workers and ASHAs. A child between **minus 2 and minus 3 SD** is in the yellow zone of mild to moderate malnutrition and is referred to the PHC. A child below **minus 3 SD** is in the red zone of severe malnutrition and must be referred immediately to a higher centre. Mid-arm circumference below 12.5 cm in children aged 1 to 5 years signals moderate to severe malnutrition.",
+   "say": "Under ICDS, the MGRS-based chart is used by Anganwadi workers and ASHAs. A child between minus 2 and minus 3 SD is in the yellow zone of mild to moderate malnutrition and is referred to the PHC. A child below minus 3 SD is in the red zone of severe malnutrition and must be referred immediately to a higher centre. Mid-arm circumference below 12.5 cm in children aged 1 to 5 years signals moderate to severe malnutrition.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Above minus 2 SD",
+      "sub": "Normal, continue monitoring"
+     },
+     {
+      "id": "b",
+      "label": "Minus 2 to minus 3 SD",
+      "sub": "Yellow, refer to PHC"
+     },
+     {
+      "id": "c",
+      "label": "Below minus 3 SD",
+      "sub": "Red, refer to higher centre"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Waterlow's classification separates two types of **protein energy malnutrition**. Stunting, a low height-for-age, reflects chronic or past deprivation and is an index of duration. Wasting, a low weight-for-height, reflects acute rapid loss and is an index of severity. Weight-for-age is a composite measure. The IAP grades PEM by percentage of ideal weight: above 80 percent is normal, 71 to 80 percent is grade 1, 61 to 70 percent is grade 2, 51 to 60 percent is grade 3, and below 50 percent is grade 4.",
+   "say": "Waterlow's classification separates two types of protein energy malnutrition. Stunting, a low height-for-age, reflects chronic deprivation and is an index of duration. Wasting, a low weight-for-height, reflects acute loss and is an index of severity. The IAP grades PEM by percentage of ideal weight: above 80 percent is normal, 71 to 80 percent is grade 1, 61 to 70 percent is grade 2, 51 to 60 percent is grade 3, and below 50 percent is grade 4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Grade",
+     "Percent of ideal weight"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "Above 80"
+     ],
+     [
+      "Grade 1",
+      "71 to 80"
+     ],
+     [
+      "Grade 2",
+      "61 to 70"
+     ],
+     [
+      "Grade 3",
+      "51 to 60"
+     ],
+     [
+      "Grade 4",
+      "Below 50"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mid-day meal scheme**, also called the school lunch programme, comes under the Ministry of Education and has run since 1961. Its meal must be a supplement, not a substitute, to home diet. It should supply at least one third of total energy and half of protein needs. The revised cooked meal provides 300 calories and 8 to 12 grams of protein to children in classes I to V. Nodal ministry for ICDS is the Ministry of Women and Child Development.",
+   "say": "The mid-day meal scheme, also called the school lunch programme, comes under the Ministry of Education and has run since 1961. Its meal must be a supplement to home diet. It should supply at least one third of total energy and half of protein needs. The revised cooked meal provides 300 calories and 8 to 12 grams of protein to children in classes one to five. The nodal ministry for ICDS is the Ministry of Women and Child Development.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Requirement"
+    ],
+    "rows": [
+     [
+      "Energy",
+      "At least one third"
+     ],
+     [
+      "Protein",
+      "At least half"
+     ],
+     [
+      "Cooked meal",
+      "300 kcal, 8 to 12 g protein"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "8fa588e2-dc87-4019-9e2d-1386ff0c4703",
+  "0638a7ab-0848-4a71-85b9-0e640a776016",
+  "17aa9d64-24b3-4688-bead-0478ee609426"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "WHO Child Growth Standards (MGRS 2006)",
+  "ICDS revised nutrition norms, Government of India"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 148
+ }
+}

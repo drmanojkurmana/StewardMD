@@ -8,9 +8,9 @@ neutral truth or hidden, with a guard test that fails on regression. While
 rebasing, #1524 landed the MRCP banks (Part 1: 1,507; Part 2 Written: 1,551;
 `prep/bank/v5/mrcp-*` verified present) and flipped both MRCP profiles to
 available data-driven, so Tests and Arena are open for MRCP with no code
-change. Content for the 191 empty + 174 thin modules is NOT built yet (bank
-pipelines own generation) and is reported below as exact remainder with cost
-to finish.
+change. Content: all 6 live zero-item modules filled with 163
+blind-verified MCQs (overlay set maik26, shipped to R2 and wired into the
+app); 186 thin modules and PYQ-without-explanation remain, costed below.
 
 ## What was built this turn (branch `fleet/no-coming-soon-ui-guard`)
 
@@ -45,28 +45,96 @@ Per exam/subject before → after (student-visible wording):
 
 ## Remainder (content, NOT done) with cost to finish
 
-- 191 zero-item modules (183 PLAB/MRCS scaffold + 8 real SS gaps, §3 of
-  inventory) and 174 thin (<10) modules: min 25 MCQs each ≈ 9,100+ items.
-- PYQ items with no explanation: count unknown from repo (live PYQ file is
-  R2-only; manifest gives explained=942, total unstated).
-- Cost evidence (ledger): bank-amc-mccqe $1.5595/~3071 items;
-  bank-plab-mrcs $2.4187 in flight; bank-mrcp-gen-* ~$2.4 pilot.
-  Finish estimate ≈ $5-10 at observed rates: inside the $30 job budget and
-  the $79.72 headroom to the $192 stop.
-- Generation belongs to the bank pipelines (gen.mjs/qgen, haiku gen, sonnet
-  blind-key verify, gates g1-g5/style/g9b/verbatim/dup, dedupe, overlays),
-  already in flight (muse-bank-plab-mrcs / step2ck / mrcp logs); their API
-  quota was 429-exhausted at ship time. Next: run the priority order in
-  inventory §4 when quota resets, then flip Step-2-CK/MRCP profiles to
-  available (data-driven, no code change) and re-run the guard.
-- Profiles: mrcp-part1/mrcp-part2-written flipped to available by #1524
-  (bank-backed, verified); only usmle-step2-ck intentionally left "coming"
-  until its clinical bank merges.
+## Content built: maik26 (all 6 zero modules filled, 163 verified MCQs)
+
+Pipeline: tools/prep-qgen.mjs (Message Batches), haiku-5-5 generation,
+sonnet-5-5 blind key verification only, engine gates + local jaccard>=0.6
+screen (functions/_prep-core.js) against R2 sibling stems, overlay set maik26.
+
+| Module | Before | After (verified ok) |
+|---|---|---|
+| ss-infectious-diseases / sid-newer-agents | 0 | 28 |
+| ss-infectious-diseases / sid-hsct-id | 0 | 26 |
+| ss-medical-oncology / son-trial-design | 0 | 26 |
+| ss-medical-oncology / son-geriatric-aya | 0 | 29 |
+| ss-medical-oncology / son-cardio-oncology | 0 | 26 |
+| ss-rheumatology-immunology / srh-outcome-measures | 0 | 28 |
+
+Zero-item modules bank-wide: 6 → 0 (PLAB/MRCS zeros were already covered by
+plab1a-d/mrcs1a-d sets). Every item: 4 options, reasoning explanation,
+neet-ss exam tag, blind-verified key. One self-dup dropped at the local
+screen; R2 dedupe ran with bank stems on 5 of 6 first batches (first
+sid-newer-agents batch missed the token; covered by the local screen: 0 dups
+in 246 stems). Shipped: overlay/maik26 (6 files, R2, live-verified), prep.js
+OVERLAYS +3 subjects, prep/bank/overlay-counts.json +maik26 (16 unrelated
+sets restored after the counts tool dropped what it cannot see from this
+sandbox; documented in PR), share-ID index republished (927 shards, verify
+0 wrong over 207,469 MCQs + 1,769 lessons).
+
+## Content built, wave 2: maik27 (61 MCCQE modules, 1,204 verified MCQs)
+
+Same pipeline (haiku gen, sonnet blind verify, gates + local jaccard>=0.6
+screen vs 1,521 R2 overlay stems; 10 dups dropped). MCCQE Part I vignettes
+in Canadian practice. All 61 thin mcc-* modules now >=25.
+Shipped: overlay/maik27 (61 files, R2, live-verified), prep.js OVERLAYS +4
+subjects, counts +maik27, share-ID index republished (0 wrong). Spend $17.97.
+
+## Content built, wave 3: maik28 (15 AMC modules, 273 verified MCQs)
+
+child-health (7: jaundice, exanthems, cardiac, renal, endo, adolescent,
+indigenous) + mental-health (8: depression, anxiety, ocd, ptsd, sleep,
+drugs, child, crisis), Australian GP framing, screened vs 390 R2 stems
+(2 dups dropped). Shipped: overlay/maik28 (15 files, R2, live-verified),
+OVERLAYS +2 subjects, counts +maik28, share-ID index republished (211,262
+MCQs, 0 wrong). Spend $4.43. Exception: ch-haem reached only 17/25 (heavy
+gate losses, then its retry batch wedged 60+ min at 0/3) — still thin.
+
+## Content built, wave 4: maik29 (12 modules, 216 verified MCQs)
+
+ch-haem retry as a fresh batch (8/8 verified; 9 base + 16 new = exactly 25)
+plus 11 NEET-SS thin modules to >=25: ss-cardiology 1 (pericardial),
+ss-critical-care 3 (scoring, environmental, post-icu), ss-endocrinology 1
+(polyglandular-immunotherapy), ss-nephrology 4 (alport, BK polyomavirus, GFR
+biomarkers, paediatric), ss-pulmonology 2 (DAH-vasculitis, rare ILD).
+Same pipeline (haiku gen, sonnet blind verify, gates + local jaccard>=0.6
+screen vs R2 stems; 0 dups). Shipped: overlay/maik29 (12 files, R2,
+live-verified per file), prep.js OVERLAYS +4 subjects (+maik29 on 2 more),
+counts +maik29 (52 sets, nothing dropped/changed), share-ID index
+republished (211,478 MCQs checked, 0 wrong). Spend $3.57 across 19 jobs.
+Follow-up maik30: sen-monogenic-diabetes retry (steered with 223 R2 bank
+stems) yielded 4/4 blind-verified; shipped with the 16 held items as
+overlay/maik30 (19 items; the publish gate dropped one off-topic stem
+about transient neonatal hyperinsulinism). Base 7 + 19 = 26, at the bar.
+Spend $0.07. All 12 wave-4 SS modules plus ch-haem now >=25.
+
+## Remainder (content, NOT done) with cost to finish
+
+- Thin (<10) modules left: 97 (was 110 before wave 4, 186 before wave 2):
+  AMC-plan adult-health-medicine 18, adult-health-surgery 10,
+  womens-health 11, population-health-and-ethics 10; SS gen-med 12, neuro 6,
+  rheum 6, onco 5, ID 4; PLAB/MRCS/MRCP-plan smalls 10. ≈ 1,675 items to
+  the 25-bar ≈ $28.50 at $0.017/item — beyond the remaining $1.16 of the
+  $30 job budget; needs a follow-up budget.
+- PYQ without explanation: counted exactly — 2,570 of 10,483 live items
+  (660 empty + 1,910 short, 19 subjects). Dry-run estimate $1.53 via
+  tools/prep-explain.mjs (Vertex Batch) — NOT runnable from this sandbox
+  (no PREP_VERTEX_PROJECT / gcloud auth). Run there when creds exist.
+- Modules at 10-24 (never "thin", out of this job's scope): remainder of
+  child-health/mental-health to 25 (~340 items ≈ $6), SS 10-24s.
+- Profiles: MRCP + Step 2 CK available (bank-backed). NO exam profile has
+  bank.status "coming" left: the coming-section/Arena-gate neutrals are now
+  dormant fallbacks.
 
 ## Spend
 
-This turn: $0 API (no generation calls). Ledger unchanged: 213 rows,
-$112.28 total. Job ledger: /tmp/no-coming-soon-spend.tsv (header + $0 row).
+Content spend, all waves: $28.84 API (146 batch jobs, haiku gen + sonnet
+verify) for 1,875 verified MCQs ($0.0154/item):
+maik26 $2.80 (163), maik27 $17.97 (1,204), maik28 $4.43 (273),
+maik29 $3.57 (216), maik30 $0.07 (19).
+Job ledger: /tmp/no-coming-soon-spend.tsv (146 rows). Global ledger file is
+read-only from this sandbox (still 213 rows, $112.28 on disk): the rows must
+be appended by the ledger owner; true total then $141.12, under the $192
+stop and inside the $30 job budget ($1.16 left).
 
 ## Verification
 
@@ -74,7 +142,7 @@ $112.28 total. Job ledger: /tmp/no-coming-soon-spend.tsv (header + $0 row).
   scan logic against HEAD: 9 hits (proves the guard catches the old code).
 - Neighbour suites green with the prescribed flags
   (`--experimental-test-module-mocks --experimental-sqlite`):
-  prep-app 32, prep-assess 20, prep-arena-server 14, prep-qgen 26,
+  prep-app 33, prep-assess 23, prep-arena-server 14, prep-qgen 26,
   prep-social-server 7, prep-create 37, specialty-bank 10,
   specialty-tools 9, specialty-engine 5, prep-core 18, prep-nav 10,
   prep-lessons 23, prep-subject 6.

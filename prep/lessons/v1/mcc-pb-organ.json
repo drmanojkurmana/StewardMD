@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mcc-pb-organ",
+ "subject": "mcc-professional-behaviours",
+ "title": "Organ donation and death determination",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Death determination must follow a **structured clinical assessment** of irreversible loss of all brain function, including the brainstem. Before any test, the examiner must confirm a known, irreversible cause and exclude confounders such as **hypothermia**, sedative or opioid effects, and severe metabolic disturbance. Correct these and allow adequate clearance time before interpreting findings. Two examinations by separate physicians are standard in Indian and most international practice, with a documented apnoea test where safe.",
+   "say": "Death determination must follow a structured clinical assessment of irreversible loss of all brain function, including the brainstem. Before any test, the examiner must confirm a known, irreversible cause and exclude confounders such as hypothermia, sedative or opioid effects, and severe metabolic disturbance. Correct these and allow adequate clearance time before interpreting findings. Two examinations by separate physicians are standard in Indian and most international practice, with a documented apnoea test where safe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Known irreversible cause"
+     },
+     {
+      "id": "b",
+      "label": "Exclude confounders"
+     },
+     {
+      "id": "c",
+      "label": "Exam one: brainstem reflexes"
+     },
+     {
+      "id": "d",
+      "label": "Exam two by separate doctor"
+     },
+     {
+      "id": "e",
+      "label": "Apnoea test or ancillary study"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When apnoea testing cannot be done safely, an **ancillary test** can complete the determination. Cerebral blood flow studies, such as transcranial Doppler or cerebral angiography, show absence of intracranial flow in brain death. EEG shows electrocerebral silence but is less definitive, and it is affected by sedatives and hypothermia. The chosen test must suit local protocol and the clinical setting.",
+   "say": "When apnoea testing cannot be done safely, an ancillary test can complete the determination. Cerebral blood flow studies, such as transcranial Doppler or cerebral angiography, show absence of intracranial flow in brain death. EEG shows electrocerebral silence but is less definitive, and it is affected by sedatives and hypothermia. The chosen test must suit local protocol and the clinical setting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Role in determination",
+     "Key limitation"
+    ],
+    "rows": [
+     [
+      "Apnoea test",
+      "Confirms loss of respiratory drive",
+      "Unsafe with poor oxygenation"
+     ],
+     [
+      "Cerebral blood flow study",
+      "Shows absent intracranial flow",
+      "Needs specialist interpretation"
+     ],
+     [
+      "EEG",
+      "Shows electrocerebral silence",
+      "Affected by sedatives and hypothermia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Donation after circulatory death** begins only after a decision to withdraw life support, with the family's consent and prior donor identification. Death is declared by circulatory criteria, meaning irreversible cessation of circulation, and procurement starts only after that determination. Early referral to the donation service allows logistics to be planned before withdrawal. Withdrawal of care and donation referral can run in parallel.",
+   "say": "Donation after circulatory death begins only after a decision to withdraw life support, with the family's consent and prior donor identification. Death is declared by circulatory criteria, meaning irreversible cessation of circulation, and procurement starts only after that determination. Early referral to the donation service allows logistics to be planned before withdrawal. Withdrawal of care and donation referral can run in parallel.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brain death pathway",
+     "points": [
+      "Brainstem function absent",
+      "Ventilated donor maintained",
+      "Procurement with organ perfusion"
+     ]
+    },
+    "right": {
+     "title": "Circulatory death pathway",
+     "points": [
+      "Support withdrawn first",
+      "Death by circulatory criteria",
+      "Procurement after irreversible arrest"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Medical assistance in dying** eligibility must be judged separately from donation. The assessment rests on the patient's own enduring request, decision-making capacity and the legal criteria. Donation must never be made a condition of approval, and the clinician should keep the two processes independent. Substitute decision-makers and registrations do not replace the patient's own decision while he or she has capacity.",
+   "say": "Medical assistance in dying eligibility must be judged separately from donation. The assessment rests on the patient's own enduring request, decision-making capacity and the legal criteria. Donation must never be made a condition of approval, and the clinician should keep the two processes independent. Substitute decision-makers and registrations do not replace the patient's own decision while he or she has capacity.",
+   "vis": null
+  },
+  {
+   "tx": "Donor registration, such as a driving licence or donor card, is **evidence of wishes** but is not a binding consent in most settings. For a patient lacking capacity, the substitute decision-maker decides according to the patient's known values, beliefs and prior statements. If the family refuses, explore those values further before accepting refusal. Court orders are rarely needed and are not the first step. Donation requests should be made with sensitivity and timed appropriately.",
+   "say": "Donor registration, such as a driving licence or donor card, is evidence of wishes but is not a binding consent in most settings. For a patient lacking capacity, the substitute decision-maker decides according to the patient's known values, beliefs and prior statements. If the family refuses, explore those values further before accepting refusal. Court orders are rarely needed and are not the first step. Donation requests should be made with sensitivity and timed appropriately.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

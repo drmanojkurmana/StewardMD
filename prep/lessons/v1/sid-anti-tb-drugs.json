@@ -1,0 +1,83 @@
+{
+ "v": 1,
+ "module": "sid-anti-tb-drugs",
+ "subject": "ss-infectious-diseases",
+ "title": "Antituberculous drugs and toxicity",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Anti-tuberculous drugs are grouped into **first-line** agents such as isoniazid, rifampicin, pyrazinamide and ethambutol, and newer agents used in drug-resistant disease. Each carries a signature toxicity that examiners test. Learn the pairing of drug and toxicity first, because most recall questions ask you to match one to the other, along with the monitoring that goes with it.",
+   "say": "Anti-tuberculous drugs are grouped into first-line agents, such as isoniazid, rifampicin, pyrazinamide and ethambutol, and newer agents used in drug-resistant disease. Each carries a signature toxicity that examiners test. Learn the pairing of drug and toxicity first, because most recall questions ask you to match one to the other, along with the monitoring that goes with it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Signature toxicity",
+     "Key check"
+    ],
+    "rows": [
+     [
+      "Isoniazid",
+      "Peripheral neuropathy",
+      "Give pyridoxine"
+     ],
+     [
+      "Rifampicin",
+      "Enzyme induction",
+      "Review interacting drugs"
+     ],
+     [
+      "Pyrazinamide",
+      "Raised uric acid",
+      "Watch for joint pain"
+     ],
+     [
+      "Ethambutol",
+      "Optic neuritis",
+      "Visual acuity and colour vision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Isoniazid** causes peripheral neuropathy because it interferes with **pyridoxine**, or vitamin B6, metabolism. Risk rises with slow acetylators, malnutrition, alcohol use, diabetes, HIV and pregnancy. Prevention is simple: give pyridoxine alongside isoniazid, usually 10 mg daily in India, and write it on the prescription. Isoniazid hepatitis is also common in older patients and heavy drinkers, so liver tests are needed.",
+   "say": "Isoniazid causes peripheral neuropathy because it interferes with pyridoxine, also called vitamin B6, metabolism. Risk rises with slow acetylators, malnutrition, alcohol use, diabetes, HIV and pregnancy. Prevention is simple: give pyridoxine alongside isoniazid, usually 10 mg daily in India, and write it on the prescription. Isoniazid hepatitis is also common in older patients and heavy drinkers, so liver tests are needed.",
+   "vis": null
+  },
+  {
+   "tx": "**Rifampicin** is a potent inducer of **CYP3A4** and other hepatic enzymes, so it lowers levels of many co-prescribed drugs. **Warfarin** needs closer INR monitoring and often a higher dose. Combined oral contraceptives lose reliability, so a barrier or alternative method is advised. Rifampicin also turns urine, tears and sweat orange, which patients must be warned about. Its hepatotoxicity adds to that of isoniazid and pyrazinamide.",
+   "say": "Rifampicin is a potent inducer of CYP3A4 and other hepatic enzymes, so it lowers levels of many co-prescribed drugs. Warfarin needs closer INR monitoring and often a higher dose. Combined oral contraceptives lose reliability, so a barrier or alternative method is advised. Rifampicin also turns urine, tears and sweat orange, which patients must be warned about. Its liver toxicity adds to that of isoniazid and pyrazinamide.",
+   "vis": null
+  },
+  {
+   "tx": "**Ethambutol** causes dose-related optic neuritis, typically affecting red-green colour discrimination and visual acuity, and the damage is often reversible if the drug is stopped early. Baseline visual acuity and colour vision testing are required, with regular checks thereafter, especially in patients who cannot report symptoms reliably. Ethambutol is renally cleared, so the dose interval must be extended in renal impairment.",
+   "say": "Ethambutol causes dose-related optic neuritis, typically affecting red-green colour discrimination and visual acuity, and the damage is often reversible if the drug is stopped early. Baseline visual acuity and colour vision testing are required, with regular checks thereafter, especially in patients who cannot report symptoms reliably. Ethambutol is renally cleared, so the dose interval must be extended in renal impairment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_30152c396ac5",
+  "q_46cf0a358830",
+  "q_ae53a3ebe2ce"
+ ],
+ "src": [],
+ "refs": [
+  "WHO consolidated guidelines on tuberculosis: Module 4 Treatment",
+  "National Tuberculosis Elimination Programme (India) guidelines for drug-resistant TB"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 51
+ }
+}

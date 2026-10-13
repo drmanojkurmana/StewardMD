@@ -1,0 +1,116 @@
+{
+ "v": 1,
+ "module": "scc-quality-icu",
+ "subject": "ss-critical-care",
+ "title": "ICU Organisation, Quality and Safety: Ventilator Care and Early Warning",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Ventilated patients need a structured bedside check before any change. Start with **vital signs**, an **arterial blood gas**, and chest sounds. These markers show whether the ventilator is doing its job. When a high pressure alarm sounds, the first duty is to identify its cause before touching any setting. Silencing the alarm or raising the tidal volume without a diagnosis can worsen injury. Common causes include secretions, kinking, patient coughing, and a tension **pneumothorax**, which needs urgent bedside review.",
+   "say": "Ventilated patients need a structured bedside check before any change. Start with vital signs, an arterial blood gas, and chest sounds. These markers show whether the ventilator is doing its job. When a high pressure alarm sounds, the first duty is to identify its cause before touching any setting. Silencing the alarm or raising the tidal volume without a diagnosis can worsen injury. Common causes include secretions, kinking, patient coughing, and a tension pneumothorax, which needs urgent bedside review.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Alarm cause",
+     "Bedside clue",
+     "Immediate step"
+    ],
+    "rows": [
+     [
+      "Secretions or kinked tube",
+      "Sawtooth waveform, suction needed",
+      "Suction and check tubing"
+     ],
+     [
+      "Patient coughing or fighting",
+      "Asynchrony on the waveform",
+      "Assess sedation and comfort"
+     ],
+     [
+      "Tension pneumothorax",
+      "Falling saturation, one-sided silence",
+      "Urgent decompression, call senior"
+     ],
+     [
+      "Mainstem intubation",
+      "Unilateral breath sounds",
+      "Reposition the tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Weaning and mode choice matter for safe liberation. **Pressure support ventilation** is generally preferred over **SIMV** for weaning, because SIMV is associated with longer time on the ventilator. For a patient with a neuromuscular disorder and normal lungs, the goal is to reduce work of breathing, so a mode that assists each spontaneous effort is chosen. Auto-PEEP from dynamic hyperinflation, seen in severe COPD, can cause hypotension and a sudden tension pneumothorax.",
+   "say": "Weaning and mode choice matter for safe liberation. Pressure support ventilation is generally preferred over SIMV for weaning, because SIMV is associated with longer time on the ventilator. For a patient with a neuromuscular disorder and normal lungs, the goal is to reduce work of breathing, so a mode that assists each spontaneous effort is chosen. Auto-PEEP from dynamic hyperinflation, seen in severe COPD, can cause hypotension and a sudden tension pneumothorax.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess drive and gas exchange"
+     },
+     {
+      "id": "b",
+      "label": "Pressure support for weaning"
+     },
+     {
+      "id": "c",
+      "label": "Check for auto-PEEP"
+     },
+     {
+      "id": "d",
+      "label": "Trial of spontaneous breathing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early warning scores such as the **NEWS** score detect deterioration before arrest. Scores rise with abnormal respiratory rate, oxygen saturation, temperature, blood pressure, pulse, consciousness and oxygen use. A high total triggers escalation to a **rapid response team** and senior review. Quality checks, including ventilator checklists and handover, reduce **ventilator associated events**. Any manual change to ventilator settings must be followed by checking alarm limits and reviewing the patient's response.",
+   "say": "Early warning scores such as the NEWS score detect deterioration before arrest. Scores rise with abnormal respiratory rate, oxygen saturation, temperature, blood pressure, pulse, consciousness and oxygen use. A high total triggers escalation to a rapid response team and senior review. Quality checks, including ventilator checklists and handover, reduce ventilator associated events. Any manual change to ventilator settings must be followed by checking alarm limits and reviewing the patient's response.",
+   "vis": null
+  },
+  {
+   "tx": "Competence governs who may adjust ventilator parameters. A non-respiratory staff member must show competency equivalent to a respiratory therapist before changing settings such as **PEEP**. Competency is documented through training and supervised practice. Staff workload and **burnout** also affect safety, so ICU staffing should match patient acuity. Intensivist presence and **tele-ICU** support can extend expert oversight to smaller units, improving outcomes where specialists are scarce.",
+   "say": "Competence governs who may adjust ventilator parameters. A non-respiratory staff member must show competency equivalent to a respiratory therapist before changing settings such as PEEP. Competency is documented through training and supervised practice. Staff workload and burnout also affect safety, so ICU staffing should match patient acuity. Intensivist presence and tele-ICU support can extend expert oversight to smaller units, improving outcomes where specialists are scarce.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_8c182f44c313",
+  "q_1d42611beb7a",
+  "q_494b4926de26"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline on acutely ill adults in hospital (NICE CG50 NEWS2 context)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

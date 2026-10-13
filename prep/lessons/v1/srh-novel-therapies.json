@@ -1,0 +1,109 @@
+{
+ "v": 1,
+ "module": "srh-novel-therapies",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Novel immunotherapies in SLE: anifrolumab safety and the emerging pipeline",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Anifrolumab** is a human IgG1 monoclonal antibody that binds the **type I interferon receptor** subunit IFNAR1, blocking signalling from all type I interferons. It is used in moderate to severe systemic lupus erythematosus with high interferon activity. Because it blocks the receptor rather than one cytokine, it dampens the interferon gene signature seen in many patients.",
+   "say": "Anifrolumab is a human IgG1 monoclonal antibody that binds the type I interferon receptor subunit IFNAR1, blocking signalling from all type I interferons. It is used in moderate to severe systemic lupus erythematosus with high interferon activity. Because it blocks the receptor rather than one cytokine, it dampens the interferon gene signature seen in many patients.",
+   "vis": null
+  },
+  {
+   "tx": "Monoclonal antibodies are cleared mainly by **catabolism** through the reticuloendothelial system, not by the kidney. So a patient with reduced eGFR, such as 45 mL/min/1.73 m2, does not need a dose reduction for anifrolumab. Renal function still matters for the overall lupus picture, so creatinine should be followed for nephritis, not for drug clearance.",
+   "say": "Monoclonal antibodies are cleared mainly by catabolism through the reticuloendothelial system, not by the kidney. So a patient with reduced kidney function, with an eGFR of 45, does not need a dose reduction for anifrolumab. Renal function still matters for the overall lupus picture, so creatinine should be followed for nephritis, not for drug clearance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Safety issue",
+     "Practical action"
+    ],
+    "rows": [
+     [
+      "Herpes zoster",
+      "Screen, vaccinate where appropriate, and counsel early"
+     ],
+     [
+      "Serious infection",
+      "Hold therapy until it has resolved"
+     ],
+     [
+      "Live vaccines",
+      "Avoid during treatment"
+     ],
+     [
+      "Combination biologics",
+      "Not advised; lacks trial evidence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serious or active **infection** is the key reason to pause anifrolumab. A patient with cellulitis who is afebrile and stable should not simply continue therapy, and the dose is not halved. Treatment is held until the infection has fully resolved, then restarted with monitoring. Herpes zoster is the infection most specifically linked to this drug in trials.",
+   "say": "Serious or active infection is the key reason to pause anifrolumab. A patient with cellulitis who is afebrile and stable should not simply continue therapy, and the dose is not halved. Treatment is held until the infection has fully resolved, then restarted with monitoring. Herpes zoster is the infection most specifically linked to this drug in trials.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Active infection"
+     },
+     {
+      "id": "b",
+      "label": "Withhold dose"
+     },
+     {
+      "id": "c",
+      "label": "Treat and resolve"
+     },
+     {
+      "id": "d",
+      "label": "Restart with monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trial data showed that **higher dosing** of anifrolumab gave more severe adverse events and more discontinuations, without clearly better efficacy. Patients should not receive a stronger regimen in the hope of a better response. Combining anifrolumab with another biologic is also not recommended, since this combination has not been studied in trials.",
+   "say": "Trial data showed that higher dosing of anifrolumab gave more severe adverse events and more discontinuations, without clearly better efficacy. Patients should not receive a stronger regimen in the hope of a better response. Combining anifrolumab with another biologic is also not recommended, since this combination has not been studied in trials.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_185f91514bd4",
+  "q_56a0c03970de",
+  "q_94300c60e3a7"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "v": 1,
+ "module": "phm-beta-blockers",
+ "subject": "pharmacology",
+ "title": "Beta adrenergic blockers: selectivity, key properties and safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Some drugs have **intrinsic sympathomimetic activity**, meaning they partly stimulate receptors while blocking them. Pindolol is the classic example. Propranolol has the highest **membrane stabilising** action. Lipid soluble agents such as propranolol cross the blood brain barrier and cause CNS effects. Atenolol, nadolol and sotalol are lipid insoluble and do not cross it.",
+   "say": "Some drugs have intrinsic sympathomimetic activity, meaning they partly stimulate receptors while blocking them. Pindolol is the classic example. Propranolol has the highest membrane stabilising action. Lipid soluble agents such as propranolol cross the blood brain barrier and cause CNS effects. Atenolol, nadolol and sotalol are lipid insoluble and do not cross it.",
+   "vis": null
+  },
+  {
+   "tx": "Beta blockers are used in hypertension, angina, arrhythmias, myocardial infarction and heart failure. In heart failure the evidence-based agents are **bisoprolol**, **metoprolol** and **carvedilol**. Other uses include migraine prophylaxis with propranolol, essential tremor, thyrotoxicosis, portal hypertension and performance anxiety. They are contraindicated in asthma, decompensated heart failure and heart block. Non-selective agents also carry a risk of bronchospasm.",
+   "say": "Beta blockers are used in hypertension, angina, arrhythmias, myocardial infarction and heart failure. In heart failure the evidence-based agents are bisoprolol, metoprolol and carvedilol. Other uses include migraine prophylaxis with propranolol, essential tremor, thyrotoxicosis, portal hypertension and performance anxiety. They are contraindicated in asthma, decompensated heart failure and heart block. Non-selective agents also carry a risk of bronchospasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Asthma or COPD"
+     },
+     {
+      "id": "b",
+      "label": "Non-selective risk"
+     },
+     {
+      "id": "c",
+      "label": "Bronchospasm"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beta blockers mask **hypoglycaemia** by blocking tremor, palpitations and tachycardia, but sweating is spared because it is cholinergic. Glycogenolysis and counter-regulation are also reduced. Cardioselective agents are safer in diabetics. Withdrawal of beta blockers, especially after long use, can cause rebound tachycardia, hypertension and angina, so doses should be tapered. Overdose is treated with **glucagon**.",
+   "say": "Beta blockers mask hypoglycaemia by blocking tremor, palpitations and tachycardia, but sweating is spared because it is cholinergic. Glycogenolysis and counter-regulation are also reduced. Cardioselective agents are safer in diabetics. Withdrawal of beta blockers, especially after long use, can cause rebound tachycardia, hypertension and angina, so doses should be tapered. Overdose is treated with glucagon.",
+   "vis": null
+  },
+  {
+   "tx": "Exam tip: beta blockers with **verapamil** can cause severe bradycardia, AV block and heart failure. Metoprolol toxicity causes bradycardia, hypotension, widened QRS and prolonged AV conduction. Timolol, a non-selective agent used in glaucoma, can cause bronchospasm in asthmatics. Propranolol and metoprolol are the classic comparison in exam questions.",
+   "say": "Exam tip: beta blockers with verapamil can cause severe bradycardia, AV block and heart failure. Metoprolol toxicity causes bradycardia, hypotension, widened QRS and prolonged AV conduction. Timolol, a non-selective agent used in glaucoma, can cause bronchospasm in asthmatics. Propranolol and metoprolol are the classic comparison in exam questions.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "0b8d8d93-bd49-4bbf-af70-dc868c34a373",
+  "491e706e-d3f6-4b75-ab57-25d9a34ef18c",
+  "7d9cae75-8068-4952-9a9d-3febf97ebe2d"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi, Essentials of Medical Pharmacology (Seventh edition)",
+  "Katzung's Basic and Clinical Pharmacology (Katzung)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 213
+ }
+}

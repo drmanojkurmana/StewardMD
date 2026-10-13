@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "fmt-legal-procedures",
+ "subject": "forensic-medicine",
+ "title": "Inquest, courts and medical evidence",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An **inquest** is an inquiry into the cause and manner of an unnatural, sudden or suspicious death. In India it is carried out by a police officer under Section 174 of the CrPC, or by a magistrate under Section 176. The police inquest is the most common type. Its purpose is to establish identity and cause of death, not to decide guilt.",
+   "say": "An inquest is an inquiry into the cause and manner of an unnatural, sudden or suspicious death. In India it is carried out by a police officer under Section 174 of the CrPC, or by a magistrate under Section 176. The police inquest is the most common type. Its purpose is to establish identity and cause of death, not to decide guilt.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Police inquest",
+     "Magistrate inquest"
+    ],
+    "rows": [
+     [
+      "Section",
+      "174 CrPC",
+      "176 CrPC"
+     ],
+     [
+      "Conducted by",
+      "Sub-inspector or above",
+      "DM, SDM or executive magistrate"
+     ],
+     [
+      "Typical cases",
+      "Suicide, homicide, accident",
+      "Custody death, dowry death, exhumation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Magistrate inquest is mandatory for deaths in prison, police custody or during police firing, dowry deaths within **7 years of marriage**, exhumation, and deaths in psychiatric hospitals. A police inquest covers suicide, homicide, accident and deaths raising suspicion of another person's offence. Remember that exhumation always needs a magistrate's order.",
+   "say": "Magistrate inquest is mandatory for deaths in prison, police custody or during police firing, dowry deaths within seven years of marriage, exhumation, and deaths in psychiatric hospitals. A police inquest covers suicide, homicide, accident and deaths raising suspicion of another person's offence. Remember that exhumation always needs a magistrate's order.",
+   "vis": null
+  },
+  {
+   "tx": "**Dowry death** under Section 304B IPC applies when a woman dies from bodily injury, burns or other causes in suspicious circumstances within **7 years of marriage**, and soon before death she faced harassment or cruelty over dowry. Punishment is imprisonment of not less than 10 years, extendable to life. Cruelty by husband or relatives under Section 498A carries up to 3 years and fine.",
+   "say": "Dowry death under Section 304B IPC applies when a woman dies from bodily injury, burns or other causes in suspicious circumstances within seven years of marriage, and soon before death she faced harassment or cruelty over dowry. Punishment is imprisonment of not less than 10 years, extendable to life. Cruelty by husband or relatives under Section 498A carries up to 3 years and fine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dowry death (304B)",
+     "points": [
+      "Within 7 years of marriage",
+      "Soon before death, cruelty or harassment",
+      "Minimum 10 years, may extend to life"
+     ]
+    },
+    "right": {
+     "title": "Cruelty (498A)",
+     "points": [
+      "Wilful conduct driving woman to suicide or grave injury",
+      "Harassment to coerce dowry",
+      "Up to 3 years and fine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Courts have set sentencing limits. A **Chief Judicial Magistrate** may impose up to 7 years imprisonment, a first class magistrate up to 3 years or a fine of 10,000 rupees, and a second class magistrate up to 1 year or 5000 rupees, under Section 29 CrPC. The **Assistant Sessions Court** can give up to 10 years. The **Sessions Court** can award any sentence, including death, which must be confirmed by the High Court.",
+   "say": "Courts have sentencing limits. A Chief Judicial Magistrate may impose up to 7 years imprisonment, a first class magistrate up to 3 years or a fine of 10,000 rupees, and a second class magistrate up to 1 year or 5000 rupees, under Section 29 CrPC. The Assistant Sessions Court can give up to 10 years. The Sessions Court can award any sentence, including death, which must be confirmed by the High Court.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Court",
+     "Maximum sentence"
+    ],
+    "rows": [
+     [
+      "Chief Judicial Magistrate",
+      "7 years, any fine"
+     ],
+     [
+      "First class magistrate",
+      "3 years or 10,000 rupees"
+     ],
+     [
+      "Second class magistrate",
+      "1 year or 5000 rupees"
+     ],
+     [
+      "Assistant Sessions Court",
+      "10 years, any fine"
+     ],
+     [
+      "Sessions Court",
+      "Any sentence, death needs High Court confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical evidence is documentary or oral. **Oral evidence** is preferred because it allows **cross examination**. Exceptions where a document suffices include a **dying declaration**, a doctor's evidence recorded in a lower court, chemical examiner reports, and hospital records. A **subpoena** is the legal summons compelling a witness to attend court.",
+   "say": "Medical evidence is documentary or oral. Oral evidence is preferred because it allows cross examination. Exceptions where a document suffices include a dying declaration, a doctor's evidence recorded in a lower court, chemical examiner reports, and hospital records. A subpoena is the legal summons compelling a witness to attend court.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "79dd6e62-eb47-49b8-99ca-152a332e4b74",
+  "4e1770e7-aa7f-42a7-91a6-bddd6a7bd3c7",
+  "82a7e7e9-193f-441b-9a72-246492b18a45"
+ ],
+ "src": [],
+ "refs": [
+  "Code of Criminal Procedure 1973",
+  "Indian Penal Code 1860",
+  "Reddy KSN. The Essentials of Forensic Medicine and Toxicology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 368
+ }
+}

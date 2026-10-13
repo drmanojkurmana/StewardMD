@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "son-prostate-local",
+ "subject": "ss-medical-oncology",
+ "title": "Localized and biochemically recurrent prostate cancer",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Nonmetastatic disease is stratified into **low, intermediate, high and very-high risk**. Low risk means organ-confined disease with PSA below 10 ng/mL and grade group 1. High risk includes extraprostatic extension, PSA above 20 ng/mL, or grade group 4 to 5. Very-high risk adds seminal vesicle T3b invasion, adjacent-organ T4 invasion, or multiple high-grade biopsy cores.",
+   "say": "Nonmetastatic disease is stratified into low, intermediate, high and very-high risk. Low risk means organ-confined disease with PSA below 10 nanograms per millilitre and grade group 1. High risk includes extraprostatic extension, PSA above 20, or grade group 4 to 5. Very-high risk adds seminal vesicle T3b invasion, adjacent-organ T4 invasion, or multiple high-grade biopsy cores.",
+   "vis": null
+  },
+  {
+   "tx": "Multiparametric MRI graded by **PI-RADS** is usually done before biopsy. PI-RADS 1 and 2 lesions can safely avoid biopsy, while PI-RADS 3 to 5 lesions receive targeted biopsy. This reduces detection of indolent grade group 1 tumours without missing clinically relevant cancers. PSA itself is prostate specific, not cancer specific, so prostatitis and BPH can also raise it.",
+   "say": "Multiparametric MRI graded by PI-RADS is usually done before biopsy. PI-RADS 1 and 2 lesions can safely avoid biopsy, while PI-RADS 3 to 5 lesions receive targeted biopsy. This reduces detection of indolent grade group 1 tumours without missing clinically relevant cancers. PSA itself is prostate specific, not cancer specific, so prostatitis and benign enlargement can also raise it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "mpMRI PI-RADS"
+     },
+     {
+      "id": "b",
+      "label": "PI-RADS 1-2"
+     },
+     {
+      "id": "c",
+      "label": "PI-RADS 3-5"
+     },
+     {
+      "id": "d",
+      "label": "No biopsy"
+     },
+     {
+      "id": "e",
+      "label": "Targeted biopsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For **low-risk** disease, **active surveillance** is preferred, with repeat biopsy reserved for discordance between imaging and biomarkers. For intermediate and high-risk disease, **radical prostatectomy** or radiotherapy is offered, with radiotherapy often combined with androgen deprivation for longer durations in high-risk patients. The ProtecT trial showed no 10-year survival disadvantage for active surveillance.",
+   "say": "For low-risk disease, active surveillance is preferred, with repeat biopsy reserved for discordance between imaging and biomarkers. For intermediate and high-risk disease, radical prostatectomy or radiotherapy is offered, with radiotherapy often combined with androgen deprivation for longer durations in high-risk patients. The ProtecT trial showed no 10-year survival disadvantage for active surveillance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active surveillance",
+     "points": [
+      "Low-risk disease",
+      "Repeat biopsy only if discordant",
+      "No survival penalty at 10 years (ProtecT)"
+     ]
+    },
+    "right": {
+     "title": "Radical treatment",
+     "points": [
+      "Intermediate or high risk",
+      "Prostatectomy or radiotherapy",
+      "High risk: ADT up to three years with radiotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After radical prostatectomy, PSA should become **undetectable within about 6 weeks**. Persistent measurable PSA suggests residual or recurrent disease. In recurrence, PSMA PET helps localise disease, but it cannot detect low-volume microscopic spread, so a negative scan does not exclude nodal involvement. Serial PSA monitoring follows the patient after treatment.",
+   "say": "After radical prostatectomy, PSA should become undetectable within about 6 weeks. Persistent measurable PSA suggests residual or recurrent disease. In recurrence, PSMA PET helps localise disease, but it cannot detect low-volume microscopic spread, so a negative scan does not exclude nodal involvement. Serial PSA monitoring follows the patient after treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e79015576269",
+  "q_1395e19b9e6b",
+  "q_58d03eb2c872"
+ ],
+ "src": [
+  "kb-reference-prostate-cancer"
+ ],
+ "refs": [
+  "NICE Guideline NG131: Prostate cancer: diagnosis and management",
+  "ProtecT trial (Hamdy et al., NEJM 2016)",
+  "Campbell-Walsh-Wein Urology (Wein et al., editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 897,
+  "itemN": 45
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "snp-gfr-biomarkers",
+ "subject": "ss-nephrology",
+ "title": "GFR Estimation and Kidney Biomarkers",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Measured GFR** is the reference standard, found by clearance of an exogenous filtration marker given by infusion, so it avoids reliance on equations. **Estimated GFR** draws on serum markers and equations and is the figure clinicians use every day. Creatinine-based, cystatin C-based and Cockcroft-Gault approaches each suit different situations. Exam questions often ask which method is the gold standard and which is practical. Measured clearance is precise but costly and seldom needed in routine practice.",
+   "say": "Measured GFR is the reference standard. It is found by clearance of an exogenous filtration marker given through a drip, so it avoids reliance on equations. Estimated GFR draws on serum markers and equations, and it is the figure clinicians use every day. Creatinine-based, cystatin C-based and Cockcroft-Gault approaches each suit different situations. Exam questions often ask which method is the gold standard and which is practical. Measured clearance is precise but costly and seldom needed in routine practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Basis",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Measured clearance",
+      "Exogenous filtration marker given by infusion",
+      "Reference standard and research"
+     ],
+     [
+      "Creatinine equation",
+      "CKD-EPI 2021, race-free",
+      "Routine eGFR reporting"
+     ],
+     [
+      "Cystatin C equation",
+      "Serum cystatin C level",
+      "Low muscle mass or sarcopenia"
+     ],
+     [
+      "Cockcroft-Gault",
+      "Age, weight and creatinine",
+      "Drug dosing and creatinine clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Cockcroft-Gault** formula estimates creatinine clearance in mL/min from age, weight and serum creatinine, using a factor of 0.85 for females. It was built for drug dosing and tends to overestimate GFR in obesity and sarcopenia. Low muscle mass lowers creatinine production, so a normal creatinine can hide a reduced GFR. In such patients, cystatin C is a better marker because it does not depend on muscle mass.",
+   "say": "The Cockcroft-Gault formula estimates creatinine clearance in millilitres per minute from age, weight and serum creatinine, multiplying the result by 0.85 for females. It was built for drug dosing and tends to overestimate GFR in obesity and sarcopenia. Low muscle mass lowers creatinine production, so a normal creatinine can hide a reduced GFR. In such patients, cystatin C is the better marker because it does not depend on muscle mass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cockcroft-Gault",
+     "points": [
+      "Uses age, weight and creatinine",
+      "Multiply by 0.85 in females",
+      "Built for drug dosing"
+     ]
+    },
+    "right": {
+     "title": "Sarcopenia pitfall",
+     "points": [
+      "Low muscle lowers creatinine",
+      "Normal creatinine can mislead",
+      "Cystatin C avoids muscle bias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Trimethoprim** blocks tubular secretion of creatinine in the proximal tubule, so serum creatinine climbs while the true **GFR** stays the same. The equation-based estimate therefore drops artificially. This change is reversible once the drug is withdrawn. When a student meets a creatinine rise soon after starting trimethoprim-sulfamethoxazole, the expected answer is this secretory artefact, not **acute tubular necrosis** or hyperfiltration.",
+   "say": "Trimethoprim stops the kidney tubules from secreting creatinine, so the serum level rises even though the real filtration rate is unchanged. Estimated GFR therefore appears lower than it truly is. Once the drug is stopped, the change reverses. In exams, a creatinine rise shortly after starting trimethoprim with sulfamethoxazole usually points to this effect rather than acute tubular necrosis or hyperfiltration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trimethoprim given"
+     },
+     {
+      "id": "b",
+      "label": "Tubular secretion blocked"
+     },
+     {
+      "id": "c",
+      "label": "Serum creatinine rises"
+     },
+     {
+      "id": "d",
+      "label": "Estimated GFR falls falsely"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal functional reserve** is the rise in GFR after a protein load or amino acid infusion, and it shows how much capacity the kidney holds in reserve. A blunted response can reveal early nephron loss even when resting GFR looks normal. It is a research and specialist tool rather than a routine test. Keep it separate from baseline GFR when answering questions on reserve capacity.",
+   "say": "Renal functional reserve is the rise in GFR after a protein load or amino acid infusion, and it shows how much capacity the kidney holds in reserve. A blunted response can reveal early nephron loss even when resting GFR looks normal. It is a research and specialist tool rather than a routine test. Keep it separate from baseline GFR when answering questions on reserve capacity.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_dbed5420e745",
+  "q_592a66a85036",
+  "q_d30d8316e346"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease",
+  "NICE NG203 Chronic kidney disease: assessment and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

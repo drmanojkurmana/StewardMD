@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "srh-pregnancy",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Pregnancy and reproductive health in rheumatic disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Preconception planning is the first priority. Pregnancy should be deferred until the disease has been **quiescent for at least 6 months**, so that flares during pregnancy are less likely. Women should be counselled early, ideally before conception, so that medicines can be reviewed. Disease activity, renal function and antiphospholipid status should all be checked before trying to conceive.",
+   "say": "Preconception planning is the first priority. Pregnancy should be deferred until the disease has been quiescent for at least 6 months, so that flares during pregnancy are less likely. Women should be counselled early, ideally before conception, so that medicines can be reviewed. Disease activity, renal function and antiphospholipid status should all be checked before trying to conceive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Pre-conception advice",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Hydroxychloroquine",
+      "Continue",
+      "Lowers flare risk"
+     ],
+     [
+      "Mycophenolate",
+      "Stop 6 weeks before",
+      "Teratogenic"
+     ],
+     [
+      "Methotrexate",
+      "Stop before conception",
+      "Teratogenic"
+     ],
+     [
+      "Cyclophosphamide",
+      "Avoid in pregnancy",
+      "Gonadal and fetal toxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hydroxychloroquine** should be continued through pregnancy, because stopping it raises the risk of flares. **Mycophenolate**, **methotrexate** and **cyclophosphamide** are contraindicated in pregnancy. Mycophenolate must be stopped at least 6 weeks before conception, and a compatible agent such as azathioprine or a calcineurin inhibitor may be substituted.",
+   "say": "Hydroxychloroquine should be continued through pregnancy, because stopping it raises the risk of flares. Mycophenolate, methotrexate and cyclophosphamide are contraindicated in pregnancy. Mycophenolate must be stopped at least 6 weeks before conception, and a compatible agent such as azathioprine or a calcineurin inhibitor may be substituted.",
+   "vis": null
+  },
+  {
+   "tx": "Women with **anti-Ro/SSA** antibodies carry a risk of **congenital heart block** and **neonatal lupus**. Fetal heart rate monitoring is usually begun between 16 and 26 weeks of gestation. Hydroxychloroquine reduces the risk of heart block in these pregnancies. Neonatal lupus can cause rash, cytopenias and transaminitis in the newborn, and these usually resolve.",
+   "say": "Women with anti Ro SSA antibodies carry a risk of congenital heart block and neonatal lupus. Fetal heart rate monitoring is usually begun between 16 and 26 weeks of gestation. Hydroxychloroquine reduces the risk of heart block in these pregnancies. Neonatal lupus can cause rash, cytopenias and transaminitis in the newborn, and these usually resolve.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anti-Ro positive"
+     },
+     {
+      "id": "b",
+      "label": "Hydroxychloroquine"
+     },
+     {
+      "id": "c",
+      "label": "Fetal monitoring 16 to 26 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Heart block risk reduced"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pre-eclampsia can mimic a **lupus flare**, so the two must be told apart. Pre-eclampsia tends to present with new hypertension and rising proteinuria with a low platelet count, while a flare usually shows active serology and urinary sediment. **Low-dose aspirin**, 75 to 150 mg daily, is started from 12 weeks of gestation to reduce pre-eclampsia risk in women with SLE or antiphospholipid syndrome.",
+   "say": "Pre-eclampsia can mimic a lupus flare, so the two must be told apart. Pre-eclampsia tends to present with new hypertension and rising proteinuria with a low platelet count, while a flare usually shows active serology and urinary sediment. Low-dose aspirin, 75 to 150 mg daily, is started from 12 weeks of gestation to reduce pre-eclampsia risk in women with SLE or antiphospholipid syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pre-eclampsia",
+     "points": [
+      "New hypertension",
+      "Rising proteinuria",
+      "Low platelets",
+      "Often after 20 weeks"
+     ]
+    },
+    "right": {
+     "title": "Lupus flare",
+     "points": [
+      "Active serology",
+      "Active urinary sediment",
+      "Complement consumption",
+      "Can occur at any stage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**TNF inhibitors** differ in how they reach the foetus. Agents built as **pegylated Fab fragments** lack a significant Fc region, so they cross the placenta poorly and may be continued in pregnancy when disease control needs it. Most other **monoclonal antibodies** carry an Fc portion, which allows active transport across the placenta in the third trimester, so stopping them around the second trimester is commonly considered. Compatibility with breastfeeding should still be checked case by case.",
+   "say": "TNF inhibitors differ in how they reach the foetus. Pegylated Fab fragments lack a significant Fc region, so they cross the placenta poorly and can sometimes be continued in pregnancy if the disease needs it. Most other monoclonal antibodies have an Fc portion that allows active transport across the placenta in the third trimester, so stopping them around the second trimester is often considered. Breastfeeding compatibility should be checked for each agent.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_252c5f0a73ea",
+  "q_2c06f1a49ff2",
+  "q_add1135e272b"
+ ],
+ "src": [],
+ "refs": [
+  "EULAR recommendations for women's health and the management of family planning, assessment of pregnancy risk and treatment in rheumatic diseases"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 57
+ }
+}

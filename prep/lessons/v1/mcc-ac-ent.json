@@ -1,0 +1,163 @@
+{
+ "v": 1,
+ "module": "mcc-ac-ent",
+ "subject": "mcc-acute-care",
+ "title": "Airway, epistaxis and ENT emergencies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Airway emergencies are judged by the **danger of sudden obstruction**, not by how the patient looks at first. Stridor at rest, drooling, a muffled hot potato voice, and a child sitting upright with the chin forward signal a threatened airway. Do not examine the throat of a child with suspected epiglottitis with a tongue depressor, and do not send them away. Secure the airway in a controlled setting with anaesthetic and ENT support.",
+   "say": "Airway emergencies are judged by the danger of sudden obstruction, not by how the patient looks at first. Stridor at rest, drooling, a muffled hot potato voice, and a child sitting upright with the chin forward signal a threatened airway. Do not examine the throat of a child with suspected epiglottitis with a tongue depressor, and do not send them away. Secure the airway in a controlled setting with anaesthetic and ENT support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Epiglottitis",
+     "Croup"
+    ],
+    "rows": [
+     [
+      "Onset",
+      "Abrupt, over hours",
+      "Gradual, over days"
+     ],
+     [
+      "Cough",
+      "Absent or muffled",
+      "Barking"
+     ],
+     [
+      "Posture",
+      "Sits upright, chin forward",
+      "Usually comfortable"
+     ],
+     [
+      "Fever",
+      "High, looks toxic",
+      "Mild or absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Croup in a well child with barking cough, stridor only when crying and normal oxygen saturation is usually mild. A **single oral dose of corticosteroid** reduces subglottic oedema, and admission is not needed if the child is alert and drinking. Nebulised adrenaline is reserved for stridor at rest or signs of respiratory distress, and it needs observation afterwards.",
+   "say": "Croup in a well child with barking cough, stridor only when crying and normal oxygen saturation is usually mild. A single oral dose of corticosteroid reduces subglottic oedema, and admission is not needed if the child is alert and drinking. Nebulised adrenaline is reserved for stridor at rest or signs of respiratory distress, and it needs observation afterwards.",
+   "vis": null
+  },
+  {
+   "tx": "A unilateral **peritonsillar abscess** causes sore throat, fever, trismus and a tonsil pushed toward the midline with the uvula deviated away. While the airway is not yet threatened, the collection needs **needle aspiration or incision and drainage** to remove the source and relieve mass effect. Warn the patient that airway can worsen, and review if voice changes or stridor develop.",
+   "say": "A unilateral peritonsillar abscess causes sore throat, fever, trismus and a tonsil pushed toward the midline with the uvula deviated away. While the airway is not yet threatened, the collection needs needle aspiration or incision and drainage to remove the source and relieve mass effect. Warn the patient that airway can worsen, and review if voice changes or stridor develop.",
+   "vis": null
+  },
+  {
+   "tx": "Odontogenic infection can spread into the **deep neck spaces**, causing Ludwig angina. Trismus, dysphagia, a muffled voice, neck swelling under the jaw and marked leukocytosis with raised CRP signal sepsis and possible airway compromise. Urgent airway assessment and ENT consultation come first, with antibiotics and drainage to follow. Never discharge such a patient for outpatient care.",
+   "say": "Odontogenic infection can spread into the deep neck spaces, causing Ludwig angina. Trismus, dysphagia, a muffled voice, neck swelling under the jaw and marked leukocytosis with raised CRP signal sepsis and possible airway compromise. Urgent airway assessment and ENT consultation come first, with antibiotics and drainage to follow. Never discharge such a patient for outpatient care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dental abscess"
+     },
+     {
+      "id": "b",
+      "label": "Spread to floor of mouth"
+     },
+     {
+      "id": "c",
+      "label": "Deep neck spaces"
+     },
+     {
+      "id": "d",
+      "label": "Airway assessment and ENT"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most **anterior epistaxis** settles with steady, firm compression of the soft part of the nose, which squeezes the vessels of **Little's area** against the septum. Anticoagulants such as warfarin make bleeding harder to control but do not alter this first step, so check the INR and platelet count early. If bleeding persists, a topical vasoconstrictor and then anterior packing or cautery are the next options.",
+   "say": "Most anterior epistaxis settles with steady, firm compression of the soft part of the nose, which squeezes the vessels of Little's area against the septum. Anticoagulants such as warfarin make bleeding harder to control but do not alter this first step, so check the INR and platelet count early. If bleeding persists, a topical vasoconstrictor and then anterior packing or cautery are the next options.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Firm pressure on alae"
+     },
+     {
+      "id": "b",
+      "label": "Topical vasoconstrictor"
+     },
+     {
+      "id": "c",
+      "label": "Anterior packing or cautery"
+     },
+     {
+      "id": "d",
+      "label": "Posterior packing or ENT review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Post-tonsillectomy haemorrhage in the first 24 hours is often bleeding, but **secondary haemorrhage** appears around day 5 to 10 as slough separates and exposes a vessel. Vomiting fresh blood, tachycardia and hypotension call for resuscitation and immediate return to theatre for surgical haemostasis. Normal platelets and INR point to a local vessel rather than a coagulopathy.",
+   "say": "Post-tonsillectomy haemorrhage in the first 24 hours is often bleeding, but secondary haemorrhage appears around day 5 to 10 as slough separates and exposes a vessel. Vomiting fresh blood, tachycardia and hypotension call for resuscitation and immediate return to theatre for surgical haemostasis. Normal platelets and INR point to a local vessel rather than a coagulopathy.",
+   "vis": null
+  },
+  {
+   "tx": "Painless, non-itchy swelling of the lips, tongue and uvula with an **ACE inhibitor** suggests bradykinin-mediated angioedema, and urticaria is often absent. Stop the ACE inhibitor and arrange early airway assessment, because tongue and uvular swelling can progress to obstruction. Antihistamines and steroids do not treat bradykinin-driven swelling reliably, so they must not be the sole therapy.",
+   "say": "Painless, non-itchy swelling of the lips, tongue and uvula with an ACE inhibitor suggests bradykinin-mediated angioedema, and urticaria is often absent. Stop the ACE inhibitor and arrange early airway assessment, because tongue and uvular swelling can progress to obstruction. Antihistamines and steroids do not treat bradykinin-driven swelling reliably, so they must not be the sole therapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Scott-Brown's Otorhinolaryngology and Head and Neck Surgery (Gleeson, M.)",
+  "NICE CKS: Nosebleed (epistaxis)",
+  "Dhingra's Diseases of Ear, Nose and Throat and Head Neck Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

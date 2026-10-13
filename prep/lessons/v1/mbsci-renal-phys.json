@@ -1,0 +1,170 @@
+{
+ "v": 1,
+ "module": "mbsci-renal-phys",
+ "subject": "mrcp-basic-science",
+ "title": "Renal tubular acidosis and renal electrolyte handling",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Renal tubular acidosis is a **normal anion gap hyperchloraemic acidosis** caused by the kidney failing to excrete acid or reabsorb bicarbonate. The key question is whether urine can be acidified during a systemic acidosis. In distal, or type 1, renal tubular acidosis the collecting duct cannot secrete hydrogen ions, so urine pH stays above 5.5 even when blood is acidic. Potassium is lost in exchange for sodium, so hypokalaemia is typical.",
+   "say": "Renal tubular acidosis is a normal anion gap hyperchloraemic acidosis caused by the kidney failing to excrete acid or reabsorb bicarbonate. The key question is whether urine can be acidified during a systemic acidosis. In distal, or type 1, renal tubular acidosis the collecting duct cannot secrete hydrogen ions, so urine pH stays above 5.5 even when blood is acidic. Potassium is lost in exchange for sodium, so hypokalaemia is typical.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Distal (type 1)",
+     "Type 4"
+    ],
+    "rows": [
+     [
+      "Urine pH",
+      "Persistently above 5.5",
+      "Below 5.5 possible"
+     ],
+     [
+      "Potassium",
+      "Low",
+      "High"
+     ],
+     [
+      "Main defect",
+      "Hydrogen secretion failure",
+      "Low aldosterone effect"
+     ],
+     [
+      "Stones",
+      "Calcium phosphate, alkaline urine",
+      "Uncommon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Type 4 renal tubular acidosis is the **hyperkalaemic** variant, usually from reduced aldosterone action or hyporeninaemic hypoaldosteronism. It is common in diabetes and reduced kidney function, and drugs such as ACE inhibitors and ARBs can contribute. Less aldosterone lowers potassium and hydrogen ion secretion in the distal nephron, so potassium rises and acid retention follows.",
+   "say": "Type 4 renal tubular acidosis is the hyperkalaemic variant, usually from reduced aldosterone action or hyporeninaemic hypoaldosteronism. It is common in diabetes and reduced kidney function, and drugs such as ACE inhibitors and ARBs can contribute. Less aldosterone lowers potassium and hydrogen ion secretion in the distal nephron, so potassium rises and acid retention follows.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diabetes or reduced kidney function"
+     },
+     {
+      "id": "b",
+      "label": "Low renin and aldosterone"
+     },
+     {
+      "id": "c",
+      "label": "Less potassium and hydrogen secretion"
+     },
+     {
+      "id": "d",
+      "label": "Hyperkalaemic acidosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Urinary electrolytes help separate causes of acidosis. The **urine anion gap** is sodium plus potassium minus chloride. A negative value suggests the kidney is excreting ammonium normally, as in gastrointestinal bicarbonate loss from diarrhoea. A positive value suggests impaired renal acid excretion, as in renal tubular acidosis.",
+   "say": "Urinary electrolytes help separate causes of acidosis. The urine anion gap is sodium plus potassium minus chloride. A negative value suggests the kidney is excreting ammonium normally, as in gastrointestinal bicarbonate loss from diarrhoea. A positive value suggests impaired renal acid excretion, as in renal tubular acidosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative urine anion gap",
+     "points": [
+      "High ammonium excretion",
+      "Normal response to acid load",
+      "Typical of diarrhoea"
+     ]
+    },
+    "right": {
+     "title": "Positive urine anion gap",
+     "points": [
+      "Impaired ammonium excretion",
+      "Suggests renal tubular acidosis",
+      "Consider aldosterone or tubular defect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Potassium handling is also shaped by **aldosterone** signalling and by **channel defects** along the nephron. Loss-of-function changes in the thick ascending limb or thiazide-sensitive transporter produce salt-losing tubulopathies with alkalosis. Gain-of-function changes in the **epithelial sodium channel** cause hypertension with suppressed renin and aldosterone, together with hypokalaemic alkalosis. Recognising this pattern points towards a genetic cause.",
+   "say": "Potassium handling is also shaped by aldosterone signalling and by channel defects along the nephron. Loss-of-function changes in the thick ascending limb or thiazide-sensitive transporter produce salt-losing tubulopathies with alkalosis. Gain-of-function changes in the epithelial sodium channel cause hypertension with suppressed renin and aldosterone, together with hypokalaemic alkalosis. Recognising this pattern points towards a genetic cause.",
+   "vis": null
+  },
+  {
+   "tx": "Loop diuretics act on the **thick ascending limb**, blocking the sodium-potassium-chloride cotransporter NKCC2. This reduces sodium reabsorption and the medullary gradient, and raises calcium and magnesium excretion. Thiazides act in the distal convoluted tubule and can raise serum calcium, which is the opposite pattern. Over the whole nephron, the proximal tubule reabsorbs most of the filtered sodium.",
+   "say": "Loop diuretics act on the thick ascending limb, blocking the sodium-potassium-chloride cotransporter NKCC2. This reduces sodium reabsorption and the medullary gradient, and raises calcium and magnesium excretion. Thiazides act in the distal convoluted tubule and can raise serum calcium, which is the opposite pattern. Over the whole nephron, the proximal tubule reabsorbs most of the filtered sodium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Site",
+     "Calcium effect"
+    ],
+    "rows": [
+     [
+      "Loop diuretic",
+      "Thick ascending limb",
+      "Calcium loss"
+     ],
+     [
+      "Thiazide",
+      "Distal convoluted tubule",
+      "Calcium retention"
+     ],
+     [
+      "Aldosterone antagonist",
+      "Collecting duct",
+      "Potassium retention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prerenal acute kidney injury from volume loss is recognised by a **low fractional excretion of sodium**, below about 1 per cent. Kidneys under low perfusion avidly retain sodium. Angiotensin II maintains glomerular filtration by constricting the efferent arteriole, and ACE inhibitors remove this effect, so creatinine can rise sharply.",
+   "say": "Prerenal acute kidney injury from volume loss is recognised by a low fractional excretion of sodium, below about 1 per cent. Kidneys under low perfusion avidly retain sodium. Angiotensin II maintains glomerular filtration by constricting the efferent arteriole, and ACE inhibitors remove this effect, so creatinine can rise sharply.",
+   "vis": null
+  },
+  {
+   "tx": "Hyperkalaemia with ECG changes is an emergency. **Intravenous calcium gluconate** stabilises the cardiac membrane within minutes but does not lower serum potassium. Insulin with glucose, salbutamol and potassium binders then shift or remove potassium, and dialysis is needed when these fail or renal function is poor.",
+   "say": "Hyperkalaemia with ECG changes is an emergency. Intravenous calcium gluconate stabilises the cardiac membrane within minutes but does not lower serum potassium. Insulin with glucose, salbutamol and potassium binders then shift or remove potassium, and dialysis is needed when these fail or renal function is poor.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Kidney Disease: Improving Global Outcomes (KDIGO) Clinical Practice Guideline for Acute Kidney Injury",
+  "NICE guideline on acute kidney injury (NG148)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 21
+ }
+}

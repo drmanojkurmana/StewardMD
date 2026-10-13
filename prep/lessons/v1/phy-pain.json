@@ -1,0 +1,164 @@
+{
+ "v": 1,
+ "module": "phy-pain",
+ "subject": "physiology",
+ "title": "Pain and temperature: nociceptors, fibres, and modulation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pain is an unpleasant sensory and emotional experience linked to actual or potential tissue damage. **Nociception** is the unconscious neural activity triggered by a harmful stimulus at sensory receptors. **Free nerve endings** act as the pain receptors in skin, periosteum, arterial walls and joint surfaces. Brain parenchyma, liver parenchyma and lung alveoli lack pain receptors, which is why brain tissue can be touched without pain.",
+   "say": "Pain is an unpleasant sensory and emotional experience linked to actual or potential tissue damage. Nociception is the unconscious neural activity triggered by a harmful stimulus at sensory receptors. Free nerve endings act as the pain receptors in skin, periosteum, arterial walls and joint surfaces. Brain parenchyma, liver parenchyma and lung alveoli lack pain receptors, which is why brain tissue can be touched without pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Fast pain",
+     "Slow pain"
+    ],
+    "rows": [
+     [
+      "Fibre type",
+      "A delta, lightly myelinated",
+      "C, unmyelinated"
+     ],
+     [
+      "Quality",
+      "Sharp, well localised",
+      "Dull, burning, aching"
+     ],
+     [
+      "Conduction",
+      "Rapid",
+      "Slow"
+     ],
+     [
+      "Example",
+      "Sudden prick",
+      "Lingering ache"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pain is carried by **A delta fibres** and **C fibres**. A delta fibres are lightly myelinated, medium to large, and give sharp, well localised fast pain. C fibres are small and unmyelinated, conduct slowly, and produce diffuse, lingering pain. Visceral pain travels mainly through C fibres, so it is poorly localised, often referred, and linked with nausea and autonomic change. Pain and temperature ascend in the **lateral spinothalamic tract**.",
+   "say": "Pain is carried by A delta fibres and C fibres. A delta fibres are lightly myelinated, medium to large, and give sharp, well localised fast pain. C fibres are small and unmyelinated, conduct slowly, and produce diffuse, lingering pain. Visceral pain travels mainly through C fibres, so it is poorly localised, often referred, and linked with nausea and autonomic change. Pain and temperature ascend in the lateral spinothalamic tract.",
+   "vis": null
+  },
+  {
+   "tx": "Peripheral sensitisers such as **prostaglandins**, bradykinin and substance P do not directly excite nociceptors but raise their sensitivity. **Substance P** is an undecapeptide tachykinin acting as a neurotransmitter and neuromodulator. Hyperalgesia is an exaggerated response to a painful stimulus, whereas allodynia is pain caused by a normally non painful stimulus. Both reflect sensitisation of the pain pathway.",
+   "say": "Peripheral sensitisers such as prostaglandins, bradykinin and substance P do not directly excite nociceptors but raise their sensitivity. Substance P is an undecapeptide tachykinin acting as a neurotransmitter and neuromodulator. Hyperalgesia is an exaggerated response to a painful stimulus, whereas allodynia is pain caused by a normally non painful stimulus. Both reflect sensitisation of the pain pathway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperalgesia",
+     "points": [
+      "Exaggerated response to painful stimulus",
+      "Lowered pain threshold"
+     ]
+    },
+    "right": {
+     "title": "Allodynia",
+     "points": [
+      "Non painful stimulus felt as pain",
+      "Central sensitisation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gate control theory proposes that stimulation of large myelinated A beta fibres closes a gate in the **substantia gelatinosa** of the dorsal horn, reducing transmission of pain. Enkephalinergic interneurons form this gate. Counter irritants, massage, rubbing and TENS work on this principle. Referred pain arises when visceral and somatic afferents converge on the same second order dorsal horn neurons.",
+   "say": "Gate control theory proposes that stimulation of large myelinated A beta fibres closes a gate in the substantia gelatinosa of the dorsal horn, reducing transmission of pain. Enkephalinergic interneurons form this gate. Counter irritants, massage, rubbing and TENS work on this principle. Referred pain arises when visceral and somatic afferents converge on the same second order dorsal horn neurons.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Large A beta touch fibres"
+     },
+     {
+      "id": "b",
+      "label": "Substantia gelatinosa interneurons"
+     },
+     {
+      "id": "c",
+      "label": "Pain transmission reduced"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The descending analgesia system has three parts: the **periaqueductal grey** and periventricular area of the midbrain and upper pons, the **raphe magnus nucleus** in the lower pons and upper medulla, and a dorsal horn pain inhibitory complex. Raphe neurons release serotonin, which activates enkephalin interneurons. Endogenous opioids such as beta endorphin, enkephalins and dynorphin act on these pathways, and stress induced analgesia follows the same route.",
+   "say": "The descending analgesia system has three parts: the periaqueductal grey and periventricular area of the midbrain and upper pons, the raphe magnus nucleus in the lower pons and upper medulla, and a dorsal horn pain inhibitory complex. Raphe neurons release serotonin, which activates enkephalin interneurons. Endogenous opioids such as beta endorphin, enkephalins and dynorphin act on these pathways, and stress induced analgesia follows the same route.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p",
+      "label": "Periaqueductal grey"
+     },
+     {
+      "id": "r",
+      "label": "Raphe magnus"
+     },
+     {
+      "id": "d",
+      "label": "Dorsal horn inhibitory complex"
+     },
+     {
+      "id": "x",
+      "label": "Reduced pain signal"
+     }
+    ],
+    "edges": [
+     [
+      "p",
+      "r"
+     ],
+     [
+      "r",
+      "d"
+     ],
+     [
+      "d",
+      "x"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "9bb8b044-e808-47ea-ba7e-7cfccf4afe10",
+  "2eafb1b9-9135-469e-9d9f-ed793ac08fdf",
+  "f3e07129-506e-4da7-8ec8-4ee76e4f6f11"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Ganong's Review of Medical Physiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 124
+ }
+}

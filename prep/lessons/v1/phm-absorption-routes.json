@@ -1,0 +1,135 @@
+{
+ "v": 1,
+ "module": "phm-absorption-routes",
+ "subject": "pharmacology",
+ "title": "Routes of administration and drug absorption",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Routes of administration decide how fast and how completely a drug reaches the circulation. **Bioavailability** is the fraction of the administered dose that reaches the systemic circulation unchanged. An intravenous dose has a bioavailability of one, because it skips absorption entirely. Oral drugs may fall short for two reasons: incomplete absorption across the gut wall, and **first-pass metabolism** in the intestinal wall and liver.",
+   "say": "Routes of administration decide how fast and how completely a drug reaches the circulation. Bioavailability is the fraction of the administered dose that reaches the systemic circulation unchanged. An intravenous dose has a bioavailability of one, because it skips absorption entirely. Oral drugs may fall short for two reasons: incomplete absorption across the gut wall, and first-pass metabolism in the intestinal wall and liver.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Bioavailability and speed",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Intravenous",
+      "Complete, fastest",
+      "Reference standard, value of one"
+     ],
+     [
+      "Inhalational",
+      "Fast, direct to lungs",
+      "Gases and aerosols act quickly"
+     ],
+     [
+      "Sublingual",
+      "Fast, bypasses liver",
+      "Used for glyceryl trinitrate"
+     ],
+     [
+      "Oral",
+      "Variable, first-pass loss",
+      "Most variable absorption"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drugs cross membranes mainly by **passive diffusion**, and only **unionised** drugs that are lipid soluble pass easily. The pH rule decides where a drug is absorbed. Weak acids stay unionised in the acidic stomach, so they are absorbed there. Weak bases stay unionised in the alkaline intestine, so they are absorbed there. Aspirin and phenobarbitone are therefore absorbed from the stomach.",
+   "say": "Drugs cross membranes mainly by passive diffusion, and only unionised drugs that are lipid soluble pass easily. The pH rule decides where a drug is absorbed. Weak acids stay unionised in the acidic stomach, so they are absorbed there. Weak bases stay unionised in the alkaline intestine, so they are absorbed there. Aspirin and phenobarbitone are therefore absorbed from the stomach.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Weak acids",
+     "points": [
+      "Unionised in acidic stomach",
+      "Absorbed from stomach",
+      "Examples: aspirin, phenobarbitone"
+     ]
+    },
+    "right": {
+     "title": "Weak bases",
+     "points": [
+      "Unionised in alkaline intestine",
+      "Absorbed from intestine",
+      "Example: basic drugs in gut"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ion trapping** occurs when a drug becomes ionised on the far side of a membrane and cannot diffuse back. Aspirin stays unionised in the stomach lumen, then ionises inside the gastric mucosal cell and gets trapped there, which adds to its gastric toxicity. Ion trapping also explains why acidic drugs accumulate in alkaline compartments and basic drugs in acidic ones.",
+   "say": "Ion trapping occurs when a drug becomes ionised on the far side of a membrane and cannot diffuse back. Aspirin stays unionised in the stomach lumen, then ionises inside the gastric mucosal cell and gets trapped there, which adds to its gastric toxicity. Ion trapping also explains why acidic drugs accumulate in alkaline compartments and basic drugs in acidic ones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unionised in stomach lumen"
+     },
+     {
+      "id": "b",
+      "label": "Crosses into mucosal cell"
+     },
+     {
+      "id": "c",
+      "label": "Ionises and is trapped"
+     },
+     {
+      "id": "d",
+      "label": "Local mucosal injury"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prodrugs** are inactive as given and are converted to active drugs in the body. Enalapril becomes enalaprilat, levodopa becomes dopamine, and becampicillin becomes ampicillin. Captopril and lisinopril are ACE inhibitors that are active as given, so they are not prodrugs. Prodrugs offer better bioavailability, greater stability and fewer side effects.",
+   "say": "Prodrugs are inactive as given and are converted to active drugs in the body. Enalapril becomes enalaprilat, levodopa becomes dopamine, and becampicillin becomes ampicillin. Captopril and lisinopril are ACE inhibitors that are active as given, so they are not prodrugs. Prodrugs offer better bioavailability, greater stability and fewer side effects.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "9743d343-a0c5-498d-891c-9a4a9d23370f",
+  "31eac8da-5418-4baf-93a5-1135e1d07b29",
+  "6b095be6-1d92-425a-a22b-a05e8dc8620c"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung BG, Masters SB, Trevor AJ (Eds). Basic and Clinical Pharmacology",
+  "Tripathi KD. Essentials of Medical Pharmacology, Seventh edition"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 227
+ }
+}

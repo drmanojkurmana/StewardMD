@@ -1,0 +1,97 @@
+{
+ "v": 1,
+ "module": "srh-drug-monitoring",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Drug toxicity monitoring in rheumatology: DMARDs, JAK inhibitors and biologics",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Disease-modifying drugs in rheumatology carry **toxicities** that must be checked on a schedule, not only when a patient feels unwell. Monitoring protects patients from silent organ damage. Your job in the exam is to match each drug to its specific monitoring test and its action threshold. Start with the drug that causes the most common questions.",
+   "say": "Disease-modifying drugs in rheumatology carry toxicities that must be checked on a schedule, not only when a patient feels unwell. Monitoring protects patients from silent organ damage. Your job in the exam is to match each drug to its specific monitoring test and its action threshold.",
+   "vis": null
+  },
+  {
+   "tx": "**Leflunomide** inhibits dihydro-orotate dehydrogenase, which slows pyrimidine synthesis in lymphocytes. Its effect is usually seen after about four to eight weeks. Liver enzymes are checked monthly in the first six months. If ALT rises above three times the upper limit, the dose is reduced or the drug stopped, and blood pressure must be measured because hypertension can occur. Before conception, a washout with cholestyramine is needed.",
+   "say": "Leflunomide inhibits dihydro-orotate dehydrogenase, which slows pyrimidine synthesis in lymphocytes. Its effect is usually seen after four to eight weeks. Liver enzymes are checked monthly in the first six months. If the ALT rises above three times the upper limit, the dose is reduced or the drug stopped, and blood pressure must be measured because hypertension can occur. Before conception, a cholestyramine washout is needed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start leflunomide"
+     },
+     {
+      "id": "b",
+      "label": "Monthly ALT for 6 months"
+     },
+     {
+      "id": "c",
+      "label": "ALT above 3 times normal?"
+     },
+     {
+      "id": "d",
+      "label": "Reduce dose and recheck"
+     },
+     {
+      "id": "e",
+      "label": "Continue with routine checks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "yes"
+     ],
+     [
+      "c",
+      "e",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**JAK inhibitors** carry a boxed safety warning. They are linked with **venous thromboembolism**, **major adverse cardiovascular events** and **malignancy**, with greater risk in older patients and those with cardiovascular risk factors. Screen for **latent tuberculosis** and other serious infections before starting treatment, and review the risk profile at each visit.",
+   "say": "JAK inhibitors carry a boxed safety warning. They are linked with venous thromboembolism, major adverse cardiovascular events and malignancy, with greater risk in older patients and those with cardiovascular risk factors. Screen for latent tuberculosis and other serious infections before starting treatment, and review the risk profile at each visit.",
+   "vis": null
+  },
+  {
+   "tx": "**Hydroxychloroquine** is a low-risk drug, but it can cause retinopathy with long use. Baseline retinal screening is done, followed by annual optical coherence tomography after about five years of use, with extra vigilance in those with renal impairment or high dose. Sulfasalazine can cause reversible oligospermia in men, which should be explained before starting. Together these points cover the core monitoring facts for rheumatology drugs.",
+   "say": "Hydroxychloroquine is a low-risk drug, but it can cause retinopathy with long use. Baseline retinal screening is done, followed by annual optical coherence tomography after about five years of use, with extra vigilance in those with renal impairment or high dose. Sulfasalazine can cause reversible oligospermia in men, which should be explained before starting. Together these points cover the core monitoring facts for rheumatology drugs.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_dd2e6a76f0b9",
+  "q_4b1a7d10768b",
+  "q_8645bbbb661a"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Fauci et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

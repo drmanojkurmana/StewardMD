@@ -1,0 +1,137 @@
+{
+ "v": 1,
+ "module": "mcc-pb-mentalhealthlaw",
+ "subject": "mcc-professional-behaviours",
+ "title": "Mental health law: capacity, consent and involuntary care",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Mental health law governs when a clinician may assess or treat a person without their **consent**. Start with the presumption that every adult with capacity decides for themselves. Capacity is **decision-specific**, meaning a person may be capable of one choice and not another. Clinicians must check it for each decision, not assume it from a diagnosis.",
+   "say": "Mental health law governs when a clinician may assess or treat a person without their consent. Start with the presumption that every adult with capacity decides for themselves. Capacity is decision-specific, meaning a person may be capable of one choice and not another. Clinicians must check it for each decision, not assume it from a diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "Capacity has four parts: **understanding** the information, **appreciating** how it applies to oneself, **reasoning** with options, and **communicating** a choice. A patient may repeat facts yet fail appreciation, as in schizophrenia with impaired insight. Such a refusal may not be valid, so formal assessment comes before any override.",
+   "say": "Capacity has four parts: understanding the information, appreciating how it applies to oneself, reasoning with options, and communicating a choice. A patient may repeat facts yet fail appreciation, as in schizophrenia with impaired insight. Such a refusal may not be valid, so formal assessment comes before any override.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Key question"
+    ],
+    "rows": [
+     [
+      "Understanding",
+      "Can they restate the information?"
+     ],
+     [
+      "Appreciation",
+      "Do they see it applies to them?"
+     ],
+     [
+      "Reasoning",
+      "Can they weigh the options?"
+     ],
+     [
+      "Communication",
+      "Can they express a stable choice?"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a person lacks capacity, the **substitute decision-maker** consents. A valid advance directive or a power of attorney made while capable ranks first and is applied to the specific situation. Otherwise a legally designated surrogate acts on known wishes and values. Next of kin such as a son does not outrank a validly appointed attorney. Urgency alone does not remove the need for valid consent.",
+   "say": "When a person lacks capacity, the substitute decision-maker consents. A valid advance directive or a power of attorney made while capable ranks first and is applied to the specific situation. Otherwise a legally designated surrogate acts on known wishes and values. Next of kin such as a son does not outrank a validly appointed attorney. Urgency alone does not remove the need for valid consent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Lacks capacity"
+     },
+     {
+      "id": "b",
+      "label": "Valid directive or attorney"
+     },
+     {
+      "id": "c",
+      "label": "Legal surrogate acts on wishes"
+     },
+     {
+      "id": "d",
+      "label": "Emergency or court route"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "if none"
+     ],
+     [
+      "c",
+      "d",
+      "if no surrogate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Involuntary care can be authorised under **provincial legislation** when a **mental disorder** creates a serious risk of harm and the person declines voluntary treatment. Examples include suicidal threats during first-episode psychosis and acute mania with a threat to set fire to a home. Because refusal rules out voluntary admission, a legal assessment order becomes the route. Any detention must be proportionate and time-limited.",
+   "say": "Involuntary care can be authorised under provincial legislation when a mental disorder creates a serious risk of harm and the person declines voluntary treatment. Examples include suicidal threats during first-episode psychosis and acute mania with a threat to set fire to a home. Because refusal rules out voluntary admission, a legal assessment order becomes the route. Any detention must be proportionate and time-limited.",
+   "vis": null
+  },
+  {
+   "tx": "Confidentiality is not absolute. A **duty to protect** arises when a patient poses a credible, serious and imminent threat to an identifiable person. The clinician should disclose only what is needed to prevent harm, for example warning the potential victim or informing police. Keeping a threat secret because it was said in session is not acceptable.",
+   "say": "Confidentiality is not absolute. A duty to protect arises when a patient poses a credible, serious and imminent threat to an identifiable person. The clinician should disclose only what is needed to prevent harm, for example warning the potential victim or informing police. Keeping a threat secret because it was said in session is not acceptable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Keep confidential",
+     "points": [
+      "Routine clinical content",
+      "No specific named target",
+      "Threat is vague or distant"
+     ]
+    },
+    "right": {
+     "title": "Disclose limited information",
+     "points": [
+      "Named or identifiable person",
+      "Credible and imminent",
+      "Access to means or past violence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reversible causes such as **delirium** or a metabolic upset, for example low sodium or rising creatinine, can weaken a person's **decision-making capacity**. Treat the cause first, then reassess as they recover. A psychiatric label or a fixed belief does not remove capacity on its own; the specific decision must be tested. Where lithium toxicity leaves someone disoriented and no surrogate can be reached, urgent treatment may go ahead under the **emergency exception**.",
+   "say": "Reversible causes such as delirium or a metabolic upset, for example low sodium or rising creatinine, can weaken a person's decision-making capacity. Treat the cause first, then reassess as they recover. A psychiatric label or a fixed belief does not remove capacity on its own; the specific decision must be tested. Where lithium toxicity leaves someone disoriented and no surrogate can be reached, urgent treatment may go ahead under the emergency exception.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Tarasoff v. Regents of the University of California (1976) duty to protect principle"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

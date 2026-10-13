@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mcc-hp-otherscreen",
+ "subject": "mcc-health-promotion",
+ "title": "Lung and prostate screening decisions",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Screening aims to find disease early in people without symptoms. For **lung cancer**, low-dose CT is offered to adults with a high smoking burden who are still fit for curative treatment. Eligibility is judged by pack-years and time since quitting, and the decision must be shared with the patient.",
+   "say": "Screening aims to find disease early in people without symptoms. For lung cancer, low-dose CT is offered to adults with a high smoking burden who are still fit for curative treatment. Eligibility is judged by pack-years and time since quitting, and the decision must be shared with the patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Prostate cancer screening** with PSA in asymptomatic men can detect tumours that would never cause harm. It can also produce false positives leading to biopsy and its complications. Informed choice, through discussion of benefits and harms, comes before any PSA test. Asymptomatic men with a normal examination and only a friend's diagnosis as a reason need this discussion.",
+   "say": "Prostate cancer screening with PSA in asymptomatic men can detect tumours that would never cause harm. It can also produce false positives leading to biopsy and its complications. Informed choice, through discussion of benefits and harms, comes before any PSA test.",
+   "vis": null
+  },
+  {
+   "tx": "Low-grade, low-volume prostate cancer on biopsy, with a good life expectancy and no urinary symptoms, usually suits **active surveillance**. This means regular PSA, repeat biopsy or imaging, and treatment only if progression occurs. Normal creatinine means renal function does not restrict choices. Radical treatment is not needed at diagnosis for such men.",
+   "say": "Low-grade, low-volume prostate cancer on biopsy, with a good life expectancy and no urinary symptoms, usually suits active surveillance. This means regular PSA, repeat biopsy or imaging, and treatment only if progression occurs. Normal creatinine means renal function does not restrict choices.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low-grade biopsy"
+     },
+     {
+      "id": "b",
+      "label": "Regular PSA and imaging"
+     },
+     {
+      "id": "c",
+      "label": "Repeat biopsy if needed"
+     },
+     {
+      "id": "d",
+      "label": "Treat on progression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic features such as weight loss, bone pain, fatigue and anaemia, with a markedly raised PSA and a firm enlarged prostate, suggest **advanced prostate cancer**. This needs urgent urology referral for tissue diagnosis and staging. Routine annual or two-yearly PSA monitoring is not appropriate in such a patient.",
+   "say": "Systemic features such as weight loss, bone pain, fatigue and anaemia, with a markedly raised PSA and a firm enlarged prostate, suggest advanced prostate cancer. This needs urgent urology referral for tissue diagnosis and staging. Routine PSA monitoring is not appropriate in such a patient.",
+   "vis": null
+  },
+  {
+   "tx": "Where a PSA is persistently raised but the examination is normal, the next step is shared decision-making about the benefits and harms of further tests. **Multiparametric MRI** can identify suspicious lesions and guide a targeted biopsy, reducing unnecessary procedures. Treatment such as surgery or finasteride should not start before evaluation.",
+   "say": "Where a PSA is persistently raised but the examination is normal, the next step is shared decision-making about the benefits and harms of further tests. Multiparametric MRI can identify suspicious lesions and guide a targeted biopsy, reducing unnecessary procedures. Treatment should not start before evaluation.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE NG12: Suspected cancer: recognition and referral",
+  "NICE NG131: Prostate cancer: diagnosis and management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

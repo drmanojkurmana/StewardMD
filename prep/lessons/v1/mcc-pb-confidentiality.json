@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "mcc-pb-confidentiality",
+ "subject": "mcc-professional-behaviours",
+ "title": "Confidentiality in Clinical Practice",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Confidentiality means a patient's health information is held in trust and shared only with **consent** or under a recognised **legal exception**. It protects the willingness of patients to disclose sensitive history and seek care. Confidentiality is the default; disclosure is the exception that needs a justification.",
+   "say": "Confidentiality means a patient's health information is held in trust and shared only with consent or under a recognised legal exception. It protects the willingness of patients to disclose sensitive history and seek care. Confidentiality is the default, and disclosure is the exception that needs a justification.",
+   "vis": null
+  },
+  {
+   "tx": "Capacity, not age alone, decides who may consent. A **mature minor** with capacity can consent to confidential care, such as testing and treatment for sexually transmitted infections. A patient who lacks capacity needs a **substitute decision-maker**, who receives only the information needed for the decisions they make.",
+   "say": "Capacity, not age alone, decides who may consent. A mature minor with capacity can consent to confidential care, such as testing and treatment for sexually transmitted infections. A patient who lacks capacity needs a substitute decision-maker, who receives only the information needed for the decisions they make.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Who may receive information"
+    ],
+    "rows": [
+     [
+      "Capable adult",
+      "Only the patient, unless they consent"
+     ],
+     [
+      "Mature minor with capacity",
+      "Adolescent controls confidential care"
+     ],
+     [
+      "Incapable patient with named substitute",
+      "That substitute, for treatment decisions"
+     ],
+     [
+      "Relatives without authority",
+      "Only with a clear need to know"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Certain situations override confidentiality. **Notifiable infections**, such as syphilis, must be reported to public health authorities whether or not the patient agrees. Disclosure is also justified to prevent **serious harm** to an identifiable third party, and suspected **child abuse** must be reported to the child protection agency once reasonable suspicion exists.",
+   "say": "Certain situations override confidentiality. Notifiable infections, such as syphilis, must be reported to public health authorities whether or not the patient agrees. Disclosure is also justified to prevent serious harm to an identifiable third party, and suspected child abuse must be reported to the child protection agency once reasonable suspicion exists.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Concern arises"
+     },
+     {
+      "id": "b",
+      "label": "Legal duty?"
+     },
+     {
+      "id": "c",
+      "label": "Report minimum needed"
+     },
+     {
+      "id": "d",
+      "label": "Otherwise keep confidential"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Third parties such as employers and insurers need **specific, informed consent** for each disclosure. Share only what answers their stated question, such as a fitness-for-duty opinion, rather than the full chart or sensitive history like psychiatric history. A general signed consent form does not authorise release of detailed records.",
+   "say": "Third parties such as employers and insurers need specific, informed consent for each disclosure. Share only what answers their stated question, such as a fitness-for-duty opinion, rather than the full chart or sensitive history like psychiatric history. A general signed consent form does not authorise release of detailed records.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Share",
+     "points": [
+      "Answer to the specific question",
+      "Fitness opinion with consent",
+      "Minimum necessary detail"
+     ]
+    },
+    "right": {
+     "title": "Withhold",
+     "points": [
+      "Full chart or medication list",
+      "Psychiatric or sexual history",
+      "Anything beyond the stated purpose"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "National Medical Commission, Code of Ethics Regulations (India)",
+  "General Medical Council, Confidentiality: good practice in handling patient information"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

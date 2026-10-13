@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "sca-revascularisation",
+ "subject": "ss-cardiology",
+ "title": "Percutaneous and surgical revascularisation: key principles for NEET-PG",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Older lesions, typically beyond 12 months, are more likely to be **fibrocalcific** and hard, with few neovascular channels. The **J-CTO score** predicts the chance of successful crossing. A **blunt proximal cap** is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
+   "say": "Older lesions, typically beyond twelve months, are more likely to be fibrocalcific and hard, with few neovascular channels. The J-CTO score predicts the chance of successful crossing. A blunt proximal cap is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
+   "vis": null
+  },
+  {
+   "tx": "CTO revascularisation is mainly aimed at relieving angina and improving **quality of life**, with a reduction in repeat revascularisation. It has not been shown to reduce myocardial infarction or mortality in general. Patients with **three-vessel disease** and insulin-dependent diabetes generally benefit from **coronary artery bypass grafting**, as guidelines favour surgery in this group, particularly where complex anatomy is present.",
+   "say": "CTO revascularisation is mainly aimed at relieving angina and improving quality of life, with a reduction in repeat revascularisation. It has not been shown to reduce myocardial infarction or mortality in general. Patients with three-vessel disease and insulin-dependent diabetes generally benefit from coronary artery bypass grafting, as guidelines favour surgery in this group, particularly where complex anatomy is present.",
+   "vis": null
+  },
+  {
+   "tx": "Stent generation determines the **drug-eluting stent** design. Second-generation stents use a thin-strut **cobalt-chromium** scaffold with an everolimus or zotarolimus coating, and have better outcomes than first-generation devices. Thinner struts of about 70 micrometres reduce restenosis compared with 140 micrometre designs. Long stents raise the risk of fracture, and small vessels below about 2.5 to 3 mm need careful selection.",
+   "say": "Stent generation determines the drug-eluting stent design. Second-generation stents use a thin-strut cobalt-chromium scaffold with an everolimus or zotarolimus coating, and have better outcomes than first-generation devices. Thinner struts of about seventy micrometres reduce restenosis compared with one hundred and forty micrometre designs. Long stents raise the risk of fracture, and small vessels below about two and a half to three millimetres need careful selection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-generation DES",
+     "points": [
+      "Stainless steel or early platforms",
+      "Sirolimus or paclitaxel",
+      "Permanent polymer",
+      "Higher late thrombosis risk"
+     ]
+    },
+    "right": {
+     "title": "Second-generation DES",
+     "points": [
+      "Cobalt-chromium thin struts",
+      "Everolimus or zotarolimus",
+      "Biocompatible polymers",
+      "Lower restenosis and thrombosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stent thrombosis** is classified by timing: early within 30 days, late from 30 days to 1 year, and very late beyond 1 year. Causes include delayed reendothelialisation, **stent malapposition**, and under-expansion. In-stent restenosis, a more than 50 percent narrowing within the stent, is driven by neointimal hyperplasia, and diabetes and multivessel disease raise its risk. Under-expansion is the most preventable procedural cause.",
+   "say": "Stent thrombosis is classified by timing: early within thirty days, late from thirty days to one year, and very late beyond one year. Causes include delayed reendothelialisation, stent malapposition, and under-expansion. In-stent restenosis, a more than fifty percent narrowing within the stent, is driven by neointimal hyperplasia, and diabetes and multivessel disease raise its risk. Under-expansion is the most preventable procedural cause.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stent placed"
+     },
+     {
+      "id": "b",
+      "label": "Delayed healing or malapposition"
+     },
+     {
+      "id": "c",
+      "label": "Thrombus forms"
+     },
+     {
+      "id": "d",
+      "label": "Early, late or very late thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose revascularisation by anatomy and risk. For **left main disease** and complex three-vessel disease, the **SYNTAX score** grades lesion complexity; higher scores favour **CABG** over PCI in trials. Arterial grafts such as the left internal thoracic artery to the LAD improve long-term patency. For diabetics with multivessel disease, the FREEDOM trial showed lower death and myocardial infarction with CABG than with PCI.",
+   "say": "Choose revascularisation by anatomy and risk. For left main disease and complex three-vessel disease, the SYNTAX score grades lesion complexity; higher scores favour CABG over PCI in trials. Arterial grafts such as the left internal thoracic artery to the LAD improve long-term patency. For diabetics with multivessel disease, the FREEDOM trial showed lower death and myocardial infarction with CABG than with PCI.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_f1bd4639b70b",
+  "q_533ce1181d3c",
+  "q_99154a94ba6f"
+ ],
+ "src": [],
+ "refs": [
+  "Guidelines for Myocardial Revascularisation: European Society of Cardiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

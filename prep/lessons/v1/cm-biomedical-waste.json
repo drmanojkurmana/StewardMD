@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "cm-biomedical-waste",
+ "subject": "community-medicine",
+ "title": "Biomedical Waste Management: Colour Coding and Treatment",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "India's **Bio-Medical Waste Management Rules** govern how healthcare facilities handle the waste they create. The foundation is **segregation at source**: waste is sorted at the bedside or procedure room where it arises, rather than being sorted later in a central store. Each waste stream then goes into a colour-coded container tied to a defined treatment route, such as **incineration**, **autoclaving** or **deep burial**.",
+   "say": "The national rules for biomedical waste in India set out how healthcare settings must manage their waste. The starting point is segregation at source. Staff sort waste right where it is produced, at the bedside or in the procedure room, instead of leaving it to be sorted in a store later. Every stream then goes into a colour-coded container linked to a specific treatment route, for example incineration, autoclaving or deep burial. Expect exam questions on matching each colour to its waste type and treatment.",
+   "vis": null
+  },
+  {
+   "tx": "Yellow bags hold human anatomical, animal, microbiological and soiled waste, treated by **incineration** or deep burial. Red containers take contaminated recyclable plastic and microbiology waste, treated by autoclaving, microwaving or chemical treatment. Blue or white translucent puncture-proof containers take **sharps**, treated by autoclaving, microwaving or chemical treatment followed by destruction or shredding.",
+   "say": "Yellow bags hold human anatomical, animal, microbiological and soiled waste. They are treated by incineration or deep burial. Red containers take contaminated recyclable plastic and microbiology waste, treated by autoclaving, microwaving or chemical treatment. Blue or white translucent puncture-proof containers take sharps, treated by autoclaving, microwaving or chemical treatment, followed by destruction or shredding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colour",
+     "Container",
+     "Main waste",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Yellow",
+      "Plastic bag",
+      "Anatomical, animal, soiled",
+      "Incineration or deep burial"
+     ],
+     [
+      "Red",
+      "Disinfected container or bag",
+      "Microbiology, contaminated plastic",
+      "Autoclaving, microwaving, chemical"
+     ],
+     [
+      "Blue or white translucent",
+      "Puncture-proof container",
+      "Sharps",
+      "Autoclaving, microwaving, shredding"
+     ],
+     [
+      "Black",
+      "Plastic bag",
+      "Discarded medicines, cytotoxic drugs, ash",
+      "Secured landfill"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose the treatment by waste type. **Autoclaving** uses steam at 121 degrees Celsius for more than 45 minutes at 15 psi, and its check organism is Geobacillus stearothermophilus. **Microwaving** works through heating water molecules and checks with Bacillus atrophaeus. **Screw-feed technology** is a non-burn dry thermal method that reduces volume by about 80 percent, but it should not process pathological, cytotoxic or radioactive waste.",
+   "say": "Choose the treatment by waste type. Autoclaving uses steam at 121 degrees Celsius for more than 45 minutes at 15 psi, and its check organism is Geobacillus stearothermophilus. Microwaving works through heating water molecules and checks with Bacillus atrophaeus. Screw-feed technology is a non-burn dry thermal method that reduces volume by about 80 percent, but it should not process pathological, cytotoxic or radioactive waste.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w",
+      "label": "Waste sorted"
+     },
+     {
+      "id": "a",
+      "label": "Autoclave"
+     },
+     {
+      "id": "m",
+      "label": "Microwave"
+     },
+     {
+      "id": "s",
+      "label": "Shred or mutilate"
+     },
+     {
+      "id": "l",
+      "label": "Landfill"
+     }
+    ],
+    "edges": [
+     [
+      "w",
+      "a",
+      "Infectious"
+     ],
+     [
+      "w",
+      "m",
+      "Infectious"
+     ],
+     [
+      "a",
+      "s",
+      "Sharps"
+     ],
+     [
+      "s",
+      "l"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remember the chamber types: a **double-chamber pyrolytic incinerator** is best for infectious waste, a single-chamber furnace is a fallback when pyrolytic units are unaffordable, and rotary kilns handle genotoxic substances. Hepatitis B and tetanus vaccination is recommended for all staff who handle biomedical waste, with yearly health checks.",
+   "say": "Remember the chamber types. A double-chamber pyrolytic incinerator is best for infectious waste. A single-chamber furnace is a fallback when pyrolytic units are unaffordable. Rotary kilns handle genotoxic substances. Hepatitis B and tetanus vaccination is recommended for all staff who handle biomedical waste, with yearly health checks.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "18fec33f-2663-47e4-ba2c-cfad09961a8b",
+  "832ae9b2-e25b-4789-8b68-56458eb11c94",
+  "d92c1166-7b57-43b0-95eb-3b4a6585567b"
+ ],
+ "src": [],
+ "refs": [
+  "Bio-Medical Waste Management Rules 2016 (India)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 148
+ }
+}

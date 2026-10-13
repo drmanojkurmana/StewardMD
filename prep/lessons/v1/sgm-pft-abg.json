@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "sgm-pft-abg",
+ "subject": "ss-general-medicine",
+ "title": "Pulmonary Function Tests and Arterial Blood Gases: High-Yield Essentials",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Spirometry is the first test when **airflow obstruction** is suspected. The key measure is the **FEV1/FVC ratio**, which is reduced in obstruction. Interpretation depends on the threshold chosen: GOLD applies a fixed cut-off after **bronchodilator** testing, whereas ATS and ERS favour the **lower limit of normal**, which avoids overdiagnosis in older adults. A normal ratio with a reduced FVC points towards restriction, which should be confirmed with **lung volumes**.",
+   "say": "Spirometry is the first test when airflow obstruction is suspected. The key measure is the FEV1 to FVC ratio, which is reduced in obstruction. Interpretation depends on the threshold chosen. GOLD applies a fixed cut-off after bronchodilator testing, whereas ATS and ERS favour the lower limit of normal, which avoids overdiagnosis in older adults. A normal ratio with a reduced FVC points towards restriction, which should be confirmed with lung volumes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "FEV1/FVC",
+     "FVC",
+     "TLC"
+    ],
+    "rows": [
+     [
+      "Obstruction",
+      "Reduced",
+      "Normal or reduced",
+      "Normal or raised"
+     ],
+     [
+      "Restriction",
+      "Normal or raised",
+      "Reduced",
+      "Reduced"
+     ],
+     [
+      "Mixed",
+      "Reduced",
+      "Reduced",
+      "Variable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **flow-volume loop** localises the level of obstruction. A scooped, concave expiratory limb signals **small airway or diffuse obstruction**. A flattened inspiratory limb points to a **variable extrathoracic upper airway lesion**, such as vocal cord palsy. A fixed upper airway lesion flattens both limbs.",
+   "say": "The flow-volume loop helps localise the level of obstruction. A scooped, concave expiratory limb signals small airway or diffuse obstruction. A flattened inspiratory limb points to a variable extrathoracic upper airway lesion, such as vocal cord palsy. A fixed upper airway lesion flattens both limbs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Loop finding",
+     "Likely site"
+    ],
+    "rows": [
+     [
+      "Scooped expiratory limb",
+      "Diffuse or small airway disease"
+     ],
+     [
+      "Flattened inspiratory limb",
+      "Variable extrathoracic obstruction"
+     ],
+     [
+      "Both limbs flattened",
+      "Fixed central airway lesion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lung volumes** need a test that reaches gas trapped behind obstructed airways. **Body plethysmography** measures thoracic gas volume (VTG) during panting against a closed shutter, using changes in mouth and box pressure. It also gives airway resistance (Raw) and specific conductance (sGaw). **Residual volume** equals TLC minus vital capacity.",
+   "say": "Lung volumes need a test that reaches gas trapped behind obstructed airways. Body plethysmography measures thoracic gas volume during panting against a closed shutter, using changes in mouth and box pressure. It also gives airway resistance and specific conductance. Residual volume equals total lung capacity minus vital capacity. Gas dilution methods can underestimate trapped gas in emphysema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Closed shutter panting"
+     },
+     {
+      "id": "b",
+      "label": "Mouth and box pressure"
+     },
+     {
+      "id": "c",
+      "label": "VTG and Raw"
+     },
+     {
+      "id": "d",
+      "label": "TLC minus VC gives RV"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Restriction** means total lung capacity sits below the lower limit of normal, and **plethysmography** is needed to confirm it because spirometry alone cannot prove restriction. **DLCO** measures gas transfer. It falls in interstitial lung disease and emphysema, yet it is raised in polycythaemia and pulmonary haemorrhage. A low total lung capacity with low DLCO in fibrosis is the classic pattern.",
+   "say": "Restriction means total lung capacity sits below the lower limit of normal, and plethysmography is needed to confirm it because spirometry alone cannot prove restriction. DLCO measures gas transfer. It falls in interstitial lung disease and emphysema, yet it is raised in polycythaemia and pulmonary haemorrhage. A low total lung capacity with low DLCO in fibrosis is the classic pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Restriction",
+     "points": [
+      "TLC below lower limit of normal",
+      "FVC reduced, ratio preserved",
+      "Plethysmography confirms",
+      "DLCO low in fibrosis"
+     ]
+    },
+    "right": {
+     "title": "Obstruction",
+     "points": [
+      "FEV1/FVC ratio reduced",
+      "TLC normal or raised",
+      "Trapped gas raises residual volume",
+      "DLCO low in emphysema"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **arterial blood gas** is read in order: pH, PaCO2, then bicarbonate. A **PaCO2 above 45 mmHg** defines hypercapnic ventilatory failure. The **alveolar-arterial (A-a) gradient** separates ventilation from parenchymal causes. A normal gradient in hypoxaemia points to hypoventilation, while a raised gradient suggests shunt, V/Q mismatch or diffusion defect.",
+   "say": "The arterial blood gas is read in order: pH, then PaCO2, then bicarbonate. A PaCO2 above 45 mmHg defines hypercapnic ventilatory failure. The alveolar-arterial gradient separates ventilatory causes from parenchymal ones. A normal gradient with hypoxaemia points to hypoventilation, while a raised gradient suggests shunt, V/Q mismatch or a diffusion defect.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Read pH"
+     },
+     {
+      "id": "b",
+      "label": "PaCO2 above 45?"
+     },
+     {
+      "id": "c",
+      "label": "Hypercapnic failure"
+     },
+     {
+      "id": "d",
+      "label": "Calculate A-a gradient"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **oxygen dissociation curve** is sigmoid, so haemoglobin saturation falls steeply only once PaO2 drops well below normal. The **P50**, the PaO2 at which haemoglobin is half saturated, marks where the curve sits. A **right shift** from raised temperature, acidosis, raised 2,3-DPG or raised PaCO2 unloads oxygen to tissues. A **left shift**, from alkalosis, low temperature or carbon monoxide, holds oxygen tightly.",
+   "say": "The oxygen dissociation curve is sigmoid, so saturation falls steeply only once PaO2 drops well below normal. The P50, the PaO2 at which haemoglobin is half saturated, marks where the curve sits. A right shift, from raised temperature, acidosis, raised 2,3-DPG or raised PaCO2, unloads oxygen to tissues. A left shift, from alkalosis, low temperature or carbon monoxide, holds oxygen tightly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left shift",
+     "points": [
+      "Alkalosis",
+      "Hypothermia",
+      "Carbon monoxide",
+      "Fetal haemoglobin"
+     ]
+    },
+    "right": {
+     "title": "Right shift",
+     "points": [
+      "Acidosis",
+      "Raised 2,3-DPG",
+      "Raised temperature",
+      "Raised PaCO2"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_6d551fb24905",
+  "q_cb61007f8ff0",
+  "q_e9ef34102077"
+ ],
+ "src": [],
+ "refs": [
+  "GOLD Report: Global Strategy for the Diagnosis, Management, and Prevention of COPD",
+  "ATS/ERS technical standards for spirometry, body plethysmography and gas transfer testing",
+  "Global Lung Function Initiative (GLI) reference equations",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 42
+ }
+}

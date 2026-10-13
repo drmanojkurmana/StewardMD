@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "wh-fertility",
+ "subject": "womens-health",
+ "title": "Infertility: Core Causes, Tests and First-Line Management",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Infertility** is failure to conceive after 12 months of regular unprotected intercourse. Evaluation starts earlier, after 6 months, if the woman is over 35, and immediately if she is over 40. Both partners must be assessed together, because male factors contribute to roughly 40 to 50 percent of cases and combined factors to a further 20 to 30 percent.",
+   "say": "Infertility is defined as failure to conceive after 12 months of regular unprotected intercourse. Evaluation starts earlier, after 6 months, if the woman is over 35, and immediately if she is over 40. Both partners must be assessed together, because male factors contribute to roughly 40 to 50 percent of cases and combined factors to a further 20 to 30 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Ovulatory",
+      "PCOS, hypothalamic amenorrhoea, premature ovarian insufficiency"
+     ],
+     [
+      "Tubal or pelvic",
+      "Scarring after pelvic infection, endometriosis or surgery"
+     ],
+     [
+      "Uterine or cervical",
+      "Fibroids, polyps, intrauterine adhesions, congenital anomalies"
+     ],
+     [
+      "Endocrine",
+      "Hyperprolactinaemia, thyroid dysfunction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Polycystic ovary syndrome** is the commonest cause of anovulatory infertility. Diagnosis under the 2023 international guideline needs two of ovulatory dysfunction, hyperandrogenism or polycystic ovarian morphology, after mimics are excluded. Before ovulation induction, check **semen analysis**, optimise weight and start folic acid.",
+   "say": "Polycystic ovary syndrome is the commonest cause of anovulatory infertility. Diagnosis under the 2023 international guideline needs two of ovulatory dysfunction, hyperandrogenism or polycystic ovarian morphology, after mimics are excluded. Before ovulation induction, check semen analysis, optimise weight and start folic acid.",
+   "vis": null
+  },
+  {
+   "tx": "Start by confirming **ovulation** with a **mid-luteal progesterone** measurement, then check **prolactin** and **TSH**, plus a pregnancy test when relevant. Raised **prolactin** is handled with a **dopamine agonist** such as **cabergoline**, which brings levels down and often allows **ovulation** to return. An underactive thyroid is replaced with **levothyroxine**.",
+   "say": "Start by confirming ovulation with a mid-luteal progesterone measurement, then check prolactin and TSH, plus a pregnancy test when relevant. Raised prolactin is handled with a dopamine agonist such as cabergoline, which brings levels down and often allows ovulation to return. An underactive thyroid is replaced with levothyroxine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Raised prolactin"
+     },
+     {
+      "id": "b",
+      "label": "Cabergoline"
+     },
+     {
+      "id": "c",
+      "label": "Lower prolactin"
+     },
+     {
+      "id": "d",
+      "label": "Ovulation restored"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tubal damage from **pelvic inflammatory disease** is often silent. Hysterosalpingography showing bilateral hydrosalpinx is a key finding. Hydrosalpinx fluid can leak into the uterus and reduce implantation, so **IVF** is usually the preferred route, often after salpingectomy or tubal occlusion.",
+   "say": "Tubal damage from pelvic inflammatory disease is often silent. Hysterosalpingography showing bilateral hydrosalpinx is a key finding. Hydrosalpinx fluid can leak into the uterus and reduce implantation, so IVF is usually the preferred route, often after salpingectomy or tubal occlusion.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-clinical-protocols-polycystic-ovary-syndrome",
+  "kb-reference-female-infertility",
+  "kb-reference-infertility-and-contraception"
+ ],
+ "refs": [
+  "2023 International Evidence-based Guideline for the Assessment and Management of Polycystic Ovary Syndrome",
+  "NICE Fertility problems: assessment and treatment (CG156)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 5,
+  "kbWords": 2500,
+  "itemN": 12
+ }
+}

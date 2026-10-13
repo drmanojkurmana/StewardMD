@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "sen-endocrine-testing",
+ "subject": "ss-endocrinology",
+ "title": "Endocrine testing and assay interpretation: pitfalls that mislead results",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Immunoassays are quick, but they can return falsely abnormal values. The **hook effect** occurs when an extremely high analyte concentration saturates both capture and detection antibodies in a sandwich assay, producing a falsely low or normal reading. Suspect it when the result conflicts with the clinical picture, such as a very high tumour marker with modest symptoms. Diluting the sample and repeating the test usually reveals the true value.",
+   "say": "Immunoassays are quick, but they can return falsely abnormal values. The hook effect happens when an extremely high analyte level saturates both capture and detection antibodies in a sandwich assay, so the reading looks falsely low or normal. Suspect it when the result does not fit the clinical picture. Diluting the sample and repeating the test usually uncovers the true value.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Assay issue",
+     "Typical clue",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Hook effect",
+      "Very high analyte, low reading",
+      "Dilute sample and repeat"
+     ],
+     [
+      "Macroprolactin",
+      "Raised prolactin, few symptoms",
+      "Polyethylene glycol precipitation"
+     ],
+     [
+      "Heterophile antibodies",
+      "Discordant results across assays",
+      "Use alternative assay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hook effect** occurs when an extremely high analyte concentration saturates both capture and detection antibodies in a sandwich immunoassay, so the signal falls and the result looks falsely normal or low. Serial dilution of the sample reveals it, because the diluted value rises. **Macroprolactin** is a large complex of prolactin with IgG that has low bioactivity, so it causes a raised prolactin without symptoms. Precipitation with polyethylene glycol confirms it.",
+   "say": "The hook effect occurs when an extremely high analyte concentration saturates both antibodies in a sandwich immunoassay, so the result looks falsely low. Serial dilution of the sample reveals it, because the diluted value rises. Macroprolactin is a large complex of prolactin bound to IgG with low bioactivity, so it raises the measured prolactin without symptoms. Polyethylene glycol precipitation confirms it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hook effect",
+     "points": [
+      "Very high analyte level",
+      "Falsely low or normal reading",
+      "Dilution gives a higher value"
+     ]
+    },
+    "right": {
+     "title": "Macroprolactin",
+     "points": [
+      "Large prolactin-IgG complex",
+      "Raised prolactin, few symptoms",
+      "PEG precipitation confirms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Heterophile antibodies** are human antibodies that bind the animal immunoglobulins used in assays, forming false bridges between capture and detection reagents. This can produce spuriously high or low results. Discordant values across different platforms are the clue. **LC-MS/MS** measures the analyte by mass and avoids most antibody-based interference, so it is preferred for steroids such as cortisol and aldosterone when accuracy matters.",
+   "say": "Heterophile antibodies are human antibodies that bind the animal immunoglobulins used in assays, forming false bridges between capture and detection reagents. This can produce spuriously high or low results. Discordant values across different platforms are the clue. Liquid chromatography tandem mass spectrometry, known as LC-MS/MS, measures the analyte by mass and avoids most antibody interference, so it is preferred for steroids such as cortisol and aldosterone when accuracy matters.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Discordant results"
+     },
+     {
+      "id": "b",
+      "label": "Suspect heterophile antibody"
+     },
+     {
+      "id": "c",
+      "label": "Retest on alternative assay"
+     },
+     {
+      "id": "d",
+      "label": "LC-MS/MS for steroids"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dynamic testing uses **stimulation** or **suppression** to probe endocrine reserve. Stimulation tests detect **under-secretion**, such as a short adrenal stimulation test for adrenal insufficiency. Suppression tests detect **autonomous secretion**, such as an overnight low-dose suppression test for Cushing syndrome. **Reference intervals** must match the assay and population, as a single value taken out of context can mislead.",
+   "say": "Dynamic testing uses stimulation or suppression to probe endocrine reserve. Stimulation tests detect under-secretion, such as a short adrenal stimulation test for adrenal insufficiency. Suppression tests detect autonomous secretion, such as an overnight low-dose suppression test for Cushing syndrome. Reference intervals must match the assay and population, because a single value taken out of context can mislead.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test type",
+     "Purpose",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Stimulation",
+      "Detects under-secretion",
+      "Short adrenal stimulation test"
+     ],
+     [
+      "Suppression",
+      "Detects autonomous secretion",
+      "Overnight low-dose suppression test"
+     ],
+     [
+      "Venous sampling",
+      "Localises source",
+      "Adrenal vein sampling"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_4eb0d856c8d7",
+  "q_1d5d9c556814",
+  "q_4de26e5b12c8"
+ ],
+ "src": [],
+ "refs": [
+  "Endocrine Society Clinical Practice Guidelines on Primary Aldosteronism (Funder and colleagues)",
+  "Endocrine Society Clinical Practice Guidelines on Cushing Syndrome (Nieman and colleagues)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 62
+ }
+}

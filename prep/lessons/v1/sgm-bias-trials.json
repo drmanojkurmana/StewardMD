@@ -1,0 +1,156 @@
+{
+ "v": 1,
+ "module": "sgm-bias-trials",
+ "subject": "ss-general-medicine",
+ "title": "Bias, confounding and clinical trial interpretation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Bias** is a systematic error that pushes results away from the truth. It is present to some degree in all studies, so the goal is to recognise and minimise it rather than pretend it can be eliminated. Random error, by contrast, scatters results without a consistent direction and is reduced by larger samples. **Confounding** is a distortion caused by a third variable linked to both exposure and outcome, such as smoking in a coffee and lung cancer study.",
+   "say": "Bias is a systematic error that pushes results away from the truth. It is present to some degree in all studies, so the goal is to recognise and minimise it rather than pretend it can be eliminated. Random error, by contrast, scatters results without a consistent direction and is reduced by larger samples. Confounding is a distortion caused by a third variable linked to both exposure and outcome, such as smoking in a coffee and lung cancer study.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Bias",
+     "Random error"
+    ],
+    "rows": [
+     [
+      "Direction",
+      "Consistent",
+      "No consistent direction"
+     ],
+     [
+      "Reduced by larger sample",
+      "No",
+      "Yes"
+     ],
+     [
+      "Example",
+      "Selection or observer bias",
+      "Chance variation in measurements"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Selection bias** arises when the study population does not represent the target population, for example recruiting from a hospital when comparing with community controls, which is **Berkson bias**. **Channeling bias** occurs in observational studies when sicker patients are steered towards one drug. **Propensity score** analysis is the usual fix, as it models the chance of receiving the intervention from observed covariates.",
+   "say": "Selection bias arises when the study population does not represent the target population, for example recruiting from a hospital when comparing with community controls, which is Berkson bias. Channeling bias occurs in observational studies when sicker patients are steered towards one drug. Propensity score analysis is the usual fix, as it models the chance of receiving the intervention from observed covariates.",
+   "vis": null
+  },
+  {
+   "tx": "**Lead-time bias** makes early diagnosis look like longer survival, even when the disease course is unchanged, because the clock starts at detection. **Length-time bias** occurs when screening over-detects slow, indolent tumours, so screen-detected cases appear less aggressive. The **healthy worker effect** explains why employed people show lower mortality than the general population. Intention-to-screen analysis helps address length-time bias.",
+   "say": "Lead-time bias makes early diagnosis look like longer survival, even when the disease course is unchanged, because the clock starts at detection. Length-time bias occurs when screening over-detects slow, indolent tumours, so screen-detected cases appear less aggressive. The healthy worker effect explains why employed people show lower mortality than the general population. Intention-to-screen analysis helps address length-time bias.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Survival artefact",
+     "points": [
+      "Lead-time: clock starts earlier",
+      "Length-time: indolent cases over-sampled",
+      "Healthy worker: employed are healthier"
+     ]
+    },
+    "right": {
+     "title": "Remedy",
+     "points": [
+      "Intention-to-screen analysis",
+      "Compare like with like",
+      "Interpret survival with caution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Observer bias** and **confirmation bias** both distort outcome assessment, the latter when an assessor reads ambiguous findings as supporting a favoured belief. **Blinding** of assessors, including radiologists, is the main protection. **Hawthorne effect** describes participants changing behaviour because they know they are observed. **Response bias**, such as socially desirable answers, and **recall bias** are reduced by careful questionnaire design and shorter recall windows.",
+   "say": "Observer bias and confirmation bias both distort outcome assessment, the latter when an assessor reads ambiguous findings as supporting a favoured belief. Blinding of assessors, including radiologists, is the main protection. Hawthorne effect describes participants changing behaviour because they know they are observed. Response bias, such as socially desirable answers, and recall bias are reduced by careful questionnaire design and shorter recall windows.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assessor knows allocation"
+     },
+     {
+      "id": "b",
+      "label": "Subjective judgement"
+     },
+     {
+      "id": "c",
+      "label": "Blinding breaks the link"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "prevent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Allocation concealment** protects the randomisation sequence before assignment, whereas **blinding** protects against knowledge after assignment. A trial is **intention-to-treat** when everyone is analysed in their randomised group, which preserves randomisation and is the preferred primary analysis for superiority trials. **Per-protocol** analysis includes only adherent participants and can break randomisation. For **non-inferiority** trials, per-protocol analysis can wrongly favour the new drug, so both are often reported.",
+   "say": "Allocation concealment protects the randomisation sequence before assignment, whereas blinding protects against knowledge after assignment. A trial is intention-to-treat when everyone is analysed in their randomised group, which preserves randomisation and is the preferred primary analysis for superiority trials. Per-protocol analysis includes only adherent participants and can break randomisation. For non-inferiority trials, per-protocol analysis can wrongly favour the new drug, so both are often reported.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intention-to-treat",
+     "points": [
+      "Analyse as randomised",
+      "Preserves randomisation",
+      "Preferred for superiority"
+     ]
+    },
+    "right": {
+     "title": "Per-protocol",
+     "points": [
+      "Only adherent participants",
+      "Can break randomisation",
+      "Both reported in non-inferiority"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **confidence interval** shows a range that would capture the true effect in 95 percent of repeated samples, and narrower intervals mean greater precision. A **p value** is the probability of the observed data if the null hypothesis is true. **Clinical significance** asks whether the effect is large enough to matter to patients, and a result can be statistically significant yet below the **minimal clinically important difference**.",
+   "say": "A confidence interval shows a range that would capture the true effect in 95 percent of repeated samples, and narrower intervals mean greater precision. A p value is the probability of the observed data if the null hypothesis is true. Clinical significance asks whether the effect is large enough to matter to patients, and a result can be statistically significant yet below the minimal clinically important difference.",
+   "vis": null
+  },
+  {
+   "tx": "Interpret **surrogate endpoints** cautiously, since a marker such as blood pressure may not translate into fewer strokes. **Composite endpoints** combine events, so the individual components should be reported. **Subgroup analyses** are prone to false positives and should be prespecified. Trials progress through phases I to IV, and **CONSORT** guides complete, transparent reporting of randomised trials.",
+   "say": "Interpret surrogate endpoints cautiously, since a marker such as blood pressure may not translate into fewer strokes. Composite endpoints combine events, so the individual components should be reported. Subgroup analyses are prone to false positives and should be prespecified. Trials progress through phases I to IV, and CONSORT guides complete, transparent reporting of randomised trials.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_674ca96f23e0",
+  "q_59b9dc2ed71d",
+  "q_b99b0af3a0db"
+ ],
+ "src": [],
+ "refs": [
+  "CONSORT Statement (Schulz KF and colleagues, 2010 revision, published in BMJ and other journals)",
+  "Park K, Park's Textbook of Preventive and Social Medicine (Banarsidas Bhanot)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 52
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "mderm-hair-nail",
+ "subject": "mrcp-dermatology",
+ "title": "Hair, nail and pigmentation disorders: a high-yield overview",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Hair loss is classified first by whether the scalp is scarred. **Non-scarring** causes include telogen effluvium, alopecia areata and androgenetic alopecia, while scarring types destroy the follicle permanently. Telogen effluvium is diffuse shedding about 2 to 3 months after a trigger such as fever, surgery, childbirth or crash dieting. A positive pull test and a normal scalp support the diagnosis, and most cases settle within months once the trigger has passed.",
+   "say": "Hair loss is classified first by whether the scalp is scarred. Non-scarring causes include telogen effluvium, alopecia areata and androgenetic alopecia, while scarring types destroy the follicle permanently. Telogen effluvium is diffuse shedding about two to three months after a trigger such as fever, surgery, childbirth or crash dieting. A positive pull test and a normal scalp support the diagnosis, and most cases settle within months once the trigger has passed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Telogen effluvium",
+     "Alopecia areata",
+     "Androgenetic alopecia"
+    ],
+    "rows": [
+     [
+      "Pattern",
+      "Diffuse thinning",
+      "Well-defined patches",
+      "Crown and temples"
+     ],
+     [
+      "Scalp",
+      "Normal",
+      "Smooth, no scale",
+      "Normal"
+     ],
+     [
+      "Mechanism",
+      "Shift to telogen",
+      "T-cell attack on follicles",
+      "DHT miniaturising follicles"
+     ],
+     [
+      "Key sign",
+      "Positive pull test",
+      "Exclamation mark hairs",
+      "Miniaturised hairs on trichoscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alopecia areata** is an organ-specific autoimmune disorder in which T lymphocytes attack anagen follicles. Because the follicles survive, regrowth is possible. Exclamation mark hairs at the margins signal active disease. It is linked with atopy, thyroid disease, vitiligo and Down syndrome. Nail pitting or onycholysis, extensive scalp involvement and early onset predict a less favourable course and recurrence.",
+   "say": "Alopecia areata is an organ-specific autoimmune disorder in which T lymphocytes attack growing follicles. Because the follicles survive, regrowth is possible. Exclamation mark hairs at the margins signal active disease. It is linked with atopy, thyroid disease, vitiligo and Down syndrome. Nail pitting or onycholysis, extensive scalp involvement and early onset predict a less favourable course and recurrence.",
+   "vis": null
+  },
+  {
+   "tx": "**Vitiligo** is an acquired loss of epidermal melanocytes that produces well-demarcated amelanotic macules, often on the hands, face, around the mouth and eyes. Cytotoxic CD8 positive T cells are thought to target melanocyte antigens. Wood's lamp accentuates the depigmentation. Limited disease may respond to topical corticosteroids or topical calcineurin inhibitors, while widespread or progressive disease is often treated with narrowband UVB phototherapy.",
+   "say": "Vitiligo is an acquired loss of epidermal melanocytes that produces well-demarcated white macules, often on the hands, face, around the mouth and eyes. Cytotoxic CD8 positive T cells are thought to target melanocyte antigens. Wood's lamp accentuates the depigmentation. Limited disease may respond to topical corticosteroids or topical calcineurin inhibitors, while widespread or progressive disease is often treated with narrowband UVB phototherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Limited disease",
+     "points": [
+      "Topical corticosteroids",
+      "Topical calcineurin inhibitors",
+      "Often on the face"
+     ]
+    },
+    "right": {
+     "title": "Widespread or progressive",
+     "points": [
+      "Narrowband UVB phototherapy",
+      "Screen for autoimmune thyroid disease",
+      "Diagnosis is clinical"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Melasma** is an acquired, symmetrical brown hyperpigmentation of sun-exposed facial skin, most common in women. It is linked to oestrogen, pregnancy and ultraviolet light, and can be aggravated by the combined oral contraceptive. Wood's lamp can accentuate epidermal pigment. Potassium hydroxide scraping excludes pityriasis versicolor. Management centres on strict photoprotection and reviewing hormonal triggers.",
+   "say": "Melasma is an acquired, symmetrical brown hyperpigmentation of sun-exposed facial skin, most common in women. It is linked to oestrogen, pregnancy and ultraviolet light, and can be aggravated by the combined oral contraceptive. Wood's lamp can accentuate epidermal pigment. Potassium hydroxide scraping excludes pityriasis versicolor. Management centres on strict photoprotection and reviewing hormonal triggers.",
+   "vis": null
+  },
+  {
+   "tx": "**Addison disease**, or primary adrenal insufficiency, destroys the adrenal cortex. Cortisol and aldosterone fall while ACTH rises, and the raised ACTH acts on melanocortin receptors to darken the skin, especially creases and buccal mucosa. Hyponatraemia, hyperkalaemia and postural hypotension follow. Autoimmune adrenalitis is the commonest cause in the UK. In a hypotensive patient, intravenous hydrocortisone and saline come before confirmatory testing.",
+   "say": "Addison disease, or primary adrenal insufficiency, destroys the adrenal cortex. Cortisol and aldosterone fall while ACTH rises, and the raised ACTH acts on melanocortin receptors to darken the skin, especially creases and buccal mucosa. Hyponatraemia, hyperkalaemia and postural hypotension follow. Autoimmune adrenalitis is the commonest cause in the UK. In a hypotensive patient, intravenous hydrocortisone and saline come before confirmatory testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Adrenal destruction"
+     },
+     {
+      "id": "b",
+      "label": "Low cortisol and aldosterone"
+     },
+     {
+      "id": "c",
+      "label": "High ACTH"
+     },
+     {
+      "id": "d",
+      "label": "Skin and mucosal pigmentation"
+     },
+     {
+      "id": "e",
+      "label": "Hyponatraemia and hyperkalaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nail disorders** need careful assessment. **Onychomycosis**, most often caused by dermatophytes such as Trichophyton rubrum, is confirmed by sending clippings for microscopy and culture before systemic therapy. **Psoriatic nail disease** causes pitting, onycholysis and the oil-drop sign, and suggests psoriatic arthritis when distal joints are affected. **Longitudinal melanonychia** needs urgent referral if the band widens or extends to the proximal nail fold, which is the Hutchinson sign of subungual melanoma.",
+   "say": "Nail disorders need careful assessment. Onychomycosis, most often caused by dermatophytes such as Trichophyton rubrum, is confirmed by sending clippings for microscopy and culture before systemic therapy. Psoriatic nail disease causes pitting, onycholysis and the oil-drop sign, and suggests psoriatic arthritis when distal joints are affected. Longitudinal melanonychia needs urgent referral if the band widens or extends to the proximal nail fold, which is the Hutchinson sign of subungual melanoma.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Rook's Textbook of Dermatology (Griffiths, Barker, Bleiker, Chalmers, Creamer)",
+  "Fitzpatrick's Dermatology (Wolff, Johnson, Suurmond)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 23
+ }
+}

@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "snp-onconephrology",
+ "subject": "ss-nephrology",
+ "title": "Onconephrology: Tumour Lysis Syndrome and Drug Nephrotoxicity",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Tumour lysis syndrome** (TLS) occurs when rapid cell death releases intracellular potassium, phosphate, and nucleic acid breakdown products, mainly **uric acid**. Burkitt lymphoma and high-grade lymphoma and acute leukaemia, especially with a raised white cell count, carry the highest risk. Hyperkalaemia, hyperphosphataemia, hyperuricaemia and hypocalcaemia are the classic laboratory hallmarks. Uric acid crystals and calcium phosphate crystals deposit in distal tubules, causing obstructive acute kidney injury.",
+   "say": "Tumour lysis syndrome occurs when rapid cell death releases intracellular potassium, phosphate, and nucleic acid breakdown products, mainly uric acid. Burkitt lymphoma, high-grade lymphoma, and acute leukaemia with a raised white cell count carry the highest risk. The classic laboratory hallmarks are hyperkalaemia, hyperphosphataemia, hyperuricaemia, and hypocalcaemia. Uric acid and calcium phosphate crystals deposit in distal tubules, causing obstructive acute kidney injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Main released solutes",
+      "Potassium, phosphate, uric acid"
+     ],
+     [
+      "Highest risk settings",
+      "Burkitt, high-grade lymphoma, acute leukaemia"
+     ],
+     [
+      "Crystal types",
+      "Uric acid, calcium phosphate"
+     ],
+     [
+      "Main renal lesion",
+      "Distal tubular crystal obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Humans lack **urate oxidase**, so uric acid cannot be converted to soluble allantoin and accumulates. Xanthine oxidase converts xanthine to uric acid. **Allopurinol** inhibits xanthine oxidase and prevents new uric acid formation, but it has no uricolytic action, so it does not clear existing uric acid. **Rasburicase** is a recombinant urate oxidase that rapidly converts uric acid to allantoin and is preferred when uric acid is high or renal function is poor.",
+   "say": "Humans lack urate oxidase, so uric acid cannot be converted to soluble allantoin and it accumulates. Xanthine oxidase converts xanthine to uric acid. Allopurinol inhibits xanthine oxidase and prevents new uric acid formation, but it cannot clear uric acid already present. Rasburicase is a recombinant urate oxidase that rapidly converts uric acid to allantoin, and it is preferred when uric acid is high or renal function is poor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Allopurinol",
+     "points": [
+      "Blocks xanthine oxidase",
+      "Prevents new uric acid formation",
+      "No effect on existing uric acid"
+     ]
+    },
+    "right": {
+     "title": "Rasburicase",
+     "points": [
+      "Recombinant urate oxidase",
+      "Converts uric acid to allantoin",
+      "Preferred if high risk or renal impairment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tumour lysis syndrome prophylaxis starts with **intravenous hydration** given 48 hours before chemotherapy and continued for 48 hours afterwards. High-risk patients need **frequent monitoring** of renal function and **uric acid** every 4 to 6 hours once treatment begins. **Rasburicase** lowers uric acid but is avoided in **G6PD deficiency**, because it generates hydrogen peroxide that can cause haemolysis.",
+   "say": "Tumour lysis syndrome prophylaxis starts with intravenous hydration given 48 hours before chemotherapy and continued for 48 hours afterwards. High-risk patients need frequent monitoring of renal function and uric acid every 4 to 6 hours once treatment begins. Rasburicase lowers uric acid but is avoided in G6PD deficiency, because it generates hydrogen peroxide that can cause haemolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hydrate 48 h before chemo"
+     },
+     {
+      "id": "b",
+      "label": "Continue hydration 48 h after"
+     },
+     {
+      "id": "c",
+      "label": "Monitor renal function and uric acid every 4-6 h"
+     },
+     {
+      "id": "d",
+      "label": "High uric acid risk?"
+     },
+     {
+      "id": "e",
+      "label": "Check G6PD status"
+     },
+     {
+      "id": "f",
+      "label": "Give rasburicase if G6PD normal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ifosfamide** is an alkylating agent whose metabolite **acrolein** injures the bladder urothelium, causing **haemorrhagic cystitis**. **Mesna** is given alongside to bind acrolein in the urine and prevent this. Ifosfamide can also cause **Fanconi-type** proximal tubular injury, so **aggressive hydration** and monitoring of urine output are essential. Serial checks of creatinine, phosphate, glucose and urinalysis help detect tubular damage early.",
+   "say": "Ifosfamide is an alkylating agent whose metabolite acrolein injures the bladder lining and causes haemorrhagic cystitis. Mesna is given alongside to bind acrolein in the urine and prevent this. Ifosfamide can also cause Fanconi-type proximal tubular injury, so aggressive hydration and monitoring of urine output are essential. Regular checks of creatinine, phosphate, glucose and urinalysis help detect tubular damage early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Mechanism",
+     "Preventive step"
+    ],
+    "rows": [
+     [
+      "Haemorrhagic cystitis",
+      "Acrolein irritates the urothelium",
+      "Mesna and hydration"
+     ],
+     [
+      "Fanconi-type injury",
+      "Proximal tubular damage",
+      "Hydration and electrolyte checks"
+     ],
+     [
+      "Phosphate and glucose wasting",
+      "Proximal tubular dysfunction",
+      "Serial urinalysis and bloods"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Several modern cancer treatments injure the kidney through different mechanisms. **VEGF inhibitors** commonly cause **proteinuria**, so urine protein should be monitored during treatment. **Immune checkpoint inhibitors** can trigger immune-mediated **acute interstitial nephritis**, which may need steroid treatment. **CAR-T** therapy can cause **acute kidney injury**, often linked to cytokine release. **Sinusoidal obstruction syndrome** after stem cell transplant can compromise renal perfusion. **Nephrectomy** for renal cell carcinoma lowers filtration reserve and raises the risk of **chronic kidney disease**.",
+   "say": "Several modern cancer treatments can injure the kidney through different mechanisms. VEGF inhibitors often cause proteinuria, so urine protein should be checked during treatment. Immune checkpoint inhibitors can trigger immune-mediated interstitial nephritis, which may need steroids. CAR-T therapy can cause acute kidney injury, often linked to cytokine release. Sinusoidal obstruction syndrome after stem cell transplant can compromise renal perfusion. Nephrectomy for renal cell carcinoma lowers filtration reserve and raises the risk of chronic kidney disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy",
+     "Kidney injury",
+     "Typical pattern"
+    ],
+    "rows": [
+     [
+      "VEGF inhibitors",
+      "Proteinuria",
+      "Glomerular injury with protein leak"
+     ],
+     [
+      "Immune checkpoint inhibitors",
+      "Acute interstitial nephritis",
+      "Immune-mediated tubulointerstitial injury"
+     ],
+     [
+      "CAR-T therapy",
+      "Acute kidney injury",
+      "Linked to cytokine release"
+     ],
+     [
+      "Stem cell transplant",
+      "Sinusoidal obstruction syndrome",
+      "Reduced renal perfusion"
+     ],
+     [
+      "Nephrectomy for renal cell carcinoma",
+      "Reduced filtration",
+      "Risk of chronic kidney disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_ec3e587058cc",
+  "q_c4e5dca0788c",
+  "q_04e12a50ed33"
+ ],
+ "src": [],
+ "refs": [
+  "Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. Br J Haematol 2004"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 38
+ }
+}

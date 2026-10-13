@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "srh-ra-pathogenesis",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Rheumatoid arthritis: pathogenesis and diagnosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rheumatoid arthritis is a chronic **inflammatory polyarthritis** driven by an autoimmune response. Genetic risk is largely carried by the **HLA-DRB1 shared epitope**, and environmental triggers such as cigarette smoking act on this background. Smoking promotes lung and joint exposure to citrullinated proteins, which the immune system begins to recognise as foreign.",
+   "say": "Rheumatoid arthritis is a chronic inflammatory polyarthritis driven by an autoimmune response. Genetic risk is largely carried by the HLA DRB1 shared epitope, and environmental triggers such as cigarette smoking act on this background. Smoking promotes lung and joint exposure to citrullinated proteins, which the immune system begins to recognise as foreign.",
+   "vis": null
+  },
+  {
+   "tx": "Arginine residues in proteins are converted to **citrulline** by the enzyme **peptidyl arginine deiminase**, commonly called PAD. Antibodies against citrullinated proteins, known as **anti-CCP or ACPA**, arise from this process. These antibodies can appear up to about 10 years before clinical symptoms, and rheumatoid factor may also be detectable early.",
+   "say": "Arginine residues in proteins are converted to citrulline by the enzyme peptidyl arginine deiminase, commonly called PAD. Antibodies against citrullinated proteins, known as anti CCP or ACPA, arise from this process. These antibodies can appear up to about 10 years before clinical symptoms, and rheumatoid factor may also be detectable early.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Key feature",
+     "Role in diagnosis"
+    ],
+    "rows": [
+     [
+      "Anti-CCP",
+      "Targets citrullinated peptides",
+      "High specificity, around 95%"
+     ],
+     [
+      "Rheumatoid factor",
+      "Anti-IgG Fc antibody",
+      "Useful but less specific"
+     ],
+     [
+      "HLA-DRB1 allele",
+      "Genetic susceptibility",
+      "Not diagnostic on its own"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the **synovium**, fibroblast-like synoviocytes become invasive and form a **pannus** that spreads over cartilage and bone. RANKL released by synoviocytes and inflammatory cells activates osteoclasts, causing **bone erosions**. TNF-alpha further suppresses bone formation and promotes osteoclast development, so erosion becomes the structural hallmark of the disease.",
+   "say": "In the synovium, fibroblast like synoviocytes become invasive and form a pannus that spreads over cartilage and bone. RANKL released by synoviocytes and inflammatory cells activates osteoclasts, causing bone erosions. TNF alpha further suppresses bone formation and promotes osteoclast development, so erosion becomes the structural hallmark of the disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Citrullinated antigen"
+     },
+     {
+      "id": "b",
+      "label": "Synovial inflammation"
+     },
+     {
+      "id": "c",
+      "label": "Pannus formation"
+     },
+     {
+      "id": "d",
+      "label": "RANKL and TNF"
+     },
+     {
+      "id": "e",
+      "label": "Bone erosion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The 2010 ACR-EULAR classification uses a **score of 6 or more** for definite RA. Points are given for joint number and distribution, serology (**anti-CCP or RF**), acute phase reactants such as CRP or ESR, and symptom duration of six weeks or more. Involvement of small joints of hands and feet, especially MCP and PIP joints, scores higher than large joint involvement.",
+   "say": "The 2010 ACR EULAR classification uses a score of 6 or more for definite rheumatoid arthritis. Points are given for joint number and distribution, serology including anti CCP or rheumatoid factor, acute phase reactants such as CRP or ESR, and symptom duration of six weeks or more. Involvement of small joints of the hands and feet, especially the MCP and PIP joints, scores higher than large joint involvement.",
+   "vis": null
+  },
+  {
+   "tx": "Clinical features help separate RA from mimics. RA causes **morning stiffness lasting more than one hour**, symmetric small joint swelling of MCPs, PIPs and wrists, and **ulnar deviation**, **swan neck** and **boutonniere deformities**. Distal interphalangeal joints are usually spared, which points away from RA and towards osteoarthritis.",
+   "say": "Clinical features help separate rheumatoid arthritis from its mimics. Rheumatoid arthritis causes morning stiffness lasting more than one hour, symmetric small joint swelling of the MCPs, PIPs and wrists, and ulnar deviation, swan neck and boutonniere deformities. Distal interphalangeal joints are usually spared, which points away from rheumatoid arthritis and towards osteoarthritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suggests RA",
+     "points": [
+      "Morning stiffness over one hour",
+      "Symmetric MCP and PIP swelling",
+      "Wrist involvement",
+      "Ulnar deviation and deformities"
+     ]
+    },
+    "right": {
+     "title": "Suggests osteoarthritis",
+     "points": [
+      "Short morning stiffness",
+      "DIP joint involvement",
+      "Bony enlargement",
+      "Asymmetric pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Synovial fluid in RA is **inflammatory**, typically with 5,000 to 50,000 WBC per microlitre and neutrophil predominance. Septic arthritis must be excluded, and **Staphylococcus aureus** is the commonest organism in RA patients. Early referral within about six weeks of symptom onset is advised, and **methotrexate** with folic acid is first-line csDMARD treatment.",
+   "say": "Synovial fluid in rheumatoid arthritis is inflammatory, typically with 5,000 to 50,000 white cells per microlitre and neutrophil predominance. Septic arthritis must be excluded, and Staphylococcus aureus is the commonest organism in rheumatoid arthritis patients. Early referral within about six weeks of symptom onset is advised, and methotrexate with folic acid is first line csDMARD treatment.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_e55979d6ca0d",
+  "q_002a7252fcab",
+  "q_1e4960a7f59c"
+ ],
+ "src": [],
+ "refs": [
+  "Aletaha D et al. 2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative (Arthritis and Rheumatism)",
+  "NICE guideline NG100 Rheumatoid arthritis in adults: management"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 56
+ }
+}

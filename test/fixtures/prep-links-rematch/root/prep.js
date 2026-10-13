@@ -1,0 +1,2 @@
+var VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
+var OVERLAYS = G.SMD_PREP_OVERLAYS || {};

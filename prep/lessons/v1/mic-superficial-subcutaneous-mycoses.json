@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "mic-superficial-subcutaneous-mycoses",
+ "subject": "microbiology",
+ "title": "General mycology: superficial and subcutaneous mycoses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Fungi are eukaryotic organisms with a **chitin** containing cell wall. Yeasts are unicellular, moulds are filamentous, and **dimorphic fungi** switch form with temperature, growing as yeast at 37 degrees C and as mould at 25 degrees C. Dermatophytes are filamentous fungi that digest keratin. Superficial mycoses stay in the stratum corneum, hair and nails, while subcutaneous mycoses enter through trauma and spread locally along lymphatics.",
+   "say": "Fungi are eukaryotic organisms with a chitin containing cell wall. Yeasts are unicellular, moulds are filamentous, and dimorphic fungi switch form with temperature. They grow as yeast at 37 degrees C and as mould at 25 degrees C. Dermatophytes are filamentous fungi that digest keratin. Superficial mycoses stay in the stratum corneum, hair and nails. Subcutaneous mycoses enter through trauma and spread locally along lymphatics.",
+   "vis": null
+  },
+  {
+   "tx": "Dermatophytes are classed by habitat. **Anthropophilic** species live on humans, **zoophilic** species come from animals such as cats, dogs and cattle, and **geophilic** species live in soil. Hair involvement differs by genus. Trichophyton attacks skin, hair and nails. Microsporum attacks skin and hair. Epidermophyton attacks skin and nails, never hair.",
+   "say": "Dermatophytes are classed by habitat. Anthropophilic species live on humans. Zoophilic species come from animals such as cats, dogs and cattle. Geophilic species live in soil. Hair involvement differs by genus. Trichophyton attacks skin, hair and nails. Microsporum attacks skin and hair. Epidermophyton attacks skin and nails, never hair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genus",
+     "Skin",
+     "Hair",
+     "Nail"
+    ],
+    "rows": [
+     [
+      "Trichophyton",
+      "Yes",
+      "Yes",
+      "Yes"
+     ],
+     [
+      "Microsporum",
+      "Yes",
+      "Yes",
+      "No"
+     ],
+     [
+      "Epidermophyton",
+      "Yes",
+      "No",
+      "Yes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malassezia furfur** is a lipophilic yeast causing pityriasis versicolor, a chronic recurrent scaling condition of the stratum corneum. Patches are hypo or hyperpigmented and favour the neck, chest and upper arms. A KOH mount shows short curved hyphae and clustered yeast cells, often described as spaghetti and meatballs. Treatment is topical azoles or selenium sulfide, and steroids are avoided.",
+   "say": "Malassezia furfur is a lipophilic yeast causing pityriasis versicolor. This is a chronic recurrent scaling condition of the stratum corneum. Patches are hypo or hyperpigmented and favour the neck, chest and upper arms. A KOH mount shows short curved hyphae and clustered yeast cells, often described as spaghetti and meatballs. Treatment is topical azoles or selenium sulfide, and steroids are avoided.",
+   "vis": null
+  },
+  {
+   "tx": "**Sporothrix schenckii** is a dimorphic fungus found on plants and thorns. Infection follows minor trauma, typically from rose thorns, and gives a nodule that ulcerates, followed by nodules along the lymphatics. This is rose gardener's disease, an occupational risk for gardeners and farmers. Tissue shows cigar-shaped yeast cells, and the fungus grows in culture at 25 degrees C. Asteroid bodies are not seen in this infection's typical picture.",
+   "say": "Sporothrix schenckii is a dimorphic fungus found on plants and thorns. Infection follows minor trauma, typically from rose thorns. It gives a nodule that ulcerates, followed by nodules along the lymphatics. This is called rose gardener's disease and is an occupational risk for gardeners and farmers. Tissue shows cigar-shaped yeast cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thorn prick"
+     },
+     {
+      "id": "b",
+      "label": "Nodule then ulcer"
+     },
+     {
+      "id": "c",
+      "label": "Lymphatic nodules"
+     },
+     {
+      "id": "d",
+      "label": "Cigar shaped yeasts"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chromoblastomycosis and eumycetoma are both subcutaneous. Chromoblastomycosis shows **sclerotic bodies**, brown spherical melanised cells in tissue, and produces verrucous cauliflower lesions on feet and legs. Eumycetoma is a triad of swelling, sinuses and grains, caused by true fungi such as Madurella mycetomatis, and does not respond to antibiotics. Actinomycetoma is bacterial and does respond to antibiotics.",
+   "say": "Chromoblastomycosis and eumycetoma are both subcutaneous infections. Chromoblastomycosis shows sclerotic bodies, which are brown spherical melanised cells in tissue. It produces verrucous cauliflower lesions on feet and legs. Eumycetoma causes swelling, sinuses and grains, is caused by true fungi such as Madurella mycetomatis, and does not respond to antibiotics. Actinomycetoma is bacterial and does respond.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chromoblastomycosis",
+     "points": [
+      "Sclerotic bodies in tissue",
+      "Verrucous cauliflower lesions",
+      "Feet and lower legs",
+      "Traumatic implantation"
+     ]
+    },
+    "right": {
+     "title": "Eumycetoma",
+     "points": [
+      "Swelling, sinuses, grains",
+      "True fungi, e.g. Madurella",
+      "Poor response to antibiotics",
+      "Actinomycetoma is bacterial"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "adbf5828-39a9-4f1f-8c8e-7000b211f3ef",
+  "29daff73-9101-4491-9414-9666ff9ea082",
+  "aac0fbd0-f579-4b01-be8a-2776b55e3464"
+ ],
+ "src": [],
+ "refs": [
+  "Jawetz, Melnick, & Adelberg's Medical Microbiology",
+  "Ananthanarayan and Paniker's Textbook of Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 333
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "srh-arthropathy-systemic",
+ "subject": "ss-rheumatology-immunology",
+ "title": "Arthropathy of systemic and endocrine disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Hemochromatosis** causes iron deposition in joints, classically affecting the second and third **metacarpophalangeal** joints with hook-like osteophytes and chondrocalcinosis. Iron appears to reduce synovial pyrophosphatase activity, favouring calcium pyrophosphate crystal formation. Wrist involvement is also typical, and distal interphalangeal joints are usually spared, which helps separate it from primary osteoarthritis.",
+   "say": "Hemochromatosis causes iron deposition in joints. It classically affects the second and third metacarpophalangeal joints, with hook-like osteophytes and chondrocalcinosis. Iron appears to reduce synovial pyrophosphatase activity, which favours calcium pyrophosphate crystal formation. Wrist involvement is also typical, and distal interphalangeal joints are usually spared. This helps separate it from primary osteoarthritis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Hemochromatosis",
+     "Primary osteoarthritis"
+    ],
+    "rows": [
+     [
+      "Commonest joints",
+      "2nd and 3rd MCP",
+      "DIP and PIP"
+     ],
+     [
+      "Wrists",
+      "Often involved",
+      "Usually spared"
+     ],
+     [
+      "Crystals",
+      "Chondrocalcinosis",
+      "Absent"
+     ],
+     [
+      "Response to phlebotomy",
+      "Poor once established",
+      "Not applicable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acromegaly** arthropathy results from growth hormone and IGF-I driving cartilage hypertrophy. Early radiographs may show apparent joint-space widening rather than narrowing. Later changes include enlarged epiphyses, osteophytes and subchondral cysts. Hypothyroid arthropathy can cause stiffness and effusions, and is linked to **mucinous synovial infiltration**.",
+   "say": "Acromegaly arthropathy results from growth hormone and IGF-I driving cartilage hypertrophy. Early radiographs may show apparent joint-space widening rather than narrowing. Later changes include enlarged epiphyses, osteophytes and subchondral cysts. Hypothyroid arthropathy can cause stiffness and effusions, and is linked to mucinous synovial infiltration.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic cheiroarthropathy** causes thickened, tight skin over the hands, limiting joint movement, often with a prayer sign. **Charcot neuroarthropathy** affects the midfoot in patients with severe neuropathy, producing fragmentation, subluxation and warmth. Suspected osteomyelitis can be separated from Charcot changes using a labelled white cell scan, since technetium bone scans alone cannot discriminate them.",
+   "say": "Diabetic cheiroarthropathy causes thickened, tight skin over the hands, limiting joint movement, often with a prayer sign. Charcot neuroarthropathy affects the midfoot in patients with severe neuropathy, producing fragmentation, subluxation and warmth. Suspected osteomyelitis can be separated from Charcot changes using a labelled white cell scan, because technetium bone scans alone cannot discriminate them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cheiroarthropathy",
+     "points": [
+      "Tight thick hand skin",
+      "Limited joint mobility",
+      "Prayer sign"
+     ]
+    },
+    "right": {
+     "title": "Charcot foot",
+     "points": [
+      "Midfoot fragmentation",
+      "Subluxation and warmth",
+      "Indium-111 scan helps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Alkaptonuria** results from deficiency of homogentisate 1,2-dioxygenase (HGD), leading to very high circulating homogentisic acid and ochronosis of cartilage and connective tissue. Patients have dark urine and spinal and large joint arthropathy. Prevalence is roughly 1 in 100,000 to 250,000. Joint disease is progressive and usually needs orthopaedic management.",
+   "say": "Alkaptonuria results from deficiency of homogentisate one, two dioxygenase, leading to very high circulating homogentisic acid and ochronosis of cartilage and connective tissue. Patients have dark urine and spinal and large joint arthropathy. Prevalence is roughly 1 in 100,000 to 250,000. Joint disease is progressive and usually needs orthopaedic management.",
+   "vis": null
+  },
+  {
+   "tx": "**Hemophilic arthropathy** arises from recurrent intra-articular bleeding, causing synovitis and cartilage damage. In an acute bleed, nonselective NSAIDs should be avoided because they impair platelet function. Any fever above 38.3 C in a hemophiliac joint must prompt exclusion of **septic arthritis** first. Factor replacement should precede arthrocentesis, and a thigh haematoma without abscess is managed with factor replacement rather than aspiration.",
+   "say": "Hemophilic arthropathy arises from recurrent intra-articular bleeding, causing synovitis and cartilage damage. In an acute bleed, nonselective NSAIDs should be avoided because they impair platelet function. Any fever above 38.3 degrees Celsius in a hemophiliac joint must prompt exclusion of septic arthritis first. Factor replacement should precede arthrocentesis, and a thigh haematoma without abscess is managed with factor replacement rather than aspiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute haemarthrosis"
+     },
+     {
+      "id": "b",
+      "label": "Fever above 38.3 C?"
+     },
+     {
+      "id": "c",
+      "label": "Exclude septic arthritis"
+     },
+     {
+      "id": "d",
+      "label": "Replace factor"
+     },
+     {
+      "id": "e",
+      "label": "Aspirate or treat"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sickle cell dactylitis** presents as painful swelling of the hands and feet, usually in young children. It typically resolves completely without lasting structural damage. Hyperuricaemia is common in sickle cell disease, with roughly 40 percent of patients affected, due to urate overproduction and renal disease. Acute multi-joint pain in these patients should prompt arthrocentesis to distinguish infection, gout and crisis.",
+   "say": "Sickle cell dactylitis presents as painful swelling of the hands and feet, usually in young children. It typically resolves completely without lasting structural damage. Hyperuricaemia is common in sickle cell disease, with roughly 40 percent of patients affected, due to urate overproduction and renal disease. Acute multi-joint pain in these patients should prompt arthrocentesis to distinguish infection, gout and crisis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_24c83cd6ec59",
+  "q_e427660bf14a",
+  "q_2d756effad0d"
+ ],
+ "src": [],
+ "refs": [
+  "Harrison's Principles of Internal Medicine",
+  "Kelley and Firestein's Textbook of Rheumatology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 15
+ }
+}

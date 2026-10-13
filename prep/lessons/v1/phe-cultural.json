@@ -1,0 +1,133 @@
+{
+ "v": 1,
+ "module": "phe-cultural",
+ "subject": "population-health-and-ethics",
+ "title": "Cultural safety and communication",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Culturally safe care starts from the patient's own language, beliefs and lived experience, rather than from what the clinician assumes. Good practice relies on **cultural safety** and **self-determination**, so the patient decides who is involved and how much is shared. Build **trust** by listening closely, asking open questions, and confirming understanding with teach-back. Interpreters should be used where language is a barrier, and family roles should be explored rather than presumed.",
+   "say": "Culturally safe care starts from the patient's own language, beliefs and lived experience, rather than from what the clinician assumes. Good practice relies on cultural safety and self-determination, so the patient decides who is involved and how much is shared. Build trust by listening closely, asking open questions, and confirming understanding with teach-back. Interpreters should be used where language is a barrier, and family roles should be explored rather than presumed.",
+   "vis": null
+  },
+  {
+   "tx": "Language, gender and family roles all shape a consultation. A **qualified interpreter** is preferred over a relative, because family members may soften or leave out facts. Ask the patient, rather than assume, who should join the discussion. Adolescents may need time alone, within the limits of confidentiality. The table gives a quick reference for common situations.",
+   "say": "Language, gender and family roles all shape a consultation. A qualified interpreter is preferred over a relative, because family members may soften or leave out facts. Ask the patient, rather than assume, who should join the discussion. Adolescents may need time alone, within the limits of confidentiality. The table gives a quick reference for common situations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Best approach"
+    ],
+    "rows": [
+     [
+      "Limited English, first language not English",
+      "Book an accredited interpreter, not a relative"
+     ],
+     [
+      "Patient asks for a clinician of a given sex",
+      "Offer a female clinician or chaperone where possible"
+     ],
+     [
+      "Patient wants family involved",
+      "Ask first who the patient wants present"
+     ],
+     [
+      "Adolescent asks for private advice",
+      "Speak with the young person alone first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a **medication error** affects a patient, open disclosure applies even if no lasting harm has occurred. The patient is told promptly and honestly, an apology is given, and questions are answered. Incident reporting and review continue alongside this conversation and never replace it. Family may be involved only with the patient's consent if she has capacity.",
+   "say": "When a medication error affects a patient, open disclosure applies even if no lasting harm has occurred. The patient is told promptly and honestly, an apology is given, and questions are answered. Incident reporting and review continue alongside this conversation and never replace it. Family may be involved only with the patient's consent if she has capacity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Error identified"
+     },
+     {
+      "id": "n2",
+      "label": "Tell patient promptly"
+     },
+     {
+      "id": "n3",
+      "label": "Apologise and explain"
+     },
+     {
+      "id": "n4",
+      "label": "Review runs alongside"
+     },
+     {
+      "id": "n5",
+      "label": "Ongoing updates"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nodding or brief answers do not prove understanding. A **teach-back** check asks the patient to restate key points in their own words, which exposes gaps that a yes or no hides. This applies to consent, results and treatment choices. Written material alone is not enough for someone with limited English or low health literacy.",
+   "say": "Nodding or brief answers do not prove understanding. A teach-back check asks the patient to restate key points in their own words, which exposes gaps that a yes or no hides. This applies to consent, results and treatment choices. Written material alone is not enough for someone with limited English or low health literacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common assumption",
+     "points": [
+      "Family should decide",
+      "Nodding means understanding",
+      "Posting results is enough"
+     ]
+    },
+    "right": {
+     "title": "Culturally safe practice",
+     "points": [
+      "Ask who is wanted present",
+      "Use an accredited interpreter",
+      "Check with teach-back"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Open Disclosure Standard, Australian Commission on Safety and Quality in Health Care"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

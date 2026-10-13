@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "mstat-regression",
+ "subject": "mrcp-statistics",
+ "title": "Regression, correlation and survival analysis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Correlation** quantifies how closely two continuous variables move together. The **Pearson coefficient** r ranges from minus one to plus one and measures linear association only. Its square, **r squared**, gives the proportion of variance in one variable accounted for by the other. Correlation does not show causation, and a near-zero value can hide a strong curved relationship. Plot the data before interpreting r.",
+   "say": "Correlation quantifies how closely two continuous variables move together. The Pearson coefficient, written r, ranges from minus one to plus one and measures linear association only. Its square, r squared, gives the proportion of variance in one variable accounted for by the other. Correlation does not show causation, and a value near zero can hide a strong curved relationship. Always plot the data before interpreting r.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Preferred measure",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Linear, roughly normal data",
+      "Pearson r",
+      "Measures linear strength directly"
+     ],
+     [
+      "Skewed or outlier-heavy data",
+      "Spearman rho",
+      "Uses ranks, so extremes matter less"
+     ],
+     [
+      "Monotonic but curved trend",
+      "Spearman rho",
+      "Captures consistent direction"
+     ],
+     [
+      "Agreement between two methods",
+      "Bland-Altman plot",
+      "Correlation alone misses bias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Linear regression** estimates how the mean outcome changes per unit change in an exposure. The slope is the **regression coefficient**, and in multiple regression each slope is adjusted for the other predictors. A confidence interval excluding zero indicates statistical significance. Regression describes association, so causal claims need design support such as randomisation.",
+   "say": "Linear regression estimates how the mean outcome changes for each unit change in an exposure. The slope is the regression coefficient, and in multiple regression each slope is adjusted for the other predictors. A confidence interval that excludes zero indicates statistical significance. Regression describes association, so causal claims need design support such as randomisation.",
+   "vis": null
+  },
+  {
+   "tx": "**Logistic regression** relates predictors to a binary outcome by modelling the **log odds** of the event. Each coefficient becomes a **log odds ratio** once exponentiated, giving an **adjusted odds ratio** that accounts for other covariates. A value of one indicates no association. Odds ratios mirror **risk ratios** only when the event is uncommon; with frequent outcomes they overstate the relative risk, so results should be worded as odds.",
+   "say": "Logistic regression models the log odds of a binary outcome, so each coefficient is a log odds ratio. Exponentiate it to get an adjusted odds ratio, which holds the other covariates fixed. An odds ratio of one means no association. When the event is uncommon, odds ratios roughly match risk ratios, but when it is common they diverge, so report them as odds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Odds ratio",
+     "points": [
+      "Ratio of event to non-event odds",
+      "Exponentiated logistic coefficient",
+      "Approximates risk ratio only when rare"
+     ]
+    },
+    "right": {
+     "title": "Risk ratio",
+     "points": [
+      "Ratio of event probabilities",
+      "Direct comparison of absolute risk",
+      "Preferred for clinical counselling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Survival analysis** handles time-to-event data with censoring. The **Cox proportional hazards model** reports a **hazard ratio**, the ratio of instantaneous event rates, without specifying the baseline hazard. It assumes proportional hazards, checked with Schoenfeld residuals or log-log plots. A hazard ratio is not a risk ratio and does not give median survival directly.",
+   "say": "Survival analysis handles time-to-event data with censoring. The Cox proportional hazards model reports a hazard ratio, the ratio of instantaneous event rates, without specifying the baseline hazard. It assumes proportional hazards, which can be checked with Schoenfeld residuals or log-log plots. A hazard ratio is not a risk ratio and does not give median survival directly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Time to event data"
+     },
+     {
+      "id": "b",
+      "label": "Censoring handled"
+     },
+     {
+      "id": "c",
+      "label": "Cox model fitted"
+     },
+     {
+      "id": "d",
+      "label": "Hazard ratio reported"
+     },
+     {
+      "id": "e",
+      "label": "Check proportional hazards"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Regression to the mean** is the tendency for extreme first measurements to move back towards the population average on repeat testing. Patients selected for very high readings carry some random error that does not recur. Uncontrolled before-and-after studies can therefore mimic a treatment effect. A **control group** or repeated baseline readings guards against this artefact.",
+   "say": "Regression to the mean is the tendency for extreme first measurements to move back towards the population average on repeat testing. Patients selected for very high readings carry some random error that does not recur. Uncontrolled before and after studies can therefore mimic a treatment effect. A control group or repeated baseline readings guards against this artefact.",
+   "vis": null
+  },
+  {
+   "tx": "**Immortal time bias** arises when follow-up before treatment starts is counted as exposed time, so treated patients appear to survive longer. **Lead-time bias** arises when earlier detection lengthens survival measured from diagnosis without delaying death. Analyse exposure as time-varying, and use mortality rather than survival from diagnosis to judge screening.",
+   "say": "Immortal time bias arises when follow-up before treatment starts is counted as exposed time, so treated patients appear to survive longer. Lead-time bias arises when earlier detection lengthens survival measured from diagnosis without delaying death. Analyse exposure as time-varying, and use mortality rather than survival from diagnosis to judge screening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bias",
+     "Mechanism",
+     "Remedy"
+    ],
+    "rows": [
+     [
+      "Immortal time",
+      "Pre-treatment time counted as exposed",
+      "Time-varying exposure or landmark analysis"
+     ],
+     [
+      "Lead-time",
+      "Earlier diagnosis inflates survival",
+      "Compare mortality rates"
+     ],
+     [
+      "Regression to the mean",
+      "Extreme baseline values drift back",
+      "Control group"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Bland JM, Altman DG. Statistical methods for assessing agreement between two methods of clinical measurement. Lancet, 1986."
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 19
+ }
+}

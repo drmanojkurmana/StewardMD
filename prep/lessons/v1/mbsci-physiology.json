@@ -1,0 +1,160 @@
+{
+ "v": 1,
+ "module": "mbsci-physiology",
+ "subject": "mrcp-basic-science",
+ "title": "Cardiovascular and respiratory physiology: gas transport, shunt and haemodynamics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Oxygen reaches tissues mainly bound to **haemoglobin**, with only a small dissolved fraction. Oxygen content depends on haemoglobin concentration, saturation and PaO2. The **oxygen-haemoglobin dissociation curve** is sigmoid, and its position is described by P50, the PO2 at which haemoglobin is half saturated. Exam questions often test which factors move this curve and in which direction.",
+   "say": "Oxygen reaches tissues mainly bound to haemoglobin, with only a small dissolved fraction. Oxygen content depends on haemoglobin concentration, saturation and PaO2. The oxygen-haemoglobin dissociation curve is sigmoid, and its position is described by P50, the PO2 at which haemoglobin is half saturated. Exam questions often test which factors move this curve and in which direction.",
+   "vis": null
+  },
+  {
+   "tx": "Acidosis, raised carbon dioxide, hyperthermia and raised **2,3-bisphosphoglycerate** lower haemoglobin's affinity for oxygen. This is a **right shift**, which raises P50 and favours unloading in hypoxic, metabolically active tissues. Alkalosis, hypothermia, fetal haemoglobin and carboxyhaemoglobin do the opposite, a left shift that retains oxygen on haemoglobin.",
+   "say": "Acidosis, raised carbon dioxide, hyperthermia and raised 2,3-bisphosphoglycerate lower haemoglobin's affinity for oxygen. This is a right shift, which raises P50 and favours unloading in hypoxic, metabolically active tissues. Alkalosis, hypothermia, fetal haemoglobin and carboxyhaemoglobin do the opposite, a left shift that retains oxygen on haemoglobin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor",
+     "Effect on curve"
+    ],
+    "rows": [
+     [
+      "Acidosis or raised CO2",
+      "Right shift"
+     ],
+     [
+      "Fever or raised 2,3-BPG",
+      "Right shift"
+     ],
+     [
+      "Alkalosis or hypothermia",
+      "Left shift"
+     ],
+     [
+      "Carboxyhaemoglobin or fetal Hb",
+      "Left shift"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **intrapulmonary shunt**, perfused alveoli are not ventilated, so venous blood returns to the left heart without gaining oxygen. Shunt responds poorly to high inspired oxygen, unlike hypoventilation or diffusion limitation. Pneumonia, atelectasis and pulmonary oedema are typical causes. Hypoxic pulmonary vasoconstriction limits the shunt fraction by diverting flow away from poorly ventilated alveoli.",
+   "say": "In intrapulmonary shunt, perfused alveoli are not ventilated, so venous blood returns to the left heart without gaining oxygen. Shunt responds poorly to high inspired oxygen, unlike hypoventilation or diffusion limitation. Pneumonia, atelectasis and pulmonary oedema are typical causes. Hypoxic pulmonary vasoconstriction limits the shunt fraction by diverting flow away from poorly ventilated alveoli.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Unventilated alveoli"
+     },
+     {
+      "id": "b",
+      "label": "Perfused, no gas exchange"
+     },
+     {
+      "id": "c",
+      "label": "Deoxygenated blood to left heart"
+     },
+     {
+      "id": "d",
+      "label": "Low PaO2 despite high FiO2"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypoxic pulmonary vasoconstriction** is a local response in precapillary pulmonary arterioles to low alveolar oxygen. It diverts blood from poorly ventilated regions, improving ventilation-perfusion matching. Systemic arterioles behave the opposite way and dilate in hypoxia. Chronic alveolar hypoxia can contribute to pulmonary hypertension.",
+   "say": "Hypoxic pulmonary vasoconstriction is a local response in precapillary pulmonary arterioles to low alveolar oxygen. It diverts blood from poorly ventilated regions, improving ventilation-perfusion matching. Systemic arterioles behave the opposite way and dilate in hypoxia. Chronic alveolar hypoxia can contribute to pulmonary hypertension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pulmonary arterioles",
+     "points": [
+      "Constrict in hypoxia",
+      "Local response",
+      "Improves V/Q matching"
+     ]
+    },
+    "right": {
+     "title": "Systemic arterioles",
+     "points": [
+      "Dilate in hypoxia",
+      "Increase local supply",
+      "Worsen shunt-like mismatch if dilated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Arteriolar resistance follows **Poiseuille's law**, so resistance is inversely proportional to the fourth power of radius. Halving the radius increases resistance about sixteen-fold at constant flow and viscosity. Surfactant and Laplace's law explain alveolar stability: collapsing pressure rises as radius falls, and surfactant lowers surface tension to protect small alveoli, as in neonatal respiratory distress syndrome.",
+   "say": "Arteriolar resistance follows Poiseuille's law, so resistance is inversely proportional to the fourth power of radius. Halving the radius increases resistance about sixteen-fold at constant flow and viscosity. Surfactant and Laplace's law explain alveolar stability: collapsing pressure rises as radius falls, and surfactant lowers surface tension to protect small alveoli, as in neonatal respiratory distress syndrome.",
+   "vis": null
+  },
+  {
+   "tx": "The **Fick principle** calculates cardiac output as oxygen consumption divided by the arteriovenous oxygen content difference. Mixed venous blood is usually sampled from the pulmonary artery. For example, VO2 of 250 mL/min with arterial content 200 mL/L and venous content 150 mL/L gives 5 L/min. Heart rate does not enter the calculation directly.",
+   "say": "The Fick principle calculates cardiac output as oxygen consumption divided by the arteriovenous oxygen content difference. Mixed venous blood is usually sampled from the pulmonary artery. For example, oxygen consumption of 250 mL/min with arterial content 200 mL/L and venous content 150 mL/L gives 5 litres per minute. Heart rate does not enter the calculation directly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Variable",
+     "Value"
+    ],
+    "rows": [
+     [
+      "VO2",
+      "250 mL/min"
+     ],
+     [
+      "Arterial O2 content",
+      "200 mL/L"
+     ],
+     [
+      "Mixed venous O2 content",
+      "150 mL/L"
+     ],
+     [
+      "Cardiac output",
+      "5 L/min"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Ganong's Review of Medical Physiology (Barrett KE et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 23
+ }
+}

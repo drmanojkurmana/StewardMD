@@ -1,0 +1,153 @@
+{
+ "v": 1,
+ "module": "cm-cohort",
+ "subject": "community-medicine",
+ "title": "Cohort studies and measures of risk",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **cohort study** is an analytic observational design. Groups are defined by exposure and followed forward over time to see who develops the disease. Because exposure is recorded before disease occurs, it proceeds from cause to effect and can give true **incidence** rates. A well-designed cohort is considered the most reliable design for showing an association between a suspected risk factor and a later disease.",
+   "say": "A cohort study is an analytic observational design. Groups are defined by exposure and followed forward over time to see who develops the disease. Because exposure is recorded before disease occurs, it proceeds from cause to effect and can give true incidence rates. A well-designed cohort is considered the most reliable design for showing an association between a suspected risk factor and a later disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exposed group"
+     },
+     {
+      "id": "b",
+      "label": "Non-exposed group"
+     },
+     {
+      "id": "c",
+      "label": "Follow-up over time"
+     },
+     {
+      "id": "d",
+      "label": "Disease outcome measured"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cohorts are classified by timing. A **prospective cohort** begins in the present, when the outcome has not yet occurred, and follows people into the future. A **retrospective (historical) cohort** uses existing records, so the outcome has already occurred when the study starts. An **ambidirectional** cohort combines both. Framingham Heart Study is a classic prospective cohort that clarified coronary heart disease risk factors.",
+   "say": "Cohorts are classified by timing. A prospective cohort begins in the present, when the outcome has not yet occurred, and follows people into the future. A retrospective or historical cohort uses existing records, so the outcome has already occurred when the study starts. An ambidirectional cohort combines both. Framingham Heart Study is a classic prospective cohort that clarified coronary heart disease risk factors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Timing of outcome",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Prospective",
+      "Not yet occurred at start",
+      "Framingham Heart Study"
+     ],
+     [
+      "Retrospective",
+      "Already occurred at start",
+      "Records-based exposure review"
+     ],
+     [
+      "Ambidirectional",
+      "Both past and future",
+      "Mixed record and follow-up design"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Relative risk** (risk ratio) is incidence among exposed divided by incidence among non-exposed. A value of 1 means no association. Above 1 suggests a positive association, and a value of 2 means a 100 percent increase in risk. Below 1 suggests a protective exposure. For example, if smokers have 10 per 1000 lung cancer and non-smokers 1 per 1000, the relative risk is 10.",
+   "say": "Relative risk, also called risk ratio, is incidence among exposed divided by incidence among non-exposed. A value of 1 means no association. Above 1 suggests a positive association, and a value of 2 means a 100 percent increase in risk. Below 1 suggests a protective exposure. For example, if smokers have 10 per 1000 lung cancer and non-smokers 1 per 1000, the relative risk is 10.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RR above 1",
+     "points": [
+      "Positive association",
+      "RR of 2 means double incidence",
+      "Greater than 100 percent increase"
+     ]
+    },
+    "right": {
+     "title": "RR below 1",
+     "points": [
+      "Exposure is protective",
+      "Incidence lower in exposed",
+      "RR of 1 means no association"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Person-years** combine the number of people and the time they are followed. For example, 25 persons working on a project for 30 years contribute 750 person-years. Incidence rates in cohorts use such denominators. **Loss to follow-up**, also called attrition, can bias results and is a key disadvantage. Cohort studies are also time consuming, expensive, large, and less useful for rare diseases.",
+   "say": "Person-years combine the number of people and the time they are followed. For example, 25 persons working on a project for 30 years contribute 750 person-years. Incidence rates in cohorts use such denominators. Loss to follow-up, also called attrition, can bias results and is a key disadvantage. Cohort studies are also time consuming, expensive, large, and less useful for rare diseases.",
+   "vis": null
+  },
+  {
+   "tx": "Compared with a **case-control** study, a cohort study starts with exposure and yields incidence, relative risk and attributable risk. It can study several outcomes from one exposure and shows the natural history of disease well. A case-control study starts with disease, is cheaper and quicker, suits rare diseases, and gives an odds ratio. Relative risk cannot be calculated directly from a case-control design.",
+   "say": "Compared with a case-control study, a cohort study starts with exposure and yields incidence, relative risk and attributable risk. It can study several outcomes from one exposure and shows the natural history of disease well. A case-control study starts with disease, is cheaper and quicker, suits rare diseases, and gives an odds ratio. Relative risk cannot be calculated directly from a case-control design.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cohort study",
+     "points": [
+      "Starts with exposure",
+      "Gives incidence and relative risk",
+      "Expensive and long"
+     ]
+    },
+    "right": {
+     "title": "Case-control study",
+     "points": [
+      "Starts with disease",
+      "Gives odds ratio",
+      "Cheaper, suits rare disease"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "f5dec898-4313-415d-acd1-323e8c351ff7",
+  "d9e6b86d-cdb6-40af-aaac-f4019f7518bd",
+  "41026ac8-3dc5-4007-b0e7-3e354b81ad3f"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Leon Gordis, Epidemiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 146
+ }
+}

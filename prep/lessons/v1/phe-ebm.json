@@ -1,0 +1,138 @@
+{
+ "v": 1,
+ "module": "phe-ebm",
+ "subject": "population-health-and-ethics",
+ "title": "Evidence-based medicine and guidelines",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Evidence-based medicine** combines the best available research with clinical expertise and patient values. Clinical questions are framed so that they can be answered, often using the PICO structure: population, intervention, comparator and outcome. Studies are then ranked by how well they protect against bias, with systematic reviews and randomised trials sitting high in the hierarchy.",
+   "say": "Evidence-based medicine combines the best available research with clinical expertise and patient values. Clinical questions are framed so they can be answered, often using the PICO structure: population, intervention, comparator and outcome. Studies are then ranked by how well they protect against bias, with systematic reviews and randomised trials sitting high in the hierarchy.",
+   "vis": null
+  },
+  {
+   "tx": "Study design must match the question. **Randomised controlled trials** best answer questions about treatment effects because randomisation balances known and unknown confounders. **Cohort studies** follow exposure forward and suit common outcomes or harms. **Case-control studies** start from cases and look back at exposure, which is efficient for rare outcomes with limited time and funding.",
+   "say": "Study design must match the question. Randomised controlled trials best answer questions about treatment effects, because randomisation balances known and unknown confounders. Cohort studies follow exposure forward and suit common outcomes or harms. Case-control studies start from cases and look back at exposure, which is efficient for rare outcomes when time and funding are limited.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Best design",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Treatment effect",
+      "Randomised trial",
+      "Balances confounders"
+     ],
+     [
+      "Common harm over time",
+      "Cohort study",
+      "Follows exposure forward"
+     ],
+     [
+      "Rare outcome, limited resources",
+      "Case-control study",
+      "Starts from cases"
+     ],
+     [
+      "Prevalence snapshot",
+      "Cross-sectional survey",
+      "Measures current status"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absolute measures show the real size of an effect. The **absolute risk reduction** is the control event rate minus the treatment event rate. The **number needed to treat** is one divided by the absolute risk reduction. Relative measures such as relative risk reduction can look large while the absolute benefit is small, so clinicians should check both before advising a patient.",
+   "say": "Absolute measures show the real size of an effect. The absolute risk reduction is the control event rate minus the treatment event rate. The number needed to treat is one divided by the absolute risk reduction. Relative measures such as relative risk reduction can look large while the absolute benefit is small, so clinicians should check both before advising a patient.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Control rate 8%"
+     },
+     {
+      "id": "b",
+      "label": "Treatment rate 6%"
+     },
+     {
+      "id": "c",
+      "label": "ARR 2 percent"
+     },
+     {
+      "id": "d",
+      "label": "NNT 50"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Guidelines grade both the **strength of recommendation** and the **quality of evidence**. A strong recommendation means most informed people would want the intervention, but low-quality evidence means the effect estimate is uncertain. In older patients with competing priorities or a preference for fewer medicines, such recommendations must be applied through **shared decision-making** rather than automatically.",
+   "say": "Guidelines grade both the strength of recommendation and the quality of evidence. A strong recommendation means most informed people would want the intervention, but low-quality evidence means the effect estimate is uncertain. In older patients with competing priorities or a preference for fewer medicines, such recommendations must be applied through shared decision-making rather than automatically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strong recommendation",
+     "points": [
+      "Most informed people want it",
+      "Benefits likely outweigh harms"
+     ]
+    },
+    "right": {
+     "title": "Low quality evidence",
+     "points": [
+      "Effect estimate is uncertain",
+      "Individual values matter more"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Guideline precedence matters in practice. Where **NICE** guidance covers a point, it generally takes precedence in the UK pathway, while Indian practice follows **ICMR** and NMC frameworks and US guidance may differ. Trial populations often exclude older adults with multimorbidity, so **individualised application** is essential. Always check whether a guideline's population matches the patient in front of you.",
+   "say": "Guideline precedence matters in practice. Where NICE guidance covers a point, it generally takes precedence in the UK pathway, while Indian practice follows ICMR and NMC frameworks, and US guidance may differ. Trial populations often exclude older adults with multimorbidity, so individualised application is essential. Always check whether a guideline's population matches the patient in front of you.",
+   "vis": null
+  },
+  {
+   "tx": "Observational associations can mislead. A **healthy user effect** and **confounding** can make a preventive medicine look protective when users are simply more active, non-smokers and attend regular checks. Recognising confounding by lifestyle and health-seeking behaviour is key. Only randomisation reliably separates a drug effect from these differences.",
+   "say": "Observational associations can mislead. A healthy user effect and confounding can make a preventive medicine look protective when users are simply more active, non-smokers and attend regular checks. Recognising confounding by lifestyle and health-seeking behaviour is key. Only randomisation reliably separates a drug effect from these differences.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Sackett DL et al. Evidence-Based Medicine: How to Practise and Teach EBM"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "sne-carotid-disease",
+ "subject": "ss-neurology",
+ "title": "Carotid and Vertebral Artery Disease: Stenosis, Revascularisation and Timing",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Carotid stenosis causes stroke mainly through **artery-to-artery thromboembolism** from unstable plaque, not through simple flow limitation. Plaque surface breakdown releases debris that travels distally to the middle cerebral or retinal territories. A cervical bruit is a poor marker: it has neither good sensitivity nor specificity, so it cannot confirm significant stenosis. **Carotid duplex ultrasound** is the usual first-line test to grade the narrowing.",
+   "say": "Carotid stenosis causes stroke mainly through artery-to-artery thromboembolism from unstable plaque, not through simple flow limitation. Plaque surface breakdown releases debris that travels distally to the middle cerebral or retinal territories. A cervical bruit is a poor marker. It has neither good sensitivity nor specificity, so it cannot confirm significant stenosis. Carotid duplex ultrasound is the usual first line test to grade the narrowing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Clinical meaning"
+    ],
+    "rows": [
+     [
+      "Cervical bruit",
+      "Poor sensitivity and specificity"
+     ],
+     [
+      "Echolucent plaque",
+      "Higher stroke risk than echogenic"
+     ],
+     [
+      "Lipid core with haemorrhage",
+      "Marks a vulnerable plaque"
+     ],
+     [
+      "Duplex ultrasound",
+      "First line grading test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Plaque sites are chosen by haemodynamics. The **carotid bulb and bifurcation** have low and **oscillating wall shear stress**, which promotes atherosclerosis. Subclavian stenosis can produce **subclavian steal**: retrograde vertebral flow feeds the arm during exercise and diverts blood from the posterior circulation. Patients get dizziness, visual disturbance or drop attacks with arm use. Most asymptomatic cases need only surveillance.",
+   "say": "Plaque sites are chosen by haemodynamics. The carotid bulb and bifurcation have low and oscillating wall shear stress, which promotes atherosclerosis. Subclavian stenosis can produce subclavian steal, where retrograde vertebral flow feeds the arm during exercise and diverts blood from the posterior circulation. Patients get dizziness, visual disturbance or drop attacks with arm use. Most asymptomatic cases need only surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Proximal subclavian stenosis"
+     },
+     {
+      "id": "b",
+      "label": "Retrograde vertebral flow"
+     },
+     {
+      "id": "c",
+      "label": "Arm fed during exercise"
+     },
+     {
+      "id": "d",
+      "label": "Posterior circulation steal"
+     },
+     {
+      "id": "e",
+      "label": "Dizziness or visual symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe **internal carotid stenosis** can starve the eye of blood, causing **ocular ischaemic syndrome**. Patients notice slow recovery after bright light and a dull ache around the eye. Fundoscopy shows narrowed retinal arteries with dot and blot haemorrhages. Watch for **neovascular glaucoma**, where intraocular pressure may read normal or low because ciliary perfusion is reduced. Revascularisation lowers stroke and cardiac risk but cannot bring back lost vision.",
+   "say": "Severe internal carotid stenosis can starve the eye of blood, causing ocular ischaemic syndrome. Patients often notice slow recovery after bright light and a dull ache around the eye. Fundoscopy shows narrowed retinal arteries with dot and blot haemorrhages. Watch for neovascular glaucoma, where pressure may read normal or low because ciliary perfusion is reduced. Revascularisation lowers stroke and cardiac risk but cannot bring back lost vision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Typical finding"
+    ],
+    "rows": [
+     [
+      "Vision",
+      "Slow recovery after bright light"
+     ],
+     [
+      "Eye pain",
+      "Dull ache around the eye"
+     ],
+     [
+      "Fundus",
+      "Narrowed retinal arteries, dot and blot haemorrhages"
+     ],
+     [
+      "Pressure",
+      "May be normal or low; neovascular glaucoma possible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Timing matters most after symptoms. For symptomatic stenosis of 50 to 99 percent, **carotid endarterectomy** within about **two weeks** gives the greatest benefit, with the NASCET and ECST trials as the key evidence. Operating in the first 48 hours carries higher complication rates, and registry data suggest the lowest complications at about three to seven days. Asymptomatic 50 percent or more stenosis is defined by no neurological events in the preceding six months.",
+   "say": "Timing matters most after symptoms. For symptomatic stenosis of 50 to 99 percent, carotid endarterectomy within about two weeks gives the greatest benefit, with the NASCET and ECST trials as the key evidence. Operating in the first 48 hours carries higher complication rates, and registry data suggest the lowest complications at about three to seven days. Asymptomatic stenosis of 50 percent or more is defined by no neurological events in the preceding six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Timing or threshold"
+    ],
+    "rows": [
+     [
+      "Symptomatic 50 to 99 percent",
+      "Endarterectomy within about 2 weeks"
+     ],
+     [
+      "Within 48 hours of event",
+      "Higher complication rate"
+     ],
+     [
+      "Around 3 to 7 days",
+      "Lowest complication risk in registries"
+     ],
+     [
+      "Asymptomatic",
+      "No events in last 6 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choose the revascularisation method by anatomy and risk. **Carotid stenting**, as tested in CREST, suits patients with prior neck radiation, hostile neck anatomy or high surgical risk. Endarterectomy carries more procedural myocardial infarction than stenting, while stenting carries more periprocedural stroke in older patients. For symptomatic stenosis under 50 percent, medical therapy is preferred. Chronic total internal carotid occlusion is managed medically.",
+   "say": "Choose the revascularisation method by anatomy and risk. Carotid stenting, as tested in CREST, suits patients with prior neck radiation, hostile neck anatomy or high surgical risk. Endarterectomy carries more procedural myocardial infarction than stenting, while stenting carries more periprocedural stroke in older patients. For symptomatic stenosis under 50 percent, medical therapy is preferred. Chronic total internal carotid occlusion is managed medically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endarterectomy",
+     "points": [
+      "Preferred in most standard anatomy",
+      "More procedural myocardial infarction",
+      "Cranial nerve injury possible"
+     ]
+    },
+    "right": {
+     "title": "Stenting",
+     "points": [
+      "Suits neck radiation or hostile anatomy",
+      "More periprocedural stroke in elderly",
+      "Used in CREST comparison"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Asymptomatic stenosis is managed with **best medical therapy**, which cuts ipsilateral stroke risk to about 1 percent a year. Asymptomatic stenosis marks generalised atherosclerosis, so coronary and systemic risk matter. Watch for **hyperperfusion syndrome** after revascularisation, with headache and seizures. A carotid web is a non-atherosclerotic lesion in younger patients. For characterising stenosis and avoiding flow artefact overestimation, contrast-enhanced MRA or digital subtraction angiography is preferred over TOF MRA.",
+   "say": "Asymptomatic stenosis is managed with best medical therapy, which cuts ipsilateral stroke risk to about 1 percent a year. Asymptomatic stenosis marks generalised atherosclerosis, so coronary and systemic risk matter. Watch for hyperperfusion syndrome after revascularisation, with headache and seizures. A carotid web is a non-atherosclerotic lesion in younger patients. For characterising stenosis and avoiding flow artefact overestimation, contrast-enhanced MRA or digital subtraction angiography is preferred over TOF MRA.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_018224a5c2bc",
+  "q_2f54e91c8b89",
+  "q_482c09a0b1da"
+ ],
+ "src": [],
+ "refs": [
+  "North American Symptomatic Carotid Endarterectomy Trial (NASCET)",
+  "European Carotid Surgery Trial (ECST)",
+  "Asymptomatic Carotid Atherosclerosis Study (ACAS)",
+  "Asymptomatic Carotid Surgery Trial (ACST)",
+  "Carotid Revascularization Endarterectomy versus Stenting Trial (CREST)",
+  "ACCF/AHA Guideline for Management of Patients With Lower Extremity and Carotid Disease"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

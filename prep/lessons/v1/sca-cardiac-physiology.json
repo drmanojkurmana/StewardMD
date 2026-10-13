@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "sca-cardiac-physiology",
+ "subject": "ss-cardiology",
+ "title": "Cardiac physiology and haemodynamics: core principles for NEET-PG and INI-CET",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **Frank-Starling law** states that stroke volume rises as end-diastolic volume, the **preload**, increases, because stretched myocardial fibres contract more forcefully. Contractility shifts the whole curve upward, so the same preload gives greater output. **Afterload** is the resistance the ventricle must eject against; raising it reduces emptying, while lowering it shifts the performance curve upward, mimicking higher contractility.",
+   "say": "The Frank-Starling law states that stroke volume rises as end-diastolic volume, the preload, increases, because stretched myocardial fibres contract more forcefully. Increased contractility shifts the whole curve upward, so the same preload gives greater output. Afterload is the resistance the ventricle must eject against. Raising afterload reduces emptying, while lowering it shifts the performance curve upward, mimicking higher contractility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preload",
+     "points": [
+      "End-diastolic volume",
+      "Stretches fibres",
+      "Raises stroke volume on the curve"
+     ]
+    },
+    "right": {
+     "title": "Afterload",
+     "points": [
+      "Resistance to ejection",
+      "Raised by hypertension or aortic stenosis",
+      "Lowering it shifts the curve upward"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the **cardiac action potential**, phase 0 is rapid depolarisation from opening of voltage-gated sodium channels. Phase 2 is a plateau sustained by calcium entry balanced against potassium exit. Phase 4 in pacemaker cells is slow depolarisation from passive sodium influx, and the AV node acts as the secondary pacemaker at about 40 to 60 beats per minute. Calcium entry triggers **excitation-contraction coupling** by releasing calcium from the sarcoplasmic reticulum.",
+   "say": "In the cardiac action potential, phase 0 is rapid depolarisation from opening of voltage-gated sodium channels. Phase 2 is a plateau sustained by calcium entry balanced against potassium exit. Phase 4 in pacemaker cells is slow depolarisation from passive sodium influx. The AV node acts as the secondary pacemaker at about 40 to 60 beats per minute. Calcium entry triggers excitation-contraction coupling by releasing calcium from the sarcoplasmic reticulum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Key event",
+     "Main ions"
+    ],
+    "rows": [
+     [
+      "0",
+      "Rapid upstroke",
+      "Sodium in"
+     ],
+     [
+      "2",
+      "Plateau",
+      "Calcium in, potassium out"
+     ],
+     [
+      "3",
+      "Repolarisation",
+      "Potassium out"
+     ],
+     [
+      "4",
+      "Pacemaker slope",
+      "Sodium in"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Jugular venous pulse (JVP) waves reflect right atrial activity. The **a wave** is atrial contraction, lost in **atrial fibrillation**. Cannon a waves signal atrioventricular dissociation, when the atrium contracts against a closed tricuspid valve. The **x descent** is atrial relaxation with ventricular systole, and the v wave is passive atrial filling. A **Kussmaul sign**, where JVP does not fall on inspiration, is classically seen in constrictive pericarditis.",
+   "say": "Jugular venous pulse waves reflect right atrial activity. The a wave is atrial contraction and is lost in atrial fibrillation. Cannon a waves signal atrioventricular dissociation, when the atrium contracts against a closed tricuspid valve. The x descent is atrial relaxation during ventricular systole, and the v wave is passive atrial filling. A Kussmaul sign, where the jugular pressure does not fall on inspiration, is classically seen in constrictive pericarditis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning",
+     "Classic setting"
+    ],
+    "rows": [
+     [
+      "Absent a wave",
+      "No atrial contraction",
+      "Atrial fibrillation"
+     ],
+     [
+      "Cannon a wave",
+      "Atrium against closed tricuspid",
+      "Complete heart block, ventricular rhythm"
+     ],
+     [
+      "Kussmaul sign",
+      "No fall on inspiration",
+      "Constrictive pericarditis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pulsus paradoxus** is an inspiratory fall in systolic pressure greater than 10 mmHg, an exaggerated form of normal **interventricular dependence**. It is classic for **cardiac tamponade** but is unreliable in atrial fibrillation, marked tachycardia or tachypnoea. Total electrical alternans on the ECG is relatively specific for a large effusion. In tamponade, the rate of fluid accumulation matters more than the absolute volume, and hypotension demands urgent pericardiocentesis after fluid resuscitation.",
+   "say": "Pulsus paradoxus is an inspiratory fall in systolic pressure greater than 10 mmHg, an exaggerated form of normal interventricular dependence. It is classic for cardiac tamponade but is unreliable in atrial fibrillation, marked tachycardia or tachypnoea. Total electrical alternans on the ECG is relatively specific for a large effusion. In tamponade, the rate of fluid accumulation matters more than the absolute volume, and hypotension demands urgent pericardiocentesis after fluid resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected tamponade"
+     },
+     {
+      "id": "b",
+      "label": "Hypotension"
+     },
+     {
+      "id": "c",
+      "label": "Fluid resuscitation"
+     },
+     {
+      "id": "d",
+      "label": "Urgent pericardiocentesis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myocardial oxygen demand** rises with heart rate, contractility and wall tension, so afterload and preload both increase it. **Coronary autoregulation** keeps flow steady across a range of perfusion pressures by adjusting arteriolar tone, and this is blunted when vessels are maximally dilated. Septal infarction can damage the **Bundle of His**, which runs through the interventricular septum, causing high-grade AV block.",
+   "say": "Myocardial oxygen demand rises with heart rate, contractility and wall tension, so afterload and preload both increase it. Coronary autoregulation keeps flow steady across a range of perfusion pressures by adjusting arteriolar tone. Septal infarction can damage the Bundle of His, which runs through the interventricular septum, causing high-grade AV block.",
+   "vis": null
+  },
+  {
+   "tx": "Heart sounds and murmurs are linked to haemodynamics. Standing from a squat reduces preload, so the click-murmur complex of mitral valve prolapse moves closer to S1. Fixed splitting of S2 that does not change with respiration is characteristic of a **secundum atrial septal defect**. Pulsus parvus et tardus, a weak and delayed carotid upstroke, points to severe aortic stenosis. Heavy carotid pressure can trigger carotid sinus hypersensitivity and syncope in older adults.",
+   "say": "Heart sounds and murmurs are linked to haemodynamics. Standing from a squat reduces preload, so the click-murmur complex of mitral valve prolapse moves closer to the first heart sound. Fixed splitting of the second heart sound that does not change with respiration is characteristic of a secundum atrial septal defect. Pulsus parvus et tardus, a weak and delayed carotid upstroke, points to severe aortic stenosis. Heavy carotid pressure can trigger carotid sinus hypersensitivity and syncope in older adults.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "src": [],
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 42
+ }
+}

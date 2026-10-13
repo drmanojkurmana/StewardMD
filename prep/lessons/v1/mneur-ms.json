@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mneur-ms",
+ "subject": "mrcp-neurology",
+ "title": "Multiple sclerosis: suspicion, first presentations and follow-up",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Multiple sclerosis is a **demyelinating** disease of the central nervous system, so the diagnosis depends on showing dissemination in time and space. NICE advises against routinely suspecting MS when the main symptoms are fatigue, low mood, dizziness or vague sensory complaints. These symptoms are common and have more likely causes. Suspicion should rise when there is a clear neurological episode, confirmed by history and examination, with focal features.",
+   "say": "Multiple sclerosis is a demyelinating disease of the central nervous system, so the diagnosis depends on showing dissemination in time and space. NICE advises against routinely suspecting MS when the main symptoms are fatigue, low mood, dizziness or vague sensory complaints. These symptoms are common and have more likely causes. Suspicion should rise when there is a clear neurological episode, confirmed by history and examination, with focal features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Presentation",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "Fatigue, low mood, dizziness",
+      "Do not routinely suspect MS; look for common causes"
+     ],
+     [
+      "Focal episode with signs",
+      "Confirm episode and consider referral"
+     ],
+     [
+      "Vague sensory symptoms only",
+      "Manage likely causes and review if features emerge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Optic neuritis** is inflammation of the optic nerve and is a common first presentation of MS. It typically causes unilateral visual loss, often with pain on eye movement, over more than 24 hours. An isolated episode confirmed by an ophthalmologist should prompt referral to a consultant neurologist. Other features, such as **Lhermitte's sign**, an electric-shock sensation down the spine on neck flexion, also support a neurological cause.",
+   "say": "Optic neuritis is inflammation of the optic nerve and is a common first presentation of MS. It typically causes unilateral visual loss, often with pain on eye movement, over more than 24 hours. An isolated episode confirmed by an ophthalmologist should prompt referral to a consultant neurologist. Other features, such as Lhermitte's sign, an electric-shock sensation down the spine on neck flexion, also support a neurological cause.",
+   "vis": null
+  },
+  {
+   "tx": "A **clinically isolated syndrome** is a first demyelinating episode that does not yet meet the **2024 revised McDonald criteria**. The person should have a planned review to reassess the diagnosis, with timing agreed, for example annually. They should know who to contact if new symptoms appear or current symptoms worsen. Diagnosis of MS requires combining clinical, MRI and laboratory evidence.",
+   "say": "A clinically isolated syndrome is a first demyelinating episode that does not yet meet the 2024 revised McDonald criteria. The person should have a planned review to reassess the diagnosis, with timing agreed, for example annually. They should know who to contact if new symptoms appear or current symptoms worsen. Diagnosis of MS requires combining clinical, MRI and laboratory evidence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "First episode"
+     },
+     {
+      "id": "b",
+      "label": "MRI and labs"
+     },
+     {
+      "id": "c",
+      "label": "McDonald met?"
+     },
+     {
+      "id": "d",
+      "label": "Diagnose MS"
+     },
+     {
+      "id": "e",
+      "label": "Planned review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "Yes"
+     ],
+     [
+      "c",
+      "e",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At diagnosis, people with confirmed MS should receive oral and written information and support. NICE recommends a **face-to-face** follow-up with a professional with MS expertise within **6 weeks** of diagnosis, then a comprehensive care review at least once a year. Counselling on pregnancy is also important. Relapses often fall during pregnancy, then may rise in the 3 to 6 months after childbirth before returning to pre-pregnancy levels, and pregnancy does not increase disease progression.",
+   "say": "At diagnosis, people with confirmed MS should receive oral and written information and support. NICE recommends a face-to-face follow-up with a professional with MS expertise within 6 weeks of diagnosis, then a comprehensive care review at least once a year. Counselling on pregnancy is also important. Relapses often fall during pregnancy, then may rise in the 3 to 6 months after childbirth before returning to pre-pregnancy levels, and pregnancy does not increase disease progression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timepoint",
+     "Expected pattern"
+    ],
+    "rows": [
+     [
+      "At diagnosis",
+      "Information and support offered"
+     ],
+     [
+      "Within 6 weeks",
+      "Face-to-face MS-expert review"
+     ],
+     [
+      "Pregnancy",
+      "Relapses may fall"
+     ],
+     [
+      "3 to 6 months postpartum",
+      "Relapse risk may rise"
+     ],
+     [
+      "At least yearly",
+      "Comprehensive care review"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG220: Multiple sclerosis in adults: management",
+  "Revised McDonald criteria (2024), Thompson et al., Lancet Neurology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 28
+ }
+}

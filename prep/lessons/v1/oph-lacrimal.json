@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "oph-lacrimal",
+ "subject": "ophthalmology",
+ "title": "Lacrimal apparatus and dry eye",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **lacrimal apparatus** secretes and drains tears. The tear film has three layers: an innermost mucin layer from conjunctival goblet cells, a middle aqueous layer from the main and accessory lacrimal glands, and an outermost **lipid layer** from the meibomian glands. The aqueous layer forms the bulk of the tear film and has a pH of about 7.0 to 7.4.",
+   "say": "The lacrimal apparatus secretes and drains tears. The tear film has three layers. The innermost layer is mucin, made by conjunctival goblet cells. The middle aqueous layer forms the bulk of the tear film and comes from the main and accessory lacrimal glands. The outermost lipid layer is produced by the meibomian glands. Tear pH is about 7.0 to 7.4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Layer",
+     "Source",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Mucin (inner)",
+      "Goblet cells, crypts of Henle",
+      "Wets the cornea"
+     ],
+     [
+      "Aqueous (middle)",
+      "Main and accessory lacrimal glands",
+      "Bulk of tear film"
+     ],
+     [
+      "Lipid (outer)",
+      "Meibomian glands",
+      "Slows evaporation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dry eye** is classified by which layer is deficient. **Keratoconjunctivitis sicca** is the aqueous deficiency type and the commonest form. Sjogren syndrome is its classic autoimmune cause, typically in women aged 40 to 50, and presents as the sicca complex with xerostomia. Meibomian gland loss causes lipid deficiency, and goblet cell damage from chemical burns or cicatricial pemphigoid causes mucin deficiency.",
+   "say": "Dry eye is classified by which tear layer is deficient. Keratoconjunctivitis sicca is the aqueous deficiency type and the commonest form. Sjogren syndrome is its classic autoimmune cause, typically in women aged 40 to 50, and presents as the sicca complex with dry mouth. Meibomian gland loss causes lipid deficiency. Goblet cell damage from chemical burns or cicatricial pemphigoid causes mucin deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "Dry eye is diagnosed with tests of tear quantity and quality. The **Schirmer test** measures wetting of filter paper, and the **tear film break-up time** is normally about 10 to 15 seconds. **Rose bengal** stains dead cells and devitalised epithelium and is more visible on the conjunctiva, while fluorescein stains the cornea. Interpalpebral staining of the nasal or inferior cornea is typical of KCS. The phenol red thread test avoids anaesthesia.",
+   "say": "Dry eye is diagnosed with tests of tear quantity and quality. The Schirmer test measures wetting of filter paper. The tear film break-up time is normally about 10 to 15 seconds. Rose bengal stains dead cells and devitalised epithelium and shows up more on the conjunctiva. Fluorescein stains the cornea. Interpalpebral staining of the nasal or inferior cornea is typical of keratoconjunctivitis sicca.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Measures",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Schirmer test",
+      "Tear volume",
+      "Filter paper wetting"
+     ],
+     [
+      "Tear break-up time",
+      "Tear film stability",
+      "Normal about 10 to 15 s"
+     ],
+     [
+      "Rose bengal",
+      "Devitalised cells",
+      "Conjunctival staining"
+     ],
+     [
+      "Phenol red thread",
+      "Tear volume",
+      "No anaesthesia needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute dacryocystitis** is a contraindication to probing and irrigation, which can cause trauma to the friable inflamed sac. It is treated with systemic antibiotics, analgesics and hot fomentation, and surgery is deferred. **Chronic dacryocystitis** in adults is treated surgically, and **dacryocystorhinostomy** creates a communication between the lacrimal sac and the middle meatus of the nose. Contraindications to DCR include deviated nasal septum, atrophic rhinitis and carcinoma of the lacrimal gland.",
+   "say": "Acute dacryocystitis is a contraindication to probing and irrigation, because the inflamed sac can be damaged. It is treated with systemic antibiotics, analgesics and hot fomentation, and surgery is deferred. Chronic dacryocystitis in adults is treated surgically with dacryocystorhinostomy, which opens the sac into the middle meatus. Contraindications include deviated nasal septum, atrophic rhinitis and carcinoma of the lacrimal gland.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute dacryocystitis",
+     "points": [
+      "No probing or irrigation",
+      "Systemic antibiotics",
+      "Analgesics and hot fomentation"
+     ]
+    },
+    "right": {
+     "title": "Chronic dacryocystitis",
+     "points": [
+      "Dacryocystorhinostomy is the surgery of choice",
+      "Opening into middle meatus",
+      "Avoid in DNS, atrophic rhinitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Epiphora has three causes: over-production of tears, mechanical obstruction, and **lacrimal pump failure**. The lacrimal pump relies on the orbicularis muscle and lid apposition. **Jones dye test** distinguishes partial obstruction from pump failure, and dacryoscintigraphy confirms pump failure. Seventh nerve palsy causes epiphora through lagophthalmos, ectropion or pump failure.",
+   "say": "Epiphora has three causes: overproduction of tears, mechanical obstruction, and lacrimal pump failure. The lacrimal pump relies on the orbicularis muscle and lid apposition. The Jones dye test distinguishes partial obstruction from pump failure, and dacryoscintigraphy confirms pump failure. Seventh nerve palsy can cause epiphora through lagophthalmos, ectropion or pump failure.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "624e4ec9-e093-4d93-a24d-f1181e6590ce",
+  "8f94d306-7ed4-43f7-814b-ef1d41cfbdf3",
+  "a3579eaf-16ce-4e69-bd37-92e6c3fa42e2"
+ ],
+ "src": [],
+ "refs": [
+  "Khurana AK, Comprehensive Ophthalmology",
+  "Basak SK, Textbook of Ophthalmology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 141
+ }
+}

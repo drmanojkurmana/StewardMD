@@ -1,0 +1,90 @@
+{
+ "v": 1,
+ "module": "med-mixed",
+ "subject": "medicine",
+ "title": "Mixed practice: high-yield medicine review",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Gallbladder carcinoma is linked to several **risk factors** worth committing to memory. Chief among them are **gallstones** exceeding 3 cm, a calcified **porcelain gallbladder**, and an anomalous pancreaticobiliary junction. Choledochal cysts, adenomatous polyps, primary sclerosing cholangitis, obesity and chronic **Salmonella typhi** carriage also raise the risk. Oral contraceptives have no established link.",
+   "say": "Gallbladder carcinoma is linked to several risk factors worth committing to memory. Chief among them are gallstones exceeding 3 cm, a calcified porcelain gallbladder, and an anomalous pancreaticobiliary junction. Choledochal cysts, adenomatous polyps, primary sclerosing cholangitis, obesity and chronic Salmonella typhi carriage also raise the risk. Oral contraceptives have no established link.",
+   "vis": null
+  },
+  {
+   "tx": "A chronic smoker with haemoptysis and a normal chest X-ray still needs imaging. The next best step is **high resolution CT**, which detects small or central lesions missed on plain film. Bronchoscopy follows if CT shows an endobronchial or central abnormality.",
+   "say": "A chronic smoker with haemoptysis and a normal chest X-ray still needs imaging. The next best step is high resolution CT, which detects small or central lesions missed on plain film. Bronchoscopy follows if the CT shows an endobronchial or central abnormality.",
+   "vis": null
+  },
+  {
+   "tx": "Contrast-related urticaria with wheeze, hypotension and tachycardia is an **anaphylactoid reaction**. The first drug is **epinephrine**, given intramuscularly or intravenously depending on severity, followed by H1 and H2 blockers, aminophylline and hydrocortisone. Beta blockers are contraindicated because they blunt the response to adrenaline.",
+   "say": "Contrast-related urticaria with wheeze, hypotension and tachycardia is an anaphylactoid reaction. The first drug is epinephrine, followed by H1 and H2 blockers, aminophylline and hydrocortisone. Beta blockers are contraindicated because they blunt the response to adrenaline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway and breathing threat"
+     },
+     {
+      "id": "b",
+      "label": "Give epinephrine"
+     },
+     {
+      "id": "c",
+      "label": "Add H1 and H2 blockers"
+     },
+     {
+      "id": "d",
+      "label": "Aminophylline and hydrocortisone"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary sclerosing cholangitis is linked to **ulcerative colitis**, which is the most important association and is seen in most patients. Autoimmune hepatitis, Crohn's disease, sicca syndrome and retroperitoneal fibrosis are also linked. Smoking is protective in PSC and ulcerative colitis, and PSC favours males.",
+   "say": "Primary sclerosing cholangitis is linked to ulcerative colitis, which is the most important association. Autoimmune hepatitis, Crohn's disease, sicca syndrome and retroperitoneal fibrosis are also linked. Smoking is protective in primary sclerosing cholangitis and ulcerative colitis, and the disease favours males.",
+   "vis": null
+  },
+  {
+   "tx": "For cancer pain that persists long term, the **oral route** is preferred for analgesics. It is reliable, convenient and easy to dose. Parenteral routes are reserved for patients who cannot swallow. In Wernicke's encephalopathy, **thiamine** deficiency damages the mammillary bodies and dorsomedial thalamic nuclei.",
+   "say": "For cancer pain that persists long term, the oral route is preferred for analgesics. It is reliable, convenient and easy to dose. Parenteral routes are reserved for patients who cannot swallow. In Wernicke's encephalopathy, thiamine deficiency damages the mammillary bodies and dorsomedial thalamic nuclei.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "f115da0d-8b0b-4770-8aea-0cd9a246f7a5",
+  "121475f9-104c-4b89-bea9-2457073a3a5b",
+  "1ba6d92d-40ed-4ede-ae33-07724bb2a75f"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 528
+ }
+}

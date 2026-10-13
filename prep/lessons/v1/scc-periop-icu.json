@@ -1,0 +1,169 @@
+{
+ "v": 1,
+ "module": "scc-periop-icu",
+ "subject": "ss-critical-care",
+ "title": "Postoperative and cardiac surgical critical care: high-yield principles for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Postoperative and cardiac surgical critical care covers **low cardiac output syndrome**, **vasoplegia**, post cardiac surgery bleeding, and **postoperative atrial fibrillation**. Each complication is linked to the surgery itself, so the first task is recognising which complication is most likely in a given patient. Early recognition and correction of the cause is the main principle.",
+   "say": "Postoperative and cardiac surgical critical care covers low cardiac output syndrome, vasoplegia, post cardiac surgery bleeding, and postoperative atrial fibrillation. Each complication is linked to the surgery itself, so the first task is recognising which complication is most likely in a given patient. Early recognition and correction of the cause is the main principle.",
+   "vis": null
+  },
+  {
+   "tx": "Escalating or disproportionate postoperative pain should prompt a search for a **serious surgical complication**, such as compartment syndrome or deep infection, before the opioid dose is raised. Multimodal analgesia works because agents acting on different pathways combine additively or synergistically, allowing lower doses of each drug and fewer adverse effects.",
+   "say": "Escalating or disproportionate postoperative pain should prompt a search for a serious surgical complication, such as compartment syndrome or deep infection, before the opioid dose is raised. Multimodal analgesia works because agents acting on different pathways combine additively or synergistically, allowing lower doses of each drug and fewer adverse effects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Multimodal analgesia",
+     "High-dose monotherapy"
+    ],
+    "rows": [
+     [
+      "Mechanism",
+      "Agents hit different pathways",
+      "Single pathway"
+     ],
+     [
+      "Dose of each drug",
+      "Lower",
+      "Higher"
+     ],
+     [
+      "Side effects",
+      "Fewer",
+      "More dose-related"
+     ],
+     [
+      "Complete pain relief",
+      "Not guaranteed",
+      "Not guaranteed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Postoperative **junctional ectopic tachycardia** (JET) is a narrow-complex tachycardia with atrioventricular dissociation, where ventricles beat faster than atria. It arises from abnormal automaticity in the AV junction or proximal His bundle. Mechanical trauma, oedema and high catecholamines near the conduction system are the usual triggers.",
+   "say": "Postoperative junctional ectopic tachycardia is a narrow-complex tachycardia with atrioventricular dissociation, where the ventricles beat faster than the atria. It arises from abnormal automaticity in the AV junction or proximal His bundle. Mechanical trauma, oedema and high catecholamines near the conduction system are the usual triggers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trauma, oedema, catecholamines"
+     },
+     {
+      "id": "b",
+      "label": "AV junction automaticity"
+     },
+     {
+      "id": "c",
+      "label": "Junctional ectopic tachycardia"
+     },
+     {
+      "id": "d",
+      "label": "AV dissociation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In an unstable infant with JET despite electrolyte correction, the key initial step is to lower the ectopic pacemaker activity. **Mild hypothermia** is the standard cornerstone for postoperative JET, and it should not be replaced by rapid reflex cardioversion. Correcting electrolytes, especially potassium and magnesium, and avoiding catecholamine excess come alongside it.",
+   "say": "In an unstable infant with junctional ectopic tachycardia despite electrolyte correction, the key initial step is to lower the ectopic pacemaker activity. Mild hypothermia is the standard cornerstone for postoperative junctional ectopic tachycardia, and it should not be replaced by rapid reflex cardioversion. Correcting electrolytes, especially potassium and magnesium, and avoiding catecholamine excess come alongside it.",
+   "vis": null
+  },
+  {
+   "tx": "Total anomalous pulmonary venous return (TAPVR) needs an obligatory **right-to-left atrial shunt** through an ASD or PFO to fill the left heart. An obstructed pathway raises pulmonary venous pressure, causing pulmonary oedema, pulmonary hypertension and cyanosis. A restrictive atrial communication is therefore a red flag, and the supracardiac type classically shows a snowman silhouette on chest X-ray.",
+   "say": "Total anomalous pulmonary venous return needs an obligatory right-to-left atrial shunt through an ASD or PFO to fill the left heart. An obstructed pathway raises pulmonary venous pressure, causing pulmonary oedema, pulmonary hypertension and cyanosis. A restrictive atrial communication is therefore a red flag, and the supracardiac type classically shows a snowman silhouette on chest X-ray.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unobstructed TAPVR",
+     "points": [
+      "Shunt via ASD or PFO adequate",
+      "Pulmonary flow normal-ish",
+      "Less urgent presentation"
+     ]
+    },
+    "right": {
+     "title": "Obstructed TAPVR",
+     "points": [
+      "Pulmonary venous pressure high",
+      "Pulmonary oedema and cyanosis",
+      "Restrictive atrial communication dangerous",
+      "Urgent surgery needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before major non-cardiac surgery, the **Revised Cardiac Risk Index** counts six predictors, including insulin-dependent diabetes, heart failure, ischaemic heart disease, stroke, renal insufficiency and high-risk surgery. Functional capacity below 4 METs, such as inability to climb two flights of stairs, signals poor reserve. Aortic surgery is high-risk, with cardiac event rates above 5 percent.",
+   "say": "Before major non-cardiac surgery, the Revised Cardiac Risk Index counts six predictors, including insulin-dependent diabetes, heart failure, ischaemic heart disease, stroke, renal insufficiency and high-risk surgery. Functional capacity below 4 METs, such as inability to climb two flights of stairs, signals poor reserve. Aortic surgery is high-risk, with cardiac event rates above 5 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure risk",
+     "Cardiac event rate",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Low",
+      "Under 1 percent",
+      "Superficial surgery"
+     ],
+     [
+      "Intermediate",
+      "1 to 5 percent",
+      "Carotid or head and neck"
+     ],
+     [
+      "High",
+      "Over 5 percent",
+      "Aortic or major vascular"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_0a53c392a6a7",
+  "q_d5ea5870bb3f",
+  "q_4cce63da1f2e"
+ ],
+ "src": [],
+ "refs": [
+  "2014 ACC/AHA Guideline on Perioperative Cardiovascular Evaluation and Management of Noncardiac Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 34
+ }
+}

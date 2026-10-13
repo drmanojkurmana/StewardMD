@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "mcc-pb-team",
+ "subject": "mcc-professional-behaviours",
+ "title": "Collaboration and handover: safe transfer of care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Handover is the **structured transfer of patient responsibility** from one clinician to another, usually at shift change or transfer of care. Its core purpose is making sure every pending result, open task and safety concern has a named owner after the handover. Most handover harm arises from items that were known but not assigned. Use a structured format such as SBAR or I-PASS, and confirm the receiving clinician has understood the plan.",
+   "say": "Handover is the structured transfer of patient responsibility from one clinician to another, usually at shift change or transfer of care. Its core purpose is making sure every pending result, open task and safety concern has a named owner after the handover. Most handover harm arises from items that were known but not assigned. Use a structured format such as SBAR or I-PASS, and confirm the receiving clinician has understood the plan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "What it covers"
+    ],
+    "rows": [
+     [
+      "Situation",
+      "Reason for admission and current concern"
+     ],
+     [
+      "Background",
+      "Relevant history, medicines and allergies"
+     ],
+     [
+      "Assessment",
+      "Latest observations, results and trends"
+     ],
+     [
+      "Recommendation",
+      "Actions, owner and time of follow-up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pending results are the most common handover failure. A **pending result** with no owner is effectively lost at shift change. Before handing over, list every investigation not yet back, every abnormal result still needing action, and every task planned for the next shift. Assign each item to a named clinician. Written notes alone do not confirm that anything was understood.",
+   "say": "Pending results are the most common handover failure. A pending result with no owner is effectively lost at shift change. Before handing over, list every investigation not yet back, every abnormal result still needing action, and every task planned for the next shift. Assign each item to a named clinician. Written notes alone do not confirm that anything was understood.",
+   "vis": null
+  },
+  {
+   "tx": "When a nurse raises concern about deterioration, treat it as a **clinical signal**, not a complaint. Rising heart rate, falling blood pressure, low urine output, new drowsiness or new confusion can mean sepsis, bleeding or hypoperfusion. The trend over time matters more than a single documented 'stable' status. Examine the patient promptly, review observations, and escalate using structured communication such as SBAR if you are unsure or the patient is worsening.",
+   "say": "When a nurse raises concern about deterioration, treat it as a clinical signal, not a complaint. Rising heart rate, falling blood pressure, low urine output, new drowsiness or new confusion can mean sepsis, bleeding or hypoperfusion. The trend over time matters more than a single documented stable status. Examine the patient promptly, review observations, and escalate using structured communication such as SBAR if you are unsure or the patient is worsening.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nurse raises concern"
+     },
+     {
+      "id": "b",
+      "label": "Clinician reviews trend"
+     },
+     {
+      "id": "c",
+      "label": "Bedside assessment now"
+     },
+     {
+      "id": "d",
+      "label": "Escalate if unstable"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transitions out of hospital, such as discharge to a family physician, need a **discharge summary** listing pending results, outstanding investigations and the responsible clinician for each. Medication reconciliation is equally important. Compare the best possible medication history across sources, including community pharmacy and recent over-the-counter products, to catch omissions and interactions. Anticoagulants and renally cleared drugs carry particular risk.",
+   "say": "Transitions out of hospital, such as discharge to a family physician, need a discharge summary listing pending results, outstanding investigations and the responsible clinician for each. Medication reconciliation is equally important. Compare the best possible medication history across sources, including community pharmacy and recent over-the-counter products, to catch omissions and interactions. Anticoagulants and renally cleared drugs carry particular risk.",
+   "vis": null
+  },
+  {
+   "tx": "Collaboration includes the **patient and their chosen supports**. Culturally safe care means asking what family, Elders or community health workers the patient wants involved, and arranging a care conference with them where possible, including phone participation. Explore barriers such as cost, travel and feeling judged, and co-plan follow-up. Shared decision-making means the patient's preferences shape the plan, not just the clinician's.",
+   "say": "Collaboration includes the patient and their chosen supports. Culturally safe care means asking what family, Elders or community health workers the patient wants involved, and arranging a care conference with them where possible, including phone participation. Explore barriers such as cost, travel and feeling judged, and co-plan follow-up. Shared decision-making means the patient's preferences shape the plan, not just the clinician's.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline NG5: Medicines optimisation"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 12
+ }
+}

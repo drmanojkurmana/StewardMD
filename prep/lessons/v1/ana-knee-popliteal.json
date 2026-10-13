@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "ana-knee-popliteal",
+ "subject": "anatomy",
+ "title": "Popliteal fossa and knee joint",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **popliteal fossa** is a diamond-shaped space at the back of the knee. Its superior and medial boundary is the semimembranosus and semitendinosus, its superior and lateral boundary is the biceps femoris, and its inferior boundary is formed by the two heads of gastrocnemius with plantaris laterally. The **popliteal artery** is the deepest structure in the fossa, lying directly on the femur and the knee capsule.",
+   "say": "The popliteal fossa is a diamond-shaped space at the back of the knee. Its upper medial boundary is formed by semimembranosus and semitendinosus, its upper lateral boundary by biceps femoris, and its lower boundary by the two heads of gastrocnemius, with plantaris on the lateral side. The popliteal artery is the deepest structure in the fossa, lying directly on the femur and the knee capsule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Boundary",
+     "Muscles"
+    ],
+    "rows": [
+     [
+      "Superomedial",
+      "Semimembranosus and semitendinosus"
+     ],
+     [
+      "Superolateral",
+      "Biceps femoris"
+     ],
+     [
+      "Inferomedial",
+      "Medial head of gastrocnemius"
+     ],
+     [
+      "Inferolateral",
+      "Lateral head of gastrocnemius and plantaris"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From medial to lateral, the upper part of the fossa holds the artery, vein and nerve, while the lower part holds the nerve, vein and artery. The popliteal artery is hard to feel because it is deep and does not cross a prominent bone. The **sciatic nerve** usually divides into the tibial and common peroneal nerves at the apex of the fossa.",
+   "say": "From medial to lateral, the upper part of the fossa contains the artery, vein and nerve, while the lower part contains the nerve, vein and artery. The popliteal artery is hard to feel because it is deep and does not cross a prominent bone. The sciatic nerve usually divides into the tibial and common peroneal nerves at the apex of the fossa.",
+   "vis": null
+  },
+  {
+   "tx": "In a supracondylar femoral fracture, the distal fragment is tilted backwards by the pull of gastrocnemius. This can lacerate the **popliteal artery**, which is why orthopaedic surgeons check its integrity. The femoral artery becomes the popliteal artery after passing through the adductor hiatus, and it divides below the knee into the anterior and posterior tibial arteries.",
+   "say": "In a supracondylar femoral fracture, the distal fragment is tilted backwards by the pull of gastrocnemius. This can lacerate the popliteal artery, which is why orthopaedic surgeons check it. The femoral artery becomes the popliteal artery after passing through the adductor hiatus, and divides below the knee into the anterior and posterior tibial arteries.",
+   "vis": null
+  },
+  {
+   "tx": "The **cruciate ligaments** give anteroposterior stability and lie within the joint. The anterior cruciate ligament is taut in extension and prevents anterior displacement of the tibia on the femur. The posterior cruciate ligament is taut in flexion and prevents posterior displacement of the tibia, and it is the one injured in posterior dislocation. The anterior one is injured more often.",
+   "say": "The cruciate ligaments give anteroposterior stability and lie within the joint. The anterior cruciate ligament is taut in extension and prevents anterior displacement of the tibia on the femur. The posterior cruciate ligament is taut in flexion and prevents posterior displacement of the tibia, and it is the one injured in posterior dislocation. The anterior one is injured more often.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior cruciate",
+     "points": [
+      "Taut in extension",
+      "Stops anterior tibial slide",
+      "Injured more often",
+      "Torn in hyperextension"
+     ]
+    },
+    "right": {
+     "title": "Posterior cruciate",
+     "points": [
+      "Taut in flexion",
+      "Stops posterior tibial slide",
+      "Injured in posterior dislocation",
+      "Attaches to medial femoral condyle"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Knee **locking** happens in the last stage of extension, when the femur rotates medially on the tibia, driven by quadriceps femoris. Unlocking at the start of flexion is done by the **popliteus**, which rotates the femur laterally on the tibia. Locking and unlocking alternate to allow locomotion. Medial meniscus is firmly attached to the medial collateral ligament and is more often injured than the more mobile lateral meniscus.",
+   "say": "Knee locking happens in the last stage of extension, when the femur rotates medially on the tibia, driven by quadriceps femoris. Unlocking at the start of flexion is done by popliteus, which rotates the femur laterally on the tibia. Locking and unlocking alternate to allow locomotion. The medial meniscus is firmly attached to the medial collateral ligament and is more often injured than the more mobile lateral meniscus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Full extension"
+     },
+     {
+      "id": "b",
+      "label": "Quadriceps locks knee"
+     },
+     {
+      "id": "c",
+      "label": "Popliteus unlocks"
+     },
+     {
+      "id": "d",
+      "label": "Flexion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Start of flexion"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Housemaid's knee** is inflammation of the prepatellar bursa, caused by prolonged kneeling. Clergyman's knee is inflammation of the infrapatellar bursa. A **Baker's cyst** is a pulsion diverticulum of the knee joint, seen as a non-tender swelling in the popliteal fossa. The patellar tendon, or semitendinosus and gracilis, may be used to reconstruct the anterior cruciate ligament.",
+   "say": "Housemaid's knee is inflammation of the prepatellar bursa, caused by prolonged kneeling. Clergyman's knee is inflammation of the infrapatellar bursa. A Baker's cyst is a pulsion diverticulum of the knee joint, seen as a non-tender swelling in the popliteal fossa. The patellar tendon, or semitendinosus and gracilis, may be used to reconstruct the anterior cruciate ligament.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "65a1636f-6fa8-490d-8515-0e9bbb8fb361",
+  "d4ab1825-8c1f-4ee0-bf47-a2f61a08c81a",
+  "e99772a0-b8be-4111-ac0e-3f2d788b93dc"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 5 Lower Limb in B.D. Chaurasia's Human Anatomy (Chaurasia)",
+  "Moore Clinically Oriented Anatomy (Moore)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 152
+ }
+}

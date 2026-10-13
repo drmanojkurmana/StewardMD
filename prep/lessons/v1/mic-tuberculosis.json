@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "mic-tuberculosis",
+ "subject": "microbiology",
+ "title": "Mycobacterium tuberculosis: Identification, Diagnosis and Drug Resistance",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Mycobacterium tuberculosis** is a non-spore-forming, non-motile, slender aerobic rod. It is poorly stained by Gram stain but holds the **carbol fuchsin** dye on Ziehl-Neelsen staining, so it is called an **acid-fast bacillus**. Acid fastness comes from its waxy mycolic acid-rich cell wall, which resists decolourisation by acid alcohol.",
+   "say": "Mycobacterium tuberculosis is a non spore forming, non motile, slender aerobic rod. It stains poorly with Gram stain, but it holds carbol fuchsin on Ziehl Neelsen staining, so it is called an acid fast bacillus. Acid fastness comes from its waxy, mycolic acid rich cell wall, which resists decolourisation by acid alcohol.",
+   "vis": null
+  },
+  {
+   "tx": "Diagnosis rests on three tools. **Sputum smear microscopy** is rapid but insensitive, and at least 10,000 bacilli per ml are needed for a direct smear to be positive. **Culture on Lowenstein-Jensen medium** is the gold standard but takes 3 to 6 weeks. **Cartridge-based NAAT (CBNAAT, GeneXpert MTB/RIF)** detects DNA and rifampicin resistance from unprocessed sputum in about 90 minutes.",
+   "say": "Diagnosis rests on three tools. Sputum smear microscopy is rapid but insensitive, and at least ten thousand bacilli per millilitre are needed for a direct smear to be positive. Culture on Lowenstein Jensen medium is the gold standard but takes three to six weeks. Cartridge based NAAT, known as CBNAAT or GeneXpert MTB RIF, detects the DNA and rifampicin resistance from unprocessed sputum in about ninety minutes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Key point",
+     "Time"
+    ],
+    "rows": [
+     [
+      "Sputum smear (ZN or auramine)",
+      "Rapid, low sensitivity",
+      "Minutes"
+     ],
+     [
+      "LJ culture",
+      "Gold standard",
+      "3 to 6 weeks"
+     ],
+     [
+      "CBNAAT (GeneXpert)",
+      "Detects rpoB resistance",
+      "About 90 minutes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Culture media matter. **Lowenstein-Jensen medium** contains glycerol, asparagine and eggs, and its **malachite green** is a selective agent that suppresses other bacteria. Glycerol favours M. tuberculosis, while LJ medium without glycerol but with pyruvate favours M. bovis. The **interferon-gamma release assay (IGRA)** uses antigens such as ESAT-6 and CFP-10 to detect sensitised T cells in whole blood.",
+   "say": "Culture media matter. Lowenstein Jensen medium contains glycerol, asparagine and eggs, and its malachite green is a selective agent that suppresses other bacteria. Glycerol favours M. tuberculosis, while LJ medium without glycerol but with pyruvate favours M. bovis. The interferon gamma release assay uses antigens such as ESAT six and CFP ten to detect sensitised T cells in whole blood.",
+   "vis": null
+  },
+  {
+   "tx": "**Multidrug-resistant TB (MDR-TB)** is resistance to at least **isoniazid** and **rifampicin**. Resistance is due to chromosomal mutations, such as rpoB for rifampicin and katG or inhA for isoniazid. **XDR-TB** adds resistance to any fluoroquinolone and at least one injectable second-line drug such as amikacin, kanamycin or capreomycin. Multidrug therapy is used to prevent such mutants from being selected.",
+   "say": "Multidrug resistant TB, or MDR TB, is resistance to at least isoniazid and rifampicin. Resistance is due to chromosomal mutations, such as rpoB for rifampicin and katG or inhA for isoniazid. XDR TB adds resistance to any fluoroquinolone and at least one injectable second line drug such as amikacin, kanamycin or capreomycin. Multidrug therapy is used to prevent such mutants from being selected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MDR-TB",
+     "points": [
+      "Resistant to isoniazid and rifampicin",
+      "Treated over 24 to 27 months",
+      "Intensive phase of six drugs"
+     ]
+    },
+    "right": {
+     "title": "XDR-TB",
+     "points": [
+      "MDR plus a fluoroquinolone",
+      "Plus an injectable second-line drug",
+      "Treated over 24 to 30 months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For suspected MDR-TB, the sequence is rapid molecular testing for rifampicin resistance at diagnosis, then line-probe assays and phenotypic susceptibility testing to define the pattern. The regimen is then tailored to these results and referred to a specialist drug-resistant TB service. **Malabsorption** and non-adherence can mimic resistance, so they must be excluded.",
+   "say": "For suspected MDR TB, the sequence is rapid molecular testing for rifampicin resistance at diagnosis, then line probe assays and phenotypic susceptibility testing to define the pattern. The regimen is then tailored to these results and referred to a specialist drug resistant TB service. Malabsorption and non adherence can mimic resistance, so they must be excluded.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected MDR-TB"
+     },
+     {
+      "id": "b",
+      "label": "CBNAAT for rifampicin"
+     },
+     {
+      "id": "c",
+      "label": "Line-probe and DST"
+     },
+     {
+      "id": "d",
+      "label": "Tailor regimen, refer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "01872e36-d6ab-4426-8766-e0782c50d5f2",
+  "2ce972bb-7b5e-467a-a408-f10399bc9cc4",
+  "d0e96d46-1915-4b9c-bd7c-2833adedbba8"
+ ],
+ "src": [
+  "kb-reference-mdr-tuberculosis"
+ ],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 327,
+  "itemN": 167
+ }
+}

@@ -1,0 +1,172 @@
+{
+ "v": 1,
+ "module": "sne-neurology-systemic-disease",
+ "subject": "ss-neurology",
+ "title": "Neurology of systemic and metabolic disease: Wernicke encephalopathy and Korsakoff syndrome",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Wernicke encephalopathy** is an acute neurological emergency caused by thiamine (vitamin B1) deficiency. It is seen in chronic alcohol use, hyperemesis gravidarum, prolonged vomiting and after bariatric surgery. The classic triad is confusion, ataxia and ophthalmoplegia, but the full triad is present in only about 16 percent of patients, so the diagnosis is clinical. Thiamine pyrophosphate is a cofactor for enzymes of the Krebs cycle, so deficiency impairs cerebral energy production.",
+   "say": "Wernicke encephalopathy is an acute neurological emergency caused by thiamine, or vitamin B1, deficiency. It is seen in chronic alcohol use, hyperemesis gravidarum, prolonged vomiting and after bariatric surgery. The classic triad is confusion, ataxia and ophthalmoplegia, but the full triad is present in only about 16 percent of patients, so the diagnosis is clinical. Thiamine pyrophosphate is a cofactor for Krebs cycle enzymes, so deficiency impairs cerebral energy production.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Classic finding",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Triad",
+      "Confusion, ataxia, ophthalmoplegia",
+      "Full triad in about 16 percent"
+     ],
+     [
+      "Cause",
+      "Thiamine deficiency",
+      "Alcohol, vomiting, bariatric surgery"
+     ],
+     [
+      "Diagnosis",
+      "Clinical",
+      "Do not delay treatment for tests"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment must start at once with **parenteral thiamine**, given before or alongside any glucose. Glucose raises thiamine demand and can tip a marginal patient into acute decompensation. Do not wait for serum thiamine levels or brain MRI. Multiple intravenous doses carry a rare risk of anaphylaxis, so watch for allergic reactions. Magnesium is a necessary cofactor for thiamine activation, so hypomagnesaemia must be corrected for thiamine to work well.",
+   "say": "Treatment must start at once with parenteral thiamine, given before or alongside any glucose. Glucose raises thiamine demand and can tip a marginal patient into acute decompensation. Do not wait for serum thiamine levels or brain MRI. Multiple intravenous doses carry a rare risk of anaphylaxis, so watch for allergic reactions. Magnesium is a necessary cofactor for thiamine activation, so hypomagnesaemia must be corrected for thiamine to work well.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspect Wernicke"
+     },
+     {
+      "id": "b",
+      "label": "Give IV thiamine"
+     },
+     {
+      "id": "c",
+      "label": "Then or with glucose"
+     },
+     {
+      "id": "d",
+      "label": "Correct magnesium"
+     },
+     {
+      "id": "e",
+      "label": "Monitor for anaphylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ocular signs such as nystagmus and lateral rectus palsy usually improve within hours to days of thiamine. Ataxia and gait disturbance recover more slowly and may stay incomplete. Persistent, disproportionate impairment of episodic memory and new learning after stabilisation points to **Korsakoff syndrome**. Korsakoff is associated with bilateral damage to the medial dorsal thalamic nucleus and the mammillary bodies. Acute MRI often shows mammillary body enhancement and medial thalamic signal change.",
+   "say": "Ocular signs such as nystagmus and lateral rectus palsy usually improve within hours to days of thiamine. Ataxia and gait disturbance recover more slowly and may stay incomplete. Persistent, disproportionate impairment of episodic memory and new learning after stabilisation points to Korsakoff syndrome. Korsakoff is associated with bilateral damage to the medial dorsal thalamic nucleus and the mammillary bodies. Acute MRI often shows mammillary body enhancement and medial thalamic signal change.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wernicke (acute)",
+     "points": [
+      "Ocular signs improve fast",
+      "Ataxia recovers slowly",
+      "Mammillary body enhancement on MRI"
+     ]
+    },
+    "right": {
+     "title": "Korsakoff (chronic)",
+     "points": [
+      "Memory and new learning impaired",
+      "Disproportionate to other deficits",
+      "Management is rehabilitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thiamine deficiency** shows two classic faces. **Wet beriberi** brings a hyperdynamic circulation, with tachycardia, warm peripheries and oedema from high-output cardiac failure. **Dry beriberi** is mainly a **sensorimotor neuropathy**. Once **Korsakoff amnesia** is established, thiamine rarely restores lost memory, so care shifts to cognitive and functional rehabilitation. Prevention in high-risk groups, such as patients after bariatric surgery or those with prolonged vomiting, is the strongest lever.",
+   "say": "Thiamine deficiency has two classic faces. Wet beriberi brings a hyperdynamic circulation, with tachycardia, warm peripheries and oedema from high-output cardiac failure. Dry beriberi is mainly a sensorimotor neuropathy. Once Korsakoff amnesia is established, thiamine rarely restores lost memory, so care shifts to cognitive and functional rehabilitation. Prevention in high-risk groups, such as patients after bariatric surgery or those with prolonged vomiting, is the strongest lever.",
+   "vis": null
+  },
+  {
+   "tx": "Thiamine deficiency is not the only systemic cause of encephalopathy. **Posterior reversible encephalopathy syndrome (PRES)** causes headache, seizures, visual disturbance and confusion. The classic MRI shows symmetric posterior white matter oedema with T2 hyperintensity. It is linked to uncontrolled hypertension, chemotherapy, immunosuppressants such as tacrolimus, and renal failure. Autoregulation fails when systolic pressure is high, although some cases occur with normal blood pressure. Hepatic and uraemic encephalopathy are separate metabolic causes.",
+   "say": "Thiamine deficiency is not the only systemic cause of encephalopathy. Posterior reversible encephalopathy syndrome causes headache, seizures, visual disturbance and confusion. The classic MRI shows symmetric posterior white matter oedema with T2 hyperintensity. It is linked to uncontrolled hypertension, chemotherapy, immunosuppressants such as tacrolimus, and renal failure. Autoregulation fails when systolic pressure is high, although some cases occur with normal blood pressure. Hepatic and uraemic encephalopathy are separate metabolic causes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Likely cause",
+     "Key imaging"
+    ],
+    "rows": [
+     [
+      "Hypertension or chemotherapy",
+      "PRES",
+      "Posterior white matter T2 signal"
+     ],
+     [
+      "Tacrolimus use",
+      "PRES",
+      "Posterior white matter T2 signal"
+     ],
+     [
+      "Thiamine lack after surgery",
+      "Wernicke",
+      "Mammillary body enhancement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remember that the **Caine criteria** support the diagnosis, but thiamine treatment must not wait for them. Prevention in high-risk patients uses intravenous or intramuscular thiamine at a dose set by the treating team. Always consider the cause, check glucose early, and treat before any glucose infusion. Keep in mind that the exam answer is usually to start thiamine without delay.",
+   "say": "Remember that the Caine criteria support the diagnosis, but thiamine treatment must not wait for them. Prevention in high-risk patients uses intravenous or intramuscular thiamine at a dose set by the treating team. Always consider the cause, check glucose early, and treat before any glucose infusion. Keep in mind that the exam answer is usually to start thiamine without delay.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1ce336066ebc",
+  "q_dd07f5e46c9b",
+  "q_2eca24fefa11"
+ ],
+ "src": [],
+ "refs": [
+  "Caine D et al. Diagnostic criteria for Wernicke encephalopathy (review literature)",
+  "Harrison's Principles of Internal Medicine (Kasper DL et al., editors)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 31
+ }
+}

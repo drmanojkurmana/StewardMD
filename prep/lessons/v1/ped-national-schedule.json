@@ -1,0 +1,168 @@
+{
+ "v": 1,
+ "module": "ped-national-schedule",
+ "subject": "paediatrics",
+ "title": "National immunisation schedule: key vaccines, timings and doses",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **Universal Immunisation Programme** delivers a fixed schedule of vaccines free of cost to every child in India. Infants receive BCG, **birth dose OPV** and **hepatitis B birth dose** within the first day or two of life. Vaccines given at birth are BCG, zero dose OPV and hepatitis B. Knowing which vaccine belongs to which visit is the core exam skill.",
+   "say": "The Universal Immunisation Programme delivers a fixed schedule of vaccines free of cost to every child in India. Infants receive BCG, birth dose OPV and hepatitis B birth dose within the first day or two of life. Vaccines given at birth are BCG, zero dose OPV and hepatitis B. Knowing which vaccine belongs to which visit is the core exam skill.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Vaccines"
+    ],
+    "rows": [
+     [
+      "At birth",
+      "BCG, bOPV-0, Hepatitis B-0"
+     ],
+     [
+      "6 weeks",
+      "bOPV-1, Pentavalent-1, Rotavirus-1, fIPV-1, PCV-1"
+     ],
+     [
+      "10 weeks",
+      "bOPV-2, Pentavalent-2, Rotavirus-2"
+     ],
+     [
+      "14 weeks",
+      "bOPV-3, Pentavalent-3, Rotavirus-3, fIPV-2, PCV-2"
+     ],
+     [
+      "9 months",
+      "MR-1, JE-1 where used, PCV booster, Vitamin A 1 lakh IU"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **pentavalent vaccine** combines diphtheria, pertussis, tetanus, hepatitis B and Haemophilus influenzae type b antigens. It is given at 6, 10 and 14 weeks. The DPT booster is given at 16 to 24 months and again at 5 to 6 years, with Td later at 10 and 16 years. Whole-cell DTwP is given intramuscularly at 0.5 ml and stored at 2 to 8 degrees Celsius.",
+   "say": "The pentavalent vaccine combines diphtheria, pertussis, tetanus, hepatitis B and Haemophilus influenzae type b antigens. It is given at 6, 10 and 14 weeks. The DPT booster is given at 16 to 24 months and again at 5 to 6 years, with Td later at 10 and 16 years. Whole-cell DTwP is given intramuscularly at 0.5 ml and stored at 2 to 8 degrees Celsius.",
+   "vis": null
+  },
+  {
+   "tx": "**Inactivated polio vaccine** is given as a fractional intradermal dose, fIPV, at 6 and 14 weeks, alongside oral polio doses. The **measles-rubella** vaccine is given at 9 months and again at 16 to 24 months. Vitamin A prophylaxis is linked to these visits: 1 lakh IU at 9 months and 2 lakh IU at later booster visits, then every 6 months up to 5 years.",
+   "say": "Inactivated polio vaccine is given as a fractional intradermal dose, fIPV, at 6 and 14 weeks, alongside oral polio doses. The measles-rubella vaccine is given at 9 months and again at 16 to 24 months. Vitamin A prophylaxis is linked to these visits: 1 lakh IU at 9 months and 2 lakh IU at later booster visits, then every 6 months up to 5 years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age",
+     "Vitamin A dose"
+    ],
+    "rows": [
+     [
+      "9 months",
+      "1,00,000 IU with measles vaccine"
+     ],
+     [
+      "16-24 months",
+      "2,00,000 IU with DPT/OPV booster"
+     ],
+     [
+      "Every 6 months",
+      "2,00,000 IU until 5 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For a child who missed vaccines, the rule is to restart nothing. Give the next due doses at the next visit as if the usual interval had elapsed, and complete the series at the earliest opportunity. For an unknown status, treat the child as unimmunised. **Catch-up** rules: BCG and Pentavalent are given only up to 1 year of age, while OPV and Hib run to 5 years and DPT to 7 years.",
+   "say": "For a child who missed vaccines, the rule is to restart nothing. Give the next due doses at the next visit as if the usual interval had elapsed, and complete the series at the earliest opportunity. For an unknown status, treat the child as unimmunised. Catch-up rules: BCG and Pentavalent are given only up to 1 year of age, while OPV and Hib run to 5 years and DPT to 7 years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Missed dose"
+     },
+     {
+      "id": "b",
+      "label": "Do not restart series"
+     },
+     {
+      "id": "c",
+      "label": "Give due dose at next visit"
+     },
+     {
+      "id": "d",
+      "label": "Complete at earliest chance"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mission Indradhanush** targets seven vaccine-preventable diseases: diphtheria, pertussis, tetanus, childhood tuberculosis, polio, hepatitis B and measles. Japanese encephalitis is not one of the seven and is given only in selected endemic districts. Hence it is the answer when asked which disease is excluded. BCG, unlike other vaccines, is best known for protecting against severe forms like miliary and tubercular meningitis.",
+   "say": "Mission Indradhanush targets seven vaccine-preventable diseases: diphtheria, pertussis, tetanus, childhood tuberculosis, polio, hepatitis B and measles. Japanese encephalitis is not one of the seven and is given only in selected endemic districts. Hence it is the answer when asked which disease is excluded. BCG is best known for protecting against severe forms like miliary and tubercular meningitis.",
+   "vis": null
+  },
+  {
+   "tx": "Infants of an **HBsAg positive mother** need both hepatitis B immunoglobulin and vaccine, given at separate sites within 12 hours of birth. Further vaccine doses follow at 1 and 6 months. In contrast, the rotavirus course must be completed by 12 months. Rotarix needs 2 doses at 10 and 14 weeks, while RotaTeq and Rotavac need 3 doses at 6, 10 and 14 weeks.",
+   "say": "Infants of an HBsAg positive mother need both hepatitis B immunoglobulin and vaccine, given at separate sites within 12 hours of birth. Further vaccine doses follow at 1 and 6 months. In contrast, the rotavirus course must be completed by 12 months. Rotarix needs 2 doses at 10 and 14 weeks, while RotaTeq and Rotavac need 3 doses at 6, 10 and 14 weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rotarix",
+     "points": [
+      "2 doses",
+      "Given at 10 and 14 weeks"
+     ]
+    },
+    "right": {
+     "title": "RotaTeq and Rotavac",
+     "points": [
+      "3 doses",
+      "Given at 6, 10 and 14 weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oral **Vitamin A** for prophylaxis in a 9-month-old is 1 lakh IU, not 2 lakh IU, because the first dose is linked to measles vaccination. A pregnant woman who received MMR inadvertently needs reassurance, as no congenital rubella syndrome was seen in women immunised in pregnancy. Counsel and wait rather than terminate pregnancy.",
+   "say": "Oral Vitamin A for prophylaxis in a 9-month-old is 1 lakh IU, not 2 lakh IU, because the first dose is linked to measles vaccination. A pregnant woman who received MMR inadvertently needs reassurance, as no congenital rubella syndrome was seen in women immunised in pregnancy. Counsel and wait rather than terminate pregnancy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "218972be-3960-421c-bdc4-8a7627c5e548",
+  "cb79215a-3b3d-4629-9d92-62c09eccb53f",
+  "8296135c-a68b-48b2-bbe0-4a4efd58e1b1"
+ ],
+ "src": [],
+ "refs": [
+  "National Immunization Schedule, Government of India (Ministry of Health and Family Welfare)",
+  "Indian Academy of Pediatrics Immunization Guidelines",
+  "Nelson Textbook of Pediatrics (Kliegman et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 80
+ }
+}

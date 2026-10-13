@@ -1,0 +1,92 @@
+{
+ "v": 1,
+ "module": "ch-neonatal-emergencies",
+ "subject": "child-health",
+ "title": "Neonatal emergencies: recognising and acting early",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Neonatal emergencies often present with vague signs such as **lethargy**, poor feeding, grey colour or abnormal tone. Early recognition matters because the newborn compensates poorly. Start with airway, breathing, circulation and check blood glucose and temperature in every unwell neonate. Treat hypoglycaemia promptly, since low glucose causes neurological injury if untreated. Infants of diabetic mothers are particularly at risk after birth.",
+   "say": "Neonatal emergencies often present with vague signs such as lethargy, poor feeding, grey colour or abnormal tone. Early recognition matters because the newborn compensates poorly. Start with airway, breathing and circulation, and check blood glucose and temperature in every unwell neonate. Treat hypoglycaemia promptly, since low glucose causes neurological injury if untreated. Infants of diabetic mothers are particularly at risk after birth.",
+   "vis": null
+  },
+  {
+   "tx": "Resuscitation of a newborn follows a stepwise **neonatal sequence**: **drying, warming and airway clearance**, then **positive pressure ventilation**. Chest compressions are added only when effective ventilation fails to lift the heart rate, and they are paired with ventilation. **Adrenaline** is considered once compressions are underway and the heart rate remains low.",
+   "say": "Resuscitation of a newborn follows a stepwise neonatal sequence: drying, warming and airway clearance, then positive pressure ventilation. Chest compressions are added only when effective ventilation fails to lift the heart rate, and they are paired with ventilation. Adrenaline is considered once compressions are underway and the heart rate remains low.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dry, warm, clear airway"
+     },
+     {
+      "id": "b",
+      "label": "Effective ventilation"
+     },
+     {
+      "id": "c",
+      "label": "Heart rate still low?"
+     },
+     {
+      "id": "d",
+      "label": "Add chest compressions"
+     },
+     {
+      "id": "e",
+      "label": "Consider adrenaline"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypoxic-ischaemic encephalopathy** follows intrapartum asphyxia and presents with hypotonia, poor suck, seizures and altered consciousness. In moderate to severe cases, **therapeutic hypothermia** is started as early as possible after birth and continued for a defined period. Keep glucose normal and avoid hyperthermia during cooling. Early referral to a tertiary unit is essential because the window for cooling is limited.",
+   "say": "Hypoxic-ischaemic encephalopathy follows intrapartum asphyxia and presents with hypotonia, poor suck, seizures and altered consciousness. In moderate to severe cases, therapeutic hypothermia is started as early as possible after birth and continued for a defined period. Keep glucose normal and avoid hyperthermia during cooling. Early referral to a tertiary unit is essential because the window for cooling is limited.",
+   "vis": null
+  },
+  {
+   "tx": "**Necrotising enterocolitis** affects preterm infants, usually after feeds are started or increased. It presents with abdominal distension, bilious aspirates, feed intolerance and temperature instability. Pneumatosis intestinalis and portal venous gas on X-ray confirm the diagnosis. Stable infants are managed medically with bowel rest, antibiotics and close monitoring, while perforation or deterioration needs surgical review.",
+   "say": "Necrotising enterocolitis affects preterm infants, usually after feeds are started or increased. It presents with abdominal distension, bilious aspirates, feed intolerance and temperature instability. Pneumatosis intestinalis and portal venous gas on X-ray confirm the diagnosis. Stable infants are managed medically with bowel rest and antibiotics, while perforation or deterioration needs surgical review.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Neonatal Resuscitation Program, American Academy of Pediatrics and American Heart Association",
+  "National Institute for Health and Care Excellence Neonatal Infection Guidance"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 4,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

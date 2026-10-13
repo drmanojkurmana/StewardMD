@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "module": "med-clinical-cardiology",
+ "subject": "medicine",
+ "title": "Clinical cardiology: pulse, JVP and heart sounds",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **a wave** is presystolic right atrial contraction and it is absent in **atrial fibrillation**. A prominent a wave suggests reduced right ventricular compliance, tricuspid stenosis or pulmonary hypertension. A **cannon a wave** occurs when the atrium contracts against a closed tricuspid valve, as in AV dissociation, and in a wide-complex tachycardia it points to a ventricular origin.",
+   "say": "The a wave is presystolic right atrial contraction and it is absent in atrial fibrillation. A prominent a wave suggests reduced right ventricular compliance, tricuspid stenosis or pulmonary hypertension. A cannon a wave occurs when the atrium contracts against a closed tricuspid valve, as in AV dissociation, and in a wide-complex tachycardia it points to a ventricular origin.",
+   "vis": null
+  },
+  {
+   "tx": "**Kussmaul's sign** is a rise, or failure to fall, of the JVP on inspiration. It is classic for **constrictive pericarditis** but also occurs in restrictive cardiomyopathy, massive pulmonary embolism, right ventricular infarction and advanced left heart failure. Atrial fibrillation does not produce it. In the Indian exam setting, a rising JVP on deep breath should prompt thought of constriction.",
+   "say": "Kussmaul's sign is a rise, or failure to fall, of the JVP on inspiration. It is classic for constrictive pericarditis but also occurs in restrictive cardiomyopathy, massive pulmonary embolism, right ventricular infarction and advanced left heart failure. Atrial fibrillation does not produce it. In the Indian exam setting, a rising JVP on deep breath should prompt thought of constriction.",
+   "vis": null
+  },
+  {
+   "tx": "**Pulsus paradoxus** is an inspiratory fall in systolic pressure of more than 10 mmHg. It is seen in **cardiac tamponade**, with a raised JVP and blunted y descent, and also in massive pulmonary embolism, hypovolaemic shock, severe obstructive lung disease and tension pneumothorax. It is not a feature of hypertrophic cardiomyopathy.",
+   "say": "Pulsus paradoxus is an inspiratory fall in systolic pressure of more than 10 millimetres of mercury. It is seen in cardiac tamponade, with a raised JVP and blunted y descent, and also in massive pulmonary embolism, hypovolaemic shock, severe obstructive lung disease and tension pneumothorax. It is not a feature of hypertrophic cardiomyopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Seen in",
+     "points": [
+      "Cardiac tamponade",
+      "Massive pulmonary embolism",
+      "Hypovolaemic shock",
+      "Severe COPD or asthma"
+     ]
+    },
+    "right": {
+     "title": "Not a feature of",
+     "points": [
+      "Hypertrophic cardiomyopathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Arterial pulse contour gives clues. **Pulsus parvus et tardus** (weak, delayed upstroke) suggests severe **aortic stenosis**. A collapsing **water-hammer pulse** suggests chronic severe **aortic regurgitation**. **Pulsus bisferiens** has a double systolic peak and occurs in combined aortic valve disease and hypertrophic obstructive cardiomyopathy. **Pulsus alternans** signals severe left ventricular systolic dysfunction.",
+   "say": "Arterial pulse contour gives clues. Pulsus parvus et tardus, a weak and delayed upstroke, suggests severe aortic stenosis. A collapsing water-hammer pulse suggests chronic severe aortic regurgitation. Pulsus bisferiens has a double systolic peak and occurs in combined aortic valve disease and hypertrophic obstructive cardiomyopathy. Pulsus alternans signals severe left ventricular systolic dysfunction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pulse type",
+     "Classic cause",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Parvus et tardus",
+      "Severe aortic stenosis",
+      "Weak, delayed upstroke"
+     ],
+     [
+      "Water-hammer",
+      "Chronic severe aortic regurgitation",
+      "Sharp, rapidly collapsing"
+     ],
+     [
+      "Bisferiens",
+      "Combined AS and AR; HOCM",
+      "Double systolic peak"
+     ],
+     [
+      "Alternans",
+      "Severe LV systolic dysfunction",
+      "Alternating beat strength"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use **Valsalva manoeuvre** and **dynamic auscultation** to separate murmurs. The murmur of **HOCM** gets louder with strain and on standing, and softer with squatting or passive leg raising. Tricuspid regurgitation murmur louder on inspiration (Carvallo's sign) separates it from mitral regurgitation. In suspected valve disease, refer to cardiology for confirmation, and use echocardiography as the key investigation.",
+   "say": "Use Valsalva manoeuvre and dynamic auscultation to separate murmurs. The murmur of hypertrophic obstructive cardiomyopathy gets louder with strain and on standing, and softer with squatting or passive leg raising. The tricuspid regurgitation murmur gets louder on inspiration, which is Carvallo's sign, and this separates it from mitral regurgitation. In suspected valve disease, refer to cardiology for confirmation, and use echocardiography as the key investigation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bedside murmur"
+     },
+     {
+      "id": "b",
+      "label": "Valsalva strain"
+     },
+     {
+      "id": "c",
+      "label": "Louder: HOCM"
+     },
+     {
+      "id": "d",
+      "label": "Refer, echo"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "964d2a63-0938-4bd9-9df1-cb21676c093b",
+  "e755bd69-b55f-4e25-8c3a-30e8512bee64",
+  "d386acce-8097-49a3-9305-207050cbcb88"
+ ],
+ "src": [
+  "kb-reference-physical-examination-of-the-cardiovascular"
+ ],
+ "refs": [
+  "Harrison's Principles of Internal Medicine (Kasper et al.)",
+  "Hurst's The Heart (Fuster and Walsh)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 899,
+  "itemN": 289
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "mcc-pb-transfusion",
+ "subject": "mcc-professional-behaviours",
+ "title": "Transfusion refusal: respecting capacity and planning bloodless care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A **capacitated adult** may refuse any treatment, including allogeneic blood, even when refusal could be fatal. Capacity is judged for each decision separately: the patient must understand the information, retain it, weigh it and communicate a choice. Confusion, delirium or distress can make capacity fluctuate, so it must be formally assessed before a refusal is overridden or accepted without question. A refusal from someone who lacks capacity is not automatically valid.",
+   "say": "A capacitated adult may refuse any treatment, including allogeneic blood, even when refusal could be fatal. Capacity is judged for each decision separately. The patient must understand the information, retain it, weigh it and communicate a choice. Confusion, delirium or distress can make capacity fluctuate, so it must be formally assessed before a refusal is overridden or accepted without question.",
+   "vis": null
+  },
+  {
+   "tx": "When a patient lacks capacity, a **valid advance directive** signed while capable and clearly covering the situation remains binding. The **substitute decision-maker** must act on the patient's known wishes rather than their own preferences. Family pressure does not override a valid refusal. Emergency exceptions do not apply when a clear, applicable refusal exists, so blood-sparing care is used instead.",
+   "say": "When a patient lacks capacity, a valid advance directive signed while capable and clearly covering the situation remains binding. The substitute decision-maker must act on the patient's known wishes rather than their own preferences. Family pressure does not override a valid refusal, and emergency exceptions do not apply when a clear refusal exists.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Usual approach"
+    ],
+    "rows": [
+     [
+      "Capable, refuses blood",
+      "Respect refusal, start bloodless care"
+     ],
+     [
+      "Lacks capacity, valid directive",
+      "Honour directive, blood-sparing measures"
+     ],
+     [
+      "Lacks capacity, no directive",
+      "Substitute decides using known wishes"
+     ],
+     [
+      "Unclear capacity",
+      "Formal decision-specific assessment first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refusal often covers whole blood only, so ask which **blood fractions** and components the patient accepts, such as albumin, clotting factors, cell salvage or dialysis. Do not assume. In an ischaemic patient with anaemia, establish these limits quickly because oxygen-carrying capacity must be restored within the accepted options. Document each choice clearly in the notes.",
+   "say": "Refusal often covers whole blood only, so ask which blood fractions and components the patient accepts, such as albumin, clotting factors, cell salvage or dialysis. Do not assume. In an ischaemic patient, establish these limits quickly, because oxygen-carrying capacity must be restored within the accepted options. Document each choice clearly.",
+   "vis": null
+  },
+  {
+   "tx": "Bloodless management rests on **patient blood management**. Treat **iron deficiency** with intravenous iron when oral iron is inadequate or poorly tolerated, and look for any source of blood loss. **Erythropoiesis-stimulating agents** combined with iron can support patients with chronic kidney disease. Starting optimisation weeks before surgery allows the red cell mass to recover, and **cell salvage** can recapture blood lost during operations.",
+   "say": "Bloodless management rests on patient blood management. Treat iron deficiency with intravenous iron when oral iron is inadequate or poorly tolerated, and look for any source of blood loss. Erythropoiesis-stimulating agents combined with iron can support patients with chronic kidney disease. Starting optimisation weeks before surgery lets the red cell mass recover, and cell salvage can recapture blood lost during operations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Find iron deficiency"
+     },
+     {
+      "id": "b",
+      "label": "IV iron and source control"
+     },
+     {
+      "id": "c",
+      "label": "Raise red cell mass"
+     },
+     {
+      "id": "d",
+      "label": "Blood-sparing surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Remember the exam logic: a capable patient refusing transfusion is respected, and bloodless care starts at once. Lacking capacity, a valid directive is honoured. Unclear capacity needs formal assessment. Ischaemia from anaemia is urgent, so clarify accepted fractions first. Preoperative iron repletion over weeks is the standard of care for elective surgery, with the **substitute decision-maker** acting on known wishes.",
+   "say": "Remember the exam logic. A capable patient refusing transfusion is respected, and bloodless care starts at once. When a patient lacks capacity but has a valid directive, that directive is honoured. Unclear capacity needs formal assessment. Ischaemia from anaemia is urgent, so clarify accepted fractions first. For elective surgery, preoperative iron repletion over weeks is standard. Where the patient cannot decide, a substitute decision-maker acts on their known wishes.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Good Medical Practice (General Medical Council)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

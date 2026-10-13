@@ -1,0 +1,177 @@
+{
+ "v": 1,
+ "module": "snp-kidney-pregnancy",
+ "subject": "ss-nephrology",
+ "title": "Kidney disease in pregnancy: physiology, preeclampsia, HELLP and renal risks",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "During pregnancy the **glomerular filtration rate** rises early on, and **renal plasma flow** increases too. Because clearance is higher, **serum creatinine** normally falls compared with the non-pregnant value. The collecting system often dilates, more often on the right, so mild **hydronephrosis** may be a normal finding. A creatinine that fails to fall as expected, or one that climbs, should prompt review rather than reassurance.",
+   "say": "During pregnancy, the glomerular filtration rate rises early on, and renal plasma flow increases too. Because clearance is higher, serum creatinine normally drops compared with the non-pregnant value. The collecting system often dilates, more often on the right side, so mild hydronephrosis may be a normal finding. A creatinine that fails to fall as expected, or one that climbs, should prompt review rather than reassurance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Change in pregnancy",
+     "Clinical meaning"
+    ],
+    "rows": [
+     [
+      "GFR",
+      "Rises early in pregnancy",
+      "Clearance is higher than usual"
+     ],
+     [
+      "Serum creatinine",
+      "Normally falls",
+      "A value that does not fall as expected needs review"
+     ],
+     [
+      "Renal plasma flow",
+      "Increases",
+      "Supports the higher clearance"
+     ],
+     [
+      "Collecting system",
+      "Dilates, mostly on the right",
+      "Mild dilatation can be physiological"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preeclampsia is diagnosed when **new hypertension** appears after 20 weeks, with a blood pressure of at least 140/90 mmHg on two readings taken at least 4 hours apart. Proteinuria or another organ involvement, such as low platelets or abnormal liver function, must also be present. Without **proteinuria or organ dysfunction**, the diagnosis is gestational hypertension. Chronic kidney disease can coexist, making the picture harder to read.",
+   "say": "Preeclampsia is diagnosed when new hypertension appears after 20 weeks of gestation. The blood pressure must be at least 140 over 90 millimetres of mercury on two readings taken at least 4 hours apart. Proteinuria or involvement of another organ, such as low platelets or abnormal liver function, must also be present. Without proteinuria or organ dysfunction, the diagnosis is gestational hypertension instead. Chronic kidney disease can coexist, which makes the picture harder to interpret.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "BP 140/90 or more after 20 weeks"
+     },
+     {
+      "id": "n2",
+      "label": "Repeat reading at least 4 hours later"
+     },
+     {
+      "id": "n3",
+      "label": "Proteinuria or organ dysfunction?"
+     },
+     {
+      "id": "n4",
+      "label": "Preeclampsia"
+     },
+     {
+      "id": "n5",
+      "label": "Gestational hypertension"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4",
+      "Yes"
+     ],
+     [
+      "n3",
+      "n5",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preeclampsia with **severe features** is diagnosed when blood pressure reaches the severe range, around 160/110 mmHg or higher, or when there is a falling **platelet count**, a rising serum creatinine, raised liver enzymes, or new neurological or visual symptoms. Severe-range pressure needs treatment within about an hour, using IV labetalol or oral nifedipine if cannula access is unavailable. **Magnesium sulfate** is given for seizure prophylaxis, and levetiracetam is the alternative when magnesium cannot be used.",
+   "say": "Preeclampsia with severe features is diagnosed when blood pressure reaches the severe range, around 160 over 110 millimetres of mercury or higher, or when there is a falling platelet count, a rising serum creatinine, raised liver enzymes, or new neurological or visual symptoms. Severe-range pressure needs treatment within about an hour, using intravenous labetalol, or oral nifedipine if there is no cannula access. Magnesium sulfate is given for seizure prophylaxis, and levetiracetam is the alternative when magnesium cannot be used.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severe feature",
+     "Clinical sign"
+    ],
+    "rows": [
+     [
+      "Blood pressure",
+      "Severe range, around 160/110 mmHg or higher"
+     ],
+     [
+      "Platelets",
+      "Falling count"
+     ],
+     [
+      "Serum creatinine",
+      "Rising, new renal impairment"
+     ],
+     [
+      "Liver enzymes",
+      "Raised"
+     ],
+     [
+      "Neurological or visual",
+      "New headache or visual disturbance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**HELLP syndrome** combines microangiopathic **haemolysis**, raised liver enzymes and a low platelet count. It can occur without hypertension or proteinuria, so a normal blood pressure does not exclude it. Renal involvement is common, and delivery after maternal stabilisation is the definitive treatment. **Renal cortical necrosis** is a rarer cause of acute kidney injury, linked to placental abruption, septic abortion, postpartum haemorrhage and DIC, presenting with flank pain or anuria.",
+   "say": "HELLP syndrome combines microangiopathic haemolysis, raised liver enzymes and a low platelet count. It can occur without hypertension or proteinuria, so a normal blood pressure does not exclude it. Renal involvement is common, and delivery after maternal stabilisation is the definitive treatment. Renal cortical necrosis is a rarer cause of acute kidney injury. It is linked to placental abruption, septic abortion, postpartum haemorrhage and disseminated intravascular coagulation, and it presents with flank pain or anuria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HELLP syndrome",
+     "points": [
+      "Haemolysis on blood film",
+      "Raised liver enzymes",
+      "Low platelet count",
+      "Can occur without hypertension",
+      "Delivery is definitive treatment"
+     ]
+    },
+    "right": {
+     "title": "Renal cortical necrosis",
+     "points": [
+      "Linked to placental abruption",
+      "Linked to septic abortion",
+      "Linked to postpartum haemorrhage",
+      "Linked to DIC",
+      "Flank pain or anuria"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_b98ef7f11ea1",
+  "q_143696574085",
+  "q_38df8a089b5f"
+ ],
+ "src": [],
+ "refs": [
+  "NICE guideline NG133: Hypertension in pregnancy",
+  "ACOG Practice Bulletin 222: Gestational Hypertension and Preeclampsia"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

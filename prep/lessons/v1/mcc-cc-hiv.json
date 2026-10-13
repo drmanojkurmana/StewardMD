@@ -1,0 +1,173 @@
+{
+ "v": 1,
+ "module": "mcc-cc-hiv",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic HIV care: key principles for the long-term patient",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Long-term HIV care aims for a **sustained undetectable viral load**, which prevents progression and stops onward transmission. Clinicians check adherence, viral load and CD4 count at planned intervals. A suppressed patient usually keeps a stable regimen, and any change needs a clear reason such as toxicity, interactions or treatment failure. Patients should also be screened for co-infections and cardiometabolic risk throughout care.",
+   "say": "The main goal of long term HIV care is a sustained undetectable viral load. This prevents disease progression and stops onward transmission. Clinicians check adherence, viral load and CD4 count at planned intervals. A suppressed patient usually stays on a stable regimen, and any change needs a clear reason, such as toxicity, drug interactions or treatment failure. Screening for co-infections and cardiometabolic risk continues throughout care.",
+   "vis": null
+  },
+  {
+   "tx": "Routine **viral load** monitoring confirms that treatment is working. The target is an undetectable result, and a rise above the threshold prompts adherence review and **resistance testing**. **CD4 count** tracks immune recovery, while **renal function** and lipids guide drug choice and cardiovascular risk. Visits should combine clinical review with these checks.",
+   "say": "Routine viral load monitoring confirms that treatment is working. The target is an undetectable result, and a rise above the threshold prompts adherence review and resistance testing. CD4 count tracks immune recovery, while renal function and lipids guide drug choice and cardiovascular risk. Visits should combine clinical review with these checks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Check",
+     "Purpose",
+     "Typical timing"
+    ],
+    "rows": [
+     [
+      "Viral load",
+      "Confirm suppression",
+      "Routinely and after any change"
+     ],
+     [
+      "CD4 count",
+      "Track immune recovery",
+      "Periodically"
+     ],
+     [
+      "Renal function",
+      "Guide dosing and drug safety",
+      "Periodically"
+     ],
+     [
+      "Lipids and glucose",
+      "Assess cardiovascular risk",
+      "Periodically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term cardiovascular risk in people with HIV is raised by infection-related inflammation, some antiretroviral exposure, smoking and hypertension. Management is to estimate total risk, treat hypertension, offer smoking cessation and consider a **statin** when risk justifies it. Stress testing is not routine in an asymptomatic patient with a normal resting ECG, and antiretroviral therapy should not be stopped because of cardiac risk.",
+   "say": "Long term cardiovascular risk in people with HIV is raised by infection related inflammation, some antiretroviral exposure, smoking and hypertension. Management means estimating total risk, treating hypertension, offering help to stop smoking and considering a statin when the risk justifies it. Stress testing is not routine in an asymptomatic patient with a normal resting electrocardiogram. Antiretroviral therapy should not be stopped because of cardiac risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do",
+     "points": [
+      "Estimate total risk",
+      "Treat hypertension",
+      "Offer smoking cessation",
+      "Consider a statin"
+     ]
+    },
+    "right": {
+     "title": "Avoid",
+     "points": [
+      "Routine stress testing if asymptomatic",
+      "Stopping ART for cardiac risk",
+      "Aspirin without a clear indication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immune reconstitution inflammatory syndrome occurs in the early weeks of antiretroviral therapy, usually in patients with a low CD4 count. As immunity returns, the body mounts an exaggerated response to an infection already present, such as tuberculosis or a fungal infection. Fever, cough and lymph node enlargement are typical. The usual response is to investigate and treat the underlying infection while **continuing antiretroviral therapy**.",
+   "say": "Immune reconstitution inflammatory syndrome occurs in the early weeks of antiretroviral therapy, usually in patients with a low CD4 count. As immunity returns, the body mounts an exaggerated response to an infection already present, such as tuberculosis or a fungal infection. Fever, cough and lymph node enlargement are typical. The usual response is to investigate and treat the underlying infection while continuing antiretroviral therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ART starts"
+     },
+     {
+      "id": "b",
+      "label": "CD4 recovers"
+     },
+     {
+      "id": "c",
+      "label": "Hidden infection flares"
+     },
+     {
+      "id": "d",
+      "label": "Investigate and treat infection"
+     },
+     {
+      "id": "e",
+      "label": "Continue ART"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "People living with HIV should be checked for **hepatitis B**, since the two viruses travel by similar routes. When both **surface antigen** and **surface antibody** are negative, the person is susceptible and should be offered vaccination. Vaccine courses are given over several months, followed by antibody testing. Immunoglobulin does not provide routine protection, and antivirals are kept for active infection.",
+   "say": "People living with HIV should be checked for hepatitis B, since the two viruses travel by similar routes. When both surface antigen and surface antibody are negative, the person is susceptible and should be offered vaccination. Vaccine courses are given over several months, followed by antibody testing. Immunoglobulin does not provide routine protection, and antivirals are kept for active infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serology",
+     "Meaning",
+     "Action"
+    ],
+    "rows": [
+     [
+      "HBsAg negative, anti-HBs negative",
+      "Susceptible",
+      "Vaccinate"
+     ],
+     [
+      "HBsAg negative, anti-HBs positive",
+      "Immune",
+      "No action"
+     ],
+     [
+      "HBsAg positive",
+      "Active infection",
+      "Treat and monitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained **viral suppression** depends above all on **adherence** to antiretroviral therapy. Gaps in dosing let **drug resistance** emerge, particularly with older regimens. Clinicians should support patients through counselling, reminder aids and help with alcohol, substance use and mental health. Check **viral load** after any treatment change, following a lapse in medication or when new symptoms appear. Resistance testing is warranted if viraemia persists.",
+   "say": "Lasting suppression rests mainly on taking medication consistently. Missed doses give resistance a chance to develop, most of all with older regimens. Counselling, reminder aids and help with alcohol, drug use and mental health all make a difference. Check viral load after a change, after a lapse in treatment, or when symptoms return. If viraemia persists despite good adherence, consider resistance testing.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "WHO Consolidated Guidelines on Tuberculosis and HIV"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 5
+ }
+}

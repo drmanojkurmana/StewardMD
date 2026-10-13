@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "module": "ana-thyroid-root",
+ "subject": "anatomy",
+ "title": "Thyroid, parathyroid and root of neck: anatomy essentials",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "The **thyroid gland** lies in the anterior triangle of the neck, against the vertebrae from C5 to T1, embracing the upper trachea. Each lobe runs from the middle of the thyroid cartilage to the fourth or fifth tracheal ring. The **isthmus** crosses the midline in front of the second to fourth tracheal rings. Exam tip: the isthmus is the commonly tested landmark for tracheal rings.",
+   "say": "The thyroid gland lies in the anterior triangle of the neck, against the vertebrae from C5 to T1, embracing the upper trachea. Each lobe runs from the middle of the thyroid cartilage to the fourth or fifth tracheal ring. The isthmus crosses the midline in front of the second to fourth tracheal rings. Remember the isthmus for tracheal ring questions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Extent",
+     "Key exam point"
+    ],
+    "rows": [
+     [
+      "Lobe",
+      "Mid thyroid cartilage to 4th or 5th ring",
+      "Lies against C5 to T1"
+     ],
+     [
+      "Isthmus",
+      "2nd to 4th tracheal rings",
+      "Midline, anterior to trachea"
+     ],
+     [
+      "Gland weight",
+      "About 20 g",
+      "Deep red in colour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **inferior thyroid artery** arises from the thyrocervical trunk, a branch of the first part of the subclavian artery. It runs up, then medially, then down to the lower pole. Its terminal part is intimately related to the **recurrent laryngeal nerve**, which is why this nerve is injured during thyroidectomy. The artery also supplies the parathyroid glands.",
+   "say": "The inferior thyroid artery arises from the thyrocervical trunk, a branch of the first part of the subclavian artery. It runs up, then medially, then down to the lower pole of the gland. Its terminal part is intimately related to the recurrent laryngeal nerve, which is why this nerve is injured during thyroidectomy. The artery also supplies the parathyroid glands.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Subclavian 1st part"
+     },
+     {
+      "id": "b",
+      "label": "Thyrocervical trunk"
+     },
+     {
+      "id": "c",
+      "label": "Inferior thyroid artery"
+     },
+     {
+      "id": "d",
+      "label": "Lower pole and parathyroids"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **recurrent laryngeal nerve** runs close to the inferior thyroid artery, so it is at risk during surgery. Hoarseness after thyroidectomy usually signals injury to this nerve. The internal branch of the superior laryngeal nerve, by contrast, lies away from the artery. Exam tip: the recurrent nerve supplies most intrinsic laryngeal muscles.",
+   "say": "The recurrent laryngeal nerve runs close to the inferior thyroid artery, so it is at risk during surgery. Hoarseness after thyroidectomy usually signals injury to this nerve. The internal branch of the superior laryngeal nerve, by contrast, lies away from the artery. Remember that the recurrent nerve supplies most intrinsic laryngeal muscles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Recurrent laryngeal nerve",
+     "points": [
+      "Close to inferior thyroid artery",
+      "Supplies most intrinsic laryngeal muscles",
+      "Injury causes hoarseness"
+     ]
+    },
+    "right": {
+     "title": "Internal laryngeal nerve",
+     "points": [
+      "Pierces thyrohyoid membrane",
+      "Lies away from the artery",
+      "Sensory to larynx above cords"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **parathyroid glands** develop from the third and fourth pharyngeal pouches. The superior glands arise from the fourth pouch, and the inferior glands from the third pouch, which also gives rise to the thymus. The inferior glands can descend with the thymus, so they show more variable position. Each gland weighs about 50 mg. Chief cells produce parathormone.",
+   "say": "The parathyroid glands develop from the third and fourth pharyngeal pouches. The superior glands arise from the fourth pouch, and the inferior glands from the third pouch, which also gives rise to the thymus. The inferior glands can descend with the thymus, so their position is more variable. Each gland weighs about 50 milligrams.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gland",
+     "Pharyngeal pouch",
+     "Position"
+    ],
+    "rows": [
+     [
+      "Superior",
+      "Fourth",
+      "Fairly constant, dorsal to recurrent nerve"
+     ],
+     [
+      "Inferior",
+      "Third",
+      "Variable, may descend with thymus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "0ffe80ae-9358-4b93-85cb-9482660cf467",
+  "ff15c4bd-8fa3-4318-87f4-7e0059799b47",
+  "a4323be3-aab4-4221-b6f7-bc520a66111e"
+ ],
+ "src": [],
+ "refs": [
+  "Snell's Clinical Anatomy by Regions",
+  "Gray's Anatomy for Students",
+  "BD Chaurasia's Human Anatomy"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 145
+ }
+}

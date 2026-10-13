@@ -1,0 +1,132 @@
+{
+ "v": 1,
+ "module": "cm-genetics",
+ "subject": "community-medicine",
+ "title": "Genetics and public health: core principles for NEET-PG and INI-CET",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Population genetics** studies the genetic composition of populations and the factors that change inherited trait frequencies. The central principle is the **Hardy-Weinberg law**, which states that allele frequencies stay constant from generation to generation when no disturbing forces act. It assumes a large, static population with random mating, no mutation, no natural selection, and no net migration. Real human populations rarely meet these conditions.",
+   "say": "Population genetics studies the genetic makeup of populations and the forces that change how often inherited traits appear. The central principle is the Hardy-Weinberg law. It states that allele frequencies stay constant from one generation to the next when no disturbing forces act. It assumes a large static population with random mating, no mutation, no natural selection, and no net migration. Real human populations rarely meet all of these conditions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disturbing factor",
+     "Effect on gene pool"
+    ],
+    "rows": [
+     [
+      "Mutation",
+      "Creates new alleles"
+     ],
+     [
+      "Natural selection",
+      "Removes or favours alleles"
+     ],
+     [
+      "Non-random mating",
+      "Shifts genotype ratios"
+     ],
+     [
+      "Migration and founder effect",
+      "Alters allele frequencies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Forces that disturb equilibrium include **mutation**, **natural selection**, population movement, assortative breeding and public health measures. The **founder effect** describes how a small group settling a new area carries only a subset of gene variants, so some diseases appear at unusual frequencies there. Heterozygote advantage, as in sickle cell trait and malaria, is another classic route by which a harmful allele persists.",
+   "say": "Several forces disturb Hardy-Weinberg equilibrium. These include mutation, natural selection, population movement, assortative breeding and public health measures. The founder effect describes how a small group settling a new area carries only some gene variants, so certain diseases appear at unusual frequencies there. Heterozygote advantage, as seen with sickle cell trait and malaria, is another route by which a harmful allele persists in a population.",
+   "vis": null
+  },
+  {
+   "tx": "**Eugenics**, a term coined by Sir Francis Galton, aims to improve hereditary traits. **Negative eugenics** discourages reproduction by people with undesirable genes, through sterilisation, abortion or family planning. **Positive eugenics** encourages reproduction by carriers of desirable traits, using methods such as in vitro fertilisation. **Euthenics** instead improves the environment so that a given genotype can express itself well, through education, sanitation and housing.",
+   "say": "Eugenics, a term coined by Sir Francis Galton, seeks to improve hereditary traits. Negative eugenics discourages reproduction by people with undesirable genes, through sterilisation, abortion or family planning. Positive eugenics encourages reproduction by carriers of desirable traits, using methods such as in vitro fertilisation. Euthenics, in contrast, improves the environment so that a genotype can express itself well, through education, sanitation and housing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative eugenics",
+     "points": [
+      "Discourages reproduction of affected carriers",
+      "Sterilisation, abortion, family planning"
+     ]
+    },
+    "right": {
+     "title": "Positive eugenics",
+     "points": [
+      "Encourages reproduction of desirable carriers",
+      "IVF, egg transplant, cloning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Consanguineous marriage**, marriage between blood relatives, raises the risk of offspring receiving two copies of recessive alleles, so recessive disorders and polygenic traits become more common. Autosomal recessive conditions such as phenylketonuria are classic examples. Dominant traits are not made more likely by consanguinity. Lowering consanguineous marriage is therefore a community health measure. Genetic counselling supports this, and nested case-control designs are used to study such risks.",
+   "say": "Consanguineous marriage, meaning marriage between blood relatives, increases the risk that offspring inherit two copies of recessive alleles. Recessive disorders such as phenylketonuria, and polygenic traits, become more common as a result. Dominant traits are not made more likely by consanguinity. Reducing consanguineous marriage is therefore a community health measure, supported by genetic counselling.",
+   "vis": null
+  },
+  {
+   "tx": "**Prospective genetic counselling** screens for heterozygous carriers before pregnancy and explains the risk to couples who are both carriers, as in sickle cell anaemia and thalassaemia. **Retrospective counselling** follows an affected birth and suits congenital anomalies and inborn errors of metabolism. In India, the **National Sickle Cell Anaemia Elimination Mission** and the thalassaemia control programme rely on carrier screening. Newborn screening with the **Guthrie test** detects phenylketonuria by measuring blood phenylalanine.",
+   "say": "Prospective genetic counselling screens for carriers before pregnancy and explains the risk to couples who are both carriers, as in sickle cell anaemia and thalassaemia. Retrospective counselling follows an affected birth and suits congenital anomalies and inborn errors of metabolism. In India, the National Sickle Cell Anaemia Elimination Mission and thalassaemia control programmes rely on carrier screening. Newborn screening with the Guthrie test detects phenylketonuria by measuring blood phenylalanine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Carrier screening"
+     },
+     {
+      "id": "b",
+      "label": "Both partners carriers"
+     },
+     {
+      "id": "c",
+      "label": "Counsel on 1 in 4 risk"
+     },
+     {
+      "id": "d",
+      "label": "Prenatal diagnosis if needed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "852dd8f0-df09-4747-a66e-4242cc0353b2",
+  "edfb5905-58fb-4551-a785-f04bb76a1da2",
+  "027f7b4c-3dbf-4272-9ffc-387686cef586"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine (Park K)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 40
+ }
+}

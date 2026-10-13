@@ -1,0 +1,105 @@
+{
+ "v": 1,
+ "module": "minf-hiv",
+ "subject": "mrcp-infectious-diseases",
+ "title": "HIV and opportunistic infections: key principles for exams",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Low CD4 counts raise the risk of **cryptococcal meningitis**, which often presents quietly. Screening with a **serum cryptococcal antigen** test in patients with CD4 below 100 cells per microlitre can reveal subclinical infection early. A positive result should prompt lumbar puncture, with opening pressure measured and CSF antigen or fungal culture sent before treatment starts.",
+   "say": "Low CD4 counts raise the risk of cryptococcal meningitis, which often presents quietly. Screening with a serum cryptococcal antigen test in patients with CD4 below 100 cells per microlitre can reveal subclinical infection early. A positive result should prompt lumbar puncture, with opening pressure measured and CSF antigen or fungal culture sent before treatment starts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CD4 below 100"
+     },
+     {
+      "id": "b",
+      "label": "Serum CrAg positive"
+     },
+     {
+      "id": "c",
+      "label": "Lumbar puncture"
+     },
+     {
+      "id": "d",
+      "label": "Induction therapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Raised **intracranial pressure** is common in cryptococcal meningitis and drives mortality. Repeated therapeutic lumbar punctures are first line to lower pressure. Shunting is reserved for patients who fail drainage. Induction uses liposomal amphotericin with flucytosine, followed by fluconazole consolidation, per UK practice.",
+   "say": "Raised intracranial pressure is common in cryptococcal meningitis and drives mortality. Repeated therapeutic lumbar punctures are first line to lower pressure. Shunting is reserved for patients who fail drainage. Induction uses liposomal amphotericin with flucytosine, followed by fluconazole consolidation, per UK practice.",
+   "vis": null
+  },
+  {
+   "tx": "**Pneumocystis pneumonia** typically develops subacutely, causing dry cough, exertional breathlessness and hypoxaemia. Chest imaging often shows bilateral perihilar opacities, and **lactate dehydrogenase** is commonly raised. Treatment with high-dose **co-trimoxazole** should begin promptly, while adjunctive corticosteroids are considered once oxygenation is significantly impaired.",
+   "say": "Pneumocystis pneumonia usually develops over weeks, bringing a dry cough, breathlessness on exertion and low blood oxygen. Chest imaging often shows shadowing around both hilar regions, and lactate dehydrogenase is typically elevated. High-dose co-trimoxazole should be started promptly, and steroids are added when oxygenation is markedly reduced.",
+   "vis": null
+  },
+  {
+   "tx": "**Immune reconstitution inflammatory syndrome** occurs when recovering immunity unmasks or worsens an existing infection, usually within weeks of starting ART. Antiretroviral therapy and anti-infective treatment should continue together. Steroids are reserved for severe inflammation, and new infection or treatment failure must be excluded.",
+   "say": "Immune reconstitution inflammatory syndrome occurs when recovering immunity unmasks or worsens an existing infection, usually within weeks of starting ART. Antiretroviral therapy and anti-infective treatment should continue together. Steroids are reserved for severe inflammation, and new infection or treatment failure must be excluded.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continue",
+     "points": [
+      "ART",
+      "Anti-infective treatment",
+      "Supportive care"
+     ]
+    },
+    "right": {
+     "title": "Reserve steroids",
+     "points": [
+      "Severe or life-threatening features",
+      "After excluding new infection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rifampicin** is a potent enzyme inducer that lowers levels of many antiretrovirals. With dolutegravir, the dose is given twice daily while on rifampicin, and rifampicin is not reduced. Hepatitis B coinfection needs tenofovir or emtricitabine, as they are active against both viruses.",
+   "say": "Rifampicin is a potent enzyme inducer that lowers levels of many antiretrovirals. With dolutegravir, the dose is given twice daily while on rifampicin, and rifampicin is not reduced. Hepatitis B coinfection needs tenofovir or emtricitabine, as they are active against both viruses.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "BHIVA guidelines on antiretroviral therapy and opportunistic infections"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 35
+ }
+}

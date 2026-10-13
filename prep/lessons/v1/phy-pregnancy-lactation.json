@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "module": "phy-pregnancy-lactation",
+ "subject": "physiology",
+ "title": "Pregnancy, parturition and lactation: key hormones and physiology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The **trophoblast** produces human chorionic gonadotropin, or hCG, soon after implantation. hCG acts on LH receptors of the corpus luteum, preventing its regression so it keeps making progesterone and oestrogen through the first 10 to 12 weeks. hCG is detectable in maternal serum within days of implantation and forms the basis of pregnancy tests. Serum levels peak around 10 weeks, then fall. Radioimmunoassay is the sensitive quantitative method.",
+   "say": "The trophoblast produces human chorionic gonadotropin, or hCG, soon after implantation. hCG acts on LH receptors of the corpus luteum, preventing its regression so it keeps making progesterone and oestrogen through the first 10 to 12 weeks. hCG is detectable in maternal serum within days of implantation and forms the basis of pregnancy tests. Serum levels peak around 10 weeks, then fall. Radioimmunoassay is the sensitive quantitative method.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Source",
+      "Syncytiotrophoblast"
+     ],
+     [
+      "Action",
+      "Maintains corpus luteum"
+     ],
+     [
+      "Peak level",
+      "About 10 weeks"
+     ],
+     [
+      "Receptor",
+      "Same as LH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Placental and fetal hormones drive breast growth. **Human placental lactogen** supports breast, nipple and areola growth before birth. Oestrogen expands the duct system, while progesterone enlarges the lobules and alveoli. **Prolactin** from the anterior pituitary rises in pregnancy and prepares the alveoli for milk production, but high levels during pregnancy are kept from producing milk by the high oestrogen and progesterone.",
+   "say": "Placental and fetal hormones drive breast growth. Human placental lactogen supports breast, nipple and areola growth before birth. Oestrogen expands the duct system, while progesterone enlarges the lobules and alveoli. Prolactin from the anterior pituitary rises in pregnancy and prepares the alveoli for milk production, but high levels during pregnancy are kept from producing milk by the high oestrogen and progesterone.",
+   "vis": null
+  },
+  {
+   "tx": "Lactation has four stages: mammogenesis, lactogenesis, galactokinesis and galactopoiesis. After delivery of the placenta, oestrogen and progesterone fall sharply, freeing **prolactin** to start milk synthesis. Prolactin is essential for initiating secretion but not for maintaining it, which depends on growth hormone, thyroxine and cortisol. Dopamine from the hypothalamus inhibits prolactin, and hyperprolactinaemia suppresses menstruation and ovulation.",
+   "say": "Lactation has four stages: mammogenesis, lactogenesis, galactokinesis and galactopoiesis. After delivery of the placenta, oestrogen and progesterone fall sharply, freeing prolactin to start milk synthesis. Prolactin is essential for initiating secretion but not for maintaining it, which depends on growth hormone, thyroxine and cortisol. Dopamine from the hypothalamus inhibits prolactin, and hyperprolactinaemia suppresses menstruation and ovulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Main driver"
+    ],
+    "rows": [
+     [
+      "Mammogenesis",
+      "Oestrogen, progesterone, prolactin"
+     ],
+     [
+      "Lactogenesis",
+      "Prolactin after delivery"
+     ],
+     [
+      "Galactokinesis",
+      "Oxytocin"
+     ],
+     [
+      "Galactopoiesis",
+      "GH, thyroxine, cortisol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **milk ejection reflex**, also called let-down, is a neuroendocrine reflex. Suckling sends signals to the hypothalamus, and **oxytocin** is released from the posterior pituitary. Oxytocin contracts the myoepithelial cells around the alveoli and smaller ducts, forcing milk into the lactiferous sinuses. Emotional stress, fear, pain, alcohol and catecholamines inhibit oxytocin release and can impair let-down.",
+   "say": "The milk ejection reflex, also called let-down, is a neuroendocrine reflex. Suckling sends signals to the hypothalamus, and oxytocin is released from the posterior pituitary. Oxytocin contracts the myoepithelial cells around the alveoli and smaller ducts, forcing milk into the lactiferous sinuses. Emotional stress, fear, pain, alcohol and catecholamines inhibit oxytocin release and can impair let-down.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suckling"
+     },
+     {
+      "id": "b",
+      "label": "Hypothalamus signal"
+     },
+     {
+      "id": "c",
+      "label": "Oxytocin released"
+     },
+     {
+      "id": "d",
+      "label": "Myoepithelial contraction"
+     },
+     {
+      "id": "e",
+      "label": "Milk ejected"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxytocin also drives parturition. It is made mainly in the paraventricular nucleus and stored in the posterior pituitary. Oestrogen sensitises the uterus to oxytocin and progesterone reduces sensitivity. Contraction is strongest in the fundus and body, while the lower segment is relaxed at term. The **Ferguson reflex**, cervical stretch leading to further oxytocin release, sustains labour. Colostrum is rich in IgA, IgG and IgM and in lactoferrin.",
+   "say": "Oxytocin also drives parturition. It is made mainly in the paraventricular nucleus and stored in the posterior pituitary. Oestrogen sensitises the uterus to oxytocin and progesterone reduces sensitivity. Contraction is strongest in the fundus and body, while the lower segment is relaxed at term. The Ferguson reflex, cervical stretch leading to further oxytocin release, sustains labour. Colostrum is rich in IgA, IgG and IgM and in lactoferrin.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "6e1f3d8e-1d27-451d-865f-48839ec3c147",
+  "b70e7f28-2ca7-4ddc-850e-1ba8a5e73c5d",
+  "8266acca-1bda-4b31-9c07-790b7d34bec0"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham and others, Eds)",
+  "Ganong's Review of Medical Physiology (Barrett and others, Eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 84
+ }
+}

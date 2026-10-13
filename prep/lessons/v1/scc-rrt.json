@@ -1,0 +1,110 @@
+{
+ "v": 1,
+ "module": "scc-rrt",
+ "subject": "ss-critical-care",
+ "title": "Renal replacement therapy in the ICU",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Renal replacement therapy (RRT) is indicated for **life-threatening hyperkalaemia**, refractory acidosis, fluid overload, uraemic complications and certain toxins. Timing has been studied in trials such as AKIKI and STARRT-AKI, which showed that a strategy of delaying RRT until a clear mandatory indication arises gives outcomes similar to early initiation, with many patients never needing it. Earlier initiation is not routinely beneficial.",
+   "say": "Renal replacement therapy is indicated for life-threatening hyperkalaemia, refractory acidosis, fluid overload, uraemic complications and certain toxins. Timing has been studied in the AKIKI and STARRT-AKI trials. A strategy of delaying RRT until a clear mandatory indication arises gives outcomes similar to early initiation, and many patients never need it. Earlier initiation is not routinely beneficial.",
+   "vis": null
+  },
+  {
+   "tx": "Effluent dose matters. The **RENAL** and **ATN** trials suggest that about **20 to 25 mL/kg/h** of effluent is adequate, and higher doses do not improve survival. **Filter clotting** is a common problem, so keep the **filtration fraction** modest and use **regional citrate anticoagulation** where bleeding risk is high.",
+   "say": "Effluent dose matters. The RENAL and ATN trials suggest that about twenty to twenty five millilitres per kilogram per hour is adequate, and higher doses do not improve survival. Filter clotting is a common problem, so keep the filtration fraction modest and use regional citrate anticoagulation where bleeding risk is high.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Effluent about 20 to 25 mL/kg/h"
+     },
+     {
+      "id": "b",
+      "label": "Modest filtration fraction"
+     },
+     {
+      "id": "c",
+      "label": "Regional citrate if bleeding risk"
+     },
+     {
+      "id": "d",
+      "label": "Fewer filter clots"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug dosing on CRRT depends on **sieving coefficient** and protein binding. Water-soluble agents such as beta-lactam antibiotics are cleared substantially and may need higher or more frequent dosing, whereas highly protein-bound drugs are cleared poorly. Check the sieving coefficient, which is the ratio of ultrafiltrate to blood concentration, and recheck levels during therapy.",
+   "say": "Drug dosing on CRRT depends on the sieving coefficient and protein binding. Water-soluble agents such as beta-lactam antibiotics are cleared substantially and may need higher or more frequent dosing, whereas highly protein-bound drugs are cleared poorly. The sieving coefficient is the ratio of ultrafiltrate to blood concentration, and levels should be rechecked during therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Vascular access for CRRT usually uses a **non-tunnelled** dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least 24 cm long. Avoid subclavian lines where possible, because stenosis can block future arteriovenous fistula sites. Watch for low arterial pressure alarms, which often mean catheter inflow obstruction.",
+   "say": "Vascular access for CRRT usually uses a non-tunnelled dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least twenty four centimetres long. Avoid subclavian lines where possible, because stenosis can block future fistula sites. A low arterial pressure alarm often means catheter inflow obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Preferred access",
+     "points": [
+      "Right internal jugular",
+      "Ultrasound guided",
+      "Dual lumen catheter"
+     ]
+    },
+    "right": {
+     "title": "Avoid or use with care",
+     "points": [
+      "Subclavian (stenosis risk)",
+      "Femoral at least 24 cm",
+      "Check for inflow obstruction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Watch for **complications** during CRRT. **Hypotension** often reflects **ultrafiltration** removing fluid faster than plasma can refill from the tissues. Check **blood chemistry** and **acid-base status** frequently during the early phase, often every six to twelve hours. Monitor the **circuit** for **filter clotting**, which lowers delivered dose. Weaning is guided by **urine output** and recovering **renal function**.",
+   "say": "Watch for complications during CRRT. Hypotension often reflects ultrafiltration removing fluid faster than plasma can refill from the tissues. Check blood chemistry and acid-base status frequently during the early phase, often every six to twelve hours. Monitor the circuit for filter clotting, which lowers delivered dose. Weaning is guided by urine output and recovering renal function.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_c8df65345b3c",
+  "q_322d15ed4dfe",
+  "q_440b411f8e95"
+ ],
+ "src": [],
+ "refs": [
+  "KDIGO Clinical Practice Guideline for Acute Kidney Injury (2012)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 37
+ }
+}

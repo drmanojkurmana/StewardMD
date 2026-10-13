@@ -1,0 +1,125 @@
+{
+ "v": 1,
+ "module": "mcc-pb-virtual",
+ "subject": "mcc-professional-behaviours",
+ "title": "Virtual care ethics: privacy, licensure, safety and consent",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Virtual care keeps the same **confidentiality** and **informed consent** duties as in-person care. Before discussing sensitive results, confirm the patient is in a private setting and agrees to the discussion. If colleagues or family can hear, reschedule or move the call. Identity checks come first, but privacy shapes what you disclose. Document the agreement and the setting.",
+   "say": "Virtual care keeps the same confidentiality and informed consent duties as in-person care. Before discussing sensitive results, confirm the patient is in a private setting and agrees to the discussion. If colleagues or family can hear, reschedule or move the call. Identity checks come first, but privacy shapes what you disclose. Document the agreement and the setting.",
+   "vis": null
+  },
+  {
+   "tx": "Some presentations cannot be safely managed by video, because the clinician cannot examine, test or rescue. **Red flags** include dangerous electrolyte shifts, suspected drug toxicity, overdose and hypoperfusion. These need same-day in-person care or emergency services. Confirm the patient's location before any other step if rescue may be needed.",
+   "say": "Some presentations cannot be safely managed by video, because the clinician cannot examine, test or rescue. Red flags include dangerous electrolyte shifts, suspected drug toxicity, overdose and hypoperfusion. These need same-day in-person care or emergency services. Confirm the patient's location before any other step if rescue may be needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Video finding",
+     "Concern",
+     "Needed action"
+    ],
+    "rows": [
+     [
+      "Potassium 6.4 mmol/L with weakness",
+      "Arrhythmia risk",
+      "Emergency care now"
+     ],
+     [
+      "Lithium with vomiting and tremor",
+      "Possible toxicity",
+      "Same-day review and level"
+     ],
+     [
+      "Large sedative intake",
+      "Respiratory depression",
+      "Locate and dispatch help"
+     ],
+     [
+      "Low blood pressure and low urine output",
+      "Acute kidney injury",
+      "Urgent in-person review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Decision-specific **capacity** is judged on understanding, retaining, weighing and communicating a choice. If the patient lacks capacity, consent passes to a legally authorised substitute decision-maker. A relative's claim to speak for the patient is not enough. Confirm the legal authority first, then decide in line with known wishes and best interests.",
+   "say": "Decision-specific capacity is judged on understanding, retaining, weighing and communicating a choice. If the patient lacks capacity, consent passes to a legally authorised substitute decision-maker. A relative's claim to speak for the patient is not enough. Confirm the legal authority first, then decide in line with known wishes and best interests.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Assess capacity"
+     },
+     {
+      "id": "b",
+      "label": "Has capacity?"
+     },
+     {
+      "id": "c",
+      "label": "Patient consents"
+     },
+     {
+      "id": "d",
+      "label": "Confirm legal proxy"
+     },
+     {
+      "id": "e",
+      "label": "Best-interests decision"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Opioids and sedatives carry **overdose** and misuse risk, so remote prescribing suits only stable, known patients. A new patient, missing records and reported overuse all call for caution. Arrange an in-person review with history, examination and monitoring before increasing a dose. Avoid long renewals without follow-up.",
+   "say": "Opioids and sedatives carry overdose and misuse risk, so remote prescribing suits only stable, known patients. A new patient, missing records and reported overuse all call for caution. Arrange an in-person review with history, examination and monitoring before increasing a dose. Avoid long renewals without follow-up.",
+   "vis": null
+  },
+  {
+   "tx": "Watch for **coercive control** when a partner answers for the patient, replies are brief, or the patient looks away from the camera. Ask to speak privately and check the patient's voice, consent and safety. Shared households may need headphones or a private room. Ask the patient's preference before any third party joins.",
+   "say": "Watch for coercive control when a partner answers for the patient, replies are brief, or the patient looks away from the camera. Ask to speak privately and check the patient's voice, consent and safety. Shared households may need headphones or a private room. Ask the patient's preference before any third party joins.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

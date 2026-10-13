@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "module": "mcc-cc-bladder",
+ "subject": "mcc-chronic-care",
+ "title": "Incontinence and bladder care: essentials for exam and practice",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In a parous woman with **stress incontinence** and no prolapse beyond the introitus, the first line is **supervised pelvic floor muscle training**. This strengthens urethral support and closure. Antimuscarinics do not help stress leakage, and cystoscopy or catheters are not first-line for uncomplicated symptoms. Surgery such as a midurethral sling is reserved for cases that fail conservative care.",
+   "say": "In a parous woman with stress incontinence and no prolapse beyond the introitus, the first line is supervised pelvic floor muscle training. This strengthens urethral support and closure. Antimuscarinics do not help stress leakage, and cystoscopy or catheters are not first-line for uncomplicated symptoms. Surgery such as a midurethral sling is reserved for cases that fail conservative care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stress leakage"
+     },
+     {
+      "id": "b",
+      "label": "Pelvic floor training"
+     },
+     {
+      "id": "c",
+      "label": "Review at weeks"
+     },
+     {
+      "id": "d",
+      "label": "Sling if failed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "no response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute urinary retention** with a palpable bladder and deranged renal function is an emergency. Obstruction raises upstream pressure and impairs potassium excretion, so **hyperkalaemia** and **obstructive acute kidney injury** must be treated promptly. Immediate bladder drainage with a urethral catheter restores flow. Oral drugs or outpatient review are unsafe here.",
+   "say": "Acute urinary retention with a palpable bladder and deranged renal function is an emergency. Obstruction raises upstream pressure and impairs potassium excretion, so hyperkalaemia and obstructive acute kidney injury must be treated promptly. Immediate bladder drainage with a urethral catheter restores flow. Oral drugs or outpatient review are unsafe here.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Retention, high creatinine"
+     },
+     {
+      "id": "b",
+      "label": "Urgent catheter drainage"
+     },
+     {
+      "id": "c",
+      "label": "Monitor potassium and urine output"
+     },
+     {
+      "id": "d",
+      "label": "Find cause"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antimuscarinic drugs** such as oxybutynin cross into the brain and block central receptors. In older adults with dementia they can worsen cognition, cause constipation and raise overall anticholinergic burden. When these effects appear, stop the drug. Prompted voiding and bladder training give urge symptom control without central effects.",
+   "say": "Antimuscarinic drugs such as oxybutynin cross into the brain and block central receptors. In older adults with dementia they can worsen cognition, cause constipation and raise overall anticholinergic burden. When these effects appear, stop the drug. Prompted voiding and bladder training give urge symptom control without central effects.",
+   "vis": null
+  },
+  {
+   "tx": "Indwelling **urethral catheters** carry a risk of **catheter-associated urinary tract infection** that rises with dwell time. Remove the catheter as soon as there is no valid indication, and use a clamp trial where appropriate. Asymptomatic bacteriuria or pyuria in a catheterised patient should not be treated with antibiotics. Treat only when there are fever, flank pain or new systemic signs.",
+   "say": "Indwelling urethral catheters carry a risk of catheter associated urinary tract infection that rises with dwell time. Remove the catheter as soon as there is no valid indication, and use a clamp trial where appropriate. Asymptomatic bacteriuria or pyuria in a catheterised patient should not be treated with antibiotics. Treat only when there are fever, flank pain or new systemic signs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Remove catheter",
+     "points": [
+      "No valid indication",
+      "Clamp trial passed",
+      "Monitor voiding"
+     ]
+    },
+    "right": {
+     "title": "Treat with antibiotics",
+     "points": [
+      "Fever present",
+      "Flank pain present",
+      "Systemic signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For a **patient lacking capacity**, a substitute decision-maker must decide using the patient's known values and prior wishes, not their own preference or signature alone. Elective procedures should wait if the patient may regain capacity. In progressive dementia, capacity rarely returns, so the decision rests on past wishes and best interests. Document the reasoning clearly.",
+   "say": "For a patient lacking capacity, a substitute decision-maker must decide using the patient's known values and prior wishes, not their own preference or signature alone. Elective procedures should wait if the patient may regain capacity. In progressive dementia, capacity rarely returns, so the decision rests on past wishes and best interests. Document the reasoning clearly.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE Urinary incontinence and pelvic organ prolapse in women: management (NG123)",
+  "NICE Urinary tract infection (lower): antimicrobial prescribing (NG109)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

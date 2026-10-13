@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "son-organ-tox",
+ "subject": "ss-medical-oncology",
+ "title": "Methylene blue and anthracycline toxicity: organ-specific cytotoxic effects",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Methaemoglobin contains **ferric iron**, which cannot carry oxygen. **Methylene blue** is reduced to **leucomethylene blue**, which converts ferric iron back to ferrous iron. The standard dose is 1 mg/kg intravenously over five minutes. G6PD deficiency is a key caution, because the drug can trigger haemolysis in these patients.",
+   "say": "Methaemoglobin contains ferric iron, which cannot carry oxygen. Methylene blue is reduced to leucomethylene blue, which converts ferric iron back to ferrous iron. The standard dose is one milligram per kilogram intravenously over five minutes. G6PD deficiency is a key caution, because the drug can trigger haemolysis in these patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mb",
+      "label": "Methylene blue"
+     },
+     {
+      "id": "lmb",
+      "label": "Leucomethylene blue"
+     },
+     {
+      "id": "met",
+      "label": "Fe3+ MetHb"
+     },
+     {
+      "id": "hb",
+      "label": "Fe2+ Hb"
+     }
+    ],
+    "edges": [
+     [
+      "mb",
+      "lmb",
+      "reduced"
+     ],
+     [
+      "lmb",
+      "met",
+      "acts on"
+     ],
+     [
+      "met",
+      "hb",
+      "restored"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If methaemoglobin stays above 30 per cent or symptoms persist after one hour, a repeat 1 mg/kg dose may be given. Total dosing is usually capped near 7 mg/kg. In moderate renal impairment, a single dose is commonly preferred because the drug accumulates. In severe G6PD deficiency, **ascorbic acid** is an alternative.",
+   "say": "If methaemoglobin stays above thirty per cent or symptoms persist after one hour, a repeat one milligram per kilogram dose may be given. Total dosing is usually capped near seven milligrams per kilogram. In moderate renal impairment, a single dose is commonly preferred because the drug accumulates. In severe G6PD deficiency, ascorbic acid is an alternative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Suggested approach"
+    ],
+    "rows": [
+     [
+      "MetHb above 30 per cent after one hour",
+      "Repeat 1 mg/kg dose"
+     ],
+     [
+      "Moderate renal impairment",
+      "Single dose preferred"
+     ],
+     [
+      "Severe G6PD deficiency",
+      "Use ascorbic acid instead"
+     ],
+     [
+      "Cumulative dose near 7 mg/kg",
+      "Stop and reassess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Methylene blue acts as a reversible **MAO-A inhibitor**, so pairing it with SSRIs or other serotonergic agents raises the risk of **serotonin syndrome**. Its blue dye also absorbs red light used by **pulse oximeters**, so SpO2 readings can read falsely low and an **arterial blood gas** should confirm oxygenation. Urine may turn blue-green, which is harmless and needs no treatment.",
+   "say": "Methylene blue acts as a reversible MAO-A inhibitor, so pairing it with SSRIs or other serotonergic agents raises the risk of serotonin syndrome. Its blue dye also absorbs red light used by pulse oximeters, so oxygen saturation readings can appear falsely low, and an arterial blood gas should confirm oxygenation. Urine may turn blue-green, which is harmless and needs no treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Effect",
+     "Practical response"
+    ],
+    "rows": [
+     [
+      "Falsely low pulse oximetry reading",
+      "Confirm with arterial blood gas"
+     ],
+     [
+      "Blue-green urine",
+      "Benign, no action needed"
+     ],
+     [
+      "Serotonergic co-medication",
+      "Avoid or choose an alternative"
+     ],
+     [
+      "Intra-amniotic exposure",
+      "Avoid, linked to fetal atresia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **vasoplegic shock** after cardiopulmonary bypass, excess **nitric oxide** activates guanylate cyclase and raises cyclic GMP, causing refractory vasodilation. Methylene blue inhibits nitric oxide synthase and guanylate cyclase, restoring vascular tone. A bolus of 1 to 2 mg/kg is used, which differs from the methaemoglobinaemia dose.",
+   "say": "In vasoplegic shock after cardiopulmonary bypass, excess nitric oxide activates guanylate cyclase and raises cyclic GMP, causing refractory vasodilation. Methylene blue inhibits nitric oxide synthase and guanylate cyclase, restoring vascular tone. A bolus of one to two milligrams per kilogram is used, which differs from the methaemoglobinaemia dose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Methaemoglobinaemia",
+     "points": [
+      "1 mg/kg IV over five minutes",
+      "Reduces ferric iron",
+      "Repeat after one hour if needed"
+     ]
+    },
+    "right": {
+     "title": "Vasoplegia",
+     "points": [
+      "1 to 2 mg/kg bolus",
+      "Blocks nitric oxide pathway",
+      "Watch serotonin and MetHb risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anthracyclines such as doxorubicin generate **reactive oxygen species** and bind **topoisomerase 2 beta** in cardiomyocytes, blocking DNA repair and triggering mitochondrial apoptosis. Type 1 injury is irreversible and cumulative. Risk rises above about 250 mg/m2, with high risk above 400 mg/m2, and factors such as hypertension, diabetes and older age lower the safe threshold.",
+   "say": "Anthracyclines such as doxorubicin generate reactive oxygen species and bind topoisomerase 2 beta in cardiomyocytes, blocking DNA repair and triggering mitochondrial apoptosis. Type 1 injury is irreversible and cumulative. Risk rises above about two hundred and fifty milligrams per square metre, with high risk above four hundred, and factors such as hypertension, diabetes and older age lower the safe threshold.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cumulative dose",
+     "Risk level"
+    ],
+    "rows": [
+     [
+      "Below 250 mg/m2",
+      "Lower, routine follow-up"
+     ],
+     [
+      "250 to 400 mg/m2",
+      "Moderate, periodic imaging"
+     ],
+     [
+      "Above 400 mg/m2",
+      "High, strict monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Baseline echocardiography with LVEF and **global longitudinal strain** should precede treatment. A fall in LVEF of more than 10 points to below 50 per cent, or a GLS drop of 15 per cent or more, signals toxicity. Rising **cardiac troponin** or NT-proBNP prompts imaging. Lifelong surveillance is advised after high cumulative doses.",
+   "say": "Baseline echocardiography with ejection fraction and global longitudinal strain should precede treatment. A fall in ejection fraction of more than ten points to below fifty per cent, or a strain drop of fifteen per cent or more, signals toxicity. Rising cardiac troponin or NT-proBNP prompts imaging. Lifelong surveillance is advised after high cumulative doses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b",
+      "label": "Baseline echo and GLS"
+     },
+     {
+      "id": "s",
+      "label": "Serial LVEF and GLS"
+     },
+     {
+      "id": "bio",
+      "label": "Troponin or NT-proBNP rise"
+     },
+     {
+      "id": "img",
+      "label": "Repeat imaging"
+     },
+     {
+      "id": "cc",
+      "label": "Cardio-oncology review"
+     }
+    ],
+    "edges": [
+     [
+      "b",
+      "s"
+     ],
+     [
+      "s",
+      "bio"
+     ],
+     [
+      "bio",
+      "img"
+     ],
+     [
+      "img",
+      "cc"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_2232bf36a528",
+  "q_4222ebd96409",
+  "q_d8f17f438adc"
+ ],
+ "src": [],
+ "refs": [
+  "2022 ESC Guidelines on cardio-oncology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 46
+ }
+}

@@ -1,0 +1,109 @@
+{
+ "v": 1,
+ "module": "sen-disorders-sex-development",
+ "subject": "ss-endocrinology",
+ "title": "Differences of sex development: a practical approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Differences of sex development (DSD) describe congenital conditions where chromosomal, gonadal or anatomical sex is atypical. For NEET-PG and INI-CET, sort cases first by karyotype. A **46,XY DSD** means testes are present but androgen action or synthesis is impaired. A **46,XX DSD** usually reflects excess androgen exposure or, rarely, testis-determining material. Mixed and ovotesticular forms have their own rules. Always obtain a karyotype before assigning sex.",
+   "say": "Differences of sex development describe congenital conditions where chromosomal, gonadal or anatomical sex is atypical. For NEET-PG and INI-CET, sort cases first by karyotype. A 46,XY DSD means testes are present but androgen action or synthesis is impaired. A 46,XX DSD usually reflects excess androgen exposure or, rarely, testis-determining material. Mixed and ovotesticular forms have their own rules. Always obtain a karyotype before assigning sex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Karyotype",
+     "Typical condition",
+     "Key clue"
+    ],
+    "rows": [
+     [
+      "46,XY",
+      "Androgen insensitivity, 5-alpha reductase deficiency",
+      "Testes present, Mullerian regression"
+     ],
+     [
+      "46,XX",
+      "Congenital adrenal hyperplasia, ovotesticular DSD",
+      "Ovaries present, virilised genitalia"
+     ],
+     [
+      "45,X/46,XY",
+      "Mixed gonadal dysgenesis",
+      "Streak gonad on one side, tumour risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mixed gonadal dysgenesis** (45,X/46,XY) arises from a mosaic karyotype. The side with a **streak gonad** may retain Mullerian structures, while the side with testicular tissue shows Wolffian development. Y-bearing dysgenetic gonads carry a significant risk of **gonadoblastoma** and germ cell tumours, so gonadectomy is generally recommended. Turner-related features such as short stature may need growth hormone.",
+   "say": "Mixed gonadal dysgenesis arises from a 45,X and 46,XY mosaic karyotype. The side with a streak gonad may retain Mullerian structures, while the side with testicular tissue shows Wolffian development. Y-bearing dysgenetic gonads carry a significant risk of gonadoblastoma and germ cell tumours, so gonadectomy is generally recommended. Turner-related features such as short stature may need growth hormone.",
+   "vis": null
+  },
+  {
+   "tx": "**Ovotesticular DSD** means ovarian and testicular tissue coexist in one person. Most cases are 46,XX, and the karyotype is the most common finding. Diagnosis needs **gonadal histology** showing both tissue types, not imaging alone. Management follows sex of rearing, gonadal function and malignancy risk. Gonadal segments with Y material or testicular tissue need removal or close surveillance.",
+   "say": "Ovotesticular DSD means ovarian and testicular tissue coexist in one person. Most cases are 46,XX, and the karyotype is the most common finding. Diagnosis needs gonadal histology showing both tissue types, not imaging alone. Management follows sex of rearing, gonadal function and malignancy risk. Gonadal segments with Y material or testicular tissue need removal or close surveillance.",
+   "vis": null
+  },
+  {
+   "tx": "Use a **hCG stimulation test** to measure testicular function where needed. Check serum testosterone, DHT and **anti-Mullerian hormone** alongside LH and FSH. Pelvic imaging confirms whether a uterus is present. Watch for red flags: an enlarging gonadal mass, salt loss suggesting congenital adrenal hyperplasia, or failure of puberty. Refer early to a specialist disorders-of-sex-development team.",
+   "say": "Use an hCG stimulation test to measure testicular function where needed. Check serum testosterone, DHT and anti-Mullerian hormone alongside LH and FSH. Pelvic imaging confirms whether a uterus is present. Watch for red flags: an enlarging gonadal mass, salt loss suggesting congenital adrenal hyperplasia, or failure of puberty. Refer early to a specialist disorders-of-sex-development team.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Karyotype",
+      "Confirms 46,XY, 46,XX or mosaic"
+     ],
+     [
+      "hCG stimulation",
+      "Tests testicular function"
+     ],
+     [
+      "Testosterone to DHT ratio",
+      "Supports 5-alpha reductase deficiency"
+     ],
+     [
+      "Anti-Mullerian hormone",
+      "Reflects Sertoli cell function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gender assignment and **gonadectomy timing** are decided by a multidisciplinary team. Early irreversible genital surgery before diagnosis is a common error. In 5-alpha reductase deficiency, many individuals raised female adopt a male identity at puberty, so counselling is essential. Defer elective genital procedures where possible and keep lifelong psychosocial support. Fertility is usually impaired.",
+   "say": "Gender assignment and gonadectomy timing are decided by a multidisciplinary team. Early irreversible genital surgery before diagnosis is a common error. In 5-alpha reductase deficiency, many individuals raised female adopt a male identity at puberty, so counselling is essential. Defer elective genital procedures where possible and keep lifelong psychosocial support. Fertility is usually impaired.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_6a5d10c24845",
+  "q_d61980f926a1",
+  "q_4a42c4183c83"
+ ],
+ "src": [
+  "kb-reference-5-alpha-reductase-deficiency-type-2",
+  "kb-reference-androgen-insensitivity-syndrome",
+  "kb-reference-mixed-gonadal-dysgenesis",
+  "kb-reference-ovotesticular-dsd"
+ ],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 4,
+  "kbWords": 2498,
+  "itemN": 20
+ }
+}

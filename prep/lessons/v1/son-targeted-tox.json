@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "son-targeted-tox",
+ "subject": "ss-medical-oncology",
+ "title": "Toxicities of targeted agents and ADCs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**EGFR inhibitors** cause an acneiform rash in roughly 60 to 80 percent of treated patients. Lesions are monomorphic papulopustules on the face, scalp and upper trunk. Rash often appears in the first weeks and tends to correlate with drug response. Management is prophylactic, with a daily moisturiser, sunscreen and a topical or oral tetracycline class antibiotic started early, and dose modification is reserved for severe grades.",
+   "say": "EGFR inhibitors cause an acneiform rash in roughly sixty to eighty percent of treated patients. The lesions are monomorphic papulopustules on the face, scalp and upper trunk. The rash often appears in the first few weeks. Management is prophylactic, with a daily moisturiser, sunscreen and an early tetracycline class antibiotic. Dose modification is reserved for severe grades.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "EGFR acneiform rash"
+    ],
+    "rows": [
+     [
+      "Incidence",
+      "About 60 to 80 percent"
+     ],
+     [
+      "Lesion type",
+      "Monomorphic papulopustules"
+     ],
+     [
+      "Typical site",
+      "Face, scalp, upper trunk"
+     ],
+     [
+      "Key prevention",
+      "Moisturiser, sunscreen, early antibiotic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paronychia** is inflammation of the nail fold, most often from Staphylococcus aureus in acute cases. Acute infection lasting under six weeks is usually managed with warm soaks, and a discrete abscess needs incision and drainage. Chronic paronychia is typically irritant or Candida driven and is managed with antifungals and avoidance of irritants. Nail dystrophy is the commonest major complication of chronic disease.",
+   "say": "Paronychia is inflammation of the nail fold, most often caused by Staphylococcus aureus in acute cases. Acute infection lasting under six weeks is usually managed with warm soaks. A discrete abscess needs incision and drainage. Chronic paronychia is typically irritant or Candida driven and is managed with antifungals and avoidance of irritants. Nail dystrophy is the commonest major complication of chronic disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Hand foot skin reaction** is a palmoplantar erythema with pain and swelling, typical of multikinase and some targeted agents. Early recognition matters because grade 2 or higher reactions often need dose interruption. Emollients, urea creams and avoidance of friction and heat are first line. Topical steroids are added for symptomatic control, and the drug is restarted at a reduced dose once the reaction settles.",
+   "say": "Hand foot skin reaction is a palmoplantar erythema with pain and swelling, typical of multikinase and some targeted agents. Early recognition matters because higher grade reactions often need dose interruption. Emollients, urea creams and avoidance of friction and heat are first line. Topical steroids help symptoms. The drug is restarted at a reduced dose once the reaction settles.",
+   "vis": null
+  },
+  {
+   "tx": "**VEGF pathway inhibitors** commonly raise blood pressure and cause **proteinuria** through effects on renal endothelium. Blood pressure should be checked before every cycle and managed with standard **antihypertensive** therapy, typically an ACE inhibitor or a calcium channel blocker. Urine protein is tracked regularly, and nephrotic range loss usually prompts a temporary hold of the drug.",
+   "say": "VEGF pathway inhibitors often raise blood pressure and cause proteinuria, because they affect the renal endothelium. Check blood pressure before every cycle and treat it with standard antihypertensive drugs, usually an ACE inhibitor or a calcium channel blocker. Track urine protein regularly. If loss reaches the nephrotic range, the drug is usually held temporarily.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Check BP before each cycle"
+     },
+     {
+      "id": "b",
+      "label": "Treat hypertension"
+     },
+     {
+      "id": "c",
+      "label": "Monitor urine protein"
+     },
+     {
+      "id": "d",
+      "label": "Hold drug if nephrotic range"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Interstitial lung disease** is the key serious toxicity of a **HER2-directed antibody drug conjugate**. It can be fatal and may appear weeks to months after starting treatment. Any new cough, dyspnoea or falling oxygen saturation needs urgent chest imaging and interruption of the drug. **Corticosteroids** are started promptly once the diagnosis is suspected, and specialist respiratory input is sought early.",
+   "say": "The key serious toxicity of a HER2-directed antibody drug conjugate is interstitial lung disease. It can be fatal and may appear weeks to months after starting treatment. Any new cough, breathlessness or falling oxygen saturation needs urgent chest imaging and interruption of the drug. Corticosteroids are started promptly once the diagnosis is suspected, and specialist respiratory input is sought early.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_13332ed9615a",
+  "q_4a20526d0ae6",
+  "q_5bdfdec2a1f3"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 41
+ }
+}

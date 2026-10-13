@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "module": "ped-behavioural",
+ "subject": "paediatrics",
+ "title": "Behavioural problems in children: high-yield overview",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Breath-holding spells are **paroxysmal** events seen in about 0.1 to 5 percent of healthy children aged 6 months to 6 years. They are reflexive, not volitional, and occur during expiration. Two forms exist: the **cyanotic** form, triggered by frustration or scolding, and the **pallid** form, triggered by pain or a fall. Treatment is support and reassurance; antiepileptics are not needed.",
+   "say": "Breath-holding spells are paroxysmal events seen in about 0.1 to 5 percent of healthy children aged 6 months to 6 years. They are reflexive, not volitional, and occur during expiration. There are two forms: the cyanotic form, triggered by frustration or scolding, and the pallid form, triggered by pain or a fall. Treatment is support and reassurance, and antiepileptics are not needed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Cyanotic form",
+     "Pallid form"
+    ],
+    "rows": [
+     [
+      "Trigger",
+      "Frustration or anger",
+      "Pain or a fall"
+     ],
+     [
+      "Autonomic basis",
+      "Central sympathetic overactivity",
+      "Excess central parasympathetic activity"
+     ],
+     [
+      "Key sign",
+      "Generalised cyanosis",
+      "Pallor"
+     ],
+     [
+      "Refractory use",
+      "Support only",
+      "Atropine may be considered"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temper tantrums and oppositionalism peak between 2 and 4 years of age and are age-typical. A tantrum lasting more than 15 minutes, or occurring more than 3 times a day, may signal a **medical, emotional or social** problem. Lying in the 2 to 4 year age group is usually play with language rather than antisocial behaviour.",
+   "say": "Temper tantrums and oppositionalism peak between 2 and 4 years of age and are age-typical. A tantrum lasting more than 15 minutes, or occurring more than 3 times a day, may signal a medical, emotional or social problem. Lying in the 2 to 4 year age group is usually play with language rather than antisocial behaviour.",
+   "vis": null
+  },
+  {
+   "tx": "Attention deficit hyperactivity disorder needs symptoms of **inattention**, **hyperactivity** or **impulsivity** that are disruptive for developmental level. Symptoms must begin before age 7 (ICD-10 says by 6 to 12 years), last at least 6 months, and impair function in at least two settings. Three subtypes exist: predominantly inattentive, predominantly hyperactive-impulsive, and combined. Diagnosis is clinical.",
+   "say": "Attention deficit hyperactivity disorder needs symptoms of inattention, hyperactivity or impulsivity that are disruptive for developmental level. Symptoms must begin before age 7 in the American criteria, while ICD-10 allows onset between 6 and 12 years. They must last at least 6 months and impair function in at least two settings. There are three subtypes: predominantly inattentive, predominantly hyperactive-impulsive, and combined. Diagnosis is clinical.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inattention",
+     "points": [
+      "Easily distracted",
+      "Misses details",
+      "Trouble finishing tasks",
+      "Does not seem to listen"
+     ]
+    },
+    "right": {
+     "title": "Hyperactivity and impulsivity",
+     "points": [
+      "Fidgets or squirms",
+      "Blurts out answers",
+      "Trouble waiting turn",
+      "Constantly on the go"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Drugs used in ADHD include **methylphenidate**, **dextroamphetamine** and the non-stimulant **atomoxetine**. Stimulants are first-line in many settings, while clonidine and guanfacine are non-stimulant options. Enuresis is a separate problem: imipramine, desmopressin and oxybutynin are used, with the alarm being the preferred first-line therapy.",
+   "say": "Drugs used in attention deficit hyperactivity disorder include methylphenidate, dextroamphetamine and the non-stimulant atomoxetine. Stimulants are often first-line, while clonidine and guanfacine are non-stimulant options. For enuresis, imipramine, desmopressin and oxybutynin are used, but the alarm is preferred as first-line therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Nocturnal enuresis is involuntary voiding at night after the age the child should be dry. Enuresis should be investigated and treated after **5 years** of age, when most children attain bladder control. Primary enuresis means never consistently dry; secondary means relapse after at least 6 months of dryness. A **urine alarm** achieves roughly 75 to 95 percent success over 8 to 12 weeks.",
+   "say": "Nocturnal enuresis is involuntary voiding at night after the age when the child should be dry. It should be investigated and treated after 5 years of age, when most children attain bladder control. Primary enuresis means never consistently dry, while secondary enuresis means relapse after at least 6 months of dryness. A urine alarm achieves roughly 75 to 95 percent success over 8 to 12 weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Enuresis after 5 years"
+     },
+     {
+      "id": "b",
+      "label": "Labs: urinalysis, bladder scan"
+     },
+     {
+      "id": "c",
+      "label": "Behaviour plan and alarm"
+     },
+     {
+      "id": "d",
+      "label": "Desmopressin or imipramine if failed"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "99dc5393-ddb1-4790-963d-a3647cfaa720",
+  "315d953f-6c51-46c2-9ebe-05fd220664b2",
+  "9de42ca6-bc5f-46a0-9e79-15a753374180"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics (Kliegman et al.)",
+  "Diagnostic and Statistical Manual of Mental Disorders, Fourth Edition",
+  "ICD-10 Classification of Mental and Behavioural Disorders"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 131
+ }
+}

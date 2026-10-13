@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "mcard-valvular",
+ "subject": "mrcp-cardiology",
+ "title": "Valvular heart disease: high-yield essentials",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Valvular heart disease covers stenosis and regurgitation across the four valves, and the lesson focuses on how each lesion is recognised and what drives treatment timing. Start with the **haemodynamic logic**: a stenotic valve obstructs forward flow, while a regurgitant valve lets blood leak back. Murmur timing, pulse character and the echo gradient or valve area together place each lesion in the right category. Most exam questions hinge on identifying which lesion fits the clinical pattern.",
+   "say": "Valvular heart disease covers stenosis and regurgitation across the four valves. Start with the haemodynamic logic. A stenotic valve obstructs forward flow, while a regurgitant valve lets blood leak back. Murmur timing, pulse character and the echo gradient or valve area together place each lesion in the right category. Most exam questions hinge on identifying which lesion fits the clinical pattern.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Key clue",
+     "Murmur timing"
+    ],
+    "rows": [
+     [
+      "Aortic stenosis",
+      "Slow-rising pulse, syncope on exertion",
+      "Ejection systolic"
+     ],
+     [
+      "Aortic regurgitation",
+      "Wide pulse pressure",
+      "Early diastolic"
+     ],
+     [
+      "Mitral stenosis",
+      "Opening snap, low rumble",
+      "Mid-diastolic"
+     ],
+     [
+      "Mitral regurgitation",
+      "Pansystolic radiating to axilla",
+      "Pansystolic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aortic stenosis is the most common valve lesion in older adults and is usually degenerative. Symptoms of **angina, syncope and heart failure** signal a poor prognosis. Severe disease is defined by a valve area of 1.0 cm2 or less, with a peak jet velocity of 4 m/s or more or a mean gradient of 40 mmHg or more. Symptomatic severe aortic stenosis needs valve replacement, surgical or transcatheter depending on surgical risk. Balloon valvuloplasty is only a temporising measure.",
+   "say": "Aortic stenosis is the most common valve lesion in older adults and is usually degenerative. Angina, syncope and heart failure signal a poor prognosis. Severe disease is defined by a valve area of 1.0 cm2 or less, with a peak jet velocity of 4 m/s or more or a mean gradient of 40 mmHg or more. Symptomatic severe aortic stenosis needs valve replacement, surgical or transcatheter depending on surgical risk. Balloon valvuloplasty is only a temporising measure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe AS on echo"
+     },
+     {
+      "id": "b",
+      "label": "Symptoms present?"
+     },
+     {
+      "id": "c",
+      "label": "Valve replacement"
+     },
+     {
+      "id": "d",
+      "label": "Surveillance if asymptomatic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "yes"
+     ],
+     [
+      "b",
+      "d",
+      "no"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitral stenosis is most often rheumatic and is a **diastolic** lesion. The opening snap comes early after the second heart sound, and a shorter gap signals more severe stenosis because left atrial pressure is higher. Atrial fibrillation is a common complication and carries a high thromboembolic risk. In rheumatic mitral stenosis with atrial fibrillation, a vitamin K antagonist is used, and DOACs are not recommended in moderate or severe disease.",
+   "say": "Mitral stenosis is most often rheumatic and is a diastolic lesion. The opening snap comes early after the second heart sound, and a shorter gap signals more severe stenosis because left atrial pressure is higher. Atrial fibrillation is a common complication and carries a high thromboembolic risk. In rheumatic mitral stenosis with atrial fibrillation, a vitamin K antagonist is used, and DOACs are not recommended in moderate or severe disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mild or moderate mitral stenosis",
+     "points": [
+      "Opening snap further from second heart sound",
+      "Fewer symptoms at rest",
+      "Warfarin still used if AF develops"
+     ]
+    },
+    "right": {
+     "title": "Severe mitral stenosis",
+     "points": [
+      "Opening snap closer to second heart sound",
+      "Breathlessness on minimal exertion",
+      "Anticoagulation and intervention considered"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mitral regurgitation can be acute, as with **papillary muscle rupture** after an inferior infarct, which typically occurs 2 to 7 days after the event and causes pulmonary oedema and shock. The posteromedial papillary muscle is most vulnerable because it has a single blood supply. Acute severe mitral regurgitation needs urgent cardiothoracic surgical referral alongside haemodynamic support, since vasodilators and inotropes stabilise but do not correct the lesion.",
+   "say": "Mitral regurgitation can be acute, as with papillary muscle rupture after an inferior infarct, which typically occurs 2 to 7 days after the event and causes pulmonary oedema and shock. The posteromedial papillary muscle is most vulnerable because it has a single blood supply. Acute severe mitral regurgitation needs urgent cardiothoracic surgical referral alongside haemodynamic support, since vasodilators and inotropes stabilise but do not correct the lesion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inferior STEMI"
+     },
+     {
+      "id": "b",
+      "label": "Day 2 to 7 rupture"
+     },
+     {
+      "id": "c",
+      "label": "Acute severe MR and shock"
+     },
+     {
+      "id": "d",
+      "label": "Urgent surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aortic regurgitation produces a **wide pulse pressure** because the left ventricle ejects a larger stroke volume and blood runs off into the ventricle during diastole. Acute aortic regurgitation, for example from endocarditis or a paravalvular leak, is poorly tolerated because a noncompliant, nondilated ventricle cannot accommodate the sudden volume load. Diastolic pressure rises rapidly and severe heart failure follows, making this an emergency.",
+   "say": "Aortic regurgitation produces a wide pulse pressure because the left ventricle ejects a larger stroke volume and blood runs off into the ventricle during diastole. Acute aortic regurgitation, for example from endocarditis or a paravalvular leak, is poorly tolerated because a noncompliant, nondilated ventricle cannot accommodate the sudden volume load. Diastolic pressure rises rapidly and severe heart failure follows, making this an emergency.",
+   "vis": null
+  },
+  {
+   "tx": "Hypertrophic obstructive cardiomyopathy produces a **dynamic** outflow murmur that behaves opposite to fixed valve disease. Standing and Valsalva reduce ventricular volume and intensify the murmur, while squatting and handgrip soften it. Mitral valve prolapse usually gives a mid-systolic click and late systolic murmur, and most patients with mild regurgitation and normal ventricular function need only periodic review. Prophylaxis is limited to prior endocarditis.",
+   "say": "Hypertrophic obstructive cardiomyopathy produces a dynamic outflow murmur that behaves opposite to fixed valve disease. Standing and Valsalva reduce ventricular volume and intensify the murmur, while squatting and handgrip soften it. Mitral valve prolapse usually gives a mid-systolic click and late systolic murmur, and most patients with mild regurgitation and normal ventricular function need only periodic review. Prophylaxis is limited to prior endocarditis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypertrophic obstructive cardiomyopathy",
+     "points": [
+      "Murmur louder on standing or Valsalva",
+      "Softer with squatting",
+      "Fixed valve lesions do not behave this way"
+     ]
+    },
+    "right": {
+     "title": "Mitral valve prolapse",
+     "points": [
+      "Mid-systolic click then late murmur",
+      "Mild regurgitation often needs only review",
+      "Prophylaxis limited to prior endocarditis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prosthetic valve endocarditis with Staphylococcus aureus is a surgical emergency when there is an abscess, new heart block or uncontrolled infection. New first-degree heart block suggests **perivalvular extension** into the conduction system. Surgery is added alongside antibiotics, not in place of them. Multiple and mixed valve disease can mask one lesion behind another, so transoesophageal echo and catheterisation help clarify the true severity.",
+   "say": "Prosthetic valve endocarditis with Staphylococcus aureus is a surgical emergency when there is an abscess, new heart block or uncontrolled infection. New first-degree heart block suggests perivalvular extension into the conduction system. Surgery is added alongside antibiotics, not in place of them. Multiple and mixed valve disease can mask one lesion behind another, so transoesophageal echo and catheterisation help clarify the true severity.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-carcinoid-heart-disease",
+  "kb-reference-multiple-and-mixed-valvular-heart"
+ ],
+ "refs": [
+  "2021 ESC/EACTS Guidelines for the management of valvular heart disease",
+  "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease",
+  "NICE guidance on atrial fibrillation (NG196)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 1799,
+  "itemN": 18
+ }
+}

@@ -1,0 +1,119 @@
+{
+ "v": 1,
+ "module": "sid-vaccines",
+ "subject": "ss-infectious-diseases",
+ "title": "Adult immunization: pneumococcal, zoster, influenza and live vaccine safety",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Recombinant zoster vaccine (RZV)** is non-live and contains an adjuvanted glycoprotein E antigen. It is given as two doses, usually two to six months apart, to adults aged 50 and older, including those with prior herpes zoster. Immunocompromised adults may receive the second dose sooner, after one to two months. Because it is non-live, it is safe in immunosuppressed patients, unlike live zoster vaccine. Vaccine efficacy against herpes zoster remains high across age groups.",
+   "say": "Recombinant zoster vaccine is non-live and contains an adjuvanted glycoprotein E antigen. It is given as two doses, usually two to six months apart, to adults aged 50 and older, including those with prior herpes zoster. Immunocompromised adults may receive the second dose sooner, after one to two months. Because it is non-live, it is safe in immunosuppressed patients, unlike the older live zoster vaccine.",
+   "vis": null
+  },
+  {
+   "tx": "**Influenza vaccine** is given every year to all adults, with the strain matched to circulating viruses. Inactivated vaccine is safe in pregnancy, chronic illness and immunosuppression. **Live attenuated influenza vaccine (LAIV)** is avoided in pregnancy, immunocompromised patients and those in close contact with severely immunosuppressed people. Guillain-Barre syndrome has been reported after influenza vaccination, but the absolute risk is very small compared with influenza illness itself.",
+   "say": "Influenza vaccine is given every year to all adults, with the strain matched to circulating viruses. Inactivated vaccine is safe in pregnancy, chronic illness and immunosuppression. Live attenuated influenza vaccine is avoided in pregnancy, in immunocompromised patients, and in close contact with severely immunosuppressed people. Guillain-Barre syndrome has been reported after influenza vaccination, but the absolute risk is very small compared with influenza illness itself.",
+   "vis": null
+  },
+  {
+   "tx": "**Live vaccines** contain replicating organisms and are contraindicated in **severe immunosuppression**, pregnancy and within a short window after high-dose corticosteroids or blood products. Examples include MMR, varicella, yellow fever, oral Ty21a typhoid and LAIV. Inactivated, recombinant and toxoid vaccines are generally safe for immunocompromised patients, though responses may be weaker. Immunocompromised patients should be vaccinated before immunosuppression where possible.",
+   "say": "Live vaccines contain replicating organisms and are contraindicated in severe immunosuppression, in pregnancy, and within a short window after high-dose corticosteroids or blood products. Examples include MMR, varicella, yellow fever, oral Ty21a typhoid and live attenuated influenza vaccine. Inactivated, recombinant and toxoid vaccines are generally safe for immunocompromised patients, though responses may be weaker. Where possible, vaccinate before immunosuppression starts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Live vaccines",
+     "points": [
+      "MMR and varicella",
+      "Yellow fever",
+      "Oral Ty21a typhoid",
+      "LAIV"
+     ]
+    },
+    "right": {
+     "title": "Non-live vaccines",
+     "points": [
+      "Inactivated influenza",
+      "Recombinant zoster",
+      "Toxoids such as Td",
+      "Conjugate and polysaccharide pneumococcal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatitis B **non-responders** are adults who do not reach protective **anti-HBs** levels after a full three-dose series. Check anti-HBs one to two months after the final dose. If the level is low, a repeat **three-dose series** is given, with antibodies checked again. Persistent non-response suggests testing for **HBsAg** and anti-HBc, and considering a booster or referral. Separately, Tdap is given in every pregnancy, timed for the later part of gestation, to protect the newborn against **pertussis**.",
+   "say": "Hepatitis B non-responders are adults who do not reach protective anti-HBs levels after a full three-dose series. Check anti-HBs one to two months after the final dose. If the level is low, repeat the three-dose series and check antibodies again. Persistent non-response suggests testing for HBsAg and anti-HBc, and considering a booster or referral. Separately, Tdap is given in every pregnancy, timed for the later part of gestation, to protect the newborn against pertussis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Full three-dose series"
+     },
+     {
+      "id": "b",
+      "label": "Check anti-HBs at one to two months"
+     },
+     {
+      "id": "c",
+      "label": "Low: repeat three doses"
+     },
+     {
+      "id": "d",
+      "label": "Recheck anti-HBs"
+     },
+     {
+      "id": "e",
+      "label": "Still low: test HBsAg and anti-HBc"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Low"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e",
+      "Non-responder"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_2f48abe1d226",
+  "q_7f435236da8a",
+  "q_ea64eaab5ab5"
+ ],
+ "src": [],
+ "refs": [
+  "CDC Advisory Committee on Immunization Practices adult immunization schedule",
+  "WHO position paper on typhoid vaccines",
+  "WHO position paper on rabies vaccines"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 34
+ }
+}

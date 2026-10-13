@@ -1,0 +1,136 @@
+{
+ "v": 1,
+ "module": "phm-mood-stabilisers",
+ "subject": "pharmacology",
+ "title": "Mood stabilisers and anxiolytics: lithium and beyond",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Lithium carbonate** is the mainstay for bipolar disorder and is the drug of choice for prophylaxis. It is a small monovalent cation with a **narrow therapeutic window**. Its half-life is about 24 hours, and steady state takes 5 to 7 days. Serum levels are measured 12 hours after the last dose. Maintenance levels are 0.5 to 0.8 mEq/L, while acute mania needs 0.8 to 1.2 mEq/L.",
+   "say": "Lithium carbonate is the mainstay for bipolar disorder and is the drug of choice for prophylaxis. It is a small monovalent cation with a narrow therapeutic window. Its half-life is about 24 hours, and steady state takes five to seven days. Serum levels are measured twelve hours after the last dose. Maintenance levels are 0.5 to 0.8 mEq/L, while acute mania needs 0.8 to 1.2 mEq/L.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical use",
+     "Serum level (mEq/L)"
+    ],
+    "rows": [
+     [
+      "Bipolar maintenance",
+      "0.5 to 0.8"
+     ],
+     [
+      "Acute mania",
+      "0.8 to 1.2"
+     ],
+     [
+      "Toxicity suspected",
+      "Above 1.5 to 2"
+     ],
+     [
+      "Dialysis consideration",
+      "Above 4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lithium toxicity is marked by **tremor**, the most common early sign, along with ataxia, hyperreflexia, confusion and seizures. Gastrointestinal upset such as nausea, vomiting and a metallic taste may also occur. Toxic symptoms are frequent above 1.5 mEq/L. Lithium interacts with **thiazide diuretics**, which raise lithium levels, so these antihypertensives should be avoided. ACE inhibitors and NSAIDs also raise levels.",
+   "say": "Lithium toxicity is marked by tremor, the most common early sign, along with ataxia, hyperreflexia, confusion and seizures. Gastrointestinal upset such as nausea, vomiting and a metallic taste may also occur. Toxic symptoms are frequent above 1.5 mEq/L. Lithium interacts with thiazide diuretics, which raise lithium levels, so these antihypertensives should be avoided. ACE inhibitors and NSAIDs also raise levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thiazide diuretic"
+     },
+     {
+      "id": "b",
+      "label": "Sodium loss"
+     },
+     {
+      "id": "c",
+      "label": "Proximal Na and Li reabsorption"
+     },
+     {
+      "id": "d",
+      "label": "Lithium level rises"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nephrogenic diabetes insipidus** is the most common renal effect, causing polyuria and polydipsia even at therapeutic levels. Lithium blocks the action of ADH on the collecting duct. **Amiloride** is the drug of choice for this effect, and propranolol treats lithium-induced tremor. Chronic use may cause tubulointerstitial nephritis, mainly after repeated toxic episodes. Hypothyroidism and goitre can also occur.",
+   "say": "Nephrogenic diabetes insipidus is the most common renal effect, causing polyuria and polydipsia even at therapeutic levels. Lithium blocks the action of ADH on the collecting duct. Amiloride is the drug of choice for this effect, and propranolol treats lithium-induced tremor. Chronic use may cause tubulointerstitial nephritis, mainly after repeated toxic episodes. Hypothyroidism and goitre can also occur.",
+   "vis": null
+  },
+  {
+   "tx": "Choose the right agent for each phase. **Lithium** is preferred for euphoric mania and prophylaxis. **Valproate** suits mixed or dysphoric mania and rapid cycling. **Lamotrigine** is the first anticonvulsant helpful in bipolar depression. **Carbamazepine** is used in acute mania. Atypical antipsychotics like olanzapine are preferred for acute mania with psychosis. Phenytoin is not used in bipolar disorder.",
+   "say": "Choose the right agent for each phase. Lithium is preferred for euphoric mania and prophylaxis. Valproate suits mixed or dysphoric mania and rapid cycling. Lamotrigine is the first anticonvulsant helpful in bipolar depression. Carbamazepine is used in acute mania. Atypical antipsychotics like olanzapine are preferred for acute mania with psychosis. Phenytoin is not used in bipolar disorder.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Best use"
+    ],
+    "rows": [
+     [
+      "Lithium",
+      "Euphoric mania, prophylaxis"
+     ],
+     [
+      "Valproate",
+      "Mixed mania, rapid cycling"
+     ],
+     [
+      "Lamotrigine",
+      "Bipolar depression"
+     ],
+     [
+      "Olanzapine",
+      "Acute mania with psychosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "349fa480-b37a-4aa9-8da5-c25414c3b4c6",
+  "5cd5c6e7-be29-4f04-b782-6f8d10be1fe4",
+  "1b2aa052-f406-4d52-9814-5b4cbb78cc13"
+ ],
+ "src": [],
+ "refs": [
+  "Katzung Basic and Clinical Pharmacology (Katzung BG)",
+  "Harrison's Principles of Internal Medicine (Kasper DL et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 127
+ }
+}

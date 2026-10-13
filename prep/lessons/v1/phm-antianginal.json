@@ -1,0 +1,111 @@
+{
+ "v": 1,
+ "module": "phm-antianginal",
+ "subject": "pharmacology",
+ "title": "Antianginal drugs and calcium channel blockers",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Angina is a supply-demand mismatch in the myocardium, usually from fixed **atherosclerotic** narrowing of epicardial coronary arteries. Antianginal drugs work by reducing myocardial oxygen demand, improving supply, or both. The main levers are **preload**, **afterload** and **heart rate**. Nitrates mainly lower preload through venodilation, while calcium channel blockers and beta-blockers lower heart rate and contractility.",
+   "say": "Angina is a mismatch between the heart's oxygen demand and supply, usually caused by fixed atherosclerotic narrowing of the epicardial coronary arteries. Antianginal drugs work by reducing oxygen demand, improving supply, or both. The main levers are preload, afterload and heart rate. Nitrates mainly lower preload through venodilation, while calcium channel blockers and beta-blockers lower heart rate and contractility.",
+   "vis": null
+  },
+  {
+   "tx": "Nitrates release **nitric oxide**, which raises cGMP and relaxes vascular smooth muscle. Veins respond more than arteries, so venous pooling reduces preload and end-diastolic pressure. Sublingual **glyceryl trinitrate** acts within minutes and is the drug of choice for an acute attack. Nitrates are contraindicated with PDE-5 inhibitors such as sildenafil, and within 24 hours of sildenafil use.",
+   "say": "Nitrates release nitric oxide, which raises cGMP and relaxes vascular smooth muscle. Veins respond more than arteries, so venous pooling reduces preload and end-diastolic pressure. Sublingual glyceryl trinitrate acts within minutes and is the drug of choice for an acute attack. Nitrates are contraindicated with PDE-5 inhibitors such as sildenafil, and within 24 hours of sildenafil use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Glyceryl trinitrate",
+     "Isosorbide mononitrate"
+    ],
+    "rows": [
+     [
+      "Use",
+      "Acute relief",
+      "Prophylaxis"
+     ],
+     [
+      "Onset",
+      "Within minutes",
+      "Slower, sustained"
+     ],
+     [
+      "Tolerance",
+      "Needs nitrate-free interval",
+      "Once-daily MR avoids it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nitrate tolerance** emerges when nitrates are given continuously, partly through depletion of thiols and oxidative stress that blunts the vasodilator response. Dosing schedules therefore build in a break from the drug. **Glyceryl trinitrate** patches need a gap of roughly eight to ten hours, whereas **isosorbide dinitrate** needs about twelve. Modified-release **isosorbide mononitrate** given once daily largely avoids this problem. **Monday disease** describes headache and dizziness when exposure resumes after a break.",
+   "say": "Nitrate tolerance builds up when nitrates are given continuously, partly because thiol stores run down and oxidative stress blunts the vessel's response. Schedules therefore include a drug-free gap. Glyceryl trinitrate patches need roughly eight to ten hours off, while isosorbide dinitrate needs about twelve. Once-daily modified-release isosorbide mononitrate largely avoids the problem. Monday disease is the headache and dizziness that appear when exposure restarts after a break.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent or entity",
+     "Tolerance pattern",
+     "Practical schedule"
+    ],
+    "rows": [
+     [
+      "Glyceryl trinitrate (patch)",
+      "Tolerance with continuous use",
+      "Drug-free break of about 8 to 10 hours"
+     ],
+     [
+      "Isosorbide dinitrate",
+      "Tolerance with continuous use",
+      "Drug-free break of about 12 hours"
+     ],
+     [
+      "Isosorbide mononitrate MR, once daily",
+      "Largely avoids tolerance",
+      "No break needed with standard dosing"
+     ],
+     [
+      "Monday disease",
+      "Headache and dizziness on re-exposure",
+      "Appears after a nitrate-free break"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Do not combine **beta-blockers** with verapamil or diltiazem, because bradycardia, AV block or asystole may occur. Ivabradine must not be combined with verapamil, diltiazem or strong CYP3A4 inhibitors. Nitrates must not be used within 24 hours of sildenafil, or 48 hours of tadalafil. Sinus rhythm with resting heart rate of 70 bpm or more and LVEF below 40 percent suits ivabradine.",
+   "say": "Do not combine beta-blockers with verapamil or diltiazem, because bradycardia, AV block or asystole may occur. Ivabradine must not be combined with verapamil, diltiazem or strong CYP3A4 inhibitors. Nitrates must not be used within 24 hours of sildenafil, or 48 hours of tadalafil. Sinus rhythm with resting heart rate of 70 bpm or more and LVEF below 40 percent suits ivabradine.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "8c8dbd0b-da3f-4e44-8ce4-0c49cf2dfcba",
+  "edf059f4-ae92-4489-91e3-9f16e5c30372",
+  "0c265c8e-5783-4de5-8c32-5d9a7aea0ffb"
+ ],
+ "src": [
+  "kb-reference-stable-angina",
+  "kb-clinical-protocols-chronic-coronary-syndrome"
+ ],
+ "refs": [
+  "ESC Guidelines for the management of chronic coronary syndromes (2024)",
+  "NICE Stable angina guidance",
+  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton L, et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 1554,
+  "itemN": 244
+ }
+}

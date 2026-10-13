@@ -1,0 +1,159 @@
+{
+ "v": 1,
+ "module": "son-penile-adrenal",
+ "subject": "ss-medical-oncology",
+ "title": "Penile and Adrenal Cancers: High-Yield Essentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Penile squamous carcinoma is strongly linked to **HPV**, especially high-risk types, and to chronic inflammation under a **closed preputial environment**. Smoking raises risk about three to four and a half times. Phimosis with poor hygiene adds a substantial increase. Neonatal circumcision removes the closed preputial space and is protective. Biopsy is mandatory before any treatment, because it confirms the histology and grade and shows how deep the tumour invades.",
+   "say": "Penile squamous carcinoma is strongly linked to HPV, especially high-risk types, and to chronic inflammation under a closed preputial environment. Smoking raises risk about three to four and a half times. Phimosis with poor hygiene adds a substantial increase. Neonatal circumcision removes the closed preputial space and is protective. Biopsy is mandatory before any treatment, because it confirms the histology and grade and shows how deep the tumour invades.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk factor",
+     "Effect on penile cancer risk"
+    ],
+    "rows": [
+     [
+      "Smoking",
+      "About 3 to 4.5 times higher"
+     ],
+     [
+      "Phimosis with poor hygiene",
+      "Substantially increased"
+     ],
+     [
+      "Neonatal circumcision",
+      "Protective"
+     ],
+     [
+      "High-risk HPV",
+      "Major driver of squamous disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Premalignant penile lesions, once called Bowen disease or erythroplasia of Queyrat, are now grouped as **penile intraepithelial neoplasia**. Verrucous carcinoma is a low-grade variant with **low metastatic potential**. Because of this, it is usually treated with local excision, Mohs surgery or laser ablation rather than lymph node surgery or chemotherapy. Standard squamous carcinoma behaves more aggressively and needs nodal assessment.",
+   "say": "Premalignant penile lesions, once called Bowen disease or erythroplasia of Queyrat, are now grouped as penile intraepithelial neoplasia. Verrucous carcinoma is a low-grade variant with low metastatic potential. Because of this, it is usually treated with local excision, Mohs surgery or laser ablation rather than lymph node surgery or chemotherapy. Standard squamous carcinoma behaves more aggressively and needs nodal assessment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Verrucous carcinoma",
+     "points": [
+      "Low metastatic potential",
+      "Local excision or laser ablation",
+      "Organ preservation possible"
+     ]
+    },
+    "right": {
+     "title": "Standard squamous carcinoma",
+     "points": [
+      "More aggressive behaviour",
+      "Needs nodal staging",
+      "Inguinal node management guided by findings"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An incidental **adrenal mass** needs a structured work-up before any surgery. The first and most critical step is excluding **pheochromocytoma**, using plasma or urinary metanephrines, because operating on an unrecognised catecholamine-secreting tumour can cause a fatal hypertensive crisis. Hormonal screening for hypercortisolism follows. Surgery is planned only after these results are known.",
+   "say": "An incidental adrenal mass needs a structured work-up before any surgery. The first and most critical step is excluding pheochromocytoma, using plasma or urinary metanephrines, because operating on an unrecognised catecholamine-secreting tumour can cause a fatal hypertensive crisis. Hormonal screening for hypercortisolism follows. Surgery is planned only after these results are known.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Incidental adrenal mass"
+     },
+     {
+      "id": "b",
+      "label": "Metanephrines"
+     },
+     {
+      "id": "c",
+      "label": "Cortisol screen"
+     },
+     {
+      "id": "d",
+      "label": "Planned surgery"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenocortical carcinoma** management hinges on **complete en bloc resection** performed at a specialist centre, as this is the only route to cure. In selected high-risk patients after surgery, **mitotane** may be given as an adjuvant. When disease has spread, the **EDP-mitotane** combination, tested in the FIRM-ACT trial, extended survival relative to an older comparator regimen. Radiotherapy and ablative techniques do not offer cure on their own.",
+   "say": "Adrenocortical carcinoma management depends on complete en bloc resection done at a specialist centre, since that is the only route to cure. In selected high-risk patients after surgery, mitotane may be given as an adjuvant. When the disease has spread, the EDP-mitotane combination, tested in the FIRM-ACT trial, prolonged survival compared with an older comparator regimen. Radiotherapy and ablative techniques alone do not offer a cure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical setting",
+     "Standard approach"
+    ],
+    "rows": [
+     [
+      "Localised, resectable",
+      "Complete en bloc open resection"
+     ],
+     [
+      "Selected high-risk after surgery",
+      "Adjuvant mitotane"
+     ],
+     [
+      "Metastatic, first line",
+      "EDP plus mitotane (FIRM-ACT)"
+     ],
+     [
+      "Radiotherapy or ablation alone",
+      "Not curative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histology alone cannot separate benign from malignant adrenal tumours. The **Weiss criteria** assess nine histological features, and a score of **three or more** features suggests malignancy. Malignant adrenal cortical tumours are then managed by the features above. In pheochromocytoma, malignancy is defined by metastases rather than microscopic appearance. Mutations in the **SDHB** gene carry a higher risk of malignant behaviour in paragangliomas.",
+   "say": "Histology alone cannot separate benign from malignant adrenal tumours. The Weiss criteria assess nine histological features, and a score of three or more features suggests malignancy. Malignant adrenal cortical tumours are then managed by the features above. In pheochromocytoma, malignancy is defined by metastases rather than microscopic appearance. Mutations in the SDHB gene carry a higher risk of malignant behaviour in paragangliomas.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4c4ad9efc3d1",
+  "q_9d64f880a509",
+  "q_b07f6b28a2ca"
+ ],
+ "src": [],
+ "refs": [
+  "EAU Guidelines on Penile Cancer (European Association of Urology)",
+  "ESMO Clinical Practice Guidelines on Adrenocortical Carcinoma (Fassnacht et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 8
+ }
+}

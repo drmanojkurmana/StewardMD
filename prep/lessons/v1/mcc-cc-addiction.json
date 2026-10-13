@@ -1,0 +1,130 @@
+{
+ "v": 1,
+ "module": "mcc-cc-addiction",
+ "subject": "mcc-chronic-care",
+ "title": "Chronic addiction care: maintenance, safety and relapse management",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A patient on **methadone** with vomiting and diarrhoea for four days, palpitations and a prolonged corrected QT needs urgent attention. Diarrhoea and vomiting cause **hypokalaemia** and **hypomagnesaemia**, which prolong ventricular repolarisation. Methadone also prolongs QT, so the combination raises the risk of torsades de pointes. The first step is to replace potassium and magnesium, correct the cause, and repeat the ECG. Do not simply discharge or increase the dose.",
+   "say": "A patient on methadone with vomiting and diarrhoea for four days, palpitations and a prolonged corrected QT needs urgent attention. Diarrhoea and vomiting cause hypokalaemia and hypomagnesaemia, which prolong ventricular repolarisation. Methadone also prolongs QT, so the combination raises the risk of torsades de pointes. The first step is to replace potassium and magnesium, correct the cause, and repeat the ECG. Do not simply discharge or increase the dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vomiting and diarrhoea"
+     },
+     {
+      "id": "b",
+      "label": "Low K and Mg"
+     },
+     {
+      "id": "c",
+      "label": "Prolonged QT"
+     },
+     {
+      "id": "d",
+      "label": "Replace electrolytes"
+     },
+     {
+      "id": "e",
+      "label": "Repeat ECG"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Alcohol withdrawal begins about six to twenty four hours after the last drink. Tremor, sweating, anxiety and tachycardia are typical, and **seizures** or **delirium tremens** can follow. **Benzodiazepines** are the mainstay, given on a symptom-triggered basis with a withdrawal score such as CIWA-Ar. Give **thiamine** before any glucose to prevent Wernicke encephalopathy. Antipsychotics alone do not treat withdrawal and can lower the seizure threshold.",
+   "say": "Alcohol withdrawal begins about six to twenty four hours after the last drink. Tremor, sweating, anxiety and tachycardia are typical, and seizures or delirium tremens can follow. Benzodiazepines are the mainstay, given on a symptom-triggered basis with a withdrawal score such as CIWA-Ar. Give thiamine before any glucose to prevent Wernicke encephalopathy. Antipsychotics alone do not treat withdrawal and can lower the seizure threshold.",
+   "vis": null
+  },
+  {
+   "tx": "For **stimulant use disorder**, such as methamphetamine, no medicine is approved, so psychosocial treatment is the core. **Contingency management** gives small, immediate rewards for verified abstinence, based on operant conditioning, and has the strongest evidence. It is best combined with counselling such as cognitive behavioural therapy. Outpatient care suits patients with stable housing, work and no psychosis. Medicines such as quetiapine or bupropion lack good evidence for this use.",
+   "say": "For stimulant use disorder, such as methamphetamine, no medicine is approved, so psychosocial treatment is the core. Contingency management gives small, immediate rewards for verified abstinence, based on operant conditioning, and has the strongest evidence. It is best combined with counselling such as cognitive behavioural therapy. Outpatient care suits patients with stable housing, work and no psychosis. Medicines such as quetiapine or bupropion lack good evidence for this use.",
+   "vis": null
+  },
+  {
+   "tx": "When a patient on stable **buprenorphine** has occasional illicit fentanyl use but no overdose, withdrawal or loss of stability, the aim is to adjust treatment rather than stop it. First optimise the **dose**, since inadequate receptor occupancy drives relapse. Then add counselling, relapse prevention and regular urine drug screening. Discharge or tapering to zero raises overdose risk, and switching to naltrexone is unsuitable while opioids are still being used.",
+   "say": "When a patient on stable buprenorphine has occasional illicit fentanyl use but no overdose, withdrawal or loss of stability, the aim is to adjust treatment rather than stop it. First optimise the dose, since inadequate receptor occupancy drives relapse. Then add counselling, relapse prevention and regular urine drug screening. Discharge or tapering to zero raises overdose risk, and switching to naltrexone is unsuitable while opioids are still being used.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Illicit use on stable dose"
+     },
+     {
+      "id": "b",
+      "label": "Optimise dose"
+     },
+     {
+      "id": "c",
+      "label": "Add counselling"
+     },
+     {
+      "id": "d",
+      "label": "Monitor urine screens"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nicotine dependence is treated with **varenicline**, a partial agonist at nicotinic receptors, combined with behavioural support. It reduces craving and withdrawal and blunts the reward from nicotine. A patient who relapsed on a nicotine patch alone should not simply repeat that approach. Check that kidney function is normal, since dose adjustment is needed in renal impairment. **Nicotine replacement** can be combined in some cases, but varenicline with counselling is the stronger choice here.",
+   "say": "Nicotine dependence is treated with varenicline, a partial agonist at nicotinic receptors, combined with behavioural support. It reduces craving and withdrawal and blunts the reward from nicotine. A patient who relapsed on a nicotine patch alone should not simply repeat that approach. Check that kidney function is normal, since dose adjustment is needed in renal impairment. Nicotine replacement can be combined in some cases, but varenicline with counselling is the stronger choice here.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Synopsis of Psychiatry (Sadock BJ, Sadock VA, Ruiz P)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 9
+ }
+}

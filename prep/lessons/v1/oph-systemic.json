@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "oph-systemic",
+ "subject": "ophthalmology",
+ "title": "Ocular manifestations of systemic disease: high-yield lesson",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Systemic disease often shows itself first in the eye. **Lens subluxation** is a classic clue. Marfan syndrome is an autosomal dominant mesodermal dysplasia, and its lens typically shifts upwards and temporally, usually bilaterally and symmetrically. Homocystinuria is autosomal recessive and displaces the lens downwards and nasally. Weil-Marchesani syndrome causes forward displacement with a small spherical lens.",
+   "say": "Systemic disease often shows itself first in the eye. Lens subluxation is a classic clue. Marfan syndrome is an autosomal dominant mesodermal dysplasia, and its lens typically shifts upwards and temporally, usually bilaterally and symmetrically. Homocystinuria is autosomal recessive and displaces the lens downwards and nasally. Weil-Marchesani syndrome causes forward displacement with a small spherical lens.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Lens direction",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Marfan syndrome",
+      "Upwards and temporal",
+      "Arachnodactyly, aortic risk"
+     ],
+     [
+      "Homocystinuria",
+      "Downwards and nasal",
+      "Thrombosis tendency"
+     ],
+     [
+      "Weil-Marchesani",
+      "Forward",
+      "Small spherical lens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wilson disease is an autosomal recessive copper disorder. The **Kayser-Fleischer ring** is a golden brown corneal ring from copper in Descemet membrane, usually at the periphery. Copper in the lens causes **sunflower cataract**. Retinal golden plaques at the posterior pole may also be seen. Glaucoma and nystagmus are not features of this disease.",
+   "say": "Wilson disease is an autosomal recessive copper disorder. The Kayser-Fleischer ring is a golden brown corneal ring from copper in Descemet membrane, usually at the periphery. Copper in the lens causes sunflower cataract. Retinal golden plaques at the posterior pole may also be seen. Glaucoma and nystagmus are not features of this disease.",
+   "vis": null
+  },
+  {
+   "tx": "Down syndrome has several eye signs. **Brushfield spots** are small white or greyish brown spots at the iris periphery, from aggregated connective tissue, and are most typical in patients of European descent. Other features include epicanthal folds, myopia, keratoconus, esotropia and congenital cataract. **Snowflake cataract** is also described. Lisch nodules belong to neurofibromatosis, not Down syndrome.",
+   "say": "Down syndrome has several eye signs. Brushfield spots are small white or greyish brown spots at the iris periphery, from aggregated connective tissue, and are most typical in patients of European descent. Other features include epicanthal folds, myopia, keratoconus, esotropia and congenital cataract. Snowflake cataract is also described. Lisch nodules belong to neurofibromatosis, not Down syndrome.",
+   "vis": null
+  },
+  {
+   "tx": "In AIDS, the most common ocular infection is **CMV retinitis**. Early lesions are yellow-white exudates with vasculitis and haemorrhage, giving a pizza pie or cottage cheese and ketchup look. Untreated, it progresses to total retinal atrophy. The most common abnormal fundus finding is **cotton wool spots** from microvascular ischaemia, which usually do not threaten vision. Kaposi sarcoma is the commonest ocular neoplasm.",
+   "say": "In AIDS, the most common ocular infection is CMV retinitis. Early lesions are yellow-white exudates with vasculitis and haemorrhage, giving a pizza pie or cottage cheese and ketchup look. Untreated, it progresses to total retinal atrophy. The most common abnormal fundus finding is cotton wool spots from microvascular ischaemia, which usually do not threaten vision. Kaposi sarcoma is the commonest ocular neoplasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Yellow-white exudates"
+     },
+     {
+      "id": "b",
+      "label": "Vasculitis and haemorrhage"
+     },
+     {
+      "id": "c",
+      "label": "Exudative detachment"
+     },
+     {
+      "id": "d",
+      "label": "Total retinal atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "33aa18a6-cc2a-424c-99db-ff6447e32d64",
+  "72d3d4e7-5677-4805-a7ec-fe5e17959476",
+  "3a4ec308-8b23-4496-b430-00ff74892b1b"
+ ],
+ "src": [],
+ "refs": [
+  "Parsons' Diseases of the Eye (Ramanjit Sihota and Radhika Tandon)",
+  "Khurana Comprehensive Ophthalmology (A K Khurana)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 210
+ }
+}

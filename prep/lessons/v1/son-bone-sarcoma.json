@@ -1,0 +1,157 @@
+{
+ "v": 1,
+ "module": "son-bone-sarcoma",
+ "subject": "ss-medical-oncology",
+ "title": "Bone sarcomas: osteosarcoma, Ewing sarcoma and chondrosarcoma",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Bone sarcomas are malignant mesenchymal tumours of bone. The three commonest in the exam are **osteosarcoma**, **Ewing sarcoma** and **chondrosarcoma**. Osteosarcoma favours the metaphysis of long bones in adolescents, while Ewing sarcoma favours the diaphysis and flat bones, such as the pelvis and ribs. Chondrosarcoma is an adult tumour with cartilage matrix and is generally chemoresistant, so surgery is the main treatment.",
+   "say": "Bone sarcomas are malignant mesenchymal tumours of bone. The three commonest in the exam are osteosarcoma, Ewing sarcoma and chondrosarcoma. Osteosarcoma favours the metaphysis of long bones in adolescents, while Ewing sarcoma favours the diaphysis and flat bones, such as the pelvis and ribs. Chondrosarcoma is an adult tumour with cartilage matrix and is generally chemoresistant, so surgery is the main treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Osteosarcoma",
+     "Ewing sarcoma",
+     "Chondrosarcoma"
+    ],
+    "rows": [
+     [
+      "Typical age",
+      "Adolescents",
+      "Children and young adults",
+      "Adults"
+     ],
+     [
+      "Site",
+      "Metaphysis of long bones",
+      "Diaphysis, pelvis, ribs",
+      "Pelvis, long bones, ribs"
+     ],
+     [
+      "Key feature",
+      "Codman triangle, sunburst",
+      "Onion-skin periosteal reaction",
+      "Cartilage matrix, chemoresistant"
+     ],
+     [
+      "Main treatment",
+      "Neoadjuvant chemotherapy and surgery",
+      "Chemotherapy, local control, radiotherapy",
+      "Wide surgical resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ewing sarcoma shows small round blue cells with diffuse membranous **CD99** positivity, but CD99 is non-specific. Definitive diagnosis needs molecular confirmation of the **t(11;22)(q24;q12)** translocation, which fuses EWSR1 with FLI1 to form the EWS-FLI1 fusion. The fusion protein acts as an aberrant transcription factor. Roughly 85 percent of cases carry this translocation.",
+   "say": "Ewing sarcoma shows small round blue cells with diffuse membranous CD99 positivity, but CD99 is non-specific. Definitive diagnosis needs molecular confirmation of the t(11;22) translocation at q24 and q12, which fuses EWSR1 with FLI1 to form the EWS-FLI1 fusion. The fusion protein acts as an aberrant transcription factor. Roughly 85 percent of cases carry this translocation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Small round blue cells"
+     },
+     {
+      "id": "b",
+      "label": "CD99 positive"
+     },
+     {
+      "id": "c",
+      "label": "Molecular test"
+     },
+     {
+      "id": "d",
+      "label": "t(11;22) confirmed"
+     },
+     {
+      "id": "e",
+      "label": "EWS-FLI1 transcription factor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Osteosarcoma classically shows a **Codman triangle**, where the lifted periosteum is bridged by new bone at its edges, and a sunburst periosteal reaction. Ewing sarcoma instead shows an **onion-skin** periosteal reaction from layered new bone. Both tumours are aggressive and destructive, so imaging must be read alongside histology before treatment begins.",
+   "say": "Osteosarcoma classically shows a Codman triangle, where the lifted periosteum is bridged by new bone at its edges, and a sunburst periosteal reaction. Ewing sarcoma instead shows an onion-skin periosteal reaction from layered new bone. Both tumours are aggressive and destructive, so imaging must be read alongside histology before treatment begins.",
+   "vis": null
+  },
+  {
+   "tx": "Osteosarcoma is treated with **neoadjuvant chemotherapy** before **limb-salvage surgery**, followed by **adjuvant chemotherapy** where indicated. The response is judged on the resected specimen. The degree of **tumour necrosis** is the strongest prognostic factor. Less than 90 percent necrosis indicates a poor response, whereas 90 percent or more necrosis indicates a good response and helps guide further treatment decisions.",
+   "say": "Osteosarcoma is treated with neoadjuvant chemotherapy before limb-salvage surgery, followed by adjuvant chemotherapy where indicated. The response is judged on the resected specimen. The degree of tumour necrosis is the strongest prognostic factor. Less than 90 percent necrosis indicates a poor response, whereas 90 percent or more necrosis indicates a good response and helps guide further treatment decisions.",
+   "vis": null
+  },
+  {
+   "tx": "Ewing sarcoma treatment uses the **VDC/IE** alternating regimen: vincristine, doxorubicin and cyclophosphamide alternate with ifosfamide and etoposide. Local control can be by surgery or radiotherapy. Surgery is preferred for expendable bones such as the ribs or fibula to avoid growth and secondary cancer problems. Serum LDH is measured at diagnosis for prognosis.",
+   "say": "Ewing sarcoma treatment uses the VDC/IE alternating regimen: vincristine, doxorubicin and cyclophosphamide alternate with ifosfamide and etoposide. Local control can be by surgery or radiotherapy. Surgery is preferred for expendable bones such as the ribs or fibula to avoid growth and secondary cancer problems. Serum LDH is measured at diagnosis for prognosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ewing sarcoma local control",
+     "points": [
+      "Surgery for ribs or fibula",
+      "Radiotherapy where surgery is unsafe",
+      "Avoids growth and secondary cancer issues"
+     ]
+    },
+    "right": {
+     "title": "Ewing prognosis",
+     "points": [
+      "Around 20 percent metastatic at diagnosis",
+      "Metastatic 5-year survival near 30 percent",
+      "Raised LDH is a poor marker"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Giant cell tumour of bone is a **benign but locally aggressive** tumour that usually arises at the end of long bones near the knee. **Surgical curettage** with adjuvant local treatment is the mainstay, aiming to prevent recurrence. Imaging typically shows an eccentric lytic lesion reaching the subchondral bone. Malignant transformation is uncommon but recognised, particularly after radiotherapy. **Chondrosarcoma**, by contrast, is generally managed with **wide surgical excision**, as it responds poorly to chemotherapy and radiotherapy.",
+   "say": "Giant cell tumour of bone is a benign but locally aggressive tumour, usually found at the end of long bones near the knee. Surgical curettage with adjuvant local treatment is the mainstay, aiming to prevent recurrence. Imaging typically shows an eccentric lytic lesion reaching the subchondral bone. Malignant transformation is uncommon but recognised, particularly after radiotherapy. Chondrosarcoma, by contrast, is generally managed with wide surgical excision, because it responds poorly to chemotherapy and radiotherapy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_4982a94a7090",
+  "q_aef97a581b4c",
+  "q_7f7a44736fe2"
+ ],
+ "src": [],
+ "refs": [
+  "ESMO Clinical Practice Guidelines for bone sarcomas"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 33
+ }
+}

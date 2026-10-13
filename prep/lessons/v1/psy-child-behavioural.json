@@ -1,0 +1,158 @@
+{
+ "v": 1,
+ "module": "psy-child-behavioural",
+ "subject": "psychiatry",
+ "title": "Behavioural and emotional disorders of childhood: conduct, tics, enuresis and related conditions",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Childhood behavioural disorders are grouped by the **core behaviour** involved. **Conduct disorder** is a persistent pattern in which the basic rights of others are violated or societal rules are broken, with onset before 18 years. Features include frequent lying, stealing, fire setting, physical violence, cruelty to animals and running away from home or school. Many children with conduct disorder later develop antisocial personality disorder in adulthood.",
+   "say": "Childhood behavioural disorders are grouped by the core behaviour involved. Conduct disorder is a persistent pattern in which the basic rights of others are violated or societal rules are broken, with onset before 18 years. Features include frequent lying, stealing, fire setting, physical violence, cruelty to animals and running away from home or school. Many children with conduct disorder later develop antisocial personality disorder in adulthood.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oppositional defiant disorder",
+     "points": [
+      "Defiance towards adults and authority",
+      "Deliberately annoys parents and teachers",
+      "Gross violation of social norms absent",
+      "Usually confined to the family"
+     ]
+    },
+    "right": {
+     "title": "Conduct disorder",
+     "points": [
+      "Violates rights of others",
+      "Aggression, bullying, cruelty",
+      "Stealing, lying, fire setting",
+      "Truancy and running away"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tic disorders** are sudden, rapid, recurrent, non-rhythmic movements or sounds. **Tourette syndrome** needs multiple motor tics and at least one vocal tic, with onset before 18 years and no tic-free period longer than 3 consecutive months within a year. Average onset is 3 to 9 years and males are affected more often. **Coprolalia**, the uttering of obscene words, occurs in about 10 percent of cases and is not the core feature.",
+   "say": "Tic disorders are sudden, rapid, recurrent, non-rhythmic movements or sounds. Tourette syndrome needs multiple motor tics and at least one vocal tic, with onset before 18 years and no tic-free period longer than 3 consecutive months within a year. Average onset is 3 to 9 years and males are affected more often. Coprolalia, the uttering of obscene words, occurs in about 10 percent of cases and is not the core feature.",
+   "vis": null
+  },
+  {
+   "tx": "**Nocturnal enuresis** is bedwetting in a child beyond the expected age of continence. First-line treatment is behavioural: the **bell and pad alarm** is the method of choice, with the lowest relapse rate. Fluid restriction after evening, bladder training and motivational rewards help but are inferior. Supportive psychotherapy alone is not effective for the enuresis itself.",
+   "say": "Nocturnal enuresis is bedwetting in a child beyond the expected age of continence. First-line treatment is behavioural. The bell and pad alarm is the method of choice, with the lowest relapse rate. Fluid restriction after evening, bladder training and motivational rewards help but are inferior. Supportive psychotherapy alone is not effective for the enuresis itself.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Behavioural care"
+     },
+     {
+      "id": "b",
+      "label": "Bell and pad alarm"
+     },
+     {
+      "id": "c",
+      "label": "Drug therapy"
+     },
+     {
+      "id": "d",
+      "label": "Desmopressin first"
+     },
+     {
+      "id": "e",
+      "label": "Imipramine second"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "first"
+     ],
+     [
+      "b",
+      "c",
+      "if fails"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug treatment of enuresis is reserved for significant impairment. **Desmopressin**, an antidiuretic available as intranasal spray or tablet, is the **drug of choice** and acts by reducing night urine output. **Imipramine**, a tricyclic antidepressant, is used second line but carries a risk of sudden death in children with ADHD, so it is less preferred. Anticholinergics, amphetamines and diazepam show no benefit. Relapse is common after stopping medication.",
+   "say": "Drug treatment of enuresis is reserved for significant impairment. Desmopressin, an antidiuretic available as intranasal spray or tablet, is the drug of choice and acts by reducing night urine output. Imipramine, a tricyclic antidepressant, is used second line but carries a risk of sudden death in children with ADHD, so it is less preferred. Anticholinergics, amphetamines and diazepam show no benefit. Relapse is common after stopping medication.",
+   "vis": null
+  },
+  {
+   "tx": "**Separation anxiety disorder** involves excessive distress on separation from attachment figures, while **selective mutism** is consistent failure to speak in specific social settings, such as school, despite normal speech at home. **School refusal** is avoidance of school due to emotional distress. **Pica** is persistent eating of non-nutritive substances, and **lead** poisoning is the classic associated toxicity.",
+   "say": "Separation anxiety disorder involves excessive distress on separation from attachment figures, while selective mutism is consistent failure to speak in specific social settings, such as school, despite normal speech at home. School refusal is avoidance of school due to emotional distress. Pica is persistent eating of non-nutritive substances, and lead poisoning is the classic associated toxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Core feature",
+     "Key point"
+    ],
+    "rows": [
+     [
+      "Separation anxiety",
+      "Distress away from carers",
+      "Excessive, age inappropriate"
+     ],
+     [
+      "Selective mutism",
+      "No speech in certain settings",
+      "Speaks normally at home"
+     ],
+     [
+      "School refusal",
+      "Avoids school from distress",
+      "Often linked to anxiety"
+     ],
+     [
+      "Pica",
+      "Eats non-nutritive items",
+      "Watch for lead toxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Habit disorders such as **thumb sucking**, nail biting, hair pulling and head banging are repetitive, usually benign and self-limiting, and usually settle as children grow. **Tics** are not habit disorders. Body-focused repetitive behaviours are best treated with **habit reversal therapy**, and medication such as clomipramine or SSRIs is an adjunct. Undue parental attention can worsen these habits.",
+   "say": "Habit disorders such as thumb sucking, nail biting, hair pulling and head banging are repetitive, usually benign and self-limiting, and usually settle as children grow. Tics are not habit disorders. Body-focused repetitive behaviours are best treated with habit reversal therapy, and medication such as clomipramine or SSRIs is an adjunct. Undue parental attention can worsen these habits.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "27a58e3b-ddf0-4b0a-bcb0-ef3549bc72dc",
+  "5ae60fe8-4050-4561-9565-27247bdbda62",
+  "fa611f1e-2727-42c7-a6cc-15b321b9c258"
+ ],
+ "src": [],
+ "refs": [
+  "Kaplan and Sadock's Comprehensive Textbook of Psychiatry (Sadock B, Sadock V)",
+  "DSM-5 (American Psychiatric Association)",
+  "NICE guideline on nocturnal enuresis (NICE CG111)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 65
+ }
+}

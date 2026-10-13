@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "module": "sur-metabolic-nutrition",
+ "subject": "surgery",
+ "title": "Metabolic response to injury and surgical nutrition",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "After injury, the body enters a **neuroendocrine stress response** designed to help survival. The response has an early **ebb phase**, with reduced cardiac output and low metabolic rate, followed by a **flow phase** of hypermetabolism and catabolism. Catecholamines peak within 24 to 48 hours, cortisol and glucagon rise, and insulin release is suppressed, which favours the hyperglycaemic state seen after trauma.",
+   "say": "After injury, the body enters a neuroendocrine stress response designed to help survival. The response has an early ebb phase, with reduced cardiac output and low metabolic rate, followed by a flow phase of hypermetabolism and catabolism. Catecholamines peak within 24 to 48 hours, cortisol and glucagon rise, and insulin release is suppressed, which favours the hyperglycaemic state seen after trauma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hormone",
+     "Change after injury"
+    ],
+    "rows": [
+     [
+      "Catecholamines",
+      "Rise, peak 24 to 48 hours"
+     ],
+     [
+      "Cortisol",
+      "Rises via ACTH"
+     ],
+     [
+      "Glucagon",
+      "Increased"
+     ],
+     [
+      "Insulin",
+      "Suppressed"
+     ],
+     [
+      "Thyroxine",
+      "No change"
+     ],
+     [
+      "Sex hormones",
+      "Decreased"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Protein metabolism shows a **negative nitrogen balance** because breakdown exceeds synthesis. Skeletal muscle releases alanine, which the liver uses for gluconeogenesis and for **acute-phase proteins**. Glutamine, the most abundant blood amino acid, falls after injury and sepsis. Interleukin 1 and tumour necrosis factor, also called cachectin, drive muscle wasting rather than inhibiting it.",
+   "say": "Protein metabolism shows a negative nitrogen balance because breakdown exceeds synthesis. Skeletal muscle releases alanine, which the liver uses for gluconeogenesis and for acute-phase proteins. Glutamine, the most abundant blood amino acid, falls after injury and sepsis. Interleukin 1 and tumour necrosis factor, also called cachectin, drive muscle wasting rather than inhibiting it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trauma protein changes",
+     "points": [
+      "Muscle protein breakdown increased",
+      "Urinary nitrogen loss increased",
+      "Hepatic acute-phase protein synthesis increased",
+      "Liver gluconeogenesis increased"
+     ]
+    },
+    "right": {
+     "title": "Cytokine effects",
+     "points": [
+      "Interleukin 1 promotes muscle breakdown",
+      "Tumour necrosis factor is catabolic",
+      "Glutamine consumed by lymphocytes and fibroblasts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Enteral feeding is the preferred route whenever the **gut is working** and can be safely accessed. It maintains gut barrier integrity, reduces bacterial translocation and lowers pro-inflammatory cytokines. Oral sip feeding, nasogastric tubes, and surgical or percutaneous gastrostomy are enteral options. In a comatose patient, a nasojejunal tube or a **feeding jejunostomy** reduces the risk of vomiting and aspiration.",
+   "say": "Enteral feeding is the preferred route whenever the gut is working and can be safely accessed. It maintains gut barrier integrity, reduces bacterial translocation and lowers pro-inflammatory cytokines. Oral sip feeding, nasogastric tubes, and surgical or percutaneous gastrostomy are enteral options. In a comatose patient, a nasojejunal tube or a feeding jejunostomy reduces the risk of vomiting and aspiration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Gut working?"
+     },
+     {
+      "id": "b",
+      "label": "Enteral route"
+     },
+     {
+      "id": "c",
+      "label": "Gut not usable"
+     },
+     {
+      "id": "d",
+      "label": "Parenteral route"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "yes"
+     ],
+     [
+      "a",
+      "c",
+      "no"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enteral feeding is contraindicated in **small bowel obstruction or ileus**, severe diarrhoea, proximal small intestinal fistula and severe pancreatitis. Distal low-output fistulas under 200 ml per day are a recognised indication. In inflammatory bowel disease with poor mucosa, parenteral feeding may be needed. Parenteral nutrition is indicated after massive small bowel resection, when enteral needs cannot be met.",
+   "say": "Enteral feeding is contraindicated in small bowel obstruction or ileus, severe diarrhoea, proximal small intestinal fistula and severe pancreatitis. Distal low-output fistulas under 200 ml per day are a recognised indication. In inflammatory bowel disease with poor mucosa, parenteral feeding may be needed. Parenteral nutrition is indicated after massive small bowel resection, when enteral needs cannot be met.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "46e4af12-7b7b-4b8c-8b9f-01f3712aadfa",
+  "cd85d612-76c6-40df-89a5-64507a152dcf",
+  "03af2026-a969-449c-aa06-0fea1ef3ac2a"
+ ],
+ "src": [],
+ "refs": [
+  "Bailey and Love's Short Practice of Surgery"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 130
+ }
+}

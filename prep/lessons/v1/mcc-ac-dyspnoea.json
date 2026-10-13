@@ -1,0 +1,134 @@
+{
+ "v": 1,
+ "module": "mcc-ac-dyspnoea",
+ "subject": "mcc-acute-care",
+ "title": "Acute dyspnoea: a practical approach",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute dyspnoea is **breathlessness** that develops quickly and needs prompt assessment. The first task is to identify the likely cause from the history, examination and simple investigations. The main causes in the emergency setting are **acute decompensated heart failure**, **acute severe asthma**, **acute-on-chronic COPD**, **anaphylaxis** and **pulmonary embolism**. Each has a distinct pattern and a distinct first treatment.",
+   "say": "Acute dyspnoea means breathlessness that develops quickly and needs prompt assessment. The first task is to identify the likely cause from the history, examination and simple investigations. The main causes in the emergency setting are acute decompensated heart failure, acute severe asthma, acute-on-chronic COPD, anaphylaxis and pulmonary embolism. Each has a distinct pattern and a distinct first treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause",
+     "Key clues",
+     "First step"
+    ],
+    "rows": [
+     [
+      "Decompensated heart failure",
+      "Orthopnoea, crackles, raised JVP, oedema",
+      "IV loop diuretic"
+     ],
+     [
+      "Acute severe asthma",
+      "Short phrases, wheeze, poor air entry",
+      "Nebulised salbutamol and ipratropium"
+     ],
+     [
+      "Acute-on-chronic COPD",
+      "Drowsiness, hypercapnia, productive cough",
+      "Noninvasive ventilation"
+     ],
+     [
+      "Anaphylaxis",
+      "Urticaria, stridor, hypotension after trigger",
+      "IM adrenaline"
+     ],
+     [
+      "Pulmonary embolism",
+      "Pleuritic pain, tachycardia, clot on CT",
+      "Therapeutic anticoagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **acute decompensated heart failure**, raised left-sided filling pressures cause pulmonary venous congestion. Intravenous **loop diuretics** such as furosemide promote natriuresis, reduce preload and relieve breathlessness. Renal function and electrolytes must be monitored to avoid overdiuresis and hypokalaemia. Ramipril and bisoprolol are generally continued unless the patient is hypotensive or shocked.",
+   "say": "In acute decompensated heart failure, raised left sided filling pressures cause pulmonary venous congestion. Intravenous loop diuretics such as furosemide promote natriuresis, reduce preload and relieve breathlessness. Renal function and electrolytes must be monitored to avoid overdiuresis and hypokalaemia. Ramipril and bisoprolol are generally continued unless the patient is hypotensive or shocked.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Congestion"
+     },
+     {
+      "id": "b",
+      "label": "IV loop diuretic"
+     },
+     {
+      "id": "c",
+      "label": "Natriuresis"
+     },
+     {
+      "id": "d",
+      "label": "Reduced preload"
+     },
+     {
+      "id": "e",
+      "label": "Relief of dyspnoea"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anaphylaxis** presents with urticaria, angioedema, stridor, wheeze, hypotension and tachycardia within minutes of an exposure. The first treatment is **intramuscular adrenaline** into the anterolateral thigh, repeated at intervals if needed. Adrenaline reverses vasodilation, capillary leak and bronchospasm through alpha and beta receptors. Antihistamines and steroids are adjuncts and do not replace adrenaline. Absence of a prior reaction does not exclude anaphylaxis.",
+   "say": "Anaphylaxis presents with urticaria, angioedema, stridor, wheeze, hypotension and tachycardia within minutes of an exposure. The first treatment is intramuscular adrenaline into the anterolateral thigh, repeated at intervals if needed. Adrenaline reverses vasodilation, capillary leak and bronchospasm through alpha and beta receptors. Antihistamines and steroids are adjuncts and do not replace adrenaline. Absence of a prior reaction does not exclude anaphylaxis.",
+   "vis": null
+  },
+  {
+   "tx": "**Pulmonary embolism** with haemodynamic stability is treated with immediate **therapeutic anticoagulation**, typically low molecular weight heparin, which acts within minutes. Warfarin or a direct oral anticoagulant is started and overlapped with parenteral therapy. Raised troponin signals right ventricular strain and raises risk, but does not by itself justify thrombolysis in a stable patient. Systemic thrombolysis is reserved for haemodynamic collapse. Refractory breathlessness in advanced cancer is managed with low-dose opioids, a bowel regimen and monitoring for sedation.",
+   "say": "Pulmonary embolism with haemodynamic stability is treated with immediate therapeutic anticoagulation, typically low molecular weight heparin, which acts within minutes. Warfarin or a direct oral anticoagulant is started and overlapped with parenteral therapy. Raised troponin signals right ventricular strain and raises risk, but does not by itself justify thrombolysis in a stable patient. Systemic thrombolysis is reserved for haemodynamic collapse. Refractory breathlessness in advanced cancer is managed with low-dose opioids, a bowel regimen and monitoring for sedation.",
+   "vis": null
+  },
+  {
+   "tx": "Some causes of breathlessness are immediately life-threatening and need procedures rather than drugs. A **tension pneumothorax** causes a deviated trachea, absent breath sounds, hyperresonance and raised jugular venous pressure with shock. **Immediate needle decompression** of the affected side comes before imaging. Non-invasive ventilation and fluid boluses are wrong here. In advanced cancer, refractory breathlessness can be treated with low-dose opioids plus a bowel regimen, since opioids reduce the distress of breathlessness.",
+   "say": "Some causes of breathlessness are immediately life threatening and need procedures rather than drugs. A tension pneumothorax causes a deviated trachea, absent breath sounds, hyperresonance and raised jugular venous pressure with shock. Immediate needle decompression of the affected side comes before imaging. Non-invasive ventilation and fluid boluses are wrong here. In advanced cancer, refractory breathlessness can be treated with low-dose opioids plus a bowel regimen, since opioids reduce the distress of breathlessness.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "NICE guideline on acute heart failure",
+  "NICE guideline on asthma: diagnosis, monitoring and management",
+  "NICE guideline on pulmonary embolism diagnosis",
+  "British Thoracic Society guideline on emergency oxygen use",
+  "Harrison's Principles of Internal Medicine"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 3,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

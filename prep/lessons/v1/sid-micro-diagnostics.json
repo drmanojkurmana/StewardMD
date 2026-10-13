@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "module": "sid-micro-diagnostics",
+ "subject": "ss-infectious-diseases",
+ "title": "Microbiological diagnostics: specimen collection and key biomarkers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Good diagnosis starts before the lab. Collect **blood cultures** before antibiotics, with adequate volume, usually 8 to 10 mL per bottle in adults, because low volume markedly lowers yield. Label each set with site and time. Specimen quality decides whether a result means anything.",
+   "say": "Good diagnosis starts before the laboratory. Collect blood cultures before antibiotics, with adequate volume, usually eight to ten millilitres per bottle in adults, because low volume markedly lowers yield. Label each set with the site and time. Specimen quality decides whether a result means anything.",
+   "vis": null
+  },
+  {
+   "tx": "Urine culture collection depends on the clinical setting. A **midstream specimen** from a continent adult woman should contain at least 3 mL, and wiping the genital area beforehand does not measurably lower contamination. When an **indwelling catheter** has been in place beyond 14 days, swap it out before sampling. Drainage bag samples are unreliable, so do not use them. If transport is delayed, keep the tube chilled between 2 and 8 degrees Celsius.",
+   "say": "Urine culture collection depends on the clinical setting. A midstream specimen from a continent adult woman should contain at least three millilitres, and wiping the genital area beforehand does not measurably lower contamination. When an indwelling catheter has been in place beyond fourteen days, swap it out before sampling. Drainage bag samples are unreliable, so do not use them. If transport is delayed, keep the tube chilled between two and eight degrees Celsius.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Preferred sample",
+     "Avoid"
+    ],
+    "rows": [
+     [
+      "Continent adult woman",
+      "Midstream void, 3 mL minimum",
+      "Relying on wiping alone"
+     ],
+     [
+      "Catheter over 14 days",
+      "Replace catheter, then collect",
+      "Drainage bag sampling"
+     ],
+     [
+      "Infant with fever",
+      "Catheter or suprapubic aspirate",
+      "Bag specimen"
+     ],
+     [
+      "Pyonephrosis",
+      "Renal pelvis at first access",
+      "Sampling after irrigation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Identification has moved fast. **MALDI-TOF** mass spectrometry identifies uropathogens within about 60 minutes from colonies, and **multiplex PCR** panels give rapid pathogen and resistance markers. Chromogenic media help separate mixed growth. Procalcitonin, however, is a biomarker, not a culture substitute. Use it alongside, not instead of, cultures.",
+   "say": "Identification has moved fast. MALDI-TOF mass spectrometry identifies uropathogens within about sixty minutes from colonies, and multiplex PCR panels give rapid pathogen and resistance markers. Chromogenic media help separate mixed growth. Procalcitonin, however, is a biomarker, not a culture substitute. Use it alongside cultures, not instead of them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conventional culture",
+     "points": [
+      "24 to 48 hour incubation",
+      "Gives full susceptibility",
+      "Shows mixed growth"
+     ]
+    },
+    "right": {
+     "title": "Rapid molecular and MALDI",
+     "points": [
+      "Results in about 1 hour",
+      "Detects resistance genes",
+      "Still needs culture for susceptibility"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During serial monitoring, **procalcitonin** typically halves roughly every 24 hours once the infection is under control. Clinicians may consider stopping **antibiotics** when levels fall below 0.5 ng/mL or drop by about 80 percent from the **peak value**. High-dose **biotin** can distort immunoassay results, so it should be avoided for about three days before sampling. If the patient is unstable, repeat testing within six to 24 hours.",
+   "say": "During serial monitoring, procalcitonin typically halves roughly every twenty four hours once the infection is under control. Clinicians may consider stopping antibiotics when levels fall below zero point five nanograms per millilitre or drop by about eighty percent from the peak value. High dose biotin can distort immunoassay results, so it should be avoided for about three days before sampling. If the patient is unstable, repeat testing within six to twenty four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peak procalcitonin"
+     },
+     {
+      "id": "b",
+      "label": "Halves about every 24 h"
+     },
+     {
+      "id": "c",
+      "label": "Below 0.5 ng/mL or 80% fall"
+     },
+     {
+      "id": "d",
+      "label": "Consider stopping antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fungal and invasive infections need specialised assays. **Galactomannan** and **beta-D-glucan** support diagnosis of invasive aspergillosis and candidiasis, respectively, but both can be positive from other causes, so interpret them with clinical context and repeat testing. **Ribosomal RNA gene sequencing** and **metagenomic sequencing** act as second-line tools when cultures are negative. Serology needs paired samples to show a rise in titre.",
+   "say": "Fungal and invasive infections need specialised assays. Galactomannan and beta-D-glucan support diagnosis of invasive aspergillosis and candidiasis, respectively, but both can be positive from other causes, so interpret them with clinical context and repeat testing. Ribosomal RNA gene sequencing and metagenomic sequencing act as second-line tools when cultures are negative. Serology needs paired samples to show a rise in titre.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_377b5f7767fb",
+  "q_3e37fe6fdf93",
+  "q_4930fbb72b5d"
+ ],
+ "src": [],
+ "refs": [
+  "Chapter 4 in Medical Microbiology (Murray et al.)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 3,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 49
+ }
+}

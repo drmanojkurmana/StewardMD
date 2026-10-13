@@ -1,0 +1,100 @@
+{
+ "v": 1,
+ "module": "spu-transplant-rehab",
+ "subject": "ss-pulmonology",
+ "title": "Lung transplantation and pulmonary rehabilitation: referral, allocation and complications",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Lung transplantation is considered when a patient with end-stage lung disease has a **high predicted mortality** without surgery. Global practice uses a threshold of roughly greater than 50 percent risk of death within 2 years. Referral is also prompted by a **BODE index above 7**, a six minute walk distance below 350 metres, or NYHA class III or IV symptoms despite optimised therapy.",
+   "say": "Lung transplantation is considered when a patient with end-stage lung disease has a high predicted mortality without surgery. Global practice uses a threshold of roughly greater than 50 percent risk of death within 2 years. Referral is also prompted by a BODE index above 7, a six minute walk distance below 350 metres, or NYHA class III or IV symptoms despite optimised therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trigger",
+     "Threshold"
+    ],
+    "rows": [
+     [
+      "Predicted mortality",
+      "Over 50 percent within 2 years"
+     ],
+     [
+      "BODE index",
+      "Above 7"
+     ],
+     [
+      "Six minute walk",
+      "Below 350 metres"
+     ],
+     [
+      "NYHA class",
+      "III or IV despite therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **lung allocation score** ranks candidates for donor lungs. It is derived from the predicted survival benefit, meaning the difference between one year survival with transplant and one year survival without it. Candidates with the greatest expected benefit receive higher priority. In idiopathic pulmonary fibrosis, a fall in FVC of more than 10 percent over 6 months is a trigger for listing.",
+   "say": "The lung allocation score ranks candidates for donor lungs. It is derived from the predicted survival benefit, meaning the difference between one year survival with transplant and one year survival without it. Candidates with the greatest expected benefit receive higher priority. In idiopathic pulmonary fibrosis, a fall in FVC of more than 10 percent over 6 months is a trigger for listing.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary graft dysfunction** is an early form of lung injury that appears soon after transplantation and is driven by ischaemia reperfusion. **Ex vivo lung perfusion** keeps donor lungs warm and perfused during assessment, which may reduce this reperfusion damage. Later, **chronic lung allograft dysfunction** develops, and **bronchiolitis obliterans syndrome** is its main phenotype, causing fixed airflow obstruction that restricts long-term survival.",
+   "say": "Primary graft dysfunction is an early lung injury that appears soon after transplant, driven by blood flow returning to tissue that was deprived of it. Ex vivo lung perfusion keeps donor lungs warm and perfused while they are assessed, which may lessen that reperfusion harm. Later on, chronic lung allograft dysfunction can emerge. Its main form is bronchiolitis obliterans syndrome, which produces fixed airflow blockage and is a major barrier to surviving long term.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early problem",
+     "points": [
+      "Ischaemia reperfusion injury",
+      "Appears soon after transplant",
+      "Ex vivo perfusion may reduce harm"
+     ]
+    },
+    "right": {
+     "title": "Late problem",
+     "points": [
+      "Bronchiolitis obliterans syndrome",
+      "Fixed airflow obstruction",
+      "Limits long-term survival"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bronchiolitis obliterans syndrome shows fixed obstruction on spirometry. Expiratory CT typically reveals **mosaic attenuation** from air trapping, and chest radiographs may look hyperlucent. Fixed obstruction does not reverse with standard therapy, so exposure control and early detection matter most. Once established, the loss of airflow is usually permanent.",
+   "say": "Bronchiolitis obliterans syndrome shows fixed obstruction on spirometry. Expiratory CT typically reveals mosaic attenuation from air trapping, and chest radiographs may look hyperlucent. Fixed obstruction does not reverse with standard therapy, so exposure control and early detection matter most. Once established, the loss of airflow is usually permanent.",
+   "vis": null
+  },
+  {
+   "tx": "**Pulmonary rehabilitation** improves exercise capacity, breathlessness and quality of life in chronic lung disease. Programmes combine **supervised exercise training**, education and psychosocial support, and they are recommended before and after surgery. Preoperative evaluation checks cardiac function, nutrition and fitness. Rehabilitation is a core part of care both before listing and during recovery.",
+   "say": "Pulmonary rehabilitation improves exercise capacity, breathlessness and quality of life in chronic lung disease. Programmes combine supervised exercise training, education and psychosocial support, and they are recommended before and after surgery. Preoperative evaluation checks cardiac function, nutrition and fitness. Rehabilitation is a core part of care both before listing and during recovery.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_1ed2d5febee3",
+  "q_6c7f13ff8ba5",
+  "q_5bea11ea2d71"
+ ],
+ "src": [],
+ "refs": [
+  "ISHLT Guidelines for the Evaluation and Care of Lung Transplant Candidates"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 36
+ }
+}

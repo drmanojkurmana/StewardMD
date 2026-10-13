@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-maternal-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Maternal physiological changes in pregnancy",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "**Cardiac output** starts rising from about the fifth week and peaks near 30 to 34 weeks, roughly 40 to 50 percent above baseline. Stroke volume and heart rate both contribute. **Systemic vascular resistance** falls, so blood pressure drops in the second trimester. Output is lowest when the woman lies supine and highest in the left lateral position.",
+   "say": "Cardiac output begins to rise around the fifth week and peaks near thirty to thirty four weeks, about forty to fifty percent above baseline. Systemic vascular resistance falls, so blood pressure drops. Output is lowest when lying flat on the back and highest in the left lateral position.",
+   "vis": null
+  },
+  {
+   "tx": "**Supine hypotension syndrome** occurs when the gravid uterus compresses the inferior vena cava in late pregnancy. Most women open collateral veins and cope. In a minority, venous return falls, causing faintness, tachycardia and hypotension. Turning to the left lateral position restores pressure quickly. The classic exam vignette is a full term woman who feels faint lying supine and well when she turns on her side.",
+   "say": "Supine hypotension syndrome happens when the enlarged uterus compresses the inferior vena cava in late pregnancy. Most women develop collateral circulation and are fine. In some, venous return falls, causing faintness, tachycardia and low blood pressure. Turning to the left lateral position usually restores normal pressure quickly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supine position"
+     },
+     {
+      "id": "b",
+      "label": "Uterus compresses IVC"
+     },
+     {
+      "id": "c",
+      "label": "Venous return falls"
+     },
+     {
+      "id": "d",
+      "label": "Faintness and hypotension"
+     },
+     {
+      "id": "e",
+      "label": "Turn to left lateral"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy is a **hypercoagulable state**. Fibrinogen rises by about 50 percent, and factors VII, VIII, IX and X increase, while factors XI and XIII fall. Fibrinolysis is reduced. Platelets stay normal or fall slightly. Clotting time is unchanged. All three elements of Virchow's triad are present, which explains the higher thromboembolic risk. Coagulation values return to normal about two weeks postpartum.",
+   "say": "Pregnancy is a hypercoagulable state. Fibrinogen rises by about fifty percent, and several clotting factors increase, while factors eleven and thirteen fall. Fibrinolysis is reduced and platelets stay normal or fall slightly. Clotting time is unchanged. Virchow's triad is fully present, which raises thromboembolic risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Factor or process",
+     "Pregnancy change"
+    ],
+    "rows": [
+     [
+      "Fibrinogen",
+      "Rises about 50 percent"
+     ],
+     [
+      "Factors VII, VIII, IX, X",
+      "Increase"
+     ],
+     [
+      "Factors XI and XIII",
+      "Decrease"
+     ],
+     [
+      "Fibrinolytic activity",
+      "Reduced"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal plasma flow** and **GFR** rise by roughly 50 to 60 percent at term. Serum urea and creatinine fall. The filtered load of glucose can exceed tubular reabsorption, so the **renal threshold** for glucose drops. Mild **glycosuria** is therefore common and usually harmless. However, glycosuria on one occasion before 20 weeks, or on two or more occasions, warrants a glucose tolerance test. Respiratory minute ventilation rises through tidal volume, with respiratory rate unchanged, producing a mild respiratory alkalosis.",
+   "say": "Renal plasma flow and glomerular filtration rate rise by about fifty to sixty percent at term, and serum urea and creatinine fall. Glucose may spill into urine because the renal threshold drops. Mild glycosuria is common, but glycosuria before twenty weeks on one occasion, or on two or more occasions, needs a glucose tolerance test. Tidal volume rises, causing a mild respiratory alkalosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Increases in pregnancy",
+     "points": [
+      "Renal plasma flow",
+      "GFR",
+      "Tidal volume",
+      "Minute ventilation"
+     ]
+    },
+    "right": {
+     "title": "Decreases in pregnancy",
+     "points": [
+      "Serum urea and creatinine",
+      "Plasma osmolality",
+      "Residual volume",
+      "Expiratory reserve volume"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Insulin resistance** rises in the second half of pregnancy. The main cause is **human placental lactogen**, with contributions from oestrogen, progesterone, cortisol and prolactin. Insulin secretion rises to compensate. This is the basis of gestational diabetes screening. Separately, **hyperemesis gravidarum** is severe vomiting that can cause dehydration and electrolyte loss. Thiamine should be given before glucose, because it can precipitate **Wernicke encephalopathy** in a deficient patient.",
+   "say": "Insulin resistance rises in later pregnancy, mainly due to human placental lactogen, with help from oestrogen, progesterone, cortisol and prolactin. Insulin secretion rises to compensate. In hyperemesis gravidarum, severe vomiting can cause dehydration. Thiamine should be given before glucose to prevent Wernicke encephalopathy.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "1948a207-c1fc-4849-8a0c-4170194d331f",
+  "2c8b4eb9-743d-4d34-afa8-bac38347065d",
+  "d90f9327-473f-435d-9995-bc3630d53710"
+ ],
+ "src": [],
+ "refs": [
+  "Williams Obstetrics (Cunningham FG et al., eds)",
+  "D.C. Dutta's Textbook of Obstetrics",
+  "CURRENT Diagnosis and Treatment: Obstetrics and Gynecology (DeCherney AH et al., eds)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 245
+ }
+}

@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "rad-gi",
+ "subject": "radiology",
+ "title": "Gastrointestinal Radiology: Barium Studies and Key Signs",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Barium studies remain core tools in GI radiology. A **barium swallow** images the oral cavity up to the fundus of the stomach. It is used for dysphagia, motility disorders, Zenker's diverticulum and assessing sites of oesophageal perforation. It is contraindicated in tracheo-oesophageal fistula and oesophageal perforation.",
+   "say": "Barium studies remain core tools in gastrointestinal radiology. A barium swallow images the oral cavity up to the fundus of the stomach. It is used for dysphagia, motility disorders, Zenker's diverticulum and assessing sites of oesophageal perforation. It is contraindicated in tracheo-oesophageal fistula and oesophageal perforation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Study",
+     "Region imaged",
+     "Typical use"
+    ],
+    "rows": [
+     [
+      "Barium swallow",
+      "Mouth to gastric fundus",
+      "Dysphagia, motility, Zenker's"
+     ],
+     [
+      "Barium meal and follow through",
+      "Stomach to small bowel",
+      "Small bowel disease"
+     ],
+     [
+      "Barium enema",
+      "Colon",
+      "Colonic lesions, intussusception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oesophageal signs help narrow the differential on a **barium swallow**. A **bird beak** deformity, with a tapered distal narrowing, fits **achalasia**. A **rat tail** appearance, with an irregular shouldered stricture, suggests **carcinoma**. Multiple tertiary contractions giving a **corkscrew** outline point to **diffuse oesophageal spasm**.",
+   "say": "Oesophageal signs help you narrow the differential on a barium swallow. A bird beak shape, tapering at the lower end, fits achalasia. A rat tail, with an irregular shouldered narrowing, suggests carcinoma. Multiple tertiary contractions giving a corkscrew outline point to diffuse oesophageal spasm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Likely diagnosis"
+    ],
+    "rows": [
+     [
+      "Bird beak",
+      "Achalasia"
+     ],
+     [
+      "Rat tail",
+      "Carcinoma of the oesophagus"
+     ],
+     [
+      "Corkscrew",
+      "Diffuse oesophageal spasm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pneumoperitoneum is a surgical emergency. A **Rigler sign** shows both walls of a bowel loop outlined by free gas, and the **football sign** shows a large central gas collection. The best view is an erect chest radiograph, or a left lateral decubitus film if the patient cannot sit, held for about 10 minutes. CT is the most sensitive test.",
+   "say": "Pneumoperitoneum is a surgical emergency. A Rigler sign shows both walls of a bowel loop outlined by free gas, and the football sign shows a large central gas collection. The best view is an erect chest radiograph, or a left lateral decubitus film if the patient cannot sit, held for about ten minutes. CT is the most sensitive test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected perforation"
+     },
+     {
+      "id": "b",
+      "label": "Erect chest film"
+     },
+     {
+      "id": "c",
+      "label": "Left lateral decubitus"
+     },
+     {
+      "id": "d",
+      "label": "CT if equivocal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "if unfit to sit"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gastric ulcers are judged on barium studies. A benign ulcer shows a **Hampton line**, a thin lucent line at the neck, and a projection beyond the lumen. A malignant ulcer shows a **Carman meniscus** sign, an irregular lentiform inner margin, and often lies in the fundus or proximal greater curvature. Two or more benign features support a confident diagnosis.",
+   "say": "Gastric ulcers are judged on barium studies. A benign ulcer shows a Hampton line, a thin lucent line at the neck, and a projection beyond the lumen. A malignant ulcer shows a Carman meniscus sign, an irregular lentiform inner margin, and often lies in the fundus or proximal greater curvature. Two or more benign features support a confident diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign ulcer",
+     "points": [
+      "Hampton line",
+      "Projection beyond lumen",
+      "Radiating rugal folds",
+      "Healing on repeat study"
+     ]
+    },
+    "right": {
+     "title": "Malignant ulcer",
+     "points": [
+      "Carman meniscus sign",
+      "Fundus or proximal greater curvature",
+      "Loss of mucosal pattern",
+      "Incomplete healing"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "fe55d2b4-ac59-4735-991b-168c95012355",
+  "9d6f27f8-6ede-4dd5-8c20-2701e8e8db82",
+  "fe1b26c0-61ae-40bf-83f6-28f30a1ee3c2"
+ ],
+ "src": [],
+ "refs": [
+  "Grainger and Allison's Diagnostic Radiology (Adam, Dixon, Gilliland, Vaughan)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 356
+ }
+}

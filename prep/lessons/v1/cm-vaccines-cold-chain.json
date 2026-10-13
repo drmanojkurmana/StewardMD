@@ -1,0 +1,97 @@
+{
+ "v": 1,
+ "module": "cm-vaccines-cold-chain",
+ "subject": "community-medicine",
+ "title": "Vaccines, cold chain and AEFI",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Vaccines are classified by how they are made. **Live attenuated** vaccines use weakened living organisms, such as BCG, OPV, measles, MMR and yellow fever 17D. **Killed** or inactivated vaccines use organisms destroyed by heat or chemicals, such as Hepatitis A, rabies, pertussis and IPV. **Toxoids**, such as tetanus and diphtheria, use inactivated toxins. Subunit and conjugate vaccines use only part of the organism, such as HBsAg in Hepatitis B vaccine.",
+   "say": "Vaccines are classified by how they are made. Live attenuated vaccines use weakened living organisms, such as BCG, OPV, measles, MMR and yellow fever 17D. Killed or inactivated vaccines use organisms destroyed by heat or chemicals, such as Hepatitis A, rabies, pertussis and IPV. Toxoids, such as tetanus and diphtheria, use inactivated toxins. Subunit and conjugate vaccines use only part of the organism, such as HBsAg in Hepatitis B vaccine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Live attenuated",
+      "BCG, OPV, MMR, yellow fever"
+     ],
+     [
+      "Killed",
+      "Hepatitis A, rabies, IPV"
+     ],
+     [
+      "Toxoid",
+      "Tetanus, diphtheria"
+     ],
+     [
+      "Subunit",
+      "Hepatitis B, Vi polysaccharide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **open vial policy** lets partly used multidose vials of qualifying UIP vaccines be reused for up to 28 days. Applicable vaccines include OPV, pentavalent, DPT, TT, Hepatitis B, IPV and PCV. BCG, measles, MR, JE and rotavirus are not applicable. Conditions include an unexpired vial, correct storage, a sterile septum and a usable **VVM** stage. The vaccine vial monitor shows cumulative heat exposure.",
+   "say": "The open vial policy lets partly used multidose vials of qualifying UIP vaccines be reused for up to 28 days. Applicable vaccines include OPV, pentavalent, DPT, TT, Hepatitis B, IPV and PCV. BCG, measles, MR, JE and rotavirus are not applicable. Conditions include an unexpired vial, correct storage, a sterile septum and a usable VVM stage. The vaccine vial monitor shows cumulative heat exposure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Open vial applies",
+     "points": [
+      "OPV, pentavalent, DPT",
+      "TT, Hepatitis B, IPV, PCV",
+      "Up to 28 days if conditions met"
+     ]
+    },
+    "right": {
+     "title": "Open vial does not apply",
+     "points": [
+      "BCG, measles, MR, JE",
+      "Rotavirus vaccine",
+      "Reconstituted UIP vaccines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adverse events following immunisation, or **AEFI**, are any untoward medical events after vaccination. **Toxic shock syndrome** is linked to measles vaccine when the vial is contaminated or reused on the same or next day, and it should not be used beyond 4 hours of reconstitution. Symptoms are severe watery diarrhoea, vomiting and high fever, and it can be fatal within 48 hours. It is preventable and reflects poor immunisation quality.",
+   "say": "Adverse events following immunisation, or AEFI, are any untoward medical events after vaccination. Toxic shock syndrome is linked to measles vaccine when the vial is contaminated or reused on the same or next day, and it should not be used beyond 4 hours of reconstitution. Symptoms are severe watery diarrhoea, vomiting and high fever, and it can be fatal within 48 hours. It is preventable and reflects poor immunisation quality.",
+   "vis": null
+  },
+  {
+   "tx": "Measles vaccine is a freeze dried, thermolabile **live attenuated** vaccine given subcutaneously from 9 months. After reconstitution it is stored in the dark at 2 to 8 degrees and used within 4 hours. BCG is given intradermally, with diluent normal saline rather than distilled water. Reconstituted BCG is used within 3 hours. Yellow fever 17D is given subcutaneously as a single dose, with revaccination every 10 years.",
+   "say": "Measles vaccine is a freeze dried, thermolabile live attenuated vaccine given subcutaneously from 9 months. After reconstitution it is stored in the dark at 2 to 8 degrees and used within 4 hours. BCG is given intradermally, with diluent normal saline rather than distilled water. Reconstituted BCG is used within 3 hours. Yellow fever 17D is given subcutaneously as a single dose, with revaccination every 10 years.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "76c4ccfc-f326-4098-9286-dfaa885137b0",
+  "df7bac3d-1e76-42a8-a85d-92738b1f231b",
+  "3c0423f7-f6c7-4b6c-9766-0b6efff5dd83"
+ ],
+ "src": [],
+ "refs": [
+  "Park's Textbook of Preventive and Social Medicine",
+  "Universal Immunization Programme, Government of India operational guidelines",
+  "WHO Global Advisory Committee on Vaccine Safety"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 246
+ }
+}

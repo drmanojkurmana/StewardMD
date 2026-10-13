@@ -1,0 +1,128 @@
+{
+ "v": 1,
+ "module": "mcc-pb-grief",
+ "subject": "mcc-professional-behaviours",
+ "title": "Grief and bereavement: recognising normal grief, prolonged grief and medical mimics",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Most bereaved people grieve in a way that eases over months, with **yearning**, sadness, sleep disturbance and poor appetite gradually settling with social support. Grief becomes a concern when it is intense, persistent and impairing. Clinicians should first ask how long the grief has lasted and how much it limits work, sleep and relationships.",
+   "say": "Most bereaved people grieve in a way that eases over months, with yearning, sadness, sleep disturbance and poor appetite gradually settling with social support. Grief becomes a concern when it is intense, persistent and impairing. Clinicians should first ask how long the grief has lasted and how much it limits work, sleep and relationships.",
+   "vis": null
+  },
+  {
+   "tx": "**Prolonged grief disorder** is a persistent, impairing grief response that does not ease with time. Core features include intense yearning, preoccupation with the death and avoidance of reminders, lasting more than a year after the loss. It is distinct from major depression, although the two can coexist.",
+   "say": "Prolonged grief disorder is a persistent, impairing grief response that does not ease with time. Core features include intense yearning, preoccupation with the death and avoidance of reminders, lasting more than a year after the loss. It is distinct from major depression, although the two can coexist.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Normal grief",
+     "Prolonged grief disorder"
+    ],
+    "rows": [
+     [
+      "Duration",
+      "Eases over months",
+      "Persists beyond one year"
+     ],
+     [
+      "Yearning",
+      "Fluctuates and softens",
+      "Intense and constant"
+     ],
+     [
+      "Avoidance",
+      "Brief and situational",
+      "Marked, blocks daily life"
+     ],
+     [
+      "Function",
+      "Largely preserved",
+      "Work and social life impaired"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before attributing symptoms to grief, exclude **medical causes**. Fatigue, weight loss, pallor, low mood or poor concentration after a bereavement may reflect anaemia, hypothyroidism or other illness. Check haemoglobin, thyroid function and renal function, and look for an unexplained cause of weight loss in older adults.",
+   "say": "Before attributing symptoms to grief, exclude medical causes. Fatigue, weight loss, pallor, low mood or poor concentration after a bereavement may reflect anaemia, hypothyroidism or other illness. Check haemoglobin, thyroid function and renal function, and look for an unexplained cause of weight loss in older adults.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bereaved with low mood or fatigue"
+     },
+     {
+      "id": "b",
+      "label": "Examine and test"
+     },
+     {
+      "id": "c",
+      "label": "Medical cause found"
+     },
+     {
+      "id": "d",
+      "label": "Treat cause and reassess mood"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Grief-related **insomnia** and low appetite in older adults call for caution with sedatives. Benzodiazepines and Z-drugs such as zopiclone cause sedation, impaired balance and cognitive impairment, raising falls and fracture risk. Reduced renal function, alcohol and nocturnal unsteadiness magnify these hazards. Prefer sleep measures and psychological support.",
+   "say": "Grief-related insomnia and low appetite in older adults call for caution with sedatives. Benzodiazepines and Z-drugs such as zopiclone cause sedation, impaired balance and cognitive impairment, raising falls and fracture risk. Reduced renal function, alcohol and nocturnal unsteadiness magnify these hazards. Prefer sleep measures and psychological support.",
+   "vis": null
+  },
+  {
+   "tx": "Bereavement after **suicide** carries raised risk and needs continuing safety screening, even when the patient denies current thoughts. Culturally meaningful mourning, such as involving family and Elders, reduces isolation, a key protective factor. Grief talk should not be deferred until screening is complete.",
+   "say": "Bereavement after suicide carries raised risk and needs continuing safety screening, even when the patient denies current thoughts. Culturally meaningful mourning, such as involving family and Elders, reduces isolation, a key protective factor. Grief talk should not be deferred until screening is complete.",
+   "vis": null
+  },
+  {
+   "tx": "Sudden death of a relative at a young age can be the first sign of an inherited cardiac condition, and bereaved families may present with palpitations, fainting or anxiety. Look for a **long QT interval** on the ECG and review the family history for unexplained deaths. Refer for specialist cardiology assessment and offer **family screening**, because first-degree relatives share the inherited risk.",
+   "say": "Sudden death of a relative at a young age can be the first sign of an inherited cardiac condition, and bereaved families may present with palpitations, fainting or anxiety. Look for a long QT interval on the ECG and review the family history for unexplained deaths. Refer for specialist cardiology assessment and offer family screening, because first-degree relatives share the inherited risk.",
+   "vis": null
+  },
+  {
+   "tx": "Most bereaved people do not need medication. Begin with **supportive counselling** and a scheduled review, watching how their grief settles over time. Reserve **grief-focused psychotherapy** for those with **prolonged grief disorder**, and consider antidepressants only when a **major depressive episode** is clearly established. Always screen for **suicidal thoughts** and record a clear follow-up plan.",
+   "say": "Most bereaved people do not need medication. Begin with supportive counselling and a scheduled review, watching how their grief settles over time. Reserve grief-focused psychotherapy for those with prolonged grief disorder, and consider antidepressants only when a major depressive episode is clearly established. Always screen for suicidal thoughts and record a clear follow-up plan.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [],
+ "refs": [
+  "Prolonged grief disorder, ICD-11 classification criteria (World Health Organization)"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 11
+ }
+}

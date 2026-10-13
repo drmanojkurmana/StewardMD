@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "module": "pat-tissue-repair",
+ "subject": "pathology",
+ "title": "Tissue repair and wound healing",
+ "minutes": 5,
+ "steps": [
+  {
+   "tx": "Repair begins with **regeneration** or **scar formation**. Regeneration replaces lost parenchymal cells by division of surviving neighbours, but only if the cells can divide and a connective tissue framework remains. Cells are classed as **labile** (continuously dividing, such as surface epithelium, bone marrow and intestinal mucosa), **stable** (quiescent but able to re-enter the cycle, such as hepatocytes, fibroblasts and endothelium) or **permanent** (non-dividing, such as neurons, cardiac and skeletal muscle).",
+   "say": "Repair begins with regeneration or scar formation. Regeneration replaces lost parenchymal cells by division of surviving neighbours, but only if the cells can divide and a connective tissue framework remains. Cells are classed as labile, meaning continuously dividing, such as surface epithelium, bone marrow and intestinal mucosa. Stable cells are quiescent but can re-enter the cycle, such as hepatocytes, fibroblasts and endothelium. Permanent cells do not divide, such as neurons, cardiac and skeletal muscle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cell class",
+     "Examples",
+     "Renewal"
+    ],
+    "rows": [
+     [
+      "Labile",
+      "Surface epithelium, marrow, gut mucosa",
+      "Constant"
+     ],
+     [
+      "Stable",
+      "Hepatocytes, fibroblasts, endothelium",
+      "On stimulus"
+     ],
+     [
+      "Permanent",
+      "Neurons, cardiac and skeletal muscle",
+      "None"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wound healing is staged as **haemostasis**, **inflammation**, **proliferation** and **maturation**. Clot formation is the earliest event. Neutrophils reach the margins within 24 hours, and cytokines and chemotactic factors drive their arrival. Proliferation brings **granulation tissue**, new vessels through **angiogenesis**, and epithelial cover. Maturation then slowly raises tensile strength.",
+   "say": "Wound healing runs through haemostasis, inflammation, proliferation and maturation. Clot formation is the earliest event. Neutrophils reach the margins within 24 hours, drawn by cytokines and chemotactic factors. In the proliferative phase, granulation tissue fills the wound, new vessels form by angiogenesis, and epithelium covers the surface. Maturation then slowly raises tensile strength.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Haemostasis"
+     },
+     {
+      "id": "b",
+      "label": "Inflammation"
+     },
+     {
+      "id": "c",
+      "label": "Proliferation"
+     },
+     {
+      "id": "d",
+      "label": "Maturation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Growth factors steer repair. **VEGF**, chiefly VEGF-A, prompts endothelial cells to migrate and multiply, forming new capillaries by sprouting, and it also makes vessels leakier by raising permeability. **TGF-beta** recruits and expands fibroblasts, boosts collagen production and dampens matrix breakdown by restraining metalloproteinases. Because it promotes excessive scarring, it is central to fibrosis in the lung, liver and kidney. **PDGF** and **FGF-2** also act on fibroblasts.",
+   "say": "Growth factors steer repair. VEGF, chiefly VEGF-A, prompts endothelial cells to migrate and multiply, forming new capillaries by sprouting, and it also makes vessels leakier by raising permeability. TGF-beta recruits and expands fibroblasts, boosts collagen production and dampens matrix breakdown by restraining metalloproteinases. Because it promotes excessive scarring, it is central to fibrosis in the lung, liver and kidney. PDGF and FGF-2 also act on fibroblasts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "VEGF",
+     "points": [
+      "Endothelial cell migration and growth",
+      "Capillary sprouting",
+      "Vasodilation",
+      "Higher vascular permeability"
+     ]
+    },
+    "right": {
+     "title": "TGF-beta",
+     "points": [
+      "Fibroblast recruitment and expansion",
+      "Greater collagen production",
+      "Reduced matrix breakdown",
+      "Drives fibrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extracellular matrix is laid down and remodelled. **Type III collagen** dominates the early provisional matrix, then **type I collagen** takes over by about 2 weeks. **Matrix metalloproteinases** are zinc-dependent enzymes that degrade collagen and other matrix proteins. **Type IV collagen** with laminin forms the basement membrane. Vitamin C is needed for lysyl oxidase, so deficiency weakens cross-linking.",
+   "say": "Extracellular matrix is laid down and remodelled. Type III collagen dominates the early provisional matrix, then type I collagen takes over by about 2 weeks. Matrix metalloproteinases are zinc-dependent enzymes that degrade collagen and other matrix proteins. Type IV collagen with laminin forms the basement membrane. Vitamin C is needed for lysyl oxidase, so deficiency weakens cross-linking.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Collagen",
+     "Main site or role"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Skin, tendon, bone; mature scar"
+     ],
+     [
+      "Type III",
+      "Early repair, fetal skin, reticular fibres"
+     ],
+     [
+      "Type IV",
+      "Basement membrane"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "f11527e0-0223-4541-af0d-93e0af9f6217",
+  "1dba5623-0038-4bfb-9b4d-e4328800c742",
+  "1ec34087-d1ed-49d8-a8b0-5454021bab20"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins and Cotran Pathologic Basis of Disease (Kumar, Abbas, Aster)",
+  "Robbins Basic Pathology"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 1,
+  "dropped": 2,
+  "kbWords": 0,
+  "itemN": 184
+ }
+}

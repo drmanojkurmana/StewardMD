@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "shm-myeloproliferative-neoplasms",
+ "subject": "ss-haematology",
+ "title": "Philadelphia-negative myeloproliferative neoplasms: driver mutations, risk and key therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Philadelphia-negative myeloproliferative neoplasms include **polycythaemia vera**, **essential thrombocythaemia** and **primary myelofibrosis**. All arise from a clonal haematopoietic stem cell and share driver mutations in JAK2, CALR or MPL. Most patients carry one of these three drivers, and patients lacking all three are called triple-negative. Identifying the driver is the first step in classifying the disorder for exam purposes.",
+   "say": "Philadelphia-negative myeloproliferative neoplasms include polycythaemia vera, essential thrombocythaemia and primary myelofibrosis. All arise from a clonal haematopoietic stem cell and share driver mutations in JAK2, CALR or MPL. Most patients carry one of these three drivers. Patients lacking all three are called triple-negative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Usual driver",
+     "Key feature"
+    ],
+    "rows": [
+     [
+      "Polycythaemia vera",
+      "JAK2 V617F",
+      "Raised red cell mass, low erythropoietin"
+     ],
+     [
+      "Essential thrombocythaemia",
+      "JAK2, CALR or MPL",
+      "Very high platelet count"
+     ],
+     [
+      "Primary myelofibrosis",
+      "JAK2, CALR or MPL",
+      "Marrow fibrosis, splenomegaly, dry tap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "JAK2 V617F is found in about **95 percent** of polycythaemia vera patients, making it the hallmark test. The mutation causes ligand-independent JAK2 signalling, which raises Bcl-XL and blocks apoptosis in progenitor cells. When V617F is absent, the next test is JAK2 exon 12 mutation, which is found in a small minority of V617F-negative cases.",
+   "say": "JAK2 V617F is found in about 95 percent of polycythaemia vera patients, making it the hallmark test. The mutation causes ligand-independent JAK2 signalling, which raises Bcl-XL and blocks apoptosis in progenitor cells. When V617F is absent, the next test is JAK2 exon 12 mutation, found in a small minority of cases.",
+   "vis": null
+  },
+  {
+   "tx": "Essential thrombocythaemia is more common in **women**, with a male to female ratio of about 1 to 2, and typically presents around the sixth decade. Very high platelet counts can destroy high molecular weight von Willebrand multimers, causing an **acquired von Willebrand syndrome** and mucosal bleeding. Thrombosis remains the main danger, so aspirin and cytoreduction are weighed against bleeding risk.",
+   "say": "Essential thrombocythaemia is more common in women, with a male to female ratio of about 1 to 2. It typically presents around the sixth decade. Very high platelet counts can destroy high molecular weight von Willebrand multimers, causing an acquired von Willebrand syndrome and mucosal bleeding. Thrombosis remains the main danger.",
+   "vis": null
+  },
+  {
+   "tx": "In primary myelofibrosis, marrow fibrosis is a **reactive, polyclonal** process driven by cytokines such as TGF-beta and platelet-derived growth factor. The peripheral smear shows leukoerythroblastosis and teardrop cells, and the bone marrow is often a dry tap. The **DIPSS** score adds points for advanced age, constitutional symptoms, low haemoglobin, high leucocyte count and raised circulating blasts.",
+   "say": "In primary myelofibrosis, marrow fibrosis is a reactive, polyclonal process driven by cytokines such as TGF-beta and platelet-derived growth factor. The smear shows leukoerythroblastosis and teardrop cells, and the marrow is often a dry tap. The DIPSS score adds points for advanced age, constitutional symptoms, low haemoglobin, high white cell count and raised circulating blasts, and the total places the patient into a prognostic risk category.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clinical risk factors",
+      "sub": "Age, symptoms, Hb, WBC, blasts"
+     },
+     {
+      "id": "b",
+      "label": "DIPSS score",
+      "sub": "Count risk factors"
+     },
+     {
+      "id": "c",
+      "label": "Risk category",
+      "sub": "Low to high"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted therapy in myelofibrosis includes **ruxolitinib**, a JAK1 and JAK2 inhibitor for splenomegaly and symptoms, along with **fedratinib**, **momelotinib** and **pacritinib**. In polycythaemia vera, **ropeginterferon** and **hydroxyurea** lower the red cell mass. Phlebotomy aims for a haematocrit below 45 percent, as shown in the CYTO-PV trial, together with low-dose aspirin in low-risk disease.",
+   "say": "Targeted therapy in myelofibrosis includes ruxolitinib, a JAK1 and JAK2 inhibitor for splenomegaly and symptoms, along with fedratinib, momelotinib and pacritinib. In polycythaemia vera, ropeginterferon and hydroxyurea lower the red cell mass. Phlebotomy aims for a haematocrit below 45 percent, as shown in the CYTO-PV trial, together with low-dose aspirin in low-risk disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug or measure",
+     "Setting",
+     "Target"
+    ],
+    "rows": [
+     [
+      "Phlebotomy",
+      "Polycythaemia vera",
+      "Haematocrit below 45 percent"
+     ],
+     [
+      "Ruxolitinib",
+      "Myelofibrosis",
+      "Spleen and symptom control"
+     ],
+     [
+      "Hydroxyurea",
+      "High-risk PV or ET",
+      "Cytoreduction"
+     ],
+     [
+      "Ropeginterferon",
+      "Polycythaemia vera",
+      "Haematocrit control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic mastocytosis** is usually driven by a gain-of-function **KIT** mutation, leading to clonal **mast cell** infiltration of the skin, marrow and other organs. Patients often report flushing, pruritus and mediator symptoms such as itching, palpitations or gastrointestinal upset. **Hypereosinophilic syndrome** is a separate entity defined by persistently raised **eosinophils** with evidence of organ damage, once secondary causes have been excluded.",
+   "say": "Systemic mastocytosis is usually driven by a gain-of-function KIT mutation. It leads to clonal mast cell infiltration of the skin, marrow and other organs. Patients often report flushing, itching, palpitations or gut upset from mediator release. Hypereosinophilic syndrome is a separate entity. It is defined by persistently raised eosinophils with evidence of organ damage, once secondary causes have been excluded.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "q_a0b2705fbdde",
+  "q_1602b03c4f9b",
+  "q_390b6d6ed734"
+ ],
+ "src": [],
+ "refs": [
+  "Vardiman JW et al. WHO Classification of Tumours of Haematopoietic and Lymphoid Tissues (revised 4th edition)",
+  "Barbui T et al. CYTO-PV trial report, Blood"
+ ],
+ "gen": "AI",
+ "run": "links100",
+ "model": "claude-haiku-5-5",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 2,
+  "dropped": 1,
+  "kbWords": 0,
+  "itemN": 30
+ }
+}
