@@ -40,22 +40,39 @@
   function readQueue(store) { try { var q = JSON.parse((store || localStorage).getItem(QUEUE_KEY) || "[]"); return Array.isArray(q) ? q : []; } catch (e) { return []; } }
   function writeQueue(q, store) { try { (store || localStorage).setItem(QUEUE_KEY, JSON.stringify(q.slice(-50))); } catch (e) {} }
   function queueReport(payload, store) { var q = readQueue(store); q.push({ payload: payload, at: Date.now() }); writeQueue(q, store); return q.length; }
+  /* The existing report path needs a signed-in user (functions/api/prep/flag.js identify());
+   * attach the same Bearer token prep.js sendReport uses when the auth bridge is present. */
+  function authHeaders(fetchFn) {
+    if (fetchFn) return Promise.resolve({ "Content-Type": "application/json" });
+    try {
+      var u = typeof window !== "undefined" && window.SMD_AUTH && window.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) return Promise.resolve(u.getIdToken()).then(function (tok) {
+        var h = { "Content-Type": "application/json" }; if (tok) h.Authorization = "Bearer " + tok; return h;
+      }, function () { return { "Content-Type": "application/json" }; });
+    } catch (e) {}
+    return Promise.resolve({ "Content-Type": "application/json" });
+  }
+  function postFlag(payload, fetchFn) {
+    var f = fetchFn || (typeof fetch !== "undefined" ? fetch : null);
+    if (!f) return Promise.reject(new Error("no fetch"));
+    return authHeaders(fetchFn).then(function (h) { return f("/api/prep/flag", { method: "POST", headers: h, body: JSON.stringify(payload) }); });
+  }
   /* send(payload, fetchFn, store) -> "sent" | "queued". Never throws; offline keeps the report. */
   function send(payload, fetchFn, store) {
     var f = fetchFn || (typeof fetch !== "undefined" ? fetch : null);
     if (!f || (typeof navigator !== "undefined" && navigator.onLine === false)) { queueReport(payload, store); return Promise.resolve("queued"); }
-    return Promise.resolve(f("/api/prep/flag", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }))
+    return postFlag(payload, fetchFn)
       .then(function (r) { if (r && r.ok === false && r.status >= 400 && r.status !== 401 && r.status !== 429) { queueReport(payload, store); return "queued"; } return "sent"; },
         function () { queueReport(payload, store); return "queued"; });
   }
   function flushQueue(fetchFn, store) {
     var q = readQueue(store); if (!q.length) return Promise.resolve(0);
     var f = fetchFn || (typeof fetch !== "undefined" ? fetch : null); if (!f) return Promise.resolve(0);
-    var sent = 0;
+    var sent = 0, left = [];
     return q.reduce(function (p, entry) { return p.then(function () {
-      return Promise.resolve(f("/api/prep/flag", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(entry.payload) }))
-        .then(function (r) { if (!r || r.ok !== false) sent++; }, function () {});
-    }); }, Promise.resolve()).then(function () { writeQueue(q.slice(sent), store); return sent; });
+      return postFlag(entry.payload, fetchFn)
+        .then(function (r) { if (!r || r.ok !== false) sent++; else left.push(entry); }, function () { left.push(entry); });
+    }); }, Promise.resolve()).then(function () { writeQueue(left, store); return sent; });
   }
   var ICONS = {
     report: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 21V4"/><path d="M4 5h11l-2 4 2 4H4"/></svg>',
@@ -74,12 +91,16 @@
   function actionRowHtml(opts) {
     opts = opts || {};
     var bm = !!opts.bookmarked;
-    var pa = opts.pearl ? { report: ' data-pearl-act="report"', share: ' data-pearl-act="share"', bookmark: ' data-pearl-act="bookmark"' } : { report: "", share: "", bookmark: "" };
+    /* Pearl rows speak data-pearl-act only (prep-pearl.js owns them); other surfaces speak the
+     * generic data-action-* events from bind(), so one click is never handled twice. */
+    var ra = opts.pearl ? ' data-pearl-act="report"' : " data-action-report";
+    var sa = opts.pearl ? ' data-pearl-act="share"' : " data-action-share";
+    var ba = opts.pearl ? ' data-pearl-act="bookmark"' : " data-action-bookmark";
     return '<div class="pn-act-row" role="group" aria-label="Item actions">' +
-      '<button type="button" class="pn-act-btn" data-action-report' + pa.report + ">" + ICONS.report + "<span>Report</span></button>" +
+      '<button type="button" class="pn-act-btn"' + ra + ">" + ICONS.report + "<span>Report</span></button>" +
       (opts.shareId ? '<button type="button" class="pn-act-btn" data-act="id-share" data-v="' + esc(opts.shareId) + '">' + ICONS.share + "<span>Share</span></button>"
-        : '<button type="button" class="pn-act-btn" data-action-share' + pa.share + ">" + ICONS.share + "<span>Share</span></button>") +
-      '<button type="button" class="pn-act-btn' + (bm ? " on" : "") + '" data-action-bookmark' + pa.bookmark + ' aria-pressed="' + bm + '">' + (bm ? ICONS.bookmarkOn : ICONS.bookmark) + "<span>" + (bm ? "Saved" : "Bookmark") + "</span></button></div>" + metaHtml(opts.meta);
+        : '<button type="button" class="pn-act-btn"' + sa + ">" + ICONS.share + "<span>Share</span></button>") +
+      '<button type="button" class="pn-act-btn' + (bm ? " on" : "") + '"' + ba + ' aria-pressed="' + bm + '">' + (bm ? ICONS.bookmarkOn : ICONS.bookmark) + "<span>" + (bm ? "Saved" : "Bookmark") + "</span></button></div>" + metaHtml(opts.meta);
   }
   function reportSheetHtml(item) {
     item = item || {};
@@ -111,7 +132,7 @@
       var built = buildPayload({ itemId: form.getAttribute("data-item-id"), itemType: form.getAttribute("data-item-type"), subject: form.getAttribute("data-subject"), module: form.getAttribute("data-module") }, picked ? picked.value : "", text.value);
       if (!built.ok) { err.textContent = built.error; err.hidden = false; return; }
       err.hidden = true;
-      var sendBtn = form.querySelector(".pn-rpt-send"); sendBtn.disabled = true; sendBtn.textContent = "Sending…";
+      var sendBtn = form.querySelector(".pn-rpt-send"); sendBtn.disabled = true; sendBtn.setAttribute("aria-busy", "true"); sendBtn.textContent = "Sending…";
       var finish = function () { done(); if (onSend) onSend(built.payload); };
       if (onSend && onSend.handlesSend) { finish(); return; }
       send(built.payload).then(finish, finish);
@@ -142,7 +163,7 @@
       var sh = t.closest && t.closest("[data-action-share]");
       if (sh) doc.dispatchEvent(new CustomEvent("pn-action-share", { detail: { trigger: sh } }));
       var bk = t.closest && t.closest("[data-action-bookmark]");
-      if (bk) { var on = bk.getAttribute("aria-pressed") === "true"; bk.setAttribute("aria-pressed", String(!on)); bk.classList.toggle("on", !on); doc.dispatchEvent(new CustomEvent("pn-action-bookmark", { detail: { trigger: bk, bookmarked: !on } })); }
+      if (bk) { var on = bk.getAttribute("aria-pressed") === "true"; bk.setAttribute("aria-pressed", String(!on)); bk.classList.toggle("on", !on); var lab = bk.querySelector("span"); if (lab) lab.textContent = !on ? "Saved" : "Bookmark"; doc.dispatchEvent(new CustomEvent("pn-action-bookmark", { detail: { trigger: bk, bookmarked: !on } })); }
     });
     doc.addEventListener("keydown", function (e) { if (e.key === "Escape") closeSheet(doc); });
     if (typeof window !== "undefined" && window.addEventListener) window.addEventListener("online", function () { flushQueue(); });

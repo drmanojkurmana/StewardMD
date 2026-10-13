@@ -2847,6 +2847,19 @@
   var REASONS = [["wrong-key", "The answer key is wrong"], ["unclear", "The question is unclear"], ["outdated", "Outdated information"], ["typo", "Typing or formatting error"], ["other", "Something else"]];
   function openReport() {
     var r = st.run, it = r && r.items[r.i]; if (!it) return;
+    // Shared Report-reason sheet (prep-action-row.js): same sheet as lessons and Pearls, posting
+    // through the existing /api/prep/flag path. Without it, the legacy reason list below.
+    var A = G.PREP_ACTION;
+    if (A && A.openSheet) {
+      var item = { itemId: it.id, itemType: "question", subject: it._s, module: it._m || it.t };
+      if (it.qg && G.PREP_QGEN) {
+        var cbQ = function (payload) { var s = load(); s.rep[it.id] = payload.reason; save(); G.PREP_QGEN.report(it, payload.reason); toast("Thank you. This question is hidden from your module."); };
+        cbQ.handlesSend = true;
+        A.openSheet(D, item, cbQ); return;
+      }
+      A.openSheet(D, item, function (payload) { var s = load(); s.rep[it.id] = payload ? payload.reason : ""; save(); toast("Thank you. Report received."); });
+      return;
+    }
     st.stack.push(function () {
       paint(bar("Report this question", "", "back") + '<div class="pn-body"><p class="pn-mut">What is wrong with it? Reports go to the StewardMD team with the question number only.</p><ul class="pn-mods">' +
         REASONS.map(function (x) { return '<li><button type="button" class="pn-mod" data-act="sendreport" data-v="' + x[0] + '"><span class="pn-mb"><b>' + x[1] + "</b></span></button></li>"; }).join("") + "</ul></div>");
