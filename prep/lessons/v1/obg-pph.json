@@ -1,65 +1,89 @@
 {
- "v": 1,
- "module": "obg-pph",
- "subject": "obstetrics-gynaecology",
- "title": "Postpartum haemorrhage: call, compress, contract, resuscitate",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Postpartum haemorrhage** is underestimated because blood hides in drapes and clots. Call for help early, quantify loss, and start resuscitation alongside cause control. The four causes are **Tone** (atony, commonest), **Trauma**, **Tissue** (retained placenta) and **Thrombin** (clotting failure) (RCOG Green-top guidance).",
-   "say": "Postpartum haemorrhage is underestimated. Call for help early, quantify loss, and resuscitate while controlling the cause: Tone, Trauma, Tissue, Thrombin.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Call + quantify"
-     },
-     {
-      "id": "b",
-      "label": "Uterine massage + oxytocic"
-     },
-     {
-      "id": "c",
-      "label": "Find the 4 Ts"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For atony, rub up a contraction and give **oxytocic** therapy per protocol, empty the bladder, and escalate through further uterotonics, tranexamic acid early where indicated, balloon tamponade and theatre if bleeding continues. Give blood products guided by loss and clotting, and keep the patient warm. Retained tissue needs theatre; trauma needs repair; clotting failure needs haematology-guided replacement.",
-   "say": "For atony, rub up a contraction and give oxytocic therapy. Escalate through uterotonics, early tranexamic acid, balloon and theatre, with blood products as indicated.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Cause",
-     "First fix"
-    ],
-    "rows": [
-     [
-      "Tone",
-      "Massage plus oxytocic"
-     ],
-     [
-      "Tissue",
-      "Theatre for retained tissue"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Prevention is active management of the third stage and vigilance in the first hours, when atony declares itself. Document estimated loss honestly, debrief the woman, and check haemoglobin and iron afterwards. A rising pulse with falling pressure in a pale postpartum woman is bleeding until proved otherwise, even with a firm uterus (think trauma or clots).",
-   "say": "Prevention is active third-stage management and vigilance. A rising pulse in a pale postpartum woman is bleeding until proved otherwise."
+  "v": 1,
+  "module": "obg-pph",
+  "subject": "obstetrics-gynaecology",
+  "title": "Postpartum haemorrhage: atony, trauma, tissue and thrombin",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**PPH** (**500 ml vaginal**, **1000 ml section**, severe 1000 with shock; **atony** overcontracted uterus, **trauma** tears, **tissue** retained, **thrombin** DIC) kills fastest; **active third stage** (**oxytocin 10 IU IM**, controlled cord traction, uterine massage) prevents. Quantified drapes weigh; shock index tachycardia hypotension transfuses. Grand multiparity twins polyhydramnios macrosomia atony risk.",
+      "say": "Half litre vaginal litre section is PPH: oxytocin 10 IM active third prevents. Four Ts find.",
+      "vis": null
+    },
+    {
+      "tx": "**Oxytocin** (**10 IU IM** prevention, **20 to 40 IU infusion** treatment, bolus hypotension) with **ergometrine** (**hypertension banned**, nausea) and **carboprost** (**asthma banned**, diarrhoea fever) then **misoprostol** (800 sublingual, shivering fever) sequences; **tranexamic acid** (**1 g IV within 3 hours**, WOMAN trial) clots early. Bimanual compression bridges; aorta compresses.",
+      "say": "Oxytocin first ergometrine hypertensive banned carboprost asthmatic banned: tranexamic grams 3 hours. Sequence squeezes.",
+      "vis": null
+    },
+    {
+      "tx": "**Balloon tamponade** (**Bakri**, condom catheter low resource, 24 hours with antibiotics) with **B-Lynch compression suture**, uterine artery ligation, **internal iliac** then **hysterectomy** last resort steps; **retained tissue** (succenturiate lobe, velamentous vessels) explores manually. Placenta accreta spectrum (previa with sections, bladder invasion MRI) hysterectomises electively.",
+      "say": "Balloon day B-Lynch stitch artery ties hysterectomy last: retained explores. Accreta previa sections hysterectomises.",
+      "vis": null
+    },
+    {
+      "tx": "**DIC** (abruption, amniotic embolism, sepsis, massive transfusion dilution; **fibrinogen** cryoprecipitate, **1:1:1** red cells plasma platelets, calcium warmed) with **transfusion** (O negative emergency, tranexamic early, cell salvage) resuscitates; **uterine inversion** (**Johnson manoeuvre**, relaxants then oxytocics, shock out of proportion) reinverts urgently. Thromboelastometry guides; audit every PPH.",
+      "say": "DIC fibrinogen cries 1:1:1 warmed calcium: inversion Johnson reinverts shock disproportionate. Audit closes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PPH",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "Define",
+            "500 1000",
+            "Weigh drapes"
+          ],
+          [
+            "Drugs",
+            "Oxy ergo prosto",
+            "TXA 3h"
+          ],
+          [
+            "Save uterus",
+            "Balloon Lynch",
+            "Ties"
+          ],
+          [
+            "Last",
+            "Hysterectomy",
+            "DIC 1:1:1"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-obg-181",
+    "bk2-obg-182",
+    "bk2-obg-183",
+    "bk2-obg-184",
+    "bk2-obg-185",
+    "bk2-obg-186",
+    "bk2-obg-187",
+    "bk2-obg-188",
+    "bk2-obg-189",
+    "bk2-obg-190"
+  ],
+  "src": [],
+  "refs": [
+    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-obg1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

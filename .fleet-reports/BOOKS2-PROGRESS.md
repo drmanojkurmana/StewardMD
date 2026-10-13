@@ -176,3 +176,9 @@
 - FIRST WAVE IN NEW v1 FORMAT (post-#1575): lessons {v,module,quiz,gen,run,model,checks}, KB {name,aliases,system,specialty,referenceOnly,review,reference}, overlays {topic,set,v,items+licence meta}, index modules dict, counts sets.maikbook2.pharmacology.
 - Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay match 8/8. 80 IDs unique, no dups. maikbook2 1180 -> 1260.
 - STATE2/COVERAGE2 updated + mirrors. Tripathi chunks done (delete /tmp/books2-work/tripathi/ on lead confirm). Next: original-15 queue or batch2-part2 gaps; derm/ortho/vascular blocked on books.
+
+## Wave OBG1 (2026-10-13, muse Wonder): OBG gaps 10/19
+- Branch books2-obg1 from origin/main post-OPH2-merge, PR #1594 open (no merge; squash after browser job). 10 lessons + 9 KB + 100 MCQs bk2-obg-161..260 (ectopic reuses pre-existing ectopic_pregnancy KB; others: hypertensive-disorders, pph, preterm-prom-postterm, operative-obstetrics, puerperium, anaemia-pregnancy, infections-pregnancy, endometriosis-adenomyosis, pcos-hirsutism).
+- Sources: Sakshi Arora Obs E9 (1.6M chars) + Ten Teachers Gynae 21st (0.8M chars) in /tmp/books2-work/obg/. New v1 format throughout.
+- Gates: LP.checkLesson 10/10, kb_validate_v2 9/9, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. 100 IDs unique, no dups. maikbook2 1280 -> 1380, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: OBG2 (remaining 9 gaps).
