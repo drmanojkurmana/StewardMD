@@ -166,7 +166,7 @@ try {
       ok(await until(`return document.querySelectorAll(".pn-rpt-sheet input[name=pn-rpt-reason]").length === 7;`, 3000), "Report sheet lists the seven reasons");
       await ev(`document.querySelector('.pn-rpt-sheet input[value="unclear"]').click(); return 1;`);
       await click(".pn-rpt-sheet .pn-rpt-send");
-      ok(await until(`return !!document.querySelector(".pn-rpt-sheet .pn-rpt-ok");`, 3000), "the sheet confirms the report was received");
+      ok(await until(`var d=document.querySelector(".pn-rpt-sheet .pn-rpt-done"); return !!d && !d.hidden;`, 3000), "the sheet confirms the report was received");
       await click(".pn-rpt-sheet [data-rpt-close]");
       ok(await until(`return !document.querySelector(".pn-rpt-sheet") && !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
       await shot("after-report");
