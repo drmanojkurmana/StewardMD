@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-enterobacteriaceae",
+ "subject": "microbiology",
+ "title": "Enterobacteriaceae: E. coli, Klebsiella, Proteus and Shigella",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Enterobacteriaceae** ferment glucose as oxidase negative Gram negative bacilli, and **MacConkey agar** sorts them: **lactose fermenters** (E. coli, Klebsiella) blush pink while non fermenters (Salmonella, Shigella, Proteus) stay pale. **E. coli** (indole positive, motile) causes most community **UTI** via P fimbriae ascending in women; uncomplicated cystitis gets **nitrofurantoin or fosfomycin** (no pyelonephritis cover) while pyelonephritis needs fluoroquinolones or ceftriaxone. Klebsiella (nonmotile, urease negative, mucoid) strikes alcoholics and diabetics.",
+   "say": "Pink on MacConkey is lactose fermenter. E. coli UTI cystitis gets nitrofurantoin, kidney needs more.",
+   "vis": null
+  },
+  {
+   "tx": "**E. coli diarrhoeas** each carry a signature: **ETEC** (traveller's watery diarrhoea, LT and ST enterotoxins), **EPEC** (infantile watery diarrhoea, attaching effacing pedestals), **EIEC** (dysentery like Shigella, invades M cells), **EHEC O157:H7** (undercooked beef, haemorrhagic colitis with Shiga toxin, **haemolytic uraemic syndrome**; sorbitol non fermenter on SMAC, and antibiotics withheld as lysis worsens toxin release), and **EAEC** (stacked brick persistence in children and travellers). Hydration leads; antibiotics only for traveller's (azithromycin) and shiga excluded cases.",
+   "say": "Bloody beef diarrhoea with falling platelets is O157: hydrate, never antibiotics. Traveller's watery is ETEC.",
+   "vis": null
+  },
+  {
+   "tx": "**Klebsiella pneumoniae** (currant jelly sputum, bulging fissures, cavitation in alcoholics) and **Proteus mirabilis** (**swarming** waves, **urease** splitting urea into ammonia, **struvite staghorn stones** with alkaline urine, Dienes lines where strains meet) round out urinary and lung patterns. **Shigella** (nonmotile, no H2S, tiny infective dose of 10 organisms, M cell invasion with bloody mucoid stools and tenesmus) is treated with ceftriaxone or azithromycin; S. dysenteriae type 1 makes Shiga toxin with HUS risk. Motility with H2S instead suggests Salmonella.",
+   "say": "Swarming urease positive urine is Proteus: staghorn stones follow. Ten organisms suffice for Shigella dysentery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Motility",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "E. coli",
+      "Motile",
+      "Indole positive UTI"
+     ],
+     [
+      "Klebsiella",
+      "Nonmotile",
+      "Currant jelly"
+     ],
+     [
+      "Proteus",
+      "Swarming",
+      "Urease, staghorn"
+     ],
+     [
+      "Shigella",
+      "Nonmotile",
+      "Tiny dose dysentery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistance** travels on plasmids: **ESBLs** (TEM, SHV and CTX-M hydrolysing penicillins and cephalosporins, clavulanate sensitive, screened by ceftazidime or cefotaxime resistance) versus **AmpC** (chromosomal in Enterobacter and Citrobacter, clavulanate resistant, needing cefepime or carbapenem) versus **carbapenemases** (KPC serine, NDM and VIM metallo needing aztreonam plus avibactam or colistin combinations). Uncomplicated ESBL cystitis keeps **fosfomycin or nitrofurantoin**; pyelonephritis and bacteraemia need **carbapenems** with source control and de-escalation.",
+   "say": "ESBL bladder keeps fosfomycin; kidney and blood need carbapenems. AmpC shrugs at clavulanate.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-mic-031",
+  "bk2-mic-032",
+  "bk2-mic-033",
+  "bk2-mic-034",
+  "bk2-mic-035",
+  "bk2-mic-036",
+  "bk2-mic-037",
+  "bk2-mic-038",
+  "bk2-mic-039",
+  "bk2-mic-040"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

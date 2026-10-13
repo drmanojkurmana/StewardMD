@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-staphylococcus",
+ "subject": "microbiology",
+ "title": "Staphylococcus aureus, MRSA and coagulase negative staphylococci",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Staphylococcus aureus** clusters like grapes as Gram positive cocci because division planes stay random, and the laboratory separates it from streptococci by **catalase positivity** (bubbles with hydrogen peroxide) and from coagulase negative species by **tube coagulase** (free coagulase clotting plasma). Golden pigment, beta haemolysis on blood agar and mannitol fermentation support the call, while protein A (binding Fc of IgG) explains phagocytosis evasion. Slide coagulase detects bound clumping factor rapidly.",
+   "say": "Grape like clusters that bubble with peroxide and clot plasma are aureus. Catalase splits staph from strep.",
+   "vis": null
+  },
+  {
+   "tx": "**Toxin diseases** declare themselves fast: **staphylococcal food poisoning** (preformed heat stable enterotoxin in cream filled sweets, vomiting within 6 hours, no fever, self limiting with fluids), **toxic shock syndrome** (TSST-1 superantigen in tampon users or wound packing, fever with rash, desquamation and hypotension), and **staphylococcal scalded skin syndrome** (exfoliatin in neonates, Nikolsky positive but mucosa spared, unlike TEN). PVL strains necrotise lungs after viral illness.",
+   "say": "Vomiting 6 hours after sweets is preformed toxin. Scalded neonate with spared mucosa is exfoliatin.",
+   "vis": null
+  },
+  {
+   "tx": "**MRSA** carries **mecA** on SCCmec encoding PBP2a, a transpeptidase with a closed active site that beta lactams cannot reach, so oxacillin screening flags resistance to the whole class except ceftaroline. Hospital clones (SCCmec I to III, multidrug resistant) differ from community clones (SCCmec IV, PVL positive skin abscesses). **Vancomycin** remains the parenteral backbone with trough and MIC creep watched; **VRSA** (vanA from enterococci) needs linezolid or daptomycin (never in pneumonia, surfactant inactivates). Mupirocin decolonises carriers with contact precautions containing spread.",
+   "say": "Oxacillin resistant means whole beta lactam class fails. Community MRSA abscesses carry PVL.",
+   "vis": null
+  },
+  {
+   "tx": "**Coagulase negative staphylococci** matter on hardware: **S. epidermidis** (biofilm slime on catheters, shunts and prosthetic valves, novobiocin sensitive) causes indolent device infections needing removal, while **S. saprophyticus** (novobiocin resistant) causes honeymoon cystitis in young women. **S. lugdunensis**, though coagulase negative, behaves like aureus with aggressive native valve endocarditis and needs full aureus style therapy. Speciation guides whether to pull the line or treat the bladder.",
+   "say": "Device infection with slime is epidermidis: pull hardware. Honeymoon cystitis resisting novobiocin is saprophyticus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Coagulase",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Aureus",
+      "Positive",
+      "Golden, Mannitol, invasive"
+     ],
+     [
+      "Epidermidis",
+      "Negative",
+      "Biofilm on devices"
+     ],
+     [
+      "Saprophyticus",
+      "Negative",
+      "Young women UTI"
+     ],
+     [
+      "Lugdunensis",
+      "Negative",
+      "Aggressive like aureus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-001",
+  "bk2-mic-002",
+  "bk2-mic-003",
+  "bk2-mic-004",
+  "bk2-mic-005",
+  "bk2-mic-006",
+  "bk2-mic-007",
+  "bk2-mic-008",
+  "bk2-mic-009",
+  "bk2-mic-010"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

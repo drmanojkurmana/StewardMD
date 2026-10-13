@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "mic-vibrio-campylobacter",
+ "subject": "microbiology",
+ "title": "Vibrio cholerae, Campylobacter and Helicobacter",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Vibrio cholerae O1 and O139** (comma shaped, darting motility, oxidase positive, halotolerant) colonise small bowel without invading, releasing **AB cholera toxin** that ADP ribosylates Gs, locking adenylate cyclase on so cAMP pours chloride and water into the lumen. The result is painless **rice water stools** (no blood, no pus, no fever, no tenesmus) with isotonic dehydration, hypokalaemic ileus and shock. O139 Bengal emerged with epidemic potential like O1; non O1 vibrios cause wound sepsis (V. vulnificus in cirrhotics, V. parahaemolyticus Kanagawa seafood).",
+   "say": "Painless rice water without blood is cholera toxin at work. O1 and O139 both epidemic.",
+   "vis": null
+  },
+  {
+   "tx": "**Cholera management** is fluids first: **oral rehydration solution** (glucose sodium co transport) for most, **Ringer lactate** intravenously for shock with potassium watched, antibiotics only shortening shedding (**single dose doxycycline**, azithromycin in pregnancy). Diagnosis uses **TCBS agar** (yellow sucrose fermenting colonies), dark field darting motility inhibited by antiserum, and Cary-Blair transport. **Shanchol killed oral vaccine** protects endemic belts; sanitation ends epidemics. Tetracycline shortens but never replaces volume.",
+   "say": "Cholera kills by volume loss: replace volume first. TCBS yellows the diagnosis.",
+   "vis": null
+  },
+  {
+   "tx": "**Campylobacter jejuni** (curved gull wing rods, microaerophilic, growth at 42C selecting poultry isolates) causes bloody inflammatory diarrhoea with cramps and fever, and its lipooligosaccharide mimics **GM1 ganglioside** triggering **Guillain-Barre syndrome** weeks later (ascending paralysis needing IVIG or plasmapheresis). Diagnosis is stool culture on Skirrow agar with oxidase; treatment is **azithromycin** (erythromycin) as fluoroquinolone resistance spreads. Reactive arthritis (HLA-B27) follows like Salmonella and Shigella.",
+   "say": "Bloody poultry diarrhoea then ascending paralysis is Campylobacter to Guillain-Barre. Azithromycin treats.",
+   "vis": null
+  },
+  {
+   "tx": "**Helicobacter pylori** (curved, **urease** splitting urea into ammonia cloud, antral coloniser) causes chronic gastritis, **duodenal ulcers**, gastric adenocarcinoma and **MALT lymphoma** (curable by eradication). Noninvasive diagnosis is **urea breath test or stool antigen**; invasive is rapid urease (CLO) on biopsy with histology. Eradication is **clarithromycin triple** (PPI plus amoxicillin plus clarithromycin) or **bismuth quadruple** where resistance rules; **test of cure** uses breath or stool antigen (never serology, antibodies linger). NSAID ulcers differ by history.",
+   "say": "Urease positive antral gastritis with ulcer is H. pylori. Cure MALT by eradication; retest with breath, not blood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Stool",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Cholerae",
+      "Rice water, no blood",
+      "ORS plus doxy"
+     ],
+     [
+      "Jejuni",
+      "Bloody inflammatory",
+      "Azithromycin"
+     ],
+     [
+      "Pylori",
+      "No diarrhoea",
+      "Triple, retest breath"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-051",
+  "bk2-mic-052",
+  "bk2-mic-053",
+  "bk2-mic-054",
+  "bk2-mic-055",
+  "bk2-mic-056",
+  "bk2-mic-057",
+  "bk2-mic-058",
+  "bk2-mic-059",
+  "bk2-mic-060"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
