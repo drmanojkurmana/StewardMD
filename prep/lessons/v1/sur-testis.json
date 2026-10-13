@@ -1,0 +1,160 @@
+{
+ "module": "sur-testis",
+ "subject": "surgery",
+ "title": "Testicular germ cell tumors, serum markers, radical inguinal orchiectomy, and retroperitoneal dissection",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Testicular neoplasms represent the most frequent solid **malignancy** in young adult men aged fifteen to thirty-five years. Germ cell tumors comprise ninety-five percent of primary neoplasms, stratified clinically into seminomas and non-seminomatous germ cell tumors. Seminomas represent fifty percent of cases, composed of sheets of uniform cells with clear glycogen-rich cytoplasm, prominent nucleoli, and delicate fibrous septa infiltrated by lymphocytes. Cryptorchidism increases testicular malignancy risk four- to eightfold, even following successful early orchidopexy.",
+   "say": "Testicular tumors are the most common solid cancer in young men. Germ cell tumors are divided into seminomas and non-seminomatous subtypes. Cryptorchidism increases malignancy risk several fold, even after corrective surgical orchidopexy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Germ cell tumor subtype",
+     "Histological features",
+     "Serum tumor marker profile"
+    ],
+    "rows": [
+     [
+      "Classic seminoma",
+      "Uniform clear cells with lymphoid stroma",
+      "Normal AFP; beta-hCG elevated in 15%"
+     ],
+     [
+      "Embryonal carcinoma",
+      "Anaplastic pleomorphic glandular sheets",
+      "Both AFP and beta-hCG may be elevated"
+     ],
+     [
+      "Yolk sac tumor",
+      "Schiller-Duval bodies & microcysts",
+      "Serum AFP elevated in nearly 100%"
+     ],
+     [
+      "Choriocarcinoma",
+      "Syncytio- and cytotrophoblasts",
+      "Profoundly elevated serum beta-hCG"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serum tumor markers play an indispensable **role** in the diagnosis, clinical staging, risk stratification, and post-treatment monitoring of testicular neoplasms. Alpha-fetoprotein has a serum half-life of five to seven days, produced by yolk sac elements and embryonal carcinomas, but never by pure seminomas. Beta-human chorionic gonadotropin has a half-life of twenty-four to thirty-six hours, produced by syncytiotrophoblastic cells. Serum lactate dehydrogenase reflects overall tumor cell turnover and metabolic bulk.",
+   "say": "Serum tumor markers include alpha-fetoprotein, beta-hCG, and lactate dehydrogenase. Alpha-fetoprotein is never produced by pure seminomas. Tracking marker half-lives verifies complete surgical resection and monitors treatment response.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Painless testicular enlargement"
+     },
+     {
+      "id": "n2",
+      "label": "High-frequency scrotal Doppler ultrasound"
+     },
+     {
+      "id": "n3",
+      "label": "Preoperative baseline serum markers"
+     },
+     {
+      "id": "n4",
+      "label": "Radical inguinal orchiectomy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A painless, firm intratesticular mass that does not **transilluminate** warrants immediate high-frequency Doppler ultrasonography. If an intratesticular vascular lesion is confirmed, radical inguinal orchiectomy with high ligation of the spermatic cord at the internal inguinal ring is mandatory. Transscrotal biopsy or scrotal orchiectomy is strictly contraindicated because violating the scrotal wall disrupts native retroperitoneal lymphatic drainage, predisposing to aberrant tumor dissemination into superficial inguinal lymph nodes.",
+   "say": "Any firm intratesticular mass requires prompt scrotal Doppler ultrasound. Radical inguinal orchiectomy with high cord ligation is mandatory. Scrotal incision or needle biopsy is strictly prohibited to avoid altering lymphatic drainage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical step / decision",
+     "Technical execution",
+     "Oncological rationale"
+    ],
+    "rows": [
+     [
+      "Skin incision",
+      "Inguinal incision above groin crease",
+      "Avoids scrotal skin contamination"
+     ],
+     [
+      "Spermatic cord control",
+      "Early cross-clamping at internal ring",
+      "Prevents hematogenous tumor extrusion"
+     ],
+     [
+      "En bloc mobilization",
+      "Mobilize testis within tunica vaginalis",
+      "Complete oncological resection margin"
+     ],
+     [
+      "Contraindicated action",
+      "Transscrotal needle or open biopsy",
+      "Spills tumor into inguinal nodal basin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Staging requires abdominopelvic and chest computed **tomography** combined with serial post-orchiectomy serum marker decay kinetics. Primary lymphatic drainage from the right testis enters the interaortocaval and precaval nodes, while the left testis drains to the left para-aortic nodes. Seminomas demonstrate exquisite radiosensitivity and chemosensitivity to cisplatin-based regimens. Non-seminomatous tumors with persistent retroperitoneal lymphadenopathy exceeding one centimeter following induction chemotherapy mandate nerve-sparing retroperitoneal lymph node dissection to resect teratoma or viable residual carcinoma.",
+   "say": "Staging involves contrast CT imaging and post-orchiectomy marker monitoring. Seminomas respond exquisitely to radiotherapy and cisplatin chemotherapy. Persistent post-chemotherapy retroperitoneal masses in non-seminomatous disease require retroperitoneal lymph node dissection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Seminoma Management",
+     "points": [
+      "Exquisitely sensitive to radiotherapy",
+      "Surveillance or single-agent carboplatin in stage I",
+      "BEP chemotherapy for advanced disease"
+     ]
+    },
+    "right": {
+     "title": "Non-Seminoma Management",
+     "points": [
+      "Retroperitoneal lymph node dissection (RPLND)",
+      "BEP chemotherapy (bleomycin, etoposide, cisplatin)",
+      "Resect post-chemo residual masses > 1 cm"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f4d67f1d-4000-8000-f4d6-7f1d12345678",
+  "f1d67a64-4000-8000-f1d6-7a6412345678",
+  "f2d67bf7-4000-8000-f2d6-7bf712345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

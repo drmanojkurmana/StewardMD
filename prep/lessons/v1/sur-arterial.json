@@ -1,0 +1,160 @@
+{
+ "module": "sur-arterial",
+ "subject": "surgery",
+ "title": "Peripheral arterial disease, Fontaine stages, acute limb ischemia, and revascularization",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Rutherford Vascular Surgery 9th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Atherosclerotic peripheral arterial disease produces progressive luminal narrowing within lower extremity **arteries**, classically stratified by Fontaine stages or Rutherford categories. Fontaine stage II denotes reproducible intermittent claudication during exertion. Stage III signifies ischemic rest pain occurring when recumbent that awakens the patient at night. Stage IV denotes critical limb-threatening ischemia characterized by non-healing ischemic ulcerations or gangrene. Critical ischemia carries a high risk of major limb amputation without prompt revascularization.",
+   "say": "Peripheral arterial disease causes lower extremity ischemia, classified into Fontaine stages. Intermittent claudication represents stage two, while rest pain represents stage three. Stage four denotes critical tissue loss and gangrene requiring urgent revascularization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fontaine stage",
+     "Clinical presentation",
+     "Rutherford category"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Asymptomatic arterial stenosis",
+      "Category 0"
+     ],
+     [
+      "Stage IIa / IIb",
+      "Mild to severe intermittent claudication",
+      "Categories 1 to 3"
+     ],
+     [
+      "Stage III",
+      "Ischemic rest pain (worse supine)",
+      "Category 4"
+     ],
+     [
+      "Stage IV",
+      "Ulceration or ischemic gangrene",
+      "Categories 5 and 6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ankle-brachial index represents the cornerstone non-invasive diagnostic **modality** for evaluating lower extremity arterial perfusion. A resting index between 0.9 and 1.3 is normal, while values between 0.5 and 0.8 reflect moderate claudication. An index below 0.5 indicates severe ischemia, and ankle pressure under fifty millimeters of mercury signifies critical ischemia. In diabetic patients with heavily calcified, non-compressible tibial vessels yielding false values above 1.4, the toe-brachial index accurately measures microvascular perfusion.",
+   "say": "The ankle-brachial index is the primary non-invasive test for lower limb ischemia. An index between 0.9 and 1.3 is normal, while values below 0.5 signify severe ischemia. Toe-brachial index is used when arteries are calcified and non-compressible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Suspected lower limb ischemia"
+     },
+     {
+      "id": "n2",
+      "label": "Measure bilateral ankle-brachial index"
+     },
+     {
+      "id": "n3",
+      "label": "Toe pressures if vessels non-compressible"
+     },
+     {
+      "id": "n4",
+      "label": "Duplex ultrasound & CT angiography"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute limb ischemia manifests with the cardinal six Ps: pain, pallor, poikilothermia, pulselessness, **paresthesia**, and paralysis. Paresthesia and motor paralysis signify advanced nerve and muscle ischemia with impending irreversible necrosis. Rutherford classifies acute ischemia into viable (grade I), marginally threatened (grade IIa), immediately threatened (grade IIb), and irreversibly infarcted (grade III). Cardiogenic emboli from atrial fibrillation typically lodge abruptly at arterial bifurcations, most commonly the femoral bifurcation, without prior collateral development.",
+   "say": "Acute limb ischemia manifests with the six Ps: pain, pallor, coldness, pulselessness, paresthesia, and paralysis. Paresthesia and motor weakness indicate immediately threatened tissue requiring emergency surgical revascularization.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rutherford category",
+     "Sensory deficit",
+     "Motor deficit / Doppler signal"
+    ],
+    "rows": [
+     [
+      "Class I (Viable)",
+      "No sensory loss",
+      "No muscle weakness / audible signals"
+     ],
+     [
+      "Class IIa (Marginal)",
+      "Minimal toe numbness",
+      "No muscle weakness / venous signal"
+     ],
+     [
+      "Class IIb (Threatened)",
+      "Sensory loss above toes",
+      "Mild-moderate weakness / inaudible arterial"
+     ],
+     [
+      "Class III (Irreversible)",
+      "Profound anesthetic numbness",
+      "Paralysis and rigor / absent Doppler signals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency management of acute limb ischemia mandates immediate intravenous heparin anticoagulation to prevent propagating thrombus **formation**. Catheter-directed balloon thromboembolectomy using a Fogarty catheter rapidly restores arterial inflow. Post-reperfusion syndrome with severe muscle swelling mandates immediate prophylactic four-compartment calf fasciotomy to prevent myonecrosis. Chronic critical limb ischemia is managed by endovascular angioplasty or surgical bypass, where the reversed or in situ autologous great saphenous vein provides superior long-term patency.",
+   "say": "Acute limb ischemia requires immediate heparinization and emergency Fogarty balloon embolectomy. Reperfusion swelling mandates four-compartment calf fasciotomy. Chronic critical ischemia is treated with endovascular angioplasty or autologous saphenous vein bypass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Embolic Acute Ischemia",
+     "points": [
+      "Sudden acute onset without prior claudication",
+      "Identifiable cardiac source (atrial fibrillation)",
+      "Treated with Fogarty catheter embolectomy"
+     ]
+    },
+    "right": {
+     "title": "Thrombotic Acute Ischemia",
+     "points": [
+      "Gradual worsening on pre-existing atherosclerosis",
+      "Well-developed collateral vessels present",
+      "Requires catheter thrombolysis or surgical bypass"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "d98e3fa9-4000-8000-d98e-3fa912345678",
+  "d68e3af0-4000-8000-d68e-3af012345678",
+  "d78e3c83-4000-8000-d78e-3c8312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
