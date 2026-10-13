@@ -240,4 +240,7 @@
 ## 2026-10-14 LON5 endocrine DONE (branch books2-lon5, PR #1608 open)
 
 9 modules (pituitary, hypothyroid, hyperthyroid, parathyroid, bone, adrenal, aldo-pheo, gonadal-CAH, diabetes-overwrite-disclosed), 9 lessons + 9 KB + 90 MCQs bk2-med-371-460. Gates: LP 9/9, books-mcqs 2/2, lessons 23/23, lessons-100 3/3, medcov pass, subject pass, accuracy 5/5, similarity 0 hits, app 32/33 (pre-existing, verified on clean main). Next: push + PR, then LON6 neuro block (10 modules).
+## 2026-10-14 LON6 neuro DONE (branch books2-lon6, PR to open)
+10 modules (headache, epilepsy-overwrite, stroke-overwrite, dementia, movement, MS, neuropathy, neuromuscular, spinal-cord, cns-infections-overwrite), 10 lessons + 10 KB + 100 MCQs bk2-med-461-560. Gates: LP 10/10, suites 54/54, similarity 0 hits, answers 26/25/24/25, app 32/33 (pre-existing). Next: push + PR, then LON7 haematology block.
+
 
