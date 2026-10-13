@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "med-osce-procedures",
+ "subject": "medicine",
+ "title": "OSCE procedures: asepsis, access, oxygen, communication",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Every procedure opens with **identity, consent, allergy, indication and site**, plus hand hygiene, equipment and help. Wrong patient and wrong site errors survive every technology that skips these sentences. Aseptic non touch technique then protects key parts and key sites in ward procedures as strictly as in theatres, because microbes respect no hierarchy of rooms.",
+   "say": "Confirm identity, consent, allergy, indication and site first. Protect key parts and sites with aseptic non touch technique.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Check and consent"
+     },
+     {
+      "id": "b",
+      "label": "Prepare aseptically"
+     },
+     {
+      "id": "c",
+      "label": "Do, document, hand over"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Access skills** reward calm escalation. Venepuncture needs site care, correct bottles and order, sharps safety and labelling at the bedside. Failed cannulation twice in a sick patient calls senior help and protocol alternatives rather than fixation on one vein. Catheters demand indication, asepsis, confirmed bladder placement before balloon inflation and documented drainage thereafter.",
+   "say": "Label blood at the bedside, escalate access failure early and catheterise only for indication with confirmed placement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Safety mark"
+    ],
+    "rows": [
+     [
+      "Venepuncture",
+      "Label at bedside"
+     ],
+     [
+      "Catheter",
+      "Confirm before balloon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oxygen** is prescribed like a medicine, with target saturation range, device and monitoring, then reviewed. Unprescribed oxygen drifts into harm for susceptible lungs while deficiency injures every organ. Hand hygiene at the five moments, before contact and asepsis and after exposure, contact and surroundings, interrupts transmission that gloves alone never stop.",
+   "say": "Prescribe oxygen to a target range and review it. Practise hand hygiene at all five moments for every patient.",
+   "vis": null
+  },
+  {
+   "tx": "**Communication stations** test medicine itself. Bad news is paced with a warning, plain words, silence for reaction, empathy and a checked summary with follow up. Refusal by a patient with capacity is explored for fixable fears, respected, documented and safety netted, while all other care continues. Threats and false reassurance fail ethically and clinically in the same breath.",
+   "say": "Warn, tell plainly, listen and plan for bad news. Respect capacity based refusal, document and safety net always.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Good practice",
+     "points": [
+      "Plain paced words",
+      "Checked summary"
+     ]
+    },
+    "right": {
+     "title": "Harmful practice",
+     "points": [
+      "Rapid monologue",
+      "False reassurance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Notes** hand the patient safely onward. Indication, consent, asepsis, findings, specimens, complications, aftercare and escalation triggers let the next team act without repeating risk. A note that says only done transfers danger, not care. In OSCE halls and real wards alike, documentation is scored because patients live inside what the next clinician can discover quickly.",
+   "say": "Document indication, findings, specimens and aftercare for the next team. Done alone transfers danger, not care.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap1001",
+  "mk-gap1002",
+  "mk-gap1005"
+ ],
+ "src": [
+  "kb-clinical-protocols-osce-procedures"
+ ],
+ "refs": [
+  "NMC CBME competencies (India)",
+  "GMC guidance and WHO hand hygiene (labelled)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

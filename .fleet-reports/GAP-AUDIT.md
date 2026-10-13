@@ -130,3 +130,29 @@ Fourteen more life-critical THIN lines filled: ans-cpr (ACLS/BLS), ped-newborn-c
 ## Fill result (gap1013d, wave 4: drug safety)
 
 Five drug-safety THIN lines filled: phm-insulin, phm-opioids, phm-corticosteroids, phm-chelators-antidotes (antidotes) and mphar-interactions. Each verified lesson-less in the taxonomy before writing; each now has a hand lesson (indexed) plus 10 new MCQs in overlay gap1013d (50 items, mk-gap841 to mk-gap890), registered in prep.js (pharmacology and mrcp-pharmacology) and overlay-counts.json. Sources named per item: BNF insulin safety, NICE NG28, BNF opioid guidance, BNF corticosteroid safety, NPIS TOXBASE and BNF interactions. No numeric dose, conversion, taper or antidote rate is stated; insulin units, opioid conversions, steroid tapers/crisis doses and antidote doses are explicitly flagged as individual-prescription or current-chart territory. Step 3 re-read: dose scan clean; held list empty. Not filled (needs owner decisions recorded in DONE report): dedicated modules for high-alert drugs, paediatric dose calculation and pregnancy/lactation safety do not exist in the taxonomy, so no silent module creation was done.
+
+## Re-audit after waves 2 to 4 (2026-10-13, origin/main 6ee1ce93b)
+
+Waves 2 to 4 were verified line by line on origin/main before any new writing (taxonomy.json, lessons index with 932 entries, overlay-counts gap1013a to gap1013d, prep.js OVERLAYS). Result: every life-critical line named in the continuation is already at depth (hand lesson indexed plus 10 gap depth MCQs plus base bank): ACLS/BLS (ans-cpr), neonatal resuscitation (ped-newborn-care), ATLS (sur-atls), stroke (med-stroke), PE (med-pe-pulmonary-htn), tension pneumothorax (med-pleural), massive haemorrhage (sur-shock-transfusion), eclampsia (obg-hypertensive-disorders), PPH (obg-pph), ectopic (obg-ectopic), paracetamol (med-overdose), hyponatraemia (med-sodium), raised ICP (med-ich), meningitis (med-cns-infections), malignant hyperthermia (ans-intraop-complications), LA toxicity (ans-local-anaesthetics), paediatric dehydration (ped-diarrhoea), difficult airway (ans-difficult-airway, lesson plus MCQs; KB was the only missing element). No duplicate fill was made for these lines. True remainder filled in wave 5 below.
+
+| Line (continuation order) | Before wave 5 | After wave 5 |
+|---|---|---|
+| Difficult airway KB | MISSING (no kb file) | OK: kb/clinical-protocols/difficult-airway.json created; lesson src linked |
+| NTEP (cm-tuberculosis) | THIN: no lesson | OK: hand lesson plus 10 MCQs (gap1013e) |
+| NACO (cm-hiv-sti) | THIN: no lesson (KB only) | OK: hand lesson plus 10 MCQs |
+| NVBDCP (cm-arboviral) | THIN: no lesson | OK: hand lesson plus 10 MCQs |
+| UIP (cm-uip) | Lesson OK, no gap depth | OK: plus 10 depth MCQs |
+| Ayushman Bharat | MISSING: no module | OK: NEW cm-ayushman-bharat (taxonomy source plus built) plus lesson plus 10 MCQs |
+| RMNCH+A | THIN: proxy lessons only, no named module | OK: NEW cm-rmncha plus lesson plus 10 MCQs |
+| High-alert drugs | MISSING: no module | OK: NEW phm-high-alert-drugs plus lesson plus 10 MCQs |
+| Paediatric dose calculation | MISSING: no module | OK: NEW ped-dose-calculation plus lesson plus 10 MCQs |
+| Pregnancy/lactation safety | Lesson OK (mphar-special), no gap depth | OK: plus 10 depth MCQs |
+| Interactions depth | 10 gap MCQs (wave 4) | OK depth doubled: plus 10 more (20 gap total) |
+| Clinical examination steps | MISSING: no home | OK: NEW med-examination plus KB plus lesson plus 10 MCQs |
+| OSCE procedures | MISSING: no home | OK: NEW med-osce-procedures plus KB plus lesson plus 10 MCQs |
+| CBC/lab interpretation | MISSING: no home | OK: NEW med-lab-interpretation plus KB plus lesson plus 10 MCQs |
+| ECG, ABG, X-ray, CT | Already OK (lessons present) | Unchanged; no duplicate modules created |
+
+## Fill result (gap1013e, wave 5: programmes, drug safety depth, skills)
+
+Thirteen modules filled with 130 new MCQs (mk-gap891 to mk-gap1020) in overlay gap1013e, registered in prep.js OVERLAYS (community-medicine, pharmacology, paediatrics, medicine, mrcp-pharmacology) and overlay-counts.json, with the prep-app registry assertions updated to match (same pattern as waves 2 to 4). Ten new hand lessons (5 steps each, all passing prep-lessons checkLesson with zero problems): cm-tuberculosis, cm-hiv-sti, cm-arboviral, cm-ayushman-bharat, cm-rmncha, phm-high-alert-drugs, ped-dose-calculation, med-examination, med-osce-procedures, med-lab-interpretation, all indexed as hand in prep/lessons/v1/index.json. Seven NEW taxonomy modules (cm-ayushman-bharat, cm-rmncha, phm-high-alert-drugs, ped-dose-calculation, med-examination, med-osce-procedures, med-lab-interpretation) added to both prep/taxonomy source JSON and built prep/taxonomy.json (new medicine section med-skills); taxonomy validation passes for all 34 subjects. Four new KB clinical protocols: difficult-airway (completes the airway line; lesson src now kb-clinical-protocols-difficult-airway), clinical-examination, osce-procedures, lab-interpretation (skills lessons link them in src). New MCQs only; no existing explanation rewritten; no coming-soon text. Owner defaults applied: ss-* shells untouched; no milligram regimens where sources conflict (organophosphate atropine/pralidoxime and antivenom vials still indications and sequence only, carried as held omissions in DONE).

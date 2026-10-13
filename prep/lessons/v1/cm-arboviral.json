@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "cm-arboviral",
+ "subject": "community-medicine",
+ "title": "Vector borne diseases and NVBDCP: source, surveillance, severity",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Source reduction** decides whether next month has an outbreak. Aedes mosquitoes breed in stored domestic water, Anopheles in varied water collections, and sandflies and other vectors each leave an ecological signature. Teams map breeding, work with families to empty, cover or treat containers, and verify with repeat larval checks rather than single ceremonial sprays.",
+   "say": "Map breeding, reduce sources with the community and verify with repeat checks. Single sprays without source work always rebound.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Map breeding"
+     },
+     {
+      "id": "b",
+      "label": "Reduce source"
+     },
+     {
+      "id": "c",
+      "label": "Verify again"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dengue** care follows the patient, not the platelet count. Warning signs such as severe abdominal pain, persistent vomiting, mucosal bleeding and fluid accumulation demand hospital assessment and leakage monitoring. Fever settling can mark the start of leakage, not safety. Stable patients without warnings need clear return advice, fluids they can sustain and planned review.",
+   "say": "Judge dengue by warning signs and perfusion, not platelets alone. Fever settling can start leakage, so safety net every patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign group",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Warning signs",
+      "Admit and monitor"
+     ],
+     [
+      "No warnings",
+      "Advise and review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Malaria** needs species, severity and completion. Falciparum can kill quickly, vivax can relapse without radical cure, and severe features such as impaired consciousness or dark urine demand emergency referral and protocol parenteral care. Surveillance finds fevers early, confirms them and defends cleared areas. Milligram regimens are read from the current protocol chart at the bedside.",
+   "say": "Identify species and severity, complete treatment and refer severe malaria at once. Regimens come from the current protocol chart.",
+   "vis": null
+  },
+  {
+   "tx": "**Encephalitis surveillance** catches what single diagnoses miss. Acute encephalitis syndrome reporting, sentinel laboratory confirmation and Japanese encephalitis vaccination in endemic districts connect hospital cases to prevention. Chikungunya and dengue trends from sentinel sites sharpen vector action while clinicians treat syndromes and watch for warnings at the bedside.",
+   "say": "Report encephalitis syndromes, confirm at sentinel sites and vaccinate where the programme deploys. Trends guide timely vector action.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hospital role",
+     "points": [
+      "Syndrome care",
+      "Report cases"
+     ]
+    },
+    "right": {
+     "title": "Programme role",
+     "points": [
+      "Confirm trends",
+      "Direct prevention"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Filariasis, kala azar and other **programme diseases** share one logic: find cases actively, treat completely, control vector or reservoir and follow up honestly. Surgery and hospital care rescue late disease but never stop transmission alone. When surveillance staff, drugs and community trust work together, incidence falls and stays down across seasons.",
+   "say": "Find, treat fully, control the vector and follow up. Hospital rescue alone never stops vector borne transmission.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap911",
+  "mk-gap912",
+  "mk-gap915"
+ ],
+ "src": [],
+ "refs": [
+  "National Vector Borne Disease Control Programme (NVBDCP), India",
+  "WHO dengue and malaria guidance"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}

@@ -1,0 +1,114 @@
+{
+ "v": 1,
+ "module": "med-examination",
+ "subject": "medicine",
+ "title": "Clinical examination: consent, sequence, comparison",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Every examination opens with **consent**, hand hygiene, positioning and dignified exposure, with a chaperone for intimate examination. These steps are clinical, not ceremonial: they license touch, reveal signs clothing hides and build the trust that honest histories need. The painful area is approached last, after inspection has spoken, in abdomen, joint and breast alike.",
+   "say": "Open with consent, hygiene, position and dignified exposure, chaperone for intimate parts. Approach the painful area last.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Consent and position"
+     },
+     {
+      "id": "b",
+      "label": "Inspect"
+     },
+     {
+      "id": "c",
+      "label": "Examine and compare"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Comparison** is the interpretive engine. Pulses are felt on both sides with radio femoral timing, chest signs combine expansion, percussion, sounds and resonance across both lungs, and power is read with tone, reflexes, coordination and gait. Single signs seduce; combined, compared signs localise. Thyroid, nodes and joints each demand their linked systemic checks before conclusions harden.",
+   "say": "Compare sides and combine signs. Pulses, chest, motor and thyroid findings localise only as complete compared sets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Compare"
+    ],
+    "rows": [
+     [
+      "Chest",
+      "Expansion, note, sounds"
+     ],
+     [
+      "Motor",
+      "Power, tone, reflexes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sequence** protects findings. The abdomen is inspected and auscultated before percussion and palpation disturb sounds and provoke guarding. Joints follow look, feel, then active and passive movement with stability and neurovascular checks. Lymph nodes are described by site, size, consistency, tenderness, mobility, skin and drainage territory, with systemic review completing the story.",
+   "say": "Inspect and listen before palpating the abdomen. Look, feel and move joints, and describe nodes with their drainage territory.",
+   "vis": null
+  },
+  {
+   "tx": "**Breast and intimate examination** add chaperone, inspection in positions, every quadrant and axilla, skin and nipple review and symptom history to palpation skill. Shortcuts miss second lesions and break professional standards that examinations are judged by in OSCE halls and courts alike. Findings are described in plain anatomical language the next clinician can relocate without imagination.",
+   "say": "Breast examination inspects, palpates all quadrants and axillae and reviews skin and nipple, with consent and chaperone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete",
+     "points": [
+      "All quadrants and axilla",
+      "Skin and nipple review"
+     ]
+    },
+    "right": {
+     "title": "Incomplete",
+     "points": [
+      "One lump only",
+      "No history or chaperone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Closure** converts signs into care. Summarise findings aloud, offer likely differentials with honest uncertainty, thank the patient and agree targeted investigations, treatment and safety netting. Blanket testing and false certainty both fail the patient, one by waste and delay, the other by closing thought before evidence arrives. The record preserves findings, not impressions alone.",
+   "say": "Close by summarising, sharing differentials honestly and agreeing targeted tests with safety netting. Record findings fully.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "mk-gap991",
+  "mk-gap992",
+  "mk-gap995"
+ ],
+ "src": [
+  "kb-clinical-protocols-clinical-examination"
+ ],
+ "refs": [
+  "GMC guidance (UK)",
+  "NMC CBME competencies (India)"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "second_pass": "gap-audit-1013e re-read 2026-10-13"
+ }
+}
