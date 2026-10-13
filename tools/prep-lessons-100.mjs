@@ -395,6 +395,14 @@ async function main(argv = process.argv.slice(2)) {
   }
   const batchSize = Number(arg("--batch-size", "60"));
   mods = mods.slice(0, batchSize);
+  // --scopes <jsonfile>: { mid: scope } for modules whose bank scope is null and whose title
+  // misdescribes the items (verified by reading the stems). The draft teaches the scope; without
+  // this the draft follows a wrong title and item-grounded verification rightly fails.
+  const scf = arg("--scopes", null);
+  if (scf) {
+    const ov = readJ(path.resolve(scf)) || {};
+    mods = mods.map((m) => (ov[m.mid] ? { ...m, scope: String(ov[m.mid]) } : m));
+  }
   console.log(`modules: ${mods.length} (cap $${cap}, spent $${ledgerSum(ledger).toFixed(4)})`);
   const kb = loadKb(ROOT);
   const grounds = new Map();
