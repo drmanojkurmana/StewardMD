@@ -1,12 +1,12 @@
 {
  "schema": 1,
- "version": "0900c5b2ffb2",
- "count": 253,
+ "version": "bd81955dcc91",
+ "count": 257,
  "subjects": [
   {
    "key": "emergency",
    "label": "Emergency and Resuscitation",
-   "count": 8
+   "count": 11
   },
   {
    "key": "critical-care",
@@ -91,7 +91,7 @@
   {
    "key": "anaesthesia",
    "label": "Anaesthesia and Perioperative",
-   "count": 5
+   "count": 6
   },
   {
    "key": "ophthalmology-ent",
@@ -103,7 +103,7 @@
   {
    "key": "international",
    "label": "International",
-   "count": 220
+   "count": 224
   },
   {
    "key": "india",
@@ -2243,6 +2243,21 @@
    "status": "ai_drafted"
   },
   {
+   "id": "clinical-examination",
+   "title": "Clinical examination: systems, sequence and closure",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [],
+   "summary": "Consent, hygiene, positioning and dignified exposure open every examination, with chaperone for intimate parts. Systems are examined in protective sequence and always compared: pulses bilaterally, chest signs combined, abdomen inspected and auscultated before palpation, motor power with tone and reflexes. Closure summarises findings, differentials, targeted tests and safety netting.",
+   "sources": [
+    "GMC 2020",
+    "National Medical Commission 2023"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "clostridioides-difficile-infection",
    "title": "Clostridioides difficile infection (adult)",
    "subject": "infectious-disease",
@@ -2713,6 +2728,20 @@
    "sources": [
     "ISPAD 2022",
     "ISPAD / Pediatric Diabetes 2022"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "difficult-airway",
+   "title": "Difficult airway: oxygenate first, follow the plan",
+   "subject": "anaesthesia",
+   "population": "Adults",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [],
+   "summary": "Call for help early, preoxygenate and position well, limit laryngoscopy attempts, oxygenate with supraglottic airway or mask, wake the patient if safe, and proceed without delay to emergency front of neck access when intubation and oxygenation both fail. Confirm every tube with waveform capnography. No drug doses are stated; drug charts and local DAS charts govern them.",
+   "sources": [
+    "Difficult Airway Society and Association of Anaesthetists 2015"
    ],
    "status": "ai_drafted"
   },
@@ -4264,6 +4293,21 @@
    "status": "ai_drafted"
   },
   {
+   "id": "lab-interpretation",
+   "title": "Laboratory interpretation: blood count, chemistry and gases",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [],
+   "summary": "Read the full blood count as one instrument, chemistry by pattern with synthetic markers, kidney injury by urine output beside creatinine, troponin as injury needing mechanism, gases in pH, primary, compensation, gap and cause order, and clotting with history and medicines. Isolated numbers never decide transfusion or surgery.",
+   "sources": [
+    "NICE 2015",
+    "KDIGO 2012"
+   ],
+   "status": "ai_drafted"
+  },
+  {
    "id": "leptospirosis",
    "title": "Leptospirosis (adult, India)",
    "subject": "infectious-disease",
@@ -5114,6 +5158,21 @@
     "The Lancet (Eddleston et al.) 2008",
     "PLoS Medicine (Eddleston et al.) 2009",
     "ISCCM 2024"
+   ],
+   "status": "ai_drafted"
+  },
+  {
+   "id": "osce-procedures",
+   "title": "OSCE procedures: asepsis, access and communication",
+   "subject": "emergency",
+   "population": "Adults and children",
+   "basis": "international",
+   "counterpart": null,
+   "aliases": [],
+   "summary": "Identity, consent, allergy, indication and site checks open every procedure, with aseptic non touch protection of key parts and sites. Venepuncture labels at the bedside, cannulation failure escalates early, catheters need indication and confirmed placement, oxygen is prescribed to a target range, and communication stations pace bad news and respect capacity based refusal.",
+   "sources": [
+    "National Medical Commission 2023",
+    "WHO 2009"
    ],
    "status": "ai_drafted"
   },
