@@ -228,3 +228,5 @@
 - Wave GUY1 DONE (branch books2-guy1): 8 physiology lessons + 8 KB + 80 MCQs bk2-phy-001 to 080. Gates: LP.checkLesson 8/8, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 8/8. maikbook2 1870 -> 1950, no rebase needed. Next: GUY2 (7 modules).
 
 
+- Wave GUY2 DONE (branch books2-guy2): final 7 physiology lessons + 7 KB + 70 MCQs bk2-phy-081 to 150. Gates: LP.checkLesson 7/7, kb_validate_v2 7/7, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 7/7. maikbook2 1870 -> 1940, no rebase needed. Physiology 15/15 COMPLETE pending merges. Next: Long Cases queue.
+
