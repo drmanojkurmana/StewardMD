@@ -100,3 +100,5 @@ Wave LON2 DONE (branch books2-lon2): med-asthma, med-copd (KB reused), med-bronc
 Wave LON3 DONE (branch books2-lon3): med-oesophagus, med-peptic-gi-bleed, med-malabsorption, med-ibd (KB reused), med-pancreatitis (KB reused), med-jaundice, med-viral-hepatitis, med-fatty-liver, med-cirrhosis, med-autoimmune-metabolic-liver. Each: 1 v1 lesson, 1 KB (8 new + 2 reused), 10 MCQs bk2-med-181 to 280. Medicine gaps remaining: 72 med-* (LON4: renal block next).
 
 
+Wave LON5 DONE (branch books2-lon5, from origin/main): med-pituitary, med-hypothyroidism, med-hyperthyroidism, med-parathyroid, med-bone, med-adrenal, med-aldo-pheo, med-gonadal-cah, med-diabetes (unindexed orphan overwritten + registered, see STATE2 disclosure). Each: 1 v1 lesson, 1 KB (9 new; all Endocrinology non_infective), 10 MCQs bk2-med-371 to 460. Medicine gaps remaining: 54 lesson-less med-* on merged-main basis (LON6: neuro block next).
+
