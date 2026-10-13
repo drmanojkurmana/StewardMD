@@ -233,4 +233,6 @@
 
 
 - Wave LON2 DONE (branch books2-lon2): 10 respiratory long-case lessons + 9 KB + 100 MCQs bk2-med-081 to 180. Gates: LP.checkLesson 10/10, kb_validate_v2 9/9, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. maikbook2 2050 -> 2150, no rebase needed. Next: LON3 GI block.
+- Wave LON3 DONE (branch books2-lon3): 10 GI long-case lessons + 8 KB + 100 MCQs bk2-med-181 to 280. Gates: LP.checkLesson 10/10, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23, quiz-overlay 10/10. maikbook2 2050 -> 2150, no rebase needed. Next: LON4 renal block.
+
 
