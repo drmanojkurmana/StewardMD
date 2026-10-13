@@ -42,12 +42,24 @@
   {
    "tx": "The **positive predictive value** answers a different question: given a positive result, how likely is disease? It falls when **prevalence** is low, because many disease-free people generate false positives. A test with high specificity can still give mostly false positives in a low-prevalence population.",
    "say": "The positive predictive value answers a different question: given a positive result, how likely is disease? It falls when prevalence is low, because many disease-free people generate false positives. A test with high specificity can still give mostly false positives in a low-prevalence population.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-2x2.svg",
+    "alt": "Two by two table with 80 true positives, 20 false negatives, 10 false positives and 90 true negatives, giving sensitivity 80 percent, specificity 90 percent, positive predictive value 88.9 percent and negative predictive value 81.8 percent.",
+    "caption": "Read sensitivity down the diseased column. Read predictive value across the test row.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "A **reference interval** usually covers the central 95 percent of values in a healthy reference population. About 5 percent of healthy people fall outside it. When many tests are ordered, some mildly abnormal results occur by chance, so an isolated mild abnormality should be interpreted with caution.",
    "say": "A reference interval usually covers the central 95 percent of values in a healthy reference population. About 5 percent of healthy people fall outside it. When many tests are ordered, some mildly abnormal results occur by chance, so an isolated mild abnormality should be interpreted with caution.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-normal.svg",
+    "alt": "Normal bell curve centred on the mean, with bands at one, two and three standard deviations covering about 68, 95 and 99.7 percent of values.",
+    "caption": "The 68-95-99.7 rule: most values sit within two standard deviations of the mean.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "Choosing a **study design** depends on the aim. A **cross-sectional** survey estimates prevalence at one point in time. A **prospective cohort** follows disease-free people over time to measure **incidence**. Diagnostic accuracy is best estimated by comparing a test with a reference standard in consecutive patients.",

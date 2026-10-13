@@ -9,10 +9,9 @@
 .pn-pearl-tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 10px 0; max-width: 100%; }
 .pn-pearl-table { border-collapse: collapse; width: 100%; min-width: 280px; font-size: 13px; line-height: 1.5; }
 .pn-pearl-table th, .pn-pearl-table td { border: 1px solid rgba(66,205,181,.32); padding: 7px 8px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
-.pn-pearl-foot { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center; border-top: 1px solid rgba(66,205,181,.28); padding-top: 10px; font-size: 13px; }
-.pn-pearl-foot button { min-height: 40px; padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(66,205,181,.45); background: transparent; color: inherit; cursor: pointer; font: inherit; }
-.pn-pearl-foot button[aria-pressed="true"] { background: #42CDB5; color: #071318; border-color: #42CDB5; }
-.pn-pearl-foot button:focus-visible, .pn-pearl-credit:focus-visible, .pn-pearl-sheet button:focus-visible { outline: 2px solid #42CDB5; outline-offset: 2px; }
+.pn-pearl-foot { border-top: 1px solid rgba(66,205,181,.28); padding-top: 10px; }
+/* The footer buttons are the shared filled pills (prep-action-row.css); no outlined variant here. */
+.pn-pearl-credit:focus-visible, .pn-pearl-sheet button:focus-visible { outline: 2px solid #42CDB5; outline-offset: 2px; }
 .pn-pearl-sheet { position: fixed; inset: 0; background: rgba(7,19,24,.72); display: flex; align-items: flex-end; justify-content: center; z-index: 60; padding: 12px; box-sizing: border-box; }
 .pn-pearl-sheet-c { background: var(--pn-card, #0D1D23); color: var(--pn-ink, #EAF4F1); border: 1px solid rgba(66,205,181,.35); border-radius: 12px; padding: 18px; width: 100%; max-width: 520px; max-height: 80vh; overflow-y: auto; }
 .pn-pearl-sheet-c h3 { font-size: 16px; margin: 0 0 8px; }

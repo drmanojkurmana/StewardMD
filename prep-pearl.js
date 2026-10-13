@@ -54,11 +54,13 @@
   }
   function footerHtml(lesson, shareId, bookmarked) {
     var id = pearlId(lesson.module, shareId);
-    var share = shareId ? '<button type="button" data-act="id-share" data-v="' + esc(shareId) + '" aria-label="Share this Pearl">Share</button>' : '<button type="button" data-pearl-act="share">Share</button>';
-    return '<footer class="pn-pearl-foot"><span class="pn-pearl-id">Pearl ID: ' + id +
-      ' <button type="button" class="pn-pearl-copy" data-pearl-copy="' + id + '" aria-label="Copy Pearl ID ' + id + '">Copy</button></span>' +
-      '<span class="pn-pearl-acts"><button type="button" data-pearl-act="report">Report</button>' + share +
-      '<button type="button" data-pearl-act="bookmark" aria-pressed="' + (bookmarked ? "true" : "false") + '">Bookmark</button></span></footer>';
+    var A = (typeof window !== "undefined" && window.PREP_ACTION) || (typeof globalThis !== "undefined" && globalThis.PREP_ACTION);
+    if (A && A.actionRowHtml) return '<footer class="pn-pearl-foot">' + A.actionRowHtml({ pearl: true, shareId: shareId, bookmarked: bookmarked, meta: [{ label: "Pearl ID", value: id }] }) + "</footer>";
+    return '<footer class="pn-pearl-foot"><div class="pn-act-row" role="group" aria-label="Item actions">' +
+      '<button type="button" class="pn-act-btn" data-pearl-act="report">Report</button>' +
+      (shareId ? '<button type="button" class="pn-act-btn" data-act="id-share" data-v="' + esc(shareId) + '">Share</button>' : '<button type="button" class="pn-act-btn" data-pearl-act="share">Share</button>') +
+      '<button type="button" class="pn-act-btn" data-pearl-act="bookmark" aria-pressed="' + (bookmarked ? "true" : "false") + '">Bookmark</button></div>' +
+      '<p class="pn-act-meta"><button type="button" class="pn-act-chip" data-pearl-copy="' + id + '" aria-label="Copy Pearl ID ' + id + '">Pearl ID ' + id + '</button></p></footer>';
   }
   function tableHtml(vis) {
     if (!vis || vis.kind !== "table") return "";
@@ -89,7 +91,8 @@
     doc.addEventListener("click", function (e) {
       var t = e.target;
       var c = t.closest && t.closest("[data-pearl-copy]");
-      if (c) { var txt = c.getAttribute("data-pearl-copy"); if (typeof navigator !== "undefined" && navigator.clipboard) navigator.clipboard.writeText(txt); c.textContent = "Copied"; setTimeout(function () { c.textContent = "Copy"; }, 1200); return; }
+      if (c && !c.hasAttribute("data-copy-id")) { var txt = c.getAttribute("data-pearl-copy"); if (typeof navigator !== "undefined" && navigator.clipboard) navigator.clipboard.writeText(txt); var old = c.textContent; c.textContent = "Copied"; setTimeout(function () { c.textContent = old; }, 1200); return; }
+      if (c) return; /* data-copy-id chips are handled by prep-action-row (single Copied status) */
       var cl = t.closest && t.closest("[data-pearl-close]");
       if (cl) { closeSheet(doc); return; }
       var cr = t.closest && t.closest("[data-pearl-credit]");
