@@ -167,3 +167,7 @@
 - Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23. 100 IDs unique, no dups. maikbook2 1080 -> 1180.
 - Note: phm-opioids/corticosteroids/insulin had minimal unindexed stub files on main; wave overwrote them with full lessons (139 replaced lines). Untracked tools/generate-books2-pharma2.mjs is an unrelated 2-module stub, left untouched.
 - STATE2/COVERAGE2 updated + mirrors. Next: PHARMA3 (10 modules).
+## Wave PHARMA3 (2026-10-13, muse Wonder): pharmacology 20/28
+- Branch books2-pharma3 from origin/main post-OPH1-merge, PR #1592 open (no merge; squash after browser job). 10 lessons + 10 KB + 100 MCQs bk2-phm-221..320 (oral-antidiabetics, thyroid, pituitary, contraceptives-uterine, bone-calcium, haematinics, antiplatelets-fibrinolytics, beta-lactams, protein-synthesis-inhibitors, other-antibacterials).
+- Gates: LP.checkLesson 10/10, kb_validate_v2 10/10, prep-books-mcqs 2/2, prep-lessons 23/23. 100 IDs unique, no dups. maikbook2 1180 -> 1280, no rebase needed.
+- STATE2/COVERAGE2 updated + mirrors. Next: PHARMA4 (8 modules).

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-antiplatelets-fibrinolytics",
+ "subject": "pharmacology",
+ "title": "Antiplatelets, DAPT and fibrinolytics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aspirin** (irreversible **COX-1**, lifelong low dose secondary prevention, dyspepsia with PPI cover, Reye ban in viral children) with **clopidogrel** (prodrug needing **CYP2C19** activation; poor metabolisers and **omeprazole interaction** blunt effect, **TTP** rare) form DAPT backbones; genotyping with pantoprazole swaps personalise. Aspirin resistance (diabetes, noncompliance) checks adherence first; desensitisation protocols serve CAD with allergy.",
+   "say": "Lifelong low aspirin protects stents and strokes; clopidogrel needs CYP2C19 and dodges omeprazole. Genotype poor metabolisers.",
+   "vis": null
+  },
+  {
+   "tx": "**Prasugrel** (potent, **prior stroke or TIA ban**, CABG bleed ban, diabetes benefit) and **ticagrelor** (reversible, **dyspnoea**, no CYP issue, twice daily, CABG shorter hold) escalate ACS; **GP IIb/IIIa blockers** (**abciximab** thrombocytopenia, eptifibatide, tirofiban) bridge PCI thrombus. Cangrelor IV bridges surgery gaps; cilostazol (claudication, heart failure ban) walks legs. Potency trades bleeding; choice follows stroke, surgery and genes.",
+   "say": "Prior stroke bans prasugrel; ticagrelor breathes hard twice daily. Abciximab drops platelets acutely.",
+   "vis": null
+  },
+  {
+   "tx": "**DAPT duration** (ACS 12 months, stable PCI 6 months, high bleeding PRECISE-DAPT shortens, high ischaemia extends; **triple therapy** AF with PCI minimised to days then dual DOAC plus clopidogrel) balances stent thrombosis against bleed; PPI covers GI risk while NSAIDs stop. De-escalation (prasugrel to clopidogrel guided) and aspirin withdrawal (TWILIGHT ticagrelor monotherapy) modernise. Bleeding scores (PRECISE-DAPT, ARC-HBR) gate.",
+   "say": "Stent bleeds balance twelve months ACS, six stable; triple therapy shrinks to days. PPI shields guts, NSAIDs stop.",
+   "vis": null
+  },
+  {
+   "tx": "**Fibrinolytics** (**alteplase** stroke 4.5h and MI, **tenecteplase** single bolus MI, reteplase double) lyse with intracranial bleed watched (BP, glucose, age gates); **streptokinase** (antigenic, antibodies bar reuse, hypotension) cheaply infarcts where PCI lags. **Tranexamic acid** (**CRASH-2** trauma, **WOMAN** PPH, menorrhagia, epistaxis, dental) blocks fibrinolysis early (3 hour windows); haematuria upper tract clots caution. Urokinase niches catheters.",
+   "say": "Stroke lyses 4.5 hours alteplase; MI tenecteplases single bolus. Trauma and PPH tranexamic inside 3 hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clot drug",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Aspirin",
+      "COX-1 lifelong",
+      "PPI gut"
+     ],
+     [
+      "Clopidogrel",
+      "CYP2C19",
+      "No omeprazole"
+     ],
+     [
+      "Ticagrelor",
+      "Reversible BID",
+      "Dyspnoea"
+     ],
+     [
+      "Alteplase",
+      "Stroke 4.5h",
+      "Brain bleed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-281",
+  "bk2-phm-282",
+  "bk2-phm-283",
+  "bk2-phm-284",
+  "bk2-phm-285",
+  "bk2-phm-286",
+  "bk2-phm-287",
+  "bk2-phm-288",
+  "bk2-phm-289",
+  "bk2-phm-290"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

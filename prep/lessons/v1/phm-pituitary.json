@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-pituitary",
+ "subject": "pharmacology",
+ "title": "Pituitary drugs: GH, desmopressin, oxytocin and dopaminergics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Growth hormone** (somatropin, IGF-1 mediated growth, glucose antagonism) treats documented deficiency (stimulation tests, short stature with delayed bone age) and Turner, CKD and SGA short stature; excess causes acromegaly (octreotide, pegvisomant, surgery per endocrine wave). Side effects (intracranial hypertension, slipped epiphysis, glucose intolerance) watch; athletics abuse (acromegalic features, cardiomyopathy) bans. IGF-1 with growth velocity follows.",
+   "say": "Short delayed bone age low IGF-1 is GH deficiency: replace and watch velocity. Slipped epiphysis headaches warn.",
+   "vis": null
+  },
+  {
+   "tx": "**Desmopressin** (V2 selective, no pressor V1) treats **central diabetes insipidus** (thirsty polyuria with dilute urine, water deprivation plus copeptin sorting central from nephrogenic), **bedwetting** (nocturnal enuresis second line), and **mild haemophilia A with von Willebrand disease** (endothelial vWF release, tachyphylaxis). **Hyponatraemia** (nasal overabsorption, elderly) restricts fluids; nephrogenic DI (lithium, hypercalcaemia) instead gets thiazides with amiloride. Desmopressin challenge distinguishes.",
+   "say": "Dilute thirsty polyuria concentrating on desmopressin is central DI. Bedwetters and mild haemophilics benefit; sodium watched.",
+   "vis": null
+  },
+  {
+   "tx": "**Oxytocin** (labour **induction and augmentation**, **PPH prevention** and treatment, milk letdown) is titrated by contraction monitoring (hyperstimulation with fetal distress eases off, fluids restrict into hyponatraemia); **ergometrine** (sustained tetany, hypertension ban, retained placenta) and **carboprost** (asthma ban, diarrhoea) rescue atonic bleeding with **misoprostol** (shivering, sublingual PPH where cold chain fails). Active third stage (oxytocin with controlled traction) prevents most PPH.",
+   "say": "Atonic PPH gets oxytocin first, ergometrine if pressure allows, carboprost if breathing allows. Hyperstimulated uterus rests off drip.",
+   "vis": null
+  },
+  {
+   "tx": "**Dopamine agonists** (**bromocriptine, cabergoline**: prolactinoma shrinkers per pituitary wave, acromegaly adjuncts, Parkinson add-ons) risk **valvulopathy** (high dose Parkinson range, echo watched) with impulse control disorders; **tocolytics** (nifedipine first line preterm labour, **atosiban** oxytocin antagonist, **MgSO4** neuroprotection with toxicity watched: reflexes, respirations, urine output, **calcium rescue**, indomethacin ductus caution) buy steroids time. **Magnesium eclampsia** (Pritchard, seizure recurrence) monitors similarly.",
+   "say": "Preterm contractions buy steroids with nifedipine; fetal brain gains MgSO4. Lost reflexes on magnesium is toxicity: calcium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pituitary drug",
+     "Role",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Somatropin",
+      "Short deficiency",
+      "Slipped epiphysis"
+     ],
+     [
+      "Desmopressin",
+      "Central DI",
+      "Hyponatraemia"
+     ],
+     [
+      "Oxytocin",
+      "Labour, PPH",
+      "Hyperstimulation"
+     ],
+     [
+      "Cabergoline",
+      "Prolactinoma",
+      "Valves high dose"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-241",
+  "bk2-phm-242",
+  "bk2-phm-243",
+  "bk2-phm-244",
+  "bk2-phm-245",
+  "bk2-phm-246",
+  "bk2-phm-247",
+  "bk2-phm-248",
+  "bk2-phm-249",
+  "bk2-phm-250"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
