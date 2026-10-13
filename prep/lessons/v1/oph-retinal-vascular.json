@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "oph-retinal-vascular",
+ "subject": "ophthalmology",
+ "title": "Diabetic retinopathy, hypertensive retinopathy and vascular occlusions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Diabetic retinopathy** stages microaneurysms to proliferative: mild (microaneurysms only), moderate (dot blot haemorrhages, hard exudates, venous beading), severe nonproliferative by the **4-2-1 rule** (severe haemorrhages in 4 quadrants, beading in 2, IRMA in 1), then proliferative with new vessels on disc (NVD) or elsewhere (NVE) bleeding into vitreous. **Diabetic macular oedema** (focal leaking microaneurysms or diffuse breakdown, hard exudate plaques threatening fovea) is charted by OCT thickness. Panretinal photocoagulation regresses proliferation; anti VEGF (ranibizumab patterns) with focal or grid laser treats oedema; tight glycaemic, pressure and lipid control underpins all.",
+   "say": "Count quadrants by 4-2-1 for severe disease. New vessels need panretinal laser; swollen macula needs anti VEGF.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypertensive retinopathy** (Keith Wagener Barker grades: I arteriolar narrowing, II AV nicking, III haemorrhages with cotton wool spots and exudates, IV disc swelling) mirrors systemic risk; malignant hypertension with disc oedema needs urgent pressure control. **Copper wiring** (severe) and **silver wiring** (sclerotic) mark chronicity. Toxaemia of pregnancy, renal failure and anaemia retinopathies mimic with reversible changes on systemic cure. Central serous chorioretinopathy (stressed young men, steroid use, ink blot or smokestack leak with neurosensory detachment) settles mostly, with photodynamic or mineralocorticoid patterns for chronic cases.",
+   "say": "Nicking plus silver wires is chronic hypertension; disc swelling with pressure crisis is malignant. Stressed young man with blurred spot: central serous.",
+   "vis": null
+  },
+  {
+   "tx": "**Branch retinal vein occlusion** (arteriosclerotic crossing compression) bleeds sectorally with macular oedema and ischaemia driving new vessels; grid laser with anti VEGF treats oedema while sectoral scatter ablates ischaemia. **Central retinal vein occlusion** splits ischaemic (poor vision, florid haemorrhages, afferent pupil defect, rubeosis risk with 100 day glaucoma) from nonischaemic (better vision, milder signs); fluorescein quantifies nonperfusion guiding prophylactic scatter. Hyperhomocysteinaemia, glaucoma and hyperviscosity hunt causes in young patients. Hemispheric occlusions behave between the two.",
+   "say": "Crossing nick bleeds one quadrant: branch occlusion. Florid blood with blind pupil is ischaemic central: watch iris vessels.",
+   "vis": null
+  },
+  {
+   "tx": "**Central retinal artery occlusion** pales the retina with a **cherry red spot** (preserved choroidal blush at fovea), boxcarring of blood columns and sudden painless blindness; cilioretinal sparing preserves slivers. Irreversible after about 90 minutes, emergency lowers pressure (ocular massage, paracentesis, acetazolamide) and hunts giant cell arteritis (ESR, CRP, steroids) versus embolic carotid disease (echo, Doppler). Branch occlusions sectoralise with Hollenhorst plaques at bifurcations. **Ocular ischaemic syndrome** (carotid stenosis with midperipheral dot haemorrhages, dilated veins, low pressure and rubeosis) needs carotid revascularisation.",
+   "say": "Pale retina with cherry spot is artery blocked: minutes matter, check carotids and arteritis. Low pressure with midperipheral dots is carotid starvation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Occlusion",
+     "Fundus",
+     "Clock"
+    ],
+    "rows": [
+     [
+      "BRVO",
+      "Sectoral blood, crossing nick",
+      "Anti VEGF, sector laser"
+     ],
+     [
+      "Ischaemic CRVO",
+      "Florid blood, RAPD",
+      "Scatter, watch rubeosis"
+     ],
+     [
+      "CRAO",
+      "Pale with cherry spot",
+      "Minutes, massage, arteritis hunt"
+     ],
+     [
+      "OIS",
+      "Dots, low pressure",
+      "Fix carotid"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-oph-121",
+  "bk2-oph-122",
+  "bk2-oph-123",
+  "bk2-oph-124",
+  "bk2-oph-125",
+  "bk2-oph-126",
+  "bk2-oph-127",
+  "bk2-oph-128",
+  "bk2-oph-129",
+  "bk2-oph-130"
+ ],
+ "src": [],
+ "refs": [
+  "Parsons' Diseases of the Eye 23rd Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-oph2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
