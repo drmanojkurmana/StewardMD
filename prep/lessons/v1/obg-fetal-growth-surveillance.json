@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-fetal-growth-surveillance",
+ "subject": "obstetrics-gynaecology",
+ "title": "Cardiotocography: baseline heart rate, variability, deceleration patterns and FIGO classification",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Intrapartum electronic fetal monitoring utilizing **cardiotocography (CTG)** provides continuous real-time assessment of fetal oxygenation and autonomic neurological integrity. Systematic interpretation requires structured evaluation of four fundamental parameters: baseline heart rate, baseline variability, presence of accelerations, and deceleration morphology in relation to uterine contraction frequency.",
+   "say": "Cardiotocography continuously evaluates fetal oxygenation and autonomic function during labor. Structured interpretation examines four parameters: baseline heart rate, baseline variability, accelerations, and deceleration patterns in relation to contractions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CTG Parameter",
+     "Normal (Reassuring)",
+     "Suspicious (Non-reassuring)",
+     "Pathological (Abnormal)"
+    ],
+    "rows": [
+     [
+      "Baseline Heart Rate",
+      "110 to 160 bpm",
+      "100-109 bpm or 161-180 bpm",
+      "< 100 bpm or > 180 bpm"
+     ],
+     [
+      "Baseline Variability",
+      "5 to 25 bpm",
+      "< 5 bpm for 30-50 minutes",
+      "< 5 bpm for > 50 min or > 25 bpm (saltatory)"
+     ],
+     [
+      "Accelerations",
+      "Present (>= 2 in 20 min)",
+      "Absence non-specific in labor",
+      "Absence with other abnormal features"
+     ],
+     [
+      "Decelerations",
+      "None or early only",
+      "Variable with non-reassuring features",
+      "Repetitive late, prolonged, or atypical variable"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic morphology and timing of **fetal heart rate decelerations** correlate strictly with distinct underlying pathophysiological mechanisms. Early decelerations are symmetrical, mirror uterine contractions exactly, and represent benign vagal discharge provoked by fetal head compression. In contrast, late decelerations begin after the contraction peak, lag behind the contraction, and signal critical uteroplacental insufficiency and myocardial hypoxia.",
+   "say": "The shape and timing of decelerations reveal their underlying cause. Early decelerations mirror contractions exactly, caused by benign fetal head compression. Late decelerations begin after contraction peaks, indicating uteroplacental insufficiency and fetal hypoxia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Decelerations",
+     "points": [
+      "Symmetrical, gradual onset and recovery",
+      "Nadir matches the exact peak of uterine contraction",
+      "Caused by intracranial pressure stimulating vagus nerve",
+      "Benign physiological finding; no intervention needed"
+     ]
+    },
+    "right": {
+     "title": "Late Decelerations",
+     "points": [
+      "Symmetrical, gradual decrease starting at/after contraction peak",
+      "Nadir occurs after the peak of contraction",
+      "Recovery delayed until after contraction finishes",
+      "Caused by uteroplacental hypoperfusion and chemoreceptor hypoxia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Variable decelerations are the most common deceleration pattern encountered during labor, characterized by an abrupt drop from baseline taking under thirty seconds to nadir. Mediated by transient **umbilical cord compression**, partial venous occlusion initially induces a brief compensatory heart rate rise ('shouldering') before complete arterial occlusion triggers systemic hypertension, baroreceptor stimulation, and steep vagal deceleration.",
+   "say": "Variable decelerations are the most common pattern, showing an abrupt drop in heart rate caused by umbilical cord compression. Partial cord compression causes initial shouldering before complete occlusion triggers baroreceptor vagal slowing.",
+   "vis": null
+  },
+  {
+   "tx": "A smooth, regular, undulating sine wave devoid of accelerations or normal beat-to-beat variability defines a **sinusoidal heart rate pattern**. Lasting longer than twenty to thirty minutes, it is pathognomonic for severe fetal anemia secondary to Rh isoimmunization, massive fetomaternal hemorrhage, ruptured vasa previa, or acute fetal asphyxia. It represents an emergency requiring immediate operative delivery or urgent intrauterine resuscitation.",
+   "say": "A smooth, regular sine wave pattern without variability defines a sinusoidal heart rate. Lasting over twenty minutes, it is pathognomonic for severe fetal anemia from Rh disease or massive bleeding, demanding immediate operative delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification (FIGO)",
+     "Trace features",
+     "Underlying fetal status",
+     "Mandated clinical action"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "All 4 parameters reassuring",
+      "No hypoxia / normal acid-base",
+      "Continue routine intrapartum care"
+     ],
+     [
+      "Suspicious",
+      "One non-reassuring feature",
+      "Compensated / low hypoxia risk",
+      "Correct reversible causes (fluids/position)"
+     ],
+     [
+      "Pathological",
+      "Two or more non-reassuring, or one abnormal",
+      "High probability of fetal hypoxia/acidemia",
+      "Expedite delivery / Scalp blood sample"
+     ],
+     [
+      "Sinusoidal pattern",
+      "Smooth wave (3-5 cycles/min, 5-15 bpm amp)",
+      "Severe fetal anemia or profound asphyxia",
+      "Immediate Category 1 emergency delivery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-151",
+  "bk2-obg-152",
+  "bk2-obg-153",
+  "bk2-obg-154",
+  "bk2-obg-155",
+  "bk2-obg-156",
+  "bk2-obg-157",
+  "bk2-obg-158",
+  "bk2-obg-159",
+  "bk2-obg-160"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

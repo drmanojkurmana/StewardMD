@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "module": "obg-ovarian-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Epithelial ovarian carcinoma: Risk of Malignancy Index, FIGO staging and cytoreduction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Epithelial ovarian carcinoma remains the most lethal gynaecological malignancy, with over seventy percent of patients diagnosed at advanced Stage III or IV disease. The predominant histological subtype is **high-grade serous carcinoma**, which molecular and pathological evidence demonstrates arises from precursor serous tubal intraepithelial carcinoma lesions located within the fimbriated end of the fallopian tube, universally characterized by TP53 mutations.",
+   "say": "Ovarian cancer is the most lethal gynaecological cancer, usually detected at advanced stages. The main subtype is high-grade serous carcinoma, which arises from precursor lesions in the fallopian tube fimbriae and carries universal TP53 mutations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological subtype",
+     "Precursor lesion & genetics",
+     "Clinical presentation",
+     "Chemosensitivity"
+    ],
+    "rows": [
+     [
+      "High-grade serous (70-80%)",
+      "STIC in fimbria / TP53 / BRCA1/2",
+      "Ascites, peritoneal carcinomatosis",
+      "High response to platinum/taxane"
+     ],
+     [
+      "Endometrioid (10%)",
+      "Atypical endometriosis / PTEN / ARID1A",
+      "Associated with synchronous endometrial ca",
+      "Good response"
+     ],
+     [
+      "Clear cell (5-10%)",
+      "Endometrioma / ARID1A / PIK3CA",
+      "Thromboembolism, hypercalcemia",
+      "Chemoresistant / Poor prognosis"
+     ],
+     [
+      "Mucinous (3-5%)",
+      "Mucinous adenoma / KRAS mutation",
+      "Large multiloculated unilateral mass",
+      "Chemoresistant / Exclude GI primary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preoperative triage of an adnexal mass utilizes the validated **Risk of Malignancy Index (RMI)** to estimate the probability of malignancy and direct referral to specialized gynaecological oncologists. The RMI integrates three independent parameters: the ultrasound score (U), menopausal status (M), and the serum CA-125 level. An RMI threshold score exceeding two hundred provides high sensitivity and specificity for malignant disease.",
+   "say": "Preoperative evaluation uses the Risk of Malignancy Index to predict cancer risk. RMI multiplies ultrasound features, menopausal status, and serum CA-125. A score above two hundred indicates high malignancy risk warranting referral to a specialist oncology center.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RMI formula components",
+     "points": [
+      "Ultrasound score (U = 0, 1 or 3 based on 5 features)",
+      "Multilocular, solid areas, metastases, ascites, bilaterality",
+      "Menopausal status (M = 1 premenopausal, M = 3 postmenopausal)",
+      "Serum CA-125 level in units per milliliter"
+     ]
+    },
+    "right": {
+     "title": "Clinical interpretation",
+     "points": [
+      "RMI = U x M x Serum CA-125",
+      "RMI < 25: Low risk (general gynaecologist management)",
+      "RMI 25-200: Intermediate risk",
+      "RMI > 200: High risk (> 75% malignant; gynae-oncology center)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unlike cervical cancer, staging of ovarian carcinoma is strictly **surgical staging** performed via a midline vertical laparotomy. Standard comprehensive staging mandates aspiration of peritoneal ascites or peritoneal washings, total abdominal hysterectomy, bilateral salpingo-oophorectomy, infragastric omentectomy, bilateral pelvic and para-aortic lymphadenectomy up to the renal vessels, and systematic peritoneal biopsies of diaphragmatic, paracolic, and pelvic surfaces.",
+   "say": "Ovarian cancer is staged surgically through a midline laparotomy. Comprehensive staging requires collecting peritoneal fluid, removing the uterus, ovaries, and omentum, dissecting pelvic and para-aortic lymph nodes, and taking systematic peritoneal biopsies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FIGO Stage (2014)",
+     "Anatomical extent of tumor spread",
+     "Sub-stages",
+     "5-year survival"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Growth strictly limited to the ovaries or fallopian tubes",
+      "IA (one ovary) / IB (both) / IC (ruptured/positive washings)",
+      "85-90%"
+     ],
+     [
+      "Stage II",
+      "Extension to pelvic organs below the pelvic brim",
+      "IIA (uterus/tubes) / IIB (other pelvic intraperitoneal organs)",
+      "70-75%"
+     ],
+     [
+      "Stage III",
+      "Peritoneal metastasis outside pelvis and/or retroperitoneal nodes",
+      "IIIA (microscopic) / IIIB (<= 2 cm) / IIIC (> 2 cm or node positive)",
+      "35-45%"
+     ],
+     [
+      "Stage IV",
+      "Distant metastasis outside the peritoneal cavity",
+      "IVA (malignant pleural effusion) / IVB (parenchymal liver/spleen)",
+      "15-20%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cornerstone of advanced ovarian cancer management is primary **cytoreductive debulking surgery**. Achieving complete macroscopic cytoreduction with zero visible residual disease (R0) represents the single most critical independent modifiable prognostic variable determining long-term survival. Postoperative adjuvant therapy consists of carboplatin and paclitaxel chemotherapy, followed by targeted maintenance with poly-ADP ribose polymerase (PARP) inhibitors.",
+   "say": "The primary treatment for advanced ovarian cancer is cytoreductive surgery. Removing all visible tumor with zero residual disease is the strongest factor improving survival. Postoperative chemotherapy combines carboplatin and paclitaxel, followed by targeted PARP inhibitors.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-obg-081",
+  "bk2-obg-082",
+  "bk2-obg-083",
+  "bk2-obg-084",
+  "bk2-obg-085",
+  "bk2-obg-086",
+  "bk2-obg-087",
+  "bk2-obg-088",
+  "bk2-obg-089",
+  "bk2-obg-090"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

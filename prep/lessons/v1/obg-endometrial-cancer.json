@@ -1,0 +1,154 @@
+{
+ "v": 1,
+ "module": "obg-endometrial-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Endometrial carcinoma: Bokhman dual pathogenesis, Lynch syndrome and FIGO staging",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Endometrial carcinoma is the most common gynaecological malignancy in developed nations. Clinically, over ninety percent of affected women present early with **postmenopausal bleeding**. In postmenopausal patients presenting with abnormal spotting, transvaginal ultrasound measurement of the endometrial stripe provides high negative predictive value. A stripe thickness exceeding four millimeters mandates histological confirmation via outpatient Pipelle biopsy.",
+   "say": "Endometrial cancer is the most common gynaecological cancer, presenting with postmenopausal bleeding in over ninety percent of cases. An endometrial thickness over four millimeters on ultrasound requires prompt biopsy to exclude cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endometrial stripe thickness",
+     "Clinical setting",
+     "Malignancy probability",
+     "Clinical action required"
+    ],
+    "rows": [
+     [
+      "<= 4 mm",
+      "Postmenopausal bleeding",
+      "< 1% (reassuring)",
+      "Observation unless bleeding recurs"
+     ],
+     [
+      "> 4 mm",
+      "Postmenopausal bleeding",
+      "10-15% (elevated)",
+      "Mandatory endometrial biopsy"
+     ],
+     [
+      "> 11 mm",
+      "Asymptomatic postmenopausal",
+      "Elevated risk",
+      "Endometrial biopsy recommended"
+     ],
+     [
+      "Any thickness with fluid",
+      "Postmenopausal bleeding",
+      "High suspicion if thick wall",
+      "Hysteroscopy and targeted biopsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classical clinicopathological classification described by Bokhman separates endometrial cancer into two distinct biological categories. **Type I endometrioid carcinoma** represents eighty percent of cases, occurs in perimenopausal women, is driven by unopposed estrogen and obesity, arises from atypical hyperplasia, and harbors PTEN and microsatellite instability mutations. In contrast, **Type II serous carcinoma** is estrogen-independent, arises in atrophic endometrium, carries TP53 mutations, and has poor prognosis.",
+   "say": "The Bokhman classification divides endometrial cancer into two types. Type one is estrogen-driven, linked to obesity, and has a favorable prognosis. Type two comprises serous and clear cell tumors arising in older women with TP53 mutations and aggressive behavior.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I Endometrioid Carcinoma",
+     "points": [
+      "Accounts for 80% of cases, diagnosed in perimenopause",
+      "Driven by chronic unopposed estrogen and obesity",
+      "Precursor: atypical endometrial hyperplasia (EIN)",
+      "Mutations: PTEN (80%), PIK3CA, KRAS, ARID1A, MSI-H",
+      "Favorable prognosis (5-year survival > 85%)"
+     ]
+    },
+    "right": {
+     "title": "Type II Serous / Clear Cell Carcinoma",
+     "points": [
+      "Accounts for 10-20% of cases, older postmenopausal women",
+      "Estrogen-independent, arises in thin atrophic uterus",
+      "Precursor: endometrial intraepithelial carcinoma (EIC)",
+      "Mutations: TP53 (> 90%), HER2 amplification",
+      "Aggressive, early peritoneal spread, poor prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "All newly diagnosed endometrial carcinomas require screening for **Lynch syndrome** (hereditary non-polyposis colorectal cancer). Caused by germline mutations in DNA mismatch repair genes (MLH1, MSH2, MSH6, PMS2), Lynch syndrome confers a lifetime endometrial cancer risk of forty to sixty percent, equal to or exceeding the lifetime risk of colorectal cancer in affected women. Universal reflex immunohistochemical testing identifies families requiring genetic counseling.",
+   "say": "All endometrial cancers should be screened for Lynch syndrome. Caused by mismatch repair mutations, it confers a forty to sixty percent lifetime risk of endometrial cancer. Universal immunohistochemistry identifies affected families for genetic testing.",
+   "vis": null
+  },
+  {
+   "tx": "Staging of endometrial cancer follows the **FIGO surgical staging system** performed via minimally invasive total laparoscopic hysterectomy, bilateral salpingo-oophorectomy, and sentinel lymph node mapping. Stage I is confined to the uterine corpus, subdivided by myometrial invasion depth into Stage IA (less than fifty percent) and Stage IB (fifty percent or greater). Stage II invades cervical stroma, Stage III demonstrates locoregional spread, and Stage IV invades bladder, bowel, or distant organs.",
+   "say": "Endometrial cancer is staged surgically with laparoscopic hysterectomy, removal of ovaries, and sentinel node mapping. Stage one is limited to the uterine body, stage two invades the cervix, stage three extends into the pelvis or lymph nodes, and stage four involves distant organs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FIGO Stage",
+     "Anatomical extent of invasion",
+     "Prognostic significance",
+     "Adjuvant therapy requirement"
+    ],
+    "rows": [
+     [
+      "Stage IA",
+      "Confined to endometrium or < 50% myometrial invasion",
+      "Excellent prognosis (> 90% survival)",
+      "Observation (or vaginal vault brachytherapy if G3)"
+     ],
+     [
+      "Stage IB",
+      "Invasion >= 50% of the myometrial thickness",
+      "Moderate risk of nodal metastasis",
+      "Vaginal brachytherapy +/- external beam RT"
+     ],
+     [
+      "Stage II",
+      "Invasion into cervical stromal connective tissue",
+      "Increased locoregional recurrence risk",
+      "External beam pelvic radiotherapy"
+     ],
+     [
+      "Stage III",
+      "Spread to serosa/adnexa (IIIA), vagina (IIIB), nodes (IIIC)",
+      "High risk of systemic recurrence",
+      "Chemotherapy plus external beam radiation"
+     ],
+     [
+      "Stage IV",
+      "Invasion of bladder/bowel mucosa (IVA) or distant organ (IVB)",
+      "Advanced metastatic disease",
+      "Systemic chemotherapy (carboplatin/paclitaxel)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-091",
+  "bk2-obg-092",
+  "bk2-obg-093",
+  "bk2-obg-094",
+  "bk2-obg-095",
+  "bk2-obg-096",
+  "bk2-obg-097",
+  "bk2-obg-098",
+  "bk2-obg-099",
+  "bk2-obg-100"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

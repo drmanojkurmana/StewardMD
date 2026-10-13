@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "module": "obg-aph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Antepartum haemorrhage: placenta previa, abruptio placentae and vasa previa",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antepartum haemorrhage** is defined as vaginal bleeding occurring from twenty-four completed weeks of gestation until delivery of the fetus, complicating up to five percent of pregnancies. The two major placental causes are placenta previa and abruptio placentae. Rapid clinical differentiation is vital because maternal and fetal resuscitation protocols, delivery urgency, and surgical approaches differ fundamentally between these conditions.",
+   "say": "Antepartum haemorrhage is bleeding from twenty-four weeks gestation until delivery. The two main placental causes are placenta previa and abruptio placentae. Differentiating them rapidly is essential because resuscitation, delivery timing, and surgical management differ fundamentally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Placenta Previa",
+     "Abruptio Placentae"
+    ],
+    "rows": [
+     [
+      "Nature of bleeding",
+      "Painless, causeless, recurrent, bright red",
+      "Painful, dark venous blood, sudden onset"
+     ],
+     [
+      "Uterine tone & feel",
+      "Soft, relaxed, completely non-tender",
+      "Tense, hypertonic, tender, 'woody' feel"
+     ],
+     [
+      "Fetal parts & lie",
+      "Easily palpable, abnormal lie/presentation common",
+      "Difficult to palpate due to spasm and tenderness"
+     ],
+     [
+      "Fetal heart rate",
+      "Usually normal unless maternal exsanguination",
+      "Frequently distressed, bradycardic or absent"
+     ],
+     [
+      "Coagulopathy / DIC",
+      "Extremely rare unless massive shock",
+      "Common (10-30%) due to thromboplastin release"
+     ],
+     [
+      "Digital vaginal exam",
+      "Strictly contraindicated until scan rules out previa",
+      "Avoided until placenta localized"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **placenta previa**, the placenta implants partially or completely over the lower uterine segment. Transvaginal sonography defines low-lying placenta when the placental edge lies within twenty millimeters of the internal os, and placenta previa when the placenta directly covers the os. Digital vaginal examination is strictly contraindicated prior to ultrasound exclusion, as digital palpation can provoke catastrophic, torrential hemorrhage.",
+   "say": "In placenta previa, the placenta implants over the lower uterine segment. Transvaginal ultrasound defines low-lying placenta within twenty millimeters of the os, and placenta previa when directly covering it. Vaginal examination is strictly contraindicated prior to ultrasound.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Placenta Accreta Spectrum (PAS)",
+     "points": [
+      "Placenta accreta: chorionic villi adhere to myometrium",
+      "Placenta increta: villi invade deeply into myometrium",
+      "Placenta percreta: villi penetrate serosa into bladder",
+      "Highest risk: anterior previa overlying prior cesarean scar"
+     ]
+    },
+    "right": {
+     "title": "Vasa Previa",
+     "points": [
+      "Fetal vessels traverse membranes across internal os",
+      "Associated with velamentous cord insertion or succenturiate lobe",
+      "Vessels rupture during amniotomy, causing fetal exsanguination",
+      "Apt test confirms fetal hemoglobin; emergency C-section required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Abruptio placentae** involves premature detachment of a normally situated placenta prior to delivery. Blood may escape vaginally (revealed hemorrhage) or accumulate retroplacentally behind the placenta (concealed hemorrhage). Extensive retroplacental hematomas force thromboplastin into maternal circulation, precipitating disseminated intravascular coagulation, while extravasated blood dissecting into myometrial bundles creates a bruised, purple **Couvelaire uterus**.",
+   "say": "Abruptio placentae is the premature detachment of a normally situated placenta. Hemorrhage may be revealed externally or concealed behind the placenta. Retroplacental hematomas release thromboplastin into maternal circulation, triggering DIC and creating a bruised Couvelaire uterus.",
+   "vis": null
+  },
+  {
+   "tx": "Emergency management of antepartum haemorrhage requires immediate hemodynamic stabilization with large-bore intravenous access, fluid resuscitation, and blood bank cross-matching. In severe abruption with coagulopathy, fresh frozen plasma, platelets, and cryoprecipitate (target fibrinogen > 200 mg/dL) must be transfused. Delivery is expedited via emergency **cesarean section** for fetal distress, persistent severe hemorrhage, or placenta previa covering the internal os.",
+   "say": "Emergency management focuses on rapid stabilization with intravenous fluids, blood cross-matching, and correcting coagulopathy with cryoprecipitate and plasma. Delivery is expedited by emergency cesarean section for fetal distress, persistent bleeding, or placenta previa covering the internal os.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scenario",
+     "Diagnostic finding",
+     "Primary maternal goal",
+     "Definitive obstetric management"
+    ],
+    "rows": [
+     [
+      "Placenta previa >= 36-37 wk",
+      "Placental edge < 20 mm from os",
+      "Elective delivery before labor onset",
+      "Planned cesarean section by senior team"
+     ],
+     [
+      "Severe abruption with distress",
+      "Hypertonic uterus, fetal bradycardia",
+      "Immediate operative rescue",
+      "Emergency Category 1 cesarean delivery"
+     ],
+     [
+      "Severe abruption with IUD",
+      "Fetal demise, maternal coagulopathy",
+      "Correct DIC / Fibrinogen > 200 mg/dL",
+      "Aim for vaginal delivery under analgesia"
+     ],
+     [
+      "Vasa previa rupture",
+      "Sinusoidal FHR upon membrane rupture",
+      "Prevent fetal exsanguination",
+      "Immediate emergency cesarean section"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-obg-111",
+  "bk2-obg-112",
+  "bk2-obg-113",
+  "bk2-obg-114",
+  "bk2-obg-115",
+  "bk2-obg-116",
+  "bk2-obg-117",
+  "bk2-obg-118",
+  "bk2-obg-119",
+  "bk2-obg-120"
+ ],
+ "src": [],
+ "refs": [],
+ "gen": "AI",
+ "run": "books2-wave1",
+ "model": "local-expert",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
