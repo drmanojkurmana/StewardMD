@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-general-anaesthetics",
+ "subject": "pharmacology",
+ "title": "General anaesthetics, premedication and malignant hyperthermia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**General anaesthesia** passes Guedel stages (analgesia, excitement with struggling, surgical planes, medullary paralysis) now tracked by **MAC** (minimum alveolar concentration preventing movement in half, lower in elderly, higher in infants and alcoholics) with BIS and end tidal monitoring. Balanced technique (hypnotic plus analgesic plus relaxant) minimises each toxicity; day care favours rapid emergence agents. Preoperative fasting, consent and allergy history precede every plan.",
+   "say": "MAC measures potency: low in elderly, high in infants. Balanced hypnosis plus analgesia plus relaxation minimises harm.",
+   "vis": null
+  },
+  {
+   "tx": "**Inhaled agents** (sevoflurane smooth induction, isoflurane pungent with coronary steal debates, desflurane fastest with airway irritability, **nitrous oxide** analgesic second gas effect but **diffusion hypoxia** on discontinuation needing 100 percent oxygen, B12 inactivating with chronic use) vasodilate dose dependently; sevoflurane suits children while desflurane suits morbid obesity. Compound A (sevoflurane with dry absorbent) and carbon monoxide (desflurane) warn circuits; scavenging protects staff. Hepatitis (halothane) retired older vapours.",
+   "say": "Sweet sevoflurane induces kids; fast desflurane wakes the obese. Nitrous off needs pure oxygen: diffusion hypoxia.",
+   "vis": null
+  },
+  {
+   "tx": "**Intravenous agents** specialise: **propofol** (rapid smooth, antiemetic, **egg and soy allergy caution**, injection pain, bacterial growth, infusion syndrome with prolonged high dose), **etomidate** (haemodynamically kind, **adrenal suppression** single dose, myoclonus), **ketamine** (**dissociative**, bronchodilator suiting asthmatics, **emergence delirium** with laryngospasm in children, raised intracranial pressure caution), thiopental (porphyria banned, laryngospasm), **dexmedetomidine** (cooperative sedation, bradycardia). Opioids (fentanyl chest wall rigidity) with relaxants complete.",
+   "say": "Egg allergic asthmatic child: ketamine dissociates kindly. Propofol burns veins and bugs: strict asepsis.",
+   "vis": null
+  },
+  {
+   "tx": "**Premedication** (glycopyrrolate drying secretions, midazolam anxiolysis, ondansetron antiemesis, ranitidine with metoclopramide aspiration prophylaxis in obstetrics and reflux) smooths induction; malignant hyperthermia (**RYR1** calcium storm from volatiles or suxamethonium: masseter spasm, rising ETCO2, mixed acidosis, hyperthermia late) is aborted by **stopping triggers with dantrolene** (plus cooling, bicarbonate, hyperkalaemia treated). Family screening with caffeine halothane contracture testing follows; safe anaesthesia thereafter avoids triggers.",
+   "say": "Masseter locked with soaring CO2 is malignant hyperthermia: stop triggers, dantrolene now.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Sevoflurane",
+      "Sweet, kids",
+      "Compound A"
+     ],
+     [
+      "Nitrous",
+      "Second gas",
+      "Diffusion hypoxia"
+     ],
+     [
+      "Propofol",
+      "Smooth, antiemetic",
+      "Egg, bugs"
+     ],
+     [
+      "Ketamine",
+      "Dissociative",
+      "Emergence"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-131",
+  "bk2-phm-132",
+  "bk2-phm-133",
+  "bk2-phm-134",
+  "bk2-phm-135",
+  "bk2-phm-136",
+  "bk2-phm-137",
+  "bk2-phm-138",
+  "bk2-phm-139",
+  "bk2-phm-140"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

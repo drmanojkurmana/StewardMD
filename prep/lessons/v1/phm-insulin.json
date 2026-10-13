@@ -2,65 +2,88 @@
  "v": 1,
  "module": "phm-insulin",
  "subject": "pharmacology",
- "title": "Insulin safety: the right insulin, patient and time; treat hypos early",
- "minutes": 7,
+ "title": "Insulin: types, regimens, DKA and hypoglycaemia",
+ "minutes": 6,
  "steps": [
   {
-   "tx": "**Insulin** errors harm because products differ in onset and duration and names sound alike. Prescribe and check the **exact product, device, dose units, timing and injection site**, and confirm the patient identifier before every dose. Never abbreviate units, never draw insulin with a non-insulin syringe, and rotate sites to avoid lipohypertrophy and erratic absorption (BNF insulin safety).",
-   "say": "Check product, device, units, timing and site before every insulin dose, and rotate injection sites.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Right product + device"
-     },
-     {
-      "id": "b",
-      "label": "Right patient + time"
-     },
-     {
-      "id": "c",
-      "label": "Rotate sites"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
+   "tx": "**Insulins** sort by kinetics: rapid (**lispro, aspart, glulisine**: meal bolus, pumps), short (**regular**: IV DKA and infusions), intermediate (**NPH**: cloudy, peaks, nocturnal hypoglycaemia), long (**glargine, detemir, degludec**: flat basal, no peak, less nocturnal lows), **premixed** (convenience, rigid). Concentrated U200 and U300 suit resistance; **inhaled Afrezza** (smokers and lung disease banned, spirometry watched) niches. Rotation with lipohypertrophy checks preserves absorption.",
+   "say": "Meals bolus rapid, nights basaled flat: bolus feeds, basal fasts. Cloudy NPH peaks nightly: lows lurk.",
+   "vis": null
   },
   {
-   "tx": "**Hypoglycaemia** is insulin's emergency: sweating, tremor, hunger, confusion or reduced consciousness. A conscious patient who can swallow takes **fast-acting oral glucose by mouth protocol** and is rechecked; an unconscious or unsafe-swallow patient gets parenteral treatment and senior help per protocol. Recheck after treatment, find why it happened (missed meal, dose, illness, alcohol or interaction) and adjust the plan, not just the episode (NICE NG28; BNF).",
-   "say": "Treat hypos early by mouth if swallowing is safe, parenterally if not, then recheck and find the cause.",
+   "tx": "**Basal bolus** (long basal with rapid meal boluses, carb counting) mimics physiology beating **sliding scale alone** (reactive, hypoglycaemic, hospital harm); correction scales supplement, never substitute. Type 1 always basal (DKA without), type 2 adds basal to orals failing. Dawn phenomenon (morning surge) splits evening basal; Somogyi (nocturnal hypo rebounding) cuts it. Sick day rules (never stop basal, ketones, fluids) prevent DKA.",
+   "say": "Sliding scale alone harms inpatients: basal always, bolus meals. Dawn rises need basal; Somogyi rebounds cut.",
+   "vis": null
+  },
+  {
+   "tx": "**Diabetic ketoacidosis** (hyperglycaemia with ketonaemia and acidosis, nausea with Kussmaul breathing and fruity breath; infection, missed insulin, SGLT2 euglycaemic triggers) is treated by **fluids first** (saline resuscitation), **IV regular insulin infusion** (fixed weight based, glucose falls, dextrose added), **potassium** (total body depleted despite normal labs; hold insulin under 3.3), bicarbonate only under pH 6.9, trigger hunted. Switch subcutaneous (basal given before stopping infusion) avoids relapse; HHS (no ketones, profound dehydration, higher mortality) fluids more.",
+   "say": "DKA fluids first, insulin infusion, potassium watched, basal before stopping drip. Euglycaemic SGLT2 DKA fools meters.",
+   "vis": null
+  },
+  {
+   "tx": "**Hypoglycaemia** (**Whipple triad**: symptoms, low glucose, relief on correction; autonomic sweats and tremor versus neuroglycopenic confusion) is treated by **15-15 rule** (15 g fast carbs, recheck 15 minutes) with **glucagon** (unconscious, vomiters) and octreotide for sulfonylurea overdoses (long observation). Impaired awareness (beta blockers mask) needs driving and glucagon co-prescription; **lipodystrophy** rotates sites while pumps with CGM (hybrid closed loop) smooth. Sulfonylurea lows linger days.",
+   "say": "Confused sweaty diabetic is hypo until glucose proves otherwise: 15 grams, 15 minutes, glucagon if out.",
    "vis": {
     "kind": "table",
     "cols": [
-     "State",
-     "Route"
+     "Insulin",
+     "Profile",
+     "Role"
     ],
     "rows": [
      [
-      "Conscious, safe swallow",
-      "Oral fast-acting glucose protocol"
+      "Lispro/aspart",
+      "Rapid",
+      "Meals, pumps"
      ],
      [
-      "Unconscious / unsafe",
-      "Parenteral protocol + senior help"
+      "Regular",
+      "Short IV",
+      "DKA infusion"
+     ],
+     [
+      "Glargine",
+      "Flat basal",
+      "Nights"
+     ],
+     [
+      "NPH",
+      "Peaky cloudy",
+      "Twice daily"
      ]
     ]
    }
-  },
-  {
-   "tx": "Sick days change everything: illness usually raises glucose and ketone risk even when the patient eats less, so insulin is generally **continued with closer monitoring** and sick-day advice, never stopped by default in type 1 diabetes. Document glucose and ketone checks, driving and hypo-awareness counselling, and sharps safety. Exact units and correction factors are individually prescribed and are never improvised in teaching items.",
-   "say": "In illness, insulin is continued with closer monitoring and sick-day advice, and exact units stay individually prescribed.",
-   "vis": null
   }
- ]
+ ],
+ "quiz": [
+  "bk2-phm-211",
+  "bk2-phm-212",
+  "bk2-phm-213",
+  "bk2-phm-214",
+  "bk2-phm-215",
+  "bk2-phm-216",
+  "bk2-phm-217",
+  "bk2-phm-218",
+  "bk2-phm-219",
+  "bk2-phm-220"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
