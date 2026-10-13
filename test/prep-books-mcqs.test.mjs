@@ -88,5 +88,5 @@ test("maikbook2 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 400, "Expected 400 high-yield verified MCQs in maikbook2 (160 OBG + 240 pathology batch 2)");
+  assert.equal(totalItems, 520, "Expected 400 high-yield verified MCQs in maikbook2 (160 OBG + 360 pathology batch 2)");
 });

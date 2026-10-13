@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "pat-vasculitis-vascular-tumours",
+ "subject": "pathology",
+ "title": "Vasculitis and vascular tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Vasculitis** inflames vessel walls classified by dominant vessel size: large (Takayasu, giant cell), medium (polyarteritis nodosa, Kawasaki) and small (ANCA associated, immune complex and cryoglobulinaemic). Wall inflammation stenoses, aneurysms or ruptures vessels while ischaemia injures downstream organs in patterns that localise size. Biopsy, ANCA serology and imaging triangulate diagnosis.",
+   "say": "Vasculitis sorts by vessel size: large, medium or small. Inflamed walls narrow, balloon or burst. Organ pattern plus ANCA plus biopsy triangulates it.",
+   "vis": null
+  },
+  {
+   "tx": "**Giant cell arteritis** inflames large arteries in patients over fifty with new headache, scalp tenderness, jaw claudication, raised ESR and vision loss from anterior ischaemic optic neuropathy. Temporal biopsy shows granulomatous panarteritis with giant cells at fragmented internal elastic lamina, but skip lesions demand long specimens and immediate steroids must never wait for biopsy when vision threatens.",
+   "say": "Over fifty with jaw claudication and high ESR means giant cell arteritis. Steroids immediately protect vision; biopsy follows within days. Skip lesions need long samples.",
+   "vis": null
+  },
+  {
+   "tx": "**Polyarteritis nodosa** necrotises medium arteries causing renovascular hypertension, mononeuritis multiplex, livedo, testicular pain and visceral microaneurysms, sparing lungs and glomeruli (no glomerulonephritis), sometimes hepatitis B driven and ANCA negative. Kawasaki disease instead acutely inflames medium vessels in febrile children threatening coronary aneurysms prevented by early immunoglobulin.",
+   "say": "Polyarteritis aneurysms medium arteries sparing glomeruli, sometimes hepatitis B linked. Kawasaki fevers children toward coronary aneurysms prevented by early immunoglobulin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vasculitis",
+     "Size",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Takayasu",
+      "Large aorta branches",
+      "Young women, pulseless arms, bruits"
+     ],
+     [
+      "Giant cell",
+      "Large cranial branches",
+      "Over 50, jaw claudication, blindness risk"
+     ],
+     [
+      "Polyarteritis nodosa",
+      "Medium visceral",
+      "Microaneurysms, mononeuritis, HBV link, ANCA negative"
+     ],
+     [
+      "ANCA small vessel",
+      "Small capillaries venules",
+      "PR3 GPA, MPO MPA, EGPA asthma eosinophils"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Small vessel **ANCA vasculitis** splits into granulomatosis with polyangiitis (PR3, upper airway destruction, lung nodules), microscopic polyangiitis (MPO, renal pulmonary capillaritis without granulomas) and eosinophilic granulomatosis (asthma, eosinophilia, neuropathy). All share pauci immune necrotising injury and crescentic nephritis potential needing urgent immunosuppression with infection exclusion.",
+   "say": "PR3 granulomatosis destroys upper airways; MPO capillaritis floods lungs and kidneys; eosinophilic type asthmas first. All pauci immune and urgent.",
+   "vis": null
+  },
+  {
+   "tx": "Vascular tumours range from benign **haemangiomas** (infantile proliferating then involuting, cherry angiomas of ageing) through Kaposi sarcoma (HHV8 spindle vessels in immunosuppression) to angiosarcoma (malignant endothelium, scalp of elderly, liver after vinyl chloride or arsenic, post radiation fields). Bacillary angiomatosis in AIDS mimics Kaposi but is Bartonella infection curable by antibiotics.",
+   "say": "Vascular tumours span involuting infant haemangiomas to lethal angiosarcomas. Kaposi follows HHV8 immunosuppression. Bartonella mimics it curably in AIDS.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-321",
+  "bk2-pat-322",
+  "bk2-pat-323",
+  "bk2-pat-324",
+  "bk2-pat-325",
+  "bk2-pat-326",
+  "bk2-pat-327",
+  "bk2-pat-328",
+  "bk2-pat-329",
+  "bk2-pat-330"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

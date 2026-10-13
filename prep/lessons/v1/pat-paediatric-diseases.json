@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-paediatric-diseases",
+ "subject": "pathology",
+ "title": "Diseases of infancy and childhood: malformations, infections and tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Children are not small adults in pathology: disease clusters into congenital malformations, prematurity complications, infections, tumours distinct from adult cancers and sudden death syndromes. **Malformations** arise from intrinsic developmental errors, disruptions destroy previously normal structures, deformations mould normal tissue by mechanical force and sequences cascade from one initiating defect.",
+   "say": "Childhood pathology groups into malformations, prematurity disease, infections and distinct tumours. Malformations err intrinsically; disruptions destroy; deformations mould. Names predict mechanisms.",
+   "vis": null
+  },
+  {
+   "tx": "Premature lungs lacking surfactant develop **respiratory distress syndrome** with atelectasis, hypoxia and hyaline membranes lining alveoli from fibrin and necrotic debris. Antenatal steroids mature surfactant and exogenous surfactant rescues established disease. Retinopathy of prematurity and necrotising enterocolitis of the preterm gut complete the prematurity triad examiners rotate.",
+   "say": "Preterm lungs without surfactant collapse with hyaline membranes. Steroids before birth and surfactant after rescue them. Prematurity also threatens eyes and gut.",
+   "vis": null
+  },
+  {
+   "tx": "**Necrotising enterocolitis** ischaemically necroses preterm bowel, especially terminal ileum and proximal colon, causing feed intolerance, pneumatosis intestinalis gas in the wall and perforation. Immature barrier, formula feeding and bacterial colonisation converge as triggers. Surgical resection saves perforated disease at the cost of short bowel risk.",
+   "say": "Preterm gut necroses at ileum and colon with gas inside the wall. Feed intolerance plus pneumatosis means stop feeds and escalate. Perforation needs surgery.",
+   "vis": null
+  },
+  {
+   "tx": "Childhood tumours are often embryonal small blue cell neoplasms: **neuroblastoma** from adrenal or sympathetic tissue secreting catecholamines, Wilms tumour (nephroblastoma) triphasic in kidney, retinoblastoma with RB1 loss and hepatoblastoma with raised AFP. Leukaemia remains commonest overall, and tumour syndromes (Li Fraumeni, Beckwith Wiedemann) link overgrowth to cancer risk.",
+   "say": "Childhood cancers are embryonal: neuroblastoma secretes catecholamines, Wilms fills kidneys triphasically, retinoblastoma follows RB1 loss. Overgrowth syndromes predispose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neuroblastoma",
+     "points": [
+      "Adrenal or sympathetic chain, calcified, crosses midline",
+      "Catecholamines, opsoclonus myoclonus sometimes",
+      "MYCN amplification worsens prognosis",
+      "Stage 4S in infants may regress spontaneously"
+     ]
+    },
+    "right": {
+     "title": "Wilms tumour",
+     "points": [
+      "Large renal mass, usually unilateral, does not cross midline like neuroblastoma imaging",
+      "Triphasic blastema, stroma, epithelium",
+      "WT1 syndromes (WAGR, Denys Drash) predispose",
+      "Excellent prognosis with multimodal therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sudden infant death syndrome** remains a diagnosis of exclusion after negative autopsy, scene and history review in an infant under one year, linked to prone sleep, soft bedding and overheating in vulnerable brainstem arousal development. Back to sleep campaigns cut incidence dramatically, proving environmental modification without fully solving mechanism.",
+   "say": "SIDS excludes every other cause in infants under one year. Prone sleep and soft bedding raise risk in vulnerable arousal systems. Back sleeping cut deaths sharply.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-251",
+  "bk2-pat-252",
+  "bk2-pat-253",
+  "bk2-pat-254",
+  "bk2-pat-255",
+  "bk2-pat-256",
+  "bk2-pat-257",
+  "bk2-pat-258",
+  "bk2-pat-259",
+  "bk2-pat-260"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}
