@@ -141,3 +141,8 @@
 
 ## Wave B2P2-ENT (2026-10-13)
 12 ENT lessons + 12 KB + 120 MCQs (bk2-ent-001..120) on branch books2-batch2p2-ent. Batch2-part2 contained only Dhingra ENT 8th + duplicate Tripathi; derm/ortho/vascular books not in upload, remain TODO in COVERAGE2.
+
+## Wave OPH2 (2026-10-13, muse Wonder): ophthalmology complete 20/20 pending merges
+- Branch books2-oph2 from origin/main post-#1584, PR #1586 open (no merge; squash after browser job). 10 lessons + 8 KB + 100 MCQs bk2-oph-101..200 (secondary-glaucoma, vitreous, retinal-vascular, retinal-detachment, macula, tumours, optic-nerve, pupil, strabismus, trauma).
+- 2 KBs map to pre-existing articles, not duplicated. Gates: LP.checkLesson 10/10, kb_validate_v2 8/8, prep-books-mcqs 2/2, prep-lessons 23/23. maikbook2 1080 -> 1180 (1280 after OPH1 #1585 merges; rebase then).
+- prep-lessons-100 targetModules failure re-verified pre-existing on clean main. STATE2/COVERAGE2 updated in /tmp/books2-work + fleet mirrors. Next: microbiology 22, pathology 17, pharmacology 28.
