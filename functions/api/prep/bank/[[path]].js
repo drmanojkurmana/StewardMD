@@ -38,7 +38,7 @@ const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Owner-reviewed MaiK questions (Author screen + tools/prep-qgen.mjs publish, set "maik<n>"): overlay/maik<n>/<subject>/<module>.json,
 // immutable. Exam-bank sets (ck<n>, plab<n>[a-z], mrcs<n>[a-z], ...) use the same overlay layout under their own exam prefix.
-const MAIK_RE = /^overlay\/(?:maik(?:img)?[1-9]\d{0,2}|[a-z]{2,12}[1-9]\d{0,2}[a-z]?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+const MAIK_RE = /^overlay\/(?:maikfill\d|maik(?:img)?[1-9]\d{0,2}|[a-z]{2,12}[1-9]\d{0,2}[a-z]?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Openly licensed images for image MCQs: img/maikimg/i-<hash>.webp, immutable.
 const MAIK_IMG_RE = /^img\/maikimg\/i-[a-z0-9-]{8,40}\.webp$/;
 // MaiK overlay manifest: overlay/maik/index.json (short cache) points to immutable overlay/maik/manifest-[0-9a-f]{8,16}.json
