@@ -1,77 +1,60 @@
 {
- "v": 1,
- "module": "med-diabetes",
- "subject": "medicine",
- "title": "DKA and HHS: fluids, potassium, insulin in that order",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "**Diabetic ketoacidosis** combines hyperglycaemia, ketosis and acidosis, usually with vomiting, abdominal pain, deep breathing and drowsiness. **Hyperosmolar hyperglycaemic state** brings profound dehydration and confusion without major ketosis. Both kill through dehydration, potassium shifts and the precipitating illness, so find the trigger (infection, missed insulin, new diabetes) while resuscitating (JBDS-IP DKA guidance).",
-   "say": "DKA combines high glucose, ketones and acidosis. HHS brings profound dehydration and confusion without major ketosis. Both kill through dehydration and potassium shifts, so find the trigger while resuscitating.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Confirm ketones + gas"
-     },
-     {
-      "id": "b",
-      "label": "Fluids"
-     },
-     {
-      "id": "c",
-      "label": "Potassium check"
-     },
-     {
-      "id": "d",
-      "label": "Insulin"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Sequence saves lives: **isotonic fluids first**, check **potassium before insulin** (insulin drives potassium into cells), then a fixed-rate insulin infusion with glucose added as levels fall so insulin can continue until ketones clear. Replace potassium in fluids when normal, withhold and replace first when low, and recheck gases, ketones, glucose and potassium on schedule.",
-   "say": "Sequence saves lives: isotonic fluids first, check potassium before insulin, then insulin with glucose added as levels fall so insulin can continue until ketones clear. Recheck on schedule.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Step",
-     "Why"
-    ],
-    "rows": [
-     [
-      "Fluids first",
-      "Restore circulation and renal clearance"
-     ],
-     [
-      "Potassium before insulin",
-      "Insulin drops serum potassium"
-     ],
-     [
-      "Glucose with insulin later",
-      "Lets insulin clear ketones safely"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Beware **cerebral oedema** in children (headache, falling pulse, rising pressure, drowsiness) and hypokalaemia or hypoglycaemia from treatment itself. HHS needs slower, careful rehydration and clot prevention. Never stop insulin because glucose normalised while ketones persist; the acid, not the sugar, is the disease.",
-   "say": "Beware cerebral oedema in children and treatment complications. Never stop insulin because glucose normalised while ketones persist; the acid, not the sugar, is the disease."
+  "v": 1,
+  "module": "med-diabetes",
+  "subject": "medicine",
+  "title": "Diabetes mellitus long case: control, complications and crises",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**History** (**thirst** polyuria polydipsia nights, **weight** T1 loss T2 gain acanthosis, **MODY** young lean family three generations, **LADA** adult lean GAD slow insulin, **feet** numbness callus ulcers claudication, **eyes** blur laser cataract, **kidney** froth oedema dialysis, **crises** DKA vomiting HHS confusion) with **viva** (**ketotic** vomiting tachypnoeic, **footsore** ulcerated neuropathic) profiles; **control** (HbA1c hypos drives) grades. Sugars climb.",
+      "say": "Thirsts weights MODYs LADAs is history: feet numb eyes blur kidneys froth crises sicken ketotics breathe footsores limp controls grade HbA1cs track hypos warn. Urines sweeten.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**BMI** waist acanthosis xanthelasma, **feet** pulses monofilament callus ulcers Charcot, **neuro** stocking vibration reflexes, **eyes** cataract retinopathy macula, **kidney** oedema BP ACR, **skin** necrobiosis injections lipohypertrophy, **DKA** dehydrated Kussmaul fruity, **HHS** drowsy hyperosmolar) with **bedside** (**glucose** ketones gases, **ACR** protein quantifies, **ECG** potassium shifts) gases; **amputations** (toes healed) notes. Complications gather.",
+      "say": "BMIs feet neuros eyes is exam: kidneys swell skins mark DKAs breathe HHSs dull glucoses read ketones rise ACRs leak ECGs peak amputations heal shoes fit. Limbs threaten.",
+      "vis": null
+    },
+    {
+      "tx": "**Investigations** (**HbA1c** control targets grades, **GAD** LADA MODY gene sorts, **ACR** eGFR kidney stages, **retina** screening laser grades, **feet** Doppler pressures debrides, **lipids** statin thresholds, **ketones** DKA HHS gases) with **differentials** (**T1** ketotic young, **T2** resistant obese, **MODY** gene lean, **secondary** pancreatic steroids) sorts; **MDT** (diabetes eyes feet decides) meets. Sugars stratify.",
+      "say": "HbA1cs GADs ACRs retinas is Ix: feet image lipids treat ketones gas T1s sicken T2s resist MODYs inherit secondaries scar MDTs meet lasers burn dialyses plan. Numbers stage.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**metformin** first SGLT2 GLP cardio-renal, **insulin** basal bolus sick rules, **statin** ACE BP targets guards, **feet** offload debride revascularise, **laser** retina vitrectomy saves, **DKA** fluids potassium insulin resolves, **HHS** slow osmolar corrects) with **traps** (**hypos** driving warns, **euglycaemic** SGLT2 keto checks, **pregnancy** plans folate) closes; **follow** (HbA1c ACR feet eyes) tracks. Sugars tamed.",
+      "say": "Metformins insulins statins feet is Rx: lasers burn DKAs fill HHSs slow hypos warn euglycaemics check pregnancies plan follows track controls steady wishes respect. Lives extend.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-451",
+    "bk2-med-452",
+    "bk2-med-453",
+    "bk2-med-454",
+    "bk2-med-455",
+    "bk2-med-456",
+    "bk2-med-457",
+    "bk2-med-458",
+    "bk2-med-459",
+    "bk2-med-460"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon5",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }
