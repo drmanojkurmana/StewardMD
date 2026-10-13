@@ -149,7 +149,7 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.match(read("prep.js"), /"mcc-chronic-care": \["maik23", "maik24", "maik27", "maikfill1", "maikfill7"\]/, "maikfill1/maikfill7 wire mcc-chronic-care");
   assert.match(read("prep.js"), /"plab-biochemistry": \["maikfill1"\], "plab-dermatology": \["maikfill1", "maikfill7"\]/, "maikfill sets wire the new plab subjects");
   assert.match(read("prep.js"), /"ss-neurology": \["maikfill6"\]/, "maikfill6 wires ss-neurology");
-  assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2", "gap1013c"\], surgery: \["maiktopic1", "ck2", "gap1013c"\]/, "step2ck subjects read the ck1 overlay");
+  assert.match(read("prep.js"), /paediatrics: \["maiktopic1", "ck2", "gap1013c"\], surgery: \["maiktopic1", "ck2", "gap1013c", "maikbook1"\]/, "step2ck subjects read the ck1 overlay");
   assert.deepEqual(P.oldOverlays("radmax7"), ["radmax", "radmax2", "radmax3", "radmax4", "radmax5", "radmax6"], "radmax7 replaces cached radmax to radmax6 copies");
   assert.deepEqual(P.oldOverlays("radmax5"), ["radmax", "radmax2", "radmax3", "radmax4"], "radmax5 replaces cached radmax to radmax4 copies");
   assert.deepEqual(P.oldOverlays("radnotes3"), ["radnotes", "radnotes2"], "radnotes3 replaces cached radnotes and radnotes2 copies");

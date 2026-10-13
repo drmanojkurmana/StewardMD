@@ -1,0 +1,106 @@
+{
+  "module": "ana-cranial-nerves",
+  "subject": "anatomy",
+  "title": "Cranial nerves: nuclei, exit foramina and clinical lesions",
+  "minutes": 6,
+  "refs": [
+    "Gray's Anatomy for Students",
+    "Snell's Clinical Neuroanatomy"
+  ],
+  "steps": [
+    {
+      "tx": "Twelve pairs of **cranial nerves** originate from the forebrain and brainstem to innervate the head, neck and visceral organs. Cranial nerves one and two arise from the cerebrum and diencephalon. Cranial nerves three and four emerge from the midbrain. Cranial nerves five through eight emerge from the pons and pontomedullary junction. Cranial nerves nine through twelve arise from the medulla oblongata, exiting via basal skull foramina.",
+      "say": "Twelve pairs of cranial nerves originate from the forebrain and brainstem to innervate the head, neck and visceral organs. Cranial nerves one and two arise from the cerebrum and diencephalon. Cranial nerves three and four emerge from the midbrain. Cranial nerves five through eight emerge from the pons. Cranial nerves nine through twelve arise from the medulla oblongata, exiting via basal skull foramina.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nerve",
+          "Brainstem origin",
+          "Skull exit foramen"
+        ],
+        "rows": [
+          [
+            "Oculomotor III",
+            "Midbrain interpeduncular fossa",
+            "Superior orbital fissure"
+          ],
+          [
+            "Trigeminal V",
+            "Midbrain, pons, medulla nuclei",
+            "Fissure, rotundum and ovale"
+          ],
+          [
+            "Facial VII",
+            "Pontomedullary junction",
+            "Internal acoustic meatus"
+          ],
+          [
+            "Hypoglossal XII",
+            "Medulla pre-olivary sulcus",
+            "Hypoglossal canal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **facial nerve** possesses complex motor, parasympathetic, sensory and taste functions. Motor fibres from the motor nucleus loop around the abducens nucleus, forming the facial colliculus, before exiting at the cerebellopontine angle. It travels through the internal acoustic meatus, facial canal and stylomastoid foramen. Branches include the greater petrosal nerve for lacrimation, nerve to stapedius for sound dampening, and chorda tympani for taste and salivation.",
+      "say": "The facial nerve possesses complex motor, parasympathetic, sensory and taste functions. Motor fibres loop around the abducens nucleus, forming the facial colliculus, before exiting at the cerebellopontine angle. It travels through the internal acoustic meatus, facial canal and stylomastoid foramen. Branches include the greater petrosal nerve, nerve to stapedius, and chorda tympani.",
+      "vis": null
+    },
+    {
+      "tx": "The distinction between upper and lower motor neuron **facial palsy** is clinically vital. Upper motor neuron lesions from contralateral cerebral hemisphere stroke spare forehead wrinkling because the frontalis muscle receives bilateral corticonuclear innervation. Lower motor neuron lesions such as Bell palsy or acoustic neuroma affect all ipsilateral facial muscles, resulting in loss of forehead wrinkling, incomplete eye closure and drooping mouth angle.",
+      "say": "The distinction between upper and lower motor neuron facial palsy is clinically vital. Upper motor neuron lesions from contralateral stroke spare forehead wrinkling because the frontalis muscle receives bilateral innervation. Lower motor neuron lesions such as Bell palsy affect all ipsilateral facial muscles, causing loss of forehead wrinkles, incomplete eye closure and mouth drooping.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Upper motor neuron lesion",
+          "points": [
+            "Contralateral hemisphere stroke",
+            "Forehead wrinkling spared bilaterally",
+            "Lower facial weakness on opposite side",
+            "Preserved taste and stapedius reflex"
+          ]
+        },
+        "right": {
+          "title": "Lower motor neuron lesion",
+          "points": [
+            "Ipsilateral Bell palsy or trauma",
+            "Forehead wrinkling lost on same side",
+            "Inability to close eye on same side",
+            "May lose taste and exhibit hyperacusis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **jugular foramen** transmits cranial nerves nine, ten and eleven along with the internal jugular vein. The glossopharyngeal nerve carries taste and sensation from the posterior tongue and carotid sinus baroreceptor afferents. The vagus nerve supplies parasympathetic fibres to thoracic and abdominal viscera. The accessory nerve innervates sternocleidomastoid and trapezius. Jugular foramen syndrome manifests with hoarseness, dysphagia and shoulder drop.",
+      "say": "The jugular foramen transmits cranial nerves nine, ten and eleven along with the internal jugular vein. The glossopharyngeal nerve carries posterior tongue sensation and carotid sinus afferents. The vagus supplies thoracic and abdominal parasympathetics. The accessory nerve innervates sternocleidomastoid and trapezius. Jugular foramen syndrome manifests with hoarseness, dysphagia and shoulder drop.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-brain-gross.png",
+        "alt": "Brainstem cranial nerve roots and exit points",
+        "caption": "Ventral view of the human brainstem indicating cranial nerve exit origins and related brainstem nuclei."
+      }
+    }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "8df4382b-4000-8000-8df4-382b12345678",
+    "8ef439be-4000-8000-8ef4-39be12345678",
+    "8ff43b51-4000-8000-8ff4-3b5112345678"
+  ],
+  "src": [
+    "kb-reference-cranial-nerves-and-brainstem-nuclei"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
