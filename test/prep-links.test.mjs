@@ -7,7 +7,8 @@ import os from "node:os";
 import path from "node:path";
 import { norm, leadIn, leadSec, normKbId, kbDocs, phrases, drugPhrases, matcher, scan, linkItem, expText, dictionaries,
   confirmRequests, build, reportText, SHOW, MAX, CONFIRM_SCHEMA, kbBridge, pickKbLesson, matchChapter, sigWords,
-  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER, linkRelevant, floorEntries } from "../tools/prep-links.mjs";
+  addTopicLinks, stampLinks, gapsReport, topicKbForModule, LINKS_VER, linkRelevant, floorEntries, srcPackTargets,
+  SRCPACK_MAX_KB } from "../tools/prep-links.mjs";
 import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const D = dictionaries();
@@ -278,6 +279,85 @@ test("linkItem: module grounding tags need per-item corroboration, hand links ke
   assert.ok(!linkItem(bad, D.M, C0).some((l) => l.id === "cataract"), "an uncorroborated grounding tag is dropped, never shown");
   const hand = IT({ q: "Painless loss of vision with an afferent defect. What is the likely cause?", exp: "Glaucoma damages the optic nerve.", x: { links: { kb_ids: ["cataract"] } } });
   assert.ok(linkItem(hand, D.M, C0).some((l) => l.id === "cataract" && l.v === "a"), "a hand-written link without the grounding marker keeps trust");
+});
+
+test("normKbId: bare kb-<slug> source ids map to the article they name", () => {
+  assert.equal(normKbId("kb-hydatidiform-mole", D.byKey), "hydatidiform_mole");
+  assert.equal(normKbId("kb-gestational-trophoblastic-neoplasia", D.byKey), "gestational_trophoblastic_neoplasia");
+  assert.equal(normKbId("kb-choriocarcinoma", D.byKey), "choriocarcinoma");
+  assert.equal(normKbId("kb-hap", D.byKey), "HAP");
+  assert.equal(normKbId("kb-reference-zika-virus", D.byKey), "zika_virus", "the longer prefixes still win");
+});
+
+test("srcPackTargets: item-evidenced only, batch context skipped, unresolved never guessed", () => {
+  assert.equal(SRCPACK_MAX_KB, 3);
+  // The GTN item's stem never says "mole", but its key point teaches the hydatidiform mole: only the
+  // evidenced article shows (the module topic covers the category separately); unevidenced batch
+  // siblings are skipped, not guessed.
+  const it = { q: "A woman bleeds at 10 weeks. Tissue is triploid. Which mechanism?", o: ["Dispermy", "Duplication", "Empty egg", "Nondisjunction"], a: 0, kp: "Partial hydatidiform moles are triploid due to fertilization of a normal oocyte by two spermatozoa." };
+  const ctx = { byKey: D.byKey, kbTitle: D.kbTitle, protoIds: D.protoIds };
+  const r = srcPackTargets(["kb-gestational-trophoblastic-neoplasia", "kb-choriocarcinoma", "kb-gynecologic-malignancies", "kb-hydatidiform-mole"], it, ctx);
+  assert.deepEqual(r.targets.map((t) => t.id), ["hydatidiform_mole"], "only the item-evidenced article shows");
+  assert.deepEqual(r.targets.map((t) => [t.c, t.v]), [[95, "sp"]]);
+  assert.deepEqual(r.skipped, ["kb-gestational-trophoblastic-neoplasia", "kb-choriocarcinoma", "kb-gynecologic-malignancies"], "mapped but unevidenced batch siblings are skipped");
+  assert.deepEqual(r.unresolved, []);
+  const dup = srcPackTargets(["kb-choriocarcinoma", "kb-choriocarcinoma", "KB-CHORIOCARCINOMA"], it, ctx);
+  assert.deepEqual(dup.targets, [], "an incoherent pack shows nothing at all");
+  assert.deepEqual(dup.skipped, ["kb-choriocarcinoma"], "repeats collapse into one skipped id");
+  // A JIA frequency item: the overview (primary) and the keyed subtype show; distractor-only subtypes do not.
+  const jia = { q: "What is the most frequent subtype of juvenile idiopathic arthritis in the Western world?", o: ["Psoriatic arthritis", "Oligoarticular JIA", "Systemic JIA", "Polyarticular RF-negative JIA"], a: 1, kp: "Oligoarticular JIA is the predominant subtype." };
+  const j = srcPackTargets(["kb-juvenile-idiopathic-arthritis", "kb-oligoarticular-juvenile-idiopathic-arthritis", "kb-juvenile-psoriatic-arthritis", "kb-polyarticular-juvenile-idiopathic-arthritis", "kb-systemic-juvenile-idiopathic-arthritis"], jia, ctx);
+  assert.deepEqual(j.targets.map((t) => t.id), ["juvenile_idiopathic_arthritis", "oligoarticular_juvenile_idiopathic_arthritis"]);
+  assert.ok(j.skipped.includes("kb-juvenile-psoriatic-arthritis"), "a distractor-only subtype is skipped even though family words match");
+  // A tumour-localisation item sitting in a migraine pack: the pack is off-topic, nothing is shown.
+  const mis = { q: "A child has morning emesis and ataxia. Which brain tumour location?", o: ["Posterior fossa", "Supratentorial", "Spinal", "Suprasellar"], a: 0, kp: "Posterior fossa tumours cause morning vomiting and ataxia." };
+  const m = srcPackTargets(["kb-migraine-prevention", "kb-migraine", "kb-vestibular-migraine"], mis, ctx);
+  assert.deepEqual(m.targets, [], "an off-topic pack never becomes specific links");
+  assert.equal(m.skipped.length, 3);
+  const u = srcPackTargets(["kb-no-such-thing", "sp-nbk441999"], it, ctx);
+  assert.deepEqual(u.targets, []);
+  assert.deepEqual(u.unresolved, ["kb-no-such-thing", "sp-nbk441999"], "unknown ids are reported, never guessed");
+});
+
+test("srcPackTargets: an evidenced protocol source rides as a protocol link", () => {
+  const ctx = { byKey: D.byKey, kbTitle: D.kbTitle, protoIds: D.protoIds };
+  const dka = { q: "A young diabetic presents with vomiting and Kussmaul breathing. Glucose 480, pH 7.21, ketones positive. Diagnosis?", o: ["Diabetic ketoacidosis", "Hyperosmolar coma", "Lactic acidosis", "Starvation ketosis"], a: 0, kp: "DKA: hyperglycaemia, acidosis and ketonaemia." };
+  const r = srcPackTargets(["kb-diabetic-ketoacidosis"], dka, ctx);
+  assert.deepEqual(r.targets.map((t) => [t.k, t.id, t.v]), [["pr", "diabetic-ketoacidosis", "sp"]], "a protocol slug maps to its protocol");
+});
+
+test("linkItem: srcPack provenance rides at pipeline confidence, batch context never shows", () => {
+  const it = { id: "sp1", q: "A woman bleeds at 10 weeks. Tissue is triploid. Which mechanism?", o: ["Dispermy", "Duplication", "Empty egg", "Nondisjunction"], a: 0, kp: "Partial hydatidiform moles are triploid.", srcPack: ["kb-gestational-trophoblastic-neoplasia", "kb-choriocarcinoma", "kb-gynecologic-malignancies", "kb-hydatidiform-mole"] };
+  const ls = linkItem(it, D.M, C0);
+  assert.deepEqual(ls.filter((l) => l.v === "sp").map((l) => l.id), ["hydatidiform_mole"], "only the evidenced article rides");
+  assert.ok(ls.filter((l) => l.v === "sp").every((l) => l.k === "kb" && l.c >= SHOW));
+  assert.ok(!ls.some((l) => l.id === "choriocarcinoma" || l.id === "gestational_trophoblastic_neoplasia"), "unevidenced batch siblings never ride");
+  const mis = linkItem({ id: "sp2", q: "A child has morning emesis and ataxia. Which brain tumour location?", o: ["Posterior fossa", "Supratentorial", "Spinal", "Suprasellar"], a: 0, kp: "Posterior fossa tumours.", srcPack: ["kb-migraine", "kb-vestibular-migraine"] }, D.M, C0);
+  assert.ok(!mis.some((l) => l.v === "sp"), "an off-topic pack adds no provenance rows");
+  const dka = { id: "sp3", q: "A young diabetic presents with vomiting and Kussmaul breathing. Glucose 480, pH 7.21, ketones positive. Diagnosis?", o: ["Diabetic ketoacidosis", "Hyperosmolar coma", "Lactic acidosis", "Starvation ketosis"], a: 0, kp: "DKA.", srcPack: ["kb-diabetic-ketoacidosis"] };
+  const pr = linkItem(dka, D.M, C0);
+  assert.ok(pr.some((l) => l.k === "pr" && l.id === "diabetic-ketoacidosis" && l.v === "sp" && l.c >= SHOW), "an evidenced protocol source rides");
+  const nonClin = linkItem(dka, D.M, { ...C0, clinical: false });
+  assert.ok(nonClin.every((l) => l.k !== "pr"), "basic-science subjects still get no protocol links");
+});
+
+test("addTopicLinks: provenance-only items keep the subject chapter as Learn this module", () => {
+  const base = { mid: "m9", sid: "s", topics: {}, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), subjectLesson: { key: "s-mixed", title: "Mixed review" } };
+  const prov = [{ k: "kb", id: "gestational_trophoblastic_neoplasia", title: "Gestational trophoblastic neoplasia", c: 95, v: "sp", sec: "" }];
+  addTopicLinks(prov, { q: "What?" }, base);
+  assert.ok(prov.some((l) => l.k === "ls" && l.id === "s-mixed" && l.v === "lt" && l.ev === 0), "the module fallback stays after provenance");
+  const hard = [{ k: "kb", id: "cataract", title: "Cataract", c: 92, v: "k", sec: "" }];
+  addTopicLinks(hard, { q: "What?" }, base);
+  assert.ok(!hard.some((l) => l.k === "ls"), "matcher specifics still replace the fallback, as before");
+});
+
+test("addTopicLinks: the verified module topic rides next to provenance, then the module lesson", () => {
+  const base = { mid: "m0", sid: "s", topics: { m0: { kb: [["gestational_trophoblastic_neoplasia", "Gestational trophoblastic neoplasia", "name+local"]] } }, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), subjectLesson: { key: "s-mixed", title: "Mixed review" } };
+  const links = [{ k: "kb", id: "hydatidiform_mole", title: "Hydatidiform mole", c: 94, v: "sp", sec: "" }];
+  addTopicLinks(links, { q: "A woman bleeds.", o: ["X"], a: 0 }, base);
+  const ids = links.map((l) => l.k + ":" + l.id + ":" + l.v + ":ev" + (l.ev == null ? "-" : l.ev));
+  assert.ok(links.some((l) => l.k === "kb" && l.id === "gestational_trophoblastic_neoplasia" && l.v === "kt" && l.ev === 0), "module topic rides as the chapter, got " + ids.join(" "));
+  assert.ok(links.some((l) => l.k === "ls" && l.id === "s-mixed" && l.v === "lt" && l.ev === 0), "module lesson stays after it, got " + ids.join(" "));
 });
 
 test("linkItem: SGLT2 key never links Familial Renal Glucosuria (owner screenshot 2026-10-13)", () => {

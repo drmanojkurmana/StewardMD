@@ -18,6 +18,10 @@
  *
  * How a link is made (conservative; a link the student sees has confidence >= SHOW):
  *   a  the content pipeline wrote it on the item (x.links, ids checked against what exists)          95
+ *   sp the item's source provenance (it.srcPack: batch sources gated to primary + item-evidenced,  95/94/93
+ *      first-listed = primary, at most 3 KB per item; batch-context ids are skipped and unresolved ids
+ *      are logged, never guessed). Provenance outranks guessed mentions: srcPack evidence > topic
+ *      evidence (kt) > module fallback (lt, "Learn this module").
  *   k  the target's name is the keyed answer (or most of it)                                          92 / 80
  *   q  the name is in the stem's question sentence (the lead-in)                                      82
  *   s  the name is elsewhere in the stem AND in the stored explanation                                77
@@ -90,11 +94,12 @@ export function leadSec(stem) {
 
 /* ================= ids ================= */
 /* normKbId(raw, byKey) -> the key the Knowledge Library opens, or null. byKey: Map(lowercase key -> real key). Accepts
-   "zika_virus", "ZIKA_VIRUS", "kb-reference-zika-virus", "kb-diseases-brain-abscess", "kb:zika_virus". */
+   "zika_virus", "ZIKA_VIRUS", "kb-reference-zika-virus", "kb-diseases-brain-abscess", "kb:zika_virus" and the
+   bare "kb-<slug>" ids the content pipeline stamps on items (it.srcPack, e.g. "kb-hydatidiform-mole"). */
 export function normKbId(raw, byKey) {
   let s = String(raw || "").trim();
   if (!s) return null;
-  s = s.replace(/^kb:/i, "").replace(/^kb-(reference|diseases|disease|treatments|clinical-protocols)-/i, "");
+  s = s.replace(/^kb:/i, "").replace(/^kb-(reference|diseases|disease|treatments|clinical-protocols)-/i, "").replace(/^kb[-_]/i, "");
   const k = s.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
   return byKey.get(k) || null;
 }
@@ -269,7 +274,7 @@ export function expText(it) {
    none of its name words in that text and fails closed. Module-topic targets (kt) are exempt by design. */
 const GENERIC_HIT = new Set("renal cardiac hepatic pulmonary cerebral gastric intestinal familial congenital inherited hereditary chronic acute primary secondary".split(" "));
 export function linkRelevant(it, l, ctx = {}) {
-  if (!l || l.v === "kt" || l.v === "lt") return true;
+  if (!l || l.v === "kt" || l.v === "lt" || l.v === "sp") return true;
   if (ctx.topicIds && ctx.topicIds.has(l.k + ":" + l.id)) return true;
   const key = (it && it.o && typeof it.a === "number" && it.o[it.a]) || "";
   const hay = new Set(words([key, (it && it.q) || "", expText(it || {}), ctx.moduleTitle || "", String((it && it.t) || ctx.mid || "").replace(/[-_]/g, " ")].join(" ")));
@@ -353,9 +358,65 @@ export function promotable(it, l, ctx = {}) {
   if (l.c > 50 && !(base === "k" && l.c < 70) && tagEvidenced(it, l, ctx)) return true;
   return false;
 }
+/* srcPack provenance (it.srcPack): the source ids the content pipeline read when it generated the item's
+   module batch ("kb-<slug>" for Knowledge Library articles and clinical protocols). The links builder used to
+   ignore these fields, throwing away the best possible links — but the pack is batch provenance, not item
+   evidence: it names sibling articles the item is not about (a JIA frequency item lists every JIA subtype; a
+   tumour-localisation item sits in a migraine pack), so showing the pack as specific links scores 40% wrong
+   against blind audit (owner rule: never a wrong link). srcPackTargets maps ids to real targets — KB articles
+   first (normKbId), then clinical protocols (protocol ids are already hyphenated slugs, so the bare slug must
+   match exactly) — never guessing: unmappable ids land in unresolved. Only mapped articles the item itself
+   evidences are shown (at most 3 KB per item, display in first-listed order, first-listed = primary); an
+   off-topic pack for the item (migraine sources for a tumour question, nipah for an NVDRS question) yields
+   nothing and the item keeps its matcher-only links. Evidence is the distinguishing-word bar on titles only
+   (never aliases: overview articles list subtopics as aliases, so alias evidence cannot say which article the
+   item teaches): every title word of length 5 or more must appear in the item's own stem, keyed answer, tags,
+   explanation or key point — never in a distractor option (which names what the item is not about) and never
+   in the module title (which names the batch, not the item). A subtype article fails on its distinguishing
+   word ("psoriatic" is only a distractor), while the taught article passes on it ("hydatidiform" is in the
+   key point; "oligoarticular" in the keyed answer). Titles with no word of length 5 or more never pass (fail
+   closed). Mapped but unshown ids land in skipped (batch context, logged with unresolved). Shown rows
+   (via "sp") are exempt from the relevance gate and the specific-link gate: they passed the item-evidence bar
+   to get here. Next to provenance, the verified module topic still rides as the chapter row (kt) and the
+   subject lesson stays as "Learn this module": srcPack evidence > topic evidence > module fallback. */
+export const SRCPACK_MAX_KB = 3;
+export function srcPackTargets(srcPack, it, ctx = {}) {
+  const kb = [], pr = [], unresolved = [];
+  const seen = new Set();
+  let pos = 0;
+  for (const raw of [].concat(srcPack || [])) {
+    const s = String(raw == null ? "" : raw).trim();
+    if (!s || seen.has(s.toLowerCase())) continue;
+    seen.add(s.toLowerCase());
+    const id = ctx.byKey ? normKbId(s, ctx.byKey) : null;
+    if (id) { kb.push({ k: "kb", id, title: (ctx.kbTitle && ctx.kbTitle.get(id)) || id, pos: pos++, raw: s }); continue; }
+    const slug = s.replace(/^kb[-_]/i, "");
+    if (ctx.protoIds && (ctx.protoIds.has(slug) || ctx.protoIds.has(s))) {
+      const pid = ctx.protoIds.has(slug) ? slug : s;
+      pr.push({ k: "pr", id: pid, title: ctx.protoIds.get(pid), pos: pos++, raw: s }); continue;
+    }
+    unresolved.push(s);
+  }
+  const key = (it && it.o && typeof it.a === "number" && it.o[it.a]) || "";
+  const hay = new Set(words([(it && it.q) || "", key, ...(((it && it.tg) || []).filter((t) => typeof t === "string")), (it && it.exp) || "", (it && it.kp) || ""].join(" ")));
+  const evidenced = (l) => {
+    const tw = words(String(l.title || "").replace(/\s*\([^)]*\)\s*/g, " ")).filter((w) => w.length >= 5);
+    if (!tw.length) return false;
+    return tw.every((w) => hay.has(w));
+  };
+  const keepKb = kb.filter(evidenced);
+  const keepPr = pr.filter(evidenced);
+  const showKb = keepKb.slice(0, SRCPACK_MAX_KB), showPr = keepPr.slice(0, MAX.pr);
+  const shown = new Set([...showKb, ...showPr]);
+  const skipped = kb.concat(pr).filter((t) => !shown.has(t)).map((t) => t.raw);
+  const targets = showKb.concat(showPr).sort((a, b) => a.pos - b.pos).map(({ k, id, title, pos }) => ({ k, id, title, pos }));
+  targets.filter((t) => t.k === "kb").forEach((t, i) => { t.c = 95 - i; t.v = "sp"; });
+  targets.filter((t) => t.k === "pr").forEach((t) => { t.c = 95; t.v = "sp"; });
+  return { targets, unresolved, skipped };
+}
 export function gateSpecificLinks(links, it, ctx = {}) {
   for (const l of links || []) {
-    if (!l || l.v === "kt" || l.v === "lt" || (l.k !== "kb" && l.k !== "pr" && l.k !== "dr")) continue;
+    if (!l || l.v === "kt" || l.v === "lt" || l.v === "sp" || (l.k !== "kb" && l.k !== "pr" && l.k !== "dr")) continue;
     const base = l.v === "rm" ? "rm" : (l.v || "")[0];
     const floor = base === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN;
     if (l.c < floor) l.c = Math.min(l.c, floor - 1);
@@ -432,6 +493,18 @@ export function linkItem(it, M, ctx = {}) {
     for (const raw of [].concat(L.drug_ids || L.drug || [])) { const id = words(raw).join(" "); if (id && ctx.drugIds && ctx.drugIds.has(id) && (!grounding || corroborated("dr", id))) put({ k: "dr", id, title: ctx.drugIds.get(id), c: 95, v: "a", sec: "" }); }
     for (const raw of [].concat(L.protocol_ids || L.protocol || L.proto || [])) { const id = String(raw || "").trim(); if (id && ctx.protoIds && ctx.protoIds.has(id) && (!grounding || corroborated("pr", id))) put({ k: "pr", id, title: ctx.protoIds.get(id), c: 95, v: "a", sec: "" }); }
   }
+  // The item's source provenance (it.srcPack): batch sources gated to primary + item-evidenced
+  // (srcPackTargets). Provenance outranks guessed mentions, so these rows ride at pipeline confidence
+  // and the per-kind trim below lets them fill up to three KB slots.
+  if (Array.isArray(it.srcPack) && it.srcPack.length) {
+    const SP = srcPackTargets(it.srcPack, it, ctx);
+    if (ctx.spUnresolved) for (const u of SP.unresolved) ctx.spUnresolved.set(u, (ctx.spUnresolved.get(u) || 0) + 1);
+    if (ctx.spSkipped) for (const u of SP.skipped) ctx.spSkipped.set(u, (ctx.spSkipped.get(u) || 0) + 1);
+    for (const t of SP.targets) {
+      if (t.k === "pr" && ctx.clinical === false) continue;
+      put({ k: t.k, id: t.id, title: t.title, c: t.c, v: "sp", sec: t.k === "kb" ? sec : "" });
+    }
+  }
   // Relevance guard (every source, pipeline x.links included): a specific link whose target name does not
   // relate to the key, stem, explanation or module topic is capped below the floor, never shown. It stays
   // in the sidecar for audit. This is what keeps SGLT2 -> Familial Renal Glucosuria from ever returning.
@@ -441,9 +514,11 @@ export function linkItem(it, M, ctx = {}) {
   for (const l of best.values()) if (l.v[0] === "k" && l.c >= 92) top[l.k] = 1;
   const out = [], per = {};
   for (const l of Array.from(best.values()).sort((a, b) => b.c - a.c || a.id.localeCompare(b.id))) {
-    if (l.k !== "dr" && top[l.k] && l.v[0] !== "k" && l.v !== "a" && l.c < 85) continue;
+    if (l.k !== "dr" && top[l.k] && l.v[0] !== "k" && l.v !== "a" && l.v !== "sp" && l.c < 85) continue;
+    // Provenance rows (v "sp") fill up to three KB slots; every other kind keeps its cap.
+    const lim = l.k === "kb" && l.v === "sp" ? SRCPACK_MAX_KB : MAX[l.k];
     per[l.k] = (per[l.k] || 0) + 1;
-    if (per[l.k] <= MAX[l.k]) out.push(l);
+    if (per[l.k] <= lim) out.push(l);
   }
   return out;
 }
@@ -598,7 +673,11 @@ export function addTopicLinks(links, it, ctx = {}) {
     const prAnyEvidenced = ((entry && entry.pr) || []).some(([id, title]) => stemEvidenced(it, { k: "pr", id, title }, ktCtx));
     // When the subject's rapid-review lesson can serve as the module-level target and no mapped
     // target is evidenced for this item, the lesson is preferred over a possibly wrong article.
-    const preferSubject = !own && !subtopic && !mappedEvidenced && !!ctx.subjectLesson && !links.some((l) => l.c >= SHOW && l.v !== "kt");
+    // Provenance-only items (every shown link is a srcPack row) are exempt: the verified module topic
+    // still rides as the chapter row next to provenance, then the subject lesson after it.
+    const shownSpOnly = links.some((l) => l.c >= SHOW) && links.every((l) => l.c < SHOW || l.v === "sp");
+    const hardShownTopic = links.some((l) => l.c >= SHOW && l.v !== "kt" && l.v !== "sp");
+    const preferSubject = !own && !subtopic && !mappedEvidenced && !!ctx.subjectLesson && !hardShownTopic && !shownSpOnly;
     const hasShown = () => links.some((l) => l.c >= SHOW && l.v !== "kt");
     // A verified module topic beats an unshown mention: below-the-bar same-kind links vacate their slots
     // so the topic tier still lands (shown links are never evicted, and the cap still holds).
@@ -616,7 +695,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     for (const [id, title] of kbList) {
       if (subtopic || preferSubject || promoted) continue;
       const st = stemEvidenced(it, { k: "kb", id, title }, ktCtx), tg = tagEvidenced(it, { k: "kb", id, title }, ktCtx);
-      if (hasShown() && entry && (entry.kb || []).some(([i]) => i === id) && !st && !tg) continue;
+      if (hasShown() && !shownSpOnly && entry && (entry.kb || []).some(([i]) => i === id) && !st && !tg) continue;
       if (!own && kbAnyEvidenced && !st) continue;
       // The ev flag uses the upgrade bar (stem/keyed answer or the item's own tags): a mention in a
       // wrong option only never counts as item evidence, so the row renders as the module chapter.
@@ -626,7 +705,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     for (const [id, title] of (entry && entry.pr) || []) {
       if (subtopic || preferSubject || promoted) continue;
       const st = stemEvidenced(it, { k: "pr", id, title }, ktCtx), tg = tagEvidenced(it, { k: "pr", id, title }, ktCtx);
-      if (hasShown() && !st && !tg) continue;
+      if (hasShown() && !shownSpOnly && !st && !tg) continue;
       if (!own && prAnyEvidenced && !st) continue;
       const evd = stemEvidenced(it, { k: "pr", id, title }, ktCtx, true) || tg;
       if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "", ev: evd ? 1 : 0 }); has.add("pr:" + id); }
@@ -651,9 +730,16 @@ export function addTopicLinks(links, it, ctx = {}) {
   }
   // Subject-level module target: when nothing honest has been shown yet (no own lesson, no specific,
   // no evidenced topic article), the subject's rapid-review lesson is the fallback chapter. It is
-  // broader than a module article and cannot name the wrong subtopic's disease.
-  if (ctx.subjectLesson && ctx.subjectLesson.key && !links.some((l) => l.c >= SHOW) && !has.has("ls:" + ctx.subjectLesson.key)) {
-    const cand2 = links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= SPECIFIC_MIN && l.c < SHOW && entityOverlap(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0];
+  // broader than a module article and cannot name the wrong subtopic's disease. Provenance items keep it
+  // too, as their "Learn this module" chapter row after the source articles — without promoting weaker
+  // mentions next to provenance, and never when a matcher specific or the own lesson is shown (those
+  // replace the fallback exactly as before; only provenance and chapter rows do not).
+  const anyShown = links.some((l) => l.c >= SHOW);
+  const hasSp = links.some((l) => l.c >= SHOW && l.v === "sp");
+  const hardShown = links.some((l) => l.c >= SHOW && l.v !== "sp" && l.v !== "kt" && l.v !== "lt");
+  const ownLtShown = links.some((l) => l.k === "ls" && l.c >= SHOW && l.v === "lt");
+  if (ctx.subjectLesson && ctx.subjectLesson.key && (!anyShown || (hasSp && !hardShown && !ownLtShown)) && !has.has("ls:" + ctx.subjectLesson.key)) {
+    const cand2 = !anyShown ? links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= SPECIFIC_MIN && l.c < SHOW && entityOverlap(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0] : null;
     if (cand2) { cand2.c = SHOW; cand2.v = "kt"; if (cand2.k === "kb") cand2.sec = leadSec(it.q || ""); cand2.ev = 1; }
     else { links.push({ k: "ls", id: ctx.subjectLesson.key, title: ctx.subjectLesson.title || ctx.subjectLesson.key, c: 75, v: "lt", sec: "", ev: 0 }); has.add("ls:" + ctx.subjectLesson.key); }
   }
@@ -1017,12 +1103,14 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     if (s && !subjectLessonOf.has(s)) subjectLessonOf.set(s, { key: k, title });
   }
   // Pass 2: link.
-  const byMod = new Map(), sidecar = [], rep = { items: 0, linked: 0, links: 0, bySubject: {}, byKind: { kb: 0, dr: 0, pr: 0, ls: 0 }, byVia: {}, candidates: 0, low: 0, ver: "" };
+  const byMod = new Map(), sidecar = [], rep = { items: 0, linked: 0, links: 0, bySubject: {}, byKind: { kb: 0, dr: 0, pr: 0, ls: 0 }, byVia: {}, candidates: 0, low: 0, ver: "", srcPack: { items: 0, links: 0, unresolved: {}, skipped: 0 } };
+  const spUnresolved = new Map(), spSkipped = new Map();
   const ver = new Date().toISOString().slice(0, 10) + "." + D.src.kb.slice(0, 6);
   for (const { it, sid, mid } of items({ cache, bank })) {
     if (!usableItem(it)) continue;
     const ls = lessonKb.get(mid);
-    const links = linkItem(it, D.M, { lessonKb: ls, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds, mid, moduleTitle: ((topics[mid] || {}).t || "") });
+    const links = linkItem(it, D.M, { lessonKb: ls, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, kbAliases, drugIds: D.drugIds, protoIds: D.protoIds, spUnresolved, spSkipped, mid, moduleTitle: ((topics[mid] || {}).t || "") });
+    if (Array.isArray(it.srcPack) && it.srcPack.length) rep.srcPack.items++;
     const conf = confirmed && confirmed[String(it.id)];
     const rm = rematch && rematch.items && rematch.items[String(it.id)];
     if (rm && Array.isArray(rm.links)) applyRematch(links, rm.links);
@@ -1040,7 +1128,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     rep.low += links.length - shown.length;
     if (links.some((l) => l.v[0] === "s" && l.c < SHOW && l.c >= 60)) rep.candidates++;
     if (shown.length) { rep.linked++; bs.linked++; }
-    for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; }
+    for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; if (l.v === "sp") rep.srcPack.links++; }
     if (links.length) sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
       links: { kb_ids: links.filter((l) => l.k === "kb" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
       provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h" || l.v === "rm") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h" || l.v === "rm") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
@@ -1097,6 +1185,9 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     ptrC[sid] = h;
   }
   rep.ver = ver;
+  rep.srcPack.unresolved = Object.fromEntries([...spUnresolved.entries()].sort((a, b) => b[1] - a[1]));
+  rep.srcPack.skipped = [...spSkipped.values()].reduce((s, n) => s + n, 0);
+  log(`srcPack: ${rep.srcPack.items} items carry source provenance, ${rep.srcPack.links} provenance links shown, ${rep.srcPack.skipped} batch-context ids skipped, ${spUnresolved.size} unresolved ids (top skipped: ${[...spSkipped.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, v]) => k + " x" + v).join(", ") || "none"}; top unresolved: ${[...spUnresolved.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, v]) => k + " x" + v).join(", ") || "none"})`);
   const pointer = { v: 1, ver, gen: new Date().toISOString(), th: SHOW, n: { items: rep.items, linked: rep.linked, links: rep.links }, src: D.src, m: ptrM, c: ptrC };
   return { files, pointer, sidecar, report: rep };
 }
@@ -1164,7 +1255,9 @@ function writeOut(out, b, prevNames) {
   return changed;
 }
 export function reportText(r) {
-  const lines = [`links ${r.ver}: ${r.linked} of ${r.items} usable items (${(100 * r.linked / Math.max(1, r.items)).toFixed(1)}%) have at least one link at confidence >= ${SHOW}; ${r.links} links shown (kb ${r.byKind.kb}, drugs ${r.byKind.dr}, protocols ${r.byKind.pr}, lessons ${r.byKind.ls}); by method ${JSON.stringify(r.byVia)}; ${r.low} weaker candidates kept out; ${r.candidates} items with a stem-only candidate (confirm stage)`];
+  const sp = r.srcPack || { items: 0, links: 0, unresolved: {}, skipped: 0 };
+  const lines = [`links ${r.ver}: ${r.linked} of ${r.items} usable items (${(100 * r.linked / Math.max(1, r.items)).toFixed(1)}%) have at least one link at confidence >= ${SHOW}; ${r.links} links shown (kb ${r.byKind.kb}, drugs ${r.byKind.dr}, protocols ${r.byKind.pr}, lessons ${r.byKind.ls}); by method ${JSON.stringify(r.byVia)}; ${r.low} weaker candidates kept out; ${r.candidates} items with a stem-only candidate (confirm stage)`,
+    `srcPack: ${sp.items} items carry source provenance, ${sp.links} provenance links shown, ${sp.skipped || 0} batch-context ids skipped, ${Object.keys(sp.unresolved).length} unresolved source ids (logged, never guessed)`];
   for (const [s, x] of Object.entries(r.bySubject).sort((a, b) => b[1].items - a[1].items)) lines.push(`  ${s.padEnd(28)} ${String(x.linked).padStart(6)} / ${String(x.items).padStart(6)}  ${(100 * x.linked / Math.max(1, x.items)).toFixed(1)}%`);
   return lines.join("\n");
 }
