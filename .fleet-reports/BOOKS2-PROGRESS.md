@@ -257,3 +257,6 @@
 ## 2026-10-14 LON9 infectious DONE (branch books2-lon9, PR to open; PR #1611 still open)
 
 11 modules (sepsis-overwrite, hiv, malaria, arbovirus, enteric-rickettsial, parasitic, zoonoses-toxin, leprosy, sti, fungal, viral), 11 lessons + 11 KB + 110 MCQs bk2-med-761-870. Gates: LP 11/11, suites 59/59, similarity 0 hits, answers 28/27/27/28, app pre-existing only. Next: push + PR, then LON10 final medicine mix (9 modules).
+## 2026-10-14 ANA2 core anaesthesia DONE (branch books2-ana2, PR to open)
+
+9 modules (airway-overwrite, opioids, LA-overwrite, neuraxial, intraop-overwrite, recovery, obstetric, cpr-overwrite, pain), 9 lessons + 9 KB + 90 MCQs bk2-ane-081-170. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Anaesthesia 25/25 indexed pending merge. Next: push + PR, then Nelson paediatrics (27 modules).

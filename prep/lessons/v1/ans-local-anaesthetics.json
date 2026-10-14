@@ -1,62 +1,60 @@
 {
- "v": 1,
- "module": "ans-local-anaesthetics",
- "subject": "anaesthesia",
- "title": "Local anaesthetic toxicity: stop, lipid emulsion, prolonged resuscitation",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Local anaesthetic systemic toxicity** follows accidental intravascular injection or overdose, presenting with tingling, tinnitus, agitation or seizures, then cardiovascular collapse and arrhythmia. **Stop injecting at once**, call for help, support airway, breathing and circulation, and give **intravenous lipid emulsion per protocol** while resuscitation continues, which may need to be prolonged (Association of Anaesthetists guidance).",
-   "say": "Tingling, tinnitus or seizures after local anaesthetic mean stop injecting, call for help and give protocol lipid emulsion.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Stop injecting"
-     },
-     {
-      "id": "b",
-      "label": "Call + ABC support"
-     },
-     {
-      "id": "c",
-      "label": "Lipid emulsion per protocol"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Prevention is dose discipline: calculate the maximum dose for the patient and drug, aspirate and inject incrementally, use ultrasound where trained, and watch the patient after every block. Lipid emulsion must be immediately available wherever local anaesthetics are given in significant doses. Seizures are controlled as guided while lipid and resuscitation proceed.",
-   "say": "Prevent toxicity by dose calculation, aspiration and incremental injection, with lipid emulsion always to hand.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Prevent",
-     "Prepare"
-    ],
-    "rows": [
-     [
-      "Calculate, aspirate, increment",
-      "Lipid emulsion available"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Cardiovascular collapse from toxicity can be resistant and prolonged, so resuscitation is not abandoned early and critical care is involved from the start. Document drug, concentration, volume, site and times exactly. Maximum-dose numbers follow current BNF and local charts, and are flagged here rather than memorised loosely.",
-   "say": "Resuscitation may be prolonged; document drug, volume, site and times exactly, and involve critical care early.",
-   "vis": null
+  "v": 1,
+  "module": "ans-local-anaesthetics",
+  "subject": "anaesthesia",
+  "title": "Local anaesthetics: chemistry to LAST rescue",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Chemistry** (**amides** liver lignocaine bupivacaine, **esters** plasma cocaine chloroprocaine, **protein** bound free active, **pKa** ionised onset speed, **lipid** potency duration spreads, **vasoactivity** cocaine constricts rest dilate, **allergy** ester PABA true, **metabolism** clearance halves) with **curves** (**dose** weight limits, **site** vascularity absorbs) sorts; **pregnancy** (protein falls) adjusts. Molecules block.",
+      "say": "Amides esters proteins pKas is chemistry: lipids spread vasoactivities vary allergies rare metabolisms clear doses cap sites absorb pregnancies adjust free fractions rise. Nerves numb.",
+      "vis": null
+    },
+    {
+      "tx": "**Agents** (**lignocaine** versatile antiarrhythmic airway, **bupivacaine** long cardiac potent, **ropivacaine** safer motor-sparing, **levobupivacaine** single-enantiomer cardiac, **prilocaine** methaemoglobin EMLA, **chloroprocaine** short obstetric backs, **cocaine** topical vasoconstricts, **articaine** dental infiltration) with **choices** (**obstetric** chloroprocaine backs, **cardiac** ropivacaine guards) matches; **doses** (lean-weight caps) calculates. Syringes label.",
+      "say": "Lignocaines bupivacaines ropivacaines levos is agents: prilocaines blue chloroprocaines fade cocaines shrink articaines infiltrate choices match doses cap labels read barcodes scan. Blocks set.",
+      "vis": null
+    },
+    {
+      "tx": "**Blocks** (**spinal** intrathecal baricity heights, **epidural** segmental catheters test-dose, **plexus** interscalene phrenic axillary, **TAP** abdominal wall catheters, **topical** EMLA airway gargles, **intravenous** Bier cuff pain, **wound** infusions chondrolysis, **ultrasound** in-plane spreads) with **checks** (**aspiration** intravascular screens, **test-dose** adrenaline tachycardia) guards; **consent** (risks alternatives) signs. Needles advance.",
+      "say": "Spinals epidurals plexuses TAPs is blocks: topicals numb intravenouses cuff wounds soak ultrasounds guide aspirations check test-doses warn consents sign LAST kits ready. Dermatomes fade.",
+      "vis": null
+    },
+    {
+      "tx": "**LAST** (**prodrome** tinnitus metallic agitation, **seizures** benzodiazepine oxygenates, **arrest** bupivacaine refractory VF, **lipid** bolus infusion rescue, **support** airway seizure circulation, **avoid** vasopressin calcium-blockers, **report** registries learning, **prevent** ultrasound doses aspirate) with **traps** (**pregnancy** low thresholds, **acidosis** lowers seizure, **elderly** reduced clearance) closes; **follow** (neuro cardiac reviews) tracks. Hearts restart.",
+      "say": "Prodromes seizures arrests lipids is LAST: supports sustain avoids list reports file prevents guard pregnancies lower acidoses drop elderlies clear follows track reviews schedule wishes respect. Rescues pour.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-ane-101",
+    "bk2-ane-102",
+    "bk2-ane-103",
+    "bk2-ane-104",
+    "bk2-ane-105",
+    "bk2-ane-106",
+    "bk2-ane-107",
+    "bk2-ane-108",
+    "bk2-ane-109",
+    "bk2-ane-110"
+  ],
+  "src": [],
+  "refs": [
+    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-ana2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }
