@@ -40,7 +40,7 @@ const SCREEN_OPEN = {
   hospital: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('[data-mi="icu"]'));`,
   drugs: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('[data-mi="db"]'));`,
   dosing: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('[data-mi="ely"]'));`,
-  more: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('[data-mi="account"]'));`,
+  more: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('[data-mi="opencase"]'));`,
   dx: `var s=document.getElementById("hvSheet"); return !!(s && s.classList.contains("on") && s.querySelector('#dxAddNew'));`,
   maik: `return !!document.getElementById("maikSheet");`,
   calc: `var o=document.getElementById("mcOverlay"); return !!(o && o.classList.contains("on"));`,
@@ -204,7 +204,7 @@ try {
   ok(await ev(SCREEN_OPEN.calc) === true, "the Calculators guide opens the real Calculators overlay");
   await ev(`document.querySelector('.smdt-card [data-t="skip"]').click(); return 1;`); await sleep(500);
   await ev(`SMD_TOUR.guide("imaging"); return 1;`); await sleep(1100);
-  ok(await ev(SCREEN_OPEN.more) === true, "the Imaging guide opens the More sheet at Settings (Settings moved there from the sidebar, 2026-10-12)");
+  ok(await ev(SCREEN_OPEN.sidebar) === true, "the Imaging guide opens the sidebar at Settings (Settings moved back there from More, 2026-10-14)");
   await ev(`document.querySelector('.smdt-card [data-t="next"]').click(); return 1;`); await sleep(1500);
   const ex = await ev(`return JSON.stringify({exp: !!document.querySelector(".sbr-set-ov"), row: !!document.querySelector('[data-sbr-act="experimental"]'), drawer: !!(document.getElementById("sbDrawer")&&document.getElementById("sbDrawer").classList.contains("open")), title: (document.querySelector(".smdt-title")||{}).innerText});`);
   ok(JSON.parse(ex).exp === true, "and then the Experimental Features page for the module toggles " + ex);
