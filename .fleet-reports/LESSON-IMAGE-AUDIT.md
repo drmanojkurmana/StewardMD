@@ -1265,3 +1265,51 @@ Generated 2026-10-13 from `prep/lessons/v1/index.json` (1,041 lessons). A lesson
 - `wh-miscarriage` Miscarriage and abortion care: key decisions for the exam
 - `wh-postnatal` Postnatal care and breastfeeding: key warning signs and management
 - `wh-urogyn` Prolapse and incontinence: key principles for exams
+
+---
+
+## Addendum 2026-10-14 (branch lessonui-1013, 1449 lessons)
+
+Method: same rule (any step with `vis.kind` image/figure or `vis.src`).
+62/1449 lessons carry at least one image step. Zero-image lessons per subject
+(zero / total; subjects with none listed are fully illustrated):
+
+adult-health-medicine 13/13, adult-health-surgery 18/18, anaesthesia 34/34,
+anatomy 53/80, biochemistry 69/69, child-health 10/10, community-medicine
+42/56, dermatology 18/18, ent 37/37, forensic-medicine 15/15,
+mcc-acute-care 21/21, mcc-chronic-care 23/23, mcc-health-promotion 26/26,
+mcc-professional-behaviours 29/29, medicine 113/113, mental-health 10/10,
+microbiology 40/40, mrcp-basic-science 8/8, mrcp-cardiology 1/1,
+mrcp-dermatology 2/2, mrcp-endocrinology 4/4, mrcp-gastroenterology 2/2,
+mrcp-geriatrics 3/3, mrcp-haematology-oncology 5/5, mrcp-infectious-diseases
+4/4, mrcp-nephrology 5/5, mrcp-neurology 2/2, mrcp-ophthalmology 3/3,
+mrcp-pharmacology 7/7, mrcp-psychiatry 1/1, mrcp-respiratory 3/3,
+mrcp-rheumatology 8/8, mrcp-statistics 1/8, obstetrics-gynaecology 50/50,
+ophthalmology 30/30, orthopaedics 16/16, paediatrics 57/57, pathology 73/73,
+pharmacology 72/72, physiology 41/49, plab-dermatology 5/5, plab-psychiatry
+5/5, population-health-and-ethics 16/18, psychiatry 28/28, radiology 23/23,
+ss-cardiology 11/11, ss-critical-care 32/32, ss-endocrinology 6/6,
+ss-gastroenterology 3/3, ss-general-medicine 37/38, ss-haematology 5/5,
+ss-hepatology 8/8, ss-infectious-diseases 29/29, ss-medical-oncology 44/44,
+ss-nephrology 26/26, ss-neurology 18/18, ss-pulmonology 7/7, ss-radiology
+11/11, ss-rheumatology-immunology 25/25, surgery 65/66, womens-health 10/10.
+Fully illustrated: ss-biostatistics 0/6. (Counts moved since the 2026-10-13
+pass above because the corpus grew from 1041 to 1449 lessons.)
+
+Backfilled this branch from the existing original-figure bank
+(`prep/lessons/media/`, StewardMD originals, ATTRIBUTION.md unchanged; alt
+text + captions added; numbers re-verified: recall-bias OR 1.0 -> 6.0, alpha
+0.05 with power = 1 - beta, point-source 65 cases / propagated 72 cases):
+
+- mstat-sampling "Power" -> stats-errors.svg; "A non-significant result" ->
+  stats-ci-forest.svg
+- mstat-regression "Linear regression" -> stats-scatter.svg
+- mstat-design "Non-differential misclassification" -> epi-bias.svg
+- cm-infectious-epi "Generation time" -> epi-curve.svg
+
+Deliberately untouched: mstat-audit (flow/table/compare on every step),
+mstat-design lead-time and regression-to-mean steps, mstat-regression
+regression-to-mean step, mstat-sampling dropouts step (no fitting bank figure;
+a forced figure would mislead). Next targets by exam weight:
+community-medicine (42), physiology (41), medicine (113), pathology (73),
+pharmacology (72).

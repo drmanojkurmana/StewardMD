@@ -77,7 +77,13 @@
   {
    "tx": "**Non-differential misclassification** of exposure, where errors are equal across outcome groups, usually biases an association towards the null. Differential misclassification can push results in either direction. **Neyman bias** (prevalence-incidence bias) occurs when prevalent users are sampled, so early withdrawals are missed and mislabelled as unexposed.",
    "say": "Non-differential misclassification of exposure, where errors are equal across outcome groups, usually biases an association towards the null. Differential misclassification can push results in either direction. Neyman bias, also called prevalence-incidence bias, occurs when prevalent users are sampled, so early withdrawals are missed and mislabelled as unexposed.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/epi-bias.svg",
+    "alt": "Two panels of stacked bars. Truly, half of cases and half of controls were exposed, an odds ratio of 1. From memory, cases report four-fifths exposed and controls two-fifths, a false odds ratio of 6.",
+    "caption": "Recall bias is differential misclassification: unequal memory creates an association where none exists.",
+    "ar": 1.5384615384615385
+   }
   }
  ],
  "quiz": [],

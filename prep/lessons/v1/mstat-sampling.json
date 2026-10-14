@@ -8,7 +8,13 @@
   {
    "tx": "**Power** is the probability that a study will detect a true difference of a specified size as statistically significant. Conventionally, studies are planned for 80 to 90 percent power at a two-sided **alpha** of 0.05. Underpowered trials can miss real effects and produce false negative results. Power depends on four things: alpha, the true effect size, the outcome standard deviation and the sample size.",
    "say": "Power is the probability that a study will detect a true difference of a specified size as statistically significant. Conventionally, studies are planned for 80 to 90 percent power at a two-sided alpha of 0.05. Underpowered trials can miss real effects and produce false negative results. Power depends on four things: alpha, the true effect size, the outcome standard deviation and the sample size.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-errors.svg",
+    "alt": "Two overlapping curves for no real effect and a real effect, with a significance cut-off marking alpha as the false-positive area, beta as the missed-effect area, and power as one minus beta.",
+    "caption": "Alpha is the false-positive risk you set at 0.05. Bigger samples, bigger effects and less noise raise power toward 80 to 90 percent.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "When comparing two **means**, the sample size in each group depends on the **variance** divided by the square of the **detectable difference**. Halving the difference therefore multiplies the required size by four, and doubling the standard deviation has the same effect. Because the effect is squared, very small differences demand very large trials, so the target should be clinically meaningful rather than arbitrarily small.",
@@ -102,7 +108,13 @@
   {
    "tx": "A **non-significant result** does not prove that no effect exists. A trial with low power may simply have been unable to detect a real difference. The **confidence interval** shows the range of effects compatible with the data. A wide interval that includes clinically important benefit or harm means the study is inconclusive. Judge both the point estimate and the precision against a prespecified minimal important difference.",
    "say": "A non-significant result does not prove that no effect exists. A trial with low power may simply have been unable to detect a real difference. The confidence interval shows the range of effects compatible with the data. A wide interval that includes clinically important benefit or harm means the study is inconclusive. Judge both the point estimate and the precision against a prespecified minimal important difference.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-ci-forest.svg",
+    "alt": "Forest plot of risk ratios with horizontal confidence intervals. Studies whose intervals cross the null line are compatible with no effect, and narrower intervals are more precise.",
+    "caption": "A non-significant result is not proof of no effect: the interval shows the range still compatible with the data.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "Dropouts and refusals can undermine a study's **internal validity**. To offset anticipated losses, inflate the recruitment goal: divide the number of analysable participants required by the proportion expected to remain, then round upwards. Suppose 200 completers are needed and 15 percent will be lost; roughly 236 people should be approached. When non-participants seem different from participants, compare what is known about each group, such as age or baseline severity, to estimate the **selection bias** likely to follow.",
