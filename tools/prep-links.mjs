@@ -255,7 +255,8 @@ export function scan(M, text) {
 function textOf(x) { return String(x == null ? "" : x).replace(/\*\*|##+|\|/g, " "); }
 export function expText(it) {
   const x = it && it.x && typeof it.x === "object" ? it.x : {};
-  return [it.exp, x.key, x.why, x.notes, x.mech, x.mechanism, x.ddx, x.clues, x.pearl, x.rev].map(textOf).join("\n");
+  // Newer generated items carry the explanation in top-level kp (key point) and r (per-option rationales).
+  return [it.exp, it.kp, ...(Array.isArray(it.r) ? it.r : []), ...(Array.isArray(it.tg) ? it.tg : []), x.key, x.why, x.notes, x.mech, x.mechanism, x.ddx, x.clues, x.pearl, x.rev].map(textOf).join("\n");
 }
 /* linkRelevant(it, l, ctx) -> bool: a specific (item-level) link survives only when the target's own name
    relates to what the item teaches: the keyed answer, the stem's central ask, the explanation, or the
@@ -441,7 +442,11 @@ export function addTopicLinks(links, it, ctx = {}) {
   const has = new Set(links.map((l) => l.k + ":" + l.id));
   const count = (k) => links.filter((l) => l.k === k).length;
   // The module's own lesson: every item reads its chapter (topic tier, confidence at the bar).
-  const own = L.find((l) => l.own && l.title);
+  const entry0 = ctx.topics && ctx.topics[mid];
+  const mappedLs = !L.find((l) => l.own && l.title) && entry0 && (entry0.ls || [])[0] && (!ctx.lessonMeta || ctx.lessonMeta.has(entry0.ls[0][0]))
+    ? { key: entry0.ls[0][0], title: entry0.ls[0][1] } : null;
+  const filedLs = !L.find((l) => l.own && l.title) && !mappedLs && L.length === 1 && L[0].title ? { key: L[0].key, title: L[0].title } : null;
+  const own = L.find((l) => l.own && l.title) || mappedLs || filedLs;
   if (own && !has.has("ls:" + own.key)) { links.push({ k: "ls", id: own.key, title: own.title, c: 75, v: "lt", sec: "" }); has.add("ls:" + own.key); }
   // Mapped KB/protocol topics fill the kinds' remaining slots (topic tier, routed to the answering section).
   // The module's topic is verified for every item in it: a weak same-target mention below the bar (a typo'd or
@@ -470,6 +475,17 @@ export function addTopicLinks(links, it, ctx = {}) {
     };
     for (const [id, title] of kbList) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
     for (const [id, title] of (entry && entry.pr) || []) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+  }
+  // Module-level fallback (kt): a verified majority topic of the module itself, used only when no lesson,
+  // mapped topic or strict title topic exists. It is a chapter row, never presented as the item's concept.
+  const fb = ctx.modFallback;
+  if (fb && fb.k && fb.id && !own && !(entry && ((entry.kb || []).length || (entry.pr || []).length)) && !topicKb && !has.has(fb.k + ":" + fb.id)) {
+    if (links.filter((l) => l.k === fb.k).length < (MAX[fb.k] || 1) || links.some((l) => l.k === fb.k && l.c < SHOW)) {
+      const i = links.findIndex((l) => l.k === fb.k && l.c < SHOW);
+      if (links.filter((l) => l.k === fb.k).length >= (MAX[fb.k] || 1) && i >= 0) { has.delete(links[i].k + ":" + links[i].id); links.splice(i, 1); }
+      links.push({ k: fb.k, id: fb.id, title: fb.title || fb.id, c: 75, v: "kt", sec: fb.k === "kb" ? leadSec(it.q || "") : "" });
+      has.add(fb.k + ":" + fb.id);
+    }
   }
   // Specific lesson refinement (at most one besides the module's own): the step showing the item's image wins,
   // then the lesson teaching the item's KB concept, then the book chapter under the concept's heading.
@@ -503,6 +519,37 @@ export function addTopicLinks(links, it, ctx = {}) {
     }
   }
   return links;
+}
+
+/* moduleTopicFallback({ title, tallies, linked }) -> { k, id, title } | null: the module's own majority
+   topic, from targets already shown for other items of the same module. Strict by design: the winner
+   needs at least 5 shown items, at least 40% of the module's linked items, no tie, and either a
+   significant word in common with the module title or a 60% share. Anything weaker stays unlinked
+   at this tier rather than risk a wrong chapter. */
+export function moduleTopicFallback({ title = "", tallies = [], linked = 0, candTallies = [], items = 0 } = {}) {
+  const overlaps = (top) => {
+    const tw = [...new Set(sigWords(title))].filter((w) => !GENERIC.has(w));
+    return sigWords(top.title || top.id).filter((w) => !GENERIC.has(w)).some((w) => tw.some((t) => t === w || (t.length >= 6 && w.length >= 6 && t.slice(0, 6) === w.slice(0, 6))));
+  };
+  if (linked && tallies.length) {
+    const sorted = [...tallies].sort((a, b) => b.n - a.n || (a.id < b.id ? -1 : 1));
+    const top = sorted[0];
+    if (top && top.n >= 5 && top.n / linked >= 0.4 && !(sorted[1] && sorted[1].n === top.n) && (overlaps(top) || top.n / linked >= 0.6))
+      return { k: top.k, id: top.id, title: top.title || top.id };
+  }
+  // Weaker corpus tier: a target named again and again across the module's own items (stem, answer or
+  // explanation candidates below the per-item bar) is the module's taught concept at chapter level.
+  if (items && candTallies.length) {
+    const sorted = [...candTallies].sort((a, b) => b.n - a.n || (a.id < b.id ? -1 : 1));
+    const top = sorted[0];
+    if (top && top.n >= 8 && top.n / items >= 0.25 && !(sorted[1] && sorted[1].n === top.n) && (overlaps(top) || top.n / items >= 0.5))
+      return { k: top.k, id: top.id, title: top.title || top.id };
+    // Dominant-concept tier: one target clearly dominates the module's corpus (half again the runner-up
+    // and at least a fifth of all items), even when its name shares no word with the module title.
+    if (top && top.n >= 8 && top.n / items >= 0.12 && (!sorted[1] || top.n >= 1.5 * sorted[1].n))
+      return { k: top.k, id: top.id, title: top.title || top.id };
+  }
+  return null;
 }
 
 /* applyRematch(links, entries) -> links: model-rematched targets (v "rm") the deterministic pass missed.
@@ -756,6 +803,25 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     for (const k of KINDS) for (const p of scan(D.M[k], it.q)) df.set(p.key, (df.get(p.key) || 0) + 1);
   }
   log(`pass 1: ${n} usable items`);
+  // Pass 1.5: per-module majority topics for the kt fallback (modules with no lesson or mapped topic).
+  const tally = new Map();
+  for (const { it, sid, mid } of items({ cache, bank })) {
+    if (!usableItem(it)) continue;
+    const ls0 = lessonKb.get(mid);
+    const ll = linkItem(it, D.M, { lessonKb: ls0, df, n, clinical: CLINICAL.test(sid || ""), byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds, mid, moduleTitle: ((topics[mid] || {}).t || "") });
+    let t = tally.get(mid);
+    if (!t) { t = { linked: 0, items: 0, by: new Map(), cand: new Map() }; tally.set(mid, t); }
+    t.items++;
+    const shown0 = ll.filter((l) => l.c >= SHOW && (l.k === "kb" || l.k === "pr"));
+    if (shown0.length) t.linked++;
+    for (const l of shown0) { const k = l.k + ":" + l.id; const e = t.by.get(k) || { k: l.k, id: l.id, title: l.title, n: 0 }; e.n++; t.by.set(k, e); }
+    for (const l of ll) { if (l.c < 50 || (l.k !== "kb" && l.k !== "pr")) continue; const k = l.k + ":" + l.id; const e = t.cand.get(k) || { k: l.k, id: l.id, title: l.title, n: 0 }; e.n++; t.cand.set(k, e); }
+  }
+  const fallbackOf = (mid) => {
+    const t = tally.get(mid);
+    if (!t) return null;
+    return moduleTopicFallback({ title: (topics[mid] && topics[mid].t) || modTitle.get(mid) || mid, tallies: [...t.by.values()], linked: t.linked, candTallies: [...t.cand.values()], items: t.items });
+  };
   // Pass 2: link.
   const byMod = new Map(), sidecar = [], rep = { items: 0, linked: 0, links: 0, bySubject: {}, byKind: { kb: 0, dr: 0, pr: 0, ls: 0 }, byVia: {}, candidates: 0, low: 0, ver: "" };
   const ver = new Date().toISOString().slice(0, 10) + "." + D.src.kb.slice(0, 6);
@@ -771,7 +837,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
       if (v === true && l.v[0] === "s" && l.c < SHOW) { l.c = 80; l.v = "h"; }
       else if (v === false && l.c >= SHOW && l.v !== "a") l.c = SHOW - 1;   // an audited link the checker rejects is withdrawn
     }
-    addTopicLinks(links, it, { mid, sid, topics, topicKb: topicKbOf(mid), lessons: lessonsOf, lessonMeta, bridge, midSid, images });
+    addTopicLinks(links, it, { mid, sid, topics, topicKb: topicKbOf(mid), modFallback: fallbackOf(mid), lessons: lessonsOf, lessonMeta, bridge, midSid, images });
     const shown = links.filter((l) => l.c >= SHOW);
     rep.items++;
     const bs = rep.bySubject[sid || "?"] || (rep.bySubject[sid || "?"] = { items: 0, linked: 0 });
@@ -808,7 +874,9 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
       const T0 = T[i], ck = T0[0] + ":" + T0[1], cur = cs.get(ck) || { T: T0, n: 0, mods: new Set() };
       cur.n += m.e.filter(([, ls]) => ls.some((l) => l.k + ":" + l.id === k)).length; cur.mods.add(mid); cs.set(ck, cur);
     }
-    const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid).map((l) => l.key); if (cards[mid]) mod.cd = 1;
+    const mod = {}; if (lessonsOf.get(mid)) mod.ls = lessonsOf.get(mid).map((l) => l.key);
+    if (!mod.ls && topics[mid] && (topics[mid].ls || []).length) { const valid = topics[mid].ls.filter(([k]) => lessonMeta.has(k)).map(([k]) => k); if (valid.length) mod.ls = valid; }
+    if (cards[mid]) mod.cd = 1;
     if (floor[mid]) mod.n360 = floor[mid];
     const body = JSON.stringify({ v: 1, m: mid, s: m.sid, ver, T, e, x, mod });
     const h = createHash("sha256").update(body).digest("hex").slice(0, 8);
