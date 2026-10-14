@@ -116,6 +116,8 @@ try {
   console.log("ask path: " + await ev(`return "pa-ul(old)=" + !!document.querySelector("#pnAsk .pa-txt ul.pa-ul") + " plain-ul(new)=" + !!document.querySelector("#pnAsk .pa-txt ul:not(.pa-ul)");`));
   console.log("ask first-bubble: " + await ev(`var b=document.querySelector("#pnAsk .pa-txt"); return b?b.innerHTML.slice(0,400):"none";`));
   ok(await until(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length >= 1;`, 20000), "MaiK answers");
+  // The answer reveals word by word (reveal(); off under reduced motion): assert the settled text, not a frame.
+  ok(await until(`return !document.querySelector(\"#pnAsk .pa-rev\") && !document.querySelector(\"#pnAsk [data-key=typing]\");`, 10000), "answer reveal settles");
   ok(await ev(`var b=document.querySelector("#pnAsk .pt-msg.ai .pa-txt"); return !!b && !!b.querySelector("strong") && b.querySelector("strong").textContent.indexOf("Fibromuscular dysplasia")>=0;`) === true, "MaiK answer renders Markdown bold as strong");
   ok(await ev(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pa-txt ul > li").length === 2;`) === true, "MaiK answer renders Markdown bullets as a 2-item list");
   ok(await ev(`var s=document.querySelector("#pnAsk .pt-stored .pn-xkey strong"); return !!s && s.textContent.indexOf("Ans. is b")>=0;`) === true, "stored explanation under the answer keeps the key line");
