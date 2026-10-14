@@ -251,3 +251,6 @@
 
 
 
+## 2026-10-14 LON8 rheumatology DONE (branch books2-lon8, PR to open)
+
+9 modules (ra, spa, crystal, sle, ctd, vasculitis-large, vasculitis-small, amyloid-misc, allergy-overwrite), 9 lessons + 9 KB + 90 MCQs bk2-med-671-760. Gates: LP 9/9, suites 59/59 (mcqs 2, lessons 23, lessons-100 3, medcov 15, subject 6, accuracy 5, kb 3), similarity 0 hits, answers 23/23/22/22, app 32/33 (pre-existing, verified on clean base). Next: push + PR, then LON9 infectious block (10 modules).
