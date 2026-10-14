@@ -20,7 +20,7 @@
   /* ================= pure ================= */
   var EXAMS = [
     { id: "neet-pg", label: "NEET-PG / INI-CET", branch: "mbbs", tag: "neet-pg", sec: 60 },
-    { id: "neet-ss", label: "NEET-SS", branch: "ss-medicine", tag: "neet-ss", sec: 60 },
+    { id: "neet-ss", label: "NEET-SS", branch: "ss-medicine", tag: "neet-ss", sec: 60, ssAll: true },
     { id: "usmle", label: "USMLE", branch: "mbbs", tag: "usmle", sec: 90 },
     // FMGE: the MBBS bank as is (all 19 subjects; all: true ignores the subjects' exam tags).
     { id: "fmge", label: "FMGE", branch: "mbbs", tag: "fmge", all: true, sec: 60 },
@@ -750,7 +750,8 @@
   }
   function subjectsOf(exam) {
     var ex = examOf(exam), out = [];
-    (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
+    // ssAll (NEET-SS): groups live across every ss-* branch, so the tab covers them all, not just ss-medicine.
+    (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch || (ex.ssAll && b.id.indexOf("ss-") === 0)) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
     return out;
   }
   /* The selected plan's scope (prep-plan.js EXAM_CHOICES/SS_GROUPS): Tests and QBank follow the plan's exam, group and
