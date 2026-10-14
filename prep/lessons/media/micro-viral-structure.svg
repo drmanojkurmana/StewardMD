@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="t d">
+<title id="t">Virion Architecture: Naked versus Enveloped Viruses</title>
+<desc id="d">Structural comparison of non-enveloped (naked) versus enveloped viruses, showing nucleic acid core, protein capsid, lipid bilayer envelope, glycoprotein spikes, and physical resistance differences.</desc>
+<rect width="800" height="520" fill="#FFFFFF"/>
+<text x="400" y="34" font-size="20" font-weight="700" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">Virion Structure: Naked vs Enveloped</text>
+<text x="400" y="56" font-size="12.5" font-weight="400" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Capsid symmetry, lipid envelope properties, and environmental stability rules</text>
+
+<!-- Center divider -->
+<line x1="400" y1="85" x2="400" y2="450" stroke="#E0ECE8" stroke-width="2" stroke-dasharray="6 4"/>
+
+<!-- Left Side: Naked (Non-enveloped) -->
+<text x="210" y="105" font-size="16" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">Naked (Non-Enveloped) Virus</text>
+<text x="210" y="123" font-size="11.5" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Nucleic acid + Protein capsid only</text>
+
+<!-- Naked Virion Diagram -->
+<!-- Icosahedral Capsid -->
+<polygon points="210,145 285,185 285,255 210,295 135,255 135,185" fill="#EAF3F0" stroke="#0B6B5B" stroke-width="3"/>
+<!-- Genome core (DNA/RNA) -->
+<path d="M 175 220 Q 210 180 210 220 T 245 220" fill="none" stroke="#071318" stroke-width="3"/>
+<text x="210" y="245" font-size="11" font-weight="700" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">Viral Genome (DNA/RNA)</text>
+<text x="210" y="170" font-size="11" font-weight="600" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">Protein Capsid (Capsomeres)</text>
+
+<!-- Properties Card Left -->
+<rect x="50" y="315" width="320" height="145" rx="8" fill="#F4F8F6" stroke="#0B6B5B" stroke-width="1.5"/>
+<text x="65" y="338" font-size="12" font-weight="700" fill="#0B6B5B" font-family="system-ui,sans-serif">Physical &amp; Clinical Properties:</text>
+<text x="65" y="358" font-size="11" fill="#071318" font-family="system-ui,sans-serif">• Stable to heat, acid, drying, bile, and detergents</text>
+<text x="65" y="376" font-size="11" fill="#071318" font-family="system-ui,sans-serif">• Can survive the gastrointestinal tract</text>
+<text x="65" y="394" font-size="11" font-weight="700" fill="#0B6B5B" font-family="system-ui,sans-serif">• Transmission: Fecal-oral route, fomites</text>
+<text x="65" y="414" font-size="11" font-weight="700" fill="#071318" font-family="system-ui,sans-serif">Examples:</text>
+<text x="65" y="430" font-size="10.5" fill="#3D5A54" font-family="system-ui,sans-serif">Poliovirus, Rhinovirus, Norovirus, HAV, HEV, Adenovirus, Rotavirus, Parvovirus B19</text>
+
+<!-- Right Side: Enveloped -->
+<text x="590" y="105" font-size="16" font-weight="700" text-anchor="middle" fill="#B42318" font-family="system-ui,sans-serif">Enveloped Virus</text>
+<text x="590" y="123" font-size="11.5" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Capsid + Host-derived lipid bilayer + Spikes</text>
+
+<!-- Enveloped Virion Diagram -->
+<!-- Outer Envelope Circle with Spikes -->
+<circle cx="590" cy="220" r="75" fill="#FDF2F0" stroke="#B42318" stroke-width="2.5"/>
+<!-- Spikes radiating out -->
+<line x1="590" y1="145" x2="590" y2="130" stroke="#B7791F" stroke-width="3"/>
+<circle cx="590" cy="126" r="4" fill="#B7791F"/>
+<line x1="590" y1="295" x2="590" y2="310" stroke="#B7791F" stroke-width="3"/>
+<circle cx="590" cy="314" r="4" fill="#B7791F"/>
+<line x1="515" y1="220" x2="500" y2="220" stroke="#B7791F" stroke-width="3"/>
+<circle cx="496" cy="220" r="4" fill="#B7791F"/>
+<line x1="665" y1="220" x2="680" y2="220" stroke="#B7791F" stroke-width="3"/>
+<circle cx="684" cy="220" r="4" fill="#B7791F"/>
+
+<!-- Inner Capsid -->
+<polygon points="590,175 635,198 635,242 590,265 545,242 545,198" fill="#EAF3F0" stroke="#0B6B5B" stroke-width="2"/>
+<!-- Genome core -->
+<path d="M 570 220 Q 590 195 590 220 T 610 220" fill="none" stroke="#071318" stroke-width="2.5"/>
+<text x="590" y="160" font-size="10.5" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">Glycoprotein Spike (Hemagglutinin)</text>
+
+<!-- Properties Card Right -->
+<rect x="430" y="315" width="320" height="145" rx="8" fill="#FDF2F0" stroke="#B42318" stroke-width="1.5"/>
+<text x="445" y="338" font-size="12" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">Physical &amp; Clinical Properties:</text>
+<text x="445" y="358" font-size="11" fill="#071318" font-family="system-ui,sans-serif">• LABILE: Disrupted by acid, detergents, drying, ether</text>
+<text x="445" y="376" font-size="11" fill="#071318" font-family="system-ui,sans-serif">• Must stay wet; destroyed by stomach gastric acid</text>
+<text x="445" y="394" font-size="11" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">• Transmission: Respiratory droplets, blood, secretions</text>
+<text x="445" y="414" font-size="11" font-weight="700" fill="#071318" font-family="system-ui,sans-serif">Examples:</text>
+<text x="445" y="430" font-size="10.5" fill="#3D5A54" font-family="system-ui,sans-serif">Influenza, HIV, Herpesviruses (HSV/VZV/EBV), HBV, HCV, Rabies, Coronaviruses</text>
+
+<text x="400" y="505" font-size="11" font-weight="400" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">All negative-sense RNA viruses are enveloped; ether sensitivity proves the presence of a lipid envelope.</text>
+</svg>

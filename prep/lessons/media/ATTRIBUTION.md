@@ -44,9 +44,25 @@ applies.
 | bio-lineweaver-burk.svg | Lineweaver-Burk double-reciprocal plot: competitive (same Vmax, higher Km) vs non-competitive (lower Vmax, same Km) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | bio-glycolysis-tca.svg | Cellular energy hub: glycolysis, pyruvate dehydrogenase, Krebs cycle, ~30-32 ATP yield | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | bio-purine-pathway.svg | Purine metabolism: HGPRT salvage vs Xanthine Oxidase catabolism to uric acid | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-trilaminar-disc.svg | Gastrulation and trilaminar germ disc derivatives: ectoderm, mesoderm, endoderm | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-epiploic-foramen.svg | Boundaries of epiploic foramen of Winslow (portal triad, IVC, caudate, duodenum) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-thyroid-relations.svg | Thyroid gland surgical bed: recurrent & superior laryngeal nerves, parathyroid glands | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-carotid-branches.svg | External carotid artery branches (8 classical branches) vs internal carotid | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-twinning-timing.svg | Monozygotic twinning cleavage timing: Di-Di (d0-3), Mono-Di (d4-8), Mono-Mono (d8-12), Conjoined (>d13) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-allens-test.svg | Allen test: radial and ulnar arterial palmar arches collateral patency assessment | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-acid-base-map.svg | Acid-base nomogram / Davenport map: pH vs [HCO3-], PCO2 isobars, primary & compensated states | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-fluid-compartments.svg | 60-40-20 body fluid distribution: TBW (60%), ICF (40%), ECF (20% = 15% ISF + 5% plasma) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-appetite-nuclei.svg | Hypothalamic feeding centers: lateral (hunger/orexigenic) vs ventromedial (satiety), leptin/ghrelin | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-stretch-reflex.svg | Monosynaptic deep tendon reflex arc: muscle spindle, Ia afferent, alpha motor neuron, reciprocal Ia interneuron | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-nephron-diuretics.svg | Nephron transport segments and diuretic sites: PCT (CA inhibitors), TAL (NKCC2 loop), DCT (NCCT thiazide), CD (ENaC/aldosterone) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-raas-pathway.svg | Renin-Angiotensin-Aldosterone System cascade and inhibitor sites: Aliskiren, ACEi, ARB, Spironolactone | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-necrosis-patterns.svg | Six morphologic patterns of tissue necrosis: coagulative, liquefactive, caseous, fat, fibrinoid, gangrenous | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| bio-etc-complexes.svg | Mitochondrial electron transport chain complexes I-IV, ATP synthase, proton pumping, and specific inhibitors | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-viral-structure.svg | Viral structural architecture: enveloped vs naked, icosahedral vs helical, capsid, spike proteins, genetic payload | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 
 Numbers and scientific labels on each figure were recomputed and verified by a second pass
 (Hill equation EC50 10⁻⁷ M, right-shifted EC50 10⁻⁵·⁵ M, 50% depressed Emax; first-order half-life 2h
 yielding 50%, 25%, 12.5% at 2h, 4h, 6h; zero-order clearance 12.5 mg/L/hr; Lineweaver-Burk intercepts
 1/Vmax and -1/Km; TCA ATP yields; sensitivity 80%, specificity 90%, PPV 88.9%, NPV 81.8%; SE 5.0/2.0/1.0 at
-n = 4/25/100 with SD 10; IQR 18; ARR 5% so NNT 20).
+n = 4/25/100 with SD 10; IQR 18; ARR 5% so NNT 20; 60-40-20 body fluid distribution 42L/28L/14L/10.5L/3.5L;
+Davenport isobars PCO2 40 normal, pH 7.40, HCO3- 24; twinning cleavage days 0-3, 4-8, 8-12, >13).

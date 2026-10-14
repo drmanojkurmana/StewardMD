@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="t d">
+<title id="t">Mitochondrial Electron Transport Chain Complexes and Inhibitors</title>
+<desc id="d">Biochemical pathway diagram of the inner mitochondrial membrane showing respiratory complexes I through IV, ATP synthase (complex V), proton pumping into the intermembrane space, and specific pharmacological and poison inhibitors.</desc>
+<rect width="800" height="520" fill="#FFFFFF"/>
+<text x="400" y="34" font-size="20" font-weight="700" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">Electron Transport Chain and Oxidative Phosphorylation</text>
+<text x="400" y="56" font-size="12.5" font-weight="400" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Inner mitochondrial membrane complexes, proton gradient generation, and toxic inhibitors</text>
+
+<!-- Intermembrane space (Top, Acidic H+) -->
+<rect x="50" y="80" width="700" height="60" fill="#FDF2F0" opacity="0.6"/>
+<text x="70" y="105" font-size="13" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">INTERMEMBRANE SPACE (High H⁺, Electrochemical Gradient)</text>
+<text x="70" y="125" font-size="11" fill="#3D5A54" font-family="system-ui,sans-serif">Protons pumped across generate proton motive force (Δψ + ΔpH)</text>
+
+<!-- Inner Mitochondrial Membrane Strip -->
+<rect x="50" y="140" width="700" height="130" fill="#EAF3F0" stroke="#0B6B5B" stroke-width="2"/>
+<text x="70" y="160" font-size="11" font-weight="700" fill="#0B6B5B" font-family="system-ui,sans-serif">Inner Mitochondrial Membrane (Cardiolipin rich, impermeable to H⁺)</text>
+
+<!-- Complex I -->
+<rect x="90" y="170" width="85" height="90" rx="6" fill="#0B6B5B"/>
+<text x="132" y="200" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Complex I</text>
+<text x="132" y="218" font-size="9" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">NADH Dehyd.</text>
+<text x="132" y="235" font-size="10" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">Pumps 4 H⁺</text>
+
+<!-- Complex II -->
+<rect x="210" y="190" width="75" height="70" rx="6" fill="#0B6B5B" opacity="0.85"/>
+<text x="247" y="218" font-size="12" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Complex II</text>
+<text x="247" y="234" font-size="8.5" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Succinate Dehyd.</text>
+<text x="247" y="248" font-size="9" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">(0 H⁺ pumped)</text>
+
+<!-- CoQ (Ubiquinone) -->
+<circle cx="320" cy="205" r="16" fill="#B7791F"/>
+<text x="320" y="210" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">CoQ</text>
+
+<!-- Complex III -->
+<rect x="370" y="170" width="85" height="90" rx="6" fill="#0B6B5B"/>
+<text x="412" y="200" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Complex III</text>
+<text x="412" y="218" font-size="9" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Cyt bc1</text>
+<text x="412" y="235" font-size="10" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">Pumps 4 H⁺</text>
+
+<!-- Cyt c -->
+<circle cx="490" cy="155" r="15" fill="#B7791F"/>
+<text x="490" y="159" font-size="10" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Cyt c</text>
+
+<!-- Complex IV -->
+<rect x="535" y="170" width="85" height="90" rx="6" fill="#0B6B5B"/>
+<text x="577" y="200" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Complex IV</text>
+<text x="577" y="218" font-size="9" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Cyt c Oxidase</text>
+<text x="577" y="235" font-size="10" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">Pumps 2 H⁺</text>
+
+<!-- Complex V: ATP Synthase -->
+<rect x="655" y="155" width="80" height="110" rx="8" fill="#16383E" stroke="#FFFFFF" stroke-width="1.5"/>
+<text x="695" y="195" font-size="13" font-weight="700" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">Complex V</text>
+<text x="695" y="212" font-size="9" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif">ATP Synthase</text>
+<text x="695" y="235" font-size="10" font-weight="700" text-anchor="middle" fill="#42CDB5" font-family="system-ui,sans-serif">ADP -> ATP</text>
+
+<!-- H+ flow down into Complex V -->
+<line x1="695" y1="125" x2="695" y2="150" stroke="#42CDB5" stroke-width="3" marker-end="url(#arr-gr3)"/>
+<defs><marker id="arr-gr3" viewBox="0 0 6 6" refX="3" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L3 6 L6 0 z" fill="#42CDB5"/></marker></defs>
+
+<!-- Mitochondrial Matrix (Bottom) -->
+<text x="70" y="295" font-size="13" font-weight="700" fill="#071318" font-family="system-ui,sans-serif">MITOCHONDRIAL MATRIX (Krebs Cycle / β-Oxidation)</text>
+<text x="132" y="320" font-size="11" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">NADH -> NAD⁺</text>
+<text x="247" y="320" font-size="11" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">FADH2 -> FAD</text>
+<text x="577" y="320" font-size="11" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">½ O2 -> H2O</text>
+
+<!-- Inhibitor Reference Grid Below -->
+<rect x="50" y="345" width="700" height="135" rx="8" fill="#FFFFFF" stroke="#B42318" stroke-width="1.5"/>
+<text x="70" y="370" font-size="13" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">Classic ETC Inhibitors and Uncouplers (Universal Exam High-Yield):</text>
+<line x1="50" y1="380" x2="750" y2="380" stroke="#FDF2F0" stroke-width="1.5"/>
+
+<text x="70" y="402" font-size="11.5" font-weight="700" fill="#071318" font-family="system-ui,sans-serif">• Complex I Inhibitors:</text>
+<text x="240" y="402" font-size="11" fill="#3D5A54" font-family="system-ui,sans-serif">Rotenone (pesticide), Amobarbital (barbiturate), Metformin (mild)</text>
+
+<text x="70" y="422" font-size="11.5" font-weight="700" fill="#071318" font-family="system-ui,sans-serif">• Complex III Inhibitors:</text>
+<text x="240" y="422" font-size="11" fill="#3D5A54" font-family="system-ui,sans-serif">Antimycin A</text>
+
+<text x="70" y="442" font-size="11.5" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">• Complex IV Inhibitors:</text>
+<text x="240" y="442" font-size="11" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">Cyanide (CN⁻), Carbon Monoxide (CO), Sodium Azide (NaN3), H2S</text>
+
+<text x="70" y="462" font-size="11.5" font-weight="700" fill="#B7791F" font-family="system-ui,sans-serif">• Complex V &amp; Uncouplers:</text>
+<text x="240" y="462" font-size="11" fill="#071318" font-family="system-ui,sans-serif">Oligomycin blocks Fo; 2,4-DNP, Aspirin, &amp; Thermogenin (UCP-1) dissipate H⁺ gradient as heat</text>
+
+<text x="400" y="505" font-size="11" font-weight="400" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Cyanide and CO inhibit Complex IV (Cytochrome c oxidase), halting ATP synthesis; uncouplers dissipate the gradient, causing hyperthermia.</text>
+</svg>
