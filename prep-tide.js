@@ -37,7 +37,7 @@
   ].join("\n");
   // Theme colours: C1 the high current, C2 the ember, C3 the deep. Light: tints of the same hues on the paper.
   var PAL = {
-    dark: { c1: [0x1a, 0x40, 0x74], c2: [0x5e, 0x4a, 0x33], c3: [0x16, 0x1a, 0x30], b: 0.04 },
+    dark: { c1: [0x24, 0x24, 0x24], c2: [0x4a, 0x3d, 0x2c], c3: [0x08, 0x08, 0x08], b: 0.04 },
     light: { c1: [0xcb, 0xda, 0xef], c2: [0xf8, 0xdf, 0xb6], c3: [0xe2, 0xe9, 0xf4], b: 0.02 }
   };
   var CANVAS_H = 420, SCALE = 0.5, FRAME_MS = 1000 / 30, SPEED = 0.16, IDLE_MS = 10000;

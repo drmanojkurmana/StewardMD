@@ -7,8 +7,8 @@
   --ky-diamond: #1f5b8a; --ky-platinum: #5a6472; --ky-gold: #7a5f1f; --ky-silver: #5a6472;
 }
 body.dark .pn-root {
-  --ky-bg: #0d1d23; --ky-bg2: #071318; --ky-line: #1c3038; --ky-edge: #24414a;
-  --ky-text: #eef5f3; --ky-mut: #9db5ae; --ky-acc: #42cdb5; --ky-acc-soft: #123437;
+  --ky-bg: #141414; --ky-bg2: #0a0a0a; --ky-line: #262626; --ky-edge: #333;
+  --ky-text: #f2f2f2; --ky-mut: #a7a7a7; --ky-acc: #42cdb5; --ky-acc-soft: #123437;
   --ky-diamond: #8fc3e8; --ky-platinum: #c9cfd8; --ky-gold: #d3b578; --ky-silver: #9aa3b2;
 }
 .pn-root .ky-sec { max-width: 720px; margin: 0 auto; }
@@ -121,3 +121,12 @@ body.dark .pn-root {
 .pn-root .ky-pager .ky-pos { font-size: 13px; font-weight: 700; color: var(--ky-mut); font-variant-numeric: tabular-nums; }
 .pn-root .pn-rv { touch-action: pan-y; }
 @media (max-width: 380px) { .pn-root .ky-legend { grid-template-columns: 1fr; } .pn-root .ky-ty { grid-template-columns: 1fr 1fr 38px; } }
+/* PrepNucleus dark mode: black shades, not navy (owner 2026-10-14). The palette names stay; only the values change. */
+body.dark .pn-root {
+  --pn-c-midnight: #050505; --pn-c-navy: #121212; --pn-c-navy-2: #1a1a1a; --pn-c-navy-3: #242424; --pn-c-navy-4: #2e2e2e;
+  --pn-line: #242424; --pn-edge: #262626; --pn-scrim: rgba(0, 0, 0, .7);
+  --pn-text: #f2f2f2; --pn-mut: #a8a8a8; --pn-mut2: #8c8c8c;
+  --pn-hero: #141414; --pn-hero-mut: #b4b4b4;
+  --pn-ok-bg: #14301f; --pn-bad-bg: #3a1c1c;
+  --pn-tile-ink: #d4d4d4;
+}

@@ -137,6 +137,12 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .ky-pos");`, 3000), "tapping a fix row opens the review pager");
   ok(await txt("#smdPrep .ky-pos") === "1 of 5", "the pager covers the fix list only: " + await txt("#smdPrep .ky-pos"));
   await shot("pager-light");
+  ok(await ev(`return !document.querySelector("#smdPrep .pn-why-chip");`) === true, "the review pager has no Why A / Why B buttons");
+  await ev(`document.body.classList.add("dark"); return 1;`); await shot("pager-dark");
+  const bgs = await ev(`var r=document.querySelector("#smdPrep"), c=getComputedStyle(r).backgroundColor, o=document.querySelector("#smdPrep .pn-opt:not(.right):not(.wrong)"); return [c, o ? getComputedStyle(o).backgroundColor : ""];`);
+  const dark = (c) => { const m = String(c).match(/\d+/g); return m && m.slice(0, 3).every((v) => +v < 40) && Math.max(...m.slice(0, 3)) - Math.min(...m.slice(0, 3)) < 8; };
+  ok(dark(bgs[0]) && dark(bgs[1]), "dark mode background and cards are neutral black, not navy: " + JSON.stringify(bgs));
+  await ev(`document.body.classList.remove("dark"); return 1;`);
   const q1 = await txt("#smdPrep .pn-q");
   await click("#smdPrep [data-act=rvnext]"); await sleep(250);
   ok(await txt("#smdPrep .ky-pos") === "2 of 5" && await txt("#smdPrep .pn-q") !== q1, "Next moves to the next question in the list");
