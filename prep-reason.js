@@ -248,7 +248,8 @@
   function slotHtml(d) {
     var h = "", links = d.links || [], mt = d.mt || "";
     function row(act, attrs, kind, title) {
-      return '<li><button type="button" class="pn-rlr" data-act="' + act + '"' + attrs + '><small>' + kind + "</small><b>" + escH(title) + "</b></button></li>";
+      var cls = "pn-rlr" + (act === "r-cancer-protocols" ? " pn-km-proto-btn" : "");
+      return '<li><button type="button" class="' + cls + '" data-act="' + act + '"' + attrs + '><small>' + kind + "</small><b>" + escH(title) + "</b></button></li>";
     }
     // Fallback rows (a module/subject-level target with no item evidence) render under the plain
     // "Learn this module" label with the module name, after every evidenced row; they open the same

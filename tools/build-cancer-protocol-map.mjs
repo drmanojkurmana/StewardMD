@@ -371,7 +371,8 @@ export function writeMappingOutputs(result, root = ROOT) {
     totalProtocols: result.totalProtocolsInKb,
     articlesCount: result.articlesWithProtocolsCount,
     articles: result.articles,
-    protocolsToArticles: result.protocolsToArticles
+    protocolsToArticles: result.protocolsToArticles,
+    unmappedCancers: result.unmappedCancerArticles
   }, null, 2);
   fs.writeFileSync(jsonPath, jsonContent, "utf8");
 
