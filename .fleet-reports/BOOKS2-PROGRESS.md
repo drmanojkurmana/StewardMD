@@ -263,3 +263,6 @@
 ## 2026-10-14 ANA2 core anaesthesia DONE (branch books2-ana2, PR to open)
 
 9 modules (airway-overwrite, opioids, LA-overwrite, neuraxial, intraop-overwrite, recovery, obstetric, cpr-overwrite, pain), 9 lessons + 9 KB + 90 MCQs bk2-ane-081-170. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Anaesthesia 25/25 indexed pending merge. Next: push + PR, then Nelson paediatrics (27 modules).
+## 2026-10-14 NEL3 neonatology DONE (branch books2-nel3, PR to open)
+
+9 modules (newborn-overwrite, preterm, resp, jaundice, infections, misc, growth, malnutrition, micronutrients), 9 lessons + 9 KB + 90 MCQs bk2-paed-171-260. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Paediatrics 21/39 indexed. Next: push + PR, then NEL4 (10 modules).
