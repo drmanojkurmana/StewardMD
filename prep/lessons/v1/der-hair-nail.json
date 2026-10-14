@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-hair-nail",
+ "subject": "dermatology",
+ "title": "Hair and nail disorders: alopecia areata, androgenetic alopecia, telogen effluvium, onychomycosis, systemic nail signs",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Alopecia areata** is an autoimmune disease causing non-scarring hair loss through breakdown of hair follicle immune privilege. Cytotoxic CD8 T cells attack anagen hair bulbs, producing smooth, circumscribed, round-to-oval patches of hair loss. Dermoscopy reveals pathognomonic **exclamation mark hairs** (short hairs tapering proximally near the scalp). Extensive variants include alopecia totalis and alopecia universalis.",
+   "say": "Alopecia areata is an autoimmune attack on anagen follicles producing round non-scarring bald patches with exclamation mark hairs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Loss of hair follicle immune privilege"
+     },
+     {
+      "id": "b",
+      "label": "Peribulbar lymphocytic swarm of bees"
+     },
+     {
+      "id": "c",
+      "label": "Anagen arrest and exclamation mark hairs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Androgenetic alopecia** is patterned non-scarring hair thinning driven by dihydrotestosterone (DHT) binding to androgen receptors in genetically susceptible hair follicles. Follicular miniaturization shortens the anagen growth phase and converts terminal hairs into fine vellus hairs. Men display bitemporal recession and vertex thinning, whereas women show diffuse crown thinning with preservation of the frontal hairline.",
+   "say": "Androgenetic alopecia causes dihydrotestosterone-driven follicular miniaturization, causing vertex recession in men and crown thinning in women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Male androgenetic alopecia",
+     "points": [
+      "Hamilton-Norwood classification",
+      "Frontotemporal hairline recession",
+      "Vertex scalp thinning",
+      "Treated with finasteride and minoxidil"
+     ]
+    },
+    "right": {
+     "title": "Female pattern hair loss",
+     "points": [
+      "Ludwig and Sinclair classifications",
+      "Preserved anterior frontal hairline",
+      "Diffuse widening of central part line",
+      "Treated with topical minoxidil"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Telogen effluvium** is a diffuse, non-scarring hair shedding occurring two to three months after a major systemic physiological or psychological stressor. Triggers include childbirth (telogen gravidarum), severe febrile illness, major surgery, rapid weight loss, or severe iron deficiency. Premature synchronized transition of growing anagen hairs into the resting telogen phase causes shedding of club hairs.",
+   "say": "Telogen effluvium causes diffuse shedding two to three months after severe systemic stress as anagen hairs enter telogen.",
+   "vis": null
+  },
+  {
+   "tx": "**Onychomycosis** is fungal infection of the nail apparatus, primarily caused by dermatophytes (Trichophyton rubrum). The distal subungual subtype is most common, displaying subungual hyperkeratosis, onycholysis, and yellowish-brown nail plate discolouration. Confirmation via direct microscopy with potassium hydroxide and fungal culture is mandatory before initiating months of oral terbinafine.",
+   "say": "Onychomycosis produces subungual hyperkeratosis and crumbling nails, confirmed by microscopy and culture before oral terbinafine.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic nail signs** provide vital diagnostic clues to internal disease. **Clubbing** (loss of Lovibond angle) reflects pulmonary or cardiac shunting. Koilonychia (spoon nails) indicates iron deficiency anaemia. Muehrcke lines (paired white transverse bands) and Terry nails indicate hypoalbuminaemia and cirrhosis. Splinter haemorrhages suggest infective endocarditis, and nail pitting suggests psoriasis or alopecia areata.",
+   "say": "Nail signs reflect systemic illness: clubbing in lung disease, spoon nails in iron deficiency, and splinter haemorrhages in endocarditis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nail abnormality",
+     "Clinical appearance",
+     "Systemic disease association"
+    ],
+    "rows": [
+     [
+      "Digital clubbing",
+      "Loss of Lovibond angle over 180 degrees",
+      "Lung cancer, bronchiectasis, cyanotic heart"
+     ],
+     [
+      "Koilonychia",
+      "Thin, concave spoon-shaped nail plate",
+      "Severe chronic iron deficiency anaemia"
+     ],
+     [
+      "Splinter haemorrhages",
+      "Linear dark red subungual streaks",
+      "Infective endocarditis, local trauma"
+     ],
+     [
+      "Terry nails",
+      "Proximal white nail, distal pink rim",
+      "Liver cirrhosis, congestive heart failure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-alopecia_areata",
+  "kb-reference-onychomycosis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

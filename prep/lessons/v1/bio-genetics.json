@@ -1,0 +1,179 @@
+{
+ "v": 1,
+ "module": "bio-genetics",
+ "subject": "biochemistry",
+ "title": "Inheritance patterns, cytogenetics, trinucleotide repeats and imprinting",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Classical Mendelian inheritance follows predictable pedigree patterns. **Autosomal dominant** disorders manifest in heterozygotes, transmit vertically across successive generations, and affect males and females equally with a 50 percent recurrence risk. **Autosomal recessive** traits require homozygous or compound heterozygous mutations, often affect horizontal sibships, and correlate with parental consanguinity. **X-linked recessive** disorders affect hemizygous males through carrier females, with no male-to-male transmission.",
+   "say": "Autosomal dominant traits appear vertically in every generation with 50 percent recurrence risk. Autosomal recessive traits appear in sibling horizontal clusters with 25 percent risk. X linked recessive traits manifest in males, transmitted through carrier mothers without male to male transmission.",
+   "vis": {
+    "cols": [
+     "Inheritance Mode",
+     "Pedigree Pattern",
+     "Transmission Characteristics",
+     "Classic Example"
+    ],
+    "rows": [
+     [
+      "Autosomal Dominant",
+      "Vertical transmission across all generations",
+      "50 percent risk to offspring, males and females equal",
+      "Huntington disease, Marfan syndrome"
+     ],
+     [
+      "Autosomal Recessive",
+      "Horizontal transmission within sibships",
+      "25 percent risk to offspring, linked to consanguinity",
+      "Cystic fibrosis, Sickle cell anaemia, PKU"
+     ],
+     [
+      "X-linked Recessive",
+      "Oblique transmission through unaffected mothers",
+      "Affects males, no male-to-male transmission",
+      "Duchenne muscular dystrophy, Haemophilia A"
+     ],
+     [
+      "X-linked Dominant",
+      "Vertical transmission, affected fathers transmit to all daughters",
+      "No male-to-male transmission, affects both sexes",
+      "Fragile X syndrome, Hypophosphataemic rickets"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Non-Mendelian mechanisms defy simple classical ratios. **Mitochondrial inheritance** exhibits strictly maternal transmission because sperm contribute negligible cytoplasm to the zygote; all offspring of an affected mother inherit the mutation, but severity varies with **heteroplasmy** (ratio of mutant to wild-type mitochondrial genomes). **Germline mosaicism** arises from postzygotic mutations restricted to gonadal precursors, explaining recurrent affected offspring born to phenotypically normal, genetically unaffected parents.",
+   "say": "Mitochondrial disorders are inherited exclusively from mothers, with variable severity determined by the proportion of mutant mitochondria known as heteroplasmy. Germline mosaicism explains how healthy parents can have multiple children with dominant mutations.",
+   "vis": {
+    "left": {
+     "title": "Mitochondrial Inheritance",
+     "points": [
+      "Strictly maternal transmission pattern",
+      "Affected mothers transmit to all children",
+      "Affected fathers transmit to zero children",
+      "Phenotype variable due to heteroplasmy",
+      "Examples: MELAS, MERRF, Leber optic neuropathy"
+     ]
+    },
+    "right": {
+     "title": "Germline Mosaicism",
+     "points": [
+      "Mutation restricted to gamete progenitor cells",
+      "Parent somatic tissues lack the mutation",
+      "Parent displays completely normal phenotype",
+      "Can produce multiple affected offspring",
+      "Seen in osteogenesis imperfecta and Duchenne"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Trinucleotide repeat disorders involve unstable microsatellite expansions that amplify during gametogenesis. This produces **genetic anticipation**, where disease manifests with earlier onset and greater severity in subsequent generations. **Huntington disease** involves CAG repeats in the coding region. **Fragile X syndrome** involves CGG repeats in the FMR1 promoter, causing hypermethylation and gene silencing. **Friedreich ataxia** involves intronic GAA repeats in the frataxin gene, and **myotonic dystrophy** involves 3-prime UTR CTG expansions.",
+   "say": "Trinucleotide repeat expansions become larger across generations, leading to genetic anticipation with earlier onset and worse symptoms. Examples include CAG repeats in Huntington disease, CGG in Fragile X, GAA in Friedreich ataxia, and CTG in myotonic dystrophy.",
+   "vis": {
+    "cols": [
+     "Disorder",
+     "Trinucleotide Repeat",
+     "Gene and Location",
+     "Parental Expansion Bias"
+    ],
+    "rows": [
+     [
+      "Huntington disease",
+      "CAG (glutamine)",
+      "HTT gene, coding exon",
+      "Paternal transmission bias"
+     ],
+     [
+      "Fragile X syndrome",
+      "CGG (arginine)",
+      "FMR1 gene, 5-prime UTR promoter",
+      "Maternal transmission bias"
+     ],
+     [
+      "Friedreich ataxia",
+      "GAA",
+      "FXN frataxin gene, intron 1",
+      "Autosomal recessive transmission"
+     ],
+     [
+      "Myotonic dystrophy type 1",
+      "CTG",
+      "DMPK gene, 3-prime UTR",
+      "Maternal transmission bias"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Genomic imprinting** is an epigenetic process where one parental allele is silenced by DNA methylation, ensuring monoallelic expression from the active chromosome. On chromosome 15q11-q13, maternal expression of UBE3A is paired with paternal expression of adjacent snoRNA genes. Loss of the **paternal 15q11-q13 contribution** causes **Prader-Willi syndrome**, characterized by neonatal hypotonia, hyperphagia, obesity, and hypogonadism. Loss of the **maternal UBE3A allele** causes **Angelman syndrome**, presenting with severe ataxia, inappropriate laughter, and seizures.",
+   "say": "Genomic imprinting silences one parent's allele through DNA methylation. Deletion of the paternal chromosome 15 region causes Prader-Willi syndrome with infantile hypotonia and later voracious hyperphagia. Deletion of the maternal gene causes Angelman syndrome with laughter, ataxia, and seizures.",
+   "vis": {
+    "left": {
+     "title": "Prader-Willi Syndrome",
+     "points": [
+      "Loss of paternal 15q11-q13 expression",
+      "Maternal genes normally imprinted and silenced",
+      "Paternal deletion (70%) or maternal uniparental disomy (25%)",
+      "Neonatal hypotonia, poor feeding initially",
+      "Hyperphagia, morbid obesity, short stature later"
+     ]
+    },
+    "right": {
+     "title": "Angelman Syndrome",
+     "points": [
+      "Loss of maternal UBE3A 15q11-q13 expression",
+      "Paternal genes normally imprinted and silenced",
+      "Maternal deletion (70%) or paternal uniparental disomy",
+      "Severe speech impairment, microcephaly",
+      "Ataxic puppet gait, inappropriate laughter, seizures"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Aneuploidies stem from meiotic non-disjunction during gametogenesis, correlating strongly with advanced maternal age. **Down syndrome (Trisomy 21)** features flat facial profile, upslanting palpebral fissures, single palmar crease, AVSD cardiac defects, early Alzheimer neuropathology, and duodenal atresia. **Edwards syndrome (Trisomy 18)** presents with micrognathia, low-set ears, clenched fists with overlapping fingers, rocker-bottom feet, and severe cardiac anomalies. **Patau syndrome (Trisomy 13)** exhibits holoprosencephaly, cleft lip and palate, microphthalmia, and polydactyly.",
+   "say": "Meiotic non-disjunction produces chromosomal aneuploidies. Trisomy 21 causes Down syndrome with distinctive facies, cardiac defects, and intellectual disability. Trisomy 18 causes Edwards syndrome with clenched hands and rocker bottom feet. Trisomy 13 causes Patau syndrome with midline clefts and holoprosencephaly.",
+   "vis": {
+    "cols": [
+     "Trisomy",
+     "Syndrome Name",
+     "First Trimester Quad Screen Findings",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "Trisomy 21",
+      "Down syndrome",
+      "Decreased AFP, decreased estriol, elevated hCG, elevated inhibin A",
+      "Intellectual disability, flat facies, endocardial cushion defects, duodenal atresia"
+     ],
+     [
+      "Trisomy 18",
+      "Edwards syndrome",
+      "Decreased AFP, decreased estriol, decreased hCG, normal/low inhibin A",
+      "Clenched fists with overlapping fingers, rocker-bottom feet, micrognathia"
+     ],
+     [
+      "Trisomy 13",
+      "Patau syndrome",
+      "Decreased beta-hCG, decreased PAPP-A in first trimester",
+      "Holoprosencephaly, cleft lip and palate, microphthalmia, postaxial polydactyly"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-fragile-x-syndrome"
+ ]
+}

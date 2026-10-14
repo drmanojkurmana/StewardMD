@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "bio-heme",
+ "subject": "biochemistry",
+ "title": "Heme biosynthesis, porphyrias and bilirubin metabolism",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Heme biosynthesis begins in the mitochondrial matrix where **delta-aminolevulinic acid synthase (ALAS)** condenses succinyl-CoA and glycine, requiring pyridoxal phosphate (vitamin B6). **ALAS1** is ubiquitous and negatively feedback-regulated by free heme, whereas **ALAS2** is erythroid-specific and regulated by iron availability. Subsequent steps in cytosol assemble porphobilinogen and cyclic tetrapyrroles. The final step returns to mitochondria, where **ferrochelatase** inserts ferrous iron (Fe2+) into protoporphyrin IX to complete heme.",
+   "say": "Heme synthesis starts in mitochondria with delta aminolevulinic acid synthase, combining glycine and succinyl CoA using vitamin B6. After cytoplasmic intermediate steps, ferrochelatase inserts iron into protoporphyrin 9 inside mitochondria to form heme.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Glycine + Succinyl-CoA in mitochondria"
+     },
+     {
+      "id": "b2",
+      "label": "ALA synthase rate-limiting step (B6 cofactor)"
+     },
+     {
+      "id": "b3",
+      "label": "Cytosolic assembly of porphobilinogen and uroporphyrinogen"
+     },
+     {
+      "id": "b4",
+      "label": "Coproporphyrinogen re-enters mitochondria"
+     },
+     {
+      "id": "b5",
+      "label": "Ferrochelatase inserts Fe2+ into Protoporphyrin IX"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ],
+     [
+      "b4",
+      "b5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Lead toxicity** disrupts heme synthesis by inhibiting two key zinc-dependent enzymes: cytosolic **delta-aminolevulinic acid dehydratase (ALAD)** and mitochondrial **ferrochelatase**. Consequently, delta-aminolevulinic acid and zinc protoporphyrin accumulate in blood. Lead toxicity causes microcytic sideroblastic anaemia with **basophilic stippling** on peripheral smear, lead lines on gingivae (Burton lines), colicky abdominal pain, peripheral motor neuropathy (wrist drop), and encephalopathy in young children.",
+   "say": "Lead poisoning blocks ALA dehydratase and ferrochelatase, elevating ALA and zinc protoporphyrin. It leads to microcytic anaemia with basophilic stippling, Burton lines on gums, wrist drop, abdominal colic, and cognitive decline in children.",
+   "vis": {
+    "cols": [
+     "Inhibited Enzyme",
+     "Subcellular Location",
+     "Accumulated Metabolite",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "ALA dehydratase",
+      "Cytosol",
+      "Delta-aminolevulinic acid (ALA)",
+      "Neurotoxicity, abdominal colic, motor neuropathy"
+     ],
+     [
+      "Ferrochelatase",
+      "Mitochondrial inner membrane",
+      "Zinc protoporphyrin, free protoporphyrin",
+      "Microcytic anaemia, ring sideroblasts, basophilic stippling"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Acute intermittent porphyria (AIP)** results from autosomal dominant **porphobilinogen deaminase deficiency**. Early precursors ALA and PBG accumulate without porphyrins, causing the classic triad of **abdominal pain, neuropsychiatric disturbances, and red-wine urine** without cutaneous photosensitivity. Conversely, **porphyria cutanea tarda (PCT)** stems from **uroporphyrinogen decarboxylase deficiency**. Porphyrinogens accumulate and generate reactive oxygen species upon ultraviolet exposure, causing severe **cutaneous blistering, skin fragility**, and hypertrichosis.",
+   "say": "Acute intermittent porphyria involves PBG deaminase deficiency, causing severe abdominal pain, neuropathy, psychiatric symptoms, and port-wine urine without rash. Porphyria cutanea tarda involves uroporphyrinogen decarboxylase defect, causing fragile skin and blistering on sun exposure.",
+   "vis": {
+    "left": {
+     "title": "Acute Intermittent Porphyria",
+     "points": [
+      "Porphobilinogen deaminase (HMBS) defect",
+      "Accumulates ALA and porphobilinogen",
+      "Neurovisceral symptoms: abdominal pain, psychosis",
+      "Cutaneous photosensitivity is strictly absent",
+      "Urine darkens to port-wine colour on standing"
+     ]
+    },
+    "right": {
+     "title": "Porphyria Cutanea Tarda",
+     "points": [
+      "Uroporphyrinogen decarboxylase defect",
+      "Accumulates cyclic uroporphyrin",
+      "Severe cutaneous blistering on sun exposure",
+      "Associated with hepatitis C and iron overload",
+      "Treated with phlebotomy and low-dose chloroquine"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Senescent erythrocytes are phagocytosed by reticuloendothelial macrophages. **Heme oxygenase** cleaves heme, producing biliverdin, carbon monoxide, and iron. Biliverdin reductase reduces biliverdin to lipid-soluble **unconjugated bilirubin**, which travels tightly bound to albumin. Hepatocytes take up bilirubin via organic anion transporting polypeptides. In the smooth endoplasmic reticulum, **UDP-glucuronosyltransferase (UGT1A1)** conjugates bilirubin with two glucuronic acid molecules, forming water-soluble **bilirubin diglucuronide** for biliary secretion.",
+   "say": "Macrophages degrade heme using heme oxygenase into biliverdin and carbon monoxide, then reduce it to unconjugated bilirubin. Bound to albumin, it travels to hepatocytes, where UGT1A1 conjugates it with glucuronic acid to allow secretion into bile.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "RBC breakdown and heme release in macrophages"
+     },
+     {
+      "id": "r2",
+      "label": "Heme oxygenase generates Biliverdin and CO"
+     },
+     {
+      "id": "r3",
+      "label": "Biliverdin reductase yields unconjugated bilirubin"
+     },
+     {
+      "id": "r4",
+      "label": "Albumin transport to hepatic sinusoidal membrane"
+     },
+     {
+      "id": "r5",
+      "label": "UGT1A1 conjugation to bilirubin diglucuronide in ER"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ],
+     [
+      "r4",
+      "r5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Gilbert syndrome** involves mild promoter mutations in UGT1A1, causing asymptomatic unconjugated hyperbilirubinaemia during fasting, illness, or stress. **Crigler-Najjar syndrome type I** features complete absence of UGT1A1, causing fatal neonatal kernicterus unless treated with phototherapy and liver transplantation. **Dubin-Johnson syndrome** is an autosomal recessive deficiency of the canalicular transporter **MRP2**, causing conjugated hyperbilirubinaemia and a strikingly **black liver** due to impaired epinephrine metabolite excretion.",
+   "say": "Gilbert syndrome causes mild unconjugated jaundice during stress due to reduced UGT1A1 activity. Crigler-Najjar type 1 features total UGT1A1 absence, causing lethal kernicterus. Dubin-Johnson syndrome stems from defective canalicular excretion, causing conjugated jaundice and a black liver.",
+   "vis": {
+    "cols": [
+     "Disorder",
+     "Enzymatic or Transport Defect",
+     "Bilirubin Type",
+     "Clinical Key Feature"
+    ],
+    "rows": [
+     [
+      "Gilbert syndrome",
+      "Reduced UGT1A1 activity (~30 percent)",
+      "Unconjugated",
+      "Benign mild jaundice triggered by fasting, stress, or infection"
+     ],
+     [
+      "Crigler-Najjar type I",
+      "Complete absence of UGT1A1",
+      "Unconjugated",
+      "Severe neonatal jaundice, kernicterus risk, unresponsive to phenobarbital"
+     ],
+     [
+      "Crigler-Najjar type II",
+      "Markedly reduced UGT1A1 (<10 percent)",
+      "Unconjugated",
+      "Less severe, serum bilirubin drops with enzyme-inducing phenobarbital"
+     ],
+     [
+      "Dubin-Johnson syndrome",
+      "Defective MRP2 canalicular transporter",
+      "Conjugated",
+      "Direct hyperbilirubinaemia, gross black liver on biopsy, normal life expectancy"
+     ],
+     [
+      "Rotor syndrome",
+      "Impaired hepatic storage OATP1B1/B3",
+      "Conjugated",
+      "Direct hyperbilirubinaemia, normal liver histology, no pigmentation"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-acute-intermittent-porphyria",
+  "kb-reference-porphyria-cutanea-tarda"
+ ]
+}

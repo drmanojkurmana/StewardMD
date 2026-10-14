@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-pigmentary",
+ "subject": "dermatology",
+ "title": "Disorders of pigmentation: vitiligo, melasma, post-inflammatory hyperpigmentation, Wood lamp",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Vitiligo** is an acquired chronic autoimmune disorder characterized by selective destruction of epidermal melanocytes, resulting in sharply demarcated, depigmented chalk-white macules and patches. Cytotoxic CD8 T cells and oxidative stress drive melanocyte apoptosis. Vitiligo is classified into non-segmental (generalized, bilateral symmetrical) and segmental (unilateral, dermatomal distribution with early hair follicle depigmentation termed leukotrichia).",
+   "say": "Vitiligo causes sharply demarcated chalk-white depigmented patches from autoimmune CD8 T-cell destruction of cutaneous melanocytes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-segmental vitiligo",
+     "points": [
+      "Bilateral, symmetrical distribution",
+      "Acrofacial and generalized patterns",
+      "Associated with autoimmune thyroiditis",
+      "Koebner phenomenon frequently positive"
+     ]
+    },
+    "right": {
+     "title": "Segmental vitiligo",
+     "points": [
+      "Unilateral, follows a dermatome",
+      "Rapid onset then long stability",
+      "Early leukotrichia (white hair)",
+      "Rarely associated with thyroid disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wood lamp examination** emits long-wave ultraviolet A light (wavelength 365 nm) and serves as an essential diagnostic tool in pigmentary dermatology. Under Wood light, complete depigmentation in vitiligo fluoresces bright chalky blue-white, accentuating borders against normal skin. In contrast, epidermal melasma is enhanced under Wood light, whereas dermal melasma shows no accentuation.",
+   "say": "Wood lamp accentuates vitiligo with bright chalky blue-white fluorescence, distinguishing complete depigmentation from hypopigmentation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "365 nm UVA illumination"
+     },
+     {
+      "id": "b",
+      "label": "Absence of epidermal melanin"
+     },
+     {
+      "id": "c",
+      "label": "Chalky-white fluorescence accentuation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Melasma (chloasma)** is an acquired hypermelanosis of sun-exposed facial areas, predominantly affecting women of darker phototypes. Key etiological drivers include ultraviolet radiation, genetic predisposition, and hormonal fluctuations associated with pregnancy, oral contraceptive pills, and hormone replacement therapy. Lesions present as symmetric, irregular light-to-dark brown reticulated macules over the cheeks, forehead, and upper lip.",
+   "say": "Melasma causes symmetric brown facial patches in sun-exposed zones, exacerbated by UV light, estrogen, and pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "**Melasma therapy** requires rigorous broad-spectrum photoprotection blocking ultraviolet and visible light. The gold-standard topical intervention is the modified **Kligman formula** (triple combination cream), incorporating hydroquinone, a topical retinoid, and a mild corticosteroid. Topical tranexamic acid, azelaic acid, and chemical peels serve as adjunctive therapies for recalcitrant pigmentation.",
+   "say": "Management of melasma relies on strict photoprotection and triple combination cream containing hydroquinone, tretinoin, and corticosteroid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment modality",
+     "Mechanism of action",
+     "Clinical indication"
+    ],
+    "rows": [
+     [
+      "Broad-spectrum sunscreen",
+      "Blocks UVA, UVB, and visible light",
+      "Universal mandatory foundation"
+     ],
+     [
+      "Hydroquinone 2-4 percent",
+      "Competitive tyrosinase inhibition",
+      "First-line depigmenting agent"
+     ],
+     [
+      "Topical retinoid (tretinoin)",
+      "Enhances epidermal turnover and delivery",
+      "Synergistic agent in triple cream"
+     ],
+     [
+      "Azelaic acid 20 percent",
+      "Tyrosinase inhibitor, anti-inflammatory",
+      "Safe alternative in pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-inflammatory hyperpigmentation (PIH)** develops after resolution of cutaneous inflammation such as acne, eczema, or lichen planus. Epidermal PIH results from increased melanin production and transfer to keratinocytes, whereas dermal PIH stems from basal layer melanocyte disruption with pigment incontinence and macrophage phagocytosis (melanophages), proving far slower to clear.",
+   "say": "Post-inflammatory hyperpigmentation occurs after skin inflammation, clearing faster when epidermal than when dermal melanophages are involved.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-vitiligo",
+  "kb-reference-melasma"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

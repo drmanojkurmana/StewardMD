@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "bio-gluconeogenesis-glycogen",
+ "subject": "biochemistry",
+ "title": "Gluconeogenesis, glycogen metabolism and glycogen storage disorders",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Gluconeogenesis synthesizes glucose from non-carbohydrate precursors during fasting, overcoming three irreversible glycolytic steps using four specialized enzymes. **Pyruvate carboxylase** converts pyruvate to oxaloacetate in mitochondria, requiring biotin and acetyl-CoA. **Phosphoenolpyruvate carboxykinase** converts oxaloacetate to PEP in cytoplasm. **Fructose-1,6-bisphosphatase** bypasses phosphofructokinase-1, inhibited allosterically by AMP and fructose-2,6-bisphosphate. Finally, **glucose-6-phosphatase** in the endoplasmic reticulum releases free glucose into the systemic circulation.",
+   "say": "Gluconeogenesis creates glucose from lactate, glycerol, and glucogenic amino acids during fasting. Four bypass enzymes overcome glycolytic checkpoints: pyruvate carboxylase, PEPCK, fructose 1,6 bisphosphatase, and glucose 6 phosphatase in the liver.",
+   "vis": {
+    "cols": [
+     "Glycolytic Step Bypassed",
+     "Gluconeogenic Enzyme",
+     "Subcellular Site",
+     "Key Allosteric Modulator"
+    ],
+    "rows": [
+     [
+      "Pyruvate kinase step",
+      "Pyruvate carboxylase",
+      "Mitochondrial matrix",
+      "Activated by acetyl-CoA; requires biotin"
+     ],
+     [
+      "Pyruvate kinase step",
+      "PEP carboxykinase (PEPCK)",
+      "Cytosol and mitochondria",
+      "Induced transcriptionally by glucagon and cortisol"
+     ],
+     [
+      "PFK-1 step",
+      "Fructose-1,6-bisphosphatase",
+      "Cytosol",
+      "Inhibited by AMP and fructose-2,6-bisphosphate"
+     ],
+     [
+      "Glucokinase step",
+      "Glucose-6-phosphatase",
+      "Endoplasmic reticulum",
+      "Enables free glucose export; absent in muscle"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Glycogen synthesis utilizes **glycogen synthase**, which adds glucose units via alpha-1,4-glycosidic bonds using UDP-glucose. **Branching enzyme** creates alpha-1,6 linkages every 8 to 12 residues. Conversely, glycogen breakdown requires **glycogen phosphorylase**, releasing glucose-1-phosphate until four residues remain before a branch. The **debranching enzyme** possesses 4:4 glucantransferase and alpha-1,6-glucosidase activities, cleaving the final branch residue as free glucose.",
+   "say": "Glycogen stores glucose in liver and muscle. Glycogen synthase elongates chains with alpha 1,4 bonds, while branching enzyme introduces alpha 1,6 branch points. Breakdown uses glycogen phosphorylase to release glucose 1 phosphate, and debranching enzyme removes the branch junctions.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Glucose-6-phosphate to Glucose-1-phosphate"
+     },
+     {
+      "id": "g2",
+      "label": "UDP-glucose pyrophosphorylase activation"
+     },
+     {
+      "id": "g3",
+      "label": "Glycogen synthase elongates alpha-1,4 chains"
+     },
+     {
+      "id": "g4",
+      "label": "Branching enzyme adds alpha-1,6 branches"
+     },
+     {
+      "id": "g5",
+      "label": "Branched glycogen particle in cytosol"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ],
+     [
+      "g4",
+      "g5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Hormones coordinate glycogen metabolism reciprocally through phosphorylation cascades. **Glucagon and adrenaline** elevate intracellular cyclic AMP, activating protein kinase A. PKA phosphorylates glycogen phosphorylase kinase, activating **glycogen phosphorylase** while inactivating glycogen synthase. Conversely, **insulin** stimulates protein phosphatase-1 via receptor tyrosine kinase cascades, dephosphorylating both enzymes to stimulate glycogen synthesis and inhibit glycogenolysis. This reciprocal arrangement prevents wasteful futile cycles.",
+   "say": "Glucagon and adrenaline raise cyclic AMP to activate protein kinase A. This phosphorylates and turns on glycogen phosphorylase while turning off glycogen synthase. Insulin triggers protein phosphatase 1 to dephosphorylate enzymes, stimulating glycogen storage.",
+   "vis": {
+    "left": {
+     "title": "Fasting (Glucagon / Epinephrine)",
+     "points": [
+      "Elevated cAMP and active Protein Kinase A",
+      "Phosphorylated glycogen phosphorylase is active",
+      "Phosphorylated glycogen synthase is inactive",
+      "Promotes glycogen breakdown and glucose output"
+     ]
+    },
+    "right": {
+     "title": "Fed State (Insulin)",
+     "points": [
+      "Activation of Protein Phosphatase-1",
+      "Dephosphorylated glycogen phosphorylase is inactive",
+      "Dephosphorylated glycogen synthase is active",
+      "Promotes glycogen storage and net synthesis"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Von Gierke disease (type I)** results from glucose-6-phosphatase deficiency. Impaired hepatic glucose release causes severe fasting **hypoglycaemia**, lactic acidosis, hyperuricaemia, hyperlipidaemia, and massive hepatomegaly without splenomegaly. **Cori disease (type III)** stems from debranching enzyme deficiency, accumulating abnormal limit dextrins with short outer branches. Cori presents with mild fasting hypoglycaemia, hepatomegaly, and normal blood lactate levels, distinguishing it from type I.",
+   "say": "Von Gierke disease stems from glucose 6 phosphatase deficiency, causing severe fasting hypoglycaemia, lactic acidosis, and hepatomegaly. Cori disease involves debranching enzyme deficiency, accumulating limit dextrins with milder hypoglycaemia and normal blood lactate levels.",
+   "vis": {
+    "cols": [
+     "GSD Type",
+     "Deficient Enzyme",
+     "Glycogen Structure",
+     "Distinguishing Clinical Features"
+    ],
+    "rows": [
+     [
+      "Type I (Von Gierke)",
+      "Glucose-6-phosphatase",
+      "Normal structure, excess accumulation",
+      "Severe fasting hypoglycaemia, lactic acidosis, gout, hepatomegaly"
+     ],
+     [
+      "Type III (Cori)",
+      "Debranching enzyme (alpha-1,6-glucosidase)",
+      "Abnormal limit dextrin with short branches",
+      "Mild hypoglycaemia, normal lactate, hepatomegaly, cardiomyopathy"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Pompe disease (type II)** is a lysosomal storage disorder caused by **lysosomal acid alpha-1,4-glucosidase deficiency**. Glycogen accumulates within lysosomes, causing hypertrophic cardiomyopathy, generalized hypotonia, and early infant death without hypoglycaemia. **McArdle disease (type V)** involves **muscle glycogen phosphorylase deficiency**. Patients develop painful exercise-induced muscle cramps, fatigue, and **myoglobinuria** causing red urine after strenuous exertion, with absent venous lactate elevation during ischaemic exercise testing.",
+   "say": "Pompe disease involves lysosomal acid maltase deficiency, causing massive glycogen accumulation in the heart, leading to fatal infantile cardiomyopathy. McArdle disease involves muscle phosphorylase deficiency, causing exercise cramps, fatigue, and myoglobinuria without rise in blood lactate.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Pompe Disease (Type II)",
+     "McArdle Disease (Type V)"
+    ],
+    "rows": [
+     [
+      "Deficient enzyme",
+      "Lysosomal acid alpha-glucosidase (acid maltase)",
+      "Skeletal muscle glycogen phosphorylase (myophosphorylase)"
+     ],
+     [
+      "Primary organ involved",
+      "Heart, skeletal muscle, liver lysosomes",
+      "Skeletal muscle cytosol exclusively"
+     ],
+     [
+      "Fasting blood glucose",
+      "Normal (hepatic cytoplasmic enzymes intact)",
+      "Normal (liver phosphorylase is distinct isozyme)"
+     ],
+     [
+      "Hallmark manifestation",
+      "Hypertrophic cardiomyopathy, severe hypotonia",
+      "Exercise intolerance, cramps, post-exercise myoglobinuria"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-von-gierke-disease"
+ ]
+}

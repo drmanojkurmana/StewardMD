@@ -1,0 +1,221 @@
+{
+ "v": 1,
+ "module": "bio-minerals",
+ "subject": "biochemistry",
+ "title": "Minerals and trace elements: iron, copper, zinc, selenium and iodine",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Dietary ferric iron (Fe3+) is reduced to ferrous iron (Fe2+) by duodenal **cytochrome b (Dcytb)** and absorbed via divalent metal transporter 1 (DMT1). Basolateral export into circulation requires **ferroportin** coupled to oxidation by hephaestin. Circulating iron binds **transferrin**, while intracellular iron is stored within **ferritin**. The liver secretes **hepcidin** in response to high iron stores or systemic inflammation. Hepcidin binds ferroportin, inducing its endocytosis and degradation, thereby locking iron inside enterocytes and macrophages.",
+   "say": "Non-heme iron is reduced in the duodenum and transported into enterocytes by DMT1. Ferroportin exports iron into blood, where transferrin carries it. Hepcidin from the liver degrades ferroportin during inflammation or iron excess, blocking iron release and causing anaemia of chronic disease.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Dietary Fe3+ reduced to Fe2+ by Dcytb"
+     },
+     {
+      "id": "i2",
+      "label": "Apical uptake via DMT1 into enterocyte"
+     },
+     {
+      "id": "i3",
+      "label": "Basolateral export via Ferroportin and Hephaestin"
+     },
+     {
+      "id": "i4",
+      "label": "Serum transport by Transferrin to tissues"
+     },
+     {
+      "id": "i5",
+      "label": "Hepcidin degrades ferroportin, downregulating export"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2"
+     ],
+     [
+      "i2",
+      "i3"
+     ],
+     [
+      "i3",
+      "i4"
+     ],
+     [
+      "i5",
+      "i3"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Hereditary haemochromatosis** is an autosomal recessive disorder most commonly caused by **HFE gene mutations (C282Y/H63D)**. Defective HFE signaling suppresses hepcidin synthesis, causing uncontrolled intestinal iron absorption and systemic overload. Excess iron catalyzes Fenton reactions, generating hydroxyl free radicals that damage organs. The classic clinical tetrad includes **bronze diabetes** (hyperpigmentation and diabetes mellitus), micronodular cirrhosis, pseudogout, and dilated cardiomyopathy. Therapeutic phlebotomy prevents irreversible end-organ fibrosis.",
+   "say": "Hereditary haemochromatosis results from HFE mutations that decrease hepcidin production, causing unchecked iron absorption. Free iron damages parenchymal cells via free radicals, leading to bronze skin pigmentation, diabetes, cirrhosis, cardiomyopathy, and arthropathy. Phlebotomy is life saving.",
+   "vis": {
+    "cols": [
+     "Organ Involved",
+     "Pathological Damage",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Liver",
+      "Iron deposition in hepatocytes and Kupffer cells",
+      "Cirrhosis, markedly increased risk of hepatocellular carcinoma"
+     ],
+     [
+      "Pancreatic islets",
+      "Deposition in beta cells causing cell loss",
+      "Secondary diabetes mellitus (bronze diabetes)"
+     ],
+     [
+      "Skin",
+      "Melanin and hemosiderin accumulation in dermis",
+      "Slate-grey or bronze hyperpigmentation"
+     ],
+     [
+      "Heart",
+      "Deposition in myocardium and conducting system",
+      "Dilated cardiomyopathy, arrhythmias, heart failure"
+     ],
+     [
+      "Joints",
+      "Calcium pyrophosphate crystal deposition",
+      "Chondrocalcinosis, pseudogout in second and third MCP joints"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Absorbed copper travels to hepatocytes and incorporates into **ceruloplasmin** via the copper-transporting P-type ATPase **ATP7B**. Excess copper is excreted into bile through ATP7B. Mutations in ATP7B cause **Wilson disease (hepatolenticular degeneration)**. Copper fails to enter ceruloplasmin or bile, accumulating in hepatocytes and eventually spilling into blood to deposit in basal ganglia, cornea, and kidneys. Hallmarks include cirrhosis, parkinsonian movement disorders, psychiatric changes, low ceruloplasmin, and **Kayser-Fleischer rings**.",
+   "say": "ATP7B coordinates copper incorporation into ceruloplasmin and excretion into bile. Mutated ATP7B in Wilson disease causes toxic copper accumulation in liver, brain, and cornea. Patients develop cirrhosis, tremor, psychiatric illness, Kayser-Fleischer rings, and low serum ceruloplasmin.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Autosomal recessive ATP7B mutation"
+     },
+     {
+      "id": "w2",
+      "label": "Impaired biliary excretion and ceruloplasmin loading"
+     },
+     {
+      "id": "w3",
+      "label": "Low serum ceruloplasmin, free copper toxic release"
+     },
+     {
+      "id": "w4",
+      "label": "Deposition in liver, lenticular nuclei, Descemet membrane"
+     },
+     {
+      "id": "w5",
+      "label": "Cirrhosis, dystonia, psychosis, Kayser-Fleischer rings"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ],
+     [
+      "w4",
+      "w5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Zinc** functions as an essential cofactor for over 300 metalloenzymes including carbonic anhydrase, alkaline phosphatase, RNA polymerase, and zinc-finger transcription factors. **Acrodermatitis enteropathica** is an inherited zinc malabsorption disorder presenting with periorificial and acral vesiculobullous dermatitis, alopecia, and chronic diarrhoea. **Selenium** incorporates as selenocysteine into **glutathione peroxidase**, protecting against lipid peroxidation. Severe selenium deficiency causes **Keshan disease**, an endemic congestive cardiomyopathy seen in selenium-deficient geographical regions.",
+   "say": "Zinc is required for hundreds of enzymes and zinc-finger motifs. Inherited zinc malabsorption causes acrodermatitis enteropathica with periorificial pustular rashes, alopecia, and diarrhoea. Selenium is vital for glutathione peroxidase; deficiency causes Keshan disease cardiomyopathy.",
+   "vis": {
+    "left": {
+     "title": "Zinc Deficiency",
+     "points": [
+      "Cofactor for carbonic anhydrase, polymerases",
+      "Delayed wound healing and hypogonadism",
+      "Dysgeusia (distorted taste) and anosmia",
+      "Acrodermatitis enteropathica rash and alopecia",
+      "Impaired cellular immunity and recurrent infections"
+     ]
+    },
+    "right": {
+     "title": "Selenium Deficiency",
+     "points": [
+      "Cofactor for glutathione peroxidase antioxidant",
+      "Component of iodothyronine deiodinase",
+      "Keshan disease: endemic congestive cardiomyopathy",
+      "Kashin-Beck disease: deforming osteoarthropathy",
+      "Enhanced susceptibility to oxidative tissue injury"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Thyroid follicular cells trap circulating iodide via the **sodium-iodide symporter (NIS)**. **Thyroperoxidase (TPO)** oxidizes iodide to iodine and catalyzes the iodination of tyrosine residues on thyroglobulin (**organification**), generating monoiodotyrosine (MIT) and diiodotyrosine (DIT). TPO couples MIT and DIT to form triiodothyronine (T3) and thyroxine (T4). Severe dietary iodine deficiency causes compensatory goitre from chronic TSH stimulation, and untreated maternal deficiency leads to endemic **congenital cretinism** with profound cognitive impairment and short stature.",
+   "say": "Iodide is concentrated into thyroid follicular cells by the sodium-iodide symporter. Thyroid peroxidase oxidizes iodide and iodinates thyroglobulin to create T3 and T4. Severe dietary iodine deficiency causes goitre, and in pregnant women causes congenital cretinism in the newborn.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "y1",
+      "label": "Iodide uptake via basolateral Na+/I- symporter"
+     },
+     {
+      "id": "y2",
+      "label": "Pendrin apical transport into follicular lumen"
+     },
+     {
+      "id": "y3",
+      "label": "Thyroperoxidase (TPO) oxidizes iodide to iodine"
+     },
+     {
+      "id": "y4",
+      "label": "Organification to form MIT and DIT residues on thyroglobulin"
+     },
+     {
+      "id": "y5",
+      "label": "Coupling generates T3 and T4 for endocytosis and secretion"
+     }
+    ],
+    "edges": [
+     [
+      "y1",
+      "y2"
+     ],
+     [
+      "y2",
+      "y3"
+     ],
+     [
+      "y3",
+      "y4"
+     ],
+     [
+      "y4",
+      "y5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-scurvy"
+ ]
+}

@@ -1,101 +1,101 @@
 {
-  "module": "bio-fatty-acid-oxidation",
-  "subject": "biochemistry",
-  "title": "Fatty acid beta-oxidation, carnitine shuttle and ketogenesis",
-  "minutes": 6,
-  "refs": [
-    "Harper's Illustrated Biochemistry",
-    "Lippincott Illustrated Reviews: Biochemistry"
-  ],
-  "steps": [
-    {
-      "tx": "Long-chain fatty acids require activation to fatty acyl-CoA by thiokinase in the cytosol before mitochondrial translocation. Transport across the inner mitochondrial membrane is mediated by the **carnitine shuttle**. Carnitine palmitoyltransferase-one converts acyl-CoA to acylcarnitine at the outer membrane, inhibited allosterically by malonyl-CoA during active lipogenesis. A translocase shuttles acylcarnitine inside, where carnitine palmitoyltransferase-two regenerates matrix acyl-CoA.",
-      "say": "Long-chain fatty acids require activation to acyl-CoA before mitochondrial entry via the carnitine shuttle. Carnitine palmitoyltransferase-one converts acyl-CoA to acylcarnitine, inhibited by malonyl-CoA during lipogenesis. A translocase carries acylcarnitine across the inner membrane, where carnitine palmitoyltransferase-two regenerates mitochondrial acyl-CoA.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Enzyme or carrier",
-          "Membrane localization",
-          "Functional role"
-        ],
-        "rows": [
-          [
-            "Carnitine palmitoyltransferase-1",
-            "Outer mitochondrial membrane",
-            "Replaces CoA with carnitine; rate-limiting step"
-          ],
-          [
-            "Carnitine-acylcarnitine translocase",
-            "Inner mitochondrial membrane",
-            "Antiporter swapping acylcarnitine for free carnitine"
-          ],
-          [
-            "Carnitine palmitoyltransferase-2",
-            "Matrix side of inner membrane",
-            "Reconverts acylcarnitine to matrix acyl-CoA"
-          ],
-          [
-            "Acyl-CoA dehydrogenase",
-            "Mitochondrial matrix",
-            "Catalyzes initial dehydrogenation step yielding FADH2"
-          ]
-        ]
-      }
+ "module": "bio-fatty-acid-oxidation",
+ "subject": "biochemistry",
+ "title": "Fatty acid beta-oxidation, carnitine shuttle and ketogenesis",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry",
+  "Lippincott Illustrated Reviews: Biochemistry"
+ ],
+ "steps": [
+  {
+   "tx": "Long-chain fatty acids require activation to fatty acyl-CoA by thiokinase in the cytosol before mitochondrial translocation. Transport across the inner mitochondrial membrane is mediated by the **carnitine shuttle**. Carnitine palmitoyltransferase-one converts acyl-CoA to acylcarnitine at the outer membrane, inhibited allosterically by malonyl-CoA during active lipogenesis. A translocase shuttles acylcarnitine inside, where carnitine palmitoyltransferase-two regenerates matrix acyl-CoA.",
+   "say": "Long-chain fatty acids require activation to acyl-CoA before mitochondrial entry via the carnitine shuttle. Carnitine palmitoyltransferase-one converts acyl-CoA to acylcarnitine, inhibited by malonyl-CoA during lipogenesis. A translocase carries acylcarnitine across the inner membrane, where carnitine palmitoyltransferase-two regenerates mitochondrial acyl-CoA.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme or carrier",
+     "Membrane localization",
+     "Functional role"
+    ],
+    "rows": [
+     [
+      "Carnitine palmitoyltransferase-1",
+      "Outer mitochondrial membrane",
+      "Replaces CoA with carnitine; rate-limiting step"
+     ],
+     [
+      "Carnitine-acylcarnitine translocase",
+      "Inner mitochondrial membrane",
+      "Antiporter swapping acylcarnitine for free carnitine"
+     ],
+     [
+      "Carnitine palmitoyltransferase-2",
+      "Matrix side of inner membrane",
+      "Reconverts acylcarnitine to matrix acyl-CoA"
+     ],
+     [
+      "Acyl-CoA dehydrogenase",
+      "Mitochondrial matrix",
+      "Catalyzes initial dehydrogenation step yielding FADH2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitochondrial **beta-oxidation** proceeds through a four-step recurring spiral: oxidation by acyl-CoA dehydrogenase yielding FADH2; hydration by enoyl-CoA hydratase; oxidation by hydroxyacyl-CoA dehydrogenase yielding NADH; and thiolytic cleavage by thiolase yielding acetyl-CoA and a fatty acyl-CoA shortened by two carbons. Each complete cycle of palmitate (sixteen carbons) produces eight acetyl-CoA, seven FADH2 and seven NADH, yielding over one hundred ATP.",
+   "say": "Mitochondrial beta-oxidation proceeds through four recurring steps: oxidation yielding FADH2, hydration, second oxidation yielding NADH, and thiolytic cleavage yielding acetyl-CoA and an acyl-CoA shortened by two carbons. Palmitate oxidation yields eight acetyl-CoA, seven FADH2 and seven NADH, generating over one hundred ATP.",
+   "vis": null
+  },
+  {
+   "tx": "Medium-chain acyl-CoA dehydrogenase deficiency is the most common inborn error of lipid catabolism. An inability to break down fatty acids with six to twelve carbons results in severe **hypoketotic hypoglycemia** during prolonged fasting or intercurrent viral illness. Glycogen reserves become depleted while gluconeogenesis fails due to lack of acetyl-CoA activation of pyruvate carboxylase, accumulating dicarboxylic acids and octanoylcarnitine.",
+   "say": "Medium-chain acyl-CoA dehydrogenase deficiency is the most common inborn lipid disorder. An inability to break down medium-chain fats causes severe hypoketotic hypoglycemia during fasting. Gluconeogenesis fails due to lack of acetyl-CoA, leading to dicarboxylic acidemia and lethargy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MCAD deficiency",
+     "points": [
+      "Autosomal recessive dehydrogenase defect",
+      "Severe hypoketotic hypoglycemia on fasting",
+      "Elevated C8 octanoylcarnitine in blood",
+      "Treated with frequent high-carb meals, avoiding fasts"
+     ]
     },
-    {
-      "tx": "Mitochondrial **beta-oxidation** proceeds through a four-step recurring spiral: oxidation by acyl-CoA dehydrogenase yielding FADH2; hydration by enoyl-CoA hydratase; oxidation by hydroxyacyl-CoA dehydrogenase yielding NADH; and thiolytic cleavage by thiolase yielding acetyl-CoA and a fatty acyl-CoA shortened by two carbons. Each complete cycle of palmitate (sixteen carbons) produces eight acetyl-CoA, seven FADH2 and seven NADH, yielding over one hundred ATP.",
-      "say": "Mitochondrial beta-oxidation proceeds through four recurring steps: oxidation yielding FADH2, hydration, second oxidation yielding NADH, and thiolytic cleavage yielding acetyl-CoA and an acyl-CoA shortened by two carbons. Palmitate oxidation yields eight acetyl-CoA, seven FADH2 and seven NADH, generating over one hundred ATP.",
-      "vis": null
-    },
-    {
-      "tx": "Medium-chain acyl-CoA dehydrogenase deficiency is the most common inborn error of lipid catabolism. An inability to break down fatty acids with six to twelve carbons results in severe **hypoketotic hypoglycemia** during prolonged fasting or intercurrent viral illness. Glycogen reserves become depleted while gluconeogenesis fails due to lack of acetyl-CoA activation of pyruvate carboxylase, accumulating dicarboxylic acids and octanoylcarnitine.",
-      "say": "Medium-chain acyl-CoA dehydrogenase deficiency is the most common inborn lipid disorder. An inability to break down medium-chain fats causes severe hypoketotic hypoglycemia during fasting. Gluconeogenesis fails due to lack of acetyl-CoA, leading to dicarboxylic acidemia and lethargy.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "MCAD deficiency",
-          "points": [
-            "Autosomal recessive dehydrogenase defect",
-            "Severe hypoketotic hypoglycemia on fasting",
-            "Elevated C8 octanoylcarnitine in blood",
-            "Treated with frequent high-carb meals, avoiding fasts"
-          ]
-        },
-        "right": {
-          "title": "Primary carnitine deficiency",
-          "points": [
-            "Defective OCTN2 carnitine membrane transporter",
-            "Impaired renal reabsorption of free carnitine",
-            "Low plasma carnitine, cardiomyopathy, muscle weakness",
-            "Treated with oral L-carnitine supplementation"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "During starvation or untreated diabetic ketoacidosis, massive adipose lipolysis floods the liver with fatty acids. Excessive acetyl-CoA saturates the tricarboxylic acid cycle and is diverted into hepatic **ketogenesis**. Mitochondrial HMG-CoA synthase converts acetyl-CoA to acetoacetate, beta-hydroxybutyrate and acetone. Extrahepatic tissues convert acetoacetate to acetyl-CoA using thiophorase. The liver cannot utilize ketone bodies because it completely lacks thiophorase.",
-      "say": "During starvation or diabetic ketoacidosis, excessive acetyl-CoA saturates the Krebs cycle and drives hepatic ketogenesis. Mitochondrial HMG-CoA synthase synthesizes acetoacetate, beta-hydroxybutyrate and acetone. Extrahepatic tissues use acetoacetate via thiophorase. The liver cannot use ketones because it lacks thiophorase.",
-      "vis": null
+    "right": {
+     "title": "Primary carnitine deficiency",
+     "points": [
+      "Defective OCTN2 carnitine membrane transporter",
+      "Impaired renal reabsorption of free carnitine",
+      "Low plasma carnitine, cardiomyopathy, muscle weakness",
+      "Treated with oral L-carnitine supplementation"
+     ]
     }
-  ],
-  "v": 1,
-  "gen": "AI",
-  "run": "books-pipeline",
-  "model": "gemini-3.8-flash-high",
-  "quiz": [
-    "0be3ff5d-4000-8000-0be3-ff5d12345678",
-    "08e3faa4-4000-8000-08e3-faa412345678",
-    "09e3fc37-4000-8000-09e3-fc3712345678"
-  ],
-  "src": [
-    "kb-reference-fatty-acid-beta-oxidation-and-ketogenesis"
-  ],
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true
+   }
+  },
+  {
+   "tx": "During starvation or untreated diabetic ketoacidosis, massive adipose lipolysis floods the liver with fatty acids. Excessive acetyl-CoA saturates the tricarboxylic acid cycle and is diverted into hepatic **ketogenesis**. Mitochondrial HMG-CoA synthase converts acetyl-CoA to acetoacetate, beta-hydroxybutyrate and acetone. Extrahepatic tissues convert acetoacetate to acetyl-CoA using thiophorase. The liver cannot utilize ketone bodies because it completely lacks thiophorase.",
+   "say": "During starvation or diabetic ketoacidosis, excessive acetyl-CoA saturates the Krebs cycle and drives hepatic ketogenesis. Mitochondrial HMG-CoA synthase synthesizes acetoacetate, beta-hydroxybutyrate and acetone. Extrahepatic tissues use acetoacetate via thiophorase. The liver cannot use ketones because it lacks thiophorase.",
+   "vis": null
   }
+ ],
+ "v": 1,
+ "gen": "hand",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "0be3ff5d-4000-8000-0be3-ff5d12345678",
+  "08e3faa4-4000-8000-08e3-faa412345678",
+  "09e3fc37-4000-8000-09e3-fc3712345678"
+ ],
+ "src": [
+  "kb-reference-fatty-acid-beta-oxidation-and-ketogenesis"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }

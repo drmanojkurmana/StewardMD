@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "module": "bio-storage-disorders",
+ "subject": "biochemistry",
+ "title": "Lysosomal storage disorders: sphingolipidoses and mucopolysaccharidoses",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Lysosomes degrade complex glycolipids, glycosaminoglycans, and glycoproteins through acid hydrolases. Inherited enzyme deficiencies lead to progressive substrate accumulation within lysosomes, cellular swelling, and organ dysfunction. **Sphingolipidoses** involve defective turnover of sphingomyelins and gangliosides, primarily affecting macrophage-rich reticuloendothelial organs and the central nervous system. Most exhibit autosomal recessive inheritance, with **Fabry disease** and Hunter syndrome being prominent X-linked exceptions.",
+   "say": "Lysosomes rely on acid hydrolases to break down complex macromolecules. In sphingolipidoses, defective enzymes cause progressive lipid accumulation in macrophages and neurons. Most are autosomal recessive, except for X linked Fabry disease and Hunter syndrome.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Acid hydrolase genetic deficiency"
+     },
+     {
+      "id": "l2",
+      "label": "Incomplete degradation of complex sphingolipids"
+     },
+     {
+      "id": "l3",
+      "label": "Substrate accumulation inside secondary lysosomes"
+     },
+     {
+      "id": "l4",
+      "label": "Lysosomal distension and cell dysfunction"
+     },
+     {
+      "id": "l5",
+      "label": "Neurodegeneration, hepatosplenomegaly, skeletal damage"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ],
+     [
+      "l4",
+      "l5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Gaucher disease** is the most common sphingolipidosis, caused by deficient **glucocerebrosidase** (beta-glucosidase) and accumulation of glucocerebroside. Engorged macrophages form **Gaucher cells** with characteristic crumpled tissue-paper cytoplasm. Clinical findings include massive hepatosplenomegaly, pancytopenia from marrow infiltration, bone pain, and **Erlenmeyer flask deformities** of distal femora. Type 1 is non-neuropathic and responds favorably to recombinant enzyme replacement therapy with imiglucerase.",
+   "say": "Gaucher disease results from glucocerebrosidase deficiency, leading to lipid laden macrophages with crumpled tissue paper appearance. Patients develop huge splenomegaly, anaemia, thrombocytopenia, bone crises, and Erlenmeyer flask deformities. Type 1 responds well to enzyme replacement.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Type 1 Gaucher",
+     "Type 2 and 3 Gaucher"
+    ],
+    "rows": [
+     [
+      "Neurological involvement",
+      "Non-neuropathic (adult type)",
+      "Neuropathic (infantile acute vs juvenile chronic)"
+     ],
+     [
+      "Pathognomonic histology",
+      "Crumpled tissue paper macrophages",
+      "Perivascular Gaucher cells in brain"
+     ],
+     [
+      "Skeletal manifestations",
+      "Avascular necrosis, Erlenmeyer flask femur",
+      "Progressive skeletal and neurological decline"
+     ],
+     [
+      "Treatment approach",
+      "Enzyme replacement (imiglucerase), substrate reduction",
+      "Supportive care, marrow transplant in selected types"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Niemann-Pick disease** results from **sphingomyelinase deficiency**, accumulating sphingomyelin in reticuloendothelial cells and neurons. It produces foamy histiocytes, hepatosplenomegaly, neurodegeneration, and a **cherry-red macular spot**. **Tay-Sachs disease** involves **hexosaminidase A deficiency**, accumulating GM2 ganglioside. Tay-Sachs displays progressive neurodegeneration, developmental regression, hyperacusis, and a cherry-red macular spot, but notably **lacks hepatosplenomegaly**, distinguishing it clinically from Niemann-Pick.",
+   "say": "Both Niemann-Pick and Tay-Sachs present with neurodegeneration and a cherry-red spot at the macula. Niemann-Pick is caused by sphingomyelinase deficiency and features foamy cells with hepatosplenomegaly. Tay-Sachs involves hexosaminidase A deficiency and has no hepatosplenomegaly.",
+   "vis": {
+    "left": {
+     "title": "Niemann-Pick Disease",
+     "points": [
+      "Sphingomyelinase deficiency",
+      "Sphingomyelin accumulation",
+      "Hepatosplenomegaly present",
+      "Foamy histiocytes on bone marrow biopsy",
+      "Cherry-red spot on macular examination"
+     ]
+    },
+    "right": {
+     "title": "Tay-Sachs Disease",
+     "points": [
+      "Hexosaminidase A deficiency",
+      "GM2 ganglioside accumulation",
+      "Hepatosplenomegaly absent",
+      "Lysosomes with onion skin lamellar bodies",
+      "Cherry-red spot on macular examination"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Fabry disease** is an X-linked recessive disorder caused by **alpha-galactosidase A deficiency**, leading to ceramide trihexoside accumulation. Early manifestations include burning **acroparaesthesias**, angiokeratomas in bathing-trunk distribution, and hypohidrosis. As glycosphingolipids deposit within vascular endothelium, adults develop progressive **proteinuria, renal failure**, left ventricular hypertrophy, and premature strokes. Enzyme replacement therapy with agalsidase halts renal and cardiac decline.",
+   "say": "Fabry disease is an X linked disorder of alpha galactosidase A, accumulating ceramide trihexoside. Adolescents suffer burning neuropathic extremity pain, angiokeratomas, and decreased sweating. Adults face premature renal failure, hypertrophic cardiomyopathy, and stroke.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "X-linked alpha-galactosidase A deficiency"
+     },
+     {
+      "id": "f2",
+      "label": "Accumulation of ceramide trihexoside (Gb3)"
+     },
+     {
+      "id": "f3",
+      "label": "Vascular endothelial and neural deposition"
+     },
+     {
+      "id": "f4",
+      "label": "Acroparaesthesia and bathing-trunk angiokeratomas"
+     },
+     {
+      "id": "f5",
+      "label": "Progressive renal failure, cardiac hypertrophy, stroke"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Mucopolysaccharidoses impair glycosaminoglycan breakdown, accumulating heparan sulfate and dermatan sulfate. **Hurler syndrome (MPS I)** is autosomal recessive due to **alpha-L-iduronidase deficiency**, causing gargoyle facial features, corneal clouding, hepatosplenomegaly, dysostosis multiplex, and intellectual disability. **Hunter syndrome (MPS II)** is X-linked recessive due to **iduronate-2-sulfatase deficiency**. Hunter presents with aggressive behavior and similar physical features but characteristically **lacks corneal clouding**.",
+   "say": "Mucopolysaccharidoses stem from defective glycosaminoglycan breakdown. Hurler syndrome involves alpha-L-iduronidase deficiency, causing coarse facial features, severe corneal clouding, and mental disability. Hunter syndrome is X-linked, involves iduronate sulfatase, and lacks corneal clouding.",
+   "vis": {
+    "left": {
+     "title": "Hurler Syndrome (MPS I)",
+     "points": [
+      "Autosomal recessive inheritance",
+      "Alpha-L-iduronidase enzyme defect",
+      "Corneal clouding present early",
+      "Coarse facial dysmorphism and airway obstruction",
+      "Severe developmental delay and dysostosis"
+     ]
+    },
+    "right": {
+     "title": "Hunter Syndrome (MPS II)",
+     "points": [
+      "X-linked recessive inheritance",
+      "Iduronate-2-sulfatase enzyme defect",
+      "Corneal clouding distinctly absent",
+      "Pebbly skin lesions and aggressive behavior",
+      "Coarse features with skeletal involvement"
+     ]
+    },
+    "kind": "compare"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-gaucher-disease",
+  "kb-reference-tay-sachs-disease",
+  "kb-reference-niemann-pick-disease"
+ ]
+}

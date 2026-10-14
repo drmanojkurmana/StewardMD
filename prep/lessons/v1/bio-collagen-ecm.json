@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "bio-collagen-ecm",
+ "subject": "biochemistry",
+ "title": "Collagen, elastin, extracellular matrix and connective tissue disorders",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Collagen is the most abundant mammalian protein, built from repeated **Gly-X-Y tripeptide sequences** where X is commonly proline and Y is hydroxyproline. **Glycine** occupies every third residue because its tiny hydrogen side chain fits within the crowded central axis of the tight triple helix. Hydroxyproline stabilizes the triple helix through interchain hydrogen bonding. Disruption of glycine residues destabilizes the entire helical conformation, predisposing to early degradation.",
+   "say": "Collagen features a repeating sequence with glycine at every third position. Glycine is small enough to pack into the core of the triple helix. Proline provides conformational rigidity, while hydroxyproline residues stabilize the helical chains with hydrogen bonds.",
+   "vis": {
+    "cols": [
+     "Structural Feature",
+     "Residue or Element",
+     "Functional Significance"
+    ],
+    "rows": [
+     [
+      "Repeating motif",
+      "Gly-X-Y triplet",
+      "Allows compact steric packing into a triple helix"
+     ],
+     [
+      "Core packing residue",
+      "Glycine",
+      "Smallest amino acid, fits into tight central helical axis"
+     ],
+     [
+      "Helix stabilizer",
+      "4-Hydroxyproline",
+      "Forms interchain water bridges and hydrogen bonds"
+     ],
+     [
+      "Cross-linking sites",
+      "Hydroxylysine",
+      "Permits extracellular covalent cross-links and glycosylation"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Preprocollagen synthesis begins on rough endoplasmic reticulum ribosomes. Signal peptide cleavage yields procollagen, which undergoes **prolyl and lysyl hydroxylation** requiring vitamin C, ferrous iron, and oxygen. Triple helix assembly occurs in the ER lumen before secretion into the extracellular space. Extracellular **procollagen peptidases** cleave terminal propeptides to form insoluble tropocollagen. Finally, copper-dependent **lysyl oxidase** deaminates lysyl residues to form covalent cross-links between fibrils.",
+   "say": "Collagen synthesis involves intracellular and extracellular phases. In the endoplasmic reticulum, vitamin C dependent hydroxylases modify proline and lysine before triple helix assembly. After secretion, peptidases cleave terminal ends, and copper dependent lysyl oxidase cross links fibers.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Synthesis of preprocollagen in RER"
+     },
+     {
+      "id": "c2",
+      "label": "Hydroxylation of Pro and Lys via vitamin C"
+     },
+     {
+      "id": "c3",
+      "label": "Triple helix assembly and Golgi secretion"
+     },
+     {
+      "id": "c4",
+      "label": "Cleavage of terminal propeptides by peptidases"
+     },
+     {
+      "id": "c5",
+      "label": "Covalent cross-linking by lysyl oxidase"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ],
+     [
+      "c4",
+      "c5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Different genetic collagen types provide specialized biomechanical properties across body tissues. **Type I collagen** provides tensile strength in bone, skin, tendons, and mature scar tissue. **Type II collagen** predominates in hyaline cartilage and the vitreous body. **Type III collagen** forms pliable reticular fibers in blood vessels, distensible viscera, and granulation tissue. **Type IV collagen** forms two-dimensional non-fibrillar meshworks anchoring epithelial cells within basement membranes.",
+   "say": "Collagen types have distinct anatomical locations. Type 1 imparts tensile strength to bone and tendons. Type 2 forms cartilage. Type 3 provides elasticity to blood vessels and pliable organs. Type 4 creates the basement membrane supporting epithelial layers.",
+   "vis": {
+    "cols": [
+     "Collagen Type",
+     "Predominant Tissues",
+     "Associated Pathology"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Bone, skin, tendon, dentin, fascia",
+      "Osteogenesis imperfecta, delayed wound healing"
+     ],
+     [
+      "Type II",
+      "Hyaline cartilage, vitreous body",
+      "Chondrodysplasias, early osteoarthritis"
+     ],
+     [
+      "Type III",
+      "Vascular wall, uterus, granulation tissue",
+      "Vascular Ehlers-Danlos syndrome, arterial rupture"
+     ],
+     [
+      "Type IV",
+      "Basement membrane, lamina densa",
+      "Alport syndrome, Goodpasture disease"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Osteogenesis imperfecta** results from dominant mutations in COL1A1 or COL1A2 encoding type I collagen. Clinical hallmarks include recurrent fractures with minimal trauma, **blue sclerae** from scleral thinning revealing choroidal pigment, conductive hearing loss, and opalescent teeth. **Ehlers-Danlos syndromes** represent a heterogeneous group characterized by **joint hypermobility**, hyperextensible skin, and tissue fragility. Classical EDS involves type V collagen, whereas vascular EDS involves type III collagen mutations predisposing to arterial rupture.",
+   "say": "Osteogenesis imperfecta stems from type 1 collagen defects, leading to brittle bones, blue sclerae, and hearing loss. Ehlers-Danlos syndromes feature joint hypermobility and skin fragility. The vascular subtype from type 3 collagen defects carries high risk of catastrophic arterial rupture.",
+   "vis": {
+    "left": {
+     "title": "Osteogenesis Imperfecta",
+     "points": [
+      "COL1A1 and COL1A2 gene mutations",
+      "Multiple fractures with minimal trauma",
+      "Blue sclerae and conductive hearing loss",
+      "Dentinogenesis imperfecta in teeth"
+     ]
+    },
+    "right": {
+     "title": "Ehlers-Danlos Syndrome",
+     "points": [
+      "Type V or type III collagen defects",
+      "Marked joint hypermobility and skin hyperextensibility",
+      "Fragile skin with atrophic cigarette paper scars",
+      "Vascular subtype causes spontaneous arterial rupture"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Elastin** is a hydrophobic extracellular protein rich in proline, lysine, and glycine, lacking hydroxylated residues. Secreted tropoelastin cross-links via **desmosine and isodesmosine** cross-links to form elastic fibers surrounded by a **fibrillin-1 microfibrillar scaffold**. Fibrillin-1 mutations on chromosome 15 cause Marfan syndrome. Defective fibrillin-1 impairs structural integrity and deregulates transforming growth factor beta signaling, causing tall stature, arachnodactyly, upward lens ectopia lentis, and aortic root aneurysms.",
+   "say": "Elastin provides tissue recoil through desmosine cross links on a fibrillin scaffold. In Marfan syndrome, fibrillin 1 gene mutations cause excessive growth, upward lens dislocation, arachnodactyly, and life threatening aortic root dilation from excess transforming growth factor beta signaling.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "FBN1 gene mutation on chromosome 15"
+     },
+     {
+      "id": "m2",
+      "label": "Defective fibrillin-1 microfibrillar scaffold"
+     },
+     {
+      "id": "m3",
+      "label": "Excessive bioactive TGF-beta signaling"
+     },
+     {
+      "id": "m4",
+      "label": "Elastin fragmentation in aortic media"
+     },
+     {
+      "id": "m5",
+      "label": "Aortic root dilatation, dissection, ectopia lentis"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-osteogenesis-imperfecta",
+  "kb-reference-ehlers-danlos-syndrome"
+ ]
+}

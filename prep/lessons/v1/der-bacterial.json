@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-bacterial",
+ "subject": "dermatology",
+ "title": "Bacterial pyodermas: impetigo, folliculitis, erysipelas, cellulitis, necrotising fasciitis",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Bacterial pyodermas** are primary skin infections predominantly caused by Staphylococcus aureus and Streptococcus pyogenes. Impetigo presents in non-bullous form with characteristic golden-yellow honey-coloured crusts around the mouth and nose, or in bullous form mediated by staphylococcal exfoliative toxin A targeting desmoglein 1. Topical antiseptics or mupirocin manage localized non-bullous disease, whereas extensive lesions require oral flucloxacillin.",
+   "say": "Bacterial pyodermas include impetigo, caused by staphylococcus and streptococcus, featuring honey-coloured crusts or toxin-mediated blisters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-bullous impetigo",
+     "points": [
+      "Streptococcus and Staphylococcus",
+      "Honey-coloured adherent crusts",
+      "Face and perioral distribution",
+      "Topical mupirocin first line"
+     ]
+    },
+    "right": {
+     "title": "Bullous impetigo",
+     "points": [
+      "Staphylococcus aureus phage group 2",
+      "Exfoliative toxin A against Dsg1",
+      "Flaccid superficial blisters",
+      "Systemic oral antibiotic indicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Folliculitis** describes acute pyogenic inflammation of hair follicles, most frequently triggered by Staphylococcus aureus. Progression gives rise to a furuncle, which represents an extensive necrotising follicle-centred boil. Coalescence of multiple adjacent furuncles with deep subcutaneous sinus tracts produces a carbuncle, typically on the posterior neck or back in diabetics and requiring systemic antibiotics plus surgical drainage.",
+   "say": "Folliculitis affects follicles, coalescing into furuncles and deeper multi-headed carbuncles requiring systemic coverage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Superficial folliculitis"
+     },
+     {
+      "id": "b",
+      "label": "Furuncle boil"
+     },
+     {
+      "id": "c",
+      "label": "Subcutaneous carbuncle"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Erysipelas and cellulitis** represent deeper spreading cutaneous infections. Erysipelas affects the upper dermis and superficial lymphatics, caused by Group A beta-haemolytic streptococci, manifesting with a raised, sharply demarcated erythematous plaque and abrupt fever. Cellulitis involves the deep dermis and subcutaneous adipose tissue, displaying ill-defined spreading margins, warmth, and marked local tenderness.",
+   "say": "Erysipelas involves superficial dermis with sharply demarcated margins, whereas cellulitis extends deeper into subcutaneous fat with ill-defined borders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Erysipelas",
+     "Cellulitis"
+    ],
+    "rows": [
+     [
+      "Primary layer",
+      "Upper dermis and lymphatics",
+      "Deep dermis and subcutaneous fat"
+     ],
+     [
+      "Margin demarcation",
+      "Sharply raised, distinct border",
+      "Ill-defined, diffuse spreading edge"
+     ],
+     [
+      "Predominant pathogen",
+      "Group A Streptococcus",
+      "Staphylococcus aureus and Streptococcus"
+     ],
+     [
+      "Systemic signs",
+      "Abrupt fever, chills, rigors",
+      "Subacute onset, local tenderness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Necrotising fasciitis** is a surgical emergency characterized by rapid fulminant necrosis of subcutaneous fascia and skin. Clinical clues include disproportionate excruciating pain out of proportion to visible skin changes, woody subcutaneous induration, bullae with dusky cutaneous infarction, and late cutaneous anaesthesia. Urgent radical surgical debridement and broad-spectrum intravenous antimicrobial coverage are lifesaving.",
+   "say": "Necrotising fasciitis presents with pain out of proportion to skin signs, dusky necrosis, and requires urgent debridement.",
+   "vis": null
+  },
+  {
+   "tx": "**Ecthyma** is a deep ulcerative pyoderma penetrating through the full thickness of the epidermis into the dermis. Lesions present as 'punched-out' ulcers covered by thick hard adherent crusts, healing with permanent scar formation. Predisposing factors include poor hygiene, malnutrition, and minor trauma, managed with crust softening and systemic anti-staphylococcal therapy.",
+   "say": "Ecthyma produces deep punched-out dermal ulcers with thick adherent crusts that heal with permanent scarring.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-impetigo",
+  "kb-reference-cellulitis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

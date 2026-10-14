@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-drugs-procedures",
+ "subject": "dermatology",
+ "title": "Dermatological therapeutics and procedures: topical corticosteroid ladder, isotretinoin safety, phototherapy, cryotherapy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Topical corticosteroid potency** is categorized into a four-tier stepped ladder in the British National Formulary: mild (hydrocortisone), moderate (clobetasone butyrate), potent (betamethasone valerate), and very potent (clobetasol propionate). Mild steroids are reserved for vulnerable anatomical sites such as the face, eyelids, and intertriginous skin, whilst potent agents treat thick plaques on limbs and trunk.",
+   "say": "Topical corticosteroids are graded from mild to very potent; mild agents protect the face, whilst potent agents treat thickened plaques.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Potency tier",
+     "Representative agent",
+     "Approved anatomical application"
+    ],
+    "rows": [
+     [
+      "Mild (Class IV)",
+      "Hydrocortisone 1 percent",
+      "Face, eyelids, axillae, groins, infants"
+     ],
+     [
+      "Moderate (Class III)",
+      "Clobetasone butyrate 0.05 percent",
+      "Trunk and limbs, moderate eczema"
+     ],
+     [
+      "Potent (Class II)",
+      "Betamethasone valerate 0.1 percent",
+      "Lichenified plaques, scalp, psoriasis"
+     ],
+     [
+      "Very potent (Class I)",
+      "Clobetasol propionate 0.05 percent",
+      "Palms, soles, hypertrophic lichen planus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Finger-tip unit (FTU)** quantifies topical medication dosing, defined as the amount of ointment squeezed from a 5 mm nozzle onto the adult index fingertip from distal crease to tip (approximately 0.5 grams). One FTU covers an area equivalent to two adult flat handprints. Adverse effects of prolonged steroid misuse include dermal atrophy, telangiectasia, striae distensae, steroid rosacea, and systemic HPA axis suppression.",
+   "say": "One fingertip unit equals approximately point five grams and covers two flat adult handprints, preventing overuse atrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "One fingertip unit (0.5 g)"
+     },
+     {
+      "id": "b",
+      "label": "Covers two adult hand surfaces"
+     },
+     {
+      "id": "c",
+      "label": "Averts cutaneous atrophy and striae"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic retinoid safety** centers on oral isotretinoin and acitretin. Both are potent teratogens requiring strict dual contraception starting four weeks prior to therapy and continuing after cessation (five weeks for isotretinoin, two to three years for acitretin due to esterification). Baseline monitoring must verify negative pregnancy tests, normal liver function tests, and fasting serum lipid profiles.",
+   "say": "Oral retinoids demand strict contraception, pregnancy testing, and monitoring of liver function and fasting lipid panels.",
+   "vis": null
+  },
+  {
+   "tx": "**Phototherapy** harnesses ultraviolet light to suppress cutaneous immune activation. Narrowband UVB (wavelength 311 nm) is first-line phototherapy for widespread plaque psoriasis and extensive vitiligo, avoiding psoralen photosensitizers. Psoralen with UVA (PUVA) uses oral or bath 8-methoxypsoralen for deeper dermal penetration in severe eczema and mycosis fungoides, though carrying higher long-term skin cancer risks.",
+   "say": "Narrowband UVB at 311 nanometres treats psoriasis and vitiligo safely, whilst PUVA penetrates deeper for refractory disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Narrowband UVB",
+     "points": [
+      "Monochromatic 311 nm wavelength",
+      "No oral photosensitizer required",
+      "First-line in psoriasis and vitiligo",
+      "Lower cumulative skin cancer risk"
+     ]
+    },
+    "right": {
+     "title": "PUVA photochemotherapy",
+     "points": [
+      "UVA plus oral or bath psoralen",
+      "Deep penetration into lower dermis",
+      "Eye protection required for 24 hours",
+      "Higher squamous cell carcinoma risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cryotherapy and diagnostic procedures** are fundamental in dermatology. Liquid nitrogen cryotherapy (-196 degrees Celsius) induces intracellular ice crystallization and vascular thrombosis to destroy viral warts and actinic keratoses. Skin biopsy techniques comprise shave biopsy for superficial lesions, punch biopsy (3-4 mm) for inflammatory dermatoses, and complete excisional biopsy for suspected melanomas.",
+   "say": "Liquid nitrogen cryotherapy freezes benign lesions, whilst punch and excisional biopsies provide tissue for histopathological diagnosis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-atopic_dermatitis",
+  "kb-reference-psoriasis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

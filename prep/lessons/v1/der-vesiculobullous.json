@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-vesiculobullous",
+ "subject": "dermatology",
+ "title": "Immunobullous disorders: pemphigus vulgaris vs bullous pemphigoid, target antigens, immunofluorescence",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Pemphigus vulgaris** is an autoimmune blistering disorder characterized by IgG autoantibodies targeting desmoglein 3 (and desmoglein 1 in mucocutaneous disease). Autoantibody binding disrupts epidermal desmosomes, causing intraepidermal acantholysis. Blisters are thin-walled, flaccid, and rupture easily, leaving extensive painful denuded erosions that heal without scarring. Oral mucosal ulceration precedes cutaneous lesions in the majority of patients.",
+   "say": "Pemphigus vulgaris involves desmoglein 3 autoantibodies causing intraepidermal acantholysis and fragile flaccid blisters with oral erosions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anti-desmoglein 3 autoantibodies"
+     },
+     {
+      "id": "b",
+      "label": "Suprabasal intraepidermal acantholysis"
+     },
+     {
+      "id": "c",
+      "label": "Fragile flaccid blisters and raw erosions"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bedside signs in pemphigus** include **Nikolsky sign** and Asboe-Hansen sign. Nikolsky sign is elicited by applying gentle tangential shearing pressure to normal-appearing perilesional skin, resulting in epidermal dislodgement and peeling. Asboe-Hansen (bulla spread) sign occurs when direct vertical pressure on an intact blister pushes blister fluid laterally beneath adjacent uninvolved epidermis.",
+   "say": "Nikolsky sign shows epidermal peeling with lateral shearing pressure, confirming superficial acantholytic clefting.",
+   "vis": null
+  },
+  {
+   "tx": "**Bullous pemphigoid** is an autoimmune subepidermal blistering disease predominantly affecting the elderly. IgG autoantibodies target **BP180** (collagen XVII) and BP230 within hemidesmosomes. Because the blister roof consists of the entire thickness of the epidermis, bullae are characteristically tense, durable, and arise on erythematous or urticarial plaques. Nikolsky sign is negative, and mucosal involvement is rare.",
+   "say": "Bullous pemphigoid involves anti-BP180 hemidesmosomal antibodies, producing subepidermal tense bullae with a negative Nikolsky sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pemphigus vulgaris",
+     "points": [
+      "Target: Desmoglein 3 and 1",
+      "Suprabasal intraepidermal split",
+      "Flaccid, fragile bullae, oral erosion",
+      "Positive Nikolsky sign"
+     ]
+    },
+    "right": {
+     "title": "Bullous pemphigoid",
+     "points": [
+      "Target: BP180 and BP230",
+      "Subepidermal basement membrane split",
+      "Tense durable bullae, pruritus",
+      "Negative Nikolsky sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Direct immunofluorescence (DIF)** provides definitive differentiation. In pemphigus vulgaris, DIF demonstrates IgG and C3 deposition in a classic **fishnet** intercellular pattern surrounding epidermal keratinocytes. In bullous pemphigoid, DIF reveals continuous linear deposition of IgG and C3 along the dermo-epidermal basement membrane zone.",
+   "say": "Direct immunofluorescence confirms pemphigus via intercellular fishnet IgG, whereas bullous pemphigoid reveals linear basement membrane IgG.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic test",
+     "Pemphigus vulgaris",
+     "Bullous pemphigoid"
+    ],
+    "rows": [
+     [
+      "Histopathology split",
+      "Intraepidermal suprabasal row of tombstones",
+      "Subepidermal blister with eosinophils"
+     ],
+     [
+      "Direct immunofluorescence",
+      "Intercellular epidermal fishnet pattern",
+      "Linear basement membrane zone IgG/C3"
+     ],
+     [
+      "Circulating antibodies",
+      "Anti-desmoglein 3 and desmoglein 1 ELISA",
+      "Anti-BP180 NC16A and BP230 ELISA"
+     ],
+     [
+      "Tzanck smear",
+      "Acantholytic Tzanck cells present",
+      "Acantholytic cells completely absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dermatitis herpetiformis** is an intensely pruritic subepidermal blistering disease strongly linked to coeliac disease. IgA autoantibodies target epidermal transglutaminase, depositing in a granular pattern within the dermal papillae on DIF. Lesions present as symmetrical grouped vesicles on extensor elbows, knees, and buttocks, responding promptly to a gluten-free diet and dapsone.",
+   "say": "Dermatitis herpetiformis features grouped itchy vesicles on extensors with granular IgA in dermal papillae, responding to dapsone.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-pemphigus_vulgaris",
+  "kb-reference-bullous_pemphigoid"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

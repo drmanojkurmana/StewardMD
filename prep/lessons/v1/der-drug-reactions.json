@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "der-drug-reactions",
+ "subject": "dermatology",
+ "title": "Cutaneous adverse drug reactions: maculopapular exanthem, fixed drug eruption, DRESS, Stevens-Johnson syndrome, TEN",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Cutaneous adverse drug reactions** range from benign exanthems to life-threatening severe cutaneous adverse reactions (SCAR). The most common type is the **maculopapular exanthem**, appearing one to two weeks after initiating culprit drugs like aminopenicillins, sulfonamides, or anticonvulsants. Symmetrical erythematous macules and papules originate on the trunk and spread centrifugally without mucosal involvement.",
+   "say": "Maculopapular exanthems present symmetrically one to two weeks post-drug without mucosal sloughing, resolving after drug withdrawal.",
+   "vis": null
+  },
+  {
+   "tx": "**Fixed drug eruption (FDE)** manifests as solitary or few sharply demarcated, round erythematous violaceous plaques that recur at the exact same anatomical site within hours of re-exposure. Lesions frequently blister and resolve with pronounced, persistent Slate-grey post-inflammatory hyperpigmentation. Classic causative drugs include paracetamol, NSAIDs, cotrimoxazole, and tetracyclines, commonly affecting genitalia and lips.",
+   "say": "Fixed drug eruptions recur at the identical site upon re-exposure, healing with dark slate-grey hyperpigmentation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug ingestion"
+     },
+     {
+      "id": "b",
+      "label": "CD8 memory T cell activation"
+     },
+     {
+      "id": "c",
+      "label": "Site-specific violaceous blister"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**DRESS syndrome** (drug reaction with eosinophilia and systemic symptoms) is a severe delayed hypersensitivity reaction typically occurring two to eight weeks after drug initiation. Features include high spiking fevers, facial oedema, diffuse morbilliform rash, marked lymphadenopathy, atypical lymphocytosis, and profound eosinophilia. Internal organ involvement predominantly targets the liver, kidney, or myocardium.",
+   "say": "DRESS presents two to eight weeks after culprit drugs with facial oedema, rash, marked eosinophilia, and hepatitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign exanthem",
+     "points": [
+      "Onset within 1 to 2 weeks",
+      "Trunk and proximal limbs",
+      "No facial or mucosal oedema",
+      "Normal liver and renal biochemistry"
+     ]
+    },
+    "right": {
+     "title": "DRESS syndrome",
+     "points": [
+      "Delayed onset 2 to 8 weeks",
+      "Prominent periorbital and facial swelling",
+      "Marked peripheral eosinophilia",
+      "Transaminitis and internal organ injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stevens-Johnson syndrome (SJS) and Toxic Epidermal Necrolysis (TEN)** represent spectrum variants of acute immunological keratinocyte apoptosis mediated by cytotoxic T cells and granulysin. Target lesions with central necrosis and widespread epidermal necrolysis develop alongside severe mucosal detachment affecting at least two mucosal surfaces. Classification relies strictly on the percentage of detached body surface area.",
+   "say": "SJS and TEN involve cytotoxic keratinocyte necrosis, target lesions, mucosal detachment, and widespread epidermal detachment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "Detached skin surface area",
+     "Typical presentation"
+    ],
+    "rows": [
+     [
+      "Stevens-Johnson syndrome (SJS)",
+      "Less than 10 percent BSA",
+      "Targetoid lesions, oral and ocular erosion"
+     ],
+     [
+      "SJS and TEN overlap",
+      "10 to 30 percent BSA",
+      "Widespread purpuric macules, confluent sheets"
+     ],
+     [
+      "Toxic epidermal necrolysis (TEN)",
+      "Greater than 30 percent BSA",
+      "Confluent full-thickness epidermal sloughing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SCORTEN** is a validated prognostic illness severity score calculated within the first twenty-four hours of hospital admission to predict mortality in TEN. Seven independent variables are evaluated: age over forty, heart rate over one hundred and twenty, active malignancy, epidermal detachment over ten percent, serum urea over ten, glucose over fourteen, and bicarbonate under twenty.",
+   "say": "SCORTEN stratifies mortality in TEN across seven physiological parameters assessed within the first twenty-four hours of admission.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-stevens_johnson_syndrome",
+  "kb-reference-toxic_epidermal_necrolysis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

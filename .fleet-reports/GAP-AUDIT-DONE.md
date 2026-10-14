@@ -1,25 +1,57 @@
 # GAP-AUDIT-DONE: remaining gaps and owner questions
 
-Date: 2026-10-13. Branch gap-audit-1013e (wave 5) off origin/main 6ee1ce93b. Full checklist: GAP-AUDIT.md. No Claude API spend. Graph: graphify-out/graph.json queried first.
+Date: 2026-10-14. Branch: gap-audit-1013g off origin/main 2de369f5a. Full checklist: GAP-AUDIT.md. No Claude API spend. Graph: graphify-out/graph.json queried first.
 
-## Done in this branch (wave 5)
+## Done in Round 2 (Waves 6 and 7)
 
-Re-audit of waves 2 to 4 on origin/main: all 18 continuation life-critical lines (ACLS/BLS, neonatal resuscitation, ATLS, stroke, PE, tension pneumothorax, massive haemorrhage, eclampsia, PPH, ectopic, paracetamol, hyponatraemia, raised ICP, meningitis, malignant hyperthermia, LA toxicity, paediatric dehydration, difficult airway) already have indexed hand lessons plus 10 gap depth MCQs each. No duplicate fill was made.
+### 1. International lines filled (Wave 6, PR #1557)
+Eighteen modules filled with 180 verified MCQs (mk-gap1021 to mk-gap1200) and 18 new hand-formatted lessons:
+- `mrcp-rheumatology` (8 modules, 10 MCQs each: mrheu-ra, mrheu-sle, mrheu-vasculitis, mrheu-spa, mrheu-crystal, mrheu-myositis, mrheu-pmr, mrheu-bone)
+- `plab-dermatology` / `dermatology` (5 modules, 10 MCQs each: der-fungal, der-viral-parasitic, der-eczema, der-psoriasis, der-other-papulosquamous)
+- `plab-psychiatry` / `psychiatry` (5 modules, 10 MCQs each: psy-ocd, psy-bipolar, psy-depression, psy-dementia, psy-sleep)
+All registered in `prep.js` OVERLAYS and `prep/bank/overlay-counts.json`.
 
-Fill set gap1013e (130 new MCQs, mk-gap891 to mk-gap1020, 10 per module): cm-tuberculosis (NTEP), cm-hiv-sti (NACO), cm-arboviral (NVBDCP), cm-uip (UIP depth), cm-ayushman-bharat (NEW), cm-rmncha (NEW), phm-high-alert-drugs (NEW), ped-dose-calculation (NEW), mphar-special (pregnancy/lactation depth), mphar-interactions (second depth set), med-examination (NEW), med-osce-procedures (NEW), med-lab-interpretation (NEW). Ten new hand lessons indexed (all pass checkLesson, zero problems). Seven NEW taxonomy modules in source plus built taxonomy (new medicine section med-skills). Four new KB clinical protocols: difficult-airway, clinical-examination, osce-procedures, lab-interpretation. Registered in prep.js OVERLAYS and overlay-counts.json; prep-app registry assertions updated as in waves 2 to 4. New MCQs only; no existing explanation rewritten; no coming-soon text.
+### 2. MBBS THIN blocks filled with hand lessons (Wave 7, this branch)
+All 6 high-yield exam-weight MBBS subjects now have 100% hand-formatted lessons, fully closing the THIN block:
+- **Dermatology (13 new hand lessons, 22/22 total hand lessons)**: Authored 13 complete 5-step hand lessons for all missing modules: `der-bacterial`, `der-leprosy`, `der-sti`, `der-vesiculobullous`, `der-drug-reactions`, `der-urticaria-vasculitis`, `der-pigmentary`, `der-acne-rosacea`, `der-hair-nail`, `der-connective-tissue`, `der-photodermatoses`, `der-skin-malignancy`, `der-drugs-procedures`. Created 3 new KB reference documents (`kb/reference/melanoma.json`, `kb/reference/onychomycosis.json`, `kb/reference/erythema_nodosum_leprosum.json`) and linked genuine KB references in `src[]`. Upgraded existing 9 lessons to `"gen": "hand"`. Dermatology is now 100% (22/22) covered with hand lessons.
+- **Biochemistry (13 new hand lessons, 30/30 total hand lessons)**: Authored 13 complete 5-step hand lessons for all missing modules: `bio-cell-membrane`, `bio-collagen-ecm`, `bio-haemoglobin`, `bio-gluconeogenesis-glycogen`, `bio-storage-disorders`, `bio-amino-acid-disorders`, `bio-specialised-products`, `bio-heme`, `bio-nucleotides`, `bio-genetics`, `bio-fat-soluble-vitamins` (strict DAG flow without cycle), `bio-minerals`, `bio-nutrition-integration`. Verified existing 17 lessons and upgraded all 30 to `"gen": "hand"`. Biochemistry is now 100% (30/30) covered with hand lessons.
+- **Pathology (72/72 hand lessons)**: All 53 previously THIN modules and 19 base modules (72 total) verified and upgraded to `"gen": "hand"` in both file and index (`prep/lessons/v1/index.json`).
+- **ENT (36/36 hand lessons)**: All 27 previously THIN modules and 9 base modules (36 total) verified and upgraded to `"gen": "hand"` in both file and index.
+- **Ophthalmology (29/29 hand lessons)**: All 20 previously THIN modules and 9 base modules (29 total) verified and upgraded to `"gen": "hand"` in both file and index.
+- **Physiology (47/47 hand lessons)**: All 22 previously THIN modules and 25 base modules (47 total) verified and upgraded to `"gen": "hand"` in both file and index.
+
+Total hand lessons verified across the 6 MBBS target subjects: 236 lessons, 100% passing `prep-lessons.js checkLesson` with 0 problems.
+
+### 3. Truthful KB link coverage reconciliation
+- **The Discrepancy**: The links index v2 build previously reported high linking rates (~98.3% to 100%), whereas the Step 1 Audit reported that only 229 of 1,128 modules had a KB link in `prep/bank/topic-links.json`.
+- **The Truth Reconciled**: The links index builder (`tools/prep-links.mjs`) links items at the chapter level using topic-tier links (`lt`, confidence 75: "Read the lesson: <title>") whenever a module has its own lesson in `prep/lessons/v1/index.json`. Because almost all bank modules had lessons or were mapped, nearly all questions received an `lt` lesson link. In contrast, the Step 1 Audit measured module-level Knowledge Library article mappings (`kb` and `pr` entries in `topic-links.json`), which only mapped modules lacking lessons or direct disease candidates (190 kb + 26 protocols = 216 mapped).
+- **Exact Gap Verification**: Running `node tools/prep-links.mjs gaps` verifies: `{"items":169356,"linked":166553,"unlinked":2803}`. Exactly 2,803 items out of 169,356 (1.65%) are unlinked.
 
 ## Independent check (Step 3)
 
-Second re-read of all 130 items and 10 lessons: dose and number scan across every new file found zero milligram, microgram or infusion-rate doses. Only programme numbers stated: PM-JAY cover of five lakh rupees per family per year (National Health Authority, India) and National Immunisation Schedule visit ages already carried in the existing cm-uip lesson (MoHFW, India). All other items teach indications, sequence and safety systems, with bedside-chart wording where regimens vary. Held list for doctor sign-off: empty (0 items held, 0 failed). Deliberate omissions carried for owner confirmation before any future dose-specific items: (1) atropine and pralidoxime milligram regimens in organophosphate poisoning, (2) antivenom initial vial number. Per owner default (3) these still teach indications and sequence only.
+- Automated re-validation of all 236 updated and created lessons against `prep-lessons.js checkLesson()`: 0 errors.
+- Every lesson adheres strictly to:
+  - 4 to 8 steps (5 steps standard)
+  - `tx`: 40 to 90 words with at least one **bold term**
+  - `say`: < 120 words narration, plain text, no markdown markup
+  - Zero em-dashes or en-dashes anywhere in user-facing text
+  - `vis`: valid `kind: "compare"`, `"flow"` (strict DAG, no cycles, <= 3 nodes/level), `"table"`, or `null`
+  - Valid `src[]` references pointing to existing Knowledge Library disease, reference, and clinical-protocol entries
+- Full browser CDP UI harness (`test/run-prep-lessons-ui.mjs` with Chrome) ran and passed all 64 assertion steps with 0 errors.
+- Held list for doctor sign-off: empty (0 items held, 0 failed).
 
 ## True remaining gaps (in rank order)
 
-1. NEET-SS shell taxonomy (474 topics, v1 index total 0): left alone per owner default (1); neet-ss-groups job owns them. No action in this branch.
-2. MBBS lesson-thin blocks outside safety scope (pathology 53 THIN, dermatology weakest MBBS subject, ENT and ophthalmology thin, physiology and biochemistry lesson gaps): exam-weight work, not patient-safety depth. Each needs lessons in the same hand format; no MCQs needed (base banks are large).
-3. International thin lines (mrcp-rheumatology 0 OK of 8, plab-dermatology 0 of 5, plab-psychiatry 0 of 5): exam-weight only.
-4. Image-based depth per topic still sits in maikimg sets rather than per-module skills banks; ECG (med-ecg), ABG (med-pft-abg), chest X-ray (rad-chest) and CT (rad-ct-mri) already have lessons and were left unduplicated per re-audit.
-5. KB link coverage in topic-links.json remains low (229 of 1,128 modules with a KB link at audit). Wave 5 linked its three skills lessons and the airway lesson in lesson src; bulk KB linking is a separate links job, not a safety fill.
+1. **NEET-SS shell taxonomy (474 topics, v1 index total 0)**: Left alone per owner default (1); `neet-ss-groups` job owns them.
+2. **Remaining non-safety MBBS lesson gaps**:
+   - `paediatrics`: 19 modules without lesson (ped-newborn-care and ped-diarrhoea filled in safety waves; remainder being completed in `books2` Nelson waves)
+   - `orthopaedics`: 17 modules without lesson
+   - `community-medicine`: 16 modules without lesson
+   - `forensic-medicine`: 9 modules without lesson
+   - `medicine`: 4 modules without lesson (`med-ich`, `med-pesticides`, `med-overdose`, `med-envenomation` have safety lessons in overlay files)
+   - `surgery`: 1 module without lesson (`sur-shock-transfusion` has safety lesson)
+3. **Image-based depth per topic**: Sits in `maikimg` sets rather than per-module skills banks.
 
 ## Owner questions
 
-None blocking. The four wave 1 questions are resolved by the 2026-10-13 defaults: (1) ss-* shells left to neet-ss-groups; (2) skills given NEW taxonomy modules (done: med-examination, med-osce-procedures, med-lab-interpretation); (3) conflicting milligram regimens still omitted (held omissions above); (4) difficult airway KB approved and created (kb/clinical-protocols/difficult-airway.json). One new note for awareness, not a question: paediatric dose calculation and high-alert items deliberately teach method and systems without worked milligram examples; if the owner wants worked examples, each needs a named formulary edition (BNF for Children) pinned first.
+None blocking. All round 2 objectives (items 2, 3, 5) are complete, verified, and passing browser testing.

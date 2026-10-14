@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-leprosy",
+ "subject": "dermatology",
+ "title": "Leprosy and Hansen disease: Ridley-Jopling spectrum, slit-skin smears, lepra reactions, WHO MDT",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Leprosy (Hansen disease)** is a chronic granulomatous infection caused by Mycobacterium leprae, primarily affecting cooler peripheral nerves and skin. The clinical presentation is determined by host cell-mediated immunity along the Ridley-Jopling spectrum, spanning polar tuberculoid (TT), borderline tuberculoid (BT), mid-borderline (BB), borderline lepromatous (BL), to polar lepromatous leprosy (LL).",
+   "say": "Leprosy affects peripheral nerves and skin across a spectrum determined by host cell-mediated immune competence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tt",
+      "label": "Tuberculoid high immunity"
+     },
+     {
+      "id": "bb",
+      "label": "Borderline unstable"
+     },
+     {
+      "id": "ll",
+      "label": "Lepromatous low immunity"
+     }
+    ],
+    "edges": [
+     [
+      "tt",
+      "bb"
+     ],
+     [
+      "bb",
+      "ll"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tuberculoid leprosy (TT)** reflects strong cell-mediated immunity. Patients present with few (one to three) hypopigmented, well-demarcated anaesthetic macules or plaques with raised erythematous borders and impaired sweating. Acid-fast bacilli are absent on slit-skin smears (paucibacillary). Early asymmetric enlargement of a single peripheral nerve trunk occurs, with marked thermal and pain sensory deficit.",
+   "say": "Tuberculoid disease features few hypopigmented anaesthetic plaques, absent bacilli on smear, and early single nerve thickening.",
+   "vis": null
+  },
+  {
+   "tx": "**Lepromatous leprosy (LL)** reflects deficient cell-mediated immunity with unchecked bacillary multiplication. Innumerable symmetric shiny erythematous macules, papules, plaques, and nodules develop across the body. Classic facial infiltration causes leonine facies, loss of outer eyebrows (madarosis), and nasal cartilage collapse. Slit-skin smears demonstrate abundant globus clusters of acid-fast bacilli with a high bacteriological index.",
+   "say": "Lepromatous disease presents with diffuse symmetric nodules, leonine facies, madarosis, and high bacillary load on smears.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tuberculoid (TT)",
+     "points": [
+      "Strong Th1 cell-mediated immunity",
+      "Few anaesthetic plaques (1 to 3)",
+      "Negative slit-skin smears",
+      "Positive lepromin skin test"
+     ]
+    },
+    "right": {
+     "title": "Lepromatous (LL)",
+     "points": [
+      "Defective Th1, high Th2 response",
+      "Diffuse symmetric nodules and facies",
+      "Abundant globi on slit-skin smear",
+      "Negative lepromin skin test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lepra reactions** are acute immunological flares causing permanent neurological disability. Type 1 (reversal) reaction represents delayed Type IV hypersensitivity in borderline leprosy, causing acute inflammation of existing skin lesions and severe nerve pain or sudden motor weakness. Type 2 reaction (erythema nodosum leprosum) represents immune-complex Type III hypersensitivity in BL and LL, manifesting with painful crops of evanescent subcutaneous nodules.",
+   "say": "Type 1 reactions involve delayed hypersensitivity with acute neuritis. Type 2 reactions involve immune complexes with erythema nodosum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Type 1 reversal reaction",
+     "Type 2 reaction (ENL)"
+    ],
+    "rows": [
+     [
+      "Immunological basis",
+      "Type IV delayed hypersensitivity",
+      "Type III immune-complex vasculitis"
+     ],
+     [
+      "Patient spectrum",
+      "Borderline forms (BT, BB, BL)",
+      "Multibacillary forms (BL, LL)"
+     ],
+     [
+      "Cutaneous signs",
+      "Swelling of existing plaques",
+      "Painful new crops of red nodules"
+     ],
+     [
+      "Primary treatment",
+      "Oral systemic corticosteroids",
+      "Corticosteroids or thalidomide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**WHO multidrug therapy (MDT)** remains the global cornerstone to cure infection and prevent drug resistance. Paucibacillary leprosy is treated for six months with rifampicin and dapsone. Multibacillary leprosy is treated for twelve months with rifampicin, dapsone, and clofazimine. Monthly supervised rifampicin kills over ninety-nine percent of viable bacilli, whilst clofazimine provides anti-inflammatory and bacteriostatic effects.",
+   "say": "WHO multidrug therapy combines rifampicin, dapsone, and clofazimine to cure infection and avert resistance.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-leprosy",
+  "kb-reference-erythema_nodosum_leprosum"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}
