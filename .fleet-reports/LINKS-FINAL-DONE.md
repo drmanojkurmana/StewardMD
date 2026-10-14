@@ -94,3 +94,64 @@ See the PR for the published version string and verify line.
   `test/prep-links-rematch.test.mjs`, `test/prep-links-final.test.mjs`: 38 pass, 1 skipped.
 - `test/prep-lessons.test.mjs`, `test/prep-lessons-100.test.mjs`,
   `test/prep-reason.test.mjs`: 50 pass.
+
+## Quality finding follow-up (2026-10-14): never a wrong link
+
+A fresh build already reported 0 unlinked, but the sidecar carried weak specific
+KB links: 142,280 items with a KB link, 69,927 whose top KB link was a specific
+below 75 (45,248 explanation-only `e` at 55). Fix, no API:
+
+- `gateSpecificLinks` (tools/prep-links.mjs): a specific kb/pr/dr link must pass
+  a method floor (`e` >= 60, others >= 50) AND `entityOverlap` (a significant
+  word of the title or aliases in stem, keyed answer, an option, or the
+  explanation). Failures are capped below the floor; the module-level lt/kt
+  target takes the slot. Cutoff derivation against the human (`a`) links as
+  ground truth (matcher re-run with pipeline links stripped, 3,481 items):
+  no method/score bucket reached 95% exact agreement (q82 87.8%, k92 66.9%,
+  s77 77.0%, e55 46.0%, s65 23.7%), so score alone cannot certify a link and
+  the overlap requirement is mandatory, with the suggested floors.
+- `ktOk`: derived module-topic targets (topicKb majority/single-title guesses)
+  must share a word or acronym with the module's own title or lesson title.
+  Mapped topic-list entries stand as the module's verified list; when the
+  module's own lesson covers an item, an unevidenced mapped article no longer
+  rides along as a second article.
+- The sidecar now emits only gated KB/drug/protocol links.
+
+Before/after, same fresh cache, `gaps --fail` exit 0 both times
+(202,673 of 202,673 linked; per-subject linked counts unchanged at 100%):
+
+| Measure (sidecar top KB link) | Before | After |
+| --- | ---: | ---: |
+| Items carrying a KB link | 142,280 | 104,195 |
+| Top KB specific below 75 | 69,927 | 10,099 (all at the >=50 floor, none `e`) |
+| Explanation-only (`e`) top KB | 52,366+ | 0 |
+
+Precision audit (300 random KB-carrying items, stem + target title judged by
+google/gemini-3.8-flash via OpenRouter, a different model than the matcher;
+spend under $0.50):
+
+| Judge view | Before wrong | After wrong |
+| --- | ---: | ---: |
+| Strict (stem + article only) | 51/300 = 17.0% | 38/296 = 12.8% |
+| Of which specific (non-kt) links | 41 (13.7%) | 12 (4.0%) |
+| Explanation-only wrongs | 28 | 0 |
+
+The <=2% wrong target is **not met** under the strict judge, and this is
+reported rather than hidden: the remaining flags are almost all `kt` module
+articles for mixed modules that have no lesson (e.g. a Mumps article for a
+chickenpox item in a viral-exanthems module). Those articles are the module's
+verified topic and are what keeps `gaps --fail` at 0 for modules with no
+lesson and no evidenced specific; removing them would re-open unlinked items.
+Specific-link wrongs fell from 13.7% to 4.0% and explanation-only wrongs to
+zero; the residual specific flags are borderline related cases (a sign or an
+associated feature named in the stem) plus five pipeline `a` stamps.
+Closing the last gap needs per-subtopic articles/lessons for the mixed
+modules, not a looser matcher.
+
+Published: `tools/prep-links.mjs publish --yes` (token trimmed from
+~/.config/stewardmd/cloudflare.env), version 2026-10-14.dd526c,
+`verify: 2406 files ... (202673 of 202673 items linked): 0 bad`.
+
+Tests: prep-links, prep-links-topics, prep-links-rematch, prep-links-final,
+prep-lessons, prep-lessons-100, prep-reason: 91 pass, 1 skipped, 0 fail.
+
