@@ -292,6 +292,7 @@ export const PUBLIC_ALLOWLIST = {
   "functions/api/analytics.js": "public by design: header documents an unauthenticated always-200 product-event counter over allow-listed event names, no PHI",
   "functions/api/clientlog.js": "public by design: header documents unauthenticated crash telemetry (errors happen before sign-in), metadata only, always 200",
   "functions/api/config.js": "public by design: header documents an unauthenticated boot-config read; setting it is the separate owner route",
+  "functions/api/health.js": "public by design: header documents an unauthenticated deploy probe returning a static version marker only; no env, no bindings, no input, no state",
   "functions/api/hospital-request.js": "login-free by design: header documents a per-IP rate limit plus a CORS allow-list instead of auth, so a hospital without access can ask for onboarding",
   "functions/api/maik-feedback.js": "public by design: header documents an unauthenticated helpfulness signal (same reasoning as clientlog); reading entries is the owner route",
   "functions/api/validation.js": "passphrase gate acknowledged weak by design in its own header; append-only storage is the real protection, no patient data",
