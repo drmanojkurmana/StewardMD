@@ -49,6 +49,11 @@ rm -rf \
 # can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as
 # node_modules/capacitor-whisper -> ../local-plugins/..., and local-plugins is removed above, so those links dangle.
 # Drop every broken link in the build copy (node_modules stays: functions bundling needs the real packages).
-find . -path ./.git -prune -o -xtype l -print -delete 2>/dev/null | sed 's/^/pages-build: removed broken link /' || true
+# Also drop links that resolve outside the repo: Pages cannot read those either.
+root=$(pwd -P)
+find . -path ./.git -prune -o -type l -print0 | while IFS= read -r -d '' l; do
+  t=$(realpath "$l" 2>/dev/null || true)
+  case "$t" in "$root"/*) ;; *) rm -f "$l"; echo "pages-build: removed link $l" ;; esac
+done
 
 echo "pages-build: static files (excl functions/) = $(find . -type f -not -path './functions/*' -not -path './.git/*' | wc -l | tr -d ' ')"
