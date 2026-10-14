@@ -45,4 +45,10 @@ rm -rf \
   store-assets voice-service voice-benchmark \
   prompts infra qa-report archive .fleet-reports .github .planning
 
+# Pages rejects an output directory with broken symlinks ("build output directory contains links to files that
+# can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as
+# node_modules/capacitor-whisper -> ../local-plugins/..., and local-plugins is removed above, so those links dangle.
+# Drop every broken link in the build copy (node_modules stays: functions bundling needs the real packages).
+find . -path ./.git -prune -o -xtype l -print -delete 2>/dev/null | sed 's/^/pages-build: removed broken link /' || true
+
 echo "pages-build: static files (excl functions/) = $(find . -type f -not -path './functions/*' -not -path './.git/*' | wc -l | tr -d ' ')"
