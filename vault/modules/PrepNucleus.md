@@ -1643,3 +1643,17 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - `prep-insight.js` (loaded after `prep-coach.js`): stem-wording question type, per-set analysis, device tallies `ky_q`/`ky_ty`/`ky_cal`. Flag `smd_kyiq_insight` (default ON, `0` = old result). Tests: `test/prep-insight.test.mjs`, `test/run-kyiq-insight-ui.mjs`. See [[decisions/Decisions]] 2026-10-14.
 - Review is a swipe pager (`rvp`, `rvGo`, `paintReview` in `prep.js`). Retagging confidence after the fact does not update `ky_ty`/`ky_cal` (only the older coach counters).
 - **Nucleus360 entry (2026-10-14):** a row leads the Practise group on the PrepNucleus home (`n360-hub`), and the module screen's Nucleus360 button now comes first. `prep-nucleus360.js` did not export `act`, so tapping the old module button threw `G.PREP_NUCLEUS360.act is not a function` (nothing opened); fixed. Covered in `test/run-kyiq-insight-ui.mjs`.
+
+## Content fixes by owners and tester doctors (2026-10-14)
+- Review Desk > PrepNucleus reports: owners and registered signers (the Clinical-updates signer list; no new list) get **Edit question** / **Edit lesson**
+  on each reported item (`review-prepfix.js`, `window.SMD_PREPFIX`). A question's stem, options and correct option, explanation, key point and up to 3
+  images, or a lesson's title and each step's text, spoken line and figure, can be changed. Saves go LIVE at once (owner decision: no approval step);
+  History shows who, when and what; Revert removes the fix. The reports list and Restore are now open to signers too (`functions/api/prep/flag.js`).
+- Server: `functions/_prepfix.js` (validation, who may edit, image type by bytes) and `functions/api/prep/fix.js` (`?ix=1`, `?module=`, `?me=1`, `?log=1`,
+  POST fix, POST `?image=1`, DELETE). KV: `prep:fixix`, `prep:fixmod:<module>`, `prep:fixlog:<kind>:<id>`. Images go to R2 `prep-bank/v90/img/fx-<hash>.webp` (a JPEG or PNG
+  keeps its own Content-Type there; the bank route now honours it) and are served by the existing bank route.
+- Client: `prep.js` `fixesFor(mid)` after `loadModule` (index asked at most every 30 min; a hung request is cut at 2 s and the module opens uncorrected),
+  `applyFix` drops the old per-option reasoning (`r`, `x`) when options or explanation change; `prep-lessons.js` `applyLessonFix` at `lessonFile`.
+  `PREP.refreshFixes()` clears this phone's caches after an edit.
+- A fix holds only changed fields and the previous fix is merged in. Reverting a single field is not offered; Revert drops the whole fix.
+- Tests: `test/prep-fix.test.mjs`, `test/run-prepfix-ui.mjs`. Not built: editing from inside PrepNucleus itself (only from the Review Desk reports).

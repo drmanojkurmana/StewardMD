@@ -923,9 +923,56 @@
       if (bankErr && !r[1].length) throw bankErr;
       var items = markLevels(mergeOverlay(r[0], r[1]));
       items.forEach(function (it) { it._s = sid; it._m = mid; });
-      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-      return items;
+      // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
+      return fixesFor(mid).then(function (fx) {
+        items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); });
+        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+        return items;
+      });
     });
+  }
+  /* ---------- content fixes (owner 2026-10-14: owners and tester doctors correct a question or lesson from the Review Desk) ----------
+   * /api/prep/fix?ix=1 says which modules carry fixes (asked at most every 30 min, the last answer kept offline); a module with
+   * fixes asks /api/prep/fix?module=<id> once per edit (cached by the edit's timestamp). A slow or failed ask never blocks a
+   * module: after 2 s the module opens without its fixes and the next open has them. */
+  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {} };
+  function raceTo(p, ms, fb) { return new Promise(function (res) { var done = false, t = setTimeout(function () { if (!done) { done = true; res(fb); } }, ms); p.then(function (v) { if (!done) { done = true; clearTimeout(t); res(v); } }, function () { if (!done) { done = true; clearTimeout(t); res(fb); } }); }); }
+  function fixIndex() {
+    var s = load(), last = (s.fxix && s.fxix.mods) || {};
+    if (s.fxix && Date.now() - (s.fxix.ts || 0) < FIX_TTL) return Promise.resolve(last);
+    if (st.fxIxP) return st.fxIxP;
+    st.fxIxP = G.fetch(FIX_API + "?ix=1").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      st.fxIxP = null;
+      if (!j || !j.mods) return last;
+      s.fxix = { mods: j.mods, ts: Date.now() }; save(); return j.mods;
+    }, function () { st.fxIxP = null; return last; });
+    return st.fxIxP;
+  }
+  function fixesFor(mid) {
+    return raceTo(fixIndex(), 2000, ((load().fxix || {}).mods) || {}).then(function (mods) {
+      var ts = mods[mid]; if (!ts) return NOFIX;
+      var key = "fx:" + mid + ":" + ts;
+      if (st.mem[key]) return st.mem[key];
+      return raceTo(cacheGet(key).then(null, function () { return null; }).then(function (hit) {
+        if (hit && hit.fx) return (st.mem[key] = hit.fx);
+        return G.fetch(FIX_API + "?module=" + encodeURIComponent(mid)).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+          if (!j) return NOFIX;
+          var fx = { q: j.q || {}, l: j.l || {} }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
+        });
+      }), 2000, NOFIX);
+    });
+  }
+  // The same rules as applyQuestionFix in functions/_prepfix.js: edited options or explanation drop the per-option reasoning that described the old wording.
+  function applyFix(it, fx) {
+    if (!it || !fx) return it;
+    if (fx.q != null) it.q = fx.q;
+    if (fx.o) { it.o = fx.o.slice(); it.a = fx.a; it.r = null; it.x = null; }
+    else if (fx.a != null) { it.a = fx.a; it.r = null; it.x = null; }
+    if (fx.exp != null) { it.exp = fx.exp; it.r = null; it.x = null; }
+    if (fx.kp != null) it.kp = fx.kp;
+    if (fx.img) { it.img = fx.img.slice(); it.imgPlace = fx.imgPlace === "exp" ? "exp" : "stem"; delete it.credit; delete it.licence; }
+    it._fx = fx.ts || 1;
+    return it;
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -3613,7 +3660,7 @@
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
-    run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
+    run: runQuestions, fixes: fixesFor, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
     setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },
@@ -3638,6 +3685,8 @@
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
     modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
 
-  var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
+  var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
+    // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.
+    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);

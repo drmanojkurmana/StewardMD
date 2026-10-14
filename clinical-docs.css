@@ -61,3 +61,18 @@
 #smdShare .kit-add[disabled] { opacity: .5; cursor: default; }
 #smdShare .rv-pill { align-self: flex-start; }
 #smdShare .kit-card p { margin: 4px 0; line-height: 1.45; }
+/* PrepNucleus content editor in the Clinical review desk (review-prepfix.js) */
+#smdReview .pf-opt { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+#smdReview .pf-opt .kit-inp { flex: 1 1 auto; min-width: 0; }
+#smdReview .pf-key { display: inline-flex; align-items: center; gap: 4px; min-width: 44px; min-height: 44px; font-weight: 700; }
+#smdReview .pf-key input { width: 20px; height: 20px; }
+#smdReview .pf-img { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+#smdReview .pf-img img { width: 96px; height: 72px; object-fit: contain; background: #fff; border: 1px solid var(--outline-var, #cfd8d6); border-radius: 8px; }
+#smdReview .pf-file { cursor: pointer; }
+#smdReview .pf-step { border-top: 1px solid var(--outline-var, #cfd8d6); padding-top: 10px; margin-top: 6px; }
+#smdReview .pf-sub { display: block; margin: 8px 0 4px; font-size: 12px; opacity: .75; }
+#smdReview .pf-msg { min-height: 20px; margin: 10px 0 0; font-size: 13px; }
+#smdReview .pf-msg.bad { color: #b42318; font-weight: 700; }
+#smdReview .pf-hist { margin-top: 14px; font-size: 13px; }
+#smdReview .pf-hist ul { margin: 8px 0 0; padding-left: 18px; }
+body.dark #smdReview .pf-img img { background: #1a1a1a; border-color: #333; }

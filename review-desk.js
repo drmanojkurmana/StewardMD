@@ -278,19 +278,23 @@
   }
   function loadPrep() {
     S.prep = { loading: true };
-    prepCall("GET").then(function (r) { S.prep = r.status === 200 ? { items: r.data.items || [] } : { err: r.status === 403 ? "Only owners can see student reports." : r.status === 0 ? "No connection. Try again." : "The reports did not load." }; render(); });
+    // Owners and registered signers may also correct the reported text (review-prepfix.js).
+    if (G.SMD_PREPFIX && G.SMD_PREPFIX.me) G.SMD_PREPFIX.me().then(function (m) { S.fxMe = !!(m && m.editor); if (S.kind === "prep") render(); });
+    prepCall("GET").then(function (r) { S.prep = r.status === 200 ? { items: r.data.items || [] } : { err: r.status === 403 ? "Only owners and registered signers can see student reports." : r.status === 0 ? "No connection. Try again." : "The reports did not load." }; render(); });
   }
   function prepHtml(tabs) {
+    if (G.SMD_PREPFIX && G.SMD_PREPFIX.active()) return G.SMD_PREPFIX.html();
     var P = S.prep;
     if (!P) { loadPrep(); P = S.prep; }
-    var intro = '<p class="kit-muted">Questions students reported in PrepNucleus, most reported first. Three separate reports hide a question from everyone; Restore brings it back after you have checked it.</p>';
+    var intro = '<p class="kit-muted">Questions students reported in PrepNucleus, most reported first. Three separate reports hide a question from everyone; Restore brings it back after you have checked it.' + (S.fxMe ? " Tap Edit to correct the wording, explanation, key point or image; the fix goes live for every student." : "") + "</p>";
     if (P.loading) return tabs + intro + '<p class="kit-muted">Loading…</p>';
     if (P.err) return tabs + intro + '<p class="kit-muted">' + esc(P.err) + '</p><div class="kit-row"><button type="button" class="kit-pill" data-rv-act="prepreload">Try again</button></div>';
     if (!P.items.length) return tabs + intro + '<p class="kit-muted">No reports yet.</p>';
     return tabs + intro + '<div class="rv-list">' + P.items.map(function (x) {
       var why = Object.keys(x.reasons || {}).map(function (k) { return (PREP_REASON[k] || k) + " " + x.reasons[k]; }).join(", ");
       return '<div class="rv-row"><span class="rv-t">' + esc(x.module || "") + " · " + esc(x.itemId) + '</span><span class="rv-s">' + esc(x.subject || "") + " · " + x.n + " report" + (x.n === 1 ? "" : "s") + (why ? ": " + esc(why) : "") + "</span>" +
-        "<span>" + (x.hidden ? '<span class="rv-pill">Hidden</span><button type="button" class="kit-pill" data-rv-act="prepun:' + esc(x.itemId) + '">Restore</button>' : "") + "</span></div>";
+        "<span>" + (x.hidden ? '<span class="rv-pill">Hidden</span><button type="button" class="kit-pill" data-rv-act="prepun:' + esc(x.itemId) + '">Restore</button>' : "") +
+        (S.fxMe ? '<button type="button" class="kit-pill" data-rv-act="prepedit:' + esc(x.itemId) + '">' + ms("edit") + (x.itemType === "lesson" ? "Edit lesson" : "Edit question") + "</button>" : "") + "</span></div>";
     }).join("") + "</div>";
   }
   function flagOn() {
@@ -329,6 +333,8 @@
     var b = e.target && e.target.closest && e.target.closest("[data-rv-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-rv-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (/^pf/.test(cmd) && G.SMD_PREPFIX && G.SMD_PREPFIX.act(cmd, arg)) return;
+    if (cmd === "prepedit") { var px = ((S.prep && S.prep.items) || []).filter(function (x) { return x.itemId === arg; })[0]; if (px && G.SMD_PREPFIX) G.SMD_PREPFIX.open(px); return; }
     if (cmd === "prepreload") { S.prep = null; render(); return; }
     if (cmd === "prepun") { prepCall("DELETE", { itemId: arg }).then(function (r) { toast(r.status === 200 ? "Restored. Students see it again within a few hours." : "Restore failed."); S.prep = null; render(); }); return; }
     if (cmd === "kind") { S.kind = arg; S.sel = ""; if (arg === "prep") S.prep = null; if (arg === "bulletin" && G.SMD_BULLETINS_DESK) G.SMD_BULLETINS_DESK.reset(); render(); return; }
@@ -372,7 +378,7 @@
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.
   function openBulletins() { S.wantBulletin = true; open(); }
-  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, _tokosMoreRows: tokosMoreRows, DECISIONS: DECISIONS };
+  var API = { open: open, openBulletins: openBulletins, close: close, _render: render, afterEdit: function (reload) { if (reload) S.prep = null; }, _buildExport: buildExport, _tokosItems: tokosItems, _tokosMore: tokosMore, _tokosMoreRows: tokosMoreRows, DECISIONS: DECISIONS };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   G.SMD_REVIEW = API;
 })(typeof window !== "undefined" ? window : globalThis);

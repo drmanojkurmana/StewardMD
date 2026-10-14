@@ -323,9 +323,26 @@
     if (L.mem[mid]) return Promise.resolve(L.mem[mid]);
     return index().then(function (ix) { var m = ix.modules[mid]; return m && m.from === "bank" ? bankFile(mid, m.r > 1 && m.r < 100 ? m.r | 0 : 0) : appFile(mid); }).then(function (f) {
       f = tidyLesson(f);
-      if (checkLesson(f).length) throw new Error("bad lesson");
-      return (L.mem[mid] = f);
+      // Corrections by owners and registered signers (functions/_prepfix.js), keyed by the lesson key inside its module.
+      return (host && host.fixes ? host.fixes((f && f.module) || mid) : Promise.resolve(null)).then(function (fx) {
+        if (fx && fx.l && fx.l[mid]) applyLessonFix(f, fx.l[mid]);
+        if (checkLesson(f).length) throw new Error("bad lesson");
+        return (L.mem[mid] = f);
+      });
     });
+  }
+  // Same rules as applyLessonFix in functions/_prepfix.js: new text per step; a new figure replaces the step's visual.
+  function applyLessonFix(les, fx) {
+    if (fx.title) les.title = fx.title;
+    var steps = fx.steps || {};
+    Object.keys(steps).forEach(function (k) {
+      var st = les.steps && les.steps[Number(k)], f = steps[k]; if (!st) return;
+      if (f.tx != null) st.tx = f.tx;
+      if (f.say != null) st.say = f.say;
+      if (f.fig) st.vis = { kind: "image", src: f.fig.src, alt: f.fig.alt, caption: f.fig.caption || "" };
+    });
+    les._fx = fx.ts || 1;
+    return les;
   }
   function store() { var s = host.store(); if (!s.ls) s.ls = {}; if (!s.lsp) s.lsp = { r: 1, au: 0 }; return s; }
 
@@ -1008,5 +1025,5 @@
     });
   }
 
-  G.PREP_LESSONS = { mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
+  G.PREP_LESSONS = { file: function (mid, h) { if (!host) host = h; return lessonFile(mid); }, mount: mount, subjectButton: subjectButton, openSubject: openSubject, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);

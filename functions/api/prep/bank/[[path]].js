@@ -81,7 +81,8 @@ export async function onRequestGet({ env, params }) {
   try { obj = await bucket.get(PREFIX + p); } catch (e) { return new Response(JSON.stringify({ error: "bank-unavailable" }), { status: 503, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "Retry-After": "5" } }); }
   if (!obj) return notFound();
   const headers = new Headers({
-    "Content-Type": /\.webp$/.test(p) ? "image/webp" : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
+    // An image uploaded by an editor (functions/api/prep/fix.js) may be a JPEG or PNG stored under a .webp key: say what it is.
+    "Content-Type": /\.webp$/.test(p) ? (obj.httpMetadata && /^image\/(?:webp|jpeg|png)$/.test(obj.httpMetadata.contentType || "") ? obj.httpMetadata.contentType : "image/webp") : /\.svg$/.test(p) ? "image/svg+xml" : "application/json; charset=utf-8",
     // manifest.json and the pyq/lessons/cards/ids/links/quality/tests index.json name the current files, so they may change; everything else is immutable
     "Cache-Control": /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik|tests)\/index)\.json$/.test(p) ? "public, max-age=300" : "public, max-age=31536000, immutable",
     "X-Content-Type-Options": "nosniff",
