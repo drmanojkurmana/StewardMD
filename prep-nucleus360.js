@@ -375,14 +375,47 @@
       });
     });
   }
+  /* The plan's subjects (the NEET-SS group, the one INI-SS subject), or null: the hub lists everything without
+     an exam-scoped plan. History and confidence stay untouched; only the listing narrows. */
+  function scopeKeep() {
+    try {
+      if (!H || !H.planSubjects || (H.planNeed && H.planNeed())) return null;
+      var st = H.store ? H.store() : null;
+      if (!st || !st.pl || (st.pl.exam !== "neet-ss" && st.pl.exam !== "ini-ss")) return null;
+      var keep = {};
+      (H.planSubjects() || []).forEach(function (sb) { keep[sb.id] = 1; });
+      return keep;
+    } catch (e) { return null; }
+  }
+  // A group with no Nucleus360 topics keeps the whole hub: an empty hub helps nobody.
+  function scopeTopics(topics) {
+    var keep = scopeKeep();
+    if (!keep) return { topics: topics, scoped: false };
+    var out = topics.filter(function (t) {
+      var pairs = t.modules || [];
+      for (var i = 0; i < pairs.length; i++) if (keep[pairs[i][0]]) return true;
+      return !!keep[t.subject];
+    });
+    if (!out.length) return { topics: topics, scoped: false };
+    return { topics: out, scoped: true };
+  }
+  function scopeName() {
+    try {
+      if (!H || !H.planScopeLabel) return "";
+      return H.planScopeLabel() || "";
+    } catch (e) { return ""; }
+  }
   function openHub(pre) {
     loadTopics().then(function (topics) {
+      var sc = scopeTopics(topics);
+      topics = sc.topics;
       var q = (pre || "").toLowerCase();
       var rows = topics.filter(function (t) { return !q || t.title.toLowerCase().indexOf(q) >= 0; }).slice(0, 60).map(function (t) {
         return H.row("n360-topic", H.ico("search"), escH(t.title), escH((t.subject || "") + (t.n ? " · " + t.n + " MCQs" : "")), ' data-t="' + escH(t.id) + '"');
       }).join("");
+      var scopeLine = sc.scoped && scopeName() ? '<p class="pn-mut pn-small">' + escH(scopeName()) + ": topics from your subjects.</p>" : "";
       H.push(function () {
-        H.paint(H.bar(escH(NUCLEUS360.name), escH(NUCLEUS360.tagline), "back") + '<div class="pn-body"><p class="pn-mut">Pick a topic to cover it A to Z through MCQs, in chapter order.</p>' +
+        H.paint(H.bar(escH(NUCLEUS360.name), escH(NUCLEUS360.tagline), "back") + '<div class="pn-body"><p class="pn-mut">Pick a topic to cover it A to Z through MCQs, in chapter order.</p>' + scopeLine +
           '<p><input id="pnN360Q" class="pn-in" type="search" placeholder="Search a topic, e.g. Pancreatic adenocarcinoma" value="' + escH(pre || "") + '" aria-label="Search topics"></p>' +
           '<div class="pn-group" id="pnN360Rows">' + (rows || '<p class="pn-empty">No topic matches. The chapter list is growing; try the QBank modules.</p>') + "</div></div>");
         var inp = H.root() && H.root().querySelector("#pnN360Q");
@@ -393,6 +426,7 @@
   function openHubLive(q, topics) {
     var box = H.root() && H.root().querySelector("#pnN360Rows");
     if (!box) return;
+    topics = scopeTopics(topics).topics;
     q = (q || "").toLowerCase();
     box.innerHTML = topics.filter(function (t) { return !q || t.title.toLowerCase().indexOf(q) >= 0; }).slice(0, 60).map(function (t) {
       return H.row("n360-topic", H.ico("search"), escH(t.title), escH((t.subject || "") + (t.n ? " · " + t.n + " MCQs" : "")), ' data-t="' + escH(t.id) + '"');
