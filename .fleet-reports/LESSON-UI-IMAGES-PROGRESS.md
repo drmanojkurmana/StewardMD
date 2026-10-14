@@ -61,7 +61,7 @@
 
 ## Update 2026-10-14 (Medical SVGs: Pharma, Micro, Path, Biochem)
 
-- **Lead Note 15:05**: Anatomy and Physiology are owned by a separate subagent and were skipped.
+- **Lead Note 15:05**: Anatomy and Physiology were temporarily owned by a separate subagent and were skipped in this pass.
 - **12 New Original Medical SVGs**: Authored in `prep/lessons/media/` following project palette (#071318 / #0D1D23 / #42CDB5 / #0B6B5B / #B7791F / #B42318), viewBox 800x520 (ar = 1.538462), accessible `<title>`/`<desc>` + step alt text & captions, clean SVG geometry, all numbers verified by recomputation:
   - Pharmacology: `pharma-dose-response.svg`, `pharma-therapeutic-index.svg`, `pharma-elimination-kinetics.svg`
   - Microbiology: `micro-cell-wall.svg`, `micro-growth-curve.svg`, `micro-antibody-response.svg`
@@ -81,5 +81,21 @@
   - `bio-purine-pyrimidine` (step 4)
 - **Validation**: All 11 lessons pass `P.checkLesson(l)` cleanly (0 errors).
 - **Attribution**: Updated `prep/lessons/media/ATTRIBUTION.md`.
-- **Tests**: 47/47 unit tests pass; browser UI suites `test/run-prep-lessons-ui.mjs` and `test/run-prep-ui.mjs` pass 100% (ALL PASS).
+
+## Update 2026-10-14 (Anatomy & Physiology Diagrams, Lead Note 16:00)
+
+- **Lead Note 16:00 Compliance**: The Claude subagent for Anatomy and Physiology was stopped. Anatomy and Physiology returned to our ownership.
+- **Integrated Work**: Inspected `/private/tmp/claude-img-wt` (`claude-img-1014`), cherry-picked all 5 commits (`5c662ccfe`, `29ea042c8`, `51d6c9ec8`, `92aef44a9`, `7297732a1`), including text-legibility width patch (`cw = min(cw, 560)`). Safely removed `/private/tmp/claude-img-wt`.
+- **Anatomy**: 74 of 80 lessons now wired with clean, labelled SVGs (batches 1 & 2: 169 SVGs across 123 lessons).
+- **Physiology**: 45 of 49 lessons wired with custom curves, axes, Wiggers, Frank-Starling, and pathway figures (batches 1 & 2).
+- **Audit Update**: Total 1,449 lessons, 161 now carry verified diagrams (1,288 imageless across all 60 subjects). Detailed inventory written to `.fleet-reports/LESSON-IMAGE-AUDIT.md`.
+
+## Update 2026-10-14 (Upper Controls Unification, Section A Owner Correction)
+
+- **Design Reference**: Bottom player bar untouched; tokens, fills, radii, heights, typography, and press states adopted by all upper controls.
+- **Header Controls**: Back circle (`.pn-ib`), share circle (`.pi-sb`), and "Auto" pill (`.pn-lsn-auto`) styled with `var(--pn-s1)` fill, `var(--pn-r-pill)`/50% radius, 44px min touch target, shadowless surface, and `scale(.95)` press feedback.
+- **ID Metadata**: Single quiet line with centered `.pn-act-meta` and tap-to-copy pill `.pn-act-chip.pi-chip` (44px min height, 14px padding, `scale(.97)` press).
+- **Action Buttons**: Uniform icon+label filled pills in `prep-action-row.css` matching player bar language.
+- **Test Passes**: `run-prep-ids-ui.mjs` (ALL PASS), `run-prep-lessons-ui.mjs` (ALL PASS), `run-prep-ui.mjs` (ALL PASS), unit suites (action-row, lessons, prep-server 100% PASS).
+
 

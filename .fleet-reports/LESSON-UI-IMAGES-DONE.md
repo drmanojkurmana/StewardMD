@@ -122,3 +122,23 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   - Unit test suite: 47/47 passing (0 failed).
   - Browser CDP test suites: `test/run-prep-lessons-ui.mjs` (ALL PASS) and `test/run-prep-ui.mjs` (ALL PASS).
 
+## Addendum 2026-10-14 (Anatomy & Physiology Diagrams, Lead Note 16:00)
+
+- **Ownership Handover**: Following Lead Note 16:00, the Claude subagent work for Anatomy and Physiology was retrieved from `/private/tmp/claude-img-wt` (`claude-img-1014`). All 5 commits were cherry-picked into `lessonui-1013`, incorporating text legibility fixes (`cw = min(cw, 560)`). The temporary worktree was subsequently removed.
+- **Diagram Inventory**:
+  - Anatomy: 74 of 80 lessons covered with 169 custom SVG diagrams (batches 1 & 2).
+  - Physiology: 45 of 49 lessons covered with custom curve, axis, Wiggers, Frank-Starling, and pathway figures.
+- **Audit Update**: 161 total lessons with images out of 1,449 lessons (1,288 imageless across 60 subjects). Detailed inventory generated in `.fleet-reports/LESSON-IMAGE-AUDIT.md`.
+
+## Addendum 2026-10-14 (Upper Controls Unification, Section A Owner Correction)
+
+- **Visual Reference**: The bottom player bar is the pristine visual design reference and remains untouched.
+- **Upper Controls Styling**:
+  - Restyled header back circle (`.pn-ib`), share circle (`.pi-sb`), and "Auto" pill (`.pn-lsn-auto`) to share the bottom bar's fills (`var(--pn-s1)`), radii (`var(--pn-r-pill)`/50%), 44px min height/touch targets, quiet shadow-less surfaces, and `scale(.95)` press feedback.
+  - Centered ID metadata line `.pn-act-meta` with tap-to-copy pill `.pn-act-chip.pi-chip` (44px min height, 14px padding, `scale(.97)` press).
+  - Uniform icon+label filled pill buttons across Report, Share, and Bookmark.
+- **Testing & Compliance**:
+  - Web design guidelines compliance pass: 44px touch targets, focus-visible outlines, reduced-motion overrides, light & dark theme compatibility via CSS variables.
+  - Browser test suites verified: `test/run-prep-ids-ui.mjs` (ALL PASS), `test/run-prep-lessons-ui.mjs` (ALL PASS), `test/run-prep-ui.mjs` (ALL PASS).
+
+

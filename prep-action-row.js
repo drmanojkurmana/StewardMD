@@ -84,8 +84,8 @@
   function metaHtml(meta) {
     if (!meta || !meta.length) return "";
     return '<p class="pn-act-meta">' + meta.filter(function (m) { return m && m.value; }).map(function (m) {
-      return '<button type="button" class="pn-act-chip" data-copy-id="' + esc(m.value) + '" data-pearl-copy="' + esc(m.value) + '" aria-label="Copy ' + esc(m.label || "ID") + " " + esc(m.value) + '">' +
-        '<span class="pn-act-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v">' + esc(m.value) + '</span></button>';
+      return '<button type="button" class="pn-act-chip pi-chip" data-copy-id="' + esc(m.value) + '" data-pearl-copy="' + esc(m.value) + '" data-act="id-copy" data-v="' + esc(m.value) + '" aria-label="Copy ' + esc(m.label || "ID") + " " + esc(m.value) + '">' +
+        '<span class="pn-act-chip-k pi-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v pi-chip-v">' + esc(m.value) + '</span></button>';
     }).join("") + '<span class="pn-act-copied" role="status" aria-live="polite"></span></p>';
   }
   function actionRowHtml(opts) {
@@ -122,7 +122,7 @@
   function openSheet(doc, item, onSend) {
     lastTrigger = doc.activeElement || null; closeSheet(doc);
     var w = doc.createElement("div"); w.innerHTML = reportSheetHtml(item);
-    var el = w.firstChild; doc.body.appendChild(el);
+    var el = w.firstChild; (doc.getElementById("smdPrep") || doc.body).appendChild(el);
     var form = el.querySelector(".pn-rpt-form"), text = el.querySelector(".pn-rpt-text"), count = el.querySelector(".pn-rpt-count"), err = el.querySelector(".pn-rpt-err");
     text.addEventListener("input", function () { count.textContent = text.value.length + " / " + MAX_TEXT; });
     el.querySelector("[data-rpt-cancel]").addEventListener("click", function () { closeSheet(doc); });
