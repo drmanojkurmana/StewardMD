@@ -83,7 +83,7 @@ const wave2Lessons = [
         say: "The central nervous system is enclosed by three meninges: dura mater, arachnoid mater and pia mater. The tough dura forms reflections including the falx cerebri and tentorium cerebelli. The subarachnoid space between arachnoid and pia carries cerebrospinal fluid and major cerebral vessels.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Gross brain architecture and meningeal relationships",
           caption: "Overview of cerebral hemispheres, brainstem, cerebellar structures and intracranial compartments."
         }
@@ -171,7 +171,7 @@ const wave2Lessons = [
         say: "Berry aneurysms develop at arterial bifurcations within the Circle of Willis due to internal elastic lamina defects. The anterior communicating artery is the most frequent site, followed by the posterior communicating artery. Rupture leads to subarachnoid hemorrhage with sudden thunderclap headache.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Circle of Willis and cerebral blood supply",
           caption: "Basal arterial polygon showing relationships between internal carotid, basilar, anterior and posterior cerebral arteries."
         }
@@ -232,7 +232,7 @@ const wave2Lessons = [
         say: "Posterior cerebral artery infarction of the calcarine cortex causes contralateral homonymous hemianopia. Central vision is often preserved, termed macular sparing. This occurs because the occipital pole receives dual collateral supply from the middle cerebral artery.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-eye-gross.png",
+          src: "prep/lessons/media/ap-eye-gross.webp",
           alt: "Ocular apparatus and visual sensory projections",
           caption: "Structure of the ocular globe and retinal architecture projecting central sensory axons to intracranial visual pathways."
         }
@@ -293,7 +293,7 @@ const wave2Lessons = [
         say: "Disruption of the sympathetic pathway causes Horner syndrome, presenting with ptosis, miosis and anhidrosis. Ptosis stems from superior tarsal muscle weakness, miosis from unopposed sphincter pupillae action, and anhidrosis from loss of sudomotor tone, commonly seen in Pancoast apical lung tumours.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-eye-gross.png",
+          src: "prep/lessons/media/ap-eye-gross.webp",
           alt: "Pupillary control pathways and autonomic innervation",
           caption: "Autonomic regulation of iris musculature showing sympathetic dilation and parasympathetic constrictor loops."
         }
@@ -356,7 +356,7 @@ const wave2Lessons = [
         say: "The arcuate fasciculus connects Wernicke area to Broca area. Disruption causes conduction aphasia, where speech is fluent and comprehension is intact, but repetition is markedly impaired. Lesions of the dominant angular gyrus produce Gerstmann syndrome with agraphia, acalculia and finger agnosia.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Cerebral cortex functional regions and lateral convexity",
           caption: "Lateral surface of the cerebral hemisphere illustrating frontal expressive, temporal receptive, and parietal association regions."
         }
@@ -419,7 +419,7 @@ const wave2Lessons = [
         say: "Alternating hemiplegias feature ipsilateral cranial nerve signs with contralateral body deficits. Weber syndrome in the midbrain causes ipsilateral third nerve palsy with contralateral hemiplegia. Wallenberg syndrome in the lateral medulla causes dysphagia, Horner syndrome, ataxia, and crossed sensory loss.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Brainstem cross-sections and long tract topography",
           caption: "Midbrain, pons and medulla cross-sections showing cranial nerve nuclei and intersecting corticospinal pathways."
         }
@@ -484,7 +484,7 @@ const wave2Lessons = [
         say: "The second part of the duodenum receives the common bile duct and pancreatic duct at the ampulla of Vater. The third part runs horizontally between the abdominal aorta posteriorly and superior mesenteric artery anteriorly, vulnerable to compression in superior mesenteric artery syndrome.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-stomach-gross.png",
+          src: "prep/lessons/media/ap-stomach-gross.webp",
           alt: "Gastric and duodenal gross anatomy",
           caption: "Gastroduodenal architecture illustrating gastric curvatures, pylorus, and C-loop duodenal relationships."
         }
@@ -547,7 +547,7 @@ const wave2Lessons = [
         say: "Splenectomy impairs clearance of encapsulated bacteria, creating risk of overwhelming postsplenectomy sepsis from Streptococcus pneumoniae and Neisseria meningitidis. Blood smears demonstrate Howell-Jolly bodies, Heinz bodies and target cells, requiring lifelong vaccination protocols.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-spleen-gross.png",
+          src: "prep/lessons/media/ap-spleen-gross.webp",
           alt: "Splenic gross anatomy and vascular hilum",
           caption: "Gross anatomy of the spleen displaying visceral impressions, fibrous capsule, and branching hilar vessels."
         }
@@ -610,7 +610,7 @@ const wave2Lessons = [
         say: "Segmental bronchi supply ten bronchopulmonary segments in each lung. Each segment is a surgical anatomical unit with an independent tertiary bronchus and pulmonary arterial branch. In contrast, pulmonary veins course through intersegmental connective tissue borders.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-trachea-bronchi-gross.png",
+          src: "prep/lessons/media/ap-trachea-bronchi-gross.webp",
           alt: "Tracheobronchial branching and carina architecture",
           caption: "Tracheobronchial framework depicting cartilage rings, carina bifurcating into primary and lobar bronchi."
         }
@@ -672,7 +672,7 @@ const wave2Lessons = [
         say: "The testis descends retroperitoneally into the scrotum, enclosed by the fibrous tunica albuginea and serous tunica vaginalis. The epididymis caps the posterior testis, maturing and storing spermatozoa before they enter the ductus deferens.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-male-reproductive-gross.png",
+          src: "prep/lessons/media/ap-male-reproductive-gross.webp",
           alt: "Male reproductive and lower urinary structures",
           caption: "Anatomy of the prostate, seminal vesicles, ductus deferens and testicular compartments."
         }
@@ -734,7 +734,7 @@ const wave2Lessons = [
         say: "Bile drains from canaliculi into right and left hepatic ducts, forming the common hepatic duct at the liver hilum. The cystic duct joins the common hepatic duct to form the common bile duct, descending within the hepatoduodenal ligament to the duodenum.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-liver-gross.png",
+          src: "prep/lessons/media/ap-liver-gross.webp",
           alt: "Hepatic architecture and biliary branching",
           caption: "Hepatic surface contours and biliary branching patterns displaying portal triad entry and inferior vena cava."
         }
@@ -797,7 +797,7 @@ const wave2Lessons = [
         say: "The anal canal is divided by the pectinate line. Above the line, tissue is endodermal, supplied by superior rectal vessels, and insensitive to somatic pain. Below the line, tissue is ectodermal, supplied by inferior rectal vessels, and highly sensitive to sharp pain via pudendal nerves.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-large-intestine-gross.png",
+          src: "prep/lessons/media/ap-large-intestine-gross.webp",
           alt: "Large intestine and colorectal morphology",
           caption: "Large bowel contours displaying cecum, appendix base, teniae coli, haustra and rectal flexures."
         }
@@ -859,7 +859,7 @@ const wave2Lessons = [
         say: "Waldeyer tonsillar ring guards the aerodigestive portal. It consists of the superior adenoid tonsil, bilateral tubal tonsils, lateral palatine tonsils between faucial pillars, and the lingual tonsil at the tongue base, providing first line immune defense.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-throat-pharynx-gross.png",
+          src: "prep/lessons/media/ap-throat-pharynx-gross.webp",
           alt: "Pharyngeal spaces and tonsillar ring topography",
           caption: "Pharyngeal mucosal landscape depicting nasopharynx, palatine tonsillar fossa and laryngopharyngeal junctions."
         }
@@ -1207,7 +1207,7 @@ const mcqsBySubject = {
           exp: "An epidural hematoma classical presents as a biconvex lenticular collection confined by cranial sutures, most commonly caused by skull fracture at the pterion lacerating the middle meningeal artery.",
           r: ["Correct. Middle meningeal artery rupture creates a high-pressure biconvex collection bounded by cranial sutures.", "Incorrect. Bridging vein shearing produces a crescentic subdural hematoma that crosses suture lines.", "Incorrect. Dural sinus tears are less common and typically associate with depressed skull fractures.", "Incorrect. Anterior cerebral artery injury causes intracerebral or subarachnoid hemorrhage."],
           kp: "Epidural hematomas arise from middle meningeal artery laceration, producing biconvex collections limited by cranial suture attachments.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1231,7 +1231,7 @@ const mcqsBySubject = {
           exp: "Subdural hematomas result from rupture of delicate bridging cerebral veins spanning the subdural space, forming a crescent-shaped collection that freely crosses cranial suture lines.",
           r: ["Correct. Bridging veins tear easily in elderly patients with brain atrophy, producing crescentic subdural hematomas.", "Incorrect. Middle meningeal artery produces biconvex epidural hematomas that do not cross sutures.", "Incorrect. Internal carotid laceration is an arterial skull base trauma injury.", "Incorrect. Aneurysm rupture causes subarachnoid hemorrhage."],
           kp: "Subdural hematomas result from sheared bridging veins, creating crescent-shaped collections that cross cranial suture lines.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1255,7 +1255,7 @@ const mcqsBySubject = {
           exp: "Dural reflections including the falx cerebri and tentorium cerebelli are formed by duplications of the inner meningeal layer of the cranial dura mater.",
           r: ["Correct. The meningeal layer of dura mater reflects to form intracranial septa including tentorium cerebelli.", "Incorrect. Arachnoid mater lines the dura but does not form rigid dural folds.", "Incorrect. Pia mater closely invests cerebral parenchyma.", "Incorrect. Periosteal dura adheres to inner skull bones."],
           kp: "Dural folds such as the tentorium cerebelli and falx cerebri are formed by the inner meningeal layer of dura mater.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -1303,7 +1303,7 @@ const mcqsBySubject = {
           exp: "Uncal herniation pushes the uncus across the tentorial edge, compressing the ipsilateral oculomotor nerve (CN III). The superficial parasympathetic pupilloconstrictor fibers are damaged first, yielding an ipsilateral blown pupil.",
           r: ["Correct. CN III is compressed against the petroclinoid ligament by the herniating uncus.", "Incorrect. CN IV has the longest intracranial course but is less immediately compressed by uncal mass effect.", "Incorrect. CN VI is vulnerable to downward traction from elevated intracranial pressure.", "Incorrect. Trigeminal nerve lies in Meckel cave."],
           kp: "Uncal herniation compresses the ipsilateral oculomotor nerve, leading to ipsilateral pupillary dilation and sluggish light reflex.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1334,7 +1334,7 @@ const mcqsBySubject = {
           exp: "The anterior cerebral artery supplies the medial aspect of the hemisphere representing the leg and foot on the motor and sensory homunculi, plus the paracentral lobule controlling micturition.",
           r: ["Correct. Right ACA infarction affects medial motor and sensory cortex for the contralateral leg and micturition center.", "Incorrect. MCA stroke predominantly impairs face and upper extremity strength.", "Incorrect. Left MCA stroke causes right sided face/arm weakness and aphasia.", "Incorrect. PCA infarction causes contralateral homonymous hemianopia."],
           kp: "Anterior cerebral artery occlusion causes contralateral leg and foot weakness, sensory loss, and urinary incontinence.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1346,7 +1346,7 @@ const mcqsBySubject = {
           exp: "The left (dominant) middle cerebral artery supplies the lateral cortex including Broca and Wernicke areas and the motor homunculus for face and arm.",
           r: ["Correct. Left MCA stroke causes right face/arm weakness, sensory deficit, and aphasia.", "Incorrect. Left ACA stroke causes leg greater than arm weakness.", "Incorrect. Right MCA stroke causes left hemiparesis and hemineglect.", "Incorrect. Basilar artery occlusion produces bilateral brainstem signs or locked-in state."],
           kp: "Dominant middle cerebral artery stroke produces contralateral face and arm weakness along with expressive or receptive aphasia.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1370,7 +1370,7 @@ const mcqsBySubject = {
           exp: "The oculomotor nerve runs directly adjacent to the junction of the internal carotid and posterior communicating artery. PCOM aneurysms compress CN III, causing painful third nerve palsy with an unreactive dilated pupil.",
           r: ["Correct. PCOM aneurysm classically causes painful oculomotor nerve palsy with pupillomotor involvement.", "Incorrect. CN IV runs more laterally along the tentorial edge.", "Incorrect. CN VI runs within Dorello canal in the cavernous sinus.", "Incorrect. V1 provides corneal sensation."],
           kp: "Posterior communicating artery aneurysm classically produces painful third cranial nerve palsy with pupillary involvement.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1394,7 +1394,7 @@ const mcqsBySubject = {
           exp: "Lenticulostriate arteries supply the basal ganglia and the posterior limb of the internal capsule. Lacunar infarction here produces pure motor stroke involving face, arm, and leg equally.",
           r: ["Correct. Lenticulostriate stroke damages the posterior limb of internal capsule, causing pure motor hemiparesis.", "Incorrect. Bitemporal hemianopia results from chiasm compression.", "Incorrect. Wallenberg syndrome stems from PICA or vertebral occlusion.", "Incorrect. Broca aphasia requires cortical infarction."],
           kp: "Lenticulostriate arterial occlusion causes lacunar strokes in the internal capsule, manifesting as pure motor hemiparesis.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1430,7 +1430,7 @@ const mcqsBySubject = {
           exp: "The cavernous sinus encloses CN III, IV, V1, V2, and VI, along with the internal carotid artery. Cavernous sinus thrombosis produces proptosis, chemosis, and painful ophthalmoplegia.",
           r: ["Correct. Cavernous sinus thrombosis compresses CN III, IV, V1, V2, and VI traversing its walls and lumen.", "Incorrect. Superior sagittal sinus thrombosis causes headache, seizures, and elevated ICP.", "Incorrect. Sigmoid sinus thrombosis causes mastoid tenderness (Griesinger sign).", "Incorrect. Internal jugular thrombosis impairs systemic venous outflow."],
           kp: "Cavernous sinus thrombosis presents with chemosis, proptosis, and ophthalmoplegia due to involvement of CN III, IV, V1, V2, and VI.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1442,7 +1442,7 @@ const mcqsBySubject = {
           exp: "The basilar artery ascends along the ventral pons and terminates at the upper pontine border by bifurcating into the paired posterior cerebral arteries.",
           r: ["Correct. The basilar artery terminates by dividing into both posterior cerebral arteries.", "Incorrect. Internal carotid gives off ACA, MCA, PCOM, and anterior choroidal.", "Incorrect. Vertebral arteries unite to form the basilar artery.", "Incorrect. AICA is a branch of the lower basilar trunk."],
           kp: "The posterior cerebral arteries originate as the terminal bifurcation branches of the basilar artery.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -1461,7 +1461,7 @@ const mcqsBySubject = {
           exp: "Pituitary adenomas expand upward from the sella, compressing the decussating nasal retinal axons in the optic chiasm, leading to loss of both temporal visual fields (bitemporal hemianopia).",
           r: ["Correct. Compression of decussating nasal retinal fibers causes bitemporal hemianopia.", "Incorrect. Right optic tract lesion causes left homonymous hemianopia.", "Incorrect. Temporal lobe lesion damaging Meyer loop causes superior quadrantanopia.", "Incorrect. Monocular blindness requires pre-chiasmatic optic nerve damage."],
           kp: "Chiasmal compression by pituitary tumors damages crossing nasal retinal fibers, causing bitemporal hemianopia.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1473,7 +1473,7 @@ const mcqsBySubject = {
           exp: "Meyer loop fibers represent the inferior retina (superior visual field) and course through the temporal lobe. Right-sided injury produces contralateral superior quadrantanopia (pie in the sky).",
           r: ["Correct. Right Meyer loop damage causes contralateral superior quadrantanopia (pie in the sky).", "Incorrect. Inferior quadrantanopia results from parietal optic radiation damage.", "Incorrect. Complete hemianopia requires complete tract or radiation destruction.", "Incorrect. Bitemporal defect occurs only at the chiasm."],
           kp: "Temporal lobe lesions damaging Meyer loop produce contralateral superior quadrantanopia (pie in the sky).",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1485,7 +1485,7 @@ const mcqsBySubject = {
           exp: "Macular sparing occurs in PCA cortical strokes because the occipital pole representing the macula receives rich collateral arterial flow from terminal branches of the middle cerebral artery.",
           r: ["Correct. Collateral flow from terminal branches of the middle cerebral artery preserves occipital pole perfusion.", "Incorrect. Retinal projections do not duplicate foveal representations across the chiasm.", "Incorrect. Frontal eye fields control voluntary saccades, not sensory visual perception.", "Incorrect. The lesion is in the occipital cortex, not the chiasm."],
           kp: "Macular sparing in posterior cerebral artery strokes is due to collateral perfusion from middle cerebral artery terminal branches.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "analysis"
         },
@@ -1509,7 +1509,7 @@ const mcqsBySubject = {
           exp: "The left optic tract carries axons from the left temporal hemiretina and right nasal hemiretina, representing the entire right visual hemifield. A lesion produces complete right homonymous hemianopia.",
           r: ["Correct. Left optic tract destruction abolishes perception of the entire right visual hemifield.", "Incorrect. Left hemianopia requires a right retrochiasmal lesion.", "Incorrect. Bitemporal hemianopia requires central chiasm compression.", "Incorrect. Monocular left eye blindness requires left optic nerve transection."],
           kp: "Lesions of the optic tract or complete retrochiasmal pathway cause contralateral homonymous hemianopia.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1545,7 +1545,7 @@ const mcqsBySubject = {
           exp: "A relative afferent pupillary defect (RAPD) occurs when swinging flashlight test reveals paradoxical pupillary dilation when light moves from the normal eye to the eye with damaged afferent optic nerve, classic in optic neuritis.",
           r: ["Correct. Optic neuritis causes an afferent defect manifesting as a Marcus Gunn pupil.", "Incorrect. Horner syndrome is an efferent sympathetic defect.", "Incorrect. CN III palsy is an efferent parasympathetic defect causing fixed mydriasis.", "Incorrect. Argyll Robertson pupils accommodate but do not react to light, seen in neurosyphilis."],
           kp: "Optic neuritis damages afferent pupillary signaling, producing a Marcus Gunn pupil on swinging flashlight examination.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1569,7 +1569,7 @@ const mcqsBySubject = {
           exp: "Lateral compression of the optic chiasm damages the uncrossed temporal retinal axons from both eyes, causing loss of both nasal visual fields (binasal hemianopia).",
           r: ["Correct. Bilateral lateral chiasmal compression selectively damages uncrossed temporal retinal fibers, causing binasal hemianopia.", "Incorrect. Medial central compression causes bitemporal hemianopia.", "Incorrect. Unilateral tract lesions cause homonymous hemianopia.", "Incorrect. Total blindness requires complete bilateral optic nerve disruption."],
           kp: "Lateral chiasmal compression damages uncrossed temporal fibers, producing binasal hemianopia.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 3,
           cog: "analysis"
         }
@@ -1588,7 +1588,7 @@ const mcqsBySubject = {
           exp: "Broca aphasia is characterized by non-fluent, effortful expressive speech with preserved comprehension, localized to Brodmann areas 44 and 45 in the inferior frontal gyrus of the dominant hemisphere.",
           r: ["Correct. Broca expressive aphasia localizes to the dominant inferior frontal gyrus.", "Incorrect. Wernicke aphasia features fluent speech with severely impaired comprehension.", "Incorrect. Conduction aphasia features fluent speech with intact comprehension and isolated repetition failure.", "Incorrect. Angular gyrus lesions cause Gerstmann syndrome."],
           kp: "Broca aphasia localizes to the dominant inferior frontal gyrus, causing non-fluent speech with preserved comprehension.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1600,7 +1600,7 @@ const mcqsBySubject = {
           exp: "Wernicke aphasia is characterized by fluent but meaningless speech (word salad), impaired comprehension, and lack of awareness (anosognosia), localizing to Brodmann area 22 in the posterior superior temporal gyrus.",
           r: ["Correct. Brodmann area 22 is Wernicke area, mediating language comprehension.", "Incorrect. Areas 44 and 45 constitute Broca expressive area.", "Incorrect. Area 4 is primary motor cortex.", "Incorrect. Area 17 is primary visual cortex."],
           kp: "Wernicke aphasia is a receptive fluent aphasia with impaired comprehension localized to Brodmann area 22.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1624,7 +1624,7 @@ const mcqsBySubject = {
           exp: "Gerstmann syndrome (tetrad of agraphia, acalculia, finger agnosia, right-left confusion) localizes to the angular gyrus (Brodmann area 39) of the dominant parietal lobe.",
           r: ["Correct. Dominant angular gyrus lesions produce Gerstmann syndrome.", "Incorrect. Precentral gyrus lesions cause hemiplegia.", "Incorrect. Superior temporal lesions cause Wernicke aphasia.", "Incorrect. Cingulate lesions cause akinetic mutism or emotional blunting."],
           kp: "Gerstmann syndrome (agraphia, acalculia, finger agnosia, right-left disorientation) localizes to the dominant angular gyrus.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -1636,7 +1636,7 @@ const mcqsBySubject = {
           exp: "Non-dominant (typically right) parietal lobe lesions cause contralateral hemispatial neglect and anosognosia (denial of illness), where patients disregard the contralateral sensory environment.",
           r: ["Correct. Non-dominant parietal lesions cause contralateral spatial hemineglect and anosognosia.", "Incorrect. Kluver-Bucy syndrome results from bilateral amygdala lesions.", "Incorrect. Gerstmann syndrome occurs in dominant parietal lobe lesions.", "Incorrect. Anton syndrome is visual anosognosia from bilateral occipital destruction."],
           kp: "Non-dominant right parietal lobe infarction leads to profound contralateral hemispatial neglect and anosognosia.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1660,7 +1660,7 @@ const mcqsBySubject = {
           exp: "The motor homunculus is inverted: lower extremity representation lies on the medial surface within the anterior cerebral artery territory, while hands and face occupy the lateral convexity (MCA territory).",
           r: ["Correct. Lower extremity motor control occupies the medial cortex in the ACA territory.", "Incorrect. Lateral convexity controls face, tongue, and hand movements.", "Incorrect. Middle convexity controls trunk and shoulder.", "Incorrect. Prefrontal cortex governs executive planning."],
           kp: "On the motor homunculus, the lower limb is mapped onto the medial cortex, while the upper limb and face occupy the lateral convexity.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1696,7 +1696,7 @@ const mcqsBySubject = {
           exp: "The calcarine branch of the posterior cerebral artery provides the primary arterial perfusion to the primary visual cortex lining the calcarine fissure on the medial occipital surface.",
           r: ["Correct. Calcarine branch of PCA supplies primary visual cortex.", "Incorrect. MCA supplies lateral hemispheric convexity.", "Incorrect. ACA supplies medial frontal and anterior parietal surfaces.", "Incorrect. SCA supplies superior cerebellar hemisphere."],
           kp: "The primary visual cortex along the calcarine fissure is supplied by the calcarine artery of the posterior cerebral artery.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -1727,7 +1727,7 @@ const mcqsBySubject = {
           exp: "Weber syndrome is an alternating midbrain syndrome caused by occlusion of paramedian branches of PCA, damaging the exiting CN III fascicles and the adjacent cerebral peduncle (corticospinal tract).",
           r: ["Correct. Weber syndrome features ipsilateral CN III palsy and contralateral hemiparesis.", "Incorrect. Wallenberg syndrome damages lateral medulla with CN IX/X and sensory signs.", "Incorrect. Millard-Gubler syndrome features CN VI/VII palsy with contralateral hemiplegia.", "Incorrect. Dejerine syndrome features CN XII palsy with contralateral hemiplegia."],
           kp: "Weber syndrome localizes to the midbrain, presenting with ipsilateral CN III palsy and contralateral hemiplegia.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1739,7 +1739,7 @@ const mcqsBySubject = {
           exp: "Wallenberg (lateral medullary) syndrome results from PICA or vertebral artery occlusion. It damages nucleus ambiguus (dysphagia/hoarseness), spinal trigeminal tract (ipsilateral face numbness), and spinothalamic tract (contralateral body numbness).",
           r: ["Correct. Wallenberg syndrome is caused by PICA occlusion damaging lateral medulla.", "Incorrect. AICA occlusion causes lateral pontine syndrome with facial nerve palsy and deafness.", "Incorrect. Basilar artery causes locked-in state or bilateral pontine ischemia.", "Incorrect. Superior cerebellar artery causes ipsilateral cerebellar ataxia without crossed sensory loss."],
           kp: "Wallenberg lateral medullary syndrome results from PICA occlusion, causing dysphagia, hoarseness, Horner syndrome, and crossed analgesia.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1751,7 +1751,7 @@ const mcqsBySubject = {
           exp: "The rule of four states that 4 cranial nerves emerge from the medulla: glossopharyngeal (IX), vagus (X), accessory (XI), and hypoglossal (XII).",
           r: ["Correct. CN IX, X, XI, and XII exit from the medulla oblongata.", "Incorrect. CN V, VI, VII, and VIII emerge from the pons.", "Incorrect. CN III and IV exit from the midbrain.", "Incorrect. CN I and II are forebrain structures."],
           kp: "The medulla oblongata houses and gives exit to cranial nerves IX, X, XI, and XII.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1763,7 +1763,7 @@ const mcqsBySubject = {
           exp: "Millard-Gubler syndrome is a ventral pontine alternating syndrome damaging exiting CN VI and VII fascicles along with the corticospinal tract.",
           r: ["Correct. Millard-Gubler syndrome involves ventral pons, affecting CN VI, VII, and corticospinal tract.", "Incorrect. Weber involves midbrain CN III.", "Incorrect. Wallenberg involves lateral medulla.", "Incorrect. Dejerine involves medial medulla with CN XII."],
           kp: "Millard-Gubler syndrome localizes to the ventral pons, causing ipsilateral CN VI and VII palsies with contralateral hemiparesis.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1787,7 +1787,7 @@ const mcqsBySubject = {
           exp: "Dejerine (medial medullary) syndrome is caused by anterior spinal artery or paramedian vertebral occlusion, damaging the hypoglossal nucleus/nerve (tongue deviates to lesion side) and corticospinal tract.",
           r: ["Correct. Right medial medullary infarction damages right CN XII and uncrossed corticospinal fibers.", "Incorrect. Lateral medulla spares CN XII and motor fibers.", "Incorrect. Midbrain lesions involve CN III, not CN XII.", "Incorrect. Internal capsule lesions produce contralateral face/arm/leg weakness without tongue atrophy."],
           kp: "Medial medullary syndrome damages CN XII (tongue deviates towards lesion) and corticospinal tract (contralateral hemiparesis).",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1842,7 +1842,7 @@ const mcqsBySubject = {
           exp: "Over 90% of duodenal ulcers occur in the first part of the duodenum (duodenal bulb). Anterior wall ulcers perforate into the peritoneal cavity causing pneumoperitoneum.",
           r: ["Correct. The duodenal bulb (D1) is the most frequent site of peptic ulcers and anterior perforation.", "Incorrect. D3 is rarely affected by primary peptic ulcer disease.", "Incorrect. Gastric fundus ulcers are uncommon compared to antral and duodenal bulb lesions.", "Incorrect. D2 ulcers are much less common."],
           kp: "The first part of the duodenum (duodenal bulb) is the predominant site for peptic ulcers, with anterior ulcers perforating into the peritoneum.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1854,7 +1854,7 @@ const mcqsBySubject = {
           exp: "The gastroduodenal artery descends directly posterior to the first part of the duodenum (D1). Chronic posterior ulcers penetrate into this artery, causing massive gastrointestinal hemorrhage.",
           r: ["Correct. Posterior duodenal bulb ulcers erode the gastroduodenal artery, causing torrential bleeding.", "Incorrect. Splenic artery runs along the superior border of the pancreas towards the spleen.", "Incorrect. Left gastric artery supplies the lesser curvature of the stomach.", "Incorrect. Superior mesenteric artery courses posterior to the third part of duodenum."],
           kp: "Posterior duodenal bulb ulcers erode the gastroduodenal artery, leading to massive, life-threatening upper gastrointestinal hemorrhage.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1866,7 +1866,7 @@ const mcqsBySubject = {
           exp: "The short gastric arteries (typically 4 to 6 branches) arise from the splenic artery at the splenic hilum and pass through the gastrosplenic ligament to supply the fundus.",
           r: ["Correct. Short gastric arteries arise from the splenic artery to supply the gastric fundus.", "Incorrect. Right gastric artery supplies the lesser curvature.", "Incorrect. Left gastroepiploic supplies the upper greater curvature.", "Incorrect. Right gastroepiploic supplies the lower greater curvature."],
           kp: "Short gastric arteries from the splenic artery supply the gastric fundus and run within the gastrosplenic ligament.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1878,7 +1878,7 @@ const mcqsBySubject = {
           exp: "In superior mesenteric artery (SMA) syndrome, loss of the retroperitoneal mesenteric fat pad narrows the aortomesenteric angle, compressing the horizontal duodenum between the aorta and SMA.",
           r: ["Correct. SMA syndrome results from compression of D3 between the abdominal aorta and superior mesenteric artery.", "Incorrect. IVC and portal vein are not the compressive clamp in SMA syndrome.", "Incorrect. Celiac trunk lies superior to the duodenum.", "Incorrect. Left renal vein compression between aorta and SMA causes nutcracker syndrome, not duodenal obstruction."],
           kp: "Superior mesenteric artery syndrome compresses the third part of the duodenum between the aorta and the SMA.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -1902,7 +1902,7 @@ const mcqsBySubject = {
           exp: "The ampulla of Vater opens into the posteromedial wall of the second (descending) part of the duodenum at the major duodenal papilla.",
           r: ["Correct. The ampulla of Vater empties into the second (descending) duodenum.", "Incorrect. The first part is the duodenal bulb.", "Incorrect. The third part runs horizontally across the spine.", "Incorrect. The fourth part ascends to the duodenojejunal flexure."],
           kp: "The major duodenal papilla is located on the posteromedial wall of the descending (second) part of the duodenum.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1914,7 +1914,7 @@ const mcqsBySubject = {
           exp: "The left gastric artery is the smallest and first branch arising directly from the celiac trunk, ascending towards the gastroesophageal junction.",
           r: ["Correct. The left gastric artery originates directly from the celiac trunk.", "Incorrect. It does not originate directly from the abdominal aorta.", "Incorrect. Common hepatic is a sister branch from the celiac trunk.", "Incorrect. Splenic is another branch of the celiac trunk."],
           kp: "The left gastric artery is a direct branch of the celiac trunk, supplying the lesser curvature and lower esophagus.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -1950,7 +1950,7 @@ const mcqsBySubject = {
           exp: "The stomach muscularis externa consists of three layers: outer longitudinal, middle circular, and an inner oblique layer that assists in mechanical churning of food into chyme.",
           r: ["Correct. The inner oblique layer is unique to the stomach muscularis externa.", "Incorrect. Middle circular layer exists throughout the GI tract.", "Incorrect. Outer longitudinal layer exists throughout the GI tract.", "Incorrect. Muscularis mucosae is a separate thin mucosal boundary layer."],
           kp: "The stomach uniquely possesses three muscularis externa layers, featuring an inner oblique layer for churning.",
-          img: ["ap-stomach-gross.png"],
+          img: ["ap-stomach-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -1969,7 +1969,7 @@ const mcqsBySubject = {
           exp: "The spleen lies in the left hypochondrium directly protected by the lateral curves of the left 9th, 10th, and 11th ribs. Fractures here frequently lacerate the splenic parenchyma.",
           r: ["Correct. Fractures of left ribs 9 to 11 are most strongly associated with traumatic splenic injury.", "Incorrect. Ribs 1-3 injuries correlate with aortic or subclavian vessel trauma.", "Incorrect. Ribs 5-7 overlie the heart and left lung base.", "Incorrect. Ribs 11-12 overlie the left kidney posteriorly."],
           kp: "Fractures of the left 9th through 11th ribs place the underlying spleen at high risk for parenchymal laceration.",
-          img: ["ap-spleen-gross.png"],
+          img: ["ap-spleen-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -1981,7 +1981,7 @@ const mcqsBySubject = {
           exp: "Short gastric arteries run within the gastrosplenic ligament from the splenic artery to supply the gastric fundus. Aggressive dissection can compromise fundic vascularity.",
           r: ["Correct. Short gastric vessels supply the gastric fundus within the gastrosplenic ligament.", "Incorrect. Gastric antrum is supplied by gastroepiploic and right gastric vessels.", "Incorrect. Pylorus is supplied by right gastric and gastroduodenal branches.", "Incorrect. Lesser curve is supplied by left gastric artery."],
           kp: "The gastrosplenic ligament contains the short gastric arteries supplying the fundus of the stomach.",
-          img: ["ap-spleen-gross.png"],
+          img: ["ap-spleen-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -1993,7 +1993,7 @@ const mcqsBySubject = {
           exp: "The tail of the pancreas lies within the splenorenal ligament and frequently abuts or enters the splenic hilum, creating a high risk of pancreatic fistulas if clamped during splenectomy.",
           r: ["Correct. The pancreatic tail lies in the splenorenal ligament abutting the splenic hilum.", "Incorrect. Left suprarenal gland lies retroperitoneal medial to the kidney.", "Incorrect. Duodenojejunal flexure is located medial to the midline.", "Incorrect. Splenic flexure lies inferiorly, attached by phrenicocolic ligament."],
           kp: "The tail of the pancreas lies within the splenorenal ligament and is vulnerable to iatrogenic injury during splenic hilar ligation.",
-          img: ["ap-spleen-gross.png"],
+          img: ["ap-spleen-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -2053,7 +2053,7 @@ const mcqsBySubject = {
           exp: "The phrenicocolic ligament extends from the splenic flexure of the colon to the diaphragm, serving as the anatomical floor (sustentaculum lienis) supporting the spleen.",
           r: ["Correct. The phrenicocolic ligament supports the inferior splenic pole.", "Incorrect. Gastrosplenic carries short gastric arteries.", "Incorrect. Splenorenal carries splenic vessels and pancreatic tail.", "Incorrect. Falciform attaches liver to anterior wall."],
           kp: "The phrenicocolic ligament (sustentaculum lienis) forms an anatomical shelf supporting the spleen.",
-          img: ["ap-spleen-gross.png"],
+          img: ["ap-spleen-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2077,7 +2077,7 @@ const mcqsBySubject = {
           exp: "The hepatic portal vein is formed posterior to the neck of the pancreas by the confluence of the splenic vein and the superior mesenteric vein.",
           r: ["Correct. The splenic vein and superior mesenteric vein join to form the portal vein.", "Incorrect. Inferior mesenteric vein typically empties into the splenic vein earlier.", "Incorrect. Left renal vein drains into IVC.", "Incorrect. IVC is systemic venous circulation."],
           kp: "The splenic vein unites with the superior mesenteric vein behind the pancreatic neck to form the hepatic portal vein.",
-          img: ["ap-spleen-gross.png"],
+          img: ["ap-spleen-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -2096,7 +2096,7 @@ const mcqsBySubject = {
           exp: "The right main bronchus is wider, shorter, and runs more vertically than the left main bronchus. Aspirated foreign bodies therefore enter the right bronchial tree far more frequently.",
           r: ["Correct. The right main bronchus is more vertical and wider, predisposing to foreign body lodgement.", "Incorrect. Left main bronchus is narrower, longer, and more horizontal.", "Incorrect. Left upper lobe is angled sharply away from the carina.", "Incorrect. Solid foreign bodies typically pass through the tracheal lumen into a bronchus."],
           kp: "Aspirated foreign bodies preferentially enter the right main bronchus due to its wider caliber and more vertical orientation.",
-          img: ["ap-trachea-bronchi-gross.png"],
+          img: ["ap-trachea-bronchi-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -2108,7 +2108,7 @@ const mcqsBySubject = {
           exp: "The trachea bifurcates at the carina, corresponding surface-wise to the sternal angle of Louis (manubriosternal joint) and the T4-T5 intervertebral disc level.",
           r: ["Correct. Tracheal bifurcation occurs at the sternal angle of Louis at T4-T5.", "Incorrect. Xiphisternal joint corresponds to T9.", "Incorrect. Jugular notch corresponds to T2.", "Incorrect. Cricoid cartilage marks tracheal origin at C6."],
           kp: "Tracheal bifurcation occurs at the carina, aligning with the sternal angle of Louis and T4-T5 intervertebral level.",
-          img: ["ap-trachea-bronchi-gross.png"],
+          img: ["ap-trachea-bronchi-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2120,7 +2120,7 @@ const mcqsBySubject = {
           exp: "The isthmus of the thyroid gland crosses anteriorly over the 2nd, 3rd, and 4th tracheal rings in the lower anterior neck.",
           r: ["Correct. The thyroid isthmus overlies the 2nd through 4th tracheal rings.", "Incorrect. Thymus gland lies lower in the anterior superior mediastinum.", "Incorrect. Parathyroid glands lie on the posterior thyroid capsule.", "Incorrect. Submandibular gland lies in the digastric triangle."],
           kp: "The thyroid isthmus crosses directly anterior to tracheal rings 2 to 4, representing a key landmark during tracheostomy.",
-          img: ["ap-trachea-bronchi-gross.png"],
+          img: ["ap-trachea-bronchi-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2144,7 +2144,7 @@ const mcqsBySubject = {
           exp: "The trachealis muscle spans the posterior gap of the C-shaped cartilages. Contraction narrows the lumen, accelerating linear air velocity during explosive coughing.",
           r: ["Correct. Trachealis muscle contracts to narrow airway caliber and boost cough clearance velocity.", "Incorrect. Cricothyroid tenses vocal cords.", "Incorrect. Sternothyroid is an extrinsic strap muscle.", "Incorrect. Bronchialis is an anatomical misnomer."],
           kp: "The trachealis smooth muscle spans the posterior tracheal wall, narrowing luminal diameter to enhance cough velocity.",
-          img: ["ap-trachea-bronchi-gross.png"],
+          img: ["ap-trachea-bronchi-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2180,7 +2180,7 @@ const mcqsBySubject = {
           exp: "The carina is the prominent sagittal ridge of cartilage projecting upward at the bifurcation of the trachea into mainstem bronchi, densely innervated by cough reflex receptors.",
           r: ["Correct. The carina is the mucosal ridge dividing the tracheal bifurcation.", "Incorrect. Conus elasticus forms the vocal ligament.", "Incorrect. Thyroid notch is on the thyroid cartilage.", "Incorrect. Interarytenoid fold lies in the posterior larynx."],
           kp: "The carina is the highly sensitive internal ridge marking the bifurcation of the trachea into primary bronchi.",
-          img: ["ap-trachea-bronchi-gross.png"],
+          img: ["ap-trachea-bronchi-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2223,7 +2223,7 @@ const mcqsBySubject = {
           exp: "The vesicoureteric junction (VUJ) is the narrowest site along the entire ureter as it passes obliquely through the muscular bladder wall, making it the most frequent impaction site for calculi.",
           r: ["Correct. The vesicoureteric junction is the narrowest anatomical site, frequently trapping migrating calculi.", "Incorrect. PUJ is a constriction, but stones that pass it commonly impact at the VUJ.", "Incorrect. Pelvic brim crossing is the second constriction site.", "Incorrect. Mid-lumbar ureter has no anatomical constriction."],
           kp: "The vesicoureteric junction is the narrowest site along the ureter and the most frequent location for calculus impaction.",
-          img: ["ap-urinary-bladder-gross.png"],
+          img: ["ap-urinary-bladder-gross.webp"],
           d: 1,
           cog: "application"
         },
@@ -2235,7 +2235,7 @@ const mcqsBySubject = {
           exp: "The peripheral zone forms approximately 70% of the volume of the prostate gland and accounts for 75% of prostatic adenocarcinomas, which are easily palpated on digital rectal examination.",
           r: ["Correct. Peripheral zone is the primary site of origin for prostatic adenocarcinoma.", "Incorrect. Transition zone is where benign prostatic hyperplasia originates.", "Incorrect. Central zone surrounds the ejaculatory ducts and rarely develops carcinoma.", "Incorrect. Anterior fibromuscular stroma is non-glandular."],
           kp: "Seventy-five percent of prostate adenocarcinomas originate in the peripheral zone, palpated via digital rectal exam.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2247,7 +2247,7 @@ const mcqsBySubject = {
           exp: "Benign prostatic hyperplasia originates almost exclusively within the transition zone surrounding the proximal prostatic urethra, directly compressing the urethral lumen.",
           r: ["Correct. The transition zone surrounding the urethra is the exclusive site of benign prostatic hyperplasia.", "Incorrect. Peripheral zone gives rise to adenocarcinoma.", "Incorrect. Central zone surrounds ejaculatory ducts.", "Incorrect. External sphincter is striated muscle."],
           kp: "Benign prostatic hyperplasia develops within the transition zone of the prostate, leading to bladder outlet obstruction.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2259,7 +2259,7 @@ const mcqsBySubject = {
           exp: "Parasympathetic preganglionic neurons arise from the S2-S4 sacral segments (pelvic splanchnic nerves) to stimulate muscarinic M3 receptors on the detrusor, inducing bladder contraction.",
           r: ["Correct. S2, S3, and S4 provide parasympathetic motor supply to the detrusor muscle.", "Incorrect. T10-T12 mediate sympathetic vasoconstriction.", "Incorrect. L1-L2 mediate sympathetic internal sphincter closure (hypogastric nerve).", "Incorrect. S1 lacks parasympathetic preganglionic outflow."],
           kp: "Sacral parasympathetic nerves from S2-S4 stimulate detrusor muscle contraction and internal sphincter relaxation during micturition.",
-          img: ["ap-urinary-bladder-gross.png"],
+          img: ["ap-urinary-bladder-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2271,7 +2271,7 @@ const mcqsBySubject = {
           exp: "The bladder trigone is bounded superolaterally by the two ureteric orifices and inferiorly by the internal urethral orifice at the bladder neck.",
           r: ["Correct. The trigone is bounded by both ureteric openings and the internal urethral orifice.", "Incorrect. Ejaculatory ducts empty into the prostatic urethra.", "Incorrect. Prostatic utricle is in the urethra.", "Incorrect. Bladder dome is the superior muscular wall."],
           kp: "The bladder trigone is bounded by the paired ureteric orifices and the single internal urethral orifice.",
-          img: ["ap-urinary-bladder-gross.png"],
+          img: ["ap-urinary-bladder-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2283,7 +2283,7 @@ const mcqsBySubject = {
           exp: "Because the testes develop high in the posterior abdominal wall and descend into the scrotum, testicular lymphatic drainage follows the testicular vessels directly to the para-aortic (lumbar) nodes.",
           r: ["Correct. Testicular lymphatic drainage travels directly to para-aortic lymph nodes.", "Incorrect. Superficial inguinal nodes drain scrotal skin.", "Incorrect. Deep inguinal nodes drain lower extremity deep tissues.", "Incorrect. Internal iliac nodes drain pelvic viscera including prostate."],
           kp: "Testicular lymphatic drainage travels directly to para-aortic (lumbar) lymph nodes, whereas scrotal skin drains to superficial inguinal nodes.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -2295,7 +2295,7 @@ const mcqsBySubject = {
           exp: "The bell-clapper deformity occurs when the tunica vaginalis abnormally envelops the epididymis and spermatic cord, allowing the testis to twist freely on its neurovascular pedicle.",
           r: ["Correct. Bell-clapper deformity allows the testis to rotate freely on its pedicle within the tunica vaginalis.", "Incorrect. Patent processus vaginalis predisposes to indirect inguinal hernia or hydrocele.", "Incorrect. Cryptorchidism increases malignancy risk but bell-clapper is the primary cause of intravaginal torsion.", "Incorrect. Tunica albuginea is the dense capsule of the testis itself."],
           kp: "Bell-clapper deformity (high attachment of tunica vaginalis) permits free axial rotation, predisposing to testicular torsion.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -2307,7 +2307,7 @@ const mcqsBySubject = {
           exp: "The tunica albuginea is a tough, dense white fibrous capsule that covers the testis and projects inward septa dividing it into testicular lobules.",
           r: ["Correct. Tunica albuginea is the fibrous capsule of the testis.", "Incorrect. Tunica dartos is smooth muscle in the scrotal wall.", "Incorrect. External spermatic fascia is derived from external oblique aponeurosis.", "Incorrect. Cremasteric fascia is derived from internal oblique."],
           kp: "The tunica albuginea is the dense fibrous capsule enclosing the testicular seminiferous tubules.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2319,7 +2319,7 @@ const mcqsBySubject = {
           exp: "The ampulla of the ductus deferens joins the excretory duct of the seminal vesicle to form the ejaculatory duct, which courses through the prostate to empty into the prostatic urethra.",
           r: ["Correct. Ductus deferens joins the seminal vesicle duct to form the ejaculatory duct.", "Incorrect. Bulbourethral glands empty into the bulbous urethra.", "Incorrect. Prostate secretes directly through multiple prostatic ducts.", "Incorrect. Littre glands are tiny intraurethral glands."],
           kp: "The ejaculatory duct is formed by the union of the ductus deferens and the duct of the seminal vesicle.",
-          img: ["ap-male-reproductive-gross.png"],
+          img: ["ap-male-reproductive-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2350,7 +2350,7 @@ const mcqsBySubject = {
           exp: "Segment I (caudate lobe) is functionally distinct: it receives blood from both right and left portal triads and drains directly into the IVC via independent hepatic veins, often hypertrophy in Budd-Chiari syndrome.",
           r: ["Correct. Segment I (caudate lobe) receives dual portal inflow and drains directly into the IVC.", "Incorrect. Segment IV is part of the left functional liver.", "Incorrect. Segment II is the superior lateral left segment.", "Incorrect. Segment VIII is the anterosuperior right segment."],
           kp: "Couinaud segment I (caudate lobe) receives dual portal inflow and drains directly into the IVC, sparing it in hepatic vein thrombosis.",
-          img: ["ap-liver-gross.png"],
+          img: ["ap-liver-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2362,7 +2362,7 @@ const mcqsBySubject = {
           exp: "The portal triad consists of the proper hepatic artery, hepatic portal vein, and common bile duct, contained within the free edge of the lesser omentum (hepatoduodenal ligament).",
           r: ["Correct. The portal triad contains the proper hepatic artery, portal vein, and common bile duct.", "Incorrect. Hepatic veins drain superiorly into the IVC.", "Incorrect. IVC is retroperitoneal.", "Incorrect. Celiac trunk is on the posterior abdominal wall."],
           kp: "The portal triad within the hepatoduodenal ligament comprises the portal vein, proper hepatic artery, and common bile duct.",
-          img: ["ap-liver-lobule-portal.png"],
+          img: ["ap-liver-lobule-portal.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2374,7 +2374,7 @@ const mcqsBySubject = {
           exp: "Hepatic stellate cells (Ito cells) reside in the space of Disse. They store vitamin A in quiescence, but under inflammatory stimulation transdifferentiate into collagen-secreting myofibroblasts, driving fibrosis.",
           r: ["Correct. Stellate cells store vitamin A and synthesize collagen in cirrhosis.", "Incorrect. Kupffer cells are resident tissue macrophages.", "Incorrect. Endothelial cells line the sinusoids.", "Incorrect. Hepatocytes perform metabolic and secretory duties."],
           kp: "Hepatic stellate cells in the space of Disse store vitamin A and become myofibroblasts that drive liver fibrosis and cirrhosis.",
-          img: ["ap-liver-lobule-portal.png"],
+          img: ["ap-liver-lobule-portal.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2386,7 +2386,7 @@ const mcqsBySubject = {
           exp: "Zone 3 (centrilobular) is farthest from incoming portal arterioles, having the lowest oxygen tension and the highest cytochrome P450 concentration, making it most vulnerable to ischemia and toxic injury.",
           r: ["Correct. Zone 3 has the lowest oxygen tension and highest P450 concentration, making it vulnerable to ischemia and acetaminophen toxicity.", "Incorrect. Zone 1 is best oxygenated and resists ischemia.", "Incorrect. Zone 2 is an intermediate transition zone.", "Incorrect. Space of Mall is at the portal tract border."],
           kp: "Acinar Zone 3 (centrilobular) is most susceptible to ischemic injury and toxic metabolite damage from high CYP450 activity.",
-          img: ["ap-liver-lobule-portal.png"],
+          img: ["ap-liver-lobule-portal.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2398,7 +2398,7 @@ const mcqsBySubject = {
           exp: "The portal vein delivers approximately 75% of blood flow to the liver (rich in nutrients from the GI tract), while the hepatic artery delivers the remaining 25% (high in oxygen).",
           r: ["Correct. The portal vein supplies approximately 75% of hepatic blood volume.", "Incorrect. Hepatic artery provides about 25% of flow.", "Incorrect. Flow is not equally split.", "Incorrect. Arterial perfusion is mandatory for biliary epithelium."],
           kp: "The portal vein supplies roughly 75% of hepatic blood flow, while the hepatic artery supplies the remaining 25%.",
-          img: ["ap-liver-gross.png"],
+          img: ["ap-liver-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2410,7 +2410,7 @@ const mcqsBySubject = {
           exp: "The round ligament of the liver (ligamentum teres) is the obliterated fibrous cord of the left umbilical vein, which carried oxygenated placental blood to the fetal liver.",
           r: ["Correct. Ligamentum teres is the obliterated remnant of the left umbilical vein.", "Incorrect. Ductus venosus obliterates to form ligamentum venosum.", "Incorrect. Umbilical arteries obliterate to form medial umbilical ligaments.", "Incorrect. Ductus arteriosus forms ligamentum arteriosum."],
           kp: "The ligamentum teres hepatis is the anatomical remnant of the obliterated fetal left umbilical vein.",
-          img: ["ap-liver-gross.png"],
+          img: ["ap-liver-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2434,7 +2434,7 @@ const mcqsBySubject = {
           exp: "Cantlie line (the principal portal scissura) runs from the gallbladder fossa anteriorly to the middle of the IVC posteriorly, dividing the liver into functional left and right lobes.",
           r: ["Correct. Cantlie line divides the functional right and left liver based on vascular inflow.", "Incorrect. Falciform ligament marks anatomical superficial division, not the functional plane.", "Incorrect. Left triangular ligament attaches segment II to diaphragm.", "Incorrect. Umbilical fissure separates segment III from segment IV."],
           kp: "Cantlie line extends from the gallbladder fossa to the IVC, defining the functional border between right and left hemiliver.",
-          img: ["ap-liver-gross.png"],
+          img: ["ap-liver-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2446,7 +2446,7 @@ const mcqsBySubject = {
           exp: "Kupffer cells are specialized resident macrophages that adhere to sinusoidal endothelial luminal surfaces, clearing bacteria, endotoxins, and damaged erythrocytes from portal blood.",
           r: ["Correct. Kupffer cells are the resident sinusoidal macrophages of the liver.", "Incorrect. Ito cells are stellate cells in the space of Disse.", "Incorrect. Fenestrations are physical endothelial pores.", "Incorrect. Hepatocytes are parenchymal epithelial cells."],
           kp: "Kupffer cells are liver-resident macrophages lining the sinusoids that clear particulate antigens and bacteria from portal flow.",
-          img: ["ap-liver-lobule-portal.png"],
+          img: ["ap-liver-lobule-portal.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2477,7 +2477,7 @@ const mcqsBySubject = {
           exp: "All three longitudinal smooth muscle bands of the cecum (tenia libera, mesocolica, and omentalis) coalesce at the origin of the appendix, serving as an infallible surgical guide to locate the base.",
           r: ["Correct. Teniae coli converge precisely at the base of the appendix.", "Incorrect. Appendices epiploicae are sparse on the cecum and do not mark the appendix base.", "Incorrect. Ileocecal valve is internal.", "Incorrect. Plica semilunaris are internal mucosal folds."],
           kp: "Convergence of all three teniae coli on the cecal wall provides the definitive anatomical locator for the base of the appendix.",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2489,7 +2489,7 @@ const mcqsBySubject = {
           exp: "The retrocecal and retrocolic position is the most common anatomical location of the appendix, accounting for approximately 65% of cases.",
           r: ["Correct. Retrocecal position accounts for roughly 65% of normal anatomical variations.", "Incorrect. Pelvic position accounts for approximately 30%.", "Incorrect. Subcecal is uncommon (2%).", "Incorrect. Pre-ileal is rare (1%)."],
           kp: "The retrocecal position is the most common anatomical orientation of the vermiform appendix (65%).",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2501,7 +2501,7 @@ const mcqsBySubject = {
           exp: "The splenic flexure represents the watershed between the middle colic artery (SMA) and left colic artery (IMA), termed Griffiths point, making it the most vulnerable site for ischemic colitis.",
           r: ["Correct. Griffiths point at the splenic flexure is the major watershed between SMA and IMA.", "Incorrect. Hepatic flexure is perfused entirely by SMA branches.", "Incorrect. Ileocecal junction is perfused by ileocolic artery.", "Incorrect. Sudeck point is between IMA and internal iliac at rectosigmoid."],
           kp: "The splenic flexure (Griffiths point) is the major colonic vascular watershed, predisposing to ischemic colitis during hypoperfusion.",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -2537,7 +2537,7 @@ const mcqsBySubject = {
           exp: "The appendicular artery arises from the inferior division of the ileocolic artery (a branch of the SMA) and runs within the free border of the mesoappendix.",
           r: ["Correct. The appendicular artery arises from the ileocolic artery.", "Incorrect. Right colic supplies ascending colon.", "Incorrect. Middle colic supplies transverse colon.", "Incorrect. SMA is the primary trunk, not the immediate parent vessel."],
           kp: "The appendicular artery is an end-artery arising from the ileocolic artery, running within the mesoappendix.",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2549,7 +2549,7 @@ const mcqsBySubject = {
           exp: "The rectosigmoid junction is located at the level of the third sacral vertebra (S3), where teniae coli expand to form a continuous longitudinal outer muscular layer around the rectum.",
           r: ["Correct. The rectum begins at the S3 vertebra where teniae coli fuse into a continuous coat.", "Incorrect. S1 marks the sacral promontory.", "Incorrect. Coccyx tip is the lower end of pelvic floor.", "Incorrect. Pubic symphysis is anterior."],
           kp: "The rectum begins at the S3 level, where teniae coli fuse into a continuous longitudinal muscular tunic.",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2573,7 +2573,7 @@ const mcqsBySubject = {
           exp: "The marginal artery of Drummond is a continuous arterial channel formed by anastomoses between ileocolic, right colic, middle colic, left colic, and sigmoid arteries along the mesenteric border.",
           r: ["Correct. Marginal artery of Drummond provides collateral flow along the length of the colon.", "Incorrect. Arc of Riolan is an inconstant central tortuous mesenteric anastomosis.", "Incorrect. Internal pudendal supplies perineum.", "Incorrect. Gastroepiploic supplies greater curve of stomach."],
           kp: "The marginal artery of Drummond runs along the mesenteric margin of the colon, providing crucial collateral flow.",
-          img: ["ap-large-intestine-gross.png"],
+          img: ["ap-large-intestine-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2604,7 +2604,7 @@ const mcqsBySubject = {
           exp: "The stylopharyngeus is the only pharyngeal muscle innervated by the glossopharyngeal nerve (CN IX), derived from the third pharyngeal arch. All other muscles are supplied by CN X.",
           r: ["Correct. Stylopharyngeus is innervated exclusively by CN IX (glossopharyngeal nerve).", "Incorrect. Salpingopharyngeus is innervated by CN X.", "Incorrect. Palatopharyngeus is innervated by CN X.", "Incorrect. Superior constrictor is innervated by CN X."],
           kp: "Stylopharyngeus is the sole pharyngeal muscle innervated by the glossopharyngeal nerve (CN IX).",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2616,7 +2616,7 @@ const mcqsBySubject = {
           exp: "Killian dehiscence is a triangular area of muscular weakness located between the oblique thyropharyngeus fibers and transverse cricopharyngeus fibers of the inferior pharyngeal constrictor.",
           r: ["Correct. Killian dehiscence lies between the thyropharyngeus and cricopharyngeus muscles.", "Incorrect. Space between superior and middle constrictors conveys stylopharyngeus and CN IX.", "Incorrect. Area below cricopharyngeus is Laimer triangle.", "Incorrect. Longitudinal muscles lie inside the circular constrictor coat."],
           kp: "Zenker diverticulum herniates posteriorly through Killian dehiscence between the thyropharyngeus and cricopharyngeus muscles.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2628,7 +2628,7 @@ const mcqsBySubject = {
           exp: "The pharyngeal tonsil (adenoid) sits in the roof and posterior wall of the nasopharynx. Hypertrophy in children causes mouth breathing, snoring, and eustachian tube obstruction.",
           r: ["Correct. The pharyngeal tonsil (adenoid) forms the roof of Waldeyer ring.", "Incorrect. Palatine tonsils form the lateral elements in the oropharynx.", "Incorrect. Lingual tonsil forms the inferior element at tongue base.", "Incorrect. Tubal tonsils surround eustachian tube openings."],
           kp: "The pharyngeal tonsil (adenoid) occupies the posterior roof of the nasopharynx in Waldeyer tonsillar ring.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2640,7 +2640,7 @@ const mcqsBySubject = {
           exp: "The main arterial supply to the palatine tonsil is the tonsillar artery, which is a branch of the facial artery entering through the lower pole of the tonsillar capsule.",
           r: ["Correct. Tonsillar branch of the facial artery is the principal blood supply to the palatine tonsil.", "Incorrect. Ascending pharyngeal contributes smaller branches.", "Incorrect. Dorsal lingual supplies anterior lower pole.", "Incorrect. Descending palatine enters superiorly."],
           kp: "The primary arterial blood supply to the palatine tonsil is the tonsillar branch of the facial artery.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -2664,7 +2664,7 @@ const mcqsBySubject = {
           exp: "The palatine tonsil lies within the tonsillar bed between the anterior tonsillar pillar (palatoglossal arch) and posterior tonsillar pillar (palatopharyngeal arch).",
           r: ["Correct. Palatoglossal arch is anterior pillar; palatopharyngeal arch is posterior pillar.", "Incorrect. Palatoglossus is strictly anterior.", "Incorrect. Uvula is midline superior.", "Incorrect. Buccinator lies in the cheek."],
           kp: "The palatine tonsillar fossa is bounded by the palatoglossal arch anteriorly and palatopharyngeal arch posteriorly.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2700,7 +2700,7 @@ const mcqsBySubject = {
           exp: "The eustachian tube opens on the lateral wall of the nasopharynx anterior to the pharyngeal recess (fossa of Rosenmuller), bounded by the torus tubarius.",
           r: ["Correct. Eustachian tube opens on the lateral wall of the nasopharynx.", "Incorrect. Oropharynx lies below the soft palate.", "Incorrect. Laryngopharynx lies posterior to larynx.", "Incorrect. Piriform recess is in the laryngopharynx."],
           kp: "The eustachian tube opens on the lateral nasopharyngeal wall, surrounded by the cartilaginous torus tubarius.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -2712,7 +2712,7 @@ const mcqsBySubject = {
           exp: "The piriform fossa is a gutter on either side of the laryngeal inlet in the laryngopharynx. Pointed foreign bodies commonly lodge here, risking injury to the internal laryngeal nerve beneath its mucosa.",
           r: ["Correct. Piriform fossa frequently catches sharp ingested foreign bodies.", "Incorrect. Vallecula lies between tongue base and epiglottis.", "Incorrect. Fossa of Rosenmuller is in nasopharynx.", "Incorrect. Tonsillar crypts are in palatine tonsils."],
           kp: "Pointed foreign bodies frequently lodge in the piriform fossa, overlying the sensitive internal laryngeal nerve.",
-          img: ["ap-throat-pharynx-gross.png"],
+          img: ["ap-throat-pharynx-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -2805,7 +2805,7 @@ const mcqsBySubject = {
           exp: "Sympathetic denervation leads to upregulation and hypersensitivity of post-junctional alpha-1 receptors on the dilator pupillae. Apraclonidine dilates the denervated pupil, confirming Horner syndrome.",
           r: ["Correct. Apraclonidine dilates the Horner pupil due to alpha-1 receptor denervation supersensitivity.", "Incorrect. Apraclonidine does not block muscarinic receptors.", "Incorrect. Cocaine tests for stored norepinephrine; apraclonidine acts directly.", "Incorrect. Apraclonidine acts peripherally on iris smooth muscle."],
           kp: "Apraclonidine reverses anisocoria in Horner syndrome due to denervation supersensitivity of pupillary alpha-1 receptors.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "application"
         },
@@ -2829,7 +2829,7 @@ const mcqsBySubject = {
           exp: "Sympathetic stimulation causes relaxation of the ciliary muscle via beta-2 receptors, flattening the lens for distant vision. Parasympathetic M3 stimulation contracts ciliary muscle for near accommodation.",
           r: ["Correct. Beta-2 sympathetic stimulation relaxes the ciliary muscle, flattening the lens for far vision.", "Incorrect. Parasympathetic M3 stimulation contracts ciliary muscle for near accommodation.", "Incorrect. Sphincter pupillae contraction is parasympathetic.", "Incorrect. Retinal artery autoregulates."],
           kp: "Sympathetic beta-2 stimulation relaxes the ciliary muscle to flatten the lens for distance vision.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "recall"
         },

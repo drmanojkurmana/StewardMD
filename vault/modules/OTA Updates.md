@@ -175,3 +175,11 @@ copies nothing would ever load.
 Deps: [[Native app delivery]]. See [[Decisions]] for the full incident history and reasoning.
 
 - **2026-09-12 gotcha:** an `adb install` can look like it did nothing: the phone keeps running the downloaded OTA bundle (`CapacitorUpdater.current()` over CDP shows it), not `assets/public`. `CapacitorUpdater.reset({toLastSuccessful:false})` puts the APK bundle back. After a client merge, press Push to devices or the next OTA pull restores the old UI.
+
+## Gotcha: bundle grew to 137 MB and the download sat at 0 s (2026-10-14)
+The iPad's "Downloading update (137.2 MB)" never finished. The OTA zip had grown from 48 MB to 137 MB, almost all of it 28 anatomy
+PNGs (about 1.7 MB each, 40 MB, incompressible) added to `prep/lessons/media` by the 100% diagram-coverage commit. A cold edge cache
+streams the zip from R2 at ~210 KB/s, so 137 MB is ~11 minutes against the plugin's 900 s cap, and nothing shows progress meanwhile.
+Fix: the 28 PNGs are now WebP (40 MB to 4 MB, same look), references updated in the lesson and overlay JSON and the generators;
+zip is ~102 MB. **Before adding large media to `prep/`, check the zip size** (`bash scripts/build-www.sh && cd www && zip -qr /tmp/x.zip .`).
+Still large: `kb` 78 MB raw, `assets/vendor` 22 MB (ML/wasm), `prep/lessons/v1` JSON, `tokos` 22 MB.

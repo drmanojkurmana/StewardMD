@@ -83,7 +83,7 @@ const lessons = [
         say: "Airway resistance is greatest in medium-sized bronchi between generations four and eight, rather than in terminal bronchioles. Although individual terminal bronchioles are narrow, their massive parallel cross-sectional area reduces resistance. Parasympathetic vagal discharge induces bronchoconstriction, whereas beta-two adrenergic stimulation promotes smooth muscle bronchodilation.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-lung-alveoli-gas-exchange.png",
+          src: "prep/lessons/media/ap-lung-alveoli-gas-exchange.webp",
           alt: "Pulmonary mechanics and surfactant dynamics",
           caption: "Cross-section of terminal respiratory units illustrating alveolar surface tension forces, surfactant distribution and airway resistance profiles."
         }
@@ -146,7 +146,7 @@ const lessons = [
         say: "The cortical collecting duct comprises two distinct cell populations regulating electrolyte and acid-base homeostasis. Principal cells reabsorb sodium through epithelial sodium channels under aldosterone control, driving potassium secretion. Intercalated alpha cells secrete protons via apical proton ATPases for acid elimination, whereas beta cells secrete bicarbonate.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-nephron-filtration.png",
+          src: "prep/lessons/media/ap-nephron-filtration.webp",
           alt: "Nephron tubular transport and ion channels",
           caption: "Cellular schematics detailing cotransporter, exchanger and ion channel distributions along proximal, loop and collecting duct epithelia."
         }
@@ -208,7 +208,7 @@ const lessons = [
         say: "The hormone antidiuretic hormone regulates final urine volume by binding basolateral V2 receptors on principal cells. Receptor activation stimulates adenylyl cyclase, raising cyclic AMP and triggering insertion of aquaporin-2 water channels into the apical membrane. Water flows into hypertonic interstitium, concentrating urine and restoring systemic osmolality.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-kidney-gross.png",
+          src: "prep/lessons/media/ap-kidney-gross.webp",
           alt: "Renal medullary countercurrent multiplier schematic",
           caption: "Longitudinal cross-section of renal cortex and medulla illustrating loop of Henle countercurrent multiplier, vasa recta exchanger and ADH water reabsorption."
         }
@@ -271,7 +271,7 @@ const lessons = [
         say: "The peptide hormone somatostatin is the master paracrine inhibitor of gastric secretion. Released by antral D cells when luminal pH falls below three, somatostatin binds Gi-coupled receptors, suppressing gastrin and histamine release. Prostaglandin E2 stimulates mucosal mucus and bicarbonate secretion. Nonsteroidal anti-inflammatory drugs inhibit prostaglandins, causing peptic ulceration.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-stomach-gross.png",
+          src: "prep/lessons/media/ap-stomach-gross.webp",
           alt: "Gastric mucosa and parietal cell signaling",
           caption: "Cellular diagram of gastric parietal cell receptors, proton pump machinery, second messenger cascades and antral negative feedback loops."
         }
@@ -334,7 +334,7 @@ const lessons = [
         say: "The counter-regulatory peptide glucagon from islet alpha cells maintains plasma glucose during fasting. Binding hepatic receptors, glucagon raises cyclic AMP and activates glycogen phosphorylase while inactivating glycogen synthase, releasing glucose into circulation. Glucagon also stimulates hepatic gluconeogenesis and ketone body synthesis.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-pancreas-gross.png",
+          src: "prep/lessons/media/ap-pancreas-gross.webp",
           alt: "Pancreatic acinar and islet histology",
           caption: "Histological schematic comparing exocrine acinar ductal units with endocrine islets of Langerhans, highlighting insulin secretion cascades."
         }
@@ -397,7 +397,7 @@ const lessons = [
         say: "Retinal bipolar cells process reduced glutamate release through two opposite pathways, creating center-surround receptive fields. On-center bipolar cells express metabotropic receptors, depolarizing in response to light. Off-center bipolar cells express ionotropic receptors, hyperpolarizing with light. Horizontal cells provide lateral inhibition, enhancing edge detection.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-eye-gross.png",
+          src: "prep/lessons/media/ap-eye-gross.webp",
           alt: "Photoreceptor phototransduction cascade",
           caption: "Schematic detailing rhodopsin photoisomerization, transducin activation, cGMP phosphodiesterase cleavage and bipolar cell signaling."
         }
@@ -461,7 +461,7 @@ const lessons = [
         say: "The prolonged effective refractory period of ventricular myocardium lasts throughout phases zero, one, two and mid-phase three. During this interval, sodium channels remain inactivated and cannot reopen, making it impossible to elicit another action potential. This prevents summation and tetanus, ensuring rhythmic cardiac pumping.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-heart-conduction-cycle.png",
+          src: "prep/lessons/media/ap-heart-conduction-cycle.webp",
           alt: "Cardiac ventricular and pacemaker action potentials",
           caption: "Comparative waveform schematics of working ventricular myocyte action potential phases and sinoatrial nodal pacemaker prepotentials."
         }

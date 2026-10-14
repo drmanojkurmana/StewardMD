@@ -38,7 +38,7 @@ const mcqSets = {
             "Incorrect. Both divisions of CN III pass inside the tendinous ring."
           ],
           kp: "Trochlear, frontal, lacrimal nerves and superior ophthalmic vein pass OUTSIDE the common tendinous ring.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "recall"
         },
@@ -60,7 +60,7 @@ const mcqSets = {
             "Incorrect. Anterior ethmoidal nerve traverses the medial orbital wall."
           ],
           kp: "Infraorbital nerve runs along the orbital floor and is frequently damaged in maxillary blowout fractures.",
-          img: ["ap-eye-gross.png"],
+          img: ["ap-eye-gross.webp"],
           d: 2,
           cog: "application"
         }
@@ -87,7 +87,7 @@ const mcqSets = {
             "Incorrect. Thyroarytenoid relaxes the vocal ligaments."
           ],
           kp: "Posterior cricoarytenoid is the sole vocal cord abductor; bilateral denervation causes acute airway obstruction.",
-          img: ["ap-larynx-gross.png"],
+          img: ["ap-larynx-gross.webp"],
           d: 1,
           cog: "recall"
         },
@@ -109,7 +109,7 @@ const mcqSets = {
             "Incorrect. Ansa cervicalis lies superficial in the carotid sheath."
           ],
           kp: "External branch of superior laryngeal nerve accompanies superior thyroid artery; injury impairs high-pitch phonation.",
-          img: ["ap-larynx-gross.png"],
+          img: ["ap-larynx-gross.webp"],
           d: 2,
           cog: "application"
         }
@@ -136,7 +136,7 @@ const mcqSets = {
             "Correct. The nasolacrimal duct drains into the inferior meatus under the valve of Hasner."
           ],
           kp: "Nasolacrimal duct drains into the inferior meatus beneath the inferior concha.",
-          img: ["ap-nose-sinuses-gross.png"],
+          img: ["ap-nose-sinuses-gross.webp"],
           d: 1,
           cog: "recall"
         }
@@ -163,7 +163,7 @@ const mcqSets = {
             "Incorrect. Mastoid antrum is an air reservoir, not an acoustic lever."
           ],
           kp: "Impedance matching is driven by the ~17:1 area ratio between tympanic membrane and stapes footplate.",
-          img: ["ap-ear-gross.png"],
+          img: ["ap-ear-gross.webp"],
           d: 2,
           cog: "analysis"
         }
@@ -190,7 +190,7 @@ const mcqSets = {
             "Incorrect. Superior cerebellar artery occlusion does not cause dysphagia or hoarseness."
           ],
           kp: "Lateral medullary (Wallenberg) syndrome is caused by PICA occlusion; nucleus ambiguus damage causes dysphagia and hoarseness.",
-          img: ["ap-brain-gross.png"],
+          img: ["ap-brain-gross.webp"],
           d: 2,
           cog: "application"
         }
@@ -220,7 +220,7 @@ const mcqSets = {
             "Incorrect. Bronchial smooth muscle tone does not regulate alveolar collapsing pressure."
           ],
           kp: "Surfactant concentrates in smaller alveoli, lowering surface tension and preventing diffuse atelectasis.",
-          img: ["ap-lung-alveoli-gas-exchange.png"],
+          img: ["ap-lung-alveoli-gas-exchange.webp"],
           d: 2,
           cog: "analysis"
         }
@@ -247,7 +247,7 @@ const mcqSets = {
             "Incorrect. ENaC creates a lumen-negative potential in collecting ducts."
           ],
           kp: "ROMK potassium back-leak in the thick ascending limb generates a lumen-positive potential driving Ca2+ and Mg2+ reabsorption.",
-          img: ["ap-nephron-filtration.png"],
+          img: ["ap-nephron-filtration.webp"],
           d: 2,
           cog: "analysis"
         }
@@ -274,7 +274,7 @@ const mcqSets = {
             "Incorrect. IKr repolarizes the membrane (phase 3), but does not drive phase 4 depolarization."
           ],
           kp: "Phase 4 pacemaker depolarization is driven by the inward funny current (If) via HCN channels.",
-          img: ["ap-heart-conduction-cycle.png"],
+          img: ["ap-heart-conduction-cycle.webp"],
           d: 2,
           cog: "recall"
         }
