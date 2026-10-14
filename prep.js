@@ -1314,6 +1314,10 @@
   }
   /* coachResultHtml(r): this run's confidence outcomes (honest counts) plus where to revise first. */
   function coachResultHtml(r) {
+    if (insightOn() && r && r.items) { var ih = insightHtml(r); if (ih) return ih; }
+    return coachResultHtmlOld(r);
+  }
+  function coachResultHtmlOld(r) {
     var CO = G.PREP_COACH;
     if (!CO || !r || !r.items) return "";
     var K = CO.KYIQ, n = { misconception: 0, confused: 0, lucky: 0, tagged: 0 };
@@ -1337,6 +1341,97 @@
     if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
+  /* ---------- KnowYourIQ insight (prep-insight.js): the result screen after a set. No AI call. ---------- */
+  // Kill switch: localStorage smd_kyiq_insight = "0" returns the old two-line result.
+  function insightOn() { try { if (G.localStorage.getItem("smd_kyiq_insight") === "0") return false; } catch (e) {} return !!G.PREP_INSIGHT; }
+  function kyChip(oc) {
+    var L = { misconception: "Confident but wrong", confused: "Confused", wrong: "Wrong", guesswrong: "Guessed wrong", lucky: "Guessed right", mastered: "Confident and right", right: "Right" };
+    return '<span class="ky-bd ky-bd-' + oc + '">' + (L[oc] || oc) + "</span>";
+  }
+  function kyOptLetter(k) { return "ABCDEFGHIJ"[k] || "?"; }
+  function kyItemName(it) { return it && it._s && (it._m || it.t) ? coachTopicName(it._s + "|" + (it._m || it.t)).replace(/<[^>]*>/g, "") : ""; }
+  function kyRow(r, f, list) {
+    var it = r.items[f.i], q = String(it.q || ""), asp = G.PREP_INSIGHT.aspectOf(it);
+    var rem = G.PREP_INSIGHT.rememberLine(it, null);
+    var rep = f.rep >= 2 ? '<span class="ky-bd ky-bd-rep">Missed ' + f.rep + " times</span>" : "";
+    var mine = f.chosen >= 0 && it.o ? '<span class="ky-line">You chose <b>' + kyOptLetter(f.chosen) + ".</b> " + esc(String(it.o[f.chosen] || "")) + "</span>" : "";
+    var right = it.o ? '<span class="ky-line ky-ok">Answer <b>' + kyOptLetter(f.correct) + ".</b> " + esc(String(it.o[f.correct] || "")) + "</span>" : "";
+    return '<li><button type="button" class="pn-mod ky-fix" data-act="kyfixq" data-i="' + f.i + '" data-l="' + list + '"><span class="pn-rvq" aria-hidden="true">' + (f.i + 1) + '</span><span class="pn-mb">' +
+      '<span class="ky-tags">' + kyChip(f.oc) + '<span class="ky-bd">' + esc(G.PREP_INSIGHT.aspectLabel(asp)) + "</span>" + rep + "</span>" +
+      '<b><span class="pn-sr">' + (f.i + 1) + ". </span>" + esc(q.length > 110 ? q.slice(0, 109) + "…" : q) + "</b>" + mine + right +
+      (rem ? '<small class="ky-rem">Remember: ' + esc(rem) + "</small>" : "") + "</span>" + ico("chev") + "</button></li>";
+  }
+  function kySpark(series) {
+    var W = 240, H = 44, pts = series.map(function (d, i) {
+      var x = series.length > 1 ? i * (W - 8) / (series.length - 1) + 4 : W / 2, y = H - 6 - (d.ok / d.n) * (H - 12);
+      return x.toFixed(1) + "," + y.toFixed(1);
+    });
+    return '<svg class="ky-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" aria-hidden="true"><polyline points="' + pts.join(" ") + '"/></svg>';
+  }
+  function insightHtml(r) {
+    var IN = G.PREP_INSIGHT, K = G.PREP_COACH && G.PREP_COACH.KYIQ, s = load();
+    var an = IN.analyzeRun({ items: r.items, ans: r.ans, conf: r.conf || [] }, s);
+    if (!an.answered) return "";
+    r.ky = { fix: an.fix.map(function (f) { return f.i; }), rem: an.remember.map(function (f) { return f.i; }), items: an.fixShown };
+    var all = {}; IN.allTime(s).forEach(function (a) { all[a.id] = a; });
+    var h = '<section class="ky-sec ky-ins" aria-label="KnowYourIQ result"><div class="ky-head">' + kyMark(28) + '<h2 class="pn-h">' + esc(K ? K.NAME : "KnowYourIQ") + ": this test</h2></div>";
+    var hl = IN.headline(an);
+    if (hl) h += '<p class="ky-txt ky-lead">' + esc(hl) + "</p>";
+    // 1. Confidence x correct, one bar and a legend of the groups that have answers.
+    var seg = "", leg = "";
+    IN.GRID_ORDER.forEach(function (k) {
+      var n = an.grid[k]; if (!n) return;
+      seg += '<i class="ky-g-' + k + '" style="flex-grow:' + n + '"></i>';
+      leg += '<li><i class="ky-g-' + k + '"></i><span>' + n + " " + esc(IN.GRID_LABEL[k].toLowerCase()) + "</span></li>";
+    });
+    h += '<div class="ky-card ky-pad"><p class="pn-sec">How sure you were</p><span class="ky-grid pn-fills" aria-hidden="true">' + seg + '</span><ul class="ky-legend">' + leg + "</ul>" +
+      (an.grid.right + an.grid.wrong === an.answered ? '<p class="ky-note">You did not tap how sure you were. Tag questions to see confident errors and lucky guesses.</p>' : "") + "</div>";
+    // 2. Weak by question type, this set with the all-time tick.
+    var rows = IN.ASPECTS.filter(function (a) { return an.types[a.id].n; }).map(function (a) { var t = an.types[a.id]; return { a: a, t: t, acc: t.ok / t.n }; });
+    rows.sort(function (x, y) { return x.acc - y.acc || y.t.n - x.t.n; });
+    h += '<div class="ky-card ky-pad"><p class="pn-sec">By question type</p>' + rows.map(function (x) {
+      var pc = Math.round(x.acc * 100), weak = x.t.n >= IN.CFG.MIN_ASPECT && x.acc < IN.CFG.WEAK_ACC, al = all[x.a.id];
+      return '<div class="ky-ty' + (weak ? " weak" : "") + '"><span class="ky-tn">' + esc(x.a.label) + '</span><span class="ky-tb" role="img" aria-label="' + x.t.ok + " of " + x.t.n + ' right"><i style="width:' + pc + '%"></i>' + (al ? '<u style="left:' + Math.round(al.acc * 100) + '%"></u>' : "") + '</span><span class="ky-tv">' + x.t.ok + "/" + x.t.n + "</span></div>";
+    }).join("") + '<p class="ky-note">' + (Object.keys(all).length ? "The tick is your all-time rate for that type. " : "") + "A type needs " + IN.CFG.MIN_ASPECT + "+ answers before it is called weak. Types come from how the question is worded.</p></div>";
+    // 3. Fix list.
+    if (an.fix.length) {
+      h += '<div class="ky-card ky-pad"><p class="pn-sec">Fix these first <span class="pn-rvn">' + an.fix.length + '</span></p><ol class="pn-missed ky-fixl">' + an.fixShown.map(function (f) { return kyRow(r, f, "fix"); }).join("") + "</ol>" +
+        (an.fix.length > an.fixShown.length ? '<p class="ky-note">Showing the first ' + an.fixShown.length + ". The Review list below has all " + an.fix.length + ".</p>" : "") +
+        '<div class="ky-rowbtns"><button type="button" class="pn-btn sm" data-act="kypractise" data-l="fix">Practise these ' + an.fix.length + "</button></div></div>";
+    }
+    // 4. Remember: right answers you were not sure of.
+    if (an.remember.length) {
+      h += '<div class="ky-card ky-pad"><p class="pn-sec">Remember these <span class="pn-rvn">' + an.remember.length + '</span></p><ol class="pn-missed ky-fixl">' + an.remember.map(function (f) {
+        f.chosen = r.ans[f.i]; f.correct = r.items[f.i].a; f.rep = 0; return kyRow(r, f, "rem");
+      }).join("") + "</ol></div>";
+    }
+    // 5. Confidence reliability over the last days.
+    var ser = IN.calSeries(s, 14).filter(function (d) { return d.n > 0; });
+    if (ser.length >= 3) {
+      var tn = 0, tk = 0; ser.forEach(function (d) { tn += d.n; tk += d.ok; });
+      h += '<div class="ky-card ky-pad"><p class="pn-sec">Does "confident" mean right?</p>' + kySpark(ser) + '<p class="ky-txt">Last ' + ser.length + " days: right on " + Math.round(tk * 100 / tn) + "% of the answers you called confident (" + tn + ").</p></div>";
+    }
+    // 6. Where to revise first (topic) and the one optional AI button.
+    var view = coachView(s, coachExam(s)), first = null;
+    view.topics.forEach(function (x) { if (!first && x.group !== "fresh" && x.group !== "ready") first = x; });
+    if (first) h += '<p class="ky-txt">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>";
+    if (G.PREP_ASK && an.fix.length) h += askBtn("kypattern", "Explain my pattern", "").replace("pa-ask", "pa-ask ky-ask");
+    return h + "</section>";
+  }
+  function kyPatternOpen() {
+    var r = st.run, IN = G.PREP_INSIGHT;
+    if (!r || !IN || !G.PREP_ASK) return false;
+    var an = IN.analyzeRun({ items: r.items, ans: r.ans, conf: r.conf || [] }, load());
+    var title = "KnowYourIQ: my pattern";
+    return G.PREP_ASK.open({ kind: "card", fr: title, bk: IN.patternText(an, r.items, kyItemName), title: title, ask: "Explain my pattern and what to remember." }, HOST);
+  }
+  function kyPractise(list) {
+    var r = st.run; if (!r || !r.ky) return;
+    var ids = r.ky[list === "rem" ? "rem" : "fix"] || [], out = ids.map(function (i) { return r.items[i]; }).filter(Boolean);
+    if (!out.length) return;
+    st.stack.pop(); runQuestions(out, "study", "Practise my errors");
+  }
+
   /* After a run finishes: file each attempted topic's next review from its current group. Fresh
      topics (under N answers) are left alone: no group, no due date. */
   function coachFileReviews(r) {
@@ -2283,6 +2378,11 @@
   // timed test. No motion for keys.
   function onRunKey(e) {
     var r = st.run;
+    if (r && r.rvp && r.rvView && st.stack[st.stack.length - 1] === r.rvView && !e.ctrlKey && !e.metaKey && !e.altKey && !(root && root.querySelector(".pn-sheet-wrap"))) {
+      var rt = e.target && e.target.tagName;
+      if (rt !== "INPUT" && rt !== "TEXTAREA" && (e.key === "ArrowRight" || e.key === "ArrowLeft")) { e.preventDefault(); rvGo(e.key === "ArrowRight" ? 1 : -1); }
+      return;
+    }
     if (!r || r.done || st.stack[st.stack.length - 1] !== renderRun || e.ctrlKey || e.metaKey || e.altKey) return;
     if (root && root.querySelector(".pn-sheet-wrap")) return;   // a sheet over the runner keeps the keys
     if (r.phase === "between") return;
@@ -2332,6 +2432,7 @@
         CO.notePair(s.coach_pairs, tk, { q: it.id, a: P[0], b: P[1], ta: it.o[P[0]] || "", tb: it.o[P[1]] || "", ts: Date.now() });
       }
     }
+    if (chosen >= 0 && insightOn()) G.PREP_INSIGHT.noteAnswer(s, it, ok, cf, td);
     s.last = { s: it._s, m: it._m || it.t };
     // Answer log for readiness accuracy (prep-plan.js): [module, 1|0], newest last.
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
@@ -2423,7 +2524,7 @@
     var sp = reviewSplit(r.items, r.ans, r.qc && r.qc.out, load().bm), f = r.rf && sp[r.rf] ? r.rf : (r.rf = reviewDefault(sp));
     var skipL = sp.out.length ? (sp.out.length === sp.skip.length ? "Time up" : "Skipped or time up") : "Skipped";
     var F = [["all", "All"], ["wrong", "Wrong"], ["right", "Correct"], ["skip", skipL], ["bm", "Bookmarked"]];
-    var list = sp[f].slice(0, RV_LIST_MAX);
+    var list = sp[f].slice(0, RV_LIST_MAX); r.rvList = sp[f];
     return '<h2 class="pn-sec" id="pnRvH">Review</h2><div class="pn-filters pn-rvf" role="group" aria-labelledby="pnRvH">' + F.map(function (x) {
       var n = sp[x[0]].length, on = x[0] === f;
       return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="rfilter" data-v="' + x[0] + '"' + (n || on ? "" : " disabled") + ">" + x[1] + ' <span class="pn-rvn">' + n + "</span></button>";
@@ -2571,28 +2672,80 @@
       '<p class="pn-self-t">Higher than <b>' + share + "%</b> of your modules</p>" +
       '<p class="pn-mut pn-small">From your own answers in ' + acc.length + " modules (5 or more answers each), on this device.</p></section>";
   }
-  function reviewQuestion(i) {
-    var r = st.run, it = r.items[i];
-    st.stack.push(function () {
-      var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
-      var rid = G.PREP_IDS && it._s !== "deck" ? G.PREP_IDS.ofItem(it) : null;
-      var tu = r.qc && r.qc.out[i] ? '<p class="pn-timeup">' + ico("lock") + "<span><b>Time ran out</b>" + (r.ans[i] >= 0 ? "Your answer was kept." : "Not answered.") + "</span></p>" : "";
-      paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
-        return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
-      }).join("") + '</ol><section class="pn-fb">' + (function () {
-        var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
-        var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
-        var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
-          whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-          return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
-        }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-        return ex + whyRowHtml(it, r.ans[i], i) + outdatedHtml(it) +
-          (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "");
-      })() + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div>");
-      if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
-      if (G.PREP_RAD) G.PREP_RAD.mount(root);
-    });
+  /* Review pager: one stack entry for the whole filtered list. Swipe left or right (touch), the Previous and Next
+     buttons or the arrow keys move through the list without going back to it; r.rvp = { L: indexes, pos }. */
+  function reviewQuestion(i, list) {
+    var r = st.run, L = list && list.length ? list : (r.rvList && r.rvList.indexOf(i) >= 0 ? r.rvList : [i]);
+    r.rvp = { L: L.slice(), pos: Math.max(0, L.indexOf(i)) };
+    r.rvView = function () { paintReview(); };
+    st.stack.push(r.rvView);
     rerender();
+  }
+  function rvGo(dir, viaSwipe) {
+    var r = st.run, P = r && r.rvp; if (!P) return false;
+    var np = P.pos + dir; if (np < 0 || np >= P.L.length) return false;
+    P.pos = np; st.swipeIn = dir;
+    if (G.PREP_MOTION && G.PREP_MOTION.haptic) G.PREP_MOTION.haptic("light");
+    rerender();
+    var b = root && bodyOf(root); if (b) b.scrollTop = 0;
+    return true;
+  }
+  function paintReview() {
+    var r = st.run, P = r.rvp, i = P.L[P.pos], it = r.items[i];
+    var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    var rid = G.PREP_IDS && it._s !== "deck" ? G.PREP_IDS.ofItem(it) : null;
+    var tu = r.qc && r.qc.out[i] ? '<p class="pn-timeup">' + ico("lock") + "<span><b>Time ran out</b>" + (r.ans[i] >= 0 ? "Your answer was kept." : "Not answered.") + "</span></p>" : "";
+    var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : ""; st.swipeIn = 0;
+    var n = P.L.length, multi = n > 1;
+    var pager = multi ? '<div class="ky-pager" role="group" aria-label="Review position"><button type="button" class="pn-btn sm" data-act="rvprev"' + (P.pos ? "" : " disabled") + ">" + ico("back") + ' Previous</button><span class="ky-pos" aria-live="polite">' + (P.pos + 1) + " of " + n + '</span><button type="button" class="pn-btn sm" data-act="rvnext"' + (P.pos < n - 1 ? "" : " disabled") + '>Next <span class="ky-flip">' + ico("back") + "</span></button></div>" : "";
+    var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
+    var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
+    var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
+      whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
+        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+      }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
+    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+    }).join("") + '</ol><section class="pn-fb">' + ex + whyRowHtml(it, r.ans[i], i) + outdatedHtml(it) +
+      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
+    if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
+    if (G.PREP_RAD) G.PREP_RAD.mount(root);
+    bindRvSwipe();
+  }
+  /* Touch and pen only (the mouse has the buttons). The card follows the finger; a throw past 70 px or faster than
+     0.5 px/ms moves to the next or previous question; a short one settles back. Vertical scrolling is untouched. */
+  function bindRvSwipe() {
+    var body = root && root.querySelector(".pn-rv");
+    if (!body || body.__pnRv) return;
+    body.__pnRv = 1;
+    var x0 = 0, y0 = 0, id = null, on = false, moved = false, dx = 0, vx = 0, lt = 0, lx = 0, qw = null;
+    body.addEventListener("pointerdown", function (e) {
+      if (on || e.pointerType === "mouse" || (e.target.closest && e.target.closest(".pn-yq-fig,.pn-stack,.pn-wrap,.ky-pager,button,a,input,textarea,select"))) return;
+      qw = body.querySelector("#pnRvQ"); if (!qw) return;
+      on = true; moved = false; id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; lt = Date.now(); dx = vx = 0;
+    });
+    body.addEventListener("pointermove", function (e) {
+      if (!on || e.pointerId !== id) return;
+      var mx = e.clientX - x0, my = e.clientY - y0, now = Date.now();
+      if (!moved) { if (Math.abs(mx) < 10 || Math.abs(mx) < Math.abs(my)) { if (Math.abs(my) > 12) on = false; return; } moved = true; try { body.setPointerCapture(id); } catch (x) {} qw.classList.add("drag"); }
+      var P = st.run && st.run.rvp, dir = mx < 0 ? 1 : -1, can = !!P && (dir > 0 ? P.pos < P.L.length - 1 : P.pos > 0), w = body.clientWidth || 360;
+      dx = can ? mx : (mx * w * 0.55) / (w + 0.55 * Math.abs(mx)) * 0.5;
+      if (now > lt) { vx = (e.clientX - lx) / (now - lt); lx = e.clientX; lt = now; }
+      qw.style.transform = "translateX(" + dx.toFixed(1) + "px)";
+      qw.style.opacity = String(Math.max(0.55, 1 - Math.abs(dx) / 900));
+    });
+    var end = function (e) {
+      if (!on || e.pointerId !== id) return;
+      on = false;
+      if (!moved) return;
+      qw.classList.remove("drag");
+      var dir = dx < 0 ? 1 : -1, fast = Math.abs(vx) > 0.5 && (vx < 0 ? 1 : -1) === dir;
+      if (e.type === "pointerup" && (Math.abs(dx) > 70 || fast) && rvGo(dir, true)) return;
+      if (!(G.PREP_MOTION && G.PREP_MOTION.settle && G.PREP_MOTION.settle(qw, "translateX(" + dx.toFixed(1) + "px)", "translateX(0px)"))) qw.style.transform = "";
+      qw.style.opacity = "";
+    };
+    body.addEventListener("pointerup", end);
+    body.addEventListener("pointercancel", end);
   }
 
   /* ---------- Phase 4: today's plan, mistakes, weak areas ---------- */
@@ -3161,6 +3314,11 @@
     if (a === "report") return openReport();
     if (a === "sendreport") return sendReport(v);
     if (a === "reviewq") return reviewQuestion(Number(b.getAttribute("data-i")));
+    if (a === "kyfixq") { var rk = st.run, lk = b.getAttribute("data-l") === "rem" ? "rem" : "fix"; return reviewQuestion(Number(b.getAttribute("data-i")), rk && rk.ky ? rk.ky[lk] : null); }
+    if (a === "rvnext") return void rvGo(1);
+    if (a === "rvprev") return void rvGo(-1);
+    if (a === "kypractise") return kyPractise(b.getAttribute("data-l"));
+    if (a === "kypattern") return void kyPatternOpen();
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
     // Practise the whole set again in the same order; a saved set keeps its place and gets the new answers.
     if (a === "retryall") { var r5 = st.run; st.stack.pop(); return runQuestions(r5.items.slice(), "study", r5.title, r5.psId ? { psId: r5.psId } : r5.save ? { save: r5.save } : {}); }

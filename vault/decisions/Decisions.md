@@ -11763,3 +11763,19 @@ Help's unread-reply count moved onto the More row. The guided tour follows: the 
 Experimental step opens the Settings page directly, and the tour now retries ~1.3s for a target (the More rows fade in
 one by one; a single 220ms retry skipped late rows). Test: `test/run-menu-dedupe-ui.mjs` (no label in both menus).
 Older tests that pinned the old layout were updated. [[modules/Refined Look]]
+
+## 2026-10-14 KnowYourIQ result screen: deterministic insight, one optional AI button; Review swipes through the list
+- The after-set screen was two lines of counts. It now shows (no AI call): confidence x correct bar, weak-by-question-type
+  bars (this set, all-time tick), a fix list (confident errors first, then confused, wrong, guessed wrong; each row has
+  your option, the answer, a remember line and a "Missed N times" badge), a remember list (right but unsure), and
+  how often "confident" was right over the last 14 days. Code: `prep-insight.js` (pure, `window.PREP_INSIGHT`), wired in
+  `prep.js` (`insightHtml`, `record()` files tallies), styles in `prep-coach.css`.
+- Question type is read from the stem wording (the bank has no type field): Diagnosis, Investigation, Treatment,
+  Pathogenesis, Basic science and anatomy, Screening and prevention, Clinical features and facts, Complications, Other.
+  A type needs 3+ answers in a set (6+ all-time) before it is called weak. About 30% of stems fall to Other.
+- Device-only store keys: `ky_q` (per-question wrong/right/last), `ky_ty` (per type), `ky_cal` (per-day confident reliability).
+- Only AI use: "Explain my pattern" button, one small structured message (counts + up to 6 short stems), never automatic.
+- Kill switch: `localStorage.smd_kyiq_insight = "0"` restores the old result. Default ON.
+- Review (`reviewQuestion`) is now a pager over the filtered list or the fix/remember list: swipe, Previous/Next, arrow keys.
+  Do not go back to one-question-per-push.
+- Avoid class `ky-empty` for real content: `empty-states.js` decorates it with an inbox icon (the two stray icons seen on the old result).

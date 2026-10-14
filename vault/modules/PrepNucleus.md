@@ -1637,3 +1637,8 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   and `prep-deid-audit` (generated-art pattern covers `-aiN(-h)?`). Spot/marks alignment is overlaid programmatically;
   mismatches keep the book figure. `--dry` replays steps 2-5 on the 10 pilot figures without publishing. Resumable via
   per-step markers; intermediates deleted (2.6 GB disk). Run book: `full/FINISH-README.md`. No app files change: no OTA.
+
+
+## KnowYourIQ insight (2026-10-14)
+- `prep-insight.js` (loaded after `prep-coach.js`): stem-wording question type, per-set analysis, device tallies `ky_q`/`ky_ty`/`ky_cal`. Flag `smd_kyiq_insight` (default ON, `0` = old result). Tests: `test/prep-insight.test.mjs`, `test/run-kyiq-insight-ui.mjs`. See [[decisions/Decisions]] 2026-10-14.
+- Review is a swipe pager (`rvp`, `rvGo`, `paintReview` in `prep.js`). Retagging confidence after the fact does not update `ky_ty`/`ky_cal` (only the older coach counters).
