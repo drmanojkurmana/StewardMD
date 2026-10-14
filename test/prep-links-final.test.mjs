@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { addTopicLinks, moduleTopicFallback, gateSpecificLinks, entityOverlap, ktOk, SPECIFIC_MIN_E, SPECIFIC_MIN } from "../tools/prep-links.mjs";
+import { addTopicLinks, moduleTopicFallback, gateSpecificLinks, entityOverlap, stemEvidenced, ktOk, SPECIFIC_MIN_E, SPECIFIC_MIN } from "../tools/prep-links.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readJ = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
@@ -81,6 +81,49 @@ test("addTopicLinks: an unevidenced mapped article does not ride along when the 
   assert.deepEqual(off.map((l) => l.v), ["lt"], "the lesson is the module-level target, the mumps article is not linked");
   const on = addTopicLinks([], { q: "A child has parotid swelling. What is it?", o: ["Mumps", "Sialadenitis"], a: 0 }, ctx);
   assert.ok(on.some((l) => l.id === "mumps" && l.v === "kt"), "an evidenced mapped article still rides with the lesson");
+});
+
+test("addTopicLinks: a mixed module shows the item's own subtopic, not another subtopic's article", () => {
+  const topics = { m1: { t: "Viral exanthems", kb: [["mumps", "Mumps"]], pr: [] } };
+  const ctx = { mid: "m1", sid: "s", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Viral exanthems" };
+  const it = { q: "Secondary attack rate of chickenpox is?", o: ["Low", "High", "Nil", "Same"], a: 1 };
+  assert.equal(stemEvidenced(it, { k: "kb", id: "varicella", title: "Varicella (Chickenpox)" }, {}), true);
+  assert.equal(stemEvidenced(it, { k: "kb", id: "mumps", title: "Mumps" }, {}), false);
+  const links = [{ k: "kb", id: "varicella", title: "Varicella (Chickenpox)", c: 65, v: "s", sec: "" }];
+  addTopicLinks(links, it, ctx);
+  assert.deepEqual(links.map((l) => [l.id, l.v, l.c]), [["varicella", "kt", 75]], "the item's evidenced subtopic becomes its topic target");
+  const noCand = [];
+  addTopicLinks(noCand, it, ctx);
+  assert.deepEqual(noCand.map((l) => l.id), ["mumps"], "with no evidenced candidate the module article remains the fallback");
+  const multi = { m2: { t: "Liver diseases", kb: [["hepatitis_a", "Hepatitis A"], ["wilson_disease", "Wilson Disease"]], pr: [] } };
+  const ctx2 = { mid: "m2", sid: "s", topics: multi, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Liver diseases" };
+  const out2 = addTopicLinks([], { q: "Kayser-Fleischer rings are seen in?", o: ["Wilson disease", "Haemochromatosis"], a: 0 }, ctx2);
+  assert.deepEqual(out2.map((l) => l.id), ["wilson_disease"], "among several mapped topics only the evidenced one is shown");
+});
+
+test("addTopicLinks: subject rapid-review lesson replaces an unevidenced module article; evidenced articles stay", () => {
+  const topics = { m1: { t: "Viral exanthems", kb: [["mumps", "Mumps"]], pr: [] } };
+  const ctx = { mid: "m1", sid: "microbiology", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Viral exanthems", subjectLesson: { key: "mic-mixed", title: "Microbiology mixed rapid review" } };
+  const off = addTopicLinks([], { q: "Secondary attack rate of chickenpox is?", o: ["Low", "High"], a: 1 }, ctx);
+  assert.deepEqual(off.map((l) => [l.k, l.id, l.v]), [["ls", "mic-mixed", "lt"]], "the broad subject lesson, not another subtopic's article");
+  const on = addTopicLinks([], { q: "A child has parotid swelling and orchitis. What is it?", o: ["Mumps", "Sialadenitis"], a: 0 }, ctx);
+  assert.ok(on.some((l) => l.id === "mumps" && l.v === "kt"), "an evidenced module article still wins over the subject lesson");
+  const shown = [{ k: "kb", id: "varicella", title: "Varicella (Chickenpox)", c: 92, v: "k", sec: "" }];
+  addTopicLinks(shown, { q: "Vesicles in dermatomes?", o: ["Varicella zoster", "HSV"], a: 0 }, ctx);
+  assert.ok(!shown.some((l) => l.id === "mumps"), "an unevidenced extra article does not ride along with a shown specific");
+});
+
+test("addTopicLinks: a stem-evidenced candidate becomes the per-item topic article next to the module lesson", () => {
+  const lessons = new Map([["m1", [{ key: "m1", title: "Cardiology Review", own: true }]]]);
+  const links = [{ k: "kb", id: "varicella", title: "Varicella (Chickenpox)", c: 65, v: "s", sec: "" }];
+  const out = addTopicLinks(links, { q: "Secondary attack rate of chickenpox is?", o: ["Low", "High"], a: 1 },
+    { mid: "m1", sid: "s", topics: {}, lessons, lessonMeta: new Map([["m1", { title: "Cardiology Review" }]]), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Cardiology" });
+  assert.ok(out.some((l) => l.id === "varicella" && l.v === "kt" && l.c === 75), "the item's own article at topic tier");
+  assert.ok(out.some((l) => l.id === "m1" && l.v === "lt"), "the module lesson remains");
+  const expOnly = [{ k: "kb", id: "varicella", title: "Varicella (Chickenpox)", c: 55, v: "e", sec: "" }];
+  const out2 = addTopicLinks(expOnly, { q: "A question about rashes in general?", o: ["Alpha", "Beta"], a: 0, exp: "Chickenpox is discussed in the explanation." },
+    { mid: "m1", sid: "s", topics: {}, lessons, lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Cardiology" });
+  assert.ok(!out2.some((l) => l.id === "varicella" && l.c >= 75), "an explanation-only mention is never promoted");
 });
 
 test("addTopicLinks: a mapped lesson (entry.ls) is the topic lesson when the module has none of its own", () => {
