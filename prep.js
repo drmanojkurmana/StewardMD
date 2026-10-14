@@ -1635,8 +1635,36 @@
   function row(act, icon, title, sub, attrs) {
     return '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + '><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>' + title + "</b><small>" + sub + "</small></span>" + ico("chev") + "</button>";
   }
+  /* The stored NEET-SS group, or null. Home, the custom module and the hub narrow to it; switching it clears
+     nothing else (history, bookmarks and confidence stay in the store). */
+  function ssScope() {
+    var PP = planPure(), s = load();
+    if (!PP || !s.pl || s.pl.exam !== "neet-ss") return null;
+    return PP.ssGroupOf(PP.planGroup(s.pl));
+  }
+  // Home's Subjects block for a NEET-SS student: the Step 2 shortlist (the mixed row first), a Change group
+  // control and See all subjects on its own page, never the whole scroll inline.
+  function ssHomeSubjects(scope, subs, known) {
+    var short = scope.label.replace(/ group$/, "");
+    return '<h2 class="pn-h">Subjects</h2>' +
+      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change group</button></p>' +
+      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your group") + "</div>" +
+      '<div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      '<button type="button" class="pn-btn" data-act="ss-all">See all subjects</button>';
+  }
+  // Every ss-* subject on its own page (tiles open their subjects); reached from Home's See all subjects.
+  function renderSsAll() {
+    var subs = subjectsOf("neet-ss"), scope = ssScope();
+    paint(bar("All subjects", scope ? scope.label : "", "back") + '<div class="pn-body"><div class="pn-subs" id="pnGrid">' +
+      subs.map(function (sb) { return tile(sb, null); }).join("") + "</div></div>");
+    Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
+      if (!st.open || st.stack[st.stack.length - 1] !== renderSsAll) return;
+      var grid = root().querySelector("#pnGrid");
+      if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
+    });
+  }
   function renderHome() {
-    var s = load(), ex = examOf(s.exam), subs = subjectsOf(s.exam), arena = arenaOn();
+    var s = load(), ex = examOf(s.exam), scope = ssScope(), subs = scope ? planSubjects() : subjectsOf(s.exam), arena = arenaOn();
     // The exam is asked once (onboarding, prep-plan.js) and kept in the synced store; it changes only in Settings (the
     // plan sheet's Exam row), so home shows no exam switcher. Without prep-plan.js the old exam tabs stay.
     var plan = !!G.PREP_PLAN, choice = plan && s.pl && s.pl.exam && G.PREP_PLAN._pure.choiceOf(s.pl.exam), exLabel = choice && choice.tab === ex.id ? choice.label : ex.label;
@@ -1679,7 +1707,8 @@
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       "</div>" +
       psHomeHtml(s) +
-      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      (scope ? ssHomeSubjects(scope, subs, known) :
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
       // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
       (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
       (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
@@ -3194,7 +3223,10 @@
   /* ---------- custom module ---------- */
   var cm = { subs: {}, d: 0, n: 25, mode: "study" };
   function renderCustom() {
-    var s = load(), subs = subjectsOf(s.exam);
+    // The custom module follows the plan like Tests and QBank: the NEET-SS group, the one INI-SS subject.
+    var s = load(), subs = planSubjects();
+    if (!subs.length && planNeed()) subs = subjectsOf(s.exam);
+    Object.keys(cm.subs).forEach(function (id) { var ok = false; subs.forEach(function (sb) { if (sb.id === id) ok = true; }); if (!ok) delete cm.subs[id]; });
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(cm.subs).length;
     paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm">' +
@@ -3514,6 +3546,9 @@
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
     if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
     if (a === "custom") return push(renderCustom);
+    if (a === "ss-all") return push(renderSsAll);
+    // The mixed row: the custom module prefilled with the student's group subjects.
+    if (a === "ss-mixed") { var sc = ssScope(); cm.subs = {}; if (sc) sc.subjects.forEach(function (id) { cm.subs[id] = 1; }); return push(renderCustom); }
     if (a === "cmsub") { if (cm.subs[v]) delete cm.subs[v]; else cm.subs[v] = 1; return rerender(); }
     if (a === "cmd") { cm.d = Number(v); return rerender(); }
     if (a === "cmn") { cm.n = Number(v); return rerender(); }
