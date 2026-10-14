@@ -2,8 +2,11 @@
  * Fetches and extracts high-yield clinical facts, numeric criteria, guidelines, and dosing
  * from StewardMD Knowledge Base articles and Standard Protocols to ground Ask MaiK answers.
  */
-import { existsSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+// No static node: imports: Cloudflare Workers reject the bundle ("No such module node:fs").
+// Node (tests, dev server) gets fs through process.getBuiltinModule; Workers use env.ASSETS only.
+const nodeFs = () => globalThis.process?.getBuiltinModule?.("node:fs") || null;
+const join = (...p) => p.join("/").replace(/\/{2,}/g, "/");
+const cwd = () => globalThis.process?.cwd?.() || "";
 
 export const KB_DIRS = [
   "kb/reference",
@@ -41,28 +44,28 @@ export function candidateFilenames(slug) {
   return cands;
 }
 
-export function findKbPathSync(id, rootDir = process.cwd()) {
+export function findKbPathSync(id, rootDir = cwd()) {
   const cands = candidateFilenames(id);
   for (const dir of KB_DIRS) {
     for (const c of cands) {
       const p = join(rootDir, dir, c);
-      if (existsSync(p)) return join(dir, c);
+      if (nodeFs()?.existsSync(p)) return join(dir, c);
     }
   }
   return null;
 }
 
-export function loadKbJsonSync(id, rootDir = process.cwd()) {
+export function loadKbJsonSync(id, rootDir = cwd()) {
   const rel = findKbPathSync(id, rootDir);
   if (!rel) return null;
   try {
-    return JSON.parse(readFileSync(join(rootDir, rel), "utf8"));
+    return JSON.parse(nodeFs().readFileSync(join(rootDir, rel), "utf8"));
   } catch (e) {
     return null;
   }
 }
 
-export async function loadKbJsonAsync(env, id, rootDir = process.cwd()) {
+export async function loadKbJsonAsync(env, id, rootDir = cwd()) {
   // 1. Try env.ASSETS (Cloudflare Pages Functions runtime)
   if (env && env.ASSETS && typeof env.ASSETS.fetch === "function") {
     const cands = candidateFilenames(id);
@@ -183,7 +186,7 @@ export function formatGroundingSections(docs, kp) {
   return sections.join("\n\n").slice(0, 3200);
 }
 
-export function resolveKbSync(srcPack, kp, contextText = "", rootDir = process.cwd()) {
+export function resolveKbSync(srcPack, kp, contextText = "", rootDir = cwd()) {
   const ids = Array.isArray(srcPack) ? srcPack.map((x) => (typeof x === "string" ? x : (x && x.id) || "")).filter(Boolean) : [];
   if (!ids.length) {
     ids.push(...detectInferredKbIds(contextText));
@@ -208,7 +211,7 @@ export function resolveKbSync(srcPack, kp, contextText = "", rootDir = process.c
   return formatGroundingSections(docs, kp);
 }
 
-export async function fetchKbGrounding(env, srcPack, kp, contextText = "", rootDir = process.cwd()) {
+export async function fetchKbGrounding(env, srcPack, kp, contextText = "", rootDir = cwd()) {
   const ids = Array.isArray(srcPack) ? srcPack.map((x) => (typeof x === "string" ? x : (x && x.id) || "")).filter(Boolean) : [];
   if (!ids.length) {
     ids.push(...detectInferredKbIds(contextText));
