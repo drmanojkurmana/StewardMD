@@ -83,7 +83,7 @@ def graph(name, title, desc, rows, edges=(), sub=None, w=800, cw=None, rh=56, ga
     """rows: list of rows; each row is a list of (id, text) or None. edges: (a,b[,label[,'dash']]). Returns F."""
     nrows = len(rows); ncols = max(len(r) for r in rows)
     cw = cw or (w - 60 - (ncols - 1) * 24) / ncols
-    cw = min(cw, 340)
+    cw = min(cw, 560)
     h = top + nrows * rh + (nrows - 1) * gap + 40 + (30 * len(notes) if notes else 0)
     f = F(name, title, desc, w, h, sub)
     pos = {}
