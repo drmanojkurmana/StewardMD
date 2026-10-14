@@ -18,7 +18,7 @@
 (function (G) {
   "use strict";
   var D = G.document, FL = function () { return G.SMD_NEO_FLAGS; };
-  var VER = "neo3-ui2";
+  var VER = "neo3-ui3";
   var TOOLS = [], root = null, cur = "home", curOpts = null, editing = false;
 
   function on() { return !!(FL() && FL().on()); }
@@ -95,10 +95,10 @@
       "#neoHub[hidden]{display:none!important}",
       "body.dark #neoHub,body.v3-dark #neoHub{--nh-bg:#0d1417;--nh-panel:#151f23;--nh-ink:#e3ecea;--nh-mut:#93a4a8;--nh-line:#26363b;--nh-acc:#37b8a6;--nh-acc-soft:#153430;--nh-warn:#f0b454;--nh-warn-soft:#352812;--nh-bad:#ff7b6e;--nh-bad-soft:#3a1714}",
       "#neoHub *{box-sizing:border-box}",
-      "#neoHub .nh-top{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;border-bottom:1px solid var(--nh-line);background:var(--nh-panel)}",
+      "#neoHub .nh-top{display:grid;grid-template-columns:minmax(64px,1fr) auto minmax(44px,1fr);align-items:center;gap:8px;min-height:56px;padding:calc(env(safe-area-inset-top,0px) + 4px) 12px 4px;border-bottom:1px solid var(--nh-line);background:var(--nh-panel)}",
       "#neoHub .nh-x{border:0;background:none;color:var(--nh-acc);font:600 16px var(--nh-f);padding:6px 4px;min-height:44px;min-width:44px;cursor:pointer;text-align:left}",
-      "#neoHub .nh-t{flex:1;min-width:0;font:700 17px var(--nh-f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
-      "#neoHub .nh-body{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 30px);display:flex;flex-direction:column;gap:12px}",
+      "#neoHub .nh-t{grid-column:2;min-width:0;max-width:56vw;text-align:center;font:600 17px var(--nh-f);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      "#neoHub .nh-body{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 30px);display:flex;flex-direction:column;gap:12px}",
       "#neoHub .nh-baby{position:sticky;top:-12px;z-index:2;background:var(--nh-panel);border:1px solid var(--nh-line);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px}",
       "#neoHub .nh-bsum{flex:1;min-width:0;font:600 14px var(--nh-f);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}#neoHub .nh-bsum small{display:block;font:500 12px var(--nh-f);color:var(--nh-mut)}",
       "#neoHub .nh-card{background:var(--nh-panel);border:1px solid var(--nh-line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;min-width:0}",
@@ -116,7 +116,7 @@
       "#neoHub .nh-btn{border:1.5px solid var(--nh-acc);color:var(--nh-acc);background:transparent;border-radius:10px;font:600 14px var(--nh-f);padding:8px 12px;min-height:44px;cursor:pointer}#neoHub .nh-btn.pri{background:var(--nh-acc);color:#fff}",
       "#neoHub .nh-tools{display:grid;grid-template-columns:1fr;gap:0;background:var(--nh-panel);border:1px solid var(--nh-line);border-radius:12px;overflow:hidden}",
       "#neoHub .nh-tool{display:grid;grid-template-columns:26px minmax(0,1fr) auto;grid-template-rows:auto auto;align-items:center;column-gap:10px;row-gap:2px;text-align:left;border:0;border-top:1px solid var(--nh-line);background:var(--nh-panel);color:var(--nh-ink);border-radius:0;padding:10px 12px;min-height:64px;cursor:pointer;font:600 15px var(--nh-f);line-height:1.3;min-width:0;width:100%;transition:background-color .12s ease}#neoHub .nh-tool:first-child{border-top:0}#neoHub .nh-tool small{grid-column:2;grid-row:2;font:400 12.5px var(--nh-f);color:var(--nh-mut)}#neoHub .nh-tool .material-symbols-rounded{grid-column:1;grid-row:1/3;color:var(--nh-acc);font-size:20px;line-height:1}#neoHub .nh-tool::after{content:'›';grid-column:3;grid-row:1/3;color:var(--nh-mut);font:400 22px var(--nh-f);line-height:1}",
-      "#neoHub .nh-beta{display:inline-block;vertical-align:middle;font:700 10px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--nh-acc);border-radius:6px;padding:3px 6px;margin-left:4px}",
+      "#neoHub .nh-beta{grid-column:3;justify-self:end;display:inline-block;vertical-align:middle;font:700 10px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--nh-acc);border-radius:6px;padding:3px 6px;margin:0}",
       "#neoHub .nh-draft{font:700 10.5px var(--nh-f);letter-spacing:.05em;text-transform:uppercase;color:var(--nh-warn);background:var(--nh-warn-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-ok{font:700 10.5px var(--nh-f);color:var(--nh-acc);background:var(--nh-acc-soft);border-radius:999px;padding:3px 8px}",
       "#neoHub .nh-val{font:700 24px/1.2 var(--nh-f);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}#neoHub .nh-lbl{font:700 11px var(--nh-f);letter-spacing:.06em;text-transform:uppercase;color:var(--nh-acc)}",
@@ -236,7 +236,7 @@
   function render() {
     if (!root) return;
     var body = root.querySelector(".nh-body"), t = cur !== "home" ? toolById(cur) : null;
-    root.querySelector(".nh-t").innerHTML = esc(t ? t.title : "Neonatal") + ' <span class="nh-beta" title="Beta: AI-drafted from cited sources, awaiting neonatologist review">Beta</span>';
+    root.querySelector(".nh-t").textContent = t ? t.title : "Neonatal";
     root.querySelector("[data-nh=back]").textContent = t ? "‹ All tools" : "‹ Close";
     body.innerHTML = babyBar() + (editing ? recordHtml() : "") + '<div data-nh="screen"></div>';
     var scr = body.querySelector("[data-nh=screen]");
@@ -292,7 +292,7 @@
     css();
     if (!root) {
       root = D.createElement("div"); root.id = "neoHub"; root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "Neonatal tools");
-      root.innerHTML = '<div class="nh-top"><button type="button" class="nh-x" data-nh="back" aria-label="Back">‹ Close</button><div class="nh-t">Neonatal</div></div><div class="nh-body"></div>';
+      root.innerHTML = '<div class="nh-top"><button type="button" class="nh-x" data-nh="back" aria-label="Back">‹ Close</button><div class="nh-t">Neonatal</div><span class="nh-beta" title="Beta: AI-drafted from cited sources, awaiting neonatologist review">Beta</span></div><div class="nh-body"></div>';
       root.addEventListener("click", onClick);
       root.addEventListener("input", onInput);
       root.addEventListener("change", onInput);
