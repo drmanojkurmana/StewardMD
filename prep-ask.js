@@ -664,10 +664,14 @@
         return p.teachChat(g.ground, turns(), { lexicon: lex, generate: function (prompt, system, cx) {
           var body = { kind: "chat", base: c.kind === "mcq" ? "mcq" : "step", ground: g.ground, turn: n, messages: cx.messages, idem: idemFor(S.th.k + "|" + S.th.rec.cid, n, cx.messages), thread: th };
           if (cx.summary) body.summary = cx.summary;
+          if (c.item && c.item.srcPack) body.srcPack = c.item.srcPack;
+          if (c.item && c.item.kp) body.kp = c.item.kp;
           return online(body);
         } });
       }
       var body = c.kind === "mcq" ? { kind: "mcq", ground: g.ground, key: keyOf(c.item), chosen: chosen, thread: th, turn: n } : { kind: "step", ground: g.ground, title: String(c.title || "").slice(0, 200), thread: th, turn: n };
+      if (c.item && c.item.srcPack) body.srcPack = c.item.srcPack;
+      if (c.item && c.item.kp) body.kp = c.item.kp;
       var gen = function () { return online(body); };
       return c.kind === "mcq" ? p.teach(c.item, chosen, { generate: gen, lexicon: lex, sents: g.sents }) : p.teachStep(c.step, c.title, { generate: gen, lexicon: lex });
     }).then(finish, function () { finish({ ok: false, note: "MaiK could not answer online just now." }); });
@@ -738,7 +742,7 @@
       return G.fetch((G.SMD_API_BASE || "") + URL_TEACH, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + tok }, body: JSON.stringify(body) });
     }).then(function (r) {
       return r.json().then(null, function () { return {}; }).then(function (j) {
-        if (r.status === 200 && j && j.text) { if (S === mine) { S.usage = j.usage || null; S.wallet = j.wallet || null; } return { text: j.text, model: "online" }; }
+        if (r.status === 200 && j && j.text) { if (S === mine) { S.usage = j.usage || null; S.wallet = j.wallet || null; } return { text: j.text, model: "online", beyond: Array.isArray(j.beyond) ? j.beyond : [] }; }
         return onlineNote(r.status, j);
       });
     }, function () { return onlineNote(0); });
