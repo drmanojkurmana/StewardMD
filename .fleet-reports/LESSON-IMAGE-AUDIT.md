@@ -1313,3 +1313,44 @@ regression-to-mean step, mstat-sampling dropouts step (no fitting bank figure;
 a forced figure would mislead). Next targets by exam weight:
 community-medicine (42), physiology (41), medicine (113), pathology (73),
 pharmacology (72).
+
+## Addendum 2026-10-14 (Medical SVGs: Pharma, Micro, Path, Biochem)
+
+Per Lead Note 15:05, anatomy and physiology subjects are owned by a separate Claude subagent and were skipped in this pass. Focus directed to the top non-anatomy basic sciences: **pharmacology**, **microbiology**, **pathology**, and **biochemistry**.
+
+12 new original SVG medical diagrams authored and verified in `prep/lessons/media/`:
+- `pharma-dose-response.svg` (Dose-response, EC50, competitive right-shift vs non-competitive Emax depression, partial agonist)
+- `pharma-therapeutic-index.svg` (Therapeutic index: ED50 vs TD50, narrow therapeutic margin)
+- `pharma-elimination-kinetics.svg` (First-order exponential t1/2=2h vs zero-order linear clearance)
+- `micro-cell-wall.svg` (Gram-positive thick peptidoglycan/teichoic vs Gram-negative outer membrane/LPS/periplasm)
+- `micro-growth-curve.svg` (Bacterial batch growth curve: lag, log/exponential, stationary, decline phases)
+- `micro-antibody-response.svg` (Primary IgM/IgG kinetics vs secondary memory response, affinity maturation)
+- `path-extravasation.svg` (Leukocyte extravasation sequence: margination, selectin rolling, integrin adhesion, PECAM-1 diapedesis, chemotaxis)
+- `path-apoptosis-pathways.svg` (Intrinsic mitochondrial Bax/Bak/Caspase 9 vs extrinsic FasL/Caspase 8 converging on Caspase 3)
+- `path-granuloma.svg` (Concentric caseating granuloma architecture: central necrosis, Langhans giant cells, epithelioid cuff)
+- `bio-lineweaver-burk.svg` (Lineweaver-Burk double reciprocal: competitive same 1/Vmax vs non-competitive depressed Vmax)
+- `bio-glycolysis-tca.svg` (Cellular respiration hub: glycolysis, PDH, Krebs TCA cycle, oxidative phosphorylation ~30-32 ATP)
+- `bio-purine-pathway.svg` (Purine metabolism: HGPRT salvage vs Xanthine Oxidase catabolism to uric acid)
+
+Wired into 11 target lessons across 12 steps:
+- `phm-pharmacodynamics`: step 4 -> `pharma-dose-response.svg`
+- `phm-pharmacokinetics`: step 3 -> `pharma-elimination-kinetics.svg`, step 5 -> `pharma-therapeutic-index.svg`
+- `mic-antibodies-complement`: step 2 -> `micro-antibody-response.svg`
+- `mic-history-morphology`: step 2 -> `micro-cell-wall.svg`
+- `mic-culture-identification`: step 2 -> `micro-growth-curve.svg`
+- `pat-acute-inflammation`: step 2 -> `path-extravasation.svg`
+- `pat-apoptosis`: step 2 -> `path-apoptosis-pathways.svg`
+- `pat-chronic-granulomatous`: step 4 -> `path-granuloma.svg`
+- `bio-enzymes-kinetics`: step 3 -> `bio-lineweaver-burk.svg`
+- `bio-glycolysis-tca`: step 2 -> `bio-glycolysis-tca.svg`
+- `bio-purine-pyrimidine`: step 4 -> `bio-purine-pathway.svg`
+
+Current audit counts across 1,449 lessons:
+- Total lessons: 1,449 | Illustrated: 77 (5.3%) | Zero-image: 1,372 (94.7%)
+- pharmacology: 72 lessons, 2 illustrated (70 zero)
+- microbiology: 40 lessons, 3 illustrated (37 zero)
+- pathology: 73 lessons, 3 illustrated (70 zero)
+- biochemistry: 69 lessons, 3 illustrated (66 zero)
+- anatomy: 80 lessons, 27 illustrated (53 zero, skipped per lead note)
+- physiology: 49 lessons, 8 illustrated (41 zero, skipped per lead note)
+

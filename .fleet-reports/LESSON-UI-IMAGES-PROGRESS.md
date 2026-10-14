@@ -58,3 +58,28 @@
   mstat-sampling x2 (stats-errors, stats-ci-forest), mstat-regression
   (stats-scatter), mstat-design (epi-bias), cm-infectious-epi (epi-curve).
   Audit addendum in `.fleet-reports/LESSON-IMAGE-AUDIT.md` (1449 lessons).
+
+## Update 2026-10-14 (Medical SVGs: Pharma, Micro, Path, Biochem)
+
+- **Lead Note 15:05**: Anatomy and Physiology are owned by a separate subagent and were skipped.
+- **12 New Original Medical SVGs**: Authored in `prep/lessons/media/` following project palette (#071318 / #0D1D23 / #42CDB5 / #0B6B5B / #B7791F / #B42318), viewBox 800x520 (ar = 1.538462), accessible `<title>`/`<desc>` + step alt text & captions, clean SVG geometry, all numbers verified by recomputation:
+  - Pharmacology: `pharma-dose-response.svg`, `pharma-therapeutic-index.svg`, `pharma-elimination-kinetics.svg`
+  - Microbiology: `micro-cell-wall.svg`, `micro-growth-curve.svg`, `micro-antibody-response.svg`
+  - Pathology: `path-extravasation.svg`, `path-apoptosis-pathways.svg`, `path-granuloma.svg`
+  - Biochemistry: `bio-lineweaver-burk.svg`, `bio-glycolysis-tca.svg`, `bio-purine-pathway.svg`
+- **Wired into 11 target lessons (12 steps)**:
+  - `phm-pharmacodynamics` (step 4)
+  - `phm-pharmacokinetics` (step 3 & step 5)
+  - `mic-antibodies-complement` (step 2)
+  - `mic-history-morphology` (step 2)
+  - `mic-culture-identification` (step 2)
+  - `pat-acute-inflammation` (step 2)
+  - `pat-apoptosis` (step 2)
+  - `pat-chronic-granulomatous` (step 4)
+  - `bio-enzymes-kinetics` (step 3)
+  - `bio-glycolysis-tca` (step 2)
+  - `bio-purine-pyrimidine` (step 4)
+- **Validation**: All 11 lessons pass `P.checkLesson(l)` cleanly (0 errors).
+- **Attribution**: Updated `prep/lessons/media/ATTRIBUTION.md`.
+- **Tests**: 47/47 unit tests pass; browser UI suites `test/run-prep-lessons-ui.mjs` and `test/run-prep-ui.mjs` pass 100% (ALL PASS).
+
