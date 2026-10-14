@@ -65,9 +65,11 @@ stale inventory counts.
 - `test/run-neetss-flow-ui.mjs` (Playwright, Chromium): full two-page flow, scoped home,
   see-all page, mixed prefill, group switch keeps history, reload lands on list, 390px +
   iPad, dark + light, 44px controls, no h-scroll, keyboard roles, no AI calls.
-  Local run: no browser on this machine survives process spawn (Playwright headless shell,
-  full Chromium and Google Chrome all abort-trap under the shell sandbox; safaridriver never
-  listens; unsandboxed runs need human approval, which is off). Run it where Chrome works:
+  No browser on the dev machine survives process spawn (Playwright headless shell, full
+  Chromium and Google Chrome all abort-trap under the shell sandbox; safaridriver never
+  listens; unsandboxed runs need human approval, which is off), so screenshots are pending.
+  Two ways: (1) after merge, dispatch the included neetss-flow-browser workflow and download
+  the neetss-flow-shots artifact; (2) where Chrome works:
   `SHOTS=<dir> node test/run-neetss-flow-ui.mjs`, `VP=820x1180` for iPad, `PN_LIGHT=1` light.
   Screenshots to attach: neetss-step1/step2/home at 390 and 820, dark and light.
 
