@@ -66,6 +66,8 @@ try {
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_QGEN=false; window.SMD_PREP_SETUP=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
+  await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
+  await ev(`try{localStorage.removeItem("smd_prep"); localStorage.removeItem("smd_prep_v1"); localStorage.setItem("smd_home_tools", JSON.stringify({ prep: true }));}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await load(BASE + "?prep=1");
   ok(await until(`return !!document.querySelector('.rnav-tile[data-act=prep]');`, 10000), "?prep=1: the tile renders");
   await click(".rnav-tile[data-act=prep]");
