@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { addTopicLinks, moduleTopicFallback, gateSpecificLinks, entityOverlap, stemEvidenced, ktOk, SPECIFIC_MIN_E, SPECIFIC_MIN } from "../tools/prep-links.mjs";
+import { addTopicLinks, moduleTopicFallback, gateSpecificLinks, entityOverlap, stemEvidenced, tagEvidenced, promotable, ktOk, SPECIFIC_MIN_E, SPECIFIC_MIN } from "../tools/prep-links.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readJ = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
@@ -124,6 +124,22 @@ test("addTopicLinks: a stem-evidenced candidate becomes the per-item topic artic
   const out2 = addTopicLinks(expOnly, { q: "A question about rashes in general?", o: ["Alpha", "Beta"], a: 0, exp: "Chickenpox is discussed in the explanation." },
     { mid: "m1", sid: "s", topics: {}, lessons, lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Cardiology" });
   assert.ok(!out2.some((l) => l.id === "varicella" && l.c >= 75), "an explanation-only mention is never promoted");
+});
+
+test("promotable: topic tags promote, distractors and explanation-only mentions do not", () => {
+  const it = { q: "A patient in the ICU has a new skin colonisation finding. What is it?", o: ["Candida auris", "Candida albicans", "Aspergillus", "Mucor"], a: 0, tg: ["Candida auris colonisation"], exp: "Candida auris colonises skin." };
+  const cand = { k: "kb", id: "candida_auris", title: "Candida Auris", c: 55, v: "e", sec: "" };
+  assert.equal(tagEvidenced(it, cand, {}), true);
+  assert.equal(promotable(it, cand, {}), true, "a tag-named candidate above the distractor cap promotes");
+  const distractor = { k: "kb", id: "x", title: "Mucor", c: 50, v: "s", sec: "" };
+  assert.equal(promotable(it, distractor, {}), false, "a candidate at the distractor cap never promotes");
+  const neg = { k: "kb", id: "candida_auris", title: "Candida Auris", c: 60, v: "k", sec: "" };
+  assert.equal(promotable(it, neg, {}), false, "a negated keyed mention does not promote on tags alone");
+  const noTag = { ...it, tg: [] };
+  assert.equal(promotable(noTag, cand, {}), false, "an explanation-only mention without tags or stem evidence does not promote");
+  const links = [{ ...cand }];
+  const out = addTopicLinks(links, it, { mid: "m1", sid: "medicine", topics: {}, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Medicine" });
+  assert.ok(out.some((l) => l.id === "candida_auris" && l.v === "kt" && l.c === 75), "the tag-evidenced article becomes the topic target");
 });
 
 test("addTopicLinks: a mapped lesson (entry.ls) is the topic lesson when the module has none of its own", () => {
