@@ -75,8 +75,12 @@ const page = await ctx.newPage();
 const errors = [], reqs = [];
 page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && (e.stack || e.message)) || ""))) errors.push(String(e.message || e)); });
 page.on("request", (r) => reqs.push(r.url()));
-await page.route(/^https:\/\/neetss\.test\/nsfix\//, serveFix);
-await page.route(/^https:\/\/neetss\.test\//, serveFile);
+// One dispatcher: matching order between registered routes is engine-defined, so the fixture
+// paths must win inside a single handler, never via registration order.
+await page.route(/^https:\/\/neetss\.test\//, (route) => {
+  const p = new URL(route.request().url()).pathname;
+  return p === FIX || p.startsWith(FIX) ? serveFix(route) : serveFile(route);
+});
 await page.addInitScript(`window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_OVERLAYS={};
   window.confirm=function(){return true;}; try{localStorage.setItem("smd_prep","1");["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){localStorage.removeItem(k);});}catch(e){}`);
 await page.goto(BASE);
@@ -91,24 +95,37 @@ async function shot(name) { if (!SHOTS) return; await sleep(400); await page.scr
 const tiles = () => page.evaluate(() => [].map.call(document.querySelectorAll("#pnGrid .pn-tile"), (b) => b.getAttribute("data-s")).join(","));
 const noXScroll = () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
 
+async function dumpState(tag) {
+  try {
+    const st = await ev(() => {
+      const root = document.querySelector("#smdPrep");
+      return { home: !!document.querySelector("#smdPrep #pnHome"), err: !!document.querySelector("#smdPrep .pn-err"),
+        q: (document.querySelector("#smdPrep .pl-q") || {}).textContent || null,
+        body: ((root || {}).textContent || "").replace(/\s+/g, " ").trim().slice(0, 240) };
+    });
+    console.log("STATE " + tag + " " + JSON.stringify(st));
+  } catch (e) { console.log("STATE " + tag + " unreadable: " + (e && e.message)); }
+}
 try {
   // ---- first-time flow: exam -> Step 1 -> Step 2, each on its own page
   await ev(() => PREP.open());
-  ok(await until(() => !!document.querySelector("#smdPrep .pl-q")), "first open shows onboarding");
+  const booted = await until(() => !!document.querySelector("#smdPrep .pl-q"));
+  ok(booted, "first open shows onboarding");
+  if (!booted) await dumpState("no-onboarding");
   ok((await txt("#smdPrep .pl-q") || "").includes("Which exam"), "exam step first");
-  await tap('#smdPrep [data-act=p-f-exam][data-v="neet-ss"]');
-  ok(await until(() => /who you are/.test(document.querySelector("#smdPrep .pl-ob").textContent)), "NEET-SS names what is next, no long group scroll");
+  ok(await tap('#smdPrep [data-act=p-f-exam][data-v="neet-ss"]'), "tap NEET-SS exam");
+  ok(await until(() => { const o = document.querySelector("#smdPrep .pl-ob"); return o && /who you are/.test(o.textContent); }), "NEET-SS names what is next, no long group scroll");
   ok(await ev(() => !document.querySelector('#smdPrep [data-act="p-f-group"]')), "exam step has no inline group list");
-  await tap("#smdPrep [data-act=p-ob-next]");
+  ok(await tap("#smdPrep [data-act=p-ob-next]"), "tap Continue to Step 1");
   ok(await until(() => /Who are you/.test(document.querySelector("#smdPrep .pl-q").textContent)), "Step 1 on its own page");
   const cards = await ev(() => Array.from(document.querySelectorAll('#smdPrep [data-act="p-f-group"]')).map((b) => b.textContent.replace(/\s+/g, " ").trim()).join(" | "));
   ok((cards.match(/data-v/g) || []).length === 0 && cards.split(" | ").length === 15, "Step 1 offers the fifteen feeder groups: " + cards.split(" | ").length);
   ok(/Radiodiagnosis/.test(cards) && /own paper/.test(cards), "radiodiagnosis and own-paper groups listed with degree and includes lines");
   ok(await ev(() => document.querySelectorAll('#smdPrep [role="radio"][aria-checked="true"]').length) === 0, "nothing preselected");
-  ok(await ev(() => document.querySelector("#smdPrep [data-act=p-ob-next]").disabled) === true, "Step 1 Continue waits for a pick");
+  ok(await ev(() => { const b = document.querySelector("#smdPrep [data-act=p-ob-next]"); return !!b && b.disabled === true; }), "Step 1 Continue waits for a pick");
   await shot("step1");
-  await tap('#smdPrep [data-act="p-f-group"][data-v="surgical"]');
-  ok(await ev(() => document.querySelector('#smdPrep [data-act="p-f-group"][data-v="surgical"]').getAttribute("aria-checked")) === "true", "surgical card selects");
+  ok(await tap('#smdPrep [data-act="p-f-group"][data-v="surgical"]'), "tap surgical card");
+  ok(await ev(() => { const b = document.querySelector('#smdPrep [data-act="p-f-group"][data-v="surgical"]'); return !!b && b.getAttribute("aria-checked") === "true"; }), "surgical card selects");
   await tap("#smdPrep [data-act=p-ob-next]");
   ok(await until(() => /Pick your super-specialty/.test(document.querySelector("#smdPrep .pl-q").textContent)), "Step 2 on its own page");
   ok(await until(() => /MCQs/.test(document.querySelector("#smdPrep .pl-ob").textContent), 20000), "Step 2 fills module and MCQ counts");
@@ -123,7 +140,7 @@ try {
   // Change group goes back to Step 1 with the pick kept.
   await tap('#smdPrep [data-act="p-f-who"]');
   ok(await until(() => /Who are you/.test(document.querySelector("#smdPrep .pl-q").textContent)), "Change group returns to Step 1");
-  ok(await ev(() => document.querySelector('#smdPrep [data-act="p-f-group"][data-v="surgical"]').getAttribute("aria-checked")) === "true", "pick kept");
+  ok(await ev(() => { const b = document.querySelector('#smdPrep [data-act="p-f-group"][data-v="surgical"]'); return !!b && b.getAttribute("aria-checked") === "true"; }), "pick kept");
   await tap("#smdPrep [data-act=p-ob-next]");
   ok(await until(() => /Pick your super-specialty/.test(document.querySelector("#smdPrep .pl-q").textContent)), "forward to Step 2 again");
   await tap("#smdPrep [data-act=p-ob-next]");
@@ -183,6 +200,8 @@ try {
   console.log("FAIL harness error: " + (e && e.message));
   fails++;
 }
+await dumpState("final");
+if (SHOTS && fails) { try { await page.screenshot({ path: join(SHOTS, "neetss-failure-" + TAG + ".png") }); } catch (e) {} }
 await browser.close();
 console.log(fails ? "RESULT FAIL" : "RESULT PASS");
 process.exit(fails ? 1 : 0);
