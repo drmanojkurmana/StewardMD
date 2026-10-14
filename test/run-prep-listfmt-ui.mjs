@@ -112,7 +112,10 @@ try {
   const lum = (c) => { const x = c.match(/[\d.]+/g).map(Number).slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }); return 0.2126 * x[0] + 0.7152 * x[1] + 0.0722 * x[2]; };
   const ratio = (f, b) => (Math.max(lum(f), lum(b)) + 0.05) / (Math.min(lum(f), lum(b)) + 0.05);
   const cols = `var m=document.querySelector("#smdPrep .pn-lf-m"); if(!m) return "none";
-    return getComputedStyle(m).color + " on " + getComputedStyle(document.querySelector("#smdPrep")).backgroundColor;`;
+    function opaque(c){var a=String(c).match(/[\\d.]+/g); return !a || a.length<3 || !(+a[0]===0&&+a[1]===0&&+a[2]===0&&a.length>3&&+a[3]===0);}
+    var el=m, b=null; while(el){var c=getComputedStyle(el).backgroundColor; if(opaque(c)){b=c;break;} el=el.parentElement;}
+    if(!b) b=getComputedStyle(document.body).backgroundColor;
+    return getComputedStyle(m).color + " on " + b;`;
   await ev(`document.body.classList.remove("dark"); return 1;`); await sleep(300);
   const [fL, bL] = String(await ev(cols)).split(" on ");
   const crLight = bL === undefined ? 0 : ratio(fL, bL);

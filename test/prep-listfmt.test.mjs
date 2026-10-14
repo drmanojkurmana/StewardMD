@@ -108,6 +108,8 @@ test("match-the-following stems become a two-column table with headers", () => {
   const p = LF.parse(q);
   assert.ok(p && p.match);
   assert.deepEqual(p.match.cols.map((c) => c.items.length), [4, 4]);
+  assert.equal(p.lead, "Match each interstitial lung disease pattern with its characteristic imaging finding.");
+  for (const c of p.match.cols) for (const it of c.items) assert.ok(!/column/i.test(it.text));
   const h = LF.stem(q);
   assert.ok(h.includes('<th scope="col">Column I</th>') && h.includes('<th scope="col">Column II</th>'));
   assert.ok(h.includes("Honeycombing") && h.includes("Sub-pleural sparing"));

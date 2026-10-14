@@ -172,20 +172,23 @@
     }
     if ((saysMatch || interleave(a, b)) && !bodiesOverlap(a.items[0], b.items[0])) {
       var first = a.items[0].at < b.items[0].at ? a : b, second = first === a ? b : a;
-      /* Re-cut bodies at every label of either run so "1. Scaphocephaly a. Metopic 2. ..." splits cleanly. */
+      /* Re-cut bodies at every label of either run so "1. Scaphocephaly a. Metopic 2. ..." splits cleanly.
+         Standalone "Column A" / "List II" header lines carry no item content: they leave the bodies. */
+      function dehead(s) { return trim(String(s).replace(/^[ \t]*(column|list)[ \t]+[a-z0-9ivx]+[ \t]*$/gim, "")); }
       function recut(run, other) {
         var marks = run.items.concat(other.items).sort(function (p, q) { return p.at - q.at; });
         return run.items.map(function (it) {
           var nx = null, n;
           for (n = 0; n < marks.length; n++) if (marks[n].at > it.at && (!nx || marks[n].at < nx.at)) nx = marks[n];
-          var body = trim(t.slice(it.end, nx ? nx.at : t.length));
+          var body = dehead(t.slice(it.end, nx ? nx.at : t.length));
           return body ? { label: it.label, disp: it.disp, text: body } : null;
         }).filter(Boolean);
       }
       var c1 = recut(first, second), c2 = recut(second, first);
       if (c1.length >= 2 && c2.length >= 2) {
         var heads = saysMatch && /column/i.test(t) ? ["Column I", "Column II"] : ["A", "B"];
-        return { lead: trim(t.slice(0, Math.min(a.items[0].at, b.items[0].at))), items: null, ol: null,
+        var lead = dehead(t.slice(0, Math.min(a.items[0].at, b.items[0].at)));
+        return { lead: lead, items: null, ol: null,
           match: { cols: [{ head: heads[0], items: c1 }, { head: heads[1], items: c2 }] } };
       }
     }
