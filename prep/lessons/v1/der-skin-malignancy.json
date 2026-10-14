@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-skin-malignancy",
+ "subject": "dermatology",
+ "title": "Cutaneous malignancies: basal cell carcinoma, squamous cell carcinoma, malignant melanoma, Breslow depth",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Basal cell carcinoma (BCC)** is the most common human malignancy, arising from pluripotent basal cells of the interfollicular epidermis and hair follicles. Prolonged intermittent ultraviolet radiation is the predominant risk factor. The classic nodular subtype presents as a slow-growing, pearly translucent papule or nodule with rolled borders and prominent arborising surface telangiectasia, often developing central ulceration (rodent ulcer).",
+   "say": "Basal cell carcinoma presents as a pearly translucent papule with telangiectasia and rolled borders that rarely metastasizes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ultraviolet DNA damage (PTCH1 mutation)"
+     },
+     {
+      "id": "b",
+      "label": "Pearly translucent nodule with telangiectasia"
+     },
+     {
+      "id": "c",
+      "label": "Local invasion with minimal metastasis risk"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Squamous cell carcinoma (SCC)** arises from malignant proliferation of epidermal keratinocytes. Cumulative lifelong ultraviolet radiation is the chief driver, frequently preceded by premalignant **actinic keratosis** or Bowen disease (SCC in situ). Invasive SCC presents as an indurated, hyperkeratotic, crusted nodule or non-healing ulcer on sun-damaged skin, carrying significant risk of regional lymph node metastasis.",
+   "say": "Squamous cell carcinoma presents as an indurated crusted ulcer or nodule on sun-damaged skin, with metastasis risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Malignant melanoma** arises from transformed melanocytes and accounts for the majority of skin cancer deaths. The bedside **ABCDE criteria** facilitate early clinical detection: Asymmetry, Border irregularity, Colour variegation (shades of brown, black, red, white), Diameter exceeding six millimetres, and Evolution (any change in size, shape, elevation, or bleeding).",
+   "say": "Melanoma is evaluated using ABCDE criteria: asymmetry, border irregularity, colour variegation, diameter over six millimetres, and evolving changes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal cell carcinoma",
+     "points": [
+      "Arises from basal epidermal cells",
+      "Pearly translucent border, telangiectasia",
+      "Local tissue destruction, rodent ulcer",
+      "Extremely low metastatic potential"
+     ]
+    },
+    "right": {
+     "title": "Squamous cell carcinoma",
+     "points": [
+      "Arises from malignant keratinocytes",
+      "Indurated crusted plaque or ulcer",
+      "Arises from actinic keratosis",
+      "Significant metastatic risk to lymph nodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Breslow thickness** is the single most important histological prognostic factor in primary cutaneous melanoma. It measures the vertical tumour depth in millimetres from the top of the epidermal granular layer (or base of ulceration) to the deepest invasive melanoma cell. Breslow thickness dictates surgical excision margins and determines the indication for sentinel lymph node biopsy (typically recommended for thickness over 0.8 mm).",
+   "say": "Breslow thickness measures vertical tumour depth in millimetres and is the primary determinant of prognosis and surgical margins.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Breslow tumour thickness",
+     "Recommended surgical margin",
+     "Sentinel lymph node biopsy"
+    ],
+    "rows": [
+     [
+      "Melanoma in situ",
+      "0.5 cm margin",
+      "Not indicated"
+     ],
+     [
+      "Less than or equal to 1.0 mm",
+      "1.0 cm margin",
+      "Consider if ulcerated or over 0.8 mm"
+     ],
+     [
+      "1.01 to 2.0 mm",
+      "1.0 to 2.0 cm margin",
+      "Routinely recommended"
+     ],
+     [
+      "Greater than 2.0 mm",
+      "2.0 cm margin",
+      "Routinely recommended"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Major melanoma subtypes** include superficial spreading melanoma (most common overall, prolonged radial growth phase), nodular melanoma (rapid vertical growth, early deep invasion), lentigo maligna melanoma (elderly sun-damaged facial skin), and acral lentiginous melanoma (palms, soles, subungual nail apparatus, independent of UV radiation and most common in darker skin types).",
+   "say": "Melanoma subtypes include superficial spreading, nodular with rapid vertical growth, lentigo maligna, and non-UV acral lentiginous on palms and soles.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-melanoma",
+  "kb-reference-basal_cell_carcinoma"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

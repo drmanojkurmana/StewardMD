@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "bio-nucleotides",
+ "subject": "biochemistry",
+ "title": "Purine and pyrimidine metabolism, salvage pathways and gout",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**De novo purine synthesis** constructs the purine ring directly onto ribose-5-phosphate, with **PRPP synthetase** and **PRPP amidotransferase** serving as committing steps. Glycine, aspartate, glutamine, CO2, and tetrahydrofolate donate ring atoms to yield inosine monophosphate (IMP). Conversely, **de novo pyrimidine synthesis** synthesizes the orotate ring first before attaching PRPP, initiated by cytosolic **carbamoyl phosphate synthetase II (CPS II)**. Ribonucleotide reductase converts ribonucleotides to deoxyribonucleotides for DNA replication.",
+   "say": "Purine synthesis builds the purine ring atom by atom onto ribose 5 phosphate, using PRPP amidotransferase as the rate limiting enzyme. Pyrimidine synthesis builds the six membered pyrimidine ring first using carbamoyl phosphate synthetase 2 before attaching PRPP.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Purine Biosynthesis",
+     "Pyrimidine Biosynthesis"
+    ],
+    "rows": [
+     [
+      "Committed step",
+      "PRPP amidotransferase",
+      "Carbamoyl phosphate synthetase II (CPS II)"
+     ],
+     [
+      "Subcellular location",
+      "Cytosol",
+      "Cytosol (except mitochondrial dihydroorotate dehydrogenase)"
+     ],
+     [
+      "Assembly strategy",
+      "Ring assembled directly onto PRPP backbone",
+      "Pyrimidines ring synthesized first, then linked to PRPP"
+     ],
+     [
+      "Parent nucleotide",
+      "Inosine monophosphate (IMP)",
+      "Uridine monophosphate (UMP)"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "The purine salvage pathway recycles free bases into nucleotides, consuming less energy than de novo synthesis. **HGPRT** converts hypoxanthine to IMP and guanine to GMP using PRPP. **Lesch-Nyhan syndrome** is an X-linked recessive disorder caused by complete **HGPRT deficiency**. Lacking salvage, PRPP accumulates and accelerates de novo purine synthesis, causing massive uric acid overproduction. Clinical features include gout, nephrolithiasis, dystonia, choreoathetosis, and compulsive **self-mutilating behavior** such as lip biting.",
+   "say": "HGPRT salvages hypoxanthine and guanine back into purine nucleotides. Complete HGPRT deficiency causes Lesch-Nyhan syndrome, an X linked disease with hyperuricaemia, gout, kidney stones, choreoathetosis, and compulsive self-mutilation such as biting lips and fingers.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "X-linked HGPRT enzyme deficiency"
+     },
+     {
+      "id": "n2",
+      "label": "Failure of purine base salvage into IMP and GMP"
+     },
+     {
+      "id": "n3",
+      "label": "Accumulation of PRPP drives de novo purine synthesis"
+     },
+     {
+      "id": "n4",
+      "label": "Excessive purine degradation to uric acid"
+     },
+     {
+      "id": "n5",
+      "label": "Gout, dystonia, chorea, compulsive self-mutilation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Adenosine deaminase (ADA)** deaminates adenosine and deoxyadenosine to inosine. Inherited ADA deficiency causes autosomal recessive **severe combined immunodeficiency (SCID)**. Without ADA, toxic **deoxy-ATP (dATP)** accumulates and allosterically inhibits **ribonucleotide reductase**, starving dividing cells of deoxyribonucleotides. Rapidly proliferating T and B lymphocytes undergo apoptosis, resulting in profound combined humoral and cellular immunodeficiency, recurrent opportunistic infections, and failure to thrive.",
+   "say": "Adenosine deaminase deficiency causes autosomal recessive severe combined immunodeficiency. Toxic deoxy-ATP accumulates, shutting down ribonucleotide reductase. This deprives dividing lymphocytes of DNA precursors, destroying both T and B cell immunity.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Autosomal recessive ADA gene mutation"
+     },
+     {
+      "id": "a2",
+      "label": "Accumulation of deoxyadenosine and dATP"
+     },
+     {
+      "id": "a3",
+      "label": "Allosteric inhibition of ribonucleotide reductase"
+     },
+     {
+      "id": "a4",
+      "label": "DNA synthesis arrest in proliferating lymphoblasts"
+     },
+     {
+      "id": "a5",
+      "label": "Profound T and B cell depletion (SCID phenotype)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Purines degrade into hypoxanthine and xanthine, which **xanthine oxidase** oxidizes to **uric acid**, the end product of human purine catabolism. When serum urate exceeds its solubility limit of 6.8 milligrams per decilitre, monosodium urate crystals precipitate within synovial fluid and periarticular tissues. Crystals trigger neutrophil phagocytosis and **NLRP3 inflammasome activation**, releasing IL-1beta and causing agonizing podagra, fever, joint swelling, and chronic tophaceous deposits.",
+   "say": "Xanthine oxidase oxidizes purines to uric acid. When uric acid levels exceed solubility, needle-shaped monosodium urate crystals precipitate in joints, activating the NLRP3 inflammasome. This triggers intense neutrophilic inflammation causing severe acute gouty arthritis.",
+   "vis": {
+    "left": {
+     "title": "Gout (Monosodium Urate)",
+     "points": [
+      "Needle-shaped crystalline morphology",
+      "Strongly negative birefringent (yellow when parallel)",
+      "Typically affects first MTP joint (podagra)",
+      "Hyperuricaemia from overproduction or underexcretion"
+     ]
+    },
+    "right": {
+     "title": "Pseudogout (Calcium Pyrophosphate)",
+     "points": [
+      "Rhomboid-shaped crystalline morphology",
+      "Weakly positive birefringent (blue when parallel)",
+      "Typically affects knees and wrists",
+      "Associated with hemochromatosis and hyperparathyroidism"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Nucleotide biosynthetic pathways provide prime targets for antimicrobial, immunosuppressive, and antineoplastic agents. **Methotrexate** inhibits dihydrofolate reductase, blocking thymidylate and purine synthesis. **5-Fluorouracil** forms 5-FdUMP to inhibit thymidylate synthase. **Mycophenolate mofetil** inhibits inosine monophosphate dehydrogenase, selectively suppressing lymphocyte purine synthesis. **Allopurinol and febuxostat** inhibit xanthine oxidase, lowering serum urate in chronic gout and tumor lysis syndrome prevention.",
+   "say": "Antimetabolites target nucleotide metabolism. Methotrexate blocks dihydrofolate reductase, 5-fluorouracil inhibits thymidylate synthase, and mycophenolate inhibits IMP dehydrogenase. Allopurinol and febuxostat inhibit xanthine oxidase to prevent uric acid accumulation.",
+   "vis": {
+    "cols": [
+     "Drug",
+     "Target Enzyme",
+     "Metabolic Consequence",
+     "Clinical Use"
+    ],
+    "rows": [
+     [
+      "Methotrexate",
+      "Dihydrofolate reductase (DHFR)",
+      "Depletes tetrahydrofolate, blocks dTMP and purines",
+      "Leukaemia, lymphoma, rheumatoid arthritis"
+     ],
+     [
+      "5-Fluorouracil (5-FU)",
+      "Thymidylate synthase",
+      "Blocks dUMP to dTMP conversion, arrests DNA synthesis",
+      "Colorectal and breast adenocarcinoma"
+     ],
+     [
+      "Mycophenolate",
+      "IMP dehydrogenase",
+      "Depletes guanine nucleotides, inhibits lymphocytes",
+      "Organ transplant immunosuppression, lupus nephritis"
+     ],
+     [
+      "Allopurinol / Febuxostat",
+      "Xanthine oxidase",
+      "Decreases uric acid production, elevates xanthine",
+      "Chronic gout prevention, tumor lysis prophylaxis"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-gout",
+  "kb-reference-lesch-nyhan-syndrome"
+ ]
+}

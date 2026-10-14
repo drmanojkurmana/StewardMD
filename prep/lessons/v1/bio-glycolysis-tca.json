@@ -1,101 +1,101 @@
 {
-  "module": "bio-glycolysis-tca",
-  "subject": "biochemistry",
-  "title": "Glycolysis, pyruvate dehydrogenase and the tricarboxylic acid cycle",
-  "minutes": 6,
-  "refs": [
-    "Harper's Illustrated Biochemistry",
-    "Lippincott Illustrated Reviews: Biochemistry"
-  ],
-  "steps": [
-    {
-      "tx": "The **glycolytic pathway** in the cytoplasm converts one molecule of glucose into two molecules of pyruvate with the net generation of two ATP and two NADH. The commitment step is catalyzed by phosphofructokinase-one, which phosphorylates fructose-6-phosphate to fructose-1,6-bisphosphate. Phosphofructokinase-one is allosterically inhibited by high cellular ATP and citrate, and powerfully activated by fructose-2,6-bisphosphate, synthesized by the tandem bifunctional enzyme PFK-2.",
-      "say": "The glycolytic pathway converts one molecule of glucose into two molecules of pyruvate, generating two ATP and two NADH. The rate-limiting step is catalyzed by phosphofructokinase-one, converting fructose-6-phosphate to fructose-1,6-bisphosphate. It is inhibited by ATP and citrate, and activated by fructose-2,6-bisphosphate.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Regulatory enzyme",
-          "Substrates and products",
-          "Key allosteric regulators"
-        ],
-        "rows": [
-          [
-            "Hexokinase / Glucokinase",
-            "Glucose to glucose-6-phosphate",
-            "Glucose-6-P inhibits hexokinase; insulin induces glucokinase"
-          ],
-          [
-            "Phosphofructokinase-1",
-            "Fructose-6-P to fructose-1,6-BP",
-            "ATP, citrate inhibit; AMP, F-2,6-BP activate"
-          ],
-          [
-            "Pyruvate kinase",
-            "Phosphoenolpyruvate to pyruvate",
-            "ATP, alanine inhibit; fructose-1,6-BP feedforward activates"
-          ],
-          [
-            "Pyruvate dehydrogenase",
-            "Pyruvate to acetyl-CoA",
-            "Acetyl-CoA, NADH inhibit; ADP, Ca2+ activate"
-          ]
-        ]
-      }
+ "module": "bio-glycolysis-tca",
+ "subject": "biochemistry",
+ "title": "Glycolysis, pyruvate dehydrogenase and the tricarboxylic acid cycle",
+ "minutes": 6,
+ "refs": [
+  "Harper's Illustrated Biochemistry",
+  "Lippincott Illustrated Reviews: Biochemistry"
+ ],
+ "steps": [
+  {
+   "tx": "The **glycolytic pathway** in the cytoplasm converts one molecule of glucose into two molecules of pyruvate with the net generation of two ATP and two NADH. The commitment step is catalyzed by phosphofructokinase-one, which phosphorylates fructose-6-phosphate to fructose-1,6-bisphosphate. Phosphofructokinase-one is allosterically inhibited by high cellular ATP and citrate, and powerfully activated by fructose-2,6-bisphosphate, synthesized by the tandem bifunctional enzyme PFK-2.",
+   "say": "The glycolytic pathway converts one molecule of glucose into two molecules of pyruvate, generating two ATP and two NADH. The rate-limiting step is catalyzed by phosphofructokinase-one, converting fructose-6-phosphate to fructose-1,6-bisphosphate. It is inhibited by ATP and citrate, and activated by fructose-2,6-bisphosphate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regulatory enzyme",
+     "Substrates and products",
+     "Key allosteric regulators"
+    ],
+    "rows": [
+     [
+      "Hexokinase / Glucokinase",
+      "Glucose to glucose-6-phosphate",
+      "Glucose-6-P inhibits hexokinase; insulin induces glucokinase"
+     ],
+     [
+      "Phosphofructokinase-1",
+      "Fructose-6-P to fructose-1,6-BP",
+      "ATP, citrate inhibit; AMP, F-2,6-BP activate"
+     ],
+     [
+      "Pyruvate kinase",
+      "Phosphoenolpyruvate to pyruvate",
+      "ATP, alanine inhibit; fructose-1,6-BP feedforward activates"
+     ],
+     [
+      "Pyruvate dehydrogenase",
+      "Pyruvate to acetyl-CoA",
+      "Acetyl-CoA, NADH inhibit; ADP, Ca2+ activate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The mitochondrial **pyruvate dehydrogenase complex** bridges glycolysis and the tricarboxylic acid cycle by oxidatively decarboxylating pyruvate to acetyl-CoA, releasing carbon dioxide and generating NADH. It requires five essential cofactors: thiamine pyrophosphate (vitamin B1), lipoic acid, coenzyme A (pantothenate B5), flavin adenine dinucleotide (riboflavin B2) and nicotinamide adenine dinucleotide (niacin B3). Thiamine deficiency impairs PDH, causing lactic acidosis and Wernicke-Korsakoff syndrome.",
+   "say": "The pyruvate dehydrogenase complex bridges glycolysis and the citric acid cycle by decarboxylating pyruvate to acetyl-CoA. It requires five cofactors: thiamine pyrophosphate, lipoic acid, coenzyme A, FAD and NAD+. Thiamine deficiency impairs the enzyme complex, causing lactic acidosis and Wernicke encephalopathy.",
+   "vis": null
+  },
+  {
+   "tx": "The **tricarboxylic acid cycle** or Krebs cycle oxidizes acetyl-CoA within the mitochondrial matrix, producing three NADH, one FADH2, one GTP and two carbon dioxide per acetyl-CoA turned. Oxaloacetate condenses with acetyl-CoA via citrate synthase to form citrate. Isocitrate dehydrogenase catalyzes the rate-limiting oxidative decarboxylation to alpha-ketoglutarate, inhibited by ATP and NADH and activated by ADP. Succinate dehydrogenase embeds directly within inner mitochondrial complex two.",
+   "say": "The tricarboxylic acid cycle oxidizes acetyl-CoA within the mitochondrial matrix, producing three NADH, one FADH2, one GTP and two carbon dioxide per turn. Citrate synthase condenses oxaloacetate with acetyl-CoA. Isocitrate dehydrogenase is the rate-limiting step, inhibited by ATP and activated by ADP. Succinate dehydrogenase is inner mitochondrial complex two.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aerobic glycolysis + TCA",
+     "points": [
+      "Pyruvate enters mitochondria via carrier",
+      "Converted to acetyl-CoA by PDH complex",
+      "NADH transferred to electron transport chain",
+      "Yields 30 to 32 ATP per glucose molecule"
+     ]
     },
-    {
-      "tx": "The mitochondrial **pyruvate dehydrogenase complex** bridges glycolysis and the tricarboxylic acid cycle by oxidatively decarboxylating pyruvate to acetyl-CoA, releasing carbon dioxide and generating NADH. It requires five essential cofactors: thiamine pyrophosphate (vitamin B1), lipoic acid, coenzyme A (pantothenate B5), flavin adenine dinucleotide (riboflavin B2) and nicotinamide adenine dinucleotide (niacin B3). Thiamine deficiency impairs PDH, causing lactic acidosis and Wernicke-Korsakoff syndrome.",
-      "say": "The pyruvate dehydrogenase complex bridges glycolysis and the citric acid cycle by decarboxylating pyruvate to acetyl-CoA. It requires five cofactors: thiamine pyrophosphate, lipoic acid, coenzyme A, FAD and NAD+. Thiamine deficiency impairs the enzyme complex, causing lactic acidosis and Wernicke encephalopathy.",
-      "vis": null
-    },
-    {
-      "tx": "The **tricarboxylic acid cycle** or Krebs cycle oxidizes acetyl-CoA within the mitochondrial matrix, producing three NADH, one FADH2, one GTP and two carbon dioxide per acetyl-CoA turned. Oxaloacetate condenses with acetyl-CoA via citrate synthase to form citrate. Isocitrate dehydrogenase catalyzes the rate-limiting oxidative decarboxylation to alpha-ketoglutarate, inhibited by ATP and NADH and activated by ADP. Succinate dehydrogenase embeds directly within inner mitochondrial complex two.",
-      "say": "The tricarboxylic acid cycle oxidizes acetyl-CoA within the mitochondrial matrix, producing three NADH, one FADH2, one GTP and two carbon dioxide per turn. Citrate synthase condenses oxaloacetate with acetyl-CoA. Isocitrate dehydrogenase is the rate-limiting step, inhibited by ATP and activated by ADP. Succinate dehydrogenase is inner mitochondrial complex two.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Aerobic glycolysis + TCA",
-          "points": [
-            "Pyruvate enters mitochondria via carrier",
-            "Converted to acetyl-CoA by PDH complex",
-            "NADH transferred to electron transport chain",
-            "Yields 30 to 32 ATP per glucose molecule"
-          ]
-        },
-        "right": {
-          "title": "Anaerobic glycolysis",
-          "points": [
-            "Pyruvate reduced to lactate by lactate dehydrogenase",
-            "Regenerates NAD+ to sustain GAPDH flux",
-            "Occurs in mature erythrocytes and ischemic muscle",
-            "Net yield only 2 ATP per glucose molecule"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Arsenic poisoning directly inhibits the pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase complexes by binding the sulfhydryl groups of **lipoic acid**. This disrupts aerobic mitochondrial respiration and ATP synthesis, producing vomiting, rice-water diarrhea, garlic-scented breath and prolonged QT interval. Fluoroacetate inhibits aconitase, while malonate acts as a classical competitive inhibitor of succinate dehydrogenase, arresting cycle progression.",
-      "say": "Arsenic poisoning inhibits pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase by binding lipoic acid sulfhydryls. This disrupts mitochondrial ATP synthesis, producing vomiting, rice-water diarrhea and garlic breath. Fluoroacetate inhibits aconitase, while malonate inhibits succinate dehydrogenase.",
-      "vis": null
+    "right": {
+     "title": "Anaerobic glycolysis",
+     "points": [
+      "Pyruvate reduced to lactate by lactate dehydrogenase",
+      "Regenerates NAD+ to sustain GAPDH flux",
+      "Occurs in mature erythrocytes and ischemic muscle",
+      "Net yield only 2 ATP per glucose molecule"
+     ]
     }
-  ],
-  "v": 1,
-  "gen": "AI",
-  "run": "books-pipeline",
-  "model": "gemini-3.8-flash-high",
-  "quiz": [
-    "c458421e-4000-8000-c458-421e12345678",
-    "c358408b-4000-8000-c358-408b12345678",
-    "c2583ef8-4000-8000-c258-3ef812345678"
-  ],
-  "src": [
-    "kb-reference-glycolysis-pyruvate-dehydrogenase-and-tca-cycle"
-  ],
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true
+   }
+  },
+  {
+   "tx": "Arsenic poisoning directly inhibits the pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase complexes by binding the sulfhydryl groups of **lipoic acid**. This disrupts aerobic mitochondrial respiration and ATP synthesis, producing vomiting, rice-water diarrhea, garlic-scented breath and prolonged QT interval. Fluoroacetate inhibits aconitase, while malonate acts as a classical competitive inhibitor of succinate dehydrogenase, arresting cycle progression.",
+   "say": "Arsenic poisoning inhibits pyruvate dehydrogenase and alpha-ketoglutarate dehydrogenase by binding lipoic acid sulfhydryls. This disrupts mitochondrial ATP synthesis, producing vomiting, rice-water diarrhea and garlic breath. Fluoroacetate inhibits aconitase, while malonate inhibits succinate dehydrogenase.",
+   "vis": null
   }
+ ],
+ "v": 1,
+ "gen": "hand",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "c458421e-4000-8000-c458-421e12345678",
+  "c358408b-4000-8000-c358-408b12345678",
+  "c2583ef8-4000-8000-c258-3ef812345678"
+ ],
+ "src": [
+  "kb-reference-glycolysis-pyruvate-dehydrogenase-and-tca-cycle"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }
