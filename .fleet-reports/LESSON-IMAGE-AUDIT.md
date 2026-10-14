@@ -1,21 +1,23 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1290 lessons (88.0%) have zero images; 176 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1282 lessons (87.4%) have zero images; 184 have at least one.**
+
+Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
 | medicine | 113 | 113 | 0 |
 | anatomy | 80 | 0 | 80 |
-| pathology | 73 | 69 | 4 |
-| pharmacology | 72 | 68 | 4 |
-| biochemistry | 69 | 65 | 4 |
+| pathology | 73 | 67 | 6 |
+| pharmacology | 72 | 66 | 6 |
+| biochemistry | 69 | 63 | 6 |
 | surgery | 66 | 65 | 1 |
 | paediatrics | 57 | 57 | 0 |
 | community-medicine | 56 | 42 | 14 |
 | obstetrics-gynaecology | 50 | 50 | 0 |
 | physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
-| microbiology | 40 | 36 | 4 |
+| microbiology | 40 | 34 | 6 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
 | anaesthesia | 34 | 34 | 0 |

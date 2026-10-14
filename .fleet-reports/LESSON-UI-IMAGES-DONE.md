@@ -175,4 +175,22 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   - `node scripts/lesson-diagrams/check.mjs` passes across all 126 lessons, 198 figures with 0 problems.
   - Overall inventory: 1,466 total lessons, 176 with images, 1,290 zero images.
 
+## Addendum 2026-10-14 (Batch 3: Pharma/Micro/Bio/Path SVGs)
+
+- **8 original SVGs** (`pharma-insulin-profiles`, `pharma-vaughan-williams`,
+  `micro-hepb-serology`, `micro-hiv-cycle`, `bio-urea-cycle`,
+  `bio-beta-oxidation`, `path-thrombus-fates`, `path-type3-immune-complex`)
+  wired into 8 null-visual steps (`phm-insulin`, `phm-antiarrhythmics`,
+  `mic-hepatitis-viruses`, `mic-hiv`, `bio-urea-cycle`,
+  `bio-fatty-acid-oxidation`, `pat-thrombosis-embolism`, `pat-hypersensitivity`).
+  Bank figure format kept (white stage, 800x520, `<title>`/`<desc>`, alt +
+  caption, no em/en dashes). Numbers second-passed by independent
+  parse-and-assert (insulin bar geometry within 1.5px, urea 4-bond cost,
+  palmitate 16/2 = 8, turns 7).
+- **Attribution**: 8 CC BY 4.0 StewardMD-original rows in
+  `prep/lessons/media/ATTRIBUTION.md`; still zero third-party images.
+- **Gates**: 8/8 `checkLesson` clean; full 1466-lesson sweep shows only the 6
+  pre-existing med/mphar/sur failures (identical on clean tree); lesson unit
+  suites 26/26 pass. Inventory now 184 with images, 1,282 zero.
+
 

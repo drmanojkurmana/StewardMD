@@ -59,10 +59,21 @@ applies.
 | path-necrosis-patterns.svg | Six morphologic patterns of tissue necrosis: coagulative, liquefactive, caseous, fat, fibrinoid, gangrenous | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | bio-etc-complexes.svg | Mitochondrial electron transport chain complexes I-IV, ATP synthase, proton pumping, and specific inhibitors | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | micro-viral-structure.svg | Viral structural architecture: enveloped vs naked, icosahedral vs helical, capsid, spike proteins, genetic payload | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-insulin-profiles.svg | Insulin onset/peak/duration Gantt: rapid 15 min/1 h/3 to 4 h, regular 30 min/2 to 3 h/6 to 8 h, NPH 2 h/4 to 10 h/10 to 16 h, glargine flat about 24 h | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-vaughan-williams.svg | Vaughan Williams classes I to IV by ion channel action with examples, plus adenosine/digoxin/magnesium and CAST proarrhythmia caution | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-hepb-serology.svg | Hepatitis B serology timeline: HBeAg, HBsAg, anti-HBc IgM window period, lasting anti-HBs; chronicity 90 percent neonates vs 5 percent adults | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-hiv-cycle.svg | HIV replication cycle with drug class per step: entry, reverse transcription, integration, maturation; diploid 2-copy genome, gag/pol products | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| bio-urea-cycle.svg | Ornithine cycle order with CPS-I 2 ATP and NAG, ASS ATP to AMP, fumarate and urea release; 4 high energy bonds per turn | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| bio-beta-oxidation.svg | Beta oxidation four-step spiral: FADH2, water, NADH, acetyl-CoA; palmitate 16 C needs 7 turns for 8 acetyl-CoA and about 106 ATP | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-thrombus-fates.svg | Four thrombus fates: propagation, embolisation, fibrinolysis of fresh clots, organisation with recanalisation | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-type3-immune-complex.svg | Type III sequence: deposition, complement C3a/C5a, neutrophil injury; SLE/RA/PSGN/PAN; serum sickness 5 to 10 days, Arthus 4 to 10 hours | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 
 Numbers and scientific labels on each figure were recomputed and verified by a second pass
 (Hill equation EC50 10⁻⁷ M, right-shifted EC50 10⁻⁵·⁵ M, 50% depressed Emax; first-order half-life 2h
 yielding 50%, 25%, 12.5% at 2h, 4h, 6h; zero-order clearance 12.5 mg/L/hr; Lineweaver-Burk intercepts
 1/Vmax and -1/Km; TCA ATP yields; sensitivity 80%, specificity 90%, PPV 88.9%, NPV 81.8%; SE 5.0/2.0/1.0 at
 n = 4/25/100 with SD 10; IQR 18; ARR 5% so NNT 20; 60-40-20 body fluid distribution 42L/28L/14L/10.5L/3.5L;
-Davenport isobars PCO2 40 normal, pH 7.40, HCO3- 24; twinning cleavage days 0-3, 4-8, 8-12, >13).
+Davenport isobars PCO2 40 normal, pH 7.40, HCO3- 24; twinning cleavage days 0-3, 4-8, 8-12, >13;
+insulin bars re-derived from printed hours (pixel positions asserted within 1.5px);
+urea cost 4 bonds (2 ATP at CPS-I plus ATP to AMP at ASS); palmitate 16/2 = 8 acetyl-CoA,
+turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 numbered steps).

@@ -132,4 +132,46 @@
   - `node scripts/lesson-diagrams/check.mjs` passes across all 126 lessons, 198 figures with 0 problems.
   - Overall inventory: 1,466 total lessons, 176 with images, 1,290 zero images.
 
+## Update 2026-10-14 (Batch 3: Pharma/Micro/Bio/Path SVGs)
+
+- **8 New Original SVGs** in `prep/lessons/media/` (bank format: white ground,
+  800x520, `<title>`/`<desc>` + step alt/caption, palette #071318/#0B6B5B/#B7791F,
+  no em/en dashes, zero layout warnings from the generator):
+  - Pharmacology (2):
+    - `pharma-insulin-profiles.svg` -> `phm-insulin` step 0 (onset/peak/duration
+      Gantt: rapid 15 min/1 h/3 to 4 h, regular 30 min/2 to 3 h/6 to 8 h,
+      NPH 2 h/peak band 4 to 10 h/10 to 16 h, glargine flat about 24 h)
+    - `pharma-vaughan-williams.svg` -> `phm-antiarrhythmics` step 0 (classes
+      I to IV by channel with examples, adenosine/digoxin/magnesium, CAST caution)
+  - Microbiology (2):
+    - `micro-hepb-serology.svg` -> `mic-hepatitis-viruses` step 1 (HBsAg,
+      anti-HBs, anti-HBc IgM window, HBeAg; 90 percent neonate vs 5 percent
+      adult chronicity)
+    - `micro-hiv-cycle.svg` -> `mic-hiv` step 0 (5 replication steps, one drug
+      class per step, diploid 2-copy genome, 1983/1984)
+  - Biochemistry (2):
+    - `bio-urea-cycle.svg` -> `bio-urea-cycle` step 1 (CPS-I 2 ATP + NAG,
+      ASS ATP to AMP, fumarate/urea release, 4 bonds per turn)
+    - `bio-beta-oxidation.svg` -> `bio-fatty-acid-oxidation` step 1 (4-step
+      spiral; palmitate 16 C, 7 turns, 8 acetyl-CoA, about 106 ATP)
+  - Pathology (2):
+    - `path-thrombus-fates.svg` -> `pat-thrombosis-embolism` step 2
+      (propagation, embolisation, dissolution, organisation + recanalisation)
+    - `path-type3-immune-complex.svg` -> `pat-hypersensitivity` step 2
+      (deposition, C3a/C5a, neutrophils; SLE/RA/PSGN/PAN; 5 to 10 days, 4 to 10 h)
+- **Second pass**: independent parse-and-assert over the emitted files
+  (labels present, palette only, insulin bar pixels re-derived within 1.5px,
+  16/2 = 8 acetyl-CoA and turns = 8 - 1 = 7); one verifier artifact
+  (peak-band rect matched as bar) fixed in the verifier, figure untouched.
+- **Validation**: all 8 lessons pass `checkLesson` with 0 errors; full sweep
+  1466 lessons shows only 6 pre-existing failures (med/mphar/sur files,
+  identical on the clean tree); `prep-lessons` + `prep-lessons-100` unit
+  suites 26/26 pass.
+- **Attribution**: 8 rows added to `prep/lessons/media/ATTRIBUTION.md`
+  (all StewardMD original, CC BY 4.0); no third-party images anywhere.
+- **Inventory**: 1,466 total lessons, 184 with images, 1,282 zero images.
+- **Next queue** (per order, exam weight): pharmacology 66, pathology 67,
+  biochemistry 63, microbiology 34 zero-image lessons remain; anatomy and
+  physiology are complete (80/80, 49/49) and stay last/skipped.
+
 
