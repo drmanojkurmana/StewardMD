@@ -85,7 +85,7 @@
     if (!meta || !meta.length) return "";
     return '<p class="pn-act-meta">' + meta.filter(function (m) { return m && m.value; }).map(function (m) {
       return '<button type="button" class="pn-act-chip pi-chip" data-copy-id="' + esc(m.value) + '" data-pearl-copy="' + esc(m.value) + '" data-act="id-copy" data-v="' + esc(m.value) + '" aria-label="Copy ' + esc(m.label || "ID") + " " + esc(m.value) + '">' +
-        '<span class="pn-act-chip-k pi-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v pi-chip-v">' + esc(m.value) + '</span></button>';
+        '<span class="pn-act-chip-k pi-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v pi-chip-v" translate="no">' + esc(m.value) + '</span></button>';
     }).join("") + '<span class="pn-act-copied" role="status" aria-live="polite"></span></p>';
   }
   function actionRowHtml(opts) {
