@@ -45,3 +45,26 @@
 @media (prefers-reduced-motion: reduce) { .pn-root .qg-item { transition: none; } }
 .pn-root .qg-limit p { margin: 0; text-wrap: pretty; }
 .pn-root .qg-limh { font-weight: 700; font-size: 17px; margin-bottom: 6px !important; }
+
+/* Page selector (From/To window + advanced ranges, stepper, chapters, previews, done markers) */
+.pn-root .qg-pg { display: flex; flex-direction: column; gap: 8px; padding: 12px 14px; border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); border-radius: var(--pn-r-lg); background: var(--pn-card); }
+.pn-root .qg-pgrow { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pn-root .qg-pgrow > div { min-width: 0; }
+.pn-root .qg-pgrow .pc-in { min-height: 48px; font-size: 17px; font-variant-numeric: tabular-nums; }
+.pn-root .qg-count { font-size: 15px; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .qg-count b { font-size: 22px; font-weight: 700; color: var(--pn-text); margin-right: 2px; }
+.pn-root .qg-pgerr { margin: 0; }
+.pn-root .qg-pgok { margin: 0; padding: 0; }
+.pn-root .qg-step { display: flex; flex-wrap: wrap; gap: 8px; }
+.pn-root .qg-step .pn-chip { min-height: 44px; flex: 1 1 auto; }
+.pn-root .qg-pg .pn-chip { min-height: 44px; }
+.pn-root .qg-donewrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.pn-root .qg-done { padding: 4px 9px; border-radius: var(--pn-r-pill); background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-size: 12px; font-weight: 700; white-space: nowrap; }
+.pn-root .qg-prev { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.pn-root .qg-pv { margin: 0; min-width: 0; border: 1px solid var(--pn-line); border-radius: var(--pn-r-md); overflow: hidden; background: var(--pn-s1); }
+.pn-root .qg-pv img { display: block; width: 100%; height: 120px; object-fit: cover; object-position: top; background: #fff; }
+.pn-root .qg-pv figcaption { padding: 6px 8px 0; font-size: 12px; font-weight: 700; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .qg-pv p { margin: 0; padding: 2px 8px 8px; font-size: 12.5px; line-height: 1.4; color: var(--pn-text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.pn-root .qg-adv { align-self: flex-start; }
+.pn-root select#qgChap { min-height: 48px; }
+@media (prefers-reduced-motion: reduce) { .pn-root .qg-pv img { animation: none; } }
