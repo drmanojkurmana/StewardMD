@@ -76,3 +76,21 @@
 #smdReview .pf-hist { margin-top: 14px; font-size: 13px; }
 #smdReview .pf-hist ul { margin: 8px 0 0; padding-left: 18px; }
 body.dark #smdReview .pf-img img { background: #1a1a1a; border-color: #333; }
+/* Crop sheet for editor images (review-prepfix.js) */
+#smdReview .pf-crop { position: fixed; inset: 0; z-index: 30; display: flex; align-items: flex-end; justify-content: center; background: rgba(0, 0, 0, .55); }
+#smdReview .pf-crop-card { width: 100%; max-width: 560px; max-height: 94vh; overflow: auto; background: var(--surface, #fff); color: var(--on-surface, #111); border-radius: 18px 18px 0 0; padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+#smdReview .pf-crop-card h3 { margin: 0 0 10px; font-size: 17px; }
+#smdReview .pf-stage { display: flex; justify-content: center; background: #111; border-radius: 12px; padding: 8px; touch-action: none; }
+#smdReview .pf-wrap { position: relative; display: inline-block; overflow: hidden; line-height: 0; }
+#smdReview .pf-wrap canvas { display: block; max-width: 100%; }
+#smdReview .pf-box { position: absolute; box-sizing: border-box; border: 2px solid #fff; box-shadow: 0 0 0 9999px rgba(0, 0, 0, .5); cursor: move; touch-action: none; }
+#smdReview .pf-box::before, #smdReview .pf-box::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(to right, transparent 33.2%, rgba(255,255,255,.4) 33.3%, rgba(255,255,255,.4) 33.5%, transparent 33.6%, transparent 66.5%, rgba(255,255,255,.4) 66.6%, rgba(255,255,255,.4) 66.8%, transparent 66.9%); }
+#smdReview .pf-box::after { background: linear-gradient(to bottom, transparent 33.2%, rgba(255,255,255,.4) 33.3%, rgba(255,255,255,.4) 33.5%, transparent 33.6%, transparent 66.5%, rgba(255,255,255,.4) 66.6%, rgba(255,255,255,.4) 66.8%, transparent 66.9%); }
+#smdReview .pf-box i { position: absolute; width: 30px; height: 30px; background: #fff; border-radius: 50%; border: 2px solid #0e6e63; box-sizing: border-box; touch-action: none; }
+#smdReview .pf-box i[data-h="nw"] { left: -15px; top: -15px; cursor: nwse-resize; } #smdReview .pf-box i[data-h="ne"] { right: -15px; top: -15px; cursor: nesw-resize; }
+#smdReview .pf-box i[data-h="sw"] { left: -15px; bottom: -15px; cursor: nesw-resize; } #smdReview .pf-box i[data-h="se"] { right: -15px; bottom: -15px; cursor: nwse-resize; }
+#smdReview .pf-ctl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 0; }
+#smdReview .pf-ctl label { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+#smdReview .pf-ctl select { min-height: 40px; }
+body.dark #smdReview .pf-crop-card { background: #141414; color: #eee; }
+#smdReview .pf-ctl .kit-seg.on { background: #0e6e63; color: #fff; border-color: #0e6e63; }

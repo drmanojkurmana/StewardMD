@@ -1656,4 +1656,5 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   `applyFix` drops the old per-option reasoning (`r`, `x`) when options or explanation change; `prep-lessons.js` `applyLessonFix` at `lessonFile`.
   `PREP.refreshFixes()` clears this phone's caches after an edit.
 - A fix holds only changed fields and the previous fix is merged in. Reverting a single field is not offered; Revert drops the whole fix.
+- Images: choosing a file opens a **crop sheet** (`review-prepfix.js` `cropOpen`): drag or resize the box by its corners, shape chips (Free, 1:1, 4:3, 16:9, Original), Rotate in 90 degree steps, output size (800, 1200 or 1600 px, never enlarged) and quality; nothing uploads until Use this crop. Cancel uploads nothing. Pure helpers `fitAspect`, `resizeRect`, `moveRect`, `outSize` are tested through `SMD_PREPFIX._pure`.
 - Tests: `test/prep-fix.test.mjs`, `test/run-prepfix-ui.mjs`. Not built: editing from inside PrepNucleus itself (only from the Review Desk reports).

@@ -53,7 +53,7 @@ const BOOTX = `
       { itemId: "ana-gametogenesis-q1", subject: "anatomy", module: "ana-gametogenesis", n: 2, reasons: { typo: 2 }, itemType: "question" },
       { itemId: "ana-spleen", subject: "anatomy", module: "ana-spleen", n: 1, reasons: { unclear: 1 }, itemType: "lesson" }] }), { status: 200 }));
     if (u.indexOf("/api/prep/fix") !== -1) {
-      var body = opts && opts.body; window.__reqs.push({ m: m, u: u, b: typeof body === "string" ? JSON.parse(body) : (body && body.size ? "blob:" + body.size + ":" + body.type : null) });
+      var body = opts && opts.body; if (body && body.size) window.__lastBlob = body; window.__reqs.push({ m: m, u: u, b: typeof body === "string" ? JSON.parse(body) : (body && body.size ? "blob:" + body.size + ":" + body.type : null) });
       if (u.indexOf("me=1") !== -1) return Promise.resolve(new Response(JSON.stringify(window.__me), { status: 200 }));
       if (u.indexOf("image=1") !== -1) return Promise.resolve(new Response(JSON.stringify({ ok: true, path: "v90/img/fx-test0001.webp" }), { status: 200 }));
       if (u.indexOf("log=1") !== -1) return Promise.resolve(new Response(JSON.stringify({ log: window.__log || [] }), { status: 200 }));
@@ -105,10 +105,49 @@ try {
   await ev(`document.getElementById("pf_a1").checked = true; return 1;`);
   await setv("pf_kp", "Remember the corrected rule.");
   await setv("pf_note", "typo in option B");
-  // image: a real file through the change event
-  await ev(`var c=document.createElement("canvas"); c.width=40; c.height=30; var x=c.getContext("2d"); x.fillStyle="#08c"; x.fillRect(0,0,40,30);
-    return new Promise(function(res){ c.toBlob(function(b){ var f=new File([b],"fig.png",{type:"image/png"}); var dt=new DataTransfer(); dt.items.add(f); var i=document.getElementById("pf_file"); i.files=dt.files; i.dispatchEvent(new Event("change",{bubbles:true})); res(1); }, "image/png"); });`).catch(() => 0);
-  const gotImg = await until(`return document.querySelectorAll("#smdReview .pf-img img").length === 1;`, 8000);
+  // image: a real file through the change event opens the crop sheet first
+  const pickFile = `var c=document.createElement("canvas"); c.width=400; c.height=300; var x=c.getContext("2d"); var g=x.createLinearGradient(0,0,400,300); g.addColorStop(0,"#08c"); g.addColorStop(1,"#c40"); x.fillStyle=g; x.fillRect(0,0,400,300);
+    return new Promise(function(res){ c.toBlob(function(b){ var f=new File([b],"fig.png",{type:"image/png"}); var dt=new DataTransfer(); dt.items.add(f); var i=document.getElementById("pf_file"); i.files=dt.files; i.dispatchEvent(new Event("change",{bubbles:true})); res(1); }, "image/png"); });`;
+  await ev(pickFile).catch(() => 0);
+  ok(await until(`return !!document.getElementById("pfCrop") && /Result 400 x 300 px/.test(document.getElementById("pfcinfo").textContent);`, 8000), "a chosen image opens the crop sheet, the whole picture selected (Result 400 x 300 px)");
+  ok(await ev(`return document.querySelectorAll("#pfCrop .pf-box i").length === 4 && !!document.querySelector('#pfCrop [data-pfc="rotate"]') && !!document.getElementById("pfsize") && !!document.getElementById("pfqual");`) === true, "the sheet has four corner handles, shape chips, Rotate, Size and Quality");
+  const pu = await J(`var P = SMD_PREPFIX._pure; return JSON.stringify({ fit: P.fitAspect({ x: 0, y: 0, w: 400, h: 300 }, 1, { w: 400, h: 300 }), fit169: P.fitAspect({ x: 0, y: 0, w: 400, h: 300 }, 16 / 9, { w: 400, h: 300 }), res: P.resizeRect({ x: 100, y: 100, w: 100, h: 100 }, "se", 50, 20, null, { w: 400, h: 300 }), resA: P.resizeRect({ x: 100, y: 100, w: 100, h: 100 }, "se", 50, 0, 2, { w: 400, h: 300 }), resNw: P.resizeRect({ x: 100, y: 100, w: 100, h: 100 }, "nw", -300, -300, null, { w: 400, h: 300 }), mv: P.moveRect({ x: 100, y: 100, w: 100, h: 100 }, 999, -999, { w: 400, h: 300 }), out: P.outSize({ w: 4000, h: 3000 }, 1200), small: P.outSize({ w: 400, h: 300 }, 1200) });`);
+  ok(pu.fit.w === 300 && pu.fit.h === 300 && pu.fit.x === 50, "a square inside 400 x 300 is 300 x 300, centred");
+  ok(Math.round(pu.fit169.w) === 400 && Math.round(pu.fit169.h) === 225, "16:9 inside 400 x 300 is 400 x 225");
+  ok(pu.res.w === 150 && pu.res.h === 120 && pu.res.x === 100, "dragging the SE corner grows the box and keeps the NW corner");
+  ok(pu.resA.w === 150 && pu.resA.h === 75, "with a 2:1 shape a resize keeps 2:1");
+  ok(pu.resNw.x === 0 && pu.resNw.y === 0 && pu.resNw.w === 200 && pu.resNw.h === 200, "a corner dragged past the edge stops at the image edge");
+  ok(pu.mv.x === 300 && pu.mv.y === 0, "moving the box stops at the image edges");
+  ok(pu.out.w === 1200 && pu.out.h === 900 && pu.small.w === 400, "the output is capped by the chosen size and never enlarged");
+  await click('#pfCrop [data-pfc="aspect:sq"]');
+  ok(await until(`return /Result 300 x 300 px/.test(document.getElementById("pfcinfo").textContent);`, 3000), "Square makes a 300 x 300 crop");
+  const sq = await J(`var b=document.getElementById("pfbox"); return JSON.stringify([parseFloat(b.style.width), parseFloat(b.style.height)]);`);
+  ok(Math.abs(sq[0] - sq[1]) < 1.5, "the box on screen is square (" + sq.map((x) => Math.round(x)).join(" x ") + ")");
+  await click('#pfCrop [data-pfc="rotate"]'); await sleep(150);
+  await click('#pfCrop [data-pfc="aspect:orig"]');
+  ok(await until(`return /Result 225 x 300 px/.test(document.getElementById("pfcinfo").textContent);`, 3000), "after a turn, Original keeps the rotated picture's own shape (225 x 300 inside the square)");
+  await click('#pfCrop [data-pfc="aspect:free"]');
+  if (process.env.SHOTS) { await sleep(300); const r = await call("Page.captureScreenshot", { format: "png" }); (await import("node:fs")).writeFileSync(process.env.SHOTS + "/prepfix-crop.png", Buffer.from(r.result.data, "base64")); }
+  // drag the SE corner with a real pointer
+  const h = await J(`var r=document.querySelector('#pfCrop .pf-box i[data-h="se"]').getBoundingClientRect(); return JSON.stringify([r.left + r.width / 2, r.top + r.height / 2]);`);
+  const before = await J(`var b=document.getElementById("pfbox"); return JSON.stringify([parseFloat(b.style.width), parseFloat(b.style.height)]);`);
+  await call("Input.dispatchMouseEvent", { type: "mouseMoved", x: h[0], y: h[1] }); await call("Input.dispatchMouseEvent", { type: "mousePressed", x: h[0], y: h[1], button: "left", clickCount: 1 });
+  for (let k = 1; k <= 6; k++) { await call("Input.dispatchMouseEvent", { type: "mouseMoved", x: h[0] - k * 10, y: h[1] - k * 8, button: "left" }); await sleep(16); }
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: h[0] - 60, y: h[1] - 48, button: "left", clickCount: 1 });
+  const after = await J(`var b=document.getElementById("pfbox"); return JSON.stringify([parseFloat(b.style.width), parseFloat(b.style.height)]);`);
+  ok(after[0] < before[0] - 40 && after[1] < before[1] - 30, "dragging a corner with the pointer shrinks the box (" + before.map(Math.round) + " to " + after.map(Math.round) + ")");
+  await ev(`var s=document.getElementById("pfsize"); s.value="800"; s.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
+  const crop1 = await text("#pfcinfo");
+  await click('#pfCrop [data-pfc="ok"]');
+  const gotImg = await until(`return document.querySelectorAll("#smdReview .pf-img img").length === 1 && !document.getElementById("pfCrop");`, 8000);
+  const dims = JSON.parse(await evA(`createImageBitmap(window.__lastBlob).then(function (b) { return JSON.stringify([b.width, b.height]); })`));
+  const want = crop1.match(/Result (\d+) x (\d+)/);
+  ok(dims[0] === Number(want[1]) && dims[1] === Number(want[2]), "the uploaded picture has the size the sheet announced (" + dims.join(" x ") + ")");
+  // cancel uploads nothing
+  const upsBefore = await ev(`return window.__reqs.filter(function(x){return x.u.indexOf("image=1")!==-1;}).length;`);
+  await ev(pickFile).catch(() => 0); await until(`return !!document.getElementById("pfCrop");`, 6000);
+  await click('#pfCrop [data-pfc="cancel"]'); await sleep(300);
+  ok(await ev(`return window.__reqs.filter(function(x){return x.u.indexOf("image=1")!==-1;}).length;`) === upsBefore && await ev(`return document.querySelectorAll("#smdReview .pf-img img").length === 1 && !document.getElementById("pfCrop");`) === true, "Cancel closes the sheet and uploads nothing");
   ok(gotImg, "a chosen image is shrunk, uploaded and shown");
   const up = await J(`var r=window.__reqs.filter(function(x){return x.u.indexOf("image=1")!==-1;}); return JSON.stringify(r[0]||null);`);
   ok(up && /^blob:\d+:image\/(webp|jpeg)$/.test(up.b), "the upload is a WebP or JPEG blob: " + (up && up.b));

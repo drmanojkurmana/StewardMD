@@ -89,6 +89,123 @@
       return api("POST", "?image=1", null, blob, blob.type);
     }).then(function (r) { if (r.status !== 200 || !r.data.path) throw new Error(errText(r)); return r.data.path; });
   }
+
+  /* ---------- crop (owner 2026-10-14: "image option with crop settings") ----------
+   * A chosen image opens a crop sheet before anything is uploaded: drag or resize the box (corners), pick a shape (free, square, 4:3,
+   * 16:9 or the image's own), rotate in 90 degree steps, choose the output size and quality. Rectangles are in pixels of the rotated
+   * image; the pure helpers below are exercised by test/run-prepfix-ui.mjs through SMD_PREPFIX._pure. */
+  var MIN_BOX = 24;
+  function clampRect(r, b) {
+    var w = Math.min(Math.max(r.w, MIN_BOX), b.w), h = Math.min(Math.max(r.h, MIN_BOX), b.h);
+    return { x: Math.min(Math.max(r.x, 0), b.w - w), y: Math.min(Math.max(r.y, 0), b.h - h), w: w, h: h };
+  }
+  /* fitAspect(rect, aspect, bounds): the largest rectangle of that width/height ratio inside the current one, same centre. */
+  function fitAspect(r, a, b) {
+    if (!a) return clampRect(r, b);
+    var w = r.w, h = r.w / a;
+    if (h > r.h) { h = r.h; w = r.h * a; }
+    return clampRect({ x: r.x + (r.w - w) / 2, y: r.y + (r.h - h) / 2, w: w, h: h }, b);
+  }
+  function moveRect(r, dx, dy, b) { return clampRect({ x: r.x + dx, y: r.y + dy, w: r.w, h: r.h }, b); }
+  /* resizeRect(start, handle, dx, dy, aspect, bounds): handle is nw, ne, sw or se; the opposite corner stays where it is. */
+  function resizeRect(r, hd, dx, dy, a, b) {
+    var fx = hd.charAt(1) === "e" ? r.x : r.x + r.w, fy = hd.charAt(0) === "s" ? r.y : r.y + r.h;   // the fixed corner
+    var mx = (hd.charAt(1) === "e" ? r.x + r.w : r.x) + dx, my = (hd.charAt(0) === "s" ? r.y + r.h : r.y) + dy;   // the moved corner
+    mx = Math.min(Math.max(mx, 0), b.w); my = Math.min(Math.max(my, 0), b.h);
+    var w = Math.max(MIN_BOX, Math.abs(mx - fx)), h = Math.max(MIN_BOX, Math.abs(my - fy));
+    var sx = mx >= fx ? 1 : -1, sy = my >= fy ? 1 : -1;
+    if (a) {
+      if (w / h > a) w = h * a; else h = w / a;
+      var maxW = sx > 0 ? b.w - fx : fx, maxH = sy > 0 ? b.h - fy : fy;
+      if (w > maxW) { w = maxW; h = w / a; } if (h > maxH) { h = maxH; w = h * a; }
+    }
+    return { x: sx > 0 ? fx : fx - w, y: sy > 0 ? fy : fy - h, w: w, h: h };
+  }
+  /* outSize(rect, maxSide) -> { w, h }: the picture's size after the crop, never enlarged. */
+  function outSize(r, max) { var k = Math.min(1, max / Math.max(r.w, r.h)); return { w: Math.max(1, Math.round(r.w * k)), h: Math.max(1, Math.round(r.h * k)) }; }
+
+  var C = null;
+  var ASPECTS = [["free", "Free", null], ["sq", "1:1", 1], ["43", "4:3", 4 / 3], ["169", "16:9", 16 / 9], ["orig", "Original", "orig"]];
+  function rotDims() { return C.rot % 2 ? { w: C.sh, h: C.sw } : { w: C.sw, h: C.sh }; }
+  function aspectVal() { var a = C.aspect; if (a === "orig") { var d = rotDims(); return d.w / d.h; } return a; }
+  function cropDraw() {
+    var cv = D.getElementById("pfcv"), box = D.getElementById("pfbox"), d = rotDims(), st = D.getElementById("pfstage");
+    var maxW = Math.min(st.clientWidth || 320, 520), maxH = Math.max(180, Math.round((G.innerHeight || 700) * 0.42)), s = Math.min(maxW / d.w, maxH / d.h);
+    C.s = s; cv.width = Math.max(1, Math.round(d.w * s)); cv.height = Math.max(1, Math.round(d.h * s));
+    var x = cv.getContext("2d"); x.save(); x.translate(cv.width / 2, cv.height / 2); x.rotate(C.rot * Math.PI / 2);
+    var w = C.sw * s, h = C.sh * s; x.drawImage(C.bmp, -w / 2, -h / 2, w, h); x.restore();
+    var r = C.rect;
+    box.style.left = (r.x * s) + "px"; box.style.top = (r.y * s) + "px"; box.style.width = (r.w * s) + "px"; box.style.height = (r.h * s) + "px";
+    var o = outSize(r, C.max), info = D.getElementById("pfcinfo"); if (info) info.textContent = "Result " + o.w + " x " + o.h + " px";
+  }
+  function cropRender() {
+    var d = rotDims(), f = Math.min(1, 3000 / Math.max(d.w, d.h)), t = D.createElement("canvas");
+    t.width = Math.max(1, Math.round(d.w * f)); t.height = Math.max(1, Math.round(d.h * f));
+    var x = t.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, t.width, t.height);
+    x.save(); x.translate(t.width / 2, t.height / 2); x.rotate(C.rot * Math.PI / 2); x.drawImage(C.bmp, -C.sw * f / 2, -C.sh * f / 2, C.sw * f, C.sh * f); x.restore();
+    var r = C.rect, o = outSize({ w: r.w * f, h: r.h * f }, C.max), c = D.createElement("canvas"); c.width = o.w; c.height = o.h;
+    c.getContext("2d").drawImage(t, r.x * f, r.y * f, r.w * f, r.h * f, 0, 0, o.w, o.h);
+    return encode(c, "image/webp", C.q).then(function (b) { return b && b.type === "image/webp" ? b : encode(c, "image/jpeg", Math.min(0.92, C.q + 0.03)); });
+  }
+  function cropClose() { var e = D.getElementById("pfCrop"); if (e && e.parentNode) e.parentNode.removeChild(e); C = null; }
+  function cropOpen(file, done) {
+    return loadBitmap(file).then(function (bmp) {
+      C = { bmp: bmp, sw: bmp.width || bmp.naturalWidth, sh: bmp.height || bmp.naturalHeight, rot: 0, aspect: null, max: 1200, q: 0.85, done: done, drag: null };
+      C.rect = { x: 0, y: 0, w: C.sw, h: C.sh };
+      var host = D.getElementById("smdReview") || D.body, el = D.createElement("div"); el.id = "pfCrop"; el.className = "pf-crop"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Crop image");
+      el.innerHTML = '<div class="pf-crop-card"><h3>Crop the image</h3><div class="pf-stage" id="pfstage"><div class="pf-wrap"><canvas id="pfcv"></canvas><div class="pf-box" id="pfbox" tabindex="0" aria-label="Crop area. Drag to move, drag a corner to resize."><i data-h="nw"></i><i data-h="ne"></i><i data-h="sw"></i><i data-h="se"></i></div></div></div>' +
+        '<div class="pf-ctl" role="group" aria-label="Shape">' + ASPECTS.map(function (a) { return '<button type="button" class="kit-seg' + (a[0] === "free" ? " on" : "") + '" data-pfc="aspect:' + a[0] + '" aria-pressed="' + (a[0] === "free") + '">' + a[1] + "</button>"; }).join("") +
+        '<button type="button" class="kit-pill" data-pfc="rotate">' + ms("rotate_right") + "Rotate</button></div>" +
+        '<div class="pf-ctl"><label>Size <select id="pfsize" class="kit-inp"><option value="800">Small, 800 px</option><option value="1200" selected>Medium, 1200 px</option><option value="1600">Large, 1600 px</option></select></label>' +
+        '<label>Quality <select id="pfqual" class="kit-inp"><option value="0.7">Smaller file</option><option value="0.85" selected>Standard</option><option value="0.92">Sharper</option></select></label></div>' +
+        '<p class="pf-sub" id="pfcinfo"></p><div class="kit-row"><button type="button" class="kit-add" data-pfc="ok">' + ms("crop") + 'Use this crop</button><button type="button" class="kit-clear" data-pfc="cancel">Cancel</button></div></div>';
+      host.appendChild(el);
+      cropDraw();
+      el.addEventListener("pointerdown", cropDown); el.addEventListener("pointermove", cropMove); el.addEventListener("pointerup", cropUp); el.addEventListener("pointercancel", cropUp);
+      el.addEventListener("click", cropClick); el.addEventListener("change", function (e) { var t = e.target; if (!C) return; if (t.id === "pfsize") C.max = Number(t.value) || 1200; if (t.id === "pfqual") C.q = Number(t.value) || 0.85; cropDraw(); });
+      var okb = el.querySelector('[data-pfc="ok"]'); if (okb) okb.focus();
+    });
+  }
+  function cropClick(e) {
+    var b = e.target.closest && e.target.closest("[data-pfc]"); if (!b || !C) return;
+    var a = b.getAttribute("data-pfc"), i = a.indexOf(":"), cmd = i < 0 ? a : a.slice(0, i), arg = i < 0 ? "" : a.slice(i + 1);
+    if (cmd === "cancel") { var dn = C.done; cropClose(); dn(null); return; }
+    if (cmd === "rotate") {   // the box turns with the picture
+      var d = rotDims(), r = C.rect; C.rot = (C.rot + 1) % 4;
+      C.rect = clampRect({ x: d.h - (r.y + r.h), y: r.x, w: r.h, h: r.w }, { w: d.h, h: d.w });
+      if (C.aspect) C.rect = fitAspect(C.rect, aspectVal(), rotDims());
+      cropDraw(); return;
+    }
+    if (cmd === "aspect") {
+      ASPECTS.forEach(function (x) { if (x[0] === arg) C.aspect = x[2]; });
+      [].forEach.call(D.querySelectorAll("#pfCrop [data-pfc^='aspect:']"), function (n) { var on = n.getAttribute("data-pfc") === "aspect:" + arg; n.classList.toggle("on", on); n.setAttribute("aria-pressed", String(on)); });
+      C.rect = fitAspect(C.rect, aspectVal(), rotDims()); cropDraw(); return;
+    }
+    if (cmd === "ok") { var done = C.done; b.disabled = true; cropRender().then(function (blob) { cropClose(); done(blob); }, function () { cropClose(); done(null); }); }
+  }
+  function cropDown(e) {
+    if (!C || !e.target.closest) return;
+    var box = e.target.closest("#pfbox"); if (!box) return;
+    var h = e.target.getAttribute && e.target.getAttribute("data-h");
+    C.drag = { h: h || "move", x: e.clientX, y: e.clientY, r: { x: C.rect.x, y: C.rect.y, w: C.rect.w, h: C.rect.h }, id: e.pointerId };
+    try { box.setPointerCapture(e.pointerId); } catch (x) {}
+    e.preventDefault();
+  }
+  function cropMove(e) {
+    if (!C || !C.drag || e.pointerId !== C.drag.id) return;
+    var dx = (e.clientX - C.drag.x) / C.s, dy = (e.clientY - C.drag.y) / C.s, b = rotDims();
+    C.rect = C.drag.h === "move" ? moveRect(C.drag.r, dx, dy, b) : resizeRect(C.drag.r, C.drag.h, dx, dy, aspectVal(), b);
+    cropDraw();
+  }
+  function cropUp(e) { if (C && C.drag && e.pointerId === C.drag.id) C.drag = null; }
+  function cropThenUpload(file) {
+    return new Promise(function (res, rej) {
+      cropOpen(file, function (blob) {
+        if (!blob) { rej(new Error("cancelled")); return; }
+        api("POST", "?image=1", null, blob, blob.type).then(function (r) { if (r.status !== 200 || !r.data.path) rej(new Error(errText(r))); else res(r.data.path); });
+      }).then(null, function () { rej(new Error("That image could not be opened.")); });
+    });
+  }
   function imgUrl(path) { return (G.SMD_API_BASE || "") + "/api/prep/bank/" + path; }
 
   /* ---------- state and loading ---------- */
@@ -228,13 +345,13 @@
     var t = e.target; if (!P || !t || t.type !== "file" || !t.files || !t.files[0] || !t.closest || !t.closest("#smdReview")) return;
     var step = t.getAttribute("data-pf-step"), file = t.files[0]; t.value = "";
     keepForm(); P.busy = step != null ? Number(step) : true; refresh();
-    uploadImage(file).then(function (path) {
+    cropThenUpload(file).then(function (path) {
       if (!P) return; P.busy = false;
       if (step != null) P.figs[Number(step)] = { src: path, alt: "", caption: "" }; else if (P.img.length < 3) P.img.push(path);
       refresh();
-    }, function (err) { if (P) { P.busy = false; refresh(); toast(String((err && err.message) || "The image did not upload.")); } });
+    }, function (err) { if (P) { P.busy = false; refresh(); if (!err || err.message !== "cancelled") toast(String((err && err.message) || "The image did not upload.")); } });
   }
   if (D && D.addEventListener) D.addEventListener("change", onChange, true);
 
-  G.SMD_PREPFIX = { me: me, open: open, active: active, html: html, act: act, _pure: { diffQuestion: diffQuestion, diffLesson: diffLesson, changedFields: changedFields, strip: strip } };
+  G.SMD_PREPFIX = { me: me, open: open, active: active, html: html, act: act, _pure: { clampRect: clampRect, fitAspect: fitAspect, moveRect: moveRect, resizeRect: resizeRect, outSize: outSize, diffQuestion: diffQuestion, diffLesson: diffLesson, changedFields: changedFields, strip: strip } };
 })(typeof window !== "undefined" ? window : this);
