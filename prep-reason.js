@@ -17,6 +17,9 @@
    (IndexedDB first). Lessons and card decks are re-checked against the live lesson and card indexes before they
    are shown. Per-item lesson rows carry a tier: the module's own chapter ("Lesson: <title>") or the
    specific lesson (the step showing the item's image, the lesson teaching its concept), opening at its step.
+   A row whose target is only a module/subject-level fallback (no item-evidenced topic/KB/lesson: lt rows
+   and kt rows the index flags ev 0, or legacy kt/lt rows) renders under the plain "Learn this module"
+   label with the module name, in the neutral secondary style; evidenced rows keep their wording.
 
    Opening: the Knowledge Library article through SMD_REASON.openRef (guarded by hasDiseaseRef), a drug through
    MEDDB.openComposition, a protocol through SMD_KBPROTO.open({ id }); each overlay is lifted above PrepNucleus
@@ -89,14 +92,20 @@
     return kind === "review" ? "Review the concept" : kind === "revise" ? "Revise this topic" :
       kind === "practise" ? "Practise related questions" : kind === "plan" ? "Schedule revision" : "";
   }
-  /* shardLinks(sh, iid) -> [{ k, id, title, c, sec }] at confidence >= SHOW, strongest first. */
+  /* shardLinks(sh, iid) -> [{ k, id, title, c, v, sec, ev }] at confidence >= SHOW, strongest first.
+     ev is the item-evidence flag new indexes carry on kt/lt rows (1 item-evidenced, 0 module/subject
+     fallback); rows from older indexes carry none (see isFallback). */
   function shardLinks(sh, iid) {
     var out = [];
     if (!sh || !sh.T || !sh.e) return out;
     var rows = sh.e[String(iid)] || [];
     rows.forEach(function (r) {
       var t = sh.T[r[0]];
-      if (t && r[1] >= SHOW) out.push({ k: t[0], id: t[1], title: t[2], c: r[1], v: r[2] || "", sec: r[3] || "" });
+      if (t && r[1] >= SHOW) {
+        var o = { k: t[0], id: t[1], title: t[2], c: r[1], v: r[2] || "", sec: r[3] || "" };
+        if (r.length > 4) o.ev = r[4];
+        out.push(o);
+      }
     });
     out.sort(function (a, b) { return b.c - a.c || (a.id < b.id ? -1 : 1); });
     return out;
@@ -133,6 +142,18 @@
     var hits = tw.filter(function (w) { return hay.indexOf(" " + w + " ") >= 0 || hay.indexOf(" " + w) >= 0; });
     var generic = { renal: 1, cardiac: 1, hepatic: 1, pulmonary: 1, cerebral: 1, gastric: 1, intestinal: 1, familial: 1, congenital: 1, inherited: 1, hereditary: 1, chronic: 1, acute: 1, primary: 1, secondary: 1 };
     return hits.length >= 2 || hits.some(function (w) { return !generic[w]; });
+  }
+  /* isFallback(l): the tier-to-label rule. A module/subject-level fallback row renders under the plain
+     "Learn this module" label, never with the topic-specific wording of evidenced links. New index rows
+     carry ev on kt/lt rows (1 when the item itself evidences the target through its stem, keyed answer
+     or own tags, 0 for the plain module/subject fallback). Rows from older indexes without ev are
+     evidenced only when their score/type says so (a specific via at the bar), else fallback (kt/lt or
+     a topic-tier lesson). Pipeline x.links rows (no via) are written for the item itself: evidenced. */
+  function isFallback(l) {
+    if (!l) return true;
+    if (l.ev === 1 || l.ev === 0) return l.ev === 0;
+    if (l.v === "kt" || l.v === "lt" || l.tier === "topic") return true;
+    return false;
   }
   /* findRunItem(items, iid) -> the run's item with this id, or null. The gaps slots carry only data-i/s/m
      (they never call remember()), so fill() finds each slot's own item here for its pipeline links. */
@@ -197,7 +218,11 @@
     var rows = sh.e[String(iid)] || [];
     rows.forEach(function (r) {
       var t = sh.T[r[0]];
-      if (t && t[0] === "ls" && r[1] >= SHOW) out.push({ key: t[1], title: t[2], c: r[1], tier: r[2] === "lt" ? "topic" : "specific", step: r[3] == null ? "" : String(r[3]) });
+      if (t && t[0] === "ls" && r[1] >= SHOW) {
+        var lo = { key: t[1], title: t[2], c: r[1], tier: r[2] === "lt" ? "topic" : "specific", step: r[3] == null ? "" : String(r[3]) };
+        if (r.length > 4) lo.ev = r[4];
+        out.push(lo);
+      }
     });
     out.sort(function (a, b) { return b.c - a.c || (a.key < b.key ? -1 : 1); });
     return out;
@@ -209,23 +234,35 @@
      The practise action carries the slot's own item (data-i/data-m) so gaps practise the gaps question,
      not the last remembered one. */
   function slotHtml(d) {
-    var h = "", links = d.links || [];
+    var h = "", links = d.links || [], mt = d.mt || "";
     function row(act, attrs, kind, title) {
       return '<li><button type="button" class="pn-rlr" data-act="' + act + '"' + attrs + '><small>' + kind + "</small><b>" + escH(title) + "</b></button></li>";
     }
-    var rows = "";
+    // Fallback rows (a module/subject-level target with no item evidence) render under the plain
+    // "Learn this module" label with the module name, after every evidenced row; they open the same
+    // target as before, only the label changes.
+    function fbRow(act, attrs) { return row(act, attrs, "Learn this module", mt || "Revise this topic"); }
+    var rowsEv = "", rowsFb = "";
     links.forEach(function (l) {
-      if (l.k === "kb") rows += row("r-kb", ' data-id="' + escH(l.id) + '"', "Knowledge Library", l.title || l.id);
-      else if (l.k === "dr") rows += row("r-drug", ' data-t="' + escH(l.title || l.id) + '"', "Drug Index", l.title || l.id);
-      else if (l.k === "pr") rows += row("r-proto", ' data-id="' + escH(l.id) + '"', "Protocol", l.title || l.id);
+      if (l.k !== "kb" && l.k !== "dr" && l.k !== "pr") return;
+      var act = l.k === "kb" ? "r-kb" : l.k === "dr" ? "r-drug" : "r-proto";
+      if (isFallback(l)) {
+        rowsFb += fbRow(act, l.k === "dr" ? ' data-t="' + escH(l.title || l.id) + '"' : ' data-id="' + escH(l.id) + '"');
+        return;
+      }
+      if (l.k === "kb") rowsEv += row("r-kb", ' data-id="' + escH(l.id) + '"', "Knowledge Library", l.title || l.id);
+      else if (l.k === "dr") rowsEv += row("r-drug", ' data-t="' + escH(l.title || l.id) + '"', "Drug Index", l.title || l.id);
+      else if (l.k === "pr") rowsEv += row("r-proto", ' data-id="' + escH(l.id) + '"', "Protocol", l.title || l.id);
     });
     var lessons = d.lessons || [];
     lessons.forEach(function (l) {
-      rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : ""),
-        "Lesson", "Lesson: " + (l.title || "Revise this topic"));
+      var at = ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : "");
+      if (isFallback(l)) rowsFb += fbRow("l-open", at);
+      else rowsEv += row("l-open", at, "Lesson", "Lesson: " + (l.title || "Revise this topic"));
     });
-    if (!lessons.length && d.lesson) rows += row("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"', "Lesson", d.lesson.title ? "Lesson: " + d.lesson.title : "Revise this topic");
-    if (d.cards) rows += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
+    if (!lessons.length && d.lesson) rowsFb += fbRow("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"');
+    if (d.cards) rowsEv += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
+    var rows = rowsEv + rowsFb;
     if (rows) h += '<h3 class="pn-km-h">Know more</h3>' + '<ul class="pn-rl">' + rows + "</ul>";
     if (d.next) {
       var pract = 'data-act="r-practise"' + (d.iid ? ' data-i="' + escH(d.iid) + '"' : "") + (d.mid ? ' data-m="' + escH(d.mid) + '"' : "");
@@ -250,6 +287,7 @@
   }
 
   function kmKindLabel(t) {
+    if (t.fb) return "Learn this module";
     if (t.k === "kb") return "Knowledge Library";
     if (t.k === "ls") return "Lesson";
     if (t.k === "dr") return "Drug Index";
@@ -273,7 +311,7 @@
      Separates item-specific topic targets (for the direct row) and full targets (for the bottom sheet). */
   function kmTargets(d) {
     var rowTargets = [], allTargets = [];
-    var sid = d.sid || "", mid = d.mid || "";
+    var sid = d.sid || "", mid = d.mid || "", mt = d.mt || "";
     var links = d.links || [];
     var kb = links.filter(function (l) { return l.k === "kb"; });
     var dr = links.filter(function (l) { return l.k === "dr"; });
@@ -281,8 +319,13 @@
     var okLessons = d.okLessons || [];
     var lesson = d.lesson;
 
+    function tag(t, l) {
+      if (l.ev !== undefined) t.ev = l.ev;
+      t.fb = isFallback(l); t.mt = mt;
+      return t;
+    }
     kb.forEach(function (l) {
-      var t = { k: "kb", id: l.id, title: l.title || l.id, act: "r-kb", attrs: ' data-id="' + escH(l.id) + '"' };
+      var t = tag({ k: "kb", id: l.id, title: l.title || l.id, v: l.v || "", act: "r-kb", attrs: ' data-id="' + escH(l.id) + '"' }, l);
       rowTargets.push(t); allTargets.push(t);
     });
 
@@ -290,26 +333,21 @@
     if (!lsList.length && lesson) {
       lsList.push({ key: lesson.key, title: lesson.title || pretty(lesson.key), tier: "topic", step: "" });
     }
-    lsList.sort(function (a, b) {
-      var at = a.tier === "topic" ? 0 : 1;
-      var bt = b.tier === "topic" ? 0 : 1;
-      return at - bt;
-    });
     lsList.forEach(function (l) {
-      var t = {
+      var t = tag({
         k: "ls", key: l.key, title: l.title || l.key, tier: l.tier || "specific", step: l.step || "",
         act: "l-open", attrs: ' data-s="' + escH(sid) + '" data-m="' + escH(mid) + '" data-l="' + escH(l.key) + '"' + (l.step ? ' data-step="' + escH(l.step) + '"' : "")
-      };
+      }, l);
       rowTargets.push(t); allTargets.push(t);
     });
 
     dr.forEach(function (l) {
-      var t = { k: "dr", id: l.id, title: l.title || l.id, act: "r-drug", attrs: ' data-t="' + escH(l.title || l.id) + '"' };
+      var t = tag({ k: "dr", id: l.id, title: l.title || l.id, v: l.v || "", act: "r-drug", attrs: ' data-t="' + escH(l.title || l.id) + '"' }, l);
       rowTargets.push(t); allTargets.push(t);
     });
 
     pr.forEach(function (l) {
-      var t = { k: "pr", id: l.id, title: l.title || l.id, act: "r-proto", attrs: ' data-id="' + escH(l.id) + '"' };
+      var t = tag({ k: "pr", id: l.id, title: l.title || l.id, v: l.v || "", act: "r-proto", attrs: ' data-id="' + escH(l.id) + '"' }, l);
       rowTargets.push(t); allTargets.push(t);
     });
 
@@ -329,6 +367,12 @@
       rowTargets.push(tN); allTargets.push(tN);
     }
 
+    // Items with both keep both, evidenced first: a stable partition, so the direct row and every
+    // sheet group lead with item-evidenced targets and plain module fallbacks follow.
+    function evd(ts) { return ts.filter(function (t) { return !t.fb; }); }
+    function fbd(ts) { return ts.filter(function (t) { return t.fb; }); }
+    rowTargets = evd(rowTargets).concat(fbd(rowTargets));
+    allTargets = evd(allTargets).concat(fbd(allTargets));
     return { rowTargets: rowTargets, allTargets: allTargets };
   }
 
@@ -336,6 +380,12 @@
      target, so the row is recognisable. One or two targets render as direct buttons (two side by side);
      three or more show the top two plus a "More (N)" button (N = every target) opening the sheet. */
   function kmBtn(t) {
+    // A fallback target renders under the plain "Learn this module" label with the module name as its
+    // subtitle, in the neutral secondary style (pn-km-fb); evidenced targets keep their exact look.
+    if (t.fb) {
+      return '<button type="button" class="pn-km-btn pn-km-fb" data-act="' + t.act + '"' + t.attrs + '>' +
+        '<b>Learn this module</b>' + (t.mt ? '<small>' + escH(t.mt) + '</small>' : '') + '</button>';
+    }
     return '<button type="button" class="pn-km-btn" data-act="' + t.act + '"' + t.attrs + '>' +
       '<b>' + escH(kmTargetLabel(t)) + '</b></button>';
   }
@@ -384,7 +434,7 @@
         items.map(function (t) {
           return '<li><button type="button" class="pn-rlr" data-act="' + t.act + '"' + t.attrs + '>' +
             '<small>' + escH(kmKindLabel(t)) + '</small>' +
-            '<b>' + escH(kmTargetLabel(t)) + '</b></button></li>';
+            '<b>' + escH(t.fb ? (t.mt || "") : kmTargetLabel(t)) + '</b></button></li>';
         }).join("") + '</ul></div>';
     });
     return h;
@@ -392,7 +442,7 @@
 
   var PURE = { SHOW: SHOW, VER: VER, has: hasItem, hasX: has, linksOf: linksOf, pref: pref, nextAction: nextAction,
     nextLabel: nextLabel, shardLinks: shardLinks, lessonLinks: lessonLinks, relOf: relOf, mergeLinks: mergeLinks,
-    body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf,
+    body: body, slotHtml: slotHtml, escH: escH, findRunItem: findRunItem, srcOf: srcOf, isFallback: isFallback,
     kmSlot: kmSlot, kmKindLabel: kmKindLabel, kmTargetLabel: kmTargetLabel, kmTargets: kmTargets, titleRelevant: titleRelevant,
     knowMoreHtml: knowMoreHtml, knowMoreSheetBodyHtml: knowMoreSheetBodyHtml };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
@@ -426,7 +476,7 @@
       });
     }, function () { return null; });
   }
-  function pretty(id) { return String(id || "").replace(/_/g, " ").replace(/(^|[\s-])([a-z])/g, function (m, a, b) { return a + b.toUpperCase(); }); }
+  function pretty(id) { return String(id || "").replace(/[_-]+/g, " ").replace(/(^|\s)([a-z])/g, function (m, a, b) { return a + b.toUpperCase(); }); }
   function titleOf(l) {
     if (l.title) return l.title;
     try {
@@ -544,6 +594,9 @@
       if (!mid) mid = found._m || found.t || "";
     }
     if (!sid && mid && H.subjectOfModule) { try { sid = H.subjectOfModule(mid) || ""; } catch (e) {} }
+    var mt = "";
+    try { mt = (mid && H.moduleTitleOf) ? (H.moduleTitleOf(mid) || "") : ""; } catch (e) { mt = ""; }
+    if (!mt && mid) mt = pretty(mid);
     var pipe = linksOf(x);
     var prefKind = pref(x.next);
     shard(H, mid).then(function (sh) {
@@ -586,7 +639,7 @@
         if (isKm) {
           var hasAny = pipe.length > 0 || (sh && sh.e && sh.e[String(iid)] && sh.e[String(iid)].some(function (r) { return r[1] >= SHOW; }));
           var n360 = (sh && sh.mod && sh.mod.n360) || null;
-          var km = (hasAny || n360) ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid, n360: n360 }) : { rowTargets: [], allTargets: [] };
+          var km = (hasAny || n360) ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid, mt: mt, n360: n360 }) : { rowTargets: [], allTargets: [] };
           if (!km.rowTargets.length) {
             updateEl("", true);
             return;
@@ -598,17 +651,20 @@
         }
 
         var kb = links.filter(function (l) { return l.k === "kb"; });
+        // The review action leads with the first item-evidenced article; a fallback-only article is an
+        // honest module target, so it keeps the action but names the module, never the article.
+        var kbEv = kb.filter(function (l) { return !isFallback(l); });
         var nLesson = okLessons.length + (lesson ? 1 : 0) + (cards ? 1 : 0);
         var kind = nextAction(prefKind, { kb: kb.length, lesson: nLesson, related: related.length, plan: G.PREP_PLAN ? 1 : 0 });
         var firstL = okLessons[0] || lesson;
         var next = null;
-        if (kind === "review") next = { kind: kind, label: nextLabel(kind), id: kb[0].id, target: kb[0].title };
+        if (kind === "review") next = { kind: kind, label: nextLabel(kind), id: (kbEv[0] || kb[0]).id, target: kbEv[0] ? kbEv[0].title : mt };
         else if (kind === "revise") next = { kind: kind, label: nextLabel(kind), lkey: firstL ? firstL.key : null, step: firstL ? firstL.step : null, target: firstL ? "Lesson" : "Flashcards" };
         else if (kind === "practise") next = { kind: kind, label: nextLabel(kind), target: related.length + (related.length === 1 ? " question" : " questions") };
         else if (kind === "plan") next = { kind: kind, label: nextLabel(kind), target: "Today's plan" };
         R.slots[iid] = { related: related, mid: mid, sid: sid };
         if (R.last && R.last.iid === iid) R.last.related = related;
-        var html = slotHtml({ links: links, lessons: okLessons, lesson: lesson, cards: cards, related: related, next: next, sid: sid, mid: mid, iid: iid });
+        var html = slotHtml({ links: links, lessons: okLessons, lesson: lesson, cards: cards, related: related, next: next, sid: sid, mid: mid, mt: mt, iid: iid });
         updateEl(html, false);
       });
     }, function () { try { slot.removeAttribute("data-done"); } catch (e) {} });

@@ -195,12 +195,15 @@ test("lessonLinks: tiers from via, the step rides along, the 75 floor, strongest
 
 test("slotHtml: per-item lessons with Read-the-lesson rows and steps, the module fallback stays", () => {
   const lessons = [{ key: "m1", title: "Liver Masses", tier: "topic", step: "" }, { key: "c9", title: "Adenoma Imaging", tier: "specific", step: "2" }];
-  const h = R.slotHtml({ lessons, sid: "s", mid: "m1" });
-  assert.match(h, /Lesson: Liver Masses/);
+  const h = R.slotHtml({ lessons, sid: "s", mid: "m1", mt: "Liver Masses" });
+  assert.match(h, /Learn this module/, "the topic-tier chapter is a plain module fallback (owner relabel 2026-10-14)");
+  assert.match(h, /<small>Learn this module<\/small><b>Liver Masses<\/b>/, "the fallback names the module, not the chapter");
+  assert.ok(h.indexOf("Lesson: Adenoma Imaging") < h.indexOf("Learn this module"), "evidenced rows come first");
   assert.match(h, /data-act="l-open" data-s="s" data-m="m1" data-l="c9" data-step="2"/);
   assert.ok(!/data-l="m1" data-step/.test(h), "no step, no attribute");
   const fb = R.slotHtml({ lesson: { key: "m1" }, sid: "s", mid: "m1" });
   assert.match(fb, /data-act="l-open" data-s="s" data-m="m1" data-l="m1"/);
+  assert.match(fb, /Learn this module/, "the module fallback keeps its plain row");
   assert.match(fb, /Revise this topic/, "the untitled fallback keeps its plain row");
   assert.equal(R.slotHtml({ lessons: [], lesson: null }), "");
   const rv = R.slotHtml({ lessons, next: { kind: "revise", label: "Revise this topic", lkey: "c9", step: "2", target: "Lesson" }, sid: "s", mid: "m1" });
