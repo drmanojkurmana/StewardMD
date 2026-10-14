@@ -34,11 +34,14 @@ const until = async (e, ms = 15000) => { const t0 = Date.now(); while (Date.now(
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const shot = async (name, dark) => {
   if (!process.env.SHOTS) return;
+  const fsx = await import("node:fs");
+  fsx.mkdirSync(process.env.SHOTS, { recursive: true });
   await ev(`document.body.classList.${dark ? "add" : "remove"}("dark"); return 1;`);
   await sleep(400);
   const r = await shotCall({ format: "png" });
-  if (r.result) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, "listfmt-" + name + "-" + (dark ? "dark" : "light") + ".png"), Buffer.from(r.result.data, "base64"));
+  if (r.result) fsx.writeFileSync(join(process.env.SHOTS, "listfmt-" + name + "-" + (dark ? "dark" : "light") + ".png"), Buffer.from(r.result.data, "base64"));
 };
+const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 
 const OWNER_Q = "Arrange the incidence of various types of breast cancers in increasing incidence. a. PTEN ( Cowden disease )b. Sporadic breast cancerc. Hereditary breast cancerd. BRCA1e. BRCA2f. Familial breast cancer";
 const OWNER_E = "Breast cancer Incidence Sporadic breast cancer 65-75 % Familial breast cancer 20-30 % Hereditary breast cancer 5-10 % BRCA1 45 % BRCA 2 35 % p53 ( Li-Fraumeni syndrome ) 1 % STK11/LKB1a (Peutz-Jegherssyndrome), PTENa (Cowdendisease), MSH2/MLH1a ( Muir-Torresyndrome), ATMa (Ataxiatelangiectasia ) Less than 1 % Unknown 20 %";
@@ -57,13 +60,17 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_ONBOARD=false; window.confirm=function(){return true;};` });
-  await call("Page.navigate", { url: BASE + "?prep=1" });
-  await until(`return !!(window.PREP && window.SMD_showHome);`, 30000);
-  await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); SMD_showHome(); return 1;`);
-  await sleep(500);
-  await ev(`document.querySelector('.rnav-tile[data-act=prep]').click(); return 1;`);
-  ok(await until(`return PREP.isOpen() && !!window.PREP_LISTFMT;`, 20000), "PrepNucleus opens with prep-listfmt.js loaded");
+  // Fixture bank (same preamble as test/run-prep-ui.mjs) so home opens deterministically; the two checked
+  // items are injected straight into a run below, so fixture counts stay untouched.
+  const FIX = "/test/fixtures/prep/";
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_QGEN=false; window.SMD_PREP_SETUP=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
+  const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
+  const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
+  await load(BASE + "?prep=1");
+  ok(await until(`return !!document.querySelector('.rnav-tile[data-act=prep]');`, 10000), "?prep=1: the tile renders");
+  await click(".rnav-tile[data-act=prep]");
+  ok(await until(`return PREP.isOpen() && !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]");`, 20000), "tile opens PrepNucleus home with the Anatomy subject");
+  ok(await ev(`return !!window.PREP_LISTFMT && typeof PREP_LISTFMT.parse === "function";`) === true, "prep-listfmt.js loaded with parser API");
   ok(await ev(`return typeof PREP_LISTFMT.parse === "function" && typeof PREP_LISTFMT.stem === "function";`) === true, "parser API present in page");
 
   const start = await ev(`PREP._host.run([
