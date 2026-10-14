@@ -133,6 +133,19 @@
     probe.style.cssText = "position:fixed;top:0;left:0;visibility:hidden;pointer-events:none;padding-top:max(env(safe-area-inset-top,0px),var(--sai-top,0px))";
     host.appendChild(probe);
   }
+  /* The Display setting zooms the whole page (home.js zoomNowD: documentElement.style.zoom, 0.95 by default on a
+   * small phone). The island is laid out in screen pixels (innerWidth, the hardware island), so it opts out of that
+   * zoom the way the Display sheet does; inside a 0.95 page it drew 5% small and slid toward the left edge. */
+  function pageZoom() {
+    var de = document.documentElement, z = parseFloat(de.style.zoom);
+    if (!(z > 0)) try { z = parseFloat(getComputedStyle(de).zoom); } catch (e) { z = 1; }
+    return z > 0.3 && z < 4 ? z : 1;
+  }
+  function unzoom() {
+    var z = pageZoom(), inv = z === 1 ? "" : String(Math.round(1e4 / z) / 1e4);
+    if (svg && svg.style.zoom !== inv) svg.style.zoom = inv;
+    if (layer && layer.style.zoom !== inv) layer.style.zoom = inv;
+  }
   function safeTop() { try { return parseFloat(getComputedStyle(probe).paddingTop) || 0; } catch (e) { return 0; } }
 
   /* ---- spring state: pill {x,y,w,h} and card {x,y,w,h}, each a spring ---- */
@@ -229,6 +242,7 @@
     if (!opts) return;
     try {
       ensureDom();
+      unzoom();
       var o = {
         title: opts.title ? String(opts.title) : "", message: opts.message ? String(opts.message) : "",
         symbol: opts.symbol === undefined ? "info" : opts.symbol, avatar: opts.avatar || null, accent: opts.accent || null,
@@ -389,6 +403,7 @@
   document.addEventListener("visibilitychange", sync);
   window.addEventListener("resize", function () {
     if (!cur || phase !== "open" || !geo) return;
+    unzoom();
     var vw = window.innerWidth || 390, p = restPill();
     geo.x = Math.round(vw / 2 - geo.w / 2);
     T.px = S.px = p.x; T.cx = S.cx = vw / 2; paint();
