@@ -56,3 +56,24 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   updated browser tests and 390px light/dark screenshots could not be run
   here. They are ready to run with `node test/run-prep-ui.mjs` and
   `node test/run-prep-lessons-ui.mjs` (SHOTS=dir) on a machine with Chrome.
+
+## Addendum 2026-10-14 (epi figures + sheet a11y, atop #1575)
+
+- 9 more original SVGs (`prep/lessons/media/epi-*.svg`) wired into the
+  last 8 imageless community-medicine epi/stats lessons (9 steps); every
+  edited lesson passes `checkLesson`. Numbers re-asserted by an
+  independent parse-and-assert pass that caught and fixed two label gaps
+  before wiring. Queue update in `LESSON-UI-IMAGES-PROGRESS.md`.
+- Report sheet accessibility: options grouped as `radiogroup` labelled by
+  the title; validation error takes focus with a visible outline.
+- Unit/guard re-run: action-row 8/8, lessons 23/23, ids/pearl batch 49/50;
+  the single failure (`prep-ids` live-cache count `>1700` lessons vs 1041
+  cached) reads an external cache outside the repo and is environmental.
+- Compliance pass (web-design-guidelines + accessibility + taste
+  preflight): labelled controls, 44px+ targets, focus-visible everywhere,
+  no `transition: all`, reduced-motion off switch, lazy width/height
+  images, `…` endings. No new UI library (repo already uses its own
+  tokens).
+- Branch merged up to current `origin/main` (the MCQ gate failures were
+  branch staleness: #1575 had already landed the same A/B work). Browser
+  gate re-run on `lessonui-browser-run`; PR and squash merge wait on green.
