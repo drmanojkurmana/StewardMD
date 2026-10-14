@@ -102,6 +102,16 @@ try {
   await ev(`document.body.classList.remove("dark"); PREP.open(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep .pn-body") && !!window.PREP_INSIGHT;`, 20000), "PrepNucleus opens and prep-insight.js is loaded");
 
+  // ---------- Nucleus360 is on the PrepNucleus home and leads a module ----------
+  ok(await ev(`var r=document.querySelector("#smdPrep .pn-group [data-act=n360-hub]"); return !!r && /Nucleus360/.test(r.textContent) && r.getBoundingClientRect().height > 40;`) === true, "Nucleus360 has a row at the top of the Practise group on home");
+  await click("#smdPrep .pn-group [data-act=n360-hub]");
+  ok(await until(`return /Nucleus360/.test((document.querySelector("#smdPrep .pn-bar")||{}).textContent||"") && !document.querySelector("#smdPrep .pn-group [data-act=n360-hub]");`, 6000), "tapping the home row opens the Nucleus360 hub");
+  await ev(`PREP.back(); return 1;`); await sleep(300);
+  await ev(`PREP.close(); return 1;`); await sleep(200);
+  await ev(`PREP.open({ subject: "anatomy", module: "ana-gametogenesis" }); return 1;`);
+  ok(await until(`var s=document.querySelector("#pnN360Slot"); var b=document.querySelector("#smdPrep > .pn-body"); return !!s && !!s.querySelector("[data-act=n360-hub]") && b.firstElementChild === s;`, 8000), "inside a module the Nucleus360 button now comes first");
+  await ev(`PREP.close(); return 1;`); await sleep(200); await ev(`PREP.open(); return 1;`); await until(`return !!document.querySelector("#smdPrep .pn-body");`, 8000);
+
   // ---------- first run ----------
   await ev(`PREP._host.run(${JSON.stringify(ITEMS)}, "study", "Insight set"); return 1;`);
   ok(await until(`return /Mechanism|Investigation|diagnosis|Nerve|Treatment|Screening|Next step|Complication/.test((document.querySelector("#smdPrep .pn-q")||{}).textContent||"");`, 8000), "the set starts");
@@ -138,7 +148,7 @@ try {
   ok(await txt("#smdPrep .ky-pos") === "1 of 5", "the pager covers the fix list only: " + await txt("#smdPrep .ky-pos"));
   await shot("pager-light");
   ok(await ev(`return !document.querySelector("#smdPrep .pn-why-chip");`) === true, "the review pager has no Why A / Why B buttons");
-  await ev(`document.body.classList.add("dark"); return 1;`); await shot("pager-dark");
+  await ev(`document.body.classList.add("dark"); return 1;`); await shot("pager-dark"); await sleep(500);
   const bgs = await ev(`var r=document.querySelector("#smdPrep"), c=getComputedStyle(r).backgroundColor, o=document.querySelector("#smdPrep .pn-opt:not(.right):not(.wrong)"); return [c, o ? getComputedStyle(o).backgroundColor : ""];`);
   const dark = (c) => { const m = String(c).match(/\d+/g); return m && m.slice(0, 3).every((v) => +v < 40) && Math.max(...m.slice(0, 3)) - Math.min(...m.slice(0, 3)) < 8; };
   ok(dark(bgs[0]) && dark(bgs[1]), "dark mode background and cards are neutral black, not navy: " + JSON.stringify(bgs));

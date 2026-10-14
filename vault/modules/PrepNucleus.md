@@ -1642,3 +1642,4 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 ## KnowYourIQ insight (2026-10-14)
 - `prep-insight.js` (loaded after `prep-coach.js`): stem-wording question type, per-set analysis, device tallies `ky_q`/`ky_ty`/`ky_cal`. Flag `smd_kyiq_insight` (default ON, `0` = old result). Tests: `test/prep-insight.test.mjs`, `test/run-kyiq-insight-ui.mjs`. See [[decisions/Decisions]] 2026-10-14.
 - Review is a swipe pager (`rvp`, `rvGo`, `paintReview` in `prep.js`). Retagging confidence after the fact does not update `ky_ty`/`ky_cal` (only the older coach counters).
+- **Nucleus360 entry (2026-10-14):** a row leads the Practise group on the PrepNucleus home (`n360-hub`), and the module screen's Nucleus360 button now comes first. `prep-nucleus360.js` did not export `act`, so tapping the old module button threw `G.PREP_NUCLEUS360.act is not a function` (nothing opened); fixed. Covered in `test/run-kyiq-insight-ui.mjs`.

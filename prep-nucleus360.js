@@ -441,5 +441,5 @@
     if (a === "n360-summary") { var sid2 = b.getAttribute("data-t"); return topicById(sid2).then(function (t) { if (t) openSummary(t); }); }
   }
   function init(host) { H = host; ses(); }
-  G.PREP_NUCLEUS360 = { on: on, init: init, mountModule: mountModule, openHub: openHub, openOutline: openOutline, startTopic: startTopic, openSummary: openSummary, wrap: wrap, tapConf: tapConf, confOf: confOf, NUCLEUS360: NUCLEUS360, _pure: PURE };
+  G.PREP_NUCLEUS360 = { on: on, init: init, mountModule: mountModule, act: act, openHub: openHub, openOutline: openOutline, startTopic: startTopic, openSummary: openSummary, wrap: wrap, tapConf: tapConf, confOf: confOf, NUCLEUS360: NUCLEUS360, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);
