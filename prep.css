@@ -1040,7 +1040,7 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-xt tbody tr:nth-child(even) td, .pn-root .pn-xt tbody tr:nth-child(even) th { background: color-mix(in srgb, var(--pn-s1) 55%, var(--pn-card)); }
 /* Render-time explanation references (prep-expfmt.js): a REF: line becomes a quiet pill where it stood.
    Token-only colours, so light and dark follow the theme; non-interactive, no animation, no glow. */
-.pn-root .pn-xchip { display: inline-block; padding: 3px 10px; border: 1px solid var(--pn-line); border-radius: 999px; background: var(--pn-card); font-size: 13px; font-weight: 600; color: var(--pn-mut); white-space: normal; }
+.pn-root .pn-xchip { display: inline-block; padding: 3px 12px; -webkit-box-decoration-break: clone; box-decoration-break: clone; border: 1px solid var(--pn-line); border-radius: 999px; background: var(--pn-card); font-size: 13px; font-weight: 600; color: var(--pn-mut); white-space: normal; }
 .pn-root .pn-kp { display: flex; flex-direction: column; gap: 3px; max-width: 40em; padding: 12px 14px 13px 16px; border-left: 3px solid var(--pn-pri); border-radius: var(--pn-r-xs) var(--pn-r-md) var(--pn-r-md) var(--pn-r-xs); background: var(--pn-pri-soft); font-size: 15.5px; line-height: 1.55; }
 .pn-root .pn-kp > b { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--pn-pri-ink); }
 @media (min-width: 600px) {
