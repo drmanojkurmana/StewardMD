@@ -958,8 +958,8 @@
       { screen: "home", sel: '[data-act="askai"]', title: "MaiK, your AI resident", body: "The centre button opens MaiK. Ask the case, dictate a note, attach an image. Named scores open their calculator for free." },
       { screen: "home", sel: '[data-act="hospital"]', title: "Hospital: the patient hub", body: "ICU and Ward, Ward Sync, OPD Queue, FollowCare, Prescription and Connect all live under Hospital." },
       { screen: "home", sel: '[data-act="notifications"]', title: "Alerts", body: "Lab Watch results, referrals, unit activity and updates arrive here. Allow notifications the first time the app asks." },
-      { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Calculators, Drugs, Guidelines, RadioAnatome, Help & Support and Settings. Something not working? Shake your phone to report it." },
-      { screen: "home", sel: '[data-act="more"]', title: "More", body: "Profile and StewardMD ID, Subscription, AI Usage, NMC eLOGBook, Settings, help, this guide and the legal pages." },
+      { screen: "home", sel: '[data-act="menu"]', title: "The sidebar", body: "Your profile, Guidelines, Subscription, AI Usage, Settings, Help & Support, this tour and the legal pages. Something not working? Shake your phone to report it." },
+      { screen: "home", sel: '[data-act="more"]', title: "More", body: "NMC eLOGBook, Open shared case, Search Medical Register, AgentConnect and Connect patient. Profile, Subscription, Settings and help are in the sidebar." },
       { screen: "home", sel: '[data-act="theme"]', title: "Dark or light", body: "Tap the sun or moon to switch. Appearance and fonts live in Settings; the choice is remembered." }
     ] },
     { id: "reasoning", icon: "brain", name: "Clinical reasoning", sub: "Differential, syndromes, antibiogram · 1 min", steps: [
@@ -1005,24 +1005,23 @@
       { screen: "hospital", sel: null, title: "Take the ICU walkthrough", cta: "Start ICU tour", then: "icu", body: "The ICU tour opens the real dashboard on a demo patient and walks board, patient, monitoring, rounds and handover end to end." }
     ] },
     { id: "imaging", icon: "scan", name: "Imaging AI and learning", sub: "KardiQ X, ThoreX, FundX, SknX, CliniX, SURGX, Logbook · 1 min", steps: [
-      { screen: "more", sel: '[data-mi="settings"]', title: "Settings, then Experimental Features", body: "The Beta modules live under Settings (More, then Settings): the four image readers, CliniX for students and SURGX for surgeons. Each is decision support under clinical evaluation." },
+      { screen: "sidebar", sel: '[data-sbr-act="settings"]', title: "Settings, then Experimental Features", body: "The Beta modules live under Settings (sidebar, then Settings): the four image readers, CliniX for students and SURGX for surgeons. Each is decision support under clinical evaluation." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="kardiox"]', title: "KardiQ X: the ECG", body: "Photograph the 12-lead flat and in good light. Rhythm, intervals and the STEMI question, with the confidence shown. Treat a flag as a prompt to look, not a result to act on." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="thorex"]', title: "ThoreX: the chest film", body: "On-device chest radiograph interpretation: consolidation, effusion, pneumothorax, cardiomegaly, flagged for your review." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="fundx"]', title: "FundX: the retina", body: "Smartphone fundus imaging support with retinal red flags and referral advice." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="sknx"]', title: "SknX: the lesion", body: "A lesion photo with a scale reference, a short history, and a differential with the next step." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="clinix"]', title: "CliniX for students", body: "Clinical learning and bedside skills, step by step. Content is pending release sign-off; treat it as draft." },
       { screen: "sidebar-exp", sel: '[data-sbr-tg="surgx"]', title: "SURGX for surgeons", body: "Notes, protocols, procedures, evidence and a case mentor. Notes are encrypted on this device and never leave it; export before you reinstall." },
-      { screen: "sidebar", sel: '[data-sbr-act="atlas"]', title: "RadioAnatome", body: "Labelled radiological anatomy for reference and teaching. The ECG atlas lives inside KardiQ X, under Learn." },
       { screen: "more", sel: '[data-mi="pglog"]', title: "NMC eLOGBook", body: "The PG digital logbook under PGMER-2023: log cases as they happen, submit the week, your guide authenticates monthly, export in the council's format." }
     ] },
     { id: "account", icon: "user", name: "Account and settings", sub: "Verification, Pro, alerts, help · 1 min", steps: [
-      { screen: "more", sel: '[data-mi="account"]', title: "Profile and StewardMD ID", body: "Your permanent SMD-XXXXXX handle, the registration status and your professional details. Colleagues add you to a unit by this ID." },
-      { screen: "more", sel: '[data-mi="account"]', title: "Verification", body: "Upload the NMC or State Medical Council certificate, or the registration number with a photo ID. Verified doctors unlock prescribing and get Pro free for 7 days. Your mobile number is verified by a WhatsApp code, SMS as backup." },
-      { screen: "more", sel: '[data-mi="subscription"]', title: "Subscription", body: "Trainee, Co-Resident, Pro, Physician and yearly plans, quoted per day. The clinical engine, calculators, drugs and reference stay free forever." },
-      { screen: "more", sel: '[data-mi="aiusage"]', title: "AI Usage", body: "MaiK tokens used today, the remaining allowance and the top-up packs." },
-      { screen: "more", sel: '[data-mi="settings"]', title: "Settings", body: "Notifications (choose what reaches you; critical and overdue alerts always come through), Appearance and Theme (font size, density, auto-fit, and typefaces such as Atkinson Hyperlegible and Lexend), AI and advanced options, all in one place." },
-      { screen: "more", sel: '[data-mi="help"]', title: "Help and support", body: "Contact the team and track your requests. Feature news email can be switched off with the Unsubscribe button in any such email; account notices always arrive." },
-      { screen: "more", sel: '[data-mi="disclaimer"]', title: "The rules the app follows", body: "Clinical decision support and an educational aid: verify every dose and recommendation against the primary source. No confirmed diagnoses. Patient details never leave the device in notifications, SMS or logs." }
+      { screen: "sidebar", sel: '#smdSbProfile', title: "Profile and StewardMD ID", body: "Your permanent SMD-XXXXXX handle, the registration status and your professional details. Colleagues add you to a unit by this ID." },
+      { screen: "sidebar", sel: '#smdSbProfile', title: "Verification", body: "Upload the NMC or State Medical Council certificate, or the registration number with a photo ID. Verified doctors unlock prescribing and get Pro free for 7 days. Your mobile number is verified by a WhatsApp code, SMS as backup." },
+      { screen: "sidebar", sel: '[data-sbr-act="subscription"]', title: "Subscription", body: "Trainee, Co-Resident, Pro, Physician and yearly plans, quoted per day. The clinical engine, calculators, drugs and reference stay free forever." },
+      { screen: "sidebar", sel: '[data-sbr-act="aiusage"]', title: "AI Usage", body: "MaiK tokens used today, the remaining allowance and the top-up packs." },
+      { screen: "sidebar", sel: '[data-sbr-act="settings"]', title: "Settings", body: "Notifications (choose what reaches you; critical and overdue alerts always come through), Appearance and Theme (font size, density, auto-fit, and typefaces such as Atkinson Hyperlegible and Lexend), AI and advanced options, all in one place." },
+      { screen: "sidebar", sel: '[data-sbr-act="help"]', title: "Help and support", body: "Contact the team and track your requests. Feature news email can be switched off with the Unsubscribe button in any such email; account notices always arrive." },
+      { screen: "sidebar", sel: '[data-sbr-act="disclaimer"]', title: "The rules the app follows", body: "Clinical decision support and an educational aid: verify every dose and recommendation against the primary source. No confirmed diagnoses. Patient details never leave the device in notifications, SMS or logs." }
     ] }
   ];
 

@@ -3007,6 +3007,37 @@
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   // A small section label inside the More sheet (same look as the old "Legal & safety" heading).
   function sec(t) { return '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">' + t + '</div>'; }
+  /* One dispatcher for every More-sheet destination. The account, help and legal rows now live in the sidebar
+     (sidebar-redesign.js), which calls it through window.SMD_moreAct. */
+  function moreAct(a) {
+    if (a === "settings") { closeSheet(); return setTimeout(function () { try { if (window.SMD_openSettings) SMD_openSettings(); else openDisplay(); } catch (e) {} }, 120); }
+    if (a === "display") return openDisplay();
+    if (a === "notifprefs") return openNotifPrefs();
+    // One Help & Support centre (bug-report.js, 2026-09-27); the old sheet is the fallback only.
+    if (a === "help") { closeSheet(); if (window.SMD_HELP && SMD_HELP.openCentre) return SMD_HELP.openCentre(); return openHelp(); }
+    if (a === "account") return openAccount();
+    if (a === "subscription") return openSubscription();
+    if (a === "aiusage") { closeSheet(); return openAiUsage(); }
+    if (a === "aictl") { closeSheet(); return openAiControl(); }
+    if (a === "mail") { closeSheet(); if (window.SMD_MAIL) return SMD_MAIL.open(); return toast("Mail loading…"); }
+    // About & Acknowledgements: the combined About modal (what the sidebar row opened), else the old acknowledgements view.
+    if (a === "ack") { closeSheet(); if (window.openAbout) return openAbout(); if (window.SB && SB.modal) return SB.modal("aboutModal"); return openAck(); }
+    if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
+    if (a === "nmcsearch") { closeSheet(); setTimeout(function () { try { window.SMD_NMC ? SMD_NMC.open() : toast("Loading…"); } catch (e) {} }, 120); return; }
+    if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
+    // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
+    // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
+    // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
+    // fell back to index.html and the whole app "restarted". Modals work on web + native.
+    if (a === "disclaimer") { closeSheet(); if (typeof openModal === "function") openModal("disclaimerModal"); return; }
+    if (a === "privacy") { closeSheet(); if (typeof openModal === "function") openModal("privacyModal"); return; }
+    if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
+    closeSheet();
+    if (a === "connect") a = "agentconnect";
+    if (ACT[a] && roleLocked(a)) return openRoleLock(a);
+    if (ACT[a]) ACT[a]();
+  }
+  try { window.SMD_moreAct = moreAct; } catch (e) {}
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
@@ -3034,66 +3065,14 @@
       ((window.SMD_CONNECT_AGENT_BOOT && window.SMD_CONNECT_AGENT_BOOT.enabled)
         ? mi("hub", "AgentConnect", "Connect your hospital's EMR", "agentconnect")
         : mi("hub", "Connect EMR", "Onboard a hospital or EMR", "connect")) +
-      mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
-      sec("Account") +
-      mi("user", "Profile", "ID, verification, hospital, plan &amp; sign-in", "account") +
-      mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
-      mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
-      (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
-      // Owner Mail (mail.js): the hello@maiknowledge.com mailbox, live through /api/mail. The caption is
-      // replaced with the unread count once /api/mail/status answers.
-      ((nIsOwner() && window.SMD_MAIL && SMD_MAIL.enabled()) ? mi("mail", "Mail", "hello@maiknowledge.com (owner)", "mail") : "") +
-      (window.SMD_openSettings
-        ? mi("settings", "Settings", "Notifications, appearance, AI &amp; advanced", "settings")
-        : mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
-          mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs")) +
-      sec("Help") +
-      mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
-      mi("play", "App tour", "Replay the guided tour", "apptour") +
-      sec("About &amp; legal") +
-      mi("award", "About &amp; Acknowledgements", "StewardMD, version history, credits", "ack") +
-      mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
-      mi("lock", "Privacy policy", "How your data is handled", "privacy") +
-      mi("book", "Terms of use", "Terms &amp; conditions", "terms")
+      mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient")
     );
     var s = sheetEl();
-    // Help & support used to carry its unread-reply count in the sidebar; it lives here now.
-    try { var _un = window.SMD_BUGS && SMD_BUGS.unread ? SMD_BUGS.unread() : 0; var _hm = s.querySelector('[data-mi="help"] .ml'); if (_un && _hm) _hm.insertAdjacentHTML('afterbegin', '<span style="float:right;margin-left:8px;background:#EF4444;color:#fff;border-radius:999px;padding:1px 7px;font:700 11px var(--hfont,sans-serif)">' + _un + ' new</span>'); } catch (e) {}
-    var mailRow = s.querySelector('[data-mi="mail"] .mc');
-    if (mailRow && window.SMD_MAIL) SMD_MAIL.checkUnread().then(function (n) { if (mailRow.isConnected) mailRow.textContent = n ? n + " unread" : "hello@maiknowledge.com (owner)"; });
     s.querySelectorAll("[data-ui]").forEach(function (b) {
       b.addEventListener("click", function () { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); });
     });
     s.querySelectorAll("[data-mi]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var a = b.getAttribute("data-mi");
-        if (a === "settings") { closeSheet(); return setTimeout(function () { try { if (window.SMD_openSettings) SMD_openSettings(); else openDisplay(); } catch (e) {} }, 120); }
-        if (a === "display") return openDisplay();
-        if (a === "notifprefs") return openNotifPrefs();
-        // One Help & Support centre (bug-report.js, 2026-09-27); the old sheet is the fallback only.
-        if (a === "help") { closeSheet(); if (window.SMD_HELP && SMD_HELP.openCentre) return SMD_HELP.openCentre(); return openHelp(); }
-        if (a === "account") return openAccount();
-        if (a === "subscription") return openSubscription();
-        if (a === "aiusage") { closeSheet(); return openAiUsage(); }
-        if (a === "aictl") { closeSheet(); return openAiControl(); }
-        if (a === "mail") { closeSheet(); if (window.SMD_MAIL) return SMD_MAIL.open(); return toast("Mail loading…"); }
-        // About & Acknowledgements: the combined About modal (what the sidebar row opened), else the old acknowledgements view.
-        if (a === "ack") { closeSheet(); if (window.openAbout) return openAbout(); if (window.SB && SB.modal) return SB.modal("aboutModal"); return openAck(); }
-        if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
-        if (a === "nmcsearch") { closeSheet(); setTimeout(function () { try { window.SMD_NMC ? SMD_NMC.open() : toast("Loading…"); } catch (e) {} }, 120); return; }
-        if (a === "apptour") { closeSheet(); setTimeout(function () { try { if (window.SMD_TOUR) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); } catch (e) {} }, 120); return; }
-        // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
-        // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
-        // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
-        // fell back to index.html and the whole app "restarted". Modals work on web + native.
-        if (a === "disclaimer") { closeSheet(); if (typeof openModal === "function") openModal("disclaimerModal"); return; }
-        if (a === "privacy") { closeSheet(); if (typeof openModal === "function") openModal("privacyModal"); return; }
-        if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
-        closeSheet();
-        if (a === "connect") a = "agentconnect";
-        if (ACT[a] && roleLocked(a)) return openRoleLock(a);
-        if (ACT[a]) ACT[a]();
-      });
+      b.addEventListener("click", function () { moreAct(b.getAttribute("data-mi")); });
     });
   }
   // AI Usage (doctor dashboard, AI Control Center Phase 3): a doctor's OWN daily AI limits + activity.
@@ -10498,6 +10477,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
   var NOTIF_OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"];
   function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
+  try { window.SMD_isOwner = nIsOwner; } catch (e) {}
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;
   var _feedType = "all", _feedQ = "", _feedBranch = "all";

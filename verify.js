@@ -737,7 +737,15 @@
   /* The drawer's first row is PROFILE (owner, 2026-09-27, screenshot: "want profile button here").
    * It used to be "Account & Verification", a second door into what is now one Profile page; that
    * page holds verification, so this row opens Profile. Permanent, not behind a flag. */
+  /* 2026-10-14 (owner): the Profile row is gone from the drawer. The photo and name bar at its top (home.js
+   * injectSbAccount, #smdSbProfile) already opens the Profile page, so a second door was a duplicate. This only
+   * removes a row an older build may have left in place. */
   function injectMenu() {
+    var menu = $("sbMenu"); if (!menu) return;
+    var old = menu.querySelector("[data-smd-verify]"); if (old) old.remove();
+    return;
+  }
+  function injectMenuRetired() {
     var menu = $("sbMenu"); if (!menu || menu.querySelector("[data-smd-verify]")) return;
     var b = document.createElement("button");
     b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-verify", "1"); b.setAttribute("data-smd-profile", "1");

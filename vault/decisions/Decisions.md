@@ -11806,3 +11806,14 @@ Older tests that pinned the old layout were updated. [[modules/Refined Look]]
   The sprite stays only for the "MaiK" wordmark (`mkai-word`). `scripts/build-www.sh` copies `assets/maik-logo-*.webp`.
 - Not changed on purpose: the home tab bar "Ask Maik" orb (`home.js` `rnav-maik-mark`, `maik-ai-mark.png`) because the home look is
   frozen, and the main MaiK assistant's own logo and the footer logo (owner 2026-10-09).
+
+## 2026-10-14 Menus: account, help and legal rows moved from More to the sidebar (reverses 2026-10-12 for those rows)
+- Sidebar (`sidebar-redesign.js` `build`): Clinical workspace, Reference (Guidelines & Protocols), Account (Subscription, AI Usage,
+  AI Control Center and Mail for the owner, Settings), Help (Help & support with its unread count, App tour), About & legal
+  (About & Acknowledgements, Medical disclaimer, Privacy policy, Terms of use).
+- More (`home.js` `openMore`) is now Clinical only: Open shared case, Search Medical Register, Scheme Search, NMC eLOGBook,
+  AgentConnect / Connect EMR, Connect patient.
+- No Profile row anywhere in the drawer (`verify.js injectMenu` is a no-op that removes an old row) and no RadioAnatome row
+  (it keeps its home tile). The photo and name bar at the top of the drawer (`#smdSbProfile`) opens the Profile page.
+- Handlers stay in `home.js`: `moreAct(a)` is shared and exported as `window.SMD_moreAct`; `window.SMD_isOwner` gates owner rows.
+- The guided tour follows (sidebar steps for Profile, Subscription, AI Usage, Settings, Help, legal). Tests: `test/run-menu-dedupe-ui.mjs`.

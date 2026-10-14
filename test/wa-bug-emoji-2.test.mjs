@@ -81,17 +81,18 @@ test("home.js: the More screen no longer duplicates sidebar navigation", () => {
   assert.ok(!body.includes('mi("book", "Guidelines'), "Guidelines & References (duplicated by the sidebar) is removed from More");
   assert.ok(!body.includes('mi("calc", "Calculators"'), "Calculators (duplicated by the sidebar) is removed from More");
   // What SHOULD still be there — this isn't a wholesale gutting of the screen.
-  assert.ok(body.includes('"opencase"') && body.includes('"notifprefs"') && body.includes('"account"'), "rows that are NOT duplicated elsewhere stay in More");
+  assert.ok(body.includes('"opencase"') && body.includes('"nmcsearch"') && body.includes('"connectpatient"'), "the Clinical rows stay in More");
+  assert.ok(!body.includes('"account"') && !body.includes('"subscription"') && !body.includes('"help"'), "the account and help rows moved to the sidebar (2026-10-14)");
 });
 
-test("menus: every destination has exactly one home (owner, 2026-10-12)", () => {
+test("menus: every destination has exactly one home (owner, 2026-10-14)", () => {
   const sb = read("sidebar-redesign.js"), home = read("home.js");
   const menu = sb.slice(sb.indexOf("function build(menu)"), sb.indexOf("if (menu.__sbrClick) return;"));
   assert.ok(menu.includes('row("guidelines", "book", "Guidelines &amp; Protocols")'), "Guidelines stays in the sidebar (reference)");
-  for (const gone of ["drugs", "interactions", "calculators", "help", "tour", "ack"]) assert.equal(menu.includes('row("' + gone + '"'), false, "the sidebar no longer has " + gone);
-  assert.equal(menu.includes('data-sbr-act="settings"'), false, "the sidebar no longer has a Settings row");
-  assert.ok(home.includes('mi("award", "About &amp; Acknowledgements"'), "a combined About & Acknowledgements row exists in More");
-  assert.ok(home.includes('"settings"') && home.includes('mi("play", "App tour"'), "Settings and the App tour live in More");
+  for (const gone of ["drugs", "interactions", "calculators", "profile", "atlas"]) assert.equal(menu.includes('row("' + gone + '"'), false, "the sidebar has no " + gone + " row");
+  for (const here of ["subscription", "aiusage", "settings", "help", "tour", "ack", "disclaimer", "privacy", "terms"]) assert.ok(menu.includes('row("' + here + '"'), "the sidebar has " + here);
+  const i = home.indexOf("function openMore() {"), body = home.slice(i, home.indexOf("\n    );", i));
+  for (const gone of ['mi("award", "About &amp; Acknowledgements"', 'mi("play", "App tour"', 'mi("user", "Profile"', 'mi("spark", "Subscription"', 'mi("settings"']) assert.equal(body.includes(gone), false, "More no longer has " + gone);
 });
 
 test("home.js: .hv-sheet (the More sheet, and every other sheet) dark-themes", () => {

@@ -46,6 +46,12 @@
     chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 11h7M8.5 14h4.5"/>',
     bug: '<rect x="8" y="6" width="8" height="14" rx="4"/><path d="M12 20v-9M8 11H4M16 11h4M8 16H5M16 16h3M9 6.5 7 4M15 6.5 17 4M10 6a2 2 0 0 1 4 0"/>',
     mail: '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/>',
+    trend: '<path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/>',
+    lines: '<path d="M4 6h16M4 12h16M4 18h10"/>',
+    play: '<path d="M7 4v16l13-8Z"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.5 2.5 0 0 1 4.6 1.3c0 1.6-2.1 2-2.1 3.4"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
+    lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/>',
     flask: '<path d="M10 2v5.5L4.4 18.5A2 2 0 0 0 6.1 21h11.8a2 2 0 0 0 1.7-2.5L14 7.5V2h-4Z"/><path d="M8.5 2h7M7 14h10"/>'
   };
   function svg(name) {
@@ -55,6 +61,9 @@
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
   function hubOn() { return true; }   // one Profile, permanent (owner, 2026-09-27); smd_profile_hub retired
   function closeSB() { try { if (window.SB && SB.close) SB.close(); } catch (e) {} }
+
+  function more(a) { if (window.SMD_moreAct) window.SMD_moreAct(a); else toast("Loading…"); }
+  function isOwner() { try { return !!(window.SMD_isOwner && window.SMD_isOwner()); } catch (e) { return false; } }
 
   // Row actions → existing globals, with graceful fallbacks.
   var ACT = {
@@ -104,7 +113,14 @@
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
     // Specialty / branch selector — opens the Clinical Workspaces bottom sheet (workspaces.js).
     mail: function () { closeSB(); if (window.SMD_MAIL && SMD_MAIL.open) SMD_MAIL.open(); else toast("Mail loading…"); },
-    workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); }
+    workspace: function () { if (window.SMD_WS && SMD_WS.open) SMD_WS.open(); else toast("Workspaces loading…"); },
+    // Account, help and legal rows (2026-10-14, owner): they live in the sidebar now; home.js owns the handlers.
+    subscription: function () { more("subscription"); },
+    aiusage: function () { more("aiusage"); },
+    aictl: function () { more("aictl"); },
+    disclaimer: function () { more("disclaimer"); },
+    privacy: function () { more("privacy"); },
+    terms: function () { more("terms"); }
     // "settings" is handled specially (expands the Advanced block) — see wiring below.
   };
 
@@ -482,15 +498,35 @@
     menu.setAttribute("data-sbr", "1");
     menu.innerHTML =
       wsRow() +
-      // MENU DE-DUPLICATION (2026-10-12, owner): every destination now lives in exactly ONE menu.
-      // The sidebar is REFERENCE only. Tools (Drugs Database, Interaction Checker, Calculators) repeated the Drugs tab
-      // and the home tiles; Help & Support, App tour, About & Acknowledgements and Settings moved to the More sheet
-      // (home.js openMore), which is now the one home for account, settings, help, tour and legal. Their ACT handlers
-      // stay below: the Settings page, the tour and the other entry points still call them.
+      // MENU LAYOUT (2026-10-14, owner; reverses the 2026-10-12 split): the sidebar is Reference plus the account, help and
+      // legal rows that used to sit in the More sheet (home.js openMore now holds only the Clinical rows). There is no
+      // Profile row (the photo and name bar at the top opens the profile) and no RadioAnatome row (it has its home tile).
+      // Every destination is still in exactly ONE menu. The handlers stay in home.js (window.SMD_moreAct).
       '<div class="sbr-sec">Reference</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
-        (flag("smd_atlas", true) ? row("atlas", "atlas", "RadioAnatome") : "") +
+      '<div class="sbr-sec">Account</div>' +
+      row("subscription", "spark", "Subscription") +
+      row("aiusage", "trend", "AI Usage") +
+      (isOwner() ? row("aictl", "lines", "AI Control Center") : "") +
+      (isOwner() && window.SMD_MAIL && SMD_MAIL.enabled && SMD_MAIL.enabled() ? row("mail", "mail", "Mail") : "") +
+      row("settings", "gear", "Settings") +
+      '<div class="sbr-sec">Help</div>' +
+      row("help", "help", "Help &amp; support") +
+      row("tour", "play", "App tour") +
+      '<div class="sbr-sec">About &amp; legal</div>' +
+      row("ack", "award", "About &amp; Acknowledgements") +
+      row("disclaimer", "shield", "Medical disclaimer") +
+      row("privacy", "lock", "Privacy policy") +
+      row("terms", "book", "Terms of use") +
       '<div class="sbr-status"><b></b>System Online</div>';
+
+    // Unread counts the rows used to carry in the More sheet.
+    try {
+      var un = window.SMD_BUGS && SMD_BUGS.unread ? SMD_BUGS.unread() : 0, hr = menu.querySelector('[data-sbr-act="help"]');
+      if (un && hr) hr.insertAdjacentHTML("beforeend", '<span class="sbr-badge">' + un + " new</span>");
+      var mr = menu.querySelector('[data-sbr-act="mail"]');
+      if (mr && window.SMD_MAIL && SMD_MAIL.checkUnread) SMD_MAIL.checkUnread().then(function (n) { if (n && mr.isConnected) mr.insertAdjacentHTML("beforeend", '<span class="sbr-badge">' + n + "</span>"); });
+    } catch (e) {}
 
     if (menu.__sbrClick) return;   // delegate once per element (survives innerHTML rebuilds)
     menu.__sbrClick = true;

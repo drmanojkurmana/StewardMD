@@ -148,13 +148,14 @@ try {
   ok(rows === "Profile, ID & verification", "Settings has ONE account row, not two (" + rows + ")");
   await ev(`document.querySelector('#sbrSettings [data-sbr-act="profile"]').click(); return 1;`); await sleep(600);
   ok(await q("#hvSheet.on .hv-pf.hub"), "and it opens the hub");
-  // The drawer's first row is PROFILE (owner, 2026-09-27: "want profile button here").
-  await ev(`document.getElementById("hvScrim").click(); try { SB.open(); } catch (e) {} return 1;`); await sleep(600);
-  const drow = await ev(`var b=document.querySelector('#sbMenu [data-smd-profile]'); return b ? b.textContent.trim() : null;`);
-  ok(drow === "Profile", "the drawer has a Profile row where Account & Verification was (" + drow + ")");
+  // 2026-10-14 (owner): no Profile row in the drawer; the photo and name bar at its top opens the Profile page.
+  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({ type: "email", email: "dr@example.com", name: "Dr Test" })); document.getElementById("hvScrim").click(); try { SB.open(); } catch (e) {} return 1;`); await sleep(700);
+  ok(await ev(`return !document.querySelector('#sbMenu [data-smd-profile]');`) === true, "the drawer has no Profile row");
   ok(await ev(`return !/Account\s*&\s*Verification/.test(document.getElementById("sbMenu").textContent);`) === true, "and no Account & Verification row");
-  await ev(`document.querySelector('#sbMenu [data-smd-profile]').click(); return 1;`); await sleep(700);
+  ok(await ev(`return !!document.querySelector('#smdSbProfile');`) === true, "the photo and name bar is there");
+  await ev(`document.querySelector('#smdSbProfile').click(); return 1;`); await sleep(900);
   ok(await q("#hvSheet.on .hv-pf.hub"), "tapping it opens the Profile page");
+  await ev(`localStorage.removeItem("stewardmd_account"); return 1;`);
 
   // ── hardcoded: the retired switch changes nothing ─────────────────────────────────────────────
   await ev(`localStorage.setItem("smd_profile_hub", "0"); return 1;`);

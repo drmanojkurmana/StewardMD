@@ -160,13 +160,13 @@ test("the report payload carries the screen, the pointed element and the page, a
   assert.match(src, /fix it within 24 hours/);
 });
 
-test("menus: ONE Help & Support row, and it lives in More (not the sidebar); no separate Feedback / Bug Centre, AgentConnect and My Clinic out of the sidebar; bug-report.js is loaded", () => {
+test("menus: ONE Help & Support row, and it lives in the sidebar (not More); no separate Feedback / Bug Centre, AgentConnect and My Clinic out of the sidebar; bug-report.js is loaded", () => {
   const sb = readFileSync(new URL("../sidebar-redesign.js", import.meta.url), "utf8");
   const menu = sb.slice(sb.indexOf("function build(menu)"), sb.indexOf("if (menu.__sbrClick) return;"));
-  // 2026-10-12 (owner): one home per destination. Help & Support moved from the sidebar to the More sheet.
-  assert.equal(/row\("help"/.test(menu), false, "the sidebar no longer carries Help & Support");
+  // 2026-10-14 (owner): the account, help and legal rows moved from the More sheet back to the sidebar; one home each.
+  assert.match(menu, /row\("help", "help", "Help &amp; support"\)/);
   const home = readFileSync(new URL("../home.js", import.meta.url), "utf8");
-  assert.match(home, /mi\("help", "Help &amp; support", "Contact us &amp; track your requests", "help"\)/);
+  assert.equal(/mi\("help"/.test(home), false, "More no longer carries Help & support");
   assert.equal(/row\("feedback"/.test(menu), false, "Send Feedback folded into Help & Support");
   assert.equal(/row\("bugs"/.test(menu), false, "Bug Report Centre folded into Help & Support");
   assert.equal(/row\("agentconnect"/.test(menu), false);

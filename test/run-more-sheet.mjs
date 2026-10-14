@@ -56,13 +56,13 @@ try {
   // combined About & Acknowledgements row is back here (and gone from the sidebar). The old separate rows stay gone.
   ok(!rows.labels.some((l) => l.startsWith("About StewardMD")), "the old About StewardMD row is gone");
   ok(!rows.labels.some((l) => l.startsWith("Acknowledgements")), "the old Acknowledgements row is gone");
-  ok(rows.labels.some((l) => l.startsWith("About & Acknowledgements")), "the combined About & Acknowledgements row is here (and not in the sidebar)");
+  ok(!rows.labels.some((l) => l.startsWith("About & Acknowledgements")), "the combined About & Acknowledgements row moved to the sidebar (2026-10-14)");
   ok(!rows.labels.some((l) => l.startsWith("Guidelines")), "Guidelines & References row is gone");
   ok(!rows.labels.some((l) => l.startsWith("Calculators")), "Calculators row is gone");
   ok(rows.labels.some((l) => l.startsWith("Open shared case")), "Open shared case (not duplicated elsewhere) is still there");
-  ok(rows.labels.some((l) => l.startsWith("Settings")), "Settings (the page that holds notifications, appearance, AI and advanced) is here");
+  ok(!rows.labels.some((l) => l.startsWith("Settings")), "Settings moved to the sidebar (2026-10-14)");
   ok(!rows.labels.some((l) => l.startsWith("Notification preferences") || l.startsWith("Display")), "separate Notification and Display rows are gone (inside Settings)");
-  ok(rows.labels.some((l) => l.startsWith("Profile")), "Profile (not duplicated elsewhere) is still there");
+  ok(!rows.labels.some((l) => l.startsWith("Profile")), "Profile is not in More (the sidebar photo bar opens it)");
 
   // Dark mode: .hv-sheet must actually resolve dark colors, not just have a rule sitting unused.
   const light = await J(`
