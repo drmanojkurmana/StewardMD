@@ -142,6 +142,15 @@ test("promotable: topic tags promote, distractors and explanation-only mentions 
   assert.ok(out.some((l) => l.id === "candida_auris" && l.v === "kt" && l.c === 75), "the tag-evidenced article becomes the topic target");
 });
 
+test("addTopicLinks: an explanation-only mapped article yields to the subject lesson; a tag-evidenced one stays", () => {
+  const topics = { m1: { t: "Viral exanthems", kb: [["mumps", "Mumps"]], pr: [] } };
+  const ctx = { mid: "m1", sid: "microbiology", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Viral exanthems", subjectLesson: { key: "mic-mixed", title: "Microbiology mixed rapid review" } };
+  const expOnly = addTopicLinks([], { q: "A question about rashes in general?", o: ["Alpha", "Beta"], a: 0, exp: "Mumps is discussed in the explanation." }, ctx);
+  assert.deepEqual(expOnly.map((l) => l.id), ["mic-mixed"], "explanation-only evidence is not enough for the module article");
+  const tagged = addTopicLinks([], { q: "A question about rashes in general?", o: ["Alpha", "Beta"], a: 0, tg: ["Mumps parotitis"], exp: "" }, ctx);
+  assert.ok(tagged.some((l) => l.id === "mumps" && l.v === "kt"), "a tag-evidenced module article stays");
+});
+
 test("addTopicLinks: a mapped lesson (entry.ls) is the topic lesson when the module has none of its own", () => {
   const topics = { m0: { kb: [], pr: [], ls: [["les1", "Chapter One"]] } };
   const out = addTopicLinks([], { q: "What is the treatment?" },
