@@ -31,7 +31,7 @@ Loose candidate hits per pattern family (field counts; one item can hit several)
 | stems to match tables (Column I / Column II) | 498 | rest |
 | items with sequence-chip options | 437 | rest |
 | items with aligned pair options | 514 | rest |
-| explanations to lists | 4178 | rest |
+| explanations to lists | 4374 | rest |
 | explanations to value tables | 429 | rest |
 
 Guard: >= 2 consecutive labels in order from the first element, single letter/number/roman labels, bodies
@@ -51,10 +51,14 @@ all run through these). Truncated list rows (review summaries, mistakes) stay pl
   corpus properties over 441 real stems + 80 options + 60 explanations. PASS.
 - test/prep-no-coming-soon.test.mjs (extended to prep-listfmt.js). PASS.
 - Related suites (app, core, arena x2, ask x2, teacher, tests-collapse, viewer, 122 tests). PASS.
-- test/run-prep-listfmt-ui.mjs (new, CDP 390px, light+dark shots, OL/table/aria/contrast/overflow asserts).
-  NOT runnable in this sandbox (Chrome SIGABRT, listen EPERM); runs in CI where /opt/pw-browsers/chromium exists.
-- Full `npm test`: see PR checks; unit failures must equal main's known set.
-- Screenshots: blocked locally (no working browser); attach from the CI run of run-prep-listfmt-ui.mjs (SHOTS dir).
+- test/run-prep-listfmt-ui.mjs (new CDP harness, 390px): 25/25 PASS in CI (run 38626953031, job
+  listfmt-shots) — owner 6-row list, a)–f) labels, exact item text, order chips with aria-label, 8-row
+  explanation table with row headers, match Column I/II table with 4 paired rows, pair chips, contrast
+  light 5.91:1 / dark 8.83:1, no horizontal scroll, no animations, no page errors. 8 screenshots in
+  .fleet-reports/shots-listfmt/ and attached to the PR; each opened and pixel-inspected.
+- Full `npm test` locally: prep subset 1091 tests, 1088 pass; the single failure (live-IDs cache test) fails
+  identically on clean main (environmental). CI unit-tests: 14155 pass, 1 fail — the same pre-existing
+  allowlist failure as clean main (links-floor gap family). Cloudflare Pages failure is the known one.
 
 ## Compliance pass (web-design-guidelines style)
 

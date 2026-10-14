@@ -139,23 +139,3 @@ jobs:
       # Clinical Bulletins (signed practice updates on the disease reader + Review Desk signing tab).
       - name: Clinical Bulletins UI harness
         run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-bulletins-ui.mjs
-
-  # TEMPORARY for mcq-list-format-1014 (reverted before merge): 390 px light/dark screenshots of the neat-list
-  # render, since no browser launches in the job sandbox. Own job so it can never red clinix-ui.
-  # The committed harness (test/run-prep-listfmt-ui.mjs) stays for reruns.
-  listfmt-shots:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: MCQ list-format browser check + screenshots
-        run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" SHOTS=$PWD/shots-listfmt node test/run-prep-listfmt-ui.mjs
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: listfmt-shots
-          path: shots-listfmt/
-          if-no-files-found: warn
