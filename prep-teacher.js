@@ -206,7 +206,9 @@
     var terms = map ? [] : capsTerms(a).filter(function (w) { return g.indexOf(" " + w.replace(/[^a-z0-9 ]+/g, " ") + " ") < 0; });
     return { ok: !nums.length && !drugs.length && !terms.length, numbers: nums, drugs: drugs, terms: terms };
   }
-  // Model text for the screen: markdown bold dropped, blank runs collapsed.
+  // Model text for the grounding gate: markdown bold dropped, blank runs collapsed. The DISPLAY text keeps
+  // the author's markdown (owner 2026-10-15: Ask MaiK renders Markdown bold and bullets through prep-expfmt.js);
+  // the gate below always runs on the cleaned text, so safety is unchanged.
   function cleanAnswer(t) { return str(t).replace(/\*\*/g, "").replace(/^#+\s*/gm, "").replace(/\n{3,}/g, "\n\n").trim(); }
   /* What the fallback shows: the stored text, as written. */
   function fallbackFor(item, chosen) {
@@ -240,18 +242,19 @@
     return Promise.resolve().then(function () { return deps.generate(prompt, SYSTEM); }).then(function (r) {
       // A generator may name its own failure (Ask MaiK online: sign-in, tokens, connection) with a note to show.
       if (r && typeof r === "object" && r.error) { var f = fail(NOTES[r.error] ? r.error : "model-error"); if (r.note) { f.note = r.note; f.why = r.error; } return f; }
-      var text = cleanAnswer(r && typeof r === "object" ? r.text : r);
+      var shown = str(r && typeof r === "object" ? r.text : r).replace(/\n{3,}/g, "\n\n").trim();
+      var text = cleanAnswer(shown);
       if (!text) return fail("empty");
       if (NOT_COVERED.test(text)) return fail("not-covered");
       var ck = check(text, ground, deps.lexicon);
       if (!ck.ok) {
         if (r && typeof r === "object" && (r.model === "online" || (Array.isArray(r.beyond) && r.beyond.length))) {
           var bey = (Array.isArray(r.beyond) && r.beyond.length) ? r.beyond : beyondOf(ck);
-          return { ok: true, text: text, check: ck, beyond: bey, ms: now() - t0, model: r.model || "online" };
+          return { ok: true, text: shown, check: ck, beyond: bey, ms: now() - t0, model: r.model || "online" };
         }
         return fail("check", ck);
       }
-      return { ok: true, text: text, check: ck, ms: now() - t0, model: (r && typeof r === "object" && r.model) || "" };
+      return { ok: true, text: shown, check: ck, ms: now() - t0, model: (r && typeof r === "object" && r.model) || "" };
     }, function () { return fail("model-error"); });
   }
 
@@ -278,17 +281,18 @@
     var prompt = "GROUNDING:\n" + ground + "\n\nTASK: Explain this step again in simpler words, using only the grounding.";
     return Promise.resolve().then(function () { return deps.generate(prompt, STEP_SYSTEM); }).then(function (r) {
       if (r && typeof r === "object" && r.error) return { ok: false, reason: "model-error", why: r.note ? r.error : undefined, note: r.note || "MaiK could not answer on this phone just now." };
-      var text = cleanAnswer(r && typeof r === "object" ? r.text : r);
+      var shown = str(r && typeof r === "object" ? r.text : r).replace(/\n{3,}/g, "\n\n").trim();
+      var text = cleanAnswer(shown);
       if (!text) return { ok: false, reason: "empty", note: "MaiK gave no answer on this phone just now." };
       var ck = check(text, ground, deps.lexicon);
       if (!ck.ok) {
         if (r && typeof r === "object" && (r.model === "online" || (Array.isArray(r.beyond) && r.beyond.length))) {
           var bey = (Array.isArray(r.beyond) && r.beyond.length) ? r.beyond : beyondOf(ck);
-          return { ok: true, text: text, check: ck, beyond: bey };
+          return { ok: true, text: shown, check: ck, beyond: bey };
         }
         return { ok: false, reason: "check", note: "MaiK's answer named a drug or a number that is not in this step, so it is not shown.", check: ck };
       }
-      return { ok: true, text: text, check: ck };
+      return { ok: true, text: shown, check: ck };
     }, function () { return { ok: false, reason: "model-error", note: "MaiK could not answer on this phone just now." }; });
   }
 
@@ -425,7 +429,8 @@
     var prompt = chatPrompt(ground, ctx);
     return Promise.resolve().then(function () { return deps.generate(prompt, CHAT_SYSTEM, ctx); }).then(function (r) {
       if (r && typeof r === "object" && r.error) { var f = fail("model-error"); f.why = r.error; if (r.note) f.note = r.note; return f; }
-      var text = chatClean(r && typeof r === "object" ? r.text : r);
+      var shown = str(r && typeof r === "object" ? r.text : r).replace(/\n{3,}/g, "\n\n").trim();
+      var text = chatClean(shown);
       if (!text) return fail("empty");
       if (/^\W*the stored explanation does not cover this\W*$/i.test(text)) return fail("not-covered");
       var ck = check(text, ground, deps.lexicon);
@@ -437,7 +442,7 @@
         x = String(x).trim();
         if (x && !seenB[x.toLowerCase()]) { seenB[x.toLowerCase()] = 1; bey.push(x); }
       });
-      var out = { ok: true, text: text, check: ck, beyond: bey.slice(0, 5) };
+      var out = { ok: true, text: shown, check: ck, beyond: bey.slice(0, 5) };
       if (r && typeof r === "object") {
         if (r.grounded !== undefined) out.grounded = !!r.grounded;
         if (r.grounding) out.grounding = r.grounding;

@@ -111,6 +111,8 @@ try {
   await ev(`var n=document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length;
     if(!n){ var t=document.getElementById("paIn"); if(t){ t.focus(); t.value="Explain simply"; t.dispatchEvent(new Event("input",{bubbles:true})); t.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",bubbles:true,cancelable:true})); } } return 1;`);
   console.log("ask state: " + await ev(`var w=document.getElementById("pnAsk"); return w ? ("typing=" + !!w.querySelector('[data-key=typing]') + " empty=" + !!w.querySelector(".pa-empty") + " consent=" + !!w.querySelector("[data-act=ak-consent]") + " ai=" + w.querySelectorAll(".pt-msg.ai").length) : "no-sheet";`));
+  console.log("ask threads: " + await ev(`try{var s=JSON.parse(localStorage.getItem("smd_prep_ask_v1")||"{}"); var ks=Object.keys(s.threads||{}); return ks.length ? s.threads[ks[0]].turns.map(function(t){return (t.r||"?")+":"+(typeof t.t==="string"?t.t:((t.t&&t.t.text)||"")) + "").slice(0,110);}).join(" // ") : "none";}catch(e){return "ERR:"+e;}`));
+  console.log("ask bubbles: " + await ev(`Array.from(document.querySelectorAll("#pnAsk .pa-txt")).map(function(b){return b.innerHTML.slice(0,260);}).join(" ||| ")`));
   ok(await until(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length >= 1;`, 20000), "MaiK answers");
   ok(await ev(`var b=document.querySelector("#pnAsk .pt-msg.ai .pa-txt"); return !!b && !!b.querySelector("strong") && b.querySelector("strong").textContent.indexOf("Fibromuscular dysplasia")>=0;`) === true, "MaiK answer renders Markdown bold as strong");
   ok(await ev(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pa-txt ul > li").length === 2;`) === true, "MaiK answer renders Markdown bullets as a 2-item list");
