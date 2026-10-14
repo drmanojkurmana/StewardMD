@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-skin",
+ "subject": "pathology",
+ "title": "Skin pathology: blistering, papulosquamous disease and tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pemphigus vulgaris** (intraepidermal **suprabasal** split, **fishnet IgG** on direct immunofluorescence, flaccid bullae with **oral erosions** and **Nikolsky sign**, desmoglein 3 and 1 antibodies) is treated by **steroids with rituximab** (steroid sparing, B cell depletion); paraneoplastic (lymphoma, bronchiolitis obliterans) and drug induced (penicillamine, captopril) mimic. **Bullous pemphigoid** (**subepidermal tense bullae** sparing mucosa mostly, **linear IgG with C3** at basement membrane, elderly, BP180 and BP230) needs less aggressive steroids with doxycycline or dapsone; mortality lower. Level of split decides.",
+   "say": "Flaccid oral blisters Nikolsky positive are pemphigus: rituximab. Tense elderly sparing mouth are pemphigoid: gentler.",
+   "vis": null
+  },
+  {
+   "tx": "**Dermatitis herpetiformis** (intensely itchy extensor vesicles, **granular IgA** at dermal papillae tips, gluten sensitive with coeliac overlap, **dapsone** relieving itch in days) is managed by gluten free diet long term; **linear IgA disease** (drug induced vancomycin, string of pearls blisters) differs by linear pattern. Porphyria cutanea tarda (photosensitivity with milia, HCV and alcohol, phlebotomy) blisters metabolically; epidermolysis bullosa (mechanobullous, genetic) splits by level neonatally.",
+   "say": "Itchy extensor clusters granular IgA are herpetiformis: dapsone days, diet life. Vancomycin pearls are linear IgA.",
+   "vis": null
+  },
+  {
+   "tx": "**Psoriasis** (parakeratosis with **Munro microabscesses**, regular acanthosis, **Auspitz bleeding** on scale removal, extensor elbows and knees with scalp and nails, arthritis) steps from topicals and phototherapy to **methotrexate**, ciclosporin, acitretin and biologics (anti TNF, IL-17, IL-23); pustular (von Zumbusch, hypocalcaemia) and erythrodermic variants admit. **Lichen planus** (sawtooth rete, **Wickham striae**, violaceous polygonal papules with wrists and hepatitis C link, oral erosive premalignant) contrasts; **erythema multiforme** (**target lesions** with HSV trigger) versus **SJS and TEN** (mucosal Nikolsky, **SCORTEN**, culprit drug stopped, burn unit care) completes urgent rashes.",
+   "say": "Silvery extensor Auspitz is psoriasis: topicals to biologics. Violaceous polygonal Wickham is lichen planus.",
+   "vis": null
+  },
+  {
+   "tx": "**Basal cell carcinoma** (pearly rolled edge with telangiectasia, **peripheral palisading**, PTCH Gorlin syndrome, rarely metastasises) is excised or Mohs (face); **squamous cell carcinoma** (**keratin pearls**, actinic keratosis precursor, Marjolin ulcer, lip and ear worse, nodes dissect) needs wider margins with radiotherapy backup. **Melanoma** (**ABCDE**, **Breslow thickness** staging, sentinel node, **BRAF with MEK inhibitors**, checkpoint immunotherapy) kills if missed; lentigo maligna (elderly face), nodular (vertical fast), acral lentiginous and amelanotic variants deceive. Sunscreen with mole mapping prevents.",
+   "say": "Pearly palisading never mets is BCC: Mohs face. Keratin pearls actinic is SCC. Ugly duckling changing mole: Breslow stages.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Skin",
+     "Level",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Pemphigus",
+      "Suprabasal fishnet",
+      "Rituximab"
+     ],
+     [
+      "Pemphigoid",
+      "Subepidermal linear",
+      "Gentle steroids"
+     ],
+     [
+      "Psoriasis",
+      "Parakeratosis Munro",
+      "Biologics"
+     ],
+     [
+      "Melanoma",
+      "Breslow depth",
+      "Wide plus sentinel"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-521",
+  "bk2-pat-522",
+  "bk2-pat-523",
+  "bk2-pat-524",
+  "bk2-pat-525",
+  "bk2-pat-526",
+  "bk2-pat-527",
+  "bk2-pat-528",
+  "bk2-pat-529",
+  "bk2-pat-530"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

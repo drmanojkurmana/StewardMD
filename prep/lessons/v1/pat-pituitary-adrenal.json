@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-pituitary-adrenal",
+ "subject": "pathology",
+ "title": "Pituitary and adrenal pathology: adenomas, Cushing, Conn and phaeochromocytoma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pituitary neuroendocrine tumours** (PitNETs, benign, sellar expansion with **bitemporal hemianopia** from chiasm compression) sort by stain and hormone: **prolactinoma** (commonest, galactorrhoea with amenorrhoea, stalk effect hyperprolactinaemia, **dopamine agonists** cabergoline shrinking), GH somatotroph (acromegaly), ACTH corticotroph (Cushing disease), TSH and gonadotroph (usually nonfunctioning presenting with mass effect). **Transsphenoidal resection** cures most except prolactinomas; apoplexy (sudden headache with visual loss into adenoma) needs urgent steroids with decompression.",
+   "say": "Milky amenorrhoea with stalk mass is prolactinoma: dopamine agonist shrinks. Bitemporal loss is chiasm squeezed: resect sphenoidally.",
+   "vis": null
+  },
+  {
+   "tx": "**Acromegaly** (GH excess, coarse facies with prognathism, sweaty doughy hands, carpal tunnel, cardiomyopathy with diabetes, colon polyps) is confirmed by **failed OGTT suppression** with high IGF-1; treatment is transsphenoidal surgery with **octreotide** or pegvisomant and radiotherapy backup. **Cushing disease** (pituitary ACTH, central obesity with striae, hypertension, glucose intolerance) is separated from ectopic (small cell lung, high ACTH with hypokalaemia) and adrenal (low ACTH) by **high dose dexamethasone suppression** with petrosal sampling; selective adenomectomy cures.",
+   "say": "Big jaw sweaty hands unsuppressed on glucose are acromegaly: operate, octreotide. Pituitary Cushing suppresses on high dose dexamethasone.",
+   "vis": null
+  },
+  {
+   "tx": "**Pituitary apoplexy** (haemorrhage into adenoma, thunderclap headache with ophthalmoplegia and visual loss, adrenal crisis) is resuscitated with **stress steroids** then urgent decompression; Sheehan (postpartum necrosis with agalactia) and empty sella mimic functionally. **Craniopharyngioma** (Rathke pouch, **adamantinomatous** calcified cystic in children versus papillary **BRAF** adults, bitemporal loss with short stature and DI) is resected conservatively (hypothalamic obesity threatens) with radiotherapy backup. Hypothalamic hamartoma (gelastic seizures with precocity) differs.",
+   "say": "Thunderclap blind into adenoma is apoplexy: steroids then decompress. Calcified cystic child with short stature is craniopharyngioma.",
+   "vis": null
+  },
+  {
+   "tx": "**Adrenal cortex** lesions sort by hormone: **Conn aldosteronoma** (hypertension with **hypokalaemia** and metabolic alkalosis, low renin high aldosterone ratio, adrenal vein sampling lateralises, spironolactone bridges to adrenalectomy), Cushing adenoma (low ACTH, laparoscopic removal), **adrenocortical carcinoma** (**Weiss criteria**, large necrotic heterogeneous masses, **mitotane** with EDP chemotherapy). **Phaeochromocytoma** (medulla, **10 percent rule**: bilateral, malignant, extra adrenal, familial MEN2 and VHL, **paroxysmal hypertension** with headache sweats palpitations, **metanephrines** raised) needs **alpha blockade first** (phenoxybenzamine) then surgery; unblocked beta blockade kills. **Incidentaloma** workup (1 mg dexamethasone, aldosterone renin, metanephrines) sorts.",
+   "say": "Hypokalaemic hypertensive low renin is Conn: vein sample, remove. Paroxysmal triad with metanephrines is phaeo: alpha first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gland",
+     "Hormone",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Prolactinoma",
+      "Prolactin",
+      "Cabergoline"
+     ],
+     [
+      "Acromegaly",
+      "GH",
+      "Operate, octreotide"
+     ],
+     [
+      "Conn",
+      "Aldosterone",
+      "Adrenalectomy"
+     ],
+     [
+      "Phaeo",
+      "Catecholamines",
+      "Alpha then surgery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-471",
+  "bk2-pat-472",
+  "bk2-pat-473",
+  "bk2-pat-474",
+  "bk2-pat-475",
+  "bk2-pat-476",
+  "bk2-pat-477",
+  "bk2-pat-478",
+  "bk2-pat-479",
+  "bk2-pat-480"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -778,7 +778,7 @@
     if (A.bankStatus(p) === "coming") { H.toast("No " + p.name + " questions in the bank yet."); return; }
     var dailyKind = type === "daily10" ? "daily10" : type === "daily_mixed" ? "daily_mixed" : null;
     var seed = dailyKind ? A.dailyKey(p.id, Date.now(), dailyKind) : String(Date.now()) + Math.random(), R = A.rng(seed + ":files");
-    var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap() };   // daily: the same set all day, seen or not
+    var opts = { seed: seed, hidden: H.hidden(), recent: dailyKind ? null : seenMap(), diverse: true };   // daily: the same set all day, seen or not; diverse: concepts spread inside each blueprint quota
     if (sid) opts.subjects = [sid];
     if (mid) { opts.modules = [mid]; opts.module = mid; }
     if (type === "diagnostic") opts.history = histBySubject();

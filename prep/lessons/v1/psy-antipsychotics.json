@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "psy-antipsychotics",
+ "subject": "psychiatry",
+ "title": "Antipsychotic drugs",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antipsychotics** all antagonise or partially agonise dopamine D2 receptors. First generation (haloperidol, chlorpromazine) cause more extrapyramidal effects; second generation (risperidone, olanzapine, quetiapine, aripiprazole partial agonist) trade toward metabolic harm variably (olanzapine and clozapine worst weight and diabetes, aripiprazole least). Choice follows patient prior response, side effect vulnerability, formulation (oral, long acting injection) and medical comorbidity, not class superiority claims except clozapine in resistance.",
+   "say": "All block D2. Typicals move muscles; atypicals move metabolism. Clozapine alone beats resistance.",
+   "vis": null
+  },
+  {
+   "tx": "**Extrapyramidal effects** timeline: acute dystonia (hours to days, torticollis, oculogyric crisis, treated anticholinergic like procyclidine), akathisia (days to weeks inner restlessness, dose reduce or beta blocker or benzodiazepine strategies, suicide linked distress), parkinsonism (weeks, bradykinesia, rigidity, tremor) and tardive dyskinesia (months to years, choreoathetoid orofacial movements, stop or switch, VMAT2 inhibitors treat). Anticholinergic prophylaxis is not routine given cognition and tardive worsening.",
+   "say": "Dystonia days, akathisia weeks, parkinsonism months early, tardive years. Akathisia feels like torture inside skin.",
+   "vis": null
+  },
+  {
+   "tx": "**Neuroleptic malignant syndrome** is rare lethal hyperdopamine blockade reaction: fever, lead pipe rigidity, confusion, autonomic instability, raised CK and leucocytosis, usually after starting or raising antipsychotics (or abrupt dopamine agonist withdrawal). Stop antipsychotic, cool, hydrate, ICU, consider dantrolene or bromocriptine and ECT in refractory cases, differentiating serotonin syndrome (clonus, hyperreflexia, serotonergic drugs, agitation) where reflexes and bowel activity surge instead.",
+   "say": "Fever plus lead pipe rigidity plus confusion after antipsychotic is NMS: stop drug, cool, ICU. Serotonin syndrome twitches and clonus instead.",
+   "vis": null
+  },
+  {
+   "tx": "Monitoring is treatment: baseline and periodic weight, waist, glucose or HbA1c, lipids, pressure, ECG (QT prolonging combinations), prolactin (risperidone, amisulpride, typicals raise; sexual dysfunction, amenorrhea, galactorrhoea, bone loss), movement scales and full blood count pathways for **clozapine** (neutropenia, myocarditis early, constipation ileus deaths, seizures dose related). High dose antipsychotic prescribing beyond licensed totals and polypharmacy need documented rationale and ECG vigilance, generally discouraged.",
+   "say": "Weigh, sugar, lipids, ECG, prolactin, movements: monitoring is half the prescription. Clozapine adds blood, heart and bowel watch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adverse effect",
+     "Timing",
+     "Antidote direction"
+    ],
+    "rows": [
+     [
+      "Acute dystonia",
+      "Hours to days",
+      "Anticholinergic (procyclidine)"
+     ],
+     [
+      "Akathisia",
+      "Days to weeks",
+      "Dose reduce, beta blocker strategies"
+     ],
+     [
+      "Parkinsonism",
+      "Weeks",
+      "Reduce, switch, cautious anticholinergic"
+     ],
+     [
+      "Tardive dyskinesia",
+      "Months to years",
+      "Stop culprit, VMAT2 inhibitor"
+     ],
+     [
+      "NMS",
+      "Days to weeks after change",
+      "Stop, ICU, cooling, consider dantrolene"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-151",
+  "bk2-psy-152",
+  "bk2-psy-153",
+  "bk2-psy-154",
+  "bk2-psy-155",
+  "bk2-psy-156",
+  "bk2-psy-157",
+  "bk2-psy-158",
+  "bk2-psy-159",
+  "bk2-psy-160"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

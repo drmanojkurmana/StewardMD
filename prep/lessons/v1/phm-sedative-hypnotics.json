@@ -1,0 +1,118 @@
+{
+ "v": 1,
+ "module": "phm-sedative-hypnotics",
+ "subject": "pharmacology",
+ "title": "Sedative-hypnotics, anxiolytics and alcohol dependence",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sedative hypnotics** climb a dose staircase from calm through sleep to anaesthesia, coma and medullary failure by enhancing **GABA**, the brain's main inhibitory transmitter at GABA-A chloride channels. **Benzodiazepines** increase how often the channel opens (ceiling effect, rarely lethal alone) while **barbiturates** prolong each opening and at high doses open channels directly (no ceiling, lethal overdose). Both synergise fatally with alcohol and opioids, the stack behind most community overdose deaths.",
+   "say": "Benzodiazepines open channels more often with a ceiling; barbiturates hold them open without one. Never stack sedatives with alcohol or opioids.",
+   "vis": null
+  },
+  {
+   "tx": "**Benzodiazepines** are chosen by half life and route: **diazepam** (long with active metabolites, smooth withdrawal tapers, status epilepticus with lorazepam preferred IV), **lorazepam** (conjugation safe in liver failure and elderly, reliable IM absorption), **midazolam** (short, procedural sedation and infusion), chlordiazepoxide (withdrawal legacy). **Flumazenil** antagonises the binding site reversing sedation, but in dependence or mixed tricyclic overdose it precipitates seizures, so use stays selective and hospital based with resuscitation ready.",
+   "say": "Diazepam tapers withdrawal, lorazepam suits failing livers, midazolam sedates procedures. Flumazenil reverses but can seize dependents.",
+   "vis": null
+  },
+  {
+   "tx": "**Z drugs** (zolpidem, zopiclone, eszopiclone) favour GABA-A alpha-1 subunits for sleep with less anxiolysis and dependence, yet complex sleep behaviours with morning impairment persist (women and elderly dosed lower). **Barbiturates** survive in niches (phenobarbital epilepsy and withdrawal protocols, thiopental historical induction); porphyria forbids them (ALA synthase induction). Buspirone (5HT1A partial, delayed weeks, no dependence) suits chronic anxiety without sedation.",
+   "say": "Z drugs sleep selectively but still sleepwalk and impair mornings. Porphyria forbids barbiturates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Pearl",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Diazepam",
+      "Long, active metabolites",
+      "Withdrawal taper"
+     ],
+     [
+      "Lorazepam",
+      "Liver safe",
+      "Elderly, IM"
+     ],
+     [
+      "Midazolam",
+      "Short",
+      "Procedures"
+     ],
+     [
+      "Zolpidem",
+      "Alpha-1 selective",
+      "Insomnia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alcohol withdrawal** unfolds over hours to days (tremor and anxiety, seizures in the first two days, **delirium tremens** with fever, confusion and autonomic storm carrying mortality) and is scored by **CIWA** for **symptom triggered benzodiazepine tapers**; **thiamine precedes glucose** always to prevent Wernicke injury. Relapse prevention pairs counselling with **acamprosate** (glutamate balance), **naltrexone** (reward blockade) or supervised **disulfiram** (aldehyde deterrence). Kindling worsens each untreated withdrawal.",
+   "say": "Withdrawal tremor to DT storm is scored by CIWA and tapered. Thiamine before sugar, always.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Timing",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Tremor",
+      "Hours",
+      "Benzo taper"
+     ],
+     [
+      "Seizures",
+      "Day 1 to 2",
+      "Benzo load"
+     ],
+     [
+      "DTs",
+      "Day 2 to 4",
+      "ICU taper"
+     ],
+     [
+      "Relapse",
+      "Months",
+      "Acamprosate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-121",
+  "bk2-phm-122",
+  "bk2-phm-123",
+  "bk2-phm-124",
+  "bk2-phm-125",
+  "bk2-phm-126",
+  "bk2-phm-127",
+  "bk2-phm-128",
+  "bk2-phm-129",
+  "bk2-phm-130"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

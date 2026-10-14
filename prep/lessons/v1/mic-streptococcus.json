@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-streptococcus",
+ "subject": "microbiology",
+ "title": "Streptococci, pneumococcus and enterococcus",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Streptococci** chain as catalase negative cocci, and Lancefield cell wall carbohydrate sorts beta haemolytic species: **pyogenes** (group A, bacitracin sensitive, PYR positive) causes pharyngitis while **agalactiae** (group B, bacitracin resistant, CAMP positive) colonises vaginas. **Pneumoniae** shows lancet shaped diplococci with draughtsman colonies, **optochin sensitivity** and bile solubility, confirmed by capsular **quellung swelling**. Viridans alpha haemolyse mouths; enterococci grow in 6.5 percent salt with PYR positivity.",
+   "say": "Chains that never bubble are streptococci. Bacitracin splits A from B; optochin names pneumococcus.",
+   "vis": null
+  },
+  {
+   "tx": "**Group A sequelae** split by mechanism: **acute rheumatic fever** (M protein mimicry 2 to 4 weeks after pharyngitis, migratory arthritis with carditis, Sydenham chorea, erythema marginatum and subcutaneous nodules by Jones criteria) needs secondary penicillin prophylaxis for years, while **poststreptococcal glomerulonephritis** (nephritogenic M types after skin or throat infection, smoky urine with low C3, hypertension and oedema) needs supportive care only. **Scarlet fever** (erythrogenic toxin, strawberry tongue, Pastia lines, sandpaper rash) and **erysipelas** (raised salmon edge) stay suppurative, not autoimmune.",
+   "say": "Migratory joints plus carditis after sore throat is rheumatic: prophylax for years. Smoky urine with low C3 is glomerulonephritis.",
+   "vis": null
+  },
+  {
+   "tx": "**Pneumococcus** pairs a thick capsule (opsonophagocytosis target) with IgA protease and pneumolysin, causing **lobar pneumonia** (rusty sputum, air bronchograms), meningitis in extremes of age, and otitis media. Penicillin resistance comes from **altered PBPs** (mosaic genes, never beta lactamase), so meningitis gets ceftriaxone plus vancomycin empirically. **Conjugate vaccine** (PCV, T dependent, infants) prevents invasive disease and carriage while **polysaccharide vaccine** (PPV23, adults over 65, asplenia) covers serotypes without memory. Asplenic patients need both plus Haemophilus and meningococcal cover.",
+   "say": "Rusty lobar consolidation with lancet diplococci is pneumococcus. Conjugate for babies, polysaccharide for elders.",
+   "vis": null
+  },
+  {
+   "tx": "**Agalactiae** threatens neonates in two acts: early onset sepsis (vertical, day 0 to 6) prevented by **35 to 37 week screening with intrapartum penicillin**, and late onset meningitis (community, week 1 to 12). **Viridans streptococci** (dental plaque, dextran sticky) seed damaged mitral valves subacutely after dental work (Osler nodes, Roth spots), needing prophylaxis only in highest risk hearts now. **Enterococci** (gut hardy, intrinsically cephalosporin resistant) cause UTI and endocarditis; **VRE** (vanA) needs linezolid or daptomycin with stewardship.",
+   "say": "Screen vaginas at 35 to 37 weeks to stop early neonatal sepsis. Dental work seeding murmur valves is viridans.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Screen",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "Pyogenes A",
+      "Bacitracin sensitive",
+      "Rheumatic sequelae"
+     ],
+     [
+      "Agalactiae B",
+      "CAMP positive",
+      "Neonatal sepsis"
+     ],
+     [
+      "Pneumoniae",
+      "Optochin sensitive",
+      "Rusty lobar disease"
+     ],
+     [
+      "Enterococcus",
+      "Salt tolerant",
+      "VRE, cephalosporin proof"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-011",
+  "bk2-mic-012",
+  "bk2-mic-013",
+  "bk2-mic-014",
+  "bk2-mic-015",
+  "bk2-mic-016",
+  "bk2-mic-017",
+  "bk2-mic-018",
+  "bk2-mic-019",
+  "bk2-mic-020"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,162 @@
+{
+ "module": "sur-neonatal",
+ "subject": "surgery",
+ "title": "Neonatal surgical anomalies, esophageal atresia, diaphragmatic hernia, and abdominal wall defects",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Holcomb and Ashcraft's Pediatric Surgery 7th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Esophageal atresia occurs in one in three thousand live births, with eighty-five percent **exhibiting** Gross type C anomaly characterized by a blind proximal esophageal pouch and a distal tracheoesophageal fistula. Neonates present immediately after birth with copious foaming saliva, frothing at the mouth, and coughing, choking, and cyanosis upon feeding. Inability to pass a rigid 10 French nasogastric tube into the stomach, with the catheter coiling in the upper thoracic pouch on plain radiograph, establishes the diagnosis. Presence of gastrointestinal gas confirms a distal tracheoesophageal fistula.",
+   "say": "Esophageal atresia with distal tracheoesophageal fistula presents with excessive frothy salivation, choking on feeding, and an inability to pass an orogastric tube. Plain radiography confirms coiling in the upper pouch, while abdominal gas indicates a distal fistula.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EA/TEF anatomical subtype",
+     "Gross anatomical arrangement",
+     "Abdominal bowel gas status"
+    ],
+    "rows": [
+     [
+      "Type C (85% of cases)",
+      "Proximal atresia with distal TEF",
+      "Gas present in stomach & bowel"
+     ],
+     [
+      "Type A (Isolated EA 8%)",
+      "Pure atresia without fistula",
+      "Gasless abdomen on radiograph"
+     ],
+     [
+      "Type E (H-type TEF 4%)",
+      "Fistula without esophageal atresia",
+      "Normal gas; recurrent aspirations"
+     ],
+     [
+      "Type B (Proximal TEF 2%)",
+      "Proximal fistula with distal atresia",
+      "Gasless abdomen on radiograph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Concomitant congenital anomalies occur in over half of infants with esophageal atresia, **necessitating** systematic screening for the VACTERL association: vertebral defects, anal atresia, cardiac anomalies, tracheoesophageal fistula, renal dysplasia, and limb radial abnormalities. Preoperative care focuses on continuous suctioning of the proximal pouch with a Replogle tube and upright positioning to minimize acid reflux into the tracheobronchial tree. Primary surgical repair through a right extrapleural thoracotomy or thoracoscopy ligates the fistula and achieves end-to-end esophageal anastomosis.",
+   "say": "Infants with esophageal atresia require evaluation for the VACTERL association, especially echocardiography for congenital cardiac defects. Preoperative Replogle pouch suction prevents aspiration before extrapleural fistula division and esophageal repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Frothing saliva in newborn infant"
+     },
+     {
+      "id": "n2",
+      "label": "NG tube coils in upper pouch on X-ray"
+     },
+     {
+      "id": "n3",
+      "label": "Echocardiogram & VACTERL screening"
+     },
+     {
+      "id": "n4",
+      "label": "Extrapleural fistula ligation & repair"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital diaphragmatic hernia arises from failure of the pleuroperitoneal **membrane** to close at eight to ten weeks gestation, most frequently occurring through the posterolateral foramen of Bochdalek on the left side in eighty-five percent of cases. Abdominal viscera herniate into the thoracic cavity, impairing lung bud branching and producing profound ipsilateral and contralateral pulmonary hypoplasia with persistent pulmonary hypertension of the newborn. Neonates present with severe respiratory distress, a scaphoid abdomen, and bowel sounds audible in the hemithorax.",
+   "say": "Congenital diaphragmatic hernia results from failure of pleuroperitoneal membrane closure, usually left-sided through the foramen of Bochdalek. Evisceration of viscera causes severe pulmonary hypoplasia and persistent pulmonary hypertension with a scaphoid abdomen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diaphragmatic defect type",
+     "Anatomical defect location",
+     "Pathophysiological consequence"
+    ],
+    "rows": [
+     [
+      "Bochdalek hernia (85%)",
+      "Posterolateral pleuroperitoneal canal",
+      "Severe bilateral pulmonary hypoplasia"
+     ],
+     [
+      "Morgagni hernia (5%)",
+      "Anterior retrosternal parasternal space",
+      "Often asymptomatic until late childhood"
+     ],
+     [
+      "Pulmonary hypoplasia",
+      "Decreased bronchial branching & alveoli",
+      "Hypercarbic respiratory failure"
+     ],
+     [
+      "Persistent PPHN",
+      "Hypertrophied pulmonary vascular media",
+      "Severe right-to-left ductal shunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Omphalocele represents a midline abdominal wall defect at the **umbilicus** covered by a three-layer sac composed of peritoneum, Wharton jelly, and amnion, with the umbilical cord inserting directly onto the apex of the sac. Over fifty percent of omphalocele infants harbor severe associated chromosomal anomalies, congenital heart defects, or Beckwith-Wiedemann syndrome. Gastroschisis, by contrast, is a full-thickness defect located immediately to the right of an intact umbilical cord without a covering membrane, leaving thickened, edematous bowel eviscerated into amniotic fluid.",
+   "say": "Omphalocele is a midline defect covered by a sac with high chromosomal and cardiac associations. Gastroschisis is a full-thickness defect to the right of an intact umbilical ring without a sac, with low chromosomal associations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Omphalocele",
+     "points": [
+      "Midline defect at the umbilical ring",
+      "Covered by intact peritoneal/amniotic sac",
+      "Umbilical cord inserts onto the sac",
+      "High chromosomal/cardiac association (> 50%)"
+     ]
+    },
+    "right": {
+     "title": "Gastroschisis",
+     "points": [
+      "Full-thickness defect to right of cord",
+      "No covering sac; bowel exposed to amniotic fluid",
+      "Umbilical cord inserts normally on body wall",
+      "Rarely associated with extraintestinal anomalies"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "6961d289-4000-8000-6961-d28912345678",
+  "6661cdd0-4000-8000-6661-cdd012345678",
+  "6761cf63-4000-8000-6761-cf6312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

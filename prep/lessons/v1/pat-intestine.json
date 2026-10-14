@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-intestine",
+ "subject": "pathology",
+ "title": "Intestinal pathology: malabsorption, IBD, polyps and Hirschsprung",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Coeliac disease** (HLA-DQ2 and DQ8, gluten gliadin, **tTG IgA** with total IgA checked, **villous atrophy** with intraepithelial lymphocytes) causes iron deficiency, diarrhoea and failure to thrive with **dermatitis herpetiformis** (itchy extensor vesicles, dapsone) and **refractory sprue with enteropathy lymphoma** risk; **gluten free diet** heals with serology followed. **Whipple disease** (Tropheryma whipplei, **PAS positive** foamy macrophages, arthralgia with diarrhoea and nodes, CNS oculomasticatory) needs prolonged **ceftriaxone then cotrimoxazole**; SIBO (blind loops, B12 low with folate high, breath tests, rifaximin) and disaccharidase deficiency complete malabsorption.",
+   "say": "Villous flattening with tTG positivity is coeliac: gluten free for life. PAS foamy macrophages with joints are Whipple: long antibiotics.",
+   "vis": null
+  },
+  {
+   "tx": "**Crohn disease** (mouth to anus, **skip lesions** with **creeping fat** and strictures, **transmural** with **noncaseating granulomas**, cobblestoning, fistulas, smoking worsens) differs from **ulcerative colitis** (rectum upward continuous, **crypt abscesses** with goblet depletion, toxic megacolon, smoking protects, **primary sclerosing cholangitis** associates). UC bleeds superficially; Crohn obstructs and fistulises. Treatment steps mesalazine (UC), steroids, thiopurines, **anti TNF and vedolizumab or ustekinumab**; surgery colectomises UC curatively while Crohn recurs. Colonoscopy with biopsies sorts.",
+   "say": "Skip transmural fistulising is Crohn; continuous rectal bleeding is UC. Smoking harms Crohn, shields UC.",
+   "vis": null
+  },
+  {
+   "tx": "**Colorectal polyps** sort malignant potential: hyperplastic (serrated benign, distal), **adenomas** (tubular, tubulovillous, villous with worst risk, size and high grade dysplasia drive), sessile serrated (BRAF, right sided, interval cancers), hamartomatous (juvenile, Peutz-Jeghers STK11 with mucocutaneous pigment, Cowden PTEN). **APC pathway** (chromosomal instability, FAP with hundreds of polyps and desmoids, prophylactic colectomy) differs from **microsatellite instability** (**HNPCC Lynch** with MSH2 and MLH1, right sided with endometrial and ovarian tumours, Amsterdam criteria, aspirin debates). Snare with surveillance intervals prevents.",
+   "say": "Villous large polyps threaten most. Hundreds of polyps with desmoids are FAP: colectomy prevents.",
+   "vis": null
+  },
+  {
+   "tx": "**Hirschsprung disease** (aganglionic distal bowel from failed neural crest migration, **RET** mutations, Down association, male predominance) presents with delayed meconium, bilious vomiting and enterocolitis; **suction biopsy** (absent ganglia with hypertrophic nerves, calretinin lost) confirms with transition zone on contrast enema. Treatment is pull through (Swenson, Soave, Duhamel) resecting to ganglionic bowel. **Mesenteric ischaemia** (AF emboli with pain out of proportion and lactic acidosis, watershed ischaemic colitis) and Ogilvie pseudo obstruction complete emergencies.",
+   "say": "No meconium in 48 hours with transition zone is Hirschsprung: biopsy then pull through. Pain out of proportion is mesenteric ischaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bowel",
+     "Pattern",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Crohn",
+      "Skip transmural",
+      "Anti TNF"
+     ],
+     [
+      "UC",
+      "Continuous rectal",
+      "Colectomy cures"
+     ],
+     [
+      "FAP",
+      "Hundreds APC",
+      "Prophylactic colectomy"
+     ],
+     [
+      "Hirschsprung",
+      "Aganglionic",
+      "Pull through"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-391",
+  "bk2-pat-392",
+  "bk2-pat-393",
+  "bk2-pat-394",
+  "bk2-pat-395",
+  "bk2-pat-396",
+  "bk2-pat-397",
+  "bk2-pat-398",
+  "bk2-pat-399",
+  "bk2-pat-400"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

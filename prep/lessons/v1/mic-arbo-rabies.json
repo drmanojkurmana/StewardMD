@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-arbo-rabies",
+ "subject": "microbiology",
+ "title": "Arboviruses: dengue, chikungunya, zika, JE and rabies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Dengue virus** (flavivirus, **Aedes aegypti** day biter, four serotypes with heterotypic **antibody dependent enhancement**) fevers in phases: febrile (breakbone pain with retro-orbital ache, tourniquet positive petechiae, **leukopenia**), critical (plasma leak with rising haematocrit, pleural effusions and shock as fever settles), recovery (convalescent rash with itching). **Warning signs** (abdominal pain, persistent vomiting, mucosal bleed, lethargy, liver enlargement, rising haematocrit with falling platelets) admit for **judicious isotonic fluids**; **NSAIDs and aspirin avoided** (bleeding), paracetamol with platelet watched. **NS1 antigen** diagnoses early, IgM later.",
+   "say": "Breakbone fever that worsens as fever settles is dengue leaking: fluids by haematocrit, never NSAIDs. Second serotype shocks.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe dengue** (shock with narrow pulse pressure, severe bleed, organ failure) is resuscitated with crystalloids (colloids debated) and blood for overt bleed, while platelet transfusion follows therapeutic (bleeding with low counts) not prophylactic numbers. **Chikungunya** (Aedes, **debilitating symmetric arthralgia** lingering months, no shock or leak) needs analgesia with physiotherapy; **zika** (Aedes, mild rash with conjunctivitis, **microcephaly** with Guillain-Barre, sexual transmission, pregnancy avoided) needs repellents with travel deferral. Neonatal dengue with maternal illness warns.",
+   "say": "Lingering joint pain without leak is chikungunya. Microcephaly clusters are zika: repel and defer pregnancy.",
+   "vis": null
+  },
+  {
+   "tx": "**Japanese encephalitis** (Culex, pigs with wading birds, monsoon, parkinsonian features with **thalamic lesions** and seizures in children) is prevented by **SA 14-14-2 live vaccine** with pig separation; treatment stays supportive with sequelae rehab. **Kyasanur Forest disease** and **Crimean-Congo haemorrhagic fever** (ticks, ribavirin debated, barrier nursing with ribavirin prophylaxis for contacts) bleed with nosocomial risk. **Yellow fever** (Aedes and Haemagogus, jaundice with black vomit, **17D live vaccine** with certificate) completes flaviviral maps.",
+   "say": "Pigs plus thalamic encephalitis in monsoon is JE: vaccinate SA 14-14-2. Tick bleed with contacts is CCHF: barrier nurse.",
+   "vis": null
+  },
+  {
+   "tx": "**Rabies virus** (rhabdovirus, bullet shaped, **Negri bodies** with retrograde axonal travel) causes **hydrophobia with aerophobia**, agitation then paralysis, inevitably fatal once encephalitic. Prevention is everything: wound washing with soap (virus is enveloped), **PEP** (vaccine Essen 5 dose or Zagreb 2-1-1 intramuscular plus **human rabies immunoglobulin** infiltrated into wounds for category III), pre exposure for vets and handlers, intradermal regimens where scarce. Bats (aerosol, transplant) with fox and dog bites source; Milwaukee coma protocol rarely saves.",
+   "say": "Any mammal bite: wash with soap, vaccinate, immunoglobulin into wounds. Hydrophobia means prevention failed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arbovirus",
+     "Vector",
+     "Fear"
+    ],
+    "rows": [
+     [
+      "Dengue",
+      "Aedes day",
+      "Second shock"
+     ],
+     [
+      "Chikungunya",
+      "Aedes",
+      "Months arthralgia"
+     ],
+     [
+      "JE",
+      "Culex pigs",
+      "Thalamic kids"
+     ],
+     [
+      "Rabies",
+      "Dog bite",
+      "Hydrophobia fatal"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-151",
+  "bk2-mic-152",
+  "bk2-mic-153",
+  "bk2-mic-154",
+  "bk2-mic-155",
+  "bk2-mic-156",
+  "bk2-mic-157",
+  "bk2-mic-158",
+  "bk2-mic-159",
+  "bk2-mic-160"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

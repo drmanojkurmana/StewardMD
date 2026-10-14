@@ -83,9 +83,10 @@ try {
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
   const tile = `return !!document.querySelector('.rnav-tile[data-act=prep]');`;
 
-  // ---- off per device (smd_prep="0"); the default is ON since 2026-10-06
+  // ---- off per device (smd_prep="0"); the default is ON since 2026-10-06. PrepNucleus is pinned to Home so its tile
+  // shows whatever starter set (tool-groups.js) the role would get.
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
-  await ev(`try{localStorage.setItem("smd_prep","0"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_home_tools");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep","0"); localStorage.removeItem("smd_prep_v1"); localStorage.setItem("smd_home_tools", JSON.stringify({ prep: true }));}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await load(BASE);
   ok(reqs.some((u) => /prep-loader\.js\?v=/.test(u)) && !reqs.some((u) => /\/prep(\.js|\.css)/.test(u)), "boot loads prep-loader.js and not prep.js or prep.css");
   ok(await ev(tile) === false, "smd_prep=0: no PrepNucleus tile");

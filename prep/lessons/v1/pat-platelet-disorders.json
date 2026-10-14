@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "pat-platelet-disorders",
+ "subject": "pathology",
+ "title": "Vascular and platelet bleeding disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Platelet and vascular bleeding** is immediate, superficial and mucocutaneous: petechiae, purpura, gum and nose bleeds, menorrhagia and oozing from cuts, contrasting factor deficiency deep delayed bleeding. Counts may be low (production, destruction or sequestration) or function may fail with normal counts (drugs, uraemia, inherited receptor defects). Film and count triage first.",
+   "say": "Platelet bleeding oozes immediately from skin and mucosa. Low counts or broken function both cause it. Count plus film triages before factor tests.",
+   "vis": null
+  },
+  {
+   "tx": "**Immune thrombocytopenia (ITP)** destroys antibody coated platelets in spleen causing isolated thrombocytopenia with large young platelets and otherwise normal film, acutely after viral illness in children (often self limited) and chronically in adults (often women, associated autoimmunity). Bleeding tracks count severity, and intracranial bleed is the feared rare complication at very low counts.",
+   "say": "ITP antibodies destroy platelets leaving isolated low counts with big young platelets. Children recover after viruses; adults persist. Very low counts risk brain bleeds.",
+   "vis": null
+  },
+  {
+   "tx": "Production failure lowers platelets with marrow clues: **aplastic anaemia** empties marrow trifactorially, leukaemia floods it with blasts, B12 deficiency dysplasias it reversibly and drugs or alcohol suppress it transiently. Splenic sequestration in portal hypertension pools platelets with leukopenia proportionally. Each mechanism demands different therapy, so marrow context matters more than count alone.",
+   "say": "Empty, flooded, deficient or suppressed marrows all lower platelets differently. Big spleens pool them. Mechanism, not count alone, chooses treatment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Setting",
+     "Film or marrow clue"
+    ],
+    "rows": [
+     [
+      "Destruction (ITP)",
+      "Isolated low platelets, well patient",
+      "Large platelets, normal other lines"
+     ],
+     [
+      "Production failure",
+      "Pancytopenia, blasts or empty marrow",
+      "Marrow examination decisive"
+     ],
+     [
+      "Sequestration",
+      "Portal hypertension, huge spleen",
+      "Leukopenia accompanies pooling"
+     ],
+     [
+      "Consumption (DIC/TTP)",
+      "Sick patient, schistocytes or clotting chaos",
+      "Emergency patterns, not isolated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited function defects bleed with normal counts: **Glanzmann thrombasthenia** lacks GPIIb IIIa aggregation (absent clot retraction), Bernard Soulier lacks GPIb adhesion with giant platelets and lowish counts, and storage pool defects lack granule release. Aspirin irreversibly acetylates platelet COX for the cell lifespan, NSAIDs reversibly, uraemia coats function reversibly, all unmasked by bleeding time or aggregometry historically and clinical pattern today.",
+   "say": "Normal counts can still bleed without platelet receptors or granules. Aspirin disables platelets for life; uraemia disables temporarily. Receptor names answer function stems.",
+   "vis": null
+  },
+  {
+   "tx": "Vascular purpura bleeds without platelet fault: **Henoch Schonlein (IgA vasculitis)** palpably purpuras buttocks and legs in children with arthritis, gut pain and nephritis; scurvy weakens collagen vessels; amyloid infiltrates them fragile; senile and steroid purpura thin supporting skin. Palpable purpura means vessel inflammation, non blanching petechiae mean platelet or vessel leak, a bedside split.",
+   "say": "Palpable purpura inflames vessels visibly in IgA disease of childhood. Flat petechiae leak from platelet lack. Scurvy and amyloid weaken walls themselves.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-311",
+  "bk2-pat-312",
+  "bk2-pat-313",
+  "bk2-pat-314",
+  "bk2-pat-315",
+  "bk2-pat-316",
+  "bk2-pat-317",
+  "bk2-pat-318",
+  "bk2-pat-319",
+  "bk2-pat-320"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

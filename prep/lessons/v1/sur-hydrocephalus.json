@@ -1,0 +1,160 @@
+{
+ "module": "sur-hydrocephalus",
+ "subject": "surgery",
+ "title": "Cerebrospinal fluid dynamics, hydrocephalus classification, ventriculoperitoneal shunting, and ETV",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Youmans Neurological Surgery 7th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Cerebrospinal fluid is produced continuously by choroid plexus ependymal **cells** within the lateral, third, and fourth cerebral ventricles at an average rate of five hundred milliliters daily. The total circulating adult cerebrospinal fluid volume approximates one hundred and fifty milliliters. Cerebrospinal fluid circulates from the lateral ventricles through the paired foramina of Monro into the third ventricle, passes down the narrow cerebral aqueduct of Sylvius into the fourth ventricle, and exits through the median Magendie and lateral Luschka foramina.",
+   "say": "Cerebrospinal fluid is produced by the choroid plexus at five hundred milliliters per day, maintaining a circulating volume of one hundred and fifty milliliters. It circulates through the ventricles and aqueduct before entering the subarachnoid space.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical CSF pathway",
+     "Connection / conduit structure",
+     "Drainage destination"
+    ],
+    "rows": [
+     [
+      "Lateral ventricles",
+      "Foramina of Monro (interventricular)",
+      "Third ventricle lumen"
+     ],
+     [
+      "Third ventricle",
+      "Cerebral aqueduct of Sylvius (midbrain)",
+      "Fourth ventricle lumen"
+     ],
+     [
+      "Fourth ventricle",
+      "Foramina of Luschka and Magendie",
+      "Basal cisterns & subarachnoid space"
+     ],
+     [
+      "Subarachnoid space",
+      "Arachnoid granulations / villi",
+      "Superior sagittal dural venous sinus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hydrocephalus is fundamentally classified as non-communicating or **communicating** based upon the anatomical site of flow disruption. Non-communicating obstructive hydrocephalus arises from internal ventricular obstruction, most commonly aqueductal stenosis, posterior fossa neoplasms compressing the fourth ventricle, or colloid cysts of the third ventricle. Communicating hydrocephalus results from impaired cerebrospinal fluid reabsorption at the level of arachnoid granulations, classically developing secondary to post-meningitic fibrosis, subarachnoid hemorrhage, or diffuse carcinomatous leptomeningeal infiltration.",
+   "say": "Non-communicating hydrocephalus results from physical blockage within the ventricular system such as aqueductal stenosis. Communicating hydrocephalus arises from impaired absorption at the arachnoid villi following meningitis or hemorrhage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ventriculomegaly on neuroimaging"
+     },
+     {
+      "id": "n2",
+      "label": "Assess fourth ventricle size & patency"
+     },
+     {
+      "id": "n3",
+      "label": "Distinguish obstructive from communicating"
+     },
+     {
+      "id": "n4",
+      "label": "Select VP shunt vs endoscopic third ventriculostomy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal pressure hydrocephalus represents a distinct communicating **syndrome** occurring in elderly adults, characterized by the pathognomonic clinical triad of Adams and Hakim: progressive gait apraxia, urinary urge incontinence, and subcortical dementia. The classic gait is magnetic, wide-based, and short-stepped. Neuroimaging reveals marked ventriculomegaly disproportionate to sulcal cerebral atrophy. A diagnostic lumbar puncture removing forty to fifty milliliters of fluid yielding temporary clinical gait improvement strongly predicts favorable responsiveness to ventriculoperitoneal shunting.",
+   "say": "Normal pressure hydrocephalus presents with gait apraxia, urinary incontinence, and dementia. Significant ventriculomegaly with normal opening pressure on lumbar puncture and gait improvement after tap test predicts surgical shunt success.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical triad component",
+     "Physical examination manifestation",
+     "Expected response to shunt"
+    ],
+    "rows": [
+     [
+      "Gait disturbance",
+      "Magnetic, shuffling, wide-based steps",
+      "Most responsive to CSF diversion"
+     ],
+     [
+      "Urinary incontinence",
+      "Urgency advancing to complete loss",
+      "Moderately responsive to diversion"
+     ],
+     [
+      "Cognitive impairment",
+      "Psychomotor slowing & executive defect",
+      "Least responsive / variable recovery"
+     ],
+     [
+      "Lumbar tap test",
+      "Removal of 40-50 mL cerebrospinal fluid",
+      "Confirms dynamic gait improvement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventriculoperitoneal shunting represents the primary definitive treatment for communicating hydrocephalus, **diverting** excess fluid from the lateral ventricle into the peritoneal cavity through a subcutaneous valve-regulated silicone catheter. Complications include mechanical catheter obstruction, overdrainage with chronic subdural hematomas, and shunt infection predominantly caused by Staphylococcus epidermidis. For obstructive non-communicating hydrocephalus, endoscopic third ventriculostomy creates an opening in the floor of the third ventricle into the prepontine cistern, providing physiological internal diversion without permanent prosthetic hardware.",
+   "say": "Ventriculoperitoneal shunts divert fluid from the lateral ventricle into the peritoneal cavity. For obstructive hydrocephalus, endoscopic third ventriculostomy creates a bypass fenestration in the floor of the third ventricle, avoiding foreign shunt hardware.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ventriculoperitoneal (VP) Shunt",
+     "points": [
+      "Diverts CSF to peritoneal cavity via valve",
+      "Standard therapy for communicating hydrocephalus",
+      "Risks: blockage, infection & subdural hematoma"
+     ]
+    },
+    "right": {
+     "title": "Endoscopic Third Ventriculostomy",
+     "points": [
+      "Fenestrates floor of third ventricle into cistern",
+      "Procedure of choice for aqueductal stenosis",
+      "Zero foreign hardware implanted"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "43674178-4000-8000-4367-417812345678",
+  "46674631-4000-8000-4667-463112345678",
+  "4567449e-4000-8000-4567-449e12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

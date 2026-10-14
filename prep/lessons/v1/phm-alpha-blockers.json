@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-alpha-blockers",
+ "subject": "pharmacology",
+ "title": "Alpha adrenergic blockers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Alpha blockers** antagonise alpha 1 receptors on vessels and the prostate, lowering vascular resistance and relaxing bladder neck smooth muscle. Nonselective agents also block presynaptic alpha 2 feedback, releasing more noradrenaline and causing tachycardia, which is why selective alpha 1 drugs dominate practice. Their two great theatres are hypertension history and prostatic obstruction, plus one starring role preparing phaeochromocytoma for surgery.",
+   "say": "Alpha blockers relax vessels and the prostate neck. Selective alpha one drugs avoid the racing heart of older nonselective ones. Think blood pressure, prostate flow, and phaeochromocytoma preparation.",
+   "vis": null
+  },
+  {
+   "tx": "**Phenoxybenzamine** binds alpha receptors irreversibly for days and is the classic preoperative shield in phaeochromocytoma, where catecholamine storms during tumour handling can kill. Volume expansion accompanies blockade because chronic vasoconstriction has shrunk circulating volume. Phentolamine is its short acting reversible cousin for intraoperative surges and extravasation rescue. Beta blockade for tachycardia must never precede alpha blockade here, or unopposed alpha vasoconstriction worsens crisis.",
+   "say": "Phenoxybenzamine blocks alpha receptors irreversibly before phaeochromocytoma surgery, with salt and fluid loading. Never give beta blockers first or unopposed alpha squeeze causes crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Selectivity",
+     "Main role"
+    ],
+    "rows": [
+     [
+      "Phenoxybenzamine",
+      "Nonselective, irreversible",
+      "Phaeochromocytoma preparation"
+     ],
+     [
+      "Phentolamine",
+      "Nonselective, reversible",
+      "Intraoperative surges, extravasation"
+     ],
+     [
+      "Prazosin / doxazosin",
+      "Alpha 1 selective",
+      "Hypertension adjunct, prostate"
+     ],
+     [
+      "Tamsulosin",
+      "Alpha 1A uroselective",
+      "Prostatic symptoms, fewer pressure effects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **benign prostatic obstruction**, alpha 1A receptors dominate prostate and bladder neck tone, so tamsulosin and silodosin improve flow with less blood pressure fall than vascular acting cousins. First dose postural hypotension remains the class warning, worst with prazosin and in dehydrated elderly patients. Ejaculatory dysfunction, especially with silodosin, and floppy iris syndrome during cataract surgery are the counselling points examiners favour.",
+   "say": "Prostate alpha blockers like tamsulosin improve urinary flow. Warn about postural dizziness, ejaculation changes, and tell the cataract surgeon because the iris becomes floppy.",
+   "vis": null
+  },
+  {
+   "tx": "Alpha blockers lost first line hypertension status when doxazosin trials showed more **heart failure** than diuretic based therapy, so they now serve as add on agents, notably with resistant hypertension or coexisting prostate symptoms. They favourably nudge glucose and lipids, a metabolic kindness opposite to older beta blockers and diuretics. Night dosing softens first dose hypotension and matches prostate symptom timing.",
+   "say": "Alpha blockers are no longer first choice for blood pressure because heart failure outcomes trailed diuretics. They remain useful add ons, especially when prostate symptoms coexist.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alpha first (correct in phaeo)",
+     "points": [
+      "Phenoxybenzamine days before surgery",
+      "Volume and salt loading follows",
+      "Then beta blocker if tachycardia persists"
+     ]
+    },
+    "right": {
+     "title": "Beta first (dangerous)",
+     "points": [
+      "Unopposed alpha vasoconstriction",
+      "Hypertensive crisis worsens",
+      "Pulmonary oedema risk rises"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clues tie the class together in stems: a man whose urinary flow improves but who feels dizzy standing, a cataract patient whose iris billows, and an adrenal tumour patient loaded with salt before surgery all point to alpha blockade. **Ergot alkaloids** partially agonise alpha receptors historically, but modern practice reserves this class knowledge for prostate, phaeochromocytoma and resistant pressure add on therapy.",
+   "say": "Dizzy standing on prostate tablets, floppy iris at cataract surgery, salt loading before adrenal tumour removal: all are alpha blocker fingerprints across exam stems.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-031",
+  "bk2-phm-032",
+  "bk2-phm-033",
+  "bk2-phm-034",
+  "bk2-phm-035",
+  "bk2-phm-036",
+  "bk2-phm-037",
+  "bk2-phm-038",
+  "bk2-phm-039",
+  "bk2-phm-040"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-anxiety",
+ "subject": "psychiatry",
+ "title": "Anxiety disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Anxiety disorders** share excessive fear or worry with avoidance and bodily arousal, separated by trigger and time course. Generalised anxiety disorder worries freely across domains for months with tension, fatigue, poor concentration and sleep disturbance. Panic disorder suffers recurrent unexpected panic attacks (minutes of palpitations, breathlessness, chest pain, derealisation and fear of dying) plus persistent fear of further attacks and avoidance.",
+   "say": "Free floating months of worry is GAD. Sudden minutes of terror with body storm is panic.",
+   "vis": null
+  },
+  {
+   "tx": "**Phobias** cue immediate fear to specific objects or situations (animals, blood injury, heights, flying) with avoidance out of proportion to danger; blood injury phobia uniquely faints via vasovagal diphasic response, treated with applied tension rather than pure relaxation. Social anxiety fears scrutiny and embarrassment, blushing and avoidance of performance, beginning in adolescence and impairing education and work. Agoraphobia fears places where escape feels difficult (crowds, transport, outside alone), often but not always after panic.",
+   "say": "Specific triggers mean phobia. Blood phobia faints, so tense muscles instead of relaxing. Social anxiety fears being judged.",
+   "vis": null
+  },
+  {
+   "tx": "First line treatment for most anxiety disorders is **CBT** (psychoeducation, cognitive restructuring, graded exposure, panic interoceptive exposure, worry scheduling), with SSRIs first line pharmacologically and pregabalin or buspirone in selected GAD patterns per local guidance. Benzodiazepines are short crisis adjuncts only, given dependence, falls and interference with exposure learning. Beta blockers help peripheral performance symptoms occasionally, not core anxiety disorders.",
+   "say": "Therapy plus SSRI treats anxiety durably. Benzodiazepines only briefly: they block exposure learning and addict.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Medical mimics must be screened by pattern: hyperthyroidism, pheochromocytoma spells, hypoglycaemia, arrhythmia and asthma drugs, caffeine and stimulant use, alcohol and benzodiazepine withdrawal. Anxiety with weight loss, tremor and heat intolerance needs thyroid tests; episodic headache, sweating and palpitations with hypertension spells raise pheochromocytoma. Treating mimics cures the anxiety label.",
+   "say": "Anxious plus thin, trembling and heat hating needs thyroid checked. Headache spells with pressure surges suggest pheochromocytoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Core trigger",
+     "First line anchor"
+    ],
+    "rows": [
+     [
+      "GAD",
+      "Free floating multi domain worry",
+      "CBT plus SSRI"
+     ],
+     [
+      "Panic disorder",
+      "Unexpected attacks, fear of attacks",
+      "CBT with interoceptive exposure, SSRI"
+     ],
+     [
+      "Social anxiety",
+      "Scrutiny and embarrassment",
+      "CBT exposure, SSRI"
+     ],
+     [
+      "Specific phobia",
+      "Single object or situation",
+      "Graded exposure alone usually"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-041",
+  "bk2-psy-042",
+  "bk2-psy-043",
+  "bk2-psy-044",
+  "bk2-psy-045",
+  "bk2-psy-046",
+  "bk2-psy-047",
+  "bk2-psy-048",
+  "bk2-psy-049",
+  "bk2-psy-050"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

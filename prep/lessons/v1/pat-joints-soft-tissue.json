@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-joints-soft-tissue",
+ "subject": "pathology",
+ "title": "Arthritis and soft tissue tumours",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Osteoarthritis** (wear and tear, **Heberden DIP with Bouchard PIP nodes**, knee and hip, joint space narrowing with **osteophytes** and sclerosis, no systemic features) is managed by weight loss, physiotherapy, analgesia and arthroplasty; **rheumatoid arthritis** (symmetric **MCP and PIP** with morning stiffness over an hour, **pannus** erosions, **rheumatoid factor with anti CCP**, nodules with Felty and Caplan, **atlantoaxial instability**) needs early **methotrexate** with biologics to remission. Heberden nodes never rheumatoid; ulnar deviation with swan neck deforms RA hands.",
+   "say": "DIP nodes without systemics are OA: replace late. Symmetric MCP stiffness over an hour is RA: methotrexate early.",
+   "vis": null
+  },
+  {
+   "tx": "**Gout** (hyperuricaemia, **negatively birefringent needle** crystals, **podagra** first MTP, tophi with renal stones, alcohol and diuretics precipitate) is aborted by **colchicine or NSAIDs** (steroids if contraindicated) and prevented by **allopurinol or febuxostat** (HLA-B5801 screening Asians, flare cover on initiation); **pseudogout** (**positively birefringent rhomboid** calcium pyrophosphate, chondrocalcinosis, knee in elderly, haemochromatosis and hyperpara associates) is aspirated with NSAIDs. Joint fluid polarised microscopy decides; serum urate misleads acutely.",
+   "say": "Needles negative bright podagra is gout: colchicine now, allopurinol later. Rhomboid positive knee is pseudogout.",
+   "vis": null
+  },
+  {
+   "tx": "**Spondyloarthritis** (HLA-B27, sacroiliitis, enthesitis, uveitis) includes **ankylosing spondylitis** (**bamboo spine** with squaring, morning back pain easing exercise, **anti TNF**), psoriatic (DIP with **sausage digits** and nail pitting, methotrexate or biologics), reactive (post dysentery or chlamydia triad with circinate balanitis, self limited with antibiotics for trigger), enteropathic (IBD). **Septic arthritis** (Staph aureus, gonococcal migratory with tenosynovitis, prosthetic) is **urgent washout with IV antibiotics**; crystals never exclude sepsis. Spine MRI sacroiliitis stages.",
+   "say": "Bamboo morning back easing motion is AS: anti TNF. Hot single joint is septic until washed: never trust crystals alone.",
+   "vis": null
+  },
+  {
+   "tx": "**Soft tissue tumours** sort benign versus malignant: lipoma (soft, slips, observe) versus **liposarcoma** (deep large, MDM2 amplified, wide resection), **GIST** (stomach, **CD117 and DOG1** positive, **imatinib** for KIT mutants), **synovial sarcoma** (young, X;18 SS18-SSX, biphasic, ifosfamide based), embryonal **rhabdomyosarcoma** (orbit in children, VAC chemo) versus alveolar (PAX-FOXO1, worse), **desmoid** (FAP Gardner, beta catenin, infiltrative without metastases, watch or resect), DFSP (storiform, Mohs). Size over 5 cm deep masses biopsy by core.",
+   "say": "Deep large fatty mass is liposarcoma until MDM2 says otherwise. CD117 gut wall tumour is GIST: imatinib.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Joint",
+     "Crystal",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Gout",
+      "Needles negative",
+      "Colchicine, allopurinol"
+     ],
+     [
+      "Pseudogout",
+      "Rhomboid positive",
+      "NSAIDs"
+     ],
+     [
+      "RA",
+      "No crystals",
+      "Methotrexate"
+     ],
+     [
+      "Septic",
+      "No crystals",
+      "Washout"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-491",
+  "bk2-pat-492",
+  "bk2-pat-493",
+  "bk2-pat-494",
+  "bk2-pat-495",
+  "bk2-pat-496",
+  "bk2-pat-497",
+  "bk2-pat-498",
+  "bk2-pat-499",
+  "bk2-pat-500"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "module": "sur-renal-tumours",
+ "subject": "surgery",
+ "title": "Renal cell carcinoma, paraneoplastic syndromes, nephron-sparing surgery, and IVC thrombus",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Renal cell carcinoma accounts for ninety percent of primary kidney **malignancies** in adults. Clear cell adenocarcinoma represents the dominant histological subtype, arising from proximal convoluted tubule epithelium and classically associated with von Hippel-Lindau gene mutations on chromosome 3p. Papillary renal cell carcinoma comprises fifteen percent, driven by MET proto-oncogene alterations. Chromophobe carcinoma arises from intercalated cells of the cortical collecting duct, exhibiting a more favorable clinical prognosis.",
+   "say": "Renal cell carcinoma accounts for ninety percent of renal malignancies. Clear cell carcinoma arises from the proximal tubule and is linked to chromosome 3p VHL mutations. Papillary and chromophobe carcinomas comprise the remaining common subtypes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RCC histological subtype",
+     "Cell of anatomical origin",
+     "Genetic association"
+    ],
+    "rows": [
+     [
+      "Clear cell carcinoma",
+      "Proximal convoluted tubule",
+      "VHL inactivation (3p25)"
+     ],
+     [
+      "Papillary carcinoma",
+      "Proximal convoluted tubule",
+      "MET proto-oncogene duplication"
+     ],
+     [
+      "Chromophobe carcinoma",
+      "Cortical collecting duct",
+      "Birt-Hogg-Dube / FLCN mutation"
+     ],
+     [
+      "Collecting duct carcinoma",
+      "Medullary collecting duct",
+      "Aggressive sarcomatoid variant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic clinical triad of flank pain, gross hematuria, and a palpable abdominal **mass** occurs in less than ten percent of modern cases due to widespread incidental radiological detection. Paraneoplastic syndromes occur frequently, including erythrocytosis from erythropoietin secretion, hypercalcemia from parathyroid hormone-related peptide, and Stauffer syndrome characterized by non-metastatic hepatic dysfunction. A newly developing left-sided varicocele that fails to decompress in the recumbent position suggests left renal vein tumor invasion.",
+   "say": "The classic triad of flank pain, hematuria, and a palpable mass is rare today due to incidental imaging detection. Paraneoplastic manifestations include erythrocytosis, hypercalcemia, and Stauffer syndrome. A non-emptying left varicocele signals renal vein involvement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Incidental renal mass on imaging"
+     },
+     {
+      "id": "n2",
+      "label": "Evaluate paraneoplastic markers"
+     },
+     {
+      "id": "n3",
+      "label": "Triple-phase contrast renal CT"
+     },
+     {
+      "id": "n4",
+      "label": "Assess renal vein / IVC thrombus"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Triple-phase contrast-enhanced computed tomography of the abdomen and pelvis constitutes the primary staging **modality** for renal parenchymal masses. It evaluates tumor enhancement in the corticomedullary phase, washout in the nephrographic phase, and assesses renal vein or inferior vena cava tumor thrombus extension. Magnetic resonance imaging provides superior soft-tissue contrast when assessing cephalad caval thrombus propagation toward the hepatic veins or right atrium.",
+   "say": "Triple-phase contrast CT scan evaluates renal mass enhancement and venous invasion into the renal vein or inferior vena cava. Magnetic resonance imaging is preferred when evaluating proximal caval tumor thrombus extending toward the right atrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IVC thrombus level",
+     "Anatomical cranial extent",
+     "Surgical approach"
+    ],
+    "rows": [
+     [
+      "Level I (Subhepatic)",
+      "Thrombus adjacent to renal vein",
+      "Standard infrahepatic clamping"
+     ],
+     [
+      "Level II (Intrahepatic)",
+      "Thrombus below major hepatic veins",
+      "Infrahepatic IVC mobilization"
+     ],
+     [
+      "Level III (Suprahepatic)",
+      "Thrombus reaches diaphragmatic IVC",
+      "Retrohepatic liver mobilization"
+     ],
+     [
+      "Level IV (Atrial)",
+      "Thrombus extends into right atrium",
+      "Cardiopulmonary bypass & arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nephron-sparing partial nephrectomy represents the gold standard surgical **approach** for localized T1a renal tumors measuring four centimeters or smaller, preserving renal functional reserve while providing oncological outcomes equivalent to radical excision. Radical nephrectomy entails en bloc resection of the kidney within Gerota fascia, ipsilateral adrenal gland when indicated, and regional lymph nodes. Metastatic clear cell disease responds to vascular endothelial growth factor receptor inhibitors and immune checkpoint combination therapy.",
+   "say": "Partial nephrectomy is the gold standard for tumors four centimeters or smaller to preserve renal function. Radical nephrectomy within Gerota fascia is reserved for larger lesions. Systemic VEGF inhibitors and immunotherapy treat metastatic disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Partial Nephrectomy",
+     "points": [
+      "Mandatory for solitary functional kidney",
+      "T1a tumors <= 4 cm gold standard",
+      "Preserves long-term renal function"
+     ]
+    },
+    "right": {
+     "title": "Radical Nephrectomy",
+     "points": [
+      "En bloc resection within Gerota fascia",
+      "Indicated for central or T2+ tumors",
+      "May require IVC thrombectomy"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "57fa5e19-4000-8000-57fa-5e1912345678",
+  "54fa5960-4000-8000-54fa-596012345678",
+  "55fa5af3-4000-8000-55fa-5af312345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

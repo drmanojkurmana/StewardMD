@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-bone",
+ "subject": "pathology",
+ "title": "Bone tumours and metabolic bone disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Osteosarcoma** (adolescents, distal femur or proximal tibia **metaphysis**, lifting periosteum into **Codman triangle** with **sunburst spiculation**, pulmonary mets) is biopsied then treated by **MAP chemotherapy** (methotrexate, Adriamycin, cisplatin) with **limb salvage** surgery; necrosis percent grades response. Paget secondary osteosarcoma (elderly) and post radiation variants behave worse; skip metastases MRI stage. Painful enlarging metaphyseal mass with raised ALP alarms.",
+   "say": "Teen knee metaphyseal sunburst with Codman is osteosarcoma: MAP then salvage. Paget bone sarcoma behaves worse.",
+   "vis": null
+  },
+  {
+   "tx": "**Ewing sarcoma** (children, **diaphyseal** femur or pelvis, **onion skin** periosteal layering, small round blue cells with **EWS-FLI1** translocation, fever mimicking osteomyelitis) is treated by multiagent chemotherapy with surgery or radiotherapy (pelvis often rays); lung and marrow stage. **Chondrosarcoma** (older adults, pelvis and shoulder, **rings and arcs** calcification, IDH mutations, chemo resistant) needs wide resection; dedifferentiated variants kill fast. Small round blue differentials (lymphoma, rhabdomyosarcoma, neuroblastoma) immunophenotype.",
+   "say": "Diaphyseal onion skin febrile child is Ewing: EWS-FLI1, chemo plus rays. Pelvic rings and arcs older is chondrosarcoma: resect wide.",
+   "vis": null
+  },
+  {
+   "tx": "**Benign tumours** behave by age and site: **giant cell tumour** (skeletally mature **epiphysis**, soap bubble lytic, RANKL driven, **denosumab** with curettage), **osteochondroma** (metaphyseal exostosis pointing away, cartilage cap, EXT genes, secondary chondrosarcoma when cap thickens), enchondroma (Ollier multiples, Maffucci with haemangiomas), **aneurysmal bone cyst** (blowout with fluid levels, USP6) versus unicameral (fallen fragment sign, steroids or curettage), nonossifying fibroma (cortical, regresses). Epiphyseal lytic adult is GCT until proven.",
+   "say": "Epiphyseal soap bubble adult is giant cell: denosumab, curette. Exostosis cap thickening turns malignant.",
+   "vis": null
+  },
+  {
+   "tx": "**Paget disease** (elderly, **mosaic cement lines**, hat size growing with deafness, high ALP, osteosarcoma risk) is treated by **bisphosphonates** for pain or complications; **fibrous dysplasia** (**GNAS**, ground glass with **shepherd crook** deformity, McCune-Albright with cafe au lait and precocity, Mazabraud with myxomas) observes or fixes deformity. **Osteoporosis** (postmenopausal, DEXA T under minus 2.5, fragility hip and spine, bisphosphonates with calcium and vitamin D) differs by density; osteomalacia (Looser zones, low phosphate) mineralises poorly.",
+   "say": "Growing hat deaf high ALP is Paget: bisphosphonate. Ground glass shepherd crook is fibrous dysplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bone",
+     "Age site",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Osteosarcoma",
+      "Teen metaphysis",
+      "MAP plus salvage"
+     ],
+     [
+      "Ewing",
+      "Child diaphysis",
+      "Chemo plus rays"
+     ],
+     [
+      "GCT",
+      "Adult epiphysis",
+      "Denosumab"
+     ],
+     [
+      "Paget",
+      "Elderly mosaic",
+      "Bisphosphonate"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-481",
+  "bk2-pat-482",
+  "bk2-pat-483",
+  "bk2-pat-484",
+  "bk2-pat-485",
+  "bk2-pat-486",
+  "bk2-pat-487",
+  "bk2-pat-488",
+  "bk2-pat-489",
+  "bk2-pat-490"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

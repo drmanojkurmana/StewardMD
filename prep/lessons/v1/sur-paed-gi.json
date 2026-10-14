@@ -1,0 +1,160 @@
+{
+ "module": "sur-paed-gi",
+ "subject": "surgery",
+ "title": "Paediatric gastrointestinal emergencies, hypertrophic pyloric stenosis, intussusception, and Ladd procedure",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Holcomb and Ashcraft's Pediatric Surgery 7th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Infantile hypertrophic pyloric stenosis arises from hypertrophy and hyperplasia of the circular pyloric smooth **muscle**, producing severe gastric outlet obstruction in infants aged three to six weeks. It occurs predominantly in first-born males, manifesting with non-bilious projectile vomiting immediately after feeding and a palpable olive-shaped mass in the right epigastrium. Persistent gastric loss of hydrochloric acid causes classic hypochloremic, hypokalemic metabolic alkalosis with paradoxical aciduria. Transverse abdominal ultrasonography demonstrates pyloric muscle thickness exceeding three millimeters and channel length exceeding fifteen millimeters.",
+   "say": "Hypertrophic pyloric stenosis presents in infants aged three to six weeks with non-bilious projectile vomiting and an epigastric olive mass. It produces hypochloremic hypokalemic metabolic alkalosis, with ultrasound showing muscle thickness over three millimeters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic parameter",
+     "Threshold diagnostic criterion",
+     "Clinical / laboratory significance"
+    ],
+    "rows": [
+     [
+      "Pyloric muscle thickness",
+      "Greater than or equal to 3.0 mm",
+      "Confirms hypertrophic circular muscle"
+     ],
+     [
+      "Pyloric channel length",
+      "Greater than or equal to 15 mm",
+      "Elongated gastric outlet channel"
+     ],
+     [
+      "Serum chloride level",
+      "Less than 98 mmol/L",
+      "Profound hypochloremia from vomitus"
+     ],
+     [
+      "Blood gas evaluation",
+      "Elevated serum bicarbonate & pH",
+      "Metabolic alkalosis requiring saline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrolyte and fluid resuscitation with isotonic saline takes absolute precedence over operative **intervention**, because performing general anesthesia in an alkalotic infant risks severe postoperative apnea. Once serum chloride exceeds one hundred milliequivalents per liter, Ramstedt extramucosal pyloromyotomy is curative. The surgeon divides the hypertrophic circular pyloric muscle down to the bulging, intact submucosa. Meticulous inspection for mucosal perforation followed by air insufflation through an orogastric tube is mandatory prior to abdominal wall closure.",
+   "say": "Isotonic saline resuscitation to normalize chloride and acid-base status is mandatory before surgery to avoid anesthetic apnea. Ramstedt pyloromyotomy divides the circular muscle down to intact submucosa without entering the mucosal lumen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Non-bilious projectile vomiting in infant"
+     },
+     {
+      "id": "n2",
+      "label": "Diagnose hypochloremic alkalosis on labs"
+     },
+     {
+      "id": "n3",
+      "label": "Resuscitate with normal saline & potassium"
+     },
+     {
+      "id": "n4",
+      "label": "Ramstedt extramucosal pyloromyotomy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intussusception involves the invagination of a proximal bowel segment into an immediately distal bowel **lumen**, most commonly ileocolic in infants aged six to twenty-four months. The classic triad includes intermittent severe colicky abdominal pain with drawing up of legs, vomiting, and passage of red currant jelly stools containing mucus and blood. Abdominal ultrasound displays the pathognomonic target or doughnut sign. Non-operative reduction utilizing pneumatic or hydrostatic enema is the primary treatment of choice, provided peritonitis, bowel perforation, and septic shock are absent.",
+   "say": "Ileocolic intussusception presents in toddlers with severe colicky pain, leg flexion, vomiting, and red currant jelly stools. Ultrasonography reveals a target sign. Pneumatic enema reduction is first-line in the absence of peritonitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intussusception feature",
+     "Clinical manifestation",
+     "Management rule"
+    ],
+    "rows": [
+     [
+      "Classic triad",
+      "Colicky pain, vomiting, red currant jelly stool",
+      "Present complete in under 50%"
+     ],
+     [
+      "Ultrasound appearance",
+      "Transverse target / longitudinal pseudokidney",
+      "Diagnostic sensitivity > 98%"
+     ],
+     [
+      "Pneumatic reduction",
+      "Air insufflation up to 120 mmHg under fluoroscopy",
+      "Successful reduction in > 85%"
+     ],
+     [
+      "Operative indication",
+      "Peritonitis, perforation, or failed enema",
+      "Manual reduction or segmental resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Midgut malrotation results from failure of normal embryonic 270-degree counterclockwise gut **rotation** around the superior mesenteric artery, leaving a narrow mesenteric base prone to clockwise torsion and catastrophic midgut volvulus. Sudden onset of bilious vomiting in a previously thriving neonate represents midgut volvulus until proven otherwise. Upper gastrointestinal contrast radiography reveals the duodenojejunal junction displaced to the right of the spine and a corkscrew duodenum. Emergency surgical exploration via the Ladd procedure detorses the volvulus, divides adhesive Ladd bands, widens the mesenteric base, and performs appendectomy.",
+   "say": "Bilious vomiting in a newborn is midgut volvulus until proven otherwise. Upper gastrointestinal contrast series demonstrates a corkscrew duodenum. Emergency Ladd procedure detorses the bowel, divides Ladd bands, and widens the mesenteric base.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pyloric Stenosis",
+     "points": [
+      "Non-bilious projectile vomiting",
+      "Age 3 to 6 weeks; olive mass",
+      "Hypochloremic metabolic alkalosis"
+     ]
+    },
+    "right": {
+     "title": "Midgut Volvulus",
+     "points": [
+      "Acute bilious green vomiting in newborn",
+      "Narrow mesenteric root twists on SMA",
+      "Surgical emergency: Ladd procedure"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "5ac7ed76-4000-8000-5ac7-ed7612345678",
+  "59c7ebe3-4000-8000-59c7-ebe312345678",
+  "58c7ea50-4000-8000-58c7-ea5012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

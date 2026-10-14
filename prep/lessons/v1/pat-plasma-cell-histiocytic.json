@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-plasma-cell-histiocytic",
+ "subject": "pathology",
+ "title": "Plasma cell neoplasms, histiocytic disorders and spleen",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Plasma cell neoplasms** span a spectrum from monoclonal gammopathy of undetermined significance (MGUS, under ten percent marrow plasma cells without end organ damage) through smouldering myeloma to multiple myeloma with CRAB damage: hypercalcaemia, renal failure, anaemia and bone lesions. A monoclonal spike with free light chain imbalance marks the clone at every stage.",
+   "say": "Plasma clones range from harmless MGUS to myeloma destroying bone, kidney and marrow. CRAB features mark active myeloma. Monoclonal spike tracks the clone.",
+   "vis": null
+  },
+  {
+   "tx": "**Multiple myeloma** marrow packed with clonal plasma cells secretes monoclonal immunoglobulin (usually IgG or IgA) or free light chains that precipitate in renal tubules as casts (myeloma kidney) while osteoclast activation punches lytic bone lesions without sclerotic rim. Rouleaux stacking of red cells, high ESR and recurrent bacterial infections from suppressed normal antibodies complete the classic stem.",
+   "say": "Myeloma light chains cast and fail kidneys while osteoclasts punch lytic holes in bone. Red cells stack in rouleaux. Normal antibodies fall causing infections.",
+   "vis": null
+  },
+  {
+   "tx": "**Waldenstrom macroglobulinaemia** is lymphoplasmacytic lymphoma secreting monoclonal IgM whose pentamer viscosity sludges blood causing visual changes, bleeding and neuropathy, with MYD88 mutation support. Unlike myeloma, lytic bones are absent and hyperviscosity dominates, treated urgently by plasmapheresis when symptomatic. AL amyloidosis may complicate any light chain clone depositing in heart and kidney.",
+   "say": "IgM Waldenstrom sludges blood viscous without lytic bones. Plasmapheresis rescues vision urgently. Light chains from any clone may amyloid heart and kidney.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MGUS",
+     "points": [
+      "M protein under 30 g/L, marrow plasma cells under 10 percent",
+      "No CRAB end organ damage",
+      "About 1 percent yearly progression",
+      "Observe, do not treat"
+     ]
+    },
+    "right": {
+     "title": "Multiple myeloma",
+     "points": [
+      "Clonal plasma cells 10 percent plus with CRAB or biomarkers",
+      "Lytic lesions, renal casts, anaemia, calcium",
+      "Treat with proteasome, IMiD and antibody regimens",
+      "Free light chains guide response"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **spleen** enlarges from congestion (portal hypertension), hyperplasia (haemolysis, infection), infiltration (storage, lymphoma, myelofibrosis) or malignancy, while its loss (surgical or autosplenectomy) risks overwhelming post splenectomy infection from encapsulated pneumococcus, meningococcus and Haemophilus. Howell Jolly bodies betray absent splenic filtering on any film thereafter.",
+   "say": "Big spleens congest, work harder, infiltrate or malignantly expand. Absent spleens invite encapsulated sepsis for life. Howell Jolly bodies confess the missing filter.",
+   "vis": null
+  },
+  {
+   "tx": "**Histiocytic disorders** include reactive haemophagocytic lymphohistiocytosis (HLH) where activated macrophages devour blood cells amid ferritin storms and cytopenias from infection or lymphoma triggers, and Langerhans cell histiocytosis with Birbeck granule tennis racket cells causing lytic skull lesions, diabetes insipidus and rash in children, now classed as inflammatory myeloid neoplasm with BRAF mutations.",
+   "say": "HLH macrophages eat blood cells in ferritin storms needing trigger control. Langerhans cells with tennis racket granules lyse child skulls and thirst through diabetes insipidus.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-301",
+  "bk2-pat-302",
+  "bk2-pat-303",
+  "bk2-pat-304",
+  "bk2-pat-305",
+  "bk2-pat-306",
+  "bk2-pat-307",
+  "bk2-pat-308",
+  "bk2-pat-309",
+  "bk2-pat-310"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

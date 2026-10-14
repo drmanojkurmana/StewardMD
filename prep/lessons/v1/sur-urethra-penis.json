@@ -1,0 +1,160 @@
+{
+ "module": "sur-urethra-penis",
+ "subject": "surgery",
+ "title": "Urethral stricture disease, urethroplasty techniques, and penile carcinoma",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Urethral stricture disease arises from ischemic scarring and progressive spongiofibrosis within the corpus **spongiosum** surrounding the urethral epithelium. Etiologies include iatrogenic trauma from traumatic catheterization or transurethral instrumentation, straddle pelvic perineal trauma, chronic urethritis from Neisseria gonorrhoeae, and lichen sclerosus balanitis xerotica obliterans. The bulbar urethra represents the most frequent anatomical site of anterior urethral strictures, producing progressive obstructive voiding symptoms, decreased urinary stream force, and post-void dribbling.",
+   "say": "Urethral strictures result from spongiofibrosis in the corpus spongiosum, commonly following catheterization, straddle trauma, or gonococcal infection. The bulbar urethra is the most frequent site, causing decreased urinary flow and post-void dribbling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stricture anatomical region",
+     "Etiological causal mechanism",
+     "Preferred reconstructive approach"
+    ],
+    "rows": [
+     [
+      "Bulbar urethra",
+      "Straddle injury / iatrogenic instrumentation",
+      "Excision & primary anastomosis (< 2 cm)"
+     ],
+     [
+      "Penile pendulous urethra",
+      "Lichen sclerosus / failed hypospadias",
+      "Buccal mucosa graft substitution"
+     ],
+     [
+      "Membranous urethra",
+      "Pelvic fracture urethral distraction (PFUI)",
+      "Delayed anastomotic perineal repair"
+     ],
+     [
+      "Fossa navicularis / meatus",
+      "Chronic balanitis xerotica obliterans",
+      "Extended meatoplasty / graft onlay"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Retrograde urethrography combined with voiding cystourethrography constitutes the gold standard diagnostic **imaging** modality, delineating stricture length, caliber, anatomical location, and associated false passages or diverticula. For short bulbar strictures under two centimeters, primary anastomotic urethroplasty provides long-term success rates exceeding ninety percent by excising the fibrotic segment and performing a spatulated end-to-end anastomosis. Long or complex penile strictures require substitution urethroplasty utilizing autologous buccal mucosal graft onlays, which possess a thick elastin-rich lamina propria facilitating robust vascular inosculation.",
+   "say": "Retrograde urethrography is the diagnostic gold standard, mapping stricture length and location. Short bulbar strictures are cured by primary anastomotic urethroplasty, while long strictures require substitution urethroplasty with buccal mucosal grafts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Obstructive lower urinary voiding symptoms"
+     },
+     {
+      "id": "n2",
+      "label": "Retrograde urethrogram & cystourethrogram"
+     },
+     {
+      "id": "n3",
+      "label": "Measure stricture length & spongiofibrosis"
+     },
+     {
+      "id": "n4",
+      "label": "Anastomotic repair (< 2 cm) vs buccal graft"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Penile carcinoma represents an uncommon malignancy in developed nations, with squamous cell carcinoma accounting for ninety-five **percent** of cases. Uncircumcised status with chronic phimosis, poor hygiene, smegma accumulation, and high-risk human papillomavirus infection (types 16 and 18) are primary risk factors. Premalignant lesions include erythroplasia of Queyrat on the glans and Bowen disease on the shaft. Tumors present as painless, non-healing ulcerations or exophytic verrucous masses on the glans penis or prepuce.",
+   "say": "Squamous cell carcinoma accounts for ninety-five percent of penile cancers, linked to uncircumcised status with phimosis, poor hygiene, and human papillomavirus infection. Lesions present as painless non-healing ulcers on the glans or foreskin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Penile lesion type",
+     "Clinical morphology & site",
+     "Malignancy potential"
+    ],
+    "rows": [
+     [
+      "Erythroplasia of Queyrat",
+      "Velvety red plaque on glans / prepuce",
+      "Carcinoma in situ (10-30% invasive)"
+     ],
+     [
+      "Bowen disease",
+      "Crusted solitary plaque on penile shaft",
+      "Carcinoma in situ"
+     ],
+     [
+      "Buschke-Lowenstein tumor",
+      "Giant verrucous condyloma of glans",
+      "Locally aggressive non-metastasizing"
+     ],
+     [
+      "Invasive squamous carcinoma",
+      "Ulcerated or fungating glans lesion",
+      "Regional inguinal nodal metastases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management prioritizes complete oncological clearance while preserving maximum penile length for upright micturition and sexual **function**. Superficial low-grade tumors are managed with organ-sparing glansectomy or wide local excision, whereas invasive corporal lesions necessitate partial penectomy with a minimum clear margin of two to three millimeters, or total penectomy with perineal urethrostomy. Bilateral inguinal lymphadenectomy is indicated for intermediate- and high-risk primary tumors or palpable adenopathy persisting after antimicrobial therapy.",
+   "say": "Surgical treatment aims for oncological clearance with functional length preservation. Low-grade lesions undergo organ-sparing glansectomy, while deep corporal invasion requires partial or total penectomy with inguinal lymph node dissection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Organ-Sparing Surgery",
+     "points": [
+      "Wide local excision or glansectomy",
+      "Indicated for superficial T1 disease",
+      "Preserves corporal length & function"
+     ]
+    },
+    "right": {
+     "title": "Radical Resection",
+     "points": [
+      "Partial penectomy or total penectomy",
+      "Indicated for T2+ corporal cavernous invasion",
+      "Bilateral inguinal lymph node staging"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "1952fb26-4000-8000-1952-fb2612345678",
+  "1852f993-4000-8000-1852-f99312345678",
+  "1752f800-4000-8000-1752-f80012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

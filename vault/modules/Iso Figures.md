@@ -28,6 +28,7 @@ Runtime: `iso-figures.js` (ES5, ~16 KB, loaded `defer` from index.html and the p
 `SMD_ISO.slot(id, { state, controls:false, hide:[keys], theme })`; a MutationObserver mounts slots (repaints
 included); `SMD_ISO.set(id, state)` drives a mounted figure. Figures animate only while on screen, stop under
 reduced motion. The figure files (70 to 240 KB each, ~200 KB gzipped for all) load only when a slot appears.
+**Never edit an Ophthalmos file to add a figure:** they are byte-identical copies of the module repo; use a host adapter in `iso-figures.js` instead.
 **Bump `V` in iso-figures.js and the `?v=` in index.html + product/index.html when any figure or the CSS changes.**
 
 ## Where each figure lives
@@ -38,7 +39,7 @@ reduced motion. The figure files (70 to 240 KB each, ~200 KB gzipped for all) lo
 | syringe-pump | Neonatal infusions (`neo-infusions.js`), collapsed under the result, AFTER the range and source lines, rate fixed to the calculated mL/h (`hide: ["rateI"]`) | own: rate / barrel area, slack delay |
 | bp-cuff | CliniX `diagram.bpiso` (`clinix-diagrams.js`, `iso: "bp-cuff"`), media `media.cvs.bp.iso` on `skill.exam.cvs.bp` | own: beats vs let-down rate (AHA 2019) |
 | chest-drain | SURGX chest trauma protocol (`"isoFigure": "chest-drain"`, passed through `surgx-model.js compileProtocol`) | own: seal/suction pressures |
-| retinoscope | Ophthalmos focus explorer (`ophthalmos-explore.js isoBench()`), set to the eye's spherical equivalent | `OPHTHALMOS_RETINO` (LOCAL copy checked against it); working distances 67 cm 1.50 D, 50 cm 2.00 D as the retinoscopy sim |
+| retinoscope | Ophthalmos focus explorer, added by the adapter `ophthalmosBench()` in `iso-figures.js` (Ophthalmos files are synced byte-for-byte from their own repo and must not be edited here, see `test/ophthalmos-sync.json`), set to the eye's spherical equivalent | `OPHTHALMOS_RETINO` (LOCAL copy checked against it); working distances 67 cm 1.50 D, 50 cm 2.00 D as the retinoscopy sim |
 | circle-system, syringe-pump, chest-drain | Product page `product/index.html` "Equipment you can watch work." (dark) | as above |
 
 ## Tests

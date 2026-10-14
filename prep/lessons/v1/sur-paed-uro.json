@@ -1,0 +1,162 @@
+{
+ "module": "sur-paed-uro",
+ "subject": "surgery",
+ "title": "Paediatric urology, hypospadias, cryptorchidism, and Wilms tumor",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Hypospadias represents a common congenital penile **anomaly** characterized by incomplete development of the anterior urethra, resulting in a ventrally displaced urethral meatus, ventral fibrous chordee curvature, and a deficient ventral prepuce creating a dorsal hood. Neonatal circumcision is strictly contraindicated because the vascularized dorsal prepuce provides essential tissue for future surgical reconstruction. Surgical repair utilizing tubularized incised plate urethroplasty is ideally scheduled between six and eighteen months of age to minimize psychological awareness.",
+   "say": "Hypospadias features a ventrally displaced urethral meatus, ventral chordee, and a dorsal prepuce hood. Neonatal circumcision is strictly contraindicated to preserve foreskin for reconstruction, with urethroplasty scheduled between six and eighteen months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypospadias anatomic class",
+     "Urethral meatus position",
+     "Surgical reconstructive approach"
+    ],
+    "rows": [
+     [
+      "Distal (Glandular/coronal)",
+      "Glans or coronal sulcus (65%)",
+      "Tubularized incised plate (Snodgrass)"
+     ],
+     [
+      "Midshaft penile",
+      "Mid-pendulous shaft (15%)",
+      "Onlay island flap or incised plate"
+     ],
+     [
+      "Proximal (Penoscrotal)",
+      "Scrotum or perineum (20%)",
+      "Staged buccal mucosa graft urethroplasty"
+     ],
+     [
+      "Associated chordee",
+      "Ventral tunical tethering",
+      "Dorsal plication / degloving release"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cryptorchidism denotes failure of normal testicular **descent** into the scrotal sac, increasing risks of impaired spermatogenesis, testicular torsion, inguinal hernia, and malignant testicular germ cell degeneration. The increased risk of testicular cancer persists throughout life, involving both the undescended and contralateral descended testicles. Diagnostic laparoscopy represents the definitive investigation for non-palpable intra-abdominal testicles. Surgical orchidopexy with fixation within a subdartos pouch is recommended between six and twelve months of age to preserve germinal epithelium.",
+   "say": "Cryptorchidism increases the risk of subfertility and testicular cancer in both testes. Diagnostic laparoscopy is the gold standard for non-palpable intra-abdominal testes. Surgical orchidopexy is performed between six and twelve months of age.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Undescended testis on neonatal exam"
+     },
+     {
+      "id": "n2",
+      "label": "Palpate inguinal canal carefully"
+     },
+     {
+      "id": "n3",
+      "label": "Diagnostic laparoscopy if non-palpable"
+     },
+     {
+      "id": "n4",
+      "label": "Orchidopexy between 6 and 12 months"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posterior urethral valves represent the most common cause of congenital lower urinary **tract** obstruction in newborn boys, consisting of obstructing mucosal folds within the prostatic urethra. Fetal ultrasound reveals bilateral hydroureteronephrosis, distended thick-walled bladder with a dilated posterior urethra termed the keyhole sign, and oligohydramnios producing secondary pulmonary hypoplasia. Urgent neonatal decompression with a small feeding tube followed by cystoscopic transurethral valve ablation restores urinary outflow and preserves renal function.",
+   "say": "Posterior urethral valves produce severe urinary outflow obstruction in male neonates, displaying the keyhole bladder sign and hydronephrosis on ultrasound. Prompt transurethral valve ablation prevents progressive chronic renal failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological entity",
+     "Diagnostic imaging sign",
+     "Clinical management priority"
+    ],
+    "rows": [
+     [
+      "Posterior urethral valves",
+      "Keyhole sign on bladder ultrasound",
+      "Primary endoscopic valve ablation"
+     ],
+     [
+      "Vesicoureteral reflux (VUR)",
+      "Retrograde contrast into ureter on VCUG",
+      "Prophylactic antibiotics or ureteral reimplantation"
+     ],
+     [
+      "Reflux nephropathy",
+      "Cortical scarring on DMSA scintigraphy",
+      "Control hypertension & prevent infection"
+     ],
+     [
+      "Antenatal hydronephrosis",
+      "Renal pelvis AP diameter > 10 mm",
+      "Postnatal ultrasound & MAG3 renography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wilms tumor represents the most frequent malignant renal **tumor** of childhood, presenting at a median age of three years with an asymptomatic, smooth, firm abdominal flank mass that rarely crosses the midline. Neuroblastoma, by contrast, arises from sympathetic neuroblasts in the adrenal gland or retroperitoneum, presenting as a hard, irregular mass that frequently crosses the aortic midline and encases major vascular structures. Wilms tumor is treated by multimodality chemotherapy and radical nephrectomy without prior needle biopsy.",
+   "say": "Wilms tumor presents in toddlers as a smooth painless flank mass that rarely crosses the midline. Neuroblastoma arises from sympathetic tissue, is calcified, and characteristically crosses the aortic midline. Multimodal therapy achieves high cure rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wilms Tumor (Nephroblastoma)",
+     "points": [
+      "Smooth, firm mass; rarely crosses midline",
+      "Arises from metanephric renal blastema",
+      "Biopsy contraindicated; radical nephrectomy",
+      "WT1 gene deletion on chromosome 11p13"
+     ]
+    },
+    "right": {
+     "title": "Neuroblastoma",
+     "points": [
+      "Irregular, nodular mass; crosses midline",
+      "Arises from neural crest adrenal medulla",
+      "Elevated urinary VMA and HVA catecholamines",
+      "Frequent encasement of mesenteric vessels"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4d7f76c8-4000-8000-4d7f-76c812345678",
+  "507f7b81-4000-8000-507f-7b8112345678",
+  "4f7f79ee-4000-8000-4f7f-79ee12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

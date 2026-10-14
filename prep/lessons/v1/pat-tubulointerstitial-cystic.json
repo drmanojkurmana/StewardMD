@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-tubulointerstitial-cystic",
+ "subject": "pathology",
+ "title": "Tubulointerstitial disease and renal cysts",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Acute tubular necrosis** (ischaemia from shock or sepsis, nephrotoxins like aminoglycosides, cisplatin, amphotericin and contrast) sheds epithelium into **muddy brown granular casts** with **FENa over 2 percent** (versus under 1 percent in prerenal) and oliguria; phases run initiation, maintenance and diuretic recovery with polyuria. Management is fluids with pressors, stop toxins, dialyse complications; most recover if the insult lifts. Contrast gets hydration with bicarbonate or NAC debates; rhabdomyolysis (myoglobin, CK, tea coloured urine) alkalinises with fluids.",
+   "say": "Muddy brown casts with high FENa after shock are ATN: perfuse, dialyse complications. Contrast kidneys hydrate first.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute interstitial nephritis** (beta lactams, NSAIDs with minimal change overlap, PPIs, allopurinol, infections) presents with fever, rash and arthralgia weeks after drugs, **eosinophils** in blood and urine (Hansel stain), **WBC casts** and rising creatinine; biopsy shows interstitial infiltrates sparing glomeruli. Treatment is **stop the drug with steroids** debated for severe or prolonged cases; PPIs hide ubiquitously so medication review matters. Chronic analgesic abuse papillary necroses separately.",
+   "say": "Fever rash eosinophils weeks after penicillin with WBC casts is AIN: stop drug, steroids debated. Review PPIs.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute pyelonephritis** (ascending E. coli with P fimbriae, **WBC casts** proving tubular origin, fever with loin pain and dysuria) is treated by culture guided fluoroquinolones or ceftriaxone (men, pregnancy, obstruction admitted); **vesicoureteric reflux** (childhood recurrent UTI, MCU grading, prophylaxis debated, reimplantation high grades) scars into reflux nephropathy with hypertension. **Chronic pyelonephritis** (coarse asymmetric scars with blunted calyces) differs from analgesic nephropathy (papillary necrosis with calcifications). Emphysematous pyelonephritis (diabetics, gas) nephrectomises emergently.",
+   "say": "WBC casts with loin pain are pyelonephritis: culture then cover. Childhood recurrent UTI refluxes: MCU grades.",
+   "vis": null
+  },
+  {
+   "tx": "**Cystic diseases** sort by gene and age: **ADPKD** (**PKD1** severe, PKD2 milder, bilateral enlarged kidneys, **berry aneurysms** with subarachnoid risk, liver cysts, mitral prolapse, tolvaptan slowing), **ARPKD** (PKHD1, infants with oligohydramnios and Potter sequence, congenital hepatic fibrosis), medullary sponge (tubular ectasia with stones and haematuria, benign), medullary cystic (tubulointerstitial fibrosis with hyperuricaemia), acquired cystic (dialysis, RCC risk). Simple cysts (Bosniak I) observe; complex (Bosniak III-IV) resects.",
+   "say": "Enlarged cystic kidneys with berry aneurysms are ADPKD: screen brain vessels. Dialysis cysts watch for RCC.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kidney",
+     "Cast",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "ATN",
+      "Muddy brown",
+      "Perfuse"
+     ],
+     [
+      "AIN",
+      "WBC, eosinophils",
+      "Stop drug"
+     ],
+     [
+      "Pyelo",
+      "WBC casts",
+      "Culture cover"
+     ],
+     [
+      "ADPKD",
+      "No casts",
+      "Tolvaptan"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-421",
+  "bk2-pat-422",
+  "bk2-pat-423",
+  "bk2-pat-424",
+  "bk2-pat-425",
+  "bk2-pat-426",
+  "bk2-pat-427",
+  "bk2-pat-428",
+  "bk2-pat-429",
+  "bk2-pat-430"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -39,6 +39,10 @@ try {
   await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
   await call('Page.navigate', { url: `http://localhost:${PORT}/` });
   ok(await until(`!!document.querySelector('#rnavToolsGrid .rnav-tile')`, 30000), 'home tools grid rendered');
+  // Pin the brand tiles this test checks; with any pin saved, Home shows every default tool as before the starter set.
+  await ev(`localStorage.setItem('smd_home_tools',JSON.stringify({ophthalmos:true,surgx:true}));1`);
+  await call('Page.navigate', { url: `http://localhost:${PORT}/` });
+  ok(await until(`!!document.querySelector('#rnavToolsGrid .rnav-tile[data-act="surgx"]')`, 30000), 'home grid with the brand tiles');
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());1`);
   await sleep(800);
   const r = await ev(`(()=>{const tiles=[...document.querySelectorAll('#rnavToolsGrid .rnav-tile:not(.addtool)')];const out=tiles.map(t=>{const a=t.getAttribute('data-act'),live=t.querySelector('.rnav-badge .ai-live'),anim=t.querySelector('.rnav-badge .ai-anim,.ai-clinix-img'),img=t.querySelector('.rnav-badge img');return {a,live:!!live,name:live?getComputedStyle(live).animationName:'',moving:!!anim||(!!live&&getComputedStyle(live).animationName!=='none')||(!!img&&getComputedStyle(img).animationName!=='none'),brand:!!img,locked:t.classList.contains('role-locked')}});return out})()`);

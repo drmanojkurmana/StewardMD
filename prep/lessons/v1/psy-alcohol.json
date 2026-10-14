@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-alcohol",
+ "subject": "psychiatry",
+ "title": "Alcohol use disorder",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Alcohol use disorder** spans hazardous use, harmful use and dependence (ICD) or severity graded DSM disorder defined by craving, loss of control, tolerance, withdrawal, salience over life and continued use despite harm. Screening uses AUDIT (CAGE as crude bedside adjunct: Cut down, Annoyed, Guilty, Eye opener). Dependence physiology shows as morning drinking, relief drinking and withdrawal tremor, sweating, nausea, tachycardia, seizures and hallucinations on stopping.",
+   "say": "Craving, lost control, tolerance and morning relief drinking mean dependence. AUDIT screens better than CAGE.",
+   "vis": null
+  },
+  {
+   "tx": "**Withdrawal** timelines are examination favourites: tremor and autonomic hyperactivity within hours, withdrawal seizures at about 24 to 48 hours, alcoholic hallucinosis (clear consciousness auditory hallucinations) around 24 to 48 hours, and **delirium tremens** at 48 to 96 hours with fluctuating confusion, fever, severe autonomic storm and visual hallucinations carrying mortality without treatment. Benzodiazepine reducing regimens (chlordiazepoxide pattern) plus fluids and electrolytes treat withdrawal; carbamazepine is alternative in selected pathways.",
+   "say": "Seizures day one to two, delirium tremens day two to four. Benzodiazepines treat withdrawal; confusion plus fever plus storm is DT.",
+   "vis": null
+  },
+  {
+   "tx": "**Wernicke encephalopathy** (thiamine deficiency) classically triads confusion, ataxia and ophthalmoplegia or nystagmus, though full triad is minority, so any confused malnourished drinker gets parenteral thiamine before glucose (glucose without thiamine may precipitate it). Untreated it progresses to **Korsakoff syndrome**: irreversible anterograde amnesia with confabulation and relatively preserved other cognition. Pabrinex style parenteral replacement precedes oral thiamine in at risk refeeding patients.",
+   "say": "Confused ataxic drinker with eye signs: thiamine before glucose, parenteral. Korsakoff forgets new events and confabulates.",
+   "vis": null
+  },
+  {
+   "tx": "Relapse prevention combines psychosocial programmes (motivational interviewing, mutual aid, relapse prevention CBT) with drugs: **acamprosate** (supports abstinence, glutamate modulation, renal caution), **naltrexone** (opioid blockade reducing heavy drinking, liver and opioid interaction cautions) and disulfiram (supervised aversive aldehyde reaction, only in motivated abstinent patients with consent). Treat comorbid depression after abstinence reassessment, screen liver, pancreas, cancers and fetal alcohol spectrum in offspring.",
+   "say": "Acamprosate keeps abstinence, naltrexone cuts heavy drinking, disulfiram punishes drinking under supervision only.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Withdrawal event",
+     "Typical onset",
+     "Consciousness"
+    ],
+    "rows": [
+     [
+      "Tremor, autonomic",
+      "6 to 12 hours",
+      "Clear"
+     ],
+     [
+      "Withdrawal seizure",
+      "24 to 48 hours",
+      "Brief post ictal"
+     ],
+     [
+      "Alcoholic hallucinosis",
+      "24 to 48 hours",
+      "Clear"
+     ],
+     [
+      "Delirium tremens",
+      "48 to 96 hours",
+      "Fluctuating confusion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-071",
+  "bk2-psy-072",
+  "bk2-psy-073",
+  "bk2-psy-074",
+  "bk2-psy-075",
+  "bk2-psy-076",
+  "bk2-psy-077",
+  "bk2-psy-078",
+  "bk2-psy-079",
+  "bk2-psy-080"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

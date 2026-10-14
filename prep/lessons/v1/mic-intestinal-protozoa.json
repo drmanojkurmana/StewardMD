@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "mic-intestinal-protozoa",
+ "subject": "microbiology",
+ "title": "Intestinal protozoa: amoebiasis, giardiasis and coccidia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Entamoeba histolytica** (quadrinucleate cysts, trophozoites with **ingested RBCs** distinguishing from dispar) invades colon into **flask shaped ulcers** (narrow neck, wide base) causing bloody mucoid dysentery with tenesmus, then rides portal blood into **right lobe liver abscess** (**anchovy sauce** pus, North American hole). Diagnosis is stool antigen or PCR (microscopy confuses dispar), serology positive in liver disease, ultrasound solitary right lobe cavity. Treatment is **metronidazole** for tissue plus **diloxanide or paromomycin** luminal clearance; aspirate large left lobe or threatened rupture.",
+   "say": "Ingested red cells mark histolytica over dispar. Anchovy right lobe abscess needs metronidazole plus luminal agent.",
+   "vis": null
+  },
+  {
+   "tx": "**Giardia lamblia** (trophozoites with **falling leaf motility** and owl face, oval cysts, mountain stream and daycare spread) coats duodenum causing foul fatty frothy diarrhoea with bloating, lactose intolerance and failure to thrive without blood. Diagnosis is stool antigen or string test (Entero-Test) with duodenal biopsy showing villous blunting; treatment is **tinidazole or metronidazole** with hygiene. Travellers with greasy floaters after camping implicate it; IgA deficiency and cystic fibrosis predispose.",
+   "say": "Falling leaf motility with fatty floaters is Giardia: tinidazole. No blood, duodenal coating disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Coccidian diarrhoeas** strike AIDS and travellers: **Cryptosporidium** (tiny oocysts, **modified ZN** red, waterborne pool outbreaks, profuse watery diarrhoea under CD4 100, **nitazoxanide** with ART restoring), **Cyclospora** (larger oocysts, raspberries and travel, **TMP-SMX** treats), **Cystoisospora belli** (largest, immunocompromised, TMP-SMX). Stool modified acid fast with autofluorescence sorts; chronic carriage with wasting warns. Safe water with handwashing prevents; calves and lambs source crypto.",
+   "say": "Modified ZN red tiny oocysts in AIDS watery diarrhoea are crypto: nitazoxanide plus ART. Cyclospora yields to cotrimoxazole.",
+   "vis": null
+  },
+  {
+   "tx": "**Balantidium coli** (largest protozoan, ciliated, pig contact) ulcerates like amoeba rarely needing tetracycline; **Blastocystis** (common, usually commensal, metronidazole only if sole pathogen with symptoms) and **Dientamoeba fragilis** (pinworm vectored, TMP-SMX or metronidazole) complete differentials. **Entamoeba coli** (8 nuclei) and **Endolimax nana** never treat. Stool concentration with trichrome separates; treat the pathogen, not the commensal.",
+   "say": "Largest ciliated protozoan from pigs is Balantidium. Eight nuclei coli never needs drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protozoa",
+     "Stool",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Histolytica",
+      "RBC trophs",
+      "Metro plus diloxanide"
+     ],
+     [
+      "Giardia",
+      "Fatty frothy",
+      "Tinidazole"
+     ],
+     [
+      "Crypto",
+      "ZN oocysts",
+      "Nitazoxanide plus ART"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-181",
+  "bk2-mic-182",
+  "bk2-mic-183",
+  "bk2-mic-184",
+  "bk2-mic-185",
+  "bk2-mic-186",
+  "bk2-mic-187",
+  "bk2-mic-188",
+  "bk2-mic-189",
+  "bk2-mic-190"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

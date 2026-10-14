@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-myocardial-pericardial",
+ "subject": "pathology",
+ "title": "Myocarditis, cardiomyopathies and pericardial disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Myocarditis** (viral Coxsackie B commonest, parvovirus B19, Chagas with apical aneurysm, diphtheria, hypersensitivity drugs, **giant cell** fulminant in young with VT) presents with chest pain, heart failure or arrhythmia after viral prodrome; troponin with MRI Lake Louise criteria supports while **Dallas criteria** (endomyocardial biopsy lymphocytic infiltrate with myocyte necrosis) confirms. Most viral cases rest into recovery with heart failure therapy; giant cell needs combined immunosuppression with transplant listing, fulminant cases need mechanical support. Athletes rest months.",
+   "say": "Chest pain with failure after viral flu is myocarditis: rest, biopsy Dallas confirms. Giant cell VT storms need transplant listing.",
+   "vis": null
+  },
+  {
+   "tx": "**Dilated cardiomyopathy** (alcohol, peripartum, haemochromatosis, anthracyclines, TTN truncations, tachycardia induced) dilates thin walls into systolic failure treated as HFrEF with devices; **hypertrophic cardiomyopathy** (autosomal dominant **MYH7 and MYBPC3**, **asymmetric septal hypertrophy** with SAM and dynamic outflow murmur easing on squatting, myocyte disarray) kills young athletes suddenly. HCM management is beta blockers, **septal myectomy or alcohol ablation** for obstruction, ICD by risk (family death, unexplained syncope, massive thickness, NSVT), endocarditis prophylaxis debated, strenuous sport avoided.",
+   "say": "Thin dilated failure is DCM. Thick septum with dynamic murmur is HCM: beta block, myectomy, ICD by risk.",
+   "vis": null
+  },
+  {
+   "tx": "**Restrictive cardiomyopathy** (amyloid with low voltage plus thick walls, sarcoid with AV block, haemochromatosis, endomyocardial fibrosis) stiffens diastolic filling with **Kussmaul sign** (JVP rising on inspiration) shared with constriction; **arrhythmogenic RV cardiomyopathy** (**plakoglobin desmosomes**, epsilon waves with T inversions V1 to V3, VT of LBBB morphology, fibrofatty replacement) restricts athletes with ICD. **Stress Takotsubo** (postmenopausal grief, apical ballooning with clean coronaries) recovers; **LV noncompaction** trabeculates with clots and failure.",
+   "say": "Thick walls with tiny voltage are amyloid restrictive. Epsilon waves with LBBB VT are ARVC: ICD, no sport.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute pericarditis** (viral idiopathic, uremic, post MI Dressler, TB, purulent Staph) gives pleuritic pain easing leaning forward with **diffuse concave ST elevation and PR depression**; treatment is **NSAIDs plus colchicine** (aspirin post MI), steroids only in autoimmune or refractory. **Tamponade** (Beck triad hypotension with muffled sounds and JVD, **pulsus paradoxus**, electrical alternans, diastolic chamber collapse) needs urgent **pericardiocentesis**; **constriction** (calcified rigid sac, **pericardial knock**, equalised diastolic pressures, septal bounce) needs **pericardiectomy**.",
+   "say": "Lean forward relief with diffuse ST elevation is pericarditis: NSAID plus colchicine. Muffled shock with paradoxus is tamponade: needle now.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disease",
+     "Sign",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Myocarditis",
+      "Postviral failure",
+      "Rest, Dallas"
+     ],
+     [
+      "HCM",
+      "Dynamic murmur",
+      "Beta block, myectomy"
+     ],
+     [
+      "Tamponade",
+      "Paradoxus",
+      "Pericardiocentesis"
+     ],
+     [
+      "Constriction",
+      "Knock, Kussmaul",
+      "Pericardiectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-381",
+  "bk2-pat-382",
+  "bk2-pat-383",
+  "bk2-pat-384",
+  "bk2-pat-385",
+  "bk2-pat-386",
+  "bk2-pat-387",
+  "bk2-pat-388",
+  "bk2-pat-389",
+  "bk2-pat-390"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

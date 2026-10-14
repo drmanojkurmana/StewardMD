@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-cns-stimulants",
+ "subject": "pharmacology",
+ "title": "CNS stimulants, ADHD and narcolepsy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**ADHD** (inattention with hyperactivity impairing school, comorbidity with tics and anxiety) is treated by **methylphenidate** (dopamine noradrenaline reuptake, appetite and sleep watched, drug holidays debated) or **atomoxetine** (selective noradrenaline, tics safer, suicidal ideation boxed, slower onset); guanfacine extended release suits tics and aggression. Diagnosis excludes thyroid, anaemia and sleep apnoea; behavioural therapy pairs. Cardiovascular screen (murmur, family sudden death) precedes stimulants.",
+   "say": "School impairing inattention with hyperactivity is ADHD: methylphenidate first, atomoxetine with tics. Hearts screened first.",
+   "vis": null
+  },
+  {
+   "tx": "**Stimulant cautions** (growth slowing, insomnia, appetite loss, **diversion** and misuse, psychosis at dose, seizures lowered threshold) are managed by lowest effective dose with holidays, locked storage and prescription monitoring; **tics** worsen on stimulants favouring atomoxetine or guanfacine. Blood pressure with weight charts follow; substance misuse history favours nonstimulants. Teachers rate progress blinded.",
+   "say": "Stimulants stunt appetite and sleep: holidays with locked cupboards. Tics worsen: atomoxetine instead.",
+   "vis": null
+  },
+  {
+   "tx": "**Narcolepsy** (hypocretin orexin loss, **cataplexy** laughing into weakness, sleep paralysis with hypnagogic hallucinations, MSLT early REM) is kept awake by **modafinil** (eugeroic, no euphoria, contraceptive failure caution) or pitolisant, with **sodium oxybate** nights consolidating sleep and cataplexy; amphetamines legacy. Driving licensed restricted; scheduled naps help. Idiopathic hypersomnia (long unrefreshing sleep) differs without cataplexy.",
+   "say": "Laughing into weakness with dream intrusions is narcolepsy: modafinil days, oxybate nights. Pills fail contraception: warn.",
+   "vis": null
+  },
+  {
+   "tx": "**Caffeine** (adenosine antagonism, neonatal **apnoea** treated, withdrawal headaches) and **theophylline** (narrow index, seizures, CYP interactions) stimulate modestly; **cocaine** (vasospasm MI with excited delirium, chest pain benzodiazepines not beta blockers, rhabdomyolysis) harms acutely. **Nootropics** (piracetam and analogues, evidence thin, myoclonus niche) are counselled realistically. Energy drinks stack caffeine with taurine risking arrhythmia.",
+   "say": "Neonatal apnoea of prematurity is caffeine territory. Cocaine chest pain never gets beta blockers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stimulant",
+     "Role",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Methylphenidate",
+      "ADHD first",
+      "Growth, diversion"
+     ],
+     [
+      "Atomoxetine",
+      "Tics ADHD",
+      "Suicidal box"
+     ],
+     [
+      "Modafinil",
+      "Narcolepsy days",
+      "Contraception"
+     ],
+     [
+      "Caffeine",
+      "Neonatal apnoea",
+      "Withdrawal"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-191",
+  "bk2-phm-192",
+  "bk2-phm-193",
+  "bk2-phm-194",
+  "bk2-phm-195",
+  "bk2-phm-196",
+  "bk2-phm-197",
+  "bk2-phm-198",
+  "bk2-phm-199",
+  "bk2-phm-200"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

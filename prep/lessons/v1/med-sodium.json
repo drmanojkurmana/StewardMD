@@ -1,66 +1,60 @@
 {
- "v": 1,
- "module": "med-sodium",
- "subject": "medicine",
- "title": "Hyponatraemia: find the cause, correct slowly, watch the brain",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Hyponatraemia** is usually a water problem, not a salt shortage: excess water intake, SIADH from drugs or illness, vomiting, diuretics, heart or liver failure and adrenal failure all feature. Assess **volume state, medicines, urine and blood osmolality and thyroid and adrenal clues**, and grade symptoms, because confusion, seizures and coma mark severe disease needing senior help (European hyponatraemia guidance).",
-   "say": "Hyponatraemia is usually excess water. Assess volume, medicines and osmolality, and grade symptoms, because confusion and seizures mean severe disease.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Low sodium"
-     },
-     {
-      "id": "b",
-      "label": "Volume + medicines + osmolality"
-     },
-     {
-      "id": "c",
-      "label": "Severe symptoms? Senior help"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Correction must be **slow and within guideline limits**: a rapid rise can cause osmotic demyelination and permanent brain injury, a risk highest in chronic, malnourished and alcohol-related cases. Hypertonic saline is reserved for severe symptoms under senior supervision with frequent sodium checks. Treat the cause (stop the culprit drug, replace true losses) and recheck sodium on schedule, not by feel.",
-   "say": "Correct slowly within guideline limits. Too-rapid correction can permanently injure the brain; hypertonic saline is for severe symptoms under senior care.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Risk",
-     "Guard"
-    ],
-    "rows": [
-     [
-      "Rapid rise",
-      "Osmotic demyelination"
-     ],
-     [
-      "Severe symptoms",
-      "Senior-led hypertonic care"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Never guess a correction rate from memory: use the current guideline and local protocol, document the plan and the recheck times, and hand over the latest sodium and trend. New confusion in a hyponatraemic patient is deterioration until proved otherwise. Exact limits are protocol territory and are flagged, not improvised, in this lesson.",
-   "say": "Use guideline limits and local protocol, document recheck times, and treat new confusion as deterioration.",
-   "vis": null
+  "v": 1,
+  "module": "med-sodium",
+  "subject": "medicine",
+  "title": "Sodium and water balance: hypo- and hypernatraemia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**History** (**confusion** seizures falls sodium clues, **drugs** thiazides SSRIs carbamazepine, **SIADH** lung tumour euvolemic, **Addison** pigmented hypotensive craving, **losses** vomiting diarrhoea diuretics, **thirst** polydipsia DI lithium, **heart** liver overload oedema, **post-op** hypotonic fluids) with **viva** (**hyponatraemic** confused faller, **hypernatraemic** thirsty unfed elder) profiles; **volume** (hypo eu hyper sorts) states. Sodiums drift.",
+      "say": "Confusions drugs SIADHs Addisons is history: losses drain thirsts drive hearts fail post-ops dilute volumes state hyponatraemics seize hypernatraemics thirst restricts plan. Salts shift.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**volume** JVP oedema turgor postural, **neuro** GCS seizures focal, **skin** pigmented Addison vitiligo, **oedema** cardiac liver overload, **dry** tachycardic losses, **head** injury DI clues, **chest** tumour SIADH) with **bedside** (**osmolality** serum urine bedside math, **urine** sodium SIADH wastes, **glucose** hyperglycaemic corrects) maths; **myelinolysis** (rapid correct warns) guards. Brains swell.",
+      "say": "Volumes neuros skins oedemas is exam: dries tachy heads injure chests harbour osmolalities math urines waste glucoses correct myelinolyses warn pontines lock restricts slow corrects check. Waters shift.",
+      "vis": null
+    },
+    {
+      "tx": "**Investigations** (**serum** sodium trends corrected glucose, **urine** osmolality sodium SIADH cerebral, **cortisol** short synacthen Addison, **TSH** hypothyroid mimics, **water** deprivation desmopressin DI, **imaging** lung pituitary hunts) with **differentials** (**hypovolemic** dry wastes, **euvolemic** SIADH adrenal thyroid, **hypervolemic** oedematous fails, **DI** dilute despite thirst) sorts; **endocrine** (pituitary adrenal decides) meets. Osmoles guide.",
+      "say": "Serums urines cortisols TSHs is Ix: deprivations test imagings hunt hypovolemics fill euvolemics restrict hypervolemics drain DIs spray endocrines meet DDAVPs give demyelinations avoid. Numbers direct.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**restrict** SIADH fluids salt tablets, **hypertonic** seizures coma 100 mL, **isotonic** hypovolemic fills, **DDAVP** central DI sprays, **correct** 8 to 10 daily limits, **treat** tumour adrenal thyroid causes, **thirst** hypernatraemic waters) with **traps** (**myelinolysis** rapid correct locks, **overcorrect** DDAVP clamps, **chronic** slow respects) closes; **follow** (sodium neuro checks) tracks. Sodiums steady.",
+      "say": "Restricts hypertonics isotonics DDAVPs is Rx: corrects limit treats cure thirsts water myelinolyses lock overcorrects clamp chronics respect follows track checks repeat wishes respect. Salts settle.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-351",
+    "bk2-med-352",
+    "bk2-med-353",
+    "bk2-med-354",
+    "bk2-med-355",
+    "bk2-med-356",
+    "bk2-med-357",
+    "bk2-med-358",
+    "bk2-med-359",
+    "bk2-med-360"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

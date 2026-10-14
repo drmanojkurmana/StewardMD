@@ -19,3 +19,19 @@ the sheet opens the old reorder sheet (`openToolsCustomize`, still `ACT.customiz
 search). Role-locked tools are listed and explain themselves on tap. Search lists "All tools" too
 (`search.js` EXTRA_TOOLS). Test: `test/run-all-tools-ui.mjs`; `run-home-sheet-drag-handle.mjs` and
 `run-govschemes-ui.mjs` reach Customize through the new route.
+
+## Grouped by role, starter set, Recently used (2026-10-13)
+Owner: tools are overwhelming and hard to arrange. `tool-groups.js` (`window.SMD_TOOL_GROUPS`, loaded just before
+`home.js`) holds the data; `home.js` uses it when present and the flag `smd_tool_groups` is on (default; `"0"` or
+`?toolgroups=0` turns it off).
+- **All tools sheet:** Recently used (up to 4, key `smd_tools_recent`, tool ids only) then one `<details>` section per
+  role (`GROUPS`), the user's own role first, open and marked "Your role"; others closed (all open with no role).
+  Every tool sits in one section; a tool missing from `GROUPS` lands in "More tools". Rows show `DESC[act]`, the
+  one-line description, in place of the subtitle. Search: every word, any order, over title + subtitle + description;
+  while searching all sections open, empty ones and Recently used hide; clearing restores what was open.
+- **Starter set:** with no `smd_home_tools` saved, `homeToolVisible` shows `starter(role, kit)`: the `PACKS[kit]`
+  tools, then `STARTER[role]` (or `none`), at most 8, skipping tools locked for the role and `ON_HOME_ALREADY`
+  (the quick actions and chips above the grid). `homeToolPrefsForWrite()` saves the starter as explicit prefs on the
+  first pin/hide, so the grid never jumps; after that it behaves exactly as before.
+- **Adding a tool:** add it to `HOME_TOOLS`, to one `GROUPS[].acts` and to `DESC` (the unit test fails otherwise).
+- Tests: `test/tool-groups.test.mjs`, `test/run-tool-groups-ui.mjs` (390 px, both themes, kill switch).

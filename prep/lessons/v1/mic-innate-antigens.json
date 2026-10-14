@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "mic-innate-antigens",
+ "subject": "microbiology",
+ "title": "Innate immunity, complement and antigens",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Innate immunity** strikes without memory: skin and mucosa with lysozyme and defensins bar entry, while **pattern recognition receptors** (TLR4 sensing LPS, TLR5 flagellin, NOD sensing muramyl dipeptide) trigger inflammation. **Phagocytosis** (chemotaxis, opsonin dependent engulfment by C3b and IgG Fc, respiratory burst killing) clears most invaders; **NK cells** kill MHC-I bare targets virally infected, and **interferons** (alpha beta antiviral, gamma macrophage activating) bridge to adaptive responses. Fever with acute phase proteins (CRP, MBL) follows IL-1, IL-6 and TNF.",
+   "say": "No memory, no delay: innate strikes first. Missing MHC invites NK killing.",
+   "vis": null
+  },
+  {
+   "tx": "**Complement** converges on C3 through three doors: **classical** (C1q binding antibody Fc, needs immune complexes), **lectin** (mannose binding lectin on microbial sugars), and **alternative** (spontaneous C3 tickover amplified on unprotected surfaces, properdin stabilised). Downstream, **C3b opsonises**, **C3a and C5a** (anaphylatoxins) recruit and degranulate mast cells, and **MAC C5b to C9** punches osmotic holes. Regulation (C1 inhibitor, factor H, factor I, DAF, protectin) protects self; paroxysmal nocturnal haemoglobinuria (GPI anchor loss, Ham and sucrose tests, eculizumab) shows regulation failure.",
+   "say": "Three doors, one C3: classical needs antibody, lectin needs sugar, alternative ticks over. C3b sticks, C5a calls, MAC kills.",
+   "vis": null
+  },
+  {
+   "tx": "**Complement deficiencies** pattern predictably: **C1 inhibitor deficiency** (hereditary angioedema, C4 low with normal C3, danazol or C1 concentrate, no urticaria unlike allergy), **C3 deficiency** (recurrent pyogenic infections, worst opsonic failure), **terminal C5 to C9 deficiency** (recurrent neisserial disease), **factor H deficiency** (atypical HUS with microangiopathy). **Eculizumab** (anti C5, PNH and aHUS) mandates meningococcal vaccination as MAC blockade invites neisseriae. CH50 (classical) with AH50 (alternative) screens; component assays pinpoint.",
+   "say": "Swelling without itch with low C4 is C1 inhibitor deficiency. Eculizumab demands meningococcal vaccines.",
+   "vis": null
+  },
+  {
+   "tx": "**Antigens** need shape and size: complete antigens immunise alone while **haptens** (penicillin, nickel) need carrier proteins to turn immunogenic. **Epitopes** are the contact patches antibodies grip; **T dependent antigens** (proteins, memory with class switching) differ from **T independent** (polysaccharides, IgM only, no memory, poor infants). **MHC-I** (all nucleated cells, CD8 killers) versus **MHC-II** (antigen presenting cells, CD4 helpers) route responses; **superantigens** (TSST, streptococcal pyrogenic exotoxins) clamp MHC-II outside the groove firing polyclonal storms.",
+   "say": "Small haptens need carriers to immunise. Polysaccharides make IgM without memory; proteins remember.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathway",
+     "Trigger",
+     "Fails as"
+    ],
+    "rows": [
+     [
+      "Classical",
+      "Antibody C1q",
+      "C1INH angioedema"
+     ],
+     [
+      "Lectin",
+      "MBL sugars",
+      "Pyogenic repeats"
+     ],
+     [
+      "Alternative",
+      "C3 tickover",
+      "aHUS, PNH"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-101",
+  "bk2-mic-102",
+  "bk2-mic-103",
+  "bk2-mic-104",
+  "bk2-mic-105",
+  "bk2-mic-106",
+  "bk2-mic-107",
+  "bk2-mic-108",
+  "bk2-mic-109",
+  "bk2-mic-110"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

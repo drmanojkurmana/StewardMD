@@ -1,0 +1,165 @@
+{
+ "module": "sur-prostate",
+ "subject": "surgery",
+ "title": "Benign prostatic hyperplasia, prostatic adenocarcinoma, Gleason grading, and radical prostatectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Benign prostatic hyperplasia arises within the periurethral transition **zone** of the prostate gland under the permissive endocrine influence of dihydrotestosterone, synthesized locally by 5-alpha reductase type 2. Progressive nodular hyperplasia compresses the prostatic urethra, producing bladder outlet obstruction and lower urinary tract symptoms. Prostatic adenocarcinoma, by contrast, develops predominantly in the posterior peripheral zone in seventy percent of cases, remaining asymptomatic until local extension or distant bone metastases supervene.",
+   "say": "Benign prostatic hyperplasia arises in the periurethral transition zone under dihydrotestosterone stimulation, causing urinary outflow obstruction. Prostatic adenocarcinoma develops primarily in the posterior peripheral zone, presenting silently without early obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prostate anatomical zone",
+     "Associated pathological entity",
+     "Clinical presentation pattern"
+    ],
+    "rows": [
+     [
+      "Transition zone",
+      "Benign prostatic hyperplasia (BPH)",
+      "Early urinary outflow obstruction"
+     ],
+     [
+      "Peripheral zone",
+      "Prostatic adenocarcinoma (70%)",
+      "Palpable nodule on digital rectal exam"
+     ],
+     [
+      "Central zone",
+      "Uncommon benign / malignant growth",
+      "Surrounds ejaculatory ducts"
+     ],
+     [
+      "Anterior fibromuscular stroma",
+      "Devoid of glandular tissue",
+      "Non-neoplastic structural zone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serum prostate-specific antigen is a kallikrein-like **serine** protease produced by prostatic epithelial cells to liquefy seminal coagulum. Elevated serum levels indicate disrupted prostatic architecture rather than cancer-specific transformation, occurring in BPH, prostatitis, urinary retention, and trauma. A total PSA level exceeding four nanograms per milliliter warrants diagnostic evaluation. A free-to-total PSA ratio under fifteen percent increases cancer suspicion, while multiparametric MRI utilizing PI-RADS scoring guides targeted transperineal or transrectal biopsies.",
+   "say": "Prostate-specific antigen is an organ-specific serine protease that rises with architectural disruption in cancer, BPH, or prostatitis. A level exceeding four nanograms or a low free-to-total ratio prompts multiparametric MRI and targeted biopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Elevated PSA or abnormal rectal exam"
+     },
+     {
+      "id": "n2",
+      "label": "Multiparametric prostate MRI (PI-RADS)"
+     },
+     {
+      "id": "n3",
+      "label": "Targeted plus systematic core biopsy"
+     },
+     {
+      "id": "n4",
+      "label": "Gleason score & risk stratification"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histopathological grading utilizes the Gleason architecture **scoring** system, combining the most predominant and second most common glandular architectural patterns into five prognostic Grade Groups. Grade Group 1 corresponds to Gleason score 3+3=6, exhibiting excellent clinical prognosis. Grade Group 5 corresponds to Gleason scores 9 and 10, characterized by sheets of undifferentiated cells or comedonecrosis. Staging incorporates digital examination, serum PSA, bone scintigraphy for osteoblastic skeletal metastases, and PSMA PET imaging.",
+   "say": "Histological grading uses the Gleason system, grouping architectural patterns into Grade Groups 1 through 5. Bone scintigraphy and prostate-specific membrane antigen PET scans identify osteoblastic bone metastases in high-risk disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gleason score pattern",
+     "Grade Group designation",
+     "Clinical biological behavior"
+    ],
+    "rows": [
+     [
+      "Gleason 3 + 3 = 6",
+      "Grade Group 1",
+      "Indolent / active surveillance candidate"
+     ],
+     [
+      "Gleason 3 + 4 = 7",
+      "Grade Group 2",
+      "Favorable intermediate risk"
+     ],
+     [
+      "Gleason 4 + 3 = 7",
+      "Grade Group 3",
+      "Unfavorable intermediate risk"
+     ],
+     [
+      "Gleason 4 + 4 = 8",
+      "Grade Group 4",
+      "High risk / aggressive local invasion"
+     ],
+     [
+      "Gleason 9 or 10",
+      "Grade Group 5",
+      "Very high risk / high metastatic potential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of localized prostate cancer encompasses active **surveillance** for low-risk disease, robotic-assisted radical prostatectomy, or external beam radiation with concurrent androgen deprivation therapy. Radical prostatectomy removes the prostate, seminal vesicles, and ampullae of the vasa deferentia, with bilateral pelvic lymphadenectomy for intermediate- and high-risk tumors. For symptomatic BPH refractory to medical alpha-blocker and 5-alpha reductase inhibitor therapy, transurethral resection of the prostate remains the definitive endoscopic benchmark.",
+   "say": "Localized prostate cancer is managed with active surveillance, robotic radical prostatectomy, or external beam radiotherapy with androgen deprivation. Refractory BPH is treated definitively with transurethral resection of the prostate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Radical Prostatectomy",
+     "points": [
+      "Complete prostate & seminal vesicle removal",
+      "Bilateral pelvic lymph node dissection",
+      "Risks: stress incontinence & erectile dysfunction"
+     ]
+    },
+    "right": {
+     "title": "Endoscopic BPH Surgery",
+     "points": [
+      "Transurethral resection of prostate (TURP)",
+      "Removes adenomatous transition zone tissue",
+      "Preserves peripheral zone and outer capsule"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "4c40755d-4000-8000-4c40-755d12345678",
+  "494070a4-4000-8000-4940-70a412345678",
+  "4a407237-4000-8000-4a40-723712345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

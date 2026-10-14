@@ -93,3 +93,17 @@ test("a corrupt model is explained as damaged, with a way out", () => {
 test("corrupt is distinguished from not-installed", () => {
   assert.notEqual(N({ error: "model-corrupted" }), N({ error: "unknown model pack" }));
 });
+
+/* REPORTED 2026-10-12 (screenshot): "Reason: server_error" twice in a row. The server sends the cause
+ * in r.reason (errReason in functions/api/ai), and the notice dropped it. */
+test("a cloud server_error shows the server's reason code", () => {
+  const h = N({ error: "server_error", reason: "provider_rate_limit" });
+  assert.match(h, /Reason: server_error \(provider_rate_limit\)/);
+});
+
+test("no reason, or a reason that is not a short code, adds nothing", () => {
+  assert.match(N({ error: "server_error" }), /Reason: server_error<\/span>/);
+  const h = N({ error: "server_error", reason: "<img src=x onerror=alert(1)> patient John" });
+  assert.match(h, /Reason: server_error<\/span>/);
+  assert.doesNotMatch(h, /img|John/);
+});

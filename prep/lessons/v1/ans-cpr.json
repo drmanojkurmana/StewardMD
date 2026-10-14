@@ -1,66 +1,60 @@
 {
- "v": 1,
- "module": "ans-cpr",
- "subject": "anaesthesia",
- "title": "CPR, BLS and ALS: compressions first, defibrillate shockable rhythms",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "**Cardiac arrest** care starts with recognition, a call for help and **high-quality chest compressions** with minimal interruption. Attach a defibrillator and monitor as soon as possible, because the rhythm decides the pathway: shockable rhythms need early defibrillation, non-shockable rhythms need compressions and adrenaline per protocol (Resuscitation Council UK).",
-   "say": "Recognise arrest, call for help and start high-quality compressions with minimal interruption. Attach the defibrillator early, because the rhythm decides the pathway.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Recognise + call"
-     },
-     {
-      "id": "b",
-      "label": "Compressions"
-     },
-     {
-      "id": "c",
-      "label": "Defibrillator: shockable?"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In **ventricular fibrillation or pulseless ventricular tachycardia**, defibrillate promptly and resume compressions immediately after each shock. In **asystole or pulseless electrical activity**, continue compressions and give protocol drugs while hunting reversible causes. Rotate compressors, use capnography where available, and keep interruptions to seconds, not minutes.",
-   "say": "Shockable rhythms are defibrillated promptly with compressions resumed at once. Non-shockable rhythms need compressions, protocol drugs and a hunt for reversible causes.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Rhythm",
-     "Priority"
-    ],
-    "rows": [
-     [
-      "VF / pulseless VT",
-      "Defibrillate + compressions"
-     ],
-     [
-      "Asystole / PEA",
-      "Compressions + cause hunt"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The reversible causes are the **four Hs and four Ts**: hypoxia, hypovolaemia, hypo- or hyperkalaemia and metabolic upset, hypothermia; tension pneumothorax, tamponade, toxins and thrombus. Treat the cause you find, involve critical care early, and after return of circulation move to structured post-resuscitation care rather than stopping at a pulse.",
-   "say": "Treat reversible causes, the four Hs and four Ts, and move to structured post-resuscitation care once circulation returns.",
-   "vis": null
+  "v": 1,
+  "module": "ans-cpr",
+  "subject": "anaesthesia",
+  "title": "Perioperative cardiopulmonary resuscitation: theatre arrest to ROSC",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Recognition** (**monitors** ECG capnography pressure alarms, **rhythms** VF anaphylaxis bradycardia, **causes** sux drugs LAST bleeding, **team** surgeon anaesthetist roles, **position** supine drapes down, **stop** volatiles insufflation, **call** arrest trolleys help, **time** zero documentation) with **drills** (**trolley** checked defibrillator, **drugs** drawn labelled, **airway** difficult plans) prepares; **records** (download strips) saves. Alarms sound.",
+      "say": "Monitors rhythms causes teams is recognition: positions drop stops halt calls summon times stamp drills rehearse trolleys stock drugs draw airways plan records save defibrillators charge. Theatres arrest.",
+      "vis": null
+    },
+    {
+      "tx": "**CPR** (**compress** over drapes recoil rate, **defibrillate** pads gel shockable, **adrenaline** anaphylaxis arrest doses, **atropine** sux bradycardia glycopyrrolate, **fluids** bleeding pressure legs, **blood** massive switch on, **cause** tamponade tension pneumothorax, **sterile** compressions continue) with **roles** (**compressor** swaps fatigue, **airway** 100 oxygen, **scribe** times doses) rotates; **capnography** (quality ROSC) guides. Chests pump.",
+      "say": "Compresses defibrillates adrenalines atropines is CPR: fluids fill bloods flow causes reverse steriles persist roles rotate capnographies guide quality numbers ROSCs return. Sternums press.",
+      "vis": null
+    },
+    {
+      "tx": "**Causes** (**anaphylaxis** chlorhexidine latex adrenaline, **LAST** bupivacaine lipid seizures, **bleed** concealed cell salvage TXA, **tamponade** surgical open-chest massage, **embolism** CO2 venous air locks, **gas** critical hypoxia hypercarbia, **electrolytes** calcium magnesium arrests, **hypothermia** irrigation cold rewarm) with **fixes** (**open** chest massage clamps, **bypass** femoral crash ECMO, **packs** bleeding pressure) rescues; **surgeon** (source controls) operates. Reversibles reverse.",
+      "say": "Anaphylaxes LASTs bleeds tamponades is causes: embolisms lock gases starve electrolytes swing hypothermias chill fixes open bypasses bridge packs press surgeons clamp sources tie. Killers yield.",
+      "vis": null
+    },
+    {
+      "tx": "**After** (**ROSC** stabilise ICU handover, **debrief** team patient family, **report** DATIX learning, **restock** trolley drugs checklists, **follow** neuroprognosis days, **support** second-victim counselling, **audit** arrest registry NAP, **consent** disclosure candour) with **traps** (**premature** moving unstable, **blame** culture silence, **documentation** gaps litigation) closes; **rest** (fatigue rotas) protects. Teams recover.",
+      "say": "ROSCs debriefs reports restocks is after: follows track supports counsel audits learn consents disclose traps gape prematures move blames silence documentations gap rests rota fatigues ease. Services learn.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-ane-151",
+    "bk2-ane-152",
+    "bk2-ane-153",
+    "bk2-ane-154",
+    "bk2-ane-155",
+    "bk2-ane-156",
+    "bk2-ane-157",
+    "bk2-ane-158",
+    "bk2-ane-159",
+    "bk2-ane-160"
+  ],
+  "src": [],
+  "refs": [
+    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-ana2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "neo-resuscitation",
+  "subject": "paediatrics",
+  "title": "Neonatal resuscitation and stabilization: NRP steps",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Preparation** (**trained team**, **warmer** preheated, **suction** bulb then catheter, **PPV** device tested, **pulse oximeter** right wrist preductal, **cord clamp** delayed 30 to 60 seconds vigorous) with **initial** (**dry warm stimulate**, **position sniffing**, **clear airway** mouth nose, **tone breathing** assess) starts every birth; **meconium** (vigorous routine, **non-vigorous** tube clears) triages. Apgar scores resuscitation not delays.",
+      "say": "Dry warm stimulate sniff clear assess tone breathing every birth: meconium vigorous routine floppy tubes. Scores never delay.",
+      "vis": null
+    },
+    {
+      "tx": "**PPV** (**apnoea gasping HR under 100**, **40 to 60 per minute**, **PIP 20 to 25**, **PEEP 5**, **room air term 21 percent**, preterms 21 to 30 percent titrated; **chest rise** watches, **MR SOPA** mask reposition suction open pressure airway) with **CPAP** (laboured spontaneously breathing, grunting) supports; **oxygen** (preductal targets minutes 60 to 65 at 1 min rising to 85 to 95 by 10) titrates blender. Prolonged PPV suctions stomach.",
+      "say": "Blue limp slow under 100 gets bag mask 40 60 room air: rise fails MR SOPA fixes. Right wrist targets titrate.",
+      "vis": null
+    },
+    {
+      "tx": "**Compressions** (**HR under 60 after 30 seconds effective PPV**, **3 to 1 ratio**, **90 compressions 30 breaths**, **two thumbs** encircling, **depth third** chest, **100 percent oxygen** raised) with **adrenaline** (**HR under 60 after compressions**, **0.01 to 0.03 mg per kg IV** preferred, **ETT 0.05 to 0.1** while access secured, repeat 3 to 5 minutes) and **volume** (**normal saline 10 ml per kg**, pallor poor perfusion bleed) expands; **UVC** (umbilical venous emergency) accesses. Hands encircle thumbs press.",
+      "say": "Sixty despite good bagging gets thumbs 3 to 1 oxygen up: still slow adrenaline IV tenths. Saline tens pale bleeds.",
+      "vis": null
+    },
+    {
+      "tx": "**Post** (**glucose** hypoglycaemia screens, **temperature** 36.5 to 37.5 servo, **antibiotics** sepsis risk, **HIE** cooling criteria, **transport** warm glucose monitored) with **ethics** (**22 to 25 weeks** parental counselling, **non-initiation** anomalies, **stopping** 20 minutes asystole) closes; **debrief** (team review, records) learns. Golden hour stabilises.",
+      "say": "Warm sugared screened cooled selected transported monitored: twenty minutes flat stops counselled. Debriefs learn.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "NRP",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "Start",
+            "Dry stimulate",
+            "Meconium triage"
+          ],
+          [
+            "PPV",
+            "40 60 room",
+            "MR SOPA"
+          ],
+          [
+            "Pump drugs",
+            "3 to 1 IV",
+            "UVC"
+          ],
+          [
+            "After",
+            "Warm sugar",
+            "Debrief"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-paed-001",
+    "bk2-paed-002",
+    "bk2-paed-003",
+    "bk2-paed-004",
+    "bk2-paed-005",
+    "bk2-paed-006",
+    "bk2-paed-007",
+    "bk2-paed-008",
+    "bk2-paed-009",
+    "bk2-paed-010"
+  ],
+  "src": [],
+  "refs": [
+    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-nel1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-haemolytic-acquired",
+ "subject": "pathology",
+ "title": "Acquired haemolytic anaemias: immune, microangiopathic and infectious",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acquired haemolysis divides into immune (Coombs positive), mechanical microangiopathic (schistocytes, Coombs negative), infectious, drug oxidant and marrow clone causes. **Schistocytes** are sheared red fragments proving mechanical destruction in small vessels or on prosthetic valves. The Coombs test plus film splits the differential faster than any panel.",
+   "say": "Acquired haemolysis splits by Coombs and film. Schistocytes prove shearing. Immune coats test positive. Film plus Coombs triages fastest.",
+   "vis": null
+  },
+  {
+   "tx": "**Thrombotic thrombocytopenic purpura** from ADAMTS13 failure lets ultra large von Willebrand multimers platelet clump microvessels, shearing red cells and consuming platelets with fever, renal and neurological fluctuation (classic pentad rarely complete). Plasma exchange is emergent and must not wait for ADAMTS13 results when schistocytes, thrombocytopenia and haemolysis combine without another cause.",
+   "say": "TTP clumps platelets through uncleaved von Willebrand factor, shearing cells and confusing brains. Exchange plasma immediately on suspicion; do not wait for enzyme proof.",
+   "vis": null
+  },
+  {
+   "tx": "**Haemolytic uraemic syndrome** instead injures renal endothelium, typically after Shiga toxin E coli bloody diarrhoea in children, causing haemolysis, thrombocytopenia and acute kidney injury dominating over neurology. Atypical HUS from complement dysregulation recurs and responds to complement blockade. TTP and HUS overlap but organ emphasis and age separate them usefully.",
+   "say": "HUS follows bloody diarrhoea in children and destroys kidneys mainly. TTP confuses brains mainly in adults. Organ emphasis separates the twins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TTP",
+     "points": [
+      "ADAMTS13 severe deficiency",
+      "Neurology prominent, renal milder",
+      "Adults; plasma exchange emergent",
+      "Platelets very low, schistocytes florid"
+     ]
+    },
+    "right": {
+     "title": "HUS",
+     "points": [
+      "Shiga toxin endothelium or complement defect",
+      "Renal failure dominant",
+      "Children after bloody diarrhoea (typical)",
+      "Supportive care; eculizumab for atypical"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Autoimmune haemolysis** warm and cold types were contrasted previously; drug immune haemolysis adds hapten (penicillin), immune complex (quinidine) and true autoantibody (methyldopa) mechanisms resolving on drug withdrawal. Paroxysmal cold haemoglobinuria after viral illness in children lyses cells through biphasic Donath Landsteiner antibody, darkening urine after cold exposure.",
+   "say": "Drugs haemolyse by hapten, immune complex or autoantibody tricks stopping when withdrawn. Childhood post viral cold antibody lyses after chilling. Withdrawal is diagnostic therapy.",
+   "vis": null
+  },
+  {
+   "tx": "Infections haemolyse directly: malaria ruptures parasitised cells cyclically, babesiosis mimics it in asplenic patients, clostridial sepsis alpha toxin lyses massively and bartonella in immunosuppression destroys cells. **Mechanical valves** and malignant hypertension or DIC shear cells chronically, so haemolysis stems always ask for film, Coombs, cultures and drug history together.",
+   "say": "Malaria and clostridia lyse from inside; valves and DIC shear from outside. Film, Coombs, cultures and drug history together solve haemolysis.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-281",
+  "bk2-pat-282",
+  "bk2-pat-283",
+  "bk2-pat-284",
+  "bk2-pat-285",
+  "bk2-pat-286",
+  "bk2-pat-287",
+  "bk2-pat-288",
+  "bk2-pat-289",
+  "bk2-pat-290"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

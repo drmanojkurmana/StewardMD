@@ -148,10 +148,60 @@ function poolFor(items, exam) {
 const countFor = (t, exam) => (exam === "usmle" && t.usmle >= 5 ? t.usmle : t.count || 0);
 function shuffle(a, rnd) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
 
+/* Topic-diverse selection (owner 2026-10-13): server-side port of the prep.js rule (that file is ES5 browser code,
+ * not importable here). Concept key: answer head + 2-3 rarest stem words (same stopwords as the client);
+ * deterministic from the passed rnd. Kept in step with prep.js DIV_STOP/conceptKeyOf by test/prep-arena-server.test.mjs. */
+const DIV_STOP = new Set(("a an the and or of to in on for with without from into by at as is are was were be been has have had can may should would could not all any each such more most one two also than then that this these those which what when where who how why but its his her their they them she you your patient patients following among between during after before over under common commonly cause causes caused due associated present presents presented presentation diagnosis diagnosed treatment management clinical acute chronic disease condition syndrome seen shows shown used use given year years old day days case question best").split(" "));
+function divNorm(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/ +/g, " ").replace(/^ | $/g, ""); }
+function divTokensOf(it) {
+  const o = it && it.o;
+  let ans = "";
+  if (o && Number.isInteger(it.a) && it.a >= 0 && it.a < o.length) {
+    const head = [];
+    for (const w of divNorm(o[it.a]).split(" ")) {
+      if (head.length >= 2) break;
+      if ((w.length >= 3 && !DIV_STOP.has(w) && /[a-z]/.test(w)) || (/^[0-9]+$/.test(w) && w.length >= 2)) head.push(w);
+    }
+    ans = head.join(" ");
+  }
+  const words = [];
+  for (const w of divNorm(it && it.q).split(" ")) {
+    if (w.length >= 3 && !DIV_STOP.has(w) && /[a-z]/.test(w) && !/^[0-9]+$/.test(w) && words.indexOf(w) < 0) words.push(w);
+  }
+  return { ans, words };
+}
+function divKeys(items) {
+  const df = new Map();
+  const toks = items.map((it) => { const t = divTokensOf(it); for (const w of t.words) df.set(w, (df.get(w) || 0) + 1); return t; });
+  return toks.map((t) => "t:" + (t.ans || "?") + "|" + t.words.slice().sort((a, b) => (df.get(a) - df.get(b)) || (a < b ? -1 : 1)).slice(0, 3).join("+"));
+}
+// diverseOrder(items, rnd): same items, consecutive items rarely sharing a concept (greedy largest-non-last + rnd).
+function diverseOrder(items, rnd) {
+  if (items.length < 3) return items.slice();
+  const ks = divKeys(items), groups = new Map();
+  items.forEach((it, i) => { if (!groups.has(ks[i])) groups.set(ks[i], { k: ks[i], q: [], r: rnd() }); groups.get(ks[i]).q.push(it); });
+  const order = [...groups.values()];
+  for (const g of order) shuffle(g.q, rnd);
+  const out = [];
+  let last = null;
+  while (out.length < items.length) {
+    let best = null;
+    for (const g of order) {
+      if (!g.q.length || g.k === last) continue;
+      if (!best || g.q.length > best.q.length || (g.q.length === best.q.length && g.r < best.r)) best = g;
+    }
+    if (!best) for (const g of order) if (g.q.length) { best = g; break; }
+    if (!best) break;
+    out.push(best.q.pop()); last = best.k;
+  }
+  return out;
+}
+
 /* drawItems(bank, exam, n, seed) -> [{id, q, o, a, s, m}], at most n, deterministic for a seed and bank version.
  * Spread like MOCKS: every subject with questions gets one (subjects in seeded order, so a short draw does not always
  * favour the same subjects), the rest in proportion to question counts; inside a subject, up to half as many modules
- * as slots, items round-robin across them. Flagged (disputed key) items never appear. */
+ * as slots, items round-robin across them, each module pool concept-ordered and the final set interleaved so Arena
+ * sets cover the topic map. Flagged (disputed key) items never appear. */
 export async function drawItems(bank, exam, n, seed) {
   const rnd = mulberry32(seedFrom(String(seed)));
   const subs = [];
@@ -173,7 +223,7 @@ export async function drawItems(bank, exam, n, seed) {
     if (!x.k) continue;
     const mods = shuffle(x.mods.slice(), rnd).slice(0, Math.max(1, Math.ceil(x.k / 2)));
     const pools = [];
-    for (const t of mods) { const f = await bank.module(x.s, t.file); const p = shuffle(poolFor(f && f.items, exam), rnd); if (p.length) pools.push({ m: t.id, p }); }
+    for (const t of mods) { const f = await bank.module(x.s, t.file); const p = diverseOrder(poolFor(f && f.items, exam), rnd); if (p.length) pools.push({ m: t.id, p }); }
     for (let got = 0, j = 0, dry = 0; got < x.k && pools.length && dry < pools.length; j = (j + 1) % pools.length) {
       const pl = pools[j], it = pl.p.shift();
       if (!it) { dry++; continue; }
@@ -183,5 +233,5 @@ export async function drawItems(bank, exam, n, seed) {
       out.push({ id: it.id, q: String(it.q || ""), o: it.o.map(String), a: it.a, s: x.s, m: pl.m });
     }
   }
-  return out;
+  return diverseOrder(out, rnd);
 }

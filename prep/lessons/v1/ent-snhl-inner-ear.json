@@ -1,0 +1,94 @@
+{
+ "v": 1,
+ "module": "ent-snhl-inner-ear",
+ "subject": "ent",
+ "title": "Sensorineural hearing loss and inner ear disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sensorineural loss** localises to cochlea (sensory) or auditory nerve (neural or retrocochlear): both air and bone conduction fall together without gap, Weber lateralises to the better ear and Rinne stays positive. Speech discrimination suffers, recruitment and tinnitus feature, and tuning forks can mislead in dead ears without masking. Audiometry plus speech scores grade and lateralise disease.",
+   "say": "Inner ear or nerve loss drops air and bone together. Weber flees to the good ear. Speech clarity suffers beyond mere loudness.",
+   "vis": null
+  },
+  {
+   "tx": "**Meniere disease** gives episodic vertigo lasting tens of minutes to hours with fluctuating low frequency sensorineural loss, tinnitus and aural fullness in one ear, from endolymphatic hydrops. Attacks cluster then burn out leaving progressive loss. Lifestyle, betahistine or diuretics per local practice, intratympanic therapy and surgery escalate for disabling vertigo, while bilateral disease limits ablative options.",
+   "say": "Meniere attacks spin for minutes to hours with roaring tinnitus, fullness and fluctuating deafness in one ear.",
+   "vis": null
+  },
+  {
+   "tx": "**Sudden sensorineural loss** (30 dB or more over three frequencies within days) is an otologic emergency: most is idiopathic or viral, but stroke and neuroma hide among cases, so urgent audiometry, early steroids per protocol timing, and MRI internal auditory meatus follow. Delayed treatment worsens recovery odds. Bilateral sudden loss suggests systemic, drug or autoimmune causes.",
+   "say": "Sudden deafness is an emergency: confirm quickly, treat early, scan the nerve pathway. Delay costs hearing.",
+   "vis": null
+  },
+  {
+   "tx": "**Vestibular schwannoma (acoustic neuroma)** grows slowly from the vestibular nerve in the cerebellopontine angle causing unilateral progressive sensorineural loss, tinnitus and imbalance, later trigeminal and facial signs when large. Bilateral tumours define neurofibromatosis type 2. MRI gadolinium of internal meatus diagnoses; observation, radiosurgery or microsurgery balance growth against hearing and facial function.",
+   "say": "Slow one sided deafness with tinnitus needs neuroma excluded by MRI. Bilateral tumours mean NF2.",
+   "vis": null
+  },
+  {
+   "tx": "Other inner ear diseases fill exams: **presbycusis** symmetric high frequency ageing loss; noise trauma notches at 4 kHz; ototoxic aminoglycosides and cisplatin kill outer hair cells base first (high frequencies) needing monitoring; perilymph fistula and superior canal dehiscence cause pressure or sound induced vertigo (Tullio); autoimmune inner ear disease progresses bilaterally over weeks and answers steroids.",
+   "say": "Ageing and noise take high tones first. Ototoxic drugs need hearing monitoring. Sound induced spinning suggests canal dehiscence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Vertigo pattern",
+     "Hearing pattern"
+    ],
+    "rows": [
+     [
+      "Meniere disease",
+      "Episodic 20 min to hours",
+      "Fluctuating low frequency SNHL"
+     ],
+     [
+      "BPPV",
+      "Seconds on rolling over",
+      "Normal hearing"
+     ],
+     [
+      "Labyrinthitis",
+      "Days severe after ear infection",
+      "SNHL with deaf ear"
+     ],
+     [
+      "Canal dehiscence",
+      "Sound or pressure induced brief",
+      "Conductive like gap with good bone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-051",
+  "bk2-ent-052",
+  "bk2-ent-053",
+  "bk2-ent-054",
+  "bk2-ent-055",
+  "bk2-ent-056",
+  "bk2-ent-057",
+  "bk2-ent-058",
+  "bk2-ent-059",
+  "bk2-ent-060"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra Diseases of ENT 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2p2-ent",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

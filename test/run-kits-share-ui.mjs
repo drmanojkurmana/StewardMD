@@ -74,7 +74,8 @@ try {
   ok(await until('!!(window.SMD_SHARE&&window.SMD_KITS&&window.OPDEMR&&window.SMD_DOCS&&window.SMD_REVIEW)', 25000), 'app loaded with kits sharing');
   await ev(`['introPoster','splash','accountGate','introOverlay','smdBootSplash'].forEach(k=>document.getElementById(k)?.remove());document.body.classList.remove('dark');1`);
   ok(await ev('SMD_SHARE.on()'), 'sharing is on by default (no flag set)');
-  ok(await until(`!!document.querySelector('#rnavToolsGrid .rnav-tile[data-act="kxinbox"]')`, 8000), 'the Colleagues tile is on Home by default');
+  // Home starts with a role starter set (tool-groups.js, 2026-10-13); Colleagues is always in All tools.
+  ok(await until(`SMD_HOME_TOOLS().some(t=>t.act==='kxinbox')`, 8000), 'the Colleagues tool is available by default (All tools)');
   await as('uA');
 
   /* ---- the hospital's version inside the kit, kit history ---- */

@@ -33,9 +33,9 @@
   100-vs-100 against per-protocol 88-vs-92, CHD web of causation).
   Accessible (`<title>`/`<desc>` + lesson alt text), same stage, fonts and
   palette as the stats set. Every printed number recomputed by an
-  independent parse-and-assert pass (`/tmp/verify_epi_figs.py`); two label
-  gaps it caught (unprinted 174 totals, abbreviated ENVIRONMENT) were fixed
-  before wiring. No external images, still no third-party attribution.
+  independent parse-and-assert pass; two label gaps it caught (unprinted
+  174 totals, abbreviated ENVIRONMENT) were fixed before wiring. No
+  external images, still no third-party attribution.
 - **Wired** into the remaining 8 community-medicine epi/stats lessons (9
   steps): `cm-descriptive-epi` x2 (one compare replaced where the curve
   teaches the same point-source content, one empty step), `cm-measures`,

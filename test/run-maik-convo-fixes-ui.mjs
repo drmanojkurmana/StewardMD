@@ -6,7 +6,7 @@
  *     "I found limited StewardMD material" card),
  *   - a time + Copy / Edit icons sit under the clinician's prompt, and Edit puts the prompt back,
  *   - Save stores the answer under a topic and it is listed in the sidebar's "Saved answers",
- *   - an error answer gets "Try again" and no Copy/Regenerate row,
+ *   - an error answer gets "Try again" and no Copy/Regenerate row, and names the server's reason code,
  *   - the AI Usage sheet leads with tokens left and has Refresh.
  *
  * USAGE: BASE=http://localhost:8996/ CHROME=<chrome binary> node test/run-maik-convo-fixes-ui.mjs
@@ -43,7 +43,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 const ANSWER = "AJCC 8th does not contain a separate grade-only rule; staging uses T, N, M plus biomarkers.\n\n" +
   "| Profile | Grade 2 |\n|---|---|\n| Triple negative | IIB \\rightarrow IIIB |\n\n- **T2** is over 2 cm and up to 5 cm\n- N1 is 1 to 3 mobile nodes";
 const STUB = (text, err) => `
-  var r = ${err ? `{ error: "server_error" }` : `{ text: ${JSON.stringify(text)}, engine: "cloud" }`};
+  var r = ${err ? `{ error: "server_error", reason: "provider_rate_limit" }` : `{ text: ${JSON.stringify(text)}, engine: "cloud" }`};
   SMD_AI.explainGrounded = function () { return Promise.resolve(r); };
   SMD_AI.explainGroundedStream = function (p, o, onDelta) { return Promise.resolve(r); };
   return 1;`;
@@ -113,6 +113,7 @@ try {
   let errSeen = false;
   for (let i = 0; i < 30; i++) { await sleep(500); if (await ev(`var a=document.querySelectorAll("#maikBody .maik-b.ai"); var l=a[a.length-1]; return !!(l && /unavailable/i.test(l.textContent));`) === true) { errSeen = true; break; } }
   ok(errSeen, "the server error shows");
+  ok(await ev(`var a=document.querySelectorAll("#maikBody .maik-b.ai"), l=a[a.length-1]; return /Reason: server_error \\(provider_rate_limit\\)/.test(l.textContent);`) === true, "the error names the server's reason code");
   ok(await ev(`var a=document.querySelectorAll("#maikBody .maik-b.ai"), l=a[a.length-1]; return !l.querySelector(".maik-fb") && [].slice.call(l.querySelectorAll("button")).some(function(b){return b.textContent==="Try again"});`) === true, "error bubble: Try again, no Copy/Regenerate/rating row");
   await ev(STUB("Recovered answer."));
   const nBefore = await ev(`return document.querySelectorAll("#maikBody .maik-b.ai").length;`);

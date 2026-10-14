@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-mpn-mds",
+ "subject": "pathology",
+ "title": "Myeloproliferative neoplasms and myelodysplastic syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Myeloproliferative neoplasms** are clonal stem cell proliferations overproducing mature blood cells: polycythaemia vera (red cells), essential thrombocythaemia (platelets) and primary myelofibrosis (fibrotic marrow with leukoerythroblastic blood). JAK2 V617F drives most cases through constitutive signalling, with CALR and MPL mutations filling many JAK2 negative thrombocythaemia and fibrosis cases.",
+   "say": "Myeloproliferative clones overproduce mature cells under JAK2 family signalling. Red, platelet or fibrotic phenotypes share mutations. CALR and MPL fill JAK2 gaps.",
+   "vis": null
+  },
+  {
+   "tx": "**Polycythaemia vera** raises red mass with low erythropoietin, panmyelosis, aquagenaic itching after showers, erythromelalgia burning red feet, gout and thrombotic risk in unusual sites like hepatic veins (Budd Chiari). Venesection to target haematocrit plus antiplatelet therapy prevents clots, distinguishing true vera from secondary erythrocytosis of hypoxia or EPO tumours where EPO rises.",
+   "say": "True polycythaemia suppresses erythropoietin, itches after showers and clots in odd veins. Secondary red excess raises erythropoietin from hypoxia or tumours. Hormone level splits them.",
+   "vis": null
+  },
+  {
+   "tx": "**Primary myelofibrosis** replaces marrow with reticulin and collagen so blood production moves to spleen and liver (extramedullary), causing massive splenomegaly, teardrop red cells (dacrocytes), leukoerythroblastic film and constitutional sweats and weight loss. Dry tap on aspiration is a clue, and transformation to acute leukaemia ends many courses.",
+   "say": "Fibrotic marrows squeeze teardrop cells out and move blood making to a huge spleen. Dry taps and dacrocytes signpost myelofibrosis. Leukaemia transforms it fatally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polycythaemia vera",
+     "points": [
+      "High red mass, LOW erythropoietin",
+      "JAK2 almost universal",
+      "Itch, erythromelalgia, thrombosis",
+      "Venesection based control"
+     ]
+    },
+    "right": {
+     "title": "Secondary erythrocytosis",
+     "points": [
+      "High red mass, HIGH erythropoietin",
+      "Hypoxia, altitude, EPO secreting tumours",
+      "No JAK2 clone",
+      "Treat the hypoxic or tumour cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Myelodysplastic syndromes** are the mirror image: clonal marrows producing dysplastic, ineffective cells causing cytopenias despite cellular marrows, in older adults. Ring sideroblasts, blasts percentage and cytogenetics grade risk toward acute myeloid leukaemia. The 5q deletion syndrome (macrocytic anaemia, lobated megakaryocytes) uniquely responds to lenalidomide.",
+   "say": "Dysplastic clones fill marrows yet starve blood through ineffective production. Blast count and chromosomes grade leukaemia risk. Deleting 5q creates a drug responsive subtype.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic myeloid leukaemia** (BCR ABL1, Philadelphia chromosome) is the tyrosine kinase prototype with leukocytosis, basophilia and splenomegaly cured functionally by imatinib class inhibitors, bridging proliferative and leukaemic worlds. Mastocytosis (KIT D816V, raised tryptase) and hypereosinophilic clonal disorders complete the WHO proliferative family examiners sample.",
+   "say": "CML kinase BCR ABL is blocked by imatinib transforming prognosis. Basophilia and huge counts signpost it. Philadelphia chromosome made targeted therapy famous.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-291",
+  "bk2-pat-292",
+  "bk2-pat-293",
+  "bk2-pat-294",
+  "bk2-pat-295",
+  "bk2-pat-296",
+  "bk2-pat-297",
+  "bk2-pat-298",
+  "bk2-pat-299",
+  "bk2-pat-300"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -440,9 +440,9 @@
     var go2 = function (pp) {
       loadingScreen("New questions");
       loadPairs(pp).then(function (lists) {
-        var per = Math.ceil(Math.min(n, 50) / Math.max(1, lists.length)), out = [];
-        lists.forEach(function (l) { out = out.concat(H.pure.adaptiveNew(H.pure.poolFor(l.items, ex.id, s.hid && s.hid.ids), s.cards, "p:" + l.m, H.pure.targetDifficulty(s.mod[l.m]), per)); });
-        done(H.pure.shuffle(out), "New questions", "No new questions left in these modules. Pick a subject below.");
+        var per = Math.ceil(Math.min(n, 50) / Math.max(1, lists.length)), out = [], td = H.today();
+        lists.forEach(function (l) { out = out.concat(H.pure.diversePick(H.pure.poolFor(l.items, ex.id, s.hid && s.hid.ids), per, { cards: s.cards, dk: "p:" + l.m, today: td, mt: s.mt, target: H.pure.targetDifficulty(s.mod[l.m]), seed: "plan-new:" + l.m + ":" + td })); });
+        done(H.pure.diverseOrder(out), "New questions", "No new questions left in these modules. Pick a subject below.");
       });
     };
     if (pairs.length) return go2(pairs);
