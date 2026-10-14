@@ -283,3 +283,8 @@ Waves #1596-#1617 all merged (NEL3 #1615, NEL4 #1616, NEL5 #1617 confirmed). Gap
 - Wave DER1 (branch books2-derm1, PR #1639): 11 modules + 2 KB + 110 MCQs bk2-der-001..110. New maikbook2/dermatology subject; prep.js dermatology wired maikbook2; total 4130 -> 4240. Gates: 31+26 tests pass, app 33/33, similarity 0, stems new, answers 27/28/28/27.
 - Wave DER2 (branch books2-derm2 stacked, PR #1640): final 11 modules + 1 KB + 110 MCQs bk2-der-111..220; total 4240 -> 4350. Gates: 90/90, similarity 0, stems new, answers 28/27/27/28. Dermatology 22/22 COMPLETE pending merges.
 - No dose regimens anywhere; NLEP labelled; zero Anthropic API calls; no PDFs deleted.
+
+## CLOSE 2026-10-14 batch 3 + 3b (muse Wonder)
+- DER1 #1639 + DER2 #1640 squash-merged (clinix-ui browser job passed on both; unit-tests passed; Cloudflare Pages fail is known infra). OTA run 38596514039 success. Live on main: 22 derm overlays, 220 MCQs bk2-der-001..220, 3 module KBs, 22 lessons indexed (gap1013f, untouched).
+- Delivered this session: ortho verified 17/17 live; derm 22/22 complete (lessons pre-existing, maikbook2 220 new, 3 KBs new). No dose regimens; NLEP labelled; similarity 0; stems new; $0 Anthropic spend; no PDFs deleted.
+- Still blocked: vascular/CTVS books (sva-arterial, sva-venous-access lesson-less); 4 med orphans + sur-shock-transfusion unindexed (topics covered generally). BOOKS2-DONE.md withheld until lead confirms blocked scope.
