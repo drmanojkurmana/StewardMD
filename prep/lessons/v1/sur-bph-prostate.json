@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "sur-bph-prostate",
+  "subject": "surgery",
+  "title": "Prostate and bladder outlet: BPH drugs, TURP and PSA",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**BPH** (**IPSS** scores, **hesitancy weak stream** dribbling, **retention** catheterise, **DRE** smooth enlarged, **PSA** age density, **uroflow** 15 ml peak, **residual** 100 ml) with **drugs** (**tamsulosin** relaxes ejaculation, **finasteride** halves PSA 6 months shrinks, **tadalafil** daily, **combination** large) treats mild; **surgery** (retention stones infections renal) indicates. Streams score.",
+      "say": "Weak dribbling smooth big slow trickles is BPH: blockers relax reductase halves combos large. Scores flow.",
+      "vis": null
+    },
+    {
+      "tx": "**TURP** (**chips** resect verumontanum, **glycine** irrigant, **TUR syndrome** hyponatraemia confusion, **bipolar** saline safer, **laser** HoLEP enucleates, **catheter** 2 days, **stricture** meatal) with **minimally** (**UroLift** preserves ejaculation, **Rezum** steam, **iTIND** temporary, **PAE** embolises) spares sex; **open** (over 80 g) removes. Chips wash.",
+      "say": "Shaved chips glycine salts confuse is TURP: bipolars saline lasers enucleate lifts steam stents embolise. Glands debulk.",
+      "vis": null
+    },
+    {
+      "tx": "**PSA** (**over 4** biopsies, **density** 0.15, **velocity** rises, **free** low cancers, **MRI** PI-RADS fusion, **TRUS** 12 cores sepsis, **active surveillance** low risk) with **prostatitis** (**acute** fever tender ciprofloxacin, **chronic** pelvic alpha blockers, **granulomatous** BCG, **abscess** drains) and **cancer** (Gleason MRI stage, **prostatectomy** nerves spare, **radiation** brachy) screens; **DRE** (nodules hard) feels. Fingers screen.",
+      "say": "Rising dense MRIs fuse cores survey is PSA pathway: fevers tender cipro pelvics alpha nodules hard feel. Grades stage.",
+      "vis": null
+    },
+    {
+      "tx": "**Retention** (**catheterise** urethral suprapubic, **trial without** alpha blocker, **Precipitants** anticholinergics, **upper tracts** ultrasound creatinine) with **incontinence** (stress post prostatectomy Kegels, **urge** antimuscarinics, **overflow** retention drains, **sling** mesh) and **UTI** (recurrent evaluate, **prophylaxis** nightly) manages; **haematuria** (visible cystoscopy, **CT urogram** upper) images. Bladders drain.",
+      "say": "Blocked catheters trials triggers uppers watch is retention: leaks Kegels urges calm overflows drain bloods scope. Pressures image.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prostate",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "BPH",
+            "IPSS flow",
+            "Blockers"
+          ],
+          [
+            "TURP",
+            "Chips glycine",
+            "Bipolar"
+          ],
+          [
+            "PSA",
+            "Density MRI",
+            "Survey"
+          ],
+          [
+            "Bladder",
+            "Catheter trial",
+            "Scope"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-uro-011",
+    "bk2-uro-012",
+    "bk2-uro-013",
+    "bk2-uro-014",
+    "bk2-uro-015",
+    "bk2-uro-016",
+    "bk2-uro-017",
+    "bk2-uro-018",
+    "bk2-uro-019",
+    "bk2-uro-020"
+  ],
+  "src": [],
+  "refs": [
+    "Campbell-Walsh-Wein Urology 12th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-uro1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-renal-urinary-tumours",
+ "subject": "pathology",
+ "title": "Renal cell carcinoma, Wilms and urothelial cancer",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Renal cell carcinoma** (smoking, obesity, hypertension, dialysis acquired cysts) subtypes sort genetics: **clear cell** (**VHL** loss, hypervascular, commonest), papillary (MET, multifocal), **chromophobe** (Birt-Hogg-Dube, pale, best prognosis), collecting duct (aggressive). Classic triad (haematuria, flank pain, palpable mass) now rare; incidental imaging finds most. Treatment is **partial or radical nephrectomy** (cytoreductive debated) with **TKI and checkpoint inhibitors** (sunitinib, nivolumab) for metastatic; active surveillance suits small elderly masses.",
+   "say": "Hypervascular clear kidney mass is RCC: VHL lost. Small elderly masses watch; spread gets TKI plus immunotherapy.",
+   "vis": null
+  },
+  {
+   "tx": "**Paraneoplastic syndromes** flag RCC: **polycythaemia** (ectopic EPO), **hypercalcaemia** (PTHrP), hypertension (renin), **Stauffer syndrome** (nonmetastatic hepatic dysfunction with raised ALP), Cushing (ACTH), amyloid. New varicocele (left gonadal vein obstruction) or IVC thrombus warns locally advanced disease; lung cannonballs seed commonly. Paraneoplasia resolves with nephrectomy and recurs with relapse, serving as markers.",
+   "say": "New polycythaemia with kidney mass is EPO paraneoplasia. Left varicocele with haematuria is renal vein thrombus.",
+   "vis": null
+  },
+  {
+   "tx": "**Wilms tumour** (nephroblastoma, WT1 and WT2, triphasic blastemal with epithelial and stromal elements) presents as **painless abdominal mass** in toddlers that **crosses midline** (versus neuroblastoma which does not cross and calcifies with raised catecholamines); associations include **WAGR** (aniridia, genitourinary anomalies, retardation), Denys-Drash and **Beckwith-Wiedemann**. Treatment (vincristine with actinomycin and doxorubicin, nephrectomy timing by protocol) cures over 90 percent; **anaplasia** (p53) worsens needing intensification. Lung metastases resect.",
+   "say": "Painless midline crossing toddler mass is Wilms: chemo cures mostly. Aniridia plus mass is WAGR: delete WT1.",
+   "vis": null
+  },
+  {
+   "tx": "**Urothelial carcinoma** (smoking, **aniline dyes** and aromatic amines, cyclophosphamide, aristolochic acid, chronic schistosoma haematobium squamous) presents with **painless haematuria**; **carcinoma in situ** (flat high grade, BCG responsive) with papillary Ta/T1 graded low versus high. Non muscle invasive gets **TURBT with intravesical BCG** (live attenuated, cystitis with BCG sepsis caution); muscle invasive needs **neoadjuvant cisplatin with radical cystectomy** and diversion. Upper tract (renal pelvis, ureter) mirrors bladder with nephroureterectomy.",
+   "say": "Painless haematuria in a smoker is urothelial until scoped: TURBT stages. Flat red high grade is CIS: BCG.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urinary tumour",
+     "Gene",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Clear RCC",
+      "VHL",
+      "Nephrectomy"
+     ],
+     [
+      "Wilms",
+      "WT1/WT2",
+      "Chemo cures"
+     ],
+     [
+      "Bladder",
+      "Smoking/dyes",
+      "TURBT plus BCG"
+     ],
+     [
+      "Chromophobe",
+      "BHD",
+      "Best outlook"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-431",
+  "bk2-pat-432",
+  "bk2-pat-433",
+  "bk2-pat-434",
+  "bk2-pat-435",
+  "bk2-pat-436",
+  "bk2-pat-437",
+  "bk2-pat-438",
+  "bk2-pat-439",
+  "bk2-pat-440"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-immunodeficiency-transplant",
+ "subject": "microbiology",
+ "title": "Primary immunodeficiency and transplant rejection",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antibody deficiencies** announce after maternal IgG wanes at 6 months with recurrent sinopulmonary bacterial infections: **X linked agammaglobulinaemia** (Bruton tyrosine kinase, absent B cells with all isotypes low, live vaccines avoided, **IVIG** lifelong), **common variable immunodeficiency** (adults, low IgG with low IgA or IgM, autoimmunity with granulomas and bronchiectasis), selective **IgA deficiency** (commonest, mostly silent, anaphylaxis to blood products with anti IgA), and hyper IgM (CD40L, opportunists with neutropenia). Isohaemagglutinins absent flag functionally.",
+   "say": "Six month old with bacterial pneumonias and no B cells is Bruton: IVIG for life. Adult low IgG with autoimmunity is CVID.",
+   "vis": null
+  },
+  {
+   "tx": "**Combined and cellular defects** threaten earlier and wider: **SCID** (T low with variable B, ADA or cytokine chain defects, newborn **TREC screening**, BMT or gene therapy before live vaccines kill), **DiGeorge** (22q11, thymic aplasia with **hypocalcaemia**, conotruncal hearts, irradiated blood only), **Wiskott-Aldrich** (X linked, eczema with **thrombocytopenia of small platelets** and infections), **Job syndrome** (STAT3, high IgE with retained primary teeth and cold abscesses). **Chronic granulomatous disease** (NADPH oxidase, **DHR test**, catalase positive Aspergillus and Staph) and **leukocyte adhesion deficiency** (CD18, delayed cord separation) break phagocytes.",
+   "say": "Absent thymic shadow with low calcium is DiGeorge: irradiate blood. Small platelets plus eczema is Wiskott-Aldrich.",
+   "vis": null
+  },
+  {
+   "tx": "**Transplant rejection** times itself: **hyperacute** (preformed ABO or anti HLA DSA, minutes, fibrinoid necrosis with thrombosis, never treat, remove), **acute cellular** (T cells, weeks to months, tubulitis with endotheliitis, pulse steroids or ATG), **acute humoral** (DSA with C4d staining, plasmapheresis with IVIG and rituximab), **chronic** (months to years, graft vasculopathy with interstitial fibrosis, untreatable, re transplant listed). Prevention is ABO compatibility, **HLA matching** (DR matters most), **complement dependent crossmatch** with flow, and panel reactive antibody minimised by desensitisation.",
+   "say": "Minutes blue graft is hyperacute: preformed antibody, remove. Tubulitis weeks later is cellular: pulse steroids.",
+   "vis": null
+  },
+  {
+   "tx": "**Graft versus host disease** reverses direction (graft attacking host) after BMT or transfusion in immunodeficiency: acute (within 100 days, skin rash with **GI diarrhoea and liver cholestasis**) versus chronic (sicca, scleroderma, bronchiolitis obliterans). Irradiated blood products prevent transfusion associated GVHD. Maintenance uses **calcineurin inhibitors** (ciclosporin, tacrolimus: nephrotoxic with tremor and diabetes), **mycophenolate or azathioprine**, **mTOR sirolimus**, steroids and basiliximab induction; levels monitored as infection and **PTLD** (EBV driven) stalk over suppression.",
+   "say": "Rash plus diarrhoea plus cholestasis post BMT is acute GVHD. Irradiate blood for immunodeficients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rejection",
+     "When",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Hyperacute",
+      "Minutes",
+      "Remove graft"
+     ],
+     [
+      "Cellular acute",
+      "Weeks-months",
+      "Steroids or ATG"
+     ],
+     [
+      "Humoral acute",
+      "Weeks-months",
+      "Plasma exchange"
+     ],
+     [
+      "Chronic",
+      "Years",
+      "Re transplant"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-111",
+  "bk2-mic-112",
+  "bk2-mic-113",
+  "bk2-mic-114",
+  "bk2-mic-115",
+  "bk2-mic-116",
+  "bk2-mic-117",
+  "bk2-mic-118",
+  "bk2-mic-119",
+  "bk2-mic-120"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

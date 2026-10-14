@@ -70,7 +70,13 @@
   {
    "tx": "**Publication bias** arises when small studies with null or negative results remain unpublished. A **funnel plot** graphs each study's effect against its precision; without bias it looks like a symmetrical inverted funnel. Asymmetry suggests small-study effects. **Egger's test** supports visual inspection, but asymmetry is a warning rather than proof. Searching trial registries and grey literature helps reduce this bias.",
    "say": "Publication bias arises when small studies with null or negative results remain unpublished. A funnel plot graphs each study's effect against its precision. Without bias it looks like a symmetrical inverted funnel. Asymmetry suggests small study effects. Egger's test supports visual inspection, but asymmetry is a warning rather than proof. Searching trial registries and grey literature helps reduce this bias.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-funnel.svg",
+    "alt": "Funnel plot with precise studies near the pooled effect at the top, scattered small studies below, and a gap where small negative studies are missing.",
+    "caption": "A missing corner suggests small negative studies never reached print.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Risk of bias** must be judged for each included study before synthesis. The **RoB 2** tool suits randomised trials, while **ROBINS-I** suits non-randomised studies of interventions, where confounding by indication is a major concern. **QUADAS-2** is used for diagnostic accuracy studies. **GRADE** then rates the certainty of evidence per outcome, starting randomised trials at high and observational studies at low.",

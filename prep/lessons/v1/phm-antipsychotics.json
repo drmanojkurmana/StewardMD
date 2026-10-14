@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-antipsychotics",
+ "subject": "pharmacology",
+ "title": "Antipsychotics: D2 blockade, EPS and clozapine",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Typical antipsychotics** (chlorpromazine, haloperidol; pure **D2 blockade**) control positive symptoms but hyperprolactinaemia (galactorrhoea, amenorrhoea, sexual dysfunction from tuberoinfundibular blockade) with **extrapyramidal symptoms** burden adherence; low potency sedates and hypotenses (alpha blockade) while high potency freezes. **Atypical antipsychotics** (serotonin-dopamine antagonism) spare EPS variably at metabolic cost. Depot decanoates (haloperidol, fluphenazine, paliperidone palmitate) enforce adherence in noncompliant psychosis.",
+   "say": "Pure D2 blocks psychosis and prolactin together: milky amenorrhoea with stiffness is typical. Depots enforce adherence.",
+   "vis": null
+  },
+  {
+   "tx": "**Atypical fingerprints** guide choice: **clozapine** (treatment resistant gold, **agranulocytosis** with weekly then monthly ANC, myocarditis, seizures, sialorrhea, no EPS, smoking induces CYP1A2 lowering levels on cessation), **olanzapine** (metabolic syndrome with diabetes), **quetiapine** (sedative, cataracts debated, bipolar depression), **risperidone** (prolactin raising), **ziprasidone** (QT prolonging, weight neutral), **aripiprazole** (partial D2 agonist, least metabolic, akathisia). Thioridazine (retinal deposits, QT) retired mostly.",
+   "say": "Resistant psychosis with ANC watched is clozapine. Metabolic weight is olanzapine; prolactin is risperidone.",
+   "vis": null
+  },
+  {
+   "tx": "**Extrapyramidal symptoms** time themselves: **acute dystonia** (hours to days, oculogyric crisis, **procyclidine or benztropine** rescue), **akathisia** (weeks, restless pacing, **propranolol** or benzodiazepines), drug induced **parkinsonism** (bradykinesia with rigidity, anticholinergics or amantadine, switch atypical), **tardive dyskinesia** (months to years, orofacial chorea, **valbenazine or deutetrabenazine** VMAT2, prevention by minimal dose). Rabbit syndrome (perioral tremor) mimics TD.",
+   "say": "Oculogyric hours after haloperidol is dystonia: procyclidine. Pacing weeks after is akathisia: propranolol.",
+   "vis": null
+  },
+  {
+   "tx": "**Neuroleptic malignant syndrome** (dopamine blockade: lead pipe rigidity with fever, autonomic instability, raised CK, delirium) is treated by **stopping drug with dantrolene or bromocriptine** and support; **QT prolongation** (thioridazine, ziprasidone, haloperidol IV) torsades needing ECG watched. **Clozapine** monitoring (ANC, myocarditis troponin, constipation ileus, nocturnal enuresis) sustains the resistant gold; re-challenge after neutropenia debates haematology. Smoking cessation doubles clozapine levels into toxicity.",
+   "say": "Rigid fever CK on antipsychotic is NMS: stop, dantrolene. Quitting smoking doubles clozapine: cut dose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antipsychotic",
+     "Signature harm",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Haloperidol",
+      "EPS, NMS",
+      "Stiffness"
+     ],
+     [
+      "Clozapine",
+      "Agranulocytosis",
+      "ANC"
+     ],
+     [
+      "Olanzapine",
+      "Metabolic",
+      "Sugar lipids"
+     ],
+     [
+      "Ziprasidone",
+      "QT",
+      "ECG"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-171",
+  "bk2-phm-172",
+  "bk2-phm-173",
+  "bk2-phm-174",
+  "bk2-phm-175",
+  "bk2-phm-176",
+  "bk2-phm-177",
+  "bk2-phm-178",
+  "bk2-phm-179",
+  "bk2-phm-180"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

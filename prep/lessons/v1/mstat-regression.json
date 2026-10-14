@@ -42,7 +42,13 @@
   {
    "tx": "**Linear regression** estimates how the mean outcome changes per unit change in an exposure. The slope is the **regression coefficient**, and in multiple regression each slope is adjusted for the other predictors. A confidence interval excluding zero indicates statistical significance. Regression describes association, so causal claims need design support such as randomisation.",
    "say": "Linear regression estimates how the mean outcome changes for each unit change in an exposure. The slope is the regression coefficient, and in multiple regression each slope is adjusted for the other predictors. A confidence interval that excludes zero indicates statistical significance. Regression describes association, so causal claims need design support such as randomisation.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-scatter.svg",
+    "alt": "Three scatter plots: points exactly on a rising line for r equals plus 1, a shapeless cloud for r equals 0, and points exactly on a falling line for r equals minus 1.",
+    "caption": "Each line is a regression line: its slope is the regression coefficient, positive, zero, or negative.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Logistic regression** relates predictors to a binary outcome by modelling the **log odds** of the event. Each coefficient becomes a **log odds ratio** once exponentiated, giving an **adjusted odds ratio** that accounts for other covariates. A value of one indicates no association. Odds ratios mirror **risk ratios** only when the event is uncommon; with frequent outcomes they overstate the relative risk, so results should be worded as odds.",

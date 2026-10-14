@@ -1,0 +1,160 @@
+{
+ "module": "sur-uro-congenital",
+ "subject": "surgery",
+ "title": "Congenital urinary tract anomalies, ureteropelvic obstruction, duplex ureter, and pyeloplasty",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Congenital pelviureteric junction obstruction represents the most frequent **cause** of significant pediatric hydronephrosis, characterized by impaired urine transport from the renal pelvis into the proximal ureter. Intrinsic aperistaltic ureteral segments or extrinsic mechanical compression by lower pole crossing accessory renal vessels account for the obstruction. Infants present with palpable abdominal masses or urinary tract infections, while older children develop intermittent Dietl crises with severe episodic flank pain following excessive fluid consumption and diuresis.",
+   "say": "Pelviureteric junction obstruction is the most common cause of neonatal hydronephrosis. Aperistaltic ureteral segments or crossing vessels impede flow, causing Dietl crises with flank pain after heavy fluid intake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological mechanism",
+     "Underlying pathological defect",
+     "Typical age of clinical detection"
+    ],
+    "rows": [
+     [
+      "Intrinsic UPJ obstruction",
+      "Aperistaltic collagenous muscular segment",
+      "Antenatal ultrasound or newborn period"
+     ],
+     [
+      "Extrinsic crossing vessel",
+      "Lower pole accessory renal artery compression",
+      "Older children and young adults"
+     ],
+     [
+      "High ureteral insertion",
+      "Angulation at pelvic-ureteral junction",
+      "Childhood intermittent flank fullness"
+     ],
+     [
+      "Secondary UPJ stricture",
+      "Chronic reflux-induced pelvic tortuosity",
+      "Associated with high-grade VUR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluation requires renal ultrasonography and dynamic diuretic **renography** utilizing technetium-99m mercaptoacetyltriglycine (MAG3) with intravenous furosemide challenge. A persistent non-clearing excretion curve with an elimination half-time exceeding twenty minutes confirms functional obstruction. The surgical gold standard for symptomatic or progressive functional obstruction is the Anderson-Hynes dismembered pyeloplasty, excising the aperistaltic segment, trimming the redundant renal pelvis, and reconstructing a widely spatulated, tension-free pelviureteric anastomosis over an internal double-J stent.",
+   "say": "Diuretic MAG3 renography confirms obstruction when clearance half-time exceeds twenty minutes. Anderson-Hynes dismembered pyeloplasty represents the gold standard surgical repair, excising the aperistaltic segment and constructing a spatulated anastomosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hydronephrosis on renal ultrasound"
+     },
+     {
+      "id": "n2",
+      "label": "MAG3 diuretic renogram with furosemide"
+     },
+     {
+      "id": "n3",
+      "label": "Obstructive washout curve (T1/2 > 20 min)"
+     },
+     {
+      "id": "n4",
+      "label": "Anderson-Hynes dismembered pyeloplasty"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Duplex collecting systems follow the classic Weigert-Meyer **law** of embryological development in complete ureteral duplication. The upper pole moiety ureter inserts ectopically into the bladder more inferomedially than normal, frequently terminating in an obstructing ureterocele. The lower pole moiety ureter inserts orthotopically into the bladder higher and more laterally, possessing a shortened intramural tunnel that strongly predisposes to vesicoureteral reflux and recurrent pyelonephritis. Ectopic ureter insertion distal to the external urinary sphincter produces continuous incontinence in females.",
+   "say": "In duplex systems, the Weigert-Meyer law dictates that the upper pole ureter inserts inferomedially and tends to obstruct with a ureterocele. The lower pole ureter inserts laterally and refluxes. Ectopic insertion distal to the sphincter causes continuous female dribbling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Duplex renal moiety",
+     "Bladder insertion location",
+     "Pathological complication"
+    ],
+    "rows": [
+     [
+      "Upper pole moiety ureter",
+      "Inferomedial ectopic insertion",
+      "Ureterocele and urinary obstruction"
+     ],
+     [
+      "Lower pole moiety ureter",
+      "Superolateral orthotopic insertion",
+      "Vesicoureteral reflux & pyelonephritis"
+     ],
+     [
+      "Ectopic ureter in females",
+      "Vagina or urethra below sphincter",
+      "Continuous urinary dribbling"
+     ],
+     [
+      "Ectopic ureter in males",
+      "Prostatic urethra / seminal vesicle",
+      "Epididymitis without incontinence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autosomal dominant polycystic kidney disease results from mutations in the **PKD1** gene on chromosome 16 or PKD2 on chromosome 4, manifesting in adult life with bilateral palpable renal enlargement, flank pain, microscopic hematuria, hypertension, and progressive renal insufficiency. Extrarenal manifestations include hepatic cysts, mitral valve prolapse, and intracranial berry aneurysms of the circle of Willis. Bladder exstrophy represents a severe midline infraumbilical defect with an open exposed bladder plate and pubic diastasis, treated by multidisciplinary staged functional closure.",
+   "say": "Autosomal dominant polycystic kidney disease produces bilateral massive cyst formation, hypertension, and intracranial berry aneurysms. Bladder exstrophy features an exposed bladder wall and wide pubic diastasis requiring staged reconstructive closure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ADPKD (Adult Form)",
+     "points": [
+      "PKD1 (16p13) or PKD2 (4q21) mutations",
+      "Massive bilateral cysts in adult life",
+      "Associated with cerebral berry aneurysms"
+     ]
+    },
+    "right": {
+     "title": "ARPKD (Infantile Form)",
+     "points": [
+      "PKHD1 fibrocystin gene mutation",
+      "Congenital bilateral enlarged spongy kidneys",
+      "Obligatory congenital hepatic fibrosis"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "c5da20a6-4000-8000-c5da-20a612345678",
+  "c4da1f13-4000-8000-c4da-1f1312345678",
+  "c3da1d80-4000-8000-c3da-1d8012345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

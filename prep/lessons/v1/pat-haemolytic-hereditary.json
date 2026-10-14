@@ -1,0 +1,85 @@
+{
+ "v": 1,
+ "module": "pat-haemolytic-hereditary",
+ "subject": "pathology",
+ "title": "Hereditary haemolytic anaemias: membrane and enzyme defects",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Haemolysis** shortens red cell survival causing anaemia with reticulocytosis, raised unconjugated bilirubin and LDH, low haptoglobin and gallstones or splenomegaly when chronic. Hereditary causes split into membrane defects, enzyme defects and haemoglobin disorders. Film morphology is the fastest guide: spherocytes, elliptocytes, bite cells or sickle forms each name their disease.",
+   "say": "Haemolysis raises reticulocytes, bilirubin and LDH while haptoglobin falls. Film shape names the cause: spheres, bites or sickles. Chronic haemolysis stones the gallbladder.",
+   "vis": null
+  },
+  {
+   "tx": "**Hereditary spherocytosis** from spectrin, ankyrin or band 3 defects loses membrane surface so cells become spherical, rigid and trapped by the spleen (extravascular haemolysis). Spherocytes lack central pallor with raised MCHC, osmotic fragility increases and splenectomy cures haemolysis while spherocytes persist. Aplastic crisis from parvovirus and pigment gallstones complicate childhood.",
+   "say": "Spherocytes lose membrane, ball up and die in the spleen. Fragility testing confirms them. Removing the spleen stops haemolysis though spheres remain.",
+   "vis": null
+  },
+  {
+   "tx": "**G6PD deficiency** (X linked) leaves red cells defenceless against oxidant stress, so infections, fava beans, naphthalene or drugs like primaquine and dapsone trigger episodic intravascular haemolysis with Heinz bodies and bite cells. Between crises counts normalise, and enzyme assay during crisis falsely normalises from young reticulocytes, a classic testing trap.",
+   "say": "G6PD deficient cells burst under oxidant stress from beans, infections or drugs, showing Heinz bodies and bite cells. Test enzyme between crises, not during.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Membrane defect (spherocytosis)",
+     "points": [
+      "Chronic extravascular (splenic) haemolysis",
+      "Spherocytes, high MCHC, family history",
+      "Splenectomy curative for haemolysis",
+      "Pigment gallstones in childhood"
+     ]
+    },
+    "right": {
+     "title": "Enzyme defect (G6PD)",
+     "points": [
+      "Episodic intravascular haemolysis after triggers",
+      "Heinz bodies and bite cells in crisis",
+      "Avoid oxidant triggers; support crises",
+      "X linked; favism after broad beans"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pyruvate kinase deficiency** starves red cells of ATP causing chronic haemolysis with spiky echinocytes, splenomegaly and iron overload even without transfusions from ineffective erythropoiesis signals. Paroxysmal nocturnal haemoglobinuria is acquired instead: PIGA mutation loses CD55 and CD59 anchors, causing complement intravascular haemolysis, dark morning urine, thrombosis and marrow failure.",
+   "say": "Pyruvate kinase lack starves cells of ATP for lifelong haemolysis. PNH is acquired anchor loss causing complement bursts, dark urine and clots. Hereditary versus acquired splits them.",
+   "vis": null
+  },
+  {
+   "tx": "Autoimmune haemolysis must be separated by the **direct antiglobulin (Coombs) test**: warm IgG disease (lymphoma, lupus, drugs) coats cells for splenic removal and responds to steroids, while cold IgM agglutinin disease (mycoplasma, lymphoma) fixes complement causing acral ischaemia. Hereditary films are Coombs negative, the decisive branch point in haemolysis stems.",
+   "say": "Positive Coombs means immune haemolysis; negative means hereditary or mechanical. Warm disease responds to steroids in spleen; cold disease clumps in cold fingers.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-pat-271",
+  "bk2-pat-272",
+  "bk2-pat-273",
+  "bk2-pat-274",
+  "bk2-pat-275",
+  "bk2-pat-276",
+  "bk2-pat-277",
+  "bk2-pat-278",
+  "bk2-pat-279",
+  "bk2-pat-280"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-batch2-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -37,40 +37,23 @@
   {
    "tx": "**Standard deviation** (SD) measures how far individual observations scatter around the mean. **Standard error** (SE) measures the precision of the sample mean and equals SD divided by the square root of n. Increasing sample size shrinks the SE but leaves the SD unchanged. A small SEM does not mean the data are less variable; it only means the mean is estimated more precisely.",
    "say": "Standard deviation measures how far individual observations scatter around the mean. Standard error measures the precision of the sample mean and equals the standard deviation divided by the square root of n. Increasing sample size shrinks the standard error but leaves the standard deviation unchanged. A small standard error does not mean the data are less variable; it only means the mean is estimated more precisely.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-sd-se.svg",
+    "alt": "Standard deviation fixed at 10 while the standard error falls from 5.0 at n equals 4 to 2.0 at n equals 25 and 1.0 at n equals 100.",
+    "caption": "SD describes the patients and never shrinks. SE describes the mean and shrinks as n grows.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "In a **normal distribution**, mean plus or minus 1 SD covers about 68 percent of values, plus or minus 2 SD about 95 percent, and plus or minus 3 SD about 99.7 percent. A **z score** is (value minus mean) divided by SD. Z scores between minus 3 and plus 3 support approximate normality. Skewness and kurtosis quantify departures from normal shape in non-normal data.",
    "say": "In a normal distribution, the mean plus or minus one standard deviation covers about 68 percent of values, plus or minus two standard deviations about 95 percent, and plus or minus three standard deviations about 99.7 percent. A z score is the value minus the mean, divided by the standard deviation. Z scores between minus 3 and plus 3 support approximate normality. Skewness and kurtosis quantify departures from normal shape in non-normal data.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "1 SD",
-      "sub": "about 68%"
-     },
-     {
-      "id": "b",
-      "label": "2 SD",
-      "sub": "about 95%"
-     },
-     {
-      "id": "c",
-      "label": "3 SD",
-      "sub": "about 99.7%"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/stats-normal.svg",
+    "alt": "Normal bell curve centred on the mean, with bands at one, two and three standard deviations covering about 68, 95 and 99.7 percent of values.",
+    "caption": "The 68-95-99.7 rule: most values sit within two standard deviations of the mean.",
+    "ar": 1.5384615384615385
    }
   },
   {

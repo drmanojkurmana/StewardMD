@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-stress-trauma",
+ "subject": "psychiatry",
+ "title": "Trauma and stressor-related disorders",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Exposure to actual or threatened death, serious injury or sexual violence (directly, witnessed, learned of in close others, or repeated occupational exposure) can produce trauma disorders separated by time and symptom pattern. **Acute stress disorder** runs three days to one month with intrusion, dissociation, avoidance and arousal. **PTSD** persists beyond one month across four clusters: intrusion (flashbacks, nightmares), avoidance, negative cognition and mood, and hyperarousal (hypervigilance, exaggerated startle, insomnia).",
+   "say": "Under a month is acute stress; beyond a month with four clusters is PTSD. Flashbacks plus avoidance plus vigilance is the signature.",
+   "vis": null
+  },
+  {
+   "tx": "**Adjustment disorder** is emotional or behavioural symptoms within three months of an identifiable stressor, out of proportion or impairing, resolving within six months after stressor ends, and not better explained by another disorder or normal bereavement. It is a common exam distractor against major depression: if full major depressive episode criteria are met, depression is diagnosed instead. Subtypes specify anxious, depressed or conduct features.",
+   "say": "Stressor linked distress not meeting bigger diagnoses is adjustment disorder. Full depression criteria outrank it.",
+   "vis": null
+  },
+  {
+   "tx": "Trauma focused psychological therapy is first line for PTSD: **trauma focused CBT** and **EMDR** (eye movement desensitisation and reprocessing) have strongest evidence, offered after stabilisation without mandatory single session debriefing, which is ineffective and potentially harmful when forced. SSRIs (sertraline, paroxetine class examples) or venlafaxine are second line or adjuncts; prazosin nightmares evidence is mixed. Benzodiazepines worsen outcomes and are avoided.",
+   "say": "Trauma focused CBT or EMDR first. Never force single session debriefing. Avoid benzodiazepines in PTSD.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Complex PTSD (ICD pattern) adds disturbances in self organisation (affect dysregulation, negative self concept, relational difficulty) after prolonged or repeated trauma like childhood abuse or captivity, needing phase based care (safety and stabilisation, trauma processing, reintegration). Children present with re enactment play, regression and somatic complaints. Comorbid depression, substance use and traumatic brain injury must be co treated, and safeguarding current safety precedes trauma processing always.",
+   "say": "Prolonged trauma adds self and relationship damage: complex PTSD. Safety first, then processing, then rebuilding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disorder",
+     "Timing",
+     "Defining edge"
+    ],
+    "rows": [
+     [
+      "Acute stress disorder",
+      "3 days to 1 month",
+      "Dissociation prominent"
+     ],
+     [
+      "PTSD",
+      "Over 1 month",
+      "Four clusters persist"
+     ],
+     [
+      "Adjustment disorder",
+      "Within 3 months of stressor",
+      "Subthreshold, stressor bound"
+     ],
+     [
+      "Complex PTSD",
+      "Prolonged trauma, any duration after",
+      "Self organisation disturbed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-051",
+  "bk2-psy-052",
+  "bk2-psy-053",
+  "bk2-psy-054",
+  "bk2-psy-055",
+  "bk2-psy-056",
+  "bk2-psy-057",
+  "bk2-psy-058",
+  "bk2-psy-059",
+  "bk2-psy-060"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,165 @@
+{
+ "module": "sur-venous",
+ "subject": "surgery",
+ "title": "Chronic venous disease, CEAP classification, varicose veins, and endovenous ablation",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Rutherford Vascular Surgery 9th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Chronic venous disease arises from valvular incompetence and venous **hypertension** in superficial, deep, or perforating venous systems. When bicuspid venous valves fail, retrograde gravitational hydrostatic pooling transmits elevated pressures into cutaneous capillary beds. Extravasation of red blood cells produces hemosiderin hyperpigmentation, while pericapillary fibrin cuffs and chronic leukocyte entrapment induce progressive subcutaneous fibrosis termed lipodermatosclerosis. The medial lower calf and perimalleolar region represent the classic anatomical site of venous stasis.",
+   "say": "Chronic venous insufficiency stems from venous valvular incompetence and ambulatory venous hypertension. Hydrostatic pooling drives red cell extravasation, hemosiderin pigmentation, and subcutaneous lipodermatosclerosis over the medial lower calf.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous system component",
+     "Normal physiological role",
+     "Pathophysiological consequence"
+    ],
+    "rows": [
+     [
+      "Superficial (GSV & SSV)",
+      "Drain skin and subcutaneous tissues",
+      "Varicosities, telangiectasias, aching"
+     ],
+     [
+      "Deep system",
+      "Carries 90% of venous return",
+      "Deep reflux, chronic edema, severe skin breakdown"
+     ],
+     [
+      "Perforating veins",
+      "Direct blood from superficial to deep",
+      "Incompetence causes localized venous hypertensive flares"
+     ],
+     [
+      "Calf muscle pump",
+      "Generates propulsion during ambulation",
+      "Pump failure exacerbates ambulatory hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The international CEAP classification categorizes venous disorders based on clinical, **etiological**, anatomical, and pathophysiological criteria. Clinical class C1 denotes telangiectasias or reticular veins. Class C2 encompasses true dilated, tortuous varicose veins measuring three millimeters or larger. Class C3 denotes lower limb edema without trophic skin changes. Class C4 includes pigmentation, eczema, and lipodermatosclerosis. Class C5 represents a healed venous ulceration, while class C6 denotes an active, open venous leg ulcer.",
+   "say": "The CEAP classification grades venous disease from C0 to C6. C2 represents varicose veins, C3 lower extremity edema, C4 trophic skin changes like lipodermatosclerosis, and C6 an active, non-healing venous leg ulcer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CEAP clinical class",
+     "Physical examination finding",
+     "Typical anatomical location"
+    ],
+    "rows": [
+     [
+      "Class C1",
+      "Telangiectasias & reticular veins",
+      "Lateral thigh, ankle flare"
+     ],
+     [
+      "Class C2",
+      "Varicose veins (>= 3 mm diameter)",
+      "Great / small saphenous distribution"
+     ],
+     [
+      "Class C3",
+      "Dependent lower extremity edema",
+      "Perimalleolar and lower calf"
+     ],
+     [
+      "Class C4a / C4b",
+      "Pigmentation, eczema / lipodermatosclerosis",
+      "Medial gaiter area of lower calf"
+     ],
+     [
+      "Class C5 / C6",
+      "Healed / active venous stasis ulcer",
+      "Superior to medial malleolus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Duplex ultrasound examination in the standing position represents the definitive diagnostic **investigation** for venous pathology. It documents anatomical venous pathways, identifies intraluminal thrombi, and quantifies retrograde reflux duration following distal manual compression release. Pathological reflux is defined as retrograde venous flow exceeding five hundred milliseconds in superficial and perforator veins, or exceeding one thousand milliseconds in deep femoral and popliteal veins. Deep vein patency must be confirmed prior to superficial interventions.",
+   "say": "Standing duplex ultrasound is the gold standard diagnostic test, identifying venous thrombi and quantifying reflux duration. Reflux exceeding five hundred milliseconds in superficial veins or one second in deep veins is pathological.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Lower limb venous symptoms / ulcer"
+     },
+     {
+      "id": "n2",
+      "label": "Standing duplex ultrasound examination"
+     },
+     {
+      "id": "n3",
+      "label": "Quantify reflux duration & deep patency"
+     },
+     {
+      "id": "n4",
+      "label": "Ablation vs compression therapy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conservative therapy utilizing graduated compression **stockings** exerting twenty to thirty or thirty to forty millimeters of mercury pressure constitutes initial management. For superficial axial incompetence involving the great saphenous vein, endovenous thermal ablation via radiofrequency or laser has replaced open high ligation and stripping as first-line therapy. Tumescent local anesthesia protects adjacent cutaneous nerves and absorbs heat during ablation. Ultrasound-guided foam sclerotherapy and cyanoacrylate adhesive provide effective non-thermal options.",
+   "say": "Graduated compression therapy provides foundational conservative support. Endovenous thermal ablation using radiofrequency or laser with tumescent anesthesia is the first-line treatment for saphenous reflux, replacing open surgical stripping.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endovenous Thermal Ablation",
+     "points": [
+      "Radiofrequency (RFA) or laser (EVLA)",
+      "Tumescent local anesthesia required",
+      "Rapid recovery and > 95% closure rates"
+     ]
+    },
+    "right": {
+     "title": "Open Saphenous Stripping",
+     "points": [
+      "High ligation at saphenofemoral junction",
+      "Mechanical vein stripping to knee level",
+      "Higher groin hematoma and nerve injury rates"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "79a3c1af-4000-8000-79a3-c1af12345678",
+  "7aa3c342-4000-8000-7aa3-c34212345678",
+  "7ba3c4d5-4000-8000-7ba3-c4d512345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

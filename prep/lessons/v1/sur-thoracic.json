@@ -1,0 +1,160 @@
+{
+ "module": "sur-thoracic",
+ "subject": "surgery",
+ "title": "Thoracic oncology, anatomic lobectomy, VATS resection, and pleural empyema",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Shields General Thoracic Surgery 8th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Non-small cell lung cancer accounts for eighty-five percent of primary pulmonary **malignancies**, classified histologically into adenocarcinoma, squamous cell carcinoma, and large cell carcinoma. Preoperative physiological evaluation mandates spirometry and diffusing capacity of the lung for carbon monoxide. Predicted postoperative forced expiratory volume in one second and diffusing capacity exceeding forty percent indicate safe tolerance for anatomical resection, while values below thirty percent warrant cardiopulmonary exercise testing.",
+   "say": "Non-small cell lung cancer accounts for eighty-five percent of primary lung neoplasms. Preoperative physiological assessment requires spirometry and carbon monoxide diffusion testing, with predicted postoperative values above forty percent confirming surgical resectability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pulmonary function parameter",
+     "Low surgical risk threshold",
+     "High risk / further testing threshold"
+    ],
+    "rows": [
+     [
+      "Predicted post-op FEV1 (ppoFEV1)",
+      "Greater than 40 percent",
+      "Less than 30 percent"
+     ],
+     [
+      "Predicted post-op DLCO (ppoDLCO)",
+      "Greater than 40 percent",
+      "Less than 30 percent"
+     ],
+     [
+      "Peak VO2 on CPET exercise",
+      "Greater than 15 mL/kg/min",
+      "Less than 10 mL/kg/min"
+     ],
+     [
+      "Cardiac risk stratification",
+      "Revised Cardiac Risk Index <= 1",
+      "Elevated cardiac biomarker / ischemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical lobectomy with systematic hilar and mediastinal lymph node **dissection** remains the gold standard curative operation for clinical stage I and II non-small cell lung carcinoma. Video-assisted thoracic surgery and robotic-assisted approaches demonstrate reduced postoperative pain, shorter chest tube duration, and equivalent oncological long-term survival compared to open thoracotomy. Sublobar segmentectomy represents an acceptable alternative for peripheral tumors measuring two centimeters or smaller with pure or predominant ground-glass opacity.",
+   "say": "Anatomic lobectomy with systematic mediastinal lymph node dissection is the gold standard for early-stage lung cancer. Minimally invasive video-assisted and robotic approaches reduce pain and hospital stay with equivalent survival.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Solitary pulmonary nodule / biopsy"
+     },
+     {
+      "id": "n2",
+      "label": "PET-CT and endobronchial ultrasound (EBUS)"
+     },
+     {
+      "id": "n3",
+      "label": "Confirm stage I-II physiological reserve"
+     },
+     {
+      "id": "n4",
+      "label": "VATS anatomical lobectomy & node clearance"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary spontaneous pneumothorax develops in tall, thin young adults secondary to apical subpleural **bleb** rupture. Indications for surgical intervention include a second ipsilateral recurrence, first contralateral or bilateral pneumothorax, persistent air leak exceeding three to five days, or high-risk occupational professions including commercial pilots and deep-sea divers. Video-assisted thoracic wedge resection of apical blebs combined with mechanical pleural abrasion or chemical pleurodesis prevents recurrent pneumothorax.",
+   "say": "Primary spontaneous pneumothorax results from apical subpleural bleb rupture in young adults. Recurrent episodes or persistent air leaks warrant video-assisted apical bleb wedge resection and mechanical pleurodesis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pneumothorax indication",
+     "Clinical presentation context",
+     "Recommended surgical management"
+    ],
+    "rows": [
+     [
+      "Second ipsilateral episode",
+      "Recurrent spontaneous collapse",
+      "VATS wedge excision & pleurodesis"
+     ],
+     [
+      "Persistent air leak > 3 days",
+      "Bronchopleural fistula through chest tube",
+      "Operative stapling of apical blebs"
+     ],
+     [
+      "Tension pneumothorax",
+      "Hemodynamic instability & tracheal shift",
+      "Immediate needle decompression then tube"
+     ],
+     [
+      "High-risk profession",
+      "Pilot, diver, isolated geographic area",
+      "Elective VATS pleurodesis on first event"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pleural empyema progresses through three distinct pathophysiological **phases**: the early exudative phase with free-flowing fluid, the fibrinopurulent phase with loculations, and the chronic organizing phase characterized by a dense fibrous peel restricting lung re-expansion. Parapneumonic effusions with pleural fluid pH below 7.2, glucose below forty milligrams per deciliter, or visible bacteria require tube thoracostomy. Fibrinopurulent or organized empyema refractory to drainage mandates video-assisted thoracic surgery or open decortication to liberate the trapped lung.",
+   "say": "Pleural empyema evolves from early exudative fluid to organizing fibrous peels that trap the lung. Complicated effusions with low pH require chest tube drainage, while loculated peels mandate surgical decortication.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exudative & Early Empyema",
+     "points": [
+      "Thin, free-flowing serosanguinous fluid",
+      "Pleural fluid pH > 7.2 and sterile",
+      "Responds to chest tube thoracostomy"
+     ]
+    },
+    "right": {
+     "title": "Organizing Fibrous Empyema",
+     "points": [
+      "Dense collagenous peel traps underlying lung",
+      "Pleural fluid pH < 7.2 with high LDH",
+      "Mandates VATS or open decortication"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "e5f78c0a-4000-8000-e5f7-8c0a12345678",
+  "e4f78a77-4000-8000-e4f7-8a7712345678",
+  "e3f788e4-4000-8000-e3f7-88e412345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

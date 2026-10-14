@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "phm-targeted-anticancer",
+  "subject": "pharmacology",
+  "title": "Targeted anticancer: kinase inhibitors, antibodies and immunotherapy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Imatinib** (BCR-ABL CML chronic phase, KIT GIST, **periorbital oedema** with cramps, cytopenias) pioneered with **resistance** (T315I ponatinib, dasatinib pleural effusions, nilotinib QT and vascular) sequencing; molecular monitoring (BCR-ABL PCR milestones) switches. GIST adjuvant years with exon 9 doubling debates. Fluid retention diuretics manage.",
+      "say": "CML chronic imatinib oedemas cramps; T315I ponatinib rescues. PCR milestones switch.",
+      "vis": null
+    },
+    {
+      "tx": "**EGFR** (**erlotinib, gefitinib**: **acneiform rash** severity predicts, diarrhoea, ILD; **osimertinib**: T790M, CNS, QT) with **ALK** (**crizotinib**: **visual trails**, QT, bradycardia; alectinib brain penetrant, myalgias; lorlatinib lipids and CNS) and **HER2** (**trastuzumab**: **cardiotoxicity** LVEF watched, infusion reactions; pertuzumab diarrhoea; T-DM1 platelets with liver) target lung and breast by mutation. Testing before treating gates; brain imaging stages ALK.",
+      "say": "Rash severity predicts EGFR response; visual trails crizotinib. Trastuzumab hearts echo watched.",
+      "vis": null
+    },
+    {
+      "tx": "**VEGF** (**bevacizumab**: **bleed, GI perforation, hypertension, proteinuria**, wound dehiscence surgery held; sunitinib hand foot with thyroid; sorafenib) with **BRAF and MEK** (**vemurafenib**: photosensitivity, SCCs; dabrafenib with trametinib **pyrexia**) and **CDK4/6** (**palbociclib**: **neutropenia** holding, QT debated; ribociclib liver) controls; elective surgery holds bevacizumab weeks. Hypertension treats through while perforation stops forever.",
+      "say": "Bevacizumab bleeds perforates hypertenses: surgery holds weeks. BRAF MEK fevers; palbociclib neutropenias hold.",
+      "vis": null
+    },
+    {
+      "tx": "**BTK** (**ibrutinib**: **atrial fibrillation with bleed**, hypertension, diarrhoea; acalabrutinib gentler, zanubrutinib) with **BCL2 venetoclax** (**tumour lysis ramp up** weekly, neutropenia) and **PARP** (**olaparib** BRCA: **anaemia** with MDS rare, nausea) treats blood and ovary; **checkpoint** (**pembrolizumab, nivolumab**: **pneumonitis, colitis, endocrinopathies**, hepatitis with high dose steroids, no chemo nausea) with **CAR-T** (**CRS tocilizumab**, ICANS steroids) immunises. Lysis labs gate venetoclax ramp.",
+      "say": "Ibrutinib fibrillates bleeds; venetoclax lyses ramping. Checkpoint colitis pneumonitis steroids high.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Targeted",
+          "Pearl",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Imatinib",
+            "CML oedema",
+            "PCR"
+          ],
+          [
+            "Osimertinib",
+            "T790M CNS",
+            "QT"
+          ],
+          [
+            "Trastuzumab",
+            "HER2 heart",
+            "LVEF"
+          ],
+          [
+            "Pembrolizumab",
+            "Colitis lung",
+            "Steroids"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-phm-361",
+    "bk2-phm-362",
+    "bk2-phm-363",
+    "bk2-phm-364",
+    "bk2-phm-365",
+    "bk2-phm-366",
+    "bk2-phm-367",
+    "bk2-phm-368",
+    "bk2-phm-369",
+    "bk2-phm-370"
+  ],
+  "src": [],
+  "refs": [
+    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-pharma4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

@@ -1,0 +1,84 @@
+{
+ "v": 1,
+ "module": "mic-neisseria",
+ "subject": "microbiology",
+ "title": "Gonococcus and meningococcus",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Neisseria gonorrhoeae** appears as intracellular kidney bean diplococci inside neutrophils on Gram stain of urethral pus, oxidase positive and fastidious on **Thayer-Martin** selective agar. In men it burns with purulent urethritis; in women it climbs silently causing cervicitis, **pelvic inflammatory disease** with Fitz-Hugh-Curtis perihepatitis (violin string adhesions with right upper quadrant pain), tubal infertility and ectopic risk. Treat with **ceftriaxone plus doxycycline** (chlamydial cover) as resistance spreads.",
+   "say": "Beans inside neutrophils with pus is gonorrhoea. Right upper quadrant pain with PID is Fitz-Hugh-Curtis.",
+   "vis": null
+  },
+  {
+   "tx": "**Gonococcal complications** need pattern memory: **ophthalmia neonatorum** (purulent conjunctivitis day 2 to 5, versus chlamydial day 5 to 14, versus chemical day 1) prevented by erythromycin ointment; **disseminated gonococcal infection** (tenosynovitis with migratory arthralgia and sparse pustules on extremities in sexually active young adults) versus septic gonococcal arthritis (single purulent joint). No vaccine exists because pili and Opa proteins vary antigenically; condoms with partner therapy break chains.",
+   "say": "Day 2 to 5 sticky neonatal eyes are gonococcal. Tendons plus pustules that migrate are disseminated.",
+   "vis": null
+  },
+  {
+   "tx": "**Neisseria meningitidis** (capsules A, B, C, Y, W135) colonises throats then explodes into meningitis with a **petechial purpuric rash** that never blanches, adrenal haemorrhage (**Waterhouse-Friderichsen** with shock and DIC), and rapid death without ceftriaxone. **Terminal complement (C5 to C9) deficiency** invites recurrent neisserial disease, so such patients need tetravalent plus MenB vaccines. Crowded hostels, Hajj and dry season meningitis belts concentrate risk; droplet precautions isolate.",
+   "say": "Non blanching purpura with neck stiffness is meningococcal: ceftriaxone now. Recurrent disease means complement deficiency.",
+   "vis": null
+  },
+  {
+   "tx": "**Contacts and prevention** follow strict rules: chemoprophylaxis for close contacts with **rifampicin, ciprofloxacin or ceftriaxone** eradicates carriage, while the index case needs therapy plus carriage clearance. **Conjugate ACWY vaccine** protects travellers and asplenics with T dependent memory; **MenB protein vaccine** (factor H binding protein) covers the unencapsulated B strain. Penicillin treats sensitive meningococci; gonococcal treatment never uses penicillin or fluoroquinolones alone now.",
+   "say": "Household contacts of meningococcal disease get prophylaxis, not waiting. ACWY for travel, MenB protein for B.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Capsule",
+     "Emergency"
+    ],
+    "rows": [
+     [
+      "Gonorrhoeae",
+      "None",
+      "Ceftriaxone plus doxy"
+     ],
+     [
+      "Meningitidis ACWY",
+      "Polysaccharide",
+      "Ceftriaxone, prophylax contacts"
+     ],
+     [
+      "Meningitidis B",
+      "None (sialic)",
+      "Protein vaccine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-021",
+  "bk2-mic-022",
+  "bk2-mic-023",
+  "bk2-mic-024",
+  "bk2-mic-025",
+  "bk2-mic-026",
+  "bk2-mic-027",
+  "bk2-mic-028",
+  "bk2-mic-029",
+  "bk2-mic-030"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

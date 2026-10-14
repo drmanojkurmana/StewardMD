@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-salmonella",
+ "subject": "microbiology",
+ "title": "Salmonella: enteric fever and non typhoidal disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Enteric fever** (Typhi and Paratyphi A, B, C) starts with step ladder fever climbing over week one with headache, then **rose spots** (faint truncal macules), splenomegaly and **relative bradycardia** (Faget sign: pulse lagging temperature) in week two. Bacteria invade ileal **Peyer patches**, and week three threatens **perforation with peritonitis** or gastrointestinal bleeding. Paratyphi runs milder; **Vi capsule** shields Typhi from complement. Humans are the only reservoir, spread by the 5 Fs with contaminated water.",
+   "say": "Step ladder fever plus rose spots plus slow pulse is enteric fever. Week three perforates ileum.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic carriers** (2 to 5 percent, gallbladder colonisation especially with gallstones, shedding Vi positive bacilli in stool) sustain endemicity; food handlers need exclusion with clearance cultures. Complications beyond perforation include encephalopathy (muttering delirium, typhoid state), hepatitis, pneumonia, myocarditis and osteomyelitis. Relapse follows inadequate therapy as intracellular bacilli resurge. Paratyphi B (Schottmuller) and C add focal suppurations.",
+   "say": "Gallbladder carriers shedding Vi bacilli keep typhoid endemic. Muttering delirium with fever is typhoid state.",
+   "vis": null
+  },
+  {
+   "tx": "**Diagnosis follows the week**: week one **blood culture** (highest yield before antibiotics), week two stool culture with rising **Widal O and H titres** (O appears first, H persists; single titres mislead in endemic zones, paired rising titres diagnose), week three urine culture. **Bone marrow culture** stays most sensitive even after antibiotics (intracellular niche). TyphiDot IgM and IDL Tubex support rapid calls; **leukopenia with eosinopenia** (rather than leukocytosis) hints enteric over other fevers. Vi serology flags carriers.",
+   "say": "Bleed cultures week one, Widal rising week two, marrow beats all. Leukopenia points to typhoid.",
+   "vis": null
+  },
+  {
+   "tx": "**Treatment** outruns resistance: **ceftriaxone or azithromycin** for MDR strains (chloramphenicol, ampicillin and cotrimoxazole resistance), with **fluoroquinolone resistance** (gyrA mutations, nalidixic acid screen) now widespread in South Asia forcing XDR regimens (azithromycin plus meropenem debates). Carriers get prolonged ciprofloxacin with **cholecystectomy** when stones persist. Vaccines: **Ty21a oral live** (3 year cover) versus **Vi polysaccharide injectable** (single dose, no memory, over 2 years) versus Vi conjugate (Typbar TCV, infants, memory). Sanitation prevents; vaccines bridge.",
+   "say": "MDR typhoid gets ceftriaxone or azithromycin. Vi conjugate protects infants with memory.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Week",
+     "Best test",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "1",
+      "Blood culture",
+      "Bacteraemia"
+     ],
+     [
+      "2",
+      "Rising Widal",
+      "O then H"
+     ],
+     [
+      "Any",
+      "Marrow culture",
+      "Most sensitive"
+     ],
+     [
+      "Carrier",
+      "Stool Vi",
+      "Gallbladder"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-041",
+  "bk2-mic-042",
+  "bk2-mic-043",
+  "bk2-mic-044",
+  "bk2-mic-045",
+  "bk2-mic-046",
+  "bk2-mic-047",
+  "bk2-mic-048",
+  "bk2-mic-049",
+  "bk2-mic-050"
+ ],
+ "src": [],
+ "refs": [
+  "Ananthanarayan and Paniker's Textbook of Microbiology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

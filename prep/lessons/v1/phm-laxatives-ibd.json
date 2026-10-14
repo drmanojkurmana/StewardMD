@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-laxatives-ibd",
+ "subject": "pharmacology",
+ "title": "Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Constipation drugs** work by four strategies: bulk forming fibres that swell stool, osmotic agents that hold water in the lumen, stimulants that provoke colonic contraction, and softeners or secretagogues that ease passage. Matching mechanism to cause matters because obstruction, opioid effect and pelvic floor dysfunction each answer differently. Chronic laxative fear is largely misplaced with modern osmotic agents, while stimulant overuse mythology exceeds the evidence for harm at recommended doses.",
+   "say": "Laxatives bulk, draw water, stimulate or soften. Osmotic agents like macrogols are safe long term. Always exclude obstruction and match the drug to the cause, especially opioids.",
+   "vis": null
+  },
+  {
+   "tx": "**Osmotic laxatives** lead chronic care: macrogols (polyethylene glycol) hold water isotonically with minimal electrolyte disturbance, and lactulose ferments to acids that also trap ammonia, giving it a second career in hepatic encephalopathy. Magnesium salts act fast but endanger kidney failure patients. Stimulant senna and bisacodyl rescue impaction and opioid constipation when osmotics alone stall, timed at night for morning effect.",
+   "say": "Macrogols are the chronic constipation backbone. Lactulose also traps ammonia in liver failure. Senna rescues when osmotics stall. Magnesium laxatives endanger failing kidneys.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Example",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Bulk forming",
+      "Ispaghula husk",
+      "Needs fluids; slow onset days"
+     ],
+     [
+      "Osmotic",
+      "Macrogol, lactulose",
+      "Chronic first line; lactulose in encephalopathy"
+     ],
+     [
+      "Stimulant",
+      "Senna, bisacodyl",
+      "Night dose, morning effect; rescue"
+     ],
+     [
+      "Opioid antagonist",
+      "Methylnaltrexone",
+      "Peripheral mu blockade in opioid constipation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Antidiarrhoeals** slow transit so water absorbs: loperamide agonises peripheral mu opioid receptors without central effects at normal doses, while codeine adds central and dependence burdens. Slowing the gut is dangerous when infection invades or colon dilates, so bloody diarrhoea, suspected Clostridioides or toxic megacolon forbid antimotility drugs. Oral rehydration remains the actual life saving therapy in all acute diarrhoea, with drugs as comfort adjuncts only.",
+   "say": "Loperamide slows the gut safely peripherally, but never slow an infected or dilating colon. Rehydration saves lives in diarrhoea; antimotility drugs only comfort.",
+   "vis": null
+  },
+  {
+   "tx": "**Inflammatory bowel disease** therapy suppresses mucosal immunity stepwise: mesalazine delivers topical 5 aminosalicylate in ulcerative colitis, steroids induce remission without maintaining it, thiopurines and methotrexate maintain immunomodulation slowly, and biologics (anti TNF, vedolizumab, ustekinumab) plus small molecules heal mucosa in moderate severe disease. Each escalation trades infection and malignancy surveillance burdens, including thiopurine skin cancers and anti TNF tuberculosis reactivation screening before starting.",
+   "say": "IBD care escalates from mesalazine through steroids for flares only, to thiopurines and biologics that heal mucosa. Screen for tuberculosis before anti TNF therapy and watch skin cancers on thiopurines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ulcerative colitis",
+     "points": [
+      "Mesalazine backbone oral plus rectal",
+      "Continuous colon from rectum upward",
+      "Colectomy curative of colitis"
+     ]
+    },
+    "right": {
+     "title": "Crohn disease",
+     "points": [
+      "Mesalazine weak; early biologics favoured",
+      "Skip lesions mouth to anus, fistulae",
+      "Surgery not curative, strictures and fistulae"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Supportive pharmacology completes gut care: **loperamide** never substitutes for rehydration, bile acid sequestrants treat post cholecystectomy diarrhoea, eluxadoline and rifaximin enter irritable bowel niches, and probiotics carry modest condition specific evidence. In constipation predominant elders, secretagogues such as linaclotide add fluid secretion options. Exam stems reward recognising red flags (blood, fever, dilation, obstruction) where gut slowing or stimulating drugs become dangerous rather than helpful.",
+   "say": "Red flags change everything: blood, fever, dilation or obstruction forbid gut slowing and demand investigation. Rehydration first, mechanism matched drugs second.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-071",
+  "bk2-phm-072",
+  "bk2-phm-073",
+  "bk2-phm-074",
+  "bk2-phm-075",
+  "bk2-phm-076",
+  "bk2-phm-077",
+  "bk2-phm-078",
+  "bk2-phm-079",
+  "bk2-phm-080"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -118,29 +118,11 @@
    "tx": "A **systematic review** collects all eligible studies using a predefined search and bias assessment. In a **forest plot**, each study shows its point estimate and confidence interval, and the diamond gives the pooled estimate. **I squared** describes the share of variation across studies due to heterogeneity rather than chance. High values, above about 75 percent, call for exploring sources and usually a random-effects model. A funnel plot with a missing lower-left gap suggests publication bias.",
    "say": "A systematic review collects all eligible studies using a predefined search and bias assessment. In a forest plot, each study shows its point estimate and confidence interval, and the diamond gives the pooled estimate. I squared describes the share of variation across studies due to heterogeneity rather than chance. High values, above about 75 percent, call for exploring sources and usually a random-effects model. A funnel plot with a missing lower-left gap suggests publication bias.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Tool",
-     "Reads",
-     "Warning sign"
-    ],
-    "rows": [
-     [
-      "Forest plot",
-      "Estimates and CIs per study",
-      "Diamond crossing null"
-     ],
-     [
-      "I squared",
-      "Heterogeneity share",
-      "Above about 75 percent"
-     ],
-     [
-      "Funnel plot",
-      "Effect against precision",
-      "Gap in lower left"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/stats-ci-forest.svg",
+    "alt": "Forest plot of risk ratios: Study A 1.40 (1.10 to 1.80), Study B 0.90 (0.60 to 1.30) crossing the null at 1, Study C 1.20 (1.00 to 1.50), pooled 1.25 (1.08 to 1.45).",
+    "caption": "An interval crossing the null line is compatible with no effect. Width is precision.",
+    "ar": 1.5384615384615385
    }
   },
   {

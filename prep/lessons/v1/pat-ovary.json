@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-ovary",
+ "subject": "pathology",
+ "title": "Ovarian tumours: surface epithelial, germ cell and sex cord",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**High grade serous carcinoma** (BRCA1 and BRCA2, **STIC lesions** in fimbriae seeding peritoneum, p53 null, bloating with ascites and omental cake presenting late) is treated by **debulking surgery with platinum taxane chemotherapy** (neoadjuvant where unresectable, PARP inhibitors in BRCA); risk reducing salpingo oophorectomy protects carriers after childbearing. **CA-125** with transvaginal ultrasound triages (ROMA with HE4), though endometriosis and fibroids raise it benignly. Low grade serous (KRAS, indolent) differs molecularly.",
+   "say": "Bloated ascitic omental cake with p53 is high grade serous: debulk plus platinum. BRCA carriers remove tubes and ovaries.",
+   "vis": null
+  },
+  {
+   "tx": "**Mucinous tumours** (large multilocular, pseudomyxoma peritonei from appendiceal primaries mimicking, CK20 with CDX2 pointing gut) are resected intact (rupture seeds); **endometrioid** (endometriosis associated, PTEN, synchronous endometrial primaries) and **clear cell** (endometriosis, HNF1B, thromboembolism, chemoresistant) complete epithelial patterns. Borderline tumours (atypical proliferation without invasion, young, fertility sparing surgery) recur but rarely kill. Frozen section guides extent intraoperatively.",
+   "say": "Huge mucinous mass with pseudomyxoma is appendiceal until proven: resect intact. Clear cell clots and resists chemo.",
+   "vis": null
+  },
+  {
+   "tx": "**Germ cell tumours** (young, rapid, curable) sort by markers: **dysgerminoma** (sheets with lymphocytes, **LDH** raised, radiosensitive, KIT), **yolk sac** (**AFP** raised, **Schiller-Duval bodies**), **choriocarcinoma** (hCG with haemorrhage), immature teratoma (neural grading), **struma ovarii** (thyroid tissue with hyperthyroidism). Fertility sparing unilateral salpingo oophorectomy with BEP chemotherapy cures mostly; markers (AFP, hCG, LDH) stage and follow. Mature cystic teratoma (dermoid, Rokitansky protuberance, teeth and hair) torses or rarely squamous transforms.",
+   "say": "AFP Schiller-Duval is yolk sac; hCG haemorrhage is choriocarcinoma; LDH sheets are dysgerminoma. Dermoids twist.",
+   "vis": null
+  },
+  {
+   "tx": "**Sex cord stromal tumours** (inhibin positive) include **granulosa cell** (**Call-Exner bodies** with coffee bean nuclei, **inhibin** raised, endometrial hyperplasia with postmenopausal bleed, late recurrences), Sertoli-Leydig (virilisation with amenorrhoea), and **fibroma** (**Meigs syndrome**: fibroma with ascites and pleural effusion resolving on removal). Surgery stages; granulosa needs decades of follow up. Thecomas estrogenise similarly.",
+   "say": "Coffee bean Call-Exner with inhibin is granulosa: watch endometrium for decades. Fibroma plus fluid that surgery cures is Meigs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ovary",
+     "Marker",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Serous high",
+      "p53, BRCA",
+      "Debulk plus platinum"
+     ],
+     [
+      "Yolk sac",
+      "AFP",
+      "BEP"
+     ],
+     [
+      "Chorio",
+      "hCG",
+      "BEP"
+     ],
+     [
+      "Granulosa",
+      "Inhibin",
+      "Resect, follow"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-461",
+  "bk2-pat-462",
+  "bk2-pat-463",
+  "bk2-pat-464",
+  "bk2-pat-465",
+  "bk2-pat-466",
+  "bk2-pat-467",
+  "bk2-pat-468",
+  "bk2-pat-469",
+  "bk2-pat-470"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

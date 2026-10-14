@@ -1,106 +1,106 @@
 {
-  "module": "phy-vision",
-  "subject": "physiology",
-  "title": "Photoreceptor phototransduction, dark current and visual processing",
-  "minutes": 6,
-  "refs": [
-    "Guyton and Hall Textbook of Medical Physiology",
-    "Kandel's Principles of Neural Science"
-  ],
-  "steps": [
-    {
-      "tx": "The neural **retina** contains two classes of photoreceptor cells adapted for distinct visual functions. Rods contain rhodopsin, operate under scotopic dim light, provide high sensitivity but low spatial acuity, and do not mediate color vision. Cones contain photopsins, operate under photopic bright light, mediate high-resolution visual acuity, and provide trichromatic color vision. The fovea centralis contains solely densely packed cones without overlying neural layers.",
-      "say": "The neural retina contains two classes of photoreceptor cells adapted for distinct visual functions. Rods contain rhodopsin, operate under scotopic dim light, and provide high sensitivity with low acuity. Cones operate under photopic bright light, mediate high-resolution acuity, and provide color vision. The fovea centralis contains densely packed cones without overlying layers.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Rod photoreceptors",
-          "Cone photoreceptors"
-        ],
-        "rows": [
-          [
-            "Photopigment",
-            "Rhodopsin",
-            "Three photopsin opsins (blue, green, red)"
-          ],
-          [
-            "Lighting condition",
-            "Scotopic (night and dim light)",
-            "Photopic (daylight)"
-          ],
-          [
-            "Retinal distribution",
-            "High in periphery, absent in fovea",
-            "Densely concentrated in fovea centralis"
-          ],
-          [
-            "Acuity and color",
-            "Low acuity, achromatic",
-            "High acuity, trichromatic color vision"
-          ]
-        ]
-      }
+ "module": "phy-vision",
+ "subject": "physiology",
+ "title": "Photoreceptor phototransduction, dark current and visual processing",
+ "minutes": 6,
+ "refs": [
+  "Guyton and Hall Textbook of Medical Physiology",
+  "Kandel's Principles of Neural Science"
+ ],
+ "steps": [
+  {
+   "tx": "The neural **retina** contains two classes of photoreceptor cells adapted for distinct visual functions. Rods contain rhodopsin, operate under scotopic dim light, provide high sensitivity but low spatial acuity, and do not mediate color vision. Cones contain photopsins, operate under photopic bright light, mediate high-resolution visual acuity, and provide trichromatic color vision. The fovea centralis contains solely densely packed cones without overlying neural layers.",
+   "say": "The neural retina contains two classes of photoreceptor cells adapted for distinct visual functions. Rods contain rhodopsin, operate under scotopic dim light, and provide high sensitivity with low acuity. Cones operate under photopic bright light, mediate high-resolution acuity, and provide color vision. The fovea centralis contains densely packed cones without overlying layers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Rod photoreceptors",
+     "Cone photoreceptors"
+    ],
+    "rows": [
+     [
+      "Photopigment",
+      "Rhodopsin",
+      "Three photopsin opsins (blue, green, red)"
+     ],
+     [
+      "Lighting condition",
+      "Scotopic (night and dim light)",
+      "Photopic (daylight)"
+     ],
+     [
+      "Retinal distribution",
+      "High in periphery, absent in fovea",
+      "Densely concentrated in fovea centralis"
+     ],
+     [
+      "Acuity and color",
+      "Low acuity, achromatic",
+      "High acuity, trichromatic color vision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In complete darkness, photoreceptors exhibit an inward sodium and calcium flux termed the **dark current**. High basal cyclic GMP levels hold cyclic nucleotide-gated channels open in outer segment discs, maintaining continuous depolarization at minus forty millivolts. This depolarization triggers sustained tonic exocytosis of glutamate neurotransmitter from synaptic terminals onto bipolar cells. Photoreceptors are among the very few sensory neurons that continuously release transmitter in the dark.",
+   "say": "In darkness, photoreceptors exhibit an inward sodium and calcium flux termed the dark current. High basal cyclic GMP holds cyclic nucleotide-gated channels open, maintaining depolarization at minus forty millivolts. This depolarization triggers continuous tonic release of glutamate onto bipolar cells. Photoreceptors continuously release transmitter in the dark.",
+   "vis": null
+  },
+  {
+   "tx": "Light absorption triggers the biochemical cascade of **phototransduction**. A photon isomerizes eleven-cis-retinal to all-trans-retinal within rhodopsin, converting it to activated metarhodopsin two. Metarhodopsin two activates the G protein transducin, which stimulates cyclic GMP phosphodiesterase. Hydrolysis of cyclic GMP closes outer segment sodium channels, hyperpolarizing the photoreceptor membrane to minus seventy millivolts and decreasing glutamate release onto post-synaptic bipolar neurons.",
+   "say": "Light absorption triggers phototransduction. A photon isomerizes eleven-cis-retinal to all-trans-retinal, creating metarhodopsin two. This activates transducin, stimulating phosphodiesterase to hydrolyze cyclic GMP. Closing of cyclic nucleotide-gated channels hyperpolarizes the membrane and decreases glutamate release onto bipolar neurons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dark state",
+     "points": [
+      "High cGMP levels in outer segment",
+      "Open cGMP-gated cation channels (dark current)",
+      "Depolarized membrane potential (~ -40 mV)",
+      "High continuous glutamate release"
+     ]
     },
-    {
-      "tx": "In complete darkness, photoreceptors exhibit an inward sodium and calcium flux termed the **dark current**. High basal cyclic GMP levels hold cyclic nucleotide-gated channels open in outer segment discs, maintaining continuous depolarization at minus forty millivolts. This depolarization triggers sustained tonic exocytosis of glutamate neurotransmitter from synaptic terminals onto bipolar cells. Photoreceptors are among the very few sensory neurons that continuously release transmitter in the dark.",
-      "say": "In darkness, photoreceptors exhibit an inward sodium and calcium flux termed the dark current. High basal cyclic GMP holds cyclic nucleotide-gated channels open, maintaining depolarization at minus forty millivolts. This depolarization triggers continuous tonic release of glutamate onto bipolar cells. Photoreceptors continuously release transmitter in the dark.",
-      "vis": null
-    },
-    {
-      "tx": "Light absorption triggers the biochemical cascade of **phototransduction**. A photon isomerizes eleven-cis-retinal to all-trans-retinal within rhodopsin, converting it to activated metarhodopsin two. Metarhodopsin two activates the G protein transducin, which stimulates cyclic GMP phosphodiesterase. Hydrolysis of cyclic GMP closes outer segment sodium channels, hyperpolarizing the photoreceptor membrane to minus seventy millivolts and decreasing glutamate release onto post-synaptic bipolar neurons.",
-      "say": "Light absorption triggers phototransduction. A photon isomerizes eleven-cis-retinal to all-trans-retinal, creating metarhodopsin two. This activates transducin, stimulating phosphodiesterase to hydrolyze cyclic GMP. Closing of cyclic nucleotide-gated channels hyperpolarizes the membrane and decreases glutamate release onto bipolar neurons.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Dark state",
-          "points": [
-            "High cGMP levels in outer segment",
-            "Open cGMP-gated cation channels (dark current)",
-            "Depolarized membrane potential (~ -40 mV)",
-            "High continuous glutamate release"
-          ]
-        },
-        "right": {
-          "title": "Light state",
-          "points": [
-            "Transducin activates phosphodiesterase",
-            "Rapid cGMP hydrolysis",
-            "Closed cation channels cause hyperpolarization",
-            "Decreased glutamate release onto bipolar cells"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Retinal bipolar cells process reduced glutamate release through two opposite pathways, creating **center-surround receptive fields**. On-center bipolar cells express metabotropic mGluR6 receptors that invert the signal: light-induced glutamate reduction relieves inhibition, depolarizing on-bipolar cells. Off-center bipolar cells express ionotropic AMPA receptors that hyperpolarize upon light. Horizontal cells provide lateral inhibition across neighboring photoreceptors, enhancing contrast detection and spatial edge definition.",
-      "say": "Retinal bipolar cells process reduced glutamate release through two opposite pathways, creating center-surround receptive fields. On-center bipolar cells express metabotropic receptors, depolarizing in response to light. Off-center bipolar cells express ionotropic receptors, hyperpolarizing with light. Horizontal cells provide lateral inhibition, enhancing edge detection.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ap-eye-gross.png",
-        "alt": "Photoreceptor phototransduction cascade",
-        "caption": "Schematic detailing rhodopsin photoisomerization, transducin activation, cGMP phosphodiesterase cleavage and bipolar cell signaling."
-      }
+    "right": {
+     "title": "Light state",
+     "points": [
+      "Transducin activates phosphodiesterase",
+      "Rapid cGMP hydrolysis",
+      "Closed cation channels cause hyperpolarization",
+      "Decreased glutamate release onto bipolar cells"
+     ]
     }
-  ],
-  "v": 1,
-  "gen": "AI",
-  "run": "books-pipeline",
-  "model": "gemini-3.8-flash-high",
-  "quiz": [
-    "52c28b3c-4000-8000-52c2-8b3c12345678",
-    "55c28ff5-4000-8000-55c2-8ff512345678",
-    "54c28e62-4000-8000-54c2-8e6212345678"
-  ],
-  "src": [
-    "kb-reference-photoreceptor-phototransduction-and-retina"
-  ],
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true
+   }
+  },
+  {
+   "tx": "Retinal bipolar cells process reduced glutamate release through two opposite pathways, creating **center-surround receptive fields**. On-center bipolar cells express metabotropic mGluR6 receptors that invert the signal: light-induced glutamate reduction relieves inhibition, depolarizing on-bipolar cells. Off-center bipolar cells express ionotropic AMPA receptors that hyperpolarize upon light. Horizontal cells provide lateral inhibition across neighboring photoreceptors, enhancing contrast detection and spatial edge definition.",
+   "say": "Retinal bipolar cells process reduced glutamate release through two opposite pathways, creating center-surround receptive fields. On-center bipolar cells express metabotropic receptors, depolarizing in response to light. Off-center bipolar cells express ionotropic receptors, hyperpolarizing with light. Horizontal cells provide lateral inhibition, enhancing edge detection.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.png",
+    "alt": "Photoreceptor phototransduction cascade",
+    "caption": "Schematic detailing rhodopsin photoisomerization, transducin activation, cGMP phosphodiesterase cleavage and bipolar cell signaling."
+   }
   }
+ ],
+ "v": 1,
+ "gen": "hand",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "52c28b3c-4000-8000-52c2-8b3c12345678",
+  "55c28ff5-4000-8000-55c2-8ff512345678",
+  "54c28e62-4000-8000-54c2-8e6212345678"
+ ],
+ "src": [
+  "kb-reference-photoreceptor-phototransduction-and-retina"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }

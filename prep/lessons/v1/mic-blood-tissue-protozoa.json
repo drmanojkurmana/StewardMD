@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-blood-tissue-protozoa",
+ "subject": "microbiology",
+ "title": "Malaria, babesiosis, leishmaniasis, trypanosomiasis and toxoplasmosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Plasmodium species** specialise: **falciparum** (malignant tertian, multiple delicate rings with accole forms, high parasitaemia, cerebral malaria with coma, algid, blackwater fever), **vivax and ovale** (benign tertian, amoeboid cytoplasm, **Schuffner dots**, **hypnozoites** relapsing, Duffy dependence), **malariae** (quartan, band forms, **nephrotic syndrome**), **knowlesi** (macaque, band like, daily spikes). **Artemisinin combination therapy** (artemether lumefantrine) cures blood stages; **primaquine** kills hypnozoites and gametocytes after **G6PD testing** (haemolysis risk). Severe disease gets IV **artesunate**.",
+   "say": "Accole rings with coma are falciparum: IV artesunate. Schuffner dots that relapse are vivax: primaquine after G6PD.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe malaria** (cerebral coma, severe anaemia, acidosis with respiratory distress, hypoglycaemia, hyperparasitaemia over 10 percent, renal failure, shock) is treated with IV **artesunate** (preferred over quinine, less hypoglycaemia and deafness) plus supportive ICU; exchange transfusion debates continue. Prophylaxis (doxycycline, mefloquine with neuropsychiatric caution, atovaquone proguanil) with bed nets and indoor spraying prevents; **intermittent preventive in pregnancy** (sulfadoxine pyrimethamine) protects. Vaccine RTS,S (mosquirix) partially shields children.",
+   "say": "Coma with parasites is cerebral malaria: artesunate IV, not quinine. Prevent with nets plus chemoprophylaxis.",
+   "vis": null
+  },
+  {
+   "tx": "**Visceral leishmaniasis** (kala azar, **Leishmania donovani**, sandfly, **LD bodies** in marrow and spleen, prolonged fever with massive splenomegaly, pancytopenia and hypergammaglobulinaemia, **rK39 rapid test**) is treated with **liposomal amphotericin B** (single dose strategies in Bihar) or miltefosine with paromomycin; **post kala azar dermal leishmaniasis** (PKDL, reservoir) follows. **Cutaneous** (oriental sore, painless ulcer with raised edge) and **mucocutaneous** (espundia destroying nose) need species guided antimony or ampho. HIV coinfection relapses.",
+   "say": "Fever with huge spleen and pancytopenia is kala azar: rK39 then liposomal ampho. PKDL reservoirs follow cure.",
+   "vis": null
+  },
+  {
+   "tx": "**African trypanosomiasis** (tsetse, gambiense chronic with **Winterbottom posterior cervical nodes** and daytime somnolence, rhodesiense acute) stages by CSF: haemolymphatic (**suramin**) versus meningoencephalitic (**melarsoprol** arsenic with encephalopathy or eflornithine nifurtimox). **Chagas disease** (triatomine kissing bug, **Romana sign** eyelid oedema, megaoesophagus with megacolon, apical aneurysm, xenodiagnosis, **benznidazole**) threatens transfusions. **Toxoplasma** (cat oocysts, congenital triad hydrocephalus with chorioretinitis and calcifications, AIDS **ring enhancing lesions**, **TMP-SMX** with pyrimethamine sulfadiazine) and **Babesia** (**Maltese cross**, asplenia, clindamycin plus quinine) complete tissue patterns.",
+   "say": "Sleeping sickness stages by CSF: suramin early, melarsoprol late. Cat oocyst rings in AIDS brain are Toxo.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protozoa",
+     "Vector",
+     "Cure"
+    ],
+    "rows": [
+     [
+      "Falciparum",
+      "Anopheles",
+      "Artesunate"
+     ],
+     [
+      "Donovani",
+      "Sandfly",
+      "Liposomal ampho"
+     ],
+     [
+      "Gambiense",
+      "Tsetse",
+      "Stage by CSF"
+     ],
+     [
+      "Toxo",
+      "Cat oocyst",
+      "TMP-SMX"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-191",
+  "bk2-mic-192",
+  "bk2-mic-193",
+  "bk2-mic-194",
+  "bk2-mic-195",
+  "bk2-mic-196",
+  "bk2-mic-197",
+  "bk2-mic-198",
+  "bk2-mic-199",
+  "bk2-mic-200"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

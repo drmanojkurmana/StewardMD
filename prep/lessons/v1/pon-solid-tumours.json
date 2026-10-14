@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "pon-solid-tumours",
+  "subject": "paediatrics",
+  "title": "Solid and CNS tumours: Wilms, neuroblastoma and brain tumours",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Wilms** (**triphasic** blastemal stromal epithelial, **WT1 WAGR Beckwith**, **hypertension** renin, **no biopsy** rupture spills upstage, **actinomycin vincristine** NWTS, **doxorubicin** advanced, **nephrectomy** upfront) with **clear cell sarcoma** (bone mets) and **rhabdoid** (infant lethal SMARCB1) differs; **nephrogenic rests** watch. Flanks ballot while hypertension resolves nephrectomy promptly.",
+      "say": "Flank renin triphasic no touch vincristine actinomycin is Wilms: upfront nephrectomies advanced doxorubicin. Rests watch.",
+      "vis": null
+    },
+    {
+      "tx": "**Neuroblastoma** (**adrenal** infants, **opsoclonus myoclonus** dancing eyes, **raccoon** periorbital, **MIBG** avid, **MYCN** amplified poor, **INSS** stages, **surgery** low, **isotretinoin** maintenance, **anti-GD2** immunotherapy) with **pheochromocytoma** (paroxysmal hypertension, **metanephrines**, **phenoxybenzamine** alpha first) catecholamines; **ganglioneuroma** benign matures. Spots MIBG while staging scans marrow bilateral sample routinely.",
+      "say": "Belly dancing eyes raccoon MIBG MYCN is neuroblastoma: resect low isotretinoin GD2 high. Sweats metanephrines block alpha.",
+      "vis": null
+    },
+    {
+      "tx": "**Brain** (**medulloblastoma** posterior fossa vomiting ataxia, **pilocytic** cystic mural cerebellar BRAF, **ependymoma** plastic, **DIPG** pons steroids trial, **craniopharyngioma** calcified visual obesity, **surgery** maximal safe, **radiation** age deferred protons, **chemo** baby protocols) with **retinoblastoma** (**leukocoria** white reflex, **RB1** bilateral, **enucleation** advanced, **chemo** systemic intra-arterial, **second cancers** osteosarcoma) eyes; **shunts** (hydrocephalus) divert. Mornings vomit.",
+      "say": "Wobbly vomiting posterior fossa operates radiates babies chemo: white reflex RB enucleates chemos seconds watch. Shunts divert.",
+      "vis": null
+    },
+    {
+      "tx": "**Sarcoma** (**osteosarcoma** metaphyseal sunburst chemo limbs salvage, **Ewing** diaphyseal onion EWS surgery radiation, **rhabdomyosarcoma** orbital bladder VAC, **late** growth infertility cardiac) with **germ cell** (**sacrococcygeal** neonatal resect, **yolk sac AFP**, **BEP** malignant) and **liver** (**hepatoblastoma AFP** resect transplant, **hemangioma** propranolol) completes; **biopsy** (core image guided) types. Limbs salvage.",
+      "say": "Sunburst knees limbs salvage Ewing onions VAC orbits bladders: sacrococcygeal AFP BEP liver AFP resect. Cores type.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Solid",
+          "Pearl",
+          "Act"
+        ],
+        "rows": [
+          [
+            "Wilms",
+            "Triphasic no touch",
+            "NWTS"
+          ],
+          [
+            "Neuroblast",
+            "MIBG MYCN",
+            "GD2"
+          ],
+          [
+            "Brain eye",
+            "Vomit white",
+            "Protons"
+          ],
+          [
+            "Sarcoma",
+            "Sunburst onion",
+            "Salvage"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-paed-151",
+    "bk2-paed-152",
+    "bk2-paed-153",
+    "bk2-paed-154",
+    "bk2-paed-155",
+    "bk2-paed-156",
+    "bk2-paed-157",
+    "bk2-paed-158",
+    "bk2-paed-159",
+    "bk2-paed-160"
+  ],
+  "src": [],
+  "refs": [
+    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-nel2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

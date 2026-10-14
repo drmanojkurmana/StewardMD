@@ -171,6 +171,9 @@ test("bank route serves fixed-test papers and rejects traversal", () => {
   assert.equal(bankPath({ path: ["v1", "tests", "..", "manifest.json"] }), null);
   assert.equal(bankPath({ path: ["v1", "tests", "neet-pg", "grand", "x.json", "y"] }), null);
   assert.equal(bankPath({ path: ["v1", "tests", "NEET-PG", "grand", "x.json"] }), null, "uppercase rejected");
+  assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject_mini", "fmge-sub-anatomy-1.json"] }), "v1/tests/fmge/subject_mini/fmge-sub-anatomy-1.json", "subject_mini papers serve");
+  assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject-mini", "fmge-sub-anatomy-1.json"] }), "v1/tests/fmge/subject-mini/fmge-sub-anatomy-1.json", "subject-mini dir serves (the published layout)");
+  assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject_mini", "..", "manifest.json"] }), null, "traversal still rejected");
   assert.equal(bankPath({ path: ["overlay", "maikimg4", "pathology", "pat-breast.json"] }), "overlay/maikimg4/pathology/pat-breast.json");
   assert.equal(bankPath({ path: ["overlay", "maik", "index.json"] }), "overlay/maik/index.json");
   assert.equal(bankPath({ path: ["img", "maikimg", "i-abc12345.webp"] }), "img/maikimg/i-abc12345.webp");
@@ -300,6 +303,119 @@ test("verify accepts an id served from two modules at either triple", () => {
   } finally {
     fs.rmSync(cache, { recursive: true, force: true });
     fs.rmSync(out, { recursive: true, force: true });
+  }
+});
+
+// fetch tolerates a missing module index (live 404): the subject is skipped with a manifest entry instead of
+// aborting, and its pool follows the overlays. No network: an injected stub getter serves one subject and 404s.
+test("fetch skips a 404 module index with a warning, not an abort", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fxfetch-"));
+  try {
+    const { ver, pyq } = T.appVersions();
+    const item = (id) => ({ id, q: `Stem ${id} with enough distinct words here`, o: ["a", "b", "c", "d"], a: 0, d: 2 });
+    const get = async (url) => {
+      if (url.includes("/anatomy/index.json")) return { topics: [{ id: "m1", count: 2, group: "core" }] };
+      if (url.includes("/anatomy/mcq/m1.json")) return { items: [item("a1"), item("a2")] };
+      if (url.endsWith("/pyq/index.json")) return { papers: [], file: "items-00000001.json" };
+      if (url.includes("/pyq/items-00000001.json")) return { items: [] };
+      throw new Error("HTTP 404 for " + url);
+    };
+    const logs = [];
+    const r = await T.fetchBank({ cache: dir, api: "http://127.0.0.1:9/bank/", jobs: 8, log: (m) => logs.push(m), _get: get });
+    assert.ok(r.idxSkipped.length > 0, "some subjects skipped");
+    assert.ok(!r.idxSkipped.includes("anatomy"), "served subjects are not skipped");
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(dir, "skipped-index.json"), "utf8")), r.idxSkipped);
+    assert.deepEqual(T.skippedSubjects(dir), r.idxSkipped);
+    assert.ok(logs.some((m) => /no live module index/.test(m)), "the skip is warned: " + logs.join(" | "));
+    assert.ok(fs.existsSync(path.join(dir, `${ver}/anatomy/mcq/m1.json`)), "served modules are cached");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("a skipped subject loads its overlays only; an unfetched subject still throws", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fxskip-"));
+  try {
+    const { ver } = T.appVersions();
+    const write = (rel, j) => { const f = path.join(dir, rel); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, JSON.stringify(j)); };
+    write("skipped-index.json", ["sx"]);
+    write("overlay/setA/sx/m1.json", { items: [{ id: "o1", q: "Overlay only stem with enough distinct words", o: ["a", "b", "c", "d"], a: 1, d: 2 }] });
+    const { lists } = T.loadSubject(dir, tax, ver, "sx", { setA: { sx: { m1: 1 } } });
+    assert.equal(lists.length, 1);
+    assert.deepEqual(lists[0].items.map((it) => [it.id, it._ov]), [["o1", "setA"]]);
+    assert.throws(() => T.loadSubject(dir, tax, ver, "sy", {}), /not fetched: sy/);
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("neet-ss scope covers every ss branch, not just ss-medicine", () => {
+  const exam = T.EXAMS.find((e) => e.profile === "neet-ss");
+  const subs = T.scopeSubjects(tax, exam);
+  assert.ok(subs.includes("ss-general-medicine"), "medical still in scope");
+  assert.ok(subs.includes("ss-general-surgery"), "surgical group in scope");
+  assert.ok(subs.includes("ss-neonatology") || subs.includes("ss-virology"), "seeded groups in scope");
+  const medOnly = subs.filter((s) => s === "ss-general-medicine").length;
+  assert.ok(subs.length > medOnly + 14, `scope spans the groups, not 15 medical subjects (got ${subs.length})`);
+});
+
+test("census warnings report zero pools instead of silently skipping", () => {
+  assert.deepEqual(T.censusWarnings({ eligible: 10, image: 5, topics: 3, skipped: [], zeroSubs: [] }), []);
+  const w = T.censusWarnings({ eligible: 10, image: 0, topics: 0, skipped: ["plab-x"], zeroSubs: ["plab-x", "plab-y"] });
+  assert.ok(w.some((x) => /plab-x/.test(x) && /404/.test(x)), "skipped subjects named");
+  assert.ok(w.some((x) => /image/.test(x)), "zero image pool reported");
+  assert.ok(w.some((x) => /topic/.test(x)), "zero topics reported");
+  assert.ok(w.some((x) => /2 subjects with zero/.test(x)), "zero-pool subjects reported");
+  assert.ok(T.censusWarnings({ eligible: 0, image: 0, topics: 0, skipped: [], zeroSubs: ["a"] }).some((x) => /no eligible questions/.test(x)));
+});
+
+test("auditCoverage flags eligible exam/formats with neither papers nor shortfalls", () => {
+  const census = { "neet-pg": { eligible: 100, image: 5, topics: 3 } };
+  const covered = T.FORMATS.filter((f) => f !== "image").map((f) => ({ exam: "neet-pg", format: f }));
+  const gaps = T.auditCoverage(covered, [], census);
+  assert.equal(gaps.length, 1);
+  assert.match(gaps[0], /neet-pg\/image/);
+  assert.deepEqual(T.auditCoverage(covered, [{ exam: "neet-pg", format: "image", id: "x", reason: "r" }], census), [], "a shortfall is reported, not silent");
+  assert.deepEqual(T.auditCoverage([], [], { "neet-pg": { eligible: 0, image: 0, topics: 0 } }), [], "empty pools are not gaps");
+});
+
+test("subject_mini papers live at the route-legal subject-mini dir", () => {
+  assert.equal(T.formatDir("subject_mini"), "subject-mini");
+  assert.equal(T.formatDir("grand"), "grand");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fxdir-"));
+  try {
+    const bank = fixtureBank();
+    const p = T.buildPaper(tax, "neet-pg", "subject_mini", "anatomy", 1, bank, BANK_VERS, {}, {}, "2026-10-11T00:00:00.000Z").paper;
+    T.writePapers(dir, [p]);
+    T.buildIndex(dir, T.readOut(dir));
+    const ix = JSON.parse(fs.readFileSync(path.join(dir, "index.json"), "utf8"));
+    assert.equal(ix.papers[0].path, "neet-pg/subject-mini/neet-pg-sub-anatomy-1.json");
+    assert.ok(fs.existsSync(path.join(dir, "neet-pg", "subject-mini", "neet-pg-sub-anatomy-1.json")));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("requestList never rebuilds published fixed-key papers", () => {
+  const exam = T.EXAMS.find((e) => e.profile === "neet-pg");
+  const { ver } = T.appVersions();
+  const have = new Set(["neet-pg-sub-anatomy-1"]);
+  const req = T.requestList(tax, null, ver, exam, "subject_mini", {}, false, have);
+  assert.ok(!req.some(([f, k, n]) => f === "subject_mini" && k === "anatomy" && n === 1), "published key skipped");
+  assert.ok(req.some(([f, k, n]) => f === "subject_mini" && k === "anatomy" && n === 2), "sibling key still built");
+});
+
+test("buildPaper assembles with the concept-diverse selector", () => {
+  const bank = fixtureBank();
+  const orig = A.assemble;
+  let got = null;
+  A.assemble = (...a) => { got = a[2]; return orig(...a); };
+  try {
+    const r = T.buildPaper(tax, "neet-pg", "mini", "all", 1, bank, BANK_VERS, {}, {}, "2026-10-11T00:00:00.000Z");
+    assert.ok(r.paper, JSON.stringify(r.shortfall));
+    assert.equal(got && got.diverse, true, "assembler gets diverse:true");
+  } finally {
+    A.assemble = orig;
   }
 });
 

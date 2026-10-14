@@ -1,0 +1,160 @@
+{
+ "module": "sur-brain-tumours",
+ "subject": "surgery",
+ "title": "Intracranial neoplasms, glioblastoma multiforme, meningioma, and maximal safe resection",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Youmans Neurological Surgery 7th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Secondary brain metastases represent the most frequent intracranial **neoplasms** in adult patients, originating predominantly from primary carcinomas of the lung, breast, skin melanoma, kidney, and colon. Among primary brain tumors, glioblastoma represents the most common and aggressive malignant histological subtype. Histopathological hallmarks include dense nuclear pleomorphism, microvascular endothelial proliferation, and prominent pseudopalisading geographic necrosis. Mutations in isocitrate dehydrogenase define distinct molecular prognostic subgroups, with IDH-wildtype conferring worse clinical outcomes.",
+   "say": "Metastatic brain tumors from lung, breast, and melanoma are the most common adult intracranial neoplasms. Glioblastoma is the most frequent primary malignant brain tumor, characterized histologically by pseudopalisading necrosis and microvascular proliferation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brain tumor category",
+     "Microscopic histopathology",
+     "Molecular / genetic marker"
+    ],
+    "rows": [
+     [
+      "Glioblastoma (Grade 4)",
+      "Pseudopalisading necrosis & vessels",
+      "IDH-wildtype / MGMT promoter"
+     ],
+     [
+      "Oligodendroglioma",
+      "Fried-egg cells with round nuclei",
+      "1p/19q co-deletion & IDH mutant"
+     ],
+     [
+      "Meningioma (Grade 1)",
+      "Psammoma bodies & whorled cells",
+      "NF2 gene alteration (chromosome 22)"
+     ],
+     [
+      "Vestibular schwannoma",
+      "Antoni A & Antoni B spindle cells",
+      "Bilateral tumors indicate NF2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Meningiomas arise from arachnoid cap **cells** of the leptomeninges, representing the most common benign extra-axial intracranial tumor. They demonstrate a characteristic dural tail of enhancement on contrast-enhanced magnetic resonance imaging and contain laminated calcified psammoma bodies microscopically. Vestibular schwannomas develop from the Schwann cell sheath of the inferior vestibular nerve within the internal auditory canal, producing progressive unilateral sensorineural hearing loss and tinnitus, with bilateral lesions serving as the pathognomonic hallmark of neurofibromatosis type 2.",
+   "say": "Meningiomas arise from arachnoid cap cells, presenting as extra-axial masses with a characteristic dural tail on MRI. Vestibular schwannomas arise from the vestibular nerve, producing progressive unilateral sensorineural hearing loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "New onset focal deficit or seizure"
+     },
+     {
+      "id": "n2",
+      "label": "Gadolinium-enhanced brain MRI"
+     },
+     {
+      "id": "n3",
+      "label": "Differentiate intra-axial from extra-axial"
+     },
+     {
+      "id": "n4",
+      "label": "Image-guided stereotactic craniotomy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients present clinically with generalized features of raised intracranial **pressure** including morning headaches, nausea, projectile vomiting, and bilateral papilledema, alongside focal neurological deficits or new-onset adult epileptic seizures. Magnetic resonance imaging with intravenous gadolinium contrast constitutes the definitive imaging modality of choice. High-grade gliomas display intense peripheral rim enhancement with central non-enhancing necrosis and extensive surrounding vasogenic edema that characteristically respects the cortical grey-white matter boundary.",
+   "say": "Brain tumors present with morning headaches, vomiting, papilledema, and seizures. Contrast-enhanced MRI is the diagnostic gold standard, displaying peripheral rim enhancement and central necrosis in glioblastomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical presentation feature",
+     "Underlying neurological mechanism",
+     "Diagnostic evaluation"
+    ],
+    "rows": [
+     [
+      "Morning headache & vomiting",
+      "Raised ICP peaking with recumbency",
+      "Fundoscopy for papilledema"
+     ],
+     [
+      "New-onset adult seizures",
+      "Cortical irritation & vasogenic edema",
+      "Electroencephalography & MRI"
+     ],
+     [
+      "Unilateral hearing loss",
+      "Cerebellopontine angle compression",
+      "Pure tone audiometry & MRI IAC"
+     ],
+     [
+      "Bitemporal hemianopia",
+      "Optic chiasm compression by pituitary",
+      "Visual field testing & sella MRI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cornerstone of surgical management is maximal safe **resection**, utilizing stereotactic neuronavigation, intraoperative functional MRI, and awake craniotomy with cortical mapping when tumors abut eloquent motor or language cortex. Oral 5-aminolevulinic acid facilitates intraoperative fluorescence-guided visualization of infiltrating tumor margins under blue light. For glioblastoma, the Stupp protocol following surgical debulking combines fractionated focal external beam radiation with concurrent and adjuvant temozolomide chemotherapy, yielding superior survival when the MGMT promoter is methylated.",
+   "say": "Maximal safe surgical resection utilizing neuronavigation and awake mapping provides the foundation of care. Glioblastoma is treated adjuvantly with the Stupp protocol of radiation and temozolomide chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intra-Axial Glioma Surgery",
+     "points": [
+      "Maximal safe resection within parenchyma",
+      "Awake mapping for eloquent speech areas",
+      "5-ALA fluorescence identifies tumor edges"
+     ]
+    },
+    "right": {
+     "title": "Extra-Axial Meningioma Surgery",
+     "points": [
+      "Simpson grade complete excision of dural base",
+      "Cavitron ultrasonic aspirator debulking",
+      "Curative when complete resection achieved"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "8bb63b05-4000-8000-8bb6-3b0512345678",
+  "88b6364c-4000-8000-88b6-364c12345678",
+  "89b637df-4000-8000-89b6-37df12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

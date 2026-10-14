@@ -1,0 +1,89 @@
+{
+  "v": 1,
+  "module": "phm-antifungals",
+  "subject": "pharmacology",
+  "title": "Antifungals: azoles, amphotericin and echinocandins",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Azoles** (lanosterol demethylase blockade) share **CYP inhibition** (warfarin, statin, QT with macrolides) with **hepatotoxicity**; **fluconazole** (candida, crypto maintenance, single dose vulvovaginitis, renal dosed) is safest systemically, **itraconazole** (ABPA, histo, blasto; **negative inotrope banning heart failure**, levels with absorption acidic) needs monitoring, **voriconazole** (invasive aspergillus first line, **visual halos**, skin cancer chronic, CYP2C19 levels) watches eyes and liver. Acne-like rashes with LFTs gate.",
+      "say": "Azoles inhibit CYP and injure liver: fluconazole safest, itraconazole fails hearts, voriconazole halos vision. Levels guide.",
+      "vis": null
+    },
+    {
+      "tx": "**Posaconazole** (AML and GVHD **prophylaxis**, mucor step down, QT with GI upset) and **isavuconazole** (aspergillus with mucor, **shortens QT** uniquely, fewer interactions) modernise mould cover; therapeutic drug monitoring targets prophylaxis versus treatment. Breakthrough (non-aspergillus moulds, resistance) switches class; surgical debridement pairs mucor. Suspension versus tablet absorption differs critically.",
+      "say": "AML mould shield is posaconazole; QT shortening mould drug is isavuconazole. Breakthrough switches class.",
+      "vis": null
+    },
+    {
+      "tx": "**Amphotericin B** (ergosterol pores, broadest including mucor and crypto, **infusion reactions** with rigors, **nephrotoxicity** with hypokalaemia and hypomagnesaemia, anaemia) is tamed by **liposomal** formulation (less renal, costlier) with saline loading and slow infusion; test doses debated. **Flucytosine** (crypto combo with ampho, **marrow suppression** with levels in renal failure) never solos (resistance); prehydration with electrolyte repletion sustains courses.",
+      "say": "Rigoring febrile infusion with failing kidneys is amphotericin: liposomal tames, saline loads. Flucytosine never solos.",
+      "vis": null
+    },
+    {
+      "tx": "**Echinocandins** (**caspofungin, micafungin, anidulafungin**: beta-glucan wall, candidaemia with empiric neutropenic fever, **no crypto, CNS or urine** cover, histamine flushing) bridge azole resistance; **terbinafine** (**nail onychomycosis** with LFTs, taste loss, drug interactions few) beats griseofulvin (tinea capitis children, photosensitivity, warfarin boost). **Nystatin** (thrush swish, no absorption) with clotrimazole vulvovaginitis finish topicals.",
+      "say": "Candidaemia empiric neutropenic is echinocandin (never crypto or urine). Nails terbinafine with LFTs; kids ringworm griseofulvin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antifungal",
+          "Pearl",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Fluconazole",
+            "Safest systemic",
+            "CYP, liver"
+          ],
+          [
+            "Voriconazole",
+            "Aspergillus first",
+            "Eyes, levels"
+          ],
+          [
+            "Ampho B",
+            "Broadest",
+            "Kidneys"
+          ],
+          [
+            "Caspofungin",
+            "Candidaemia",
+            "Not crypto"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-phm-321",
+    "bk2-phm-322",
+    "bk2-phm-323",
+    "bk2-phm-324",
+    "bk2-phm-325",
+    "bk2-phm-326",
+    "bk2-phm-327",
+    "bk2-phm-328",
+    "bk2-phm-329",
+    "bk2-phm-330"
+  ],
+  "src": [],
+  "refs": [
+    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-pharma4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

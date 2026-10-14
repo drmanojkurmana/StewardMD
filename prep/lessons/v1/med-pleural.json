@@ -1,66 +1,60 @@
 {
- "v": 1,
- "module": "med-pleural",
- "subject": "medicine",
- "title": "Tension pneumothorax and pleural emergencies: decompress, drain, reassess",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "A **tension pneumothorax** traps air under pressure, collapsing the lung and obstructing venous return. Suspect it with severe breathlessness, falling blood pressure, distended neck veins, tracheal deviation and absent breath sounds on one side, especially after trauma, ventilation or a pleural procedure. It is a **clinical diagnosis**: do not wait for imaging when the picture fits (ATLS; BTS guidance).",
-   "say": "Tension pneumothorax is a clinical diagnosis. Severe breathlessness, low pressure and one silent chest after trauma mean act now, not image first.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspect tension"
-     },
-     {
-      "id": "b",
-      "label": "Immediate decompression"
-     },
-     {
-      "id": "c",
-      "label": "Chest drain + reassess"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Immediate **needle or finger decompression per protocol** is followed by a formal chest drain, because decompression alone is temporary. A simple pneumothorax in a stable patient is managed by size, symptoms and protocol, ranging from observation to aspiration or drainage. Every pleural intervention ends with reassessment of breathing, pressure and drain swing and a check film as guided.",
-   "say": "Decompression is temporary and is followed by a chest drain. Stable simple pneumothorax is managed by size, symptoms and protocol.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Problem",
-     "Definitive step"
-    ],
-    "rows": [
-     [
-      "Tension",
-      "Drain after decompression"
-     ],
-     [
-      "Stable simple",
-      "Protocol: observe, aspirate or drain"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A large pleural effusion causing breathlessness needs ultrasound-guided drainage by trained hands, with fluid sent for analysis. Sudden deterioration after any chest procedure is tension until proved otherwise. Document side, site, consent and complications honestly for every pleural procedure.",
-   "say": "Drain large effusions under ultrasound guidance, and treat sudden deterioration after any chest procedure as tension until proved otherwise.",
-   "vis": null
+  "v": 1,
+  "module": "med-pleural",
+  "subject": "medicine",
+  "title": "Pleural diseases and pneumothorax",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Effusion** (**stony** dull absent breath, **mediastinal** shift away large, **CXR** meniscus blunts, **ultrasound** septations guides, **tap** diagnostic pH cultures, **Lights** protein LDH exudates, **TB** lymphocytic ADA, **malignant** bloody cytology) with **causes** (**failure** bilateral transudates, **pneumonia** parapneumonic pH, **PE** small exudates, **pancreatitis** amylase left) sorts; **thoracoscopy** (biopsy pleurodesis) sees. Chests dull.",
+      "say": "Stonies shifts meniscuses ultrasounds is effusion: taps test Lights score TBs lymph malignancies bleed failures wet pneumonias sour PEs small pancreases leak scopes see biopsies seed. Fluids dull.",
+      "vis": null
+    },
+    {
+      "tx": "**Pneumothorax** (**sudden** pleuritic breathless tall, **hyperresonant** absent breath silent, **tension** trachea away shock, **CXR** visceral pleural edge, **primary** blebs young thin, **secondary** COPD blebs bursts, **needle** 2nd ICS decompresses, **chest** drain Seldinger swings) with **traps** (**tension** never waits films, **clamp** never clamps swings, **suction** persistent leaks) drains; **pleurodesis** (recurrent sticks) prevents. Lungs collapse.",
+      "say": "Suddens hyperresonants tensions is pneumothorax: CXRs edge primaries bleb secondaries burst needles hiss drains swing tensions shock clamps avoid suctions bubble recurrences stick flights warn dives ban. Chests silent.",
+      "vis": null
+    },
+    {
+      "tx": "**Mesothelioma** (**asbestos** lag 30 years plaques, **chest** pain weight loss, **nodular** pleural rind traps, **biopsy** VATS immunohistochemistry, **pemetrexed** cisplatin doubles, **compensation** industrial claims, **palliation** pain breathlessness, **screening** exposed watches) with **plaques** (**calcified** bilateral diaphragmatic, **benign** asbestos watches) warns; **asbestosis** (fibrosis crackles) stiffens. Pleura thickens.",
+      "say": "Asbestoses pains nodulars is mesothelioma: biopsies stain pemetrexeds double compensations claim palliations ease screenings watch plaques calcify benigns observe fibroses crackle exposures tally jobs record. Rinds encase.",
+      "vis": null
+    },
+    {
+      "tx": "**Empyema** (**fever** pus pH glucose, **ultrasound** septations loculates, **pigtail** small-bore drains, **fibrinolytics** tPA DNase breaks, **surgery** VATS decorticates, **antibiotics** weeks cultures, **TB** empyema necessitatis, **follow** CXR lungs expand) with **chylothorax** (**milky** triglycerides thoracic, **lymphoma** conduits blocks, **fasting** octreotide ligates) milks; **haemothorax** (trauma drains) bleeds. Pus collects.",
+      "say": "Fevers pigtails fibrinolytics is empyema: surgeries strip antibiotics time TBs burst follows film lungs expand chylous milk fasts starve octreotides slow ligations tie traumas bleed transfusions replace clots watch. Cavities fill.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-151",
+    "bk2-med-152",
+    "bk2-med-153",
+    "bk2-med-154",
+    "bk2-med-155",
+    "bk2-med-156",
+    "bk2-med-157",
+    "bk2-med-158",
+    "bk2-med-159",
+    "bk2-med-160"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

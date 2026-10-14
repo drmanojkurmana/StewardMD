@@ -2,65 +2,88 @@
  "v": 1,
  "module": "phm-corticosteroids",
  "subject": "pharmacology",
- "title": "Corticosteroid safety: benefit today, adrenal and bone harm tomorrow",
- "minutes": 7,
+ "title": "Corticosteroids: potency, Cushing, taper and uses",
+ "minutes": 6,
  "steps": [
   {
-   "tx": "**Corticosteroids** suppress inflammation powerfully and harm quietly: raised glucose and pressure, infection masking, mood and sleep disturbance, bone loss, muscle weakness and adrenal suppression. Use the **lowest effective dose for the shortest time**, record indication and review date, and monitor glucose, pressure, mood and infection. Patients on longer courses carry steroid information and know not to stop suddenly (BNF corticosteroid safety).",
-   "say": "Lowest dose, shortest time, with a recorded indication, review date and monitoring plan.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Lowest dose, shortest time"
-     },
-     {
-      "id": "b",
-      "label": "Monitor glucose, pressure, infection"
-     },
-     {
-      "id": "c",
-      "label": "Never stop suddenly"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
+   "tx": "**Corticosteroids** act genomically (hours, transrepression of inflammation) and non-genomically (pulses); potency sorts duration: **hydrocortisone** (short, mineralocorticoid full, replacement), **prednisolone** (intermediate, workhorse), **dexamethasone and betamethasone** (long, no mineralocorticoid, cerebral oedema and fetal lung), **fludrocortisone** (pure mineralocorticoid, Addison and salt wasting). Dose equivalence (hydrocortisone 20 equals prednisolone 5 equals dexamethasone 0.75) converts.",
+   "say": "Short hydrocortisone replaces, intermediate prednisolone works, long dexamethasone oedemas. Fludrocortisone salts.",
+   "vis": null
   },
   {
-   "tx": "Prolonged steroids suppress the adrenal axis, so sudden stopping or intercurrent illness can provoke **adrenal crisis**: vomiting, abdominal pain, weakness, low pressure and collapse. Treatment is urgent protocol hydrocortisone and fluids with senior help, while steroids are tapered as guided during recovery. Sick-day steroid advice is agreed in advance for at-risk patients, not invented during the crisis (BNF; adrenal insufficiency guidance).",
-   "say": "Sudden stopping or illness on long-term steroids can cause adrenal crisis, needing urgent protocol treatment and senior help.",
+   "tx": "**Iatrogenic Cushing** (commonest cause: prescriptions, central obesity with striae, hypertension, glucose intolerance, cataract, psychosis) reverses on taper while endogenous (pituitary, adrenal, ectopic) works up separately. **Adrenal suppression** (weeks of steroids blunt HPA) demands **taper** (alternate day, slow below physiological) with **stress cover** (double or triple perioperative and febrile illness, parenteral if vomiting); abrupt stops crisis (hypotension, hyponatraemia, shock). Sick day rules card every chronic user.",
+   "say": "Weeks of steroids blunt adrenals: taper slow, double sick days. Stopping abruptly crises.",
+   "vis": null
+  },
+  {
+   "tx": "**Systemic uses** target inflammation and immunity: asthma and COPD exacerbations (prednisolone bursts), rheumatoid and IBD flares, **multiple sclerosis relapse** (methylprednisolone pulses), **cerebral oedema** around tumours (dexamethasone), **Pneumocystis hypoxia** (adjunct saving), **TB meningitis** (dexamethasone mortality benefit), ALL induction, transplant rejection, anaphylaxis adjunct (adrenaline leads). Pulses treat flares; maintenance seeks sparers (methotrexate, azathioprine, biologics).",
+   "say": "MS relapse pulses methylprednisolone; tumour oedema dexamethasones; TB meningitis steroids save. Sparers maintain.",
+   "vis": null
+  },
+  {
+   "tx": "**Adverse shield** anticipates: hyperglycaemia (diabetes screen), **osteoporosis** (calcium, vitamin D, bisphosphonates, DEXA), cataract with glaucoma (eye checks), psychosis and mania, **avascular necrosis** hips, skin thinning with striae, weight gain. **Inhaled** (beclomethasone, budesonide; rinse mouth preventing **candidiasis**, spacer technique) and topical (fingertip units, potency ladders, tachyphylaxis) localise benefit. Live vaccines wait immunosuppression out.",
+   "say": "Steroid bones thin: calcium, D, bisphosphonate, DEXA. Inhalers rinse: thrush follows otherwise.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Trigger",
-     "Danger"
+     "Steroid",
+     "Duration",
+     "Role"
     ],
     "rows": [
      [
-      "Sudden stop / illness",
-      "Adrenal crisis"
+      "Hydrocortisone",
+      "Short",
+      "Replace"
      ],
      [
-      "Recovery",
-      "Guided taper"
+      "Prednisolone",
+      "Intermediate",
+      "Flares"
+     ],
+     [
+      "Dexamethasone",
+      "Long",
+      "Oedema, lung"
+     ],
+     [
+      "Fludrocortisone",
+      "Mineral",
+      "Salt"
      ]
     ]
    }
-  },
-  {
-   "tx": "Bone, eye, growth and vaccine cautions travel with steroids: bone protection is considered for longer courses, live vaccines are avoided during significant immunosuppression as guided, and children need growth monitoring. Document cumulative burden when courses repeat. Exact taper schedules and crisis doses follow current protocols and are flagged here rather than generalised.",
-   "say": "Consider bone protection, vaccine cautions and growth checks, and take exact tapers from current protocols.",
-   "vis": null
   }
- ]
+ ],
+ "quiz": [
+  "bk2-phm-201",
+  "bk2-phm-202",
+  "bk2-phm-203",
+  "bk2-phm-204",
+  "bk2-phm-205",
+  "bk2-phm-206",
+  "bk2-phm-207",
+  "bk2-phm-208",
+  "bk2-phm-209",
+  "bk2-phm-210"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

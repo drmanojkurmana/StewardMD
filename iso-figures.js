@@ -11,7 +11,7 @@
    Node: module.exports = the pure helpers (test/iso-figures.test.mjs). */
 (function (G) {
   "use strict";
-  var V = "iso2";
+  var V = "iso3";
   var NUM = /(-?\d*\.?\d+(?:e[-+]?\d+)?)/;
 
   /* ================= pure helpers ================= */
@@ -249,14 +249,33 @@
   }
   function sweep() { live = live.filter(function (inst) { return D.body.contains(inst.el); }); }
 
+  // Host adapters: modules synced byte-for-byte from their own repos (Ophthalmos, test/ophthalmos-sync.json) are not
+  // edited here, so their figure is added from this side. The focus explorer repaints .ex-wrap[data-x=focus] whole;
+  // the retinoscopy bench goes under its grid, set to that eye's spherical equivalent (rounded to 0.5 D).
+  function ophthalmosBench() {
+    var w = D.querySelector('.ex-wrap[data-x="focus"]'), grid = w && w.querySelector(".ex-grid");
+    if (!grid || w.querySelector(".smd-iso-bench")) return;
+    var rx = 0, O = G.OPHTHALMOS, X = G.OPHTHALMOS_EXPLORE;
+    try {
+      var fo = O._explore._x.fo;
+      if (fo && X && X.focus) { var r = X.focus({ len: fo.len, cyl: fo.cyl, ax: fo.ax, age: fo.age, near: fo.near, lens: null }).rx; rx = clamp(Math.round((r.s + r.c / 2) * 2) / 2, -6, 6); }
+    } catch (e) {}
+    var sec = D.createElement("section");
+    sec.className = "ex-iso smd-iso-bench";
+    sec.innerHTML = '<h2 class="ex-h3">The same eye under a retinoscope</h2>' + slot("retinoscope", { state: { rx: rx, lens: 0 } });
+    grid.parentNode.insertBefore(sec, grid.nextSibling);
+  }
+  function adapters() { try { ophthalmosBench(); } catch (e) {} }
+
   function start() {
     if (!enabled() || !D.body) return;
+    adapters();
     mountAll(D);
     if ("MutationObserver" in G) {
       var queued = false;
       new G.MutationObserver(function () {
         if (queued) return; queued = true;
-        (G.requestAnimationFrame || G.setTimeout)(function () { queued = false; sweep(); mountAll(D); });
+        (G.requestAnimationFrame || G.setTimeout)(function () { queued = false; sweep(); adapters(); mountAll(D); });
       }).observe(D.body, { childList: true, subtree: true });
     }
   }

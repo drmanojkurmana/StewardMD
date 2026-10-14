@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "module": "bio-fat-soluble-vitamins",
+ "subject": "biochemistry",
+ "title": "Fat-soluble vitamins: absorption, biochemical functions and toxicity",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Vitamin A** encompasses retinol, retinal, and retinoic acid. **11-cis-retinal** binds opsin to form rhodopsin, essential for low-light vision in retinal rods; light isomerizes it to all-trans-retinal, initiating phototransduction. **Retinoic acid** binds nuclear retinoic acid receptors (RAR/RXR) to regulate epithelial differentiation. Deficiency causes **nyctalopia** (night blindness), xerophthalmia, Bitot spots, and follicular hyperkeratosis. Toxicity causes idiopathic intracranial hypertension, teratogenicity, dry skin, and hepatomegaly.",
+   "say": "Vitamin A provides retinal for rhodopsin in low light rod vision and retinoic acid for epithelial differentiation. Deficiency causes night blindness, Bitot spots, and corneal xerosis. Hypervitaminosis A causes raised intracranial pressure, hepatotoxicity, and fetal malformations.",
+   "vis": {
+    "cols": [
+     "Form of Vitamin A",
+     "Biochemical Role",
+     "Deficiency Manifestation"
+    ],
+    "rows": [
+     [
+      "11-cis-retinal",
+      "Chromophore in rhodopsin photopigment",
+      "Nyctalopia (night blindness) in dim light"
+     ],
+     [
+      "Retinoic acid",
+      "Nuclear receptor ligand for gene expression",
+      "Squamous metaplasia, Bitot spots, xerophthalmia"
+     ],
+     [
+      "Retinol",
+      "Circulating transport form bound to RBP",
+      "Depleted hepatic retinyl ester stores in stellate cells"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Skin synthesizes cholecalciferol (vitamin D3) from 7-dehydrocholesterol via ultraviolet B light. In the liver, **25-hydroxylase (CYP2R1)** forms 25-hydroxyvitamin D3 (calcidiol), the major circulating storage form. In renal proximal tubules, **1-alpha-hydroxylase (CYP27B1)** forms active **1,25-dihydroxyvitamin D3 (calcitriol)**, stimulated by PTH and hypophosphataemia. Calcitriol induces calbindin to enhance intestinal calcium and phosphate absorption and coordinates with PTH to stimulate osteoclastic bone resorption.",
+   "say": "Sunlight converts skin 7-dehydrocholesterol to cholecalciferol. The liver hydroxylates it to calcidiol, and the kidney performs 1-alpha-hydroxylation to produce active calcitriol under PTH stimulation. Calcitriol maximizes intestinal calcium and phosphate absorption.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "7-Dehydrocholesterol in skin exposed to UVB"
+     },
+     {
+      "id": "d2",
+      "label": "Cholecalciferol transport to liver"
+     },
+     {
+      "id": "d3",
+      "label": "Hepatic 25-hydroxylase yields Calcidiol (25-OH-D)"
+     },
+     {
+      "id": "d4",
+      "label": "Renal 1-alpha-hydroxylase stimulated by PTH yields Calcitriol"
+     },
+     {
+      "id": "d5",
+      "label": "Enterocyte calbindin expression drives Ca2+ and PO4 absorption"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ],
+     [
+      "d4",
+      "d5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Vitamin D deficiency impairs bone mineralization. In growing children, **rickets** causes unmineralized osteoid accumulation, widened epiphyses, **rachitic rosary** at costochondral junctions, craniotabes, and bowed legs. In adults, **osteomalacia** causes diffuse bone pain, proximal muscle weakness, and pseudofractures (Looser zones) on radiographs. Conversely, **vitamin D toxicity** induces severe hypercalcaemia, hypercalciuria, polyuria, nephrocalcinosis, and metastatic soft tissue calcification, seen in sarcoidosis from macrophage 1-alpha-hydroxylase.",
+   "say": "Vitamin D deficiency causes rickets in children with widened epiphyses, bowed legs, and costochondral beading. In adults it produces osteomalacia with bone pain and pseudofractures. Excess vitamin D causes hypercalcaemia, nephrocalcinosis, and renal stones.",
+   "vis": {
+    "left": {
+     "title": "Rickets (Children)",
+     "points": [
+      "Occurs prior to epiphyseal growth plate closure",
+      "Widening and cupping of metaphyses on X-ray",
+      "Rachitic rosary at costochondral junctions",
+      "Genu varum or genu valgum deformities",
+      "Craniotabes with delayed fontanelle closure"
+     ]
+    },
+    "right": {
+     "title": "Osteomalacia (Adults)",
+     "points": [
+      "Occurs in remodeled mature bone after epiphyseal closure",
+      "Impaired osteoid mineralization in cortical and trabecular bone",
+      "Diffuse skeletal aching and proximal myopathy",
+      "Looser zones (pseudofractures) on radiograph",
+      "Elevated alkaline phosphatase with low calcium and phosphate"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Vitamin E (alpha-tocopherol)** is a lipid-soluble antioxidant that halts free-radical chain reactions in polyunsaturated membrane phospholipids. By quenching lipid peroxyl radicals, it protects erythrocyte membranes and myelin sheaths against oxidative damage. Deficiency manifests as **haemolytic anaemia**, acanthocytosis, and a neurological syndrome mimicking Friedreich ataxia: **posterior column degeneration** causing loss of proprioception and vibration, and spinocerebellar tract ataxia without visual loss.",
+   "say": "Vitamin E acts as a membrane antioxidant that prevents free radical peroxidation of lipids. Deficiency causes haemolytic anaemia and progressive neurological deficits: loss of vibration and proprioception, ataxia, and absent reflexes, closely resembling Friedreich ataxia.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Vitamin E Deficiency",
+     "Vitamin B12 Deficiency"
+    ],
+    "rows": [
+     [
+      "Haematological finding",
+      "Haemolytic anaemia with acanthocytes",
+      "Megaloblastic anaemia with hypersegmented neutrophils"
+     ],
+     [
+      "Dorsal column involvement",
+      "Loss of vibration and proprioception",
+      "Loss of vibration and proprioception"
+     ],
+     [
+      "Serum methylmalonic acid",
+      "Normal",
+      "Elevated (diagnostic marker)"
+     ],
+     [
+      "Serum homocysteine",
+      "Normal",
+      "Elevated"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Vitamin K** serves as an essential cofactor for **gamma-glutamyl carboxylase**, which converts glutamic acid residues to gamma-carboxyglutamate (Gla) on coagulation factors **II, VII, IX, and X**, and anticoagulants **proteins C and S**. Gla residues chelate calcium, allowing attachment to platelet phospholipids during clot assembly. Vitamin K epoxide reductase (VKOR) regenerates reduced vitamin K and is inhibited by **warfarin**. Neonates receive prophylactic intramuscular vitamin K to prevent haemorrhagic disease of the newborn.",
+   "say": "Vitamin K is the cofactor for gamma-carboxylation of factors 2, 7, 9, 10, protein C, and protein S, enabling calcium binding on platelets. Warfarin blocks vitamin K epoxide reductase. Newborns receive prophylactic vitamin K at birth to prevent fatal haemorrhage.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Dietary or bacterial Vitamin K intake"
+     },
+     {
+      "id": "k2",
+      "label": "Active hydroquinone cofactor generated"
+     },
+     {
+      "id": "k3",
+      "label": "Carboxylation of Factors II, VII, IX, X and Proteins C, S"
+     },
+     {
+      "id": "k4",
+      "label": "Oxidized epoxide recycled by VKOR"
+     },
+     {
+      "id": "k5",
+      "label": "Warfarin competitively inhibits VKOR recycling"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ],
+     [
+      "k4",
+      "k5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-scurvy"
+ ]
+}

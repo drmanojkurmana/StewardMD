@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "bio-haemoglobin",
+ "subject": "biochemistry",
+ "title": "Haemoglobin structure, allosteric oxygen binding and haemoglobinopathies",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Adult haemoglobin A is a **heterotetramer** of two alpha and two beta globin chains, each carrying an iron-protoporphyrin IX heme group. Deoxygenated haemoglobin exists in the **T tense state** with low oxygen affinity, stabilized by salt bridges. Oxygen binding ruptures these electrostatic bonds, shifting the molecule to the **R relaxed state** with high oxygen affinity. This conformational transition generates a **sigmoidal oxygen dissociation curve**, enabling efficient cooperative loading in lungs and unloading in tissues.",
+   "say": "Haemoglobin is a tetramer of two alpha and two beta subunits. Deoxyhaemoglobin sits in a low affinity tense state. Binding oxygen breaks salt bridges and shifts the tetramer into the high affinity relaxed state, creating a cooperative sigmoidal oxygen binding curve.",
+   "vis": {
+    "left": {
+     "title": "Tense State (T state)",
+     "points": [
+      "Low affinity for oxygen molecules",
+      "Stabilized by interchain salt bridges",
+      "Favored by low pH, high CO2, 2,3-BPG",
+      "Dominates in deoxygenated venous blood"
+     ]
+    },
+    "right": {
+     "title": "Relaxed State (R state)",
+     "points": [
+      "High affinity for oxygen molecules",
+      "Salt bridges ruptured upon oxygenation",
+      "Favored by high pH, low CO2, low 2,3-BPG",
+      "Dominates in oxygenated pulmonary blood"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Four physiological allosteric effectors regulate haemoglobin oxygen affinity. An increase in **protons, carbon dioxide, temperature, or 2,3-bisphosphoglycerate** shifts the oxygen dissociation curve to the **right**, decreasing oxygen affinity and promoting unloading into metabolically active tissues. Conversely, alkalosis, hypothermia, fetal haemoglobin, or reduced 2,3-BPG shift the curve to the **left**. The Bohr effect reflects proton binding to histidine residues in deoxyhaemoglobin, stabilizing the tense conformation.",
+   "say": "Metabolic byproducts modulate oxygen release. Higher acidity, carbon dioxide, heat, and 2,3 bisphosphoglycerate shift the curve rightward, offloading oxygen to working tissues. Hypothermia, alkalosis, and fetal haemoglobin shift the curve leftward, increasing binding affinity.",
+   "vis": {
+    "cols": [
+     "Direction of Shift",
+     "Allosteric Factors",
+     "Physiological Consequence"
+    ],
+    "rows": [
+     [
+      "Right shift",
+      "Increased H+ (acidosis), pCO2, temperature, 2,3-BPG",
+      "Decreased O2 affinity, enhanced delivery to active tissue"
+     ],
+     [
+      "Left shift",
+      "Decreased H+ (alkalosis), pCO2, temperature, 2,3-BPG",
+      "Increased O2 affinity, tight binding in lungs or placenta"
+     ],
+     [
+      "Fetal HbF effect",
+      "Lack of positively charged residues in gamma chains",
+      "Poor 2,3-BPG binding, shifts curve left to extract maternal O2"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Embryonic globins Gower and Portland are replaced by **fetal haemoglobin HbF**, consisting of two alpha and two gamma chains. Gamma chains contain serine instead of histidine at position 143, eliminating critical positive charges needed to bind anionic 2,3-BPG. Because HbF binds 2,3-BPG poorly, it maintains higher oxygen affinity than maternal HbA, driving transplacental oxygen transfer. Around birth, gamma globin transcription switches to beta globin, producing adult **HbA (alpha2 beta2)**.",
+   "say": "Fetal haemoglobin consists of two alpha and two gamma chains. Lacking specific histidine residues, it binds 2,3 bisphosphoglycerate weakly, giving it higher oxygen affinity than maternal blood. This gradient drives oxygen across the placenta until adult beta globin replaces gamma globin.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Embryonic globins in yolk sac (Gower, Portland)"
+     },
+     {
+      "id": "h2",
+      "label": "Fetal globin switch in liver (HbF: alpha2 gamma2)"
+     },
+     {
+      "id": "h3",
+      "label": "Low 2,3-BPG binding affinity extracts maternal O2"
+     },
+     {
+      "id": "h4",
+      "label": "Perinatal beta globin promoter activation in marrow"
+     },
+     {
+      "id": "h5",
+      "label": "Adult haemoglobin dominance (HbA: alpha2 beta2)"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ],
+     [
+      "h3",
+      "h4"
+     ],
+     [
+      "h4",
+      "h5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Sickle cell disease** results from a point mutation in the beta globin gene substituting **valine for glutamic acid at codon 6**. The nonpolar valine creates a hydrophobic patch on deoxyhaemoglobin S. Under hypoxic conditions, deoxy-HbS molecules polymerize into insoluble fibrous filaments, distorting erythrocytes into rigid **sickle shapes**. These deformed cells cause microvascular vaso-occlusion, tissue ischaemia, painful crises, autosplenectomy, and severe haemolytic anaemia.",
+   "say": "Sickle cell anaemia arises from a single base substitution placing hydrophobic valine at position 6 of the beta globin chain. Deoxygenation causes mutant haemoglobin S to polymerize into rigid cords, deforming erythrocytes and causing painful vaso-occlusion and haemolysis.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Point mutation: Glu to Val at beta-6"
+     },
+     {
+      "id": "s2",
+      "label": "Exposure of hydrophobic patch on deoxy-HbS"
+     },
+     {
+      "id": "s3",
+      "label": "Polymerization into long helical fibers"
+     },
+     {
+      "id": "s4",
+      "label": "Erythrocyte sickling and membrane damage"
+     },
+     {
+      "id": "s5",
+      "label": "Microvascular occlusion and chronic haemolysis"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ],
+     [
+      "s4",
+      "s5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Thalassaemias** are quantitative globin synthesis defects. **Alpha thalassaemia** typically stems from gene deletions across four alpha globin alleles on chromosome 16, producing Hb Bart (gamma4) in hydrops fetalis or HbH (beta4) in three-gene deletions. **Beta thalassaemia** involves point mutations on chromosome 11, causing absent or reduced beta chain synthesis. Unpaired excess alpha chains precipitate within erythroblasts, causing severe **ineffective erythropoiesis**, marrow expansion, chipmunk facies, and transfusion-dependent anaemia.",
+   "say": "Thalassaemias represent quantitative deficits in globin chain synthesis. Alpha thalassaemia usually involves gene deletions, while beta thalassaemia involves point mutations. Unpaired surplus globin chains precipitate in marrow precursors, leading to ineffective erythropoiesis and severe anaemia.",
+   "vis": {
+    "cols": [
+     "Disorder",
+     "Genetic Mechanism",
+     "Predominant Haemoglobins",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "Alpha thalassaemia major",
+      "Four alpha-gene deletion",
+      "Hb Bart (gamma4 tetramers)",
+      "Hydrops fetalis, fatal in utero without intrauterine transfusion"
+     ],
+     [
+      "HbH disease",
+      "Three alpha-gene deletion",
+      "HbH (beta4 tetramers)",
+      "Chronic haemolytic anaemia, splenomegaly, microcytosis"
+     ],
+     [
+      "Beta thalassaemia major",
+      "Homozygous beta-0 or beta+ mutations",
+      "HbF markedly elevated, absent HbA",
+      "Severe anaemia at 6 months, chipmunk facies, iron overload"
+     ],
+     [
+      "Beta thalassaemia minor",
+      "Heterozygous beta mutation",
+      "HbA2 elevated above 3.5 percent",
+      "Mild microcytic anaemia, target cells on peripheral smear"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-sickle-cell-disease"
+ ]
+}

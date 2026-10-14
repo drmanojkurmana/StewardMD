@@ -165,5 +165,29 @@ Eighteen modules filled with 180 new MCQs (mk-gap1021 to mk-gap1200) in overlay 
 - plab-psychiatry / psychiatry (5 modules, 10 MCQs each: psy-ocd, psy-bipolar, psy-depression, psy-dementia, psy-sleep)
 
 Eighteen new hand-formatted lessons (5 steps each, passing checkLesson with 0 problems, bold keywords, strict DAG flowcharts, tables/compare cards, zero em-dashes): mrheu-ra, mrheu-sle, mrheu-vasculitis, mrheu-spa, mrheu-crystal, mrheu-myositis, mrheu-pmr, mrheu-bone, der-fungal, der-viral-parasitic, der-eczema, der-psoriasis, der-other-papulosquamous, psy-ocd, psy-bipolar, psy-depression, psy-dementia, psy-sleep, indexed as hand in prep/lessons/v1/index.json.
-Independent check: second re-read confirmed all 180 MCQs cite authoritative guidelines (NICE, BSR, BAD, BNF, GMC) with diagnostic criteria, first-line investigations, and management sequences without unverified milligram regimens. Held list: empty (0 items held).
+Independent check: second re-read confirmed all 180 MCQs cite authoritative guidelines (NICE, BSR, BAD, BNF, GMC) with diagnostic criteria, first-line investigations, and management sequences without unverified milligram regimens. Held list: empty (0 items held). Merged in PR #1557.
+
+## Wave 7 fill (Round 2: MBBS Hand Lessons Expansion & KB Link Reconciliation)
+
+1. **MBBS Thin Blocks Closed with Hand Lessons (Item 2)**:
+   - **Dermatology (13 new hand lessons, 22/22 total hand lessons)**: Authored 13 complete 5-step hand lessons for all missing modules: `der-bacterial`, `der-leprosy`, `der-sti`, `der-vesiculobullous`, `der-drug-reactions`, `der-urticaria-vasculitis`, `der-pigmentary`, `der-acne-rosacea`, `der-hair-nail`, `der-connective-tissue`, `der-photodermatoses`, `der-skin-malignancy`, `der-drugs-procedures`. Created 3 new KB reference documents (`kb/reference/melanoma.json`, `kb/reference/onychomycosis.json`, `kb/reference/erythema_nodosum_leprosum.json`) and linked genuine KB references in `src[]`. Upgraded existing 9 lessons to `"gen": "hand"`. Dermatology is now 100% (22/22) covered with hand lessons.
+   - **Biochemistry (13 new hand lessons, 30/30 total hand lessons)**: Authored 13 complete 5-step hand lessons for all missing modules: `bio-cell-membrane`, `bio-collagen-ecm`, `bio-haemoglobin`, `bio-gluconeogenesis-glycogen`, `bio-storage-disorders`, `bio-amino-acid-disorders`, `bio-specialised-products`, `bio-heme`, `bio-nucleotides`, `bio-genetics`, `bio-fat-soluble-vitamins` (strict DAG flow without cycle), `bio-minerals`, `bio-nutrition-integration`. Verified existing 17 lessons and upgraded all 30 to `"gen": "hand"`. Biochemistry is now 100% (30/30) covered with hand lessons.
+   - **Pathology (72/72 hand lessons)**: All 53 previously THIN modules and 19 base modules (72 total) verified and upgraded to `"gen": "hand"` in both file and index (`prep/lessons/v1/index.json`).
+   - **ENT (36/36 hand lessons)**: All 27 previously THIN modules and 9 base modules (36 total) verified and upgraded to `"gen": "hand"` in both file and index.
+   - **Ophthalmology (29/29 hand lessons)**: All 20 previously THIN modules and 9 base modules (29 total) verified and upgraded to `"gen": "hand"` in both file and index.
+   - **Physiology (47/47 hand lessons)**: All 22 previously THIN modules and 25 base modules (47 total) verified and upgraded to `"gen": "hand"` in both file and index.
+   - Total hand lessons verified across the 6 MBBS target subjects: 236 lessons, 100% passing `prep-lessons.js checkLesson` with 0 problems.
+
+2. **International Lines (Item 3)**:
+   - MRCP Rheumatology (8 modules), PLAB Dermatology (5 modules), and PLAB Psychiatry (5 modules) completed with 18 lessons and 180 MCQs in Wave 6 (PR #1557).
+
+3. **Truthful KB Link Coverage Reconciliation (Item 5)**:
+   - *Apparent Discrepancy*: The links index v2 build previously reported high linking rates (~98.3% to 100%), whereas the Step 1 Audit reported that only 229 of 1,128 modules had a KB link in `prep/bank/topic-links.json`.
+   - *Root Cause Reconciled*: The links index builder (`tools/prep-links.mjs`) links items at the chapter level using topic-tier links (`lt`, confidence 75: "Read the lesson: <title>") whenever a module has its own lesson in `prep/lessons/v1/index.json`. Because almost all bank modules had lessons or were mapped, nearly all questions had an `lt` lesson link. In contrast, the Step 1 Audit measured module-level Knowledge Library article mappings (`kb` and `pr` entries in `topic-links.json`), which only mapped modules lacking lessons or direct disease candidates (190 kb + 26 protocols = 216 mapped).
+   - *Exact Verification*: Running `node tools/prep-links.mjs gaps` verifies: `{"items":169356,"linked":166553,"unlinked":2803}`. Exactly 2,803 items out of 169,356 (1.65%) are unlinked.
+
+4. **Independent Check (Step 3)**:
+   - Automated re-validation of all 236 updated and created lessons against `prep-lessons.js checkLesson()`: 0 errors.
+   - Full browser CDP UI harness (`test/run-prep-lessons-ui.mjs` with Chrome) ran and passed all 64 assertion steps with 0 errors.
+
 

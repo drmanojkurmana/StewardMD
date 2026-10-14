@@ -47,11 +47,12 @@ const PURE = need(path.join(ROOT, "prep.js"));
 export const TESTS_VER = "v1";
 export const PAPER_SCHEMA = "prep/fixed-paper/v1";
 // The common-tests exams (ini-ss is a profile but not a common-tests exam).
+// neet-ss carries ssAll: its papers cover every ss-* branch (one paper per group), not just ss-medicine.
 export const EXAMS = [
   { profile: "fmge", tab: "fmge", branch: "mbbs", tag: "fmge", all: true },
   { profile: "neet-pg", tab: "neet-pg", branch: "mbbs", tag: "neet-pg" },
   { profile: "ini-cet", tab: "neet-pg", branch: "mbbs", tag: "ini-cet" },
-  { profile: "neet-ss", tab: "neet-ss", branch: "ss-medicine", tag: "neet-ss" },
+  { profile: "neet-ss", tab: "neet-ss", branch: "ss-medicine", tag: "neet-ss", ssAll: true },
   { profile: "usmle-step1", tab: "usmle", branch: "mbbs", tag: "usmle" },
   { profile: "usmle-step2-ck", tab: "usmle", branch: "mbbs", tag: "usmle-step2-ck" },
   { profile: "plab-1", tab: "plab", branch: "uk", tag: "plab-1" },
@@ -114,10 +115,11 @@ export function subjectName(tax, sid) {
   return sid;
 }
 // Subjects in a common-tests exam's scope (exam tags in prep/taxonomy.json, like the app's subjectsOf).
+// An exam with ssAll covers every ss-* branch (NEET-SS groups live across them).
 export function scopeSubjects(tax, exam) {
   const out = [];
   for (const b of tax.branches) {
-    if (b.id !== exam.branch) continue;
+    if (b.id !== exam.branch && !(exam.ssAll && b.id.indexOf("ss-") === 0)) continue;
     for (const s of b.subjects) if (exam.all || !s.ex || s.ex.indexOf(exam.tag) >= 0) out.push(s.id);
   }
   return out;
@@ -244,28 +246,52 @@ async function getJSON(url, tries = 4) {
 function readCache(f) {
   try { const j = JSON.parse(fs.readFileSync(f, "utf8")); return j && typeof j === "object" ? j : null; } catch { return null; }
 }
+// Subjects whose live module index 404s (taxonomy lists them, the bank serves no file): the pool simply lacks
+// those items. Recorded in the cache so loadSubject tells them apart from subjects never fetched.
+export function skippedSubjects(cache) {
+  try {
+    const j = JSON.parse(fs.readFileSync(path.join(cache, "skipped-index.json"), "utf8"));
+    return Array.isArray(j) ? j : [];
+  } catch { return []; }
+}
 // Every module file the build reads: non-mixed topics with questions (the Tests 2 scope), per subject bank version.
-export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs = 8, log = () => {} } = {}) {
+// A missing module index (live 404) skips that subject with a warning instead of aborting the fetch.
+export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs = 8, log = () => {}, _get = getJSON } = {}) {
   api = api.replace(/\/?$/, "/");
   const tax = loadTaxonomy(), { ver, pyq } = appVersions();
   const subjects = [...new Set(EXAMS.flatMap((e) => scopeSubjects(tax, e)))].sort();
-  const want = [];
+  const want = [], skippedIdx = [];
   for (const sid of subjects) {
     const bv = bvOf(tax, ver, sid);
     const ixP = `${bv}/${sid}/index.json`, ixF = path.join(cache, ixP);
     let ix = readCache(ixF);
-    if (!ix || !Array.isArray(ix.topics)) { ix = await getJSON(api + ixP); fs.mkdirSync(path.dirname(ixF), { recursive: true }); fs.writeFileSync(ixF, JSON.stringify(ix)); }
+    if (!ix || !Array.isArray(ix.topics)) {
+      try {
+        ix = await _get(api + ixP);
+      } catch (e) {
+        if (!/HTTP 404/.test(String((e && e.message) || e))) throw e;
+        skippedIdx.push(sid); // no live index: overlay-only subject, the pool follows the overlays
+        continue;
+      }
+      fs.mkdirSync(path.dirname(ixF), { recursive: true }); fs.writeFileSync(ixF, JSON.stringify(ix));
+    }
     for (const t of ix.topics || []) {
       if (t.group === "mixed" || !(t.count > 0)) continue;
       want.push({ rel: `${bv}/${sid}/mcq/${t.id}.json`, sid, mid: t.id });
     }
+  }
+  if (skippedIdx.length) {
+    skippedIdx.sort();
+    fs.mkdirSync(cache, { recursive: true });
+    fs.writeFileSync(path.join(cache, "skipped-index.json"), JSON.stringify(skippedIdx));
+    log(`  WARNING: ${skippedIdx.length} subjects have no live module index (404, skipped; pool follows the overlays): ${skippedIdx.slice(0, 8).join(", ")}${skippedIdx.length > 8 ? "..." : ""}`);
   }
   let done = 0, fetched = 0;
   const one = async (w) => {
     const f = path.join(cache, w.rel);
     const hit = readCache(f);
     if (!hit || !Array.isArray(hit.items)) {
-      const j = await getJSON(api + w.rel);
+      const j = await _get(api + w.rel);
       if (!j || !Array.isArray(j.items)) throw new Error("no items in " + w.rel);
       fs.mkdirSync(path.dirname(f), { recursive: true });
       fs.writeFileSync(f, JSON.stringify(j));
@@ -285,7 +311,7 @@ export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs
     const hit = readCache(f);
     if (hit && Array.isArray(hit.items)) { done++; return; }
     try {
-      const j = await getJSON(api + rel);
+      const j = await _get(api + rel);
       if (!j || !Array.isArray(j.items)) throw new Error("no items in " + rel);
       fs.mkdirSync(path.dirname(f), { recursive: true });
       fs.writeFileSync(f, JSON.stringify(j));
@@ -300,7 +326,7 @@ export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs
   await Promise.all(Array.from({ length: Math.max(1, jobs) }, async () => { while (k < ovWant.length) await oneOv(ovWant[k++]); }));
   // Live manifest cross-check: sets the app serves but the committed counts do not know.
   try {
-    const ptr = await getJSON(api + "overlay/maik/index.json");
+    const ptr = await _get(api + "overlay/maik/index.json");
     const live = new Set();
     for (const sid of Object.keys((ptr && ptr.sets) || {})) for (const s of ptr.sets[sid]) live.add(s);
     const known = new Set(Object.keys(overlaySets()));
@@ -309,18 +335,18 @@ export async function fetchBank({ cache = DEFAULT_CACHE, api = DEFAULT_API, jobs
   } catch (e) { log(`  WARNING: live overlay manifest unreadable (${(e && e.message) || e}); pool follows the committed counts`); }
   if (skipped.length) log(`  WARNING: ${skipped.length} overlay files 404 (${skipped.slice(0, 5).join(", ")}${skipped.length > 5 ? "..." : ""})`);
   // PYQ recall papers (the items file the live index names).
-  const pyqIx = await getJSON(api + `${pyq}/pyq/index.json`);
+  const pyqIx = await _get(api + `${pyq}/pyq/index.json`);
   const pyqF = path.join(cache, `${pyq}/pyq`, pyqIx.file);
   let pyqFetched = 0;
   if (!readCache(pyqF)) {
-    const j = await getJSON(api + `${pyq}/pyq/` + pyqIx.file);
+    const j = await _get(api + `${pyq}/pyq/` + pyqIx.file);
     fs.mkdirSync(path.dirname(pyqF), { recursive: true });
     fs.writeFileSync(pyqF, JSON.stringify(j));
     pyqFetched = 1;
   }
   fs.writeFileSync(path.join(cache, "pyq-index.json"), JSON.stringify(pyqIx));
   log(`bank cache: ${want.length} module files (+PYQ), ${fetched + pyqFetched} fetched, ${want.length - fetched} reused; overlays: ${ovWant.length} files, ${ovFetched} fetched, ${skipped.length} skipped (404)`);
-  return { subjects, modules: want.length, overlays: ovWant.length, ovFetched, ovSkipped: skipped.length };
+  return { subjects, modules: want.length, overlays: ovWant.length, ovFetched, ovSkipped: skipped.length, idxSkipped: skippedIdx };
 }
 
 /* ---------- load: slim pools per subject, exactly what assemble() reads ---------- */
@@ -328,9 +354,10 @@ const slim = (it, s, m, ov = null) => ({ id: it.id, q: it.q, o: it.o, a: it.a, f
 export function loadSubject(cache, tax, ver, sid, sets = overlaySets()) {
   const bv = bvOf(tax, ver, sid);
   const ix = readCache(path.join(cache, `${bv}/${sid}/index.json`));
-  if (!ix) throw new Error("not fetched: " + sid + " (run fetch first)");
+  // A skipped subject (live index 404, see fetchBank) has no bank lists; its pool is the overlays alone.
+  if (!ix && skippedSubjects(cache).indexOf(sid) < 0) throw new Error("not fetched: " + sid + " (run fetch first)");
   const lists = [], byMid = {};
-  for (const t of ix.topics || []) {
+  for (const t of (ix && ix.topics) || []) {
     if (t.group === "mixed" || !(t.count > 0)) continue;
     const j = readCache(path.join(cache, `${bv}/${sid}/mcq/${t.id}.json`));
     if (!j) throw new Error("not fetched: " + sid + "/" + t.id);
@@ -422,14 +449,34 @@ export function poolCounts(root = ROOT) {
 export function majorTopics(cache, tax, ver, exam) {
   const out = [];
   const pt = bankPool(exam.profile), pools = pt ? (poolCounts()[pt] || {}) : null;
+  const sets = overlaySets();
   const min = (EXAM_CFG[exam.profile] || {}).topicMin || TOPIC_MIN;
   for (const sid of scopeSubjects(tax, exam)) {
     const ix = readCache(path.join(cache, `${bvOf(tax, ver, sid)}/${sid}/index.json`));
-    const ts = [];
+    const ts = [], seenMid = {};
     for (const t of (ix && ix.topics) || []) {
       const n = pools ? ((pools[sid] || {})[t.id] || 0) : t.count;
       if (t.group === "mixed" || !(n >= min)) continue;
+      seenMid[t.id] = 1;
       ts.push({ sid, mid: t.id, title: (t.title && t.title.en) || t.id, count: n });
+    }
+    // Overlay-only subjects have no live index: their pool modules still get topic papers (titled by module id).
+    if (pools && pools[sid]) for (const mid of Object.keys(pools[sid])) {
+      const n = pools[sid][mid] || 0;
+      if (seenMid[mid] || !(n >= min)) continue;
+      seenMid[mid] = 1;
+      ts.push({ sid, mid, title: mid, count: n });
+    }
+    // New overlay modules (books, gap fills) no index or pool knows: summed committed counts, same threshold.
+    const ovCounts = {};
+    for (const set of Object.keys(sets).sort()) {
+      const sm = (sets[set] || {})[sid];
+      if (!sm) continue;
+      for (const mid of Object.keys(sm)) ovCounts[mid] = (ovCounts[mid] || 0) + (sm[mid] || 0);
+    }
+    for (const mid of Object.keys(ovCounts)) {
+      if (seenMid[mid] || !(ovCounts[mid] >= min)) continue;
+      ts.push({ sid, mid, title: mid, count: ovCounts[mid] });
     }
     ts.sort((a, b) => b.count - a.count || (a.mid < b.mid ? -1 : 1));
     out.push(...ts.slice(0, TOP_PER_SUBJECT));
@@ -442,7 +489,8 @@ export function buildPaper(tax, examId, format, key, n, bankLists, bankVers, use
   const plan = planFor(examId, format, key);
   if (!plan) return { shortfall: { id: paperIdFor(examId, format, key, n), reason: `format ${format} does not apply to ${examId}` } };
   const seed = seedFor(examId, format, String(key || "all"), n);
-  const opts = { ...plan.opts, seed, recent: used, quality };
+  // diverse: the concept-key selector spreads a paper across distinct concepts inside each blueprint quota.
+  const opts = { ...plan.opts, seed, recent: used, quality, diverse: true };
   const r = A.assemble(plan.profile, plan.asmType, opts, bankLists);
   const id = paperIdFor(examId, format, key, n);
   if (!r.ok) return { shortfall: { id, reason: r.refused || "refused", requested: r.requested, eligible: countEligible(bankLists, plan, quality) } };
@@ -496,9 +544,15 @@ export function imageSubjects(cache, tax, ver, exam, sets) {
 }
 // Full request list for one exam: [format, key, n] in build order (grands first, so they get first pick).
 // startAt {"<exam>/<format>": n} continues NN numbering past existing papers (new papers, new IDs).
-// Image papers share one NN numbering per exam: ASK.image general papers, then the subject papers.
-export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}, subjectsOnly = false) {
+// haveIds (paper ids already published) skips fixed-key papers (subject_mini, topic): existing papers are never
+// rebuilt, so a grown bank yields papers only for new subjects and topics. Image papers share one NN numbering
+// per exam: ASK.image general papers, then the subject papers.
+export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}, subjectsOnly = false, haveIds = null) {
   const req = [];
+  const push = (f, key, n) => {
+    if (haveIds && haveIds.has(paperIdFor(exam.profile, f, key, n))) return;
+    req.push([f, key, n]);
+  };
   const fmts = onlyFormat ? [onlyFormat] : FORMATS;
   const parts = (A.profile(exam.profile) || {}).format || {};
   for (const f of fmts) {
@@ -506,21 +560,21 @@ export function requestList(tax, cache, ver, exam, onlyFormat, startAt = {}, sub
     if (f === "pyq" && exam.profile !== "neet-pg") continue;
     if (f === "grand" || f === "mini" || f === "daily10" || f === "pyq") {
       const from = (startAt[`${exam.profile}/${f}`] || 0) + 1;
-      for (let n = from; n < from + askFor(exam.profile, f); n++) req.push([f, "all", n]);
+      for (let n = from; n < from + askFor(exam.profile, f); n++) push(f, "all", n);
     } else if (f === "image") {
       let n = (startAt[`${exam.profile}/image`] || 0) + 1;
-      if (!subjectsOnly) for (let k = 0; k < askFor(exam.profile, "image"); k++) req.push(["image", "all", n++]);
-      for (const { sid, n: cnt } of imageSubjects(cache, tax, ver, exam)) for (let k = 0; k < cnt; k++) req.push(["image", sid, n++]);
+      if (!subjectsOnly) for (let k = 0; k < askFor(exam.profile, "image"); k++) push("image", "all", n++);
+      for (const { sid, n: cnt } of imageSubjects(cache, tax, ver, exam)) for (let k = 0; k < cnt; k++) push("image", sid, n++);
     } else if (f === "part") {
       const ps = [...new Set((parts.sections || []).map((s) => String(s.part || "1")))].sort();
       for (const p of ps) {
         const from = (startAt[`${exam.profile}/part`] || 0) + 1;
-        for (let n = from; n < from + askFor(exam.profile, "part"); n++) req.push(["part", p, n]);
+        for (let n = from; n < from + askFor(exam.profile, "part"); n++) push("part", p, n);
       }
     } else if (f === "subject_mini") {
-      for (const sid of scopeSubjects(tax, exam)) for (let n = 1; n <= askFor(exam.profile, "subject_mini"); n++) req.push(["subject_mini", sid, n]);
+      for (const sid of scopeSubjects(tax, exam)) for (let n = 1; n <= askFor(exam.profile, "subject_mini"); n++) push("subject_mini", sid, n);
     } else if (f === "topic") {
-      for (const t of majorTopics(cache, tax, ver, exam)) req.push(["topic", `${t.sid}|${t.mid}`, 1]);
+      for (const t of majorTopics(cache, tax, ver, exam)) push("topic", `${t.sid}|${t.mid}`, 1);
     }
   }
   return req;
@@ -530,13 +584,13 @@ export function topicTitle(cache, tax, ver, sid, mid) {
   for (const t of (ix && ix.topics) || []) if (t.id === mid) return (t.title && t.title.en) || mid;
   return mid;
 }
-export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, createdAt, onlyFormat = null, startAt = {}, priorUsed = [], subjectsOnly = false, log = () => {} }) {
+export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, createdAt, onlyFormat = null, startAt = {}, priorUsed = [], subjectsOnly = false, haveIds = null, log = () => {} }) {
   const { lists, bank } = examLists(cache, tax, ver, exam);
   const pyq = exam.profile === "neet-pg" ? loadPyq(cache, pyqVer) : null;
   const used = {};
   for (const id of priorUsed) used[id] = 1;
   const papers = [], shortfalls = [];
-  for (const [format, key, n] of requestList(tax, cache, ver, exam, onlyFormat, startAt, subjectsOnly)) {
+  for (const [format, key, n] of requestList(tax, cache, ver, exam, onlyFormat, startAt, subjectsOnly, haveIds)) {
     const bankLists = format === "pyq" ? pyq.lists : lists;
     const bankVers = format === "pyq" ? { [pyqVer + "/pyq"]: ["pyq"] } : bank;
     // Topic titles come from the live index.
@@ -552,8 +606,13 @@ export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, created
 }
 
 /* ---------- write: never overwrite a published paper ---------- */
+// On-disk/R2 directory per format. subject_mini lives at subject-mini (dash): the bank route rejects
+// underscores, so subject_mini/ papers 404 even when uploaded (owner 2026-10-14: 302 indexed, 0 served).
+export function formatDir(format) {
+  return format === "subject_mini" ? "subject-mini" : format;
+}
 export function paperPath(out, paper) {
-  return path.join(out, paper.exam, paper.format, paper.id + ".json");
+  return path.join(out, paper.exam, formatDir(paper.format), paper.id + ".json");
 }
 export function samePaper(a, b) {
   const strip = (p) => { const c = { ...p }; delete c.createdAt; return JSON.stringify(c); };
@@ -592,7 +651,7 @@ export function writePapers(out, papers) {
   return { wrote, kept };
 }
 export function buildIndex(out, papers) {
-  const rows = papers.map((p) => ({ id: p.id, exam: p.exam, format: p.format, title: p.title, count: p.count, duration_sec: p.duration_sec, scope: p.scope, path: `${p.exam}/${p.format}/${p.id}.json`, profile: p.profile.version, createdAt: p.createdAt }));
+  const rows = papers.map((p) => ({ id: p.id, exam: p.exam, format: p.format, title: p.title, count: p.count, duration_sec: p.duration_sec, scope: p.scope, path: `${p.exam}/${formatDir(p.format)}/${p.id}.json`, profile: p.profile.version, createdAt: p.createdAt }));
   rows.sort((a, b) => (a.exam < b.exam ? -1 : a.exam > b.exam ? 1 : a.format < b.format ? -1 : a.format > b.format ? 1 : a.id < b.id ? -1 : 1));
   const idx = { v: 1, tests: TESTS_VER, updated: new Date().toISOString(), papers: rows };
   fs.writeFileSync(path.join(out, "index.json"), JSON.stringify(idx, null, 1) + "\n");
@@ -720,6 +779,52 @@ export function reportMd({ papers, shortfalls, overlap, bankCounts }) {
   return L.join("\n");
 }
 
+/* ---------- census: eligible pools per exam, with gaps reported not skipped ---------- */
+export function censusExam(cache, tax, ver, exam, quality = {}) {
+  const { lists } = examLists(cache, tax, ver, exam);
+  const tot = poolSizes(lists, { quality });
+  const eligible = Object.values(tot).reduce((a, x) => a + x, 0);
+  const imgSizes = poolSizes(lists, { image: true, quality });
+  const image = Object.values(imgSizes).reduce((a, x) => a + x, 0);
+  const imageBySubject = Object.entries(imgSizes).filter(([, x]) => x > 0)
+    .sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
+  const scope = scopeSubjects(tax, exam);
+  const skipped = skippedSubjects(cache).filter((s) => scope.indexOf(s) >= 0);
+  const zeroSubs = scope.filter((s) => !(tot[s] > 0)).sort();
+  return {
+    profile: exam.profile, subjects: scope.length, eligible, image, imageBySubject,
+    topics: majorTopics(cache, tax, ver, exam).length, skipped, zeroSubs,
+  };
+}
+// Every exam/format gap as a warning line: zero eligible pools are reported, never silently skipped.
+export function censusWarnings(c) {
+  const w = [];
+  if (c.skipped.length) w.push(`no live module index (404, overlay-only pool): ${c.skipped.join(", ")}`);
+  if (!c.eligible) w.push("no eligible questions at all: every format will shortfall");
+  if (c.eligible && !c.image) w.push("no eligible image pool: image papers will shortfall");
+  if (c.eligible && !c.topics) w.push("no major topics: topic papers will shortfall");
+  if (c.zeroSubs.length) w.push(`${c.zeroSubs.length} subjects with zero eligible pool: ${c.zeroSubs.slice(0, 8).join(", ")}${c.zeroSubs.length > 8 ? "..." : ""}`);
+  return w;
+}
+// auditCoverage: exam/format pairs with an eligible pool but neither papers nor shortfalls are silently
+// skipped gaps. censusByExam: { exam: { eligible, image, topics } }. Returns gap strings.
+export function auditCoverage(papers, shortfalls, censusByExam) {
+  const have = {}, short = {};
+  for (const p of papers) have[`${p.exam}/${p.format}`] = 1;
+  for (const s of shortfalls) short[`${s.exam}/${s.format}`] = 1;
+  const gaps = [];
+  for (const [exam, c] of Object.entries(censusByExam)) {
+    if (!c.eligible) continue;
+    for (const f of FORMATS) {
+      if (f === "pyq" && exam !== "neet-pg") continue;
+      if (f === "part" && !(A.profile(exam) || {}).format.parts) continue;
+      const pool = f === "image" ? c.image : f === "topic" ? c.topics : c.eligible;
+      if (pool && !have[`${exam}/${f}`] && !short[`${exam}/${f}`]) gaps.push(`${exam}/${f}: eligible pool (${pool}) but no papers and no shortfalls`);
+    }
+  }
+  return gaps;
+}
+
 /* ---------- CLI ---------- */
 const arg = (argv, k, d) => { const i = argv.indexOf(k); return i >= 0 && i + 1 < argv.length ? argv[i + 1] : d; };
 async function main(argv = process.argv.slice(2)) {
@@ -740,18 +845,15 @@ async function main(argv = process.argv.slice(2)) {
   if (qdir) log(`quality sidecar: ${Object.keys(quality).length} records from ${qdir}`);
   if (cmd === "census") {
     for (const exam of EXAMS) {
-      const { lists } = examLists(cache, tax, ver, exam);
-      const tot = poolSizes(lists, { quality });
-      const n = Object.values(tot).reduce((a, x) => a + x, 0);
-      const imgSizes = poolSizes(lists, { image: true, quality });
-      const img = Object.values(imgSizes).reduce((a, x) => a + x, 0);
-      const topics = majorTopics(cache, tax, ver, exam).length;
-      console.log(`${exam.profile}: subjects=${scopeSubjects(tax, exam).length} eligible=${n} image=${img} major_topics=${topics}`);
-      const nz = Object.entries(imgSizes).filter(([, x]) => x > 0).sort((a, b) => b[1] - a[1] || (a[0] < b[0] ? -1 : 1));
-      for (const [s, x] of nz) console.log(`  image ${s}: ${x}`);
+      const c = censusExam(cache, tax, ver, exam, quality);
+      console.log(`${exam.profile}: subjects=${c.subjects} eligible=${c.eligible} image=${c.image} major_topics=${c.topics}`);
+      for (const [s, x] of c.imageBySubject) console.log(`  image ${s}: ${x}`);
+      for (const w of censusWarnings(c)) console.log(`  WARNING: ${w}`);
     }
     const pq = loadPyq(cache, pyq);
-    console.log(`pyq pool (neet-pg recall 2017+): ${poolSizes(pq.lists, { quality }).pyq || 0} eligible`);
+    const pyqN = poolSizes(pq.lists, { quality }).pyq || 0;
+    console.log(`pyq pool (neet-pg recall 2017+): ${pyqN} eligible`);
+    if (!pyqN) console.log("  WARNING: pyq pool is empty: neet-pg PYQ papers will shortfall");
     return;
   }
   if (cmd === "build") {
@@ -763,17 +865,22 @@ async function main(argv = process.argv.slice(2)) {
     // Numbering continues past existing papers unless --start restarts it (rebuilds then skip as identical).
     const startAt = argv.includes("--start") ? {} : startNumbers(out);
     const prior = readOut(out);
+    const haveIds = new Set(prior.map((p) => p.id)); // fixed-key papers already published are never rebuilt
     const createdAt = new Date().toISOString();
-    const papers = [], shortfalls = [], bankCounts = {};
+    const papers = [], shortfalls = [], bankCounts = {}, censusByExam = {};
     for (const exam of EXAMS.filter((e) => !onlyExam || e.profile === onlyExam)) {
       const { lists } = examLists(cache, tax, ver, exam);
       bankCounts[exam.profile] = poolSizes(lists, { quality });
+      const c = censusExam(cache, tax, ver, exam, quality);
+      censusByExam[exam.profile] = c;
+      for (const w of censusWarnings(c)) log(`  WARNING ${exam.profile}: ${w}`);
       const priorUsed = prior.filter((p) => p.exam === exam.profile).flatMap((p) => p.items.map((t) => t[2]));
-      const r = buildExam({ tax, cache, ver, pyqVer: pyq, exam, quality, createdAt, onlyFormat, startAt, priorUsed, subjectsOnly, log });
+      const r = buildExam({ tax, cache, ver, pyqVer: pyq, exam, quality, createdAt, onlyFormat, startAt, priorUsed, subjectsOnly, haveIds, log });
       papers.push(...r.papers);
       shortfalls.push(...r.shortfalls);
       log(`${exam.profile}: ${r.papers.length} papers, ${r.shortfalls.length} shortfalls`);
     }
+    for (const g of auditCoverage(prior.concat(papers), shortfalls, censusByExam)) log(`  WARNING coverage gap: ${g}`);
     if (dry) {
       log(`dry run: ${papers.length} papers would build, ${shortfalls.length} shortfalls; nothing written`);
       return { papers, shortfalls };

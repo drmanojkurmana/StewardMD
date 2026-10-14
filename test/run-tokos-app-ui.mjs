@@ -55,9 +55,11 @@ try {
 
   const shot = async (name) => { const r = await call("Page.captureScreenshot", { format: "png" }); if (r.result && process.env.SHOTS) (await import("node:fs")).writeFileSync(join(process.env.SHOTS, name + ".png"), Buffer.from(r.result.data, "base64")); };
 
-  // default (owner decision 2026-09-29, ON for all): no flag set, the tile shows and opens Tokós
+  // default (owner decision 2026-09-29, ON for all): no flag set, the tile shows and opens Tokós.
+  // Student role: the Home starter set (tool-groups.js) shows Tokós in the student starter, so the tile renders
+  // with no pins and without Add Tool, as before the starter set.
   await call("Page.navigate", { url: BASE }); await until(`return !!(window.TOKOS && window.SMD_showHome);`, 30000);
-  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.removeItem("smd_tokos_prefs"); localStorage.removeItem("smd_home_tools"); localStorage.removeItem("smd_review_decisions");}catch(e){} return 1;`);
+  await ev(`try{localStorage.removeItem("smd_tokos"); localStorage.removeItem("smd_tokos_prefs"); localStorage.removeItem("smd_home_tools"); localStorage.removeItem("smd_review_decisions"); localStorage.setItem("smd_role","student");}catch(e){} return 1;`);
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;

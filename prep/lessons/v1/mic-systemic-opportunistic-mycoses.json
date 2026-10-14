@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-systemic-opportunistic-mycoses",
+ "subject": "microbiology",
+ "title": "Systemic and opportunistic mycoses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aspergillus fumigatus** (septate hyphae with **acute angle branching**, fruiting bodies in cavities) diseases by immunity: **allergic bronchopulmonary aspergillosis** (asthma with fleeting shadows, high IgE, central bronchiectasis, steroids with itraconazole), **aspergilloma** (fungus ball in old TB cavity with haemoptysis, air crescent, resection or embolisation), **invasive aspergillosis** (neutropenia, halo sign nodules, **galactomannan** positive, **voriconazole** first line). Culture with KOH and biopsy proves; **septate versus mucor broad aseptate** splits therapy instantly.",
+   "say": "Acute branching septate hyphae are Aspergillus: galactomannan in neutropenia, voriconazole. Ball in old cavity bleeds: aspergilloma.",
+   "vis": null
+  },
+  {
+   "tx": "**Mucormycosis** (broad **aseptate hyphae with right angle branching**, Rhizopus thriving in **diabetic ketoacidosis** and post COVID steroids) invades vessels necrosing tissue: **rhino orbital cerebral** (black turbinate with facial pain, ophthalmoplegia, cavernous thrombosis), pulmonary and cutaneous forms. Management is **liposomal amphotericin B** with urgent **surgical debridement** and sugar control; posaconazole or isavuconazole steps down. Do not confuse with aspergillus (voriconazole fails mucor); biopsy with frozen section decides within hours.",
+   "say": "Black turbinate in DKA is mucor: amphotericin plus knife, not voriconazole. Broad aseptate right angles prove.",
+   "vis": null
+  },
+  {
+   "tx": "**Candida albicans** (pseudohyphae with **germ tubes**, chlamydospores) colonises then invades lines and guts: **oesophageal candidiasis** (AIDS dysphagia, white plaques bleeding on scrape, **fluconazole**), vulvovaginitis (diabetes, single dose fluconazole), **candidaemia** (TPN, broad antibiotics, remove lines, **echinocandin** then step down, fundoscopy with echo for seeding). **Cryptococcus neoformans** (capsulated budding yeast, **India ink** halos, pigeon droppings, **cryptococcal meningitis** in AIDS with high pressure headaches, **CrAg lateral flow**, amphotericin plus flucytosine induction) completes yeasts.",
+   "say": "White plaques bleeding on scrape in AIDS is candida oesophagitis: fluconazole. Capsuled yeast meningitis is crypto: ampho plus flucytosine.",
+   "vis": null
+  },
+  {
+   "tx": "**Pneumocystis jirovecii** (cysts, **ground glass with pneumatoceles**, CD4 under 200, exertional desaturation with raised LDH, **TMP-SMX** treatment and prophylaxis, steroids in hypoxia) is prevented by cotrimoxazole. **Dimorphics** (mould in soil, yeast in tissue): **Histoplasma** (Ohio Mississippi, bat caves, calcified nodes, itraconazole), **Coccidioides** (desert Southwest, spherules with endospores, erythema nodosum), **Blastomyces** (broad based budding, skin and prostate), **Paracoccidioides** (pilot wheel, Latin America), **Talaromyces marneffei** (AIDS Southeast Asia, umbilicated papules).",
+   "say": "Ground glass under CD4 200 is Pneumocystis: cotrimoxazole plus steroids if hypoxic. Dimorphics switch shape with temperature.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fungus",
+     "Hyphae",
+     "Drug"
+    ],
+    "rows": [
+     [
+      "Aspergillus",
+      "Septate acute",
+      "Voriconazole"
+     ],
+     [
+      "Mucor",
+      "Aseptate right",
+      "Ampho plus surgery"
+     ],
+     [
+      "Candida",
+      "Pseudohyphae",
+      "Fluconazole"
+     ],
+     [
+      "Crypto",
+      "Capsuled yeast",
+      "Ampho plus flucytosine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-171",
+  "bk2-mic-172",
+  "bk2-mic-173",
+  "bk2-mic-174",
+  "bk2-mic-175",
+  "bk2-mic-176",
+  "bk2-mic-177",
+  "bk2-mic-178",
+  "bk2-mic-179",
+  "bk2-mic-180"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

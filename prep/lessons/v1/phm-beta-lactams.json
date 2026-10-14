@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-beta-lactams",
+ "subject": "pharmacology",
+ "title": "Beta-lactams: penicillins, cephalosporins and carbapenems",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Penicillins** sort spectrum: benzylpenicillin (strep, meningococcus, syphilis; short half life), **aminopenicillins** (amoxicillin, ampicillin; **EBV rash** warns, enterococcus, Listeria with gentamicin), antistaphylococcal (cloxacillin, nafcillin; MSSA), antipseudomonal (**piperacillin tazobactam** febrile neutropenia and nosocomial). **Amoxicillin rash in mononucleosis** (not allergy, rechallenge safe) confuses; nephritis with cytopenias hypersensitises rarely. Procaine and benzathine depot (syphilis, rheumatic prophylaxis) stretch.",
+   "say": "EBV amoxicillin rash is not allergy: rechallenge later. Febrile neutropenia gets pip-tazo; Listeria ampicillin plus gentamicin.",
+   "vis": null
+  },
+  {
+   "tx": "**Cephalosporins** generation hop: first (**cefazolin** surgical prophylaxis, MSSA), second (**cefuroxime** respiratory, cefoxitin anaerobes), third (**ceftriaxone** meningitis and gonorrhoea with **biliary sludge**, **ceftazidime** pseudomonas, cefixime gonorrhoea oral, cefotaxime neonates), fourth (**cefepime** febrile neutropenia and pseudomonas), fifth (**ceftaroline** MRSA pneumonia). Ceftriaxone displaces bilirubin (neonates caution) with calcium stones; oral cefuroxime axetil steps down. Generation trades Gram positive for negative.",
+   "say": "Surgical cefazolin, meningitic ceftriaxone, pseudomonal ceftazidime or cefepime, MRSA ceftaroline. Neonatal ceftriaxone displaces bilirubin.",
+   "vis": null
+  },
+  {
+   "tx": "**Carbapenems** (**meropenem, imipenem with cilastatin** blocking renal dehydropeptidase, doripenem; broadest including ESBL, **seizures** imipenem most, valproate levels crashed) reserve ESBL and resistant nosocomial; **ertapenem** (once daily, no pseudomonas or Acinetobacter) suits community ESBL UTI. **Aztreonam** (monobactam, Gram negative only, **penicillin allergy safe** except ceftazidime shared side chain rare) bridges allergic sepsis. De-escalation cultures narrow; stewardship locks carbapenems.",
+   "say": "ESBL nosocomial gets meropenem; community UTI ertapenem (no pseudomonas). Penicillin allergic Gram negative sepsis: aztreonam.",
+   "vis": null
+  },
+  {
+   "tx": "**Beta-lactamase inhibitors** (clavulanate with amoxicillin: **hepatotoxic**, co-amoxiclav diarrhoea; sulbactam with ampicillin; tazobactam with piperacillin; **avibactam** with ceftazidime rescuing KPC) never work alone. **Penicillin allergy** (anaphylaxis IgE with skin testing, **cephalosporin cross reactivity low around 2 percent** except shared chains, carbapenem tolerated mostly, **desensitisation** protocols where no alternative) is de-labelled when viral rash or GI upset mislabelled. Allergy bands kill when wrong.",
+   "say": "Clavulanate hepatitises; avibactam rescues KPC. True anaphylaxis skin tests; EBV rash de-labels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Beta-lactam",
+     "Role",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Amoxicillin",
+      "Enterococcus, Listeria",
+      "EBV rash"
+     ],
+     [
+      "Ceftriaxone",
+      "Meningitis, GC",
+      "Sludge, bilirubin"
+     ],
+     [
+      "Cefepime",
+      "Neutropenic fever",
+      "Neurotoxic"
+     ],
+     [
+      "Meropenem",
+      "ESBL",
+      "Seizures"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-291",
+  "bk2-phm-292",
+  "bk2-phm-293",
+  "bk2-phm-294",
+  "bk2-phm-295",
+  "bk2-phm-296",
+  "bk2-phm-297",
+  "bk2-phm-298",
+  "bk2-phm-299",
+  "bk2-phm-300"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

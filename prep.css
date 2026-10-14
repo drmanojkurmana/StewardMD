@@ -433,7 +433,8 @@ body.dark .pn-root .pn-vimg img, body.dark .pn-root .pn-zoom-b img { filter: bri
 .pn-root .pn-lsn-play:active, .pn-root .pn-lsn-spd:active { transform: scale(.92); }
 .pn-root .pn-lsn-play.on { background: var(--pn-fill); color: var(--pn-on-fill); }
 .pn-root .pn-lsn-play svg { width: 22px; height: 22px; }
-.pn-root .pn-lsn-auto { flex: 0 0 auto; min-width: 64px; height: 44px; padding: 0 14px; border-radius: var(--pn-r-pill); border: 1px solid var(--pn-edge); background: var(--pn-card); color: var(--pn-mut); font-size: 14px; font-weight: 600; transition: background-color var(--pn-d-press) ease, color var(--pn-d-press) ease, border-color var(--pn-d-press) ease; }
+.pn-root .pn-lsn-auto { flex: 0 0 auto; min-width: 64px; height: 44px; padding: 0 14px; border-radius: var(--pn-r-pill); border: 0; background: var(--pn-s1); color: var(--pn-mut); font-size: 14px; font-weight: 600; transition: transform var(--pn-d-press) var(--pn-ease), background-color var(--pn-d-press) ease, color var(--pn-d-press) ease; }
+.pn-root .pn-lsn-auto:active { transform: scale(.92); }
 .pn-root .pn-lsn-auto.on { background: var(--pn-pri-soft); border-color: transparent; color: var(--pn-pri-ink); }
 .pn-root .pn-lsn-spd { min-width: 52px; height: 44px; padding: 0 10px; border: 0; border-radius: var(--pn-r-pill); background: var(--pn-s1); font-family: var(--pn-num); font-size: 14px; font-weight: 650; font-variant-numeric: tabular-nums; transition: transform var(--pn-d-press) var(--pn-ease); }
 .pn-root .pn-lsn-next { flex: 1 1 auto; min-width: 0; margin-left: auto; border-radius: var(--pn-r-pill); }

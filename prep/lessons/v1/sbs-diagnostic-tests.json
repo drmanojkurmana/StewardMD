@@ -124,7 +124,13 @@
   {
    "tx": "A **ROC curve** plots sensitivity against one minus specificity across every possible cutoff, so each point shows a trade-off between missed disease and false alarms. The **area under the curve** summarises overall discrimination: a value near one half means the test performs little better than chance, while a value near one indicates near-perfect separation of diseased and healthy people. Moving to a lower cutoff raises sensitivity but costs specificity. Choose the working cutoff by weighing the harm of missing disease against the burden of unnecessary follow-up.",
    "say": "A ROC curve plots sensitivity against one minus specificity for every possible cutoff, so each point reflects a balance between missed disease and false alarms. The area under the curve tells you how well the test separates diseased from healthy people. An area near one half is little better than chance, while an area near one is almost perfect. Lowering the cutoff boosts sensitivity but reduces specificity. Pick your cutoff by weighing the cost of missing disease against the cost of unnecessary follow-up.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/stats-roc.svg",
+    "alt": "ROC curves: a chance diagonal at AUC 0.50, a weaker test near 0.65 and a better test near 0.90 toward the top left corner.",
+    "caption": "The closer the curve hugs the top left, the better the test discriminates.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "Screening can appear beneficial without truly helping. **Lead time bias** occurs when detection moves earlier, so survival looks longer even though the timing of death is unchanged. **Length time bias** arises because slowly progressing cases are more likely to be caught on screening, over-representing indolent disease. Randomised trials are needed to exclude both.",

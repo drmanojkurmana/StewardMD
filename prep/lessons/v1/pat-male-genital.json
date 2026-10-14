@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-male-genital",
+ "subject": "pathology",
+ "title": "Male genital pathology: prostate, testis, penis and scrotum",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Benign prostatic hyperplasia** (dihydrotestosterone driven **transitional zone** nodules with bladder outlet obstruction, hesitancy with nocturia and retention) is treated by **alpha blockers** (tamsulosin relaxing smooth muscle) then **5 alpha reductase inhibitors** (finasteride shrinking), with **TURP** for refractory or complicated disease (retention, stones, renal injury). PSA rises modestly with volume; biopsy only when cancer suspected. Chronic prostatitis (pelvic pain with cultures often negative) differs by tenderness with antibiotics debated.",
+   "say": "Transitional zone nodules blocking old men are BPH: block alpha, shrink with finasteride, resect when complicated.",
+   "vis": null
+  },
+  {
+   "tx": "**Prostate adenocarcinoma** (peripheral zone, **Gleason score** grading glands, PSA screening debates, **osteoblastic bone metastases** with high alkaline phosphatase) is managed by risk: active surveillance (low risk), prostatectomy or radiotherapy (localised), **androgen deprivation** (leuprolide, bicalutamide, orchidectomy) for advanced with docetaxel or abiraterone added. Back pain with high PSA in elders seeds spine; cord compression (steroids with urgent decompression) threatens. Prostatitis and BPH raise PSA benignly; density and velocity refine.",
+   "say": "Peripheral zone hard nodule with high PSA is cancer: Gleason grades. Osteoblastic spine mets mark prostate: deprive androgens.",
+   "vis": null
+  },
+  {
+   "tx": "**Testicular germ cell tumours** (young men, **cryptorchidism** risk, painless mass that does not transilluminate) split into **seminoma** (radiosensitive, sheets with lymphocytes, **PLAP** positive, orchidectomy with surveillance or radiotherapy) and **nonseminoma** (**yolk sac AFP** raised, **choriocarcinoma hCG** with haemorrhage, embryonal aggressive, teratoma mixed). Staging (retroperitoneal nodes, lung) gates **RPLND** versus BEP chemotherapy (bleomycin lungs, cisplatin kidneys); tumour markers (AFP, hCG, LDH) stage and follow. Sex cord tumours (Leydig with precocity, Sertoli) are rarer.",
+   "say": "Painless solid young testis is germ cell until orchidectomy proves: AFP yolk sac, hCG choriocarcinoma. Seminoma radiosensitively surveils.",
+   "vis": null
+  },
+  {
+   "tx": "**Emergencies and benign scrotals** sort fast: **testicular torsion** (adolescent sudden pain with vomiting, **bell clapper** deformity, absent cremasteric, Doppler flow lost) needs **detorsion within 6 hours with bilateral orchiopexy**; epididymo-orchitis (chlamydia under 35, E. coli over 35, Prehn relief, antibiotics by age) mimics. **Left varicocele** (bag of worms, infertility, renal mass in new adult onset), hydrocele (transilluminates), spermatocele, and **penile SCC** (HPV, phimosis, lichen sclerosus, partial penectomy with node dissection) complete patterns.",
+   "say": "Sudden twisted teen testis with lost Doppler is torsion: untwist in 6 hours, fix both. Left bag of worms infertile is varicocele.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scrotum",
+     "Pain",
+     "Knife"
+    ],
+    "rows": [
+     [
+      "Torsion",
+      "Sudden vomit",
+      "Orchiopexy 6h"
+     ],
+     [
+      "Epididymitis",
+      "Gradual relief lift",
+      "Antibiotics"
+     ],
+     [
+      "Tumour",
+      "Painless solid",
+      "Orchidectomy"
+     ],
+     [
+      "Varicocele",
+      "Dull left",
+      "Ligate infertile"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-441",
+  "bk2-pat-442",
+  "bk2-pat-443",
+  "bk2-pat-444",
+  "bk2-pat-445",
+  "bk2-pat-446",
+  "bk2-pat-447",
+  "bk2-pat-448",
+  "bk2-pat-449",
+  "bk2-pat-450"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

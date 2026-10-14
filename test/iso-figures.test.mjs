@@ -160,17 +160,21 @@ test("capnography: transit time = line volume / sampling flow", () => {
 
 test("wiring: index.html, product page and the five host modules", () => {
   const index = read("index.html");
-  assert.match(index, /<script src="\/iso-figures\.js\?v=iso2" defer><\/script>/);
+  assert.match(index, /<script src="\/iso-figures\.js\?v=iso3" defer><\/script>/);
   assert.ok(!/src="\/iso-fig-/.test(index), "no figure in the core bundle");
-  assert.match(read("iso-figures.js"), /var V = "iso2"/);
-  assert.match(read("product/index.html"), /data-smd-iso="circle-system"[\s\S]*\/iso-figures\.js\?v=iso2/);
+  assert.match(read("iso-figures.js"), /var V = "iso3"/);
+  assert.match(read("product/index.html"), /data-smd-iso="circle-system"[\s\S]*\/iso-figures\.js\?v=iso3/);
   const nk = read("narke-explore-ui.js");
   assert.match(nk, /SMD_ISO\.slot\("circle-system", \{ controls: false/);
   assert.match(nk, /SMD_ISO\.set\("circle-system"/);
   assert.match(nk, /SMD_ISO\.slot\("vaporizer"\)/);
   assert.match(nk, /SMD_ISO\.slot\("capno-line"\)/);
   assert.match(read("neo-infusions.js"), /SMD_ISO\.slot\("syringe-pump", \{ state: \{ rate: mlh \}, hide: \["rateI"\] \}\)/);
-  assert.match(read("ophthalmos-explore.js"), /I\.slot\("retinoscope"/);
+  // Ophthalmos is synced byte-for-byte from its own repo (test/ophthalmos-module.test.mjs), so the bench is added from
+  // the runtime's side and the module file stays untouched.
+  assert.match(read("iso-figures.js"), /slot\("retinoscope", \{ state: \{ rx: rx, lens: 0 \} \}\)/);
+  assert.match(read("iso-figures.js"), /\.ex-wrap\[data-x="focus"\]/);
+  assert.ok(!/SMD_ISO|retinoscope/.test(read("ophthalmos-explore.js")), "ophthalmos-explore.js stays the module's own file");
   assert.equal(JSON.parse(read("surgx/protocols/chest-trauma.json")).isoFigure, "chest-drain");
   assert.match(read("surgx-screens.js"), /SMD_ISO\.slot\(p\.isoFigure\)/);
   const SM = require("../surgx-model.js");

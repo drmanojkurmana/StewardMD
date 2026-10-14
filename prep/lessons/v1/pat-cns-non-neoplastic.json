@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-cns-non-neoplastic",
+ "subject": "pathology",
+ "title": "Non neoplastic CNS disease: stroke, MS, meningitis and prions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ischaemic stroke** (thrombotic atherosclerosis, embolic AF, lacunar lipohyalinosis) syndromes localise: **MCA** (contralateral face arm weakness with aphasia or neglect), ACA (leg), PCA (visual), basilar (locked in), lacunar (pure motor or sensory). Management is **IV alteplase within 4.5 hours** (no bleed on CT, BP controlled) with **thrombectomy to 24 hours** in large vessel occlusion, then aspirin, statin, AF anticoagulation delayed, decompressive hemicraniectomy in malignant oedema. Stroke mimics (hypoglycaemia, Todd, conversion) glucose first.",
+   "say": "Face arm aphasia is MCA: CT rules bleed, alteplase in 4.5 hours, thrombectomy to 24. Glucose every mimic first.",
+   "vis": null
+  },
+  {
+   "tx": "**Subarachnoid haemorrhage** (**berry aneurysms** at bifurcations: ACom, PCom with third nerve palsy, MCA; autosomal dominant PKD, smoking) strikes as **thunderclap headache** with vomiting and neck stiffness; noncontrast CT with **LP xanthochromia** (if CT negative) confirms, CTA finds. Complications (rebleed, **vasospasm** days 4 to 14 with **nimodipine**, hydrocephalus, SIADH or cerebral salt wasting) are coiled or clipped urgently; grading (Hunt Hess, Fisher) prognosticates. Sentinel leaks warn.",
+   "say": "Thunderclap worst headache is SAH: CT, xanthochromia if clean, nimodipine for vasospasm. PCom blows the third nerve.",
+   "vis": null
+  },
+  {
+   "tx": "**Multiple sclerosis** (autoimmune demyelination, young women, temperate latitudes, EBV linked, **periventricular Dawson fingers**, juxtacortical and infratentorial plaques) relapses with **internuclear ophthalmoplegia** (MLF, adduction lag with nystagmus), optic neuritis, Lhermitte and Uhthoff heat worsening; **oligoclonal bands** with raised IgG index confirm dissemination in time and space on MRI. Relapses get pulsed steroids with plasma exchange refractory; **disease modifiers** (interferon, natalizumab with **PML** risk, ocrelizumab, fingolimod) slow. **ADEM** (postviral children, monophasic, encephalopathy) differs.",
+   "say": "Heat worsened internuclear lag with Dawson fingers is MS: bands confirm, steroids pulse. PML haunts natalizumab.",
+   "vis": null
+  },
+  {
+   "tx": "**Meningitis** sorts by CSF: bacterial (neutrophils, low glucose, high protein, ceftriaxone plus vancomycin with dexamethasone before antibiotics), viral (lymphocytes, normal glucose, support), **TB** (basal exudates with cranial nerve palsies, low glucose with high protein, ATT with steroids). **Brain abscess** (otitis or cyanotic heart, ring enhancement with toxoplasma in AIDS treated empirically, bacterial aspirated) and **CJD prion** (rapid dementia with myoclonus, periodic sharp complexes, 14-3-3, no cure, precautions) complete emergencies; **normal pressure hydrocephalus** (**wet, wobbly, wacky** triad, tap test improving, shunt) reverses dementia.",
+   "say": "Neck stiffness photophobia: tap CSF, dexamethasone then antibiotics. Wet wobbly wacky improving on tap is NPH: shunt.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CNS",
+     "Fluid",
+     "Fix"
+    ],
+    "rows": [
+     [
+      "Bacterial",
+      "Neutrophils low sugar",
+      "Ceftriaxone plus vanco"
+     ],
+     [
+      "MS",
+      "OCB bands",
+      "Steroids, modifiers"
+     ],
+     [
+      "SAH",
+      "Xanthochromia",
+      "Coil, nimodipine"
+     ],
+     [
+      "NPH",
+      "Normal pressure",
+      "Shunt"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-501",
+  "bk2-pat-502",
+  "bk2-pat-503",
+  "bk2-pat-504",
+  "bk2-pat-505",
+  "bk2-pat-506",
+  "bk2-pat-507",
+  "bk2-pat-508",
+  "bk2-pat-509",
+  "bk2-pat-510"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-path5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

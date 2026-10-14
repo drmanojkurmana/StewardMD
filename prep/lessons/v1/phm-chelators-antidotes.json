@@ -1,62 +1,89 @@
 {
- "v": 1,
- "module": "phm-chelators-antidotes",
- "subject": "pharmacology",
- "title": "Antidotes and chelators: specific rescues, toxicology-guided",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "An **antidote** helps only when the poison, timing and patient fit, so antidotes are given on **toxicology advice**, never by reflex. Examples of the principle include acetylcysteine for paracetamol, naloxone for opioids, and chelators that bind heavy metals such as lead, iron or copper in confirmed poisoning. Supportive airway, breathing and circulation care always comes first and often matters more than the antidote (NPIS TOXBASE).",
-   "say": "Antidotes are toxicology-guided and specific; supportive care always comes first.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Support ABC"
-     },
-     {
-      "id": "b",
-      "label": "Identify poison + timing"
-     },
-     {
-      "id": "c",
-      "label": "Antidote on tox advice"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Chelators** bind metal ions for excretion and are reserved for confirmed or strongly suspected significant poisoning, because they can also bind essential metals and injure kidneys. Choice and route depend on the metal, severity and organ state, decided with toxicology and specialist teams. Blood levels, exposure history and source removal (workplace, remedies, environment) complete the treatment; treating the number without removing the source fails (NPIS TOXBASE).",
-   "say": "Chelators are for confirmed significant metal poisoning, decided with toxicology, and the exposure source must be removed.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Use chelation",
-     "Also essential"
-    ],
-    "rows": [
-     [
-      "Confirmed significant poisoning",
-      "Remove the source"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Document poison, amount, timing, co-ingestants and every antidote time exactly, and observe for rebound toxicity when an antidote wears off before the poison. Never give an antidote as a diagnostic test in an undifferentiated collapse. Exact antidote doses and infusion rates follow current TOXBASE entries and are flagged here, not recalled loosely (NPIS TOXBASE).",
-   "say": "Document poison and antidote times exactly, watch for rebound, and take doses from current TOXBASE entries.",
-   "vis": null
+  "v": 1,
+  "module": "phm-chelators-antidotes",
+  "subject": "pharmacology",
+  "title": "Chelators and antidotes: metals, cyanide, alcohols and overdoses",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Lead** (**Burton gum lines**, **basophilic stippling**, Fanconi, wrist drop adults, encephalopathy children; **dimercaprol with EDTA** severe, **succimer oral** children moderate) with **mercury and arsenic** (**dimercaprol BAL**, succimer, **chelation challenge** urine lead mobilisation) chelates; iron overload (deferoxamine per haematinics wave) parallels. Abdominal X-ray chips lavage selected; levels with renal gate courses.",
+      "say": "Blue gums dotted red cells wrist drops is lead: succimer kids oral, BAL EDTA severe. Challenge urines mobilise.",
+      "vis": null
+    },
+    {
+      "tx": "**Cyanide** (bitter almond, lactate gap, cherry red; **amyl with sodium nitrite plus thiosulfate**, **hydroxocobalamin safer** red skin and urine) with **carbon monoxide** (**100 percent oxygen** half life, **hyperbaric** severe pregnancy and neuro, cherry red misleading) antidotes; smoke inhalation both suspected. Lactate with carboxyhaemoglobin gates; thiosulfate sulfur donates.",
+      "say": "Bitter almond lactate gap is cyanide: hydroxocobalamin reddens safest. CO 100 percent O2 hyperbarics severe.",
+      "vis": null
+    },
+    {
+      "tx": "**Methanol and ethylene glycol** (**formate blindness** with putamen, **oxalate kidneys**; **fomepizole** preferred, ethanol alternative, **dialysis** severe with bicarbonate) with **organophosphates** (**SLUDGE with bronchorrhoea**, miosis, fasciculations; **atropine plus pralidoxime before ageing**, benzodiazepine seizures, **intermediate syndrome** ventilation) poison; osmolal gap with anion gap metabolic acidosis warns. Cholinesterase levels follow.",
+      "say": "Blind formate putamen is methanol: fomepizole dialyses severe. SLUDGE drooling miosis: atropine pralidoxime pre ageing.",
+      "vis": null
+    },
+    {
+      "tx": "**Paracetamol** (**NAC 150 50 100**, **Rumack-Matthew** nomogram, delayed fulminant) with **salicylates** (**urinary alkalinisation**, dialysis severe, tinnitus hyperventilating) and **iron tablets acute** (**deferoxamine** shock with X-ray tablets) overdoses; **digoxin Fab** (hyperkalaemia with AV block), **warfarin** (vitamin K with 4F-PCC), **dabigatran idarucizumab**, **heparin protamine**, **benzodiazepine flumazenil** selective, **opioid naloxone**, **TCA bicarbonate**, **CCB and beta blocker high dose insulin with glucagon calcium lipid** reverse. Toxidromes route.",
+      "say": "Paracetamol nomograms NAC 150 50 100; salicylates alkalinise dialysing severe. Fab, PCC, naloxone reverse.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Poison",
+          "Antidote",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Lead",
+            "Succimer BAL EDTA",
+            "Levels"
+          ],
+          [
+            "Cyanide",
+            "Hydroxocobalamin",
+            "Lactate"
+          ],
+          [
+            "Methanol",
+            "Fomepizole",
+            "Dialysis"
+          ],
+          [
+            "Paracetamol",
+            "NAC",
+            "Nomogram"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "bk2-phm-381",
+    "bk2-phm-382",
+    "bk2-phm-383",
+    "bk2-phm-384",
+    "bk2-phm-385",
+    "bk2-phm-386",
+    "bk2-phm-387",
+    "bk2-phm-388",
+    "bk2-phm-389",
+    "bk2-phm-390"
+  ],
+  "src": [],
+  "refs": [
+    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-pharma4",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

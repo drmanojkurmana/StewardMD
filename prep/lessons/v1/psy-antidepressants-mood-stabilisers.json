@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "psy-antidepressants-mood-stabilisers",
+ "subject": "psychiatry",
+ "title": "Antidepressants and mood stabilisers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antidepressants** classes: SSRIs first line (sertraline post MI friendly, fluoxetine long half life and interactions, paroxetine discontinuation and weight, citalopram QT dose caps), SNRIs (venlafaxine hypertension and discontinuation), mirtazapine (sedation, appetite, low sexual effects), tricyclics (effective but cardiotoxic, anticholinergic, lethal in overdose, amitriptyline pain at low dose), MAOIs (specialist, tyramine diet, washouts). Onset takes weeks; review at two to four weeks, continue six to twelve months after first episode remission, taper slowly avoiding discontinuation syndrome (dizzy, electric shocks, irritability with short half life agents).",
+   "say": "SSRIs first. Weeks to work, months to stay, taper slowly. Paroxetine stops hardest; tricyclics kill in overdose.",
+   "vis": null
+  },
+  {
+   "tx": "**Serotonin syndrome** follows serotonergic stacking (SSRI plus MAOI, tramadol, linezolid, triptans context, St John wort) with mental agitation, autonomic hyperactivity and neuromuscular clonus or hyperreflexia, treated by stopping serotonergics, benzodiazepine sedation, cooling and cyproheptadine in moderate severe hospital care. Switching antidepressants respects washouts (fluoxetine five weeks before MAOI due norfluoxetine). Hyponatraemia SIADH in elderly, bleeding risk with NSAIDs or anticoagulants (platelet serotonin), and initial activation or suicidal thought monitoring in youth frame SSRI safety.",
+   "say": "Stack serotonergics and clonus burns: stop, sedate, cool. Fluoxetine needs five weeks before MAOI.",
+   "vis": null
+  },
+  {
+   "tx": "**Lithium** remains gold standard for bipolar prophylaxis and acute mania adjunct with anti suicide benefit, narrow therapeutic index (target ranges per local protocol, lower elderly), requiring renal, thyroid, calcium and level monitoring (12 hour post dose). Toxicity (coarse tremor, vomiting, diarrhoea, confusion, seizures) precipitates with dehydration, NSAIDs, ACE inhibitors and thiazides reducing clearance. Long term harms: hypothyroidism, hyperparathyroidism, nephrogenic diabetes insipidus and CKD surveillance, plus teratogenic cardiac risk counselling (Ebstein relative risk small absolute).",
+   "say": "Lithium saves bipolar lives on a knife edge: levels, kidneys, thyroid, calcium. NSAIDs and dehydration poison it.",
+   "vis": null
+  },
+  {
+   "tx": "Other mood agents: **valproate** effective mania prophylaxis but major teratogen (neural tube, neurodevelopmental) restricted in women and girls with pregnancy prevention programmes, also weight, hepatic, platelet and PCOS effects; carbamazepine (enzyme inducer, hyponatraemia, blood dyscrasias, HLA rash screening in at risk ancestries); lamotrigine prevents bipolar depression (slow titration against Stevens Johnson, valproate doubles levels); quetiapine and other atypicals span mania and bipolar depression licences. Pregnancy and breastfeeding choices are individualised specialist decisions never abrupt cessation by default.",
+   "say": "Valproate and pregnancy do not mix without prevention programme. Lamotrigine titrates slowly or skin falls off.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Bipolar strength",
+     "Signature monitor"
+    ],
+    "rows": [
+     [
+      "Lithium",
+      "Mania prophylaxis, anti suicide",
+      "Levels, renal, thyroid, calcium"
+     ],
+     [
+      "Valproate",
+      "Mania",
+      "Teratogen rules, liver, platelets, weight"
+     ],
+     [
+      "Lamotrigine",
+      "Bipolar depression prevention",
+      "Slow titration, rash"
+     ],
+     [
+      "Carbamazepine",
+      "Mania alternative",
+      "Sodium, blood count, inducer interactions"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-psy-161",
+  "bk2-psy-162",
+  "bk2-psy-163",
+  "bk2-psy-164",
+  "bk2-psy-165",
+  "bk2-psy-166",
+  "bk2-psy-167",
+  "bk2-psy-168",
+  "bk2-psy-169",
+  "bk2-psy-170"
+ ],
+ "src": [],
+ "refs": [
+  "Psychiatry topic map (Marrow e6 topic selection only; text rewritten in own words, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-psychiatry",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

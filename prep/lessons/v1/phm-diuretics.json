@@ -1,0 +1,112 @@
+{
+ "v": 1,
+ "module": "phm-diuretics",
+ "subject": "pharmacology",
+ "title": "Diuretics and antidiuretics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Diuretics** block sodium reabsorption at successive nephron stations, and potency follows how much sodium that station normally reclaims: the loop of Henle reabsorbs the largest share, so loop diuretics are strongest, thiazides act moderately in the distal tubule, and potassium sparing agents weakly in the collecting duct. Water follows sodium out, shrinking extracellular volume and relieving congestion or pressure according to the clinical target chosen.",
+   "say": "Diuretics block sodium uptake along the kidney tubule. Loop drugs are strongest, thiazides moderate, potassium sparing weakest. Water follows sodium, relieving congestion or pressure.",
+   "vis": null
+  },
+  {
+   "tx": "**Loop diuretics** such as furosemide block the sodium potassium chloride cotransporter, wasting potassium, calcium and magnesium while flooding urine output for acute pulmonary oedema and congestion. High doses or rapid pushes cause ototoxicity, and gout follows urate competition. Thiazides block the distal sodium chloride channel, wasting potassium but retaining calcium, a pairing that treats hypertension and recurrent calcium stones yet provokes hyponatraemia, gout and glucose rise.",
+   "say": "Furosemide unloads flooded lungs fast but wastes potassium and calcium and can deafen at high doses. Thiazides lower pressure, retain calcium for stone formers, and drop sodium and potassium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Site",
+     "Potassium / Calcium"
+    ],
+    "rows": [
+     [
+      "Loop (furosemide)",
+      "Ascending loop of Henle",
+      "Loses K and Ca"
+     ],
+     [
+      "Thiazide",
+      "Distal convoluted tubule",
+      "Loses K, retains Ca"
+     ],
+     [
+      "Spironolactone",
+      "Collecting duct (aldosterone)",
+      "Retains K, no Ca effect"
+     ],
+     [
+      "Osmotic (mannitol)",
+      "Whole tubule water hold",
+      "Dilutional shifts; cerebral oedema use"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Potassium sparing** diuretics split into aldosterone antagonists (spironolactone, eplerenone) and channel blockers (amiloride). Spironolactone transforms heart failure and ascites outcomes beyond its mild diuresis, but hyperkalaemia, gynaecomastia and menstrual upset limit it, while eplerenone spares sex hormone receptors. Combining potassium sparing agents with ACE inhibitors, supplements or kidney failure invites dangerous hyperkalaemia needing scheduled monitoring after every change.",
+   "say": "Spironolactone saves lives in heart failure and ascites beyond making urine. Its costs are high potassium and breast tenderness. Recheck potassium and kidneys after every dose change.",
+   "vis": null
+  },
+  {
+   "tx": "**Antidiuretics** reverse the flow: desmopressin mimics vasopressin at V2 receptors inserting aquaporins, rescuing central diabetes insipidus and nocturnal enuresis and raising von Willebrand factor in mild bleeding disorders, with hyponatraemia as its overshoot danger when fluids are unrestricted. Vasopressin itself at V1 receptors constricts vessels in shock and bleeding varices through terlipressin, separating receptor jobs between water retention and vascular squeeze.",
+   "say": "Desmopressin inserts water channels to treat central diabetes insipidus and enuresis, but excess water intake on it drops sodium dangerously. Vasopressin cousins squeeze vessels for shock and varices.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central diabetes insipidus",
+     "points": [
+      "No vasopressin produced (pituitary)",
+      "Desmopressin fully effective",
+      "Dilute urine, high plasma osmolality"
+     ]
+    },
+    "right": {
+     "title": "Nephrogenic diabetes insipidus",
+     "points": [
+      "Kidney deaf to vasopressin (lithium)",
+      "Desmopressin ineffective",
+      "Thiazides paradoxically help volume"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diuretic resistance** in heart failure yields to sequential nephron blockade, adding thiazide to loop therapy, while acetazolamide's proximal carbonic anhydrase blockade serves altitude sickness, glaucoma and metabolic alkalosis niches. Every diuretic prescription pairs with a monitoring promise: weight, blood pressure lying and standing, creatinine and electrolytes within one to two weeks of changes. Exam stems hide the diagnosis in electrolyte patterns, so read potassium, calcium and sodium as class fingerprints.",
+   "say": "Read electrolytes as fingerprints: loop loses calcium, thiazide keeps it, both drop potassium, spironolactone raises it. Recheck bloods within two weeks of any change.",
+   "vis": null
+  }
+ ],
+ "quiz": [
+  "bk2-phm-081",
+  "bk2-phm-082",
+  "bk2-phm-083",
+  "bk2-phm-084",
+  "bk2-phm-085",
+  "bk2-phm-086",
+  "bk2-phm-087",
+  "bk2-phm-088",
+  "bk2-phm-089",
+  "bk2-phm-090"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

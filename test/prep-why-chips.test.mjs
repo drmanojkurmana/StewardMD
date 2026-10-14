@@ -252,13 +252,13 @@ test("CSS design: restrained dark green palette (#071318, #0D1D23, #42CDB5), no 
 });
 
 /* ---------- 9. Version and cache-busting tokens ---------- */
-test("cache-busting: index.html and prep-loader.js at prep69, sw.js has whychips and km2 markers", () => {
+test("cache-busting: index.html and prep-loader.js at prep70, sw.js has whychips and km2 markers", () => {
   const indexHtml = read("index.html");
   const loaderJs = read("prep-loader.js");
   const swJs = read("sw.js");
 
-  assert.ok(indexHtml.includes('/prep-loader.js?v=prep69"'), "index.html bumped to prep69");
-  assert.ok(loaderJs.includes('var V = "prep69";'), "prep-loader.js bumped to prep69");
+  assert.ok(indexHtml.includes('/prep-loader.js?v=prep70"'), "index.html bumped to prep70");
+  assert.ok(loaderJs.includes('var V = "prep70";'), "prep-loader.js bumped to prep70");
   assert.ok(swJs.includes("whychips1"), "sw.js CACHE contains whychips1");
   assert.ok(swJs.includes("km2"), "sw.js CACHE contains the Know more km2 marker");
 });

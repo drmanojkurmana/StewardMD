@@ -276,11 +276,13 @@
         (pool[l.s] || (pool[l.s] = [])).push({ it: it, m: l.m });
       });
     });
+    var DIV = diverseFns(opts.diverse);
     Object.keys(pool).forEach(function (s) {
-      // unseen first, then recently attempted (soft); random within each, round-robin across modules
+      // unseen first, then recently attempted (soft); random within each, round-robin across modules; with
+      // opts.diverse, a concept round-robin inside each (diversity applies inside the quota bucket, owner 2026-10-13)
       var rec = opts.recent || {}, fresh = [], old = [];
       shuffle(pool[s], R).forEach(function (x) { (rec[x.it.id] ? old : fresh).push(x); });
-      pool[s] = rr(fresh).concat(rr(old));
+      pool[s] = DIV && !opts.only ? drr(rr(fresh), DIV, R).concat(drr(rr(old), DIV, R)) : rr(fresh).concat(rr(old));
     });
     var avail = {}; Object.keys(pool).forEach(function (s) { avail[s] = pool[s].length; });
     // 2. planned quotas
@@ -327,7 +329,7 @@
       if (y.share == null) dev.push(styleName(y.style) + ": " + have + " of " + out.length + " (no quota: the official document does not give a share).");
       else { var need = Math.round(y.share * out.length); if (have < need) dev.push(styleName(y.style) + ": " + have + " in this test, " + need + " planned (" + Math.round(y.share * 100) + "%); the bank had too few."); }
     });
-    out = shuffle(out, R);
+    out = DIV ? DIV.diverseOrder(out, R) : shuffle(out, R);
     var count = out.length, reduced = count < want;
     if (dupN) dev.push(dupN + " duplicate " + (dupN === 1 ? "question was" : "questions were") + " left out (same item or same question text).");
     if (reduced) dev.unshift("Reduced to " + count + " of " + want + " questions: the bank does not hold enough eligible questions for this blueprint.");
@@ -355,6 +357,33 @@
     list.forEach(function (x) { if (!by[x.m]) { by[x.m] = []; order.push(x.m); } by[x.m].push(x); });
     var out = [], more = true;
     for (var i = 0; more; i++) { more = false; order.forEach(function (m) { if (by[m][i]) { out.push(by[m][i]); more = true; } }); }
+    return out;
+  }
+  /* Topic-diverse selection (owner 2026-10-13): the canonical concept selector lives in prep.js PURE. Lazy here so
+     this engine stays dependency-free (its node tests load it alone); in the app prep-tests.js sets opts.diverse and
+     G.PREP._pure is present, in node the require below resolves once both files are loaded. null when off/unavailable. */
+  function diverseFns(on) {
+    if (!on) return null;
+    try {
+      var P = (G && G.PREP && G.PREP._pure) || (typeof require === "function" ? require("./prep.js") : null);
+      if (P && P.diverseOrder && P.conceptKeys) return P;
+    } catch (e) {}
+    return null;
+  }
+  // drr(list, DIV, R): the entries' relative order kept (module round-robin), regrouped round-robin across concepts
+  // so a subject bucket's take covers as many distinct concepts as possible. Seeded via R, deterministic per seed.
+  function drr(list, DIV, R) {
+    if (list.length < 2) return list.slice();
+    var ks = DIV.conceptKeys(list.map(function (x) { return x.it; }));
+    var groups = {}, order = [];
+    list.forEach(function (x, i) {
+      var k = ks[i];
+      if (!groups[k]) { groups[k] = { k: k, q: [], r: R() }; order.push(groups[k]); }
+      groups[k].q.push(x);
+    });
+    order.sort(function (a, b) { return a.r - b.r; });
+    var out = [], more = true;
+    for (var i = 0; more; i++) { more = false; order.forEach(function (g) { if (g.q[i]) { out.push(g.q[i]); more = true; } }); }
     return out;
   }
   /* Diagnostic (simple, from the student's own history): subjects never or least answered first, then the weakest by

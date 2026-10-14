@@ -1,0 +1,117 @@
+{
+ "v": 1,
+ "module": "phm-asthma-cough",
+ "subject": "pharmacology",
+ "title": "Drugs for bronchial asthma, COPD and cough",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Asthma pharmacotherapy** separates relievers that open airways within minutes from controllers that suppress the underlying eosinophilic airway inflammation over weeks. Inhaled corticosteroids are the controller foundation at every persistent step, while short acting beta 2 agonists rescue bronchospasm on demand. Modern practice increasingly pairs reliever with inhaled steroid in one inhaler so rescue doses also deliver anti inflammatory treatment exactly when symptoms declare risk.",
+   "say": "Relievers open airways fast; controllers calm inflammation slowly. Inhaled steroids are the foundation. Rescue puffs that also carry steroid treat risk at the moment symptoms appear.",
+   "vis": null
+  },
+  {
+   "tx": "**Beta 2 agonists** relax bronchial smooth muscle through cyclic AMP: salbutamol rescues for hours, while long acting salmeterol and formoterol maintain dilation for twelve hours and must never be used without inhaled steroid cover in asthma. Formoterol's fast onset allows reliever pairing strategies. Tremor, tachycardia, hypokalaemia and hyperglycaemia mark systemic spillover, worst with nebulised or intravenous dosing during severe attacks.",
+   "say": "Salbutamol rescues; long acting beta drugs maintain but must never fly solo in asthma without steroid cover. Tremor, fast pulse and low potassium betray systemic spillover.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Class",
+     "Examples",
+     "Role"
+    ],
+    "rows": [
+     [
+      "SABA",
+      "Salbutamol",
+      "Rescue relief minutes"
+     ],
+     [
+      "LABA + ICS",
+      "Formoterol combinations",
+      "Maintenance and reliever strategies"
+     ],
+     [
+      "ICS",
+      "Beclometasone, budesonide, fluticasone",
+      "Controller foundation"
+     ],
+     [
+      "LTRA",
+      "Montelukast",
+      "Add on, exercise and aspirin sensitive"
+     ],
+     [
+      "Biologics",
+      "Omalizumab, anti IL5 agents",
+      "Severe phenotypes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Inhaled corticosteroids** reduce exacerbations, hospitalisations and asthma death, with local costs of oral candidiasis and hoarseness prevented by spacers and mouth rinsing. Leukotriene antagonist montelukast helps exercise induced and aspirin sensitive disease taken orally at night, with rare neuropsychiatric warnings. Theophylline's narrow window, interactions and arrhythmia risk have demoted it to specialist add on status where levels can be monitored carefully.",
+   "say": "Inhaled steroids prevent attacks and deaths; rinse the mouth to avoid thrush. Montelukast suits exercise and aspirin sensitive asthma. Theophylline is narrow and monitored, now a specialist extra.",
+   "vis": null
+  },
+  {
+   "tx": "Severe phenotypes earn **biologics**: omalizumab traps IgE in allergic asthma, anti interleukin 5 agents deplete eosinophils, and dupilumab blocks interleukin 4 and 13 signalling, each matched to biomarkers such as eosinophils, exhaled nitric oxide and allergy testing. In acute severe attacks, systemic steroids, nebulised beta agonists, ipratropium and intravenous magnesium form the escalating ladder while preparing high dependency support for the tiring patient.",
+   "say": "Severe asthma biologics match the patient's inflammatory fingerprint: IgE, eosinophils or type two cytokines. Acute attacks climb steroids, nebulisers, ipratropium and magnesium while watching for exhaustion.",
+   "vis": null
+  },
+  {
+   "tx": "**COPD** drugs emphasise long acting bronchodilation (LAMA plus LABA) over steroids, reserving inhaled steroids for frequent exacerbators with eosinophils because pneumonia risk rises. Antitussives suppress cough weakly and mucolytics such as carbocisteine modestly reduce exacerbations in selected chronic bronchitis. Codeine and dextromethorphan cough mixtures carry dependence and interaction cautions, and suppressing a productive cough in bronchiectasis harms clearance more than it comforts.",
+   "say": "COPD leans on long acting dilators; steroids only for selected exacerbators because pneumonia risk rises. Cough suppressants are weak and can harm patients who need to clear secretions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Asthma emphasis",
+     "points": [
+      "Inflammation first: ICS foundation",
+      "LABA never without ICS",
+      "Biologics by type 2 biomarkers"
+     ]
+    },
+    "right": {
+     "title": "COPD emphasis",
+     "points": [
+      "Bronchodilation first: LAMA/LABA",
+      "ICS only selected exacerbators",
+      "Steroids raise pneumonia risk"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-051",
+  "bk2-phm-052",
+  "bk2-phm-053",
+  "bk2-phm-054",
+  "bk2-phm-055",
+  "bk2-phm-056",
+  "bk2-phm-057",
+  "bk2-phm-058",
+  "bk2-phm-059",
+  "bk2-phm-060"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition and Kaplan Pharmacology (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-batch2-pharma1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

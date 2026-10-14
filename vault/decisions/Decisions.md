@@ -5,6 +5,26 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-13 · Tools grouped by role in All tools; Home starts with a starter set (owner asked)
+
+**Decision.** The owner: "there are many clinical tools ... many find it difficult to categorise and arrange them".
+Answers to the questions asked: categories in the **All tools sheet only** (Home keeps its look, see 2026-10-12
+"Home page look stays"); grouped **by role**; Home shows **6 to 8 tools picked per role and specialty**; add
+**Recently used**, **specialty starter packs** and **one-line descriptions**. `tool-groups.js` holds the data: four
+sections (Students: learn and practise; Interns: bedside and ward work; Residents: specialty and training; Doctors:
+practice and clinic), each tool in exactly one, the earliest role it is mainly for, never a role it is locked for
+(`role-features.js` LOCKED). The user's own section comes first, marked "Your role" and open; the others start
+closed (all open with no role). Search matches every word in title, subtitle and description and opens the sections
+that match. **Starter set:** until the user pins or hides a tool, Home shows the specialty pack (kit id from
+`smd_my_specialty`) then the role's list, at most 8, never a tool locked for the role and never one Home already
+offers above the grid (quick actions and chips). The first pin or hide saves what Home showed at that moment, so
+nothing the user saw disappears; after that the user's choice wins and a role change no longer reshuffles Home.
+**Why:** 44 tools in one flat list, 25 to 29 on Home by default. **Trade-off:** an existing user who never
+customised Home now sees 6 to 8 tools instead of every default (all still one tap away in All tools); a tool fits
+one section only, so "Residents" also holds tools interns may use (role locks are unchanged). Flag `smd_tool_groups`
+default ON; `"0"` or `?toolgroups=0` restores the flat list and the old defaults. **Status:** branch
+`claude/determined-hopper-ayuqpd`. See [[Home Tools]].
+
 ## 2026-10-12 · Isometric equipment figures: the Anatomy kit runs at build time only (owner asked)
 
 **Decision.** Use the MIT Anatomy skill/kit (wheresryan22/anatomy) for working equipment figures, but vendor its kit

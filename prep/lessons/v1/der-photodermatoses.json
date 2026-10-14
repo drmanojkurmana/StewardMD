@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-photodermatoses",
+ "subject": "dermatology",
+ "title": "Photodermatoses and photosensitivity: polymorphous light eruption, solar urticaria, porphyria cutanea tarda",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Photodermatoses** comprise cutaneous disorders triggered or aggravated by ultraviolet (UV) or visible radiation. The most prevalent idiopathic photodermatosis is **polymorphous light eruption (PMLE)**, a delayed-type hypersensitivity reaction to sunlight. Symptoms typically emerge within hours to days of initial spring or summer sun exposure, presenting as intensely pruritic erythematous papules, papulovesicles, or plaques on exposed skin.",
+   "say": "Polymorphous light eruption is an itchy delayed hypersensitivity rash appearing on sun-exposed skin each spring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Initial spring sunlight exposure"
+     },
+     {
+      "id": "b",
+      "label": "Cutaneous photo-antigen generation"
+     },
+     {
+      "id": "c",
+      "label": "Pruritic papulovesicular eruption"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Solar urticaria** is an immediate-type hypersensitivity reaction mediated by IgA or IgE antibodies against light-induced photoallergens. Within minutes of sunlight exposure, patients develop tingling, erythema, and transient wheals on exposed areas. Symptoms subside within one to two hours once shaded. Management includes strict sun avoidance, high-potency broad-spectrum sunscreens, and high-dose non-sedating H1-antihistamines.",
+   "say": "Solar urticaria causes wheals within minutes of light exposure, resolving rapidly after leaving the sun.",
+   "vis": null
+  },
+  {
+   "tx": "**Porphyria cutanea tarda (PCT)** is the most common porphyria, caused by deficient hepatic **uroporphyrinogen decarboxylase** activity. Photosensitivity is non-inflammatory, characterized by extreme skin fragility, subepidermal blisters, erosions, and milia on the dorsal hands following minor sun exposure or mechanical trauma. Hypertrichosis of the temporal forehead and sclerodermoid skin changes frequently accompany chronic disease.",
+   "say": "Porphyria cutanea tarda causes blistering and skin fragility on dorsal hands due to uroporphyrinogen decarboxylase deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polymorphous light eruption",
+     "points": [
+      "Immediate itchy papules and plaques",
+      "Delayed Type IV hypersensitivity",
+      "No skin fragility or blistering",
+      "Normal urine porphyrin levels"
+     ]
+    },
+    "right": {
+     "title": "Porphyria cutanea tarda",
+     "points": [
+      "Fragile skin, erosions, milia on hands",
+      "Enzyme defect in heme synthesis",
+      "Prominent subepidermal blisters",
+      "Urine fluoresces pink-orange under Wood light"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnostic markers in PCT** include screening for precipitating factors: hepatitis C virus infection, alcohol excess, haemochromatosis (HFE mutations), and exogenous estrogens. Diagnosis is confirmed by elevated urinary and plasma uroporphyrins and hepta-carboxyl porphyrins. Urine exhibits striking coral-red or pink-orange fluorescence under Wood light. Therapeutic phlebotomy and low-dose chloroquine accelerate remission.",
+   "say": "Diagnosis of PCT shows coral-red urine fluorescence under Wood lamp. Treatment utilizes therapeutic phlebotomy and chloroquine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Finding in PCT",
+     "Clinical management"
+    ],
+    "rows": [
+     [
+      "Enzyme deficiency",
+      "Uroporphyrinogen decarboxylase (UROD)",
+      "Hepatic iron accumulation worsens defect"
+     ],
+     [
+      "Wood lamp urine test",
+      "Coral-red pink-orange fluorescence",
+      "Diagnostic of excess urinary uroporphyrins"
+     ],
+     [
+      "Primary risk factors",
+      "Hepatitis C, alcohol, iron overload",
+      "Screen and treat underlying viral hepatitis"
+     ],
+     [
+      "First-line therapy",
+      "Repeated therapeutic phlebotomy",
+      "Removes iron, restores UROD activity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Drug-induced photosensitivity** divides into phototoxicity and photoallergy. Phototoxicity is non-immunological, dose-dependent, and resembles exaggerated sunburn within hours of exposure to drugs like doxycycline, amiodarone, or thiazides. Photoallergy represents cell-mediated hypersensitivity, requiring prior sensitization, manifesting with eczematous dermatitis spreading beyond light-exposed skin.",
+   "say": "Drug photosensitivity includes dose-dependent phototoxic exaggerated sunburn and cell-mediated photoallergic eczematous dermatitis.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-polymorphous_light_eruption",
+  "kb-reference-porphyria_cutanea_tarda"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

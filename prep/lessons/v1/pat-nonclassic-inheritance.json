@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "pat-nonclassic-inheritance",
+ "subject": "pathology",
+ "title": "Non Mendelian inheritance: imprinting, repeats and mitochondria",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Genomic imprinting** silences alleles by parent of origin through methylation: **Prader-Willi syndrome** (paternal 15q11-13 deletion or maternal **uniparental disomy**, hyperphagia with obesity, short stature, intellectual disability) mirrors **Angelman syndrome** (maternal deletion or paternal UPD, severe disability with ataxia, inappropriate laughter, seizures) at the same locus. **Uniparental disomy** (both homologues from one parent) unmasks imprinting or recessive mutations; Beckwith-Wiedemann (paternal 11p15 excess, macrosomia with Wilms risk) inverts the pattern. Methylation testing with FISH sorts deletions from disomy.",
+   "say": "Same chromosome, opposite parent lost: Prader-Willi eats, Angelman laughs. Both homologues from one parent is disomy.",
+   "vis": null
+  },
+  {
+   "tx": "**Trinucleotide repeats** expand across generations causing **anticipation** (earlier, severer disease): **fragile X** (CGG in FMR1, intellectual disability with macroorchidism and long face; premutations cause **primary ovarian insufficiency** and tremor ataxia syndrome), **myotonic dystrophy** (CTG in DMPK, hatchet face with cataracts, myotonia, cardiac block, congenital severe form), **Huntington disease** (CAG in HTT, chorea with dementia, paternal transmission expands most). Southern blot or PCR sizes repeats; premutation carriers need family counselling before expansion.",
+   "say": "Repeats growing each generation strike earlier: fragile X, myotonic dystrophy, Huntington. Fathers expand Huntington most.",
+   "vis": null
+  },
+  {
+   "tx": "**Mitochondrial inheritance** passes only through ova (sperm mitochondria discarded), so affected mothers transmit to all children while fathers transmit to none; **heteroplasmy** (mutant load varying by tissue) explains variable severity. **MELAS** (stroke like episodes with lactic acidosis) and **MERRF** (myoclonus with ragged red fibres) strike energy hungry brain and muscle; **Leber optic neuropathy** blinds young men sequentially (covered in neuro ophthalmology wave). Muscle biopsy with respiratory chain assays and mtDNA sequencing confirms; maternal relatives counselled.",
+   "say": "Mother to all children, father to none: mitochondrial. Mixed mutant loads vary the damage: heteroplasmy.",
+   "vis": null
+  },
+  {
+   "tx": "**Mosaicism** (postzygotic mutation, McCune-Albright with cafe au lait and precocious puberty, segmental neurofibromatosis) and **gonadal mosaicism** (phenotypically normal parent with multiple affected children, as in osteogenesis imperfecta) explain recurrence defying Mendelian ratios. Counselling computes empiric risks: imprinting needs parent of origin testing, repeats need sizing, mitochondria need maternal pedigree, mosaicism needs gonadal sampling debates. Pedigree with molecular testing replaces risk tables.",
+   "say": "Normal parents with several affected children suggest gonadal mosaicism. Pedigree plus molecules sets recurrence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Example",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Imprinting",
+      "Prader-Willi/Angelman",
+      "Methylation, FISH"
+     ],
+     [
+      "Repeats",
+      "Fragile X/Huntington",
+      "Repeat sizing"
+     ],
+     [
+      "Mitochondrial",
+      "MELAS/MERRF",
+      "mtDNA, biopsy"
+     ],
+     [
+      "Disomy",
+      "Beckwith-Wiedemann",
+      "Microsatellites"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-pat-361",
+  "bk2-pat-362",
+  "bk2-pat-363",
+  "bk2-pat-364",
+  "bk2-pat-365",
+  "bk2-pat-366",
+  "bk2-pat-367",
+  "bk2-pat-368",
+  "bk2-pat-369",
+  "bk2-pat-370"
+ ],
+ "src": [],
+ "refs": [
+  "Robbins Basic Pathology 9th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-path4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

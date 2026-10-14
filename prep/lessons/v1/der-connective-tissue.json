@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-connective-tissue",
+ "subject": "dermatology",
+ "title": "Connective tissue dermatoses: lupus erythematosus, dermatomyositis, systemic sclerosis, localized scleroderma",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Cutaneous lupus erythematosus** is classified into acute, subacute, and chronic subtypes. Acute cutaneous lupus presents as a transient, sun-induced **malar butterfly rash** over the nasal bridge and malar eminences, characteristically sparing the nasolabial folds. Subacute cutaneous lupus features annular polycyclic or papulosquamous plaques linked to anti-Ro/SSA antibodies, resolving without scarring.",
+   "say": "Cutaneous lupus includes malar butterfly rash sparing nasolabial folds in acute disease, and anti-Ro annular plaques in subacute disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ultraviolet light exposure"
+     },
+     {
+      "id": "b",
+      "label": "Keratinocyte apoptosis and autoantigen display"
+     },
+     {
+      "id": "c",
+      "label": "Interface dermatitis and cutaneous rash"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Discoid lupus erythematosus (DLE)** is the most common form of chronic cutaneous lupus. Lesions present as well-demarcated, indurated, erythematous plaques on sun-exposed head and neck, featuring follicular plugging (carpet tack sign), adherent scale, peripheral hyperpigmentation, and central hypopigmented scarring with permanent follicular destruction and cicatricial alopecia.",
+   "say": "Discoid lupus produces indurated scarred plaques with carpet tack scales and permanent cicatricial alopecia.",
+   "vis": null
+  },
+  {
+   "tx": "**Dermatomyositis** is an autoimmune inflammatory myopathy with pathognomonic cutaneous hallmarks that often precede proximal muscle weakness. Hallmarks include the **heliotrope rash** (violaceous erythema with periorbital oedema), **Gottron papules** (violaceous lichenoid papules over the dorsal metacarpophalangeal and interphalangeal joints), the V-sign over the anterior neck, and the shawl sign over the upper back.",
+   "say": "Dermatomyositis presents with periorbital heliotrope erythema, Gottron papules on knuckle joints, and proximal muscle weakness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lupus malar rash",
+     "points": [
+      "Malar cheeks and nasal bridge",
+      "Spares nasolabial folds strictly",
+      "Anti-dsDNA and Sm antibodies",
+      "No knuckle papules"
+     ]
+    },
+    "right": {
+     "title": "Dermatomyositis rash",
+     "points": [
+      "Periorbital heliotrope violaceous hue",
+      "Gottron papules over knuckle joints",
+      "Anti-Mi2 and Jo1 antibodies",
+      "Underlying internal malignancy risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Systemic sclerosis** displays characteristic cutaneous sclerosis driven by excessive fibroblast collagen deposition. Limited cutaneous systemic sclerosis (CREST syndrome) manifests with calcinosis, Raynaud phenomenon, oesophageal dysmotility, sclerodactyly (tight skin distal to elbows and knees), and telangiectasia, linked to anti-centromere antibodies. Diffuse disease features proximal trunk sclerosis and anti-Scl-70 antibodies.",
+   "say": "Systemic sclerosis causes skin tightening and sclerodactyly, divided into limited CREST syndrome and diffuse truncal disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Limited systemic sclerosis",
+     "Diffuse systemic sclerosis"
+    ],
+    "rows": [
+     [
+      "Skin extent",
+      "Distal to elbows and knees, face",
+      "Trunk, abdomen, proximal limbs"
+     ],
+     [
+      "Classic acronym",
+      "CREST syndrome features",
+      "Rapid progressive generalized fibrosis"
+     ],
+     [
+      "Autoantibody",
+      "Anti-centromere antibodies (ACA)",
+      "Anti-topoisomerase 1 (anti-Scl-70)"
+     ],
+     [
+      "Organ crisis",
+      "Pulmonary arterial hypertension",
+      "Scleroderma renal crisis and ILD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Morphea (localized scleroderma)** is an isolated autoimmune fibrosing disorder confined to the skin and subcutaneous tissues without systemic organ sclerosis or Raynaud phenomenon. Lesions begin as erythematous violaceous expanding plaques that evolve into ivory-white sclerotic plaques with an active violaceous 'lilac ring' border, eventually resolving with subcutaneous atrophy.",
+   "say": "Morphea is localized cutaneous sclerosis with ivory-white plaques and a lilac border, sparing internal organs.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-systemic_lupus_erythematosus",
+  "kb-reference-dermatomyositis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

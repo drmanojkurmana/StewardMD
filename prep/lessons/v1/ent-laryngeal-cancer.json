@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "ent-laryngeal-cancer",
+ "subject": "ent",
+ "title": "Carcinoma of the larynx",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Laryngeal cancer** is overwhelmingly squamous carcinoma from smoking and alcohol, subsited by lymphatics and presentation: glottic (true cords, sparse lymphatics, hoarseness early, best prognosis), supraglottic (rich lymphatics, late sore throat, otalgia, nodes, worse prognosis), subglottic (rarest, stridor late, worst). Any hoarseness over three weeks in smoker needs laryngoscopy; cord mobility (mobile, impaired, fixed) stages depth (T) because fixation means deep muscle or joint invasion.",
+   "say": "Hoarse smoker three weeks scopes. Glottis shouts early and cures; supraglottis whispers late with nodes.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Staging workup: flexible and operative laryngoscopy with biopsy, stroboscopy, CT or MRI larynx and neck (cartilage invasion, pre epiglottic and paraglottic spaces), chest imaging (second primary and metastases), nutrition, dental, speech swallow and smoking cessation. Transglottic tumours cross ventricle ignoring subsite borders. HPV plays minor role here unlike oropharynx; leukoplakia and dysplasia on cords are precursor surveillance lesions (voice preserving stripping decisions).",
+   "say": "Fixed cord stages deep. Scan cartilage and chest; smokers grow second cancers.",
+   "vis": null
+  },
+  {
+   "tx": "Early glottic cancer (T1 T2) cures equally by **radiotherapy** or transoral laser microsurgery (single modality, voice outcomes debated by tumour extent), preserving larynx. Advanced disease balances total laryngectomy (permanent stoma, voice rehabilitation by tracheoesophageal prosthesis electrolarynx or oesophageal speech) against chemoradiation organ preservation (RTOG pattern: concurrent cisplatin radiation spares anatomy in many, salvage surgery for failure, but nonfunctional preserved larynx with aspiration can be worse than laryngectomy). Choice is multidisciplinary with patient values, pulmonary reserve and salvage feasibility.",
+   "say": "Early cord cancer: beam or laser, keep voice box. Advanced: remove it or chemobeam and salvage failures.",
+   "vis": null
+  },
+  {
+   "tx": "**Key point.** Airway and aftercare dominate advanced care: impending obstruction needs awake tracheostomy (often before treatment, avoiding emergency cricothyrotomy through tumour), stoma education after laryngectomy (no voice without prosthesis, water drowning risk, heat moisture exchangers), hypothyroidism after neck radiation or hemithyroidectomy, and vigilance for pharyngocutaneous fistula post salvage (prior radiation, poor nutrition). Supraglottic tumours electively treat both neck sides even node negative due occult spread, unlike early glottic where neck observation is standard.",
+   "say": "Beam neck both sides for supraglottis even silent. After laryngectomy, voice comes via prosthesis valve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subsite",
+     "Lymphatics",
+     "First symptom"
+    ],
+    "rows": [
+     [
+      "Glottic",
+      "Sparse, nodes late",
+      "Hoarseness early"
+     ],
+     [
+      "Supraglottic",
+      "Rich bilateral",
+      "Sore throat, nodes, otalgia"
+     ],
+     [
+      "Subglottic",
+      "Paratracheal spread",
+      "Stridor late"
+     ],
+     [
+      "Transglottic",
+      "Crosses ventricle",
+      "Mixed advanced signs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-231",
+  "bk2-ent-232",
+  "bk2-ent-233",
+  "bk2-ent-234",
+  "bk2-ent-235",
+  "bk2-ent-236",
+  "bk2-ent-237",
+  "bk2-ent-238",
+  "bk2-ent-239",
+  "bk2-ent-240"
+ ],
+ "src": [],
+ "refs": [
+  "Dhingra Diseases of ENT 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "hand",
+ "run": "books2-batch2p2-ent",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

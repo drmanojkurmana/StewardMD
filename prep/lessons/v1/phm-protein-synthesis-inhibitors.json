@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-protein-synthesis-inhibitors",
+ "subject": "pharmacology",
+ "title": "Protein synthesis inhibitors: aminoglycosides to linezolid",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aminoglycosides** (**gentamicin, tobramycin, amikacin**: concentration dependent killing with **post antibiotic effect**, poor oral absorption, **once daily dosing** with extended interval, **ototoxicity** vestibular and cochlear with **nephrotoxicity** tubular) need levels (peak efficacy, trough toxicity) with magnesium, calcium watched; **myasthenia worsens** (neuromuscular blockade) while loop diuretics add ototoxicity. Synergy (endocarditis with ampicillin, febrile neutropenia with pip-tazo) justifies; pregnancy avoids (fetal ototoxicity). Amikacin reserves resistant TB and Acinetobacter.",
+   "say": "Once daily peaks kill, troughs toxify ears and kidneys: levels both. Myasthenia worsens on aminoglycosides.",
+   "vis": null
+  },
+  {
+   "tx": "**Macrolides** (erythromycin, clarithromycin, **azithromycin**: 50S blockade, atypical pneumonia, **traveller's diarrhoea**, **chlamydia single dose**, pertussis, H. pylori triple) trade QT prolongation (erythromycin IV most) with **CYP3A4 inhibition** (clarithromycin statins and warfarin); **erythromycin prokinetic** (motilin agonist, gastroparesis) with **infantile pyloric stenosis** caution, azithromycin hearing reversible. **Clindamycin** (anaerobic above diaphragm, **toxin suppression** in necrotising infections with penicillin, **C. difficile** risk, Pneumocystis with primaquine) complements.",
+   "say": "Atypical pneumonia traveller chlamydia single dose is azithromycin. Toxin shutting necrotising clindamycin risks C. diff.",
+   "vis": null
+  },
+  {
+   "tx": "**Tetracyclines** (**doxycycline**: atypical, rickettsia, cholera adjunct, Lyme, malaria prophylaxis, acne, **teeth and bone banned under 8 and pregnancy**, photosensitivity, oesophagitis upright) with **minocycline** (vertigo, pigmentation, acne) and **tigecycline** (broad rescue, **black box mortality**, nausea) chelate with cations (iron, calcium, antacids spaced); **demeclocycline** (SIADH aquaresis) niches. **Chloramphenicol** (**aplastic anaemia** idiosyncratic, **grey baby** glucuronidation failure, meningitis where nothing else) is last resort monitored.",
+   "say": "Under 8 and pregnant never tetracyclines: teeth stain. Doxy covers rickettsia to acne upright with water.",
+   "vis": null
+  },
+  {
+   "tx": "**Linezolid** (oxazolidinone, **VRE and MRSA pneumonia**, 50S unique, **serotonin syndrome** with SSRIs, **optic neuropathy** with lactic acidosis beyond 28 days, thrombocytopenia weekly) with tedizolid (less marrow) and **streptogramins** (quinupristin dalfopristin, VRE faecium only, arthralgia) rescue resistant Gram positives; **nitrofurantoin and fosfomycin** (cystitis, covered next wave) differ by site. Vancomycin stays first where susceptible; daptomycin covers bacteraemia (never lung). Duration caps linezolid.",
+   "say": "VRE pneumonia beyond 28 days blinds and lactates on linezolid: weekly platelets, stop SSRIs clashing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protein drug",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Gentamicin",
+      "Once daily",
+      "Ears kidneys"
+     ],
+     [
+      "Azithromycin",
+      "Single STI",
+      "QT"
+     ],
+     [
+      "Doxycycline",
+      "Rickettsia acne",
+      "Teeth kids"
+     ],
+     [
+      "Linezolid",
+      "VRE lung",
+      "28 day cap"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-301",
+  "bk2-phm-302",
+  "bk2-phm-303",
+  "bk2-phm-304",
+  "bk2-phm-305",
+  "bk2-phm-306",
+  "bk2-phm-307",
+  "bk2-phm-308",
+  "bk2-phm-309",
+  "bk2-phm-310"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

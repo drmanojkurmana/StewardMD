@@ -1,0 +1,160 @@
+{
+ "module": "sur-aneurysm",
+ "subject": "surgery",
+ "title": "Abdominal aortic aneurysm, Laplace law, endoleak types, and carotid endarterectomy",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Rutherford Vascular Surgery 9th ed"
+ ],
+ "steps": [
+  {
+   "tx": "An abdominal aortic aneurysm represents a permanent focal arterial **dilation** exceeding three centimeters in diameter or fifty percent greater than the adjacent normal aorta. The infrarenal abdominal aorta is involved in over ninety percent of cases due to decreased medial elastin lamellae and lack of vasa vasorum. Laplace law states that mural wall tension equals pressure multiplied by radius divided by wall thickness, explaining why rupture risk accelerates exponentially as diameter expands beyond five centimeters.",
+   "say": "An abdominal aortic aneurysm is defined as a diameter exceeding three centimeters. Ninety percent involve the infrarenal aorta. By Laplace law, mural wall tension rises directly with increasing radius, dramatically accelerating rupture risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aneurysm diameter",
+     "Annual rupture risk",
+     "Clinical management strategy"
+    ],
+    "rows": [
+     [
+      "3.0 to 3.9 cm",
+      "Under 1 percent per year",
+      "Serial ultrasound every 2 to 3 years"
+     ],
+     [
+      "4.0 to 4.9 cm",
+      "Approximately 1 to 3 percent",
+      "Serial ultrasound every 6 to 12 months"
+     ],
+     [
+      "5.0 to 5.4 cm",
+      "Approximately 3 to 5 percent",
+      "Close monitoring / consider repair in women"
+     ],
+     [
+      ">= 5.5 cm",
+      "Exceeds 10 percent per year",
+      "Elective surgical or endovascular repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Elective repair is recommended when maximum transverse diameter reaches five and a half centimeters in men or five centimeters in women, or upon rapid expansion exceeding five **millimeters** over six months. Ruptured aneurysm classically presents with severe sudden back or flank pain, a pulsatile abdominal mass, and profound hypotension, though this diagnostic triad appears complete in only half of cases. Hemodynamically stable patients undergo immediate contrast computed tomography, while unstable patients proceed directly to the operating theater.",
+   "say": "Elective repair is indicated at five and a half centimeters in men, five centimeters in women, or with rapid expansion. Rupture presents with severe back pain, a pulsatile abdominal mass, and shock, requiring immediate surgical exploration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Suspected ruptured aortic aneurysm"
+     },
+     {
+      "id": "n2",
+      "label": "Permissive hypotension (SBP 70-90)"
+     },
+     {
+      "id": "n3",
+      "label": "Immediate OR transfer or fast CTA"
+     },
+     {
+      "id": "n4",
+      "label": "Cross-clamping or aortic balloon occlusion"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endovascular aneurysm repair requires favorable anatomical morphology including an adequate infrarenal **neck** length exceeding ten millimeters, non-circumferential thrombus, and suitable iliac access vessels. Complications following endovascular stenting are characterized by endoleaks. Type I endoleaks involve persistent flow at proximal or distal attachment sites, transmitting full systemic arterial pressure and mandating immediate corrective reintervention. Type II endoleaks arise from retrograde branch flow through lumbar arteries or the inferior mesenteric artery, resolving spontaneously in most cases.",
+   "say": "Endovascular aneurysm repair requires an adequate proximal aortic neck length of at least ten millimeters. Type I attachment site endoleaks transmit systemic arterial pressure and require immediate repair. Type II branch vessel endoleaks are typically observed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Endoleak classification",
+     "Anatomical source of flow",
+     "Clinical management rule"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Attachment site seal failure (proximal/distal)",
+      "Immediate ballooning, cuff or stent"
+     ],
+     [
+      "Type II",
+      "Retrograde branch flow (lumbar / IMA)",
+      "Conservative surveillance unless enlarging"
+     ],
+     [
+      "Type III",
+      "Graft fabric tear or modular disconnection",
+      "Urgent endovascular component relining"
+     ],
+     [
+      "Type IV / V",
+      "Graft wall porosity / endotension",
+      "Observation unless sac expands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Carotid endarterectomy prevents ischemic cerebral events in patients with severe extracranial **atherosclerosis**. The NASCET trial established that symptomatic patients with seventy to ninety-nine percent internal carotid stenosis achieve substantial stroke risk reduction from carotid endarterectomy compared to medical therapy alone. Surgery involves plaque excision through a longitudinal arteriotomy, with temporary intraluminal shunting used to preserve cerebral perfusion during clamping when collateral flow through the circle of Willis is insufficient.",
+   "say": "Carotid endarterectomy significantly reduces stroke risk in symptomatic internal carotid artery stenosis between seventy and ninety-nine percent. Meticulous plaque removal with patch angioplasty restores cerebral inflow and prevents future embolization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carotid Endarterectomy (CEA)",
+     "points": [
+      "Gold standard for symptomatic > 70% stenosis",
+      "Complete surgical excision of plaque",
+      "Mandates temporary intraluminal shunt if needed"
+     ]
+    },
+    "right": {
+     "title": "Carotid Artery Stenting (CAS)",
+     "points": [
+      "Alternative in hostile neck or radiation",
+      "Requires embolic protection filter",
+      "Slightly higher periprocedural minor stroke risk"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "6f296cd5-4000-8000-6f29-6cd512345678",
+  "6c29681c-4000-8000-6c29-681c12345678",
+  "6d2969af-4000-8000-6d29-69af12345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

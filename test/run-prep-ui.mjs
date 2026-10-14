@@ -1,7 +1,7 @@
 /* PrepNucleus in the REAL app (headless Chrome over CDP), against the small fixture bank in test/fixtures/prep.
  * What must hold: OFF by default (no tile, open() a no-op); with ?prep=1 the boot loads only prep-loader.js, the tile
  * opens the overlay, home lists the exam's subjects with MCQ counts; a subject lists sections and numbered modules
- * (an empty module says "Questions coming soon"); practice marks each answer with its explanation and source line and
+ * (empty modules stay hidden since #1525); practice marks each answer with its explanation and source line and
  * writes FSRS cards; a flagged item and an item on the reported-and-hidden list never show; a report is kept; subject
  * search finds a question and opens it; a wrong answer joins My mistakes with its tag and leaves when answered right;
  * home shows readiness and Today's plan, whose reviews item starts the due set; a mini mock is marked with the pattern's negative marking and
@@ -83,9 +83,10 @@ try {
   const load = async (url) => { reqs.length = 0; await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
   const tile = `return !!document.querySelector('.rnav-tile[data-act=prep]');`;
 
-  // ---- off per device (smd_prep="0"); the default is ON since 2026-10-06
+  // ---- off per device (smd_prep="0"); the default is ON since 2026-10-06. PrepNucleus is pinned to Home so its tile
+  // shows whatever starter set (tool-groups.js) the role would get.
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
-  await ev(`try{localStorage.setItem("smd_prep","0"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_home_tools");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep","0"); localStorage.removeItem("smd_prep_v1"); localStorage.setItem("smd_home_tools", JSON.stringify({ prep: true }));}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await load(BASE);
   ok(reqs.some((u) => /prep-loader\.js\?v=/.test(u)) && !reqs.some((u) => /\/prep(\.js|\.css)/.test(u)), "boot loads prep-loader.js and not prep.js or prep.css");
   ok(await ev(tile) === false, "smd_prep=0: no PrepNucleus tile");
@@ -108,9 +109,9 @@ try {
   const navIn = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
   ok(navIn.n === 1 && /translateX\(28px\)/.test(navIn.from) && String(navIn.op) === "0", "a push slides the new screen in from the right: " + JSON.stringify(navIn));
   ok(await ev(`var p=document.createElement("p"); p.className="pn-load"; p.textContent="Loading"; document.querySelector("#smdPrep .pn-body").appendChild(p); var b=getComputedStyle(p,"::before"), a=getComputedStyle(p,"::after"), r=b.content!=="none" && parseFloat(getComputedStyle(p).minHeight)>=300 && /pn-shim/.test(a.animationName) && b.boxShadow!=="none"; p.remove(); return r;`) === true, "loading states draw a skeleton with a moving shimmer");
-  ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 3;`, 10000), "subject lists its 3 modules");
+  ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 2;`, 10000), "subject lists its 2 modules with questions (empty modules stay hidden, #1525)");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-sec")).map(function(h){return h.textContent;}).join("|");`) === "Embryology|Upper limb", "sections in taxonomy order");
-  ok(await ev(`var b=document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]'); return b.getAttribute("aria-disabled")==="true" && /Questions coming soon/.test(b.textContent);`) === true, "an empty module says Questions coming soon and is disabled");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]');`) === true, "the empty placenta module is hidden, never coming-soon");
   ok(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus] .pn-num').textContent;`) === "3", "modules are numbered across sections");
   await shot("subject");
 
@@ -163,9 +164,13 @@ try {
         ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")), k=Object.keys(s.mt); return k.length===1 && s.mt[k[0]][2]==="misread";`) === true, "a wrong answer joins My mistakes and takes its tag");
       } else ok(await ev(`return !document.querySelector("#smdPrep [data-act=mtag]");`) === true, "a right answer offers no mistake tags");
       await click("#smdPrep [data-act=report]");
-      ok(await until(`return document.querySelectorAll("#smdPrep [data-act=sendreport]").length === 5;`, 3000), "Report lists the five reasons");
-      await click('#smdPrep [data-act=sendreport][data-v=unclear]');
-      ok(await until(`return !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
+      ok(await until(`return document.querySelectorAll(".pn-rpt-sheet input[name=pn-rpt-reason]").length === 7;`, 3000), "Report sheet lists the seven reasons");
+      await ev(`document.querySelector('.pn-rpt-sheet input[value="unclear"]').click(); return 1;`);
+      await click(".pn-rpt-sheet .pn-rpt-send");
+      ok(await until(`var d=document.querySelector(".pn-rpt-sheet .pn-rpt-done"); return !!d && !d.hidden;`, 3000), "the sheet confirms the report was received");
+      await click(".pn-rpt-sheet [data-rpt-close]");
+      ok(await until(`return !document.querySelector(".pn-rpt-sheet") && !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
+      await shot("after-report");
       ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.rep).length===1 && s.rep[Object.keys(s.rep)[0]]==="unclear";`) === true, "the report is kept on the device");
     }
     if (i === 3) {
@@ -184,7 +189,7 @@ try {
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.cards).filter(function(k){return k.indexOf("p:ana-gametogenesis:")===0;}).length;`) === 5, "5 FSRS cards written under the module deck");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return s.mod["ana-gametogenesis"].t;`) === 5, "attempts counted for the module");
   await click("#smdPrep [data-act=donerun]");
-  ok(await until(`return /answered/.test((document.querySelector("#smdPrep .pn-mut")||{}).textContent||"");`, 3000), "Done returns to the module screen");
+  ok(await until(`return (document.querySelector("#smdPrep .pn-t h1")||{}).textContent === "Gametogenesis";`, 3000), "Done returns to the module screen");
 
   // ---- timed test
   await click('#smdPrep [data-act=start][data-k=exam]');
@@ -245,6 +250,9 @@ try {
   await ev(`var it=PREP._st.run.items[0]; var b=document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]'); b.click(); return 1;`);
   ok(await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`) === n0 - 1, "answering a mistake right takes it off the list");
   await ev(`PREP.back(); PREP.back(); return 1;`);
+  // Legacy pattern mocks below; the default Tests 2 hub (data-act=t2-pre) has its own suite
+  // (test/run-prep-tests2-ui.mjs), so pin the flag off for this section only.
+  await ev(`try{localStorage.setItem("smd_prep_tests2","0");}catch(e){} return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=mocks]");`, 3000);
   await click("#smdPrep [data-act=mocks]");
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=mock]").length === 4;`, 3000), "NEET-PG and INI-CET patterns, full and mini");
@@ -258,6 +266,7 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mod[data-act=subject][data-s=anatomy]');`) === true, "the analysis lists subjects, each opening its subject");
   await shot("mock-result");
   ok(await ev(`var m=JSON.parse(localStorage.getItem("smd_prep_v1")).mh; return m.length===1 && m[0].marks===3 && /mini/.test(m[0].label);`) === true, "the finished mock is kept in the mock history");
+  await ev(`try{localStorage.removeItem("smd_prep_tests2");}catch(e){} return 1;`);
   await click("#smdPrep [data-act=donerun]");
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 3000);

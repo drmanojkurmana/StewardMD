@@ -1,0 +1,160 @@
+{
+ "module": "sur-urolithiasis",
+ "subject": "surgery",
+ "title": "Urolithiasis, acute renal colic, endourological procedures, and staghorn calculi",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Campbell-Walsh Urology 12th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Renal **calculi** represent a frequent urological presentation affecting approximately ten percent of the adult population. Calcium oxalate stones comprise seventy-five percent of cases, followed by calcium phosphate, uric acid, and struvite. Uric acid stones are radiolucent on conventional radiography but visible on computed tomography. Struvite stones form in alkaline urine secondary to infection with urease-producing organisms such as Proteus mirabilis, often expanding into branched staghorn shapes.",
+   "say": "Renal calculi affect ten percent of adults. Calcium oxalate represents seventy-five percent of stones, while uric acid and struvite comprise the remainder. Struvite stones form in alkaline urine from urease-producing bacteria and can produce staghorn configurations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stone composition",
+     "Radiographic density",
+     "Urinary pH profile"
+    ],
+    "rows": [
+     [
+      "Calcium oxalate",
+      "Opaque on radiography",
+      "Variable urine pH"
+     ],
+     [
+      "Uric acid",
+      "Radiolucent on X-ray",
+      "Acidic urine pH < 5.5"
+     ],
+     [
+      "Struvite triple phosphate",
+      "Faintly opaque / staghorn",
+      "Alkaline urine pH > 7.2"
+     ],
+     [
+      "Cystine",
+      "Faintly radiopaque",
+      "Acidic urine pH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute renal colic classically manifests as sudden, severe unilateral flank **pain** that radiates anteriorly toward the ipsilateral groin and genitalia. Patients typically writhe in discomfort, unlike peritonitis patients who remain motionless. Non-contrast helical computed tomography of the kidneys, ureters, and bladder represents the definitive diagnostic gold standard. It detects all stone varieties with high sensitivity, measuring stone dimensions, location, and Hounsfield unit density.",
+   "say": "Acute renal colic produces severe flank pain radiating toward the groin. Non-contrast helical CT scan of the abdomen and pelvis is the gold standard diagnostic test, accurately determining stone size, location, and density.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Acute severe flank colic"
+     },
+     {
+      "id": "n2",
+      "label": "Non-contrast helical CT scan"
+     },
+     {
+      "id": "n3",
+      "label": "Assess size, density & location"
+     },
+     {
+      "id": "n4",
+      "label": "Decompress or elective intervention"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ureteral calculi smaller than five millimeters possess a seventy-five percent likelihood of spontaneous **passage** under conservative medical expulsive therapy utilizing alpha-1 adrenergic antagonists such as tamsulosin. Urgent surgical decompression with a ureteral stent or percutaneous nephrostomy is mandated when obstruction coincides with clinical infection or septic shock. Extracorporeal shock wave lithotripsy and ureteroscopy remain primary treatments for renal stones under twenty millimeters, while larger staghorn calculi necessitate percutaneous nephrolithotomy.",
+   "say": "Distal ureteral stones under five millimeters frequently pass spontaneously with tamsulosin medical expulsive therapy. Obstructing stones with fever or sepsis require immediate urgent decompression with a retrograde stent or percutaneous nephrostomy. Larger stones require ureteroscopy or percutaneous nephrolithotomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stone dimension & site",
+     "Clinical indication",
+     "Recommended procedure"
+    ],
+    "rows": [
+     [
+      "Ureteral stone < 5 mm",
+      "Uncomplicated colic",
+      "Medical expulsive therapy"
+     ],
+     [
+      "Obstructing stone with fever",
+      "Urosepsis emergency",
+      "Immediate stent or nephrostomy"
+     ],
+     [
+      "Renal stone < 20 mm",
+      "Symptomatic calculus",
+      "Shock wave lithotripsy or RIRS"
+     ],
+     [
+      "Staghorn calculus > 20 mm",
+      "Complex pelvic stone",
+      "Percutaneous nephrolithotomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent stone formers require comprehensive metabolic **evaluation** including serum calcium, phosphate, intact parathyroid hormone, and 24-hour urine collections for calcium, oxalate, citrate, and uric acid. Thiazide diuretics decrease urinary calcium excretion, preventing calcium oxalate stone recurrence. Potassium citrate alkalinizes urine to treat and dissolve radiolucent uric acid stones. Adequate daily fluid intake exceeding two and a half liters represents the most critical universal preventive measure.",
+   "say": "Metabolic evaluation in recurrent stone formers includes 24-hour urine collection for calcium, oxalate, and citrate. Thiazide diuretics reduce urinary calcium excretion, whereas potassium citrate treats uric acid stones. High daily fluid intake prevents recurrent nephrolithiasis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcium Oxalate Prevention",
+     "points": [
+      "Thiazide diuretics lower urine calcium",
+      "Dietary calcium restriction contraindicated",
+      "Maintain urine output > 2.5 L daily"
+     ]
+    },
+    "right": {
+     "title": "Uric Acid Stone Therapy",
+     "points": [
+      "Potassium citrate urine alkalinization",
+      "Maintain urinary pH between 6.5 and 7.0",
+      "Allopurinol for severe hyperuricosuria"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "95525c7b-4000-8000-9552-5c7b12345678",
+  "96525e0e-4000-8000-9652-5e0e12345678",
+  "97525fa1-4000-8000-9752-5fa112345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

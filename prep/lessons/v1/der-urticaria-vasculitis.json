@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-urticaria-vasculitis",
+ "subject": "dermatology",
+ "title": "Urticaria and cutaneous vasculitis: mast cell degranulation, wheals, leukocytoclastic vasculitis, palpable purpura",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Urticaria** is characterized by transient, intensely pruritic erythematous oedematous papules and plaques known as **wheals**. Wheals result from dermal mast cell degranulation with local release of histamine, platelet-activating factor, and leukotrienes causing pre-capillary vasodilation and plasma extravasation. Individual wheals characteristically fade completely within twenty-four hours without leaving residual bruising or pigmentation.",
+   "say": "Urticaria produces intensely pruritic wheals from mast cell histamine release that resolve completely within twenty-four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mast cell degranulation"
+     },
+     {
+      "id": "b",
+      "label": "Histamine and leukotriene release"
+     },
+     {
+      "id": "c",
+      "label": "Dermal oedema and transient wheal"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Angioedema** represents mast cell or bradykinin-mediated oedema extending into the deep dermis and subcutaneous or submucosal tissues. It presents with non-pitting, non-pruritic, painful swelling of the lips, tongue, larynx, and eyelids that takes up to seventy-two hours to resolve. ACE-inhibitor-induced angioedema is bradykinin-mediated and does not respond to antihistamines or corticosteroids.",
+   "say": "Angioedema involves deep subcutaneous swelling of facial and mucosal tissues, mediated by histamine or bradykinin pathways.",
+   "vis": null
+  },
+  {
+   "tx": "**Cutaneous small-vessel vasculitis** (leukocytoclastic vasculitis) is an immune-complex-mediated inflammation of dermal post-capillary venules. Deposition of circulating immune complexes activates complement, recruiting neutrophils that undergo karyorrhexis (leukocytoclasia) and vessel wall fibrinoid necrosis with erythrocyte extravasation. The pathognomonic clinical sign is non-blanching **palpable purpura** concentrated on lower limbs.",
+   "say": "Leukocytoclastic vasculitis presents with non-blanching palpable purpura on dependent extremities due to post-capillary venule damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urticarial wheal",
+     "points": [
+      "Histamine mast cell degranulation",
+      "Blanches completely on diascopy",
+      "Individual lesion clears under 24 hours",
+      "Leaves normal unblemished skin"
+     ]
+    },
+    "right": {
+     "title": "Palpable purpura",
+     "points": [
+      "Immune complex necrotising vasculitis",
+      "Non-blanching on glass diascopy",
+      "Persists unchanged for several days",
+      "Resolves with haemosiderin staining"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Henoch-Schonlein purpura (IgA vasculitis)** is the most common systemic vasculitis in childhood, often preceded by an upper respiratory tract infection. The classic diagnostic tetrad comprises palpable non-thrombocytopenic purpura on the lower extremities and buttocks, colicky abdominal pain with gastrointestinal bleeding, arthralgia or non-erosive arthritis, and glomerulonephritis with IgA mesangial deposition.",
+   "say": "IgA vasculitis presents with lower limb palpable purpura, abdominal colic, arthralgia, and glomerulonephritis with mesangial IgA.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Systemic feature",
+     "Pathological finding",
+     "Clinical significance"
+    ],
+    "rows": [
+     [
+      "Cutaneous purpura",
+      "Leukocytoclastic vasculitis with IgA",
+      "Mandatory criterion, symmetrical on legs"
+     ],
+     [
+      "Gastrointestinal tract",
+      "Submucosal bowel wall haemorrhage",
+      "Colicky pain, risk of intussusception"
+     ],
+     [
+      "Renal involvement",
+      "Mesangial IgA nephropathy",
+      "Microscopic haematuria, proteinuria"
+     ],
+     [
+      "Joint involvement",
+      "Periarticular swelling, no erosions",
+      "Knees and ankles, self-limiting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Urticarial vasculitis** bridges urticaria and vasculitis. Individual wheal-like lesions persist for more than twenty-four hours, cause burning rather than itching, and resolve with residual petechiae or hyperpigmentation. Biopsy demonstrates true leukocytoclastic vasculitis. Patients should be screened for hypocomplementaemia and underlying systemic lupus erythematosus.",
+   "say": "Urticarial vasculitis features wheals that persist over twenty-four hours, burn rather than itch, and leave bruising.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-urticaria",
+  "kb-reference-cutaneous_leukocytoclastic_vasculitis"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

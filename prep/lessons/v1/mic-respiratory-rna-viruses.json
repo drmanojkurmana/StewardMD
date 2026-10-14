@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-respiratory-rna-viruses",
+ "subject": "microbiology",
+ "title": "Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Influenza A** (segmented negative RNA, **H haemagglutinin with N neuraminidase**) escapes by **drift** (point mutations, yearly epidemics) and **shift** (reassortment, pandemics like 2009 H1N1); avian H5N1 and H7N9 spill with high mortality. Treatment is **oseltamivir** within 48 hours for high risk groups with yearly inactivated or live vaccines reformulated; **Reye syndrome** forbids aspirin in viral children. Diagnosis is rapid antigen or PCR with droplet precautions. B drifts only; C is mild.",
+   "say": "Shift pandemics, drift epidemics: H with N sorts flu. High risk flu gets oseltamivir in 2 days.",
+   "vis": null
+  },
+  {
+   "tx": "**Parainfluenza** causes **croup** (barking seal cough with **steeple sign** subglottic narrowing, worse at night, nebulised adrenaline with dexamethasone) while **RSV** (syncytia, infants) causes **bronchiolitis** (wheeze with hypoxia and apnoea, hyperinflated films, oxygen with fluids, **palivizumab** prophylaxis for preemies, ribavirin selected). Human metapneumovirus mimics RSV; adenovirus (pink eye with pharyngoconjunctival fever, military barracks) persists environmentally. Humidified oxygen beats antibiotics in both.",
+   "say": "Seal bark with steeple is croup: mist with steroids. Infant wheeze epidemic is RSV: oxygen, not antibiotics.",
+   "vis": null
+  },
+  {
+   "tx": "**Measles** (morbillivirus, cough coryza conjunctivitis with **Koplik spots** before maculopapular head to foot rash, infectious 4 days either side) kills by pneumonia and encephalitis; **vitamin A** halves mortality with **SSPE** (years later myoclonus with periodic EEG) haunting survivors. **Mumps** (paramyxovirus, parotitis with **orchitis** threatening fertility, aseptic meningitis, pancreatitis) and **rubella** (mild with posterior nodes, **congenital triad** of cataract, deafness and PDA with blueberry muffin rash) complete MMR targets; IgM with PCR confirms while support prevails.",
+   "say": "Koplik plus head to foot rash is measles: vitamin A saves. Parotid swelling with testicular pain is mumps.",
+   "vis": null
+  },
+  {
+   "tx": "**Coronaviruses** (enveloped positive RNA, crown spikes) range from common colds to **SARS, MERS and SARS-CoV-2** (zoonotic spillovers, anosmia with ground glass pneumonia, dexamethasone in hypoxia, antivirals per era guidance, vaccines blunting severity). **MMR strategy** (live attenuated, two doses, egg and gelatin cautions, pregnancy avoided a month) eliminates measles, mumps and rubella together; outbreaks signal coverage gaps needing catch up. Isolation with notification contains importations.",
+   "say": "Ground glass with anosmia is COVID until PCR rules out. Two MMR doses erase three diseases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Sign",
+     "Shield"
+    ],
+    "rows": [
+     [
+      "Influenza",
+      "H/N shift",
+      "Yearly vaccine"
+     ],
+     [
+      "RSV",
+      "Infant wheeze",
+      "Palivizumab"
+     ],
+     [
+      "Measles",
+      "Koplik",
+      "MMR plus vitamin A"
+     ],
+     [
+      "Rubella",
+      "Posterior nodes",
+      "MMR"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-141",
+  "bk2-mic-142",
+  "bk2-mic-143",
+  "bk2-mic-144",
+  "bk2-mic-145",
+  "bk2-mic-146",
+  "bk2-mic-147",
+  "bk2-mic-148",
+  "bk2-mic-149",
+  "bk2-mic-150"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

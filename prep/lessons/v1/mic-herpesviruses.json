@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "mic-herpesviruses",
+ "subject": "microbiology",
+ "title": "Herpesviruses: HSV, VZV, EBV, CMV, HHV6 and HHV8",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Herpes simplex 1 and 2** (enveloped dsDNA, latency in **trigeminal and sacral ganglia**) erupt as grouped vesicles on erythematous bases: HSV-1 oral cold sores with keratitis (dendritic ulcer threatening vision) and temporal lobe **encephalitis** (fever with aphasia, temporal MRI changes, RBCs in CSF), HSV-2 genital ulcers with neonatal herpes (vaginal delivery through active lesions avoided by section). **Tzanck smear** (multinucleated giant cells) with **Cowdry A inclusions** bedsides while PCR confirms; **aciclovir** (viral thymidine kinase activated, needs hydration against crystal nephropathy) treats with valaciclovir suppression for recurrences.",
+   "say": "Grouped vesicles that recur are herpes: latent in ganglia. Temporal fever with aphasia is HSV encephalitis: aciclovir now.",
+   "vis": null
+  },
+  {
+   "tx": "**Varicella zoster virus** (same ganglion latency, dorsal root) causes **chickenpox** (centripetal vesicles in crops with fever, infectious until all crusted) then decades later **shingles** (dermatomal burning vesicles, thoracic commonest, **Ramsay Hunt** with facial palsy and ear vesicles, ophthalmic division threatening sight). Postherpetic neuralgia (elderly) needs gabapentinoids with early antivirals shortening; **varicella vaccine** (live, contacts and seronegative pregnancy exposed get VZIG) prevents. Breakthrough disease runs mild.",
+   "say": "Crops centripetal then crusts are chickenpox. Dermatomal burn in elders is shingles: antivirals within 72 hours.",
+   "vis": null
+  },
+  {
+   "tx": "**Epstein-Barr virus** (B cell latency via CD21, salivary spread in adolescents) causes **infectious mononucleosis** (fever with exudative pharyngitis, posterior cervical nodes and splenomegaly; **atypical lymphocytes** with **heterophile Monospot**, amoxicillin rash unmasking, splenic rupture avoided by rest). Tumour links (African **Burkitt lymphoma** with jaw mass and c-myc, **nasopharyngeal carcinoma**, post transplant **PTLD**) need biopsy; chronic active infection debates follow. CMV heterophile negative mononucleosis mimics without pharyngitis.",
+   "say": "Kissing disease with atypical cells and amoxicillin rash is EBV. Jaw mass in African child is Burkitt.",
+   "vis": null
+  },
+  {
+   "tx": "**Cytomegalovirus** (largest herpesvirus, **owl eye basophilic inclusions**, latency in monocytes) harms the immunocompromised and fetuses: **congenital CMV** (commonest infectious deafness with microcephaly and petechiae, valganciclovir debated), transplant retinitis (pizza pie haemorrhages, **ganciclovir** with neutropenia watched) and colitis. **HHV-6** causes **roseola infantum** (high fever then rash as fever breaks, febrile seizures), and **HHV-8** drives **Kaposi sarcoma** (violaceous AIDS plaques) with primary effusion lymphoma. Serology with PCR and pp65 antigenaemia stage.",
+   "say": "Pizza pie retina in transplant is CMV: ganciclovir. Fever that breaks into rash in infants is roseola.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Virus",
+     "Latency",
+     "Signature"
+    ],
+    "rows": [
+     [
+      "HSV",
+      "Trigeminal/sacral",
+      "Grouped vesicles"
+     ],
+     [
+      "VZV",
+      "Dorsal root",
+      "Dermatomal shingles"
+     ],
+     [
+      "EBV",
+      "B cells",
+      "Atypical lymphocytes"
+     ],
+     [
+      "CMV",
+      "Monocytes",
+      "Owl eye"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-mic-121",
+  "bk2-mic-122",
+  "bk2-mic-123",
+  "bk2-mic-124",
+  "bk2-mic-125",
+  "bk2-mic-126",
+  "bk2-mic-127",
+  "bk2-mic-128",
+  "bk2-mic-129",
+  "bk2-mic-130"
+ ],
+ "src": [],
+ "refs": [
+  "Paniker's Textbook of Medical Parasitology 8th Ed + Ananthanarayan and Paniker's Textbook of Microbiology (topic maps; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-micro2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

@@ -1,0 +1,160 @@
+{
+ "module": "sur-cardiac",
+ "subject": "surgery",
+ "title": "Coronary artery bypass grafting, valvular heart disease, and cardiopulmonary bypass",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Kirklin/Barratt-Boyes Cardiac Surgery 4th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Coronary artery bypass grafting represents the definitive surgical revascularization modality for complex multivessel **coronary** artery disease. Established anatomical indications include significant left main coronary artery stenosis exceeding fifty percent, three-vessel coronary disease with proximal left anterior descending involvement, or two-vessel disease in diabetic patients with impaired left ventricular ejection fraction. The SYNTAX score quantifies coronary lesion complexity, guiding multidisciplinary Heart Team decisions between percutaneous coronary intervention and surgical bypass.",
+   "say": "Coronary artery bypass grafting is indicated for left main stenosis exceeding fifty percent, three-vessel disease, or multivessel disease in diabetic patients. The SYNTAX score assesses lesion complexity to direct treatment between stenting and bypass.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical lesion pattern",
+     "Clinical indication threshold",
+     "Recommended revascularization"
+    ],
+    "rows": [
+     [
+      "Left main coronary stenosis",
+      "Stenosis >= 50 percent",
+      "Coronary artery bypass grafting (CABG)"
+     ],
+     [
+      "Three-vessel CAD with diabetes",
+      "Multivessel diffuse disease",
+      "CABG provides superior survival"
+     ],
+     [
+      "Single or two-vessel disease",
+      "Isolated non-LAD stenosis",
+      "Percutaneous coronary intervention (PCI)"
+     ],
+     [
+      "Acute coronary syndrome / shock",
+      "Emergent cardiogenic collapse",
+      "Emergency bypass or primary PCI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conduit selection determines long-term graft **patency** following coronary bypass surgery. The left internal mammary artery anastomosed to the left anterior descending coronary artery represents the undisputed gold standard conduit, demonstrating ten-year patency rates exceeding ninety percent and conferring significant long-term survival advantage. Supplemental arterial conduits include the radial artery, which achieves higher patency than saphenous veins when target stenosis exceeds seventy percent. Autologous great saphenous veins remain widely utilized for multivessel grafting.",
+   "say": "The left internal mammary artery grafted to the left anterior descending artery is the gold standard conduit, providing ninety percent ten-year patency. Supplemental conduits include the radial artery and autologous great saphenous vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Multivessel coronary disease identified"
+     },
+     {
+      "id": "n2",
+      "label": "Harvest left internal mammary artery (LIMA)"
+     },
+     {
+      "id": "n3",
+      "label": "Supplemental radial artery or saphenous vein"
+     },
+     {
+      "id": "n4",
+      "label": "LIMA to LAD anastomosis constructed"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical intervention for aortic stenosis is indicated upon onset of angina, syncope, or heart failure **symptoms**, or in asymptomatic patients with aortic valve area under one square centimeter and mean transvalvular gradient exceeding forty millimeters of mercury. Transcatheter aortic valve replacement represents the preferred approach in elderly or high-risk surgical candidates. For severe primary mitral regurgitation, surgical mitral valve repair utilizing an annuloplasty ring and leaflet reconstruction achieves superior survival compared to complete valve replacement.",
+   "say": "Aortic valve replacement is indicated for symptomatic severe stenosis with valve area under one square centimeter. Transcatheter replacement is favored in high-risk patients. Mitral valve repair is preferred over replacement for primary mitral regurgitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Valvular heart lesion",
+     "Surgical indication criteria",
+     "Preferred operative procedure"
+    ],
+    "rows": [
+     [
+      "Severe aortic stenosis",
+      "Valve area < 1.0 cm2 & symptoms",
+      "Surgical (SAVR) or transcatheter (TAVR)"
+     ],
+     [
+      "Severe mitral regurgitation",
+      "Symptomatic or EF <= 60%",
+      "Mitral valve repair with annuloplasty"
+     ],
+     [
+      "Aortic regurgitation",
+      "LV end-systolic dimension > 50 mm",
+      "Aortic valve replacement / root repair"
+     ],
+     [
+      "Tricuspid regurgitation",
+      "Severe secondary annular dilation",
+      "Tricuspid annuloplasty ring repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiopulmonary bypass temporarily assumes the physiological **functions** of the heart and lungs, consisting of venous cannulation, a membrane oxygenator, a roller or centrifugal systemic perfusion pump, and an arterial return cannula in the ascending aorta. Systemic anticoagulation with high-dose heparin targeting an activated clotting time exceeding four hundred and eighty seconds is mandatory before initiating bypass. Hypothermic potassium cardioplegia arrests the heart in diastole, while protamine sulfate neutralizes heparin following separation.",
+   "say": "Cardiopulmonary bypass oxygenates and pumps blood during cardiac arrest. High-dose heparin maintains activated clotting time above four hundred and eighty seconds. Potassium cardioplegia arrests the myocardium in diastole, neutralized with protamine after bypass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "On-Pump Cardiac Surgery",
+     "points": [
+      "Cardiopulmonary bypass with cardiac arrest",
+      "Still, bloodless surgical operative field",
+      "Requires full heparinization (ACT > 480 s)"
+     ]
+    },
+    "right": {
+     "title": "Off-Pump Coronary Surgery",
+     "points": [
+      "Beating heart surgery using stabilizers",
+      "Avoids aortic cross-clamping & CPB circuit",
+      "Technically challenging for circumflex vessels"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "f4f66dae-4000-8000-f4f6-6dae12345678",
+  "f3f66c1b-4000-8000-f3f6-6c1b12345678",
+  "f2f66a88-4000-8000-f2f6-6a8812345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}

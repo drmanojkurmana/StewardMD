@@ -46,7 +46,7 @@ export const ORDER = {
     "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics", "ss-radiology"],
 };
 export const BRANCHES = [{ id: "mbbs", name: { en: "MBBS" } }, { id: "ss-medicine", name: { en: "SS Medicine" } }];
-export const EXAMS = ["neet-pg", "ini-cet", "neet-ss", "usmle"];
+export const EXAMS = ["neet-pg", "ini-cet", "neet-ss", "usmle", "usmle-step2-ck"];
 // Fill targets by module size (plan 6.1): the reference tier before a source pack exists.
 export const TARGET = { s: 15, m: 40, l: 80 };
 
@@ -105,7 +105,15 @@ export function modulesOf(s) {
   return out;
 }
 // The tree the app draws (bundled). Scope terms stay in the build: they are for classification only.
-export function taxonomyForApp(subjects) {
+// Branches drawn but not generated (prep/taxonomy-extra.json): the licensing branches (PLAB 1, MRCS Part A, AMC,
+// MCCQE Part I, MRCP) reuse MBBS modules, and the NEET-SS surgical branch has no module scopes, so neither can be a
+// prep/taxonomy/ source. They are appended here so a rebuild of prep/taxonomy.json keeps them.
+export const EXTRA_FILE = path.join(ROOT, "prep", "taxonomy-extra.json");
+export function extraBranches(file = EXTRA_FILE) {
+  if (!fs.existsSync(file)) return [];
+  return JSON.parse(fs.readFileSync(file, "utf8")).branches || [];
+}
+export function taxonomyForApp(subjects, extra = extraBranches()) {
   return {
     v: 1,
     branches: BRANCHES.map((b) => ({
@@ -114,7 +122,7 @@ export function taxonomyForApp(subjects) {
         id: s.id, code: s.code, name: { en: s.title }, ex: s.exams, medmcqa: s.medmcqa || null, ...(s.bank ? { bv: s.bank } : {}),
         sections: s.sections.map((sec) => ({ id: sec.id, name: { en: sec.title }, modules: sec.modules.map((m) => ({ id: m.id, name: { en: m.title }, size: m.size })) })),
       })),
-    })),
+    })).concat(extra),
   };
 }
 

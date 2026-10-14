@@ -1,0 +1,89 @@
+{
+ "v": 1,
+ "module": "phm-antiepileptics",
+ "subject": "pharmacology",
+ "title": "Antiepileptics and status epilepticus",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Antiepileptics** sort by channel: **sodium blockade** (phenytoin, carbamazepine, lamotrigine, lacosamide; use dependent, partial and tonic clonic), **calcium T blockade** (**ethosuximide** absence), **GABA enhancement** (benzodiazepines, phenobarbital, vigabatrin irreversible, tiagabine reuptake), **glutamate blockade** (topiramate, perampanel AMPA), **SV2A** (**levetiracetam** broad, safe pregnancy). Choice follows seizure type (absence needs ethosuximide or valproate, never phenytoin), age, pregnancy and comorbidity; monotherapy titrates first.",
+   "say": "Partial and tonic clonic take sodium blockers; absence takes ethosuximide. Never phenytoin absence: worsens.",
+   "vis": null
+  },
+  {
+   "tx": "**Phenytoin** (**zero order** saturation kinetics, **gingival hyperplasia** with hirsutism and megaloblastic anaemia, **HLA-B*1502** hypersensitivity, teratogenic, inducer) needs level monitoring (free in hypoalbuminaemia and renal failure); **carbamazepine** (**autoinduction**, **SIADH hyponatraemia**, agranulocytosis, SJS HLA screened, trigeminal neuralgia first line) interacts widely. **Valproate** (broadest including myoclonus, **neural tube defects** with PCOS, weight gain, pancreatitis, hyperammonaemia, tremor) is avoided in pregnancy; levels with LFTs watch all three.",
+   "say": "Saturation kinetics, gum overgrowth, HLA rash: phenytoin, watch levels. Autoinduction plus low sodium: carbamazepine.",
+   "vis": null
+  },
+  {
+   "tx": "**Absence** (3 Hz spike wave, hyperventilation provokes, ethosuximide first) and **myoclonic** (valproate or levetiracetam, photosensitive juvenile) epilepsies start young; new agents fill niches (**levetiracetam** irritability, brivaracetam calmer, lacosamide PR prolonging, perampanel aggression, topiramate weight loss with stones and glaucoma, zonisamide sulfa stones, gabapentinoids pain not epilepsy). **Never withdraw abruptly** (rebound status); switch overlapping. Comorbidity guides (migraine topiramate, pain gabapentin, mood valproate or lamotrigine).",
+   "say": "Blank staring hyperventilated is absence: ethosuximide. Never stop suddenly: status rebounds.",
+   "vis": null
+  },
+  {
+   "tx": "**Status epilepticus** (over 5 minutes convulsive, time is brain) runs **lorazepam IV** (buccal midazolam prehospital, rectal diazepam children) then **fosphenytoin, levetiracetam or valproate** infusion, then **midazolam or propofol** anaesthesia with EEG burst suppression for refractory; pyridoxine in neonates, glucose with thiamine always. Nonconvulsive (prolonged postictal, subtle twitches) needs EEG. **Pregnancy** prefers **levetiracetam or lamotrigine** with high dose folate; breastfeeding mostly continues.",
+   "say": "Seizing past 5 minutes is status: lorazepam, then fosphenytoin or levetiracetam, then anaesthesia. Pregnant epilepsy prefers levetiracetam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Seizure drug",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Phenytoin",
+      "Zero order, gums",
+      "Levels, HLA"
+     ],
+     [
+      "Carbamazepine",
+      "Autoinduction",
+      "Sodium, SJS"
+     ],
+     [
+      "Valproate",
+      "Broadest",
+      "Pregnancy"
+     ],
+     [
+      "Ethosuximide",
+      "Absence",
+      "GI upset"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-phm-181",
+  "bk2-phm-182",
+  "bk2-phm-183",
+  "bk2-phm-184",
+  "bk2-phm-185",
+  "bk2-phm-186",
+  "bk2-phm-187",
+  "bk2-phm-188",
+  "bk2-phm-189",
+  "bk2-phm-190"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma2b",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
+}

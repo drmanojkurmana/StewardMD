@@ -1,0 +1,160 @@
+{
+ "module": "sur-lymphatic",
+ "subject": "surgery",
+ "title": "Lymphedema staging, lymphoscintigraphy, complete decongestive therapy, and surgical restoration",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Rutherford Vascular Surgery 9th ed"
+ ],
+ "steps": [
+  {
+   "tx": "Lymphedema is a chronic debilitating condition caused by impaired interstitial **drainage** and macromolecular clearance, leading to protein-rich fluid stagnation, chronic inflammation, adipocyte hypertrophy, and progressive cutaneous fibrosis. Primary lymphedema results from intrinsic lymphatic aplasia or hypoplasia, divided into congenital Milroy disease presenting before age one, Meige disease praecox presenting around puberty, and lymphedema tarda developing after age thirty-five. Secondary lymphedema most commonly follows axillary lymphadenectomy, radiation, or filariasis worldwide.",
+   "say": "Lymphedema results from defective lymphatic clearance, causing protein-rich interstitial fluid retention, adipose deposition, and dermal fibrosis. Primary forms include Milroy and Meige diseases, while secondary lymphedema commonly follows axillary dissection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymphedema etiology",
+     "Typical age of onset",
+     "Predominant causal mechanism"
+    ],
+    "rows": [
+     [
+      "Congenital (Milroy)",
+      "Birth to 1 year of age",
+      "VEGFR3 gene mutation / aplasia"
+     ],
+     [
+      "Praecox (Meige)",
+      "Puberty to age 35 years",
+      "Lymphatic hypoplasia (most common primary)"
+     ],
+     [
+      "Tarda",
+      "After age 35 years",
+      "Adult-onset primary lymphatic incompetence"
+     ],
+     [
+      "Secondary lymphedema",
+      "Any age following insult",
+      "Axillary clearance, radiation, filariasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The International Society of Lymphology classifies clinical lymphedema into four progressive **stages**. Stage 0 denotes a subclinical, latent state where lymphatic transport capacity is reduced without visible edema. Stage 1 demonstrates early pitting edema that improves or resolves completely with overnight leg elevation. Stage 2 exhibits irreversible, non-pitting edema with extensive subcutaneous fibrofatty proliferation. Stage 3 represents lymphostatic elephantiasis characterized by massive limb enlargement, acanthosis, verrucous hyperkeratosis, and recurrent episodes of streptococcal cellulitis.",
+   "say": "The International Society of Lymphology recognizes four stages from latent stage zero to elephantiasis in stage three. Stage one demonstrates reversible pitting edema, while stage two exhibits non-pitting irreversible fibroadipose deposition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISL clinical stage",
+     "Physical examination characteristics",
+     "Reversibility with limb elevation"
+    ],
+    "rows": [
+     [
+      "Stage 0 (Latent)",
+      "No visible swelling / impaired transport",
+      "Subclinical state"
+     ],
+     [
+      "Stage 1 (Early)",
+      "Soft pitting edema",
+      "Reverses completely with elevation"
+     ],
+     [
+      "Stage 2 (Late)",
+      "Non-pitting dense edema with fibrosis",
+      "Does not reverse with elevation"
+     ],
+     [
+      "Stage 3 (Elephantiasis)",
+      "Verrucous hyperkeratosis & fat lobules",
+      "Irreversible / severe chronic disability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stemmer sign, defined as the inability to pinch and lift a fold of **skin** at the base of the second toe, represents a pathognomonic physical finding distinguishing lymphedema from venous edema. Lymphoscintigraphy using intradermal technetium-99m sulfur colloid represents the diagnostic gold standard, demonstrating delayed transit, dermal backflow, and absent regional lymph node visualization. Near-infrared fluorescence lymphography with indocyanine green provides real-time high-resolution mapping of functioning superficial lymphatic channels.",
+   "say": "Stemmer sign is the inability to pinch skin at the second toe base, pathognomonic for lymphedema. Technetium-99m lymphoscintigraphy is the diagnostic gold standard, demonstrating delayed transit and dermal backflow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Painless chronic limb enlargement"
+     },
+     {
+      "id": "n2",
+      "label": "Positive Stemmer sign on exam"
+     },
+     {
+      "id": "n3",
+      "label": "Technetium lymphoscintigraphy"
+     },
+     {
+      "id": "n4",
+      "label": "Stage-guided CDT or supermicrosurgery"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete decongestive therapy represents the cornerstone conservative management, combining manual **lymphatic** drainage, multi-layer short-stretch compression bandaging, therapeutic exercise, and meticulous skin hygiene to prevent recurrent cellulitis. Supermicrosurgical lymphovenous anastomosis creates shunts between functioning lymphatic channels and adjacent subdermal venules in early stage 1 and 2 disease. Vascularized lymph node transfer provides physiological clearance for refractory cases, while suction-assisted lipectomy removes hypertrophied fibrofatty tissue in advanced stage 2 and 3 disease.",
+   "say": "Complete decongestive therapy provides essential conservative management through manual drainage and compression bandaging. Supermicrosurgical lymphovenous anastomosis diverts lymphatic flow into venules, while suction lipectomy resects chronic fibroadipose tissue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological Surgery",
+     "points": [
+      "Lymphovenous anastomosis (LVA)",
+      "Vascularized lymph node transfer (VLNT)",
+      "Best in early stages with patent channels"
+     ]
+    },
+    "right": {
+     "title": "Ablative / Reductive Surgery",
+     "points": [
+      "Suction-assisted lipectomy",
+      "Charles skin excision procedure",
+      "Indicated for chronic fibroadipose excess"
+     ]
+    }
+   }
+  }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-coverage-wave4b",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "a7cf2b9c-4000-8000-a7cf-2b9c12345678",
+  "aacf3055-4000-8000-aacf-305512345678",
+  "a9cf2ec2-4000-8000-a9cf-2ec212345678"
+ ],
+ "src": [],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
+}
