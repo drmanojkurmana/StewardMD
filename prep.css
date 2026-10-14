@@ -1011,6 +1011,20 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-xnotes ol, .pn-root .pn-exp ol { list-style: decimal; }
 .pn-root .pn-xnotes ol > li { padding-left: 2px; }
 .pn-root .pn-xnotes ol > li::marker, .pn-root .pn-exp ol > li::marker { color: var(--pn-pri-ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+/* Run-together enumerations (prep-listfmt.js): the lead keeps stem type; each item sits on its own line with a
+   hanging muted label. Token-only rules, so light and dark follow the theme; no animation, no glow. */
+.pn-root .pn-lf-lead { margin: 0 0 8px; }
+.pn-root ol.pn-lf, .pn-root .pn-exp ol.pn-lf { list-style: none; margin: 8px 0 2px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.pn-root ol.pn-lf > li, .pn-root .pn-exp ol.pn-lf > li { display: flex; gap: 10px; align-items: baseline; line-height: 1.5; overflow-wrap: anywhere; padding-left: 0; }
+.pn-root .pn-lf-m { flex: 0 0 auto; min-width: 2em; font-weight: 700; color: var(--pn-mut); font-variant-numeric: tabular-nums; }
+.pn-root .pn-lf-tail { margin: 8px 0 0; }
+.pn-root table.pn-lf-t .pn-lf-m { min-width: 0; }
+.pn-root .pn-seq { display: inline-flex; flex-wrap: wrap; align-items: baseline; row-gap: 4px; font-variant-numeric: tabular-nums; }
+.pn-root .pn-seq-t { font-weight: 700; }
+.pn-root .pn-seq-s { color: var(--pn-mut); font-weight: 400; }
+.pn-root .pn-pairs { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: baseline; }
+.pn-root .pn-pair { display: inline-flex; align-items: baseline; gap: 6px; padding: 3px 10px; border: 1px solid var(--pn-line); border-radius: var(--pn-r-sm); background: var(--pn-card); font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pn-root .pn-pair-s { color: var(--pn-mut); font-weight: 400; }
 .pn-root .pn-xt { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; border: 1px solid var(--pn-line); border-radius: var(--pn-r-sm); }
 .pn-root .pn-xt:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: 2px; }
 .pn-root .pn-xt table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 14.5px; line-height: 1.45; }
