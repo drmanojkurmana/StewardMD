@@ -172,6 +172,7 @@ test("bank route serves fixed-test papers and rejects traversal", () => {
   assert.equal(bankPath({ path: ["v1", "tests", "neet-pg", "grand", "x.json", "y"] }), null);
   assert.equal(bankPath({ path: ["v1", "tests", "NEET-PG", "grand", "x.json"] }), null, "uppercase rejected");
   assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject_mini", "fmge-sub-anatomy-1.json"] }), "v1/tests/fmge/subject_mini/fmge-sub-anatomy-1.json", "subject_mini papers serve");
+  assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject-mini", "fmge-sub-anatomy-1.json"] }), "v1/tests/fmge/subject-mini/fmge-sub-anatomy-1.json", "subject-mini dir serves (the published layout)");
   assert.equal(bankPath({ path: ["v1", "tests", "fmge", "subject_mini", "..", "manifest.json"] }), null, "traversal still rejected");
   assert.equal(bankPath({ path: ["overlay", "maikimg4", "pathology", "pat-breast.json"] }), "overlay/maikimg4/pathology/pat-breast.json");
   assert.equal(bankPath({ path: ["overlay", "maik", "index.json"] }), "overlay/maik/index.json");
@@ -376,6 +377,23 @@ test("auditCoverage flags eligible exam/formats with neither papers nor shortfal
   assert.match(gaps[0], /neet-pg\/image/);
   assert.deepEqual(T.auditCoverage(covered, [{ exam: "neet-pg", format: "image", id: "x", reason: "r" }], census), [], "a shortfall is reported, not silent");
   assert.deepEqual(T.auditCoverage([], [], { "neet-pg": { eligible: 0, image: 0, topics: 0 } }), [], "empty pools are not gaps");
+});
+
+test("subject_mini papers live at the route-legal subject-mini dir", () => {
+  assert.equal(T.formatDir("subject_mini"), "subject-mini");
+  assert.equal(T.formatDir("grand"), "grand");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "fxdir-"));
+  try {
+    const bank = fixtureBank();
+    const p = T.buildPaper(tax, "neet-pg", "subject_mini", "anatomy", 1, bank, BANK_VERS, {}, {}, "2026-10-11T00:00:00.000Z").paper;
+    T.writePapers(dir, [p]);
+    T.buildIndex(dir, T.readOut(dir));
+    const ix = JSON.parse(fs.readFileSync(path.join(dir, "index.json"), "utf8"));
+    assert.equal(ix.papers[0].path, "neet-pg/subject-mini/neet-pg-sub-anatomy-1.json");
+    assert.ok(fs.existsSync(path.join(dir, "neet-pg", "subject-mini", "neet-pg-sub-anatomy-1.json")));
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test("requestList never rebuilds published fixed-key papers", () => {
