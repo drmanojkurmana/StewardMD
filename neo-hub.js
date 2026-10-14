@@ -18,7 +18,7 @@
 (function (G) {
   "use strict";
   var D = G.document, FL = function () { return G.SMD_NEO_FLAGS; };
-  var VER = "neo3";
+  var VER = "neo3-ui1";
   var TOOLS = [], root = null, cur = "home", curOpts = null, editing = false;
 
   function on() { return !!(FL() && FL().on()); }
@@ -142,6 +142,12 @@
       "#neoHub .nh-list{display:flex;flex-direction:column;min-width:0}#neoHub .nh-li>span{min-width:0;overflow-wrap:anywhere}#neoHub .nh-li>.nh-chip{flex-shrink:0}#neoHub .nh-li{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:0;border-top:1px solid var(--nh-line);background:none;color:var(--nh-ink);font:600 15px var(--nh-f);padding:11px 2px;min-height:44px;cursor:pointer;width:100%}#neoHub .nh-li:first-child{border-top:0}#neoHub .nh-li small{font:500 12.5px var(--nh-f);color:var(--nh-mut)}",
       "#neoHub svg{max-width:100%;height:auto;display:block}",
       "#neoHub .nh-foot{font:500 12px var(--nh-f);color:var(--nh-mut);text-align:center;padding:4px 8px}",
+      "#neoHub :focus-visible{outline:3px solid var(--nh-acc);outline-offset:2px}",
+      "#neoHub input:focus-visible,#neoHub select:focus-visible{box-shadow:0 0 0 3px var(--nh-acc-soft)}",
+      "#neoHub .nh-tool,#neoHub .nh-btn{transition:background-color .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease,transform .16s ease}",
+      "#neoHub .nh-tool:active,#neoHub .nh-btn:not(:disabled):active{transform:translateY(1px)}#neoHub .nh-btn:disabled{opacity:.55;cursor:not-allowed}",
+      "@media(hover:hover){#neoHub .nh-tool:hover{border-color:var(--nh-acc);box-shadow:0 4px 14px rgba(16,42,44,.08);transform:translateY(-1px)}#neoHub .nh-btn:not(:disabled):hover{background:var(--nh-acc-soft)}#neoHub .nh-btn.pri:not(:disabled):hover{background:#0b625c;color:#fff}body.dark #neoHub .nh-btn.pri:not(:disabled):hover,body.v3-dark #neoHub .nh-btn.pri:not(:disabled):hover{background:#238f83}}",
+      "@media(prefers-reduced-motion:reduce){#neoHub *,#neoHub *::before,#neoHub *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}",
       "@media(min-width:720px){#neoHub .nh-body{max-width:760px;margin:0 auto;width:100%}#neoHub .nh-tools{grid-template-columns:repeat(3,minmax(0,1fr))}}"
     ];
     // The same look for the neonatal block the dose calculator embeds (.neo-blk inside #doseCalc).
