@@ -150,3 +150,10 @@ Anthropic API returns 400 "Your credit balance is too low" for claude-haiku-5-5,
 
 - 396 verified ($0 API, blind fresh-context, dropped 4 disagreements: maikss111[35], maikss112[37,41,49]), keys rotated, dedupe 0 in batch, R2 live maikss105-112: ss-clinical-pharmacology 189->339, ss-geriatric-mental-health 180->330, ss-child-adolescent-psychiatry 177->273.
 - Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`. Remainder: child-adolescent psychiatry 27; then Paediatric subjects (~120 each), Surgical (vascular 140, plastic 131, paediatric surgery 130, surgical oncology 114, CTVS 53, neurosurgery 15, urology 8), OBG/Ortho/Anaesthesia (~170 each).
+
+## VOLUME phase batch 13 (2026-10-14, OpenRouter pipeline): 6 subjects complete to 300 - PR merged
+
+- 137 OpenRouter-generated MCQs (deepseek-v4.1-flash + nvidia/nemotron-3-ultra-550b-a55b:free, cross-family blind verified by nemotron/deepseek + minimax-m3 20% sample + AGY Gemini 3.8 Flash High blind pass; held 3 during quality gates, replaced), dedupe 0 in batch, R2 live maikss277-maikss283: ss-child-adolescent-psychiatry +27, ss-vascular-surgery +1, ss-rheumatology-immunology +10, ss-infectious-diseases +13, ss-nephrology +28, ss-neurology +29, ss-neurology +29.
+- Overlays maikss277-maikss283 live on R2 and wired in prep.js and overlay-counts.json. 6 subjects now reach >= 300: ss-child-adolescent-psychiatry (300), ss-vascular-surgery (300), ss-rheumatology-immunology (300), ss-infectious-diseases (300), ss-nephrology (300), ss-neurology (300). Local scope tests pass 18/18.
+- Cumulative OpenRouter spend: $0.8464 of $9.00 hard stop. Note: OpenRouter workspace balance reached initial $5 credit cap (402 error); top up credits to continue remaining batches.
+- Outside-sandbox pending (lead): `node tools/prep-ids.mjs publish --yes`.
