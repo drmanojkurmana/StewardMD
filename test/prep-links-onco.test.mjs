@@ -14,7 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { stampLinks } from "../tools/prep-links.mjs";
+import { stampLinks, oncoEvKbId } from "../tools/prep-links.mjs";
 import mapClient from "../cancer-protocols-map.js";
 import prepReason from "../prep-reason.js";
 
@@ -70,6 +70,66 @@ test("prep-links-onco: non-cancer question does NOT carry oncology protocol_ids"
   const oncoProtos = mapClient.getProtocols("cervical_cancer").map((p) => p.id);
   const foundOnco = (links.protocol_ids || []).filter((id) => oncoProtos.includes(id));
   assert.equal(foundOnco.length, 0, "non-cancer question carries 0 oncology protocols");
+});
+
+test("prep-links-onco: distractor-only cancer mention does NOT attach oncology protocols", () => {
+  // Real case: CIDP item (ss-neurology) where "amyloid" appears only in a wrong
+  // option and the reasons. The index promotes it to a kt/ev=1 chapter row, but
+  // chemotherapy regimens must not ride along (owner: no wrong links).
+  const it = {
+    id: "q_c5f0be10723d",
+    q: "A biopsy specimen is taken from a patient with a chronic progressive neuropathy showing classic demyelinating features. Which histologic finding is most characteristic of CIDP?",
+    o: [
+      "Onion bulb formation",
+      "Endoneurial amyloid deposits",
+      "Axonal spheroids",
+      "Vasculitic nerve infarction"
+    ],
+    a: 0,
+    exp: "Onion bulbs, composed of concentrically arranged Schwann cells around thinly myelinated fibers, are classic findings."
+  };
+  const links = [{ k: "kb", id: "amyloidosis", title: "Amyloidosis", c: 75, v: "kt", ev: 1 }];
+  const modKbIds = ["immune_mediated_necrotising_myopathy"];
+  assert.equal(oncoEvKbId(links, it, modKbIds), null, "distractor-only kt cancer yields no protocol article");
+});
+
+test("prep-links-onco: module-topic cancer DOES attach oncology protocols", () => {
+  // MPN-module item evidenced to the module's own mapped topic keeps protocols.
+  const it = {
+    id: "q_mpn_1",
+    q: "Myelofibrosis leading to a dry tap on bone marrow aspiration is seen with which condition?",
+    o: ["Myeloproliferative neoplasm", "Iron deficiency", "Aplastic anemia", "Thalassemia"],
+    a: 0,
+    exp: "Dry tap suggests marrow fibrosis in myeloproliferative disease."
+  };
+  const links = [{ k: "kb", id: "polycythemia_vera_and_other_myeloprolifera", title: "Polycythemia Vera and Other Myeloproliferative Neoplasms", c: 75, v: "kt", ev: 1 }];
+  const modKbIds = ["polycythemia_vera_and_other_myeloprolifera"];
+  assert.equal(oncoEvKbId(links, it, modKbIds), "polycythemia_vera_and_other_myeloprolifera", "module-topic kt cancer yields its article");
+});
+
+test("prep-links-onco: specific-tier evidence attaches even outside the module topic", () => {
+  // srcPack-verified lung item in its NSCLC module: specific tier always counts.
+  const it = {
+    id: "q_lung_1",
+    q: "A 62-year-old heavy smoker presents with persistent cough and a normal chest radiograph. What is the next step?",
+    o: ["CT chest", "Bronchoscopy", "Observation", "Antibiotics"],
+    a: 0,
+    exp: "CT in high-risk patients with persistent symptoms."
+  };
+  const links = [{ k: "kb", id: "lung_cancer", title: "Lung Cancer", c: 95, v: "sp" }];
+  assert.equal(oncoEvKbId(links, it, ["something_else"]), "lung_cancer", "specific-tier kb yields its article");
+});
+
+test("prep-links-onco: topic-tier cancer named in stem or key DOES attach", () => {
+  const it = {
+    id: "q_cervix_2",
+    q: "A 45-year-old woman is diagnosed with locally advanced cervical carcinoma (FIGO stage IIB). What is the standard treatment?",
+    o: ["Concurrent chemoradiation", "Surgery", "Radiation alone", "Observation"],
+    a: 0,
+    exp: "CCRT is standard."
+  };
+  const links = [{ k: "kb", id: "cervical_cancer", title: "Cervical Cancer", c: 75, v: "kt", ev: 1 }];
+  assert.equal(oncoEvKbId(links, it, ["unrelated_module_topic"]), "cervical_cancer", "stem-named kt cancer yields its article");
 });
 
 test("prep-links-onco: prep-reason kmTargets generates cp target for evidenced cancer MCQ", () => {

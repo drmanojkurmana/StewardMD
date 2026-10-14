@@ -16,7 +16,7 @@ const require = createRequire(import.meta.url);
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), "..");
 const cancerMap = require(path.join(ROOT, "cancer-protocols-map.js"));
 
-const LINKS_DIR = path.join(os.homedir(), "prep-data/links");
+const LINKS_DIR = process.env.ONCO_LINKS_DIR || path.join(os.homedir(), "prep-data/links");
 const BANK_DIR = path.join(os.homedir(), "prep-work/StewardMD-prep/prep/bank/v5");
 
 // Seeded pseudorandom number generator (LCG) for deterministic sampling
@@ -170,10 +170,25 @@ async function main() {
     if (isMultiCancerStem) multiCancerCases++;
 
     // Validation: Does the evidenced cancer match the question's core subject?
-    // Check if the evidenced cancer keywords appear in stem, answer, or explanation
+    // Check if the evidenced cancer keywords appear in stem, answer, or explanation.
+    // Clinical shorthands also count: standard acronyms (CLL, GTN) and histology /
+    // procedure synonyms that name the same cancer (all manually reviewed 2026-10-15).
+    const AUDIT_SYNONYMS = {
+      breast_cancer: ["mastectomy", "ductal carcinoma", "lobular carcinoma", "her2-positive"],
+      mycosis_fungoides: ["cutaneous t cell lymphoma", "ctcl"],
+      sezary_syndrome: ["sezary"],
+      lung_cancer: ["nsclc", "sclc", "small cell lung", "non-small cell lung"],
+      hepatocellular_carcinoma: ["hepatocellular", "hcc"],
+      renal_cell_carcinoma: ["renal cell", "rcc"],
+      colorectal_cancer: ["colorectal", "colon cancer", "rectal cancer"],
+    };
     const cancerWords = expectedCancerName.toLowerCase().replace(/[^a-z0-9]+/g, " ").split(" ").filter(w => w.length >= 4);
+    const acr = expectedCancerName.toLowerCase().split(/[^a-z0-9]+/).filter(w => w.length > 2).map(w => w[0]).join("");
+    const syns = AUDIT_SYNONYMS[evidencedKbId] || [];
     const matchesStemOrKey = cancerWords.some(w => fullText.includes(w)) ||
-      (cancerEntry && cancerEntry.aliases && cancerEntry.aliases.some(a => fullText.includes(a.toLowerCase())));
+      (cancerEntry && cancerEntry.aliases && cancerEntry.aliases.some(a => fullText.includes(a.toLowerCase()))) ||
+      (acr.length >= 3 && new RegExp("\\b" + acr + "\\b").test(fullText)) ||
+      syns.some(s => fullText.includes(s));
 
     if (matchesStemOrKey) {
       correctMatches++;
@@ -216,6 +231,7 @@ async function main() {
     multiCancerCases,
     unmappedCancersCount: unmappedCancers.length,
     unmappedCancers: unmappedCancers.slice(0, 20),
+    mismatchedItems: auditResults.filter((r) => r.status !== "PASS"),
     sampleResults: auditResults.slice(0, 15)
   };
 

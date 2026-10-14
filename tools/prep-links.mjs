@@ -362,6 +362,22 @@ export function promotable(it, l, ctx = {}) {
   if (l.c > 50 && !(base === "k" && l.c < 70) && tagEvidenced(it, l, ctx)) return true;
   return false;
 }
+/* oncoEvKbId(links, it, modKbIds) -> kb id or null: the oncology-protocol gate.
+   Stricter than the Know-more article gate on purpose. Specific-tier evidence
+   (srcPack 'sp', exact/key and other above-the-bar tiers) always counts: the item
+   is verified about that cancer. Topic-tier ('kt') counts only when it is the
+   module's own mapped topic article, or the cancer is named in the stem or the
+   keyed answer (keyOnly bar): a wrong-option-only or explanation-only mention
+   (promoted to a kt chapter row for reading) must never pull chemotherapy
+   regimens onto the item (owner: no wrong links). */
+export function oncoEvKbId(links, it, modKbIds) {
+  const cands = (links || []).filter((l) => l && l.k === "kb" && l.c >= SHOW && l.v !== "lt" && (l.v !== "kt" || l.ev === 1));
+  if (!cands.length) return null;
+  const specific = cands.find((l) => l.v !== "kt");
+  if (specific) return specific.id;
+  const topic = cands.find((l) => (modKbIds || []).includes(l.id) || stemEvidenced(it, l, {}, true));
+  return topic ? topic.id : null;
+}
 /* srcPack provenance (it.srcPack): the source ids the content pipeline read when it generated the item's
    module batch ("kb-<slug>" for Knowledge Library articles and clinical protocols). The links builder used to
    ignore these fields, throwing away the best possible links — but the pack is batch provenance, not item
@@ -905,7 +921,9 @@ export function stampLinks(its, o = {}) {
       if (!L[k]) L[k] = [];
       if (!L[k].includes(l.id)) L[k].push(l.id);
     }
-    const evKb = keep.find((l) => l.k === "kb");
+    const modKbIds = ((((topics[it.t || mid] || {}).kb) || [])).map((e) => e[0]);
+    const evKbId = oncoEvKbId(links, it, modKbIds);
+    const evKb = evKbId ? links.find((l) => l.k === "kb" && l.id === evKbId && l.c >= SHOW) : null;
     if (evKb && cancerMap) {
       const ce = cancerMap.get(evKb.id);
       if (ce && ce.protocols && ce.protocols.length) {
@@ -1144,7 +1162,9 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     if (shown.length) { rep.linked++; bs.linked++; }
     for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; if (l.v === "sp") rep.srcPack.links++; }
     if (links.length) {
-      const evKb = links.find((l) => l.k === "kb" && l.c >= SHOW && (l.v !== "kt" || l.ev === 1) && l.v !== "lt");
+      const modKbIds = (((topics[mid] || {}).kb) || []).map((e) => e[0]);
+      const evKbId = oncoEvKbId(links, it, modKbIds);
+      const evKb = evKbId ? links.find((l) => l.k === "kb" && l.id === evKbId && l.c >= SHOW) : null;
       const ce = (evKb && cancerMap) ? cancerMap.get(evKb.id) : null;
       const oncoProtoList = (ce && ce.protocols) ? ce.protocols.map((p) => [p.id, evKb.c, "cp"]) : [];
 
