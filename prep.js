@@ -726,7 +726,18 @@
   function save() { try { G.localStorage.setItem(KEY, JSON.stringify(st.store)); } catch (e) { toast("Progress could not be saved: the device storage is full."); } }
 
   /* ---------- data ---------- */
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); }); }
+  function isBankUrl(u) {
+    if (typeof u !== "string") return false;
+    if (u.indexOf("/api/prep/bank/") >= 0) return true;
+    if (API && u.indexOf(API) === 0 && API.indexOf("/api/prep/bank/") >= 0) return true;
+    return false;
+  }
+  function getJSON(url) {
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && isBankUrl(url)) {
+      return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
+  }
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }
   // MaiK lines: fetched once per open, cached like the taxonomy; a miss shows no line.
   function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
@@ -827,6 +838,16 @@
   function cachePut(path, val) { return idbDo("readwrite", function (os) { return os.put(val, path); }); }
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
+  function purgeCachedMcqs() {
+    return cacheKeys().then(function (keys) {
+      if (!keys || !keys.length) return;
+      keys.forEach(function (k) {
+        var sk = String(k);
+        if (sk.indexOf("lessons/") === 0 || sk.indexOf("cards/") === 0 || sk.indexOf("run:") === 0 || sk.indexOf("rec:") === 0) return;
+        cacheDel(sk);
+      });
+    }).catch(function () {});
+  }
   function modulePath(sid, mid) { return bvOf(sid) + "/" + sid + "/mcq/" + mid + ".json"; }
   // Stamps of the main bank version (bankStamps), loaded once a session; a failed load (offline) gives none.
   function loadStamps() {
@@ -836,15 +857,10 @@
   function loadBank(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
-    return Promise.all([cacheGet(p), bvOf(sid) === VER ? loadStamps() : {}]).then(function (r) {
-      var hit = r[0] && r[0].items ? r[0] : null, stamp = r[1][sid] || "";
-      if (cacheFresh(hit, stamp)) return (st.mem[p] = hit.items);
-      return getJSON(API + p).then(function (f) {
-        var items = (f.items || []).map(function (it) { it._s = sid; it._m = mid; return it; });
-        st.mem[p] = items;
-        cachePut(p, { items: items, ts: Date.now(), s: stamp });
-        return items;
-      }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
+    return getJSON(API + p).then(function (f) {
+      var items = (f.items || []).map(function (it) { it._s = sid; it._m = mid; return it; });
+      st.mem[p] = items;
+      return items;
     });
   }
   /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes3" and "radmax7"; new
@@ -903,17 +919,17 @@
       var sets = overlaysOfSid(sid);
       return Promise.all(sets.map(function (set) {
         var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
-        if (st.mem[p]) return st.mem[p];
-        return cacheGet(p).then(function (hit) {
-          if (hit && hit.items) return (st.mem[p] = hit.items);
-          return getJSON(API + p).then(function (f) {
-            var items = (f && f.items) || [];
-            st.mem[p] = items;
-            cachePut(p, { items: items, ts: Date.now() });
-            oldOverlays(set).forEach(function (o) { cacheDel("overlay/" + o + "/" + sid + "/" + mid + ".json"); });
-            return items;
-          }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
-        }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+        if (st.mem[p]) return Promise.resolve(st.mem[p]).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+        return getJSON(API + p).then(function (f) {
+          var items = (f && f.items) || [];
+          st.mem[p] = items;
+          items.forEach(function (it) { it._ov = set; });
+          return items;
+        }, function (e) {
+          if (e && e.status === 404) return [];
+          if (miss) miss.n++;
+          return [];
+        });
       })).then(function (r) { return [].concat.apply([], r); });
     });
   }
@@ -953,15 +969,12 @@
       return Promise.all((subs || []).filter(function (s) { return ix.subjects[s]; }).map(function (s) {
         var u = "quality/" + ix.subjects[s];
         if (st.mem[u]) return st.mem[u];
-        return cacheGet(u).then(function (hit) {
-          if (hit && hit.qf) return (st.mem[u] = ASSESS.readQuality(hit.qf));
-          return getJSON(API + u).then(function (f) { st.mem[u] = ASSESS.readQuality(f); cachePut(u, { qf: f, ts: Date.now() }); return st.mem[u]; }, function () { return {}; });
-        });
+        return getJSON(API + u).then(function (f) { st.mem[u] = ASSESS.readQuality(f); return st.mem[u]; }, function () { return {}; });
       })).then(function (maps) { var out = {}; maps.forEach(function (m) { for (var k in m) out[k] = m[k]; }); return out; });
     });
   }
 
-  // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
+  // Subject search index (search.json, built with the bank): fetched on the first search, kept in memory for the session.
   // The subject index may name the file (search: "search-<hash>.json", a rebuilt index under a new immutable name, e.g. with
   // the overlay sets' items), so a phone that cached the older search.json fetches the new one; no name: search.json.
   function searchFile(ix) { var n = ix && ix.search; return typeof n === "string" && /^search-[0-9a-f]{8}\.json$/.test(n) ? n : "search.json"; }
@@ -970,22 +983,17 @@
   }
   function loadSearchAt(sid, p) {
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
-    return cacheGet(p).then(function (hit) {
-      if (hit && hit.sx) return (st.mem[p] = hit.sx);
-      return getJSON(API + p).then(function (sx) {
-        st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() });
-        // a named index replaces the subject's plain search.json, whose cached copy is dropped
-        if (!/\/search\.json$/.test(p)) cacheDel(p.replace(/[^/]+$/, "search.json"));
-        return sx;
-      }, function (e) {
-        // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
-        // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
-        if (!e || e.status !== 404) throw e;
-        return loadIndex(sid).then(function (ix) {
-          var ts = (ix.topics || []).filter(function (t) { return t.group !== "mixed" && (t.count || 0) + (t.ov || 0) > 0; });
-          return Promise.all(ts.map(function (t) { return loadModule(sid, t.id).then(function (items) { return { id: t.id, items: items }; }, function () { return { id: t.id, items: [] }; }); }));
-        }).then(function (topics) { return (st.mem[p] = buildSearch(topics)); });
-      });
+    return getJSON(API + p).then(function (sx) {
+      st.mem[p] = sx;
+      return sx;
+    }, function (e) {
+      // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
+      // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
+      if (!e || e.status !== 404) throw e;
+      return loadIndex(sid).then(function (ix) {
+        var ts = (ix.topics || []).filter(function (t) { return t.group !== "mixed" && (t.count || 0) + (t.ov || 0) > 0; });
+        return Promise.all(ts.map(function (t) { return loadModule(sid, t.id).then(function (items) { return { id: t.id, items: items }; }, function () { return { id: t.id, items: [] }; }); }));
+      }).then(function (topics) { return (st.mem[p] = buildSearch(topics)); });
     });
   }
   /* buildSearch([{ id, items }]) -> the search.json shape (tools/tokos-build-mcq-search.mjs, same tokeniser and preview,
@@ -1306,7 +1314,7 @@
     });
     root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); st.navKey = 1; try { back(); } finally { st.navKey = 0; } } else onRunKey(e); });
     st.open = true; st.stack = [];
-    refreshHidden(); loadLines();
+    refreshHidden(); loadLines(); purgeCachedMcqs();
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     // MaiK modules (prep-qgen.js): ask the server once whether the feature is on for this account (shows the entry rows).
@@ -1803,7 +1811,7 @@
       '<h2 class="pn-sec">Your course</h2><div class="pn-group">' +
       (plan ? row("p-settings", ico("gear"), "Exam and plan", "Exam: " + esc(exLabel) + " · daily goal and reminder") : "") +
       (G.PrepPro ? row("pro-open", ico("star"), "PrepNucleus Pro", "Your plan and what it includes") : "") +
-      row("downloads", ico("dl"), "Offline downloads", "Subjects kept on this phone") +
+      row("downloads", ico("dl"), "Offline content", "Lessons and cards kept offline; questions need a connection") +
       (G.PREP_IDS ? row("id-screen", ico("search"), "Open a shared ID", "A question or lesson a friend sent you") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
       (G.PREP_QGEN && G.PREP_QGEN.isOwner() ? row("g-author", ico("gear"), "Author", "Owner only: write, check and stage new questions") : "") + "</div>" +
@@ -1994,7 +2002,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">The questions did not load. Check the connection and try again. A module opened once, or a downloaded subject, works offline.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
@@ -3261,36 +3269,23 @@
     });
   }
 
-  /* ---------- offline downloads ---------- */
+  /* ---------- offline content ---------- */
   function renderDownloads() {
-    var s = load(), subs = subjectsOf(s.exam);
-    var ndl = subs.filter(function (sb) { return !!s.dl[sb.id]; }).length;
-    paint(bar("Offline downloads", "", "back") + '<div class="pn-body pn-dll">' + hband("dl", ndl + " of " + subs.length, subs.length === 1 ? "subject offline" : "subjects offline", "A downloaded subject opens every module without a connection. Opened modules are kept anyway.") + '<ul class="pn-mods" id="pnDl">' +
-      subs.map(function (sb) {
-        var on = !!s.dl[sb.id];
-        return '<li><div class="pn-mod static' + (on ? " on" : "") + '"><span class="pn-ic sm" style="--h:' + subjHue(sb.id) + '" aria-hidden="true">' + subjIco(sb.id) + '</span><span class="pn-mb"><b>' + tx(sb.name) + '</b><small id="pnDl-' + esc(sb.id) + '">' + (on ? "Downloaded" + (typeof s.dl[sb.id] === "number" ? " " + dayMonth(s.dl[sb.id]) : "") : "Not downloaded") + '</small><span class="pn-dlbar" id="pnDlb-' + esc(sb.id) + '" aria-hidden="true"><i></i></span></span>' +
-          '<button type="button" class="pn-btn sm" data-act="' + (on ? "dlrm" : "dlget") + '" data-s="' + esc(sb.id) + '">' + (on ? "Remove" : "Download") + "</button></div></li>";
-      }).join("") + "</ul></div>");
+    var s = load();
+    if (s.dl && Object.keys(s.dl).length) { s.dl = {}; save(); }
+    paint(bar("Offline content", "", "back") + '<div class="pn-body pn-dll">' +
+      hband("dl", "Online questions", "Server-verified bank", "To protect question security and ensure the latest explanations, practice questions require an active internet connection. Lessons, high-yield cards, and clinical pearls remain available offline.") +
+      '<div class="pn-card" style="margin:16px 0;padding:16px;background:var(--pn-card, #0d1d23);border-radius:12px;border:1px solid rgba(66,205,181,0.15);">' +
+      '<p style="margin:0 0 8px;font-size:14px;color:var(--pn-t1, #e6f1f0);font-weight:600;">Question bank policy</p>' +
+      '<p style="margin:0;font-size:13px;color:var(--pn-t2, #8ea4a2);line-height:1.5;">Questions and explanations are streamed securely from the server during each session and are not stored permanently on your device.</p>' +
+      '</div></div>');
   }
   function download(sid) {
-    var s = load(), el = function () { return root && root.querySelector("#pnDl-" + sid); };
-    loadIndex(sid).then(function (ix) {
-      var ts = ix.topics.filter(function (t) { return t.all || t.count; }), done = 0;
-      if (!ts.length) { var e0 = el(); if (e0) e0.textContent = "No questions yet"; return; }
-      var step = function (i) {
-        if (i >= ts.length) { s.dl[sid] = Date.now(); save(); return renderDownloads(); }
-        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(), b = root && root.querySelector("#pnDlb-" + sid); if (e) e.textContent = "Downloading " + done + " of " + ts.length + "…"; if (b) { b.classList.add("on"); b.firstChild.style.transform = "scaleX(" + (done / ts.length).toFixed(3) + ")"; } return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
-      };
-      return step(0);
-    });
+    toast("Questions require an active internet connection.");
   }
   function removeDownload(sid) {
     var s = load();
-    cacheKeys().then(function (keys) {
-      (keys || []).forEach(function (k) { k = String(k); if (k.indexOf(bvOf(sid) + "/" + sid + "/") === 0 || (k.indexOf("overlay/") === 0 && k.split("/")[2] === sid)) { cacheDel(k); delete st.mem[k]; } });
-      Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:" + sid + "/") === 0) delete st.mem[k]; });
-      delete s.dl[sid]; save(); renderDownloads();
-    });
+    s.dl = {}; save(); renderDownloads();
   }
 
   /* ---------- practice setup (prep-setup.js): the sheet before a set from a module, a subject, custom, mistakes, bookmarks ----------
