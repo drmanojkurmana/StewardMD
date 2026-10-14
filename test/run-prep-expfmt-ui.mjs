@@ -103,6 +103,9 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-why-card");`, 8000), "Why chip opens its reason panel");
   ok(await ev(`var p=document.querySelector("#smdPrep .pn-fb .pn-why-body"); return !!p && !!p.querySelector("strong") && p.textContent.indexOf("Atheroma")>=0;`) === true, "Why panel formats the reason with emphasis");
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-fb .pn-exp strong') && document.querySelector("#smdPrep .pn-fb .pn-exp").tagName === "DIV";`) === true, "explanation uses strong semantics in its block");
+  // The explanation sits below the fold: bring the key line to the middle before shooting.
+  await ev(`var k=document.querySelector("#smdPrep .pn-fb .pn-xkey"); if(k) k.scrollIntoView({block:"center"}); return 1;`);
+  await sleep(500);
   await shot("fb", false); await shot("fb", true);
 
   // ---- Ask MaiK: a fresh thread opens empty by design (resume() never auto-calls), so send a real doubt
