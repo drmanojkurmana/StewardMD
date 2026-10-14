@@ -194,3 +194,33 @@ was not loosened at any point.
 
 Republished: links 2026-10-14.dd526c, verify 0 bad (203,577 items).
 Tests: 94 pass, 1 skipped across the links and lessons suites.
+
+## Follow-up 2 (2026-10-14, links-final3): topic tags as per-item evidence
+
+- `promotable` now also accepts a candidate named by the item's own topic
+  tags (`it.tg`) at any score above the distractor cap (50), in addition to
+  stem/keyed-answer evidence at >= 65. Explanation-only and wrong-option-only
+  mentions still never promote; the specific-link gate is unchanged.
+- Book-chapter matching (`lh`) now also considers topic-tier KB titles.
+
+Clean-cache verification repeated (fresh fetch, build):
+203,577 items, 203,577 linked, `gaps --fail` exit 0. Tests: 95 pass,
+1 skipped.
+
+Third audit (same protocol, majority of 3 gemini-3.8-flash passes,
+300 random linked items, first shown link):
+
+| Stage | Wrong |
+| --- | ---: |
+| Before any gate | 17/300 = 5.7% (single pass) |
+| After gate v1 (#1623) | 14/300 = 4.7% |
+| After per-subtopic + subject fallback (#1630) | 14/300 = 4.7% (majority) |
+| After tag evidence (this change) | 14/300 = 4.7% (majority) |
+
+The <=2% target remains unmet under this judge. The majority-flagged
+residue is now dominated by module/subject lesson links for items whose
+own module is mixed or whose filing is off-topic, where the only honest
+targets are the broad chapter or a borderline candidate; there is no
+remaining matcher rule that removes them without either loosening the
+specific-link gate (forbidden) or leaving items unlinked (forbidden).
+Republished: links 2026-10-14.dd526c, verify 0 bad.
