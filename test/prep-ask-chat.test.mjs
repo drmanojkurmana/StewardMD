@@ -236,12 +236,12 @@ test("maik-ai-mark: variants, the size rule, decorative by default, escaped opti
   assert.equal(M.variantFor("tile-mark", 34), "tile");
   assert.equal(M.variantFor("tile-mark", 140), "tile");
   assert.equal(M.variantFor("tile", 140), "tile");
-  assert.match(M.html("full", { size: 140 }), /class="mkai mkai-tile"[^>]*><use href="#mkai-tile">/);
+  assert.match(M.html("full", { size: 140 }), /<img class="mkai mkai-tile"[^>]*src="\/assets\/maik-logo-512\.webp"/);
   assert.equal(M.variantFor("full", 16), "full", "an explicit variant is kept");
   const h = M.html("mark", { size: 18, cls: "x" });
-  assert.match(h, /^<svg class="mkai mkai-mark x" viewBox="0 0 100 100" width="18" height="18" aria-hidden="true" focusable="false"><use href="#mkai-mark"><\/use><\/svg>$/);
-  assert.match(M.html("full", { size: 40, title: 'Ask "MaiK"' }), /role="img" aria-label="Ask &quot;MaiK&quot;"/);
-  assert.match(M.html("mark", { color: "#fff" }), /style="color:#fff"/);
+  assert.match(h, /^<img class="mkai mkai-mark x" src="\/assets\/maik-logo-128\.webp" width="18" height="18"[^>]*alt="" aria-hidden="true"/);
+  assert.match(M.html("full", { size: 40, title: 'Ask "MaiK"' }), /alt="Ask &quot;MaiK&quot;"/);
+  assert.doesNotMatch(M.html("mark", { color: "#fff" }), /color:#fff/, "the logo is a picture: no tint");
   assert.doesNotMatch(M.html("mark", { cls: '"><script>' }), /<script>/);
 });
 
@@ -324,9 +324,9 @@ test("every Ask MaiK entry point across the app carries the mark; the MaiK assis
   assert.ok(ask.indexOf("avatar(44) + '<div><h2 id=\"paT\">'") > 0 && ask.indexOf("avatar(30) + '<h2 id=\"paT\">'") > 0, "the sheet's two headers use the mark");
   const home = src("home.js");
   assert.match(home, /act: "askai", ic: "auto_awesome", anim: "maikai"/, "the Home Ask MaiK tile");
-  assert.match(home, /maikai: '<svg class="mkai mkai-mark"[^']*<use href="#mkai-mark"><\/use><\/svg>'/);
+  assert.match(home, /maikai: '<img class="mkai mkai-mark" src="\/assets\/maik-logo-128\.webp"/);
   assert.match(home, /window\.SMD_askMaikHandoff = function/);
-  assert.equal((home.match(/mkai/g) || []).length, 3, "home.js uses the mark only on the tile (no change inside the MaiK assistant)");
+  assert.equal((home.match(/mkai/g) || []).length, 2, "home.js uses the mark only on the tile (no change inside the MaiK assistant)");
   const shell = home.slice(home.indexOf("function maikShellHTML"), home.indexOf("function maikShellHTML") + 6000);
   assert.ok(shell.length > 1000 && !/mkai|SMD_MAIK_MARK/.test(shell), "the assistant's own shell is unchanged");
   assert.equal((home.match(/<img class="v4-maik-logo v4-maik-light" src="\/maik-logo\.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="\/maik-logo-white\.png"/g) || []).length, 2, "the footer MaiKnowledge logo is untouched");

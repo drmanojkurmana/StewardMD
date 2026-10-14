@@ -2348,7 +2348,7 @@
   // (eye blink · ECG sweep · lesion pulse · X-ray beam); reduced-motion disables the motion.
   var ANIM_ICON = {
     // The MaiK AI mark (assets/maik-ai-mark.svg via maik-ai-mark.js's sprite), white on the dark badge: the "Ask MaiK" tile.
-    maikai: '<svg class="mkai mkai-mark" viewBox="0 0 100 100" width="30" height="30" aria-hidden="true" focusable="false"><use href="#mkai-mark"></use></svg>',
+    maikai: '<img class="mkai mkai-mark" src="/assets/maik-logo-128.webp" width="30" height="30" alt="" aria-hidden="true" decoding="async" draggable="false" style="border-radius:50%">',
     eye: '<svg class="ai-anim ai-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle class="pupil" cx="12" cy="12" r="3.1"/></svg>',
     ecg: '<svg class="ai-anim ai-ecg" viewBox="0 0 48 24"><path d="M0 12 H11 l2.5 -8 3 16 2.5 -8 H27 l2.5 -7 3 14 2.5 -7 H48"/></svg>',
     derm: '<img class="ai-brandmark ai-sknx-img" src="/sknx-mark.png?v=sx2" alt="SknX AI" width="38" height="38">',

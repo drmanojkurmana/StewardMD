@@ -11799,3 +11799,10 @@ Older tests that pinned the old layout were updated. [[modules/Refined Look]]
 - Review (`reviewQuestion`) is now a pager over the filtered list or the fix/remember list: swipe, Previous/Next, arrow keys.
   Do not go back to one-question-per-push.
 - Avoid class `ky-empty` for real content: `empty-states.js` decorates it with an inbox icon (the two stray icons seen on the old result).
+
+## 2026-10-14 Ask MaiK icon is the owner's circle logo everywhere (white disc, navy M and star)
+- `maik-ai-mark.js` `html()` now returns an `<img>` of `/assets/maik-logo-{128,256,512}.webp` for every variant and size (was the
+  SVG sprite tile/mark). Every caller (18 files, the Prep Ask sheet, buttons, search rows, home tile) changes at once.
+  The sprite stays only for the "MaiK" wordmark (`mkai-word`). `scripts/build-www.sh` copies `assets/maik-logo-*.webp`.
+- Not changed on purpose: the home tab bar "Ask Maik" orb (`home.js` `rnav-maik-mark`, `maik-ai-mark.png`) because the home look is
+  frozen, and the main MaiK assistant's own logo and the footer logo (owner 2026-10-09).

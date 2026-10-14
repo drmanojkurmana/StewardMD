@@ -30,12 +30,15 @@
     return size < 28 ? "mark" : "full";
   }
   function escAttr(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  /* The mark is the owner's circular logo (2026-10-14: white disc, navy M and star), one raster in three sizes under
+     /assets/maik-logo-<px>.webp, used for every variant. The sprite stays only for the "MaiK" wordmark. */
+  function logoPx(size) { var d = size * 3; return d <= 128 ? 128 : d <= 256 ? 256 : 512; }
   function html(variant, opts) {
     opts = opts || {};
     var size = +opts.size || 20, v = variantFor(variant, size), title = opts.title ? escAttr(opts.title) : "";
-    return '<svg class="mkai mkai-' + v + (opts.cls ? " " + escAttr(opts.cls) : "") + '" viewBox="0 0 100 100" width="' + size + '" height="' + size + '"' +
-      (opts.color ? ' style="color:' + escAttr(opts.color) + '"' : "") +
-      (title ? ' role="img" aria-label="' + title + '"' : ' aria-hidden="true"') + ' focusable="false"><use href="#mkai-' + v + '"></use></svg>';
+    return '<img class="mkai mkai-' + v + (opts.cls ? " " + escAttr(opts.cls) : "") + '" src="/assets/maik-logo-' + logoPx(size) + '.webp" width="' + size + '" height="' + size + '"' +
+      ' style="border-radius:50%;object-fit:contain' + '"' +
+      (title ? ' alt="' + title + '"' : ' alt="" aria-hidden="true"') + ' decoding="async" draggable="false">';
   }
   function word() {
     return '<span class="mkai-w"><svg class="mkai-word" aria-hidden="true" focusable="false"><use href="#mkai-word"></use></svg><span class="mkai-wt">MaiK</span></span>';

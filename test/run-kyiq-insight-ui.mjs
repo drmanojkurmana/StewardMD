@@ -153,6 +153,13 @@ try {
   const dark = (c) => { const m = String(c).match(/\d+/g); return m && m.slice(0, 3).every((v) => +v < 40) && Math.max(...m.slice(0, 3)) - Math.min(...m.slice(0, 3)) < 8; };
   ok(dark(bgs[0]) && dark(bgs[1]), "dark mode background and cards are neutral black, not navy: " + JSON.stringify(bgs));
   await ev(`document.body.classList.remove("dark"); return 1;`);
+  // ---------- the Ask MaiK icon is the owner's circle logo everywhere it is drawn ----------
+  await click("#smdPrep [data-act=ask-rv]");
+  await sleep(1200);
+  const mk = await evA(`(function(){ var box=document.createElement("div"); box.id="mkProbe"; box.innerHTML=[18,32,44,96,300].map(function(n){ return SMD_MAIK_MARK.html(n < 28 ? "mark" : "tile", { size: n }); }).join(""); document.body.appendChild(box); return new Promise(function(res){ setTimeout(function(){ var i=box.querySelectorAll("img.mkai"), bad=0; i.forEach(function(x){ if(!x.complete||!x.naturalWidth) bad++; }); var live=document.querySelectorAll("#smdPrep img.mkai"); res({ n: i.length, bad: bad, svg: box.querySelectorAll("svg").length, srcs: Array.prototype.map.call(i,function(x){return x.getAttribute("src");}), liveBad: Array.prototype.filter.call(live,function(x){return !x.naturalWidth;}).length, live: live.length }); }, 800); }); })()`);
+  ok(mk && mk.n === 5 && mk.bad === 0 && mk.svg === 0 && mk.live >= 1 && mk.liveBad === 0, "every Ask MaiK icon size is the circle logo image and loads: " + JSON.stringify(mk));
+  await ev(`document.getElementById("mkProbe").remove(); return 1;`);
+  await ev(`var c=document.querySelector("[data-act=ak-close], .pa-close, .pn-sheet-wrap [data-act=close]"); if (c) c.click(); return 1;`); await sleep(300);
   const q1 = await txt("#smdPrep .pn-q");
   await click("#smdPrep [data-act=rvnext]"); await sleep(250);
   ok(await txt("#smdPrep .ky-pos") === "2 of 5" && await txt("#smdPrep .pn-q") !== q1, "Next moves to the next question in the list");

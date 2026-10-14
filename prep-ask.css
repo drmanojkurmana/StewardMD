@@ -114,8 +114,8 @@ body.dark .pn-root .pa-sb.on { background: var(--pn-seg); }
 .pn-root .pn-maikline span:last-child { min-width: 0; overflow-wrap: anywhere; }
 
 /* MaiK AI mark (maik-ai-mark.js): the avatar tile is the SVG itself; the old picture stays only as a fallback */
-.pn-root .pt-av.mk { background: none; overflow: hidden; box-shadow: none; }
-.pn-root .pt-av.mk > svg { display: block; width: 100%; height: 100%; }
+.pn-root .pt-av.mk { background: none; overflow: hidden; box-shadow: none; border-radius: 50%; }
+.pn-root .pt-av.mk > :is(svg, img) { display: block; width: 100%; height: 100%; }
 .pn-root :is(.pa-hchip, .pa-hand) .mkai { color: currentColor; }
 .pn-root .pn-ib .pl-mkai { color: var(--pn-pri-ink); }
 
