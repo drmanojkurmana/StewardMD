@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "bio-amino-acid-disorders",
+ "subject": "biochemistry",
+ "title": "Inborn errors of amino acid metabolism: PKU, alkaptonuria, MSUD and homocystinuria",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Phenylketonuria (PKU)** is an autosomal recessive disorder caused by deficient **phenylalanine hydroxylase** or its cofactor tetrahydrobiopterin (BH4). Phenylalanine accumulates and diverts into phenylpyruvate, phenylacetate, and phenyllactate. Untreated children develop profound intellectual disability, microcephaly, seizures, hypopigmentation from reduced melanin, and a characteristic **mousy or musty body odour**. Management requires dietary phenylalanine restriction and tyrosine supplementation initiated immediately after newborn screening.",
+   "say": "Phenylketonuria results from phenylalanine hydroxylase or BH4 deficiency. Toxic phenylketones accumulate, causing severe mental disability, seizures, fair skin, and a musty body odour. Early dietary phenylalanine restriction combined with tyrosine supplementation prevents neurological damage.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Phenylalanine intake in diet"
+     },
+     {
+      "id": "p2",
+      "label": "Deficient Phenylalanine Hydroxylase (PAH)"
+     },
+     {
+      "id": "p3",
+      "label": "Phenylalanine accumulation and tyrosine deficiency"
+     },
+     {
+      "id": "p4",
+      "label": "Alternative transamination to phenylketones"
+     },
+     {
+      "id": "p5",
+      "label": "Microcephaly, musty odour, intellectual impairment"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ],
+     [
+      "p4",
+      "p5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Alkaptonuria** is a benign-appearing autosomal recessive disorder caused by deficiency of **homogentisate 1,2-dioxygenase** in the tyrosine degradation pathway. Homogentisic acid accumulates and oxidizes to a dark polymer. Hallmarks include urine that **turns black upon standing or alkalinization**, dark blue-black pigment deposition in connective tissues (**ochronosis**), scleral pigmentation, and debilitating degenerative arthritis of large joints and the spine in adulthood.",
+   "say": "Alkaptonuria involves homogentisate dioxygenase deficiency in tyrosine breakdown. Accumulating homogentisic acid oxidizes to black pigment. Patients have urine that darkens when exposed to air, blue-black scleral pigmentation, and severe ochronotic osteoarthritis in later life.",
+   "vis": {
+    "cols": [
+     "Feature",
+     "Biochemical Basis",
+     "Clinical Finding"
+    ],
+    "rows": [
+     [
+      "Dark urine",
+      "Homogentisic acid auto-oxidation in alkaline air",
+      "Infant diaper stains black upon standing"
+     ],
+     [
+      "Ochronosis",
+      "Pigment deposition in articular cartilage and sclera",
+      "Slate-grey scleral spots and darkened ear cartilage"
+     ],
+     [
+      "Arthropathy",
+      "Pigment-induced brittle cartilage fragmentation",
+      "Severe degenerative spine and knee osteoarthritis in middle age"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "**Maple syrup urine disease (MSUD)** results from deficiency of the mitochondrial **branched-chain alpha-ketoacid dehydrogenase** complex, which requires thiamine, lipoic acid, CoA, FAD, and NAD. Leucine, isoleucine, and valine and their respective alpha-ketoacids accumulate to neurotoxic levels. Neonates present within the first week of life with poor feeding, vomiting, lethargy, alternating hypertonia and hypotonia, cerebral oedema, and a **sweet maple syrup or burnt sugar odour** in urine and earwax.",
+   "say": "Maple syrup urine disease is caused by branched chain alpha-ketoacid dehydrogenase deficiency. Leucine, isoleucine, and valine build up, causing neonatal vomiting, encephalopathy, seizures, and a sweet maple syrup smell in urine. Dietary restriction of branched chain amino acids is life saving.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Intake of Leucine, Isoleucine, Valine"
+     },
+     {
+      "id": "m2",
+      "label": "Normal transamination to alpha-ketoacids"
+     },
+     {
+      "id": "m3",
+      "label": "Deficient Branched-Chain Alpha-Ketoacid Dehydrogenase"
+     },
+     {
+      "id": "m4",
+      "label": "Accumulation of branched amino acids and ketoacids"
+     },
+     {
+      "id": "m5",
+      "label": "Encephalopathy, cerebral oedema, burnt sugar urine odour"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ],
+     [
+      "m4",
+      "m5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Classical **homocystinuria** is an autosomal recessive deficiency of **cystathionine beta-synthase (CBS)**, requiring pyridoxal phosphate (vitamin B6). Homocysteine accumulates while cysteine becomes essential. Clinical features include Marfanoid habitus, osteoporosis, downward and inward **ectopia lentis** (subluxation of the lens), intellectual disability, and premature **thromboembolism** in arteries and veins. Treatment involves high-dose vitamin B6 in responsive patients, dietary methionine restriction, cysteine supplementation, and betaine.",
+   "say": "Classical homocystinuria is caused by cystathionine beta synthase deficiency. Patients present with a Marfanoid habitus, downward lens dislocation, mental disability, and severe early arterial and venous thrombosis. Vitamin B6, methionine restriction, and betaine form standard therapy.",
+   "vis": {
+    "left": {
+     "title": "Homocystinuria",
+     "points": [
+      "Cystathionine beta-synthase deficiency",
+      "Ectopia lentis subluxates downward and inward",
+      "High risk of arterial and venous thrombosis",
+      "Intellectual disability common",
+      "Cysteine is an essential dietary requirement"
+     ]
+    },
+    "right": {
+     "title": "Marfan Syndrome",
+     "points": [
+      "Fibrillin-1 structural gene mutation",
+      "Ectopia lentis subluxates upward and outward",
+      "Risk of aortic aneurysm and dissection",
+      "Normal cognitive and intellectual development",
+      "No thromboembolic predisposition"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "The urea cycle disposes of waste nitrogen by converting ammonia to urea in hepatocytes. **Ornithine transcarbamylase (OTC) deficiency** is the most common urea cycle disorder and the only X-linked one. Excess carbamoyl phosphate leaks into the cytoplasm, driving pyrimidine synthesis and causing massive **orotic aciduria**. Neonates develop lethargy, hypothermia, tachypnoea from respiratory alkalosis, and cerebral oedema. Elevated blood ammonia with high urinary orotate confirms OTC deficiency over carbamoyl phosphate synthetase I deficiency.",
+   "say": "The urea cycle eliminates ammonia as urea. Ornithine transcarbamylase deficiency is the only X linked urea cycle defect. Excess carbamoyl phosphate spills into pyrimidine synthesis, causing massive urinary orotic acid and life threatening hyperammonaemic encephalopathy.",
+   "vis": {
+    "cols": [
+     "Enzyme Deficiency",
+     "Inheritance",
+     "Blood Ammonia",
+     "Urinary Orotic Acid"
+    ],
+    "rows": [
+     [
+      "Carbamoyl phosphate synthetase I",
+      "Autosomal recessive",
+      "Markedly elevated",
+      "Undetectable or normal"
+     ],
+     [
+      "Ornithine transcarbamylase (OTC)",
+      "X-linked recessive",
+      "Markedly elevated",
+      "Markedly elevated"
+     ],
+     [
+      "Argininosuccinate synthetase",
+      "Autosomal recessive",
+      "Elevated (citrullinaemia)",
+      "Normal to slightly elevated"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-phenylketonuria",
+  "kb-reference-alkaptonuria",
+  "kb-reference-homocystinuria",
+  "kb-reference-maple-syrup-urine-disease"
+ ]
+}

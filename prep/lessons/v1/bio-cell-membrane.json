@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "bio-cell-membrane",
+ "subject": "biochemistry",
+ "title": "Cell organelles, membrane structure, transport mechanisms and peroxisomal disorders",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The plasma membrane consists of an amphipathic **phospholipid bilayer** with interspersed cholesterol and proteins. Phospholipids display lateral mobility while transverse flip-flop movement is rare and enzyme-dependent. **Cholesterol** modulates membrane fluidity, preventing crystallization at low temperatures and excessive mobility at high temperatures. Integral proteins span the membrane as alpha-helices, while peripheral proteins attach electrostatically to lipid polar heads or cytoskeletal anchors.",
+   "say": "The cell membrane is a dynamic fluid lipid bilayer. Phospholipids move freely sideways, while cholesterol acts as a bidirectional fluidity buffer. Transmembrane proteins mediate selective solute passage and signal transmission across the barrier.",
+   "vis": {
+    "cols": [
+     "Component",
+     "Location",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Phospholipids",
+      "Amphipathic lipid bilayer",
+      "Form hydrophobic selective barrier"
+     ],
+     [
+      "Cholesterol",
+      "Intercalated between acyl chains",
+      "Buffers membrane fluidity against temperature changes"
+     ],
+     [
+      "Integral proteins",
+      "Transmembrane hydrophobic alpha-helices",
+      "Channels, solute transporters, and signal receptors"
+     ],
+     [
+      "Peripheral proteins",
+      "Attached to membrane surface",
+      "Cytoskeletal anchoring and intracellular enzyme cascades"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Solute transport across biological membranes occurs via passive or active mechanisms. **Simple diffusion** follows chemical gradients without carrier proteins. **Facilitated diffusion** utilises specific uniporters such as GLUT1 without energy expenditure. **Primary active transport** couples ATP hydrolysis directly to ion movement, exemplified by the ubiquitous Na+/K+-ATPase pump. **Secondary active transport** exploits electrochemical gradients established by primary pumps, driving glucose uptake via SGLT1 symporters in enterocytes.",
+   "say": "Transport across membranes is categorized by energy requirement. Simple diffusion requires no carrier. Facilitated diffusion uses uniporters down gradients. Primary active transport hydrolyzes ATP directly, while secondary active transport harnesses ion gradients to transport secondary solutes.",
+   "vis": {
+    "left": {
+     "title": "Passive Transport",
+     "points": [
+      "Movement down electrochemical gradient",
+      "No direct ATP expenditure required",
+      "Includes simple diffusion and GLUT transporters",
+      "Saturable kinetics seen in carrier-mediated types"
+     ]
+    },
+    "right": {
+     "title": "Active Transport",
+     "points": [
+      "Movement against electrochemical gradient",
+      "Requires ATP hydrolysis directly or indirectly",
+      "Primary transport includes Na+/K+-ATPase",
+      "Secondary transport includes SGLT1 sodium glucose symport"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "Mitochondria possess an outer membrane, an intermembrane space, a folded inner membrane containing cristae, and a protein-rich matrix. The **inner mitochondrial membrane** houses complexes I through IV of the electron transport chain and ATP synthase. Protons pumped into the intermembrane space generate a transmembrane **proton motive force**. Mitochondrial DNA is circular, maternal in inheritance, and encodes 13 respiratory chain polypeptides. Mutations cause disorders like Leber hereditary optic neuropathy.",
+   "say": "Mitochondria generate cellular ATP through electron transport and oxidative phosphorylation across the inner membrane cristae. Pumping protons creates an electrochemical gradient that drives ATP synthase. Mitochondrial DNA exhibits strictly maternal inheritance.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "NADH and FADH2 oxidation"
+     },
+     {
+      "id": "n2",
+      "label": "Complexes I, III, IV pump protons"
+     },
+     {
+      "id": "n3",
+      "label": "Proton electrochemical gradient"
+     },
+     {
+      "id": "n4",
+      "label": "Complex V ATP synthase rotation"
+     },
+     {
+      "id": "n5",
+      "label": "Cellular ATP generation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ],
+     [
+      "n4",
+      "n5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Peroxisomes carry out **alpha-oxidation of branched-chain fatty acids** such as phytanic acid and **beta-oxidation of very long-chain fatty acids** containing 22 or more carbons. They also synthesize plasmalogens essential for myelin integrity. Defective peroxisomal biogenesis due to mutated **PEX genes** causes Zellweger syndrome. Affected infants present with dysmorphic facies, severe hypotonia, neonatal seizures, hepatomegaly, renal cortical cysts, and elevated plasma very long-chain fatty acids.",
+   "say": "Peroxisomes metabolize very long chain and branched chain fatty acids while generating plasmalogens for myelin. Mutated PEX genes prevent peroxisome assembly in Zellweger syndrome, causing severe hypotonia, seizures, craniofacial dysmorphism, and early mortality.",
+   "vis": {
+    "cols": [
+     "Disorder",
+     "Enzymatic or Genetic Defect",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "Zellweger syndrome",
+      "PEX biogenesis gene mutations",
+      "Severe hypotonia, large fontanelle, seizures, elevated VLCFA"
+     ],
+     [
+      "Refsum disease",
+      "Phytanoyl-CoA hydroxylase defect",
+      "Retinitis pigmentosa, cerebellar ataxia, elevated phytanic acid"
+     ],
+     [
+      "X-linked adrenoleukodystrophy",
+      "ABCD1 peroxisomal transporter defect",
+      "Neurodegeneration, progressive adrenal insufficiency, elevated VLCFA"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "The rough endoplasmic reticulum coordinates translation, core N-linked glycosylation, and chaperone-assisted protein folding. Accumulation of misfolded polypeptides triggers **endoplasmic reticulum stress** and activates the **unfolded protein response**. Transmembrane sensors IRE1, PERK, and ATF6 attenuate global protein translation while upregulating folding chaperones like BiP. If proteostatic equilibrium cannot be restored, the unfolded protein response activates caspase cascades, committing the dysfunctional cell to apoptotic death.",
+   "say": "The endoplasmic reticulum folds nascent proteins. When misfolded proteins accumulate, the unfolded protein response slows down translation and boosts chaperone synthesis. If folding cannot be restored, the pathway activates apoptosis to remove damaged cells.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Misfolded proteins accumulate in ER"
+     },
+     {
+      "id": "e2",
+      "label": "Activation of IRE1, PERK, ATF6 sensors"
+     },
+     {
+      "id": "e3",
+      "label": "Suppression of global protein translation"
+     },
+     {
+      "id": "e4",
+      "label": "Induction of BiP and folding chaperones"
+     },
+     {
+      "id": "e5",
+      "label": "Restoration of homeostasis or apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e2",
+      "e4"
+     ],
+     [
+      "e3",
+      "e5"
+     ],
+     [
+      "e4",
+      "e5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-zellweger-syndrome"
+ ]
+}

@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "bio-nutrition-integration",
+ "subject": "biochemistry",
+ "title": "Nutrition, energy balance, metabolic integration and protein-energy malnutrition",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **fed state** is governed by **insulin**, which promotes glycogen synthesis in liver and muscle, lipogenesis and triglyceride storage in adipose tissue, and protein synthesis throughout tissues. Conversely, the **fasting state** is dominated by **glucagon and adrenaline**. The liver maintains blood glucose initially through glycogenolysis and subsequently via gluconeogenesis from lactate, alanine, and glycerol. Muscle shifts to fatty acid oxidation, sparing glucose for the brain and obligate glycolytic erythrocytes.",
+   "say": "In the fed state, insulin stimulates glycogen, fatty acid, and protein synthesis. During fasting, glucagon and adrenaline drive hepatic glycogen breakdown and gluconeogenesis, while muscle and tissues oxidize fatty acids to spare glucose for the brain.",
+   "vis": {
+    "left": {
+     "title": "Fed State (Insulin Dominance)",
+     "points": [
+      "Glycogen synthesis in liver and skeletal muscle",
+      "De novo lipogenesis and VLDL secretion",
+      "Lipoprotein lipase activation in adipose capillary bed",
+      "Inhibition of hormone-sensitive lipase",
+      "Active protein translation across tissues"
+     ]
+    },
+    "right": {
+     "title": "Fasting State (Glucagon Dominance)",
+     "points": [
+      "Hepatic glycogenolysis and gluconeogenesis",
+      "Hormone-sensitive lipase activation in adipocytes",
+      "Fatty acid mobilization and muscle beta-oxidation",
+      "Hepatic ketogenesis from excess acetyl-CoA",
+      "Glucose spared for cerebral and RBC consumption"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "During prolonged starvation exceeding three days, adipose lipolysis accelerates. The liver converts surplus acetyl-CoA into **ketone bodies** (**acetoacetate, beta-hydroxybutyrate**, and acetone) via mitochondrial HMG-CoA synthase. The **brain adapts** to utilize beta-hydroxybutyrate for up to two-thirds of its energy expenditure, dramatically reducing systemic gluconeogenic demands and sparing essential skeletal muscle protein breakdown. Erythrocytes lack mitochondria and therefore cannot metabolize ketone bodies, maintaining an absolute requirement for glucose.",
+   "say": "In starvation beyond three days, the liver turns excess fatty acids into ketone bodies: acetoacetate and beta-hydroxybutyrate. The brain adapts to consume ketones for most of its energy needs, conserving muscle proteins from destructive gluconeogenesis.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Adipose lipolysis releases free fatty acids"
+     },
+     {
+      "id": "k2",
+      "label": "Mitochondrial beta-oxidation floods liver with acetyl-CoA"
+     },
+     {
+      "id": "k3",
+      "label": "Mitochondrial HMG-CoA synthase drives ketogenesis"
+     },
+     {
+      "id": "k4",
+      "label": "Beta-hydroxybutyrate and acetoacetate enter blood"
+     },
+     {
+      "id": "k5",
+      "label": "Brain oxidizes ketones, sparing skeletal muscle protein"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ],
+     [
+      "k4",
+      "k5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Kwashiorkor** is caused by inadequate protein intake in the presence of adequate caloric consumption, common after weaning onto starchy porridge. Markedly reduced hepatic protein synthesis leads to severe **hypoalbuminaemia**, generalized pitting **oedema**, distended abdomen, hepatomegaly from fatty liver (inability to synthesize apolipoproteins for VLDL export), and flaky-paint dermatosis. **Marasmus** results from severe deficiency of both calories and protein, causing profound muscle wasting, subcutaneous fat loss, and an **emaciated broomstick appearance** without oedema.",
+   "say": "Kwashiorkor is severe protein deficiency with adequate calories, causing hypoalbuminaemic oedema, a distended abdomen, and fatty liver due to impaired VLDL export. Marasmus is total calorie and protein deprivation, leading to extreme emaciation and fat loss without oedema.",
+   "vis": {
+    "left": {
+     "title": "Kwashiorkor",
+     "points": [
+      "Selective protein malnutrition with adequate calories",
+      "Severe generalized pitting oedema",
+      "Fatty liver due to impaired apolipoprotein B synthesis",
+      "Flaky-paint dermatosis and flag sign hair changes",
+      "Lethargy, apathy, and poor appetite"
+     ]
+    },
+    "right": {
+     "title": "Marasmus",
+     "points": [
+      "Total calorie and protein starvation",
+      "Oedema is completely absent",
+      "Liver is normal without steatosis",
+      "Profound muscle wasting and total subcutaneous fat loss",
+      "Alert, ravenous appetite despite monkey-like facies"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Refeeding syndrome** occurs when malnourished or chronically starved patients receive rapid carbohydrate replenishment. Glucose infusion stimulates sudden **insulin secretion**, which drives phosphate, potassium, and magnesium into cells to support glycolysis and phosphorylation cascades. Severe **hypophosphataemia** depletes intracellular ATP and 2,3-BPG, precipitating fatal cardiac arrhythmias, acute congestive heart failure, respiratory muscle paralysis, and rhabdomyolysis. Management requires slow caloric re-introduction and proactive electrolyte repletion before feeding.",
+   "say": "Refeeding syndrome happens when carbohydrates are introduced too quickly in severe malnutrition. Insulin surges, driving phosphate, potassium, and magnesium into cells. Severe hypophosphataemia causes catastrophic ATP depletion, heart failure, respiratory arrest, and arrhythmias.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Rapid carbohydrate reintroduction in starved patient"
+     },
+     {
+      "id": "f2",
+      "label": "Surge of endogenous insulin secretion"
+     },
+     {
+      "id": "f3",
+      "label": "Massive cellular uptake of Phosphate, K+, and Mg2+"
+     },
+     {
+      "id": "f4",
+      "label": "Severe hypophosphataemia and ATP depletion"
+     },
+     {
+      "id": "f5",
+      "label": "Cardiac arrhythmias, heart failure, respiratory muscle failure"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ],
+     [
+      "f4",
+      "f5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Dietary fibre** encompasses non-digestible plant polysaccharides. Soluble fibres such as pectin bind bile acids in the intestinal lumen, increasing fecal excretion and forcing hepatic conversion of cholesterol to bile salts, thereby **lowering LDL cholesterol**. Dietary fibre blunts postprandial glucose excursions by slowing gastric emptying. **Metabolic syndrome** reflects chronic positive energy balance and central adiposity, defined by central obesity, elevated triglycerides, low HDL, elevated fasting glucose, and arterial hypertension, driving cardiovascular risk.",
+   "say": "Soluble dietary fibre binds bile acids, promoting cholesterol excretion and lowering LDL levels while blunting postprandial blood glucose spikes. Metabolic syndrome combines central obesity, high triglycerides, low HDL, hypertension, and insulin resistance to elevate cardiovascular risk.",
+   "vis": {
+    "cols": [
+     "Metabolic Parameter",
+     "Diagnostic Threshold",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Waist circumference",
+      "Over 90 cm in Asian men, over 80 cm in Asian women",
+      "Visceral adiposity releases free fatty acids into portal circulation"
+     ],
+     [
+      "Triglycerides",
+      "Equal or greater than 150 mg/dL",
+      "Excess hepatic VLDL synthesis driven by portal free fatty acids"
+     ],
+     [
+      "HDL cholesterol",
+      "Below 40 mg/dL in men, below 50 mg/dL in women",
+      "Enhanced clearance mediated by cholesteryl ester transfer protein"
+     ],
+     [
+      "Blood pressure",
+      "Equal or greater than 130/85 mmHg",
+      "Hyperinsulinaemia stimulates renal sodium retention and sympathetic tone"
+     ],
+     [
+      "Fasting plasma glucose",
+      "Equal or greater than 100 mg/dL",
+      "Hepatic insulin resistance impairs suppression of gluconeogenesis"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-kwashiorkor"
+ ]
+}

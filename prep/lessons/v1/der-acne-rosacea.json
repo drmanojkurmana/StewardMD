@@ -1,0 +1,122 @@
+{
+ "v": 1,
+ "module": "der-acne-rosacea",
+ "subject": "dermatology",
+ "title": "Acne vulgaris and rosacea: pilosebaceous pathogenesis, grading, stepped topical therapy, systemic retinoids",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Acne vulgaris** is a chronic inflammatory disorder of the pilosebaceous unit. Four interrelated pathogenic factors drive disease: follicular hyperkeratinisation causing microcomedone formation, androgen-driven sebaceous gland hypersecretion, proliferation of Cutibacterium acnes within sebum-rich follicles, and host immune-mediated inflammation. Lesions span non-inflammatory open and closed comedones to inflammatory papules, pustules, and deep nodules.",
+   "say": "Acne vulgaris arises from follicular hyperkeratinisation, androgenic sebum excess, Cutibacterium acnes proliferation, and host inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Follicular plugging microcomedone"
+     },
+     {
+      "id": "b",
+      "label": "Sebum excess and C. acnes growth"
+     },
+     {
+      "id": "c",
+      "label": "Inflammatory papule and nodule"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stepped management of acne** aligns with clinical severity. Mild comedonal acne responds to topical retinoids (adapalene, tretinoin) targeting abnormal keratinocyte desquamation. Mild-to-moderate inflammatory acne requires combination therapy with **benzoyl peroxide** (which prevents bacterial resistance) plus a topical retinoid or topical antibiotic. Moderate-to-severe disease necessitates oral tetracyclines paired with topical benzoyl peroxide.",
+   "say": "Mild acne uses topical retinoids and benzoyl peroxide, stepping up to oral tetracyclines for inflammatory disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity grade",
+     "Primary lesions",
+     "First-line guideline treatment"
+    ],
+    "rows": [
+     [
+      "Mild comedonal",
+      "Open and closed comedones",
+      "Topical retinoid monotherapy"
+     ],
+     [
+      "Mild-moderate papulopustular",
+      "Comedones, inflammatory papules",
+      "Topical retinoid plus benzoyl peroxide"
+     ],
+     [
+      "Moderate-severe inflammatory",
+      "Extensive papules and pustules",
+      "Oral lymecycline or doxycycline plus topical"
+     ],
+     [
+      "Severe nodulocystic",
+      "Nodules, cysts, scarring",
+      "Oral isotretinoin specialist care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral isotretinoin** is the only curative agent targeting all four pathogenic mechanisms of acne vulgaris. It induces profound sebaceous gland atrophy, normalizes follicular keratinisation, and reduces inflammation. Because isotretinoin is a potent human **teratogen** causing severe craniofacial, cardiac, and central nervous system malformations, strict pregnancy prevention programmes with reliable contraception are mandatory.",
+   "say": "Oral isotretinoin targets all four acne mechanisms, but is severely teratogenic, requiring strict pregnancy prevention programmes.",
+   "vis": null
+  },
+  {
+   "tx": "**Rosacea** is a chronic neurovascular facial disorder characterized by centrofacial erythema, flushing, telangiectasia, and inflammatory papules and pustules without comedones. Four major clinical subtypes are recognized: erythematotelangiectatic, papulopustular, phymatous (rhinophyma with sebaceous hyperplasia on the nose), and ocular rosacea. Sunlight, hot beverages, spicy foods, and alcohol frequently trigger flares.",
+   "say": "Rosacea produces centrofacial erythema, telangiectasia, and pustules without comedones, triggered by heat, sun, and alcohol.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acne vulgaris",
+     "points": [
+      "Adolescents and young adults",
+      "Comedones always present",
+      "Affects face, chest, and back",
+      "Responds to topical retinoids"
+     ]
+    },
+    "right": {
+     "title": "Rosacea",
+     "points": [
+      "Middle-aged adults (30 to 50 years)",
+      "Comedones completely absent",
+      "Strictly centrofacial distribution",
+      "Flushing, telangiectasia, rhinophyma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rosacea management** combines avoidance of known thermal and dietary triggers with targeted topical and systemic therapy. Mild papulopustular rosacea responds to topical ivermectin, metronidazole, or azelaic acid. Moderate-to-severe disease requires sub-antimicrobial or standard-dose oral doxycycline. Topical brimonidine provides temporary vasoconstriction for persistent facial erythema.",
+   "say": "Management of rosacea requires trigger avoidance and topical ivermectin or metronidazole, stepping to oral doxycycline when severe.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-acne_vulgaris",
+  "kb-reference-rosacea"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

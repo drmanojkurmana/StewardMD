@@ -189,7 +189,7 @@ try {
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.cards).filter(function(k){return k.indexOf("p:ana-gametogenesis:")===0;}).length;`) === 5, "5 FSRS cards written under the module deck");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return s.mod["ana-gametogenesis"].t;`) === 5, "attempts counted for the module");
   await click("#smdPrep [data-act=donerun]");
-  ok(await until(`return /answered/.test((document.querySelector("#smdPrep .pn-mut")||{}).textContent||"");`, 3000), "Done returns to the module screen");
+  ok(await until(`return (document.querySelector("#smdPrep .pn-t h1")||{}).textContent === "Gametogenesis";`, 3000), "Done returns to the module screen");
 
   // ---- timed test
   await click('#smdPrep [data-act=start][data-k=exam]');
@@ -250,6 +250,9 @@ try {
   await ev(`var it=PREP._st.run.items[0]; var b=document.querySelector('#smdPrep .pn-opt[data-k="'+it.a+'"]'); b.click(); return 1;`);
   ok(await ev(`return Object.keys(JSON.parse(localStorage.getItem("smd_prep_v1")).mt).length;`) === n0 - 1, "answering a mistake right takes it off the list");
   await ev(`PREP.back(); PREP.back(); return 1;`);
+  // Legacy pattern mocks below; the default Tests 2 hub (data-act=t2-pre) has its own suite
+  // (test/run-prep-tests2-ui.mjs), so pin the flag off for this section only.
+  await ev(`try{localStorage.setItem("smd_prep_tests2","0");}catch(e){} return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=mocks]");`, 3000);
   await click("#smdPrep [data-act=mocks]");
   ok(await until(`return document.querySelectorAll("#smdPrep [data-act=mock]").length === 4;`, 3000), "NEET-PG and INI-CET patterns, full and mini");
@@ -263,6 +266,7 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-mod[data-act=subject][data-s=anatomy]');`) === true, "the analysis lists subjects, each opening its subject");
   await shot("mock-result");
   ok(await ev(`var m=JSON.parse(localStorage.getItem("smd_prep_v1")).mh; return m.length===1 && m[0].marks===3 && /mini/.test(m[0].label);`) === true, "the finished mock is kept in the mock history");
+  await ev(`try{localStorage.removeItem("smd_prep_tests2");}catch(e){} return 1;`);
   await click("#smdPrep [data-act=donerun]");
   await ev(`PREP.back(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pl-hero");`, 3000);

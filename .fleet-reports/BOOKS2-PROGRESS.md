@@ -266,3 +266,12 @@
 ## 2026-10-14 NEL3 neonatology DONE (branch books2-nel3, PR to open)
 
 9 modules (newborn-overwrite, preterm, resp, jaundice, infections, misc, growth, malnutrition, micronutrients), 9 lessons + 9 KB + 90 MCQs bk2-paed-171-260. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Paediatrics 21/39 indexed. Next: push + PR, then NEL4 (10 modules).
+## 2026-10-14 NEL4 genetics/resp/cardiac/GI/renal DONE (branch books2-nel4, PR #1616 open)
+
+10 modules (chromosomal, inheritance-syndromes, inborn-errors, respiratory-infections, chronic-respiratory, congenital-heart, acquired-heart, diarrhoea-overwrite, glomerular, urinary-tract), 10 lessons + 10 KB + 100 MCQs bk2-paed-261-360. Gates: LP 10/10, suites 64/64 (mcqs 2, lessons 23, lessons-100 3, medcov 15, subject 6, accuracy 5, kb 3, KB-shape 10/10), similarity 0 hits (3.9M Nelson 8-grams), answers 26/25/24/25, app 32/33 (pre-existing). Next: NEL5 final paediatrics (8 modules).
+## 2026-10-14 NEL5 final paediatrics DONE (branch books2-nel5, PR #1617 open)
+
+8 modules (seizures, haematology, oncology, thyroid-adrenal, diabetes-puberty, emergencies-poisoning, fluids-electrolytes, immunology-rheumatology), 8 lessons + 8 KB + 80 MCQs bk2-paed-361-440. Gates: LP 8/8, suites 62/62 (mcqs 2, lessons 23, lessons-100 3, medcov 15, subject 6, accuracy 5, kb 3, KB-shape 8/8), similarity 0 hits, answers 20/20/20/20, app 32/33 (pre-existing). Paediatrics 39/39 COMPLETE pending merges. No orphans.
+## 2026-10-14 Verify, no new content (main a9c421262, muse Wonder)
+
+Waves #1596-#1617 all merged (NEL3 #1615, NEL4 #1616, NEL5 #1617 confirmed). Gap recompute: 1443 indexed, books-2 subjects 0 lesson-less. batch2-part2 re-listed: still only Dhingra ENT + duplicate Tripathi, no derm/ortho/vascular books. 4 med orphans + sur-shock-transfusion left unindexed (topics covered by med-stroke + med-poisoning-general; no LON11, would duplicate). Tests 54/54 on main. No PDFs deleted. Next: ortho/derm/vascular only when books arrive.

@@ -1,0 +1,127 @@
+{
+ "v": 1,
+ "module": "der-sti",
+ "subject": "dermatology",
+ "title": "Sexually transmitted infections in dermatology: primary chancre, chancroid, LGV, donovanosis, genital herpes",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "**Primary syphilis** is caused by the spirochaete Treponema pallidum. Following an incubation period of nine to ninety days, the characteristic **hard chancre** develops at the inoculation site. The chancre is a solitary, painless, indurated ulcer with a clean base and rolled cartilaginous edges, accompanied by painless, firm, non-suppurative regional lymphadenopathy. Spontaneous healing occurs within three to six weeks.",
+   "say": "Primary syphilis presents with a solitary painless indurated chancre with clean base and non-tender rubbery lymphadenopathy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Spirochaete inoculation"
+     },
+     {
+      "id": "b",
+      "label": "Solitary painless hard chancre"
+     },
+     {
+      "id": "c",
+      "label": "Clean healing with spirochaetaemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chancroid** is caused by the fastidious Gram-negative coccobacillus Haemophilus ducreyi. Patients present with multiple painful, non-indurated soft ulcers with ragged undermined edges and a dirty purulent, bleeding necrotic base. In over half of cases, unilateral painful suppurative inguinal lymphadenitis (bubo) develops, which may rupture spontaneously through the skin unless needle-aspirated.",
+   "say": "Chancroid causes multiple painful soft ulcers with ragged edges and unilateral suppurative inguinal bubo formation.",
+   "vis": null
+  },
+  {
+   "tx": "**Lymphogranuloma venereum (LGV)** is caused by Chlamydia trachomatis serovars L1, L2, and L3. The primary lesion is a fleeting, painless, self-healing herpetiform vesicle or ulcer that often escapes notice. Weeks later, secondary disease manifests as painful multilocular inguinal lymphadenopathy. Enlargement of nodes above and below Poupart ligament creates the pathognomonic **groove sign**.",
+   "say": "LGV causes a transient painless papule followed by multilocular inguinal adenopathy separated by the inguinal ligament groove sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Syphilitic chancre",
+     "points": [
+      "Treponema pallidum spirochaete",
+      "Painless, hard cartilaginous base",
+      "Clean granulating floor",
+      "Non-suppurative bilateral nodes"
+     ]
+    },
+    "right": {
+     "title": "Chancroid ulcer",
+     "points": [
+      "Haemophilus ducreyi bacillus",
+      "Painful, soft non-indurated base",
+      "Dirty necrotic purulent floor",
+      "Suppurative unilateral bubo"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Donovanosis (granuloma inguinale)** is a chronic progressive ulcerative infection caused by Klebsiella granulomatis. Lesions present as painless, slowly expanding, exuberant, beefy-red ulcers that bleed readily on contact, lacking true lymphadenopathy but forming subcutaneous pseudobuboes. Diagnosis is confirmed on tissue crush smears demonstrating intracytoplasmic **Donovan bodies** within large mononuclear histiocytes.",
+   "say": "Donovanosis causes painless beefy-red vascular ulcers with pseudobuboes, confirmed by intracellular Donovan bodies on smear.",
+   "vis": null
+  },
+  {
+   "tx": "**Genital herpes** is caused by Herpes simplex virus type 2 and type 1. Primary episodes present with grouped umbilicated vesicles on an erythematous base that rapidly erode into shallow, exquisitely painful polycyclic ulcers. Associated bilateral tender lymphadenopathy and dysuria are common. Recurrences occur along the affected dermatome, managed with oral antiviral agents.",
+   "say": "Genital herpes presents with painful crops of grouped vesicles that rupture into shallow tender polycyclic erosions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection",
+     "Organism",
+     "Ulcer feature",
+     "Lymph node sign"
+    ],
+    "rows": [
+     [
+      "Primary syphilis",
+      "Treponema pallidum",
+      "Single painless indurated",
+      "Firm painless bilateral"
+     ],
+     [
+      "Chancroid",
+      "Haemophilus ducreyi",
+      "Multiple painful ragged",
+      "Suppurative painful bubo"
+     ],
+     [
+      "LGV",
+      "Chlamydia L1-L3",
+      "Transient painless papule",
+      "Groove sign across ligament"
+     ],
+     [
+      "Donovanosis",
+      "Klebsiella granulomatis",
+      "Painless beefy-red ulcer",
+      "Pseudobubo without adenitis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "kb-reference-primary_syphilis",
+  "kb-reference-chancroid"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": true
+ }
+}

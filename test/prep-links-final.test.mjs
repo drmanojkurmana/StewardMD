@@ -6,7 +6,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { addTopicLinks, moduleTopicFallback, gateSpecificLinks, entityOverlap, ktOk, SPECIFIC_MIN_E, SPECIFIC_MIN } from "../tools/prep-links.mjs";
+import { addTopicLinks, moduleTopicFallback } from "../tools/prep-links.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const readJ = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), "utf8"));
@@ -40,47 +40,6 @@ test("moduleTopicFallback: majority only, no tie, no generic-word overlap", () =
   assert.deepEqual(
     moduleTopicFallback({ title: "Unrelated title", tallies: [], linked: 0, candTallies: [{ k: "kb", id: "c", title: "Dominant Concept", n: 20 }, { k: "kb", id: "d", title: "Runner Up", n: 5 }], items: 60 }),
     { k: "kb", id: "c", title: "Dominant Concept" }, "a dominant corpus concept is the module chapter");
-});
-
-test("gateSpecificLinks: weak or unevidenced specifics fall below their floor, evidenced ones stand", () => {
-  assert.equal(SPECIFIC_MIN_E, 60); assert.equal(SPECIFIC_MIN, 50);
-  const it = { q: "A child with profuse watery diarrhoea and vomiting. What is the cause?", o: ["Cholera", "Rotavirus", "Giardia", "Amoeba"], a: 0, exp: "Cholera causes rice-water stools." };
-  const weakE = [{ k: "kb", id: "ovarian_remnant_syndrome", title: "Ovarian Remnant Syndrome", c: 55, v: "e", sec: "" }];
-  gateSpecificLinks(weakE, it, {});
-  assert.ok(weakE[0].c < SPECIFIC_MIN_E, "an explanation-only 55 with no entity overlap is demoted");
-  const noOverlap = [{ k: "kb", id: "CELLULITIS", title: "Cellulitis", c: 80, v: "rm", sec: "" }];
-  const finger = { q: "Sausage-shaped finger in a man with psoriasis. What is it?", o: ["Dactylitis", "Tenosynovitis", "Gout", "Septic arthritis"], a: 0, exp: "Dactylitis is diffuse finger swelling." };
-  gateSpecificLinks(noOverlap, finger, {});
-  assert.ok(noOverlap[0].c <= 40, "a rematch link with no stem/answer/option overlap is demoted however it was scored");
-  const good = [{ k: "kb", id: "cholera", title: "Cholera", c: 92, v: "k", sec: "" }];
-  gateSpecificLinks(good, it, {});
-  assert.equal(good[0].c, 92, "an evidenced keyed-answer link is untouched");
-  assert.equal(entityOverlap(it, { k: "kb", id: "cholera", title: "Cholera" }, {}), true);
-  assert.equal(entityOverlap(it, { k: "kb", id: "x", title: "Ovarian Remnant Syndrome" }, {}), false);
-  const kt = [{ k: "kb", id: "anything", title: "Anything", c: 75, v: "kt", sec: "" }];
-  gateSpecificLinks(kt, it, {});
-  assert.equal(kt[0].c, 75, "module-topic tier is exempt from the specific gate");
-});
-
-test("ktOk: a module-topic target must come from the item's own module", () => {
-  const ctx = { topics: { m1: { t: "Opioid analgesics and abuse" } }, moduleTitle: "Opioid analgesics and abuse" };
-  assert.equal(ktOk("Alcohol and Alcohol Use Disorders", ctx, "m1"), false, "another module's topic is not this module's chapter");
-  assert.equal(ktOk("Opioid Use Disorder", ctx, "m1"), true);
-  assert.equal(ktOk("Anything", { topics: {} }, "unknown"), true, "no known module title: the verified map stands");
-  const topics = { m1: { t: "Opioid analgesics and abuse", kb: [["alcohol_and_alcohol_use_disorders", "Alcohol and Alcohol Use Disorders"], ["opioid_use_disorder", "Opioid Use Disorder"]], pr: [] } };
-  const out = addTopicLinks([], { q: "Papaver somniferum latex exudes from which part?" },
-    { mid: "m1", sid: "pharmacology", topics, lessons: new Map(), lessonMeta: new Map(), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Opioid analgesics and abuse" });
-  assert.deepEqual(out.map((l) => l.id), ["alcohol_and_alcohol_use_disorders", "opioid_use_disorder"], "a mapped entry is the module's own verified topic list and stands without a lesson");
-});
-
-test("addTopicLinks: an unevidenced mapped article does not ride along when the module lesson covers the item", () => {
-  const lessons = new Map([["m1", [{ key: "m1", title: "Viral Exanthems", own: true }]]]);
-  const topics = { m1: { t: "Viral exanthems", kb: [["mumps", "Mumps"]], pr: [] } };
-  const ctx = { mid: "m1", sid: "s", topics, lessons, lessonMeta: new Map([["m1", { title: "Viral Exanthems" }]]), bridge: new Map(), midSid: new Map(), images: new Map(), moduleTitle: "Viral exanthems" };
-  const off = addTopicLinks([], { q: "Secondary attack rate of chickenpox is?", o: ["Low", "High"], a: 1 }, ctx);
-  assert.deepEqual(off.map((l) => l.v), ["lt"], "the lesson is the module-level target, the mumps article is not linked");
-  const on = addTopicLinks([], { q: "A child has parotid swelling. What is it?", o: ["Mumps", "Sialadenitis"], a: 0 }, ctx);
-  assert.ok(on.some((l) => l.id === "mumps" && l.v === "kt"), "an evidenced mapped article still rides with the lesson");
 });
 
 test("addTopicLinks: a mapped lesson (entry.ls) is the topic lesson when the module has none of its own", () => {

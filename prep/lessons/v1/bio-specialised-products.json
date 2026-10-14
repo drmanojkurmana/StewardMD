@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "bio-specialised-products",
+ "subject": "biochemistry",
+ "title": "Specialised products of amino acids: catecholamines, serotonin, melanin and nitric oxide",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Tyrosine serves as the precursor for thyroid hormones, melanin, and catecholamines. **Tyrosine hydroxylase** catalyzes the rate-limiting conversion of tyrosine to L-DOPA. DOPA decarboxylase produces dopamine requiring vitamin B6. Dopamine beta-hydroxylase synthesizes noradrenaline using vitamin C and copper. In the adrenal medulla, **PNMT** methylates noradrenaline to adrenaline using S-adenosylmethionine under cortisol induction. Separately, **tyrosinase** oxidizes DOPA to dopaquinone for melanin synthesis; its deficiency causes oculocutaneous albinism.",
+   "say": "Tyrosine is converted to DOPA, dopamine, noradrenaline, and adrenaline. Adrenaline synthesis requires cortisol driven PNMT in the adrenal medulla. Tyrosinase converts tyrosine into melanin, and deficiency in this pathway causes albinism.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Tyrosine to L-DOPA (Tyrosine hydroxylase)"
+     },
+     {
+      "id": "t2",
+      "label": "L-DOPA to Dopamine (DOPA decarboxylase, B6)"
+     },
+     {
+      "id": "t3",
+      "label": "Dopamine to Noradrenaline (Dopamine beta-hydroxylase, Vit C)"
+     },
+     {
+      "id": "t4",
+      "label": "Noradrenaline to Adrenaline (PNMT, SAM)"
+     },
+     {
+      "id": "t5",
+      "label": "Adrenaline secretion into systemic circulation"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ],
+     [
+      "t4",
+      "t5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "Tryptophan is converted to **serotonin (5-hydroxytryptamine)** via tryptophan hydroxylase requiring BH4, followed by decarboxylation requiring vitamin B6. In the pineal gland, serotonin is acetylated and methylated into **melatonin**, which regulates circadian rhythms. Tryptophan also synthesizes **niacin (vitamin B3)** through quinolinate intermediates, with 60 milligrams of tryptophan yielding approximately 1 milligram of niacin. In carcinoid syndrome or Hartnup disease, tryptophan depletion causes pellagra.",
+   "say": "Tryptophan yields serotonin, melatonin, and niacin. Serotonin regulates gastrointestinal motility and mood, while melatonin governs circadian sleep cycles. Because tryptophan synthesizes niacin, diverted metabolism in carcinoid tumors can trigger secondary pellagra.",
+   "vis": {
+    "cols": [
+     "Derived Product",
+     "Key Cofactors / Intermediates",
+     "Physiological Function"
+    ],
+    "rows": [
+     [
+      "Serotonin (5-HT)",
+      "BH4, Vitamin B6",
+      "Neurotransmitter, platelet aggregation, gut motility"
+     ],
+     [
+      "Melatonin",
+      "S-adenosylmethionine (SAM)",
+      "Circadian sleep-wake rhythm regulation in pineal gland"
+     ],
+     [
+      "Niacin (NAD/NADP)",
+      "Vitamin B6, Iron, Riboflavin",
+      "Cellular oxidation-reduction coenzymes"
+     ],
+     [
+      "5-HIAA",
+      "Monoamine oxidase (MAO)",
+      "Urinary breakdown product used to diagnose carcinoid tumors"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Arginine produces critical bioactive molecules. **Nitric oxide synthase (NOS)** oxidizes arginine to **nitric oxide (NO)** and citrulline, requiring NADPH, FAD, FMN, heme, and tetrahydrobiopterin. Endothelial NO diffuses into vascular smooth muscle, stimulating soluble guanylyl cyclase to increase cyclic GMP, causing vasodilation. Arginine also donates its amidino group to glycine via amidinotransferase to synthesize **guanidinoacetate**, which is methylated in the liver to form **creatine** for muscle energy storage.",
+   "say": "Arginine is the substrate for nitric oxide synthesis via nitric oxide synthase, which boosts cyclic GMP to relax vascular smooth muscle. Arginine also combines with glycine to create creatine, which stores high energy phosphate in skeletal muscle.",
+   "vis": {
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Arginine and oxygen substrate"
+     },
+     {
+      "id": "a2",
+      "label": "Endothelial Nitric Oxide Synthase (eNOS)"
+     },
+     {
+      "id": "a3",
+      "label": "Nitric oxide (NO) gas diffusion into smooth muscle"
+     },
+     {
+      "id": "a4",
+      "label": "Activation of soluble guanylyl cyclase (sGC)"
+     },
+     {
+      "id": "a5",
+      "label": "Elevated cyclic GMP and vascular smooth muscle relaxation"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ],
+     [
+      "a4",
+      "a5"
+     ]
+    ],
+    "kind": "flow"
+   }
+  },
+  {
+   "tx": "**Glutamate** undergoes decarboxylation catalyzed by glutamate decarboxylase requiring pyridoxal phosphate (vitamin B6) to produce **gamma-aminobutyric acid (GABA)**, the chief inhibitory neurotransmitter of the central nervous system. Vitamin B6 deficiency can induce GABA depletion, causing infantile convulsions. **Histidine** undergoes decarboxylation by histidine decarboxylase to form **histamine**, a major mediator of acute allergic reactions, gastric acid secretion from parietal cells, and vascular permeability.",
+   "say": "Glutamate is decarboxylated into GABA, the primary inhibitory neurotransmitter in the brain, relying on vitamin B6. Histidine is decarboxylated into histamine, which mediates allergic responses, bronchoconstriction, vascular permeability, and gastric acid secretion.",
+   "vis": {
+    "left": {
+     "title": "GABA (from Glutamate)",
+     "points": [
+      "Decarboxylation via Glutamate Decarboxylase",
+      "Strictly requires Vitamin B6 cofactor",
+      "Major inhibitory neurotransmitter in brain",
+      "Deficiency causes seizures and convulsions"
+     ]
+    },
+    "right": {
+     "title": "Histamine (from Histidine)",
+     "points": [
+      "Decarboxylation via Histidine Decarboxylase",
+      "Stored in mast cell and basophil granules",
+      "Stimulates H1 vascular and H2 gastric receptors",
+      "Mediate anaphylaxis, urticaria, and acid output"
+     ]
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "**Glycine** is the smallest amino acid and participates in diverse biosynthetic cascades. Condensation of glycine with succinyl-CoA via ALA synthase initiates **heme synthesis**. Glycine combines with glutamate and cysteine to form **glutathione (GSH)**, the paramount cellular antioxidant maintaining erythrocyte membrane integrity and detoxifying paracetamol metabolites. Glycine also donates carbons 4 and 5 and nitrogen 7 to the **purine ring**, and conjugates with cholic acid to form glycocholic bile acid.",
+   "say": "Glycine provides carbons and nitrogen for heme synthesis and the purine ring. It is an essential component of glutathione, the primary cellular antioxidant that shields red blood cells from oxidative damage and conjugates drug metabolites.",
+   "vis": {
+    "cols": [
+     "Specialised Product",
+     "Pathway or Enzyme",
+     "Key Physiological Role"
+    ],
+    "rows": [
+     [
+      "Heme",
+      "ALA synthase with Succinyl-CoA",
+      "Oxygen carriage in haemoglobin, electron transfer in cytochromes"
+     ],
+     [
+      "Glutathione (gamma-Glu-Cys-Gly)",
+      "Glutathione synthetase",
+      "Neutralizes reactive oxygen species, protects RBCs against haemolysis"
+     ],
+     [
+      "Purine ring (C4, C5, N7)",
+      "De novo purine nucleotide synthesis",
+      "DNA and RNA building blocks, ATP and GTP energy carriers"
+     ],
+     [
+      "Bile salt conjugation",
+      "Bile acid-CoA amino acid transferase",
+      "Forms glycocholate, emulsifying dietary lipids in the gut"
+     ]
+    ],
+    "kind": "table"
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "hand",
+ "src": [
+  "kb-reference-albinism"
+ ]
+}
