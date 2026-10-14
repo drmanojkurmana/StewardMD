@@ -260,3 +260,6 @@
 ## 2026-10-14 LON10 final medicine mix DONE (branch books2-lon10, PR to open; PRs #1611/#1612 still open)
 
 9 modules (onc-emergencies, paraneoplastic, inheritance, inborn-errors, poisoning-general, environmental, nutrition, resuscitation, shock), 9 lessons + 9 KB + 90 MCQs bk2-med-871-960. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Medicine 108/112 indexed after LON8/9/10 merge. Next: push + PR.
+## 2026-10-14 ANA2 core anaesthesia DONE (branch books2-ana2, PR to open)
+
+9 modules (airway-overwrite, opioids, LA-overwrite, neuraxial, intraop-overwrite, recovery, obstetric, cpr-overwrite, pain), 9 lessons + 9 KB + 90 MCQs bk2-ane-081-170. Gates: LP 9/9, suites 59/59, similarity 0 hits, answers 23/23/22/22, app pre-existing only. Anaesthesia 25/25 indexed pending merge. Next: push + PR, then Nelson paediatrics (27 modules).
