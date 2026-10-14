@@ -276,6 +276,59 @@ export function linkRelevant(it, l, ctx = {}) {
   // familial): that is the namesake trap. A distinctive name word (zika, glucosuria) suffices alone.
   return hits.length >= 2 || hits.some((w) => !GENERIC_HIT.has(w));
 }
+/* Specific-link gate (quality finding 2026-10-14): a specific KB/protocol/drug link must be evidenced
+   by the item itself. Cutoffs derived against the 3,856 human ('a') links as ground truth: re-running
+   the matcher with pipeline links stripped, no method/score bucket reached 95% exact agreement with
+   the human set (best: q at 82 = 87.8%; e at 50-59 = 46.0%; s at 60-69 = 23.7%), so score alone cannot
+   certify a link. The gate therefore combines the suggested floors (e >= 60, others >= 50) with a
+   mandatory entity overlap: a significant word of the target's title or aliases must appear in the
+   stem, the keyed answer, an option, or the explanation. Anything failing either check is capped
+   below its floor and the module-level target (lt/kt) takes its place in addTopicLinks. */
+export const SPECIFIC_MIN_E = 60;
+export const SPECIFIC_MIN = 50;
+export function entityOverlap(it, l, ctx = {}) {
+  if (!l) return false;
+  if (ctx.topicIds && ctx.topicIds.has(l.k + ":" + l.id)) return true;
+  const names = l.k === "dr" ? [l.id] : [l.title || l.id].concat((ctx.kbAliases && ctx.kbAliases.get(l.id)) || []);
+  const hay = new Set(words([(it && it.q) || "", ...(((it && it.o) || [])), expText(it || {}), ctx.moduleTitle || "", String((it && it.t) || ctx.mid || "").replace(/[-_]/g, " ")].join(" ")));
+  for (const name of names) {
+    const nameWords = sigWords(String(name || "").replace(/\s*\([^)]*\)\s*/g, " "));
+    if (!nameWords.length) continue;
+    const hits = nameWords.filter((w) => hay.has(w));
+    if (hits.length >= 2 || hits.some((w) => !GENERIC_HIT.has(w))) return true;
+  }
+  return false;
+}
+export function gateSpecificLinks(links, it, ctx = {}) {
+  for (const l of links || []) {
+    if (!l || l.v === "kt" || l.v === "lt" || (l.k !== "kb" && l.k !== "pr" && l.k !== "dr")) continue;
+    const base = l.v === "rm" ? "rm" : (l.v || "")[0];
+    const floor = base === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN;
+    if (l.c < floor) l.c = Math.min(l.c, floor - 1);
+    if (!entityOverlap(it, l, ctx)) l.c = Math.min(l.c, 40);
+  }
+  return links;
+}
+/* ktOk(title, ctx, mid) -> bool: a module-topic (kt) target must come from the item's own module.
+   When the module's title is known (topic-map entry title or ctx.moduleTitle), the target's title
+   must share a distinctive word (6-letter prefix tolerant) with that title or with the module's own
+   lesson title, checking the module's topic list rather than a single guessed title. Unknown module
+   titles fail open only where the map itself is the module's verified topic list. */
+export function ktOk(title, ctx = {}, mid = "", id = "") {
+  const entry = ctx.topics && ctx.topics[mid];
+  const modTitle = (entry && entry.t) || ctx.moduleTitle || "";
+  if (!modTitle) return true;
+  const fold = (w) => w.replace(/ae/g, "e").replace(/oe/g, "e");
+  const pool = [modTitle].concat(ctx.lessonTitles || []);
+  const acr = (list) => new Set(list.flatMap((t) => String(t || "").match(/\b[A-Z]{3,4}\b/g) || []));
+  const poolAcr = acr(pool);
+  const tw = [...new Set(pool.flatMap((t) => words(t)))].filter((w) => w.length >= 4).map(fold);
+  if (!tw.length && !poolAcr.size) return true;
+  const names = [title || ""].concat((ctx.kbAliases && id && ctx.kbAliases.get(id)) || []);
+  for (const a of acr(names)) if (poolAcr.has(a)) return true;
+  const cw = [...new Set(names.flatMap((t) => words(t)))].filter((w) => w.length >= 4).map(fold);
+  return cw.some((w) => tw.some((t) => t === w || (t.length >= 5 && w.length >= 5 && t.slice(0, 5) === w.slice(0, 5))));
+}
 /* linkItem(it, M, ctx) -> [{ k, id, title, c, v, sec }] best first, at most MAX per kind (c >= 50 only).
    M: { kb, pr, dr } matchers. ctx: { lessonKb: Set of KB ids cited by the module's lessons, df: Map(phrase key -> items
    whose stem names it) and n (items), clinical (subject takes protocols), byKey (KB key map), protoIds, drugIds }. */
@@ -454,8 +507,9 @@ export function addTopicLinks(links, it, ctx = {}) {
   const entry = ctx.topics && ctx.topics[mid];
   // The map skips own-lesson modules; topicKbForModule still gives those modules their KB topic article,
   // so a taught module shows the article next to its lesson (both, whenever both exist).
-  const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
-  const kbList = entry && (entry.kb || []).length ? entry.kb : topicKb || [];
+  const ktCtx = { ...ctx, lessonTitles: (L || []).map((l) => l.title).filter(Boolean) };
+  const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb && ktOk(ctx.topicKb.title, ktCtx, mid, ctx.topicKb.id) ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
+  const kbList = (entry && (entry.kb || []).length ? entry.kb : topicKb || []).filter(([i, t]) => ktOk(t, ktCtx, mid, i));
   if (entry || topicKb) {
     const sec = leadSec(it.q || "");
     for (const l of links) {
@@ -474,12 +528,12 @@ export function addTopicLinks(links, it, ctx = {}) {
       return true;
     };
     for (const [id, title] of kbList) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
-    for (const [id, title] of (entry && entry.pr) || []) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+    for (const [id, title] of ((entry && entry.pr) || []).filter(([i, t]) => ktOk(t, ktCtx, mid, i))) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
   }
   // Module-level fallback (kt): a verified majority topic of the module itself, used only when no lesson,
   // mapped topic or strict title topic exists. It is a chapter row, never presented as the item's concept.
   const fb = ctx.modFallback;
-  if (fb && fb.k && fb.id && !own && !(entry && ((entry.kb || []).length || (entry.pr || []).length)) && !topicKb && !has.has(fb.k + ":" + fb.id)) {
+  if (fb && fb.k && fb.id && ktOk(fb.title || fb.id, ktCtx, mid, fb.id) && !own && !kbList.length && !(entry && (entry.pr || []).length) && !topicKb && !has.has(fb.k + ":" + fb.id)) {
     if (links.filter((l) => l.k === fb.k).length < (MAX[fb.k] || 1) || links.some((l) => l.k === fb.k && l.c < SHOW)) {
       const i = links.findIndex((l) => l.k === fb.k && l.c < SHOW);
       if (links.filter((l) => l.k === fb.k).length >= (MAX[fb.k] || 1) && i >= 0) { has.delete(links[i].k + ":" + links[i].id); links.splice(i, 1); }
@@ -616,11 +670,13 @@ export function stampLinks(its, o = {}) {
   const lessonMeta = new Map(Object.entries(merged).map(([k, e]) => [k, { title: (e && e.title) || "" }]));
   const images = new Map(Object.entries(topicsDoc.images || {}));
   const sid = o.sid || null, mid = o.mid || "";
+  const kbAliasesStamp = new Map(kbDocs(root).map((d) => [d.id, [d.name].concat(d.aliases || [])]));
   const midSid = new Map(mid && sid ? [[mid, sid]] : []);
   for (const it of its || []) {
     if (!it || (it.flags && it.flags.length) || !Array.isArray(it.o) || it.o.length < 2 || typeof it.a !== "number") continue;
     const links = linkItem(it, D.M, { df: new Map(), n: 0, clinical: typeof CLINICAL !== "undefined" ? CLINICAL.test(sid || "") : undefined, byKey: D.byKey, kbTitle: D.kbTitle, drugIds: D.drugIds, protoIds: D.protoIds, mid, moduleTitle: ((topics[mid] || {}).t || "") });
-    addTopicLinks(links, it, { mid: it.t || mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge: new Map(), midSid, images });
+    gateSpecificLinks(links, it, { mid, moduleTitle: ((topics[mid] || {}).t || ""), kbAliases: kbAliasesStamp });
+    addTopicLinks(links, it, { mid: it.t || mid, sid, topics, lessons: lessonsOf, lessonMeta, bridge: new Map(), midSid, images, moduleTitle: ((topics[mid] || {}).t || "") });
     const keep = links.filter((l) => l.c >= SHOW && l.v !== "kt");
     if (!keep.length) continue;
     const L = {};
@@ -782,6 +838,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
   // Topic KB for modules the map does not cover (it skips own-lesson modules): one article per module,
   // only on an exact or lesson-cited title match, so every taught item can show article + lesson together.
   const kbAll = kbDocs();
+  const kbAliases = new Map(kbAll.map((d) => [d.id, [d.name].concat(d.aliases || [])]));
   const modTitle = new Map();
   for (const s of appConfig().subjects) for (const t of subjectIndex(s.id, s.bv, ROOT).topics || []) if (!modTitle.has(t.id)) modTitle.set(t.id, (t.title && t.title.en) || t.title || "");
   const topicKbMemo = new Map();
@@ -837,7 +894,8 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
       if (v === true && l.v[0] === "s" && l.c < SHOW) { l.c = 80; l.v = "h"; }
       else if (v === false && l.c >= SHOW && l.v !== "a") l.c = SHOW - 1;   // an audited link the checker rejects is withdrawn
     }
-    addTopicLinks(links, it, { mid, sid, topics, topicKb: topicKbOf(mid), modFallback: fallbackOf(mid), lessons: lessonsOf, lessonMeta, bridge, midSid, images });
+    gateSpecificLinks(links, it, { mid, moduleTitle: ((topics[mid] || {}).t || "") || modTitle.get(mid) || "", kbAliases });
+    addTopicLinks(links, it, { mid, sid, topics, topicKb: topicKbOf(mid), modFallback: fallbackOf(mid), lessons: lessonsOf, lessonMeta, bridge, midSid, images, kbAliases, moduleTitle: ((topics[mid] || {}).t || "") || modTitle.get(mid) || "" });
     const shown = links.filter((l) => l.c >= SHOW);
     rep.items++;
     const bs = rep.bySubject[sid || "?"] || (rep.bySubject[sid || "?"] = { items: 0, linked: 0 });
@@ -847,7 +905,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     if (shown.length) { rep.linked++; bs.linked++; }
     for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; }
     if (links.length) sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
-      links: { kb_ids: links.filter((l) => l.k === "kb").map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr").map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr").map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
+      links: { kb_ids: links.filter((l) => l.k === "kb" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
       provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h" || l.v === "rm") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h" || l.v === "rm") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
     if (!shown.length) continue;
     if (!byMod.has(mid)) byMod.set(mid, { sid, e: [] });
