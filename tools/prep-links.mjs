@@ -309,11 +309,11 @@ export function gateSpecificLinks(links, it, ctx = {}) {
   }
   return links;
 }
-/* ktOk(title, ctx, mid) -> bool: a module-topic (kt) target must come from the item's own module.
-   When the module's title is known (topic-map entry title or ctx.moduleTitle), the target's title
-   must share a distinctive word (6-letter prefix tolerant) with that title or with the module's own
-   lesson title, checking the module's topic list rather than a single guessed title. Unknown module
-   titles fail open only where the map itself is the module's verified topic list. */
+/* ktOk(title, ctx, mid, id) -> bool: a derived module-topic (kt) target (topicKbForModule or the
+   majority fallback, both guessed from a single title) must come from the item's own module: its
+   title or aliases must share a word or acronym with the module's own title or lesson title.
+   Mapped entry.kb/entry.pr targets are the module's verified topic list by construction and are
+   not filtered here; per-item evidence for those is handled by the ride-along rule in addTopicLinks. */
 export function ktOk(title, ctx = {}, mid = "", id = "") {
   const entry = ctx.topics && ctx.topics[mid];
   const modTitle = (entry && entry.t) || ctx.moduleTitle || "";
@@ -509,7 +509,7 @@ export function addTopicLinks(links, it, ctx = {}) {
   // so a taught module shows the article next to its lesson (both, whenever both exist).
   const ktCtx = { ...ctx, lessonTitles: (L || []).map((l) => l.title).filter(Boolean) };
   const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb && ktOk(ctx.topicKb.title, ktCtx, mid, ctx.topicKb.id) ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
-  const kbList = (entry && (entry.kb || []).length ? entry.kb : topicKb || []).filter(([i, t]) => ktOk(t, ktCtx, mid, i));
+  const kbList = entry && (entry.kb || []).length ? entry.kb : topicKb || [];
   if (entry || topicKb) {
     const sec = leadSec(it.q || "");
     for (const l of links) {
@@ -527,8 +527,17 @@ export function addTopicLinks(links, it, ctx = {}) {
       links.splice(i, 1);
       return true;
     };
-    for (const [id, title] of kbList) if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
-    for (const [id, title] of ((entry && entry.pr) || []).filter(([i, t]) => ktOk(t, ktCtx, mid, i))) if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+    // When the module's own lesson already covers the item, a mapped article the item itself does not
+    // evidence does not ride along as a second, possibly wrong, article: the lesson is the module-level
+    // target. Mapped articles stay where there is no lesson, or where the item evidences the article.
+    for (const [id, title] of kbList) {
+      if (own && entry && (entry.kb || []).some(([i]) => i === id) && !entityOverlap(it, { k: "kb", id, title }, ktCtx)) continue;
+      if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
+    }
+    for (const [id, title] of (entry && entry.pr) || []) {
+      if (own && !entityOverlap(it, { k: "pr", id, title }, ktCtx)) continue;
+      if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+    }
   }
   // Module-level fallback (kt): a verified majority topic of the module itself, used only when no lesson,
   // mapped topic or strict title topic exists. It is a chapter row, never presented as the item's concept.
