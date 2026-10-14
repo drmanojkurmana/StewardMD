@@ -77,3 +77,13 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
 - Branch merged up to current `origin/main` (the MCQ gate failures were
   branch staleness: #1575 had already landed the same A/B work). Browser
   gate re-run on `lessonui-browser-run`; PR and squash merge wait on green.
+
+## Addendum 2026-10-14 (branch lessonui-1013)
+
+- Wired 5 remaining null-visual stats/epi steps (mstat-sampling x2,
+  mstat-regression, mstat-design, cm-infectious-epi); figure numbers
+  re-verified; guards green (34 tests); browser gate lessonui-browser.yml.
+- Deliberately left: mstat-audit (visuals on every step), single-concept bias
+  glossary steps with no fitting bank figure. Next queue by exam weight:
+  community-medicine 42, physiology 41, medicine 113, pathology 73,
+  pharmacology 72.

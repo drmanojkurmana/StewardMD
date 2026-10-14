@@ -47,3 +47,14 @@
 
 - Then biochemistry (56), pathology (44), pharmacology (32), physiology:
   pathway and mechanism diagrams.
+
+## Update 2026-10-14 (branch lessonui-1013)
+
+- **A/B verified, no code change**: shared `PREP_ACTION` action row (lessons,
+  pearls, MCQs) already reuses bottom-bar tokens; Report sheet already asks
+  why (7 reasons, Other-requires-note, 500 max, queue + retry, backward
+  compatible `/api/prep/flag`). Unit + CI browser coverage green.
+- **C**: 5 more null-visual steps wired from the existing bank (no new files):
+  mstat-sampling x2 (stats-errors, stats-ci-forest), mstat-regression
+  (stats-scatter), mstat-design (epi-bias), cm-infectious-epi (epi-curve).
+  Audit addendum in `.fleet-reports/LESSON-IMAGE-AUDIT.md` (1449 lessons).
