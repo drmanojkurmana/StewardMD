@@ -1,5 +1,5 @@
 {
- "_note": "Branches the app draws that are kept here as drawn, not built from prep/taxonomy/ sources: the licensing branches (PLAB 1, MRCS Part A, AMC, MCCQE Part I, MRCP; #1519 to #1526) reuse MBBS modules, which must be unique among sources, and the NEET-SS surgical branch (#1536) carries no module scopes and the ini-ss exam. tools/prep-build-bank.mjs taxonomyForApp appends them after the generated branches, so a bank rebuild keeps them. Add a branch here when it is not generated.",
+ "_note": "Branches the app draws that are kept here as drawn, not built from prep/taxonomy/ sources: the licensing branches (PLAB 1, MRCS Part A, AMC, MCCQE Part I, MRCP; #1519 to #1526) reuse MBBS modules, which must be unique among sources, and the NEET-SS surgical branch (#1536) carries no module scopes and the ini-ss exam. tools/prep-build-bank.mjs taxonomyForApp appends them after the generated branches, so a bank rebuild keeps them. Add a branch here when it is not generated. The NEET-SS specialty groups (ss-paediatrics to ss-psychiatry; #1553 to #1560) are kept here as drawn too: they were added to prep/taxonomy.json directly.",
  "branches": [
   {
    "id": "uk",
@@ -7222,6 +7222,855 @@
          "id": "sva-venous-access",
          "name": {
           "en": "Venous disease and vascular access"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-paediatrics",
+   "name": {
+    "en": "SS Paediatrics"
+   },
+   "subjects": [
+    {
+     "id": "ss-neonatology",
+     "name": {
+      "en": "Neonatology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "neo",
+     "sections": [
+      {
+       "id": "ss-neonatology-g",
+       "name": {
+        "en": "Neonatology"
+       },
+       "modules": [
+        {
+         "id": "neo-resuscitation",
+         "name": {
+          "en": "Neonatal resuscitation and stabilization"
+         },
+         "size": "l"
+        },
+        {
+         "id": "neo-respiratory",
+         "name": {
+          "en": "Respiratory disorders and ventilation"
+         },
+         "size": "l"
+        },
+        {
+         "id": "neo-infections-jaundice",
+         "name": {
+          "en": "Infections, jaundice and metabolic care"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-cardiology",
+     "name": {
+      "en": "Paediatric Cardiology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pcd",
+     "sections": [
+      {
+       "id": "ss-paediatric-cardiology-g",
+       "name": {
+        "en": "Paediatric Cardiology"
+       },
+       "modules": [
+        {
+         "id": "pcd-congenital",
+         "name": {
+          "en": "Congenital heart disease"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pcd-acquired-rhythm",
+         "name": {
+          "en": "Acquired heart disease and rhythm disorders"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-neurology",
+     "name": {
+      "en": "Paediatric Neurology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pnr",
+     "sections": [
+      {
+       "id": "ss-paediatric-neurology-g",
+       "name": {
+        "en": "Paediatric Neurology"
+       },
+       "modules": [
+        {
+         "id": "pnr-epilepsy",
+         "name": {
+          "en": "Epilepsy and paroxysmal disorders"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pnr-neuromuscular-development",
+         "name": {
+          "en": "Neuromuscular and developmental disorders"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-gastroenterology",
+     "name": {
+      "en": "Paediatric Gastroenterology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pgt",
+     "sections": [
+      {
+       "id": "ss-paediatric-gastroenterology-g",
+       "name": {
+        "en": "Paediatric Gastroenterology"
+       },
+       "modules": [
+        {
+         "id": "pgt-liver",
+         "name": {
+          "en": "Liver and biliary disorders"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pgt-gi-nutrition",
+         "name": {
+          "en": "GI and nutritional disorders"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-nephrology",
+     "name": {
+      "en": "Paediatric Nephrology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pnp",
+     "sections": [
+      {
+       "id": "ss-paediatric-nephrology-g",
+       "name": {
+        "en": "Paediatric Nephrology"
+       },
+       "modules": [
+        {
+         "id": "pnp-glomerular",
+         "name": {
+          "en": "Glomerular and tubular disorders"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pnp-aki-ckd",
+         "name": {
+          "en": "AKI, CKD and dialysis"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-hepatology",
+     "name": {
+      "en": "Paediatric Hepatology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "php",
+     "sections": [
+      {
+       "id": "ss-paediatric-hepatology-g",
+       "name": {
+        "en": "Paediatric Hepatology"
+       },
+       "modules": [
+        {
+         "id": "php-cholestasis",
+         "name": {
+          "en": "Infantile cholestasis and biliary disease"
+         },
+         "size": "l"
+        },
+        {
+         "id": "php-failure-metabolic",
+         "name": {
+          "en": "Liver failure and metabolic liver disease"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-oncology",
+     "name": {
+      "en": "Paediatric Oncology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pon",
+     "sections": [
+      {
+       "id": "ss-paediatric-oncology-g",
+       "name": {
+        "en": "Paediatric Oncology"
+       },
+       "modules": [
+        {
+         "id": "pon-leukaemia-lymphoma",
+         "name": {
+          "en": "Leukaemias and lymphomas"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pon-solid-tumours",
+         "name": {
+          "en": "Solid and CNS tumours"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-critical-care",
+     "name": {
+      "en": "Paediatric Critical Care"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "pcc",
+     "sections": [
+      {
+       "id": "ss-paediatric-critical-care-g",
+       "name": {
+        "en": "Paediatric Critical Care"
+       },
+       "modules": [
+        {
+         "id": "pcc-shock-sepsis",
+         "name": {
+          "en": "Shock, sepsis and fluids"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pcc-ventilation-sedation",
+         "name": {
+          "en": "Ventilation, sedation and neuroprotection"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-obg",
+   "name": {
+    "en": "SS Obstetrics and Gynaecology"
+   },
+   "subjects": [
+    {
+     "id": "ss-gynaecological-oncology",
+     "name": {
+      "en": "Gynaecological Oncology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "gynonc",
+     "sections": [
+      {
+       "id": "ss-gynaecological-oncology-g",
+       "name": {
+        "en": "Gynaecological Oncology"
+       },
+       "modules": [
+        {
+         "id": "gyn-cervix-endometrium",
+         "name": {
+          "en": "Cervical and endometrial cancer"
+         },
+         "size": "l"
+        },
+        {
+         "id": "gyn-ovary-vulva-gtn",
+         "name": {
+          "en": "Ovarian, vulval and gestational trophoblastic disease"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-reproductive-medicine",
+     "name": {
+      "en": "Reproductive Medicine and Surgery"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "repr",
+     "sections": [
+      {
+       "id": "ss-reproductive-medicine-g",
+       "name": {
+        "en": "Reproductive Medicine and Surgery"
+       },
+       "modules": [
+        {
+         "id": "rep-infertility-art",
+         "name": {
+          "en": "Infertility and assisted reproduction"
+         },
+         "size": "l"
+        },
+        {
+         "id": "rep-endocrine-surgery",
+         "name": {
+          "en": "Reproductive endocrinology and surgery"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-orthopaedics",
+   "name": {
+    "en": "SS Orthopaedics"
+   },
+   "subjects": [
+    {
+     "id": "ss-hand-surgery",
+     "name": {
+      "en": "Hand Surgery"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "hand",
+     "sections": [
+      {
+       "id": "ss-hand-surgery-g",
+       "name": {
+        "en": "Hand Surgery"
+       },
+       "modules": [
+        {
+         "id": "hnd-trauma-nerve",
+         "name": {
+          "en": "Hand trauma and nerve repair"
+         },
+         "size": "l"
+        },
+        {
+         "id": "hnd-reconstruction",
+         "name": {
+          "en": "Hand reconstruction and microsurgery"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-orthopaedics",
+     "name": {
+      "en": "Paediatric Orthopaedics"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "paedorth",
+     "sections": [
+      {
+       "id": "ss-paediatric-orthopaedics-g",
+       "name": {
+        "en": "Paediatric Orthopaedics"
+       },
+       "modules": [
+        {
+         "id": "por-hip-spine",
+         "name": {
+          "en": "Hip, spine and neuromuscular disorders"
+         },
+         "size": "l"
+        },
+        {
+         "id": "por-trauma-deformity",
+         "name": {
+          "en": "Paediatric trauma, infection and deformity"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-anaesthesiology",
+   "name": {
+    "en": "SS Anaesthesiology"
+   },
+   "subjects": [
+    {
+     "id": "ss-cardiac-anaesthesia",
+     "name": {
+      "en": "Cardiac Anaesthesia"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "cardanaes",
+     "sections": [
+      {
+       "id": "ss-cardiac-anaesthesia-g",
+       "name": {
+        "en": "Cardiac Anaesthesia"
+       },
+       "modules": [
+        {
+         "id": "can-cpb-bypass",
+         "name": {
+          "en": "Cardiopulmonary bypass and myocardial protection"
+         },
+         "size": "l"
+        },
+        {
+         "id": "can-valve-tee",
+         "name": {
+          "en": "Valve surgery, TEE and perioperative care"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-neuroanaesthesia",
+     "name": {
+      "en": "Neuroanaesthesia"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "neuroanaes",
+     "sections": [
+      {
+       "id": "ss-neuroanaesthesia-g",
+       "name": {
+        "en": "Neuroanaesthesia"
+       },
+       "modules": [
+        {
+         "id": "nan-icp-brain",
+         "name": {
+          "en": "ICP, cerebral protection and aneurysm surgery"
+         },
+         "size": "l"
+        },
+        {
+         "id": "nan-spine-awake",
+         "name": {
+          "en": "Spine, awake craniotomy and neuro monitoring"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-transplant-anaesthesia",
+     "name": {
+      "en": "Organ Transplant Anaesthesia and Critical Care"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "transanaes",
+     "sections": [
+      {
+       "id": "ss-transplant-anaesthesia-g",
+       "name": {
+        "en": "Organ Transplant Anaesthesia and Critical Care"
+       },
+       "modules": [
+        {
+         "id": "tan-liver",
+         "name": {
+          "en": "Liver transplantation anaesthesia"
+         },
+         "size": "l"
+        },
+        {
+         "id": "tan-renal-crit",
+         "name": {
+          "en": "Renal transplant and perioperative critical care"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-paediatric-anaesthesia",
+     "name": {
+      "en": "Paediatric and Neonatal Anaesthesia"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "paedanaes",
+     "sections": [
+      {
+       "id": "ss-paediatric-anaesthesia-g",
+       "name": {
+        "en": "Paediatric and Neonatal Anaesthesia"
+       },
+       "modules": [
+        {
+         "id": "pan-neonatal",
+         "name": {
+          "en": "Neonatal anaesthesia and physiology"
+         },
+         "size": "l"
+        },
+        {
+         "id": "pan-paediatric",
+         "name": {
+          "en": "Paediatric anaesthesia, airway and analgesia"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-ent",
+   "name": {
+    "en": "SS ENT"
+   },
+   "subjects": [
+    {
+     "id": "ss-head-neck-surgery",
+     "name": {
+      "en": "Head and Neck Surgery"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "headneck",
+     "sections": [
+      {
+       "id": "ss-head-neck-surgery-g",
+       "name": {
+        "en": "Head and Neck Surgery"
+       },
+       "modules": [
+        {
+         "id": "hnc-cancers",
+         "name": {
+          "en": "Head and neck cancers"
+         },
+         "size": "l"
+        },
+        {
+         "id": "hnc-skullbase-larynx",
+         "name": {
+          "en": "Skull base, larynx and neck surgery"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-pathology",
+   "name": {
+    "en": "SS Pathology"
+   },
+   "subjects": [
+    {
+     "id": "ss-onco-pathology",
+     "name": {
+      "en": "Onco-Pathology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "oncopath",
+     "sections": [
+      {
+       "id": "ss-onco-pathology-g",
+       "name": {
+        "en": "Onco-Pathology"
+       },
+       "modules": [
+        {
+         "id": "onc-solid",
+         "name": {
+          "en": "Solid tumour pathology and staging"
+         },
+         "size": "l"
+        },
+        {
+         "id": "onc-haem-molecular",
+         "name": {
+          "en": "Haematolymphoid and molecular pathology"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-microbiology",
+   "name": {
+    "en": "SS Microbiology"
+   },
+   "subjects": [
+    {
+     "id": "ss-virology",
+     "name": {
+      "en": "Virology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "viro",
+     "sections": [
+      {
+       "id": "ss-virology-g",
+       "name": {
+        "en": "Virology"
+       },
+       "modules": [
+        {
+         "id": "vir-diagnosis",
+         "name": {
+          "en": "Viral diagnosis and hepatitis viruses"
+         },
+         "size": "l"
+        },
+        {
+         "id": "vir-hiv-emerging",
+         "name": {
+          "en": "HIV, respiratory and emerging viruses"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-pharmacology",
+   "name": {
+    "en": "SS Pharmacology"
+   },
+   "subjects": [
+    {
+     "id": "ss-clinical-pharmacology",
+     "name": {
+      "en": "Clinical Pharmacology"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "cph",
+     "sections": [
+      {
+       "id": "ss-clinical-pharmacology-g",
+       "name": {
+        "en": "Clinical Pharmacology"
+       },
+       "modules": [
+        {
+         "id": "cph-pkpd",
+         "name": {
+          "en": "Pharmacokinetics and pharmacodynamics"
+         },
+         "size": "l"
+        },
+        {
+         "id": "cph-therapeutics",
+         "name": {
+          "en": "Therapeutics, trials and prescribing"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ss-psychiatry",
+   "name": {
+    "en": "SS Psychiatry"
+   },
+   "subjects": [
+    {
+     "id": "ss-geriatric-mental-health",
+     "name": {
+      "en": "Geriatric Mental Health"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "gmh",
+     "sections": [
+      {
+       "id": "ss-geriatric-mental-health-g",
+       "name": {
+        "en": "Geriatric Mental Health"
+       },
+       "modules": [
+        {
+         "id": "gmh-dementia-delirium",
+         "name": {
+          "en": "Dementia and delirium"
+         },
+         "size": "l"
+        },
+        {
+         "id": "gmh-late-life",
+         "name": {
+          "en": "Late-life psychiatry and capacity"
+         },
+         "size": "l"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "ss-child-adolescent-psychiatry",
+     "name": {
+      "en": "Child and Adolescent Psychiatry"
+     },
+     "ex": [
+      "neet-ss",
+      "ini-ss"
+     ],
+     "code": "cap",
+     "sections": [
+      {
+       "id": "ss-child-adolescent-psychiatry-g",
+       "name": {
+        "en": "Child and Adolescent Psychiatry"
+       },
+       "modules": [
+        {
+         "id": "cap-development",
+         "name": {
+          "en": "Development and neurodevelopmental disorders"
+         },
+         "size": "l"
+        },
+        {
+         "id": "cap-disorders",
+         "name": {
+          "en": "Child and adolescent psychiatric disorders"
          },
          "size": "l"
         }
