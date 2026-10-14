@@ -83,7 +83,7 @@ try {
   const load = async (url) => { await call("Page.navigate", { url }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean); await ev(`SMD_showHome(); return 1;`); await sleep(500); };
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.removeItem("smd_prep"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_ask_v1");}catch(e){} localStorage.setItem("smd_home_tools", JSON.stringify({ prep: true })); indexedDB.deleteDatabase("prep-bank"); return 1;`);
-  await load(BASE + "?prep=1");
+  await load(BASE + "?prep=1&tour=0");  // ?tour=0: the welcome tour defaults ON and would cover every shot
   ok(await until(`return !!document.querySelector('.rnav-tile[data-act=prep]');`, 10000), "?prep=1: the tile renders");
   await click(".rnav-tile[data-act=prep]");
   ok(await until(`return PREP.isOpen() && !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]");`, 20000), "tile opens PrepNucleus home");
