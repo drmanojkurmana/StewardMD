@@ -106,3 +106,4 @@ Wave LON7 DONE (branch books2-lon7, from origin/main): med-microcytic, med-megal
 
 
 
+Wave LON10 DONE (branch books2-lon10, from origin/main): med-onc-emergencies, med-paraneoplastic, med-inheritance, med-inborn-errors, med-poisoning-general, med-environmental, med-nutrition, med-resuscitation, med-shock (no orphans; all files new). Each: 1 v1 lesson, 1 KB (9 new; Oncology/Genetics/Toxicology/Critical Care/Nutrition non_infective), 10 MCQs bk2-med-871 to 960. Medicine 108/112 indexed after LON8/9/10 merge (this branch 88/112; 4 gap-fill orphans hold files unindexed).
