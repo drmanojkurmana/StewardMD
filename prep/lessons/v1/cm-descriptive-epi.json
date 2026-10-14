@@ -77,25 +77,11 @@
    "tx": "A **point source** epidemic results from a single common exposure. All cases occur within one incubation period, the curve rises and falls rapidly with one peak, and no secondary wave appears. Bhopal gas tragedy and food poisoning are classic examples. A **propagated** epidemic spreads person to person, shows a gradual rise and slow tail, and has secondary waves, as in polio and hepatitis A.",
    "say": "A point source epidemic results from a single common exposure. All cases occur within one incubation period, the curve rises and falls rapidly with one peak, and no secondary wave appears. Bhopal gas tragedy and food poisoning are classic examples. A propagated epidemic spreads person to person, shows a gradual rise and slow tail, and has secondary waves, as in polio and hepatitis A.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Point source",
-     "points": [
-      "Single exposure",
-      "One incubation period",
-      "Rapid rise and fall",
-      "One peak, no secondary wave"
-     ]
-    },
-    "right": {
-     "title": "Propagated",
-     "points": [
-      "Person to person spread",
-      "Gradual rise, slow tail",
-      "Secondary waves present",
-      "Polio, hepatitis A"
-     ]
-    }
+    "kind": "image",
+    "src": "prep/lessons/media/epi-curve.svg",
+    "alt": "Two epidemic curves. Left: a point-source outbreak with one sharp peak inside a single incubation period, 65 cases, rapid rise and fall. Right: a propagated outbreak with gradual rise, a slow tail and a second wave, 72 cases.",
+    "caption": "Point source peaks once inside one incubation period; person-to-person spread returns in waves.",
+    "ar": 1.5384615384615385
    }
   },
   {
@@ -174,7 +160,13 @@
   {
    "tx": "Descriptive studies such as the ecological design examine **population** level data. A correlation between two group level measures does not prove that the same link holds in individuals, which is the **ecological fallacy**. Migrant studies compare disease rates in people who move between areas, helping separate genetic from environmental causes. Spot maps localise local distribution, as John Snow did.",
    "say": "Descriptive studies such as the ecological design examine population level data. A correlation between two group level measures does not prove that the same link holds in individuals, which is the ecological fallacy. Migrant studies compare disease rates in people who move between areas, helping separate genetic from environmental causes. Spot maps localise local distribution, as John Snow did.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/epi-ecological.svg",
+    "alt": "Left: six countries plotted by average fat intake and heart deaths rise together along a dashed line. Right: individuals inside two of those countries form two flat clouds with no link between personal intake and risk.",
+    "caption": "Country averages can correlate even when individuals show no link: that gap is the ecological fallacy.",
+    "ar": 1.5384615384615385
+   }
   }
  ],
  "quiz": [

@@ -105,12 +105,13 @@
   function reportSheetHtml(item) {
     item = item || {};
     return '<div class="pn-rpt-sheet" role="dialog" aria-modal="true" aria-label="Report this item"><div class="pn-rpt-card">' +
-      '<h2 class="pn-rpt-t">What is wrong?</h2><p class="pn-rpt-sub">Your report goes to the StewardMD team with the item ID only.</p>' +
+      '<h2 class="pn-rpt-t" id="pnRptT">What is wrong?</h2><p class="pn-rpt-sub">Your report goes to the StewardMD team with the item ID only.</p>' +
       '<form class="pn-rpt-form" data-item-id="' + esc(item.itemId || item.id || "") + '" data-item-type="' + esc(item.itemType || item.type || "question") + '" data-subject="' + esc(item.subject || "") + '" data-module="' + esc(item.module || "") + '">' +
-      REASONS.map(function (r, i) { return '<label class="pn-rpt-opt"><input type="radio" name="pn-rpt-reason" value="' + r[0] + '"' + (i === 0 ? "" : "") + '><span>' + esc(r[1]) + "</span></label>"; }).join("") +
+      '<div class="pn-rpt-opts" role="radiogroup" aria-labelledby="pnRptT">' +
+      REASONS.map(function (r) { return '<label class="pn-rpt-opt"><input type="radio" name="pn-rpt-reason" value="' + r[0] + '"><span>' + esc(r[1]) + "</span></label>"; }).join("") + "</div>" +
       '<label class="pn-rpt-note-t" for="pnRptText">Add a note (optional)</label>' +
       '<textarea id="pnRptText" name="pn-rpt-text" class="pn-rpt-text" rows="3" maxlength="' + MAX_TEXT + '" placeholder="For example, the dose on line 2…" aria-describedby="pnRptCount pnRptErr"></textarea>' +
-      '<p class="pn-rpt-count" id="pnRptCount" aria-live="polite">0 / ' + MAX_TEXT + '</p><p class="pn-rpt-err" id="pnRptErr" role="alert" hidden></p>' +
+      '<p class="pn-rpt-count" id="pnRptCount" aria-live="polite">0 / ' + MAX_TEXT + '</p><p class="pn-rpt-err" id="pnRptErr" role="alert" tabindex="-1" hidden></p>' +
       '<div class="pn-rpt-actions"><button type="button" class="pn-act-btn pn-rpt-cancel" data-rpt-cancel>Cancel</button>' +
       '<button type="submit" class="pn-rpt-send">Send report</button></div></form>' +
       '<div class="pn-rpt-done" hidden><p class="pn-rpt-ok" role="status">Thank you. Report received.</p>' +
@@ -130,7 +131,7 @@
       ev.preventDefault();
       var picked = form.querySelector("input[name=pn-rpt-reason]:checked");
       var built = buildPayload({ itemId: form.getAttribute("data-item-id"), itemType: form.getAttribute("data-item-type"), subject: form.getAttribute("data-subject"), module: form.getAttribute("data-module") }, picked ? picked.value : "", text.value);
-      if (!built.ok) { err.textContent = built.error; err.hidden = false; return; }
+      if (!built.ok) { err.textContent = built.error; err.hidden = false; if (err.focus) err.focus(); return; }
       err.hidden = true;
       var sendBtn = form.querySelector(".pn-rpt-send"); sendBtn.disabled = true; sendBtn.setAttribute("aria-busy", "true"); sendBtn.textContent = "Sending…";
       var finish = function () { done(); if (onSend) onSend(built.payload); };

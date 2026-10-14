@@ -22,11 +22,28 @@
   table, 2x2 table, hierarchy compare, correlation compare). Every edited
   lesson passes the reader's own `checkLesson`.
 
+## Done (2026-10-14 session)
+
+- **Figures**: 9 more original SVGs in `prep/lessons/media/epi-*.svg`
+  (point-source vs propagated epidemic curves with 65/72-case counts,
+  ecological correlation vs individuals, prevalence bathtub, population
+  pyramid with 174/174 millions and dependency ratio 58%, agent-host
+  triad, recall-bias odds-ratio distortion 1.0 to 6.0, person-years
+  timelines summing to 30 plus the 750 example, intention-to-treat
+  100-vs-100 against per-protocol 88-vs-92, CHD web of causation).
+  Accessible (`<title>`/`<desc>` + lesson alt text), same stage, fonts and
+  palette as the stats set. Every printed number recomputed by an
+  independent parse-and-assert pass (`/tmp/verify_epi_figs.py`); two label
+  gaps it caught (unprinted 174 totals, abbreviated ENVIRONMENT) were fixed
+  before wiring. No external images, still no third-party attribution.
+- **Wired** into the remaining 8 community-medicine epi/stats lessons (9
+  steps): `cm-descriptive-epi` x2 (one compare replaced where the curve
+  teaches the same point-source content, one empty step), `cm-measures`,
+  `cm-vital-statistics`, `cm-outbreak-surveillance`, `cm-case-control`,
+  `cm-cohort`, `cm-experimental`, `cm-bias-causation` (empty steps only).
+  Every edited lesson passes the reader's own `checkLesson`.
+
 ## Remaining (highest exam weight first)
 
-- Community medicine: `cm-case-control`, `cm-cohort`, `cm-experimental`,
-  `cm-bias-causation`, `cm-descriptive-epi`, `cm-measures`,
-  `cm-vital-statistics`, `cm-outbreak-surveillance` (have flow/table/compare
-  visuals; need topic figures: epidemic curve, population pyramid, rates tree).
 - Then biochemistry (56), pathology (44), pharmacology (32), physiology:
   pathway and mechanism diagrams.
