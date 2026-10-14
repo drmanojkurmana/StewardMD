@@ -703,6 +703,10 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function tx(v) { return esc(v && typeof v === "object" ? (v.en || "") : v); }
+  /* Run-together enumerations (prep-listfmt.js, render-only: stored text never changes). Without the file, plain esc. */
+  function lfStem(q) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(q) : esc(q); }
+  function lfOpt(o) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o); }
+  function lfExp(e) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.exp(e) : null; }
   function toast(m) { try { if (G.toast) G.toast(m); } catch (e) {} }
   function today() { return C.dayNum(Date.now(), new Date().getTimezoneOffset()); }
   function fmt(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
@@ -1758,10 +1762,10 @@
   function qotdHtml(it) {
     var q = qotdState(), done = q && q.id === it.id ? q : null, L = ["A", "B", "C", "D"], sb = subjectById(it._s);
     return '<p class="pn-qd-h"><span class="pn-qd-dot" aria-hidden="true"></span>Question of the day<span class="pn-qd-s">' + (sb ? tx(sb.name) : "") + "</span></p>" +
-      '<p class="pn-qd-q">' + esc(it.q) + "</p>" +
+      '<div class="pn-qd-q">' + lfStem(it.q) + "</div>" +
       '<ol class="pn-qd-o">' + it.o.map(function (o, k) {
         var c = done ? (k === it.a ? " right" : k === done.k ? " wrong" : "") : "";
-        return '<li><button type="button" class="pn-qd-b' + c + '" data-act="' + (done ? "qotd-why" : "qotd") + '" data-k="' + k + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></button></li>";
+        return '<li><button type="button" class="pn-qd-b' + c + '" data-act="' + (done ? "qotd-why" : "qotd") + '" data-k="' + k + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></button></li>";
       }).join("") + "</ol>" +
       (done ? '<button type="button" class="pn-link pn-qd-more" data-act="qotd-why">' + (done.k === it.a ? "Correct. " : "Answer: " + L[it.a] + ". ") + "See the explanation " + ico("chev") + "</button>" : "");
   }
@@ -2267,7 +2271,7 @@
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
     if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
-    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
     return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
@@ -2347,7 +2351,7 @@
       var cls = "pn-opt";
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
       else if (k === chosen) cls += " sel";
-      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" +
+      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span>" +
         (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
@@ -2374,11 +2378,11 @@
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
-        '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
+        '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
         (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
-          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
         whyRowHtml(it, chosen, r.i) +
@@ -2419,7 +2423,7 @@
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), cs ? esc(cs.label) + " · question " + (r.i - lo + 1) + " of " + cs.n : "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + (cs ? secLineHtml(r) + secStripHtml(r) : tlHtml(r)) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + kyIntro + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + kyIntro + pyq.tags + '<div class="pn-q">' + lfStem(it.q) + "</div>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (revealFb) revealFeedback();
     tlSync(r);
@@ -2747,7 +2751,7 @@
       others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
       var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
@@ -2757,9 +2761,9 @@
       }).join("") + "</div></div>" : "";
       return '<li><details class="t2sol t2sol-' + st + '" id="t2q' + i + '"' + (list.length === 1 ? " open" : "") + ">" +
         '<summary><span class="t2sol-n" aria-hidden="true">' + (i + 1) + '</span><span class="t2sol-t"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 110 ? it.q.slice(0, 109) + "…" : it.q) + "</b><small>" + esc(stT) + " · answer " + ansL + "</small></span>" + ico("chev") + "</summary>" +
-        '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
+        '<div class="t2sol-b"><div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
-          return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+          return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
         }).join("") + "</ol>" + ex + whyRowHtml(it, a, i) + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
@@ -2886,10 +2890,10 @@
     var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
     var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
-      return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
       (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);

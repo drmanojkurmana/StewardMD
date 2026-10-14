@@ -281,9 +281,9 @@
       var a = keyOf(c.item), ch = chosenOf(c), wrong = ch >= 0 && ch !== a;
       var line = '<span class="pa-cxk">' + (c.n ? "Question " + esc(c.n) : "Question") + "</span>" +
         (ch >= 0 ? '<span class="pa-cxp ' + (wrong ? "bad" : "ok") + '">You chose ' + L(ch) + "</span>" : "") + (a >= 0 ? '<span class="pa-cxp ok">Answer ' + L(a) + "</span>" : "");
-      var opts = (c.item.o || []).map(function (o, i) { return '<li class="' + (i === a ? "key" : i === ch ? "pick" : "") + '"><b>' + L(i) + "</b><span>" + esc(o) + "</span></li>"; }).join("");
+      var opts = (c.item.o || []).map(function (o, i) { return '<li class="' + (i === a ? "key" : i === ch ? "pick" : "") + '"><b>' + L(i) + "</b><span>" + (G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o)) + "</span></li>"; }).join("");
       var stExp = storedHtml();
-      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(c.item.q) + '</p><ol class="pa-cxo">' + opts + "</ol>" + (stExp ? '<div class="pa-cx-stored">' + stExp + "</div>" : "") + "</div>";
+      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><div class="pa-cxq">' + (G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(c.item.q) : esc(c.item.q)) + '</div><ol class="pa-cxo">' + opts + "</ol>" + (stExp ? '<div class="pa-cx-stored">' + stExp + "</div>" : "") + "</div>";
     } else {
       inner = '<summary class="pa-cxs"><span class="pa-cxk">' + (c.kind === "card" ? "Card" : "Lesson step") + '</span><span class="pa-cxt">' + esc(c.title || "") + "</span>" + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(String(c.step.tx || "").replace(/\*\*/g, "")) + "</p></div>";
     }
@@ -334,7 +334,7 @@
     if (c.kind !== "mcq") return para(String(c.step.tx || "").replace(/\*\*/g, ""));
     var f = p.fallbackFor(c.item, chosenOf(c));
     return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
-      (f.exp ? para(f.exp) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + esc(f.kp) + "</p>" : "");
+      (f.exp ? ((G.PREP_LISTFMT && G.PREP_LISTFMT.exp(f.exp)) || para(f.exp)) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + esc(f.kp) + "</p>" : "");
   }
   function typing(cap) { return '<li class="pt-msg ai" data-key="typing">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + cap + "</p></div></li>"; }
   function reply(key, html, note, last) { return '<li class="pt-msg ai" data-key="' + key + '">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b' + (last ? " pa-last" : "") + '"' + (last ? ' role="status"' : "") + ' tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }
