@@ -155,3 +155,42 @@ Published: `tools/prep-links.mjs publish --yes` (token trimmed from
 Tests: prep-links, prep-links-topics, prep-links-rematch, prep-links-final,
 prep-lessons, prep-lessons-100, prep-reason: 91 pass, 1 skipped, 0 fail.
 
+
+## Follow-up (2026-10-14, links-final2): per-subtopic targets, second audit
+
+Changes (tools/prep-links.mjs, no loosening of the specific-link gate):
+
+- Per-item topic article: when no specific is shown, the item's own candidate
+  named by its stem or keyed answer (score >= 65, never explanation-only,
+  never a wrong-option-only mention) is promoted to the topic tier instead of
+  the module's single article. Wrong-option distractors are excluded by the
+  keyed-answer-only evidence check.
+- Unevidenced mapped articles no longer ride along with any shown link.
+- Items with no honest target now get their subject's (or parent subject's,
+  via SUBJECT_PARENT) rapid-review lesson instead of another subtopic's
+  article. KB link instances fell from 69,720 kt to 43,987 at the first step.
+
+Clean-cache verification (fresh fetch of 4,860 files, then build):
+`203,577 items, 203,577 linked, 0 unlinked`, `gaps --fail` exit 0.
+(The item count grew from 202,673 with new modules merged on main.)
+
+Second audit (google/gemini-3.8-flash via OpenRouter, stem + keyed answer +
+explanation shown):
+
+| Audit | Before (pre-gate) | After gate v1 | After this follow-up |
+| --- | ---: | ---: | ---: |
+| Same 300 KB-carrying items, top KB, strict | 51/300 = 17.0% wrong | 44/300 = 14.7% | 25/252 = 9.9% (48 items moved to lesson fallback) |
+| 300 random linked items, first shown link | 17/300 = 5.7% | 14/300 = 4.7% | 14/300 = 4.7% by majority of 3 judge passes |
+
+The <=2% target is still not met under this judge, reported honestly.
+Single judge passes on identical samples swung between 3.7% and 12.3%
+wrong (the model is not deterministic at temperature 0 via OpenRouter),
+so the final population figure uses a majority of three passes. The
+remaining majority-flagged links are module/subject lessons for items
+filed in mixed modules and a small number of borderline promoted
+candidates; closing them needs per-subtopic lessons/articles for those
+modules or a confirm stage, not a looser matcher. The specific-link gate
+was not loosened at any point.
+
+Republished: links 2026-10-14.dd526c, verify 0 bad (203,577 items).
+Tests: 94 pass, 1 skipped across the links and lessons suites.
