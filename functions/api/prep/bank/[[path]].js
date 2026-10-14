@@ -58,7 +58,7 @@ const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 // Pre-built common tests (tools/prep-fixed-tests.mjs; schema prep/assess/schemas/fixed-paper.schema.json):
 // v<n>/tests/index.json names the papers (short cache), v<n>/tests/<exam>/<format>/<paper>.json is immutable
 // (a changed paper gets a new id, never new bytes). Locators only, no question text.
-const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
+const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9_-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
 // Attribution credits for freely licensed images: image-credits.json
 const CREDITS_RE = /^image-credits\.json$/;
 const PREFIX = "prep-bank/";
