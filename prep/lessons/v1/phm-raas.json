@@ -9,42 +9,11 @@
    "tx": "The **renin-angiotensin-aldosterone system** (RAAS) raises blood pressure. Renin converts angiotensinogen to angiotensin I, and **ACE** (angiotensin converting enzyme) converts it to the potent vasoconstrictor angiotensin II. ACE inhibitors block this conversion, while ARBs such as losartan and telmisartan block the **AT1 receptor**. Aliskiren inhibits renin itself. Sacubitril, combined with valsartan, inhibits neprilysin as well.",
    "say": "The renin angiotensin aldosterone system raises blood pressure. Renin converts angiotensinogen to angiotensin I, and ACE, angiotensin converting enzyme, converts it to the potent vasoconstrictor angiotensin II. ACE inhibitors block this conversion, while ARBs such as losartan and telmisartan block the AT1 receptor. Aliskiren inhibits renin itself. Sacubitril, combined with valsartan, also inhibits neprilysin.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Angiotensinogen"
-     },
-     {
-      "id": "b",
-      "label": "Angiotensin I"
-     },
-     {
-      "id": "c",
-      "label": "Angiotensin II"
-     },
-     {
-      "id": "d",
-      "label": "AT1 effects"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "Renin"
-     ],
-     [
-      "b",
-      "c",
-      "ACE"
-     ],
-     [
-      "c",
-      "d",
-      "Vasoconstriction"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/pharma-raas-pathway.svg",
+    "alt": "Stepwise biochemical cascade of the renin-angiotensin-aldosterone axis showing direct renin inhibitors, ACE inhibitors, angiotensin receptor blockers, and aldosterone antagonists with their physiological targets.",
+    "caption": "RAAS pathway: Renin (Aliskiren), ACE (ACE-I), Angiotensin II AT1 receptors (ARBs), and Aldosterone (Spironolactone).",
+    "ar": 1.5384615384615385
    }
   },
   {
