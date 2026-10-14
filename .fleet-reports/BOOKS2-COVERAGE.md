@@ -106,3 +106,4 @@ Wave LON7 DONE (branch books2-lon7, from origin/main): med-microcytic, med-megal
 
 
 
+Wave LON8 DONE (branch books2-lon8, from origin/main): med-ra, med-spa, med-crystal, med-sle, med-ctd, med-vasculitis-large, med-vasculitis-small, med-amyloid-misc, med-allergy-immunology (1 disclosed orphan overwrite + registered, see STATE2 disclosure). Each: 1 v1 lesson, 1 KB (9 new; 8 Rheumatology + 1 Immunology non_infective), 10 MCQs bk2-med-671 to 760. Medicine gaps remaining: 24 lesson-less med-* on merged-main basis (LON9: infectious block next).
