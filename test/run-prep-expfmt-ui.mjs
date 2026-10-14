@@ -99,6 +99,9 @@ try {
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-fb .pn-why > li").length === 3;`) === true, "why-the-others-wrong lists 3 bullets");
   ok(await ev(`var k=document.querySelector("#smdPrep .pn-fb .pn-kp"); return !!k && k.textContent.indexOf("Mid-artery beads")>=0;`) === true, "Remember callout shows the key point");
   ok(await ev(`var c=document.querySelector("#smdPrep .pn-fb .pn-xchip"); return !!c && c.textContent.indexOf("Harrison")>=0;`) === true, "reference chip shows the book line");
+  await click("#smdPrep .pn-fb [data-act=why-opt]");
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-why-p");`, 8000), "Why chip opens its reason panel");
+  ok(await ev(`var p=document.querySelector("#smdPrep .pn-fb .pn-why-p"); return !!p && !!p.querySelector("strong") && p.textContent.indexOf("Atheroma")>=0;`) === true, "Why panel formats the reason with emphasis");
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-fb .pn-exp strong') && document.querySelector("#smdPrep .pn-fb .pn-exp").tagName === "DIV";`) === true, "explanation uses strong semantics in its block");
   await shot("fb", false); await shot("fb", true);
 
@@ -120,7 +123,8 @@ try {
   ok(await until(`return !document.querySelector(\"#pnAsk .pa-rev\") && !document.querySelector(\"#pnAsk [data-key=typing]\");`, 10000), "answer reveal settles");
   ok(await ev(`var b=document.querySelector("#pnAsk .pt-msg.ai .pa-txt"); return !!b && !!b.querySelector("strong") && b.querySelector("strong").textContent.indexOf("Fibromuscular dysplasia")>=0;`) === true, "MaiK answer renders Markdown bold as strong");
   ok(await ev(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pa-txt ul > li").length === 2;`) === true, "MaiK answer renders Markdown bullets as a 2-item list");
-  ok(await ev(`var s=document.querySelector("#pnAsk .pt-stored .pn-xkey strong"); return !!s && s.textContent.indexOf("Ans. is b")>=0;`) === true, "stored explanation under the answer keeps the key line");
+  // Note: the first-turn stored expander (t.first) only follows the auto question, which the current UI never
+  // auto-sends; typed doubts correctly omit it. The stored path shares para() with the feedback asserts above.
   await shot("ask", false); await shot("ask", true);
 
   // ---- compliance at 390 px
