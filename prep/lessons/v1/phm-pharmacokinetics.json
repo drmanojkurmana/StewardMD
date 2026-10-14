@@ -38,34 +38,11 @@
    "tx": "**First order kinetics** means a constant fraction of drug is eliminated per unit time, so the rate depends on plasma concentration. Half-life stays constant and clearance stays constant. Most drugs follow this pattern. **Zero order kinetics** means a constant amount is eliminated per unit time, as with alcohol, phenytoin and salicylates at high doses, where elimination saturates.",
    "say": "First order kinetics means a constant fraction of drug is eliminated per unit time, so the rate depends on plasma concentration. Half-life and clearance stay constant, and most drugs behave this way. Zero order kinetics means a constant amount is eliminated per unit time. Alcohol, phenytoin and salicylates show this when elimination saturates.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "First order",
-     "Zero order"
-    ],
-    "rows": [
-     [
-      "Amount removed",
-      "Fixed fraction per time",
-      "Fixed amount per time"
-     ],
-     [
-      "Rate versus concentration",
-      "Directly proportional",
-      "Independent"
-     ],
-     [
-      "Half-life",
-      "Constant",
-      "Varies with dose"
-     ],
-     [
-      "Examples",
-      "Most drugs, lithium",
-      "Alcohol, phenytoin, aspirin"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/pharma-elimination-kinetics.svg",
+    "alt": "Comparative plasma concentration decline curves over time: first-order elimination shows exponential decline with constant half-life (constant fraction eliminated per hour); zero-order elimination displays linear decline (constant amount eliminated per hour).",
+    "caption": "Elimination kinetics: first-order rate is concentration-dependent (constant half-life); zero-order rate is constant and saturable.",
+    "ar": 1.5384615384615385
    }
   },
   {
@@ -112,7 +89,13 @@
   {
    "tx": "**Therapeutic drug monitoring** (TDM) is used for drugs with a narrow therapeutic index, large variation between patients, or toxicity risk in renal failure. Examples include digoxin, lithium, phenytoin, aminoglycosides and immunosuppressants such as cyclosporine. TDM is not useful for drugs whose effect is easily measured, such as antihypertensives, diuretics and metformin.",
    "say": "Therapeutic drug monitoring is used for drugs with a narrow therapeutic index, wide variation between patients, or toxicity risk in renal failure. Examples include digoxin, lithium, phenytoin, aminoglycosides and cyclosporine. It is not useful where the effect is easily measured, such as with antihypertensives, diuretics and metformin.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/pharma-therapeutic-index.svg",
+    "alt": "Therapeutic index curves plotting cumulative population frequency against drug dose: effective dose curve (ED50) and toxic dose curve (TD50). The therapeutic index is the ratio TD50 to ED50, defining the margin of safety.",
+    "caption": "Therapeutic index: ratio of toxic dose (TD50) to effective dose (ED50); narrow margins require therapeutic drug monitoring.",
+    "ar": 1.5384615384615385
+   }
   },
   {
    "tx": "**Redistribution** explains rapid offset of action after a single intravenous bolus of a highly lipid soluble agent such as thiopentone. The drug first reaches well perfused organs like the brain, then moves to fat and muscle, so the brain concentration falls quickly. Halothane and ether show similar redistribution, which is distinct from true elimination by metabolism or excretion.",

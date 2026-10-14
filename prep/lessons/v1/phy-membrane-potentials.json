@@ -112,7 +112,13 @@
   {
    "tx": "Repolarisation happens as Na+ channels close and **voltage-gated K+ channels** open, letting potassium leave the cell. The slow closing of these K+ channels causes a brief **after-hyperpolarisation**, when the potential dips below resting level. The Na+/K+ pump then restores the normal ionic gradients.",
    "say": "Repolarisation happens as sodium channels close and voltage gated potassium channels open, letting potassium leave the cell. The slow closing of these potassium channels causes a brief after hyperpolarisation, when the potential dips below resting level. The sodium potassium pump then restores the normal ionic gradients.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-action-potential.svg",
+    "alt": "Plot of one neuronal action potential against time: resting at minus 70 millivolts, threshold at minus 55, rapid depolarisation to about plus 35 as sodium channels open, repolarisation as potassium channels open, undershoot below rest, and return to rest.",
+    "caption": "Sodium influx drives the upstroke; potassium efflux drives repolarisation and the undershoot.",
+    "ar": 1.4815
+   }
   },
   {
    "tx": "During the **absolute refractory period**, a new action potential cannot be triggered by any stimulus, because Na+ channels are inactivated. The **relative refractory period** follows, when a strong stimulus can still excite the membrane. Impulses do not travel backwards because the area behind a moving impulse is refractory.",
@@ -151,7 +157,13 @@
   {
    "tx": "Electrical events differ across tissues. **Electrotonic potentials** are graded, local and decay with distance, whereas action potentials propagate without decrement. Gradual, slowly rising stimuli cause **accommodation**, where the threshold rises and no spike is produced. Potassium changes shift resting potential: high extracellular K+ depolarises, while low K+ hyperpolarises.",
    "say": "Electrical events differ across tissues. Electrotonic potentials are graded, local and decay with distance, whereas action potentials propagate without decrement. Gradual, slowly rising stimuli cause accommodation, where the threshold rises and no spike is produced. High extracellular potassium depolarises the membrane, while low potassium hyperpolarises it.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-graded-vs-ap.svg",
+    "alt": "Plot of response amplitude against distance: a graded electrotonic potential decays exponentially with distance, while an action potential regenerates and keeps a constant amplitude along the axon.",
+    "caption": "Graded potentials decay with distance; action potentials do not.",
+    "ar": 1.6667
+   }
   }
  ],
  "quiz": [

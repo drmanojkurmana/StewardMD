@@ -59,7 +59,9 @@ test("taxonomyForApp: branches, subjects, sections, modules; no scope text shipp
   assert.deepEqual(t.branches[1].subjects, []);
   // by default the drawn branches (prep/taxonomy-extra.json) follow the generated ones, so a rebuild keeps them
   const full = B.taxonomyForApp([SUBJ]);
-  assert.deepEqual(full.branches.map((b) => b.id), ["mbbs", "ss-medicine", "uk", "intl", "mrcp", "ss-surgery"]);
+  // Built branches first, then every branch kept as drawn in prep/taxonomy-extra.json, in that file's order.
+  assert.deepEqual(full.branches.map((b) => b.id), ["mbbs", "ss-medicine"].concat(B.extraBranches().map((b) => b.id)));
+  assert.ok(B.extraBranches().some((b) => b.id === "uk") && B.extraBranches().some((b) => b.id === "ss-surgery"), "the drawn branches are read");
 });
 
 test("scrubRefs removes references and locators, keeps gene names and prose", () => {

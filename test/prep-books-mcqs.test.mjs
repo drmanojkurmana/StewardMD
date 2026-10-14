@@ -52,7 +52,7 @@ test("maikbook2 overlay items well formed across all subjects", () => {
   assert.ok(fs.existsSync(base), "maikbook2 directory exists");
 
   let totalItems = 0;
-  for (const subj of ["obstetrics-gynaecology", "pathology", "pharmacology", "ent", "psychiatry", "ophthalmology", "microbiology", "paediatrics", "anaesthesia", "surgery", "physiology", "medicine"]) {
+  for (const subj of ["obstetrics-gynaecology", "pathology", "pharmacology", "ent", "psychiatry", "ophthalmology", "microbiology", "paediatrics", "anaesthesia", "surgery", "physiology", "medicine", "orthopaedics"]) {
     const subjDir = path.join(base, subj);
     assert.ok(fs.existsSync(subjDir), `${subj} overlay directory exists`);
 
@@ -88,5 +88,5 @@ test("maikbook2 overlay items well formed across all subjects", () => {
     }
   }
 
-  assert.equal(totalItems, 3960, "Expected 3960 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 240 microbiology + 440 paediatrics + 170 anaesthesia + 80 surgery + 150 physiology + 960 medicine)");
+  assert.equal(totalItems, 4130, "Expected 4130 high-yield verified MCQs in maikbook2 (350 OBG + 530 pathology batch 2 + 400 pharmacology batch 2 + 270 ENT + 170 psychiatry + 200 ophthalmology + 240 microbiology + 440 paediatrics + 170 anaesthesia + 80 surgery + 150 physiology + 960 medicine + 170 orthopaedics)");
 });

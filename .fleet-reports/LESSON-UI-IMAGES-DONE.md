@@ -87,3 +87,58 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   glossary steps with no fitting bank figure. Next queue by exam weight:
   community-medicine 42, physiology 41, medicine 113, pathology 73,
   pharmacology 72.
+
+## Addendum 2026-10-14 (Medical SVGs: Pharma, Micro, Path, Biochem)
+
+- **Lead Note 15:05 Compliance**: Anatomy and Physiology are owned by a separate subagent and were skipped in this pass. Focus directed to the top non-anatomy basic sciences: Pharmacology, Microbiology, Pathology, and Biochemistry.
+- **12 Original SVG Diagrams Created**:
+  - `prep/lessons/media/pharma-dose-response.svg` (Dose-response, EC50, competitive right-shift vs non-competitive Emax depression, partial agonist)
+  - `prep/lessons/media/pharma-therapeutic-index.svg` (Therapeutic index: ED50 vs TD50, narrow therapeutic margin)
+  - `prep/lessons/media/pharma-elimination-kinetics.svg` (First-order exponential t1/2=2h vs zero-order linear clearance)
+  - `prep/lessons/media/micro-cell-wall.svg` (Gram-positive thick peptidoglycan/teichoic vs Gram-negative outer membrane/LPS/periplasm)
+  - `prep/lessons/media/micro-growth-curve.svg` (Bacterial batch growth curve: lag, log/exponential, stationary, decline phases)
+  - `prep/lessons/media/micro-antibody-response.svg` (Primary IgM/IgG kinetics vs secondary memory response, affinity maturation)
+  - `prep/lessons/media/path-extravasation.svg` (Leukocyte extravasation sequence: margination, selectin rolling, integrin adhesion, PECAM-1 diapedesis, chemotaxis)
+  - `prep/lessons/media/path-apoptosis-pathways.svg` (Intrinsic mitochondrial Bax/Bak/Caspase 9 vs extrinsic FasL/Caspase 8 converging on Caspase 3)
+  - `prep/lessons/media/path-granuloma.svg` (Concentric caseating granuloma architecture: central necrosis, Langhans giant cells, epithelioid cuff)
+  - `prep/lessons/media/bio-lineweaver-burk.svg` (Lineweaver-Burk double reciprocal: competitive same 1/Vmax vs non-competitive depressed Vmax)
+  - `prep/lessons/media/bio-glycolysis-tca.svg` (Cellular respiration hub: glycolysis, PDH, Krebs TCA cycle, oxidative phosphorylation ~30-32 ATP)
+  - `prep/lessons/media/bio-purine-pathway.svg` (Purine metabolism: HGPRT salvage vs Xanthine Oxidase catabolism to uric acid)
+- **11 Target Lessons Wired (12 Steps)**:
+  - `phm-pharmacodynamics` (step 4 -> `pharma-dose-response.svg`)
+  - `phm-pharmacokinetics` (step 3 -> `pharma-elimination-kinetics.svg`, step 5 -> `pharma-therapeutic-index.svg`)
+  - `mic-antibodies-complement` (step 2 -> `micro-antibody-response.svg`)
+  - `mic-history-morphology` (step 2 -> `micro-cell-wall.svg`)
+  - `mic-culture-identification` (step 2 -> `micro-growth-curve.svg`)
+  - `pat-acute-inflammation` (step 2 -> `path-extravasation.svg`)
+  - `pat-apoptosis` (step 2 -> `path-apoptosis-pathways.svg`)
+  - `pat-chronic-granulomatous` (step 4 -> `path-granuloma.svg`)
+  - `bio-enzymes-kinetics` (step 3 -> `bio-lineweaver-burk.svg`)
+  - `bio-glycolysis-tca` (step 2 -> `bio-glycolysis-tca.svg`)
+  - `bio-purine-pyrimidine` (step 4 -> `bio-purine-pathway.svg`)
+- **Attribution & Scientific Verification**: All 12 diagrams catalogued in `prep/lessons/media/ATTRIBUTION.md`; values, kinetics, equations, and morphological labels re-verified by independent check.
+- **Verification & Gates**:
+  - `P.checkLesson(l)` passes for all 11 lessons with 0 errors.
+  - Unit test suite: 47/47 passing (0 failed).
+  - Browser CDP test suites: `test/run-prep-lessons-ui.mjs` (ALL PASS) and `test/run-prep-ui.mjs` (ALL PASS).
+
+## Addendum 2026-10-14 (Anatomy & Physiology Diagrams, Lead Note 16:00)
+
+- **Ownership Handover**: Following Lead Note 16:00, the Claude subagent work for Anatomy and Physiology was retrieved from `/private/tmp/claude-img-wt` (`claude-img-1014`). All 5 commits were cherry-picked into `lessonui-1013`, incorporating text legibility fixes (`cw = min(cw, 560)`). The temporary worktree was subsequently removed.
+- **Diagram Inventory**:
+  - Anatomy: 74 of 80 lessons covered with 169 custom SVG diagrams (batches 1 & 2).
+  - Physiology: 45 of 49 lessons covered with custom curve, axis, Wiggers, Frank-Starling, and pathway figures.
+- **Audit Update**: 161 total lessons with images out of 1,449 lessons (1,288 imageless across 60 subjects). Detailed inventory generated in `.fleet-reports/LESSON-IMAGE-AUDIT.md`.
+
+## Addendum 2026-10-14 (Upper Controls Unification, Section A Owner Correction)
+
+- **Visual Reference**: The bottom player bar is the pristine visual design reference and remains untouched.
+- **Upper Controls Styling**:
+  - Restyled header back circle (`.pn-ib`), share circle (`.pi-sb`), and "Auto" pill (`.pn-lsn-auto`) to share the bottom bar's fills (`var(--pn-s1)`), radii (`var(--pn-r-pill)`/50%), 44px min height/touch targets, quiet shadow-less surfaces, and `scale(.95)` press feedback.
+  - Centered ID metadata line `.pn-act-meta` with tap-to-copy pill `.pn-act-chip.pi-chip` (44px min height, 14px padding, `scale(.97)` press).
+  - Uniform icon+label filled pill buttons across Report, Share, and Bookmark.
+- **Testing & Compliance**:
+  - Web design guidelines compliance pass: 44px touch targets, focus-visible outlines, reduced-motion overrides, light & dark theme compatibility via CSS variables.
+  - Browser test suites verified: `test/run-prep-ids-ui.mjs` (ALL PASS), `test/run-prep-lessons-ui.mjs` (ALL PASS), `test/run-prep-ui.mjs` (ALL PASS).
+
+

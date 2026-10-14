@@ -8,7 +8,13 @@
   {
    "tx": "The **cell membrane** is a lipid bilayer with embedded proteins. Substances cross it by passive or active routes. Passive movement runs down a gradient and needs no ATP. Active transport runs uphill and needs energy. Know which route suits each molecule, because exam questions test this directly.",
    "say": "The cell membrane is a lipid bilayer with embedded proteins. Substances cross it by passive or active routes. Passive movement runs down a gradient and needs no ATP. Active transport runs uphill and needs energy. Know which route suits each molecule, because exam questions test this directly.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-transport-types.svg",
+    "alt": "Table of membrane transport mechanisms: simple diffusion, facilitated diffusion via channels or carriers, primary active transport using ATP such as the sodium potassium pump, and secondary active transport driven by the sodium gradient such as SGLT.",
+    "caption": "Passive goes downhill without ATP; primary active uses ATP directly; secondary active borrows energy from the sodium gradient.",
+    "ar": 2.1739
+   }
   },
   {
    "tx": "**Simple diffusion** needs no carrier protein and suits small, lipid soluble molecules such as steroid hormones and oxygen. Its rate follows **Fick's law**, which links flux to surface area, concentration gradient, diffusion coefficient and solubility. Flux falls as membrane thickness and molecular size increase. Temperature is treated as constant within the equation.",
@@ -42,7 +48,13 @@
   {
    "tx": "**Facilitated diffusion** uses a carrier or channel but still runs down the gradient, so no energy is spent. Glucose entering cells via GLUT transporters is the classic example, and insulin speeds this up. Carriers have finite binding sites, so the process shows **saturation kinetics**. Simple diffusion does not.",
    "say": "Facilitated diffusion uses a carrier or channel but still runs down the gradient, so no energy is spent. Glucose entering cells via GLUT transporters is the classic example, and insulin speeds this up. Carriers have finite binding sites, so the process shows saturation kinetics. Simple diffusion does not.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-saturation-kinetics.svg",
+    "alt": "Plot of transport rate against concentration gradient: simple diffusion is a straight rising line, facilitated diffusion rises and saturates at a transport maximum, showing carrier specificity, saturation and competition.",
+    "caption": "Carrier-mediated transport saturates (Tmax); simple diffusion never does.",
+    "ar": 1.6667
+   }
   },
   {
    "tx": "**Primary active transport** uses ATP directly. The **Na-K ATPase** pumps three sodium ions out and two potassium ions in per ATP. The alpha subunit carries the binding sites and ATPase activity. **Secondary active transport** uses the sodium gradient the pump creates. Sodium-glucose cotransport in the gut is the model. Symport moves both solutes the same way, and antiport moves them opposite ways.",
