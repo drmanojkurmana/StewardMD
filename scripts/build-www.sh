@@ -265,6 +265,8 @@ if [ -f prep/taxonomy.json ]; then
   # MaiK lines (prep.js, after a set) and the device table for Ask MaiK on this phone (prep-ask.js), a few KB each.
   for j in maik-lines device-capability; do [ -f "prep/$j.json" ] && cp "prep/$j.json" "$WWW/prep/"; done
   [ -d prep/profiles ] && mkdir -p "$WWW/prep/profiles" && cp prep/profiles/*.json "$WWW/prep/profiles/"
+  # Nucleus360 topic list and floor map (prep-nucleus360.js reads prep/nucleus360/topics.json from the app bundle; without it the hub is empty).
+  [ -d prep/nucleus360 ] && mkdir -p "$WWW/prep/nucleus360" && cp prep/nucleus360/*.json "$WWW/prep/nucleus360/"
   # Illustrations (home sky, brand banner, logo icon, onboarding, finish screens, Arena lobby, empty states).
   [ -d prep/art ] && mkdir -p "$WWW/prep/art" && for a in prep/art/*.webp; do case "$a" in *-4k.webp) ;; *) cp "$a" "$WWW/prep/art/";; esac; done  # 4K masters and PNGs stay out of the app bundle
   BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
