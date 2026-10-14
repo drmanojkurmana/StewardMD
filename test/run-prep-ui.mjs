@@ -1,7 +1,7 @@
 /* PrepNucleus in the REAL app (headless Chrome over CDP), against the small fixture bank in test/fixtures/prep.
  * What must hold: OFF by default (no tile, open() a no-op); with ?prep=1 the boot loads only prep-loader.js, the tile
  * opens the overlay, home lists the exam's subjects with MCQ counts; a subject lists sections and numbered modules
- * (an empty module says "Questions coming soon"); practice marks each answer with its explanation and source line and
+ * (empty modules stay hidden since #1525); practice marks each answer with its explanation and source line and
  * writes FSRS cards; a flagged item and an item on the reported-and-hidden list never show; a report is kept; subject
  * search finds a question and opens it; a wrong answer joins My mistakes with its tag and leaves when answered right;
  * home shows readiness and Today's plan, whose reviews item starts the due set; a mini mock is marked with the pattern's negative marking and
@@ -109,9 +109,9 @@ try {
   const navIn = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
   ok(navIn.n === 1 && /translateX\(28px\)/.test(navIn.from) && String(navIn.op) === "0", "a push slides the new screen in from the right: " + JSON.stringify(navIn));
   ok(await ev(`var p=document.createElement("p"); p.className="pn-load"; p.textContent="Loading"; document.querySelector("#smdPrep .pn-body").appendChild(p); var b=getComputedStyle(p,"::before"), a=getComputedStyle(p,"::after"), r=b.content!=="none" && parseFloat(getComputedStyle(p).minHeight)>=300 && /pn-shim/.test(a.animationName) && b.boxShadow!=="none"; p.remove(); return r;`) === true, "loading states draw a skeleton with a moving shimmer");
-  ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 3;`, 10000), "subject lists its 3 modules");
+  ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 2;`, 10000), "subject lists its 2 modules with questions (empty modules stay hidden, #1525)");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-sec")).map(function(h){return h.textContent;}).join("|");`) === "Embryology|Upper limb", "sections in taxonomy order");
-  ok(await ev(`var b=document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]'); return b.getAttribute("aria-disabled")==="true" && /Questions coming soon/.test(b.textContent);`) === true, "an empty module says Questions coming soon and is disabled");
+  ok(await ev(`return !document.querySelector('#smdPrep .pn-mod[data-m=ana-placenta]');`) === true, "the empty placenta module is hidden, never coming-soon");
   ok(await ev(`return document.querySelector('#smdPrep .pn-mod[data-m=ana-brachial-plexus] .pn-num').textContent;`) === "3", "modules are numbered across sections");
   await shot("subject");
 
