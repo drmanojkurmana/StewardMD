@@ -320,6 +320,35 @@ export function stemEvidenced(it, l, ctx = {}, keyOnly = false) {
 /* Parent subject for super-specialty and exam subjects, for the subject-lesson fallback
    (mirrors the parent tier in tools/prep-links-topicmap-local.mjs). */
 export const SUBJECT_PARENT = { "ss-radiology": "radiology", "ss-onco-pathology": "pathology", "ss-ctvs": "surgery", "ss-hand-surgery": "orthopaedics", "ss-reproductive-medicine": "obstetrics-gynaecology", "ss-neurosurgery": "surgery", "ss-surgical-oncology": "surgery", "ss-paediatric-orthopaedics": "orthopaedics", "ss-general-surgery": "surgery", "ss-general-medicine": "medicine", "ss-critical-care": "anaesthesia", "ss-endocrinology": "medicine", "ss-rheumatology-immunology": "medicine", "ss-neurology": "medicine", "ss-infectious-diseases": "medicine", "ss-nephrology": "medicine", "ss-pulmonology": "medicine", "ss-hepatology": "medicine", "ss-haematology": "medicine", "ss-medical-oncology": "medicine", "ss-gastroenterology": "medicine", "ss-cardiology": "medicine", "ss-child-adolescent-psychiatry": "psychiatry", "ss-geriatric-mental-health": "psychiatry", "ss-clinical-pharmacology": "pharmacology", "ss-biostatistics": "community-medicine", "ss-vascular-surgery": "surgery", "ss-urology": "surgery", "ss-plastic-surgery": "surgery", "ss-head-neck-surgery": "ent", "ss-transplant-anaesthesia": "anaesthesia", "ss-cardiac-anaesthesia": "anaesthesia", "ss-neuroanaesthesia": "anaesthesia", "ss-gynaecological-oncology": "obstetrics-gynaecology", "ss-surgical-gastroenterology": "surgery", "ss-paediatric-gastroenterology": "paediatrics", "ss-paediatric-surgery": "paediatrics", "ss-virology": "microbiology", "population-health-and-ethics": "community-medicine", "child-health": "paediatrics", "adult-health-medicine": "medicine", "adult-health-surgery": "surgery", "womens-health": "obstetrics-gynaecology", "mental-health": "psychiatry" };
+/* tagEvidenced(it, l, ctx) -> bool: the target's title or an alias is named by the item's own
+   topic tags (it.tg, the concept tags the content pipeline wrote for this item). Tags are the
+   item's own metadata, so a candidate the tags name may become the item's topic target even
+   when the stem alone does not name it; a wrong-option-only or explanation-only mention may not. */
+export function tagEvidenced(it, l, ctx = {}) {
+  if (!l) return false;
+  const tags = ((it && it.tg) || []).filter((t) => typeof t === "string");
+  if (!tags.length) return false;
+  const names = l.k === "dr" ? [l.id] : [l.title || l.id].concat((ctx.kbAliases && ctx.kbAliases.get(l.id)) || []);
+  const hay = new Set(words(tags.join(" ")));
+  for (const name of names) {
+    const nameWords = sigWords(String(name || "").replace(/[()]/g, " "));
+    if (!nameWords.length) continue;
+    const hits = nameWords.filter((w) => hay.has(w));
+    if (hits.length >= 2 || hits.some((w) => !GENERIC_HIT.has(w))) return true;
+  }
+  return false;
+}
+/* promotable(it, l, ctx) -> bool: a below-the-bar candidate may become the item's topic-tier
+   target when the item itself evidences it: named by stem/keyed answer at the stem tier
+   (score >= 65), or named by the item's own topic tags at any candidate score above the
+   distractor cap (50). Explanation-only and wrong-option-only mentions never promote. */
+export function promotable(it, l, ctx = {}) {
+  if (!l || l.c < 50 || l.c >= SHOW) return false;
+  if (l.c >= 65 && stemEvidenced(it, l, ctx, true)) return true;
+  const base = (l.v || "")[0];
+  if (l.c > 50 && !(base === "k" && l.c < 70) && tagEvidenced(it, l, ctx)) return true;
+  return false;
+}
 export function gateSpecificLinks(links, it, ctx = {}) {
   for (const l of links || []) {
     if (!l || l.v === "kt" || l.v === "lt" || (l.k !== "kb" && l.k !== "pr" && l.k !== "dr")) continue;
@@ -535,7 +564,7 @@ export function addTopicLinks(links, it, ctx = {}) {
   // every item in a mixed module.
   let promoted = null;
   if (!links.some((l) => (l.k === "kb" || l.k === "pr") && l.c >= SHOW && l.v !== "kt")) {
-    promoted = links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= 65 && l.c < SHOW && stemEvidenced(it, l, ktCtx, true)).sort((a, b) => b.c - a.c)[0] || null;
+    promoted = links.filter((l) => (l.k === "kb" || l.k === "pr") && promotable(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0] || null;
     if (promoted) { promoted.c = SHOW; promoted.v = "kt"; promoted.sec = promoted.k === "kb" ? leadSec(it.q || "") : ""; }
   }
   const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb && ktOk(ctx.topicKb.title, ktCtx, mid, ctx.topicKb.id) ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
@@ -544,18 +573,20 @@ export function addTopicLinks(links, it, ctx = {}) {
     const sec = leadSec(it.q || "");
     for (const l of links) {
       if (l.c >= SHOW || l.v === "kt") continue;
-      if (l.k === "kb" && kbList.some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
-      else if (l.k === "pr" && entry && (entry.pr || []).some(([id]) => id === l.id)) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
+      // Only an item-evidenced mention (stem, keyed answer or the item's own tags) upgrades to
+      // the topic tier; an explanation-only mention of the module article stays below the bar.
+      if (l.k === "kb" && kbList.some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
+      else if (l.k === "pr" && entry && (entry.pr || []).some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
     }
     // Per-subtopic topic target: in a mixed module the single mapped article can be another
     // subtopic's article for this item. When no mapped target is named by the item but one of
     // the item's own below-the-bar candidates is (stem, keyed answer or an option), that
     // candidate becomes the item's topic target instead of the module article.
-    const mappedEvidenced = kbList.some(([id, title]) => stemEvidenced(it, { k: "kb", id, title }, ktCtx))
-      || ((entry && entry.pr) || []).some(([id, title]) => stemEvidenced(it, { k: "pr", id, title }, ktCtx));
+    const mappedEvidenced = kbList.some(([id, title]) => stemEvidenced(it, { k: "kb", id, title }, ktCtx) || tagEvidenced(it, { k: "kb", id, title }, ktCtx))
+      || ((entry && entry.pr) || []).some(([id, title]) => stemEvidenced(it, { k: "pr", id, title }, ktCtx) || tagEvidenced(it, { k: "pr", id, title }, ktCtx));
     let subtopic = null;
     if (!own && !mappedEvidenced) {
-      subtopic = links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= 65 && l.c < SHOW && stemEvidenced(it, l, ktCtx, true)).sort((a, b) => b.c - a.c)[0] || null;
+      subtopic = links.filter((l) => (l.k === "kb" || l.k === "pr") && promotable(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0] || null;
       if (subtopic) { subtopic.c = SHOW; subtopic.v = "kt"; if (subtopic.k === "kb") subtopic.sec = sec; }
     }
     const kbAnyEvidenced = kbList.some(([id, title]) => stemEvidenced(it, { k: "kb", id, title }, ktCtx));
@@ -579,13 +610,13 @@ export function addTopicLinks(links, it, ctx = {}) {
     // target. Mapped articles stay where there is no lesson, or where the item evidences the article.
     for (const [id, title] of kbList) {
       if (subtopic || preferSubject || promoted) continue;
-      if (hasShown() && entry && (entry.kb || []).some(([i]) => i === id) && !stemEvidenced(it, { k: "kb", id, title }, ktCtx)) continue;
+      if (hasShown() && entry && (entry.kb || []).some(([i]) => i === id) && !stemEvidenced(it, { k: "kb", id, title }, ktCtx) && !tagEvidenced(it, { k: "kb", id, title }, ktCtx)) continue;
       if (!own && kbAnyEvidenced && !stemEvidenced(it, { k: "kb", id, title }, ktCtx)) continue;
       if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
     }
     for (const [id, title] of (entry && entry.pr) || []) {
       if (subtopic || preferSubject || promoted) continue;
-      if (hasShown() && !stemEvidenced(it, { k: "pr", id, title }, ktCtx)) continue;
+      if (hasShown() && !stemEvidenced(it, { k: "pr", id, title }, ktCtx) && !tagEvidenced(it, { k: "pr", id, title }, ktCtx)) continue;
       if (!own && prAnyEvidenced && !stemEvidenced(it, { k: "pr", id, title }, ktCtx)) continue;
       if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
     }
@@ -596,10 +627,10 @@ export function addTopicLinks(links, it, ctx = {}) {
   // Same per-subtopic rule for the majority fallback: an item's own stem-evidenced candidate
   // is its topic target in preference to the module's majority article.
   if (fb && !own && !kbList.length && !(entry && (entry.pr || []).length) && !topicKb) {
-    const cand = links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= 65 && l.c < SHOW && stemEvidenced(it, l, ktCtx, true)).sort((a, b) => b.c - a.c)[0];
+    const cand = links.filter((l) => (l.k === "kb" || l.k === "pr") && promotable(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0];
     if (cand && cand.id !== fb.id) { cand.c = SHOW; cand.v = "kt"; if (cand.k === "kb") cand.sec = leadSec(it.q || ""); }
   }
-  if (fb && fb.k && fb.id && ktOk(fb.title || fb.id, ktCtx, mid, fb.id) && !own && !kbList.length && !(entry && (entry.pr || []).length) && !topicKb && !links.some((l) => l.v === "kt" && l.c >= SHOW) && !(ctx.subjectLesson && !stemEvidenced(it, { k: fb.k, id: fb.id, title: fb.title || fb.id }, ktCtx)) && !has.has(fb.k + ":" + fb.id)) {
+  if (fb && fb.k && fb.id && ktOk(fb.title || fb.id, ktCtx, mid, fb.id) && !own && !kbList.length && !(entry && (entry.pr || []).length) && !topicKb && !links.some((l) => l.v === "kt" && l.c >= SHOW) && !(ctx.subjectLesson && !stemEvidenced(it, { k: fb.k, id: fb.id, title: fb.title || fb.id }, ktCtx) && !tagEvidenced(it, { k: fb.k, id: fb.id, title: fb.title || fb.id }, ktCtx)) && !has.has(fb.k + ":" + fb.id)) {
     if (links.filter((l) => l.k === fb.k).length < (MAX[fb.k] || 1) || links.some((l) => l.k === fb.k && l.c < SHOW)) {
       const i = links.findIndex((l) => l.k === fb.k && l.c < SHOW);
       if (links.filter((l) => l.k === fb.k).length >= (MAX[fb.k] || 1) && i >= 0) { has.delete(links[i].k + ":" + links[i].id); links.splice(i, 1); }
@@ -635,7 +666,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     if (!pick) {
       const chapters = L.filter((l) => !l.own && l.title);
       if (chapters.length) {
-        const texts = links.filter((l) => l.k === "kb" && l.c >= SHOW && l.v !== "kt").map((l) => l.title)
+        const texts = links.filter((l) => l.k === "kb" && l.c >= SHOW).map((l) => l.title)
           .concat((it.tg || []).filter((t) => typeof t === "string"));
         const c = matchChapter(texts, chapters);
         if (c && !has.has("ls:" + c)) { pick = c; via = "lh"; }
