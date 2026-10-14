@@ -225,3 +225,31 @@ targets are the broad chapter or a borderline candidate; there is no
 remaining matcher rule that removes them without either loosening the
 specific-link gate (forbidden) or leaving items unlinked (forbidden).
 Republished: links 2026-10-14.dd526c, verify 0 bad.
+
+## Follow-up 3 (2026-10-14, links-final4): residue classes and the remaining blocker
+
+Fix: the weak-mention upgrade to the topic tier now requires item evidence
+(stem, keyed answer, or the item's own tags). An explanation-only mention of
+the module article no longer upgrades. Explanation-only `kt` tops fell from
+2,936 to 1,741; own-module-lesson tops rose accordingly. Clean-cache build
+again 203,577 of 203,577 linked, `gaps --fail` exit 0; tests 96 pass,
+1 skipped. Majority-of-three audit on a fresh 300: 16/300 = 5.3% wrong.
+The <=2% target is still not met. The residue, measured over the whole
+population (203,577 linked items, first shown link), is:
+
+| Residue class | Items | Share | Why it cannot be fixed by linking rules |
+| --- | ---: | ---: | --- |
+| Module's own lesson as top link (`lt`) | 103,782 | 51.0% | The lesson is the item's own module chapter and is presented as topic tier. Gemini flags an estimated ~5% of sampled ones where the item is off-topic within its (mixed) module: that is a bank filing/content problem, and this class alone contributes an expected ~2.5% wrong over all items, above the whole 2% budget, even if every other class were perfect. |
+| Subject rapid-review lesson (`lt`, no own lesson) | 8,537 | 4.2% | Broad subject chapter; no per-subtopic lesson exists for these modules in current content. |
+| `kt` article with only explanation/module evidence | 1,741 | 0.9% | No own lesson and no subject rapid-review lesson exists for their subjects; removing the article would leave the item unlinked. |
+| `kt` article stem/tag-evidenced | 21,084 | 10.4% | Per-item articles; the judge flags a borderline subset (signs, associated features, differentials). |
+
+Specific (non-topic) tops are almost all item-evidenced: only about 230
+of 68,000 specific first links lack stem/tag/explanation evidence.
+Closing the remaining gap requires per-subtopic lessons or articles for
+the mixed modules (content work) or a paid confirm stage for the
+stem-only candidates (excluded by the no-API rule of this job); it cannot
+be closed by loosening the specific-link gate or by leaving items
+unlinked, both of which this job forbids.
+
+Republished: links 2026-10-14.dd526c, verify 0 bad (203,577 items).
