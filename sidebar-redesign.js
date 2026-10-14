@@ -414,6 +414,7 @@
         '<span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
         '<button class="sbr-sw' + (on ? " on" : "") + '" data-ota-auto="1" role="switch" aria-checked="' + on + '" aria-label="Automatic updates"><span></span></button></div></div>' +
       '<div class="sbr-note" id="otaStatus">Version ' + ver + '</div>' +
+      '<div id="otaProg" hidden></div>' +
       '<button class="sbr-row" id="otaCheck">' + svg("refresh") + '<span class="sbr-lbl">Check for updates</span></button>' +
       '<button class="sbr-row" id="otaInstall" style="display:none">' + svg("download") + '<span class="sbr-lbl">Download &amp; install</span></button>';
   }
@@ -444,9 +445,15 @@
     if (installBtn) installBtn.addEventListener("click", function () {
       if (!pending) return;
       installBtn.disabled = true;
-      SMD_OTA.install(pending, function (pct, label) { if (statusEl) statusEl.textContent = label || ("Downloading… " + pct + "%"); }).then(function (res) {
-        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready, reopening…"; }
+      // The download card (native-ota.js progressUI): bar, MB, live speed and a speed graph, so people can see it working.
+      var pu = SMD_OTA.progressUI ? SMD_OTA.progressUI(root.querySelector("#otaProg")) : null;
+      SMD_OTA.install(pending, function (pct, label, info) {
+        if (pu && info) { if (statusEl) statusEl.textContent = "Downloading update"; pu.update(pct, label, info); }
+        else if (statusEl) statusEl.textContent = label || ("Downloading… " + pct + "%");
+      }).then(function (res) {
+        if (res && res.ok) { if (pu) pu.done(); if (statusEl) statusEl.textContent = "Update ready, reopening…"; }
         else {
+          if (pu) pu.fail();
           installBtn.disabled = false;
           // Phrase it from the failure CODE, same vocabulary as the update banner. The raw code was
           // reaching the screen verbatim ("Install failed — download-failed"), which tells a doctor

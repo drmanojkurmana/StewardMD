@@ -183,3 +183,12 @@ streams the zip from R2 at ~210 KB/s, so 137 MB is ~11 minutes against the plugi
 Fix: the 28 PNGs are now WebP (40 MB to 4 MB, same look), references updated in the lesson and overlay JSON and the generators;
 zip is ~102 MB. **Before adding large media to `prep/`, check the zip size** (`bash scripts/build-www.sh && cd www && zip -qr /tmp/x.zip .`).
 Still large: `kb` 78 MB raw, `assets/vendor` 22 MB (ML/wasm), `prep/lessons/v1` JSON, `tokos` 22 MB.
+
+## Download card (2026-10-14)
+`SMD_OTA.progressUI(el)` draws the Settings > Software Update download card (bar, "about N of M MB", live speed with ETA, speed graph); the
+update banner uses the compact form. `install(pending, onProgress)` now passes a third argument `info` ({bytes,total,pct,speed,eta,est,phase,history}).
+The plugin reports no bytes during a single-zip download, so the figures are ESTIMATES: a small ranged GET (384 KB, 1.5 MB on fast links) to the
+bundle URL every ~1.5 s measures the link, and the speed summed over time (capped at 97%) is the shown MB. The card says "about". If the plugin sends
+percentages in the 1 to 69 band the meter uses them (exact, no "about"); the 70% event stops the probes and shows Installing; 20 s without a probe answer
+shows "Waiting for the network" and freezes the bar. The silent auto-update path passes no onProgress and spends no probe traffic. It cannot tell a stalled
+native transfer from a slow one while the network itself is fine. Test: `test/run-ota-progress-ui.mjs`.

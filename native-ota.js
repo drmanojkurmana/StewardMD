@@ -97,6 +97,53 @@
     });
   }
 
+  /* ---------- the download meter (owner, 2026-10-14: "show real-time speed and a progress bar so users can wait") ----------
+   * The updater plugin reports NO bytes while a single-zip bundle transfers (see install()), so the meter measures the
+   * connection itself: a small ranged request to the same bundle URL every couple of seconds gives a real link speed,
+   * and the bytes shown are that speed summed over time, capped below 100% until the plugin says the file landed. That
+   * makes the MB figure an ESTIMATE and the screen says so. If the plugin ever sends intermediate percentages (the
+   * 1 to 69 band, 70 = file landed on iOS) the meter switches to those and drops the "about". No traffic is spent when
+   * nobody is watching (the silent auto-update path passes no onProgress). */
+  function makeMeter(total) {
+    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [];
+    return {
+      sample: function (bytes, ms) {
+        if (!(bytes > 0 && ms > 0)) return;
+        var s = bytes * 1000 / ms; speed = speed ? speed * 0.6 + s * 0.4 : s; lastOk = Date.now();
+      },
+      real: function (frac) { if (frac > 0 && frac < 1) exact = Math.max(exact || 0, frac); },
+      read: function (now, phase) {
+        var dt = Math.max(0, now - last); last = now;
+        var stalled = phase === "download" && now - lastOk > 20000;
+        if (phase === "download" && !stalled && exact == null && total) est = Math.min(total * 0.97, est + speed * dt / 1000);
+        var bytes = phase !== "download" ? total : (exact != null ? exact * total : est);
+        if (now - lastPush >= 1000) { lastPush = now; hist.push(stalled ? 0 : speed); if (hist.length > 90) hist.shift(); }
+        var sp = stalled ? 0 : speed;
+        return { bytes: bytes, total: total, pct: total ? Math.min(100, Math.round(bytes * 100 / total)) : 0, speed: sp,
+          eta: sp > 0 && total ? Math.max(0, (total - bytes) / sp) : null, est: exact == null,
+          phase: stalled ? "waiting" : phase, history: hist.slice() };
+      }
+    };
+  }
+  function startProbe(url, total, meter) {
+    var alive = true, ctl = null, chunk = 393216;
+    try { if (typeof AbortController !== "undefined") ctl = new AbortController(); } catch (e) {}
+    (function loop() {
+      if (!alive) return;
+      var span = total && total > chunk ? Math.floor(Math.random() * (total - chunk)) : 0, t = Date.now();
+      var opts = { headers: { Range: "bytes=" + span + "-" + (span + chunk - 1) }, cache: "no-store" };
+      if (ctl) opts.signal = ctl.signal;
+      fetch(url, opts).then(function (r) { if (!(r.ok || r.status === 206)) throw new Error("probe"); return r.arrayBuffer(); })
+        .then(function (buf) { var ms = Date.now() - t; meter.sample(buf.byteLength, ms); chunk = buf.byteLength * 1000 / Math.max(ms, 1) > 1500000 ? 1572864 : 393216; })
+        .then(null, function () {})
+        .then(function () { if (alive) setTimeout(loop, 1500); });
+    })();
+    return function stop() { alive = false; try { if (ctl) ctl.abort(); } catch (e) {} };
+  }
+  function fmtMB(b) { return (Math.round(b / 104857.6) / 10).toFixed(1); }
+  function fmtSpeed(b) { return b >= 1048576 ? (Math.round(b / 104857.6) / 10).toFixed(1) + " MB/s" : Math.round(b / 1024) + " KB/s"; }
+  function fmtEta(s) { if (s == null) return "working it out"; if (s < 90) return "about " + Math.max(1, Math.round(s)) + " s left"; return "about " + Math.round(s / 60) + " min left"; }
+
   // install(pending, onProgress): downloads + applies. `immediate` (default true) reloads right
   // away via set() — the right choice for an explicit tap ("Update now" / "Download & install").
   // The silent auto-update path (see maybeAutoApply below) passes immediate:false (next()), so an
@@ -115,25 +162,26 @@
      * flight, then Installing when the plugin reports the file complete, then Restarting. Callers get
      * (percent, label); the label is what to show. */
     var mb = pending.zipSize ? (Math.round(pending.zipSize / 104857.6) / 10) + " MB" : "";
-    var t0 = Date.now(), phase = "download";
+    var t0 = Date.now(), phase = "download", meter = onProgress ? makeMeter(pending.zipSize || 0) : null, stopProbe = null;
     function say(pct) {
       if (!onProgress) return;
       var secs = Math.round((Date.now() - t0) / 1000);
       var label = phase === "download" ? "Downloading update" + (mb ? " (" + mb + ")" : "") + "\u2026 " + secs + "s"
         : phase === "install" ? "Installing\u2026"
         : "Restarting to finish\u2026";
-      try { onProgress(pct, label); } catch (e) {}
+      try { onProgress(pct, label, meter ? meter.read(Date.now(), phase) : null); } catch (e) {}
     }
-    function cleanup() { try { if (tick) clearInterval(tick); } catch (e) {} try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} try { if (offFail && offFail.remove) offFail.remove(); } catch (e) {} }
+    function cleanup() { try { if (stopProbe) stopProbe(); } catch (e) {} try { if (tick) clearInterval(tick); } catch (e) {} try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} try { if (offFail && offFail.remove) offFail.remove(); } catch (e) {} }
     try {
       if (onProgress && p.addListener) {
         p.addListener("download", function (ev) {
           var pct = Math.round((ev && ev.percent) || 0);
-          if (pct >= 70 && phase === "download") phase = "install";   // the file is down; unzip + verify
+          if (meter && pct > 0 && pct < 70) meter.real(pct / 70);   // intermediate percentages (if the plugin ever sends them) beat the estimate
+          if (pct >= 70 && phase === "download") { phase = "install"; try { if (stopProbe) { stopProbe(); stopProbe = null; } } catch (e) {} }   // the file is down; unzip + verify
           say(pct);
         }).then(function (h) { offDl = h; });
       }
-      if (onProgress) { say(0); tick = setInterval(function () { if (phase === "download") say(0); }, 1000); }
+      if (onProgress) { say(0); tick = setInterval(function () { if (phase === "download") say(0); }, 1000); if (meter && pending.zipSize) stopProbe = startProbe(pending.zipUrl, pending.zipSize, meter); }
     } catch (e) {}
     // One automatic retry on a transport-class download failure. The plugin verifies the
     // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
@@ -161,6 +209,67 @@
         cleanup();
         return { ok: false, error: otaCode(e, "download-failed") };
       });
+  }
+
+  /* progressUI(el, opts) -> { update(pct, label, info), done(), fail(msg) }. The shared download card: a bar, "about 41.3 of
+   * 101.7 MB", the live link speed with an ETA, and a small speed graph. info is what install() passes as the third
+   * argument to onProgress. opts.compact draws only the bar and one line (the update banner). */
+  function otpCss() {
+    if (document.getElementById("smdOtpCss")) return;
+    var s = document.createElement("style"); s.id = "smdOtpCss";
+    s.textContent =
+      ".otp{--otp-acc:#0e6e63;--otp-bg:rgba(14,110,99,.10);--otp-mut:#5a7184;margin:10px 0;padding:14px;border-radius:14px;background:rgba(255,255,255,.55);border:1px solid rgba(14,110,99,.18);color:inherit}" +
+      "body.dark .otp,body.v3-dark .otp{--otp-acc:#2dd4bf;--otp-bg:rgba(45,212,191,.14);--otp-mut:#9db5ae;background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}" +
+      ".otp-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.otp-ph{font:700 14px/1.2 inherit}.otp-pc{font:700 20px/1 inherit;font-variant-numeric:tabular-nums;color:var(--otp-acc)}" +
+      ".otp-bar{position:relative;height:12px;margin:10px 0 8px;border-radius:7px;background:var(--otp-bg);overflow:hidden}" +
+      ".otp-bar i{position:absolute;inset:0 auto 0 0;width:0;border-radius:7px;background:var(--otp-acc);transition:width .6s ease}" +
+      ".otp-bar.wait i{opacity:.55}" +
+      ".otp-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;font:600 12.5px/1.3 inherit;font-variant-numeric:tabular-nums}.otp-mb{white-space:nowrap}.otp-row span:last-child{color:var(--otp-mut);text-align:right}" +
+      ".otp-spark{display:block;width:100%;height:46px;margin-top:10px}.otp-spark polyline{fill:none;stroke:var(--otp-acc);stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}" +
+      ".otp-spark path{fill:var(--otp-bg);stroke:none}.otp-spark text{font:600 9px inherit;fill:var(--otp-mut)}" +
+      ".otp-note{margin:8px 0 0;font:500 11.5px/1.4 inherit;color:var(--otp-mut)}" +
+      ".otp.compact{margin:6px 0 0;padding:0;background:none;border:0}.otp.compact .otp-bar{height:6px;margin:6px 0 4px;background:rgba(255,255,255,.25)}.otp.compact .otp-bar i{background:#fff}" +
+      ".otp.compact .otp-row{font-size:11.5px}.otp.compact .otp-row span:last-child{color:rgba(255,255,255,.85)}" +
+      "@media(prefers-reduced-motion:reduce){.otp-bar i{transition:none}}";
+    (document.head || document.documentElement).appendChild(s);
+  }
+  function sparkSvg(hist) {
+    var W = 240, H = 46, n = hist.length;
+    if (n < 2) return "";
+    var mx = 1; hist.forEach(function (v) { if (v > mx) mx = v; });
+    var pts = hist.map(function (v, i) { return (i * (W - 4) / (n - 1) + 2).toFixed(1) + "," + (H - 6 - (v / mx) * (H - 14)).toFixed(1); });
+    return '<svg class="otp-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none" aria-hidden="true"><path d="M2,' + H + " L" + pts.join(" L") + " L" + (W - 2) + "," + H + 'Z"/><polyline points="' + pts.join(" ") + '"/></svg>';
+  }
+  function progressUI(el, opts) {
+    opts = opts || {};
+    if (!el) return { update: function () {}, done: function () {}, fail: function () {} };
+    otpCss();
+    var compact = !!opts.compact;
+    el.hidden = false;
+    el.innerHTML = '<div class="otp' + (compact ? " compact" : "") + '" aria-live="off"><div class="otp-top"' + (compact ? ' style="display:none"' : "") + '><b class="otp-ph">Downloading update</b><span class="otp-pc">0%</span></div>' +
+      '<div class="otp-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Update download"><i></i></div>' +
+      '<div class="otp-row"><span class="otp-mb">Starting…</span><span class="otp-sp"></span></div><div class="otp-gr"></div>' +
+      (compact ? "" : '<p class="otp-note">Keep the app open. A large update can take several minutes on a slow connection. MB and speed are estimates from your connection.</p>') + "</div>";
+    var q = function (c) { return el.querySelector(c); };
+    var lastAnn = 0;
+    return {
+      update: function (pct, label, info) {
+        if (!info) return;
+        var bar = q(".otp-bar"), ph = q(".otp-ph");
+        if (info.phase === "install") { ph.textContent = "Installing"; q(".otp-mb").textContent = fmtMB(info.total) + " MB downloaded"; q(".otp-sp").textContent = "verifying and unpacking"; }
+        else if (info.phase === "restart") { ph.textContent = "Restarting"; q(".otp-mb").textContent = "Update ready"; q(".otp-sp").textContent = "reopening the app"; }
+        else if (info.phase === "waiting") { ph.textContent = "Waiting for the network"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = "no data coming through"; }
+        else { ph.textContent = "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta); }
+        q(".otp-pc").textContent = info.pct + "%";
+        bar.classList.toggle("wait", info.phase === "waiting");
+        bar.firstChild.style.width = info.pct + "%";
+        bar.setAttribute("aria-valuenow", String(info.pct));
+        if (!compact) { var g = q(".otp-gr"); if (g) g.innerHTML = sparkSvg(info.history || []); }
+        var now = Date.now(); if (now - lastAnn > 15000) { lastAnn = now; try { el.firstChild.setAttribute("aria-live", "polite"); setTimeout(function () { try { el.firstChild.setAttribute("aria-live", "off"); } catch (e) {} }, 1200); } catch (e) {} }
+      },
+      done: function () { var b = q(".otp-bar"); if (b) { b.firstChild.style.width = "100%"; b.setAttribute("aria-valuenow", "100"); } var p = q(".otp-pc"); if (p) p.textContent = "100%"; },
+      fail: function () { el.hidden = true; el.innerHTML = ""; }
+    };
   }
 
   /* NEVER hand a native error message to the UI. @capgo/capacitor-updater is given the bundle's
@@ -235,7 +344,7 @@
     versionLabel: function (v) { return versionLabel(arguments.length ? v : myVersion()); },
     purgeOld: purgeOld,
     reconcile: function () { _truth = reconcileVersion(); return _truth; },
-    check: check, install: install,
+    check: check, install: install, progressUI: progressUI, _meter: makeMeter,
   };
 
   // ---- The banner (the part home.js's dormant Settings row never had) -----------------------
@@ -290,11 +399,16 @@
       _bannerEl.querySelector(".later").addEventListener("click", hideBanner);
       _bannerEl.querySelector(".go").addEventListener("click", function () {
         var btn = _bannerEl.querySelector(".go"); btn.textContent = "Updating…"; btn.disabled = true;
+        // Compact meter under the banner text while it downloads.
+        var sub = _bannerEl.querySelector(".sub"), host = _bannerEl.querySelector(".otp-host");
+        if (!host) { host = document.createElement("span"); host.className = "otp-host"; host.style.display = "block"; sub.parentNode.appendChild(host); }
+        var pu = progressUI(host, { compact: true }); sub.style.display = "none";
         // set() itself reloads the WebView on success — nothing left to do here but handle failure.
         // Phrase it from the failure CODE (same vocabulary as the Settings screen): a connection
         // drop and a full disk need different actions, and a bare "try again" never says which.
-        install(_bannerPending, null, true).then(function (res) {
+        install(_bannerPending, function (pct, label, info) { if (info) pu.update(pct, label, info); }, true).then(function (res) {
           if (!res.ok) {
+            pu.fail(); sub.style.display = "";
             btn.textContent = "Update now"; btn.disabled = false;
             var code = res && res.error;
             toast(code === "network" ? "Download failed — check connection and try again" :
