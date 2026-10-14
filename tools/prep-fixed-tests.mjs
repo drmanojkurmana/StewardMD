@@ -606,8 +606,13 @@ export function buildExam({ tax, cache, ver, pyqVer, exam, quality = {}, created
 }
 
 /* ---------- write: never overwrite a published paper ---------- */
+// On-disk/R2 directory per format. subject_mini lives at subject-mini (dash): the bank route rejects
+// underscores, so subject_mini/ papers 404 even when uploaded (owner 2026-10-14: 302 indexed, 0 served).
+export function formatDir(format) {
+  return format === "subject_mini" ? "subject-mini" : format;
+}
 export function paperPath(out, paper) {
-  return path.join(out, paper.exam, paper.format, paper.id + ".json");
+  return path.join(out, paper.exam, formatDir(paper.format), paper.id + ".json");
 }
 export function samePaper(a, b) {
   const strip = (p) => { const c = { ...p }; delete c.createdAt; return JSON.stringify(c); };
@@ -646,7 +651,7 @@ export function writePapers(out, papers) {
   return { wrote, kept };
 }
 export function buildIndex(out, papers) {
-  const rows = papers.map((p) => ({ id: p.id, exam: p.exam, format: p.format, title: p.title, count: p.count, duration_sec: p.duration_sec, scope: p.scope, path: `${p.exam}/${p.format}/${p.id}.json`, profile: p.profile.version, createdAt: p.createdAt }));
+  const rows = papers.map((p) => ({ id: p.id, exam: p.exam, format: p.format, title: p.title, count: p.count, duration_sec: p.duration_sec, scope: p.scope, path: `${p.exam}/${formatDir(p.format)}/${p.id}.json`, profile: p.profile.version, createdAt: p.createdAt }));
   rows.sort((a, b) => (a.exam < b.exam ? -1 : a.exam > b.exam ? 1 : a.format < b.format ? -1 : a.format > b.format ? 1 : a.id < b.id ? -1 : 1));
   const idx = { v: 1, tests: TESTS_VER, updated: new Date().toISOString(), papers: rows };
   fs.writeFileSync(path.join(out, "index.json"), JSON.stringify(idx, null, 1) + "\n");
