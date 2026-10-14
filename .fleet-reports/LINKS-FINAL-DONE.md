@@ -215,9 +215,10 @@ Third audit (same protocol, majority of 3 gemini-3.8-flash passes,
 | Before any gate | 17/300 = 5.7% (single pass) |
 | After gate v1 (#1623) | 14/300 = 4.7% |
 | After per-subtopic + subject fallback (#1630) | 14/300 = 4.7% (majority) |
-| After tag evidence (this change) | 14/300 = 4.7% (majority) |
+| After tag evidence (this change) | 27/300 = 9.0% (majority, own sample) |
 
-The <=2% target remains unmet under this judge. The majority-flagged
+The <=2% target remains unmet under this judge, and the tag-evidence
+stage did not improve the majority figure on its own sample. The majority-flagged
 residue is now dominated by module/subject lesson links for items whose
 own module is mixed or whose filing is off-topic, where the only honest
 targets are the broad chapter or a borderline candidate; there is no
