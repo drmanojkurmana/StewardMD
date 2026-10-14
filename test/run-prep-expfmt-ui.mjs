@@ -33,7 +33,7 @@ const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const shotCall = async (p) => { await sleep(200); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 15000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
-let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
+let fails = 0, intercepted = 0;
 const shot = async (name, dark) => {
   if (!process.env.SHOTS) return;
   const fsx = await import("node:fs");
@@ -64,6 +64,7 @@ try {
     const m = JSON.parse(e.data);
     if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); }
     if (m.method === "Fetch.requestPaused") {
+      intercepted++;
       call("Fetch.fulfillRequest", { requestId: m.params.requestId, responseCode: 200,
         responseHeaders: [{ name: "Content-Type", value: "application/json" }],
         body: Buffer.from(JSON.stringify({ text: MAIK_MD, usage: { mt: 40 }, wallet: { balanceMt: 1900, costCapOn: true } })).toString("base64") });
@@ -101,10 +102,16 @@ try {
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-fb .pn-exp strong') && document.querySelector("#smdPrep .pn-fb .pn-exp").tagName === "DIV";`) === true, "explanation uses strong semantics in its block");
   await shot("fb", false); await shot("fb", true);
 
-  // ---- Ask MaiK: the served Markdown answer renders bold and bullets in a real bubble
+  // ---- Ask MaiK: a fresh thread opens empty by design (resume() never auto-calls), so send a real doubt
+  // like a student would; the mocked teach endpoint answers with Markdown bold and bullets.
   await click('#smdPrep .pn-fb [data-act=ask]');
   ok(await until(`return !!document.getElementById("paIn");`, 8000), "Ask MaiK sheet opens");
-  ok(await until(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length >= 1;`, 15000), "MaiK answers");
+  await ev(`var c=document.querySelector('#pnAsk [data-act=ak-consent]'); if(c) c.click(); return 1;`);
+  await sleep(1500);
+  await ev(`var n=document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length;
+    if(!n){ var t=document.getElementById("paIn"); if(t){ t.focus(); t.value="Explain simply"; t.dispatchEvent(new Event("input",{bubbles:true})); t.dispatchEvent(new KeyboardEvent("keydown",{key:"Enter",bubbles:true,cancelable:true})); } } return 1;`);
+  console.log("ask state: " + await ev(`var w=document.getElementById("pnAsk"); return w ? ("typing=" + !!w.querySelector('[data-key=typing]') + " empty=" + !!w.querySelector(".pa-empty") + " consent=" + !!w.querySelector("[data-act=ak-consent]") + " ai=" + w.querySelectorAll(".pt-msg.ai").length) : "no-sheet";`));
+  ok(await until(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pt-ans-b").length >= 1;`, 20000), "MaiK answers");
   ok(await ev(`var b=document.querySelector("#pnAsk .pt-msg.ai .pa-txt"); return !!b && !!b.querySelector("strong") && b.querySelector("strong").textContent.indexOf("Fibromuscular dysplasia")>=0;`) === true, "MaiK answer renders Markdown bold as strong");
   ok(await ev(`return document.querySelectorAll("#pnAsk .pt-msg.ai .pa-txt ul > li").length === 2;`) === true, "MaiK answer renders Markdown bullets as a 2-item list");
   ok(await ev(`var s=document.querySelector("#pnAsk .pt-stored .pn-xkey strong"); return !!s && s.textContent.indexOf("Ans. is b")>=0;`) === true, "stored explanation under the answer keeps the key line");
@@ -129,6 +136,7 @@ try {
   ok(await ev(`return document.documentElement.clientWidth <= 390 && document.querySelector("#smdPrep").scrollWidth <= 391;`) === true, "390 px: no horizontal scroll");
   ok(await ev(`return document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.closest&&t.closest(".pn-exp,.pn-xkey,.pn-xchip,.pa-txt");}).length === 0;`) === true, "explanation adds no animation");
   ok(errors.length === 0, "no PREP page errors" + (errors.length ? ": " + errors.slice(0, 2).join(" | ") : ""));
+  console.log("teach requests intercepted: " + intercepted);
   console.log(fails ? `FAILED ${fails}` : "ALL PASS");
 } catch (e) { console.log("FAIL harness: " + (e && e.stack || e)); fails++; }
 try { ws && ws.close(); } catch {}
