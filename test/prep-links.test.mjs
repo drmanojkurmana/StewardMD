@@ -201,7 +201,7 @@ test("addTopicLinks: own chapter at the bar, topics fill slots, one specific les
   const topics = { m0: { kb: [["cataract", "Cataract"]], pr: [["blood-transfusion", "Blood transfusion"]] } };
   const it = { q: "What is the best initial treatment?", tg: ["x"] };
   const ls = addTopicLinks([], it, { mid: "m1", sid: "s", topics, lessons, lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map() });
-  assert.deepEqual(ls, [{ k: "ls", id: "m1", title: "Liver Masses", c: 75, v: "lt", sec: "" }]);
+  assert.deepEqual(ls, [{ k: "ls", id: "m1", title: "Liver Masses", c: 75, v: "lt", sec: "", ev: 0 }]);
   const kb = addTopicLinks([], it, { mid: "m0", sid: "s", topics, lessons: new Map(), lessonMeta: meta, bridge: new Map(), midSid: new Map(), images: new Map() });
   assert.deepEqual(kb.map((l) => [l.k, l.v, l.c]), [["kb", "kt", 75], ["pr", "kt", 75]]);
   assert.equal(kb[0].sec, "mgmt", "the topic article opens at the answering section");
@@ -213,7 +213,7 @@ test("addTopicLinks: own chapter at the bar, topics fill slots, one specific les
   const kbL = addTopicLinks([{ k: "kb", id: "a", title: "Atheroma", c: 92, v: "k" }], it,
     { mid: "m0", sid: "s", topics: {}, lessons: new Map(), lessonMeta: new Map([["m1", { title: "Liver Masses" }]]),
       bridge: new Map([["a", [{ key: "m1", n: 3 }]]]), midSid: new Map([["m1", "s"]]), images: new Map() });
-  assert.deepEqual(kbL.filter((l) => l.k === "ls"), [{ k: "ls", id: "m1", title: "Liver Masses", c: 80, v: "lk", sec: "" }]);
+  assert.deepEqual(kbL.filter((l) => l.k === "ls"), [{ k: "ls", id: "m1", title: "Liver Masses", c: 80, v: "lk", sec: "", ev: 1 }]);
 });
 
 test("addTopicLinks: a weak same-topic mention upgrades to the topic tier instead of nothing", () => {

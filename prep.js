@@ -690,7 +690,7 @@
     weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
-    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml };
+    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -2920,6 +2920,9 @@
   }
   function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
   function subjectByCode(code) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { if (sb.code === code) r = sb.id; }); }); return r; }
+  /* moduleTitleOf(mid, tax): the taxonomy display name ("Gametogenesis"), for the Know more fallback
+     rows ("Learn this module" names the module, never a possibly off-topic article). "" when unknown. */
+  function moduleTitleOf(mid, tax) { var r = ""; ((tax || {}).branches || []).forEach(function (b) { (b.subjects || []).forEach(function (sb) { (sb.sections || []).forEach(function (sec) { (sec.modules || []).forEach(function (m) { if (m.id === mid) r = (m.name && (m.name.en || m.name)) || mid; }); }); }); }); return r; }
   function loadingScreen(title, msg) { paint(bar(title, "", "back") + '<div class="pn-body"><p class="pn-load" role="status" id="pnLoadMsg">' + msg + "</p></div>"); }
   function stepMsg(d, n) { var el = root && root.querySelector("#pnLoadMsg"); if (el) el.textContent = "Loading questions: " + d + " of " + n + " modules…"; }
   // Today's set: due reviews from the modules with the most due (up to 6 files), then adaptive new questions from
@@ -3615,7 +3618,7 @@
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
     setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },
     // Arena and My stats (prep-arena.js)
-    subjIco: subjIco, subjHue: subjHue, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, subjectById: subjectById, tx: tx,
+    subjIco: subjIco, subjHue: subjHue, row: row, fmtTime: fmtTime, mockOf: mockOf, subjectOfModule: subjectOfModule, moduleTitleOf: function (mid) { return moduleTitleOf(mid, st.tax); }, subjectById: subjectById, tx: tx,
     stackTop: function () { return st.stack[st.stack.length - 1]; }, home: renderHome,
     // Tab roots for the floating tab bar (prep-nav.js): Tests and You.
     screens: { mocks: renderMocks, menu: renderMenu }, run_: function () { return st.run; },
