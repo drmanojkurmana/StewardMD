@@ -103,6 +103,14 @@ try {
   ok(!(await ev("return SMD_dynNotify.isVisible()")), "auto-dismisses after its duration");
   await sleep(800);
 
+  // 5b. Display zoom (home.js zoomNowD, 0.95 auto fit on a small phone): the card stays centred on the screen and the
+  // pill on the hardware island. Before the fix the whole island drew 5% small and slid left (11 px left, 31 px right).
+  await ev("document.documentElement.style.zoom='0.95'; window.dispatchEvent(new Event('resize')); return 1");
+  await ev("SMD_dynNotify({title:'Zoomed page', message:'centred on the screen'}); return 1"); await sleep(1200);
+  const zc = await ev("var L=[].slice.call(document.querySelectorAll('body > div')).filter(function(e){return e.style.clipPath&&e.textContent.indexOf('Zoomed page')>=0;})[0];var r=L.getBoundingClientRect();var p=document.querySelector('svg rect').getBoundingClientRect();return {l:Math.round(r.left),r:Math.round(innerWidth-r.right),pc:Math.round(p.left+p.width/2),vw:innerWidth};");
+  ok(Math.abs(zc.l - zc.r) <= 1 && Math.abs(zc.pc - zc.vw / 2) <= 1, "zoomed page (0.95): card centred and pill on the island " + JSON.stringify(zc));
+  await ev("SMD_dynNotify.dismiss(); document.documentElement.style.zoom=''; return 1"); await sleep(1200);
+
   // 6. kill switch restores the old toast
   await ev("localStorage.setItem('smd_dyn_notify','0'); return 1"); await load();
   await ev("toast('Legacy path'); return 1"); await sleep(400);
