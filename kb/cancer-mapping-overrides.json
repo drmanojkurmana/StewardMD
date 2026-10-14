@@ -1,0 +1,124 @@
+{
+  "diseaseAliases": {
+    "all_cancer": ["acute_lymphoid_leukemia"],
+    "aml_cancer": ["acute_myeloid_leukemia"],
+    "ampullary_cancer": ["ampullary_adenoma"],
+    "amyloidosis": ["amyloidosis"],
+    "anal_cancer": ["anal_cancer"],
+    "appendiceal_cancer": ["appendiceal_mucinous_neoplasm"],
+    "basal_cell_carcinoma": ["basal_cell_carcinoma"],
+    "bcell_lymphoma": ["burkitt_lymphoma"],
+    "cholangiocarcinoma": ["cholangiocarcinoma"],
+    "bladder_cancer": ["bladder_cancer"],
+    "bone_cancer": ["osteosarcoma", "ewing_sarcoma", "chondrosarcoma"],
+    "breast_cancer": ["breast_cancer"],
+    "castleman_disease_multicentric": ["CASTLEMAN_DISEASE"],
+    "cervical_cancer": ["cervical_cancer"],
+    "cll_cancer": ["chronic_lymphocytic_leukemia"],
+    "cml": ["chronic_myeloid_leukemia"],
+    "cns_cancer": ["glioblastoma"],
+    "colorectal_cancer": ["colorectal_cancer"],
+    "cutaneous_lymphoma": ["mycosis_fungoides", "sezary_syndrome", "primary_cutaneous_anaplastic_large_cell_lymphoma"],
+    "dfsp": ["dermatofibrosarcoma_protuberans"],
+    "dlbcl_cancer": ["primary_cns_lymphoma"],
+    "gist_cancer": ["gastrointestinal_stromal_tumour"],
+    "gestational_trophoblastic_neoplasia": ["gestational_trophoblastic_neoplasia"],
+    "hcc_cancer": ["hepatocellular_carcinoma"],
+    "hcl_cancer": ["hairy_cell_leukemia"],
+    "headneck_cancer": ["head_and_neck_cancer"],
+    "histiocytic_neoplasms": ["langerhans_cell_histiocytosis"],
+    "hodgkin_cancer": ["hodgkin_lymphoma"],
+    "kaposi_sarcoma": ["kaposi_sarcoma"],
+    "lung_cancer": ["lung_cancer"],
+    "systemic_mastocytosis": ["systemic_mastocytosis"],
+    "myelodysplastic_syndromes": ["myeloproliferative_and_myelodysplastic_syndromes"],
+    "melanoma_cancer": ["melanoma"],
+    "merkel_cell_carcinoma": ["merkel_cell_carcinoma"],
+    "mesothelioma": ["mesothelioma"],
+    "myeloproliferative_neoplasms": ["polycythemia_vera_and_other_myeloprolifera", "myeloproliferative_and_myelodysplastic_syndromes"],
+    "myeloma_cancer": ["myeloma"],
+    "neuroblastoma": ["neuroblastoma"],
+    "neuroendocrine_adrenal_tumors": ["carcinoid_tumour", "CARCINOID_SYNDROME", "pheochromocytoma"],
+    "occult_primary": ["carcinoma_of_unknown_primary"],
+    "ovarian_cancer": ["ovarian_cancer"],
+    "pancreatic_cancer": ["pancreatic_cancer"],
+    "pediatric_acute_lymphoblastic_leukemia": ["acute_lymphoid_leukemia"],
+    "pediatric_acute_myeloid_leukemia": ["acute_myeloid_leukemia"],
+    "pediatric_central_nervous_system_tumors": ["medulloblastoma"],
+    "pediatric_mature_bcell_lymphoma": ["burkitt_lymphoma"],
+    "penile_cancer": ["penile_cancer"],
+    "prostate_cancer": ["prostate_cancer"],
+    "rcc_cancer": ["renal_cell_carcinoma"],
+    "rectal_cancer": ["colorectal_cancer"],
+    "sarcoma_cancer": ["soft_tissue_sarcoma"],
+    "small_cell_lung_cancer": ["lung_cancer"],
+    "small_bowel_adenocarcinoma": ["upper_gastrointestinal_tract_cancers"],
+    "small_bowel": ["upper_gastrointestinal_tract_cancers"],
+    "cutaneous_squamous_cell_carcinoma": ["squamous_cell_carcinoma_skin"],
+    "t_cell_lymphoma": ["mycosis_fungoides", "sezary_syndrome", "primary_cutaneous_anaplastic_large_cell_lymphoma", "angioimmunoblastic_t_cell_lymphoma", "extranodal_nk_t_cell_lymphoma", "hepatosplenic_t_cell_lymphoma"],
+    "testicular_cancer": ["testicular_cancer"],
+    "thymoma": ["thymoma"],
+    "thyroid_cancer": ["thyroid_cancer"],
+    "uppergi_cancer": ["upper_gastrointestinal_tract_cancers", "gastric_neoplasms_peptic_ulcer_and_gastrectomy"],
+    "uterine_cancer": ["endometrial_cancer"],
+    "uveal_melanoma": ["choroidal_melanoma"],
+    "vaginal_cancer": ["vulval_vaginal_lichen_vin_cancer"],
+    "vulvar_cancer": ["vulvar_cancer"],
+    "waldenstrom_macroglobulinemia": ["waldenstrom_macroglobulinemia"],
+    "wilms_tumor": ["wilms_tumour"]
+  },
+  "protocolOverrides": {
+    "cervical-cisplatin-weekly": {
+      "articles": ["cervical_cancer"],
+      "settings": ["Concurrent Chemoradiation", "Adjuvant"]
+    },
+    "cervical-pembrolizumab": {
+      "articles": ["cervical_cancer"],
+      "settings": ["Concurrent Chemoradiation", "Recurrent / Metastatic"]
+    },
+    "cervical-tisotumab-vedotin": {
+      "articles": ["cervical_cancer"],
+      "settings": ["Recurrent / Metastatic"]
+    },
+    "gyn-carbo-paclitaxel": {
+      "articles": ["cervical_cancer", "ovarian_cancer", "endometrial_cancer"],
+      "settings": ["Recurrent / Metastatic"]
+    },
+    "gyn-carbo-paclitaxel-bev": {
+      "articles": ["cervical_cancer", "ovarian_cancer"],
+      "settings": ["Recurrent / Metastatic"]
+    },
+    "sclc-platinum-etoposide": {
+      "articles": ["cervical_cancer", "lung_cancer"],
+      "settings": ["Neuroendocrine / Small Cell"]
+    },
+    "sclc-topotecan": {
+      "articles": ["cervical_cancer", "lung_cancer"],
+      "settings": ["Neuroendocrine / Small Cell", "Recurrent / Metastatic"]
+    },
+    "breast-cmf": {
+      "articles": ["breast_cancer"],
+      "settings": ["Adjuvant"]
+    },
+    "breast-tac": {
+      "articles": ["breast_cancer"],
+      "settings": ["Adjuvant"]
+    },
+    "sclc-lurbinectedin": {
+      "articles": ["lung_cancer"],
+      "settings": ["Second-line / Relapsed"]
+    },
+    "sclc-tarlatamab": {
+      "articles": ["lung_cancer"],
+      "settings": ["Second-line / Relapsed"]
+    },
+    "rare-mlne-imatinib": {
+      "articles": ["chronic_myeloid_leukemia"],
+      "settings": ["Systemic Therapy"]
+    },
+    "small-bowel-folfox": {
+      "articles": ["upper_gastrointestinal_tract_cancers"],
+      "settings": ["First-line Systemic", "Adjuvant"]
+    }
+  }
+}

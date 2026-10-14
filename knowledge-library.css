@@ -396,3 +396,53 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbh-urgent h5 { color: #ff8a80; }
 #dxOverlay #dxMgmt.dx-reader .kbr-rel i { flex: 0 0 auto; width: 8px; height: 8px; border-top: 1.5px solid var(--rd-mut); border-right: 1.5px solid var(--rd-mut); transform: rotate(45deg); }
 #dxOverlay #dxMgmt.dx-reader .kbr-rel:focus-visible { outline: 2px solid var(--rd-ink); outline-offset: -2px; }
 @media (hover: hover) { #dxOverlay #dxMgmt.dx-reader .kbr-rel:hover span { text-decoration: underline; text-underline-offset: 3px; } }
+
+/* Protocols section in KB reader (cancer-protocols-map.js) */
+#dxOverlay #dxMgmt.dx-reader .kbr-sec--protocols { margin-top: 10px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-intro { margin: 6px 0 14px; font-size: 14px; line-height: 1.5; color: var(--rd-mut); }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-group { margin: 16px 0 20px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-group:last-child { margin-bottom: 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { margin: 0 0 8px; font: 600 15px/1.35 var(--sans, system-ui); color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-list { display: flex; flex-direction: column; gap: 8px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--rd-line);
+  border-radius: 10px;
+  background: var(--panel, #fff);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-card:hover { border-color: var(--teal, #42CDB5); }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-card:focus-visible { outline: 2px solid var(--teal, #42CDB5); outline-offset: 2px; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-card--readonly { cursor: default; opacity: 0.9; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-card--readonly:hover { border-color: var(--rd-line); }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+}
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-name { font: 600 14px/1.35 var(--sans, system-ui); color: var(--rd-ink); }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-chev { font-size: 18px; line-height: 1; color: var(--teal, #42CDB5); flex-shrink: 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-proto-regimen { margin-top: 4px; font-size: 13px; line-height: 1.45; color: var(--rd-mut); }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-card {
+  background: #0D1D23;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-card:hover { border-color: #42CDB5; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-card--readonly:hover { border-color: rgba(255, 255, 255, 0.12); }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-name { color: #e6f0ed; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-regimen { color: #9bb5af; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-intro { color: #9bb5af; }
+body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; }
+

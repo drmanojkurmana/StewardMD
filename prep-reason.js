@@ -40,6 +40,18 @@
   }
   function escH(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
 
+  function getCancerMap(id) {
+    if (!id) return null;
+    var map = null;
+    if (typeof window !== "undefined" && window.SMD_ONCO_KB_MAP) map = window.SMD_ONCO_KB_MAP;
+    else if (G && G.SMD_ONCO_KB_MAP) map = G.SMD_ONCO_KB_MAP;
+    else if (typeof require === "function") {
+      try { map = require("./cancer-protocols-map.js"); } catch (e) {}
+    }
+    if (map && typeof map.get === "function") return map.get(id);
+    return null;
+  }
+
   /* linksOf(x) -> [{ k, id }] k one of kb/dr/pr/ls/cd, in pipeline confidence order. Accepts x.links
      { kb|kb_ids, drug|drug_ids, protocol|protocol_ids|proto, lesson|lesson_ids, card|card_ids } and the flat
      x.kb / x.drug / x.protocol / x.lesson / x.card (a link id string or a list of them). */
@@ -262,6 +274,15 @@
     });
     if (!lessons.length && d.lesson) rowsFb += fbRow("l-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '" data-l="' + escH(d.lesson.key) + '"');
     if (d.cards) rowsEv += row("k-open", ' data-s="' + escH(d.sid) + '" data-m="' + escH(d.mid) + '"', "Flashcards", "Cards for this topic");
+    var kbEv = links.filter(function (l) { return l.k === "kb" && !isFallback(l); });
+    var cancerProto = null;
+    for (var ki = 0; ki < kbEv.length; ki++) {
+      var ce = getCancerMap(kbEv[ki].id);
+      if (ce && ce.protocols && ce.protocols.length) { cancerProto = ce; break; }
+    }
+    if (cancerProto) {
+      rowsEv += row("r-cancer-protocols", ' data-cancer="' + escH(cancerProto.articleId) + '"', "Protocols", "See protocols (" + (cancerProto.totalProtocols || cancerProto.protocols.length) + ")");
+    }
     var rows = rowsEv + rowsFb;
     if (rows) h += '<h3 class="pn-km-h">Know more</h3>' + '<ul class="pn-rl">' + rows + "</ul>";
     if (d.next) {
@@ -291,7 +312,7 @@
     if (t.k === "kb") return "Knowledge Library";
     if (t.k === "ls") return "Lesson";
     if (t.k === "dr") return "Drug Index";
-    if (t.k === "pr") return "Protocol";
+    if (t.k === "pr" || t.k === "cp") return "Protocols";
     if (t.k === "cd") return "Flashcards";
     if (t.k === "n360") return "Nucleus360";
     return "";
@@ -302,6 +323,7 @@
     if (t.k === "ls") return "Lesson: " + (t.title || "Revise this topic");
     if (t.k === "dr") return "Drug: " + (t.title || t.id);
     if (t.k === "pr") return "Protocol: " + (t.title || t.id);
+    if (t.k === "cp") return t.title || "See protocols";
     if (t.k === "cd") return "Flashcards: Cards for this topic";
     if (t.k === "n360") return "Cover this topic with Nucleus360";
     return t.title || "";
@@ -366,6 +388,23 @@
       var tN = { k: "n360", id: n360id, title: n360.title || n360[1] || n360id, act: "n360-topic", attrs: ' data-t="' + escH(n360id) + '"' };
       rowTargets.push(tN); allTargets.push(tN);
     }
+    var kbEv = kb.filter(function (l) { return !isFallback(l); });
+    var cancerProto = null;
+    for (var ki = 0; ki < kbEv.length; ki++) {
+      var ce = getCancerMap(kbEv[ki].id);
+      if (ce && ce.protocols && ce.protocols.length) { cancerProto = ce; break; }
+    }
+    if (cancerProto) {
+      var pCount = cancerProto.totalProtocols || cancerProto.protocols.length;
+      allTargets.push({
+        k: "cp",
+        id: cancerProto.articleId,
+        title: "See protocols (" + pCount + ")",
+        count: pCount,
+        act: "r-cancer-protocols",
+        attrs: ' data-cancer="' + escH(cancerProto.articleId) + '"'
+      });
+    }
 
     // Items with both keep both, evidenced first: a stable partition, so the direct row and every
     // sheet group lead with item-evidenced targets and plain module fallbacks follow.
@@ -373,7 +412,7 @@
     function fbd(ts) { return ts.filter(function (t) { return t.fb; }); }
     rowTargets = evd(rowTargets).concat(fbd(rowTargets));
     allTargets = evd(allTargets).concat(fbd(allTargets));
-    return { rowTargets: rowTargets, allTargets: allTargets };
+    return { rowTargets: rowTargets, allTargets: allTargets, cancerProtocols: cancerProto };
   }
 
   /* knowMoreHtml(d): the "Know more" block below the explanation. The header always shows, even for one
@@ -391,20 +430,43 @@
   }
   function knowMoreHtml(d) {
     var tg = d.targets || [];
-    if (!tg.length) return "";
+    var cancerProto = d.cancerProtocols || null;
+    if (!cancerProto && d.allTargets) {
+      for (var i = 0; i < d.allTargets.length; i++) {
+        if (d.allTargets[i].k === "cp") {
+          cancerProto = getCancerMap(d.allTargets[i].id);
+          break;
+        }
+      }
+    }
+    if (!tg.length && !cancerProto) return "";
     var all = d.allTargets && d.allTargets.length ? d.allTargets : tg;
+    var nonCpAll = all.filter(function (t) { return t.k !== "cp"; });
     var head = '<h3 class="pn-km-h">Know more</h3>';
-    if (all.length <= 2) {
-      if (tg.length === 1) return head + '<div class="pn-km-row">' + kmBtn(tg[0]) + '</div>';
-      return head + '<div class="pn-km-row pn-km-duo">' + kmBtn(tg[0]) + kmBtn(tg[1]) + '</div>';
+
+    var protoRow = "";
+    if (cancerProto) {
+      var pCount = cancerProto.totalProtocols || (cancerProto.protocols ? cancerProto.protocols.length : 0);
+      protoRow = '<div class="pn-km-row pn-km-proto-row">' +
+        '<button type="button" class="pn-km-btn pn-km-proto-btn" data-act="r-cancer-protocols" data-cancer="' + escH(cancerProto.articleId) + '">' +
+        '<b>See protocols (' + pCount + ')</b><span class="pn-km-count" aria-hidden="true">&rsaquo;</span>' +
+        '</button></div>';
+    }
+
+    if (nonCpAll.length <= 2) {
+      var duoRow = "";
+      if (tg.length === 1) duoRow = '<div class="pn-km-row">' + kmBtn(tg[0]) + '</div>';
+      else if (tg.length >= 2) duoRow = '<div class="pn-km-row pn-km-duo">' + kmBtn(tg[0]) + kmBtn(tg[1]) + '</div>';
+      return head + duoRow + protoRow;
     }
     var top = tg.slice(0, 2);
     var duo = top.length === 2 ? '<div class="pn-km-row pn-km-duo">' + kmBtn(top[0]) + kmBtn(top[1]) + '</div>'
       : '<div class="pn-km-row">' + kmBtn(top[0]) + '</div>';
-    return head + duo + '<div class="pn-km-row">' +
+    var moreBtn = '<div class="pn-km-row">' +
       '<button type="button" class="pn-km-btn pn-km-more" data-act="r-km-sheet" data-i="' + escH(d.iid) + '" data-s="' + escH(d.sid || "") + '" data-m="' + escH(d.mid || "") + '">' +
       '<b>More (' + all.length + ')</b><span class="pn-km-count" aria-hidden="true">&rsaquo;</span>' +
       '</button></div>';
+    return head + duo + protoRow + moreBtn;
   }
 
   /* knowMoreSheetBodyHtml(d): targets grouped by kind for the bottom sheet.
@@ -417,6 +479,7 @@
       { k: "ls", title: "Lessons" },
       { k: "dr", title: "Drugs" },
       { k: "pr", title: "Protocols" },
+      { k: "cp", title: "Protocols" },
       { k: "cd", title: "Flashcards" }
     ];
     var h = "";
@@ -448,7 +511,7 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
-  var R = { ptr: null, ptrP: null, last: null, slots: {}, kmTargets: {}, kmSheet: null };
+  var R = { ptr: null, ptrP: null, last: null, slots: {}, kmTargets: {}, kmSheet: null, cancerProtoSheet: null };
   function api(H) { return (H.bankApi || "/api/prep/bank/").replace(/\/?$/, "/"); }
   function cget(H, k) { try { return H.cacheGet ? Promise.resolve(H.cacheGet(k)).then(null, function () { return null; }) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function cput(H, k, v) { try { if (H.cachePut) H.cachePut(k, v); } catch (e) {} }
@@ -543,7 +606,15 @@
     R.kmSheet = null;
     return had;
   }
+  function closeCancerProtocolsSheet() {
+    var el = G.document && G.document.getElementById("pnCancerProtoSheet");
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+    var had = !!R.cancerProtoSheet;
+    R.cancerProtoSheet = null;
+    return had;
+  }
   function openKmSheet(d, H) {
+    closeCancerProtocolsSheet();
     closeKmSheet();
     var root = (H && H.root) ? H.root() : (G.document && G.document.getElementById("smdPrep"));
     if (!root) return;
@@ -570,6 +641,94 @@
     });
     root.appendChild(wrap);
     R.kmSheet = wrap;
+  }
+
+  function openCancerProtocolsSheet(cancerId, H) {
+    closeKmSheet();
+    closeCancerProtocolsSheet();
+    var mapEntry = getCancerMap(cancerId);
+    if (!mapEntry || !mapEntry.protocols || !mapEntry.protocols.length) {
+      toast(H, "No protocols found for this cancer.");
+      return;
+    }
+    var root = (H && H.root) ? H.root() : (G.document && G.document.getElementById("smdPrep"));
+    if (!root) return;
+    var wrap = G.document.createElement("div");
+    wrap.className = "pn-sheet-wrap pn-proto-wrap";
+    wrap.id = "pnCancerProtoSheet";
+    var closeIco = (H && H.ico) ? H.ico("close") : '<svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 13.41 12z"/></svg>';
+
+    var oncoAvailable = false;
+    try {
+      var flags = G.SMD_QUEUE_FLAGS;
+      oncoAvailable = (!flags || flags.bool("smd_onco_protocols")) && !!(G.SMD_PROTOSHEET && G.SMD_PROTOSHEET.open);
+    } catch (e) {
+      oncoAvailable = false;
+    }
+
+    var groups = {};
+    var settingList = mapEntry.settings && mapEntry.settings.length ? mapEntry.settings : ["Protocols"];
+    settingList.forEach(function (s) { groups[s] = []; });
+    mapEntry.protocols.forEach(function (p) {
+      var primary = (p.settings && p.settings[0]) || "Protocols";
+      if (!groups[primary]) groups[primary] = [];
+      groups[primary].push(p);
+    });
+
+    var bHtml = "";
+    settingList.forEach(function (s) {
+      var list = groups[s] || [];
+      if (!list.length) return;
+      bHtml += '<div class="pn-proto-group"><h4 class="pn-proto-gh">' + escH(s) + '</h4><ul class="pn-proto-list">';
+      list.forEach(function (p) {
+        var cardInner = '<div class="pn-proto-head">' +
+          '<div class="pn-proto-name">' + escH(p.name) + '</div>' +
+          (oncoAvailable ? '<span class="pn-proto-arrow" aria-hidden="true">&rsaquo;</span>' : '') +
+          '</div>' +
+          (p.regimen ? '<div class="pn-proto-regimen">' + escH(p.regimen) + '</div>' : '');
+        if (oncoAvailable) {
+          bHtml += '<li><button type="button" class="pn-proto-card pn-proto-card--btn" data-act="r-proto-open" data-proto-id="' + escH(p.id) + '">' + cardInner + '</button></li>';
+        } else {
+          bHtml += '<li><div class="pn-proto-card pn-proto-card--static">' + cardInner + '</div></li>';
+        }
+      });
+      bHtml += '</ul></div>';
+    });
+
+    wrap.innerHTML = '<div class="pn-scrim" data-act="r-cancer-proto-close"></div>' +
+      '<section class="pn-sheet pn-proto-sheet" role="dialog" aria-modal="true" aria-labelledby="pnCancerProtoT" tabindex="-1">' +
+      '<span class="pn-grab" aria-hidden="true"></span>' +
+      '<div class="pn-sheet-h">' +
+        '<div>' +
+          '<h2 id="pnCancerProtoT">' + escH(mapEntry.articleTitle || "Cancer") + '</h2>' +
+          '<div class="pn-proto-sub">Protocols (' + (mapEntry.totalProtocols || mapEntry.protocols.length) + ')</div>' +
+        '</div>' +
+        '<button type="button" class="pn-ib" data-act="r-cancer-proto-close" aria-label="Close">' + closeIco + '</button>' +
+      '</div>' +
+      '<div class="pn-proto-sheet-b">' + bHtml + '</div>' +
+      '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="r-cancer-proto-close">Close</button></div>' +
+      '</section>';
+
+    wrap.addEventListener("click", function (e) {
+      var b = e.target.closest("button[data-act], [data-act='r-cancer-proto-close']");
+      if (!b) return;
+      var a = b.getAttribute("data-act");
+      if (a === "r-cancer-proto-close") {
+        closeCancerProtocolsSheet();
+      } else if (a === "r-proto-open") {
+        var pid = b.getAttribute("data-proto-id");
+        closeCancerProtocolsSheet();
+        try {
+          if (G.SMD_PROTOSHEET && G.SMD_PROTOSHEET.open) {
+            G.SMD_PROTOSHEET.open(pid);
+            lift("smdProtoSheet");
+          }
+        } catch (err) {}
+      }
+    });
+
+    root.appendChild(wrap);
+    R.cancerProtoSheet = wrap;
   }
   /* fill(H): patch every links slot on screen, each by its own data-i/s/m. The feedback slot, Know more row,
      and each Knowledge-gaps slot resolve independently; a gaps slot finds its item in the current run (gaps never call
@@ -646,12 +805,12 @@
           var hasAny = pipe.length > 0 || (sh && sh.e && sh.e[String(iid)] && sh.e[String(iid)].some(function (r) { return r[1] >= SHOW; }));
           var n360 = (sh && sh.mod && sh.mod.n360) || null;
           var km = (hasAny || n360) ? kmTargets({ links: links, okLessons: okLessons, lesson: lesson, cards: cards, itemCards: itemCards, sid: sid, mid: mid, mt: mt, n360: n360 }) : { rowTargets: [], allTargets: [] };
-          if (!km.rowTargets.length) {
+          if (!km.rowTargets.length && !km.cancerProtocols) {
             updateEl("", true);
             return;
           }
-          R.kmTargets[iid] = { targets: km.rowTargets, allTargets: km.allTargets, sid: sid, mid: mid, iid: iid };
-          var kmHtml = knowMoreHtml({ targets: km.rowTargets, allTargets: km.allTargets, sid: sid, mid: mid, iid: iid });
+          R.kmTargets[iid] = { targets: km.rowTargets, allTargets: km.allTargets, cancerProtocols: km.cancerProtocols, sid: sid, mid: mid, iid: iid };
+          var kmHtml = knowMoreHtml({ targets: km.rowTargets, allTargets: km.allTargets, cancerProtocols: km.cancerProtocols, sid: sid, mid: mid, iid: iid });
           updateEl(kmHtml, false);
           return;
         }
@@ -761,7 +920,30 @@
       closeKmSheet();
       return;
     }
+    if (a === "r-cancer-protocols") {
+      var cid = b.getAttribute("data-cancer");
+      openCancerProtocolsSheet(cid, H);
+      return;
+    }
+    if (a === "r-cancer-proto-close") {
+      closeCancerProtocolsSheet();
+      return;
+    }
+    if (a === "r-proto-open") {
+      var pid = b.getAttribute("data-proto-id");
+      closeCancerProtocolsSheet();
+      try {
+        if (G.SMD_PROTOSHEET && G.SMD_PROTOSHEET.open) {
+          G.SMD_PROTOSHEET.open(pid);
+          lift("smdProtoSheet");
+          return;
+        }
+      } catch (e) {}
+      toast(H, "Protocol viewer is not available.");
+      return;
+    }
     if (R.kmSheet) closeKmSheet();
+    if (R.cancerProtoSheet) closeCancerProtocolsSheet();
     if (a === "r-kb") {
       var id = b.getAttribute("data-id");
       try {
@@ -792,7 +974,8 @@
   }
 
   G.PREP_REASON = { has: hasItem, body: function (it, o) { remember(it); return body(it, o); }, slotHtml: slotHtml,
-    fill: fill, act: act, back: function () { return closeKmSheet(); }, linksOf: linksOf, nextAction: nextAction,
+    fill: fill, act: act, back: function () { if (closeCancerProtocolsSheet()) return true; return closeKmSheet(); }, linksOf: linksOf, nextAction: nextAction,
     pref: pref, kmSlot: kmSlot, knowMoreHtml: knowMoreHtml, kmTargets: kmTargets, closeKmSheet: closeKmSheet,
+    openCancerProtocolsSheet: openCancerProtocolsSheet, closeCancerProtocolsSheet: closeCancerProtocolsSheet,
     _pure: PURE, _r: R };
 })(typeof window !== "undefined" ? window : this);
