@@ -189,7 +189,10 @@ export async function onRequestGet(ctx) {
 
   // --- Gated paths: authentication, app proof & rate limits ---
   const reqObj = request || new Request("https://stewardmd.in/api/prep/bank/" + p);
-  const origin = reqObj.headers.get("Origin") || "";
+  let origin = reqObj.headers.get("Origin") || "";
+  if (!origin && reqObj.headers.get("Referer")) {
+    try { origin = new URL(reqObj.headers.get("Referer")).origin; } catch (e) {}
+  }
 
   // 1. Strict Origin check
   if (origin && !isAllowedOrigin(origin)) {

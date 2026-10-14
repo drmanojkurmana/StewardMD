@@ -198,6 +198,49 @@ test("gate [ENFORCE=1]: mint session + valid app proof gets 200 with private no-
   assert.equal(body.items.length, 1);
 });
 
+test("gate [ENFORCE=1]: mint session without Origin header (curl) is refused with 403", async () => {
+  gate.resetBankGateMemory();
+  const env = {
+    PREP_BANK_ENFORCE: "1",
+    MAIK_KV: kv(),
+  };
+  const sessReq = new Request("https://stewardmd.in/api/prep/bank/session", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer tok-a",
+      "Content-Type": "application/json",
+      "X-SMD-Device": "dev-test-1",
+    },
+    body: JSON.stringify({ deviceId: "dev-test-1", appVersion: "1.0.0" }),
+  });
+  const sessRes = await bank.onRequestPost({ env, params: { path: ["session"] }, request: sessReq });
+  assert.equal(sessRes.status, 403);
+  const sessData = await sessRes.json();
+  assert.equal(sessData.code, "origin-required");
+});
+
+test("gate [ENFORCE=1]: mint session with foreign Origin is refused with 403", async () => {
+  gate.resetBankGateMemory();
+  const env = {
+    PREP_BANK_ENFORCE: "1",
+    MAIK_KV: kv(),
+  };
+  const sessReq = new Request("https://stewardmd.in/api/prep/bank/session", {
+    method: "POST",
+    headers: {
+      Origin: "https://evil-site.com",
+      Authorization: "Bearer tok-a",
+      "Content-Type": "application/json",
+      "X-SMD-Device": "dev-test-1",
+    },
+    body: JSON.stringify({ deviceId: "dev-test-1", appVersion: "1.0.0" }),
+  });
+  const sessRes = await bank.onRequestPost({ env, params: { path: ["session"] }, request: sessReq });
+  assert.equal(sessRes.status, 403);
+  const sessData = await sessRes.json();
+  assert.equal(sessData.code, "foreign-origin");
+});
+
 test("gate [ENFORCE=1]: replayed nonce is rejected with 401 replayed-nonce", async () => {
   gate.resetBankGateMemory();
   const memKv = kv();
@@ -467,3 +510,57 @@ test("guard test: gated responses are NEVER Cache-Control public or immutable", 
   assert.doesNotMatch(ccImg, /public/);
   assert.doesNotMatch(ccImg, /immutable/);
 });
+
+test("client compatibility: prep-bank-client HMAC signature verified by server gate", async () => {
+  gate.resetBankGateMemory();
+  const client = (await import("../prep-bank-client.js")).default || (await import("../prep-bank-client.js"));
+  const key = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef";
+  const path = "v1/anatomy/mcq/ana-gametogenesis.json";
+  const ts = Math.floor(Date.now() / 1000);
+  const nonce = "nonce-test-123";
+  const toSign = `${ts}:${path}:${nonce}`;
+
+  const clientSig = client.hmacSha256Hex(key, toSign);
+  const serverSig = await gate.hmacSha256Hex(key, toSign);
+  assert.equal(clientSig, serverSig, "Pure JS client HMAC-SHA256 matches subtle crypto server HMAC-SHA256");
+
+  // Verify full request flow with client headers
+  const memKv = kv();
+  const env = {
+    PREP_BANK_ENFORCE: "1",
+    MAIK_KV: memKv,
+    PREP_BANK_R2: r2({ "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}' }),
+  };
+  const sess = await gate.mintBankSession({ id: "fb:u-a" }, env);
+
+  const req = new Request("https://stewardmd.in/api/prep/bank/" + path, {
+    method: "GET",
+    headers: {
+      Origin: "https://stewardmd.in",
+      Authorization: "Bearer tok-a",
+      "X-SMD-Session": sess.sessionId,
+      "X-SMD-Timestamp": String(ts),
+      "X-SMD-Nonce": nonce,
+      "X-SMD-Signature": client.hmacSha256Hex(sess.sessionKey, toSign),
+    },
+  });
+
+  const res = await bank.onRequestGet({ env, params: { path: path.split("/") }, request: req });
+  assert.equal(res.status, 200);
+});
+
+test("guard test: client does not write question files to persistent caches (cachePut)", async () => {
+  const fs = await import("node:fs/promises");
+  const prepJs = await fs.readFile(new URL("../prep.js", import.meta.url), "utf8");
+  const prepPyqJs = await fs.readFile(new URL("../prep-pyq.js", import.meta.url), "utf8");
+
+  // prep.js should not call cachePut on module or overlay question paths
+  assert.ok(!prepJs.includes('cachePut(p, { items: items'), "loadBank must not put questions in IDB cache");
+  assert.ok(!prepJs.includes('cachePut(p, { sx: sx'), "loadSearchAt must not put search index in IDB cache");
+  assert.ok(!prepJs.includes('cachePut(u, { qf: f'), "loadQuality must not put quality sidecar in IDB cache");
+
+  // prep-pyq.js should not put pyq items in IDB cache
+  assert.ok(!prepPyqJs.includes('host.cachePut(key, f)'), "prep-pyq.js loadItems must not put items in IDB cache");
+  assert.ok(!prepPyqJs.includes('host.cachePut("pyq/index.json"'), "prep-pyq.js loadIndex must not put pyq index in IDB cache");
+});
+

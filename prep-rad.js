@@ -51,8 +51,13 @@
   };
   function svg(n) { return '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + SV[n] + "</svg>"; }
   function esc(s) { return R.host && R.host.esc ? R.host.esc(s) : String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function api() { return (R.host && R.host.bankApi) || "/api/prep/bank/"; }
-  function url(k, wi) { return sliceUrl(api(), R.it.stack, wi == null ? R.wi : wi, k); }
+  function url(k, wi) {
+    var u = sliceUrl(api(), R.it.stack, wi == null ? R.wi : wi, k);
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl) {
+      return G.PREP_BANK_CLIENT.signImageUrl(u);
+    }
+    return u;
+  }
 
   function controls(st, n, k, big) {
     var w = st.w || [], wl = st.wl || w;

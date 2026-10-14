@@ -29,10 +29,12 @@ export async function onRequestOptions({ request }) {
 }
 
 export async function onRequestPost({ request, env }) {
-  const o = request.headers.get("Origin") || "";
-  // If Origin is sent, verify it's allowed
-  if (o && !isAllowedOrigin(o)) {
-    return json({ error: "forbidden", code: "foreign-origin" }, 403);
+  let o = request.headers.get("Origin") || "";
+  if (!o && request.headers.get("Referer")) {
+    try { o = new URL(request.headers.get("Referer")).origin; } catch (e) {}
+  }
+  if (!o || !isAllowedOrigin(o)) {
+    return json({ error: "forbidden", code: !o ? "origin-required" : "foreign-origin", message: "Requests must originate from the StewardMD application" }, 403);
   }
 
   // User auth check: caller must be signed in

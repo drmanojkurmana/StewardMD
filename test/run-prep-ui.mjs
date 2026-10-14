@@ -329,7 +329,7 @@ try {
   ok(await until(`return !document.querySelector("#smdPrep .pt-chat") && !!document.querySelector("#smdPrep .pn-home");`, 3000), "teacher chat: Back to the question leaves the chat");
   await ev(`PREP.close(); delete window.SMD_MAIK_LOCAL; delete window.SMD_MAIK_MODELS; window.Capacitor = window.__capWas; return 1;`);
 
-  // ---- offline: reload, block the bank route, the module still opens from IndexedDB
+  // ---- offline: reload, block the bank route: questions require a connection
   await load(BASE + "?prep=1");
   await call("Network.setBlockedURLs", { urls: ["*" + FIX + "api/*"] });
   await ev(`PREP.open(); return 1;`);
@@ -339,8 +339,9 @@ try {
   await click('#smdPrep .pn-mod[data-m=ana-gametogenesis]');
   await until(`return !!document.querySelector('#smdPrep [data-act=start][data-k=study]');`, 5000);
   await click('#smdPrep [data-act=start][data-k=study]');
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-q");`, 10000), "a module opened once loads offline after a reload");
-  await ev(`PREP.back(); PREP.back(); PREP.back(); return 1;`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-err");`, 10000), "a module opened once requires connection offline after reload");
+  ok(await ev(`return /Questions need a connection/.test(document.querySelector("#smdPrep .pn-err").textContent);`), "shows connection needed message");
+  await ev(`PREP.back(); PREP.back(); return 1;`);
   await until(`return !!document.querySelector('#smdPrep #pnHome');`, 5000);
   await ev(`PREP._host.setExam("neet-ss"); return 1;`);
   await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=ss-cardiology]");`, 5000);

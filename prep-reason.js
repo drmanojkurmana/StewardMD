@@ -452,12 +452,18 @@
   function api(H) { return (H.bankApi || "/api/prep/bank/").replace(/\/?$/, "/"); }
   function cget(H, k) { try { return H.cacheGet ? Promise.resolve(H.cacheGet(k)).then(null, function () { return null; }) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function cput(H, k, v) { try { if (H.cachePut) H.cachePut(k, v); } catch (e) {} }
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
+  function getJSON(url, H) {
+    if (H && H.getJSON) return H.getJSON(url);
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && url && url.indexOf("/api/prep/bank/") >= 0) {
+      return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
   /* The pointer: network first (it names the current shards), the IndexedDB copy offline. */
   function pointer(H) {
     if (R.ptr) return Promise.resolve(R.ptr);
     if (R.ptrP) return R.ptrP;
-    R.ptrP = getJSON(api(H) + VER + "/links/index.json").then(function (p) {
+    R.ptrP = getJSON(api(H) + VER + "/links/index.json", H).then(function (p) {
       R.ptr = p; R.ptrP = null; cput(H, VER + "/links/index.json", p); return p;
     }, function (e) {
       return cget(H, VER + "/links/index.json").then(function (hit) { R.ptrP = null; if (hit && hit.m) { R.ptr = hit; return hit; } throw e; });
@@ -472,7 +478,7 @@
       var rel = "m/" + mid + "-" + String(v).split("/")[1] + ".json", key = VER + "/links/" + rel;
       return cget(H, key).then(function (hit) {
         if (hit && hit.e) return hit;
-        return getJSON(api(H) + VER + "/links/" + rel).then(function (sh) { cput(H, key, sh); return sh; }, function () { return null; });
+        return getJSON(api(H) + VER + "/links/" + rel, H).then(function (sh) { cput(H, key, sh); return sh; }, function () { return null; });
       });
     }, function () { return null; });
   }
