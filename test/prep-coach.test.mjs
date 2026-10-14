@@ -324,7 +324,7 @@ test("mark assets: symbol-only webp at 1x/2x/3x, light and dark, shipped", () =>
 test("coach styles: owner palette, no glows, light and dark, reduced motion", () => {
   const rawCss = fs.readFileSync(new URL("../prep-coach.css", import.meta.url), "utf8");
   const css = rawCss.replace(/\/\*[\s\S]*?\*\//g, "");
-  assert.match(css, /#071318/); assert.match(css, /#0d1d23/i); assert.match(css, /#42cdb5/i);
+  assert.match(css, /#0a0a0a/); assert.match(css, /#141414/i); assert.match(css, /#42cdb5/i);
   assert.doesNotMatch(css, /box-shadow|text-shadow|backdrop|linear-gradient|radial-gradient/);
   assert.match(css, /body\.dark \.pn-root/);
   assert.match(css, /prefers-reduced-motion/);
