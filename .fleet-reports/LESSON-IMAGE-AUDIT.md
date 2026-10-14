@@ -1,24 +1,25 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1288 lessons (88.9%) have zero images; 161 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1290 lessons (88.0%) have zero images; 176 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
 | medicine | 113 | 113 | 0 |
-| anatomy | 80 | 6 | 74 |
-| pathology | 73 | 70 | 3 |
-| pharmacology | 72 | 70 | 2 |
-| biochemistry | 69 | 66 | 3 |
+| anatomy | 80 | 0 | 80 |
+| pathology | 73 | 69 | 4 |
+| pharmacology | 72 | 68 | 4 |
+| biochemistry | 69 | 65 | 4 |
 | surgery | 66 | 65 | 1 |
 | paediatrics | 57 | 57 | 0 |
 | community-medicine | 56 | 42 | 14 |
 | obstetrics-gynaecology | 50 | 50 | 0 |
-| physiology | 49 | 4 | 45 |
+| physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
-| microbiology | 40 | 37 | 3 |
+| microbiology | 40 | 36 | 4 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
 | anaesthesia | 34 | 34 | 0 |
+| orthopaedics | 33 | 33 | 0 |
 | ss-critical-care | 32 | 32 | 0 |
 | ophthalmology | 30 | 30 | 0 |
 | mcc-professional-behaviours | 29 | 29 | 0 |
@@ -34,7 +35,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 | dermatology | 18 | 18 | 0 |
 | population-health-and-ethics | 18 | 16 | 2 |
 | ss-neurology | 18 | 18 | 0 |
-| orthopaedics | 16 | 16 | 0 |
 | forensic-medicine | 15 | 15 | 0 |
 | adult-health-medicine | 13 | 13 | 0 |
 | ss-cardiology | 11 | 11 | 0 |
@@ -185,21 +185,15 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `med-resuscitation`: Cardiac arrest and resuscitation: rhythms to post-ROSC care
 - `med-shock`: Shock and haemodynamic support: types to pressors
 
-### anatomy (6/80 imageless)
+### anatomy (0/80 imageless - 100% complete)
 
-- `ana-germ-layers`: Bilaminar and trilaminar disc, gastrulation and neurulation
-- `ana-mixed`: Mixed practice anatomy: high-yield rapid review
-- `ana-peritoneum`: Peritoneum and peritoneal spaces: lesser sac, foramen of Winslow and key recesses
-- `ana-thyroid-root`: Thyroid, parathyroid and root of neck: anatomy essentials
-- `ana-twinning-teratology`: Twinning, teratogens and congenital anomalies
-- `ana-vessels-lymphatics`: Blood vessels and lymphatics of the head and neck
+All 80 lessons in anatomy carry at least one verified diagram.
 
-### pathology (70/73 imageless)
+### pathology (69/73 imageless)
 
 - `pat-adaptations-accumulations`: Cellular adaptations, accumulations, pigments and calcification
 - `pat-benign-wbc-lymph-node`: Non-neoplastic leukocyte and lymph node disorders: reactive changes and key differentials
 - `pat-carcinogenic-agents`: Carcinogenic agents and oncogenic viruses
-- `pat-cell-injury-necrosis`: Cell injury and necrosis
 - `pat-cytogenetics`: Cytogenetic disorders: karyotyping and key syndromes
 - `pat-hypersensitivity`: Hypersensitivity reactions and transplant rejection
 - `pat-infectious-pathology`: Pathology of Infectious Diseases: Inclusions, Granulomas and Special Stains
@@ -267,7 +261,7 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `pat-male-genital`: Male genital pathology: prostate, testis, penis and scrotum
 - `pat-skin`: Skin pathology: blistering, papulosquamous disease and tumours
 
-### pharmacology (70/72 imageless)
+### pharmacology (68/72 imageless)
 
 - `phm-absorption-routes`: Routes of administration and drug absorption
 - `phm-adverse-reactions`: Adverse drug reactions, interactions and pharmacogenetics
@@ -295,7 +289,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `phm-mixed`: Mixed pharmacology rapid review: antidotes, toxicology and key high-yield drugs
 - `phm-mood-stabilisers`: Mood stabilisers and anxiolytics: lithium and beyond
 - `phm-peptic-ulcer`: Drugs for peptic ulcer and acid disorders
-- `phm-raas`: Renin-angiotensin system drugs: ACE inhibitors and ARBs
 - `phm-serotonin-migraine`: Serotonin, ergot alkaloids and antimigraine drugs
 - `phm-sex-hormones`: Androgens, estrogens, progestins and their antagonists
 - `phm-sulfonamides-quinolones`: Sulfonamides, cotrimoxazole and fluoroquinolones
@@ -307,7 +300,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `phm-asthma-cough`: Drugs for bronchial asthma, COPD and cough
 - `phm-antiemetics`: Antiemetics and prokinetic drugs
 - `phm-laxatives-ibd`: Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease
-- `phm-diuretics`: Diuretics and antidiuretics
 - `phm-antihypertensives`: Antihypertensive drugs
 - `phm-antiarrhythmics`: Antiarrhythmic drugs
 - `phm-shock-pah`: Drugs for shock and pulmonary arterial hypertension
@@ -340,7 +332,7 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### biochemistry (66/69 imageless)
+### biochemistry (65/69 imageless)
 
 - `bio-acid-base-balance`: Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation
 - `bio-aging-cellular-senescence`: Biochemical aging: telomere dynamics, sirtuins, and cellular senescence
@@ -356,7 +348,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `bio-dna-replication-repair`: DNA Structure, Replication and Repair
 - `bio-endocrine-biochemistry`: Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects
 - `bio-enzymes`: Enzymes and clinical enzymology
-- `bio-etc-oxphos`: Mitochondrial bioenergetics: electron transport chain complexes, proton gradient and uncoupling
 - `bio-extracellular-matrix`: Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders
 - `bio-fatty-acid-oxidation`: Fatty acid beta-oxidation, carnitine shuttle and ketogenesis
 - `bio-fatty-acid-synthesis`: Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging
@@ -635,12 +626,9 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `gyn-cervix-endometrium`: SS gyn-oncology: cervical and endometrial cancer staging and therapy
 - `gyn-ovary-vulva-gtn`: SS gyn-oncology: ovarian, vulval and GTN staging and therapy
 
-### physiology (4/49 imageless)
+### physiology (0/49 imageless - 100% complete)
 
-- `phy-acid-base`: Acid-Base Balance and Compensation
-- `phy-body-fluids`: Body fluid compartments and homeostasis
-- `phy-hypothalamus-limbic`: Hypothalamus, limbic system and thermoregulation
-- `phy-motor-reflexes`: Spinal reflexes, motor control and posture
+All 49 lessons in physiology carry at least one verified diagram.
 
 ### ss-medical-oncology (44/44 imageless)
 
@@ -689,12 +677,11 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `son-trial-design`: Clinical trial design and evidence in oncology
 - `son-tumour-markers`: Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest
 
-### microbiology (37/40 imageless)
+### microbiology (36/40 imageless)
 
 - `mic-ag-ab-reactions`: Antigen-antibody reactions and serological tests
 - `mic-bacterial-genetics`: Bacterial genetics and antimicrobial resistance
 - `mic-clostridia-anaerobes`: Clostridia, non-sporing anaerobes and actinomycetes
-- `mic-general-virology`: General virology and prions: structure, replication, culture and prion disease
 - `mic-gram-positive-bacilli`: Corynebacterium, Bacillus and Listeria: High-Yield Essentials
 - `mic-hiv`: HIV and retroviruses: structure, entry, diagnosis and the NACO approach
 - `mic-immune-response`: Immune response, MHC, cytokines and hypersensitivity
@@ -845,6 +832,42 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `ans-obstetric`: Obstetric anaesthesia: labour to crash section
 - `ans-cpr`: Perioperative cardiopulmonary resuscitation: theatre arrest to ROSC
 - `ans-pain`: Acute and chronic pain management: ladders to interventions
+
+### orthopaedics (33/33 imageless)
+
+- `ort-amputation-gait`: Amputations, prosthetics and gait: high-yield essentials
+- `ort-arthritis`: Arthritis and joint replacement: high-yield orthopaedic essentials
+- `ort-elbow-injuries`: Injuries around the elbow in children and adults
+- `ort-femur-knee-injuries`: Femoral shaft fractures and knee injuries
+- `ort-forearm-wrist-injuries`: Forearm and wrist injuries: high-yield lesson
+- `ort-fracture-principles`: Fracture classification, healing and management principles
+- `ort-hip-injuries`: Hip dislocation and proximal femur fractures
+- `ort-knee-foot-conditions`: Knee and foot conditions: high-yield orthopaedics for NEET-PG
+- `ort-leg-ankle-foot-injuries`: Leg, ankle and foot injuries: high-yield eponyms and key signs
+- `ort-mixed`: Orthopaedics mixed rapid review
+- `ort-neuromuscular`: Neuromuscular disorders in orthopaedics
+- `ort-osteonecrosis-osteochondritis`: Osteonecrosis and osteochondritis: high-yield orthopaedics for NEET-PG
+- `ort-pelvis-acetabulum`: Pelvic and acetabular fractures
+- `ort-shoulder-arm-injuries`: Injuries of the shoulder girdle and arm
+- `ort-splints-implants`: Splints, traction, casts and implants
+- `ort-tb-spine`: Tuberculosis of the spine: Pott spine essentials
+- `ort-fracture-complications`: Complications of fractures: early threats to late failures
+- `ort-nerve-injuries`: Peripheral nerve injuries: classify, localise, time repair
+- `ort-hand-injuries`: Hand injuries: metacarpals, tendons, nails and replantation
+- `ort-spinal-injuries`: Spinal injuries: clear, classify and protect the cord
+- `ort-scoliosis-kyphosis`: Spinal deformities: scoliosis curves and kyphosis humps
+- `ort-low-back-pain`: Low back pain: discs, slips, stenosis and red flags
+- `ort-osteomyelitis`: Osteomyelitis: sequestra, sinuses and dead-space surgery
+- `ort-septic-arthritis-joint-tb`: Septic arthritis and joint tuberculosis: wash early, treat long
+- `ort-benign-bone-tumours`: Benign bone tumours: age, site and margin sort them
+- `ort-malignant-bone-tumours`: Malignant bone tumours and metastasis: stage, chemo, salvage
+- `ort-ddh`: Developmental dysplasia of the hip: clunks to osteotomies
+- `ort-ctev`: Clubfoot: Ponseti casting before scalpels
+- `ort-perthes-scfe`: Perthes and SCFE: contain the young, pin the slip
+- `ort-skeletal-dysplasia`: Skeletal dysplasias: FGFR3, brittle bones and storage
+- `ort-metabolic-bone`: Metabolic bone disease: porous, soft and Pagetoid
+- `ort-shoulder-elbow-conditions`: Shoulder and elbow: cuffs, frozen capsules and tennis elbows
+- `ort-hand-wrist-conditions`: Hand and wrist: tunnels, cords, ganglia and lunates
 
 ### ss-critical-care (32/32 imageless)
 
@@ -1253,25 +1276,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `sne-stroke-syndromes`: Ischaemic stroke mechanisms and vascular syndromes
 - `sne-young-stroke-vasculopathies`: Moyamoya disease: stroke in the young
 
-### orthopaedics (16/16 imageless)
-
-- `ort-amputation-gait`: Amputations, prosthetics and gait: high-yield essentials
-- `ort-arthritis`: Arthritis and joint replacement: high-yield orthopaedic essentials
-- `ort-elbow-injuries`: Injuries around the elbow in children and adults
-- `ort-femur-knee-injuries`: Femoral shaft fractures and knee injuries
-- `ort-forearm-wrist-injuries`: Forearm and wrist injuries: high-yield lesson
-- `ort-fracture-principles`: Fracture classification, healing and management principles
-- `ort-hip-injuries`: Hip dislocation and proximal femur fractures
-- `ort-knee-foot-conditions`: Knee and foot conditions: high-yield orthopaedics for NEET-PG
-- `ort-leg-ankle-foot-injuries`: Leg, ankle and foot injuries: high-yield eponyms and key signs
-- `ort-mixed`: Orthopaedics mixed rapid review
-- `ort-neuromuscular`: Neuromuscular disorders in orthopaedics
-- `ort-osteonecrosis-osteochondritis`: Osteonecrosis and osteochondritis: high-yield orthopaedics for NEET-PG
-- `ort-pelvis-acetabulum`: Pelvic and acetabular fractures
-- `ort-shoulder-arm-injuries`: Injuries of the shoulder girdle and arm
-- `ort-splints-implants`: Splints, traction, casts and implants
-- `ort-tb-spine`: Tuberculosis of the spine: Pott spine essentials
-
 ### forensic-medicine (15/15 imageless)
 
 - `fmt-autopsy`: Medicolegal autopsy and exhumation
@@ -1429,6 +1433,10 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1449 lessons). A lesson 
 - `spu-pft`: Pulmonary function tests: spirometry, lung volumes, DLCO and bronchoprovocation
 - `spu-tobacco-environmental`: Nicotine replacement therapy in tobacco cessation
 - `spu-transplant-rehab`: Lung transplantation and pulmonary rehabilitation: referral, allocation and complications
+
+### ss-biostatistics (0/6 imageless - 100% complete)
+
+All 6 lessons in ss-biostatistics carry at least one verified diagram.
 
 ### ss-endocrinology (6/6 imageless)
 

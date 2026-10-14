@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-labelledby="t d">
+<title id="t">External Carotid Artery Branches and Bifurcation</title>
+<desc id="d">Schematic branching tree of the external carotid artery showing the eight branches organized into anterior, medial, posterior, and terminal groups, originating from the common carotid bifurcation at C3-C4.</desc>
+<rect width="800" height="520" fill="#FFFFFF"/>
+<text x="400" y="34" font-size="20" font-weight="700" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">External Carotid Artery: Eight Branches</text>
+<text x="400" y="56" font-size="12.5" font-weight="400" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Bifurcation at C3-C4 (upper border of thyroid cartilage); Internal Carotid gives NO branches in neck</text>
+
+<!-- Main Vessel Tree -->
+<!-- Common Carotid -->
+<line x1="380" y1="450" x2="380" y2="340" stroke="#B42318" stroke-width="12"/>
+<text x="365" y="400" font-size="13" font-weight="700" text-anchor="end" fill="#B42318" font-family="system-ui,sans-serif">Common Carotid (CCA)</text>
+
+<!-- Bifurcation at C3-C4 -->
+<circle cx="380" cy="340" r="8" fill="#071318"/>
+<line x1="380" y1="340" x2="520" y2="340" stroke="#3D5A54" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="525" y="344" font-size="11.5" font-weight="700" fill="#0B6B5B" font-family="system-ui,sans-serif">C3-C4: Upper border of thyroid cartilage</text>
+
+<!-- Internal Carotid (Straight deep, no branches) -->
+<path d="M 380 340 Q 420 280 430 100" fill="none" stroke="#B42318" stroke-width="8" opacity="0.4"/>
+<text x="445" y="160" font-size="13" font-weight="700" fill="#3D5A54" font-family="system-ui,sans-serif">Internal Carotid (ICA)</text>
+<text x="445" y="178" font-size="11" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">(NO neck branches)</text>
+
+<!-- External Carotid (Anterior and branching) -->
+<path d="M 380 340 Q 350 280 340 130" fill="none" stroke="#B42318" stroke-width="8"/>
+<text x="330" y="240" font-size="13" font-weight="700" text-anchor="end" fill="#B42318" font-family="system-ui,sans-serif">ECA Trunk</text>
+
+<!-- 1. Anterior Branches (Left side green cards) -->
+<!-- Superior Thyroid -->
+<path d="M 365 320 Q 310 325 240 335" fill="none" stroke="#0B6B5B" stroke-width="3"/>
+<rect x="70" y="315" width="160" height="36" rx="6" fill="#F4F8F6" stroke="#0B6B5B" stroke-width="1.2"/>
+<text x="150" y="338" font-size="12" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">1. Superior Thyroid</text>
+
+<!-- Lingual -->
+<path d="M 355 270 Q 300 270 240 270" fill="none" stroke="#0B6B5B" stroke-width="3"/>
+<rect x="70" y="252" width="160" height="36" rx="6" fill="#F4F8F6" stroke="#0B6B5B" stroke-width="1.2"/>
+<text x="150" y="275" font-size="12" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">2. Lingual</text>
+
+<!-- Facial -->
+<path d="M 350 220 Q 290 215 240 205" fill="none" stroke="#0B6B5B" stroke-width="3"/>
+<rect x="70" y="190" width="160" height="36" rx="6" fill="#F4F8F6" stroke="#0B6B5B" stroke-width="1.2"/>
+<text x="150" y="212" font-size="12" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">3. Facial</text>
+
+<text x="150" y="175" font-size="12.5" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">ANTERIOR GROUP</text>
+
+<!-- 2. Medial Branch -->
+<path d="M 355 295 Q 370 260 380 230" fill="none" stroke="#B7791F" stroke-width="3"/>
+<rect x="300" y="200" width="150" height="36" rx="6" fill="#FBF8EE" stroke="#B7791F" stroke-width="1.2"/>
+<text x="375" y="222" font-size="11" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">4. Ascending Pharyngeal</text>
+
+<!-- 3. Posterior Branches (Right side amber) -->
+<!-- Occipital -->
+<path d="M 350 240 Q 420 230 540 230" fill="none" stroke="#B7791F" stroke-width="3"/>
+<rect x="550" y="215" width="160" height="36" rx="6" fill="#FBF8EE" stroke="#B7791F" stroke-width="1.2"/>
+<text x="630" y="238" font-size="12" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">5. Occipital</text>
+
+<!-- Posterior Auricular -->
+<path d="M 345 180 Q 430 170 540 170" fill="none" stroke="#B7791F" stroke-width="3"/>
+<rect x="550" y="152" width="160" height="36" rx="6" fill="#FBF8EE" stroke="#B7791F" stroke-width="1.2"/>
+<text x="630" y="175" font-size="12" font-weight="700" text-anchor="middle" fill="#B7791F" font-family="system-ui,sans-serif">6. Posterior Auricular</text>
+
+<!-- 4. Terminal Branches (Top) -->
+<!-- Maxillary -->
+<path d="M 340 130 Q 300 100 240 90" fill="none" stroke="#B42318" stroke-width="3.5"/>
+<rect x="100" y="75" width="130" height="36" rx="6" fill="#FDF2F0" stroke="#B42318" stroke-width="1.2"/>
+<text x="165" y="98" font-size="12" font-weight="700" text-anchor="middle" fill="#B42318" font-family="system-ui,sans-serif">7. Maxillary</text>
+
+<!-- Superficial Temporal -->
+<path d="M 340 130 L 340 70" fill="none" stroke="#B42318" stroke-width="3.5"/>
+<rect x="270" y="50" width="150" height="36" rx="6" fill="#FDF2F0" stroke="#B42318" stroke-width="1.2"/>
+<text x="345" y="73" font-size="12" font-weight="700" text-anchor="middle" fill="#B42318" font-family="system-ui,sans-serif">8. Superficial Temporal</text>
+
+<text x="260" y="120" font-size="11" font-weight="700" fill="#B42318" font-family="system-ui,sans-serif">TERMINAL (in Parotid)</text>
+
+<!-- Mnemonic card bottom -->
+<rect x="150" y="440" width="500" height="50" rx="8" fill="#EAF3F0" stroke="#0B6B5B" stroke-width="1.2"/>
+<text x="400" y="462" font-size="12" font-weight="700" text-anchor="middle" fill="#0B6B5B" font-family="system-ui,sans-serif">Mnemonic: "Some Anatomists Like Freaking Out Poor Medical Students"</text>
+<text x="400" y="480" font-size="11" text-anchor="middle" fill="#071318" font-family="system-ui,sans-serif">Superior thyroid, Ascending pharyngeal, Lingual, Facial, Occipital, Post. auricular, Maxillary, Superficial temporal</text>
+
+<text x="400" y="510" font-size="10.5" text-anchor="middle" fill="#3D5A54" font-family="system-ui,sans-serif">Ophthalmic artery arises from the cerebral portion of the Internal Carotid Artery, not the External Carotid.</text>
+</svg>

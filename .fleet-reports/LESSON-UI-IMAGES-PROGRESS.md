@@ -98,4 +98,38 @@
 - **Action Buttons**: Uniform icon+label filled pills in `prep-action-row.css` matching player bar language.
 - **Test Passes**: `run-prep-ids-ui.mjs` (ALL PASS), `run-prep-lessons-ui.mjs` (ALL PASS), `run-prep-ui.mjs` (ALL PASS), unit suites (action-row, lessons, prep-server 100% PASS).
 
+## Update 2026-10-14 (Wave 2 Medical SVGs: Anatomy & Physiology 100% Complete + Basic Sciences)
+
+- **100% Completion of Anatomy (80/80) & Physiology (49/49)**:
+  - Addressed all remaining 6 imageless Anatomy lessons and all 4 remaining imageless Physiology lessons with custom, verified SVGs.
+  - Anatomy is now 80/80 (100% complete).
+  - Physiology is now 49/49 (100% complete).
+- **15 New Original Medical SVGs**:
+  - Anatomy (6):
+    - `ana-trilaminar-disc.svg` -> `ana-germ-layers` (gastrulation, trilaminar germ disc derivatives)
+    - `ana-epiploic-foramen.svg` -> `ana-peritoneum` (boundaries of foramen of Winslow)
+    - `ana-thyroid-relations.svg` -> `ana-thyroid-root` (thyroid bed relations, RLN, SLN, parathyroids)
+    - `ana-carotid-branches.svg` -> `ana-vessels-lymphatics` (ECA 8 branches vs ICA)
+    - `ana-twinning-timing.svg` -> `ana-twinning-teratology` (monozygotic cleavage timing: Di-Di, Mono-Di, Mono-Mono, conjoined)
+    - `ana-allens-test.svg` -> `ana-mixed` (Allen test collateral circulation)
+  - Physiology (4):
+    - `phy-acid-base-map.svg` -> `phy-acid-base` (Davenport acid-base nomogram)
+    - `phy-fluid-compartments.svg` -> `phy-body-fluids` (60-40-20 fluid distribution)
+    - `phy-appetite-nuclei.svg` -> `phy-hypothalamus-limbic` (hypothalamic hunger vs satiety centers)
+    - `phy-stretch-reflex.svg` -> `phy-motor-reflexes` (monosynaptic stretch reflex and reciprocal inhibition)
+  - Pharmacology (2):
+    - `pharma-nephron-diuretics.svg` -> `phm-diuretics` (tubular segments, transport proteins, diuretic action sites)
+    - `pharma-raas-pathway.svg` -> `phm-raas` (RAAS cascade and pharmacologic targets)
+  - Pathology (1):
+    - `path-necrosis-patterns.svg` -> `pat-cell-injury-necrosis` (6 morphologic patterns of necrosis)
+  - Biochemistry (1):
+    - `bio-etc-complexes.svg` -> `bio-etc-oxphos` (mitochondrial ETC complexes I-IV, ATP synthase, inhibitors)
+  - Microbiology (1):
+    - `micro-viral-structure.svg` -> `mic-general-virology` (enveloped vs naked, helical vs icosahedral architecture)
+- **Scientific Re-verification**: All numbers, labels, physiological constants, and days re-asserted and recorded in `prep/lessons/media/ATTRIBUTION.md`.
+- **Validation**:
+  - All 15 wired lessons pass `checkLesson` with 0 errors.
+  - `node scripts/lesson-diagrams/check.mjs` passes across all 126 lessons, 198 figures with 0 problems.
+  - Overall inventory: 1,466 total lessons, 176 with images, 1,290 zero images.
+
 
