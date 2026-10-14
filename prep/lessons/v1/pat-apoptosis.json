@@ -43,57 +43,11 @@
    "tx": "Apoptosis has two main **initiating pathways**. The intrinsic pathway is triggered inside the cell by stress or loss of growth signals. The extrinsic pathway is triggered by **death receptors** such as Fas (CD95) and TNFR1. Both pathways converge on the activation of caspases. Caspases are cysteine proteases, and they cleave after aspartate residues.",
    "say": "Apoptosis has two main initiating pathways. The intrinsic pathway is triggered inside the cell by stress or loss of growth signals. The extrinsic pathway is triggered by death receptors such as Fas and TNFR1. Both pathways converge on the activation of caspases. Caspases are cysteine proteases, and they cleave after aspartate residues.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Stress or growth factor loss"
-     },
-     {
-      "id": "b",
-      "label": "Mitochondrial leak"
-     },
-     {
-      "id": "c",
-      "label": "Caspase 9"
-     },
-     {
-      "id": "d",
-      "label": "Fas or TNFR1 signal"
-     },
-     {
-      "id": "e",
-      "label": "Caspase 8"
-     },
-     {
-      "id": "f",
-      "label": "Executioner caspases 3 and 6"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "intrinsic"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "d",
-      "e",
-      "extrinsic"
-     ],
-     [
-      "c",
-      "f"
-     ],
-     [
-      "e",
-      "f"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/path-apoptosis-pathways.svg",
+    "alt": "Apoptosis signaling pathways: intrinsic mitochondrial pathway mediated by pro-apoptotic Bax and Bak releasing cytochrome c to activate initiator caspase 9; extrinsic death receptor pathway via FasL or TNF activating initiator caspase 8; both converging on executioner caspases 3, 6, and 7.",
+    "caption": "Apoptosis pathways: intrinsic (mitochondrial/cytochrome c/caspase-9) and extrinsic (death receptor/caspase-8) converge on executioner caspase-3.",
+    "ar": 1.5384615384615385
    }
   },
   {

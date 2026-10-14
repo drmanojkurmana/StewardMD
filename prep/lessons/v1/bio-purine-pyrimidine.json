@@ -123,52 +123,11 @@
    "tx": "Purine catabolism terminates in **uric acid** production catalyzed by molybdenum-containing xanthine oxidase. Uric acid is poorly soluble at physiological pH and body temperature. When serum uric acid exceeds its solubility limit of six-point-eight milligrams per deciliter, monosodium urate crystals precipitate within synovial fluid and periarticular tissues, triggering acute gouty arthritis. Allopurinol and febuxostat inhibit xanthine oxidase, lowering systemic uric acid levels.",
    "say": "Purine catabolism culminates in uric acid generation by xanthine oxidase. Uric acid has limited solubility. Serum concentrations above six-point-eight milligrams per deciliter cause monosodium urate crystal precipitation in joints, precipitating gout. Allopurinol and febuxostat inhibit xanthine oxidase to prevent attacks.",
    "vis": {
-    "kind": "flow",
-    "title": "Uric acid generation and gout pharmacology",
-    "nodes": [
-     {
-      "id": "pur",
-      "label": "Hypoxanthine & Guanine"
-     },
-     {
-      "id": "xan",
-      "label": "Xanthine intermediate"
-     },
-     {
-      "id": "uri",
-      "label": "Uric acid end product"
-     },
-     {
-      "id": "cry",
-      "label": "Monosodium urate crystal deposition"
-     },
-     {
-      "id": "inf",
-      "label": "NLRP3 inflammasome neutrophil arthritis"
-     }
-    ],
-    "edges": [
-     [
-      "pur",
-      "xan",
-      "Xanthine oxidase / Guanase"
-     ],
-     [
-      "xan",
-      "uri",
-      "Inhibited by Allopurinol & Febuxostat"
-     ],
-     [
-      "uri",
-      "cry",
-      "Hyperuricemia >6.8 mg/dL"
-     ],
-     [
-      "cry",
-      "inf",
-      "Needle-shaped negative birefringent crystals"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/bio-purine-pathway.svg",
+    "alt": "Purine metabolism pathway: HGPRT salvage recycling hypoxanthine and guanine back to IMP and GMP (blocked in Lesch-Nyhan syndrome), and Xanthine Oxidase catabolism producing uric acid, inhibited by allopurinol and febuxostat.",
+    "caption": "Purine salvage versus degradation: HGPRT salvages bases; Xanthine Oxidase degrades them to uric acid (target of Allopurinol/Febuxostat).",
+    "ar": 1.5384615384615385
    }
   }
  ],

@@ -76,34 +76,11 @@
    "tx": "Linear transformation via the **Lineweaver-Burk** double-reciprocal plot permits precise graphical determination of kinetic parameters. Plotting inverse initial velocity against inverse substrate concentration produces a straight line. The y-intercept represents the reciprocal of Vmax, while the x-intercept corresponds to the negative reciprocal of Km. Slope of the line equals Km divided by Vmax, simplifying mathematical differentiation of enzyme inhibitors.",
    "say": "The Lineweaver-Burk double-reciprocal plot graphs inverse velocity against inverse substrate concentration. The y-intercept yields the inverse of Vmax, while the x-intercept reveals negative inverse Km. The slope equals Km divided by Vmax, facilitating inhibitor analysis.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Plot coordinate",
-     "Mathematical value",
-     "Inhibitor behavior"
-    ],
-    "rows": [
-     [
-      "Y-intercept",
-      "1 / Vmax",
-      "Unchanged in competitive; elevated in noncompetitive"
-     ],
-     [
-      "X-intercept",
-      "-1 / Km",
-      "Shifts toward origin in competitive; unchanged in noncompetitive"
-     ],
-     [
-      "Slope",
-      "Km / Vmax",
-      "Increased by both competitive and noncompetitive inhibitors"
-     ],
-     [
-      "Parallel lines",
-      "Slope unchanged",
-      "Hallmark of uncompetitive inhibition"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/bio-lineweaver-burk.svg",
+    "alt": "Lineweaver-Burk double reciprocal plot showing 1/V versus 1/[S]. Competitive inhibition line intersects at identical Y-intercept (same 1/Vmax) with X-intercept shifted rightward towards origin (increased Km). Non-competitive inhibition line shares identical X-intercept (same -1/Km) with higher Y-intercept (reduced Vmax).",
+    "caption": "Lineweaver-Burk plot: competitive inhibitors increase Km (same Vmax, same Y-intercept); non-competitive inhibitors decrease Vmax (same Km, same X-intercept).",
+    "ar": 1.5384615384615385
    }
   },
   {
