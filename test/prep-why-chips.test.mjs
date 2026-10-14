@@ -251,14 +251,13 @@ test("CSS design: restrained dark green palette (#071318, #0D1D23, #42CDB5), no 
   assert.ok(!whyCssSlice.includes("box-shadow: 0 0"), "no glowing box-shadow in why chips CSS");
 });
 
-/* ---------- 9. Version and cache-busting tokens ---------- */
-test("cache-busting: index.html and prep-loader.js at prep74, sw.js has whychips and km2 markers", () => {
+test("cache-busting: index.html and prep-loader.js at prep74 or later, sw.js has whychips and km2 markers", () => {
   const indexHtml = read("index.html");
   const loaderJs = read("prep-loader.js");
   const swJs = read("sw.js");
-
-  assert.ok(indexHtml.includes('/prep-loader.js?v=prep74"'), "index.html bumped to prep74");
-  assert.ok(loaderJs.includes('var V = "prep74";'), "prep-loader.js bumped to prep74");
+  const m = loaderJs.match(/var V = "prep(\d+)";/);
+  assert.ok(m && Number(m[1]) >= 74, "prep-loader.js at prep74 or later");
+  assert.ok(indexHtml.includes(`/prep-loader.js?v=prep${m[1]}"`), "index.html matches prep-loader.js version");
   assert.ok(swJs.includes("whychips1"), "sw.js CACHE contains whychips1");
   assert.ok(swJs.includes("km2"), "sw.js CACHE contains the Know more km2 marker");
 });
