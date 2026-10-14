@@ -19,7 +19,7 @@ const require = createRequire(import.meta.url);
 const P = require("../prep.js");
 const read = (f) => fs.readFileSync(path.join(ROOT, f), "utf8");
 
-const SURFACES = ["prep.js", "prep-listfmt.js", "prep-tests.js", "prep-arena.js", "prep-qgen.js",
+const SURFACES = ["prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-tests.js", "prep-arena.js", "prep-qgen.js",
   "prep-social.js", "prep-plan.js", "prep-profiles.js", "prep-lessons.js",
   "specialty-bank.js", "specialty-tools.js", "specialty-learn.js",
   "ophthalmos-learn.js"];

@@ -129,7 +129,9 @@ test("teach: a checked answer is returned, with the prompt and system the model 
   const m = model({ text: "**B** is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.", model: "MAiK Lite" });
   const r = await T.teach(MEDMCQA, 1, { generate: m.generate, lexicon: LEX });
   assert.equal(r.ok, true); assert.equal(r.model, "MAiK Lite");
-  assert.equal(r.text, "B is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.");
+  // Owner 2026-10-15 (explanation-format): the display text keeps the author Markdown; the sheet renders it.
+  // The grounding gate still runs on the cleaned text (see the check-failure test below).
+  assert.equal(r.text, "**B** is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.");
   assert.equal(m.calls.length, 1); assert.equal(m.calls[0].system, T.SYSTEM);
   assert.ok(m.calls[0].prompt.includes("Explanation: " + MEDMCQA.exp) && m.calls[0].prompt.includes("The student chose B"));
 });

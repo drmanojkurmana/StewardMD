@@ -707,6 +707,22 @@
   function lfStem(q) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(q) : esc(q); }
   function lfOpt(o) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o); }
   function lfExp(e) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.exp(e) : null; }
+  /* Render-time explanation text (prep-expfmt.js): paragraphs, the answer sentence in bold, lists, chips.
+     Without the file, null and the caller keeps its previous path. The drug pattern builds once from the
+     app's own drug lexicon (drug-lexicon.js); without it, drugs stay unbolded and everything else applies. */
+  var xfDrugRx = null, xfDrugDone = false;
+  function xfDrugs() {
+    if (!xfDrugDone) {
+      xfDrugDone = true;
+      try {
+        if (G.PREP_EXPFMT && G.SMD_DRUG_LEXICON) xfDrugRx = G.PREP_EXPFMT.drugRx(G.PREP_EXPFMT.drugNames(G.SMD_DRUG_LEXICON));
+      } catch (e) { xfDrugRx = null; }
+    }
+    return xfDrugRx;
+  }
+  function xfCtx(it) { return { o: (it && it.o) || [], a: it && typeof it.a === "number" ? it.a : -1, drugRx: xfDrugs() }; }
+  function xfExp(text, it) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.exp(text, xfCtx(it)) : null; }
+  function xfInline(text, it) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(text, xfCtx(it)) : inlineMd(text); }
   function toast(m) { try { if (G.toast) G.toast(m); } catch (e) {} }
   function today() { return C.dayNum(Date.now(), new Date().getTimezoneOffset()); }
   function fmt(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
@@ -2279,13 +2295,13 @@
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
     if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
-    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || mdLite(legacyExp(why))) + "</div>" + fig;
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || xfExp(why, it) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
     return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
-    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
+    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + xfInline(p, it) + "</span></aside>" : "";
   }
   // The MaiK AI mark (maik-ai-mark.js, one SVG for every Ask MaiK entry); without it, the old avatar picture.
   function mkAv(size) { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: size || 34 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
@@ -2390,7 +2406,7 @@
         (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
-          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
         whyRowHtml(it, chosen, r.i) +
@@ -2759,7 +2775,7 @@
       others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
       var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
@@ -2898,7 +2914,7 @@
     var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
     var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
     paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
@@ -3402,7 +3418,7 @@
     var text = storedForOption(it, opt);
     var L = optLetter(opt), isKey = it && opt === it.a;
     if (text) {
-      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (inlineMd ? inlineMd(text) : esc(text)) + '</div></div>';
+      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(text, xfCtx(it)) : inlineMd(text)) + '</div></div>';
       box.style.display = "";
     } else {
       box.innerHTML = '<div class="pn-why-card pn-why-empty"><p class="pn-why-none">No stored note for this option</p><button type="button" class="pn-why-ask" data-act="why-ask" data-opt="' + opt + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '>Ask MaiK why</button></div>';
