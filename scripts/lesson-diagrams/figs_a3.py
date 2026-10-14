@@ -88,9 +88,9 @@ def popliteal_fossa():
     f.text(235, 365, "Lateral head of", 13, 700, INK, "end"); f.text(235, 382, "gastrocnemius", 13, 700, INK, "end")
     f.text(565, 365, "Medial head of", 13, 700, INK); f.text(565, 382, "gastrocnemius", 13, 700, INK)
     f.circle(400, 215, 16, "#E8C547", INK, 1.8); f.circle(400, 255, 13, "#3E6FA5", INK, 1.8); f.circle(400, 292, 11, RED, INK, 1.8)
-    f.line(416, 215, 600, 245, GREY, 1.1); f.text(604, 249, "Tibial nerve (most superficial)", 12.5, 700, INK)
-    f.line(413, 255, 600, 270, GREY, 1.1); f.text(604, 274, "Popliteal vein", 12.5, 700, INK)
-    f.line(411, 292, 600, 295, GREY, 1.1); f.text(604, 299, "Popliteal artery (deepest)", 12.5, 700, INK)
+    f.line(416, 215, 580, 245, GREY, 1.1); f.text(584, 249, "Tibial nerve (superficial)", 12.5, 700, INK)
+    f.line(413, 255, 580, 270, GREY, 1.1); f.text(584, 274, "Popliteal vein", 12.5, 700, INK)
+    f.line(411, 292, 580, 295, GREY, 1.1); f.text(584, 299, "Popliteal artery (deepest)", 12.5, 700, INK)
     f.text(400, 450, "Common peroneal nerve runs along the medial edge of biceps femoris.", 12.5, 500, GREY, "middle")
     f.text(400, 472, "Roof: popliteal fascia. Floor: popliteal surface of femur, capsule, popliteus.", 12, 400, GREY, "middle")
     return f

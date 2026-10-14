@@ -1,101 +1,107 @@
 {
-  "module": "ana-spinal-cord",
-  "subject": "anatomy",
-  "title": "Spinal cord architecture, ascending and descending pathways",
-  "minutes": 6,
-  "refs": [
-    "Gray's Anatomy for Students",
-    "Snell's Clinical Neuroanatomy"
-  ],
-  "steps": [
-    {
-      "tx": "The **spinal cord** extends from the foramen magnum to the lower border of the first lumbar vertebra in adults, terminating as the conus medullaris. Below this, nerve roots form the cauda equina within the lumbar cistern. The filum terminale anchors the cord to the coccyx. Lumbar puncture is safely performed at the third to fourth or fourth to fifth lumbar interspace, safely below the level of spinal cord termination.",
-      "say": "The spinal cord extends from the foramen magnum to the lower border of the first lumbar vertebra in adults, terminating as the conus medullaris. Below this, nerve roots form the cauda equina within the lumbar cistern. The filum terminale anchors the cord to the coccyx. Lumbar puncture is safely performed at the L3-L4 or L4-L5 interspace, well below the cord.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Adult level",
-          "Infant level"
-        ],
-        "rows": [
-          [
-            "Spinal cord termination",
-            "Lower border of L1",
-            "Upper border of L3"
-          ],
-          [
-            "Dural sac termination",
-            "Lower border of S2",
-            "Lower border of S2"
-          ],
-          [
-            "Preferred lumbar puncture",
-            "L3-L4 or L4-L5",
-            "L4-L5 or L5-S1"
-          ]
-        ]
-      }
+ "module": "ana-spinal-cord",
+ "subject": "anatomy",
+ "title": "Spinal cord architecture, ascending and descending pathways",
+ "minutes": 6,
+ "refs": [
+  "Gray's Anatomy for Students",
+  "Snell's Clinical Neuroanatomy"
+ ],
+ "steps": [
+  {
+   "tx": "The **spinal cord** extends from the foramen magnum to the lower border of the first lumbar vertebra in adults, terminating as the conus medullaris. Below this, nerve roots form the cauda equina within the lumbar cistern. The filum terminale anchors the cord to the coccyx. Lumbar puncture is safely performed at the third to fourth or fourth to fifth lumbar interspace, safely below the level of spinal cord termination.",
+   "say": "The spinal cord extends from the foramen magnum to the lower border of the first lumbar vertebra in adults, terminating as the conus medullaris. Below this, nerve roots form the cauda equina within the lumbar cistern. The filum terminale anchors the cord to the coccyx. Lumbar puncture is safely performed at the L3-L4 or L4-L5 interspace, well below the cord.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Adult level",
+     "Infant level"
+    ],
+    "rows": [
+     [
+      "Spinal cord termination",
+      "Lower border of L1",
+      "Upper border of L3"
+     ],
+     [
+      "Dural sac termination",
+      "Lower border of S2",
+      "Lower border of S2"
+     ],
+     [
+      "Preferred lumbar puncture",
+      "L3-L4 or L4-L5",
+      "L4-L5 or L5-S1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cross-sectional spinal cord architecture features central gray matter surrounded by white columns. The dorsal horn processes sensory input, the ventral horn contains lower motor neuron cell bodies, and the lateral horn from thoracic one to lumbar two contains preganglionic sympathetic neurons. The **spinothalamic tract** transmits pain and temperature. Primary afferents enter via Lissauer tract, synapse in the substantia gelatinosa, and secondary axons decussate across the anterior white commissure.",
+   "say": "Cross-sectional spinal cord architecture features central gray matter surrounded by white columns. The dorsal horn processes sensory input, the ventral horn contains lower motor neuron cell bodies, and the lateral horn from T1 to L2 houses sympathetic neurons. The spinothalamic tract transmits pain and temperature, decussating in the anterior white commissure within one to two segments.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cord-section.svg",
+    "alt": "Cross-section of the spinal cord with labelled grey matter horns and white matter tracts: dorsal columns, lateral corticospinal tract, anterolateral spinothalamic tract, anterior corticospinal tract.",
+    "caption": "Dorsal columns: fine touch and position, same side. Lateral corticospinal: motor, crossed. Spinothalamic: pain and temperature, crossed.",
+    "ar": 1.4815
+   }
+  },
+  {
+   "tx": "The **dorsal column medial lemniscal** pathway conveys conscious proprioception, two-point discrimination and vibration sensation. First-order neurons ascend uncrossed in the gracile fasciculus from the lower body and cuneate fasciculus from the upper body to synapse in the gracile and cuneate nuclei of the medulla. Second-order fibres cross as internal arcuate fibres to form the medial lemniscus, projecting to the ventral posterolateral thalamic nucleus.",
+   "say": "The dorsal column pathway conveys conscious proprioception, two-point discrimination and vibration sensation. First-order neurons ascend uncrossed in the gracile and cuneate fasciculi to synapse in the medulla. Second-order fibres cross as internal arcuate fibres to form the medial lemniscus, projecting to the ventral posterolateral thalamus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dorsal column pathway",
+     "points": [
+      "Vibration, proprioception, fine touch",
+      "Ascends uncrossed in spinal cord",
+      "Decussates in medulla as internal arcuate fibres",
+      "Lesion causes ipsilateral loss below injury"
+     ]
     },
-    {
-      "tx": "Cross-sectional spinal cord architecture features central gray matter surrounded by white columns. The dorsal horn processes sensory input, the ventral horn contains lower motor neuron cell bodies, and the lateral horn from thoracic one to lumbar two contains preganglionic sympathetic neurons. The **spinothalamic tract** transmits pain and temperature. Primary afferents enter via Lissauer tract, synapse in the substantia gelatinosa, and secondary axons decussate across the anterior white commissure.",
-      "say": "Cross-sectional spinal cord architecture features central gray matter surrounded by white columns. The dorsal horn processes sensory input, the ventral horn contains lower motor neuron cell bodies, and the lateral horn from T1 to L2 houses sympathetic neurons. The spinothalamic tract transmits pain and temperature, decussating in the anterior white commissure within one to two segments.",
-      "vis": null
-    },
-    {
-      "tx": "The **dorsal column medial lemniscal** pathway conveys conscious proprioception, two-point discrimination and vibration sensation. First-order neurons ascend uncrossed in the gracile fasciculus from the lower body and cuneate fasciculus from the upper body to synapse in the gracile and cuneate nuclei of the medulla. Second-order fibres cross as internal arcuate fibres to form the medial lemniscus, projecting to the ventral posterolateral thalamic nucleus.",
-      "say": "The dorsal column pathway conveys conscious proprioception, two-point discrimination and vibration sensation. First-order neurons ascend uncrossed in the gracile and cuneate fasciculi to synapse in the medulla. Second-order fibres cross as internal arcuate fibres to form the medial lemniscus, projecting to the ventral posterolateral thalamus.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Dorsal column pathway",
-          "points": [
-            "Vibration, proprioception, fine touch",
-            "Ascends uncrossed in spinal cord",
-            "Decussates in medulla as internal arcuate fibres",
-            "Lesion causes ipsilateral loss below injury"
-          ]
-        },
-        "right": {
-          "title": "Lateral spinothalamic tract",
-          "points": [
-            "Pain and temperature sensation",
-            "Decussates in spinal cord within 1-2 segments",
-            "Ascends in contralateral anterolateral funiculus",
-            "Lesion causes contralateral loss 1-2 levels below"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Brown-Sequard syndrome illustrates spinal cord tract organization following **spinal cord hemisection**. Interruption of the lateral corticospinal tract causes ipsilateral spastic paralysis below the lesion. Interruption of the dorsal columns causes ipsilateral loss of vibration and proprioception below the lesion. Interruption of the crossing spinothalamic fibres causes contralateral loss of pain and temperature starting one to two segments below the injury level.",
-      "say": "Brown-Sequard syndrome illustrates spinal cord tract organization following hemisection. Interruption of the corticospinal tract causes ipsilateral spastic paralysis below the lesion. Dorsal column damage causes ipsilateral loss of vibration and proprioception. Spinothalamic disruption causes contralateral loss of pain and temperature starting one to two segments below.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ap-brain-gross.png",
-        "alt": "Spinal cord cross section and tract somatotopy",
-        "caption": "Cross-sectional schematic of spinal cord funiculi illustrating ascending sensory tracts and descending motor pathways."
-      }
+    "right": {
+     "title": "Lateral spinothalamic tract",
+     "points": [
+      "Pain and temperature sensation",
+      "Decussates in spinal cord within 1-2 segments",
+      "Ascends in contralateral anterolateral funiculus",
+      "Lesion causes contralateral loss 1-2 levels below"
+     ]
     }
-  ],
-  "v": 1,
-  "gen": "AI",
-  "run": "books-pipeline",
-  "model": "gemini-3.8-flash-high",
-  "quiz": [
-    "41c96685-4000-8000-41c9-668512345678",
-    "3ec961cc-4000-8000-3ec9-61cc12345678",
-    "3fc9635f-4000-8000-3fc9-635f12345678"
-  ],
-  "src": [
-    "kb-reference-spinal-cord-tracts-and-syndromes"
-  ],
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true
+   }
+  },
+  {
+   "tx": "Brown-Sequard syndrome illustrates spinal cord tract organization following **spinal cord hemisection**. Interruption of the lateral corticospinal tract causes ipsilateral spastic paralysis below the lesion. Interruption of the dorsal columns causes ipsilateral loss of vibration and proprioception below the lesion. Interruption of the crossing spinothalamic fibres causes contralateral loss of pain and temperature starting one to two segments below the injury level.",
+   "say": "Brown-Sequard syndrome illustrates spinal cord tract organization following hemisection. Interruption of the corticospinal tract causes ipsilateral spastic paralysis below the lesion. Dorsal column damage causes ipsilateral loss of vibration and proprioception. Spinothalamic disruption causes contralateral loss of pain and temperature starting one to two segments below.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.png",
+    "alt": "Spinal cord cross section and tract somatotopy",
+    "caption": "Cross-sectional schematic of spinal cord funiculi illustrating ascending sensory tracts and descending motor pathways."
+   }
   }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "41c96685-4000-8000-41c9-668512345678",
+  "3ec961cc-4000-8000-3ec9-61cc12345678",
+  "3fc9635f-4000-8000-3fc9-635f12345678"
+ ],
+ "src": [
+  "kb-reference-spinal-cord-tracts-and-syndromes"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }
