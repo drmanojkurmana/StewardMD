@@ -40,9 +40,13 @@
  * any of these spellings to the one key that opens.
  * Index (R2 prep-bank/v2/links/, route LINKS_RE): index.json { v, ver, gen, th, n, src, m: { module: "<subject>/<hash8>" },
  * c: { subject: hash8 } } (short cache); m/<module>-<hash8>.json { v, m, s, T: [[kind, id, title]], e: { itemId:
- * [[t, conf, via, sec?]] }, x: { t: [[module, itemId]] }, mod: { ls: [lesson keys], cd: 1 } } and c/<subject>-<hash8>.json
+ * [[t, conf, via, sec?, ev?]] }, x: { t: [[module, itemId]] }, mod: { ls: [lesson keys], cd: 1 } } and c/<subject>-<hash8>.json
  * { v, s, T: [[kind, id, title, nItems, [modules]]] } are immutable. No question text is published. kind is kb/dr/pr/ls;
  * sec routes a KB row to its reader section and a lesson row to its step. ls rows never enter x or c/ files.
+ * ev rides on kt/lt (module/subject fallback tier) rows only: 1 when the item itself evidences the target
+ * (stem, keyed answer or its own tags), 0 for the plain module/subject fallback. The client renders 0 rows
+ * under "Learn this module" and 1 rows with the evidenced wording; rows without ev (older indexes) render
+ * as evidenced only when their score/type says so (a specific via at the bar), else as fallback.
  */
 import fs from "node:fs";
 import os from "node:os";
@@ -550,7 +554,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     ? { key: entry0.ls[0][0], title: entry0.ls[0][1] } : null;
   const filedLs = !L.find((l) => l.own && l.title) && !mappedLs && L.length === 1 && L[0].title ? { key: L[0].key, title: L[0].title } : null;
   const own = L.find((l) => l.own && l.title) || mappedLs || filedLs;
-  if (own && !has.has("ls:" + own.key)) { links.push({ k: "ls", id: own.key, title: own.title, c: 75, v: "lt", sec: "" }); has.add("ls:" + own.key); }
+  if (own && !has.has("ls:" + own.key)) { links.push({ k: "ls", id: own.key, title: own.title, c: 75, v: "lt", sec: "", ev: 0 }); has.add("ls:" + own.key); }
   // Mapped KB/protocol topics fill the kinds' remaining slots (topic tier, routed to the answering section).
   // The module's topic is verified for every item in it: a weak same-target mention below the bar (a typo'd or
   // explanation-only name) is upgraded to the topic tier instead of leaving the item with nothing.
@@ -565,7 +569,7 @@ export function addTopicLinks(links, it, ctx = {}) {
   let promoted = null;
   if (!links.some((l) => (l.k === "kb" || l.k === "pr") && l.c >= SHOW && l.v !== "kt")) {
     promoted = links.filter((l) => (l.k === "kb" || l.k === "pr") && promotable(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0] || null;
-    if (promoted) { promoted.c = SHOW; promoted.v = "kt"; promoted.sec = promoted.k === "kb" ? leadSec(it.q || "") : ""; }
+    if (promoted) { promoted.c = SHOW; promoted.v = "kt"; promoted.sec = promoted.k === "kb" ? leadSec(it.q || "") : ""; promoted.ev = 1; }
   }
   const topicKb = (!entry || !(entry.kb || []).length) && ctx.topicKb && ktOk(ctx.topicKb.title, ktCtx, mid, ctx.topicKb.id) ? [[ctx.topicKb.id, ctx.topicKb.title]] : null;
   const kbList = entry && (entry.kb || []).length ? entry.kb : topicKb || [];
@@ -575,8 +579,9 @@ export function addTopicLinks(links, it, ctx = {}) {
       if (l.c >= SHOW || l.v === "kt") continue;
       // Only an item-evidenced mention (stem, keyed answer or the item's own tags) upgrades to
       // the topic tier; an explanation-only mention of the module article stays below the bar.
-      if (l.k === "kb" && kbList.some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = sec; }
-      else if (l.k === "pr" && entry && (entry.pr || []).some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = ""; }
+      // Upgraded rows are item-evidenced (ev 1), never the plain module fallback.
+      if (l.k === "kb" && kbList.some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = sec; l.ev = 1; }
+      else if (l.k === "pr" && entry && (entry.pr || []).some(([id]) => id === l.id) && (stemEvidenced(it, l, ktCtx, true) || tagEvidenced(it, l, ktCtx))) { l.c = SHOW; l.v = "kt"; l.sec = ""; l.ev = 1; }
     }
     // Per-subtopic topic target: in a mixed module the single mapped article can be another
     // subtopic's article for this item. When no mapped target is named by the item but one of
@@ -587,7 +592,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     let subtopic = null;
     if (!own && !mappedEvidenced) {
       subtopic = links.filter((l) => (l.k === "kb" || l.k === "pr") && promotable(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0] || null;
-      if (subtopic) { subtopic.c = SHOW; subtopic.v = "kt"; if (subtopic.k === "kb") subtopic.sec = sec; }
+      if (subtopic) { subtopic.c = SHOW; subtopic.v = "kt"; if (subtopic.k === "kb") subtopic.sec = sec; subtopic.ev = 1; }
     }
     const kbAnyEvidenced = kbList.some(([id, title]) => stemEvidenced(it, { k: "kb", id, title }, ktCtx));
     const prAnyEvidenced = ((entry && entry.pr) || []).some(([id, title]) => stemEvidenced(it, { k: "pr", id, title }, ktCtx));
@@ -610,15 +615,21 @@ export function addTopicLinks(links, it, ctx = {}) {
     // target. Mapped articles stay where there is no lesson, or where the item evidences the article.
     for (const [id, title] of kbList) {
       if (subtopic || preferSubject || promoted) continue;
-      if (hasShown() && entry && (entry.kb || []).some(([i]) => i === id) && !stemEvidenced(it, { k: "kb", id, title }, ktCtx) && !tagEvidenced(it, { k: "kb", id, title }, ktCtx)) continue;
-      if (!own && kbAnyEvidenced && !stemEvidenced(it, { k: "kb", id, title }, ktCtx)) continue;
-      if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec }); has.add("kb:" + id); }
+      const st = stemEvidenced(it, { k: "kb", id, title }, ktCtx), tg = tagEvidenced(it, { k: "kb", id, title }, ktCtx);
+      if (hasShown() && entry && (entry.kb || []).some(([i]) => i === id) && !st && !tg) continue;
+      if (!own && kbAnyEvidenced && !st) continue;
+      // The ev flag uses the upgrade bar (stem/keyed answer or the item's own tags): a mention in a
+      // wrong option only never counts as item evidence, so the row renders as the module chapter.
+      const evd = stemEvidenced(it, { k: "kb", id, title }, ktCtx, true) || tg;
+      if (!has.has("kb:" + id) && room("kb")) { links.push({ k: "kb", id, title, c: 75, v: "kt", sec, ev: evd ? 1 : 0 }); has.add("kb:" + id); }
     }
     for (const [id, title] of (entry && entry.pr) || []) {
       if (subtopic || preferSubject || promoted) continue;
-      if (hasShown() && !stemEvidenced(it, { k: "pr", id, title }, ktCtx) && !tagEvidenced(it, { k: "pr", id, title }, ktCtx)) continue;
-      if (!own && prAnyEvidenced && !stemEvidenced(it, { k: "pr", id, title }, ktCtx)) continue;
-      if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "" }); has.add("pr:" + id); }
+      const st = stemEvidenced(it, { k: "pr", id, title }, ktCtx), tg = tagEvidenced(it, { k: "pr", id, title }, ktCtx);
+      if (hasShown() && !st && !tg) continue;
+      if (!own && prAnyEvidenced && !st) continue;
+      const evd = stemEvidenced(it, { k: "pr", id, title }, ktCtx, true) || tg;
+      if (!has.has("pr:" + id) && room("pr")) { links.push({ k: "pr", id, title, c: 75, v: "kt", sec: "", ev: evd ? 1 : 0 }); has.add("pr:" + id); }
     }
   }
   // Module-level fallback (kt): a verified majority topic of the module itself, used only when no lesson,
@@ -634,7 +645,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     if (links.filter((l) => l.k === fb.k).length < (MAX[fb.k] || 1) || links.some((l) => l.k === fb.k && l.c < SHOW)) {
       const i = links.findIndex((l) => l.k === fb.k && l.c < SHOW);
       if (links.filter((l) => l.k === fb.k).length >= (MAX[fb.k] || 1) && i >= 0) { has.delete(links[i].k + ":" + links[i].id); links.splice(i, 1); }
-      links.push({ k: fb.k, id: fb.id, title: fb.title || fb.id, c: 75, v: "kt", sec: fb.k === "kb" ? leadSec(it.q || "") : "" });
+      links.push({ k: fb.k, id: fb.id, title: fb.title || fb.id, c: 75, v: "kt", sec: fb.k === "kb" ? leadSec(it.q || "") : "", ev: 0 });
       has.add(fb.k + ":" + fb.id);
     }
   }
@@ -643,8 +654,8 @@ export function addTopicLinks(links, it, ctx = {}) {
   // broader than a module article and cannot name the wrong subtopic's disease.
   if (ctx.subjectLesson && ctx.subjectLesson.key && !links.some((l) => l.c >= SHOW) && !has.has("ls:" + ctx.subjectLesson.key)) {
     const cand2 = links.filter((l) => (l.k === "kb" || l.k === "pr") && l.c >= SPECIFIC_MIN && l.c < SHOW && entityOverlap(it, l, ktCtx)).sort((a, b) => b.c - a.c)[0];
-    if (cand2) { cand2.c = SHOW; cand2.v = "kt"; if (cand2.k === "kb") cand2.sec = leadSec(it.q || ""); }
-    else { links.push({ k: "ls", id: ctx.subjectLesson.key, title: ctx.subjectLesson.title || ctx.subjectLesson.key, c: 75, v: "lt", sec: "" }); has.add("ls:" + ctx.subjectLesson.key); }
+    if (cand2) { cand2.c = SHOW; cand2.v = "kt"; if (cand2.k === "kb") cand2.sec = leadSec(it.q || ""); cand2.ev = 1; }
+    else { links.push({ k: "ls", id: ctx.subjectLesson.key, title: ctx.subjectLesson.title || ctx.subjectLesson.key, c: 75, v: "lt", sec: "", ev: 0 }); has.add("ls:" + ctx.subjectLesson.key); }
   }
   // Specific lesson refinement (at most one besides the module's own): the step showing the item's image wins,
   // then the lesson teaching the item's KB concept, then the book chapter under the concept's heading.
@@ -674,7 +685,7 @@ export function addTopicLinks(links, it, ctx = {}) {
     }
     if (pick) {
       const meta = (ctx.lessonMeta && ctx.lessonMeta.get(pick)) || {};
-      links.push({ k: "ls", id: pick, title: meta.title || pick.replace(/-/g, " "), c: via === "li" ? 85 : via === "lk" ? 80 : 78, v: via, sec });
+      links.push({ k: "ls", id: pick, title: meta.title || pick.replace(/-/g, " "), c: via === "li" ? 85 : via === "lk" ? 80 : 78, v: via, sec, ev: 1 });
     }
   }
   return links;
@@ -732,6 +743,19 @@ export function applyRematch(links, entries) {
     has.add(e.k + ":" + e.id);
   }
   return links;
+}
+
+/* shardRow(t, l) -> the published e row for one link: [t, conf, via] plus sec when set. kt/lt
+   (module/subject fallback tier) rows reserve the sec slot and carry the item-evidence flag
+   (ev 1 item-evidenced, 0 plain fallback) as a fifth element, so the client can relabel plain
+   module/subject fallbacks. Rows without ev (older builds, or a kt/lt row the builder never
+   classified) render as evidenced only when their score/type says so, else fallback. Older
+   clients read r[0..3] positionally and ignore the extra element. */
+export function shardRow(t, l) {
+  const r = [t, l.c, l.v];
+  if (l.sec || l.v === "kt" || l.v === "lt") r.push(l.sec || "");
+  if ((l.v === "kt" || l.v === "lt") && l.ev !== undefined) r.push(l.ev);
+  return r;
 }
 
 /* gapsReport(outDir) -> { items, linked, unlinked } over a built links out dir (fast, no bank needed).
@@ -1036,7 +1060,7 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
   for (const [mid, m] of Array.from(byMod.entries()).sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
     const T = [], tIx = new Map(), e = {}, x = {};
     const t = (l) => { const k = l.k + ":" + l.id; if (!tIx.has(k)) { tIx.set(k, T.length); T.push([l.k, l.id, l.title]); } return tIx.get(k); };
-    for (const [id, links] of m.e) e[id] = links.map((l) => { const r = [t(l), l.c, l.v]; if (l.sec) r.push(l.sec); return r; });
+    for (const [id, links] of m.e) e[id] = links.map((l) => shardRow(t(l), l));
     for (const [k, i] of tIx) {
       if (T[i][0] === "ls") continue;   // lessons stay out of related questions and concept files
       const others = (byTarget.get(k) || []).filter((r) => r.mid !== mid).sort((a, b) => (b.sid === m.sid) - (a.sid === m.sid) || b.c - a.c || (a.id < b.id ? -1 : 1)).slice(0, 8);

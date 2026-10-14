@@ -1715,6 +1715,14 @@ body.dark .pn-root .pn-km-btn:active { background: var(--pn-km-card-press); }
 body.dark .pn-root .pn-km-btn small { color: var(--pn-km-mut); }
 body.dark .pn-root .pn-km-btn b { color: var(--pn-km-ink); }
 body.dark .pn-root .pn-km-count { color: var(--pn-km-mint); }
+/* "Learn this module" fallback rows: the same 44px shape, the module name as subtitle, neutral secondary
+   colours only, never the mint accent or topic wording. Tokens only, so light and dark follow. */
+.pn-root .pn-km-btn small { font-size: 13px; line-height: 1.35; color: var(--pn-mut); overflow-wrap: anywhere; }
+.pn-root .pn-km-btn.pn-km-fb { background: var(--pn-card); border-color: var(--pn-edge); }
+body.dark .pn-root .pn-km-btn.pn-km-fb { background: var(--pn-card); border-color: var(--pn-edge); }
+body.dark .pn-root .pn-km-btn.pn-km-fb:active { background: var(--pn-s1); }
+body.dark .pn-root .pn-km-btn.pn-km-fb b { color: var(--pn-text); }
+body.dark .pn-root .pn-km-btn.pn-km-fb small { color: var(--pn-mut); }
 
 /* Know more bottom sheet */
 #pnKmSheet.pn-sheet-wrap { z-index: 920; }
