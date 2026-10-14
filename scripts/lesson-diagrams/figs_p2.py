@@ -200,7 +200,7 @@ def follicle_stages():
      "Normal A-a gradient is under about 15 mmHg; hypoventilation lowers PaO2 with a normal gradient.")
 def aa_gradient():
     return graph("x", "Alveolar gas equation and the A-a gradient", "d", [[("a", "Inspired PO2 = 0.21 x (760 - 47) = about 150 mmHg")], [("b", "Minus PaCO2 / R = 40 / 0.8 = 50 mmHg")], [("c", "Alveolar PO2 (PAO2) = about 100 mmHg")], [("d", "Minus arterial PO2 (PaO2) about 90 mmHg")], [("e", "A-a gradient about 10 mmHg (normal below about 15, rises with age)")], [("f", "Wide gradient: V/Q mismatch, shunt, diffusion defect.\nNormal gradient, low PaO2: hypoventilation, low FiO2")]],
-                 [("a", "b"), ("b", "c"), ("c", "d"), ("d", "e"), ("e", "f")], "FiO2 0.21, barometric pressure 760, water vapour 47, respiratory quotient 0.8", cw=520, rh=44, gap=18, top=90, nodestyle={"c": ST_A, "f": ST_R})
+                 [("a", "b"), ("b", "c"), ("c", "d"), ("d", "e"), ("e", "f")], "FiO2 0.21, barometric pressure 760, water vapour 47, respiratory quotient 0.8", cw=520, rh=50, gap=16, top=90, nodestyle={"c": ST_A, "f": ST_R})
 
 @fig("phy-haemostasis", 0, "Primary haemostasis: vascular spasm, platelet adhesion by von Willebrand factor binding GPIb to collagen, activation releasing ADP and thromboxane A2, aggregation through GPIIb IIIa and fibrinogen; aspirin blocks thromboxane, clopidogrel blocks the ADP receptor, abciximab blocks GPIIb IIIa.",
      "Adhesion (vWF, GPIb), activation (ADP, TXA2), aggregation (GPIIb/IIIa, fibrinogen); each step has a drug.")

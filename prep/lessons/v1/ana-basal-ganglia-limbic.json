@@ -1,112 +1,112 @@
 {
- "module": "ana-basal-ganglia-limbic",
- "subject": "anatomy",
- "title": "Basal ganglia circuitry and the limbic system",
- "minutes": 6,
- "refs": [
-  "Gray's Anatomy for Students",
-  "Snell's Clinical Neuroanatomy"
- ],
- "steps": [
-  {
-   "tx": "The **basal ganglia** are subcortical gray nuclei that modulate motor planning, procedural learning and cognitive habits. The corpus striatum comprises the caudate nucleus and lentiform nucleus. The lentiform nucleus is subdivided into the outer putamen and inner globus pallidus. Functionally linked structures include the subthalamic nucleus in the diencephalon and the substantia nigra in the midbrain. They influence cortical activity via thalamocortical loops.",
-   "say": "The basal ganglia are subcortical gray nuclei that modulate motor planning, procedural learning and cognitive habits. The corpus striatum comprises the caudate nucleus and lentiform nucleus, subdivided into putamen and globus pallidus. Functionally linked structures include the subthalamic nucleus and substantia nigra, influencing cortical activity via thalamocortical loops.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Nucleus",
-     "Component",
-     "Primary neurotransmitter output"
-    ],
-    "rows": [
-     [
-      "Caudate",
-      "Dorsal striatum",
-      "GABAergic inhibitory output"
-     ],
-     [
-      "Putamen",
-      "Dorsal striatum",
-      "GABAergic inhibitory output"
-     ],
-     [
-      "Globus pallidus internus",
-      "Main output nucleus",
-      "GABAergic inhibition to thalamus"
-     ],
-     [
-      "Subthalamic nucleus",
-      "Indirect pathway regulator",
-      "Glutamatergic excitation to pallidum"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Motor regulation proceeds via balanced direct and indirect pathways. The **direct pathway** facilitates movement: striatal D1 receptor activation inhibits the internal globus pallidus, disinhibiting the motor thalamus and activating the cerebral cortex. The **indirect pathway** suppresses movement: striatal D2 receptor activation inhibits the external globus pallidus, disinhibiting the subthalamic nucleus, which excites the internal globus pallidus, suppressing the thalamus.",
-   "say": "Motor regulation proceeds via balanced direct and indirect pathways. The direct pathway facilitates movement: striatal D1 receptor activation inhibits the internal globus pallidus, disinhibiting the thalamus and activating cortex. The indirect pathway suppresses movement through subthalamic excitation of the globus pallidus, dampening thalamic drive.",
-   "vis": {
-    "kind": "image",
-    "src": "prep/lessons/media/ana-bg-pathways.svg",
-    "alt": "Wiring diagram of the basal ganglia. Cortex excites striatum. Direct pathway: striatum D1 inhibits GPi, which frees the thalamus to excite cortex. Indirect pathway: striatum D2 inhibits GPe, which frees the subthalamic nucleus to excite GPi, which inhibits thalamus. Substantia nigra pars compacta dopamine excites D1 cells and inhibits D2 cells.",
-    "caption": "Direct pathway releases movement (two inhibitions make an excitation); indirect pathway brakes it; dopamine pushes toward movement.",
-    "ar": 1.4286
-   }
-  },
-  {
-   "tx": "Disruption of basal ganglia circuits produces classic movement disorders. In Parkinson disease, degeneration of dopaminergic neurons in the **substantia nigra pars compacta** reduces direct pathway drive and increases indirect pathway activity, producing rigidity, bradykinesia, resting tremor and postural instability. In Huntington disease, loss of striatal GABAergic neurons causes chorea. Subthalamic nucleus infarction produces violent contralateral hemiballismus.",
-   "say": "Disruption of basal ganglia circuits produces classic movement disorders. In Parkinson disease, loss of dopaminergic neurons in substantia nigra pars compacta reduces direct pathway drive, causing bradykinesia, rigidity and resting tremor. In Huntington disease, striatal neuronal loss causes chorea. Subthalamic stroke causes contralateral hemiballismus.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Parkinson disease",
-     "points": [
-      "Substantia nigra dopamine loss",
-      "Overactive indirect pathway inhibition",
-      "Hypokinetic state with bradykinesia",
-      "Cogwheel rigidity and resting tremor"
-     ]
+  "module": "ana-basal-ganglia-limbic",
+  "subject": "anatomy",
+  "title": "Basal ganglia circuitry and the limbic system",
+  "minutes": 6,
+  "refs": [
+    "Gray's Anatomy for Students",
+    "Snell's Clinical Neuroanatomy"
+  ],
+  "steps": [
+    {
+      "tx": "The **basal ganglia** are subcortical gray nuclei that modulate motor planning, procedural learning and cognitive habits. The corpus striatum comprises the caudate nucleus and lentiform nucleus. The lentiform nucleus is subdivided into the outer putamen and inner globus pallidus. Functionally linked structures include the subthalamic nucleus in the diencephalon and the substantia nigra in the midbrain. They influence cortical activity via thalamocortical loops.",
+      "say": "The basal ganglia are subcortical gray nuclei that modulate motor planning, procedural learning and cognitive habits. The corpus striatum comprises the caudate nucleus and lentiform nucleus, subdivided into putamen and globus pallidus. Functionally linked structures include the subthalamic nucleus and substantia nigra, influencing cortical activity via thalamocortical loops.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nucleus",
+          "Component",
+          "Primary neurotransmitter output"
+        ],
+        "rows": [
+          [
+            "Caudate",
+            "Dorsal striatum",
+            "GABAergic inhibitory output"
+          ],
+          [
+            "Putamen",
+            "Dorsal striatum",
+            "GABAergic inhibitory output"
+          ],
+          [
+            "Globus pallidus internus",
+            "Main output nucleus",
+            "GABAergic inhibition to thalamus"
+          ],
+          [
+            "Subthalamic nucleus",
+            "Indirect pathway regulator",
+            "Glutamatergic excitation to pallidum"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Hemiballismus",
-     "points": [
-      "Subthalamic nucleus lacunar stroke",
-      "Loss of excitatory pallidal drive",
-      "Hyperkinetic flinging movements",
-      "Affects contralateral arm and leg"
-     ]
+    {
+      "tx": "Motor regulation proceeds via balanced direct and indirect pathways. The **direct pathway** facilitates movement: striatal D1 receptor activation inhibits the internal globus pallidus, disinhibiting the motor thalamus and activating the cerebral cortex. The **indirect pathway** suppresses movement: striatal D2 receptor activation inhibits the external globus pallidus, disinhibiting the subthalamic nucleus, which excites the internal globus pallidus, suppressing the thalamus.",
+      "say": "Motor regulation proceeds via balanced direct and indirect pathways. The direct pathway facilitates movement: striatal D1 receptor activation inhibits the internal globus pallidus, disinhibiting the thalamus and activating cortex. The indirect pathway suppresses movement through subthalamic excitation of the globus pallidus, dampening thalamic drive.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ana-bg-pathways.svg",
+        "alt": "Wiring diagram of the basal ganglia. Cortex excites striatum. Direct pathway: striatum D1 inhibits GPi, which frees the thalamus to excite cortex. Indirect pathway: striatum D2 inhibits GPe, which frees the subthalamic nucleus to excite GPi, which inhibits thalamus. Substantia nigra pars compacta dopamine excites D1 cells and inhibits D2 cells.",
+        "caption": "Direct pathway releases movement (two inhibitions make an excitation); indirect pathway brakes it; dopamine pushes toward movement.",
+        "ar": 1.4286
+      }
+    },
+    {
+      "tx": "Disruption of basal ganglia circuits produces classic movement disorders. In Parkinson disease, degeneration of dopaminergic neurons in the **substantia nigra pars compacta** reduces direct pathway drive and increases indirect pathway activity, producing rigidity, bradykinesia, resting tremor and postural instability. In Huntington disease, loss of striatal GABAergic neurons causes chorea. Subthalamic nucleus infarction produces violent contralateral hemiballismus.",
+      "say": "Disruption of basal ganglia circuits produces classic movement disorders. In Parkinson disease, loss of dopaminergic neurons in substantia nigra pars compacta reduces direct pathway drive, causing bradykinesia, rigidity and resting tremor. In Huntington disease, striatal neuronal loss causes chorea. Subthalamic stroke causes contralateral hemiballismus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parkinson disease",
+          "points": [
+            "Substantia nigra dopamine loss",
+            "Overactive indirect pathway inhibition",
+            "Hypokinetic state with bradykinesia",
+            "Cogwheel rigidity and resting tremor"
+          ]
+        },
+        "right": {
+          "title": "Hemiballismus",
+          "points": [
+            "Subthalamic nucleus lacunar stroke",
+            "Loss of excitatory pallidal drive",
+            "Hyperkinetic flinging movements",
+            "Affects contralateral arm and leg"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Papez circuit** connects limbic structures critical for emotional processing and episodic memory consolidation. Hippocampal pyramidal neurons project via the fornix to the mamillary bodies of the hypothalamus. The mamillothalamic tract connects mamillary bodies to the anterior thalamic nucleus. Thalamic projections radiate to the cingulate gyrus, which projects via the entorhinal cortex back to the hippocampus, completing the loop.",
+      "say": "The Papez circuit connects limbic structures critical for emotional processing and episodic memory consolidation. Hippocampal neurons project via the fornix to the mamillary bodies. The mamillothalamic tract connects mamillary bodies to the anterior thalamus, which radiates to the cingulate gyrus, projecting back to the hippocampus.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-brain-gross.png",
+        "alt": "Basal ganglia and limbic system anatomy",
+        "caption": "Coronal and axial planes detailing caudate, lentiform nucleus, subthalamic connections and limbic circuitry."
+      }
     }
-   }
-  },
-  {
-   "tx": "The **Papez circuit** connects limbic structures critical for emotional processing and episodic memory consolidation. Hippocampal pyramidal neurons project via the fornix to the mamillary bodies of the hypothalamus. The mamillothalamic tract connects mamillary bodies to the anterior thalamic nucleus. Thalamic projections radiate to the cingulate gyrus, which projects via the entorhinal cortex back to the hippocampus, completing the loop.",
-   "say": "The Papez circuit connects limbic structures critical for emotional processing and episodic memory consolidation. Hippocampal neurons project via the fornix to the mamillary bodies. The mamillothalamic tract connects mamillary bodies to the anterior thalamus, which radiates to the cingulate gyrus, projecting back to the hippocampus.",
-   "vis": {
-    "kind": "image",
-    "src": "prep/lessons/media/ap-brain-gross.png",
-    "alt": "Basal ganglia and limbic system anatomy",
-    "caption": "Coronal and axial planes detailing caudate, lentiform nucleus, subthalamic connections and limbic circuitry."
-   }
+  ],
+  "v": 1,
+  "gen": "AI",
+  "run": "books-pipeline",
+  "model": "gemini-3.8-flash-high",
+  "quiz": [
+    "ab84d67d-4000-8000-ab84-d67d12345678",
+    "a884d1c4-4000-8000-a884-d1c412345678",
+    "a984d357-4000-8000-a984-d35712345678"
+  ],
+  "src": [
+    "kb-reference-basal-ganglia-circuits-and-disorders"
+  ],
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "v": 1,
- "gen": "AI",
- "run": "books-pipeline",
- "model": "gemini-3.8-flash-high",
- "quiz": [
-  "ab84d67d-4000-8000-ab84-d67d12345678",
-  "a884d1c4-4000-8000-a884-d1c412345678",
-  "a984d357-4000-8000-a984-d35712345678"
- ],
- "src": [
-  "kb-reference-basal-ganglia-circuits-and-disorders"
- ],
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true
- }
 }
