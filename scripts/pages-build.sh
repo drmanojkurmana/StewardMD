@@ -52,7 +52,8 @@ rm -rf \
 # Also drop links that resolve outside the repo: Pages cannot read those either.
 root=$(pwd -P)
 find . -path ./.git -prune -o -type l -print0 | while IFS= read -r -d '' l; do
-  t=$(realpath "$l" 2>/dev/null || true)
+  # [ -e ] first: GNU realpath returns a path for a dangling link, so it alone would keep it.
+  if [ -e "$l" ]; then t=$(realpath "$l" 2>/dev/null || true); else t=; fi
   case "$t" in "$root"/*) ;; *) rm -f "$l"; echo "pages-build: removed link $l" ;; esac
 done
 
