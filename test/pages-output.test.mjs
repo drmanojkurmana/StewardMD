@@ -1,7 +1,7 @@
 /* Cloudflare Pages output guard. Pages deploys the repo root, caps a site at
  * 20,000 files and 25 MiB per file, and compiles functions/ separately (they
  * do not count as site files). On 2026-10-13 the static count crossed 20,000
- * (19,734 -> 20,284) and every production build failed for days while OTA
+ * (19,737 -> 20,289 at 7c1c07f5a) and every production build failed for days while OTA
  * kept shipping, so no server code deployed. This test replays the Pages
  * build's exclusion list (scripts/pages-build.sh, the single source of
  * truth) over `git ls-files` and fails well before either cap: at most
@@ -52,7 +52,7 @@ test("no pages output file exceeds 24 MiB", () => {
 
 test("pages build keeps functions and runtime dirs", () => {
   const excluded = pagesExclusions();
-  for (const kept of ["functions", "connect-agent", "atlas", "kb/dist", "prep/lessons", "data", "assets"]) {
+  for (const kept of ["functions", "connect-agent", "atlas", "kb/dist", "prep/lessons", "data", "assets", "tokos-models", "narke-models", "wardsynq", "scripts"]) {
     assert.ok(!excluded.includes(kept), `scripts/pages-build.sh must not exclude runtime path ${kept}`);
   }
 });
