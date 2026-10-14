@@ -317,8 +317,23 @@
     var b = function (v, label) { var on = S.mode === v, dis = v === "local" && !canLocal; return '<button type="button" class="pa-sb' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="ak-mode" data-v="' + v + '"' + (dis ? ' aria-disabled="true"' : "") + ">" + label + "</button>"; };
     return '<div class="pa-seg" role="radiogroup" aria-label="Where MaiK answers">' + b("local", "On this phone") + b("online", "Online") + "</div>";
   }
+  /* Ask MaiK text (prep-expfmt.js when loaded): MaiK answers use Markdown bold and bullets, so they render
+     through the same safe renderer as stored explanations; without it, the previous plain path. */
+  var paDrugRx = null, paDrugDone = false;
+  function paDrugs() {
+    if (!paDrugDone) {
+      paDrugDone = true;
+      try {
+        if (G.PREP_EXPFMT && G.SMD_DRUG_LEXICON) paDrugRx = G.PREP_EXPFMT.drugRx(G.PREP_EXPFMT.drugNames(G.SMD_DRUG_LEXICON));
+      } catch (e) { paDrugRx = null; }
+    }
+    return paDrugRx;
+  }
+  function paCtx(item) { return { o: (item && item.o) || [], a: item && typeof item.a === "number" ? item.a : -1, drugRx: paDrugs() }; }
+  function paInline(t, item) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(t, paCtx(item)) : esc(t); }
   // Paragraphs, and runs of "- " lines as a list. Text only (escaped).
-  function para(t) {
+  function para(t, item) {
+    if (G.PREP_EXPFMT) { try { var h = G.PREP_EXPFMT.exp(t, paCtx(item)); if (h) return h; } catch (e) {} }
     var out = "", list = [];
     var flush = function () { if (list.length) { out += '<ul class="pa-ul">' + list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>"; list = []; } };
     String(t || "").split(/\n+/).forEach(function (p) {
@@ -331,10 +346,10 @@
   }
   function storedHtml() {
     var c = S.ctx, p = P();
-    if (c.kind !== "mcq") return para(String(c.step.tx || "").replace(/\*\*/g, ""));
+    if (c.kind !== "mcq") return para(String(c.step.tx || ""));
     var f = p.fallbackFor(c.item, chosenOf(c));
-    return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
-      (f.exp ? ((G.PREP_LISTFMT && G.PREP_LISTFMT.exp(f.exp)) || para(f.exp)) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + esc(f.kp) + "</p>" : "");
+    return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why, c.item) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
+      (f.exp ? ((G.PREP_LISTFMT && G.PREP_LISTFMT.exp(f.exp)) || para(f.exp, c.item)) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + paInline(f.kp, c.item) + "</p>" : "");
   }
   function typing(cap) { return '<li class="pt-msg ai" data-key="typing">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + cap + "</p></div></li>"; }
   function reply(key, html, note, last) { return '<li class="pt-msg ai" data-key="' + key + '">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b' + (last ? " pa-last" : "") + '"' + (last ? ' role="status"' : "") + ' tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }

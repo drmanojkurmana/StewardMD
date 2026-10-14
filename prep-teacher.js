@@ -528,11 +528,26 @@
     var token = "pt" + (++seq), S = { phase: "wait", res: null, t0: 0 }, esc = host.esc;
     var a = keyOf(item), c = typeof chosenIndex === "number" ? chosenIndex : -1, wrong = c >= 0 && c !== a;
     var title = wrong ? "Why is " + letter(c) + " wrong?" : "Why is " + letter(a) + " right?";
-    function para(t) { return str(t).split(/\n{2,}/).map(function (p) { return '<p class="pn-exp">' + esc(p.trim()) + "</p>"; }).join(""); }
+    var ptDrugRx = null, ptDrugDone = false;
+    function ptDrugs() {
+      if (!ptDrugDone) {
+        ptDrugDone = true;
+        try {
+          if (G.PREP_EXPFMT && G.SMD_DRUG_LEXICON) ptDrugRx = G.PREP_EXPFMT.drugRx(G.PREP_EXPFMT.drugNames(G.SMD_DRUG_LEXICON));
+        } catch (e) { ptDrugRx = null; }
+      }
+      return ptDrugRx;
+    }
+    /* Stored explanations render through the same safe renderer as the question screen
+       (prep-expfmt.js): without it, the previous plain path. */
+    function para(t) {
+      if (G.PREP_EXPFMT) { try { var h = G.PREP_EXPFMT.exp(t, { o: (item && item.o) || [], a: -1, drugRx: ptDrugs() }); if (h) return h; } catch (e) {} }
+      return str(t).split(/\n{2,}/).map(function (p) { return '<p class="pn-exp">' + esc(p.trim()) + "</p>"; }).join("");
+    }
     function stored(f) {
       return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") +
         "<h3>Answer " + esc(f.key) + "</h3>" + (f.exp ? ((G.PREP_LISTFMT && G.PREP_LISTFMT.exp(f.exp)) || para(f.exp)) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') +
-        (f.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(f.kp) + "</p>" : "");
+        (f.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + (G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(f.kp, { o: [], a: -1, drugRx: ptDrugs() }) : esc(f.kp)) + "</p>" : "");
     }
     var ctx = '<section class="pt-ctx" aria-label="The question"><p class="pt-q">' + esc(str(item.q)) + '</p><p class="pt-pills">' +
       (c >= 0 ? '<span class="pt-pill ' + (wrong ? "bad" : "ok") + '">You chose ' + letter(c) + "</span>" : "") + (a >= 0 ? '<span class="pt-pill ok">Answer ' + letter(a) + "</span>" : "") + "</p></section>";

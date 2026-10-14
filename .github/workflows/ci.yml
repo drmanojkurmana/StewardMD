@@ -139,3 +139,23 @@ jobs:
       # Clinical Bulletins (signed practice updates on the disease reader + Review Desk signing tab).
       - name: Clinical Bulletins UI harness
         run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" node test/run-bulletins-ui.mjs
+
+  # TEMPORARY for explanation-format-1015 (reverted before merge): 390 px light/dark screenshots of the
+  # formatted explanations, since no browser launches in the job sandbox. Own job so it can never red clinix-ui.
+  # The committed harness (test/run-prep-expfmt-ui.mjs) stays for reruns.
+  expfmt-shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Explanation-format browser check + screenshots
+        run: CHROME="$(command -v google-chrome || command -v chromium)" CHROME_FLAGS="--disable-dev-shm-usage" SHOTS=$PWD/shots-expfmt node test/run-prep-expfmt-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: expfmt-shots
+          path: shots-expfmt/
+          if-no-files-found: warn
