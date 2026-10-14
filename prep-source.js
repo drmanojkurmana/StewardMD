@@ -377,6 +377,69 @@
     if (r.pages.length > cap) return { error: capMsg(cap, r.pages.length) };
     return { sel: r.pages };
   }
+  /* ---------- the From/To window (owner 2026-10-15, PDF module page picker) ----------
+     Two digits-only fields replace the free-text range box, because the iOS number pad has no hyphen or comma.
+     Every result is plain words; an over-long window carries a one-tap fix, a reversed one a swap. */
+  function numOrNull(v) { var s = String(v == null ? "" : v).replace(/\s+/g, ""); return /^\d{1,4}$/.test(s) ? +s : null; }
+  // { sel, from, to, count } or { error, fix? { from, to }, swap? { from, to } }. from/to may be numbers or strings.
+  function clampWindow(from, to, total, cap) {
+    cap = cap || PAGE_CAP;
+    var a = numOrNull(from), b = numOrNull(to);
+    if (a == null || b == null) return { error: "Type the first and last page numbers." };
+    if (a < 1 || b < 1 || a > total || b > total) return { error: "This PDF has " + total + " pages." };
+    if (b < a) return { error: "The last page comes before the first page.", swap: { from: b, to: a } };
+    var n = b - a + 1;
+    if (n > cap) {
+      var f2 = Math.min(a, Math.max(1, total - cap + 1)), t2 = Math.min(total, f2 + cap - 1);
+      return { error: "That is " + n + " pages. One module holds up to " + cap + ".", fix: { from: f2, to: t2 } };
+    }
+    var sel = []; for (var p = a; p <= b; p++) sel.push(p);
+    return { sel: sel, from: a, to: b, count: n };
+  }
+  // A valid window -> the same spec the typed box uses ("752-811", or "752" for one page), so the request is unchanged.
+  function windowSpec(from, to) { return from === to ? String(from) : from + "-" + to; }
+  // The window after the pages already used, or null when the book is done.
+  function nextWindow(sel, total, cap) {
+    cap = cap || PAGE_CAP;
+    var hi = 0; (sel || []).forEach(function (p) { if (+p > hi) hi = +p; });
+    var from = hi + 1;
+    if (from > total) return null;
+    return { from: from, to: Math.min(total, from + cap - 1) };
+  }
+  // One history slot per file, so "done" markers follow the book, not the phone.
+  function pdfHistKey(name, bytes) { return String(name || "") + "|" + (+bytes || 0); }
+  /* The PDF's own chapter list (pdf.js outline) as [{ title, page }], depth-first, pages 1-based. Named destinations
+     are resolved through the document; anything unresolvable is left out, and a PDF without an outline gives []. */
+  function readOutline(doc) {
+    if (!doc || typeof doc.getOutline !== "function") return Promise.resolve([]);
+    var destPage = function (dest) {
+      if (dest == null) return Promise.resolve(0);
+      var ref = Array.isArray(dest) ? dest[0] : dest;
+      if (typeof ref === "string") {
+        if (typeof doc.getDestination !== "function") return Promise.resolve(0);
+        return doc.getDestination(ref).then(destPage, function () { return 0; });
+      }
+      if (ref == null || typeof doc.getPageIndex !== "function") return Promise.resolve(0);
+      return doc.getPageIndex(ref).then(function (i) { return (i | 0) + 1; }, function () { return 0; });
+    };
+    var resolveItems = function (items) {
+      var jobs = [];
+      (items || []).forEach(function (it) {
+        var title = String((it && it.title) || "").replace(/\s+/g, " ").trim();
+        if (!title) return;
+        jobs.push(destPage(it.dest).then(function (page) { return { title: title, page: page, kids: (it && it.items) || [] }; }));
+      });
+      return Promise.all(jobs).then(function (rows) {
+        var out = [], tails = [];
+        rows.forEach(function (r) {
+          if (r.page >= 1) out.push({ title: r.title, page: r.page });
+          if (r.kids.length) tails.push(resolveItems(r.kids));
+        });
+        return Promise.all(tails).then(function (lists) { lists.forEach(function (l) { out.push.apply(out, l); }); return out; });
+      });
+    };
+    return doc.getOutline().then(resolveItems, function () { return []; });
+  }
   // [1,2,3,7,9,10] -> "1-3, 7, 9-10"
   function selSpec(sel) {
     var out = [], s = null, prev = null;
@@ -723,6 +786,7 @@
     isNoteHeading: isNoteHeading, notesToPages: notesToPages, stripRepeats: stripRepeats, splitSentences: splitSentences, buildDoc: buildDoc,
     docFromNotes: docFromNotes, docFromPdfPages: docFromPdfPages, docText: docText, defaultPages: defaultPages, parsePages: parsePages, pageSpan: pageSpan,
     selInitial: selInitial, selToggle: selToggle, selRange: selRange, selFromSpec: selFromSpec, selSpec: selSpec, gridWindow: gridWindow,
+    numOrNull: numOrNull, clampWindow: clampWindow, windowSpec: windowSpec, nextWindow: nextWindow, pdfHistKey: pdfHistKey, readOutline: readOutline,
     fitBytes: fitBytes, fitChars: fitChars, rangeMsg: rangeMsg, fitMsg: fitMsg,
     capCheck: capCheck, estTokens: estTokens, chunkSentences: chunkSentences, chunkOrder: chunkOrder, chunkPayload: chunkPayload,
     scrubFind: scrubFind, prepScrub: prepScrub, scrubSummary: scrubSummary,
