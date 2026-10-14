@@ -33,7 +33,7 @@ const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(function(){try{${e}}catch(x){return "ERR:"+String(x&&x.message||x)}})()`, returnByValue: true }); return r.result && r.result.result ? r.result.result.value : undefined; };
 const shotCall = async (p) => { await sleep(200); await ev(`document.getAnimations().forEach(function (a) { try { var t = a.effect && a.effect.getTiming(); if (t && t.iterations !== Infinity) a.finish(); } catch (e) {} }); return 1;`); return call("Page.captureScreenshot", p); };
 const until = async (e, ms = 15000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(200); } return false; };
-let fails = 0, intercepted = 0;
+let fails = 0, intercepted = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const shot = async (name, dark) => {
   if (!process.env.SHOTS) return;
   const fsx = await import("node:fs");
