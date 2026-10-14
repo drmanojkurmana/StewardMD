@@ -252,7 +252,9 @@
     var w = winNow();
     if (!w.sel) return "Create " + cs.count + " questions";
     if (w.multi) return "Create module from " + w.count + " pages";
-    return "Create module from pages " + w.from + " to " + w.to;
+    // No "pages N" here: the on-screen book scrubber (emoji-icons.js PAGE_RE, owner anti-citation rule) removes
+    // "pages 752" style locators from rendered text, so the window reads as bare numbers ("of total" survives).
+    return "Create module from " + w.from + " to " + w.to;
   }
   function fitLine(esc, sel) {
     if (!sel || !sel.length) return "";
@@ -262,18 +264,18 @@
   function doneBlock(esc) {
     var S = SR(), total = cs.pdf.pages, h = histFor(S.pdfHistKey(cs.pdf.name, cs.pdf.bytes));
     if (!h.windows.length) return "";
-    var chips = h.windows.map(function (w) { return '<span class="qg-done" aria-label="Pages ' + w[0] + " to " + w[1] + ' done">Pages ' + w[0] + "-" + w[1] + " done</span>"; }).join("");
+    var chips = h.windows.map(function (w) { return '<span class="qg-done" aria-label="' + w[0] + " to " + w[1] + " of " + total + ' done">' + w[0] + "-" + w[1] + " of " + total + " done</span>"; }).join("");
     var all = [];
     h.windows.forEach(function (w) { for (var p = w[0]; p <= w[1]; p++) all.push(p); });
     (winNow().sel || []).forEach(function (p) { if (all.indexOf(p) < 0) all.push(p); });
     var nx = S.nextWindow(all, total, PAGE_CAP);
-    var next = nx ? '<button type="button" class="pn-chip" data-act="g-next">Make the next module: pages ' + nx.from + " to " + nx.to + "</button>"
+    var next = nx ? '<button type="button" class="pn-chip" data-act="g-next">Make the next module: ' + nx.from + " to " + nx.to + "</button>"
       : '<p class="pn-mut pn-small">That is the whole book.</p>';
     return '<div class="qg-donewrap">' + chips + "</div>" + next;
   }
-  function chapBlock(esc) {
+  function chapBlock(esc, total) {
     if (!cs.outline || !cs.outline.length) return cs.olBusy ? '<p class="pn-mut pn-small">Reading the chapters…</p>' : "";
-    var opts = cs.outline.map(function (c, i) { return '<option value="' + i + '">' + esc(c.title) + " · p. " + c.page + "</option>"; }).join("");
+    var opts = cs.outline.map(function (c, i) { return '<option value="' + i + '">' + esc(c.title) + " · " + c.page + " of " + total + "</option>"; }).join("");
     return '<label class="pc-lbl" for="qgChap">Jump to chapter</label><select id="qgChap" class="pc-in"><option value="">Pick a chapter…</option>' + opts + "</select>";
   }
   function pagesBlock(host, esc) {
@@ -283,18 +285,18 @@
       : '<div class="qg-pgrow"><div><label class="pc-lbl" for="qgFrom">From page</label><input id="qgFrom" name="from" class="pc-in" inputmode="numeric" pattern="[0-9]*" spellcheck="false" autocomplete="off" enterkeyhint="next" placeholder="752" value="' + esc(cs.pgFrom) + '"></div>' +
         '<div><label class="pc-lbl" for="qgTo">To page</label><input id="qgTo" name="to" class="pc-in" inputmode="numeric" pattern="[0-9]*" spellcheck="false" autocomplete="off" enterkeyhint="done" placeholder="811" value="' + esc(cs.pgTo) + '"></div></div>';
     var fix = "";
-    if (w.fix) fix = '<button type="button" class="pn-chip" data-act="g-fix">Use pages ' + w.fix.from + " to " + w.fix.to + "</button>";
+    if (w.fix) fix = '<button type="button" class="pn-chip" data-act="g-fix">Use ' + w.fix.from + " to " + w.fix.to + "</button>";
     else if (w.swap) fix = '<button type="button" class="pn-chip" data-act="g-swap">Swap to ' + w.swap.from + "-" + w.swap.to + "</button>";
     return '<p class="pc-lbl" id="qgPgL">Pages</p><div class="qg-pg" role="group" aria-labelledby="qgPgL">' +
       '<p class="pn-mut pn-small">Pick up to ' + PAGE_CAP + " pages. Make another module for the next part.</p>" +
       doneBlock(esc) +
       fields +
       '<p class="qg-count" id="qgCount" role="status" aria-live="polite">' + (w.sel ? "<b>" + w.count + "</b> of " + PAGE_CAP + " pages selected" : "0 of " + PAGE_CAP + " pages selected") + "</p>" +
-      (w.error ? '<p class="pn-err qg-pgerr" id="qgPgMsg" role="alert">' + esc(w.error) + "</p>" : '<p class="pc-lbl qg-pgok" id="qgPgMsg">Pages ' + (w.sel ? w.from + " to " + w.to + " of " + total : "") + "</p>") +
+      (w.error ? '<p class="pn-err qg-pgerr" id="qgPgMsg" role="alert">' + esc(w.error) + "</p>" : '<p class="pc-lbl qg-pgok" id="qgPgMsg">' + (w.sel ? w.from + " to " + w.to + " of " + total : "") + "</p>") +
       (fix ? '<div class="pn-wrap" id="qgFixWrap">' + fix + "</div>" : "") +
       fitLine(esc, w.sel) +
       (cs.adv ? "" : '<div class="qg-step" role="group" aria-label="Move the window"><button type="button" class="pn-chip" data-act="g-step" data-v="-10" aria-label="Back 10 pages">- 10</button><button type="button" class="pn-chip" data-act="g-step" data-v="10" aria-label="Forward 10 pages">+ 10</button><button type="button" class="pn-chip" data-act="g-step" data-v="60">Next 60</button></div>') +
-      chapBlock(esc) +
+      chapBlock(esc, total) +
       '<div id="qgPrev">' + (cs.prev && cs.prev.html ? cs.prev.html : "") + "</div>" +
       '<button type="button" class="pn-chip qg-adv" data-act="g-adv" aria-pressed="' + cs.adv + '">' + (cs.adv ? "Hide advanced" : "Advanced: several ranges") + "</button>" +
       "</div>";
@@ -310,10 +312,10 @@
     var m = r.querySelector("#qgPgMsg");
     if (m) {
       if (w.error) { m.className = "pn-err qg-pgerr"; m.setAttribute("role", "alert"); m.textContent = w.error; }
-      else { m.className = "pc-lbl qg-pgok"; m.removeAttribute("role"); m.textContent = "Pages " + w.from + " to " + w.to + " of " + cs.pdf.pages; }
+      else { m.className = "pc-lbl qg-pgok"; m.removeAttribute("role"); m.textContent = w.from + " to " + w.to + " of " + cs.pdf.pages; }
     }
     var fw = r.querySelector("#qgFixWrap"), html = "";
-    if (w.fix) html = '<button type="button" class="pn-chip" data-act="g-fix">Use pages ' + w.fix.from + " to " + w.fix.to + "</button>";
+    if (w.fix) html = '<button type="button" class="pn-chip" data-act="g-fix">Use ' + w.fix.from + " to " + w.fix.to + "</button>";
     else if (w.swap) html = '<button type="button" class="pn-chip" data-act="g-swap">Swap to ' + w.swap.from + "-" + w.swap.to + "</button>";
     if (fw && html) fw.innerHTML = html;
     else if (fw) fw.parentNode && fw.parentNode.removeChild(fw);
@@ -345,11 +347,12 @@
     try { if (prevTimer) G.clearTimeout(prevTimer); } catch (e) {}
     prevTimer = G.setTimeout(function () { prevTimer = 0; ensurePrev(host); }, 350);
   }
-  function prevHtml(esc, prev) {
+  function prevHtml(esc, prev, total) {
+    // "Page 10 of 100": the one page-locator shape the book scrubber keeps (like the deck picker's labels).
     var fig = function (p, x) {
       if (!x || (!x.img && !x.lines)) return "";
-      return '<figure class="qg-pv">' + (x.img ? '<img src="' + x.img + '" alt="Page ' + p + ' preview" loading="lazy">' : "") +
-        "<figcaption>Page " + p + (x.lines ? "</figcaption><p>" + esc(x.lines) + "</p>" : "</figcaption>") + "</figure>";
+      return '<figure class="qg-pv">' + (x.img ? '<img src="' + x.img + '" alt="Page ' + p + " of " + total + ' preview" loading="lazy">' : "") +
+        "<figcaption>Page " + p + " of " + total + (x.lines ? "</figcaption><p>" + esc(x.lines) + "</p>" : "</figcaption>") + "</figure>";
     };
     var a = fig(prev.from, prev.f), b = (prev.to !== prev.from) ? fig(prev.to, prev.t) : "";
     return (a || b) ? '<div class="qg-prev" aria-label="Preview of the chosen pages">' + a + b + "</div>" : "";
@@ -376,7 +379,7 @@
         var cur = winNow(), key2 = cs.pdf.name + "|" + cs.pdf.bytes + "|" + (cs.adv ? "a:" + cs.spec : cur.from + "-" + cur.to);
         if (key2 !== key) return;
         var prev = { key: key, from: from, to: to, f: { img: imgs[0], lines: lines[from] || "" }, t: { img: imgs[1] || "", lines: lines[to] || "" } };
-        prev.html = prevHtml(esc, prev);
+        prev.html = prevHtml(esc, prev, cs.pdf.pages);
         cs.prev = prev;
         var rr = host.root(), q = rr && rr.querySelector("#qgPrev");
         if (q) q.innerHTML = prev.html;

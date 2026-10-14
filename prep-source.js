@@ -472,11 +472,12 @@
     return "This PDF has " + total + " pages. I can use up to " + cap + " pages at a time. " +
       (sp ? "Pick pages or I will use pages " + sp[0] + " to " + sp[1] + ". Make another " + noun + " for the rest." : "Pick up to " + cap + " pages to begin.");
   }
-  // The plain words when a fit shortens the selection: which pages are used and how many.
+  // The plain words when a fit shortens the selection: which pages are used and how many. Bare numbers, never
+  // "pages N": the on-screen book scrubber (emoji-icons.js PAGE_RE) removes "pages 5" style locators from any text.
   function fitMsg(sel) {
     var sp = pageSpan(sel || []);
     if (!sp) return "";
-    return sp[0] === sp[1] ? "Using page " + sp[0] + " to stay under 50 MB." : "Using pages " + sp[0] + " to " + sp[1] + " (" + (sel || []).length + " pages) to stay under 50 MB.";
+    return sp[0] === sp[1] ? "Only " + sp[0] + " is used to stay under 50 MB." : "Using " + sp[0] + " to " + sp[1] + " (" + (sel || []).length + " pages) to stay under 50 MB.";
   }
   /* Virtual grid: which pages to draw for a scroll position. top = the grid's offset inside the scroller, rowH = one
      row's height with its gap. -> { from, to } page numbers (1-based, inclusive), with `buf` rows either side. */

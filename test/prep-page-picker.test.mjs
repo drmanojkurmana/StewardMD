@@ -9,6 +9,7 @@ import { createRequire } from "node:module";
 
 const req = createRequire(import.meta.url);
 const S = req("../prep-source.js");
+const EI = req("../emoji-icons.js");
 
 test("cap: one module holds 60 pages", () => {
   assert.equal(S.PAGE_CAP, 60);
@@ -130,4 +131,28 @@ test("readOutline: no outline, a broken outline, or no document gives []", async
   assert.deepEqual(await S.readOutline(stubDoc(null, true)), []);
   assert.deepEqual(await S.readOutline(null), []);
   assert.deepEqual(await S.readOutline({}), []);
+});
+
+/* ---------- the on-screen book scrubber (emoji-icons.js PAGE_RE) ----------
+ * Owner anti-citation rule: "pages 752" style locators are removed from rendered text. Every user-facing picker
+ * string is therefore phrased so the scrubber keeps it byte-for-byte ("of total" survives, bare "pages N" does
+ * not). CI proved it: "Create module from pages 1 to 60" rendered as "Create module from to 60". */
+test("picker strings survive the on-screen book scrubber byte-for-byte", () => {
+  for (const s of [
+    "Create module from 752 to 811",
+    "Create module from 4 pages",
+    "752-811 of 4273 done",
+    "Make the next module: 812 to 871",
+    "Use 752 to 811",
+    "Swap to 752-811",
+    "Page 10 of 100",
+    "Cardio · 30 of 100",
+    "10 to 20 of 100",
+    "4 of 60 pages selected",
+    "Pick up to 60 pages. Make another module for the next part.",
+    "Using 1 to 3 (3 pages) to stay under 50 MB.",
+    "Only 5 is used to stay under 50 MB.",
+    "That is the whole book.",
+    "That is the end of the book.",
+  ]) assert.equal(EI.display(s), s, JSON.stringify(s) + " must reach the screen unchanged");
 });
