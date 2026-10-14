@@ -282,15 +282,15 @@ try {
   ok(await until(`return !!document.getElementById("qgFrom");`, 20000), "pdf: From/To fields open for a 100-page PDF");
   ok((await qgVal("qgFrom")) === "1" && (await qgVal("qgTo")) === "60", "pdf: starts with the first 60 (" + (await qgVal("qgFrom")) + "-" + (await qgVal("qgTo")) + ")");
   ok(/60 of 60 pages selected/.test(await screenText()), "pdf: the counter says 60 of 60");
-  ok(/Create module from pages 1 to 60/.test(await screenText()), "pdf: Create names the window");
+  ok(/Create module from 1 to 60/.test(await screenText()), "pdf: Create names the window");
   ok(await ev(`var f=document.getElementById("qgFrom"),t=document.getElementById("qgTo"); return f&&t&&f.getAttribute("inputmode")==="numeric"&&t.getAttribute("inputmode")==="numeric";`) === true, "pdf: digits keyboards on From/To");
   ok(/Pick up to 60 pages\. Make another module for the next part/.test(await screenText()), "pdf: the one-line explanation");
-  ok(/Pages 1-60 done/.test(await screenText()) && /Make the next module: pages 61 to 100/.test(await screenText()), "pdf: the done marker and the next-module button");
+  ok(/1-60 of 100 done/.test(await screenText()) && /Make the next module: 61 to 100/.test(await screenText()), "pdf: the done marker and the next-module button");
   ok(await ev(`return !document.getElementById("qgChap");`) === true, "pdf: no chapter list without an outline, and no error");
   await click('#smdPrep [data-act="g-next"]');
   await sleep(400);
   ok((await qgVal("qgFrom")) === "61" && (await qgVal("qgTo")) === "100", "pdf: next fills 61 to 100");
-  ok(/Create module from pages 61 to 100/.test(await screenText()), "pdf: Create follows the window");
+  ok(/Create module from 61 to 100/.test(await screenText()), "pdf: Create follows the window");
   await ev(`var f=document.getElementById("qgFrom"); f.value="1"; f.dispatchEvent(new Event("input")); var t=document.getElementById("qgTo"); t.value="100"; t.dispatchEvent(new Event("input")); return 1;`);
   ok(await until(`return /100 pages\\. One module holds up to 60/.test(document.body.innerText);`, 3000), "pdf: an over-long window is said plainly");
   await click('#smdPrep [data-act="g-fix"]');
@@ -306,6 +306,9 @@ try {
   ok(!DASH.test(await screenText()), "pdf: no em or en dash on the picker");
   await shots("pdfpages");
   try { rmSync(bigPath, { force: true }); } catch {}
+  // Leave no PDF state behind: later sections expect a fresh topic-mode create screen.
+  await ev(`var c=PREP_QGEN._cs; c.kind="topic"; c.topic=""; c.text=""; c.pdf=null; c.spec=""; c.pgFrom=""; c.pgTo=""; c.adv=false; c.outline=null; c.prev=null; c.own=false; c.err=""; try{localStorage.removeItem("smd_prep_qgen_pages");}catch(e){} PREP._host.rerender(); return 1;`);
+  await sleep(300);
 
   // ---- limit reached
   api.mode = "limit"; api.status.left = 0;
