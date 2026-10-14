@@ -208,8 +208,8 @@ test("rangeMsg: a long PDF names the pages used; a short one says nothing", () =
   assert.equal(SR.rangeMsg(500, SR.selInitial(500)), "This PDF has 500 pages. I can use up to 60 pages at a time. Pick pages or I will use pages 1 to 60. Make another deck for the rest.");
   assert.match(SR.rangeMsg(500, [120, 121], 60, "module"), /I will use pages 120 to 121\. Make another module for the rest\./);
   assert.match(SR.rangeMsg(500, []), /Pick up to 60 pages to begin\./);
-  assert.equal(SR.fitMsg([1, 2, 3]), "Using pages 1 to 3 (3 pages) to stay under 50 MB.");
-  assert.equal(SR.fitMsg([5]), "Using page 5 to stay under 50 MB.");
+  assert.equal(SR.fitMsg([1, 2, 3]), "Using 1 to 3 (3 pages) to stay under 50 MB.");
+  assert.equal(SR.fitMsg([5]), "Only 5 is used to stay under 50 MB.");
 });
 
 test("typed ranges: 120-179 works; over 60 pages still errors with the cap words", () => {

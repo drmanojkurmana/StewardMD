@@ -85,7 +85,7 @@ const lessons = [
         say: "The superior orbital fissure lies between the greater and lesser wings of the sphenoid. Structures passing inside the common tendinous ring include both divisions of the oculomotor nerve, the nasociliary nerve and the abducens nerve. Structures passing outside the ring include the frontal nerve, lacrimal nerve, trochlear nerve and superior ophthalmic vein. Compression produces superior orbital fissure syndrome.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-eye-gross.png",
+          src: "prep/lessons/media/ap-eye-gross.webp",
           alt: "Orbit and ocular anatomy diagram",
           caption: "Cross-section of ocular and orbital structures showing extraocular muscle insertions and neurovascular pathways."
         }
@@ -148,7 +148,7 @@ const lessons = [
         say: "The recurrent laryngeal nerve takes distinct anatomical pathways on the right and left sides. The left recurrent laryngeal nerve loops around the aortic arch lateral to the ligamentum arteriosum before ascending in the tracheoesophageal groove. The right nerve hooks around the right subclavian artery. Left nerve injury occurs in thoracic disease, producing hoarseness, while bilateral injury causes acute stridor.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-larynx-gross.png",
+          src: "prep/lessons/media/ap-larynx-gross.webp",
           alt: "Laryngeal anatomy and cartilage relationships",
           caption: "Coronal and posterior views of the laryngeal framework, intrinsic musculature and recurrent nerve trajectory."
         }
@@ -211,7 +211,7 @@ const lessons = [
         say: "The olfactory epithelium lines the roof of the nasal cavity, the upper superior concha and the adjacent superior septum. Bipolar olfactory receptor neurons send axons through the cribriform plate of the ethmoid to synapse in the olfactory bulb. Fracture of the cribriform plate produces cerebrospinal fluid rhinorrhea, anosmia, and risks bacterial meningitis.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-nose-sinuses-gross.png",
+          src: "prep/lessons/media/ap-nose-sinuses-gross.webp",
           alt: "Nasal cavity and paranasal sinus anatomy",
           caption: "Sagittal section of the lateral nasal wall detailing conchae, meatal drainage ostia and paranasal sinus relations."
         }
@@ -274,7 +274,7 @@ const lessons = [
         say: "The cochlear duct houses the organ of Corti within the bony cochlea. Perilymph fills the scala vestibuli and scala tympani with high sodium. Endolymph fills the scala media, secreted by the stria vascularis with high potassium. Deflection of stereocilia opens potassium channels, depolarizing inner hair cells and transmitting acoustic signals via the vestibulocochlear nerve.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-ear-gross.png",
+          src: "prep/lessons/media/ap-ear-gross.webp",
           alt: "Ear anatomy and cochlear cross-section",
           caption: "Anatomical schematic of external, middle and inner ear chambers, detailing ossicular linkage and cochlear fluid compartments."
         }
@@ -337,7 +337,7 @@ const lessons = [
         say: "The jugular foramen transmits cranial nerves nine, ten and eleven along with the internal jugular vein. The glossopharyngeal nerve carries posterior tongue sensation and carotid sinus afferents. The vagus supplies thoracic and abdominal parasympathetics. The accessory nerve innervates sternocleidomastoid and trapezius. Jugular foramen syndrome manifests with hoarseness, dysphagia and shoulder drop.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Brainstem cranial nerve roots and exit points",
           caption: "Ventral view of the human brainstem indicating cranial nerve exit origins and related brainstem nuclei."
         }
@@ -400,7 +400,7 @@ const lessons = [
         say: "The midbrain surrounds the cerebral aqueduct of Sylvius. Dorsally, the superior colliculi coordinate visual reflexes, while the inferior colliculi relay auditory signals. Ventrally, the substantia nigra contains dopaminergic neurons projecting to the striatum, which degenerate in Parkinson disease. The red nucleus gives origin to the rubrospinal tract, coordinating flexor tone.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Brainstem and cerebral peduncles anatomy",
           caption: "Mid-sagittal and cross-sectional representations of midbrain, pontine and medullary architecture."
         }
@@ -462,7 +462,7 @@ const lessons = [
         say: "Cerebellar lesions manifest with ipsilateral ataxia because cerebellar pathways double-cross. Lesions of the midline vermis produce truncal ataxia and unsteady gait, commonly seen in alcoholic degeneration. Hemispheric lesions produce appendicular ataxia, intention tremor, dysmetria, dysdiadochokinesia and scanning speech on the same side.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Cerebellar architecture and peduncles",
           caption: "Posterior fossa anatomy showing cerebellar hemisphere divisions, folia, and cerebellar peduncle attachments to brainstem."
         }
@@ -524,7 +524,7 @@ const lessons = [
         say: "Reabsorption of cerebrospinal fluid occurs through arachnoid granulations projecting into the superior sagittal sinus. Hydrocephalus results from an imbalance between production and absorption. Non-communicating hydrocephalus is caused by structural obstruction such as aqueductal stenosis. Communicating hydrocephalus arises from impaired arachnoid granulation reabsorption following meningitis.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-neuron-synapse.png",
+          src: "prep/lessons/media/ap-brain-neuron-synapse.webp",
           alt: "Cerebrospinal fluid circulation and meningeal layers",
           caption: "Schematic representation of ventricular CSF circulation pathways, choroid plexus locations and arachnoid granulation reabsorption."
         }
@@ -586,7 +586,7 @@ const lessons = [
         say: "Brown-Sequard syndrome illustrates spinal cord tract organization following hemisection. Interruption of the corticospinal tract causes ipsilateral spastic paralysis below the lesion. Dorsal column damage causes ipsilateral loss of vibration and proprioception. Spinothalamic disruption causes contralateral loss of pain and temperature starting one to two segments below.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Spinal cord cross section and tract somatotopy",
           caption: "Cross-sectional schematic of spinal cord funiculi illustrating ascending sensory tracts and descending motor pathways."
         }
@@ -649,7 +649,7 @@ const lessons = [
         say: "The Papez circuit connects limbic structures critical for emotional processing and episodic memory consolidation. Hippocampal neurons project via the fornix to the mamillary bodies. The mamillothalamic tract connects mamillary bodies to the anterior thalamus, which radiates to the cingulate gyrus, projecting back to the hippocampus.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Basal ganglia and limbic system anatomy",
           caption: "Coronal and axial planes detailing caudate, lentiform nucleus, subthalamic connections and limbic circuitry."
         }
@@ -711,7 +711,7 @@ const lessons = [
         say: "Failure of pleuroperitoneal membrane closure causes congenital diaphragmatic hernia, occurring ninety percent of the time on the left through the posterolateral canal of Bochdalek. Abdominal contents herniate into the thorax, causing bilateral pulmonary hypoplasia and persistent pulmonary hypertension. Morgagni hernia is an anterior retrosternal defect.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-duodenum-gross.png",
+          src: "prep/lessons/media/ap-duodenum-gross.webp",
           alt: "Embryonic gut rotation and diaphragmatic development",
           caption: "Schematic view of midgut herniation, arterial axis rotation and four-component fusion of the thoracoabdominal diaphragm."
         }
@@ -774,7 +774,7 @@ const lessons = [
         say: "The common fibular nerve winds around the neck of the fibula, making it the most frequently injured lower limb nerve. Trauma, tight casting or fibular fracture causes foot drop due to paralysis of dorsiflexors and everters. The patient adopts a high-stepping gait, with loss of sensation over the foot dorsum.",
         vis: {
           kind: "image",
-          src: "prep/lessons/media/ap-brain-gross.png",
+          src: "prep/lessons/media/ap-brain-gross.webp",
           alt: "Upper and lower limb motor nerve pathways",
           caption: "Diagrammatic trajectory of major peripheral nerve trunks showing compression sites and cutaneous sensory territories."
         }

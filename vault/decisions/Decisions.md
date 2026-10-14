@@ -11817,3 +11817,6 @@ Older tests that pinned the old layout were updated. [[modules/Refined Look]]
   (it keeps its home tile). The photo and name bar at the top of the drawer (`#smdSbProfile`) opens the Profile page.
 - Handlers stay in `home.js`: `moreAct(a)` is shared and exported as `window.SMD_moreAct`; `window.SMD_isOwner` gates owner rows.
 - The guided tour follows (sidebar steps for Profile, Subscription, AI Usage, Settings, Help, legal). Tests: `test/run-menu-dedupe-ui.mjs`.
+
+## 2026-10-14 Acknowledgements: Dr. Chevuri Manoj Kumar Reddy added
+**Added:** Dr. Chevuri Manoj Kumar Reddy, MD Radiodiagnosis, upcoming Interventional Radiologist (owner supplied the title; the contribution line about PrepNucleus Radiology and RadioAnatome was drafted at the owner's request, wording not verified with Dr. Reddy, so confirm it with him). One `<span>` in `#ackCard` (index.html), which feeds both the About tab and the Acknowledgements sheet.

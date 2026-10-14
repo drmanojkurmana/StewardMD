@@ -24,6 +24,8 @@ const SS = [
   { id: "ss-cardiology", name: { en: "Cardiology" } },
   { id: "ss-neurology", name: { en: "Neurology" } },
   { id: "ss-pulmonology", name: { en: "Pulmonology" } },
+  // Outside every medical-kind group, so a medical-kind plan never covers this mock exam whole.
+  { id: "ss-urology", name: { en: "Urology" } },
 ];
 function profiles() {
   const base = (id, name, tab, extra) => Object.assign({
@@ -187,7 +189,7 @@ test("fxFor filters papers by the plan scope; counts follow", () => {
   assert.deepEqual(g.fxFor(px, "neet-ss", "image", cardio).map((r) => r.id), ["neet-ss-image-06"], "subject image paper kept by scope name");
 });
 
-test("NEET-SS respiratory plan: only its papers, counts filtered, no leakage", () => {
+test("NEET-SS respiratory plan: its subjects plus the medical core, no leakage", () => {
   const list = profiles(), pl = { exam: "neet-ss", group: "respiratory" };
   const { T2, H } = loadT2(list, storeFor(pl), "neet-ss", pl);
   T2._P.fx = papers();
@@ -198,8 +200,8 @@ test("NEET-SS respiratory plan: only its papers, counts filtered, no leakage", (
   assert.ok(!html.includes('data-p="ini-ss"'), "sibling INI-SS card gone");
   assert.ok(!html.includes("More exam formats"), "no more-formats section");
   assert.ok(html.includes("NEET-SS · Respiratory Medicine group"), "context names the group");
-  assert.ok(html.includes("neet-ss-sub-ss-pulmonology-1") || html.includes("1, 0 done"), "only the group subject paper counts");
-  assert.ok(!html.includes("neet-ss-sub-ss-cardiology-1"), "other groups subject papers hidden");
+  // Owner rule: the group subject plus the medical core count (papers lazy-load; the header carries the count).
+  assert.ok(html.includes("3, 0 done"), "pulmonology plus cardiology and neurology subject papers");
   assert.ok(!html.includes("neet-ss-grand-01"), "exam-wide grand hidden from the filtered group");
 });
 
@@ -226,13 +228,14 @@ test("INI-SS plan without a subject: one prompt, no exam section", () => {
   assert.ok(html.includes('data-act="p-settings"'), "settings is the way through");
 });
 
-test("surgical NEET-SS plan: one short empty state for the group", () => {
-  const list = profiles(), pl = { exam: "neet-ss", group: "surgical" };
+test("a NEET-SS group with no bank subjects: one short empty state", () => {
+  // ENT holds no subjects in this mock bank (in the real bank every group has questions).
+  const list = profiles(), pl = { exam: "neet-ss", group: "ent" };
   const { T2, H } = loadT2(list, storeFor(pl), "neet-ss", pl);
   T2._P.fx = papers();
   T2._P.sess = null;
   const html = T2.testsHtml(H);
-  assert.ok(html.includes("No questions for the Surgical group in the bank yet."), "rare state, clearly worded");
+  assert.ok(html.includes("No questions for the ENT group in the bank yet."), "rare state, clearly worded");
   assert.ok(!html.includes('data-p="neet-ss"'), "no empty exam section");
 });
 

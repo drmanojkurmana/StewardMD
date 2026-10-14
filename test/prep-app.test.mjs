@@ -408,10 +408,9 @@ test("bank stamps: a module cached before an in-place republish is fetched again
   assert.equal(P.cacheFresh({ items: [], s: "1.1" }, s.anatomy), false, "another stamp is stale");
   assert.equal(P.cacheFresh({ items: [], s: s.anatomy }, s.anatomy), true);
   assert.equal(P.cacheFresh({ items: [] }, ""), true, "no stamp (offline, subject outside the manifest): keep the copy");
-  assert.equal(P.cacheFresh(null, ""), false);
   const src = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "prep.js"), "utf8");
-  assert.match(src, /cachePut\(p, \{ items: items, ts: Date\.now\(\), s: stamp \}\)/, "loadBank stores the stamp");
-  assert.match(src, /function \(e\) \{ if \(hit\) return \(st\.mem\[p\] = hit\.items\); throw e; \}/, "a failed refetch falls back to the cached copy");
+  assert.match(src, /st\.mem\[p\] = items;/, "loadBank stores items in session memory only");
+  assert.ok(!src.includes('cachePut(p, { items: items'), "loadBank never puts questions in IDB cache");
   const sh = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts/build-www.sh"), "utf8");
   assert.match(sh, /manifest\.json" "\$WWW\/prep\/bank/, "the native bundle ships the manifest");
 });

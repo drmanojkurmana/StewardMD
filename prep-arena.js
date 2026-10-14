@@ -531,11 +531,11 @@
       var shown = b.phase === "r", now = Date.now(), total = Math.max(1, b.deadline - b.got), left = Math.max(0, b.deadline - now);
       body = versus(b) +
         '<div class="pn-tbar' + (shown ? " stop" : "") + '" role="timer" aria-label="' + Math.ceil(left / 1000) + ' seconds left"><i style="animation-duration:' + total + "ms;animation-delay:-" + (total - left) + 'ms"></i></div>' +
-        '<p class="pn-q">' + esc(b.q) + '</p><ol class="pn-opts">' + b.o.map(function (o, k) {
+        '<div class="pn-q">' + (G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(b.q) : esc(b.q)) + '</div><ol class="pn-opts">' + b.o.map(function (o, k) {
           var cls = "pn-opt";
           if (shown) { if (k === b.a) cls += " right"; else if (k === b.you.k) cls += " wrong"; } else if (k === b.pick) cls += " sel";
           var them = shown && b.them && b.them.k === k ? '<span class="pn-them">' + esc(b.opp.name.split(" ")[0]) + "</span>" : "";
-          return '<li><button type="button" class="' + cls + '" data-act="a-pick" data-k="' + k + '"' + (shown || b.pick >= 0 ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === b.pick) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" + them + "</button></li>";
+          return '<li><button type="button" class="' + cls + '" data-act="a-pick" data-k="' + k + '"' + (shown || b.pick >= 0 ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === b.pick) + '"><span class="pn-l">' + L[k] + "</span><span>" + (G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o)) + "</span>" + them + "</button></li>";
         }).join("") + "</ol>" +
         (shown ? '<section class="pn-round" role="status"><p><b>' + (b.you.k === b.a ? "Right, +" + b.you.pts : b.you.k < 0 ? "No answer, 0" : "Wrong, 0") + "</b> for you</p><p>" + esc(b.opp.name) + ": " + (b.them.k === b.a ? "right, +" + b.them.pts : b.them.k < 0 ? "no answer" : "wrong") + '</p><p class="pn-mut pn-small">' + (b.i + 1 < b.n ? "Next round in a moment" : "Final result in a moment") + "</p></section>"
           : b.pick >= 0 ? '<p class="pn-mut pn-small pn-wait" role="status">Answer locked. Waiting for the round to close.</p>' : "");

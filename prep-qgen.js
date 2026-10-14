@@ -97,9 +97,26 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= state ================= */
-  var LS_FLAG = "smd_prep_qgen", LS_AUTHOR = "smd_prep_qgen_author";
+  var LS_FLAG = "smd_prep_qgen", LS_AUTHOR = "smd_prep_qgen_author", LS_PAGES = "smd_prep_qgen_pages";
   var status = null, statusAt = 0, statusP = null;
-  var cs = { kind: "topic", topic: "", text: "", count: 10, diff: "mix", exam: "neet-pg", pdf: null, spec: "", busy: "", err: "", own: false };
+  var cs = { kind: "topic", topic: "", text: "", count: 10, diff: "mix", exam: "neet-pg", pdf: null, spec: "", busy: "", err: "", own: false,
+    pgFrom: "", pgTo: "", adv: false, outline: null, olBusy: false, prev: null };
+  /* Per-PDF history in local storage: { "<name>|<bytes>": { windows: [[from, to]], last: { from, to } } }. Only page
+     numbers are kept, never file contents. */
+  function readHist() { try { return JSON.parse(G.localStorage.getItem(LS_PAGES) || "{}") || {}; } catch (e) { return {}; } }
+  function histFor(key) { var h = readHist(); return (key && h[key]) || { windows: [], last: null }; }
+  function markDone(key, from, to) {
+    if (!key || !(from >= 1) || !(to >= from)) return;
+    try {
+      var h = readHist(), e = h[key] || { windows: [], last: null }, seen = false;
+      e.windows.forEach(function (w) { if (w[0] === from && w[1] === to) seen = true; });
+      if (!seen) e.windows.push([from, to]);
+      e.windows.sort(function (a, b) { return a[0] - b[0]; });
+      e.last = { from: from, to: to };
+      h[key] = e;
+      G.localStorage.setItem(LS_PAGES, JSON.stringify(h));
+    } catch (e2) {}
+  }
   var job = null;          // the module being made
   var au = null;           // the owner's Author draft
   function DK() { return G.PREP_DECKS; }
@@ -168,7 +185,7 @@
       '<p class="pn-mut pn-small" id="qgChars">' + fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters</p>";
     else srcHtml = '<button type="button" class="pc-drop" data-act="g-pick"' + (cs.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (cs.pdf ? esc(cs.pdf.name) : "Choose a PDF") + "</b><small>" + (cs.pdf ? fmtN(cs.pdf.pages) + " pages" : "A chapter or your notes, up to " + PAGE_CAP + " pages") + "</small></span></button>" +
       '<input type="file" id="qgFile" accept="application/pdf,.pdf" hidden aria-hidden="true" tabindex="-1">' +
-      (cs.pdf ? '<label class="pc-lbl" for="qgPages">Pages</label><input id="qgPages" name="pages" class="pc-in" inputmode="numeric" spellcheck="false" autocomplete="off" placeholder="For example 1-12…" value="' + esc(cs.spec) + '">' + rangeLine(esc) : "");
+      (cs.pdf ? pagesBlock(host, esc) : "");
     var grounded = cs.kind !== "topic";
     host.paint(host.bar("Create a module", "With MaiK", "back") + '<div class="pn-body qg-create" id="qgCreateView">' +
       (out ? '<section class="pn-panel qg-limit" role="status"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + st.caps.modulesPerDay + " modules with MaiK a day. Come back tomorrow, or practise the modules you made in Your decks.</p></section>" : "") +
@@ -182,36 +199,208 @@
       (grounded ? '<button type="button" class="pc-check" data-act="g-own" aria-pressed="' + cs.own + '"><span class="pc-box" aria-hidden="true">' + (cs.own ? host.ico("check") : "") + "</span><span>These are my own notes, or material I am allowed to use for study.</span></button>" : "") +
       (cs.busy ? '<section class="pn-panel pc-readp" role="status" aria-live="polite"><span class="pc-spin" aria-hidden="true"></span><p class="pn-load">' + esc(cs.busy) + "</p></section>" : "") +
       (cs.err ? '<p class="pn-err" role="alert" id="qgErr" tabindex="-1">' + esc(cs.err) + "</p>" : "") +
-      '<div class="qg-foot"><button type="button" class="pn-btn pri" data-act="g-go"' + (cs.busy || out ? " disabled" : "") + ">" + (out ? "Back tomorrow" : "Create " + cs.count + " questions") + "</button>" +
+      '<div class="qg-foot"><button type="button" class="pn-btn pri" data-act="g-go"' + (cs.busy || out || (cs.kind === "pdf" && cs.pdf && !winNow().sel) ? " disabled" : "") + ">" + (out ? "Back tomorrow" : goLabel()) + "</button>" +
       '<p class="pn-mut pn-small" id="qgLeft">' + esc(ll ? ll + ". " : "") + "Uses about " + fmtN(MT_ROUND * Math.ceil(cs.count / PER)) + " MaiK Tokens.</p></div>" +
       '<p class="pn-mut pn-small qg-safe">MaiK writes practice questions for revision, and a second check answers each one before it is saved. Mistakes are still possible: these are not official exam questions, and clinical decisions need current guidance. Your module stays private to you.</p>' +
       "</div>", cs.err ? "#qgErr" : null);
     var r = host.root();
     if (!r) return;
-    var ti = r.querySelector("#qgTopic"), ta = r.querySelector("#qgText"), fi = r.querySelector("#qgFile"), pg = r.querySelector("#qgPages");
+    var ti = r.querySelector("#qgTopic"), ta = r.querySelector("#qgText"), fi = r.querySelector("#qgFile");
+    var fr = r.querySelector("#qgFrom"), to = r.querySelector("#qgTo"), av = r.querySelector("#qgAdv"), ch = r.querySelector("#qgChap");
     ON(ti, "input", function () { cs.topic = ti.value; });
     ON(ta, "input", function () { cs.text = ta.value; var c = r.querySelector("#qgChars"); if (c) c.textContent = fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters"; });
-    ON(pg, "input", function () { cs.spec = pg.value; });
+    var fromTo = function () {
+      cs.pgFrom = fr.value; cs.pgTo = to.value;
+      var w = winNow();
+      if (w.sel) cs.spec = SR().windowSpec(w.from, w.to);
+      paintWindow(host);
+      queuePrev(host);
+    };
+    ON(fr, "input", fromTo);
+    ON(to, "input", fromTo);
+    ON(av, "input", function () { cs.spec = av.value; paintWindow(host); queuePrev(host); });
+    ON(ch, "change", function () {
+      var c = cs.outline && cs.outline[+ch.value];
+      if (!c) return;
+      applyWindow(host, c.page, Math.min(cs.pdf.pages, c.page + PAGE_CAP - 1));
+    });
     ON(fi, "change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
+    queuePrev(host);
   }
   function createErr(host, m) { cs.err = m; cs.busy = ""; if (onTop("#qgCreateView", host)) host.rerender(); }
-  /* The plain line under the pages box for a long PDF: which pages are used, and the 50 MB fit when it bites. */
-  function rangeLine(esc) {
+  /* ---------- the page selector (owner 2026-10-15): From/To digits fields, not a typed range ----------
+     The iOS number pad has no hyphen or comma, so a single "Pages" box cannot take a range. Two number fields work
+     with that pad; the typed multi-range box ("752-780, 800-830") sits behind an Advanced toggle with a full
+     keyboard. A valid window is mirrored into cs.spec ("752-811"), so the module request is byte-for-byte the same
+     as before and the server needs no change. */
+  // The current choice: { sel, from, to, count, multi? } or { error, fix?, swap? }.
+  function winNow() {
     var S = SR();
-    if (!S || !cs.pdf || cs.pdf.pages <= PAGE_CAP) return "";
-    var rr = S.selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP), sel = (rr && rr.sel) || S.selInitial(cs.pdf.pages);
-    var msg = S.rangeMsg(cs.pdf.pages, sel, PAGE_CAP, "module");
-    var fit = S.fitBytes(sel, cs.pdf.bytes || 0, cs.pdf.pages || 0);
-    if (fit.cut) msg += (msg ? " " : "") + S.fitMsg(fit.sel);
-    return msg ? '<p class="pn-mut pn-small">' + esc(msg) + "</p>" : "";
+    if (!S || !cs.pdf) return { error: "" };
+    if (cs.adv) {
+      var r = S.selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP);
+      if (r.error) return { error: r.error };
+      return { sel: r.sel, from: r.sel[0], to: r.sel[r.sel.length - 1], count: r.sel.length,
+        multi: (r.sel[r.sel.length - 1] - r.sel[0] + 1) !== r.sel.length };
+    }
+    var w = S.clampWindow(cs.pgFrom, cs.pgTo, cs.pdf.pages, PAGE_CAP);
+    if (w.error) return w;
+    return { sel: w.sel, from: w.from, to: w.to, count: w.count, multi: false };
+  }
+  function goLabel() {
+    if (cs.kind !== "pdf" || !cs.pdf) return "Create " + cs.count + " questions";
+    var w = winNow();
+    if (!w.sel) return "Create " + cs.count + " questions";
+    if (w.multi) return "Create module from " + w.count + " pages";
+    // No "pages N" here: the on-screen book scrubber (emoji-icons.js PAGE_RE, owner anti-citation rule) removes
+    // "pages 752" style locators from rendered text, so the window reads as bare numbers ("of total" survives).
+    return "Create module from " + w.from + " to " + w.to;
+  }
+  function fitLine(esc, sel) {
+    if (!sel || !sel.length) return "";
+    var fit = SR().fitBytes(sel, cs.pdf.bytes || 0, cs.pdf.pages || 0);
+    return fit.cut ? '<p class="pn-mut pn-small">' + esc(SR().fitMsg(fit.sel)) + "</p>" : "";
+  }
+  function doneBlock(esc) {
+    var S = SR(), total = cs.pdf.pages, h = histFor(S.pdfHistKey(cs.pdf.name, cs.pdf.bytes));
+    if (!h.windows.length) return "";
+    var chips = h.windows.map(function (w) { return '<span class="qg-done" aria-label="' + w[0] + " to " + w[1] + " of " + total + ' done">' + w[0] + "-" + w[1] + " of " + total + " done</span>"; }).join("");
+    var all = [];
+    h.windows.forEach(function (w) { for (var p = w[0]; p <= w[1]; p++) all.push(p); });
+    (winNow().sel || []).forEach(function (p) { if (all.indexOf(p) < 0) all.push(p); });
+    var nx = S.nextWindow(all, total, PAGE_CAP);
+    var next = nx ? '<button type="button" class="pn-chip" data-act="g-next">Make the next module: ' + nx.from + " to " + nx.to + "</button>"
+      : '<p class="pn-mut pn-small">That is the whole book.</p>';
+    return '<div class="qg-donewrap">' + chips + "</div>" + next;
+  }
+  function chapBlock(esc, total) {
+    if (!cs.outline || !cs.outline.length) return cs.olBusy ? '<p class="pn-mut pn-small">Reading the chapters…</p>' : "";
+    var opts = cs.outline.map(function (c, i) { return '<option value="' + i + '">' + esc(c.title) + " · " + c.page + " of " + total + "</option>"; }).join("");
+    return '<label class="pc-lbl" for="qgChap">Jump to chapter</label><select id="qgChap" class="pc-in"><option value="">Pick a chapter…</option>' + opts + "</select>";
+  }
+  function pagesBlock(host, esc) {
+    var w = winNow(), total = cs.pdf.pages;
+    var fields = cs.adv
+      ? '<label class="pc-lbl" for="qgAdv">Pages (advanced)</label><input id="qgAdv" name="pages" class="pc-in" inputmode="text" spellcheck="false" autocomplete="off" enterkeyhint="done" placeholder="752-780, 800-830" value="' + esc(cs.spec) + '">'
+      : '<div class="qg-pgrow"><div><label class="pc-lbl" for="qgFrom">From page</label><input id="qgFrom" name="from" class="pc-in" inputmode="numeric" pattern="[0-9]*" spellcheck="false" autocomplete="off" enterkeyhint="next" placeholder="752" value="' + esc(cs.pgFrom) + '"></div>' +
+        '<div><label class="pc-lbl" for="qgTo">To page</label><input id="qgTo" name="to" class="pc-in" inputmode="numeric" pattern="[0-9]*" spellcheck="false" autocomplete="off" enterkeyhint="done" placeholder="811" value="' + esc(cs.pgTo) + '"></div></div>';
+    var fix = "";
+    if (w.fix) fix = '<button type="button" class="pn-chip" data-act="g-fix">Use ' + w.fix.from + " to " + w.fix.to + "</button>";
+    else if (w.swap) fix = '<button type="button" class="pn-chip" data-act="g-swap">Swap to ' + w.swap.from + "-" + w.swap.to + "</button>";
+    return '<p class="pc-lbl" id="qgPgL">Pages</p><div class="qg-pg" role="group" aria-labelledby="qgPgL">' +
+      '<p class="pn-mut pn-small">Pick up to ' + PAGE_CAP + " pages. Make another module for the next part.</p>" +
+      doneBlock(esc) +
+      fields +
+      '<p class="qg-count" id="qgCount" role="status" aria-live="polite">' + (w.sel ? "<b>" + w.count + "</b> of " + PAGE_CAP + " pages selected" : "0 of " + PAGE_CAP + " pages selected") + "</p>" +
+      (w.error ? '<p class="pn-err qg-pgerr" id="qgPgMsg" role="alert">' + esc(w.error) + "</p>" : '<p class="pc-lbl qg-pgok" id="qgPgMsg">' + (w.sel ? w.from + " to " + w.to + " of " + total : "") + "</p>") +
+      (fix ? '<div class="pn-wrap" id="qgFixWrap">' + fix + "</div>" : "") +
+      fitLine(esc, w.sel) +
+      (cs.adv ? "" : '<div class="qg-step" role="group" aria-label="Move the window"><button type="button" class="pn-chip" data-act="g-step" data-v="-10" aria-label="Back 10 pages">- 10</button><button type="button" class="pn-chip" data-act="g-step" data-v="10" aria-label="Forward 10 pages">+ 10</button><button type="button" class="pn-chip" data-act="g-step" data-v="60">Next 60</button></div>') +
+      chapBlock(esc, total) +
+      '<div id="qgPrev">' + (cs.prev && cs.prev.html ? cs.prev.html : "") + "</div>" +
+      '<button type="button" class="pn-chip qg-adv" data-act="g-adv" aria-pressed="' + cs.adv + '">' + (cs.adv ? "Hide advanced" : "Advanced: several ranges") + "</button>" +
+      "</div>";
+  }
+  /* Refresh the counter, the message, the fix button and the Create label after a keystroke, without a repaint
+     (a repaint would drop the keyboard focus). Structural changes still rerender. */
+  function paintWindow(host) {
+    var r = host.root(), esc = host.esc;
+    if (!r || !r.querySelector("#qgCreateView") || !cs.pdf) return;
+    var w = winNow();
+    var c = r.querySelector("#qgCount");
+    if (c) c.innerHTML = w.sel ? "<b>" + w.count + "</b> of " + PAGE_CAP + " pages selected" : "0 of " + PAGE_CAP + " pages selected";
+    var m = r.querySelector("#qgPgMsg");
+    if (m) {
+      if (w.error) { m.className = "pn-err qg-pgerr"; m.setAttribute("role", "alert"); m.textContent = w.error; }
+      else { m.className = "pc-lbl qg-pgok"; m.removeAttribute("role"); m.textContent = w.from + " to " + w.to + " of " + cs.pdf.pages; }
+    }
+    var fw = r.querySelector("#qgFixWrap"), html = "";
+    if (w.fix) html = '<button type="button" class="pn-chip" data-act="g-fix">Use ' + w.fix.from + " to " + w.fix.to + "</button>";
+    else if (w.swap) html = '<button type="button" class="pn-chip" data-act="g-swap">Swap to ' + w.swap.from + "-" + w.swap.to + "</button>";
+    if (fw && html) fw.innerHTML = html;
+    else if (fw) fw.parentNode && fw.parentNode.removeChild(fw);
+    else if (html && m && m.parentNode) m.parentNode.insertAdjacentHTML("afterend", '<div class="pn-wrap" id="qgFixWrap">' + html + "</div>");
+    var go = r.querySelector('[data-act="g-go"]');
+    if (go && !cs.busy) {
+      var bad = !w.sel;
+      go.disabled = !!bad;
+      go.textContent = goLabel();
+    }
+  }
+  // Set the window from numbers (chapter jump, stepper, fix, next-module): inputs, spec and paint, then previews.
+  function applyWindow(host, from, to) {
+    cs.adv = false; cs.pgFrom = String(from); cs.pgTo = String(to);
+    cs.spec = SR().windowSpec(from, to);
+    var r = host.root();
+    if (r) {
+      var f = r.querySelector("#qgFrom"), t = r.querySelector("#qgTo");
+      if (!f || !t) { host.rerender(); queuePrev(host); return; }
+      f.value = cs.pgFrom; t.value = cs.pgTo;
+    }
+    paintWindow(host);
+    queuePrev(host);
+  }
+  /* First-lines + thumbnail preview of the From and To pages, so the choice can be confirmed. Two pages at most,
+     low resolution, one fetch at a time; a failure hides the previews, never an error. */
+  var prevTimer = 0;
+  function queuePrev(host) {
+    try { if (prevTimer) G.clearTimeout(prevTimer); } catch (e) {}
+    prevTimer = G.setTimeout(function () { prevTimer = 0; ensurePrev(host); }, 350);
+  }
+  function prevHtml(esc, prev, total) {
+    // "Page 10 of 100": the one page-locator shape the book scrubber keeps (like the deck picker's labels).
+    var fig = function (p, x) {
+      if (!x || (!x.img && !x.lines)) return "";
+      return '<figure class="qg-pv">' + (x.img ? '<img src="' + x.img + '" alt="Page ' + p + " of " + total + ' preview" loading="lazy">' : "") +
+        "<figcaption>Page " + p + " of " + total + (x.lines ? "</figcaption><p>" + esc(x.lines) + "</p>" : "</figcaption>") + "</figure>";
+    };
+    var a = fig(prev.from, prev.f), b = (prev.to !== prev.from) ? fig(prev.to, prev.t) : "";
+    return (a || b) ? '<div class="qg-prev" aria-label="Preview of the chosen pages">' + a + b + "</div>" : "";
+  }
+  function ensurePrev(host) {
+    var S = SR(), r = host.root(), esc = host.esc;
+    if (!S || !cs.pdf || !r || !r.querySelector("#qgPrev")) return;
+    var w = winNow();
+    if (!w.sel) { cs.prev = null; var q = r.querySelector("#qgPrev"); if (q) q.innerHTML = ""; return; }
+    var key = cs.pdf.name + "|" + cs.pdf.bytes + "|" + (cs.adv ? "a:" + cs.spec : w.from + "-" + w.to);
+    if (cs.prev && cs.prev.key === key) { var q0 = r.querySelector("#qgPrev"); if (q0 && cs.prev.html !== q0.innerHTML) q0.innerHTML = cs.prev.html; return; }
+    var doc = cs.pdf.doc, from = w.from, to = w.to;
+    cs.prev = { key: key, from: from, to: to, html: (cs.prev && cs.prev.from === from && cs.prev.to === to) ? cs.prev.html : "" };
+    var pages = from === to ? [from] : [from, to];
+    S.readPdfPages(doc, pages, null).then(function (rd) {
+      var lines = {};
+      (rd.pages || []).forEach(function (pg) {
+        var tx = (pg.lines || []).map(function (l) { return l.tx; }).join(" ").replace(/\s+/g, " ").trim();
+        lines[pg.p] = tx.slice(0, 160);
+      });
+      var jobs = pages.map(function (p) { return S.renderThumb(doc, p, 160).then(function (u) { return u; }, function () { return ""; }); });
+      return Promise.all(jobs).then(function (imgs) {
+        if (!cs.pdf || cs.pdf.doc !== doc || !winNow().sel) return;
+        var cur = winNow(), key2 = cs.pdf.name + "|" + cs.pdf.bytes + "|" + (cs.adv ? "a:" + cs.spec : cur.from + "-" + cur.to);
+        if (key2 !== key) return;
+        var prev = { key: key, from: from, to: to, f: { img: imgs[0], lines: lines[from] || "" }, t: { img: imgs[1] || "", lines: lines[to] || "" } };
+        prev.html = prevHtml(esc, prev, cs.pdf.pages);
+        cs.prev = prev;
+        var rr = host.root(), q = rr && rr.querySelector("#qgPrev");
+        if (q) q.innerHTML = prev.html;
+      });
+    }, function () {});
   }
   function pickPdf(file, host) {
     if (!SR()) return createErr(host, "PDFs cannot be read here. Paste the text instead.");
     cs.err = ""; cs.pdf = null; cs.busy = "Opening the PDF…"; host.rerender();
     SR().openPdf(file).then(function (pdf) {
       cs.busy = ""; cs.pdf = pdf; cs.spec = SR().defaultPages(pdf.pages);
+      var m = String(cs.spec).match(/^(\d+)(?:-(\d+))?$/);
+      cs.adv = false; cs.pgFrom = (m && m[1]) || ""; cs.pgTo = (m && m[2]) || cs.pgFrom;
+      cs.outline = null; cs.olBusy = true; cs.prev = null;
       if (!cs.topic) cs.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 120);
       if (onTop("#qgCreateView", host)) host.rerender();
+      SR().readOutline(pdf.doc).then(function (list) {
+        if (!cs.pdf || cs.pdf.doc !== pdf.doc) return;
+        cs.outline = list; cs.olBusy = false;
+        if (onTop("#qgCreateView", host)) host.rerender();
+      });
     }, function () { createErr(host, "This PDF could not be opened. It may be protected by a password or damaged."); });
   }
   /* The grounding: pasted notes, or the chosen PDF pages read on this phone (same reader as Make a deck).
@@ -220,7 +409,14 @@
     if (cs.kind === "topic") return Promise.resolve({ text: "", pages: null });
     if (cs.kind === "notes") return Promise.resolve({ text: cs.text, pages: null });
     if (!cs.pdf) return Promise.reject(new Error("Choose a PDF first."));
-    var res = SR().selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP);
+    // Window mode reads the From/To fields, never a stale typed spec (e.g. left behind by the Advanced toggle).
+    var spec = cs.spec;
+    if (!cs.adv) {
+      var w0 = winNow();
+      if (!w0.sel) return Promise.reject(new Error(w0.error || "Pick the pages to use first."));
+      spec = SR().windowSpec(w0.from, w0.to);
+    }
+    var res = SR().selFromSpec(spec, cs.pdf.pages, PAGE_CAP);
     var pages = res && res.sel ? res.sel : res && res.pages ? res.pages : null;
     if (!pages || !pages.length) return Promise.reject(new Error((res && res.error) || "Type the pages to use, for example 1-12, up to " + PAGE_CAP + "."));
     if (pages.length > PAGE_CAP) return Promise.reject(new Error("Up to " + PAGE_CAP + " pages in one module."));
@@ -230,7 +426,14 @@
     return SR().readPdfPages(cs.pdf.doc, pages, function (d, n) { if (d < n) say("Reading page " + (d + 1) + " of " + n + "…"); }).then(function (rd) {
       cs.busy = "";
       var doc = SR().buildDoc(rd.pages || []), text = (doc.sents || []).map(function (s) { return s.tx; }).join(" ");
-      if (text.replace(/\s+/g, "").length < 200) throw new Error("These pages have too little text to make questions from. Try other pages.");
+      if (text.replace(/\s+/g, "").length < 200) {
+        var skipped = (rd.skipped || []).map(function (s) { return s.why; });
+        var bare = !(rd.pages || []).some(function (pg) { return ((pg.lines || []).length > 0); });
+        if (bare && skipped.length && skipped.every(function (w) { return w === "no-text"; }))
+          throw new Error("These pages look scanned: there is no readable text on them. Try other pages, or paste the text instead.");
+        throw new Error("These pages have too little text to make questions from. Try other pages.");
+      }
+      markDone(SR().pdfHistKey(cs.pdf.name, cs.pdf.bytes), pages[0], pages[pages.length - 1]);
       return { text: text, pages: pages };
     });
   }
@@ -248,6 +451,7 @@
       var ground = scrub(String(g.text || "")).slice(0, GROUND_MAX);
       start(host, { title: topic.slice(0, 120), topic: topic.slice(0, 120), ground: ground, pages: g.pages || null, exam: cs.exam, diff: cs.diff, target: cs.count });
       cs.topic = ""; cs.text = ""; cs.pdf = null; cs.spec = ""; cs.own = false;
+      cs.pgFrom = ""; cs.pgTo = ""; cs.adv = false; cs.outline = null; cs.olBusy = false; cs.prev = null;
     }, function (e) { createErr(host, (e && e.message) || "The pages could not be read."); });
   }
 
@@ -574,6 +778,33 @@
     if (a === "g-exam") { cs.exam = v; return host.rerender(); }
     if (a === "g-own") { cs.own = !cs.own; if (cs.own && /^Confirm/.test(cs.err)) cs.err = ""; return host.rerender(); }
     if (a === "g-pick") { var f = host.root() && host.root().querySelector("#qgFile"); if (f) f.click(); return; }
+    if (a === "g-adv" && cs.pdf) {
+      cs.adv = !cs.adv;
+      if (cs.adv) { var w0 = winNow(); if (w0.sel && !w0.multi) cs.spec = SR().windowSpec(w0.from, w0.to); }
+      else { var r0 = SR().selFromSpec(cs.spec, cs.pdf.pages, PAGE_CAP); if (r0.sel && r0.sel.length) { cs.pgFrom = String(r0.sel[0]); cs.pgTo = String(r0.sel[r0.sel.length - 1]); cs.spec = SR().windowSpec(r0.sel[0], r0.sel[r0.sel.length - 1]); } }
+      host.rerender();
+      return;
+    }
+    if (a === "g-fix" && cs.pdf) { var w1 = winNow(); if (w1.fix) applyWindow(host, w1.fix.from, w1.fix.to); return; }
+    if (a === "g-swap" && cs.pdf) { var w2 = winNow(); if (w2.swap) applyWindow(host, w2.swap.from, w2.swap.to); return; }
+    if (a === "g-step" && cs.pdf) {
+      var d = +(el && el.getAttribute("data-v")) || 0, w3 = winNow(), total = cs.pdf.pages;
+      if (!w3.sel) return;
+      var size = w3.multi ? w3.count : (w3.to - w3.from + 1), from;
+      if (d === PAGE_CAP) { var nx = SR().nextWindow(w3.sel, total, PAGE_CAP); if (!nx) { cs.err = ""; host.rerender(); return host.toast("That is the end of the book."); } from = nx.from; }
+      else from = Math.min(Math.max(1, w3.from + d), Math.max(1, total - size + 1));
+      applyWindow(host, from, Math.min(total, from + size - 1));
+      return;
+    }
+    if (a === "g-next" && cs.pdf) {
+      var S = SR(), h = histFor(S.pdfHistKey(cs.pdf.name, cs.pdf.bytes)), all = [];
+      h.windows.forEach(function (ww) { for (var p = ww[0]; p <= ww[1]; p++) all.push(p); });
+      (winNow().sel || []).forEach(function (p) { if (all.indexOf(p) < 0) all.push(p); });
+      var nx2 = S.nextWindow(all, cs.pdf.pages, PAGE_CAP);
+      if (!nx2) return host.toast("That is the whole book.");
+      applyWindow(host, nx2.from, nx2.to);
+      return;
+    }
     if (a === "g-go") return go(host);
     if (a === "g-stop") { if (job && !job.done) { job.stopReq = true; host.rerender(); } return; }
     if (a === "g-retry") { resume(host); return; }
