@@ -1,61 +1,60 @@
 {
- "v": 1,
- "module": "med-stroke",
- "subject": "medicine",
- "title": "Acute stroke: time is brain, thrombolyse and thrombectomise fast",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "Suspect **stroke** with sudden face, arm or leg weakness, speech disturbance or visual loss. Record **exact onset time**, because reperfusion windows run from when the patient was last well. Send for immediate brain imaging to separate infarct from haemorrhage; no antiplatelet, anticoagulant or thrombolytic is safe until bleeding is excluded (NICE NG236).",
-   "say": "Suspect stroke with sudden focal weakness or speech loss. Record exact onset time and image the brain at once; nothing that thins blood is safe until bleeding is excluded.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "FAST positive"
-     },
-     {
-      "id": "b",
-      "label": "Onset time"
-     },
-     {
-      "id": "c",
-      "label": "Urgent brain imaging"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For ischaemic stroke inside the window, give **thrombolysis** where eligible and refer **large-vessel occlusion for thrombectomy** without delay; every minute loses brain. Control glucose, temperature and swallowing (nil by mouth until screened), and start secondary prevention once haemorrhage is excluded. Haemorrhagic stroke needs pressure control, reversal of anticoagulation and neurosurgical advice.",
-   "say": "For ischaemic stroke inside the window, thrombolyse where eligible and refer large-vessel occlusion for thrombectomy without delay. Haemorrhage needs pressure control and reversal.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Infarct",
-     "Haemorrhage"
-    ],
-    "rows": [
-     [
-      "Thrombolysis / thrombectomy window",
-      "Pressure control, reversal, neurosurgery"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Mimics include hypoglycaemia, migraine, seizure after-effects and functional weakness, so check **capillary glucose in every suspected stroke**. Transient symptoms (TIA) still need same-day specialist assessment, because early stroke risk is high. Rehabilitation and secondary prevention start on day one, not at discharge.",
-   "say": "Check capillary glucose in every suspected stroke. Even transient symptoms need same-day assessment, because early stroke risk is high."
+  "v": 1,
+  "module": "med-stroke",
+  "subject": "medicine",
+  "title": "Stroke and hemiplegia: infarct, bleed and TIA",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**History** (**sudden** FACE arm speech minutes hours, **TIA** transient fully recovered ABCD2, **bleed** headache vomit hypertensive coma, **SAH** thunderclap neck, **risks** AF rheumatic smoking pill, **young** dissection drugs vasculitis, **mimics** Todd Todd hypoglycaemia migraine) with **viva** (**hemiplegic** dense aphasic, **crescendo** TIAs warning) profiles; **onset** (last-known-well clocks) times. Vessels block.",
+      "say": "Suddens TIAs bleeds SAHs is history: risks score youngs tear mimics mimic onsets clock hemiplegics drop crescendos warn clocks tick windows shut. Brains starve.",
+      "vis": null
+    },
+    {
+      "tx": "**Examination** (**face** droops forehead spared UMN, **arm** pronator drift dense, **speech** Broca nonfluent Wernicke fluent, **NIHSS** scores gaze fields neglect, **carotid** bruit AF murmur, **fundi** emboli hypertensive, **coma** GCS bleed dilates, **swallow** coughs aspirates) with **bedside** (**glucose** hypo mimics, **ECG** AF rate, **swallow** screen before feed) screens; **neglect** (right parietal ignores) tests. Sides fail.",
+      "say": "Faces arms speeches NIHSSs is exam: carotids bruit fundis spot comas sink swallows choke glucoses correct ECGs race neglects ignore tests show sides weaken. Limbs dangle.",
+      "vis": null
+    },
+    {
+      "tx": "**Investigations** (**CT** bleed excludes thrombolysis gates, **MRI** DWI infarct core penumbra, **carotid** Doppler stenosis endarterectomy, **echo** PFO vegetations Holter AF, **sugar** lipids HbA1c risks, **vasculitis** young ESR screens) with **differentials** (**infarct** pale windowed, **ICH** hypertensive coma, **SAH** thunderclap xanthochromia, **venous** young seizures haemorrhagic) sorts; **stroke** (thrombolysis thrombectomy decides) meets. Clots lodge.",
+      "say": "CTs MRIs carotids echoes is Ix: sugars profile vasculitides screen infarcts pale ICHs bleed SAHs burst venouses clot strokes meet windows open retrievers pull. Scans gate.",
+      "vis": null
+    },
+    {
+      "tx": "**Management** (**thrombolyse** alteplase 4-point-5 window, **thrombectomy** large vessel 24, **aspirin** clopidogrel statin starts, **swallow** NG safe feeds, **physio** early mobilise prevents, **ICH** lowers reverses operates, **AF** anticoagulate after days, **prevent** pressure sugar smoke) with **traps** (**bleed** thrombolysis kills, **feed** aspirates drowns, **hemicraniectomy** malignant saves) closes; **follow** (rehab mood seizures) tracks. Brains recover.",
+      "say": "Thrombolyses thrombectomies aspirins swallows is Rx: physios move ICHs lower AFs wait prevents guard bleeds kill feeds drown craniectomies save follows track rehabs restore wishes respect. Functions return.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "bk2-med-481",
+    "bk2-med-482",
+    "bk2-med-483",
+    "bk2-med-484",
+    "bk2-med-485",
+    "bk2-med-486",
+    "bk2-med-487",
+    "bk2-med-488",
+    "bk2-med-489",
+    "bk2-med-490"
+  ],
+  "src": [],
+  "refs": [
+    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "books2-lon6",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
   }
- ]
 }

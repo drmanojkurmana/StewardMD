@@ -101,4 +101,6 @@ Wave LON3 DONE (branch books2-lon3): med-oesophagus, med-peptic-gi-bleed, med-ma
 
 
 Wave LON5 DONE (branch books2-lon5, from origin/main): med-pituitary, med-hypothyroidism, med-hyperthyroidism, med-parathyroid, med-bone, med-adrenal, med-aldo-pheo, med-gonadal-cah, med-diabetes (unindexed orphan overwritten + registered, see STATE2 disclosure). Each: 1 v1 lesson, 1 KB (9 new; all Endocrinology non_infective), 10 MCQs bk2-med-371 to 460. Medicine gaps remaining: 54 lesson-less med-* on merged-main basis (LON6: neuro block next).
+Wave LON6 DONE (branch books2-lon6, from origin/main): med-headache, med-epilepsy, med-stroke, med-dementia, med-movement, med-ms, med-neuropathy, med-neuromuscular, med-spinal-cord, med-cns-infections (3 unindexed orphans overwritten + registered, see STATE2 disclosure). Each: 1 v1 lesson, 1 KB (10 new; 9 Neurology non_infective + 1 infective), 10 MCQs bk2-med-461 to 560. Medicine gaps remaining: 44 lesson-less med-* on merged-main basis (LON7: haematology block next).
+
 
