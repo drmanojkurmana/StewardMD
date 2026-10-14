@@ -251,3 +251,6 @@
 
 
 
+## 2026-10-14 LON9 infectious DONE (branch books2-lon9, PR to open; PR #1611 still open)
+
+11 modules (sepsis-overwrite, hiv, malaria, arbovirus, enteric-rickettsial, parasitic, zoonoses-toxin, leprosy, sti, fungal, viral), 11 lessons + 11 KB + 110 MCQs bk2-med-761-870. Gates: LP 11/11, suites 59/59, similarity 0 hits, answers 28/27/27/28, app pre-existing only. Next: push + PR, then LON10 final medicine mix (9 modules).

@@ -106,3 +106,4 @@ Wave LON7 DONE (branch books2-lon7, from origin/main): med-microcytic, med-megal
 
 
 
+Wave LON9 DONE (branch books2-lon9, from origin/main): med-sepsis, med-hiv, med-malaria, med-arbovirus, med-enteric-rickettsial, med-parasitic, med-zoonoses-toxin, med-leprosy, med-sti, med-fungal, med-viral (1 disclosed orphan overwrite + registered, see STATE2 disclosure). Each: 1 v1 lesson, 1 KB (11 new Infectious Diseases infective), 10 MCQs bk2-med-761 to 870. Medicine gaps remaining: 13 lesson-less med-* on merged-main basis (LON10: onc/genetics/tox/critical-care mix next).
