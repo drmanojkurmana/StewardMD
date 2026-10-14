@@ -105,6 +105,21 @@ def graph(name, title, desc, rows, edges=(), sub=None, w=800, cw=None, rh=56, ga
             x1, y1, x2, y2 = ax, a[1] + a[3], bx, b[1]
         else:
             x1, y1, x2, y2 = ax, a[1], bx, b[1] + b[3]
+            if abs(ax - bx) < 3:  # backward edge in one column: route round the right side
+                xr = max(a[0] + a[2], b[0] + b[2]) + 30
+                f.line(a[0] + a[2], ay, xr, ay, GREY, 1.8, dash); f.line(xr, ay, xr, by, GREY, 1.8, dash); f.arrow(xr, by, b[0] + b[2] + 2, by, GREY, 1.8, 9, dash)
+                if lab: f.text(xr + 8, (ay + by) / 2, lab, 11.5, 500, AMBER)
+                continue
+        hit = any(k not in (e[0], e[1]) and any(p[0] - 2 < x1 + (x2 - x1) * t < p[0] + p[2] + 2 and p[1] - 2 < y1 + (y2 - y1) * t < p[1] + p[3] + 2 for t in [i / 40 for i in range(3, 38)]) for k, p in pos.items())
+        if hit and abs(y1 - y2) > 1:
+            lo, hi = sorted((ay, by)); span = [p for p in pos.values() if lo - 1 <= p[1] + p[3] / 2 <= hi + 1]
+            xr = max(p[0] + p[2] for p in span) + 26
+            if xr > w - 8:
+                xl = min(p[0] for p in span) - 26
+                f.line(a[0], ay, xl, ay, GREY, 1.8, dash); f.line(xl, ay, xl, by, GREY, 1.8, dash); f.arrow(xl, by, b[0] - 2, by, GREY, 1.8, 9, dash)
+            else:
+                f.line(a[0] + a[2], ay, xr, ay, GREY, 1.8, dash); f.line(xr, ay, xr, by, GREY, 1.8, dash); f.arrow(xr, by, b[0] + b[2] + 2, by, GREY, 1.8, 9, dash)
+            continue
         f.arrow(x1, y1, x2, y2, GREY, 1.8, 9, dash)
         if lab: f.text((x1 + x2) / 2 + (8 if abs(x1 - x2) < 3 else 0), (y1 + y2) / 2 - (6 if abs(y1 - y2) < 3 else -4), lab, 11.5, 500, AMBER, "start" if abs(x1 - x2) < 3 else "middle")
     if notes:
