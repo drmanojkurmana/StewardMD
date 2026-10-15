@@ -11,12 +11,12 @@
  *  - owner: the Author row shows, a run lists items with a flagged one, Approve all unflagged, Stage sends only approved
  *    items and shows the publish command;
  *  - no em or en dash on these screens, every button 44 px or taller, no uncaught error.
- * SHOTS=<dir> saves 390x844 and 820x1180, dark and light, of: create, progress, result, limit, author, review.
+ * SHOTS=<dir> saves 390x844 and 820x1180, dark and light, of: create, progress, result, pdfpages, limit, author, review.
  * USAGE: node test/run-prep-qgen-ui.mjs   (CHROME, CHROME_PORT, BASE, SHOTS)
  */
 import { spawn } from "node:child_process";
 import { freePort } from "./free-port.mjs";
-import { writeFileSync, mkdirSync, rmSync } from "node:fs";
+import { writeFileSync, mkdirSync, rmSync, statSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { setTimeout as sleep } from "node:timers/promises";
 import { dirname, join } from "node:path";
@@ -112,6 +112,44 @@ const goTests = async () => { await ev(`try{localStorage.setItem("smd_prep_tt","
 const goMenu = async () => { await ev(`var H=PREP._host; H.push(H.screens.menu); return 1;`); await sleep(300); };
 const hasRow = (act) => ev(`return !!document.querySelector('#smdPrep [data-act="${act}"]');`);
 const reopen = async () => { await ev(`PREP.close(); PREP.open(); return 1;`); await until(`return PREP.isOpen() && !!document.querySelector("#smdPrep .pn-tile");`, 15000); };
+const setQgFile = async (path) => { const { result: { root } } = await call("DOM.getDocument", { depth: 0 }); const { result: { nodeId } } = await call("DOM.querySelector", { nodeId: root.nodeId, selector: "#qgFile" }); await call("DOM.setFileInputFiles", { nodeId, files: [path] }); };
+const qgVal = (id) => ev(`var i=document.getElementById(${JSON.stringify(id)}); return i ? i.value : "missing";`);
+
+/* A tiny digital PDF (same builder shape as the Make-a-deck harness) and a long one, so the picker has text to read. */
+function makeQgPdf(pagesIn) {
+  const pageText = pagesIn || [
+    [[20, 780, "Acute leukaemia"], [11, 750, "Acute myeloid leukaemia shows more than twenty percent myeloblasts in the marrow."],
+      [11, 735, "Auer rods are needle shaped aggregates of azurophilic granules."], [11, 720, "Disseminated intravascular coagulation complicates the promyelocytic subtype."]],
+  ];
+  const objs = [];
+  objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+  const pobj = pageText.map((_, k) => 3 + 2 * k), font = 3 + 2 * pageText.length;
+  objs[2] = "<< /Type /Pages /Kids [" + pobj.map((o) => o + " 0 R").join(" ") + "] /Count " + pageText.length + " >>";
+  objs[font] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>";
+  pobj.forEach((po, k) => {
+    const stream = pageText[k].map(([size, y, t]) => `BT /F1 ${size} Tf 50 ${y} Td (${t}) Tj ET`).join("\n");
+    objs[po] = `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 ${font} 0 R >> >> /Contents ${po + 1} 0 R >>`;
+    objs[po + 1] = `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`;
+  });
+  let out = "%PDF-1.4\n";
+  const offs = [];
+  for (let i = 1; i < objs.length; i++) { offs[i] = out.length; out += `${i} 0 obj\n${objs[i]}\nendobj\n`; }
+  const xref = out.length;
+  out += `xref\n0 ${objs.length}\n0000000000 65535 f \n` + offs.slice(1).map((o) => String(o).padStart(10, "0") + " 00000 n \n").join("");
+  out += `trailer\n<< /Size ${objs.length} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  return out;
+}
+function makeQgBigPdf(n) {
+  const W = ["renal", "cardiac", "hepatic", "pulmonary", "neural", "gastric", "splenic", "dermal", "ocular", "osseous", "vascular", "endocrine"];
+  const pages = [];
+  for (let k = 1; k <= n; k++) {
+    const w = (i) => W[(k * 7 + i * 5) % W.length];
+    pages.push([[18, 780, "Topic " + k + " " + w(1) + " disorders"], [11, 750, "The " + w(2) + " finding " + k + " is linked with " + w(3) + " change in adults."],
+      [11, 735, "Treatment " + k + " starts with " + w(4) + " support and careful monitoring."], [11, 720, "Complication " + k + " involves the " + w(5) + " system in severe cases."],
+      [11, 705, "Prognosis " + k + " depends on early " + w(6) + " assessment and follow up."]]);
+  }
+  return makeQgPdf(pages);
+}
 
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -228,6 +266,49 @@ try {
   await click('#smdPrep [data-act="su-go"]');
   ok(await until(`return !!document.querySelector("#smdPrep .pn-opt");`, 5000), "offline: the module practises");
   await call("Network.emulateNetworkConditions", { offline: false, latency: 0, downloadThroughput: -1, uploadThroughput: -1 });
+
+  // ---- PDF page picker: From/To window, the one-tap fix, advanced ranges, the next-60 chain
+  api.status = Object.assign({}, api.status, { on: true, student: true, owner: false, left: 3 }); api.mode = "ok";
+  await reopen(); await ev(signIn); await ev(`PREP_QGEN.refresh(PREP._host, true); return 1;`); await sleep(400);
+  await goMenu();
+  await click('#smdPrep [data-act="g-new"]');
+  ok(await until(`return !!document.getElementById("qgCreateView");`, 5000), "pdf: create screen opens");
+  await click('#smdPrep [data-act="g-src"][data-v="pdf"]');
+  ok(await until(`return !!document.getElementById("qgFile");`, 3000), "pdf: the file button shows");
+  const bigName = "chap100-" + PORT + ".pdf", bigPath = join(tmpdir(), bigName);
+  writeFileSync(bigPath, makeQgBigPdf(100));
+  await ev(`try{localStorage.setItem("smd_prep_qgen_pages", JSON.stringify({${JSON.stringify(bigName + "|" + statSync(bigPath).size)}:{windows:[[1,60]],last:{from:1,to:60}}}));}catch(e){} return 1;`);
+  await setQgFile(bigPath);
+  ok(await until(`return !!document.getElementById("qgFrom");`, 20000), "pdf: From/To fields open for a 100-page PDF");
+  ok((await qgVal("qgFrom")) === "1" && (await qgVal("qgTo")) === "60", "pdf: starts with the first 60 (" + (await qgVal("qgFrom")) + "-" + (await qgVal("qgTo")) + ")");
+  ok(/60 of 60 pages selected/.test(await screenText()), "pdf: the counter says 60 of 60");
+  ok(/Create module from 1 to 60/.test(await screenText()), "pdf: Create names the window");
+  ok(await ev(`var f=document.getElementById("qgFrom"),t=document.getElementById("qgTo"); return f&&t&&f.getAttribute("inputmode")==="numeric"&&t.getAttribute("inputmode")==="numeric";`) === true, "pdf: digits keyboards on From/To");
+  ok(/Pick up to 60 pages\. Make another module for the next part/.test(await screenText()), "pdf: the one-line explanation");
+  ok(/1-60 of 100 done/.test(await screenText()) && /Make the next module: 61 to 100/.test(await screenText()), "pdf: the done marker and the next-module button");
+  ok(await ev(`return !document.getElementById("qgChap");`) === true, "pdf: no chapter list without an outline, and no error");
+  await click('#smdPrep [data-act="g-next"]');
+  await sleep(400);
+  ok((await qgVal("qgFrom")) === "61" && (await qgVal("qgTo")) === "100", "pdf: next fills 61 to 100");
+  ok(/Create module from 61 to 100/.test(await screenText()), "pdf: Create follows the window");
+  await ev(`var f=document.getElementById("qgFrom"); f.value="1"; f.dispatchEvent(new Event("input")); var t=document.getElementById("qgTo"); t.value="100"; t.dispatchEvent(new Event("input")); return 1;`);
+  ok(await until(`return /100 pages\\. One module holds up to 60/.test(document.body.innerText);`, 3000), "pdf: an over-long window is said plainly");
+  await click('#smdPrep [data-act="g-fix"]');
+  await sleep(400);
+  ok((await qgVal("qgFrom")) === "1" && (await qgVal("qgTo")) === "60", "pdf: the one-tap fix narrows to 1 to 60");
+  await click('#smdPrep [data-act="g-adv"]');
+  ok(await until(`return !!document.getElementById("qgAdv");`, 3000), "pdf: Advanced shows the typed box");
+  ok(await ev(`return document.getElementById("qgAdv").getAttribute("inputmode")==="text";`) === true, "pdf: Advanced uses the full keyboard");
+  await ev(`var i=document.getElementById("qgAdv"); i.value="10-12, 20"; i.dispatchEvent(new Event("input")); return 1;`);
+  ok(await until(`return /4 of 60 pages selected/.test(document.body.innerText);`, 3000), "pdf: a multi-range counts 4 of 60");
+  ok(/Create module from 4 pages/.test(await screenText()), "pdf: Create names the count for several ranges");
+  ok(await smallButtons() === "", "pdf: every button 44 px or taller (" + (await smallButtons()) + ")");
+  ok(!DASH.test(await screenText()), "pdf: no em or en dash on the picker");
+  await shots("pdfpages");
+  try { rmSync(bigPath, { force: true }); } catch {}
+  // Leave no PDF state behind: later sections expect a fresh topic-mode create screen.
+  await ev(`var c=PREP_QGEN._cs; c.kind="topic"; c.topic=""; c.text=""; c.pdf=null; c.spec=""; c.pgFrom=""; c.pgTo=""; c.adv=false; c.outline=null; c.prev=null; c.own=false; c.err=""; try{localStorage.removeItem("smd_prep_qgen_pages");}catch(e){} PREP._host.rerender(); return 1;`);
+  await sleep(300);
 
   // ---- limit reached
   api.mode = "limit"; api.status.left = 0;

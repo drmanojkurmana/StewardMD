@@ -41,28 +41,13 @@
     { id: "mrcs-part-a", tab: "mrcs", profile: "mrcs-part-a", label: "MRCS Part A", sub: "Intercollegiate MRCS Part A, 300 questions" }
   ];
   /* NEET-SS papers are set per specialty group (NBEMS NEET-SS bulletin: one 150-question paper per group; the 2025
-     groups below, each with its feeder broad specialty). subjects = the bank's ss-* subjects in that group. The
-     group sheet offers only groups whose subjects hold questions; a group with no bank subjects is not offered. */
-  var SS_GROUPS = [
-    { id: "medical", label: "Medical group", feeder: "MD or DNB General Medicine",
-      subjects: ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
-        "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology",
-        "ss-infectious-diseases", "ss-biostatistics"] },
-    { id: "surgical", label: "Surgical group", feeder: "MS or DNB General Surgery", subjects: ["ss-general-surgery", "ss-urology", "ss-neurosurgery", "ss-surgical-oncology", "ss-ctvs", "ss-paediatric-surgery", "ss-plastic-surgery", "ss-vascular-surgery"] },
-    { id: "anaesthesiology", label: "Anaesthesiology group", feeder: "MD or DNB Anaesthesiology", subjects: ["ss-cardiac-anaesthesia", "ss-neuroanaesthesia", "ss-transplant-anaesthesia", "ss-paediatric-anaesthesia"] },
-    { id: "critical-care", label: "Critical Care group", feeder: "MD or DNB Anaesthesiology, Medicine or equivalent", subjects: ["ss-critical-care", "ss-pulmonology"] },
-    { id: "ent", label: "ENT group", feeder: "MS or DNB ENT", subjects: ["ss-head-neck-surgery"] },
-    { id: "medical-oncology", label: "Medical Oncology group", feeder: "MD or DNB General Medicine or equivalent", subjects: ["ss-medical-oncology"] },
-    { id: "microbiology", label: "Microbiology group", feeder: "MD or DNB Microbiology", subjects: ["ss-virology"] },
-    { id: "obs-gynae", label: "Obstetrics and Gynaecology group", feeder: "MS or DNB Obstetrics and Gynaecology", subjects: ["ss-gynaecological-oncology", "ss-reproductive-medicine"] },
-    { id: "orthopaedics", label: "Orthopaedics group", feeder: "MS or DNB Orthopaedics", subjects: ["ss-hand-surgery", "ss-paediatric-orthopaedics"] },
-    { id: "paediatric", label: "Paediatric group", feeder: "MD or DNB Paediatrics", subjects: ["ss-neonatology", "ss-paediatric-cardiology", "ss-paediatric-neurology", "ss-paediatric-gastroenterology", "ss-paediatric-nephrology", "ss-paediatric-hepatology", "ss-paediatric-oncology", "ss-paediatric-critical-care"] },
-    { id: "pathology", label: "Pathology group", feeder: "MD or DNB Pathology", subjects: ["ss-onco-pathology"] },
-    { id: "pharmacology", label: "Pharmacology group", feeder: "MD or DNB Pharmacology", subjects: ["ss-clinical-pharmacology"] },
-    { id: "psychiatry", label: "Psychiatry group", feeder: "MD or DNB Psychiatry", subjects: ["ss-geriatric-mental-health", "ss-child-adolescent-psychiatry"] },
-    { id: "radio-diagnosis", label: "Radio-diagnosis group", feeder: "MD or DNB Radio-diagnosis", subjects: ["ss-radiology"] },
-    { id: "respiratory", label: "Respiratory Medicine group", feeder: "MD or DNB Respiratory Medicine or equivalent", subjects: ["ss-pulmonology", "ss-critical-care"] }
-  ];
+     groups and feeder degrees). The mapping lives in prep/ss-groups.json; prep-ss-groups.js is its one compiled copy
+     (tools/prep-ss-groups-build.mjs): medical-kind groups show their own super-specialties plus the medical core and
+     Biostatistics, surgical shows its own plus Biostatistics, every other group its own plus Biostatistics.
+     subjects = the bank's ss-* subjects in that group, in taxonomy order. The group sheet offers only groups whose
+     subjects hold questions; a group with no bank subjects is not offered. */
+  var SS_DATA = NODE ? require("./prep-ss-groups.js") : (G.PREP_SS_GROUPS || { groups: [] });
+  var SS_GROUPS = SS_DATA.groups || [];
   function ssGroupOf(id) { for (var gi = 0; gi < SS_GROUPS.length; gi++) if (SS_GROUPS[gi].id === id) return SS_GROUPS[gi]; return null; }
   function ssGroupSubjects(id) { var g = ssGroupOf(id); return g ? g.subjects.slice() : []; }
   function defaultSsGroup() { return "medical"; }
@@ -561,15 +546,26 @@
     try { (H.subjectsOf("neet-ss") || []).forEach(function (sb) { out.push([sb.id, H.tx(sb.name)]); }); } catch (e) {}
     return out;
   }
+  // One NEET-SS group card: the group, the feeder degree and the super-specialties it holds. Shared by the
+  // onboarding Step 1 page and the settings sheet, so there is only one group picker.
+  function groupCardHtml(g, on) {
+    return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder) + "</small><small>" + esc(g.includes || "") + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
+  }
+  function groupPickerHtml(c, explicit) {
+    var offered = SS_GROUPS.filter(function (g) { return g.subjects.length; });
+    return '<div class="pl-opts" role="radiogroup" aria-label="NEET-SS group">' + offered.map(function (g) {
+      // Onboarding asks explicitly, so nothing is preselected; settings preselects the stored group.
+      var on = explicit ? c.group === g.id : (c.group || defaultSsGroup()) === g.id;
+      return groupCardHtml(g, on);
+    }).join("") + "</div>";
+  }
   // The second half of the exam step: the NEET-SS group (one paper per group) or the one INI-SS subject.
-  function examSubHtml(c) {
+  // onboarding: the exam step only names what is next; the group itself is asked on its own Step 1 page.
+  function examSubHtml(c, onboarding) {
     if (!c) return "";
     if (c.exam === "neet-ss") {
-      var offered = SS_GROUPS.filter(function (g) { return g.subjects.length; });
-      return '<div class="pl-subq" role="radiogroup" aria-label="NEET-SS group"><p class="pn-mut pn-small">Your group: one paper per group.</p><div class="pl-opts">' + offered.map(function (g) {
-        var on = (c.group || defaultSsGroup()) === g.id;
-        return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-group" data-v="' + g.id + '"><span class="pn-rb"><b>' + esc(g.label) + "</b><small>" + esc(g.feeder) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
-      }).join("") + "</div></div>";
+      if (onboarding) return '<div class="pl-subq"><p class="pn-mut pn-small">Next: who you are, then only your subjects. One paper per group.</p></div>';
+      return '<div class="pl-subq"><p class="pn-mut pn-small">Your group: one paper per group.</p>' + groupPickerHtml(c, false) + "</div>";
     }
     if (c.exam === "ini-ss") {
       var opts = ssSubjectOptions();
@@ -587,7 +583,7 @@
     out.exam = step ? '<div class="pl-opts" role="radiogroup" aria-label="Exam">' + EXAM_CHOICES.map(function (e) {
       var on = c.exam === e.id;
       return '<button type="button" class="pl-opt' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" data-act="p-f-exam" data-v="' + e.id + '"><span class="pn-rb"><b>' + esc(e.label) + "</b><small>" + esc(e.sub) + '</small></span><span class="pl-dot" aria-hidden="true">' + (on ? ic("check") : "") + "</span></button>";
-    }).join("") + "</div>" + examSubHtml(c) : segHtml("p-f-exam", "Exam", EXAM_CHOICES.map(function (e) { return [e.id, esc(e.label)]; }), c.exam) + '<p class="pn-mut pn-small pl-segsub">' + esc(ch ? ch.sub : "") + "</p>" + examSubHtml(c);
+    }).join("") + "</div>" + examSubHtml(c, true) : segHtml("p-f-exam", "Exam", EXAM_CHOICES.map(function (e) { return [e.id, esc(e.label)]; }), c.exam) + '<p class="pn-mut pn-small pl-segsub">' + esc(ch ? ch.sub : "") + "</p>" + examSubHtml(c, false);
     var d = new Date(H.today() * 864e5), iso = d.toISOString().slice(0, 10), left = c.date ? dayOfDate(c.date) - H.today() : null;
     var exact = '<details class="pl-exact"><summary>Type a date</summary><label class="pn-sl"><span class="pn-mut pn-small">Exam date</span><input class="pn-in" type="date" id="plDate" name="examDate" min="' + iso + '" value="' + esc(c.date || "") + '"></label></details>';
     var calBody = calHtml(c) + '<div class="pn-wrap">' + chip("p-f-nodate", "1", !c.date, "Not decided yet") + "</div>" + exact;
@@ -696,8 +692,11 @@
   ];
   function onboard(h) {
     H = h;
-    if (!P.ob) { P.ob = { i: 0, c: { exam: null, date: null, min: 30, rem: null } }; P.cal = null; }
-    var o = P.ob, st = STEPS[o.i], last = o.i === STEPS.length - 1,
+    if (!P.ob) { P.ob = { i: 0, sub: null, c: { exam: null, date: null, min: 30, rem: null } }; P.cal = null; }
+    var o = P.ob;
+    // NEET-SS asks the group on its own pages after the exam step: Step 1 who you are, Step 2 your shortlist.
+    if (o.i === 0 && o.c.exam === "neet-ss" && (o.sub === "who" || o.sub === "spec")) return onboardSub(o);
+    var st = STEPS[o.i], last = o.i === STEPS.length - 1,
       can = st[0] !== "exam" || (!!o.c.exam && (o.c.exam !== "ini-ss" || !!o.c.subject));
     H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step " + (o.i + 1) + " of 4", "close", st[0] === "exam" ? "" : '<button type="button" class="pn-link pl-skip" data-act="p-skip">Skip</button>') +
       '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>" +
@@ -706,9 +705,59 @@
       '<button type="button" class="pn-btn pri" data-act="p-ob-next"' + (can ? "" : " disabled") + ">" + (last ? "Start preparing" : "Continue") + "</button></div></div>", "#plQ");
     wireInputs(o.c, function () { onboard(H); });
   }
+  function obProg(o) {
+    return '<div class="pn-lsn-prog" aria-hidden="true">' + STEPS.map(function (x, i) { return "<i" + (i <= o.i ? ' class="on"' : "") + "></i>"; }).join("") + "</div>";
+  }
+  // Step 1 ("Who are you?"): the feeder-degree cards, asked once and remembered with the plan. Nothing preselected.
+  function onboardWho(o) {
+    var can = !!ssGroupOf(o.c.group);
+    H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step 1 of 4", "close", "") + obProg(o) +
+      '<div class="pn-body pl-ob"><h2 class="pl-q" id="plQ" tabindex="-1">Who are you?</h2><p class="pn-mut">Pick the degree you hold. Your NEET-SS paper follows it, one group at a time.</p>' +
+      '<div class="pl-subq">' + groupPickerHtml(o.c, true) + "</div>" +
+      '<div class="pn-navrow pl-obnav"><button type="button" class="pn-btn" data-act="p-ob-back">Back</button>' +
+      '<button type="button" class="pn-btn pri" data-act="p-ob-next"' + (can ? "" : " disabled") + ">Continue</button></div></div>", "#plQ");
+  }
+  // Step 2 ("Pick your super-specialty"): only this group's subjects, with module and MCQ counts, the mixed
+  // "All <group> subjects" row first. A preview: the same shortlist Home shows after onboarding.
+  function specRowHtml(name, sub, icon) {
+    return '<li><div class="pn-row static"><span class="pn-ri" aria-hidden="true">' + H.ico(icon) + '</span><span class="pn-rb"><b>' + esc(name) + "</b><small>" + esc(sub) + "</small></span></div></li>";
+  }
+  function onboardSpec(o) {
+    var g = ssGroupOf(o.c.group) || ssGroupOf(defaultSsGroup()), ix = {};
+    try { ix = H.ix() || {}; } catch (e) {}
+    var short = g.label.replace(/ group$/, ""), total = 0, rows = "", anyIx = false;
+    g.subjects.forEach(function (sid) {
+      var sb = null; try { sb = H.subjectById(sid); } catch (e) {}
+      if (!sb) return;
+      var t = ix[sid];
+      if (t && t.topics) {
+        anyIx = true;
+        var mods = 0, q = 0;
+        t.topics.forEach(function (x) { if (x.group === "mixed") return; var n = 0; try { n = H.pure.countFor(x, "neet-ss"); } catch (e2) {} if (n > 0) { mods++; q += n; } });
+        if (!q) return; // a subject with no questions is never shown
+        total += q;
+        rows += specRowHtml(H.tx(sb.name), mods + (mods === 1 ? " module" : " modules") + " · " + H.fmt(q) + " MCQs", "book");
+      } else rows += specRowHtml(H.tx(sb.name), "Counting questions…", "book");
+    });
+    var list = !rows && anyIx ? '<p class="pn-empty">No questions in this group on this phone yet.</p>'
+      : (anyIx ? '<ul class="pn-group pl-speclist">' + specRowHtml("All " + short + " subjects", total ? "Mixed · " + H.fmt(total) + " MCQs" : "Mixed", "grid") + rows + "</ul>"
+        : '<p class="pn-load" role="status">Loading your subjects…</p><ul class="pn-group pl-speclist">' + rows + "</ul>");
+    H.paint('<div class="pn-sky" aria-hidden="true"></div>' + H.bar("PrepNucleus", "Step 1 of 4", "close", "") + obProg(o) +
+      '<div class="pn-body pl-ob"><h2 class="pl-q" id="plQ" tabindex="-1">Pick your super-specialty</h2><p class="pn-mut">' + esc(g.label) + ": only these subjects are on your paper.</p>" + list +
+      '<div class="pn-navrow pl-obnav"><button type="button" class="pn-btn" data-act="p-f-who">Change group</button>' +
+      '<button type="button" class="pn-btn pri" data-act="p-ob-next">Continue</button></div></div>', "#plQ");
+    var need = g.subjects.filter(function (sid) { var x = null; try { x = H.ix()[sid]; } catch (e) {} return !x; });
+    if (need.length) {
+      Promise.all(need.map(function (sid) { try { return H.loadIndex(sid).then(function () {}, function () {}); } catch (e) { return Promise.resolve(); } })).then(function () {
+        if (P.ob && P.ob.i === 0 && P.ob.sub === "spec") onboard(H);
+      });
+    }
+  }
+  function onboardSub(o) { if (o.sub === "who") onboardWho(o); else onboardSpec(o); }
   function finishOnboard(skip) {
     var c = P.ob ? P.ob.c : { exam: null };
-    if (skip) apply({ exam: c.exam || null, date: c.date, min: c.min || 30, rem: c.rem });
+    // Skipping keeps the exam and the picked group: only the date, minutes and reminder stay undecided.
+    if (skip) apply({ exam: c.exam || null, group: c.group, subject: c.subject, date: c.date, min: c.min || 30, rem: c.rem });
     else apply(c);
     P.ob = null;
     var stk = H.stack(); stk.length = 0; stk.push(H.home); H.home();
@@ -733,8 +782,14 @@
     // Onboarding fields edit P.ob.c; the settings sheet edits SET.
     var c = P.sheet && P.sheet.id === "set" ? SET : P.ob && P.ob.c, redraw = P.sheet && P.sheet.id === "set" ? function () { drawSettings(false); } : function () { onboard(H); };
     if (a.indexOf("p-n-") === 0) return G.PREP_NATIVE && G.PREP_NATIVE.act(a, b, H, c && redraw);
+    // The Step 2 "Change group" control returns to Step 1; it must run before the generic p-f- field branch.
+    if (a === "p-f-who") { if (P.ob) { P.ob.sub = "who"; if (H.nav) H.nav(-1); onboard(H); } return; }
     if (a.indexOf("p-f-") === 0 && c) {
-      if (a === "p-f-exam") { c.exam = v; if (v === "neet-ss" && !ssGroupOf(c.group)) c.group = defaultSsGroup(); if (v !== "ini-ss") c.subject = null; }
+      if (a === "p-f-exam") { var wasOnb = !(P.sheet && P.sheet.id === "set"), prev = c.exam; c.exam = v;
+        // Onboarding asks the group explicitly on Step 1, so a fresh NEET-SS pick clears it; settings keeps the default.
+        if (v === "neet-ss" && wasOnb && prev !== "neet-ss") { c.group = null; P.ob.sub = null; }
+        else if (v === "neet-ss" && !ssGroupOf(c.group)) c.group = defaultSsGroup();
+        if (v !== "ini-ss") c.subject = null; }
       if (a === "p-f-group" && c.exam === "neet-ss" && ssGroupOf(v)) c.group = v;
       if (a === "p-f-subject" && c.exam === "ini-ss") c.subject = v;
       if (a === "p-f-nodate") c.date = null;
@@ -753,13 +808,33 @@
     }
     if (a === "p-save") { apply(SET); closeSheet(true); return H.rerender(); }
     if (a === "p-skip") return finishOnboard(true);
-    if (a === "p-ob-back") { if (P.ob && P.ob.i) { P.ob.i--; if (H.nav) H.nav(-1); onboard(H); } return; }
-    if (a === "p-ob-next") { if (!P.ob) return; if (P.ob.i < STEPS.length - 1) { P.ob.i++; if (H.nav) H.nav(1); return onboard(H); } return finishOnboard(false); }
+    if (a === "p-ob-back") {
+      if (!P.ob) return;
+      if (P.ob.i === 0 && P.ob.sub) { P.ob.sub = P.ob.sub === "spec" ? "who" : null; if (H.nav) H.nav(-1); onboard(H); return; }
+      if (P.ob.i) { P.ob.i--; if (H.nav) H.nav(-1); onboard(H); }
+      return;
+    }
+    if (a === "p-ob-next") {
+      if (!P.ob) return;
+      // NEET-SS goes exam -> Step 1 (who) -> Step 2 (shortlist) -> date, each on its own page.
+      if (P.ob.i === 0 && P.ob.c.exam === "neet-ss") {
+        if (!P.ob.sub) { P.ob.sub = "who"; if (H.nav) H.nav(1); return onboard(H); }
+        if (P.ob.sub === "who" && ssGroupOf(P.ob.c.group)) { P.ob.sub = "spec"; if (H.nav) H.nav(1); return onboard(H); }
+        if (P.ob.sub === "spec") { P.ob.sub = null; P.ob.i = 1; if (H.nav) H.nav(1); return onboard(H); }
+        return;
+      }
+      if (P.ob.i < STEPS.length - 1) { P.ob.i++; if (H.nav) H.nav(1); return onboard(H); }
+      return finishOnboard(false);
+    }
   }
   // PREP.back() asks first: a sheet closes; inside onboarding a step goes back.
   function back() {
     if (P.sheet) { closeSheet(); return true; }
-    if (P.ob && H && H.stackTop && H.stack().length === 1 && P.ob.i > 0) { P.ob.i--; onboard(H); return true; }
+    if (P.ob && H && H.stackTop && H.stack().length === 1 && (P.ob.i > 0 || (P.ob.i === 0 && P.ob.sub))) {
+      if (P.ob.i === 0) P.ob.sub = P.ob.sub === "spec" ? "who" : null;
+      else P.ob.i--;
+      onboard(H); return true;
+    }
     return false;
   }
   function leave() { P.sheet = null; P.ob = null; SET = null; if (G.PREP_NATIVE) G.PREP_NATIVE.leave(); }

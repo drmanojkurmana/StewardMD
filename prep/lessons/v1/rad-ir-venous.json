@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "module": "rad-ir-venous",
+  "subject": "radiology",
+  "title": "Venous access and IVC filters",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Venous access devices are matched to therapy length and veins. **Peripheral cannulas** suit days, **PICC lines** suit weeks to months of antibiotics or fluids, **tunnelled catheters** suit dialysis and prolonged therapy, and **implantable ports** suit intermittent chemotherapy over months. The **right internal jugular vein** gives the straightest run to the superior vena cava under **ultrasound guidance**. Tip position at the **cavoatrial junction** is confirmed before vesicants run. **Catheter-related thrombosis** presents with arm swelling and needs anticoagulation with line review.",
+      "say": "Devices match therapy length. Cannulas suit days, PICC lines suit weeks to months, tunnelled catheters suit dialysis, and ports suit intermittent chemotherapy. The right internal jugular vein gives the straightest run under ultrasound, with tips confirmed at the cavoatrial junction. Arm swelling signals catheter thrombosis needing anticoagulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Device",
+          "Use"
+        ],
+        "rows": [
+          [
+            "Peripheral cannula",
+            "Days"
+          ],
+          [
+            "PICC line",
+            "Weeks to months"
+          ],
+          [
+            "Tunnelled catheter",
+            "Dialysis prolonged"
+          ],
+          [
+            "Implantable port",
+            "Intermittent chemotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Malignant **superior vena cava syndrome** with facial swelling, plethora and dilated chest collaterals responds rapidly to **venous stenting**. Stenting suits patients needing urgent relief before or alongside oncology, while chemosensitive tumours may resolve with drugs alone. **Balloon angioplasty** predilates tight malignant strictures before stent deployment. **Bilateral brachiocephalic** disease needs kissing stents to keep both sides open. **Anticoagulation** after venous stenting follows local protocol rather than a universal rule.",
+      "say": "Facial swelling with chest collaterals marks superior vena cava syndrome, which stenting relieves rapidly. Chemosensitive tumours may resolve with drugs, but tight strictures need balloon predilation first. Bilateral disease needs kissing stents, and anticoagulation after stenting follows local protocol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm SVC block"
+          },
+          {
+            "id": "b",
+            "label": "Cross the stricture"
+          },
+          {
+            "id": "c",
+            "label": "Balloon predilate"
+          },
+          {
+            "id": "d",
+            "label": "Deploy venous stent"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "IVC filters catch clots when blood thinners cannot be used. The core indications are **venous thromboembolism with a contraindication to anticoagulation** and **recurrent embolism despite adequate therapy**. **Retrievable filters** suit temporary risk such as trauma or perioperative bleeding, while **permanent filters** suit lifelong contraindications. Filters sit **below the renal veins** so renal drainage stays open. **Insertion-site thrombosis** and access bleeding are the commonest immediate harms.",
+      "say": "Filters catch clots when thinners cannot be used. Core indications are clots with a contraindication to anticoagulation and recurrence despite therapy. Retrievable filters suit temporary risk, permanent ones suit lifelong bans. Filters sit below the renal veins, and insertion-site thrombosis is the commonest early harm.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Filter"
+        ],
+        "rows": [
+          [
+            "VTE, thinners contraindicated",
+            "Indicated"
+          ],
+          [
+            "Recurrence despite therapy",
+            "Indicated"
+          ],
+          [
+            "Temporary bleeding risk",
+            "Retrievable"
+          ],
+          [
+            "Lifelong contraindication",
+            "Permanent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A filter left behind becomes a hazard. **Retrieval** is booked as soon as protection is no longer needed and thinners can resume, ideally within weeks to a few months. **Tilted filters** with hooks embedded in the caval wall need advanced retrieval with loops or forceps. Complications of neglected filters include **IVC thrombosis**, **strut fracture with embolisation**, **migration** and difficult removal. **Filter registries** with recall dates prevent the commonest failure, which is simply forgetting the device.",
+      "say": "Filters left behind become hazards. Retrieval is booked once protection ends and thinners resume. Tilted hooks need advanced retrieval techniques. Neglected filters thrombose, fracture, migrate or become irretrievable, so registries with recall dates prevent simply forgetting the device.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "maikir-031",
+    "maikir-032",
+    "maikir-033",
+    "maikir-034",
+    "maikir-035",
+    "maikir-036",
+    "maikir-037",
+    "maikir-038",
+    "maikir-039",
+    "maikir-040"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

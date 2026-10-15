@@ -1,23 +1,24 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1290 lessons (88.0%) have zero images; 176 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1483 lessons); recounted 2026-10-15 (1484 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (84.4%) have zero images; 231 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
-| medicine | 113 | 113 | 0 |
+| medicine | 113 | 92 | 21 |
 | anatomy | 80 | 0 | 80 |
-| pathology | 73 | 69 | 4 |
-| pharmacology | 72 | 68 | 4 |
-| biochemistry | 69 | 65 | 4 |
-| surgery | 66 | 65 | 1 |
-| paediatrics | 57 | 57 | 0 |
+| pathology | 73 | 64 | 9 |
+| pharmacology | 72 | 60 | 12 |
+| surgery | 71 | 62 | 9 |
+| biochemistry | 69 | 63 | 6 |
+| paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
-| obstetrics-gynaecology | 50 | 50 | 0 |
+| obstetrics-gynaecology | 50 | 46 | 4 |
 | physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
-| microbiology | 40 | 36 | 4 |
+| microbiology | 40 | 31 | 9 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
+| radiology | 35 | 35 | 0 |
 | anaesthesia | 34 | 34 | 0 |
 | orthopaedics | 33 | 33 | 0 |
 | ss-critical-care | 32 | 32 | 0 |
@@ -29,7 +30,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 | ss-nephrology | 26 | 26 | 0 |
 | ss-rheumatology-immunology | 25 | 25 | 0 |
 | mcc-chronic-care | 23 | 23 | 0 |
-| radiology | 23 | 23 | 0 |
 | mcc-acute-care | 21 | 21 | 0 |
 | adult-health-surgery | 18 | 18 | 0 |
 | dermatology | 18 | 18 | 0 |
@@ -44,7 +44,7 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 | womens-health | 10 | 10 | 0 |
 | mrcp-basic-science | 8 | 8 | 0 |
 | mrcp-rheumatology | 8 | 8 | 0 |
-| mrcp-statistics | 8 | 1 | 7 |
+| mrcp-statistics | 8 | 0 | 8 |
 | ss-hepatology | 8 | 8 | 0 |
 | mrcp-pharmacology | 7 | 7 | 0 |
 | ss-pulmonology | 7 | 7 | 0 |
@@ -69,15 +69,11 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 
 ## Imageless lessons by subject (highest exam weight first)
 
-### medicine (113/113 imageless)
+### medicine (92/113 imageless)
 
-- `med-acid-base`: Approach to Metabolic Acidosis and Renal Tubular Acidosis
 - `med-clinical-cardiology`: Clinical cardiology: pulse, JVP and heart sounds
-- `med-diabetes-complications`: Management of Diabetic Ketoacidosis
-- `med-ecg`: ECG interpretation: high-yield patterns for NEET-PG, INI-CET and USMLE
 - `med-envenomation`: Snake bite: immobilise, reassure, antivenom for systemic or severe local signs
 - `med-examination`: Clinical examination: consent, sequence, comparison
-- `med-heart-failure`: Management of Chronic Heart Failure with Reduced Ejection Fraction
 - `med-ich`: Raised intracranial pressure and intracranial bleeding: protect the brain
 - `med-iv-fluids`: Intravenous fluid therapy: crystalloids, colloids and maintenance
 - `med-lab-interpretation`: Lab interpretation: count, chemistry, gas in context
@@ -86,21 +82,12 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 - `med-onc-principles`: Immune checkpoint inhibitors: pembrolizumab and immune-related adverse events
 - `med-osce-procedures`: OSCE procedures: asepsis, access, oxygen, communication
 - `med-overdose`: Paracetamol poisoning: time, levels, antidote by toxicology advice
-- `med-pesticides`: Organophosphate poisoning: atropine for the wet patient, pralidoxime early
-- `med-pft-abg`: Pulmonary function tests and arterial blood gases
 - `med-cad-stable`: Stable coronary artery disease and dyslipidaemia
-- `med-acs`: Acute coronary syndromes
-- `med-arrhythmias`: Arrhythmias and conduction disorders
-- `med-valvular`: Valvular and rheumatic heart disease
 - `med-endocarditis`: Infective endocarditis
-- `med-cardiomyopathy`: Cardiomyopathies and myocarditis
 - `med-pericardial`: Pericardial diseases
 - `med-hypertension`: Systemic hypertension and aortic disease
-- `med-asthma`: Asthma
-- `med-copd`: Chronic obstructive pulmonary disease
 - `med-bronchiectasis-cf`: Bronchiectasis and cystic fibrosis
 - `med-pneumonia`: Pneumonia
-- `med-tb`: Tuberculosis
 - `med-ild`: Interstitial, granulomatous and occupational lung disease
 - `med-pe-pulmonary-htn`: Pulmonary embolism and pulmonary hypertension
 - `med-pleural`: Pleural diseases and pneumothorax
@@ -114,17 +101,11 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 - `med-jaundice`: Jaundice and liver function tests
 - `med-viral-hepatitis`: Viral hepatitis and acute liver failure
 - `med-fatty-liver`: Alcoholic and non-alcoholic fatty liver disease
-- `med-cirrhosis`: Cirrhosis and portal hypertension
 - `med-autoimmune-metabolic-liver`: Autoimmune, cholestatic, metabolic and drug-induced liver disease
-- `med-aki`: Acute kidney injury: prerenal, intrinsic and postrenal
-- `med-ckd`: Chronic kidney disease, dialysis and transplantation
-- `med-glomerulonephritis`: Glomerulonephritis and the nephritic syndrome
 - `med-nephrotic`: Nephrotic syndrome: heavy proteinuria and clots
 - `med-tubulointerstitial`: Tubulointerstitial, cystic and inherited kidney disease
 - `med-renovascular`: Renovascular disease and thrombotic microangiopathy
 - `med-uti-stones`: Urinary tract infection and kidney stones
-- `med-sodium`: Sodium and water balance: hypo- and hypernatraemia
-- `med-potassium`: Potassium, magnesium and phosphate emergencies
 - `med-pituitary`: Pituitary adenomas, acromegaly and Sheehan's syndrome
 - `med-hypothyroidism`: Hypothyroidism, Hashimoto's and myxoedema coma
 - `med-hyperthyroidism`: Thyrotoxicosis, Graves' disease and thyroid storm
@@ -133,10 +114,8 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 - `med-adrenal`: Addison's disease, Cushing's syndrome and adrenal crisis
 - `med-aldo-pheo`: Primary aldosteronism and phaeochromocytoma
 - `med-gonadal-cah`: Hypogonadism, hirsutism and congenital adrenal hyperplasia
-- `med-diabetes`: Diabetes mellitus long case: control, complications and crises
 - `med-headache`: Headache: migraine, red flags and thunderclap
 - `med-epilepsy`: Seizures and status epilepticus
-- `med-stroke`: Stroke and hemiplegia: infarct, bleed and TIA
 - `med-dementia`: Dementia and delirium: reversible and progressive
 - `med-movement`: Parkinsonism, tremor, chorea and dystonia
 - `med-ms`: Multiple sclerosis and demyelination
@@ -189,15 +168,13 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 
 All 80 lessons in anatomy carry at least one verified diagram.
 
-### pathology (69/73 imageless)
+### pathology (64/73 imageless)
 
 - `pat-adaptations-accumulations`: Cellular adaptations, accumulations, pigments and calcification
 - `pat-benign-wbc-lymph-node`: Non-neoplastic leukocyte and lymph node disorders: reactive changes and key differentials
 - `pat-carcinogenic-agents`: Carcinogenic agents and oncogenic viruses
 - `pat-cytogenetics`: Cytogenetic disorders: karyotyping and key syndromes
-- `pat-hypersensitivity`: Hypersensitivity reactions and transplant rejection
 - `pat-infectious-pathology`: Pathology of Infectious Diseases: Inclusions, Granulomas and Special Stains
-- `pat-mediators`: Chemical mediators of inflammation: key facts for exams
 - `pat-mendelian-disorders`: Mendelian disorders: inheritance patterns and key single-gene diseases
 - `pat-mixed`: Mixed pathology rapid review: high-yield pairings
 - `pat-molecular-carcinogenesis`: Molecular basis of cancer: oncogenes, tumour suppressors and DNA repair
@@ -208,8 +185,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-transfusion`: Blood banking and transfusion medicine: core principles for exams
 - `pat-tumour-biology`: Nomenclature, characteristics and spread of tumours
 - `pat-tumour-diagnosis`: Host response, paraneoplastic syndromes and diagnosis of cancer
-- `pat-thrombosis-embolism`: Thrombosis, embolism and infarction
-- `pat-shock`: Shock: types, stages and tissue effects
 - `pat-autoimmune`: Autoimmune diseases: tolerance failure and systemic patterns
 - `pat-immunodeficiency`: Immunodeficiency diseases and AIDS
 - `pat-amyloidosis`: Amyloidosis: types, staining and organ patterns
@@ -225,7 +200,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-obstructive-restrictive`: Obstructive, restrictive and vascular lung diseases
 - `pat-lung-tumours`: Lung tumours: types, paraneoplastic syndromes and spread
 - `pat-hepatitis-cirrhosis`: Hepatitis, cirrhosis and liver failure
-- `pat-glomerular`: Glomerular diseases: nephritic and nephrotic patterns
 - `pat-breast`: Breast pathology: benign lesions, carcinoma types and receptors
 - `pat-thyroid-parathyroid`: Thyroid and parathyroid disorders: goitre, cancer and calcium
 - `pat-diabetes-men`: Diabetes mellitus, pancreatic endocrine tumours and MEN syndromes
@@ -261,9 +235,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-male-genital`: Male genital pathology: prostate, testis, penis and scrotum
 - `pat-skin`: Skin pathology: blistering, papulosquamous disease and tumours
 
-### pharmacology (68/72 imageless)
+### pharmacology (60/72 imageless)
 
-- `phm-absorption-routes`: Routes of administration and drug absorption
 - `phm-adverse-reactions`: Adverse drug reactions, interactions and pharmacogenetics
 - `phm-aminoglycosides`: Aminoglycosides: mechanism, toxicity and key clinical rules
 - `phm-antianginal`: Antianginal drugs and calcium channel blockers
@@ -273,7 +246,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-antimuscarinics`: Antimuscarinic drugs: receptors, uses and toxicity
 - `phm-antiparkinsonian`: Antiparkinsonian drugs and drugs for dementia
 - `phm-antiprotozoal-anthelmintic`: Antiamoebic, antiprotozoal and anthelmintic drugs: high-yield essentials
-- `phm-antitubercular`: Antitubercular drugs: key actions, toxicities and regimens
 - `phm-beta-blockers`: Beta adrenergic blockers: selectivity, key properties and safety
 - `phm-cholinergic-agonists`: Cholinergic transmission and cholinomimetics
 - `phm-cytotoxic-anticancer`: Cytotoxic anticancer drugs: key toxicities, rescues and mechanisms
@@ -300,16 +272,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-asthma-cough`: Drugs for bronchial asthma, COPD and cough
 - `phm-antiemetics`: Antiemetics and prokinetic drugs
 - `phm-laxatives-ibd`: Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease
-- `phm-antihypertensives`: Antihypertensive drugs
-- `phm-antiarrhythmics`: Antiarrhythmic drugs
 - `phm-shock-pah`: Drugs for shock and pulmonary arterial hypertension
 - `phm-sedative-hypnotics`: Sedative-hypnotics, anxiolytics and alcohol dependence
 - `phm-general-anaesthetics`: General anaesthetics, premedication and malignant hyperthermia
 - `phm-local-anaesthetics`: Local anaesthetics: esters, amides and regional blocks
-- `phm-opioids`: Opioid analgesics, receptors and dependence
 - `phm-antidepressants`: Antidepressants, lithium and mood stabilisers
 - `phm-antipsychotics`: Antipsychotics: D2 blockade, EPS and clozapine
-- `phm-antiepileptics`: Antiepileptics and status epilepticus
 - `phm-cns-stimulants`: CNS stimulants, ADHD and narcolepsy
 - `phm-corticosteroids`: Corticosteroids: potency, Cushing, taper and uses
 - `phm-oral-antidiabetics`: Oral antidiabetics and incretin therapies
@@ -317,10 +285,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-pituitary`: Pituitary drugs: GH, desmopressin, oxytocin and dopaminergics
 - `phm-contraceptives-uterine`: Contraceptives, emergency cover and uterotonics
 - `phm-bone-calcium`: Bone, calcium and hypercalcaemia drugs
-- `phm-insulin`: Insulin: types, regimens, DKA and hypoglycaemia
 - `phm-haematinics`: Haematinics, growth factors and chelators
 - `phm-antiplatelets-fibrinolytics`: Antiplatelets, DAPT and fibrinolytics
-- `phm-beta-lactams`: Beta-lactams: penicillins, cephalosporins and carbapenems
 - `phm-protein-synthesis-inhibitors`: Protein synthesis inhibitors: aminoglycosides to linezolid
 - `phm-other-antibacterials`: Other antibacterials: fluoroquinolones, vancomycin, metronidazole and UTI drugs
 - `phm-antifungals`: Antifungals: azoles, amphotericin and echinocandins
@@ -332,7 +298,72 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### biochemistry (65/69 imageless)
+### surgery (62/71 imageless)
+
+- `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
+- `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
+- `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
+- `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
+- `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
+- `sur-mixed`: Mixed practice: surgery rapid review
+- `sur-neck-face-trauma`: Neck, vascular and maxillofacial injuries: high-yield essentials
+- `sur-onc-principles`: Principles of surgical oncology and soft tissue sarcoma
+- `sur-periop`: Perioperative care and surgical complications: key high-yield points
+- `sur-plastic`: Skin grafts, flaps and cleft surgery timing
+- `sur-small-bowel`: Small intestine and mesentery: high-yield essentials
+- `sur-stomach`: Stomach and duodenum: high-yield surgical essentials
+- `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
+- `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
+- `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
+- `sur-head-injury`: Traumatic brain injury, intracranial hematomas, intracranial pressure monitoring, and herniation
+- `sur-chest-trauma`: Thoracic trauma: tension pneumothorax, massive hemothorax, cardiac tamponade, and flail chest
+- `sur-oral`: Oral cavity cancer, mucosal premalignant lesions, TNM staging, and surgical resection margins
+- `sur-salivary`: Salivary gland neoplasms: parotidectomy, facial nerve preservation, and malignant tumors
+- `sur-neck`: Congenital and acquired neck masses: branchial anomalies, thyroglossal duct cysts, and nodal metastases
+- `sur-parathyroid-adrenal`: Surgical endocrinopathies: primary hyperparathyroidism, pheochromocytoma, and adrenalectomy
+- `sur-oesophagus`: Esophageal motility disorders, antireflux surgery, Barrett esophagus, and esophagectomy
+- `sur-liver`: Hepatic anatomy, benign liver lesions, hepatocellular carcinoma, and hepatic resection
+- `sur-portal-hypertension`: Portal hypertension, acute variceal hemorrhage, endoscopic therapies, and portosystemic shunts
+- `sur-bile-duct`: Biliary tract pathology: choledocholithiasis, cholangiocarcinoma, and bile duct injury repair
+- `sur-pancreas`: Pancreatic disease: acute pancreatitis, necrotizing step-up approach, and Whipple resection
+- `sur-spleen`: Splenic trauma, non-operative management, surgical splenectomy, and overwhelming post-splenectomy infection
+- `sur-obstruction`: Intestinal obstruction: small bowel strangulation, adhesive bands, and colonic volvulus
+- `sur-colorectal-cancer`: Colorectal cancer: staging, total mesorectal excision, genetic syndromes, and multimodality therapy
+- `sur-anorectal`: Anorectal disorders: hemorrhoids, anal fissure, fistula-in-ano, and Goodsall rule
+- `sur-peritoneum`: Acute peritonitis, damage control laparotomy, temporary abdominal closure, and abdominal compartment syndrome
+- `sur-urolithiasis`: Urolithiasis, acute renal colic, endourological procedures, and staghorn calculi
+- `sur-renal-tumours`: Renal cell carcinoma, paraneoplastic syndromes, nephron-sparing surgery, and IVC thrombus
+- `sur-bladder`: Urothelial carcinoma of the bladder, TURBT, staging, and radical cystectomy
+- `sur-prostate`: Benign prostatic hyperplasia, prostatic adenocarcinoma, Gleason grading, and radical prostatectomy
+- `sur-testis`: Testicular germ cell tumors, serum markers, radical inguinal orchiectomy, and retroperitoneal dissection
+- `sur-arterial`: Peripheral arterial disease, Fontaine stages, acute limb ischemia, and revascularization
+- `sur-venous`: Chronic venous disease, CEAP classification, varicose veins, and endovenous ablation
+- `sur-lymphatic`: Lymphedema staging, lymphoscintigraphy, complete decongestive therapy, and surgical restoration
+- `sur-thoracic`: Thoracic oncology, anatomic lobectomy, VATS resection, and pleural empyema
+- `sur-cardiac`: Coronary artery bypass grafting, valvular heart disease, and cardiopulmonary bypass
+- `sur-brain-tumours`: Intracranial neoplasms, glioblastoma multiforme, meningioma, and maximal safe resection
+- `sur-hydrocephalus`: Cerebrospinal fluid dynamics, hydrocephalus classification, ventriculoperitoneal shunting, and ETV
+- `sur-paed-gi`: Paediatric gastrointestinal emergencies, hypertrophic pyloric stenosis, intussusception, and Ladd procedure
+- `sur-neonatal`: Neonatal surgical anomalies, esophageal atresia, diaphragmatic hernia, and abdominal wall defects
+- `sur-paed-uro`: Paediatric urology, hypospadias, cryptorchidism, and Wilms tumor
+- `sur-transplant`: Organ transplantation, allorecognition, rejection mechanisms, and renal allografting
+- `sur-uro-congenital`: Congenital urinary tract anomalies, ureteropelvic obstruction, duplex ureter, and pyeloplasty
+- `sur-urethra-penis`: Urethral stricture disease, urethroplasty techniques, and penile carcinoma
+- `spl-reconstructive`: Reconstructive ladder, grafts and free flaps
+- `spl-burns-hand`: Burns resuscitation, excision-grafting and hand surgery
+- `spl-craniofacial-aesthetic`: Craniofacial, cleft and aesthetic surgery
+- `sur-stones`: Urinary stones and obstruction: ESWL, URS and PCNL
+- `sur-bph-prostate`: Prostate and bladder outlet: BPH drugs, TURP and PSA
+- `sur-oncology`: Uro-oncology: bladder, kidney and testis cancers
+- `sur-andrology-infertility`: Andrology and male infertility: ED, varicocele and azoospermia
+- `sur-paediatric-reconstructive`: Paediatric and reconstructive urology: hypospadias, valves and strictures
+- `sva-arterial`: Arterial disease and aneurysms: CLTI, ALI, AAA, carotid and mesenteric
+- `sva-venous-access`: Venous disease, diabetic foot, trauma, access and lymphoedema
+- `sct-coronary-valve`: Coronary and valvular surgery: CABG, valves, endocarditis, CPB and support
+- `sct-aorta-congenital`: Aortic dissection and congenital cardiac surgery: arch, septal and single ventricles
+- `sct-thoracic`: Thoracic surgery: lung cancer, pleura, mediastinum, oesophagus link and trauma
+
+### biochemistry (63/69 imageless)
 
 - `bio-acid-base-balance`: Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation
 - `bio-aging-cellular-senescence`: Biochemical aging: telomere dynamics, sirtuins, and cellular senescence
@@ -349,7 +380,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-endocrine-biochemistry`: Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects
 - `bio-enzymes`: Enzymes and clinical enzymology
 - `bio-extracellular-matrix`: Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders
-- `bio-fatty-acid-oxidation`: Fatty acid beta-oxidation, carnitine shuttle and ketogenesis
 - `bio-fatty-acid-synthesis`: Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging
 - `bio-fluids-electrolytes`: Fluid compartments, plasma osmolality, Starling forces, and hyponatremia
 - `bio-fuel-metabolism`: Fuel homeostasis: the feed-fast cycle, hormonal counter-regulation, and ketoacidosis
@@ -383,7 +413,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-transcription`: Transcription and RNA processing
 - `bio-translation-proteasome`: Ribosomal translation, genetic code fidelity, and the ubiquitin-proteasome system
 - `bio-translation`: Genetic code, translation and protein targeting
-- `bio-urea-cycle`: Urea cycle, nitrogen disposal and hyperammonemia
 - `bio-vitamins-minerals`: Vitamins and trace minerals: coenzyme mechanisms, antioxidant defenses and deficiency syndromes
 - `bio-water-soluble-vitamins`: Water-soluble vitamins: key coenzymes and deficiency syndromes
 - `bio-cell-membrane`: Cell organelles, membrane structure, transport mechanisms and peroxisomal disorders
@@ -400,81 +429,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-minerals`: Minerals and trace elements: iron, copper, zinc, selenium and iodine
 - `bio-nutrition-integration`: Nutrition, energy balance, metabolic integration and protein-energy malnutrition
 
-### surgery (65/66 imageless)
-
-- `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
-- `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
-- `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
-- `sur-gallbladder`: Biliary surgery: acute cholecystitis, critical view of safety and bile duct injuries
-- `sur-hernia`: Groin hernias: anatomy, Lichtenstein repair and laparoscopic techniques
-- `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
-- `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
-- `sur-mixed`: Mixed practice: surgery rapid review
-- `sur-neck-face-trauma`: Neck, vascular and maxillofacial injuries: high-yield essentials
-- `sur-onc-principles`: Principles of surgical oncology and soft tissue sarcoma
-- `sur-periop`: Perioperative care and surgical complications: key high-yield points
-- `sur-plastic`: Skin grafts, flaps and cleft surgery timing
-- `sur-shock-transfusion`: Massive haemorrhage and transfusion: stop bleeding, replace blood, keep warm
-- `sur-small-bowel`: Small intestine and mesentery: high-yield essentials
-- `sur-stomach`: Stomach and duodenum: high-yield surgical essentials
-- `sur-thyroid`: Thyroid carcinoma, Bethesda classification and surgical management
-- `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
-- `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
-- `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
-- `sur-burns`: Burn resuscitation, inhalation injury, escharotomy indications, and topical wound care
-- `sur-head-injury`: Traumatic brain injury, intracranial hematomas, intracranial pressure monitoring, and herniation
-- `sur-chest-trauma`: Thoracic trauma: tension pneumothorax, massive hemothorax, cardiac tamponade, and flail chest
-- `sur-oral`: Oral cavity cancer, mucosal premalignant lesions, TNM staging, and surgical resection margins
-- `sur-salivary`: Salivary gland neoplasms: parotidectomy, facial nerve preservation, and malignant tumors
-- `sur-neck`: Congenital and acquired neck masses: branchial anomalies, thyroglossal duct cysts, and nodal metastases
-- `sur-parathyroid-adrenal`: Surgical endocrinopathies: primary hyperparathyroidism, pheochromocytoma, and adrenalectomy
-- `sur-oesophagus`: Esophageal motility disorders, antireflux surgery, Barrett esophagus, and esophagectomy
-- `sur-liver`: Hepatic anatomy, benign liver lesions, hepatocellular carcinoma, and hepatic resection
-- `sur-portal-hypertension`: Portal hypertension, acute variceal hemorrhage, endoscopic therapies, and portosystemic shunts
-- `sur-bile-duct`: Biliary tract pathology: choledocholithiasis, cholangiocarcinoma, and bile duct injury repair
-- `sur-pancreas`: Pancreatic disease: acute pancreatitis, necrotizing step-up approach, and Whipple resection
-- `sur-spleen`: Splenic trauma, non-operative management, surgical splenectomy, and overwhelming post-splenectomy infection
-- `sur-obstruction`: Intestinal obstruction: small bowel strangulation, adhesive bands, and colonic volvulus
-- `sur-appendix`: Acute appendicitis: Alvarado scoring, appendiceal neoplasms, and laparoscopic appendectomy
-- `sur-colorectal-cancer`: Colorectal cancer: staging, total mesorectal excision, genetic syndromes, and multimodality therapy
-- `sur-anorectal`: Anorectal disorders: hemorrhoids, anal fissure, fistula-in-ano, and Goodsall rule
-- `sur-peritoneum`: Acute peritonitis, damage control laparotomy, temporary abdominal closure, and abdominal compartment syndrome
-- `sur-urolithiasis`: Urolithiasis, acute renal colic, endourological procedures, and staghorn calculi
-- `sur-renal-tumours`: Renal cell carcinoma, paraneoplastic syndromes, nephron-sparing surgery, and IVC thrombus
-- `sur-bladder`: Urothelial carcinoma of the bladder, TURBT, staging, and radical cystectomy
-- `sur-prostate`: Benign prostatic hyperplasia, prostatic adenocarcinoma, Gleason grading, and radical prostatectomy
-- `sur-testis`: Testicular germ cell tumors, serum markers, radical inguinal orchiectomy, and retroperitoneal dissection
-- `sur-arterial`: Peripheral arterial disease, Fontaine stages, acute limb ischemia, and revascularization
-- `sur-aneurysm`: Abdominal aortic aneurysm, Laplace law, endoleak types, and carotid endarterectomy
-- `sur-venous`: Chronic venous disease, CEAP classification, varicose veins, and endovenous ablation
-- `sur-lymphatic`: Lymphedema staging, lymphoscintigraphy, complete decongestive therapy, and surgical restoration
-- `sur-thoracic`: Thoracic oncology, anatomic lobectomy, VATS resection, and pleural empyema
-- `sur-cardiac`: Coronary artery bypass grafting, valvular heart disease, and cardiopulmonary bypass
-- `sur-brain-tumours`: Intracranial neoplasms, glioblastoma multiforme, meningioma, and maximal safe resection
-- `sur-hydrocephalus`: Cerebrospinal fluid dynamics, hydrocephalus classification, ventriculoperitoneal shunting, and ETV
-- `sur-paed-gi`: Paediatric gastrointestinal emergencies, hypertrophic pyloric stenosis, intussusception, and Ladd procedure
-- `sur-neonatal`: Neonatal surgical anomalies, esophageal atresia, diaphragmatic hernia, and abdominal wall defects
-- `sur-paed-uro`: Paediatric urology, hypospadias, cryptorchidism, and Wilms tumor
-- `sur-transplant`: Organ transplantation, allorecognition, rejection mechanisms, and renal allografting
-- `sur-uro-congenital`: Congenital urinary tract anomalies, ureteropelvic obstruction, duplex ureter, and pyeloplasty
-- `sur-urethra-penis`: Urethral stricture disease, urethroplasty techniques, and penile carcinoma
-- `sur-atls`: Advanced Trauma Life Support, primary survey, definitive airway, and lethal triad
-- `spl-reconstructive`: Reconstructive ladder, grafts and free flaps
-- `spl-burns-hand`: Burns resuscitation, excision-grafting and hand surgery
-- `spl-craniofacial-aesthetic`: Craniofacial, cleft and aesthetic surgery
-- `sur-stones`: Urinary stones and obstruction: ESWL, URS and PCNL
-- `sur-bph-prostate`: Prostate and bladder outlet: BPH drugs, TURP and PSA
-- `sur-oncology`: Uro-oncology: bladder, kidney and testis cancers
-- `sur-andrology-infertility`: Andrology and male infertility: ED, varicocele and azoospermia
-- `sur-paediatric-reconstructive`: Paediatric and reconstructive urology: hypospadias, valves and strictures
-
-### paediatrics (57/57 imageless)
+### paediatrics (56/57 imageless)
 
 - `ped-behavioural`: Behavioural problems in children: high-yield overview
 - `ped-child-health-programmes`: Child health programmes and child protection
 - `ped-childhood-infections`: Common childhood infections: high-yield essentials
 - `ped-development`: Developmental milestones and adolescence
-- `ped-diarrhoea`: Diarrhoea and dehydration: assess rehydrate zinc rotavirus
 - `ped-dose-calculation`: Paediatric dose calculation: weigh, match, cap, verify
 - `ped-exanthems`: Exanthematous fevers: rash patterns and key signs
 - `ped-gi-disorders`: Paediatric gastrointestinal disorders: high-yield essentials
@@ -573,7 +533,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `cm-waste-disposal`: Solid waste, excreta and sewage disposal
 - `cm-water`: Water supply and purification: essentials for NEET-PG
 
-### obstetrics-gynaecology (50/50 imageless)
+### obstetrics-gynaecology (46/50 imageless)
 
 - `obg-abortion`: Miscarriage and medical termination of pregnancy: key classifications, causes and legal limits
 - `obg-cervical-cancer`: Premalignant and malignant lesions of the cervix
@@ -584,7 +544,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-maternal-physiology`: Maternal physiological changes in pregnancy
 - `obg-mixed`: Obstetrics and Gynaecology mixed rapid review
 - `obg-multiple-pregnancy`: Multiple pregnancy: zygosity, chorionicity and key complications
-- `obg-normal-labour`: Normal labour: stages, partograph and third stage
 - `obg-other-medical`: Other medical disorders in pregnancy: key high-yield points
 - `obg-pelvis-fetal-skull`: Obstetric pelvis and fetal skull
 - `obg-placenta-fetus`: Placenta, fetal development and fetal circulation
@@ -605,9 +564,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-diabetes-pregnancy`: Gestational diabetes mellitus: diagnostic criteria, glycemic targets and maternal thyroid dysfunction
 - `obg-rh-isoimmunisation`: Rh isoimmunization: pathogenesis, MCA Doppler velocity and intrauterine transfusion
 - `obg-abnormal-labour`: Fetal malpresentations: breech types, external cephalic version and assisted delivery maneuvers
-- `obg-fetal-growth-surveillance`: Cardiotocography: baseline heart rate, variability, deceleration patterns and FIGO classification
 - `obg-ectopic`: Ectopic pregnancy: diagnosis and methotrexate versus surgery
-- `obg-hypertensive-disorders`: Hypertensive disorders: preeclampsia, eclampsia and HELLP
 - `obg-pph`: Postpartum haemorrhage: atony, trauma, tissue and thrombin
 - `obg-preterm-prom-postterm`: Preterm labour, PROM and post-term: steroids, magnesium and induction
 - `obg-operative-obstetrics`: Operative obstetrics: forceps, vacuum and caesarean technique
@@ -622,7 +579,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-amenorrhoea`: Amenorrhoea: primary, secondary and Turner, MRKH, Asherman
 - `obg-vaginitis-sti`: Vaginal discharge and STIs: clue cells, froth, ulcers and warts
 - `obg-vulval-vaginal`: Vulval and vaginal disorders: lichen, VIN, VaIN and cancers
-- `obg-contraception`: Contraception: pills, IUCD, injectables, implants and sterilisation
 - `gyn-cervix-endometrium`: SS gyn-oncology: cervical and endometrial cancer staging and therapy
 - `gyn-ovary-vulva-gtn`: SS gyn-oncology: ovarian, vulval and GTN staging and therapy
 
@@ -677,27 +633,22 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `son-trial-design`: Clinical trial design and evidence in oncology
 - `son-tumour-markers`: Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest
 
-### microbiology (36/40 imageless)
+### microbiology (31/40 imageless)
 
 - `mic-ag-ab-reactions`: Antigen-antibody reactions and serological tests
 - `mic-bacterial-genetics`: Bacterial genetics and antimicrobial resistance
 - `mic-clostridia-anaerobes`: Clostridia, non-sporing anaerobes and actinomycetes
 - `mic-gram-positive-bacilli`: Corynebacterium, Bacillus and Listeria: High-Yield Essentials
-- `mic-hiv`: HIV and retroviruses: structure, entry, diagnosis and the NACO approach
-- `mic-immune-response`: Immune response, MHC, cytokines and hypersensitivity
 - `mic-mixed`: Microbiology mixed rapid review
 - `mic-other-dna-viruses`: Poxviruses, adenoviruses, papillomaviruses and parvoviruses: high-yield microbiology
 - `mic-spirochaetes`: Spirochaetes: Syphilis, Relapsing Fever, Lyme Disease and Leptospirosis
-- `mic-sterilisation`: Sterilisation, disinfection and hospital infection control
 - `mic-superficial-subcutaneous-mycoses`: General mycology: superficial and subcutaneous mycoses
-- `mic-tuberculosis`: Mycobacterium tuberculosis: Identification, Diagnosis and Drug Resistance
 - `mic-herpesviruses`: Herpesviruses: HSV, VZV, EBV, CMV, HHV6 and HHV8
 - `mic-staphylococcus`: Staphylococcus aureus, MRSA and coagulase negative staphylococci
 - `mic-picorna-enteric`: Picornaviruses, hepatitis A and E, rhinovirus and norovirus
 - `mic-respiratory-rna-viruses`: Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses
 - `mic-streptococcus`: Streptococci, pneumococcus and enterococcus
 - `mic-arbo-rabies`: Arboviruses: dengue, chikungunya, zika, JE and rabies
-- `mic-hepatitis-viruses`: Hepatitis B, C, D and E: serology, phases and cure
 - `mic-neisseria`: Gonococcus and meningococcus
 - `mic-systemic-opportunistic-mycoses`: Systemic and opportunistic mycoses
 - `mic-intestinal-protozoa`: Intestinal protozoa: amoebiasis, giardiasis and coccidia
@@ -795,6 +746,44 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `ent-airway`: Tracheostomy and airway foreign bodies
 - `ent-neck-masses`: Neck masses and neck dissection
 - `ent-sleep-apnoea`: Snoring and obstructive sleep apnoea
+
+### radiology (35/35 imageless)
+
+- `rad-brachytherapy`: Brachytherapy and therapeutic radioisotopes
+- `rad-cardiovascular`: Cardiovascular imaging: key chest radiograph and modality signs
+- `rad-chest`: Chest radiology: key signs and patterns for exams
+- `rad-clinical-rt`: Radiotherapy in Clinical Oncology: Radiosensitivity, Radical and Palliative Use
+- `rad-contrast`: Contrast media and reactions
+- `rad-ct-mri`: CT and MRI principles
+- `rad-genitourinary`: Genitourinary radiology: key investigations and classic signs
+- `rad-gi`: Gastrointestinal Radiology: Barium Studies and Key Signs
+- `rad-hepatobiliary`: Hepatobiliary and pancreatic imaging: key patterns and investigations
+- `rad-interventional`: Interventional radiology: core techniques and high-yield facts
+- `rad-mixed`: Radiology mixed rapid review
+- `rad-musculoskeletal`: Musculoskeletal Radiology and Bone Tumours: High-Yield Signs
+- `rad-neuroradiology`: Neuroradiology essentials: trauma bleeds, stroke, and lesions that mimic each other on imaging
+- `rad-nm-principles`: Radionuclides and Nuclear Medicine Instrumentation
+- `rad-nm-scans`: Nuclear medicine scans and PET: choosing the right tracer
+- `rad-obgyn-breast`: Obstetric, gynaecological and breast imaging: key high-yield facts
+- `rad-paediatric`: Paediatric radiology: high-yield neonatal and childhood signs
+- `rad-radiation-protection`: Radiation units, biological effects and protection
+- `rad-radiobiology`: Radiobiology and fractionation: the essentials for NEET-PG and INI-CET
+- `rad-teletherapy`: External beam radiotherapy techniques
+- `rad-toxicity`: Radiation toxicity and tissue tolerance
+- `rad-ultrasound`: Ultrasound and Doppler: Physics, Artefacts and Key Clinical Uses
+- `rad-xray`: X-ray production and conventional radiography
+- `rad-ir-drainage`: Biliary and urinary drainage
+- `rad-ir-ablation`: Ablation and liver-directed cancer therapy
+- `rad-ir-malformation`: Vascular malformations
+- `rad-ir-selective`: Uterine prostate and bariatric embolisation
+- `rad-ir-pain-spine`: Pain and spine interventions
+- `rad-ir-safety`: IR safety: contrast radiation anticoagulation consent
+- `rad-ir-access`: Angiography and vascular access
+- `rad-ir-embolisation`: Embolisation agents and techniques
+- `rad-ir-tips`: TIPS and portal interventions
+- `rad-ir-venous`: Venous access and IVC filters
+- `rad-ir-stent`: Angioplasty and stents
+- `rad-ir-thrombolysis`: Thrombolysis and thrombectomy
 
 ### anaesthesia (34/34 imageless)
 
@@ -1144,32 +1133,6 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `mcc-cc-tb`: Latent and active tuberculosis: diagnosis and management
 - `mcc-cc-thyroid`: Thyroid disease: essentials for exams
 
-### radiology (23/23 imageless)
-
-- `rad-brachytherapy`: Brachytherapy and therapeutic radioisotopes
-- `rad-cardiovascular`: Cardiovascular imaging: key chest radiograph and modality signs
-- `rad-chest`: Chest radiology: key signs and patterns for exams
-- `rad-clinical-rt`: Radiotherapy in Clinical Oncology: Radiosensitivity, Radical and Palliative Use
-- `rad-contrast`: Contrast media and reactions
-- `rad-ct-mri`: CT and MRI principles
-- `rad-genitourinary`: Genitourinary radiology: key investigations and classic signs
-- `rad-gi`: Gastrointestinal Radiology: Barium Studies and Key Signs
-- `rad-hepatobiliary`: Hepatobiliary and pancreatic imaging: key patterns and investigations
-- `rad-interventional`: Interventional radiology: core techniques and high-yield facts
-- `rad-mixed`: Radiology mixed rapid review
-- `rad-musculoskeletal`: Musculoskeletal Radiology and Bone Tumours: High-Yield Signs
-- `rad-neuroradiology`: Neuroradiology essentials: trauma bleeds, stroke, and lesions that mimic each other on imaging
-- `rad-nm-principles`: Radionuclides and Nuclear Medicine Instrumentation
-- `rad-nm-scans`: Nuclear medicine scans and PET: choosing the right tracer
-- `rad-obgyn-breast`: Obstetric, gynaecological and breast imaging: key high-yield facts
-- `rad-paediatric`: Paediatric radiology: high-yield neonatal and childhood signs
-- `rad-radiation-protection`: Radiation units, biological effects and protection
-- `rad-radiobiology`: Radiobiology and fractionation: the essentials for NEET-PG and INI-CET
-- `rad-teletherapy`: External beam radiotherapy techniques
-- `rad-toxicity`: Radiation toxicity and tissue tolerance
-- `rad-ultrasound`: Ultrasound and Doppler: Physics, Artefacts and Key Clinical Uses
-- `rad-xray`: X-ray production and conventional radiography
-
 ### mcc-acute-care (21/21 imageless)
 
 - `mcc-ac-asthma`: Severe asthma: recognition and acute management
@@ -1399,9 +1362,9 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `mrheu-spa`: Spondyloarthritis: axial disease, psoriatic features, biologics
 - `mrheu-vasculitis`: Systemic vasculitis: vessel size, ANCA syndromes, emergency management
 
-### mrcp-statistics (1/8 imageless)
+### mrcp-statistics (0/8 imageless - 100% complete)
 
-- `mstat-audit`: Clinical audit, governance and quality improvement
+All 8 lessons in mrcp-statistics carry at least one verified diagram.
 
 ### ss-hepatology (8/8 imageless)
 

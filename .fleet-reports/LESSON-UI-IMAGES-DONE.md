@@ -175,4 +175,101 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   - `node scripts/lesson-diagrams/check.mjs` passes across all 126 lessons, 198 figures with 0 problems.
   - Overall inventory: 1,466 total lessons, 176 with images, 1,290 zero images.
 
+## Addendum 2026-10-14 (Batch 3: Pharma/Micro/Bio/Path SVGs)
 
+- **8 original SVGs** (`pharma-insulin-profiles`, `pharma-vaughan-williams`,
+  `micro-hepb-serology`, `micro-hiv-cycle`, `bio-urea-cycle`,
+  `bio-beta-oxidation`, `path-thrombus-fates`, `path-type3-immune-complex`)
+  wired into 8 null-visual steps (`phm-insulin`, `phm-antiarrhythmics`,
+  `mic-hepatitis-viruses`, `mic-hiv`, `bio-urea-cycle`,
+  `bio-fatty-acid-oxidation`, `pat-thrombosis-embolism`, `pat-hypersensitivity`).
+  Bank figure format kept (white stage, 800x520, `<title>`/`<desc>`, alt +
+  caption, no em/en dashes). Numbers second-passed by independent
+  parse-and-assert (insulin bar geometry within 1.5px, urea 4-bond cost,
+  palmitate 16/2 = 8, turns 7).
+- **Attribution**: 8 CC BY 4.0 StewardMD-original rows in
+  `prep/lessons/media/ATTRIBUTION.md`; still zero third-party images.
+- **Gates**: 8/8 `checkLesson` clean; full 1466-lesson sweep shows only the 6
+  pre-existing med/mphar/sur failures (identical on clean tree); lesson unit
+  suites 26/26 pass. Inventory now 184 with images, 1,282 zero.
+
+
+
+## Addendum 2026-10-15 (Batch 4: prodrug/fever/type-IV/cold-sterilisation/shock-organs/nephritic-nephrotic/rifampicin/ZN SVGs)
+
+- **8 original SVGs** wired into 8 null-visual steps only (no replacements):
+  `phm-absorption-routes` s3 (prodrug map), `pat-mediators` s4 (fever
+  pathway), `mic-immune-response` s4 (type IV 48-72h timeline),
+  `mic-sterilisation` s3 (cold methods), `pat-shock` s4 (organ injury map),
+  `pat-glomerular` s0 (nephritic vs nephrotic fork), `phm-antitubercular` s3
+  (rifampicin panel), `mic-tuberculosis` s0 (ZN sequence + wall inset).
+  Figure facts drawn from the step text itself; standard adjuncts
+  (0.22 micrometre pores, endoscope/plasma use, muddy-brown casts, hyaline
+  membranes, zone 3, watershed gut, LFT monitoring) are textbook-stable.
+- **Validation**: parse-and-assert second pass (palette, 11px floor, ASCII,
+  title/desc, key strings); 8/8 `checkLesson` clean; diagram checker 0
+  problems; audit lists reconciled (1274 lines = 1274 zero-image lessons).
+- Inventory now 192 with images, 1274 zero of 1466.
+
+## Addendum 2026-10-15 (Batch 5: ECG/potassium, QT/LVH, ABG, OP aftermath, femoral canal, thyroid complications, transfusion drill, dehydration triage)
+
+- **8 original SVGs into 7 lessons** (all null-vis steps; `med-ecg` took two
+  figures). Figure facts drawn from the step text; standard adjuncts
+  (sine-wave management, digoxin caution, capsular ligation, voice checks,
+  NG/zinc in plan B, lung watch in plan C) are textbook-stable.
+- **Contrast follow-through**: geometric amber-on-white scan across the new
+  8 plus batch-4 and older bank figures; all small-text hits recolored to
+  ink (computed pairs now all 4.5:1 or better). Pre-existing `#EAF3F0`
+  fills in `epi-curve` left untouched.
+- `med-pesticides` carries a pre-existing step-count gate failure (3 steps
+  on the clean tree too); wiring adds no new failure.
+- Inventory now 199 with images, 1267 zero of 1466.
+
+## Addendum 2026-10-15 (batch 6: medicine backfill, atop lessonui-1013)
+
+- **8 original SVGs** (`med-acs-reperfusion`, `med-aki-fena`,
+  `med-ckd-heatmap`, `med-spirometry`, `med-asthma-steps`, `med-saag`,
+  `med-cha2ds2`, `med-avblock`) wired into 6 null-visual medicine lessons
+  (`med-acs` s2, `med-aki` s2, `med-ckd` s2, `med-asthma` s2+s3,
+  `med-cirrhosis` s2, `med-arrhythmias` s2+s3). Same bank format (white
+  stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank
+  palette subset, ASCII, 11px floor, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files caught one
+  layout clip (spirometry note), fixed before wiring; all printed numbers
+  match ACC/AHA, KDIGO and GINA values. Attribution +8 rows, still zero
+  third-party images.
+- **Gates**: 6/6 wired lessons `checkLesson` clean; diagram checker
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23,
+  prep-lessons-100 3/3, prep-pearl 4/4, prep-pearl-figs 2/2,
+  prep-server 16/16. Inventory now 206 with images, 1265 zero of 1471.
+- Next queue by exam weight: medicine 104, obgyn 50, ss-med-onc 44,
+  ent 37, anaesthesia 34, orthopaedics 33 (anatomy 80/80 and physiology
+  49/49 already complete). Browser gate `lessonui-browser.yml` before merge.
+
+## Addendum 2026-10-15 (batch 10: medicine backfill, branch lessonui-batch10)
+
+- **8 original SVGs** (`med-stroke-clock`, `med-sodium-ladder`,
+  `med-potassium-steps`, `med-hf-diuretics`, `med-murmur-as-ar`,
+  `med-tb-att`, `med-dka-hhs`, `med-gap-delta`) wired into 8 null-visual
+  medicine steps only (no replacements): `med-stroke` s3 (4.5 h lysis /
+  24 h thrombectomy clock), `med-sodium` s3 (volume triage + 8-to-10
+  ceiling), `med-potassium` s3 (protect/shift/remove ladder),
+  `med-heart-failure` s2 (2x IV dose + urine-Na-90 resistance rule),
+  `med-valvular` s1 (AS vs AR murmur timing), `med-tb` s3 (2HRZE/4HR
+  timeline), `med-diabetes` s3 (DKA vs HHS), `med-acid-base` s1 (gap
+  math). Figure facts drawn from the step text itself; standard adjuncts
+  (DDAVP clamp, patiromer, Austin Flint/pistol/Duroziez, bedaquiline /
+  delamanid, IRIS, beta-hydroxybutyrate, delta ratio) are textbook-stable.
+- **Validation**: zero builder warnings; independent parse-and-assert
+  second pass (viewBox 800x520, role=img, title/desc, ASCII, 11px floor,
+  no amber-on-white text, key strings) 8/8 clean; 8/8 `checkLesson`
+  clean; diagram checker 126 lessons / 198 figures / 0 problems; full
+  1483-lesson sweep shows only the 6 pre-existing med/mphar/sur
+  step-count failures (identical set as baseline, none touched here).
+- **Guards** (project flags `--experimental-test-module-mocks
+  --experimental-sqlite`): action-row, lessons, lessons-100, reason,
+  bug-report, server, pearl, pearl-figs 95/95 pass.
+- **Attribution**: +8 CC BY 4.0 StewardMD-original rows in
+  `prep/lessons/media/ATTRIBUTION.md`; still zero third-party images.
+- Inventory now 226 with images, 1257 zero of 1483.

@@ -61,6 +61,7 @@ jobs:
         working-directory: after
         env:
           CHROME: /usr/bin/google-chrome
+          SHOTS: ${{ github.workspace }}/shots-after
         run: node test/run-prep-qgen-ui.mjs
       - uses: actions/upload-artifact@v4
         if: always()

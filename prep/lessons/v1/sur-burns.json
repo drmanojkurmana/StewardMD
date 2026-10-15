@@ -51,47 +51,11 @@
    "tx": "Fluid **resuscitation** in major burns exceeding 20 percent total body surface area (TBSA) utilizes balanced crystalloids, traditionally calculated via the Parkland formula: 4 mL of lactated Ringer solution per kilogram body weight multiplied by percent TBSA burned. Half the total volume is infused during the first 8 hours post-injury, and the remainder over the subsequent 16 hours. Resuscitation titration is guided by target adult urine output of 0.5 mL/kg/h.",
    "say": "Resuscitation for burns over 20 percent total body surface area uses the Parkland formula: 4 milliliters times weight in kilograms times percent burn of lactated Ringer. Half is given in the first 8 hours. Fluid titration targets urine output of 0.5 milliliters per kilogram per hour.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "b1",
-      "label": "TBSA estimation via Rule of Nines"
-     },
-     {
-      "id": "b2",
-      "label": "Parkland calculation (4 mL x kg x %TBSA)"
-     },
-     {
-      "id": "b3",
-      "label": "Infuse 50 percent total volume in initial 8 hours"
-     },
-     {
-      "id": "b4",
-      "label": "Infuse remaining 50 percent over subsequent 16 hours"
-     },
-     {
-      "id": "b5",
-      "label": "Titrate to target adult urine output 0.5 mL/kg/hr"
-     }
-    ],
-    "edges": [
-     [
-      "b1",
-      "b2"
-     ],
-     [
-      "b2",
-      "b3"
-     ],
-     [
-      "b3",
-      "b4"
-     ],
-     [
-      "b4",
-      "b5"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/sur-parkland.svg",
+    "alt": "Parkland formula 4 mL times kg times percent burn: half in the first 8 hours, rest over the next 16; titrate to urine 0.5 mL per kg per hour; 70 kg 40 percent example totals 11,200 mL.",
+    "caption": "Half in 8 h, rest in 16 h, urine steers the drip.",
+    "ar": 1.5385
    }
   },
   {

@@ -281,9 +281,9 @@
       var a = keyOf(c.item), ch = chosenOf(c), wrong = ch >= 0 && ch !== a;
       var line = '<span class="pa-cxk">' + (c.n ? "Question " + esc(c.n) : "Question") + "</span>" +
         (ch >= 0 ? '<span class="pa-cxp ' + (wrong ? "bad" : "ok") + '">You chose ' + L(ch) + "</span>" : "") + (a >= 0 ? '<span class="pa-cxp ok">Answer ' + L(a) + "</span>" : "");
-      var opts = (c.item.o || []).map(function (o, i) { return '<li class="' + (i === a ? "key" : i === ch ? "pick" : "") + '"><b>' + L(i) + "</b><span>" + esc(o) + "</span></li>"; }).join("");
+      var opts = (c.item.o || []).map(function (o, i) { return '<li class="' + (i === a ? "key" : i === ch ? "pick" : "") + '"><b>' + L(i) + "</b><span>" + (G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o)) + "</span></li>"; }).join("");
       var stExp = storedHtml();
-      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(c.item.q) + '</p><ol class="pa-cxo">' + opts + "</ol>" + (stExp ? '<div class="pa-cx-stored">' + stExp + "</div>" : "") + "</div>";
+      inner = '<summary class="pa-cxs" aria-label="The question: ' + esc((c.n ? "question " + c.n + ", " : "") + (ch >= 0 ? "you chose " + L(ch) + ", " : "") + "answer " + L(a)) + '">' + line + CHEV + '</summary><div class="pa-cxb"><div class="pa-cxq">' + (G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(c.item.q) : esc(c.item.q)) + '</div><ol class="pa-cxo">' + opts + "</ol>" + (stExp ? '<div class="pa-cx-stored">' + stExp + "</div>" : "") + "</div>";
     } else {
       inner = '<summary class="pa-cxs"><span class="pa-cxk">' + (c.kind === "card" ? "Card" : "Lesson step") + '</span><span class="pa-cxt">' + esc(c.title || "") + "</span>" + CHEV + '</summary><div class="pa-cxb"><p class="pa-cxq">' + esc(String(c.step.tx || "").replace(/\*\*/g, "")) + "</p></div>";
     }
@@ -317,8 +317,23 @@
     var b = function (v, label) { var on = S.mode === v, dis = v === "local" && !canLocal; return '<button type="button" class="pa-sb' + (on ? " on" : "") + '" role="radio" aria-checked="' + on + '" tabindex="' + (on ? 0 : -1) + '" data-act="ak-mode" data-v="' + v + '"' + (dis ? ' aria-disabled="true"' : "") + ">" + label + "</button>"; };
     return '<div class="pa-seg" role="radiogroup" aria-label="Where MaiK answers">' + b("local", "On this phone") + b("online", "Online") + "</div>";
   }
+  /* Ask MaiK text (prep-expfmt.js when loaded): MaiK answers use Markdown bold and bullets, so they render
+     through the same safe renderer as stored explanations; without it, the previous plain path. */
+  var paDrugRx = null, paDrugDone = false;
+  function paDrugs() {
+    if (!paDrugDone) {
+      paDrugDone = true;
+      try {
+        if (G.PREP_EXPFMT && G.SMD_DRUG_LEXICON) paDrugRx = G.PREP_EXPFMT.drugRx(G.PREP_EXPFMT.drugNames(G.SMD_DRUG_LEXICON));
+      } catch (e) { paDrugRx = null; }
+    }
+    return paDrugRx;
+  }
+  function paCtx(item) { return { o: (item && item.o) || [], a: item && typeof item.a === "number" ? item.a : -1, drugRx: paDrugs() }; }
+  function paInline(t, item) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(t, paCtx(item)) : esc(t); }
   // Paragraphs, and runs of "- " lines as a list. Text only (escaped).
-  function para(t) {
+  function para(t, item) {
+    if (G.PREP_EXPFMT) { try { var h = G.PREP_EXPFMT.exp(t, paCtx(item)); if (h) return h; } catch (e) {} }
     var out = "", list = [];
     var flush = function () { if (list.length) { out += '<ul class="pa-ul">' + list.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>"; list = []; } };
     String(t || "").split(/\n+/).forEach(function (p) {
@@ -331,10 +346,10 @@
   }
   function storedHtml() {
     var c = S.ctx, p = P();
-    if (c.kind !== "mcq") return para(String(c.step.tx || "").replace(/\*\*/g, ""));
+    if (c.kind !== "mcq") return para(String(c.step.tx || ""));
     var f = p.fallbackFor(c.item, chosenOf(c));
-    return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
-      (f.exp ? para(f.exp) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + esc(f.kp) + "</p>" : "");
+    return (f.why ? "<h3>Why " + esc(f.chosen) + " is wrong</h3>" + para(f.why, c.item) : "") + "<h3>Answer " + esc(f.key) + "</h3>" +
+      (f.exp ? ((G.PREP_LISTFMT && G.PREP_LISTFMT.exp(f.exp)) || para(f.exp, c.item)) : '<p class="pn-mut">No explanation is stored for this question yet.</p>') + (f.kp ? '<p class="pn-kp"><b>Remember:</b> ' + paInline(f.kp, c.item) + "</p>" : "");
   }
   function typing(cap) { return '<li class="pt-msg ai" data-key="typing">' + avatar() + '<div class="pt-bub pt-typing"><span class="pt-dots" aria-hidden="true"><i></i><i></i><i></i></span><p class="pn-mut pn-small" role="status">' + cap + "</p></div></li>"; }
   function reply(key, html, note, last) { return '<li class="pt-msg ai" data-key="' + key + '">' + avatar() + '<div class="pt-col"><section class="pt-bub pt-ans-b' + (last ? " pa-last" : "") + '"' + (last ? ' role="status"' : "") + ' tabindex="-1">' + html + "</section>" + (note ? '<p class="pt-note">' + note + "</p>" : "") + "</div></li>"; }
@@ -664,10 +679,14 @@
         return p.teachChat(g.ground, turns(), { lexicon: lex, generate: function (prompt, system, cx) {
           var body = { kind: "chat", base: c.kind === "mcq" ? "mcq" : "step", ground: g.ground, turn: n, messages: cx.messages, idem: idemFor(S.th.k + "|" + S.th.rec.cid, n, cx.messages), thread: th };
           if (cx.summary) body.summary = cx.summary;
+          if (c.item && c.item.srcPack) body.srcPack = c.item.srcPack;
+          if (c.item && c.item.kp) body.kp = c.item.kp;
           return online(body);
         } });
       }
       var body = c.kind === "mcq" ? { kind: "mcq", ground: g.ground, key: keyOf(c.item), chosen: chosen, thread: th, turn: n } : { kind: "step", ground: g.ground, title: String(c.title || "").slice(0, 200), thread: th, turn: n };
+      if (c.item && c.item.srcPack) body.srcPack = c.item.srcPack;
+      if (c.item && c.item.kp) body.kp = c.item.kp;
       var gen = function () { return online(body); };
       return c.kind === "mcq" ? p.teach(c.item, chosen, { generate: gen, lexicon: lex, sents: g.sents }) : p.teachStep(c.step, c.title, { generate: gen, lexicon: lex });
     }).then(finish, function () { finish({ ok: false, note: "MaiK could not answer online just now." }); });
@@ -738,7 +757,7 @@
       return G.fetch((G.SMD_API_BASE || "") + URL_TEACH, { method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + tok }, body: JSON.stringify(body) });
     }).then(function (r) {
       return r.json().then(null, function () { return {}; }).then(function (j) {
-        if (r.status === 200 && j && j.text) { if (S === mine) { S.usage = j.usage || null; S.wallet = j.wallet || null; } return { text: j.text, model: "online" }; }
+        if (r.status === 200 && j && j.text) { if (S === mine) { S.usage = j.usage || null; S.wallet = j.wallet || null; } return { text: j.text, model: "online", beyond: Array.isArray(j.beyond) ? j.beyond : [] }; }
         return onlineNote(r.status, j);
       });
     }, function () { return onlineNote(0); });

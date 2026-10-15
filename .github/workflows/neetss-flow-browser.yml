@@ -1,0 +1,48 @@
+name: neetss-flow-browser
+
+# Browser gate for the NEET-SS group flow: the two-page flow, scoped home, see-all page and
+# group switch in real Chromium at 390px and iPad widths, dark and light, with screenshots.
+on:
+  workflow_dispatch:
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium (matches playwright-core)
+        run: |
+          npm install --no-save playwright-core
+          npx playwright-core install --with-deps chromium
+      - name: 390px dark
+        env:
+          SHOTS: ${{ github.workspace }}/shots
+          VP: 390x844
+        run: node test/run-neetss-flow-ui.mjs
+      - name: 390px light
+        env:
+          SHOTS: ${{ github.workspace }}/shots
+          VP: 390x844
+          PN_LIGHT: 1
+        run: node test/run-neetss-flow-ui.mjs
+      - name: iPad dark
+        env:
+          SHOTS: ${{ github.workspace }}/shots
+          VP: 820x1180
+        run: node test/run-neetss-flow-ui.mjs
+      - name: iPad light
+        env:
+          SHOTS: ${{ github.workspace }}/shots
+          VP: 820x1180
+          PN_LIGHT: 1
+        run: node test/run-neetss-flow-ui.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: neetss-flow-shots
+          path: shots
+          if-no-files-found: warn

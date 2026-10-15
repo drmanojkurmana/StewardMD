@@ -85,7 +85,7 @@
     if (!meta || !meta.length) return "";
     return '<p class="pn-act-meta">' + meta.filter(function (m) { return m && m.value; }).map(function (m) {
       return '<button type="button" class="pn-act-chip pi-chip" data-copy-id="' + esc(m.value) + '" data-pearl-copy="' + esc(m.value) + '" data-act="id-copy" data-v="' + esc(m.value) + '" aria-label="Copy ' + esc(m.label || "ID") + " " + esc(m.value) + '">' +
-        '<span class="pn-act-chip-k pi-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v pi-chip-v">' + esc(m.value) + '</span></button>';
+        '<span class="pn-act-chip-k pi-chip-k">' + esc(m.label || "ID") + '</span> <span class="pn-act-chip-v pi-chip-v" translate="no">' + esc(m.value) + '</span></button>';
     }).join("") + '<span class="pn-act-copied" role="status" aria-live="polite"></span></p>';
   }
   function actionRowHtml(opts) {
@@ -110,7 +110,7 @@
       '<div class="pn-rpt-opts" role="radiogroup" aria-labelledby="pnRptT">' +
       REASONS.map(function (r) { return '<label class="pn-rpt-opt"><input type="radio" name="pn-rpt-reason" value="' + r[0] + '"><span>' + esc(r[1]) + "</span></label>"; }).join("") + "</div>" +
       '<label class="pn-rpt-note-t" for="pnRptText">Add a note (optional)</label>' +
-      '<textarea id="pnRptText" name="pn-rpt-text" class="pn-rpt-text" rows="3" maxlength="' + MAX_TEXT + '" placeholder="For example, the dose on line 2…" aria-describedby="pnRptCount pnRptErr"></textarea>' +
+      '<textarea id="pnRptText" name="pn-rpt-text" class="pn-rpt-text" rows="3" maxlength="' + MAX_TEXT + '" placeholder="For example, the dose on line 2…" autocomplete="off" aria-describedby="pnRptCount pnRptErr"></textarea>' +
       '<p class="pn-rpt-count" id="pnRptCount" aria-live="polite">0 / ' + MAX_TEXT + '</p><p class="pn-rpt-err" id="pnRptErr" role="alert" tabindex="-1" hidden></p>' +
       '<div class="pn-rpt-actions"><button type="button" class="pn-act-btn pn-rpt-cancel" data-rpt-cancel>Cancel</button>' +
       '<button type="submit" class="pn-rpt-send">Send report</button></div></form>' +

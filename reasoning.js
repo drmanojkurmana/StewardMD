@@ -4387,7 +4387,7 @@
    *   kind (diagnostic, ddx, treatment, flowchart) from the one bucket it loads; legacy tables,
    *   algorithms and diagrams go by their content, or to Diagnosis when it is unclear. */
   var KBR_LABELS = { causes: ["Causes", "Causes"], patho: ["Pathophysiology", "Pathophysiology"], dx: ["Diagnosis and investigations", "Diagnosis"],
-    ddx: ["Differential diagnosis", "Differentials"], mgmt: ["Management and treatment", "Management"], prog: ["Prognosis", "Prognosis"],
+    ddx: ["Differential diagnosis", "Differentials"], mgmt: ["Management and treatment", "Management"], protocols: ["Protocols", "Protocols"], prog: ["Prognosis", "Prognosis"],
     pearls: ["Clinical pearls and pitfalls", "Pearls"], refs: ["References", "References"] };
   function kbrTable(t) {
     var ths = (t.headers || []).map(function (h) { return '<th scope="col">' + esc(h) + '</th>'; }).join("");
@@ -4489,6 +4489,57 @@
     var prog = H.prognosis ? '<p>' + medFormat(stripCite(H.prognosis)) + '</p>' : "";
     var pearlsHtml = (pearls.length ? evSub(glancePearls.length ? "More pearls" : "Pearls", evList(pearls)) : "") + evSub("Pitfalls", evList(arr(H.pitfalls), "warn"));
     var refs = refSrc && refSrc.cite ? '<div class="kbr-refs">' + refSrc.cite + '</div>' : "";
+    // Oncology protocols (cancer-protocols-map.js)
+    var protoHtml = "";
+    try {
+      var protoEntry = (window.SMD_ONCO_KB_MAP && window.SMD_ONCO_KB_MAP.get) ? window.SMD_ONCO_KB_MAP.get(id) : null;
+      if (protoEntry && protoEntry.protocols && protoEntry.protocols.length) {
+        var oncoAvail = false;
+        try {
+          if (window.SMD_PROTOSHEET) {
+            oncoAvail = !(window.SMD_QUEUE_FLAGS && window.SMD_QUEUE_FLAGS.bool && !window.SMD_QUEUE_FLAGS.bool("smd_onco_protocols"));
+          }
+        } catch (eOnco) { oncoAvail = false; }
+        var bySetting = {};
+        (protoEntry.settings || []).forEach(function (s) { bySetting[s] = []; });
+        protoEntry.protocols.forEach(function (p) {
+          var pSettings = (p.settings && p.settings.length) ? p.settings : ["Systemic Therapy"];
+          pSettings.forEach(function (s) {
+            if (!bySetting[s]) bySetting[s] = [];
+            bySetting[s].push(p);
+          });
+        });
+        var protoGroupsHtml = "";
+        (protoEntry.settings || []).forEach(function (settingName) {
+          var list = bySetting[settingName];
+          if (!list || !list.length) return;
+          var cardsHtml = list.map(function (p) {
+            var reg = p.regimen ? '<div class="kbr-proto-regimen">' + esc(p.regimen) + '</div>' : '';
+            if (oncoAvail) {
+              return '<button type="button" class="kbr-proto-card" data-kbr-proto="' + esc(p.id) + '" aria-label="' + esc(p.name) + '">' +
+                '<div class="kbr-proto-head"><span class="kbr-proto-name">' + esc(p.name) + '</span><span class="kbr-proto-chev" aria-hidden="true">&rsaquo;</span></div>' +
+                reg +
+                '</button>';
+            } else {
+              return '<div class="kbr-proto-card kbr-proto-card--readonly">' +
+                '<div class="kbr-proto-head"><span class="kbr-proto-name">' + esc(p.name) + '</span></div>' +
+                reg +
+                '</div>';
+            }
+          }).join("");
+          protoGroupsHtml += '<div class="kbr-proto-group">' +
+            '<h4 class="kbr-proto-group-title">' + esc(settingName) + '</h4>' +
+            '<div class="kbr-proto-list">' + cardsHtml + '</div>' +
+            '</div>';
+        });
+        if (protoGroupsHtml) {
+          protoHtml = '<div class="kbr-proto-wrap">' +
+            '<p class="kbr-proto-intro">Verified oncology treatment regimens and dosing protocols for ' + esc(protoEntry.articleTitle || o.name || id) + ':</p>' +
+            protoGroupsHtml +
+            '</div>';
+        }
+      }
+    } catch (eProto) {}
     // [key, text the record holds, the full section with v2 slots placed after the text]
     var secs = [
       ["causes", o.causes || "", o.causes || ""],
@@ -4496,6 +4547,7 @@
       ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging],
       ["ddx", ddxText + legacyTbl.ddx, ddxText + v2("ddx") + legacyTbl.ddx],
       ["mgmt", (o.mgmt || "") + calcTx + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + calcTx + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
+      ["protocols", protoHtml, protoHtml],
       ["prog", prog, prog],
       ["pearls", pearlsHtml, pearlsHtml],
       ["refs", refs, refs + v2("foot")]
@@ -4651,6 +4703,7 @@
     el.className = "dx-mgmt dx-reader";
     var backLabel = "‹ Back to differential";
     if (opts && opts.from === "onco-home") backLabel = "‹ ONCQIS";
+    else if (opts && opts.from === "protocol-sheet") backLabel = "‹ Protocol";
     else if (opts && (opts.standalone || opts.from === "syndromes" || opts.from === "knowledge-library" || _libReturnScroll !== null)) backLabel = "‹ Library";
     if (opts && opts.backLabel) backLabel = opts.backLabel;
     var rd = kbReaderBodyHTML(id, H, { name: name, reason: reason, syn: syn, causes: synCauses, mgmt: rdMgmt, confirm: rdConfirm, keyIx: rdKeyIx });
@@ -4669,6 +4722,16 @@
     kbDedupeReader(el);
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
     try { kbWireRelated(el, id, opts); } catch (e) {}
+    if (!el.__kbProtoWired) {
+      el.__kbProtoWired = true;
+      el.addEventListener("click", function (ev) {
+        var protoBtn = ev.target && ev.target.closest ? ev.target.closest("[data-kbr-proto]") : null;
+        if (protoBtn && window.SMD_PROTOSHEET && typeof window.SMD_PROTOSHEET.open === "function") {
+          var protoId = protoBtn.getAttribute("data-kbr-proto");
+          if (protoId) window.SMD_PROTOSHEET.open(protoId);
+        }
+      });
+    }
     var favourite = document.createElement("button"); favourite.type = "button"; favourite.className = "dx-reader-favourite";
     function favouritePaint() { var saved = kbReadList("favourites").indexOf(id) >= 0; favourite.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg><span>' + (saved ? "Saved" : "Save") + '</span>'; favourite.setAttribute("aria-pressed", String(saved)); favourite.setAttribute("aria-label", saved ? "Saved to favourites" : "Save to favourites"); }
     favouritePaint();
@@ -4696,6 +4759,16 @@
       if ((opts && opts.from === "onco-home") || (window.SMD_ONCOHOME && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on"))) {
         try { close(); } catch (e) {}
         try { if (window.SMD_ONCOHOME && SMD_ONCOHOME.foreground) SMD_ONCOHOME.foreground(); } catch (e) {}
+        return;
+      }
+      if (opts && opts.from === "protocol-sheet") {
+        if (root) {
+          root.classList.remove("on", "dx-reference-mode");
+          root.style.zIndex = "";
+          document.body.classList.remove("dx-lock");
+        }
+        var ps = document.getElementById("smdProtoSheet");
+        if (ps) ps.style.display = "block";
         return;
       }
       // Opened standalone from the Knowledge Library? Return cleanly to the library underneath
@@ -6030,6 +6103,9 @@
       opts = opts || {};
       var isStandalone = opts.standalone !== undefined ? !!opts.standalone : (opts.from ? true : !(root && root.classList.contains("on")));
       ensureRoot();
+      if (opts.from === "protocol-sheet") {
+        root.style.zIndex = "16000";
+      }
       openDiseaseRef(id, Object.assign({ standalone: isStandalone }, opts));
       root.classList.add("dx-reference-mode", "on");
       document.body.classList.add("dx-lock");

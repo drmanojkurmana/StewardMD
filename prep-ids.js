@@ -227,7 +227,13 @@
 
   /* ---------- the global index ---------- */
   function api() { return ((I.host && I.host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/") + VER + "/ids/"; }
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); }); }
+  function getJSON(url) {
+    if (I.host && I.host.getJSON) return I.host.getJSON(url);
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && url && url.indexOf("/api/prep/bank/") >= 0) {
+      return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
+  }
   function cget(k) { var H = I.host; return H && H.cacheGet ? Promise.resolve(H.cacheGet(k)).then(null, function () { return null; }) : Promise.resolve(null); }
   function cput(k, v) { var H = I.host; try { if (H && H.cachePut) H.cachePut(k, v); } catch (e) {} }
   // The pointer names the current shards: network first (short cache), the IndexedDB copy offline.

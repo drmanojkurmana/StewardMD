@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "module": "rad-ir-access",
+  "subject": "radiology",
+  "title": "Angiography and vascular access",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Most IR procedures begin with the **Seldinger technique**, where a needle punctures the vessel, a **guidewire** threads through the needle, and a **sheath** or catheter then slides over the wire after the needle is removed. The **common femoral artery** remains the default access for angiography, entered below the inguinal ligament with the **anterior wall** punctured to avoid back-wall bleeding. **Ultrasound guidance** with a **micropuncture** needle lowers failed sticks and groin complications. **Radial access** suits coronary and selected visceral work with faster ambulation.",
+      "say": "Most procedures begin with the Seldinger sequence of needle, guidewire, then sheath or catheter. The common femoral artery is the default access, punctured on its anterior wall below the inguinal ligament. Ultrasound guidance with a micropuncture needle reduces failed punctures and groin complications. Radial access allows faster ambulation for suitable cases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Needle punctures vessel"
+          },
+          {
+            "id": "b",
+            "label": "Guidewire threaded"
+          },
+          {
+            "id": "c",
+            "label": "Sheath over wire"
+          },
+          {
+            "id": "d",
+            "label": "Diagnostic angiogram"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnostic angiography maps vessels when CT or MR leaves doubt. **Four-vessel digital subtraction angiography** stays the investigation of choice for the cause of **subarachnoid haemorrhage**, showing aneurysms and vasospasm in real time. **DSA** is also the gold standard for **arterial occlusive disease** and for confirming **chronic thromboembolic pulmonary hypertension** before endarterectomy. **Mesenteric angiography** localises brisk **gastrointestinal bleeding** and can treat it in the same sitting. **Spinal angiography** maps a dural fistula before surgery.",
+      "say": "Angiography maps vessels when CT or MR leaves doubt. Four-vessel digital subtraction angiography finds the cause of subarachnoid haemorrhage and grades vasospasm. DSA is the gold standard for arterial occlusive disease and for confirming chronic clot in the lungs. Mesenteric angiography localises brisk gut bleeding and can treat it at once.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Question",
+          "Test"
+        ],
+        "rows": [
+          [
+            "SAH cause",
+            "Four-vessel DSA"
+          ],
+          [
+            "Occlusive disease",
+            "DSA gold standard"
+          ],
+          [
+            "Brisk GI bleed",
+            "Mesenteric angiogram"
+          ],
+          [
+            "Dural fistula map",
+            "Spinal angiogram"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Groin complications follow access and each has a signature. A **pseudoaneurysm** shows a **to-and-fro** Doppler waveform and is treated with **ultrasound-guided thrombin injection** when small and narrow-necked. An **arteriovenous fistula** gives a continuous bruit with a palpable thrill. A **high femoral stick** above the ligament risks **retroperitoneal bleeding** with hypotension and flank pain. **Dissection** flaps appear as a double lumen on contrast runs. **Radial occlusion** is usually silent because the ulnar artery keeps the hand perfused.",
+      "say": "Each groin complication has a signature. A pseudoaneurysm shows to-and-fro flow on Doppler and small ones close with thrombin injection. A fistula gives a continuous bruit with a thrill. A high stick risks hidden bleeding behind the peritoneum. Radial occlusion is usually silent thanks to ulnar supply.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "Diagnosis"
+        ],
+        "rows": [
+          [
+            "To-and-fro Doppler",
+            "Pseudoaneurysm"
+          ],
+          [
+            "Continuous bruit and thrill",
+            "AV fistula"
+          ],
+          [
+            "Hypotension after high stick",
+            "Retroperitoneal bleed"
+          ],
+          [
+            "Silent after radial access",
+            "Radial occlusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Safe angiography starts before the needle. **Consent** explains benefits, groin risks, contrast allergy, radiation and alternatives in plain language. **Anticoagulants** are reviewed against **SIR periprocedural guidance**, with moderate and high-risk procedures needing corrected clotting. **Kidney function** is checked and high-risk patients receive **prehydration**. Prior contrast reactions trigger **steroid premedication** under local protocol. Pregnancy is asked about so the **foetal dose** can be justified and minimised under **ALARA**.",
+      "say": "Safety starts before the needle. Consent covers benefits, groin risks, contrast allergy, radiation and alternatives. Blood thinners are reviewed against SIR periprocedural guidance. Kidneys are checked with fluids for high-risk patients. Prior contrast reactions trigger steroid cover, and pregnancy is always asked about.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "maikir-001",
+    "maikir-002",
+    "maikir-003",
+    "maikir-004",
+    "maikir-005",
+    "maikir-006",
+    "maikir-007",
+    "maikir-008",
+    "maikir-009",
+    "maikir-010"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave1",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}
