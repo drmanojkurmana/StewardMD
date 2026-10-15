@@ -1,3 +1,5 @@
+// ZERO Workers AI (owner 2026-10-15, Cloudflare bill): this tool calls Cloudflare Workers AI and costs money per run.
+if (process.env.ALLOW_CF_AI !== "1") { console.error("Workers AI is disabled. Not running."); process.exit(1); }
 /* StewardMD — embed the KB chunk corpus and upsert it to the Vectorize index.
  *
  * The hybrid-retrieval "vector arm" (functions/api/retrieve) queries a Vectorize

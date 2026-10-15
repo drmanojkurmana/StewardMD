@@ -1,3 +1,5 @@
+// ZERO Workers AI (owner 2026-10-15, Cloudflare bill): this tool calls Cloudflare Workers AI and costs money per run.
+if (process.env.ALLOW_CF_AI !== "1") { console.error("Workers AI is disabled. Not running."); process.exit(1); }
 /* StewardMD — build the DISEASE-LEVEL semantic index (docs + vectors).
  *
  * This regenerates the two artifacts the deployed hybrid-retrieval vector arm
