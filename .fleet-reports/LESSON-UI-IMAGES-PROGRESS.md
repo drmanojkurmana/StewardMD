@@ -188,3 +188,25 @@
 - Local headless screenshots blocked by sandbox (Chrome renders nothing,
   server listen EPERM); visual QA deferred to the `lessonui-browser` CI gate
   (390px dark/light) before merge.
+
+## 2026-10-15 batch 4: pharma/path/micro figure backfill (lessonui-1013)
+- **8 original SVGs** (`pharma-prodrug`, `path-fever`, `micro-type4`,
+  `micro-cold-sterilisation`, `path-shock-organs`, `path-nephritic-nephrotic`,
+  `pharma-rifampicin`, `micro-zn-stain`) wired into 8 null-visual steps
+  (`phm-absorption-routes` s3, `pat-mediators` s4, `mic-immune-response` s4,
+  `mic-sterilisation` s3, `pat-shock` s4, `pat-glomerular` s0,
+  `phm-antitubercular` s3, `mic-tuberculosis` s0). Same bank format: white
+  stage, 800x520 (`ar` 1.5385), `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F, pure ASCII, min 11px type.
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  title/desc/role, palette subset, min font size, per-figure key strings:
+  enalapril/enalaprilat, IL-1/TNF/IL-6/PGE2/IL-18, 48-72h/Th1/tuberculin,
+  gamma/filtration/EtO/plasma/121C, ATN/DAD/centrilobular/Waterhouse,
+  nephritic/nephrotic fork, orange/indinavir/MDR, carbol/mycolic/AFB).
+- **Attribution**: 8 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 8/8 `checkLesson` clean; `scripts/lesson-diagrams/check.mjs`
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23, prep-lessons-100
+  3/3. Audit now 192 with images, 1274 zero (lists reconciled to headers).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.

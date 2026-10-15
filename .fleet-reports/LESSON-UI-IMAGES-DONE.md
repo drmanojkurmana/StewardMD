@@ -194,3 +194,19 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   suites 26/26 pass. Inventory now 184 with images, 1,282 zero.
 
 
+
+## Addendum 2026-10-15 (Batch 4: prodrug/fever/type-IV/cold-sterilisation/shock-organs/nephritic-nephrotic/rifampicin/ZN SVGs)
+
+- **8 original SVGs** wired into 8 null-visual steps only (no replacements):
+  `phm-absorption-routes` s3 (prodrug map), `pat-mediators` s4 (fever
+  pathway), `mic-immune-response` s4 (type IV 48-72h timeline),
+  `mic-sterilisation` s3 (cold methods), `pat-shock` s4 (organ injury map),
+  `pat-glomerular` s0 (nephritic vs nephrotic fork), `phm-antitubercular` s3
+  (rifampicin panel), `mic-tuberculosis` s0 (ZN sequence + wall inset).
+  Figure facts drawn from the step text itself; standard adjuncts
+  (0.22 micrometre pores, endoscope/plasma use, muddy-brown casts, hyaline
+  membranes, zone 3, watershed gut, LFT monitoring) are textbook-stable.
+- **Validation**: parse-and-assert second pass (palette, 11px floor, ASCII,
+  title/desc, key strings); 8/8 `checkLesson` clean; diagram checker 0
+  problems; audit lists reconciled (1274 lines = 1274 zero-image lessons).
+- Inventory now 192 with images, 1274 zero of 1466.
