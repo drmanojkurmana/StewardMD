@@ -174,4 +174,17 @@
   biochemistry 63, microbiology 34 zero-image lessons remain; anatomy and
   physiology are complete (80/80, 49/49) and stay last/skipped.
 
-
+## 2026-10-15: anatomy/physiology reuse (lead note 16:00)
+- `/private/tmp/claude-img-wt` no longer mounted, but branch `claude-img-1014`
+  content is already in `lessonui-1013`: 105 `ana-*.svg` + 91 `phy-*.svg`,
+  all 196 referenced from lesson steps (0 unreferenced). No regeneration needed.
+- **A11y fix**: all 186 placeholder `<desc id="d">d</desc>` replaced with the
+  referencing step's alt text (longest alt wins); 10 files already had real
+  descs. `scripts/lesson-diagrams/check.mjs`: 126 lessons, 198 figures, 0 problems.
+- **Attribution**: added the missing 186 rows (titles taken from each file's
+  `<title>`); now 105 ana + 91 phy rows, all StewardMD original CC BY 4.0.
+- **Report sheet**: textarea gains `autocomplete="off"` (guidelines: non-auth
+  field); unit suites `prep-action-row` + `bug-report` 23/23 pass.
+- Local headless screenshots blocked by sandbox (Chrome renders nothing,
+  server listen EPERM); visual QA deferred to the `lessonui-browser` CI gate
+  (390px dark/light) before merge.
