@@ -32,7 +32,7 @@
   var RANK_MIN_N = 100;            // Arena "rank of N": shown only from 100 players up (owner 2026-10-10; conservative)
   var CLOCK_BACK_MS = 120000;      // rule 4
   var SAVE_EVERY_MS = 5000;        // rule 3
-  // KnowYourIQ capture (prep-coach.js chips): one confidence id per question, skippable (null), plus the two
+  // IQoach capture (prep-coach.js chips): one confidence id per question, skippable (null), plus the two
   // mixed-up option indexes when Confused carries them. Kept here so the attempt record and the saved session
   // carry it without depending on the coach file.
   var CONF_IDS = { guessing: 1, confident: 1, confused: 1 };

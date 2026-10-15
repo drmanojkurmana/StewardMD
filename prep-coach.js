@@ -1,5 +1,5 @@
-/* KnowYourIQ: confidence-aware coaching for PrepNucleus. window.PREP_COACH. ES5.
- * "Know what you know." It reports knowledge groups and tiers only: never an IQ number,
+/* IQoach: confidence-aware coaching for PrepNucleus. window.PREP_COACH. ES5.
+ * "Know your Medical IQ". It reports knowledge groups and tiers only: never an IQ number,
  * intelligence score, rank, percentile or predicted score. Exam ready means "ready by your
  * own answers", from the student's own counted answers on this device.
  *
@@ -43,8 +43,8 @@
 
   /* ---------- ONE config object: names, thresholds, weights (owner-retunable) ---------- */
   var KYIQ = {
-    NAME: "KnowYourIQ", TAGLINE: "Know what you know.",
-    NOTEST: "KnowYourIQ shows what you know and what you are only guessing. It is not an intelligence test.",
+    NAME: "IQoach", TAGLINE: "Know your Medical IQ",
+    NOTEST: "IQoach shows what you know and what you are only guessing. It is not an intelligence test.",
     MIN_N: 5,                 // answers on a topic before any group or tier shows
     HIST_N: 20,               // last answers kept per topic for recency weighting
     DECAY: 0.9,               // recency weight per answer back (newest 1, next 0.9, ...)

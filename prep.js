@@ -1441,7 +1441,7 @@
 
   /* ---------- home ---------- */
   function arenaOn() { return !!(G.PREP_ARENA && G.PREP_ARENA.enabled()); }
-  /* KnowYourIQ section (My coaching): importance sources, view, names, section and result cards.
+  /* IQoach section (My coaching): importance sources, view, names, section and result cards.
      All numbers come from the student's own answers on this device; nothing is predicted. */
   function coachSrc(exam) {
     var bp = null;
@@ -1474,7 +1474,7 @@
     }
     return out;
   }
-  // My coaching (KnowYourIQ) compares against the selected plan's exam, never the tab it shares.
+  // My coaching (IQoach) compares against the selected plan's exam, never the tab it shares.
   function coachExam(s) { var p = planProfileId(); return p || s.exam; }
   function coachTopicName(t) {
     var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
@@ -1504,7 +1504,7 @@
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
-      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About KnowYourIQ" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
+      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About IQoach" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
       '<p class="ky-sub">' + esc(K.NAME) + " · " + esc(K.TAGLINE) + "</p>";
     if (st.kySecInfo) h += '<p class="ky-note">' + esc(K.NOTEST) + ' Groups build from your own answers on this phone: answer ' + K.MIN_N + " questions on a topic to see its group and tier.</p>";
     if (!view.topics.length) {
@@ -1556,7 +1556,7 @@
     if (n.misconception) bits.push("<b>" + n.misconception + "</b> confident-wrong (misconceptions to fix first)");
     if (n.confused) bits.push("<b>" + n.confused + "</b> confused between options");
     if (n.lucky) bits.push("<b>" + n.lucky + "</b> guessed right (lucky, not mastered)");
-    var h = '<section class="ky-sec" aria-label="KnowYourIQ result"><div class="ky-head">' + kyMark(28) +
+    var h = '<section class="ky-sec" aria-label="IQoach result"><div class="ky-head">' + kyMark(28) +
       '<h2 class="pn-h">' + esc(K.NAME) + ": this test</h2></div>" +
       '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="ky-empty">You tagged ' + n.tagged + " of " + r.items.length + ": " + (bits.join(" · ") || "no misconceptions, confused or lucky answers.") + "</p>" +
       (first ? '<p class="ky-empty">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>" : "") +
@@ -1564,7 +1564,7 @@
     if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
-  /* ---------- KnowYourIQ insight (prep-insight.js): the result screen after a set. No AI call. ---------- */
+  /* ---------- IQoach insight (prep-insight.js): the result screen after a set. No AI call. ---------- */
   // Kill switch: localStorage smd_kyiq_insight = "0" returns the old two-line result.
   function insightOn() { try { if (G.localStorage.getItem("smd_kyiq_insight") === "0") return false; } catch (e) {} return !!G.PREP_INSIGHT; }
   function kyChip(oc) {
@@ -1597,7 +1597,7 @@
     if (!an.answered) return "";
     r.ky = { fix: an.fix.map(function (f) { return f.i; }), rem: an.remember.map(function (f) { return f.i; }), items: an.fixShown };
     var all = {}; IN.allTime(s).forEach(function (a) { all[a.id] = a; });
-    var h = '<section class="ky-sec ky-ins" aria-label="KnowYourIQ result"><div class="ky-head">' + kyMark(28) + '<h2 class="pn-h">' + esc(K ? K.NAME : "KnowYourIQ") + ": this test</h2></div>";
+    var h = '<section class="ky-sec ky-ins" aria-label="IQoach result"><div class="ky-head">' + kyMark(28) + '<h2 class="pn-h">' + esc(K ? K.NAME : "IQoach") + ": this test</h2></div>";
     var hl = IN.headline(an);
     if (hl) h += '<p class="ky-txt ky-lead">' + esc(hl) + "</p>";
     // 1. Confidence x correct, one bar and a legend of the groups that have answers.
@@ -1645,7 +1645,7 @@
     var r = st.run, IN = G.PREP_INSIGHT;
     if (!r || !IN || !G.PREP_ASK) return false;
     var an = IN.analyzeRun({ items: r.items, ans: r.ans, conf: r.conf || [] }, load());
-    var title = "KnowYourIQ: my pattern";
+    var title = "IQoach: my pattern";
     return G.PREP_ASK.open({ kind: "card", fr: title, bk: IN.patternText(an, r.items, kyItemName), title: title, ask: "Explain my pattern and what to remember." }, HOST);
   }
   function kyPractise(list) {
@@ -1674,7 +1674,7 @@
       save();
     } catch (e) {}
   }
-  /* "Ask MaiK about my KnowYourIQ": the existing sheet with the compact structured summary as
+  /* "Ask MaiK about my IQoach": the existing sheet with the compact structured summary as
      context. The on-phone model writes the plain-language plan; if it cannot, the standard
      MaiK Cloud handoff applies. No per-attempt LLM call is needed for the screens themselves. */
   function coachAskOpen() {
@@ -1760,7 +1760,7 @@
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
-      // KnowYourIQ (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
+      // IQoach (My coaching): due today, groups, pairs and Ask MaiK. Nothing without the coach file.
       coachSecHtml("home") +
       // Question of the day (prep50): one bank question a day, the same for the whole day; drawn once the subject indexes
       // are read (below). Hidden offline when its module is not on this phone.
@@ -2082,7 +2082,7 @@
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
     st.run = { m0: opts.custom ? null : snapNow(), items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
-    // KnowYourIQ capture (prep-coach.js): one confidence chip per question, null until tapped (skippable),
+    // IQoach capture (prep-coach.js): one confidence chip per question, null until tapped (skippable),
     // plus the confused pair. Shown in every mode; ignoring them changes nothing about the run.
     st.run.conf = items.map(function () { return null; });
     st.run.confPair = items.map(function () { return null; });
@@ -2353,14 +2353,14 @@
   // The MaiK AI mark (maik-ai-mark.js, one SVG for every Ask MaiK entry); without it, the old avatar picture.
   function mkAv(size) { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: size || 34 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
   function askBtn(act, label, attrs) { return '<button type="button" class="pn-btn pa-ask" data-act="' + act + '"' + (attrs || "") + '>' + mkAv(32) + '<span>' + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.label(label) : label) + "</span></button>"; }
-  /* KnowYourIQ capture row: the three one-tap chips (labels from prep-coach.js CONF), an info button that
+  /* IQoach capture row: the three one-tap chips (labels from prep-coach.js CONF), an info button that
      reopens the intro, and, when Confused is lit, the optional pair tick (which two options mix you up).
      Everything sits below the options; tapping is optional and never blocks answering or the timer. */
   function confRowHtml(r, it) {
     var CO = G.PREP_COACH;
     var chips = CO ? CO.CONF : [["guessing", "I'm guessing"], ["confident", "I'm confident"], ["confused", "I'm confused between options"]];
     var cur = r.conf && r.conf[r.i];
-    var h = '<div class="pn-mtag ky-cap" role="group" aria-label="How sure are you?"><span class="pn-mut pn-small">How sure are you? (optional) <button type="button" class="pn-link ky-info" data-act="kyinfo" aria-label="About KnowYourIQ">' + ico("info") + "</button></span>" +
+    var h = '<div class="pn-mtag ky-cap" role="group" aria-label="How sure are you?"><span class="pn-mut pn-small">How sure are you? (optional) <button type="button" class="pn-link ky-info" data-act="kyinfo" aria-label="About IQoach">' + ico("info") + "</button></span>" +
       '<div class="pn-wrap">' + chips.map(function (t) {
         var on = cur === t[0];
         return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="conf" data-v="' + t[0] + '">' + esc(t[1]) + "</button>";
@@ -2375,7 +2375,7 @@
     }
     return h + "</div>";
   }
-  /* KnowYourIQ intro card: shown at the start of a run until dismissed, and again from the info button.
+  /* IQoach intro card: shown at the start of a run until dismissed, and again from the info button.
      Never blocks: the question answers normally with it on screen, and it hides after the first answer. */
   function kyIntroHtml(r) {
     var CO = G.PREP_COACH;
@@ -2473,7 +2473,7 @@
     }
     // Time up: the question stays locked for the rest of the set, answered or not.
     var lockNote = locked && !shown ? '<p class="pn-timeup" role="status">' + ico("lock") + "<span><b>Time up</b>" + (chosen >= 0 ? "Your answer " + L[chosen] + " is kept and can no longer be changed." : "This question can no longer be answered.") + "</span></p>" : "";
-    // KnowYourIQ capture: the confidence chips below every question, in every mode (practice, study, timed
+    // IQoach capture: the confidence chips below every question, in every mode (practice, study, timed
     // exams, grand tests, mock and fixed papers). Skippable: no tap, no record, no extra step, no timer change.
     // The row sits below the options, so the options never move; Confused opens the optional pair tick.
     var confRow = !locked ? confRowHtml(r, it) : "";
@@ -2672,7 +2672,7 @@
     if (G.PrepPro) G.PrepPro.use("questions", { items: [it] });
     var ms = s.mod[it._m || it.t] || (s.mod[it._m || it.t] = { t: 0, ok: 0 });
     ms.t++; if (ok) ms.ok++; ms.last = td;
-    // KnowYourIQ capture: cap is the chip id or { conf, pair, ms }. The chip is tallied on the module
+    // IQoach capture: cap is the chip id or { conf, pair, ms }. The chip is tallied on the module
     // (skipped chips leave no trace); counted answers also file the per-topic aggregate and the pair.
     // Blanks (chosen < 0) are noted by the scheduler above but never feed the coach.
     var cc = null, pr = null, msT = 0;
@@ -2726,7 +2726,7 @@
     if (r.custom) return r.custom.submit(r);
     if (r.qc) qcPause(r.qc, pnow());
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (it._gone) return; var cf = r.conf && r.conf[i], cp = r.confPair && r.confPair[i], cm = (r.ms || [])[i] || 0; if (r.ans[i] >= 0) record(it, r.ans[i], { conf: cf, pair: cp, ms: cm }); else record(it, -1, cf); });
-    // KnowYourIQ: each attempted topic's next review, from its current group (fresh topics left alone).
+    // IQoach: each attempted topic's next review, from its current group (fresh topics left alone).
     coachFileReviews(r);
     // Tests 2: the attempt record (prep-assess.js result), daily completion, the saved session cleared.
     if (r.t2 && G.PREP_TESTS) { try { G.PREP_TESTS.finished(r); } catch (e) {} }
@@ -3524,7 +3524,7 @@
     if (a === "secstart") { if (st.run && st.run.sc) startSection(st.run, Number(v)); return; }
     if (a === "prev") { if (st.run && st.run.i && canSwipe(-1)) { st.run.i--; if (e.detail) st.swipeIn = -1; renderRun(); } return; }
     if (a === "markq") { var rr = st.run; rr.mark[rr.i] = !rr.mark[rr.i]; return renderRun(); }
-    // KnowYourIQ capture: toggle the confidence chip (tapping the lit chip clears it). Leaving Confused
+    // IQoach capture: toggle the confidence chip (tapping the lit chip clears it). Leaving Confused
     // clears the pair with it. When the question is already answered, the tallies move with the chip so a
     // retag never double counts (reconf touches confidence counters only, not the answer itself).
     if (a === "conf") {
@@ -3543,7 +3543,7 @@
       }
       return renderRun();
     }
-    // KnowYourIQ capture: tick which two options mix you up (tapping a lit letter clears it; a third tap
+    // IQoach capture: tick which two options mix you up (tapping a lit letter clears it; a third tap
     // replaces the oldest). Only while Confused is lit, and never after the run is done.
     if (a === "confpair") {
       var rp = st.run, itp = rp && rp.items[rp.i];
@@ -3558,7 +3558,7 @@
       }
       return renderRun();
     }
-    // KnowYourIQ intro: "Got it" hides it for this run; "Don't show me again" persists on this device.
+    // IQoach intro: "Got it" hides it for this run; "Don't show me again" persists on this device.
     if (a === "kyintro") {
       if (st.run) { st.run.kyHide = true; st.run.kyShow = false; }
       if (v === "never" && G.PREP_COACH) G.PREP_COACH.introDismiss(true);

@@ -1,4 +1,4 @@
-/* KnowYourIQ insight (prep-insight.js): the result screen after a set and the swipe pager in Review, in the real app.
+/* IQoach insight (prep-insight.js): the result screen after a set and the swipe pager in Review, in the real app.
  * Headless Chrome over CDP with touch. Synthetic items run through PREP._host.run (no bank needed).
  *  - result: confidence x correct bar, by-type rows, fix list (confident errors first), remember list, no AI call;
  *  - a question missed twice carries "Missed 2 times";

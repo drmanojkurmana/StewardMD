@@ -1,4 +1,4 @@
-/* KnowYourIQ (prep-coach.js + capture in prep.js/prep-assess.js/prep-tests.js).
+/* IQoach (prep-coach.js + capture in prep.js/prep-assess.js/prep-tests.js).
  * What must hold:
  *  - capture: the three owner chips with their exact labels, skippable; each chip pairs with the
  *    mark-for-review flag and rides with time taken, answer changes and the confused pair; the
@@ -41,9 +41,9 @@ const agg = (t, oks, confs = [], days = null, slow = []) => {
 const stat = (aggs, t) => C.summarize(aggs).find((x) => x.t === t);
 const SRC = { blueprint: null, pyq: null, data: DATA, exam: "neet-pg" };
 
-test("name and config: KnowYourIQ in ONE object, never an intelligence test", () => {
-  assert.equal(K.NAME, "KnowYourIQ");
-  assert.equal(K.TAGLINE, "Know what you know.");
+test("name and config: IQoach in ONE object, never an intelligence test", () => {
+  assert.equal(K.NAME, "IQoach");
+  assert.equal(K.TAGLINE, "Know your Medical IQ");
   assert.match(K.NOTEST, /not an intelligence test/);
   for (const k of ["MIN_N", "HIST_N", "DECAY", "READY_ACC", "REVISE_ACC", "MAX_UNSURE", "MAX_SLOW",
     "READY_DAYS_MIN", "REREAD_CW_MIN", "WEAK_W", "IMPORT_W", "NEUTRAL", "TIER_MIN", "REVIEW_DAYS",
@@ -259,7 +259,7 @@ test("Ask MaiK summary: compact, grouped, no scores or predictions", () => {
   const view = C.analyze(aggs, "neet-pg", SRC);
   const s = C.summaryText(view, "neet-pg", ["a|m"], [{ t: "a|m", ta: "X", tb: "Y" }]);
   assert.ok(s.length <= K.SUMMARY_MAX_BYTES);
-  assert.match(s, /KnowYourIQ/);
+  assert.match(s, /IQoach/);
   assert.match(s, /Just revise/);
   assert.match(s, /Due today/);
   assert.match(s, /I mix up/);
@@ -291,7 +291,7 @@ test("UI wiring: My coaching on home, tests and results, with the Ask entry", ()
   assert.match(T, /H\.coachSec\("tests"\)/, "tests home shows the due list");
   assert.match(J, /coachResultHtml\(r\) \+ reviewHtml\(r\)/, "classic results show the coach card");
   assert.match(T, /H\.coachResult\(r\)/, "test results show the coach card");
-  assert.match(J, /Ask MaiK about my " \+ K\.NAME/, "Ask entry carries the KnowYourIQ name");
+  assert.match(J, /Ask MaiK about my " \+ K\.NAME/, "Ask entry carries the IQoach name");
   assert.match(J, /kind: "card", fr: title, bk: CO\.summaryText/, "Ask opens the existing sheet with the compact summary");
   assert.match(J, /coachFileReviews\(r\)/, "finishing files each topic's next review");
   for (const f of ["coachSrc", "coachView", "coachTopicName", "kyMark", "kyTierChip", "coachSecHtml",

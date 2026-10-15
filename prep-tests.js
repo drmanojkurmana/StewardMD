@@ -905,7 +905,7 @@
   function statsChoice() { try { return G.localStorage.getItem(STATS); } catch (e) { return "0"; } }
   function sendStats(rec) {
     if (statsChoice() !== "1" || !rec || !G.fetch) return;
-    // KnowYourIQ: the confidence tag id only (guessing/confident/confused), never any text.
+    // IQoach: the confidence tag id only (guessing/confident/confused), never any text.
     var rows = rec.items.map(function (x) { return [x.item_id, x.chosen == null ? null : x.correct ? 1 : 0, Math.min(3600, Math.round((x.ms || 0) / 1000)), x.chosen == null ? -1 : x.chosen, A.cleanConf(x.conf)]; });
     try { G.fetch((G.SMD_PREP_STATS_API || "/api/prep/stats"), { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, exam: rec.exam, type: rec.test_type, items: rows }), keepalive: rows.length <= 60, credentials: "omit" }).then(null, function () {}); } catch (e) {}
   }
@@ -937,7 +937,7 @@
     clearSess();
   }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
-  /* KnowYourIQ capture: compact chip counts for a t2h row, from the attempt record's items. */
+  /* IQoach capture: compact chip counts for a t2h row, from the attempt record's items. */
   function confCounts(items) {
     var c = { guessing: 0, confident: 0, confused: 0 };
     (items || []).forEach(function (x) { var v = A.cleanConf(x && x.conf); if (v) c[v]++; });

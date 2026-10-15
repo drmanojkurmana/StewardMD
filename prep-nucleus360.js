@@ -278,7 +278,7 @@
     try { return JSON.parse(G.localStorage.getItem(NUCLEUS360.storeKey) || "{}"); } catch (e) { return {}; }
   }
   function writeProg(p) { try { G.localStorage.setItem(NUCLEUS360.storeKey, JSON.stringify(p)); } catch (e) {} }
-  // Confidence tap per concept (KnowYourIQ-style): Sure / Unsure / Guess, stored per topic+concept.
+  // Confidence tap per concept (IQoach-style): Sure / Unsure / Guess, stored per topic+concept.
   function tapConf(topicId, conceptId, v) {
     var p = readProg(), k = topicId + "|" + conceptId;
     p[k] = { conf: v, ts: Date.now() };

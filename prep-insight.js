@@ -1,4 +1,4 @@
-/* KnowYourIQ insight: what a finished set says about the student, with no AI call. window.PREP_INSIGHT. ES5.
+/* IQoach insight: what a finished set says about the student, with no AI call. window.PREP_INSIGHT. ES5.
  * Pure and deterministic. Three jobs:
  *   1. aspectOf(item): tag a question as Diagnosis / Investigation / Treatment / Pathogenesis / Screening and
  *      prevention / Clinical features / Complications / Other from the wording of the stem alone (the bank has
@@ -208,7 +208,7 @@
 
   /* Compact text for the optional "Explain my pattern" call: counts and short stems only, no names, no PHI. */
   function patternText(an, items, nameOf, pearlOf) {
-    var L = ["KnowYourIQ: my last set (" + an.answered + " answered). Explain my pattern and what to remember. Short, plain words."];
+    var L = ["IQoach: my last set (" + an.answered + " answered). Explain my pattern and what to remember. Short, plain words."];
     var g = an.grid;
     L.push("Confident right " + g.mastered + ", confident wrong " + g.misconception + ", guessed right " + g.lucky + ", guessed wrong " + g.guesswrong + ", confused " + g.confused + ", untagged wrong " + g.wrong + ".");
     var ty = [];

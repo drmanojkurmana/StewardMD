@@ -11820,3 +11820,8 @@ Older tests that pinned the old layout were updated. [[modules/Refined Look]]
 
 ## 2026-10-14 Acknowledgements: Dr. Chevuri Manoj Kumar Reddy added
 **Added:** Dr. Chevuri Manoj Kumar Reddy, MD Radiodiagnosis, upcoming Interventional Radiologist (owner supplied the title; the contribution line about PrepNucleus Radiology and RadioAnatome was drafted at the owner's request, wording not verified with Dr. Reddy, so confirm it with him). One `<span>` in `#ackCard` (index.html), which feeds both the About tab and the Acknowledgements sheet.
+
+## 2026-10-15 KnowYourIQ renamed IQoach; tagline "Know your Medical IQ"
+- User-facing name is now **IQoach** (`prep-coach.js` `KYIQ.NAME`, `TAGLINE`, `NOTEST`; headings, aria labels, the Ask MaiK button and pattern title in `prep.js`). The tagline replaces "Know what you know."
+- Internal names are unchanged on purpose: `window.PREP_COACH`, `KYIQ` config, `PREP_KYIQ_DATA`, `prep-knowyouriq-data.js`, flag `smd_kyiq_insight`, `ky-*` CSS classes, `data-act="ky*"`, art files `knowyouriq-mark-*`. Old vault notes still say KnowYourIQ.
+- Still no IQ number, score, rank or prediction anywhere; the intro line says IQoach is not an intelligence test.
