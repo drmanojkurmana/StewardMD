@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-diarrhoea",
-  "subject": "paediatrics",
-  "title": "Diarrhoea and dehydration: assess rehydrate zinc rotavirus",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Assess** (**thirst** drinks eagerly poor inability, **eyes** sunken tears absent, **pinch** slow very slow recoil, **urine** scanty anuric, **pulse** rapid weak thready, **conscious** restless lethargic floppy, **weight** loss grades, **shock** cold peripheries) with **plans** (**A** no-dehydration home, **B** some ORS facility, **C** severe IV bolus) sorts; **chart** (losses inputs) tracks. Guts drain.",
-      "say": "Thirsts eyes pinches urines is assess: drinks fail sinks dry recoils slow outputs fade pulses race consciousness dims weights drop shocks chill plans sort A-homes B-facilities C-boluses charts log losses tally. Grades guide.",
-      "vis": null
-    },
-    {
-      "tx": "**Rehydrate** (**ORS** low-osmolarity small frequent spoons, **NG** vomiters continuous drips, **IV** Ringer severe shock bolus, **breast** continue feeds never starve, **zinc** fourteen-day courses shortens, **potassium** bananas replacements, **monitor** puffy overhydration, **reassess** four-hour checks) with **counsels** (**mothers** preparation storage, **hygiene** hand water) teaches; **discharge** (home ORS stocks) sends. Fluids restore.",
-      "say": "ORSs NGs IVs breasts is rehydrate: osmolarities low spoons sip drips run boluses push breasts nurse starves ban zincs dose courses run potassiums replace monitors watch puffies swell reassesses time hours four counsels teach preparations mix discharges send stocks home. Sips save.",
-      "vis": null
-    },
-    {
-      "tx": "**Cause** (**rota** watery vaccine-preventable peaks, **cholera** rice-water epidemics doxycycline, **dysentery** blood mucus ciprofloxacin, **amoeba** metronidazole liver, **giardia** fatty malabsorption tinidazole, **lactose** secondary transient withdrawal, **antibiotic** clostridioides stops, **surgical** intussusception blood currant) with **tests** (**stool** leukocytes cultures, **outbreak** notification) traces; **isolate** (cohort wards) contains. Bugs purge.",
-      "say": "Rotas choleras dysenteries amoebas is cause: waters gush vaccines block rices flow epidemics spread bloods stain drugs kill livers abscess fatties float intolerances pass stops trigger currents telescope tests trace stools culture outbreaks notify wards cohort isolates wash. Causes purge.",
-      "vis": null
-    },
-    {
-      "tx": "**Prevent** (**rota** vaccine schedules, **exclusive** breast six months, **wean** timely hygienic foods, **water** boiled chlorinated, **measles** vaccine diarrhoea kills, **vitamin-A** campaigns severity, **deworm** periodic albendazole, **nutrition** catch-up feeds) with **traps** (**missed** shock sepsis, **over-IV** overload lungs, **antimotility** forbidden children) closes; **audit** (diarrhoea deaths) reviews. Futures hydrate.",
-      "say": "Rotas exclusives weans waters is prevent: schedules prick breasts nurse weans time boils kill measles shield severities cut deworms dose nutritions catch traps dodge shocks hide overloads flood antimotilities ban guts still audits review deaths count. Programs protect.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-331",
-    "bk2-paed-332",
-    "bk2-paed-333",
-    "bk2-paed-334",
-    "bk2-paed-335",
-    "bk2-paed-336",
-    "bk2-paed-337",
-    "bk2-paed-338",
-    "bk2-paed-339",
-    "bk2-paed-340"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-diarrhoea",
+ "subject": "paediatrics",
+ "title": "Diarrhoea and dehydration: assess rehydrate zinc rotavirus",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Assess** (**thirst** drinks eagerly poor inability, **eyes** sunken tears absent, **pinch** slow very slow recoil, **urine** scanty anuric, **pulse** rapid weak thready, **conscious** restless lethargic floppy, **weight** loss grades, **shock** cold peripheries) with **plans** (**A** no-dehydration home, **B** some ORS facility, **C** severe IV bolus) sorts; **chart** (losses inputs) tracks. Guts drain.",
+   "say": "Thirsts eyes pinches urines is assess: drinks fail sinks dry recoils slow outputs fade pulses race consciousness dims weights drop shocks chill plans sort A-homes B-facilities C-boluses charts log losses tally. Grades guide.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ped-dehydration.svg",
+    "alt": "Dehydration triage columns: plan A home fluids for no dehydration, plan B facility ORS for some with eager thirst, slow pinch and restlessness, plan C IV Ringer bolus for severe with floppy, anuric shock; pinch recoil decides.",
+    "caption": "Some gets ORS, severe gets IV; pinch decides.",
+    "ar": 1.5385
+   }
+  },
+  {
+   "tx": "**Rehydrate** (**ORS** low-osmolarity small frequent spoons, **NG** vomiters continuous drips, **IV** Ringer severe shock bolus, **breast** continue feeds never starve, **zinc** fourteen-day courses shortens, **potassium** bananas replacements, **monitor** puffy overhydration, **reassess** four-hour checks) with **counsels** (**mothers** preparation storage, **hygiene** hand water) teaches; **discharge** (home ORS stocks) sends. Fluids restore.",
+   "say": "ORSs NGs IVs breasts is rehydrate: osmolarities low spoons sip drips run boluses push breasts nurse starves ban zincs dose courses run potassiums replace monitors watch puffies swell reassesses time hours four counsels teach preparations mix discharges send stocks home. Sips save.",
+   "vis": null
+  },
+  {
+   "tx": "**Cause** (**rota** watery vaccine-preventable peaks, **cholera** rice-water epidemics doxycycline, **dysentery** blood mucus ciprofloxacin, **amoeba** metronidazole liver, **giardia** fatty malabsorption tinidazole, **lactose** secondary transient withdrawal, **antibiotic** clostridioides stops, **surgical** intussusception blood currant) with **tests** (**stool** leukocytes cultures, **outbreak** notification) traces; **isolate** (cohort wards) contains. Bugs purge.",
+   "say": "Rotas choleras dysenteries amoebas is cause: waters gush vaccines block rices flow epidemics spread bloods stain drugs kill livers abscess fatties float intolerances pass stops trigger currents telescope tests trace stools culture outbreaks notify wards cohort isolates wash. Causes purge.",
+   "vis": null
+  },
+  {
+   "tx": "**Prevent** (**rota** vaccine schedules, **exclusive** breast six months, **wean** timely hygienic foods, **water** boiled chlorinated, **measles** vaccine diarrhoea kills, **vitamin-A** campaigns severity, **deworm** periodic albendazole, **nutrition** catch-up feeds) with **traps** (**missed** shock sepsis, **over-IV** overload lungs, **antimotility** forbidden children) closes; **audit** (diarrhoea deaths) reviews. Futures hydrate.",
+   "say": "Rotas exclusives weans waters is prevent: schedules prick breasts nurse weans time boils kill measles shield severities cut deworms dose nutritions catch traps dodge shocks hide overloads flood antimotilities ban guts still audits review deaths count. Programs protect.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-331",
+  "bk2-paed-332",
+  "bk2-paed-333",
+  "bk2-paed-334",
+  "bk2-paed-335",
+  "bk2-paed-336",
+  "bk2-paed-337",
+  "bk2-paed-338",
+  "bk2-paed-339",
+  "bk2-paed-340"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

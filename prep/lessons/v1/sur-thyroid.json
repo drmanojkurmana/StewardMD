@@ -1,106 +1,112 @@
 {
-  "module": "sur-thyroid",
-  "subject": "surgery",
-  "title": "Thyroid carcinoma, Bethesda classification and surgical management",
-  "minutes": 6,
-  "refs": [
-    "Sabiston Textbook of Surgery 22nd ed",
-    "Schwartz's Principles of Surgery"
-  ],
-  "steps": [
-    {
-      "tx": "Thyroid nodules are evaluated with serum thyroid-stimulating hormone measurement and high-resolution neck ultrasonography. Fine-needle aspiration cytology is categorized using the six-tier **Bethesda system**, which stratifies malignancy risk and guides clinical management. Bethesda category one is non-diagnostic; two is benign; three is atypia of undetermined significance; four is follicular neoplasm; five is suspicious for malignancy; and six is diagnostic of overt malignancy.",
-      "say": "Thyroid nodules are evaluated with serum TSH measurement and ultrasound. Fine-needle aspiration cytology is categorized using the six-tier Bethesda system. Bethesda category one is non-diagnostic; two is benign; three is atypia of undetermined significance; four is follicular neoplasm; five is suspicious for malignancy; and six is overt malignancy.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Bethesda category",
-          "Cytological description",
-          "Malignancy risk",
-          "Management"
-        ],
-        "rows": [
-          [
-            "Bethesda II",
-            "Benign (colloid nodule, thyroiditis)",
-            "< 3%",
-            "Clinical and ultrasound follow-up"
-          ],
-          [
-            "Bethesda III",
-            "Atypia of undetermined significance",
-            "10 - 30%",
-            "Repeat FNA or molecular testing"
-          ],
-          [
-            "Bethesda IV",
-            "Follicular neoplasm",
-            "25 - 40%",
-            "Diagnostic lobectomy"
-          ],
-          [
-            "Bethesda VI",
-            "Malignant (papillary, medullary)",
-            "97 - 99%",
-            "Thyroid lobectomy or total thyroidectomy"
-          ]
-        ]
-      }
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Thyroid carcinoma, Bethesda classification and surgical management",
+ "minutes": 6,
+ "refs": [
+  "Sabiston Textbook of Surgery 22nd ed",
+  "Schwartz's Principles of Surgery"
+ ],
+ "steps": [
+  {
+   "tx": "Thyroid nodules are evaluated with serum thyroid-stimulating hormone measurement and high-resolution neck ultrasonography. Fine-needle aspiration cytology is categorized using the six-tier **Bethesda system**, which stratifies malignancy risk and guides clinical management. Bethesda category one is non-diagnostic; two is benign; three is atypia of undetermined significance; four is follicular neoplasm; five is suspicious for malignancy; and six is diagnostic of overt malignancy.",
+   "say": "Thyroid nodules are evaluated with serum TSH measurement and ultrasound. Fine-needle aspiration cytology is categorized using the six-tier Bethesda system. Bethesda category one is non-diagnostic; two is benign; three is atypia of undetermined significance; four is follicular neoplasm; five is suspicious for malignancy; and six is overt malignancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bethesda category",
+     "Cytological description",
+     "Malignancy risk",
+     "Management"
+    ],
+    "rows": [
+     [
+      "Bethesda II",
+      "Benign (colloid nodule, thyroiditis)",
+      "< 3%",
+      "Clinical and ultrasound follow-up"
+     ],
+     [
+      "Bethesda III",
+      "Atypia of undetermined significance",
+      "10 - 30%",
+      "Repeat FNA or molecular testing"
+     ],
+     [
+      "Bethesda IV",
+      "Follicular neoplasm",
+      "25 - 40%",
+      "Diagnostic lobectomy"
+     ],
+     [
+      "Bethesda VI",
+      "Malignant (papillary, medullary)",
+      "97 - 99%",
+      "Thyroid lobectomy or total thyroidectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Papillary thyroid carcinoma is the most common endocrine malignancy, accounting for eighty-five percent of thyroid cancers. Classic cytological features include ground-glass nuclei with optical clearing termed **Orphan Annie eye nuclei**, intranuclear cytoplasmic pseudoinclusions, longitudinal nuclear grooves and psammoma bodies. It spreads predominantly via lymphatic channels to cervical lymph nodes, yet carries a favorable prognosis exceeding ninety-five percent twenty-year survival.",
+   "say": "Papillary thyroid carcinoma is the most common endocrine malignancy, accounting for eighty-five percent of thyroid cancers. Classic cytological features include Orphan Annie eye nuclei, intranuclear pseudoinclusions, longitudinal nuclear grooves and psammoma bodies. It spreads predominantly via lymphatics to cervical nodes and has an excellent prognosis.",
+   "vis": null
+  },
+  {
+   "tx": "Distinguishing follicular carcinoma from benign adenoma requires histological evaluation of the entire resected capsule. Fine-needle aspiration cytology cannot differentiate the two because both show identical follicular cells. **Capsular or vascular invasion** on permanent histology confirms follicular carcinoma. Follicular carcinoma spreads hematogenously to bone and lungs. Medullary thyroid carcinoma arises from calcitonin-secreting parafollicular C cells and is associated with RET proto-oncogene mutations in MEN 2.",
+   "say": "Distinguishing follicular carcinoma from benign adenoma requires histological evaluation of the resected capsule. Fine-needle aspiration cannot differentiate them because both show identical follicular cells. Capsular or vascular invasion confirms follicular carcinoma. Medullary carcinoma arises from calcitonin-secreting C cells, linked with RET mutations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Papillary carcinoma",
+     "points": [
+      "Most common (85% of cases)",
+      "Lymphatic spread to cervical nodes",
+      "Orphan Annie nuclei and psammoma bodies",
+      "Excellent long-term survival > 95%"
+     ]
     },
-    {
-      "tx": "Papillary thyroid carcinoma is the most common endocrine malignancy, accounting for eighty-five percent of thyroid cancers. Classic cytological features include ground-glass nuclei with optical clearing termed **Orphan Annie eye nuclei**, intranuclear cytoplasmic pseudoinclusions, longitudinal nuclear grooves and psammoma bodies. It spreads predominantly via lymphatic channels to cervical lymph nodes, yet carries a favorable prognosis exceeding ninety-five percent twenty-year survival.",
-      "say": "Papillary thyroid carcinoma is the most common endocrine malignancy, accounting for eighty-five percent of thyroid cancers. Classic cytological features include Orphan Annie eye nuclei, intranuclear pseudoinclusions, longitudinal nuclear grooves and psammoma bodies. It spreads predominantly via lymphatics to cervical nodes and has an excellent prognosis.",
-      "vis": null
-    },
-    {
-      "tx": "Distinguishing follicular carcinoma from benign adenoma requires histological evaluation of the entire resected capsule. Fine-needle aspiration cytology cannot differentiate the two because both show identical follicular cells. **Capsular or vascular invasion** on permanent histology confirms follicular carcinoma. Follicular carcinoma spreads hematogenously to bone and lungs. Medullary thyroid carcinoma arises from calcitonin-secreting parafollicular C cells and is associated with RET proto-oncogene mutations in MEN 2.",
-      "say": "Distinguishing follicular carcinoma from benign adenoma requires histological evaluation of the resected capsule. Fine-needle aspiration cannot differentiate them because both show identical follicular cells. Capsular or vascular invasion confirms follicular carcinoma. Medullary carcinoma arises from calcitonin-secreting C cells, linked with RET mutations.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Papillary carcinoma",
-          "points": [
-            "Most common (85% of cases)",
-            "Lymphatic spread to cervical nodes",
-            "Orphan Annie nuclei and psammoma bodies",
-            "Excellent long-term survival > 95%"
-          ]
-        },
-        "right": {
-          "title": "Follicular carcinoma",
-          "points": [
-            "Accounts for 10-15% of thyroid cancers",
-            "Hematogenous spread to bones and lungs",
-            "Diagnosed only by capsular or vascular invasion",
-            "FNA reports as follicular neoplasm"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Major complications of thyroid surgery include **hypoparathyroidism** and recurrent laryngeal nerve palsy. Devitalization or inadvertent excision of parathyroid glands produces acute postoperative hypocalcemia presenting with perioral paresthesia, carpopedal spasm (Trousseau sign) and facial twitching (Chvostek sign). Injury to the external branch of the superior laryngeal nerve denervates the cricothyroid muscle, causing vocal fatigue and loss of high-pitch phonation.",
-      "say": "Major complications of thyroid surgery include hypoparathyroidism and recurrent laryngeal nerve injury. Inadvertent excision of parathyroid glands produces hypocalcemia with perioral numbness, Trousseau sign and Chvostek sign. Injury to the external branch of the superior laryngeal nerve causes vocal fatigue and inability to sing high notes.",
-      "vis": null
+    "right": {
+     "title": "Follicular carcinoma",
+     "points": [
+      "Accounts for 10-15% of thyroid cancers",
+      "Hematogenous spread to bones and lungs",
+      "Diagnosed only by capsular or vascular invasion",
+      "FNA reports as follicular neoplasm"
+     ]
     }
-  ],
-  "v": 1,
-  "gen": "AI",
-  "run": "books-pipeline",
-  "model": "gemini-3.8-flash-high",
-  "quiz": [
-    "670b6246-4000-8000-670b-624612345678",
-    "660b60b3-4000-8000-660b-60b312345678",
-    "650b5f20-4000-8000-650b-5f2012345678"
-  ],
-  "src": [
-    "kb-reference-thyroid-carcinoma-and-bethesda-classification"
-  ],
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true
+   }
+  },
+  {
+   "tx": "Major complications of thyroid surgery include **hypoparathyroidism** and recurrent laryngeal nerve palsy. Devitalization or inadvertent excision of parathyroid glands produces acute postoperative hypocalcemia presenting with perioral paresthesia, carpopedal spasm (Trousseau sign) and facial twitching (Chvostek sign). Injury to the external branch of the superior laryngeal nerve denervates the cricothyroid muscle, causing vocal fatigue and loss of high-pitch phonation.",
+   "say": "Major complications of thyroid surgery include hypoparathyroidism and recurrent laryngeal nerve injury. Inadvertent excision of parathyroid glands produces hypocalcemia with perioral numbness, Trousseau sign and Chvostek sign. Injury to the external branch of the superior laryngeal nerve causes vocal fatigue and inability to sing high notes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/sur-thyroid-complications.svg",
+    "alt": "Thyroidectomy complications: lost parathyroids cause hypocalcaemia with perioral paraesthesia, Trousseau spasm and Chvostek twitch; recurrent laryngeal injury hoarsens, external superior laryngeal injury fatigues voice and kills high pitch.",
+    "caption": "Tingling mouth on day one: calcium, not reassurance.",
+    "ar": 1.5385
+   }
   }
+ ],
+ "v": 1,
+ "gen": "AI",
+ "run": "books-pipeline",
+ "model": "gemini-3.8-flash-high",
+ "quiz": [
+  "670b6246-4000-8000-670b-624612345678",
+  "660b60b3-4000-8000-660b-60b312345678",
+  "650b5f20-4000-8000-650b-5f2012345678"
+ ],
+ "src": [
+  "kb-reference-thyroid-carcinoma-and-bethesda-classification"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true
+ }
 }

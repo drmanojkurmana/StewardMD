@@ -1,20 +1,22 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1274 lessons (86.9%) have zero images; 192 have at least one.**
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1267 lessons (86.4%) have zero images; 199 have at least one.**
 
 Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
 
-Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with.
+
+Batch 5 (2026-10-15): 7 more lessons wired (medicine +3, surgery +3, paediatrics +1; 8 figures, med-ecg took two); was 1274 zero / 192 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
-| medicine | 113 | 113 | 0 |
+| medicine | 113 | 110 | 3 |
 | anatomy | 80 | 0 | 80 |
 | pathology | 73 | 64 | 9 |
 | pharmacology | 72 | 64 | 8 |
 | biochemistry | 69 | 63 | 6 |
-| surgery | 66 | 65 | 1 |
-| paediatrics | 57 | 57 | 0 |
+| surgery | 66 | 62 | 4 |
+| paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
 | obstetrics-gynaecology | 50 | 50 | 0 |
 | physiology | 49 | 0 | 49 |
@@ -73,12 +75,11 @@ Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, micro
 
 ## Imageless lessons by subject (highest exam weight first)
 
-### medicine (113/113 imageless)
+### medicine (110/113 imageless)
 
 - `med-acid-base`: Approach to Metabolic Acidosis and Renal Tubular Acidosis
 - `med-clinical-cardiology`: Clinical cardiology: pulse, JVP and heart sounds
 - `med-diabetes-complications`: Management of Diabetic Ketoacidosis
-- `med-ecg`: ECG interpretation: high-yield patterns for NEET-PG, INI-CET and USMLE
 - `med-envenomation`: Snake bite: immobilise, reassure, antivenom for systemic or severe local signs
 - `med-examination`: Clinical examination: consent, sequence, comparison
 - `med-heart-failure`: Management of Chronic Heart Failure with Reduced Ejection Fraction
@@ -90,8 +91,6 @@ Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, micro
 - `med-onc-principles`: Immune checkpoint inhibitors: pembrolizumab and immune-related adverse events
 - `med-osce-procedures`: OSCE procedures: asepsis, access, oxygen, communication
 - `med-overdose`: Paracetamol poisoning: time, levels, antidote by toxicology advice
-- `med-pesticides`: Organophosphate poisoning: atropine for the wet patient, pralidoxime early
-- `med-pft-abg`: Pulmonary function tests and arterial blood gases
 - `med-cad-stable`: Stable coronary artery disease and dyslipidaemia
 - `med-acs`: Acute coronary syndromes
 - `med-arrhythmias`: Arrhythmias and conduction disorders
@@ -393,13 +392,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-minerals`: Minerals and trace elements: iron, copper, zinc, selenium and iodine
 - `bio-nutrition-integration`: Nutrition, energy balance, metabolic integration and protein-energy malnutrition
 
-### surgery (65/66 imageless)
+### surgery (62/66 imageless)
 
 - `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
 - `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
 - `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
 - `sur-gallbladder`: Biliary surgery: acute cholecystitis, critical view of safety and bile duct injuries
-- `sur-hernia`: Groin hernias: anatomy, Lichtenstein repair and laparoscopic techniques
 - `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
 - `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
 - `sur-mixed`: Mixed practice: surgery rapid review
@@ -407,10 +405,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-onc-principles`: Principles of surgical oncology and soft tissue sarcoma
 - `sur-periop`: Perioperative care and surgical complications: key high-yield points
 - `sur-plastic`: Skin grafts, flaps and cleft surgery timing
-- `sur-shock-transfusion`: Massive haemorrhage and transfusion: stop bleeding, replace blood, keep warm
 - `sur-small-bowel`: Small intestine and mesentery: high-yield essentials
 - `sur-stomach`: Stomach and duodenum: high-yield surgical essentials
-- `sur-thyroid`: Thyroid carcinoma, Bethesda classification and surgical management
 - `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
 - `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
 - `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
@@ -461,13 +457,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-andrology-infertility`: Andrology and male infertility: ED, varicocele and azoospermia
 - `sur-paediatric-reconstructive`: Paediatric and reconstructive urology: hypospadias, valves and strictures
 
-### paediatrics (57/57 imageless)
+### paediatrics (56/57 imageless)
 
 - `ped-behavioural`: Behavioural problems in children: high-yield overview
 - `ped-child-health-programmes`: Child health programmes and child protection
 - `ped-childhood-infections`: Common childhood infections: high-yield essentials
 - `ped-development`: Developmental milestones and adolescence
-- `ped-diarrhoea`: Diarrhoea and dehydration: assess rehydrate zinc rotavirus
 - `ped-dose-calculation`: Paediatric dose calculation: weigh, match, cap, verify
 - `ped-exanthems`: Exanthematous fevers: rash patterns and key signs
 - `ped-gi-disorders`: Paediatric gastrointestinal disorders: high-yield essentials
