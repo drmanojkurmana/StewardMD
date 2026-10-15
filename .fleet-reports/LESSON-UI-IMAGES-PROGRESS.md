@@ -132,4 +132,219 @@
   - `node scripts/lesson-diagrams/check.mjs` passes across all 126 lessons, 198 figures with 0 problems.
   - Overall inventory: 1,466 total lessons, 176 with images, 1,290 zero images.
 
+## Update 2026-10-14 (Batch 3: Pharma/Micro/Bio/Path SVGs)
 
+- **8 New Original SVGs** in `prep/lessons/media/` (bank format: white ground,
+  800x520, `<title>`/`<desc>` + step alt/caption, palette #071318/#0B6B5B/#B7791F,
+  no em/en dashes, zero layout warnings from the generator):
+  - Pharmacology (2):
+    - `pharma-insulin-profiles.svg` -> `phm-insulin` step 0 (onset/peak/duration
+      Gantt: rapid 15 min/1 h/3 to 4 h, regular 30 min/2 to 3 h/6 to 8 h,
+      NPH 2 h/peak band 4 to 10 h/10 to 16 h, glargine flat about 24 h)
+    - `pharma-vaughan-williams.svg` -> `phm-antiarrhythmics` step 0 (classes
+      I to IV by channel with examples, adenosine/digoxin/magnesium, CAST caution)
+  - Microbiology (2):
+    - `micro-hepb-serology.svg` -> `mic-hepatitis-viruses` step 1 (HBsAg,
+      anti-HBs, anti-HBc IgM window, HBeAg; 90 percent neonate vs 5 percent
+      adult chronicity)
+    - `micro-hiv-cycle.svg` -> `mic-hiv` step 0 (5 replication steps, one drug
+      class per step, diploid 2-copy genome, 1983/1984)
+  - Biochemistry (2):
+    - `bio-urea-cycle.svg` -> `bio-urea-cycle` step 1 (CPS-I 2 ATP + NAG,
+      ASS ATP to AMP, fumarate/urea release, 4 bonds per turn)
+    - `bio-beta-oxidation.svg` -> `bio-fatty-acid-oxidation` step 1 (4-step
+      spiral; palmitate 16 C, 7 turns, 8 acetyl-CoA, about 106 ATP)
+  - Pathology (2):
+    - `path-thrombus-fates.svg` -> `pat-thrombosis-embolism` step 2
+      (propagation, embolisation, dissolution, organisation + recanalisation)
+    - `path-type3-immune-complex.svg` -> `pat-hypersensitivity` step 2
+      (deposition, C3a/C5a, neutrophils; SLE/RA/PSGN/PAN; 5 to 10 days, 4 to 10 h)
+- **Second pass**: independent parse-and-assert over the emitted files
+  (labels present, palette only, insulin bar pixels re-derived within 1.5px,
+  16/2 = 8 acetyl-CoA and turns = 8 - 1 = 7); one verifier artifact
+  (peak-band rect matched as bar) fixed in the verifier, figure untouched.
+- **Validation**: all 8 lessons pass `checkLesson` with 0 errors; full sweep
+  1466 lessons shows only 6 pre-existing failures (med/mphar/sur files,
+  identical on the clean tree); `prep-lessons` + `prep-lessons-100` unit
+  suites 26/26 pass.
+- **Attribution**: 8 rows added to `prep/lessons/media/ATTRIBUTION.md`
+  (all StewardMD original, CC BY 4.0); no third-party images anywhere.
+- **Inventory**: 1,466 total lessons, 184 with images, 1,282 zero images.
+- **Next queue** (per order, exam weight): pharmacology 66, pathology 67,
+  biochemistry 63, microbiology 34 zero-image lessons remain; anatomy and
+  physiology are complete (80/80, 49/49) and stay last/skipped.
+
+## 2026-10-15: anatomy/physiology reuse (lead note 16:00)
+- `/private/tmp/claude-img-wt` no longer mounted, but branch `claude-img-1014`
+  content is already in `lessonui-1013`: 105 `ana-*.svg` + 91 `phy-*.svg`,
+  all 196 referenced from lesson steps (0 unreferenced). No regeneration needed.
+- **A11y fix**: all 186 placeholder `<desc id="d">d</desc>` replaced with the
+  referencing step's alt text (longest alt wins); 10 files already had real
+  descs. `scripts/lesson-diagrams/check.mjs`: 126 lessons, 198 figures, 0 problems.
+- **Attribution**: added the missing 186 rows (titles taken from each file's
+  `<title>`); now 105 ana + 91 phy rows, all StewardMD original CC BY 4.0.
+- **Report sheet**: textarea gains `autocomplete="off"` (guidelines: non-auth
+  field); unit suites `prep-action-row` + `bug-report` 23/23 pass.
+- Local headless screenshots blocked by sandbox (Chrome renders nothing,
+  server listen EPERM); visual QA deferred to the `lessonui-browser` CI gate
+  (390px dark/light) before merge.
+## 2026-10-15 batch 4: pharma/path/micro figure backfill (lessonui-1013)
+- **8 original SVGs** (`pharma-prodrug`, `path-fever`, `micro-type4`,
+  `micro-cold-sterilisation`, `path-shock-organs`, `path-nephritic-nephrotic`,
+  `pharma-rifampicin`, `micro-zn-stain`) wired into 8 null-visual steps
+  (`phm-absorption-routes` s3, `pat-mediators` s4, `mic-immune-response` s4,
+  `mic-sterilisation` s3, `pat-shock` s4, `pat-glomerular` s0,
+  `phm-antitubercular` s3, `mic-tuberculosis` s0). Same bank format: white
+  stage, 800x520 (`ar` 1.5385), `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F, pure ASCII, min 11px type.
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  title/desc/role, palette subset, min font size, per-figure key strings:
+  enalapril/enalaprilat, IL-1/TNF/IL-6/PGE2/IL-18, 48-72h/Th1/tuberculin,
+  gamma/filtration/EtO/plasma/121C, ATN/DAD/centrilobular/Waterhouse,
+  nephritic/nephrotic fork, orange/indinavir/MDR, carbol/mycolic/AFB).
+- **Attribution**: 8 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 8/8 `checkLesson` clean; `scripts/lesson-diagrams/check.mjs`
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23, prep-lessons-100
+  3/3. Audit now 192 with images, 1274 zero (lists reconciled to headers).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+
+## Batch 5 biostatistics top-up (2026-10-15 session)
+
+- **Second-pass verify**: independent parse-and-assert over the 13 required
+  stats SVGs (title/desc/aria present; skew mean/median/mode positional order
+  in both tails; normal 68/95/99.7; SE root-n; boxplot Q1/median/Q3/IQR;
+  histogram vs bar; scatter r +1/0/-1; 2x2 sens/spec/PPV/NPV; ROC AUC+chance;
+  forest null+CI; errors alpha/beta/power; designs RCT/cohort/case-control;
+  pyramid systematic-review top vs expert-opinion bottom; sampling
+  random/stratified/cluster/systematic). All passed, no edits needed.
+- **New figure**: 1 original SVG `stats-control-chart.svg` (control chart,
+  centre mean, UCL/LCL at +/-3 SD, 20 computed points: 19 within +/-1.2 SD,
+  1 special-cause point beyond UCL). Same bank format: white stage, 800x520
+  (`ar` 1.5385), `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F, min 11px type.
+- **Wired** into `mstat-audit` step 3 (compare replaced where the figure
+  teaches the same common-vs-special-cause content). `checkLesson` clean;
+  `scripts/lesson-diagrams/check.mjs` 126 lessons / 198 figures / 0 problems;
+  `test/prep-lessons.test.mjs` 23/23. Audit now 193 with images, 1273 zero.
+- **Attribution**: 1 row appended (StewardMD original CC BY 4.0);
+  still zero third-party images. No figure needed Wikimedia fallback.
+## 2026-10-15 batch 5: medicine/surgery/paeds backfill (lessonui-1015)
+- **8 original SVGs** (`med-ecg-potassium`, `med-ecg-qt-lvh`, `med-abg-steps`,
+  `med-op-aftermath`, `sur-femoral-canal`, `sur-thyroid-complications`,
+  `sur-transfusion-reaction`, `ped-dehydration`) wired into 7 lessons
+  (`med-ecg` s5+s3, `med-pft-abg` s1, `med-pesticides` s2, `sur-hernia` s1,
+  `sur-thyroid` s3, `sur-shock-transfusion` s2, `ped-diarrhoea` s0), all
+  null-visual steps. Same bank format (white stage, 800x520, `ar` 1.5385,
+  `<title>`/`<desc>`, alt + caption, palette subset, ASCII, 11px floor).
+- **Contrast audit (WCAG 2.2 AA, computed ratios)**: white on ink 18.83,
+  on green 6.43, on muted 7.53, ink on amber 5.17 all pass; amber on white
+  3.64 fails, so every amber-on-white small text found by geometric scan
+  (text point inside no non-white rect) was recolored to ink: the batch-5
+  `med-abg-steps` "vs", 5 batch-4 dashed-box headings, plus 5 older
+  bank labels (`stats-roc`, `stats-2x2` x2, `stats-normal`, `epi-curve`).
+  Amber remains for strokes, borders and on-dark accents only.
+- **Gates**: 7/8 wired lessons `checkLesson` clean; `med-pesticides`
+  fails only the pre-existing 3-step count (identical on clean tree, step
+  count untouched by this change). Diagram checker 0 problems.
+- Audit now 199 with images, 1267 zero of 1466 (lists reconciled).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+## 2026-10-15 batch 6: medicine backfill (lessonui-1013)
+- **8 original SVGs** (`med-acs-reperfusion`, `med-aki-fena`,
+  `med-ckd-heatmap`, `med-spirometry`, `med-asthma-steps`, `med-saag`,
+  `med-cha2ds2`, `med-avblock`) wired into 6 null-visual lessons
+  (`med-acs` s2, `med-aki` s2, `med-ckd` s2, `med-asthma` s2+s3,
+  `med-cirrhosis` s2, `med-arrhythmias` s2+s3). Same bank format (white
+  stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank
+  palette subset, ASCII, 11px floor, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  title/desc/role, palette subset incl. ana-bank tints `#FFF1CC`/`#FBE3E0`,
+  min font size, per-figure key strings: PCI 90 / lysis 30 / cath 24h;
+  FENa 1%/2%, U Na 20/40, osm 500/350, BUN/Cr 20/15, FEUrea 35%;
+  G1-G5 and A1-A3 cutoffs with KDIGO risk colours; FEV1/FVC 0.7,
+  reversibility 12% + 200 mL; five GINA steps; SAAG 1.1, PMN 250,
+  100 mg to 40 mg; CHA2DS2-VASc max 9, 0/1/2+ rule; PR 200 ms,
+  Mobitz I/II, dissociation). One layout clip caught (spirometry note)
+  was fixed before wiring. All printed numbers match standard
+  ACC/AHA, KDIGO and GINA guideline values.
+- **Attribution**: 8 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 6/6 wired lessons `checkLesson` clean; diagram checker
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23,
+  prep-lessons-100 3/3, prep-pearl 4/4, prep-pearl-figs 2/2,
+  prep-server 16/16. Audit now 206 with images, 1265 zero of 1471.
+
+## Batch 7 (2026-10-15, branch lessonui-1013): pharmacology mechanism quartet
+
+- **4 original SVGs** (`pharma-opioid-receptors`, `pharma-antiepileptic-mechanisms`,
+  `pharma-beta-lactam-spectrum`, `pharma-bp-sites`) wired into 4 null-visual
+  lessons (`phm-opioids` s0, `phm-antiepileptics` s0, `phm-beta-lactams` s0,
+  `phm-antihypertensives` s0). Same bank format (white stage, 800x520,
+  `ar` 1.5385, `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: label/number check against lesson text before wiring
+  (mu-1/mu-2 split, naloxone short vs naltrexone maintenance; Na/Ca-T/GABA
+  lists with status ladder; generation exemplars with EBV-rash, biliary
+  sludge, imipenem-seizure/valproate-crash, ertapenem-no-pseudo, clavulanate
+  hepatotoxic, avibactam KPC; five BP sites with spironolactone-fourth and
+  fetotoxicity warning). SVG well-formedness asserted (title/desc/close).
+- **Attribution**: 4 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 210 with images,
+  1261 zero of 1471 (pharmacology 60 zero / 12 with).
+- Next: microbiology (31 zero), biochemistry (63 zero), pathology (64 zero)
+  highest-weight lessons first; anatomy/physiology already complete.
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge (batch 8: gate run 38698561591 green).
+
+## Batch 8 (2026-10-15, branch lessonui-1013): obstetrics-gynaecology sextet
+
+- **6 original SVGs** (`obg-labour-curve`, `obg-bishop`, `obg-htn-classes`,
+  `obg-mgso4`, `obg-contra-fail`, `obg-decelerations`) wired into 4 null-visual
+  lessons (`obg-normal-labour` s1+s3, `obg-hypertensive-disorders` s0+s2,
+  `obg-contraception` s1, `obg-fetal-growth-surveillance` s2). Same bank format
+  (white stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: independent parse-and-assert over the 6 files (viewBox,
+  title/desc/role, palette subset, min font 10.5, per-figure key strings plus
+  geometry: alert 1.0, nullip 1.2, parous 1.5 cm/h line slopes with the +4 h
+  action line; contra bar widths 8/20/176/353/431/560 px for 0.1/<1/9/18/22/85
+  against a 0-25 axis). Small amber-on-light text (3.64:1) recoloured to ink
+  or block-red after a contrast computation; all remaining small text is 6.4:1
+  or better, graphics strokes 3.6:1.
+- **Attribution**: 6 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 214 with images,
+  1257 zero of 1471 (obstetrics-gynaecology 46 zero / 4 with).
+- Next: ent (37 zero), anaesthesia (34 zero), orthopaedics (33 zero),
+  ophthalmology (30 zero), psychiatry (28 zero), then micro/biochem/pathology
+  highest-weight remainders; anatomy/physiology already complete.
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+
+## Batch 9 (2026-10-15, branch lessonui-batch9): medicine quartet
+
+- **4 original SVGs** (`med-gold-bode`, `med-dka-bridge`,
+  `med-nephritic-nephrotic`, `med-cardiomyopathy`) wired into 4 null-visual
+  lessons (`med-copd` s2, `med-diabetes-complications` s3,
+  `med-glomerulonephritis` s0, `med-cardiomyopathy` s0). Same bank format
+  (white stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption,
+  palette #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: XML parse + a11y assert on all 4 files; numbers recomputed:
+  GOLD cutoffs 80/50/30 with FEV1/FVC < 0.70, ABE group rule (>= 2 moderate or
+  >= 1 severe = E), BODE 0-10; DKA overlap 1-2 h, TDD weight split, ketones
+  < 0.6 resolution (matches lesson steps 0-2); nephritic/nephrotic split at
+  3.5 g/day with latency rules; HCM septum >= 15 mm with Valsalva/squat
+  murmur dynamics. No shared-figure duplication except deliberate reuse.
+  Contrast computed for every small-text pair: translucent fills recoloured
+  to solid teal/red/ink so all remaining small text is 5.9:1 or better
+  (lowest: white on solid teal 6.43:1; ink on lightened GOLD 2/3 bars
+  6.0/7.2:1).
+- **Attribution**: 4 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 218 with images,
+  1253 zero of 1471 (medicine 100 zero / 13 with).
+- Next: surgery (67 zero), biochemistry (63 zero), pharmacology (60 zero),
+  paediatrics (56 zero) highest-weight remainders; anatomy/physiology verified
+  complete (79/79 ana, 49/49 phy with images).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.

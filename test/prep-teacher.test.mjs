@@ -70,7 +70,8 @@ test("prompt: wrong answer asks why it is wrong; right or none asks why the key 
   assert.match(T.promptFor(MEDMCQA, 1, g), /^GROUNDING:\n[\s\S]+\n\nTASK: The student chose B\. Explain why B is wrong and why A is the correct answer, using only the grounding\.$/);
   assert.match(T.promptFor(MEDMCQA, 0, g), /TASK: Explain why A is the correct answer and why the other options are not/);
   assert.match(T.promptFor(MEDMCQA, -1, g), /TASK: Explain why A is the correct answer/);
-  assert.match(T.SYSTEM, /ONLY the facts in the GROUNDING/);
+  assert.doesNotMatch(T.SYSTEM, /ONLY the facts in the GROUNDING/);
+  assert.match(T.SYSTEM, /facts in the GROUNDING block first and prefer it/);
 });
 
 test("teachable: needs exp, kp, a reason or a source sentence beyond the stem and options", () => {
@@ -128,7 +129,9 @@ test("teach: a checked answer is returned, with the prompt and system the model 
   const m = model({ text: "**B** is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.", model: "MAiK Lite" });
   const r = await T.teach(MEDMCQA, 1, { generate: m.generate, lexicon: LEX });
   assert.equal(r.ok, true); assert.equal(r.model, "MAiK Lite");
-  assert.equal(r.text, "B is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.");
+  // Owner 2026-10-15 (explanation-format): the display text keeps the author Markdown; the sheet renders it.
+  // The grounding gate still runs on the cleaned text (see the check-failure test below).
+  assert.equal(r.text, "**B** is wrong: valproate is not the cause. Phenytoin causes gingival hyperplasia in about 50% of patients.");
   assert.equal(m.calls.length, 1); assert.equal(m.calls[0].system, T.SYSTEM);
   assert.ok(m.calls[0].prompt.includes("Explanation: " + MEDMCQA.exp) && m.calls[0].prompt.includes("The student chose B"));
 });

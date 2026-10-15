@@ -32,11 +32,12 @@ function kv() {
 }
 const get = (path, env) => bank.onRequestGet({ env, params: { path: path.split("/") } });
 
-test("bank: serves a whitelisted module file from prep-bank/ with immutable caching", async () => {
+test("bank: serves a whitelisted module file from prep-bank/ with private caching", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}', "prep-bank/v1/manifest.json": "{}" }) };
   const r = await get("v1/anatomy/mcq/ana-gametogenesis.json", env);
   assert.equal(r.status, 200);
-  assert.match(r.headers.get("Cache-Control"), /immutable/);
+  assert.match(r.headers.get("Cache-Control"), /private/);
+  assert.doesNotMatch(r.headers.get("Cache-Control"), /immutable/);
   assert.equal(r.headers.get("ETag"), '"e1"');
   assert.deepEqual(JSON.parse(await r.text()), { topic: "ana-gametogenesis", items: [] });
   const m = await get("v1/manifest.json", env);
@@ -69,19 +70,20 @@ test("bank: a failed R2 read is a 503 with no-store (never a 404); HEAD answers 
   assert.equal((await bank.onRequestHead({ env, params: { path: ["..", "x"] } })).status, 404);
 });
 
-test("bank: PYQ index (short cache), hashed items file and webp images (immutable, image/webp); nothing else under pyq/", async () => {
+test("bank: PYQ index, hashed items file and webp images (private caching for items/images); nothing else under pyq/", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v2/pyq/index.json": '{"v":1}', "prep-bank/v2/pyq/items-0a1b2c3d.json": '{"v":1,"items":[]}', "prep-bank/v2/pyq/img/neet-pg-2025-r1-1-1.webp": "RIFF" }) };
   const ix = await get("v2/pyq/index.json", env);
   assert.equal(ix.status, 200);
   assert.doesNotMatch(ix.headers.get("Cache-Control"), /immutable/);
   const it = await get("v2/pyq/items-0a1b2c3d.json", env);
   assert.equal(it.status, 200);
-  assert.match(it.headers.get("Cache-Control"), /immutable/);
+  assert.match(it.headers.get("Cache-Control"), /private/);
+  assert.doesNotMatch(it.headers.get("Cache-Control"), /immutable/);
   assert.match(it.headers.get("Content-Type"), /json/);
   const im = await get("v2/pyq/img/neet-pg-2025-r1-1-1.webp", env);
   assert.equal(im.status, 200);
   assert.equal(im.headers.get("Content-Type"), "image/webp");
-  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  assert.match(im.headers.get("Cache-Control"), /private/);
   let asked = 0;
   const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
   for (const p of ["v2/pyq/items.json", "v2/pyq/items-0A1B2C3D.json", "v2/pyq/img/x.png", "v2/pyq/img/../index.json", "v2/pyq/source.pdf", "v2/pyq/img/a/b.webp", "v2/anatomy/x.webp", "v2/pyq/img/neet.webp.json"]) {
@@ -90,28 +92,30 @@ test("bank: PYQ index (short cache), hashed items file and webp images (immutabl
   assert.equal(asked, 0);
 });
 
-test("bank: a bank item's images (v<n>/img/<name>.webp, immutable, image/webp); nothing else under img/", async () => {
+test("bank: a bank item's images (v<n>/img/<name>.webp, private caching, image/webp); nothing else under img/", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v5/img/ana-brachial-plexus-1.webp": "RIFF" }) };
   const im = await get("v5/img/ana-brachial-plexus-1.webp", env);
   assert.equal(im.status, 200);
   assert.equal(im.headers.get("Content-Type"), "image/webp");
-  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  assert.match(im.headers.get("Cache-Control"), /private/);
+  assert.doesNotMatch(im.headers.get("Cache-Control"), /immutable/);
   let asked = 0;
   const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
   for (const p of ["v5/img/x.png", "v5/img/../manifest.json", "v5/img/a/b.webp", "v5/img/UPPER.webp", "v5/img/x.webp.json", "img/x.webp", "v5/anatomy/img/x.webp"]) assert.equal((await get(p, spy)).status, 404, p);
   assert.equal(asked, 0);
 });
 
-test("bank: radnotes figures and overlays (img/radnotes/rn-<id>.webp, overlay/radnotes/<subject>/<module>.json, immutable); nothing else", async () => {
+test("bank: radnotes figures and overlays (img/radnotes/rn-<id>.webp, overlay/radnotes/<subject>/<module>.json, private caching); nothing else", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/img/radnotes/rn-n1-p031-2.webp": "RIFF", "prep-bank/overlay/radnotes/radiology/rad-gi.json": '{"topic":"rad-gi","set":"radnotes","v":1,"items":[]}' }) };
   const im = await get("img/radnotes/rn-n1-p031-2.webp", env);
   assert.equal(im.status, 200);
   assert.equal(im.headers.get("Content-Type"), "image/webp");
-  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  assert.match(im.headers.get("Cache-Control"), /private/);
   const ov = await get("overlay/radnotes/radiology/rad-gi.json", env);
   assert.equal(ov.status, 200);
   assert.match(ov.headers.get("Content-Type"), /application\/json/);
-  assert.match(ov.headers.get("Cache-Control"), /immutable/);
+  assert.match(ov.headers.get("Cache-Control"), /private/);
+  assert.doesNotMatch(ov.headers.get("Cache-Control"), /immutable/);
   assert.equal(JSON.parse(await ov.text()).set, "radnotes");
   let asked = 0;
   const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
@@ -120,13 +124,14 @@ test("bank: radnotes figures and overlays (img/radnotes/rn-<id>.webp, overlay/ra
   assert.equal(asked, 0);
 });
 
-test("bank: medcov overlays (overlay/medcov[N]/<subject>/<module>.json, immutable); nothing else", async () => {
+test("bank: medcov overlays (overlay/medcov[N]/<subject>/<module>.json, private caching); nothing else", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/overlay/medcov/medicine/med-acs.json": '{"topic":"med-acs","set":"medcov","v":1,"items":[]}', "prep-bank/overlay/medcov/ss-cardiology/sca-stemi.json": '{"topic":"sca-stemi","set":"medcov","v":1,"items":[]}', "prep-bank/overlay/medcov2/medicine/med-acs.json": '{"topic":"med-acs","set":"medcov","v":2,"items":[]}' }) };
   for (const p of ["overlay/medcov/medicine/med-acs.json", "overlay/medcov/ss-cardiology/sca-stemi.json", "overlay/medcov2/medicine/med-acs.json"]) {
     const r = await get(p, env);
     assert.equal(r.status, 200, p);
     assert.match(r.headers.get("Content-Type"), /application\/json/);
-    assert.match(r.headers.get("Cache-Control"), /immutable/);
+    assert.match(r.headers.get("Cache-Control"), /private/);
+    assert.doesNotMatch(r.headers.get("Cache-Control"), /immutable/);
     assert.equal(JSON.parse(await r.text()).set, "medcov");
   }
   let asked = 0;
@@ -159,14 +164,15 @@ test("bank: lessons and cards (index short cache; module files and lesson media 
   assert.equal(asked, 0);
 });
 
-test("bank: radiology images and scroll-stack slices in a subject's own version (immutable, right types); nothing else", async () => {
+test("bank: radiology images and scroll-stack slices in a subject's own version (private caching, right types); nothing else", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v6/ss-radiology/img/rad-moyamoya-pmc1-f1.webp": "RIFF", "prep-bank/v6/ss-radiology/stack/vs/soft/000.webp": "RIFF",
     "prep-bank/v6/ss-radiology/stack/vs/stack.json": '{"n":1}', "prep-bank/v6/ss-radiology/index.json": '{"id":"ss-radiology"}', "prep-bank/v6/ss-radiology/mcq/srd-neuro-tumour.json": '{"items":[]}' }) };
   for (const [p, type] of [["v6/ss-radiology/img/rad-moyamoya-pmc1-f1.webp", /^image\/webp$/], ["v6/ss-radiology/stack/vs/soft/000.webp", /^image\/webp$/], ["v6/ss-radiology/stack/vs/stack.json", /json/], ["v6/ss-radiology/mcq/srd-neuro-tumour.json", /json/]]) {
     const r = await get(p, env);
     assert.equal(r.status, 200, p);
     assert.match(r.headers.get("Content-Type"), type, p);
-    assert.match(r.headers.get("Cache-Control"), /immutable/, p);
+    assert.match(r.headers.get("Cache-Control"), /private/, p);
+    assert.doesNotMatch(r.headers.get("Cache-Control"), /immutable/, p);
   }
   assert.equal((await get("v6/ss-radiology/index.json", env)).status, 200);
   let asked = 0;

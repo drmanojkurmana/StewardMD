@@ -815,7 +815,7 @@
       if (type === "incorrect" && opts.only) missingMistakesNote(lists, opts.only, asm);
       if (!asm.ok && !asm.count && (type === "image" || type === "case")) asm.refused = (asm.refused || "This test cannot be built now.") + (type === "image" ? " No image questions in the modules checked." : " No clinical cases in the modules checked.");
       H.stack().pop();
-      if (res[0].every(function (l) { return !l.items.length; })) asm = { ok: false, refused: "The questions did not load. Check the connection and try again; a subject downloaded for offline works without one.", deviations: [], items: [] };
+      if (res[0].every(function (l) { return !l.items.length; })) asm = { ok: false, refused: "Questions need a connection. Check the connection and try again.", deviations: [], items: [] };
       P.pick = { p: p, type: type, asm: asm, title: title, sid: sid, mid: mid, scopeTxt: scopeTxt };
       H.push(preScreen);
     });

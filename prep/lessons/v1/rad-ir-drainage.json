@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "module": "rad-ir-drainage",
+  "subject": "radiology",
+  "title": "Biliary and urinary drainage",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Obstructed bile needs a way out when endoscopy fails. **Percutaneous transhepatic biliary drainage** punctures a peripheral duct under ultrasound and fluoroscopy, ideal after failed **ERCP** or in hilar obstruction. An **internal-external catheter** drains to a bag while stenting past the blockage into duodenum, and capping trials test internal flow. **Left-sided access** suits hilar tumours, while right-sided access suits distal blocks. **Cholangitis** with Charcot fever, pain and jaundice makes drainage urgent rather than elective.",
+      "say": "Blocked bile needs drainage when endoscopy fails. Biliary drainage punctures a peripheral duct under image guidance, ideal after failed ERCP or in hilar blocks. Internal-external catheters drain outside while stenting into the gut. Fever with pain and jaundice makes drainage urgent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Puncture duct"
+          },
+          {
+            "id": "b",
+            "label": "Cross the block"
+          },
+          {
+            "id": "c",
+            "label": "Internal-external drain"
+          },
+          {
+            "id": "d",
+            "label": "Cap and stent"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The infected obstructed kidney is an emergency. **Percutaneous nephrostomy** drains pus under ultrasound within hours in **obstructive pyelonephritis**, saving both kidney and life. **Antegrade ureteric stenting** follows once sepsis settles, pushing a double-J stent down to bladder past stones or strictures. **Pregnancy with obstructing stones** favours nephrostomy over radiation-heavy options. **Clotted or displaced tubes** declare themselves with falling output, pain and fever, needing exchange not antibiotics alone.",
+      "say": "An infected blocked kidney is an emergency. Nephrostomy drains pus within hours in obstructive pyelonephritis. Antegrade stenting follows once sepsis settles, pushing a double-J stent to bladder. Pregnancy with stones favours nephrostomy, and blocked tubes need exchange rather than antibiotics alone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Problem",
+          "Drain"
+        ],
+        "rows": [
+          [
+            "Hilar block, ERCP failed",
+            "PTBD"
+          ],
+          [
+            "Infected obstructed kidney",
+            "Nephrostomy"
+          ],
+          [
+            "Stone after sepsis settles",
+            "Antegrade stent"
+          ],
+          [
+            "Unfit gallbladder sepsis",
+            "Cholecystostomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gallbladder and abscess drains buy time safely. **Percutaneous cholecystostomy** decompresses **acute cholecystitis** in patients unfit for surgery, with interval cholecystectomy planned later. **Abscess drainage** follows the Seldinger route with **pigtail catheters**, upsized or flushed when thick pus slows output. **Pancreatic collections** need the drain to respect vessels and bowel on cross-sectional planning. **Catheter care** with flushing, fixation and output charts prevents the commonest failure, which is blockage or accidental removal.",
+      "say": "Gallbladder and abscess drains buy time. Cholecystostomy decompresses cholecystitis in unfit patients with later surgery planned. Abscess drains use pigtail catheters that need flushing when thick pus slows output. Pancreatic collections need careful planned routes, and flushing with fixation prevents blockage.",
+      "vis": null
+    },
+    {
+      "tx": "Metal keeps benign and malignant strictures open. **Self-expanding metal biliary stents** outlast plastic in **malignant obstruction** with longer patency and fewer exchanges. **Benign strictures** from stones or surgery may remodel with prolonged plastic or retrievable covered metal stents. **Stent occlusion** returns with jaundice, itch and cholangitis, managed by exchange through the mature tract. **Haemobilia** with melaena after puncture usually settles, but arterial pseudoaneurysm needs coil embolisation.",
+      "say": "Metal keeps strictures open. Metal biliary stents outlast plastic in malignant blocks with fewer exchanges. Benign strictures remodel with prolonged or retrievable stents. Occlusion returns with jaundice needing exchange, and post-puncture bleeding usually settles unless a pseudoaneurysm needs coils.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stricture",
+          "Stent"
+        ],
+        "rows": [
+          [
+            "Malignant block",
+            "Metal stent"
+          ],
+          [
+            "Benign stricture",
+            "Remodelling stent"
+          ],
+          [
+            "Occluded stent",
+            "Exchange"
+          ],
+          [
+            "Arterial bleed",
+            "Coil embolisation"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir-061",
+    "maikir-062",
+    "maikir-063",
+    "maikir-064",
+    "maikir-065",
+    "maikir-066",
+    "maikir-067",
+    "maikir-068",
+    "maikir-069",
+    "maikir-070"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

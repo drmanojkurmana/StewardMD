@@ -143,8 +143,8 @@ test("overlay releases: a new folder per release, the earlier folders' cached co
   assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
   assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
   assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
-  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e"\], anaesthesia: \["gap1013a", "gap1013c"\], pathology: \["maik1", "maiktopic1", "maikbook2"\], pharmacology: \["maik1", "maiktopic1", "gap1013d", "gap1013e"\], "ss-pulmonology": \["medcov4", "maik29", "maikfill4", "maikfill7"\], "ss-cardiology": \["maik29", "maikfill1"\], "ss-critical-care": \["maik29", "maikfill2"\], "ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"\], "ss-nephrology": \["maik29", "maikfill2", "maikss281"\]/, "maikfill0-9 join the SS subjects (maik29/maik30 intact)");
-  assert.match(read("prep.js"), /"ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"\]/, "maik30 wires sen-monogenic-diabetes (maikfill4/8/9 join)");
+  assert.match(read("prep.js"), /medicine: \["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e"\], anaesthesia: \["gap1013a", "gap1013c"\], pathology: \["maik1", "maiktopic1", "maikbook2"\], pharmacology: \["maik1", "maiktopic1", "gap1013d", "gap1013e"\], "ss-pulmonology": \["medcov4", "maik29", "maikfill4", "maikfill7"\], "ss-cardiology": \["maik29", "maikfill1"\], "ss-critical-care": \["maik29", "maikfill2"\], "ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"(, "maikss\d+")*\], "ss-nephrology": \["maik29", "maikfill2", "maikss281"\]/, "maikfill0-9 join the SS subjects (maik29/maik30 intact)");
+  assert.match(read("prep.js"), /"ss-endocrinology": \["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"(, "maikss\d+")*\]/, "maik30 wires sen-monogenic-diabetes (maikfill4/8/9 join)");
   assert.match(read("prep.js"), /"ss-infectious-diseases": \["maiktopic1", "maik26", "maikfill0", "maikfill2", "maikss280"\]/, "maikfill0 wires the pilot modules");
   assert.match(read("prep.js"), /"mcc-chronic-care": \["maik23", "maik24", "maik27", "maikfill1", "maikfill7"\]/, "maikfill1/maikfill7 wire mcc-chronic-care");
   assert.match(read("prep.js"), /"plab-biochemistry": \["maikfill1"\], "plab-dermatology": \["maikfill1", "maikfill7", "gap1013f"\]/, "maikfill sets wire the new plab subjects");
@@ -408,10 +408,9 @@ test("bank stamps: a module cached before an in-place republish is fetched again
   assert.equal(P.cacheFresh({ items: [], s: "1.1" }, s.anatomy), false, "another stamp is stale");
   assert.equal(P.cacheFresh({ items: [], s: s.anatomy }, s.anatomy), true);
   assert.equal(P.cacheFresh({ items: [] }, ""), true, "no stamp (offline, subject outside the manifest): keep the copy");
-  assert.equal(P.cacheFresh(null, ""), false);
   const src = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "prep.js"), "utf8");
-  assert.match(src, /cachePut\(p, \{ items: items, ts: Date\.now\(\), s: stamp \}\)/, "loadBank stores the stamp");
-  assert.match(src, /function \(e\) \{ if \(hit\) return \(st\.mem\[p\] = hit\.items\); throw e; \}/, "a failed refetch falls back to the cached copy");
+  assert.match(src, /st\.mem\[p\] = items;/, "loadBank stores items in session memory only");
+  assert.ok(!src.includes('cachePut(p, { items: items'), "loadBank never puts questions in IDB cache");
   const sh = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "scripts/build-www.sh"), "utf8");
   assert.match(sh, /manifest\.json" "\$WWW\/prep\/bank/, "the native bundle ships the manifest");
 });

@@ -81,24 +81,28 @@
     var u = it._py ? base(host) + "img/" : it._ov && /^[a-z0-9-]{2,40}$/.test(it._ov) ? api + "img/" + it._ov.replace(/\d+$/, "") + "/" : api + (host.bankVer ? host.bankVer() : "v4") + "/img/";
     return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u;
   }
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
-  // index.json: network first (it names the current items file), the IndexedDB copy when offline.
+  function getJSON(url, host) {
+    if (host && host.getJSON) return host.getJSON(url);
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && url && url.indexOf("/api/prep/bank/") >= 0) {
+      return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); });
+  }
   function loadIndex(host) {
     if (P.ix) return Promise.resolve(P.ix);
     if (P.ixP) return P.ixP;
-    P.ixP = getJSON(base(host) + "index.json").then(function (ix) { host.cachePut("pyq/index.json", ix); return ix; }, function () {
-      return host.cacheGet("pyq/index.json").then(function (hit) { if (!hit) throw new Error("offline"); return hit; });
-    }).then(function (ix) { P.ix = ix; P.ixP = null; return ix; }, function (e) { P.ixP = null; throw e; });
+    P.ixP = getJSON(base(host) + "index.json", host).then(function (ix) {
+      P.ix = ix; P.ixP = null; return ix;
+    }, function (e) {
+      P.ixP = null; throw e;
+    });
     return P.ixP;
   }
   function loadItems(host) {
     if (P.items) return Promise.resolve(P.items);
     if (P.itP) return P.itP;
     P.itP = loadIndex(host).then(function (ix) {
-      var key = "pyq/" + ix.file;
-      return host.cacheGet(key).then(function (hit) {
-        return hit || getJSON(base(host) + ix.file).then(function (f) { host.cachePut(key, f); return f; });
-      });
+      return getJSON(base(host) + ix.file, host);
     }).then(function (f) {
       // _s/_m: the subject and module FSRS and the mock analysis file it under; "pyq" until the mapping sorts it.
       P.items = (f.items || []).map(function (it) { it._py = 1; it._s = it.ts || it.subject || "pyq"; it._m = it.t || "pyq"; return it; });
@@ -268,7 +272,13 @@
     return '<p class="pn-yq-tags">' + tagLabel(list).map(function (l) { return '<span class="pn-yq-tag">' + svg("tag", 14) + "<span>" + e(l) + "</span></span>"; }).join("") + "</p>";
   }
   // A question image: a file in the PYQ image folder, or a data: URL kept on the phone (a deck made from a PDF).
-  function imgSrc(host, f) { return /^data:image\//.test(String(f)) ? String(f) : base(host) + "img/" + f; }
+  function imgSrc(host, f) {
+    var u = /^data:image\//.test(String(f)) ? String(f) : base(host) + "img/" + f;
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl && !/^data:image\//.test(u)) {
+      return G.PREP_BANK_CLIENT.signImageUrl(u);
+    }
+    return u;
+  }
   // One image's URL: a data: URL as is; a name with a "/" is a bank path (e.g. "v6/ss-radiology/img/x.webp", PREP_RAD
   // items; PYQ names never have one), relative to the bank API; else the item's image folder (imgBase).
   function itemImg(it, host, f) {
@@ -276,8 +286,10 @@
     if (/^data:image\//.test(f)) return f;
     // App-bundled teaching illustrations (KardiqX ECGs, Ophthalmos, PSM charts): same-origin, no bank fetch.
     if (/^\/assets\/(kardiox-learn|ophthalmos|psm)\//.test(f)) return f;
-    if (f.indexOf("/") >= 0) { var u = (host.bankApi || "/api/prep/bank/") + f; return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; }
-    return imgBase(it, host) + f;
+    if (f.indexOf("/") >= 0) { var u = (host.bankApi || "/api/prep/bank/") + f; var uFull = u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; return (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl) ? G.PREP_BANK_CLIENT.signImageUrl(uFull) : uFull; }
+    var u2 = imgBase(it, host) + f;
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl) return G.PREP_BANK_CLIENT.signImageUrl(u2);
+    return u2;
   }
   /* figure(item, host, where) -> the item's images for one place: "stem" (default; next to the question) or "exp"
      (inside the feedback card, after the notes). An item's imgPlace says where its images go; none means "stem". */

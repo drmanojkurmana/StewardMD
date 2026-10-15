@@ -1,21 +1,37 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1290 lessons (88.0%) have zero images; 176 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (85.2%) have zero images; 218 have at least one.**
+
+Batch 9 (2026-10-15, branch lessonui-batch9): 4 more lessons wired (medicine +4: med-copd, med-diabetes-complications, med-glomerulonephritis, med-cardiomyopathy; 4 original SVGs); was 1257 zero / 214 with.
+
+Batch 8 (2026-10-15, branch lessonui-1013): 4 more lessons wired (obstetrics-gynaecology +4: obg-normal-labour x2 figs, obg-hypertensive-disorders x2 figs, obg-contraception, obg-fetal-growth-surveillance; 6 original SVGs); was 1261 zero / 210 with.
+
+Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
+
+Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with.
+
+Batch 5 (2026-10-15): 7 more lessons wired (medicine +3, surgery +3, paediatrics +1; 8 figures, med-ecg took two); was 1274 zero / 192 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+
+Merge of lessonui-1013 (2026-10-15): `mstat-audit` wired with new original `stats-control-chart.svg` (compare card replaced); was 1267 zero / 199 with.
+
+Batch 6 (2026-10-15): 6 more lessons wired (medicine +6: med-acs, med-aki, med-ckd, med-asthma x2 figs, med-cirrhosis, med-arrhythmias x2 figs; 8 figures); was 1271 zero / 200 with.
+
+Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +4: phm-opioids, phm-antiepileptics, phm-beta-lactams, phm-antihypertensives; 4 original SVGs); was 1265 zero / 206 with.
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
-| medicine | 113 | 113 | 0 |
+| medicine | 113 | 100 | 13 |
 | anatomy | 80 | 0 | 80 |
-| pathology | 73 | 69 | 4 |
-| pharmacology | 72 | 68 | 4 |
-| biochemistry | 69 | 65 | 4 |
-| surgery | 66 | 65 | 1 |
-| paediatrics | 57 | 57 | 0 |
+| pathology | 73 | 64 | 9 |
+| pharmacology | 72 | 60 | 12 |
+| surgery | 71 | 67 | 4 |
+| biochemistry | 69 | 63 | 6 |
+| paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
-| obstetrics-gynaecology | 50 | 50 | 0 |
+| obstetrics-gynaecology | 50 | 46 | 4 |
 | physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
-| microbiology | 40 | 36 | 4 |
+| microbiology | 40 | 31 | 9 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
 | anaesthesia | 34 | 34 | 0 |
@@ -44,7 +60,7 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 | womens-health | 10 | 10 | 0 |
 | mrcp-basic-science | 8 | 8 | 0 |
 | mrcp-rheumatology | 8 | 8 | 0 |
-| mrcp-statistics | 8 | 1 | 7 |
+| mrcp-statistics | 8 | 0 | 8 |
 | ss-hepatology | 8 | 8 | 0 |
 | mrcp-pharmacology | 7 | 7 | 0 |
 | ss-pulmonology | 7 | 7 | 0 |
@@ -69,12 +85,11 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 
 ## Imageless lessons by subject (highest exam weight first)
 
-### medicine (113/113 imageless)
+### medicine (110/113 imageless)
 
 - `med-acid-base`: Approach to Metabolic Acidosis and Renal Tubular Acidosis
 - `med-clinical-cardiology`: Clinical cardiology: pulse, JVP and heart sounds
 - `med-diabetes-complications`: Management of Diabetic Ketoacidosis
-- `med-ecg`: ECG interpretation: high-yield patterns for NEET-PG, INI-CET and USMLE
 - `med-envenomation`: Snake bite: immobilise, reassure, antivenom for systemic or severe local signs
 - `med-examination`: Clinical examination: consent, sequence, comparison
 - `med-heart-failure`: Management of Chronic Heart Failure with Reduced Ejection Fraction
@@ -86,8 +101,6 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 - `med-onc-principles`: Immune checkpoint inhibitors: pembrolizumab and immune-related adverse events
 - `med-osce-procedures`: OSCE procedures: asepsis, access, oxygen, communication
 - `med-overdose`: Paracetamol poisoning: time, levels, antidote by toxicology advice
-- `med-pesticides`: Organophosphate poisoning: atropine for the wet patient, pralidoxime early
-- `med-pft-abg`: Pulmonary function tests and arterial blood gases
 - `med-cad-stable`: Stable coronary artery disease and dyslipidaemia
 - `med-acs`: Acute coronary syndromes
 - `med-arrhythmias`: Arrhythmias and conduction disorders
@@ -189,15 +202,13 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson 
 
 All 80 lessons in anatomy carry at least one verified diagram.
 
-### pathology (69/73 imageless)
+### pathology (64/73 imageless)
 
 - `pat-adaptations-accumulations`: Cellular adaptations, accumulations, pigments and calcification
 - `pat-benign-wbc-lymph-node`: Non-neoplastic leukocyte and lymph node disorders: reactive changes and key differentials
 - `pat-carcinogenic-agents`: Carcinogenic agents and oncogenic viruses
 - `pat-cytogenetics`: Cytogenetic disorders: karyotyping and key syndromes
-- `pat-hypersensitivity`: Hypersensitivity reactions and transplant rejection
 - `pat-infectious-pathology`: Pathology of Infectious Diseases: Inclusions, Granulomas and Special Stains
-- `pat-mediators`: Chemical mediators of inflammation: key facts for exams
 - `pat-mendelian-disorders`: Mendelian disorders: inheritance patterns and key single-gene diseases
 - `pat-mixed`: Mixed pathology rapid review: high-yield pairings
 - `pat-molecular-carcinogenesis`: Molecular basis of cancer: oncogenes, tumour suppressors and DNA repair
@@ -208,8 +219,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-transfusion`: Blood banking and transfusion medicine: core principles for exams
 - `pat-tumour-biology`: Nomenclature, characteristics and spread of tumours
 - `pat-tumour-diagnosis`: Host response, paraneoplastic syndromes and diagnosis of cancer
-- `pat-thrombosis-embolism`: Thrombosis, embolism and infarction
-- `pat-shock`: Shock: types, stages and tissue effects
 - `pat-autoimmune`: Autoimmune diseases: tolerance failure and systemic patterns
 - `pat-immunodeficiency`: Immunodeficiency diseases and AIDS
 - `pat-amyloidosis`: Amyloidosis: types, staining and organ patterns
@@ -225,7 +234,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-obstructive-restrictive`: Obstructive, restrictive and vascular lung diseases
 - `pat-lung-tumours`: Lung tumours: types, paraneoplastic syndromes and spread
 - `pat-hepatitis-cirrhosis`: Hepatitis, cirrhosis and liver failure
-- `pat-glomerular`: Glomerular diseases: nephritic and nephrotic patterns
 - `pat-breast`: Breast pathology: benign lesions, carcinoma types and receptors
 - `pat-thyroid-parathyroid`: Thyroid and parathyroid disorders: goitre, cancer and calcium
 - `pat-diabetes-men`: Diabetes mellitus, pancreatic endocrine tumours and MEN syndromes
@@ -261,9 +269,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-male-genital`: Male genital pathology: prostate, testis, penis and scrotum
 - `pat-skin`: Skin pathology: blistering, papulosquamous disease and tumours
 
-### pharmacology (68/72 imageless)
+### pharmacology (60/72 imageless)
 
-- `phm-absorption-routes`: Routes of administration and drug absorption
 - `phm-adverse-reactions`: Adverse drug reactions, interactions and pharmacogenetics
 - `phm-aminoglycosides`: Aminoglycosides: mechanism, toxicity and key clinical rules
 - `phm-antianginal`: Antianginal drugs and calcium channel blockers
@@ -273,7 +280,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-antimuscarinics`: Antimuscarinic drugs: receptors, uses and toxicity
 - `phm-antiparkinsonian`: Antiparkinsonian drugs and drugs for dementia
 - `phm-antiprotozoal-anthelmintic`: Antiamoebic, antiprotozoal and anthelmintic drugs: high-yield essentials
-- `phm-antitubercular`: Antitubercular drugs: key actions, toxicities and regimens
 - `phm-beta-blockers`: Beta adrenergic blockers: selectivity, key properties and safety
 - `phm-cholinergic-agonists`: Cholinergic transmission and cholinomimetics
 - `phm-cytotoxic-anticancer`: Cytotoxic anticancer drugs: key toxicities, rescues and mechanisms
@@ -300,16 +306,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-asthma-cough`: Drugs for bronchial asthma, COPD and cough
 - `phm-antiemetics`: Antiemetics and prokinetic drugs
 - `phm-laxatives-ibd`: Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease
-- `phm-antihypertensives`: Antihypertensive drugs
-- `phm-antiarrhythmics`: Antiarrhythmic drugs
 - `phm-shock-pah`: Drugs for shock and pulmonary arterial hypertension
 - `phm-sedative-hypnotics`: Sedative-hypnotics, anxiolytics and alcohol dependence
 - `phm-general-anaesthetics`: General anaesthetics, premedication and malignant hyperthermia
 - `phm-local-anaesthetics`: Local anaesthetics: esters, amides and regional blocks
-- `phm-opioids`: Opioid analgesics, receptors and dependence
 - `phm-antidepressants`: Antidepressants, lithium and mood stabilisers
 - `phm-antipsychotics`: Antipsychotics: D2 blockade, EPS and clozapine
-- `phm-antiepileptics`: Antiepileptics and status epilepticus
 - `phm-cns-stimulants`: CNS stimulants, ADHD and narcolepsy
 - `phm-corticosteroids`: Corticosteroids: potency, Cushing, taper and uses
 - `phm-oral-antidiabetics`: Oral antidiabetics and incretin therapies
@@ -317,10 +319,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-pituitary`: Pituitary drugs: GH, desmopressin, oxytocin and dopaminergics
 - `phm-contraceptives-uterine`: Contraceptives, emergency cover and uterotonics
 - `phm-bone-calcium`: Bone, calcium and hypercalcaemia drugs
-- `phm-insulin`: Insulin: types, regimens, DKA and hypoglycaemia
 - `phm-haematinics`: Haematinics, growth factors and chelators
 - `phm-antiplatelets-fibrinolytics`: Antiplatelets, DAPT and fibrinolytics
-- `phm-beta-lactams`: Beta-lactams: penicillins, cephalosporins and carbapenems
 - `phm-protein-synthesis-inhibitors`: Protein synthesis inhibitors: aminoglycosides to linezolid
 - `phm-other-antibacterials`: Other antibacterials: fluoroquinolones, vancomycin, metronidazole and UTI drugs
 - `phm-antifungals`: Antifungals: azoles, amphotericin and echinocandins
@@ -332,81 +332,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### biochemistry (65/69 imageless)
-
-- `bio-acid-base-balance`: Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation
-- `bio-aging-cellular-senescence`: Biochemical aging: telomere dynamics, sirtuins, and cellular senescence
-- `bio-apoptosis-cell-cycle`: Cellular homeostasis: apoptosis cascades, caspases, and cell cycle checkpoints
-- `bio-calcium-bone`: Calcium homeostasis: parathyroid hormone, vitamin D activation, and metabolic bone disease
-- `bio-carb-lipid-basics`: Carbohydrate and lipid chemistry: isomerism, glycosidic bonds and lipid classifications
-- `bio-carbohydrate-chemistry`: Chemistry of carbohydrates: isomers, reducing sugars, polysaccharides and GAGs
-- `bio-cholesterol-steroids`: Cholesterol and steroidogenesis: HMG-CoA reductase, statins, bile acids and adrenocortical pathways
-- `bio-coagulation-cascade`: Hemostasis: tissue factor pathway, contact activation, and natural anticoagulants
-- `bio-complex-carbs`: Glycosaminoglycans, proteoglycans and the mucopolysaccharidoses: Hurler and Hunter syndromes
-- `bio-digestion-absorption`: Nutrient assimilation: luminal digestion, enterocyte transporters, and malabsorption
-- `bio-dna-repair`: DNA replication fidelity and genome surveillance: replication fork enzymes and repair pathways
-- `bio-dna-replication-repair`: DNA Structure, Replication and Repair
-- `bio-endocrine-biochemistry`: Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects
-- `bio-enzymes`: Enzymes and clinical enzymology
-- `bio-extracellular-matrix`: Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders
-- `bio-fatty-acid-oxidation`: Fatty acid beta-oxidation, carnitine shuttle and ketogenesis
-- `bio-fatty-acid-synthesis`: Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging
-- `bio-fluids-electrolytes`: Fluid compartments, plasma osmolality, Starling forces, and hyponatremia
-- `bio-fuel-metabolism`: Fuel homeostasis: the feed-fast cycle, hormonal counter-regulation, and ketoacidosis
-- `bio-gene-regulation`: Epigenetic mechanisms, chromatin remodeling, and transcriptional regulation
-- `bio-glycogen-gluconeogenesis`: Carbohydrate synthesis and storage: gluconeogenesis, glycogen metabolism and storage diseases
-- `bio-immunochemistry-mhc`: Immunochemistry: V(D)J recombination, MHC antigen processing, and complement cascades
-- `bio-intro-principles`: Biochemical basis of disease: cellular compartmentalization and molecular pathology
-- `bio-lipid-chemistry`: Chemistry of lipids: fatty acids, membrane lipids and eicosanoids
-- `bio-lipid-synthesis`: Fatty acid, triacylglycerol and cholesterol synthesis
-- `bio-lipoproteins`: Lipoprotein metabolism: apolipoproteins, receptor pathways, and dyslipidemias
-- `bio-liver-heme-detox`: Heme biosynthesis, porphyrias, bilirubin metabolism, and xenobiotic detoxification
-- `bio-membrane-transport`: Biological membranes: fluid mosaic model, lipid rafts and solute transport mechanisms
-- `bio-minor-pathways`: HMP shunt, uronic acid pathway, fructose and galactose metabolism
-- `bio-mixed`: Biochemistry mixed rapid review: high-yield essentials
-- `bio-muscle-metabolism`: Muscle bioenergetics: creatine phosphate shuttle, glycogenolysis, and rhabdomyolysis
-- `bio-neurochemistry-bbb`: Neurochemistry: blood-brain barrier transport, myelin lipids, and glutamate excitotoxicity
-- `bio-neurotransmitters`: Neurotransmitter biosynthesis, catecholamine metabolism, and phaeochromocytoma
-- `bio-nutrition-energy`: Nutritional bioenergetics: energy expenditure, nitrogen balance, and protein-energy malnutrition
-- `bio-omics-diagnostics`: Clinical genomics, mass spectrometry proteomics, and pharmacogenomic diagnostics
-- `bio-oxidation-etc`: Biological oxidation, electron transport chain and free radicals
-- `bio-oxygen-transport`: Hemoglobin and myoglobin: cooperativity, allosteric effectors, 2,3-BPG and the Bohr effect
-- `bio-plasma-proteins`: Plasma proteins: albumin oncotic pressure, alpha-1 antitrypsin, and Wilson disease
-- `bio-protein-folding`: Protein folding, molecular chaperones, amyloidosis and prion conformational disorders
-- `bio-protein-structure`: Amino acids and protein structure: essentials, zwitterions, folding and misfolding
-- `bio-rbc-metabolism`: Erythrocyte metabolism: anaerobic glycolysis, Rapoport-Luebering shunt and G6PD antioxidant defenses
-- `bio-recombinant-techniques`: Recombinant DNA technology and laboratory techniques
-- `bio-ros-antioxidants`: Reactive oxygen species: generation, antioxidant defenses, and reperfusion injury
-- `bio-signal-transduction`: G-protein coupled receptors, second messengers, and receptor tyrosine kinase signaling
-- `bio-sphingolipids-lysosomal`: Sphingolipids and lysosomal storage disorders: Gaucher, Tay-Sachs, Niemann-Pick and Fabry diseases
-- `bio-transcription-splicing`: RNA transcription, post-transcriptional processing, and spliceosome defects
-- `bio-transcription`: Transcription and RNA processing
-- `bio-translation-proteasome`: Ribosomal translation, genetic code fidelity, and the ubiquitin-proteasome system
-- `bio-translation`: Genetic code, translation and protein targeting
-- `bio-urea-cycle`: Urea cycle, nitrogen disposal and hyperammonemia
-- `bio-vitamins-minerals`: Vitamins and trace minerals: coenzyme mechanisms, antioxidant defenses and deficiency syndromes
-- `bio-water-soluble-vitamins`: Water-soluble vitamins: key coenzymes and deficiency syndromes
-- `bio-cell-membrane`: Cell organelles, membrane structure, transport mechanisms and peroxisomal disorders
-- `bio-collagen-ecm`: Collagen, elastin, extracellular matrix and connective tissue disorders
-- `bio-haemoglobin`: Haemoglobin structure, allosteric oxygen binding and haemoglobinopathies
-- `bio-gluconeogenesis-glycogen`: Gluconeogenesis, glycogen metabolism and glycogen storage disorders
-- `bio-storage-disorders`: Lysosomal storage disorders: sphingolipidoses and mucopolysaccharidoses
-- `bio-amino-acid-disorders`: Inborn errors of amino acid metabolism: PKU, alkaptonuria, MSUD and homocystinuria
-- `bio-specialised-products`: Specialised products of amino acids: catecholamines, serotonin, melanin and nitric oxide
-- `bio-heme`: Heme biosynthesis, porphyrias and bilirubin metabolism
-- `bio-nucleotides`: Purine and pyrimidine metabolism, salvage pathways and gout
-- `bio-genetics`: Inheritance patterns, cytogenetics, trinucleotide repeats and imprinting
-- `bio-fat-soluble-vitamins`: Fat-soluble vitamins: absorption, biochemical functions and toxicity
-- `bio-minerals`: Minerals and trace elements: iron, copper, zinc, selenium and iodine
-- `bio-nutrition-integration`: Nutrition, energy balance, metabolic integration and protein-energy malnutrition
-
-### surgery (65/66 imageless)
+### surgery (67/71 imageless)
 
 - `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
 - `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
 - `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
 - `sur-gallbladder`: Biliary surgery: acute cholecystitis, critical view of safety and bile duct injuries
-- `sur-hernia`: Groin hernias: anatomy, Lichtenstein repair and laparoscopic techniques
 - `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
 - `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
 - `sur-mixed`: Mixed practice: surgery rapid review
@@ -414,10 +345,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-onc-principles`: Principles of surgical oncology and soft tissue sarcoma
 - `sur-periop`: Perioperative care and surgical complications: key high-yield points
 - `sur-plastic`: Skin grafts, flaps and cleft surgery timing
-- `sur-shock-transfusion`: Massive haemorrhage and transfusion: stop bleeding, replace blood, keep warm
 - `sur-small-bowel`: Small intestine and mesentery: high-yield essentials
 - `sur-stomach`: Stomach and duodenum: high-yield surgical essentials
-- `sur-thyroid`: Thyroid carcinoma, Bethesda classification and surgical management
 - `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
 - `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
 - `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
@@ -467,14 +396,84 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-oncology`: Uro-oncology: bladder, kidney and testis cancers
 - `sur-andrology-infertility`: Andrology and male infertility: ED, varicocele and azoospermia
 - `sur-paediatric-reconstructive`: Paediatric and reconstructive urology: hypospadias, valves and strictures
+- `sva-arterial`: Arterial disease and aneurysms: CLTI, ALI, AAA, carotid and mesenteric
+- `sva-venous-access`: Venous disease, diabetic foot, trauma, access and lymphoedema
+- `sct-coronary-valve`: Coronary and valvular surgery: CABG, valves, endocarditis, CPB and support
+- `sct-aorta-congenital`: Aortic dissection and congenital cardiac surgery: arch, septal and single ventricles
+- `sct-thoracic`: Thoracic surgery: lung cancer, pleura, mediastinum, oesophagus link and trauma
 
-### paediatrics (57/57 imageless)
+### biochemistry (63/69 imageless)
+
+- `bio-acid-base-balance`: Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation
+- `bio-aging-cellular-senescence`: Biochemical aging: telomere dynamics, sirtuins, and cellular senescence
+- `bio-apoptosis-cell-cycle`: Cellular homeostasis: apoptosis cascades, caspases, and cell cycle checkpoints
+- `bio-calcium-bone`: Calcium homeostasis: parathyroid hormone, vitamin D activation, and metabolic bone disease
+- `bio-carb-lipid-basics`: Carbohydrate and lipid chemistry: isomerism, glycosidic bonds and lipid classifications
+- `bio-carbohydrate-chemistry`: Chemistry of carbohydrates: isomers, reducing sugars, polysaccharides and GAGs
+- `bio-cholesterol-steroids`: Cholesterol and steroidogenesis: HMG-CoA reductase, statins, bile acids and adrenocortical pathways
+- `bio-coagulation-cascade`: Hemostasis: tissue factor pathway, contact activation, and natural anticoagulants
+- `bio-complex-carbs`: Glycosaminoglycans, proteoglycans and the mucopolysaccharidoses: Hurler and Hunter syndromes
+- `bio-digestion-absorption`: Nutrient assimilation: luminal digestion, enterocyte transporters, and malabsorption
+- `bio-dna-repair`: DNA replication fidelity and genome surveillance: replication fork enzymes and repair pathways
+- `bio-dna-replication-repair`: DNA Structure, Replication and Repair
+- `bio-endocrine-biochemistry`: Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects
+- `bio-enzymes`: Enzymes and clinical enzymology
+- `bio-extracellular-matrix`: Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders
+- `bio-fatty-acid-synthesis`: Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging
+- `bio-fluids-electrolytes`: Fluid compartments, plasma osmolality, Starling forces, and hyponatremia
+- `bio-fuel-metabolism`: Fuel homeostasis: the feed-fast cycle, hormonal counter-regulation, and ketoacidosis
+- `bio-gene-regulation`: Epigenetic mechanisms, chromatin remodeling, and transcriptional regulation
+- `bio-glycogen-gluconeogenesis`: Carbohydrate synthesis and storage: gluconeogenesis, glycogen metabolism and storage diseases
+- `bio-immunochemistry-mhc`: Immunochemistry: V(D)J recombination, MHC antigen processing, and complement cascades
+- `bio-intro-principles`: Biochemical basis of disease: cellular compartmentalization and molecular pathology
+- `bio-lipid-chemistry`: Chemistry of lipids: fatty acids, membrane lipids and eicosanoids
+- `bio-lipid-synthesis`: Fatty acid, triacylglycerol and cholesterol synthesis
+- `bio-lipoproteins`: Lipoprotein metabolism: apolipoproteins, receptor pathways, and dyslipidemias
+- `bio-liver-heme-detox`: Heme biosynthesis, porphyrias, bilirubin metabolism, and xenobiotic detoxification
+- `bio-membrane-transport`: Biological membranes: fluid mosaic model, lipid rafts and solute transport mechanisms
+- `bio-minor-pathways`: HMP shunt, uronic acid pathway, fructose and galactose metabolism
+- `bio-mixed`: Biochemistry mixed rapid review: high-yield essentials
+- `bio-muscle-metabolism`: Muscle bioenergetics: creatine phosphate shuttle, glycogenolysis, and rhabdomyolysis
+- `bio-neurochemistry-bbb`: Neurochemistry: blood-brain barrier transport, myelin lipids, and glutamate excitotoxicity
+- `bio-neurotransmitters`: Neurotransmitter biosynthesis, catecholamine metabolism, and phaeochromocytoma
+- `bio-nutrition-energy`: Nutritional bioenergetics: energy expenditure, nitrogen balance, and protein-energy malnutrition
+- `bio-omics-diagnostics`: Clinical genomics, mass spectrometry proteomics, and pharmacogenomic diagnostics
+- `bio-oxidation-etc`: Biological oxidation, electron transport chain and free radicals
+- `bio-oxygen-transport`: Hemoglobin and myoglobin: cooperativity, allosteric effectors, 2,3-BPG and the Bohr effect
+- `bio-plasma-proteins`: Plasma proteins: albumin oncotic pressure, alpha-1 antitrypsin, and Wilson disease
+- `bio-protein-folding`: Protein folding, molecular chaperones, amyloidosis and prion conformational disorders
+- `bio-protein-structure`: Amino acids and protein structure: essentials, zwitterions, folding and misfolding
+- `bio-rbc-metabolism`: Erythrocyte metabolism: anaerobic glycolysis, Rapoport-Luebering shunt and G6PD antioxidant defenses
+- `bio-recombinant-techniques`: Recombinant DNA technology and laboratory techniques
+- `bio-ros-antioxidants`: Reactive oxygen species: generation, antioxidant defenses, and reperfusion injury
+- `bio-signal-transduction`: G-protein coupled receptors, second messengers, and receptor tyrosine kinase signaling
+- `bio-sphingolipids-lysosomal`: Sphingolipids and lysosomal storage disorders: Gaucher, Tay-Sachs, Niemann-Pick and Fabry diseases
+- `bio-transcription-splicing`: RNA transcription, post-transcriptional processing, and spliceosome defects
+- `bio-transcription`: Transcription and RNA processing
+- `bio-translation-proteasome`: Ribosomal translation, genetic code fidelity, and the ubiquitin-proteasome system
+- `bio-translation`: Genetic code, translation and protein targeting
+- `bio-vitamins-minerals`: Vitamins and trace minerals: coenzyme mechanisms, antioxidant defenses and deficiency syndromes
+- `bio-water-soluble-vitamins`: Water-soluble vitamins: key coenzymes and deficiency syndromes
+- `bio-cell-membrane`: Cell organelles, membrane structure, transport mechanisms and peroxisomal disorders
+- `bio-collagen-ecm`: Collagen, elastin, extracellular matrix and connective tissue disorders
+- `bio-haemoglobin`: Haemoglobin structure, allosteric oxygen binding and haemoglobinopathies
+- `bio-gluconeogenesis-glycogen`: Gluconeogenesis, glycogen metabolism and glycogen storage disorders
+- `bio-storage-disorders`: Lysosomal storage disorders: sphingolipidoses and mucopolysaccharidoses
+- `bio-amino-acid-disorders`: Inborn errors of amino acid metabolism: PKU, alkaptonuria, MSUD and homocystinuria
+- `bio-specialised-products`: Specialised products of amino acids: catecholamines, serotonin, melanin and nitric oxide
+- `bio-heme`: Heme biosynthesis, porphyrias and bilirubin metabolism
+- `bio-nucleotides`: Purine and pyrimidine metabolism, salvage pathways and gout
+- `bio-genetics`: Inheritance patterns, cytogenetics, trinucleotide repeats and imprinting
+- `bio-fat-soluble-vitamins`: Fat-soluble vitamins: absorption, biochemical functions and toxicity
+- `bio-minerals`: Minerals and trace elements: iron, copper, zinc, selenium and iodine
+- `bio-nutrition-integration`: Nutrition, energy balance, metabolic integration and protein-energy malnutrition
+
+### paediatrics (56/57 imageless)
 
 - `ped-behavioural`: Behavioural problems in children: high-yield overview
 - `ped-child-health-programmes`: Child health programmes and child protection
 - `ped-childhood-infections`: Common childhood infections: high-yield essentials
 - `ped-development`: Developmental milestones and adolescence
-- `ped-diarrhoea`: Diarrhoea and dehydration: assess rehydrate zinc rotavirus
 - `ped-dose-calculation`: Paediatric dose calculation: weigh, match, cap, verify
 - `ped-exanthems`: Exanthematous fevers: rash patterns and key signs
 - `ped-gi-disorders`: Paediatric gastrointestinal disorders: high-yield essentials
@@ -573,7 +572,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `cm-waste-disposal`: Solid waste, excreta and sewage disposal
 - `cm-water`: Water supply and purification: essentials for NEET-PG
 
-### obstetrics-gynaecology (50/50 imageless)
+### obstetrics-gynaecology (46/50 imageless)
 
 - `obg-abortion`: Miscarriage and medical termination of pregnancy: key classifications, causes and legal limits
 - `obg-cervical-cancer`: Premalignant and malignant lesions of the cervix
@@ -584,7 +583,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-maternal-physiology`: Maternal physiological changes in pregnancy
 - `obg-mixed`: Obstetrics and Gynaecology mixed rapid review
 - `obg-multiple-pregnancy`: Multiple pregnancy: zygosity, chorionicity and key complications
-- `obg-normal-labour`: Normal labour: stages, partograph and third stage
 - `obg-other-medical`: Other medical disorders in pregnancy: key high-yield points
 - `obg-pelvis-fetal-skull`: Obstetric pelvis and fetal skull
 - `obg-placenta-fetus`: Placenta, fetal development and fetal circulation
@@ -605,9 +603,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-diabetes-pregnancy`: Gestational diabetes mellitus: diagnostic criteria, glycemic targets and maternal thyroid dysfunction
 - `obg-rh-isoimmunisation`: Rh isoimmunization: pathogenesis, MCA Doppler velocity and intrauterine transfusion
 - `obg-abnormal-labour`: Fetal malpresentations: breech types, external cephalic version and assisted delivery maneuvers
-- `obg-fetal-growth-surveillance`: Cardiotocography: baseline heart rate, variability, deceleration patterns and FIGO classification
 - `obg-ectopic`: Ectopic pregnancy: diagnosis and methotrexate versus surgery
-- `obg-hypertensive-disorders`: Hypertensive disorders: preeclampsia, eclampsia and HELLP
 - `obg-pph`: Postpartum haemorrhage: atony, trauma, tissue and thrombin
 - `obg-preterm-prom-postterm`: Preterm labour, PROM and post-term: steroids, magnesium and induction
 - `obg-operative-obstetrics`: Operative obstetrics: forceps, vacuum and caesarean technique
@@ -622,7 +618,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-amenorrhoea`: Amenorrhoea: primary, secondary and Turner, MRKH, Asherman
 - `obg-vaginitis-sti`: Vaginal discharge and STIs: clue cells, froth, ulcers and warts
 - `obg-vulval-vaginal`: Vulval and vaginal disorders: lichen, VIN, VaIN and cancers
-- `obg-contraception`: Contraception: pills, IUCD, injectables, implants and sterilisation
 - `gyn-cervix-endometrium`: SS gyn-oncology: cervical and endometrial cancer staging and therapy
 - `gyn-ovary-vulva-gtn`: SS gyn-oncology: ovarian, vulval and GTN staging and therapy
 
@@ -677,27 +672,22 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `son-trial-design`: Clinical trial design and evidence in oncology
 - `son-tumour-markers`: Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest
 
-### microbiology (36/40 imageless)
+### microbiology (31/40 imageless)
 
 - `mic-ag-ab-reactions`: Antigen-antibody reactions and serological tests
 - `mic-bacterial-genetics`: Bacterial genetics and antimicrobial resistance
 - `mic-clostridia-anaerobes`: Clostridia, non-sporing anaerobes and actinomycetes
 - `mic-gram-positive-bacilli`: Corynebacterium, Bacillus and Listeria: High-Yield Essentials
-- `mic-hiv`: HIV and retroviruses: structure, entry, diagnosis and the NACO approach
-- `mic-immune-response`: Immune response, MHC, cytokines and hypersensitivity
 - `mic-mixed`: Microbiology mixed rapid review
 - `mic-other-dna-viruses`: Poxviruses, adenoviruses, papillomaviruses and parvoviruses: high-yield microbiology
 - `mic-spirochaetes`: Spirochaetes: Syphilis, Relapsing Fever, Lyme Disease and Leptospirosis
-- `mic-sterilisation`: Sterilisation, disinfection and hospital infection control
 - `mic-superficial-subcutaneous-mycoses`: General mycology: superficial and subcutaneous mycoses
-- `mic-tuberculosis`: Mycobacterium tuberculosis: Identification, Diagnosis and Drug Resistance
 - `mic-herpesviruses`: Herpesviruses: HSV, VZV, EBV, CMV, HHV6 and HHV8
 - `mic-staphylococcus`: Staphylococcus aureus, MRSA and coagulase negative staphylococci
 - `mic-picorna-enteric`: Picornaviruses, hepatitis A and E, rhinovirus and norovirus
 - `mic-respiratory-rna-viruses`: Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses
 - `mic-streptococcus`: Streptococci, pneumococcus and enterococcus
 - `mic-arbo-rabies`: Arboviruses: dengue, chikungunya, zika, JE and rabies
-- `mic-hepatitis-viruses`: Hepatitis B, C, D and E: serology, phases and cure
 - `mic-neisseria`: Gonococcus and meningococcus
 - `mic-systemic-opportunistic-mycoses`: Systemic and opportunistic mycoses
 - `mic-intestinal-protozoa`: Intestinal protozoa: amoebiasis, giardiasis and coccidia
@@ -1399,9 +1389,9 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `mrheu-spa`: Spondyloarthritis: axial disease, psoriatic features, biologics
 - `mrheu-vasculitis`: Systemic vasculitis: vessel size, ANCA syndromes, emergency management
 
-### mrcp-statistics (1/8 imageless)
+### mrcp-statistics (0/8 imageless - 100% complete)
 
-- `mstat-audit`: Clinical audit, governance and quality improvement
+All 8 lessons in mrcp-statistics carry at least one verified diagram.
 
 ### ss-hepatology (8/8 imageless)
 
