@@ -215,14 +215,20 @@
     refresh();
     var loader = G.PREP_LOADER && G.PREP_LOADER.load ? G.PREP_LOADER.load() : Promise.reject(new Error("PrepNucleus is not available"));
     loader.then(function (PREP) {
-      return api("GET", "?module=" + encodeURIComponent(x.module)).then(function (fr) {
+      // A lesson opened by its ID does not yet know its module: read the lesson first.
+      var pre = Promise.resolve();
+      if (P.kind === "lesson" && !P.mod) {
+        var L0 = G.PREP_LESSONS; if (!L0 || !L0.file) throw new Error("Lessons are not available");
+        pre = L0.file(P.id, PREP._host).then(function (les) { P.mod = les.module || P.id; P.subject = les.subject || P.subject || ""; });
+      }
+      return pre.then(function () { return api("GET", "?module=" + encodeURIComponent(P.mod)); }).then(function (fr) {
         var fx = fr.status === 200 ? fr.data : { q: {}, l: {} };
         P.prev = (P.kind === "lesson" ? fx.l : fx.q)[P.id] || null;
         if (P.kind === "lesson") {
           var L = G.PREP_LESSONS; if (!L || !L.file) throw new Error("Lessons are not available");
           return L.file(P.id, PREP._host).then(function (les) { P.les = JSON.parse(JSON.stringify(les)); P.base = JSON.parse(JSON.stringify(les)); });
         }
-        return PREP.loadItems(x.subject, x.module).then(function (items) {
+        return PREP.loadItems(P.subject, P.mod).then(function (items) {
           var it = null; (items || []).forEach(function (i) { if (String(i.id) === String(P.id)) it = i; });
           if (!it) throw new Error("That question is no longer in this module.");
           P.item = JSON.parse(JSON.stringify(it)); P.base = JSON.parse(JSON.stringify(it)); P.img = (it.img || []).slice(); P.place = it.imgPlace === "exp" ? "exp" : "stem";
@@ -230,6 +236,34 @@
       });
     }).then(function () { P.loading = false; refresh(); return api("GET", "?log=1&kind=" + P.kind + "&id=" + encodeURIComponent(P.id)); })
       .then(function (r) { if (P && r) { P.log = r.status === 200 ? (r.data.log || []) : []; refresh(); } }, function (e) { if (P) { P.loading = false; P.err = String((e && e.message) || "It did not load."); refresh(); } });
+  }
+
+  /* openById(raw): any question or lesson by the ID shown in PrepNucleus (Q-K92-1RY-GTV, L-4FD-N0V-2RA), no report needed. The share-ID index
+   * (prep-ids.js) says where it lives; previous-year questions sit in their papers and are not editable here. Returns a promise of a message
+   * ("" when the editor opened) so the desk can show it under the box. */
+  function openById(raw) {
+    if (!G.PREP_LOADER || !G.PREP_LOADER.load) return Promise.resolve("PrepNucleus is not available.");
+    return G.PREP_LOADER.load().then(function (PREP) {
+      var IDS = G.PREP_IDS;
+      if (!IDS || !IDS._pure || !IDS.resolve) return "Share IDs are not available in this build.";
+      var n = IDS._pure.norm(raw);
+      if (!n.ok) return IDS._pure.errText(n.err);
+      if (IDS._i && !IDS._i.host) IDS._i.host = PREP._host;
+      return IDS.resolve(n.id).then(function (r) {
+        if (r.offline) return "No connection, and that ID is not stored on this phone.";
+        if (r.unknown || !r.loc) return "No question or lesson has that ID.";
+        var loc = IDS._pure.parseLoc(r.loc);
+        if (!loc) return "No question or lesson has that ID.";
+        if (loc.kind === "x") return "That question was withdrawn.";
+        if (loc.kind === "p") return "Previous-year questions live in their papers and cannot be edited here.";
+        if (loc.kind === "l") { open({ itemType: "lesson", itemId: loc.key, module: "", subject: "" }); return ""; }
+        return PREP.loadItems(loc.sid, loc.mid).then(function (items) {
+          var it = null; (items || []).forEach(function (i) { if (!it && IDS.ofItem(i) === n.id) it = i; });
+          if (!it) return "That question is no longer in its module.";
+          open({ itemType: "question", itemId: String(it.id), module: loc.mid, subject: loc.sid }); return "";
+        });
+      });
+    }, function () { return "PrepNucleus could not load. Check the connection."; });
   }
   function refresh() { try { if (G.SMD_REVIEW && G.SMD_REVIEW._render) G.SMD_REVIEW._render(); } catch (e) {} }
   function close(reload) { P = null; try { if (G.SMD_REVIEW && G.SMD_REVIEW.afterEdit) G.SMD_REVIEW.afterEdit(!!reload); } catch (e) {} refresh(); }
@@ -352,6 +386,7 @@
     }, function (err) { if (P) { P.busy = false; refresh(); if (!err || err.message !== "cancelled") toast(String((err && err.message) || "The image did not upload.")); } });
   }
   if (D && D.addEventListener) D.addEventListener("change", onChange, true);
+  if (D && D.addEventListener) D.addEventListener("keydown", function (e) { if (e.key === "Enter" && e.target && e.target.id === "pf_idq") { var b = D.querySelector('#smdReview [data-rv-act="pfid"]'); if (b) b.click(); } }, true);
 
-  G.SMD_PREPFIX = { me: me, open: open, active: active, html: html, act: act, _pure: { clampRect: clampRect, fitAspect: fitAspect, moveRect: moveRect, resizeRect: resizeRect, outSize: outSize, diffQuestion: diffQuestion, diffLesson: diffLesson, changedFields: changedFields, strip: strip } };
+  G.SMD_PREPFIX = { me: me, open: open, openById: openById, active: active, html: html, act: act, _pure: { clampRect: clampRect, fitAspect: fitAspect, moveRect: moveRect, resizeRect: resizeRect, outSize: outSize, diffQuestion: diffQuestion, diffLesson: diffLesson, changedFields: changedFields, strip: strip } };
 })(typeof window !== "undefined" ? window : this);

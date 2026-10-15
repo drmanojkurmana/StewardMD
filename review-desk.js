@@ -289,8 +289,9 @@
     var intro = '<p class="kit-muted">Questions students reported in PrepNucleus, most reported first. Three separate reports hide a question from everyone; Restore brings it back after you have checked it.' + (S.fxMe ? " Tap Edit to correct the wording, explanation, key point or image; the fix goes live for every student." : "") + "</p>";
     if (P.loading) return tabs + intro + '<p class="kit-muted">Loading…</p>';
     if (P.err) return tabs + intro + '<p class="kit-muted">' + esc(P.err) + '</p><div class="kit-row"><button type="button" class="kit-pill" data-rv-act="prepreload">Try again</button></div>';
-    if (!P.items.length) return tabs + intro + '<p class="kit-muted">No reports yet.</p>';
-    return tabs + intro + '<div class="rv-list">' + P.items.map(function (x) {
+    var byId = S.fxMe ? '<div class="kit-field wide pf-byid"><label for="pf_idq" class="kit-fl">Edit any question or lesson by its ID</label><div class="kit-row"><input id="pf_idq" class="kit-inp" placeholder="Q-K92-1RY-GTV" autocomplete="off" autocapitalize="characters" spellcheck="false"><button type="button" class="kit-add" data-rv-act="pfid">' + ms("edit") + 'Open</button></div><p class="kit-muted" id="pf_idmsg" role="status"></p></div>' : "";
+    if (!P.items.length) return tabs + intro + byId + '<p class="kit-muted">No reports yet.</p>';
+    return tabs + intro + byId + '<div class="rv-list">' + P.items.map(function (x) {
       var why = Object.keys(x.reasons || {}).map(function (k) { return (PREP_REASON[k] || k) + " " + x.reasons[k]; }).join(", ");
       return '<div class="rv-row"><span class="rv-t">' + esc(x.module || "") + " · " + esc(x.itemId) + '</span><span class="rv-s">' + esc(x.subject || "") + " · " + x.n + " report" + (x.n === 1 ? "" : "s") + (why ? ": " + esc(why) : "") + "</span>" +
         "<span>" + (x.hidden ? '<span class="rv-pill">Hidden</span><button type="button" class="kit-pill" data-rv-act="prepun:' + esc(x.itemId) + '">Restore</button>' : "") +
@@ -333,6 +334,12 @@
     var b = e.target && e.target.closest && e.target.closest("[data-rv-act]"); if (!b || !b.closest("#smdReview")) return;
     var act = b.getAttribute("data-rv-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { close(); return; }
+    if (cmd === "pfid" && G.SMD_PREPFIX) {
+      var idm = D.getElementById("pf_idmsg"), idq = D.getElementById("pf_idq");
+      if (idm) idm.textContent = "Looking it up…";
+      G.SMD_PREPFIX.openById(idq ? idq.value : "").then(function (m) { var e = D.getElementById("pf_idmsg"); if (e && m) e.textContent = m; });
+      return;
+    }
     if (/^pf/.test(cmd) && G.SMD_PREPFIX && G.SMD_PREPFIX.act(cmd, arg)) return;
     if (cmd === "prepedit") { var px = ((S.prep && S.prep.items) || []).filter(function (x) { return x.itemId === arg; })[0]; if (px && G.SMD_PREPFIX) G.SMD_PREPFIX.open(px); return; }
     if (cmd === "prepreload") { S.prep = null; render(); return; }

@@ -196,6 +196,33 @@ try {
   const p3 = await lastReq("POST");
   ok(p3.b.kind === "lesson" && p3.b.id === "ana-spleen" && p3.b.fix.steps["1"].tx === "Step two, corrected." && !p3.b.fix.steps["0"] && p3.b.fix.title === undefined, "only the edited lesson step is sent");
 
+  // ---- any question or lesson by its ID ----
+  await ev(`window.__fixMod = { q: {}, l: {} }; window.__fixIx = {}; PREP.refreshFixes(); return 1;`);
+  const ids = await J(`return PREP_LOADER.load().then(function (P) { return P.loadItems("anatomy", "ana-gametogenesis"); }).then(function (items) { return JSON.stringify({ q1: PREP_IDS.ofItem(items[1]), id1: items[1].id, lesson: PREP_IDS.ofLesson("ana-spleen") }); });`).catch(() => null);
+  const ids2 = ids && ids.q1 ? ids : JSON.parse(await evA(`PREP_LOADER.load().then(function (P) { return P.loadItems("anatomy", "ana-gametogenesis"); }).then(function (items) { return JSON.stringify({ q1: PREP_IDS.ofItem(items[1]), id1: items[1].id, lesson: PREP_IDS.ofLesson("ana-spleen") }); })`));
+  ok(/^Q-?[0-9A-Z]{3}-?[0-9A-Z]{3}-?[0-9A-Z]{3,5}$/.test(ids2.q1), "the app's own share ID for a question: " + ids2.q1);
+  await ev(`PREP_IDS.resolve = function (id) { var m = ${JSON.stringify({ [ids2.q1.replace(/-/g, "")]: "m:anatomy/ana-gametogenesis", [ids2.lesson.replace(/-/g, "")]: "l:ana-spleen" })}; var loc = m[id.replace(/-/g, "")]; if (id === "QWITHDRAWN") return Promise.resolve({ loc: "x" }); return Promise.resolve(loc ? { loc: loc } : { unknown: true }); }; return 1;`);
+  await click(`#smdReview [data-rv-act="kind:prep"]`); await sleep(300);
+  ok(await until(`return !!document.getElementById("pf_idq") && !!document.querySelector('#smdReview [data-rv-act="pfid"]');`, 8000), "an editor sees a box to open any question or lesson by its ID");
+  await setv("pf_idq", "Q-123-456-789"); await click(`#smdReview [data-rv-act="pfid"]`);
+  ok(await until(`return /looks wrong|unknown|No question/i.test((document.getElementById("pf_idmsg")||{}).textContent||"");`, 6000), "a mistyped ID says so: " + await text("#pf_idmsg"));
+  await setv("pf_idq", "q 000 000 00" + "0"); await click(`#smdReview [data-rv-act="pfid"]`); await sleep(600);
+  ok(/./.test(await text("#pf_idmsg")) && !(await ev(`return !!document.getElementById("pf_q");`)), "a bad or unknown ID opens nothing and explains");
+  await setv("pf_idq", ids2.q1.toLowerCase().replace(/-/g, " ")); await click(`#smdReview [data-rv-act="pfid"]`);
+  ok(await until(`return !!document.getElementById("pf_q");`, 15000), "a question's ID (typed in lower case with spaces) opens its editor");
+  ok(/Fixture question 2 /.test(await val("pf_q")), "it is the right question: " + await val("pf_q"));
+  await click(`#smdReview [data-rv-act="pfback"]`); await sleep(300);
+  await click(`#smdReview [data-rv-act="kind:prep"]`); await sleep(300);
+  await setv("pf_idq", ids2.lesson); await click(`#smdReview [data-rv-act="pfid"]`);
+  ok(await until(`return !!document.getElementById("pf_title") && !!document.getElementById("pf_tx3");`, 15000), "a lesson's ID opens the lesson editor (its module is read from the lesson)");
+  await setv("pf_tx0", "Edited by ID."); await click(`#smdReview [data-rv-act="pfsave"]`); await until(`return !document.getElementById("pf_title");`, 6000);
+  const pl = await lastReq("POST");
+  ok(pl.b.kind === "lesson" && pl.b.id === "ana-spleen" && pl.b.module === "ana-spleen" && pl.b.fix.steps["0"].tx === "Edited by ID.", "saving an ID-opened lesson names the lesson and the module learned from it");
+  await click(`#smdReview [data-rv-act="kind:prep"]`); await sleep(300);
+  await setv("pf_idq", "QWITHDRAWN"); await ev(`PREP_IDS._pure.norm = (function (n) { return function (r) { return r === "QWITHDRAWN" ? { ok: true, id: "QWITHDRAWN" } : n(r); }; })(PREP_IDS._pure.norm); return 1;`);
+  await click(`#smdReview [data-rv-act="pfid"]`);
+  ok(await until(`return /withdrawn/i.test((document.getElementById("pf_idmsg")||{}).textContent||"");`, 6000), "a withdrawn question says so");
+
   // ---- the student side ----
   await ev(`window.__fixIx = { "ana-gametogenesis": 777 }; window.__fixMod = { q: { "ana-gametogenesis-q1": { exp: "STUDENT SEES THIS", o: ["A1", "B1", "C1"], a: 2, kp: "KP", ts: 777 } }, l: {} }; PREP.refreshFixes(); return 1;`);
   const stu = JSON.parse(await evA(`PREP_LOADER.load().then(function (P) { return P.loadItems("anatomy", "ana-gametogenesis"); }).then(function (items) { var it = items.filter(function (i) { return i.id === "ana-gametogenesis-q1"; })[0]; return JSON.stringify({ exp: it.exp, o: it.o, a: it.a, kp: it.kp, r: it.r || null, x: it.x || null, other: items.filter(function (i) { return i.id !== "ana-gametogenesis-q1"; })[0].exp }); })`) || "null");
