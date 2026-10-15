@@ -44,16 +44,6 @@ applies.
 | bio-lineweaver-burk.svg | Lineweaver-Burk double-reciprocal plot: competitive (same Vmax, higher Km) vs non-competitive (lower Vmax, same Km) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | bio-glycolysis-tca.svg | Cellular energy hub: glycolysis, pyruvate dehydrogenase, Krebs cycle, ~30-32 ATP yield | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | bio-purine-pathway.svg | Purine metabolism: HGPRT salvage vs Xanthine Oxidase catabolism to uric acid | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-trilaminar-disc.svg | Gastrulation and trilaminar germ disc derivatives: ectoderm, mesoderm, endoderm | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-epiploic-foramen.svg | Boundaries of epiploic foramen of Winslow (portal triad, IVC, caudate, duodenum) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-thyroid-relations.svg | Thyroid gland surgical bed: recurrent & superior laryngeal nerves, parathyroid glands | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-carotid-branches.svg | External carotid artery branches (8 classical branches) vs internal carotid | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-twinning-timing.svg | Monozygotic twinning cleavage timing: Di-Di (d0-3), Mono-Di (d4-8), Mono-Mono (d8-12), Conjoined (>d13) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| ana-allens-test.svg | Allen test: radial and ulnar arterial palmar arches collateral patency assessment | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| phy-acid-base-map.svg | Acid-base nomogram / Davenport map: pH vs [HCO3-], PCO2 isobars, primary & compensated states | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| phy-fluid-compartments.svg | 60-40-20 body fluid distribution: TBW (60%), ICF (40%), ECF (20% = 15% ISF + 5% plasma) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| phy-appetite-nuclei.svg | Hypothalamic feeding centers: lateral (hunger/orexigenic) vs ventromedial (satiety), leptin/ghrelin | StewardMD (original) | CC BY 4.0 (StewardMD original) |
-| phy-stretch-reflex.svg | Monosynaptic deep tendon reflex arc: muscle spindle, Ia afferent, alpha motor neuron, reciprocal Ia interneuron | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | pharma-nephron-diuretics.svg | Nephron transport segments and diuretic sites: PCT (CA inhibitors), TAL (NKCC2 loop), DCT (NCCT thiazide), CD (ENaC/aldosterone) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | pharma-raas-pathway.svg | Renin-Angiotensin-Aldosterone System cascade and inhibitor sites: Aliskiren, ACEi, ARB, Spironolactone | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | path-necrosis-patterns.svg | Six morphologic patterns of tissue necrosis: coagulative, liquefactive, caseous, fat, fibrinoid, gangrenous | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -71,6 +61,7 @@ applies.
 | ana-accessory-glands.svg | Accessory gland secretions | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-acini.svg | Serous and mucous acini | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-airway-epithelium.svg | Airway epithelium by level | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-allens-test.svg | Allen test: radial and ulnar arterial palmar arches collateral patency assessment | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-ankle-ligaments.svg | Ligaments of the ankle | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-arch-derivatives.svg | Pharyngeal arch derivatives | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-articular-layers.svg | Layers of articular cartilage | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -81,6 +72,7 @@ applies.
 | ana-brachial-plexus.svg | Brachial plexus | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-breast-lymph.svg | Lymphatic drainage of the breast | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-breast-sagittal.svg | Structure of the breast | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-carotid-branches.svg | External carotid artery branches (8 classical branches) vs internal carotid | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-cartilage-types.svg | Three types of cartilage | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-cavernous-sinus.svg | Cavernous sinus, coronal section | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-cerebellar-nuclei.svg | Deep cerebellar nuclei and their zones | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -98,6 +90,7 @@ applies.
 | ana-diaphragm-openings.svg | Openings of the diaphragm | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-duodenal-wall.svg | Wall of the duodenum | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-duodenum-parts.svg | Parts of the duodenum | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-epiploic-foramen.svg | Boundaries of epiploic foramen of Winslow (portal triad, IVC, caudate, duodenum) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-epithelia.svg | High-yield epithelia and where they sit | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-facial-course.svg | Course and branches of the facial nerve (CN VII) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-femoral-head-supply.svg | Blood supply of the femoral head | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -158,9 +151,12 @@ applies.
 | ana-thalamic-relays.svg | Thalamic nuclei as relays | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-thoracic-duct.svg | Course of the thoracic duct | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-thoracic-outlet.svg | Thoracic outlet and a cervical rib | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-thyroid-relations.svg | Thyroid gland surgical bed: recurrent & superior laryngeal nerves, parathyroid glands | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-tonsil-relations.svg | Palatine tonsil: boundaries and supply | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-trachea-section.svg | Trachea in cross-section | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-trendelenburg.svg | Trendelenburg test: why the pelvis drops | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-trilaminar-disc.svg | Gastrulation and trilaminar germ disc derivatives: ectoderm, mesoderm, endoderm | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ana-twinning-timing.svg | Monozygotic twinning cleavage timing: Di-Di (d0-3), Mono-Di (d4-8), Mono-Mono (d8-12), Conjoined (>d13) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-uterine-ligaments.svg | Ligaments that hold the uterus | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-venous-sinuses.svg | Dural venous sinuses: where the blood goes | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-vessel-walls.svg | Arteries by wall structure | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -168,9 +164,11 @@ applies.
 | ana-yolk-sac-fates.svg | Yolk sac: what it gives rise to | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-aa-gradient.svg | Alveolar gas equation and the A-a gradient | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-abo-table.svg | ABO blood groups | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-acid-base-map.svg | Acid-base nomogram / Davenport map: pH vs [HCO3-], PCO2 isobars, primary & compensated states | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-action-potential.svg | The neuronal action potential | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-adrenal-layers.svg | Adrenal gland: layers and hormones | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-altitude-illness.svg | Altitude illness | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-appetite-nuclei.svg | Hypothalamic feeding centers: lateral (hunger/orexigenic) vs ventromedial (satiety), leptin/ghrelin | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-autonomic-outflow.svg | Autonomic outflow | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-autonomic-receptors.svg | Autonomic receptors | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-autoregulation.svg | Autoregulation of organ blood flow | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -195,6 +193,7 @@ applies.
 | phy-fibre-types.svg | Nerve fibre types | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-fibrinolysis.svg | Fibrinolysis | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-filtration-barrier.svg | Glomerular filtration barrier | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-fluid-compartments.svg | 60-40-20 body fluid distribution: TBW (60%), ICF (40%), ECF (20% = 15% ISF + 5% plasma) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-follicle-stages.svg | Follicle to corpus luteum | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-frank-starling.svg | Frank-Starling relationship | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-gh-axis.svg | Growth hormone axis | StewardMD (original) | CC BY 4.0 (StewardMD original) |
@@ -240,6 +239,7 @@ applies.
 | phy-semen-parameters.svg | Semen analysis: lower reference limits | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-sensory-pathways.svg | Two somatosensory pathways | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-slow-waves.svg | Slow waves and spikes in gut smooth muscle | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| phy-stretch-reflex.svg | Monosynaptic deep tendon reflex arc: muscle spindle, Ia afferent, alpha motor neuron, reciprocal Ia interneuron | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-surfactant.svg | Why alveoli need surfactant | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-swallowing.svg | Swallowing in three phases | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | phy-tal-cell.svg | Thick ascending limb of the loop of Henle | StewardMD (original) | CC BY 4.0 (StewardMD original) |

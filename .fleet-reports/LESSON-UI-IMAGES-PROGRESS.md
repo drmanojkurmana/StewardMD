@@ -174,8 +174,6 @@
   biochemistry 63, microbiology 34 zero-image lessons remain; anatomy and
   physiology are complete (80/80, 49/49) and stay last/skipped.
 
-
-
 ## 2026-10-15: anatomy/physiology reuse (lead note 16:00)
 - `/private/tmp/claude-img-wt` no longer mounted, but branch `claude-img-1014`
   content is already in `lessonui-1013`: 105 `ana-*.svg` + 91 `phy-*.svg`,
