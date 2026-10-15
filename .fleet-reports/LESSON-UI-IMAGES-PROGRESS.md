@@ -296,7 +296,7 @@
   1261 zero of 1471 (pharmacology 60 zero / 12 with).
 - Next: microbiology (31 zero), biochemistry (63 zero), pathology (64 zero)
   highest-weight lessons first; anatomy/physiology already complete.
-- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge (batch 8: gate run 38698561591 green).
 
 ## Batch 8 (2026-10-15, branch lessonui-1013): obstetrics-gynaecology sextet
 
