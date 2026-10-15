@@ -315,10 +315,49 @@ body.dark .ps-oral-lang-title { color: #60a5fa; }
 .ps-file-input { display: none; }
 .ps-brand-logo-upload-wrap { display: flex; }
 
+.ps-kb-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 14px;
+}
+.ps-kb-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--ps-line, #cbd5e1);
+  border-radius: 8px;
+  background: var(--ps-card, #ffffff);
+  color: var(--ps-ink, #0f172a);
+  font: 500 13px/1.3 var(--sans, system-ui);
+  text-decoration: none;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+  box-sizing: border-box;
+}
+.ps-kb-link-btn .material-symbols-rounded {
+  font-size: 18px;
+  color: #42CDB5;
+}
+.ps-kb-link-btn:hover {
+  border-color: #42CDB5;
+  background: color-mix(in srgb, #42CDB5 6%, var(--ps-card, #ffffff));
+}
+.ps-kb-link-btn:focus-visible {
+  outline: 2px solid #42CDB5;
+  outline-offset: 2px;
+}
+.ps-kb-link-btn b {
+  font-weight: 600;
+  color: #42CDB5;
+}
+
 @media print {
   body.ps-open > *:not(.ps-overlay) { display: none !important; }
   .ps-overlay { position: static !important; display: block !important; background: #fff !important; --ps-card: #fff; --ps-ink: #000; --ps-muted: #333; --ps-line: #999; }
-  .ps-header, .ps-actionbar, .ps-sig-actions, .ps-vh, .ps-verify .ps-chk input, .ps-emr-bar, .ps-modal-backdrop, .ps-table-actions, .ps-dose-edit-btn, .ps-inst-editbtn, .ps-lang-picker, .ps-tox-actions, .ps-note-chips, .ps-drug-del-btn, .ps-tox-del-btn, .ps-note-footer { display: none !important; }
+  .ps-header, .ps-actionbar, .ps-sig-actions, .ps-vh, .ps-verify .ps-chk input, .ps-emr-bar, .ps-modal-backdrop, .ps-table-actions, .ps-dose-edit-btn, .ps-inst-editbtn, .ps-lang-picker, .ps-tox-actions, .ps-note-chips, .ps-drug-del-btn, .ps-tox-del-btn, .ps-note-footer, .ps-kb-links { display: none !important; }
   .ps-wrap { height: auto !important; }
   .ps-scroll { overflow: visible !important; padding: 0 !important; }
   .ps-sheet { border: none !important; box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; padding: 8mm 6mm !important; }
