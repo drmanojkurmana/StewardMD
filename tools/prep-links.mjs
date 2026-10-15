@@ -64,6 +64,10 @@ import { appConfig, subjectIndex } from "./prep-ids.mjs";
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
+let cancerMap = null;
+try {
+  cancerMap = require(path.join(ROOT, "cancer-protocols-map.js"));
+} catch (e) {}
 export const LINKS_VER = "v2";
 export const SHOW = 75;
 export const MAX = { kb: 2, dr: 2, pr: 1, ls: 2 };
@@ -357,6 +361,22 @@ export function promotable(it, l, ctx = {}) {
   const base = (l.v || "")[0];
   if (l.c > 50 && !(base === "k" && l.c < 70) && tagEvidenced(it, l, ctx)) return true;
   return false;
+}
+/* oncoEvKbId(links, it, modKbIds) -> kb id or null: the oncology-protocol gate.
+   Stricter than the Know-more article gate on purpose. Specific-tier evidence
+   (srcPack 'sp', exact/key and other above-the-bar tiers) always counts: the item
+   is verified about that cancer. Topic-tier ('kt') counts only when it is the
+   module's own mapped topic article, or the cancer is named in the stem or the
+   keyed answer (keyOnly bar): a wrong-option-only or explanation-only mention
+   (promoted to a kt chapter row for reading) must never pull chemotherapy
+   regimens onto the item (owner: no wrong links). */
+export function oncoEvKbId(links, it, modKbIds) {
+  const cands = (links || []).filter((l) => l && l.k === "kb" && l.c >= SHOW && l.v !== "lt" && (l.v !== "kt" || l.ev === 1));
+  if (!cands.length) return null;
+  const specific = cands.find((l) => l.v !== "kt");
+  if (specific) return specific.id;
+  const topic = cands.find((l) => (modKbIds || []).includes(l.id) || stemEvidenced(it, l, {}, true));
+  return topic ? topic.id : null;
 }
 /* srcPack provenance (it.srcPack): the source ids the content pipeline read when it generated the item's
    module batch ("kb-<slug>" for Knowledge Library articles and clinical protocols). The links builder used to
@@ -901,6 +921,18 @@ export function stampLinks(its, o = {}) {
       if (!L[k]) L[k] = [];
       if (!L[k].includes(l.id)) L[k].push(l.id);
     }
+    const modKbIds = ((((topics[it.t || mid] || {}).kb) || [])).map((e) => e[0]);
+    const evKbId = oncoEvKbId(links, it, modKbIds);
+    const evKb = evKbId ? links.find((l) => l.k === "kb" && l.id === evKbId && l.c >= SHOW) : null;
+    if (evKb && cancerMap) {
+      const ce = cancerMap.get(evKb.id);
+      if (ce && ce.protocols && ce.protocols.length) {
+        if (!L.protocol_ids) L.protocol_ids = [];
+        for (const p of ce.protocols) {
+          if (!L.protocol_ids.includes(p.id)) L.protocol_ids.push(p.id);
+        }
+      }
+    }
     if (!Object.keys(L).length) continue;
     const x = it.x && typeof it.x === "object" ? it.x : {};
     const old = x.links && typeof x.links === "object" ? x.links : {};
@@ -1129,9 +1161,31 @@ export function build({ cache, bank, confirmed = null, rematch = null, floor = n
     if (links.some((l) => l.v[0] === "s" && l.c < SHOW && l.c >= 60)) rep.candidates++;
     if (shown.length) { rep.linked++; bs.linked++; }
     for (const l of shown) { rep.links++; rep.byKind[l.k]++; rep.byVia[l.v] = (rep.byVia[l.v] || 0) + 1; if (l.v === "sp") rep.srcPack.links++; }
-    if (links.length) sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
-      links: { kb_ids: links.filter((l) => l.k === "kb" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), drug_ids: links.filter((l) => l.k === "dr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), protocol_ids: links.filter((l) => l.k === "pr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]), lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key), lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])), card_ids: cards[mid] ? [mid] : [] },
-      provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h" || l.v === "rm") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h" || l.v === "rm") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver } });
+    if (links.length) {
+      const modKbIds = (((topics[mid] || {}).kb) || []).map((e) => e[0]);
+      const evKbId = oncoEvKbId(links, it, modKbIds);
+      const evKb = evKbId ? links.find((l) => l.k === "kb" && l.id === evKbId && l.c >= SHOW) : null;
+      const ce = (evKb && cancerMap) ? cancerMap.get(evKb.id) : null;
+      const oncoProtoList = (ce && ce.protocols) ? ce.protocols.map((p) => [p.id, evKb.c, "cp"]) : [];
+
+      const pList = links.filter((l) => l.k === "pr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]);
+      const pSeen = new Set(pList.map((x) => x[0]));
+      for (const opl of oncoProtoList) {
+        if (!pSeen.has(opl[0])) pList.push(opl);
+      }
+
+      sidecar.push({ item_id: String(it.id), concept_id: shown[0] ? shown[0].k + ":" + shown[0].id : null, subject: sid, topic: mid,
+        links: {
+          kb_ids: links.filter((l) => l.k === "kb" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]),
+          drug_ids: links.filter((l) => l.k === "dr" && (l.v === "kt" || l.c >= ((l.v || "")[0] === "e" ? SPECIFIC_MIN_E : SPECIFIC_MIN))).map((l) => [l.id, l.c, l.v]),
+          protocol_ids: pList,
+          lesson_ids: (lessonsOf.get(mid) || []).map((l) => l.key),
+          lesson_links: links.filter((l) => l.k === "ls").map((l) => [l.id, l.c, l.v].concat(l.sec ? [l.sec] : [])),
+          card_ids: cards[mid] ? [mid] : []
+        },
+        provenance: { method: links.some((l) => l.v === "a") ? "human" : links.some((l) => l.v === "h" || l.v === "rm") ? "llm_mapped" : "exact_key", score: shown[0] ? shown[0].c / 100 : null, model: links.some((l) => l.v === "h" || l.v === "rm") ? "claude-haiku-5-5" : null, at: new Date().toISOString(), version: ver }
+      });
+    }
     if (!shown.length) continue;
     if (!byMod.has(mid)) byMod.set(mid, { sid, e: [] });
     byMod.get(mid).e.push([String(it.id), shown, it.pyq ? 1 : 0]);

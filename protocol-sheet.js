@@ -285,6 +285,22 @@
       "</button>"
     );
 
+    var kbLinkHtml = "";
+    try {
+      if (!isExport && G.SMD_ONCO_KB_MAP && typeof G.SMD_ONCO_KB_MAP.getReverse === "function") {
+        var revArticles = G.SMD_ONCO_KB_MAP.getReverse(pr.id) || [];
+        if (revArticles.length) {
+          kbLinkHtml = "<div class=\"ps-kb-links\">" +
+            revArticles.map(function (art) {
+              return "<button type=\"button\" class=\"ps-kb-link-btn\" data-ps-act=\"open-kb-article\" data-kb-id=\"" + esc(art.id) + "\">" +
+                ms("menu_book") + "<span>Read the KB article: <b>" + esc(art.title) + "</b></span>" +
+                "</button>";
+            }).join("") +
+            "</div>";
+        }
+      }
+    } catch (eRev) {}
+
     return "<div class=\"ps-inst\">" +
         "<div class=\"ps-inst-top\">" +
           "<div class=\"ps-inst-brand\">" +
@@ -304,6 +320,7 @@
       "</div>" +
       emrBar +
       banner +
+      kbLinkHtml +
       "<div class=\"ps-cards\">" +
         "<section class=\"ps-card ps-card-demog\"><div class=\"ps-card-h\">Patient demographics</div><div class=\"ps-card-grid ps-grid-2\">" +
           field("Case No / MRN", "caseNo", p.caseNo, "text", "MRN / Case #", isExport) +
@@ -1174,6 +1191,13 @@
       if (act === "wardsync-fetch") { fetchWardSync(); return; }
       if (act === "print") return doPrint();
       if (act === "assign") return doAssign();
+      if (act === "open-kb-article") {
+        var kbId = t.getAttribute("data-kb-id");
+        if (kbId && G.DX && typeof G.DX.openRef === "function") {
+          G.DX.openRef(kbId, { from: "protocol-sheet" });
+        }
+        return;
+      }
       if (act === "sig-clear") { st.sig = null; var c = D.getElementById("psSig"); if (c) c.getContext("2d").clearRect(0, 0, c.width, c.height); return; }
 
       // Branding modal

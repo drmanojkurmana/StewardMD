@@ -188,7 +188,6 @@
 - Local headless screenshots blocked by sandbox (Chrome renders nothing,
   server listen EPERM); visual QA deferred to the `lessonui-browser` CI gate
   (390px dark/light) before merge.
-
 ## 2026-10-15 batch 4: pharma/path/micro figure backfill (lessonui-1013)
 - **8 original SVGs** (`pharma-prodrug`, `path-fever`, `micro-type4`,
   `micro-cold-sterilisation`, `path-shock-organs`, `path-nephritic-nephrotic`,
