@@ -210,3 +210,17 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
   title/desc, key strings); 8/8 `checkLesson` clean; diagram checker 0
   problems; audit lists reconciled (1274 lines = 1274 zero-image lessons).
 - Inventory now 192 with images, 1274 zero of 1466.
+
+## Addendum 2026-10-15 (Batch 5: ECG/potassium, QT/LVH, ABG, OP aftermath, femoral canal, thyroid complications, transfusion drill, dehydration triage)
+
+- **8 original SVGs into 7 lessons** (all null-vis steps; `med-ecg` took two
+  figures). Figure facts drawn from the step text; standard adjuncts
+  (sine-wave management, digoxin caution, capsular ligation, voice checks,
+  NG/zinc in plan B, lung watch in plan C) are textbook-stable.
+- **Contrast follow-through**: geometric amber-on-white scan across the new
+  8 plus batch-4 and older bank figures; all small-text hits recolored to
+  ink (computed pairs now all 4.5:1 or better). Pre-existing `#EAF3F0`
+  fills in `epi-curve` left untouched.
+- `med-pesticides` carries a pre-existing step-count gate failure (3 steps
+  on the clean tree too); wiring adds no new failure.
+- Inventory now 199 with images, 1267 zero of 1466.

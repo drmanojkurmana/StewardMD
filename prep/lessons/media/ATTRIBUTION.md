@@ -66,6 +66,14 @@ applies.
 | path-nephritic-nephrotic.svg | Nephritic (inflamed, haematuria, hypertension, falling filtration) vs nephrotic (leaky, massive proteinuria, oedema, thrombosis risk) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | pharma-rifampicin.svg | Rifampicin: harmless orange secretions, enzyme inducer avoiding protease inhibitors, hepatic clearance, MDR-TB is INH plus RIF resistance | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | micro-zn-stain.svg | Ziehl-Neelsen sequence: carbol fuchsin, acid-alcohol resisted by mycolic acid wall, red bacilli on blue; Gram stain poor | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-ecg-potassium.svg | Potassium ECG: hyperkalaemia peaked T to flat P to wide QRS to sine wave; hypokalaemia flat T with prominent U | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-ecg-qt-lvh.svg | QT and voltage: hypoCa and hypoK lengthen QT toward torsades, hyperCa shortens; LVH SV1+RV5 over 35 mm; RVH R/S over 1 in V1 | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-abg-steps.svg | Gas exchange flow: helium dilution vs plethysmography, alveolar gas equation, A-a gradient wide means lung defect; PaO2 about 95 mmHg | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-op-aftermath.svg | OP poisoning aftermath: no succinylcholine, intermediate syndrome days later, fat-store relapse; ventilate | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-femoral-canal.svg | Femoral canal walls: anterior inguinal, posterior Cooper, medial lacunar Gimbernat, lateral femoral vein; 40 percent strangulation risk | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-thyroid-complications.svg | Thyroidectomy: hypoparathyroidism with Trousseau and Chvostek; recurrent laryngeal voice loss; external superior laryngeal high-pitch loss | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-transfusion-reaction.svg | Transfusion reaction drill: stop, saline, recheck, call, return; never restart the unit | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| ped-dehydration.svg | Childhood dehydration triage: plans A, B and C by thirst, eyes, pinch, urine, pulse and consciousness | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-abduction-phases.svg | Phases of shoulder abduction | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-accessory-glands.svg | Accessory gland secretions | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-acini.svg | Serous and mucous acini | StewardMD (original) | CC BY 4.0 (StewardMD original) |

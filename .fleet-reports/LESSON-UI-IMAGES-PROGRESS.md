@@ -230,3 +230,23 @@
   `test/prep-lessons.test.mjs` 23/23. Audit now 193 with images, 1273 zero.
 - **Attribution**: 1 row appended (StewardMD original CC BY 4.0);
   still zero third-party images. No figure needed Wikimedia fallback.
+## 2026-10-15 batch 5: medicine/surgery/paeds backfill (lessonui-1015)
+- **8 original SVGs** (`med-ecg-potassium`, `med-ecg-qt-lvh`, `med-abg-steps`,
+  `med-op-aftermath`, `sur-femoral-canal`, `sur-thyroid-complications`,
+  `sur-transfusion-reaction`, `ped-dehydration`) wired into 7 lessons
+  (`med-ecg` s5+s3, `med-pft-abg` s1, `med-pesticides` s2, `sur-hernia` s1,
+  `sur-thyroid` s3, `sur-shock-transfusion` s2, `ped-diarrhoea` s0), all
+  null-visual steps. Same bank format (white stage, 800x520, `ar` 1.5385,
+  `<title>`/`<desc>`, alt + caption, palette subset, ASCII, 11px floor).
+- **Contrast audit (WCAG 2.2 AA, computed ratios)**: white on ink 18.83,
+  on green 6.43, on muted 7.53, ink on amber 5.17 all pass; amber on white
+  3.64 fails, so every amber-on-white small text found by geometric scan
+  (text point inside no non-white rect) was recolored to ink: the batch-5
+  `med-abg-steps` "vs", 5 batch-4 dashed-box headings, plus 5 older
+  bank labels (`stats-roc`, `stats-2x2` x2, `stats-normal`, `epi-curve`).
+  Amber remains for strokes, borders and on-dark accents only.
+- **Gates**: 7/8 wired lessons `checkLesson` clean; `med-pesticides`
+  fails only the pre-existing 3-step count (identical on clean tree, step
+  count untouched by this change). Diagram checker 0 problems.
+- Audit now 199 with images, 1267 zero of 1466 (lists reconciled).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
