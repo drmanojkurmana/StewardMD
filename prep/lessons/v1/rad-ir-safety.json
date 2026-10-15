@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "module": "rad-ir-safety",
+  "subject": "radiology",
+  "title": "IR safety: contrast radiation anticoagulation consent",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Contrast kidneys need water, not fear. **Contrast-associated kidney injury** threatens patients with chronic kidney disease, dehydration, heart failure and multiple myeloma. **Prehydration** with isotonic fluids before and after high-risk procedures is the core prevention under **NICE and ESUR guidance**. **Nephrotoxic drugs** including NSAIDs pause where safe. **Post-procedure creatinine** checks catch injury early. **Metformin** continues unless acute kidney injury develops or is at high risk, when it pauses until recovery.",
+      "say": "Contrast kidneys need water. Kidney injury threatens chronic disease, dehydration and failure. Prehydration before and after high-risk procedures is the core prevention. Nephrotoxins pause where safe, creatinine is rechecked after, and metformin continues unless kidney injury develops.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk",
+          "Action"
+        ],
+        "rows": [
+          [
+            "CKD and dehydration",
+            "Prehydrate"
+          ],
+          [
+            "NSAIDs",
+            "Pause if safe"
+          ],
+          [
+            "Post procedure",
+            "Recheck creatinine"
+          ],
+          [
+            "Metformin",
+            "Continue unless AKI"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gadolinium is safer but not innocent. **Nephrogenic systemic fibrosis** follows gadolinium in severe kidney failure, so agents are avoided or minimised when **eGFR falls below 30** under **ACR guidance**. **Pregnancy** allows gadolinium only where benefits clearly outweigh risks, while **breastfeeding** interruptions are no longer routinely required. **Allergy-style reactions** to gadolinium are rarer than with iodinated contrast but need the same resuscitation readiness. **Barium** stays outside vessels, and aspiration of thin barium threatens lungs.",
+      "say": "Gadolinium is safer but not innocent. Fibrosis follows gadolinium in severe failure, so use minimises below eGFR 30. Pregnancy allows it only with clear benefit, breastfeeding pauses are unneeded, allergy readiness stays mandatory, and barium never enters vessels.",
+      "vis": null
+    },
+    {
+      "tx": "Radiation protection starts with justification. **ALARA** keeps every dose as low as reasonably achievable through collimation, pulsed fluoroscopy and last-image hold. **Deterministic effects** such as skin injury have thresholds, while **stochastic effects** such as cancer carry no safe threshold. **Pregnancy questioning** precedes every fluoroscopy case, with foetal risk negligible below about **50 mGy** under **ICRP and ACR guidance**. **Staff protection** uses lead aprons, thyroid shields, glasses and dosimeters with distance discipline.",
+      "say": "Protection starts with justification. ALARA minimises dose through collimation and pulsed screening. Skin injuries have thresholds while cancer risk has none. Pregnancy is asked about every time, foetal risk stays negligible below about 50 mGy, and staff wear lead with dosimeters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Justify exposure"
+          },
+          {
+            "id": "b",
+            "label": "Ask pregnancy status"
+          },
+          {
+            "id": "c",
+            "label": "Minimise with ALARA"
+          },
+          {
+            "id": "d",
+            "label": "Record dose"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Blood and consent decide legality. **SIR periprocedural guidance** stratifies procedures by bleeding risk, with moderate and high-risk work needing **platelets above 50** and **INR below 1.5 to 1.8** corrected beforehand. **Direct oral anticoagulants** pause per renal function and procedure risk rather than a single rule. **Montgomery consent** discloses what a reasonable patient would want to know, including groin, contrast, radiation and alternative options. The **WHO checklist** with team briefs and sign-in closes the safety loop.",
+      "say": "Blood and consent decide legality. SIR guidance stratifies bleeding risk, with moderate and high-risk work needing platelets above 50 and INR below 1.5 to 1.8. Oral thinners pause by kidney and risk, Montgomery consent discloses what reasonable patients want to know, and the WHO checklist closes the loop.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Rule",
+          "Standard"
+        ],
+        "rows": [
+          [
+            "Platelets mod-high risk",
+            "Above 50"
+          ],
+          [
+            "INR mod-high risk",
+            "Below 1.5 to 1.8"
+          ],
+          [
+            "Consent test",
+            "Montgomery"
+          ],
+          [
+            "Team safety",
+            "WHO checklist"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir-111",
+    "maikir-112",
+    "maikir-113",
+    "maikir-114",
+    "maikir-115",
+    "maikir-116",
+    "maikir-117",
+    "maikir-118",
+    "maikir-119",
+    "maikir-120"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "v": 1,
+  "module": "rad-ir-pain-spine",
+  "subject": "radiology",
+  "title": "Pain and spine interventions",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Collapsed vertebrae can be cemented back to function. **Vertebroplasty** injects bone cement directly into the fractured body, while **kyphoplasty** first inflates a balloon to restore height before cementing. **Osteoporotic fractures** with severe ongoing pain despite conservative care are the core indication under **NICE guidance**. **Malignant fractures** from myeloma or metastases respond when the posterior wall is intact. **Burst fractures** with retropulsion and neurology need surgery, not cement.",
+      "say": "Collapsed vertebrae can be cemented. Vertebroplasty injects cement directly, while kyphoplasty restores height with a balloon first. Severe painful osteoporotic fractures are the core indication. Malignant fractures respond with intact posterior walls, while burst fractures with neurology need surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fracture",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Osteoporotic painful",
+            "Augment"
+          ],
+          [
+            "Malignant intact wall",
+            "Augment"
+          ],
+          [
+            "Burst with neurology",
+            "Surgery"
+          ],
+          [
+            "Mild improving pain",
+            "Conservative"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cement demands respect for leaks. **Cement leakage** into discs or veins is usually silent but paravertebral leak can injure nerves. **Pulmonary cement embolism** follows venous leak and needs monitoring. **Adjacent fractures** cluster after augmentation because stiffened bone loads neighbours. **Infection** is rare with sterile technique. **Height restoration** favours kyphoplasty, while pain relief is similar between the two techniques.",
+      "say": "Cement demands respect. Leaks are usually silent but nerve injury and lung embolism occur. Neighbouring bones fracture more after stiffening. Infection stays rare with sterile technique, height favours balloons, and pain relief matches between techniques.",
+      "vis": null
+    },
+    {
+      "tx": "Pancreatic cancer pain yields to neurolysis. **Celiac plexus neurolysis** with alcohol or phenol suits **upper abdominal cancer pain** refractory to opioids, classically pancreatic. **Endoscopic ultrasound guidance** reaches the plexus without crossing tumour-laden planes. **Diarrhoea and hypotension** follow sympathectomy and need fluids and warning. **Opioid doses** fall after successful blocks, which matters for bowels and minds. **Repeat blocks** fade in value, so timing near peak need is best.",
+      "say": "Pancreatic pain yields to neurolysis. Celiac plexus destruction suits upper abdominal cancer pain failing opioids. Endoscopic ultrasound reaches the plexus cleanly. Diarrhoea and hypotension follow and need warning, opioid doses fall afterwards, and timing near peak need works best.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm cancer pain"
+          },
+          {
+            "id": "b",
+            "label": "Guide to plexus"
+          },
+          {
+            "id": "c",
+            "label": "Inject neurolytic"
+          },
+          {
+            "id": "d",
+            "label": "Cut opioid dose"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Backs and legs have targeted injections. **Facet joint injections** with steroid and local anaesthetic suit **axial back pain** worse on extension and rotation. **Medial branch blocks** diagnose facet pain before **radiofrequency denervation** burns the nerve. **Epidural steroid injections** suit **radicular leg pain** from disc or stenosis, with transforaminal routes reaching the exiting root. **Red flags** with neurology, saddle numbness or retention need urgent surgery, never injection.",
+      "say": "Backs and legs have targeted injections. Facet shots suit axial pain worse on twisting. Medial branch blocks diagnose before denervation burns the nerve. Epidurals suit leg pain from discs, and red flags with numbness or retention need urgent surgery instead.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pain",
+          "Shot"
+        ],
+        "rows": [
+          [
+            "Axial extension pain",
+            "Facet injection"
+          ],
+          [
+            "Diagnose facet",
+            "Medial branch"
+          ],
+          [
+            "Radicular leg pain",
+            "Epidural steroid"
+          ],
+          [
+            "Saddle numbness",
+            "Urgent surgery"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir-101",
+    "maikir-102",
+    "maikir-103",
+    "maikir-104",
+    "maikir-105",
+    "maikir-106",
+    "maikir-107",
+    "maikir-108",
+    "maikir-109",
+    "maikir-110"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-wave2",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 10
+  }
+}
