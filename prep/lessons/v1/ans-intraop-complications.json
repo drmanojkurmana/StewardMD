@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ans-intraop-complications",
-  "subject": "anaesthesia",
-  "title": "Intraoperative complications: hypotension to malignant hyperthermia",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Circulation** (**hypotension** vasodilation hypovolaemia bleeding, **hypertension** pain light awareness, **arrhythmia** electrolytes ischaemia QT, **ischaemia** ST troponin demand, **fluids** balanced bolus dynamic, **pressors** metaraminol noradrenaline, **TEE** wall volumes air, **transfuse** triggers ratios) with **monitors** (**arterial** beat pressures, **CVP** filling trends) guides; **calcium** (citrate low) corrects. Pressures swing.",
-      "say": "Hypotensions hypertensions arrhythmias ischaemias is circulation: fluids fill pressors squeeze TEEs peer transfuses trigger arterials trace CVPs trend calciums correct bypasses wean. Hearts labour.",
-      "vis": null
-    },
-    {
-      "tx": "**Allergy** (**latex** gloves catheters cross-fruit, **chlorhexidine** coated lines gels, **atracurium** histamine wheeze, **suxamethonium** anaphylaxis bradycardia, **antibiotics** teicoplanin timing, **tryptase** timed paired samples, **treat** adrenaline fluids steroids, **refer** allergy testing labels) with **watches** (**bronchospasm** pressures wheeze, **rash** draped hidden) detects; **latex-free** (carts lists) prepares. Skins flush.",
-      "say": "Latexes chlorhexidines atracuriums suxes is allergy: antibiotics time tryptases peak treats flood refers label bronchospasms squeeze rashes hide latex-frees ready arrests avoid. Immunities flare.",
-      "vis": null
-    },
-    {
-      "tx": "**Hyperthermia** (**MH** ryanodine masseter CO2 rigidity, **triggers** volatiles suxamethonium, **dantrolene** mixed venous cooling, **thyroid** storm beta esmolol, **phaeo** labile catecholamine, **sepsis** intraop rigors cultures, **transfusion** febrile rigors checks, **cool** lavage bladder) with **carts** (**dantrolene** accessible mixed, **bicarbonate** acidosis treats) rescues; **genetics** (family screens) counsels. Temperatures soar.",
-      "say": "MHs triggers dantrolenes thyroids is hyperthermia: phaeos surge sepses brew transfusions chill cools lavage carts roll genetics screen families test volatiles stop suxes avoid. Bodies burn.",
-      "vis": null
-    },
-    {
-      "tx": "**Awareness** (**BIS** depth 40-60 titrates, **paralysis** isolated forearm checks, **risk** TIVA obstetric trauma, **consent** explicit recall discusses, **support** psychology referrals, **prevent** brain monitors alarms, **report** NAP5 learning, **follow** Brice interviews) with **traps** (**sux** awareness pain, **sedation** ICU gaps, **handover** info losses) closes; **records** (doses times) documents. Minds wake.",
-      "say": "BISs paralyses risks consents is awareness: supports counsel prevents monitor reports file traps gape suxes ache sedations drift handovers lose records log reviews audit wishes respect. Memories form.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ane-121",
-    "bk2-ane-122",
-    "bk2-ane-123",
-    "bk2-ane-124",
-    "bk2-ane-125",
-    "bk2-ane-126",
-    "bk2-ane-127",
-    "bk2-ane-128",
-    "bk2-ane-129",
-    "bk2-ane-130"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ana2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ans-intraop-complications",
+ "subject": "anaesthesia",
+ "title": "Intraoperative complications: hypotension to malignant hyperthermia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Circulation** (**hypotension** vasodilation hypovolaemia bleeding, **hypertension** pain light awareness, **arrhythmia** electrolytes ischaemia QT, **ischaemia** ST troponin demand, **fluids** balanced bolus dynamic, **pressors** metaraminol noradrenaline, **TEE** wall volumes air, **transfuse** triggers ratios) with **monitors** (**arterial** beat pressures, **CVP** filling trends) guides; **calcium** (citrate low) corrects. Pressures swing.",
+   "say": "Hypotensions hypertensions arrhythmias ischaemias is circulation: fluids fill pressors squeeze TEEs peer transfuses trigger arterials trace CVPs trend calciums correct bypasses wean. Hearts labour.",
+   "vis": null
+  },
+  {
+   "tx": "**Allergy** (**latex** gloves catheters cross-fruit, **chlorhexidine** coated lines gels, **atracurium** histamine wheeze, **suxamethonium** anaphylaxis bradycardia, **antibiotics** teicoplanin timing, **tryptase** timed paired samples, **treat** adrenaline fluids steroids, **refer** allergy testing labels) with **watches** (**bronchospasm** pressures wheeze, **rash** draped hidden) detects; **latex-free** (carts lists) prepares. Skins flush.",
+   "say": "Latexes chlorhexidines atracuriums suxes is allergy: antibiotics time tryptases peak treats flood refers label bronchospasms squeeze rashes hide latex-frees ready arrests avoid. Immunities flare.",
+   "vis": null
+  },
+  {
+   "tx": "**Hyperthermia** (**MH** ryanodine masseter CO2 rigidity, **triggers** volatiles suxamethonium, **dantrolene** mixed venous cooling, **thyroid** storm beta esmolol, **phaeo** labile catecholamine, **sepsis** intraop rigors cultures, **transfusion** febrile rigors checks, **cool** lavage bladder) with **carts** (**dantrolene** accessible mixed, **bicarbonate** acidosis treats) rescues; **genetics** (family screens) counsels. Temperatures soar.",
+   "say": "MHs triggers dantrolenes thyroids is hyperthermia: phaeos surge sepses brew transfusions chill cools lavage carts roll genetics screen families test volatiles stop suxes avoid. Bodies burn.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ans-intraop-complications-fig1.webp",
+    "alt": "Clinical signs of Malignant Hyperthermia (CO2, rigidity, masseter) and treatment (dantrolene, cooling).",
+    "caption": "Malignant Hyperthermia: CO2, rigidity, dantrolene, cooling",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Awareness** (**BIS** depth 40-60 titrates, **paralysis** isolated forearm checks, **risk** TIVA obstetric trauma, **consent** explicit recall discusses, **support** psychology referrals, **prevent** brain monitors alarms, **report** NAP5 learning, **follow** Brice interviews) with **traps** (**sux** awareness pain, **sedation** ICU gaps, **handover** info losses) closes; **records** (doses times) documents. Minds wake.",
+   "say": "BISs paralyses risks consents is awareness: supports counsel prevents monitor reports file traps gape suxes ache sedations drift handovers lose records log reviews audit wishes respect. Memories form.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ane-121",
+  "bk2-ane-122",
+  "bk2-ane-123",
+  "bk2-ane-124",
+  "bk2-ane-125",
+  "bk2-ane-126",
+  "bk2-ane-127",
+  "bk2-ane-128",
+  "bk2-ane-129",
+  "bk2-ane-130"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ana2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
