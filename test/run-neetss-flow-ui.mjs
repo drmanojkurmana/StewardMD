@@ -75,10 +75,16 @@ const page = await ctx.newPage();
 const errors = [], reqs = [];
 page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && (e.stack || e.message)) || ""))) errors.push(String(e.message || e)); });
 page.on("request", (r) => reqs.push(r.url()));
-page.on("response", (r) => { const u = r.url(); if (u.includes("/nsfix/")) console.log("DIAG resp " + r.status() + " " + u.slice(u.indexOf("/nsfix/"), u.indexOf("/nsfix/") + 60)); });
-page.on("requestfailed", (r) => console.log("DIAG reqfail " + r.url().slice(-70) + " " + ((r.failure() || {}).errorText || "")));
-await page.route(/^https:\/\/neetss\.test\/nsfix\//, serveFix);
-await page.route(/^https:\/\/neetss\.test\//, serveFile);
+const netLog = [];
+page.on("response", (r) => { const u = r.url(); if (u.includes("/nsfix/")) netLog.push("resp " + r.status() + " " + u.slice(u.indexOf("/nsfix/"), u.indexOf("/nsfix/") + 60)); });
+page.on("requestfailed", (r) => netLog.push("reqfail " + r.url().slice(-70) + " " + ((r.failure() || {}).errorText || "")));
+// One route: the fixture wins on /nsfix/*, everything else falls to the file server.
+// (Two overlapping page.route calls depend on the runner's match order, which broke once already.)
+await page.route(/^https:\/\/neetss\.test\//, (route) => {
+  const u = new URL(route.request().url());
+  if (u.pathname === FIX.slice(0, -1) || u.pathname.startsWith(FIX)) return serveFix(route);
+  return serveFile(route);
+});
 await page.addInitScript(`window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_OVERLAYS={};
   window.confirm=function(){return true;}; try{localStorage.setItem("smd_prep","1");if(!sessionStorage.getItem("nsfix-boot")){sessionStorage.setItem("nsfix-boot","1");["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){localStorage.removeItem(k);});}}catch(e){}`);
 await page.goto(BASE);
@@ -97,7 +103,7 @@ try {
   // ---- first-time flow: exam -> Step 1 -> Step 2, each on its own page
   await ev(() => PREP.open());
   ok(await until(() => !!document.querySelector("#smdPrep .pl-q")), "first open shows onboarding");
-  console.log("DIAG smdPrep: " + await ev(() => { const r = document.querySelector("#smdPrep"); return (r ? r.textContent : "(no #smdPrep)").replace(/\s+/g, " ").trim().slice(0, 300); }));
+  if (!(await ev(() => !!document.querySelector("#smdPrep .pl-q")))) console.log("DIAG smdPrep: " + await ev(() => { const r = document.querySelector("#smdPrep"); return (r ? r.textContent : "(no #smdPrep)").replace(/\s+/g, " ").trim().slice(0, 300); }));
   ok((await txt("#smdPrep .pl-q") || "").includes("Which exam"), "exam step first");
   await tap('#smdPrep [data-act=p-f-exam][data-v="neet-ss"]');
   ok(await until(() => /who you are/.test(document.querySelector("#smdPrep .pl-ob").textContent)), "NEET-SS names what is next, no long group scroll");
@@ -193,5 +199,6 @@ try {
   fails++;
 }
 await browser.close();
+if (fails) netLog.slice(-12).forEach((l) => console.log("DIAG " + l));
 console.log(fails ? "RESULT FAIL" : "RESULT PASS");
 process.exit(fails ? 1 : 0);
