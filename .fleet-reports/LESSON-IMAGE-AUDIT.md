@@ -298,12 +298,11 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### surgery (67/71 imageless)
+### surgery (62/71 imageless)
 
 - `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
 - `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
 - `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
-- `sur-gallbladder`: Biliary surgery: acute cholecystitis, critical view of safety and bile duct injuries
 - `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
 - `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
 - `sur-mixed`: Mixed practice: surgery rapid review
@@ -316,7 +315,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
 - `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
 - `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
-- `sur-burns`: Burn resuscitation, inhalation injury, escharotomy indications, and topical wound care
 - `sur-head-injury`: Traumatic brain injury, intracranial hematomas, intracranial pressure monitoring, and herniation
 - `sur-chest-trauma`: Thoracic trauma: tension pneumothorax, massive hemothorax, cardiac tamponade, and flail chest
 - `sur-oral`: Oral cavity cancer, mucosal premalignant lesions, TNM staging, and surgical resection margins
@@ -330,7 +328,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-pancreas`: Pancreatic disease: acute pancreatitis, necrotizing step-up approach, and Whipple resection
 - `sur-spleen`: Splenic trauma, non-operative management, surgical splenectomy, and overwhelming post-splenectomy infection
 - `sur-obstruction`: Intestinal obstruction: small bowel strangulation, adhesive bands, and colonic volvulus
-- `sur-appendix`: Acute appendicitis: Alvarado scoring, appendiceal neoplasms, and laparoscopic appendectomy
 - `sur-colorectal-cancer`: Colorectal cancer: staging, total mesorectal excision, genetic syndromes, and multimodality therapy
 - `sur-anorectal`: Anorectal disorders: hemorrhoids, anal fissure, fistula-in-ano, and Goodsall rule
 - `sur-peritoneum`: Acute peritonitis, damage control laparotomy, temporary abdominal closure, and abdominal compartment syndrome
@@ -340,7 +337,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-prostate`: Benign prostatic hyperplasia, prostatic adenocarcinoma, Gleason grading, and radical prostatectomy
 - `sur-testis`: Testicular germ cell tumors, serum markers, radical inguinal orchiectomy, and retroperitoneal dissection
 - `sur-arterial`: Peripheral arterial disease, Fontaine stages, acute limb ischemia, and revascularization
-- `sur-aneurysm`: Abdominal aortic aneurysm, Laplace law, endoleak types, and carotid endarterectomy
 - `sur-venous`: Chronic venous disease, CEAP classification, varicose veins, and endovenous ablation
 - `sur-lymphatic`: Lymphedema staging, lymphoscintigraphy, complete decongestive therapy, and surgical restoration
 - `sur-thoracic`: Thoracic oncology, anatomic lobectomy, VATS resection, and pleural empyema
@@ -353,7 +349,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-transplant`: Organ transplantation, allorecognition, rejection mechanisms, and renal allografting
 - `sur-uro-congenital`: Congenital urinary tract anomalies, ureteropelvic obstruction, duplex ureter, and pyeloplasty
 - `sur-urethra-penis`: Urethral stricture disease, urethroplasty techniques, and penile carcinoma
-- `sur-atls`: Advanced Trauma Life Support, primary survey, definitive airway, and lethal triad
 - `spl-reconstructive`: Reconstructive ladder, grafts and free flaps
 - `spl-burns-hand`: Burns resuscitation, excision-grafting and hand surgery
 - `spl-craniofacial-aesthetic`: Craniofacial, cleft and aesthetic surgery
