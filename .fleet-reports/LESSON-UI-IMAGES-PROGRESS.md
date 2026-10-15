@@ -296,4 +296,28 @@
   1261 zero of 1471 (pharmacology 60 zero / 12 with).
 - Next: microbiology (31 zero), biochemistry (63 zero), pathology (64 zero)
   highest-weight lessons first; anatomy/physiology already complete.
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge (batch 8: gate run 38698561591 green).
+
+## Batch 8 (2026-10-15, branch lessonui-1013): obstetrics-gynaecology sextet
+
+- **6 original SVGs** (`obg-labour-curve`, `obg-bishop`, `obg-htn-classes`,
+  `obg-mgso4`, `obg-contra-fail`, `obg-decelerations`) wired into 4 null-visual
+  lessons (`obg-normal-labour` s1+s3, `obg-hypertensive-disorders` s0+s2,
+  `obg-contraception` s1, `obg-fetal-growth-surveillance` s2). Same bank format
+  (white stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: independent parse-and-assert over the 6 files (viewBox,
+  title/desc/role, palette subset, min font 10.5, per-figure key strings plus
+  geometry: alert 1.0, nullip 1.2, parous 1.5 cm/h line slopes with the +4 h
+  action line; contra bar widths 8/20/176/353/431/560 px for 0.1/<1/9/18/22/85
+  against a 0-25 axis). Small amber-on-light text (3.64:1) recoloured to ink
+  or block-red after a contrast computation; all remaining small text is 6.4:1
+  or better, graphics strokes 3.6:1.
+- **Attribution**: 6 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 214 with images,
+  1257 zero of 1471 (obstetrics-gynaecology 46 zero / 4 with).
+- Next: ent (37 zero), anaesthesia (34 zero), orthopaedics (33 zero),
+  ophthalmology (30 zero), psychiatry (28 zero), then micro/biochem/pathology
+  highest-weight remainders; anatomy/physiology already complete.
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.

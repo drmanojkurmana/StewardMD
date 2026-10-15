@@ -1,6 +1,8 @@
 # Lesson image audit
 
-Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1261 lessons (85.7%) have zero images; 210 have at least one.**
+Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1257 lessons (85.5%) have zero images; 214 have at least one.**
+
+Batch 8 (2026-10-15, branch lessonui-1013): 4 more lessons wired (obstetrics-gynaecology +4: obg-normal-labour x2 figs, obg-hypertensive-disorders x2 figs, obg-contraception, obg-fetal-growth-surveillance; 6 original SVGs); was 1261 zero / 210 with.
 
 Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
 
@@ -24,7 +26,7 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 | biochemistry | 69 | 63 | 6 |
 | paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
-| obstetrics-gynaecology | 50 | 50 | 0 |
+| obstetrics-gynaecology | 50 | 46 | 4 |
 | physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
 | microbiology | 40 | 31 | 9 |
@@ -568,7 +570,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `cm-waste-disposal`: Solid waste, excreta and sewage disposal
 - `cm-water`: Water supply and purification: essentials for NEET-PG
 
-### obstetrics-gynaecology (50/50 imageless)
+### obstetrics-gynaecology (46/50 imageless)
 
 - `obg-abortion`: Miscarriage and medical termination of pregnancy: key classifications, causes and legal limits
 - `obg-cervical-cancer`: Premalignant and malignant lesions of the cervix
@@ -579,7 +581,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-maternal-physiology`: Maternal physiological changes in pregnancy
 - `obg-mixed`: Obstetrics and Gynaecology mixed rapid review
 - `obg-multiple-pregnancy`: Multiple pregnancy: zygosity, chorionicity and key complications
-- `obg-normal-labour`: Normal labour: stages, partograph and third stage
 - `obg-other-medical`: Other medical disorders in pregnancy: key high-yield points
 - `obg-pelvis-fetal-skull`: Obstetric pelvis and fetal skull
 - `obg-placenta-fetus`: Placenta, fetal development and fetal circulation
@@ -600,9 +601,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-diabetes-pregnancy`: Gestational diabetes mellitus: diagnostic criteria, glycemic targets and maternal thyroid dysfunction
 - `obg-rh-isoimmunisation`: Rh isoimmunization: pathogenesis, MCA Doppler velocity and intrauterine transfusion
 - `obg-abnormal-labour`: Fetal malpresentations: breech types, external cephalic version and assisted delivery maneuvers
-- `obg-fetal-growth-surveillance`: Cardiotocography: baseline heart rate, variability, deceleration patterns and FIGO classification
 - `obg-ectopic`: Ectopic pregnancy: diagnosis and methotrexate versus surgery
-- `obg-hypertensive-disorders`: Hypertensive disorders: preeclampsia, eclampsia and HELLP
 - `obg-pph`: Postpartum haemorrhage: atony, trauma, tissue and thrombin
 - `obg-preterm-prom-postterm`: Preterm labour, PROM and post-term: steroids, magnesium and induction
 - `obg-operative-obstetrics`: Operative obstetrics: forceps, vacuum and caesarean technique
@@ -617,7 +616,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `obg-amenorrhoea`: Amenorrhoea: primary, secondary and Turner, MRKH, Asherman
 - `obg-vaginitis-sti`: Vaginal discharge and STIs: clue cells, froth, ulcers and warts
 - `obg-vulval-vaginal`: Vulval and vaginal disorders: lichen, VIN, VaIN and cancers
-- `obg-contraception`: Contraception: pills, IUCD, injectables, implants and sterilisation
 - `gyn-cervix-endometrium`: SS gyn-oncology: cervical and endometrial cancer staging and therapy
 - `gyn-ovary-vulva-gtn`: SS gyn-oncology: ovarian, vulval and GTN staging and therapy
 
