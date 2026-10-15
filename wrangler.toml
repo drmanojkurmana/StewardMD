@@ -6,9 +6,9 @@ name = "stewardmd"
 pages_build_output_dir = ""
 compatibility_date = "2025-01-01"
 
-# Workers AI (already live) — query embedding for hybrid retrieval
-[ai]
-binding = "AI"
+# Workers AI REMOVED (owner 2026-10-15: the Cloudflare bill reached 200 USD, line item Workers AI neurons).
+# Every env.AI caller is fail-safe: re-rank falls back to the lexical order, /api/retrieve returns no semantic matches,
+# grounding verification reports "not checked", PDF to markdown falls back to TinyFish. Do not re-add without the owner.
 
 # Vectorize (NEW) — KB disease-vector index for the semantic arm (functions/api/retrieve)
 [[vectorize]]
@@ -333,5 +333,3 @@ bucket_name = "wardsynq-backups"
 binding = "PREP_BANK_R2"
 bucket_name = "stewardmd-offline"
 
-[env.production.ai]
-binding = "AI"
