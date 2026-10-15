@@ -47,6 +47,51 @@ Rutherford, INR bands); warfarin/antifilarial/antibiotic mentions are class-only
 - No UI files touched (content pipeline only: lessons/KB/overlays); no UI skill read needed.
 - No PDFs deleted (none were used); no orphan overwrites (all 5 files were new).
 
+# Wave 2 DONE (vascular + CTVS gap-fill, MBBS surgery depth)
+
+**Date:** 2026-10-15/16 | **Branch:** `vasc-ctvs-lessons-1015` (worktree `/private/tmp/vascvs-wt`)
+**Commit:** `848602803` Books-2 VASC2: 90 vascular-CTVS gap-fill MCQs across 9 surgery modules
+**Generator:** `tools/generate-books2-vasc2.mjs` (vasc1 pattern: LP.checkLesson + kb_validate_v2 + family-wide stem check + dose regex + rotation + wiring)
+
+## Gap check first (fill gaps only, no rewrites)
+8 committed `sur-*` lessons verified LP.checkLesson PASS and left byte-untouched; only
+`sgs-vascular-transplant` was lesson-less, so it got one FULL new v1 lesson (6 steps) plus
+one NEW KB v2 page (graft surveillance + transplant workup, kept clear of `sur-transplant`
+HLA/rejection/renal-technique and `sva-venous-access` fistula content).
+
+## Delivered (9 modules, 90 MCQs bk2-vas-051..140)
+
+| Module | Lesson | KB new-or-reused | Overlay | MCQ ids | Named sources |
+|---|---|---|---|---|---|
+| sur-arterial | existing, untouched | reused: peripheral_arterial_disease, buerger_disease, raynaud_phenomenon, thoracic_outlet_syndrome | prep/overlays/maikbook2/surgery/sur-arterial.json | bk2-vas-051..060 | ESVS ALI, AHA/ACC PAD, SVS/ESVS PAD |
+| sur-aneurysm | existing, untouched | reused: abdominal_aortic_aneurysms_evar_and_carotid_endarterectomy, popliteal_artery_aneurysm, carotid_artery_stenosis | sur-aneurysm.json | bk2-vas-061..070 | SVS/ESVS AAA, ESVS peripheral/ruptured AAA, ACST + ESVS carotid |
+| sur-venous | existing, untouched | reused: chronic_venous_insufficiency, chronic_venous_disease_ceap_and_endovenous_ablation, deep_venous_thrombosis_and_pulmonary, venous_leg_ulcer, diabetic_foot_ulcer | sur-venous.json | bk2-vas-071..080 | NICE NG13 varicose, NICE NG158 VTE, ESC PE, ACCP antithrombotic |
+| sur-lymphatic | existing, untouched | reused: lymphedema, lymphedema_staging_lymphoscintigraphy_and_surgical_restoration, filariasis, primary_lymphoedema | sur-lymphatic.json | bk2-vas-081..090 | ISL lymphoedema consensus, NVBDCP filariasis (labelled), NICE breast |
+| sur-thoracic | existing, untouched | reused: thoracic_oncology_lobectomy_and_pleural_empyema, empyema_thoracic, tension_pneumothorax, disorders_of_the_mediastinum, thymoma | sur-thoracic.json | bk2-vas-091..100 | ESTS/STS thoracic, NICE NG122 lung, BTS bronchiectasis/pneumothorax/pleural |
+| sur-cardiac | existing, untouched | reused: cardiac_surgery_cabg_valvular_repair_and_cardiopulmonary_bypass, valvular_heart_disease_and_endocarditis | sur-cardiac.json | bk2-vas-101..110 | SYNTAX/EXCEL + ESC/EACTS revasc, STS conduit, ACC/AHA valvular/aortic |
+| sur-chest-trauma | existing, untouched | reused: flail_chest, thoracic_trauma_tension_pneumothorax_and_tamponade, tension_pneumothorax | sur-chest-trauma.json | bk2-vas-111..120 | SVS/ESTS blunt aortic injury + ATLS, STS chest trauma/post-cardiotomy |
+| sur-neck-face-trauma | existing, untouched | reused: neck_and_maxillofacial_trauma_zones_and_management, carotid_artery_stenosis | sur-neck-face-trauma.json | bk2-vas-121..130 | SVS/AAST vascular trauma + ATLS, SVS carotid/subclavian/vertebral |
+| sgs-vascular-transplant | NEW prep/lessons/v1/sgs-vascular-transplant.json (6 steps) | NEW kb/reference/sgs_vascular_graft_surveillance_transplant_workup.json | sgs-vascular-transplant.json | bk2-vas-131..140 | ISHLT listing, THOTA/NOTTO (labelled), SVS/ESVS bypass surveillance, ESVS graft infection |
+
+Counts: 90 new MCQs, ids bk2-vas-051..140 all present, 90/90 unique; answers wave-2
+23/22/22/23, all-140 bk2-vas 36/34/34/36 (balanced). Wiring purely additive:
+index.json +sgs entry, overlay-counts +9x10, accuracy lessons 1217->1218 steps
+5718->5724, books-mcqs test total 4400->4490.
+
+## Gates (re-verified read-only in worktree, 2026-10-15)
+- LP.checkLesson 9/9 PASS (8 existing + 1 new); kb_validate_v2 ok on new KB + all 26
+  distinct reused KB files.
+- Similarity: 0 true cross-family stem hits vs 6245 family stems (all prep/overlays,
+  wave-2 excluded); 0 in-wave dup stems. (Generator re-run XFAMILY lines for
+  bk2-vas-138..140 are self-matches against committed wave-2 files, not real hits.)
+- Dose regex clean (no mg/milligram/mcg); all 90 items carry `source`.
+- Suites: prep-books-mcqs + prep-lessons + prep-subject 32/32; prep-accuracy 5/5;
+  prep-crosslist + prep-ss-groups + prep-links-final + kb-tests 31/31.
+- Git: 1 wave-2 commit `848602803` (note: on top of a7b5b3b7e, NOT directly on
+  79a5dea3e which is 29 commits back; intermediate commits are others' work).
+  Tree clean at commit; this report extension is the only working-tree edit.
+- No push / merge / PR opened (per instructions).
+
 ## Lead next steps (not done here)
 1. Squash-merge the PR after the browser job (plain squash, pipeline convention).
 2. Run OTA publish, then `node tools/prep-ids.mjs publish --yes` (immutable overlay release).
