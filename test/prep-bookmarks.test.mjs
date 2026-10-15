@@ -129,3 +129,24 @@ test("bmQuery filters by text, subject, tag and status, then sorts", () => {
   assert.deepEqual(P.bmQuery(ids, aux, { sort: "az" }), ["q2", "q1", "q3"], "medicine before oncology; biomarkers before testing");
   assert.deepEqual(P.bmQuery(ids, aux, { q: "zzz" }), []);
 });
+
+test("bmNoteAttempt rolls up attempts without touching bookmarks", () => {
+  const bma = {}, bm = { q1: ["a", "m", 1] };
+  P.bmNoteAttempt(bma, "q1", false, 1000);
+  P.bmNoteAttempt(bma, "q1", true, 2000);
+  assert.deepEqual(bma, { q1: { c: 2, w: 1, l: 2000, ok: true } });
+  assert.deepEqual(bm, { q1: ["a", "m", 1] }, "bookmarks untouched");
+});
+
+test("bmQuery handles topic filter, unattempted status and revision sorts", () => {
+  const aux = {
+    q1: { t: "a", s: "s", sid: "s1", tp: "t", tid: "m1", tg: [], tn: [], n: "", wrong: false, noted: false, unatt: false, w: 3, l: 5000, saved: 3000 },
+    q2: { t: "b", s: "s", sid: "s1", tp: "t", tid: "m2", tg: [], tn: [], n: "", wrong: false, noted: false, unatt: true, w: 0, l: 0, saved: 2000 },
+    q3: { t: "c", s: "s", sid: "s1", tp: "t", tid: "m1", tg: [], tn: [], n: "", wrong: true, noted: false, unatt: false, w: 1, l: 1000, saved: 1000 },
+  };
+  const ids = ["q1", "q2", "q3"];
+  assert.deepEqual(P.bmQuery(ids, aux, { topic: "m1" }), ["q1", "q3"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { status: "new" }), ["q2"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { sort: "missed" }), ["q1", "q3", "q2"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { sort: "stale" }), ["q2", "q3", "q1"], "never revised first, then oldest revision");
+});

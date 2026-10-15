@@ -146,6 +146,11 @@ test("notes and tags ride the registers: concurrent edits converge last-writer-w
   assert.deepEqual(A.store.bmx.q9, { n: "B only", tg: [], u: T + 3 });
   assert.deepEqual(A.store.bmt, B.store.bmt);
   assert.ok(A.store.bmt.hy && A.store.bmt["u-flow-x"]);
+  A.store.bma.q1 = { c: 2, w: 1, l: T + 4, ok: true };
+  B.store.bma.q1 = { c: 1, w: 1, l: T + 5, ok: false };
+  sync(A, srv, T + 7 * DAY); sync(B, srv, T + 7 * DAY + 1); sync(A, srv, T + 7 * DAY + 2);
+  assert.deepEqual(A.store.bma.q1, { c: 1, w: 1, l: T + 5, ok: false });
+  assert.deepEqual(B.store.bma.q1, A.store.bma.q1);
   delete B.store.bmx.q9;
   sync(B, srv, T + 6 * DAY); sync(A, srv, T + 6 * DAY + 1);
   assert.equal(A.store.bmx.q9, undefined);

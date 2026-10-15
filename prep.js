@@ -37,7 +37,7 @@
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, bmx: {}, bmt: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, bmx: {}, bmt: {}, bma: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
@@ -700,7 +700,7 @@
     BM_PAGE: BM_PAGE, BM_FILES: BM_FILES, BM_FRESH_MS: BM_FRESH_MS, BM_TAGS: BM_TAGS, BM_NOTE_MAX: BM_NOTE_MAX,
     bmIsDefaultTag: bmIsDefaultTag, bmEnsureTags: bmEnsureTags, bmTagList: bmTagList, bmEntry: bmEntry,
     bmTagId: bmTagId, bmAddTag: bmAddTag, bmSetNote: bmSetNote, bmSetTags: bmSetTags, bmToggleTag: bmToggleTag, bmPruneTags: bmPruneTags,
-    bmQuery: bmQuery };
+    bmNoteAttempt: bmNoteAttempt, bmQuery: bmQuery };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -2712,6 +2712,8 @@
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
+    // Attempt history for the revision library: counted answers only, bookmarks untouched.
+    if (chosen >= 0 && s.bm && s.bm[it.id]) bmNoteAttempt(s.bma || (s.bma = {}), it.id, ok, Date.now());
     save();
   }
   function answer(k) {
@@ -2952,6 +2954,15 @@
     st.stack.push(r.rvView);
     rerender();
   }
+  // Unbookmark (or re-bookmark) without leaving the review screen.
+  function toggleReviewBookmark() {
+    var r = st.run, P = r && r.rvp; if (!r || !P) return;
+    var it = r.items[P.L[P.pos]], s = load();
+    if (!it || it._s === "deck" || it._py) return;
+    var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
+    save(); paintReview();
+    toast(added ? "Question bookmarked" : "Bookmark removed");
+  }
   function rvGo(dir, viaSwipe) {
     var r = st.run, P = r && r.rvp; if (!P) return false;
     var np = P.pos + dir; if (np < 0 || np >= P.L.length) return false;
@@ -2975,7 +2986,9 @@
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+    var sRv = load(), rvBm = it._s !== "deck" && !it._py && !!(sRv.bm && sRv.bm[it.id]);
+    var rvActs = (it._s === "deck" || it._py ? "" : '<button type="button" class="pn-ib' + (rvBm ? " on" : "") + '" data-act="rvbookmark" aria-pressed="' + rvBm + '" aria-label="' + (rvBm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", rvBm) + "</button>") + (rid ? G.PREP_IDS.shareBtn(rid) : "");
+    paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
       (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
@@ -3336,6 +3349,16 @@
     if (i >= 0) e.tg.splice(i, 1); else e.tg.push(tagId);
     return { on: i < 0, bmx: bmSetTags(bmx, id, e.tg, now) };
   }
+  /* Per-question attempt roll-up for bookmarked questions only (Phase 3): raw answers stay in
+     run history and saved sets; bma keeps { c: attempts, w: wrong, l: lastAtMs, ok: lastCorrect }.
+     Bookmarks are never removed by answering. */
+  function bmNoteAttempt(bma, id, ok, now) {
+    bma = bma || {};
+    var e = bma[id] || { c: 0, w: 0, l: 0, ok: false };
+    e.c++; if (!ok) e.w++; e.l = now == null ? Date.now() : now; e.ok = !!ok;
+    bma[id] = e;
+    return bma;
+  }
   // Drops custom tags no bookmark references; defaults always stay.
   function bmPruneTags(bmt, bmx) {
     bmt = bmt || {}; bmx = bmx || {};
@@ -3346,17 +3369,19 @@
   }
   /* Library search, filter and sort (offline: runs against the precomputed aux map, so unloaded
      questions still match subject, topic, tags and notes).
-     aux[id] = { t:textLower, s:subjLower, sid, tp:topicLower, tg:[tagIds], tn:[tagNamesLower],
-     n:noteLower, wrong, noted, saved }. f = { q, sub, tag, status, sort }. */
+     aux[id] = { t:textLower, s:subjLower, sid, tp:topicLower, tid, tg:[tagIds], tn:[tagNamesLower],
+     n:noteLower, wrong, noted, unatt, w, l, saved }. f = { q, sub, topic, tag, status, sort }. */
   function bmQuery(ids, aux, f) {
     f = f || {};
     var words = String(f.q || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w; });
     var out = (ids || []).filter(function (id) {
       var a = (aux || {})[id]; if (!a) return false;
       if (f.sub && f.sub !== "all" && a.sid !== f.sub) return false;
+      if (f.topic && f.topic !== "all" && a.tid !== f.topic) return false;
       if (f.tag && f.tag !== "all" && a.tg.indexOf(f.tag) < 0) return false;
       if (f.status === "wrong" && !a.wrong) return false;
       if (f.status === "noted" && !a.noted) return false;
+      if (f.status === "new" && !a.unatt) return false;
       if (words.length) {
         var hay = a.t + " " + a.s + " " + a.tp + " " + a.tn.join(" ") + " " + a.n;
         for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false;
@@ -3366,9 +3391,11 @@
     var sort = f.sort || "new";
     out.sort(function (x, y) {
       var ax = aux[x], ay = aux[y], kx, ky;
-      if (sort === "old") return ax.saved - ay.saved;
-      if (sort === "az") { kx = ax.s + " " + ax.tp + " " + ax.t; ky = ay.s + " " + ay.tp + " " + ay.t; return kx < ky ? -1 : kx > ky ? 1 : ay.saved - ax.saved; }
-      return ay.saved - ax.saved;
+      if (sort === "old") return (ax.saved || 0) - (ay.saved || 0);
+      if (sort === "az") { kx = ax.s + " " + ax.tp + " " + ax.t; ky = ay.s + " " + ay.tp + " " + ay.t; return kx < ky ? -1 : kx > ky ? 1 : (ay.saved || 0) - (ax.saved || 0); }
+      if (sort === "missed") return ((ay.w || 0) - (ax.w || 0)) || ((ay.saved || 0) - (ax.saved || 0));
+      if (sort === "stale") return ((ax.l || 0) - (ay.l || 0)) || ((ay.saved || 0) - (ax.saved || 0));
+      return (ay.saved || 0) - (ax.saved || 0);
     });
     return out;
   }
@@ -3386,27 +3413,31 @@
   // Search index for the library (lower-cased haystack fields per id; unloaded questions carry
   // empty text and still match subject, topic, tags and notes).
   function bmAux(s, ids) {
-    var aux = {}, cache = st.bmItems || {}, bmx = s.bmx || {}, bmt = bmEnsureTags(s.bmt);
+    var aux = {}, cache = st.bmItems || {}, bmx = s.bmx || {}, bmt = bmEnsureTags(s.bmt), bma = s.bma || {};
     ids.forEach(function (id) {
       var b = s.bm[id]; if (!b) return;
-      var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id);
+      var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id), at = bma[id];
       var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(it.exp, 300)) : "";
       var tgs = e ? e.tg.filter(function (tg) { return bmt[tg]; }) : [];
       aux[id] = { t: text.toLowerCase(), s: bmPlain(sb && sb.name).toLowerCase(), sid: b[0],
-        tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tg: tgs,
+        tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tid: b[1], tg: tgs,
         tn: tgs.map(function (tg) { return bmPlain(bmt[tg].n).toLowerCase(); }),
         n: (e && e.n ? e.n : "").toLowerCase(),
-        wrong: !!(s.mt && s.mt[id]), noted: !!(e && e.n), saved: bmTs(b, 2) };
+        wrong: !!(s.mt && s.mt[id]), noted: !!(e && e.n), unatt: !at,
+        w: at ? at.w || 0 : 0, l: at ? at.l || 0 : 0, saved: bmTs(b, 2) };
     });
     return aux;
   }
   function bmState() {
-    if (!st.bmF) st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
+    if (!st.bmF) st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
     return { q: st.bmQ || "", f: st.bmF };
   }
   function bmPageIds(s) {
     var ids = bmSortedIds(s.bm), aux = bmAux(s, ids), bst = bmState();
-    return { all: ids, aux: aux, list: bmQuery(ids, aux, { q: bst.q, sub: bst.f.sub, tag: bst.f.tag, status: bst.f.status, sort: bst.f.sort }) };
+    return { all: ids, aux: aux, list: bmQuery(ids, aux, { q: bst.q, sub: bst.f.sub, topic: bst.f.topic, tag: bst.f.tag, status: bst.f.status, sort: bst.f.sort }) };
+  }
+  function bmFiltered(bst) {
+    return !!(bst.q || bst.f.sub !== "all" || bst.f.topic !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
   }
   function bmChip(act, v, on, label, id) {
     return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '"' + (id ? ' data-id="' + esc(id) + '"' : "") + ' data-v="' + esc(v) + '">' + esc(label) + "</button>";
@@ -3457,29 +3488,35 @@
     return d;
   }
   function bmFilterPanel(s, ids) {
-    var bst = bmState(), bmt = bmEnsureTags(s.bmt), subs = {}, i;
-    ids.forEach(function (id) { subs[s.bm[id][0]] = 1; });
+    var bst = bmState(), bmt = bmEnsureTags(s.bmt), subs = {}, topics = {};
+    ids.forEach(function (id) { subs[s.bm[id][0]] = 1; topics[s.bm[id][0] + "|" + s.bm[id][1]] = 1; });
     var subIds = Object.keys(subs).sort(function (a, b) {
       var sbA = subjectById(a), sbB = subjectById(b);
       return bmPlain(sbA && sbA.name).localeCompare(bmPlain(sbB && sbB.name));
     });
     var subName = function (sid) { var sb = subjectById(sid); return bmPlain(sb && sb.name) || sid; };
+    var topicName = function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]); return (t ? bmPlain(t.title) : p[1]) || p[1]; };
+    var topicIds = Object.keys(topics).sort(function (a, b) { return topicName(a).localeCompare(topicName(b)); });
     return '<section class="pn-panel" aria-label="Find saved questions">' +
       '<label class="pn-sl" for="pnBmSearch"><span class="pn-mut pn-small">Words from the question, topic, tags or notes</span>' +
       '<span class="pn-srch">' + ico("search") + '<input id="pnBmSearch" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(bst.q) + '"></span></label>' +
       '<h2 class="pn-sec">Status</h2><div class="pn-wrap" role="group" aria-label="Filter by status">' +
-      bmChip("bmfs", "all", bst.f.status === "all", "All") + bmChip("bmfs", "wrong", bst.f.status === "wrong", "Incorrect before") + bmChip("bmfs", "noted", bst.f.status === "noted", "With notes") + "</div>" +
+      bmChip("bmfs", "all", bst.f.status === "all", "All") + bmChip("bmfs", "wrong", bst.f.status === "wrong", "Incorrect before") +
+      bmChip("bmfs", "new", bst.f.status === "new", "Unattempted") + bmChip("bmfs", "noted", bst.f.status === "noted", "With notes") + "</div>" +
       '<h2 class="pn-sec">Subject</h2><div class="pn-wrap" role="group" aria-label="Filter by subject">' + bmChip("bmfsub", "all", bst.f.sub === "all", "All") +
       subIds.map(function (sid) { return bmChip("bmfsub", sid, bst.f.sub === sid, subName(sid)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Topic</h2><div class="pn-wrap" role="group" aria-label="Filter by topic">' + bmChip("bmftopic", "all", bst.f.topic === "all", "All") +
+      topicIds.map(function (k) { return bmChip("bmftopic", k.split("|")[1], bst.f.topic === k.split("|")[1], topicName(k)); }).join("") + "</div>" +
       '<h2 class="pn-sec">Tags</h2><div class="pn-wrap" role="group" aria-label="Filter by tag">' + bmChip("bmftag", "all", bst.f.tag === "all", "All") +
       bmTagList(bmt).map(function (tg) { return bmChip("bmftag", tg, bst.f.tag === tg, bmPlain(bmt[tg].n)); }).join("") + "</div>" +
       '<h2 class="pn-sec">Sort</h2><div class="pn-wrap" role="group" aria-label="Sort saved questions">' +
-      bmChip("bmsort", "new", bst.f.sort === "new", "Newest") + bmChip("bmsort", "old", bst.f.sort === "old", "Oldest") + bmChip("bmsort", "az", bst.f.sort === "az", "Topic A-Z") + "</div></section>";
+      bmChip("bmsort", "new", bst.f.sort === "new", "Newest") + bmChip("bmsort", "old", bst.f.sort === "old", "Oldest") + bmChip("bmsort", "az", bst.f.sort === "az", "Topic A-Z") +
+      bmChip("bmsort", "missed", bst.f.sort === "missed", "Most missed") + bmChip("bmsort", "stale", bst.f.sort === "stale", "Least revised") + "</div></section>";
   }
   function renderBookmarks() {
     var s = load(), pg = bmPageIds(s), ids = pg.all, stats = bmStats(s.bm, s.mt, Date.now());
     var bst = bmState();
-    var filtered = !!(bst.q || bst.f.sub !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
+    var filtered = bmFiltered(bst);
     var shown = Math.min(st.bmShown || BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
     var nmods = {}; ids.forEach(function (id) { nmods[s.bm[id][0] + "|" + s.bm[id][1]] = 1; }); nmods = Object.keys(nmods).length;
     var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
@@ -3489,6 +3526,7 @@
       '<p class="pn-mut pn-small">' + fmt(stats.wrong) + " incorrect before · " + fmt(stats.fresh) + " saved this week.</p>" +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + (setupOn() ? " Practise bookmarks" : " Practise all bookmarks") + "</button>" + lastBtn("bookmarks", "") +
       bmFilterPanel(s, ids) +
+      (filtered && pg.list.length ? '<button type="button" class="pn-btn pri" id="pnBmGo" data-act="bmpractice">' + ico("play") + " Practise these " + fmt(pg.list.length) + "</button>" : "") +
       '<p class="pn-mut pn-small" role="status" id="pnBmCount">' + (filtered || pg.list.length > shown ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "") + "</p>" +
       '<ul class="pn-mods" id="pnBmCards" aria-label="Saved questions">' + page.map(function (id) { return bmCard(s, id); }).join("") + "</ul>" +
       (page.length ? "" : '<p class="pn-empty pn-art-bm">No saved questions match. Try fewer filters or other words.</p>') +
@@ -3504,12 +3542,20 @@
   function bmRefreshList() {
     if (!st.open || st.stack[st.stack.length - 1] !== renderBookmarks || !root) return;
     var s = load(), pg = bmPageIds(s), bst = bmState();
-    var filtered = !!(bst.q || bst.f.sub !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
+    var filtered = bmFiltered(bst);
     var shown = Math.min(st.bmShown = BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
     var cards = root.querySelector("#pnBmCards"), count = root.querySelector("#pnBmCount");
     st.bmPage = page;
     if (cards) patchHtml(cards, page.map(function (id) { return bmCard(s, id); }).join(""));
     if (count) count.textContent = (filtered || pg.list.length > shown) ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "";
+    var goHtml = (filtered && pg.list.length) ? '<button type="button" class="pn-btn pri" id="pnBmGo" data-act="bmpractice">' + ico("play") + " Practise these " + fmt(pg.list.length) + "</button>" : "";
+    var go = root.querySelector("#pnBmGo");
+    if (go && !goHtml && go.parentNode) go.parentNode.removeChild(go);
+    else if (goHtml && (!go || go.textContent !== " Practise these " + fmt(pg.list.length))) {
+      var tmp = D.createElement("div"); tmp.innerHTML = goHtml;
+      if (go) go.parentNode.replaceChild(tmp.firstChild, go);
+      else if (count && count.parentNode) count.parentNode.insertBefore(tmp.firstChild, count);
+    }
     var empty = root.querySelector("#pnBmEmpty");
     if (empty) empty.parentNode.removeChild(empty);
     if (!page.length && cards && cards.parentNode) {
@@ -3579,13 +3625,19 @@
     if (el && el.focus) try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (x) {} }
   }
   function bmFilterTo(act, key, v) {
-    if (!st.bmF) st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
+    if (!st.bmF) st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
     st.bmF[key] = v; st.bmShown = BM_PAGE; st.bmEdit = null; st.bmDraft = null;
     rerender();
     bmRefocus(act, v);
   }
+  // The quiz pool for bookmarks: every saved question, or the library's filtered selection
+  // (st.bmScope, set by "Practise these"), intersected with what is still saved.
+  function bmPoolIds(s) {
+    var scope = st.bmScope;
+    return Object.keys(s.bm).filter(function (id) { return !scope || scope.indexOf(id) >= 0; });
+  }
   function practiceBookmarks() {
-    var s = load(), by = {}, ids = Object.keys(s.bm);
+    var s = load(), by = {}, ids = bmPoolIds(s);
     ids.forEach(function (id) { var b = s.bm[id]; (by[b[0] + "|" + b[1]] = by[b[0] + "|" + b[1]] || {})[id] = 1; });
     Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }))
       .then(function (lists) { var all = []; lists.forEach(function (l) { all = all.concat(l); }); if (!all.length) return toast("The bookmarked questions need a connection to load once."); runQuestions(shuffle(all).slice(0, 50), "study", "Bookmarks"); });
@@ -3733,11 +3785,13 @@
       load: function () { return loadMany(pairs.slice(0, 12)).then(function (lists) { var hid = hidden(); return lists.map(function (l) { return l.items.filter(function (it) { return want[it.id] && usable(it, hid); }); }); }); },
       start: function (list, mode, ro) { runQuestions(list, mode, "My mistakes", saveOpt(ro, "mistakes")); } };
   }
-  // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool).
+  // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool),
+  // or the library's filtered selection (st.bmScope from "Practise these"). Count, mode, timer and
+  // repeat rows of the setup sheet apply on top; options that would leave no question read as off.
   function scopeBookmarks() {
-    var s = load(), by = {};
-    Object.keys(s.bm).forEach(function (id) { var b = s.bm[id], k = b[0] + "|" + b[1]; (by[k] = by[k] || {})[id] = 1; });
-    return { kind: "bookmarks", id: "", title: "Bookmarks", sub: Object.keys(s.bm).length + " saved", hue: 212,
+    var s = load(), by = {}, ids = bmPoolIds(s);
+    ids.forEach(function (id) { var b = s.bm[id], k = b[0] + "|" + b[1]; (by[k] = by[k] || {})[id] = 1; });
+    return { kind: "bookmarks", id: "", title: "Bookmarks", sub: ids.length + " saved", hue: 212,
       load: function () {
         return Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }));
       },
@@ -3913,6 +3967,7 @@
     if (a === "kyfixq") { var rk = st.run, lk = b.getAttribute("data-l") === "rem" ? "rem" : "fix"; return reviewQuestion(Number(b.getAttribute("data-i")), rk && rk.ky ? rk.ky[lk] : null); }
     if (a === "rvnext") return void rvGo(1);
     if (a === "rvprev") return void rvGo(-1);
+    if (a === "rvbookmark") return toggleReviewBookmark();
     if (a === "kypractise") return kyPractise(b.getAttribute("data-l"));
     if (a === "kypattern") return void kyPatternOpen();
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
@@ -3922,8 +3977,8 @@
     if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
     if (a === "bookmarks") {
-      st.bmShown = BM_PAGE; st.bmQ = ""; st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
-      st.bmEdit = null; st.bmDraft = null;
+      st.bmShown = BM_PAGE; st.bmQ = ""; st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
+      st.bmEdit = null; st.bmDraft = null; st.bmScope = null;
       var bs0 = load(), before = Object.keys(bs0.bmt || {}).length;
       bmEnsureTags(bs0.bmt || (bs0.bmt = {}));
       if (Object.keys(bs0.bmt).length !== before) save();
@@ -3934,8 +3989,15 @@
     if (a === "bmremove") return removeBookmark(b.getAttribute("data-id"));
     if (a === "bmfs") return bmFilterTo("bmfs", "status", v);
     if (a === "bmfsub") return bmFilterTo("bmfsub", "sub", v);
+    if (a === "bmftopic") return bmFilterTo("bmftopic", "topic", v);
     if (a === "bmftag") return bmFilterTo("bmftag", "tag", v);
     if (a === "bmsort") return bmFilterTo("bmsort", "sort", v);
+    if (a === "bmpractice") {
+      var sP = load(), pgP = bmPageIds(sP);
+      if (!pgP.list.length) { toast("No saved questions match."); return; }
+      st.bmScope = pgP.list.slice();
+      return setupOn() ? setupBookmarks() : practiceBookmarks();
+    }
     if (a === "bmnote") {
       var nid = b.getAttribute("data-id"), sN = load();
       if (st.bmEdit === nid) { st.bmEdit = null; st.bmDraft = null; return rerender(); }
@@ -3992,7 +4054,7 @@
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
-    if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
+    if (a === "practicebm") { st.bmScope = null; return setupOn() ? setupBookmarks() : practiceBookmarks(); }
     if (a === "custom") return push(renderCustom);
     if (a === "ss-all") return push(renderSsAll);
     // The mixed row: the custom module prefilled with the student's group subjects.
