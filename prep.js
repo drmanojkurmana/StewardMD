@@ -1862,7 +1862,7 @@
       subs.map(function (sb) { return tile(sb, null); }).join("") + "</div></div>");
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderSsAll) return;
-      var grid = root().querySelector("#pnGrid");
+      var grid = root && root.querySelector("#pnGrid");
       if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
     });
   }
