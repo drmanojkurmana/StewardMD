@@ -55,6 +55,42 @@
     (setIds || []).forEach(function (set) { var m = sets && sets[set] && sets[set][sid]; n += (m && +m[mid]) || 0; });
     return n;
   }
+  /* Cross-listed modules (prep/taxonomy/crosslist.json): one disease taught in several subjects, shown in every
+     member subject's list under its own title. Opening it from any subject loads the UNION of the members' bank
+     files and overlays. Item ids never change, so practice, progress (keyed by item and by the group's own id),
+     mistakes, bookmarks and share links keep working from every entry point. */
+  function normStem(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/ +/g, " ").replace(/^ | $/g, ""); }
+  /* unionItems([a, b, ...]) -> every item once, first file wins: a later item whose id or normalised stem already
+     showed is left out. An item without an id still dedupes by stem; an empty stem never collapses anything. */
+  function unionItems(lists) {
+    var seenId = {}, seenStem = {}, out = [], i, j, it, st;
+    for (i = 0; i < (lists || []).length; i++) {
+      var l = lists[i];
+      for (j = 0; j < (l || []).length; j++) {
+        it = l[j];
+        if (!it) continue;
+        if (it.id != null) { if (seenId[it.id]) continue; seenId[it.id] = 1; }
+        st = normStem(it.q);
+        if (st) { if (seenStem[st]) continue; seenStem[st] = 1; }
+        out.push(it);
+      }
+    }
+    return out;
+  }
+  // xgroupsFor(groups, sid) -> the crosslist groups taught in this subject, in file order. groups is the
+  // crosslist.json array or the whole { groups } file.
+  function xgroupsFor(groups, sid) {
+    var gs = (groups && groups.groups) || groups || [];
+    return gs.filter(function (g) { return ((g && g.members) || []).some(function (m) { return m[0] === sid; }); });
+  }
+  function xgroupById(groups, gid) { var gs = (groups && groups.groups) || groups || [], i; for (i = 0; i < gs.length; i++) if (gs[i] && gs[i].id === gid) return gs[i]; return null; }
+  /* xlistRow(group, counts) -> the subject-list row for a group: union counts are the sums of the member rows
+     (exact when the members share no items; loadModule writes back the exact union once the files are read). */
+  function xlistRow(group, counts) {
+    var c = { count: 0, all: 0, usmle: 0, ov: 0 };
+    (counts || []).forEach(function (x) { if (!x) return; c.count += x.count || 0; c.all += x.all || 0; c.usmle += x.usmle || 0; c.ov += x.ov || 0; });
+    return { id: group.id, title: group.title, group: "xlist", count: c.count, all: c.all, usmle: c.usmle, ov: c.ov, file: null };
+  }
   var QUAL_BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
   // A sidecar record that keeps the item out of every test (prep-assess.js eligible() blocks the same).
   function qualBlocked(q) {
@@ -685,7 +721,7 @@
     return s.cel;
   }
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
+    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, normStem: normStem, unionItems: unionItems, xgroupsFor: xgroupsFor, xgroupById: xgroupById, xlistRow: xlistRow, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
     weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -759,7 +795,7 @@
   function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
   // A subject's index; modules with overlay items (OVERLAYS) carry t.ov, their count from prep/bank/overlay-counts.json
   // (tools/prep-overlay-counts.mjs), so the counts on screen match what practice draws. No counts file: bank counts only.
-  function loadIndex(sid) {
+  function loadIndexRaw(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
     return Promise.all([
       getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json"),
@@ -774,6 +810,51 @@
       (ix.topics || []).forEach(function (t) { var n = ovFor(ovc, sets, sid, t.id); if (n) t.ov = n; });
       return (st.ix[sid] = ix);
     }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
+  }
+  /* Crosslist groups (prep/taxonomy/crosslist.json): fetched once a session like the taxonomy and kept in
+     IndexedDB, so subjects opened offline keep their rows; a miss with no copy means no cross-listed rows and
+     every subject behaves exactly as before. Never rejects. */
+  function loadXlist() {
+    if (!st.xlP) st.xlP = getJSON(STATIC + "taxonomy/crosslist.json").then(function (j) {
+      st.xl = (j && (j.groups || j)) || [];
+      cachePut("taxonomy/crosslist.json", { xl: st.xl, ts: Date.now() });
+      return st.xl;
+    }, function () {
+      return cacheGet("taxonomy/crosslist.json").then(function (hit) { return (st.xl = (hit && hit.xl) || []); });
+    });
+    return st.xlP;
+  }
+  function xRowIn(ix, mid) { var r = null; ((ix && ix.topics) || []).forEach(function (t) { if (t && t.id === mid) r = t; }); return r; }
+  /* ensureXlistRows(ix, sid) -> ix with one row per crosslist group taught in sid (rows the bank build already
+     wrote are kept). Member counts come from the member subjects' own indexes, loaded raw (no recursion: raw
+     indexes never add rows themselves). A group with no member row anywhere yet gets no row. Never rejects. */
+  function ensureXlistRows(ix, sid) {
+    var groups = xgroupsFor(st.xl || [], sid);
+    if (!groups.length) { ix._xl = 1; return Promise.resolve(ix); }
+    var want = groups.filter(function (g) { return !xRowIn(ix, g.id); });
+    if (!want.length) { ix._xl = 1; return Promise.resolve(ix); }
+    var need = {};
+    want.forEach(function (g) { (g.members || []).forEach(function (m) { if (m[0] !== sid) need[m[0]] = 1; }); });
+    return Promise.all(Object.keys(need).map(function (x) { return loadIndexRaw(x).then(null, function () { return null; }); })).then(function (list) {
+      var peers = {};
+      Object.keys(need).forEach(function (x, i) { peers[x] = list[i]; });
+      want.forEach(function (g) {
+        var rows = (g.members || []).map(function (m) { var pix = m[0] === sid ? ix : peers[m[0]]; return xRowIn(pix, m[1]); });
+        if (!rows.some(function (r) { return !!r; })) return;
+        ix.topics.push(xlistRow(g, rows));
+      });
+      ix._xl = 1;
+      return ix;
+    });
+  }
+  // A subject's index, with its cross-listed rows: the same counts the subject screen, the hub and search draw.
+  function loadIndex(sid) {
+    if (st.ix[sid] && st.ix[sid]._xl) return Promise.resolve(st.ix[sid]);
+    if (st.ixP && st.ixP[sid]) return st.ixP[sid];
+    var p = loadXlist().then(function () { return loadIndexRaw(sid); }).then(function (ix) { return ensureXlistRows(ix, sid); });
+    st.ixP = st.ixP || {};
+    st.ixP[sid] = p.then(function (ix) { delete st.ixP[sid]; return ix; }, function (e) { delete st.ixP[sid]; throw e; });
+    return st.ixP[sid];
   }
   function loadOvc() {
     if (!st.ovcP) st.ovcP = getJSON(STATIC + "bank/overlay-counts.json").then(function (j) { return (j && j.sets) || {}; }, function () { return {}; });
@@ -951,7 +1032,7 @@
   }
   // A module's questions: the bank file plus its overlay items (mergeOverlay). A bank failure with overlay items still
   // gives the overlay items; with none, the failure stands.
-  function loadModule(sid, mid) {
+  function loadModuleSingle(sid, mid) {
     var k = "mod:" + sid + "/" + mid;
     if (st.mem[k]) return Promise.resolve(st.mem[k]);
     var bankErr = null, miss = { n: 0 };
@@ -1009,6 +1090,53 @@
     if (fx.img) { it.img = fx.img.slice(); it.imgPlace = fx.imgPlace === "exp" ? "exp" : "stem"; delete it.credit; delete it.licence; }
     it._fx = fx.ts || 1;
     return it;
+  }
+  /* A cross-listed group's questions: the union of every member's bank file and overlays through the same bank
+     client (loadBank/loadOverlay, same IndexedDB cache; a missing member file adds nothing, the bank gate fails
+     open as before). Cached once under the group's id, so every entry subject shares it offline; the exact union
+     counts are written back to every loaded member subject's row. Items keep their own ids and carry the group's
+     id, so decks, stars, mistakes, bookmarks and share links match from every entry point. */
+  function loadXGroup(sid, g) {
+    var k = "mod:x:" + g.id;
+    if (st.mem[k]) return Promise.resolve(st.mem[k]);
+    var bankErr = null, miss = { n: 0 };
+    return Promise.all((g.members || []).map(function (m) {
+      return Promise.all([
+        loadBank(m[0], m[1]).then(null, function (e) { bankErr = bankErr || e; return []; }),
+        loadOverlay(m[0], m[1], miss).then(null, function () { miss.n++; return []; })
+      ]);
+    })).then(function (rs) {
+      var banks = rs.map(function (r) { return r[0]; }), ovs = [];
+      rs.forEach(function (r) { ovs.push(r[1]); });
+      var bankU = unionItems(banks), items = markLevels(unionItems([bankU].concat(ovs)));
+      if (!items.length && bankErr) throw bankErr;
+      items.forEach(function (it) { it._s = sid; it._m = g.id; });
+      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+      writeBackXCounts(g, bankU, unionItems(ovs));
+      return items;
+    });
+  }
+  // The exact union counts of a group just read, written to every loaded member subject's row: bank items and
+  // overlay-only items under the same rule the union keeps them (first id or stem wins, flagged or not), flagged
+  // keys left out of the numbers like the build counts.
+  function writeBackXCounts(g, bankU, ovU) {
+    var seenId = {}, seenStem = {}, nb = 0, nov = 0;
+    function clean(it) { return !!it && !(it.flags && it.flags.length); }
+    function mark(it) { if (it.id != null) seenId[it.id] = 1; var st = normStem(it.q); if (st) seenStem[st] = 1; }
+    function dup(it) { if (it.id != null && seenId[it.id]) return true; var st = normStem(it.q); return !!(st && seenStem[st]); }
+    (bankU || []).forEach(function (it) { if (!it) return; mark(it); if (clean(it)) nb++; });
+    (ovU || []).forEach(function (it) { if (!it || dup(it)) return; mark(it); if (clean(it)) nov++; });
+    (g.members || []).forEach(function (m) {
+      var ix = st.ix[m[0]], t = ix && xRowIn(ix, g.id);
+      if (t) { t.count = nb; t.ov = nov; t.all = nb + nov; }
+    });
+  }
+  // A module's questions, from any subject: a cross-listed id loads the union, anything else its own file.
+  function loadModule(sid, mid) {
+    return loadXlist().then(function () {
+      var g = xgroupById(st.xl || [], mid);
+      return g ? loadXGroup(sid, g) : loadModuleSingle(sid, mid);
+    });
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -1987,6 +2115,10 @@
       var seg = function (k, n) { return n ? '<i class="' + k + '" style="flex-grow:' + n + '"></i>' : ""; };
       var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "No questions in this subject for this exam yet") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
+      // Cross-listed modules (prep/taxonomy/crosslist.json): the same disease taught in other subjects, in this
+      // subject's list under its own title with the union count. Same rows, same styles, nothing new to learn.
+      var xl = filterModules(ix.topics.filter(function (t) { return t.group === "xlist"; }), prog, st.filter, s.exam);
+      if (xl.length) html += '<h2 class="pn-sec">Cross-listed</h2><ol class="pn-mods">' + xl.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
@@ -2029,7 +2161,17 @@
       '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min</button>" +
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>'));
     st.cur = { s: sid, m: mid };
-    if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
+    // Cross-listed module: lessons stay single-copy under the member modules; mount the first member that has one
+    // (a link, never a copy). Anything else mounts its own module as before.
+    var xg = xgroupById(st.xl || [], mid);
+    if (xg && G.PREP_LESSONS && G.PREP_LESSONS.index && (G.PREP_LESSONS._pure || {}).lessonsFor) {
+      G.PREP_LESSONS.index().then(function (lix) {
+        var LF = G.PREP_LESSONS._pure.lessonsFor, tgt = null, i;
+        for (i = 0; i < (xg.members || []).length && !tgt; i++) if (LF(lix, xg.members[i][1]).length) tgt = xg.members[i];
+        var mm = tgt || xg.members[0];
+        if (mm && root.querySelector("#pnLsnSlot")) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), mm[0], mm[1], HOST);
+      });
+    } else if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
     if (G.PREP_NUCLEUS360) G.PREP_NUCLEUS360.mountModule(root.querySelector("#pnN360Slot"), sid, mid, HOST);
     if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
     if (G.PREP_FLASH) G.PREP_FLASH.mount(root.querySelector("#pnCardSlot"), sid, mid, HOST);
@@ -3022,7 +3164,7 @@
       return loadModule(x.s, x.m).then(function (items) { done++; if (onStep) onStep(done, pairs.length); return { s: x.s, m: x.m, items: items }; }, function () { done++; return { s: x.s, m: x.m, items: [] }; });
     }));
   }
-  function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
+  function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); if (!r && st.xl) { var g = xgroupById(st.xl, mid); if (g && g.members && g.members[0]) r = g.members[0][0]; } return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
   function subjectByCode(code) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { if (sb.code === code) r = sb.id; }); }); return r; }
   /* moduleTitleOf(mid, tax): the taxonomy display name ("Gametogenesis"), for the Know more fallback
      rows ("Learn this module" names the module, never a possibly off-topic article). "" when unknown. */
