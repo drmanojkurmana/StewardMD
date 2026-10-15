@@ -1615,6 +1615,12 @@ body.dark .pn-root .pn-self-c .ln { stroke: var(--pn-c-amber); } body.dark .pn-r
 .pn-root .pn-missed .pn-mb b { font-weight: 550; line-height: 1.4; }
 .pn-root .pn-missed .pn-mod > svg:last-child { align-self: center; }
 
+/* ---- Bookmarks library: per-question cards with Open and Remove actions ---- */
+.pn-root .pn-bml .pn-mod { align-items: flex-start; }
+.pn-root .pn-bml .pn-mb b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.pn-root .pn-bml .pn-mb .pn-st { align-self: flex-start; margin-top: 6px; }
+.pn-root .pn-bma { flex: 0 0 auto; display: flex; gap: 8px; align-self: center; }
+
 /* ---- Menu ---- */
 .pn-root .pn-me { display: flex; align-items: center; gap: 14px; padding: 16px; border-radius: var(--pn-r-lg); background: var(--pn-card); box-shadow: var(--pn-elev), inset 0 0 0 1px var(--pn-card-edge); }
 .pn-root .pn-me-av { width: 52px; height: 52px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: var(--pn-tile-bg); }

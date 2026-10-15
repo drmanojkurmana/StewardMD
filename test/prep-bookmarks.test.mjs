@@ -42,3 +42,31 @@ test("bookmarks survive a save/load round-trip with nothing lost", () => {
 test("emptyStore ships an empty bookmark map", () => {
   assert.deepEqual(P.emptyStore().bm, {});
 });
+
+test("bmSortedIds orders newest first; undated entries sort last", () => {
+  const bm = { old: ["a", "m", 1000], new: ["a", "m", 3000], undated: ["a", "m"] };
+  assert.deepEqual(P.bmSortedIds(bm), ["new", "old", "undated"]);
+  assert.deepEqual(P.bmSortedIds(null), []);
+});
+
+test("bmPairs groups one pair per module and caps files per page", () => {
+  const bm = { q1: ["a", "m1", 1], q2: ["a", "m1", 2], q3: ["a", "m2", 3], q4: ["b", "m3", 4] };
+  const r = P.bmPairs(bm, ["q1", "q2", "q3", "q4"], 2);
+  assert.deepEqual(r.pairs, [{ s: "a", m: "m1" }, { s: "a", m: "m2" }]);
+  assert.deepEqual(r.want, { q1: 1, q2: 1, q3: 1, q4: 1 }, "want keeps every id even past the file cap");
+});
+
+test("bmStats counts total, incorrect-before and fresh", () => {
+  const bm = { q1: ["a", "m", 1000], q2: ["a", "m", 2000] };
+  const mt = { q2: ["a", "m", null, 2001, "preview"] };
+  assert.deepEqual(P.bmStats(bm, mt, 2000 + 6 * 864e5), { total: 2, wrong: 1, fresh: 2 });
+  assert.deepEqual(P.bmStats(bm, mt, 2000 + 8 * 864e5).fresh, 0, "older than a week is not fresh");
+});
+
+test("bmStem truncates long stems and collapses whitespace", () => {
+  assert.equal(P.bmStem("  What  is\n X?  "), "What is X?");
+  assert.equal(P.bmStem("x".repeat(200)).length <= 140, true);
+  assert.ok(P.bmStem("x".repeat(200)).endsWith("…"));
+  assert.equal(P.bmStem(null), "");
+  assert.equal(P.bmStem({ en: "hello" }), "hello");
+});

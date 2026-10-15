@@ -684,6 +684,9 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
+  // Bookmarks library constants: assigned before PURE because under node the IIFE returns
+  // right after PURE, so initializers placed with the browser code below would never run there.
+  var BM_PAGE = 50, BM_FILES = 12, BM_FRESH_MS = 7 * 864e5;
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
@@ -691,7 +694,8 @@
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
     optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf,
-    bmHas: bmHas, bmToggle: bmToggle };
+    bmHas: bmHas, bmToggle: bmToggle, bmTs: bmTs, bmSortedIds: bmSortedIds, bmPairs: bmPairs, bmStats: bmStats, bmStem: bmStem,
+    BM_PAGE: BM_PAGE, BM_FILES: BM_FILES, BM_FRESH_MS: BM_FRESH_MS };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -3247,22 +3251,109 @@
     bm[id] = [s, m || "", now == null ? Date.now() : now];
     return true;
   }
+  function bmTs(b, i) { return (b && +b[i]) || 0; }
+  // Newest first; entries without a timestamp sort last, never lost.
+  function bmSortedIds(bm) {
+    bm = bm || {};
+    return Object.keys(bm).sort(function (a, b) { return bmTs(bm[b], 2) - bmTs(bm[a], 2); });
+  }
+  // Module pairs for a page of ids (at most BM_FILES module files per page, so one slow
+  // connection never blocks the library) plus the wanted-id set.
+  function bmPairs(bm, ids, maxFiles) {
+    var pairs = [], seen = {}, want = {}, cap = maxFiles == null ? BM_FILES : maxFiles;
+    (ids || []).forEach(function (id) { var b = (bm || {})[id]; if (!b) return; want[id] = 1; var k = b[0] + "|" + b[1]; if (!seen[k]) { seen[k] = 1; if (pairs.length < cap) pairs.push({ s: b[0], m: b[1] }); } });
+    return { pairs: pairs, want: want };
+  }
+  function bmStats(bm, mt, now) {
+    var ids = Object.keys(bm || {}), wrong = 0, fresh = 0, cut = (now == null ? Date.now() : now) - BM_FRESH_MS;
+    ids.forEach(function (id) { if (mt && mt[id]) wrong++; if (bmTs((bm || {})[id], 2) >= cut) fresh++; });
+    return { total: ids.length, wrong: wrong, fresh: fresh };
+  }
+  // Plain-text card preview of a stem (content itself always loads from the bank, never the store).
+  function bmStem(q, n) {
+    var t = q == null ? "" : (typeof q === "object" ? (q.en || "") : String(q));
+    t = t.replace(/\s+/g, " ").trim(); n = n || 140;
+    return t.length > n ? t.slice(0, n - 1).replace(/\s+$/, "") + "…" : t;
+  }
   function toggleBookmark() {
     var r = st.run, it = r && r.items[r.i], s = load(); if (!it || it._s === "deck") return;
     var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
     save(); renderRun();
     toast(added ? "Question bookmarked" : "Bookmark removed");
   }
+  // One card per bookmarked question: preview (once its module file loads), subject and topic,
+  // saved date, an "Incorrect before" flag from the mistakes map, Open and Remove actions.
+  // Offline-first: cards paint at once from the store; previews patch in when their module loads.
+  // Ids whose module never loads keep a fallback row, so nothing saved is ever invisible.
+  function bmCard(s, id) {
+    var b = s.bm[id]; if (!b) return "";
+    var t = topicOf(b[0], b[1]), sb = subjectById(b[0]), it = (st.bmItems || {})[id];
+    var sub = (sb ? tx(sb.name) : esc(b[0])) + " · " + (t ? tx(t.title) : esc(b[1])) + " · saved " + (dayMonth(bmTs(b, 2)) || "earlier");
+    return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(b[0]) + '" aria-hidden="true">' + subjIco(b[0]) + '</span>' +
+      '<span class="pn-mb"><b>' + (it ? esc(bmStem(it.q)) : (t ? tx(t.title) : esc(b[1]))) + "</b><small>" + sub + (it ? "" : " · preview needs connection") + "</small>" +
+      (s.mt && s.mt[id] ? '<span class="pn-st">Incorrect before</span>' : "") + "</span>" +
+      '<span class="pn-bma"><button type="button" class="pn-ib" data-act="bmopen" data-id="' + esc(id) + '" aria-label="Open question">' + ico("chev") + "</button>" +
+      '<button type="button" class="pn-ib on" data-act="bmremove" data-id="' + esc(id) + '" aria-pressed="true" aria-label="Remove bookmark">' + ico("bm", true) + "</button></span></div></li>";
+  }
   function renderBookmarks() {
-    var s = load(), ids = Object.keys(s.bm), by = {};
-    ids.forEach(function (id) { var b = s.bm[id]; (by[b[0] + "|" + b[1]] = by[b[0] + "|" + b[1]] || []).push(id); });
+    var s = load(), ids = bmSortedIds(s.bm), stats = bmStats(s.bm, s.mt, Date.now());
+    var shown = Math.min(st.bmShown || BM_PAGE, ids.length), page = ids.slice(0, shown);
+    var nmods = {}; ids.forEach(function (id) { nmods[s.bm[id][0] + "|" + s.bm[id][1]] = 1; }); nmods = Object.keys(nmods).length;
     var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
+    var cache = st.bmItems || {}, pending = page.filter(function (id) { return !cache[id]; }).length;
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body pn-bml">' + (ids.length ?
-      hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + Object.keys(by).length + (Object.keys(by).length === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
+      hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + nmods + (nmods === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
+      '<p class="pn-mut pn-small">' + fmt(stats.wrong) + " incorrect before · " + fmt(stats.fresh) + " saved this week.</p>" +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + (setupOn() ? " Practise bookmarks" : " Practise all bookmarks") + "</button>" + lastBtn("bookmarks", "") +
-      '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); var last = 0; by[k].forEach(function (id) { last = Math.max(last, +s.bm[id][2] || 0); }); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + (last ? " · last saved " + dayMonth(last) : "") + '</small></span><span class="pn-st" aria-label="' + by[k].length + ' saved">' + by[k].length + "</span></div></li>"; }).join("") + "</ul>"
+      '<ul class="pn-mods" id="pnBmCards" aria-label="Saved questions">' + page.map(function (id) { return bmCard(s, id); }).join("") + "</ul>" +
+      (ids.length > shown ? '<button type="button" class="pn-btn" data-act="bmmore">' + ico("plus") + " Show more (" + fmt(ids.length - shown) + " left)</button>" : "") +
+      (pending ? '<p class="pn-mut pn-small" role="status" id="pnBmStatus">Loading previews…</p>' : "")
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
-    Object.keys(by).forEach(function (k) { var p = k.split("|"); loadIndex(p[0]); });
+    var subs = {}; page.forEach(function (id) { if (s.bm[id]) subs[s.bm[id][0]] = 1; });
+    Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
+    st.bmPage = page;
+    bmFill(page);
+  }
+  // Fill the card cache for one page, then patch the list in place when still on screen.
+  // loadMany never rejects (failed modules come back empty), so every outcome ends patched.
+  function bmFill(page) {
+    var s = load(), cache = st.bmItems || (st.bmItems = {});
+    var missing = page.filter(function (id) { return !cache[id] && s.bm[id]; });
+    if (!missing.length) return bmPatch(page);
+    var bp = bmPairs(s.bm, missing, BM_FILES);
+    loadMany(bp.pairs).then(function (lists) {
+      var hid = hidden();
+      lists.forEach(function (l) { l.items.forEach(function (it) { if (bp.want[it.id] && usable(it, hid)) cache[it.id] = it; }); });
+      bmPatch(page);
+    });
+  }
+  function bmPatch(page) {
+    if (!st.open || st.stack[st.stack.length - 1] !== renderBookmarks || st.bmPage !== page) return;
+    var s = load(), el = root && root.querySelector("#pnBmCards"), cache = st.bmItems || {};
+    if (el) patchHtml(el, page.map(function (id) { return bmCard(s, id); }).join(""));
+    var stEl = root && root.querySelector("#pnBmStatus");
+    if (stEl) {
+      var left = page.filter(function (id) { return s.bm[id] && !cache[id]; });
+      if (left.length) stEl.textContent = "Some previews need a connection. Saved questions stay here and open when you are back online.";
+      else if (stEl.parentNode) stEl.parentNode.removeChild(stEl);
+    }
+  }
+  function openBookmark(id) {
+    var s = load(), b = s.bm[id]; if (!b) return;
+    var cached = (st.bmItems || {})[id];
+    if (cached && usable(cached, hidden())) { var t = topicOf(b[0], b[1]); return runQuestions([cached], "study", t ? tx(t.title) : "Bookmarks"); }
+    loadModule(b[0], b[1]).then(function (items) {
+      var it = items.filter(function (x) { return x.id === id; })[0];
+      if (!it || !usable(it, hidden())) return toast("This question is not available.");
+      try { (st.bmItems || (st.bmItems = {}))[id] = it; } catch (e) {}
+      var t2 = topicOf(b[0], b[1]);
+      runQuestions([it], "study", t2 ? tx(t2.title) : "Bookmarks");
+    }, function () { toast("The question did not load. Check the connection and try again."); });
+  }
+  function removeBookmark(id) {
+    var s = load(); if (!bmHas(s.bm, id)) return;
+    delete s.bm[id]; save(); rerender();
+    toast("Bookmark removed");
   }
   function practiceBookmarks() {
     var s = load(), by = {}, ids = Object.keys(s.bm);
@@ -3601,7 +3692,10 @@
     if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus({ preventScroll: true }); } return; }
     if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
-    if (a === "bookmarks") return push(renderBookmarks);
+    if (a === "bookmarks") { st.bmShown = BM_PAGE; return push(renderBookmarks); }
+    if (a === "bmmore") { st.bmShown = (st.bmShown || BM_PAGE) + BM_PAGE; return rerender(); }
+    if (a === "bmopen") return openBookmark(b.getAttribute("data-id"));
+    if (a === "bmremove") return removeBookmark(b.getAttribute("data-id"));
     if (a === "plan") return startPlan();
     if (a === "weak") return startWeak();
     if (a === "goal") { var G2 = [20, 30, 50, 100], gi = G2.indexOf(s.goal); s.goal = G2[(gi + 1) % G2.length]; save(); return rerender(); }
