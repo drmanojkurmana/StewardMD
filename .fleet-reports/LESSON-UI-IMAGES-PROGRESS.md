@@ -348,3 +348,23 @@
   paediatrics (56 zero) highest-weight remainders; anatomy/physiology verified
   complete (79/79 ana, 49/49 phy with images).
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+
+## Update 2026-10-15 (batch 10: medicine backfill, atop origin/main #1674)
+
+- **8 original SVGs** (`med-stroke-clock`, `med-sodium-ladder`,
+  `med-potassium-steps`, `med-hf-diuretics`, `med-murmur-as-ar`,
+  `med-tb-att`, `med-dka-hhs`, `med-gap-delta`) wired into 8 null-visual
+  medicine steps (`med-stroke` s3, `med-sodium` s3, `med-potassium` s3,
+  `med-heart-failure` s2, `med-valvular` s1, `med-tb` s3, `med-diabetes`
+  s3, `med-acid-base` s1). Same bank format (white stage, 800x520,
+  `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank palette subset,
+  ASCII, 11px floor, amber strokes only, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  role=img, title/desc, ASCII, 11px floor, amber-text scan, key clinical
+  strings); 8/8 clean with zero builder warnings.
+- **Attribution**: +8 CC BY 4.0 StewardMD-original rows; still zero
+  third-party images.
+- **Gates**: 8/8 wired lessons `checkLesson` clean. Inventory now 226
+  with images, 1257 zero of 1483.
+- Next queue by exam weight: medicine 92, obgyn 46, ss-med-onc 44,
+  ent 37, radiology 35 (anatomy 80/80 and physiology 49/49 complete).
