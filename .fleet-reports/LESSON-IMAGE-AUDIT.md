@@ -1,6 +1,6 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1483 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1257 lessons (84.8%) have zero images; 226 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1483 lessons); recounted 2026-10-15 (1484 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (84.4%) have zero images; 231 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
@@ -8,7 +8,7 @@ Generated 2026-10-14 from `prep/lessons/v1/index.json` (1483 lessons). A lesson 
 | anatomy | 80 | 0 | 80 |
 | pathology | 73 | 64 | 9 |
 | pharmacology | 72 | 60 | 12 |
-| surgery | 71 | 67 | 4 |
+| surgery | 71 | 62 | 9 |
 | biochemistry | 69 | 63 | 6 |
 | paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
