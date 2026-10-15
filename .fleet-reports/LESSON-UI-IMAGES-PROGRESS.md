@@ -275,4 +275,25 @@
   prep-reason 24/24, bug-report 13/13, prep-lessons 23/23,
   prep-lessons-100 3/3, prep-pearl 4/4, prep-pearl-figs 2/2,
   prep-server 16/16. Audit now 206 with images, 1265 zero of 1471.
+
+## Batch 7 (2026-10-15, branch lessonui-1013): pharmacology mechanism quartet
+
+- **4 original SVGs** (`pharma-opioid-receptors`, `pharma-antiepileptic-mechanisms`,
+  `pharma-beta-lactam-spectrum`, `pharma-bp-sites`) wired into 4 null-visual
+  lessons (`phm-opioids` s0, `phm-antiepileptics` s0, `phm-beta-lactams` s0,
+  `phm-antihypertensives` s0). Same bank format (white stage, 800x520,
+  `ar` 1.5385, `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: label/number check against lesson text before wiring
+  (mu-1/mu-2 split, naloxone short vs naltrexone maintenance; Na/Ca-T/GABA
+  lists with status ladder; generation exemplars with EBV-rash, biliary
+  sludge, imipenem-seizure/valproate-crash, ertapenem-no-pseudo, clavulanate
+  hepatotoxic, avibactam KPC; five BP sites with spironolactone-fourth and
+  fetotoxicity warning). SVG well-formedness asserted (title/desc/close).
+- **Attribution**: 4 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 210 with images,
+  1261 zero of 1471 (pharmacology 60 zero / 12 with).
+- Next: microbiology (31 zero), biochemistry (63 zero), pathology (64 zero)
+  highest-weight lessons first; anatomy/physiology already complete.
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.

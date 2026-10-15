@@ -1,6 +1,6 @@
 # Lesson image audit
 
-Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1265 lessons (86.0%) have zero images; 206 have at least one.**
+Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1261 lessons (85.7%) have zero images; 210 have at least one.**
 
 Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
 
@@ -12,12 +12,14 @@ Merge of lessonui-1013 (2026-10-15): `mstat-audit` wired with new original `stat
 
 Batch 6 (2026-10-15): 6 more lessons wired (medicine +6: med-acs, med-aki, med-ckd, med-asthma x2 figs, med-cirrhosis, med-arrhythmias x2 figs; 8 figures); was 1271 zero / 200 with.
 
+Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +4: phm-opioids, phm-antiepileptics, phm-beta-lactams, phm-antihypertensives; 4 original SVGs); was 1265 zero / 206 with.
+
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
 | medicine | 113 | 104 | 9 |
 | anatomy | 80 | 0 | 80 |
 | pathology | 73 | 64 | 9 |
-| pharmacology | 72 | 64 | 8 |
+| pharmacology | 72 | 60 | 12 |
 | surgery | 71 | 67 | 4 |
 | biochemistry | 69 | 63 | 6 |
 | paediatrics | 57 | 56 | 1 |
@@ -263,7 +265,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-male-genital`: Male genital pathology: prostate, testis, penis and scrotum
 - `pat-skin`: Skin pathology: blistering, papulosquamous disease and tumours
 
-### pharmacology (64/72 imageless)
+### pharmacology (60/72 imageless)
 
 - `phm-adverse-reactions`: Adverse drug reactions, interactions and pharmacogenetics
 - `phm-aminoglycosides`: Aminoglycosides: mechanism, toxicity and key clinical rules
@@ -300,15 +302,12 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-asthma-cough`: Drugs for bronchial asthma, COPD and cough
 - `phm-antiemetics`: Antiemetics and prokinetic drugs
 - `phm-laxatives-ibd`: Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease
-- `phm-antihypertensives`: Antihypertensive drugs
 - `phm-shock-pah`: Drugs for shock and pulmonary arterial hypertension
 - `phm-sedative-hypnotics`: Sedative-hypnotics, anxiolytics and alcohol dependence
 - `phm-general-anaesthetics`: General anaesthetics, premedication and malignant hyperthermia
 - `phm-local-anaesthetics`: Local anaesthetics: esters, amides and regional blocks
-- `phm-opioids`: Opioid analgesics, receptors and dependence
 - `phm-antidepressants`: Antidepressants, lithium and mood stabilisers
 - `phm-antipsychotics`: Antipsychotics: D2 blockade, EPS and clozapine
-- `phm-antiepileptics`: Antiepileptics and status epilepticus
 - `phm-cns-stimulants`: CNS stimulants, ADHD and narcolepsy
 - `phm-corticosteroids`: Corticosteroids: potency, Cushing, taper and uses
 - `phm-oral-antidiabetics`: Oral antidiabetics and incretin therapies
@@ -318,7 +317,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-bone-calcium`: Bone, calcium and hypercalcaemia drugs
 - `phm-haematinics`: Haematinics, growth factors and chelators
 - `phm-antiplatelets-fibrinolytics`: Antiplatelets, DAPT and fibrinolytics
-- `phm-beta-lactams`: Beta-lactams: penicillins, cephalosporins and carbapenems
 - `phm-protein-synthesis-inhibitors`: Protein synthesis inhibitors: aminoglycosides to linezolid
 - `phm-other-antibacterials`: Other antibacterials: fluoroquinolones, vancomycin, metronidazole and UTI drugs
 - `phm-antifungals`: Antifungals: azoles, amphotericin and echinocandins
