@@ -302,3 +302,11 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | med-dka-bridge.svg | DKA to subcutaneous insulin: basal overlap 1-2 h, weight-based TDD split | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | med-nephritic-nephrotic.svg | Nephritic vs nephrotic split at 3.5 g/day, latency clocks the cause | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | med-cardiomyopathy.svg | Dilated vs hypertrophic (septum 15 mm, SAM) vs restrictive cardiomyopathy | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-stroke-clock.svg | Stroke countdown: alteplase to 4.5 h, thrombectomy to 24 h, aspirin/clopidogrel/statin, bleed arm | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-sodium-ladder.svg | Sodium volume triage, hypertonic 100 mL rescue, 8 to 10 per day ceiling, myelinolysis trap | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-potassium-steps.svg | Hyperkalaemia ladder: calcium, insulin/glucose/salbutamol shift, patiromer/dialysis removal | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-hf-diuretics.svg | Diuretic 2x IV ladder, urine sodium 90 or less after 3 days resistance rule | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-murmur-as-ar.svg | Aortic stenosis SAD/crescendo vs regurgitation collapsing pulse/early diastolic murmur | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-tb-att.svg | TB 2HRZE plus 4HR timeline, steroids/MDR/HIV panels, hepatotoxicity and optic traps | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-dka-hhs.svg | DKA vs HHS columns, beta-hydroxybutyrate, SGLT2 euglycaemic keto trap | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-gap-delta.svg | Normal vs high anion gap causes, urine gap kidney-vs-gut rule, delta gap cue | StewardMD (original) | CC BY 4.0 (StewardMD original) |
