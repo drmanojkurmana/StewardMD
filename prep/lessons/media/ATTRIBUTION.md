@@ -23,6 +23,7 @@ applies.
 | stats-km.svg | Kaplan-Meier survival curves | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | stats-funnel.svg | Funnel plot and publication bias | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | stats-risk.svg | Absolute risk reduction and NNT | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| stats-control-chart.svg | Control chart: centre mean, ±3 SD limits, 19 common-cause points plus 1 special-cause point | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | epi-bathtub.svg | Prevalence bathtub model: incidence vs recovery and death | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | epi-bias.svg | Recall bias distortion of odds ratio from 1.0 to 6.0 | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | epi-curve.svg | Point-source vs propagated epidemic curves | StewardMD (original) | CC BY 4.0 (StewardMD original) |

@@ -1,10 +1,12 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1274 lessons (86.9%) have zero images; 192 have at least one.**
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1273 lessons (86.8%) have zero images; 193 have at least one.**
 
 Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
 
 Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+
+Batch 5 biostatistics top-up (2026-10-15): `mstat-audit` wired with new original `stats-control-chart.svg`; was 1274 zero / 192 with.
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
@@ -48,7 +50,7 @@ Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, micro
 | womens-health | 10 | 10 | 0 |
 | mrcp-basic-science | 8 | 8 | 0 |
 | mrcp-rheumatology | 8 | 8 | 0 |
-| mrcp-statistics | 8 | 1 | 7 |
+| mrcp-statistics | 8 | 0 | 8 |
 | ss-hepatology | 8 | 8 | 0 |
 | mrcp-pharmacology | 7 | 7 | 0 |
 | ss-pulmonology | 7 | 7 | 0 |
@@ -1387,9 +1389,7 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `mrheu-spa`: Spondyloarthritis: axial disease, psoriatic features, biologics
 - `mrheu-vasculitis`: Systemic vasculitis: vessel size, ANCA syndromes, emergency management
 
-### mrcp-statistics (1/8 imageless)
-
-- `mstat-audit`: Clinical audit, governance and quality improvement
+### mrcp-statistics (0/8 imageless)
 
 ### ss-hepatology (8/8 imageless)
 
