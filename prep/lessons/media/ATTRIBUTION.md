@@ -57,6 +57,14 @@ applies.
 | bio-beta-oxidation.svg | Beta oxidation four-step spiral: FADH2, water, NADH, acetyl-CoA; palmitate 16 C needs 7 turns for 8 acetyl-CoA and about 106 ATP | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | path-thrombus-fates.svg | Four thrombus fates: propagation, embolisation, fibrinolysis of fresh clots, organisation with recanalisation | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | path-type3-immune-complex.svg | Type III sequence: deposition, complement C3a/C5a, neutrophil injury; SLE/RA/PSGN/PAN; serum sickness 5 to 10 days, Arthus 4 to 10 hours | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-prodrug.svg | Prodrug conversions: enalapril to enalaprilat, levodopa to dopamine, becampicillin to ampicillin; captopril and lisinopril active as given | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-fever.svg | Fever pathway: IL-1, TNF and IL-6 to hypothalamus, PGE2, raised set point; IL-1 and TNF most important, IL-18 not pyrogenic | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-type4.svg | Type IV hypersensitivity timeline peaking 48 to 72 h: Th1, IFN-gamma, macrophages; tuberculin test and contact dermatitis; Graves type II and Shwartzman excluded | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-cold-sterilisation.svg | Cold sterilisation: gamma for plastics/sutures/grafts, filtration for serum, ethylene oxide sporicidal but carcinogenic, low-temperature plasma | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-shock-organs.svg | Shock organ injury: kidney ATN, lung diffuse alveolar damage, liver centrilobular necrosis, gut infarct, adrenal Waterhouse-Friderichsen; multiorgan failure final | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| path-nephritic-nephrotic.svg | Nephritic (inflamed, haematuria, hypertension, falling filtration) vs nephrotic (leaky, massive proteinuria, oedema, thrombosis risk) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| pharma-rifampicin.svg | Rifampicin: harmless orange secretions, enzyme inducer avoiding protease inhibitors, hepatic clearance, MDR-TB is INH plus RIF resistance | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| micro-zn-stain.svg | Ziehl-Neelsen sequence: carbol fuchsin, acid-alcohol resisted by mycolic acid wall, red bacilli on blue; Gram stain poor | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-abduction-phases.svg | Phases of shoulder abduction | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-accessory-glands.svg | Accessory gland secretions | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | ana-acini.svg | Serous and mucous acini | StewardMD (original) | CC BY 4.0 (StewardMD original) |

@@ -1,15 +1,17 @@
 # Lesson image audit
 
-Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1282 lessons (87.4%) have zero images; 184 have at least one.**
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1466 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1274 lessons (86.9%) have zero images; 192 have at least one.**
 
-Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
+Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
+
+Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
 | medicine | 113 | 113 | 0 |
 | anatomy | 80 | 0 | 80 |
-| pathology | 73 | 67 | 6 |
-| pharmacology | 72 | 66 | 6 |
+| pathology | 73 | 64 | 9 |
+| pharmacology | 72 | 64 | 8 |
 | biochemistry | 69 | 63 | 6 |
 | surgery | 66 | 65 | 1 |
 | paediatrics | 57 | 57 | 0 |
@@ -17,7 +19,7 @@ Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, bi
 | obstetrics-gynaecology | 50 | 50 | 0 |
 | physiology | 49 | 0 | 49 |
 | ss-medical-oncology | 44 | 44 | 0 |
-| microbiology | 40 | 34 | 6 |
+| microbiology | 40 | 31 | 9 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
 | anaesthesia | 34 | 34 | 0 |
@@ -191,15 +193,13 @@ Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, bi
 
 All 80 lessons in anatomy carry at least one verified diagram.
 
-### pathology (69/73 imageless)
+### pathology (64/73 imageless)
 
 - `pat-adaptations-accumulations`: Cellular adaptations, accumulations, pigments and calcification
 - `pat-benign-wbc-lymph-node`: Non-neoplastic leukocyte and lymph node disorders: reactive changes and key differentials
 - `pat-carcinogenic-agents`: Carcinogenic agents and oncogenic viruses
 - `pat-cytogenetics`: Cytogenetic disorders: karyotyping and key syndromes
-- `pat-hypersensitivity`: Hypersensitivity reactions and transplant rejection
 - `pat-infectious-pathology`: Pathology of Infectious Diseases: Inclusions, Granulomas and Special Stains
-- `pat-mediators`: Chemical mediators of inflammation: key facts for exams
 - `pat-mendelian-disorders`: Mendelian disorders: inheritance patterns and key single-gene diseases
 - `pat-mixed`: Mixed pathology rapid review: high-yield pairings
 - `pat-molecular-carcinogenesis`: Molecular basis of cancer: oncogenes, tumour suppressors and DNA repair
@@ -210,8 +210,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-transfusion`: Blood banking and transfusion medicine: core principles for exams
 - `pat-tumour-biology`: Nomenclature, characteristics and spread of tumours
 - `pat-tumour-diagnosis`: Host response, paraneoplastic syndromes and diagnosis of cancer
-- `pat-thrombosis-embolism`: Thrombosis, embolism and infarction
-- `pat-shock`: Shock: types, stages and tissue effects
 - `pat-autoimmune`: Autoimmune diseases: tolerance failure and systemic patterns
 - `pat-immunodeficiency`: Immunodeficiency diseases and AIDS
 - `pat-amyloidosis`: Amyloidosis: types, staining and organ patterns
@@ -227,7 +225,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-obstructive-restrictive`: Obstructive, restrictive and vascular lung diseases
 - `pat-lung-tumours`: Lung tumours: types, paraneoplastic syndromes and spread
 - `pat-hepatitis-cirrhosis`: Hepatitis, cirrhosis and liver failure
-- `pat-glomerular`: Glomerular diseases: nephritic and nephrotic patterns
 - `pat-breast`: Breast pathology: benign lesions, carcinoma types and receptors
 - `pat-thyroid-parathyroid`: Thyroid and parathyroid disorders: goitre, cancer and calcium
 - `pat-diabetes-men`: Diabetes mellitus, pancreatic endocrine tumours and MEN syndromes
@@ -263,9 +260,8 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `pat-male-genital`: Male genital pathology: prostate, testis, penis and scrotum
 - `pat-skin`: Skin pathology: blistering, papulosquamous disease and tumours
 
-### pharmacology (68/72 imageless)
+### pharmacology (64/72 imageless)
 
-- `phm-absorption-routes`: Routes of administration and drug absorption
 - `phm-adverse-reactions`: Adverse drug reactions, interactions and pharmacogenetics
 - `phm-aminoglycosides`: Aminoglycosides: mechanism, toxicity and key clinical rules
 - `phm-antianginal`: Antianginal drugs and calcium channel blockers
@@ -275,7 +271,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-antimuscarinics`: Antimuscarinic drugs: receptors, uses and toxicity
 - `phm-antiparkinsonian`: Antiparkinsonian drugs and drugs for dementia
 - `phm-antiprotozoal-anthelmintic`: Antiamoebic, antiprotozoal and anthelmintic drugs: high-yield essentials
-- `phm-antitubercular`: Antitubercular drugs: key actions, toxicities and regimens
 - `phm-beta-blockers`: Beta adrenergic blockers: selectivity, key properties and safety
 - `phm-cholinergic-agonists`: Cholinergic transmission and cholinomimetics
 - `phm-cytotoxic-anticancer`: Cytotoxic anticancer drugs: key toxicities, rescues and mechanisms
@@ -303,7 +298,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-antiemetics`: Antiemetics and prokinetic drugs
 - `phm-laxatives-ibd`: Laxatives, antidiarrhoeals and drugs for inflammatory bowel disease
 - `phm-antihypertensives`: Antihypertensive drugs
-- `phm-antiarrhythmics`: Antiarrhythmic drugs
 - `phm-shock-pah`: Drugs for shock and pulmonary arterial hypertension
 - `phm-sedative-hypnotics`: Sedative-hypnotics, anxiolytics and alcohol dependence
 - `phm-general-anaesthetics`: General anaesthetics, premedication and malignant hyperthermia
@@ -319,7 +313,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-pituitary`: Pituitary drugs: GH, desmopressin, oxytocin and dopaminergics
 - `phm-contraceptives-uterine`: Contraceptives, emergency cover and uterotonics
 - `phm-bone-calcium`: Bone, calcium and hypercalcaemia drugs
-- `phm-insulin`: Insulin: types, regimens, DKA and hypoglycaemia
 - `phm-haematinics`: Haematinics, growth factors and chelators
 - `phm-antiplatelets-fibrinolytics`: Antiplatelets, DAPT and fibrinolytics
 - `phm-beta-lactams`: Beta-lactams: penicillins, cephalosporins and carbapenems
@@ -334,7 +327,7 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### biochemistry (65/69 imageless)
+### biochemistry (63/69 imageless)
 
 - `bio-acid-base-balance`: Acid-base homeostasis: Henderson-Hasselbalch, the anion gap, and renal compensation
 - `bio-aging-cellular-senescence`: Biochemical aging: telomere dynamics, sirtuins, and cellular senescence
@@ -351,7 +344,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-endocrine-biochemistry`: Biochemical endocrinology: hormone receptors, feedback loops, and steroidogenesis defects
 - `bio-enzymes`: Enzymes and clinical enzymology
 - `bio-extracellular-matrix`: Extracellular matrix biochemistry: collagen biosynthesis, lysyl oxidase and connective tissue disorders
-- `bio-fatty-acid-oxidation`: Fatty acid beta-oxidation, carnitine shuttle and ketogenesis
 - `bio-fatty-acid-synthesis`: Lipogenesis: citrate shuttle, fatty acid synthase complex and triacylglycerol packaging
 - `bio-fluids-electrolytes`: Fluid compartments, plasma osmolality, Starling forces, and hyponatremia
 - `bio-fuel-metabolism`: Fuel homeostasis: the feed-fast cycle, hormonal counter-regulation, and ketoacidosis
@@ -385,7 +377,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `bio-transcription`: Transcription and RNA processing
 - `bio-translation-proteasome`: Ribosomal translation, genetic code fidelity, and the ubiquitin-proteasome system
 - `bio-translation`: Genetic code, translation and protein targeting
-- `bio-urea-cycle`: Urea cycle, nitrogen disposal and hyperammonemia
 - `bio-vitamins-minerals`: Vitamins and trace minerals: coenzyme mechanisms, antioxidant defenses and deficiency syndromes
 - `bio-water-soluble-vitamins`: Water-soluble vitamins: key coenzymes and deficiency syndromes
 - `bio-cell-membrane`: Cell organelles, membrane structure, transport mechanisms and peroxisomal disorders
@@ -679,27 +670,22 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `son-trial-design`: Clinical trial design and evidence in oncology
 - `son-tumour-markers`: Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest
 
-### microbiology (36/40 imageless)
+### microbiology (31/40 imageless)
 
 - `mic-ag-ab-reactions`: Antigen-antibody reactions and serological tests
 - `mic-bacterial-genetics`: Bacterial genetics and antimicrobial resistance
 - `mic-clostridia-anaerobes`: Clostridia, non-sporing anaerobes and actinomycetes
 - `mic-gram-positive-bacilli`: Corynebacterium, Bacillus and Listeria: High-Yield Essentials
-- `mic-hiv`: HIV and retroviruses: structure, entry, diagnosis and the NACO approach
-- `mic-immune-response`: Immune response, MHC, cytokines and hypersensitivity
 - `mic-mixed`: Microbiology mixed rapid review
 - `mic-other-dna-viruses`: Poxviruses, adenoviruses, papillomaviruses and parvoviruses: high-yield microbiology
 - `mic-spirochaetes`: Spirochaetes: Syphilis, Relapsing Fever, Lyme Disease and Leptospirosis
-- `mic-sterilisation`: Sterilisation, disinfection and hospital infection control
 - `mic-superficial-subcutaneous-mycoses`: General mycology: superficial and subcutaneous mycoses
-- `mic-tuberculosis`: Mycobacterium tuberculosis: Identification, Diagnosis and Drug Resistance
 - `mic-herpesviruses`: Herpesviruses: HSV, VZV, EBV, CMV, HHV6 and HHV8
 - `mic-staphylococcus`: Staphylococcus aureus, MRSA and coagulase negative staphylococci
 - `mic-picorna-enteric`: Picornaviruses, hepatitis A and E, rhinovirus and norovirus
 - `mic-respiratory-rna-viruses`: Influenza, parainfluenza, RSV, measles, mumps, rubella and coronaviruses
 - `mic-streptococcus`: Streptococci, pneumococcus and enterococcus
 - `mic-arbo-rabies`: Arboviruses: dengue, chikungunya, zika, JE and rabies
-- `mic-hepatitis-viruses`: Hepatitis B, C, D and E: serology, phases and cure
 - `mic-neisseria`: Gonococcus and meningococcus
 - `mic-systemic-opportunistic-mycoses`: Systemic and opportunistic mycoses
 - `mic-intestinal-protozoa`: Intestinal protozoa: amoebiasis, giardiasis and coccidia
