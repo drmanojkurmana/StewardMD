@@ -257,7 +257,41 @@
     return best;
   }
 
-  var PURE = { NUCLEUS360: NUCLEUS360, TEMPLATES: TEMPLATES, KB_BACKING: KB_BACKING, PER_TIER: PER_TIER, typeOf: typeOf, outlineOf: outlineOf, matchConcepts: matchConcepts, orderForStudy: orderForStudy, coverage: coverage, chapterNote: chapterNote, railText: railText, summaryFor: summaryFor, revisionList: revisionList, offlineGaps: offlineGaps, findTopic: findTopic };
+  /* topicsFor(topics, q, subj) -> hub rows: subject-hub filter (a shared topic lists in
+     every home subject in t.subjects), title search, ordered by yield score (then title).
+     Pure: the hub and the tests share it. */
+  function topicsFor(topics, q, subj) {
+    q = String(q == null ? "" : q).toLowerCase();
+    subj = subj || "";
+    var out = (topics || []).filter(function (t) {
+      if (subj) {
+        var homes = t.subjects || (t.subject ? [t.subject] : []);
+        if (homes.indexOf(subj) < 0) return false;
+      }
+      return !q || String(t.title || "").toLowerCase().indexOf(q) >= 0;
+    });
+    out.sort(function (a, b) {
+      var d = (b.score || 0) - (a.score || 0);
+      if (d) return d;
+      return String(a.title || "").localeCompare(String(b.title || ""));
+    });
+    return out;
+  }
+  /* hubSubjects(doc) -> [{ id, name, n }] every home subject with its topic count,
+     sorted by display name. Pure: the hub select and the tests share it. */
+  function pureSubjName(doc, sid) { return (doc && doc.subjects && doc.subjects[sid]) || sid || ""; }
+  function pureHubSubjects(doc) {
+    var counts = {}, i, t, topics = (doc && doc.topics) || [];
+    for (i = 0; i < topics.length; i++) {
+      t = topics[i];
+      var homes = t.subjects || (t.subject ? [t.subject] : []);
+      for (var k = 0; k < homes.length; k++) counts[homes[k]] = (counts[homes[k]] || 0) + 1;
+    }
+    return Object.keys(counts).sort(function (a, b) {
+      return String(pureSubjName(doc, a)).localeCompare(String(pureSubjName(doc, b)));
+    }).map(function (s) { return { id: s, name: pureSubjName(doc, s), n: counts[s] }; });
+  }
+  var PURE = { NUCLEUS360: NUCLEUS360, TEMPLATES: TEMPLATES, KB_BACKING: KB_BACKING, PER_TIER: PER_TIER, typeOf: typeOf, outlineOf: outlineOf, matchConcepts: matchConcepts, orderForStudy: orderForStudy, coverage: coverage, chapterNote: chapterNote, railText: railText, summaryFor: summaryFor, revisionList: revisionList, offlineGaps: offlineGaps, findTopic: findTopic, topicsFor: topicsFor, hubSubjects: pureHubSubjects, subjName: pureSubjName };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -375,28 +409,45 @@
       });
     });
   }
-  function openHub(pre) {
-    loadTopics().then(function (topics) {
-      var q = (pre || "").toLowerCase();
-      var rows = topics.filter(function (t) { return !q || t.title.toLowerCase().indexOf(q) >= 0; }).slice(0, 60).map(function (t) {
-        return H.row("n360-topic", H.ico("search"), escH(t.title), escH((t.subject || "") + (t.n ? " · " + t.n + " MCQs" : "")), ' data-t="' + escH(t.id) + '"');
+  function loadDoc() {
+    var S = ses();
+    if (S.docP) return S.docP;
+    var url = (H.staticBase || "/prep/") + NUCLEUS360.topicsPath;
+    S.docP = H.getJSON(url).then(function (j) { return j || { topics: [] }; }, function () { return { topics: [] }; });
+    S.topicsP = S.docP.then(function (j) { return (j && j.topics) || []; });
+    return S.docP;
+  }
+  function subjName(doc, sid) { return PURE.subjName(doc, sid); }
+  function hubRow(t, doc) {
+    return H.row("n360-topic", H.ico("search"), escH(t.title), escH(subjName(doc, t.subject) + (t.n ? " · " + t.n + " MCQs" : "")), ' data-t="' + escH(t.id) + '"');
+  }
+  function hubSubjects(doc) { return PURE.hubSubjects(doc); }
+  function openHub(pre, subj) {
+    loadDoc().then(function (doc) {
+      var topics = (doc && doc.topics) || [];
+      var subs = hubSubjects(doc);
+      if (subj && subs.map(function (s) { return s.id; }).indexOf(subj) < 0) subj = "";
+      var rows = topicsFor(topics, pre, subj).slice(0, 60).map(function (t) { return hubRow(t, doc); }).join("");
+      var opts = '<option value="">All subjects (' + topics.length + ")</option>" + subs.map(function (s) {
+        return '<option value="' + escH(s.id) + '"' + (s.id === subj ? " selected" : "") + ">" + escH(s.name) + " (" + s.n + ")</option>";
       }).join("");
       H.push(function () {
         H.paint(H.bar(escH(NUCLEUS360.name), escH(NUCLEUS360.tagline), "back") + '<div class="pn-body"><p class="pn-mut">Pick a topic to cover it A to Z through MCQs, in chapter order.</p>' +
+          '<p><label class="pn-mut pn-small" for="pnN360S">Subject</label><select id="pnN360S" class="pn-in" aria-label="Filter topics by subject">' + opts + "</select></p>" +
           '<p><input id="pnN360Q" class="pn-in" type="search" placeholder="Search a topic, e.g. Pancreatic adenocarcinoma" value="' + escH(pre || "") + '" aria-label="Search topics"></p>' +
-          '<div class="pn-group" id="pnN360Rows">' + (rows || '<p class="pn-empty">No topic matches. The chapter list is growing; try the QBank modules.</p>') + "</div></div>");
+          '<div class="pn-group" id="pnN360Rows">' + (rows || '<p class="pn-empty">' + escH(subj ? "No Nucleus360 topics for this subject yet. The chapter list is growing; try the QBank modules." : "No topic matches. The chapter list is growing; try the QBank modules.") + "</p>") + "</div></div>");
         var inp = H.root() && H.root().querySelector("#pnN360Q");
-        if (inp) inp.addEventListener("input", function () { openHubLive(inp.value, topics); });
+        var sel = H.root() && H.root().querySelector("#pnN360S");
+        var rel = function () { openHubLive(inp ? inp.value : "", topics, sel ? sel.value : "", doc); };
+        if (inp) inp.addEventListener("input", rel);
+        if (sel) sel.addEventListener("change", rel);
       });
     });
   }
-  function openHubLive(q, topics) {
+  function openHubLive(q, topics, subj, doc) {
     var box = H.root() && H.root().querySelector("#pnN360Rows");
     if (!box) return;
-    q = (q || "").toLowerCase();
-    box.innerHTML = topics.filter(function (t) { return !q || t.title.toLowerCase().indexOf(q) >= 0; }).slice(0, 60).map(function (t) {
-      return H.row("n360-topic", H.ico("search"), escH(t.title), escH((t.subject || "") + (t.n ? " · " + t.n + " MCQs" : "")), ' data-t="' + escH(t.id) + '"');
-    }).join("") || '<p class="pn-empty">No topic matches.</p>';
+    box.innerHTML = topicsFor(topics, q, subj || "").slice(0, 60).map(function (t) { return hubRow(t, doc); }).join("") || '<p class="pn-empty">No topic matches.</p>';
   }
   function topicById(id) {
     return loadTopics().then(function (topics) {
@@ -429,12 +480,12 @@
     ses();
     if (!el || !on()) return;
     try {
-      el.innerHTML = '<button type="button" class="pn-btn" data-act="n360-hub">' + host.ico("grid") + " " + escH(NUCLEUS360.button) + '</button><p class="pn-mut pn-small">' + escH(NUCLEUS360.tagline) + ": every important concept as MCQs, in chapter order.</p>";
+      el.innerHTML = '<button type="button" class="pn-btn" data-act="n360-hub" data-s="' + escH(sid || "") + '">' + host.ico("grid") + " " + escH(NUCLEUS360.button) + '</button><p class="pn-mut pn-small">' + escH(NUCLEUS360.tagline) + ": every important concept as MCQs, in chapter order.</p>";
     } catch (e) {}
   }
   function act(a, b, h) {
     H = h || H;
-    if (a === "n360-hub") return openHub("");
+    if (a === "n360-hub") return openHub("", b && b.getAttribute ? b.getAttribute("data-s") : "");
     if (a === "n360-topic") { var id = b.getAttribute("data-t"); return topicById(id).then(function (t) { if (t) openOutline(t); }); }
     if (a === "n360-go") { var m = b.getAttribute("data-m"), tid = b.getAttribute("data-t"); return topicById(tid).then(function (t) { if (t) startTopic(t, m); }); }
     if (a === "n360-conf") { tapConf(b.getAttribute("data-t"), b.getAttribute("data-c"), b.getAttribute("data-v")); return H.rerender(); }

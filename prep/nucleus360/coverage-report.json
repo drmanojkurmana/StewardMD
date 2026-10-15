@@ -1,0 +1,966 @@
+{
+ "v": 1,
+ "gen": "2026-10-15",
+ "subjects": {
+  "anatomy": {
+   "branch": "mbbs",
+   "modules": 67,
+   "topics": 21,
+   "uncovered": [],
+   "minUnionN": 35,
+   "gaps": 324
+  },
+  "physiology": {
+   "branch": "mbbs",
+   "modules": 47,
+   "topics": 19,
+   "uncovered": [],
+   "minUnionN": 38,
+   "gaps": 286
+  },
+  "biochemistry": {
+   "branch": "mbbs",
+   "modules": 30,
+   "topics": 12,
+   "uncovered": [],
+   "minUnionN": 120,
+   "gaps": 124
+  },
+  "pathology": {
+   "branch": "mbbs",
+   "modules": 72,
+   "topics": 32,
+   "uncovered": [],
+   "minUnionN": 118,
+   "gaps": 284
+  },
+  "pharmacology": {
+   "branch": "mbbs",
+   "modules": 71,
+   "topics": 22,
+   "uncovered": [],
+   "minUnionN": 79,
+   "gaps": 308
+  },
+  "microbiology": {
+   "branch": "mbbs",
+   "modules": 37,
+   "topics": 17,
+   "uncovered": [],
+   "minUnionN": 154,
+   "gaps": 149
+  },
+  "forensic-medicine": {
+   "branch": "mbbs",
+   "modules": 23,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 101,
+   "gaps": 111
+  },
+  "community-medicine": {
+   "branch": "mbbs",
+   "modules": 71,
+   "topics": 35,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 546
+  },
+  "ophthalmology": {
+   "branch": "mbbs",
+   "modules": 29,
+   "topics": 11,
+   "uncovered": [],
+   "minUnionN": 61,
+   "gaps": 93
+  },
+  "ent": {
+   "branch": "mbbs",
+   "modules": 36,
+   "topics": 14,
+   "uncovered": [],
+   "minUnionN": 79,
+   "gaps": 190
+  },
+  "medicine": {
+   "branch": "mbbs",
+   "modules": 112,
+   "topics": 35,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 313
+  },
+  "surgery": {
+   "branch": "mbbs",
+   "modules": 57,
+   "topics": 25,
+   "uncovered": [],
+   "minUnionN": 60,
+   "gaps": 195
+  },
+  "obstetrics-gynaecology": {
+   "branch": "mbbs",
+   "modules": 47,
+   "topics": 16,
+   "uncovered": [],
+   "minUnionN": 18,
+   "gaps": 148
+  },
+  "paediatrics": {
+   "branch": "mbbs",
+   "modules": 39,
+   "topics": 18,
+   "uncovered": [],
+   "minUnionN": 146,
+   "gaps": 183
+  },
+  "orthopaedics": {
+   "branch": "mbbs",
+   "modules": 32,
+   "topics": 15,
+   "uncovered": [],
+   "minUnionN": 28,
+   "gaps": 215
+  },
+  "dermatology": {
+   "branch": "mbbs",
+   "modules": 22,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 32,
+   "gaps": 157
+  },
+  "psychiatry": {
+   "branch": "mbbs",
+   "modules": 32,
+   "topics": 14,
+   "uncovered": [],
+   "minUnionN": 79,
+   "gaps": 161
+  },
+  "anaesthesia": {
+   "branch": "mbbs",
+   "modules": 25,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 89,
+   "gaps": 119
+  },
+  "radiology": {
+   "branch": "mbbs",
+   "modules": 22,
+   "topics": 13,
+   "uncovered": [],
+   "minUnionN": 69,
+   "gaps": 224
+  },
+  "ss-general-medicine": {
+   "branch": "ss-medicine",
+   "modules": 222,
+   "topics": 40,
+   "uncovered": [],
+   "minUnionN": 87,
+   "gaps": 495
+  },
+  "ss-cardiology": {
+   "branch": "ss-medicine",
+   "modules": 38,
+   "topics": 17,
+   "uncovered": [],
+   "minUnionN": 10,
+   "gaps": 324
+  },
+  "ss-neurology": {
+   "branch": "ss-medicine",
+   "modules": 85,
+   "topics": 36,
+   "uncovered": [],
+   "minUnionN": 10,
+   "gaps": 718
+  },
+  "ss-nephrology": {
+   "branch": "ss-medicine",
+   "modules": 60,
+   "topics": 23,
+   "uncovered": [],
+   "minUnionN": 8,
+   "gaps": 442
+  },
+  "ss-gastroenterology": {
+   "branch": "ss-medicine",
+   "modules": 27,
+   "topics": 12,
+   "uncovered": [],
+   "minUnionN": 15,
+   "gaps": 212
+  },
+  "ss-hepatology": {
+   "branch": "ss-medicine",
+   "modules": 28,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 38,
+   "gaps": 150
+  },
+  "ss-endocrinology": {
+   "branch": "ss-medicine",
+   "modules": 45,
+   "topics": 18,
+   "uncovered": [],
+   "minUnionN": 20,
+   "gaps": 323
+  },
+  "ss-haematology": {
+   "branch": "ss-medicine",
+   "modules": 24,
+   "topics": 11,
+   "uncovered": [],
+   "minUnionN": 28,
+   "gaps": 213
+  },
+  "ss-medical-oncology": {
+   "branch": "ss-medicine",
+   "modules": 91,
+   "topics": 35,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 689
+  },
+  "ss-rheumatology-immunology": {
+   "branch": "ss-medicine",
+   "modules": 81,
+   "topics": 28,
+   "uncovered": [],
+   "minUnionN": 8,
+   "gaps": 514
+  },
+  "ss-pulmonology": {
+   "branch": "ss-medicine",
+   "modules": 31,
+   "topics": 11,
+   "uncovered": [],
+   "minUnionN": 11,
+   "gaps": 212
+  },
+  "ss-infectious-diseases": {
+   "branch": "ss-medicine",
+   "modules": 83,
+   "topics": 33,
+   "uncovered": [],
+   "minUnionN": 9,
+   "gaps": 593
+  },
+  "ss-critical-care": {
+   "branch": "ss-medicine",
+   "modules": 63,
+   "topics": 25,
+   "uncovered": [],
+   "minUnionN": 16,
+   "gaps": 461
+  },
+  "ss-biostatistics": {
+   "branch": "ss-medicine",
+   "modules": 6,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 13,
+   "gaps": 82
+  },
+  "ss-radiology": {
+   "branch": "ss-medicine",
+   "modules": 24,
+   "topics": 13,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 493
+  },
+  "plab-anaesthesia": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 75
+  },
+  "plab-anatomy": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 60
+  },
+  "plab-biochemistry": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 64
+  },
+  "plab-community-medicine": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 104
+  },
+  "plab-dermatology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 53
+  },
+  "plab-ent": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 302,
+   "gaps": 41
+  },
+  "plab-forensic-medicine": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 399,
+   "gaps": 41
+  },
+  "plab-medicine": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 69
+  },
+  "plab-microbiology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 58
+  },
+  "plab-obstetrics-gynaecology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 619,
+   "gaps": 16
+  },
+  "plab-ophthalmology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 54
+  },
+  "plab-orthopaedics": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 400,
+   "gaps": 13
+  },
+  "plab-paediatrics": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 219,
+   "gaps": 42
+  },
+  "plab-pathology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 67
+  },
+  "plab-pharmacology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 111
+  },
+  "plab-physiology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 82
+  },
+  "plab-psychiatry": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 112
+  },
+  "plab-radiology": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 65
+  },
+  "plab-surgery": {
+   "branch": "uk",
+   "modules": 5,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 99
+  },
+  "mrcs-anaesthesia": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 5,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 117
+  },
+  "mrcs-anatomy": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 5,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 112
+  },
+  "mrcs-ent": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 302,
+   "gaps": 41
+  },
+  "mrcs-medicine": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 5,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 111
+  },
+  "mrcs-microbiology": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 72
+  },
+  "mrcs-orthopaedics": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 5,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 105
+  },
+  "mrcs-pathology": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 73
+  },
+  "mrcs-pharmacology": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 6,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 195
+  },
+  "mrcs-physiology": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 5,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 97
+  },
+  "mrcs-radiology": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 3,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 107
+  },
+  "mrcs-surgery": {
+   "branch": "uk",
+   "modules": 8,
+   "topics": 6,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 144
+  },
+  "adult-health-medicine": {
+   "branch": "intl",
+   "modules": 49,
+   "topics": 17,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 557
+  },
+  "adult-health-surgery": {
+   "branch": "intl",
+   "modules": 32,
+   "topics": 13,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 474
+  },
+  "womens-health": {
+   "branch": "intl",
+   "modules": 20,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 358
+  },
+  "child-health": {
+   "branch": "intl",
+   "modules": 20,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 420
+  },
+  "mental-health": {
+   "branch": "intl",
+   "modules": 20,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 321
+  },
+  "population-health-and-ethics": {
+   "branch": "intl",
+   "modules": 20,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 420
+  },
+  "mcc-acute-care": {
+   "branch": "intl",
+   "modules": 49,
+   "topics": 15,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 554
+  },
+  "mcc-chronic-care": {
+   "branch": "intl",
+   "modules": 50,
+   "topics": 21,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 882
+  },
+  "mcc-health-promotion": {
+   "branch": "intl",
+   "modules": 30,
+   "topics": 13,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 546
+  },
+  "mcc-professional-behaviours": {
+   "branch": "intl",
+   "modules": 31,
+   "topics": 10,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 420
+  },
+  "mrcp-cardiology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-respiratory": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 144
+  },
+  "mrcp-gastroenterology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 144
+  },
+  "mrcp-nephrology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 104
+  },
+  "mrcp-neurology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 131
+  },
+  "mrcp-endocrinology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-rheumatology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 145
+  },
+  "mrcp-infectious-diseases": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 140
+  },
+  "mrcp-haematology-oncology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-pharmacology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-dermatology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-ophthalmology": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-geriatrics": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 140
+  },
+  "mrcp-psychiatry": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 168
+  },
+  "mrcp-statistics": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 158
+  },
+  "mrcp-basic-science": {
+   "branch": "mrcp",
+   "modules": 8,
+   "topics": 4,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 135
+  },
+  "ss-general-surgery": {
+   "branch": "ss-surgery",
+   "modules": 6,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 48
+  },
+  "ss-urology": {
+   "branch": "ss-surgery",
+   "modules": 5,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 84
+  },
+  "ss-neurosurgery": {
+   "branch": "ss-surgery",
+   "modules": 5,
+   "topics": 2,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 84
+  },
+  "ss-surgical-oncology": {
+   "branch": "ss-surgery",
+   "modules": 4,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-ctvs": {
+   "branch": "ss-surgery",
+   "modules": 3,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-surgery": {
+   "branch": "ss-surgery",
+   "modules": 3,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 517,
+   "gaps": 3
+  },
+  "ss-plastic-surgery": {
+   "branch": "ss-surgery",
+   "modules": 3,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-vascular-surgery": {
+   "branch": "ss-surgery",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-neonatology": {
+   "branch": "ss-paediatrics",
+   "modules": 3,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 331,
+   "gaps": 12
+  },
+  "ss-paediatric-cardiology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 588,
+   "gaps": 3
+  },
+  "ss-paediatric-neurology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-gastroenterology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-nephrology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-hepatology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-oncology": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-critical-care": {
+   "branch": "ss-paediatrics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-gynaecological-oncology": {
+   "branch": "ss-obg",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 882,
+   "gaps": 3
+  },
+  "ss-reproductive-medicine": {
+   "branch": "ss-obg",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-hand-surgery": {
+   "branch": "ss-orthopaedics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-orthopaedics": {
+   "branch": "ss-orthopaedics",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-cardiac-anaesthesia": {
+   "branch": "ss-anaesthesiology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-neuroanaesthesia": {
+   "branch": "ss-anaesthesiology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-transplant-anaesthesia": {
+   "branch": "ss-anaesthesiology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-paediatric-anaesthesia": {
+   "branch": "ss-anaesthesiology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-head-neck-surgery": {
+   "branch": "ss-ent",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-onco-pathology": {
+   "branch": "ss-pathology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-virology": {
+   "branch": "ss-microbiology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-clinical-pharmacology": {
+   "branch": "ss-pharmacology",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-geriatric-mental-health": {
+   "branch": "ss-psychiatry",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 0,
+   "gaps": 42
+  },
+  "ss-child-adolescent-psychiatry": {
+   "branch": "ss-psychiatry",
+   "modules": 2,
+   "topics": 1,
+   "uncovered": [],
+   "minUnionN": 243,
+   "gaps": 8
+  }
+ }
+}
