@@ -690,7 +690,8 @@
     weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
-    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf };
+    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf,
+    bmHas: bmHas, bmToggle: bmToggle };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -3236,11 +3237,21 @@
     }, function () { toast("The question did not load. Check the connection and try again."); });
   }
 
-  /* ---------- bookmarks, report ---------- */
+  /* ---------- bookmarks, report ----------
+     Pure core (also exported for tests): the map key is the stable question id, never a display
+     index; the value stays the [subject, module, savedAtMs] triple so old bookmarks keep loading.
+     Notes and tags ride sidecar maps (Phase 2), never inside this triple. */
+  function bmHas(bm, id) { return !!(bm && Object.prototype.hasOwnProperty.call(bm, id)); }
+  function bmToggle(bm, id, s, m, now) {
+    if (bmHas(bm, id)) { delete bm[id]; return false; }
+    bm[id] = [s, m || "", now == null ? Date.now() : now];
+    return true;
+  }
   function toggleBookmark() {
     var r = st.run, it = r && r.items[r.i], s = load(); if (!it || it._s === "deck") return;
-    if (s.bm[it.id]) delete s.bm[it.id]; else s.bm[it.id] = [it._s, it._m || it.t, Date.now()];
+    var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
     save(); renderRun();
+    toast(added ? "Question bookmarked" : "Bookmark removed");
   }
   function renderBookmarks() {
     var s = load(), ids = Object.keys(s.bm), by = {};
