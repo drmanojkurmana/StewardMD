@@ -116,3 +116,33 @@ touched.
 Ask the content pipeline to stamp item-level (not batch-level) provenance: with
 per-item sources the primary rule becomes safe and the skipped 73,638 ids turn
 into links. Until then the gate stays.
+
+## Publish (2026-10-15)
+
+Published with `tools/prep-links.mjs publish --yes` (token from
+`~/.config/stewardmd/cloudflare.env`, trimmed):
+
+```
+uploaded 2426 files
+verify: 2425 files of links 2026-10-15.dd526c (202277 of 202277 items linked): 0 bad
+```
+
+- Items with srcPack: **29,120** carry source provenance.
+- Links added: **11,096** provenance (`sp`) links shown at 95/94/93.
+- Batch-context ids skipped: **73,638** (logged, never guessed).
+- Unresolved ids: **955** (logged, never guessed). Top skipped:
+  kb-glomerular-diseases x490, kb-the-vasculitis-syndromes x459,
+  kb-vasculitis x377; top unresolved: kb-systemic-lupus-erythematosus-2
+  x315, sp-nbk441999 x306, sp-nbk560490 x281.
+- Full build: 202,277 of 202,277 usable items linked (100.0%),
+  338,358 links shown (kb 104,009, drugs 20,747, protocols 12,198,
+  lessons 201,404); 165,072 weaker candidates kept out; 4,856 items
+  with a stem-only candidate (confirm stage).
+
+Blind paired audit (seed 20261015, 300 after-linked items, 401 pairs):
+wrong rows 65/385 (16.9%) before vs 66/397 (16.6%) after;
+items-with-a-wrong 63 -> 63; paired worse 1, better 1, net zero.
+srcPack rows: 32 shown, 24 correct, 6 related, 2 wrong (6.2%) from one
+negation-blind item (anaplastic thyroid q_d57c758fe131).
+Tests: prep-links 26/26, prep-links-onco 8/8, prep-no-coming-soon 3/3,
+final+topics+relabel+rematch+onco-map 31 pass 0 fail 1 pre-existing skip.
