@@ -95,6 +95,7 @@ try {
   // ---- first-time flow: exam -> Step 1 -> Step 2, each on its own page
   await ev(() => PREP.open());
   ok(await until(() => !!document.querySelector("#smdPrep .pl-q")), "first open shows onboarding");
+  console.log("DIAG smdPrep: " + await ev(() => { const r = document.querySelector("#smdPrep"); return (r ? r.textContent : "(no #smdPrep)").replace(/\s+/g, " ").trim().slice(0, 300); }));
   ok((await txt("#smdPrep .pl-q") || "").includes("Which exam"), "exam step first");
   await tap('#smdPrep [data-act=p-f-exam][data-v="neet-ss"]');
   ok(await until(() => /who you are/.test(document.querySelector("#smdPrep .pl-ob").textContent)), "NEET-SS names what is next, no long group scroll");
