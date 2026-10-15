@@ -75,6 +75,8 @@ const page = await ctx.newPage();
 const errors = [], reqs = [];
 page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && (e.stack || e.message)) || ""))) errors.push(String(e.message || e)); });
 page.on("request", (r) => reqs.push(r.url()));
+page.on("response", (r) => { const u = r.url(); if (u.includes("/nsfix/")) console.log("DIAG resp " + r.status() + " " + u.slice(u.indexOf("/nsfix/"), u.indexOf("/nsfix/") + 60)); });
+page.on("requestfailed", (r) => console.log("DIAG reqfail " + r.url().slice(-70) + " " + ((r.failure() || {}).errorText || "")));
 await page.route(/^https:\/\/neetss\.test\/nsfix\//, serveFix);
 await page.route(/^https:\/\/neetss\.test\//, serveFile);
 await page.addInitScript(`window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_OVERLAYS={};
