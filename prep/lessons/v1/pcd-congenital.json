@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pcd-congenital",
-  "subject": "paediatrics",
-  "title": "Congenital heart disease: shunts, TOF, PDA and coarctation",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Shunts** (**VSD commonest**, harsh pansystolic, **ASD** fixed split, **PDA** continuous machinery bounding, **AV canal** Down; **pulmonary overcirculation** failure sweaty feeds, **Eisenmenger** reversed cyanotic clubbed) with **echo** (defect size, pressures, **cath** operability) evaluates; **heart failure** (digoxin diuretics, fortified feeds, **surgery** timing) manages. Murmurs thrill.",
-      "say": "Harsh hole sweaty failure bounding machinery is shunts: echo pressures cath operability. Failures feed fortified.",
-      "vis": null
-    },
-    {
-      "tx": "**TOF** (**pulmonary stenosis, VSD, overriding aorta, RVH**; **PROVe** paroxysmal hypercyanotic spells, **boot heart**, **knee chest** relieves, **beta blocker** propranolol, **iron** relative anaemia) with **TGA** (**D** dextro, **egg on string**, **balloon septostomy** Rashkind, **arterial switch** Jatene) and **tricuspid pulmonary atresia** (**prostaglandin** duct open, **shunt** BT) ducts; **tet spells** (cry feeds, morphine phenylephrine) abort. Knees squat.",
-      "say": "Boot PROVe squatting spells is TOF: knees propranolol iron abort. Eggs septostomise switch.",
-      "vis": null
-    },
-    {
-      "tx": "**PDA** (**preterm**, continuous, **indomethacin ibuprofen** close, **paracetamol** selected, **fluid restrict**, **surgical ligation** failed ventilated) with **coarctation** (**femoral delay**, **rib notching**, **upper hypertension**, **prostaglandin** neonatal, **balloon repair** surgery) and **aortic pulmonary stenosis** (ejection systolic, **balloon valvuloplasty**) obstructs; **HLHS** (**norwood** staged, transplant) palliates. Femorals compare.",
-      "say": "Machinery preterm closes drugs restricts ties: femorals delay ribs notch prostaglandin bridges. Pressures compare.",
-      "vis": null
-    },
-    {
-      "tx": "**Endocarditis** (**prophylaxis** high risk dental, **Duke** cultures echo vegetations, **penicillin gentamicin** strep, **vancomycin** MRSA, **surgery** large mobile abscess) with **follow** (**growth** charts, **immunise** flu RSV, **dental** hygiene, **sports** lesions graded, **pregnancy** counselled) closes; **Down** (AV canal, hypothyroid leukaemia atlantoaxial) screens. Teeth brush.",
-      "say": "Fevers vegetations cultures echo penicillin genta is endocarditis: high risk dental prophylaxes. Growth sports counselled.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "CHD",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Shunts",
-            "VSD harsh",
-            "Echo cath"
-          ],
-          [
-            "TOF",
-            "PROVe boot",
-            "Knees beta"
-          ],
-          [
-            "PDA Coarc",
-            "Drugs femorals",
-            "Tie repair"
-          ],
-          [
-            "Endocarditis",
-            "Duke vegetations",
-            "Prophylax"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-031",
-    "bk2-paed-032",
-    "bk2-paed-033",
-    "bk2-paed-034",
-    "bk2-paed-035",
-    "bk2-paed-036",
-    "bk2-paed-037",
-    "bk2-paed-038",
-    "bk2-paed-039",
-    "bk2-paed-040"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pcd-congenital",
+ "subject": "paediatrics",
+ "title": "Congenital heart disease: shunts, TOF, PDA and coarctation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Shunts** (**VSD commonest**, harsh pansystolic, **ASD** fixed split, **PDA** continuous machinery bounding, **AV canal** Down; **pulmonary overcirculation** failure sweaty feeds, **Eisenmenger** reversed cyanotic clubbed) with **echo** (defect size, pressures, **cath** operability) evaluates; **heart failure** (digoxin diuretics, fortified feeds, **surgery** timing) manages. Murmurs thrill.",
+   "say": "Harsh hole sweaty failure bounding machinery is shunts: echo pressures cath operability. Failures feed fortified.",
+   "vis": null
+  },
+  {
+   "tx": "**TOF** (**pulmonary stenosis, VSD, overriding aorta, RVH**; **PROVe** paroxysmal hypercyanotic spells, **boot heart**, **knee chest** relieves, **beta blocker** propranolol, **iron** relative anaemia) with **TGA** (**D** dextro, **egg on string**, **balloon septostomy** Rashkind, **arterial switch** Jatene) and **tricuspid pulmonary atresia** (**prostaglandin** duct open, **shunt** BT) ducts; **tet spells** (cry feeds, morphine phenylephrine) abort. Knees squat.",
+   "say": "Boot PROVe squatting spells is TOF: knees propranolol iron abort. Eggs septostomise switch.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pcd-congenital-fig1.webp",
+    "alt": "Anatomical diagrams of Tetralogy of Fallot (TOF) showing four defects and D-Transposition of the Great Arteries (TGA) with transposed vessels.",
+    "caption": "Key cyanotic congenital heart defects: Tetralogy of Fallot and Transposition of the Great Arteries. Image: National Heart Lung and Blood Institute (NIH), CC0/PD, Wikimedia Commons.",
+    "ar": 1.4752
+   }
+  },
+  {
+   "tx": "**PDA** (**preterm**, continuous, **indomethacin ibuprofen** close, **paracetamol** selected, **fluid restrict**, **surgical ligation** failed ventilated) with **coarctation** (**femoral delay**, **rib notching**, **upper hypertension**, **prostaglandin** neonatal, **balloon repair** surgery) and **aortic pulmonary stenosis** (ejection systolic, **balloon valvuloplasty**) obstructs; **HLHS** (**norwood** staged, transplant) palliates. Femorals compare.",
+   "say": "Machinery preterm closes drugs restricts ties: femorals delay ribs notch prostaglandin bridges. Pressures compare.",
+   "vis": null
+  },
+  {
+   "tx": "**Endocarditis** (**prophylaxis** high risk dental, **Duke** cultures echo vegetations, **penicillin gentamicin** strep, **vancomycin** MRSA, **surgery** large mobile abscess) with **follow** (**growth** charts, **immunise** flu RSV, **dental** hygiene, **sports** lesions graded, **pregnancy** counselled) closes; **Down** (AV canal, hypothyroid leukaemia atlantoaxial) screens. Teeth brush.",
+   "say": "Fevers vegetations cultures echo penicillin genta is endocarditis: high risk dental prophylaxes. Growth sports counselled.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CHD",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Shunts",
+      "VSD harsh",
+      "Echo cath"
+     ],
+     [
+      "TOF",
+      "PROVe boot",
+      "Knees beta"
+     ],
+     [
+      "PDA Coarc",
+      "Drugs femorals",
+      "Tie repair"
+     ],
+     [
+      "Endocarditis",
+      "Duke vegetations",
+      "Prophylax"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-031",
+  "bk2-paed-032",
+  "bk2-paed-033",
+  "bk2-paed-034",
+  "bk2-paed-035",
+  "bk2-paed-036",
+  "bk2-paed-037",
+  "bk2-paed-038",
+  "bk2-paed-039",
+  "bk2-paed-040"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
