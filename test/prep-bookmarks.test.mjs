@@ -70,3 +70,62 @@ test("bmStem truncates long stems and collapses whitespace", () => {
   assert.equal(P.bmStem(null), "");
   assert.equal(P.bmStem({ en: "hello" }), "hello");
 });
+
+test("tag registry seeds the suggested defaults without clobbering", () => {
+  const bmt = P.bmEnsureTags({});
+  assert.deepEqual(P.bmTagList(bmt), ["hy", "dif", "rm", "mr"]);
+  bmt.hy = { n: "Renamed", c: 1 };
+  P.bmEnsureTags(bmt);
+  assert.equal(bmt.hy.n, "Renamed");
+  bmt["u-flow-abc"] = { n: "Flow", c: 1 };
+  bmt["u-algo-abc"] = { n: "Algo", c: 1 };
+  assert.deepEqual(P.bmTagList(bmt), ["hy", "dif", "rm", "mr", "u-algo-abc", "u-flow-abc"]);
+});
+
+test("custom tags dedupe case-insensitively and prune when unused", () => {
+  const bmt = {};
+  const a = P.bmAddTag(bmt, "  Tissue-agnostic  ", 1000);
+  assert.ok(a.startsWith("u-tissue-agnostic-"));
+  assert.equal(P.bmAddTag(bmt, "tissue-AGNOSTIC", 2000), a);
+  assert.equal(P.bmAddTag(bmt, "   ", 3000), null);
+  const bmx = {};
+  P.bmSetTags(bmx, "q1", [a], 1000);
+  P.bmPruneTags(bmt, bmx);
+  assert.ok(bmt[a], "used custom tag stays");
+  P.bmSetTags(bmx, "q1", [], 2000);
+  P.bmPruneTags(bmt, bmx);
+  assert.ok(!bmt[a], "unused custom tag goes");
+  assert.ok(bmt.hy, "defaults always stay");
+});
+
+test("notes round-trip; empty note with no tags drops the entry", () => {
+  const bmx = {};
+  P.bmSetNote(bmx, "q1", "  Differentiate MSI-H.  ", 1000);
+  assert.deepEqual(P.bmEntry(bmx, "q1"), { n: "Differentiate MSI-H.", tg: [] });
+  P.bmSetNote(bmx, "q1", "   ", 2000);
+  assert.equal(P.bmEntry(bmx, "q1"), null);
+  P.bmSetTags(bmx, "q2", ["hy", "hy", "dif"], 3000);
+  assert.deepEqual(P.bmEntry(bmx, "q2"), { n: "", tg: ["hy", "dif"] });
+  const r = P.bmToggleTag(bmx, "q2", "mr", 4000);
+  assert.equal(r.on, true);
+  assert.deepEqual(P.bmEntry(bmx, "q2").tg, ["hy", "dif", "mr"]);
+  assert.equal(P.bmToggleTag(bmx, "q2", "hy", 5000).on, false);
+});
+
+test("bmQuery filters by text, subject, tag and status, then sorts", () => {
+  const aux = {
+    q1: { t: "msi-h versus tmb options", s: "oncology", sid: "onc", tp: "biomarkers", tg: ["hy"], tn: ["high yield"], n: "revise tissue", wrong: true, noted: true, saved: 3000 },
+    q2: { t: "insulin dosing options", s: "medicine", sid: "med", tp: "diabetes", tg: [], tn: [], n: "", wrong: false, noted: false, saved: 2000 },
+    q3: { t: "msi testing methods", s: "oncology", sid: "onc", tp: "testing", tg: ["dif"], tn: ["difficult"], n: "", wrong: false, noted: false, saved: 1000 },
+  };
+  const ids = ["q1", "q2", "q3"];
+  assert.deepEqual(P.bmQuery(ids, aux, {}), ["q1", "q2", "q3"], "default is newest first");
+  assert.deepEqual(P.bmQuery(ids, aux, { q: "msi tissue" }), ["q1"], "all words must match across fields");
+  assert.deepEqual(P.bmQuery(ids, aux, { sub: "med" }), ["q2"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { tag: "dif" }), ["q3"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { status: "wrong" }), ["q1"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { status: "noted" }), ["q1"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { sort: "old" }), ["q3", "q2", "q1"]);
+  assert.deepEqual(P.bmQuery(ids, aux, { sort: "az" }), ["q2", "q1", "q3"], "medicine before oncology; biomarkers before testing");
+  assert.deepEqual(P.bmQuery(ids, aux, { q: "zzz" }), []);
+});

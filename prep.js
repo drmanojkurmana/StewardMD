@@ -37,7 +37,7 @@
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, bmx: {}, bmt: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
@@ -687,6 +687,8 @@
   // Bookmarks library constants: assigned before PURE because under node the IIFE returns
   // right after PURE, so initializers placed with the browser code below would never run there.
   var BM_PAGE = 50, BM_FILES = 12, BM_FRESH_MS = 7 * 864e5;
+  var BM_TAGS = [["hy", "High Yield", 168], ["dif", "Difficult", 212], ["rm", "Repeated Mistake", 16], ["mr", "Must Revise", 4]];
+  var BM_NOTE_MAX = 500;
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
@@ -695,7 +697,10 @@
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
     optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf,
     bmHas: bmHas, bmToggle: bmToggle, bmTs: bmTs, bmSortedIds: bmSortedIds, bmPairs: bmPairs, bmStats: bmStats, bmStem: bmStem,
-    BM_PAGE: BM_PAGE, BM_FILES: BM_FILES, BM_FRESH_MS: BM_FRESH_MS };
+    BM_PAGE: BM_PAGE, BM_FILES: BM_FILES, BM_FRESH_MS: BM_FRESH_MS, BM_TAGS: BM_TAGS, BM_NOTE_MAX: BM_NOTE_MAX,
+    bmIsDefaultTag: bmIsDefaultTag, bmEnsureTags: bmEnsureTags, bmTagList: bmTagList, bmEntry: bmEntry,
+    bmTagId: bmTagId, bmAddTag: bmAddTag, bmSetNote: bmSetNote, bmSetTags: bmSetTags, bmToggleTag: bmToggleTag, bmPruneTags: bmPruneTags,
+    bmQuery: bmQuery };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -1375,7 +1380,9 @@
     // A sheet over the runner (Ask MaiK, share, the Pro limit) stops the per-question clock; closing it starts it again.
     try { new G.MutationObserver(function () { var r = st.run; if (r && r.qc && r.qc.used && !r.done) { syncClock(r); tlSync(r); } }).observe(root, { childList: true }); } catch (e) {}
     root.addEventListener("input", function (e) {
-      if (!e.target || e.target.id !== "pnSearch") return;
+      if (!e.target) return;
+      if (e.target.id === "pnBmSearch") return bmSearchInput(e.target.value);
+      if (e.target.id !== "pnSearch") return;
       srch.q = e.target.value;
       if (srch.timer) G.clearTimeout(srch.timer);
       srch.timer = G.setTimeout(runSearch, 250);
@@ -3275,6 +3282,96 @@
     t = t.replace(/\s+/g, " ").trim(); n = n || 140;
     return t.length > n ? t.slice(0, n - 1).replace(/\s+$/, "") + "…" : t;
   }
+  /* ---------- notes and tags (Phase 2): sidecars of bm, never inside its triple.
+     bmx: { id: { n: note, tg: [tagIds], u: updatedAtMs } }; absent = no note or tags.
+     bmt: { tagId: { n: name, c: hue } } tag registry. Both ride prep-sync MAPS like bm. */
+  function bmIsDefaultTag(id) { return BM_TAGS.some(function (t) { return t[0] === id; }); }
+  // Registry with the suggested defaults present (never clobbers a renamed default).
+  function bmEnsureTags(bmt) {
+    bmt = bmt || {};
+    BM_TAGS.forEach(function (t) { if (!bmt[t[0]]) bmt[t[0]] = { n: t[1], c: t[2] }; });
+    return bmt;
+  }
+  // Defaults first, then custom tags A-Z.
+  function bmTagList(bmt) {
+    bmt = bmEnsureTags(bmt);
+    var custom = Object.keys(bmt).filter(function (id) { return !bmIsDefaultTag(id); });
+    custom.sort(function (a, b) { return String(bmt[a].n || "").localeCompare(String(bmt[b].n || "")); });
+    return BM_TAGS.map(function (t) { return t[0]; }).concat(custom);
+  }
+  function bmEntry(bmx, id) { var e = (bmx || {})[id]; return e ? { n: e.n || "", tg: (e.tg || []).slice() } : null; }
+  function bmTagId(name, now) {
+    var slug = String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 24);
+    return "u-" + (slug || "tag") + "-" + (now == null ? Date.now() : now).toString(36);
+  }
+  function bmAddTag(bmt, name, now) {
+    bmt = bmEnsureTags(bmt);
+    name = String(name || "").replace(/\s+/g, " ").trim().slice(0, 40);
+    if (!name) return null;
+    var dup = Object.keys(bmt).filter(function (id) { return (bmt[id].n || "").toLowerCase() === name.toLowerCase(); })[0];
+    if (dup) return dup;
+    var hues = [168, 212, 36, 4, 280, 320], id = bmTagId(name, now);
+    bmt[id] = { n: name, c: hues[Object.keys(bmt).length % hues.length] };
+    return id;
+  }
+  // Sets the note (empty clears it); an entry with neither note nor tags is dropped.
+  function bmSetNote(bmx, id, note, now) {
+    bmx = bmx || {};
+    var e = bmx[id] || { tg: [] };
+    note = String(note == null ? "" : note).replace(/\s+/g, " ").trim().slice(0, BM_NOTE_MAX);
+    if (!note && !(e.tg && e.tg.length)) { delete bmx[id]; return bmx; }
+    bmx[id] = { n: note, tg: (e.tg || []).slice(), u: now == null ? Date.now() : now };
+    return bmx;
+  }
+  function bmSetTags(bmx, id, tagIds, now) {
+    bmx = bmx || {};
+    var e = bmx[id] || { n: "" }, seen = {};
+    var tg = (tagIds || []).filter(function (t) { return t && !seen[t] && (seen[t] = 1); });
+    if (!tg.length && !e.n) { delete bmx[id]; return bmx; }
+    bmx[id] = { n: e.n || "", tg: tg, u: now == null ? Date.now() : now };
+    return bmx;
+  }
+  function bmToggleTag(bmx, id, tagId, now) {
+    var e = bmEntry(bmx, id) || { n: "", tg: [] }, i = e.tg.indexOf(tagId);
+    if (i >= 0) e.tg.splice(i, 1); else e.tg.push(tagId);
+    return { on: i < 0, bmx: bmSetTags(bmx, id, e.tg, now) };
+  }
+  // Drops custom tags no bookmark references; defaults always stay.
+  function bmPruneTags(bmt, bmx) {
+    bmt = bmt || {}; bmx = bmx || {};
+    var used = {};
+    Object.keys(bmx).forEach(function (id) { ((bmx[id] || {}).tg || []).forEach(function (t) { used[t] = 1; }); });
+    Object.keys(bmt).forEach(function (id) { if (!bmIsDefaultTag(id) && !used[id]) delete bmt[id]; });
+    return bmt;
+  }
+  /* Library search, filter and sort (offline: runs against the precomputed aux map, so unloaded
+     questions still match subject, topic, tags and notes).
+     aux[id] = { t:textLower, s:subjLower, sid, tp:topicLower, tg:[tagIds], tn:[tagNamesLower],
+     n:noteLower, wrong, noted, saved }. f = { q, sub, tag, status, sort }. */
+  function bmQuery(ids, aux, f) {
+    f = f || {};
+    var words = String(f.q || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w; });
+    var out = (ids || []).filter(function (id) {
+      var a = (aux || {})[id]; if (!a) return false;
+      if (f.sub && f.sub !== "all" && a.sid !== f.sub) return false;
+      if (f.tag && f.tag !== "all" && a.tg.indexOf(f.tag) < 0) return false;
+      if (f.status === "wrong" && !a.wrong) return false;
+      if (f.status === "noted" && !a.noted) return false;
+      if (words.length) {
+        var hay = a.t + " " + a.s + " " + a.tp + " " + a.tn.join(" ") + " " + a.n;
+        for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false;
+      }
+      return true;
+    });
+    var sort = f.sort || "new";
+    out.sort(function (x, y) {
+      var ax = aux[x], ay = aux[y], kx, ky;
+      if (sort === "old") return ax.saved - ay.saved;
+      if (sort === "az") { kx = ax.s + " " + ax.tp + " " + ax.t; ky = ay.s + " " + ay.tp + " " + ay.t; return kx < ky ? -1 : kx > ky ? 1 : ay.saved - ax.saved; }
+      return ay.saved - ax.saved;
+    });
+    return out;
+  }
   function toggleBookmark() {
     var r = st.run, it = r && r.items[r.i], s = load(); if (!it || it._s === "deck") return;
     var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
@@ -3282,22 +3379,108 @@
     toast(added ? "Question bookmarked" : "Bookmark removed");
   }
   // One card per bookmarked question: preview (once its module file loads), subject and topic,
-  // saved date, an "Incorrect before" flag from the mistakes map, Open and Remove actions.
-  // Offline-first: cards paint at once from the store; previews patch in when their module loads.
-  // Ids whose module never loads keep a fallback row, so nothing saved is ever invisible.
+  // saved date, personal note and tags, an "Incorrect before" flag from the mistakes map,
+  // Open, Note and Remove actions. Offline-first: cards paint at once from the store; previews
+  // patch in when their module loads. Ids whose module never loads keep a fallback row.
+  function bmPlain(v) { return v && typeof v === "object" ? String(v.en || "") : String(v == null ? "" : v); }
+  // Search index for the library (lower-cased haystack fields per id; unloaded questions carry
+  // empty text and still match subject, topic, tags and notes).
+  function bmAux(s, ids) {
+    var aux = {}, cache = st.bmItems || {}, bmx = s.bmx || {}, bmt = bmEnsureTags(s.bmt);
+    ids.forEach(function (id) {
+      var b = s.bm[id]; if (!b) return;
+      var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id);
+      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(it.exp, 300)) : "";
+      var tgs = e ? e.tg.filter(function (tg) { return bmt[tg]; }) : [];
+      aux[id] = { t: text.toLowerCase(), s: bmPlain(sb && sb.name).toLowerCase(), sid: b[0],
+        tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tg: tgs,
+        tn: tgs.map(function (tg) { return bmPlain(bmt[tg].n).toLowerCase(); }),
+        n: (e && e.n ? e.n : "").toLowerCase(),
+        wrong: !!(s.mt && s.mt[id]), noted: !!(e && e.n), saved: bmTs(b, 2) };
+    });
+    return aux;
+  }
+  function bmState() {
+    if (!st.bmF) st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
+    return { q: st.bmQ || "", f: st.bmF };
+  }
+  function bmPageIds(s) {
+    var ids = bmSortedIds(s.bm), aux = bmAux(s, ids), bst = bmState();
+    return { all: ids, aux: aux, list: bmQuery(ids, aux, { q: bst.q, sub: bst.f.sub, tag: bst.f.tag, status: bst.f.status, sort: bst.f.sort }) };
+  }
+  function bmChip(act, v, on, label, id) {
+    return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '"' + (id ? ' data-id="' + esc(id) + '"' : "") + ' data-v="' + esc(v) + '">' + esc(label) + "</button>";
+  }
+  function bmTagPills(s, id) {
+    var e = bmEntry(s.bmx, id), bmt = bmEnsureTags(s.bmt);
+    if (!e || !e.tg.length) return "";
+    return e.tg.filter(function (tg) { return bmt[tg]; }).map(function (tg) {
+      return '<span class="pn-st pn-bmtag">' + ico("tag") + esc(bmPlain(bmt[tg].n)) + "</span>";
+    }).join("");
+  }
   function bmCard(s, id) {
     var b = s.bm[id]; if (!b) return "";
     var t = topicOf(b[0], b[1]), sb = subjectById(b[0]), it = (st.bmItems || {})[id];
+    var e = bmEntry(s.bmx, id);
     var sub = (sb ? tx(sb.name) : esc(b[0])) + " · " + (t ? tx(t.title) : esc(b[1])) + " · saved " + (dayMonth(bmTs(b, 2)) || "earlier");
+    var editing = st.bmEdit === id;
     return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(b[0]) + '" aria-hidden="true">' + subjIco(b[0]) + '</span>' +
       '<span class="pn-mb"><b>' + (it ? esc(bmStem(it.q)) : (t ? tx(t.title) : esc(b[1]))) + "</b><small>" + sub + (it ? "" : " · preview needs connection") + "</small>" +
+      (e && e.n ? '<span class="pn-bmnote">“' + esc(e.n) + '”</span>' : "") + bmTagPills(s, id) +
       (s.mt && s.mt[id] ? '<span class="pn-st">Incorrect before</span>' : "") + "</span>" +
       '<span class="pn-bma"><button type="button" class="pn-ib" data-act="bmopen" data-id="' + esc(id) + '" aria-label="Open question">' + ico("chev") + "</button>" +
-      '<button type="button" class="pn-ib on" data-act="bmremove" data-id="' + esc(id) + '" aria-pressed="true" aria-label="Remove bookmark">' + ico("bm", true) + "</button></span></div></li>";
+      '<button type="button" class="pn-ib' + (e && (e.n || e.tg.length) ? " on" : "") + '" data-act="bmnote" data-id="' + esc(id) + '" aria-expanded="' + editing + '" aria-label="Edit note and tags">' + ico("tag") + "</button>" +
+      '<button type="button" class="pn-ib on" data-act="bmremove" data-id="' + esc(id) + '" aria-pressed="true" aria-label="Remove bookmark">' + ico("bm", true) + "</button></span></div>" +
+      (editing ? bmEditor(s, id) : "") + "</li>";
+  }
+  // Inline note and tag editor for one card. Edits collect in st.bmDraft until Save, so
+  // toggling tags never loses typed text (bmHarvest copies the fields first).
+  function bmEditor(s, id) {
+    var d = st.bmDraft && st.bmDraft.id === id ? st.bmDraft : { id: id, n: "", tg: [], nt: "" };
+    var bmt = bmEnsureTags(s.bmt);
+    return '<div class="pn-bmedit"><label class="pn-bmedit-label" for="bmNoteEd">Personal note</label>' +
+      '<textarea id="bmNoteEd" class="pn-in" rows="3" maxlength="500">' + esc(d.n) + "</textarea>" +
+      '<p class="pn-bmedit-label" id="bmTagsLab">Tags</p><div class="pn-wrap" role="group" aria-labelledby="bmTagsLab">' +
+      bmTagList(bmt).map(function (tg) {
+        return bmChip("bmtag", tg, d.tg.indexOf(tg) >= 0, bmPlain(bmt[tg].n), id);
+      }).join("") + "</div>" +
+      '<div class="pn-bmnew"><input id="bmTagNew" class="pn-in" maxlength="40" autocomplete="off" placeholder="New tag name" aria-label="New tag name" value="' + esc(d.nt) + '">' +
+      '<button type="button" class="pn-btn sm" data-act="bmtagadd" data-id="' + esc(id) + '">Add</button></div>' +
+      '<div class="pn-bmrow"><button type="button" class="pn-btn pri" data-act="bmsave" data-id="' + esc(id) + '">' + ico("check") + ' Save</button>' +
+      '<button type="button" class="pn-btn" data-act="bmcancel" data-id="' + esc(id) + '">Cancel</button></div></div>';
+  }
+  function bmHarvest() {
+    var d = st.bmDraft; if (!d || !root) return d;
+    var note = root.querySelector("#bmNoteEd"), nt = root.querySelector("#bmTagNew");
+    if (note) d.n = note.value;
+    if (nt) d.nt = nt.value;
+    return d;
+  }
+  function bmFilterPanel(s, ids) {
+    var bst = bmState(), bmt = bmEnsureTags(s.bmt), subs = {}, i;
+    ids.forEach(function (id) { subs[s.bm[id][0]] = 1; });
+    var subIds = Object.keys(subs).sort(function (a, b) {
+      var sbA = subjectById(a), sbB = subjectById(b);
+      return bmPlain(sbA && sbA.name).localeCompare(bmPlain(sbB && sbB.name));
+    });
+    var subName = function (sid) { var sb = subjectById(sid); return bmPlain(sb && sb.name) || sid; };
+    return '<section class="pn-panel" aria-label="Find saved questions">' +
+      '<label class="pn-sl" for="pnBmSearch"><span class="pn-mut pn-small">Words from the question, topic, tags or notes</span>' +
+      '<span class="pn-srch">' + ico("search") + '<input id="pnBmSearch" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(bst.q) + '"></span></label>' +
+      '<h2 class="pn-sec">Status</h2><div class="pn-wrap" role="group" aria-label="Filter by status">' +
+      bmChip("bmfs", "all", bst.f.status === "all", "All") + bmChip("bmfs", "wrong", bst.f.status === "wrong", "Incorrect before") + bmChip("bmfs", "noted", bst.f.status === "noted", "With notes") + "</div>" +
+      '<h2 class="pn-sec">Subject</h2><div class="pn-wrap" role="group" aria-label="Filter by subject">' + bmChip("bmfsub", "all", bst.f.sub === "all", "All") +
+      subIds.map(function (sid) { return bmChip("bmfsub", sid, bst.f.sub === sid, subName(sid)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Tags</h2><div class="pn-wrap" role="group" aria-label="Filter by tag">' + bmChip("bmftag", "all", bst.f.tag === "all", "All") +
+      bmTagList(bmt).map(function (tg) { return bmChip("bmftag", tg, bst.f.tag === tg, bmPlain(bmt[tg].n)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Sort</h2><div class="pn-wrap" role="group" aria-label="Sort saved questions">' +
+      bmChip("bmsort", "new", bst.f.sort === "new", "Newest") + bmChip("bmsort", "old", bst.f.sort === "old", "Oldest") + bmChip("bmsort", "az", bst.f.sort === "az", "Topic A-Z") + "</div></section>";
   }
   function renderBookmarks() {
-    var s = load(), ids = bmSortedIds(s.bm), stats = bmStats(s.bm, s.mt, Date.now());
-    var shown = Math.min(st.bmShown || BM_PAGE, ids.length), page = ids.slice(0, shown);
+    var s = load(), pg = bmPageIds(s), ids = pg.all, stats = bmStats(s.bm, s.mt, Date.now());
+    var bst = bmState();
+    var filtered = !!(bst.q || bst.f.sub !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
+    var shown = Math.min(st.bmShown || BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
     var nmods = {}; ids.forEach(function (id) { nmods[s.bm[id][0] + "|" + s.bm[id][1]] = 1; }); nmods = Object.keys(nmods).length;
     var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
     var cache = st.bmItems || {}, pending = page.filter(function (id) { return !cache[id]; }).length;
@@ -3305,14 +3488,44 @@
       hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + nmods + (nmods === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
       '<p class="pn-mut pn-small">' + fmt(stats.wrong) + " incorrect before · " + fmt(stats.fresh) + " saved this week.</p>" +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + (setupOn() ? " Practise bookmarks" : " Practise all bookmarks") + "</button>" + lastBtn("bookmarks", "") +
+      bmFilterPanel(s, ids) +
+      '<p class="pn-mut pn-small" role="status" id="pnBmCount">' + (filtered || pg.list.length > shown ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "") + "</p>" +
       '<ul class="pn-mods" id="pnBmCards" aria-label="Saved questions">' + page.map(function (id) { return bmCard(s, id); }).join("") + "</ul>" +
-      (ids.length > shown ? '<button type="button" class="pn-btn" data-act="bmmore">' + ico("plus") + " Show more (" + fmt(ids.length - shown) + " left)</button>" : "") +
+      (page.length ? "" : '<p class="pn-empty pn-art-bm">No saved questions match. Try fewer filters or other words.</p>') +
+      (pg.list.length > shown ? '<button type="button" class="pn-btn" data-act="bmmore">' + ico("plus") + " Show more (" + fmt(pg.list.length - shown) + " left)</button>" : "") +
       (pending ? '<p class="pn-mut pn-small" role="status" id="pnBmStatus">Loading previews…</p>' : "")
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
     var subs = {}; page.forEach(function (id) { if (s.bm[id]) subs[s.bm[id][0]] = 1; });
     Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
     st.bmPage = page;
     bmFill(page);
+  }
+  // Search-as-you-type path: patches the list and count in place so the search box keeps focus.
+  function bmRefreshList() {
+    if (!st.open || st.stack[st.stack.length - 1] !== renderBookmarks || !root) return;
+    var s = load(), pg = bmPageIds(s), bst = bmState();
+    var filtered = !!(bst.q || bst.f.sub !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
+    var shown = Math.min(st.bmShown = BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
+    var cards = root.querySelector("#pnBmCards"), count = root.querySelector("#pnBmCount");
+    st.bmPage = page;
+    if (cards) patchHtml(cards, page.map(function (id) { return bmCard(s, id); }).join(""));
+    if (count) count.textContent = (filtered || pg.list.length > shown) ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "";
+    var empty = root.querySelector("#pnBmEmpty");
+    if (empty) empty.parentNode.removeChild(empty);
+    if (!page.length && cards && cards.parentNode) {
+      var p = D.createElement("p");
+      p.className = "pn-empty pn-art-bm"; p.id = "pnBmEmpty";
+      p.textContent = "No saved questions match. Try fewer filters or other words.";
+      cards.parentNode.insertBefore(p, cards.nextSibling);
+    }
+    var subs = {}; page.forEach(function (id) { if (s.bm[id]) subs[s.bm[id][0]] = 1; });
+    Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
+    bmFill(page);
+  }
+  function bmSearchInput(v) {
+    st.bmQ = v; st.bmEdit = null; st.bmDraft = null;
+    if (st.bmTimer) G.clearTimeout(st.bmTimer);
+    st.bmTimer = G.setTimeout(bmRefreshList, 250);
   }
   // Fill the card cache for one page, then patch the list in place when still on screen.
   // loadMany never rejects (failed modules come back empty), so every outcome ends patched.
@@ -3352,8 +3565,24 @@
   }
   function removeBookmark(id) {
     var s = load(); if (!bmHas(s.bm, id)) return;
-    delete s.bm[id]; save(); rerender();
+    delete s.bm[id];
+    if (s.bmx) delete s.bmx[id];
+    if (s.bmt) bmPruneTags(s.bmt, s.bmx);
+    if (st.bmEdit === id) { st.bmEdit = null; st.bmDraft = null; }
+    save(); rerender();
     toast("Bookmark removed");
+  }
+  function bmRefocus(act, v, id) {
+    if (!root) return;
+    var sel = '[data-act="' + act + '"]' + (id ? '[data-id="' + id + '"]' : "") + (v != null ? '[data-v="' + v + '"]' : "");
+    var el = root.querySelector(sel);
+    if (el && el.focus) try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (x) {} }
+  }
+  function bmFilterTo(act, key, v) {
+    if (!st.bmF) st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
+    st.bmF[key] = v; st.bmShown = BM_PAGE; st.bmEdit = null; st.bmDraft = null;
+    rerender();
+    bmRefocus(act, v);
   }
   function practiceBookmarks() {
     var s = load(), by = {}, ids = Object.keys(s.bm);
@@ -3692,10 +3921,62 @@
     if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus({ preventScroll: true }); } return; }
     if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
-    if (a === "bookmarks") { st.bmShown = BM_PAGE; return push(renderBookmarks); }
+    if (a === "bookmarks") {
+      st.bmShown = BM_PAGE; st.bmQ = ""; st.bmF = { sub: "all", tag: "all", status: "all", sort: "new" };
+      st.bmEdit = null; st.bmDraft = null;
+      var bs0 = load(), before = Object.keys(bs0.bmt || {}).length;
+      bmEnsureTags(bs0.bmt || (bs0.bmt = {}));
+      if (Object.keys(bs0.bmt).length !== before) save();
+      return push(renderBookmarks);
+    }
     if (a === "bmmore") { st.bmShown = (st.bmShown || BM_PAGE) + BM_PAGE; return rerender(); }
     if (a === "bmopen") return openBookmark(b.getAttribute("data-id"));
     if (a === "bmremove") return removeBookmark(b.getAttribute("data-id"));
+    if (a === "bmfs") return bmFilterTo("bmfs", "status", v);
+    if (a === "bmfsub") return bmFilterTo("bmfsub", "sub", v);
+    if (a === "bmftag") return bmFilterTo("bmftag", "tag", v);
+    if (a === "bmsort") return bmFilterTo("bmsort", "sort", v);
+    if (a === "bmnote") {
+      var nid = b.getAttribute("data-id"), sN = load();
+      if (st.bmEdit === nid) { st.bmEdit = null; st.bmDraft = null; return rerender(); }
+      var ex = bmEntry(sN.bmx, nid) || { n: "", tg: [] };
+      st.bmEdit = nid; st.bmDraft = { id: nid, n: ex.n, tg: ex.tg.slice(), nt: "" };
+      rerender();
+      var ta = root && root.querySelector("#bmNoteEd");
+      if (ta && ta.focus) try { ta.focus({ preventScroll: true }); } catch (e) { try { ta.focus(); } catch (x) {} }
+      return;
+    }
+    if (a === "bmtag") {
+      var dT = bmHarvest(), tid = b.getAttribute("data-id"), tv = v;
+      if (!dT || dT.id !== tid) return;
+      var ti = dT.tg.indexOf(tv);
+      if (ti >= 0) dT.tg.splice(ti, 1); else dT.tg.push(tv);
+      rerender();
+      return bmRefocus("bmtag", tv, tid);
+    }
+    if (a === "bmtagadd") {
+      var dA = bmHarvest(), aid = b.getAttribute("data-id"), sA = load();
+      if (!dA || dA.id !== aid) return;
+      var nid2 = bmAddTag(sA.bmt || (sA.bmt = {}), dA.nt, Date.now());
+      if (!nid2) { toast("Type a tag name first."); return; }
+      if (dA.tg.indexOf(nid2) < 0) dA.tg.push(nid2);
+      dA.nt = ""; save(); rerender();
+      var ni = root && root.querySelector("#bmTagNew");
+      if (ni && ni.focus) try { ni.focus({ preventScroll: true }); } catch (e) { try { ni.focus(); } catch (x) {} }
+      return;
+    }
+    if (a === "bmsave") {
+      var dS = bmHarvest(), sid2 = b.getAttribute("data-id"), sS = load();
+      if (!dS || dS.id !== sid2) return;
+      bmSetNote(sS.bmx || (sS.bmx = {}), sid2, dS.n, Date.now());
+      bmSetTags(sS.bmx, sid2, dS.tg, Date.now());
+      bmPruneTags(sS.bmt || (sS.bmt = {}), sS.bmx);
+      st.bmEdit = null; st.bmDraft = null;
+      save(); rerender();
+      toast("Bookmark updated");
+      return;
+    }
+    if (a === "bmcancel") { st.bmEdit = null; st.bmDraft = null; return rerender(); }
     if (a === "plan") return startPlan();
     if (a === "weak") return startWeak();
     if (a === "goal") { var G2 = [20, 30, 50, 100], gi = G2.indexOf(s.goal); s.goal = G2[(gi + 1) % G2.length]; save(); return rerender(); }
