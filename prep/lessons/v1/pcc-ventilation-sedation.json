@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pcc-ventilation-sedation",
-  "subject": "paediatrics",
-  "title": "Ventilation, sedation and neuroprotection in PICU",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Ventilation** (**indications** apnoea GCS hypoxaemia shock, **SIMV AC** modes, **tidal 6 ml** lung protective, **PEEP FiO2** ARDSNet, **permissive hypercapnia** asthma, **prone** severe, **HFOV** air leak) with **ARDS** (**Berlin** bilateral infiltrates, **low tidal** paralysis selected, **nitric** bridge, **ECMO** refractory) oxygenates; **asthma** (permissive, **magnesium** ketamine, **avoid intubation**) bronchodilates. Volumes protect.",
-      "say": "Gasping comatose shocked hypoxaemic tubes modes low tidal PEEP ladders prone severe: asthma permits hypercapnia ketamine. Lungs protect.",
-      "vis": null
-    },
-    {
-      "tx": "**Weaning** (**SBT** pressure support, **extubate** awake cough gag, **stridor** dexamethasone nebulised adrenaline, **NIV** post extubation selected, **tracheostomy** prolonged 2 weeks, **decannulation** sleep study) with **airway** (**cuffed** tubes age formula, **uncuffed** neonates leak, **capnography** confirms, **difficult** video bougie) secures; **VAP** (head up oral care, **suction** closed) prevents. Coughs extubate.",
-      "say": "Trials breathe cuffs age capnography secures stridor dexamethasone NIV bridges trachs weeks: heads up mouths suction. Weans trial.",
-      "vis": null
-    },
-    {
-      "tx": "**Sedation** (**COMFORT** scores, **morphine midazolam** infusions, **dexmedetomidine** delirium sparing, **ketamine** bronchospasm dissociative, **propofol** infusion syndrome, **daily interruption** trials, **withdrawal** WAT methadone) with **analgesia** (paracetamol, **regional** caudals, **non-pharmacologic** sucrose swaddle) comforts; **paralysis** (rocuronium train of four, **awareness** sedation first) stills selected. Scores titrate.",
-      "say": "Scored morphine midazolam dex sparing ketamine wheezy propofol watches interruptions withdraws methadone: caudals sucrose still rocuronium aware. Comfort scores.",
-      "vis": null
-    },
-    {
-      "tx": "**Neuroprotection** (**HIE** cooling 33.5 72 hours, **TBI** ICP CPP bolts mannitol hypertonic, **status** midazolam infusions, **delirium** CAPD orient sleep, **rehab** early mobilisation, **family** presence rounds) with **transport** (stabilise lines warm, **referrals** criteria, **handoffs** SBAR) closes; **death** (brain criteria apnea, **organ** donation approached, **bereavement** follows) declares. Brains cool.",
-      "say": "Cooled thirty three seventy two bolts pressures seizes infuses delirious orients mobilises early families round: transports SBAR brains declare donate. Protects cool.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "PICU",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Vent",
-            "6ml PEEP",
-            "Prone"
-          ],
-          [
-            "Wean",
-            "SBT cough",
-            "Trach"
-          ],
-          [
-            "Sedate",
-            "Scores spare",
-            "Interrupt"
-          ],
-          [
-            "Brain",
-            "Cool bolts",
-            "Family"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-161",
-    "bk2-paed-162",
-    "bk2-paed-163",
-    "bk2-paed-164",
-    "bk2-paed-165",
-    "bk2-paed-166",
-    "bk2-paed-167",
-    "bk2-paed-168",
-    "bk2-paed-169",
-    "bk2-paed-170"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pcc-ventilation-sedation",
+ "subject": "paediatrics",
+ "title": "Ventilation, sedation and neuroprotection in PICU",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ventilation** (**indications** apnoea GCS hypoxaemia shock, **SIMV AC** modes, **tidal 6 ml** lung protective, **PEEP FiO2** ARDSNet, **permissive hypercapnia** asthma, **prone** severe, **HFOV** air leak) with **ARDS** (**Berlin** bilateral infiltrates, **low tidal** paralysis selected, **nitric** bridge, **ECMO** refractory) oxygenates; **asthma** (permissive, **magnesium** ketamine, **avoid intubation**) bronchodilates. Volumes protect.",
+   "say": "Gasping comatose shocked hypoxaemic tubes modes low tidal PEEP ladders prone severe: asthma permits hypercapnia ketamine. Lungs protect.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pcc-ventilation-sedation-fig1.webp",
+    "alt": "Diagram illustrating lung protective ventilation, ARDS, and asthma management in pediatric intensive care.",
+    "caption": "Key ventilation strategies for lung protection in PICU",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Weaning** (**SBT** pressure support, **extubate** awake cough gag, **stridor** dexamethasone nebulised adrenaline, **NIV** post extubation selected, **tracheostomy** prolonged 2 weeks, **decannulation** sleep study) with **airway** (**cuffed** tubes age formula, **uncuffed** neonates leak, **capnography** confirms, **difficult** video bougie) secures; **VAP** (head up oral care, **suction** closed) prevents. Coughs extubate.",
+   "say": "Trials breathe cuffs age capnography secures stridor dexamethasone NIV bridges trachs weeks: heads up mouths suction. Weans trial.",
+   "vis": null
+  },
+  {
+   "tx": "**Sedation** (**COMFORT** scores, **morphine midazolam** infusions, **dexmedetomidine** delirium sparing, **ketamine** bronchospasm dissociative, **propofol** infusion syndrome, **daily interruption** trials, **withdrawal** WAT methadone) with **analgesia** (paracetamol, **regional** caudals, **non-pharmacologic** sucrose swaddle) comforts; **paralysis** (rocuronium train of four, **awareness** sedation first) stills selected. Scores titrate.",
+   "say": "Scored morphine midazolam dex sparing ketamine wheezy propofol watches interruptions withdraws methadone: caudals sucrose still rocuronium aware. Comfort scores.",
+   "vis": null
+  },
+  {
+   "tx": "**Neuroprotection** (**HIE** cooling 33.5 72 hours, **TBI** ICP CPP bolts mannitol hypertonic, **status** midazolam infusions, **delirium** CAPD orient sleep, **rehab** early mobilisation, **family** presence rounds) with **transport** (stabilise lines warm, **referrals** criteria, **handoffs** SBAR) closes; **death** (brain criteria apnea, **organ** donation approached, **bereavement** follows) declares. Brains cool.",
+   "say": "Cooled thirty three seventy two bolts pressures seizes infuses delirious orients mobilises early families round: transports SBAR brains declare donate. Protects cool.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PICU",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Vent",
+      "6ml PEEP",
+      "Prone"
+     ],
+     [
+      "Wean",
+      "SBT cough",
+      "Trach"
+     ],
+     [
+      "Sedate",
+      "Scores spare",
+      "Interrupt"
+     ],
+     [
+      "Brain",
+      "Cool bolts",
+      "Family"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-161",
+  "bk2-paed-162",
+  "bk2-paed-163",
+  "bk2-paed-164",
+  "bk2-paed-165",
+  "bk2-paed-166",
+  "bk2-paed-167",
+  "bk2-paed-168",
+  "bk2-paed-169",
+  "bk2-paed-170"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

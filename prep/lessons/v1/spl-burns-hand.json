@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "spl-burns-hand",
-  "subject": "surgery",
-  "title": "Burns resuscitation, excision-grafting and hand surgery",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Assess** (**rule of nines** adult, **Lund-Browder** children, **first** epidermal painful, **second** blistered, **third** leathery painless, **inhalation** soot stridor carboxy, **TBSA** maps) with **resuscitation** (**Parkland 4 ml lactated Ringer per kg per percent**, half 8 hours, **urine 0.5 ml**, **MAP** 65, **cover** clean, **tetanus** updates) fluids; **transfer** (major 10 percent child, face hands feet perineum) criteria. Maps fluids.",
-      "say": "Nines Lund blisters leathery soot stridor is burns mapped: Parkland fours halves urine halves tetanus covers. Transfers major.",
-      "vis": null
-    },
-    {
-      "tx": "**Excision** (**early tangential** 3 to 5 days, **fascial** massive, **tourniquet** limbs bloodless, **tumescence** adrenaline, **STSG** 4 to 1 mesh, **Meek** wide, **allograft** sandwich, **cultured** epicel) with **escharotomy** (**circumferential** chest limbs, **compartments** pressures, **fasciotomy** calves) releases; **face hands** (sheet grafts, **splints** anti-contracture, **pressure** garments) prioritise. Days mesh.",
-      "say": "Dead sliced meshed sandwich cultured is excision grafting: chests limbs released pressures fasciotomise faces sheet splint. Early covers.",
-      "vis": null
-    },
-    {
-      "tx": "**Hand** (**zones** flexor 2 no mans land, **tendon** 4-strand Kessler early motion, **nerves** digital repair, **amputation** replant thumb multiple, **carpal** night splints release, **Dupuytren** fasciectomy) with **fractures** (**metacarpal** buddy straps, **scaphoid** snuffbox cast, **tendon** mallet splints, **nails** trephine) fixes; **therapy** (edema elevation, **motion** protocols) moves. Zones motion.",
-      "say": "No mans strands motions nerves replant thumbs nights release cords cut is hand: buddies snuffboxes mallets trephines fix. Therapists move.",
-      "vis": null
-    },
-    {
-      "tx": "**Scars** (**contracture** splints serial, **hypertrophic** pressure silicone, **keloid** ears sternum excise radiate, **Z-plasty** lengthens, **laser** redness) with **rehab** (physio OT, **psychology** trauma, **work** hardening, **school** returns) and **prevention** (smoke alarms, **first aid** cool 20 minutes) matures; **inhalation** (bronchoscopy, **100 percent** oxygen, **ventilation** lung protective) breathes. Cools prevent.",
-      "say": "Tight presses inject lengthens lasers reddens is scars: therapy trauma hardens schools return alarms cool twenties. Airways scope.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Burns hand",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Assess",
-            "Nines Lund",
-            "Parkland"
-          ],
-          [
-            "Excise",
-            "Days mesh",
-            "Release"
-          ],
-          [
-            "Hand",
-            "Zones motion",
-            "Splint"
-          ],
-          [
-            "Scars",
-            "Press inject",
-            "Cool"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-pla-011",
-    "bk2-pla-012",
-    "bk2-pla-013",
-    "bk2-pla-014",
-    "bk2-pla-015",
-    "bk2-pla-016",
-    "bk2-pla-017",
-    "bk2-pla-018",
-    "bk2-pla-019",
-    "bk2-pla-020"
-  ],
-  "src": [],
-  "refs": [
-    "Plastic Surgery 5th Edition 2024 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-plas1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "spl-burns-hand",
+ "subject": "surgery",
+ "title": "Burns resuscitation, excision-grafting and hand surgery",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Assess** (**rule of nines** adult, **Lund-Browder** children, **first** epidermal painful, **second** blistered, **third** leathery painless, **inhalation** soot stridor carboxy, **TBSA** maps) with **resuscitation** (**Parkland 4 ml lactated Ringer per kg per percent**, half 8 hours, **urine 0.5 ml**, **MAP** 65, **cover** clean, **tetanus** updates) fluids; **transfer** (major 10 percent child, face hands feet perineum) criteria. Maps fluids.",
+   "say": "Nines Lund blisters leathery soot stridor is burns mapped: Parkland fours halves urine halves tetanus covers. Transfers major.",
+   "vis": null
+  },
+  {
+   "tx": "**Excision** (**early tangential** 3 to 5 days, **fascial** massive, **tourniquet** limbs bloodless, **tumescence** adrenaline, **STSG** 4 to 1 mesh, **Meek** wide, **allograft** sandwich, **cultured** epicel) with **escharotomy** (**circumferential** chest limbs, **compartments** pressures, **fasciotomy** calves) releases; **face hands** (sheet grafts, **splints** anti-contracture, **pressure** garments) prioritise. Days mesh.",
+   "say": "Dead sliced meshed sandwich cultured is excision grafting: chests limbs released pressures fasciotomise faces sheet splint. Early covers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/spl-burns-hand-fig1.webp",
+    "alt": "Diagram showing skin graft meshing, escharotomy incisions on torso and limbs, and depths of burn excision.",
+    "caption": "Burn excision, grafting, and escharotomy techniques",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Hand** (**zones** flexor 2 no mans land, **tendon** 4-strand Kessler early motion, **nerves** digital repair, **amputation** replant thumb multiple, **carpal** night splints release, **Dupuytren** fasciectomy) with **fractures** (**metacarpal** buddy straps, **scaphoid** snuffbox cast, **tendon** mallet splints, **nails** trephine) fixes; **therapy** (edema elevation, **motion** protocols) moves. Zones motion.",
+   "say": "No mans strands motions nerves replant thumbs nights release cords cut is hand: buddies snuffboxes mallets trephines fix. Therapists move.",
+   "vis": null
+  },
+  {
+   "tx": "**Scars** (**contracture** splints serial, **hypertrophic** pressure silicone, **keloid** ears sternum excise radiate, **Z-plasty** lengthens, **laser** redness) with **rehab** (physio OT, **psychology** trauma, **work** hardening, **school** returns) and **prevention** (smoke alarms, **first aid** cool 20 minutes) matures; **inhalation** (bronchoscopy, **100 percent** oxygen, **ventilation** lung protective) breathes. Cools prevent.",
+   "say": "Tight presses inject lengthens lasers reddens is scars: therapy trauma hardens schools return alarms cool twenties. Airways scope.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Burns hand",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Assess",
+      "Nines Lund",
+      "Parkland"
+     ],
+     [
+      "Excise",
+      "Days mesh",
+      "Release"
+     ],
+     [
+      "Hand",
+      "Zones motion",
+      "Splint"
+     ],
+     [
+      "Scars",
+      "Press inject",
+      "Cool"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-pla-011",
+  "bk2-pla-012",
+  "bk2-pla-013",
+  "bk2-pla-014",
+  "bk2-pla-015",
+  "bk2-pla-016",
+  "bk2-pla-017",
+  "bk2-pla-018",
+  "bk2-pla-019",
+  "bk2-pla-020"
+ ],
+ "src": [],
+ "refs": [
+  "Plastic Surgery 5th Edition 2024 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-plas1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
