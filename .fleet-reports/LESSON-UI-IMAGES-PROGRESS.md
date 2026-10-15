@@ -321,3 +321,30 @@
   ophthalmology (30 zero), psychiatry (28 zero), then micro/biochem/pathology
   highest-weight remainders; anatomy/physiology already complete.
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+
+## Batch 9 (2026-10-15, branch lessonui-batch9): medicine quartet
+
+- **4 original SVGs** (`med-gold-bode`, `med-dka-bridge`,
+  `med-nephritic-nephrotic`, `med-cardiomyopathy`) wired into 4 null-visual
+  lessons (`med-copd` s2, `med-diabetes-complications` s3,
+  `med-glomerulonephritis` s0, `med-cardiomyopathy` s0). Same bank format
+  (white stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption,
+  palette #071318 / #3D5A54 / #0B6B5B / #B7791F with block-red #B42318).
+- **Second pass**: XML parse + a11y assert on all 4 files; numbers recomputed:
+  GOLD cutoffs 80/50/30 with FEV1/FVC < 0.70, ABE group rule (>= 2 moderate or
+  >= 1 severe = E), BODE 0-10; DKA overlap 1-2 h, TDD weight split, ketones
+  < 0.6 resolution (matches lesson steps 0-2); nephritic/nephrotic split at
+  3.5 g/day with latency rules; HCM septum >= 15 mm with Valsalva/squat
+  murmur dynamics. No shared-figure duplication except deliberate reuse.
+  Contrast computed for every small-text pair: translucent fills recoloured
+  to solid teal/red/ink so all remaining small text is 5.9:1 or better
+  (lowest: white on solid teal 6.43:1; ink on lightened GOLD 2/3 bars
+  6.0/7.2:1).
+- **Attribution**: 4 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 4/4 wired lessons `checkLesson` clean. Audit now 218 with images,
+  1253 zero of 1471 (medicine 100 zero / 13 with).
+- Next: surgery (67 zero), biochemistry (63 zero), pharmacology (60 zero),
+  paediatrics (56 zero) highest-weight remainders; anatomy/physiology verified
+  complete (79/79 ana, 49/49 phy with images).
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.

@@ -1,6 +1,8 @@
 # Lesson image audit
 
-Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1257 lessons (85.5%) have zero images; 214 have at least one.**
+Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (85.2%) have zero images; 218 have at least one.**
+
+Batch 9 (2026-10-15, branch lessonui-batch9): 4 more lessons wired (medicine +4: med-copd, med-diabetes-complications, med-glomerulonephritis, med-cardiomyopathy; 4 original SVGs); was 1257 zero / 214 with.
 
 Batch 8 (2026-10-15, branch lessonui-1013): 4 more lessons wired (obstetrics-gynaecology +4: obg-normal-labour x2 figs, obg-hypertensive-disorders x2 figs, obg-contraception, obg-fetal-growth-surveillance; 6 original SVGs); was 1261 zero / 210 with.
 
@@ -18,7 +20,7 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
-| medicine | 113 | 104 | 9 |
+| medicine | 113 | 100 | 13 |
 | anatomy | 80 | 0 | 80 |
 | pathology | 73 | 64 | 9 |
 | pharmacology | 72 | 60 | 12 |

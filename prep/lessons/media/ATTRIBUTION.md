@@ -298,3 +298,7 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | obg-mgso4.svg | Pritchard vs Zuspan magnesium regimens, toxicity ladder with calcium gluconate, labetalol-first pressure control | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | obg-contra-fail.svg | Typical-use failure ladder implant 0.1 to nothing 85; emergency windows copper 5 days, LNG 72 h, ulipristal 120 h | StewardMD (original) | CC BY 4.0 (StewardMD original) |
 | obg-decelerations.svg | Early mirror vs late lag vs abrupt variable deceleration strips with mechanisms; shouldering and sinusoidal notes | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-gold-bode.svg | GOLD grades 1-4 (FEV1 80/50/30), ABE groups, BODE 0-10 | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-dka-bridge.svg | DKA to subcutaneous insulin: basal overlap 1-2 h, weight-based TDD split | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-nephritic-nephrotic.svg | Nephritic vs nephrotic split at 3.5 g/day, latency clocks the cause | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-cardiomyopathy.svg | Dilated vs hypertrophic (septum 15 mm, SAM) vs restrictive cardiomyopathy | StewardMD (original) | CC BY 4.0 (StewardMD original) |
