@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-adrenal",
-  "subject": "medicine",
-  "title": "Addison's disease, Cushing's syndrome and adrenal crisis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**weakness** months emaciation fatigue, **pigment** creases scars gums vitiligo, **pressure** postural dizzy faint salt craving, **Cushing** weight striae bruises pressure sugar, **crisis** vomiting pain collapse steroids stopped, **TB** HIV bleed meningococcal past, **steroid** years inhalers creams) with **viva** (**Addisonian** pigmented hypotensive, **cushingoid** moon plethoric) profiles; **weight** (loss Addison, gain Cushing) contrasts. Glands fail.",
-      "say": "Weaknesses pigments pressures Cushings is history: crises collapse TBs scar steroids blunt weights contrast Addisons darken cushings round salts crave sugars rise. Faces pigment.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**pigment** palmar knuckles scars areolae, **vitiligo** autoimmune patches, **postural** lying standing drops, **moon** facies plethora acne hirsute, **striae** purple wide bruises thin, **buffalo** hump supraclavicular pads, **crisis** shocked tachycardic rigid belly, **proximal** myopathy rises) with **bedside** (**sodium** low potassium high glucose, **cortisol** random synacthen, **BP** crisis fluids) measures; **hair** (pubic axillary lost) looks. Bodies signal.",
-      "say": "Pigments vitiligos posturals moons is exam: striae tear buffalos hump crises shock myopathies weaken sodiums dip cortisols plunge pressures fill hairs shed replacements start. Skins darken.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**cortisol** low ACTH high primary proves, **synacthen** short long fails, **dexamethasone** suppress Cushing sorts, **midnight** salivary loss rhythm, **ACTH** ectopic high pituitary, **CT** adrenals TB bleed adenoma, **electrolytes** 3S crisis) with **differentials** (**Addison** pigmented ACTH high, **Cushing** moon suppress fails, **ectopic** small-cell rapid, **steroid** withdrawal iatrogenic) sorts; **endocrine** (pituitary adrenal decides) meets. Steroids stray.",
-      "say": "Cortisols synacthens dexamethasones midnights is Ix: ACTHs soar CTs show electrolytes warn Addisons bronze Cushings moon ectopics race withdrawals blunt endocrines meet scans image surgeons cut. Numbers confess.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**crisis** saline glucose hydrocortisone 100 stat, **replace** hydrocortisone fludrocortisone doubles sick, **Cushing** transsphenoidal adrenalectomy ketoconazole, **steroid** taper sick rules card, **precipitants** infection operates treats, **pregnancy** replaces monitors) with **traps** (**thyroxine** before steroid kills, **stop** abrupt collapses, **surgery** cover doubles) closes; **follow** (electrolytes weight crisis card) tracks. Glands supported.",
-      "say": "Crises replaces Cushings tapers is Rx: precipitants treat pregnancies guard thyroxines wait stops collapse surgeries cover follows track cards carry wishes respect. Steroids steady.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-421",
-    "bk2-med-422",
-    "bk2-med-423",
-    "bk2-med-424",
-    "bk2-med-425",
-    "bk2-med-426",
-    "bk2-med-427",
-    "bk2-med-428",
-    "bk2-med-429",
-    "bk2-med-430"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-adrenal",
+ "subject": "medicine",
+ "title": "Addison's disease, Cushing's syndrome and adrenal crisis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**weakness** months emaciation fatigue, **pigment** creases scars gums vitiligo, **pressure** postural dizzy faint salt craving, **Cushing** weight striae bruises pressure sugar, **crisis** vomiting pain collapse steroids stopped, **TB** HIV bleed meningococcal past, **steroid** years inhalers creams) with **viva** (**Addisonian** pigmented hypotensive, **cushingoid** moon plethoric) profiles; **weight** (loss Addison, gain Cushing) contrasts. Glands fail.",
+   "say": "Weaknesses pigments pressures Cushings is history: crises collapse TBs scar steroids blunt weights contrast Addisons darken cushings round salts crave sugars rise. Faces pigment.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**pigment** palmar knuckles scars areolae, **vitiligo** autoimmune patches, **postural** lying standing drops, **moon** facies plethora acne hirsute, **striae** purple wide bruises thin, **buffalo** hump supraclavicular pads, **crisis** shocked tachycardic rigid belly, **proximal** myopathy rises) with **bedside** (**sodium** low potassium high glucose, **cortisol** random synacthen, **BP** crisis fluids) measures; **hair** (pubic axillary lost) looks. Bodies signal.",
+   "say": "Pigments vitiligos posturals moons is exam: striae tear buffalos hump crises shock myopathies weaken sodiums dip cortisols plunge pressures fill hairs shed replacements start. Skins darken.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-adrenal-fig1.webp",
+    "alt": "A composite image contrasting the physical examination findings of Addison's disease (hyperpigmentation, vitiligo) and Cushing's syndrome (moon facies, striae, buffalo hump).",
+    "caption": "Clinical signs of Addison's disease and Cushing's syndrome",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**cortisol** low ACTH high primary proves, **synacthen** short long fails, **dexamethasone** suppress Cushing sorts, **midnight** salivary loss rhythm, **ACTH** ectopic high pituitary, **CT** adrenals TB bleed adenoma, **electrolytes** 3S crisis) with **differentials** (**Addison** pigmented ACTH high, **Cushing** moon suppress fails, **ectopic** small-cell rapid, **steroid** withdrawal iatrogenic) sorts; **endocrine** (pituitary adrenal decides) meets. Steroids stray.",
+   "say": "Cortisols synacthens dexamethasones midnights is Ix: ACTHs soar CTs show electrolytes warn Addisons bronze Cushings moon ectopics race withdrawals blunt endocrines meet scans image surgeons cut. Numbers confess.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**crisis** saline glucose hydrocortisone 100 stat, **replace** hydrocortisone fludrocortisone doubles sick, **Cushing** transsphenoidal adrenalectomy ketoconazole, **steroid** taper sick rules card, **precipitants** infection operates treats, **pregnancy** replaces monitors) with **traps** (**thyroxine** before steroid kills, **stop** abrupt collapses, **surgery** cover doubles) closes; **follow** (electrolytes weight crisis card) tracks. Glands supported.",
+   "say": "Crises replaces Cushings tapers is Rx: precipitants treat pregnancies guard thyroxines wait stops collapse surgeries cover follows track cards carry wishes respect. Steroids steady.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-421",
+  "bk2-med-422",
+  "bk2-med-423",
+  "bk2-med-424",
+  "bk2-med-425",
+  "bk2-med-426",
+  "bk2-med-427",
+  "bk2-med-428",
+  "bk2-med-429",
+  "bk2-med-430"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "neo-infections-jaundice",
-  "subject": "paediatrics",
-  "title": "Neonatal infections, jaundice and metabolic care",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Sepsis** (**EOS** GBS E coli chorio prolonged rupture, **lethargy poor feeding temperature instability**, **CRP procalcitonin**, cultures first; **ampicillin with gentamicin** EOS, **cefotaxime** meningitis, **acyclovir** HSV vesicles seizures) with **LOS** (coagulase staph lines, fluconazole prophylaxis ELBW, **NEC** Bell bloody residuals pneumatosis, **surgery** perforation) manages; **antibiotics** 36 48 hours cultures negative stops. Bundles hands lines.",
-      "say": "Floppy unfed unstable cultures ampicillin gentamicin is EOS: bloody residuals pneumatosis NEC Bell. Stops negative.",
-      "vis": null
-    },
-    {
-      "tx": "**Jaundice** (**physiologic** day 2 to 4 term, **breastfeeding** intake, **breast milk** week 2 UGT, **pathologic** first day palms soles rapid IVIG; **bilirubin hours Bhutani**, **DAT** Coombs, **G6PD**, **TSH** hypothyroid) with **phototherapy** (irradiance eyes covered, **hydration** feeds, **rebound** checks) and **exchange** (**IVIG** isoimmune, double volume, calcium watches) treats; **kernicterus** (opisthotonos auditory) prevents. Lights chart.",
-      "say": "Day one palms rapid is pathologic DAT G6PD: lights hydrate rebound exchange IVIG. Brains stain prevented.",
-      "vis": null
-    },
-    {
-      "tx": "**Hypoglycaemia** (**at risk** IDM SGA preterm, **under 45** treats, **feeds** first, **IV dextrose** recurrent, **hyperinsulinism** diazoxide) with **calcium magnesium** (jittery QT, corrects), **thyroid** (prolonged screens), **adrenal** (ambiguous salt losing) and **IEM** (**hyperammonaemia** lethargy, **maple urine**, **tandem mass** screening, **protein stop glucose** crisis) crises; **ammonia** dialyses. Sugars protocol.",
-      "say": "Shaky low feeds dextrose recurs diazoxide hyperinsulin: pungent lethargic ammonia stops protein glucose. Screens tandem.",
-      "vis": null
-    },
-    {
-      "tx": "**TORCH** (**rubella** cataract PDA, **CMV** microcephaly calcifications, **toxo** hydrocephalus chorioretinitis, **syphilis** snuffles Hutchinson, **parvo** hydrops, **zika** calcifications; **maternal IgG** crosses, **neonatal IgM** diagnoses) with **HIV** (maternal ART, **neonatal prophylaxis**, **PCR** birth 6 weeks, **cotrimoxazole** PCP, **Bactrim** feeds) prevents; **hepatitis B** (birth duo) completes. Serologies pair.",
-      "say": "Cataract microcephaly hydrocephalus snuffles calcifications TORCH IgM: birth PCR prophy cotrimoxazole. Duos birth.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Neonate",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Sepsis",
-            "EOS ampi genta",
-            "NEC Bell"
-          ],
-          [
-            "Jaundice",
-            "Day1 pathologic",
-            "Lights IVIG"
-          ],
-          [
-            "Sugar IEM",
-            "45 ammonia",
-            "Stop protein"
-          ],
-          [
-            "TORCH",
-            "IgM diagnoses",
-            "Birth PCR"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-021",
-    "bk2-paed-022",
-    "bk2-paed-023",
-    "bk2-paed-024",
-    "bk2-paed-025",
-    "bk2-paed-026",
-    "bk2-paed-027",
-    "bk2-paed-028",
-    "bk2-paed-029",
-    "bk2-paed-030"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "neo-infections-jaundice",
+ "subject": "paediatrics",
+ "title": "Neonatal infections, jaundice and metabolic care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sepsis** (**EOS** GBS E coli chorio prolonged rupture, **lethargy poor feeding temperature instability**, **CRP procalcitonin**, cultures first; **ampicillin with gentamicin** EOS, **cefotaxime** meningitis, **acyclovir** HSV vesicles seizures) with **LOS** (coagulase staph lines, fluconazole prophylaxis ELBW, **NEC** Bell bloody residuals pneumatosis, **surgery** perforation) manages; **antibiotics** 36 48 hours cultures negative stops. Bundles hands lines.",
+   "say": "Floppy unfed unstable cultures ampicillin gentamicin is EOS: bloody residuals pneumatosis NEC Bell. Stops negative.",
+   "vis": null
+  },
+  {
+   "tx": "**Jaundice** (**physiologic** day 2 to 4 term, **breastfeeding** intake, **breast milk** week 2 UGT, **pathologic** first day palms soles rapid IVIG; **bilirubin hours Bhutani**, **DAT** Coombs, **G6PD**, **TSH** hypothyroid) with **phototherapy** (irradiance eyes covered, **hydration** feeds, **rebound** checks) and **exchange** (**IVIG** isoimmune, double volume, calcium watches) treats; **kernicterus** (opisthotonos auditory) prevents. Lights chart.",
+   "say": "Day one palms rapid is pathologic DAT G6PD: lights hydrate rebound exchange IVIG. Brains stain prevented.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/neo-infections-jaundice-fig1.webp",
+    "alt": "A Bhutani nomogram showing bilirubin levels over postnatal hours, with risk zones and thresholds for phototherapy and exchange transfusion in newborns.",
+    "caption": "Bhutani nomogram for neonatal hyperbilirubinemia, guiding phototherapy and exchange transfusion decisions",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Hypoglycaemia** (**at risk** IDM SGA preterm, **under 45** treats, **feeds** first, **IV dextrose** recurrent, **hyperinsulinism** diazoxide) with **calcium magnesium** (jittery QT, corrects), **thyroid** (prolonged screens), **adrenal** (ambiguous salt losing) and **IEM** (**hyperammonaemia** lethargy, **maple urine**, **tandem mass** screening, **protein stop glucose** crisis) crises; **ammonia** dialyses. Sugars protocol.",
+   "say": "Shaky low feeds dextrose recurs diazoxide hyperinsulin: pungent lethargic ammonia stops protein glucose. Screens tandem.",
+   "vis": null
+  },
+  {
+   "tx": "**TORCH** (**rubella** cataract PDA, **CMV** microcephaly calcifications, **toxo** hydrocephalus chorioretinitis, **syphilis** snuffles Hutchinson, **parvo** hydrops, **zika** calcifications; **maternal IgG** crosses, **neonatal IgM** diagnoses) with **HIV** (maternal ART, **neonatal prophylaxis**, **PCR** birth 6 weeks, **cotrimoxazole** PCP, **Bactrim** feeds) prevents; **hepatitis B** (birth duo) completes. Serologies pair.",
+   "say": "Cataract microcephaly hydrocephalus snuffles calcifications TORCH IgM: birth PCR prophy cotrimoxazole. Duos birth.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neonate",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Sepsis",
+      "EOS ampi genta",
+      "NEC Bell"
+     ],
+     [
+      "Jaundice",
+      "Day1 pathologic",
+      "Lights IVIG"
+     ],
+     [
+      "Sugar IEM",
+      "45 ammonia",
+      "Stop protein"
+     ],
+     [
+      "TORCH",
+      "IgM diagnoses",
+      "Birth PCR"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-021",
+  "bk2-paed-022",
+  "bk2-paed-023",
+  "bk2-paed-024",
+  "bk2-paed-025",
+  "bk2-paed-026",
+  "bk2-paed-027",
+  "bk2-paed-028",
+  "bk2-paed-029",
+  "bk2-paed-030"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

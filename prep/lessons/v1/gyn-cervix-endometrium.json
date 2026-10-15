@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "gyn-cervix-endometrium",
-  "subject": "obstetrics-gynaecology",
-  "title": "SS gyn-oncology: cervical and endometrial cancer staging and therapy",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Cervical** (**HPV 16 18**, screening VIA Pap HPV, **CIN 1 observe 2 3 excise LEEP**, **FIGO 2018** IB size nodes **IIIC**, parametrial IIB, bladder IVA) with **surgery** (**radical hysterectomy Querleu-Morrow** A B C, **trachelectomy** fertility IB, **sentinel** bilateral ultrastaging, **ovarian transposition** radiation) treats early; **adenocarcinoma** Pap misses endocervical. Colposcopy Reid directs.",
-      "say": "HPV screens excise high grades: nodes stage IIIC radicals lettered fertility trachelectomies. Sizes parametria stage.",
-      "vis": null
-    },
-    {
-      "tx": "**Chemoradiation** (**IB3 to IVA cisplatin weekly** with brachytherapy, **outback** debated, **fistula** exenteration, **palliation** bevacizumab pembrolizumab) with **recurrence** (**pelvic exenteration** central, **chemo** paclitaxel cisplatin bevacizumab, **immunotherapy** PD-L1) manages advanced; **pregnancy** (trachelectomy, neoadjuvant, delay selected) individualises. Counselling ovaries bowels bladder; fertility teams transpose ovaries before rays.",
-      "say": "Weekly cisplatin rays brachy cures locally advanced: central recurs exenterates bevacizumab palliates. Fistulae divert.",
-      "vis": null
-    },
-    {
-      "tx": "**Endometrial** (**type 1 estrogen** hyperplasia, **type 2 serous clear** p53, **ProMisE POLE MSI p53 NSMP**, Lynch screens; **FIGO 2023** molecular stages, postmenopausal bleeding biopsies, **TVS 4 mm** triages) with **surgery** (**hysterectomy BSO nodes sentinel**, **fertility progestin** grade 1 no invasion, **omentectomy** serous) stages; **obesity** risk counsels. Pipelle hysteroscopy directs.",
-      "say": "Bleeding biopsies molecular POLE MSI p53 stage 2023: hysterectomy nodes sentinel fertility progestins selected. Obesity oestrogen drives.",
-      "vis": null
-    },
-    {
-      "tx": "**Adjuvant** (**vault brachytherapy** intermediate, **EBRT** high intermediate LVSI, **chemo carboplatin paclitaxel** high risk serous, **hormonal** progestin ER, **HER2** serous trastuzumab, **immunotherapy** MSI pembrolizumab dostarlimab) with **surveillance** (vault cytology symptoms, **CA-125** selected, **recurrence** hormones radiation surgery) closes; **Lynch** (colonoscopy aspirin, family cascades) screens. Trials molecular enrol.",
-      "say": "Brachy intermediate rays LVSI chemo serous hormones ER HER2 MSI immunotherapies: Lynch colons families. Vaults watch.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "SS gyn",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Cervix",
-            "IIIC nodes",
-            "Radicals C"
-          ],
-          [
-            "ChemoRT",
-            "Cisplatin brachy",
-            "Exenterate"
-          ],
-          [
-            "Endometrium",
-            "ProMisE 2023",
-            "Sentinel"
-          ],
-          [
-            "Adjuvant",
-            "MSI immuno",
-            "Lynch"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-331",
-    "bk2-obg-332",
-    "bk2-obg-333",
-    "bk2-obg-334",
-    "bk2-obg-335",
-    "bk2-obg-336",
-    "bk2-obg-337",
-    "bk2-obg-338",
-    "bk2-obg-339",
-    "bk2-obg-340"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "gyn-cervix-endometrium",
+ "subject": "obstetrics-gynaecology",
+ "title": "SS gyn-oncology: cervical and endometrial cancer staging and therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Cervical** (**HPV 16 18**, screening VIA Pap HPV, **CIN 1 observe 2 3 excise LEEP**, **FIGO 2018** IB size nodes **IIIC**, parametrial IIB, bladder IVA) with **surgery** (**radical hysterectomy Querleu-Morrow** A B C, **trachelectomy** fertility IB, **sentinel** bilateral ultrastaging, **ovarian transposition** radiation) treats early; **adenocarcinoma** Pap misses endocervical. Colposcopy Reid directs.",
+   "say": "HPV screens excise high grades: nodes stage IIIC radicals lettered fertility trachelectomies. Sizes parametria stage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/gyn-cervix-endometrium-fig1.webp",
+    "alt": "Diagram illustrating FIGO 2018 cervical cancer stages, showing tumor spread to cervix, parametrium, pelvic sidewall, bladder, and rectum.",
+    "caption": "FIGO 2018 cervical cancer staging: anatomical spread",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Chemoradiation** (**IB3 to IVA cisplatin weekly** with brachytherapy, **outback** debated, **fistula** exenteration, **palliation** bevacizumab pembrolizumab) with **recurrence** (**pelvic exenteration** central, **chemo** paclitaxel cisplatin bevacizumab, **immunotherapy** PD-L1) manages advanced; **pregnancy** (trachelectomy, neoadjuvant, delay selected) individualises. Counselling ovaries bowels bladder; fertility teams transpose ovaries before rays.",
+   "say": "Weekly cisplatin rays brachy cures locally advanced: central recurs exenterates bevacizumab palliates. Fistulae divert.",
+   "vis": null
+  },
+  {
+   "tx": "**Endometrial** (**type 1 estrogen** hyperplasia, **type 2 serous clear** p53, **ProMisE POLE MSI p53 NSMP**, Lynch screens; **FIGO 2023** molecular stages, postmenopausal bleeding biopsies, **TVS 4 mm** triages) with **surgery** (**hysterectomy BSO nodes sentinel**, **fertility progestin** grade 1 no invasion, **omentectomy** serous) stages; **obesity** risk counsels. Pipelle hysteroscopy directs.",
+   "say": "Bleeding biopsies molecular POLE MSI p53 stage 2023: hysterectomy nodes sentinel fertility progestins selected. Obesity oestrogen drives.",
+   "vis": null
+  },
+  {
+   "tx": "**Adjuvant** (**vault brachytherapy** intermediate, **EBRT** high intermediate LVSI, **chemo carboplatin paclitaxel** high risk serous, **hormonal** progestin ER, **HER2** serous trastuzumab, **immunotherapy** MSI pembrolizumab dostarlimab) with **surveillance** (vault cytology symptoms, **CA-125** selected, **recurrence** hormones radiation surgery) closes; **Lynch** (colonoscopy aspirin, family cascades) screens. Trials molecular enrol.",
+   "say": "Brachy intermediate rays LVSI chemo serous hormones ER HER2 MSI immunotherapies: Lynch colons families. Vaults watch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SS gyn",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Cervix",
+      "IIIC nodes",
+      "Radicals C"
+     ],
+     [
+      "ChemoRT",
+      "Cisplatin brachy",
+      "Exenterate"
+     ],
+     [
+      "Endometrium",
+      "ProMisE 2023",
+      "Sentinel"
+     ],
+     [
+      "Adjuvant",
+      "MSI immuno",
+      "Lynch"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-331",
+  "bk2-obg-332",
+  "bk2-obg-333",
+  "bk2-obg-334",
+  "bk2-obg-335",
+  "bk2-obg-336",
+  "bk2-obg-337",
+  "bk2-obg-338",
+  "bk2-obg-339",
+  "bk2-obg-340"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
