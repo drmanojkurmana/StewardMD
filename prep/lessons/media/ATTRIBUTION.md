@@ -424,3 +424,8 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | rad-clinical-rt-fig1.webp (R2) | Combined radiotherapy for cervix cancer | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
 | psy-dementia-fig1.webp (R2) | Pharmacological targets for Alzheimer's disease | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
 | scc-brain-death-fig1.webp (R2) | Key brainstem reflexes assessed during brain death clinical examination | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-alvarado.svg | Alvarado MANTRELS ladder totalling 10 (T and L double weight), 7 or more books surgery; CT over 6 mm, sensitivity above 95 percent | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-parkland.svg | Parkland 4 mL x kg x percent burn, half in first 8 h, rest over next 16 h, urine target 0.5 mL/kg/h; 70 kg 40 percent worked example totals 11,200 mL | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-lethal-triad.svg | Lethal triad triangle (hypothermia, acidosis, coagulopathy) and damage control sequence under 60 minutes with temporary closure and ICU correction | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-charcot-reynolds.svg | Charcot triad (fever, jaundice, RUQ pain) to Reynolds pentad (plus shock and confusion); fluids, antibiotics, urgent ERCP drainage | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| sur-aaa-threshold.svg | AAA elective repair 5.5 cm men, 5.0 cm women, growth over 5 mm in 6 months; rupture branch stable to CT, unstable straight to theatre (SBP 70-90) | StewardMD (original) | CC BY 4.0 (StewardMD original) |
