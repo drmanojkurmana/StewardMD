@@ -276,12 +276,10 @@
       });
     }
 
-    return signRequestHeaders(p).then(function (headers) {
-      return G.fetch(url, {
-        method: "GET",
-        headers: headers,
-        cache: "no-store"
-      });
+    // Fail open while the server is in shadow mode: if no session can be minted (no token yet, session route down),
+    // ask without proof. Once PREP_BANK_ENFORCE is on the server answers 401 and that error surfaces below.
+    return signRequestHeaders(p).then(function (headers) { return headers; }, function () { return null; }).then(function (headers) {
+      return G.fetch(url, headers ? { method: "GET", headers: headers, cache: "no-store" } : { method: "GET", cache: "no-store" });
     }).then(function (r) {
       if (r.status === 401 && (!retryCount || retryCount < 1)) {
         return r.json().catch(function () { return {}; }).then(function (j) {
