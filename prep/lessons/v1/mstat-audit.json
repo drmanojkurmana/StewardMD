@@ -100,23 +100,11 @@
    "tx": "Statistical process control uses a **control chart** with limits at three standard deviations. Common cause variation is random noise inherent to a stable process. A **special cause** point beyond the limits signals a change and should be investigated before limits or data are altered.",
    "say": "Statistical process control uses a control chart with limits at three standard deviations. Common cause variation is random noise inherent to a stable process. A special cause point beyond the limits signals a change and should be investigated before limits or data are altered.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Common cause",
-     "points": [
-      "Random noise in stable system",
-      "Within control limits",
-      "No immediate action needed"
-     ]
-    },
-    "right": {
-     "title": "Special cause",
-     "points": [
-      "Point beyond limits",
-      "Assignable reason likely",
-      "Investigate and document"
-     ]
-    }
+    "kind": "image",
+    "src": "prep/lessons/media/stats-control-chart.svg",
+    "alt": "Control chart of twenty audit measurements over time: nineteen points wobble inside the plus-or-minus three standard deviation limits as common-cause noise, while one point breaks above the upper limit as a special cause to investigate.",
+    "caption": "Inside the limits is noise: leave it alone. Beyond a limit is a signal: investigate.",
+    "ar": 1.5384615384615385
    }
   }
  ],

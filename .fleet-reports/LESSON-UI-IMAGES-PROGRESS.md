@@ -210,6 +210,26 @@
   3/3. Audit now 192 with images, 1274 zero (lists reconciled to headers).
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
 
+## Batch 5 biostatistics top-up (2026-10-15 session)
+
+- **Second-pass verify**: independent parse-and-assert over the 13 required
+  stats SVGs (title/desc/aria present; skew mean/median/mode positional order
+  in both tails; normal 68/95/99.7; SE root-n; boxplot Q1/median/Q3/IQR;
+  histogram vs bar; scatter r +1/0/-1; 2x2 sens/spec/PPV/NPV; ROC AUC+chance;
+  forest null+CI; errors alpha/beta/power; designs RCT/cohort/case-control;
+  pyramid systematic-review top vs expert-opinion bottom; sampling
+  random/stratified/cluster/systematic). All passed, no edits needed.
+- **New figure**: 1 original SVG `stats-control-chart.svg` (control chart,
+  centre mean, UCL/LCL at +/-3 SD, 20 computed points: 19 within +/-1.2 SD,
+  1 special-cause point beyond UCL). Same bank format: white stage, 800x520
+  (`ar` 1.5385), `<title>`/`<desc>`, alt + caption, palette
+  #071318 / #3D5A54 / #0B6B5B / #B7791F, min 11px type.
+- **Wired** into `mstat-audit` step 3 (compare replaced where the figure
+  teaches the same common-vs-special-cause content). `checkLesson` clean;
+  `scripts/lesson-diagrams/check.mjs` 126 lessons / 198 figures / 0 problems;
+  `test/prep-lessons.test.mjs` 23/23. Audit now 193 with images, 1273 zero.
+- **Attribution**: 1 row appended (StewardMD original CC BY 4.0);
+  still zero third-party images. No figure needed Wikimedia fallback.
 ## 2026-10-15 batch 5: medicine/surgery/paeds backfill (lessonui-1015)
 - **8 original SVGs** (`med-ecg-potassium`, `med-ecg-qt-lvh`, `med-abg-steps`,
   `med-op-aftermath`, `sur-femoral-canal`, `sur-thyroid-complications`,
