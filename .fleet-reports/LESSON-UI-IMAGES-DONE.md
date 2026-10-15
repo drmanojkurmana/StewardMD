@@ -224,3 +224,25 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
 - `med-pesticides` carries a pre-existing step-count gate failure (3 steps
   on the clean tree too); wiring adds no new failure.
 - Inventory now 199 with images, 1267 zero of 1466.
+
+## Addendum 2026-10-15 (batch 6: medicine backfill, atop lessonui-1013)
+
+- **8 original SVGs** (`med-acs-reperfusion`, `med-aki-fena`,
+  `med-ckd-heatmap`, `med-spirometry`, `med-asthma-steps`, `med-saag`,
+  `med-cha2ds2`, `med-avblock`) wired into 6 null-visual medicine lessons
+  (`med-acs` s2, `med-aki` s2, `med-ckd` s2, `med-asthma` s2+s3,
+  `med-cirrhosis` s2, `med-arrhythmias` s2+s3). Same bank format (white
+  stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank
+  palette subset, ASCII, 11px floor, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files caught one
+  layout clip (spirometry note), fixed before wiring; all printed numbers
+  match ACC/AHA, KDIGO and GINA values. Attribution +8 rows, still zero
+  third-party images.
+- **Gates**: 6/6 wired lessons `checkLesson` clean; diagram checker
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23,
+  prep-lessons-100 3/3, prep-pearl 4/4, prep-pearl-figs 2/2,
+  prep-server 16/16. Inventory now 206 with images, 1265 zero of 1471.
+- Next queue by exam weight: medicine 104, obgyn 50, ss-med-onc 44,
+  ent 37, anaesthesia 34, orthopaedics 33 (anatomy 80/80 and physiology
+  49/49 already complete). Browser gate `lessonui-browser.yml` before merge.

@@ -280,3 +280,11 @@ Davenport isobars PCO2 40 normal, pH 7.40, HCO3- 24; twinning cleavage days 0-3,
 insulin bars re-derived from printed hours (pixel positions asserted within 1.5px);
 urea cost 4 bonds (2 ATP at CPS-I plus ATP to AMP at ASS); palmitate 16/2 = 8 acetyl-CoA,
 turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 numbered steps).
+| med-acs-reperfusion.svg | ACS reperfusion flow: STEMI to PCI within 90 min of door or lysis within 30 min; NSTE-ACS high risk to cath within 24 h | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-aki-fena.svg | Prerenal vs ATN: FENa below 1% vs above 2%, urine Na, osmolality, sediment, BUN/Cr ratio, FEUrea below 35% on diuretics | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-ckd-heatmap.svg | CKD G1-G5 by A1-A3 heat map with KDIGO risk colours | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-spirometry.svg | Flow-volume loops: normal, obstructive scooped with FEV1/FVC below 0.7, restrictive small; reversibility 12% and 200 mL | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-asthma-steps.svg | Asthma five-step ladder: SABA to ICS to ICS+LABA to tiotropium to biologic | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-saag.svg | SAAG 1.1 sorts portal hypertension vs peritoneal disease; neutrophils 250 or more mean SBP | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-cha2ds2.svg | CHA2DS2-VASc nine-point card: 0 none, 1 consider, 2 or more anticoagulate with DOAC first | StewardMD (original) | CC BY 4.0 (StewardMD original) |
+| med-avblock.svg | AV block ladder with rhythm strips: 1st observe, Mobitz I watch, Mobitz II pace, 3rd pace now | StewardMD (original) | CC BY 4.0 (StewardMD original) |
