@@ -250,3 +250,29 @@
   count untouched by this change). Diagram checker 0 problems.
 - Audit now 199 with images, 1267 zero of 1466 (lists reconciled).
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+## 2026-10-15 batch 6: medicine backfill (lessonui-1013)
+- **8 original SVGs** (`med-acs-reperfusion`, `med-aki-fena`,
+  `med-ckd-heatmap`, `med-spirometry`, `med-asthma-steps`, `med-saag`,
+  `med-cha2ds2`, `med-avblock`) wired into 6 null-visual lessons
+  (`med-acs` s2, `med-aki` s2, `med-ckd` s2, `med-asthma` s2+s3,
+  `med-cirrhosis` s2, `med-arrhythmias` s2+s3). Same bank format (white
+  stage, 800x520, `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank
+  palette subset, ASCII, 11px floor, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  title/desc/role, palette subset incl. ana-bank tints `#FFF1CC`/`#FBE3E0`,
+  min font size, per-figure key strings: PCI 90 / lysis 30 / cath 24h;
+  FENa 1%/2%, U Na 20/40, osm 500/350, BUN/Cr 20/15, FEUrea 35%;
+  G1-G5 and A1-A3 cutoffs with KDIGO risk colours; FEV1/FVC 0.7,
+  reversibility 12% + 200 mL; five GINA steps; SAAG 1.1, PMN 250,
+  100 mg to 40 mg; CHA2DS2-VASc max 9, 0/1/2+ rule; PR 200 ms,
+  Mobitz I/II, dissociation). One layout clip caught (spirometry note)
+  was fixed before wiring. All printed numbers match standard
+  ACC/AHA, KDIGO and GINA guideline values.
+- **Attribution**: 8 rows appended (StewardMD original CC BY 4.0);
+  still zero third-party images.
+- **Gates**: 6/6 wired lessons `checkLesson` clean; diagram checker
+  126 lessons / 198 figures / 0 problems; suites prep-action-row 10/10,
+  prep-reason 24/24, bug-report 13/13, prep-lessons 23/23,
+  prep-lessons-100 3/3, prep-pearl 4/4, prep-pearl-figs 2/2,
+  prep-server 16/16. Audit now 206 with images, 1265 zero of 1471.
+- Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
