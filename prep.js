@@ -703,6 +703,26 @@
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
   function tx(v) { return esc(v && typeof v === "object" ? (v.en || "") : v); }
+  /* Run-together enumerations (prep-listfmt.js, render-only: stored text never changes). Without the file, plain esc. */
+  function lfStem(q) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.stem(q) : esc(q); }
+  function lfOpt(o) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.opt(o) : esc(o); }
+  function lfExp(e) { return G.PREP_LISTFMT ? G.PREP_LISTFMT.exp(e) : null; }
+  /* Render-time explanation text (prep-expfmt.js): paragraphs, the answer sentence in bold, lists, chips.
+     Without the file, null and the caller keeps its previous path. The drug pattern builds once from the
+     app's own drug lexicon (drug-lexicon.js); without it, drugs stay unbolded and everything else applies. */
+  var xfDrugRx = null, xfDrugDone = false;
+  function xfDrugs() {
+    if (!xfDrugDone) {
+      xfDrugDone = true;
+      try {
+        if (G.PREP_EXPFMT && G.SMD_DRUG_LEXICON) xfDrugRx = G.PREP_EXPFMT.drugRx(G.PREP_EXPFMT.drugNames(G.SMD_DRUG_LEXICON));
+      } catch (e) { xfDrugRx = null; }
+    }
+    return xfDrugRx;
+  }
+  function xfCtx(it) { return { o: (it && it.o) || [], a: it && typeof it.a === "number" ? it.a : -1, drugRx: xfDrugs() }; }
+  function xfExp(text, it) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.exp(text, xfCtx(it)) : null; }
+  function xfInline(text, it) { return G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(text, xfCtx(it)) : inlineMd(text); }
   function toast(m) { try { if (G.toast) G.toast(m); } catch (e) {} }
   function today() { return C.dayNum(Date.now(), new Date().getTimezoneOffset()); }
   function fmt(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
@@ -722,7 +742,18 @@
   function save() { try { G.localStorage.setItem(KEY, JSON.stringify(st.store)); } catch (e) { toast("Progress could not be saved: the device storage is full."); } }
 
   /* ---------- data ---------- */
-  function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); }); }
+  function isBankUrl(u) {
+    if (typeof u !== "string") return false;
+    if (u.indexOf("/api/prep/bank/") >= 0) return true;
+    if (API && u.indexOf(API) === 0 && API.indexOf("/api/prep/bank/") >= 0) return true;
+    return false;
+  }
+  function getJSON(url) {
+    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.fetchBankJSON && isBankUrl(url)) {
+      return G.PREP_BANK_CLIENT.fetchBankJSON(url);
+    }
+    return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); });
+  }
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }
   // MaiK lines: fetched once per open, cached like the taxonomy; a miss shows no line.
   function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
@@ -823,6 +854,16 @@
   function cachePut(path, val) { return idbDo("readwrite", function (os) { return os.put(val, path); }); }
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
+  function purgeCachedMcqs() {
+    return cacheKeys().then(function (keys) {
+      if (!keys || !keys.length) return;
+      keys.forEach(function (k) {
+        var sk = String(k);
+        if (sk.indexOf("lessons/") === 0 || sk.indexOf("cards/") === 0 || sk.indexOf("run:") === 0 || sk.indexOf("rec:") === 0) return;
+        cacheDel(sk);
+      });
+    }).catch(function () {});
+  }
   function modulePath(sid, mid) { return bvOf(sid) + "/" + sid + "/mcq/" + mid + ".json"; }
   // Stamps of the main bank version (bankStamps), loaded once a session; a failed load (offline) gives none.
   function loadStamps() {
@@ -832,15 +873,10 @@
   function loadBank(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
-    return Promise.all([cacheGet(p), bvOf(sid) === VER ? loadStamps() : {}]).then(function (r) {
-      var hit = r[0] && r[0].items ? r[0] : null, stamp = r[1][sid] || "";
-      if (cacheFresh(hit, stamp)) return (st.mem[p] = hit.items);
-      return getJSON(API + p).then(function (f) {
-        var items = (f.items || []).map(function (it) { it._s = sid; it._m = mid; return it; });
-        st.mem[p] = items;
-        cachePut(p, { items: items, ts: Date.now(), s: stamp });
-        return items;
-      }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
+    return getJSON(API + p).then(function (f) {
+      var items = (f.items || []).map(function (it) { it._s = sid; it._m = mid; return it; });
+      st.mem[p] = items;
+      return items;
     });
   }
   /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes and licensed review books, sets "radnotes3" and "radmax7"; new
@@ -848,7 +884,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { anatomy: ["maikpearl1", "maikbook1"], radiology: ["radnotes3", "radmax7", "maiktopic1"], medicine: ["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e"], anaesthesia: ["gap1013a", "gap1013c"], pathology: ["maik1", "maiktopic1", "maikbook2"], pharmacology: ["maik1", "maiktopic1", "gap1013d", "gap1013e"], "ss-pulmonology": ["medcov4", "maik29", "maikfill4", "maikfill7"], "ss-cardiology": ["maik29", "maikfill1"], "ss-critical-care": ["maik29", "maikfill2"], "ss-endocrinology": ["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9"], "ss-nephrology": ["maik29", "maikfill2", "maikss281"], "adult-health-medicine": ["maik20", "maikfill2"], "adult-health-surgery": ["maik20", "maik21", "maikfill4", "maikfill8", "maikfill9"], "child-health": ["maik21", "maik22", "maik28", "maik29", "maikfill6"], "womens-health": ["maik21", "maikfill3", "maikfill7"], "mental-health": ["maik22", "maik28", "maikfill5"], "population-health-and-ethics": ["maik22", "maikfill5"], "mcc-acute-care": ["maik23", "maik27", "maikfill3", "maikfill8", "maikfill9"], "mcc-chronic-care": ["maik23", "maik24", "maik27", "maikfill1", "maikfill7"], "mcc-health-promotion": ["maik24", "maik25", "maik27", "maikfill4", "maikfill7"], "mcc-professional-behaviours": ["maik25", "maik27", "maikfill1", "maikfill7"], "community-medicine": ["maiktopic1", "ck2", "gap1013e"], paediatrics: ["maiktopic1", "ck2", "gap1013c", "gap1013e"], surgery: ["maiktopic1", "ck2", "gap1013c", "maikbook1"], "ss-biostatistics": ["maiktopic1"], "ss-surgical-oncology": ["maikss4", "maikss88", "maikss211", "maikss212", "maikss213", "maikss214", "maikss215", "maikss216", "maikss217"], "ss-neurosurgery": ["maikss3", "maikss272"], "ss-urology": ["maikss2", "maikss273", "maikss274"], "ss-general-surgery": ["maikss1"], "ss-paediatric-surgery": ["maikss6", "maikss34", "maikss85", "maikss86", "maikss254", "maikss255", "maikss256", "maikss257", "maikss258"], "ss-plastic-surgery": ["maikss7", "maikss33", "maikss83", "maikss84", "maikss259", "maikss260", "maikss261", "maikss262", "maikss263"], "ss-vascular-surgery": ["maikss8", "maikss32", "maikss81", "maikss82", "maikss246", "maikss247", "maikss248", "maikss249", "maikss250", "maikss275", "maikss276", "maikss278"], "ss-neonatology": ["maikss9", "maikss49", "maikss50", "maikss96"], "ss-paediatric-cardiology": ["maikss10", "maikss37", "maikss38", "maikss90"], "ss-paediatric-neurology": ["maikss11", "maikss39", "maikss40", "maikss91"], "ss-paediatric-nephrology": ["maikss12", "maikss41", "maikss42", "maikss92"], "ss-paediatric-gastroenterology": ["maikss13", "maikss43", "maikss44", "maikss93"], "ss-paediatric-hepatology": ["maikss14", "maikss45", "maikss46", "maikss94"], "ss-paediatric-oncology": ["maikss15", "maikss47", "maikss48", "maikss95"], "ss-paediatric-critical-care": ["maikss16", "maikss35", "maikss36", "maikss89"], "ss-gynaecological-oncology": ["maikss17", "maikss69", "maikss77"], "ss-reproductive-medicine": ["maikss18", "maikss70", "maikss78"], "ss-hand-surgery": ["maikss19", "maikss71", "maikss79", "maikss264", "maikss265", "maikss266", "maikss267", "maikss268", "maikss269", "maikss270", "maikss271"], "ss-paediatric-orthopaedics": ["maikss20", "maikss72", "maikss80"], "ss-cardiac-anaesthesia": ["maikss21", "maikss65", "maikss73"], "ss-neuroanaesthesia": ["maikss22", "maikss66", "maikss74"], "ss-transplant-anaesthesia": ["maikss23", "maikss67", "maikss75"], "ss-paediatric-anaesthesia": ["maikss24", "maikss68", "maikss76", "maikss97"], "ss-head-neck-surgery": ["maikss25", "maikss63", "maikss64", "maikss100"], "ss-onco-pathology": ["maikss26", "maikss61", "maikss62", "maikss99"], "ss-virology": ["maikss27", "maikss59", "maikss60", "maikss98"], "ss-clinical-pharmacology": ["maikss28", "maikss51", "maikss52", "maikss101", "maikss105", "maikss106", "maikss107"], "ss-geriatric-mental-health": ["maikss29", "maikss53", "maikss54", "maikss102", "maikss108", "maikss109", "maikss110"], "ss-child-adolescent-psychiatry": ["maikss30", "maikss55", "maikss56", "maikss103", "maikss111", "maikss112", "maikss277"], "ss-ctvs": ["maikss5", "maikss31", "maikss57", "maikss58", "maikss87", "maikss104", "maikss251", "maikss252", "maikss253"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1", "maikbook1"], "ss-infectious-diseases": ["maiktopic1", "maik26", "maikfill0", "maikfill2", "maikss280"], "ss-medical-oncology": ["maik26", "maikfill6"], "ss-rheumatology-immunology": ["maik26", "maikfill6", "maikss279"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1", "ck2", "gap1013b", "gap1013c", "maikbook2"], psychiatry: ["ck2", "gap1013f"], dermatology: ["gap1013f", "maikbook2"], physiology: ["maiktopic1", "maikbook1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10", "maikfill6"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19", "gap1013d", "gap1013e"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10", "gap1013f"], "mrcp-statistics": ["maik18", "maik19"], "plab-biochemistry": ["maikfill1"], "plab-dermatology": ["maikfill1", "maikfill7", "gap1013f"], "mrcs-radiology": ["maikfill2"], "plab-physiology": ["maikfill3", "maikfill8"], "plab-psychiatry": ["maikfill4", "maikfill8", "maikfill9", "gap1013f"], "ss-general-medicine": ["maikfill5"], "mrcs-anaesthesia": ["maikfill6"], "mrcs-medicine": ["maikfill6"], "mrcs-pharmacology": ["maikfill6"], "plab-pharmacology": ["maikfill6"], "plab-radiology": ["maikfill6"], "ss-neurology": ["maikfill6", "maikss282", "maikss283"] };
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { anatomy: ["maikpearl1", "maikbook1"], radiology: ["radnotes3", "radmax7", "maiktopic1", "maikir"], medicine: ["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e"], anaesthesia: ["gap1013a", "gap1013c"], pathology: ["maik1", "maiktopic1", "maikbook2"], pharmacology: ["maik1", "maiktopic1", "gap1013d", "gap1013e"], "ss-pulmonology": ["medcov4", "maik29", "maikfill4", "maikfill7", "maikss415", "maikss416", "maikss417", "maikss418", "maikss419", "maikss420", "maikss421", "maikss422", "maikss423", "maikss424", "maikss425", "maikss426", "maikss427"], "ss-cardiology": ["maik29", "maikfill1", "maikss347", "maikss348", "maikss349", "maikss350", "maikss351", "maikss352", "maikss353"], "ss-critical-care": ["maik29", "maikfill2", "maikss354", "maikss355", "maikss356", "maikss357", "maikss358", "maikss359", "maikss360", "maikss361", "maikss362"], "ss-endocrinology": ["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9", "maikss302", "maikss303", "maikss304", "maikss305", "maikss306", "maikss307", "maikss308", "maikss309", "maikss310", "maikss311", "maikss312", "maikss313", "maikss314", "maikss315", "maikss316", "maikss317", "maikss318", "maikss363", "maikss364"], "ss-nephrology": ["maik29", "maikfill2", "maikss281"], "adult-health-medicine": ["maik20", "maikfill2"], "adult-health-surgery": ["maik20", "maik21", "maikfill4", "maikfill8", "maikfill9"], "child-health": ["maik21", "maik22", "maik28", "maik29", "maikfill6"], "womens-health": ["maik21", "maikfill3", "maikfill7"], "mental-health": ["maik22", "maik28", "maikfill5"], "population-health-and-ethics": ["maik22", "maikfill5"], "mcc-acute-care": ["maik23", "maik27", "maikfill3", "maikfill8", "maikfill9"], "mcc-chronic-care": ["maik23", "maik24", "maik27", "maikfill1", "maikfill7"], "mcc-health-promotion": ["maik24", "maik25", "maik27", "maikfill4", "maikfill7"], "mcc-professional-behaviours": ["maik25", "maik27", "maikfill1", "maikfill7"], "community-medicine": ["maiktopic1", "ck2", "gap1013e"], paediatrics: ["maiktopic1", "ck2", "gap1013c", "gap1013e"], surgery: ["maiktopic1", "ck2", "gap1013c", "maikbook1"], "ss-biostatistics": ["maiktopic1", "maikss433", "maikss434", "maikss435", "maikss436", "maikss437", "maikss438"], "ss-surgical-oncology": ["maikss4", "maikss88", "maikss211", "maikss212", "maikss213", "maikss214", "maikss215", "maikss216", "maikss217"], "ss-neurosurgery": ["maikss3", "maikss272"], "ss-urology": ["maikss2", "maikss273", "maikss274"], "ss-general-surgery": ["maikss1"], "ss-paediatric-surgery": ["maikss6", "maikss34", "maikss85", "maikss86", "maikss254", "maikss255", "maikss256", "maikss257", "maikss258"], "ss-plastic-surgery": ["maikss7", "maikss33", "maikss83", "maikss84", "maikss259", "maikss260", "maikss261", "maikss262", "maikss263"], "ss-vascular-surgery": ["maikss8", "maikss32", "maikss81", "maikss82", "maikss246", "maikss247", "maikss248", "maikss249", "maikss250", "maikss275", "maikss276", "maikss278"], "ss-neonatology": ["maikss9", "maikss49", "maikss50", "maikss96", "maikss390", "maikss391", "maikss392", "maikss442"], "ss-paediatric-cardiology": ["maikss10", "maikss37", "maikss38", "maikss90", "maikss399", "maikss400"], "ss-paediatric-neurology": ["maikss11", "maikss39", "maikss40", "maikss91", "maikss409", "maikss410", "maikss445"], "ss-paediatric-nephrology": ["maikss12", "maikss41", "maikss42", "maikss92", "maikss407", "maikss408"], "ss-paediatric-gastroenterology": ["maikss13", "maikss43", "maikss44", "maikss93", "maikss403", "maikss404"], "ss-paediatric-hepatology": ["maikss14", "maikss45", "maikss46", "maikss94", "maikss405", "maikss406", "maikss444"], "ss-paediatric-oncology": ["maikss15", "maikss47", "maikss48", "maikss95", "maikss411", "maikss412", "maikss446", "maikss447"], "ss-paediatric-critical-care": ["maikss16", "maikss35", "maikss36", "maikss89", "maikss401", "maikss402", "maikss443"], "ss-gynaecological-oncology": ["maikss17", "maikss69", "maikss77", "maikss367", "maikss368", "maikss439"], "ss-reproductive-medicine": ["maikss18", "maikss70", "maikss78", "maikss428", "maikss429", "maikss449"], "ss-hand-surgery": ["maikss19", "maikss71", "maikss79", "maikss264", "maikss265", "maikss266", "maikss267", "maikss268", "maikss269", "maikss270", "maikss271"], "ss-paediatric-orthopaedics": ["maikss20", "maikss72", "maikss80", "maikss413", "maikss414", "maikss448"], "ss-cardiac-anaesthesia": ["maikss21", "maikss65", "maikss73", "maikss300", "maikss301", "maikss346"], "ss-neuroanaesthesia": ["maikss22", "maikss66", "maikss74", "maikss393", "maikss394"], "ss-transplant-anaesthesia": ["maikss23", "maikss67", "maikss75", "maikss342", "maikss343", "maikss430", "maikss431"], "ss-paediatric-anaesthesia": ["maikss24", "maikss68", "maikss76", "maikss97", "maikss340", "maikss341", "maikss397", "maikss398"], "ss-head-neck-surgery": ["maikss25", "maikss63", "maikss64", "maikss100", "maikss376", "maikss377", "maikss440"], "ss-onco-pathology": ["maikss26", "maikss61", "maikss62", "maikss99", "maikss395", "maikss396"], "ss-virology": ["maikss27", "maikss59", "maikss60", "maikss98", "maikss344", "maikss345", "maikss432"], "ss-clinical-pharmacology": ["maikss28", "maikss51", "maikss52", "maikss101", "maikss105", "maikss106", "maikss107"], "ss-geriatric-mental-health": ["maikss29", "maikss53", "maikss54", "maikss102", "maikss108", "maikss109", "maikss110"], "ss-child-adolescent-psychiatry": ["maikss30", "maikss55", "maikss56", "maikss103", "maikss111", "maikss112", "maikss277"], "ss-ctvs": ["maikss5", "maikss31", "maikss57", "maikss58", "maikss87", "maikss104", "maikss251", "maikss252", "maikss253"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1", "maikbook1"], "ss-infectious-diseases": ["maiktopic1", "maik26", "maikfill0", "maikfill2", "maikss280"], "ss-medical-oncology": ["maik26", "maikfill6"], "ss-rheumatology-immunology": ["maik26", "maikfill6", "maikss279"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1", "ck2", "gap1013b", "gap1013c", "maikbook2"], psychiatry: ["ck2", "gap1013f"], dermatology: ["gap1013f", "maikbook2"], physiology: ["maiktopic1", "maikbook1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10", "maikfill6"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19", "gap1013d", "gap1013e"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10", "gap1013f"], "mrcp-statistics": ["maik18", "maik19"], "plab-biochemistry": ["maikfill1"], "plab-dermatology": ["maikfill1", "maikfill7", "gap1013f"], "mrcs-radiology": ["maikfill2"], "plab-physiology": ["maikfill3", "maikfill8"], "plab-psychiatry": ["maikfill4", "maikfill8", "maikfill9", "gap1013f"], "ss-general-medicine": ["maikfill5"], "mrcs-anaesthesia": ["maikfill6"], "mrcs-medicine": ["maikfill6"], "mrcs-pharmacology": ["maikfill6"], "plab-pharmacology": ["maikfill6"], "plab-radiology": ["maikfill6"], "ss-neurology": ["maikfill6", "maikss282", "maikss283"], "ss-gastroenterology": ["maikss319", "maikss320", "maikss321", "maikss322", "maikss323", "maikss324", "maikss325", "maikss326", "maikss327", "maikss328", "maikss329", "maikss365", "maikss366"], "ss-haematology": ["maikss330", "maikss331", "maikss332", "maikss333", "maikss334", "maikss335", "maikss336", "maikss337", "maikss338", "maikss339", "maikss369", "maikss370", "maikss371", "maikss372", "maikss373", "maikss374", "maikss375"], "ss-hepatology": ["maikss378", "maikss379", "maikss380", "maikss381", "maikss382", "maikss383", "maikss384", "maikss385", "maikss386", "maikss387", "maikss388", "maikss389", "maikss441"]};
 
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
@@ -899,17 +935,17 @@
       var sets = overlaysOfSid(sid);
       return Promise.all(sets.map(function (set) {
         var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
-        if (st.mem[p]) return st.mem[p];
-        return cacheGet(p).then(function (hit) {
-          if (hit && hit.items) return (st.mem[p] = hit.items);
-          return getJSON(API + p).then(function (f) {
-            var items = (f && f.items) || [];
-            st.mem[p] = items;
-            cachePut(p, { items: items, ts: Date.now() });
-            oldOverlays(set).forEach(function (o) { cacheDel("overlay/" + o + "/" + sid + "/" + mid + ".json"); });
-            return items;
-          }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
-        }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+        if (st.mem[p]) return Promise.resolve(st.mem[p]).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+        return getJSON(API + p).then(function (f) {
+          var items = (f && f.items) || [];
+          st.mem[p] = items;
+          items.forEach(function (it) { it._ov = set; });
+          return items;
+        }, function (e) {
+          if (e && e.status === 404) return [];
+          if (miss) miss.n++;
+          return [];
+        });
       })).then(function (r) { return [].concat.apply([], r); });
     });
   }
@@ -923,9 +959,56 @@
       if (bankErr && !r[1].length) throw bankErr;
       var items = markLevels(mergeOverlay(r[0], r[1]));
       items.forEach(function (it) { it._s = sid; it._m = mid; });
-      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
-      return items;
+      // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
+      return fixesFor(mid).then(function (fx) {
+        items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); });
+        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+        return items;
+      });
     });
+  }
+  /* ---------- content fixes (owner 2026-10-14: owners and tester doctors correct a question or lesson from the Review Desk) ----------
+   * /api/prep/fix?ix=1 says which modules carry fixes (asked at most every 30 min, the last answer kept offline); a module with
+   * fixes asks /api/prep/fix?module=<id> once per edit (cached by the edit's timestamp). A slow or failed ask never blocks a
+   * module: after 2 s the module opens without its fixes and the next open has them. */
+  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {} };
+  function raceTo(p, ms, fb) { return new Promise(function (res) { var done = false, t = setTimeout(function () { if (!done) { done = true; res(fb); } }, ms); p.then(function (v) { if (!done) { done = true; clearTimeout(t); res(v); } }, function () { if (!done) { done = true; clearTimeout(t); res(fb); } }); }); }
+  function fixIndex() {
+    var s = load(), last = (s.fxix && s.fxix.mods) || {};
+    if (s.fxix && Date.now() - (s.fxix.ts || 0) < FIX_TTL) return Promise.resolve(last);
+    if (st.fxIxP) return st.fxIxP;
+    st.fxIxP = G.fetch(FIX_API + "?ix=1").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      st.fxIxP = null;
+      if (!j || !j.mods) return last;
+      s.fxix = { mods: j.mods, ts: Date.now() }; save(); return j.mods;
+    }, function () { st.fxIxP = null; return last; });
+    return st.fxIxP;
+  }
+  function fixesFor(mid) {
+    return raceTo(fixIndex(), 2000, ((load().fxix || {}).mods) || {}).then(function (mods) {
+      var ts = mods[mid]; if (!ts) return NOFIX;
+      var key = "fx:" + mid + ":" + ts;
+      if (st.mem[key]) return st.mem[key];
+      return raceTo(cacheGet(key).then(null, function () { return null; }).then(function (hit) {
+        if (hit && hit.fx) return (st.mem[key] = hit.fx);
+        return G.fetch(FIX_API + "?module=" + encodeURIComponent(mid)).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+          if (!j) return NOFIX;
+          var fx = { q: j.q || {}, l: j.l || {} }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
+        });
+      }), 2000, NOFIX);
+    });
+  }
+  // The same rules as applyQuestionFix in functions/_prepfix.js: edited options or explanation drop the per-option reasoning that described the old wording.
+  function applyFix(it, fx) {
+    if (!it || !fx) return it;
+    if (fx.q != null) it.q = fx.q;
+    if (fx.o) { it.o = fx.o.slice(); it.a = fx.a; it.r = null; it.x = null; }
+    else if (fx.a != null) { it.a = fx.a; it.r = null; it.x = null; }
+    if (fx.exp != null) { it.exp = fx.exp; it.r = null; it.x = null; }
+    if (fx.kp != null) it.kp = fx.kp;
+    if (fx.img) { it.img = fx.img.slice(); it.imgPlace = fx.imgPlace === "exp" ? "exp" : "stem"; delete it.credit; delete it.licence; }
+    it._fx = fx.ts || 1;
+    return it;
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -949,15 +1032,12 @@
       return Promise.all((subs || []).filter(function (s) { return ix.subjects[s]; }).map(function (s) {
         var u = "quality/" + ix.subjects[s];
         if (st.mem[u]) return st.mem[u];
-        return cacheGet(u).then(function (hit) {
-          if (hit && hit.qf) return (st.mem[u] = ASSESS.readQuality(hit.qf));
-          return getJSON(API + u).then(function (f) { st.mem[u] = ASSESS.readQuality(f); cachePut(u, { qf: f, ts: Date.now() }); return st.mem[u]; }, function () { return {}; });
-        });
+        return getJSON(API + u).then(function (f) { st.mem[u] = ASSESS.readQuality(f); return st.mem[u]; }, function () { return {}; });
       })).then(function (maps) { var out = {}; maps.forEach(function (m) { for (var k in m) out[k] = m[k]; }); return out; });
     });
   }
 
-  // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
+  // Subject search index (search.json, built with the bank): fetched on the first search, kept in memory for the session.
   // The subject index may name the file (search: "search-<hash>.json", a rebuilt index under a new immutable name, e.g. with
   // the overlay sets' items), so a phone that cached the older search.json fetches the new one; no name: search.json.
   function searchFile(ix) { var n = ix && ix.search; return typeof n === "string" && /^search-[0-9a-f]{8}\.json$/.test(n) ? n : "search.json"; }
@@ -966,22 +1046,17 @@
   }
   function loadSearchAt(sid, p) {
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
-    return cacheGet(p).then(function (hit) {
-      if (hit && hit.sx) return (st.mem[p] = hit.sx);
-      return getJSON(API + p).then(function (sx) {
-        st.mem[p] = sx; cachePut(p, { sx: sx, ts: Date.now() });
-        // a named index replaces the subject's plain search.json, whose cached copy is dropped
-        if (!/\/search\.json$/.test(p)) cacheDel(p.replace(/[^/]+$/, "search.json"));
-        return sx;
-      }, function (e) {
-        // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
-        // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
-        if (!e || e.status !== 404) throw e;
-        return loadIndex(sid).then(function (ix) {
-          var ts = (ix.topics || []).filter(function (t) { return t.group !== "mixed" && (t.count || 0) + (t.ov || 0) > 0; });
-          return Promise.all(ts.map(function (t) { return loadModule(sid, t.id).then(function (items) { return { id: t.id, items: items }; }, function () { return { id: t.id, items: [] }; }); }));
-        }).then(function (topics) { return (st.mem[p] = buildSearch(topics)); });
-      });
+    return getJSON(API + p).then(function (sx) {
+      st.mem[p] = sx;
+      return sx;
+    }, function (e) {
+      // No search.json for this bank (ss-radiology v6 to v10 shipped without one): build the same index here from the
+      // subject's module files (cached like any opened module). Kept for the session only, so a published file wins later.
+      if (!e || e.status !== 404) throw e;
+      return loadIndex(sid).then(function (ix) {
+        var ts = (ix.topics || []).filter(function (t) { return t.group !== "mixed" && (t.count || 0) + (t.ov || 0) > 0; });
+        return Promise.all(ts.map(function (t) { return loadModule(sid, t.id).then(function (items) { return { id: t.id, items: items }; }, function () { return { id: t.id, items: [] }; }); }));
+      }).then(function (topics) { return (st.mem[p] = buildSearch(topics)); });
     });
   }
   /* buildSearch([{ id, items }]) -> the search.json shape (tools/tokos-build-mcq-search.mjs, same tokeniser and preview,
@@ -1302,7 +1377,7 @@
     });
     root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); st.navKey = 1; try { back(); } finally { st.navKey = 0; } } else onRunKey(e); });
     st.open = true; st.stack = [];
-    refreshHidden(); loadLines();
+    refreshHidden(); loadLines(); purgeCachedMcqs();
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     // MaiK modules (prep-qgen.js): ask the server once whether the feature is on for this account (shows the entry rows).
@@ -1635,8 +1710,36 @@
   function row(act, icon, title, sub, attrs) {
     return '<button type="button" class="pn-row" data-act="' + act + '"' + (attrs || "") + '><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>' + title + "</b><small>" + sub + "</small></span>" + ico("chev") + "</button>";
   }
+  /* The stored NEET-SS group, or null. Home, the custom module and the hub narrow to it; switching it clears
+     nothing else (history, bookmarks and confidence stay in the store). */
+  function ssScope() {
+    var PP = planPure(), s = load();
+    if (!PP || !s.pl || s.pl.exam !== "neet-ss") return null;
+    return PP.ssGroupOf(PP.planGroup(s.pl));
+  }
+  // Home's Subjects block for a NEET-SS student: the Step 2 shortlist (the mixed row first), a Change group
+  // control and See all subjects on its own page, never the whole scroll inline.
+  function ssHomeSubjects(scope, subs, known) {
+    var short = scope.label.replace(/ group$/, "");
+    return '<h2 class="pn-h">Subjects</h2>' +
+      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change group</button></p>' +
+      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your group") + "</div>" +
+      '<div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      '<button type="button" class="pn-btn" data-act="ss-all">See all subjects</button>';
+  }
+  // Every ss-* subject on its own page (tiles open their subjects); reached from Home's See all subjects.
+  function renderSsAll() {
+    var subs = subjectsOf("neet-ss"), scope = ssScope();
+    paint(bar("All subjects", scope ? scope.label : "", "back") + '<div class="pn-body"><div class="pn-subs" id="pnGrid">' +
+      subs.map(function (sb) { return tile(sb, null); }).join("") + "</div></div>");
+    Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
+      if (!st.open || st.stack[st.stack.length - 1] !== renderSsAll) return;
+      var grid = root().querySelector("#pnGrid");
+      if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
+    });
+  }
   function renderHome() {
-    var s = load(), ex = examOf(s.exam), subs = subjectsOf(s.exam), arena = arenaOn();
+    var s = load(), ex = examOf(s.exam), scope = ssScope(), subs = scope ? planSubjects() : subjectsOf(s.exam), arena = arenaOn();
     // The exam is asked once (onboarding, prep-plan.js) and kept in the synced store; it changes only in Settings (the
     // plan sheet's Exam row), so home shows no exam switcher. Without prep-plan.js the old exam tabs stay.
     var plan = !!G.PREP_PLAN, choice = plan && s.pl && s.pl.exam && G.PREP_PLAN._pure.choiceOf(s.pl.exam), exLabel = choice && choice.tab === ex.id ? choice.label : ex.label;
@@ -1679,7 +1782,8 @@
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       "</div>" +
       psHomeHtml(s) +
-      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
+      (scope ? ssHomeSubjects(scope, subs, known) :
+      '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
       // Secondary: streak, today and level (prep-plan.js), then the student's own pages and settings.
       (G.PREP_PLAN && G.PREP_PLAN.progressHtml ? G.PREP_PLAN.progressHtml(HOST) : '<h2 class="pn-h">You</h2>') +
       (you ? '<div class="pn-group pn-you">' + you + "</div>" : "") +
@@ -1729,10 +1833,10 @@
   function qotdHtml(it) {
     var q = qotdState(), done = q && q.id === it.id ? q : null, L = ["A", "B", "C", "D"], sb = subjectById(it._s);
     return '<p class="pn-qd-h"><span class="pn-qd-dot" aria-hidden="true"></span>Question of the day<span class="pn-qd-s">' + (sb ? tx(sb.name) : "") + "</span></p>" +
-      '<p class="pn-qd-q">' + esc(it.q) + "</p>" +
+      '<div class="pn-qd-q">' + lfStem(it.q) + "</div>" +
       '<ol class="pn-qd-o">' + it.o.map(function (o, k) {
         var c = done ? (k === it.a ? " right" : k === done.k ? " wrong" : "") : "";
-        return '<li><button type="button" class="pn-qd-b' + c + '" data-act="' + (done ? "qotd-why" : "qotd") + '" data-k="' + k + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></button></li>";
+        return '<li><button type="button" class="pn-qd-b' + c + '" data-act="' + (done ? "qotd-why" : "qotd") + '" data-k="' + k + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></button></li>";
       }).join("") + "</ol>" +
       (done ? '<button type="button" class="pn-link pn-qd-more" data-act="qotd-why">' + (done.k === it.a ? "Correct. " : "Answer: " + L[it.a] + ". ") + "See the explanation " + ico("chev") + "</button>" : "");
   }
@@ -1770,7 +1874,7 @@
       '<h2 class="pn-sec">Your course</h2><div class="pn-group">' +
       (plan ? row("p-settings", ico("gear"), "Exam and plan", "Exam: " + esc(exLabel) + " · daily goal and reminder") : "") +
       (G.PrepPro ? row("pro-open", ico("star"), "PrepNucleus Pro", "Your plan and what it includes") : "") +
-      row("downloads", ico("dl"), "Offline downloads", "Subjects kept on this phone") +
+      row("downloads", ico("dl"), "Offline content", "Lessons and cards kept offline; questions need a connection") +
       (G.PREP_IDS ? row("id-screen", ico("search"), "Open a shared ID", "A question or lesson a friend sent you") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
       (G.PREP_QGEN && G.PREP_QGEN.isOwner() ? row("g-author", ico("gear"), "Author", "Owner only: write, check and stage new questions") : "") + "</div>" +
@@ -1961,7 +2065,7 @@
       if (!list.length) { toast("Nothing to practise here right now."); return rerender(); }
       runQuestions(list, kind === "exam" ? "exam" : "study", tx(topicOf(sid, mid).title));
     }, function () {
-      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">The questions did not load. Check the connection and try again. A module opened once, or a downloaded subject, works offline.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
+      paint(bar("Questions", "", "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="start" data-k="' + kind + '">Try again</button></div>');
       st.cur = { s: sid, m: mid };
     });
   }
@@ -2238,13 +2342,13 @@
     // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
     var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
     if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
-    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + (lfExp(why) || xfExp(why, it) || mdLite(legacyExp(why))) + "</div>" + fig;
     if (fig) return "<h3>Explanation</h3>" + fig;
     return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
-    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
+    return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + xfInline(p, it) + "</span></aside>" : "";
   }
   // The MaiK AI mark (maik-ai-mark.js, one SVG for every Ask MaiK entry); without it, the old avatar picture.
   function mkAv(size) { var M = G.SMD_MAIK_MARK, m = M ? M.html("tile", { size: size || 34 }) : ""; return '<span class="pt-av' + (m ? " mk" : "") + '" aria-hidden="true">' + m + "</span>"; }
@@ -2318,7 +2422,7 @@
       var cls = "pn-opt";
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
       else if (k === chosen) cls += " sel";
-      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" +
+      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span>" +
         (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
@@ -2345,11 +2449,11 @@
       others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
-        '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
+        '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
         (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
-          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
         whyRowHtml(it, chosen, r.i) +
@@ -2390,7 +2494,7 @@
     var enter = st.swipeIn ? (st.swipeIn > 0 ? " in-r" : " in-l") : "";
     st.swipeIn = 0;
     paint(bar(esc(r.title), cs ? esc(cs.label) + " · question " + (r.i - lo + 1) + " of " + cs.n : "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + (cs ? secLineHtml(r) + secStripHtml(r) : tlHtml(r)) + qprogHtml(r) +
-      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + kyIntro + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
+      '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + kyIntro + pyq.tags + '<div class="pn-q">' + lfStem(it.q) + "</div>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + lockNote + confRow + (qid && !fb && r.mode !== "exam" ? IDS.chip(qid) : "") + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (revealFb) revealFeedback();
     tlSync(r);
@@ -2718,7 +2822,7 @@
       others.sort(function (x, y) { return (y === a) - (x === a) || x - y; });
       var ex = RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: a, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(rs[k]) + "</span></p></li>";
+          return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
@@ -2728,9 +2832,9 @@
       }).join("") + "</div></div>" : "";
       return '<li><details class="t2sol t2sol-' + st + '" id="t2q' + i + '"' + (list.length === 1 ? " open" : "") + ">" +
         '<summary><span class="t2sol-n" aria-hidden="true">' + (i + 1) + '</span><span class="t2sol-t"><b><span class="pn-sr">' + (i + 1) + ". </span>" + esc(it.q.length > 110 ? it.q.slice(0, 109) + "…" : it.q) + "</b><small>" + esc(stT) + " · answer " + ansL + "</small></span>" + ico("chev") + "</summary>" +
-        '<div class="t2sol-b"><p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
+        '<div class="t2sol-b"><div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") +
         '<ol class="pn-opts">' + it.o.map(function (o, k) {
-          return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+          return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
         }).join("") + "</ol>" + ex + whyRowHtml(it, a, i) + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") +
         (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
@@ -2857,10 +2961,10 @@
     var RX = G.PREP_REASON && G.PREP_REASON.has(it) ? G.PREP_REASON : null;
     var ex = RX ? RX.body(it, { why: whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: xo.r, chosen: r.ans[i], md: mdLite, inl: inlineMd }) :
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
-        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
+        return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
-      return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
+    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
       (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
@@ -3194,7 +3298,10 @@
   /* ---------- custom module ---------- */
   var cm = { subs: {}, d: 0, n: 25, mode: "study" };
   function renderCustom() {
-    var s = load(), subs = subjectsOf(s.exam);
+    // The custom module follows the plan like Tests and QBank: the NEET-SS group, the one INI-SS subject.
+    var s = load(), subs = planSubjects();
+    if (!subs.length && planNeed()) subs = subjectsOf(s.exam);
+    Object.keys(cm.subs).forEach(function (id) { var ok = false; subs.forEach(function (sb) { if (sb.id === id) ok = true; }); if (!ok) delete cm.subs[id]; });
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(cm.subs).length;
     paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm">' +
@@ -3225,36 +3332,23 @@
     });
   }
 
-  /* ---------- offline downloads ---------- */
+  /* ---------- offline content ---------- */
   function renderDownloads() {
-    var s = load(), subs = subjectsOf(s.exam);
-    var ndl = subs.filter(function (sb) { return !!s.dl[sb.id]; }).length;
-    paint(bar("Offline downloads", "", "back") + '<div class="pn-body pn-dll">' + hband("dl", ndl + " of " + subs.length, subs.length === 1 ? "subject offline" : "subjects offline", "A downloaded subject opens every module without a connection. Opened modules are kept anyway.") + '<ul class="pn-mods" id="pnDl">' +
-      subs.map(function (sb) {
-        var on = !!s.dl[sb.id];
-        return '<li><div class="pn-mod static' + (on ? " on" : "") + '"><span class="pn-ic sm" style="--h:' + subjHue(sb.id) + '" aria-hidden="true">' + subjIco(sb.id) + '</span><span class="pn-mb"><b>' + tx(sb.name) + '</b><small id="pnDl-' + esc(sb.id) + '">' + (on ? "Downloaded" + (typeof s.dl[sb.id] === "number" ? " " + dayMonth(s.dl[sb.id]) : "") : "Not downloaded") + '</small><span class="pn-dlbar" id="pnDlb-' + esc(sb.id) + '" aria-hidden="true"><i></i></span></span>' +
-          '<button type="button" class="pn-btn sm" data-act="' + (on ? "dlrm" : "dlget") + '" data-s="' + esc(sb.id) + '">' + (on ? "Remove" : "Download") + "</button></div></li>";
-      }).join("") + "</ul></div>");
+    var s = load();
+    if (s.dl && Object.keys(s.dl).length) { s.dl = {}; save(); }
+    paint(bar("Offline content", "", "back") + '<div class="pn-body pn-dll">' +
+      hband("dl", "Online questions", "Server-verified bank", "To protect question security and ensure the latest explanations, practice questions require an active internet connection. Lessons, high-yield cards, and clinical pearls remain available offline.") +
+      '<div class="pn-card" style="margin:16px 0;padding:16px;background:var(--pn-card, #0d1d23);border-radius:12px;border:1px solid rgba(66,205,181,0.15);">' +
+      '<p style="margin:0 0 8px;font-size:14px;color:var(--pn-t1, #e6f1f0);font-weight:600;">Question bank policy</p>' +
+      '<p style="margin:0;font-size:13px;color:var(--pn-t2, #8ea4a2);line-height:1.5;">Questions and explanations are streamed securely from the server during each session and are not stored permanently on your device.</p>' +
+      '</div></div>');
   }
   function download(sid) {
-    var s = load(), el = function () { return root && root.querySelector("#pnDl-" + sid); };
-    loadIndex(sid).then(function (ix) {
-      var ts = ix.topics.filter(function (t) { return t.all || t.count; }), done = 0;
-      if (!ts.length) { var e0 = el(); if (e0) e0.textContent = "No questions yet"; return; }
-      var step = function (i) {
-        if (i >= ts.length) { s.dl[sid] = Date.now(); save(); return renderDownloads(); }
-        return loadModule(sid, ts[i].id).then(function () { done++; var e = el(), b = root && root.querySelector("#pnDlb-" + sid); if (e) e.textContent = "Downloading " + done + " of " + ts.length + "…"; if (b) { b.classList.add("on"); b.firstChild.style.transform = "scaleX(" + (done / ts.length).toFixed(3) + ")"; } return step(i + 1); }, function () { var e = el(); if (e) e.textContent = "Stopped: no connection"; });
-      };
-      return step(0);
-    });
+    toast("Questions require an active internet connection.");
   }
   function removeDownload(sid) {
     var s = load();
-    cacheKeys().then(function (keys) {
-      (keys || []).forEach(function (k) { k = String(k); if (k.indexOf(bvOf(sid) + "/" + sid + "/") === 0 || (k.indexOf("overlay/") === 0 && k.split("/")[2] === sid)) { cacheDel(k); delete st.mem[k]; } });
-      Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:" + sid + "/") === 0) delete st.mem[k]; });
-      delete s.dl[sid]; save(); renderDownloads();
-    });
+    s.dl = {}; save(); renderDownloads();
   }
 
   /* ---------- practice setup (prep-setup.js): the sheet before a set from a module, a subject, custom, mistakes, bookmarks ----------
@@ -3371,7 +3465,7 @@
     var text = storedForOption(it, opt);
     var L = optLetter(opt), isKey = it && opt === it.a;
     if (text) {
-      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (inlineMd ? inlineMd(text) : esc(text)) + '</div></div>';
+      box.innerHTML = '<div class="pn-why-card"><div class="pn-why-head"><span class="pn-why-l">' + esc(L) + '</span> <b>' + esc(isKey ? "Why " + L + " is right" : "Why " + L + " is wrong") + '</b></div><div class="pn-why-body">' + (G.PREP_EXPFMT ? G.PREP_EXPFMT.inline(text, xfCtx(it)) : inlineMd(text)) + '</div></div>';
       box.style.display = "";
     } else {
       box.innerHTML = '<div class="pn-why-card pn-why-empty"><p class="pn-why-none">No stored note for this option</p><button type="button" class="pn-why-ask" data-act="why-ask" data-opt="' + opt + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '>Ask MaiK why</button></div>';
@@ -3514,6 +3608,9 @@
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
     if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
     if (a === "custom") return push(renderCustom);
+    if (a === "ss-all") return push(renderSsAll);
+    // The mixed row: the custom module prefilled with the student's group subjects.
+    if (a === "ss-mixed") { var sc = ssScope(); cm.subs = {}; if (sc) sc.subjects.forEach(function (id) { cm.subs[id] = 1; }); return push(renderCustom); }
     if (a === "cmsub") { if (cm.subs[v]) delete cm.subs[v]; else cm.subs[v] = 1; return rerender(); }
     if (a === "cmd") { cm.d = Number(v); return rerender(); }
     if (a === "cmn") { cm.n = Number(v); return rerender(); }
@@ -3613,7 +3710,7 @@
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
   var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
-    run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
+    run: runQuestions, fixes: fixesFor, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // setExam(id): what the Settings exam row does to the exam tab (tests use it to switch exams without the sheet).
     setExam: function (id) { var s = load(); s.exam = examOf(id).id; save(); nav(0); rerender(); },
@@ -3638,6 +3735,8 @@
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
     modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
 
-  var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
+  var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
+    // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.
+    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);

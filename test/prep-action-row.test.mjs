@@ -1,5 +1,7 @@
 import { test } from "node:test"; import assert from "node:assert";
+import fs from "node:fs"; import path from "node:path"; import { fileURLToPath } from "node:url";
 import A from "../prep-action-row.js";
+const CSS = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "prep-action-row.css"), "utf8");
 
 const ITEM = { itemId: "sbs-descriptive-probability", itemType: "lesson", subject: "ss-biostatistics", module: "sbs-descriptive-probability" };
 const store = () => { const m = new Map(); return { getItem: (k) => (m.has(k) ? m.get(k) : null), setItem: (k, v) => m.set(k, String(v)) }; };
@@ -24,6 +26,10 @@ test("payload: note optional except for Other; 500 char cap", () => {
   assert.equal(A.buildPayload(ITEM, "typo", "x".repeat(500)).ok, true);
   assert.equal(A.buildPayload(ITEM, "", "").ok, false);
   assert.equal(A.buildPayload(ITEM, "nonsense", "").ok, false);
+});
+
+test("payload: app version defaults to web when the bridge sets none", () => {
+  assert.equal(A.buildPayload(ITEM, "unclear", "").payload.appVersion, "web");
 });
 
 test("payload: legacy reason codes pass through unchanged for old servers", () => {
@@ -56,8 +62,19 @@ test("action row: three labelled filled-pill buttons, bookmark state, ID chips",
   assert.match(h, /data-act="id-share" data-v="L-KME-CGE-TXS"/); assert.match(h, />Share</);
   assert.match(h, /aria-pressed="true"/); assert.match(h, />Saved</);
   assert.match(h, /data-copy-id="PN-J3M5"/); assert.match(h, /Pearl ID/);
+  assert.match(h, /translate="no"/, "ID tokens are not auto-translated");
   const p = A.actionRowHtml({ pearl: true, bookmarked: false });
   assert.match(p, /data-pearl-act="report"/); assert.doesNotMatch(p, /data-action-report/, "pearl clicks are owned once");
+});
+
+test("css: 52px pills reuse the player-bar tokens; narrow phones compact, labels stay one line", () => {
+  assert.match(CSS, /\.pn-act-btn\{[^}]*min-height:52px/, "pills keep the 52px bar height");
+  assert.match(CSS, /border-radius:var\(--pn-r-pill/, "pill radius from the shared token");
+  assert.match(CSS, /\.pn-act-btn>span\{[^}]*white-space:nowrap/, "labels never wrap the row taller");
+  assert.match(CSS, /@media\(max-width:420px\)\{\.pn-act-row\{gap:6px\}\.pn-act-btn\{padding:0 10px;gap:6px;font-size:14px\}\}/,
+    "390px compaction: Bookmark (72.5px at 15px) fits its column");
+  assert.match(CSS, /@media\s*\(prefers-reduced-motion:\s*reduce\)/, "reduced motion keeps a variant");
+  assert.doesNotMatch(CSS, /transition:\s*all/, "no transition:all");
 });
 
 test("sheet: title, seven radios, capped note, send and cancel", () => {

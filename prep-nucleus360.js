@@ -376,7 +376,7 @@
       else H.run(list, "study", title);
     }, function () {
       H.stack().pop();
-      H.paint(H.bar(escH(NUCLEUS360.name), escH(topic.title), "back") + '<div class="pn-body"><p class="pn-err" role="alert">The questions did not load. ' + escH("What is on this phone is shown; the rest will be added when you are online.") + '</p><button type="button" class="pn-btn" data-act="back">Back</button></div>');
+      H.paint(H.bar(escH(NUCLEUS360.name), escH(topic.title), "back") + '<div class="pn-body"><p class="pn-err" role="alert">Questions need a connection. Check the connection and try again.</p><button type="button" class="pn-btn" data-act="back">Back</button></div>');
     });
   }
   function openOutline(topic) {
@@ -409,6 +409,36 @@
       });
     });
   }
+  /* The plan's subjects (the NEET-SS group, the one INI-SS subject), or null: the hub lists everything without
+     an exam-scoped plan. History and confidence stay untouched; only the listing narrows. */
+  function scopeKeep() {
+    try {
+      if (!H || !H.planSubjects || (H.planNeed && H.planNeed())) return null;
+      var st = H.store ? H.store() : null;
+      if (!st || !st.pl || (st.pl.exam !== "neet-ss" && st.pl.exam !== "ini-ss")) return null;
+      var keep = {};
+      (H.planSubjects() || []).forEach(function (sb) { keep[sb.id] = 1; });
+      return keep;
+    } catch (e) { return null; }
+  }
+  // A group with no Nucleus360 topics keeps the whole hub: an empty hub helps nobody.
+  function scopeTopics(topics) {
+    var keep = scopeKeep();
+    if (!keep) return { topics: topics, scoped: false };
+    var out = topics.filter(function (t) {
+      var pairs = t.modules || [];
+      for (var i = 0; i < pairs.length; i++) if (keep[pairs[i][0]]) return true;
+      return !!keep[t.subject];
+    });
+    if (!out.length) return { topics: topics, scoped: false };
+    return { topics: out, scoped: true };
+  }
+  function scopeName() {
+    try {
+      if (!H || !H.planScopeLabel) return "";
+      return H.planScopeLabel() || "";
+    } catch (e) { return ""; }
+  }
   function loadDoc() {
     var S = ses();
     if (S.docP) return S.docP;
@@ -424,15 +454,18 @@
   function hubSubjects(doc) { return PURE.hubSubjects(doc); }
   function openHub(pre, subj) {
     loadDoc().then(function (doc) {
-      var topics = (doc && doc.topics) || [];
+      var sc = scopeTopics((doc && doc.topics) || []);
+      var topics = sc.topics;
+      doc = { v: doc && doc.v, subjects: doc && doc.subjects, topics: topics };
       var subs = hubSubjects(doc);
       if (subj && subs.map(function (s) { return s.id; }).indexOf(subj) < 0) subj = "";
       var rows = topicsFor(topics, pre, subj).slice(0, 60).map(function (t) { return hubRow(t, doc); }).join("");
       var opts = '<option value="">All subjects (' + topics.length + ")</option>" + subs.map(function (s) {
         return '<option value="' + escH(s.id) + '"' + (s.id === subj ? " selected" : "") + ">" + escH(s.name) + " (" + s.n + ")</option>";
       }).join("");
+      var scopeLine = sc.scoped && scopeName() ? '<p class="pn-mut pn-small">' + escH(scopeName()) + ": topics from your subjects.</p>" : "";
       H.push(function () {
-        H.paint(H.bar(escH(NUCLEUS360.name), escH(NUCLEUS360.tagline), "back") + '<div class="pn-body"><p class="pn-mut">Pick a topic to cover it A to Z through MCQs, in chapter order.</p>' +
+        H.paint(H.bar(escH(NUCLEUS360.name), escH(NUCLEUS360.tagline), "back") + '<div class="pn-body"><p class="pn-mut">Pick a topic to cover it A to Z through MCQs, in chapter order.</p>' + scopeLine +
           '<p><label class="pn-mut pn-small" for="pnN360S">Subject</label><select id="pnN360S" class="pn-in" aria-label="Filter topics by subject">' + opts + "</select></p>" +
           '<p><input id="pnN360Q" class="pn-in" type="search" placeholder="Search a topic, e.g. Pancreatic adenocarcinoma" value="' + escH(pre || "") + '" aria-label="Search topics"></p>' +
           '<div class="pn-group" id="pnN360Rows">' + (rows || '<p class="pn-empty">' + escH(subj ? "No Nucleus360 topics for this subject yet. The chapter list is growing; try the QBank modules." : "No topic matches. The chapter list is growing; try the QBank modules.") + "</p>") + "</div></div>");
@@ -447,6 +480,7 @@
   function openHubLive(q, topics, subj, doc) {
     var box = H.root() && H.root().querySelector("#pnN360Rows");
     if (!box) return;
+    topics = scopeTopics(topics).topics;
     box.innerHTML = topicsFor(topics, q, subj || "").slice(0, 60).map(function (t) { return hubRow(t, doc); }).join("") || '<p class="pn-empty">No topic matches.</p>';
   }
   function topicById(id) {

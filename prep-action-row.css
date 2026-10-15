@@ -7,6 +7,7 @@
 .pn-act-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
 .pn-act-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:52px;padding:0 16px;border:0;border-radius:var(--pn-r-pill,999px);background:var(--pn-s1,#0D1D23);color:var(--pn-text,#EDF5F2);font:inherit;font-size:15px;font-weight:600;line-height:1.2;cursor:pointer;touch-action:manipulation;transition:transform var(--pn-d-press,120ms) var(--pn-ease,cubic-bezier(.23,1,.32,1)),background-color var(--pn-d-press,120ms) ease,color var(--pn-d-press,120ms) ease}
 .pn-act-btn svg{flex:0 0 auto}
+.pn-act-btn>span{min-width:0;white-space:nowrap}
 .pn-act-btn:active{transform:scale(.97)}
 .pn-act-btn.on{background:var(--pn-fill,#42CDB5);color:var(--pn-on-fill,#071318)}
 .pn-act-btn[disabled],.pn-act-btn[aria-disabled="true"]{opacity:.5;cursor:default}
@@ -19,8 +20,9 @@
 .pn-act-chip-k{font-size:11px;font-weight:700;letter-spacing:.06em}
 .pn-act-chip-v{font-variant-numeric:tabular-nums;font-weight:600;color:var(--pn-text,#EDF5F2)}
 .pn-act-copied{font-size:13px;font-weight:700;color:var(--pn-pri-ink,#42CDB5);min-width:52px}
-.pn-rpt-sheet{position:fixed;inset:0;background:var(--pn-scrim,rgba(7,19,24,.72));display:flex;align-items:flex-end;justify-content:center;z-index:1000;padding:12px;box-sizing:border-box}
-.pn-rpt-card{background:var(--pn-card,#0D1D23);color:var(--pn-text,#EDF5F2);border-radius:var(--pn-r-xl,28px);padding:20px;width:100%;max-width:520px;max-height:86vh;overflow-y:auto;box-sizing:border-box}
+.pn-rpt-sheet{position:fixed;inset:0;background:var(--pn-scrim,rgba(7,19,24,.72));display:flex;align-items:flex-end;justify-content:center;z-index:1000;padding:12px 12px max(12px,env(safe-area-inset-bottom,0px));box-sizing:border-box}
+.pn-rpt-card{background:var(--pn-card,#0D1D23);color:var(--pn-text,#EDF5F2);border-radius:var(--pn-r-xl,28px);padding:20px;width:100%;max-width:520px;max-height:86vh;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
+.pn-rpt-sheet button,.pn-rpt-sheet label{-webkit-tap-highlight-color:transparent}
 .pn-rpt-t{font-size:17px;font-weight:650;margin:0 0 4px}
 .pn-rpt-sub{font-size:13px;color:var(--pn-mut,#94B4AB);margin:0 0 12px;line-height:1.5}
 .pn-rpt-opt{display:flex;align-items:center;gap:10px;min-height:52px;padding:10px 12px;border:0;border-radius:var(--pn-r-md,12px);background:var(--pn-s1,#071318);margin:0 0 8px;cursor:pointer;font-size:14.5px;transition:background-color var(--pn-d-press,120ms) ease,color var(--pn-d-press,120ms) ease}
@@ -57,5 +59,8 @@ body.dark .pn-root.pn-tided > .pn-bar .pn-ib{background:var(--pn-s1,#0D1D23);box
 body.dark .pn-root .pn-bar .pn-lsn-auto.on{background:var(--pn-pri-soft,#16383E);color:var(--pn-pri-ink,#42CDB5)}
 @media(hover:hover) and (pointer:fine){.pn-act-btn:hover{background:var(--pn-s2,#1E333B)}.pn-act-btn.on:hover{background:var(--pn-fill,#42CDB5)}.pn-act-chip:hover{background:var(--pn-s2,#1E333B)}.pn-rpt-opt:hover{background:var(--pn-s2,#1E333B)}.pn-rpt-opt:has(input:checked):hover{background:var(--pn-pri-soft,#16383E)}.pn-root .pn-bar .pn-ib:hover,.pn-root .pn-bar .pi-sb:hover,.pn-root .pn-bar .pn-lsn-auto:hover{background:var(--pn-s2,#1E333B)}}
 @media(min-width:700px){.pn-rpt-sheet{align-items:center}}
+/* Narrow phones (390 px and below): the three labels keep one evenly spaced row by compacting
+ * (tighter padding and gap, 14 px labels) instead of spilling out of the pills. 52 px height kept. */
+@media(max-width:420px){.pn-act-row{gap:6px}.pn-act-btn{padding:0 10px;gap:6px;font-size:14px}}
 @media(prefers-reduced-motion:reduce){.pn-act-btn,.pn-act-chip,.pn-rpt-send,.pn-rpt-opt,.pn-root .pn-bar .pn-ib,.pn-root .pn-bar .pi-sb,.pn-root .pn-bar .pn-lsn-auto{transition:none!important}.pn-act-btn:active,.pn-act-chip:active,.pn-rpt-send:active,.pn-root .pn-bar .pn-ib:active,.pn-root .pn-bar .pi-sb:active,.pn-root .pn-bar .pn-lsn-auto:active{transform:none}}
 

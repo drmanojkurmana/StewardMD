@@ -5,11 +5,11 @@
  *   One report per user per item counts (a second report of the same item by the same user changes nothing).
  *   At most 60 reports per user per day. Stores KV prep:flag:<itemId> = { n, reasons, subject, module, first, last }
  *   and bumps the D1 day counter prep.flag.<subject> (functions/_counters.js) for the Review Desk.
- * GET ?top=1   owners only (ownerOK): the most-reported items, for the Review Desk.
+ * GET ?top=1   editors only (owners and registered signers, functions/_prepfix.js): the most-reported items, for the Review Desk.
  * GET ?hidden=1   public: ids of items hidden from every student after HIDE_AT separate reports (plan 11: auto-hide).
  *   The server never sees attempt counts, so the plan's "3% of attempts" is approximated as 3 separate reporters.
  *   KV prep:hidden = { <itemId>: <ts> }. The app fetches it at most every 6 hours and leaves those items out.
- * DELETE { itemId }   owners only: restore an item (drops it from prep:hidden and clears its report record).
+ * DELETE { itemId }   editors only: restore an item (drops it from prep:hidden and clears its report record).
  *
  * No question text is accepted. The Report-reason sheet may add a short note (at most 500 chars,
  * control characters stripped) plus the item type and app version; only the latest note is kept
@@ -17,7 +17,7 @@
  * (falls back to MAIK_KV).
  */
 import { identify } from "../../_fbauth.js";
-import { ownerOK } from "../../_adminauth.js";
+import { isEditor } from "../../_prepfix.js";
 import { bump } from "../../_counters.js";
 
 export const REASONS = ["wrong-key", "unclear", "outdated", "typo", "other", "wrong-fact", "wrong-answer", "image-problem", "offensive"];
@@ -107,7 +107,7 @@ export async function onRequestGet({ request, env }) {
     const ids = Object.keys(await hiddenMap(kvOf(env))).sort();
     return new Response(JSON.stringify({ ids }), { headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=600" } });
   }
-  if (!(await ownerOK(request, env))) return json({ error: "forbidden" }, 403);
+  if (!(await isEditor(request, env))) return json({ error: "forbidden" }, 403);
   const kv = kvOf(env);
   if (!kv || !kv.list) return json({ items: [] });
   const out = [];
@@ -127,7 +127,7 @@ export async function onRequestGet({ request, env }) {
 }
 
 export async function onRequestDelete({ request, env }) {
-  if (!(await ownerOK(request, env))) return json({ error: "forbidden" }, 403);
+  if (!(await isEditor(request, env))) return json({ error: "forbidden" }, 403);
   const kv = kvOf(env);
   if (!kv) return json({ error: "not-configured" }, 503);
   let b = {}; try { b = (await request.json()) || {}; } catch (e) {}

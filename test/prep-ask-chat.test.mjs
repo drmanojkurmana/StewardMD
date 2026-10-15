@@ -139,9 +139,10 @@ test("teachChat: a grounded answer passes; a number or drug not in the grounding
   const bad = await T.teachChat(GROUND, turns, { lexicon: LEX, generate: () => "Valproate at 900 mg also causes it." });
   assert.equal(bad.ok, true, "shown, not swapped for the stored text");
   assert.ok(bad.check.numbers.includes("900") && bad.beyond.includes("900"), JSON.stringify(bad));
-  // markdown and dashes are cleaned for the screen
+  // Owner 2026-10-15 (explanation-format): the display text keeps the author Markdown; the sheet renders it.
+  // The grounding gate still runs on the cleaned text.
   const md = await T.teachChat(GROUND, turns, { generate: () => "**Think** of it \u2014 like this:\n* one\n* two" });
-  assert.equal(md.text, "Think of it, like this:\n- one\n- two");
+  assert.equal(md.text, "**Think** of it \u2014 like this:\n* one\n* two");
 });
 
 /* The owner's recording (2026-10-10): both messages got the stored explanation back. With a model that answers the

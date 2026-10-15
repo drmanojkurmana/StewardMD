@@ -273,7 +273,7 @@ export const AUTH_MARKERS = [
   "resolveBearer", "callerUid", "verifyDisplayToken", "redeemCode",
   "portalRead", "sessionPatient", "smartEnabled", "authorise", "hmacHex",
   "makeSecrets", "_rx_public", "verifySecret", "verifyMfaChallenge",
-  "verifyTotp", "mintStaffSession",
+  "verifyTotp", "mintStaffSession", "checkBankGate",
 ];
 
 export function hasApiAuth(text) {
@@ -292,11 +292,11 @@ export const PUBLIC_ALLOWLIST = {
   "functions/api/analytics.js": "public by design: header documents an unauthenticated always-200 product-event counter over allow-listed event names, no PHI",
   "functions/api/clientlog.js": "public by design: header documents unauthenticated crash telemetry (errors happen before sign-in), metadata only, always 200",
   "functions/api/config.js": "public by design: header documents an unauthenticated boot-config read; setting it is the separate owner route",
+  "functions/api/health.js": "public by design: header documents an unauthenticated deploy probe returning a static version marker only; no env, no bindings, no input, no state",
   "functions/api/hospital-request.js": "login-free by design: header documents a per-IP rate limit plus a CORS allow-list instead of auth, so a hospital without access can ask for onboarding",
   "functions/api/maik-feedback.js": "public by design: header documents an unauthenticated helpfulness signal (same reasoning as clientlog); reading entries is the owner route",
   "functions/api/validation.js": "passphrase gate acknowledged weak by design in its own header; append-only storage is the real protection, no patient data",
   "functions/api/ws-feedback.js": "anonymous by design: header documents an aggregate feedback signal pipe storing no identity; GET returns counts only",
-  "functions/api/prep/bank/[[path]].js": "public by design: header documents read-only serving of the versioned PrepNucleus question bank (MedMCQA MIT plus StewardMD items) from R2 behind a strict path whitelist; nothing per user, no writes",
   "functions/api/prep/stats.js": "public by design: opt-in de-identified item statistics (plan section 11), POST reads no identity or PII, GET is owner-gated or snapshot",
   "functions/api/unsubscribe.js": "session-free by design: header documents a SIGNED unsubscribe token (functions/_unsub.js) as the credential, RFC 8058 one-click; a forged link does nothing and it flips only the marketing flag",
 };
