@@ -13,6 +13,8 @@
 import { cfAccessEmail } from "../../_fbauth.js";
 const EMBED_MODEL = "text-embedding-005";
 const EMBED_URL = "https://aiplatform.googleapis.com/v1/publishers/google/models/" + EMBED_MODEL + ":predict";
+const WAI_MODEL = "@cf/baai/bge-base-en-v1.5";           // 768-d, the model the old stewardmd-kb index was built with
+const WAI_DAY_CAP = 3000;                                // questions per UTC day on the free tier (about 0.2 neuron each, far under the 10,000 free neurons/day)
 const DAY_CAP = 20000;                                  // hard ceiling on embedded questions per UTC day (spend guard)
 
 // One question -> one 768-d vector. Express-mode key in a header (never the URL). Null on any failure.
@@ -45,6 +47,26 @@ export async function embedQuery(env, text, info) {
   });
 }
 
+/* TIER 1, FREE QUOTA (owner 2026-10-16): the Workers AI binding is named CF_AI_FREE, NOT AI, so every other env.AI caller
+ * (rerank, grounding check, PDF) stays off. Only this function uses it, behind a KV daily counter far below the free
+ * 10,000 neurons/day. Over the cap, binding absent, or any error: null, and the caller falls through to Vertex. */
+async function waiQuery(env, text) {
+  const ai = env && env.CF_AI_FREE; if (!ai || !env.KB_VECTORIZE_OLD) return null;
+  const kv = env.MAIK_KV; if (!kv) return null;                         // no counter, no spend
+  const cap = Math.max(100, Math.min(WAI_DAY_CAP, Number(env.WAI_DAILY_CAP) || WAI_DAY_CAP));
+  const k = "retrieve:wai:" + new Date().toISOString().slice(0, 10);
+  try {
+    const n = Number(await kv.get(k)) || 0; if (n >= cap) return null;
+    await kv.put(k, String(n + 1), { expirationTtl: 172800 });
+    const r = await Promise.race([ai.run(WAI_MODEL, { text: [text] }), new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), 2500))]);
+    const v = r && r.data && r.data[0];
+    return Array.isArray(v) && v.length === 768 ? v : null;
+  } catch (e) { return null; }
+}
+const shape = (res) => ((res && res.matches) || []).map((m) => ({
+  diseaseId: (m.metadata && m.metadata.diseaseId) || null, chunkId: m.id || null, section: (m.metadata && m.metadata.section) || null, score: typeof m.score === "number" ? m.score : null
+})).filter((m) => m.diseaseId);
+
 // Daily spend guard: a KV counter per UTC day. Over the cap (or KV unavailable) means no vector arm, keyword only.
 async function underCap(env) {
   const kv = env && env.MAIK_KV; if (!kv) return true;
@@ -66,9 +88,10 @@ async function authorise(request, env) {
 
 export async function onRequest(context) {
   const { request, env } = context;
-  if (!(await authorise(request, env))) return json({ matches: [] });      // fail-safe, not 403 — client falls back
+  if (!(await authorise(request, env))) return json({ matches: [] });      // fail-safe, not 403, so the client falls back
   if (request.method !== "POST") return json({ matches: [] });
-  if (!env.VERTEX_API_KEY || !env.KB_VECTORIZE) return json({ matches: [] });   // not provisioned → lexical-only
+  const wai = !!(env.CF_AI_FREE && env.KB_VECTORIZE_OLD), vertex = !!(env.VERTEX_API_KEY && env.KB_VECTORIZE);
+  if (!wai && !vertex) return json({ matches: [] });                        // not provisioned: keyword-only
 
   try {
     let body = {};
@@ -77,19 +100,26 @@ export async function onRequest(context) {
     if (!query) return json({ matches: [] });
     const k = Math.max(1, Math.min(50, Number(body && body.k) || 12));
 
-    if (!(await underCap(env))) return json({ matches: [] });
-    const info = {}, vec = await embedQuery(env, query, info);
-    if (!vec) return json({ matches: [] });
-
-    const res = await env.KB_VECTORIZE.query(vec, { topK: k, returnMetadata: "all" });
-    const matches = ((res && res.matches) || []).map((m) => ({
-      diseaseId: (m.metadata && m.metadata.diseaseId) || null,
-      chunkId: m.id || null,
-      section: (m.metadata && m.metadata.section) || null,
-      score: typeof m.score === "number" ? m.score : null
-    })).filter((m) => m.diseaseId);
-    const out = json({ matches: matches }); out.headers.set("Server-Timing", "embed;dur=" + (info.ms || 0) + ";desc=\"calls " + (info.calls || 0) + "\""); return out;
+    // tier 1: Workers AI free quota against the old bge index
+    if (wai) {
+      const v = await waiQuery(env, query);
+      if (v) {
+        try {
+          const m = shape(await env.KB_VECTORIZE_OLD.query(v, { topK: k, returnMetadata: "all" }));
+          if (m.length) { const o = json({ matches: m }); o.headers.set("X-Retrieve-Tier", "workers-ai"); return o; }
+        } catch (e) {}
+      }
+    }
+    // tier 2: Vertex text-embedding-005 against the t5 index, under its own daily cap
+    if (vertex && (await underCap(env))) {
+      const info = {}, vec = await embedQuery(env, query, info);
+      if (vec) {
+        const m = shape(await env.KB_VECTORIZE.query(vec, { topK: k, returnMetadata: "all" }));
+        const out = json({ matches: m }); out.headers.set("X-Retrieve-Tier", "vertex"); out.headers.set("Server-Timing", "embed;dur=" + (info.ms || 0) + ";desc=\"calls " + (info.calls || 0) + "\""); return out;
+      }
+    }
+    return json({ matches: [] });                                           // tiers 3+ (on-phone model, then keywords) run in the client
   } catch (e) {
-    return json({ matches: [] });                                   // never break retrieval
+    return json({ matches: [] });                                           // never break retrieval
   }
 }
