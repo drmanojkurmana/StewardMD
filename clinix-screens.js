@@ -17,8 +17,9 @@
   // The real CliniX logo (owner-supplied, clinix-logo.png - same asset as home.js's live tile
   // icon, same brightness(0) invert(1) white-forcing trick used for maitri-logo.png). STATIC
   // here: the module banner is read, not glanced at from a grid, so no pulse.
+  // Colour comes from clinix.css (.cx-hero-logo): white on the teal hero, ink on the PrepNucleus wash.
   var CX_LOGO_MARK = '<img class="cx-hero-logo" src="/clinix-logo.png" alt="" aria-hidden="true" ' +
-    'style="width:38px;height:auto;object-fit:contain;filter:brightness(0) invert(1)">';
+    'style="width:38px;height:auto;object-fit:contain">';
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -247,11 +248,14 @@
 
     // Continue where you left off.
     if (pos && pos.diseaseId) {
-      var label = pos.skillId ? pos.skillId.split(".").pop().replace(/_/g, " ") : "your lesson";
+      // The topic's real title from the catalog, not its id in capitals ("RHEUMATIC-HEART-DISEASE").
+      var rEntry = C() && C().diseaseEntry(cat, pos.diseaseId);
+      var rTitle = (rEntry && rEntry.disease && rEntry.disease.title) || prettySkill(pos.diseaseId).replace(/-/g, " ");
+      var label = pos.skillId ? prettySkill(pos.skillId) : "Pick up your lesson";
       html += '<section class="cx-sec"><div class="cx-sec-h">Continue learning</div>' +
-        '<button type="button" class="cx-resume" data-act="cx-resume">' +
-        '<div class="cx-resume-txt"><div class="cx-resume-t">' + esc(String(pos.diseaseId).toUpperCase()) + "</div>" +
-        '<div class="cx-resume-s">' + esc(label) + "</div></div>" + ic("play_arrow") + "</button></section>";
+        '<button type="button" class="cx-resume" data-act="cx-resume">' + ic("play_arrow") +
+        '<div class="cx-resume-txt"><div class="cx-resume-k">Up next</div><div class="cx-resume-t">' + esc(rTitle) + "</div>" +
+        '<div class="cx-resume-s">' + esc(label) + "</div></div>" + ic("chevron_right") + "</button></section>";
     }
 
     // Symptom-first Clinical Presentations
@@ -1131,12 +1135,13 @@
       var grp = groups[g], gd = 0;
       for (i = 0; i < grp.items.length; i++) if (state.stationChecked[grp.items[i].id]) gd++;
       html += '<div class="cx-cgroup' + (gd === grp.items.length ? " cx-cgroup--done" : "") + '">' +
-        '<div class="cx-cgroup-h"><span>' + esc(grp.title) + '</span><span class="cx-cgroup-n">' + gd + "/" + grp.items.length + "</span></div>";
+        '<div class="cx-cgroup-h"><span>' + esc(grp.title) + '</span><span class="cx-cgroup-n">' + gd + "/" + grp.items.length + "</span></div>" +
+        '<div class="cx-cgroup-rows">';
       for (i = 0; i < grp.items.length; i++) {
         var it = grp.items[i], on = !!state.stationChecked[it.id];
         html += checkRow("cx-station-check", it.id, it.text, on, it.critical);
       }
-      html += "</div>";
+      html += "</div></div>";
     }
     html += "</div>";
     html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-station-finish">Finish station</button></div>';
@@ -1273,7 +1278,7 @@
       { id: "inspiration", name: "Inspiration" },
       { id: "hjr", name: "HJR" }
     ];
-    var html = '<div class="cx-maneuver-bar"><span style="font-size:11px;font-weight:700;color:var(--cx-muted);align-self:center;margin-right:4px;">MANEUVER:</span>';
+    var html = '<div class="cx-maneuver-bar"><span class="cx-maneuver-l">Manoeuvre</span>';
     for (var i = 0; i < MANEUVERS.length; i++) {
       var item = MANEUVERS[i];
       var on = m === item.id;
@@ -2341,11 +2346,9 @@
   }
 
   function renderPresentations(host) {
-    var html = header("Clinical Presentations", "Symptom-first diagnostic reasoning", "cx-back");
-    html += '<section class="cx-sec"><div class="cx-notice cx-notice--review" style="margin-bottom:12px;">' +
-      ic("emergency") + '<div><b>Symptom-First Clinical Reasoning</b>' +
-      '<span>In the emergency room or outpatient clinic, patients present with symptoms, not textbook diagnoses. ' +
-      'Master the 7-layer framework: Red Flags &rarr; Tempo &rarr; Discriminators &rarr; Don\'t-Miss &rarr; Tiered Tests.</span></div></div>' +
+    var html = header("Clinical presentations", "Start from the symptom, not the diagnosis", "cx-back");
+    html += '<section class="cx-sec"><div class="cx-blurb cx-pres-blurb">Patients arrive with symptoms, not diagnoses. ' +
+      'Each approach works in the same order: red flags, tempo, the features that discriminate, what you must not miss, then tests in tiers.</div>' +
       '<div class="cx-rows">';
 
     for (var i = 0; i < PRESENTATIONS_LIST.length; i++) {
@@ -2915,18 +2918,18 @@
     var v = state.abgValues;
     var sol = solveAbg(v);
 
-    var html = header("ABG Simulator & Diagnostic Engine", "6-step acid-base evaluation with Winter's formula and Delta-Delta ratio", "cx-back");
+    var html = header("ABG simulator", "Six steps, with Winter's formula and the delta ratio", "cx-back");
 
-    html += '<div class="cx-sec"><div class="cx-sec-h" style="margin-left:0;">Quick Clinical Presets</div>' +
-      '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">';
+    html += '<div class="cx-sec"><div class="cx-sec-h" style="margin-left:0;">Start from a case</div>' +
+      '<div class="cx-abg-presets">';
     for (var k in ABG_PRESETS) {
-      html += '<button type="button" class="cx-btn cx-btn--ghost" style="font-size:12px;padding:6px 10px;" data-act="cx-abg-preset" data-id="' + esc(k) + '">' +
+      html += '<button type="button" class="cx-chip cx-abg-preset" data-act="cx-abg-preset" data-id="' + esc(k) + '">' +
         esc(ABG_PRESETS[k].name) + '</button>';
     }
     html += '</div></div>';
 
     html += '<div class="cx-abg-box">' +
-      '<div class="cx-sec-h" style="margin-left:0;margin-top:0;">Arterial Blood Gas & Electrolyte Values</div>' +
+      '<div class="cx-sec-h" style="margin-left:0;margin-top:0;">Blood gas and electrolytes</div>' +
       '<div class="cx-abg-grid">' +
         '<div class="cx-abg-input-wrap"><span class="cx-abg-label">pH (7.35–7.45)</span>' +
           '<input type="number" class="cx-abg-input" id="cxAbgPh" step="0.01" value="' + sol.ph + '"></div>' +
@@ -2941,7 +2944,7 @@
         '<div class="cx-abg-input-wrap"><span class="cx-abg-label">Albumin g/dL (4.0)</span>' +
           '<input type="number" class="cx-abg-input" id="cxAbgAlb" step="0.1" value="' + sol.alb + '"></div>' +
       '</div>' +
-      '<button type="button" class="cx-btn cx-btn--primary" style="width:100%;" data-act="cx-abg-calc">' + ic("calculate") + ' Calculate Acid-Base Diagnosis</button>' +
+      '<button type="button" class="cx-btn cx-btn--primary" style="width:100%;" data-act="cx-abg-calc">' + ic("calculate") + ' Interpret</button>' +
 
       '<div class="cx-abg-verdict">' +
         '<div class="cx-abg-verdict-title">' + esc(sol.primary) + '</div>' +
@@ -3420,6 +3423,7 @@
       } catch (_) {}
     }
     try { h.scrollTop = keepScroll ? prev : 0; } catch (_) {}
+    try { var rt = document.getElementById("clinixRoot"); if (rt) rt.classList.toggle("cx-scrolled", h.scrollTop > 4); } catch (_) {}
   }
 
   /* A repaint rewrites the whole screen, which replaces every <input>/<textarea> with a fresh empty
@@ -4481,6 +4485,9 @@
       r.addEventListener("click", onClick);
       r.addEventListener("keydown", onKeydown);
       r.addEventListener("input", onInput);
+      // The bar turns solid once the screen scrolls (PrepNucleus look, clinix.css .cx-scrolled).
+      var sc = scrollHostOf(r);
+      if (sc) sc.addEventListener("scroll", function () { r.classList.toggle("cx-scrolled", sc.scrollTop > 4); }, { passive: true });
       // Buying Pro (or a free verified week starting) must unlock the grid without a relaunch.
       try {
         var onPlan = function () {

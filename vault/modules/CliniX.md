@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
 status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off; the "Draft, pending clinician review" line was REMOVED 2026-09-28 (owner), so nothing on screen marks it as unreviewed
-flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
+flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_pn (def:true, PrepNucleus look, ?clinixpn=0 restores teal) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
 ---
 # CliniX
 
@@ -120,6 +120,17 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
 - Home "OSCE stations" / "Viva voce" open `renderPractice` (topics by system, locked ones listed with
   a lock) instead of a toast. Picking a topic sets `state.jumpAssess`, and `openDisease` scrolls to
   `#cxAssess` once the pathway loads.
+
+## PrepNucleus look (2026-10-16, owner: "PrepNucleus alike UI, clean, neat, professional")
+Flag `smd_clinix_pn` (default ON, `?clinixpn=0` or localStorage `0` restores the teal look). `clinix.js open()`
+toggles `.cx-pn` on `#clinixRoot` every open. Everything lives in the "PrepNucleus pass" block at the END of
+`clinix.css`, scoped to `#clinixRoot.cx-pn`, mirroring `prep.css` "Apple pass": the PrepNucleus palette as
+`--cx-*` tokens (paper `#f3f2ee`, Prussian `#0f3460`, amber `#efc07b` primary with Midnight ink, dark mode on
+Midnight/Navy), the static Tide wash on the root, a transparent bar that turns to glass once the screen scrolls
+(`.cx-scrolled`, toggled by the scroll listener in `init()` and in `show()`), round header buttons, rows grouped
+into one card with hairlines and pale-blue icon squircles, sentence-case 21px section titles, capsule buttons.
+Gotchas: dark-mode token overrides must be `body.dark #clinixRoot.cx-pn` (the plain `body.dark #clinixRoot`
+block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo` filter), not inline.
 
 ## Gotchas
 - **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked

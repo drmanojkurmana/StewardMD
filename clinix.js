@@ -29,7 +29,7 @@
     "/clinix-physiology.js?v=cx11a927-sandbox1-lazy1",
     "/clinix-profile.js?v=cx10a927-lazy1",
     "/clinix-examiner.js?v=cx10a927-lazy1",
-    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce1-pro1"
+    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce1-pro1-pn1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }
@@ -101,6 +101,10 @@
     if (!on()) return;                       // hard gate: default OFF -> complete no-op
     var el = root();
     el.classList.add("cx-open");
+    // PrepNucleus look (smd_clinix_pn, default on). Read on every open so the flag applies without a relaunch.
+    var pn = true;
+    try { pn = !(window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.bool && SMD_CLINIX_FLAGS.bool("smd_clinix_pn") === false); } catch (e) {}
+    el.classList.toggle("cx-pn", pn);
     document.documentElement.classList.add("cx-lock");
     haptic("light");
     if (loaded()) { mountInto(el); return; }

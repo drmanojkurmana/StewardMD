@@ -98,7 +98,7 @@
    screen, since every other one has its back button top-left. */
 #clinixRoot .cx-hero-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 8px; color: rgba(255,255,255,.9); }
 #clinixRoot .cx-hero-mark { display: flex; align-items: center; gap: 8px; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
-#clinixRoot .cx-hero-logo { flex: 0 0 auto; }
+#clinixRoot .cx-hero-logo { flex: 0 0 auto; filter: brightness(0) invert(1); }
 #clinixRoot .cx-hero-tag { margin-top: 4px; font-size: 13px; opacity: .84; }
 
 /* ── sections and rows ────────────────────────────────────────────────────── */
@@ -158,7 +158,9 @@
 }
 #clinixRoot .cx-resume-txt { flex: 1 1 auto; min-width: 0; }
 #clinixRoot .cx-resume-t { font-weight: 700; font-size: 15px; }
-#clinixRoot .cx-resume-s { font-size: 13px; opacity: .8; text-transform: capitalize; }
+#clinixRoot .cx-resume-s { font-size: 13px; opacity: .8; }
+#clinixRoot .cx-resume-k { font-size: 13px; font-weight: 650; opacity: .8; }
+#clinixRoot .cx-resume > .material-symbols-rounded:last-child { opacity: .6; font-size: 18px; }
 
 /* ── progress ─────────────────────────────────────────────────────────────── */
 
@@ -396,6 +398,7 @@
 #clinixRoot .cx-station .cx-checklist { margin-top: 22px; gap: 18px; }
 #clinixRoot .cx-station .cx-checklist-h { margin-bottom: -6px; }
 #clinixRoot .cx-cgroup { display: flex; flex-direction: column; gap: 6px; }
+#clinixRoot .cx-cgroup-rows { display: flex; flex-direction: column; gap: 6px; }
 #clinixRoot .cx-cgroup-h { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 0 2px; font-size: 14px; font-weight: 700; color: var(--cx-ink); }
 #clinixRoot .cx-cgroup-n { font-size: 12.5px; font-weight: 600; color: var(--cx-faint); font-variant-numeric: tabular-nums; }
 #clinixRoot .cx-cgroup--done .cx-cgroup-n { color: var(--cx-ok); }
@@ -1312,3 +1315,191 @@ html.cx-lock .mc-overlay { z-index: 1300; }
   padding: 16px; background: var(--cx-surface); border: 2px solid var(--cx-ink);
   border-radius: var(--cx-r); margin: 12px 16px; font-size: 15.5px; line-height: 1.5; font-weight: 600;
 }
+
+/* ══ PrepNucleus pass (owner 2026-10-16: "PrepNucleus alike UI, clean, neat, professional") ══════════
+   Flag smd_clinix_pn (default on) puts .cx-pn on #clinixRoot; ?clinixpn=0 restores the teal look above.
+   Same palette and component rules as prep.css "Apple pass": paper background with the Tide wash at the
+   top, Prussian ink, pale-blue icon squircles, rows grouped into one card with hairlines, large
+   sentence-case section titles, capsule buttons with the amber primary. Tokens first, so every screen
+   (case, viva, tutor, tools) follows without its own rules. */
+#clinixRoot.cx-pn {
+  --cx-primary: #0f3460; --cx-primary-2: #13396a;
+  --cx-teach: #0f3460; --cx-teach-soft: #e4eaf3;
+  --cx-bg: #f3f2ee; --cx-surface: #fff; --cx-surface-2: #ebe9e3;
+  --cx-ink: #13203d; --cx-muted: #556079; --cx-faint: #6f7890; --cx-line: #e9e7e1;
+  --cx-ok: #1c7a4a; --cx-ok-bg: #e6f3eb; --cx-warn: #a3510b; --cx-warn-bg: #fbf1e3; --cx-bad: #b42318; --cx-bad-bg: #fbeceb;
+  --cx-r: 16px; --cx-r-ctl: 12px; --cx-ease: cubic-bezier(.23, 1, .32, 1);
+  --cx-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+  --cx-disp: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+  --cx-acc: #efc07b; --cx-acc-press: #e2a957; --cx-on-acc: #1a1a2e;
+  --cx-tile: #e6ecf5; --cx-tile-ink: #0f3460;
+  --cx-elev: 0 1px 2px rgba(19, 32, 61, .05), 0 6px 18px -10px rgba(19, 32, 61, .14);
+  --cx-shadow: 0 1px 2px rgba(19, 32, 61, .10), 0 2px 8px -2px rgba(19, 32, 61, .10);
+  --cx-glass: rgba(243, 242, 238, .82);
+  --cx-wash: radial-gradient(120% 90% at 82% 8%, #f7e1bd 0, transparent 55%), radial-gradient(110% 100% at 10% 0, #cbdaef 0, transparent 60%);
+  font-size: 16px; line-height: 1.45; color-scheme: light;
+}
+body.dark #clinixRoot.cx-pn {
+  --cx-primary: #efc07b; --cx-primary-2: #13396a;
+  --cx-teach: #f3cb8e; --cx-teach-soft: #13396a;
+  --cx-bg: #1a1a2e; --cx-surface: #16213e; --cx-surface-2: #1f2b4d;
+  --cx-ink: #f5f3ee; --cx-muted: #a9b1c7; --cx-faint: #8c95ae; --cx-line: #232e4c;
+  --cx-ok: #7dd3a0; --cx-ok-bg: #16332e; --cx-warn: #f7a85c; --cx-warn-bg: #3a2e22; --cx-bad: #ff8f8f; --cx-bad-bg: #3a2133;
+  --cx-tile: #29375e; --cx-tile-ink: #cdd5ea;
+  --cx-elev: inset 0 1px 0 rgba(255, 255, 255, .035); --cx-shadow: 0 1px 2px rgba(0, 0, 0, .3);
+  --cx-glass: rgba(26, 26, 46, .82);
+  --cx-wash: radial-gradient(90% 80% at 85% 10%, #4a3d2c 0, transparent 55%), radial-gradient(120% 110% at 8% 0, #262a44 0, transparent 62%);
+  color-scheme: dark;
+}
+
+/* The wash sits behind the top of every screen and scrolls away with it; reading text never sits on more. */
+#clinixRoot.cx-pn { background: var(--cx-wash), var(--cx-bg); background-size: 100% 420px, 100% 420px, auto; background-repeat: no-repeat; }
+#clinixRoot.cx-pn .cx-scroll { background: transparent; }
+
+/* Bar: transparent on the wash; solid glass with a hairline once the screen scrolls (.cx-scrolled,
+   set by clinix-screens.js), as the PrepNucleus bar does. */
+#clinixRoot.cx-pn .cx-head { background: transparent; border-bottom: 1px solid transparent; padding: calc(env(safe-area-inset-top, 0px) + 10px) 16px 10px; gap: 12px; transition: background-color .24s ease, border-color .24s ease; }
+#clinixRoot.cx-pn.cx-scrolled .cx-head, #clinixRoot.cx-pn.cx-scrolled .cx-stick { background: var(--cx-glass); -webkit-backdrop-filter: saturate(1.4) blur(18px); backdrop-filter: saturate(1.4) blur(18px); border-bottom-color: var(--cx-line); }
+#clinixRoot.cx-pn.cx-scrolled .cx-stick .cx-head { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; border-bottom-color: transparent; }
+#clinixRoot.cx-pn .cx-back, #clinixRoot.cx-pn .cx-close { width: 40px; height: 40px; background: var(--cx-surface); box-shadow: var(--cx-shadow); color: var(--cx-ink); transition: transform .38s var(--cx-ease); }
+body.dark #clinixRoot.cx-pn .cx-back, body.dark #clinixRoot.cx-pn .cx-close { background: var(--cx-surface-2); box-shadow: var(--cx-elev); }
+#clinixRoot.cx-pn .cx-back:active, #clinixRoot.cx-pn .cx-close:active { transform: scale(.94); background: var(--cx-surface); }
+#clinixRoot.cx-pn .cx-back .material-symbols-rounded, #clinixRoot.cx-pn .cx-close .material-symbols-rounded { font-size: 20px; }
+#clinixRoot.cx-pn .cx-head-title { font-family: var(--cx-disp); font-size: 17px; font-weight: 650; letter-spacing: -.022em; }
+#clinixRoot.cx-pn .cx-head-sub { font-size: 13px; }
+
+/* Home top: the brand on the wash, no slab. */
+#clinixRoot.cx-pn .cx-hero { background: transparent; color: var(--cx-ink); padding: calc(env(safe-area-inset-top, 0px) + 14px) 20px 8px 72px; min-height: 64px; }
+#clinixRoot.cx-pn .cx-hero-close { top: calc(env(safe-area-inset-top, 0px) + 12px); left: 16px; color: var(--cx-ink); }
+#clinixRoot.cx-pn .cx-hero-mark { font-family: var(--cx-disp); font-size: 22px; font-weight: 700; letter-spacing: -.024em; gap: 10px; }
+#clinixRoot.cx-pn .cx-hero-logo { width: 30px !important; filter: brightness(0) saturate(100%) invert(12%) sepia(23%) saturate(1900%) hue-rotate(196deg) brightness(92%); }
+body.dark #clinixRoot.cx-pn .cx-hero-logo { filter: brightness(0) invert(.95); }
+#clinixRoot.cx-pn .cx-hero-tag { margin-top: 2px; font-size: 14px; color: var(--cx-muted); opacity: 1; }
+
+/* Section titles: large, sentence case, no shouting eyebrows. */
+#clinixRoot.cx-pn .cx-sec { padding: 26px 16px 0; }
+#clinixRoot.cx-pn .cx-sec-h { font-family: var(--cx-disp); font-size: 21px; font-weight: 700; letter-spacing: -.024em; line-height: 1.2; text-transform: none; color: var(--cx-ink); margin: 26px 16px 12px; }
+#clinixRoot.cx-pn .cx-sec .cx-sec-h { margin: 0 0 12px; }
+#clinixRoot.cx-pn .cx-station .cx-sec-h { font-size: 17px; letter-spacing: -.016em; margin: 26px 0 10px; }
+#clinixRoot.cx-pn .cx-blurb { color: var(--cx-muted); font-size: 14.5px; line-height: 1.5; }
+#clinixRoot.cx-pn .cx-sec .cx-blurb { padding: 0 0 12px; margin-top: -6px; }
+
+/* Rows: one card, hairlines between rows, icon squircles in the brand tint. */
+#clinixRoot.cx-pn .cx-rows { gap: 0; background: var(--cx-surface); border-radius: var(--cx-r); box-shadow: var(--cx-elev); overflow: hidden; }
+body.dark #clinixRoot.cx-pn .cx-rows { box-shadow: 0 0 0 1px #252f4f; }
+#clinixRoot.cx-pn .cx-row { position: relative; border: 0; border-radius: 0; background: transparent; min-height: 62px; padding: 11px 16px; gap: 14px; transition: background-color .12s ease; }
+#clinixRoot.cx-pn .cx-row + .cx-row::before { content: ""; position: absolute; top: 0; left: 64px; right: 0; height: 1px; background: var(--cx-line); }
+#clinixRoot.cx-pn .cx-row--dz + .cx-row--dz::before, #clinixRoot.cx-pn .cx-rows--plain .cx-row + .cx-row::before { left: 16px; }
+#clinixRoot.cx-pn .cx-row:active { background: var(--cx-surface-2); transition-duration: 0s; }
+#clinixRoot.cx-pn .cx-row-ic { width: 34px; height: 34px; border-radius: 9px; align-items: center; justify-content: center; background: var(--cx-tile); color: var(--cx-tile-ink); }
+#clinixRoot.cx-pn .cx-row-ic .material-symbols-rounded { font-size: 19px; }
+#clinixRoot.cx-pn .cx-row-t { font-size: 16px; font-weight: 600; letter-spacing: -.016em; }
+#clinixRoot.cx-pn .cx-row--dz .cx-row-t { font-size: 16px; }
+#clinixRoot.cx-pn .cx-row-s { font-size: 13.5px; line-height: 1.35; }
+#clinixRoot.cx-pn .cx-row > .material-symbols-rounded:last-child { font-size: 18px; color: var(--cx-faint); }
+#clinixRoot.cx-pn .cx-row:has(> .cx-row-txt:first-child) + .cx-row::before { left: 16px; }
+#clinixRoot.cx-pn .cx-weak { padding: 12px 16px; }
+#clinixRoot.cx-pn .cx-weak + .cx-weak { border-top: 1px solid var(--cx-line); }
+
+/* Systems: subject tiles, a round icon on the brand tint. */
+#clinixRoot.cx-pn .cx-sys-grid { gap: 12px; }
+#clinixRoot.cx-pn .cx-sys { border: 0; border-radius: var(--cx-r); box-shadow: var(--cx-elev); padding: 16px; gap: 8px; transition: transform .38s var(--cx-ease); }
+body.dark #clinixRoot.cx-pn .cx-sys { box-shadow: 0 0 0 1px #252f4f; }
+#clinixRoot.cx-pn .cx-sys:active { transform: scale(.97); background: var(--cx-surface); }
+#clinixRoot.cx-pn .cx-sys-ic { width: 44px; height: 44px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--cx-tile); color: var(--cx-tile-ink); box-shadow: 0 0 0 3px var(--cx-surface), 0 0 0 4px var(--cx-line); margin: 2px 0 6px 2px; }
+#clinixRoot.cx-pn .cx-sys-ic .material-symbols-rounded { font-size: 22px; }
+#clinixRoot.cx-pn .cx-sys-t { font-size: 16px; font-weight: 650; letter-spacing: -.016em; line-height: 1.25; }
+#clinixRoot.cx-pn .cx-sys-n { font-size: 13px; }
+#clinixRoot.cx-pn .cx-sys--locked .cx-sys-ic, #clinixRoot.cx-pn .cx-sys--locked .cx-sys-t { opacity: 1; }
+#clinixRoot.cx-pn .cx-sys--locked .cx-sys-t { color: var(--cx-muted); }
+#clinixRoot.cx-pn .cx-sys-pro { background: var(--cx-surface-2); color: var(--cx-ink); font-weight: 650; padding: 3px 9px 3px 7px; }
+
+/* Up next: the PrepNucleus "next" card, amber disc. */
+#clinixRoot.cx-pn .cx-resume { background: var(--cx-surface); color: var(--cx-ink); border: 0; box-shadow: var(--cx-elev); padding: 14px 16px; gap: 14px; }
+#clinixRoot.cx-pn .cx-resume > .material-symbols-rounded:first-child { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--cx-acc); color: var(--cx-on-acc); font-size: 20px; }
+#clinixRoot.cx-pn .cx-resume-t { font-size: 16px; font-weight: 650; letter-spacing: -.016em; }
+#clinixRoot.cx-pn .cx-resume-s { color: var(--cx-muted); opacity: 1; }
+#clinixRoot.cx-pn .cx-resume-k { color: var(--cx-teach); opacity: 1; }
+#clinixRoot.cx-pn .cx-resume > .material-symbols-rounded:last-child { color: var(--cx-faint); opacity: 1; }
+
+/* Track switch: the PrepNucleus segmented pill. */
+#clinixRoot.cx-pn .cx-mode-bar { margin: 12px 16px 0; padding: 4px; border-radius: 999px; background: var(--cx-surface-2); }
+#clinixRoot.cx-pn .cx-mode-btn { min-height: 40px; border-radius: 999px; font-size: 14.5px; color: var(--cx-muted); }
+#clinixRoot.cx-pn .cx-mode-btn--active { background: var(--cx-surface); color: var(--cx-ink); box-shadow: var(--cx-shadow); }
+body.dark #clinixRoot.cx-pn .cx-mode-btn--active { background: #34446f; }
+#clinixRoot.cx-pn .cx-mode-note { padding: 10px 20px 0; font-size: 13.5px; }
+
+/* Buttons: capsules. Primary amber with Midnight ink; secondary on the card. */
+#clinixRoot.cx-pn .cx-btn { min-height: 50px; border-radius: 999px; font-size: 16px; font-weight: 600; letter-spacing: -.014em; transition: transform .38s var(--cx-ease), background-color .12s ease; }
+#clinixRoot.cx-pn .cx-btn:active { transform: scale(.97); }
+#clinixRoot.cx-pn .cx-btn--primary { background: var(--cx-acc); color: var(--cx-on-acc); font-weight: 650; box-shadow: 0 1px 2px rgba(19, 32, 61, .12), 0 6px 16px -8px rgba(160, 106, 30, .45); }
+body.dark #clinixRoot.cx-pn .cx-btn--primary { box-shadow: none; }
+#clinixRoot.cx-pn .cx-btn--primary:active { background: var(--cx-acc-press); filter: none; }
+#clinixRoot.cx-pn .cx-btn--ghost { background: var(--cx-surface); border: 0; box-shadow: var(--cx-elev); color: var(--cx-ink); }
+body.dark #clinixRoot.cx-pn .cx-btn--ghost { background: var(--cx-surface-2); box-shadow: none; }
+#clinixRoot.cx-pn .cx-ask-maik { border-radius: 999px; min-height: 46px; background: var(--cx-tile); color: var(--cx-tile-ink); }
+
+/* Module card and pathway: cards on the paper, numbered discs, a quiet connector. */
+#clinixRoot.cx-pn .cx-modcard { border: 0; box-shadow: var(--cx-elev); border-radius: var(--cx-r); background: var(--cx-surface); color: var(--cx-ink); padding: 16px; gap: 14px; }
+body.dark #clinixRoot.cx-pn .cx-modcard { box-shadow: 0 0 0 1px #252f4f; }
+#clinixRoot.cx-pn .cx-modcard:active { filter: none; background: var(--cx-surface-2); }
+#clinixRoot.cx-pn .cx-modcard-ic { flex: 0 0 auto; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; background: var(--cx-acc); color: var(--cx-on-acc); border-radius: 50%; }
+#clinixRoot.cx-pn .cx-modcard-ic .material-symbols-rounded { font-size: 24px; }
+#clinixRoot.cx-pn .cx-modcard-t { font-size: 17px; font-weight: 650; letter-spacing: -.016em; }
+#clinixRoot.cx-pn .cx-modcard-s { color: var(--cx-muted); opacity: 1; font-size: 14px; }
+#clinixRoot.cx-pn .cx-modcard-meta { color: var(--cx-faint); opacity: 1; font-size: 12.5px; }
+#clinixRoot.cx-pn .cx-modcard > .material-symbols-rounded:last-child { color: var(--cx-faint); font-size: 18px; }
+#clinixRoot.cx-pn .cx-rail-item::before { left: 31px; top: 0; bottom: -10px; width: 2px; background: var(--cx-line); }
+#clinixRoot.cx-pn .cx-rail-btn { position: relative; z-index: 1; background: var(--cx-surface); border-radius: var(--cx-r); box-shadow: var(--cx-elev); padding: 13px 16px 13px 14px; margin-bottom: 10px; gap: 14px; }
+body.dark #clinixRoot.cx-pn .cx-rail-btn { box-shadow: 0 0 0 1px #252f4f; }
+#clinixRoot.cx-pn .cx-rail-btn:active { background: var(--cx-surface-2); }
+#clinixRoot.cx-pn .cx-rail-n { width: 34px; height: 34px; border: 0; background: transparent; box-shadow: inset 0 0 0 2px var(--cx-primary); color: var(--cx-primary); font-size: 14px; }
+#clinixRoot.cx-pn .cx-rail-item--done .cx-rail-n { background: var(--cx-acc); box-shadow: none; color: var(--cx-on-acc); }
+#clinixRoot.cx-pn .cx-rail-t { font-size: 16px; font-weight: 600; letter-spacing: -.016em; }
+#clinixRoot.cx-pn .cx-rail-s { font-size: 13.5px; }
+#clinixRoot.cx-pn .cx-prog-track { height: 8px; background: var(--cx-surface-2); }
+
+/* Lessons and notices: sentence-case labels, soft fills. */
+#clinixRoot.cx-pn .cx-eyebrow { font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 650; color: var(--cx-teach); }
+#clinixRoot.cx-pn .cx-checklist-h { font-size: 13.5px; letter-spacing: 0; text-transform: none; font-weight: 600; color: var(--cx-muted); }
+#clinixRoot.cx-pn .cx-task-h { font-size: 13px; letter-spacing: 0; text-transform: none; font-weight: 650; }
+#clinixRoot.cx-pn .cx-notice { border-radius: var(--cx-r); }
+#clinixRoot.cx-pn .cx-task, #clinixRoot.cx-pn .cx-body--em, #clinixRoot.cx-pn .cx-case-open { border-radius: var(--cx-r); }
+#clinixRoot.cx-pn .cx-disclaimer { margin-top: 32px; }
+
+/* Checklists: each skill is one card of rows, like a PrepNucleus group. */
+#clinixRoot.cx-pn .cx-check { border: 0; border-radius: var(--cx-r-ctl); box-shadow: var(--cx-elev); min-height: 54px; padding: 12px 14px; }
+#clinixRoot.cx-pn .cx-cgroup-rows { gap: 0; background: var(--cx-surface); border-radius: var(--cx-r); box-shadow: var(--cx-elev); overflow: hidden; }
+body.dark #clinixRoot.cx-pn .cx-cgroup-rows { box-shadow: 0 0 0 1px #252f4f; }
+#clinixRoot.cx-pn .cx-cgroup-rows .cx-check { position: relative; border-radius: 0; box-shadow: none; background: transparent; }
+#clinixRoot.cx-pn .cx-cgroup-rows .cx-check + .cx-check::before { content: ""; position: absolute; top: 0; left: 50px; right: 0; height: 1px; background: var(--cx-line); }
+#clinixRoot.cx-pn .cx-cgroup-rows .cx-check--on { background: var(--cx-ok-bg); }
+#clinixRoot.cx-pn .cx-check-box { border-radius: 50%; border-color: var(--cx-faint); }
+#clinixRoot.cx-pn .cx-cgroup-h { font-size: 15px; font-weight: 650; letter-spacing: -.012em; padding: 0 4px 2px; }
+#clinixRoot.cx-pn .cx-crit { text-transform: none; letter-spacing: 0; font-size: 11.5px; font-weight: 650; border-radius: 999px; padding: 3px 8px; }
+
+/* Station bar and result in the same surfaces. */
+#clinixRoot.cx-pn .cx-stick { background: transparent; border-bottom: 1px solid transparent; transition: background-color .24s ease, border-color .24s ease; }
+#clinixRoot.cx-pn .cx-stick .cx-head { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
+#clinixRoot.cx-pn .cx-timer { background: var(--cx-surface); box-shadow: var(--cx-shadow); font-family: var(--cx-disp); font-size: 19px; }
+#clinixRoot.cx-pn .cx-timer--low { background: var(--cx-bad-bg); box-shadow: none; }
+#clinixRoot.cx-pn .cx-stbar-track, #clinixRoot.cx-pn .cx-result-bar { background: var(--cx-surface-2); }
+#clinixRoot.cx-pn .cx-result, #clinixRoot.cx-pn .cx-phaselist { border: 0; box-shadow: var(--cx-elev); }
+#clinixRoot.cx-pn .cx-score-pct { font-family: var(--cx-disp); }
+#clinixRoot.cx-pn .cx-result-time .material-symbols-rounded { color: var(--cx-faint); }
+
+/* Inputs and chips. */
+#clinixRoot.cx-pn .cx-input { border-radius: var(--cx-r-ctl); background: var(--cx-surface); }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot.cx-pn .cx-back, #clinixRoot.cx-pn .cx-close, #clinixRoot.cx-pn .cx-sys, #clinixRoot.cx-pn .cx-btn, #clinixRoot.cx-pn .cx-row, #clinixRoot.cx-pn .cx-head, #clinixRoot.cx-pn .cx-stick { transition: none; }
+  #clinixRoot.cx-pn .cx-sys:active, #clinixRoot.cx-pn .cx-btn:active, #clinixRoot.cx-pn .cx-back:active, #clinixRoot.cx-pn .cx-close:active { transform: none; }
+}
+
+/* Tool screens: presets as a two-column chip grid, plain labels. Base rules, so the teal look gets them too. */
+#clinixRoot .cx-abg-presets { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px; margin-bottom: 12px; }
+#clinixRoot .cx-abg-preset { min-height: 44px; padding: 8px 12px; text-align: left; font: inherit; font-size: 13.5px; font-weight: 600; line-height: 1.3; color: var(--cx-ink); background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); cursor: pointer; }
+#clinixRoot .cx-abg-preset:active { background: var(--cx-surface-2); }
+#clinixRoot.cx-pn .cx-abg-preset { border: 0; box-shadow: var(--cx-elev); }
+#clinixRoot .cx-maneuver-l { align-self: center; margin-right: 4px; font-size: 12.5px; font-weight: 600; color: var(--cx-muted); }
+#clinixRoot .cx-pres-blurb { padding: 0 0 14px; line-height: 1.5; }
