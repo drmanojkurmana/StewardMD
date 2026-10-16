@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-inborn-errors",
-  "subject": "paediatrics",
-  "title": "Inborn errors of metabolism: hypoglycaemia to transplant",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Suspect** (**hypoglycaemia** poor feed lethargy seizures, **hyperammonaemia** vomiting coma protein loads, **acidosis** Kussmaul organic acids, **odour** maple burnt PKU musty mousy, **cataract** galactosaemia E-coli sepsis, **jaundice** tyrosinaemia cabbage, **sepsis-like** well-baby crashes, **family** SIDS consanguinity) with **gases** (**lactate** ketones glucose, **ammonia** urgent spins) flags; **hold** (protein stops) stabilises. Metabolism fails.",
-      "say": "Hypoglycaemias hyperammonaemias acidoses odours is suspect: lethargies flag comas threaten Kussmauls blow cataracts cloud jaundices stain crashes mimic families share SIDSs warn gases flag lactates rise holds stop proteins pause. Smells warn.",
-      "vis": null
-    },
-    {
-      "tx": "**Name** (**PKU** phenylalanine diet BH4, **maple** leucine burnt sugar crisis, **urea** citrulline arginine scavengers, **organic** propionic methylmalonic carnitine, **galacto** lactose-free cataract reverses, **GSD** fasting ketotic liver, **lysosomal** coarse Hurler cherry Tay-Sachs, **Wilson** Kayser-Fleischer penicillamine) with **screens** (**Guthrie** heel-prick TMS, **urine** reducing substances) tests; **enzymes** (confirm assays) proves. Pathways block.",
-      "say": "PKUs maples ureas organics is name: diets restrict crisises trigger scavengers clear carnitines shuttle cataracts clear fastings drop coarses store cherries spot screens test Guthries blot enzymes prove assays confirm. Blocks map.",
-      "vis": null
-    },
-    {
-      "tx": "**Treat** (**diet** low-protein exchanges plans, **cofactor** BH4 B12 biotin trials, **scavenger** benzoate phenylbutyrate binds, **dialysis** ammonia crises clears, **transplant** liver urea MSUD cures, **enzyme** Gaucher Fabry infuses, **chaperone** migalastat folds, **gene** emerging trials) with **sick-day** (**double** calories fluids, **stop** protein catabolism) covers; **monitor** (levels growth) tracks. Futures rescue.",
-      "say": "Diets cofactors scavengers dialyses is treat: exchanges weigh trials test binds clear clears wash transplants cure infuses drip folds aid genes edit trials run sick-days cover calories double monitors track levels plot. Rescues save.",
-      "vis": null
-    },
-    {
-      "tx": "**Counsel** (**recurrence** quarter autosomal, **prenatal** CVS enzyme DNA, **newborn** screening coverage, **diet** lifelong adherence, **school** emergency letters, **transition** adult metabolic, **registry** natural history, **support** dietitian groups) with **traps** (**missed** screen false negatives, **catabolism** surgery fasts, **pregnancy** maternal PKU) closes; **audit** (outcomes reviews) improves. Families cope.",
-      "say": "Recurrences prenatals newborns diets is counsel: quarters quote enzymes test screens cover adherences strain schools brief transitions hand registries track traps dodge misses hide catabolisms spike pregnancies harm audits review outcomes learn. Counsels sustain.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-281",
-    "bk2-paed-282",
-    "bk2-paed-283",
-    "bk2-paed-284",
-    "bk2-paed-285",
-    "bk2-paed-286",
-    "bk2-paed-287",
-    "bk2-paed-288",
-    "bk2-paed-289",
-    "bk2-paed-290"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-inborn-errors",
+ "subject": "paediatrics",
+ "title": "Inborn errors of metabolism: hypoglycaemia to transplant",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Suspect** (**hypoglycaemia** poor feed lethargy seizures, **hyperammonaemia** vomiting coma protein loads, **acidosis** Kussmaul organic acids, **odour** maple burnt PKU musty mousy, **cataract** galactosaemia E-coli sepsis, **jaundice** tyrosinaemia cabbage, **sepsis-like** well-baby crashes, **family** SIDS consanguinity) with **gases** (**lactate** ketones glucose, **ammonia** urgent spins) flags; **hold** (protein stops) stabilises. Metabolism fails.",
+   "say": "Hypoglycaemias hyperammonaemias acidoses odours is suspect: lethargies flag comas threaten Kussmauls blow cataracts cloud jaundices stain crashes mimic families share SIDSs warn gases flag lactates rise holds stop proteins pause. Smells warn.",
+   "vis": null
+  },
+  {
+   "tx": "**Name** (**PKU** phenylalanine diet BH4, **maple** leucine burnt sugar crisis, **urea** citrulline arginine scavengers, **organic** propionic methylmalonic carnitine, **galacto** lactose-free cataract reverses, **GSD** fasting ketotic liver, **lysosomal** coarse Hurler cherry Tay-Sachs, **Wilson** Kayser-Fleischer penicillamine) with **screens** (**Guthrie** heel-prick TMS, **urine** reducing substances) tests; **enzymes** (confirm assays) proves. Pathways block.",
+   "say": "PKUs maples ureas organics is name: diets restrict crisises trigger scavengers clear carnitines shuttle cataracts clear fastings drop coarses store cherries spot screens test Guthries blot enzymes prove assays confirm. Blocks map.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-inborn-errors-fig1.webp",
+    "alt": "Simplified diagram of metabolic pathways with red 'X' marks indicating blocks caused by inborn errors like PKU, MSUD, and GSD.",
+    "caption": "Key metabolic pathways showing common inborn errors and their blocked steps. Image: LHcheM (small fixes by DMacks ), CC0/PD, Wikimedia Commons.",
+    "ar": 2.1381
+   }
+  },
+  {
+   "tx": "**Treat** (**diet** low-protein exchanges plans, **cofactor** BH4 B12 biotin trials, **scavenger** benzoate phenylbutyrate binds, **dialysis** ammonia crises clears, **transplant** liver urea MSUD cures, **enzyme** Gaucher Fabry infuses, **chaperone** migalastat folds, **gene** emerging trials) with **sick-day** (**double** calories fluids, **stop** protein catabolism) covers; **monitor** (levels growth) tracks. Futures rescue.",
+   "say": "Diets cofactors scavengers dialyses is treat: exchanges weigh trials test binds clear clears wash transplants cure infuses drip folds aid genes edit trials run sick-days cover calories double monitors track levels plot. Rescues save.",
+   "vis": null
+  },
+  {
+   "tx": "**Counsel** (**recurrence** quarter autosomal, **prenatal** CVS enzyme DNA, **newborn** screening coverage, **diet** lifelong adherence, **school** emergency letters, **transition** adult metabolic, **registry** natural history, **support** dietitian groups) with **traps** (**missed** screen false negatives, **catabolism** surgery fasts, **pregnancy** maternal PKU) closes; **audit** (outcomes reviews) improves. Families cope.",
+   "say": "Recurrences prenatals newborns diets is counsel: quarters quote enzymes test screens cover adherences strain schools brief transitions hand registries track traps dodge misses hide catabolisms spike pregnancies harm audits review outcomes learn. Counsels sustain.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-281",
+  "bk2-paed-282",
+  "bk2-paed-283",
+  "bk2-paed-284",
+  "bk2-paed-285",
+  "bk2-paed-286",
+  "bk2-paed-287",
+  "bk2-paed-288",
+  "bk2-paed-289",
+  "bk2-paed-290"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

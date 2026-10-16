@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-inheritance-syndromes",
-  "subject": "paediatrics",
-  "title": "Patterns of inheritance and genetic syndromes in children",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Pattern** (**dominant** vertical affected parent half risk, **recessive** horizontal carrier quarter consanguinity, **X-linked** maternal uncles skewed girls, **mitochondrial** maternal all children, **imprinting** Prader-Willi Angelman parent-origin, **mosaic** patchy severity, **anticipation** triplet expands, **pedigree** three generations) with **risks** (**numbers** recurrence quotes, **consanguinity** doubles recessive) counsels; **draw** (symbols shades) charts. Families map.",
-      "say": "Dominants recessives X-linkeds mitochondrials is pattern: verticals pass horizontals hide maternals carry imprintings flip mosaics patch anticipations grow pedigrees draw generations map risks quote numbers counsel. Trees branch.",
-      "vis": null
-    },
-    {
-      "tx": "**Syndrome** (**Marfan** tall arachnodactyly lens subluxation aortic root, **NF1** cafe-au-lait freckling neurofibromas Lisch optic glioma, **achondroplasia** rhizomelic trident foramen magnum, **Noonan** webbed pulmonary stenosis short, **Williams** elfin hypercalcaemia SVAS friendly, **Fragile-X** macroorchidism long face autism, **tuberous** ash-leaf shagreen seizures, **Ehlers** hypermobile skin vessels) with **genes** (**FBN1** fibrillin, **NF1** neurofibromin) names; **tests** (panels exomes) orders. Faces tell.",
-      "say": "Marfans NF1s achondroplasias Noonans is syndrome: heights stretch spots speckle limbs shorten necks web smiles chat macros grow ashes pale genes name fibrillins fail tests order panels read. Syndromes sign.",
-      "vis": null
-    },
-    {
-      "tx": "**Manage** (**aorta** Marfan echo beta-blocker activity limits, **tumour** NF1 optic MRI plexiform watches, **spine** achondroplasia foramen decompresses, **heart** Noonan Williams echoes, **calcium** Williams restricts, **behaviour** Fragile-X autism plans, **seizure** tuberous vigabatrin, **growth** charts GH debates) with **screens** (**annual** system reviews, **eyes** lens pressure) tracks; **school** (learning aids) supports. Lives plan.",
-      "say": "Aortas tumours spines hearts is manage: roots guard pressures check masses watch foramens free stenoses fix calciums curb behaviours plan autisms screen seizures still growths chart shortfalls debate screens track annuals review schools aid learners help. Plans hold.",
-      "vis": null
-    },
-    {
-      "tx": "**Counsel** (**recurrence** dominant half recessive quarter, **prenatal** CVS amnio NIPT options, **carrier** siblings cascade tests, **consanguinity** cultural respect risks, **preconception** folate rubella plans, **disclosure** child assent language, **registers** family clinics, **support** groups contacts) with **ethics** (**predictive** testing defers, **insurance** discrimination guards) protects; **records** (pedigrees files) keeps. Futures inform.",
-      "say": "Recurrences prenatals carriers consanguinities is counsel: halves quote quarters hide sibs test cultures respect preconceptions plan disclosures word ethics guard predictives wait records file trees keep supports link groups join. Choices inform.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-271",
-    "bk2-paed-272",
-    "bk2-paed-273",
-    "bk2-paed-274",
-    "bk2-paed-275",
-    "bk2-paed-276",
-    "bk2-paed-277",
-    "bk2-paed-278",
-    "bk2-paed-279",
-    "bk2-paed-280"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-inheritance-syndromes",
+ "subject": "paediatrics",
+ "title": "Patterns of inheritance and genetic syndromes in children",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Pattern** (**dominant** vertical affected parent half risk, **recessive** horizontal carrier quarter consanguinity, **X-linked** maternal uncles skewed girls, **mitochondrial** maternal all children, **imprinting** Prader-Willi Angelman parent-origin, **mosaic** patchy severity, **anticipation** triplet expands, **pedigree** three generations) with **risks** (**numbers** recurrence quotes, **consanguinity** doubles recessive) counsels; **draw** (symbols shades) charts. Families map.",
+   "say": "Dominants recessives X-linkeds mitochondrials is pattern: verticals pass horizontals hide maternals carry imprintings flip mosaics patch anticipations grow pedigrees draw generations map risks quote numbers counsel. Trees branch.",
+   "vis": null
+  },
+  {
+   "tx": "**Syndrome** (**Marfan** tall arachnodactyly lens subluxation aortic root, **NF1** cafe-au-lait freckling neurofibromas Lisch optic glioma, **achondroplasia** rhizomelic trident foramen magnum, **Noonan** webbed pulmonary stenosis short, **Williams** elfin hypercalcaemia SVAS friendly, **Fragile-X** macroorchidism long face autism, **tuberous** ash-leaf shagreen seizures, **Ehlers** hypermobile skin vessels) with **genes** (**FBN1** fibrillin, **NF1** neurofibromin) names; **tests** (panels exomes) orders. Faces tell.",
+   "say": "Marfans NF1s achondroplasias Noonans is syndrome: heights stretch spots speckle limbs shorten necks web smiles chat macros grow ashes pale genes name fibrillins fail tests order panels read. Syndromes sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-inheritance-syndromes-fig1.webp",
+    "alt": "Composite image showing a hand with arachnodactyly (Marfan), skin with cafe-au-lait spots and neurofibromas (NF1), and a child with short limbs (achondroplasia).",
+    "caption": "Key clinical features of common genetic syndromes aid diagnosis. Image: Mikael Häggström , M.D. Author info - Reusing images - Conflicts of in, CC BY 4.0, Wikimedia Commons.",
+    "ar": 0.8191
+   }
+  },
+  {
+   "tx": "**Manage** (**aorta** Marfan echo beta-blocker activity limits, **tumour** NF1 optic MRI plexiform watches, **spine** achondroplasia foramen decompresses, **heart** Noonan Williams echoes, **calcium** Williams restricts, **behaviour** Fragile-X autism plans, **seizure** tuberous vigabatrin, **growth** charts GH debates) with **screens** (**annual** system reviews, **eyes** lens pressure) tracks; **school** (learning aids) supports. Lives plan.",
+   "say": "Aortas tumours spines hearts is manage: roots guard pressures check masses watch foramens free stenoses fix calciums curb behaviours plan autisms screen seizures still growths chart shortfalls debate screens track annuals review schools aid learners help. Plans hold.",
+   "vis": null
+  },
+  {
+   "tx": "**Counsel** (**recurrence** dominant half recessive quarter, **prenatal** CVS amnio NIPT options, **carrier** siblings cascade tests, **consanguinity** cultural respect risks, **preconception** folate rubella plans, **disclosure** child assent language, **registers** family clinics, **support** groups contacts) with **ethics** (**predictive** testing defers, **insurance** discrimination guards) protects; **records** (pedigrees files) keeps. Futures inform.",
+   "say": "Recurrences prenatals carriers consanguinities is counsel: halves quote quarters hide sibs test cultures respect preconceptions plan disclosures word ethics guard predictives wait records file trees keep supports link groups join. Choices inform.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-271",
+  "bk2-paed-272",
+  "bk2-paed-273",
+  "bk2-paed-274",
+  "bk2-paed-275",
+  "bk2-paed-276",
+  "bk2-paed-277",
+  "bk2-paed-278",
+  "bk2-paed-279",
+  "bk2-paed-280"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
