@@ -10,7 +10,7 @@ on:
       enforce:
         description: "on = enforce bank gate, off = shadow mode"
         type: choice
-        options: [on, off]
+        options: ["enable", "disable"]
         default: "on"
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
           ENFORCE: ${{ inputs.enforce }}
         run: |
           npm install -g wrangler@4
-          if [ "$ENFORCE" = "on" ]; then
+          if [ "$ENFORCE" = "enable" ]; then
             printf '1' | npx wrangler pages secret put PREP_BANK_ENFORCE --project-name stewardmd
           else
             npx wrangler pages secret delete PREP_BANK_ENFORCE --project-name stewardmd || true
