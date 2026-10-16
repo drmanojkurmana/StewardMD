@@ -48,13 +48,13 @@ flip is verified on stewardmd.in.
 The local Cloudflare token in ~/.config/stewardmd/cloudflare.env has no Pages
 permission (API 403 on pages/projects), so the flip runs through GitHub:
 
-    gh workflow run bank-enforce.yml -f enforce=on
+    gh workflow run bank-enforce.yml -f enforce=enable
 
 That sets the Pages production secret PREP_BANK_ENFORCE=1 (read by the gate as
 env.PREP_BANK_ENFORCE === "1") and retries the latest production deployment.
 Flip off / rollback:
 
-    gh workflow run bank-enforce.yml -f enforce=off
+    gh workflow run bank-enforce.yml -f enforce=disable
 
 (deletes the secret and redeploys; gate returns to shadow logging). Full
 rollback: revert the bank-lock commits on main and redeploy.
