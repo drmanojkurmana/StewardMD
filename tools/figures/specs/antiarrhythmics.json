@@ -1,0 +1,150 @@
+{
+ "id": "antiarrhythmics",
+ "title": "Antiarrhythmic drugs: what each class does to the action potential",
+ "ariaLabel": "Two schematic action potential curves: a fast-response curve of ventricular muscle with phases 0 to 4, and a slow-response curve of the sinoatrial and atrioventricular nodes. A dashed curve shows the normal shape and a solid curve shows the effect of a Vaughan Williams class: class I sodium channel blockers slow the upstroke, class II beta-blockers slow the pacemaker drift, class III potassium channel blockers prolong the action potential, and class IV calcium channel blockers slow the nodal upstroke.",
+ "caption": "Schematic, not to scale. The curves are idealised and the axes carry no numbers; effects are qualitative and illustrative, and no dose, concentration or interval is shown or implied.",
+ "rateLabel": "Heart rate (class I effects grow as it rises)",
+ "rates": [
+  0.6,
+  1,
+  1.35
+ ],
+ "rateNames": [
+  "slow",
+  "usual",
+  "fast"
+ ],
+ "rateTicks": [
+  "slow",
+  "usual",
+  "fast"
+ ],
+ "rateStart": 1,
+ "drugLabel": "Antiarrhythmic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiarrhythmic"
+  },
+  {
+   "label": "class Ia (quinidine or procainamide type)",
+   "status": "class Ia",
+   "up": 0.75,
+   "apd": 1.25,
+   "ud": 1
+  },
+  {
+   "label": "class Ib (lidocaine type)",
+   "status": "class Ib",
+   "up": 0.85,
+   "apd": 0.85,
+   "ud": 2,
+   "apdUd": true
+  },
+  {
+   "label": "class Ic (flecainide type)",
+   "status": "class Ic",
+   "up": 0.45,
+   "apd": 1.0,
+   "ud": 1.5
+  },
+  {
+   "label": "class II (beta-blocker)",
+   "status": "class II",
+   "slope": 0.6,
+   "ca": 0.7
+  },
+  {
+   "label": "class III (amiodarone, sotalol or dofetilide type)",
+   "status": "class III",
+   "apd": 1.45
+  },
+  {
+   "label": "class IV (verapamil or diltiazem type)",
+   "status": "class IV",
+   "slope": 0.7,
+   "ca": 0.6
+  }
+ ],
+ "readout": "fast tissue: upstroke {0}, duration {1} · nodes: rate {2}, conduction {3}",
+ "status": "Heart rate: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "fast tissue: upstroke normal, duration unchanged · nodes: rate unchanged, conduction normal"
+  ],
+  [
+   1,
+   1,
+   "fast tissue: upstroke slowed, duration prolonged · nodes: rate unchanged, conduction normal"
+  ],
+  [
+   1,
+   3,
+   "fast tissue: upstroke markedly slowed, duration unchanged · nodes: rate unchanged, conduction normal"
+  ],
+  [
+   1,
+   4,
+   "fast tissue: upstroke normal, duration unchanged · nodes: rate slower, conduction slowed"
+  ],
+  [
+   1,
+   5,
+   "fast tissue: upstroke normal, duration prolonged · nodes: rate unchanged, conduction normal"
+  ],
+  [
+   1,
+   6,
+   "fast tissue: upstroke normal, duration unchanged · nodes: rate slower, conduction slowed"
+  ]
+ ],
+ "panels": [
+  {
+   "title": "Atrial and ventricular muscle",
+   "sub": "fast response: phases 0 to 4",
+   "info": "Fast-response action potential of atrial and ventricular muscle and Purkinje fibres. Phase 0: sodium channels open and the potential shoots up (the steepness sets conduction speed). Phase 1: a brief notch as sodium channels close and a transient potassium current starts. Phase 2: the plateau, with calcium entering and potassium leaving. Phase 3: potassium leaves and the cell repolarises (this sets the action potential duration and refractoriness). Phase 4: resting potential. Class I drugs act on phase 0, class III drugs on phase 3."
+  },
+  {
+   "title": "Sinoatrial and atrioventricular node",
+   "sub": "slow response: pacemaker cells",
+   "info": "Slow-response action potential of the SA and AV nodes. Phase 4 is a slow drift upward (pacemaker current and calcium entry) and sets the rate. Phase 0 is a slow upstroke carried by calcium (not sodium), so conduction through the AV node is slow. Phase 3 is repolarisation by potassium. Class II drugs slow the drift and class IV drugs slow the upstroke."
+  }
+ ],
+ "sources": [
+  "<strong>The classification.</strong> The Vaughan Williams scheme sorts antiarrhythmics by their main mechanism: class I sodium channel blockers (Ia moderate and prolonging repolarisation, Ib weak and shortening it, Ic strong with little effect on duration), class II beta-blockers, class III potassium channel blockers that prolong the action potential, and class IV non-dihydropyridine calcium channel blockers; several drugs have properties of more than one class (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK482322/\">Antiarrhythmic medications, StatPearls</a>).",
+  "<strong>Use dependence.</strong> Class I drugs block more at fast rates, because they bind sodium channels in the open and inactivated states; lidocaine type drugs act mostly in depolarised tissue such as ischaemic myocardium. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review.",
+  "<strong>Shapes of the curves.</strong> The phases, channels and effects follow standard cardiac electrophysiology teaching; the curves are idealised drawings, not recordings."
+ ],
+ "simplified": "Real curves differ by tissue (atrium, ventricle, Purkinje, endocardium and epicardium) and species; the effects on the ECG (PR, QRS, QT) are described only in words in the explanations, not drawn; amiodarone and sotalol have effects of several classes (amiodarone also blocks sodium and calcium channels and beta receptors); class Ia drugs also have anticholinergic effects; adenosine, digoxin, magnesium and ivabradine are not drawn; pro-arrhythmia (torsades with prolonged repolarisation, ventricular tachycardia with class Ic in structural heart disease) is not drawn. Use dependence is shown by a simple rate factor. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antiarrhythmic drugs: the Vaughan Williams classes",
+  "blurb": "Interactive figure: how each class changes the action potential",
+  "drugs": {
+   "quinidine": "d=1",
+   "procainamide": "d=1",
+   "disopyramide": "d=1",
+   "lidocaine": "d=2",
+   "lignocaine": "d=2",
+   "mexiletine": "d=2",
+   "phenytoin": "d=2",
+   "flecainide": "d=3",
+   "propafenone": "d=3",
+   "amiodarone": "d=5",
+   "sotalol": "d=5",
+   "dofetilide": "d=5",
+   "ibutilide": "d=5",
+   "dronedarone": "d=5",
+   "bretylium": "d=5",
+   "vernakalant": "d=5"
+  },
+  "terms": [
+   "antiarrhythmics?",
+   "anti-arrhythmics?",
+   "Vaughan[- ]Williams",
+   "class I(?:a|b|c)? (?:antiarrhythmic|drugs?)",
+   "class III (?:antiarrhythmic|drugs?)"
+  ]
+ }
+}

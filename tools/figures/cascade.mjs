@@ -23,7 +23,7 @@ const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replac
 function modelOf(S, level, drug) {
   const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
   S.nodes.forEach((n) => { lv[n.id] = 0; });
-  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
   S.edges.forEach((e) => {
     const b = (dr.blocks && dr.blocks[e.id]) || 0;
     blocked[e.id] = b;
@@ -31,7 +31,8 @@ function modelOf(S, level, drug) {
     lv[e.to] += flux[e.id];
   });
   S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
-  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * (blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { v += t[1] * (t[0].charAt(0) === "e" ? flux[t[0].slice(2)] : lv[t[0].slice(2)]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
   const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
   const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
   return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
@@ -72,7 +73,8 @@ const edgeSvg = (e) => {
   const lozenge = e.label ? `<g class="hot dr-enz" tabindex="0" data-info="${esc(e.info || e.label)}"><rect class="dr-enz-r" x="${f1(mx - lw / 2)}" y="${f1(my - 11)}" width="${f1(lw)}" height="22" rx="11"/><text class="dr-prot" x="${f1(mx)}" y="${f1(my + 4)}" text-anchor="middle">${esc(e.label)}</text></g>` : "";
   const nb = e.blockable !== false;
   const blk = nb ? `<g class="hot dr-block" id="blk-${e.id}" tabindex="0" data-info="${esc(S.blockInfo)}"><path class="dr-block-hex" d="${hex(mx, my - (e.label ? 25 : 14), 9)}"/><path class="dr-block-x" d="M${f1(mx - 3.6)} ${f1(my - (e.label ? 25 : 14) - 3.6)}L${f1(mx + 3.6)} ${f1(my - (e.label ? 25 : 14) + 3.6)}M${f1(mx + 3.6)} ${f1(my - (e.label ? 25 : 14) - 3.6)}L${f1(mx - 3.6)} ${f1(my - (e.label ? 25 : 14) + 3.6)}"/></g>` : "";
-  return `<path class="dr-rail dr-flowline" id="ln-${e.id}" d="${pathOf([[x0, y0], [x1, y1]])}"/><path class="dr-flowhead" d="${head}"/><g id="pt-${e.id}"></g>${lozenge}${blk}`;
+  const enh = nb ? `<g class="hot dr-block dr-enh" id="enh-${e.id}" tabindex="0" data-info="${esc(S.enhanceInfo || S.blockInfo)}"><path class="dr-ag-hex" d="${hex(mx + 22, my - (e.label ? 25 : 14), 9)}"/></g>` : "";
+  return `<path class="dr-rail dr-flowline" id="ln-${e.id}" d="${pathOf([[x0, y0], [x1, y1]])}"/><path class="dr-flowhead" d="${head}"/><g id="pt-${e.id}"></g>${lozenge}${blk}${enh}`;
 };
 const nodeSvg = (n, i) => `<g class="hot dr-node dr-n-${n.kind}" id="nd-${n.id}" tabindex="0" data-info="${esc(n.info)}" transform="translate(${n.x} ${n.y})">${blobSvg(nodeBlob(n, i))}<text class="dr-prot dr-nl" x="0" y="${n.sub ? -1 : 4}" text-anchor="middle">${esc(n.label)}</text>${n.sub ? `<text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">${esc(n.sub)}</text>` : ""}</g>`;
 const zoneSvg = (z) => `<rect class="dr-zone" x="${z.x}" y="${z.y}" width="${z.w}" height="${z.h}" rx="18"/><text class="dr-label dr-muted" x="${z.x + 16}" y="${z.y + 22}">${esc(z.label)}</text>`;
@@ -82,7 +84,7 @@ const body = [
   (S.zones || []).map(zoneSvg).join(""),
   S.edges.map(edgeSvg).join(""),
   S.nodes.map(nodeSvg).join(""),
-  `<g class="dr-key"><path class="dr-block-hex" d="${hex(52, 600, 7)}" style="opacity:1"/><text class="dr-label" x="68" y="604">${esc(S.blockKey || "inhibitor or blocker (generic)")}</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g>`,
+  `<g class="dr-key"><path class="dr-block-hex" d="${hex(52, 578, 7)}" style="opacity:1"/><text class="dr-label" x="68" y="582">${esc(S.blockKey || "inhibitor or blocker (generic)")}</text>${S.enhanceKey ? `<path class="dr-ag-hex" d="${hex(52, 600, 7)}" style="opacity:1"/><text class="dr-label" x="68" y="604">${esc(S.enhanceKey)}</text>` : ""}<circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g>`,
 ].join("");
 const svg = figureSvg({ width: WIDTH, height: HEIGHT, label: S.ariaLabel, body, className: "dr-fig" });
 const start = S.level.start ?? 1;
@@ -106,7 +108,7 @@ ${S.sources.map((x) => `<li>${x}</li>`).join("\n")}
 </footer>`;
 
 const script = `
-const S = ${JSON.stringify({ level: S.level, drugs: S.drugs.map((d) => ({ label: d.label, blocks: d.blocks || {} })), nodes: S.nodes.map((n) => ({ id: n.id, kind: n.kind, gain: n.gain, inv: n.inv, scale: n.scale })), edges: S.edges.map((e) => ({ id: e.id, from: e.from, to: e.to, w: e.w, rest: e.rest })), outputs: S.outputs, readout: S.readout, status: S.status, drugNames: S.drugs.map((d) => d.status || d.label) })};
+const S = ${JSON.stringify({ level: S.level, drugs: S.drugs.map((d) => ({ label: d.label, blocks: d.blocks || {} })), nodes: S.nodes.map((n) => ({ id: n.id, kind: n.kind, gain: n.gain, inv: n.inv, scale: n.scale, fixed: n.fixed, base: n.base, terms: n.terms })), edges: S.edges.map((e) => ({ id: e.id, from: e.from, to: e.to, w: e.w, rest: e.rest })), outputs: S.outputs, readout: S.readout, status: S.status, drugNames: S.drugs.map((d) => d.status || d.label) })};
 const modelOf = ${modelOf.toString()};
 const GEO = ${JSON.stringify(S.edges.map((e) => ({ id: e.id, p0: e.p0, p1: e.p1 })))};
 const NS = "http://www.w3.org/2000/svg";
@@ -126,7 +128,7 @@ let level = ${start}, drug = 0, playing = !reduce.matches, visible = true, sim =
   if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
 let M = modelOf(S, level, drug);
 const NP = 8;
-const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
 E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
 const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
 function draw(dt) {
@@ -135,6 +137,7 @@ function draw(dt) {
     const f = M.flux[e.g.id], b = M.blocked[e.g.id];
     e.f += (f - e.f) * k; e.b += (b - e.b) * k;
     if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
     e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
     const nd = Math.round(clamp(e.f) * NP);
     e.dots.forEach((d, i) => {
@@ -181,6 +184,7 @@ const extra = `.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);
 .dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
 .dr-n-out .dr-nl{fill:var(--anatomy-strong)}
 .dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
 .dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}`;
 const style = readFileSync(join(HERE, "figure.css"), "utf8") + extra;
 for (const light of [false, true]) {

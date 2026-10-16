@@ -1690,3 +1690,15 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   string that says beta-blocker) and a lesson step of `vis.kind "figure"` (`prep-lessons.js`, `phm-beta-blockers` step 5).
 - The pages and the new lesson step are AI-assisted content: they still need clinician review (Review Desk) before being called
   reviewed. Test: `test/run-beta-figure-ui.mjs`.
+
+### Figure program status (2026-10-16)
+- **Registry** `prep/figures/figures.json` (one entry per figure: drug names -> preset query, class phrases). `SMD_FIG.matchText(text)` is the one
+  matcher behind the Drugs card (all figures naming the drug), the MCQ explanation chip (prep.js `figRowHtml`, best match), the lesson step chip
+  (`prep-lessons.js` `figChip`) and the Knowledge Library row (`reasoning.js` `kbFigRow`, up to 2). Add a figure = add a spec and run its engine with `--register`.
+- **Engines** (`tools/figures/`, need an Anima checkout via `ANIMA_DIR`): `gpcr2.mjs` (two receptor cells), `cascade.mjs` (chain or network of molecules
+  with blockable or enhanceable steps, calc nodes, fixed sources, complement edges), `ap.mjs` (action potential curves). `--print-model` lists every
+  readout so a spec's `tests` can be written; the build fails if a test disagrees.
+- **Wave 1 built (10):** beta-blockers, muscarinic (agonists, atropine-type, cholinesterase inhibitors), raas, diuretics, calcium-channel-blockers,
+  anticoagulants, antiplatelets, alpha-adrenergic, antidiabetics, antiarrhythmics. About 1.2 MB for all pages, both themes.
+- **Review state:** all figure text is AI-assisted. Each spec's `sources` says which claims have a linked source and which are textbook teaching
+  flagged for review. Nothing is called "reviewed" until the owner signs it in the Review Desk.
