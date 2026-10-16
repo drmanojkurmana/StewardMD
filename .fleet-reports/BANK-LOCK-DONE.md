@@ -52,6 +52,13 @@ Cloudflare tokens lack Pages permission (API code 10000): the local token
 38864781464 failed at wrangler pages secret put). Owner: add
 PREP_BANK_ENFORCE=1 under Pages > stewardmd > Settings > Environment
 variables > Production and redeploy, or grant a token Pages:Edit, then run:
+Second unblock attempt (2026-10-16 07:13 UTC): the wrangler OAuth login on
+this machine holds pages:write scope but expired 2026-10-12, and refresh
+fails in a non-interactive session. No credential available here can write
+Pages config; the dashboard step is the only remaining path. Post-flip
+verification (401s, 429 under hammering, signed 200 with images) is still
+owed; current live result: unauthenticated module fetch 200 (shadow),
+health 200, production healthy.
 
     gh workflow run bank-enforce.yml -f enforce=enable
 
