@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-ablation-planning",
+  "subject": "radiology",
+  "title": "Thermal ablation: planning and protection",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Margins cure tumours. **Thermal ablation** kills with heat where **5 mm margins** around visible tumours predict complete necrosis. **Microwave beats radiofrequency** near vessels since heat-sink steals less energy. **Hydrodissection** with dextrose separates bowel from burn zones. **Track ablation** on withdrawal seeds no tumour along needle paths.",
+      "say": "Margins cure tumours. Heat ablation kills where five-millimetre margins around tumours predict complete death. Microwave beats radiofrequency near vessels since flowing blood steals less heat. Fluid injection separates bowel from burns. Burning tracks on withdrawal seeds no tumour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map the tumour"
+          },
+          {
+            "id": "b",
+            "label": "Plan margins"
+          },
+          {
+            "id": "c",
+            "label": "Protect neighbours"
+          },
+          {
+            "id": "d",
+            "label": "Burn the track"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Images guide every burn. **Ultrasound with fusion** overlays CT targets onto live livers for precise probes. **Immediate contrast scans** reveal residual nodules needing same-day touch-ups. **Heat-sink vessels** above 3 mm cool radiofrequency zones requiring microwave or longer burns. **General anaesthesia** stills diaphragms for dome lesions.",
+      "say": "Images guide every burn. Fusion ultrasound overlays CT targets onto live livers. Immediate contrast scans reveal leftovers needing same-day touch-ups. Large vessels cool radiofrequency zones needing microwave. General anaesthesia stills diaphragms for dome lesions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tool",
+          "Use"
+        ],
+        "rows": [
+          [
+            "Fusion ultrasound",
+            "Probe guidance"
+          ],
+          [
+            "Contrast scan",
+            "Residual check"
+          ],
+          [
+            "Microwave",
+            "Near vessels"
+          ],
+          [
+            "Hydrodissection",
+            "Bowel guard"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Burns injure beyond tumours. **Bile duct strictures** follow central burns needing stents. **Liver abscess** in necrotic zones declares with fever needing drainage. **Grounding burns** from radiofrequency pads mark poor contact needing pad checks. **Tumour seeding** along tracks stays rare where track burns prevent.",
+      "say": "Burns injure beyond tumours. Central burns stricture bile ducts needing stents. Necrotic zones abscess with fever needing drains. Pad burns mark poor grounding needing checks. Track seeding stays rare where withdrawal burns prevent.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up proves lasting kill. **Contrast imaging at one month** with no enhancement marks technical success. **Local progression** at edges earns repeat ablation while distant spread changes strategy. **Tumour markers** falling confirm response alongside scans. **Multidisciplinary review** aligns repeat burns with surgery and systemic options.",
+      "say": "Follow-up proves lasting kill. One-month contrast scans with no enhancement mark success. Edge regrowth earns repeat burns while distant spread changes strategy. Falling markers confirm response. Team review aligns repeats with surgery and drugs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan at one month"
+          },
+          {
+            "id": "b",
+            "label": "Re-burn edges"
+          },
+          {
+            "id": "c",
+            "label": "Track markers"
+          },
+          {
+            "id": "d",
+            "label": "Review as team"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-476",
+    "maikir2-477",
+    "maikir2-478",
+    "maikir2-479",
+    "maikir2-480",
+    "maikir2-481",
+    "maikir2-482",
+    "maikir2-483",
+    "maikir2-484",
+    "maikir2-485",
+    "maikir2-486",
+    "maikir2-487",
+    "maikir2-488",
+    "maikir2-489",
+    "maikir2-490",
+    "maikir2-491",
+    "maikir2-492",
+    "maikir2-493",
+    "maikir2-494",
+    "maikir2-495",
+    "maikir2-496",
+    "maikir2-497",
+    "maikir2-498",
+    "maikir2-499",
+    "maikir2-500"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

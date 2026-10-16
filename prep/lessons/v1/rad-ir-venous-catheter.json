@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-venous-catheter",
+  "subject": "radiology",
+  "title": "Central venous catheters: choice and line care",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Tips belong at the cavoatrial door. **Catheter tips** rest at the **cavoatrial junction** where high flow dilutes drugs and clots least, confirmed on fluoroscopy. **Right internal jugular** offers the straightest run to the cava with lowest thrombosis. **Left-sided and femoral lines** kink and clot sooner, reserved for blocked right sides. **Tip too deep** in atria triggers arrhythmia while shallow tips in brachiocephalic veins clot fast.",
+      "say": "Tips belong at the cavoatrial door. Catheter ends rest where the cava meets the atrium, confirmed on screening. Right neck veins offer the straightest run with least clotting. Left and groin lines kink sooner, reserved for blocked right sides. Deep tips trigger rhythm while shallow tips clot.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pick right neck"
+          },
+          {
+            "id": "b",
+            "label": "Advance to junction"
+          },
+          {
+            "id": "c",
+            "label": "Confirm on screen"
+          },
+          {
+            "id": "d",
+            "label": "Suture and dress"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ports hide under skin for months. **Implanted ports** suit intermittent chemotherapy with needle access through skin and low infection. **Tunneled cuffed catheters** serve dialysis and daily infusions where cuffs bar germs. **PICC lines** cover weeks of antibiotics via arm veins with higher clot rates. **Choice follows duration** with ports for months, tunnels for daily needs and PICCs for weeks.",
+      "say": "Ports hide under skin for months. Implanted ports suit intermittent chemotherapy with low infection. Tunnelled cuffed lines serve dialysis where cuffs bar germs. Arm PICCs cover weeks of antibiotics with higher clots. Duration picks devices: ports for months, tunnels for daily, PICCs for weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Device",
+          "Span"
+        ],
+        "rows": [
+          [
+            "Port",
+            "Months"
+          ],
+          [
+            "Tunneled line",
+            "Daily needs"
+          ],
+          [
+            "PICC",
+            "Weeks"
+          ],
+          [
+            "Femoral",
+            "Days only"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Infection starts at the hub. **Aseptic hub care** with scrubbed connections and chlorhexidine dressings prevents most line infections. **Fever with line tenderness** earns paired blood cultures from line and periphery before antibiotics. **Uncomplicated infections** may clear with locks and systemic drugs while tunnels stay. **Tunnel abscess or fungaemia** demands removal since germs coat plastic permanently.",
+      "say": "Infection starts at hubs. Scrubbed connections with antiseptic dressings prevent most line infections. Fever with tender lines earns paired cultures before drugs. Simple infections may clear with locks while tunnels stay. Tunnel abscess or fungal blood demands removal since germs coat plastic.",
+      "vis": null
+    },
+    {
+      "tx": "Blocked lines speak through pressures. **Fibrin sheaths** wrap tips allowing infusion but no withdrawal, treated with low-dose lytic dwells. **Catheter-related thrombosis** swells arms or necks with duplex-mapped clots needing anticoagulation. **Pinch-off syndrome** cracks subclavian lines at the costoclavicular angle, warning with positional flow. **Remove versus salvage** weighs infection, clot and ongoing need at every blockage.",
+      "say": "Blocked lines speak through pressures. Fibrin wraps allow flushing but no draw-back, treated with lytic dwells. Line clots swell arms needing anticoagulation. Pinch-off cracks lines at the collarbone, warning with positional flow. Every blockage weighs removal against salvage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Feel the block"
+          },
+          {
+            "id": "b",
+            "label": "Map with duplex"
+          },
+          {
+            "id": "c",
+            "label": "Lyase or anticoagulate"
+          },
+          {
+            "id": "d",
+            "label": "Remove if infected"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-251",
+    "maikir2-252",
+    "maikir2-253",
+    "maikir2-254",
+    "maikir2-255",
+    "maikir2-256",
+    "maikir2-257",
+    "maikir2-258",
+    "maikir2-259",
+    "maikir2-260",
+    "maikir2-261",
+    "maikir2-262",
+    "maikir2-263",
+    "maikir2-264",
+    "maikir2-265",
+    "maikir2-266",
+    "maikir2-267",
+    "maikir2-268",
+    "maikir2-269",
+    "maikir2-270",
+    "maikir2-271",
+    "maikir2-272",
+    "maikir2-273",
+    "maikir2-274",
+    "maikir2-275"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

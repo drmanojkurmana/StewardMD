@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-selective-uae",
+  "subject": "radiology",
+  "title": "Uterine artery embolisation in depth",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Fibroids shrink without knives. **Uterine artery embolisation** blocks fibroid blood where bulk, bleeding and pressure ease over months. **Fertility wishes** steer counselling since ovarian reserve may dip and pregnancy needs planning. **Pedunculated subserosal fibroids** risk detachment needing surgical backup. **Post-embolisation pain** peaks at hours needing PCA with anti-inflammatories.",
+      "say": "Fibroids shrink without knives. Uterine embolisation blocks fibroid blood where bulk and bleeding ease over months. Fertility wishes steer counselling since reserves may dip. Stalked outer fibroids risk detachment needing surgical backup. Pain peaks at hours needing strong analgesia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map the fibroids"
+          },
+          {
+            "id": "b",
+            "label": "Counsel fertility"
+          },
+          {
+            "id": "c",
+            "label": "Embolise both sides"
+          },
+          {
+            "id": "d",
+            "label": "Control the pain"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Both sides shut together. **Bilateral uterine embolisation** closes both arteries since collaterals cross midline freely. **Ovarian collaterals** feed fibroids in some where added closure completes. **Endpoint of pruning** stops short of stasis protecting myometrium. **Flat-panel roadmap** guides microcatheters past cervicovaginal branches.",
+      "say": "Both sides shut together. Bilateral closure blocks both arteries since collaterals cross freely. Ovarian feeders complete treatment in some. Pruned-tree endpoints stop short of stasis protecting womb muscle. Roadmaps guide catheters past vaginal branches.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Both uterines",
+            "Bilateral grains"
+          ],
+          [
+            "Ovarian feed",
+            "Added closure"
+          ],
+          [
+            "Endpoint",
+            "Pruned not stasis"
+          ],
+          [
+            "Branches",
+            "Spare vaginal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Expulsion surprises after success. **Fibroid expulsion** through cervices brings pain with discharge needing hysteroscopic rescue. **Infection after necrosis** declares with fever needing antibiotics and sometimes hysterectomy. **Ovarian failure** advances menopause where reserves were low. **Amenorrhoea patterns** vary with most resuming cycles normally.",
+      "say": "Expulsion surprises after success. Fibroids pass through cervices with pain needing scope rescue. Necrotic infection declares with fever needing drugs and sometimes surgery. Ovarian failure advances menopause where reserves ran low. Most cycles resume normally.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up measures shrinkage carefully. **MRI at six months** quantifies fibroid death with symptom scores. **Pregnancy after UAE** waits for complete uterine healing with obstetric planning. **Recurrence with regrowth** earns repeat embolisation or surgery. **Satisfaction scores** track bleeding with bulk relief.",
+      "say": "Follow-up measures shrinkage. Six-month MRI quantifies fibroid death with symptom scores. Pregnancy after waits for healing with obstetric planning. Regrowth earns repeat treatment or surgery. Satisfaction tracks bleeding with bulk relief.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan at six months"
+          },
+          {
+            "id": "b",
+            "label": "Score symptoms"
+          },
+          {
+            "id": "c",
+            "label": "Plan pregnancies"
+          },
+          {
+            "id": "d",
+            "label": "Treat regrowth"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-576",
+    "maikir2-577",
+    "maikir2-578",
+    "maikir2-579",
+    "maikir2-580",
+    "maikir2-581",
+    "maikir2-582",
+    "maikir2-583",
+    "maikir2-584",
+    "maikir2-585",
+    "maikir2-586",
+    "maikir2-587",
+    "maikir2-588",
+    "maikir2-589",
+    "maikir2-590",
+    "maikir2-591",
+    "maikir2-592",
+    "maikir2-593",
+    "maikir2-594",
+    "maikir2-595",
+    "maikir2-596",
+    "maikir2-597",
+    "maikir2-598",
+    "maikir2-599",
+    "maikir2-600"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

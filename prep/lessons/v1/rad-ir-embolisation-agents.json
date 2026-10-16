@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-embolisation-agents",
+  "subject": "radiology",
+  "title": "Embolic agents: choice and safe delivery",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Temporary plugs suit bleeding that heals itself. **Gelatin sponge** cut into pledgets or torpedoes blocks flow for days to weeks while trauma tracts and postpartum uteri recover. **Clot and hurry** mark its limits, since recanalisation follows and infected fields wash it out early. **Sizing by vessel** keeps pledgets proximal rather than sailing distally into danger. **Postpartum and trauma oozing** remain its classic territory under Society of Interventional Radiology guidance.",
+      "say": "Temporary plugs suit bleeding that heals itself. Gelatin sponge blocks flow for days to weeks while trauma and postpartum bleeding recover. It recanalises later and washes out of infected fields. Size pledgets to vessels to avoid distal sailing. Postpartum and trauma oozing remain classic uses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Find the bleeder"
+          },
+          {
+            "id": "b",
+            "label": "Size the pledget"
+          },
+          {
+            "id": "c",
+            "label": "Deposit proximally"
+          },
+          {
+            "id": "d",
+            "label": "Confirm stasis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Permanent particles close tissue for good. **Polyvinyl alcohol particles** in calibrated sizes lodge at chosen levels, with small sizes reaching deeper at higher non-target risk. **Tris-acryl microspheres** offer smoother calibrated occlusion for fibroids and prostate work. **Size matching** pairs particle calibre to target diameter so shunts and collaterals do not carry grains astray. **Pain and fever** after particles mark expected ischaemia rather than failure.",
+      "say": "Permanent particles close tissue for good. Calibrated grains lodge at chosen levels, with smaller sizes reaching deeper at higher risk. Smooth microspheres suit fibroid and prostate work. Match grain size to vessel size to avoid stray grains. Pain with fever after marks expected ischaemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Duration"
+        ],
+        "rows": [
+          [
+            "Gelatin sponge",
+            "Days to weeks"
+          ],
+          [
+            "PVA particles",
+            "Permanent"
+          ],
+          [
+            "Microspheres",
+            "Permanent"
+          ],
+          [
+            "Coils",
+            "Permanent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Metal and glue finish what particles start. **Detachable coils** pack aneurysms and feeding trunks densely under CIRSE packing standards, with framing then filling then finishing loops. **Vascular plugs** cap large high-flow vessels where coils would migrate downstream. **Liquid embolics** of glue or copolymer penetrate niduses that coils cannot fill, demanding DMSO-compatible catheters and fast flow control. **Non-target glue** in normal branches infarcts healthy tissue, so balloon protection guards dangerous anastomoses.",
+      "say": "Metal and glue finish the job. Coils pack aneurysms and trunks densely in framing, filling and finishing stages. Plugs cap large high-flow vessels where coils would drift. Liquid glue penetrates tangles that coils cannot fill but needs compatible catheters. Glue in normal branches infarcts healthy tissue.",
+      "vis": null
+    },
+    {
+      "tx": "Technique protects normal tissue first. **Superselective catheterisation** with microcatheters parks the tip inside the bleeding branch before anything is injected. **Provocative pauses** with small test injections reveal dangerous shunts to skin, bowel or cord. **Sandwich occlusion** traps pseudoaneurysms front and back when collaterals feed both ends. **Post-embolisation syndrome** with pain, fever and nausea follows successful ischaemia and needs fluids with analgesia rather than antibiotics alone.",
+      "say": "Technique protects normal tissue first. Microcatheters park inside bleeding branches before injection. Small test shots reveal dangerous shunts to skin, bowel or cord. Sandwich coils trap sacs fed from both ends. Pain with fever after success needs fluids and analgesia rather than antibiotics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Go superselective"
+          },
+          {
+            "id": "b",
+            "label": "Test for shunts"
+          },
+          {
+            "id": "c",
+            "label": "Deposit the agent"
+          },
+          {
+            "id": "d",
+            "label": "Treat the syndrome"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-076",
+    "maikir2-077",
+    "maikir2-078",
+    "maikir2-079",
+    "maikir2-080",
+    "maikir2-081",
+    "maikir2-082",
+    "maikir2-083",
+    "maikir2-084",
+    "maikir2-085",
+    "maikir2-086",
+    "maikir2-087",
+    "maikir2-088",
+    "maikir2-089",
+    "maikir2-090",
+    "maikir2-091",
+    "maikir2-092",
+    "maikir2-093",
+    "maikir2-094",
+    "maikir2-095",
+    "maikir2-096",
+    "maikir2-097",
+    "maikir2-098",
+    "maikir2-099",
+    "maikir2-100"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-tips-encephalopathy",
+  "subject": "radiology",
+  "title": "Post-TIPS encephalopathy and shunt tuning",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Confusion follows ammonia's shortcut. **Post-TIPS encephalopathy** clouds attention and sleep within weeks as gut ammonia bypasses livers straight to brains. **Precipitants stack** with constipation, infection, dehydration and sedatives tipping fragile minds over. **Lactulose with rifaximin** per AASLD and EASL guidance clears ammonia while gut flora quiets. **Driving and machinery** pause until minds clear, with families briefed on relapse signs.",
+      "say": "Confusion follows ammonia shortcut. Encephalopathy clouds attention within weeks as gut ammonia bypasses livers to brains. Constipation, infection and sedatives tip fragile minds over. Lactulose with rifaximin clears ammonia while gut flora quiets. Driving pauses until minds clear with families briefed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ammonia bypasses"
+          },
+          {
+            "id": "b",
+            "label": "Minds cloud over"
+          },
+          {
+            "id": "c",
+            "label": "Clear with drugs"
+          },
+          {
+            "id": "d",
+            "label": "Brief the family"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Narrowing shunts rescues minds. **Refractory encephalopathy** despite maximal drugs earns **shunt reduction** with hourglass stents or constrained relining. **Gradient rise** after reduction trades confusion relief against re-bleed risk, needing honest consent. **Occlusion as last resort** closes shunts fully where minds matter more than pressure. **Transplant review** runs alongside every reduction since failing livers underlie both problems.",
+      "say": "Narrowing shunts rescues minds. Drug-proof confusion earns shunt reduction with constrained relining. Rising gradients trade confusion relief against re-bleed risk. Full closure stays a last resort where minds outweigh pressure. Transplant review runs alongside every reduction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Move",
+          "Trade"
+        ],
+        "rows": [
+          [
+            "Drugs first",
+            "Clear ammonia"
+          ],
+          [
+            "Reduction",
+            "Mind over pressure"
+          ],
+          [
+            "Occlusion",
+            "Last resort"
+          ],
+          [
+            "Transplant",
+            "Definitive cure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Livers fail faster on diversion. **Post-shunt liver failure** shows rising bilirubin with coagulopathy within weeks where reserves were marginal. **MELD tracking** after shunts catches deterioration before irreversibility. **Nutrition with protein** continues per EASL guidance since starving brains and muscles worsens outcomes. **Early transplant referral** beats waiting for complete collapse.",
+      "say": "Livers fail faster on diversion. Rising bilirubin with coagulopathy within weeks marks marginal reserves tipping over. MELD tracking catches deterioration early. Protein-rich nutrition continues since starving worsens outcomes. Early transplant referral beats waiting for collapse.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up never truly ends. **Duplex with ammonia checks** pairs shunt velocities against confusion episodes at every visit. **Variceal and ascites watches** continue since reduced shunts re-raise pressure. **Medication reconciliation** stops sedatives and constipating drugs that quietly precipitate coma. **Emergency plans** tell families when drowsiness means hospital rather than extra lactulose alone.",
+      "say": "Follow-up never ends. Duplex with confusion checks pairs velocities against episodes each visit. Varix and ascites watches continue since narrowed shunts re-raise pressure. Drug reviews stop sedatives that precipitate coma. Emergency plans tell families when drowsiness means hospital.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan and ask"
+          },
+          {
+            "id": "b",
+            "label": "Watch pressure signs"
+          },
+          {
+            "id": "c",
+            "label": "Review the drugs"
+          },
+          {
+            "id": "d",
+            "label": "Plan emergencies"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-201",
+    "maikir2-202",
+    "maikir2-203",
+    "maikir2-204",
+    "maikir2-205",
+    "maikir2-206",
+    "maikir2-207",
+    "maikir2-208",
+    "maikir2-209",
+    "maikir2-210",
+    "maikir2-211",
+    "maikir2-212",
+    "maikir2-213",
+    "maikir2-214",
+    "maikir2-215",
+    "maikir2-216",
+    "maikir2-217",
+    "maikir2-218",
+    "maikir2-219",
+    "maikir2-220",
+    "maikir2-221",
+    "maikir2-222",
+    "maikir2-223",
+    "maikir2-224",
+    "maikir2-225"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}
