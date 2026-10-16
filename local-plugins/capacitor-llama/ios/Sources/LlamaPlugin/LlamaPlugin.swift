@@ -13,9 +13,10 @@ import CryptoKit
  * reads it from a local path.
  *
  * Methods (all return a Promise):
- *   available()                                          -> { available, loaded, defaultNCtx, defaultNPredict }
+ *   available()                                          -> { available, loaded, embed, defaultNCtx, defaultNPredict }
  *   load({ path, nCtx?, nThreads?, nGpuLayers? })        -> { loaded, nCtx, nThreads }
  *   generate({ prompt, system?, nPredict?, temperature?, seed?, stream? }) -> { text, ms }
+ *   embed({ text, kind? })                               -> { vector } (kind "query"|"doc", on-phone search)
  *   cancel()                                             -> { }
  *   release()                                            -> { released }
  *   excludeFromBackup({ path })                          -> { ok }
@@ -70,6 +71,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "available", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "load", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "generate", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "embed", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "generateWithImage", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "release", returnType: CAPPluginReturnPromise),
@@ -101,6 +103,15 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         NotificationCenter.default.addObserver(
             self, selector: #selector(appWillEnterForeground),
             name: UIApplication.willEnterForegroundNotification, object: nil)
+        // Memory warning drops the 210 MB embedding model (mmap reload is cheap); the chat model is
+        // left alone so an in-flight answer is never cut. The next embed() reloads on demand.
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(appDidReceiveMemoryWarning),
+            name: UIApplication.didReceiveMemoryWarningNotification, object: nil)
+    }
+
+    @objc private func appDidReceiveMemoryWarning() {
+        engine.releaseEmbed()
     }
 
     /**
@@ -327,6 +338,9 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             "available": true,                     // the XCFramework is linked at build time
             "debugBuild": isDebug,
             "loaded": engine.isLoaded,
+            // On-phone search (EmbeddingGemma 2): the JS tier feature-detects `L.embed` itself, and
+            // reads this field as a second signal. True exactly when this build ships the method below.
+            "embed": true,
             "availableMemory": avail,
             // Total RAM on the device (audit T61, 2026-09-25) - JS uses this alongside availableMemory
             // to size which model shard to offer, not just whether one currently fits.
@@ -476,6 +490,38 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
                 self?.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])
                 call.reject(e.detail, e.code.rawValue)
+            }
+        }
+    }
+
+    /**
+     * Embed one short text on device for on-phone search (kb/ai/embed-local.js).
+     *
+     * `text` is the raw question (JS truncates to 500 chars; native caps at embedMaxChars). `kind`
+     * selects the bank prefix: "query" (default) embeds a question, "doc" a document. Resolves
+     * { vector: [768 L2-normalised floats] }. The pack path comes from ModelDownloader, the same
+     * downloader + sha-checked file the Settings row downloads — never a bridge upload.
+     *
+     * Never runs while a chat generation is active (rejects "busy"); the embed model stays mmapped
+     * between calls and its per-call context is freed before resolving.
+     */
+    @objc func embed(_ call: CAPPluginCall) {
+        let text = call.getString("text") ?? ""
+        let kind = call.getString("kind") ?? "query"
+        guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            call.reject("Missing text", LlamaErr.badArguments.rawValue); return
+        }
+        let path = ModelDownloader.pathFor(LlamaEngine.embedFileName).path
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self else { return }
+            do {
+                let v = try self.engine.embed(path: path, text: text, kind: kind)
+                call.resolve(["vector": v])
+            } catch let e as LlamaError {
+                self.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])
+                call.reject(e.detail, e.code.rawValue)
+            } catch {
+                call.reject(error.localizedDescription, LlamaErr.generationFailure.rawValue)
             }
         }
     }

@@ -23,7 +23,7 @@ import java.util.concurrent.TimeUnit;
  * by the JS layer via @capacitor/filesystem with a pinned SHA-256 per shard); this plugin only ever
  * reads it from a local path.
  *
- * Methods (Promise): available, load, generate, cancel, release.
+ * Methods (Promise): available, load, generate, embed, cancel, release.
  * Events: llamaToken {text, count}, llamaError {code, message}. A llamaToken event may carry several
  * pieces concatenated; {@code count} says how many (see TokenBatcher).
  *
@@ -80,6 +80,17 @@ public class LlamaPlugin extends Plugin {
     public void load() {
         engine = new LlamaEngine();
         downloader = new ModelDownloader(getContext());
+        // Memory pressure drops the 210 MB embedding model (mmap reload is cheap); the chat model is
+        // left alone so an in-flight answer is never cut. Mirrors the iOS memory-warning observer.
+        try {
+            getContext().registerComponentCallbacks(new android.content.ComponentCallbacks2() {
+                @Override public void onConfigurationChanged(android.content.res.Configuration c) {}
+                @Override public void onLowMemory() { engine.releaseEmbed(); }
+                @Override public void onTrimMemory(int level) {
+                    if (level >= android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW) engine.releaseEmbed();
+                }
+            });
+        } catch (Throwable ignore) {}
     }
 
     // MARK: - Background model download (system DownloadManager)
@@ -225,6 +236,9 @@ public class LlamaPlugin extends Plugin {
             .put("available", engine.isAvailable())
             .put("debugBuild", isDebug)
             .put("loaded", engine.isLoaded())
+            // On-phone search (EmbeddingGemma 2): the JS tier feature-detects `L.embed` itself, and
+            // reads this field as a second signal. True exactly when this build ships embed() below.
+            .put("embed", true)
             .put("availableMemory", availMem)
             .put("totalMemory", totalMem)
             // SOFT: availMem is free + reclaimable, and llama.cpp mmaps the weights, so a model
@@ -414,6 +428,50 @@ public class LlamaPlugin extends Plugin {
             } finally {
                 // finally, not after resolve: an exception must not leave the poller running.
                 stopThermalWatch();
+            }
+        });
+    }
+
+    /**
+     * Embed one short text on device for on-phone search (kb/ai/embed-local.js). kind "query"
+     * (default) embeds a question, "doc" a document. Resolves { vector: [768 floats] }. The pack
+     * path comes from the same downloader + sha-checked file the Settings row downloads.
+     * Never runs while a chat generation is active (rejects "busy").
+     */
+    @PluginMethod
+    public void embed(PluginCall call) {
+        String text = call.getString("text", "");
+        String kind = call.getString("kind", "query");
+        if (text == null || text.trim().isEmpty()) { call.reject("Missing text", LlamaErr.BAD_ARGUMENTS.code); return; }
+        final java.io.File f = downloader.pathFor(LlamaEngine.EMBED_FILE_NAME);
+        if (!f.exists() || f.length() == 0) { call.reject("embedding model not downloaded", LlamaErr.MODEL_MISSING.code); return; }
+        // At-request gauge (see available()): refuse rather than OOM beside a resident chat model.
+        // 0 means "could not tell" and carries no opinion.
+        long avail = 0;
+        try {
+            android.app.ActivityManager am = (android.app.ActivityManager)
+                getContext().getSystemService(android.content.Context.ACTIVITY_SERVICE);
+            if (am != null) {
+                android.app.ActivityManager.MemoryInfo mi = new android.app.ActivityManager.MemoryInfo();
+                am.getMemoryInfo(mi);
+                avail = mi.availMem;
+            }
+        } catch (Throwable ignore) {}
+        if (avail > 0 && avail <= f.length() + LlamaEngine.EMBED_HEADROOM) {
+            call.reject("not enough free memory for the embedding model", LlamaErr.LOW_MEMORY.code); return;
+        }
+        final long availF = avail;
+        worker.execute(() -> {
+            try {
+                float[] v = engine.embed(f.getAbsolutePath(), text, kind, defaultThreads(), availF);
+                org.json.JSONArray arr = new org.json.JSONArray();
+                for (float x : v) arr.put((double) x);
+                call.resolve(new JSObject().put("vector", arr));
+            } catch (LlamaException e) {
+                emitError(e);
+                call.reject(e.detail, e.err.code);
+            } catch (Throwable t) {
+                call.reject(String.valueOf(t.getMessage()), LlamaErr.GENERATION_FAILURE.code);
             }
         });
     }
