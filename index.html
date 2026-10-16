@@ -2461,7 +2461,12 @@ window.openExternal = function (u) {
 <!-- MaiK AI mark: the icon on every "Ask MaiK" entry (one SVG in assets/maik-ai-mark.svg). Before home.js. -->
 <script src="/maik-ai-mark.js?v=mkai7" defer></script>
 <script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1-convo1002-liteproto1-litedrug1-ntb1-tools1-eng1-liteval1-fgwarm1-adultref1" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1" defer></script>
+<!-- On-phone semantic search (window.SMD_EMBED_LOCAL): EmbeddingGemma disease vectors through
+     the prep-bank API plus IndexedDB cache, read lazily by steward-ai.browser.js (only when the
+     smd_local_embed flag is on and the search pack is on disk). Defining the global is harmless
+     when off. -->
+<script src="/kb/ai/embed-local.js?v=embed1" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1-embedlocal1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
 <script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5" defer></script>
