@@ -391,11 +391,13 @@
   // Home's top: the readiness line, then Today's plan. Drawn at once from what is known; homeMounted() redraws it
   // once the subject indexes and the lesson index are in.
   /* Brand watermark (owner 2026-10-16): the PrepNucleus mark with "Powered by StewardMD" in the empty right side of the home
-   * header on wide screens (CSS shows it from 760 px). Decorative only: aria-hidden, no alt text, not clickable (clicks fall
-   * through to the readiness card under it), faint by design. Two small files at the repo root so build-www bundles them. */
+   * header on wide screens (CSS shows it from 760 px). Both marks are drawn as CSS masks of the logo alpha, so they take the app's
+   * own ink (Prussian on the day field, the text colour in dark) instead of their brand greens, which fought the amber and
+   * Prussian header; only the "MD" keeps the brand teal. Decorative only: aria-hidden, not clickable (clicks fall through to
+   * the readiness card under it). Two small files at the repo root so build-www bundles them. */
   function wmHtml() {
-    return '<div class="pl-wm" aria-hidden="true"><img class="pl-wm-pn" src="/prepnucleus-wm.png" alt="" width="84" height="84" decoding="async">' +
-      '<span class="pl-wm-by"><span>Powered by</span><img src="/stewardmd-wm.png" alt="" width="20" height="20" decoding="async"><b>StewardMD</b></span></div>';
+    return '<div class="pl-wm" aria-hidden="true"><span class="pl-wm-pn"></span><span class="pl-wm-rule"></span>' +
+      '<span class="pl-wm-by"><span class="pl-wm-pb">Powered by</span><span class="pl-wm-sd"><i class="pl-wm-gl"></i><span class="pl-wm-wd">Steward<b>MD</b></span></span></span></div>';
   }
   function homeHtml(h) {
     H = h;
