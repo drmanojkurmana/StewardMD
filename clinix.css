@@ -1332,7 +1332,7 @@ html.cx-lock .mc-overlay { z-index: 1300; }
   --cx-teach: #004e64; --cx-teach-soft: #e3eef2;
   --cx-bg: #eef2f5; --cx-surface: #ffffff; --cx-surface-2: #e0e5e9;
   --cx-ink: #10303b; --cx-muted: #4a6370; --cx-faint: #576f7b; --cx-line: #e3e8ec;
-  --cx-ok: #1d6b45; --cx-ok-bg: #e3f1e8; --cx-warn: #8a5410; --cx-warn-bg: #f6ecdc; --cx-bad: #a8231b; --cx-bad-bg: #f8e6e4;
+  --cx-ok: #1d6b45; --cx-ok-bg: #f1f8f4; --cx-warn: #8a5410; --cx-warn-bg: #f6ecdc; --cx-bad: #a8231b; --cx-bad-bg: #fcf3f2;
   --cx-r: 16px; --cx-r-ctl: 12px; --cx-ease: cubic-bezier(.23, 1, .32, 1);
   --cx-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
   --cx-disp: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
@@ -1352,7 +1352,7 @@ body.dark #clinixRoot.cx-pn {
   --cx-teach: #9fd3e1; --cx-teach-soft: #12394a;
   --cx-bg: #06171d; --cx-surface: #0d2730; --cx-surface-2: #14333e;
   --cx-ink: #e6edf1; --cx-muted: #9fb6c1; --cx-faint: #86a0ac; --cx-line: #1b3a45;
-  --cx-ok: #8fd6ab; --cx-ok-bg: #12301f; --cx-warn: #e9b46a; --cx-warn-bg: #352a19; --cx-bad: #f29a8f; --cx-bad-bg: #3a1c1a;
+  --cx-ok: #8fd6ab; --cx-ok-bg: #102c28; --cx-warn: #e9b46a; --cx-warn-bg: #352a19; --cx-bad: #f29a8f; --cx-bad-bg: #242225;
   --cx-acc: #7cc4d8; --cx-acc-press: #68b3c8; --cx-on-acc: #04222c;
   --cx-acc-glow: transparent;
   --cx-tile: #16404d; --cx-tile-ink: #cfe3ea;
@@ -1524,3 +1524,11 @@ body.dark #clinixRoot.cx-pn .cx-cgroup-rows { box-shadow: 0 0 0 1px var(--cx-edg
 #clinixRoot.cx-pn .cx-abg-preset { border: 0; box-shadow: var(--cx-elev); }
 #clinixRoot .cx-maneuver-l { align-self: center; margin-right: 4px; font-size: 12.5px; font-weight: 600; color: var(--cx-muted); }
 #clinixRoot .cx-pres-blurb { padding: 0 0 14px; line-height: 1.5; }
+
+/* Owner 2026-10-16: ticked steps and the critical block "lighter by 50%". Tints above are halved toward white;
+   the critical list reads as normal text with red markers instead of a bold red wall. */
+#clinixRoot.cx-pn .cx-notice--crit { box-shadow: inset 0 0 0 1px rgba(168, 35, 27, .10); }
+body.dark #clinixRoot.cx-pn .cx-notice--crit { box-shadow: inset 0 0 0 1px rgba(242, 154, 143, .14); }
+#clinixRoot.cx-pn .cx-critlist li { color: var(--cx-ink); font-weight: 500; }
+#clinixRoot.cx-pn .cx-critlist li::marker { color: var(--cx-bad); }
+#clinixRoot.cx-pn .cx-notice--crit span { color: var(--cx-muted); opacity: 1; }
