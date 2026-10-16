@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-hypothyroidism",
-  "subject": "medicine",
-  "title": "Hypothyroidism, Hashimoto's and myxoedema coma",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**cold** intolerance weight gains constipation, **skin** dry hair loss outer eyebrows, **voice** hoarse slow speech, **menses** menorrhagia infertility libido, **neck** Hashimoto goitre family vitiligo pernicious, **drugs** amiodarone lithium recent, **ablation** thyroidectomy radioiodine neck, **coma** triggers infection cold sedatives) with **viva** (**myxoedematous** puffy slowed elder, **Hashimoto** goitrous teenager) profiles; **TSH** (primary high screens) triages. Glands fail.",
-      "say": "Colds skins voices menses is history: necks swell drugs blunt ablations burn comas trigger myxoedemata puff Hashimotos lump TSHs rise FT4s fall. Bodies slow.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**skin** dry coarse cool doughy, **hair** loss eyebrows outer thirds, **face** puffy periorbital tongue, **voice** hoarse slow mentation, **pulse** bradycardic diastolic hypertensive, **reflexes** delayed relaxation phases, **goitre** Hashimoto firm rubbery, **coma** hypothermic hypoventilating hypotensive) with **bedside** (**ECG** low voltage bradycardia, **lipids** cholesterol climbs, **anaemia** macrocytic B12) charts; **growth** (cretin stalls) measures. Metabolisms idle.",
-      "say": "Skins hairs faces voices is exam: pulses slow reflexes lag goitres firm comas cool ECGs flatten lipids climb anaemias pale growths stall replacements start. Patients chill.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**TSH** high FT4 low primary proves, **TPO** antibodies Hashimoto marks, **lipids** CK cholesterol climbs, **ECG** bradycardia effusion, **cortisol** synacthen before coma thyroxine, **pituitary** MRI central low TSH) with **differentials** (**Hashimoto** TPO goitrous, **ablative** neck scarred, **iodine** deficient endemic, **drugs** amiodarone lithium, **central** pituitary low) sorts; **endocrine** (adrenal pituitary decides) meets. Hormones wane.",
-      "say": "TSHs TPOs lipids ECGs is Ix: cortisols guard MRIs show Hashimotos mark ablatives scar iodines lack drugs blunt centrals dip endocrines meet thyroxines wait steroids first. Numbers confirm.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**levothyroxine** morning empty stomach titrates, **elderly** cardiac low starts slow, **coma** ICU thyroxine hydrocortisone warms ventilates, **precipitants** antibiotics rewarm sedatives stop, **pregnancy** dose rises monitors, **calcium** iron apart spaces) with **traps** (**over-replace** AF angina bones, **coma** thyroxine alone kills, **interactions** binding blocks) closes; **follow** (TSH yearly symptoms) tracks. Glands replaced.",
-      "say": "Levothyroxines starts warms precipitants is Rx: pregnancies raise calciums space over-replaces harm comas guard interactions block follows track TSHs steady wishes respect. Hormones restore.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-381",
-    "bk2-med-382",
-    "bk2-med-383",
-    "bk2-med-384",
-    "bk2-med-385",
-    "bk2-med-386",
-    "bk2-med-387",
-    "bk2-med-388",
-    "bk2-med-389",
-    "bk2-med-390"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-hypothyroidism",
+ "subject": "medicine",
+ "title": "Hypothyroidism, Hashimoto's and myxoedema coma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**cold** intolerance weight gains constipation, **skin** dry hair loss outer eyebrows, **voice** hoarse slow speech, **menses** menorrhagia infertility libido, **neck** Hashimoto goitre family vitiligo pernicious, **drugs** amiodarone lithium recent, **ablation** thyroidectomy radioiodine neck, **coma** triggers infection cold sedatives) with **viva** (**myxoedematous** puffy slowed elder, **Hashimoto** goitrous teenager) profiles; **TSH** (primary high screens) triages. Glands fail.",
+   "say": "Colds skins voices menses is history: necks swell drugs blunt ablations burn comas trigger myxoedemata puff Hashimotos lump TSHs rise FT4s fall. Bodies slow.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**skin** dry coarse cool doughy, **hair** loss eyebrows outer thirds, **face** puffy periorbital tongue, **voice** hoarse slow mentation, **pulse** bradycardic diastolic hypertensive, **reflexes** delayed relaxation phases, **goitre** Hashimoto firm rubbery, **coma** hypothermic hypoventilating hypotensive) with **bedside** (**ECG** low voltage bradycardia, **lipids** cholesterol climbs, **anaemia** macrocytic B12) charts; **growth** (cretin stalls) measures. Metabolisms idle.",
+   "say": "Skins hairs faces voices is exam: pulses slow reflexes lag goitres firm comas cool ECGs flatten lipids climb anaemias pale growths stall replacements start. Patients chill.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-hypothyroidism-fig1.webp",
+    "alt": "Composite image showing a patient with myxedema (puffy face, periorbital edema, dry skin, outer eyebrow hair loss), a patient with Hashimoto's goitre, and a child with stunted growth (cretinism).",
+    "caption": "Key physical signs of hypothyroidism, Hashimoto's, and cretinism",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**TSH** high FT4 low primary proves, **TPO** antibodies Hashimoto marks, **lipids** CK cholesterol climbs, **ECG** bradycardia effusion, **cortisol** synacthen before coma thyroxine, **pituitary** MRI central low TSH) with **differentials** (**Hashimoto** TPO goitrous, **ablative** neck scarred, **iodine** deficient endemic, **drugs** amiodarone lithium, **central** pituitary low) sorts; **endocrine** (adrenal pituitary decides) meets. Hormones wane.",
+   "say": "TSHs TPOs lipids ECGs is Ix: cortisols guard MRIs show Hashimotos mark ablatives scar iodines lack drugs blunt centrals dip endocrines meet thyroxines wait steroids first. Numbers confirm.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**levothyroxine** morning empty stomach titrates, **elderly** cardiac low starts slow, **coma** ICU thyroxine hydrocortisone warms ventilates, **precipitants** antibiotics rewarm sedatives stop, **pregnancy** dose rises monitors, **calcium** iron apart spaces) with **traps** (**over-replace** AF angina bones, **coma** thyroxine alone kills, **interactions** binding blocks) closes; **follow** (TSH yearly symptoms) tracks. Glands replaced.",
+   "say": "Levothyroxines starts warms precipitants is Rx: pregnancies raise calciums space over-replaces harm comas guard interactions block follows track TSHs steady wishes respect. Hormones restore.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-381",
+  "bk2-med-382",
+  "bk2-med-383",
+  "bk2-med-384",
+  "bk2-med-385",
+  "bk2-med-386",
+  "bk2-med-387",
+  "bk2-med-388",
+  "bk2-med-389",
+  "bk2-med-390"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

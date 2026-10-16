@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-neonatal-infections",
-  "subject": "paediatrics",
-  "title": "Neonatal sepsis and congenital infections: screens to lumbar puncture",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Recognition** (**EOS** rupture fever tachycardia labour, **LOS** lines ventilation late NICU, **lethargy** poor feed temperature swings, **apnoea** bradycardia desaturation spells, **jaundice** unwell sepsis overlaps, **mottling** shock refill delays, **maternal** GBS UTI chorioamnionitis, **TORCH** rash microcephaly cataracts) with **scores** (**screen** CRP procalcitonin counts, **risk** Kaiser calculators) stratifies; **cultures** (pre-antibiotic draws) hurries. Newborns sicken.",
-      "say": "EOSs LOSs lethargies apnoeas is recognition: jaundices overlap mottlings shock maternals seed TORCHs scar scores stratify cultures draw antibiotics hang. Bugs invade.",
-      "vis": null
-    },
-    {
-      "tx": "**TORCH** (**toxo** chorioretinitis calcifications hydrocephalus, **rubella** cataract deafness blueberry, **CMV** petechiae microcephaly hearing, **herpes** vesicles SEM disseminated, **syphilis** snuffles rash bones, **Zika** collapsed microcephaly, **parvo** hydrops anaemia, **varicella** limb scars shingles) with **tests** (**IgM** PCR titres pairs, **eye** hearing screens) confirms; **treat** (pyrimethamine ganciclovir penicillin) targets. Wombs transmit.",
-      "say": "Toxos rubellas CMVs herpes is TORCH: syphilises snuffle Zikas shrink parvos swell varicellas scar tests pair eyes screen treats target penicillins cure. Germs cross.",
-      "vis": null
-    },
-    {
-      "tx": "**Workup** (**cultures** blood CSF urine draws, **LP** meningitis pleocytosis, **counts** neutropenia I-T ratios, **CRP** serial trends guides, **chest** pneumonia infiltrates, **herpes** surface PCR acyclovir, **fungal** candida parenteral lines, **viral** enterovirus parechovirus) with **monitors** (**apnoea** bradycardia trends, **feeds** intolerance residuals) watches; **echo** (endocarditis vegetations) rules. Sepsis hunts.",
-      "say": "Cultures LPs counts CRPs is workup: chests haze herpes stains fungals bud virals rage monitors trend feeds stall echoes clear antibiotics cover. Needles tap.",
-      "vis": null
-    },
-    {
-      "tx": "**Treatment** (**amp-gentamicin** EOS empiric covers, **cefotaxime** meningitis gram-negative, **acyclovir** HSV encephalitis doses, **fluconazole** candida lines out, **support** fluids pressors ventilation, **duration** culture-negative stops, **follow** hearing neurodevelopment, **prevent** GBS screening handwash) with **traps** (**nephrotoxic** drug levels, **resistance** de-escalate narrows, **LP** delayed unstable) closes; **records** (times doses) documents. Babies recover.",
-      "say": "Amp-gentamicins cefotaximes acyclovirs fluconazoles is treatment: supports sustain durations stop follows track prevents screen nephrotoxins watch resistances narrow LPs wait records log times chart. Drugs cure.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-211",
-    "bk2-paed-212",
-    "bk2-paed-213",
-    "bk2-paed-214",
-    "bk2-paed-215",
-    "bk2-paed-216",
-    "bk2-paed-217",
-    "bk2-paed-218",
-    "bk2-paed-219",
-    "bk2-paed-220"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-neonatal-infections",
+ "subject": "paediatrics",
+ "title": "Neonatal sepsis and congenital infections: screens to lumbar puncture",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Recognition** (**EOS** rupture fever tachycardia labour, **LOS** lines ventilation late NICU, **lethargy** poor feed temperature swings, **apnoea** bradycardia desaturation spells, **jaundice** unwell sepsis overlaps, **mottling** shock refill delays, **maternal** GBS UTI chorioamnionitis, **TORCH** rash microcephaly cataracts) with **scores** (**screen** CRP procalcitonin counts, **risk** Kaiser calculators) stratifies; **cultures** (pre-antibiotic draws) hurries. Newborns sicken.",
+   "say": "EOSs LOSs lethargies apnoeas is recognition: jaundices overlap mottlings shock maternals seed TORCHs scar scores stratify cultures draw antibiotics hang. Bugs invade.",
+   "vis": null
+  },
+  {
+   "tx": "**TORCH** (**toxo** chorioretinitis calcifications hydrocephalus, **rubella** cataract deafness blueberry, **CMV** petechiae microcephaly hearing, **herpes** vesicles SEM disseminated, **syphilis** snuffles rash bones, **Zika** collapsed microcephaly, **parvo** hydrops anaemia, **varicella** limb scars shingles) with **tests** (**IgM** PCR titres pairs, **eye** hearing screens) confirms; **treat** (pyrimethamine ganciclovir penicillin) targets. Wombs transmit.",
+   "say": "Toxos rubellas CMVs herpes is TORCH: syphilises snuffle Zikas shrink parvos swell varicellas scar tests pair eyes screen treats target penicillins cure. Germs cross.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neonatal-infections-fig1.webp",
+    "alt": "Composite image showing characteristic signs of congenital infections: hydrocephalus, cataracts, petechiae, vesicles, rash, microcephaly, hydrops, and limb scars.",
+    "caption": "Key clinical manifestations of TORCH and other congenital infections. Image: Kapitainekavern, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 1.1816
+   }
+  },
+  {
+   "tx": "**Workup** (**cultures** blood CSF urine draws, **LP** meningitis pleocytosis, **counts** neutropenia I-T ratios, **CRP** serial trends guides, **chest** pneumonia infiltrates, **herpes** surface PCR acyclovir, **fungal** candida parenteral lines, **viral** enterovirus parechovirus) with **monitors** (**apnoea** bradycardia trends, **feeds** intolerance residuals) watches; **echo** (endocarditis vegetations) rules. Sepsis hunts.",
+   "say": "Cultures LPs counts CRPs is workup: chests haze herpes stains fungals bud virals rage monitors trend feeds stall echoes clear antibiotics cover. Needles tap.",
+   "vis": null
+  },
+  {
+   "tx": "**Treatment** (**amp-gentamicin** EOS empiric covers, **cefotaxime** meningitis gram-negative, **acyclovir** HSV encephalitis doses, **fluconazole** candida lines out, **support** fluids pressors ventilation, **duration** culture-negative stops, **follow** hearing neurodevelopment, **prevent** GBS screening handwash) with **traps** (**nephrotoxic** drug levels, **resistance** de-escalate narrows, **LP** delayed unstable) closes; **records** (times doses) documents. Babies recover.",
+   "say": "Amp-gentamicins cefotaximes acyclovirs fluconazoles is treatment: supports sustain durations stop follows track prevents screen nephrotoxins watch resistances narrow LPs wait records log times chart. Drugs cure.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-211",
+  "bk2-paed-212",
+  "bk2-paed-213",
+  "bk2-paed-214",
+  "bk2-paed-215",
+  "bk2-paed-216",
+  "bk2-paed-217",
+  "bk2-paed-218",
+  "bk2-paed-219",
+  "bk2-paed-220"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

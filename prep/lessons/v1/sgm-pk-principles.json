@@ -42,7 +42,13 @@
   {
    "tx": "**Clearance** is the volume of plasma cleared of drug per unit time, calculated as elimination rate divided by plasma concentration. The **maintenance dose** rate is clearance multiplied by the desired plasma concentration, divided by bioavailability. The **loading dose** is target concentration times Vd, adjusted for bioavailability, and it fills the body store quickly without waiting for accumulation.",
    "say": "Clearance is the volume of plasma cleared of drug per unit time. It is calculated as elimination rate divided by plasma concentration. The maintenance dose rate equals clearance multiplied by the desired plasma concentration, divided by bioavailability. The loading dose equals target concentration times volume of distribution, adjusted for bioavailability. It fills the body store quickly without waiting for the drug to accumulate.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-pk-principles-fig1.webp",
+    "alt": "Graph comparing plasma drug concentration over time for loading and maintenance dose regimens, showing faster target concentration achievement with loading dose.",
+    "caption": "Loading vs. maintenance dose for target concentration",
+    "ar": 1.8349
+   }
   },
   {
    "tx": "Most drugs follow **first-order kinetics**, where elimination is proportional to concentration and a fixed fraction leaves each half-life. After four to five half-lives, about 94 to 97 percent of the drug is gone, and steady state is reached after roughly four to five half-lives of constant dosing. In contrast, **zero-order kinetics** removes a fixed amount per unit time. Phenytoin is the classic example, so small dose increases can cause sudden toxicity.",

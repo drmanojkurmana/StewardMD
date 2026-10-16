@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "obg-pph",
-  "subject": "obstetrics-gynaecology",
-  "title": "Postpartum haemorrhage: atony, trauma, tissue and thrombin",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**PPH** (**500 ml vaginal**, **1000 ml section**, severe 1000 with shock; **atony** overcontracted uterus, **trauma** tears, **tissue** retained, **thrombin** DIC) kills fastest; **active third stage** (**oxytocin 10 IU IM**, controlled cord traction, uterine massage) prevents. Quantified drapes weigh; shock index tachycardia hypotension transfuses. Grand multiparity twins polyhydramnios macrosomia atony risk.",
-      "say": "Half litre vaginal litre section is PPH: oxytocin 10 IM active third prevents. Four Ts find.",
-      "vis": null
-    },
-    {
-      "tx": "**Oxytocin** (**10 IU IM** prevention, **20 to 40 IU infusion** treatment, bolus hypotension) with **ergometrine** (**hypertension banned**, nausea) and **carboprost** (**asthma banned**, diarrhoea fever) then **misoprostol** (800 sublingual, shivering fever) sequences; **tranexamic acid** (**1 g IV within 3 hours**, WOMAN trial) clots early. Bimanual compression bridges; aorta compresses.",
-      "say": "Oxytocin first ergometrine hypertensive banned carboprost asthmatic banned: tranexamic grams 3 hours. Sequence squeezes.",
-      "vis": null
-    },
-    {
-      "tx": "**Balloon tamponade** (**Bakri**, condom catheter low resource, 24 hours with antibiotics) with **B-Lynch compression suture**, uterine artery ligation, **internal iliac** then **hysterectomy** last resort steps; **retained tissue** (succenturiate lobe, velamentous vessels) explores manually. Placenta accreta spectrum (previa with sections, bladder invasion MRI) hysterectomises electively.",
-      "say": "Balloon day B-Lynch stitch artery ties hysterectomy last: retained explores. Accreta previa sections hysterectomises.",
-      "vis": null
-    },
-    {
-      "tx": "**DIC** (abruption, amniotic embolism, sepsis, massive transfusion dilution; **fibrinogen** cryoprecipitate, **1:1:1** red cells plasma platelets, calcium warmed) with **transfusion** (O negative emergency, tranexamic early, cell salvage) resuscitates; **uterine inversion** (**Johnson manoeuvre**, relaxants then oxytocics, shock out of proportion) reinverts urgently. Thromboelastometry guides; audit every PPH.",
-      "say": "DIC fibrinogen cries 1:1:1 warmed calcium: inversion Johnson reinverts shock disproportionate. Audit closes.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "PPH",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Define",
-            "500 1000",
-            "Weigh drapes"
-          ],
-          [
-            "Drugs",
-            "Oxy ergo prosto",
-            "TXA 3h"
-          ],
-          [
-            "Save uterus",
-            "Balloon Lynch",
-            "Ties"
-          ],
-          [
-            "Last",
-            "Hysterectomy",
-            "DIC 1:1:1"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-181",
-    "bk2-obg-182",
-    "bk2-obg-183",
-    "bk2-obg-184",
-    "bk2-obg-185",
-    "bk2-obg-186",
-    "bk2-obg-187",
-    "bk2-obg-188",
-    "bk2-obg-189",
-    "bk2-obg-190"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "obg-pph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Postpartum haemorrhage: atony, trauma, tissue and thrombin",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**PPH** (**500 ml vaginal**, **1000 ml section**, severe 1000 with shock; **atony** overcontracted uterus, **trauma** tears, **tissue** retained, **thrombin** DIC) kills fastest; **active third stage** (**oxytocin 10 IU IM**, controlled cord traction, uterine massage) prevents. Quantified drapes weigh; shock index tachycardia hypotension transfuses. Grand multiparity twins polyhydramnios macrosomia atony risk.",
+   "say": "Half litre vaginal litre section is PPH: oxytocin 10 IM active third prevents. Four Ts find.",
+   "vis": null
+  },
+  {
+   "tx": "**Oxytocin** (**10 IU IM** prevention, **20 to 40 IU infusion** treatment, bolus hypotension) with **ergometrine** (**hypertension banned**, nausea) and **carboprost** (**asthma banned**, diarrhoea fever) then **misoprostol** (800 sublingual, shivering fever) sequences; **tranexamic acid** (**1 g IV within 3 hours**, WOMAN trial) clots early. Bimanual compression bridges; aorta compresses.",
+   "say": "Oxytocin first ergometrine hypertensive banned carboprost asthmatic banned: tranexamic grams 3 hours. Sequence squeezes.",
+   "vis": null
+  },
+  {
+   "tx": "**Balloon tamponade** (**Bakri**, condom catheter low resource, 24 hours with antibiotics) with **B-Lynch compression suture**, uterine artery ligation, **internal iliac** then **hysterectomy** last resort steps; **retained tissue** (succenturiate lobe, velamentous vessels) explores manually. Placenta accreta spectrum (previa with sections, bladder invasion MRI) hysterectomises electively.",
+   "say": "Balloon day B-Lynch stitch artery ties hysterectomy last: retained explores. Accreta previa sections hysterectomises.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-pph-fig1.webp",
+    "alt": "Diagram showing uterine balloon tamponade, B-Lynch suture, and manual exploration for retained tissue in postpartum haemorrhage management.",
+    "caption": "Mechanical and surgical interventions for postpartum haemorrhage",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**DIC** (abruption, amniotic embolism, sepsis, massive transfusion dilution; **fibrinogen** cryoprecipitate, **1:1:1** red cells plasma platelets, calcium warmed) with **transfusion** (O negative emergency, tranexamic early, cell salvage) resuscitates; **uterine inversion** (**Johnson manoeuvre**, relaxants then oxytocics, shock out of proportion) reinverts urgently. Thromboelastometry guides; audit every PPH.",
+   "say": "DIC fibrinogen cries 1:1:1 warmed calcium: inversion Johnson reinverts shock disproportionate. Audit closes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PPH",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Define",
+      "500 1000",
+      "Weigh drapes"
+     ],
+     [
+      "Drugs",
+      "Oxy ergo prosto",
+      "TXA 3h"
+     ],
+     [
+      "Save uterus",
+      "Balloon Lynch",
+      "Ties"
+     ],
+     [
+      "Last",
+      "Hysterectomy",
+      "DIC 1:1:1"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-181",
+  "bk2-obg-182",
+  "bk2-obg-183",
+  "bk2-obg-184",
+  "bk2-obg-185",
+  "bk2-obg-186",
+  "bk2-obg-187",
+  "bk2-obg-188",
+  "bk2-obg-189",
+  "bk2-obg-190"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "vir-diagnosis",
-  "subject": "microbiology",
-  "title": "Laboratory diagnosis of viral infections: culture to molecular",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Culture** (**cell lines** primary diploid continuous, **CPE** rounding syncytia, **haemadsorption** orthomyxo, **shell vial** CMV rapid, **pocks** CAM historic) with **microscopy** (**electron** rotavirus, **fluorescent** antibody RSV, **Tzanck** herpes multinucleated, **Negri** rabies historic) visualises; **specimens** (throat vesicle stool timing, **cold chain** ice) decides. Cells round fuse.",
-      "say": "Rounding syncytia adsorbing shells is culture CPE: vesicles throats iced fluorescent smears. Specimens time.",
-      "vis": null
-    },
-    {
-      "tx": "**Serology** (**IgM** acute, **IgG** paired 4-fold, **window** antibody negative infectious, **avidity** recent past, **heterophile** EBV, **Weil-Felix** rickettsial historic) with **ELISA** (sandwich antigens, **rapid** ICT strips, **western** HIV confirm historic) and **HI** (influenza titres) binds; **vaccination** (IgG positive protected) interprets. Windows bleed.",
-      "say": "Acute Ms paired Gs windows blank is serology: sandwiches rapids blots confirm titres inhibit. Avidities date.",
-      "vis": null
-    },
-    {
-      "tx": "**Molecular** (**PCR** DNA qualitative, **RT-PCR** RNA loads, **multiplex** respiratory panels, **genotyping** HCV HBV, **resistance** HIV integrase, **point of care** CBNAAT TB) with **antigen** (**NS1** dengue day 1 to 5, **p24** HIV window, **galactomannan** aspergillus, **cryptococcal** CrAg) detects early; **loads** (HIV HBV HCV monitor) guides therapy. Copies amplify.",
-      "say": "DNAs RNAs panels types resistances points is molecular: NS1 days p24 windows mannans antigens catch early. Loads monitor.",
-      "vis": null
-    },
-    {
-      "tx": "**Inclusions** (**Cowdry A** herpes, **owl eye** CMV, **Negri** rabies, **Guarnieri** smallpox historic, **RSV** syncytia) with **smears** (**Giemsa** stains, **Pap** koilocytes HPV, **KOH** fungi) and **histopathology** (owl eyes, **immunohistochemistry** antigens) completes; **animals** (suckling mice historic, **ethics** replace) retires. Eyes owls while pathologists correlate clinical syndromes routinely.",
-      "say": "Herpes Cowdry CMV owls rabies Negri smears stain is inclusions: koilocytes Paps fungi KOH tissues immuno. Mice retire while ethics committees approve minimal use.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Viro dx",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Culture",
-            "CPE shells",
-            "Ice"
-          ],
-          [
-            "Serology",
-            "M G windows",
-            "Pairs"
-          ],
-          [
-            "Molecular",
-            "PCR loads",
-            "Antigens"
-          ],
-          [
-            "Bodies",
-            "Owls Cowdry",
-            "Stains"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-mic-221",
-    "bk2-mic-222",
-    "bk2-mic-223",
-    "bk2-mic-224",
-    "bk2-mic-225",
-    "bk2-mic-226",
-    "bk2-mic-227",
-    "bk2-mic-228",
-    "bk2-mic-229",
-    "bk2-mic-230"
-  ],
-  "src": [],
-  "refs": [
-    "Review of Microbiology Apurba Sankar Sastry (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-sas1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "vir-diagnosis",
+ "subject": "microbiology",
+ "title": "Laboratory diagnosis of viral infections: culture to molecular",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Culture** (**cell lines** primary diploid continuous, **CPE** rounding syncytia, **haemadsorption** orthomyxo, **shell vial** CMV rapid, **pocks** CAM historic) with **microscopy** (**electron** rotavirus, **fluorescent** antibody RSV, **Tzanck** herpes multinucleated, **Negri** rabies historic) visualises; **specimens** (throat vesicle stool timing, **cold chain** ice) decides. Cells round fuse.",
+   "say": "Rounding syncytia adsorbing shells is culture CPE: vesicles throats iced fluorescent smears. Specimens time.",
+   "vis": null
+  },
+  {
+   "tx": "**Serology** (**IgM** acute, **IgG** paired 4-fold, **window** antibody negative infectious, **avidity** recent past, **heterophile** EBV, **Weil-Felix** rickettsial historic) with **ELISA** (sandwich antigens, **rapid** ICT strips, **western** HIV confirm historic) and **HI** (influenza titres) binds; **vaccination** (IgG positive protected) interprets. Windows bleed.",
+   "say": "Acute Ms paired Gs windows blank is serology: sandwiches rapids blots confirm titres inhibit. Avidities date.",
+   "vis": null
+  },
+  {
+   "tx": "**Molecular** (**PCR** DNA qualitative, **RT-PCR** RNA loads, **multiplex** respiratory panels, **genotyping** HCV HBV, **resistance** HIV integrase, **point of care** CBNAAT TB) with **antigen** (**NS1** dengue day 1 to 5, **p24** HIV window, **galactomannan** aspergillus, **cryptococcal** CrAg) detects early; **loads** (HIV HBV HCV monitor) guides therapy. Copies amplify.",
+   "say": "DNAs RNAs panels types resistances points is molecular: NS1 days p24 windows mannans antigens catch early. Loads monitor.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/vir-diagnosis-fig1.webp",
+    "alt": "A composite diagram showing a PCR amplification curve and a rapid antigen test strip, illustrating molecular and antigen detection for viral diagnosis.",
+    "caption": "Molecular and antigen tests for early viral detection and load monitoring",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Inclusions** (**Cowdry A** herpes, **owl eye** CMV, **Negri** rabies, **Guarnieri** smallpox historic, **RSV** syncytia) with **smears** (**Giemsa** stains, **Pap** koilocytes HPV, **KOH** fungi) and **histopathology** (owl eyes, **immunohistochemistry** antigens) completes; **animals** (suckling mice historic, **ethics** replace) retires. Eyes owls while pathologists correlate clinical syndromes routinely.",
+   "say": "Herpes Cowdry CMV owls rabies Negri smears stain is inclusions: koilocytes Paps fungi KOH tissues immuno. Mice retire while ethics committees approve minimal use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Viro dx",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Culture",
+      "CPE shells",
+      "Ice"
+     ],
+     [
+      "Serology",
+      "M G windows",
+      "Pairs"
+     ],
+     [
+      "Molecular",
+      "PCR loads",
+      "Antigens"
+     ],
+     [
+      "Bodies",
+      "Owls Cowdry",
+      "Stains"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-mic-221",
+  "bk2-mic-222",
+  "bk2-mic-223",
+  "bk2-mic-224",
+  "bk2-mic-225",
+  "bk2-mic-226",
+  "bk2-mic-227",
+  "bk2-mic-228",
+  "bk2-mic-229",
+  "bk2-mic-230"
+ ],
+ "src": [],
+ "refs": [
+  "Review of Microbiology Apurba Sankar Sastry (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-sas1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

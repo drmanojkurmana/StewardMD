@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-malnutrition",
-  "subject": "paediatrics",
-  "title": "Severe acute malnutrition and undernutrition: admit to rehabilitate",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Detect** (**MUAC** severe moderate cutoffs tapes, **WHZ** wasted z-scores, **oedema** bilateral pitting grades, **appetite** RUTF test passes, **stunting** height chronic flags, **weigh** admission trends, **classify** complicated uncomplicated, **screen** HIV TB contacts) with **counsels** (**mothers** feeding demonstrations, **hygiene** water sanitation) teaches; **register** (OTP SC admits) sorts. Children waste.",
-      "say": "MUACs WHZs oedemas appetites is detect: stuntings flag weighs trend classifies sort screens hunt counsels demo registers admit SCs stabilise. Tapes circle.",
-      "vis": null
-    },
-    {
-      "tx": "**Stabilise** (**hypoglycaemia** dextrose feeds, **hypothermia** kangaroo warms, **dehydration** ReSoMal cautious sips, **electrolytes** potassium magnesium replete, **infection** ampicillin gentamicin routine, **micronutrients** vitamin-A zinc folate, **F75** stabilisation starter, **transfuse** severe anaemia slow) with **monitors** (**feeds** three-hourly volumes, **oxygen** saturation dips) watches; **avoid** (iron diuretics early) withholds. Lives steady.",
-      "say": "Hypoglycaemias hypothermias dehydrations electrolytes is stabilise: infections cover micronutrients dose F75s start transfuses slow monitors watch avoids withhold irons wait diuretics harm. Steps save.",
-      "vis": null
-    },
-    {
-      "tx": "**Rehabilitate** (**F100** catch-up transitions, **RUTF** home weekly gains, **breast** relactation supports, **play** stimulation psychosocial, **immunise** catch-up schedules, **deworm** albendazole quarterly, **discharge** target weights MUAC, **follow** monthly reviews) with **mothers** (**MUAC** home tapes, **feeds** enriched demonstrations) empowers; **relapse** (food insecurity) guards. Weights climb.",
-      "say": "F100s RUTFs breasts plays is rehabilitate: immunises catch deworms dose discharges target follows review mothers tape feeds enrich relapses guard insecurities persist. Grams gain.",
-      "vis": null
-    },
-    {
-      "tx": "**Traps** (**refeeding** phosphate crashes, **overload** heart failure fluids, **missed** TB HIV lurks, **Kwash** flaky paint dermatosis, **hair** flag-sign straightens, **eyes** xerophthalmia night, **anaemia** folate B12 sorts, **audit** mortality reviews) with **prevent** (**exclusive** breast months, **complementary** timely diverse, **growth** monitoring plots) closes; **community** (screening volunteers) sustains. Futures nourish.",
-      "say": "Refeedings overloads misseds Kwashes is traps: hairs flag eyes dry anaemias pale audits review prevents guard exclusives nurse complementaries diversify communities screen volunteers weigh. Programs prevent.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-241",
-    "bk2-paed-242",
-    "bk2-paed-243",
-    "bk2-paed-244",
-    "bk2-paed-245",
-    "bk2-paed-246",
-    "bk2-paed-247",
-    "bk2-paed-248",
-    "bk2-paed-249",
-    "bk2-paed-250"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-malnutrition",
+ "subject": "paediatrics",
+ "title": "Severe acute malnutrition and undernutrition: admit to rehabilitate",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Detect** (**MUAC** severe moderate cutoffs tapes, **WHZ** wasted z-scores, **oedema** bilateral pitting grades, **appetite** RUTF test passes, **stunting** height chronic flags, **weigh** admission trends, **classify** complicated uncomplicated, **screen** HIV TB contacts) with **counsels** (**mothers** feeding demonstrations, **hygiene** water sanitation) teaches; **register** (OTP SC admits) sorts. Children waste.",
+   "say": "MUACs WHZs oedemas appetites is detect: stuntings flag weighs trend classifies sort screens hunt counsels demo registers admit SCs stabilise. Tapes circle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-malnutrition-fig1.webp",
+    "alt": "Illustration of a child's leg with bilateral pitting oedema, showing an indentation after finger pressure, indicating severe acute malnutrition.",
+    "caption": "Bilateral pitting oedema: a key sign for SAM detection",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Stabilise** (**hypoglycaemia** dextrose feeds, **hypothermia** kangaroo warms, **dehydration** ReSoMal cautious sips, **electrolytes** potassium magnesium replete, **infection** ampicillin gentamicin routine, **micronutrients** vitamin-A zinc folate, **F75** stabilisation starter, **transfuse** severe anaemia slow) with **monitors** (**feeds** three-hourly volumes, **oxygen** saturation dips) watches; **avoid** (iron diuretics early) withholds. Lives steady.",
+   "say": "Hypoglycaemias hypothermias dehydrations electrolytes is stabilise: infections cover micronutrients dose F75s start transfuses slow monitors watch avoids withhold irons wait diuretics harm. Steps save.",
+   "vis": null
+  },
+  {
+   "tx": "**Rehabilitate** (**F100** catch-up transitions, **RUTF** home weekly gains, **breast** relactation supports, **play** stimulation psychosocial, **immunise** catch-up schedules, **deworm** albendazole quarterly, **discharge** target weights MUAC, **follow** monthly reviews) with **mothers** (**MUAC** home tapes, **feeds** enriched demonstrations) empowers; **relapse** (food insecurity) guards. Weights climb.",
+   "say": "F100s RUTFs breasts plays is rehabilitate: immunises catch deworms dose discharges target follows review mothers tape feeds enrich relapses guard insecurities persist. Grams gain.",
+   "vis": null
+  },
+  {
+   "tx": "**Traps** (**refeeding** phosphate crashes, **overload** heart failure fluids, **missed** TB HIV lurks, **Kwash** flaky paint dermatosis, **hair** flag-sign straightens, **eyes** xerophthalmia night, **anaemia** folate B12 sorts, **audit** mortality reviews) with **prevent** (**exclusive** breast months, **complementary** timely diverse, **growth** monitoring plots) closes; **community** (screening volunteers) sustains. Futures nourish.",
+   "say": "Refeedings overloads misseds Kwashes is traps: hairs flag eyes dry anaemias pale audits review prevents guard exclusives nurse complementaries diversify communities screen volunteers weigh. Programs prevent.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-241",
+  "bk2-paed-242",
+  "bk2-paed-243",
+  "bk2-paed-244",
+  "bk2-paed-245",
+  "bk2-paed-246",
+  "bk2-paed-247",
+  "bk2-paed-248",
+  "bk2-paed-249",
+  "bk2-paed-250"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
