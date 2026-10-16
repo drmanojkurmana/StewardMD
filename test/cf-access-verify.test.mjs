@@ -145,10 +145,17 @@ test("/api/icd + /api/schemes: forged header reads as unavailable, verified Acce
 
 test("/api/retrieve: forged header gets no vector matches, verified Access does", async () => {
   const on = await route("retrieve/[[path]].js");
-  const env = Object.assign({ AI: { run: async () => ({ data: [[0.1, 0.2]] }) }, KB_VECTORIZE: { query: async () => ({ matches: [{ id: "c1", score: 0.9, metadata: { diseaseId: "d1", section: "s" } }] }) } }, ACCESS);
-  const post = (h) => on({ request: req("/api/retrieve", Object.assign({ "Content-Type": "application/json" }, EVIL, h), { method: "POST", body: JSON.stringify({ query: "sepsis" }) }), env }).then((r) => r.json());
-  assert.equal((await post(FORGED)).matches.length, 0);
-  assert.equal((await post({ "Cf-Access-Jwt-Assertion": await accessJwt() })).matches.length, 1);
+  // The vector arm embeds the question with Vertex (text-embedding-005, 768-d) and queries Vectorize.
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (u, o) => (String(u).includes("aiplatform.googleapis.com") && String(u).includes("text-embedding-005")
+    ? new Response(JSON.stringify({ predictions: [{ embeddings: { values: new Array(768).fill(0.01) } }] }), { status: 200 })
+    : realFetch(u, o));
+  try {
+    const env = Object.assign({ VERTEX_API_KEY: "test-key", KB_VECTORIZE: { query: async () => ({ matches: [{ id: "c1", score: 0.9, metadata: { diseaseId: "d1", section: "s" } }] }) } }, ACCESS);
+    const post = (h) => on({ request: req("/api/retrieve", Object.assign({ "Content-Type": "application/json" }, EVIL, h), { method: "POST", body: JSON.stringify({ query: "sepsis" }) }), env }).then((r) => r.json());
+    assert.equal((await post(FORGED)).matches.length, 0);
+    assert.equal((await post({ "Cf-Access-Jwt-Assertion": await accessJwt() })).matches.length, 1);
+  } finally { globalThis.fetch = realFetch; }
 });
 
 test("/api/ai gate: email + junk assertion no longer passes (T28 follow-up)", async () => {
