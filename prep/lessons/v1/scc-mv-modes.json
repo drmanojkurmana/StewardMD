@@ -37,7 +37,13 @@
   {
    "tx": "Assist-control (AC) gives a full set breath for every patient trigger, while **SIMV** delivers mandatory breaths at a set rate and allows spontaneous breaths between them. **Pressure support ventilation (PSV)** supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. PSV reduces the work of breathing and is the usual mode for weaning. Its back-up rate should be active during weaning trials.",
    "say": "Assist-control gives a full set breath for every patient trigger. SIMV delivers mandatory breaths at a set rate and allows spontaneous breaths between them. Pressure support ventilation supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. It reduces the work of breathing and is the usual mode for weaning, and its back-up rate should be active.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-mv-modes-fig1.webp",
+    "alt": "Waveforms for Assist-Control, SIMV, and Pressure Support Ventilation, showing patient triggers, mandatory, and spontaneous breaths.",
+    "caption": "Common mechanical ventilation modes: AC, SIMV, and PSV waveforms",
+    "ar": 1.8349
+   }
   },
   {
    "tx": "**Patient ventilator dyssynchrony** occurs when the patient's timing or demand does not match the machine. **Double triggering** happens when two breaths are delivered for one effort, often when inspiratory time is too short. **Reverse triggering** means a passive ventilator breath provokes an effort from the patient. Scalloped inspiratory pressure curves suggest flow starvation, where the set flow cannot meet demand.",
