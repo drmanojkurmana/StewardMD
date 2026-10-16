@@ -30,12 +30,48 @@ try {
   const card = async (name) => {
     await page.evaluate((n) => MEDDB.openComposition(n), name);
     await page.waitForTimeout(2500);
-    return page.evaluate(() => { const b = document.getElementById("dbFig"); return b ? { d: b.getAttribute("data-d"), n: b.getAttribute("data-n") } : null; });
+    return page.evaluate(() => { const b = document.getElementById("dbFig"); return b ? { d: (/d=(\d)/.exec(b.getAttribute("data-q")) || [])[1] || "0", n: b.getAttribute("data-f") } : null; });
   };
   const m = await card("Metoprolol"); ok(m && m.d === "2", "metoprolol: card, preset beta-1 selective " + JSON.stringify(m));
   const p = await card("Propranolol"); ok(p && p.d === "1", "propranolol: card, preset non-selective");
   const c = await card("Carvedilol"); ok(c && c.d === "1", "carvedilol: card");
   const a = await card("Amlodipine"); ok(a === null, "amlodipine: no card");
+
+  // the same figure from a question's explanation (study mode shows the verdict and the explanation at once)
+  await page.evaluate(() => { const o = document.getElementById("dbOverlay"); if (o) o.classList.remove("on"); document.body.classList.remove("db-lock"); });
+  await page.evaluate(() => { localStorage.setItem("smd_prep", "1"); localStorage.setItem("smd_prep_v1", JSON.stringify({ v: 1, pl: { ob: 1, exam: "neet-pg", date: "2027-05-01", min: 60, rem: 0 } })); });
+  await page.reload({ waitUntil: "load" });
+  await page.waitForFunction(() => window.PREP_LOADER && window.SMD_FIG, null, { timeout: 30000 });
+  await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash", "verifyGate"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); });
+  await page.evaluate(async () => {
+    const P = await PREP_LOADER.load();
+    const mk = (id, q, o, exp) => ({ id, q, o, a: 1, exp, d: 2, t: "x", _s: "pharmacology", _m: "phm-x" });
+    P.open();
+    await new Promise((r) => setTimeout(r, 1500));
+    (window.PREP && window.PREP._host ? window.PREP._host : P._host).run([mk("t1", "A man with heart failure on metoprolol develops asthma. What should be changed?", ["Add salbutamol", "Switch to a non-beta-blocker", "Increase the dose", "Add digoxin"], "Selective drugs can lose selectivity."), mk("t2", "Which drug blocks calcium channels?", ["Amlodipine", "Verapamil", "Atenolol only", "Digoxin"], "Verapamil.")], "study", "Figures test");
+  });
+  await page.waitForTimeout(500);
+  await page.waitForSelector('#smdPrep [data-act="answer"]', { timeout: 15000 });
+  await page.evaluate(() => document.querySelector('#smdPrep [data-act="answer"][data-k="0"]').click());
+  await page.waitForSelector(".pn-fb", { timeout: 15000 });
+  const q1 = await page.evaluate(() => { const c = document.querySelector(".pn-figchip"); return c ? { f: c.getAttribute("data-f"), q: c.getAttribute("data-q") } : null; });
+  ok(q1 && q1.f === "beta-blockers" && /d=2/.test(q1.q), "MCQ explanation: the figure chip shows for a metoprolol question " + JSON.stringify(q1));
+  await page.evaluate(() => document.querySelector(".pn-figchip").click());
+  await page.waitForSelector(".smdfig iframe", { timeout: 5000 });
+  ok(true, "the chip opens the figure over the question");
+  await page.keyboard.press("Escape");
+  const q2 = await page.evaluate(() => { const nx = document.querySelector("[data-act=next]"); if (nx) nx.click(); return true; });
+  await page.waitForTimeout(800);
+  ok(await page.evaluate(() => !document.querySelector(".pn-figchip") || !/Verapamil/.test(document.body.innerText)), "a question about other drugs shows no chip");
+  await page.evaluate(() => { const c = document.querySelector("[data-act=back]"); });
+
+  // a Knowledge Library article whose treatment text names beta-blockers
+  await page.evaluate(() => { const b = document.querySelector('#smdPrep [data-act="back"]'); });
+  await page.evaluate(() => { try { SMD_REASON.openRef("heart_failure_management", { from: "prep" }); } catch (e) { window.__kbErr = String(e); } });
+  await page.waitForTimeout(2500);
+  const kb = await page.evaluate(() => { const c = document.querySelector("#dxMgmt .kbr-figchip"); return c ? { f: c.getAttribute("data-f"), vis: c.offsetWidth > 0 } : (window.__kbErr || "none"); });
+  ok(kb && kb.f === "beta-blockers" && kb.vis, "Knowledge Library article (heart failure): the figure row shows " + JSON.stringify(kb));
+  if (kb && kb.f) { await page.evaluate(() => document.querySelector("#dxMgmt .kbr-figchip").click()); await page.waitForSelector(".smdfig iframe", { timeout: 5000 }); ok(true, "the KB chip opens the figure"); await page.keyboard.press("Escape"); }
 
   for (const dark of [true, false]) {
     await page.evaluate((dk) => { document.body.classList.toggle("dark", dk); }, dark);

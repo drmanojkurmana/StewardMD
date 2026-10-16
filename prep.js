@@ -2523,6 +2523,14 @@
     if (fig) return "<h3>Explanation</h3>" + fig;
     return '<p class="pn-mut">No explanation is stored for this question yet.</p>';
   }
+  /* One figure, every place it helps (fig-viewer.js registry): after the explanation, a "How it works" button when the question
+     names a drug or class that has an interactive figure. A link only; the answer flow is unchanged. */
+  function figRowHtml(it) {
+    var F = G.SMD_FIG;
+    if (!F || !F.matchText || !it || it._gone) return "";
+    var txt = [it.q, (it.o || []).join(" "), it.exp, it.kp].join(" "), m = F.matchText(txt, 1)[0];
+    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
+  }
   function pearlHtml(it, xo) {
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
     return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + xfInline(p, it) + "</span></aside>" : "";
@@ -2633,6 +2641,7 @@
           return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "")) +
+        figRowHtml(it) +
         whyRowHtml(it, chosen, r.i) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") + outdatedHtml(it) +
         // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
@@ -3003,6 +3012,7 @@
         whyHtml(it, xo, why, L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === a ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === a ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(rs[k], it) + "</span></p></li>";
         }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
+      ex += figRowHtml(it);
       var rid = G.PREP_IDS && it._s !== "deck" && !it._gone ? G.PREP_IDS.ofItem(it) : null;
       // My-coaching capture: a timed exam shows no chips during the run; flagged questions are tagged here instead.
       var tagRow = r.mark[i] && !it._gone ? '<div class="pn-mtag" role="group" aria-label="How sure were you?"><span class="pn-mut pn-small">Marked for review: how sure were you? (optional)</span><div class="pn-wrap">' + [["guessing", "Guessing"], ["confident", "Confident"], ["confused", "Confused"]].map(function (t) {
@@ -3151,6 +3161,7 @@
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
+    ex += figRowHtml(it);
     var sRv = load(), rvBm = it._s !== "deck" && !it._py && !!(sRv.bm && sRv.bm[it.id]);
     var rvActs = (it._s === "deck" || it._py ? "" : '<button type="button" class="pn-ib' + (rvBm ? " on" : "") + '" data-act="rvbookmark" aria-pressed="' + rvBm + '" aria-label="' + (rvBm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", rvBm) + "</button>") + (rid ? G.PREP_IDS.shareBtn(rid) : "");
     paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
@@ -4241,6 +4252,7 @@
     }
     if (a === "qotd") return qotdAnswer(+b.getAttribute("data-k"));
     if (a === "qotd-why") return qotdAnswer(-1);
+    if (a === "fig-open") { if (G.SMD_FIG) G.SMD_FIG.openFig(b.getAttribute("data-f"), b.getAttribute("data-q"), b); return; }
     if (a === "dlget") return download(b.getAttribute("data-s"));
     if (a === "dlrm") return removeDownload(b.getAttribute("data-s"));
     // PrepNucleus Pro (prep-pro.js): a lesson or card batch checks the free tier before it starts; "pro-" acts are its own.

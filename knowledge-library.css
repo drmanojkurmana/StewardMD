@@ -446,3 +446,9 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-regimen { color: #9bb5af; }
 body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-intro { color: #9bb5af; }
 body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; }
 
+
+/* Interactive figures row (reasoning.js kbFigRow, fig-viewer.js) */
+#dxOverlay #dxMgmt.dx-reader .kbr-figrow { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0; }
+#dxOverlay #dxMgmt.dx-reader .kbr-figlab { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--slate-soft, #5a7184); }
+#dxOverlay #dxMgmt.dx-reader .kbr-figchip { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line, #d7dee3); border-radius: 22px; background: var(--panel, #fff); color: var(--ink, #14202b); font: inherit; cursor: pointer; }
+#dxOverlay #dxMgmt.dx-reader .kbr-figchip:hover { border-color: var(--teal, #42CDB5); }

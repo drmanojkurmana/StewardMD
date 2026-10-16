@@ -54,5 +54,57 @@
     try { el.querySelector(".smdfig-x").focus(); } catch (e) {}
     return true;
   }
-  G.SMD_FIG = { open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE };
+  /* ---- registry (prep/figures/figures.json): one figure, every place it helps ----
+   * A figure lists the drug names it explains (name -> preset query) and class phrases. The same text match serves the Drugs
+   * page (forDrug), MCQ explanations, lesson steps and Knowledge Library articles (matchText on the text shown there).
+   * Names match whole words, case-insensitive; a class phrase counts as a hit too. Nothing shows until the registry is loaded. */
+  var REG = null, regP = null;
+  function esc2(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+  function build(j) {
+    var figs = (j && j.figures) || [];
+    return figs.filter(function (f) { return f && FIG_RE.test(String(f.page || "")); }).map(function (f) {
+      var names = Object.keys(f.drugs || {});
+      var parts = names.map(esc2).concat((f.terms || []).map(String));
+      var rx = null; try { rx = parts.length ? new RegExp("(?:^|[^a-z])(" + parts.join("|") + ")(?![a-z])", "gi") : null; } catch (e) { rx = null; }
+      return { id: String(f.id), title: String(f.title || "Interactive figure"), blurb: String(f.blurb || ""), page: String(f.page), drugs: f.drugs || {}, rx: rx };
+    });
+  }
+  function ready() {
+    if (REG) return Promise.resolve(REG);
+    if (regP) return regP;
+    var base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, "");
+    regP = G.fetch((base || "/") + "prep/figures/figures.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { REG = build(j); return REG; }, function () { REG = []; return REG; });
+    return regP;
+  }
+  function byId(id) { for (var i = 0; REG && i < REG.length; i++) if (REG[i].id === id) return REG[i]; return null; }
+  /* matchText(text, max) -> [{ id, title, blurb, hits, query }] most hits first (sync; [] until ready()). query presets the figure
+     to the first drug of that figure named in the text. */
+  function matchText(text, max) {
+    var t = String(text || ""), out = [];
+    (REG || []).forEach(function (f) {
+      if (!f.rx) return;
+      f.rx.lastIndex = 0;
+      var m, hits = 0, first = "";
+      while ((m = f.rx.exec(t))) { hits++; var nm = String(m[1]).toLowerCase(); if (!first && f.drugs[nm]) first = f.drugs[nm] + "&name=" + encodeURIComponent(nm.charAt(0).toUpperCase() + nm.slice(1)); if (hits > 50) break; }
+      if (hits) out.push({ id: f.id, title: f.title, blurb: f.blurb, hits: hits, query: first });
+    });
+    out.sort(function (a, b) { return b.hits - a.hits; });
+    return out.slice(0, max || 1);
+  }
+  function forDrug(name) {
+    var w = String(name || "").toLowerCase().replace(/[^a-z ]/g, " ").trim().split(/\s+/)[0] || "";
+    for (var i = 0; REG && i < REG.length; i++) if (w && REG[i].drugs[w]) return { id: REG[i].id, title: REG[i].title, blurb: REG[i].blurb, name: w, query: REG[i].drugs[w] + "&name=" + encodeURIComponent(w.charAt(0).toUpperCase() + w.slice(1)) };
+    return null;
+  }
+  function openFig(id, query, from) {
+    var f = byId(id); if (!f) return false;
+    return open({ src: f.page, title: f.title, from: from, query: query || "" });
+  }
+  /* chipHtml(m): the "See how it works" button for a matchText hit; the host's click handler calls openFig(data-f, data-q). */
+  function chipHtml(m, cls, act) {
+    if (!m) return "";
+    return '<button type="button" class="' + esc(cls || "smdfig-chip") + '" data-act="' + (act || "fig-open") + '" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><span aria-hidden="true">&#9654;</span> <b>' + esc(m.title) + "</b></button>";
+  }
+  G.SMD_FIG = { open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, openFig: openFig, chipHtml: chipHtml, _build: build };
+  ready();
 })(typeof window !== "undefined" ? window : this);

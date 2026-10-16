@@ -464,6 +464,13 @@
     if (!G.SMD_FIG) return;
     G.SMD_FIG.open({ src: str(b.getAttribute("data-src")), title: str(b.getAttribute("data-alt")), from: b });
   }
+  // A step that names a drug or class with an interactive figure (fig-viewer.js registry) gets a "how it works" button, unless it already shows one.
+  function figChip(step) {
+    var F = G.SMD_FIG;
+    if (!F || !F.matchText || !step || (step.vis && step.vis.kind === "figure")) return "";
+    var m = F.matchText(str(step.tx), 1)[0];
+    return m ? '<div class="pn-figrow">' + F.chipHtml(m, "pn-chip pn-figchip", "fig-open") + "</div>" : "";
+  }
   function visHtml(v, i) {
     if (!v) return "";
     var inner = v.kind === "figure" ? figureHtml(v) : v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v, i) : "";
@@ -676,7 +683,7 @@
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
-        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + (step.qc ? qcHtml(step.qc, p) : "") +
+        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
@@ -932,6 +939,7 @@
       if (zz && PV && typeof PV.open === "function") { try { PV.open({ src: imgSrc(zz.src), alt: zz.alt, caption: zz.caption, from: b }); return; } catch (e) {} }
       L.zoom = zz; if (L.zoom) { L.zret = b.getAttribute("data-z") ? '[data-act=l-zoom][data-z="' + b.getAttribute("data-z") + '"]' : "[data-act=l-zoom]"; draw(); } return; }
     if (a === "l-fig") return figOpen(b);
+    if (a === "fig-open") { if (G.SMD_FIG) G.SMD_FIG.openFig(b.getAttribute("data-f"), b.getAttribute("data-q"), b); return; }
     if (a === "l-show" || a === "l-qc" || a === "l-marks" || a === "l-mark" || a === "l-flip" || a === "l-cmp") return ixAct(a, b);
     if (a === "l-zoom2") {
       if (Date.now() - Z.moved < 350) return;   // the click that ends a pinch or a pan is not a tap
