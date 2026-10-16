@@ -581,6 +581,23 @@ test("gate [KV flag]: billing:cfg flags.PREP_BANK_ENFORCE=1 enforces with no env
   assert.equal((await call({ PREP_BANK_R2: r2(files) })).status, 200, "flag cleared and no env: shadow mode serves");
 });
 
+test("gate [ENFORCE=1]: tools credential reads the bank without login; wrong, missing or unset hash is refused", async () => {
+  gate.resetBankGateMemory();
+  const secret = "tool-secret-0123456789abcdef0123456789";
+  const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret)))].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const file = { "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}' };
+  const mk = (kvStore) => ({ PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(file), MAIK_KV: kvStore });
+  const get = (env, hdr) => bank.onRequestGet({ env, params: { path: ["v1", "anatomy", "mcq", "ana-gametogenesis.json"] }, request: new Request("https://stewardmd.in/api/prep/bank/v1/anatomy/mcq/ana-gametogenesis.json", { method: "GET", headers: hdr }) });
+  const k = kv(); k.m.set("bank:tool-hash", hash);
+  const ok = await get(mk(k), { "X-SMD-Tool": secret });
+  assert.equal(ok.status, 200);
+  assert.equal(ok.headers.get("Cache-Control"), "private, no-store");
+  assert.equal((await get(mk(k), { "X-SMD-Tool": secret + "x" })).status, 401);
+  assert.equal((await get(mk(k), {})).status, 401);
+  assert.equal((await get(mk(kv()), { "X-SMD-Tool": secret })).status, 401, "no hash in KV: the header opens nothing");
+  assert.equal((await get({ PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(file) }, { "X-SMD-Tool": secret })).status, 401, "no KV: refused");
+});
+
 test("gate [ENFORCE=1]: opening a module with 26 overlay sets is ONE open, not 27 files toward the lockouts", async () => {
   gate.resetBankGateMemory();
   const env = { PREP_BANK_ENFORCE: "1", MAIK_KV: kv(), PREP_BANK_R2: r2({}) };
