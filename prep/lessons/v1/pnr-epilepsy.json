@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pnr-epilepsy",
-  "subject": "paediatrics",
-  "title": "Epilepsy and paroxysmal disorders: febrile, spasms and status",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Febrile** (**6 months 5 years**, fever triggered, **simple** generalised under 15 minutes once daily, **complex** focal prolonged recurrent; **antipyretics** comfort, **intermittent clobazam** selected, **LP** under 12 months, **reassure** 2 to 5 percent epilepsy) with **breath holding** (crying cyanotic pallid, iron treats) and **syncope** mimics; **EEG** complex only. Fevers frighten benign.",
-      "say": "Fever fits brief generalised once is simple febrile: comfort reassure LP infants. Complex focal prolonged images.",
-      "vis": null
-    },
-    {
-      "tx": "**Spasms** (**infantile 4 to 8 months**, flexor jackknife clusters waking, **hypsarrhythmia** chaotic, **ACTH** vigabatrin tuberous, **developmental regression** urgent) with **Lennox** (slow spike slow mind, valproate lamotrigine, **drop attacks** helmet) and **Dravet** (prolonged febrile SCN1A, stiripentol, **avoid carbamazepine**) encephalopathies; **ketogenic** (resistant, lipids stones) diets. Regression alarms.",
-      "say": "Clustered jackknife waking chaotic regressing is spasms: ACTH vigabatrin tuberous urgently. Drops helmeted.",
-      "vis": null
-    },
-    {
-      "tx": "**Absence** (**4 to 10 years**, blank stares hyperventilates, **3 Hz spike wave**, **ethosuximide** choice, **valproate** generalised) with **focal** (**carbamazepine levetiracetam**, temporal aura automatisms, **MRI** sclerosis) and **juvenile myoclonic** (morning jerks photosensitive, **valproate levetiracetam**, lifelong, **driving** banned) syndromes; **EEG** classifies. Stares count.",
-      "say": "Staring hyperventilated thrice second is absence: ethosuximide first valproate generalised. Jerks morning lifelong.",
-      "vis": null
-    },
-    {
-      "tx": "**Status** (**5 minutes** continuous, **lorazepam** 0.1 mg kg, **midazolam** buccal IM, **fosphenytoin** 20 mg PE, **levetiracetam** 60 mg, **midazolam infusion** refractory, **thiopentone** super, **pyridoxine** neonatal) with **SUDEP** (nocturnal generalised, supervision), **rescue plans** (schools buccal, **vagus** resistant, **surgery** lesional, **driving** seizure free years) closes; **levels** (phenytoin valproate) monitor. Minutes protocol.",
-      "say": "Five minutes lorazepam buccal fosphenytoin levetiracetam infusions protocol: schools planned vagus surgery lesions. Levels monitor.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Fits",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Febrile",
-            "Simple benign",
-            "Reassure LP"
-          ],
-          [
-            "Spasms",
-            "Hyps regress",
-            "ACTH"
-          ],
-          [
-            "Absence focal",
-            "3Hz MRI",
-            "Ethos CBZ"
-          ],
-          [
-            "Status",
-            "5min protocol",
-            "Plans"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-051",
-    "bk2-paed-052",
-    "bk2-paed-053",
-    "bk2-paed-054",
-    "bk2-paed-055",
-    "bk2-paed-056",
-    "bk2-paed-057",
-    "bk2-paed-058",
-    "bk2-paed-059",
-    "bk2-paed-060"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pnr-epilepsy",
+ "subject": "paediatrics",
+ "title": "Epilepsy and paroxysmal disorders: febrile, spasms and status",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Febrile** (**6 months 5 years**, fever triggered, **simple** generalised under 15 minutes once daily, **complex** focal prolonged recurrent; **antipyretics** comfort, **intermittent clobazam** selected, **LP** under 12 months, **reassure** 2 to 5 percent epilepsy) with **breath holding** (crying cyanotic pallid, iron treats) and **syncope** mimics; **EEG** complex only. Fevers frighten benign.",
+   "say": "Fever fits brief generalised once is simple febrile: comfort reassure LP infants. Complex focal prolonged images.",
+   "vis": null
+  },
+  {
+   "tx": "**Spasms** (**infantile 4 to 8 months**, flexor jackknife clusters waking, **hypsarrhythmia** chaotic, **ACTH** vigabatrin tuberous, **developmental regression** urgent) with **Lennox** (slow spike slow mind, valproate lamotrigine, **drop attacks** helmet) and **Dravet** (prolonged febrile SCN1A, stiripentol, **avoid carbamazepine**) encephalopathies; **ketogenic** (resistant, lipids stones) diets. Regression alarms.",
+   "say": "Clustered jackknife waking chaotic regressing is spasms: ACTH vigabatrin tuberous urgently. Drops helmeted.",
+   "vis": null
+  },
+  {
+   "tx": "**Absence** (**4 to 10 years**, blank stares hyperventilates, **3 Hz spike wave**, **ethosuximide** choice, **valproate** generalised) with **focal** (**carbamazepine levetiracetam**, temporal aura automatisms, **MRI** sclerosis) and **juvenile myoclonic** (morning jerks photosensitive, **valproate levetiracetam**, lifelong, **driving** banned) syndromes; **EEG** classifies. Stares count.",
+   "say": "Staring hyperventilated thrice second is absence: ethosuximide first valproate generalised. Jerks morning lifelong.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pnr-epilepsy-fig1.webp",
+    "alt": "A multi-panel EEG diagram showing characteristic patterns for absence (3 Hz spike-wave), focal (focal discharge), and juvenile myoclonic (polyspike-wave) epilepsies.",
+    "caption": "EEG patterns classify absence, focal, and juvenile myoclonic epilepsy syndromes. Image: Bromfield EB, Cavazos JE, Sirven JI, editors., CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 1.2903
+   }
+  },
+  {
+   "tx": "**Status** (**5 minutes** continuous, **lorazepam** 0.1 mg kg, **midazolam** buccal IM, **fosphenytoin** 20 mg PE, **levetiracetam** 60 mg, **midazolam infusion** refractory, **thiopentone** super, **pyridoxine** neonatal) with **SUDEP** (nocturnal generalised, supervision), **rescue plans** (schools buccal, **vagus** resistant, **surgery** lesional, **driving** seizure free years) closes; **levels** (phenytoin valproate) monitor. Minutes protocol.",
+   "say": "Five minutes lorazepam buccal fosphenytoin levetiracetam infusions protocol: schools planned vagus surgery lesions. Levels monitor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fits",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Febrile",
+      "Simple benign",
+      "Reassure LP"
+     ],
+     [
+      "Spasms",
+      "Hyps regress",
+      "ACTH"
+     ],
+     [
+      "Absence focal",
+      "3Hz MRI",
+      "Ethos CBZ"
+     ],
+     [
+      "Status",
+      "5min protocol",
+      "Plans"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-051",
+  "bk2-paed-052",
+  "bk2-paed-053",
+  "bk2-paed-054",
+  "bk2-paed-055",
+  "bk2-paed-056",
+  "bk2-paed-057",
+  "bk2-paed-058",
+  "bk2-paed-059",
+  "bk2-paed-060"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

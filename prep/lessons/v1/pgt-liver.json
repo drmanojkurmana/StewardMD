@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pgt-liver",
-  "subject": "paediatrics",
-  "title": "Chronic liver disease GI consequences: portal hypertension and varices",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Portal hypertension** (**gradient over 10 mmHg**, **cirrhosis** biliary atresia post Kasai, **portal vein thrombosis** umbilical lines, **splenomegaly** hypersplenism, **caput** collaterals; **Doppler** flow direction, **elastography** stiffness) with **varices** (**oesophageal** band **ligation**, **octreotide** bleed, **propranolol** prophylaxis selected, **sclerotherapy** historic) bleeds; **balloon** (Sengstaken rescue) tamponades. Pressures gradient.",
-      "say": "Big spleen vomited blood stiff liver is portal hypertension: bands tie octreotide drips propranolol selects. Gradients measure.",
-      "vis": null
-    },
-    {
-      "tx": "**Ascites** (**SAAG** 1.1 portal, **albumin** infusions SBP, **diuretics** spironolactone furosemide, **salt** restrict, **paracentesis** diagnostic therapeutic) with **SBP** (**neutrophils 250**, **cefotaxime** albumin, **prophylaxis** norfloxacin bleed) and **hepatorenal** (**creatinine** rises, **albumin** volume, **transplant** definitive) infects fails; **nutrition** (BCAA, zinc, fat soluble) supports. Taps count.",
-      "say": "Tense belly tapped salty gradient albumin diuretics is ascites: 250 neutrophils cefotaxime albumin. Salts restrict.",
-      "vis": null
-    },
-    {
-      "tx": "**Encephalopathy** (**asterixis** flapping, **ammonia** rises, **lactulose** 2 to 3 stools, **rifaximin** adjunct, **protein** 1 to 2 g moderate, **precipitants** bleed infection constipation) with **coagulopathy** (**vitamin K** trial, **FFP** procedures, **platelets** low, **fibrinogen** cryo) and **pruritus** (**cholestyramine** binds, **rifampicin** selected, **naltrexone** refractory) manages; **transplant** (**PELD** scores, **living donor** left lateral, **post** tacrolimus) frees. Brains flap.",
-      "say": "Flapping confused ammonia lactulose stools is encephalopathy: K trials procedures plasma. Itches bind.",
-      "vis": null
-    },
-    {
-      "tx": "**GI bleed** (**resuscitate** large bore, **octreotide** infusion, **band** urgent scope, **balloon** rescue, **TIPS** refractory selected, **antibiotics** ceftriaxone SBP) with **growth** (plots falter, **supplements** MCT, **vaccinate** hepatitis A B flu) and **screening** (**variceal** surveillance scopes, **HCC** AFP ultrasound) surveils; **families** (genetic counsel, **school** plans) support. Scopes band.",
-      "say": "Vomited blood scoped banded dripped ballooned shunted selected is variceal bleed: ceftriaxone guards. Scopes survey.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Liver GI",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Portal",
-            "Gradient 10",
-            "Bands"
-          ],
-          [
-            "Ascites",
-            "SAAG 1.1",
-            "Taps"
-          ],
-          [
-            "Brain",
-            "Flaps ammonia",
-            "Lactulose"
-          ],
-          [
-            "Bleed",
-            "Scope band",
-            "TIPS"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-101",
-    "bk2-paed-102",
-    "bk2-paed-103",
-    "bk2-paed-104",
-    "bk2-paed-105",
-    "bk2-paed-106",
-    "bk2-paed-107",
-    "bk2-paed-108",
-    "bk2-paed-109",
-    "bk2-paed-110"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pgt-liver",
+ "subject": "paediatrics",
+ "title": "Chronic liver disease GI consequences: portal hypertension and varices",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Portal hypertension** (**gradient over 10 mmHg**, **cirrhosis** biliary atresia post Kasai, **portal vein thrombosis** umbilical lines, **splenomegaly** hypersplenism, **caput** collaterals; **Doppler** flow direction, **elastography** stiffness) with **varices** (**oesophageal** band **ligation**, **octreotide** bleed, **propranolol** prophylaxis selected, **sclerotherapy** historic) bleeds; **balloon** (Sengstaken rescue) tamponades. Pressures gradient.",
+   "say": "Big spleen vomited blood stiff liver is portal hypertension: bands tie octreotide drips propranolol selects. Gradients measure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pgt-liver-fig1.webp",
+    "alt": "Diagram showing portal hypertension with enlarged spleen, esophageal varices, and abdominal collaterals. Inset shows endoscopic band ligation of varices.",
+    "caption": "Portal hypertension causes varices and collaterals, managed by ligation or tamponade. Image: Kel898, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 1.2229
+   }
+  },
+  {
+   "tx": "**Ascites** (**SAAG** 1.1 portal, **albumin** infusions SBP, **diuretics** spironolactone furosemide, **salt** restrict, **paracentesis** diagnostic therapeutic) with **SBP** (**neutrophils 250**, **cefotaxime** albumin, **prophylaxis** norfloxacin bleed) and **hepatorenal** (**creatinine** rises, **albumin** volume, **transplant** definitive) infects fails; **nutrition** (BCAA, zinc, fat soluble) supports. Taps count.",
+   "say": "Tense belly tapped salty gradient albumin diuretics is ascites: 250 neutrophils cefotaxime albumin. Salts restrict.",
+   "vis": null
+  },
+  {
+   "tx": "**Encephalopathy** (**asterixis** flapping, **ammonia** rises, **lactulose** 2 to 3 stools, **rifaximin** adjunct, **protein** 1 to 2 g moderate, **precipitants** bleed infection constipation) with **coagulopathy** (**vitamin K** trial, **FFP** procedures, **platelets** low, **fibrinogen** cryo) and **pruritus** (**cholestyramine** binds, **rifampicin** selected, **naltrexone** refractory) manages; **transplant** (**PELD** scores, **living donor** left lateral, **post** tacrolimus) frees. Brains flap.",
+   "say": "Flapping confused ammonia lactulose stools is encephalopathy: K trials procedures plasma. Itches bind.",
+   "vis": null
+  },
+  {
+   "tx": "**GI bleed** (**resuscitate** large bore, **octreotide** infusion, **band** urgent scope, **balloon** rescue, **TIPS** refractory selected, **antibiotics** ceftriaxone SBP) with **growth** (plots falter, **supplements** MCT, **vaccinate** hepatitis A B flu) and **screening** (**variceal** surveillance scopes, **HCC** AFP ultrasound) surveils; **families** (genetic counsel, **school** plans) support. Scopes band.",
+   "say": "Vomited blood scoped banded dripped ballooned shunted selected is variceal bleed: ceftriaxone guards. Scopes survey.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Liver GI",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Portal",
+      "Gradient 10",
+      "Bands"
+     ],
+     [
+      "Ascites",
+      "SAAG 1.1",
+      "Taps"
+     ],
+     [
+      "Brain",
+      "Flaps ammonia",
+      "Lactulose"
+     ],
+     [
+      "Bleed",
+      "Scope band",
+      "TIPS"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-101",
+  "bk2-paed-102",
+  "bk2-paed-103",
+  "bk2-paed-104",
+  "bk2-paed-105",
+  "bk2-paed-106",
+  "bk2-paed-107",
+  "bk2-paed-108",
+  "bk2-paed-109",
+  "bk2-paed-110"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

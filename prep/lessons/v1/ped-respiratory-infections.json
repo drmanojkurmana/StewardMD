@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-respiratory-infections",
-  "subject": "paediatrics",
-  "title": "Acute respiratory infections: pneumonia bronchiolitis croup",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Triage** (**IMCI** cough difficulty counts, **fast** age-cutoff breath rates, **indrawing** lower chest severe, **danger** unable feed convulsions lethargy, **stridor** calm versus rest, **wheeze** audible bronchiolitis, **oximetry** nineties thresholds, **fever** touch axillary) with **counts** (**one-minute** calm child timers, **repeat** trends) grades; **refer** (severe urgently) moves. Breaths count.",
-      "say": "IMCIs fasts indrawings dangers is triage: coughs flag rates race chests suck feeds fail stridors sound wheezes whistle oximetries clip fevers burn counts time minutes calm repeats trend refers rush severes shift. Counts sort.",
-      "vis": null
-    },
-    {
-      "tx": "**Pneumonia** (**virus** RSV flu wheeze hyperinflation, **bacteria** pneumococcus Hib high fever, **atypical** mycoplasma school-age dry, **x-ray** lobar interstitial effusion, **blood** culture CRP procalcitonin, **oxygen** hypoxaemia blenders, **amoxicillin** first-line courses, **complication** empyema pneumatocele) with **vaccines** (**PCV** Hib measles prevents, **coverage** campaigns) protects; **follow** (persistent reviews) rechecks. Lungs infect.",
-      "say": "Viruses bacterias atypicals x-rays is pneumonia: wheezes whistle fevers spike drys hack effusions tap cultures bleed oxygens flow amoxicillins dose complications drain empyemas tap vaccines shield schedules cover follows review persistents linger. Bugs invade.",
-      "vis": null
-    },
-    {
-      "tx": "**Bronchiolitis** (**RSV** seasonal apnoea poor feed, **hyperinflation** flattened diaphragms, **suction** nasal patency feeds, **oxygen** saturation-led weans, **fluids** NG small frequent, **avoid** bronchodilator steroid routine, **high-flow** escalation CPAP, **discharge** feeding apnoea-free) with **hygiene** (**hand** cohort isolation, **tobacco** smoke-frees) prevents; **palivizumab** (preterm selects) shields. Babies wheeze.",
-      "say": "RSVs hyperinflations suctions oxygens is bronchiolitis: apnoeas pause diaphragms flatten patencies clear weans target fluids sip NGs drip avoids skip routines escalates flow high discharges plan feeds resume hygienes wash hands cohort palivizumabs shield preterms guard. Wheezes peak.",
-      "vis": null
-    },
-    {
-      "tx": "**Croup** (**bark** seal-like night cough, **steeple** subglottic narrowing, **stridor** rest severity, **steroid** dexamethasone single calms, **nebulised** adrenaline stridor settles, **mist** comfort cool, **observe** rebound hours, **epiglottitis** drooling tripod differs) with **traps** (**bacterial** toxic tracheitis, **foreign** sudden choking, **anaphylaxis** angioedema) closes; **reassure** (parents calm) soothes. Airways narrow.",
-      "say": "Barks steeples stridors steroids is croup: seals sound narrowings cone rests grade singles calm adrenalines mist settles observes watch rebounds loom droolings flag tripods sit traps dodge toxics burn foreigns choke allergies swell reassures calm parents soothe. Coughs bark.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-291",
-    "bk2-paed-292",
-    "bk2-paed-293",
-    "bk2-paed-294",
-    "bk2-paed-295",
-    "bk2-paed-296",
-    "bk2-paed-297",
-    "bk2-paed-298",
-    "bk2-paed-299",
-    "bk2-paed-300"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-respiratory-infections",
+ "subject": "paediatrics",
+ "title": "Acute respiratory infections: pneumonia bronchiolitis croup",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Triage** (**IMCI** cough difficulty counts, **fast** age-cutoff breath rates, **indrawing** lower chest severe, **danger** unable feed convulsions lethargy, **stridor** calm versus rest, **wheeze** audible bronchiolitis, **oximetry** nineties thresholds, **fever** touch axillary) with **counts** (**one-minute** calm child timers, **repeat** trends) grades; **refer** (severe urgently) moves. Breaths count.",
+   "say": "IMCIs fasts indrawings dangers is triage: coughs flag rates race chests suck feeds fail stridors sound wheezes whistle oximetries clip fevers burn counts time minutes calm repeats trend refers rush severes shift. Counts sort.",
+   "vis": null
+  },
+  {
+   "tx": "**Pneumonia** (**virus** RSV flu wheeze hyperinflation, **bacteria** pneumococcus Hib high fever, **atypical** mycoplasma school-age dry, **x-ray** lobar interstitial effusion, **blood** culture CRP procalcitonin, **oxygen** hypoxaemia blenders, **amoxicillin** first-line courses, **complication** empyema pneumatocele) with **vaccines** (**PCV** Hib measles prevents, **coverage** campaigns) protects; **follow** (persistent reviews) rechecks. Lungs infect.",
+   "say": "Viruses bacterias atypicals x-rays is pneumonia: wheezes whistle fevers spike drys hack effusions tap cultures bleed oxygens flow amoxicillins dose complications drain empyemas tap vaccines shield schedules cover follows review persistents linger. Bugs invade.",
+   "vis": null
+  },
+  {
+   "tx": "**Bronchiolitis** (**RSV** seasonal apnoea poor feed, **hyperinflation** flattened diaphragms, **suction** nasal patency feeds, **oxygen** saturation-led weans, **fluids** NG small frequent, **avoid** bronchodilator steroid routine, **high-flow** escalation CPAP, **discharge** feeding apnoea-free) with **hygiene** (**hand** cohort isolation, **tobacco** smoke-frees) prevents; **palivizumab** (preterm selects) shields. Babies wheeze.",
+   "say": "RSVs hyperinflations suctions oxygens is bronchiolitis: apnoeas pause diaphragms flatten patencies clear weans target fluids sip NGs drip avoids skip routines escalates flow high discharges plan feeds resume hygienes wash hands cohort palivizumabs shield preterms guard. Wheezes peak.",
+   "vis": null
+  },
+  {
+   "tx": "**Croup** (**bark** seal-like night cough, **steeple** subglottic narrowing, **stridor** rest severity, **steroid** dexamethasone single calms, **nebulised** adrenaline stridor settles, **mist** comfort cool, **observe** rebound hours, **epiglottitis** drooling tripod differs) with **traps** (**bacterial** toxic tracheitis, **foreign** sudden choking, **anaphylaxis** angioedema) closes; **reassure** (parents calm) soothes. Airways narrow.",
+   "say": "Barks steeples stridors steroids is croup: seals sound narrowings cone rests grade singles calm adrenalines mist settles observes watch rebounds loom droolings flag tripods sit traps dodge toxics burn foreigns choke allergies swell reassures calm parents soothe. Coughs bark.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-respiratory-infections-fig1.webp",
+    "alt": "Lateral neck X-ray of a child with croup showing the characteristic steeple sign due to subglottic narrowing, alongside a diagram comparing normal and inflamed airways.",
+    "caption": "Croup: Lateral neck X-ray showing steeple sign with subglottic narrowing",
+    "ar": 1.8349
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-291",
+  "bk2-paed-292",
+  "bk2-paed-293",
+  "bk2-paed-294",
+  "bk2-paed-295",
+  "bk2-paed-296",
+  "bk2-paed-297",
+  "bk2-paed-298",
+  "bk2-paed-299",
+  "bk2-paed-300"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

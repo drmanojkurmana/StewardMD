@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-newborn-care",
-  "subject": "paediatrics",
-  "title": "Newborn resuscitation and essential newborn care",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Assessment** (**APGAR** appearance pulse grimace activity respiration, **Ballard** neuromuscular physical maturity, **weight** LBW VLBW ELBW bands, **gestation** preterm term post-term, **cord** gases acidosis base, **tone** floppy asphyxiated vigorous, **anomalies** head-to-toe dysmorphism, **maternal** diabetes hypertension infection) with **charts** (**growth** Fenton Intergrowth, **scores** Apgar timed) grades; **resuscitate** (NRP algorithm readies) prepares. Newborns arrive.",
-      "say": "APGARs Ballards weights gestations is assessment: cords gas tones flag anomalies scan maternals share charts plot scores time resuscitates ready warmers preheat. Babies cry.",
-      "vis": null
-    },
-    {
-      "tx": "**Resuscitation** (**dry** warm stimulate back-rub, **position** sniffing shoulder-roll, **suction** mouth nose meconium, **PPV** bag-mask rate pressures, **compress** three-to-one depth, **adrenaline** umbilical doses, **volume** saline blood loss, **reassess** breathing heart colour) with **equipment** (**warmer** preheated linen, **oxygen** blender titrates, **monitor** saturation probes) runs; **call** (advanced help early) summons. Breaths start.",
-      "say": "Dries warms positions suctions is resuscitation: PPVs push compresses press adrenalines dose volumes fill reassesses loop equipments warm oxygens blend monitors beep calls summon helps arrive. Chests rise.",
-      "vis": null
-    },
-    {
-      "tx": "**Essential** (**cord** delayed one-minute clamps, **skin** kangaroo bonding warmth, **breast** first-hour colostrum latching, **vitamin-K** bleeding prevents, **eyes** erythromycin prophylaxis, **BCG** OPV-0 hepatitis birth, **screens** hearing thyroid hips, **weigh** daily loss gains) with **counsels** (**danger** feeding breathing fever, **cord** dry stump care) teaches; **follow** (home visits tracks) plans. Babies thrive.",
-      "say": "Cords skins breasts vitamins is essential: eyes shield BCGs prick screens hear weighs chart counsels warn cords dry follows visit homes track jaundices watch feeds suck. Mothers bond.",
-      "vis": null
-    },
-    {
-      "tx": "**Traps** (**hypothermia** cold stress sugars, **hypoglycaemia** jittery poor feed, **asphyxia** HIE cooling criteria, **sepsis** risk-factor screens, **jaundice** early discharge watches, **dehydration** weight sodium checks, **malformation** atresia fistula probes, **safe-sleep** back bare crib) with **referrals** (**NICU** thresholds transports, **surgery** anomaly calls) closes; **records** (birth details cards) writes. Dangers dodge.",
-      "say": "Hypothermias hypoglycaemias asphyxias sepses is traps: jaundices yellow dehydrations dry malformations block safe-sleeps guard referrals rush surgeries fix records write cards carry. Vigilance guards.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-171",
-    "bk2-paed-172",
-    "bk2-paed-173",
-    "bk2-paed-174",
-    "bk2-paed-175",
-    "bk2-paed-176",
-    "bk2-paed-177",
-    "bk2-paed-178",
-    "bk2-paed-179",
-    "bk2-paed-180"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-newborn-care",
+ "subject": "paediatrics",
+ "title": "Newborn resuscitation and essential newborn care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Assessment** (**APGAR** appearance pulse grimace activity respiration, **Ballard** neuromuscular physical maturity, **weight** LBW VLBW ELBW bands, **gestation** preterm term post-term, **cord** gases acidosis base, **tone** floppy asphyxiated vigorous, **anomalies** head-to-toe dysmorphism, **maternal** diabetes hypertension infection) with **charts** (**growth** Fenton Intergrowth, **scores** Apgar timed) grades; **resuscitate** (NRP algorithm readies) prepares. Newborns arrive.",
+   "say": "APGARs Ballards weights gestations is assessment: cords gas tones flag anomalies scan maternals share charts plot scores time resuscitates ready warmers preheat. Babies cry.",
+   "vis": null
+  },
+  {
+   "tx": "**Resuscitation** (**dry** warm stimulate back-rub, **position** sniffing shoulder-roll, **suction** mouth nose meconium, **PPV** bag-mask rate pressures, **compress** three-to-one depth, **adrenaline** umbilical doses, **volume** saline blood loss, **reassess** breathing heart colour) with **equipment** (**warmer** preheated linen, **oxygen** blender titrates, **monitor** saturation probes) runs; **call** (advanced help early) summons. Breaths start.",
+   "say": "Dries warms positions suctions is resuscitation: PPVs push compresses press adrenalines dose volumes fill reassesses loop equipments warm oxygens blend monitors beep calls summon helps arrive. Chests rise.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-newborn-care-fig1.webp",
+    "alt": "A flowchart illustrating the essential steps of neonatal resuscitation, including initial stabilization, airway management, ventilation, chest compressions, and medication, with key equipment shown.",
+    "caption": "Newborn Resuscitation Algorithm: Sequential steps for critical neonatal care. Image: American Academy of Pediatrics / Helping Babies Survive; reproduced in, CC BY 4.0, Wikimedia Commons.",
+    "ar": 0.5829
+   }
+  },
+  {
+   "tx": "**Essential** (**cord** delayed one-minute clamps, **skin** kangaroo bonding warmth, **breast** first-hour colostrum latching, **vitamin-K** bleeding prevents, **eyes** erythromycin prophylaxis, **BCG** OPV-0 hepatitis birth, **screens** hearing thyroid hips, **weigh** daily loss gains) with **counsels** (**danger** feeding breathing fever, **cord** dry stump care) teaches; **follow** (home visits tracks) plans. Babies thrive.",
+   "say": "Cords skins breasts vitamins is essential: eyes shield BCGs prick screens hear weighs chart counsels warn cords dry follows visit homes track jaundices watch feeds suck. Mothers bond.",
+   "vis": null
+  },
+  {
+   "tx": "**Traps** (**hypothermia** cold stress sugars, **hypoglycaemia** jittery poor feed, **asphyxia** HIE cooling criteria, **sepsis** risk-factor screens, **jaundice** early discharge watches, **dehydration** weight sodium checks, **malformation** atresia fistula probes, **safe-sleep** back bare crib) with **referrals** (**NICU** thresholds transports, **surgery** anomaly calls) closes; **records** (birth details cards) writes. Dangers dodge.",
+   "say": "Hypothermias hypoglycaemias asphyxias sepses is traps: jaundices yellow dehydrations dry malformations block safe-sleeps guard referrals rush surgeries fix records write cards carry. Vigilance guards.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-171",
+  "bk2-paed-172",
+  "bk2-paed-173",
+  "bk2-paed-174",
+  "bk2-paed-175",
+  "bk2-paed-176",
+  "bk2-paed-177",
+  "bk2-paed-178",
+  "bk2-paed-179",
+  "bk2-paed-180"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
