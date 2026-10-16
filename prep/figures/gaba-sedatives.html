@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GABA-A receptors: how sedatives and benzodiazepines calm a neuron</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">GABA-A receptors: how sedatives and benzodiazepines calm a neuron</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>Neuron firing: normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of a GABA-A receptor on a neuron: GABA released by inhibitory nerves opens a chloride channel, chloride enters, and the neuron fires less. Benzodiazepines make the channel open more often, barbiturates make it stay open longer, and flumazenil blocks the benzodiazepine effect."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_cl" d="M189 110L316 110"/><path class="dr-flowhead" d="M316 110l-8.1 3.9M316 110l-8.1 -3.9"/><g id="pt-e_cl"></g><g class="hot dr-enz" tabindex="0" data-info="The GABA-A receptor channel. Enhancers (benzodiazepines, barbiturates) increase the effect of a given amount of GABA, shown as a stronger flow. Flumazenil blocks the benzodiazepine site so the benzodiazepine effect goes."><rect class="dr-enz-r" x="189" y="99" width="127" height="22" rx="11"/><text class="dr-prot" x="252.5" y="114" text-anchor="middle">GABA-A receptor</text></g><g class="hot dr-block" id="blk-e_cl" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors."><path class="dr-block-hex" d="M261.5 85L257 92.8L248 92.8L243.5 85L248 77.2L257 77.2Z"/><path class="dr-block-x" d="M248.9 81.4L256.1 88.6M256.1 81.4L248.9 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_cl" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors."><path class="dr-ag-hex" d="M283.5 85L279 92.8L270 92.8L265.5 85L270 77.2L279 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_flow" d="M579 110L696 110"/><path class="dr-flowhead" d="M696 110l-8.1 3.9M696 110l-8.1 -3.9"/><g id="pt-e_flow"></g><g class="hot dr-enz" tabindex="0" data-info="Open channels let chloride in."><rect class="dr-enz-r" x="611" y="99" width="53" height="22" rx="11"/><text class="dr-prot" x="637.5" y="114" text-anchor="middle">opens</text></g><path class="dr-rail dr-flowline" id="ln-e_fire" d="M800 138L800 267"/><path class="dr-flowhead" d="M800 267l-3.9 -8.1M800 267l3.9 -8.1"/><g id="pt-e_fire"></g><g class="hot dr-enz" tabindex="0" data-info="Chloride entry lowers firing."><rect class="dr-enz-r" x="762.4" y="191.5" width="75.2" height="22" rx="11"/><text class="dr-prot" x="800" y="206.5" text-anchor="middle">inhibits</text></g><g class="hot dr-node dr-n-source" id="nd-gaba" tabindex="0" data-info="The main inhibitory transmitter of the brain, released by inhibitory nerve endings. The slider sets how much is released." transform="translate(105 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M82.7 0C83.2 1.7 83 3.5 81.8 5.2C80.5 6.9 78.1 8.6 75.3 10.1C72.4 11.5 68.5 12.9 64.7 14.1C60.8 15.3 56.5 16.4 52.1 17.4C47.8 18.4 43.4 19.3 38.7 20.1C34.1 20.9 29.3 21.7 24.2 22.3C19.1 22.9 13.7 23.4 8.3 23.7C2.9 23.9 -2.8 24 -8.4 23.9C-13.9 23.7 -19.4 23.4 -24.8 22.9C-30.1 22.4 -35.4 21.8 -40.4 21C-45.4 20.2 -50.4 19.3 -54.8 18.2C-59.2 17.2 -63.4 15.9 -66.7 14.5C-70.1 13.2 -72.9 11.6 -74.7 10C-76.6 8.4 -77.5 6.6 -77.9 5C-78.4 3.3 -77.9 1.6 -77.3 0C-76.8 -1.6 -75.8 -3.2 -74.7 -4.8C-73.7 -6.3 -72.5 -7.9 -70.9 -9.5C-69.2 -11 -67.4 -12.6 -64.8 -14.1C-62.1 -15.6 -58.8 -17.1 -54.9 -18.3C-51 -19.5 -46.2 -20.6 -41.3 -21.5C-36.3 -22.3 -30.7 -22.9 -25.3 -23.3C-19.8 -23.8 -14 -24 -8.4 -24.1C-2.8 -24.2 2.9 -24.1 8.4 -23.9C13.9 -23.7 19.4 -23.3 24.7 -22.8C29.9 -22.2 35 -21.5 39.6 -20.6C44.2 -19.7 48.4 -18.6 52.3 -17.4C56.1 -16.3 59.5 -15 62.7 -13.7C65.9 -12.4 68.8 -11 71.4 -9.5C74.1 -8.1 76.7 -6.6 78.6 -5C80.4 -3.4 82.1 -1.7 82.7 0Z"/><path class="bio-blob-shade" d="M74.4 0C74.9 1.5 74.7 3.2 73.6 4.7C72.5 6.2 70.3 7.7 67.8 9C65.2 10.4 61.7 11.6 58.2 12.7C54.8 13.8 50.8 14.7 46.9 15.6C43 16.5 39 17.4 34.8 18.1C30.6 18.8 26.3 19.6 21.8 20.1C17.2 20.6 12.3 21.1 7.5 21.3C2.6 21.5 -2.6 21.6 -7.5 21.5C-12.5 21.3 -17.5 21 -22.3 20.6C-27.1 20.2 -31.9 19.6 -36.4 18.9C-40.9 18.2 -45.3 17.4 -49.3 16.4C-53.2 15.5 -57.1 14.3 -60.1 13.1C-63.1 11.9 -65.6 10.4 -67.3 9C-68.9 7.5 -69.8 6 -70.1 4.5C-70.5 3 -70.1 1.5 -69.6 0C-69.1 -1.5 -68.2 -2.9 -67.3 -4.3C-66.3 -5.7 -65.3 -7.1 -63.8 -8.5C-62.3 -9.9 -60.7 -11.4 -58.3 -12.7C-55.9 -14 -52.9 -15.4 -49.4 -16.5C-45.9 -17.6 -41.6 -18.6 -37.2 -19.3C-32.7 -20.1 -27.7 -20.6 -22.7 -21C-17.8 -21.4 -12.6 -21.6 -7.6 -21.7C-2.5 -21.7 2.6 -21.7 7.5 -21.5C12.5 -21.3 17.5 -21 22.2 -20.5C26.9 -20 31.5 -19.3 35.6 -18.5C39.8 -17.7 43.6 -16.7 47.1 -15.7C50.5 -14.6 53.6 -13.5 56.4 -12.3C59.3 -11.1 61.9 -9.9 64.3 -8.6C66.7 -7.3 69 -5.9 70.7 -4.5C72.4 -3.1 73.9 -1.5 74.4 0Z"/><path class="bio-blob-highlight" d="M57.9 0C58.2 1.2 58.1 2.5 57.2 3.6C56.4 4.8 54.7 6 52.7 7C50.7 8.1 48 9 45.3 9.9C42.6 10.7 39.5 11.5 36.5 12.2C33.5 12.9 30.4 13.5 27.1 14.1C23.8 14.7 20.5 15.2 16.9 15.6C13.4 16 9.6 16.4 5.8 16.6C2 16.7 -2 16.8 -5.8 16.7C-9.7 16.6 -13.6 16.4 -17.4 16C-21.1 15.7 -24.8 15.2 -28.3 14.7C-31.8 14.2 -35.3 13.5 -38.3 12.8C-41.4 12 -44.4 11.1 -46.7 10.2C-49.1 9.2 -51 8.1 -52.3 7C-53.6 5.9 -54.3 4.6 -54.6 3.5C-54.9 2.3 -54.5 1.1 -54.1 0C-53.8 -1.1 -53.1 -2.2 -52.3 -3.3C-51.6 -4.4 -50.8 -5.5 -49.6 -6.6C-48.5 -7.7 -47.2 -8.8 -45.3 -9.9C-43.5 -10.9 -41.2 -12 -38.4 -12.8C-35.7 -13.7 -32.4 -14.4 -28.9 -15C-25.4 -15.6 -21.5 -16 -17.7 -16.3C-13.9 -16.6 -9.8 -16.8 -5.9 -16.8C-2 -16.9 2 -16.9 5.9 -16.7C9.7 -16.6 13.6 -16.3 17.3 -15.9C20.9 -15.5 24.5 -15 27.7 -14.4C30.9 -13.8 33.9 -13 36.6 -12.2C39.3 -11.4 41.7 -10.5 43.9 -9.6C46.1 -8.6 48.2 -7.7 50 -6.7C51.9 -5.7 53.7 -4.6 55 -3.5C56.3 -2.4 57.5 -1.2 57.9 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M82.7 0C83.2 1.7 83 3.5 81.8 5.2C80.5 6.9 78.1 8.6 75.3 10.1C72.4 11.5 68.5 12.9 64.7 14.1C60.8 15.3 56.5 16.4 52.1 17.4C47.8 18.4 43.4 19.3 38.7 20.1C34.1 20.9 29.3 21.7 24.2 22.3C19.1 22.9 13.7 23.4 8.3 23.7C2.9 23.9 -2.8 24 -8.4 23.9C-13.9 23.7 -19.4 23.4 -24.8 22.9C-30.1 22.4 -35.4 21.8 -40.4 21C-45.4 20.2 -50.4 19.3 -54.8 18.2C-59.2 17.2 -63.4 15.9 -66.7 14.5C-70.1 13.2 -72.9 11.6 -74.7 10C-76.6 8.4 -77.5 6.6 -77.9 5C-78.4 3.3 -77.9 1.6 -77.3 0C-76.8 -1.6 -75.8 -3.2 -74.7 -4.8C-73.7 -6.3 -72.5 -7.9 -70.9 -9.5C-69.2 -11 -67.4 -12.6 -64.8 -14.1C-62.1 -15.6 -58.8 -17.1 -54.9 -18.3C-51 -19.5 -46.2 -20.6 -41.3 -21.5C-36.3 -22.3 -30.7 -22.9 -25.3 -23.3C-19.8 -23.8 -14 -24 -8.4 -24.1C-2.8 -24.2 2.9 -24.1 8.4 -23.9C13.9 -23.7 19.4 -23.3 24.7 -22.8C29.9 -22.2 35 -21.5 39.6 -20.6C44.2 -19.7 48.4 -18.6 52.3 -17.4C56.1 -16.3 59.5 -15 62.7 -13.7C65.9 -12.4 68.8 -11 71.4 -9.5C74.1 -8.1 76.7 -6.6 78.6 -5C80.4 -3.4 82.1 -1.7 82.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">GABA</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">from the nerve</text></g><g class="hot dr-node dr-n-mid" id="nd-chan" tabindex="0" data-info="GABA binds the GABA-A receptor and the chloride channel opens. Benzodiazepines bind a separate site and make opening more frequent; barbiturates make it last longer." transform="translate(450 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M127.6 0C127.8 1.7 127.2 3.5 125.1 5.1C123.1 6.8 119.7 8.4 115.5 9.9C111.3 11.3 105.5 12.7 99.7 13.9C93.9 15.1 87.1 16.2 80.5 17.2C73.8 18.2 67 19 59.9 19.9C52.8 20.8 45.6 21.6 37.8 22.3C30 23.1 21.8 23.8 13.2 24.2C4.7 24.6 -4.7 24.8 -13.5 24.7C-22.4 24.6 -31.6 24.2 -40 23.6C-48.4 23 -56.4 22.1 -63.7 21.2C-70.9 20.2 -77.5 19 -83.6 17.8C-89.7 16.6 -95.3 15.3 -100.1 14C-105 12.6 -109.5 11.2 -112.9 9.6C-116.3 8.1 -118.9 6.5 -120.5 4.9C-122.1 3.3 -122.6 1.6 -122.4 0C-122.2 -1.6 -121 -3.3 -119.4 -4.9C-117.8 -6.5 -115.7 -8.1 -112.9 -9.6C-110.1 -11.2 -106.9 -12.8 -102.5 -14.3C-98.2 -15.8 -93.1 -17.3 -86.8 -18.5C-80.6 -19.7 -73 -20.9 -65.1 -21.7C-57.2 -22.5 -48.1 -23 -39.4 -23.3C-30.7 -23.6 -21.6 -23.6 -12.9 -23.6C-4.2 -23.5 4.2 -23.3 12.6 -23C21 -22.8 29.1 -22.4 37.3 -22C45.4 -21.6 53.6 -21.1 61.3 -20.4C69.1 -19.7 76.9 -18.9 83.7 -17.8C90.5 -16.8 96.8 -15.6 102.1 -14.2C107.4 -12.9 111.9 -11.4 115.5 -9.9C119.2 -8.3 122 -6.7 124 -5.1C126.1 -3.4 127.4 -1.7 127.6 0Z"/><path class="bio-blob-shade" d="M114.9 0C115 1.5 114.4 3.1 112.6 4.6C110.8 6.1 107.8 7.6 104 8.9C100.1 10.2 95 11.4 89.7 12.5C84.5 13.6 78.4 14.5 72.4 15.4C66.4 16.3 60.3 17.1 53.9 17.9C47.5 18.7 41 19.5 34 20.1C27 20.7 19.6 21.4 11.9 21.7C4.2 22.1 -4.2 22.3 -12.2 22.2C-20.2 22.2 -28.5 21.8 -36 21.3C-43.5 20.7 -50.8 19.9 -57.3 19.1C-63.8 18.2 -69.8 17.1 -75.3 16C-80.7 15 -85.7 13.8 -90.1 12.6C-94.5 11.3 -98.5 10 -101.6 8.7C-104.6 7.3 -107 5.9 -108.4 4.4C-109.9 3 -110.3 1.5 -110.1 0C-110 -1.5 -108.9 -2.9 -107.5 -4.4C-106 -5.8 -104.1 -7.3 -101.6 -8.7C-99.1 -10.1 -96.2 -11.5 -92.3 -12.9C-88.4 -14.2 -83.8 -15.6 -78.1 -16.7C-72.5 -17.8 -65.7 -18.8 -58.6 -19.5C-51.5 -20.2 -43.3 -20.7 -35.5 -21C-27.7 -21.3 -19.4 -21.3 -11.6 -21.2C-3.8 -21.2 3.8 -21 11.3 -20.7C18.9 -20.5 26.2 -20.2 33.5 -19.8C40.8 -19.4 48.2 -19 55.2 -18.4C62.2 -17.7 69.2 -17 75.3 -16.1C81.4 -15.1 87.1 -14 91.9 -12.8C96.7 -11.6 100.7 -10.3 104 -8.9C107.3 -7.5 109.8 -6 111.6 -4.6C113.5 -3.1 114.7 -1.5 114.9 0Z"/><path class="bio-blob-highlight" d="M89.3 0C89.5 1.2 89 2.4 87.6 3.6C86.2 4.7 83.8 5.9 80.9 6.9C77.9 7.9 73.9 8.9 69.8 9.7C65.7 10.6 61 11.3 56.3 12C51.7 12.7 46.9 13.3 41.9 13.9C36.9 14.5 31.9 15.1 26.5 15.6C21 16.1 15.2 16.6 9.3 16.9C3.3 17.2 -3.3 17.4 -9.5 17.3C-15.7 17.2 -22.2 17 -28 16.5C-33.9 16.1 -39.5 15.5 -44.6 14.8C-49.7 14.1 -54.3 13.3 -58.5 12.5C-62.8 11.6 -66.7 10.7 -70.1 9.8C-73.5 8.8 -76.6 7.8 -79 6.8C-81.4 5.7 -83.2 4.6 -84.3 3.4C-85.5 2.3 -85.8 1.1 -85.7 0C-85.5 -1.1 -84.7 -2.3 -83.6 -3.4C-82.5 -4.5 -81 -5.7 -79 -6.8C-77.1 -7.9 -74.8 -9 -71.8 -10C-68.7 -11 -65.1 -12.1 -60.8 -13C-56.4 -13.8 -51.1 -14.6 -45.6 -15.2C-40.1 -15.7 -33.7 -16.1 -27.6 -16.3C-21.5 -16.5 -15.1 -16.5 -9 -16.5C-3 -16.5 3 -16.3 8.8 -16.1C14.7 -15.9 20.4 -15.7 26.1 -15.4C31.8 -15.1 37.5 -14.8 42.9 -14.3C48.4 -13.8 53.8 -13.2 58.6 -12.5C63.3 -11.8 67.8 -10.9 71.5 -10C75.2 -9 78.3 -8 80.9 -6.9C83.4 -5.8 85.4 -4.7 86.8 -3.5C88.2 -2.4 89.2 -1.2 89.3 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M127.6 0C127.8 1.7 127.2 3.5 125.1 5.1C123.1 6.8 119.7 8.4 115.5 9.9C111.3 11.3 105.5 12.7 99.7 13.9C93.9 15.1 87.1 16.2 80.5 17.2C73.8 18.2 67 19 59.9 19.9C52.8 20.8 45.6 21.6 37.8 22.3C30 23.1 21.8 23.8 13.2 24.2C4.7 24.6 -4.7 24.8 -13.5 24.7C-22.4 24.6 -31.6 24.2 -40 23.6C-48.4 23 -56.4 22.1 -63.7 21.2C-70.9 20.2 -77.5 19 -83.6 17.8C-89.7 16.6 -95.3 15.3 -100.1 14C-105 12.6 -109.5 11.2 -112.9 9.6C-116.3 8.1 -118.9 6.5 -120.5 4.9C-122.1 3.3 -122.6 1.6 -122.4 0C-122.2 -1.6 -121 -3.3 -119.4 -4.9C-117.8 -6.5 -115.7 -8.1 -112.9 -9.6C-110.1 -11.2 -106.9 -12.8 -102.5 -14.3C-98.2 -15.8 -93.1 -17.3 -86.8 -18.5C-80.6 -19.7 -73 -20.9 -65.1 -21.7C-57.2 -22.5 -48.1 -23 -39.4 -23.3C-30.7 -23.6 -21.6 -23.6 -12.9 -23.6C-4.2 -23.5 4.2 -23.3 12.6 -23C21 -22.8 29.1 -22.4 37.3 -22C45.4 -21.6 53.6 -21.1 61.3 -20.4C69.1 -19.7 76.9 -18.9 83.7 -17.8C90.5 -16.8 96.8 -15.6 102.1 -14.2C107.4 -12.9 111.9 -11.4 115.5 -9.9C119.2 -8.3 122 -6.7 124 -5.1C126.1 -3.4 127.4 -1.7 127.6 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">GABA-A chloride channel</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">receptor opens</text></g><g class="hot dr-node dr-n-mid" id="nd-cl" tabindex="0" data-info="Chloride flows into the neuron and makes it harder to fire." transform="translate(800 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M94 0C93.5 1.7 92.6 3.3 91.1 4.9C89.6 6.5 87.8 8.1 85.3 9.6C82.7 11.1 79.5 12.6 75.7 13.9C72 15.2 67.4 16.5 62.6 17.6C57.8 18.7 52.4 19.6 46.9 20.5C41.3 21.4 35.5 22.2 29.3 22.8C23.2 23.5 16.8 24 10.1 24.4C3.5 24.7 -3.6 24.9 -10.3 24.8C-17.1 24.7 -24.1 24.3 -30.4 23.6C-36.7 23 -42.7 22 -48 21C-53.2 20 -57.8 18.7 -62.1 17.4C-66.4 16.2 -70 14.9 -73.6 13.5C-77.3 12.2 -80.7 10.8 -83.7 9.4C-86.8 8 -89.8 6.5 -91.8 4.9C-93.9 3.4 -95.5 1.7 -96 0C-96.5 -1.7 -96 -3.4 -94.7 -5.1C-93.5 -6.7 -91.1 -8.4 -88.3 -9.9C-85.5 -11.5 -82 -13 -78 -14.3C-74 -15.7 -69.5 -17 -64.5 -18.1C-59.6 -19.2 -54 -20.3 -48.1 -21.1C-42.3 -21.9 -35.8 -22.5 -29.4 -22.8C-23 -23.2 -16.2 -23.3 -9.7 -23.4C-3.2 -23.4 3.2 -23.2 9.5 -22.9C15.9 -22.7 22.1 -22.4 28.3 -22C34.6 -21.6 40.9 -21.2 47 -20.6C53.2 -20 59.5 -19.2 65 -18.3C70.6 -17.3 75.9 -16.1 80.1 -14.7C84.2 -13.3 87.5 -11.7 89.8 -10.1C92.2 -8.5 93.3 -6.7 94 -5C94.7 -3.4 94.5 -1.7 94 0Z"/><path class="bio-blob-shade" d="M84.6 0C84.2 1.5 83.3 3 82 4.4C80.7 5.8 79 7.3 76.7 8.6C74.4 10 71.6 11.3 68.2 12.5C64.8 13.7 60.7 14.8 56.3 15.8C52 16.8 47.2 17.7 42.2 18.5C37.2 19.2 31.9 19.9 26.4 20.5C20.9 21.1 15.1 21.6 9.1 21.9C3.2 22.2 -3.2 22.4 -9.3 22.3C-15.4 22.2 -21.7 21.8 -27.4 21.3C-33 20.7 -38.4 19.8 -43.2 18.9C-47.9 18 -52 16.8 -55.9 15.7C-59.7 14.6 -63 13.4 -66.3 12.2C-69.5 11 -72.6 9.8 -75.4 8.5C-78.1 7.2 -80.8 5.9 -82.7 4.4C-84.5 3 -86 1.5 -86.4 0C-86.8 -1.5 -86.4 -3.1 -85.3 -4.6C-84.1 -6.1 -82 -7.6 -79.5 -8.9C-77 -10.3 -73.8 -11.7 -70.2 -12.9C-66.6 -14.1 -62.6 -15.3 -58.1 -16.3C-53.6 -17.3 -48.6 -18.2 -43.3 -19C-38.1 -19.7 -32.2 -20.2 -26.4 -20.6C-20.7 -20.9 -14.6 -21 -8.7 -21C-2.9 -21 2.9 -20.9 8.6 -20.6C14.3 -20.4 19.9 -20.2 25.5 -19.8C31.1 -19.5 36.8 -19.1 42.3 -18.5C47.8 -18 53.6 -17.3 58.5 -16.4C63.5 -15.5 68.3 -14.4 72.1 -13.2C75.8 -12 78.8 -10.5 80.9 -9.1C82.9 -7.6 84 -6.1 84.6 -4.5C85.2 -3 85 -1.5 84.6 0Z"/><path class="bio-blob-highlight" d="M65.8 0C65.5 1.2 64.8 2.3 63.8 3.4C62.8 4.5 61.5 5.7 59.7 6.7C57.9 7.8 55.7 8.8 53 9.7C50.4 10.7 47.2 11.5 43.8 12.3C40.4 13.1 36.7 13.7 32.8 14.4C28.9 15 24.8 15.5 20.5 16C16.2 16.4 11.7 16.8 7.1 17.1C2.5 17.3 -2.5 17.4 -7.2 17.4C-12 17.3 -16.9 17 -21.3 16.5C-25.7 16.1 -29.9 15.4 -33.6 14.7C-37.3 14 -40.5 13.1 -43.5 12.2C-46.5 11.3 -49 10.4 -51.6 9.5C-54.1 8.5 -56.5 7.6 -58.6 6.6C-60.7 5.6 -62.9 4.6 -64.3 3.5C-65.7 2.4 -66.9 1.2 -67.2 0C-67.5 -1.2 -67.2 -2.4 -66.3 -3.6C-65.4 -4.7 -63.8 -5.9 -61.8 -7C-59.9 -8 -57.4 -9.1 -54.6 -10C-51.8 -11 -48.7 -11.9 -45.2 -12.7C-41.7 -13.5 -37.8 -14.2 -33.7 -14.7C-29.6 -15.3 -25 -15.7 -20.6 -16C-16.1 -16.3 -11.3 -16.3 -6.8 -16.4C-2.3 -16.4 2.2 -16.2 6.7 -16.1C11.1 -15.9 15.4 -15.7 19.8 -15.4C24.2 -15.1 28.6 -14.8 32.9 -14.4C37.2 -14 41.7 -13.5 45.5 -12.8C49.4 -12.1 53.2 -11.2 56 -10.3C58.9 -9.3 61.3 -8.2 62.9 -7.1C64.5 -5.9 65.3 -4.7 65.8 -3.5C66.3 -2.4 66.1 -1.2 65.8 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M94 0C93.5 1.7 92.6 3.3 91.1 4.9C89.6 6.5 87.8 8.1 85.3 9.6C82.7 11.1 79.5 12.6 75.7 13.9C72 15.2 67.4 16.5 62.6 17.6C57.8 18.7 52.4 19.6 46.9 20.5C41.3 21.4 35.5 22.2 29.3 22.8C23.2 23.5 16.8 24 10.1 24.4C3.5 24.7 -3.6 24.9 -10.3 24.8C-17.1 24.7 -24.1 24.3 -30.4 23.6C-36.7 23 -42.7 22 -48 21C-53.2 20 -57.8 18.7 -62.1 17.4C-66.4 16.2 -70 14.9 -73.6 13.5C-77.3 12.2 -80.7 10.8 -83.7 9.4C-86.8 8 -89.8 6.5 -91.8 4.9C-93.9 3.4 -95.5 1.7 -96 0C-96.5 -1.7 -96 -3.4 -94.7 -5.1C-93.5 -6.7 -91.1 -8.4 -88.3 -9.9C-85.5 -11.5 -82 -13 -78 -14.3C-74 -15.7 -69.5 -17 -64.5 -18.1C-59.6 -19.2 -54 -20.3 -48.1 -21.1C-42.3 -21.9 -35.8 -22.5 -29.4 -22.8C-23 -23.2 -16.2 -23.3 -9.7 -23.4C-3.2 -23.4 3.2 -23.2 9.5 -22.9C15.9 -22.7 22.1 -22.4 28.3 -22C34.6 -21.6 40.9 -21.2 47 -20.6C53.2 -20 59.5 -19.2 65 -18.3C70.6 -17.3 75.9 -16.1 80.1 -14.7C84.2 -13.3 87.5 -11.7 89.8 -10.1C92.2 -8.5 93.3 -6.7 94 -5C94.7 -3.4 94.5 -1.7 94 0Z"/></g><text class="dr-prot dr-nl" x="0" y="4" text-anchor="middle">Chloride enters</text></g><g class="hot dr-node dr-n-calc" id="nd-fire" tabindex="0" data-info="A teaching score for how readily the neuron fires. More chloride entry means less firing." transform="translate(800 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M96.7 0C96.1 1.6 94.8 3.2 93.4 4.8C92.1 6.3 90.7 7.9 88.6 9.5C86.4 11 84.1 12.6 80.8 14.1C77.4 15.5 73.3 17 68.4 18.2C63.5 19.4 57.5 20.5 51.4 21.4C45.2 22.2 38.3 22.8 31.5 23.3C24.7 23.7 17.6 24 10.6 24.1C3.6 24.3 -3.6 24.2 -10.5 24C-17.4 23.8 -24.5 23.5 -31 22.9C-37.5 22.3 -43.9 21.5 -49.6 20.6C-55.3 19.7 -60.5 18.6 -65.2 17.4C-70 16.2 -74.1 14.9 -78 13.6C-82 12.3 -85.6 10.9 -88.9 9.5C-92.3 8.1 -95.6 6.6 -98 5C-100.4 3.4 -102.6 1.7 -103.3 0C-103.9 -1.7 -103.7 -3.5 -102.2 -5.2C-100.7 -6.9 -97.7 -8.6 -94.1 -10.1C-90.6 -11.5 -85.8 -12.9 -81 -14.1C-76.3 -15.4 -70.9 -16.4 -65.5 -17.5C-60.1 -18.5 -54.5 -19.4 -48.6 -20.2C-42.8 -21 -36.7 -21.8 -30.3 -22.4C-23.9 -22.9 -17.1 -23.4 -10.3 -23.6C-3.6 -23.8 3.5 -23.9 10.4 -23.7C17.2 -23.6 24.1 -23.2 30.8 -22.8C37.5 -22.3 44.1 -21.7 50.4 -21C56.7 -20.2 63 -19.3 68.6 -18.3C74.1 -17.2 79.6 -16 83.8 -14.6C88 -13.2 91.5 -11.6 93.8 -10C96.1 -8.4 97.1 -6.7 97.6 -5C98.1 -3.3 97.4 -1.6 96.7 0Z"/><path class="bio-blob-shade" d="M87.1 0C86.4 1.5 85.3 2.9 84.1 4.3C82.9 5.7 81.6 7.1 79.7 8.5C77.8 9.9 75.7 11.4 72.7 12.7C69.6 14 65.9 15.3 61.5 16.4C57.1 17.5 51.8 18.5 46.2 19.2C40.7 20 34.5 20.5 28.4 21C22.2 21.4 15.8 21.6 9.5 21.7C3.2 21.8 -3.2 21.8 -9.5 21.6C-15.7 21.4 -22 21.1 -27.9 20.6C-33.8 20.1 -39.5 19.4 -44.6 18.6C-49.8 17.7 -54.5 16.7 -58.7 15.7C-63 14.6 -66.7 13.4 -70.2 12.2C-73.8 11.1 -77.1 9.8 -80.1 8.6C-83 7.3 -86.1 5.9 -88.2 4.5C-90.3 3.1 -92.3 1.5 -92.9 0C-93.6 -1.5 -93.3 -3.2 -92 -4.7C-90.6 -6.2 -87.9 -7.7 -84.7 -9.1C-81.6 -10.4 -77.2 -11.6 -72.9 -12.7C-68.6 -13.8 -63.8 -14.8 -58.9 -15.7C-54.1 -16.6 -49 -17.5 -43.8 -18.2C-38.5 -18.9 -33 -19.6 -27.3 -20.1C-21.5 -20.6 -15.4 -21 -9.3 -21.2C-3.2 -21.4 3.2 -21.5 9.3 -21.3C15.5 -21.2 21.7 -20.9 27.7 -20.5C33.7 -20.1 39.7 -19.5 45.4 -18.9C51 -18.2 56.7 -17.4 61.7 -16.5C66.7 -15.5 71.6 -14.4 75.4 -13.1C79.2 -11.9 82.3 -10.5 84.4 -9C86.5 -7.6 87.4 -6 87.9 -4.5C88.3 -3 87.7 -1.5 87.1 0Z"/><path class="bio-blob-highlight" d="M67.7 0C67.2 1.1 66.4 2.2 65.4 3.3C64.5 4.4 63.5 5.5 62 6.6C60.5 7.7 58.9 8.8 56.5 9.9C54.2 10.9 51.3 11.9 47.8 12.8C44.4 13.6 40.3 14.4 36 15C31.7 15.5 26.8 16 22.1 16.3C17.3 16.6 12.3 16.8 7.4 16.9C2.5 17 -2.5 17 -7.4 16.8C-12.2 16.7 -17.1 16.4 -21.7 16C-26.3 15.6 -30.7 15.1 -34.7 14.4C-38.7 13.8 -42.4 13 -45.7 12.2C-49 11.4 -51.9 10.4 -54.6 9.5C-57.4 8.6 -59.9 7.7 -62.3 6.7C-64.6 5.6 -66.9 4.6 -68.6 3.5C-70.3 2.4 -71.8 1.2 -72.3 0C-72.8 -1.2 -72.6 -2.5 -71.5 -3.6C-70.5 -4.8 -68.4 -6 -65.9 -7C-63.4 -8.1 -60.1 -9 -56.7 -9.9C-53.4 -10.8 -49.6 -11.5 -45.8 -12.2C-42 -12.9 -38.1 -13.6 -34 -14.1C-29.9 -14.7 -25.7 -15.3 -21.2 -15.7C-16.7 -16.1 -12 -16.4 -7.2 -16.5C-2.5 -16.7 2.5 -16.7 7.3 -16.6C12.1 -16.5 16.9 -16.3 21.6 -15.9C26.2 -15.6 30.9 -15.2 35.3 -14.7C39.7 -14.1 44.1 -13.5 48 -12.8C51.9 -12.1 55.7 -11.2 58.6 -10.2C61.6 -9.3 64 -8.1 65.6 -7C67.3 -5.9 68 -4.7 68.3 -3.5C68.7 -2.3 68.2 -1.1 67.7 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M96.7 0C96.1 1.6 94.8 3.2 93.4 4.8C92.1 6.3 90.7 7.9 88.6 9.5C86.4 11 84.1 12.6 80.8 14.1C77.4 15.5 73.3 17 68.4 18.2C63.5 19.4 57.5 20.5 51.4 21.4C45.2 22.2 38.3 22.8 31.5 23.3C24.7 23.7 17.6 24 10.6 24.1C3.6 24.3 -3.6 24.2 -10.5 24C-17.4 23.8 -24.5 23.5 -31 22.9C-37.5 22.3 -43.9 21.5 -49.6 20.6C-55.3 19.7 -60.5 18.6 -65.2 17.4C-70 16.2 -74.1 14.9 -78 13.6C-82 12.3 -85.6 10.9 -88.9 9.5C-92.3 8.1 -95.6 6.6 -98 5C-100.4 3.4 -102.6 1.7 -103.3 0C-103.9 -1.7 -103.7 -3.5 -102.2 -5.2C-100.7 -6.9 -97.7 -8.6 -94.1 -10.1C-90.6 -11.5 -85.8 -12.9 -81 -14.1C-76.3 -15.4 -70.9 -16.4 -65.5 -17.5C-60.1 -18.5 -54.5 -19.4 -48.6 -20.2C-42.8 -21 -36.7 -21.8 -30.3 -22.4C-23.9 -22.9 -17.1 -23.4 -10.3 -23.6C-3.6 -23.8 3.5 -23.9 10.4 -23.7C17.2 -23.6 24.1 -23.2 30.8 -22.8C37.5 -22.3 44.1 -21.7 50.4 -21C56.7 -20.2 63 -19.3 68.6 -18.3C74.1 -17.2 79.6 -16 83.8 -14.6C88 -13.2 91.5 -11.6 93.8 -10C96.1 -8.4 97.1 -6.7 97.6 -5C98.1 -3.3 97.4 -1.6 96.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="4" text-anchor="middle">Neuron firing</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">drug blocking this step (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>GABA release</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="usual"><span class="dr-ticks"><i>low</i><i>usual</i><i>high</i></span></label>
+  <label class="dr-range"><span>Drug class (generic)</span><select id="drug"><option value="0">none</option><option value="1">benzodiazepine type</option><option value="2">barbiturate type</option><option value="3">benzodiazepine, then flumazenil</option><option value="4">benzodiazepine plus barbiturate type</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Where each class acts.</strong> Benzodiazepines increase how often GABA-A channels open, barbiturates increase how long they stay open, and flumazenil is a benzodiazepine-site antagonist. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> Z-drugs, alcohol, anaesthetics at GABA-A, direct channel opening by barbiturates at high levels, receptor subunits, tolerance and dependence, withdrawal, respiratory depression, flumazenil limits and adverse effects are left out. Neuron firing is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"GABA release","a":[0.4,0.55,0.7],"names":["low","usual","high"],"ticks":["low","usual","high"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"benzodiazepine type","blocks":{"e_cl":-0.8}},{"label":"barbiturate type","blocks":{"e_cl":-1.5}},{"label":"benzodiazepine, then flumazenil","blocks":{"e_cl":0}},{"label":"benzodiazepine plus barbiturate type","blocks":{"e_cl":-2}}],"nodes":[{"id":"gaba","kind":"source"},{"id":"chan","kind":"mid"},{"id":"cl","kind":"mid"},{"id":"fire","kind":"calc","base":0.8,"terms":[["n:cl",-1.1]]}],"edges":[{"id":"e_cl","from":"gaba","to":"chan","w":0.4},{"id":"e_flow","from":"chan","to":"cl"},{"id":"e_fire","from":"cl","to":"fire"}],"outputs":[{"node":"fire","words":["strongly reduced","reduced","normal"],"cuts":[0.25,0.45]}],"readout":"Neuron firing: {0}","status":"GABA release: {level} · {drug} ·","drugNames":["no sedative","benzodiazepine","barbiturate","benzodiazepine reversed by flumazenil","two GABA enhancers"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_cl","p0":[189,110],"p1":[316,110]},{"id":"e_flow","p0":[579,110],"p1":[696,110]},{"id":"e_fire","p0":[800,138],"p1":[800,267]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

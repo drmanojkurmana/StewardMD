@@ -1700,5 +1700,10 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   readout so a spec's `tests` can be written; the build fails if a test disagrees.
 - **Wave 1 built (10):** beta-blockers, muscarinic (agonists, atropine-type, cholinesterase inhibitors), raas, diuretics, calcium-channel-blockers,
   anticoagulants, antiplatelets, alpha-adrenergic, antidiabetics, antiarrhythmics. About 1.2 MB for all pages, both themes.
+- **Wave 2 built (13):** gastric-acid, nsaids-steroids, thyroid-drugs, cell-wall-antibiotics, protein-synthesis-inhibitors, antibacterial-nucleic-acid,
+  antiretrovirals, opioids, dopaminergic-drugs, antidepressants, antiepileptics, anticancer-cell-cycle, lipid-lowering.
+- **Wave 3 built so far (3):** antifungals, neuromuscular-blockers, gaba-sedatives. Total 26. Registry terms are word-bounded; biochemistry and histology
+  phrases (eicosanoid, arachidonic acid, parietal cell) were dropped after a scan of the 1,514 lessons. The MCQ bank items live in R2, so MCQ false
+  positives cannot be scanned offline; `/tmp`-style scan of lesson text is the proxy.
 - **Review state:** all figure text is AI-assisted. Each spec's `sources` says which claims have a linked source and which are textbook teaching
   flagged for review. Nothing is called "reviewed" until the owner signs it in the Review Desk.
