@@ -55,6 +55,8 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries: v<n>/img/<name>.webp
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
+// KB article illustrations (tools/kb-img-engine.mjs): v<n>/kb/media/<name>.webp, immutable
+const KB_MEDIA_RE = /^v\d{1,3}\/kb\/media\/[a-z0-9-]{2,80}\.webp$/;
 // Radiology notes & figures
 const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs
@@ -106,6 +108,7 @@ export function bankPath(params) {
     PYQ_RE.test(p) ||
     STUDY_RE.test(p) ||
     IMG_RE.test(p) ||
+    KB_MEDIA_RE.test(p) ||
     RADNOTES_RE.test(p) ||
     MEDCOV_RE.test(p) ||
     MAIK_RE.test(p) ||
