@@ -212,10 +212,13 @@ final class LlamaEngine {
         guard FileManager.default.fileExists(atPath: path) else {
             throw LlamaError(.modelMissing, "no model at the given path")
         }
-        lock.lock(); defer { lock.unlock() }
         let wantDraft: String? = (!draftPath.isEmpty && FileManager.default.fileExists(atPath: draftPath)) ? draftPath : nil
-        if model != nil, ctx != nil, loadedPath == path, loadedDraftPath == wantDraft { return }   // already warm
+        lock.lock()
+        if model != nil, ctx != nil, loadedPath == path, loadedDraftPath == wantDraft { lock.unlock(); return }   // already warm
         releaseLocked()
+        lock.unlock()
+        // The multi-second load below runs WITHOUT `lock` (only `work` writes these pointers). Holding it
+        // froze the main thread's isGenerating read on backgrounding and iOS killed the app (iPhone 15 Pro, 2026-10-14).
 
         if !backendReady { llama_backend_init(); backendReady = true }
 
@@ -264,27 +267,18 @@ final class LlamaEngine {
             throw LlamaError(.lowMemory, "context allocation failed (n_ctx too large for this device?)")
         }
 
-        model = m
-        ctx = c
-        loadedPath = path
-        loadedGpuLayers = nGpuLayers
-        loadedKvQ8 = q8
-        loadedFlashAttn = fa
-        kvTokens = []
-
         // DRAFT MODEL (perf plan #6). Loaded with the same offload and cache settings, its own context
         // at the same n_ctx (positions must line up with the target's). A vocabulary mismatch makes
         // every proposal a miss at best and an out-of-range id at worst, so it is checked here and the
         // draft is simply skipped when it fails: the plain loop is always available.
-        draftKvTokens = []
-        loadedDraftPath = nil
+        var newDraftModel: OpaquePointer?, newDraftCtx: OpaquePointer?, newDraftPath: String?
         if let dp = wantDraft {
             if let dm = llama_model_load_from_file(dp, mp) {
                 if Self.vocabCompatible(llama_model_get_vocab(m), llama_model_get_vocab(dm)),
                    let dc = llama_init_from_model(dm, params(q8: q8, fa: fa)) {
-                    draftModel = dm
-                    draftCtx = dc
-                    loadedDraftPath = dp
+                    newDraftModel = dm
+                    newDraftCtx = dc
+                    newDraftPath = dp
                 } else {
                     llama_model_free(dm)
                     llamaPerf("PERF draft skipped: vocabulary mismatch or its context failed")
@@ -293,6 +287,20 @@ final class LlamaEngine {
                 llamaPerf("PERF draft skipped: could not load \(dp)")
             }
         }
+
+        lock.lock()
+        model = m
+        ctx = c
+        loadedPath = path
+        loadedGpuLayers = nGpuLayers
+        loadedKvQ8 = q8
+        loadedFlashAttn = fa
+        kvTokens = []
+        draftModel = newDraftModel
+        draftCtx = newDraftCtx
+        loadedDraftPath = newDraftPath
+        draftKvTokens = []
+        lock.unlock()
         llamaPerf("PERF loaded n_ctx=\(Int(wantCtx)) n_threads=\(Int(nThreads)) n_gpu_layers=\(Int(nGpuLayers)) n_batch=\(Int(batch)) n_ubatch=\(Int(min(ubatch, batch))) kv_q8=\(q8) flash_attn=\(fa) draft=\(draftCtx != nil)")
     }
 
