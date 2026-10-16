@@ -1,0 +1,321 @@
+{
+ "id": "lipid-lowering",
+ "title": "What sets LDL cholesterol and the drugs that lower it",
+ "ariaLabel": "Schematic of LDL cholesterol: cholesterol absorbed from the gut and cholesterol made by the liver raise it, and LDL receptors on liver cells clear it. Statins block the liver's HMG-CoA reductase, which also raises LDL receptors; ezetimibe blocks intestinal absorption; bile acid sequestrants make the liver use cholesterol for bile and so raise LDL receptors; PCSK9 inhibitors stop the receptors being destroyed.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Dietary cholesterol",
+  "a": [
+   0.2,
+   0.4,
+   0.7
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no lipid-lowering drug"
+  },
+  {
+   "label": "statin type (HMG-CoA reductase inhibitor)",
+   "status": "statin",
+   "blocks": {
+    "e_hmg": 0.85
+   }
+  },
+  {
+   "label": "ezetimibe type (absorption inhibitor)",
+   "status": "ezetimibe",
+   "blocks": {
+    "e_abs": 0.7
+   }
+  },
+  {
+   "label": "bile acid sequestrant type",
+   "status": "bile acid sequestrant",
+   "blocks": {
+    "e_bile": 0.85
+   }
+  },
+  {
+   "label": "PCSK9 inhibitor type",
+   "status": "PCSK9 inhibitor",
+   "blocks": {
+    "e_pcsk": 0.85
+   }
+  },
+  {
+   "label": "statin plus ezetimibe",
+   "status": "statin plus ezetimibe",
+   "blocks": {
+    "e_hmg": 0.85,
+    "e_abs": 0.7
+   }
+  }
+ ],
+ "readout": "LDL cholesterol: {0}",
+ "outputs": [
+  {
+   "node": "ldl",
+   "words": [
+    "markedly lowered",
+    "lowered",
+    "not lowered"
+   ],
+   "cuts": [
+    0.2,
+    0.38
+   ]
+  }
+ ],
+ "status": "Diet: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "LDL cholesterol: not lowered"
+  ],
+  [
+   1,
+   1,
+   "LDL cholesterol: markedly lowered"
+  ],
+  [
+   1,
+   2,
+   "LDL cholesterol: lowered"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "diet",
+   "kind": "source",
+   "label": "Dietary cholesterol",
+   "sub": "and bile cholesterol",
+   "x": 105,
+   "y": 110,
+   "rx": 100,
+   "info": "Cholesterol from food and from bile that is reabsorbed in the gut. The slider sets how much arrives."
+  },
+  {
+   "id": "gut",
+   "kind": "mid",
+   "label": "Absorbed cholesterol",
+   "sub": "into the body",
+   "x": 470,
+   "y": 110,
+   "rx": 100,
+   "info": "Cholesterol absorbed into the intestinal cells through NPC1L1 and sent on in chylomicrons."
+  },
+  {
+   "id": "ac",
+   "kind": "source",
+   "fixed": 0.7,
+   "label": "Acetyl-CoA",
+   "sub": "liver synthesis",
+   "x": 105,
+   "y": 300,
+   "rx": 84,
+   "info": "The starting material of the liver's own cholesterol synthesis."
+  },
+  {
+   "id": "syn",
+   "kind": "mid",
+   "label": "Cholesterol made by the liver",
+   "x": 470,
+   "y": 300,
+   "rx": 130,
+   "info": "Cholesterol made by the liver through the mevalonate pathway. HMG-CoA reductase is the rate-limiting enzyme."
+  },
+  {
+   "id": "bile",
+   "kind": "source",
+   "fixed": 0.5,
+   "label": "Bile acids",
+   "sub": "made from cholesterol",
+   "x": 105,
+   "y": 490,
+   "rx": 84,
+   "info": "Bile acids made by the liver from cholesterol and released into the gut."
+  },
+  {
+   "id": "reab",
+   "kind": "mid",
+   "label": "Bile acids reabsorbed",
+   "sub": "recycled by the gut",
+   "x": 470,
+   "y": 490,
+   "rx": 104,
+   "info": "Most bile acids are reabsorbed in the ileum and recycled. Sequestrants bind them in the gut and carry them out in the stool, so the liver must use more cholesterol to make new bile acids."
+  },
+  {
+   "id": "pcsk",
+   "kind": "source",
+   "fixed": 0.5,
+   "label": "PCSK9",
+   "sub": "protein",
+   "x": 800,
+   "y": 490,
+   "rx": 70,
+   "info": "PCSK9 is a protein that tags the LDL receptor for destruction in the liver cell."
+  },
+  {
+   "id": "ldlr",
+   "kind": "calc",
+   "base": 0.3,
+   "terms": [
+    [
+     "b:e_hmg",
+     0.4
+    ],
+    [
+     "b:e_bile",
+     0.3
+    ],
+    [
+     "b:e_pcsk",
+     0.4
+    ]
+   ],
+   "label": "LDL receptors",
+   "sub": "clear LDL from the blood",
+   "x": 800,
+   "y": 300,
+   "rx": 100,
+   "info": "LDL receptors on liver cells take LDL out of the blood. The liver makes more of them when it needs cholesterol (statins, bile acid sequestrants) or when they are less destroyed (PCSK9 inhibitors)."
+  },
+  {
+   "id": "ldl",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "e:e_abs",
+     0.5
+    ],
+    [
+     "e:e_hmg",
+     0.45
+    ],
+    [
+     "n:ldlr",
+     -0.4
+    ]
+   ],
+   "label": "LDL cholesterol",
+   "sub": "in the blood",
+   "x": 800,
+   "y": 110,
+   "rx": 100,
+   "info": "LDL cholesterol in the blood: raised by cholesterol made and absorbed, lowered by LDL receptors. This is a teaching score, not a lab value."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_abs",
+   "from": "diet",
+   "to": "gut",
+   "label": "NPC1L1",
+   "info": "The sterol transporter NPC1L1 of the intestinal cell. Ezetimibe blocks it."
+  },
+  {
+   "id": "e_hmg",
+   "from": "ac",
+   "to": "syn",
+   "label": "HMG-CoA reductase",
+   "w": 0.8,
+   "info": "HMG-CoA reductase, the rate-limiting enzyme of cholesterol synthesis. Statins inhibit it, so the liver makes less cholesterol and makes more LDL receptors."
+  },
+  {
+   "id": "e_bile",
+   "from": "bile",
+   "to": "reab",
+   "label": "reabsorption",
+   "w": 0.8,
+   "info": "Bile acid reabsorption in the ileum. Sequestrants bind bile acids so less is recycled."
+  },
+  {
+   "id": "e_pcsk",
+   "from": "pcsk",
+   "to": "ldlr",
+   "label": "PCSK9",
+   "info": "PCSK9 sends LDL receptors to be destroyed. PCSK9 inhibitors (antibodies) stop that, so more receptors return to the surface."
+  },
+  {
+   "id": "e_g2l",
+   "from": "gut",
+   "to": "ldl",
+   "blockable": false,
+   "info": "Absorbed cholesterol raises LDL."
+  },
+  {
+   "id": "e_s2l",
+   "from": "syn",
+   "to": "ldl",
+   "blockable": false,
+   "info": "Cholesterol made by the liver raises LDL."
+  },
+  {
+   "id": "e_r2l",
+   "from": "reab",
+   "to": "ldlr",
+   "blockable": false,
+   "info": "Keeping fewer bile acids makes the liver use more cholesterol and make more LDL receptors."
+  },
+  {
+   "id": "e_l2l",
+   "from": "ldlr",
+   "to": "ldl",
+   "label": "clears LDL",
+   "blockable": false,
+   "info": "LDL receptors take LDL out of the blood into liver cells, so more receptors mean lower LDL (the arrow shows where they act)."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Statins inhibit HMG-CoA reductase and raise LDL receptors; ezetimibe blocks NPC1L1 absorption; bile acid sequestrants bind bile acids so the liver uses more cholesterol; PCSK9 inhibitors stop receptor destruction. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Triglyceride-lowering drugs (fibrates and omega-3), niacin, the effect of statins on HDL and triglycerides, VLDL and the lipoprotein pathway, hepatic LDL receptor feedback through SREBP, familial hypercholesterolaemia, pleiotropic effects of statins, adverse effects and interactions are left out. LDL cholesterol is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "What sets LDL cholesterol and the drugs that lower it",
+  "blurb": "Interactive figure: statins, ezetimibe, bile acid sequestrants and PCSK9 inhibitors",
+  "drugs": {
+   "atorvastatin": "d=1",
+   "rosuvastatin": "d=1",
+   "simvastatin": "d=1",
+   "pravastatin": "d=1",
+   "lovastatin": "d=1",
+   "fluvastatin": "d=1",
+   "pitavastatin": "d=1",
+   "ezetimibe": "d=2",
+   "cholestyramine": "d=3",
+   "colestipol": "d=3",
+   "colesevelam": "d=3",
+   "evolocumab": "d=4",
+   "alirocumab": "d=4",
+   "inclisiran": "d=4"
+  },
+  "terms": [
+   "statins?",
+   "HMG[- ]CoA reductase",
+   "bile acid sequestrants?",
+   "PCSK9",
+   "lipid[- ]lowering",
+   "hypolipidaemics?",
+   "hypolipidemics?"
+  ]
+ }
+}

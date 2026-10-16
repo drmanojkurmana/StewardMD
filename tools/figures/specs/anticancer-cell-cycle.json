@@ -1,0 +1,261 @@
+{
+ "id": "anticancer-cell-cycle",
+ "title": "Anticancer drugs and the cell cycle",
+ "ariaLabel": "Schematic of the cell cycle: a growth signal drives a cell through G1, S (DNA synthesis), G2 and M (mitosis) to division. Targeted kinase inhibitors act on the growth signal, antimetabolites on S phase, topoisomerase inhibitors and bleomycin on S and G2, microtubule drugs (vinca alkaloids, taxanes) on mitosis, and alkylating agents and platinum drugs damage DNA in any phase.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or level is shown or implied.",
+ "level": {
+  "label": "Growth signal",
+  "a": [
+   0.4,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "low",
+   "active",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "active",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no anticancer drug"
+  },
+  {
+   "label": "targeted kinase inhibitor type",
+   "status": "kinase inhibitor",
+   "blocks": {
+    "e_g1": 0.7
+   }
+  },
+  {
+   "label": "antimetabolite (methotrexate or fluorouracil type)",
+   "status": "antimetabolite",
+   "blocks": {
+    "e_s": 0.8
+   }
+  },
+  {
+   "label": "alkylating agent or platinum type",
+   "status": "alkylating or platinum drug",
+   "blocks": {
+    "e_g1": 0.4,
+    "e_s": 0.5,
+    "e_g2": 0.3
+   }
+  },
+  {
+   "label": "topoisomerase inhibitor type (etoposide or irinotecan)",
+   "status": "topoisomerase inhibitor",
+   "blocks": {
+    "e_s": 0.45,
+    "e_g2": 0.5
+   }
+  },
+  {
+   "label": "bleomycin type",
+   "status": "bleomycin",
+   "blocks": {
+    "e_g2": 0.8
+   }
+  },
+  {
+   "label": "microtubule drug (vincristine or paclitaxel type)",
+   "status": "microtubule drug",
+   "blocks": {
+    "e_m": 0.85
+   }
+  }
+ ],
+ "readout": "dividing cells {0}",
+ "outputs": [
+  {
+   "node": "div",
+   "words": [
+    "few",
+    "some",
+    "many"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Growth signal: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "dividing cells many"
+  ],
+  [
+   1,
+   6,
+   "dividing cells few"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase.",
+ "blockKey": "anticancer drug (generic)",
+ "nodes": [
+  {
+   "id": "sig",
+   "kind": "source",
+   "label": "Growth signal",
+   "sub": "growth factors",
+   "x": 110,
+   "y": 110,
+   "rx": 104,
+   "info": "Growth factors and the receptor tyrosine kinase pathways that push a cell into the cycle. Cancer cells often have these switched on all the time."
+  },
+  {
+   "id": "g1",
+   "kind": "mid",
+   "label": "G1",
+   "sub": "growth",
+   "x": 440,
+   "y": 110,
+   "rx": 64,
+   "info": "G1: the cell grows and decides to divide."
+  },
+  {
+   "id": "s",
+   "kind": "mid",
+   "label": "S",
+   "sub": "DNA synthesis",
+   "x": 720,
+   "y": 110,
+   "rx": 72,
+   "info": "S phase: the DNA is copied."
+  },
+  {
+   "id": "g2",
+   "kind": "mid",
+   "label": "G2",
+   "sub": "check and prepare",
+   "x": 840,
+   "y": 300,
+   "rx": 68,
+   "info": "G2: the cell checks the copied DNA and prepares to divide."
+  },
+  {
+   "id": "m",
+   "kind": "mid",
+   "label": "M",
+   "sub": "mitosis",
+   "x": 560,
+   "y": 300,
+   "rx": 64,
+   "info": "M phase: the chromosomes are separated by the microtubule spindle."
+  },
+  {
+   "id": "div",
+   "kind": "out",
+   "label": "Cell division",
+   "sub": "two daughter cells",
+   "x": 240,
+   "y": 300,
+   "rx": 96,
+   "info": "Cells that complete the cycle divide. Cancer drugs lower the fraction that do."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_g1",
+   "from": "sig",
+   "to": "g1",
+   "label": "growth signal",
+   "info": "The growth signal pathway. Kinase inhibitors block it. Alkylating agents and platinum drugs damage DNA at any phase and so stop cells at the checkpoints."
+  },
+  {
+   "id": "e_s",
+   "from": "g1",
+   "to": "s",
+   "label": "into S",
+   "info": "Entry into DNA synthesis. Antimetabolites (methotrexate, fluorouracil, cytarabine, mercaptopurine) block the making of nucleotides or DNA and act mainly in S phase."
+  },
+  {
+   "id": "e_g2",
+   "from": "s",
+   "to": "g2",
+   "label": "S to G2",
+   "info": "Completion of DNA copying and the G2 checkpoint. Topoisomerase inhibitors act in S and G2; bleomycin breaks DNA and acts mainly in G2."
+  },
+  {
+   "id": "e_m",
+   "from": "g2",
+   "to": "m",
+   "label": "into M",
+   "info": "Entry into mitosis. Vinca alkaloids stop the spindle forming and taxanes freeze it, so the cell cannot separate its chromosomes."
+  },
+  {
+   "id": "e_d",
+   "from": "m",
+   "to": "div",
+   "blockable": false,
+   "info": "Cells that complete mitosis divide."
+  }
+ ],
+ "sources": [
+  "<strong>Phases and drug classes.</strong> Antimetabolites act in S phase, topoisomerase inhibitors in S and G2, bleomycin in G2, vinca alkaloids and taxanes in M, alkylating and platinum agents in any phase, and targeted kinase inhibitors on the growth signal. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Checkpoint biology (p53, CDK and cyclins), apoptosis, hormonal, immunological and antibody-based treatment, differences between cycle-specific and cycle-nonspecific action in detail, resistance, the effect on normal fast-dividing tissue (marrow, gut, hair) and the main toxicity of each class are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Anticancer drugs and the cell cycle",
+  "blurb": "Interactive figure: antimetabolites, alkylating agents, topoisomerase inhibitors, vinca alkaloids and taxanes by phase",
+  "drugs": {
+   "imatinib": "d=1",
+   "gefitinib": "d=1",
+   "erlotinib": "d=1",
+   "osimertinib": "d=1",
+   "sunitinib": "d=1",
+   "sorafenib": "d=1",
+   "methotrexate": "d=2",
+   "fluorouracil": "d=2",
+   "capecitabine": "d=2",
+   "cytarabine": "d=2",
+   "gemcitabine": "d=2",
+   "mercaptopurine": "d=2",
+   "thioguanine": "d=2",
+   "pemetrexed": "d=2",
+   "hydroxyurea": "d=2",
+   "cyclophosphamide": "d=3",
+   "ifosfamide": "d=3",
+   "melphalan": "d=3",
+   "chlorambucil": "d=3",
+   "busulfan": "d=3",
+   "dacarbazine": "d=3",
+   "temozolomide": "d=3",
+   "carboplatin": "d=3",
+   "cisplatin": "d=3",
+   "oxaliplatin": "d=3",
+   "etoposide": "d=4",
+   "irinotecan": "d=4",
+   "topotecan": "d=4",
+   "doxorubicin": "d=4",
+   "daunorubicin": "d=4",
+   "bleomycin": "d=5",
+   "vincristine": "d=6",
+   "vinblastine": "d=6",
+   "vinorelbine": "d=6",
+   "paclitaxel": "d=6",
+   "docetaxel": "d=6"
+  },
+  "terms": [
+   "antimetabolites?",
+   "alkylating agents?",
+   "vinca alkaloids?",
+   "taxanes?",
+   "antineoplastics?",
+   "cytotoxic (?:drugs?|chemotherapy)",
+   "cell[- ]cycle[- ]specific"
+  ]
+ }
+}

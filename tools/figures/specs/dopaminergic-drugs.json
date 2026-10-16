@@ -1,0 +1,213 @@
+{
+ "id": "dopaminergic-drugs",
+ "title": "Dopamine receptors: antipsychotics, levodopa and dopamine agonists",
+ "ariaLabel": "Schematic of a dopamine-releasing terminal acting on two striatal cells: D1 receptors coupled to Gs, which raise cAMP in the direct pathway, and D2 receptors coupled to Gi, which lower cAMP in the indirect pathway. A D2 antagonist (antipsychotic) blocks D2, a D2 agonist or levodopa adds to the dopamine signal, and a partial agonist stabilises it.",
+ "caption": "Schematic, not to scale. D1 and D2 are drawn side by side to compare them; in the striatum they sit mostly on different neurons. Response levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Dopamine release",
+  "a": [
+   0.15,
+   0.5,
+   0.85
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "D2 antagonist (haloperidol or risperidone type)",
+   "status": "D2 antagonist",
+   "cols": [
+    {},
+    {
+     "b": 0.85
+    }
+   ]
+  },
+  {
+   "label": "D2 partial agonist (aripiprazole type)",
+   "status": "D2 partial agonist",
+   "cols": [
+    {},
+    {
+     "g": 0.15,
+     "b": 0.5
+    }
+   ]
+  },
+  {
+   "label": "dopamine agonist (pramipexole or ropinirole type)",
+   "status": "D2 agonist",
+   "cols": [
+    {
+     "g": 0.05
+    },
+    {
+     "g": 0.45
+    }
+   ]
+  },
+  {
+   "label": "levodopa (more dopamine)",
+   "status": "levodopa",
+   "cols": [
+    {
+     "g": 0.35
+    },
+    {
+     "g": 0.35
+    }
+   ]
+  }
+ ],
+ "readout": "D1 signal {0} · D2 signal {1}",
+ "words": [
+  "baseline",
+  "modest",
+  "strong"
+ ],
+ "status": "Dopamine release: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "D1 signal modest · D2 signal modest"
+  ],
+  [
+   1,
+   1,
+   "D1 signal modest · D2 signal baseline"
+  ],
+  [
+   1,
+   4,
+   "D1 signal strong · D2 signal strong"
+  ]
+ ],
+ "blockInfo": "A D2 blocker molecule (generic teaching symbol, not a named drug's shape) in the receptor's binding pocket. It occupies the pocket without activating the receptor, so dopamine cannot bind where it sits. The block is competitive: a lot of dopamine can partly outcompete it.",
+ "blockKey": "D2 blocker (generic)",
+ "agonistInfo": "A dopamine receptor agonist molecule (generic teaching symbol) in the binding pocket. It activates the receptor like dopamine does. Levodopa is different: it is turned into dopamine by the nerve terminals, so it adds to the natural signal at both receptors (drawn here as extra drive).",
+ "agonistKey": "agonist or more dopamine (generic)",
+ "terminal": {
+  "label": "dopamine-releasing terminal",
+  "vesicle": "dopamine",
+  "keyLabel": "dopamine",
+  "info": "Dopamine-releasing terminal, for example from the substantia nigra to the striatum (nigrostriatal) or from the ventral tegmental area to the limbic system (mesolimbic). Dopamine is packed into vesicles and released by exocytosis; the dopamine transporter takes it back up (not drawn)."
+ },
+ "molecule": {
+  "draw": "dopamine",
+  "name": "dopamine",
+  "formula": "C<tspan class=\"dr-sub\" dy=\"3\">8</tspan><tspan dy=\"-3\">H</tspan><tspan class=\"dr-sub\" dy=\"3\">11</tspan><tspan dy=\"-3\">NO</tspan><tspan class=\"dr-sub\" dy=\"3\">2</tspan>",
+  "info": "Dopamine, 4-(2-aminoethyl)benzene-1,2-diol, C8H11NO2 (PubChem CID 681): a catechol ring with an ethylamine side chain. Flat skeletal formula, bond angles and lengths drawn schematically. In the cleft below it is drawn as a small bright dot."
+ },
+ "cols": [
+  {
+   "key": "d1",
+   "name": "D1",
+   "organ": "direct-pathway neuron",
+   "gprot": "Gαs",
+   "eff": "AC",
+   "sign": "+",
+   "msg": "cAMP",
+   "end": {
+    "kind": "pka"
+   },
+   "out": "movement-promoting signal ↑",
+   "sub": "Gαs · stimulates AC · cAMP ↑",
+   "words": [
+    "baseline",
+    "modest",
+    "strong"
+   ],
+   "info": {
+    "cell": "Striatal medium spiny neuron of the direct (striatonigral) pathway, patch of membrane in flat cross-section, schematic and not to scale.",
+    "rec": "D1-like receptor (D1 drawn; D5 is the other member): a seven-transmembrane G protein-coupled receptor coupled to Gαs/olf. Dopamine binds from outside. It has lower affinity for dopamine than D2.",
+    "end": "Protein kinase A (PKA): cAMP binds the regulatory subunits and frees the catalytic subunits to phosphorylate their targets (drawn: C swings outward). In the striatum DARPP-32 is a key target (not drawn)."
+   }
+  },
+  {
+   "key": "d2",
+   "name": "D2",
+   "organ": "indirect-pathway neuron",
+   "gprot": "Gαi",
+   "eff": "AC",
+   "sign": "−",
+   "msg": "cAMP",
+   "inv": true,
+   "end": {
+    "kind": "pka"
+   },
+   "out": "D2 signalling ↑ (cAMP ↓)",
+   "sub": "Gαi · inhibits AC · cAMP ↓",
+   "words": [
+    "baseline",
+    "modest",
+    "strong"
+   ],
+   "info": {
+    "cell": "Striatal medium spiny neuron of the indirect (striatopallidal) pathway, and also the dopamine-sensing cells of the limbic system, patch of membrane. Drawn beside the D1 cell only to compare receptors.",
+    "rec": "D2-like receptor (D2 drawn; D3 and D4 are the other members): a seven-transmembrane receptor coupled to Gαi/o. It has higher affinity for dopamine than D1, so low dopamine already engages it. Antipsychotics block it; their parkinsonism comes from the nigrostriatal D2 block.",
+    "end": "Protein kinase A (PKA): with less cAMP the catalytic subunits stay bound to the regulatory ones (drawn: C stays close). A D2 blocker removes this brake."
+   }
+  }
+ ],
+ "sources": [
+  "<strong>Receptor families and coupling (well established).</strong> D1-like receptors (D1, D5) couple to Gs and raise cAMP; D2-like receptors (D2, D3, D4) couple to Gi and lower it (<a href=\"https://pubmed.ncbi.nlm.nih.gov/9457173/\">Missale et al. 1998, Physiol Rev</a>; <a href=\"https://pubmed.ncbi.nlm.nih.gov/21303898/\">Beaulieu and Gainetdinov 2011, Pharmacol Rev</a>). In striatal medium spiny neurons the D1 receptor works through Gαolf (<a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC3155884/\">Hervé 2011, Front Neuroanat</a>).",
+  "<strong>Molecule.</strong> Dopamine, C8H11NO2 (<a href=\"https://pubchem.ncbi.nlm.nih.gov/compound/681\">PubChem CID 681</a>).",
+  "<strong>The drug classes.</strong> D2 antagonists (typical and atypical antipsychotics), partial agonists, dopamine agonists and levodopa. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "The pathways of the brain (nigrostriatal, mesolimbic, mesocortical, tuberoinfundibular), serotonin receptors (5-HT2A) that atypical antipsychotics also block, muscarinic, histaminic and alpha-adrenergic effects of antipsychotics, the effects on prolactin, the loss of dopamine neurons in Parkinson's disease, dopamine breakdown (MAO-B, COMT inhibitors and decarboxylase inhibitors), dyskinesia and receptor changes with long-term use are left out. D1 and D2 are drawn on separate cells with separate effectors; the shared pathway of the original teaching diagram is not used. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Dopamine receptors: antipsychotics, levodopa and dopamine agonists",
+  "blurb": "Interactive figure: D1 and D2 receptors with D2 blockers, partial agonists, dopamine agonists and levodopa",
+  "drugs": {
+   "haloperidol": "d=1",
+   "chlorpromazine": "d=1",
+   "fluphenazine": "d=1",
+   "trifluoperazine": "d=1",
+   "risperidone": "d=1",
+   "olanzapine": "d=1",
+   "quetiapine": "d=1",
+   "clozapine": "d=1",
+   "amisulpride": "d=1",
+   "sulpiride": "d=1",
+   "paliperidone": "d=1",
+   "ziprasidone": "d=1",
+   "lurasidone": "d=1",
+   "pimozide": "d=1",
+   "metoclopramide": "d=1",
+   "domperidone": "d=1",
+   "aripiprazole": "d=2",
+   "brexpiprazole": "d=2",
+   "cariprazine": "d=2",
+   "pramipexole": "d=3",
+   "ropinirole": "d=3",
+   "bromocriptine": "d=3",
+   "cabergoline": "d=3",
+   "apomorphine": "d=3",
+   "rotigotine": "d=3",
+   "levodopa": "d=4",
+   "carbidopa": "d=4"
+  },
+  "terms": [
+   "antipsychotics?",
+   "neuroleptics?",
+   "dopamine (?:receptor )?(?:antagonists?|agonists?)",
+   "D2 (?:receptor )?(?:antagonists?|blockers?)"
+  ]
+ }
+}
