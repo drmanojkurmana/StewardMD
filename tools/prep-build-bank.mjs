@@ -86,7 +86,8 @@ export function validateSubject(s) {
   return e;
 }
 export function loadTaxonomy(dir = TAX_DIR) {
-  const subjects = fs.readdirSync(dir).filter((f) => f.endsWith(".json")).sort()
+  // crosslist.json lives here too (the cross-subject module map); it is not a subject.
+  const subjects = fs.readdirSync(dir).filter((f) => f.endsWith(".json") && f !== "crosslist.json").sort()
     .map((f) => JSON.parse(fs.readFileSync(path.join(dir, f), "utf8")));
   const errs = [];
   const seen = new Set();
@@ -413,6 +414,33 @@ export function buildSubject(subject, items, seen, emb, llm) {
 }
 
 const sha = (s) => crypto.createHash("sha256").update(s).digest("hex");
+
+// Cross-listed modules (prep/taxonomy/crosslist.json): one disease taught in several subjects. crosslistRows
+// returns, per member subject, the virtual rows to append to its index: union counts summed over the member rows
+// (exact when the members share no items; the app writes back the exact union once the files are read). getRow
+// is (sid, mid) -> { count, all, usmle, ov } | null. A group with no member row anywhere gets no rows.
+export function crosslistRows(groups, getRow) {
+  const gs = (groups && groups.groups) || groups || [];
+  const out = new Map();
+  for (const g of gs) {
+    if (!g || !g.id || !Array.isArray(g.members) || !g.members.length) continue;
+    const rows = g.members.map(([sid, mid]) => ({ sid, row: getRow(sid, mid) }));
+    if (!rows.some((x) => x.row)) continue;
+    const sum = (k) => rows.reduce((a, x) => a + ((x.row && x.row[k]) || 0), 0);
+    const row = { id: g.id, title: g.title, group: "xlist", count: sum("count"), all: sum("all"), usmle: sum("usmle"), ov: sum("ov"), file: null };
+    for (const { sid } of rows) {
+      if (!out.has(sid)) out.set(sid, []);
+      if (!out.get(sid).some((t) => t.id === g.id)) out.get(sid).push({ ...row });
+    }
+  }
+  return out;
+}
+
+export function loadCrosslist() {
+  const p = path.join(ROOT, "prep", "taxonomy", "crosslist.json");
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8")).groups || [];
+}
 export function subjectIndex(subject, items) {
   // count = items the app shows (flagged or disputed keys are excluded until cleared); all = every item in the file.
   const counts = { total: 0, all: items.length, d1: 0, d2: 0, d3: 0, flagged: 0 };
@@ -482,6 +510,33 @@ export function main(argv = process.argv.slice(2)) {
     report.subjects.push({ id: s.id, perModule, flagged: ix.counts.flagged, under10: mods.filter((t) => t.count < 10).length, under25: mods.filter((t) => t.count < 25).length, read: items.length, movedOut: s.medmcqa ? (byName.get(s.medmcqa) || []).length - own.length : 0, kept: res.items.length, ...res.stats, modules: mods.length, empty: mods.filter((t) => !t.count).length, belowTarget: below.length, mixed: (ix.topics.find((t) => t.group === "mixed") || {}).count || 0, embed: emb ? emb.model : null, llm: s.medmcqa && llms[s.id] ? llms[s.id].model : null, bytes });
     for (const t of below) report.shortfall.push({ subject: s.id, module: t.id, size: t.size, kept: t.count, target: t.target, fill: t.target - t.count });
     console.log(`${s.id.padEnd(28)} read ${String(items.length).padStart(6)} kept ${String(res.items.length).padStart(6)} modules ${String(mods.length).padStart(4)} below target ${String(below.length).padStart(4)} mixed ${String((ix.topics.find((t) => t.group === "mixed") || {}).count || 0).padStart(5)} ${(bytes / 1e6).toFixed(1)} MB`);
+  }
+  // Cross-listed union rows: groups fully covered by this build's subjects get their union-count rows written into
+  // every member's index (partial sums would undercount the served union, so partially covered groups are left for
+  // the app, which sums the served member rows at load and writes back the exact union once the files are read).
+  if (!only) {
+    const xl = loadCrosslist();
+    if (xl.length) {
+      const have = new Map();
+      for (const s of subjects) {
+        const ip = path.join(outDir, s.id, "index.json");
+        if (fs.existsSync(ip)) have.set(s.id, JSON.parse(fs.readFileSync(ip, "utf8")));
+      }
+      const getRow = (sid, mid) => {
+        const ix = have.get(sid);
+        const t = ix && (ix.topics || []).find((t) => t.id === mid);
+        return t ? { count: t.count || 0, all: t.all || 0, usmle: t.usmle || 0, ov: t.ov || 0 } : null;
+      };
+      const full = xl.filter((g) => (g.members || []).every(([sid]) => have.has(sid)));
+      for (const [sid, rows] of crosslistRows(full, getRow)) {
+        const ix = have.get(sid), p = path.join(outDir, sid, "index.json");
+        const was = fs.statSync(p).size;
+        ix.topics = (ix.topics || []).filter((t) => !rows.some((r) => r.id === t.id)).concat(rows);
+        const now = writeJson(p, ix);
+        const me = manifest.subjects.find((e) => e.id === sid);
+        if (me) { me.bytes += now - was; me.index = sha(fs.readFileSync(p)); }
+      }
+    }
   }
   if (!only) writeJson(path.join(outDir, "manifest.json"), manifest);
   writeJson(path.join(BUILD_DIR, only ? `report-${only}.json` : "report.json"), report);

@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "obg-amniotic-fluid",
-  "subject": "obstetrics-gynaecology",
-  "title": "Disorders of amniotic fluid: oligo, polyhydramnios and amnioinfusion",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Fluid** (**500 to 1000 ml term**, swallowing urination turnover, **AFI 5 to 25 cm**, **DVP 2 to 8 cm**; lungs gut limbs cushion) with **oligo** (**AFI under 5**, **DVP under 2**: **IUGR**, **ruptured membranes**, **renal agenesis Potter**, post-term, drugs ACE) compresses cord decelerations; **nonstress** with Doppler surveils. Hydration rest improves borderline.",
-      "say": "Five twenty five index two eight pocket is normal: under is oligo IUGR renal ruptured. Cord compresses decelerates.",
-      "vis": null
-    },
-    {
-      "tx": "**Polyhydramnios** (**AFI over 25**, **DVP over 8**; **diabetes**, **anomalies** anencephaly TE fistula duodenal atresia double bubble, **twins TTTS recipient**, hydrops, macrosomia) with **symptoms** (pressure dyspnoea, preterm labour, malpresentation, cord prolapse, PPH atony) presents; **OGTT** with **anomaly scan** and **HbA1c** evaluates. Mild idiopathic observes.",
-      "say": "Over twenty five diabetes anomalies twins recipient is poly: pressure preterm prolapse atony. Sugars scans evaluate.",
-      "vis": null
-    },
-    {
-      "tx": "**Management oligo** (**hydration**, **amnioinfusion** transcervical saline variable decelerations, **delivery 36 to 37** isolated term, earlier IUGR Doppler, **steroids** preterm) with **poly** (**indomethacin** selected preterm ductus oligohydramnios, **amnioreduction** pressure relief dyspnoea, **delivery 37 to 38** diabetes anomalies ruled, **section** malpresentation) times; **cord** (transvaginal colour, knee chest) prolapse rescues. Causes treated.",
-      "say": "Oligo hydrates infuses delivers 36 37: poly indomethacin reduces delivers 37 38. Causes ruled.",
-      "vis": null
-    },
-    {
-      "tx": "**TTTS** (**monochorionic**, **donor stuck oligo**, **recipient poly**, **Quintero stages**, **laser ablation** communicating, **amnioreduction** temporises, **selective reduction** severe) with **TRAP** (acardiac pump twin, radiofrequency) and **TAPS** (anaemia polycythaemia middle cerebral Doppler) complicates monos; **fortnightly scans** 16 weeks detect. Referral fetal medicine lasers.",
-      "say": "Stuck donor drowning recipient lasers communicating is TTTS: fortnightly monos detect. Stages ablate.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Fluid",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Normal",
-            "AFI 5 25",
-            "DVP 2 8"
-          ],
-          [
-            "Oligo",
-            "IUGR renal",
-            "Infuse 36 37"
-          ],
-          [
-            "Poly",
-            "DM anomalies",
-            "Reduce 37 38"
-          ],
-          [
-            "TTTS",
-            "Stuck drowning",
-            "Laser"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-271",
-    "bk2-obg-272",
-    "bk2-obg-273",
-    "bk2-obg-274",
-    "bk2-obg-275",
-    "bk2-obg-276",
-    "bk2-obg-277",
-    "bk2-obg-278",
-    "bk2-obg-279",
-    "bk2-obg-280"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "obg-amniotic-fluid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Disorders of amniotic fluid: oligo, polyhydramnios and amnioinfusion",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Fluid** (**500 to 1000 ml term**, swallowing urination turnover, **AFI 5 to 25 cm**, **DVP 2 to 8 cm**; lungs gut limbs cushion) with **oligo** (**AFI under 5**, **DVP under 2**: **IUGR**, **ruptured membranes**, **renal agenesis Potter**, post-term, drugs ACE) compresses cord decelerations; **nonstress** with Doppler surveils. Hydration rest improves borderline.",
+   "say": "Five twenty five index two eight pocket is normal: under is oligo IUGR renal ruptured. Cord compresses decelerates.",
+   "vis": null
+  },
+  {
+   "tx": "**Polyhydramnios** (**AFI over 25**, **DVP over 8**; **diabetes**, **anomalies** anencephaly TE fistula duodenal atresia double bubble, **twins TTTS recipient**, hydrops, macrosomia) with **symptoms** (pressure dyspnoea, preterm labour, malpresentation, cord prolapse, PPH atony) presents; **OGTT** with **anomaly scan** and **HbA1c** evaluates. Mild idiopathic observes.",
+   "say": "Over twenty five diabetes anomalies twins recipient is poly: pressure preterm prolapse atony. Sugars scans evaluate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-amniotic-fluid-fig1.webp",
+    "alt": "Diagram illustrating polyhydramnios with a fetus in excessive amniotic fluid. Insets show anencephaly and duodenal atresia (double bubble sign), common causes. Fetal malpresentation is also depicted.",
+    "caption": "Polyhydramnios: excessive fluid, causes, and complications",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Management oligo** (**hydration**, **amnioinfusion** transcervical saline variable decelerations, **delivery 36 to 37** isolated term, earlier IUGR Doppler, **steroids** preterm) with **poly** (**indomethacin** selected preterm ductus oligohydramnios, **amnioreduction** pressure relief dyspnoea, **delivery 37 to 38** diabetes anomalies ruled, **section** malpresentation) times; **cord** (transvaginal colour, knee chest) prolapse rescues. Causes treated.",
+   "say": "Oligo hydrates infuses delivers 36 37: poly indomethacin reduces delivers 37 38. Causes ruled.",
+   "vis": null
+  },
+  {
+   "tx": "**TTTS** (**monochorionic**, **donor stuck oligo**, **recipient poly**, **Quintero stages**, **laser ablation** communicating, **amnioreduction** temporises, **selective reduction** severe) with **TRAP** (acardiac pump twin, radiofrequency) and **TAPS** (anaemia polycythaemia middle cerebral Doppler) complicates monos; **fortnightly scans** 16 weeks detect. Referral fetal medicine lasers.",
+   "say": "Stuck donor drowning recipient lasers communicating is TTTS: fortnightly monos detect. Stages ablate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fluid",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "AFI 5 25",
+      "DVP 2 8"
+     ],
+     [
+      "Oligo",
+      "IUGR renal",
+      "Infuse 36 37"
+     ],
+     [
+      "Poly",
+      "DM anomalies",
+      "Reduce 37 38"
+     ],
+     [
+      "TTTS",
+      "Stuck drowning",
+      "Laser"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-271",
+  "bk2-obg-272",
+  "bk2-obg-273",
+  "bk2-obg-274",
+  "bk2-obg-275",
+  "bk2-obg-276",
+  "bk2-obg-277",
+  "bk2-obg-278",
+  "bk2-obg-279",
+  "bk2-obg-280"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

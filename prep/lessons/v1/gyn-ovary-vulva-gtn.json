@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "gyn-ovary-vulva-gtn",
-  "subject": "obstetrics-gynaecology",
-  "title": "SS gyn-oncology: ovarian, vulval and GTN staging and therapy",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Ovarian** (**RMI** CA-125 menopause ultrasound, **IOTA**, **ROMA**; **high grade serous** p53 BRCA, **mucinous** GI primary rules, **clear endometrioid** endometriosis, **granulosa** inhibin precocious, **dysgerminoma** LDH young) with **staging** (**laparotomy midline**, washings, **omentectomy**, nodes, **R0 debulk** goal, **HIPEC** interval selected) operates; **neoadjuvant** (Fagotti, IDS) unresectable shrinks. Frozen sections guide.",
-      "say": "Markers menopause scans triage serous BRCA mucinous GI: midline washings omentum R0 debulks HIPEC selected. Frozen guides.",
-      "vis": null
-    },
-    {
-      "tx": "**Chemo targeted** (**carboplatin paclitaxel** 6 cycles, **dose dense** weekly, **IP** selected, **bevacizumab** frontline recurrent ascites, **PARP** BRCA HRD maintenance, **mirvetuximab** folate resistant) with **germ cell** (**BEP** bleomycin lung, **fertility sparing** unilateral, **dysgerminoma** radiosensitive) and **sex cord** (surgery inhibin follows) treats; **recurrence** (platinum free interval, secondary debulk, trials) sequences. Neuropathy counts gate.",
-      "say": "Carbo paclitaxel bevacizumab PARP HRD maintains: BEP young spares bleomycin lungs. Intervals recur sequence.",
-      "vis": null
-    },
-    {
-      "tx": "**Vulvar** (**HPV usual young**, **differentiated lichen older**, **Paget melanoma** rare, **FIGO surgical**, **sentinel unifocal 4 cm**, **groin dissection** positive, **chemoRT** advanced) with **vaginal** (vault HPV, brachytherapy, exenteration) manages; **Bartholin cancer** (over 40 solid, excision) rules. Itch ulcers biopsy early while groin ultrasound triages dissection extent.",
-      "say": "Young warty older lichen sentinel maps groins dissect positive chemoradiates advanced: Bartholin solid ages excise. Biopsy itches.",
-      "vis": null
-    },
-    {
-      "tx": "**GTN** (**complete mole** diploid androgenetic snowstorm theca, **partial** triploid fetus, **invasive** myometrium, **choriocarcinoma** vascular brain lungs, **PSTT ETT** hPL surgery; **FIGO score** age antecedent interval hCG size sites number prior chemo, **low single actinomycin methotrexate**, **high EMA-CO**, **hCG surveillance** contracept year) cures theat; **ectopic molar** (tubal, hCG follows) watches. Chemo cures metastases.",
-      "say": "Snowstorm theca diploid complete triploid partial vascular brain choriocarcinomas: scores single low multi high hCG years. Chemo cures.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "SS ovary",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Triage",
-            "RMI IOTA",
-            "Frozen"
-          ],
-          [
-            "Surgery",
-            "R0 HIPEC",
-            "NACT IDS"
-          ],
-          [
-            "Drugs",
-            "PARP HRD",
-            "BEP young"
-          ],
-          [
-            "GTN",
-            "FIGO score",
-            "EMA-CO"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-341",
-    "bk2-obg-342",
-    "bk2-obg-343",
-    "bk2-obg-344",
-    "bk2-obg-345",
-    "bk2-obg-346",
-    "bk2-obg-347",
-    "bk2-obg-348",
-    "bk2-obg-349",
-    "bk2-obg-350"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "gyn-ovary-vulva-gtn",
+ "subject": "obstetrics-gynaecology",
+ "title": "SS gyn-oncology: ovarian, vulval and GTN staging and therapy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Ovarian** (**RMI** CA-125 menopause ultrasound, **IOTA**, **ROMA**; **high grade serous** p53 BRCA, **mucinous** GI primary rules, **clear endometrioid** endometriosis, **granulosa** inhibin precocious, **dysgerminoma** LDH young) with **staging** (**laparotomy midline**, washings, **omentectomy**, nodes, **R0 debulk** goal, **HIPEC** interval selected) operates; **neoadjuvant** (Fagotti, IDS) unresectable shrinks. Frozen sections guide.",
+   "say": "Markers menopause scans triage serous BRCA mucinous GI: midline washings omentum R0 debulks HIPEC selected. Frozen guides.",
+   "vis": null
+  },
+  {
+   "tx": "**Chemo targeted** (**carboplatin paclitaxel** 6 cycles, **dose dense** weekly, **IP** selected, **bevacizumab** frontline recurrent ascites, **PARP** BRCA HRD maintenance, **mirvetuximab** folate resistant) with **germ cell** (**BEP** bleomycin lung, **fertility sparing** unilateral, **dysgerminoma** radiosensitive) and **sex cord** (surgery inhibin follows) treats; **recurrence** (platinum free interval, secondary debulk, trials) sequences. Neuropathy counts gate.",
+   "say": "Carbo paclitaxel bevacizumab PARP HRD maintains: BEP young spares bleomycin lungs. Intervals recur sequence.",
+   "vis": null
+  },
+  {
+   "tx": "**Vulvar** (**HPV usual young**, **differentiated lichen older**, **Paget melanoma** rare, **FIGO surgical**, **sentinel unifocal 4 cm**, **groin dissection** positive, **chemoRT** advanced) with **vaginal** (vault HPV, brachytherapy, exenteration) manages; **Bartholin cancer** (over 40 solid, excision) rules. Itch ulcers biopsy early while groin ultrasound triages dissection extent.",
+   "say": "Young warty older lichen sentinel maps groins dissect positive chemoradiates advanced: Bartholin solid ages excise. Biopsy itches.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/gyn-ovary-vulva-gtn-fig1.webp",
+    "alt": "Diagram showing vulvar cancer lesion, sentinel lymph node biopsy, and groin dissection for staging and management.",
+    "caption": "Vulvar cancer staging: sentinel node and groin dissection",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**GTN** (**complete mole** diploid androgenetic snowstorm theca, **partial** triploid fetus, **invasive** myometrium, **choriocarcinoma** vascular brain lungs, **PSTT ETT** hPL surgery; **FIGO score** age antecedent interval hCG size sites number prior chemo, **low single actinomycin methotrexate**, **high EMA-CO**, **hCG surveillance** contracept year) cures theat; **ectopic molar** (tubal, hCG follows) watches. Chemo cures metastases.",
+   "say": "Snowstorm theca diploid complete triploid partial vascular brain choriocarcinomas: scores single low multi high hCG years. Chemo cures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SS ovary",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Triage",
+      "RMI IOTA",
+      "Frozen"
+     ],
+     [
+      "Surgery",
+      "R0 HIPEC",
+      "NACT IDS"
+     ],
+     [
+      "Drugs",
+      "PARP HRD",
+      "BEP young"
+     ],
+     [
+      "GTN",
+      "FIGO score",
+      "EMA-CO"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-341",
+  "bk2-obg-342",
+  "bk2-obg-343",
+  "bk2-obg-344",
+  "bk2-obg-345",
+  "bk2-obg-346",
+  "bk2-obg-347",
+  "bk2-obg-348",
+  "bk2-obg-349",
+  "bk2-obg-350"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

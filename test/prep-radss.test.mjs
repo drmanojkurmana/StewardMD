@@ -233,9 +233,10 @@ test("shipped v16 subject index: taxonomy bv v16, every taxonomy module listed w
   assert.equal(sub && sub.bv, "v16");
   const ix = JSON.parse(fs.readFileSync(new URL("../prep/bank/v16/ss-radiology/index.json", import.meta.url), "utf8"));
   const mods = sub.sections.flatMap((x) => x.modules.map((m) => m.id));
-  assert.deepEqual(ix.topics.map((t) => t.id).sort(), mods.slice().sort());
-  for (const t of ix.topics) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
-  const n = ix.topics.reduce((a, t) => a + t.count, 0);
+  const own = ix.topics.filter((t) => t.group !== "xlist");   // cross-listed union rows are virtual, not modules
+  assert.deepEqual(own.map((t) => t.id).sort(), mods.slice().sort());
+  for (const t of own) { assert.ok(t.group && ix.groups.some((g) => g.id === t.group), t.id); assert.equal(t.file, "mcq/" + t.id + ".json"); }
+  const n = own.reduce((a, t) => a + t.count, 0);
   assert.equal(ix.counts.total, n); assert.equal(ix.counts.d1 + ix.counts.d2 + ix.counts.d3, n);
   assert.ok(n >= 1272, "v9 holds the 690 v8 items and the 582 radmax depth items");
 });
@@ -307,7 +308,7 @@ test("answer-key round 3: bank v15 keeps every v14 module and adds the owner-ver
 test("de-identified release: bank v16 keeps every v15 module and count; the route serves v16 figures, neutral lesson media and the radnotes3 / radmax7 sets", () => {
   const v16 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v16/ss-radiology/index.json", import.meta.url), "utf8"));
   const v15 = JSON.parse(fs.readFileSync(new URL("../prep/bank/v15/ss-radiology/index.json", import.meta.url), "utf8"));
-  assert.deepEqual(v16.topics.map((t) => [t.id, t.count]), v15.topics.map((t) => [t.id, t.count]));
+  assert.deepEqual(v16.topics.filter((t) => t.group !== "xlist").map((t) => [t.id, t.count]), v15.topics.map((t) => [t.id, t.count]));
   assert.equal(v16.counts.total, v15.counts.total, "images change, items do not");
   for (const p of ["v16/ss-radiology/index.json", "v16/manifest.json", "v16/ss-radiology/img/i-0123456789ab.webp", "v1/lessons/media/m-0123456789ab.webp",
     "img/radnotes/rn-0123456789ab.webp", "img/radmax/rm-0123456789ab.webp", "overlay/radnotes3/radiology/rad-chest.json", "overlay/radmax7/radiology/rad-gi.json",

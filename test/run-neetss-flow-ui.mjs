@@ -75,10 +75,18 @@ const page = await ctx.newPage();
 const errors = [], reqs = [];
 page.on("pageerror", (e) => { if (/prep|PREP/i.test(String((e && (e.stack || e.message)) || ""))) errors.push(String(e.message || e)); });
 page.on("request", (r) => reqs.push(r.url()));
-await page.route(/^https:\/\/neetss\.test\/nsfix\//, serveFix);
-await page.route(/^https:\/\/neetss\.test\//, serveFile);
+const netLog = [];
+page.on("response", (r) => { const u = r.url(); if (u.includes("/nsfix/")) netLog.push("resp " + r.status() + " " + u.slice(u.indexOf("/nsfix/"), u.indexOf("/nsfix/") + 60)); });
+page.on("requestfailed", (r) => netLog.push("reqfail " + r.url().slice(-70) + " " + ((r.failure() || {}).errorText || "")));
+// One route: the fixture wins on /nsfix/*, everything else falls to the file server.
+// (Two overlapping page.route calls depend on the runner's match order, which broke once already.)
+await page.route(/^https:\/\/neetss\.test\//, (route) => {
+  const u = new URL(route.request().url());
+  if (u.pathname === FIX.slice(0, -1) || u.pathname.startsWith(FIX)) return serveFix(route);
+  return serveFile(route);
+});
 await page.addInitScript(`window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_OVERLAYS={};
-  window.confirm=function(){return true;}; try{localStorage.setItem("smd_prep","1");["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){localStorage.removeItem(k);});}catch(e){}`);
+  window.confirm=function(){return true;}; try{localStorage.setItem("smd_prep","1");if(!sessionStorage.getItem("nsfix-boot")){sessionStorage.setItem("nsfix-boot","1");["smd_prep_v1","smd_prep_setup","smd_prep_tt"].forEach(function(k){localStorage.removeItem(k);});}}catch(e){}`);
 await page.goto(BASE);
 await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
 await page.evaluate(() => { ["introPoster", "splash", "accountGate", "introOverlay", "smdBootSplash"].forEach((k) => { const e = document.getElementById(k); if (e) e.remove(); }); });
@@ -95,6 +103,7 @@ try {
   // ---- first-time flow: exam -> Step 1 -> Step 2, each on its own page
   await ev(() => PREP.open());
   ok(await until(() => !!document.querySelector("#smdPrep .pl-q")), "first open shows onboarding");
+  if (!(await ev(() => !!document.querySelector("#smdPrep .pl-q")))) console.log("DIAG smdPrep: " + await ev(() => { const r = document.querySelector("#smdPrep"); return (r ? r.textContent : "(no #smdPrep)").replace(/\s+/g, " ").trim().slice(0, 300); }));
   ok((await txt("#smdPrep .pl-q") || "").includes("Which exam"), "exam step first");
   await tap('#smdPrep [data-act=p-f-exam][data-v="neet-ss"]');
   ok(await until(() => /who you are/.test(document.querySelector("#smdPrep .pl-ob").textContent)), "NEET-SS names what is next, no long group scroll");
@@ -159,13 +168,19 @@ try {
   await ev(() => PREP.back());
 
   // ---- switching group keeps history, bookmarks and confidence
+  // Seed through a reload: the app caches the store in memory, so a direct
+  // localStorage write would be overwritten by the next in-app save.
   await ev(() => { const s = JSON.parse(localStorage.getItem("smd_prep_v1")); s.bm = { "seed-q1": ["ss-urology", "ss-urology-m0"] }; s.mod = { "ss-urology-m0": { t: 4, ok: 3 } }; localStorage.setItem("smd_prep_v1", JSON.stringify(s)); return 1; });
+  await page.reload();
+  await page.waitForFunction(() => !!(window.PREP && window.SMD_showHome), null, { timeout: 30000 });
+  await ev(() => PREP.open());
+  ok(await until(() => !!document.querySelector("#smdPrep #pnHome"), 20000), "seeded store reopens on home");
   await tap('#smdPrep [data-act="p-settings"]');
   ok(await until(() => !!document.querySelector("#pnPlanSheet"), 10000), "settings sheet opens");
   await tap('#pnPlanSheet [data-act="p-f-group"][data-v="medical"]');
   await tap('#pnPlanSheet [data-act="p-save"]');
   ok(await until(() => !!document.querySelector("#smdPrep #pnHome"), 10000), "save returns home");
-  ok(await ev(() => { const s = JSON.parse(localStorage.getItem("smd_prep_v1")); return s.pl.group + "|" + Object.keys(s.bm).length + "|" + JSON.stringify(s.mod["ss-urology-m0"]); }) === "medical|1|{\"t\":4,\"ok\":3}", "group switched, history kept");
+  ok(await ev(() => { const s = JSON.parse(localStorage.getItem("smd_prep_v1")); const m = (s.mod || {})["ss-urology-m0"] || {}; return s.pl.group + "|" + Object.keys(s.bm || {}).length + "|" + m.t + "|" + m.ok; }) === "medical|1|4|3", "group switched, history kept");
   ok(await until(() => !!(document.querySelector('#smdPrep #pnGrid .pn-tile[data-s="ss-cardiology"]') && !document.querySelector('#smdPrep #pnGrid .pn-tile[data-s="ss-urology"]')), 20000), "home follows the new group");
   // Returning users land straight on their group's list.
   await page.reload();
@@ -184,5 +199,6 @@ try {
   fails++;
 }
 await browser.close();
+if (fails) netLog.slice(-12).forEach((l) => console.log("DIAG " + l));
 console.log(fails ? "RESULT FAIL" : "RESULT PASS");
 process.exit(fails ? 1 : 0);
