@@ -60,7 +60,13 @@
   {
    "tx": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is **intention-to-treat** (ITT), which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. **Rank-preserving structural failure time** models are sensitivity methods that estimate the effect of treatment actually received.",
    "say": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is intention to treat, which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. Rank-preserving structural failure time models are sensitivity methods that estimate the effect of the treatment actually received.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-trial-design-fig1.webp",
+    "alt": "Flowchart comparing intention-to-treat (ITT) and per-protocol analyses in a clinical trial, showing patients crossing over from the control arm to the experimental arm.",
+    "caption": "Intention-to-treat analysis preserves randomization despite crossover",
+    "ar": 1.8349
+   }
   },
   {
    "tx": "A **surrogate endpoint** such as PFS is valid only when it reliably predicts overall survival in that disease. An adverse or immature OS trend must be reviewed, and benefit on PFS alone may be provisional. Group sequential designs use an **O'Brien-Fleming** boundary, which is very strict at early looks, so an interim p of 0.02 usually does not justify stopping for efficacy. Single-arm phase II designs use a Simon two-stage design: stop at stage one if too few responses occur.",

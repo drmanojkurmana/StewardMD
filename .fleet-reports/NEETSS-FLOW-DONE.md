@@ -73,7 +73,35 @@ stale inventory counts.
   `SHOTS=<dir> node test/run-neetss-flow-ui.mjs`, `VP=820x1180` for iPad, `PN_LIGHT=1` light.
   Screenshots to attach: neetss-step1/step2/home at 390 and 820, dark and light.
 
-## Compliance pass (static; browser pass pending the harness run above)
+## Follow-up: browser gate fixed and green (2026-10-15, PR #1688)
+
+The gate failed twice on main after #1644. Causes found and fixed:
+- Real app crash: `renderSsAll` in prep.js called `root()` as a function; `root`
+  is the pane element. Opening See all subjects threw on every index refresh.
+  Fixed to a null-guarded element query (same shape as the other two call sites).
+- Harness route shadowing: two overlapping `page.route` calls let the file server
+  answer `/nsfix/*` with 404 (runner match order changed under a fresh
+  playwright-core install). Merged into one route: fixture first, files after.
+- Harness state bugs: the init script wiped the store on every page load (reload
+  checks could never pass; now first load per session only), and the history seed
+  wrote localStorage behind the app's in-memory store (now seeded through a
+  reload; the assert compares parsed values, not key order).
+- Mapping and unit tests untouched: prep-ss-groups, ss-flow, plan-scope,
+  no-coming-soon, plan, setup, app, subject and both nucleus360 suites pass
+  (10 files, 30/30 in the four flow suites).
+
+Gate run 38817170377 on the branch: 390px dark/light and iPad dark/light all
+RESULT PASS (188 PASS lines, no page errors, no AI calls, no h-scroll, 44px
+controls, keyboard roles). Artifact `neetss-flow-shots`: 12 screenshots
+(neetss-step1/step2/home at 390 and 820, dark and light). Step 1 cards read
+correctly at 390px dark (degree + includes lines, radio affordance, progress
+dots, palette tokens, no glows). Home Subjects sits below the fold in the shot;
+its scoping is covered by the passing tile asserts, not pixels.
+Pre-existing CI note: security-scan fails identically on main (one finding in
+`functions/api/prep/fix.js`, untouched here); unit-tests and clinix-ui are the
+merge gates for this change.
+
+## Compliance pass (static; browser pass in the gate run above)
 
 - Targets: group cards 62px, subject rows 60px, buttons 50px, inline links 44px (existing
   `.pl-opt`/`.pn-row`/`.pn-btn`/`.pn-link` tokens). No new CSS, no raw hex, no glows or

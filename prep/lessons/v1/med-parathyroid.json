@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-parathyroid",
-  "subject": "medicine",
-  "title": "Hyperparathyroidism, hypoparathyroidism and tetany",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**bones** aches fractures height loss, **stones** renal colic polyuria thirst, **groans** constipation ulcers pancreatitis, **thrones** depression fatigue cognition, **tetany** perioral tingling cramps carpopedal, **seizures** hypocalcaemic fits, **neck** adenoma MEN family jaw, **drugs** lithium thiazides) with **viva** (**hypercalcaemic** stony thirsty, **tetanic** Trousseau seizing) profiles; **calcium** (high low sorts) states. Minerals stray.",
-      "say": "Bones stones groans thrones is history: tetanies tingle seizures fit necks lump drugs raise calciums state hypercalcaemics thirst tetanics seize shifts run. Bodies calcify.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**dehydrated** dry thirsty polyuric, **bones** tender fractures kyphotic, **stones** CVA tender colic, **Chvostek** taps twitch face, **Trousseau** cuff carpopedal spasms, **cataracts** chronic hypopara slits, **neck** adenoma parathyroid feels, **QT** prolonged arrests) with **bedside** (**calcium** corrected ionised, **ECG** short long QT, **reflexes** tetany taps) taps; **band** (calcification corneas) looks. Ions signal.",
-      "say": "Dehydrations bones stones Chvosteks is exam: Trousseaus cuff cataracts cloud necks feel QTs stretch calciums correct ECGs trace reflexes tap bands ring tetanies warn. Fingers spasm.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**calcium** high PTH high primary proves, **phosphate** low ALP high bones, **vitamin** D PTH secondary, **urine** calcium stones hypercalciuria, **DEXA** bones thin fractures, **sestamibi** adenoma localises, **magnesium** tetany corrects) with **differentials** (**adenoma** single sestamibi, **hyperplasia** MEN family, **malignancy** PTHrP low PTH, **hypopara** post-thyroidectomy low) sorts; **surgical** (parathyroidectomy decides) meets. Glands overact.",
-      "say": "Calciums phosphates vitamins urines is Ix: DEXAs thin sestamibis glow adenomas glow hyperplasias spread malignancies mimic hypoparas dip surgicals meet cuts cure fluids fill. Numbers stray.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**fluids** saline diuresis flushes, **bisphosphonate** zoledronic bones guards, **cinacalcet** PTH lowers bridges, **parathyroidectomy** adenoma cures hungry bones, **calcitriol** calcium hypopara replaces, **magnesium** tetany corrects first, **dialysis** renal failure rescues) with **traps** (**hungry** bones crash, **thiazide** raises stops, **lithium** switches) closes; **follow** (calcium PTH bones) tracks. Minerals settle.",
-      "say": "Fluids bisphosphonates cinacalcets resections is Rx: calcitriols replace magnesiums correct dialyses rescue hungries crash thiazides stop lithiums switch follows track calciums steady wishes respect. Ions calm.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-401",
-    "bk2-med-402",
-    "bk2-med-403",
-    "bk2-med-404",
-    "bk2-med-405",
-    "bk2-med-406",
-    "bk2-med-407",
-    "bk2-med-408",
-    "bk2-med-409",
-    "bk2-med-410"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-parathyroid",
+ "subject": "medicine",
+ "title": "Hyperparathyroidism, hypoparathyroidism and tetany",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**bones** aches fractures height loss, **stones** renal colic polyuria thirst, **groans** constipation ulcers pancreatitis, **thrones** depression fatigue cognition, **tetany** perioral tingling cramps carpopedal, **seizures** hypocalcaemic fits, **neck** adenoma MEN family jaw, **drugs** lithium thiazides) with **viva** (**hypercalcaemic** stony thirsty, **tetanic** Trousseau seizing) profiles; **calcium** (high low sorts) states. Minerals stray.",
+   "say": "Bones stones groans thrones is history: tetanies tingle seizures fit necks lump drugs raise calciums state hypercalcaemics thirst tetanics seize shifts run. Bodies calcify.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**dehydrated** dry thirsty polyuric, **bones** tender fractures kyphotic, **stones** CVA tender colic, **Chvostek** taps twitch face, **Trousseau** cuff carpopedal spasms, **cataracts** chronic hypopara slits, **neck** adenoma parathyroid feels, **QT** prolonged arrests) with **bedside** (**calcium** corrected ionised, **ECG** short long QT, **reflexes** tetany taps) taps; **band** (calcification corneas) looks. Ions signal.",
+   "say": "Dehydrations bones stones Chvosteks is exam: Trousseaus cuff cataracts cloud necks feel QTs stretch calciums correct ECGs trace reflexes tap bands ring tetanies warn. Fingers spasm.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-parathyroid-fig1.webp",
+    "alt": "Composite image showing Chvostek and Trousseau signs for tetany, and ECG strips illustrating prolonged and short QT intervals, indicating hypocalcemia and hypercalcemia respectively.",
+    "caption": "Clinical signs and ECG changes in calcium disorders",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**calcium** high PTH high primary proves, **phosphate** low ALP high bones, **vitamin** D PTH secondary, **urine** calcium stones hypercalciuria, **DEXA** bones thin fractures, **sestamibi** adenoma localises, **magnesium** tetany corrects) with **differentials** (**adenoma** single sestamibi, **hyperplasia** MEN family, **malignancy** PTHrP low PTH, **hypopara** post-thyroidectomy low) sorts; **surgical** (parathyroidectomy decides) meets. Glands overact.",
+   "say": "Calciums phosphates vitamins urines is Ix: DEXAs thin sestamibis glow adenomas glow hyperplasias spread malignancies mimic hypoparas dip surgicals meet cuts cure fluids fill. Numbers stray.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**fluids** saline diuresis flushes, **bisphosphonate** zoledronic bones guards, **cinacalcet** PTH lowers bridges, **parathyroidectomy** adenoma cures hungry bones, **calcitriol** calcium hypopara replaces, **magnesium** tetany corrects first, **dialysis** renal failure rescues) with **traps** (**hungry** bones crash, **thiazide** raises stops, **lithium** switches) closes; **follow** (calcium PTH bones) tracks. Minerals settle.",
+   "say": "Fluids bisphosphonates cinacalcets resections is Rx: calcitriols replace magnesiums correct dialyses rescue hungries crash thiazides stop lithiums switch follows track calciums steady wishes respect. Ions calm.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-401",
+  "bk2-med-402",
+  "bk2-med-403",
+  "bk2-med-404",
+  "bk2-med-405",
+  "bk2-med-406",
+  "bk2-med-407",
+  "bk2-med-408",
+  "bk2-med-409",
+  "bk2-med-410"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

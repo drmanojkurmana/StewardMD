@@ -37,7 +37,7 @@
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, bmx: {}, bmt: {}, bma: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null, ps: {} }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
@@ -54,6 +54,42 @@
     var n = 0;
     (setIds || []).forEach(function (set) { var m = sets && sets[set] && sets[set][sid]; n += (m && +m[mid]) || 0; });
     return n;
+  }
+  /* Cross-listed modules (prep/taxonomy/crosslist.json): one disease taught in several subjects, shown in every
+     member subject's list under its own title. Opening it from any subject loads the UNION of the members' bank
+     files and overlays. Item ids never change, so practice, progress (keyed by item and by the group's own id),
+     mistakes, bookmarks and share links keep working from every entry point. */
+  function normStem(s) { return String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9]+/g, " ").replace(/ +/g, " ").replace(/^ | $/g, ""); }
+  /* unionItems([a, b, ...]) -> every item once, first file wins: a later item whose id or normalised stem already
+     showed is left out. An item without an id still dedupes by stem; an empty stem never collapses anything. */
+  function unionItems(lists) {
+    var seenId = {}, seenStem = {}, out = [], i, j, it, st;
+    for (i = 0; i < (lists || []).length; i++) {
+      var l = lists[i];
+      for (j = 0; j < (l || []).length; j++) {
+        it = l[j];
+        if (!it) continue;
+        if (it.id != null) { if (seenId[it.id]) continue; seenId[it.id] = 1; }
+        st = normStem(it.q);
+        if (st) { if (seenStem[st]) continue; seenStem[st] = 1; }
+        out.push(it);
+      }
+    }
+    return out;
+  }
+  // xgroupsFor(groups, sid) -> the crosslist groups taught in this subject, in file order. groups is the
+  // crosslist.json array or the whole { groups } file.
+  function xgroupsFor(groups, sid) {
+    var gs = (groups && groups.groups) || groups || [];
+    return gs.filter(function (g) { return ((g && g.members) || []).some(function (m) { return m[0] === sid; }); });
+  }
+  function xgroupById(groups, gid) { var gs = (groups && groups.groups) || groups || [], i; for (i = 0; i < gs.length; i++) if (gs[i] && gs[i].id === gid) return gs[i]; return null; }
+  /* xlistRow(group, counts) -> the subject-list row for a group: union counts are the sums of the member rows
+     (exact when the members share no items; loadModule writes back the exact union once the files are read). */
+  function xlistRow(group, counts) {
+    var c = { count: 0, all: 0, usmle: 0, ov: 0 };
+    (counts || []).forEach(function (x) { if (!x) return; c.count += x.count || 0; c.all += x.all || 0; c.usmle += x.usmle || 0; c.ov += x.ov || 0; });
+    return { id: group.id, title: group.title, group: "xlist", count: c.count, all: c.all, usmle: c.usmle, ov: c.ov, file: null };
   }
   var QUAL_BLOCKED = { requires_review: 1, rejected: 1, retired: 1 };
   // A sidecar record that keeps the item out of every test (prep-assess.js eligible() blocks the same).
@@ -684,13 +720,23 @@
     s.cel = { day: day, keys: keys.slice(-200) };
     return s.cel;
   }
+  // Bookmarks library constants: assigned before PURE because under node the IIFE returns
+  // right after PURE, so initializers placed with the browser code below would never run there.
+  var BM_PAGE = 50, BM_FILES = 12, BM_FRESH_MS = 7 * 864e5;
+  var BM_TAGS = [["hy", "High Yield", 168], ["dif", "Difficult", 212], ["rm", "Repeated Mistake", 16], ["mr", "Must Revise", 4]];
+  var BM_NOTE_MAX = 500;
   var PURE = { dayHash: dayHash, selfShare: selfShare, buildSearch: buildSearch, searchFile: searchFile, pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, qualBlocked: qualBlocked, isOutdated: isOutdated, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
+    statusOf: statusOf, stars: stars, countFor: countFor, ovFor: ovFor, normStem: normStem, unionItems: unionItems, xgroupsFor: xgroupsFor, xgroupById: xgroupById, xlistRow: xlistRow, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime, qcNew: qcNew, qcPause: qcPause, qcShow: qcShow, qcLeft: qcLeft, qcTick: qcTick, qcNext: qcNext, qcStep: qcStep, qcLevel: qcLevel, qcAfter: qcAfter, qcStats: qcStats, QC_GAP: QC_GAP, reviewSplit: reviewSplit, reviewDefault: reviewDefault, psPack: psPack, psPurge: psPurge, psCap: psCap, psList: psList, psDaysLeft: psDaysLeft, psUnpack: psUnpack, PS_DAYS: PS_DAYS, PS_MAX: PS_MAX,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, conceptKeyOf: conceptKeyOf, conceptKeys: conceptKeys, diversePick: diversePick, diverseOrder: diverseOrder,
     weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh,
-    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf };
+    optLetter: optLetter, storedForOption: storedForOption, whyRowHtml: whyRowHtml, moduleTitleOf: moduleTitleOf,
+    bmHas: bmHas, bmToggle: bmToggle, bmTs: bmTs, bmSortedIds: bmSortedIds, bmPairs: bmPairs, bmStats: bmStats, bmStem: bmStem,
+    BM_PAGE: BM_PAGE, BM_FILES: BM_FILES, BM_FRESH_MS: BM_FRESH_MS, BM_TAGS: BM_TAGS, BM_NOTE_MAX: BM_NOTE_MAX,
+    bmIsDefaultTag: bmIsDefaultTag, bmEnsureTags: bmEnsureTags, bmTagList: bmTagList, bmEntry: bmEntry,
+    bmTagId: bmTagId, bmAddTag: bmAddTag, bmSetNote: bmSetNote, bmSetTags: bmSetTags, bmToggleTag: bmToggleTag, bmPruneTags: bmPruneTags,
+    bmNoteAttempt: bmNoteAttempt, bmQuery: bmQuery };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -759,7 +805,7 @@
   function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
   // A subject's index; modules with overlay items (OVERLAYS) carry t.ov, their count from prep/bank/overlay-counts.json
   // (tools/prep-overlay-counts.mjs), so the counts on screen match what practice draws. No counts file: bank counts only.
-  function loadIndex(sid) {
+  function loadIndexRaw(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
     return Promise.all([
       getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json"),
@@ -774,6 +820,51 @@
       (ix.topics || []).forEach(function (t) { var n = ovFor(ovc, sets, sid, t.id); if (n) t.ov = n; });
       return (st.ix[sid] = ix);
     }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
+  }
+  /* Crosslist groups (prep/taxonomy/crosslist.json): fetched once a session like the taxonomy and kept in
+     IndexedDB, so subjects opened offline keep their rows; a miss with no copy means no cross-listed rows and
+     every subject behaves exactly as before. Never rejects. */
+  function loadXlist() {
+    if (!st.xlP) st.xlP = getJSON(STATIC + "taxonomy/crosslist.json").then(function (j) {
+      st.xl = (j && (j.groups || j)) || [];
+      cachePut("taxonomy/crosslist.json", { xl: st.xl, ts: Date.now() });
+      return st.xl;
+    }, function () {
+      return cacheGet("taxonomy/crosslist.json").then(function (hit) { return (st.xl = (hit && hit.xl) || []); });
+    });
+    return st.xlP;
+  }
+  function xRowIn(ix, mid) { var r = null; ((ix && ix.topics) || []).forEach(function (t) { if (t && t.id === mid) r = t; }); return r; }
+  /* ensureXlistRows(ix, sid) -> ix with one row per crosslist group taught in sid (rows the bank build already
+     wrote are kept). Member counts come from the member subjects' own indexes, loaded raw (no recursion: raw
+     indexes never add rows themselves). A group with no member row anywhere yet gets no row. Never rejects. */
+  function ensureXlistRows(ix, sid) {
+    var groups = xgroupsFor(st.xl || [], sid);
+    if (!groups.length) { ix._xl = 1; return Promise.resolve(ix); }
+    var want = groups.filter(function (g) { return !xRowIn(ix, g.id); });
+    if (!want.length) { ix._xl = 1; return Promise.resolve(ix); }
+    var need = {};
+    want.forEach(function (g) { (g.members || []).forEach(function (m) { if (m[0] !== sid) need[m[0]] = 1; }); });
+    return Promise.all(Object.keys(need).map(function (x) { return loadIndexRaw(x).then(null, function () { return null; }); })).then(function (list) {
+      var peers = {};
+      Object.keys(need).forEach(function (x, i) { peers[x] = list[i]; });
+      want.forEach(function (g) {
+        var rows = (g.members || []).map(function (m) { var pix = m[0] === sid ? ix : peers[m[0]]; return xRowIn(pix, m[1]); });
+        if (!rows.some(function (r) { return !!r; })) return;
+        ix.topics.push(xlistRow(g, rows));
+      });
+      ix._xl = 1;
+      return ix;
+    });
+  }
+  // A subject's index, with its cross-listed rows: the same counts the subject screen, the hub and search draw.
+  function loadIndex(sid) {
+    if (st.ix[sid] && st.ix[sid]._xl) return Promise.resolve(st.ix[sid]);
+    if (st.ixP && st.ixP[sid]) return st.ixP[sid];
+    var p = loadXlist().then(function () { return loadIndexRaw(sid); }).then(function (ix) { return ensureXlistRows(ix, sid); });
+    st.ixP = st.ixP || {};
+    st.ixP[sid] = p.then(function (ix) { delete st.ixP[sid]; return ix; }, function (e) { delete st.ixP[sid]; throw e; });
+    return st.ixP[sid];
   }
   function loadOvc() {
     if (!st.ovcP) st.ovcP = getJSON(STATIC + "bank/overlay-counts.json").then(function (j) { return (j && j.sets) || {}; }, function () { return {}; });
@@ -884,7 +975,7 @@
      { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
      goes to a new folder (medcov4, radnotes3 and radmax7 now, de-identified figures 2026-10-10; the earlier folders' copies are removed) and the folder named here moves with it.
      Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { anatomy: ["maikpearl1", "maikbook1"], radiology: ["radnotes3", "radmax7", "maiktopic1", "maikir"], medicine: ["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e"], anaesthesia: ["gap1013a", "gap1013c"], pathology: ["maik1", "maiktopic1", "maikbook2"], pharmacology: ["maik1", "maiktopic1", "gap1013d", "gap1013e"], "ss-pulmonology": ["medcov4", "maik29", "maikfill4", "maikfill7"], "ss-cardiology": ["maik29", "maikfill1"], "ss-critical-care": ["maik29", "maikfill2"], "ss-endocrinology": ["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9", "maikss302", "maikss303", "maikss304", "maikss305", "maikss306", "maikss307", "maikss308", "maikss309", "maikss310", "maikss311", "maikss312", "maikss313", "maikss314", "maikss315", "maikss316", "maikss317", "maikss318"], "ss-nephrology": ["maik29", "maikfill2", "maikss281"], "adult-health-medicine": ["maik20", "maikfill2"], "adult-health-surgery": ["maik20", "maik21", "maikfill4", "maikfill8", "maikfill9"], "child-health": ["maik21", "maik22", "maik28", "maik29", "maikfill6"], "womens-health": ["maik21", "maikfill3", "maikfill7"], "mental-health": ["maik22", "maik28", "maikfill5"], "population-health-and-ethics": ["maik22", "maikfill5"], "mcc-acute-care": ["maik23", "maik27", "maikfill3", "maikfill8", "maikfill9"], "mcc-chronic-care": ["maik23", "maik24", "maik27", "maikfill1", "maikfill7"], "mcc-health-promotion": ["maik24", "maik25", "maik27", "maikfill4", "maikfill7"], "mcc-professional-behaviours": ["maik25", "maik27", "maikfill1", "maikfill7"], "community-medicine": ["maiktopic1", "ck2", "gap1013e"], paediatrics: ["maiktopic1", "ck2", "gap1013c", "gap1013e"], surgery: ["maiktopic1", "ck2", "gap1013c", "maikbook1"], "ss-biostatistics": ["maiktopic1"], "ss-surgical-oncology": ["maikss4", "maikss88", "maikss211", "maikss212", "maikss213", "maikss214", "maikss215", "maikss216", "maikss217"], "ss-neurosurgery": ["maikss3", "maikss272"], "ss-urology": ["maikss2", "maikss273", "maikss274"], "ss-general-surgery": ["maikss1"], "ss-paediatric-surgery": ["maikss6", "maikss34", "maikss85", "maikss86", "maikss254", "maikss255", "maikss256", "maikss257", "maikss258"], "ss-plastic-surgery": ["maikss7", "maikss33", "maikss83", "maikss84", "maikss259", "maikss260", "maikss261", "maikss262", "maikss263"], "ss-vascular-surgery": ["maikss8", "maikss32", "maikss81", "maikss82", "maikss246", "maikss247", "maikss248", "maikss249", "maikss250", "maikss275", "maikss276", "maikss278"], "ss-neonatology": ["maikss9", "maikss49", "maikss50", "maikss96"], "ss-paediatric-cardiology": ["maikss10", "maikss37", "maikss38", "maikss90"], "ss-paediatric-neurology": ["maikss11", "maikss39", "maikss40", "maikss91"], "ss-paediatric-nephrology": ["maikss12", "maikss41", "maikss42", "maikss92"], "ss-paediatric-gastroenterology": ["maikss13", "maikss43", "maikss44", "maikss93"], "ss-paediatric-hepatology": ["maikss14", "maikss45", "maikss46", "maikss94"], "ss-paediatric-oncology": ["maikss15", "maikss47", "maikss48", "maikss95"], "ss-paediatric-critical-care": ["maikss16", "maikss35", "maikss36", "maikss89"], "ss-gynaecological-oncology": ["maikss17", "maikss69", "maikss77"], "ss-reproductive-medicine": ["maikss18", "maikss70", "maikss78"], "ss-hand-surgery": ["maikss19", "maikss71", "maikss79", "maikss264", "maikss265", "maikss266", "maikss267", "maikss268", "maikss269", "maikss270", "maikss271"], "ss-paediatric-orthopaedics": ["maikss20", "maikss72", "maikss80"], "ss-cardiac-anaesthesia": ["maikss21", "maikss65", "maikss73", "maikss300", "maikss301"], "ss-neuroanaesthesia": ["maikss22", "maikss66", "maikss74"], "ss-transplant-anaesthesia": ["maikss23", "maikss67", "maikss75", "maikss342", "maikss343"], "ss-paediatric-anaesthesia": ["maikss24", "maikss68", "maikss76", "maikss97", "maikss340", "maikss341"], "ss-head-neck-surgery": ["maikss25", "maikss63", "maikss64", "maikss100"], "ss-onco-pathology": ["maikss26", "maikss61", "maikss62", "maikss99"], "ss-virology": ["maikss27", "maikss59", "maikss60", "maikss98", "maikss344", "maikss345"], "ss-clinical-pharmacology": ["maikss28", "maikss51", "maikss52", "maikss101", "maikss105", "maikss106", "maikss107"], "ss-geriatric-mental-health": ["maikss29", "maikss53", "maikss54", "maikss102", "maikss108", "maikss109", "maikss110"], "ss-child-adolescent-psychiatry": ["maikss30", "maikss55", "maikss56", "maikss103", "maikss111", "maikss112", "maikss277"], "ss-ctvs": ["maikss5", "maikss31", "maikss57", "maikss58", "maikss87", "maikss104", "maikss251", "maikss252", "maikss253"], ophthalmology: ["maiktopic1"], biochemistry: ["maiktopic1", "maikbook1"], "ss-infectious-diseases": ["maiktopic1", "maik26", "maikfill0", "maikfill2", "maikss280"], "ss-medical-oncology": ["maik26", "maikfill6"], "ss-rheumatology-immunology": ["maik26", "maikfill6", "maikss279"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1", "ck2", "gap1013b", "gap1013c", "maikbook2"], psychiatry: ["ck2", "gap1013f"], dermatology: ["gap1013f", "maikbook2"], physiology: ["maiktopic1", "maikbook1"], "mrcp-basic-science": ["maik18", "maik19"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10"], "mrcp-geriatrics": ["maik18", "maik19"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10"], "mrcp-infectious-diseases": ["maik18", "maik19"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10"], "mrcp-neurology": ["maik18", "maik19", "maikimg10", "maikfill6"], "mrcp-ophthalmology": ["maik18", "maik19"], "mrcp-pharmacology": ["maik18", "maik19", "gap1013d", "gap1013e"], "mrcp-psychiatry": ["maik18", "maik19"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10", "gap1013f"], "mrcp-statistics": ["maik18", "maik19"], "plab-biochemistry": ["maikfill1"], "plab-dermatology": ["maikfill1", "maikfill7", "gap1013f"], "mrcs-radiology": ["maikfill2"], "plab-physiology": ["maikfill3", "maikfill8"], "plab-psychiatry": ["maikfill4", "maikfill8", "maikfill9", "gap1013f"], "ss-general-medicine": ["maikfill5"], "mrcs-anaesthesia": ["maikfill6"], "mrcs-medicine": ["maikfill6"], "mrcs-pharmacology": ["maikfill6"], "plab-pharmacology": ["maikfill6"], "plab-radiology": ["maikfill6"], "ss-neurology": ["maikfill6", "maikss282", "maikss283"], "ss-gastroenterology": ["maikss319", "maikss320", "maikss321", "maikss322", "maikss323", "maikss324", "maikss325", "maikss326", "maikss327", "maikss328", "maikss329"], "ss-haematology": ["maikss330", "maikss331", "maikss332", "maikss333", "maikss334", "maikss335", "maikss336", "maikss337", "maikss338", "maikss339"]};
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { anatomy: ["maikpearl1", "maikbook1", "maiknuc2"], radiology: ["radnotes3", "radmax7", "maiktopic1", "maikir", "maiknuc2"], medicine: ["medcov4", "maik1", "maiktopic1", "ck2", "gap1013a", "gap1013b", "gap1013c", "gap1013e", "maiknuc2"], anaesthesia: ["gap1013a", "gap1013c", "maiknuc2"], pathology: ["maik1", "maiktopic1", "maikbook2"], pharmacology: ["maik1", "maiktopic1", "gap1013d", "gap1013e"], "ss-pulmonology": ["medcov4", "maik29", "maikfill4", "maikfill7", "maikss415", "maikss416", "maikss417", "maikss418", "maikss419", "maikss420", "maikss421", "maikss422", "maikss423", "maikss424", "maikss425", "maikss426", "maikss427", "maiknuc5"], "ss-cardiology": ["maik29", "maikfill1", "maikss347", "maikss348", "maikss349", "maikss350", "maikss351", "maikss352", "maikss353", "maiknuc3"], "ss-critical-care": ["maik29", "maikfill2", "maikss354", "maikss355", "maikss356", "maikss357", "maikss358", "maikss359", "maikss360", "maikss361", "maikss362", "maiknuc2", "maiknuc5"], "ss-endocrinology": ["maik29", "maik30", "maikfill4", "maikfill8", "maikfill9", "maikss302", "maikss303", "maikss304", "maikss305", "maikss306", "maikss307", "maikss308", "maikss309", "maikss310", "maikss311", "maikss312", "maikss313", "maikss314", "maikss315", "maikss316", "maikss317", "maikss318", "maikss363", "maikss364", "maiknuc2", "maiknuc4"], "ss-nephrology": ["maik29", "maikfill2", "maikss281", "maiknuc4"], "adult-health-medicine": ["maik20", "maikfill2", "maiknuc6", "maiknuc7"], "adult-health-surgery": ["maik20", "maik21", "maikfill4", "maikfill8", "maikfill9", "maiknuc7"], "child-health": ["maik21", "maik22", "maik28", "maik29", "maikfill6", "maiknuc7"], "womens-health": ["maik21", "maikfill3", "maikfill7", "maiknuc7"], "mental-health": ["maik22", "maik28", "maikfill5", "maiknuc7"], "population-health-and-ethics": ["maik22", "maikfill5", "maiknuc7"], "mcc-acute-care": ["maik23", "maik27", "maikfill3", "maikfill8", "maikfill9", "maiknuc6", "maiknuc7", "maiknuc8"], "mcc-chronic-care": ["maik23", "maik24", "maik27", "maikfill1", "maikfill7"], "mcc-health-promotion": ["maik24", "maik25", "maik27", "maikfill4", "maikfill7", "maiknuc8"], "mcc-professional-behaviours": ["maik25", "maik27", "maikfill1", "maikfill7", "maiknuc8"], "community-medicine": ["maiktopic1", "ck2", "gap1013e", "maiknuc1", "maiknuc2"], paediatrics: ["maiktopic1", "ck2", "gap1013c", "gap1013e", "maiknuc2"], surgery: ["maiktopic1", "ck2", "gap1013c", "maikbook1", "maiknuc2"], "ss-biostatistics": ["maiktopic1", "maikss433", "maikss434", "maikss435", "maikss436", "maikss437", "maikss438", "maiknuc5"], "ss-surgical-oncology": ["maikss4", "maikss88", "maikss211", "maikss212", "maikss213", "maikss214", "maikss215", "maikss216", "maikss217", "maiknuc10"], "ss-neurosurgery": ["maikss3", "maikss272", "maiknuc10"], "ss-urology": ["maikss2", "maikss273", "maikss274", "maiknuc10"], "ss-general-surgery": ["maikss1", "maiknuc10"], "ss-paediatric-surgery": ["maikss6", "maikss34", "maikss85", "maikss86", "maikss254", "maikss255", "maikss256", "maikss257", "maikss258"], "ss-plastic-surgery": ["maikss7", "maikss33", "maikss83", "maikss84", "maikss259", "maikss260", "maikss261", "maikss262", "maikss263", "maiknuc10"], "ss-vascular-surgery": ["maikss8", "maikss32", "maikss81", "maikss82", "maikss246", "maikss247", "maikss248", "maikss249", "maikss250", "maikss275", "maikss276", "maikss278", "maiknuc10"], "ss-neonatology": ["maikss9", "maikss49", "maikss50", "maikss96", "maikss390", "maikss391", "maikss392", "maikss442"], "ss-paediatric-cardiology": ["maikss10", "maikss37", "maikss38", "maikss90", "maikss399", "maikss400"], "ss-paediatric-neurology": ["maikss11", "maikss39", "maikss40", "maikss91", "maikss409", "maikss410", "maikss445", "maiknuc10"], "ss-paediatric-nephrology": ["maikss12", "maikss41", "maikss42", "maikss92", "maikss407", "maikss408", "maiknuc10"], "ss-paediatric-gastroenterology": ["maikss13", "maikss43", "maikss44", "maikss93", "maikss403", "maikss404", "maiknuc10"], "ss-paediatric-hepatology": ["maikss14", "maikss45", "maikss46", "maikss94", "maikss405", "maikss406", "maikss444", "maiknuc10"], "ss-paediatric-oncology": ["maikss15", "maikss47", "maikss48", "maikss95", "maikss411", "maikss412", "maikss446", "maikss447", "maiknuc10"], "ss-paediatric-critical-care": ["maikss16", "maikss35", "maikss36", "maikss89", "maikss401", "maikss402", "maikss443", "maiknuc10", "maiknuc11"], "ss-gynaecological-oncology": ["maikss17", "maikss69", "maikss77", "maikss367", "maikss368", "maikss439"], "ss-reproductive-medicine": ["maikss18", "maikss70", "maikss78", "maikss428", "maikss429", "maikss449", "maiknuc11"], "ss-hand-surgery": ["maikss19", "maikss71", "maikss79", "maikss264", "maikss265", "maikss266", "maikss267", "maikss268", "maikss269", "maikss270", "maikss271", "maiknuc11"], "ss-paediatric-orthopaedics": ["maikss20", "maikss72", "maikss80", "maikss413", "maikss414", "maikss448", "maiknuc11"], "ss-cardiac-anaesthesia": ["maikss21", "maikss65", "maikss73", "maikss300", "maikss301", "maikss346", "maiknuc11"], "ss-neuroanaesthesia": ["maikss22", "maikss66", "maikss74", "maikss393", "maikss394", "maiknuc11"], "ss-transplant-anaesthesia": ["maikss23", "maikss67", "maikss75", "maikss342", "maikss343", "maikss430", "maikss431", "maiknuc11"], "ss-paediatric-anaesthesia": ["maikss24", "maikss68", "maikss76", "maikss97", "maikss340", "maikss341", "maikss397", "maikss398", "maiknuc11"], "ss-head-neck-surgery": ["maikss25", "maikss63", "maikss64", "maikss100", "maikss376", "maikss377", "maikss440", "maiknuc11"], "ss-onco-pathology": ["maikss26", "maikss61", "maikss62", "maikss99", "maikss395", "maikss396", "maiknuc11"], "ss-virology": ["maikss27", "maikss59", "maikss60", "maikss98", "maikss344", "maikss345", "maikss432", "maiknuc11"], "ss-clinical-pharmacology": ["maikss28", "maikss51", "maikss52", "maikss101", "maikss105", "maikss106", "maikss107", "maiknuc11"], "ss-geriatric-mental-health": ["maikss29", "maikss53", "maikss54", "maikss102", "maikss108", "maikss109", "maikss110", "maiknuc11"], "ss-child-adolescent-psychiatry": ["maikss30", "maikss55", "maikss56", "maikss103", "maikss111", "maikss112", "maikss277"], "ss-ctvs": ["maikss5", "maikss31", "maikss57", "maikss58", "maikss87", "maikss104", "maikss251", "maikss252", "maikss253", "maiknuc10"], ophthalmology: ["maiktopic1", "maiknuc2"], biochemistry: ["maiktopic1", "maikbook1"], "ss-infectious-diseases": ["maiktopic1", "maik26", "maikfill0", "maikfill2", "maikss280", "maiknuc4", "maiknuc5"], "ss-medical-oncology": ["maik26", "maikfill6", "maiknuc4", "maiknuc5"], "ss-rheumatology-immunology": ["maik26", "maikfill6", "maikss279", "maiknuc4", "maiknuc5"], microbiology: ["maiktopic1"], "obstetrics-gynaecology": ["maiktopic1", "ck2", "gap1013b", "gap1013c", "maikbook2", "maiknuc2"], psychiatry: ["ck2", "gap1013f", "maiknuc2"], dermatology: ["gap1013f", "maikbook2", "maiknuc2"], physiology: ["maiktopic1", "maikbook1", "maiknuc2"], "mrcp-basic-science": ["maik18", "maik19", "maiknuc10"], "mrcp-cardiology": ["maik18", "maik19", "maikimg10", "maiknuc8"], "mrcp-dermatology": ["maik18", "maik19", "maikimg10", "maiknuc10"], "mrcp-endocrinology": ["maik18", "maik19", "maikimg10", "maiknuc9"], "mrcp-gastroenterology": ["maik18", "maik19", "maikimg10", "maiknuc8", "maiknuc9"], "mrcp-geriatrics": ["maik18", "maik19", "maiknuc2", "maiknuc7", "maiknuc10"], "mrcp-haematology-oncology": ["maik18", "maik19", "maikimg10", "maiknuc10"], "mrcp-infectious-diseases": ["maik18", "maik19", "maiknuc5", "maiknuc10"], "mrcp-nephrology": ["maik18", "maik19", "maikimg10", "maiknuc9"], "mrcp-neurology": ["maik18", "maik19", "maikimg10", "maikfill6", "maiknuc8", "maiknuc9"], "mrcp-ophthalmology": ["maik18", "maik19", "maiknuc10"], "mrcp-pharmacology": ["maik18", "maik19", "gap1013d", "gap1013e", "maiknuc6", "maiknuc10"], "mrcp-psychiatry": ["maik18", "maik19", "maiknuc10"], "mrcp-respiratory": ["maik18", "maik19", "maikimg10", "maiknuc8"], "mrcp-rheumatology": ["maik18", "maik19", "maikimg10", "gap1013f", "maiknuc5", "maiknuc8", "maiknuc9", "maiknuc10"], "mrcp-statistics": ["maik18", "maik19", "maiknuc10"], "plab-biochemistry": ["maikfill1"], "plab-dermatology": ["maikfill1", "maikfill7", "gap1013f"], "mrcs-radiology": ["maikfill2", "maiknuc6"], "plab-physiology": ["maikfill3", "maikfill8", "maiknuc6"], "plab-psychiatry": ["maikfill4", "maikfill8", "maikfill9", "gap1013f", "maiknuc6"], "ss-general-medicine": ["maikfill5", "maiknuc2", "maiknuc3"], "mrcs-anaesthesia": ["maikfill6", "maiknuc6"], "mrcs-medicine": ["maikfill6", "maiknuc6"], "mrcs-pharmacology": ["maikfill6", "maiknuc6"], "plab-pharmacology": ["maikfill6", "maiknuc6"], "plab-radiology": ["maikfill6", "maiknuc6"], "ss-neurology": ["maikfill6", "maikss282", "maikss283", "maiknuc3", "maiknuc4", "maiknuc12"], "ss-gastroenterology": ["maikss319", "maikss320", "maikss321", "maikss322", "maikss323", "maikss324", "maikss325", "maikss326", "maikss327", "maikss328", "maikss329", "maikss365", "maikss366", "maiknuc2", "maiknuc4"], "ss-haematology": ["maikss330", "maikss331", "maikss332", "maikss333", "maikss334", "maikss335", "maikss336", "maikss337", "maikss338", "maikss339", "maikss369", "maikss370", "maikss371", "maikss372", "maikss373", "maikss374", "maikss375", "maiknuc4"], "ss-hepatology": ["maikss378", "maikss379", "maikss380", "maikss381", "maikss382", "maikss383", "maikss384", "maikss385", "maikss386", "maikss387", "maikss388", "maikss389", "maikss441", "maiknuc4"], "anatomy": ["maiknuc1"], "biochemistry": ["maiknuc1"], "forensic-medicine": ["maiknuc1"], "medicine": ["maiknuc1"], "microbiology": ["maiknuc1"], "paediatrics": ["maiknuc1"], "pathology": ["maiknuc1"], "pharmacology": ["maiknuc1"], "physiology": ["maiknuc1"], "ent": ["maiknuc2"], "orthopaedics": ["maiknuc2"], "mrcs-anatomy": ["maiknuc6"], "mrcs-orthopaedics": ["maiknuc6"], "mrcs-surgery": ["maiknuc6"], "plab-anaesthesia": ["maiknuc6"], "plab-anatomy": ["maiknuc6"], "plab-community-medicine": ["maiknuc6"], "plab-medicine": ["maiknuc6"], "plab-microbiology": ["maiknuc6"], "plab-ophthalmology": ["maiknuc6"], "plab-pathology": ["maiknuc6"], "plab-surgery": ["maiknuc6"]};
 
   /* MaiK overlays: generic discovery of published waves (maik1, maik2, ...) so later waves need NO app code changes.
      Pointer: overlay/maik/index.json (Cache-Control: max-age=300) -> manifest: "manifest-<hash>.json" (immutable, cached in IndexedDB).
@@ -951,7 +1042,7 @@
   }
   // A module's questions: the bank file plus its overlay items (mergeOverlay). A bank failure with overlay items still
   // gives the overlay items; with none, the failure stands.
-  function loadModule(sid, mid) {
+  function loadModuleSingle(sid, mid) {
     var k = "mod:" + sid + "/" + mid;
     if (st.mem[k]) return Promise.resolve(st.mem[k]);
     var bankErr = null, miss = { n: 0 };
@@ -1009,6 +1100,53 @@
     if (fx.img) { it.img = fx.img.slice(); it.imgPlace = fx.imgPlace === "exp" ? "exp" : "stem"; delete it.credit; delete it.licence; }
     it._fx = fx.ts || 1;
     return it;
+  }
+  /* A cross-listed group's questions: the union of every member's bank file and overlays through the same bank
+     client (loadBank/loadOverlay, same IndexedDB cache; a missing member file adds nothing, the bank gate fails
+     open as before). Cached once under the group's id, so every entry subject shares it offline; the exact union
+     counts are written back to every loaded member subject's row. Items keep their own ids and carry the group's
+     id, so decks, stars, mistakes, bookmarks and share links match from every entry point. */
+  function loadXGroup(sid, g) {
+    var k = "mod:x:" + g.id;
+    if (st.mem[k]) return Promise.resolve(st.mem[k]);
+    var bankErr = null, miss = { n: 0 };
+    return Promise.all((g.members || []).map(function (m) {
+      return Promise.all([
+        loadBank(m[0], m[1]).then(null, function (e) { bankErr = bankErr || e; return []; }),
+        loadOverlay(m[0], m[1], miss).then(null, function () { miss.n++; return []; })
+      ]);
+    })).then(function (rs) {
+      var banks = rs.map(function (r) { return r[0]; }), ovs = [];
+      rs.forEach(function (r) { ovs.push(r[1]); });
+      var bankU = unionItems(banks), items = markLevels(unionItems([bankU].concat(ovs)));
+      if (!items.length && bankErr) throw bankErr;
+      items.forEach(function (it) { it._s = sid; it._m = g.id; });
+      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+      writeBackXCounts(g, bankU, unionItems(ovs));
+      return items;
+    });
+  }
+  // The exact union counts of a group just read, written to every loaded member subject's row: bank items and
+  // overlay-only items under the same rule the union keeps them (first id or stem wins, flagged or not), flagged
+  // keys left out of the numbers like the build counts.
+  function writeBackXCounts(g, bankU, ovU) {
+    var seenId = {}, seenStem = {}, nb = 0, nov = 0;
+    function clean(it) { return !!it && !(it.flags && it.flags.length); }
+    function mark(it) { if (it.id != null) seenId[it.id] = 1; var st = normStem(it.q); if (st) seenStem[st] = 1; }
+    function dup(it) { if (it.id != null && seenId[it.id]) return true; var st = normStem(it.q); return !!(st && seenStem[st]); }
+    (bankU || []).forEach(function (it) { if (!it) return; mark(it); if (clean(it)) nb++; });
+    (ovU || []).forEach(function (it) { if (!it || dup(it)) return; mark(it); if (clean(it)) nov++; });
+    (g.members || []).forEach(function (m) {
+      var ix = st.ix[m[0]], t = ix && xRowIn(ix, g.id);
+      if (t) { t.count = nb; t.ov = nov; t.all = nb + nov; }
+    });
+  }
+  // A module's questions, from any subject: a cross-listed id loads the union, anything else its own file.
+  function loadModule(sid, mid) {
+    return loadXlist().then(function () {
+      var g = xgroupById(st.xl || [], mid);
+      return g ? loadXGroup(sid, g) : loadModuleSingle(sid, mid);
+    });
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -1370,7 +1508,9 @@
     // A sheet over the runner (Ask MaiK, share, the Pro limit) stops the per-question clock; closing it starts it again.
     try { new G.MutationObserver(function () { var r = st.run; if (r && r.qc && r.qc.used && !r.done) { syncClock(r); tlSync(r); } }).observe(root, { childList: true }); } catch (e) {}
     root.addEventListener("input", function (e) {
-      if (!e.target || e.target.id !== "pnSearch") return;
+      if (!e.target) return;
+      if (e.target.id === "pnBmSearch") return bmSearchInput(e.target.value);
+      if (e.target.id !== "pnSearch") return;
       srch.q = e.target.value;
       if (srch.timer) G.clearTimeout(srch.timer);
       srch.timer = G.setTimeout(runSearch, 250);
@@ -1734,7 +1874,7 @@
       subs.map(function (sb) { return tile(sb, null); }).join("") + "</div></div>");
     Promise.all(subs.map(function (sb) { return loadIndex(sb.id); })).then(function () {
       if (!st.open || st.stack[st.stack.length - 1] !== renderSsAll) return;
-      var grid = root().querySelector("#pnGrid");
+      var grid = root && root.querySelector("#pnGrid");
       if (grid) grid.innerHTML = subs.map(function (sb) { return tile(sb, st.ix[sb.id]); }).join("");
     });
   }
@@ -1987,6 +2127,10 @@
       var seg = function (k, n) { return n ? '<i class="' + k + '" style="flex-grow:' + n + '"></i>' : ""; };
       var head = '<section class="pn-subhead" style="--h:' + subjHue(sid) + '"><div class="pn-subtop"><span class="pn-ic" aria-hidden="true">' + subjIco(sid) + "</span>" + mring(dpct, dpct + "%") + '</div><span class="pn-tb"><b>' + done + " of " + mods.length + " modules completed</b><small>" + (q ? fmt(q) + " MCQs" : "No questions in this subject for this exam yet") + (due ? " · " + fmt(due) + " due" : "") + "</small></span>" +
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
+      // Cross-listed modules (prep/taxonomy/crosslist.json): the same disease taught in other subjects, in this
+      // subject's list under its own title with the union count. Same rows, same styles, nothing new to learn.
+      var xl = filterModules(ix.topics.filter(function (t) { return t.group === "xlist"; }), prog, st.filter, s.exam);
+      if (xl.length) html += '<h2 class="pn-sec">Cross-listed</h2><ol class="pn-mods">' + xl.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
       if (mixed && mixed.count && st.filter === "all") html += '<h2 class="pn-sec">More</h2><ol class="pn-mods">' + modRow(sid, mixed, prog, s, null) + "</ol>";
       var box = root.querySelector("#pnSub");
@@ -2029,7 +2173,17 @@
       '<button type="button" class="pn-btn" data-act="start" data-k="exam">' + ico("clock") + " Timed test: " + Math.min(SESSION, n) + " questions, " + Math.round(Math.min(SESSION, n) * ex.sec / 60) + " min</button>" +
       '<p class="pn-mut pn-small">Practice marks each answer at once with its explanation. A timed test marks everything at the end. Every answer schedules the question for spaced review.</p></section></div>'));
     st.cur = { s: sid, m: mid };
-    if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
+    // Cross-listed module: lessons stay single-copy under the member modules; mount the first member that has one
+    // (a link, never a copy). Anything else mounts its own module as before.
+    var xg = xgroupById(st.xl || [], mid);
+    if (xg && G.PREP_LESSONS && G.PREP_LESSONS.index && (G.PREP_LESSONS._pure || {}).lessonsFor) {
+      G.PREP_LESSONS.index().then(function (lix) {
+        var LF = G.PREP_LESSONS._pure.lessonsFor, tgt = null, i;
+        for (i = 0; i < (xg.members || []).length && !tgt; i++) if (LF(lix, xg.members[i][1]).length) tgt = xg.members[i];
+        var mm = tgt || xg.members[0];
+        if (mm && root.querySelector("#pnLsnSlot")) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), mm[0], mm[1], HOST);
+      });
+    } else if (G.PREP_LESSONS) G.PREP_LESSONS.mount(root.querySelector("#pnLsnSlot"), sid, mid, HOST);
     if (G.PREP_NUCLEUS360) G.PREP_NUCLEUS360.mountModule(root.querySelector("#pnN360Slot"), sid, mid, HOST);
     if (G.PREP_PYQ) G.PREP_PYQ.mount(root.querySelector("#pnPyqSlot"), sid, mid, HOST);
     if (G.PREP_FLASH) G.PREP_FLASH.mount(root.querySelector("#pnCardSlot"), sid, mid, HOST);
@@ -2700,6 +2854,8 @@
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
+    // Attempt history for the revision library: counted answers only, bookmarks untouched.
+    if (chosen >= 0 && s.bm && s.bm[it.id]) bmNoteAttempt(s.bma || (s.bma = {}), it.id, ok, Date.now());
     save();
   }
   function answer(k) {
@@ -2940,6 +3096,15 @@
     st.stack.push(r.rvView);
     rerender();
   }
+  // Unbookmark (or re-bookmark) without leaving the review screen.
+  function toggleReviewBookmark() {
+    var r = st.run, P = r && r.rvp; if (!r || !P) return;
+    var it = r.items[P.L[P.pos]], s = load();
+    if (!it || it._s === "deck" || it._py) return;
+    var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
+    save(); paintReview();
+    toast(added ? "Question bookmarked" : "Bookmark removed");
+  }
   function rvGo(dir, viaSwipe) {
     var r = st.run, P = r && r.rvp; if (!P) return false;
     var np = P.pos + dir; if (np < 0 || np >= P.L.length) return false;
@@ -2963,7 +3128,9 @@
       whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
         return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + lfOpt(it.o[k]) + "</small><span>" + xfInline(xo.r[k], it) + "</span></p></li>";
       }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_REASON && G.PREP_REASON.kmSlot ? G.PREP_REASON.kmSlot(it) : "");
-    paint(bar("Review", esc(r.title), "back", rid ? G.PREP_IDS.shareBtn(rid) : "") + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+    var sRv = load(), rvBm = it._s !== "deck" && !it._py && !!(sRv.bm && sRv.bm[it.id]);
+    var rvActs = (it._s === "deck" || it._py ? "" : '<button type="button" class="pn-ib' + (rvBm ? " on" : "") + '" data-act="rvbookmark" aria-pressed="' + rvBm + '" aria-label="' + (rvBm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", rvBm) + "</button>") + (rid ? G.PREP_IDS.shareBtn(rid) : "");
+    paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
       (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
@@ -3022,7 +3189,7 @@
       return loadModule(x.s, x.m).then(function (items) { done++; if (onStep) onStep(done, pairs.length); return { s: x.s, m: x.m, items: items }; }, function () { done++; return { s: x.s, m: x.m, items: [] }; });
     }));
   }
-  function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
+  function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); if (!r && st.xl) { var g = xgroupById(st.xl, mid); if (g && g.members && g.members[0]) r = g.members[0][0]; } return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }
   function subjectByCode(code) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { if (sb.code === code) r = sb.id; }); }); return r; }
   /* moduleTitleOf(mid, tax): the taxonomy display name ("Gametogenesis"), for the Know more fallback
      rows ("Learn this module" names the module, never a possibly off-topic article). "" when unknown. */
@@ -3236,25 +3403,383 @@
     }, function () { toast("The question did not load. Check the connection and try again."); });
   }
 
-  /* ---------- bookmarks, report ---------- */
+  /* ---------- bookmarks, report ----------
+     Pure core (also exported for tests): the map key is the stable question id, never a display
+     index; the value stays the [subject, module, savedAtMs] triple so old bookmarks keep loading.
+     Notes and tags ride sidecar maps (Phase 2), never inside this triple. */
+  function bmHas(bm, id) { return !!(bm && Object.prototype.hasOwnProperty.call(bm, id)); }
+  function bmToggle(bm, id, s, m, now) {
+    if (bmHas(bm, id)) { delete bm[id]; return false; }
+    bm[id] = [s, m || "", now == null ? Date.now() : now];
+    return true;
+  }
+  function bmTs(b, i) { return (b && +b[i]) || 0; }
+  // Newest first; entries without a timestamp sort last, never lost.
+  function bmSortedIds(bm) {
+    bm = bm || {};
+    return Object.keys(bm).sort(function (a, b) { return bmTs(bm[b], 2) - bmTs(bm[a], 2); });
+  }
+  // Module pairs for a page of ids (at most BM_FILES module files per page, so one slow
+  // connection never blocks the library) plus the wanted-id set.
+  function bmPairs(bm, ids, maxFiles) {
+    var pairs = [], seen = {}, want = {}, cap = maxFiles == null ? BM_FILES : maxFiles;
+    (ids || []).forEach(function (id) { var b = (bm || {})[id]; if (!b) return; want[id] = 1; var k = b[0] + "|" + b[1]; if (!seen[k]) { seen[k] = 1; if (pairs.length < cap) pairs.push({ s: b[0], m: b[1] }); } });
+    return { pairs: pairs, want: want };
+  }
+  function bmStats(bm, mt, now) {
+    var ids = Object.keys(bm || {}), wrong = 0, fresh = 0, cut = (now == null ? Date.now() : now) - BM_FRESH_MS;
+    ids.forEach(function (id) { if (mt && mt[id]) wrong++; if (bmTs((bm || {})[id], 2) >= cut) fresh++; });
+    return { total: ids.length, wrong: wrong, fresh: fresh };
+  }
+  // Plain-text card preview of a stem (content itself always loads from the bank, never the store).
+  function bmStem(q, n) {
+    var t = q == null ? "" : (typeof q === "object" ? (q.en || "") : String(q));
+    t = t.replace(/\s+/g, " ").trim(); n = n || 140;
+    return t.length > n ? t.slice(0, n - 1).replace(/\s+$/, "") + "…" : t;
+  }
+  /* ---------- notes and tags (Phase 2): sidecars of bm, never inside its triple.
+     bmx: { id: { n: note, tg: [tagIds], u: updatedAtMs } }; absent = no note or tags.
+     bmt: { tagId: { n: name, c: hue } } tag registry. Both ride prep-sync MAPS like bm. */
+  function bmIsDefaultTag(id) { return BM_TAGS.some(function (t) { return t[0] === id; }); }
+  // Registry with the suggested defaults present (never clobbers a renamed default).
+  function bmEnsureTags(bmt) {
+    bmt = bmt || {};
+    BM_TAGS.forEach(function (t) { if (!bmt[t[0]]) bmt[t[0]] = { n: t[1], c: t[2] }; });
+    return bmt;
+  }
+  // Defaults first, then custom tags A-Z.
+  function bmTagList(bmt) {
+    bmt = bmEnsureTags(bmt);
+    var custom = Object.keys(bmt).filter(function (id) { return !bmIsDefaultTag(id); });
+    custom.sort(function (a, b) { return String(bmt[a].n || "").localeCompare(String(bmt[b].n || "")); });
+    return BM_TAGS.map(function (t) { return t[0]; }).concat(custom);
+  }
+  function bmEntry(bmx, id) { var e = (bmx || {})[id]; return e ? { n: e.n || "", tg: (e.tg || []).slice() } : null; }
+  function bmTagId(name, now) {
+    var slug = String(name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 24);
+    return "u-" + (slug || "tag") + "-" + (now == null ? Date.now() : now).toString(36);
+  }
+  function bmAddTag(bmt, name, now) {
+    bmt = bmEnsureTags(bmt);
+    name = String(name || "").replace(/\s+/g, " ").trim().slice(0, 40);
+    if (!name) return null;
+    var dup = Object.keys(bmt).filter(function (id) { return (bmt[id].n || "").toLowerCase() === name.toLowerCase(); })[0];
+    if (dup) return dup;
+    var hues = [168, 212, 36, 4, 280, 320], id = bmTagId(name, now);
+    bmt[id] = { n: name, c: hues[Object.keys(bmt).length % hues.length] };
+    return id;
+  }
+  // Sets the note (empty clears it); an entry with neither note nor tags is dropped.
+  function bmSetNote(bmx, id, note, now) {
+    bmx = bmx || {};
+    var e = bmx[id] || { tg: [] };
+    note = String(note == null ? "" : note).replace(/\s+/g, " ").trim().slice(0, BM_NOTE_MAX);
+    if (!note && !(e.tg && e.tg.length)) { delete bmx[id]; return bmx; }
+    bmx[id] = { n: note, tg: (e.tg || []).slice(), u: now == null ? Date.now() : now };
+    return bmx;
+  }
+  function bmSetTags(bmx, id, tagIds, now) {
+    bmx = bmx || {};
+    var e = bmx[id] || { n: "" }, seen = {};
+    var tg = (tagIds || []).filter(function (t) { return t && !seen[t] && (seen[t] = 1); });
+    if (!tg.length && !e.n) { delete bmx[id]; return bmx; }
+    bmx[id] = { n: e.n || "", tg: tg, u: now == null ? Date.now() : now };
+    return bmx;
+  }
+  function bmToggleTag(bmx, id, tagId, now) {
+    var e = bmEntry(bmx, id) || { n: "", tg: [] }, i = e.tg.indexOf(tagId);
+    if (i >= 0) e.tg.splice(i, 1); else e.tg.push(tagId);
+    return { on: i < 0, bmx: bmSetTags(bmx, id, e.tg, now) };
+  }
+  /* Per-question attempt roll-up for bookmarked questions only (Phase 3): raw answers stay in
+     run history and saved sets; bma keeps { c: attempts, w: wrong, l: lastAtMs, ok: lastCorrect }.
+     Bookmarks are never removed by answering. */
+  function bmNoteAttempt(bma, id, ok, now) {
+    bma = bma || {};
+    var e = bma[id] || { c: 0, w: 0, l: 0, ok: false };
+    e.c++; if (!ok) e.w++; e.l = now == null ? Date.now() : now; e.ok = !!ok;
+    bma[id] = e;
+    return bma;
+  }
+  // Drops custom tags no bookmark references; defaults always stay.
+  function bmPruneTags(bmt, bmx) {
+    bmt = bmt || {}; bmx = bmx || {};
+    var used = {};
+    Object.keys(bmx).forEach(function (id) { ((bmx[id] || {}).tg || []).forEach(function (t) { used[t] = 1; }); });
+    Object.keys(bmt).forEach(function (id) { if (!bmIsDefaultTag(id) && !used[id]) delete bmt[id]; });
+    return bmt;
+  }
+  /* Library search, filter and sort (offline: runs against the precomputed aux map, so unloaded
+     questions still match subject, topic, tags and notes).
+     aux[id] = { t:textLower, s:subjLower, sid, tp:topicLower, tid, tg:[tagIds], tn:[tagNamesLower],
+     n:noteLower, wrong, noted, unatt, w, l, saved }. f = { q, sub, topic, tag, status, sort }. */
+  function bmQuery(ids, aux, f) {
+    f = f || {};
+    var words = String(f.q || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w; });
+    var out = (ids || []).filter(function (id) {
+      var a = (aux || {})[id]; if (!a) return false;
+      if (f.sub && f.sub !== "all" && a.sid !== f.sub) return false;
+      if (f.topic && f.topic !== "all" && a.tid !== f.topic) return false;
+      if (f.tag && f.tag !== "all" && a.tg.indexOf(f.tag) < 0) return false;
+      if (f.status === "wrong" && !a.wrong) return false;
+      if (f.status === "noted" && !a.noted) return false;
+      if (f.status === "new" && !a.unatt) return false;
+      if (words.length) {
+        var hay = a.t + " " + a.s + " " + a.tp + " " + a.tn.join(" ") + " " + a.n;
+        for (var i = 0; i < words.length; i++) if (hay.indexOf(words[i]) < 0) return false;
+      }
+      return true;
+    });
+    var sort = f.sort || "new";
+    out.sort(function (x, y) {
+      var ax = aux[x], ay = aux[y], kx, ky;
+      if (sort === "old") return (ax.saved || 0) - (ay.saved || 0);
+      if (sort === "az") { kx = ax.s + " " + ax.tp + " " + ax.t; ky = ay.s + " " + ay.tp + " " + ay.t; return kx < ky ? -1 : kx > ky ? 1 : (ay.saved || 0) - (ax.saved || 0); }
+      if (sort === "missed") return ((ay.w || 0) - (ax.w || 0)) || ((ay.saved || 0) - (ax.saved || 0));
+      if (sort === "stale") return ((ax.l || 0) - (ay.l || 0)) || ((ay.saved || 0) - (ax.saved || 0));
+      return (ay.saved || 0) - (ax.saved || 0);
+    });
+    return out;
+  }
   function toggleBookmark() {
     var r = st.run, it = r && r.items[r.i], s = load(); if (!it || it._s === "deck") return;
-    if (s.bm[it.id]) delete s.bm[it.id]; else s.bm[it.id] = [it._s, it._m || it.t, Date.now()];
+    var added = bmToggle(s.bm, it.id, it._s, it._m || it.t, Date.now());
     save(); renderRun();
+    toast(added ? "Question bookmarked" : "Bookmark removed");
+  }
+  // One card per bookmarked question: preview (once its module file loads), subject and topic,
+  // saved date, personal note and tags, an "Incorrect before" flag from the mistakes map,
+  // Open, Note and Remove actions. Offline-first: cards paint at once from the store; previews
+  // patch in when their module loads. Ids whose module never loads keep a fallback row.
+  function bmPlain(v) { return v && typeof v === "object" ? String(v.en || "") : String(v == null ? "" : v); }
+  // Search index for the library (lower-cased haystack fields per id; unloaded questions carry
+  // empty text and still match subject, topic, tags and notes).
+  function bmAux(s, ids) {
+    var aux = {}, cache = st.bmItems || {}, bmx = s.bmx || {}, bmt = bmEnsureTags(s.bmt), bma = s.bma || {};
+    ids.forEach(function (id) {
+      var b = s.bm[id]; if (!b) return;
+      var it = cache[id], sb = subjectById(b[0]), t = topicOf(b[0], b[1]), e = bmEntry(bmx, id), at = bma[id];
+      var text = it ? (bmStem(it.q, 500) + " " + (it.o || []).join(" ") + " " + bmStem(it.exp, 300)) : "";
+      var tgs = e ? e.tg.filter(function (tg) { return bmt[tg]; }) : [];
+      aux[id] = { t: text.toLowerCase(), s: bmPlain(sb && sb.name).toLowerCase(), sid: b[0],
+        tp: (t ? bmPlain(t.title) : bmPlain(b[1])).toLowerCase(), tid: b[1], tg: tgs,
+        tn: tgs.map(function (tg) { return bmPlain(bmt[tg].n).toLowerCase(); }),
+        n: (e && e.n ? e.n : "").toLowerCase(),
+        wrong: !!(s.mt && s.mt[id]), noted: !!(e && e.n), unatt: !at,
+        w: at ? at.w || 0 : 0, l: at ? at.l || 0 : 0, saved: bmTs(b, 2) };
+    });
+    return aux;
+  }
+  function bmState() {
+    if (!st.bmF) st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
+    return { q: st.bmQ || "", f: st.bmF };
+  }
+  function bmPageIds(s) {
+    var ids = bmSortedIds(s.bm), aux = bmAux(s, ids), bst = bmState();
+    return { all: ids, aux: aux, list: bmQuery(ids, aux, { q: bst.q, sub: bst.f.sub, topic: bst.f.topic, tag: bst.f.tag, status: bst.f.status, sort: bst.f.sort }) };
+  }
+  function bmFiltered(bst) {
+    return !!(bst.q || bst.f.sub !== "all" || bst.f.topic !== "all" || bst.f.tag !== "all" || bst.f.status !== "all");
+  }
+  function bmChip(act, v, on, label, id) {
+    return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '"' + (id ? ' data-id="' + esc(id) + '"' : "") + ' data-v="' + esc(v) + '">' + esc(label) + "</button>";
+  }
+  function bmTagPills(s, id) {
+    var e = bmEntry(s.bmx, id), bmt = bmEnsureTags(s.bmt);
+    if (!e || !e.tg.length) return "";
+    return e.tg.filter(function (tg) { return bmt[tg]; }).map(function (tg) {
+      return '<span class="pn-st pn-bmtag">' + ico("tag") + esc(bmPlain(bmt[tg].n)) + "</span>";
+    }).join("");
+  }
+  function bmCard(s, id) {
+    var b = s.bm[id]; if (!b) return "";
+    var t = topicOf(b[0], b[1]), sb = subjectById(b[0]), it = (st.bmItems || {})[id];
+    var e = bmEntry(s.bmx, id);
+    var sub = (sb ? tx(sb.name) : esc(b[0])) + " · " + (t ? tx(t.title) : esc(b[1])) + " · saved " + (dayMonth(bmTs(b, 2)) || "earlier");
+    var editing = st.bmEdit === id;
+    return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(b[0]) + '" aria-hidden="true">' + subjIco(b[0]) + '</span>' +
+      '<span class="pn-mb"><b>' + (it ? esc(bmStem(it.q)) : (t ? tx(t.title) : esc(b[1]))) + "</b><small>" + sub + (it ? "" : " · preview needs connection") + "</small>" +
+      (e && e.n ? '<span class="pn-bmnote">“' + esc(e.n) + '”</span>' : "") + bmTagPills(s, id) +
+      (s.mt && s.mt[id] ? '<span class="pn-st">Incorrect before</span>' : "") + "</span>" +
+      '<span class="pn-bma"><button type="button" class="pn-ib" data-act="bmopen" data-id="' + esc(id) + '" aria-label="Open question">' + ico("chev") + "</button>" +
+      '<button type="button" class="pn-ib' + (e && (e.n || e.tg.length) ? " on" : "") + '" data-act="bmnote" data-id="' + esc(id) + '" aria-expanded="' + editing + '" aria-label="Edit note and tags">' + ico("tag") + "</button>" +
+      '<button type="button" class="pn-ib on" data-act="bmremove" data-id="' + esc(id) + '" aria-pressed="true" aria-label="Remove bookmark">' + ico("bm", true) + "</button></span></div>" +
+      (editing ? bmEditor(s, id) : "") + "</li>";
+  }
+  // Inline note and tag editor for one card. Edits collect in st.bmDraft until Save, so
+  // toggling tags never loses typed text (bmHarvest copies the fields first).
+  function bmEditor(s, id) {
+    var d = st.bmDraft && st.bmDraft.id === id ? st.bmDraft : { id: id, n: "", tg: [], nt: "" };
+    var bmt = bmEnsureTags(s.bmt);
+    return '<div class="pn-bmedit"><label class="pn-bmedit-label" for="bmNoteEd">Personal note</label>' +
+      '<textarea id="bmNoteEd" class="pn-in" rows="3" maxlength="500">' + esc(d.n) + "</textarea>" +
+      '<p class="pn-bmedit-label" id="bmTagsLab">Tags</p><div class="pn-wrap" role="group" aria-labelledby="bmTagsLab">' +
+      bmTagList(bmt).map(function (tg) {
+        return bmChip("bmtag", tg, d.tg.indexOf(tg) >= 0, bmPlain(bmt[tg].n), id);
+      }).join("") + "</div>" +
+      '<div class="pn-bmnew"><input id="bmTagNew" class="pn-in" maxlength="40" autocomplete="off" placeholder="New tag name" aria-label="New tag name" value="' + esc(d.nt) + '">' +
+      '<button type="button" class="pn-btn sm" data-act="bmtagadd" data-id="' + esc(id) + '">Add</button></div>' +
+      '<div class="pn-bmrow"><button type="button" class="pn-btn pri" data-act="bmsave" data-id="' + esc(id) + '">' + ico("check") + ' Save</button>' +
+      '<button type="button" class="pn-btn" data-act="bmcancel" data-id="' + esc(id) + '">Cancel</button></div></div>';
+  }
+  function bmHarvest() {
+    var d = st.bmDraft; if (!d || !root) return d;
+    var note = root.querySelector("#bmNoteEd"), nt = root.querySelector("#bmTagNew");
+    if (note) d.n = note.value;
+    if (nt) d.nt = nt.value;
+    return d;
+  }
+  function bmFilterPanel(s, ids) {
+    var bst = bmState(), bmt = bmEnsureTags(s.bmt), subs = {}, topics = {};
+    ids.forEach(function (id) { subs[s.bm[id][0]] = 1; topics[s.bm[id][0] + "|" + s.bm[id][1]] = 1; });
+    var subIds = Object.keys(subs).sort(function (a, b) {
+      var sbA = subjectById(a), sbB = subjectById(b);
+      return bmPlain(sbA && sbA.name).localeCompare(bmPlain(sbB && sbB.name));
+    });
+    var subName = function (sid) { var sb = subjectById(sid); return bmPlain(sb && sb.name) || sid; };
+    var topicName = function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]); return (t ? bmPlain(t.title) : p[1]) || p[1]; };
+    var topicIds = Object.keys(topics).sort(function (a, b) { return topicName(a).localeCompare(topicName(b)); });
+    return '<section class="pn-panel" aria-label="Find saved questions">' +
+      '<label class="pn-sl" for="pnBmSearch"><span class="pn-mut pn-small">Words from the question, topic, tags or notes</span>' +
+      '<span class="pn-srch">' + ico("search") + '<input id="pnBmSearch" class="pn-in" type="search" autocomplete="off" enterkeyhint="search" value="' + esc(bst.q) + '"></span></label>' +
+      '<h2 class="pn-sec">Status</h2><div class="pn-wrap" role="group" aria-label="Filter by status">' +
+      bmChip("bmfs", "all", bst.f.status === "all", "All") + bmChip("bmfs", "wrong", bst.f.status === "wrong", "Incorrect before") +
+      bmChip("bmfs", "new", bst.f.status === "new", "Unattempted") + bmChip("bmfs", "noted", bst.f.status === "noted", "With notes") + "</div>" +
+      '<h2 class="pn-sec">Subject</h2><div class="pn-wrap" role="group" aria-label="Filter by subject">' + bmChip("bmfsub", "all", bst.f.sub === "all", "All") +
+      subIds.map(function (sid) { return bmChip("bmfsub", sid, bst.f.sub === sid, subName(sid)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Topic</h2><div class="pn-wrap" role="group" aria-label="Filter by topic">' + bmChip("bmftopic", "all", bst.f.topic === "all", "All") +
+      topicIds.map(function (k) { return bmChip("bmftopic", k.split("|")[1], bst.f.topic === k.split("|")[1], topicName(k)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Tags</h2><div class="pn-wrap" role="group" aria-label="Filter by tag">' + bmChip("bmftag", "all", bst.f.tag === "all", "All") +
+      bmTagList(bmt).map(function (tg) { return bmChip("bmftag", tg, bst.f.tag === tg, bmPlain(bmt[tg].n)); }).join("") + "</div>" +
+      '<h2 class="pn-sec">Sort</h2><div class="pn-wrap" role="group" aria-label="Sort saved questions">' +
+      bmChip("bmsort", "new", bst.f.sort === "new", "Newest") + bmChip("bmsort", "old", bst.f.sort === "old", "Oldest") + bmChip("bmsort", "az", bst.f.sort === "az", "Topic A-Z") +
+      bmChip("bmsort", "missed", bst.f.sort === "missed", "Most missed") + bmChip("bmsort", "stale", bst.f.sort === "stale", "Least revised") + "</div></section>";
   }
   function renderBookmarks() {
-    var s = load(), ids = Object.keys(s.bm), by = {};
-    ids.forEach(function (id) { var b = s.bm[id]; (by[b[0] + "|" + b[1]] = by[b[0] + "|" + b[1]] || []).push(id); });
+    var s = load(), pg = bmPageIds(s), ids = pg.all, stats = bmStats(s.bm, s.mt, Date.now());
+    var bst = bmState();
+    var filtered = bmFiltered(bst);
+    var shown = Math.min(st.bmShown || BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
+    var nmods = {}; ids.forEach(function (id) { nmods[s.bm[id][0] + "|" + s.bm[id][1]] = 1; }); nmods = Object.keys(nmods).length;
     var nbs = {}; ids.forEach(function (id) { nbs[s.bm[id][0]] = 1; }); nbs = Object.keys(nbs).length;
+    var cache = st.bmItems || {}, pending = page.filter(function (id) { return !cache[id]; }).length;
     paint(bar("Bookmarks", fmt(ids.length) + " saved", "back") + '<div class="pn-body pn-bml">' + (ids.length ?
-      hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + Object.keys(by).length + (Object.keys(by).length === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
+      hband("bm", fmt(ids.length), ids.length === 1 ? "question saved" : "questions saved", "From " + nmods + (nmods === 1 ? " module" : " modules") + " in " + nbs + (nbs === 1 ? " subject" : " subjects") + ". Practise them as one set.") +
+      '<p class="pn-mut pn-small">' + fmt(stats.wrong) + " incorrect before · " + fmt(stats.fresh) + " saved this week.</p>" +
       '<button type="button" class="pn-btn pri" data-act="practicebm">' + ico("play") + (setupOn() ? " Practise bookmarks" : " Practise all bookmarks") + "</button>" + lastBtn("bookmarks", "") +
-      '<ul class="pn-mods">' + Object.keys(by).map(function (k) { var p = k.split("|"), t = topicOf(p[0], p[1]), sb = subjectById(p[0]); var last = 0; by[k].forEach(function (id) { last = Math.max(last, +s.bm[id][2] || 0); }); return '<li><div class="pn-mod static"><span class="pn-ic sm" style="--h:' + subjHue(p[0]) + '" aria-hidden="true">' + subjIco(p[0]) + '</span><span class="pn-mb"><b>' + (t ? tx(t.title) : esc(p[1])) + "</b><small>" + (sb ? tx(sb.name) : "") + (last ? " · last saved " + dayMonth(last) : "") + '</small></span><span class="pn-st" aria-label="' + by[k].length + ' saved">' + by[k].length + "</span></div></li>"; }).join("") + "</ul>"
+      bmFilterPanel(s, ids) +
+      (filtered && pg.list.length ? '<button type="button" class="pn-btn pri" id="pnBmGo" data-act="bmpractice">' + ico("play") + " Practise these " + fmt(pg.list.length) + "</button>" : "") +
+      '<p class="pn-mut pn-small" role="status" id="pnBmCount">' + (filtered || pg.list.length > shown ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "") + "</p>" +
+      '<ul class="pn-mods" id="pnBmCards" aria-label="Saved questions">' + page.map(function (id) { return bmCard(s, id); }).join("") + "</ul>" +
+      (page.length ? "" : '<p class="pn-empty pn-art-bm">No saved questions match. Try fewer filters or other words.</p>') +
+      (pg.list.length > shown ? '<button type="button" class="pn-btn" data-act="bmmore">' + ico("plus") + " Show more (" + fmt(pg.list.length - shown) + " left)</button>" : "") +
+      (pending ? '<p class="pn-mut pn-small" role="status" id="pnBmStatus">Loading previews…</p>' : "")
       : '<p class="pn-empty pn-art-bm">Bookmark a question with the ribbon at the top while practising, and it collects here.</p>') + "</div>");
-    Object.keys(by).forEach(function (k) { var p = k.split("|"); loadIndex(p[0]); });
+    var subs = {}; page.forEach(function (id) { if (s.bm[id]) subs[s.bm[id][0]] = 1; });
+    Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
+    st.bmPage = page;
+    bmFill(page);
+  }
+  // Search-as-you-type path: patches the list and count in place so the search box keeps focus.
+  function bmRefreshList() {
+    if (!st.open || st.stack[st.stack.length - 1] !== renderBookmarks || !root) return;
+    var s = load(), pg = bmPageIds(s), bst = bmState();
+    var filtered = bmFiltered(bst);
+    var shown = Math.min(st.bmShown = BM_PAGE, pg.list.length), page = pg.list.slice(0, shown);
+    var cards = root.querySelector("#pnBmCards"), count = root.querySelector("#pnBmCount");
+    st.bmPage = page;
+    if (cards) patchHtml(cards, page.map(function (id) { return bmCard(s, id); }).join(""));
+    if (count) count.textContent = (filtered || pg.list.length > shown) ? "Showing " + fmt(shown) + " of " + fmt(pg.list.length) + " saved" : "";
+    var goHtml = (filtered && pg.list.length) ? '<button type="button" class="pn-btn pri" id="pnBmGo" data-act="bmpractice">' + ico("play") + " Practise these " + fmt(pg.list.length) + "</button>" : "";
+    var go = root.querySelector("#pnBmGo");
+    if (go && !goHtml && go.parentNode) go.parentNode.removeChild(go);
+    else if (goHtml && (!go || go.textContent !== " Practise these " + fmt(pg.list.length))) {
+      var tmp = D.createElement("div"); tmp.innerHTML = goHtml;
+      if (go) go.parentNode.replaceChild(tmp.firstChild, go);
+      else if (count && count.parentNode) count.parentNode.insertBefore(tmp.firstChild, count);
+    }
+    var empty = root.querySelector("#pnBmEmpty");
+    if (empty) empty.parentNode.removeChild(empty);
+    if (!page.length && cards && cards.parentNode) {
+      var p = D.createElement("p");
+      p.className = "pn-empty pn-art-bm"; p.id = "pnBmEmpty";
+      p.textContent = "No saved questions match. Try fewer filters or other words.";
+      cards.parentNode.insertBefore(p, cards.nextSibling);
+    }
+    var subs = {}; page.forEach(function (id) { if (s.bm[id]) subs[s.bm[id][0]] = 1; });
+    Object.keys(subs).forEach(function (sid) { loadIndex(sid); });
+    bmFill(page);
+  }
+  function bmSearchInput(v) {
+    st.bmQ = v; st.bmEdit = null; st.bmDraft = null;
+    if (st.bmTimer) G.clearTimeout(st.bmTimer);
+    st.bmTimer = G.setTimeout(bmRefreshList, 250);
+  }
+  // Fill the card cache for one page, then patch the list in place when still on screen.
+  // loadMany never rejects (failed modules come back empty), so every outcome ends patched.
+  function bmFill(page) {
+    var s = load(), cache = st.bmItems || (st.bmItems = {});
+    var missing = page.filter(function (id) { return !cache[id] && s.bm[id]; });
+    if (!missing.length) return bmPatch(page);
+    var bp = bmPairs(s.bm, missing, BM_FILES);
+    loadMany(bp.pairs).then(function (lists) {
+      var hid = hidden();
+      lists.forEach(function (l) { l.items.forEach(function (it) { if (bp.want[it.id] && usable(it, hid)) cache[it.id] = it; }); });
+      bmPatch(page);
+    });
+  }
+  function bmPatch(page) {
+    if (!st.open || st.stack[st.stack.length - 1] !== renderBookmarks || st.bmPage !== page) return;
+    var s = load(), el = root && root.querySelector("#pnBmCards"), cache = st.bmItems || {};
+    if (el) patchHtml(el, page.map(function (id) { return bmCard(s, id); }).join(""));
+    var stEl = root && root.querySelector("#pnBmStatus");
+    if (stEl) {
+      var left = page.filter(function (id) { return s.bm[id] && !cache[id]; });
+      if (left.length) stEl.textContent = "Some previews need a connection. Saved questions stay here and open when you are back online.";
+      else if (stEl.parentNode) stEl.parentNode.removeChild(stEl);
+    }
+  }
+  function openBookmark(id) {
+    var s = load(), b = s.bm[id]; if (!b) return;
+    var cached = (st.bmItems || {})[id];
+    if (cached && usable(cached, hidden())) { var t = topicOf(b[0], b[1]); return runQuestions([cached], "study", t ? tx(t.title) : "Bookmarks"); }
+    loadModule(b[0], b[1]).then(function (items) {
+      var it = items.filter(function (x) { return x.id === id; })[0];
+      if (!it || !usable(it, hidden())) return toast("This question is not available.");
+      try { (st.bmItems || (st.bmItems = {}))[id] = it; } catch (e) {}
+      var t2 = topicOf(b[0], b[1]);
+      runQuestions([it], "study", t2 ? tx(t2.title) : "Bookmarks");
+    }, function () { toast("The question did not load. Check the connection and try again."); });
+  }
+  function removeBookmark(id) {
+    var s = load(); if (!bmHas(s.bm, id)) return;
+    delete s.bm[id];
+    if (s.bmx) delete s.bmx[id];
+    if (s.bmt) bmPruneTags(s.bmt, s.bmx);
+    if (st.bmEdit === id) { st.bmEdit = null; st.bmDraft = null; }
+    save(); rerender();
+    toast("Bookmark removed");
+  }
+  function bmRefocus(act, v, id) {
+    if (!root) return;
+    var sel = '[data-act="' + act + '"]' + (id ? '[data-id="' + id + '"]' : "") + (v != null ? '[data-v="' + v + '"]' : "");
+    var el = root.querySelector(sel);
+    if (el && el.focus) try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (x) {} }
+  }
+  function bmFilterTo(act, key, v) {
+    if (!st.bmF) st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
+    st.bmF[key] = v; st.bmShown = BM_PAGE; st.bmEdit = null; st.bmDraft = null;
+    rerender();
+    bmRefocus(act, v);
+  }
+  // The quiz pool for bookmarks: every saved question, or the library's filtered selection
+  // (st.bmScope, set by "Practise these"), intersected with what is still saved.
+  function bmPoolIds(s) {
+    var scope = st.bmScope;
+    return Object.keys(s.bm).filter(function (id) { return !scope || scope.indexOf(id) >= 0; });
   }
   function practiceBookmarks() {
-    var s = load(), by = {}, ids = Object.keys(s.bm);
+    var s = load(), by = {}, ids = bmPoolIds(s);
     ids.forEach(function (id) { var b = s.bm[id]; (by[b[0] + "|" + b[1]] = by[b[0] + "|" + b[1]] || {})[id] = 1; });
     Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }))
       .then(function (lists) { var all = []; lists.forEach(function (l) { all = all.concat(l); }); if (!all.length) return toast("The bookmarked questions need a connection to load once."); runQuestions(shuffle(all).slice(0, 50), "study", "Bookmarks"); });
@@ -3402,11 +3927,13 @@
       load: function () { return loadMany(pairs.slice(0, 12)).then(function (lists) { var hid = hidden(); return lists.map(function (l) { return l.items.filter(function (it) { return want[it.id] && usable(it, hid); }); }); }); },
       start: function (list, mode, ro) { runQuestions(list, mode, "My mistakes", saveOpt(ro, "mistakes")); } };
   }
-  // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool).
+  // Bookmarks: every bookmarked question (all bookmarked, so that choice stays in the repeat row but is the whole pool),
+  // or the library's filtered selection (st.bmScope from "Practise these"). Count, mode, timer and
+  // repeat rows of the setup sheet apply on top; options that would leave no question read as off.
   function scopeBookmarks() {
-    var s = load(), by = {};
-    Object.keys(s.bm).forEach(function (id) { var b = s.bm[id], k = b[0] + "|" + b[1]; (by[k] = by[k] || {})[id] = 1; });
-    return { kind: "bookmarks", id: "", title: "Bookmarks", sub: Object.keys(s.bm).length + " saved", hue: 212,
+    var s = load(), by = {}, ids = bmPoolIds(s);
+    ids.forEach(function (id) { var b = s.bm[id], k = b[0] + "|" + b[1]; (by[k] = by[k] || {})[id] = 1; });
+    return { kind: "bookmarks", id: "", title: "Bookmarks", sub: ids.length + " saved", hue: 212,
       load: function () {
         return Promise.all(Object.keys(by).map(function (k) { var p = k.split("|"); return loadModule(p[0], p[1]).then(function (items) { var hid = hidden(); return items.filter(function (it) { return by[k][it.id] && usable(it, hid); }); }, function () { return []; }); }));
       },
@@ -3582,6 +4109,7 @@
     if (a === "kyfixq") { var rk = st.run, lk = b.getAttribute("data-l") === "rem" ? "rem" : "fix"; return reviewQuestion(Number(b.getAttribute("data-i")), rk && rk.ky ? rk.ky[lk] : null); }
     if (a === "rvnext") return void rvGo(1);
     if (a === "rvprev") return void rvGo(-1);
+    if (a === "rvbookmark") return toggleReviewBookmark();
     if (a === "kypractise") return kyPractise(b.getAttribute("data-l"));
     if (a === "kypattern") return void kyPatternOpen();
     if (a === "retrymissed") { var r2 = st.run, miss = r2.items.filter(function (it, i) { return r2.ans[i] !== it.a; }); st.stack.pop(); return runQuestions(miss, "study", r2.title); }
@@ -3590,7 +4118,69 @@
     if (a === "rfilter") { if (st.run && st.run.done) { st.run.rf = v; nav(0); renderRun(); var fb = root && root.querySelector('[data-act=rfilter][data-v="' + v + '"]'); if (fb) fb.focus({ preventScroll: true }); } return; }
     if (a === "psopen") return openSet(b.getAttribute("data-id"));
     if (a === "donerun") { st.run = null; st.stack.pop(); nav(-1); return rerender(); }
-    if (a === "bookmarks") return push(renderBookmarks);
+    if (a === "bookmarks") {
+      st.bmShown = BM_PAGE; st.bmQ = ""; st.bmF = { sub: "all", topic: "all", tag: "all", status: "all", sort: "new" };
+      st.bmEdit = null; st.bmDraft = null; st.bmScope = null;
+      var bs0 = load(), before = Object.keys(bs0.bmt || {}).length;
+      bmEnsureTags(bs0.bmt || (bs0.bmt = {}));
+      if (Object.keys(bs0.bmt).length !== before) save();
+      return push(renderBookmarks);
+    }
+    if (a === "bmmore") { st.bmShown = (st.bmShown || BM_PAGE) + BM_PAGE; return rerender(); }
+    if (a === "bmopen") return openBookmark(b.getAttribute("data-id"));
+    if (a === "bmremove") return removeBookmark(b.getAttribute("data-id"));
+    if (a === "bmfs") return bmFilterTo("bmfs", "status", v);
+    if (a === "bmfsub") return bmFilterTo("bmfsub", "sub", v);
+    if (a === "bmftopic") return bmFilterTo("bmftopic", "topic", v);
+    if (a === "bmftag") return bmFilterTo("bmftag", "tag", v);
+    if (a === "bmsort") return bmFilterTo("bmsort", "sort", v);
+    if (a === "bmpractice") {
+      var sP = load(), pgP = bmPageIds(sP);
+      if (!pgP.list.length) { toast("No saved questions match."); return; }
+      st.bmScope = pgP.list.slice();
+      return setupOn() ? setupBookmarks() : practiceBookmarks();
+    }
+    if (a === "bmnote") {
+      var nid = b.getAttribute("data-id"), sN = load();
+      if (st.bmEdit === nid) { st.bmEdit = null; st.bmDraft = null; return rerender(); }
+      var ex = bmEntry(sN.bmx, nid) || { n: "", tg: [] };
+      st.bmEdit = nid; st.bmDraft = { id: nid, n: ex.n, tg: ex.tg.slice(), nt: "" };
+      rerender();
+      var ta = root && root.querySelector("#bmNoteEd");
+      if (ta && ta.focus) try { ta.focus({ preventScroll: true }); } catch (e) { try { ta.focus(); } catch (x) {} }
+      return;
+    }
+    if (a === "bmtag") {
+      var dT = bmHarvest(), tid = b.getAttribute("data-id"), tv = v;
+      if (!dT || dT.id !== tid) return;
+      var ti = dT.tg.indexOf(tv);
+      if (ti >= 0) dT.tg.splice(ti, 1); else dT.tg.push(tv);
+      rerender();
+      return bmRefocus("bmtag", tv, tid);
+    }
+    if (a === "bmtagadd") {
+      var dA = bmHarvest(), aid = b.getAttribute("data-id"), sA = load();
+      if (!dA || dA.id !== aid) return;
+      var nid2 = bmAddTag(sA.bmt || (sA.bmt = {}), dA.nt, Date.now());
+      if (!nid2) { toast("Type a tag name first."); return; }
+      if (dA.tg.indexOf(nid2) < 0) dA.tg.push(nid2);
+      dA.nt = ""; save(); rerender();
+      var ni = root && root.querySelector("#bmTagNew");
+      if (ni && ni.focus) try { ni.focus({ preventScroll: true }); } catch (e) { try { ni.focus(); } catch (x) {} }
+      return;
+    }
+    if (a === "bmsave") {
+      var dS = bmHarvest(), sid2 = b.getAttribute("data-id"), sS = load();
+      if (!dS || dS.id !== sid2) return;
+      bmSetNote(sS.bmx || (sS.bmx = {}), sid2, dS.n, Date.now());
+      bmSetTags(sS.bmx, sid2, dS.tg, Date.now());
+      bmPruneTags(sS.bmt || (sS.bmt = {}), sS.bmx);
+      st.bmEdit = null; st.bmDraft = null;
+      save(); rerender();
+      toast("Bookmark updated");
+      return;
+    }
+    if (a === "bmcancel") { st.bmEdit = null; st.bmDraft = null; return rerender(); }
     if (a === "plan") return startPlan();
     if (a === "weak") return startWeak();
     if (a === "goal") { var G2 = [20, 30, 50, 100], gi = G2.indexOf(s.goal); s.goal = G2[(gi + 1) % G2.length]; save(); return rerender(); }
@@ -3606,7 +4196,7 @@
     if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
-    if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
+    if (a === "practicebm") { st.bmScope = null; return setupOn() ? setupBookmarks() : practiceBookmarks(); }
     if (a === "custom") return push(renderCustom);
     if (a === "ss-all") return push(renderSsAll);
     // The mixed row: the custom module prefilled with the student's group subjects.

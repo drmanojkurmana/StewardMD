@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "php-failure-metabolic",
-  "subject": "paediatrics",
-  "title": "Liver failure and metabolic liver disease: Wilson, galactosemia and GSD",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**ALF** (**INR over 2 coagulopathy** uncorrected, **encephalopathy** grades, **hypoglycaemia** dextrose, **paracetamol** NAC protocol, **autoimmune** steroids, **Wilson** haemolysis, **transplant** King's criteria) with **monitoring** (**ICP** mannitol hypertonic, **ammonia** continuous dialysis, **infection** surveillance cultures, **fluids** restrict) bridges; **aetiology** (viral serology, drugs, metabolic) hunts. Comas list.",
-      "say": "Uncorrectable INR sleepy sugary is ALF: NAC hunts lists King's bridges dialysis. Pressures watch.",
-      "vis": null
-    },
-    {
-      "tx": "**Wilson** (**KF rings** slit lamp, **low ceruloplasmin**, **urinary copper** high, **haemolysis** Coombs negative, **parkinsonism** school decline, **penicillamine** zinc trientine, **diet** copper free, **siblings** screened) with **galactosemia** (**milk free** soy, **cataracts** oil drop, **E coli sepsis**, **GALT** assay) and **tyrosinemia** (**cabbage odour**, **succinylacetone**, **nitisinone** with diet, **HCC** screens) treats diets drugs; **fructose** (vomits sweets, **aldolase** biopsy) avoids. Siblings screen.",
-      "say": "Rings copper low blue haemolysing stiff is Wilson: chelate zinc diet siblings. Milks free cataracts nitisinone cabbages.",
-      "vis": null
-    },
-    {
-      "tx": "**GSD** (**type 1 Von Gierke** fasting hypoglycaemia doll facies cornstarch, **type 2 Pompe** cardiomegaly enzyme, **type 3 9** milder, **lactate** rises, **uncooked cornstarch** nights, **transplant** selected) with **urea cycle** (**hyperammonaemia** protein loads, **dialysis** crises, **nitrogen scavengers**, **transplant** cures) and **organic acids** (anion gap, **carnitine**, **B12** responsive) crises; **newborn screening** (tandem) catches. Starches bridge.",
-      "say": "Fasting sugary doll lactate starchy is GSD 1: cornstarch nights enzymes Pompe. Ammonias dialyse scavenge transplant.",
-      "vis": null
-    },
-    {
-      "tx": "**Support** (**glucose** 10 percent, **electrolytes** phosphate magnesium, **nutrition** BCAA MCT, **bleeds** vitamin K FFP, **ascites** albumin, **vaccine** hepatitis) with **prognosis** (**King's** listing, **MELD PELD** scores, **living donor** left lateral, **post** rejection infection) and **family** (genes counsel, **school** plans, **transition** adult) sustains; **palliative** (futile multiorgan) comforts. Scores list.",
-      "say": "Dextrose tens phosphates BCAAs K plasma albumin support: King's MELD living donors levels watch. Families transition.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Liver fail",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "ALF",
-            "INR sleepy",
-            "NAC list"
-          ],
-          [
-            "Wilson",
-            "Rings copper",
-            "Chelate"
-          ],
-          [
-            "GSD urea",
-            "Starch ammonia",
-            "Dialyse"
-          ],
-          [
-            "Support",
-            "Dextrose scores",
-            "List"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-131",
-    "bk2-paed-132",
-    "bk2-paed-133",
-    "bk2-paed-134",
-    "bk2-paed-135",
-    "bk2-paed-136",
-    "bk2-paed-137",
-    "bk2-paed-138",
-    "bk2-paed-139",
-    "bk2-paed-140"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "php-failure-metabolic",
+ "subject": "paediatrics",
+ "title": "Liver failure and metabolic liver disease: Wilson, galactosemia and GSD",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**ALF** (**INR over 2 coagulopathy** uncorrected, **encephalopathy** grades, **hypoglycaemia** dextrose, **paracetamol** NAC protocol, **autoimmune** steroids, **Wilson** haemolysis, **transplant** King's criteria) with **monitoring** (**ICP** mannitol hypertonic, **ammonia** continuous dialysis, **infection** surveillance cultures, **fluids** restrict) bridges; **aetiology** (viral serology, drugs, metabolic) hunts. Comas list.",
+   "say": "Uncorrectable INR sleepy sugary is ALF: NAC hunts lists King's bridges dialysis. Pressures watch.",
+   "vis": null
+  },
+  {
+   "tx": "**Wilson** (**KF rings** slit lamp, **low ceruloplasmin**, **urinary copper** high, **haemolysis** Coombs negative, **parkinsonism** school decline, **penicillamine** zinc trientine, **diet** copper free, **siblings** screened) with **galactosemia** (**milk free** soy, **cataracts** oil drop, **E coli sepsis**, **GALT** assay) and **tyrosinemia** (**cabbage odour**, **succinylacetone**, **nitisinone** with diet, **HCC** screens) treats diets drugs; **fructose** (vomits sweets, **aldolase** biopsy) avoids. Siblings screen.",
+   "say": "Rings copper low blue haemolysing stiff is Wilson: chelate zinc diet siblings. Milks free cataracts nitisinone cabbages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/php-failure-metabolic-fig1.webp",
+    "alt": "Three panels showing Kayser-Fleischer rings, an oil drop cataract, and a liver biopsy related to metabolic liver diseases.",
+    "caption": "Clinical and diagnostic features of metabolic liver diseases",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**GSD** (**type 1 Von Gierke** fasting hypoglycaemia doll facies cornstarch, **type 2 Pompe** cardiomegaly enzyme, **type 3 9** milder, **lactate** rises, **uncooked cornstarch** nights, **transplant** selected) with **urea cycle** (**hyperammonaemia** protein loads, **dialysis** crises, **nitrogen scavengers**, **transplant** cures) and **organic acids** (anion gap, **carnitine**, **B12** responsive) crises; **newborn screening** (tandem) catches. Starches bridge.",
+   "say": "Fasting sugary doll lactate starchy is GSD 1: cornstarch nights enzymes Pompe. Ammonias dialyse scavenge transplant.",
+   "vis": null
+  },
+  {
+   "tx": "**Support** (**glucose** 10 percent, **electrolytes** phosphate magnesium, **nutrition** BCAA MCT, **bleeds** vitamin K FFP, **ascites** albumin, **vaccine** hepatitis) with **prognosis** (**King's** listing, **MELD PELD** scores, **living donor** left lateral, **post** rejection infection) and **family** (genes counsel, **school** plans, **transition** adult) sustains; **palliative** (futile multiorgan) comforts. Scores list.",
+   "say": "Dextrose tens phosphates BCAAs K plasma albumin support: King's MELD living donors levels watch. Families transition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Liver fail",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "ALF",
+      "INR sleepy",
+      "NAC list"
+     ],
+     [
+      "Wilson",
+      "Rings copper",
+      "Chelate"
+     ],
+     [
+      "GSD urea",
+      "Starch ammonia",
+      "Dialyse"
+     ],
+     [
+      "Support",
+      "Dextrose scores",
+      "List"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-131",
+  "bk2-paed-132",
+  "bk2-paed-133",
+  "bk2-paed-134",
+  "bk2-paed-135",
+  "bk2-paed-136",
+  "bk2-paed-137",
+  "bk2-paed-138",
+  "bk2-paed-139",
+  "bk2-paed-140"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pcd-acquired-rhythm",
-  "subject": "paediatrics",
-  "title": "Acquired heart disease and rhythm: rheumatic, Kawasaki and arrhythmias",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Rheumatic** (**migratory polyarthritis**, **carditis** Carey Coombs, **Sydenham chorea**, **erythema marginatum**, **subcutaneous nodules**; **ASO** titres, **penicillin** eradicate, **aspirin steroids** arthritis carditis, **secondary benzathine 3 weekly 10 years**) with **mitral** (stenosis opening snap, regurgitation pansystolic, **penicillin** endocarditis) scars valves; **Jones** revised diagnoses. Throats culture.",
-      "say": "Fleeting joints heart jerks rings bumps is rheumatic: throats penicillined benzathine years. Jones judges.",
-      "vis": null
-    },
-    {
-      "tx": "**Kawasaki** (**5 days fever** plus 4: **conjunctivitis**, **strawberry tongue**, **polymorphous rash**, **lymph node** 1.5 cm, **extremity** edema desquamation; **IVIG 2 g single** 10 days, **aspirin** high then low, **coronary** echo 2 6 weeks, **steroids** refractory, **infliximab** selected) with **MIS-C** (COVID exposed, shock GI, steroids IVIG) mimics; **incomplete** (infants coronary, labs supplement) treats. Peeling fingers.",
-      "say": "Five fever eyes tongue rash node limbs is Kawasaki: globulins days aspirin coronaries echo. Peels supplement.",
-      "vis": null
-    },
-    {
-      "tx": "**SVT** (**infant 220 beats**, **P hidden**, **adenosine** 0.1 mg kg ice vagal first, **cardioversion** unstable, **propranolol** prophylaxis, **WPW** delta ablation) with **heart block** (**maternal lupus** Ro, **pacemaker** symptomatic, **long QT** beta blocker ICD, **myocarditis** tachycardia gallop troponin IVIG) rhythms; **syncope** (vasovagal versus cardiac exertional) histories. Rates vagalise.",
-      "say": "Two twenty hidden P iced adenosine is SVT: lupus blocks pace QT betas myocarditis gallops. Exertion alarms.",
-      "vis": null
-    },
-    {
-      "tx": "**Cardiomyopathy** (**dilated** failure enalapril carvedilol, **hypertrophic** sarcomere no sports, **transplant** listed) with **hypertension** (**cuffs** size, **coarctation** femorals, **renal** Doppler, **amlodipine enalapril**) and **hyperlipidaemia** (**familial** xanthomas, **statins** 8 years) risks; **athlete screening** (history ECG selected) prevents sudden. Families cascade while lipid clinics follow familial cases lifelong.",
-      "say": "Floppy failures transplant listed: cuffs sized xanthomas statined athletes screened. Genes cascade.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Acquired",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Rheumatic",
-            "Migratory Jones",
-            "Benzathine yrs"
-          ],
-          [
-            "Kawasaki",
-            "5 plus 4",
-            "IVIG echo"
-          ],
-          [
-            "SVT",
-            "220 adenosine",
-            "WPW ablate"
-          ],
-          [
-            "Muscle BP",
-            "Transplant cuffs",
-            "Cascade"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-041",
-    "bk2-paed-042",
-    "bk2-paed-043",
-    "bk2-paed-044",
-    "bk2-paed-045",
-    "bk2-paed-046",
-    "bk2-paed-047",
-    "bk2-paed-048",
-    "bk2-paed-049",
-    "bk2-paed-050"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pcd-acquired-rhythm",
+ "subject": "paediatrics",
+ "title": "Acquired heart disease and rhythm: rheumatic, Kawasaki and arrhythmias",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Rheumatic** (**migratory polyarthritis**, **carditis** Carey Coombs, **Sydenham chorea**, **erythema marginatum**, **subcutaneous nodules**; **ASO** titres, **penicillin** eradicate, **aspirin steroids** arthritis carditis, **secondary benzathine 3 weekly 10 years**) with **mitral** (stenosis opening snap, regurgitation pansystolic, **penicillin** endocarditis) scars valves; **Jones** revised diagnoses. Throats culture.",
+   "say": "Fleeting joints heart jerks rings bumps is rheumatic: throats penicillined benzathine years. Jones judges.",
+   "vis": null
+  },
+  {
+   "tx": "**Kawasaki** (**5 days fever** plus 4: **conjunctivitis**, **strawberry tongue**, **polymorphous rash**, **lymph node** 1.5 cm, **extremity** edema desquamation; **IVIG 2 g single** 10 days, **aspirin** high then low, **coronary** echo 2 6 weeks, **steroids** refractory, **infliximab** selected) with **MIS-C** (COVID exposed, shock GI, steroids IVIG) mimics; **incomplete** (infants coronary, labs supplement) treats. Peeling fingers.",
+   "say": "Five fever eyes tongue rash node limbs is Kawasaki: globulins days aspirin coronaries echo. Peels supplement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pcd-acquired-rhythm-fig1.webp",
+    "alt": "Composite image showing a child with strawberry tongue, bilateral conjunctivitis, polymorphous rash, and peeling fingertips characteristic of Kawasaki disease.",
+    "caption": "Key clinical features of Kawasaki disease in children. Image: Dong Soo Kim, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 2.4742
+   }
+  },
+  {
+   "tx": "**SVT** (**infant 220 beats**, **P hidden**, **adenosine** 0.1 mg kg ice vagal first, **cardioversion** unstable, **propranolol** prophylaxis, **WPW** delta ablation) with **heart block** (**maternal lupus** Ro, **pacemaker** symptomatic, **long QT** beta blocker ICD, **myocarditis** tachycardia gallop troponin IVIG) rhythms; **syncope** (vasovagal versus cardiac exertional) histories. Rates vagalise.",
+   "say": "Two twenty hidden P iced adenosine is SVT: lupus blocks pace QT betas myocarditis gallops. Exertion alarms.",
+   "vis": null
+  },
+  {
+   "tx": "**Cardiomyopathy** (**dilated** failure enalapril carvedilol, **hypertrophic** sarcomere no sports, **transplant** listed) with **hypertension** (**cuffs** size, **coarctation** femorals, **renal** Doppler, **amlodipine enalapril**) and **hyperlipidaemia** (**familial** xanthomas, **statins** 8 years) risks; **athlete screening** (history ECG selected) prevents sudden. Families cascade while lipid clinics follow familial cases lifelong.",
+   "say": "Floppy failures transplant listed: cuffs sized xanthomas statined athletes screened. Genes cascade.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Acquired",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Rheumatic",
+      "Migratory Jones",
+      "Benzathine yrs"
+     ],
+     [
+      "Kawasaki",
+      "5 plus 4",
+      "IVIG echo"
+     ],
+     [
+      "SVT",
+      "220 adenosine",
+      "WPW ablate"
+     ],
+     [
+      "Muscle BP",
+      "Transplant cuffs",
+      "Cascade"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-041",
+  "bk2-paed-042",
+  "bk2-paed-043",
+  "bk2-paed-044",
+  "bk2-paed-045",
+  "bk2-paed-046",
+  "bk2-paed-047",
+  "bk2-paed-048",
+  "bk2-paed-049",
+  "bk2-paed-050"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

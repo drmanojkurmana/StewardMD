@@ -46,39 +46,11 @@
    "tx": "Elective repair is recommended when maximum transverse diameter reaches five and a half centimeters in men or five centimeters in women, or upon rapid expansion exceeding five **millimeters** over six months. Ruptured aneurysm classically presents with severe sudden back or flank pain, a pulsatile abdominal mass, and profound hypotension, though this diagnostic triad appears complete in only half of cases. Hemodynamically stable patients undergo immediate contrast computed tomography, while unstable patients proceed directly to the operating theater.",
    "say": "Elective repair is indicated at five and a half centimeters in men, five centimeters in women, or with rapid expansion. Rupture presents with severe back pain, a pulsatile abdominal mass, and shock, requiring immediate surgical exploration.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Suspected ruptured aortic aneurysm"
-     },
-     {
-      "id": "n2",
-      "label": "Permissive hypotension (SBP 70-90)"
-     },
-     {
-      "id": "n3",
-      "label": "Immediate OR transfer or fast CTA"
-     },
-     {
-      "id": "n4",
-      "label": "Cross-clamping or aortic balloon occlusion"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4"
-     ]
-    ]
+    "kind": "image",
+    "src": "prep/lessons/media/sur-aaa-threshold.svg",
+    "alt": "AAA repair at 5.5 cm in men, 5.0 cm in women, or growth over 5 mm in 6 months; rupture branch: stable to CT, unstable straight to theatre with permissive hypotension 70 to 90.",
+    "caption": "5.5 men, 5.0 women; unstable skips the scanner.",
+    "ar": 1.5385
    }
   },
   {

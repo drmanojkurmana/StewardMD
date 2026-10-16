@@ -246,3 +246,30 @@ Branch `lessonui-1013`. Bottom player bar untouched throughout; it is the token 
 - Next queue by exam weight: medicine 104, obgyn 50, ss-med-onc 44,
   ent 37, anaesthesia 34, orthopaedics 33 (anatomy 80/80 and physiology
   49/49 already complete). Browser gate `lessonui-browser.yml` before merge.
+
+## Addendum 2026-10-15 (batch 10: medicine backfill, branch lessonui-batch10)
+
+- **8 original SVGs** (`med-stroke-clock`, `med-sodium-ladder`,
+  `med-potassium-steps`, `med-hf-diuretics`, `med-murmur-as-ar`,
+  `med-tb-att`, `med-dka-hhs`, `med-gap-delta`) wired into 8 null-visual
+  medicine steps only (no replacements): `med-stroke` s3 (4.5 h lysis /
+  24 h thrombectomy clock), `med-sodium` s3 (volume triage + 8-to-10
+  ceiling), `med-potassium` s3 (protect/shift/remove ladder),
+  `med-heart-failure` s2 (2x IV dose + urine-Na-90 resistance rule),
+  `med-valvular` s1 (AS vs AR murmur timing), `med-tb` s3 (2HRZE/4HR
+  timeline), `med-diabetes` s3 (DKA vs HHS), `med-acid-base` s1 (gap
+  math). Figure facts drawn from the step text itself; standard adjuncts
+  (DDAVP clamp, patiromer, Austin Flint/pistol/Duroziez, bedaquiline /
+  delamanid, IRIS, beta-hydroxybutyrate, delta ratio) are textbook-stable.
+- **Validation**: zero builder warnings; independent parse-and-assert
+  second pass (viewBox 800x520, role=img, title/desc, ASCII, 11px floor,
+  no amber-on-white text, key strings) 8/8 clean; 8/8 `checkLesson`
+  clean; diagram checker 126 lessons / 198 figures / 0 problems; full
+  1483-lesson sweep shows only the 6 pre-existing med/mphar/sur
+  step-count failures (identical set as baseline, none touched here).
+- **Guards** (project flags `--experimental-test-module-mocks
+  --experimental-sqlite`): action-row, lessons, lessons-100, reason,
+  bug-report, server, pearl, pearl-figs 95/95 pass.
+- **Attribution**: +8 CC BY 4.0 StewardMD-original rows in
+  `prep/lessons/media/ATTRIBUTION.md`; still zero third-party images.
+- Inventory now 226 with images, 1257 zero of 1483.

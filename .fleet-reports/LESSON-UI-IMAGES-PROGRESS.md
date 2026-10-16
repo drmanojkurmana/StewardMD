@@ -348,3 +348,44 @@
   paediatrics (56 zero) highest-weight remainders; anatomy/physiology verified
   complete (79/79 ana, 49/49 phy with images).
 - Visual QA via `lessonui-browser` CI gate (390px dark/light) before merge.
+
+## Update 2026-10-15 (batch 10: medicine backfill, atop origin/main #1674)
+
+- **8 original SVGs** (`med-stroke-clock`, `med-sodium-ladder`,
+  `med-potassium-steps`, `med-hf-diuretics`, `med-murmur-as-ar`,
+  `med-tb-att`, `med-dka-hhs`, `med-gap-delta`) wired into 8 null-visual
+  medicine steps (`med-stroke` s3, `med-sodium` s3, `med-potassium` s3,
+  `med-heart-failure` s2, `med-valvular` s1, `med-tb` s3, `med-diabetes`
+  s3, `med-acid-base` s1). Same bank format (white stage, 800x520,
+  `ar` 1.5385, `<title>`/`<desc>`, alt + caption, bank palette subset,
+  ASCII, 11px floor, amber strokes only, no amber-on-white text).
+- **Second pass**: independent parse-and-assert over the 8 files (viewBox,
+  role=img, title/desc, ASCII, 11px floor, amber-text scan, key clinical
+  strings); 8/8 clean with zero builder warnings.
+- **Attribution**: +8 CC BY 4.0 StewardMD-original rows; still zero
+  third-party images.
+- **Gates**: 8/8 wired lessons `checkLesson` clean. Inventory now 226
+  with images, 1257 zero of 1483.
+- Next queue by exam weight: medicine 92, obgyn 46, ss-med-onc 44,
+  ent 37, radiology 35 (anatomy 80/80 and physiology 49/49 complete).
+
+## Update 2026-10-15 (batch 11: surgery quintet, branch lessonui-batch11)
+
+- **5 original SVGs** (`sur-alvarado`, `sur-parkland`, `sur-lethal-triad`,
+  `sur-charcot-reynolds`, `sur-aaa-threshold`) wired into 5 surgery lessons
+  (`sur-appendix` s1 table-replaced, `sur-burns` s1 flow-replaced,
+  `sur-atls` s3 compare-replaced, `sur-gallbladder` s3 null-visual,
+  `sur-aneurysm` s1 flow-replaced). Replacements teach the same step content
+  (all MANTRELS weights, all 5 Parkland nodes, triad + damage-control both
+  sides, thresholds + stable/unstable branch). Same bank format (white stage,
+  800x520, `ar` 1.5385, `<title>`/`<desc>` + role=img, alt + caption,
+  palette #071318 / #0B6B5B / #42CDB5 / #B7791F / #B42318).
+- **Second pass**: independent number-grounding assert (lesson word-forms plus
+  lesson-formula arithmetic: Parkland 4x70x40 = 11,200, 5,600/8 = 700/h,
+  5,600/16 = 350/h, UO 0.5x70 = 35/h; Alvarado 1+1+1+2+1+1+2+1 = 10);
+  all grounded, 5/5 wired lessons `checkLesson` clean.
+- **Attribution**: +5 CC BY 4.0 StewardMD-original rows; still zero
+  third-party images.
+- **Gates**: inventory now 231 with images, 1253 zero of 1484 (surgery 9/71).
+- Next queue by exam weight: medicine 92, pathology 64, biochemistry 63,
+  pharmacology 60, paediatrics 56 (anatomy 80/80, physiology 49/49 complete).

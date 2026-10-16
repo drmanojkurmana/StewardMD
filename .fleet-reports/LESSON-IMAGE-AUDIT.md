@@ -1,30 +1,14 @@
 # Lesson image audit
 
-Generated 2026-10-15 from `prep/lessons/v1/index.json` (1471 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (85.2%) have zero images; 218 have at least one.**
-
-Batch 9 (2026-10-15, branch lessonui-batch9): 4 more lessons wired (medicine +4: med-copd, med-diabetes-complications, med-glomerulonephritis, med-cardiomyopathy; 4 original SVGs); was 1257 zero / 214 with.
-
-Batch 8 (2026-10-15, branch lessonui-1013): 4 more lessons wired (obstetrics-gynaecology +4: obg-normal-labour x2 figs, obg-hypertensive-disorders x2 figs, obg-contraception, obg-fetal-growth-surveillance; 6 original SVGs); was 1261 zero / 210 with.
-
-Batch 3 (2026-10-14): 8 more lessons wired (pharmacology +2, microbiology +2, biochemistry +2, pathology +2); was 1290 zero / 176 with.
-
-Batch 4 (2026-10-15): 8 more lessons wired (pharmacology +2, pathology +3, microbiology +3); was 1282 zero / 184 with.
-
-Batch 5 (2026-10-15): 7 more lessons wired (medicine +3, surgery +3, paediatrics +1; 8 figures, med-ecg took two); was 1274 zero / 192 with. Counts are per subject (`subject` field of each lesson file or taxonomy branch).
-
-Merge of lessonui-1013 (2026-10-15): `mstat-audit` wired with new original `stats-control-chart.svg` (compare card replaced); was 1267 zero / 199 with.
-
-Batch 6 (2026-10-15): 6 more lessons wired (medicine +6: med-acs, med-aki, med-ckd, med-asthma x2 figs, med-cirrhosis, med-arrhythmias x2 figs; 8 figures); was 1271 zero / 200 with.
-
-Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +4: phm-opioids, phm-antiepileptics, phm-beta-lactams, phm-antihypertensives; 4 original SVGs); was 1265 zero / 206 with.
+Generated 2026-10-14 from `prep/lessons/v1/index.json` (1483 lessons); recounted 2026-10-15 (1484 lessons). A lesson counts as having an image when at least one step carries `vis.kind === "image"`. **1253 lessons (84.4%) have zero images; 231 have at least one.** Counts are per subject (`subject` field of each lesson file or taxonomy branch).
 
 | Subject | Lessons | Zero images | With images |
 |---|---|---|---|
-| medicine | 113 | 100 | 13 |
+| medicine | 113 | 92 | 21 |
 | anatomy | 80 | 0 | 80 |
 | pathology | 73 | 64 | 9 |
 | pharmacology | 72 | 60 | 12 |
-| surgery | 71 | 67 | 4 |
+| surgery | 71 | 62 | 9 |
 | biochemistry | 69 | 63 | 6 |
 | paediatrics | 57 | 56 | 1 |
 | community-medicine | 56 | 42 | 14 |
@@ -34,6 +18,7 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 | microbiology | 40 | 31 | 9 |
 | ss-general-medicine | 38 | 37 | 1 |
 | ent | 37 | 37 | 0 |
+| radiology | 35 | 35 | 0 |
 | anaesthesia | 34 | 34 | 0 |
 | orthopaedics | 33 | 33 | 0 |
 | ss-critical-care | 32 | 32 | 0 |
@@ -45,7 +30,6 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 | ss-nephrology | 26 | 26 | 0 |
 | ss-rheumatology-immunology | 25 | 25 | 0 |
 | mcc-chronic-care | 23 | 23 | 0 |
-| radiology | 23 | 23 | 0 |
 | mcc-acute-care | 21 | 21 | 0 |
 | adult-health-surgery | 18 | 18 | 0 |
 | dermatology | 18 | 18 | 0 |
@@ -85,14 +69,11 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 
 ## Imageless lessons by subject (highest exam weight first)
 
-### medicine (110/113 imageless)
+### medicine (92/113 imageless)
 
-- `med-acid-base`: Approach to Metabolic Acidosis and Renal Tubular Acidosis
 - `med-clinical-cardiology`: Clinical cardiology: pulse, JVP and heart sounds
-- `med-diabetes-complications`: Management of Diabetic Ketoacidosis
 - `med-envenomation`: Snake bite: immobilise, reassure, antivenom for systemic or severe local signs
 - `med-examination`: Clinical examination: consent, sequence, comparison
-- `med-heart-failure`: Management of Chronic Heart Failure with Reduced Ejection Fraction
 - `med-ich`: Raised intracranial pressure and intracranial bleeding: protect the brain
 - `med-iv-fluids`: Intravenous fluid therapy: crystalloids, colloids and maintenance
 - `med-lab-interpretation`: Lab interpretation: count, chemistry, gas in context
@@ -102,18 +83,11 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 - `med-osce-procedures`: OSCE procedures: asepsis, access, oxygen, communication
 - `med-overdose`: Paracetamol poisoning: time, levels, antidote by toxicology advice
 - `med-cad-stable`: Stable coronary artery disease and dyslipidaemia
-- `med-acs`: Acute coronary syndromes
-- `med-arrhythmias`: Arrhythmias and conduction disorders
-- `med-valvular`: Valvular and rheumatic heart disease
 - `med-endocarditis`: Infective endocarditis
-- `med-cardiomyopathy`: Cardiomyopathies and myocarditis
 - `med-pericardial`: Pericardial diseases
 - `med-hypertension`: Systemic hypertension and aortic disease
-- `med-asthma`: Asthma
-- `med-copd`: Chronic obstructive pulmonary disease
 - `med-bronchiectasis-cf`: Bronchiectasis and cystic fibrosis
 - `med-pneumonia`: Pneumonia
-- `med-tb`: Tuberculosis
 - `med-ild`: Interstitial, granulomatous and occupational lung disease
 - `med-pe-pulmonary-htn`: Pulmonary embolism and pulmonary hypertension
 - `med-pleural`: Pleural diseases and pneumothorax
@@ -127,17 +101,11 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 - `med-jaundice`: Jaundice and liver function tests
 - `med-viral-hepatitis`: Viral hepatitis and acute liver failure
 - `med-fatty-liver`: Alcoholic and non-alcoholic fatty liver disease
-- `med-cirrhosis`: Cirrhosis and portal hypertension
 - `med-autoimmune-metabolic-liver`: Autoimmune, cholestatic, metabolic and drug-induced liver disease
-- `med-aki`: Acute kidney injury: prerenal, intrinsic and postrenal
-- `med-ckd`: Chronic kidney disease, dialysis and transplantation
-- `med-glomerulonephritis`: Glomerulonephritis and the nephritic syndrome
 - `med-nephrotic`: Nephrotic syndrome: heavy proteinuria and clots
 - `med-tubulointerstitial`: Tubulointerstitial, cystic and inherited kidney disease
 - `med-renovascular`: Renovascular disease and thrombotic microangiopathy
 - `med-uti-stones`: Urinary tract infection and kidney stones
-- `med-sodium`: Sodium and water balance: hypo- and hypernatraemia
-- `med-potassium`: Potassium, magnesium and phosphate emergencies
 - `med-pituitary`: Pituitary adenomas, acromegaly and Sheehan's syndrome
 - `med-hypothyroidism`: Hypothyroidism, Hashimoto's and myxoedema coma
 - `med-hyperthyroidism`: Thyrotoxicosis, Graves' disease and thyroid storm
@@ -146,10 +114,8 @@ Batch 7 (2026-10-15, branch lessonui-1013): 4 more lessons wired (pharmacology +
 - `med-adrenal`: Addison's disease, Cushing's syndrome and adrenal crisis
 - `med-aldo-pheo`: Primary aldosteronism and phaeochromocytoma
 - `med-gonadal-cah`: Hypogonadism, hirsutism and congenital adrenal hyperplasia
-- `med-diabetes`: Diabetes mellitus long case: control, complications and crises
 - `med-headache`: Headache: migraine, red flags and thunderclap
 - `med-epilepsy`: Seizures and status epilepticus
-- `med-stroke`: Stroke and hemiplegia: infarct, bleed and TIA
 - `med-dementia`: Dementia and delirium: reversible and progressive
 - `med-movement`: Parkinsonism, tremor, chorea and dystonia
 - `med-ms`: Multiple sclerosis and demyelination
@@ -332,12 +298,11 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `phm-chelators-antidotes`: Chelators and antidotes: metals, cyanide, alcohols and overdoses
 - `phm-vitamins-dermatology`: Vitamins and dermatology drugs: retinoids, hair, pigment and sun
 
-### surgery (67/71 imageless)
+### surgery (62/71 imageless)
 
 - `sur-abdominal-trauma`: Abdominal, pelvic and genitourinary trauma: key principles
 - `sur-breast-benign`: Benign Breast Disorders and Clinical Assessment
 - `sur-colon-benign`: Benign colorectal disease: diverticular disease, polyps and stomas
-- `sur-gallbladder`: Biliary surgery: acute cholecystitis, critical view of safety and bile duct injuries
 - `sur-metabolic-nutrition`: Metabolic response to injury and surgical nutrition
 - `sur-mis`: Minimally invasive surgery: pneumoperitoneum, insufflation gas and laparoscopic physiology
 - `sur-mixed`: Mixed practice: surgery rapid review
@@ -350,7 +315,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-wound-healing`: Surgical wound healing: phases, collagen dynamics and complications
 - `sur-infections`: Surgical site infections, necrotizing soft-tissue infections, and antimicrobial prophylaxis
 - `sur-skin`: Cutaneous malignancies: melanoma staging, excision margins, and non-melanoma skin cancers
-- `sur-burns`: Burn resuscitation, inhalation injury, escharotomy indications, and topical wound care
 - `sur-head-injury`: Traumatic brain injury, intracranial hematomas, intracranial pressure monitoring, and herniation
 - `sur-chest-trauma`: Thoracic trauma: tension pneumothorax, massive hemothorax, cardiac tamponade, and flail chest
 - `sur-oral`: Oral cavity cancer, mucosal premalignant lesions, TNM staging, and surgical resection margins
@@ -364,7 +328,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-pancreas`: Pancreatic disease: acute pancreatitis, necrotizing step-up approach, and Whipple resection
 - `sur-spleen`: Splenic trauma, non-operative management, surgical splenectomy, and overwhelming post-splenectomy infection
 - `sur-obstruction`: Intestinal obstruction: small bowel strangulation, adhesive bands, and colonic volvulus
-- `sur-appendix`: Acute appendicitis: Alvarado scoring, appendiceal neoplasms, and laparoscopic appendectomy
 - `sur-colorectal-cancer`: Colorectal cancer: staging, total mesorectal excision, genetic syndromes, and multimodality therapy
 - `sur-anorectal`: Anorectal disorders: hemorrhoids, anal fissure, fistula-in-ano, and Goodsall rule
 - `sur-peritoneum`: Acute peritonitis, damage control laparotomy, temporary abdominal closure, and abdominal compartment syndrome
@@ -374,7 +337,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-prostate`: Benign prostatic hyperplasia, prostatic adenocarcinoma, Gleason grading, and radical prostatectomy
 - `sur-testis`: Testicular germ cell tumors, serum markers, radical inguinal orchiectomy, and retroperitoneal dissection
 - `sur-arterial`: Peripheral arterial disease, Fontaine stages, acute limb ischemia, and revascularization
-- `sur-aneurysm`: Abdominal aortic aneurysm, Laplace law, endoleak types, and carotid endarterectomy
 - `sur-venous`: Chronic venous disease, CEAP classification, varicose veins, and endovenous ablation
 - `sur-lymphatic`: Lymphedema staging, lymphoscintigraphy, complete decongestive therapy, and surgical restoration
 - `sur-thoracic`: Thoracic oncology, anatomic lobectomy, VATS resection, and pleural empyema
@@ -387,7 +349,6 @@ All 80 lessons in anatomy carry at least one verified diagram.
 - `sur-transplant`: Organ transplantation, allorecognition, rejection mechanisms, and renal allografting
 - `sur-uro-congenital`: Congenital urinary tract anomalies, ureteropelvic obstruction, duplex ureter, and pyeloplasty
 - `sur-urethra-penis`: Urethral stricture disease, urethroplasty techniques, and penile carcinoma
-- `sur-atls`: Advanced Trauma Life Support, primary survey, definitive airway, and lethal triad
 - `spl-reconstructive`: Reconstructive ladder, grafts and free flaps
 - `spl-burns-hand`: Burns resuscitation, excision-grafting and hand surgery
 - `spl-craniofacial-aesthetic`: Craniofacial, cleft and aesthetic surgery
@@ -786,6 +747,44 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `ent-neck-masses`: Neck masses and neck dissection
 - `ent-sleep-apnoea`: Snoring and obstructive sleep apnoea
 
+### radiology (35/35 imageless)
+
+- `rad-brachytherapy`: Brachytherapy and therapeutic radioisotopes
+- `rad-cardiovascular`: Cardiovascular imaging: key chest radiograph and modality signs
+- `rad-chest`: Chest radiology: key signs and patterns for exams
+- `rad-clinical-rt`: Radiotherapy in Clinical Oncology: Radiosensitivity, Radical and Palliative Use
+- `rad-contrast`: Contrast media and reactions
+- `rad-ct-mri`: CT and MRI principles
+- `rad-genitourinary`: Genitourinary radiology: key investigations and classic signs
+- `rad-gi`: Gastrointestinal Radiology: Barium Studies and Key Signs
+- `rad-hepatobiliary`: Hepatobiliary and pancreatic imaging: key patterns and investigations
+- `rad-interventional`: Interventional radiology: core techniques and high-yield facts
+- `rad-mixed`: Radiology mixed rapid review
+- `rad-musculoskeletal`: Musculoskeletal Radiology and Bone Tumours: High-Yield Signs
+- `rad-neuroradiology`: Neuroradiology essentials: trauma bleeds, stroke, and lesions that mimic each other on imaging
+- `rad-nm-principles`: Radionuclides and Nuclear Medicine Instrumentation
+- `rad-nm-scans`: Nuclear medicine scans and PET: choosing the right tracer
+- `rad-obgyn-breast`: Obstetric, gynaecological and breast imaging: key high-yield facts
+- `rad-paediatric`: Paediatric radiology: high-yield neonatal and childhood signs
+- `rad-radiation-protection`: Radiation units, biological effects and protection
+- `rad-radiobiology`: Radiobiology and fractionation: the essentials for NEET-PG and INI-CET
+- `rad-teletherapy`: External beam radiotherapy techniques
+- `rad-toxicity`: Radiation toxicity and tissue tolerance
+- `rad-ultrasound`: Ultrasound and Doppler: Physics, Artefacts and Key Clinical Uses
+- `rad-xray`: X-ray production and conventional radiography
+- `rad-ir-drainage`: Biliary and urinary drainage
+- `rad-ir-ablation`: Ablation and liver-directed cancer therapy
+- `rad-ir-malformation`: Vascular malformations
+- `rad-ir-selective`: Uterine prostate and bariatric embolisation
+- `rad-ir-pain-spine`: Pain and spine interventions
+- `rad-ir-safety`: IR safety: contrast radiation anticoagulation consent
+- `rad-ir-access`: Angiography and vascular access
+- `rad-ir-embolisation`: Embolisation agents and techniques
+- `rad-ir-tips`: TIPS and portal interventions
+- `rad-ir-venous`: Venous access and IVC filters
+- `rad-ir-stent`: Angioplasty and stents
+- `rad-ir-thrombolysis`: Thrombolysis and thrombectomy
+
 ### anaesthesia (34/34 imageless)
 
 - `ans-coexisting-disease`: Anaesthesia in coexisting disease: high-yield principles
@@ -1133,32 +1132,6 @@ All 49 lessons in physiology carry at least one verified diagram.
 - `mcc-cc-sleep`: Sleep apnoea and sleep disorders: a practical approach
 - `mcc-cc-tb`: Latent and active tuberculosis: diagnosis and management
 - `mcc-cc-thyroid`: Thyroid disease: essentials for exams
-
-### radiology (23/23 imageless)
-
-- `rad-brachytherapy`: Brachytherapy and therapeutic radioisotopes
-- `rad-cardiovascular`: Cardiovascular imaging: key chest radiograph and modality signs
-- `rad-chest`: Chest radiology: key signs and patterns for exams
-- `rad-clinical-rt`: Radiotherapy in Clinical Oncology: Radiosensitivity, Radical and Palliative Use
-- `rad-contrast`: Contrast media and reactions
-- `rad-ct-mri`: CT and MRI principles
-- `rad-genitourinary`: Genitourinary radiology: key investigations and classic signs
-- `rad-gi`: Gastrointestinal Radiology: Barium Studies and Key Signs
-- `rad-hepatobiliary`: Hepatobiliary and pancreatic imaging: key patterns and investigations
-- `rad-interventional`: Interventional radiology: core techniques and high-yield facts
-- `rad-mixed`: Radiology mixed rapid review
-- `rad-musculoskeletal`: Musculoskeletal Radiology and Bone Tumours: High-Yield Signs
-- `rad-neuroradiology`: Neuroradiology essentials: trauma bleeds, stroke, and lesions that mimic each other on imaging
-- `rad-nm-principles`: Radionuclides and Nuclear Medicine Instrumentation
-- `rad-nm-scans`: Nuclear medicine scans and PET: choosing the right tracer
-- `rad-obgyn-breast`: Obstetric, gynaecological and breast imaging: key high-yield facts
-- `rad-paediatric`: Paediatric radiology: high-yield neonatal and childhood signs
-- `rad-radiation-protection`: Radiation units, biological effects and protection
-- `rad-radiobiology`: Radiobiology and fractionation: the essentials for NEET-PG and INI-CET
-- `rad-teletherapy`: External beam radiotherapy techniques
-- `rad-toxicity`: Radiation toxicity and tissue tolerance
-- `rad-ultrasound`: Ultrasound and Doppler: Physics, Artefacts and Key Clinical Uses
-- `rad-xray`: X-ray production and conventional radiography
 
 ### mcc-acute-care (21/21 imageless)
 

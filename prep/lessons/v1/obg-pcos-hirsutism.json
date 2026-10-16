@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "obg-pcos-hirsutism",
-  "subject": "obstetrics-gynaecology",
-  "title": "PCOS and hirsutism: Rotterdam, metabolic risk and ovulation induction",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**PCOS** (**Rotterdam 2 of 3**: oligo-anovulation, hyperandrogenism clinical or raised testosterone, **polycystic ovaries 12 follicles or 10 ml**; adolescent 2 years, phenotypes; **mimics excluded**: thyroid prolactin NCAH Cushing androgen tumours) with **hirsutism** (**Ferriman-Gallwey** 9 areas, **virilisation** clitoromegaly balding voice warns tumour NCAH) diagnoses; **acne acanthosis** insulin flags. Rapid virilisation testosterone DHEAS images.",
-      "say": "Two three Rotterdam periods hair scans is PCOS: rapid balding voice clitoris tumours image. Mimics excluded first.",
-      "vis": null
-    },
-    {
-      "tx": "**Metabolic** (**insulin resistance** acanthosis, **75 g OGTT** screens, **dyslipidaemia**, hypertension, **NAFLD**, **endometrial hyperplasia** unopposed, **depression anxiety**, sleep apnoea) with **weight** (**5 percent restores ovulation**, diet exercise first, **orlistat** selected, **bariatric** BMI 40) manages; **metformin** (glucose intolerance, adjunct induction, GI titrate) sensitises. Diabetes converts yearly.",
-      "say": "Sugar fat liver womb mood screens yearly: 5 percent periods return metformin adjuncts. Weight first restores.",
-      "vis": null
-    },
-    {
-      "tx": "**Hirsutism** (**combined pills** SHBG + antiandrogen drospirenone cyproterone, **spironolactone** potassium contraception, **finasteride** teratogenic, **flutamide** liver, **eflornithine** facial, **laser electrolysis** 6 to 12 sessions) with **acne** (benzoyl retinoids, pills) treats cosmesis; **6 to 9 months** assesses, maintenance continues. Pregnancy plans stop antiandrogens.",
-      "say": "Pills raise binding starve hair: spiro laser months assess contracepted. Facial creams adjunct.",
-      "vis": null
-    },
-    {
-      "tx": "**Induction** (**letrozole first** 2.5 to 7.5 mg days 2 to 6, **clomiphene** 50 to 150 twins 10 percent visual, **metformin adjunct**, **gonadotropins** low dose OHSS, **ovarian drilling** wedge cautious AMH, **IVF** resistant) with **monitoring** (follicular scan, **OHSS** ascites haemoconcentration cabergoline, multiple pregnancy counsel) closes; **progesterone withdrawal** bleeds protect endometrium. BMI optimises first.",
-      "say": "Letrozole days 2 6 first clomiphene twins visuals: drilling wedges AMH IVF resistant. Scans OHSS watch.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "PCOS",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Define",
-            "2 of 3",
-            "Exclude mimics"
-          ],
-          [
-            "Metabolic",
-            "OGTT yearly",
-            "5% weight"
-          ],
-          [
-            "Hair",
-            "Pills spiro laser",
-            "9 months"
-          ],
-          [
-            "Induce",
-            "Letrozole first",
-            "Scan OHSS"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-251",
-    "bk2-obg-252",
-    "bk2-obg-253",
-    "bk2-obg-254",
-    "bk2-obg-255",
-    "bk2-obg-256",
-    "bk2-obg-257",
-    "bk2-obg-258",
-    "bk2-obg-259",
-    "bk2-obg-260"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "obg-pcos-hirsutism",
+ "subject": "obstetrics-gynaecology",
+ "title": "PCOS and hirsutism: Rotterdam, metabolic risk and ovulation induction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**PCOS** (**Rotterdam 2 of 3**: oligo-anovulation, hyperandrogenism clinical or raised testosterone, **polycystic ovaries 12 follicles or 10 ml**; adolescent 2 years, phenotypes; **mimics excluded**: thyroid prolactin NCAH Cushing androgen tumours) with **hirsutism** (**Ferriman-Gallwey** 9 areas, **virilisation** clitoromegaly balding voice warns tumour NCAH) diagnoses; **acne acanthosis** insulin flags. Rapid virilisation testosterone DHEAS images.",
+   "say": "Two three Rotterdam periods hair scans is PCOS: rapid balding voice clitoris tumours image. Mimics excluded first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-pcos-hirsutism-fig1.webp",
+    "alt": "Diagram showing Rotterdam criteria for PCOS and Ferriman-Gallwey score for hirsutism assessment.",
+    "caption": "PCOS and Hirsutism: Diagnostic criteria and clinical assessment",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Metabolic** (**insulin resistance** acanthosis, **75 g OGTT** screens, **dyslipidaemia**, hypertension, **NAFLD**, **endometrial hyperplasia** unopposed, **depression anxiety**, sleep apnoea) with **weight** (**5 percent restores ovulation**, diet exercise first, **orlistat** selected, **bariatric** BMI 40) manages; **metformin** (glucose intolerance, adjunct induction, GI titrate) sensitises. Diabetes converts yearly.",
+   "say": "Sugar fat liver womb mood screens yearly: 5 percent periods return metformin adjuncts. Weight first restores.",
+   "vis": null
+  },
+  {
+   "tx": "**Hirsutism** (**combined pills** SHBG + antiandrogen drospirenone cyproterone, **spironolactone** potassium contraception, **finasteride** teratogenic, **flutamide** liver, **eflornithine** facial, **laser electrolysis** 6 to 12 sessions) with **acne** (benzoyl retinoids, pills) treats cosmesis; **6 to 9 months** assesses, maintenance continues. Pregnancy plans stop antiandrogens.",
+   "say": "Pills raise binding starve hair: spiro laser months assess contracepted. Facial creams adjunct.",
+   "vis": null
+  },
+  {
+   "tx": "**Induction** (**letrozole first** 2.5 to 7.5 mg days 2 to 6, **clomiphene** 50 to 150 twins 10 percent visual, **metformin adjunct**, **gonadotropins** low dose OHSS, **ovarian drilling** wedge cautious AMH, **IVF** resistant) with **monitoring** (follicular scan, **OHSS** ascites haemoconcentration cabergoline, multiple pregnancy counsel) closes; **progesterone withdrawal** bleeds protect endometrium. BMI optimises first.",
+   "say": "Letrozole days 2 6 first clomiphene twins visuals: drilling wedges AMH IVF resistant. Scans OHSS watch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PCOS",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Define",
+      "2 of 3",
+      "Exclude mimics"
+     ],
+     [
+      "Metabolic",
+      "OGTT yearly",
+      "5% weight"
+     ],
+     [
+      "Hair",
+      "Pills spiro laser",
+      "9 months"
+     ],
+     [
+      "Induce",
+      "Letrozole first",
+      "Scan OHSS"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-251",
+  "bk2-obg-252",
+  "bk2-obg-253",
+  "bk2-obg-254",
+  "bk2-obg-255",
+  "bk2-obg-256",
+  "bk2-obg-257",
+  "bk2-obg-258",
+  "bk2-obg-259",
+  "bk2-obg-260"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

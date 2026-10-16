@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-mpn",
-  "subject": "medicine",
-  "title": "Myeloproliferative neoplasms: CML, PV, ET and myelofibrosis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**spleen** massive dragging early satiety weight, **CML** fatigue sweats gout priapism, **PV** plethora itching aquagenic erythromelalgia, **ET** burning toes strokes miscarriages, **fibrosis** night sweats gout tear-drop, **risks** smoking JAK exposures, **blast** fever infections bleeds) with **viva** (**leukaemic** massively splenomegalic, **plethoric** ruddy itching) profiles; **counts** (white red platelets sorts) tallies. Marrows overgrow.",
-      "say": "Spleens CMLs PVs ETs is history: fibroses sweat blasts transform risks smoke counts tally leukaemics drag plethorics flush itches torment gout aches. Spleens swell.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**spleen** massive CML myelofibrosis crosses, **liver** CML palpable dual, **plethora** ruddy conjunctival hypertensive, **erythromelalgia** burning red toes, **gout** tophi turnover stones, **priapism** leukostatic painful, **blast** fever nodes bleed, **thrombosis** strokes digits) with **bedside** (**counts** leukocytosis thrombocytosis, **smear** tear-drop basophilia, **uric** gout stones) counts; **spleen** (serial centimetres) measures. Spleens enlarge.",
-      "say": "Spleens livers plethoras erythromelalgias is exam: gouts chalk priapisms ache blasts fever thromboses clot counts climb smears tear urics rise spleens measure centimetres shrink. Bellies fill.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**BCR-ABL** CML PCR quantifies, **JAK2** PV ET fibrosis marks, **EPO** low PV secondary sorts, **marrow** fibrosis reticulin grades, **LAP** low CML high reactive, **blast** counts phase sorts) with **differentials** (**CML** BCR massive spleen, **PV** JAK plethora low EPO, **ET** platelets JAK clots, **fibrosis** tear-drop leukoerythroblastic) sorts; **transplant** (young blast decides) meets. Clones expand.",
-      "say": "BCR-ABLs JAK2s EPOs marrows is Ix: LAPs dip blasts phase CMLs fuse PVs redden ETs clot fibroses scar transplants meet donors match drugs switch. Genes fuse.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**imatinib** BCR daily PCR monitors, **venesect** PV haematocrit aspirin, **ET** aspirin hydroxycarbamide anagrelide, **fibrosis** ruxolitinib spleen anaemia, **blast** AML chemotherapy transplant, **gout** allopurinol fluids, **clots** anticoagulate manage) with **traps** (**blast** missed transforms, **venesection** iron confuses, **pregnancy** interferon plans) closes; **follow** (PCR counts spleen) tracks. Marrows calm.",
-      "say": "Imatinibs venesects ETs fibroses is Rx: blasts treat gouts dissolve clots thin blasts miss venesections confuse pregnancies plan follows track PCRs deepen wishes respect. Counts settle.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-611",
-    "bk2-med-612",
-    "bk2-med-613",
-    "bk2-med-614",
-    "bk2-med-615",
-    "bk2-med-616",
-    "bk2-med-617",
-    "bk2-med-618",
-    "bk2-med-619",
-    "bk2-med-620"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon7",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-mpn",
+ "subject": "medicine",
+ "title": "Myeloproliferative neoplasms: CML, PV, ET and myelofibrosis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**spleen** massive dragging early satiety weight, **CML** fatigue sweats gout priapism, **PV** plethora itching aquagenic erythromelalgia, **ET** burning toes strokes miscarriages, **fibrosis** night sweats gout tear-drop, **risks** smoking JAK exposures, **blast** fever infections bleeds) with **viva** (**leukaemic** massively splenomegalic, **plethoric** ruddy itching) profiles; **counts** (white red platelets sorts) tallies. Marrows overgrow.",
+   "say": "Spleens CMLs PVs ETs is history: fibroses sweat blasts transform risks smoke counts tally leukaemics drag plethorics flush itches torment gout aches. Spleens swell.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**spleen** massive CML myelofibrosis crosses, **liver** CML palpable dual, **plethora** ruddy conjunctival hypertensive, **erythromelalgia** burning red toes, **gout** tophi turnover stones, **priapism** leukostatic painful, **blast** fever nodes bleed, **thrombosis** strokes digits) with **bedside** (**counts** leukocytosis thrombocytosis, **smear** tear-drop basophilia, **uric** gout stones) counts; **spleen** (serial centimetres) measures. Spleens enlarge.",
+   "say": "Spleens livers plethoras erythromelalgias is exam: gouts chalk priapisms ache blasts fever thromboses clot counts climb smears tear urics rise spleens measure centimetres shrink. Bellies fill.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-mpn-fig1.webp",
+    "alt": "Microscopic image of a peripheral blood smear with tear-drop shaped red blood cells (dacryocytes) and increased basophils, indicative of myeloproliferative neoplasms.",
+    "caption": "Peripheral blood smear showing tear-drop cells and basophilia, characteristic of MPNs. Image: Ajay Kumar Chaurasiya, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Investigations** (**BCR-ABL** CML PCR quantifies, **JAK2** PV ET fibrosis marks, **EPO** low PV secondary sorts, **marrow** fibrosis reticulin grades, **LAP** low CML high reactive, **blast** counts phase sorts) with **differentials** (**CML** BCR massive spleen, **PV** JAK plethora low EPO, **ET** platelets JAK clots, **fibrosis** tear-drop leukoerythroblastic) sorts; **transplant** (young blast decides) meets. Clones expand.",
+   "say": "BCR-ABLs JAK2s EPOs marrows is Ix: LAPs dip blasts phase CMLs fuse PVs redden ETs clot fibroses scar transplants meet donors match drugs switch. Genes fuse.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**imatinib** BCR daily PCR monitors, **venesect** PV haematocrit aspirin, **ET** aspirin hydroxycarbamide anagrelide, **fibrosis** ruxolitinib spleen anaemia, **blast** AML chemotherapy transplant, **gout** allopurinol fluids, **clots** anticoagulate manage) with **traps** (**blast** missed transforms, **venesection** iron confuses, **pregnancy** interferon plans) closes; **follow** (PCR counts spleen) tracks. Marrows calm.",
+   "say": "Imatinibs venesects ETs fibroses is Rx: blasts treat gouts dissolve clots thin blasts miss venesections confuse pregnancies plan follows track PCRs deepen wishes respect. Counts settle.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-611",
+  "bk2-med-612",
+  "bk2-med-613",
+  "bk2-med-614",
+  "bk2-med-615",
+  "bk2-med-616",
+  "bk2-med-617",
+  "bk2-med-618",
+  "bk2-med-619",
+  "bk2-med-620"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon7",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

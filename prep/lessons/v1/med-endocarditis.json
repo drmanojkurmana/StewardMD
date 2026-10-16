@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-endocarditis",
-  "subject": "medicine",
-  "title": "Infective endocarditis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**fever** weeks rigors night sweats, **murmur** new changing regurgitant, **teeth** extraction decay procedures, **valve** rheumatic prosthetic IV lines, **weight** anorexia malaise arthralgia, **emboli** stroke splenic renal haematuria, **drugs** IVDU skin pops, **immune** SLE negative cultures) with **viva** (**young** IVDU tricuspid, **elderly** TAVI prosthetic) profiles; **Dukes** (major minor counts) scores. Fevers seed.",
-      "say": "Fevers rigors sweats murmurs teeth valves weights emboli drugs is history: young inject elderlies replace Dukes count majors minors cultures grow emboli fly. Hearts seed.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**pallor** anaemia clubbing, **Osler** tender finger pulp, **Janeway** painless palms, **splinters** nail beds bleed, **Roth** retinal ovals, **spleen** tender infarcts, **murmurs** changing aortic mitral, **failure** new regurgitation) with **bedside** (**urine** haematuria protein, **fundi** Roth spots, **skin** purpura infarcts) spots; **neuro** (mycotic aneurysm bleeds) watches. Hands spot.",
-      "say": "Pallors Oslers Janeways splinters Roths spleens is exam: urines bloody fundi spotted skins bruised neuros bleed aneurysms burst emboli seed valves leak. Fingers nodes.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**cultures** 3 sets before antibiotics, **echo** TTE TEE vegetations abscess, **CRP** ESR anaemia high, **urine** RBC casts infarcts, **ECG** PR prolongs abscess, **CT** chest abdomen emboli, **PET** prosthetic lights, **serology** Coxiella Bartonella negative) with **Dukes** (**major** cultures echo, **minor** fever vascular immune, **definite** 2 major 1-3, **reject** firm alternative) proves; **surgery** (failure abscess large mobile) times. Cultures prove.",
-      "say": "Cultures sets echos vegetations CRPs urines ECGs CTs PETs is Ix: majors grow minors fever definites count rejects firm surgeries time failures abscess dehisce blocks conduct. Bugs grow.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**penicillin** strep sensitive kills, **gentamicin** synergy kidneys hears, **vancomycin** MRSA prosthetic, **duration** 4-6 weeks valves, **surgery** heart failure uncontrolled emboli, **dental** prophylaxis high-risk, **IVDU** rehab counsels, **follow** echo CRP cultures) with **traps** (**negative** prior antibiotics serology, **fungal** lines TPN treats, **abscess** PR blocks paces) closes; **mortality** (staph prosthetic high) warns. Drugs kill.",
-      "say": "Penicillins gentamicins vancomycins durations is Rx: failures operate uncontrolled resect embolies recur dentals cover injectors counsel negatives test fungals treat abscesses block paced deaths warn. Valves sterilise.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-041",
-    "bk2-med-042",
-    "bk2-med-043",
-    "bk2-med-044",
-    "bk2-med-045",
-    "bk2-med-046",
-    "bk2-med-047",
-    "bk2-med-048",
-    "bk2-med-049",
-    "bk2-med-050"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-endocarditis",
+ "subject": "medicine",
+ "title": "Infective endocarditis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**fever** weeks rigors night sweats, **murmur** new changing regurgitant, **teeth** extraction decay procedures, **valve** rheumatic prosthetic IV lines, **weight** anorexia malaise arthralgia, **emboli** stroke splenic renal haematuria, **drugs** IVDU skin pops, **immune** SLE negative cultures) with **viva** (**young** IVDU tricuspid, **elderly** TAVI prosthetic) profiles; **Dukes** (major minor counts) scores. Fevers seed.",
+   "say": "Fevers rigors sweats murmurs teeth valves weights emboli drugs is history: young inject elderlies replace Dukes count majors minors cultures grow emboli fly. Hearts seed.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**pallor** anaemia clubbing, **Osler** tender finger pulp, **Janeway** painless palms, **splinters** nail beds bleed, **Roth** retinal ovals, **spleen** tender infarcts, **murmurs** changing aortic mitral, **failure** new regurgitation) with **bedside** (**urine** haematuria protein, **fundi** Roth spots, **skin** purpura infarcts) spots; **neuro** (mycotic aneurysm bleeds) watches. Hands spot.",
+   "say": "Pallors Oslers Janeways splinters Roths spleens is exam: urines bloody fundi spotted skins bruised neuros bleed aneurysms burst emboli seed valves leak. Fingers nodes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-endocarditis-fig1.webp",
+    "alt": "Composite image showing Osler nodes, Janeway lesions, splinter hemorrhages, clubbing, and a Roth spot, characteristic physical signs of infective endocarditis.",
+    "caption": "Key peripheral stigmata of infective endocarditis on examination",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**cultures** 3 sets before antibiotics, **echo** TTE TEE vegetations abscess, **CRP** ESR anaemia high, **urine** RBC casts infarcts, **ECG** PR prolongs abscess, **CT** chest abdomen emboli, **PET** prosthetic lights, **serology** Coxiella Bartonella negative) with **Dukes** (**major** cultures echo, **minor** fever vascular immune, **definite** 2 major 1-3, **reject** firm alternative) proves; **surgery** (failure abscess large mobile) times. Cultures prove.",
+   "say": "Cultures sets echos vegetations CRPs urines ECGs CTs PETs is Ix: majors grow minors fever definites count rejects firm surgeries time failures abscess dehisce blocks conduct. Bugs grow.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**penicillin** strep sensitive kills, **gentamicin** synergy kidneys hears, **vancomycin** MRSA prosthetic, **duration** 4-6 weeks valves, **surgery** heart failure uncontrolled emboli, **dental** prophylaxis high-risk, **IVDU** rehab counsels, **follow** echo CRP cultures) with **traps** (**negative** prior antibiotics serology, **fungal** lines TPN treats, **abscess** PR blocks paces) closes; **mortality** (staph prosthetic high) warns. Drugs kill.",
+   "say": "Penicillins gentamicins vancomycins durations is Rx: failures operate uncontrolled resect embolies recur dentals cover injectors counsel negatives test fungals treat abscesses block paced deaths warn. Valves sterilise.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-041",
+  "bk2-med-042",
+  "bk2-med-043",
+  "bk2-med-044",
+  "bk2-med-045",
+  "bk2-med-046",
+  "bk2-med-047",
+  "bk2-med-048",
+  "bk2-med-049",
+  "bk2-med-050"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

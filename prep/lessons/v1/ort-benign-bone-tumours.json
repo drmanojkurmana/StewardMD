@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ort-benign-bone-tumours",
-  "subject": "orthopaedics",
-  "title": "Benign bone tumours: age, site and margin sort them",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Sort** (**age** child versus adult splits, **site** epi-meta-diaphyseal zones, **Enneking** latent active aggressive, **geographic** sharp benign rims, **moth-eaten** lymphoma aggressive, **permeative** Ewing round-cell, **Codman** triangle lifts, **sunburst** osteosarcoma spikes) with **reads** (**x-ray** whole-bone views, **MRI** marrow soft-tissue) stages; **biopsy** (tract-planned cores) proves. Margins speak.",
-      "say": "Ages sites Ennekings geographics is sort: splits sort child-adult zones map epi-meta rims rim geographics edge moths eat aggressives drill spikes lift Codmans tent biopsies plan tracts seed reads scan wholes stage. Films sort.",
-      "vis": null
-    },
-    {
-      "tx": "**Cartilage** (**osteochondroma** exostosis away-grows cartilage-cap, **malignant** one-percent chondrosarcoma cap-thick, **enchondroma** hands calcified stipple, **Ollier** multiple enchondromas deform, **Maffucci** haemangioma sarcoma-risk, **chondroblastoma** epiphysis young sclerotic, **fibroma** chondromyxoid eccentric, **excise** symptomatic extra-periosteal) with **watches** (**growth** cessation matures, **pain** adult-growth alarms) tracks; **map** (skeletal survey) counts. Caps cartilage.",
-      "say": "Exostoses enchondromas Olliers chondroblastomas is cartilage: caps top exostoses point aways thicken warn maligns change stipples dot hands deform bend multiples curve surveys map skeletons count watches track growths halt maps draw wholes survey. Lumps cap.",
-      "vis": null
-    },
-    {
-      "tx": "**Bone-fibrous** (**osteoid** night aspirin nidus small, **osteoblastoma** larger spine posterior, **NOF** eccentric cortically-based heals, **fibrous** ground-glass shepherd-crook, **McCune** cafe-au-lait precocious polyostotic, **cyst** fallen-fragment humerus, **aneurysmal** fluid-levels young blowout, **curette** graft defects) with **relieves** (**salicylate** night-pain test, **RFA** nidus burns) treats; **brace** (fracture-risk) guards. Fibres fill.",
-      "say": "Osteoids blasts NOFs fibrous is bone: nights ache aspirins ease nidi glow smalls dot backs arch posteriors hug eccentrics hug cortices heal glasses grind grounds crooks curve shepherds bend relieves calm salicylates soothe braces guard fractures risk. Lesions ache.",
-      "vis": null
-    },
-    {
-      "tx": "**GCT-ABC** (**GCT** epiphysio-metaphyseal soap-bubble mature, **grade** Campanacci cortex breach, **denosumab** RANKL giant-cell melts, **cement** curettage thermal kills, **recur** twenty-percent re-curette, **ABC** blow-out shell younger, **fluid** levels MRI double-density, **embolise** sacral unresectable) with **spans** (**resection** expendable fibula, **prosthesis** joint-sparing) rebuilds; **follow** (lung nodules) screens. Giants bubble.",
-      "say": "GCTs grades denosumabs cements is giant: bubbles foam soaps lather breaches grade cortices melt drugs shrink RANKLs block kills burn cements bake recurs seed twenties loom spans bridge resections span follows screen lungs seed. Epiphyses bubble.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ort-081",
-    "bk2-ort-082",
-    "bk2-ort-083",
-    "bk2-ort-084",
-    "bk2-ort-085",
-    "bk2-ort-086",
-    "bk2-ort-087",
-    "bk2-ort-088",
-    "bk2-ort-089",
-    "bk2-ort-090"
-  ],
-  "src": [],
-  "refs": [
-    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ort1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ort-benign-bone-tumours",
+ "subject": "orthopaedics",
+ "title": "Benign bone tumours: age, site and margin sort them",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Sort** (**age** child versus adult splits, **site** epi-meta-diaphyseal zones, **Enneking** latent active aggressive, **geographic** sharp benign rims, **moth-eaten** lymphoma aggressive, **permeative** Ewing round-cell, **Codman** triangle lifts, **sunburst** osteosarcoma spikes) with **reads** (**x-ray** whole-bone views, **MRI** marrow soft-tissue) stages; **biopsy** (tract-planned cores) proves. Margins speak.",
+   "say": "Ages sites Ennekings geographics is sort: splits sort child-adult zones map epi-meta rims rim geographics edge moths eat aggressives drill spikes lift Codmans tent biopsies plan tracts seed reads scan wholes stage. Films sort.",
+   "vis": null
+  },
+  {
+   "tx": "**Cartilage** (**osteochondroma** exostosis away-grows cartilage-cap, **malignant** one-percent chondrosarcoma cap-thick, **enchondroma** hands calcified stipple, **Ollier** multiple enchondromas deform, **Maffucci** haemangioma sarcoma-risk, **chondroblastoma** epiphysis young sclerotic, **fibroma** chondromyxoid eccentric, **excise** symptomatic extra-periosteal) with **watches** (**growth** cessation matures, **pain** adult-growth alarms) tracks; **map** (skeletal survey) counts. Caps cartilage.",
+   "say": "Exostoses enchondromas Olliers chondroblastomas is cartilage: caps top exostoses point aways thicken warn maligns change stipples dot hands deform bend multiples curve surveys map skeletons count watches track growths halt maps draw wholes survey. Lumps cap.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ort-benign-bone-tumours-fig1.webp",
+    "alt": "Radiographic examples of benign cartilaginous tumors: osteochondroma (metaphysis), enchondroma (hand, stipple), and chondroblastoma (epiphysis). Illustrates age, site, and margin characteristics.",
+    "caption": "Benign cartilaginous tumors: typical age, site, and radiographic features",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Bone-fibrous** (**osteoid** night aspirin nidus small, **osteoblastoma** larger spine posterior, **NOF** eccentric cortically-based heals, **fibrous** ground-glass shepherd-crook, **McCune** cafe-au-lait precocious polyostotic, **cyst** fallen-fragment humerus, **aneurysmal** fluid-levels young blowout, **curette** graft defects) with **relieves** (**salicylate** night-pain test, **RFA** nidus burns) treats; **brace** (fracture-risk) guards. Fibres fill.",
+   "say": "Osteoids blasts NOFs fibrous is bone: nights ache aspirins ease nidi glow smalls dot backs arch posteriors hug eccentrics hug cortices heal glasses grind grounds crooks curve shepherds bend relieves calm salicylates soothe braces guard fractures risk. Lesions ache.",
+   "vis": null
+  },
+  {
+   "tx": "**GCT-ABC** (**GCT** epiphysio-metaphyseal soap-bubble mature, **grade** Campanacci cortex breach, **denosumab** RANKL giant-cell melts, **cement** curettage thermal kills, **recur** twenty-percent re-curette, **ABC** blow-out shell younger, **fluid** levels MRI double-density, **embolise** sacral unresectable) with **spans** (**resection** expendable fibula, **prosthesis** joint-sparing) rebuilds; **follow** (lung nodules) screens. Giants bubble.",
+   "say": "GCTs grades denosumabs cements is giant: bubbles foam soaps lather breaches grade cortices melt drugs shrink RANKLs block kills burn cements bake recurs seed twenties loom spans bridge resections span follows screen lungs seed. Epiphyses bubble.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ort-081",
+  "bk2-ort-082",
+  "bk2-ort-083",
+  "bk2-ort-084",
+  "bk2-ort-085",
+  "bk2-ort-086",
+  "bk2-ort-087",
+  "bk2-ort-088",
+  "bk2-ort-089",
+  "bk2-ort-090"
+ ],
+ "src": [],
+ "refs": [
+  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ort1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

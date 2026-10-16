@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-environmental",
-  "subject": "medicine",
-  "title": "Environmental emergencies: heat, cold, drowning and altitude",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**heat** exertional classic anhidrotic confusion, **cold** exposure alcohol frostbite shivering, **water** submersion time struggle aspiration, **altitude** ascent rate headache ataxia, **bites** marine envenomation stings, **current** lightning burns arrhythmia, **avalanche** burial asphyxia trauma, **exertion** marathon collapse asks) with **viva** (**hyperthermic** anhidrotic confused, **hypothermic** bradycardic Osborned) profiles; **gear** (wetsuits acclimatisation) asks. Climates kill.",
-      "say": "Heats colds waters altitudes is history: bites sting currents strike avalanches bury exertions collapse hyperthermics bake hypothermics slow rewarms grade descents save. Extremes strike.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**core** rectal temperature grades, **skin** hot-dry frostbite waxy, **mentation** delirious comatose GCS, **pulse** bradycardic arrhythmic Osborn, **lungs** drowning crackles ARDS, **ataxia** HACE wobbly papilloedema, **burns** lightning burns entry-exit, **shivering** present absent stages) with **bedside** (**ECG** Osborn QT arrests, **oxygen** drowning dips, **glucose** mimics corrects) grades; **rigor** (postmortem rules) respects. Temperatures swing.",
-      "say": "Cores skins mentations pulses is exam: lungs drown ataxias wobble burns char shiverings fade ECGs hump oxygens dive glucoses lift cools mist arrests guard. Bodies chill.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**gases** respiratory alkalosis acidosis, **electrolytes** rhabdo renal DIC panels, **ECG** hypothermic Osborn arrest, **troponin** lightning contusion climbs, **CXR** drowning ARDS whiteness, **oximetry** HAPE desaturation, **creatinine** crush rhabdo watches, **alcohol** hypothermia co-ingest screens) with **differentials** (**sepsis** cultures lactate, **stroke** focal imaging, **MI** troponin ECG, **epilepsy** witnessed jerks) sorts; **intensivist** (rewarm calls) meets. Cores confirm.",
-      "say": "Gases electrolytes ECGs troponins is Ix: CXRs white oximetries dip creatinines climb alcohols numb sepses brew strokes clot MIs ache epilepsies jerk intensivists meet warms choose wishes respect. Cold shows.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**cool** evaporative ice immersion classics, **rewarm** gentle handling arrhythmia guards, **oxygen** drowning PEEP ARDS nets, **descent** HAPE HACE urgent down, **nifedipine** HAPE dexamethasone HACE, **fluids** rhabdo crush alkaline, **arrest** hypothermic prolonged CPR, **prevent** acclimatise buddy water-safe) with **traps** (**alcohol** rewarming vasodilation, **rough** VF handling triggers, **prognosis** cold stiff declares) closes; **follow** (cores kidneys neuro) tracks. Extremes ease.",
-      "say": "Cools rewarms oxygens descents is Rx: nifedipines ease fluids flush arrests persist prevents plan alcohols dilate roughs fibrillate prognoses wait follows track cores norm wishes respect. Survivals warm.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-921",
-    "bk2-med-922",
-    "bk2-med-923",
-    "bk2-med-924",
-    "bk2-med-925",
-    "bk2-med-926",
-    "bk2-med-927",
-    "bk2-med-928",
-    "bk2-med-929",
-    "bk2-med-930"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon10",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-environmental",
+ "subject": "medicine",
+ "title": "Environmental emergencies: heat, cold, drowning and altitude",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**heat** exertional classic anhidrotic confusion, **cold** exposure alcohol frostbite shivering, **water** submersion time struggle aspiration, **altitude** ascent rate headache ataxia, **bites** marine envenomation stings, **current** lightning burns arrhythmia, **avalanche** burial asphyxia trauma, **exertion** marathon collapse asks) with **viva** (**hyperthermic** anhidrotic confused, **hypothermic** bradycardic Osborned) profiles; **gear** (wetsuits acclimatisation) asks. Climates kill.",
+   "say": "Heats colds waters altitudes is history: bites sting currents strike avalanches bury exertions collapse hyperthermics bake hypothermics slow rewarms grade descents save. Extremes strike.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**core** rectal temperature grades, **skin** hot-dry frostbite waxy, **mentation** delirious comatose GCS, **pulse** bradycardic arrhythmic Osborn, **lungs** drowning crackles ARDS, **ataxia** HACE wobbly papilloedema, **burns** lightning burns entry-exit, **shivering** present absent stages) with **bedside** (**ECG** Osborn QT arrests, **oxygen** drowning dips, **glucose** mimics corrects) grades; **rigor** (postmortem rules) respects. Temperatures swing.",
+   "say": "Cores skins mentations pulses is exam: lungs drown ataxias wobble burns char shiverings fade ECGs hump oxygens dive glucoses lift cools mist arrests guard. Bodies chill.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-environmental-fig1.webp",
+    "alt": "Multi-panel image showing ECG Osborn wave, frostbite stages on a hand, and hot-dry skin for environmental emergency diagnosis.",
+    "caption": "Key examination findings in environmental emergencies. Image: WikiSysop, CC BY 3.0, Wikimedia Commons.",
+    "ar": 2.3472
+   }
+  },
+  {
+   "tx": "**Investigations** (**gases** respiratory alkalosis acidosis, **electrolytes** rhabdo renal DIC panels, **ECG** hypothermic Osborn arrest, **troponin** lightning contusion climbs, **CXR** drowning ARDS whiteness, **oximetry** HAPE desaturation, **creatinine** crush rhabdo watches, **alcohol** hypothermia co-ingest screens) with **differentials** (**sepsis** cultures lactate, **stroke** focal imaging, **MI** troponin ECG, **epilepsy** witnessed jerks) sorts; **intensivist** (rewarm calls) meets. Cores confirm.",
+   "say": "Gases electrolytes ECGs troponins is Ix: CXRs white oximetries dip creatinines climb alcohols numb sepses brew strokes clot MIs ache epilepsies jerk intensivists meet warms choose wishes respect. Cold shows.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**cool** evaporative ice immersion classics, **rewarm** gentle handling arrhythmia guards, **oxygen** drowning PEEP ARDS nets, **descent** HAPE HACE urgent down, **nifedipine** HAPE dexamethasone HACE, **fluids** rhabdo crush alkaline, **arrest** hypothermic prolonged CPR, **prevent** acclimatise buddy water-safe) with **traps** (**alcohol** rewarming vasodilation, **rough** VF handling triggers, **prognosis** cold stiff declares) closes; **follow** (cores kidneys neuro) tracks. Extremes ease.",
+   "say": "Cools rewarms oxygens descents is Rx: nifedipines ease fluids flush arrests persist prevents plan alcohols dilate roughs fibrillate prognoses wait follows track cores norm wishes respect. Survivals warm.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-921",
+  "bk2-med-922",
+  "bk2-med-923",
+  "bk2-med-924",
+  "bk2-med-925",
+  "bk2-med-926",
+  "bk2-med-927",
+  "bk2-med-928",
+  "bk2-med-929",
+  "bk2-med-930"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon10",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ort-osteomyelitis",
-  "subject": "orthopaedics",
-  "title": "Osteomyelitis: sequestra, sinuses and dead-space surgery",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Acute haematogenous** (**children** metaphysis sluggish loops, **Staph aureus** commonest seeding, **sickle** Salmonella infarcts, **neonate** pseudomonas pressure, **puncture** nail through-sole pseudomonas, **pain** throbbing fever refuses-move, **swell** tender metaphysis oedema, **separate** epiphysis spared) with **taps** (**blood** cultures first, **aspirate** subperiosteal pus) proves; **start** (empirical anti-staph) covers. Bones seed.",
-      "say": "Acutes childrens Staphs sickles is acute: loops slow metaphyses trap seeds lodge aureus common infarcts die Salmonellas breed throbs ache moves refuse swells puff metaphyses swell taps draw bloods culture proves start cover empirics shield. Marrows infect.",
-      "vis": null
-    },
-    {
-      "tx": "**Chronic vocabulary** (**sequestrum** dead detached bone, **involucrum** living sheath wraps, **cloacae** pus holes drain, **sinus** skin discharging tracks, **Brodie** small cavity abscess sclerotic, **Garre** non-suppurative thickening, **Cierny-Mader** anatomic-physio stages, **reactivate** decades later flares) with **reads** (**x-ray** rarefaction periosteal, **CT** sequestra maps) sees; **stage** (host physiology) grades. Words define.",
-      "say": "Sequestra involucra cloacae sinuses is chronic: deads detach sheaths wrap livings shield holes drain pus tracks leak skins stain cavities wall Brodys rim thickens Garre swells stages grade Ciernys sort reads show rarefactions fade stages map hosts grade. Lesions persist.",
-      "vis": null
-    },
-    {
-      "tx": "**Special forms** (**vertebral** discitis endplate adults, **diabetic** probe-to-bone ulcers, **prosthetic** biofilm indolent loosening, **contiguous** open fracture spreads, **sickle** dactylitis hand-foot, **skull** Pott puffy tumour, **jaw** actinomycosis sulphur, **SAPHO** sternoclavicular acne) with **suspects** (**ulcer** depth exposes, **loosen** early radiolucency) flags; **biopsy** (deep cultures) confirms. Sites vary.",
-      "say": "Vertebrals diabetics prosthetics contiguas is special: endplates ache discs inflame probes poke ulcers bare biofilms coat loosens slide spreads crawl opens swell dactylites puff hands feet suspect flag depths bare biopsies drill deeps confirm. Infections spread.",
-      "vis": null
-    },
-    {
-      "tx": "**Treat** (**cultures** before antibiotics aspirates, **cloxacillin** MSSA ceftriaxone gram-neg, **weeks** four-six parenteral-oral, **surgery** sequestrectomy saucerise dead-space, **Papineau** open-cancellous grafting, **beads** antibiotic cement chains, **monitor** CRP ESR falls, **complications** growth-arrest amyloid Marjolin) with **fills** (**muscle** flaps obliterate, **graft** cancellous packs) closes; **follow** (years recurrence) watches. Pus drains.",
-      "say": "Cultures cloxacillins weeks surgeries is treat: aspirates tap priors start MSSAs cover weeklies run fours six drains cut sequesters lift saucers dish fills pack muscles flap monitors track CRPs fall follows watch years guard. Management cures.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ort-061",
-    "bk2-ort-062",
-    "bk2-ort-063",
-    "bk2-ort-064",
-    "bk2-ort-065",
-    "bk2-ort-066",
-    "bk2-ort-067",
-    "bk2-ort-068",
-    "bk2-ort-069",
-    "bk2-ort-070"
-  ],
-  "src": [],
-  "refs": [
-    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ort1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ort-osteomyelitis",
+ "subject": "orthopaedics",
+ "title": "Osteomyelitis: sequestra, sinuses and dead-space surgery",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Acute haematogenous** (**children** metaphysis sluggish loops, **Staph aureus** commonest seeding, **sickle** Salmonella infarcts, **neonate** pseudomonas pressure, **puncture** nail through-sole pseudomonas, **pain** throbbing fever refuses-move, **swell** tender metaphysis oedema, **separate** epiphysis spared) with **taps** (**blood** cultures first, **aspirate** subperiosteal pus) proves; **start** (empirical anti-staph) covers. Bones seed.",
+   "say": "Acutes childrens Staphs sickles is acute: loops slow metaphyses trap seeds lodge aureus common infarcts die Salmonellas breed throbs ache moves refuse swells puff metaphyses swell taps draw bloods culture proves start cover empirics shield. Marrows infect.",
+   "vis": null
+  },
+  {
+   "tx": "**Chronic vocabulary** (**sequestrum** dead detached bone, **involucrum** living sheath wraps, **cloacae** pus holes drain, **sinus** skin discharging tracks, **Brodie** small cavity abscess sclerotic, **Garre** non-suppurative thickening, **Cierny-Mader** anatomic-physio stages, **reactivate** decades later flares) with **reads** (**x-ray** rarefaction periosteal, **CT** sequestra maps) sees; **stage** (host physiology) grades. Words define.",
+   "say": "Sequestra involucra cloacae sinuses is chronic: deads detach sheaths wrap livings shield holes drain pus tracks leak skins stain cavities wall Brodys rim thickens Garre swells stages grade Ciernys sort reads show rarefactions fade stages map hosts grade. Lesions persist.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ort-osteomyelitis-fig1.webp",
+    "alt": "Diagram showing chronic osteomyelitis with a central sequestrum, surrounding involucrum, cloacae, and a draining sinus tract to the skin.",
+    "caption": "Chronic osteomyelitis: sequestrum, involucrum, cloacae, sinus",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Special forms** (**vertebral** discitis endplate adults, **diabetic** probe-to-bone ulcers, **prosthetic** biofilm indolent loosening, **contiguous** open fracture spreads, **sickle** dactylitis hand-foot, **skull** Pott puffy tumour, **jaw** actinomycosis sulphur, **SAPHO** sternoclavicular acne) with **suspects** (**ulcer** depth exposes, **loosen** early radiolucency) flags; **biopsy** (deep cultures) confirms. Sites vary.",
+   "say": "Vertebrals diabetics prosthetics contiguas is special: endplates ache discs inflame probes poke ulcers bare biofilms coat loosens slide spreads crawl opens swell dactylites puff hands feet suspect flag depths bare biopsies drill deeps confirm. Infections spread.",
+   "vis": null
+  },
+  {
+   "tx": "**Treat** (**cultures** before antibiotics aspirates, **cloxacillin** MSSA ceftriaxone gram-neg, **weeks** four-six parenteral-oral, **surgery** sequestrectomy saucerise dead-space, **Papineau** open-cancellous grafting, **beads** antibiotic cement chains, **monitor** CRP ESR falls, **complications** growth-arrest amyloid Marjolin) with **fills** (**muscle** flaps obliterate, **graft** cancellous packs) closes; **follow** (years recurrence) watches. Pus drains.",
+   "say": "Cultures cloxacillins weeks surgeries is treat: aspirates tap priors start MSSAs cover weeklies run fours six drains cut sequesters lift saucers dish fills pack muscles flap monitors track CRPs fall follows watch years guard. Management cures.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ort-061",
+  "bk2-ort-062",
+  "bk2-ort-063",
+  "bk2-ort-064",
+  "bk2-ort-065",
+  "bk2-ort-066",
+  "bk2-ort-067",
+  "bk2-ort-068",
+  "bk2-ort-069",
+  "bk2-ort-070"
+ ],
+ "src": [],
+ "refs": [
+  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ort1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

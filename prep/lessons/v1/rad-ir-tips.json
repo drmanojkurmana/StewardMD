@@ -1,142 +1,148 @@
 {
-  "v": 1,
-  "module": "rad-ir-tips",
-  "subject": "radiology",
-  "title": "TIPS and portal interventions",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "The **transjugular intrahepatic portosystemic shunt** connects a hepatic vein to a portal branch through liver parenchyma, lowering **portal pressure** without abdominal surgery. Its two evidence-based indications are **refractory variceal bleeding** and **refractory ascites** despite maximal medical therapy. The shunt uses a **covered stent-graft**, usually Viatorr-type, which stays open longer than bare metal. Success is measured on the table by the **portosystemic gradient**, with flow confirmed into the right atrium.",
-      "say": "A TIPS connects a hepatic vein to a portal branch through the liver, lowering portal pressure without open surgery. It is indicated for refractory variceal bleeding and refractory ascites despite full medical therapy. A covered stent-graft keeps the tract open, and success is measured by the pressure gradient on the table.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Jugular to hepatic vein"
-          },
-          {
-            "id": "b",
-            "label": "Puncture to portal branch"
-          },
-          {
-            "id": "c",
-            "label": "Covered stent deployed"
-          },
-          {
-            "id": "d",
-            "label": "Gradient checked"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Numbers decide who benefits from TIPS. The **portosystemic gradient** should fall to **12 mmHg or below**, the level at which variceal bleeding risk drops sharply under **Baveno and SIR guidance**. A gradient above this after deployment calls for **stent dilation** or revision. **Refractory ascites** needs repeated large-volume taps despite salt restriction and diuretics before TIPS is offered. Early or pre-emptive TIPS suits selected high-risk bleeders with preserved liver function rather than everyone with varices.",
-      "say": "Numbers decide who benefits. The gradient should fall to 12 or below, where bleeding risk drops sharply. Higher gradients need stent dilation or revision. Refractory ascites means repeated taps despite diet and diuretics, and early TIPS suits selected high-risk bleeders with preserved liver function.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Target",
-          "Value"
-        ],
-        "rows": [
-          [
-            "Portosystemic gradient",
-            "12 or below"
-          ],
-          [
-            "Refractory ascites",
-            "Repeated taps needed"
-          ],
-          [
-            "Pre-emptive TIPS",
-            "High-risk bleeders"
-          ],
-          [
-            "Revision trigger",
-            "Gradient above target"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Shunting portal blood past the liver has a price. **Hepatic encephalopathy** worsens or appears de novo in a substantial minority, managed with **lactulose** and **rifaximin** before shunt reduction is considered. **Liver failure** can follow in patients with very poor reserve, so bilirubin, MELD trajectory and frailty enter selection. **Heart failure** decompensates because the shunt returns splanchnic blood to the heart at once. **Polycystic liver disease**, uncontrolled sepsis and severe pulmonary hypertension weigh heavily against TIPS.",
-      "say": "Shunting blood past the liver has a price. Encephalopathy worsens in a substantial minority and is managed with lactulose and rifaximin before shunt reduction. Very poor liver reserve predicts failure, and heart failure can decompensate from the sudden return of blood. Polycystic disease and severe pulmonary hypertension argue against TIPS.",
-      "vis": null
-    },
-    {
-      "tx": "The portal venous system offers more than TIPS. **Portal vein recanalisation** with angioplasty and stenting treats symptomatic **non-cirrhotic thrombosis** and cavernous transformation with recurrent bleeding. **Transplenic access** reaches the portal system when jugular or transhepatic routes fail. **Variceal embolisation** with coils or glue accompanies TIPS when large spontaneous shunts steal flow. **BRTO** occludes bleeding gastric varices with a gastrorenal shunt through balloon-occluded retrograde injection of sclerosant.",
-      "say": "The portal system offers more than TIPS. Recanalisation with angioplasty treats symptomatic non-cirrhotic thrombosis with bleeding. Transplenic access helps when jugular routes fail. Coil embolisation of large shunts accompanies TIPS, and BRTO closes gastric varices through a gastrorenal shunt.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Problem",
-          "Intervention"
-        ],
-        "rows": [
-          [
-            "Refractory bleed or ascites",
-            "TIPS"
-          ],
-          [
-            "Non-cirrhotic thrombosis",
-            "Recanalisation"
-          ],
-          [
-            "Jugular route failed",
-            "Transplenic access"
-          ],
-          [
-            "Gastric varices with shunt",
-            "BRTO"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir-021",
-    "maikir-022",
-    "maikir-023",
-    "maikir-024",
-    "maikir-025",
-    "maikir-026",
-    "maikir-027",
-    "maikir-028",
-    "maikir-029",
-    "maikir-030"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-wave1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "rad-ir-tips",
+ "subject": "radiology",
+ "title": "TIPS and portal interventions",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "The **transjugular intrahepatic portosystemic shunt** connects a hepatic vein to a portal branch through liver parenchyma, lowering **portal pressure** without abdominal surgery. Its two evidence-based indications are **refractory variceal bleeding** and **refractory ascites** despite maximal medical therapy. The shunt uses a **covered stent-graft**, usually Viatorr-type, which stays open longer than bare metal. Success is measured on the table by the **portosystemic gradient**, with flow confirmed into the right atrium.",
+   "say": "A TIPS connects a hepatic vein to a portal branch through the liver, lowering portal pressure without open surgery. It is indicated for refractory variceal bleeding and refractory ascites despite full medical therapy. A covered stent-graft keeps the tract open, and success is measured by the pressure gradient on the table.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Jugular to hepatic vein"
+     },
+     {
+      "id": "b",
+      "label": "Puncture to portal branch"
+     },
+     {
+      "id": "c",
+      "label": "Covered stent deployed"
+     },
+     {
+      "id": "d",
+      "label": "Gradient checked"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Numbers decide who benefits from TIPS. The **portosystemic gradient** should fall to **12 mmHg or below**, the level at which variceal bleeding risk drops sharply under **Baveno and SIR guidance**. A gradient above this after deployment calls for **stent dilation** or revision. **Refractory ascites** needs repeated large-volume taps despite salt restriction and diuretics before TIPS is offered. Early or pre-emptive TIPS suits selected high-risk bleeders with preserved liver function rather than everyone with varices.",
+   "say": "Numbers decide who benefits. The gradient should fall to 12 or below, where bleeding risk drops sharply. Higher gradients need stent dilation or revision. Refractory ascites means repeated taps despite diet and diuretics, and early TIPS suits selected high-risk bleeders with preserved liver function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Portosystemic gradient",
+      "12 or below"
+     ],
+     [
+      "Refractory ascites",
+      "Repeated taps needed"
+     ],
+     [
+      "Pre-emptive TIPS",
+      "High-risk bleeders"
+     ],
+     [
+      "Revision trigger",
+      "Gradient above target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shunting portal blood past the liver has a price. **Hepatic encephalopathy** worsens or appears de novo in a substantial minority, managed with **lactulose** and **rifaximin** before shunt reduction is considered. **Liver failure** can follow in patients with very poor reserve, so bilirubin, MELD trajectory and frailty enter selection. **Heart failure** decompensates because the shunt returns splanchnic blood to the heart at once. **Polycystic liver disease**, uncontrolled sepsis and severe pulmonary hypertension weigh heavily against TIPS.",
+   "say": "Shunting blood past the liver has a price. Encephalopathy worsens in a substantial minority and is managed with lactulose and rifaximin before shunt reduction. Very poor liver reserve predicts failure, and heart failure can decompensate from the sudden return of blood. Polycystic disease and severe pulmonary hypertension argue against TIPS.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-tips-fig1.webp",
+    "alt": "Diagram showing TIPS complications: hepatic encephalopathy, liver failure, and heart failure decompensation. Patient selection factors like MELD score, bilirubin, and frailty are also indicated.",
+    "caption": "TIPS complications and critical patient selection factors",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "The portal venous system offers more than TIPS. **Portal vein recanalisation** with angioplasty and stenting treats symptomatic **non-cirrhotic thrombosis** and cavernous transformation with recurrent bleeding. **Transplenic access** reaches the portal system when jugular or transhepatic routes fail. **Variceal embolisation** with coils or glue accompanies TIPS when large spontaneous shunts steal flow. **BRTO** occludes bleeding gastric varices with a gastrorenal shunt through balloon-occluded retrograde injection of sclerosant.",
+   "say": "The portal system offers more than TIPS. Recanalisation with angioplasty treats symptomatic non-cirrhotic thrombosis with bleeding. Transplenic access helps when jugular routes fail. Coil embolisation of large shunts accompanies TIPS, and BRTO closes gastric varices through a gastrorenal shunt.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Intervention"
+    ],
+    "rows": [
+     [
+      "Refractory bleed or ascites",
+      "TIPS"
+     ],
+     [
+      "Non-cirrhotic thrombosis",
+      "Recanalisation"
+     ],
+     [
+      "Jugular route failed",
+      "Transplenic access"
+     ],
+     [
+      "Gastric varices with shunt",
+      "BRTO"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir-021",
+  "maikir-022",
+  "maikir-023",
+  "maikir-024",
+  "maikir-025",
+  "maikir-026",
+  "maikir-027",
+  "maikir-028",
+  "maikir-029",
+  "maikir-030"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -133,6 +133,30 @@ test("bookmark deleted on A stays deleted when B did nothing; a later re-add on 
   assert.equal(srv.doc.kv["bm.q1"], undefined);
 });
 
+test("notes and tags ride the registers: concurrent edits converge last-writer-wins, deletes tombstone", () => {
+  const { A, B, srv } = scenario("AB");
+  A.store.bmx.q1 = { n: "A note", tg: ["hy"], u: T + 1 };
+  B.store.bmx.q1 = { n: "B note", tg: ["dif"], u: T + 2 };
+  B.store.bmx.q9 = { n: "B only", tg: [], u: T + 3 };
+  A.store.bmt.hy = { n: "High Yield", c: 168 };
+  B.store.bmt["u-flow-x"] = { n: "Flow", c: 1 };
+  sync(A, srv, T + 5 * DAY); sync(B, srv, T + 5 * DAY + 1); sync(A, srv, T + 5 * DAY + 2);
+  assert.deepEqual(A.store.bmx.q1, { n: "B note", tg: ["dif"], u: T + 2 }, "later edit wins whole entry");
+  assert.deepEqual(B.store.bmx.q1, A.store.bmx.q1);
+  assert.deepEqual(A.store.bmx.q9, { n: "B only", tg: [], u: T + 3 });
+  assert.deepEqual(A.store.bmt, B.store.bmt);
+  assert.ok(A.store.bmt.hy && A.store.bmt["u-flow-x"]);
+  A.store.bma.q1 = { c: 2, w: 1, l: T + 4, ok: true };
+  B.store.bma.q1 = { c: 1, w: 1, l: T + 5, ok: false };
+  sync(A, srv, T + 7 * DAY); sync(B, srv, T + 7 * DAY + 1); sync(A, srv, T + 7 * DAY + 2);
+  assert.deepEqual(A.store.bma.q1, { c: 1, w: 1, l: T + 5, ok: false });
+  assert.deepEqual(B.store.bma.q1, A.store.bma.q1);
+  delete B.store.bmx.q9;
+  sync(B, srv, T + 6 * DAY); sync(A, srv, T + 6 * DAY + 1);
+  assert.equal(A.store.bmx.q9, undefined);
+  assert.ok(srv.doc.kv["bmx.q9"] && srv.doc.kv["bmx.q9"][1] === null, "tombstone");
+});
+
 test("clock skew: B's clock a day behind still wins for an edit made after it saw A's value", () => {
   const srv = { ver: 0, doc: null }, A = device("devA", legacy()), B = device("devB");
   sync(A, srv, T); sync(B, srv, T - DAY + 10);

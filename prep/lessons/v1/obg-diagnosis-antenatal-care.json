@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "obg-diagnosis-antenatal-care",
-  "subject": "obstetrics-gynaecology",
-  "title": "Diagnosis of pregnancy and antenatal care schedules",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Diagnosis** (**amenorrhoea** with **morning sickness, breast tenderness, urinary frequency**; **Chadwick, Goodell, Hegar** signs, **uterine** 8 weeks orange 12 weeks pelvic; **urine hCG** missed week, **serum beta-hCG** doubling, **transvaginal sac** 5 weeks yolk 6 weeks cardiac 7 weeks) with **differentials** (ectopic, corpus luteum, fibroid, DUB) confirms; **dating** (**Naegele** 9 months 7 days, **first trimester CRL** gold, IVF transfer) locks EDD. Clinical plus biochemical plus scan triangulate.",
-      "say": "Missed period sickness tender breasts frequent urine is pregnancy: hCG sac cardiac triangulate. CRL dates gold.",
-      "vis": null
-    },
-    {
-      "tx": "**Dating scan** (**11 to 14 weeks** NT, nasal bone, ductus, **combined screening**, **NIPT** cell free high risk, **anomaly 18 to 20 weeks**, **growth 28 32 36 weeks**) with **EDD** (Naegele assumes 28 day, ultrasound overrides LMP uncertain) schedules; **twins** (chorionicity lambda T first trimester, fortnightly monochorionic) surveils. Nuchal plus biochemistry risks Down.",
-      "say": "Eleven fourteen NT combined anomaly eighteen twenty growth later: lambda T twins chorionicity. CRL overrides LMP.",
-      "vis": null
-    },
-    {
-      "tx": "**Visits** (**4 weekly to 28**, **2 weekly to 36**, **weekly after**; BP urine oedema fundal symphysis, **Hb** each trimester, **OGTT 24 to 28**, **HIV HBsAg VDRL** once, **TSH** high risk, **Td** 2 doses, **IFA** 180 days, **albendazole** second trimester, **counselling** birth plan breastfeeding) with **vaccines** (Td, flu inactivated, Tdap cocoon) protects; **weight** (11 to 16 kg normal BMI, fundal McDonald) tracks. MCP cards document.",
-      "say": "Four two weekly visits BP urine fundal Hb OGTT infections Td IFA deworm: cards document. Weight tracks.",
-      "vis": null
-    },
-    {
-      "tx": "**High risk** (**elderly primi, short stature, grand multi, prior section stillbirth preterm preeclampsia, anaemia, twins, breech, medical**; **referral** FRU CEmOC, **delivery planning** 37 to 39 indicated, **steroids** preterm, **anti-D** Rh negative) with **danger signs** (bleeding, headache visual, reduced movements, leaking, fever, convulsions) educates; **kick counts** 10 in 12 hours reassure. Risk tags colour code.",
-      "say": "Elderly short grand prior anaemic twins breech medical is high risk: FRU refers planned delivers. Kicks count reassure.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Antenatal",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Diagnose",
-            "hCG sac cardiac",
-            "CRL dates"
-          ],
-          [
-            "Scans",
-            "NT anomaly growth",
-            "Lambda twins"
-          ],
-          [
-            "Visits",
-            "4 2 weekly",
-            "Td IFA"
-          ],
-          [
-            "Risk",
-            "Tags refer",
-            "Kicks"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-261",
-    "bk2-obg-262",
-    "bk2-obg-263",
-    "bk2-obg-264",
-    "bk2-obg-265",
-    "bk2-obg-266",
-    "bk2-obg-267",
-    "bk2-obg-268",
-    "bk2-obg-269",
-    "bk2-obg-270"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "obg-diagnosis-antenatal-care",
+ "subject": "obstetrics-gynaecology",
+ "title": "Diagnosis of pregnancy and antenatal care schedules",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Diagnosis** (**amenorrhoea** with **morning sickness, breast tenderness, urinary frequency**; **Chadwick, Goodell, Hegar** signs, **uterine** 8 weeks orange 12 weeks pelvic; **urine hCG** missed week, **serum beta-hCG** doubling, **transvaginal sac** 5 weeks yolk 6 weeks cardiac 7 weeks) with **differentials** (ectopic, corpus luteum, fibroid, DUB) confirms; **dating** (**Naegele** 9 months 7 days, **first trimester CRL** gold, IVF transfer) locks EDD. Clinical plus biochemical plus scan triangulate.",
+   "say": "Missed period sickness tender breasts frequent urine is pregnancy: hCG sac cardiac triangulate. CRL dates gold.",
+   "vis": null
+  },
+  {
+   "tx": "**Dating scan** (**11 to 14 weeks** NT, nasal bone, ductus, **combined screening**, **NIPT** cell free high risk, **anomaly 18 to 20 weeks**, **growth 28 32 36 weeks**) with **EDD** (Naegele assumes 28 day, ultrasound overrides LMP uncertain) schedules; **twins** (chorionicity lambda T first trimester, fortnightly monochorionic) surveils. Nuchal plus biochemistry risks Down.",
+   "say": "Eleven fourteen NT combined anomaly eighteen twenty growth later: lambda T twins chorionicity. CRL overrides LMP.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-diagnosis-antenatal-care-fig1.webp",
+    "alt": "Diagram showing timeline of antenatal ultrasound scans: 11-14 weeks for NT, nasal bone, ductus; 18-20 weeks for anomaly; 28, 32, 36 weeks for growth. Chorionicity for twins.",
+    "caption": "Antenatal ultrasound schedule and key screening markers",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Visits** (**4 weekly to 28**, **2 weekly to 36**, **weekly after**; BP urine oedema fundal symphysis, **Hb** each trimester, **OGTT 24 to 28**, **HIV HBsAg VDRL** once, **TSH** high risk, **Td** 2 doses, **IFA** 180 days, **albendazole** second trimester, **counselling** birth plan breastfeeding) with **vaccines** (Td, flu inactivated, Tdap cocoon) protects; **weight** (11 to 16 kg normal BMI, fundal McDonald) tracks. MCP cards document.",
+   "say": "Four two weekly visits BP urine fundal Hb OGTT infections Td IFA deworm: cards document. Weight tracks.",
+   "vis": null
+  },
+  {
+   "tx": "**High risk** (**elderly primi, short stature, grand multi, prior section stillbirth preterm preeclampsia, anaemia, twins, breech, medical**; **referral** FRU CEmOC, **delivery planning** 37 to 39 indicated, **steroids** preterm, **anti-D** Rh negative) with **danger signs** (bleeding, headache visual, reduced movements, leaking, fever, convulsions) educates; **kick counts** 10 in 12 hours reassure. Risk tags colour code.",
+   "say": "Elderly short grand prior anaemic twins breech medical is high risk: FRU refers planned delivers. Kicks count reassure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antenatal",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Diagnose",
+      "hCG sac cardiac",
+      "CRL dates"
+     ],
+     [
+      "Scans",
+      "NT anomaly growth",
+      "Lambda twins"
+     ],
+     [
+      "Visits",
+      "4 2 weekly",
+      "Td IFA"
+     ],
+     [
+      "Risk",
+      "Tags refer",
+      "Kicks"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-261",
+  "bk2-obg-262",
+  "bk2-obg-263",
+  "bk2-obg-264",
+  "bk2-obg-265",
+  "bk2-obg-266",
+  "bk2-obg-267",
+  "bk2-obg-268",
+  "bk2-obg-269",
+  "bk2-obg-270"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

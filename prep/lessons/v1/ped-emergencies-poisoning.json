@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-emergencies-poisoning",
-  "subject": "paediatrics",
-  "title": "Paediatric emergencies and poisoning: resuscitate to antidotes",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Resuscitate** (**ABCDE** airway breathing circulation, **weight** Broselow tapes doses, **IO** tibial access drills, **oxygen** high-flow monitors, **glucose** hypoglycaemia corrects, **hypothermia** warm chain, **team** roles closed-loop, **parents** presence explains) with **drills** (**mock** codes audits, **equipment** checked carts) readies; **document** (times doses) logs. Teams respond.",
-      "say": "ABCDEs weights IOs oxygens is resuscitate: airways open tapes measure drills bore monitors beep glucoses lift warms wrap teams call roles shout drills run mocks practice documents log times stamp. Codes run.",
-      "vis": null
-    },
-    {
-      "tx": "**Shock** (**septic** warm cold mottled cultures, **anaphylaxis** IM adrenaline second doses, **cardiogenic** gallop hepatomegaly inotropes, **fluids** balanced bolus reassess, **blood** haemorrhagic ratios, **steroids** adrenal crises, **echo** bedside function, **PICU** vasoactive transfers) with **recognises** (**tachycardia** hypotension late, **capillary** refill mottling) flags; **reassess** (after each bolus) reviews. Perfusion fails.",
-      "say": "Septics anaphylaxes cardiogenics fluids is shock: mottles spread adrenalines jab gallops thud boluses push bloods pour steroids cover echoes peer transfers rush PICUs take recognises flag hearts race reassesses check boluses count. Pressures crash.",
-      "vis": null
-    },
-    {
-      "tx": "**Poisoning** (**paracetamol** Rumack nomogram NAC, **iron** desferrioxamine chelates, **opioid** naloxone miosis, **TCA** bicarbonate QRS widens, **organophosphate** atropine pralidoxime SLUDGE, **charcoal** hour-window binds, **lavage** limited role, **enhance** dialysis salicylates) with **histories** (**dose** timing co-ingestants, **tox** screens paracetamol levels) traces; **poisons** (centre calls) consults. Toxins threaten.",
-      "say": "Paracetamols irons opioids TCAs is poisoning: nomograms plot chelates bind mioses pinpoint widens stretch SLUDGEs drip charcoals bind windows shut lavages wash barriers cross dialyses clear histories trace doses time consults call centres guide. Overdoses loom.",
-      "vis": null
-    },
-    {
-      "tx": "**Bites-burns** (**snake** pressure immobilise antivenom, **scorpion** pain prazosin watches, **dog** rabies PEP wound wash, **corrosive** dilute never neutralise, **burns** Parkland cool cover, **drowning** rescue breaths hypothermia, **abuse** bruise patterns reports, **prevent** locks helmets gates) with **follows** (**tetanus** updates scars, **physio** contractures) heals; **counsel** (supervision proofing) guards. Injuries strike.",
-      "say": "Snakes scorpions dogs corrosives is bites-burns: pressures wrap antivenoms pour pains claw vaccines jab dilutes wash burns cool parks calculate drowns gasp breaths give abuses flag patterns mark prevents lock cabinets fit follows track scars fade counsels teach proofs child. Harms happen.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-411",
-    "bk2-paed-412",
-    "bk2-paed-413",
-    "bk2-paed-414",
-    "bk2-paed-415",
-    "bk2-paed-416",
-    "bk2-paed-417",
-    "bk2-paed-418",
-    "bk2-paed-419",
-    "bk2-paed-420"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-emergencies-poisoning",
+ "subject": "paediatrics",
+ "title": "Paediatric emergencies and poisoning: resuscitate to antidotes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Resuscitate** (**ABCDE** airway breathing circulation, **weight** Broselow tapes doses, **IO** tibial access drills, **oxygen** high-flow monitors, **glucose** hypoglycaemia corrects, **hypothermia** warm chain, **team** roles closed-loop, **parents** presence explains) with **drills** (**mock** codes audits, **equipment** checked carts) readies; **document** (times doses) logs. Teams respond.",
+   "say": "ABCDEs weights IOs oxygens is resuscitate: airways open tapes measure drills bore monitors beep glucoses lift warms wrap teams call roles shout drills run mocks practice documents log times stamp. Codes run.",
+   "vis": null
+  },
+  {
+   "tx": "**Shock** (**septic** warm cold mottled cultures, **anaphylaxis** IM adrenaline second doses, **cardiogenic** gallop hepatomegaly inotropes, **fluids** balanced bolus reassess, **blood** haemorrhagic ratios, **steroids** adrenal crises, **echo** bedside function, **PICU** vasoactive transfers) with **recognises** (**tachycardia** hypotension late, **capillary** refill mottling) flags; **reassess** (after each bolus) reviews. Perfusion fails.",
+   "say": "Septics anaphylaxes cardiogenics fluids is shock: mottles spread adrenalines jab gallops thud boluses push bloods pour steroids cover echoes peer transfers rush PICUs take recognises flag hearts race reassesses check boluses count. Pressures crash.",
+   "vis": null
+  },
+  {
+   "tx": "**Poisoning** (**paracetamol** Rumack nomogram NAC, **iron** desferrioxamine chelates, **opioid** naloxone miosis, **TCA** bicarbonate QRS widens, **organophosphate** atropine pralidoxime SLUDGE, **charcoal** hour-window binds, **lavage** limited role, **enhance** dialysis salicylates) with **histories** (**dose** timing co-ingestants, **tox** screens paracetamol levels) traces; **poisons** (centre calls) consults. Toxins threaten.",
+   "say": "Paracetamols irons opioids TCAs is poisoning: nomograms plot chelates bind mioses pinpoint widens stretch SLUDGEs drip charcoals bind windows shut lavages wash barriers cross dialyses clear histories trace doses time consults call centres guide. Overdoses loom.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-emergencies-poisoning-fig1.webp",
+    "alt": "Infographic showing common pediatric poisonings, their clinical signs (toxidromes), diagnostic tools like the Rumack-Matthew nomogram, and specific antidotes or treatments.",
+    "caption": "Key pediatric poisonings: toxidromes, diagnostics (Rumack nomogram), and specific antidotes. Image: Mongrangvebet, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 0.8759
+   }
+  },
+  {
+   "tx": "**Bites-burns** (**snake** pressure immobilise antivenom, **scorpion** pain prazosin watches, **dog** rabies PEP wound wash, **corrosive** dilute never neutralise, **burns** Parkland cool cover, **drowning** rescue breaths hypothermia, **abuse** bruise patterns reports, **prevent** locks helmets gates) with **follows** (**tetanus** updates scars, **physio** contractures) heals; **counsel** (supervision proofing) guards. Injuries strike.",
+   "say": "Snakes scorpions dogs corrosives is bites-burns: pressures wrap antivenoms pour pains claw vaccines jab dilutes wash burns cool parks calculate drowns gasp breaths give abuses flag patterns mark prevents lock cabinets fit follows track scars fade counsels teach proofs child. Harms happen.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-411",
+  "bk2-paed-412",
+  "bk2-paed-413",
+  "bk2-paed-414",
+  "bk2-paed-415",
+  "bk2-paed-416",
+  "bk2-paed-417",
+  "bk2-paed-418",
+  "bk2-paed-419",
+  "bk2-paed-420"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

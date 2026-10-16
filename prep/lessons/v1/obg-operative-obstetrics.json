@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "obg-operative-obstetrics",
-  "subject": "obstetrics-gynaecology",
-  "title": "Operative obstetrics: forceps, vacuum and caesarean technique",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Forceps** (**outlet, low, mid** stations; **prolonged second stage**, maternal exhaustion, fetal distress, cardiac disease cut bearing; **Simpson** moulded, **Wrigley** outlet, **Kielland** rotation) with **prerequisites** (full dilatation, ruptured membranes, engaged, adequate pelvis, empty bladder, anaesthesia, backup section) delivers; **facial marks, cephalohaematoma** (subperiosteal limited), maternal tears complicate. Rotation beyond 45 degrees expertise.",
-      "say": "Tired heart distress low head is forceps prerequisites met: marks face limited bleeds. Pelvis adequate proved.",
-      "vis": null
-    },
-    {
-      "tx": "**Vacuum** (**flexing median point**, **metal or silastic cup**, station plus 1, caput and moulding watched; **subgaleal haemorrhage** boggy crossing sutures shock, **cephalohaematoma** limited, retinal bleeds) with **failures** (3 pulls, 3 pop-offs, 20 minutes abandon) sections; **contraindications** (preterm under 34, face brow breech, macrosomia doubt, bleeding disorders) respect. Chignon marks scalp.",
-      "say": "Flexing median cups pull: boggy crossing shock is subgaleal transfuse. Three pulls pops minutes abandon.",
-      "vis": null
-    },
-    {
-      "tx": "**Caesarean** (**elective** dates confirmed, **emergency** categories 1 immediate threat, 2 compromise unrelieved, 3 early, 4 elective; **Pfannenstiel** with **Misgav Ladach** blunt layers, **lower segment** transverse, classical vertical preterm transverse lie) with **anaesthesia** (**spinal** choice, general aspiration Mendelson, platelets coagulopathy gate) sections; **bladder** (Foley, adhesions), **uterine** (extension, broad ligament haematoma) injuries repair. Trial scar counsels.",
-      "say": "Crash threat sections spinal: blunt Misgav layers lower transverse. Categories time urgency.",
-      "vis": null
-    },
-    {
-      "tx": "**Complications** (**haemorrhage** atony placenta percreta, **infection** endometritis prophylactic antibiotics, **thrombosis** LMWH, **adhesions** future risks, **scar rupture** 0.5 percent VBAC, **placenta accreta** with repeats) with **VBAC** (**one prior transverse**, spontaneous labour, continuous monitoring, immediate section ready; classical prior banned) balances; **ERAS** (early feeding mobilisation, catheter out) recovers. Counselling future accreta warns.",
-      "say": "Repeats accreta ruptures clots infects: one transverse labours monitored ready. Antibiotics clots mobilise.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Operative",
-          "Pearl",
-          "Watch"
-        ],
-        "rows": [
-          [
-            "Forceps",
-            "Low prerequisites",
-            "Marks tears"
-          ],
-          [
-            "Vacuum",
-            "Flexing median",
-            "Subgaleal"
-          ],
-          [
-            "Section",
-            "Categories",
-            "Spinal"
-          ],
-          [
-            "VBAC",
-            "One transverse",
-            "Rupture"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-obg-201",
-    "bk2-obg-202",
-    "bk2-obg-203",
-    "bk2-obg-204",
-    "bk2-obg-205",
-    "bk2-obg-206",
-    "bk2-obg-207",
-    "bk2-obg-208",
-    "bk2-obg-209",
-    "bk2-obg-210"
-  ],
-  "src": [],
-  "refs": [
-    "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-obg1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "obg-operative-obstetrics",
+ "subject": "obstetrics-gynaecology",
+ "title": "Operative obstetrics: forceps, vacuum and caesarean technique",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Forceps** (**outlet, low, mid** stations; **prolonged second stage**, maternal exhaustion, fetal distress, cardiac disease cut bearing; **Simpson** moulded, **Wrigley** outlet, **Kielland** rotation) with **prerequisites** (full dilatation, ruptured membranes, engaged, adequate pelvis, empty bladder, anaesthesia, backup section) delivers; **facial marks, cephalohaematoma** (subperiosteal limited), maternal tears complicate. Rotation beyond 45 degrees expertise.",
+   "say": "Tired heart distress low head is forceps prerequisites met: marks face limited bleeds. Pelvis adequate proved.",
+   "vis": null
+  },
+  {
+   "tx": "**Vacuum** (**flexing median point**, **metal or silastic cup**, station plus 1, caput and moulding watched; **subgaleal haemorrhage** boggy crossing sutures shock, **cephalohaematoma** limited, retinal bleeds) with **failures** (3 pulls, 3 pop-offs, 20 minutes abandon) sections; **contraindications** (preterm under 34, face brow breech, macrosomia doubt, bleeding disorders) respect. Chignon marks scalp.",
+   "say": "Flexing median cups pull: boggy crossing shock is subgaleal transfuse. Three pulls pops minutes abandon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/obg-operative-obstetrics-fig1.webp",
+    "alt": "Diagram illustrating obstetric vacuum cup placement on fetal head and differentiating subgaleal hemorrhage from cephalohaematoma in scalp layers.",
+    "caption": "Vacuum extraction: application and scalp complications",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Caesarean** (**elective** dates confirmed, **emergency** categories 1 immediate threat, 2 compromise unrelieved, 3 early, 4 elective; **Pfannenstiel** with **Misgav Ladach** blunt layers, **lower segment** transverse, classical vertical preterm transverse lie) with **anaesthesia** (**spinal** choice, general aspiration Mendelson, platelets coagulopathy gate) sections; **bladder** (Foley, adhesions), **uterine** (extension, broad ligament haematoma) injuries repair. Trial scar counsels.",
+   "say": "Crash threat sections spinal: blunt Misgav layers lower transverse. Categories time urgency.",
+   "vis": null
+  },
+  {
+   "tx": "**Complications** (**haemorrhage** atony placenta percreta, **infection** endometritis prophylactic antibiotics, **thrombosis** LMWH, **adhesions** future risks, **scar rupture** 0.5 percent VBAC, **placenta accreta** with repeats) with **VBAC** (**one prior transverse**, spontaneous labour, continuous monitoring, immediate section ready; classical prior banned) balances; **ERAS** (early feeding mobilisation, catheter out) recovers. Counselling future accreta warns.",
+   "say": "Repeats accreta ruptures clots infects: one transverse labours monitored ready. Antibiotics clots mobilise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Operative",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Forceps",
+      "Low prerequisites",
+      "Marks tears"
+     ],
+     [
+      "Vacuum",
+      "Flexing median",
+      "Subgaleal"
+     ],
+     [
+      "Section",
+      "Categories",
+      "Spinal"
+     ],
+     [
+      "VBAC",
+      "One transverse",
+      "Rupture"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-obg-201",
+  "bk2-obg-202",
+  "bk2-obg-203",
+  "bk2-obg-204",
+  "bk2-obg-205",
+  "bk2-obg-206",
+  "bk2-obg-207",
+  "bk2-obg-208",
+  "bk2-obg-209",
+  "bk2-obg-210"
+ ],
+ "src": [],
+ "refs": [
+  "Sakshi Arora Obstetrics E9 + Gynecology by Ten Teachers 21st Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-obg1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

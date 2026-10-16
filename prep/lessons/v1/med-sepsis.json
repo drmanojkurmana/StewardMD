@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-sepsis",
-  "subject": "medicine",
-  "title": "Sepsis, fever of unknown origin and healthcare-associated infections",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**fever** rigors sweats pattern duration, **focus** cough dysuria wound diarrhoea, **FUO** three-week unexplained weight loss, **nodes** generalised lymphadenopathy night sweats, **belly** hepatosplenomegaly kala-azar zones, **devices** catheters lines ventilator days, **travel** water exposures sick contacts, **drugs** antibiotics steroids asks) with **viva** (**septicaemic** rigored hypotensive, **FUO** wasted nodular) profiles; **bite** (ticks rats mosquitoes) asks. Fevers spike.",
-      "say": "Fevers focuses FUOs nodes is history: bellies swell devices dwell travels expose drugs mask bites seed septicaemics crash FUOs waste bundles start cultures draw. Temperatures climb.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**qSOFA** mentation breathing pressure scores, **perfusion** mottled delayed refill oliguria, **nodes** generalised firm lymphadenopathy, **spleen** kala-azar lymphoma soft huge, **lines** erythema pus catheter sites, **lungs** VAP crackles ventilated, **urine** CAUTI cloudy catheters, **skin** purpura ecthyma emboli) with **bedside** (**lactate** hypoperfusion numbers, **glucose** sepsis mimics, **oxygen** saturation trends) grades; **rigor** (bedside timing) notes. Pressures fall.",
-      "say": "qSOFAs perfusions nodes spleens is exam: lines redden lungs crackle urines cloud skins spot lactates rise glucoses swing oxygens dip bundles run pressors start. Patients crash.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**cultures** blood before antibiotics pair, **lactate** clearance resuscitation guides, **procalcitonin** bacterial hints viral sorts, **smears** malaria kala-azar LD bodies, **serology** dengue scrub widal pairs, **imaging** abscess endocarditis vegetations, **urine** colony counts CAUTI, **line** tip cultures CLABSI) with **differentials** (**lymphoma** painless nodes biopsy, **kala-azar** rK39 splenic giants, **TB** granulomas ADA, **endocarditis** Dukes vegetations) sorts; **microbiology** (de-escalation calls) meets. Cultures decide.",
-      "say": "Cultures lactates procalcitonins smears is Ix: serologies pair imagings hunt urines count tips seed lymphomas node kala-azars swell TBs granulate endocarditides vegetate microbiologists meet drugs narrow wishes respect. Bugs grow.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**bundle** fluids vasopressors oxygen early, **antibiotics** broad within hour de-escalate, **source** drain lines out abscess taps, **FUO** stepwise PET biopsy holds, **HAI** bundles handwash isolation, **support** lung kidney protective, **vaccine** post-splenectomy guards, **notify** outbreak surveillance) with **traps** (**steroid** unproven routine harm, **nephrotoxic** aminoglycoside watches, **C-diff** broad-spectrum diarrhoea) closes; **follow** (lactate cultures fever) tracks. Fevers break.",
-      "say": "Bundles antibiotics sources FUOs is Rx: bundles block supports shield vaccines guard notifies track steroids harm nephrotoxins watch C-diffs brew follows track lactates clear wishes respect. Survivals rise.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-761",
-    "bk2-med-762",
-    "bk2-med-763",
-    "bk2-med-764",
-    "bk2-med-765",
-    "bk2-med-766",
-    "bk2-med-767",
-    "bk2-med-768",
-    "bk2-med-769",
-    "bk2-med-770"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon9",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-sepsis",
+ "subject": "medicine",
+ "title": "Sepsis, fever of unknown origin and healthcare-associated infections",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**fever** rigors sweats pattern duration, **focus** cough dysuria wound diarrhoea, **FUO** three-week unexplained weight loss, **nodes** generalised lymphadenopathy night sweats, **belly** hepatosplenomegaly kala-azar zones, **devices** catheters lines ventilator days, **travel** water exposures sick contacts, **drugs** antibiotics steroids asks) with **viva** (**septicaemic** rigored hypotensive, **FUO** wasted nodular) profiles; **bite** (ticks rats mosquitoes) asks. Fevers spike.",
+   "say": "Fevers focuses FUOs nodes is history: bellies swell devices dwell travels expose drugs mask bites seed septicaemics crash FUOs waste bundles start cultures draw. Temperatures climb.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**qSOFA** mentation breathing pressure scores, **perfusion** mottled delayed refill oliguria, **nodes** generalised firm lymphadenopathy, **spleen** kala-azar lymphoma soft huge, **lines** erythema pus catheter sites, **lungs** VAP crackles ventilated, **urine** CAUTI cloudy catheters, **skin** purpura ecthyma emboli) with **bedside** (**lactate** hypoperfusion numbers, **glucose** sepsis mimics, **oxygen** saturation trends) grades; **rigor** (bedside timing) notes. Pressures fall.",
+   "say": "qSOFAs perfusions nodes spleens is exam: lines redden lungs crackle urines cloud skins spot lactates rise glucoses swing oxygens dip bundles run pressors start. Patients crash.",
+   "vis": null
+  },
+  {
+   "tx": "**Investigations** (**cultures** blood before antibiotics pair, **lactate** clearance resuscitation guides, **procalcitonin** bacterial hints viral sorts, **smears** malaria kala-azar LD bodies, **serology** dengue scrub widal pairs, **imaging** abscess endocarditis vegetations, **urine** colony counts CAUTI, **line** tip cultures CLABSI) with **differentials** (**lymphoma** painless nodes biopsy, **kala-azar** rK39 splenic giants, **TB** granulomas ADA, **endocarditis** Dukes vegetations) sorts; **microbiology** (de-escalation calls) meets. Cultures decide.",
+   "say": "Cultures lactates procalcitonins smears is Ix: serologies pair imagings hunt urines count tips seed lymphomas node kala-azars swell TBs granulate endocarditides vegetate microbiologists meet drugs narrow wishes respect. Bugs grow.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**bundle** fluids vasopressors oxygen early, **antibiotics** broad within hour de-escalate, **source** drain lines out abscess taps, **FUO** stepwise PET biopsy holds, **HAI** bundles handwash isolation, **support** lung kidney protective, **vaccine** post-splenectomy guards, **notify** outbreak surveillance) with **traps** (**steroid** unproven routine harm, **nephrotoxic** aminoglycoside watches, **C-diff** broad-spectrum diarrhoea) closes; **follow** (lactate cultures fever) tracks. Fevers break.",
+   "say": "Bundles antibiotics sources FUOs is Rx: bundles block supports shield vaccines guard notifies track steroids harm nephrotoxins watch C-diffs brew follows track lactates clear wishes respect. Survivals rise.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-sepsis-fig1.webp",
+    "alt": "Infographic showing the critical steps for early sepsis management: fluids, vasopressors, oxygen, broad antibiotics within one hour, and source control.",
+    "caption": "Key elements of the sepsis management bundle for early intervention",
+    "ar": 1.8349
+   }
   }
+ ],
+ "quiz": [
+  "bk2-med-761",
+  "bk2-med-762",
+  "bk2-med-763",
+  "bk2-med-764",
+  "bk2-med-765",
+  "bk2-med-766",
+  "bk2-med-767",
+  "bk2-med-768",
+  "bk2-med-769",
+  "bk2-med-770"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon9",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

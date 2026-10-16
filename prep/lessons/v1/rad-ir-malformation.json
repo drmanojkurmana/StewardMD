@@ -1,142 +1,148 @@
 {
-  "v": 1,
-  "module": "rad-ir-malformation",
-  "subject": "radiology",
-  "title": "Vascular malformations",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Flow decides everything in vascular anomalies. The **ISSVA classification** splits lesions into **high-flow** arteriovenous malformations and fistulas versus **low-flow** venous, lymphatic and capillary lesions. **Arteriovenous malformations** shunt blood through a **nidus** without capillaries, with warmth, thrill and high-output failure. **Venous malformations** are soft, compressible and blue, swelling with dependency and containing **phleboliths**. Correct flow labelling precedes every treatment plan.",
-      "say": "Flow decides everything. ISSVA splits high-flow shunts from low-flow venous, lymphatic and capillary lesions. Malformations with a nidus run warm with thrills and can fail hearts, while venous ones feel soft and blue with stones inside. Flow labelling precedes every plan.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Lesion",
-          "Flow"
-        ],
-        "rows": [
-          [
-            "AVM and fistula",
-            "High flow"
-          ],
-          [
-            "Venous malformation",
-            "Low flow"
-          ],
-          [
-            "Lymphatic malformation",
-            "Low flow"
-          ],
-          [
-            "Haemangioma infancy",
-            "Tumour not malformation"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The nidus is the target in AVM work. **Nidus embolisation** with ethanol or **Onyx** closes the shunt core, while proximal ligation alone merely recruits collaterals. The **Yakes classification** guides access choice between transarterial, transvenous and direct puncture. **Staging** across sessions limits swelling and skin loss in large lesions. **Coils alone** in feeding arteries without nidus penetration invite recurrence. **Heart failure** from massive shunting reverses as the nidus closes.",
-      "say": "The nidus is the target. Ethanol or Onyx must reach the shunt core, since proximal ties merely recruit collaterals. Classification guides arterial, venous or direct routes. Staging limits skin loss, coils alone invite recurrence, and heart failure reverses as the nidus closes.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Map the nidus"
-          },
-          {
-            "id": "b",
-            "label": "Choose access route"
-          },
-          {
-            "id": "c",
-            "label": "Penetrate nidus"
-          },
-          {
-            "id": "d",
-            "label": "Stage and review"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Low-flow lesions shrink with sclerosants. **Venous malformations** respond to **sodium tetradecyl sulphate**, doxycycline or ethanol injected under ultrasound or fluoroscopy. **Lymphatic malformations** with macrocysts collapse after **doxycycline or bleomycin** instillation with aspiration. **Compression garments** control swelling between sessions. **Coagulopathy** with low fibrinogen in extensive venous lesions needs correction before needling. **Airway lymphatics** in the neck demand intensive care backup for post-procedure swelling.",
-      "say": "Low-flow lesions shrink with sclerosants. Venous ones respond to tetradecyl, doxycycline or ethanol under imaging. Lymphatic macrocysts collapse after doxycycline or bleomycin with aspiration. Garments control swelling, coagulopathy needs correction first, and neck lesions need airway backup.",
-      "vis": null
-    },
-    {
-      "tx": "Tumours mimic malformations and must be separated. Infantile **haemangioma** is a true tumour with rapid growth then involution, treated first-line with **propranolol** rather than needles. **Klippel-Trenaunay syndrome** combines capillary stain, venous malformation and limb overgrowth with clotting risks. **Parkes Weber syndrome** adds high-flow shunts with overgrowth. **Biopsy** is avoided in typical malformations where imaging suffices, since needling invites bleeding. **Multidisciplinary clinics** with dermatology, surgery and genetics steer complex cases.",
-      "say": "Tumours mimic malformations. Infantile haemangioma grows then involutes and takes propranolol first. Klippel-Trenaunay combines stain, venous lesions and overgrowth, while Parkes Weber adds high-flow shunts. Biopsy is avoided where imaging suffices, and joint clinics steer complex cases.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Condition",
-          "Clue"
-        ],
-        "rows": [
-          [
-            "Haemangioma infancy",
-            "Grows then involutes"
-          ],
-          [
-            "Klippel-Trenaunay",
-            "Stain with overgrowth"
-          ],
-          [
-            "Parkes Weber",
-            "High-flow with overgrowth"
-          ],
-          [
-            "Venous malformation",
-            "Blue with phleboliths"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir-081",
-    "maikir-082",
-    "maikir-083",
-    "maikir-084",
-    "maikir-085",
-    "maikir-086",
-    "maikir-087",
-    "maikir-088",
-    "maikir-089",
-    "maikir-090"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-wave2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "rad-ir-malformation",
+ "subject": "radiology",
+ "title": "Vascular malformations",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Flow decides everything in vascular anomalies. The **ISSVA classification** splits lesions into **high-flow** arteriovenous malformations and fistulas versus **low-flow** venous, lymphatic and capillary lesions. **Arteriovenous malformations** shunt blood through a **nidus** without capillaries, with warmth, thrill and high-output failure. **Venous malformations** are soft, compressible and blue, swelling with dependency and containing **phleboliths**. Correct flow labelling precedes every treatment plan.",
+   "say": "Flow decides everything. ISSVA splits high-flow shunts from low-flow venous, lymphatic and capillary lesions. Malformations with a nidus run warm with thrills and can fail hearts, while venous ones feel soft and blue with stones inside. Flow labelling precedes every plan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Flow"
+    ],
+    "rows": [
+     [
+      "AVM and fistula",
+      "High flow"
+     ],
+     [
+      "Venous malformation",
+      "Low flow"
+     ],
+     [
+      "Lymphatic malformation",
+      "Low flow"
+     ],
+     [
+      "Haemangioma infancy",
+      "Tumour not malformation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The nidus is the target in AVM work. **Nidus embolisation** with ethanol or **Onyx** closes the shunt core, while proximal ligation alone merely recruits collaterals. The **Yakes classification** guides access choice between transarterial, transvenous and direct puncture. **Staging** across sessions limits swelling and skin loss in large lesions. **Coils alone** in feeding arteries without nidus penetration invite recurrence. **Heart failure** from massive shunting reverses as the nidus closes.",
+   "say": "The nidus is the target. Ethanol or Onyx must reach the shunt core, since proximal ties merely recruit collaterals. Classification guides arterial, venous or direct routes. Staging limits skin loss, coils alone invite recurrence, and heart failure reverses as the nidus closes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Map the nidus"
+     },
+     {
+      "id": "b",
+      "label": "Choose access route"
+     },
+     {
+      "id": "c",
+      "label": "Penetrate nidus"
+     },
+     {
+      "id": "d",
+      "label": "Stage and review"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low-flow lesions shrink with sclerosants. **Venous malformations** respond to **sodium tetradecyl sulphate**, doxycycline or ethanol injected under ultrasound or fluoroscopy. **Lymphatic malformations** with macrocysts collapse after **doxycycline or bleomycin** instillation with aspiration. **Compression garments** control swelling between sessions. **Coagulopathy** with low fibrinogen in extensive venous lesions needs correction before needling. **Airway lymphatics** in the neck demand intensive care backup for post-procedure swelling.",
+   "say": "Low-flow lesions shrink with sclerosants. Venous ones respond to tetradecyl, doxycycline or ethanol under imaging. Lymphatic macrocysts collapse after doxycycline or bleomycin with aspiration. Garments control swelling, coagulopathy needs correction first, and neck lesions need airway backup.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-malformation-fig1.webp",
+    "alt": "Diagram showing ultrasound-guided sclerotherapy for a venous malformation and aspiration/injection for a lymphatic malformation, illustrating treatment of low-flow lesions.",
+    "caption": "Sclerotherapy for low-flow vascular malformations: venous and lymphatic lesions",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Tumours mimic malformations and must be separated. Infantile **haemangioma** is a true tumour with rapid growth then involution, treated first-line with **propranolol** rather than needles. **Klippel-Trenaunay syndrome** combines capillary stain, venous malformation and limb overgrowth with clotting risks. **Parkes Weber syndrome** adds high-flow shunts with overgrowth. **Biopsy** is avoided in typical malformations where imaging suffices, since needling invites bleeding. **Multidisciplinary clinics** with dermatology, surgery and genetics steer complex cases.",
+   "say": "Tumours mimic malformations. Infantile haemangioma grows then involutes and takes propranolol first. Klippel-Trenaunay combines stain, venous lesions and overgrowth, while Parkes Weber adds high-flow shunts. Biopsy is avoided where imaging suffices, and joint clinics steer complex cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Haemangioma infancy",
+      "Grows then involutes"
+     ],
+     [
+      "Klippel-Trenaunay",
+      "Stain with overgrowth"
+     ],
+     [
+      "Parkes Weber",
+      "High-flow with overgrowth"
+     ],
+     [
+      "Venous malformation",
+      "Blue with phleboliths"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir-081",
+  "maikir-082",
+  "maikir-083",
+  "maikir-084",
+  "maikir-085",
+  "maikir-086",
+  "maikir-087",
+  "maikir-088",
+  "maikir-089",
+  "maikir-090"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

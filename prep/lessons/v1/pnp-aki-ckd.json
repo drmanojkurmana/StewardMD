@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pnp-aki-ckd",
-  "subject": "paediatrics",
-  "title": "AKI, CKD and dialysis: HUS, tubular injury and transplant",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**AKI** (**creatinine rises**, **oliguria** under 0.5 ml kg hour, **pRIFLE** risk injury failure; **prerenal** fluids inotropes, **ATN** aminoglycoside contrast, **obstructive** valves ultrasound, **stop nephrotoxins**, **fluid challenge** 20 ml) with **HUS** (**triad** anaemia thrombocytopenia AKI, **E coli O157** bloody diarrhoea, **no antibiotics antimotility**, **plasma** atypical eculizumab, **dialysis** bridges) triages; **hyperkalaemia** (calcium insulin glucose kayexalate) crashes. Urine sodium splits.",
-      "say": "Rising creatinine scant urine fluids challenge stops toxins is AKI: bloody diarrhoea triad no antibiotics plasma atypical. Potassium crashes calcium.",
-      "vis": null
-    },
-    {
-      "tx": "**CKD** (**GFR stages**, **growth failure** GH, **anaemia** erythropoietin iron, **rickets** calcitriol phosphate binders, **acidosis** bicarbonate, **hypertension** enalapril, **immunise** early) with **dialysis** (**peritoneal first** children, **CAPD** home school, **haemodialysis** vascular teens, **diet** salt potassium fluids) bridges; **transplant** (**preemptive living** best, **crossmatch** DSA, **tacrolimus MMF steroids**, **PTLD** EBV) frees. Growth charts.",
-      "say": "Short anaemic acidotic hypertensive staged is CKD: peritoneal first transplant living tacrolimus. Growth hormones.",
-      "vis": null
-    },
-    {
-      "tx": "**Tubular injury** (**Fanconi** chemo ifosfamide, **rhabdomyolysis** crush tea urine bicarbonate, **tumour lysis** rasburicase allopurinol, **contrast** hydrate NAC) with **electrolytes** (**hyponatraemia** fluid restrict hypertonic seizures, **hyperkalaemia** peaked T, **hypocalcaemia** Chvostek) corrects cautiously; **acid base** (gaps osmoles) calculates. Ins outs chart while weights daily guide fluid prescriptions precisely.",
-      "say": "Crushed tea rhabdo bicarbonates rasburicase lyses: peaked Ts calcium insulins seizures hypertonic. Gaps calculate.",
-      "vis": null
-    },
-    {
-      "tx": "**PUV** (**posterior urethral valves** boys dribbling, **ultrasound** keyhole, **catheter** drains, **ablation** cystoscopic, **VURD** pop-off, **transplant** valves) with **VUR** (**prophylaxis** low, **STING** endoscopic, **reimplant** high, **DMSA** scars) and **obstructive uropathy** (hydronephrosis grades, **pyeloplasty** UPJ) relieves; **enuresis** (alarm desmopressin, constipation) matures. Streams watch.",
-      "say": "Dribbling boys keyholes ablate pop-offs transplant: reflux injects reimplants scars DMSA. Alarms dry.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "AKI CKD",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "AKI",
-            "Creatinine oliguria",
-            "Challenge"
-          ],
-          [
-            "HUS",
-            "Triad no ABX",
-            "Plasma"
-          ],
-          [
-            "CKD",
-            "Growth GH",
-            "PD transplant"
-          ],
-          [
-            "Valves",
-            "Keyhole",
-            "Ablate"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-081",
-    "bk2-paed-082",
-    "bk2-paed-083",
-    "bk2-paed-084",
-    "bk2-paed-085",
-    "bk2-paed-086",
-    "bk2-paed-087",
-    "bk2-paed-088",
-    "bk2-paed-089",
-    "bk2-paed-090"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pnp-aki-ckd",
+ "subject": "paediatrics",
+ "title": "AKI, CKD and dialysis: HUS, tubular injury and transplant",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**AKI** (**creatinine rises**, **oliguria** under 0.5 ml kg hour, **pRIFLE** risk injury failure; **prerenal** fluids inotropes, **ATN** aminoglycoside contrast, **obstructive** valves ultrasound, **stop nephrotoxins**, **fluid challenge** 20 ml) with **HUS** (**triad** anaemia thrombocytopenia AKI, **E coli O157** bloody diarrhoea, **no antibiotics antimotility**, **plasma** atypical eculizumab, **dialysis** bridges) triages; **hyperkalaemia** (calcium insulin glucose kayexalate) crashes. Urine sodium splits.",
+   "say": "Rising creatinine scant urine fluids challenge stops toxins is AKI: bloody diarrhoea triad no antibiotics plasma atypical. Potassium crashes calcium.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pnp-aki-ckd-fig1.webp",
+    "alt": "Diagram showing E. coli O157 Shiga toxin causing endothelial damage, leading to microangiopathic hemolytic anemia, thrombocytopenia, and acute kidney injury (HUS triad).",
+    "caption": "Pathophysiology of Hemolytic Uremic Syndrome (HUS) in pediatric AKI",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**CKD** (**GFR stages**, **growth failure** GH, **anaemia** erythropoietin iron, **rickets** calcitriol phosphate binders, **acidosis** bicarbonate, **hypertension** enalapril, **immunise** early) with **dialysis** (**peritoneal first** children, **CAPD** home school, **haemodialysis** vascular teens, **diet** salt potassium fluids) bridges; **transplant** (**preemptive living** best, **crossmatch** DSA, **tacrolimus MMF steroids**, **PTLD** EBV) frees. Growth charts.",
+   "say": "Short anaemic acidotic hypertensive staged is CKD: peritoneal first transplant living tacrolimus. Growth hormones.",
+   "vis": null
+  },
+  {
+   "tx": "**Tubular injury** (**Fanconi** chemo ifosfamide, **rhabdomyolysis** crush tea urine bicarbonate, **tumour lysis** rasburicase allopurinol, **contrast** hydrate NAC) with **electrolytes** (**hyponatraemia** fluid restrict hypertonic seizures, **hyperkalaemia** peaked T, **hypocalcaemia** Chvostek) corrects cautiously; **acid base** (gaps osmoles) calculates. Ins outs chart while weights daily guide fluid prescriptions precisely.",
+   "say": "Crushed tea rhabdo bicarbonates rasburicase lyses: peaked Ts calcium insulins seizures hypertonic. Gaps calculate.",
+   "vis": null
+  },
+  {
+   "tx": "**PUV** (**posterior urethral valves** boys dribbling, **ultrasound** keyhole, **catheter** drains, **ablation** cystoscopic, **VURD** pop-off, **transplant** valves) with **VUR** (**prophylaxis** low, **STING** endoscopic, **reimplant** high, **DMSA** scars) and **obstructive uropathy** (hydronephrosis grades, **pyeloplasty** UPJ) relieves; **enuresis** (alarm desmopressin, constipation) matures. Streams watch.",
+   "say": "Dribbling boys keyholes ablate pop-offs transplant: reflux injects reimplants scars DMSA. Alarms dry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AKI CKD",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "AKI",
+      "Creatinine oliguria",
+      "Challenge"
+     ],
+     [
+      "HUS",
+      "Triad no ABX",
+      "Plasma"
+     ],
+     [
+      "CKD",
+      "Growth GH",
+      "PD transplant"
+     ],
+     [
+      "Valves",
+      "Keyhole",
+      "Ablate"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-081",
+  "bk2-paed-082",
+  "bk2-paed-083",
+  "bk2-paed-084",
+  "bk2-paed-085",
+  "bk2-paed-086",
+  "bk2-paed-087",
+  "bk2-paed-088",
+  "bk2-paed-089",
+  "bk2-paed-090"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

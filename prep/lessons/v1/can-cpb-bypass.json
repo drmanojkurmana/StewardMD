@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "can-cpb-bypass",
-  "subject": "anaesthesia",
-  "title": "Cardiopulmonary bypass and myocardial protection",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Bypass circuit** (**venous drainage** gravity vacuum, **oxygenator** membrane, **pump** roller centrifugal, **heparin 300 units per kg**, **ACT over 480 seconds**, **cannulae** aortic venous) with **initiation** (**volume** prime, **cooling** 32 to 34, **haemodilution** HCT 20 to 25, **pH stat alpha stat**) runs; **ACT** (kaolin celite, **heparin resistance** antithrombin) guides. Sucks vents.",
-      "say": "Heparinised ACT 480 drained oxygenated pumped cooled dilute is bypass: resistances antithrombin. Primes cool.",
-      "vis": null
-    },
-    {
-      "tx": "**Cardioplegia** (**cold blood 4 to 1**, **antegrade** aortic root, **retrograde** coronary sinus, **del Nido** single paediatric, **arrest** potassium asystole, **re-dose** 20 minutes) with **protection** (**topical cooling**, **venting** LV distension, **ischaemia** cross clamp times, **reperfusion** hot shot) stills; **off pump** (OPCAB stabilisers, **no cross clamp**) beats. Hearts stop cold.",
-      "say": "Cold bloody roots sinus single paediatric potassium stills redosed twenties: vents distension hot shots reperfuse. Clamps time.",
-      "vis": null
-    },
-    {
-      "tx": "**Weaning** (**rewarm** 37, **de-air** TEE vents, **rhythm** pacing wires, **inotrope** adrenaline milrinone, **calcium** citrate, **protamine** 1 mg per 100 units heparin slow) with **reactions** (**fish allergy** vasoplegia, **pulmonary hypertension** protamine, **heparin rebound** ACT, **platelets** transfuse) reverses; **DHCA** (arch, **antegrade cerebral** perfusion, **NIRS** monitors) protects brains. Wires pace.",
-      "say": "Warmed de-aired paced squeezed calcium protamined slow is weaning: fish vasoplegias pulmonary hypertensions rebounds platelets. Brains perfuse antegrade.",
-      "vis": null
-    },
-    {
-      "tx": "**Monitoring** (**TEE** volumes walls air, **NIRS** cerebral oximetry, **BIS** depth, **lactate** perfusion, **thromboelastometry** guides products) with **complications** (**vasoplegia** methylene vasopressin, **stroke** emboli filters, **renal** AKI fluids, **coagulopathy** fibrinogen) watches; **blood** (cell salvage, **tranexamic** grams, **factor** concentrates) conserves. Echoes guide while warmed circuits prime retrograde autologously.",
-      "say": "Echo walls air brains infrared depths lactate products guide: blue vasoplegias strokes kidneys clots watch. Cells salvage.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "CPB",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Circuit",
-            "ACT 480",
-            "Cool dilute"
-          ],
-          [
-            "Plegia",
-            "Cold blood",
-            "Redose 20"
-          ],
-          [
-            "Wean",
-            "Pace squeeze",
-            "Protamine"
-          ],
-          [
-            "Watch",
-            "TEE NIRS",
-            "TXA cells"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-ane-001",
-    "bk2-ane-002",
-    "bk2-ane-003",
-    "bk2-ane-004",
-    "bk2-ane-005",
-    "bk2-ane-006",
-    "bk2-ane-007",
-    "bk2-ane-008",
-    "bk2-ane-009",
-    "bk2-ane-010"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-mil1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "can-cpb-bypass",
+ "subject": "anaesthesia",
+ "title": "Cardiopulmonary bypass and myocardial protection",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Bypass circuit** (**venous drainage** gravity vacuum, **oxygenator** membrane, **pump** roller centrifugal, **heparin 300 units per kg**, **ACT over 480 seconds**, **cannulae** aortic venous) with **initiation** (**volume** prime, **cooling** 32 to 34, **haemodilution** HCT 20 to 25, **pH stat alpha stat**) runs; **ACT** (kaolin celite, **heparin resistance** antithrombin) guides. Sucks vents.",
+   "say": "Heparinised ACT 480 drained oxygenated pumped cooled dilute is bypass: resistances antithrombin. Primes cool.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/can-cpb-bypass-fig1.webp",
+    "alt": "Diagram showing a patient connected to a cardiopulmonary bypass circuit with venous drainage, oxygenator, pump, and arterial return.",
+    "caption": "Cardiopulmonary bypass circuit: components and blood flow",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Cardioplegia** (**cold blood 4 to 1**, **antegrade** aortic root, **retrograde** coronary sinus, **del Nido** single paediatric, **arrest** potassium asystole, **re-dose** 20 minutes) with **protection** (**topical cooling**, **venting** LV distension, **ischaemia** cross clamp times, **reperfusion** hot shot) stills; **off pump** (OPCAB stabilisers, **no cross clamp**) beats. Hearts stop cold.",
+   "say": "Cold bloody roots sinus single paediatric potassium stills redosed twenties: vents distension hot shots reperfuse. Clamps time.",
+   "vis": null
+  },
+  {
+   "tx": "**Weaning** (**rewarm** 37, **de-air** TEE vents, **rhythm** pacing wires, **inotrope** adrenaline milrinone, **calcium** citrate, **protamine** 1 mg per 100 units heparin slow) with **reactions** (**fish allergy** vasoplegia, **pulmonary hypertension** protamine, **heparin rebound** ACT, **platelets** transfuse) reverses; **DHCA** (arch, **antegrade cerebral** perfusion, **NIRS** monitors) protects brains. Wires pace.",
+   "say": "Warmed de-aired paced squeezed calcium protamined slow is weaning: fish vasoplegias pulmonary hypertensions rebounds platelets. Brains perfuse antegrade.",
+   "vis": null
+  },
+  {
+   "tx": "**Monitoring** (**TEE** volumes walls air, **NIRS** cerebral oximetry, **BIS** depth, **lactate** perfusion, **thromboelastometry** guides products) with **complications** (**vasoplegia** methylene vasopressin, **stroke** emboli filters, **renal** AKI fluids, **coagulopathy** fibrinogen) watches; **blood** (cell salvage, **tranexamic** grams, **factor** concentrates) conserves. Echoes guide while warmed circuits prime retrograde autologously.",
+   "say": "Echo walls air brains infrared depths lactate products guide: blue vasoplegias strokes kidneys clots watch. Cells salvage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CPB",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Circuit",
+      "ACT 480",
+      "Cool dilute"
+     ],
+     [
+      "Plegia",
+      "Cold blood",
+      "Redose 20"
+     ],
+     [
+      "Wean",
+      "Pace squeeze",
+      "Protamine"
+     ],
+     [
+      "Watch",
+      "TEE NIRS",
+      "TXA cells"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-ane-001",
+  "bk2-ane-002",
+  "bk2-ane-003",
+  "bk2-ane-004",
+  "bk2-ane-005",
+  "bk2-ane-006",
+  "bk2-ane-007",
+  "bk2-ane-008",
+  "bk2-ane-009",
+  "bk2-ane-010"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-mil1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
