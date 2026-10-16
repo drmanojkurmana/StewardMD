@@ -54,3 +54,20 @@ test("a failed or malformed embed degrades to empty matches, never an error", as
     assert.deepEqual((await post({ VERTEX_API_KEY: "k", KB_VECTORIZE: VEC })).matches, []);
   } finally { globalThis.fetch = real; }
 });
+
+test("hedged: a stalled first call does not sink the question, the second call at 1 s wins and the first is aborted", async () => {
+  const real = globalThis.fetch; let n = 0, aborted = 0;
+  globalThis.fetch = (u, o) => {
+    if (!String(u).includes("aiplatform.googleapis.com")) return real(u, o);
+    const k = ++n;
+    if (k === 1) return new Promise((_, rej) => o.signal.addEventListener("abort", () => { aborted++; rej(new Error("aborted")); }));
+    return Promise.resolve(new Response(JSON.stringify({ predictions: [{ embeddings: { values: vec } }] }), { status: 200 }));
+  };
+  try {
+    const info = {}, v = await route.embedQuery({ VERTEX_API_KEY: "k" }, "burning urination", info);
+    assert.equal(v.length, 768);
+    assert.equal(info.calls, 2, "second call started at ~1 s, third never needed");
+    assert.ok(info.ms >= 900 && info.ms < 3000, "won by the hedge, not the deadline: " + info.ms);
+    assert.equal(aborted, 1, "the stalled call was aborted");
+  } finally { globalThis.fetch = real; }
+});
