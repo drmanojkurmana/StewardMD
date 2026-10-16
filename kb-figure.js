@@ -124,7 +124,58 @@
       defs + edges.join("") + parts.join("") + labels.join("") + "</svg></div>";
   }
 
-  var api = { render: render, wrap: wrap };
+  /* Image figures (figures[] entries { type: "image", src, alt, caption, ar }).
+   * src is a bank path ("v1/kb/media/<name>.webp", immutable in R2, served through
+   * /api/prep/bank/ like lesson media). Anything else never renders: a wrong image is
+   * worse than none. No dependencies; pure, so unit tests require() this file. */
+  var IMG_SRC_RE = /^v\d{1,3}\/kb\/media\/[a-z0-9-]{2,80}\.webp$/;
+
+  function nonEmpty(s) { return typeof s === "string" && s.trim().length > 0; }
+
+  function isImage(fig) {
+    return !!(fig && fig.type === "image" && IMG_SRC_RE.test(String(fig.src || "")) &&
+      nonEmpty(fig.alt) && nonEmpty(fig.caption));
+  }
+
+  /* imgUrl(src, bankApi, webBase) -> where an image figure loads from. A bank path goes
+   * through the bank API (tests point it at fixtures); a root path on native gets the
+   * API origin (the app runs at https://localhost and only stewardmd.in/api is served).
+   * Same shape as lesson figures (prep-lessons.js imgUrl/lessonImgUrl). */
+  function imgUrl(src, bankApi, webBase) {
+    var p = String(src == null ? "" : src).replace(/^\/+/, "");
+    var u = /^v\d{1,3}\//.test(p)
+      ? String(bankApi || "/api/prep/bank/").replace(/\/?$/, "/") + p
+      : "/" + p;
+    if (u.indexOf("/api/") === 0 && webBase) return String(webBase).replace(/\/$/, "") + u;
+    return u;
+  }
+
+  /* imageHTML(fig, src) -> the figure card for a validated image entry. Same card as the
+   * reader's clinical diagrams (kbp-diagram-card), same img behaviour as lesson step
+   * images: lazy, async decode, reserved box from ar (no layout jump), alt text, and the
+   * caption carries its credit line. Returns "" for anything invalid. */
+  function imageHTML(fig, src) {
+    if (!isImage(fig)) return "";
+    var ar = Number(fig.ar);
+    var dims = (ar > 0 && isFinite(ar)) ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "";
+    return '<figure class="kbp-diagram-card"><img class="kbp-diagram-img" src="' + esc(String(src || fig.src)) +
+      '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' +
+      "<figcaption><strong>" + esc(fig.title || fig.id || "Figure") + "</strong>" +
+      '<span class="kbp-diagram-meta">' + esc(fig.caption) + "</span></figcaption></figure>";
+  }
+
+  /* imageKbrHTML(fig, src) -> the same illustration in the disease reader's own idiom
+   * (kbr-fig, mirroring kbrDiagram in reasoning.js; styles in knowledge-library.css). */
+  function imageKbrHTML(fig, src) {
+    if (!isImage(fig)) return "";
+    var ar = Number(fig.ar);
+    var dims = (ar > 0 && isFinite(ar)) ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "";
+    return '<figure class="kbr-fig"><figcaption class="kbr-cap">' + esc(fig.title || fig.id || "Figure") + "</figcaption>" +
+      '<img class="kbr-media" src="' + esc(String(src || fig.src)) + '" alt="' + esc(fig.alt) + '"' + dims + ' loading="lazy" decoding="async">' +
+      '<p class="kbr-note">' + esc(fig.caption) + "</p></figure>";
+  }
+
+  var api = { render: render, wrap: wrap, isImage: isImage, imgUrl: imgUrl, imageHTML: imageHTML, imageKbrHTML: imageKbrHTML };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.KBFigure = api;
 })(typeof window !== "undefined" ? window : globalThis);
