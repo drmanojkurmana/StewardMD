@@ -897,7 +897,11 @@
     if (!PP || !pl.exam) return all;
     var want = {}, out;
     if (pl.exam === "neet-ss") PP.ssGroupSubjects(PP.planGroup(pl)).forEach(function (id) { want[id] = 1; });
-    else if (pl.exam === "ini-ss" && pl.subject) want[pl.subject] = 1;
+    else if (pl.exam === "ini-ss" && pl.subject) {
+      // The course, its degree's general subject and Biostatistics (prep-plan.js iniSubjects), course first.
+      var ids = PP.iniSubjects ? PP.iniSubjects(pl.subject) : [pl.subject];
+      return ids.map(function (id) { for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i]; return null; }).filter(Boolean);
+    }
     else if (pl.exam === "ini-ss") return [];
     else return all;
     out = all.filter(function (x) { return want[x.id]; });
@@ -1854,16 +1858,22 @@
      nothing else (history, bookmarks and confidence stay in the store). */
   function ssScope() {
     var PP = planPure(), s = load();
-    if (!PP || !s.pl || s.pl.exam !== "neet-ss") return null;
-    return PP.ssGroupOf(PP.planGroup(s.pl));
+    if (!PP || !s.pl) return null;
+    if (s.pl.exam === "neet-ss") return PP.ssGroupOf(PP.planGroup(s.pl));
+    // INI-SS: the chosen course scopes Home like a NEET-SS group (owner 2026-10-16: the whole SS list was shown).
+    if (s.pl.exam === "ini-ss" && s.pl.subject && PP.iniSubjects) {
+      var sb = subjectById(s.pl.subject);
+      return { id: "ini:" + s.pl.subject, ini: true, label: (sb ? tx(sb.name) : s.pl.subject) + " course", subjects: PP.iniSubjects(s.pl.subject) };
+    }
+    return null;
   }
   // Home's Subjects block for a NEET-SS student: the Step 2 shortlist (the mixed row first), a Change group
   // control and See all subjects on its own page, never the whole scroll inline.
   function ssHomeSubjects(scope, subs, known) {
-    var short = scope.label.replace(/ group$/, "");
+    var short = scope.label.replace(/ (group|course)$/, ""), unit = scope.ini ? "course" : "group";
     return '<h2 class="pn-h">Subjects</h2>' +
-      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change group</button></p>' +
-      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your group") + "</div>" +
+      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change ' + unit + '</button></p>' +
+      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your " + unit) + "</div>" +
       '<div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
       '<button type="button" class="pn-btn" data-act="ss-all">See all subjects</button>';
   }

@@ -1659,3 +1659,19 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - Images: choosing a file opens a **crop sheet** (`review-prepfix.js` `cropOpen`): drag or resize the box by its corners, shape chips (Free, 1:1, 4:3, 16:9, Original), Rotate in 90 degree steps, output size (800, 1200 or 1600 px, never enlarged) and quality; nothing uploads until Use this crop. Cancel uploads nothing. Pure helpers `fitAspect`, `resizeRect`, `moveRect`, `outSize` are tested through `SMD_PREPFIX._pure`.
 - **Edit by ID:** the reports tab has an "Edit any question or lesson by its ID" box (editors only). It takes the share ID shown in PrepNucleus (Q-K92-1RY-GTV or L-...; case, spaces and hyphens do not matter), resolves it through `PREP_IDS.resolve`, and opens the same editor. Previous-year questions (live in their papers) and withdrawn ones are refused with a message; a lesson opened this way learns its module from the lesson file. A raw bank id such as `ana-spleen-q3` is not accepted (no module is known for it).
 - Tests: `test/prep-fix.test.mjs`, `test/run-prepfix-ui.mjs`. Not built: editing from inside PrepNucleus itself (only from the Review Desk reports).
+
+## SS scope: NEET-SS group, INI-SS course (2026-10-16, prep79)
+- **NEET-SS:** the plan's group (`prep-ss-groups.js`, Medical default) narrows Home (`ssScope` / `ssHomeSubjects`), Tests,
+  Coach, custom module and mixed practice. Unchanged.
+- **INI-SS:** the plan's course now narrows the same places. `prep-plan.js` `iniSubjects(id)` = the course, its degree's
+  general subject (`ss-general-medicine` / `ss-general-surgery` when an SS group holds both; none for `ss-radiology` or
+  `ss-biostatistics`), then `ss-biostatistics`. `prep.js` `planSubjects()` returns them course first; `ssScope()` returns
+  a scope `{ ini: true, label: "<course> course", subjects }`, so Home reads "Change course" and "Mixed practice across
+  your course". Before this, INI-SS Home showed every SS subject (owner's Marrow comparison).
+- **Progress score and today's plan** (`prep-plan.js` `examSubjects`) use `H.planSubjects()` when it narrows, else the
+  whole tab; before, they ranked every subject on the tab (a urology student got an acid-base lesson).
+- **Skipped minutes step:** the plan footer read "of your undefined minutes"; the plan stores and shows 30 (the default
+  `planDay` already used).
+- Tests: `test/prep-plan-scope.test.mjs` (iniSubjects for every course), `test/run-prep-subject-ui.mjs` (INI-SS Medical
+  Oncology and Urology homes, NEET-SS Medical home has no surgical subject). That browser test's older checks (six exams,
+  Radiology bank v16 counts, Learn lists) fail on `main` too and were not touched here.

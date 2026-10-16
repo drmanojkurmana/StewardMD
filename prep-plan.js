@@ -51,6 +51,25 @@
   function ssGroupOf(id) { for (var gi = 0; gi < SS_GROUPS.length; gi++) if (SS_GROUPS[gi].id === id) return SS_GROUPS[gi]; return null; }
   function ssGroupSubjects(id) { var g = ssGroupOf(id); return g ? g.subjects.slice() : []; }
   function defaultSsGroup() { return "medical"; }
+  /* INI-SS is one course (DM/M.Ch.), and its paper draws on "the general/basic component of the qualifying degree and
+   * the sub-specialty of the course applied for" (prospectus, prep/assess/profiles/ini-ss.json). Owner 2026-10-16:
+   * "INI-SS med onco needs med onco, biostats and general medicine"; "INI-SS uro" does not need all surgery and medicine.
+   * So the course scope is: the course, its degree's general subject (General Medicine when a NEET-SS group pairs the
+   * course with it, General Surgery likewise; none for Radiology, whose degree is not Medicine), then Biostatistics. */
+  var INI_GENERAL = ["ss-general-medicine", "ss-general-surgery"];
+  function iniSubjects(id) {
+    if (!id) return [];
+    var out = [id];
+    INI_GENERAL.forEach(function (gen) {
+      if (gen === id || id === "ss-radiology" || id === "ss-biostatistics") return;
+      for (var gi = 0; gi < SS_GROUPS.length; gi++) {
+        var sub = SS_GROUPS[gi].subjects;
+        if (sub.indexOf(id) >= 0 && sub.indexOf(gen) >= 0) { if (out.indexOf(gen) < 0) out.push(gen); return; }
+      }
+    });
+    if (id !== "ss-biostatistics") out.push("ss-biostatistics");
+    return out;
+  }
   // The exam profile a plan choice resolves to. Legacy "usmle" plans (before the Step 1 / Step 2 CK split) read Step 1.
   function planProfileId(id) { if (id === "usmle") return "usmle-step1"; var c = choiceOf(id); return c ? (c.profile || c.id) : id; }
   // The validated NEET-SS group on a plan: the stored one, else the bank's group (medical). null off the NEET-SS plan.
@@ -216,7 +235,7 @@
   }
 
   var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, SS_GROUPS: SS_GROUPS, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf,
-    ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
+    ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, iniSubjects: iniSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
     newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }
@@ -247,7 +266,11 @@
   /* ---------- readiness from the loaded tree ---------- */
   function examSubjects() {
     var ex = H.exam(), ix = H.ix();
-    return H.subjectsOf(ex.id).map(function (sb) {
+    // The plan's scope (NEET-SS group, INI-SS course), so the progress score and today's lesson stay inside it
+    // (owner 2026-10-16: a urology student was offered an acid-base lesson). The whole tab when nothing narrows it.
+    var subs = (H.planSubjects && H.planSubjects()) || [];
+    if (!subs.length) subs = H.subjectsOf(ex.id);
+    return subs.map(function (sb) {
       var t = ix[sb.id], mods;
       // With the subject's index: modules that have questions for this exam. Before it loads: every module in the tree.
       if (t && t.topics && t.topics.length) mods = t.topics.filter(function (x) { return x.group !== "mixed" && H.pure.countFor(x, ex.id) > 0; }).map(function (x) { return x.id; });
@@ -282,7 +305,7 @@
       mock: mockFor(), weekend: wd === 0 || wd === 6, daysLeft: examDays(), weak: weak });
     var due0 = dueNow(s, td), base = newToday(s, td), t0 = Date.now();
     p.items.forEach(function (it) { if (it.k === "rev") it.due0 = due0; if (it.k === "new") it.base = base; if (it.k === "mock") it.t0 = t0; });
-    s.pt = { d: td, ex: ex.id, min: cfg().min, items: p.items, total: p.total };
+    s.pt = { d: td, ex: ex.id, min: cfg().min || 30, items: p.items, total: p.total };   // the minutes step can be skipped: the plan was built on 30
     H.save();
     return s.pt;
   }
@@ -354,7 +377,7 @@
   function planHtml(pt, live) {
     if (!pt) return '<div class="pl-plan pl-wait" role="status"><p class="pn-mut pn-small">Working out today\'s plan</p></div>';
     var s = store(), td = H.today(), prs = pt.items.map(function (it) { return itemProgress(it, s, td, dayOf); }), done = prs.filter(function (p) { return p.done; }).length;
-    var foot = !pt.items.length ? "Nothing to plan yet for this exam." : done === pt.items.length ? "Today's plan is done. Anything more still counts." : "About " + pt.total + " of your " + pt.min + " minutes";
+    var foot = !pt.items.length ? "Nothing to plan yet for this exam." : done === pt.items.length ? "Today's plan is done. Anything more still counts." : "About " + pt.total + " of your " + (pt.min || 30) + " minutes";
     var cele = !!(live && pt.items.length && done === pt.items.length && celePlan());
     var firstOpen = -1; prs.some(function (p, i) { if (!p.done) { firstOpen = i; return true; } return false; });
     return '<div class="pl-plan"' + (cele ? ' data-cele="balloons"' : "") + ">" + (pt.items.length ? '<ul class="pn-group pl-list">' + pt.items.map(function (it, i) { return itemHtml(it, prs[i], i === firstOpen); }).join("") + "</ul>" : "") +
