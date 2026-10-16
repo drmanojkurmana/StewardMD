@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-cns-infections",
-  "subject": "medicine",
-  "title": "Meningitis, encephalitis and brain abscess",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**fever** headache vomit photophobia, **neck** stiffness Kernig Brudzinski rash, **herpes** temporal confusion seizures smell, **abscess** ear sinus teeth immune, **TB** weeks weight contacts HIV, **exposures** travel animals water vaccines) with **viva** (**meningitic** Kernig photophobic, **encephalitic** confused seizing) profiles; **tempo** (hours bacterial sorts) clocks. Meninges inflame.",
-      "say": "Fevers necks herpes abscesses is history: TBs linger exposures bite tempos clock meningitics stiffen encephalitics seize rashes spot ears seed. Heads infect.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**Kernig** hip knee resists, **Brudzinski** neck hips flex, **rash** purpuric meningococcal glass, **temporal** dysphasia hallucinates smells, **papilloedema** abscess focal mass, **otitis** sinus teeth sources, **GCS** encephalitic coma grades, **seizures** herpes warns) with **bedside** (**non-blanching** glass tests, **glucose** hypo fits, **sepsis** fluids cultures) glasses; **isolation** (droplet masks) guards. Necks stiffen.",
-      "say": "Kernigs Brudzinskis rashes temporals is exam: papilloedemas bulge otitides seed GCSs sink seizures warn glasses press glucoses correct sepses fill isolations mask contacts trace. Brains swell.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**LP** opening pressure cloudy bacteria, **glucose** low protein high neutrophils, **PCR** herpes TB cryptococcal, **CT** before LP mass papilloedema, **blood** cultures lactate procalcitonin, **MRI** temporal abscess ring) with **differentials** (**bacterial** neutrophils low glucose, **viral** lymphocytes normal, **TB** weeks low chloride, **abscess** ring source) sorts; **microbiology** (de-escalates decides) meets. Fluids cloud.",
-      "say": "LPs glucoses PCRs CTs is Ix: bloods culture MRIs ring bacterials cloud virals clear TBs linger abscesses wall microbiologists meet drugs narrow steroids time. Taps diagnose.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**ceftriaxone** hours dexamethasone before, **acyclovir** temporal confusion early, **abscess** aspirate excise weeks, **TB** months steroids HIV, **seizures** levetiracetam controls, **raised** head osmotherapy ICU, **contacts** prophylaxis vaccines) with **traps** (**delay** antibiotics kills, **LP** herniates mass, **steroid** late misses) closes; **follow** (hearing neuro sequelae) tracks. Meninges clear.",
-      "say": "Ceftriaxones acyclovirs abscesses TBs is Rx: seizures calm raisings lower contacts shield delays kill LPs cone steroids miss follows track hearings test sequelae watch wishes respect. Fevers settle.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-551",
-    "bk2-med-552",
-    "bk2-med-553",
-    "bk2-med-554",
-    "bk2-med-555",
-    "bk2-med-556",
-    "bk2-med-557",
-    "bk2-med-558",
-    "bk2-med-559",
-    "bk2-med-560"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon6",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-cns-infections",
+ "subject": "medicine",
+ "title": "Meningitis, encephalitis and brain abscess",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**fever** headache vomit photophobia, **neck** stiffness Kernig Brudzinski rash, **herpes** temporal confusion seizures smell, **abscess** ear sinus teeth immune, **TB** weeks weight contacts HIV, **exposures** travel animals water vaccines) with **viva** (**meningitic** Kernig photophobic, **encephalitic** confused seizing) profiles; **tempo** (hours bacterial sorts) clocks. Meninges inflame.",
+   "say": "Fevers necks herpes abscesses is history: TBs linger exposures bite tempos clock meningitics stiffen encephalitics seize rashes spot ears seed. Heads infect.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**Kernig** hip knee resists, **Brudzinski** neck hips flex, **rash** purpuric meningococcal glass, **temporal** dysphasia hallucinates smells, **papilloedema** abscess focal mass, **otitis** sinus teeth sources, **GCS** encephalitic coma grades, **seizures** herpes warns) with **bedside** (**non-blanching** glass tests, **glucose** hypo fits, **sepsis** fluids cultures) glasses; **isolation** (droplet masks) guards. Necks stiffen.",
+   "say": "Kernigs Brudzinskis rashes temporals is exam: papilloedemas bulge otitides seed GCSs sink seizures warn glasses press glucoses correct sepses fill isolations mask contacts trace. Brains swell.",
+   "vis": null
+  },
+  {
+   "tx": "**Investigations** (**LP** opening pressure cloudy bacteria, **glucose** low protein high neutrophils, **PCR** herpes TB cryptococcal, **CT** before LP mass papilloedema, **blood** cultures lactate procalcitonin, **MRI** temporal abscess ring) with **differentials** (**bacterial** neutrophils low glucose, **viral** lymphocytes normal, **TB** weeks low chloride, **abscess** ring source) sorts; **microbiology** (de-escalates decides) meets. Fluids cloud.",
+   "say": "LPs glucoses PCRs CTs is Ix: bloods culture MRIs ring bacterials cloud virals clear TBs linger abscesses wall microbiologists meet drugs narrow steroids time. Taps diagnose.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-cns-infections-fig1.webp",
+    "alt": "A composite image showing cloudy and clear CSF tubes with labels for bacterial and viral meningitis, alongside an MRI scan of a brain with a ring-enhancing abscess.",
+    "caption": "CSF analysis and MRI differentiate meningitis types and brain abscess. Image: Aimun AB Jamjoom , Abrar R Waliuddin and Abdulhakim B Jamjoom, CC BY 2.5, Wikimedia Commons.",
+    "ar": 0.9658
+   }
+  },
+  {
+   "tx": "**Management** (**ceftriaxone** hours dexamethasone before, **acyclovir** temporal confusion early, **abscess** aspirate excise weeks, **TB** months steroids HIV, **seizures** levetiracetam controls, **raised** head osmotherapy ICU, **contacts** prophylaxis vaccines) with **traps** (**delay** antibiotics kills, **LP** herniates mass, **steroid** late misses) closes; **follow** (hearing neuro sequelae) tracks. Meninges clear.",
+   "say": "Ceftriaxones acyclovirs abscesses TBs is Rx: seizures calm raisings lower contacts shield delays kill LPs cone steroids miss follows track hearings test sequelae watch wishes respect. Fevers settle.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-551",
+  "bk2-med-552",
+  "bk2-med-553",
+  "bk2-med-554",
+  "bk2-med-555",
+  "bk2-med-556",
+  "bk2-med-557",
+  "bk2-med-558",
+  "bk2-med-559",
+  "bk2-med-560"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon6",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

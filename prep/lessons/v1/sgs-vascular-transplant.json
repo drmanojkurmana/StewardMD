@@ -1,70 +1,76 @@
 {
-  "v": 1,
-  "module": "sgs-vascular-transplant",
-  "subject": "surgery",
-  "title": "Vascular graft surveillance and transplant workup for the general surgeon",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "**Workup** (**cardiac** stress echo gates listing, **infection** screens clear fevers, **cancer** hunts hidden tumours, **sensitisation** crossmatch guards, **iliac** calcium maps landing, **urine** cultures clear bladders, **consent** voluntary choice counsels, **registry** NOTTO lists fairly) with **clears** (**bloods** antibodies screens, **scans** chests abdomens) vets; **list** (fit recipients only) registers. Candidates vet.",
-      "say": "Listing needs cardiac fitness with infection, cancer and sensitisation screens plus iliac maps, voluntary consent and fair registry places. Lists vet.",
-      "vis": null
-    },
-    {
-      "tx": "**Donation** (**brain-death** repeated exams apnea tests, **THOTA** Indian rules certify, **consent** family grief counsels, **retrieval** cold perfusion flushes, **ischaemia** cold time shrinks, **allocation** sickest fairest shares, **living** donors volunteer fit, **NOTTO** networks match) with **cools** (**flushes** organs chill, **boxes** ice travels) preserves; **share** (one donor many) multiplies. Donors give.",
-      "say": "Brain-death exams with apnea tests certify donors under Indian rules while cold perfusion with short cold times preserves organs for fair sharing. Cooling shares.",
-      "vis": null
-    },
-    {
-      "tx": "**Surveillance** (**duplex** vein grafts patrol, **stenosis** velocity steps flag, **angioplasty** threatened grafts rescues, **occlusion** silent kills, **prosthetic** ankle pressures track, **wounds** groins watch, **smoking** quitting protects, **antiplatelet** classes guard) with **patrols** (**velocities** ratios maps, **pressures** ankles trends) guards; **rescue** (stenoses before clots) saves. Grafts patrol.",
-      "say": "Vein grafts earn duplex patrols where velocity steps flag stenoses for angioplasty before silent occlusion, guarded by quitting with antiplatelet classes. Patrols rescue.",
-      "vis": null
-    },
-    {
-      "tx": "**Infection** (**fever** draining sinuses warn, **excision** infected prosthesis removes, **extra-anatomic** clean planes reroute, **autograft** vein resists better, **cultures** organisms hunt, **debridement** dead tissue clears, **flaps** groins cover, **amputation** unsalvageable last) with **hunts** (**scans** fluid collects, **bloods** markers rise) seeks; **remove** (infected plastic out) clears. Grafts infect.",
-      "say": "Draining sinuses with fever warn prosthetic infection for excision with clean-plane rerouting while vein resists better, hunted by cultures with scans. Removal clears.",
-      "vis": null
-    },
-    {
-      "tx": "**Bulge** (**pseudoaneurysm** pulsatile scars swell, **anastomotic** suture lines weaken, **duplex** yin-yang proves, **repair** interposition grafts fix, **rupture** expanding pain warns, **embolus** downstream clots shower, **femoral** groins frequent, **follow** yearly feels) with **feels** (**pulses** scars throb, **bruits** scars hum) finds; **fix** (sacs excised) steadies. Scars bulge.",
-      "say": "Pulsatile scars name anastomotic pseudoaneurysms proved by duplex yin-yang flow for interposition repair before rupture or emboli, watched yearly. Scars throb.",
-      "vis": null
-    },
-    {
-      "tx": "**After** (**rejection** biopsies prove fevers, **infection** mimics rejection closely, **lymphocele** lymph collects compress, **ureteric** leaks stent drain, **PTLD** nodes warn heavy suppression, **skin** cancers screen yearly, **creatinine** rises flag early, **follow** lifelong never discharges) with **watches** (**bloods** drug levels tracks, **scans** collects finds) follows; **balance** (suppression versus infection) treads. Follow-up lasts.",
-      "say": "Fever with graft pain earns biopsy separating rejection from infection while lymphoceles drain and nodes warn PTLD, balanced lifelong with drug levels. Watches balance.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-vas-131",
-    "bk2-vas-132",
-    "bk2-vas-133",
-    "bk2-vas-134",
-    "bk2-vas-135",
-    "bk2-vas-136",
-    "bk2-vas-137",
-    "bk2-vas-138",
-    "bk2-vas-139",
-    "bk2-vas-140"
-  ],
-  "src": [],
-  "refs": [
-    "SVS/ESVS bypass surveillance and vascular graft infection guidance, ISHLT listing, procurement and rejection guidance, Indian THOTA and NOTTO transplant rules (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-vasc2",
-  "model": "muse (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "sgs-vascular-transplant",
+ "subject": "surgery",
+ "title": "Vascular graft surveillance and transplant workup for the general surgeon",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Workup** (**cardiac** stress echo gates listing, **infection** screens clear fevers, **cancer** hunts hidden tumours, **sensitisation** crossmatch guards, **iliac** calcium maps landing, **urine** cultures clear bladders, **consent** voluntary choice counsels, **registry** NOTTO lists fairly) with **clears** (**bloods** antibodies screens, **scans** chests abdomens) vets; **list** (fit recipients only) registers. Candidates vet.",
+   "say": "Listing needs cardiac fitness with infection, cancer and sensitisation screens plus iliac maps, voluntary consent and fair registry places. Lists vet.",
+   "vis": null
+  },
+  {
+   "tx": "**Donation** (**brain-death** repeated exams apnea tests, **THOTA** Indian rules certify, **consent** family grief counsels, **retrieval** cold perfusion flushes, **ischaemia** cold time shrinks, **allocation** sickest fairest shares, **living** donors volunteer fit, **NOTTO** networks match) with **cools** (**flushes** organs chill, **boxes** ice travels) preserves; **share** (one donor many) multiplies. Donors give.",
+   "say": "Brain-death exams with apnea tests certify donors under Indian rules while cold perfusion with short cold times preserves organs for fair sharing. Cooling shares.",
+   "vis": null
+  },
+  {
+   "tx": "**Surveillance** (**duplex** vein grafts patrol, **stenosis** velocity steps flag, **angioplasty** threatened grafts rescues, **occlusion** silent kills, **prosthetic** ankle pressures track, **wounds** groins watch, **smoking** quitting protects, **antiplatelet** classes guard) with **patrols** (**velocities** ratios maps, **pressures** ankles trends) guards; **rescue** (stenoses before clots) saves. Grafts patrol.",
+   "say": "Vein grafts earn duplex patrols where velocity steps flag stenoses for angioplasty before silent occlusion, guarded by quitting with antiplatelet classes. Patrols rescue.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgs-vascular-transplant-fig1.webp",
+    "alt": "Duplex ultrasound image of a vascular graft with a significant stenosis, demonstrating increased flow velocity and spectral broadening.",
+    "caption": "Duplex ultrasound showing stenosis in a vascular graft",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Infection** (**fever** draining sinuses warn, **excision** infected prosthesis removes, **extra-anatomic** clean planes reroute, **autograft** vein resists better, **cultures** organisms hunt, **debridement** dead tissue clears, **flaps** groins cover, **amputation** unsalvageable last) with **hunts** (**scans** fluid collects, **bloods** markers rise) seeks; **remove** (infected plastic out) clears. Grafts infect.",
+   "say": "Draining sinuses with fever warn prosthetic infection for excision with clean-plane rerouting while vein resists better, hunted by cultures with scans. Removal clears.",
+   "vis": null
+  },
+  {
+   "tx": "**Bulge** (**pseudoaneurysm** pulsatile scars swell, **anastomotic** suture lines weaken, **duplex** yin-yang proves, **repair** interposition grafts fix, **rupture** expanding pain warns, **embolus** downstream clots shower, **femoral** groins frequent, **follow** yearly feels) with **feels** (**pulses** scars throb, **bruits** scars hum) finds; **fix** (sacs excised) steadies. Scars bulge.",
+   "say": "Pulsatile scars name anastomotic pseudoaneurysms proved by duplex yin-yang flow for interposition repair before rupture or emboli, watched yearly. Scars throb.",
+   "vis": null
+  },
+  {
+   "tx": "**After** (**rejection** biopsies prove fevers, **infection** mimics rejection closely, **lymphocele** lymph collects compress, **ureteric** leaks stent drain, **PTLD** nodes warn heavy suppression, **skin** cancers screen yearly, **creatinine** rises flag early, **follow** lifelong never discharges) with **watches** (**bloods** drug levels tracks, **scans** collects finds) follows; **balance** (suppression versus infection) treads. Follow-up lasts.",
+   "say": "Fever with graft pain earns biopsy separating rejection from infection while lymphoceles drain and nodes warn PTLD, balanced lifelong with drug levels. Watches balance.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-vas-131",
+  "bk2-vas-132",
+  "bk2-vas-133",
+  "bk2-vas-134",
+  "bk2-vas-135",
+  "bk2-vas-136",
+  "bk2-vas-137",
+  "bk2-vas-138",
+  "bk2-vas-139",
+  "bk2-vas-140"
+ ],
+ "src": [],
+ "refs": [
+  "SVS/ESVS bypass surveillance and vascular graft infection guidance, ISHLT listing, procurement and rejection guidance, Indian THOTA and NOTTO transplant rules (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-vasc2",
+ "model": "muse (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
