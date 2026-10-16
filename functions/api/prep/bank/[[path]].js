@@ -17,6 +17,7 @@
  */
 
 import { identify, sha256hex } from "../../../_usage.js";
+import { cfgFlag, warmBillingCfg } from "../../../_billingcfg.js";
 import {
   isAllowedOrigin,
   corsHeaders,
@@ -179,7 +180,10 @@ export async function onRequestGet(ctx) {
   }
 
   const classification = classifyBankPath(p);
-  const enforced = String(env && env.PREP_BANK_ENFORCE) === "1";
+  // Live flag: KV billing:cfg flags.PREP_BANK_ENFORCE (owner-set, cached 30s) wins over the env value, so the
+  // gate can be switched without a new Pages binding or a redeploy. No KV or no key falls back to env.
+  try { await warmBillingCfg(env && env.MAIK_KV); } catch (e) {}
+  const enforced = String(cfgFlag(env, "PREP_BANK_ENFORCE")) === "1";
 
   // Public paths: lessons, cards, credits
   if (classification === "public") {
