@@ -1,0 +1,264 @@
+{
+ "id": "allergy-mediators",
+ "title": "Allergy: mast cell mediators and the drugs that block them",
+ "ariaLabel": "Schematic of an allergic reaction: allergen binds IgE on mast cells, which release histamine and leukotrienes. Anti-IgE antibodies and mast cell stabilisers reduce mast cell activation, H1 antihistamines block histamine receptors, and montelukast-type drugs block leukotriene receptors.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Allergen exposure",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiallergic drug"
+  },
+  {
+   "label": "H1 antihistamine type",
+   "status": "H1 antihistamine",
+   "blocks": {
+    "e_h1": 0.85
+   }
+  },
+  {
+   "label": "mast cell stabiliser or anti-IgE type",
+   "status": "mast cell stabiliser or anti-IgE",
+   "blocks": {
+    "e_mast": 0.85
+   }
+  },
+  {
+   "label": "leukotriene antagonist type",
+   "status": "leukotriene antagonist",
+   "blocks": {
+    "e_lt": 0.85
+   }
+  },
+  {
+   "label": "antihistamine plus leukotriene antagonist",
+   "status": "antihistamine plus leukotriene antagonist",
+   "blocks": {
+    "e_h1": 0.85,
+    "e_lt": 0.85
+   }
+  }
+ ],
+ "readout": "Allergic symptoms: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "mild",
+    "moderate",
+    "marked"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Exposure: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Allergic symptoms: moderate"
+  ],
+  [
+   1,
+   1,
+   "Allergic symptoms: moderate"
+  ],
+  [
+   1,
+   2,
+   "Allergic symptoms: moderate"
+  ],
+  [
+   1,
+   3,
+   "Allergic symptoms: moderate"
+  ],
+  [
+   1,
+   4,
+   "Allergic symptoms: mild"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Allergen and IgE",
+   "sub": "on mast cells",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Allergen binds IgE on the surface of mast cells."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Mediators released",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Granules and lipid mediators released by the mast cell."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Histamine",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Released from mast cell granules within minutes."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Histamine effect",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Itch, sneezing, swelling and widened vessels."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Leukotrienes",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Made by mast cells from arachidonic acid."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Leukotriene effect",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Airway narrowing, mucus and nasal congestion."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.25
+    ]
+   ],
+   "label": "Allergic symptoms",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for allergic symptoms, set by the allergen exposure and by the mediators that reach their receptors."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_mast",
+   "from": "s0",
+   "to": "m0",
+   "label": "mast cell trigger",
+   "info": "Mast cell stabilisers (cromolyn-type) reduce release of mediators; anti-IgE antibodies (omalizumab) remove IgE so allergen cannot trigger the cell."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_h1",
+   "from": "s1",
+   "to": "m1",
+   "label": "H1 receptors",
+   "info": "H1 antihistamines block histamine at its H1 receptor, easing itch, sneezing and running nose."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_lt",
+   "from": "s2",
+   "to": "m2",
+   "label": "CysLT1 receptors",
+   "info": "Leukotriene receptor antagonists (montelukast-type drugs) block CysLT1 receptors, helping airway swelling and nasal congestion."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> H1 antihistamines block histamine receptors, mast cell stabilisers and anti-IgE reduce mediator release, and leukotriene antagonists block CysLT1 receptors. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Adrenaline for anaphylaxis, corticosteroids, immunotherapy, H2 blockers, first and second generation differences, sedation and anticholinergic effects, asthma care and adverse effects are left out. Allergic symptoms are drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Allergy: mast cell mediators and the drugs that block them",
+  "blurb": "Interactive figure: antihistamines, mast cell stabilisers and leukotriene antagonists",
+  "drugs": {
+   "cetirizine": "d=1",
+   "loratadine": "d=1",
+   "fexofenadine": "d=1",
+   "chlorpheniramine": "d=1",
+   "levocetirizine": "d=1",
+   "desloratadine": "d=1",
+   "diphenhydramine": "d=1",
+   "hydroxyzine": "d=1",
+   "bilastine": "d=1",
+   "cromolyn": "d=2",
+   "cromoglicate": "d=2",
+   "ketotifen": "d=2",
+   "omalizumab": "d=2",
+   "montelukast": "d=3",
+   "zafirlukast": "d=3"
+  },
+  "terms": [
+   "antihistamines?",
+   "anti[- ]?histaminic",
+   "mast cell stabili[sz]ers?",
+   "leukotriene (?:receptor )?antagonists?",
+   "H1 (?:receptor )?(?:blockers?|antagonists?)",
+   "allergic rhinitis"
+  ]
+ }
+}

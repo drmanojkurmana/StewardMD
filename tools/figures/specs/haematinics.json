@@ -1,0 +1,260 @@
+{
+ "id": "haematinics",
+ "title": "Iron, vitamin B12, folate and erythropoietin: what makes red cells",
+ "ariaLabel": "Schematic of red cell production: iron is needed to make haem, vitamin B12 and folate are needed for DNA synthesis in red cell precursors, and erythropoietin from the kidney drives the marrow. Supplements raise the supply of each.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Supply from the diet",
+  "a": [
+   0.3,
+   0.5,
+   0.7
+  ],
+  "names": [
+   "deficient",
+   "borderline",
+   "adequate"
+  ],
+  "ticks": [
+   "deficient",
+   "borderline",
+   "adequate"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no supplement"
+  },
+  {
+   "label": "iron",
+   "status": "iron supplement",
+   "blocks": {
+    "e_fe": -0.8
+   }
+  },
+  {
+   "label": "vitamin B12 or folic acid",
+   "status": "B12 or folic acid",
+   "blocks": {
+    "e_dna": -0.8
+   }
+  },
+  {
+   "label": "erythropoietin analogue",
+   "status": "erythropoietin analogue",
+   "blocks": {
+    "e_epo": -0.9
+   }
+  },
+  {
+   "label": "iron plus B12 and folic acid",
+   "status": "iron plus B12 and folic acid",
+   "blocks": {
+    "e_fe": -0.8,
+    "e_dna": -0.8
+   }
+  }
+ ],
+ "readout": "Haemoglobin: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "low",
+    "borderline",
+    "adequate"
+   ],
+   "cuts": [
+    0.4,
+    0.7
+   ]
+  }
+ ],
+ "status": "Dietary supply: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Haemoglobin: borderline"
+  ],
+  [
+   1,
+   1,
+   "Haemoglobin: borderline"
+  ],
+  [
+   1,
+   2,
+   "Haemoglobin: borderline"
+  ],
+  [
+   1,
+   3,
+   "Haemoglobin: borderline"
+  ],
+  [
+   1,
+   4,
+   "Haemoglobin: adequate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Iron",
+   "sub": "from the diet",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Dietary iron absorbed in the gut. The slider sets the supply."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Haem made",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Iron is built into haem and haemoglobin."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Vitamin B12 and folate",
+   "sub": "from the diet",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "B12 and folate are both needed for DNA synthesis in red cell precursors."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "DNA made in precursors",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Red cell precursors divide normally when DNA synthesis is sound."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Erythropoietin",
+   "sub": "from the kidney",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "A hormone from the kidney that tells the marrow to make red cells."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Marrow drive",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "The signal that pushes red cell precursors to multiply."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m0",
+     0.35
+    ],
+    [
+     "n:m1",
+     0.35
+    ],
+    [
+     "n:m2",
+     0.15
+    ]
+   ],
+   "label": "Haemoglobin",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for haemoglobin and red cell production, set by the supply of iron, B12 and folate and by the marrow drive."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_fe",
+   "from": "s0",
+   "to": "m0",
+   "label": "iron supply",
+   "info": "Iron supplements raise the iron available for haem and haemoglobin. Lack of iron causes small, pale red cells."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_dna",
+   "from": "s1",
+   "to": "m1",
+   "label": "B12, folate supply",
+   "info": "B12 and folic acid supplements raise the supply. Lack of either causes large, immature red cells (megaloblastic anaemia). Folic acid does not treat the nerve damage of B12 deficiency."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_epo",
+   "from": "s2",
+   "to": "m2",
+   "label": "marrow drive",
+   "info": "Erythropoietin analogues raise the marrow drive. They work only if iron, B12 and folate are available.",
+   "w": 0.5
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Iron is needed for haem, vitamin B12 and folate for DNA synthesis in red cell precursors, and erythropoietin drives the marrow. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Different causes of anaemia, absorption and the gut, IV iron, hepcidin, B12 route and neurological effects, haemolysis, chronic kidney disease, transfusion, adverse effects and monitoring are left out. Haemoglobin is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Iron, vitamin B12, folate and erythropoietin: what makes red cells",
+  "blurb": "Interactive figure: iron, vitamin B12, folic acid and erythropoietin",
+  "drugs": {
+   "ferrous": "d=1",
+   "ferric": "d=1",
+   "cyanocobalamin": "d=2",
+   "hydroxocobalamin": "d=2",
+   "mecobalamin": "d=2",
+   "epoetin": "d=3",
+   "darbepoetin": "d=3",
+   "folate": "d=2"
+  },
+  "terms": [
+   "haematinics?",
+   "hematinics?",
+   "iron deficiency anaemia",
+   "megaloblastic anaemia",
+   "iron (?:supplements?|therapy)",
+   "erythropoiesis[- ]stimulating"
+  ]
+ }
+}

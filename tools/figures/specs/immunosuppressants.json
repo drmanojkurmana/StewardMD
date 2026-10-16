@@ -1,0 +1,309 @@
+{
+ "id": "immunosuppressants",
+ "title": "How immunosuppressant drugs block T cell activation and growth",
+ "ariaLabel": "Schematic of T cell activation: antigen signalling through calcineurin switches on interleukin-2, lymphocytes need purine synthesis to divide, interleukin-2 signalling through mTOR drives growth, and inflammatory genes are switched on by transcription factors. Tacrolimus and ciclosporin block calcineurin, mycophenolate and azathioprine block purine synthesis, sirolimus blocks mTOR, and glucocorticoids reduce inflammatory gene expression.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Immune stimulus",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no immunosuppressant"
+  },
+  {
+   "label": "calcineurin inhibitor type",
+   "status": "calcineurin inhibitor",
+   "blocks": {
+    "e_cn": 0.85
+   }
+  },
+  {
+   "label": "antiproliferative type (mycophenolate, azathioprine)",
+   "status": "antiproliferative",
+   "blocks": {
+    "e_pur": 0.85
+   }
+  },
+  {
+   "label": "mTOR inhibitor type",
+   "status": "mTOR inhibitor",
+   "blocks": {
+    "e_mtor": 0.85
+   }
+  },
+  {
+   "label": "glucocorticoid type",
+   "status": "glucocorticoid",
+   "blocks": {
+    "e_gc": 0.85
+   }
+  },
+  {
+   "label": "calcineurin inhibitor plus antiproliferative plus glucocorticoid",
+   "status": "triple therapy",
+   "blocks": {
+    "e_cn": 0.85,
+    "e_pur": 0.85,
+    "e_gc": 0.85
+   }
+  }
+ ],
+ "readout": "T cell activation: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "suppressed",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.35,
+    0.72
+   ]
+  }
+ ],
+ "status": "Stimulus: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "T cell activation: active"
+  ],
+  [
+   1,
+   1,
+   "T cell activation: reduced"
+  ],
+  [
+   1,
+   2,
+   "T cell activation: reduced"
+  ],
+  [
+   1,
+   3,
+   "T cell activation: reduced"
+  ],
+  [
+   1,
+   4,
+   "T cell activation: reduced"
+  ],
+  [
+   1,
+   5,
+   "T cell activation: suppressed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "T cell receptor signal",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Antigen presented to the T cell. The slider sets how strong the stimulus is."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Interleukin-2 made",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "The growth signal of T cells."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Dividing lymphocytes",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Lymphocytes dividing in response to the stimulus."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "DNA copied",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Lymphocyte DNA copying and division."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Interleukin-2 signal",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Interleukin-2 acting on its receptor."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Cell growth",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "T cell growth and division after interleukin-2."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Inflammatory signals",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Cytokines and other signals that switch on inflammatory genes."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Inflammatory genes on",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Production of cytokines and other inflammatory mediators."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "T cell activation",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how strongly the immune response is switched on, which relates to risk of rejection or flare."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cn",
+   "from": "s0",
+   "to": "m0",
+   "label": "calcineurin",
+   "info": "Tacrolimus and ciclosporin bind immunophilins and block calcineurin, so NFAT is not activated and interleukin-2 is not made."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_pur",
+   "from": "s1",
+   "to": "m1",
+   "label": "purine synthesis",
+   "info": "Mycophenolate (IMPDH) and azathioprine (as thiopurines) block purine synthesis. Lymphocytes depend heavily on it, so they divide less."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mtor",
+   "from": "s2",
+   "to": "m2",
+   "label": "mTOR",
+   "info": "Sirolimus and everolimus block mTOR, so T cells do not respond to interleukin-2 by growing."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_gc",
+   "from": "s3",
+   "to": "m3",
+   "label": "gene transcription",
+   "info": "Glucocorticoids act through their receptor to lower transcription of many inflammatory genes (for example through NF-kB)."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Calcineurin inhibitors block interleukin-2 production, mycophenolate and azathioprine block purine synthesis, mTOR inhibitors block growth signalling, and glucocorticoids reduce inflammatory gene transcription. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Antibodies and biologics, methotrexate, cyclophosphamide, belatacept, infection and cancer risks, drug levels and monitoring, interactions (notably cytochrome P450), and which drug suits which condition are left out. T cell activation is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How immunosuppressant drugs block T cell activation and growth",
+  "blurb": "Interactive figure: calcineurin, purine synthesis and mTOR blockers, and glucocorticoids",
+  "drugs": {
+   "tacrolimus": "d=1",
+   "ciclosporin": "d=1",
+   "cyclosporine": "d=1",
+   "cyclosporin": "d=1",
+   "voclosporin": "d=1",
+   "pimecrolimus": "d=1",
+   "mycophenolate": "d=2",
+   "azathioprine": "d=2",
+   "mercaptopurine": "d=2",
+   "leflunomide": "d=2",
+   "sirolimus": "d=3",
+   "everolimus": "d=3",
+   "temsirolimus": "d=3"
+  },
+  "terms": [
+   "immunosuppressants?",
+   "immuno[- ]?suppressive (?:drugs?|therapy|agents?)",
+   "calcineurin inhibitors?",
+   "mTOR inhibitors?",
+   "transplant rejection"
+  ]
+ }
+}

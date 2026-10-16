@@ -1,0 +1,262 @@
+{
+ "id": "bone-calcium-drugs",
+ "title": "How bone drugs change bone breakdown and bone building",
+ "ariaLabel": "Schematic of bone remodelling: osteoclasts break bone down, osteoblasts build it, and calcium and vitamin D supply the mineral. Bisphosphonates and denosumab reduce osteoclast bone breakdown, teriparatide-type drugs increase bone building, and calcium with vitamin D supports the mineral supply.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Bone turnover drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no bone drug"
+  },
+  {
+   "label": "bisphosphonate type",
+   "status": "bisphosphonate",
+   "blocks": {
+    "e_res": 0.85
+   }
+  },
+  {
+   "label": "denosumab type (anti-RANKL)",
+   "status": "denosumab",
+   "blocks": {
+    "e_res": 0.9
+   }
+  },
+  {
+   "label": "teriparatide type (pulsed PTH analogue)",
+   "status": "teriparatide",
+   "blocks": {
+    "e_form": -0.9
+   }
+  },
+  {
+   "label": "calcium plus vitamin D",
+   "status": "calcium and vitamin D",
+   "blocks": {
+    "e_ca": -0.8
+   }
+  }
+ ],
+ "readout": "Bone mass trend: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "falling",
+    "steady",
+    "rising"
+   ],
+   "cuts": [
+    0.5,
+    0.64
+   ]
+  }
+ ],
+ "status": "Turnover drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Bone mass trend: falling"
+  ],
+  [
+   1,
+   1,
+   "Bone mass trend: rising"
+  ],
+  [
+   1,
+   2,
+   "Bone mass trend: rising"
+  ],
+  [
+   1,
+   3,
+   "Bone mass trend: rising"
+  ],
+  [
+   1,
+   4,
+   "Bone mass trend: steady"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Osteoclast signals",
+   "sub": "RANKL and others",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Signals that call up and activate osteoclasts, the cells that break bone down. The slider sets how strong the drive is."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Bone broken down",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Bone removed by osteoclasts."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Osteoblast signals",
+   "sub": "PTH pulses, others",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Signals that call up osteoblasts, the cells that build bone."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Bone built",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "New bone laid down by osteoblasts."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Calcium and vitamin D",
+   "sub": "from food and sun",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Mineral supply for new bone."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Mineral available",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Calcium and phosphate available to mineralise bone."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.45,
+   "terms": [
+    [
+     "n:m0",
+     -0.4
+    ],
+    [
+     "n:m1",
+     0.45
+    ],
+    [
+     "n:m2",
+     0.25
+    ]
+   ],
+   "label": "Bone mass trend",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the trend in bone mass: building and mineral supply raise it, and breakdown lowers it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_res",
+   "from": "s0",
+   "to": "m0",
+   "label": "osteoclast action",
+   "info": "Bisphosphonates are taken up by bone and block osteoclast function; denosumab blocks RANKL so osteoclasts are not formed or activated. Either way less bone is broken down."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More bone breakdown lowers bone mass."
+  },
+  {
+   "id": "e_form",
+   "from": "s1",
+   "to": "m1",
+   "label": "osteoblast action",
+   "info": "Intermittent (pulsed) parathyroid hormone analogues such as teriparatide increase osteoblast bone building. This is the opposite of continuous high parathyroid hormone, which breaks bone down.",
+   "w": 0.6
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More bone building raises bone mass."
+  },
+  {
+   "id": "e_ca",
+   "from": "s2",
+   "to": "m2",
+   "label": "mineral supply",
+   "info": "Calcium and vitamin D supplements raise the mineral available for bone.",
+   "w": 0.7
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More mineral raises bone mass."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Bisphosphonates and denosumab reduce osteoclast bone breakdown, teriparatide-type drugs increase bone building when given in pulses, and calcium with vitamin D supports mineral supply. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Raloxifene and hormone therapy, calcitonin, romosozumab, strontium, glucocorticoid and other causes of bone loss, fracture risk, duration and drug holidays, adverse effects (jaw osteonecrosis, atypical fracture, hypocalcaemia) and monitoring are left out. Bone mass trend is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How bone drugs change bone breakdown and bone building",
+  "blurb": "Interactive figure: bisphosphonates, denosumab, teriparatide, calcium and vitamin D",
+  "drugs": {
+   "alendronate": "d=1",
+   "risedronate": "d=1",
+   "ibandronate": "d=1",
+   "zoledronate": "d=1",
+   "zoledronic": "d=1",
+   "pamidronate": "d=1",
+   "etidronate": "d=1",
+   "denosumab": "d=2",
+   "teriparatide": "d=3",
+   "abaloparatide": "d=3",
+   "cholecalciferol": "d=4",
+   "calcitriol": "d=4"
+  },
+  "terms": [
+   "bisphosphonates?",
+   "anti[- ]?osteoporosis drugs?",
+   "osteoporosis (?:treatment|drugs?|therapy)",
+   "anti[- ]?resorptive"
+  ]
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "id": "antimalarials",
+ "title": "How antimalarial drugs act on the blood-stage parasite",
+ "ariaLabel": "Schematic of the malaria parasite in a red cell: it digests haemoglobin and must turn toxic haem into inert haemozoin, it must make folate, and artemisinins generate damaging free radicals with the help of haem iron. Chloroquine-type drugs block haem detoxification, antifolates block folate synthesis, and artemisinins increase radical damage.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Parasite growth drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antimalarial"
+  },
+  {
+   "label": "chloroquine type (blocks haem polymerisation)",
+   "status": "chloroquine type",
+   "blocks": {
+    "e_haem": 0.85
+   }
+  },
+  {
+   "label": "antifolate type",
+   "status": "antifolate",
+   "blocks": {
+    "e_fol": 0.85
+   }
+  },
+  {
+   "label": "artemisinin type",
+   "status": "artemisinin",
+   "blocks": {
+    "e_art": -0.9
+   }
+  },
+  {
+   "label": "artemisinin plus partner drug",
+   "status": "artemisinin plus partner",
+   "blocks": {
+    "e_art": -0.9,
+    "e_haem": 0.85
+   }
+  }
+ ],
+ "readout": "Parasites in the blood: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "cleared",
+    "falling",
+    "persist"
+   ],
+   "cuts": [
+    0.2,
+    0.42
+   ]
+  }
+ ],
+ "status": "Growth drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Parasites in the blood: persist"
+  ],
+  [
+   1,
+   1,
+   "Parasites in the blood: falling"
+  ],
+  [
+   1,
+   2,
+   "Parasites in the blood: falling"
+  ],
+  [
+   1,
+   3,
+   "Parasites in the blood: falling"
+  ],
+  [
+   1,
+   4,
+   "Parasites in the blood: cleared"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Haemoglobin digested",
+   "sub": "by the parasite",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "The parasite digests the red cell's haemoglobin for amino acids. This releases haem, which is toxic to it."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Haem made safe",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Haem polymerised to haemozoin. When this step is blocked, free haem accumulates and damages the parasite."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Folate precursors",
+   "sub": "PABA and others",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "The parasite makes its own folate from precursors, unlike humans who take it in the diet."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Folate made",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Folate is needed for the parasite's DNA building and growth."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Haem iron",
+   "sub": "in the parasite",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Iron from haem inside the parasite."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Radical damage",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Free radical damage to parasite proteins. More damage means less parasite."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.15,
+   "terms": [
+    [
+     "n:m0",
+     0.35
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     -0.3
+    ]
+   ],
+   "label": "Parasites in the blood",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the parasite load in the blood: growth needs safe haem and folate, and radical damage lowers it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_haem",
+   "from": "s0",
+   "to": "m0",
+   "label": "haem polymerase",
+   "info": "The parasite turns toxic free haem into inert haemozoin (malaria pigment). Chloroquine-type drugs block this, so toxic haem builds up and kills the parasite."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "This adds to the effect shown at the right."
+  },
+  {
+   "id": "e_fol",
+   "from": "s1",
+   "to": "m1",
+   "label": "folate synthesis",
+   "info": "DHPS and DHFR enzymes of the parasite folate pathway. Antifolates block them, so DNA building stops."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "This adds to the effect shown at the right."
+  },
+  {
+   "id": "e_art",
+   "from": "s2",
+   "to": "m2",
+   "label": "radical formation",
+   "info": "Artemisinins are activated by haem iron and form damaging free radicals that attack parasite proteins. A rise in this step means more damage.",
+   "w": 0.6
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More radical damage means fewer parasites."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Chloroquine-type drugs block haem polymerisation, antifolates block folate synthesis, and artemisinins generate free-radical damage activated by haem iron. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Primaquine and tafenoquine (liver stages, G6PD), atovaquone, quinine, resistance, species differences, severe malaria, pregnancy, adverse effects and prevention are left out. Parasite load is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How antimalarial drugs act on the blood-stage parasite",
+  "blurb": "Interactive figure: chloroquine type, antifolates and artemisinins",
+  "drugs": {
+   "chloroquine": "d=1",
+   "amodiaquine": "d=1",
+   "lumefantrine": "d=1",
+   "mefloquine": "d=1",
+   "piperaquine": "d=1",
+   "pyrimethamine": "d=2",
+   "sulfadoxine": "d=2",
+   "proguanil": "d=2",
+   "artemether": "d=3",
+   "artesunate": "d=3",
+   "artemisinin": "d=3",
+   "dihydroartemisinin": "d=3"
+  },
+  "terms": [
+   "antimalarials?",
+   "anti[- ]malarial drugs?",
+   "artemisinin",
+   "artemisinin combination",
+   "malaria(?:l)? (?:chemo)?therapy"
+  ]
+ }
+}

@@ -1,0 +1,249 @@
+{
+ "id": "antivirals",
+ "title": "Where antiviral drugs act in a virus life cycle",
+ "ariaLabel": "Schematic of three antiviral targets: the viral DNA polymerase of herpes viruses, the neuraminidase that releases influenza virus from the cell, and the RNA polymerase of RNA viruses. Aciclovir-type drugs block viral DNA copying, oseltamivir-type drugs block release of new virus, and remdesivir-type drugs block viral RNA copying.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Viral replication drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiviral"
+  },
+  {
+   "label": "aciclovir type (viral DNA polymerase)",
+   "status": "aciclovir type",
+   "blocks": {
+    "e_dna": 0.85
+   }
+  },
+  {
+   "label": "oseltamivir type (neuraminidase)",
+   "status": "oseltamivir type",
+   "blocks": {
+    "e_neu": 0.85
+   }
+  },
+  {
+   "label": "remdesivir type (viral RNA polymerase)",
+   "status": "remdesivir type",
+   "blocks": {
+    "e_rna": 0.85
+   }
+  }
+ ],
+ "readout": "Virus spread: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "limited",
+    "slowed",
+    "continues"
+   ],
+   "cuts": [
+    0.3,
+    0.7
+   ]
+  }
+ ],
+ "status": "Replication drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Virus spread: continues"
+  ],
+  [
+   1,
+   1,
+   "Virus spread: slowed"
+  ],
+  [
+   1,
+   2,
+   "Virus spread: slowed"
+  ],
+  [
+   1,
+   3,
+   "Virus spread: slowed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Herpes viral DNA",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "The genome of a herpes virus (for example herpes simplex or varicella zoster) in an infected cell."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "New viral DNA",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Copies of the viral genome."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "New influenza virus",
+   "sub": "budding from cell",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "New influenza viruses at the surface of an infected cell, still attached to it."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Virus released",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Virus freed to infect new cells."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Viral RNA genome",
+   "sub": "an RNA virus",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "The genome of an RNA virus in an infected cell."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "New viral RNA",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Copies of the viral genome."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0",
+     0.4
+    ],
+    [
+     "n:m1",
+     0.4
+    ],
+    [
+     "n:m2",
+     0.4
+    ]
+   ],
+   "label": "Virus spread",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how well virus keeps being made and released in the cells it infects."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_dna",
+   "from": "s0",
+   "to": "m0",
+   "label": "viral DNA polymerase",
+   "info": "Aciclovir-type drugs are first activated by a viral enzyme (thymidine kinase) and then block the viral DNA polymerase, so viral DNA is not copied."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_neu",
+   "from": "s1",
+   "to": "m1",
+   "label": "neuraminidase",
+   "info": "Influenza neuraminidase cuts the new virus free from the cell. Oseltamivir-type drugs block it, so new virus stays stuck and spreads less."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_rna",
+   "from": "s2",
+   "to": "m2",
+   "label": "viral RNA polymerase",
+   "info": "Nucleotide-analogue drugs (for example remdesivir) are built into viral RNA and stop its copying by the viral RNA polymerase."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Aciclovir-type drugs are activated by viral thymidine kinase and block viral DNA polymerase, oseltamivir-type drugs block neuraminidase, and remdesivir-type drugs block viral RNA polymerase. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Antiretrovirals (drawn in their own figure), hepatitis B and C drugs, protease inhibitors, foscarnet, resistance, timing of treatment, who benefits, adverse effects and drug interactions are left out. Virus spread is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Where antiviral drugs act in a virus life cycle",
+  "blurb": "Interactive figure: aciclovir, oseltamivir and remdesivir types",
+  "drugs": {
+   "aciclovir": "d=1",
+   "acyclovir": "d=1",
+   "valaciclovir": "d=1",
+   "valacyclovir": "d=1",
+   "famciclovir": "d=1",
+   "ganciclovir": "d=1",
+   "valganciclovir": "d=1",
+   "oseltamivir": "d=2",
+   "zanamivir": "d=2",
+   "peramivir": "d=2",
+   "remdesivir": "d=3",
+   "favipiravir": "d=3",
+   "sofosbuvir": "d=3",
+   "molnupiravir": "d=3"
+  },
+  "terms": [
+   "antivirals?",
+   "anti[- ]?viral drugs?",
+   "neuraminidase inhibitors?",
+   "nucleoside analogues?"
+  ]
+ }
+}

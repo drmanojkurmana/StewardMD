@@ -25,7 +25,7 @@ test("registry: text match for drugs, class phrases and nothing else", async () 
   assert.equal(F.matchText("A 60-year-old on metoprolol develops bradycardia")[0].id, "beta-blockers");
   assert.match(F.matchText("Which beta blocker is cardioselective? Atenolol")[0].query, /^d=2&name=Atenolol$/);
   assert.equal(F.matchText("Metoprolol versus propranolol in asthma")[0].hits, 2);
-  assert.equal(F.matchText("Paracetamol overdose causes hepatic necrosis").length, 0);
+  assert.equal(F.matchText("Paracetamol is a weak analgesic and antipyretic").length, 0);
   assert.equal(F.matchText("the word metoprololic is not a drug").length, 0, "whole words only");
   assert.equal(F.forDrug("Metoprolol succinate").query, "d=2&name=Metoprolol");
   assert.equal(F.forDrug("Paracetamol"), null);

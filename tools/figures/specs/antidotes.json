@@ -1,0 +1,293 @@
+{
+ "id": "antidotes",
+ "title": "Common antidotes and what each reverses",
+ "ariaLabel": "Schematic of four poisons and their antidotes: opioids act at opioid receptors and naloxone competes for them; paracetamol is turned into a toxic metabolite that glutathione and acetylcysteine neutralise; organophosphates block acetylcholinesterase so acetylcholine builds up, and atropine blocks muscarinic receptors while pralidoxime frees the enzyme; warfarin lowers clotting factors and vitamin K restores them.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Poison exposure",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "small",
+   "moderate",
+   "large"
+  ],
+  "ticks": [
+   "small",
+   "moderate",
+   "large"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antidote"
+  },
+  {
+   "label": "naloxone",
+   "status": "naloxone",
+   "blocks": {
+    "e_op": 0.85
+   }
+  },
+  {
+   "label": "acetylcysteine",
+   "status": "acetylcysteine",
+   "blocks": {
+    "e_nac": 0.85
+   }
+  },
+  {
+   "label": "atropine with pralidoxime",
+   "status": "atropine with pralidoxime",
+   "blocks": {
+    "e_op2": 0.85
+   }
+  },
+  {
+   "label": "vitamin K",
+   "status": "vitamin K",
+   "blocks": {
+    "e_vk": 0.85
+   }
+  }
+ ],
+ "readout": "Poisoning effect: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "largely reversed",
+    "partly reversed",
+    "marked"
+   ],
+   "cuts": [
+    0.3,
+    0.6
+   ]
+  }
+ ],
+ "status": "Exposure: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Poisoning effect: marked"
+  ],
+  [
+   1,
+   1,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   2,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   3,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   4,
+   "Poisoning effect: partly reversed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Opioid",
+   "sub": "at opioid receptors",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "An opioid acting on mu receptors in the brainstem."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Brainstem depression",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Slow breathing and drowsiness from opioid action."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Paracetamol",
+   "sub": "in overdose",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "In overdose the normal routes are overloaded and more toxic metabolite (NAPQI) is made."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Liver injury",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Liver cell damage from the toxic metabolite."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Organophosphate",
+   "sub": "anticholinesterase",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "An organophosphate pesticide or nerve agent that blocks acetylcholinesterase."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Cholinergic effects",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Excess secretions, slow heart rate, small pupils and muscle weakness."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Warfarin",
+   "sub": "in excess",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Excess warfarin lowers vitamin K dependent clotting factors."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Bleeding tendency",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Clotting is impaired, so bleeding is easier."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.25
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.3
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Poisoning effect",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the harm done by the poison, set by the exposure and by how much of each pathway is left unreversed."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_op",
+   "from": "s0",
+   "to": "m0",
+   "label": "opioid receptors",
+   "info": "Naloxone is a competitive antagonist at opioid receptors and reverses respiratory depression. It may wear off before a long-acting opioid does, so the effect can return."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_nac",
+   "from": "s1",
+   "to": "m1",
+   "label": "toxic metabolite",
+   "info": "Glutathione normally neutralises the toxic metabolite. Acetylcysteine restores glutathione, so less liver damage results."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_op2",
+   "from": "s2",
+   "to": "m2",
+   "label": "muscarinic receptors",
+   "info": "Atropine blocks the muscarinic effects of the excess acetylcholine (secretions, slow heart, narrow airways). Pralidoxime can free the enzyme if given early."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_vk",
+   "from": "s3",
+   "to": "m3",
+   "label": "clotting factors",
+   "info": "Vitamin K lets the liver make the clotting factors again. Fresh frozen plasma or concentrate give factors at once when bleeding is severe."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Naloxone competes with opioids, acetylcysteine restores glutathione after paracetamol, atropine blocks muscarinic effects of organophosphates, and vitamin K restores clotting factors after warfarin. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "The figure shows four separate poisonings side by side, and each antidote reverses only its own. Flumazenil, digoxin antibody, fomepizole, hydroxocobalamin, sodium nitrite, protamine, idarucizumab, activated charcoal, gut decontamination, timing and nomograms, supportive care and the many other antidotes are left out. Poisoning effect is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Common antidotes and what each reverses",
+  "blurb": "Interactive figure: naloxone, acetylcysteine, atropine with pralidoxime and vitamin K",
+  "drugs": {
+   "naloxone": "d=1",
+   "naltrexone": "d=1",
+   "acetylcysteine": "d=2",
+   "atropine": "d=3",
+   "pralidoxime": "d=3",
+   "phytomenadione": "d=4",
+   "phytonadione": "d=4"
+  },
+  "terms": [
+   "antidotes?",
+   "antidotal",
+   "opioid antagonists?",
+   "organophosphate poisoning",
+   "paracetamol (?:overdose|poisoning)"
+  ]
+ }
+}

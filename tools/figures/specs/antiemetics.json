@@ -1,0 +1,317 @@
+{
+ "id": "antiemetics",
+ "title": "Where antiemetic drugs act in the vomiting pathway",
+ "ariaLabel": "Schematic of four inputs to the vomiting centre: dopamine and serotonin receptors in the chemoreceptor trigger zone, serotonin receptors in the gut, histamine and muscarinic receptors from the vestibular system, and substance P at NK1 receptors. D2 antagonists, 5-HT3 antagonists, antihistamines and anticholinergics, and NK1 antagonists each block one input.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Emetic stimulus",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiemetic"
+  },
+  {
+   "label": "D2 antagonist type",
+   "status": "D2 antagonist",
+   "blocks": {
+    "e_d2": 0.85
+   }
+  },
+  {
+   "label": "5-HT3 antagonist type",
+   "status": "5-HT3 antagonist",
+   "blocks": {
+    "e_5ht": 0.85
+   }
+  },
+  {
+   "label": "antihistamine or anticholinergic type",
+   "status": "antihistamine or anticholinergic",
+   "blocks": {
+    "e_h1": 0.85
+   }
+  },
+  {
+   "label": "NK1 antagonist type",
+   "status": "NK1 antagonist",
+   "blocks": {
+    "e_nk1": 0.85
+   }
+  },
+  {
+   "label": "5-HT3 plus NK1 antagonist",
+   "status": "5-HT3 plus NK1",
+   "blocks": {
+    "e_5ht": 0.85,
+    "e_nk1": 0.85
+   }
+  }
+ ],
+ "readout": "Nausea and vomiting: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "controlled",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.3,
+    0.5
+   ]
+  }
+ ],
+ "status": "Stimulus: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Nausea and vomiting: marked"
+  ],
+  [
+   1,
+   1,
+   "Nausea and vomiting: reduced"
+  ],
+  [
+   1,
+   2,
+   "Nausea and vomiting: reduced"
+  ],
+  [
+   1,
+   3,
+   "Nausea and vomiting: reduced"
+  ],
+  [
+   1,
+   4,
+   "Nausea and vomiting: reduced"
+  ],
+  [
+   1,
+   5,
+   "Nausea and vomiting: controlled"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Dopamine signals",
+   "sub": "trigger zone",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Drugs and toxins in the blood act on the chemoreceptor trigger zone, which uses dopamine D2 receptors."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Trigger zone signal",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Signal from the chemoreceptor trigger zone to the vomiting centre."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Serotonin released",
+   "sub": "from gut cells",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Chemotherapy and gut irritation release serotonin from gut cells, which excites vagal nerves."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Vagal signal",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Signal from the gut to the vomiting centre."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Vestibular signals",
+   "sub": "motion, inner ear",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Signals from the balance organ of the inner ear, for example in motion sickness."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Vestibular signal",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Signal from the vestibular system to the vomiting centre."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Substance P",
+   "sub": "in the brainstem",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Substance P is a transmitter involved in delayed chemotherapy-induced vomiting."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "NK1 signal",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Signal through NK1 receptors to the vomiting centre."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.15
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Nausea and vomiting",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the drive to vomit: it is the sum of the signals from the four inputs."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_d2",
+   "from": "s0",
+   "to": "m0",
+   "label": "D2 receptors",
+   "info": "D2 antagonists (metoclopramide, domperidone, haloperidol-type drugs) block dopamine here. Metoclopramide also speeds gastric emptying."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_5ht",
+   "from": "s1",
+   "to": "m1",
+   "label": "5-HT3 receptors",
+   "info": "5-HT3 antagonists (ondansetron-type drugs) block serotonin receptors on the vagus and in the trigger zone."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_h1",
+   "from": "s2",
+   "to": "m2",
+   "label": "H1, muscarinic",
+   "info": "Antihistamines (cyclizine, promethazine) and anticholinergics (hyoscine) block histamine H1 and muscarinic receptors in the vestibular pathway."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_nk1",
+   "from": "s3",
+   "to": "m3",
+   "label": "NK1 receptors",
+   "info": "NK1 antagonists (aprepitant-type drugs) block substance P in the brainstem."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> D2 antagonists block the chemoreceptor trigger zone, 5-HT3 antagonists block serotonin receptors on the vagus, antihistamines and anticholinergics block vestibular input, and NK1 antagonists block substance P. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Dexamethasone, cannabinoids, benzodiazepines, the cause of vomiting and which drug suits which cause, delayed and breakthrough vomiting, pregnancy, adverse effects (QT prolongation, extrapyramidal effects) and interactions are left out. Nausea and vomiting is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Where antiemetic drugs act in the vomiting pathway",
+  "blurb": "Interactive figure: D2, 5-HT3, histamine or muscarinic and NK1 blockers",
+  "drugs": {
+   "metoclopramide": "d=1",
+   "domperidone": "d=1",
+   "prochlorperazine": "d=1",
+   "haloperidol": "d=1",
+   "chlorpromazine": "d=1",
+   "ondansetron": "d=2",
+   "granisetron": "d=2",
+   "palonosetron": "d=2",
+   "tropisetron": "d=2",
+   "cyclizine": "d=3",
+   "promethazine": "d=3",
+   "hyoscine": "d=3",
+   "scopolamine": "d=3",
+   "dimenhydrinate": "d=3",
+   "meclizine": "d=3",
+   "aprepitant": "d=4",
+   "fosaprepitant": "d=4",
+   "rolapitant": "d=4"
+  },
+  "terms": [
+   "antiemetics?",
+   "anti[- ]?emetic drugs?",
+   "5[- ]?HT3 (?:receptor )?(?:antagonists?|blockers?)",
+   "NK1 (?:receptor )?antagonists?",
+   "D2 antagonists?"
+  ]
+ }
+}
