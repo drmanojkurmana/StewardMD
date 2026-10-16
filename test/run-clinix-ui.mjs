@@ -819,6 +819,56 @@ try {
   ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
     "with Pro a formerly locked system opens normally");
 
+  // An early-access plan (Ultimate, Clinician Pro) is Pro in CliniX too, as it is in ThoreX and SknX,
+  // even when the billing verdict does not mark it pro. It used to lock the systems and ask to sign in.
+  await lockPage(false, null);
+  await ev("(SMD_PRO.hasEarlyAccess = () => true, window.dispatchEvent(new CustomEvent('smd:tier', { detail: { tier: 'ultimate' } })), true)");
+  for (let i = 0; i < 20; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-sys-pro').length === 0")) break; await sleep(150); }
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-sys-pro').length")) === 0, "an Ultimate / Clinician Pro plan unlocks every system, live, when the tier arrives");
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  await sleep(400);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
+    "and a formerly locked system opens with no notice");
+
+  // LOGIN-TWICE REGRESSION: just after launch the account is signed in but Firebase has not restored
+  // its user yet. The Pro check must wait for the user instead of asking the server as a guest.
+  await lockPage(false, null);
+  await ev(`(function () {
+    window.__proCalls = [];
+    window.SMD_ACCOUNT = { profile: function () { return { signedIn: true, isGuest: false }; } };
+    window.SMD_AUTH = { currentUser: null };
+    SMD_PRO.isPro = function () {
+      var hasUser = !!window.SMD_AUTH.currentUser;
+      window.__proCalls.push(hasUser);
+      if (hasUser) SMD_PRO.isProSync = function () { return true; };
+      return Promise.resolve(hasUser);
+    };
+    return true;
+  })()`);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  await sleep(700);
+  ok((await ev("window.__proCalls.length")) === 0 && (await ev("!document.getElementById('smdProNotice')")) === true,
+    "while Firebase restores the session, CliniX waits instead of checking Pro as a guest");
+  await ev("(window.SMD_AUTH.currentUser = { uid: 'restored' }, true)");
+  for (let i = 0; i < 20; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-modcard')")) break; await sleep(150); }
+  ok(JSON.stringify(await ev("window.__proCalls")) === "[true]", "the Pro check runs once, after the user is restored");
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
+    "and the Pro doctor gets the system, with no sign-in prompt");
+
+  // A signed-in account the server could not identify is not asked to sign in again.
+  await lockPage(false, null);
+  await ev(`(function () {
+    window.SMD_ACCOUNT = { profile: function () { return { signedIn: true, isGuest: false }; } };
+    window.SMD_AUTH = { currentUser: { uid: 'x' } };
+    SMD_PRO.isPro = function () { return Promise.resolve(false); };
+    SMD_PRO.proState = function () { return { signedIn: false, pro: false }; };
+    return true;
+  })()`);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  ok(await noticeUp(), "a refused check still explains itself");
+  ok(!/sign in/i.test((await ev("(document.querySelector('#smdProNotice .pn-go') || {}).textContent || ''")) || ""),
+    "but never asks an already signed-in account to sign in again");
+
   // The O&G OSCE and viva stations (Tokos deep link id tokos-osce).
   console.log("\n--- O&G OSCE stations ---");
   await lockPage(true, null);

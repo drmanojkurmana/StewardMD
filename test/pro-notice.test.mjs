@@ -95,6 +95,28 @@ test("a signed-in account is never told to sign in, even before Firebase has res
   assert.equal(N.explain("clinix").kind, "none");
 });
 
+test("LOGIN-TWICE: a server guest verdict for an account the app holds as signed in does not ask to sign in", () => {
+  const { N, win } = load({ pro: false, state: { signedIn: false, pro: false } });
+  win.SMD_ACCOUNT = { profile: () => ({ signedIn: true, isGuest: false }) };
+  const e = N.explain("clinix");
+  assert.notEqual(e.kind, "signin");
+  assert.ok(!/sign in/i.test(e.cta), `CTA must not be sign in: ${e.cta}`);
+  assert.equal(e.kind, "unknown", "say the plan could not be confirmed");
+});
+
+test("LOGIN-TWICE: Firebase not restored yet, but the account is signed in: not a sign-in prompt", () => {
+  const { N, win } = load({ pro: false, state: undefined });
+  win.SMD_AUTH = { currentUser: null };
+  win.SMD_ACCOUNT = { profile: () => ({ signedIn: true, isGuest: false }) };
+  assert.notEqual(N.explain("clinix").kind, "signin");
+});
+
+test("a guest account is still asked to sign in", () => {
+  const { N, win } = load({ pro: false, state: { signedIn: false, pro: false } });
+  win.SMD_ACCOUNT = { profile: () => ({ signedIn: false, isGuest: true }) };
+  assert.equal(N.explain("clinix").kind, "signin");
+});
+
 test("an unknown entitlement admits it rather than inventing a cause", () => {
   const { N } = load({ pro: false, state: undefined });
   const e = N.explain("maik");

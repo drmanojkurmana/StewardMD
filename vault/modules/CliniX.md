@@ -11,6 +11,18 @@ other systems need Pro. Rule lives in `clinix-model.js` (`systemLocked`, `openPa
 Locked systems are shown with a "Pro" badge, never hidden. Asserted both ways in
 `test/run-clinix-ui.mjs` ("Pro lock"). See [[Decisions]].
 
+**"Asked to sign in twice" (fixed 2026-10-16).** A Pro doctor signed in to the app was asked to sign
+in again inside CliniX. Two causes:
+1. `isPro()` read only `SMD_PRO.isProSync()`. ThoreX/SknX/SurgX also accept `hasEarlyAccess()`
+   (Ultimate, Clinician Pro) and `body.pro-verified`, so a comp plan the billing verdict does not
+   mark pro was Pro everywhere except CliniX. `isPro()` now uses the same three-way rule and the
+   screen repaints on `smd:tier` as well as `smd:pro`.
+2. `showLocked()` asked `/api/billing/status` immediately. Just after launch Firebase has not restored
+   its user, so the request had no token, the server answered as for a guest, and `pro-notice.js`
+   showed "Sign in". CliniX now waits (up to 5 s, `waitForSession`) for the Firebase user when
+   `SMD_ACCOUNT` says signed in, and `pro-notice.js` `reason()` never returns `signin` for an
+   account `SMD_ACCOUNT` holds as signed in (it says the plan could not be confirmed instead).
+
 Clinical learning for medical students: patient approach → history → examination → reasoning →
 investigations → diagnosis → treatment → case → OSCE → viva. Design spec:
 `docs/superpowers/specs/2026-08-22-clinix-design.md`. Recovery point: tag `pre-clinix` (b2b1bdc).

@@ -59,22 +59,57 @@
 
   /* Pro lock: one system is free (manifest `free: true`), the rest need Pro. Decided at render and at
    * every door (system card, disease/module open, resume), so a stale screen cannot leak content. */
-  function isPro() { try { return !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()); } catch (e) { return false; } }
+  /* The same rule ThoreX, SknX and SurgX use (thorex-entitlement.js defIsPro). The billing verdict
+   * alone missed a comp "ultimate" or Clinician Pro plan that the verdict does not mark pro, so the
+   * rest of the app treated the doctor as Pro and CliniX locked them out and asked them to sign in. */
+  function isPro() {
+    try {
+      if (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) return true;
+      if (window.SMD_PRO && SMD_PRO.hasEarlyAccess && SMD_PRO.hasEarlyAccess()) return true;
+      if (document.body && document.body.classList.contains("pro-verified")) return true;
+    } catch (e) {}
+    return false;
+  }
   function locked(system) { return M() ? M().systemLocked(system, isPro()) : !(system && system.free === true); }
   /* A Pro account must never be told to sign in again. isProSync() is the LAST KNOWN verdict, which
    * is false on a fresh install or before the account restores, so a lock decision is only final
    * after one live /billing/status answer: ask the server first, and retry the door if it says Pro. */
+  var proChecking = false;
   function showLocked(retry) {
     try {
       if (window.SMD_PRO && SMD_PRO.isPro && typeof retry === "function") {
-        SMD_PRO.isPro().then(function (pro) {
-          if (pro) { try { retry(); } catch (e) {} return; }
+        if (proChecking) return;          // a second tap while we ask must not stack dialogs
+        proChecking = true;
+        var done = function () {
+          proChecking = false;
+          // Re-read with the full rule: the sync also refreshes the plan tier (early access).
+          if (isPro()) { try { retry(); } catch (e) {} return; }
           noticeLocked();
-        }, noticeLocked);
+        };
+        waitForSession(function () { SMD_PRO.isPro().then(done, done); });
         return;
       }
     } catch (e) {}
     noticeLocked();
+  }
+  /* Right after launch the account is signed in (SMD_ACCOUNT, from the stored account) while
+   * Firebase is still restoring its session. A status check sent in that window carries no token,
+   * the server answers as it would for a guest, and the doctor is asked to sign in again inside
+   * CliniX. So wait, up to 5 seconds, for the Firebase user before asking. */
+  function sessionPending() {
+    try {
+      var p = window.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile();
+      if (!p || !p.signedIn || p.isGuest) return false;
+      return !(window.SMD_AUTH && SMD_AUTH.currentUser);
+    } catch (e) { return false; }
+  }
+  function waitForSession(cb) {
+    var t0 = Date.now();
+    if (sessionPending()) toast("Checking your Pro plan");
+    (function poll() {
+      if (!sessionPending() || Date.now() - t0 > 5000) { cb(); return; }
+      setTimeout(poll, 200);
+    })();
   }
   function noticeLocked() {
     try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.show) { SMD_PRO_NOTICE.show("clinix"); return; } } catch (e) {}
@@ -4448,10 +4483,13 @@
       r.addEventListener("input", onInput);
       // Buying Pro (or a free verified week starting) must unlock the grid without a relaunch.
       try {
-        if (window.SMD_PRO && SMD_PRO.onProChange) SMD_PRO.onProChange(function () {
+        var onPlan = function () {
           var top = state.stack[state.stack.length - 1];
-          if (top === "home") repaint(); else if (top === "skills") openSkills();
-        });
+          if (top === "home" || top === "practice" || top === "system") repaint(); else if (top === "skills") openSkills();
+        };
+        if (window.SMD_PRO && SMD_PRO.onProChange) SMD_PRO.onProChange(onPlan);
+        // A plan tier arriving (Clinician Pro, Ultimate) unlocks too, through hasEarlyAccess().
+        window.addEventListener("smd:tier", onPlan);
       } catch (e) {}
     }
     wireSignout();
