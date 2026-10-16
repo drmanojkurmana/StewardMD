@@ -68,7 +68,14 @@
     var label = (titled ? esc(KIND[vt.kind] || "Table") + ": " : "") + esc(vt.title || "");
     return '<section class="kbv2-sec"><h4 class="kbv2-h">' + label + "</h4>" +
       '<div class="kbv2-scroll" tabindex="0" role="region" aria-label="' + esc(vt.title || "Table") + '"><table class="kbv2-tbl"' + floor + "><thead><tr>" + head + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
-      (vt.footnote ? '<p class="kbv2-foot">' + hy(vt.footnote) + "</p>" : "") + "</section>";
+      srcLine(vt, cites) + (vt.footnote ? '<p class="kbv2-foot">' + hy(vt.footnote) + "</p>" : "") + "</section>";
+  }
+  /* The sources a table rests on, once under it: the distinct citations its rows point at, in first-use order.
+   * (Every row carries a cite id; before this the reader never showed them, so tables looked unsourced.) */
+  function srcLine(vt, cites) {
+    var seen = [], out = [];
+    (vt.rows || []).forEach(function (r) { var c = r.cite; if (c && seen.indexOf(c) < 0) { seen.push(c); if (cites[c]) out.push(esc(cites[c])); } });
+    return out.length ? '<p class="kbv2-foot kbv2-src">Source: ' + out.join("; ") + "</p>" : "";
   }
   /* Illustrations for the disease page (figures[] in kb/reference and kb/diseases, carried by
    * kb/tools/build-kb-v2.mjs): drawn svg-spec pathways plus image figures. Images reuse the
