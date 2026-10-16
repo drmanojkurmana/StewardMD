@@ -459,42 +459,6 @@
         sha256: "284a335aa3fb2ced3b1b01fcb40b08aa783e3b70832767f0dd2e3fdfa134bd54"   // lfs.oid from the HF API
       }]
     },
-    /* TERNARY BONSAI 2 27B (PrismML, 2026-09-17): Qwen3.8-27B base, 98.2% of full-precision aggregate
-     * benchmark performance, Apache-2.0. Its GGUFs are fork-only types (PTQ1_0 dense trits, 1.75
-     * bits/weight; PQ2_0 2-bit slots) that need PrismML's Hadamard activation runtime: "Stock llama.cpp
-     * will not run these files." So on 2026-09-19 (owner: "go ahead") the plugin moved from mainline
-     * b10502 to PrismML's fork, release prism-b10685-7dffb15, on both platforms; every earlier pack is
-     * a plain GGUF and keeps loading. PTQ1_0 is the smaller file and the one the card recommends for
-     * memory-bound devices. bytes and sha256 are the HF API's exact size and lfs.oid. The repo also
-     * carries an mmproj (Q8_0 629,246,976 B); vision is left off until mtmd + the Qwen3.8 projector
-     * are exercised on a phone. UNVERIFIED on device at the time of writing: the fork runtime was
-     * built, the 5.95 GB pack itself has not yet been loaded on a 12 GB phone. */
-    "bonsai2-27b": {
-      // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
-      // group rather than beside the recommended packs.
-      labs: true,
-      label: "MAiK Max 2",
-      actual: "Ternary Bonsai 2 27B (PrismML, GGUF PTQ1_0, 1.75-bit ternary, Qwen3.8-27B base)",
-      tier: 5.5,
-      noThink: true,
-      note: "The newer 27B-class model, close to full precision in 5.95 GB. Needs a 12 GB phone. Checked against the Knowledge Base.",
-      guide: {
-        speed: 1, medical: 3, general: 3,
-        bestFor: "Flagship phones with 12 GB memory, for the strongest offline reasoning available here.",
-        why: "The same footprint class as MAiK Max with a materially smaller gap to full precision, especially on multi-step reasoning and tool use.",
-        pick: "Only on a 12 GB phone, and only if you can wait: several minutes per answer and a long reload after backgrounding. No medical fine-tuning; checked against the Knowledge Base."
-      },
-      nCtx: 4096,
-      nPredict: 768,
-      files: [{
-        name: "ternary-bonsai-2-27b-ptq1_0.gguf",
-        url: HF + "/prism-ml/Ternary-Bonsai-2-27B-gguf/resolve/main/Ternary-Bonsai-2-27B-PTQ1_0.gguf?download=true",
-        bytes: 5946648928,   // exact: HF API size
-        sha256: "53107f530aa52eb00912263ab1ee29bd199261c87cd7b4ad4ca1318c1fe33ee3"   // lfs.oid from the HF API
-      }]
-      // No MLX build (owner, 2026-09-28: "Ignore 8gb model"). Its MLX pack is 8.62 GB against 5.95 GB
-      // for this GGUF and needs the Layr-Labs Hadamard runtime; MAiK Max 2 stays on llama.cpp.
-    },
     "bonsai-27b": {
       // LABS (audit T27, 2026-09-25): still downloadable, shown under the picker's collapsed "Labs"
       // group rather than beside the recommended packs.
@@ -614,7 +578,6 @@
     "bonsai-ternary-8b": { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 8,  kvGBat4k: 0.60, lang: [] },
     "bonsai-8b":         { medical: false, kb: true,  json: 1, reasoning: 2, ramGB: 6,  kvGBat4k: 0.60, lang: [] },
     "bonsai-27b":        { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
-    "bonsai2-27b":       { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
     // Cortex: only 8 of 32 layers keep a KV cache (2x8x4x256x2 B x 4096 = 0.13 GB); +0.02 recurrent state
     "mimo-cortex-9b":    { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 0.15, lang: [] },
     // Search pack: 210 MB of weights and a short embedding context, so the floor is generous (6 GB,
