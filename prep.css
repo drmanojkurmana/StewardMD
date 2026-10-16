@@ -1993,3 +1993,15 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
   .pn-root .pn-why-chip { transition: none; }
 }
 
+
+/* Interactive figure card and its full-screen page (prep-lessons.js figOpen). */
+.pn-root .pn-figgo { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 12px 14px; border: 1px solid var(--pn-line, rgba(128,128,128,.3)); border-radius: 14px; background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.pn-root .pn-figgo-i { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pn-accent, #e0b36a); color: #111; }
+.pn-root .pn-figgo-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pn-root .pn-figgo-t small { opacity: .75; }
+.pn-root .pn-vfigx figcaption { padding: 8px 2px 0; }
+.pn-root .pn-fig-ov { position: fixed; inset: 0; z-index: 60; display: flex; flex-direction: column; background: #111; color: #eee; }
+.pn-root .pn-fig-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: calc(env(safe-area-inset-top, 0px) + 8px) 12px 8px 16px; }
+.pn-root .pn-fig-top p { margin: 0; font-weight: 600; }
+.pn-root .pn-fig-sc { flex: 1; overflow: auto; -webkit-overflow-scrolling: touch; }
+.pn-root .pn-fig-fr { display: block; width: max(100%, 760px); min-height: 100%; height: 1900px; border: 0; background: transparent; }

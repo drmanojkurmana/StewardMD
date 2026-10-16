@@ -36,6 +36,7 @@
   var SPEEDS = [0.75, 1, 1.25, 1.5];
   var XP_STEP = 10;
   var LIM = { steps: [4, 8], txWords: [40, 90], sayWords: 120, cols: [2, 5], rows: [2, 8], nodes: [3, 8], perLevel: 3, points: [1, 6] };
+  var FIG_RE = /^prep\/figures\/[a-z0-9-]{2,60}\.html$/;   // an interactive figure built with the Anima kit (prep/figures/<name>.html and <name>-light.html)
   var IMG_RE = /^(?!.*\.\.)[a-z0-9][a-z0-9_\/.-]*\.(?:webp|png|jpe?g|svg)$/i;
 
   function str(s) { return s == null ? "" : String(s); }
@@ -55,6 +56,7 @@
     if (v.kind === "table") return [].concat(v.cols || [], [].concat.apply([], v.rows || [])).join(" \n");
     if (v.kind === "flow") return (v.nodes || []).map(function (n) { return n.label + (n.sub ? " " + n.sub : ""); }).concat((v.edges || []).map(function (e) { return e[2] || ""; })).join(" \n");
     if (v.kind === "compare") return [v.left.title].concat(v.left.points, [v.right.title], v.right.points).join(" \n");
+    if (v.kind === "figure") return [str(v.alt), str(v.caption)].filter(Boolean).join(" \n");
     if (v.kind === "image") {
       var t = [str(v.alt), str(v.caption)];
       if (v.spot) t.push(str(v.spot.label), str(v.spot.why));
@@ -115,6 +117,10 @@
     if (v.kind === "compare") {
       var ok = function (c) { return c && nonEmpty(c.title) && Array.isArray(c.points) && inRange(c.points.length, LIM.points) && c.points.every(nonEmpty); };
       return ok(v.left) && ok(v.right) ? "" : "compare needs a title and 1 to 6 points on each side";
+    }
+    if (v.kind === "figure") {
+      if (!FIG_RE.test(str(v.src))) return "figure src must be a prep/figures page";
+      return nonEmpty(v.alt) && nonEmpty(v.caption) ? "" : "figure needs alt text and a caption";
     }
     if (v.kind === "image") {
       if (!IMG_RE.test(str(v.src))) return "image src must be an in-app media path";
@@ -448,9 +454,39 @@
     return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '">' + imgTag(v.src, v.alt, v.ar) + "</button>" +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";
   }
+  // Interactive figure: a card here, the page itself opens full screen (figOpen) so it has room on a phone.
+  function figureHtml(v) {
+    return '<figure class="pn-vfig pn-vfigx"><button type="button" class="pn-figgo" data-act="l-fig" data-src="' + escH(v.src) + '" data-alt="' + escH(v.alt) + '">' +
+      '<span class="pn-figgo-i" aria-hidden="true">' + ic("play") + '</span><span class="pn-figgo-t"><b>Open the interactive figure</b><small>' + escH(v.alt) + "</small></span></button>" +
+      "<figcaption><span>" + escH(v.caption) + "</span></figcaption></figure>";
+  }
+  var FIG = null;
+  function figClose() {
+    if (!FIG) return false;
+    try { FIG.el.parentNode && FIG.el.parentNode.removeChild(FIG.el); } catch (e) {}
+    var from = FIG.from; FIG = null;
+    try { if (from && from.focus) from.focus(); } catch (e) {}
+    return true;
+  }
+  function figOpen(b) {
+    var src = str(b.getAttribute("data-src"));
+    if (!FIG_RE.test(src) || FIG) return;
+    var doc = G.document, base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, ""), dark = doc.body.classList.contains("dark");
+    var page = (base || "/") + (dark ? src : src.replace(/\.html$/, "-light.html"));
+    var el = doc.createElement("div");
+    el.className = "pn-fig-ov"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", str(b.getAttribute("data-alt")));
+    el.innerHTML = '<div class="pn-fig-top"><p>' + escH(b.getAttribute("data-alt")) + '</p><button type="button" class="pn-ib" data-act="l-figx" aria-label="Close the figure">' + ic("close") + '</button></div><div class="pn-fig-sc"><iframe class="pn-fig-fr" title="' + escH(b.getAttribute("data-alt")) + '" src="' + escH(page) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
+    var fr = el.querySelector("iframe");
+    fr.addEventListener("load", function () {
+      try { var h = fr.contentDocument.documentElement.scrollHeight; if (h > 200) fr.style.height = h + "px"; } catch (e) {}
+    });
+    (host && host.root && host.root() || doc.body).appendChild(el);
+    FIG = { el: el, from: b };
+    var x = el.querySelector("[data-act=l-figx]"); if (x && x.focus) x.focus();
+  }
   function visHtml(v, i) {
     if (!v) return "";
-    var inner = v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v, i) : "";
+    var inner = v.kind === "figure" ? figureHtml(v) : v.kind === "table" ? tableHtml(v) : v.kind === "flow" ? flowHtml(v) : v.kind === "compare" ? compareHtml(v) : v.kind === "image" ? imageHtml(v, i) : "";
     if (!inner) return "";
     return '<section class="pn-vis pn-vis-' + v.kind + '" aria-label="' + (v.kind === "image" ? (v.spot ? "Spot the sign" : v.marks ? "Labelled figure" : v.pair ? "Compare two images" : "Figure") : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
   }
@@ -915,6 +951,8 @@
       var zz = zoomOf(b.getAttribute("data-z") || "a"), PV = G.PREP_VIEWER;
       if (zz && PV && typeof PV.open === "function") { try { PV.open({ src: imgSrc(zz.src), alt: zz.alt, caption: zz.caption, from: b }); return; } catch (e) {} }
       L.zoom = zz; if (L.zoom) { L.zret = b.getAttribute("data-z") ? '[data-act=l-zoom][data-z="' + b.getAttribute("data-z") + '"]' : "[data-act=l-zoom]"; draw(); } return; }
+    if (a === "l-fig") return figOpen(b);
+    if (a === "l-figx") { figClose(); return; }
     if (a === "l-show" || a === "l-qc" || a === "l-marks" || a === "l-mark" || a === "l-flip" || a === "l-cmp") return ixAct(a, b);
     if (a === "l-zoom2") {
       if (Date.now() - Z.moved < 350) return;   // the click that ends a pinch or a pan is not a tap
@@ -930,6 +968,7 @@
   }
   /* back(): true when handled here (the zoomed image closes first). Leaving the reader stops the voice. */
   function back() {
+    if (FIG && figClose()) return true;
     if (!host || !L.les) return false;
     if (L.zoom && host.stackTop() === L.view) { L.zoom = null; draw(L.zret || "[data-act=l-zoom]"); return true; }
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
