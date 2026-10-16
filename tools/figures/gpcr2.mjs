@@ -33,6 +33,7 @@ function modelOf(S, level, drug) {
   const readout = S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]);
   return { act, words, readout, b: S.cols.map((c, i) => ((dr.cols && dr.cols[i]) || {}).b || 0), g: S.cols.map((c, i) => ((dr.cols && dr.cols[i]) || {}).g || 0) };
 }
+if (process.argv.includes("--print-model")) { for (let l = 0; l < 3; l++) for (let d = 0; d < S.drugs.length; d++) console.log(JSON.stringify([l, d, modelOf(S, l, d).readout])); process.exit(0); }
 for (const t of S.tests || []) {
   const r = modelOf(S, t[0], t[1]).readout;
   if (r !== t[2]) throw new Error(`${S.id}: model readout "${r}" != "${t[2]}" at level ${t[0]}, drug ${t[1]}`);

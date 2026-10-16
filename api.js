@@ -663,10 +663,12 @@
   /* Drugs that have an interactive "how it works" figure (fig-viewer.js registry, prep/figures/figures.json) get a card, preset to the
      drug's class. Matching is on the generic's first word, else on the class text (a class phrase the figure lists). */
   function figCard(d) {
-    var F = window.SMD_FIG; if (!F || !F.forDrug) return "";
-    var m = F.forDrug(d.composition) || (F.matchText([d["class"], d.action_class].join(" "), 1)[0]);
-    if (!m) return "";
-    return '<button type="button" class="db-fig" id="dbFig" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><i class="db-fig-i" aria-hidden="true">&#9654;</i><span><b>' + esc(m.title) + '</b><small>' + esc(m.blurb) + '</small></span></button>';
+    var F = window.SMD_FIG; if (!F || !F.forDrugs) return "";
+    var ms = F.forDrugs(d.composition);
+    if (!ms.length) ms = F.matchText([d["class"], d.action_class].join(" "), 1);
+    return ms.slice(0, 3).map(function (m) {
+      return '<button type="button" class="db-fig" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><i class="db-fig-i" aria-hidden="true">&#9654;</i><span><b>' + esc(m.title) + '</b><small>' + esc(m.blurb) + '</small></span></button>';
+    }).join("");
   }
   function renderDetail() {
     var d = st.info, b = detailHost();
@@ -683,8 +685,7 @@
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
       figCard(d) +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
-    var fg = b.querySelector("#dbFig");
-    if (fg) fg.addEventListener("click", function () { window.SMD_FIG.openFig(fg.getAttribute("data-f"), fg.getAttribute("data-q"), fg); });
+    b.querySelectorAll(".db-fig").forEach(function (fg) { fg.addEventListener("click", function () { window.SMD_FIG.openFig(fg.getAttribute("data-f"), fg.getAttribute("data-q"), fg); }); });
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =

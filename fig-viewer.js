@@ -91,11 +91,13 @@
     out.sort(function (a, b) { return b.hits - a.hits; });
     return out.slice(0, max || 1);
   }
-  function forDrug(name) {
-    var w = String(name || "").toLowerCase().replace(/[^a-z ]/g, " ").trim().split(/\s+/)[0] || "";
-    for (var i = 0; REG && i < REG.length; i++) if (w && REG[i].drugs[w]) return { id: REG[i].id, title: REG[i].title, blurb: REG[i].blurb, name: w, query: REG[i].drugs[w] + "&name=" + encodeURIComponent(w.charAt(0).toUpperCase() + w.slice(1)) };
-    return null;
+  /* forDrugs(name) -> every figure that names this drug (the generic's first word), each with its preset query; [] when none. */
+  function forDrugs(name) {
+    var w = String(name || "").toLowerCase().replace(/[^a-z ]/g, " ").trim().split(/\s+/)[0] || "", out = [];
+    for (var i = 0; REG && w && i < REG.length; i++) if (REG[i].drugs[w]) out.push({ id: REG[i].id, title: REG[i].title, blurb: REG[i].blurb, name: w, query: REG[i].drugs[w] + "&name=" + encodeURIComponent(w.charAt(0).toUpperCase() + w.slice(1)) });
+    return out;
   }
+  function forDrug(name) { return forDrugs(name)[0] || null; }
   function openFig(id, query, from) {
     var f = byId(id); if (!f) return false;
     return open({ src: f.page, title: f.title, from: from, query: query || "" });
@@ -105,6 +107,6 @@
     if (!m) return "";
     return '<button type="button" class="' + esc(cls || "smdfig-chip") + '" data-act="' + (act || "fig-open") + '" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><span aria-hidden="true">&#9654;</span> <b>' + esc(m.title) + "</b></button>";
   }
-  G.SMD_FIG = { open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, openFig: openFig, chipHtml: chipHtml, _build: build };
+  G.SMD_FIG = { open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, forDrugs: forDrugs, openFig: openFig, chipHtml: chipHtml, _build: build };
   ready();
 })(typeof window !== "undefined" ? window : this);

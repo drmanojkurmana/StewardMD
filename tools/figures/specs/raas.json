@@ -1,0 +1,64 @@
+{
+ "id": "raas",
+ "title": "The renin-angiotensin-aldosterone system and its drugs",
+ "ariaLabel": "Schematic of the renin-angiotensin-aldosterone cascade: renin turns angiotensinogen into angiotensin I, angiotensin-converting enzyme (ACE) turns it into angiotensin II, which acts on AT1 receptors to constrict vessels and release aldosterone, and aldosterone acts on mineralocorticoid receptors to retain salt and water. ACE also breaks down bradykinin. A renin inhibitor, ACE inhibitor, angiotensin receptor blocker or aldosterone antagonist blocks one step and lowers everything after it.",
+ "caption": "Schematic, not to scale. Levels and flow are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": { "label": "Renin release", "a": [0.2, 0.5, 0.85], "names": ["low", "raised (low pressure or low salt)", "high"], "ticks": ["low", "raised", "high"], "start": 1 },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  { "label": "none", "status": "no drug" },
+  { "label": "ACE inhibitor (enalapril or ramipril type)", "status": "ACE inhibitor", "blocks": { "ace": 0.85 } },
+  { "label": "angiotensin receptor blocker (losartan type)", "status": "angiotensin receptor blocker", "blocks": { "at1": 0.85 } },
+  { "label": "direct renin inhibitor (aliskiren type)", "status": "direct renin inhibitor", "blocks": { "renin": 0.85 } },
+  { "label": "aldosterone antagonist (spironolactone type)", "status": "aldosterone antagonist", "blocks": { "mr": 0.85 } }
+ ],
+ "readout": "vasoconstriction {0} · salt and water retention {1} · bradykinin {2}",
+ "outputs": [
+  { "node": "vasoc", "words": ["low", "moderate", "high"] },
+  { "node": "retention", "words": ["low", "moderate", "high"] },
+  { "node": "brady", "words": ["normal", "raised", "markedly raised"] }
+ ],
+ "status": "Renin release: {level} · {drug} ·",
+ "tests": [
+  [1, 0, "vasoconstriction moderate · salt and water retention moderate · bradykinin normal"],
+  [1, 1, "vasoconstriction low · salt and water retention low · bradykinin markedly raised"],
+  [1, 2, "vasoconstriction low · salt and water retention low · bradykinin normal"],
+  [1, 3, "vasoconstriction low · salt and water retention low · bradykinin normal"],
+  [1, 4, "vasoconstriction moderate · salt and water retention low · bradykinin normal"],
+  [2, 0, "vasoconstriction high · salt and water retention high · bradykinin normal"]
+ ],
+ "blockInfo": "A drug of the chosen class blocking this step (generic teaching symbol, not a named drug's shape). The block is competitive or partial in life; here its brightness shows how strongly the step is held back. Everything after the step receives less.",
+ "blockKey": "inhibitor or blocker (generic)",
+ "nodes": [
+  { "id": "angt", "kind": "source", "label": "Angiotensinogen", "sub": "from the liver", "x": 125, "y": 130, "rx": 78, "info": "Angiotensinogen: a protein made by the liver and always present in the blood. It is the starting material of the cascade. Renin release (the slider) sets how fast the cascade runs." },
+  { "id": "angI", "kind": "mid", "label": "Angiotensin I", "sub": "inactive", "x": 400, "y": 130, "rx": 72, "info": "Angiotensin I: a small peptide cut from angiotensinogen by renin. It has little activity of its own." },
+  { "id": "angII", "kind": "mid", "label": "Angiotensin II", "sub": "the active peptide", "x": 690, "y": 130, "rx": 78, "info": "Angiotensin II: the main active peptide of the system. It acts on AT1 receptors to constrict arterioles and to release aldosterone from the adrenal cortex. Angiotensin II also reaches other tissues, which this figure leaves out." },
+  { "id": "at1", "kind": "mid", "label": "AT1 receptor", "sub": "activated", "x": 690, "y": 290, "rx": 74, "info": "AT1 receptor: the angiotensin II receptor that carries most of its effects on vessels and the adrenal. AT2 receptors exist and are left out." },
+  { "id": "vasoc", "kind": "out", "label": "Vasoconstriction", "sub": "blood pressure ↑", "x": 470, "y": 440, "rx": 82, "info": "Constriction of arterioles raises peripheral resistance and so blood pressure." },
+  { "id": "aldo", "kind": "mid", "label": "Aldosterone", "sub": "adrenal cortex", "x": 810, "y": 440, "rx": 64, "info": "Aldosterone: a steroid released by the adrenal cortex when angiotensin II acts on it (potassium also releases it, not drawn)." },
+  { "id": "retention", "kind": "out", "label": "Salt and water retention", "sub": "volume ↑, potassium lost", "x": 810, "y": 565, "rx": 100, "info": "Aldosterone acts on the distal nephron to keep sodium and water and to lose potassium, which raises blood volume." },
+  { "id": "brady", "kind": "inv", "inv": "ace", "label": "Bradykinin", "sub": "ACE breaks it down", "x": 175, "y": 330, "rx": 86, "info": "Bradykinin: a vasodilating peptide that ACE (also called kininase II) breaks down. When ACE is blocked, bradykinin lasts longer, which is the proposed reason for the dry cough and for angioedema with ACE inhibitors. Angiotensin receptor blockers do not do this." }
+ ],
+ "edges": [
+  { "id": "renin", "from": "angt", "to": "angI", "label": "renin", "info": "Renin: an enzyme released by the kidney's juxtaglomerular cells when pressure or sodium delivery falls. It is the rate-setting step of the cascade." },
+  { "id": "ace", "from": "angI", "to": "angII", "label": "ACE", "info": "Angiotensin-converting enzyme (ACE): converts angiotensin I to angiotensin II, mostly on the surface of lung and other endothelium. The same enzyme breaks down bradykinin." },
+  { "id": "at1", "from": "angII", "to": "at1", "label": "AT1", "info": "Angiotensin II binding to the AT1 receptor. An angiotensin receptor blocker occupies the receptor, so angiotensin II made by any route cannot act here." },
+  { "id": "vc", "from": "at1", "to": "vasoc", "blockable": false, "info": "AT1 receptor signalling in arteriolar smooth muscle." },
+  { "id": "ald", "from": "at1", "to": "aldo", "blockable": false, "info": "AT1 receptor signalling in the adrenal cortex releases aldosterone." },
+  { "id": "mr", "from": "aldo", "to": "retention", "label": "MR", "info": "Aldosterone binding the mineralocorticoid receptor (MR) in the distal nephron. An aldosterone antagonist occupies the receptor, so aldosterone has less effect." }
+ ],
+ "sources": [
+  "<strong>The cascade (well established).</strong> Renin cleaves angiotensinogen to angiotensin I; ACE converts it to angiotensin II, which raises pressure by constricting arterioles and drives aldosterone release and renal sodium retention. Renin release by the juxtaglomerular cells sets the pace (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK470410/\">Physiology, Renin Angiotensin System, StatPearls</a>).",
+  "<strong>ACE inhibitors and bradykinin.</strong> ACE also breaks down bradykinin; the build-up when ACE is blocked is the usual explanation for the dry cough and for angioedema (substance P may add to the cough). Cough affects roughly 5 to 20 percent of people on ACE inhibitors and angioedema about 0.1 to 0.2 percent, usually within hours to a week of starting (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8669203/\">Case report and review of ACE-inhibitor angioedema, PMC</a>).",
+  "<strong>Angiotensin receptor blockers.</strong> They block angiotensin II at the AT1 receptor and can replace an ACE inhibitor when cough or angioedema is a problem; hyperkalaemia, hypotension and kidney injury are the main cautions (<a href=\"https://www.statpearls.com/articlelibrary/viewarticle/17585/\">Angiotensin II Receptor Blockers, StatPearls</a>).",
+  "<strong>Aldosterone antagonists.</strong> Spironolactone blocks the mineralocorticoid receptor and is non-selective, so it also binds androgen and progesterone receptors (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK554421/\">Spironolactone, StatPearls</a>)."
+ ],
+ "simplified": "Angiotensin II also acts on AT2 receptors and is broken down to other peptides (angiotensin 1-7 acting on Mas receptors); chymase and other enzymes make angiotensin II without ACE, which is why ACE inhibitors do not remove it completely; the feedback of angiotensin II on renin release, so renin and angiotensin I rise when ACE or the AT1 receptor is blocked, is not drawn; aldosterone is also released by potassium and ACTH; aldosterone has non-genomic and non-renal effects (heart, vessels); sacubitril and neprilysin, and the effect on potassium, creatinine and pregnancy, are left out. Levels, flow and the size of the block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "The renin-angiotensin-aldosterone system and its drugs",
+  "blurb": "Interactive figure: ACE inhibitors, ARBs, renin inhibitors and aldosterone antagonists, step by step",
+  "drugs": { "captopril": "d=1", "enalapril": "d=1", "lisinopril": "d=1", "ramipril": "d=1", "perindopril": "d=1", "benazepril": "d=1", "fosinopril": "d=1", "quinapril": "d=1", "trandolapril": "d=1", "imidapril": "d=1", "cilazapril": "d=1", "moexipril": "d=1",
+    "losartan": "d=2", "valsartan": "d=2", "telmisartan": "d=2", "candesartan": "d=2", "irbesartan": "d=2", "olmesartan": "d=2", "azilsartan": "d=2", "eprosartan": "d=2", "aliskiren": "d=3", "spironolactone": "d=4", "eplerenone": "d=4", "finerenone": "d=4" },
+  "terms": ["ACE[- ]inhibitors?", "angiotensin[- ]converting[- ]enzyme inhibitors?", "angiotensin (?:II )?receptor blockers?", "renin[- ]angiotensin(?:[- ]aldosterone)?(?: system)?", "RAAS", "aldosterone antagonists?", "mineralocorticoid receptor antagonists?"]
+ }
+}

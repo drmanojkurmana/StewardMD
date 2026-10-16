@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 import vm from "node:vm";
 
 const cfg = JSON.parse(readFileSync(new URL("../prep/figures/figures.json", import.meta.url), "utf8"));
@@ -25,13 +25,33 @@ test("registry: text match for drugs, class phrases and nothing else", async () 
   assert.equal(F.matchText("A 60-year-old on metoprolol develops bradycardia")[0].id, "beta-blockers");
   assert.match(F.matchText("Which beta blocker is cardioselective? Atenolol")[0].query, /^d=2&name=Atenolol$/);
   assert.equal(F.matchText("Metoprolol versus propranolol in asthma")[0].hits, 2);
-  assert.equal(F.matchText("Amlodipine blocks L-type calcium channels").length, 0);
+  assert.equal(F.matchText("Paracetamol overdose causes hepatic necrosis").length, 0);
   assert.equal(F.matchText("the word metoprololic is not a drug").length, 0, "whole words only");
   assert.equal(F.forDrug("Metoprolol succinate").query, "d=2&name=Metoprolol");
-  assert.equal(F.forDrug("Amlodipine"), null);
+  assert.equal(F.forDrug("Paracetamol"), null);
 });
 test("registry: chip html is escaped", async () => {
   const F = load(); await F.ready();
   const h = F.chipHtml({ id: "x", title: '<b>"', query: 'a"b' });
   assert.ok(!/<b>"/.test(h.replace("<b>&lt;b&gt;&quot;</b>", "")), h);
+});
+
+test("registry: every figure has its dark and light page, a spec, and a licence notice", () => {
+  for (const f of cfg.figures) {
+    assert.ok(existsSync(new URL("../" + f.page, import.meta.url)), f.id + " dark page");
+    assert.ok(existsSync(new URL("../" + f.page.replace(/\.html$/, "-light.html"), import.meta.url)), f.id + " light page");
+    assert.ok(existsSync(new URL("../tools/figures/specs/" + f.id + ".json", import.meta.url)), f.id + " spec");
+    const html = readFileSync(new URL("../" + f.page, import.meta.url), "utf8");
+    assert.match(html, /Anima/, f.id + " credits the Anima kit");
+    assert.ok(!/<script[^>]+src=/.test(html), f.id + " loads no external script");
+    assert.ok(!/\u2014|\u2013/.test(html.replace(/<style[\s\S]*?<\/style>/g, "")), f.id + " has no em or en dash in its text");
+  }
+});
+test("registry: drugs shared by two figures list both", async () => {
+  const F = load(); await F.ready();
+  assert.ok(F.forDrugs("spironolactone").length >= 2, "spironolactone is in the RAAS and the diuretics figures");
+  assert.equal(F.forDrugs("furosemide")[0].id, "diuretics");
+  assert.equal(F.forDrugs("enalapril")[0].id, "raas");
+  assert.equal(F.matchText("Aspirin and clopidogrel after stenting", 1)[0].id, "antiplatelets");
+  assert.equal(F.matchText("Rivaroxaban versus warfarin", 1)[0].id, "anticoagulants");
 });

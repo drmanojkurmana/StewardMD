@@ -1,0 +1,281 @@
+{
+ "id": "calcium-channel-blockers",
+ "title": "Calcium channel blockers: vessel or heart",
+ "ariaLabel": "Schematic of L-type calcium channels in a blood vessel wall and in the heart. Depolarisation opens the channels, calcium enters, and vascular smooth muscle contracts while the heart speeds up, conducts and contracts harder. A dihydropyridine blocker mainly relaxes the vessel; verapamil and diltiazem act more on the heart.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Depolarisation (how often the channels open)",
+  "a": [
+   0.3,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Calcium channel blocker class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no blocker"
+  },
+  {
+   "label": "dihydropyridine (amlodipine or nifedipine type)",
+   "status": "dihydropyridine",
+   "blocks": {
+    "c_v": 0.85,
+    "c_h": 0.15
+   }
+  },
+  {
+   "label": "verapamil type",
+   "status": "verapamil-type blocker",
+   "blocks": {
+    "c_v": 0.5,
+    "c_h": 0.85
+   }
+  },
+  {
+   "label": "diltiazem type",
+   "status": "diltiazem-type blocker",
+   "blocks": {
+    "c_v": 0.6,
+    "c_h": 0.7
+   }
+  }
+ ],
+ "readout": "vessel tone {0} · heart rate and conduction {1} · contractility {2}",
+ "outputs": [
+  {
+   "node": "tone",
+   "words": [
+    "low",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.8
+   ]
+  },
+  {
+   "node": "rate",
+   "words": [
+    "slowed",
+    "usual",
+    "fast"
+   ],
+   "cuts": [
+    0.25,
+    0.8
+   ]
+  },
+  {
+   "node": "force",
+   "words": [
+    "low",
+    "usual",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.8
+   ]
+  }
+ ],
+ "status": "Depolarisation: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "vessel tone moderate · heart rate and conduction usual · contractility usual"
+  ],
+  [
+   1,
+   1,
+   "vessel tone low · heart rate and conduction usual · contractility usual"
+  ],
+  [
+   1,
+   2,
+   "vessel tone moderate · heart rate and conduction slowed · contractility low"
+  ],
+  [
+   2,
+   0,
+   "vessel tone high · heart rate and conduction fast · contractility high"
+  ]
+ ],
+ "blockInfo": "A calcium channel blocker of the chosen class in the channel (generic teaching symbol, not a named drug's shape). Less calcium enters this tissue, so everything that depends on calcium entry is reduced.",
+ "blockKey": "calcium channel blocker (generic)",
+ "nodes": [
+  {
+   "id": "dep",
+   "kind": "source",
+   "label": "Depolarisation",
+   "sub": "the cell fires",
+   "x": 95,
+   "y": 300,
+   "rx": 80,
+   "info": "Depolarisation: the membrane potential rising towards threshold. Vascular smooth muscle and heart cells both open L-type calcium channels when this happens. The slider sets how strongly and how often."
+  },
+  {
+   "id": "cav_v",
+   "kind": "mid",
+   "label": "Channel open",
+   "sub": "vascular smooth muscle",
+   "x": 270,
+   "y": 150,
+   "rx": 88,
+   "info": "L-type calcium channels in vascular smooth muscle opening with depolarisation."
+  },
+  {
+   "id": "cav_h",
+   "kind": "mid",
+   "label": "Channel open",
+   "sub": "heart (node and muscle)",
+   "x": 270,
+   "y": 450,
+   "rx": 88,
+   "info": "L-type calcium channels in the heart opening with depolarisation."
+  },
+  {
+   "id": "tone",
+   "kind": "out",
+   "label": "Vessel tone",
+   "sub": "resistance, blood pressure",
+   "x": 835,
+   "y": 150,
+   "rx": 100,
+   "info": "Tone of the arterioles. Less calcium entry means a more relaxed vessel, lower resistance and lower blood pressure."
+  },
+  {
+   "id": "rate",
+   "kind": "out",
+   "label": "Heart rate and AV conduction",
+   "x": 820,
+   "y": 385,
+   "rx": 130,
+   "info": "Sinus rate and conduction through the AV node. Verapamil and diltiazem slow both; this is why they are used for rate control in atrial fibrillation."
+  },
+  {
+   "id": "force",
+   "kind": "out",
+   "label": "Contractility",
+   "sub": "force of each beat",
+   "x": 835,
+   "y": 525,
+   "rx": 96,
+   "info": "Force of contraction. Calcium entry triggers calcium release from the sarcoplasmic reticulum, so less entry means weaker beats; this is why verapamil is avoided in heart failure with a low ejection fraction."
+  },
+  {
+   "id": "cav_v2",
+   "kind": "mid",
+   "label": "Calcium in the cell",
+   "sub": "vessel",
+   "x": 560,
+   "y": 150,
+   "rx": 88,
+   "info": "Free calcium inside the vascular smooth muscle cell."
+  },
+  {
+   "id": "cav_h2",
+   "kind": "mid",
+   "label": "Calcium in the cell",
+   "sub": "heart",
+   "x": 560,
+   "y": 450,
+   "rx": 88,
+   "info": "Free calcium inside the heart cell."
+  }
+ ],
+ "edges": [
+  {
+   "id": "d_v",
+   "from": "dep",
+   "to": "cav_v",
+   "blockable": false,
+   "info": "Depolarisation opening channels in vascular smooth muscle."
+  },
+  {
+   "id": "d_h",
+   "from": "dep",
+   "to": "cav_h",
+   "blockable": false,
+   "info": "Depolarisation opening channels in the heart."
+  },
+  {
+   "id": "c_v",
+   "from": "cav_v",
+   "to": "cav_v2",
+   "label": "L-type channel",
+   "info": "The L-type (high-voltage) calcium channel of vascular smooth muscle. Dihydropyridines bind it most readily here, because the resting membrane potential of vessels keeps many channels in the state the drug prefers."
+  },
+  {
+   "id": "c_h",
+   "from": "cav_h",
+   "to": "cav_h2",
+   "label": "L-type channel",
+   "info": "The L-type calcium channel of the sinoatrial node, AV node and cardiac muscle. Verapamil and diltiazem bind a different site from dihydropyridines and block it most in fast-firing cells such as the nodes."
+  },
+  {
+   "id": "v_t",
+   "from": "cav_v2",
+   "to": "tone",
+   "blockable": false,
+   "info": "More calcium inside means more contraction of the vessel wall."
+  },
+  {
+   "id": "h_r",
+   "from": "cav_h2",
+   "to": "rate",
+   "blockable": false,
+   "info": "Calcium drives pacemaker and AV nodal activity."
+  },
+  {
+   "id": "h_f",
+   "from": "cav_h2",
+   "to": "force",
+   "blockable": false,
+   "info": "Calcium drives contraction of cardiac muscle."
+  }
+ ],
+ "sources": [
+  "<strong>Two groups of calcium channel blockers.</strong> Dihydropyridines act mainly on vascular smooth muscle and dilate arterioles; verapamil and diltiazem are also vasodilators but have clearly negative chronotropic, inotropic and dromotropic effects, slowing the rate, force and AV conduction. The two groups bind separate sites on the L-type channel (<a href=\"https://pmc.ncbi.nlm.nih.gov/articles/PMC8108866\">Review of calcium channel blockers, PMC</a>; <a href=\"https://bihs.org.uk/_userfiles/pages/files/treatments/calciumchannelblockersfinal2017.pdf\">British and Irish Hypertension Society, calcium channel blockers</a>).",
+  "<strong>Calcium and contraction.</strong> In smooth muscle calcium raises contraction through calmodulin and myosin light chain kinase; in the heart calcium entry triggers further release from the sarcoplasmic reticulum. This is standard physiology, in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review."
+ ],
+ "simplified": "Reflex tachycardia after a fast-acting dihydropyridine, ankle oedema, other calcium channel types (T-type, N-type), differences between individual drugs (and drugs within a group), use dependence and voltage dependence of block, interactions (digoxin, ciclosporin, beta-blockers), and the effect in heart failure or heart block are left out. Levels, flow and the size of the block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Calcium channel blockers: vessel or heart",
+  "blurb": "Interactive figure: dihydropyridines, verapamil and diltiazem, in vessels and in the heart",
+  "drugs": {
+   "amlodipine": "d=1",
+   "nifedipine": "d=1",
+   "felodipine": "d=1",
+   "nicardipine": "d=1",
+   "nimodipine": "d=1",
+   "lercanidipine": "d=1",
+   "cilnidipine": "d=1",
+   "isradipine": "d=1",
+   "nitrendipine": "d=1",
+   "lacidipine": "d=1",
+   "verapamil": "d=2",
+   "diltiazem": "d=3"
+  },
+  "terms": [
+   "calcium channel blockers?",
+   "calcium antagonists?",
+   "dihydropyridines?",
+   "CCBs?"
+  ]
+ }
+}

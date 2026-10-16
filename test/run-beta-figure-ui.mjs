@@ -30,12 +30,12 @@ try {
   const card = async (name) => {
     await page.evaluate((n) => MEDDB.openComposition(n), name);
     await page.waitForTimeout(2500);
-    return page.evaluate(() => { const b = document.getElementById("dbFig"); return b ? { d: (/d=(\d)/.exec(b.getAttribute("data-q")) || [])[1] || "0", n: b.getAttribute("data-f") } : null; });
+    return page.evaluate(() => { const b = document.querySelector(".db-fig"); return b ? { d: (/d=(\d)/.exec(b.getAttribute("data-q")) || [])[1] || "0", n: b.getAttribute("data-f") } : null; });
   };
   const m = await card("Metoprolol"); ok(m && m.d === "2", "metoprolol: card, preset beta-1 selective " + JSON.stringify(m));
   const p = await card("Propranolol"); ok(p && p.d === "1", "propranolol: card, preset non-selective");
   const c = await card("Carvedilol"); ok(c && c.d === "1", "carvedilol: card");
-  const a = await card("Amlodipine"); ok(a === null, "amlodipine: no card");
+  const a = await card("Paracetamol"); ok(a === null, "paracetamol: no card");
 
   // the same figure from a question's explanation (study mode shows the verdict and the explanation at once)
   await page.evaluate(() => { const o = document.getElementById("dbOverlay"); if (o) o.classList.remove("on"); document.body.classList.remove("db-lock"); });
@@ -62,7 +62,10 @@ try {
   await page.keyboard.press("Escape");
   const q2 = await page.evaluate(() => { const nx = document.querySelector("[data-act=next]"); if (nx) nx.click(); return true; });
   await page.waitForTimeout(800);
-  ok(await page.evaluate(() => !document.querySelector(".pn-figchip") || !/Verapamil/.test(document.body.innerText)), "a question about other drugs shows no chip");
+  await page.waitForSelector('#smdPrep [data-act="answer"]', { timeout: 8000 }).catch(() => {});
+  await page.evaluate(() => { const b = document.querySelector('#smdPrep [data-act="answer"][data-k="0"]'); if (b) b.click(); });
+  await page.waitForTimeout(800);
+  ok(await page.evaluate(() => { const c = document.querySelector(".pn-figchip"); return !!c && c.getAttribute("data-f") === "calcium-channel-blockers"; }), "the next question (verapamil) shows the calcium channel blocker figure, not the beta-blocker one");
   await page.evaluate(() => { const c = document.querySelector("[data-act=back]"); });
 
   // a Knowledge Library article whose treatment text names beta-blockers
@@ -76,7 +79,7 @@ try {
   for (const dark of [true, false]) {
     await page.evaluate((dk) => { document.body.classList.toggle("dark", dk); }, dark);
     await card("Metoprolol");
-    await page.evaluate(() => document.getElementById("dbFig").click());
+    await page.evaluate(() => document.querySelector(".db-fig").click());
     await page.waitForSelector(".smdfig iframe", { timeout: 5000 });
     const src = await page.evaluate(() => document.querySelector(".smdfig iframe").getAttribute("src"));
     ok(dark ? !/-light/.test(src) : /-light\.html/.test(src), (dark ? "dark" : "light") + " build opens: " + src);
@@ -92,7 +95,7 @@ try {
     if (SHOTS) await page.screenshot({ path: SHOTS + "/beta-" + (dark ? "dark" : "light") + ".png" });
     await page.keyboard.press("Escape");
     ok(await page.evaluate(() => !document.querySelector(".smdfig") && !SMD_FIG.isOpen()), "Escape closes it");
-    await page.evaluate(() => document.getElementById("dbFig").click());
+    await page.evaluate(() => document.querySelector(".db-fig").click());
     await page.waitForSelector(".smdfig-x"); await page.click(".smdfig-x");
     ok(await page.evaluate(() => !document.querySelector(".smdfig")), "Close button closes it");
   }
