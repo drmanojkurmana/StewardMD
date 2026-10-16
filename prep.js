@@ -1967,22 +1967,31 @@
     var pool = [];
     subs.forEach(function (sb) { var ix = st.ix[sb.id]; if (ix) ix.topics.forEach(function (t) { if (t.group !== "mixed" && countFor(t, s.exam) > 0) pool.push({ s: sb.id, m: t.id }); }); });
     if (!pool.length) return Promise.resolve(null);
-    var d = today(), hid = hidden(), pick = null;
-    // Only modules already on this phone (opened or downloaded): no download for it, and it works offline.
-    return Promise.resolve(cacheKeys()).then(null, function () { return null; }).then(function (keys) {
-      var have = {}; (keys || []).forEach(function (k) { have[k] = 1; });
-      var mine = pool.filter(function (x) { var p = modulePath(x.s, x.m); return have[p] || st.mem[p]; });
-      if (!mine.length) return null;
-      pick = mine[dayHash(d, 7) % mine.length];
-      return loadModule(pick.s, pick.m);
-    }).then(function (items) {
-      if (!items) return null;
-      var ok = (items || []).filter(function (it) {
-        return usable(it, hid) && it.o && it.o.length === 4 && !(it.img && it.img.length) && !it._py && !/\b(image|shown|figure|photograph|picture|x-?ray below|graph)\b/i.test(it.q || "") &&
-          !(G.PREP_RAD && G.PREP_RAD.figure(it, HOST));
+    // Sorted, so every student with the same subjects gets the same module and question on the same day.
+    pool.sort(function (a, b) { return a.s + "/" + a.m < b.s + "/" + b.m ? -1 : 1; });
+    var d = today(), hid = hidden();
+    var from = function (x) {
+      return loadModule(x.s, x.m).then(function (items) {
+        var ok = (items || []).filter(function (it) {
+          return it.id && it.o && it.o.length === 4 && !(it.img && it.img.length) && !it._py && !/\b(image|shown|figure|photograph|picture|x-?ray below|graph)\b/i.test(it.q || "") &&
+            !(G.PREP_RAD && G.PREP_RAD.figure(it, HOST));
+        }).sort(function (a, b) { return a.id < b.id ? -1 : 1; });
+        if (!ok.length) return null;
+        var k = dayHash(d, 13) % ok.length;
+        for (var i = 0; i < ok.length; i++) { var it = ok[(k + i) % ok.length]; if (usable(it, hid)) return it; }
+        return null;
       });
-      return ok.length ? ok[dayHash(d, 13) % ok.length] : null;
-    }).then(null, function () { return null; });
+    };
+    var first = pool[dayHash(d, 7) % pool.length];
+    return from(first).then(null, function () { return null; }).then(function (it) {
+      if (it) return it;
+      // Offline or an empty module: a module already on this phone, so the card still shows.
+      return Promise.resolve(cacheKeys()).then(null, function () { return null; }).then(function (keys) {
+        var have = {}; (keys || []).forEach(function (k) { have[k] = 1; });
+        var mine = pool.filter(function (x) { var p = modulePath(x.s, x.m); return have[p] || st.mem[p]; });
+        return mine.length ? from(mine[dayHash(d, 7) % mine.length]).then(null, function () { return null; }) : null;
+      });
+    });
   }
   function qotdHtml(it) {
     var q = qotdState(), done = q && q.id === it.id ? q : null, L = ["A", "B", "C", "D"], sb = subjectById(it._s);

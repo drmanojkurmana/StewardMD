@@ -1197,8 +1197,10 @@ best way of learning."
 - Home: readiness **orb** (`heroHtml`, `.pl-orb`): ring + amber nucleus at the arc end, figure counts up with the ring
   (prep-motion drawRing). Home bar right button is now **Menu** (`renderMenu`: exam and plan, Pro, downloads, stats,
   bookmarks, mistakes, friends, accuracy); Downloads moved into it.
-- **Question of the day** (`#pnQotd`): `dayHash(day)` picks a module of the exam's subjects that is already on the phone
-  (IDB or memory, never a download), then a usable text-only item. Answer opens the runner in study mode already
+- **Question of the day** (`#pnQotd`, fixed 2026-10-16, prep81): the pool is the student's own branch/subject list (plan scope),
+  sorted by id, so `dayHash(day)` gives the SAME module and question to every student with that scope; the module is
+  downloaded if needed (it used to need a cached module, so fresh phones saw nothing and picks differed per phone). Offline
+  falls back to a cached module. Then a usable text-only item. Answer opens the runner in study mode already
   answered (recorded normally); `smd_prep_qotd` keeps the day's answer (device only).
 - Subjects are tiles (2 a row; 1 under 360 CSS px, 3 from 700, 4 from 1000): icon disc ringed by modules completed.
 - Subject filters are a segmented control with a sliding thumb (`.pn-seg`, `--i/--n`, `.pn-seg-th`).
