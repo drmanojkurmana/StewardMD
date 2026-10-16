@@ -596,6 +596,8 @@ test("gate [ENFORCE=1]: tools credential reads the bank without login; wrong, mi
   assert.equal((await get(mk(k), {})).status, 401);
   assert.equal((await get(mk(kv()), { "X-SMD-Tool": secret })).status, 401, "no hash in KV: the header opens nothing");
   assert.equal((await get({ PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(file) }, { "X-SMD-Tool": secret })).status, 401, "no KV: refused");
+});
+
 test("gate [ENFORCE=1]: opening a module with 26 overlay sets is ONE open, not 27 files toward the lockouts", async () => {
   gate.resetBankGateMemory();
   const env = { PREP_BANK_ENFORCE: "1", MAIK_KV: kv(), PREP_BANK_R2: r2({}) };
