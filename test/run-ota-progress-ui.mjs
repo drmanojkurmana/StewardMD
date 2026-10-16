@@ -51,6 +51,10 @@ const BOOT = `
   window.__probeDelay = 100;   // ms per 384 KB probe, about 3.7 MB/s
   window.fetch = function (url, opts) {
     var u = String(url);
+    if (u.indexOf("/api/ota/probe") !== -1) {
+      window.__probes++;
+      return new Promise(function (res) { setTimeout(function () { res(new Response("a".repeat(393216), { status: 200 })); }, window.__probeDelay); });
+    }
     if (u.indexOf("/api/ota/file/") !== -1) {
       window.__probes++;
       return new Promise(function (res) { setTimeout(function () { res(new Response(new ArrayBuffer(393216), { status: 206 })); }, window.__probeDelay); });
@@ -78,6 +82,9 @@ try {
   ok(m.a.speed > 900000 && m.b.bytes > m.a.bytes && m.b.est === true, "the meter turns a measured 1 MB/s into rising estimated bytes: " + Math.round(m.a.bytes) + " then " + Math.round(m.b.bytes));
   ok(m.w.phase === "waiting" && m.w.speed === 0 && Math.abs(m.w.bytes - m.b.bytes) < 1, "no samples for over 20 s: phase waiting, speed 0, the bar stops");
   ok(m.i.phase === "install" && m.i.pct === 100, "the install phase reads 100%");
+  const n0 = await J(`var m = SMD_OTA._meter(100 * 1048576); var t0 = Date.now(); var r = m.read(t0 + 30000, "download"); m.fail("HTTP 403"); var r2 = m.read(t0 + 31000, "download"); return JSON.stringify({ r: r, r2: r2 });`);
+  ok(n0.r.phase === "download" && n0.r.samples === 0 && n0.r.elapsed >= 30000, "a probe that never answered is NOT 'waiting for the network' (the native download is still running): phase " + n0.r.phase);
+  ok(n0.r2.err === "HTTP 403", "the probe's failure reason reaches the card: " + n0.r2.err);
 
   // ---- the card, fed by a real install() ----
   await ev(`var d = document.createElement("div"); d.id = "otpHost"; d.style.cssText = "position:fixed;left:12px;right:12px;top:12px;z-index:999999;background:#fff;padding:8px"; document.body.appendChild(d);

@@ -105,37 +105,45 @@
    * 1 to 69 band, 70 = file landed on iOS) the meter switches to those and drops the "about". No traffic is spent when
    * nobody is watching (the silent auto-update path passes no onProgress). */
   function makeMeter(total) {
-    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [];
+    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [], t0 = Date.now(), samples = 0, err = "";
     return {
       sample: function (bytes, ms) {
         if (!(bytes > 0 && ms > 0)) return;
-        var s = bytes * 1000 / ms; speed = speed ? speed * 0.6 + s * 0.4 : s; lastOk = Date.now();
+        var s = bytes * 1000 / ms; speed = speed ? speed * 0.6 + s * 0.4 : s; lastOk = Date.now(); samples++; err = "";
       },
+      fail: function (code) { err = String(code || "failed").slice(0, 24); },
       real: function (frac) { if (frac > 0 && frac < 1) exact = Math.max(exact || 0, frac); },
       read: function (now, phase) {
         var dt = Math.max(0, now - last); last = now;
-        var stalled = phase === "download" && now - lastOk > 20000;
+        // "Waiting for the network" only after a measurement has worked and then stopped. A probe that never worked says
+        // nothing about the real download (which runs natively), so it must not claim the network is dead.
+        var stalled = phase === "download" && samples > 0 && now - lastOk > 20000;
         if (phase === "download" && !stalled && exact == null && total) est = Math.min(total * 0.97, est + speed * dt / 1000);
         var bytes = phase !== "download" ? total : (exact != null ? exact * total : est);
         if (now - lastPush >= 1000) { lastPush = now; hist.push(stalled ? 0 : speed); if (hist.length > 90) hist.shift(); }
         var sp = stalled ? 0 : speed;
         return { bytes: bytes, total: total, pct: total ? Math.min(100, Math.round(bytes * 100 / total)) : 0, speed: sp,
           eta: sp > 0 && total ? Math.max(0, (total - bytes) / sp) : null, est: exact == null,
-          phase: stalled ? "waiting" : phase, history: hist.slice() };
+          phase: stalled ? "waiting" : phase, history: hist.slice(), samples: samples, err: err, elapsed: Math.max(0, now - t0) };
       }
     };
   }
   function startProbe(url, total, meter) {
     var alive = true, ctl = null, chunk = 393216;
     try { if (typeof AbortController !== "undefined") ctl = new AbortController(); } catch (e) {}
+    /* The probe is a plain-text download from /api/ota/probe on the same host as the bundle (n ASCII bytes, no-store).
+     * It used to be a ranged request for a piece of the zip itself: that needs a CORS preflight and a binary body,
+     * and on the devices that failed (owner, 2026-10-16: the card sat at 0.0 MB, "working it out") no sample ever
+     * arrived. Text of a known length survives the native HTTP bridge. The reason a probe fails is kept (meter.fail)
+     * and shown on the card instead of being swallowed. */
+    var probeUrl = String(url).replace(/\/file\/[0-9a-fA-F]+(\?.*)?$/, "/probe");
     (function loop() {
       if (!alive) return;
-      var span = total && total > chunk ? Math.floor(Math.random() * (total - chunk)) : 0, t = Date.now();
-      var opts = { headers: { Range: "bytes=" + span + "-" + (span + chunk - 1) }, cache: "no-store" };
+      var t = Date.now(), opts = { cache: "no-store" };
       if (ctl) opts.signal = ctl.signal;
-      fetch(url, opts).then(function (r) { if (!(r.ok || r.status === 206)) throw new Error("probe"); return r.arrayBuffer(); })
-        .then(function (buf) { var ms = Date.now() - t; meter.sample(buf.byteLength, ms); chunk = buf.byteLength * 1000 / Math.max(ms, 1) > 1500000 ? 1572864 : 393216; })
-        .then(null, function () {})
+      fetch(probeUrl + "?n=" + chunk + "&t=" + t, opts).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
+        .then(function (txt) { var ms = Date.now() - t, n = txt ? txt.length : 0; if (!n) throw new Error("empty"); meter.sample(n, ms); chunk = n * 1000 / Math.max(ms, 1) > 1500000 ? 1572864 : 393216; })
+        .then(null, function (e) { try { if (alive) meter.fail(e && e.message ? e.message : e); } catch (x) {} })
         .then(function () { if (alive) setTimeout(loop, 1500); });
     })();
     return function stop() { alive = false; try { if (ctl) ctl.abort(); } catch (e) {} };
@@ -259,6 +267,12 @@
         if (info.phase === "install") { ph.textContent = "Installing"; q(".otp-mb").textContent = fmtMB(info.total) + " MB downloaded"; q(".otp-sp").textContent = "verifying and unpacking"; }
         else if (info.phase === "restart") { ph.textContent = "Restarting"; q(".otp-mb").textContent = "Update ready"; q(".otp-sp").textContent = "reopening the app"; }
         else if (info.phase === "waiting") { ph.textContent = "Waiting for the network"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = "no data coming through"; }
+        else if (info.phase === "download" && info.samples === 0 && info.est) {
+          // No speed measurement has come back yet. Say so plainly instead of "about 0.0 of N MB": the update IS downloading
+          // (natively); we just cannot see how far. After 12 s show how long it has run and why the measurement failed.
+          ph.textContent = "Downloading update"; q(".otp-mb").textContent = fmtMB(info.total) + " MB";
+          q(".otp-sp").textContent = info.elapsed > 12000 ? "speed not available · " + Math.round(info.elapsed / 1000) + " s" + (info.err ? " (" + info.err + ")" : "") : "measuring your connection…";
+        }
         else { ph.textContent = "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta); }
         q(".otp-pc").textContent = info.pct + "%";
         bar.classList.toggle("wait", info.phase === "waiting");

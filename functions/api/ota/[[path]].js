@@ -25,6 +25,7 @@ const json = (obj, status = 200, extra = {}) => new Response(JSON.stringify(obj)
   status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", ...extra },
 });
 const HASH_RE = /^[0-9a-f]{64}$/;   // sha256, lowercase hex — reject anything else before it reaches R2
+const PROBE_FILL = new Uint8Array(1572864).fill(97);   // "a" x 1.5 MB, the speed-probe body (sliced per request)
 
 // Per-IP throttle on the public check endpoint — hygiene, not a hard requirement (R2 egress is
 // free and the response carries nothing sensitive), mirrors the pattern in hospital-request.
@@ -63,6 +64,21 @@ export async function onRequest(context) {
     // ABSOLUTE url, which only the router (not _ota.js) can construct from the live request.
     if (result.ota && result.zipHash) result.zipUrl = new URL(request.url).origin + "/api/ota/file/" + result.zipHash;
     return json(result, 200, { "Cache-Control": "no-store" });   // never let an edge/browser cache "is there an update"
+  }
+  /* SPEED PROBE for the download card. A plain-text body of n ASCII bytes (1 KB to 1.5 MB, no-store, no R2, no KV): the app
+   * times it to show a real link speed while the native updater downloads the bundle (native-ota.js startProbe). It used to
+   * time a ranged piece of the zip itself, which needs a CORS preflight and a binary body and measured nothing on some
+   * devices (owner, 2026-10-16: the card sat at 0.0 MB). Public and harmless: the content is constant filler. */
+  if (seg[0] === "probe") {
+    const cors = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": "Range, Content-Type", "Access-Control-Max-Age": "86400" };
+    if (method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+    if (method === "GET" || method === "HEAD") {
+      const n = Math.max(1024, Math.min(1572864, parseInt(new URL(request.url).searchParams.get("n") || "393216", 10) || 393216));
+      return new Response(method === "HEAD" ? null : PROBE_FILL.subarray(0, n), { status: 200, headers: { ...cors, "Content-Type": "text/plain; charset=us-ascii", "Content-Length": String(n), "Cache-Control": "no-store" } });
+    }
+  }
+  if (method === "OPTIONS" && (seg[0] === "file" || seg[0] === "check")) {
+    return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS", "Access-Control-Allow-Headers": "Range, Content-Type", "Access-Control-Max-Age": "86400" } });
   }
   if (method === "GET" && seg[0] === "file" && seg[1]) {
     const hash = String(seg[1]).toLowerCase();
