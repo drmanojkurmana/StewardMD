@@ -1660,7 +1660,23 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - **Edit by ID:** the reports tab has an "Edit any question or lesson by its ID" box (editors only). It takes the share ID shown in PrepNucleus (Q-K92-1RY-GTV or L-...; case, spaces and hyphens do not matter), resolves it through `PREP_IDS.resolve`, and opens the same editor. Previous-year questions (live in their papers) and withdrawn ones are refused with a message; a lesson opened this way learns its module from the lesson file. A raw bank id such as `ana-spleen-q3` is not accepted (no module is known for it).
 - Tests: `test/prep-fix.test.mjs`, `test/run-prepfix-ui.mjs`. Not built: editing from inside PrepNucleus itself (only from the Review Desk reports).
 
-## SS scope: NEET-SS group, INI-SS course (2026-10-16, prep79)
+
+## Author: PDF source and publish to students (2026-10-16, prep81)
+- **Source:** the owner's Author screen has "Make it from": A topic, Notes, A PDF. The PDF picker, page window, chapter list
+  and previews are the SAME code as Create a module (`pdfPicker`/`bindPdf`/`readGround` in `prep-qgen.js`, state in `cs`,
+  `pdfUi` says which screen it paints on). PDF text is scrubbed (`prepScrub`) and capped at 200,000 characters, then goes
+  to the same `gen` rounds or batch queue as before.
+- **Publish live:** Review has "Publish to all students": pick any number (up to 12) of subject + module targets, the same
+  approved set goes into each. `op publish` (owner only, `functions/api/ai/_prep-qgen.js`) stores the items in KV
+  `prep:fixmod:<module>`.a (the public per-module record of content fixes, `a` = added questions, each with its `sub`)
+  and bumps `prep:fixix`; `prep.js` `loadModuleSingle` appends the ones whose `sub` matches. Ids `mk-<sha12>` of the stem so
+  re-publishing never doubles a question; 300 added questions a module max. `op unpublish { batch }` takes a batch back
+  from every module it reached (the "Take them down" button). No OTA, no Mac step. Existing modules only: a new module
+  still goes the staged-CLI route (it needs an index entry).
+- **Keyboard bug class:** typing in a search box must never replace the input (iOS drops the keyboard). Fixed in the
+  Clinical updates "Diseases this applies to" field and the Review desk Search; only the results list is patched.
+
+## SS scope: NEET-SS group, INI-SS course (2026-10-16, prep81)
 - **NEET-SS:** the plan's group (`prep-ss-groups.js`, Medical default) narrows Home (`ssScope` / `ssHomeSubjects`), Tests,
   Coach, custom module and mixed practice. Unchanged.
 - **INI-SS:** the plan's course now narrows the same places. `prep-plan.js` `iniSubjects(id)` = the course, its degree's

@@ -332,6 +332,35 @@ test("owner bulk: batch submit, poll to verify, poll to done; stage to R2", asyn
   assert.equal(saved.indexOf("prep-bank/"), -1);
 });
 
+test("owner publish: one reviewed set goes live in several modules, public per module, and can be taken down", async () => {
+  reset();
+  const env = envFor();
+  const mk = (n) => ({ id: "q_" + String(n).padStart(12, "a"), q: "Which drug number " + n + " is first line for the stated condition?", o: ["Alpha " + n, "Beta " + n, "Gamma " + n, "Delta " + n], a: 1, exp: "Beta " + n + " is the first line drug because of the stated reason.", r: ["w", "right", "w", "w"], kp: "Beta first", d: 2, cog: "recall", tg: [], qg: { g: 1, v: "ok" } });
+  const items = [mk(1), mk(2)];
+  assert.equal((await post(env, { op: "publish", targets: [{ subject: "pharmacology", module: "ph-first" }], items })).status, 403);
+  assert.equal((await post(env, { op: "publish", targets: [], items }, "tok-o")).status, 400);
+  assert.equal((await post(env, { op: "publish", targets: [{ subject: "Bad Subject", module: "ph-first" }], items }, "tok-o")).status, 400);
+  const t = [{ subject: "pharmacology", module: "ph-first" }, { subject: "medicine", module: "med-first" }, { subject: "pharmacology", module: "ph-first" }];
+  const r = await post(env, { op: "publish", targets: t, items }, "tok-o");
+  assert.equal(r.status, 200, r.text);
+  assert.equal(r.json.added, 4); assert.equal(r.json.targets.length, 2);
+  const rec = JSON.parse(env.MAIK_KV.m.get("prep:fixmod:ph-first"));
+  assert.equal(rec.a.length, 2); assert.equal(rec.a[0].sub, "pharmacology"); assert.match(rec.a[0].id, /^mk-[0-9a-f]{12}$/);
+  assert.equal(rec.a[0].pb, r.json.batch);
+  const ix = JSON.parse(env.MAIK_KV.m.get("prep:fixix"));
+  assert.ok(ix["ph-first"] && ix["med-first"]);
+  // again: same questions are not added twice
+  const again = await post(env, { op: "publish", targets: [t[0]], items }, "tok-o");
+  assert.equal(again.json.added, 0);
+  const { onRequestGet } = await import("../functions/api/prep/fix.js");
+  const g = await onRequestGet({ request: new Request("https://x.test/api/prep/fix?module=ph-first"), env });
+  assert.equal((await g.json()).a.length, 2);
+  const u = await post(env, { op: "unpublish", batch: r.json.batch, targets: t }, "tok-o");
+  assert.equal(u.json.removed, 4);
+  assert.equal(env.MAIK_KV.m.get("prep:fixmod:ph-first"), undefined);
+  assert.deepEqual(JSON.parse(env.MAIK_KV.m.get("prep:fixix")), {});
+});
+
 /* ---------------- CLI (tools/prep-qgen.mjs): pure parts and a dry run that sends nothing ---------------- */
 test("CLI: chunks, plan, estimate, overlay shape; the dry run makes no call", async () => {
   const C = await import("../tools/prep-qgen.mjs");

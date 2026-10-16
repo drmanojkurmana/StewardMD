@@ -14,7 +14,9 @@
 .pn-root select.pc-in:disabled { opacity: .55; }
 
 /* Author: batch job, staged command */
-.pn-root .qg-job p, .pn-root .qg-stage p { margin: 0 0 6px; }
+.pn-root .qg-job p, .pn-root .qg-stage p, .pn-root .qg-pub p { margin: 0 0 6px; }
+.pn-root .qg-pub { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.pn-root .qg-pub .pn-btn { align-self: flex-start; }
 .pn-root .qg-cmd { display: block; padding: 12px; margin: 4px 0 10px; border-radius: var(--pn-r-sm); background: var(--pn-s1); color: var(--pn-text);
   font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 

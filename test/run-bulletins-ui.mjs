@@ -384,6 +384,13 @@ try {
   ok(await ev(`SMD_BULLETINS_DESK._state.cur.disease_ids.length===0`), "suggestions are not added until the signer taps them");
   await ev(`document.querySelector('#smdReview [data-bl-act="dz:ACUTE_BRONCHITIS"]').click();true`);
   ok(await until(`SMD_BULLETINS_DESK._state.cur.disease_ids.indexOf('ACUTE_BRONCHITIS')>=0&&document.getElementById('bl_what_changed').value.indexOf('Acute Bronchitis')>=0`), "tapping a suggestion adds it and keeps the typed text");
+  // typing in the disease search must not replace the input (that closes the phone keyboard after one letter)
+  await ev(`(function(){var q=document.getElementById('bl_dq');window.__dq=q;q.focus();q.value='a';q.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`document.getElementById('bl_dq')===window.__dq&&document.activeElement===window.__dq`), "disease search keeps the same focused input after one letter");
+  await ev(`(function(){var q=window.__dq;q.value='asth';q.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+  ok(await ev(`document.getElementById('bl_dq')===window.__dq&&document.activeElement===window.__dq&&document.getElementById('bl_dq').value==='asth'`), "and after more letters");
+  ok(await ev(`document.getElementById('bl_hits').children.length>0`), "matches (or a no-match note) appear under the field");
+  await ev(`(function(){var q=window.__dq;q.value='';q.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
   // B / I / U: wraps the selected words, the preview shows the formatting, nothing else becomes markup
   await ev(`(function(){var t=document.getElementById('bl_what_changed');t.focus();var i=t.value.indexOf('Acute Bronchitis');t.setSelectionRange(i,i+'Acute Bronchitis'.length);t.dispatchEvent(new FocusEvent('focusin',{bubbles:true}));return true})()`);
   await ev(`document.querySelector('#smdReview [data-bl-act="fmt:b"]').click();true`);

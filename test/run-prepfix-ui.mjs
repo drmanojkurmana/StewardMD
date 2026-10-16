@@ -229,6 +229,13 @@ try {
   ok(stu && stu.exp === "STUDENT SEES THIS" && stu.o.length === 3 && stu.a === 2 && stu.kp === "KP" && !stu.r && !stu.x, "a fixed question reaches PrepNucleus corrected, with its old per-option reasoning dropped");
   ok(stu && /Fixture explanation/.test(stu.other), "other questions in the module are untouched");
 
+  // ---- questions the owner published straight to the module ----
+  const pubQ = (id, sub) => ({ id, q: "Published question " + id + " for students?", o: ["A", "B", "C", "D"], a: 1, exp: "Because B.", r: ["", "", "", ""], kp: "kp", d: 2, sub, prov: "SMD", gen: "AI", src: { maik: 1 }, pb: "pb1" });
+  await ev(`window.__fixIx = { "ana-gametogenesis": 999 }; window.__fixMod = { q: {}, l: {}, a: [${JSON.stringify(pubQ("mk-aaaaaaaaaaaa", "anatomy"))}, ${JSON.stringify(pubQ("mk-bbbbbbbbbbbb", "physiology"))}] }; PREP.refreshFixes(); return 1;`);
+  const pub = JSON.parse(await evA(`PREP.loadItems("anatomy", "ana-gametogenesis").then(function (items) { var p = items.filter(function (i) { return i.id === "mk-aaaaaaaaaaaa"; })[0]; return JSON.stringify({ has: !!p, s: p && p._s, m: p && p._m, other: items.some(function (i) { return i.id === "mk-bbbbbbbbbbbb"; }) }); })`) || "null");
+  ok(pub && pub.has && pub.s === "anatomy" && pub.m === "ana-gametogenesis", "a published question joins its module for students");
+  ok(pub && !pub.other, "a question published to another subject's module is not shown here");
+
   // ---- a slow fix request never blocks a module ----
   await ev(`window.__slowFix = 1; window.__fixIx = { "ana-brachial-plexus": 888 }; PREP.refreshFixes(); return 1;`);
   const t0 = Date.now();

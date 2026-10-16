@@ -18,7 +18,7 @@ follow the same scope for NEET-SS groups and INI-SS courses (they used the whole
 (`prep/assess/profiles/ini-ss.json`) says questions come from "the general/basic component of the qualifying degree
 and the sub-specialty of the course applied for"; Biostatistics was the owner's own ask. **Trade-off:** every other
 SS subject is still one tap away (See all subjects); paediatric and other courses have no general SS subject in the
-bank, so they get their course and Biostatistics only. **Status:** branch `claude/determined-hopper-ayuqpd`, prep79.
+bank, so they get their course and Biostatistics only. **Status:** branch `claude/determined-hopper-ayuqpd`, prep81.
 
 ## 2026-10-13 · Tools grouped by role in All tools; Home starts with a starter set (owner asked)
 

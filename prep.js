@@ -1057,6 +1057,14 @@
       // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
       return fixesFor(mid).then(function (fx) {
         items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); });
+        // Questions the owner published straight to this module (functions/api/ai/_prep-qgen.js op publish).
+        if (fx.a && fx.a.length) {
+          var have = {}; items.forEach(function (it) { have[it.id] = 1; });
+          fx.a.forEach(function (n) {
+            if (!n || n.sub !== sid || have[n.id] || !n.q || !n.o || n.o.length !== 4) return;
+            var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
+          });
+        }
         if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
@@ -1066,7 +1074,7 @@
    * /api/prep/fix?ix=1 says which modules carry fixes (asked at most every 30 min, the last answer kept offline); a module with
    * fixes asks /api/prep/fix?module=<id> once per edit (cached by the edit's timestamp). A slow or failed ask never blocks a
    * module: after 2 s the module opens without its fixes and the next open has them. */
-  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {} };
+  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {}, a: [] };
   function raceTo(p, ms, fb) { return new Promise(function (res) { var done = false, t = setTimeout(function () { if (!done) { done = true; res(fb); } }, ms); p.then(function (v) { if (!done) { done = true; clearTimeout(t); res(v); } }, function () { if (!done) { done = true; clearTimeout(t); res(fb); } }); }); }
   function fixIndex() {
     var s = load(), last = (s.fxix && s.fxix.mods) || {};
@@ -1088,7 +1096,7 @@
         if (hit && hit.fx) return (st.mem[key] = hit.fx);
         return G.fetch(FIX_API + "?module=" + encodeURIComponent(mid)).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
           if (!j) return NOFIX;
-          var fx = { q: j.q || {}, l: j.l || {} }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
+          var fx = { q: j.q || {}, l: j.l || {}, a: j.a || [] }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
         });
       }), 2000, NOFIX);
     });
@@ -1620,9 +1628,15 @@
   }
   // My coaching (IQoach) compares against the selected plan's exam, never the tab it shares.
   function coachExam(s) { var p = planProfileId(); return p || s.exam; }
+  function prettyId(id) { var w = String(id || "?").replace(/^[a-z]{2,4}-(?=.)/, "").replace(/-/g, " "); return w.charAt(0).toUpperCase() + w.slice(1); }
   function coachTopicName(t) {
     var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
-    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
+    // A subject whose topic list is not loaded yet would show the raw id ("son-cervix"): load it and redraw the screen.
+    if (p[0] && !tp && !st.ix[p[0]] && !(st.cnLoad && st.cnLoad[p[0]])) {
+      (st.cnLoad = st.cnLoad || {})[p[0]] = 1;
+      loadIndex(p[0]).then(function () { var h = st.stack && st.stack[st.stack.length - 1]; if (h && G.document && G.document.querySelector("#smdPrep .ky-sec")) rerender(); }, function () {});
+    }
+    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(prettyId(p[1]));
     return sn === tn ? sn : sn + " · " + tn;
   }
   function kyMark(size) {
@@ -1648,8 +1662,8 @@
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
-      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About IQoach" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
-      '<p class="ky-sub">' + esc(K.NAME) + " · " + esc(K.TAGLINE) + "</p>";
+      '<h2 class="pn-h">' + esc(K.NAME) + '</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About IQoach" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
+      '<p class="ky-sub">' + esc(K.TAGLINE) + "</p>";
     if (st.kySecInfo) h += '<p class="ky-note">' + esc(K.NOTEST) + ' Groups build from your own answers on this phone: answer ' + K.MIN_N + " questions on a topic to see its group and tier.</p>";
     if (!view.topics.length) {
       return h + '<p class="ky-empty">Answer ' + K.MIN_N + " questions on a topic to see your group. Tap how sure you are on each question, or skip it: skipping changes nothing.</p></section>";
@@ -1676,7 +1690,7 @@
         }).join("") + '<p class="ky-note">Why they differ, with KB comparisons when the question links any, shows with each question.</p></div></div>';
       }
     }
-    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME + " pattern", "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
   /* coachResultHtml(r): this run's confidence outcomes (honest counts) plus where to revise first. */
@@ -1705,7 +1719,7 @@
       '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="ky-empty">You tagged ' + n.tagged + " of " + r.items.length + ": " + (bits.join(" · ") || "no misconceptions, confused or lucky answers.") + "</p>" +
       (first ? '<p class="ky-empty">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>" : "") +
       "</div></div>";
-    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME + " pattern", "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
   /* ---------- IQoach insight (prep-insight.js): the result screen after a set. No AI call. ---------- */

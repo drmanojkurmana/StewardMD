@@ -119,6 +119,7 @@
   }
   var job = null;          // the module being made
   var au = null;           // the owner's Author draft
+  var pdfUi = "#qgCreateView";   // the screen the shared PDF picker is on: Create a module, or the owner's Author
   function DK() { return G.PREP_DECKS; }
   function SR() { return G.PREP_SRC; }
   function flagOn() {
@@ -177,15 +178,20 @@
     refresh(host, true);
     host.push(function () { renderCreate(host); });
   }
+  function pdfPicker(host, esc) {
+    var busy = cs.busy || (au && pdfUi === "#qgAuthView" && au.busy);
+    return '<button type="button" class="pc-drop" data-act="g-pick"' + (busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (cs.pdf ? esc(cs.pdf.name) : "Choose a PDF") + "</b><small>" + (cs.pdf ? fmtN(cs.pdf.pages) + " pages" : "A chapter or your notes, up to " + PAGE_CAP + " pages") + "</small></span></button>" +
+      '<input type="file" id="qgFile" accept="application/pdf,.pdf" hidden aria-hidden="true" tabindex="-1">' +
+      (cs.pdf ? pagesBlock(host, esc) : "");
+  }
   function renderCreate(host) {
+    pdfUi = "#qgCreateView";
     var esc = host.esc, st = status || {}, ll = leftLine(st), out = !st.owner && st.caps && st.left === 0;
     var srcHtml;
     if (cs.kind === "topic") srcHtml = "";
     else if (cs.kind === "notes") srcHtml = '<label class="pc-lbl" for="qgText">Your notes</label><textarea id="qgText" name="notes" class="pc-in pc-ta" rows="8" placeholder="Paste a chapter or your notes. Questions will come only from this text…">' + esc(cs.text) + "</textarea>" +
       '<p class="pn-mut pn-small" id="qgChars">' + fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters</p>";
-    else srcHtml = '<button type="button" class="pc-drop" data-act="g-pick"' + (cs.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (cs.pdf ? esc(cs.pdf.name) : "Choose a PDF") + "</b><small>" + (cs.pdf ? fmtN(cs.pdf.pages) + " pages" : "A chapter or your notes, up to " + PAGE_CAP + " pages") + "</small></span></button>" +
-      '<input type="file" id="qgFile" accept="application/pdf,.pdf" hidden aria-hidden="true" tabindex="-1">' +
-      (cs.pdf ? pagesBlock(host, esc) : "");
+    else srcHtml = pdfPicker(host, esc);
     var grounded = cs.kind !== "topic";
     host.paint(host.bar("Create a module", "With MaiK", "back") + '<div class="pn-body qg-create" id="qgCreateView">' +
       (out ? '<section class="pn-panel qg-limit" role="status"><p class="qg-limh">Today\'s free modules are used</p><p class="pn-mut">You can create ' + st.caps.modulesPerDay + " modules with MaiK a day. Come back tomorrow, or practise the modules you made in Your decks.</p></section>" : "") +
@@ -205,10 +211,14 @@
       "</div>", cs.err ? "#qgErr" : null);
     var r = host.root();
     if (!r) return;
-    var ti = r.querySelector("#qgTopic"), ta = r.querySelector("#qgText"), fi = r.querySelector("#qgFile");
-    var fr = r.querySelector("#qgFrom"), to = r.querySelector("#qgTo"), av = r.querySelector("#qgAdv"), ch = r.querySelector("#qgChap");
+    var ti = r.querySelector("#qgTopic"), ta = r.querySelector("#qgText");
     ON(ti, "input", function () { cs.topic = ti.value; });
     ON(ta, "input", function () { cs.text = ta.value; var c = r.querySelector("#qgChars"); if (c) c.textContent = fmtN(cs.text.length) + " of " + fmtN(GROUND_MAX) + " characters"; });
+    bindPdf(host, r);
+    queuePrev(host);
+  }
+  function bindPdf(host, r) {
+    var fi = r.querySelector("#qgFile"), fr = r.querySelector("#qgFrom"), to = r.querySelector("#qgTo"), av = r.querySelector("#qgAdv"), ch = r.querySelector("#qgChap");
     var fromTo = function () {
       cs.pgFrom = fr.value; cs.pgTo = to.value;
       var w = winNow();
@@ -225,9 +235,8 @@
       applyWindow(host, c.page, Math.min(cs.pdf.pages, c.page + PAGE_CAP - 1));
     });
     ON(fi, "change", function () { if (fi.files && fi.files[0]) pickPdf(fi.files[0], host); });
-    queuePrev(host);
   }
-  function createErr(host, m) { cs.err = m; cs.busy = ""; if (onTop("#qgCreateView", host)) host.rerender(); }
+  function createErr(host, m) { cs.err = m; cs.busy = ""; if (pdfUi === "#qgAuthView") au.err = m; if (onTop(pdfUi, host)) host.rerender(); }
   /* ---------- the page selector (owner 2026-10-15): From/To digits fields, not a typed range ----------
      The iOS number pad has no hyphen or comma, so a single "Pages" box cannot take a range. Two number fields work
      with that pad; the typed multi-range box ("752-780, 800-830") sits behind an Advanced toggle with a full
@@ -305,7 +314,7 @@
      (a repaint would drop the keyboard focus). Structural changes still rerender. */
   function paintWindow(host) {
     var r = host.root(), esc = host.esc;
-    if (!r || !r.querySelector("#qgCreateView") || !cs.pdf) return;
+    if (!r || !r.querySelector(pdfUi) || !cs.pdf) return;
     var w = winNow();
     var c = r.querySelector("#qgCount");
     if (c) c.innerHTML = w.sel ? "<b>" + w.count + "</b> of " + PAGE_CAP + " pages selected" : "0 of " + PAGE_CAP + " pages selected";
@@ -320,11 +329,11 @@
     if (fw && html) fw.innerHTML = html;
     else if (fw) fw.parentNode && fw.parentNode.removeChild(fw);
     else if (html && m && m.parentNode) m.parentNode.insertAdjacentHTML("afterend", '<div class="pn-wrap" id="qgFixWrap">' + html + "</div>");
-    var go = r.querySelector('[data-act="g-go"]');
-    if (go && !cs.busy) {
+    var go = r.querySelector('[data-act="g-go"], [data-act="g-arun"]');
+    if (go && !cs.busy && !(au && au.busy)) {
       var bad = !w.sel;
       go.disabled = !!bad;
-      go.textContent = goLabel();
+      if (go.getAttribute("data-act") === "g-go") go.textContent = goLabel();
     }
   }
   // Set the window from numbers (chapter jump, stepper, fix, next-module): inputs, spec and paint, then previews.
@@ -394,12 +403,13 @@
       var m = String(cs.spec).match(/^(\d+)(?:-(\d+))?$/);
       cs.adv = false; cs.pgFrom = (m && m[1]) || ""; cs.pgTo = (m && m[2]) || cs.pgFrom;
       cs.outline = null; cs.olBusy = true; cs.prev = null;
-      if (!cs.topic) cs.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 120);
-      if (onTop("#qgCreateView", host)) host.rerender();
+      if (pdfUi === "#qgAuthView") { if (!au.topic) { au.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 150); saveAuthor(); } }
+      else if (!cs.topic) cs.topic = pdf.name.replace(/\.pdf$/i, "").slice(0, 120);
+      if (onTop(pdfUi, host)) host.rerender();
       SR().readOutline(pdf.doc).then(function (list) {
         if (!cs.pdf || cs.pdf.doc !== pdf.doc) return;
         cs.outline = list; cs.olBusy = false;
-        if (onTop("#qgCreateView", host)) host.rerender();
+        if (onTop(pdfUi, host)) host.rerender();
       });
     }, function () { createErr(host, "This PDF could not be opened. It may be protected by a password or damaged."); });
   }
@@ -422,7 +432,7 @@
     if (pages.length > PAGE_CAP) return Promise.reject(new Error("Up to " + PAGE_CAP + " pages in one module."));
     pages = SR().fitBytes(pages, cs.pdf.bytes || 0, cs.pdf.pages || 0).sel;
     cs.busy = "Reading page 1 of " + pages.length + "…"; host.rerender();
-    var say = function (t) { var el = host.root() && host.root().querySelector("#qgCreateView .pc-readp .pn-load"); if (el) el.textContent = t; };
+    var say = function (t) { var el = host.root() && host.root().querySelector(pdfUi + " .pc-readp .pn-load"); if (el) el.textContent = t; };
     return SR().readPdfPages(cs.pdf.doc, pages, function (d, n) { if (d < n) say("Reading page " + (d + 1) + " of " + n + "…"); }).then(function (rd) {
       cs.busy = "";
       var doc = SR().buildDoc(rd.pages || []), text = (doc.sents || []).map(function (s) { return s.tx; }).join(" ");
@@ -627,17 +637,18 @@
   /* ================= owner: Author ================= */
   function loadAuthor() { try { var v = JSON.parse(G.localStorage.getItem(LS_AUTHOR) || "null"); return v && typeof v === "object" ? v : null; } catch (e) { return null; } }
   function saveAuthor() { try { G.localStorage.setItem(LS_AUTHOR, JSON.stringify(au)); } catch (e) {} }
-  function newAuthor(host) { return { exam: examFor(host.exam().id), subject: "", module: "", newName: "", topic: "", text: "", n: 10, diff: "mix", list: [], job: null, stage: null, err: "", busy: "", usage: null }; }
+  function newAuthor(host) { return { kind: "topic", targets: [], pub: null, psub: "", exam: examFor(host.exam().id), subject: "", module: "", newName: "", topic: "", text: "", n: 10, diff: "mix", list: [], job: null, stage: null, err: "", busy: "", usage: null }; }
   function openAuthor(host) {
     if (!isOwner()) return host.toast("Owner access only");
     au = loadAuthor() || newAuthor(host);
-    au.err = ""; au.busy = "";
+    au.err = ""; au.busy = ""; au.kind = au.kind || "topic"; au.targets = au.targets || [];
     host.push(function () { renderAuthor(host); });
     if (au.job && au.job.stage !== "done") poll(host);
   }
   function subjectsFor(host) { try { return host.subjectsOf(au.exam === "neet-ss" ? "neet-ss" : au.exam === "usmle" ? "usmle" : "neet-pg") || []; } catch (e) { return []; } }
   function plain(v) { return String(v && typeof v === "object" ? (v.en || "") : v == null ? "" : v); }
   function renderAuthor(host) {
+    pdfUi = "#qgAuthView";
     var esc = host.esc, subs = subjectsFor(host), ix = au.subject ? host.ix()[au.subject] : null;
     if (au.subject && !ix) host.loadIndex(au.subject).then(function () { if (onTop("#qgAuthView", host)) host.rerender(); });
     var mods = ix ? (ix.topics || []).filter(function (t) { return t.group !== "mixed"; }) : [];
@@ -651,15 +662,17 @@
       '<label class="pc-lbl" for="qgASub">Subject</label><select id="qgASub" name="subject" class="pc-in">' + opt("", "Choose a subject", !au.subject) + subs.map(function (s) { return opt(s.id, plain(s.name) || s.id, au.subject === s.id); }).join("") + "</select>" +
       '<label class="pc-lbl" for="qgAMod">Module</label><select id="qgAMod" name="module" class="pc-in"' + (au.subject ? "" : " disabled") + ">" + opt("", au.subject ? "A new module (name below)" : "Choose a subject first", !au.module) + mods.map(function (t) { return opt(t.id, plain(t.title) || t.id, au.module === t.id); }).join("") + "</select>" +
       (!au.module ? '<label class="pc-lbl" for="qgANew">New module name</label><input id="qgANew" name="module-name" class="pc-in" maxlength="80" autocomplete="off" value="' + esc(au.newName) + '">' : "") +
+      seg("Make it from", "qgASrcL", chip("g-asrc", "topic", "A topic", au.kind === "topic") + chip("g-asrc", "notes", "Notes", au.kind === "notes") + chip("g-asrc", "pdf", "A PDF", au.kind === "pdf")) +
       '<label class="pc-lbl" for="qgATopic">Topic for MaiK</label><input id="qgATopic" name="topic" class="pc-in" maxlength="150" autocomplete="off" value="' + esc(au.topic) + '">' +
-      '<label class="pc-lbl" for="qgAText">Source text (optional, recommended)</label><textarea id="qgAText" name="source" class="pc-in pc-ta" rows="7" placeholder="Paste the source chunks. With a source, every question must be answerable from it…">' + esc(au.text) + "</textarea>" +
-      '<p class="pn-mut pn-small">' + fmtN(au.text.length) + " of " + fmtN(OWNER_GROUND_MAX) + " characters</p>" +
+      (au.kind === "notes" ? '<label class="pc-lbl" for="qgAText">Notes (every question must be answerable from them)</label><textarea id="qgAText" name="source" class="pc-in pc-ta" rows="7" placeholder="Paste the source chunks…">' + esc(au.text) + "</textarea>" +
+        '<p class="pn-mut pn-small">' + fmtN(au.text.length) + " of " + fmtN(OWNER_GROUND_MAX) + " characters</p>" : "") +
+      (au.kind === "pdf" ? pdfPicker(host, esc) : "") +
       '<label class="pc-lbl" for="qgAN">How many questions</label><input id="qgAN" name="count" class="pc-in" type="number" inputmode="numeric" min="1" max="400" value="' + au.n + '">' +
       '<p class="pn-mut pn-small">Up to 10 run now. More go to the batch queue at half price and arrive within a few hours.</p>' +
       seg("Difficulty", "qgADL", DIFFS.map(function (d) { return chip("g-adiff", d[0], d[1], au.diff === d[0]); }).join("")) +
-      (au.busy ? '<section class="pn-panel pc-readp" role="status" aria-live="polite"><span class="pc-spin" aria-hidden="true"></span><p class="pn-load">' + esc(au.busy) + "</p></section>" : "") +
+      ((au.busy || cs.busy) ? '<section class="pn-panel pc-readp" role="status" aria-live="polite"><span class="pc-spin" aria-hidden="true"></span><p class="pn-load">' + esc(au.busy || cs.busy) + "</p></section>" : "") +
       (au.err ? '<p class="pn-err" role="alert" id="qgAErr" tabindex="-1">' + esc(au.err) + "</p>" : "") +
-      '<button type="button" class="pn-btn pri" data-act="g-arun"' + (au.busy ? " disabled" : "") + ">" + (au.n > 10 ? "Queue " + au.n + " questions" : "Write " + au.n + " questions") + "</button>" +
+      '<button type="button" class="pn-btn pri" data-act="g-arun"' + (au.busy || cs.busy || (au.kind === "pdf" && (!cs.pdf || !winNow().sel)) ? " disabled" : "") + ">" + (au.n > 10 ? "Queue " + au.n + " questions" : "Write " + au.n + " questions") + "</button>" +
       jobHtml +
       (au.usage ? '<p class="pn-mut pn-small" id="qgAUse">Last run: $' + Number(au.usage.usd || 0).toFixed(4) + " · " + fmtN(au.usage.inTok + au.usage.cacheRead + au.usage.cacheWrite) + " tokens in, " + fmtN(au.usage.outTok) + " out</p>" : "") +
       (au.list.length ? '<button type="button" class="pn-mod" data-act="g-areview"><span class="pn-mb"><b>Review ' + au.list.length + " questions</b><small>" + ok + " approved · " + pend + " to decide</small></span>" + host.ico("chev") + "</button>" : "") +
@@ -673,6 +686,7 @@
     // The DOM is patched in place, so a listener outlives this render: read the module list fresh, never from a closure.
     ON(mSel, "change", function () { au.module = mSel.value; var ix2 = au.subject ? host.ix()[au.subject] : null; if (au.module && !au.topic && ix2) { var t = (ix2.topics || []).filter(function (x) { return x.id === au.module; })[0]; if (t) au.topic = plain(t.title) || t.id; } saveAuthor(); host.rerender(); });
     var nIn = r.querySelector("#qgAN"); ON(nIn, "change", function () { host.rerender(); });
+    if (au.kind === "pdf") { bindPdf(host, r); queuePrev(host); }
   }
   function slug(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60); }
   function authorBank(host) {
@@ -687,9 +701,20 @@
     if (!au.subject) return authorErr(host, "Choose a subject.");
     if (!au.module && slug(au.newName).length < 2) return authorErr(host, "Choose a module or name a new one.");
     if (String(au.topic).trim().length < 3) return authorErr(host, "Type the topic for MaiK.");
-    if (au.text && au.text.replace(/\s+/g, "").length < 200) return authorErr(host, "The source is very short. Paste more, or leave it empty.");
+    if (au.kind === "notes" && au.text.replace(/\s+/g, "").length < 200) return authorErr(host, "The notes are very short. Paste more, or use a topic only.");
+    if (au.kind === "pdf") {
+      if (!cs.pdf) return authorErr(host, "Choose a PDF first.");
+      pdfUi = "#qgAuthView"; cs.kind = "pdf"; au.busy = "Reading the PDF…"; host.rerender();
+      return readGround(host).then(function (g) {
+        var scrub = SR() && SR().prepScrub ? SR().prepScrub : function (x) { return x; };
+        return authorGo(host, scrub(String(g.text || "")).slice(0, OWNER_GROUND_MAX));
+      }, function (e) { authorErr(host, (e && e.message) || "The pages could not be read."); });
+    }
+    return authorGo(host, au.kind === "notes" ? au.text : "");
+  }
+  function authorGo(host, ground) {
     var mod = au.mod || (au.mod = newMod());
-    var base = { topic: au.topic.trim().slice(0, 150), ground: au.text || undefined, exam: au.exam, diff: au.diff, bank: authorBank(host) };
+    var base = { topic: au.topic.trim().slice(0, 150), ground: ground || undefined, exam: au.exam, diff: au.diff, bank: authorBank(host) };
     if (au.n > 10) {
       au.busy = "Queueing " + au.n + " questions…"; host.rerender();
       return call(Object.assign({ op: "bsubmit", n: au.n, mod: mod, subject: au.subject, module: au.module || slug(au.newName), title: au.module || au.newName }, base), 60000).then(function (r) {
@@ -733,6 +758,7 @@
     host.paint(host.bar("Review", ok + " of " + au.list.length + " approved", "back") + '<div class="pn-body qg-review" id="qgRevView">' +
       '<div class="qg-revtop"><button type="button" class="pn-btn" data-act="g-abulk">Approve all unflagged</button>' +
       '<button type="button" class="pn-btn pri" data-act="g-astage"' + (ok ? "" : " disabled") + ">Stage " + ok + " for publishing</button></div>" +
+      publishHtml(host, esc, ok) +
       (au.err ? '<p class="pn-err" role="alert" id="qgRErr" tabindex="-1">' + esc(au.err) + "</p>" : "") +
       '<ol class="qg-items">' + au.list.slice(0, au.show || 50).map(function (r, i) {
         var it = r.it, fl = it.qg && it.qg.v !== "ok";
@@ -751,8 +777,58 @@
       (au.list.length > (au.show || 50) ? '<button type="button" class="pn-btn" data-act="g-amore">Show ' + Math.min(50, au.list.length - (au.show || 50)) + " more of " + au.list.length + "</button>" : "") +
       (au.list.length ? '<button type="button" class="pn-btn pc-danger" data-act="g-aclear">Clear this review</button>' : '<p class="pn-mut">Nothing to review yet.</p>') + "</div>", au.err ? "#qgRErr" : null);
     var r = host.root(); if (!r) return;
+    var ps = r.querySelector("#qgPSub"), pm = r.querySelector("#qgPMod");
+    ON(ps, "change", function () { au.psub = ps.value; au.pmod = ""; saveAuthor(); host.rerender(); });
+    ON(pm, "change", function () { au.pmod = pm.value; saveAuthor(); host.rerender(); });
     Array.prototype.forEach.call(r.querySelectorAll(".qg-edq, .qg-edx"), function (ta) {
       ON(ta, "input", function () { var row = au.list[+ta.getAttribute("data-i")]; if (!row) return; if (ta.className.indexOf("qg-edq") >= 0) row.it.q = ta.value; else row.it.exp = ta.value; row.it.qg.ed = 1; saveAuthor(); });
+    });
+  }
+  /* ---------- publish to students: one reviewed set into one or many subject modules ---------- */
+  function targetLabel(host, t) {
+    var sub = null; try { (host.subjectsOf(au.exam === "neet-ss" ? "neet-ss" : au.exam === "usmle" ? "usmle" : "neet-pg") || []).forEach(function (x) { if (x.id === t.subject) sub = x; }); } catch (e) {}
+    return t.title ? (sub ? plain(sub.name) + " · " : "") + t.title : t.subject + " / " + t.module;
+  }
+  function publishHtml(host, esc, ok) {
+    var subs = subjectsFor(host), ps = au.psub || au.subject || "", ix = ps ? host.ix()[ps] : null;
+    if (ps && !ix) host.loadIndex(ps).then(function () { if (onTop("#qgRevView", host)) host.rerender(); });
+    var mods = ix ? (ix.topics || []).filter(function (t) { return t.group !== "mixed"; }) : [];
+    var opt = function (v, label, on) { return '<option value="' + esc(v) + '"' + (on ? " selected" : "") + ">" + esc(label) + "</option>"; };
+    if (!au.targets.length && au.subject && au.module && !au.pub) {
+      var t0 = null; (host.ix()[au.subject] && host.ix()[au.subject].topics || []).forEach(function (t) { if (t.id === au.module) t0 = t; });
+      au.targets.push({ subject: au.subject, module: au.module, title: t0 ? plain(t0.title) : "" });
+    }
+    return '<section class="pn-panel qg-pub"><p><b>Publish to all students</b></p>' +
+      '<p class="pn-mut pn-small">Live at once, no app update. The same questions can go into several subjects and modules.</p>' +
+      (au.targets.length ? '<div class="pn-wrap" role="group" aria-label="Chosen modules">' + au.targets.map(function (t, i) {
+        return '<button type="button" class="pn-chip on" data-act="g-atdel" data-i="' + i + '" aria-label="Remove ' + esc(targetLabel(host, t)) + '">' + esc(targetLabel(host, t)) + " ×</button>"; }).join("") + "</div>" : '<p class="pn-mut pn-small">Choose at least one module below.</p>') +
+      '<label class="pc-lbl" for="qgPSub">Subject</label><select id="qgPSub" class="pc-in">' + opt("", "Choose a subject", !ps) + subs.map(function (s2) { return opt(s2.id, plain(s2.name) || s2.id, ps === s2.id); }).join("") + "</select>" +
+      '<label class="pc-lbl" for="qgPMod">Module</label><select id="qgPMod" class="pc-in"' + (ps ? "" : " disabled") + ">" + opt("", ps ? "Choose a module" : "Choose a subject first", !au.pmod) + mods.map(function (t) { return opt(t.id, plain(t.title) || t.id, au.pmod === t.id); }).join("") + "</select>" +
+      '<button type="button" class="pn-btn" data-act="g-atadd"' + (ps && au.pmod ? "" : " disabled") + ">Add this module</button>" +
+      '<button type="button" class="pn-btn pri" data-act="g-apub"' + (ok && au.targets.length && !au.busy ? "" : " disabled") + ">Publish " + ok + " to " + au.targets.length + " module" + (au.targets.length === 1 ? "" : "s") + "</button>" +
+      (au.pub ? '<p class="pn-small" role="status">Published ' + au.pub.n + " questions to " + au.pub.targets.length + " module" + (au.pub.targets.length === 1 ? "" : "s") + '. <button type="button" class="pn-chip" data-act="g-aundo">Take them down</button></p>' : "") + "</section>";
+  }
+  function publish(host) {
+    var items = approved(au.list);
+    if (!items.length || !au.targets.length) return;
+    if (G.confirm && !G.confirm("Publish " + items.length + " questions to " + au.targets.length + " module(s)? Every student sees them at once.")) return;
+    au.err = ""; au.busy = "Publishing…"; host.rerender();
+    call({ op: "publish", targets: au.targets.map(function (t) { return { subject: t.subject, module: t.module }; }), items: items }, 60000).then(function (r) {
+      au.busy = "";
+      if (r.status !== 200) { au.err = r.json && r.json.reason === "module-full" ? "A module would pass 300 added questions." : msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
+      au.pub = { batch: r.json.batch, n: r.json.n, targets: au.targets.slice() };
+      au.list = au.list.filter(function (x) { return x.st !== "ok"; });
+      saveAuthor(); host.rerender(); host.toast(r.json.n + " questions are live.");
+    });
+  }
+  function unpublish(host) {
+    if (!au.pub) return;
+    if (G.confirm && !G.confirm("Take this batch down from every module it reached?")) return;
+    au.busy = "Taking down…"; host.rerender();
+    call({ op: "unpublish", batch: au.pub.batch, targets: au.pub.targets.map(function (t) { return { subject: t.subject, module: t.module }; }) }, 60000).then(function (r) {
+      au.busy = "";
+      if (r.status !== 200) { au.err = msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
+      au.pub = null; saveAuthor(); host.rerender(); host.toast("Taken down.");
     });
   }
   function stage(host) {
@@ -829,6 +905,19 @@
     if (a === "g-aedit" && au.list[i]) { au.list[i].ed = !au.list[i].ed; saveAuthor(); return host.rerender(); }
     if (a === "g-abulk") { var n = bulkApprove(au.list); saveAuthor(); host.rerender(); return host.toast(n + " approved."); }
     if (a === "g-astage") return stage(host);
+    if (a === "g-asrc") { au.kind = v === "notes" || v === "pdf" ? v : "topic"; au.err = ""; pdfUi = "#qgAuthView"; saveAuthor(); return host.rerender(); }
+    if (a === "g-atadd") {
+      var psb = au.psub || au.subject, ixp = host.ix()[psb], tp = null; ((ixp && ixp.topics) || []).forEach(function (t) { if (t.id === au.pmod) tp = t; });
+      if (!psb || !au.pmod) return;
+      if (!au.targets.some(function (t) { return t.subject === psb && t.module === au.pmod; })) {
+        if (au.targets.length >= 12) return host.toast("Up to 12 modules in one go.");
+        au.targets.push({ subject: psb, module: au.pmod, title: tp ? plain(tp.title) : "" });
+      }
+      au.pmod = ""; saveAuthor(); return host.rerender();
+    }
+    if (a === "g-atdel") { au.targets.splice(i, 1); saveAuthor(); return host.rerender(); }
+    if (a === "g-apub") return publish(host);
+    if (a === "g-aundo") return unpublish(host);
     if (a === "g-amore") { au.show = (au.show || 50) + 50; return host.rerender(); }
     if (a === "g-aclear") { if (G.confirm && !G.confirm("Clear every question in this review? Staged questions are kept on the server.")) return; au.list = []; au.mod = null; saveAuthor(); return host.back(); }
     if (a === "g-acopy") { var c = au.stage && au.stage.cmd; try { G.navigator.clipboard.writeText(c).then(function () { host.toast("Copied."); }, function () { host.toast("Select the command and copy it."); }); } catch (e) { host.toast("Select the command and copy it."); } return; }
