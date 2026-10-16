@@ -534,7 +534,7 @@ try {
   await attach(BASE + "?clinix=1");
   await openCx(); await sleep(500);
   ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === true, "CliniX opens in the PrepNucleus look by default");
-  ok((await ev("getComputedStyle(document.getElementById('clinixRoot')).getPropertyValue('--cx-bg').trim().toLowerCase()")) === "#f3f2ee", "on the PrepNucleus paper background");
+  ok((await ev("getComputedStyle(document.getElementById('clinixRoot')).getPropertyValue('--cx-bg').trim().toLowerCase()")) === "#efe9d7", "on the CliniX Candle background, not the PrepNucleus paper");
   ok((await ev("getComputedStyle(document.querySelector('#clinixRoot .cx-sec-h')).textTransform")) === "none", "section titles are sentence case, not small capitals");
   ok((await ev("!document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "the bar starts transparent on the wash");
   await ev("(document.getElementById('clinixScroll').scrollTop = 600, true)"); await sleep(250);

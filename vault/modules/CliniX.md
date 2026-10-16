@@ -124,13 +124,17 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
 ## PrepNucleus look (2026-10-16, owner: "PrepNucleus alike UI, clean, neat, professional")
 Flag `smd_clinix_pn` (default ON, `?clinixpn=0` or localStorage `0` restores the teal look). `clinix.js open()`
 toggles `.cx-pn` on `#clinixRoot` every open. Everything lives in the "PrepNucleus pass" block at the END of
-`clinix.css`, scoped to `#clinixRoot.cx-pn`, mirroring `prep.css` "Apple pass": the PrepNucleus palette as
-`--cx-*` tokens (paper `#f3f2ee`, Prussian `#0f3460`, amber `#efc07b` primary with Midnight ink, dark mode on
-Midnight/Navy), the static Tide wash on the root, a transparent bar that turns to glass once the screen scrolls
+`clinix.css`, scoped to `#clinixRoot.cx-pn`, mirroring `prep.css` "Apple pass" in LAYOUT but with CliniX's OWN
+palette (owner, same day: "use different colour palettes so it differs from PrepNucleus"): Candle `#efe9d7`
+paper, Juniper `#343723` ink (text `#2b2d1d`), Coral `#7d2826` primary actions with Candle text, Leaf `#898861`
+for tiles and the wash; dark mode on a deep Juniper `#1b1c12`. Every text pair is WCAG AA (comment in the
+token block). The static wash on the root, a transparent bar that turns to glass once the screen scrolls
 (`.cx-scrolled`, toggled by the scroll listener in `init()` and in `show()`), round header buttons, rows grouped
 into one card with hairlines and pale-blue icon squircles, sentence-case 21px section titles, capsule buttons.
 Gotchas: dark-mode token overrides must be `body.dark #clinixRoot.cx-pn` (the plain `body.dark #clinixRoot`
-block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo` filter), not inline.
+block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo` filter), not inline;
+`drug-link.js` turns words like "electrolytes" into monograph links anywhere, so screen titles carry
+`no-druglink` (its SKIP list).
 
 ## Gotchas
 - **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked

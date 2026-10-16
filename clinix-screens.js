@@ -194,7 +194,8 @@
   function header(title, sub, backAct) {
     return '<header class="cx-head">' +
       '<button type="button" class="cx-back" data-act="' + esc(backAct || "cx-back") + '" aria-label="Back">' + ic("arrow_back") + "</button>" +
-      '<div class="cx-head-txt"><div class="cx-head-title">' + esc(title) + "</div>" +
+      // no-druglink: drug-link.js must not turn a word in a screen title into a monograph link.
+      '<div class="cx-head-txt no-druglink"><div class="cx-head-title">' + esc(title) + "</div>" +
       (sub ? '<div class="cx-head-sub">' + esc(sub) + "</div>" : "") + "</div>" +
       '<button type="button" class="cx-close" data-act="cx-close" aria-label="Close CliniX">' + ic("close") + "</button>" +
       "</header>";
@@ -2929,7 +2930,7 @@
     html += '</div></div>';
 
     html += '<div class="cx-abg-box">' +
-      '<div class="cx-sec-h" style="margin-left:0;margin-top:0;">Blood gas and electrolytes</div>' +
+      '<div class="cx-sec-h no-druglink" style="margin-left:0;margin-top:0;">Blood gas and electrolytes</div>' +
       '<div class="cx-abg-grid">' +
         '<div class="cx-abg-input-wrap"><span class="cx-abg-label">pH (7.35–7.45)</span>' +
           '<input type="number" class="cx-abg-input" id="cxAbgPh" step="0.01" value="' + sol.ph + '"></div>' +

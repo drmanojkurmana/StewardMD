@@ -60,8 +60,8 @@
     smd_clinix_pn: {
       type: "bool", def: true, query: "clinixpn",
       desc: "PrepNucleus look for CliniX (owner 2026-10-16: clean, neat, professional, like PrepNucleus): " +
-        "the PrepNucleus palette, top wash, round header buttons, grouped cards and amber primary " +
-        "actions. Off (?clinixpn=0) restores the teal CliniX look. CSS only, scoped to #clinixRoot.cx-pn."
+        "the PrepNucleus layout (top wash, round header buttons, grouped cards, capsule buttons) in CliniX's " +
+        "own palette: Candle, Juniper, Coral, Leaf. Off (?clinixpn=0) restores the teal CliniX look. CSS only, scoped to #clinixRoot.cx-pn."
     },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",

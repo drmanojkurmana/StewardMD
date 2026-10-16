@@ -7,8 +7,9 @@ Dated architectural calls + why. Newest first. Keep each short: **decision · wh
 
 ## 2026-10-16 · CliniX wears the PrepNucleus look, behind a flag (owner)
 
-**Decision.** CliniX adopts PrepNucleus's visual language (palette, Tide wash, round bar buttons, grouped cards,
-amber primary, sentence-case titles) as a CSS-only pass behind `smd_clinix_pn` (default on). **Why.** Owner:
+**Decision.** CliniX adopts PrepNucleus's layout language (wash, round bar buttons, grouped cards, capsule
+buttons, sentence-case titles) as a CSS-only pass behind `smd_clinix_pn` (default on), in its OWN palette (Candle,
+Juniper, Coral, Leaf; owner the same day: "use different colour palettes so it differs from PrepNucleus"). **Why.** Owner:
 "PrepNucleus alike UI, clean, neat, professional, non AI slop"; the two student modules should read as one family.
 **Trade-off.** Two looks to keep working until the teal one is retired; the pass overrides tokens first so most
 screens need no rules of their own. **Status.** Shipped default on; `?clinixpn=0` restores teal. Retire the teal
