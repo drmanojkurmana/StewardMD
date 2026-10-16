@@ -125,10 +125,10 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
 Flag `smd_clinix_pn` (default ON, `?clinixpn=0` or localStorage `0` restores the teal look). `clinix.js open()`
 toggles `.cx-pn` on `#clinixRoot` every open. Everything lives in the "PrepNucleus pass" block at the END of
 `clinix.css`, scoped to `#clinixRoot.cx-pn`, mirroring `prep.css` "Apple pass" in LAYOUT but with CliniX's OWN
-palette (owner, same day: "use different colour palettes so it differs from PrepNucleus"): Candle `#efe9d7`
-paper, Juniper `#343723` ink (text `#2b2d1d`), Coral `#7d2826` primary actions with Candle text, Leaf `#898861`
-for tiles and the wash; dark mode on a deep Juniper `#1b1c12`. Every text pair is WCAG AA (comment in the
-token block). The static wash on the root, a transparent bar that turns to glass once the screen scrolls
+palette (owner, same day: "use different colour palettes so it differs from PrepNucleus"). Current: the
+owner's pair Deep Teal `#004e64` (buttons, accents, tile ink; text `#10303b`) and Mist Gray `#e0e5e9`
+(surfaces; page `#eef2f5`), white cards; dark mode on teal-black `#06171d` with `#7cc4d8` accents. Tried and
+replaced the same day: Candle/Juniper/Coral/Leaf. Every text pair is WCAG AA (comment in the token block). The static wash on the root, a transparent bar that turns to glass once the screen scrolls
 (`.cx-scrolled`, toggled by the scroll listener in `init()` and in `show()`), round header buttons, rows grouped
 into one card with hairlines and pale-blue icon squircles, sentence-case 21px section titles, capsule buttons.
 Gotchas: dark-mode token overrides must be `body.dark #clinixRoot.cx-pn` (the plain `body.dark #clinixRoot`
@@ -137,8 +137,7 @@ block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo`
 `no-druglink` (its SKIP list).
 Home banner (owner: "keep this banner or design a better one, professional premium"; then "background too dark,
 give a pleasant, lively gradient with light colours", Marrow as the reference): `.cx-hero` is transparent on a light
-`--cx-wash` (mint-to-Candle sky, light sky glow top left, peach glow top right, 460px tall, on every screen), dark
-Juniper type, frosted chips with a facts line from `heroFacts(cat)` (systems, topics, "OSCE and viva") counted from
+`--cx-wash` (icy teal-to-Mist sky with a white glow top right, 460px tall, on every screen), dark teal type, frosted chips with a facts line from `heroFacts(cat)` (systems, topics, "OSCE and viva") counted from
 the catalog and hidden in the teal look. A dark Juniper band was tried first and rejected.
 
 ## Gotchas
