@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-pain-spine-augmentation",
-  "subject": "radiology",
-  "title": "Vertebral augmentation: cement and caution",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Crushed vertebrae ache mechanically. **Osteoporotic compression fractures** ache with standing and ease lying, tender over spinous processes. **MRI oedema** marks acute fractures that augmentation relieves. **Myeloma with metastases** need biopsy before cementing. **Conservative trials** of brace with analgesia precede needles where pain settles.",
-      "say": "Crushed vertebrae ache mechanically. Osteoporotic fractures ache standing and ease lying, tender over spinous processes. MRI oedema marks acute fractures that cement relieves. Myeloma with metastases need biopsy first. Braces with analgesia precede needles where pain settles.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Tender spine standing"
-          },
-          {
-            "id": "b",
-            "label": "MRI the oedema"
-          },
-          {
-            "id": "c",
-            "label": "Biopsy lytic lesions"
-          },
-          {
-            "id": "d",
-            "label": "Cement acute breaks"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Cement steadies broken bodies. **Vertebroplasty injects cement** directly into fractured bodies stabilising micro-motion. **Kyphoplasty balloons** restore height before cementing, suiting wedge deformities. **Unilateral versus bilateral** needles balance cement fill against pedicle risk. **Cement leaks** into discs stay silent while canal leaks threaten cords.",
-      "say": "Cement steadies broken bodies. Vertebroplasty injects cement directly stabilising micro-motion. Kyphoplasty balloons restore height suiting wedges. Single versus double needles balance fill against risk. Disc leaks stay silent while canal leaks threaten cords.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Method",
-          "Use"
-        ],
-        "rows": [
-          [
-            "Vertebroplasty",
-            "Direct cement"
-          ],
-          [
-            "Kyphoplasty",
-            "Height restore"
-          ],
-          [
-            "Unilateral",
-            "Less risk"
-          ],
-          [
-            "Bilateral",
-            "Even fill"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Leaks and neighbours suffer. **Cement pulmonary embolism** coughs after venous escape needing chest scans. **Adjacent fractures** follow altered mechanics needing bone drugs. **Infection after cement** declares with fever needing biopsy with antibiotics. **Pedicle breach** with nerve pain needs CT review.",
-      "say": "Leaks and neighbours suffer. Cement reaching lungs coughs needing chest scans. Neighbouring vertebrae break from altered mechanics needing bone drugs. Infected cement declares with fever needing biopsy. Breached pedicles ache needing CT review.",
-      "vis": null
-    },
-    {
-      "tx": "Bone drugs guard the whole remaining skeleton. **Bisphosphonates with denosumab** per osteoporosis guidance cut future fractures after augmentation. **Physiotherapy with bracing** rebuilds posture after pain fades. **Height with kyphosis watches** track deformity over years. **Pain diaries** prove lasting relief objectively.",
-      "say": "Bone drugs guard the rest. Osteoporosis drugs cut future fractures after cementing. Physiotherapy rebuilds posture after pain fades. Height with curve watches track deformity. Pain diaries prove lasting relief objectively.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Drug the bones"
-          },
-          {
-            "id": "b",
-            "label": "Exercise posture"
-          },
-          {
-            "id": "c",
-            "label": "Track height"
-          },
-          {
-            "id": "d",
-            "label": "Diary the pain"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-626",
-    "maikir2-627",
-    "maikir2-628",
-    "maikir2-629",
-    "maikir2-630",
-    "maikir2-631",
-    "maikir2-632",
-    "maikir2-633",
-    "maikir2-634",
-    "maikir2-635",
-    "maikir2-636",
-    "maikir2-637",
-    "maikir2-638",
-    "maikir2-639",
-    "maikir2-640",
-    "maikir2-641",
-    "maikir2-642",
-    "maikir2-643",
-    "maikir2-644",
-    "maikir2-645",
-    "maikir2-646",
-    "maikir2-647",
-    "maikir2-648",
-    "maikir2-649",
-    "maikir2-650"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-pain-spine-augmentation",
+ "subject": "radiology",
+ "title": "Vertebral augmentation: cement and caution",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Crushed vertebrae ache mechanically. **Osteoporotic compression fractures** ache with standing and ease lying, tender over spinous processes. **MRI oedema** marks acute fractures that augmentation relieves. **Myeloma with metastases** need biopsy before cementing. **Conservative trials** of brace with analgesia precede needles where pain settles.",
+   "say": "Crushed vertebrae ache mechanically. Osteoporotic fractures ache standing and ease lying, tender over spinous processes. MRI oedema marks acute fractures that cement relieves. Myeloma with metastases need biopsy first. Braces with analgesia precede needles where pain settles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tender spine standing"
+     },
+     {
+      "id": "b",
+      "label": "MRI the oedema"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy lytic lesions"
+     },
+     {
+      "id": "d",
+      "label": "Cement acute breaks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cement steadies broken bodies. **Vertebroplasty injects cement** directly into fractured bodies stabilising micro-motion. **Kyphoplasty balloons** restore height before cementing, suiting wedge deformities. **Unilateral versus bilateral** needles balance cement fill against pedicle risk. **Cement leaks** into discs stay silent while canal leaks threaten cords.",
+   "say": "Cement steadies broken bodies. Vertebroplasty injects cement directly stabilising micro-motion. Kyphoplasty balloons restore height suiting wedges. Single versus double needles balance fill against risk. Disc leaks stay silent while canal leaks threaten cords.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Vertebroplasty",
+      "Direct cement"
+     ],
+     [
+      "Kyphoplasty",
+      "Height restore"
+     ],
+     [
+      "Unilateral",
+      "Less risk"
+     ],
+     [
+      "Bilateral",
+      "Even fill"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Leaks and neighbours suffer. **Cement pulmonary embolism** coughs after venous escape needing chest scans. **Adjacent fractures** follow altered mechanics needing bone drugs. **Infection after cement** declares with fever needing biopsy with antibiotics. **Pedicle breach** with nerve pain needs CT review.",
+   "say": "Leaks and neighbours suffer. Cement reaching lungs coughs needing chest scans. Neighbouring vertebrae break from altered mechanics needing bone drugs. Infected cement declares with fever needing biopsy. Breached pedicles ache needing CT review.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-pain-spine-augmentation-fig1.webp",
+    "alt": "Diagram illustrating potential complications of vertebral augmentation, including cement leaks into the spinal canal or veins, adjacent vertebral fractures, and pedicle breach.",
+    "caption": "Key complications of vertebral augmentation: leaks, adjacent fractures, and infection. Image: Hellerhoff, CC BY-SA 4.0, Wikimedia Commons.",
+    "ar": 0.7799
+   }
+  },
+  {
+   "tx": "Bone drugs guard the whole remaining skeleton. **Bisphosphonates with denosumab** per osteoporosis guidance cut future fractures after augmentation. **Physiotherapy with bracing** rebuilds posture after pain fades. **Height with kyphosis watches** track deformity over years. **Pain diaries** prove lasting relief objectively.",
+   "say": "Bone drugs guard the rest. Osteoporosis drugs cut future fractures after cementing. Physiotherapy rebuilds posture after pain fades. Height with curve watches track deformity. Pain diaries prove lasting relief objectively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drug the bones"
+     },
+     {
+      "id": "b",
+      "label": "Exercise posture"
+     },
+     {
+      "id": "c",
+      "label": "Track height"
+     },
+     {
+      "id": "d",
+      "label": "Diary the pain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-626",
+  "maikir2-627",
+  "maikir2-628",
+  "maikir2-629",
+  "maikir2-630",
+  "maikir2-631",
+  "maikir2-632",
+  "maikir2-633",
+  "maikir2-634",
+  "maikir2-635",
+  "maikir2-636",
+  "maikir2-637",
+  "maikir2-638",
+  "maikir2-639",
+  "maikir2-640",
+  "maikir2-641",
+  "maikir2-642",
+  "maikir2-643",
+  "maikir2-644",
+  "maikir2-645",
+  "maikir2-646",
+  "maikir2-647",
+  "maikir2-648",
+  "maikir2-649",
+  "maikir2-650"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }

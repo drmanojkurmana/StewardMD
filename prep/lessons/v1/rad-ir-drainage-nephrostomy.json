@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-drainage-nephrostomy",
-  "subject": "radiology",
-  "title": "Emergency nephrostomy and antegrade stents",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Infected blocked kidneys die fast. **Obstructive pyelonephritis** with fever, pain and an obstructing stone needs pus out within hours. **Percutaneous nephrostomy** under ultrasound drains pus saving kidneys and lives. **Pregnancy with obstructing stones** favours nephrostomy over radiation-heavy surgery. **Sepsis bundles** with fluids and antibiotics run alongside drainage, never after it.",
-      "say": "Infected blocked kidneys die fast. Obstructive pyelonephritis with fever and stones needs pus out within hours. Ultrasound nephrostomy drains pus saving kidneys and lives. Pregnant obstructed stones favour nephrostomy. Sepsis fluids with antibiotics run during drainage.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "See infected block"
-          },
-          {
-            "id": "b",
-            "label": "Stick under ultrasound"
-          },
-          {
-            "id": "c",
-            "label": "Drain the pus"
-          },
-          {
-            "id": "d",
-            "label": "Treat the stone later"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Stents follow once sepsis settles. **Antegrade ureteric stenting** pushes double-J stents down past stones once pus clears. **Nephrostogram checks** map ureters before stenting attempts. **Failed antegrade passage** from tight strictures keeps nephrostomy until surgery. **Stent symptoms** of frequency and loin ache need warning before placement.",
-      "say": "Stents follow once sepsis settles. Antegrade stenting pushes double-J tubes past stones once pus clears. Dye studies map ureters before attempts. Tight strictures keep nephrostomy until surgery. Frequency with loin ache needs warning before stents.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Stage",
-          "Move"
-        ],
-        "rows": [
-          [
-            "Infected block",
-            "Nephrostomy now"
-          ],
-          [
-            "Settled pus",
-            "Antegrade stent"
-          ],
-          [
-            "Tight stricture",
-            "Keep tube"
-          ],
-          [
-            "Stent placed",
-            "Warn symptoms"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Tubes fail loudly when blocked. **Falling output with pain and fever** marks clotted or displaced tubes needing exchange. **Flushing meets resistance** where force bursts collecting systems. **Skin excoriation** from urinary leaks needs tube repositioning with skin care. **Accidental pull-outs** through mature tracts reseat easily while fresh ones need re-puncture.",
-      "say": "Tubes fail loudly when blocked. Falling output with pain and fever marks clotted tubes needing exchange. Forced flushing bursts kidneys. Urinary leaks excoriate skin needing repositioning. Mature pull-outs reseat easily while fresh ones need re-sticks.",
-      "vis": null
-    },
-    {
-      "tx": "Stones leave once kidneys calm. **Definitive stone surgery** follows weeks after sepsis resolves with sterile urine. **Stent removal with strings** suits short-term stents while forgotten ones encrust. **Encrusted forgotten stents** need staged endourology, never blind pulls. **Stone prevention** with fluids and metabolic workup stops returns.",
-      "say": "Stones leave once kidneys calm. Definitive surgery follows weeks after sepsis with sterile urine. Stringed stents suit short terms while forgotten ones encrust. Encrusted stents need staged surgery, never blind pulls. Fluids with metabolic workup stop returns.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Calm the kidney"
-          },
-          {
-            "id": "b",
-            "label": "Remove the stone"
-          },
-          {
-            "id": "c",
-            "label": "Retrieve the stent"
-          },
-          {
-            "id": "d",
-            "label": "Prevent returns"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-426",
-    "maikir2-427",
-    "maikir2-428",
-    "maikir2-429",
-    "maikir2-430",
-    "maikir2-431",
-    "maikir2-432",
-    "maikir2-433",
-    "maikir2-434",
-    "maikir2-435",
-    "maikir2-436",
-    "maikir2-437",
-    "maikir2-438",
-    "maikir2-439",
-    "maikir2-440",
-    "maikir2-441",
-    "maikir2-442",
-    "maikir2-443",
-    "maikir2-444",
-    "maikir2-445",
-    "maikir2-446",
-    "maikir2-447",
-    "maikir2-448",
-    "maikir2-449",
-    "maikir2-450"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-drainage-nephrostomy",
+ "subject": "radiology",
+ "title": "Emergency nephrostomy and antegrade stents",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Infected blocked kidneys die fast. **Obstructive pyelonephritis** with fever, pain and an obstructing stone needs pus out within hours. **Percutaneous nephrostomy** under ultrasound drains pus saving kidneys and lives. **Pregnancy with obstructing stones** favours nephrostomy over radiation-heavy surgery. **Sepsis bundles** with fluids and antibiotics run alongside drainage, never after it.",
+   "say": "Infected blocked kidneys die fast. Obstructive pyelonephritis with fever and stones needs pus out within hours. Ultrasound nephrostomy drains pus saving kidneys and lives. Pregnant obstructed stones favour nephrostomy. Sepsis fluids with antibiotics run during drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "See infected block"
+     },
+     {
+      "id": "b",
+      "label": "Stick under ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Drain the pus"
+     },
+     {
+      "id": "d",
+      "label": "Treat the stone later"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Stents follow once sepsis settles. **Antegrade ureteric stenting** pushes double-J stents down past stones once pus clears. **Nephrostogram checks** map ureters before stenting attempts. **Failed antegrade passage** from tight strictures keeps nephrostomy until surgery. **Stent symptoms** of frequency and loin ache need warning before placement.",
+   "say": "Stents follow once sepsis settles. Antegrade stenting pushes double-J tubes past stones once pus clears. Dye studies map ureters before attempts. Tight strictures keep nephrostomy until surgery. Frequency with loin ache needs warning before stents.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Move"
+    ],
+    "rows": [
+     [
+      "Infected block",
+      "Nephrostomy now"
+     ],
+     [
+      "Settled pus",
+      "Antegrade stent"
+     ],
+     [
+      "Tight stricture",
+      "Keep tube"
+     ],
+     [
+      "Stent placed",
+      "Warn symptoms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tubes fail loudly when blocked. **Falling output with pain and fever** marks clotted or displaced tubes needing exchange. **Flushing meets resistance** where force bursts collecting systems. **Skin excoriation** from urinary leaks needs tube repositioning with skin care. **Accidental pull-outs** through mature tracts reseat easily while fresh ones need re-puncture.",
+   "say": "Tubes fail loudly when blocked. Falling output with pain and fever marks clotted tubes needing exchange. Forced flushing bursts kidneys. Urinary leaks excoriate skin needing repositioning. Mature pull-outs reseat easily while fresh ones need re-sticks.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-drainage-nephrostomy-fig1.webp",
+    "alt": "A diagram showing common nephrostomy tube problems: blockage, displacement causing urinary leak and skin irritation, and accidental pull-out.",
+    "caption": "Common nephrostomy tube complications and troubleshooting",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Stones leave once kidneys calm. **Definitive stone surgery** follows weeks after sepsis resolves with sterile urine. **Stent removal with strings** suits short-term stents while forgotten ones encrust. **Encrusted forgotten stents** need staged endourology, never blind pulls. **Stone prevention** with fluids and metabolic workup stops returns.",
+   "say": "Stones leave once kidneys calm. Definitive surgery follows weeks after sepsis with sterile urine. Stringed stents suit short terms while forgotten ones encrust. Encrusted stents need staged surgery, never blind pulls. Fluids with metabolic workup stop returns.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Calm the kidney"
+     },
+     {
+      "id": "b",
+      "label": "Remove the stone"
+     },
+     {
+      "id": "c",
+      "label": "Retrieve the stent"
+     },
+     {
+      "id": "d",
+      "label": "Prevent returns"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-426",
+  "maikir2-427",
+  "maikir2-428",
+  "maikir2-429",
+  "maikir2-430",
+  "maikir2-431",
+  "maikir2-432",
+  "maikir2-433",
+  "maikir2-434",
+  "maikir2-435",
+  "maikir2-436",
+  "maikir2-437",
+  "maikir2-438",
+  "maikir2-439",
+  "maikir2-440",
+  "maikir2-441",
+  "maikir2-442",
+  "maikir2-443",
+  "maikir2-444",
+  "maikir2-445",
+  "maikir2-446",
+  "maikir2-447",
+  "maikir2-448",
+  "maikir2-449",
+  "maikir2-450"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }

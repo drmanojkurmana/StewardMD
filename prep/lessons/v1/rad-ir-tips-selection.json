@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-tips-selection",
-  "subject": "radiology",
-  "title": "TIPS selection: who benefits, who breaks",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Shunts rescue portal catastrophes selectively. **Refractory variceal bleeding** that defeats bands and drugs earns urgent **TIPS** under Baveno consensus, dropping portal pressure directly. **Refractory ascites** needing fortnightly taps suits elective shunts that return fluid to circulation. **Budd-Chiari with failed anticoagulation** opens obstructed veins through shunt restoration. **Hydrothorax from portal pressure** similarly drains back once gradients fall.",
-      "say": "Shunts rescue portal catastrophes selectively. Variceal bleeding that defeats bands earns urgent TIPS, dropping portal pressure directly. Refractory ascites needing fortnightly taps suits elective shunts. Budd-Chiari with failed drugs opens through shunts. Portal hydrothorax drains back once gradients fall.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Fail bands and drugs"
-          },
-          {
-            "id": "b",
-            "label": "Prove portal cause"
-          },
-          {
-            "id": "c",
-            "label": "Place the shunt"
-          },
-          {
-            "id": "d",
-            "label": "Watch pressure fall"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Sick livers tolerate shunts poorly. **Bilirubin above roughly 4 mg/dL** with **MELD beyond the high teens** warns of post-shunt liver failure under AASLD and EASL guidance. **Recurrent overt encephalopathy** predicts worse confusion once ammonia bypasses livers. **Heart failure with pulmonary hypertension** decompensates when shunt flow floods right hearts. **Polycystic livers and active infection** block needle paths and seed grafts.",
-      "say": "Sick livers tolerate shunts poorly. High bilirubin with high MELD warns of liver failure after shunting. Recurrent encephalopathy predicts worse confusion once ammonia bypasses livers. Heart failure decompensates when shunt flow floods hearts. Cystic livers and active infection block needle paths.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Blocker",
-          "Reason"
-        ],
-        "rows": [
-          [
-            "High MELD",
-            "Liver failure"
-          ],
-          [
-            "Encephalopathy",
-            "Worse confusion"
-          ],
-          [
-            "Heart failure",
-            "Flood overload"
-          ],
-          [
-            "Infection",
-            "Graft seeding"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Workup precedes every puncture. **Cardiac echo** excludes pulmonary hypertension and right-heart failure that shunts would unmask. **Hepatocellular screening** with triphasic imaging clears tumours that needles could seed or bypass. **MELD and Child-Pugh scoring** quantifies reserve so consent reflects real risk. **Lactulose and rifaximin review** optimises brains before ammonia loads rise.",
-      "say": "Workup precedes every puncture. Cardiac echo excludes pulmonary hypertension that shunts unmask. Tumour screening clears cancers that needles could seed. MELD with Child-Pugh scores reserve so consent reflects risk. Brain drugs optimise minds before ammonia rises.",
-      "vis": null
-    },
-    {
-      "tx": "Consent weighs months against confusion. **Survival gains** in refractory bleeding and ascites trade against **encephalopathy risk** approaching one in three under Baveno-cited cohorts. **Liver failure acceleration** in marginal reserves needs frank discussion with transplant teams. **Alternative bridges** of bands, taps and transplant listing frame the choice honestly. **Documented goals** align shunts with what patients value most.",
-      "say": "Consent weighs months against confusion. Survival gains in bleeding and ascites trade against encephalopathy risk near one in three. Failure acceleration in marginal livers needs transplant-team discussion. Bands, taps and listing frame alternatives. Documented goals align shunts with patient values.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Score the reserve"
-          },
-          {
-            "id": "b",
-            "label": "List alternatives"
-          },
-          {
-            "id": "c",
-            "label": "Trade months for mind"
-          },
-          {
-            "id": "d",
-            "label": "Record the goals"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-151",
-    "maikir2-152",
-    "maikir2-153",
-    "maikir2-154",
-    "maikir2-155",
-    "maikir2-156",
-    "maikir2-157",
-    "maikir2-158",
-    "maikir2-159",
-    "maikir2-160",
-    "maikir2-161",
-    "maikir2-162",
-    "maikir2-163",
-    "maikir2-164",
-    "maikir2-165",
-    "maikir2-166",
-    "maikir2-167",
-    "maikir2-168",
-    "maikir2-169",
-    "maikir2-170",
-    "maikir2-171",
-    "maikir2-172",
-    "maikir2-173",
-    "maikir2-174",
-    "maikir2-175"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-tips-selection",
+ "subject": "radiology",
+ "title": "TIPS selection: who benefits, who breaks",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Shunts rescue portal catastrophes selectively. **Refractory variceal bleeding** that defeats bands and drugs earns urgent **TIPS** under Baveno consensus, dropping portal pressure directly. **Refractory ascites** needing fortnightly taps suits elective shunts that return fluid to circulation. **Budd-Chiari with failed anticoagulation** opens obstructed veins through shunt restoration. **Hydrothorax from portal pressure** similarly drains back once gradients fall.",
+   "say": "Shunts rescue portal catastrophes selectively. Variceal bleeding that defeats bands earns urgent TIPS, dropping portal pressure directly. Refractory ascites needing fortnightly taps suits elective shunts. Budd-Chiari with failed drugs opens through shunts. Portal hydrothorax drains back once gradients fall.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fail bands and drugs"
+     },
+     {
+      "id": "b",
+      "label": "Prove portal cause"
+     },
+     {
+      "id": "c",
+      "label": "Place the shunt"
+     },
+     {
+      "id": "d",
+      "label": "Watch pressure fall"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sick livers tolerate shunts poorly. **Bilirubin above roughly 4 mg/dL** with **MELD beyond the high teens** warns of post-shunt liver failure under AASLD and EASL guidance. **Recurrent overt encephalopathy** predicts worse confusion once ammonia bypasses livers. **Heart failure with pulmonary hypertension** decompensates when shunt flow floods right hearts. **Polycystic livers and active infection** block needle paths and seed grafts.",
+   "say": "Sick livers tolerate shunts poorly. High bilirubin with high MELD warns of liver failure after shunting. Recurrent encephalopathy predicts worse confusion once ammonia bypasses livers. Heart failure decompensates when shunt flow floods hearts. Cystic livers and active infection block needle paths.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blocker",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "High MELD",
+      "Liver failure"
+     ],
+     [
+      "Encephalopathy",
+      "Worse confusion"
+     ],
+     [
+      "Heart failure",
+      "Flood overload"
+     ],
+     [
+      "Infection",
+      "Graft seeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Workup precedes every puncture. **Cardiac echo** excludes pulmonary hypertension and right-heart failure that shunts would unmask. **Hepatocellular screening** with triphasic imaging clears tumours that needles could seed or bypass. **MELD and Child-Pugh scoring** quantifies reserve so consent reflects real risk. **Lactulose and rifaximin review** optimises brains before ammonia loads rise.",
+   "say": "Workup precedes every puncture. Cardiac echo excludes pulmonary hypertension that shunts unmask. Tumour screening clears cancers that needles could seed. MELD with Child-Pugh scores reserve so consent reflects risk. Brain drugs optimise minds before ammonia rises.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-tips-selection-fig1.webp",
+    "alt": "A diagram outlining the critical pre-TIPS workup steps, including cardiac echocardiography for heart function, triphasic liver imaging for tumor screening, and MELD/Child-Pugh scoring for liver reserve, plus encephalopathy preparation.",
+    "caption": "Essential pre-TIPS workup: cardiac, liver, and encephalopathy risk assessment",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Consent weighs months against confusion. **Survival gains** in refractory bleeding and ascites trade against **encephalopathy risk** approaching one in three under Baveno-cited cohorts. **Liver failure acceleration** in marginal reserves needs frank discussion with transplant teams. **Alternative bridges** of bands, taps and transplant listing frame the choice honestly. **Documented goals** align shunts with what patients value most.",
+   "say": "Consent weighs months against confusion. Survival gains in bleeding and ascites trade against encephalopathy risk near one in three. Failure acceleration in marginal livers needs transplant-team discussion. Bands, taps and listing frame alternatives. Documented goals align shunts with patient values.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Score the reserve"
+     },
+     {
+      "id": "b",
+      "label": "List alternatives"
+     },
+     {
+      "id": "c",
+      "label": "Trade months for mind"
+     },
+     {
+      "id": "d",
+      "label": "Record the goals"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-151",
+  "maikir2-152",
+  "maikir2-153",
+  "maikir2-154",
+  "maikir2-155",
+  "maikir2-156",
+  "maikir2-157",
+  "maikir2-158",
+  "maikir2-159",
+  "maikir2-160",
+  "maikir2-161",
+  "maikir2-162",
+  "maikir2-163",
+  "maikir2-164",
+  "maikir2-165",
+  "maikir2-166",
+  "maikir2-167",
+  "maikir2-168",
+  "maikir2-169",
+  "maikir2-170",
+  "maikir2-171",
+  "maikir2-172",
+  "maikir2-173",
+  "maikir2-174",
+  "maikir2-175"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }

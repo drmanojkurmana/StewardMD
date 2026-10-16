@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-access-complications",
-  "subject": "radiology",
-  "title": "Access complications and endovascular rescue",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Resistance means stop and look. **Arterial dissection** starts when wires or catheters lift an **intimal flap**, announced by sudden resistance, pain or contrast hanging up in a false channel. **Completion angiography** through the sheath maps the flap extent before any device crosses it again. **Flow-limiting flaps** with lost distal pulses need tacking by balloon or stent, while small **non-flow-limiting flaps** heal with observation and antiplatelets. **Subintimal wiring** that will not re-enter converts to another access rather than forcing onward.",
-      "say": "Resistance means stop and look. Dissection starts when wires lift a wall flap, announced by sudden resistance, pain or hanging contrast. Final angiography maps the flap before anything crosses again. Flaps that block flow need balloon or stent tacking, while small flaps heal with watching. Wiring that will not re-enter converts elsewhere.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Feel resistance"
-          },
-          {
-            "id": "b",
-            "label": "Shoot angiogram"
-          },
-          {
-            "id": "c",
-            "label": "Tack flow-limiting flaps"
-          },
-          {
-            "id": "d",
-            "label": "Watch small flaps"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Covered metal rescues torn arteries. **Covered stents** bridge wall defects and pseudoaneurysm necks from inside, sealing leaks while preserving downstream flow under SIR rescue standards. **Coil embolisation** sacrifices small bleeding muscular branches where collateral networks cover the territory. **Prolonged balloon tamponade** across the hole buys minutes for clotting in iliac and femoral injuries. **Reversal and pressure** run alongside every endovascular rescue, never instead of it.",
-      "say": "Covered metal rescues torn arteries. Fabric-covered stents bridge holes while keeping downstream flow. Coils sacrifice small bleeding branches where collaterals cover the area. Long balloon inflation across the hole buys clotting minutes. Reversal with pressure runs alongside every rescue.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Rescue",
-          "Best for"
-        ],
-        "rows": [
-          [
-            "Covered stent",
-            "Main lumen tears"
-          ],
-          [
-            "Coils",
-            "Small branches"
-          ],
-          [
-            "Balloon tamponade",
-            "Buying minutes"
-          ],
-          [
-            "Pressure",
-            "Every rescue"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Knives still save groins that devices cannot. **Surgical cutdown** exposes the artery directly when percutaneous seals fail, haematomas compress nerves or infection needs debridement. **Thigh compartment syndrome** after massive groin bleeding brings severe pain with a tense thigh and needs urgent fasciotomy. **Graft interposition** replaces destroyed segments that neither pressure nor stents can bridge. **Joint vascular rounds** after bailouts catch re-bleeds early on the ward.",
-      "say": "Knives still save groins that devices cannot. Surgical cutdown exposes the artery when seals fail, nerves compress or infection needs cleaning. Thigh compartment syndrome after massive bleeding brings extreme pain with tension needing urgent release. Destroyed segments take grafts. Joint ward rounds catch re-bleeds early.",
-      "vis": null
-    },
-    {
-      "tx": "Small tracks usually close themselves. **Asymptomatic fistulae** between small branches often thrombose alone within weeks and merit duplex watching rather than instant closure. **Symptomatic shunts** with limb swelling, heart strain or skin changes need ultrasound-guided compression or covered stents. **Cholesterol embolisation** after rough catheter handling showers blue toes with livedo and kidney injury days later, managed supportively. **Exam answers** prioritise watching silent tracks while acting on symptomatic ones.",
-      "say": "Small tracks usually close themselves. Silent fistulae often clot alone within weeks and merit duplex watching. Shunts with swelling, heart strain or skin changes need compression or covered stents. Rough handling can shower cholesterol to toes and kidneys days later, managed supportively. Exams favour watching silent tracks.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Find the track"
-          },
-          {
-            "id": "b",
-            "label": "Watch silent ones"
-          },
-          {
-            "id": "c",
-            "label": "Close symptomatic ones"
-          },
-          {
-            "id": "d",
-            "label": "Scan the toes"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-051",
-    "maikir2-052",
-    "maikir2-053",
-    "maikir2-054",
-    "maikir2-055",
-    "maikir2-056",
-    "maikir2-057",
-    "maikir2-058",
-    "maikir2-059",
-    "maikir2-060",
-    "maikir2-061",
-    "maikir2-062",
-    "maikir2-063",
-    "maikir2-064",
-    "maikir2-065",
-    "maikir2-066",
-    "maikir2-067",
-    "maikir2-068",
-    "maikir2-069",
-    "maikir2-070",
-    "maikir2-071",
-    "maikir2-072",
-    "maikir2-073",
-    "maikir2-074",
-    "maikir2-075"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-access-complications",
+ "subject": "radiology",
+ "title": "Access complications and endovascular rescue",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Resistance means stop and look. **Arterial dissection** starts when wires or catheters lift an **intimal flap**, announced by sudden resistance, pain or contrast hanging up in a false channel. **Completion angiography** through the sheath maps the flap extent before any device crosses it again. **Flow-limiting flaps** with lost distal pulses need tacking by balloon or stent, while small **non-flow-limiting flaps** heal with observation and antiplatelets. **Subintimal wiring** that will not re-enter converts to another access rather than forcing onward.",
+   "say": "Resistance means stop and look. Dissection starts when wires lift a wall flap, announced by sudden resistance, pain or hanging contrast. Final angiography maps the flap before anything crosses again. Flaps that block flow need balloon or stent tacking, while small flaps heal with watching. Wiring that will not re-enter converts elsewhere.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Feel resistance"
+     },
+     {
+      "id": "b",
+      "label": "Shoot angiogram"
+     },
+     {
+      "id": "c",
+      "label": "Tack flow-limiting flaps"
+     },
+     {
+      "id": "d",
+      "label": "Watch small flaps"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Covered metal rescues torn arteries. **Covered stents** bridge wall defects and pseudoaneurysm necks from inside, sealing leaks while preserving downstream flow under SIR rescue standards. **Coil embolisation** sacrifices small bleeding muscular branches where collateral networks cover the territory. **Prolonged balloon tamponade** across the hole buys minutes for clotting in iliac and femoral injuries. **Reversal and pressure** run alongside every endovascular rescue, never instead of it.",
+   "say": "Covered metal rescues torn arteries. Fabric-covered stents bridge holes while keeping downstream flow. Coils sacrifice small bleeding branches where collaterals cover the area. Long balloon inflation across the hole buys clotting minutes. Reversal with pressure runs alongside every rescue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rescue",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Covered stent",
+      "Main lumen tears"
+     ],
+     [
+      "Coils",
+      "Small branches"
+     ],
+     [
+      "Balloon tamponade",
+      "Buying minutes"
+     ],
+     [
+      "Pressure",
+      "Every rescue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Knives still save groins that devices cannot. **Surgical cutdown** exposes the artery directly when percutaneous seals fail, haematomas compress nerves or infection needs debridement. **Thigh compartment syndrome** after massive groin bleeding brings severe pain with a tense thigh and needs urgent fasciotomy. **Graft interposition** replaces destroyed segments that neither pressure nor stents can bridge. **Joint vascular rounds** after bailouts catch re-bleeds early on the ward.",
+   "say": "Knives still save groins that devices cannot. Surgical cutdown exposes the artery when seals fail, nerves compress or infection needs cleaning. Thigh compartment syndrome after massive bleeding brings extreme pain with tension needing urgent release. Destroyed segments take grafts. Joint ward rounds catch re-bleeds early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-access-complications-fig1.webp",
+    "alt": "Illustrates surgical fasciotomy for compartment syndrome, arterial graft interposition, and direct surgical repair of groin complications like hematoma.",
+    "caption": "Surgical rescue: fasciotomy, graft interposition, and direct arterial repair",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Small tracks usually close themselves. **Asymptomatic fistulae** between small branches often thrombose alone within weeks and merit duplex watching rather than instant closure. **Symptomatic shunts** with limb swelling, heart strain or skin changes need ultrasound-guided compression or covered stents. **Cholesterol embolisation** after rough catheter handling showers blue toes with livedo and kidney injury days later, managed supportively. **Exam answers** prioritise watching silent tracks while acting on symptomatic ones.",
+   "say": "Small tracks usually close themselves. Silent fistulae often clot alone within weeks and merit duplex watching. Shunts with swelling, heart strain or skin changes need compression or covered stents. Rough handling can shower cholesterol to toes and kidneys days later, managed supportively. Exams favour watching silent tracks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Find the track"
+     },
+     {
+      "id": "b",
+      "label": "Watch silent ones"
+     },
+     {
+      "id": "c",
+      "label": "Close symptomatic ones"
+     },
+     {
+      "id": "d",
+      "label": "Scan the toes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-051",
+  "maikir2-052",
+  "maikir2-053",
+  "maikir2-054",
+  "maikir2-055",
+  "maikir2-056",
+  "maikir2-057",
+  "maikir2-058",
+  "maikir2-059",
+  "maikir2-060",
+  "maikir2-061",
+  "maikir2-062",
+  "maikir2-063",
+  "maikir2-064",
+  "maikir2-065",
+  "maikir2-066",
+  "maikir2-067",
+  "maikir2-068",
+  "maikir2-069",
+  "maikir2-070",
+  "maikir2-071",
+  "maikir2-072",
+  "maikir2-073",
+  "maikir2-074",
+  "maikir2-075"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }
