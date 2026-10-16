@@ -363,12 +363,27 @@
     // Clinical diagrams and diagnostic imaging: annotated figures (ECG, X-ray, CT schematic)
     // with structured callout badges for each annotation. Each card is a jump target.
     var DTYPE = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
-    // Schema v2 drawn figures (kb-figure.js). Image diagrams below are unchanged.
+    // Schema v2 figures (kb-figure.js): drawn svg-spec pathways plus image illustrations
+    // (figures[] { type: "image", src "v1/kb/media/<name>.webp", alt, caption, ar } served
+    // through /api/prep/bank/ like lesson media, immutable and cached). An image entry that
+    // fails KBFigure.isImage renders nothing. Image diagrams below are unchanged.
     var v2figs = (p.figures && p.figures.length && window.KBFigure)
-      ? p.figures.filter(function (f) { return f.type === 'svg-spec'; }).map(function (f, i) {
-          toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Fig' + i + '">' + esc(f.title || f.id) + '</button>');
-          return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'Fig' + i + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
-            window.KBFigure.render(f) + (f.caption ? '<p class="kbp-caption">' + window.KBHy.html(f.caption) + '</p>' : '') + '</section>';
+      ? p.figures.map(function (f, i) {
+          if (f.type === 'svg-spec') {
+            // index among drawn figures only, so existing Fig jump targets never move
+            var si = 0, k;
+            for (k = 0; k < i; k++) if (p.figures[k].type === 'svg-spec') si++;
+            toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Fig' + si + '">' + esc(f.title || f.id) + '</button>');
+            return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'Fig' + si + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
+              window.KBFigure.render(f) + (f.caption ? '<p class="kbp-caption">' + window.KBHy.html(f.caption) + '</p>' : '') + '</section>';
+          }
+          if (window.KBFigure.isImage && window.KBFigure.isImage(f)) {
+            toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'FigImg' + i + '">' + esc(f.title || f.id) + '</button>');
+            var imgsrc = window.KBFigure.imgUrl(f.src, G.SMD_PREP_BANK_API || "/api/prep/bank/", G.SMD_API_BASE || "");
+            return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'FigImg' + i + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
+              window.KBFigure.imageHTML(f, imgsrc) + '</section>';
+          }
+          return '';
         }).join("")
       : "";
     var diagrams = (p.diagrams && p.diagrams.length)

@@ -39,10 +39,14 @@ test("the committed overlay counts cover every set prep.js asks for, on modules 
   const oc = JSON.parse(fs.readFileSync(new URL("prep/bank/overlay-counts.json", ROOT), "utf8"));
   assert.equal(oc.v, 1);
   const ver = /VER = G\.SMD_PREP_BANK_VER \|\| "(v\d+)"/.exec(src)[1];
+  const tax = JSON.parse(fs.readFileSync(new URL("prep/taxonomy.json", ROOT), "utf8")), BV = {};
+  for (const b of tax.branches) for (const s of b.subjects) if (s.bv) BV[s.id] = s.bv;
   for (const [sid, list] of Object.entries(ov)) for (const set of list) {
     const m = (oc.sets[set] || {})[sid];
     assert.ok(m && Object.keys(m).length, set + "/" + sid + " has counts");
-    const ids = new Set(JSON.parse(fs.readFileSync(new URL("prep/bank/" + ver + "/" + sid + "/index.json", ROOT), "utf8")).topics.map((t) => t.id));
+    // a subject piloted in its own bank path (taxonomy `bv`, e.g. ss-radiology) has its modules there, like prep.js bvOf()
+    const bv = BV[sid] || ver;
+    const ids = new Set(JSON.parse(fs.readFileSync(new URL("prep/bank/" + bv + "/" + sid + "/index.json", ROOT), "utf8")).topics.map((t) => t.id));
     for (const [mid, n] of Object.entries(m)) { assert.ok(ids.has(mid), mid + " is a " + sid + " module"); assert.ok(Number.isInteger(n) && n > 0); }
   }
 });
