@@ -48,6 +48,8 @@ let docs = [...byId.values()].sort((a, b) => (a.id < b.id ? -1 : 1)); if (LIMIT)
 const totalChars = docs.reduce((n, d) => n + d.text.length, 0);
 console.log(`docs ${docs.length}, chars ${totalChars}, cap ${MAX_CHARS}`);
 if (totalChars > MAX_CHARS) { console.error("over the character cap; raise MAX_CHARS deliberately or lower DOC_CHARS"); process.exit(1); }
+const DOCS_OUT = arg("--docs-out", "");
+if (DOCS_OUT) { writeFileSync(DOCS_OUT, JSON.stringify(docs)); console.log("wrote docs ->", DOCS_OUT); process.exit(0); }
 if (DRY) process.exit(0);
 
 mkdirSync(OUT, { recursive: true });
