@@ -660,6 +660,23 @@
       '<div class="db-brand-price">' + (b.mrp != null ? esc(inr(b.mrp)) : '<span class="db-na">—</span>') + '</div>' +
       '</div>';
   }
+  /* Beta-blockers get the interactive "how it works" figure (prep/figures/beta-blockers.html, fig-viewer.js), preset to the drug's class:
+     1 = non-selective (blocks beta-1 and beta-2), 2 = beta-1 selective. Drugs that also block alpha-1 (carvedilol, labetalol) are
+     marked non-selective for beta; the figure's own notes say what it leaves out. Matching is on the generic's first word. */
+  var BB_NONSEL = "propranolol nadolol timolol sotalol pindolol oxprenolol penbutolol carteolol levobunolol bopindolol carvedilol labetalol";
+  var BB_B1 = "atenolol metoprolol bisoprolol nebivolol esmolol betaxolol acebutolol celiprolol landiolol bevantolol";
+  function bbKind(name, cls) {
+    var w = String(name || "").toLowerCase().replace(/[^a-z ]/g, " ").trim().split(/\s+/)[0] || "";
+    if (w && (" " + BB_NONSEL + " ").indexOf(" " + w + " ") >= 0) return { d: 1, name: w };
+    if (w && (" " + BB_B1 + " ").indexOf(" " + w + " ") >= 0) return { d: 2, name: w };
+    if (/beta[- ]?(adrenergic |adrenoceptor |receptor )?(blocker|blocking|antagonist)|β[- ]?(blocker|blocking)/i.test(String(cls || ""))) return { d: 0, name: w };
+    return null;
+  }
+  function figCard(d) {
+    var k = bbKind(d.composition, [d["class"], d.action_class].join(" "));
+    if (!k || !window.SMD_FIG) return "";
+    return '<button type="button" class="db-fig" id="dbFig" data-d="' + k.d + '" data-n="' + esc(k.name) + '"><i class="db-fig-i" aria-hidden="true">&#9654;</i><span><b>See how beta-blockers work</b><small>Interactive figure: heart and airway, with or without a blocker</small></span></button>';
+  }
   function renderDetail() {
     var d = st.info, b = detailHost();
     var cls = compClass(d.composition, d["class"]);
@@ -673,7 +690,13 @@
         ((window.SMD_RENAL_DOSE && SMD_RENAL_DOSE.buttonHTML) ? SMD_RENAL_DOSE.buttonHTML(d.composition) : '') +
         ((window.SMD_DOSECALC && SMD_DOSECALC.buttonHTML) ? SMD_DOSECALC.buttonHTML(d.composition) : '') + '</div>' +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
+      figCard(d) +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
+    var fg = b.querySelector("#dbFig");
+    if (fg) fg.addEventListener("click", function () {
+      var dn = fg.getAttribute("data-d"), nm = fg.getAttribute("data-n");
+      window.SMD_FIG.open({ src: "prep/figures/beta-blockers.html", title: "How beta-blockers work", from: fg, query: (dn !== "0" ? "d=" + dn + "&" : "") + "name=" + encodeURIComponent(nm.charAt(0).toUpperCase() + nm.slice(1)) });
+    });
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =
@@ -1115,6 +1138,10 @@
       ".db-dwsearch-i:focus{outline:none;border-color:var(--teal,#0a9396)}",
       ".db-head{margin-bottom:12px}.db-gen{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25}",
       ".db-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}",
+      ".db-fig{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;margin:10px 0 4px;padding:10px 14px;border:1px solid var(--line,#d7dee3);border-radius:14px;background:var(--panel,#fff);color:var(--ink,#14202b);font:inherit;text-align:left;cursor:pointer}",
+      ".db-fig-i{flex:0 0 auto;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--teal,#0e6e63);color:#fff;font-style:normal;font-size:14px}",
+      ".db-fig span{display:flex;flex-direction:column;gap:2px;min-width:0}.db-fig small{color:var(--slate-soft,#5a7184)}",
+      ".db-fig:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
       ".db-chip{font:700 10.5px var(--sans,system-ui);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:7px;padding:3px 9px;text-transform:capitalize}",
       ".db-sec{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px;margin-bottom:9px}",
       ".db-sec-h{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin-bottom:5px}",

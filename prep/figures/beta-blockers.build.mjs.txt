@@ -1,0 +1,484 @@
+import { writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { BIO_CSS, blobOf, blobSvg, membraneOf, membraneSvg } from "../../kit/blob.mjs";
+import { figureSvg, pageHtml, pathOf, plateHtml } from "../../kit/iso-kit.mjs";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const light = process.argv.includes("--light");
+const WIDTH = 960;
+const HEIGHT = 640;
+
+/* One small model drives the motion and the readout. level: how much noradrenaline/adrenaline is around
+   (rest, stress or exercise, high sympathetic drive). drug: none, propranolol (non-selective), metoprolol (beta-1 selective).
+   Every number here is illustrative: it sets how bright and how busy things look and is never shown as a measurement. */
+const AGONIST = [0.15, 0.5, 0.85];
+const BLOCK = [[0, 0], [0.85, 0.85], [0.85, 0.2]]; // [beta-1, beta-2] share of receptors held by the blocker
+function model(level, drug) {
+  const a = AGONIST[level];
+  const act = BLOCK[drug].map((b) => Math.max(0, Math.min(1, a * (1 - b * (1 - 0.5 * a))))); // competitive: more agonist partly overcomes the block
+  const word = (v) => (v < 0.2 ? "baseline" : v < 0.6 ? "modest" : "strong");
+  return { a, act1: act[0], act2: act[1], b1: BLOCK[drug][0], b2: BLOCK[drug][1], pka1: act[0] > 0.3, pka2: act[1] > 0.3, readout: `heart ${word(act[0])} · airway ${word(act[1])}` };
+}
+for (const [lv, dg, want] of [[1, 0, "heart modest · airway modest"], [1, 1, "heart baseline · airway baseline"], [1, 2, "heart baseline · airway modest"], [2, 0, "heart strong · airway strong"], [2, 2, "heart modest · airway strong"]]) {
+  const r = model(lv, dg).readout;
+  if (r !== want) throw new Error(`model readout ${r} != ${want}`);
+}
+if (!(model(2, 2).act1 < model(2, 2).act2)) throw new Error("a beta-1 blocker must dampen the heart more than the airway");
+if (Math.abs(model(1, 1).act1 - model(1, 1).act2) > 1e-9) throw new Error("a non-selective blocker must treat both receptors alike");
+if (!(model(2, 1).act1 > model(1, 1).act1)) throw new Error("more agonist must partly overcome a competitive blocker");
+
+const FP = { origin: [0, 0], scale: 1 / Math.sqrt(1.6), azimuth: 90, elevation: 0 };
+const W = (x, y) => [x, 0, -y];
+const ringE = (cx, cy, rx, ry, n = 30, phase = 0, wob = 0.035) =>
+  Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2;
+    const w = 1 + wob * Math.sin(a * 3 + phase) + (wob / 2) * Math.cos(a * 5 - phase);
+    return W(cx + Math.cos(a) * rx * w, cy + Math.sin(a) * ry * w);
+  });
+const ringS = (cx, cy, rx, ry, pw = 3, n = 56) =>
+  Array.from({ length: n }, (_, i) => {
+    const a = (i / n) * Math.PI * 2;
+    const c = Math.cos(a), s = Math.sin(a);
+    return W(cx + Math.sign(c) * Math.abs(c) ** (2 / pw) * rx, cy + Math.sign(s) * Math.abs(s) ** (2 / pw) * ry);
+  });
+const f1 = (v) => +v.toFixed(1);
+
+const MEM = { y0: 300, y1: 326 };
+const SITES = [330, 570];
+const TERM = { cx: 480, cy: 114, rx: 236, ry: 96 };
+const VES = [[298, 106], [330, 188], [440, 108], [570, 188], [612, 112], [662, 160], [350, 150], [510, 128]];
+const AC_RX = 62, AC_CY = 362;
+const COLS = [
+  { key: "b1", cx: 120, acx: 330, cell: [30, 450], name: "β1", organ: "cardiac myocyte", out: "heart rate and force ↑", pka: [330, 536] },
+  { key: "b2", cx: 600, acx: 810, cell: [510, 930], name: "β2", organ: "airway smooth muscle", out: "airway relaxes", pka: [810, 536] },
+];
+for (const c of COLS) {
+  c.home = [c.cx + 26, 356]; c.bg = [c.cx - 28, 360]; c.dock = [c.acx - 66, 366]; c.accent = "green";
+}
+
+const terminalBlob = blobOf(ringS(TERM.cx, TERM.cy, TERM.rx - 4, TERM.ry - 4, 3), FP, { tone: "hi", id: "terminal", highlight: 0.85, shade: 0.93 });
+const terminalMembrane = membraneOf(ringS(TERM.cx, TERM.cy, TERM.rx + 2, TERM.ry + 2, 3), ringS(TERM.cx, TERM.cy, TERM.rx - 4, TERM.ry - 4, 3), FP, { tone: "mid" });
+const vesicles = VES.map(([x, y], i) => ({ x, y, blob: blobOf(ringE(0, 0, 16, 16, 22, i, 0.02), FP, { tone: "lit", highlight: 0.62, shade: 0.9 }) }));
+const alphaBlob = (i) => blobOf(ringE(0, 0, 31, 20, 26, i, 0.03), FP, { tone: "hi", highlight: 0.7, shade: 0.9 });
+const bgBlob = (i) => blobOf(ringE(0, 0, 19, 15, 22, i, 0.03), FP, { tone: "mid", highlight: 0.7, shade: 0.9 });
+const acBlob = (c, i) => blobOf(ringE(c.acx, AC_CY, AC_RX, 32, 36, 0.7 + i, 0.02), FP, { tone: "hi", id: "ac" + i, highlight: 0.8, shade: 0.92 });
+const pkaR = blobOf(ringE(0, 0, 23, 14, 24, 0.4, 0.02), FP, { tone: "mid", highlight: 0.7, shade: 0.9 });
+const pkaC = (i) => blobOf(ringE(0, 0, 20, 17, 24, i + 1, 0.03), FP, { tone: "hi", highlight: 0.7, shade: 0.9 });
+
+const HX = [-39, -26, -13, 0, 13, 26, 39];
+const HTOP = [300, 296, 292, 304, 292, 296, 300];
+const HBOT = [330, 334, 337, 333, 337, 334, 330];
+const capsule = (x, y0, y1, w) =>
+  `<rect class="dr-hx" x="${f1(x - w / 2)}" y="${y0}" width="${w}" height="${y1 - y0}" rx="${w / 2}"/><path class="dr-hx-hi" d="M${f1(x - w / 4)} ${y0 + 7}V${y1 - 7}"/>`;
+const receptor = (cx) => [0, 6, 1, 5, 2, 4, 3].map((i) => capsule(cx + HX[i], HTOP[i], HBOT[i], 11)).join("");
+const acHelices = (acx) => {
+  const out = [];
+  for (const [x0, n] of [[acx - 70, 6], [acx + 15, 6]]) for (let i = 0; i < n; i++) out.push(capsule(x0 + i * 10, 296 + (i % 2) * 3, 336 - (i % 2) * 2, 9));
+  return out.join("");
+};
+
+const dotAt = (x, y) => `<circle class="dr-dot" cx="${x}" cy="${y}" r="1.7"/>`;
+const label = (text, [tx, ty], [px, py], anchor = "start", cls = "") => {
+  const sx = anchor === "end" ? tx + 4 : anchor === "start" ? tx - 4 : tx;
+  const sy = anchor === "middle" ? (py < ty ? ty - 13 : ty + 4) : ty - 4;
+  return `<path class="dr-leader" d="${pathOf([[sx, sy], [px, py]])}"/>${dotAt(px, py)}<text class="dr-label ${cls}" x="${tx}" y="${ty}" text-anchor="${anchor}">${text}</text>`;
+};
+
+/* Noradrenaline (norepinephrine), PubChem CID 439260, C8H11NO3: the dopamine skeleton with an OH on the carbon next to the ring. */
+function noradrenaline() {
+  const L = 26, c = [70, 100];
+  const v = (k) => [c[0] + Math.cos(((-90 + 60 * k) * Math.PI) / 180) * L, c[1] + Math.sin(((-90 + 60 * k) * Math.PI) / 180) * L];
+  const dir = (deg) => [Math.cos((deg * Math.PI) / 180) * L, Math.sin((deg * Math.PI) / 180) * L];
+  const add = (p, d) => [p[0] + d[0], p[1] + d[1]];
+  const V = [0, 1, 2, 3, 4, 5].map(v);
+  const Ca = add(V[1], dir(-30)), Cb = add(Ca, dir(30)), N = add(Cb, dir(-30));
+  const OHa = add(Ca, dir(-90));
+  const O3 = add(V[3], dir(90)), O4 = add(V[4], dir(150));
+  const bond = (a, b) => `<path class="dr-bond" d="${pathOf([a, b])}"/>`;
+  const inner = (a, b) => {
+    const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, vx = c[0] - mx, vy = c[1] - my, d = Math.hypot(vx, vy);
+    const o = 4.4, s = 0.16;
+    const p = (Q, R) => [Q[0] + (R[0] - Q[0]) * s + (vx / d) * o, Q[1] + (R[1] - Q[1]) * s + (vy / d) * o];
+    return `<path class="dr-bond" d="${pathOf([p(a, b), p(b, a)])}"/>`;
+  };
+  let out = "";
+  for (let k = 0; k < 6; k++) out += bond(V[k], V[(k + 1) % 6]);
+  out += inner(V[0], V[1]) + inner(V[2], V[3]) + inner(V[4], V[5]);
+  out += bond(V[1], Ca) + bond(Ca, Cb) + bond(Cb, N) + bond(Ca, OHa) + bond(V[3], O3) + bond(V[4], O4);
+  const atom = (p, t, sub) => `<circle class="dr-atom-bg" cx="${f1(p[0])}" cy="${f1(p[1])}" r="9"/><text class="dr-atom" x="${f1(p[0])}" y="${f1(p[1] + 4)}" text-anchor="middle">${t}${sub ? `<tspan class="dr-sub" dy="3">${sub}</tspan>` : ""}</text>`;
+  out += atom(O3, "OH") + atom(O4, "OH") + atom(OHa, "OH") + atom(N, "NH", "2");
+  return `<g class="hot" tabindex="0" data-info="Noradrenaline (norepinephrine), 4-(2-amino-1-hydroxyethyl)benzene-1,2-diol, C8H11NO3 (PubChem CID 439260): a catechol ring with an ethanolamine side chain. It is the main transmitter of sympathetic nerves; adrenaline from the adrenal medulla acts on the same receptors. Flat skeletal formula, bond angles and lengths drawn schematically; stereochemistry is not shown. In the cleft below it is drawn as a small bright dot." aria-label="Noradrenaline structural formula">${out}</g>`
+    + `<text class="dr-label dr-name" x="${f1(c[0] + 45)}" y="188" text-anchor="middle">noradrenaline</text><text class="dr-label dr-muted" x="${f1(c[0] + 45)}" y="204" text-anchor="middle">C<tspan class="dr-sub" dy="3">8</tspan><tspan dy="-3">H</tspan><tspan class="dr-sub" dy="3">11</tspan><tspan dy="-3">NO</tspan><tspan class="dr-sub" dy="3">3</tspan></text>`;
+}
+
+const chip = (id, text, cls) => `<g id="${id}" class="dr-chip ${cls}"><rect x="-17" y="-8" width="34" height="16" rx="8"/><text x="0" y="4" text-anchor="middle">${text}</text></g>`;
+const alphaGroup = (c, i) => `<g id="${c.key}-alpha" class="dr-alpha" transform="translate(${c.home[0]} ${c.home[1]})">${blobSvg(alphaBlob(i))}<text class="dr-prot" x="0" y="4" text-anchor="middle">Gαs</text><g transform="translate(0 26)">${chip(`${c.key}-gdp`, "GDP", "dr-gdp")}${chip(`${c.key}-gtp`, "GTP", "dr-gtp")}</g></g>`;
+const bgGroup = (c, i) => `<g class="dr-bg" transform="translate(${c.bg[0]} ${c.bg[1]})">${blobSvg(bgBlob(i))}<text class="dr-prot" x="0" y="4" text-anchor="middle">βγ</text></g>`;
+const rail = (c) => {
+  const x2 = c.acx - AC_RX, y2 = 366;
+  return `<path class="dr-rail dr-rail-green" d="${pathOf([[c.home[0], c.home[1]], [x2, y2]])}"/><path class="dr-rail-head dr-rail-green" d="M${x2} ${y2}l-9 -4.5v9z"/>`;
+};
+
+const lipid = `<pattern id="lipid" x="0" y="${MEM.y0}" width="9" height="${MEM.y1 - MEM.y0}" patternUnits="userSpaceOnUse">
+<circle class="dr-head" cx="4.5" cy="4" r="3"/><circle class="dr-head" cx="4.5" cy="22" r="3"/>
+<path class="dr-tail" d="M3.6 7V13M5.4 7V13M3.6 19V13M5.4 19V13"/></pattern>`;
+
+const hex = (x, y, r) => pathOf(Array.from({ length: 6 }, (_, k) => [x + Math.cos((k * Math.PI) / 3) * r, y + Math.sin((k * Math.PI) / 3) * r]), true);
+
+const colSvg = (c, i) => {
+  const cellPath = `M${c.cell[0]} ${MEM.y0}H${c.cell[1]}V600Q${c.cell[1]} 630 ${c.cell[1] - 30} 630H${c.cell[0] + 30}Q${c.cell[0]} 630 ${c.cell[0]} 600Z`;
+  const info = i === 0
+    ? "Cardiac myocyte (heart muscle cell), patch of its membrane in flat cross-section, schematic and not to scale. The heart carries mostly beta-1 receptors; beta-2 receptors are present too, but beta-1 dominates the rate and force response."
+    : "Airway smooth muscle cell, patch of its membrane. Airway smooth muscle carries mostly beta-2 receptors; their activation relaxes the muscle and widens the airway. Drawn beside the heart cell only to compare the two receptor types.";
+  const recInfo = i === 0
+    ? "Beta-1 adrenoceptor (β1): a seven-transmembrane G protein-coupled receptor. Noradrenaline or adrenaline binds from outside and the receptor couples to Gαs. It is the main adrenergic receptor of the heart."
+    : "Beta-2 adrenoceptor (β2): the same kind of seven-transmembrane receptor, also coupled to Gαs. It is the main adrenergic receptor of airway smooth muscle and is found in many other tissues too.";
+  return [
+    `<g class="hot" tabindex="0" data-info="${info}"><path class="dr-cell" d="${cellPath}"/></g>`,
+    `<g class="hot" tabindex="0" data-info="Plasma membrane: a lipid bilayer (heads outside, tails inside; schematic) that the receptor and adenylyl cyclase span."><path class="dr-memband" d="M${c.cell[0]} ${MEM.y0}H${c.cell[1]}V${MEM.y1}H${c.cell[0]}Z"/><path class="dr-memfill" d="M${c.cell[0]} ${MEM.y0}H${c.cell[1]}V${MEM.y1}H${c.cell[0]}Z" fill="url(#lipid)"/><path class="dr-memedge" d="M${c.cell[0]} ${MEM.y0}H${c.cell[1]}M${c.cell[0]} ${MEM.y1}H${c.cell[1]}"/></g>`,
+    `<g class="hot dr-ac" id="${c.key}-ac" tabindex="0" data-info="Adenylyl cyclase (AC): a membrane enzyme that makes cAMP from ATP. Gαs·GTP stimulates it (+). Several isoforms exist; they are not distinguished here.">${acHelices(c.acx)}${blobSvg(acBlob(c, i))}<text class="dr-prot" x="${c.acx}" y="${AC_CY - 2}" text-anchor="middle">AC</text><text id="${c.key}-plus" class="dr-sign dr-plus" x="${c.acx}" y="${AC_CY + 20}" text-anchor="middle">+</text></g>`,
+    rail(c),
+    `<g class="hot dr-rec dr-${c.key}" id="${c.key}-rec" tabindex="0" data-info="${recInfo}">${receptor(c.cx)}</g>`,
+    `<g class="hot" tabindex="0" id="${c.key}-g" data-info="Heterotrimeric G protein under the receptor: Gαs plus the βγ pair. Resting: α carries GDP and sits with βγ. When the receptor is activated, α swaps GDP for GTP; α·GTP separates from βγ and stimulates adenylyl cyclase until its own GTPase turns GTP back to GDP and α rejoins βγ. βγ has effectors of its own, not drawn.">${bgGroup(c, 1 + i)}${alphaGroup(c, 2 + i)}</g>`,
+    `<path class="dr-track" d="M${c.acx} ${AC_CY + 32} V${c.pka[1] - 24}"/><path class="dr-rail-head dr-track-head" d="M${c.acx} ${c.pka[1] - 22}l-4.5 -9h9z"/>`,
+    `<g id="${c.key}-cAMPs"></g>`,
+    `<g class="hot" id="${c.key}-pka" tabindex="0" data-info="Protein kinase A (PKA): two regulatory (R) and two catalytic (C) subunits. cAMP binds R, which frees the C subunits to phosphorylate their targets (drawn: C swings outward). ${i === 0 ? "In heart muscle the targets include the L-type calcium channel, so more calcium enters with each beat, which raises rate and force." : "In airway smooth muscle PKA phosphorylation leads to relaxation of the muscle."} In anchored complexes the C subunits may stay near R, so this is a simplification.">
+<g id="${c.key}-c1" class="dr-pkac" transform="translate(${c.pka[0] - 46} ${c.pka[1]})">${blobSvg(pkaC(i * 2))}<text class="dr-prot" x="0" y="4" text-anchor="middle">C</text></g>
+<g id="${c.key}-c2" class="dr-pkac" transform="translate(${c.pka[0] + 46} ${c.pka[1]})">${blobSvg(pkaC(i * 2 + 1))}<text class="dr-prot" x="0" y="4" text-anchor="middle">C</text></g>
+<g transform="translate(${c.pka[0]} ${c.pka[1]})">${blobSvg(pkaR)}<text class="dr-prot" x="0" y="4" text-anchor="middle">R</text></g></g>`,
+    `<text id="${c.key}-out" class="dr-out" x="${c.pka[0]}" y="600" text-anchor="middle">${c.out}</text>`,
+    `<g id="${c.key}-bound"><circle id="${c.key}-da" class="dr-da" r="5"/></g>`,
+    `<g class="hot dr-block" id="${c.key}-block" tabindex="0" data-info="A beta-blocker molecule (generic teaching symbol, not a named drug's shape) sitting in the receptor's binding pocket. It occupies the pocket without activating the receptor, so noradrenaline and adrenaline cannot bind where it sits. The block is competitive: a lot of agonist can partly outcompete it. The brightness of the symbol shows how many receptors it holds.">
+<path class="dr-block-hex" d="${hex(c.cx, 298, 8.5)}"/><path class="dr-block-x" d="M${c.cx - 3.5} 294.5L${c.cx + 3.5} 301.5M${c.cx + 3.5} 294.5L${c.cx - 3.5} 301.5"/></g>`,
+    `<text id="${c.key}-step" class="dr-step" x="${(c.cx + c.acx) / 2}" y="424" text-anchor="middle"></text>`,
+    `<text class="dr-title dr-green" x="${(c.cx + c.acx) / 2}" y="462" text-anchor="middle">${c.name} · ${c.organ}</text><text class="dr-label" x="${(c.cx + c.acx) / 2}" y="481" text-anchor="middle">Gαs · stimulates AC · cAMP ↑</text>`,
+  ].join("");
+};
+
+const body = [
+  `<defs>${lipid}</defs>`,
+  `<ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/>`,
+  `<g class="hot" tabindex="0" data-info="Sympathetic nerve terminal (a varicosity). Noradrenaline is packed into vesicles and released by exocytosis; most is taken back up by the noradrenaline transporter (not drawn). Adrenaline from the adrenal medulla reaches the same receptors through the blood.">${blobSvg(terminalBlob)}${membraneSvg(terminalMembrane)}</g>`,
+  `<text class="dr-label dr-name" x="480" y="50" text-anchor="middle">sympathetic nerve terminal</text>`,
+  ...vesicles.map((v, i) => {
+    const dots = [[-6, -4], [5, -6], [-1, 3], [7, 4], [-8, 6]].map(([a, b]) => `<circle class="dr-vdot" cx="${a}" cy="${b}" r="2.1"/>`).join("");
+    const dock = i === 1 || i === 3;
+    return `<g class="hot dr-ves" ${dock ? `id="ves-${i === 1 ? 0 : 1}"` : ""} tabindex="0" data-info="Synaptic vesicle holding noradrenaline (dots). Docked at the membrane, it fuses and releases noradrenaline. Drawn larger than life with an arbitrary number of dots." transform="translate(${v.x} ${v.y})">${blobSvg(v.blob)}${dots}</g>`;
+  }).join(""),
+  colSvg(COLS[0], 0), colSvg(COLS[1], 1),
+  `<g id="cleft"></g>`,
+  `<g id="puffs"></g>`,
+  noradrenaline(),
+  label("vesicle", [758, 114], [VES[5][0] + 14, VES[5][1] - 8], "start"),
+  label("membrane", [38, 284], [58, MEM.y0 + 6], "start"),
+  `<text class="dr-label dr-muted" x="${COLS[0].acx + 14}" y="424" text-anchor="start">ATP → cAMP</text>`,
+  `<text class="dr-label dr-muted" x="${COLS[1].acx + 14}" y="424" text-anchor="start">ATP → cAMP</text>`,
+  `<g class="dr-key"><circle class="dr-da" cx="752" cy="178" r="5"/><text class="dr-label" x="768" y="182">noradrenaline / adrenaline</text>
+<g transform="translate(752 204)">${chip("k-gdp", "GDP", "dr-gdp dr-on")}</g><text class="dr-label" x="776" y="208">on α: resting</text>
+<g transform="translate(752 228)">${chip("k-gtp", "GTP", "dr-gtp dr-on")}</g><text class="dr-label" x="776" y="232">on α: active</text>
+<path class="dr-block-hex" d="${hex(752, 252, 7)}" style="opacity:1"/><text class="dr-label" x="768" y="256">beta-blocker (generic)</text></g>`,
+].join("");
+
+const svg = figureSvg({
+  width: WIDTH,
+  height: HEIGHT,
+  label: "Schematic of a sympathetic nerve terminal releasing noradrenaline onto two cells: a cardiac myocyte with beta-1 receptors and an airway smooth muscle cell with beta-2 receptors. Each receptor couples to Gs, which stimulates adenylyl cyclase, raises cAMP and activates PKA. A beta-blocker, non-selective or beta-1 selective, occupies the receptor pocket and reduces the response.",
+  body,
+  className: "dr-fig",
+});
+
+const framed = plateHtml({
+  fig: "Fig 1",
+  title: "Beta-blockers at β1 and β2 receptors",
+  hint: "hover or focus a part · space: pause",
+  readout: model(1, 0).readout,
+  caption: "Schematic, not to scale. A sympathetic nerve terminal and two target cells drawn side by side to compare receptor types. Activation levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+  body: `<div class="dr-svg">${svg}</div>`,
+});
+
+const controls = `
+<div class="dr-controls">
+  <label class="dr-range"><span>Sympathetic drive</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="stress or exercise"><span class="dr-ticks"><i>rest</i><i>stress</i><i>high</i></span></label>
+  <label class="dr-range"><span>Beta-blocker (generic class)</span><select id="drug"><option value="0">none</option><option value="1">non-selective (propranolol type)</option><option value="2">β1-selective (metoprolol type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p>`;
+
+const sources = `<footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Beta-blockers and selectivity (well established).</strong> Beta-blockers are competitive antagonists at beta-adrenoceptors. Non-selective agents such as propranolol block both beta-1 and beta-2 receptors; cardioselective agents such as metoprolol act mainly on beta-1 receptors, which sit mainly in the heart, whereas beta-2 receptors are spread across many organs and relax smooth muscle. The negative chronotropic and inotropic effects lower the heart's oxygen demand (<a href="https://www.ncbi.nlm.nih.gov/books/NBK532906/">Beta Blockers, StatPearls</a>).</li>
+<li><strong>Selectivity is relative, not absolute.</strong> In binding studies on human receptors expressed in one cell line, clinically used antagonists ranged from modest beta-1 selectivity to modest beta-2 selectivity and most showed little selectivity, so “beta-1 selective” describes a preference that can be lost at higher exposure (<a href="https://pubmed.ncbi.nlm.nih.gov/15655528/">Baker 2005, Br J Pharmacol</a>). The figure therefore leaves a small residual block of beta-2 under the beta-1 selective setting and shows no affinity numbers.</li>
+<li><strong>Receptor and G protein.</strong> Beta-adrenoceptors are seven-transmembrane G protein-coupled receptors; the beta-2 and beta-1 receptor structures were among the first solved for ligand-activated GPCRs (<a href="https://doi.org/10.1038/nature08144">Rosenbaum, Rasmussen &amp; Kobilka 2009, Nature</a>). Activation makes Gαs swap GDP for GTP, Gαs·GTP stimulates adenylyl cyclase, and the GTPase of Gα ends the signal.</li>
+<li><strong>Heart downstream.</strong> Sympathetic stimulation raises cardiac L-type calcium current through beta-adrenergic signalling, cAMP and PKA phosphorylation of the channel; calcium entry triggers release from the sarcoplasmic reticulum (<a href="https://doi.org/10.1038/415198a">Bers 2002, Nature</a>; PKA raises the open probability of the channel, Ginsburg &amp; Bers 2004).</li>
+<li><strong>Molecule.</strong> Noradrenaline (norepinephrine), 4-(2-amino-1-hydroxyethyl)benzene-1,2-diol, C8H11NO3 (<a href="https://pubchem.ncbi.nlm.nih.gov/compound/439260">PubChem CID 439260</a>).</li>
+</ul>
+<p><strong>What was simplified.</strong> Only beta-1 in the heart and beta-2 in the airway are drawn. Beta-1 receptors also sit in the kidney and beta-2 receptors also in the heart, vessels, liver and muscle; beta-3 receptors, intrinsic sympathomimetic activity, vasodilating beta-blockers (carvedilol, labetalol), inverse agonism, beta-arrestin signalling, phosphodiesterases, Gi coupling of beta-2 in the heart, receptor desensitisation and the reflex rise in sympathetic drive are all left out. The two cells are drawn side by side only to compare receptor types. Activation levels, the size of the block and timing are illustrative; protein shapes are cartoons, not structures. “Non-selective” and “β1-selective” are drug classes shown as teaching toggles: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take a beta-blocker (for example in asthma or heart failure).</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer>`;
+
+const script = `
+const model = ${model.toString()};
+const AGONIST = ${JSON.stringify(AGONIST)};
+const BLOCK = ${JSON.stringify(BLOCK)};
+const DATA = ${JSON.stringify({ cols: COLS.map((c) => ({ key: c.key, cx: c.cx, acx: c.acx, home: c.home, dock: c.dock, pka: c.pka })), sites: SITES, ves: [VES[1], VES[3]] })};
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level");
+const drugBox = document.getElementById("drug");
+const pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info");
+const statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const NAMES = ["rest", "stress or exercise", "high sympathetic drive"];
+const DRUGS = ["no beta-blocker", "non-selective beta-blocker", "beta-1 selective beta-blocker"];
+const T = 9000;
+const lvl = (v) => (v < 0.2 ? "baseline" : v < 0.6 ? "modest" : "strong");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const ease = (u) => { u = clamp(u); return u * u * (3 - 2 * u); };
+const seg = (p, a, b) => clamp((p - a) / (b - a));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+const lerp = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
+const tr = (el, p) => el.setAttribute("transform", "translate(" + p[0].toFixed(1) + " " + p[1].toFixed(1) + ")");
+
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 0.45 * T : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 === "1" || d0 === "2") { drug = +d0; drugBox.value = d0; }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", NAMES[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the toggle below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = model(level, drug);
+const C = DATA.cols.map((d, i) => ({ d, i, alpha: $(d.key + "-alpha"), gdp: $(d.key + "-gdp"), gtp: $(d.key + "-gtp"), da: $(d.key + "-da"), rec: $(d.key + "-rec"), step: $(d.key + "-step"),
+  block: $(d.key + "-block"), plus: $(d.key + "-plus"), ac: $(d.key + "-ac"), c1: $(d.key + "-c1"), c2: $(d.key + "-c2"), out: $(d.key + "-out"), pool: $(d.key + "-cAMPs"),
+  off: i * 0.23, seed: i * 0.37, text: "", s: 0, camp: 0, pka: 0, bl: 0 }));
+const NC = 10, NP = 12;
+const pools = { cleft: $("cleft"), puffs: $("puffs") };
+const cleft = Array.from({ length: NC }, () => { const g = mk("g", { class: "dr-particle" }, pools.cleft); mk("circle", { class: "dr-p-halo", r: 8 }, g); mk("circle", { class: "dr-da", r: 4.6 }, g); return { g, a: 0 }; });
+C.forEach((c) => { c.camps = Array.from({ length: NP }, () => { const g = mk("g", { class: "dr-particle" }, c.pool); mk("circle", { class: "dr-camp", r: 4.4 }, g); mk("circle", { class: "dr-camp-dot", r: 1.5 }, g); return { g, a: 0 }; }); });
+const puffs = DATA.sites.map(() => Array.from({ length: 5 }, () => mk("circle", { class: "dr-da", r: 2.6 }, pools.puffs)));
+const vesEl = [$("ves-0"), $("ves-1")];
+const STEPS = ["1 · agonist binds the receptor", "2 · α swaps GDP for GTP", "3 · α·GTP leaves βγ, goes to AC", "4 · α·GTP stimulates AC", "5 · GTP → GDP, α heads back", "6 · α·GDP rejoins βγ"];
+
+function cycle(c) {
+  const x = sim / T + c.off, n = Math.floor(x), p = x - n;
+  const act = c.i === 0 ? M.act1 : M.act2;
+  const active = frac(n * 0.618034 + c.seed) < act - 0.0001 || (!playing && sim === 0.45 * T && act > 0.02);
+  return { p, active };
+}
+function drawRec(c) {
+  const { p, active } = cycle(c), d = c.d, pocket = [d.cx, 296], side = c.i === 0 ? -16 : 16;
+  let step = -1, alphaPos = d.home, gdp = 1, gtp = 0, da = 0, daPos = pocket, on = 0;
+  if (active) {
+    if (p < 0.15) { step = 0; daPos = lerp([d.cx + side, 246], pocket, ease(p / 0.15)); da = seg(p, 0, 0.04); on = ease(p / 0.15); }
+    else if (p < 0.3) { step = 1; da = 1; on = 1; gdp = 1 - ease(seg(p, 0.15, 0.22)); gtp = ease(seg(p, 0.22, 0.3)); }
+    else if (p < 0.55) { step = 2; da = 1; on = 1; gdp = 0; gtp = 1; alphaPos = lerp(d.home, d.dock, ease(seg(p, 0.3, 0.55))); }
+    else if (p < 0.72) { step = 3; da = 1 - ease(seg(p, 0.58, 0.7)); daPos = lerp(pocket, [d.cx + side, 246], ease(seg(p, 0.58, 0.7))); on = 1 - ease(seg(p, 0.6, 0.72)); gdp = 0; gtp = 1; alphaPos = d.dock; }
+    else if (p < 0.92) { step = 4; gdp = ease(seg(p, 0.72, 0.76)); gtp = 1 - gdp; alphaPos = lerp(d.dock, d.home, ease(seg(p, 0.74, 0.92))); }
+    else { step = 5; gdp = 1; }
+  } else if (c.bl > 0.3 && p > 0.05 && p < 0.4) {
+    const u = seg(p, 0.05, 0.4), tri = Math.sin(u * Math.PI);
+    daPos = [d.cx + 14 * u - 6, 246 + 34 * tri]; da = tri > 0.04 ? 0.9 : 0;
+  }
+  tr(c.alpha, alphaPos);
+  c.gdp.style.opacity = gdp.toFixed(2); c.gtp.style.opacity = gtp.toFixed(2);
+  c.gdp.setAttribute("transform", "translate(0 " + ((1 - gdp) * 9).toFixed(1) + ")");
+  c.gtp.setAttribute("transform", "translate(0 " + ((1 - gtp) * 9).toFixed(1) + ")");
+  tr(c.da, daPos); c.da.style.opacity = da.toFixed(2);
+  c.rec.style.setProperty("--on", on.toFixed(2));
+  const act = c.i === 0 ? M.act1 : M.act2;
+  let text = active ? STEPS[step] : (c.bl > 0.3 ? "pocket held by the blocker" : act < 0.2 ? "waiting for the agonist" : "waiting for the next binding");
+  if (text !== c.text) { c.text = text; c.step.textContent = text; }
+}
+
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 700);
+  C.forEach((c) => {
+    const act = c.i === 0 ? M.act1 : M.act2, bl = c.i === 0 ? M.b1 : M.b2;
+    c.s += (act - c.s) * k; c.camp += (act - c.camp) * k;
+    c.bl += (bl - c.bl) * k;
+    drawRec(c);
+    c.plus.style.opacity = (0.22 + 0.78 * clamp(c.s / 0.85)).toFixed(2);
+    c.ac.style.setProperty("--s1", c.s.toFixed(2));
+    const nCamp = Math.round(clamp(c.camp / 0.85) * NP);
+    c.camps.forEach((p, i) => {
+      p.a += ((i < nCamp ? 1 : 0) - p.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 500));
+      if (p.a < 0.02) { p.g.style.opacity = 0; return; }
+      const u = frac(sim / 4200 + i / NP);
+      tr(p.g, [c.d.acx + Math.sin(i * 2.3 + sim / 700) * 8 * (0.4 + u), 394 + 6 + (c.d.pka[1] - 26 - 394 - 6) * u]);
+      p.g.style.opacity = (p.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+    const on = c.i === 0 ? M.pka1 : M.pka2, tgt = on ? 1 : 0;
+    c.pkaS = (c.pkaS == null ? tgt : c.pkaS) + (tgt - (c.pkaS == null ? tgt : c.pkaS)) * k;
+    tr(c.c1, [c.d.pka[0] - 46 - 24 * c.pkaS, c.d.pka[1] + 4 * c.pkaS]);
+    tr(c.c2, [c.d.pka[0] + 46 + 24 * c.pkaS, c.d.pka[1] + 4 * c.pkaS]);
+    c.c1.style.setProperty("--on", c.pkaS.toFixed(2)); c.c2.style.setProperty("--on", c.pkaS.toFixed(2));
+    c.out.style.opacity = (0.3 + 0.7 * clamp(c.camp / 0.6)).toFixed(2);
+    c.block.style.opacity = (c.bl > 0.02 ? 0.35 + 0.65 * c.bl : 0).toFixed(2);
+  });
+  const nc = [3, 6, 10][level];
+  cleft.forEach((p, i) => {
+    p.a += ((i < nc ? 1 : 0) - p.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+    if (p.a < 0.02) { p.g.style.opacity = 0; return; }
+    const site = DATA.sites[i % 2], tgt = DATA.cols[Math.floor(i / 2) % 2].cx;
+    const u = frac(sim / 5200 + i * 0.173), wob = Math.sin(sim / 520 + i * 2.1) * 6;
+    const tx = tgt + 26 * Math.sin(i + 1) * 0.5;
+    tr(p.g, [site + (tx - site) * ease(u) + wob * (1 - u), 218 + 56 * u + Math.sin(u * 6 + i) * 5]);
+    p.g.style.opacity = (p.a * (u < 0.08 ? u / 0.08 : u > 0.88 ? (1 - u) / 0.12 : 1)).toFixed(2);
+  });
+  const period = [9000, 4600, 2400][level];
+  vesEl.forEach((v, s) => {
+    const x = (sim + s * period * 0.5) % period, dur = 1300, u = x < dur ? x / dur : -1;
+    const sq = u < 0 ? 0 : Math.sin(Math.PI * Math.min(1, u * 1.2));
+    v.setAttribute("transform", "translate(" + DATA.ves[s][0] + " " + (DATA.ves[s][1] + sq * 6).toFixed(1) + ") scale(" + (1 + 0.22 * sq).toFixed(3) + " " + (1 - 0.35 * sq).toFixed(3) + ")");
+    puffs[s].forEach((p, j) => {
+      if (u < 0.25) { p.style.opacity = 0; return; }
+      const w = (u - 0.25) / 0.75, a = (j - 2) * 0.55;
+      p.setAttribute("cx", (DATA.sites[s] + Math.sin(a) * 26 * w).toFixed(1)); p.setAttribute("cy", (214 + Math.cos(a) * 34 * w).toFixed(1));
+      p.style.opacity = (1 - w).toFixed(2);
+    });
+  });
+}
+
+function publish() {
+  M = model(level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = "Sympathetic drive: " + NAMES[level] + " · " + DRUGS[drug] + " · heart (β1) response " + lvl(M.act1) + " · airway (β2) response " + lvl(M.act2) + ". Qualitative, illustrative.";
+}
+
+function tick(now) {
+  frame = 0;
+  if (!playing || !visible) return;
+  const dt = Math.min(64, now - (last || now));
+  last = now; sim += dt;
+  draw(dt);
+  frame = requestAnimationFrame(tick);
+}
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", NAMES[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) {
+  playing = v;
+  pauseBtn.textContent = v ? "Pause motion" : "Play motion";
+  pauseBtn.setAttribute("aria-pressed", String(!v));
+  if (v) start(); else { stop(); still(); }
+}
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => {
+  if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return;
+  e.preventDefault(); setPlaying(!playing);
+});
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off);
+  el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish();
+still();
+start();
+`;
+
+const style = `
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+`;
+
+
+
+const html = pageHtml({
+  title: "Beta-blockers at β1 and β2 receptors",
+  theme: light ? "light" : "dark",
+  width: WIDTH + 40,
+  body: `<style>${BIO_CSS}${style}</style>${framed}${controls}${sources}`,
+  script,
+});
+const filename = light ? "beta-blocker-light.html" : "beta-blocker.html";
+writeFileSync(join(HERE, filename), html);
+console.log(`wrote ${filename}`);

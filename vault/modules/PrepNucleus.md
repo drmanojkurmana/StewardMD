@@ -1677,3 +1677,16 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   still goes the staged-CLI route (it needs an index entry).
 - **Keyboard bug class:** typing in a search box must never replace the input (iOS drops the keyboard). Fixed in the
   Clinical updates "Diseases this applies to" field and the Review desk Search; only the results list is patched.
+
+## Interactive figures (Anima kit) and the beta-blocker pilot (2026-10-16)
+- `fig-viewer.js` (`window.SMD_FIG.open({ src, title, from, query })`): full-screen sheet over anything, iframe of
+  `prep/figures/<name>.html` (dark build) or `<name>-light.html` (light), chosen by `body.dark`. z-index 2000 (above the Drugs
+  overlay at 1000). At least 760 px wide, so a phone scrolls sideways. Esc or the close button closes it.
+- `prep/figures/beta-blockers*.html` are built by `prep/figures/beta-blockers.build.mjs.txt` (copy it into an Anima checkout
+  `examples/beta-blocker/build.mjs`, https://github.com/Garinmckayl/anima, MIT, licence in `ANIMA-LICENSE.txt`). Query `?d=1|2`
+  presets the toggle (non-selective, beta-1 selective), `?name=` names the drug, `?l=0|2` the sympathetic drive.
+  Qualitative model only: no doses, no affinities.
+- Entry points: Drugs page (`api.js` `figCard`/`bbKind`: generic's first word against the beta-blocker lists, or a class
+  string that says beta-blocker) and a lesson step of `vis.kind "figure"` (`prep-lessons.js`, `phm-beta-blockers` step 5).
+- The pages and the new lesson step are AI-assisted content: they still need clinician review (Review Desk) before being called
+  reviewed. Test: `test/run-beta-figure-ui.mjs`.

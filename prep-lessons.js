@@ -460,29 +460,9 @@
       '<span class="pn-figgo-i" aria-hidden="true">' + ic("play") + '</span><span class="pn-figgo-t"><b>Open the interactive figure</b><small>' + escH(v.alt) + "</small></span></button>" +
       "<figcaption><span>" + escH(v.caption) + "</span></figcaption></figure>";
   }
-  var FIG = null;
-  function figClose() {
-    if (!FIG) return false;
-    try { FIG.el.parentNode && FIG.el.parentNode.removeChild(FIG.el); } catch (e) {}
-    var from = FIG.from; FIG = null;
-    try { if (from && from.focus) from.focus(); } catch (e) {}
-    return true;
-  }
   function figOpen(b) {
-    var src = str(b.getAttribute("data-src"));
-    if (!FIG_RE.test(src) || FIG) return;
-    var doc = G.document, base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, ""), dark = doc.body.classList.contains("dark");
-    var page = (base || "/") + (dark ? src : src.replace(/\.html$/, "-light.html"));
-    var el = doc.createElement("div");
-    el.className = "pn-fig-ov"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", str(b.getAttribute("data-alt")));
-    el.innerHTML = '<div class="pn-fig-top"><p>' + escH(b.getAttribute("data-alt")) + '</p><button type="button" class="pn-ib" data-act="l-figx" aria-label="Close the figure">' + ic("close") + '</button></div><div class="pn-fig-sc"><iframe class="pn-fig-fr" title="' + escH(b.getAttribute("data-alt")) + '" src="' + escH(page) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
-    var fr = el.querySelector("iframe");
-    fr.addEventListener("load", function () {
-      try { var h = fr.contentDocument.documentElement.scrollHeight; if (h > 200) fr.style.height = h + "px"; } catch (e) {}
-    });
-    (host && host.root && host.root() || doc.body).appendChild(el);
-    FIG = { el: el, from: b };
-    var x = el.querySelector("[data-act=l-figx]"); if (x && x.focus) x.focus();
+    if (!G.SMD_FIG) return;
+    G.SMD_FIG.open({ src: str(b.getAttribute("data-src")), title: str(b.getAttribute("data-alt")), from: b });
   }
   function visHtml(v, i) {
     if (!v) return "";
@@ -952,7 +932,6 @@
       if (zz && PV && typeof PV.open === "function") { try { PV.open({ src: imgSrc(zz.src), alt: zz.alt, caption: zz.caption, from: b }); return; } catch (e) {} }
       L.zoom = zz; if (L.zoom) { L.zret = b.getAttribute("data-z") ? '[data-act=l-zoom][data-z="' + b.getAttribute("data-z") + '"]' : "[data-act=l-zoom]"; draw(); } return; }
     if (a === "l-fig") return figOpen(b);
-    if (a === "l-figx") { figClose(); return; }
     if (a === "l-show" || a === "l-qc" || a === "l-marks" || a === "l-mark" || a === "l-flip" || a === "l-cmp") return ixAct(a, b);
     if (a === "l-zoom2") {
       if (Date.now() - Z.moved < 350) return;   // the click that ends a pinch or a pan is not a tap
@@ -968,7 +947,7 @@
   }
   /* back(): true when handled here (the zoomed image closes first). Leaving the reader stops the voice. */
   function back() {
-    if (FIG && figClose()) return true;
+    if (G.SMD_FIG && G.SMD_FIG.close()) return true;
     if (!host || !L.les) return false;
     if (L.zoom && host.stackTop() === L.view) { L.zoom = null; draw(L.zret || "[data-act=l-zoom]"); return true; }
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
