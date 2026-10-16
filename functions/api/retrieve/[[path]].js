@@ -16,18 +16,33 @@ const EMBED_URL = "https://aiplatform.googleapis.com/v1/publishers/google/models
 const DAY_CAP = 20000;                                  // hard ceiling on embedded questions per UTC day (spend guard)
 
 // One question -> one 768-d vector. Express-mode key in a header (never the URL). Null on any failure.
-export async function embedQuery(env, text) {
+// The express endpoint answers in about 1.5 s or stalls past 3 s (measured live, 2026-10-16), so the request is HEDGED:
+// a second call starts at 1 s and a third at 2 s if nothing has come back; the first good vector wins and the rest are
+// aborted. Worst case 3 calls of a ~20-word query per question, still a fraction of a cent. Hard deadline 6 s.
+const HEDGE_AT = [0, 1000, 2000], DEADLINE_MS = 6000;
+export async function embedQuery(env, text, info) {
   const key = String((env && env.VERTEX_API_KEY) || "").trim();
   if (!key) return null;
-  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 3000);
-  try {
-    const r = await fetch(EMBED_URL, { method: "POST", signal: ctl.signal, headers: { "x-goog-api-key": key, "Content-Type": "application/json" },
-      body: JSON.stringify({ instances: [{ content: text, task_type: "RETRIEVAL_QUERY" }], parameters: { outputDimensionality: 768 } }) });
-    if (!r.ok) return null;
+  const t0 = Date.now(), ctls = [];
+  const body = JSON.stringify({ instances: [{ content: text, task_type: "RETRIEVAL_QUERY" }], parameters: { outputDimensionality: 768 } });
+  const one = async (ctl) => {
+    const r = await fetch(EMBED_URL, { method: "POST", signal: ctl.signal, headers: { "x-goog-api-key": key, "Content-Type": "application/json" }, body });
+    if (!r.ok) throw new Error("http " + r.status);
     const j = await r.json();
     const v = j && j.predictions && j.predictions[0] && j.predictions[0].embeddings && j.predictions[0].embeddings.values;
-    return Array.isArray(v) && v.length === 768 ? v : null;
-  } catch (e) { return null; } finally { clearTimeout(t); }
+    if (!(Array.isArray(v) && v.length === 768)) throw new Error("bad vector");
+    return v;
+  };
+  return await new Promise((resolve) => {
+    let settled = false, failed = 0, timers = [];
+    const finish = (v) => { if (settled) return; settled = true; timers.forEach(clearTimeout); ctls.forEach((c) => { try { c.abort(); } catch (e) {} }); if (info) { info.ms = Date.now() - t0; info.calls = ctls.length; } resolve(v); };
+    HEDGE_AT.forEach((at) => timers.push(setTimeout(() => {
+      if (settled) return;
+      const ctl = new AbortController(); ctls.push(ctl);
+      one(ctl).then(finish, () => { if (++failed >= HEDGE_AT.length) finish(null); });
+    }, at)));
+    timers.push(setTimeout(() => finish(null), DEADLINE_MS));
+  });
 }
 
 // Daily spend guard: a KV counter per UTC day. Over the cap (or KV unavailable) means no vector arm, keyword only.
@@ -63,7 +78,7 @@ export async function onRequest(context) {
     const k = Math.max(1, Math.min(50, Number(body && body.k) || 12));
 
     if (!(await underCap(env))) return json({ matches: [] });
-    const vec = await embedQuery(env, query);
+    const info = {}, vec = await embedQuery(env, query, info);
     if (!vec) return json({ matches: [] });
 
     const res = await env.KB_VECTORIZE.query(vec, { topK: k, returnMetadata: "all" });
@@ -73,7 +88,7 @@ export async function onRequest(context) {
       section: (m.metadata && m.metadata.section) || null,
       score: typeof m.score === "number" ? m.score : null
     })).filter((m) => m.diseaseId);
-    return json({ matches: matches });
+    const out = json({ matches: matches }); out.headers.set("Server-Timing", "embed;dur=" + (info.ms || 0) + ";desc=\"calls " + (info.calls || 0) + "\""); return out;
   } catch (e) {
     return json({ matches: [] });                                   // never break retrieval
   }
