@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-malformation-avm",
+  "subject": "radiology",
+  "title": "AVM embolisation: nidus and nerves",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Shunts bypass capillary beds. **Arteriovenous malformations** tangle arteries into veins without capillaries, thrilling with bruits and warmth. **Schobinger staging** grades quiescence through expansion to ulceration and failure. **MRI with flow voids** maps extent without radiation. **High-output heart failure** follows large shunts stealing cardiac output.",
+      "say": "Shunts bypass capillary beds. Malformations tangle arteries into veins without capillaries, thrilling with warmth. Staging grades quiescence through expansion to ulceration. MRI maps extent without radiation. Large shunts steal cardiac output causing heart failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Feel the thrill"
+          },
+          {
+            "id": "b",
+            "label": "Stage the lesion"
+          },
+          {
+            "id": "c",
+            "label": "Map with MRI"
+          },
+          {
+            "id": "d",
+            "label": "Plan the attack"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Liquids cast niduses best. **Ethanol with copolymer liquids** penetrate deep nidus channels that coils cannot fill. **Transarterial with direct puncture** combines routes for complex deep tangles. **Balloon protection** guards normal branches during careful liquid pushes. **Compartment syndrome** threatens tight spaces after post-treatment swelling.",
+      "say": "Liquids cast niduses best. Ethanol with copolymers penetrate channels that coils cannot fill. Arterial with direct puncture combines for deep tangles. Balloons guard normal branches during pushes. Tight spaces swell dangerously after treatment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Route",
+          "Use"
+        ],
+        "rows": [
+          [
+            "Transarterial",
+            "Deep feeders"
+          ],
+          [
+            "Direct puncture",
+            "Superficial nidus"
+          ],
+          [
+            "Combined",
+            "Complex tangles"
+          ],
+          [
+            "Balloon guard",
+            "Normal branches"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Swelling and nerves suffer most after liquids. **Post-embolisation swelling** peaks at two days needing elevation with steroids. **Nerve injury** from liquids near neural paths needs careful mapping and dilution. **Skin necrosis** from superficial spill needs prolonged wound care. **Pulmonary embolism** from escaped liquid droplets needs close chest watching.",
+      "say": "Swelling and nerves suffer most. Post-treatment swelling peaks at days needing elevation. Liquids near nerves need mapping and dilution. Superficial spills necrose skin needing wound care. Escaped liquid threatens lungs needing chest watching.",
+      "vis": null
+    },
+    {
+      "tx": "Cure means silent nidus at last. **Angiographic nidus obliteration** defines technical success with no early draining veins. **Staged sessions** shrink giant tangles stepwise over many months. **Surgery after downsizing** removes shrunken remnants cleanly with clear margins. **Lifelong surveillance** catches silent recanalisation early.",
+      "say": "Cure means silent nidus. Vanished nidus blush defines success with no early veins. Giant tangles shrink stepwise over sessions. Surgery removes shrunken remnants cleanly. Lifelong scans catch recanalisation early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Obliterate nidus"
+          },
+          {
+            "id": "b",
+            "label": "Stage giant tangles"
+          },
+          {
+            "id": "c",
+            "label": "Resect remnants"
+          },
+          {
+            "id": "d",
+            "label": "Survey lifelong"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-526",
+    "maikir2-527",
+    "maikir2-528",
+    "maikir2-529",
+    "maikir2-530",
+    "maikir2-531",
+    "maikir2-532",
+    "maikir2-533",
+    "maikir2-534",
+    "maikir2-535",
+    "maikir2-536",
+    "maikir2-537",
+    "maikir2-538",
+    "maikir2-539",
+    "maikir2-540",
+    "maikir2-541",
+    "maikir2-542",
+    "maikir2-543",
+    "maikir2-544",
+    "maikir2-545",
+    "maikir2-546",
+    "maikir2-547",
+    "maikir2-548",
+    "maikir2-549",
+    "maikir2-550"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-drainage-ptbd",
+  "subject": "radiology",
+  "title": "PTBD technique and biliary stenting",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Blocked bile needs an outside lane. **Percutaneous transhepatic biliary drainage** punctures peripheral ducts under ultrasound with fluoroscopic wire guidance, rescuing failed ERCP and hilar blocks. **Right-sided access** suits distal blocks while left-sided suits hilar tumours. **Cholangitis with Charcot features** makes drainage urgent within hours. **Coagulopathy correction** precedes liver punctures since tracts bleed freely.",
+      "say": "Blocked bile needs an outside lane. Biliary drainage punctures peripheral ducts under ultrasound, rescuing failed endoscopy and hilar blocks. Right-sided access suits distal blocks while left suits hilar tumours. Fever with pain and jaundice makes drainage urgent. Clotting correction precedes liver punctures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Puncture periphery"
+          },
+          {
+            "id": "b",
+            "label": "Cross the block"
+          },
+          {
+            "id": "c",
+            "label": "Drain externally"
+          },
+          {
+            "id": "d",
+            "label": "Plan stenting"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Internal-external tubes bridge to stents. **Internal-external catheters** drain bags outside while side-holes stent past blocks into duodenum. **Capping trials** clamp bags testing internal flow before tube removal. **Cholangiography through tubes** maps strictures for stent sizing. **Metal versus plastic stents** follows malignant durability against benign remodelling needs.",
+      "say": "Tubes bridge to stents. Internal-external catheters drain outside while stenting past blocks into gut. Capping trials clamp bags testing internal flow. Tube cholangiograms map strictures for sizing. Metal suits malignant durability while benign remodels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Urgent sepsis",
+            "External drain"
+          ],
+          [
+            "Settled",
+            "Internal-external"
+          ],
+          [
+            "Tested",
+            "Capping trial"
+          ],
+          [
+            "Definitive",
+            "Metal or plastic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sepsis and bleeding stalk every puncture. **Post-PTBD cholangitis** flares despite drainage needing blood cultures with antibiotic escalation. **Haemobilia with melaena** usually settles while arterial pseudoaneurysms need coils. **Catheter dislodgement** declares with lost output and pain needing urgent replacement before tracts close. **Pleural transgression** from high sticks causes effusions needing drainage.",
+      "say": "Sepsis and bleeding stalk every puncture. Cholangitis flares need cultures with stronger antibiotics. Bloody bile usually settles while arterial sacs need coils. Dislodged tubes declare with lost output needing urgent replacement. High sticks breach pleura causing effusions.",
+      "vis": null
+    },
+    {
+      "tx": "Maturation decides tube freedom. **Tract maturation** over weeks lets exchanges and removals happen without bile leaks. **Stent occlusion** returns with jaundice needing exchange through mature tracts. **Benign remodelling** with prolonged stenting reshapes postoperative strictures. **Follow-up cholangiograms** schedule exchanges before sludge blocks metal.",
+      "say": "Maturation decides tube freedom. Weeks of tract healing allow safe exchanges and removals. Occluded stents return with jaundice needing exchange through mature tracts. Prolonged stents remodel benign strictures. Scheduled cholangiograms exchange before sludge blocks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Mature the tract"
+          },
+          {
+            "id": "b",
+            "label": "Exchange on schedule"
+          },
+          {
+            "id": "c",
+            "label": "Remodel benign"
+          },
+          {
+            "id": "d",
+            "label": "Remove when free"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-401",
+    "maikir2-402",
+    "maikir2-403",
+    "maikir2-404",
+    "maikir2-405",
+    "maikir2-406",
+    "maikir2-407",
+    "maikir2-408",
+    "maikir2-409",
+    "maikir2-410",
+    "maikir2-411",
+    "maikir2-412",
+    "maikir2-413",
+    "maikir2-414",
+    "maikir2-415",
+    "maikir2-416",
+    "maikir2-417",
+    "maikir2-418",
+    "maikir2-419",
+    "maikir2-420",
+    "maikir2-421",
+    "maikir2-422",
+    "maikir2-423",
+    "maikir2-424",
+    "maikir2-425"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

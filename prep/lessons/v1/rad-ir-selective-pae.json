@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-selective-pae",
+  "subject": "radiology",
+  "title": "Prostate and emerging selective embolisation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Prostates shrink without surgery. **Prostatic artery embolisation** eases urinary obstruction where glands shrink over months. **Selection favours** large glands with failed drugs and surgical risk. **Bladder and rectal mapping** guards anastomoses before grains fly. **Symptom scores** with flow rates track relief objectively.",
+      "say": "Prostates shrink without surgery. Prostatic embolisation eases obstruction where glands shrink over months. Selection favours large glands with failed drugs and surgical risk. Bladder with rectal mapping guards neighbours. Symptom scores with flow track relief.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Score the symptoms"
+          },
+          {
+            "id": "b",
+            "label": "Map the neighbours"
+          },
+          {
+            "id": "c",
+            "label": "Embolise the gland"
+          },
+          {
+            "id": "d",
+            "label": "Track the flow"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tiny tortuous feeders test operator skills daily. **Prostatic arteries** twist off internal iliacs varying wildly between patients. **Cone-beam CT** confirms gland-only perfusion before embolising. **Non-target coil protection** blocks vesical and rectal shunts first. **Bilateral closure** beats unilateral where collaterals persist.",
+      "say": "Tiny tortuous feeders test skills. Prostatic arteries twist off pelvic trunks varying wildly. Cone-beam scans confirm gland-only flow before grains. Coils block bladder and rectal shunts first. Bilateral closure beats unilateral where collaterals persist.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Move",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "Cone-beam CT",
+            "Confirm gland"
+          ],
+          [
+            "Coil shunts",
+            "Guard neighbours"
+          ],
+          [
+            "Bilateral",
+            "Complete kill"
+          ],
+          [
+            "Small grains",
+            "Deep penetration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Burning and blood alarm early. **Post-PAE dysuria with haematuria** settles with fluids and time. **Rectal ischaemia** from stray grains declares with pain and bleeding needing surgery. **Bladder wall injury** shows with haematuria and pain needing catheter rest. **Urinary retention** after swelling needs temporary catheterisation.",
+      "say": "Burning and blood alarm early. Post-procedure dysuria with bloody urine settles with fluids. Rectal stray grains declare with pain needing surgery. Bladder injury shows with bloody pain needing catheter rest. Swelling retention needs temporary catheters.",
+      "vis": null
+    },
+    {
+      "tx": "Relief builds slowly over months. **Gland shrinkage** peaks at months with flows improving steadily. **Drug weaning** follows relief where tablets stop stepwise. **Retreatment for regrowth** repeats grains or refers to surgery. **Sexual function** counselling tracks erections with ejaculation changes honestly.",
+      "say": "Relief builds over months. Glands shrink over months with flows improving. Tablet weaning follows relief stepwise. Regrowth repeats grains or refers surgery. Sexual counselling tracks erections with ejaculation honestly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Shrink over months"
+          },
+          {
+            "id": "b",
+            "label": "Wean the tablets"
+          },
+          {
+            "id": "c",
+            "label": "Repeat regrowth"
+          },
+          {
+            "id": "d",
+            "label": "Counsel sex honestly"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-601",
+    "maikir2-602",
+    "maikir2-603",
+    "maikir2-604",
+    "maikir2-605",
+    "maikir2-606",
+    "maikir2-607",
+    "maikir2-608",
+    "maikir2-609",
+    "maikir2-610",
+    "maikir2-611",
+    "maikir2-612",
+    "maikir2-613",
+    "maikir2-614",
+    "maikir2-615",
+    "maikir2-616",
+    "maikir2-617",
+    "maikir2-618",
+    "maikir2-619",
+    "maikir2-620",
+    "maikir2-621",
+    "maikir2-622",
+    "maikir2-623",
+    "maikir2-624",
+    "maikir2-625"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

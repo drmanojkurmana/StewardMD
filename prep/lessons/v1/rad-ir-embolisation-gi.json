@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-embolisation-gi",
+  "subject": "radiology",
+  "title": "Gastrointestinal bleeding embolisation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Maps find bleeders before catheters move. **CT angiography** with arterial-phase contrast spots active extravasation above roughly half a millilitre per minute, guiding the catheter to the right territory. **Catheter angiography** then confirms with selective blushes, pseudoaneurysms or abrupt cutoffs. **Negative maps** with ongoing bleeding still merit empiric embolisation of the likely bed. **Provocative heparin** is avoided outside trials, since stirring clots risks losing control.",
+      "say": "Maps find bleeders before catheters move. CT angiography spots active leaks above trace rates and guides catheters to the right territory. Selective angiography confirms blushes and cutoffs. Negative maps with ongoing bleeding still merit empiric treatment of the likely bed. Clot-stirring provocation stays experimental.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map with CT"
+          },
+          {
+            "id": "b",
+            "label": "Confirm selectively"
+          },
+          {
+            "id": "c",
+            "label": "Treat the blush"
+          },
+          {
+            "id": "d",
+            "label": "Cover empiric beds"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gut arteries tolerate sacrifice by design. **Gastroduodenal sandwich** coils front and back because pancreaticoduodenal arcades refill single-sided blocks. **Left gastric embolisation** calms diffuse fundal oozing where endoscopy fails repeatedly. **Mesenteric branches** demand superselective tips since vasa recta are end arteries. **Empiric embolisation** of the gastroduodenal or left gastric without a seen blush suits unstable re-bleeders after failed endoscopy.",
+      "say": "Gut arteries tolerate sacrifice by design. Gastroduodenal coils trap both ends because arcades refill single blocks. Left gastric work calms diffuse fundal oozing. Mesenteric branches need superselective tips as end arteries. Empiric treatment without a seen blush suits unstable re-bleeders.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bed",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Gastroduodenal",
+            "Sandwich coils"
+          ],
+          [
+            "Fundal ooze",
+            "Left gastric"
+          ],
+          [
+            "Mesenteric",
+            "Superselective"
+          ],
+          [
+            "No blush",
+            "Empiric"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bowel ischaemia is the feared price. **Vasa recta embolisation** too proximal infarcts long bowel segments, so tips advance beyond marginal arcades. **Post-procedure pain** with rising lactate and peritonism signals infarction needing surgical review. **Coil over particle** choice favours coils in bowel beds where particles shower too widely. **Stricture months later** marks healed ischaemia and needs endoscopic watching.",
+      "say": "Bowel ischaemia is the feared price. Proximal blocks infarct long segments, so tips advance beyond arcades. Pain with rising lactate and peritonism signals infarction needing surgeons. Coils beat particles in bowel beds where grains shower widely. Late stricture marks healed ischaemia needing endoscopic watch.",
+      "vis": null
+    },
+    {
+      "tx": "Re-bleeds follow a protocol, not panic. **Repeat angiography** first re-maps since new feeders often replace sealed ones. **Surgical backup** stands warned for ischaemic or uncontrollable cases rather than called late. **Acid suppression and transfusion** continue alongside radiology, never paused for the procedure. **Mortality audits** review every gut embolisation death for mapping or selection lessons under CIRSE quality guidance.",
+      "say": "Re-bleeds follow protocol not panic. Repeat angiography re-maps since new feeders replace sealed ones. Surgeons stand warned for ischaemic cases rather than called late. Acid suppression with transfusion continues alongside radiology. Death audits review mapping and selection lessons.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Re-map first"
+          },
+          {
+            "id": "b",
+            "label": "Warn surgeons early"
+          },
+          {
+            "id": "c",
+            "label": "Continue support"
+          },
+          {
+            "id": "d",
+            "label": "Audit every death"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-101",
+    "maikir2-102",
+    "maikir2-103",
+    "maikir2-104",
+    "maikir2-105",
+    "maikir2-106",
+    "maikir2-107",
+    "maikir2-108",
+    "maikir2-109",
+    "maikir2-110",
+    "maikir2-111",
+    "maikir2-112",
+    "maikir2-113",
+    "maikir2-114",
+    "maikir2-115",
+    "maikir2-116",
+    "maikir2-117",
+    "maikir2-118",
+    "maikir2-119",
+    "maikir2-120",
+    "maikir2-121",
+    "maikir2-122",
+    "maikir2-123",
+    "maikir2-124",
+    "maikir2-125"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

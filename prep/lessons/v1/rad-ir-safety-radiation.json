@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-safety-radiation",
+  "subject": "radiology",
+  "title": "Radiation safety: ALARA in practice",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Dose accumulates silently. **ALARA principles** keep exposures as low as reasonably achievable with time, distance and shielding. **Dose-area product** logged per case tracks cumulative burden. **Pulsed fluoroscopy** with last-image-hold halves dose without losing guidance. **Collimation** narrows beams to regions of interest sparing surroundings.",
+      "say": "Dose accumulates silently. ALARA keeps exposures minimal with time, distance and shielding. Dose-area product logged per case tracks burden. Pulsed screening with last-image-hold halves dose. Collimation narrows beams sparing surroundings.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Time the beam"
+          },
+          {
+            "id": "b",
+            "label": "Pulse the screen"
+          },
+          {
+            "id": "c",
+            "label": "Collimate tightly"
+          },
+          {
+            "id": "d",
+            "label": "Log the dose"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Staff shield every case. **Lead aprons with thyroid collars** worn correctly guard torsos and glands. **Ceiling-suspended screens** with table skirts block scatter. **Dosimeter badges** worn at collar outside lead track exposure. **Pregnant operators** declare early for fetal dose planning with limits.",
+      "say": "Staff shield every case. Lead aprons with thyroid collars guard torsos. Ceiling screens with table skirts block scatter. Collar badges outside lead track exposure. Pregnant operators declare early for fetal planning.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Shield",
+          "Guards"
+        ],
+        "rows": [
+          [
+            "Apron",
+            "Torso"
+          ],
+          [
+            "Collar",
+            "Thyroid"
+          ],
+          [
+            "Screen",
+            "Eyes"
+          ],
+          [
+            "Badge",
+            "Tracks dose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients burn rarely but badly. **Skin dose watches** flag deterministic injury after long cases. **Hair loss with erythema** weeks later marks overexposure needing dermatology. **Lens cataracts** threaten operators without lead glasses. **Pregnancy screening** before pelvic work protects fetuses from accidental dose.",
+      "say": "Patients burn rarely but badly. Skin dose watches flag injury after long cases. Hair loss with redness weeks later marks overexposure. Operator lenses cataract without lead glasses. Pregnancy screening before pelvic work protects fetuses.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up tracks lifetime burden very carefully. **Dose registries** follow high-dose patients across all repeat work. **Informed consent** names radiation risks frankly before complex cases. **Audit with feedback** compares operators driving doses down. **New staff training** embeds ALARA from day one.",
+      "say": "Follow-up tracks lifetime burden. Dose registries follow high-dose patients across repeats. Consent names radiation risks frankly. Audits compare operators driving doses down. Training embeds ALARA from day one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Register high doses"
+          },
+          {
+            "id": "b",
+            "label": "Consent frankly"
+          },
+          {
+            "id": "c",
+            "label": "Audit operators"
+          },
+          {
+            "id": "d",
+            "label": "Train newcomers"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-701",
+    "maikir2-702",
+    "maikir2-703",
+    "maikir2-704",
+    "maikir2-705",
+    "maikir2-706",
+    "maikir2-707",
+    "maikir2-708",
+    "maikir2-709",
+    "maikir2-710",
+    "maikir2-711",
+    "maikir2-712",
+    "maikir2-713",
+    "maikir2-714",
+    "maikir2-715",
+    "maikir2-716",
+    "maikir2-717",
+    "maikir2-718",
+    "maikir2-719",
+    "maikir2-720",
+    "maikir2-721",
+    "maikir2-722",
+    "maikir2-723",
+    "maikir2-724",
+    "maikir2-725"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-tips-technique",
+  "subject": "radiology",
+  "title": "TIPS technique: puncture to patency",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Necks open the highway to livers. **Right jugular access** under ultrasound guides sheaths down the cava into **hepatic veins**, usually the right branch for its straight run. **Wedge venography** puffs contrast that outlines portal branches as a roadmap for puncture. **Colapinto needles** curve from hepatic vein toward portal bifurcation under biplane guidance. **Failed hepatic veins** from Budd-Chiari reroute through caudate or direct caval sticks.",
+      "say": "Necks open the highway to livers. Right jugular sheaths run down into hepatic veins, usually the right branch. Wedge contrast outlines portal branches as puncture maps. Curved needles pass from hepatic vein toward portal bifurcation. Blocked hepatic veins reroute through caudate or direct caval sticks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stick the jugular"
+          },
+          {
+            "id": "b",
+            "label": "Seat in hepatic vein"
+          },
+          {
+            "id": "c",
+            "label": "Map with wedge"
+          },
+          {
+            "id": "d",
+            "label": "Puncture to portal"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gradients decide dilatation endpoints. **Portosystemic gradient** measured before and after sets the target below **12 mmHg** per Baveno consensus, where bleeding and ascites ease. **Covered stent-grafts** line the parenchymal tract, cutting dysfunction against bare metal under CIRSE-aligned practice. **Balloon dilatation** opens tracts stepwise while oversized balloons tear capsules into bleeds. **Variceal embolisation alongside** coils bleeding coronaries that shunts alone may not still.",
+      "say": "Gradients decide endpoints. Pressure drops target below twelve millimetres of mercury where bleeding and ascites ease. Covered stent-grafts line tracts, resisting dysfunction better than bare metal. Stepwise balloon opening avoids capsular tears. Coils close bleeding varices that shunts alone may not still.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Gradient",
+            "Below twelve"
+          ],
+          [
+            "Tract",
+            "Covered graft"
+          ],
+          [
+            "Opening",
+            "Stepwise balloons"
+          ],
+          [
+            "Varices",
+            "Coils alongside"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bleeding punctures declare themselves fast. **Capsular transgression** spills contrast outside livers with falling pressure, demanding covered extension or embolisation. **Biliary fistulae** from crossed ducts declare with fever and need antibiotics with drainage. **Arterial injury** alongside tracts shows as blushes needing coils. **Stent malposition** into cava or atria pulls back or extends under cardiac watching.",
+      "say": "Bleeding punctures declare fast. Capsular breaches spill contrast with falling pressure, needing covered extension or coils. Crossed bile ducts declare with fever needing antibiotics. Arterial blushes alongside tracts take coils. Misplaced stents pull back under cardiac watch.",
+      "vis": null
+    },
+    {
+      "tx": "Patency proves itself on Doppler. **Post-TIPS duplex** checks shunt velocity with direction of portal flow within days, then at surveillance intervals. **Falling velocities with recurrent ascites** mark stenosis needing venography with revision. **Variceal re-bleeds** after shunts re-map for shunt versus varix failure. **Lifelong liver follow-up** continues since shunts palliate pressure rather than curing cirrhosis.",
+      "say": "Patency proves on Doppler. Early duplex checks shunt velocity with portal flow direction, repeated at intervals. Falling velocity with returning ascites marks stenosis needing revision. Re-bleeds re-map for shunt versus varix failure. Liver follow-up continues since shunts palliate pressure not cirrhosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan the shunt"
+          },
+          {
+            "id": "b",
+            "label": "Track velocities"
+          },
+          {
+            "id": "c",
+            "label": "Revise stenosis"
+          },
+          {
+            "id": "d",
+            "label": "Follow livers lifelong"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-176",
+    "maikir2-177",
+    "maikir2-178",
+    "maikir2-179",
+    "maikir2-180",
+    "maikir2-181",
+    "maikir2-182",
+    "maikir2-183",
+    "maikir2-184",
+    "maikir2-185",
+    "maikir2-186",
+    "maikir2-187",
+    "maikir2-188",
+    "maikir2-189",
+    "maikir2-190",
+    "maikir2-191",
+    "maikir2-192",
+    "maikir2-193",
+    "maikir2-194",
+    "maikir2-195",
+    "maikir2-196",
+    "maikir2-197",
+    "maikir2-198",
+    "maikir2-199",
+    "maikir2-200"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

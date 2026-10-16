@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-embolisation-trauma",
+  "subject": "radiology",
+  "title": "Trauma and solid-organ embolisation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Stable trauma bleeds belong to radiology. **CT with arterial phase** sorts stable pelvic and solid-organ bleeders into embolisation candidates while unstable cases go straight to theatre. **Contrast blush** with falling haemoglobin marks active bleeding worth coiling. **Transient responders** who stabilise then sag suit hybrid pathways with surgeons scrubbed nearby. **Damage-control resuscitation** with blood-first ratios runs alongside mapping, never after it.",
+      "say": "Stable trauma bleeds belong to radiology. Arterial-phase CT sorts stable pelvic and organ bleeders for coiling while unstable cases go to theatre. Blush with falling haemoglobin marks coilable bleeding. Transient responders suit hybrid pathways with surgeons nearby. Blood-first resuscitation runs during mapping.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan stable cases"
+          },
+          {
+            "id": "b",
+            "label": "Find the blush"
+          },
+          {
+            "id": "c",
+            "label": "Coil the bleeder"
+          },
+          {
+            "id": "d",
+            "label": "Resuscitate throughout"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Spleens survive proximal sacrifice. **Proximal splenic coiling** drops perfusion pressure so torn branches clot while collaterals keep spleens alive under AAST-aligned pathways. **Distal superselective coils** suit focal pseudoaneurysms with intact trunks. **Vaccination after splenectomy** only, since embolised spleens keep immune function. **Re-bleed watches** with haemoglobin and repeat CT catch failures before collapse.",
+      "say": "Spleens survive proximal sacrifice. Main-trunk coils drop pressure so tears clot while collaterals keep spleens alive. Focal sacs take distal coils with intact trunks. Vaccines follow removal only since coiled spleens still immunise. Haemoglobin with repeat CT catches re-bleeds.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Injury",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Diffuse splenic ooze",
+            "Proximal coils"
+          ],
+          [
+            "Focal sac",
+            "Distal coils"
+          ],
+          [
+            "Shattered hilum",
+            "Surgery"
+          ],
+          [
+            "Stable re-bleed",
+            "Re-map"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Livers and kidneys forgive distal work. **Hepatic pseudoaneurysms** pack with parent preservation since portal flow alone cannot carry livers. **Renal segmental coils** sacrifice bleeding poles while sparing remaining nephrons for filtration. **Pelvic packing versus coils** splits unstable cases to theatre and stable blushes to radiology. **Urinoma and biloma** drain percutaneously when collections compress or infect.",
+      "say": "Livers and kidneys forgive distal work. Hepatic sacs pack with parents spared since portal flow cannot carry livers alone. Renal coils sacrifice bleeding poles while sparing filtering tissue. Unstable pelvises go to theatre while stable blushes coil. Compressing collections drain percutaneously.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up proves the save lasted. **Repeat CT before discharge** confirms sealed blushes and viable organs in high-grade injuries. **Activity restriction** for weeks protects healing spleens and livers from second ruptures. **Antibiotics for open pelvic fractures** accompany embolisation where contamination brews. **Trauma MDT review** audits every embolised case for timing and selection lessons.",
+      "say": "Follow-up proves saves lasted. Repeat CT before discharge confirms sealed blushes with viable organs. Weeks of restricted activity protect healing organs from second ruptures. Open pelvic fractures take antibiotics alongside coils. Team review audits timing and selection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Re-scan before discharge"
+          },
+          {
+            "id": "b",
+            "label": "Restrict activity"
+          },
+          {
+            "id": "c",
+            "label": "Cover contamination"
+          },
+          {
+            "id": "d",
+            "label": "Audit every case"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-126",
+    "maikir2-127",
+    "maikir2-128",
+    "maikir2-129",
+    "maikir2-130",
+    "maikir2-131",
+    "maikir2-132",
+    "maikir2-133",
+    "maikir2-134",
+    "maikir2-135",
+    "maikir2-136",
+    "maikir2-137",
+    "maikir2-138",
+    "maikir2-139",
+    "maikir2-140",
+    "maikir2-141",
+    "maikir2-142",
+    "maikir2-143",
+    "maikir2-144",
+    "maikir2-145",
+    "maikir2-146",
+    "maikir2-147",
+    "maikir2-148",
+    "maikir2-149",
+    "maikir2-150"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

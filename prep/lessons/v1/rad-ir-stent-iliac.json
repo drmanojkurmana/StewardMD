@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-stent-iliac",
+  "subject": "radiology",
+  "title": "Aortoiliac stenting: forks and inflow",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Hips claudicate when iliacs narrow. **Aortoiliac disease** cramps buttocks and thighs with weak femoral pulses, worst on exertion. **TASC classification** grades lesions where short focal stenoses suit endovascular first under ESC and global vascular guidance. **Kissing iliac stents** rebuild diseased bifurcations without open surgery. **Smoking cessation with statins and antiplatelets** underpins every revascularisation.",
+      "say": "Hips claudicate when iliacs narrow. Aortoiliac disease cramps buttocks with weak pulses on exertion. TASC grades lesions where short focal narrowings suit endovascular first. Kissing stents rebuild diseased forks without open surgery. Stopping smoking with statins underpins every fix.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Feel weak pulses"
+          },
+          {
+            "id": "b",
+            "label": "Grade with TASC"
+          },
+          {
+            "id": "c",
+            "label": "Stent the fork"
+          },
+          {
+            "id": "d",
+            "label": "Walk with drugs"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Big balloons suit big vessels. **Balloon-expandable stents** place precisely at ostia without jumping forward unexpectedly. **Self-expanding nitinol** flexes with tortuous external iliacs. **Covered iliac grafts** seal aneurysmal or ruptured segments reliably. **Kissing technique** inflates both limbs together protecting the fork.",
+      "say": "Big balloons suit big vessels. Balloon-expandable metal places precisely at ostial mouths without jumping forward unexpectedly. Self-expanding alloy flexes with tortuous vessels. Covered grafts seal aneurysmal segments. Kissing technique inflates both limbs together.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vessel",
+          "Stent"
+        ],
+        "rows": [
+          [
+            "Ostial mouth",
+            "Balloon-expandable"
+          ],
+          [
+            "Tortuous iliac",
+            "Self-expanding"
+          ],
+          [
+            "Aneurysmal",
+            "Covered graft"
+          ],
+          [
+            "Bifurcation",
+            "Kissing pair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Buttock pain warns of pelvic steal. **Internal iliac coverage** risks buttock claudication with erectile dysfunction where both sides close. **Preserve at least one** internal iliac where anatomy allows. **Spinal ischaemia** rarely follows extensive pelvic coverage needing vigilance. **Staged limbs** protect kidneys from contrast loads.",
+      "say": "Buttock pain warns of pelvic steal. Covering internal iliacs risks claudication with dysfunction where both sides shut. Preserve at least one side where possible. Spinal ischaemia rarely follows extensive coverage. Staged limbs protect kidneys from dye loads.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up walks the ABI regularly. **Ankle-brachial index** with duplex proves lasting patency at surveillance intervals. **Re-stenosis with returning claudication** earns re-ballooning before occlusion. **Antiplatelets with statins lifelong** guard metal where smoking restarts failure. **Exercise programmes** extend walking distance beyond metal alone.",
+      "say": "Follow-up walks the ABI. Pressure indices with duplex prove patency at regular surveillance intervals. Returning claudication earns re-ballooning before complete blockage. Lifelong tablets guard metal where smoking restarts failure. Supervised walking extends distance beyond metal.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Check ABI"
+          },
+          {
+            "id": "b",
+            "label": "Scan the metal"
+          },
+          {
+            "id": "c",
+            "label": "Re-balloon narrowing"
+          },
+          {
+            "id": "d",
+            "label": "Walk supervised"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-301",
+    "maikir2-302",
+    "maikir2-303",
+    "maikir2-304",
+    "maikir2-305",
+    "maikir2-306",
+    "maikir2-307",
+    "maikir2-308",
+    "maikir2-309",
+    "maikir2-310",
+    "maikir2-311",
+    "maikir2-312",
+    "maikir2-313",
+    "maikir2-314",
+    "maikir2-315",
+    "maikir2-316",
+    "maikir2-317",
+    "maikir2-318",
+    "maikir2-319",
+    "maikir2-320",
+    "maikir2-321",
+    "maikir2-322",
+    "maikir2-323",
+    "maikir2-324",
+    "maikir2-325"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

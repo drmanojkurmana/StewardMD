@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-venous-svc",
+  "subject": "radiology",
+  "title": "SVC syndrome and venous recanalisation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Faces swell when cavae choke. **SVC syndrome** balloons faces with neck vein distension and arm swelling, worse when bending forward. **Malignant compression** from lung tumours and nodes drives most cases needing urgent stenting. **Benign fibrosing lines** from chronic catheters suit gradual recanalisation. **Stridor with confusion** marks severe obstruction needing emergency airways alongside stents.",
+      "say": "Faces swell when cavae choke. SVC blockage balloons faces with neck distension, worse bending forward. Lung tumours drive most cases needing urgent stents. Chronic line scarring suits gradual reopening. Stridor with confusion marks severe blocks needing emergency airways.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "See swollen face"
+          },
+          {
+            "id": "b",
+            "label": "Map the block"
+          },
+          {
+            "id": "c",
+            "label": "Stent urgently"
+          },
+          {
+            "id": "d",
+            "label": "Treat the cause"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Stents reopen venous highways fast. **Self-expanding venous stents** scaffold SVC and brachiocephalic trunks with same-day face deflation. **Through-and-through access** from groin and neck steadies crossings of total occlusions. **Kissing stents** rebuild bifurcations where both brachiocephalics fail. **Anticoagulation after** keeps sluggish venous metal open per CIRSE-aligned protocols.",
+      "say": "Stents reopen venous highways fast. Self-expanding metal scaffolds caval trunks with same-day deflation. Combined groin-neck access steadies crossings of total blocks. Kissing stents rebuild failed bifurcations. Anticoagulation after keeps sluggish venous metal open.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Block",
+          "Move"
+        ],
+        "rows": [
+          [
+            "SVC choke",
+            "Caval stent"
+          ],
+          [
+            "Total block",
+            "Dual access"
+          ],
+          [
+            "Bifurcation",
+            "Kissing stents"
+          ],
+          [
+            "After",
+            "Anticoagulate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Legs swell when iliacs squeeze. **May-Thurner compression** of left common iliac vein under the artery breeds left-leg clots and ulcers. **Iliac stenting** scaffolds the squeeze with lasting patency. **Dialysis outflow stenosis** from old fistulae narrows central veins needing balloons with selective stents. **Post-thrombotic scarring** recanalises where organised clot still wires through.",
+      "say": "Legs swell when iliacs squeeze. Left iliac compression under the artery breeds left-leg clots. Iliac stents scaffold squeezes durably. Dialysis outflow narrowing from old fistulae takes balloons with selective stents. Scarred post-clot veins recanalise where wires still pass.",
+      "vis": null
+    },
+    {
+      "tx": "Follow-up keeps metal moving. **Duplex with symptom checks** pairs velocities against swelling at every visit. **Re-stenosis with returning faces** earns re-ballooning before total re-occlusion. **Stent migration checks** confirm positions after coughing fits and trauma. **Cause-directed therapy** of tumours and lines continues since stents bypass blocks rather than curing disease.",
+      "say": "Follow-up keeps metal moving. Duplex with swelling checks pairs velocities against symptoms each visit. Returning faces earn re-ballooning before total re-blockage. Position checks follow coughing fits. Tumour and line treatment continues since stents bypass rather than cure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan and ask"
+          },
+          {
+            "id": "b",
+            "label": "Re-balloon narrowing"
+          },
+          {
+            "id": "c",
+            "label": "Check positions"
+          },
+          {
+            "id": "d",
+            "label": "Treat the cause"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-276",
+    "maikir2-277",
+    "maikir2-278",
+    "maikir2-279",
+    "maikir2-280",
+    "maikir2-281",
+    "maikir2-282",
+    "maikir2-283",
+    "maikir2-284",
+    "maikir2-285",
+    "maikir2-286",
+    "maikir2-287",
+    "maikir2-288",
+    "maikir2-289",
+    "maikir2-290",
+    "maikir2-291",
+    "maikir2-292",
+    "maikir2-293",
+    "maikir2-294",
+    "maikir2-295",
+    "maikir2-296",
+    "maikir2-297",
+    "maikir2-298",
+    "maikir2-299",
+    "maikir2-300"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

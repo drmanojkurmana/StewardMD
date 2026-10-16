@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-safety-anticoag-consent",
+  "subject": "radiology",
+  "title": "Anticoagulation and consent in IR",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Blood thinners pause by risk. **SIR bleeding-risk categories** sort low, moderate and high-risk procedures guiding drug holds. **Direct oral anticoagulants** pause one to two days by renal function and risk. **Bridging heparin** suits mechanical valves, rarely others. **Restart plans** written before procedures prevent forgotten resumption.",
+      "say": "Blood thinners pause by risk. Bleeding-risk categories sort procedures guiding drug holds. Oral anticoagulants pause by renal function and risk. Bridging suits mechanical valves, rarely others. Written restart plans prevent forgotten resumption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sort bleed risk"
+          },
+          {
+            "id": "b",
+            "label": "Pause by kidney"
+          },
+          {
+            "id": "c",
+            "label": "Bridge valves only"
+          },
+          {
+            "id": "d",
+            "label": "Write restarts"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Platelets and knives coordinate. **Dual antiplatelets** continue through low-risk work but pause for high-risk punctures with cardiology. **Neuraxial rules** forbid spinal work on dual drugs. **Aspirin alone** continues through most IR. **Stent thrombosis** fears outweigh groin oozing where cardiology advises continuing.",
+      "say": "Platelets and knives coordinate. Dual tablets continue through low-risk work but pause for high-risk sticks with cardiology. Spinal work forbids dual drugs. Aspirin alone continues through most IR. Stent clot fears outweigh groin oozing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Aspirin alone",
+            "Continue"
+          ],
+          [
+            "Dual low-risk",
+            "Continue"
+          ],
+          [
+            "Dual high-risk",
+            "Pause with cardiology"
+          ],
+          [
+            "Spinal dual",
+            "Forbid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Consent respects Montgomery. **Material risks** a reasonable patient would weigh include death, stroke and organ loss. **Montgomery disclosure** replaces doctor-knows-best with patient-centred choice. **Alternatives with no treatment** frame honest options including waiting. **Documented discussions** with names and risks protect patients and teams.",
+      "say": "Consent respects Montgomery. Material risks a reasonable patient would weigh include death, stroke and organ loss. Patient-centred choice replaces doctor-knows-best. Alternatives with waiting frame honest options. Documented discussions protect everyone.",
+      "vis": null
+    },
+    {
+      "tx": "Capacity and children need careful care. **Gillick competence** lets mature minors consent where understanding proves. **Best interests** guide adults lacking capacity with family input. **Language barriers** need interpreters, never relatives, for consent. **Second opinions** offered where stakes run high reassure.",
+      "say": "Capacity and children need care. Mature minors consent where understanding proves. Best interests guide incapacitated adults with family input. Language barriers need interpreters, never relatives. High stakes offer second opinions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Check capacity"
+          },
+          {
+            "id": "b",
+            "label": "Interpret properly"
+          },
+          {
+            "id": "c",
+            "label": "Offer alternatives"
+          },
+          {
+            "id": "d",
+            "label": "Record everything"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-726",
+    "maikir2-727",
+    "maikir2-728",
+    "maikir2-729",
+    "maikir2-730",
+    "maikir2-731",
+    "maikir2-732",
+    "maikir2-733",
+    "maikir2-734",
+    "maikir2-735",
+    "maikir2-736",
+    "maikir2-737",
+    "maikir2-738",
+    "maikir2-739",
+    "maikir2-740",
+    "maikir2-741",
+    "maikir2-742",
+    "maikir2-743",
+    "maikir2-744",
+    "maikir2-745",
+    "maikir2-746",
+    "maikir2-747",
+    "maikir2-748",
+    "maikir2-749",
+    "maikir2-750"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}
