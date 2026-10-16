@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "nan-spine-awake",
-  "subject": "anaesthesia",
-  "title": "Spine, awake craniotomy and neuromonitoring",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Prone** (**Wilson frame** abdomen free, **eyes** protected, **venous** engorgement bleeds, **brachial** arm boards, **pressure** points padded) with **spine** (**laminectomy** decompress, **fusion** screws rods, **blood loss** TXA cell salvage, **wake-up** test historic) positions; **obese** (frames bariatric, **airway** prone fibreoptic) plans. Bellies free.",
-      "say": "Frames bellies eyes arms points padded bleeds salvage is prone spine: wake-ups monitored replace. Obesities plan.",
-      "vis": null
-    },
-    {
-      "tx": "**Monitoring** (**SSEP** dorsal columns, **MEP** corticospinal, **EMG** roots screws, **inhalational** suppresses MEP, **TIVA** propofol remifentanil preserves, **bite blocks** tongue) with **alerts** (**50 percent** amplitude drop, **surgeon** pauses steroids, **MAP** raises, **haematoma** explores) alarms; **baselines** (pre-incision) record. Signals watch while anaesthetists interpret traces continuously aloud.",
-      "say": "Columns lemniscal roots screwed volatiles suppress TIVA preserves is monitored: halves pause pressures raise haematomas explore. Baselines record.",
-      "vis": null
-    },
-    {
-      "tx": "**Awake** (**asleep awake asleep**, **scalp block** ropivacaine, **dexmedetomidine** cooperative, **mapping** speech motor, **seizures** cold saline, **laryngeal** mask airway) with **language** (naming counting, **bilingual** both, **musician** playing) maps; **anxiety** (counselling, **family** meets team) calms. Brains talk while awake testing resects maximal safe tumours routinely.",
-      "say": "Scalps blocked dex wakes speech motors map colds seize is awake: languages musicians anxieties counsel. Talks map.",
-      "vis": null
-    },
-    {
-      "tx": "**Dysreflexia** (**T6 above**, **bladder** distension triggers, **headache** sweating flushing, **sit up** legs down, **nifedipine** GTN, **bladder** drains) with **scoliosis** (**neuromuscular** Duchenne, **blood** large, **ICU** ventilate, **pain** epidural) and **trauma** (**steroids** NASCIS debated, **MAP** 85, **surgery** early) completes; **latex** (spina bifida) avoids. Bladders trigger.",
-      "say": "High cords bladders heads sweat sits drains is dysreflexia: scolioses bleed ventilate traumas MAP early. Triggers drain.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Spine awake",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Prone",
-            "Bellies free",
-            "Salvage"
-          ],
-          [
-            "Monitor",
-            "TIVA halves",
-            "Pause"
-          ],
-          [
-            "Awake",
-            "Scalps map",
-            "Calm"
-          ],
-          [
-            "Dysreflexia",
-            "Bladders sit",
-            "Drain"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-ane-031",
-    "bk2-ane-032",
-    "bk2-ane-033",
-    "bk2-ane-034",
-    "bk2-ane-035",
-    "bk2-ane-036",
-    "bk2-ane-037",
-    "bk2-ane-038",
-    "bk2-ane-039",
-    "bk2-ane-040"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-mil1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "nan-spine-awake",
+ "subject": "anaesthesia",
+ "title": "Spine, awake craniotomy and neuromonitoring",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Prone** (**Wilson frame** abdomen free, **eyes** protected, **venous** engorgement bleeds, **brachial** arm boards, **pressure** points padded) with **spine** (**laminectomy** decompress, **fusion** screws rods, **blood loss** TXA cell salvage, **wake-up** test historic) positions; **obese** (frames bariatric, **airway** prone fibreoptic) plans. Bellies free.",
+   "say": "Frames bellies eyes arms points padded bleeds salvage is prone spine: wake-ups monitored replace. Obesities plan.",
+   "vis": null
+  },
+  {
+   "tx": "**Monitoring** (**SSEP** dorsal columns, **MEP** corticospinal, **EMG** roots screws, **inhalational** suppresses MEP, **TIVA** propofol remifentanil preserves, **bite blocks** tongue) with **alerts** (**50 percent** amplitude drop, **surgeon** pauses steroids, **MAP** raises, **haematoma** explores) alarms; **baselines** (pre-incision) record. Signals watch while anaesthetists interpret traces continuously aloud.",
+   "say": "Columns lemniscal roots screwed volatiles suppress TIVA preserves is monitored: halves pause pressures raise haematomas explore. Baselines record.",
+   "vis": null
+  },
+  {
+   "tx": "**Awake** (**asleep awake asleep**, **scalp block** ropivacaine, **dexmedetomidine** cooperative, **mapping** speech motor, **seizures** cold saline, **laryngeal** mask airway) with **language** (naming counting, **bilingual** both, **musician** playing) maps; **anxiety** (counselling, **family** meets team) calms. Brains talk while awake testing resects maximal safe tumours routinely.",
+   "say": "Scalps blocked dex wakes speech motors map colds seize is awake: languages musicians anxieties counsel. Talks map.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/nan-spine-awake-fig1.webp",
+    "alt": "Illustration of an awake patient undergoing craniotomy with a surgeon performing brain mapping for speech and motor function, guided by anesthesiologist monitoring.",
+    "caption": "Awake craniotomy for functional brain mapping",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Dysreflexia** (**T6 above**, **bladder** distension triggers, **headache** sweating flushing, **sit up** legs down, **nifedipine** GTN, **bladder** drains) with **scoliosis** (**neuromuscular** Duchenne, **blood** large, **ICU** ventilate, **pain** epidural) and **trauma** (**steroids** NASCIS debated, **MAP** 85, **surgery** early) completes; **latex** (spina bifida) avoids. Bladders trigger.",
+   "say": "High cords bladders heads sweat sits drains is dysreflexia: scolioses bleed ventilate traumas MAP early. Triggers drain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Spine awake",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Prone",
+      "Bellies free",
+      "Salvage"
+     ],
+     [
+      "Monitor",
+      "TIVA halves",
+      "Pause"
+     ],
+     [
+      "Awake",
+      "Scalps map",
+      "Calm"
+     ],
+     [
+      "Dysreflexia",
+      "Bladders sit",
+      "Drain"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-ane-031",
+  "bk2-ane-032",
+  "bk2-ane-033",
+  "bk2-ane-034",
+  "bk2-ane-035",
+  "bk2-ane-036",
+  "bk2-ane-037",
+  "bk2-ane-038",
+  "bk2-ane-039",
+  "bk2-ane-040"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-mil1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

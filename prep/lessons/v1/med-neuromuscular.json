@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-neuromuscular",
-  "subject": "medicine",
-  "title": "Neuromuscular weakness: myasthenia, myopathy and MND",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**fatiguable** evening ptosis diplopia chewing, **bulbar** dysarthria swallow nasal crisis, **Gower** waddling stairs myalgia statins, **MND** fasciculations cramps wasting speech, **family** Duchenne Becker dystrophin calves, **drugs** steroids statins penicillamine, **thymoma** chest MG association) with **viva** (**myasthenic** drooping diurnal, **wasted** fasciculating dysarthric) profiles; **fatigue** (rest restores) tests. Muscles tire.",
-      "say": "Fatiguables bulbars Gowers MNDs is history: families limp drugs weaken thymomas lurk fatigues test myasthenics droop wasteds twitch strengths fade stairs climb. Limbs weaken.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**ptosis** fatiguable ice improves, **diplopia** variable fatiguable gaze, **bulbar** nasal count to 50, **Gower** floor rises waddling, **fasciculations** tongue wasted MND, **mixed** UMN LMN brisk wasted, **thymus** chest scars, **respiratory** FVC sits lies) with **bedside** (**edrophonium** ice tests, **CK** myopathy rises, **FVC** crisis monitors) counts; **dystrophin** (calves pseudohypertrophy) feels. Strengths ebb.",
-      "say": "Ptoses diplopias bulbars Gowers is exam: fasciculations flick mixeds span thymuses hide respiratories dip edrophoniums lift CKs rise FVCs fall dystrophins bulk calves swell. Eyelids droop.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**AChR** MuSK antibodies decremental EMG, **CT** thymoma chest hunts, **CK** myopathy dystrophy rises, **genetics** dystrophin SMA SMN, **EMG** MND widespread denervation, **TFT** thyrotoxic periodic) with **differentials** (**myasthenia** fatiguable AChR, **myopathy** Gower CK, **MND** mixed fasciculating, **periodic** potassium exercise) sorts; **neurology** (thymectomy decides) meets. Junctions fail.",
-      "say": "AChRs thymomas CKs genetics is Ix: EMGs crackle TFTs swing myasthenias fade myopathies rise MNDs mix periodics drop neurologists meet thymuses cut globulins pour. Tests tire.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**pyridostigmine** first strength restores, **steroids** azathioprine rituximab controls, **crisis** IVIg plasma ventilate, **thymectomy** thymoma young cures, **myopathy** steroids stop statins, **MND** riluzole MDT supports, **genetics** family screens) with **traps** (**beta** blockers worsens, **crisis** cholinergic muscarinic, **respiratory** FVC misses) closes; **follow** (strength FVC function) tracks. Muscles hold.",
-      "say": "Pyridostigmines steroids crises thymectomies is Rx: myopathies ease MNDs support genetics screen betas worsen crises confuse respiratories fail follows track strengths hold wishes respect. Weakness steadies.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-531",
-    "bk2-med-532",
-    "bk2-med-533",
-    "bk2-med-534",
-    "bk2-med-535",
-    "bk2-med-536",
-    "bk2-med-537",
-    "bk2-med-538",
-    "bk2-med-539",
-    "bk2-med-540"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon6",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-neuromuscular",
+ "subject": "medicine",
+ "title": "Neuromuscular weakness: myasthenia, myopathy and MND",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**fatiguable** evening ptosis diplopia chewing, **bulbar** dysarthria swallow nasal crisis, **Gower** waddling stairs myalgia statins, **MND** fasciculations cramps wasting speech, **family** Duchenne Becker dystrophin calves, **drugs** steroids statins penicillamine, **thymoma** chest MG association) with **viva** (**myasthenic** drooping diurnal, **wasted** fasciculating dysarthric) profiles; **fatigue** (rest restores) tests. Muscles tire.",
+   "say": "Fatiguables bulbars Gowers MNDs is history: families limp drugs weaken thymomas lurk fatigues test myasthenics droop wasteds twitch strengths fade stairs climb. Limbs weaken.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**ptosis** fatiguable ice improves, **diplopia** variable fatiguable gaze, **bulbar** nasal count to 50, **Gower** floor rises waddling, **fasciculations** tongue wasted MND, **mixed** UMN LMN brisk wasted, **thymus** chest scars, **respiratory** FVC sits lies) with **bedside** (**edrophonium** ice tests, **CK** myopathy rises, **FVC** crisis monitors) counts; **dystrophin** (calves pseudohypertrophy) feels. Strengths ebb.",
+   "say": "Ptoses diplopias bulbars Gowers is exam: fasciculations flick mixeds span thymuses hide respiratories dip edrophoniums lift CKs rise FVCs fall dystrophins bulk calves swell. Eyelids droop.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-neuromuscular-fig1.webp",
+    "alt": "Sequence of drawings showing a child rising from squatting by 'walking up' their legs, illustrating Gower's sign in myopathy.",
+    "caption": "Gower's sign: characteristic rising from floor in myopathy",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**AChR** MuSK antibodies decremental EMG, **CT** thymoma chest hunts, **CK** myopathy dystrophy rises, **genetics** dystrophin SMA SMN, **EMG** MND widespread denervation, **TFT** thyrotoxic periodic) with **differentials** (**myasthenia** fatiguable AChR, **myopathy** Gower CK, **MND** mixed fasciculating, **periodic** potassium exercise) sorts; **neurology** (thymectomy decides) meets. Junctions fail.",
+   "say": "AChRs thymomas CKs genetics is Ix: EMGs crackle TFTs swing myasthenias fade myopathies rise MNDs mix periodics drop neurologists meet thymuses cut globulins pour. Tests tire.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**pyridostigmine** first strength restores, **steroids** azathioprine rituximab controls, **crisis** IVIg plasma ventilate, **thymectomy** thymoma young cures, **myopathy** steroids stop statins, **MND** riluzole MDT supports, **genetics** family screens) with **traps** (**beta** blockers worsens, **crisis** cholinergic muscarinic, **respiratory** FVC misses) closes; **follow** (strength FVC function) tracks. Muscles hold.",
+   "say": "Pyridostigmines steroids crises thymectomies is Rx: myopathies ease MNDs support genetics screen betas worsen crises confuse respiratories fail follows track strengths hold wishes respect. Weakness steadies.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-531",
+  "bk2-med-532",
+  "bk2-med-533",
+  "bk2-med-534",
+  "bk2-med-535",
+  "bk2-med-536",
+  "bk2-med-537",
+  "bk2-med-538",
+  "bk2-med-539",
+  "bk2-med-540"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon6",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

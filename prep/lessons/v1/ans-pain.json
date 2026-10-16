@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ans-pain",
-  "subject": "anaesthesia",
-  "title": "Acute and chronic pain management: ladders to interventions",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Assessment** (**scores** rest movement sleep function, **SOCRATES** site character radiation, **neuropathic** DN4 burning allodynia, **red-flags** cancer cord fracture infection, **psychosocial** catastrophising yellow flags, **function** work walk mood, **beliefs** expectations fears, **review** meds allergies) with **tools** (**DN4** LANSS PainDETECT, **diaries** triggers reliefs) measures; **examines** (dermatomes weakness) maps. Pains speak.",
-      "say": "Scores SOCRATES neuropathics red-flags is assessment: psychosocials weigh functions limit beliefs shape reviews list tools score diaries track examines map DN4s sort. Stories score.",
-      "vis": null
-    },
-    {
-      "tx": "**Acute** (**ladder** paracetamol NSAID opioid tiers, **multimodal** scheduled around-clock, **PCA** basal bolus lockout, **epidural** thoracic abdominal major, **blocks** TAP rectus catheters, **ketamine** opioid-tolerant infusions, **wound** local infusions, **mobilise** physio ERAS) with **charts** (**observation** sedation bowels, **escalation** pain-team triggers) monitors; **discharge** (weaning plans) tapers. Pains ease.",
-      "say": "Ladders multimodals PCAs epidurals is acute: blocks numb ketamines spare wounds soak mobilises early charts watch discharges taper escalations trigger teams review. Doses step.",
-      "vis": null
-    },
-    {
-      "tx": "**Chronic** (**neuropathic** gabapentin TCA SNRI tiers, **back** NICE exercise manual, **fibromyalgia** gentle CBT sleep, **CRPS** mirror graded desensitise, **headache** medication-overuse withdraws, **cancer** WHO strong adjuvants, **interventions** facet epidural cord stimulators, **psychology** ACT mindfulness) with **programmes** (**pain** management courses, **pacing** flare plans) sustains; **opioids** (taper agreements) reviews. Aches persist.",
-      "say": "Neuropathics backs fibromyalgias CRPSs is chronic: headaches withdraw cancers climb interventions block psychologies reframe programmes pace opioids taper reviews schedule dependents wean. Lives adapt.",
-      "vis": null
-    },
-    {
-      "tx": "**Safety** (**red-flags** cord equina cancer act, **tolerance** rotate wean agreements, **dependence** screening brief interventions, **overdose** naloxone co-prescribe, **driving** counsel impairing meds, **elderly** falls constipation, **pregnancy** paracetamol limits, **audit** outcomes PREMs) with **traps** (**gabapentinoid** misuse driving, **benzodiazepine** co-prescribe deaths, **injections** infection consent) closes; **follow** (function scores weans) tracks. Lives function.",
-      "say": "Red-flags tolerances dependences overdoses is safety: drivings warn elderlies guard pregnancies limit audits track misuses flag benzos kill injections consent follows track functions score wishes respect. Prescribing stays.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ane-161",
-    "bk2-ane-162",
-    "bk2-ane-163",
-    "bk2-ane-164",
-    "bk2-ane-165",
-    "bk2-ane-166",
-    "bk2-ane-167",
-    "bk2-ane-168",
-    "bk2-ane-169",
-    "bk2-ane-170"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ana2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ans-pain",
+ "subject": "anaesthesia",
+ "title": "Acute and chronic pain management: ladders to interventions",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Assessment** (**scores** rest movement sleep function, **SOCRATES** site character radiation, **neuropathic** DN4 burning allodynia, **red-flags** cancer cord fracture infection, **psychosocial** catastrophising yellow flags, **function** work walk mood, **beliefs** expectations fears, **review** meds allergies) with **tools** (**DN4** LANSS PainDETECT, **diaries** triggers reliefs) measures; **examines** (dermatomes weakness) maps. Pains speak.",
+   "say": "Scores SOCRATES neuropathics red-flags is assessment: psychosocials weigh functions limit beliefs shape reviews list tools score diaries track examines map DN4s sort. Stories score.",
+   "vis": null
+  },
+  {
+   "tx": "**Acute** (**ladder** paracetamol NSAID opioid tiers, **multimodal** scheduled around-clock, **PCA** basal bolus lockout, **epidural** thoracic abdominal major, **blocks** TAP rectus catheters, **ketamine** opioid-tolerant infusions, **wound** local infusions, **mobilise** physio ERAS) with **charts** (**observation** sedation bowels, **escalation** pain-team triggers) monitors; **discharge** (weaning plans) tapers. Pains ease.",
+   "say": "Ladders multimodals PCAs epidurals is acute: blocks numb ketamines spare wounds soak mobilises early charts watch discharges taper escalations trigger teams review. Doses step.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ans-pain-fig1.webp",
+    "alt": "A stepped acute pain management ladder, showing paracetamol, NSAIDs, opioid tiers, multimodal strategies, regional blocks, and PCA for effective pain control.",
+    "caption": "Acute pain management: a stepped approach to multimodal analgesia",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Chronic** (**neuropathic** gabapentin TCA SNRI tiers, **back** NICE exercise manual, **fibromyalgia** gentle CBT sleep, **CRPS** mirror graded desensitise, **headache** medication-overuse withdraws, **cancer** WHO strong adjuvants, **interventions** facet epidural cord stimulators, **psychology** ACT mindfulness) with **programmes** (**pain** management courses, **pacing** flare plans) sustains; **opioids** (taper agreements) reviews. Aches persist.",
+   "say": "Neuropathics backs fibromyalgias CRPSs is chronic: headaches withdraw cancers climb interventions block psychologies reframe programmes pace opioids taper reviews schedule dependents wean. Lives adapt.",
+   "vis": null
+  },
+  {
+   "tx": "**Safety** (**red-flags** cord equina cancer act, **tolerance** rotate wean agreements, **dependence** screening brief interventions, **overdose** naloxone co-prescribe, **driving** counsel impairing meds, **elderly** falls constipation, **pregnancy** paracetamol limits, **audit** outcomes PREMs) with **traps** (**gabapentinoid** misuse driving, **benzodiazepine** co-prescribe deaths, **injections** infection consent) closes; **follow** (function scores weans) tracks. Lives function.",
+   "say": "Red-flags tolerances dependences overdoses is safety: drivings warn elderlies guard pregnancies limit audits track misuses flag benzos kill injections consent follows track functions score wishes respect. Prescribing stays.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ane-161",
+  "bk2-ane-162",
+  "bk2-ane-163",
+  "bk2-ane-164",
+  "bk2-ane-165",
+  "bk2-ane-166",
+  "bk2-ane-167",
+  "bk2-ane-168",
+  "bk2-ane-169",
+  "bk2-ane-170"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ana2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

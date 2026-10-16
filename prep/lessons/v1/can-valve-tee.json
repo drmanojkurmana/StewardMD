@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "can-valve-tee",
-  "subject": "anaesthesia",
-  "title": "Valve surgery, TEE and perioperative echo",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Stenosis** (**aortic** gradients mean 40 severe, **AVA under 1**, **dobutamine** low flow, **TAVI** inoperable, **SAVR** mechanical tissue; **mitral** pressure half time 220 severe, **Wilkins** commissurotomy, **balloon** selected) with **regurgitation** (**vena contracta**, **EROA**, **PISA**, **surgery** symptoms LV dilates, **repair** mitral rings) quantifies; **gradients** (tachycardia anaemia) interpret. Valves measure.",
-      "say": "Tight gradients small areas slow dobutamine recruit is stenosis: leaks contracta EROA rings repair. Loads interpret.",
-      "vis": null
-    },
-    {
-      "tx": "**TEE** (**mid oesophageal 4 chamber**, **TG SAX**, **bicaval**, **long axis**, **3D** valves, **Doppler** gradients, **bubble** PFO) with **views** (aortic SAX LAX, **mitral** commissural, **tricuspid** RV inflow, **descending** dissection flap) images; **indications** (valves aorta endocarditis, **haemodynamic** shock, **congenital** shunts) guides. Probes see.",
-      "say": "Four chambers gastrics bicavals longs volumes Dopplers bubbles shunt is TEE: valves shocks shunts guide. Views sweep.",
-      "vis": null
-    },
-    {
-      "tx": "**SAM** (**HOCM** dynamic outflow, **hypovolaemia** worsens, **fluids phenylephrine** treat, **avoid inotrope** vasodilate, **beta blocker** slows) with **paravalvular** (rocking, **haemolysis** LDH, **closure** percutaneous surgical) and **patient prosthesis** (indexed EOA, **high gradients** small roots, **root enlargement**) mismatches; **endocarditis** (vegetations abscess, **homograft** selected) redoes. Obstructions fill.",
-      "say": "Dynamic gradients dry worsens fill squeeze slow is SAM: rocking haemolyses closes percutaneous roots enlarge. Fills squeeze.",
-      "vis": null
-    },
-    {
-      "tx": "**Aorta** (**dissection** Stanford A operate, **aneurysm** 5.5 roots Marfan 5, **circulatory** arrest antegrade, **spinal** drains TEVAR) with **pulmonary** (thromboendarterectomy DHCA, **hypertension** nitric milrinone) and **transplant** (bicaval, **denervated** atropine resistant, **rejection** biopsies) completes; **VAD** (HeartMate driveline, **anticoagulate** INR, **RV failure** predicts) bridges. Roots replace.",
-      "say": "Torn ascending operates roots replace cords drain is aorta: clots endarterectomise denervated atropine resists. Bridges driveline.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Valve echo",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Stenosis",
-            "Gradients areas",
-            "TAVI repair"
-          ],
-          [
-            "TEE",
-            "Views bubbles",
-            "Shock guides"
-          ],
-          [
-            "SAM leak",
-            "Fill squeeze",
-            "Close"
-          ],
-          [
-            "Aorta VAD",
-            "Roots driveline",
-            "Bridge"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-ane-011",
-    "bk2-ane-012",
-    "bk2-ane-013",
-    "bk2-ane-014",
-    "bk2-ane-015",
-    "bk2-ane-016",
-    "bk2-ane-017",
-    "bk2-ane-018",
-    "bk2-ane-019",
-    "bk2-ane-020"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-mil1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "can-valve-tee",
+ "subject": "anaesthesia",
+ "title": "Valve surgery, TEE and perioperative echo",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Stenosis** (**aortic** gradients mean 40 severe, **AVA under 1**, **dobutamine** low flow, **TAVI** inoperable, **SAVR** mechanical tissue; **mitral** pressure half time 220 severe, **Wilkins** commissurotomy, **balloon** selected) with **regurgitation** (**vena contracta**, **EROA**, **PISA**, **surgery** symptoms LV dilates, **repair** mitral rings) quantifies; **gradients** (tachycardia anaemia) interpret. Valves measure.",
+   "say": "Tight gradients small areas slow dobutamine recruit is stenosis: leaks contracta EROA rings repair. Loads interpret.",
+   "vis": null
+  },
+  {
+   "tx": "**TEE** (**mid oesophageal 4 chamber**, **TG SAX**, **bicaval**, **long axis**, **3D** valves, **Doppler** gradients, **bubble** PFO) with **views** (aortic SAX LAX, **mitral** commissural, **tricuspid** RV inflow, **descending** dissection flap) images; **indications** (valves aorta endocarditis, **haemodynamic** shock, **congenital** shunts) guides. Probes see.",
+   "say": "Four chambers gastrics bicavals longs volumes Dopplers bubbles shunt is TEE: valves shocks shunts guide. Views sweep.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/can-valve-tee-fig1.webp",
+    "alt": "Diagram showing a TEE probe in the esophagus with lines indicating standard imaging planes: mid-oesophageal 4-chamber, transgastric short-axis, and bicaval views, with corresponding heart structures labeled.",
+    "caption": "Key TEE views for perioperative cardiac assessment",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**SAM** (**HOCM** dynamic outflow, **hypovolaemia** worsens, **fluids phenylephrine** treat, **avoid inotrope** vasodilate, **beta blocker** slows) with **paravalvular** (rocking, **haemolysis** LDH, **closure** percutaneous surgical) and **patient prosthesis** (indexed EOA, **high gradients** small roots, **root enlargement**) mismatches; **endocarditis** (vegetations abscess, **homograft** selected) redoes. Obstructions fill.",
+   "say": "Dynamic gradients dry worsens fill squeeze slow is SAM: rocking haemolyses closes percutaneous roots enlarge. Fills squeeze.",
+   "vis": null
+  },
+  {
+   "tx": "**Aorta** (**dissection** Stanford A operate, **aneurysm** 5.5 roots Marfan 5, **circulatory** arrest antegrade, **spinal** drains TEVAR) with **pulmonary** (thromboendarterectomy DHCA, **hypertension** nitric milrinone) and **transplant** (bicaval, **denervated** atropine resistant, **rejection** biopsies) completes; **VAD** (HeartMate driveline, **anticoagulate** INR, **RV failure** predicts) bridges. Roots replace.",
+   "say": "Torn ascending operates roots replace cords drain is aorta: clots endarterectomise denervated atropine resists. Bridges driveline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Valve echo",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Stenosis",
+      "Gradients areas",
+      "TAVI repair"
+     ],
+     [
+      "TEE",
+      "Views bubbles",
+      "Shock guides"
+     ],
+     [
+      "SAM leak",
+      "Fill squeeze",
+      "Close"
+     ],
+     [
+      "Aorta VAD",
+      "Roots driveline",
+      "Bridge"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-ane-011",
+  "bk2-ane-012",
+  "bk2-ane-013",
+  "bk2-ane-014",
+  "bk2-ane-015",
+  "bk2-ane-016",
+  "bk2-ane-017",
+  "bk2-ane-018",
+  "bk2-ane-019",
+  "bk2-ane-020"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-mil1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

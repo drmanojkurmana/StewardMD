@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "phm-antivirals",
-  "subject": "pharmacology",
-  "title": "Antivirals: herpes, hepatitis, influenza and COVID",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Aciclovir** (viral thymidine kinase activated, HSV and VZV, **crystal nephropathy** with hydration, neurotoxicity in renal failure) with **valaciclovir** (prodrug bioavailability, zoster and suppression) and famciclovir treats; **resistance** (thymidine kinase mutants in immunocompromise) switches to **foscarnet**. Encephalitis IV high dose with fluids saves; neonatal and ocular emergencies dose aggressively. TTP and HUS with high dose immunocompromise watched.",
-      "say": "HSV VZV encephalitis gets IV aciclovir hydrated: crystals clog dry kidneys. Resistant immunocompromise foscarnet.",
-      "vis": null
-    },
-    {
-      "tx": "**Ganciclovir and valganciclovir** (CMV retinitis, colitis, transplant prophylaxis; **neutropenia** with G-CSF backup, teratogenic) suppress while **foscarnet** (resistant CMV and HSV, **electrolyte chaos**: hypo and hypercalcaemia, hypo and hyperphosphataemia, hypomagnesaemia with seizures, **hydration mandatory**, penile ulcers) rescues; **cidofovir** (nephrotoxic with **probenecid** and saline, uveitis) thirds. Electrolytes with creatinine gate foscarnet courses.",
-      "say": "CMV marrow suppresses on ganciclovir; resistant electrolytes chaos on foscarnet hydrated. Counts and chemistry gate.",
-      "vis": null
-    },
-    {
-      "tx": "**Oseltamivir** (high risk flu 48 hours, prophylaxis outbreaks, nausea) with **baloxavir** (single dose cap dependent, resistance PA) and **zanamivir** (bronchospasm) treats influenza; **ribavirin** (RSV aerosol legacy, HCV with interferon past, **teratogenic** with haemolytic anaemia) is now niche. Amantadine (Parkinson, adamantane resistance ubiquitous) retired flu. Vaccines prevent best; steroids debate severe.",
-      "say": "High risk flu 48 hours gets oseltamivir; single dose baloxavir caps. Ribavirin teratogenic anaemias limit.",
-      "vis": null
-    },
-    {
-      "tx": "**HCV DAAs** (**sofosbuvir with velpatasvir** pangenotypic 12 weeks, **amiodarone bradycardia** lethal combo, **HBV reactivation** screened) cure; **HBV** (tenofovir, entecavir per hepatitis wave) suppresses. **Remdesivir** (early COVID outpatient and hypoxic inpatient, transaminases watched) with **nirmatrelvir-ritonavir** (**Paxlovid**: **CYP3A4 interactions** pausing statins and anticoagulants, dysgeusia, **rebound**, renal dosed) treats COVID by risk; molnupiravir (mutagenic, pregnancy banned) lasts. Monoclonals variant chase.",
-      "say": "Amiodarone plus sofosbuvir stops hearts: screen. Paxlovid pauses CYP3A4 victims; rebound counsels.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Antiviral",
-          "Pearl",
-          "Watch"
-        ],
-        "rows": [
-          [
-            "Aciclovir",
-            "Crystals",
-            "Hydrate"
-          ],
-          [
-            "Ganciclovir",
-            "CMV marrow",
-            "Neutrophils"
-          ],
-          [
-            "Oseltamivir",
-            "48h flu",
-            "Nausea"
-          ],
-          [
-            "Paxlovid",
-            "CYP3A4",
-            "Rebound"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-phm-331",
-    "bk2-phm-332",
-    "bk2-phm-333",
-    "bk2-phm-334",
-    "bk2-phm-335",
-    "bk2-phm-336",
-    "bk2-phm-337",
-    "bk2-phm-338",
-    "bk2-phm-339",
-    "bk2-phm-340"
-  ],
-  "src": [],
-  "refs": [
-    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-pharma4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "phm-antivirals",
+ "subject": "pharmacology",
+ "title": "Antivirals: herpes, hepatitis, influenza and COVID",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Aciclovir** (viral thymidine kinase activated, HSV and VZV, **crystal nephropathy** with hydration, neurotoxicity in renal failure) with **valaciclovir** (prodrug bioavailability, zoster and suppression) and famciclovir treats; **resistance** (thymidine kinase mutants in immunocompromise) switches to **foscarnet**. Encephalitis IV high dose with fluids saves; neonatal and ocular emergencies dose aggressively. TTP and HUS with high dose immunocompromise watched.",
+   "say": "HSV VZV encephalitis gets IV aciclovir hydrated: crystals clog dry kidneys. Resistant immunocompromise foscarnet.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antivirals-fig1.webp",
+    "alt": "Figure summarizing key antiviral drugs for Hepatitis C, Hepatitis B, and COVID-19, including their indications, critical drug interactions, and organ-specific considerations.",
+    "caption": "HCV, HBV, COVID antivirals: indications, interactions, and key considerations",
+    "ar": 1.7921
+   }
+  },
+  {
+   "tx": "**Ganciclovir and valganciclovir** (CMV retinitis, colitis, transplant prophylaxis; **neutropenia** with G-CSF backup, teratogenic) suppress while **foscarnet** (resistant CMV and HSV, **electrolyte chaos**: hypo and hypercalcaemia, hypo and hyperphosphataemia, hypomagnesaemia with seizures, **hydration mandatory**, penile ulcers) rescues; **cidofovir** (nephrotoxic with **probenecid** and saline, uveitis) thirds. Electrolytes with creatinine gate foscarnet courses.",
+   "say": "CMV marrow suppresses on ganciclovir; resistant electrolytes chaos on foscarnet hydrated. Counts and chemistry gate.",
+   "vis": null
+  },
+  {
+   "tx": "**Oseltamivir** (high risk flu 48 hours, prophylaxis outbreaks, nausea) with **baloxavir** (single dose cap dependent, resistance PA) and **zanamivir** (bronchospasm) treats influenza; **ribavirin** (RSV aerosol legacy, HCV with interferon past, **teratogenic** with haemolytic anaemia) is now niche. Amantadine (Parkinson, adamantane resistance ubiquitous) retired flu. Vaccines prevent best; steroids debate severe.",
+   "say": "High risk flu 48 hours gets oseltamivir; single dose baloxavir caps. Ribavirin teratogenic anaemias limit.",
+   "vis": null
+  },
+  {
+   "tx": "**HCV DAAs** (**sofosbuvir with velpatasvir** pangenotypic 12 weeks, **amiodarone bradycardia** lethal combo, **HBV reactivation** screened) cure; **HBV** (tenofovir, entecavir per hepatitis wave) suppresses. **Remdesivir** (early COVID outpatient and hypoxic inpatient, transaminases watched) with **nirmatrelvir-ritonavir** (**Paxlovid**: **CYP3A4 interactions** pausing statins and anticoagulants, dysgeusia, **rebound**, renal dosed) treats COVID by risk; molnupiravir (mutagenic, pregnancy banned) lasts. Monoclonals variant chase.",
+   "say": "Amiodarone plus sofosbuvir stops hearts: screen. Paxlovid pauses CYP3A4 victims; rebound counsels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiviral",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Aciclovir",
+      "Crystals",
+      "Hydrate"
+     ],
+     [
+      "Ganciclovir",
+      "CMV marrow",
+      "Neutrophils"
+     ],
+     [
+      "Oseltamivir",
+      "48h flu",
+      "Nausea"
+     ],
+     [
+      "Paxlovid",
+      "CYP3A4",
+      "Rebound"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-phm-331",
+  "bk2-phm-332",
+  "bk2-phm-333",
+  "bk2-phm-334",
+  "bk2-phm-335",
+  "bk2-phm-336",
+  "bk2-phm-337",
+  "bk2-phm-338",
+  "bk2-phm-339",
+  "bk2-phm-340"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

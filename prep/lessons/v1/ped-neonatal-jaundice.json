@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-neonatal-jaundice",
-  "subject": "paediatrics",
-  "title": "Neonatal jaundice: physiological to exchange",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Recognition** (**Kramer** cephalocaudal zones palms soles, **timing** day-one pathological flags, **feeding** poor weight loss counts, **stools** pale acholic biliary, **urine** dark conjugated stains, **tone** sleepy poor suck, **liver** spleen haemolysis sizes, **family** sibling jaundice G6PD) with **charts** (**hour** Bhutani nomograms, **transcutaneous** screening trends) plots; **discharge** (early review plans) schedules. Babies yellow.",
-      "say": "Kramers timings feedings stools is recognition: urines stain tones dull livers swell families share charts plot Nomograms rise discharges plan reviews book. Skins tint.",
-      "vis": null
-    },
-    {
-      "tx": "**Causes** (**physiological** day-two unconjugated well, **breastfeeding** intake weight loss, **breast-milk** week-old UGT slows, **ABO** O-mother A-Baby DAT, **Rh** sensitised exchange urgency, **G6PD** favism oxidant crises, **spherocytosis** MCHC family smears, **biliary** pale direct Kasai) with **haemolysis** (**reticulocytes** LDH falling Hb, **spherocytes** smears osmotic) sorts; **sepsis** (unwell screens) rules. Bilirubins climb.",
-      "say": "Physiologics breastfeedings breast-milks ABOs is causes: Rhs sensitise G6PDs favours spherocytoses sphere biliaries pale reticulocytes rise LDHs climb sepses mimic. Reds break.",
-      "vis": null
-    },
-    {
-      "tx": "**Tests** (**bilirubin** total direct fractions, **DAT** Coombs antibody screens, **blood** group crossmatch holds, **G6PD** quantitative assays, **thyroid** prolonged screens, **sepsis** cultures CRP counts, **stool** HIDA biliary clears, **Gilbert** benign unconjugated) with **thresholds** (**gestation** risk nomograms, **neurotoxicity** albumin gaps) stages; **repeat** (rebound watches) schedules. Levels guide.",
-      "say": "Bilirubins DATs bloods G6PDs is tests: thyroids lag sepses brew stools pale Gilberts benign thresholds stage neurotoxicities threaten repeats schedule rebounds watch. Numbers steer.",
-      "vis": null
-    },
-    {
-      "tx": "**Treatment** (**phototherapy** irradiance eye genital shields, **exchange** double-volume isovolumetric, **IVIG** haemolytic DAT rises, **fluids** insensible enteral supports, **stop** breastfeeding supplement plans, **Kasai** biliary portoenterostomy timing, **follow** hearing neurodevelopment, **counsel** rebound reviews) with **traps** (**kernicterus** arching opisthotonos, **dehydration** weight sodium, **biliary** late referral) closes; **charts** (hour curves) documents. Yellows fade.",
-      "say": "Phototherapies exchanges IVIGs fluids is treatment: stops pause Kasais drain follows track counsels warn kernicteruses arch dehydrations dry biliaries delay charts plot curves fall. Lights bleach.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-201",
-    "bk2-paed-202",
-    "bk2-paed-203",
-    "bk2-paed-204",
-    "bk2-paed-205",
-    "bk2-paed-206",
-    "bk2-paed-207",
-    "bk2-paed-208",
-    "bk2-paed-209",
-    "bk2-paed-210"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-neonatal-jaundice",
+ "subject": "paediatrics",
+ "title": "Neonatal jaundice: physiological to exchange",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Recognition** (**Kramer** cephalocaudal zones palms soles, **timing** day-one pathological flags, **feeding** poor weight loss counts, **stools** pale acholic biliary, **urine** dark conjugated stains, **tone** sleepy poor suck, **liver** spleen haemolysis sizes, **family** sibling jaundice G6PD) with **charts** (**hour** Bhutani nomograms, **transcutaneous** screening trends) plots; **discharge** (early review plans) schedules. Babies yellow.",
+   "say": "Kramers timings feedings stools is recognition: urines stain tones dull livers swell families share charts plot Nomograms rise discharges plan reviews book. Skins tint.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-neonatal-jaundice-fig1.webp",
+    "alt": "A Bhutani nomogram showing total serum bilirubin levels by postnatal age in hours, divided into risk zones for neonatal jaundice.",
+    "caption": "Bhutani nomogram for neonatal jaundice risk assessment by hour",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Causes** (**physiological** day-two unconjugated well, **breastfeeding** intake weight loss, **breast-milk** week-old UGT slows, **ABO** O-mother A-Baby DAT, **Rh** sensitised exchange urgency, **G6PD** favism oxidant crises, **spherocytosis** MCHC family smears, **biliary** pale direct Kasai) with **haemolysis** (**reticulocytes** LDH falling Hb, **spherocytes** smears osmotic) sorts; **sepsis** (unwell screens) rules. Bilirubins climb.",
+   "say": "Physiologics breastfeedings breast-milks ABOs is causes: Rhs sensitise G6PDs favours spherocytoses sphere biliaries pale reticulocytes rise LDHs climb sepses mimic. Reds break.",
+   "vis": null
+  },
+  {
+   "tx": "**Tests** (**bilirubin** total direct fractions, **DAT** Coombs antibody screens, **blood** group crossmatch holds, **G6PD** quantitative assays, **thyroid** prolonged screens, **sepsis** cultures CRP counts, **stool** HIDA biliary clears, **Gilbert** benign unconjugated) with **thresholds** (**gestation** risk nomograms, **neurotoxicity** albumin gaps) stages; **repeat** (rebound watches) schedules. Levels guide.",
+   "say": "Bilirubins DATs bloods G6PDs is tests: thyroids lag sepses brew stools pale Gilberts benign thresholds stage neurotoxicities threaten repeats schedule rebounds watch. Numbers steer.",
+   "vis": null
+  },
+  {
+   "tx": "**Treatment** (**phototherapy** irradiance eye genital shields, **exchange** double-volume isovolumetric, **IVIG** haemolytic DAT rises, **fluids** insensible enteral supports, **stop** breastfeeding supplement plans, **Kasai** biliary portoenterostomy timing, **follow** hearing neurodevelopment, **counsel** rebound reviews) with **traps** (**kernicterus** arching opisthotonos, **dehydration** weight sodium, **biliary** late referral) closes; **charts** (hour curves) documents. Yellows fade.",
+   "say": "Phototherapies exchanges IVIGs fluids is treatment: stops pause Kasais drain follows track counsels warn kernicteruses arch dehydrations dry biliaries delay charts plot curves fall. Lights bleach.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-201",
+  "bk2-paed-202",
+  "bk2-paed-203",
+  "bk2-paed-204",
+  "bk2-paed-205",
+  "bk2-paed-206",
+  "bk2-paed-207",
+  "bk2-paed-208",
+  "bk2-paed-209",
+  "bk2-paed-210"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-growth",
-  "subject": "paediatrics",
-  "title": "Normal growth and short stature: charts to workup",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Charts** (**WHO** under-five standards curves, **CDC** older references, **Fenton** preterm postnatal, **velocity** centimetres yearly trends, **percentiles** crossing lines flags, **mid-parental** target ranges, **BMI** thin obese sorts, **head** micro macro tracks) with **measures** (**length** recumbent stadiometer, **weight** naked scales, **technique** thrice averages) plots; **velocity** (deceleration alarms) watches. Children grow.",
-      "say": "WHOs CDCs Fentons velocities is charts: percentiles cross mid-parentals aim BMIs sort heads track measures plot techniques average velocities watch decelerations flag. Curves climb.",
-      "vis": null
-    },
-    {
-      "tx": "**Variants** (**constitutional** delayed bone-age family, **familial** short parents normal velocity, **SGA** catch-up failure risks, **prematurity** corrected age plots, **puberty** early late tempo, **nutrition** iron zinc catch-ups, **psychosocial** deprivation reversible, **athlete** energy deficit delays) with **reassures** (**velocity** normal predicts, **bone-age** matches height-age) calms; **follow** (six-monthly reviews) schedules. Tempos vary.",
-      "say": "Constitutionals familials SGAs prematurities is variants: puberties tempo nutritions restore psychosocials stunt athletes drain reassures calm bone-ages match follows schedule reviews book. Growth hums.",
-      "vis": null
-    },
-    {
-      "tx": "**Disease** (**hypothyroid** constipation dry delayed, **coeliac** anaemia TTG wheat, **Turner** webbed shield short girls, **SHOX** Madelung forearms, **GH** deficiency chubby hypoglycaemia, **Cushing** obese striae slow, **renal** acidosis CKD stunts, **syndromic** dysmorphic workups) with **labs** (**TSH** thyroxine first, **coeliac** screens, **karyotype** girls short) hunts; **bone-age** (delayed pathologic) reads. Statures stall.",
-      "say": "Hypothyroids coeliacs Turners SHOXs is disease: GHs cherub Cushings moon renals acid syndromics mark labs hunt bone-ages lag karyotypes count. Causes hide.",
-      "vis": null
-    },
-    {
-      "tx": "**Treat** (**GH** stimulation IGF-1 trials, **thyroxine** catch-up restores, **gluten-free** coeliac rebounds, **Turner** growth oestrogen plans, **nutrition** zinc iron repletes, **steroid-sparing** asthma heights, **counsel** expectations bullying, **monitor** velocity IGF safety) with **traps** (**Cushing** steroids stunt, **precocious** bone-age fuses, **IGF** glucose cancers) closes; **refer** (endocrine thresholds) sends. Heights climb.",
-      "say": "GHs thyroxines glutens Turners is treat: nutritions replete spares save counsels support monitors watch Cushings stunt precocious fuse IGFs risk refers send thresholds cross. Therapies lift.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-231",
-    "bk2-paed-232",
-    "bk2-paed-233",
-    "bk2-paed-234",
-    "bk2-paed-235",
-    "bk2-paed-236",
-    "bk2-paed-237",
-    "bk2-paed-238",
-    "bk2-paed-239",
-    "bk2-paed-240"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-growth",
+ "subject": "paediatrics",
+ "title": "Normal growth and short stature: charts to workup",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Charts** (**WHO** under-five standards curves, **CDC** older references, **Fenton** preterm postnatal, **velocity** centimetres yearly trends, **percentiles** crossing lines flags, **mid-parental** target ranges, **BMI** thin obese sorts, **head** micro macro tracks) with **measures** (**length** recumbent stadiometer, **weight** naked scales, **technique** thrice averages) plots; **velocity** (deceleration alarms) watches. Children grow.",
+   "say": "WHOs CDCs Fentons velocities is charts: percentiles cross mid-parentals aim BMIs sort heads track measures plot techniques average velocities watch decelerations flag. Curves climb.",
+   "vis": null
+  },
+  {
+   "tx": "**Variants** (**constitutional** delayed bone-age family, **familial** short parents normal velocity, **SGA** catch-up failure risks, **prematurity** corrected age plots, **puberty** early late tempo, **nutrition** iron zinc catch-ups, **psychosocial** deprivation reversible, **athlete** energy deficit delays) with **reassures** (**velocity** normal predicts, **bone-age** matches height-age) calms; **follow** (six-monthly reviews) schedules. Tempos vary.",
+   "say": "Constitutionals familials SGAs prematurities is variants: puberties tempo nutritions restore psychosocials stunt athletes drain reassures calm bone-ages match follows schedule reviews book. Growth hums.",
+   "vis": null
+  },
+  {
+   "tx": "**Disease** (**hypothyroid** constipation dry delayed, **coeliac** anaemia TTG wheat, **Turner** webbed shield short girls, **SHOX** Madelung forearms, **GH** deficiency chubby hypoglycaemia, **Cushing** obese striae slow, **renal** acidosis CKD stunts, **syndromic** dysmorphic workups) with **labs** (**TSH** thyroxine first, **coeliac** screens, **karyotype** girls short) hunts; **bone-age** (delayed pathologic) reads. Statures stall.",
+   "say": "Hypothyroids coeliacs Turners SHOXs is disease: GHs cherub Cushings moon renals acid syndromics mark labs hunt bone-ages lag karyotypes count. Causes hide.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-growth-fig1.webp",
+    "alt": "A table summarizing common pathological causes of short stature in children, listing key clinical features and initial diagnostic tests.",
+    "caption": "Pathological short stature: Clinical features and initial workup",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Treat** (**GH** stimulation IGF-1 trials, **thyroxine** catch-up restores, **gluten-free** coeliac rebounds, **Turner** growth oestrogen plans, **nutrition** zinc iron repletes, **steroid-sparing** asthma heights, **counsel** expectations bullying, **monitor** velocity IGF safety) with **traps** (**Cushing** steroids stunt, **precocious** bone-age fuses, **IGF** glucose cancers) closes; **refer** (endocrine thresholds) sends. Heights climb.",
+   "say": "GHs thyroxines glutens Turners is treat: nutritions replete spares save counsels support monitors watch Cushings stunt precocious fuse IGFs risk refers send thresholds cross. Therapies lift.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-231",
+  "bk2-paed-232",
+  "bk2-paed-233",
+  "bk2-paed-234",
+  "bk2-paed-235",
+  "bk2-paed-236",
+  "bk2-paed-237",
+  "bk2-paed-238",
+  "bk2-paed-239",
+  "bk2-paed-240"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

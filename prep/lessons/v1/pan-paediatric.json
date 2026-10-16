@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pan-paediatric",
-  "subject": "anaesthesia",
-  "title": "Paediatric anaesthesia, airway and analgesia",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Airway** (**larynx high C3**, **epiglottis floppy U**, **tongue** large, **occiput** prominent sniff, **adenoids** bleed, **croup** barking dexamethasone, **epiglottitis** drooling theatre) with **difficult** (**Pierre Robin** micrognathia, **Treacher** atresia, **mucopolysaccharidosis** stiff, **fibreoptic** nasal, **videolaryngoscopy** hyperangulated) plans; **stridor** (heliox racemic) calms. High floppy tongues obstruct.",
-      "say": "High U tongues big heads adenoids bark drool is paediatric airway: small jaws stiff necks fibres videos plan. Stridors calm.",
-      "vis": null
-    },
-    {
-      "tx": "**Induction** (**sevoflurane** 8 percent stepwise, **IV** crying EMLA, **intramuscular** ketamine selected, **parent** present calm, **emergence delirium** pain dexmedetomidine) with **maintenance** (**air oxygen** sevo, **TIVA** propofol selected, **muscle** rocuronium, **analgesia** paracetamol) keeps; **laryngospasm** (100 percent jaw Larson sux) breaks. Masks sweet.",
-      "say": "Sweet masks parents calm IVs cry sevo steps is induction: spasms oxygen jaws sux breaks. Deliriums dex calm.",
-      "vis": null
-    },
-    {
-      "tx": "**Regional** (**caudal** sacral hiatus **test dose** adrenaline, **spinal** tetracaine ex-preterm, **epidural** thoracic pectus, **penile** dorsal nerve, **TAP** umbilical, **ultrasound** in-plane) with **doses** (**bupivacaine 2 mg**, **ropivacaine** safer, **additives** clonidine morphine, **LAST** intralipid) weights; **blocks** (infraorbital cleft, **rectus** umbilical) map. Millilitres weigh.",
-      "say": "Hiatus tests spinals awake thoracics pectus dorsals circumcised TAPs bellies is regional: milligrams weigh additives intralipid rescues. Ultrasounds guide.",
-      "vis": null
-    },
-    {
-      "tx": "**Tonsils** (**bleed** primary reactionary secondary, **throat** packs count, **suction** clots, **transfuse** triggers, **PONV** dex ondansetron, **pain** paracetamol ibuprofen) with **trauma** (fractures fat embolism, **burns** Parkland fluids, **foreign** button batteries scope) and **daycase** (fitness criteria, **analgesia** take home, **parents** instructions) completes; **malignant hyperthermia** (dantrolene cools) drills. Throats count packs.",
-      "say": "Bleeding throats packs count transfuse vomits prevent aches ease is tonsils: traumas fluids batteries scope daycases fit discharge. Malignants cool dantrolene.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Paeds",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Airway",
-            "High floppy",
-            "Fibres"
-          ],
-          [
-            "Gas IV",
-            "Sevo parents",
-            "Larson"
-          ],
-          [
-            "Blocks",
-            "Caudal test",
-            "Intralipid"
-          ],
-          [
-            "Tonsils",
-            "Packs count",
-            "Daycase"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-ane-071",
-    "bk2-ane-072",
-    "bk2-ane-073",
-    "bk2-ane-074",
-    "bk2-ane-075",
-    "bk2-ane-076",
-    "bk2-ane-077",
-    "bk2-ane-078",
-    "bk2-ane-079",
-    "bk2-ane-080"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-mil1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pan-paediatric",
+ "subject": "anaesthesia",
+ "title": "Paediatric anaesthesia, airway and analgesia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Airway** (**larynx high C3**, **epiglottis floppy U**, **tongue** large, **occiput** prominent sniff, **adenoids** bleed, **croup** barking dexamethasone, **epiglottitis** drooling theatre) with **difficult** (**Pierre Robin** micrognathia, **Treacher** atresia, **mucopolysaccharidosis** stiff, **fibreoptic** nasal, **videolaryngoscopy** hyperangulated) plans; **stridor** (heliox racemic) calms. High floppy tongues obstruct.",
+   "say": "High U tongues big heads adenoids bark drool is paediatric airway: small jaws stiff necks fibres videos plan. Stridors calm.",
+   "vis": null
+  },
+  {
+   "tx": "**Induction** (**sevoflurane** 8 percent stepwise, **IV** crying EMLA, **intramuscular** ketamine selected, **parent** present calm, **emergence delirium** pain dexmedetomidine) with **maintenance** (**air oxygen** sevo, **TIVA** propofol selected, **muscle** rocuronium, **analgesia** paracetamol) keeps; **laryngospasm** (100 percent jaw Larson sux) breaks. Masks sweet.",
+   "say": "Sweet masks parents calm IVs cry sevo steps is induction: spasms oxygen jaws sux breaks. Deliriums dex calm.",
+   "vis": null
+  },
+  {
+   "tx": "**Regional** (**caudal** sacral hiatus **test dose** adrenaline, **spinal** tetracaine ex-preterm, **epidural** thoracic pectus, **penile** dorsal nerve, **TAP** umbilical, **ultrasound** in-plane) with **doses** (**bupivacaine 2 mg**, **ropivacaine** safer, **additives** clonidine morphine, **LAST** intralipid) weights; **blocks** (infraorbital cleft, **rectus** umbilical) map. Millilitres weigh.",
+   "say": "Hiatus tests spinals awake thoracics pectus dorsals circumcised TAPs bellies is regional: milligrams weigh additives intralipid rescues. Ultrasounds guide.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pan-paediatric-fig1.webp",
+    "alt": "Diagram showing anatomical landmarks for paediatric regional anaesthesia blocks including caudal, TAP, infraorbital, and penile dorsal nerve blocks, with ultrasound guidance.",
+    "caption": "Paediatric regional blocks: anatomical sites and ultrasound guidance",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Tonsils** (**bleed** primary reactionary secondary, **throat** packs count, **suction** clots, **transfuse** triggers, **PONV** dex ondansetron, **pain** paracetamol ibuprofen) with **trauma** (fractures fat embolism, **burns** Parkland fluids, **foreign** button batteries scope) and **daycase** (fitness criteria, **analgesia** take home, **parents** instructions) completes; **malignant hyperthermia** (dantrolene cools) drills. Throats count packs.",
+   "say": "Bleeding throats packs count transfuse vomits prevent aches ease is tonsils: traumas fluids batteries scope daycases fit discharge. Malignants cool dantrolene.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Paeds",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Airway",
+      "High floppy",
+      "Fibres"
+     ],
+     [
+      "Gas IV",
+      "Sevo parents",
+      "Larson"
+     ],
+     [
+      "Blocks",
+      "Caudal test",
+      "Intralipid"
+     ],
+     [
+      "Tonsils",
+      "Packs count",
+      "Daycase"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-ane-071",
+  "bk2-ane-072",
+  "bk2-ane-073",
+  "bk2-ane-074",
+  "bk2-ane-075",
+  "bk2-ane-076",
+  "bk2-ane-077",
+  "bk2-ane-078",
+  "bk2-ane-079",
+  "bk2-ane-080"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-mil1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

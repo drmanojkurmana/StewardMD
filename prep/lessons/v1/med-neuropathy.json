@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-neuropathy",
-  "subject": "medicine",
-  "title": "Peripheral neuropathy, GBS and CIDP",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**stocking** numbness burning feet hands, **areflexia** falls stairs buttons, **GBS** ascending diarrhoea vaccine facial diplegia, **dysautonomia** labile bowels bladder, **CIDP** chronic relapsing steroids, **causes** diabetes B12 alcohol drugs chemo, **red** weight malignancy vasculitis) with **viva** (**neuropathic** stockinged areflexic, **GBS** ascending ventilated) profiles; **tempo** (acute chronic sorts) times. Nerves fray.",
-      "say": "Stockings areflexias GBSs dysautonomias is history: CIDPs relapse causes poison reds warn tempos time neuropathics numb GBSs climb triggers bite bowels swing. Feet tingle.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**stocking** pinprick vibration proprioception, **areflexia** ankles knees arms, **wasting** foot drop steppage, **GBS** facial bulbar respiratory counts, **autonomic** postural sweats pupils, **vasculitic** mononeuritis painful asymmetric, **cord** mimics Babinski levels) with **bedside** (**monofilament** 10g annual, **vital** capacity GBS monitors, **glucose** B12 screens) filaments; **ulcers** (pressure callus) checks. Reflexes vanish.",
-      "say": "Stockings areflexias wastings GBSs is exam: autonomics swing vasculitics ache cords mimic filaments touch vitals blow glucoses check ulcers probe shoes fit. Legs deaden.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**NCS** axonal demyelinating sorts, **CSF** albuminocytologic GBS proves, **glucose** HbA1c B12 TFT causes, **vasculitis** ANCA ESR nerves, **myeloma** protein electrophoresis, **genetic** Charcot family feet) with **differentials** (**GBS** ascending CSF protein, **CIDP** chronic steroids, **vasculitic** painful asymmetric, **diabetic** stocking length) sorts; **neurology** (IVIg plasma decides) meets. Conductions slow.",
-      "say": "NCSs CSFs glucoses vasculitides is Ix: myelomas gap genetics test GBSs ascend CIDPs persist vasculitics sting diabetics stock neurologists meet globulins pour plasmas wash. Signals fade.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**GBS** IVIg plasma ICU ventilate, **CIDP** steroids IVIg azathioprine, **cause** glucose B12 alcohol drugs, **pain** gabapentin duloxetine amitriptyline, **physio** splints falls prevents, **vaccinate** flu pneumococcal guards) with **traps** (**respiratory** failure misses, **dysautonomia** arrests swings, **pressure** ulcers neglects) closes; **follow** (strength function NCS) tracks. Nerves recover.",
-      "say": "GBSs CIDPs causes pains is Rx: physios splint vaccinates shield respiratories fail dysautonomias swing pressures sore follows track strengths return wishes respect. Feet feel.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-521",
-    "bk2-med-522",
-    "bk2-med-523",
-    "bk2-med-524",
-    "bk2-med-525",
-    "bk2-med-526",
-    "bk2-med-527",
-    "bk2-med-528",
-    "bk2-med-529",
-    "bk2-med-530"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon6",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-neuropathy",
+ "subject": "medicine",
+ "title": "Peripheral neuropathy, GBS and CIDP",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**stocking** numbness burning feet hands, **areflexia** falls stairs buttons, **GBS** ascending diarrhoea vaccine facial diplegia, **dysautonomia** labile bowels bladder, **CIDP** chronic relapsing steroids, **causes** diabetes B12 alcohol drugs chemo, **red** weight malignancy vasculitis) with **viva** (**neuropathic** stockinged areflexic, **GBS** ascending ventilated) profiles; **tempo** (acute chronic sorts) times. Nerves fray.",
+   "say": "Stockings areflexias GBSs dysautonomias is history: CIDPs relapse causes poison reds warn tempos time neuropathics numb GBSs climb triggers bite bowels swing. Feet tingle.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**stocking** pinprick vibration proprioception, **areflexia** ankles knees arms, **wasting** foot drop steppage, **GBS** facial bulbar respiratory counts, **autonomic** postural sweats pupils, **vasculitic** mononeuritis painful asymmetric, **cord** mimics Babinski levels) with **bedside** (**monofilament** 10g annual, **vital** capacity GBS monitors, **glucose** B12 screens) filaments; **ulcers** (pressure callus) checks. Reflexes vanish.",
+   "say": "Stockings areflexias wastings GBSs is exam: autonomics swing vasculitics ache cords mimic filaments touch vitals blow glucoses check ulcers probe shoes fit. Legs deaden.",
+   "vis": null
+  },
+  {
+   "tx": "**Investigations** (**NCS** axonal demyelinating sorts, **CSF** albuminocytologic GBS proves, **glucose** HbA1c B12 TFT causes, **vasculitis** ANCA ESR nerves, **myeloma** protein electrophoresis, **genetic** Charcot family feet) with **differentials** (**GBS** ascending CSF protein, **CIDP** chronic steroids, **vasculitic** painful asymmetric, **diabetic** stocking length) sorts; **neurology** (IVIg plasma decides) meets. Conductions slow.",
+   "say": "NCSs CSFs glucoses vasculitides is Ix: myelomas gap genetics test GBSs ascend CIDPs persist vasculitics sting diabetics stock neurologists meet globulins pour plasmas wash. Signals fade.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-neuropathy-fig1.webp",
+    "alt": "Diagram comparing normal nerve conduction with demyelinating neuropathy (slowed conduction) and axonal neuropathy (reduced amplitude).",
+    "caption": "Nerve conduction study findings in normal, demyelinating, and axonal neuropathies",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Management** (**GBS** IVIg plasma ICU ventilate, **CIDP** steroids IVIg azathioprine, **cause** glucose B12 alcohol drugs, **pain** gabapentin duloxetine amitriptyline, **physio** splints falls prevents, **vaccinate** flu pneumococcal guards) with **traps** (**respiratory** failure misses, **dysautonomia** arrests swings, **pressure** ulcers neglects) closes; **follow** (strength function NCS) tracks. Nerves recover.",
+   "say": "GBSs CIDPs causes pains is Rx: physios splint vaccinates shield respiratories fail dysautonomias swing pressures sore follows track strengths return wishes respect. Feet feel.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-521",
+  "bk2-med-522",
+  "bk2-med-523",
+  "bk2-med-524",
+  "bk2-med-525",
+  "bk2-med-526",
+  "bk2-med-527",
+  "bk2-med-528",
+  "bk2-med-529",
+  "bk2-med-530"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon6",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

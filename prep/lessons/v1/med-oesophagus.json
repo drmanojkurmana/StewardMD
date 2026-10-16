@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-oesophagus",
-  "subject": "medicine",
-  "title": "Oesophageal disorders and dyspepsia",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**dysphagia** solids liquids levels, **odynophagia** painful pills candidal, **GORD** heartburn regurgitation nights, **weight** progressive malignant, **anaemia** iron chronic oozes, **smoke** alcohol cancers, **scleroderma** Raynaud reflux, **caustic** children strictures) with **viva** (**elderly** progressive solids, **young** intermittent liquids) profiles; **alarm** (bleed anaemia mass) flags. Throats stick.",
-      "say": "Dysphagias odynophagias GORDs weights is history: anaemias pale smokes burn sclerodermas tighten caustics scar elderlies waste youngs spasm alarms flag bleeds vomit. Foods lodge.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**cachexia** malignant hollows, **anaemia** pallor angular, **nodes** Virchow left supraclavicular, **liver** hard craggy mets, **chest** aspiration crackles, **skin** Raynaud sclerodactyly, **mouth** candidal dentures, **neuromuscular** bulbar strokes) with **bedside** (**BMI** nutrition grades, **swallow** water watches, **ECG** cardiac mimics) watches; **clubbing** (malignant warns) rules. Necks feel.",
-      "say": "Cachexias anaemias nodes livers is exam: chests rattle skins tighten mouths fur nodes spread brains bulbar BMIs grade swallows watch ECGs rule clubs warn cancers hide strictures narrow. Gullets block.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**endoscopy** biopsies Barrett grades, **barium** bird-beak corkscrew, **manometry** achalasia pressures, **pH** reflux correlates, **CXR** air-fluid levels, **CT** staging nodes mets, **anaemia** iron B12 workup, **H pylori** stool urea) with **differentials** (**cardiac** exertional ECG troponin, **spasm** intermittent nitrates, **webs** Plummer-Vinson iron, **tumour** progressive elderly) sorts; **MDT** (surgery oncology decides) meets. Scopes see.",
-      "say": "Endoscopies bariums manometries pHs is Ix: CXRs level CTs stage anaemias pale pyloris breathe cardiacs strain spasms ease webs tear tumours grow MDTs meet resections offer dilations stretch myotomies cut. Lumens narrow.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**PPI** daily heals Barrett, **dilate** strictures bougie balloons, **achalasia** Heller POEM botox, **varices** banding terlipressin, **cancer** oesophagectomy chemoRT, **palliation** stents lasers, **diet** soft small upright, **quit** smoke alcohol halves) with **traps** (**Barrett** surveillance dysplasia, **aspiration** upright feeds, **bleed** resuscitate band) closes; **follow** (scope intervals) tracks. Gullets open.",
-      "say": "PPIs dilates achalasias is Rx: varices band cancers resect palliations stent diets soften quits halve Barretts watch aspirations sit bleeds fill scopes track strictures recur wishes respect. Foods pass.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-181",
-    "bk2-med-182",
-    "bk2-med-183",
-    "bk2-med-184",
-    "bk2-med-185",
-    "bk2-med-186",
-    "bk2-med-187",
-    "bk2-med-188",
-    "bk2-med-189",
-    "bk2-med-190"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon3",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-oesophagus",
+ "subject": "medicine",
+ "title": "Oesophageal disorders and dyspepsia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**dysphagia** solids liquids levels, **odynophagia** painful pills candidal, **GORD** heartburn regurgitation nights, **weight** progressive malignant, **anaemia** iron chronic oozes, **smoke** alcohol cancers, **scleroderma** Raynaud reflux, **caustic** children strictures) with **viva** (**elderly** progressive solids, **young** intermittent liquids) profiles; **alarm** (bleed anaemia mass) flags. Throats stick.",
+   "say": "Dysphagias odynophagias GORDs weights is history: anaemias pale smokes burn sclerodermas tighten caustics scar elderlies waste youngs spasm alarms flag bleeds vomit. Foods lodge.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**cachexia** malignant hollows, **anaemia** pallor angular, **nodes** Virchow left supraclavicular, **liver** hard craggy mets, **chest** aspiration crackles, **skin** Raynaud sclerodactyly, **mouth** candidal dentures, **neuromuscular** bulbar strokes) with **bedside** (**BMI** nutrition grades, **swallow** water watches, **ECG** cardiac mimics) watches; **clubbing** (malignant warns) rules. Necks feel.",
+   "say": "Cachexias anaemias nodes livers is exam: chests rattle skins tighten mouths fur nodes spread brains bulbar BMIs grade swallows watch ECGs rule clubs warn cancers hide strictures narrow. Gullets block.",
+   "vis": null
+  },
+  {
+   "tx": "**Investigations** (**endoscopy** biopsies Barrett grades, **barium** bird-beak corkscrew, **manometry** achalasia pressures, **pH** reflux correlates, **CXR** air-fluid levels, **CT** staging nodes mets, **anaemia** iron B12 workup, **H pylori** stool urea) with **differentials** (**cardiac** exertional ECG troponin, **spasm** intermittent nitrates, **webs** Plummer-Vinson iron, **tumour** progressive elderly) sorts; **MDT** (surgery oncology decides) meets. Scopes see.",
+   "say": "Endoscopies bariums manometries pHs is Ix: CXRs level CTs stage anaemias pale pyloris breathe cardiacs strain spasms ease webs tear tumours grow MDTs meet resections offer dilations stretch myotomies cut. Lumens narrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-oesophagus-fig1.webp",
+    "alt": "A four-panel image showing endoscopic Barrett's, barium swallows of achalasia and spasm, and achalasia manometry tracing.",
+    "caption": "Key diagnostic findings for oesophageal disorders from endoscopy, barium, and manometry. Image: Farnoosh Farrokhi, Michael F. Vaezi., CC BY 2.0, Wikimedia Commons.",
+    "ar": 0.5333
+   }
+  },
+  {
+   "tx": "**Management** (**PPI** daily heals Barrett, **dilate** strictures bougie balloons, **achalasia** Heller POEM botox, **varices** banding terlipressin, **cancer** oesophagectomy chemoRT, **palliation** stents lasers, **diet** soft small upright, **quit** smoke alcohol halves) with **traps** (**Barrett** surveillance dysplasia, **aspiration** upright feeds, **bleed** resuscitate band) closes; **follow** (scope intervals) tracks. Gullets open.",
+   "say": "PPIs dilates achalasias is Rx: varices band cancers resect palliations stent diets soften quits halve Barretts watch aspirations sit bleeds fill scopes track strictures recur wishes respect. Foods pass.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-181",
+  "bk2-med-182",
+  "bk2-med-183",
+  "bk2-med-184",
+  "bk2-med-185",
+  "bk2-med-186",
+  "bk2-med-187",
+  "bk2-med-188",
+  "bk2-med-189",
+  "bk2-med-190"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon3",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

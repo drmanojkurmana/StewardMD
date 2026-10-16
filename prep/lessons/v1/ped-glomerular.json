@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-glomerular",
-  "subject": "paediatrics",
-  "title": "Glomerular diseases: nephrotic versus nephritic syndromes",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Nephrotic** (**protein** massive selective albuminuria, **albumin** low oedema puffy ascites, **lipids** hypercholesterolaemia xanthomas, **clots** antithrombin losses thrombosis, **infection** peritonitis pneumococcal vaccines, **minimal** foot-process steroids responsive, **FSGS** resistant hypertension biopsy, **membranous** PLA2R school-age) with **urines** (**dip** protein creatinine ratios, **microscopy** oval bodies) proves; **weigh** (daily oedema) tracks. Kidneys leak.",
-      "say": "Proteins albumins lipids clots is nephrotic: leaks flood puffs swell cholesterols rise thromboses stalk peritonites seed responsives melt resistants scar membranous stain urines dip ratios prove weighs track girths grow. Proteins pour.",
-      "vis": null
-    },
-    {
-      "tx": "**Steroids** (**prednisolone** daily induction tapers, **alternate** maintenance weans, **response** remission protein-free, **relapse** frequent triggers infections, **steroid-resistant** biopsy calcineurin, **cyclophosphamide** frequent relapsers, **rituximab** difficult courses, **levamisole** sparing options) with **monitors** (**growth** cataract pressure sugars, **urine** home dips) watches; **vaccinate** (live deferred) times. Remissions hold.",
-      "say": "Prednisolones alternates responses relapses is steroids: dailies induce tapers step weans spare remissions clear dips dry triggers spark resistants biopsy sparings spare relapsers pulse rituximabs deplete courses calm monitors watch growths stunt vaccinates time lives pause. Steroids calm.",
-      "vis": null
-    },
-    {
-      "tx": "**Nephritic** (**haematuria** cola hypertension oliguria, **post-strep** sore throat ASO low-C3, **IgA** concurrent respiratory relapses, **HSP** purpura abdominal joints, **lupus** ANA multisystem teens, **MPGN** persistent C3 dense, **rapidly** crescents urgent biopsy, **dialysis** fluid overload) with **pressures** (**salt** fluid restricts, **nifedipine** encephalopathy) controls; **follow** (C3 normalises) rechecks. Kidneys inflame.",
-      "say": "Haematurias post-streps IgAs HSPs is nephritic: colas darken hypertensions climb oligurias dry throats seed complements dip concurrents flare purpuras dot nephritides crescent dialyses wash overloads drown pressures curb salts cut rechecks track C3s rise. Glomeruli bleed.",
-      "vis": null
-    },
-    {
-      "tx": "**Support** (**diet** salt protein judicious, **diuretics** oedema ascites drains, **albumin** hypovolaemia infuses, **ACE** proteinuria renoprotects, **statins** persistent lipids, **anticoagulate** thrombosis treats, **psychology** cushingoid body image, **transition** adult nephrology) with **traps** (**missed** hypertension crisis, **peritonitis** fever taps, **AKI** prerenal contrasts) closes; **registry** (biopsy cohorts) learns. Children cope.",
-      "say": "Diets diuretics albumins ACEs is support: salts curb drains ease volumes fill proteins cut lipids lower clots thin images ache transitions hand adults take traps dodge crises spike taps culture injuries guard registries track biopsies file. Supports sustain.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-341",
-    "bk2-paed-342",
-    "bk2-paed-343",
-    "bk2-paed-344",
-    "bk2-paed-345",
-    "bk2-paed-346",
-    "bk2-paed-347",
-    "bk2-paed-348",
-    "bk2-paed-349",
-    "bk2-paed-350"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-glomerular",
+ "subject": "paediatrics",
+ "title": "Glomerular diseases: nephrotic versus nephritic syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Nephrotic** (**protein** massive selective albuminuria, **albumin** low oedema puffy ascites, **lipids** hypercholesterolaemia xanthomas, **clots** antithrombin losses thrombosis, **infection** peritonitis pneumococcal vaccines, **minimal** foot-process steroids responsive, **FSGS** resistant hypertension biopsy, **membranous** PLA2R school-age) with **urines** (**dip** protein creatinine ratios, **microscopy** oval bodies) proves; **weigh** (daily oedema) tracks. Kidneys leak.",
+   "say": "Proteins albumins lipids clots is nephrotic: leaks flood puffs swell cholesterols rise thromboses stalk peritonites seed responsives melt resistants scar membranous stain urines dip ratios prove weighs track girths grow. Proteins pour.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-glomerular-fig1.webp",
+    "alt": "Diagram comparing pediatric nephrotic and nephritic syndromes, highlighting clinical signs, urine findings, and glomerular pathology.",
+    "caption": "Key differences: Nephrotic (proteinuria, edema) vs. Nephritic (hematuria, hypertension)",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Steroids** (**prednisolone** daily induction tapers, **alternate** maintenance weans, **response** remission protein-free, **relapse** frequent triggers infections, **steroid-resistant** biopsy calcineurin, **cyclophosphamide** frequent relapsers, **rituximab** difficult courses, **levamisole** sparing options) with **monitors** (**growth** cataract pressure sugars, **urine** home dips) watches; **vaccinate** (live deferred) times. Remissions hold.",
+   "say": "Prednisolones alternates responses relapses is steroids: dailies induce tapers step weans spare remissions clear dips dry triggers spark resistants biopsy sparings spare relapsers pulse rituximabs deplete courses calm monitors watch growths stunt vaccinates time lives pause. Steroids calm.",
+   "vis": null
+  },
+  {
+   "tx": "**Nephritic** (**haematuria** cola hypertension oliguria, **post-strep** sore throat ASO low-C3, **IgA** concurrent respiratory relapses, **HSP** purpura abdominal joints, **lupus** ANA multisystem teens, **MPGN** persistent C3 dense, **rapidly** crescents urgent biopsy, **dialysis** fluid overload) with **pressures** (**salt** fluid restricts, **nifedipine** encephalopathy) controls; **follow** (C3 normalises) rechecks. Kidneys inflame.",
+   "say": "Haematurias post-streps IgAs HSPs is nephritic: colas darken hypertensions climb oligurias dry throats seed complements dip concurrents flare purpuras dot nephritides crescent dialyses wash overloads drown pressures curb salts cut rechecks track C3s rise. Glomeruli bleed.",
+   "vis": null
+  },
+  {
+   "tx": "**Support** (**diet** salt protein judicious, **diuretics** oedema ascites drains, **albumin** hypovolaemia infuses, **ACE** proteinuria renoprotects, **statins** persistent lipids, **anticoagulate** thrombosis treats, **psychology** cushingoid body image, **transition** adult nephrology) with **traps** (**missed** hypertension crisis, **peritonitis** fever taps, **AKI** prerenal contrasts) closes; **registry** (biopsy cohorts) learns. Children cope.",
+   "say": "Diets diuretics albumins ACEs is support: salts curb drains ease volumes fill proteins cut lipids lower clots thin images ache transitions hand adults take traps dodge crises spike taps culture injuries guard registries track biopsies file. Supports sustain.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-341",
+  "bk2-paed-342",
+  "bk2-paed-343",
+  "bk2-paed-344",
+  "bk2-paed-345",
+  "bk2-paed-346",
+  "bk2-paed-347",
+  "bk2-paed-348",
+  "bk2-paed-349",
+  "bk2-paed-350"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

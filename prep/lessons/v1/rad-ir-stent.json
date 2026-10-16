@@ -1,142 +1,148 @@
 {
-  "v": 1,
-  "module": "rad-ir-stent",
-  "subject": "radiology",
-  "title": "Angioplasty and stents",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Opening an artery starts with a balloon and sometimes ends with a stent. **Balloon angioplasty** cracks plaque and stretches media, with **provisional stenting** reserved for flow-limiting dissection or recoil. **Self-expanding nitinol stents** suit the mobile femoropopliteal segment, while **balloon-expandable stents** give precision at ostia such as the renal and iliac origins. **Iliac lesions** stent readily with durable patency, whereas long **femoropopliteal disease** often starts with a drug-coated balloon alone.",
-      "say": "Balloons crack plaque and stretch the wall, with stents reserved for dissection or recoil. Self-expanding stents suit mobile leg segments and balloon-expandable ones suit ostial precision. Iliac lesions stent durably, while long thigh disease often starts with a drug-coated balloon.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Segment",
-          "Strategy"
-        ],
-        "rows": [
-          [
-            "Iliac",
-            "Primary stenting"
-          ],
-          [
-            "Femoropopliteal",
-            "Balloon first"
-          ],
-          [
-            "Ostial renal",
-            "Balloon-expandable"
-          ],
-          [
-            "Mobile SFA",
-            "Self-expanding"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Drug delivery changed patency. **Drug-coated balloons** line the wall with paclitaxel without leaving metal, suiting restenosis and small vessels. **Drug-eluting stents** add a scaffold where recoil threatens. **In-stent restenosis** from neointimal hyperplasia returns with recurrent claudication and a rising duplex velocity, treated by drug-coated angioplasty inside the old stent. **Stent fracture** in hinged segments invites restenosis and needs fluoroscopic surveillance. **Dual antiplatelets** after stenting follow cardiology guidance rather than a fixed IR rule.",
-      "say": "Drug coating changed patency. Coated balloons deliver drug without metal, ideal for restenosis and small vessels. Restenosis returns with recurrent symptoms and rising velocities, treated by coated angioplasty inside the stent. Fractures in hinged segments need surveillance, and antiplatelets follow cardiology guidance.",
-      "vis": null
-    },
-    {
-      "tx": "Carotid and renal stenting are selective, not routine. **Carotid artery stenting** suits symptomatic patients at **high surgical risk** for endarterectomy, with **embolic protection devices** catching debris during deployment. Routine **renal artery stenting** for hypertension or dysfunction lost favour after the **CORAL and ASTRAL** trials showed no added benefit over medical therapy alone. True **fibromuscular dysplasia** of the renal artery still responds to plain angioplasty. **Subclavian stenosis** with arm claudication or steal stents well.",
-      "say": "Carotid stenting suits symptomatic patients at high surgical risk with embolic protection catching debris. Routine renal stenting lost favour after CORAL and ASTRAL showed no benefit over medicines alone. Fibromuscular dysplasia still responds to plain angioplasty, and subclavian steal stents well.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Lesion",
-          "Verdict"
-        ],
-        "rows": [
-          [
-            "Carotid high surgical risk",
-            "Stent with protection"
-          ],
-          [
-            "Renal atherosclerotic",
-            "Medical therapy"
-          ],
-          [
-            "Renal FMD",
-            "Plain angioplasty"
-          ],
-          [
-            "Subclavian steal",
-            "Stent"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Durability is judged by symptoms plus surveillance. **Ankle-brachial index** improvement with return of pulses marks technical success on the table. **Duplex surveillance** with velocity ratios watches for restenosis before symptoms recur. **Claudication** should improve by at least one Rutherford-style grade to count as clinical success. **Critical limb ischaemia** needs straight-line flow to the foot, often through **below-knee angioplasty**, to heal tissue loss. Re-intervention targets the restenosis, not the whole limb.",
-      "say": "Success is symptoms plus surveillance. Better pressures with returned pulses mark table success. Duplex velocities watch for restenosis before symptoms return. Claudication should improve a full grade, and threatened limbs need straight-line flow to the foot for healing.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Cross the lesion"
-          },
-          {
-            "id": "b",
-            "label": "Balloon dilate"
-          },
-          {
-            "id": "c",
-            "label": "Stent if needed"
-          },
-          {
-            "id": "d",
-            "label": "Confirm runoff"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir-041",
-    "maikir-042",
-    "maikir-043",
-    "maikir-044",
-    "maikir-045",
-    "maikir-046",
-    "maikir-047",
-    "maikir-048",
-    "maikir-049",
-    "maikir-050"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-wave1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "rad-ir-stent",
+ "subject": "radiology",
+ "title": "Angioplasty and stents",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Opening an artery starts with a balloon and sometimes ends with a stent. **Balloon angioplasty** cracks plaque and stretches media, with **provisional stenting** reserved for flow-limiting dissection or recoil. **Self-expanding nitinol stents** suit the mobile femoropopliteal segment, while **balloon-expandable stents** give precision at ostia such as the renal and iliac origins. **Iliac lesions** stent readily with durable patency, whereas long **femoropopliteal disease** often starts with a drug-coated balloon alone.",
+   "say": "Balloons crack plaque and stretch the wall, with stents reserved for dissection or recoil. Self-expanding stents suit mobile leg segments and balloon-expandable ones suit ostial precision. Iliac lesions stent durably, while long thigh disease often starts with a drug-coated balloon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Segment",
+     "Strategy"
+    ],
+    "rows": [
+     [
+      "Iliac",
+      "Primary stenting"
+     ],
+     [
+      "Femoropopliteal",
+      "Balloon first"
+     ],
+     [
+      "Ostial renal",
+      "Balloon-expandable"
+     ],
+     [
+      "Mobile SFA",
+      "Self-expanding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Drug delivery changed patency. **Drug-coated balloons** line the wall with paclitaxel without leaving metal, suiting restenosis and small vessels. **Drug-eluting stents** add a scaffold where recoil threatens. **In-stent restenosis** from neointimal hyperplasia returns with recurrent claudication and a rising duplex velocity, treated by drug-coated angioplasty inside the old stent. **Stent fracture** in hinged segments invites restenosis and needs fluoroscopic surveillance. **Dual antiplatelets** after stenting follow cardiology guidance rather than a fixed IR rule.",
+   "say": "Drug coating changed patency. Coated balloons deliver drug without metal, ideal for restenosis and small vessels. Restenosis returns with recurrent symptoms and rising velocities, treated by coated angioplasty inside the stent. Fractures in hinged segments need surveillance, and antiplatelets follow cardiology guidance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-stent-fig1.webp",
+    "alt": "Diagram showing drug-coated balloon, drug-eluting stent, and drug-coated balloon treating in-stent restenosis.",
+    "caption": "Drug delivery: balloons and stents prevent restenosis",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Carotid and renal stenting are selective, not routine. **Carotid artery stenting** suits symptomatic patients at **high surgical risk** for endarterectomy, with **embolic protection devices** catching debris during deployment. Routine **renal artery stenting** for hypertension or dysfunction lost favour after the **CORAL and ASTRAL** trials showed no added benefit over medical therapy alone. True **fibromuscular dysplasia** of the renal artery still responds to plain angioplasty. **Subclavian stenosis** with arm claudication or steal stents well.",
+   "say": "Carotid stenting suits symptomatic patients at high surgical risk with embolic protection catching debris. Routine renal stenting lost favour after CORAL and ASTRAL showed no benefit over medicines alone. Fibromuscular dysplasia still responds to plain angioplasty, and subclavian steal stents well.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion",
+     "Verdict"
+    ],
+    "rows": [
+     [
+      "Carotid high surgical risk",
+      "Stent with protection"
+     ],
+     [
+      "Renal atherosclerotic",
+      "Medical therapy"
+     ],
+     [
+      "Renal FMD",
+      "Plain angioplasty"
+     ],
+     [
+      "Subclavian steal",
+      "Stent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Durability is judged by symptoms plus surveillance. **Ankle-brachial index** improvement with return of pulses marks technical success on the table. **Duplex surveillance** with velocity ratios watches for restenosis before symptoms recur. **Claudication** should improve by at least one Rutherford-style grade to count as clinical success. **Critical limb ischaemia** needs straight-line flow to the foot, often through **below-knee angioplasty**, to heal tissue loss. Re-intervention targets the restenosis, not the whole limb.",
+   "say": "Success is symptoms plus surveillance. Better pressures with returned pulses mark table success. Duplex velocities watch for restenosis before symptoms return. Claudication should improve a full grade, and threatened limbs need straight-line flow to the foot for healing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cross the lesion"
+     },
+     {
+      "id": "b",
+      "label": "Balloon dilate"
+     },
+     {
+      "id": "c",
+      "label": "Stent if needed"
+     },
+     {
+      "id": "d",
+      "label": "Confirm runoff"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir-041",
+  "maikir-042",
+  "maikir-043",
+  "maikir-044",
+  "maikir-045",
+  "maikir-046",
+  "maikir-047",
+  "maikir-048",
+  "maikir-049",
+  "maikir-050"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

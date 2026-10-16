@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ans-recovery",
-  "subject": "anaesthesia",
-  "title": "Recovery, PONV and postoperative care: Aldrete to ERAS",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Recovery** (**Aldrete** activity breathing circulation, **fast-track** bypass criteria scores, **handover** SBAR anaesthetist nurse, **airway** patent snoring jaw, **pain** rested movement scores, **nausea** early sips antiemetics, **void** retention catheters, **discharge** escort instructions) with **zones** (**PACU** phase monitors, **daycase** street-fit criteria) flows; **calls** (deterioration escalation) briefs. Patients wake.",
-      "say": "Aldretess fast-tracks handovers airways is recovery: pains score nauseas settle voids pass discharges escort zones flow calls escalate Aldretes hit streets fit. Eyes open.",
-      "vis": null
-    },
-    {
-      "tx": "**PONV** (**Apfel** female nonsmoker history opioids, **risk** volatile nitrous durations, **ondansetron** QT headache treats, **dexamethasone** diabetic sugars, **droperidol** QT limits ECG, **scopolamine** dry visions elderly, **multimodal** TIVA propofol avoids, **hydration** dextrose fasting) with **prophylaxis** (**scored** tiers doubles, **rescue** different classes) prevents; **discharge** (vomiting delays) holds. Stomachs settle.",
-      "say": "Apfels risks ondansetrons dexamethasones is PONV: droperidols limit scopolamines dry multimodals avoid hydrations fill prophylaxes tier rescues switch discharges wait bellies calm. Nauseas fade.",
-      "vis": null
-    },
-    {
-      "tx": "**Complications** (**hypothermia** forced-air shivering oxygen, **pain** uncontrolled delirium slows, **bleeding** drains vitals returns, **respiratory** obstruction hypoventilation, **hypotension** fluids pressor reviews, **urinary** retention scans catheters, **allergy** late rashes tryptase, **cardiac** troponin ECG pain) with **escalation** (**NEWS** thresholds outreach, **ICU** criteria admits) rescues; **analgesia** (regular multimodal) rounds. Wards watch.",
-      "say": "Hypothermias pains bleedings respiratories is complications: hypotensions dip urinaries hold allergies bloom cardiacs ache escalations trigger ICUs admit analgesias round outreach reviews. Nurses call.",
-      "vis": null
-    },
-    {
-      "tx": "**Delirium** (**CAM** acute fluctuating inattention, **risk** elderly visions hearing, **drugs** anticholinergic benzodiazepine, **hydration** electrolytes constipation, **sleep** day-night noise light, **mobilise** early physio family, **treat** cause haloperidol cautions, **follow** cognition weeks) with **traps** (**restraints** worsen agitation, **sedation** prolongs stays, **deafness** aids batteries) closes; **ERAS** (bundles sustain) embeds. Minds clear.",
-      "say": "CAMs risks drugs hydrations is delirium: sleeps cycle mobilises early treats cause follows track restraints worsen sedations linger deafness isolates ERAS bundles wishes respect. Confusions lift.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ane-131",
-    "bk2-ane-132",
-    "bk2-ane-133",
-    "bk2-ane-134",
-    "bk2-ane-135",
-    "bk2-ane-136",
-    "bk2-ane-137",
-    "bk2-ane-138",
-    "bk2-ane-139",
-    "bk2-ane-140"
-  ],
-  "src": [],
-  "refs": [
-    "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ana2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ans-recovery",
+ "subject": "anaesthesia",
+ "title": "Recovery, PONV and postoperative care: Aldrete to ERAS",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Recovery** (**Aldrete** activity breathing circulation, **fast-track** bypass criteria scores, **handover** SBAR anaesthetist nurse, **airway** patent snoring jaw, **pain** rested movement scores, **nausea** early sips antiemetics, **void** retention catheters, **discharge** escort instructions) with **zones** (**PACU** phase monitors, **daycase** street-fit criteria) flows; **calls** (deterioration escalation) briefs. Patients wake.",
+   "say": "Aldretess fast-tracks handovers airways is recovery: pains score nauseas settle voids pass discharges escort zones flow calls escalate Aldretes hit streets fit. Eyes open.",
+   "vis": null
+  },
+  {
+   "tx": "**PONV** (**Apfel** female nonsmoker history opioids, **risk** volatile nitrous durations, **ondansetron** QT headache treats, **dexamethasone** diabetic sugars, **droperidol** QT limits ECG, **scopolamine** dry visions elderly, **multimodal** TIVA propofol avoids, **hydration** dextrose fasting) with **prophylaxis** (**scored** tiers doubles, **rescue** different classes) prevents; **discharge** (vomiting delays) holds. Stomachs settle.",
+   "say": "Apfels risks ondansetrons dexamethasones is PONV: droperidols limit scopolamines dry multimodals avoid hydrations fill prophylaxes tier rescues switch discharges wait bellies calm. Nauseas fade.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ans-recovery-fig1.webp",
+    "alt": "Diagram showing Apfel score risk factors (female, non-smoker, history PONV, opioids) and corresponding prophylaxis tiers for postoperative nausea and vomiting.",
+    "caption": "Apfel score for PONV risk assessment and prophylaxis tiers",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Complications** (**hypothermia** forced-air shivering oxygen, **pain** uncontrolled delirium slows, **bleeding** drains vitals returns, **respiratory** obstruction hypoventilation, **hypotension** fluids pressor reviews, **urinary** retention scans catheters, **allergy** late rashes tryptase, **cardiac** troponin ECG pain) with **escalation** (**NEWS** thresholds outreach, **ICU** criteria admits) rescues; **analgesia** (regular multimodal) rounds. Wards watch.",
+   "say": "Hypothermias pains bleedings respiratories is complications: hypotensions dip urinaries hold allergies bloom cardiacs ache escalations trigger ICUs admit analgesias round outreach reviews. Nurses call.",
+   "vis": null
+  },
+  {
+   "tx": "**Delirium** (**CAM** acute fluctuating inattention, **risk** elderly visions hearing, **drugs** anticholinergic benzodiazepine, **hydration** electrolytes constipation, **sleep** day-night noise light, **mobilise** early physio family, **treat** cause haloperidol cautions, **follow** cognition weeks) with **traps** (**restraints** worsen agitation, **sedation** prolongs stays, **deafness** aids batteries) closes; **ERAS** (bundles sustain) embeds. Minds clear.",
+   "say": "CAMs risks drugs hydrations is delirium: sleeps cycle mobilises early treats cause follows track restraints worsen sedations linger deafness isolates ERAS bundles wishes respect. Confusions lift.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ane-131",
+  "bk2-ane-132",
+  "bk2-ane-133",
+  "bk2-ane-134",
+  "bk2-ane-135",
+  "bk2-ane-136",
+  "bk2-ane-137",
+  "bk2-ane-138",
+  "bk2-ane-139",
+  "bk2-ane-140"
+ ],
+ "src": [],
+ "refs": [
+  "Miller's Anesthesia 10th Edition 2025 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ana2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

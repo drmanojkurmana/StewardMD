@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pnp-glomerular",
-  "subject": "paediatrics",
-  "title": "Glomerular and tubular disorders: nephrotic, nephritic and RTA",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Nephrotic** (**protein over 40 mg per metre square hour**, **albumin under 2.5**, **edema** periorbital, **hyperlipidaemia**; **minimal change** commonest steroid sensitive, **FSGS** resistant, **membranous** rare; **steroids prednisolone 2 mg per kg**, **relapse** upper respiratory, **levamisole cyclophosphamide** frequent) with **complications** (**peritonitis** SBP vaccines, **thrombosis** renal vein, **hypovolaemia**) watches; **biopsy** (steroid resistant, under 1 over 12, haematuria) selects. Protein dips.",
-      "say": "Puffy eyes heavy protein low albumin is nephrotic: prednisolone twos relapses colds vaccinate clots watch. Dips track.",
-      "vis": null
-    },
-    {
-      "tx": "**Nephritic** (**post-streptococcal** latent 2 weeks, **cola haematuria**, **hypertension edema** mild, **ASO C3 low**, **penicillin** eradicate, **fluid salt restrict**, supports; **IgA** synpharyngitic, **HSP** purpura abdominal, **lupus** full house, **MPGN** tram tracks) with **rapidly progressive** (**crescents**, pulses plasma, **ANCA Goodpasture** serology) emergencies; **biopsy** (persistent low C3, protein nephrotic) directs. Latencies link throats.",
-      "say": "Cola weeks after sore throat low C3 is post-strep: restrict support penicillin eradicate. Crescents pulse.",
-      "vis": null
-    },
-    {
-      "tx": "**Tubular** (**RTA type 1** distal stones nephrocalcinosis alkali, **type 2** proximal Fanconi phosphate rickets, **type 4** hyperkalaemic, **Bartter** loop polyhydramnios alkalosis deafness, **Gitelman** thiazide-like cramps, **DI** central nephrogenic thirst) with **Fanconi** (glucose phosphate amino acids lost, **cystinosis** crystals cysteamine, **Dent** protein stones) replaces losses; **stones** (calcium oxalate fluids citrate, **cystine** penicillamine) hydrate. Electrolytes map.",
-      "say": "Stones rickets polyuria deaf cramps thirst tubules map: alkali phosphate fluids citrate replace. Losses replace.",
-      "vis": null
-    },
-    {
-      "tx": "**UTI** (**E coli** commonest, **fever without focus** infants culture, **prophylaxis** VUR high, **DMSA** scars, **MCU** reflux grades, **circumcision** reduces) with **haematuria** (hypercalciuria, **nutcracker**, **Alport** deafness lenticonus, **thin basement**) and **proteinuria** (orthostatic benign, persistent quantifies) evaluates; **hypertension** (cuffs percentiles, amlodipine) percentiles. Cultures bag catheterised.",
-      "say": "Fever focusless cultures E coli DMSA scars MCU grades: deaf lenticonus Alport cuffs percentile. Bags catheterise.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Kidney",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Nephrotic",
-            "Protein edema",
-            "Steroids 2mg"
-          ],
-          [
-            "Nephritic",
-            "Cola latent",
-            "Restrict"
-          ],
-          [
-            "Tubular",
-            "Stones RTA",
-            "Replace"
-          ],
-          [
-            "UTI",
-            "Culture DMSA",
-            "Prophylax"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-071",
-    "bk2-paed-072",
-    "bk2-paed-073",
-    "bk2-paed-074",
-    "bk2-paed-075",
-    "bk2-paed-076",
-    "bk2-paed-077",
-    "bk2-paed-078",
-    "bk2-paed-079",
-    "bk2-paed-080"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pnp-glomerular",
+ "subject": "paediatrics",
+ "title": "Glomerular and tubular disorders: nephrotic, nephritic and RTA",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Nephrotic** (**protein over 40 mg per metre square hour**, **albumin under 2.5**, **edema** periorbital, **hyperlipidaemia**; **minimal change** commonest steroid sensitive, **FSGS** resistant, **membranous** rare; **steroids prednisolone 2 mg per kg**, **relapse** upper respiratory, **levamisole cyclophosphamide** frequent) with **complications** (**peritonitis** SBP vaccines, **thrombosis** renal vein, **hypovolaemia**) watches; **biopsy** (steroid resistant, under 1 over 12, haematuria) selects. Protein dips.",
+   "say": "Puffy eyes heavy protein low albumin is nephrotic: prednisolone twos relapses colds vaccinate clots watch. Dips track.",
+   "vis": null
+  },
+  {
+   "tx": "**Nephritic** (**post-streptococcal** latent 2 weeks, **cola haematuria**, **hypertension edema** mild, **ASO C3 low**, **penicillin** eradicate, **fluid salt restrict**, supports; **IgA** synpharyngitic, **HSP** purpura abdominal, **lupus** full house, **MPGN** tram tracks) with **rapidly progressive** (**crescents**, pulses plasma, **ANCA Goodpasture** serology) emergencies; **biopsy** (persistent low C3, protein nephrotic) directs. Latencies link throats.",
+   "say": "Cola weeks after sore throat low C3 is post-strep: restrict support penicillin eradicate. Crescents pulse.",
+   "vis": null
+  },
+  {
+   "tx": "**Tubular** (**RTA type 1** distal stones nephrocalcinosis alkali, **type 2** proximal Fanconi phosphate rickets, **type 4** hyperkalaemic, **Bartter** loop polyhydramnios alkalosis deafness, **Gitelman** thiazide-like cramps, **DI** central nephrogenic thirst) with **Fanconi** (glucose phosphate amino acids lost, **cystinosis** crystals cysteamine, **Dent** protein stones) replaces losses; **stones** (calcium oxalate fluids citrate, **cystine** penicillamine) hydrate. Electrolytes map.",
+   "say": "Stones rickets polyuria deaf cramps thirst tubules map: alkali phosphate fluids citrate replace. Losses replace.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pnp-glomerular-fig1.webp",
+    "alt": "Diagram of a nephron illustrating the anatomical location of various tubular disorders, including RTA types, Bartter, and Gitelman syndromes.",
+    "caption": "Key tubular disorders mapped to their primary nephron segments",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**UTI** (**E coli** commonest, **fever without focus** infants culture, **prophylaxis** VUR high, **DMSA** scars, **MCU** reflux grades, **circumcision** reduces) with **haematuria** (hypercalciuria, **nutcracker**, **Alport** deafness lenticonus, **thin basement**) and **proteinuria** (orthostatic benign, persistent quantifies) evaluates; **hypertension** (cuffs percentiles, amlodipine) percentiles. Cultures bag catheterised.",
+   "say": "Fever focusless cultures E coli DMSA scars MCU grades: deaf lenticonus Alport cuffs percentile. Bags catheterise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kidney",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Nephrotic",
+      "Protein edema",
+      "Steroids 2mg"
+     ],
+     [
+      "Nephritic",
+      "Cola latent",
+      "Restrict"
+     ],
+     [
+      "Tubular",
+      "Stones RTA",
+      "Replace"
+     ],
+     [
+      "UTI",
+      "Culture DMSA",
+      "Prophylax"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-071",
+  "bk2-paed-072",
+  "bk2-paed-073",
+  "bk2-paed-074",
+  "bk2-paed-075",
+  "bk2-paed-076",
+  "bk2-paed-077",
+  "bk2-paed-078",
+  "bk2-paed-079",
+  "bk2-paed-080"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

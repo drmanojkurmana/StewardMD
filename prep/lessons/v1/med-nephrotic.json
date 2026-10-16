@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-nephrotic",
-  "subject": "medicine",
-  "title": "Nephrotic syndrome: heavy proteinuria and clots",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**frothy** urine bubbles volumes, **anasarca** ankles ascites pleural, **weight** rapid gains, **minimal** child post-URI relapser, **membranous** adult drugs hepatitis malignancy, **FSGS** obese HIV heroin, **diabetic** years retinopathy timeline, **clots** renal vein DVT aches) with **viva** (**oedematous** nephrotic child, **thrombotic** flank Failure) profiles; **protein** (3.5 g thresholds) quantifies. Proteins leak.",
-      "say": "Frothies anasarcas weights clots is history: minimals relapse membranouses screen FSGSs scar diabetics time proteins quantify oedemas pit thromboses ache diuretics drain. Bodies swell.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**anasarca** pitting sacral scrotal, **ascites** shifting dullness, **pleural** stony dullness, **xanthelasma** hyperlipid warns, **steroid** cushingoid striae, **DVT** calf asymmetry Homan, **BP** membranous hypertenses, **growth** children stalls) with **bedside** (**dipstick** 4-plus protein, **weights** daily gains, **urine** ACR quantifies) dips; **infection** (peritonitis fever guards) watches. Legs pit.",
-      "say": "Anasarcas ascites pleurals xanthelasmas is exam: steroids moon DVTs swell pressures rise growths stall dipsticks foam weights weigh infections guard vaccines shield. Skins stretch.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**protein** 3.5 g ACR nephrotic, **albumin** low lipids high, **PLA2R** membranous primary, **biopsy** minimal FSGS spikes, **Doppler** renal vein clots, **hepatitis** HIV syphilis screens, **cancer** age-appropriate hunts, **complement** lupus clues) with **differentials** (**minimal** child steroid-responsive, **membranous** adult PLA2R, **FSGS** collapsing scars, **diabetic** nodular timeline) sorts; **renal** (biopsy clot decides) meets. Albumins fall.",
-      "say": "Proteins albumins PLA2Rs biopsies is Ix: Dopplers clot hepatitides screen cancers hunt complements dip minimals respond membranouses bind FSGSs scar diabetics nodulate renals meet calcineurins calm. Kidneys spill.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**steroids** minimal first relapses, **calcineurin** rituximab membranous FSGS, **ACE** proteinuria pressures, **statins** lipids guards, **anticoagulate** membranous albumin low, **diuretics** albumin infuses, **vaccines** pneumococcal guards, **diet** salt protein) with **traps** (**peritonitis** fever taps, **steroid** bones sugars, **relapse** dipstick watches) closes; **follow** (protein lipids clots) tracks. Proteins hold.",
-      "say": "Steroids calcineurins ACEs statins is Rx: anticoagulates thin diuretics drain vaccines guard peritonitides tap steroids thin relapses watch follows track remissions hold wishes respect. Swellings ease.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-311",
-    "bk2-med-312",
-    "bk2-med-313",
-    "bk2-med-314",
-    "bk2-med-315",
-    "bk2-med-316",
-    "bk2-med-317",
-    "bk2-med-318",
-    "bk2-med-319",
-    "bk2-med-320"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-nephrotic",
+ "subject": "medicine",
+ "title": "Nephrotic syndrome: heavy proteinuria and clots",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**frothy** urine bubbles volumes, **anasarca** ankles ascites pleural, **weight** rapid gains, **minimal** child post-URI relapser, **membranous** adult drugs hepatitis malignancy, **FSGS** obese HIV heroin, **diabetic** years retinopathy timeline, **clots** renal vein DVT aches) with **viva** (**oedematous** nephrotic child, **thrombotic** flank Failure) profiles; **protein** (3.5 g thresholds) quantifies. Proteins leak.",
+   "say": "Frothies anasarcas weights clots is history: minimals relapse membranouses screen FSGSs scar diabetics time proteins quantify oedemas pit thromboses ache diuretics drain. Bodies swell.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**anasarca** pitting sacral scrotal, **ascites** shifting dullness, **pleural** stony dullness, **xanthelasma** hyperlipid warns, **steroid** cushingoid striae, **DVT** calf asymmetry Homan, **BP** membranous hypertenses, **growth** children stalls) with **bedside** (**dipstick** 4-plus protein, **weights** daily gains, **urine** ACR quantifies) dips; **infection** (peritonitis fever guards) watches. Legs pit.",
+   "say": "Anasarcas ascites pleurals xanthelasmas is exam: steroids moon DVTs swell pressures rise growths stall dipsticks foam weights weigh infections guard vaccines shield. Skins stretch.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-nephrotic-fig1.webp",
+    "alt": "A composite image showing severe pitting edema of legs, xanthelasma, and a urine dipstick indicating 4-plus proteinuria, characteristic of nephrotic syndrome.",
+    "caption": "Key clinical and bedside findings in nephrotic syndrome",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**protein** 3.5 g ACR nephrotic, **albumin** low lipids high, **PLA2R** membranous primary, **biopsy** minimal FSGS spikes, **Doppler** renal vein clots, **hepatitis** HIV syphilis screens, **cancer** age-appropriate hunts, **complement** lupus clues) with **differentials** (**minimal** child steroid-responsive, **membranous** adult PLA2R, **FSGS** collapsing scars, **diabetic** nodular timeline) sorts; **renal** (biopsy clot decides) meets. Albumins fall.",
+   "say": "Proteins albumins PLA2Rs biopsies is Ix: Dopplers clot hepatitides screen cancers hunt complements dip minimals respond membranouses bind FSGSs scar diabetics nodulate renals meet calcineurins calm. Kidneys spill.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**steroids** minimal first relapses, **calcineurin** rituximab membranous FSGS, **ACE** proteinuria pressures, **statins** lipids guards, **anticoagulate** membranous albumin low, **diuretics** albumin infuses, **vaccines** pneumococcal guards, **diet** salt protein) with **traps** (**peritonitis** fever taps, **steroid** bones sugars, **relapse** dipstick watches) closes; **follow** (protein lipids clots) tracks. Proteins hold.",
+   "say": "Steroids calcineurins ACEs statins is Rx: anticoagulates thin diuretics drain vaccines guard peritonitides tap steroids thin relapses watch follows track remissions hold wishes respect. Swellings ease.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-311",
+  "bk2-med-312",
+  "bk2-med-313",
+  "bk2-med-314",
+  "bk2-med-315",
+  "bk2-med-316",
+  "bk2-med-317",
+  "bk2-med-318",
+  "bk2-med-319",
+  "bk2-med-320"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-seizures",
-  "subject": "paediatrics",
-  "title": "Seizure disorders in children: febrile to status epilepticus",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Febrile** (**simple** generalised brief once well, **complex** focal prolonged recurrent ill, **age** six-month five-year fevers, **cause** viral URTI HHV6, **risk** family age onset, **workup** unwell LP-selected, **treat** fever cause reassure, **recurrence** third benign counsel) with **watches** (**antipyretic** comfort only, **admission** complex observes) sorts; **parents** (fright calm plans) reassures. Fits fever.",
-      "say": "Simples complexes ages causes is febrile: briefs generalize prolongs focalise fevers spike viruses seed risks run families share workups select taps treats cool causes calm recurrences warn thirds pass watches admit complexes stay parents calm fears ease. Seizures scare.",
-      "vis": null
-    },
-    {
-      "tx": "**Epilepsy** (**classify** focal generalised unknown onset, **absence** staring hyperventilation, **myoclonic** jerks photosensitive teens, **infantile** spasms hypsarrhythmia ACTH, **EEG** sleep-deprived captures, **MRI** focal lesions screens, **triggers** sleep fever photos, **drugs** levetiracetam valproate ethosuximide) with **diaries** (**counts** frequency videos, **adherence** levels checks) tracks; **school** (plan supervision) shares. Brains misfire.",
-      "say": "Focals generaliseds absences myoclonics is epilepsy: onsets sort starings blank jerks flash spasms flex captures show lesions scan triggers steal sleeps starve drugs calm fits stop diaries log counts film adherences check levels bleed schools share plans supervise. Diagnoses classify.",
-      "vis": null
-    },
-    {
-      "tx": "**Status** (**define** five-minute continuous clusters, **ABC** oxygen glucose monitors, **first** lorazepam IV buccal, **second** levetiracetam fosphenytoin, **infusion** midazolam PICU EEG, **cause** hypoglycaemia meningitis trauma, **refractory** anaesthetic burst-suppression, **stop** clock escalates) with **rescue** (**home** buccal plans, **school** trained staff) arms; **transfer** (PICU thresholds) moves. Minutes matter.",
-      "say": "Fives ABCs firsts seconds is status: minutes define glucoses check lorazepams stop buccals work levetiracetams load infusions drip midazolams sedate causes hunt sugars dip refractories resist anaesthetics sleep rescues arm homes train transfers rush PICUs take. Clocks run.",
-      "vis": null
-    },
-    {
-      "tx": "**Safety** (**SUDEP** nocturnal supervision debates, **swim** bath road rules, **driving** adolescent regulations, **pregnancy** valproate folate switches, **wean** two-year seizure-free, **surgery** lesional VNS diets, **ketogenic** refractory teams, **transition** adult epilepsy) with **traps** (**missed** non-convulsive, **syncope** cardiac mimics, **breath-holding** pallid cyanotic) closes; **audit** (deaths reviews) learns. Lives continue.",
-      "say": "SUDEPs swims drivings pregnancies is safety: nights watch waters guard licences pause teratogens swap weans taper frees cut lesions resect diets starve transitions hand adults take traps dodge silent electrics miss faints mimic holdings pale audits review deaths count. Counsels protect.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-361",
-    "bk2-paed-362",
-    "bk2-paed-363",
-    "bk2-paed-364",
-    "bk2-paed-365",
-    "bk2-paed-366",
-    "bk2-paed-367",
-    "bk2-paed-368",
-    "bk2-paed-369",
-    "bk2-paed-370"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel5",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-seizures",
+ "subject": "paediatrics",
+ "title": "Seizure disorders in children: febrile to status epilepticus",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Febrile** (**simple** generalised brief once well, **complex** focal prolonged recurrent ill, **age** six-month five-year fevers, **cause** viral URTI HHV6, **risk** family age onset, **workup** unwell LP-selected, **treat** fever cause reassure, **recurrence** third benign counsel) with **watches** (**antipyretic** comfort only, **admission** complex observes) sorts; **parents** (fright calm plans) reassures. Fits fever.",
+   "say": "Simples complexes ages causes is febrile: briefs generalize prolongs focalise fevers spike viruses seed risks run families share workups select taps treats cool causes calm recurrences warn thirds pass watches admit complexes stay parents calm fears ease. Seizures scare.",
+   "vis": null
+  },
+  {
+   "tx": "**Epilepsy** (**classify** focal generalised unknown onset, **absence** staring hyperventilation, **myoclonic** jerks photosensitive teens, **infantile** spasms hypsarrhythmia ACTH, **EEG** sleep-deprived captures, **MRI** focal lesions screens, **triggers** sleep fever photos, **drugs** levetiracetam valproate ethosuximide) with **diaries** (**counts** frequency videos, **adherence** levels checks) tracks; **school** (plan supervision) shares. Brains misfire.",
+   "say": "Focals generaliseds absences myoclonics is epilepsy: onsets sort starings blank jerks flash spasms flex captures show lesions scan triggers steal sleeps starve drugs calm fits stop diaries log counts film adherences check levels bleed schools share plans supervise. Diagnoses classify.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-seizures-fig1.webp",
+    "alt": "Diagram illustrating pediatric epilepsy: classifications (focal, generalised), specific syndromes (absence, infantile spasms), diagnostic tools (EEG, MRI), and common triggers.",
+    "caption": "Key epilepsy classifications, syndromes, diagnostics, and triggers",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Status** (**define** five-minute continuous clusters, **ABC** oxygen glucose monitors, **first** lorazepam IV buccal, **second** levetiracetam fosphenytoin, **infusion** midazolam PICU EEG, **cause** hypoglycaemia meningitis trauma, **refractory** anaesthetic burst-suppression, **stop** clock escalates) with **rescue** (**home** buccal plans, **school** trained staff) arms; **transfer** (PICU thresholds) moves. Minutes matter.",
+   "say": "Fives ABCs firsts seconds is status: minutes define glucoses check lorazepams stop buccals work levetiracetams load infusions drip midazolams sedate causes hunt sugars dip refractories resist anaesthetics sleep rescues arm homes train transfers rush PICUs take. Clocks run.",
+   "vis": null
+  },
+  {
+   "tx": "**Safety** (**SUDEP** nocturnal supervision debates, **swim** bath road rules, **driving** adolescent regulations, **pregnancy** valproate folate switches, **wean** two-year seizure-free, **surgery** lesional VNS diets, **ketogenic** refractory teams, **transition** adult epilepsy) with **traps** (**missed** non-convulsive, **syncope** cardiac mimics, **breath-holding** pallid cyanotic) closes; **audit** (deaths reviews) learns. Lives continue.",
+   "say": "SUDEPs swims drivings pregnancies is safety: nights watch waters guard licences pause teratogens swap weans taper frees cut lesions resect diets starve transitions hand adults take traps dodge silent electrics miss faints mimic holdings pale audits review deaths count. Counsels protect.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-361",
+  "bk2-paed-362",
+  "bk2-paed-363",
+  "bk2-paed-364",
+  "bk2-paed-365",
+  "bk2-paed-366",
+  "bk2-paed-367",
+  "bk2-paed-368",
+  "bk2-paed-369",
+  "bk2-paed-370"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel5",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

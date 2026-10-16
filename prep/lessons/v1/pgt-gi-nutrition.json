@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "pgt-gi-nutrition",
-  "subject": "paediatrics",
-  "title": "GI and nutritional disorders: celiac, IBD, GERD and malnutrition",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Celiac** (**anti-tTG IgA** with total IgA, **EMA** confirm, **biopsy** Marsh villous atrophy, **HLA DQ2 DQ8**, **iron folate** deficient, **gluten free lifelong**, **oats** pure selected, **thyroid diabetes** screen) with **cow milk** (**blood streaked**, ** extensively hydrolysed**, **soy** selected, **challenge** year) and **FPIES** (profuse vomit pallor, **ondansetron**, **adrenaline** shock) allergies; **failure thrive** plots. Villous blunts.",
-      "say": "Quote tTG biopsied Marsh lifelong gluten free is celiac: milks hydrolyse challenge years FPIES vomits. Plots thrive.",
-      "vis": null
-    },
-    {
-      "tx": "**IBD** (**Crohn skip cobble granulomas** mouth anus, **UC continuous crypt abscesses** blood mucus, **calprotectin** screens, **colonoscopy** biopsies, **EEN** exclusive enteral induces Crohn, **5-ASA** UC, **azathioprine** TPMT, **infliximab** fistulising, **surgery** UC colectomy cures) with **growth** (puberty delays, **bone** DEXA, **vaccines** pre biologics) monitors; **perianal** (tags fissures MRI) examines. Skips cobble.",
-      "say": "Skipped cobbled mouth anus is Crohn continuous bloody crypts is UC: enteral induces biologics fistulise surgery cures UC. Growth puberties.",
-      "vis": null
-    },
-    {
-      "tx": "**GERD** (**effortless vomit** thriving, **red flags** bilious blood poor weight, **thickened** feeds upright, **omeprazole** selected, **pyloric** olive projectile nonbilious, **malrotation** bilious volvulus Ladd) with **constipation** (**disimpaction** PEG, **maintenance** months, **toilet** routine, **Hirschsprung** delayed meconium biopsy) and **intussusception** (**colicky drawing knees**, **red currant**, **air enema** reduces, **lead point** pathological) abdomens; **appendicitis** (migratory McBurney Alvarado, **surgery** prompt) operates. Olives obstruct.",
-      "say": "Spitty thriving thickens upright red flags bilious olives operate: currant knees air reduces lead points resect. Routines disimpact.",
-      "vis": null
-    },
-    {
-      "tx": "**Malnutrition** (**SAM** WHZ under -3 edema, **F75 F100 RUTF** phases, **appetite** tests, **infections** treat, **hypothermia hypoglycaemia** warm sugar) with **vitamins** (**A** measles eyes, **D** rickets, **iron** anaemia, **zinc** diarrhoea) and **rehab** (catch-up, **counselling** feeds, **follow** monthly) rebuilds; **obesity** (BMI 95, **lifestyle** 5-2-1-0, **NAFLD** screens) balances. Ready feeds.",
-      "say": "Skin bones edematous ready feeds phases appetite antibiotics warm sugar is SAM: measles A rickets D zinc diarrhoea. Catch-ups counsel.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "GI feed",
-          "Pearl",
-          "Act"
-        ],
-        "rows": [
-          [
-            "Celiac",
-            "tTG Marsh",
-            "Free lifelong"
-          ],
-          [
-            "IBD",
-            "Skip continuous",
-            "EEN biologics"
-          ],
-          [
-            "Vomit belly",
-            "Olive currant",
-            "Scope reduce"
-          ],
-          [
-            "Feed",
-            "F75 RUTF",
-            "Catch-up"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-paed-111",
-    "bk2-paed-112",
-    "bk2-paed-113",
-    "bk2-paed-114",
-    "bk2-paed-115",
-    "bk2-paed-116",
-    "bk2-paed-117",
-    "bk2-paed-118",
-    "bk2-paed-119",
-    "bk2-paed-120"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "pgt-gi-nutrition",
+ "subject": "paediatrics",
+ "title": "GI and nutritional disorders: celiac, IBD, GERD and malnutrition",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Celiac** (**anti-tTG IgA** with total IgA, **EMA** confirm, **biopsy** Marsh villous atrophy, **HLA DQ2 DQ8**, **iron folate** deficient, **gluten free lifelong**, **oats** pure selected, **thyroid diabetes** screen) with **cow milk** (**blood streaked**, ** extensively hydrolysed**, **soy** selected, **challenge** year) and **FPIES** (profuse vomit pallor, **ondansetron**, **adrenaline** shock) allergies; **failure thrive** plots. Villous blunts.",
+   "say": "Quote tTG biopsied Marsh lifelong gluten free is celiac: milks hydrolyse challenge years FPIES vomits. Plots thrive.",
+   "vis": null
+  },
+  {
+   "tx": "**IBD** (**Crohn skip cobble granulomas** mouth anus, **UC continuous crypt abscesses** blood mucus, **calprotectin** screens, **colonoscopy** biopsies, **EEN** exclusive enteral induces Crohn, **5-ASA** UC, **azathioprine** TPMT, **infliximab** fistulising, **surgery** UC colectomy cures) with **growth** (puberty delays, **bone** DEXA, **vaccines** pre biologics) monitors; **perianal** (tags fissures MRI) examines. Skips cobble.",
+   "say": "Skipped cobbled mouth anus is Crohn continuous bloody crypts is UC: enteral induces biologics fistulise surgery cures UC. Growth puberties.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/pgt-gi-nutrition-fig1.webp",
+    "alt": "Diagram comparing Crohn's disease (skip lesions, cobble-stoning, transmural inflammation, perianal) and Ulcerative Colitis (continuous, crypt abscesses, mucosal inflammation).",
+    "caption": "IBD: Crohn's vs. Ulcerative Colitis pathological and anatomical differences",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**GERD** (**effortless vomit** thriving, **red flags** bilious blood poor weight, **thickened** feeds upright, **omeprazole** selected, **pyloric** olive projectile nonbilious, **malrotation** bilious volvulus Ladd) with **constipation** (**disimpaction** PEG, **maintenance** months, **toilet** routine, **Hirschsprung** delayed meconium biopsy) and **intussusception** (**colicky drawing knees**, **red currant**, **air enema** reduces, **lead point** pathological) abdomens; **appendicitis** (migratory McBurney Alvarado, **surgery** prompt) operates. Olives obstruct.",
+   "say": "Spitty thriving thickens upright red flags bilious olives operate: currant knees air reduces lead points resect. Routines disimpact.",
+   "vis": null
+  },
+  {
+   "tx": "**Malnutrition** (**SAM** WHZ under -3 edema, **F75 F100 RUTF** phases, **appetite** tests, **infections** treat, **hypothermia hypoglycaemia** warm sugar) with **vitamins** (**A** measles eyes, **D** rickets, **iron** anaemia, **zinc** diarrhoea) and **rehab** (catch-up, **counselling** feeds, **follow** monthly) rebuilds; **obesity** (BMI 95, **lifestyle** 5-2-1-0, **NAFLD** screens) balances. Ready feeds.",
+   "say": "Skin bones edematous ready feeds phases appetite antibiotics warm sugar is SAM: measles A rickets D zinc diarrhoea. Catch-ups counsel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "GI feed",
+     "Pearl",
+     "Act"
+    ],
+    "rows": [
+     [
+      "Celiac",
+      "tTG Marsh",
+      "Free lifelong"
+     ],
+     [
+      "IBD",
+      "Skip continuous",
+      "EEN biologics"
+     ],
+     [
+      "Vomit belly",
+      "Olive currant",
+      "Scope reduce"
+     ],
+     [
+      "Feed",
+      "F75 RUTF",
+      "Catch-up"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-paed-111",
+  "bk2-paed-112",
+  "bk2-paed-113",
+  "bk2-paed-114",
+  "bk2-paed-115",
+  "bk2-paed-116",
+  "bk2-paed-117",
+  "bk2-paed-118",
+  "bk2-paed-119",
+  "bk2-paed-120"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
