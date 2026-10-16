@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: 22
       - name: Build the links index over live bank text
+        env:
+          # the bank is gated (PREP_BANK_ENFORCE=1); the tools credential lets CI read it (functions/api/prep/bank toolOK)
+          SMD_TOOL_TOKEN: ${{ secrets.SMD_TOOL_TOKEN }}
+          NODE_OPTIONS: --import=./tools/_bank-token.mjs
         run: |
           node tools/prep-links.mjs fetch --cache /tmp/links-cache
           node tools/prep-links.mjs build --cache /tmp/links-cache --out /tmp/links-out
