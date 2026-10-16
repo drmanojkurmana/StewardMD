@@ -135,6 +135,9 @@ Gotchas: dark-mode token overrides must be `body.dark #clinixRoot.cx-pn` (the pl
 block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo` filter), not inline;
 `drug-link.js` turns words like "electrolytes" into monograph links anywhere, so screen titles carry
 `no-druglink` (its SKIP list).
+Home banner (owner: "keep this banner or design a better one, professional premium"): in the pn look `.cx-hero`
+is a deep Juniper band (Leaf light top right, a trace of Coral low left, rounded 28px foot) with Candle type and a
+facts line from `heroFacts(cat)` (systems, topics, "OSCE and viva"), counted from the catalog, hidden in the teal look.
 
 ## Gotchas
 - **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked

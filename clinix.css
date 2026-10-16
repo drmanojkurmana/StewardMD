@@ -1379,13 +1379,28 @@ body.dark #clinixRoot.cx-pn .cx-back, body.dark #clinixRoot.cx-pn .cx-close { ba
 #clinixRoot.cx-pn .cx-head-title { font-family: var(--cx-disp); font-size: 17px; font-weight: 650; letter-spacing: -.022em; }
 #clinixRoot.cx-pn .cx-head-sub { font-size: 13px; }
 
-/* Home top: the brand on the wash, no slab. */
-#clinixRoot.cx-pn .cx-hero { background: transparent; color: var(--cx-ink); padding: calc(env(safe-area-inset-top, 0px) + 14px) 20px 8px 72px; min-height: 64px; }
-#clinixRoot.cx-pn .cx-hero-close { top: calc(env(safe-area-inset-top, 0px) + 12px); left: 16px; color: var(--cx-ink); }
-#clinixRoot.cx-pn .cx-hero-mark { font-family: var(--cx-disp); font-size: 22px; font-weight: 700; letter-spacing: -.024em; gap: 10px; }
-#clinixRoot.cx-pn .cx-hero-logo { width: 30px !important; filter: brightness(0) saturate(100%) invert(19%) sepia(14%) saturate(900%) hue-rotate(28deg) brightness(92%); }
-body.dark #clinixRoot.cx-pn .cx-hero-logo { filter: brightness(0) invert(.95); }
-#clinixRoot.cx-pn .cx-hero-tag { margin-top: 2px; font-size: 14px; color: var(--cx-muted); opacity: 1; }
+/* Home banner (owner 2026-10-16: keep a banner, make it premium). A deep Juniper band with a Leaf light at the
+   top right and a trace of Coral warmth low left, a fine inner hairline, rounded foot so it sits on the paper
+   like a card. Candle type. Nothing animates. */
+#clinixRoot.cx-pn .cx-hero {
+  margin: 0 0 4px; padding: calc(env(safe-area-inset-top, 0px) + 64px) 22px 22px;
+  color: #f4efe0; border-radius: 0 0 28px 28px; overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 100% 0, rgba(137, 136, 97, .55) 0, rgba(137, 136, 97, 0) 58%),
+    radial-gradient(90% 80% at 0 100%, rgba(125, 40, 38, .38) 0, rgba(125, 40, 38, 0) 60%),
+    linear-gradient(160deg, #3d4129 0, #2b2d1d 100%);
+  box-shadow: inset 0 -1px 0 rgba(239, 233, 215, .10), 0 14px 32px -20px rgba(43, 45, 29, .65);
+}
+body.dark #clinixRoot.cx-pn .cx-hero { box-shadow: inset 0 0 0 1px rgba(239, 233, 215, .07); }
+#clinixRoot.cx-pn .cx-hero-close { top: calc(env(safe-area-inset-top, 0px) + 12px); left: 16px; background: rgba(239, 233, 215, .12); box-shadow: none; color: #f4efe0; }
+#clinixRoot.cx-pn .cx-hero-close:active { background: rgba(239, 233, 215, .22); }
+#clinixRoot.cx-pn .cx-hero-mark { font-family: var(--cx-disp); font-size: 32px; font-weight: 750; letter-spacing: -.03em; gap: 12px; line-height: 1.05; }
+#clinixRoot.cx-pn .cx-hero-logo { width: 40px !important; filter: brightness(0) invert(94%) sepia(9%) saturate(380%) hue-rotate(5deg); }
+#clinixRoot.cx-pn .cx-hero-tag { margin-top: 10px; max-width: 30ch; font-size: 15px; line-height: 1.45; color: rgba(244, 239, 224, .78); opacity: 1; }
+#clinixRoot.cx-pn .cx-hero-facts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+#clinixRoot.cx-pn .cx-hero-facts span { padding: 5px 11px; border-radius: 999px; font-size: 12.5px; font-weight: 600; letter-spacing: .005em; color: #f4efe0; background: rgba(239, 233, 215, .10); box-shadow: inset 0 0 0 1px rgba(239, 233, 215, .14); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-hero-facts { display: none; }
+#clinixRoot.cx-pn .cx-hero-facts { display: flex; }
 
 /* Section titles: large, sentence case, no shouting eyebrows. */
 #clinixRoot.cx-pn .cx-sec { padding: 26px 16px 0; }

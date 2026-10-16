@@ -536,6 +536,7 @@ try {
   ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === true, "CliniX opens in the PrepNucleus look by default");
   ok((await ev("getComputedStyle(document.getElementById('clinixRoot')).getPropertyValue('--cx-bg').trim().toLowerCase()")) === "#efe9d7", "on the CliniX Candle background, not the PrepNucleus paper");
   ok((await ev("getComputedStyle(document.querySelector('#clinixRoot .cx-sec-h')).textTransform")) === "none", "section titles are sentence case, not small capitals");
+  ok(/^\d+ systems\d+ topicsOSCE and viva$/.test(await ev("(document.querySelector('#clinixRoot .cx-hero-facts') || {}).textContent || ''")), "the home banner states systems and topics counted from the catalog");
   ok((await ev("!document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "the bar starts transparent on the wash");
   await ev("(document.getElementById('clinixScroll').scrollTop = 600, true)"); await sleep(250);
   ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "and turns solid once the screen scrolls");

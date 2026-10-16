@@ -221,6 +221,17 @@
 
   /* ── screen: home ────────────────────────────────────────────────────────── */
 
+  // One quiet facts line under the wordmark, counted from the catalog so it never goes stale.
+  function heroFacts(cat) {
+    var sys = (cat && cat.systems) || [], topics = 0, live = 0;
+    for (var i = 0; i < sys.length; i++) {
+      var n = (sys[i].diseases || []).length + (sys[i].module ? 1 : 0);
+      topics += n; if (n) live++;
+    }
+    if (!topics) return "";
+    return '<div class="cx-hero-facts"><span>' + live + " systems</span><span>" + topics + " topics</span><span>OSCE and viva</span></div>";
+  }
+
   function renderHome(host) {
     var cat = state.catalog;
     if (!cat) { host.innerHTML = header("CliniX", "Clinical learning") + skeleton(); return; }
@@ -232,6 +243,7 @@
       '<button type="button" class="cx-close cx-hero-close" data-act="cx-close" aria-label="Close CliniX">' + ic("close") + "</button>" +
       '<div class="cx-hero-mark">' + CX_LOGO_MARK + "CliniX</div>" +
       '<div class="cx-hero-tag">Clinical reasoning operating system. From symptom to diagnosis.</div>' +
+      heroFacts(cat) +
       "</section>";
 
     // Persona Track Switcher: MBBS Exam vs PG Resident
