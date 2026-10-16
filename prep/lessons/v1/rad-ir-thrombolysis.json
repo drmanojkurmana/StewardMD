@@ -1,142 +1,148 @@
 {
-  "v": 1,
-  "module": "rad-ir-thrombolysis",
-  "subject": "radiology",
-  "title": "Thrombolysis and thrombectomy",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Fresh clot dissolves, old clot organises. **Acute limb ischaemia** with a viable limb and symptoms under **14 days** suits **catheter-directed thrombolysis** under AHA and ACC guidance, dissolving thrombus through a multi-sidehole catheter. **Alteplase** infusions run with heparin cover and serial angiographic checks. **Viability** with audible Doppler signals and no fixed mottling separates candidates from those needing open surgery. **Embolic occlusion** with a clear source lyses faster than in-situ thrombosis on plaque.",
-      "say": "Fresh clot dissolves and old clot organises. Acute limb ischaemia under 14 days with a viable limb suits catheter-directed thrombolysis with alteplase through a multi-sidehole catheter. Audible Doppler signals without fixed mottling mark viability, and embolic clots lyse faster than thrombosis on plaque.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Choice"
-        ],
-        "rows": [
-          [
-            "Viable limb under 14 days",
-            "Catheter lysis"
-          ],
-          [
-            "Fixed mottling",
-            "Open surgery"
-          ],
-          [
-            "Embolic source",
-            "Lyses faster"
-          ],
-          [
-            "Thrombosis on plaque",
-            "May need stent"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Technique decides safety in thrombolysis. **Ultrasound-accelerated catheters** and pulse-spray speed lysis without proven superiority over standard infusion. **Fibrinogen monitoring** with dose reduction or pause follows local protocol when levels fall sharply. **Puncture-site bleeding** is the commonest complication, managed with pressure and dose review. **Intracranial bleeding**, though rare, is the feared catastrophe and ends the infusion at once. **Distal embolisation** during lysis is retrieved or aspirated before completion.",
-      "say": "Technique decides safety. Accelerated catheters speed lysis without proven superiority. Fibrinogen is monitored with dose pauses per protocol. Puncture bleeding is commonest and managed with pressure, while any intracranial bleed ends the infusion at once. Distal emboli are retrieved before completion.",
-      "vis": null
-    },
-    {
-      "tx": "Pulmonary embolism care escalates by risk. **High-risk massive embolism** with hypotension receives **systemic thrombolysis** where no contraindication exists under **ESC guidance**. **Catheter-directed therapy** with fragmentation, aspiration or local lysis suits massive embolism where systemic lysis is banned or has failed. **Submassive disease** with right-heart strain but stable pressure usually stays anticoagulated with escalation only on deterioration. **Phlegmasia cerulea dolens** with venous gangrene threatens the limb and justifies catheter removal of clot.",
-      "say": "Embolism care escalates by risk. Massive embolism with hypotension receives systemic lysis where allowed. Catheter therapy suits cases where systemic lysis is banned or failed. Submassive disease usually stays anticoagulated, while phlegmasia with gangrene justifies catheter clot removal.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "PE category",
-          "Action"
-        ],
-        "rows": [
-          [
-            "Massive with hypotension",
-            "Systemic lysis"
-          ],
-          [
-            "Systemic banned or failed",
-            "Catheter therapy"
-          ],
-          [
-            "Submassive stable",
-            "Anticoagulate watch"
-          ],
-          [
-            "Phlegmasia gangrene",
-            "Catheter removal"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Clot-busting is forbidden in some patients. **Absolute bans** include prior **intracranial bleeding**, recent **ischaemic stroke**, active bleeding and recent intracranial or spinal surgery. **Recent major surgery**, trauma, gastrointestinal bleeding and severe hypertension demand case-by-case judgement. **Pregnancy and postpartum** states raise bleeding risk sharply. The **ATTRACT** trial tempered enthusiasm for routine DVT thrombolysis, showing limited benefit against bleeding risk, so iliofemoral DVT lysis stays selective for young low-bleed-risk limbs.",
-      "say": "Some patients must never receive lysis. Prior intracranial bleeding, recent stroke, active bleeding and recent brain or spine surgery ban it absolutely. Recent surgery, trauma and gut bleeding need individual judgement. ATTRACT tempered routine DVT lysis, so iliofemoral cases stay selective for young low-risk limbs.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Confirm fresh clot"
-          },
-          {
-            "id": "b",
-            "label": "Exclude bans"
-          },
-          {
-            "id": "c",
-            "label": "Catheter infusion"
-          },
-          {
-            "id": "d",
-            "label": "Check and stop"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir-051",
-    "maikir-052",
-    "maikir-053",
-    "maikir-054",
-    "maikir-055",
-    "maikir-056",
-    "maikir-057",
-    "maikir-058",
-    "maikir-059",
-    "maikir-060"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-wave1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "rad-ir-thrombolysis",
+ "subject": "radiology",
+ "title": "Thrombolysis and thrombectomy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Fresh clot dissolves, old clot organises. **Acute limb ischaemia** with a viable limb and symptoms under **14 days** suits **catheter-directed thrombolysis** under AHA and ACC guidance, dissolving thrombus through a multi-sidehole catheter. **Alteplase** infusions run with heparin cover and serial angiographic checks. **Viability** with audible Doppler signals and no fixed mottling separates candidates from those needing open surgery. **Embolic occlusion** with a clear source lyses faster than in-situ thrombosis on plaque.",
+   "say": "Fresh clot dissolves and old clot organises. Acute limb ischaemia under 14 days with a viable limb suits catheter-directed thrombolysis with alteplase through a multi-sidehole catheter. Audible Doppler signals without fixed mottling mark viability, and embolic clots lyse faster than thrombosis on plaque.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Choice"
+    ],
+    "rows": [
+     [
+      "Viable limb under 14 days",
+      "Catheter lysis"
+     ],
+     [
+      "Fixed mottling",
+      "Open surgery"
+     ],
+     [
+      "Embolic source",
+      "Lyses faster"
+     ],
+     [
+      "Thrombosis on plaque",
+      "May need stent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Technique decides safety in thrombolysis. **Ultrasound-accelerated catheters** and pulse-spray speed lysis without proven superiority over standard infusion. **Fibrinogen monitoring** with dose reduction or pause follows local protocol when levels fall sharply. **Puncture-site bleeding** is the commonest complication, managed with pressure and dose review. **Intracranial bleeding**, though rare, is the feared catastrophe and ends the infusion at once. **Distal embolisation** during lysis is retrieved or aspirated before completion.",
+   "say": "Technique decides safety. Accelerated catheters speed lysis without proven superiority. Fibrinogen is monitored with dose pauses per protocol. Puncture bleeding is commonest and managed with pressure, while any intracranial bleed ends the infusion at once. Distal emboli are retrieved before completion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-thrombolysis-fig1.webp",
+    "alt": "Diagram illustrating catheter-directed thrombolysis in an artery, showing a multi-sidehole catheter delivering thrombolytic agent to a thrombus. Inset shows puncture-site bleeding and fibrinogen monitoring.",
+    "caption": "Catheter-directed thrombolysis: technique, monitoring, and puncture-site bleeding",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Pulmonary embolism care escalates by risk. **High-risk massive embolism** with hypotension receives **systemic thrombolysis** where no contraindication exists under **ESC guidance**. **Catheter-directed therapy** with fragmentation, aspiration or local lysis suits massive embolism where systemic lysis is banned or has failed. **Submassive disease** with right-heart strain but stable pressure usually stays anticoagulated with escalation only on deterioration. **Phlegmasia cerulea dolens** with venous gangrene threatens the limb and justifies catheter removal of clot.",
+   "say": "Embolism care escalates by risk. Massive embolism with hypotension receives systemic lysis where allowed. Catheter therapy suits cases where systemic lysis is banned or failed. Submassive disease usually stays anticoagulated, while phlegmasia with gangrene justifies catheter clot removal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PE category",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Massive with hypotension",
+      "Systemic lysis"
+     ],
+     [
+      "Systemic banned or failed",
+      "Catheter therapy"
+     ],
+     [
+      "Submassive stable",
+      "Anticoagulate watch"
+     ],
+     [
+      "Phlegmasia gangrene",
+      "Catheter removal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clot-busting is forbidden in some patients. **Absolute bans** include prior **intracranial bleeding**, recent **ischaemic stroke**, active bleeding and recent intracranial or spinal surgery. **Recent major surgery**, trauma, gastrointestinal bleeding and severe hypertension demand case-by-case judgement. **Pregnancy and postpartum** states raise bleeding risk sharply. The **ATTRACT** trial tempered enthusiasm for routine DVT thrombolysis, showing limited benefit against bleeding risk, so iliofemoral DVT lysis stays selective for young low-bleed-risk limbs.",
+   "say": "Some patients must never receive lysis. Prior intracranial bleeding, recent stroke, active bleeding and recent brain or spine surgery ban it absolutely. Recent surgery, trauma and gut bleeding need individual judgement. ATTRACT tempered routine DVT lysis, so iliofemoral cases stay selective for young low-risk limbs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confirm fresh clot"
+     },
+     {
+      "id": "b",
+      "label": "Exclude bans"
+     },
+     {
+      "id": "c",
+      "label": "Catheter infusion"
+     },
+     {
+      "id": "d",
+      "label": "Check and stop"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir-051",
+  "maikir-052",
+  "maikir-053",
+  "maikir-054",
+  "maikir-055",
+  "maikir-056",
+  "maikir-057",
+  "maikir-058",
+  "maikir-059",
+  "maikir-060"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-wave1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

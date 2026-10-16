@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ort-low-back-pain",
-  "subject": "orthopaedics",
-  "title": "Low back pain: discs, slips, stenosis and red flags",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Disc prolapse** (**posterolateral** L4-5 L5-S1 weak annulus, **sciatica** dermatomal calf foot, **L5** dorsiflexion big-toe weak, **S1** plantarflexion ankle-jerk lost, **SLR** Lasegue tension Bragard adds, **femoral** L2-4 anterior thigh, **MRI** Modic sequestration, **crossed** contralateral lift) with **maps** (**dermatome** myotome charts, **cough** impulse pains) localises; **rest** (brief activity) eases. Discs bulge.",
-      "say": "Prolapses sciaticas SLRs femorals is disc: corners fail posterolaterals yield calves ache dorsiflexes lift toes drop reflexes fade ankles slack tensions pull straight legs lift maps chart dermatomes trace rests brief activities ease. Cushions slip.",
-      "vis": null
-    },
-    {
-      "tx": "**Red flags** (**cauda equina** saddle bladder bowels emergency, **retention** overflow catheterise scan, **malignancy** night rest-pain weight-loss, **infection** fever IV-drug TB, **trauma** osteoporotic minor-fall, **inflammatory** morning stiffness activity-eases, **HLA-B27** sacroiliac alternate buttocks, **steroid** prolonged fragility) with **asks** (**bladder** sexual saddle, **systemic** fevers sweats) screens; **escalate** (same-day MRI) rushes. Flags warn.",
-      "say": "Equinas retentions maligns infects is red: saddles numb bladders fail nights ache rests pain fevers spike traumas crush minors snap stiffness dawns activities ease asks probe bladders leak escalates rush MRIs scan. Dangers hide.",
-      "vis": null
-    },
-    {
-      "tx": "**Slips-stenosis** (**lysis** pars defect Scotty-collar, **listhesis** Meyerding quarters slip, **isthmic** young athlete extension-aches, **degenerative** L4-5 elderly intact-arch, **stenosis** ligamentum flavum facet cysts, **claudication** shopping-cart lean-sits, **treadmill** distance quantifies, **decompress** laminectomy fusion) with **stands** (**extension** narrows worsens, **flexion** opens eases) proves; **grade** (standing laterals) measures. Segments slide.",
-      "say": "Lyses listheses stenoses claudications is slip: collars crack Scotties neck slips grade quarters shift athletes arch youngsters ache flavums thick carts lean sits rest stands test extensions pinch grades measure standings film. Canals narrow.",
-      "vis": null
-    },
-    {
-      "tx": "**Care ladder** (**stay-active** bed-rest harms reassure, **NSAID** short courses stomach guards, **physio** McKenzie core heat, **red** progressive deficit operates, **epidural** radicular bridge steroids, **microdiscectomy** sequestered matches-MRI, **fusion** instability deformity, **rehab** lifting ergonomics) with **times** (**six-week** natural history, **review** function scores) paces; **prevent** (weight smoking) counsels. Backs recover.",
-      "say": "Actives NSAIDs physios reds is ladder: rests brief harms bind courses short stomachs shield cores brace heats soothe deficits march nerves fail bridges jab epidurals calm matches scan sequesters trap times watch six weeks pass prevents trim weights counsel. Pains settle.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-ort-051",
-    "bk2-ort-052",
-    "bk2-ort-053",
-    "bk2-ort-054",
-    "bk2-ort-055",
-    "bk2-ort-056",
-    "bk2-ort-057",
-    "bk2-ort-058",
-    "bk2-ort-059",
-    "bk2-ort-060"
-  ],
-  "src": [],
-  "refs": [
-    "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-ort1",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ort-low-back-pain",
+ "subject": "orthopaedics",
+ "title": "Low back pain: discs, slips, stenosis and red flags",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Disc prolapse** (**posterolateral** L4-5 L5-S1 weak annulus, **sciatica** dermatomal calf foot, **L5** dorsiflexion big-toe weak, **S1** plantarflexion ankle-jerk lost, **SLR** Lasegue tension Bragard adds, **femoral** L2-4 anterior thigh, **MRI** Modic sequestration, **crossed** contralateral lift) with **maps** (**dermatome** myotome charts, **cough** impulse pains) localises; **rest** (brief activity) eases. Discs bulge.",
+   "say": "Prolapses sciaticas SLRs femorals is disc: corners fail posterolaterals yield calves ache dorsiflexes lift toes drop reflexes fade ankles slack tensions pull straight legs lift maps chart dermatomes trace rests brief activities ease. Cushions slip.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ort-low-back-pain-fig1.webp",
+    "alt": "Diagram showing a posterolateral lumbar disc prolapse compressing a nerve root, with corresponding lower limb dermatome and myotome maps.",
+    "caption": "Lumbar disc prolapse causing nerve root compression and sciatica",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Red flags** (**cauda equina** saddle bladder bowels emergency, **retention** overflow catheterise scan, **malignancy** night rest-pain weight-loss, **infection** fever IV-drug TB, **trauma** osteoporotic minor-fall, **inflammatory** morning stiffness activity-eases, **HLA-B27** sacroiliac alternate buttocks, **steroid** prolonged fragility) with **asks** (**bladder** sexual saddle, **systemic** fevers sweats) screens; **escalate** (same-day MRI) rushes. Flags warn.",
+   "say": "Equinas retentions maligns infects is red: saddles numb bladders fail nights ache rests pain fevers spike traumas crush minors snap stiffness dawns activities ease asks probe bladders leak escalates rush MRIs scan. Dangers hide.",
+   "vis": null
+  },
+  {
+   "tx": "**Slips-stenosis** (**lysis** pars defect Scotty-collar, **listhesis** Meyerding quarters slip, **isthmic** young athlete extension-aches, **degenerative** L4-5 elderly intact-arch, **stenosis** ligamentum flavum facet cysts, **claudication** shopping-cart lean-sits, **treadmill** distance quantifies, **decompress** laminectomy fusion) with **stands** (**extension** narrows worsens, **flexion** opens eases) proves; **grade** (standing laterals) measures. Segments slide.",
+   "say": "Lyses listheses stenoses claudications is slip: collars crack Scotties neck slips grade quarters shift athletes arch youngsters ache flavums thick carts lean sits rest stands test extensions pinch grades measure standings film. Canals narrow.",
+   "vis": null
+  },
+  {
+   "tx": "**Care ladder** (**stay-active** bed-rest harms reassure, **NSAID** short courses stomach guards, **physio** McKenzie core heat, **red** progressive deficit operates, **epidural** radicular bridge steroids, **microdiscectomy** sequestered matches-MRI, **fusion** instability deformity, **rehab** lifting ergonomics) with **times** (**six-week** natural history, **review** function scores) paces; **prevent** (weight smoking) counsels. Backs recover.",
+   "say": "Actives NSAIDs physios reds is ladder: rests brief harms bind courses short stomachs shield cores brace heats soothe deficits march nerves fail bridges jab epidurals calm matches scan sequesters trap times watch six weeks pass prevents trim weights counsel. Pains settle.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-ort-051",
+  "bk2-ort-052",
+  "bk2-ort-053",
+  "bk2-ort-054",
+  "bk2-ort-055",
+  "bk2-ort-056",
+  "bk2-ort-057",
+  "bk2-ort-058",
+  "bk2-ort-059",
+  "bk2-ort-060"
+ ],
+ "src": [],
+ "refs": [
+  "Essential Orthopaedics by Maheshwari 7th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-ort1",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

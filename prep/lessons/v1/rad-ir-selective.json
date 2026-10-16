@@ -1,142 +1,148 @@
 {
-  "v": 1,
-  "module": "rad-ir-selective",
-  "subject": "radiology",
-  "title": "Uterine prostate and bariatric embolisation",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Uterine artery embolisation treats bleeding and bulk while keeping the uterus. **Symptomatic fibroids** with heavy periods and pressure shrink after bilateral **uterine artery** occlusion with particles. **Postpartum haemorrhage** refractory to drugs and balloon tamponade is controlled by emergent UAE. **Adenomyosis** responds partially with pain relief rather than cure. **Fertility wishes** demand counselling, since ovarian reserve may fall and pregnancy needs specialist follow-up.",
-      "say": "Uterine embolisation keeps the uterus while treating bleeding and bulk. Fibroids with heavy periods shrink after bilateral particle occlusion. Postpartum bleeding failing drugs and balloons is controlled emergently. Adenomyosis pain eases partially, and fertility wishes need counselling first.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Indication",
-          "Role"
-        ],
-        "rows": [
-          [
-            "Symptomatic fibroids",
-            "Shrink and lighten"
-          ],
-          [
-            "Postpartum bleeding",
-            "Emergent control"
-          ],
-          [
-            "Adenomyosis",
-            "Pain relief"
-          ],
-          [
-            "Fertility desired",
-            "Counsel first"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Prostate embolisation offers a middle path for urinary symptoms. **Prostate artery embolisation** suits men with **lower urinary tract symptoms** from benign enlargement who refuse or cannot undergo surgery. **Sexual function** including ejaculation is preserved better than after TURP. **Large glands** over 80 mL respond well where drugs failed. **Urinary retention** with a catheter resolves in selected cases, while proven **prostate cancer** needs oncology rather than embolisation.",
-      "say": "Prostate embolisation suits urinary symptoms from benign enlargement in men avoiding surgery. Sexual function preserves better than after resection. Large glands respond where drugs failed, retention with catheters can resolve, but proven cancer needs oncology instead.",
-      "vis": null
-    },
-    {
-      "tx": "Technique is bilateral and superselective. **Bilateral embolisation** matters because unilateral work invites collateral rebleeding in both uterus and prostate. **Cone-beam CT** during the procedure maps feeders and excludes dangerous anastomoses to bladder, rectum or penis. **Non-target embolisation** to skin, bladder or rectum is the feared error, avoided by distal catheter tips. **Post-procedure pain** peaks within hours and needs protocol analgesia with antiemetics.",
-      "say": "Technique stays bilateral and superselective. Both sides matter because unilateral work invites collateral rebleeding. Cone-beam CT maps feeders and excludes dangerous connections. Distal tips avoid skin and bladder injury, and pain peaks within hours needing protocol analgesia.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Map both sides"
-          },
-          {
-            "id": "b",
-            "label": "Exclude danger branches"
-          },
-          {
-            "id": "c",
-            "label": "Embolise bilaterally"
-          },
-          {
-            "id": "d",
-            "label": "Control pain"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Bariatric embolisation is the investigational frontier. **Left gastric artery embolisation** targets hunger signalling with early weight-loss signals in trials, but remains **research-only** outside protocols. **Genicular artery embolisation** for knee osteoarthritis pain shows promise but stays selective. **Haemorrhoidal embolisation** through superior rectal branches suits bleeding piles in unfit patients. Every frontier indication needs **trial enrolment or ethics approval**, never routine rollout.",
-      "say": "Bariatric work stays investigational. Left gastric embolisation shows early weight signals but remains research-only. Knee and haemorrhoid embolisation suit selected unfit patients. Frontier indications need trial enrolment, never routine rollout.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Frontier",
-          "Status"
-        ],
-        "rows": [
-          [
-            "Left gastric bariatric",
-            "Research only"
-          ],
-          [
-            "Genicular knee",
-            "Selective"
-          ],
-          [
-            "Haemorrhoidal",
-            "Unfit bleeders"
-          ],
-          [
-            "All frontiers",
-            "Trials first"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir-091",
-    "maikir-092",
-    "maikir-093",
-    "maikir-094",
-    "maikir-095",
-    "maikir-096",
-    "maikir-097",
-    "maikir-098",
-    "maikir-099",
-    "maikir-100"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-wave2",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "rad-ir-selective",
+ "subject": "radiology",
+ "title": "Uterine prostate and bariatric embolisation",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Uterine artery embolisation treats bleeding and bulk while keeping the uterus. **Symptomatic fibroids** with heavy periods and pressure shrink after bilateral **uterine artery** occlusion with particles. **Postpartum haemorrhage** refractory to drugs and balloon tamponade is controlled by emergent UAE. **Adenomyosis** responds partially with pain relief rather than cure. **Fertility wishes** demand counselling, since ovarian reserve may fall and pregnancy needs specialist follow-up.",
+   "say": "Uterine embolisation keeps the uterus while treating bleeding and bulk. Fibroids with heavy periods shrink after bilateral particle occlusion. Postpartum bleeding failing drugs and balloons is controlled emergently. Adenomyosis pain eases partially, and fertility wishes need counselling first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Role"
+    ],
+    "rows": [
+     [
+      "Symptomatic fibroids",
+      "Shrink and lighten"
+     ],
+     [
+      "Postpartum bleeding",
+      "Emergent control"
+     ],
+     [
+      "Adenomyosis",
+      "Pain relief"
+     ],
+     [
+      "Fertility desired",
+      "Counsel first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prostate embolisation offers a middle path for urinary symptoms. **Prostate artery embolisation** suits men with **lower urinary tract symptoms** from benign enlargement who refuse or cannot undergo surgery. **Sexual function** including ejaculation is preserved better than after TURP. **Large glands** over 80 mL respond well where drugs failed. **Urinary retention** with a catheter resolves in selected cases, while proven **prostate cancer** needs oncology rather than embolisation.",
+   "say": "Prostate embolisation suits urinary symptoms from benign enlargement in men avoiding surgery. Sexual function preserves better than after resection. Large glands respond where drugs failed, retention with catheters can resolve, but proven cancer needs oncology instead.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-selective-fig1.webp",
+    "alt": "Diagram showing catheter in prostatic artery for embolisation of enlarged prostate.",
+    "caption": "Prostate artery embolisation for benign prostatic enlargement",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Technique is bilateral and superselective. **Bilateral embolisation** matters because unilateral work invites collateral rebleeding in both uterus and prostate. **Cone-beam CT** during the procedure maps feeders and excludes dangerous anastomoses to bladder, rectum or penis. **Non-target embolisation** to skin, bladder or rectum is the feared error, avoided by distal catheter tips. **Post-procedure pain** peaks within hours and needs protocol analgesia with antiemetics.",
+   "say": "Technique stays bilateral and superselective. Both sides matter because unilateral work invites collateral rebleeding. Cone-beam CT maps feeders and excludes dangerous connections. Distal tips avoid skin and bladder injury, and pain peaks within hours needing protocol analgesia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Map both sides"
+     },
+     {
+      "id": "b",
+      "label": "Exclude danger branches"
+     },
+     {
+      "id": "c",
+      "label": "Embolise bilaterally"
+     },
+     {
+      "id": "d",
+      "label": "Control pain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bariatric embolisation is the investigational frontier. **Left gastric artery embolisation** targets hunger signalling with early weight-loss signals in trials, but remains **research-only** outside protocols. **Genicular artery embolisation** for knee osteoarthritis pain shows promise but stays selective. **Haemorrhoidal embolisation** through superior rectal branches suits bleeding piles in unfit patients. Every frontier indication needs **trial enrolment or ethics approval**, never routine rollout.",
+   "say": "Bariatric work stays investigational. Left gastric embolisation shows early weight signals but remains research-only. Knee and haemorrhoid embolisation suit selected unfit patients. Frontier indications need trial enrolment, never routine rollout.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Frontier",
+     "Status"
+    ],
+    "rows": [
+     [
+      "Left gastric bariatric",
+      "Research only"
+     ],
+     [
+      "Genicular knee",
+      "Selective"
+     ],
+     [
+      "Haemorrhoidal",
+      "Unfit bleeders"
+     ],
+     [
+      "All frontiers",
+      "Trials first"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir-091",
+  "maikir-092",
+  "maikir-093",
+  "maikir-094",
+  "maikir-095",
+  "maikir-096",
+  "maikir-097",
+  "maikir-098",
+  "maikir-099",
+  "maikir-100"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-wave2",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
