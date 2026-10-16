@@ -273,7 +273,7 @@ export const AUTH_MARKERS = [
   "resolveBearer", "callerUid", "verifyDisplayToken", "redeemCode",
   "portalRead", "sessionPatient", "smartEnabled", "authorise", "hmacHex",
   "makeSecrets", "_rx_public", "verifySecret", "verifyMfaChallenge",
-  "verifyTotp", "mintStaffSession", "checkBankGate",
+  "verifyTotp", "mintStaffSession", "checkBankGate", "editorIdentity",
 ];
 
 export function hasApiAuth(text) {
