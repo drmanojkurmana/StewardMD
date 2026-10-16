@@ -101,11 +101,36 @@ export async function verifyPlatformAttestation(attestation, user, env) {
 const _localSessions = new Map();
 const _localNonces = new Map();
 const _localFlags = new Map();
+/* One module open = its bank file plus one overlay file per overlay set (ss-endocrinology has 26), all fetched together.
+ * Counting each file made two ordinary module opens trip the 30-files/min enumeration flag (24 h lockout) and the 120/min
+ * burst limit (owner's phone, 2026-10-17: "questions need a connection" on every lesson quiz). The files of ONE module
+ * (same subject + module id) count once per minute per user; enumeration across many modules is still caught. */
+const _unitSeen = new Map();   // "uid|sid/mid" -> { exp, paths:Set }
+const UNIT_TTL_MS = 60 * 1000, UNIT_MAX_FILES = 64, UNIT_MAP_MAX = 5000;
+export function moduleUnitOf(p) {
+  let m = /^v\d+\/([a-z0-9-]+)\/mcq\/([a-z0-9-]+)\.json$/.exec(p);
+  if (m) return m[1] + "/" + m[2];
+  m = /^overlay\/[a-z0-9-]+\/([a-z0-9-]+)\/([a-z0-9-]+)\.json$/.exec(p);
+  return m ? m[1] + "/" + m[2] : null;
+}
+// true when p is a further, different file of a module this user already opened in the last minute (it rides free)
+function unitFollower(uid, p, now) {
+  const unit = moduleUnitOf(p); if (!unit) return false;
+  const k = uid + "|" + unit, e = _unitSeen.get(k);
+  if (e && now < e.exp) {
+    if (e.paths.has(p) || e.paths.size >= UNIT_MAX_FILES) return false;   // the same file again, or too many files: counts
+    e.paths.add(p); return true;
+  }
+  if (_unitSeen.size >= UNIT_MAP_MAX) { for (const [kk, v] of _unitSeen) if (now >= v.exp) _unitSeen.delete(kk); if (_unitSeen.size >= UNIT_MAP_MAX) _unitSeen.clear(); }
+  _unitSeen.set(k, { exp: now + UNIT_TTL_MS, paths: new Set([p]) });
+  return false;                                                          // the first file of the unit counts
+}
 
 export function resetBankGateMemory() {
   _localSessions.clear();
   _localNonces.clear();
   _localFlags.clear();
+  _unitSeen.clear();
 }
 
 export async function mintBankSession(user, env, opts = {}) {
@@ -274,6 +299,9 @@ export async function checkBankRateLimits(env, user, p, waitUntil, nowMs) {
       }
     } catch (e) {}
   }
+
+  // The other files of a module already counted this minute (its overlay sets) are part of the same open.
+  if (unitFollower(user.id, p, now)) return { ok: true };
 
   // 2. Burst limits: 120/min, 2,000/h, 10,000/day
   const rMin = await hitLimit(store, "pbm", user.id, 120, 60, waitUntil, now);
