@@ -5,6 +5,21 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-16 · INI-SS is a course: Home, Tests and today's plan show only what that paper asks (owner)
+
+**Decision.** The owner compared PrepNucleus with Marrow (separate SS Medicine / SS Surgery / Paediatrics / OBG
+QBanks) and asked why INI-SS Medical Oncology showed every SS subject, and why INI-SS Urology needed all surgery and
+medicine. NEET-SS already narrowed Home to the student's group (`prep-ss-groups.js`); INI-SS did not: Home showed the
+whole SS list, while Tests narrowed to the one course subject only. Now an INI-SS course scopes to the course, its
+degree's general subject (General Medicine when a NEET-SS group pairs the course with it, General Surgery likewise;
+none for Radiology) and Biostatistics (`prep-plan.js` `iniSubjects`). Medical Oncology -> Medical Oncology, General
+Medicine, Biostatistics; Urology -> Urology, General Surgery, Biostatistics. The progress score and today's lesson
+follow the same scope for NEET-SS groups and INI-SS courses (they used the whole tab). **Why:** the INI-SS prospectus
+(`prep/assess/profiles/ini-ss.json`) says questions come from "the general/basic component of the qualifying degree
+and the sub-specialty of the course applied for"; Biostatistics was the owner's own ask. **Trade-off:** every other
+SS subject is still one tap away (See all subjects); paediatric and other courses have no general SS subject in the
+bank, so they get their course and Biostatistics only. **Status:** branch `claude/determined-hopper-ayuqpd`, prep81.
+
 ## 2026-10-13 · Tools grouped by role in All tools; Home starts with a starter set (owner asked)
 
 **Decision.** The owner: "there are many clinical tools ... many find it difficult to categorise and arrange them".

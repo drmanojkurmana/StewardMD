@@ -2,7 +2,8 @@
  * What must hold:
  *  - plan choices resolve to exam profiles (USMLE Step 1 / Step 2 CK as selected; legacy "usmle" reads Step 1);
  *  - NEET-SS groups narrow subjects (medical default; groups without bank subjects get the short coming state);
- *  - INI-SS narrows to the one picked subject, and asks for it when none is picked;
+ *  - INI-SS narrows to the picked course (the course, its degree's general subject, Biostatistics; owner 2026-10-16),
+ *    and asks for it when none is picked;
  *  - the Tests segment shows ONLY the plan exam (no sibling exam, no "More exam formats"); ready-made papers filter
  *    by plan/group/subject and counts reflect the filtered set; empty groups stay hidden;
  *  - a coming bank shows one short clean state (format notes behind an info row, no inline walls of grey text).
@@ -161,6 +162,29 @@ test("NEET-SS groups: 15 groups, medical default, empty groups are not offered",
     "ss-infectious-diseases", "ss-rheumatology-immunology"].forEach((id) => assert.ok(med.includes(id), "medical holds " + id));
   assert.ok(PLAN.ssGroupSubjects("surgical").includes("ss-general-surgery"), "surgical holds its bank subjects");
   assert.deepEqual(PLAN.normalizePlan({ exam: "neet-pg", group: "medical", subject: "ss-cardiology" }), { exam: "neet-pg" });
+});
+
+test("INI-SS course scope: the course, its degree's general subject, Biostatistics; nothing from other groups", () => {
+  const ini = (PLAN._pure || PLAN).iniSubjects;
+  assert.deepEqual([...ini("ss-medical-oncology")], ["ss-medical-oncology", "ss-general-medicine", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-urology")], ["ss-urology", "ss-general-surgery", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-critical-care")], ["ss-critical-care", "ss-general-medicine", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-radiology")], ["ss-radiology", "ss-biostatistics"], "radiology's degree is not Medicine");
+  assert.deepEqual([...ini("ss-neonatology")], ["ss-neonatology", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-general-medicine")], ["ss-general-medicine", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-biostatistics")], ["ss-biostatistics"]);
+  assert.deepEqual([...ini("")], []);
+  // Every course a student can pick resolves to at most three subjects, never a surgical subject for a medicine course or the reverse.
+  const SSG = (PLAN._pure || PLAN).SS_GROUPS, med = new Set(SSG.find((g) => g.id === "medical").subjects), sur = new Set(SSG.find((g) => g.id === "surgical").subjects);
+  for (const g of SSG) for (const id of g.subjects) {
+    const out = ini(id);
+    assert.ok(out.length <= 3 && out[0] === id, id + ": " + out.join(","));
+    if (med.has(id) && id !== "ss-biostatistics") assert.ok(!out.some((x) => sur.has(x) && x !== "ss-biostatistics"), id + " has a surgical subject");
+    if (sur.has(id) && id !== "ss-biostatistics") assert.ok(!out.some((x) => med.has(x) && x !== "ss-biostatistics"), id + " has a medicine subject");
+  }
+  const src = fs.readFileSync(path.join(ROOT, "prep.js"), "utf8");
+  assert.match(src, /PP\.iniSubjects \? PP\.iniSubjects\(pl\.subject\)/, "planSubjects uses the course scope");
+  assert.match(src, /s\.pl\.exam === "ini-ss" && s\.pl\.subject && PP\.iniSubjects/, "Home (ssScope) narrows INI-SS to the course");
 });
 
 test("paperSubject reads the bank subject from ready-made paper ids", () => {
