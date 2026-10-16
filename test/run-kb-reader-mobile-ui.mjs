@@ -95,6 +95,7 @@ try {
     await ev(`MEDCALC.close()`);
     const tbl = await ev(`document.querySelectorAll('#dxMgmt .kbv2-tbl .smd-drug').length`);
     ok(tbl > 0, `${d}: drug names in the tables are links (${tbl})`);
+    ok(await ev(`(()=>{var t=[...document.querySelectorAll('#dxMgmt .kbv2-tbl')];return t.length>0&&t.every(x=>{var s=x.closest('.kbv2-sec');return s&&s.querySelector('.kbv2-src')&&/^Source: /.test(s.querySelector('.kbv2-src').textContent)})})()`), `${d}: every table names its sources`);
     ok(await ev(`document.querySelectorAll('#dxMgmt .dx-reader-content .smd-drug[data-smd-drug="influenza vaccine"]').length===0`), `${d}: a partial name ("influenza" of "influenza vaccine") is not linked`);
     if (want.drugSvg) {
       const sv = await ev(`document.querySelectorAll('#dxMgmt svg.kbfc-svg .smd-drug').length`);
