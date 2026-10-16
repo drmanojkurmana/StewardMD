@@ -55,7 +55,8 @@
    * the sub-specialty of the course applied for" (prospectus, prep/assess/profiles/ini-ss.json). Owner 2026-10-16:
    * "INI-SS med onco needs med onco, biostats and general medicine"; "INI-SS uro" does not need all surgery and medicine.
    * So the course scope is: the course, its degree's general subject (General Medicine when a NEET-SS group pairs the
-   * course with it, General Surgery likewise; none for Radiology, whose degree is not Medicine), then Biostatistics. */
+   * course with it, General Surgery likewise; MBBS Paediatrics for a paediatric course; none for Radiology, whose degree
+   * is not Medicine), then Biostatistics. */
   var INI_GENERAL = ["ss-general-medicine", "ss-general-surgery"];
   function iniSubjects(id) {
     if (!id) return [];
@@ -67,6 +68,10 @@
         if (sub.indexOf(id) >= 0 && sub.indexOf(gen) >= 0) { if (out.indexOf(gen) < 0) out.push(gen); return; }
       }
     });
+    // Paediatric courses: the bank has no SS General Paediatrics, so the feeder is the MBBS Paediatrics subject
+    // (owner 2026-10-16: "Use MBBS Paediatrics"). It lives on the NEET-PG tab; prep.js planSubjects looks it up there.
+    var pg = ssGroupOf("paediatric");
+    if (pg && pg.subjects.indexOf(id) >= 0 && id !== "ss-biostatistics") out.push("paediatrics");
     if (id !== "ss-biostatistics") out.push("ss-biostatistics");
     return out;
   }

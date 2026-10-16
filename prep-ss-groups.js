@@ -11,7 +11,7 @@
      "label": "Medical group",
      "feeder": "MD/DNB General Medicine",
      "kind": "medical",
-     "includes": "Cardiology, Neurology, Nephrology and 9 more",
+     "includes": "Cardiology, Neurology, Nephrology and 10 more",
      "subjects": [
       "ss-general-medicine",
       "ss-cardiology",
@@ -25,6 +25,7 @@
       "ss-rheumatology-immunology",
       "ss-pulmonology",
       "ss-infectious-diseases",
+      "ss-critical-care",
       "ss-biostatistics"
      ]
     },

@@ -900,7 +900,8 @@
     else if (pl.exam === "ini-ss" && pl.subject) {
       // The course, its degree's general subject and Biostatistics (prep-plan.js iniSubjects), course first.
       var ids = PP.iniSubjects ? PP.iniSubjects(pl.subject) : [pl.subject];
-      return ids.map(function (id) { for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i]; return null; }).filter(Boolean);
+      // A feeder can sit outside the NEET-SS tab (MBBS Paediatrics for a paediatric course): look it up in the taxonomy.
+      return ids.map(function (id) { for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i]; return subjectById(id); }).filter(Boolean);
     }
     else if (pl.exam === "ini-ss") return [];
     else return all;

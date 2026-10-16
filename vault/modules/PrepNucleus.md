@@ -1686,6 +1686,11 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   `ss-biostatistics`), then `ss-biostatistics`. `prep.js` `planSubjects()` returns them course first; `ssScope()` returns
   a scope `{ ini: true, label: "<course> course", subjects }`, so Home reads "Change course" and "Mixed practice across
   your course". Before this, INI-SS Home showed every SS subject (owner's Marrow comparison).
+- **Follow-up (owner 2026-10-16, prep82):** NEET-SS Medical group now includes Critical Care Medicine (medicine
+  residents; `prep/ss-groups.json` medical `own`, rebuilt with `tools/prep-ss-groups-build.mjs`); the Critical Care group
+  stays for anaesthesia residents. INI-SS paediatric courses take MBBS `paediatrics` as their feeder (no SS General
+  Paediatrics in the bank); `planSubjects` resolves a feeder outside the NEET-SS tab with `subjectById`. Paediatric
+  Surgery keeps General Surgery.
 - **Progress score and today's plan** (`prep-plan.js` `examSubjects`) use `H.planSubjects()` when it narrows, else the
   whole tab; before, they ranked every subject on the tab (a urology student got an acid-base lesson).
 - **Skipped minutes step:** the plan footer read "of your undefined minutes"; the plan stores and shows 30 (the default
