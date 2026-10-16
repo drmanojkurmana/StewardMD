@@ -43,10 +43,15 @@ flip is verified on stewardmd.in.
   module fetch and image signing against production; clinix-ui on the PR covers
   the browser suite.
 
-## Flipping ENFORCE on
+## Flipping ENFORCE on: BLOCKED on token permission (2026-10-16)
 
-The local Cloudflare token in ~/.config/stewardmd/cloudflare.env has no Pages
-permission (API 403 on pages/projects), so the flip runs through GitHub:
+ENFORCE is NOT on. Production is still in shadow mode (unauthenticated module
+fetch returns 200, verified 2026-10-16), so no student flow is broken. Both
+Cloudflare tokens lack Pages permission (API code 10000): the local token
+(403) and the GitHub CLOUDFLARE_API_TOKEN (bank-enforce workflow run
+38864781464 failed at wrangler pages secret put). Owner: add
+PREP_BANK_ENFORCE=1 under Pages > stewardmd > Settings > Environment
+variables > Production and redeploy, or grant a token Pages:Edit, then run:
 
     gh workflow run bank-enforce.yml -f enforce=enable
 
