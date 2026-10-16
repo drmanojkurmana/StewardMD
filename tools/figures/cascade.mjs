@@ -32,7 +32,7 @@ function modelOf(S, level, drug) {
   });
   S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
   S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
-  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { v += t[1] * (t[0].charAt(0) === "e" ? flux[t[0].slice(2)] : lv[t[0].slice(2)]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
   const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
   const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
   return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
@@ -194,7 +194,7 @@ for (const light of [false, true]) {
 }
 if (process.argv.includes("--register") && S.registry) {
   const fp = join(ROOT, "prep/figures/figures.json"), J = JSON.parse(readFileSync(fp, "utf8"));
-  const entry = { id: S.id, title: S.registry.title || S.title, blurb: S.registry.blurb, page: "prep/figures/" + S.id + ".html", drugs: S.registry.drugs, terms: S.registry.terms || [] };
+  const entry = { id: S.id, title: S.registry.title || S.title, blurb: S.registry.blurb, page: "prep/figures/" + S.id + ".html", drugs: S.registry.drugs, terms: S.registry.terms || [], weak: S.registry.weak, ctx: S.registry.ctx };
   const k = J.figures.findIndex((f) => f.id === S.id);
   if (k >= 0) J.figures[k] = entry; else J.figures.push(entry);
   writeFileSync(fp, JSON.stringify(J, null, 1) + "\n");

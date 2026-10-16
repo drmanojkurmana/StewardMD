@@ -1,0 +1,208 @@
+{
+ "id": "gastric-acid",
+ "title": "Gastric acid secretion: H2 blockers, PPIs and antimuscarinics",
+ "ariaLabel": "Schematic of the parietal cell: histamine (H2 receptor), gastrin (CCK2 receptor) and acetylcholine (M3 receptor) all stimulate it, and the H+/K+ ATPase proton pump then secretes acid. H2 blockers and antimuscarinics block one input; proton pump inhibitors block the final common step.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lab value is shown or implied.",
+ "level": {
+  "label": "Meal or stimulus",
+  "a": [
+   0.3,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "fasting",
+   "usual meal",
+   "large meal"
+  ],
+  "ticks": [
+   "fasting",
+   "meal",
+   "large"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "H2 blocker (famotidine or ranitidine type)",
+   "status": "H2 blocker",
+   "blocks": {
+    "e_h": 0.85
+   }
+  },
+  {
+   "label": "proton pump inhibitor (omeprazole type)",
+   "status": "proton pump inhibitor",
+   "blocks": {
+    "e_pump": 0.85
+   }
+  },
+  {
+   "label": "antimuscarinic (pirenzepine or atropine type)",
+   "status": "antimuscarinic",
+   "blocks": {
+    "e_m": 0.85
+   }
+  }
+ ],
+ "readout": "gastric acid {0}",
+ "outputs": [
+  {
+   "node": "acid",
+   "words": [
+    "low",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Stimulus: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "gastric acid high"
+  ],
+  [
+   1,
+   1,
+   "gastric acid moderate"
+  ],
+  [
+   1,
+   2,
+   "gastric acid low"
+  ],
+  [
+   1,
+   3,
+   "gastric acid moderate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect.",
+ "blockKey": "drug (generic)",
+ "nodes": [
+  {
+   "id": "his",
+   "kind": "source",
+   "label": "Histamine",
+   "sub": "from ECL cells",
+   "x": 105,
+   "y": 110,
+   "rx": 80,
+   "info": "Histamine released by enterochromaffin-like cells next to the parietal cells. It is the strongest local stimulus."
+  },
+  {
+   "id": "gas",
+   "kind": "source",
+   "label": "Gastrin",
+   "sub": "from G cells",
+   "x": 105,
+   "y": 300,
+   "rx": 80,
+   "info": "Gastrin released by G cells in the antrum when protein is eaten. It acts on parietal cells directly and by releasing histamine."
+  },
+  {
+   "id": "ach",
+   "kind": "source",
+   "label": "Acetylcholine",
+   "sub": "vagus nerve",
+   "x": 105,
+   "y": 490,
+   "rx": 86,
+   "info": "Acetylcholine from the vagus nerve, the cephalic and gastric phases of acid secretion."
+  },
+  {
+   "id": "par",
+   "kind": "mid",
+   "label": "Parietal cell stimulated",
+   "sub": "the three signals add",
+   "x": 480,
+   "y": 300,
+   "rx": 112,
+   "info": "The parietal cell adds the signals from its three receptors: H2, CCK2 (gastrin) and M3 (acetylcholine). Histamine and gastrin act through cAMP and calcium and both end at the proton pump."
+  },
+  {
+   "id": "acid",
+   "kind": "out",
+   "label": "Gastric acid",
+   "sub": "H⁺ into the lumen",
+   "x": 850,
+   "y": 300,
+   "rx": 90,
+   "info": "Hydrochloric acid secreted into the stomach lumen."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_h",
+   "from": "his",
+   "to": "par",
+   "label": "H2 receptor",
+   "w": 0.34,
+   "info": "Histamine acting on the H2 receptor, which raises cAMP. H2 blockers occupy the receptor."
+  },
+  {
+   "id": "e_g",
+   "from": "gas",
+   "to": "par",
+   "label": "CCK2 receptor",
+   "w": 0.34,
+   "blockable": false,
+   "info": "Gastrin acting on the CCK2 receptor. No common drug blocks it."
+  },
+  {
+   "id": "e_m",
+   "from": "ach",
+   "to": "par",
+   "label": "M3 receptor",
+   "w": 0.34,
+   "info": "Acetylcholine acting on the M3 receptor. Antimuscarinics block it but also block M receptors elsewhere, so they are rarely used for acid."
+  },
+  {
+   "id": "e_pump",
+   "from": "par",
+   "to": "acid",
+   "label": "H⁺/K⁺ ATPase",
+   "info": "The proton pump in the parietal cell's secretory membrane exchanges H⁺ for K⁺. Proton pump inhibitors are activated by acid and bind it irreversibly, so every stimulus is blocked at the last step."
+  }
+ ],
+ "sources": [
+  "<strong>The three signals and the pump.</strong> Histamine (H2), gastrin (CCK2) and acetylcholine (M3) all stimulate the parietal cell, and the H⁺/K⁺ ATPase is the final step; H2 blockers and antimuscarinics each block one input, and proton pump inhibitors bind the pump irreversibly. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Somatostatin and prostaglandin inhibition, the mucosal defence (mucus, bicarbonate), Helicobacter pylori, antacids and sucralfate, the delay and acid-activation of proton pump inhibitors (which are best taken before meals), rebound acid, nocturnal acid and the effect of long-term use are left out. The three inputs are drawn as equal in strength for teaching; real contributions vary. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Gastric acid secretion: H2 blockers, PPIs and antimuscarinics",
+  "blurb": "Interactive figure: the parietal cell, three signals, and where each drug acts",
+  "drugs": {
+   "famotidine": "d=1",
+   "ranitidine": "d=1",
+   "cimetidine": "d=1",
+   "nizatidine": "d=1",
+   "omeprazole": "d=2",
+   "esomeprazole": "d=2",
+   "pantoprazole": "d=2",
+   "lansoprazole": "d=2",
+   "rabeprazole": "d=2",
+   "dexlansoprazole": "d=2",
+   "pirenzepine": "d=3",
+   "vonoprazan": "d=2"
+  },
+  "terms": [
+   "H2[- ](?:receptor )?(?:blockers?|antagonists?)",
+   "proton[- ]pump inhibitors?",
+   "PPIs?",
+   "acid suppression",
+   "parietal cells?"
+  ]
+ }
+}

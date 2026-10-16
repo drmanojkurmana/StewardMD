@@ -1,0 +1,258 @@
+{
+ "id": "antiretrovirals",
+ "title": "Antiretroviral drugs and the HIV life cycle",
+ "ariaLabel": "Schematic of the HIV life cycle in a CD4 cell: the virus binds and fuses (entry), reverse transcriptase makes viral DNA, integrase inserts it into the host genome, the host machinery makes viral proteins, and protease cuts them so new virions mature. Entry inhibitors block the first step, nucleoside and non-nucleoside reverse transcriptase inhibitors the second, integrase inhibitors the third and protease inhibitors the last.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or viral load is shown or implied.",
+ "level": {
+  "label": "Viral replication",
+  "a": [
+   0.4,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "low",
+   "active",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "active",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antiretroviral class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiretroviral"
+  },
+  {
+   "label": "entry inhibitor (maraviroc or enfuvirtide type)",
+   "status": "entry inhibitor",
+   "blocks": {
+    "e_en": 0.85
+   }
+  },
+  {
+   "label": "nucleoside reverse transcriptase inhibitor (tenofovir or lamivudine type)",
+   "status": "NRTI",
+   "blocks": {
+    "e_rt": 0.85
+   }
+  },
+  {
+   "label": "non-nucleoside reverse transcriptase inhibitor (efavirenz type)",
+   "status": "NNRTI",
+   "blocks": {
+    "e_rt": 0.85
+   }
+  },
+  {
+   "label": "integrase inhibitor (dolutegravir type)",
+   "status": "integrase inhibitor",
+   "blocks": {
+    "e_int": 0.85
+   }
+  },
+  {
+   "label": "protease inhibitor (darunavir or lopinavir type)",
+   "status": "protease inhibitor",
+   "blocks": {
+    "e_pr": 0.85
+   }
+  },
+  {
+   "label": "three-drug combination (two reverse transcriptase inhibitors plus an integrase inhibitor)",
+   "status": "three-drug combination",
+   "blocks": {
+    "e_rt": 0.7,
+    "e_int": 0.7
+   }
+  }
+ ],
+ "readout": "new infectious virions {0}",
+ "outputs": [
+  {
+   "node": "vir",
+   "words": [
+    "few",
+    "some",
+    "many"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Replication: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "new infectious virions many"
+  ],
+  [
+   1,
+   2,
+   "new infectious virions few"
+  ],
+  [
+   1,
+   6,
+   "new infectious virions few"
+  ]
+ ],
+ "blockInfo": "An antiretroviral of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so fewer infectious virions are made. One drug alone lets resistant virus grow, which is why combinations are used.",
+ "blockKey": "antiretroviral (generic)",
+ "nodes": [
+  {
+   "id": "virus",
+   "kind": "source",
+   "label": "Free HIV",
+   "sub": "binds CD4",
+   "x": 100,
+   "y": 110,
+   "rx": 84,
+   "info": "A virion outside the cell. The slider sets how actively the virus is replicating."
+  },
+  {
+   "id": "cell",
+   "kind": "mid",
+   "label": "Inside the CD4 cell",
+   "sub": "capsid released",
+   "x": 465,
+   "y": 110,
+   "rx": 100,
+   "info": "After binding CD4 and a co-receptor (CCR5 or CXCR4) the viral and cell membranes fuse and the viral contents enter the cell."
+  },
+  {
+   "id": "vdna",
+   "kind": "mid",
+   "label": "Viral DNA",
+   "sub": "from viral RNA",
+   "x": 855,
+   "y": 110,
+   "rx": 78,
+   "info": "Reverse transcriptase copies the viral RNA into double-stranded DNA."
+  },
+  {
+   "id": "prov",
+   "kind": "mid",
+   "label": "Integrated provirus",
+   "sub": "part of the host genome",
+   "x": 855,
+   "y": 300,
+   "rx": 100,
+   "info": "Integrase inserts the viral DNA into the host chromosome, where it persists."
+  },
+  {
+   "id": "prot",
+   "kind": "mid",
+   "label": "Viral proteins",
+   "sub": "made by the host cell",
+   "x": 465,
+   "y": 300,
+   "rx": 92,
+   "info": "The host cell's transcription and translation make viral RNA and long polyproteins."
+  },
+  {
+   "id": "vir",
+   "kind": "out",
+   "label": "Mature virions",
+   "sub": "infectious",
+   "x": 100,
+   "y": 300,
+   "rx": 88,
+   "info": "Virions bud from the cell and mature when the viral protease cuts the long polyproteins into working proteins. Without that cut they stay immature and non-infectious."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_en",
+   "from": "virus",
+   "to": "cell",
+   "label": "entry",
+   "info": "Attachment, co-receptor binding and fusion. CCR5 antagonists block the co-receptor; fusion inhibitors block the fusion protein."
+  },
+  {
+   "id": "e_rt",
+   "from": "cell",
+   "to": "vdna",
+   "label": "reverse transcriptase",
+   "info": "Reverse transcription. Nucleoside and nucleotide analogues are built into the growing DNA and stop it; non-nucleoside inhibitors bind the enzyme away from its active site."
+  },
+  {
+   "id": "e_int",
+   "from": "vdna",
+   "to": "prov",
+   "label": "integrase",
+   "info": "Integration of viral DNA into the host genome. Integrase strand transfer inhibitors block it."
+  },
+  {
+   "id": "e_tr",
+   "from": "prov",
+   "to": "prot",
+   "blockable": false,
+   "info": "Transcription and translation by the host cell. No standard drug acts here."
+  },
+  {
+   "id": "e_pr",
+   "from": "prot",
+   "to": "vir",
+   "label": "protease",
+   "info": "Maturation: the viral protease cuts the polyproteins. Protease inhibitors block it, so the virions that bud are immature and not infectious."
+  }
+ ],
+ "sources": [
+  "<strong>The classes and where they act.</strong> Entry inhibitors interfere with HIV binding to CD4 and the chemokine co-receptors; nucleoside or nucleotide reverse transcriptase inhibitors compete with the enzyme and non-nucleoside ones bind it directly; integrase strand transfer inhibitors prevent integration into human DNA; protease inhibitors block the maturation of virions. Combinations of two to four drugs from different classes are usually needed to suppress replication fully (<a href=\"https://www.merckmanuals.com/professional/infectious-diseases/human-immunodeficiency-virus-hiv/drug-treatment-of-hiv-infection\">Antiretroviral treatment of HIV infection, MSD Manual Professional</a>)."
+ ],
+ "simplified": "Pharmacokinetic boosters (ritonavir, cobicistat), the capsid inhibitors, attachment inhibitors, pre-exposure and post-exposure prophylaxis, resistance mutations, latent reservoirs, drug interactions and toxicities, and the immune recovery that follows are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antiretroviral drugs and the HIV life cycle",
+  "blurb": "Interactive figure: entry, reverse transcriptase, integrase and protease inhibitors, step by step",
+  "drugs": {
+   "maraviroc": "d=1",
+   "enfuvirtide": "d=1",
+   "fostemsavir": "d=1",
+   "ibalizumab": "d=1",
+   "tenofovir": "d=2",
+   "lamivudine": "d=2",
+   "emtricitabine": "d=2",
+   "zidovudine": "d=2",
+   "abacavir": "d=2",
+   "stavudine": "d=2",
+   "didanosine": "d=2",
+   "efavirenz": "d=3",
+   "nevirapine": "d=3",
+   "rilpivirine": "d=3",
+   "etravirine": "d=3",
+   "doravirine": "d=3",
+   "dolutegravir": "d=4",
+   "raltegravir": "d=4",
+   "elvitegravir": "d=4",
+   "bictegravir": "d=4",
+   "cabotegravir": "d=4",
+   "darunavir": "d=5",
+   "atazanavir": "d=5",
+   "lopinavir": "d=5",
+   "ritonavir": "d=5",
+   "saquinavir": "d=5",
+   "indinavir": "d=5",
+   "nelfinavir": "d=5"
+  },
+  "terms": [
+   "antiretrovirals?",
+   "antiretroviral therapy",
+   "integrase (?:strand transfer )?inhibitors?",
+   "protease inhibitors?",
+   "reverse transcriptase inhibitors?",
+   "NRTIs?",
+   "NNRTIs?",
+   "INSTIs?",
+   "combination antiretroviral"
+  ]
+ }
+}

@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Gastric acid secretion: H2 blockers, PPIs and antimuscarinics</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Gastric acid secretion: H2 blockers, PPIs and antimuscarinics</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>gastric acid high</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of the parietal cell: histamine (H2 receptor), gastrin (CCK2 receptor) and acetylcholine (M3 receptor) all stimulate it, and the H+/K+ ATPase proton pump then secretes acid. H2 blockers and antimuscarinics block one input; proton pump inhibitors block the final common step."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_h" d="M149.3 132.5L428.3 273.8"/><path class="dr-flowhead" d="M428.3 273.8l-9 -0.2M428.3 273.8l-5.5 -7.2"/><g id="pt-e_h"></g><g class="hot dr-enz" tabindex="0" data-info="Histamine acting on the H2 receptor, which raises cAMP. H2 blockers occupy the receptor."><rect class="dr-enz-r" x="240.1" y="192.1" width="97.4" height="22" rx="11"/><text class="dr-prot" x="288.8" y="207.1" text-anchor="middle">H2 receptor</text></g><g class="hot dr-block" id="blk-e_h" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-block-hex" d="M297.8 178.1L293.3 185.9L284.3 185.9L279.8 178.1L284.3 170.3L293.3 170.3Z"/><path class="dr-block-x" d="M285.2 174.5L292.4 181.7M292.4 174.5L285.2 181.7"/></g><g class="hot dr-block dr-enh" id="enh-e_h" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-ag-hex" d="M319.8 178.1L315.3 185.9L306.3 185.9L301.8 178.1L306.3 170.3L315.3 170.3Z"/></g><path class="dr-rail dr-flowline" id="ln-e_g" d="M189 300L359 300"/><path class="dr-flowhead" d="M359 300l-8.1 3.9M359 300l-8.1 -3.9"/><g id="pt-e_g"></g><g class="hot dr-enz" tabindex="0" data-info="Gastrin acting on the CCK2 receptor. No common drug blocks it."><rect class="dr-enz-r" x="217.9" y="289" width="112.2" height="22" rx="11"/><text class="dr-prot" x="274" y="304" text-anchor="middle">CCK2 receptor</text></g><path class="dr-rail dr-flowline" id="ln-e_m" d="M150.1 467.2L428.3 326.2"/><path class="dr-flowhead" d="M428.3 326.2l-5.5 7.2M428.3 326.2l-9 0.2"/><g id="pt-e_m"></g><g class="hot dr-enz" tabindex="0" data-info="Acetylcholine acting on the M3 receptor. Antimuscarinics block it but also block M receptors elsewhere, so they are rarely used for acid."><rect class="dr-enz-r" x="240.5" y="385.7" width="97.4" height="22" rx="11"/><text class="dr-prot" x="289.2" y="400.7" text-anchor="middle">M3 receptor</text></g><g class="hot dr-block" id="blk-e_m" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-block-hex" d="M298.2 371.7L293.7 379.5L284.7 379.5L280.2 371.7L284.7 363.9L293.7 363.9Z"/><path class="dr-block-x" d="M285.6 368.1L292.8 375.3M292.8 368.1L285.6 375.3"/></g><g class="hot dr-block dr-enh" id="enh-e_m" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-ag-hex" d="M320.2 371.7L315.7 379.5L306.7 379.5L302.2 371.7L306.7 363.9L315.7 363.9Z"/></g><path class="dr-rail dr-flowline" id="ln-e_pump" d="M596 300L751 300"/><path class="dr-flowhead" d="M751 300l-8.1 3.9M751 300l-8.1 -3.9"/><g id="pt-e_pump"></g><g class="hot dr-enz" tabindex="0" data-info="The proton pump in the parietal cell's secretory membrane exchanges H⁺ for K⁺. Proton pump inhibitors are activated by acid and bind it irreversibly, so every stimulus is blocked at the last step."><rect class="dr-enz-r" x="621.1" y="289" width="104.8" height="22" rx="11"/><text class="dr-prot" x="673.5" y="304" text-anchor="middle">H⁺/K⁺ ATPase</text></g><g class="hot dr-block" id="blk-e_pump" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-block-hex" d="M682.5 275L678 282.8L669 282.8L664.5 275L669 267.2L678 267.2Z"/><path class="dr-block-x" d="M669.9 271.4L677.1 278.6M677.1 271.4L669.9 278.6"/></g><g class="hot dr-block dr-enh" id="enh-e_pump" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less acid is made. The proton pump is the last step of every route, so blocking it has the largest effect."><path class="dr-ag-hex" d="M704.5 275L700 282.8L691 282.8L686.5 275L691 267.2L700 267.2Z"/></g><g class="hot dr-node dr-n-source" id="nd-his" tabindex="0" data-info="Histamine released by enterochromaffin-like cells next to the parietal cells. It is the strongest local stimulus." transform="translate(105 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M82.7 0C83.2 1.7 83 3.5 81.8 5.2C80.5 6.9 78.1 8.6 75.3 10.1C72.4 11.5 68.5 12.9 64.7 14.1C60.8 15.3 56.5 16.4 52.1 17.4C47.8 18.4 43.4 19.3 38.7 20.1C34.1 20.9 29.3 21.7 24.2 22.3C19.1 22.9 13.7 23.4 8.3 23.7C2.9 23.9 -2.8 24 -8.4 23.9C-13.9 23.7 -19.4 23.4 -24.8 22.9C-30.1 22.4 -35.4 21.8 -40.4 21C-45.4 20.2 -50.4 19.3 -54.8 18.2C-59.2 17.2 -63.4 15.9 -66.7 14.5C-70.1 13.2 -72.9 11.6 -74.7 10C-76.6 8.4 -77.5 6.6 -77.9 5C-78.4 3.3 -77.9 1.6 -77.3 0C-76.8 -1.6 -75.8 -3.2 -74.7 -4.8C-73.7 -6.3 -72.5 -7.9 -70.9 -9.5C-69.2 -11 -67.4 -12.6 -64.8 -14.1C-62.1 -15.6 -58.8 -17.1 -54.9 -18.3C-51 -19.5 -46.2 -20.6 -41.3 -21.5C-36.3 -22.3 -30.7 -22.9 -25.3 -23.3C-19.8 -23.8 -14 -24 -8.4 -24.1C-2.8 -24.2 2.9 -24.1 8.4 -23.9C13.9 -23.7 19.4 -23.3 24.7 -22.8C29.9 -22.2 35 -21.5 39.6 -20.6C44.2 -19.7 48.4 -18.6 52.3 -17.4C56.1 -16.3 59.5 -15 62.7 -13.7C65.9 -12.4 68.8 -11 71.4 -9.5C74.1 -8.1 76.7 -6.6 78.6 -5C80.4 -3.4 82.1 -1.7 82.7 0Z"/><path class="bio-blob-shade" d="M74.4 0C74.9 1.5 74.7 3.2 73.6 4.7C72.5 6.2 70.3 7.7 67.8 9C65.2 10.4 61.7 11.6 58.2 12.7C54.8 13.8 50.8 14.7 46.9 15.6C43 16.5 39 17.4 34.8 18.1C30.6 18.8 26.3 19.6 21.8 20.1C17.2 20.6 12.3 21.1 7.5 21.3C2.6 21.5 -2.6 21.6 -7.5 21.5C-12.5 21.3 -17.5 21 -22.3 20.6C-27.1 20.2 -31.9 19.6 -36.4 18.9C-40.9 18.2 -45.3 17.4 -49.3 16.4C-53.2 15.5 -57.1 14.3 -60.1 13.1C-63.1 11.9 -65.6 10.4 -67.3 9C-68.9 7.5 -69.8 6 -70.1 4.5C-70.5 3 -70.1 1.5 -69.6 0C-69.1 -1.5 -68.2 -2.9 -67.3 -4.3C-66.3 -5.7 -65.3 -7.1 -63.8 -8.5C-62.3 -9.9 -60.7 -11.4 -58.3 -12.7C-55.9 -14 -52.9 -15.4 -49.4 -16.5C-45.9 -17.6 -41.6 -18.6 -37.2 -19.3C-32.7 -20.1 -27.7 -20.6 -22.7 -21C-17.8 -21.4 -12.6 -21.6 -7.6 -21.7C-2.5 -21.7 2.6 -21.7 7.5 -21.5C12.5 -21.3 17.5 -21 22.2 -20.5C26.9 -20 31.5 -19.3 35.6 -18.5C39.8 -17.7 43.6 -16.7 47.1 -15.7C50.5 -14.6 53.6 -13.5 56.4 -12.3C59.3 -11.1 61.9 -9.9 64.3 -8.6C66.7 -7.3 69 -5.9 70.7 -4.5C72.4 -3.1 73.9 -1.5 74.4 0Z"/><path class="bio-blob-highlight" d="M57.9 0C58.2 1.2 58.1 2.5 57.2 3.6C56.4 4.8 54.7 6 52.7 7C50.7 8.1 48 9 45.3 9.9C42.6 10.7 39.5 11.5 36.5 12.2C33.5 12.9 30.4 13.5 27.1 14.1C23.8 14.7 20.5 15.2 16.9 15.6C13.4 16 9.6 16.4 5.8 16.6C2 16.7 -2 16.8 -5.8 16.7C-9.7 16.6 -13.6 16.4 -17.4 16C-21.1 15.7 -24.8 15.2 -28.3 14.7C-31.8 14.2 -35.3 13.5 -38.3 12.8C-41.4 12 -44.4 11.1 -46.7 10.2C-49.1 9.2 -51 8.1 -52.3 7C-53.6 5.9 -54.3 4.6 -54.6 3.5C-54.9 2.3 -54.5 1.1 -54.1 0C-53.8 -1.1 -53.1 -2.2 -52.3 -3.3C-51.6 -4.4 -50.8 -5.5 -49.6 -6.6C-48.5 -7.7 -47.2 -8.8 -45.3 -9.9C-43.5 -10.9 -41.2 -12 -38.4 -12.8C-35.7 -13.7 -32.4 -14.4 -28.9 -15C-25.4 -15.6 -21.5 -16 -17.7 -16.3C-13.9 -16.6 -9.8 -16.8 -5.9 -16.8C-2 -16.9 2 -16.9 5.9 -16.7C9.7 -16.6 13.6 -16.3 17.3 -15.9C20.9 -15.5 24.5 -15 27.7 -14.4C30.9 -13.8 33.9 -13 36.6 -12.2C39.3 -11.4 41.7 -10.5 43.9 -9.6C46.1 -8.6 48.2 -7.7 50 -6.7C51.9 -5.7 53.7 -4.6 55 -3.5C56.3 -2.4 57.5 -1.2 57.9 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M82.7 0C83.2 1.7 83 3.5 81.8 5.2C80.5 6.9 78.1 8.6 75.3 10.1C72.4 11.5 68.5 12.9 64.7 14.1C60.8 15.3 56.5 16.4 52.1 17.4C47.8 18.4 43.4 19.3 38.7 20.1C34.1 20.9 29.3 21.7 24.2 22.3C19.1 22.9 13.7 23.4 8.3 23.7C2.9 23.9 -2.8 24 -8.4 23.9C-13.9 23.7 -19.4 23.4 -24.8 22.9C-30.1 22.4 -35.4 21.8 -40.4 21C-45.4 20.2 -50.4 19.3 -54.8 18.2C-59.2 17.2 -63.4 15.9 -66.7 14.5C-70.1 13.2 -72.9 11.6 -74.7 10C-76.6 8.4 -77.5 6.6 -77.9 5C-78.4 3.3 -77.9 1.6 -77.3 0C-76.8 -1.6 -75.8 -3.2 -74.7 -4.8C-73.7 -6.3 -72.5 -7.9 -70.9 -9.5C-69.2 -11 -67.4 -12.6 -64.8 -14.1C-62.1 -15.6 -58.8 -17.1 -54.9 -18.3C-51 -19.5 -46.2 -20.6 -41.3 -21.5C-36.3 -22.3 -30.7 -22.9 -25.3 -23.3C-19.8 -23.8 -14 -24 -8.4 -24.1C-2.8 -24.2 2.9 -24.1 8.4 -23.9C13.9 -23.7 19.4 -23.3 24.7 -22.8C29.9 -22.2 35 -21.5 39.6 -20.6C44.2 -19.7 48.4 -18.6 52.3 -17.4C56.1 -16.3 59.5 -15 62.7 -13.7C65.9 -12.4 68.8 -11 71.4 -9.5C74.1 -8.1 76.7 -6.6 78.6 -5C80.4 -3.4 82.1 -1.7 82.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Histamine</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">from ECL cells</text></g><g class="hot dr-node dr-n-source" id="nd-gas" tabindex="0" data-info="Gastrin released by G cells in the antrum when protein is eaten. It acts on parietal cells directly and by releasing histamine." transform="translate(105 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M81.7 0C81.8 1.7 81.4 3.5 80.1 5.1C78.8 6.8 76.6 8.4 73.9 9.9C71.2 11.3 67.6 12.7 63.8 13.9C60.1 15.1 55.7 16.2 51.5 17.2C47.2 18.2 42.9 19 38.3 19.9C33.8 20.8 29.2 21.6 24.2 22.3C19.2 23.1 13.9 23.8 8.5 24.2C3 24.6 -3 24.8 -8.7 24.7C-14.3 24.6 -20.3 24.2 -25.6 23.6C-31 23 -36.1 22.1 -40.7 21.2C-45.4 20.2 -49.6 19 -53.5 17.8C-57.4 16.6 -61 15.3 -64.1 14C-67.2 12.6 -70.1 11.2 -72.2 9.6C-74.4 8.1 -76.1 6.5 -77.1 4.9C-78.1 3.3 -78.4 1.6 -78.3 0C-78.2 -1.6 -77.4 -3.3 -76.4 -4.9C-75.4 -6.5 -74 -8.1 -72.2 -9.6C-70.4 -11.2 -68.4 -12.8 -65.6 -14.3C-62.9 -15.8 -59.6 -17.3 -55.6 -18.5C-51.6 -19.7 -46.7 -20.9 -41.7 -21.7C-36.6 -22.5 -30.8 -23 -25.2 -23.3C-19.7 -23.6 -13.8 -23.6 -8.3 -23.6C-2.7 -23.5 2.7 -23.3 8.1 -23C13.4 -22.8 18.6 -22.4 23.8 -22C29 -21.6 34.3 -21.1 39.3 -20.4C44.2 -19.7 49.2 -18.9 53.5 -17.8C57.9 -16.8 61.9 -15.6 65.3 -14.2C68.7 -12.9 71.6 -11.4 73.9 -9.9C76.3 -8.3 78.1 -6.7 79.4 -5.1C80.7 -3.4 81.6 -1.7 81.7 0Z"/><path class="bio-blob-shade" d="M73.5 0C73.6 1.5 73.2 3.1 72.1 4.6C70.9 6.1 69 7.6 66.5 8.9C64.1 10.2 60.8 11.4 57.4 12.5C54.1 13.6 50.2 14.5 46.3 15.4C42.5 16.3 38.6 17.1 34.5 17.9C30.4 18.7 26.3 19.5 21.8 20.1C17.3 20.7 12.5 21.4 7.6 21.7C2.7 22.1 -2.7 22.3 -7.8 22.2C-12.9 22.2 -18.2 21.8 -23 21.3C-27.9 20.7 -32.5 19.9 -36.7 19.1C-40.9 18.2 -44.7 17.1 -48.2 16C-51.7 15 -54.9 13.8 -57.7 12.6C-60.5 11.3 -63.1 10 -65 8.7C-67 7.3 -68.5 5.9 -69.4 4.4C-70.3 3 -70.6 1.5 -70.5 0C-70.4 -1.5 -69.7 -2.9 -68.8 -4.4C-67.9 -5.8 -66.6 -7.3 -65 -8.7C-63.4 -10.1 -61.6 -11.5 -59.1 -12.9C-56.6 -14.2 -53.6 -15.6 -50 -16.7C-46.4 -17.8 -42.1 -18.8 -37.5 -19.5C-33 -20.2 -27.7 -20.7 -22.7 -21C-17.7 -21.3 -12.4 -21.3 -7.4 -21.2C-2.4 -21.2 2.4 -21 7.3 -20.7C12.1 -20.5 16.8 -20.2 21.5 -19.8C26.1 -19.4 30.9 -19 35.3 -18.4C39.8 -17.7 44.3 -17 48.2 -16.1C52.1 -15.1 55.8 -14 58.8 -12.8C61.9 -11.6 64.4 -10.3 66.5 -8.9C68.6 -7.5 70.3 -6 71.4 -4.6C72.6 -3.1 73.4 -1.5 73.5 0Z"/><path class="bio-blob-highlight" d="M57.2 0C57.3 1.2 57 2.4 56.1 3.6C55.2 4.7 53.6 5.9 51.7 6.9C49.8 7.9 47.3 8.9 44.7 9.7C42.1 10.6 39 11.3 36 12C33.1 12.7 30 13.3 26.8 13.9C23.6 14.5 20.4 15.1 16.9 15.6C13.5 16.1 9.8 16.6 5.9 16.9C2.1 17.2 -2.1 17.4 -6.1 17.3C-10 17.2 -14.2 17 -17.9 16.5C-21.7 16.1 -25.3 15.5 -28.5 14.8C-31.8 14.1 -34.7 13.3 -37.5 12.5C-40.2 11.6 -42.7 10.7 -44.9 9.8C-47 8.8 -49 7.8 -50.6 6.8C-52.1 5.7 -53.3 4.6 -54 3.4C-54.7 2.3 -54.9 1.1 -54.8 0C-54.7 -1.1 -54.2 -2.3 -53.5 -3.4C-52.8 -4.5 -51.8 -5.7 -50.6 -6.8C-49.3 -7.9 -47.9 -9 -45.9 -10C-44 -11 -41.7 -12.1 -38.9 -13C-36.1 -13.8 -32.7 -14.6 -29.2 -15.2C-25.6 -15.7 -21.6 -16.1 -17.7 -16.3C-13.8 -16.5 -9.7 -16.5 -5.8 -16.5C-1.9 -16.5 1.9 -16.3 5.6 -16.1C9.4 -15.9 13 -15.7 16.7 -15.4C20.3 -15.1 24 -14.8 27.5 -14.3C30.9 -13.8 34.4 -13.2 37.5 -12.5C40.5 -11.8 43.4 -10.9 45.7 -10C48.1 -9 50.1 -8 51.8 -6.9C53.4 -5.8 54.7 -4.7 55.6 -3.5C56.5 -2.4 57.1 -1.2 57.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M81.7 0C81.8 1.7 81.4 3.5 80.1 5.1C78.8 6.8 76.6 8.4 73.9 9.9C71.2 11.3 67.6 12.7 63.8 13.9C60.1 15.1 55.7 16.2 51.5 17.2C47.2 18.2 42.9 19 38.3 19.9C33.8 20.8 29.2 21.6 24.2 22.3C19.2 23.1 13.9 23.8 8.5 24.2C3 24.6 -3 24.8 -8.7 24.7C-14.3 24.6 -20.3 24.2 -25.6 23.6C-31 23 -36.1 22.1 -40.7 21.2C-45.4 20.2 -49.6 19 -53.5 17.8C-57.4 16.6 -61 15.3 -64.1 14C-67.2 12.6 -70.1 11.2 -72.2 9.6C-74.4 8.1 -76.1 6.5 -77.1 4.9C-78.1 3.3 -78.4 1.6 -78.3 0C-78.2 -1.6 -77.4 -3.3 -76.4 -4.9C-75.4 -6.5 -74 -8.1 -72.2 -9.6C-70.4 -11.2 -68.4 -12.8 -65.6 -14.3C-62.9 -15.8 -59.6 -17.3 -55.6 -18.5C-51.6 -19.7 -46.7 -20.9 -41.7 -21.7C-36.6 -22.5 -30.8 -23 -25.2 -23.3C-19.7 -23.6 -13.8 -23.6 -8.3 -23.6C-2.7 -23.5 2.7 -23.3 8.1 -23C13.4 -22.8 18.6 -22.4 23.8 -22C29 -21.6 34.3 -21.1 39.3 -20.4C44.2 -19.7 49.2 -18.9 53.5 -17.8C57.9 -16.8 61.9 -15.6 65.3 -14.2C68.7 -12.9 71.6 -11.4 73.9 -9.9C76.3 -8.3 78.1 -6.7 79.4 -5.1C80.7 -3.4 81.6 -1.7 81.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Gastrin</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">from G cells</text></g><g class="hot dr-node dr-n-source" id="nd-ach" tabindex="0" data-info="Acetylcholine from the vagus nerve, the cephalic and gastric phases of acid secretion." transform="translate(105 490)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M85.1 0C84.6 1.7 83.8 3.3 82.5 4.9C81.2 6.5 79.5 8.1 77.2 9.6C74.9 11.1 72 12.6 68.6 13.9C65.1 15.2 61 16.5 56.7 17.6C52.3 18.7 47.4 19.6 42.4 20.5C37.4 21.4 32.1 22.2 26.6 22.8C21 23.5 15.2 24 9.2 24.4C3.2 24.7 -3.2 24.9 -9.3 24.8C-15.5 24.7 -21.8 24.3 -27.5 23.6C-33.2 23 -38.6 22 -43.4 21C-48.2 20 -52.3 18.7 -56.2 17.4C-60.1 16.2 -63.4 14.9 -66.7 13.5C-69.9 12.2 -73.1 10.8 -75.8 9.4C-78.5 8 -81.3 6.5 -83.1 4.9C-85 3.4 -86.5 1.7 -86.9 0C-87.4 -1.7 -86.9 -3.4 -85.8 -5.1C-84.6 -6.7 -82.5 -8.4 -80 -9.9C-77.4 -11.5 -74.2 -13 -70.6 -14.3C-67 -15.7 -62.9 -17 -58.4 -18.1C-53.9 -19.2 -48.9 -20.3 -43.6 -21.1C-38.3 -21.9 -32.4 -22.5 -26.6 -22.8C-20.8 -23.2 -14.7 -23.3 -8.8 -23.4C-2.9 -23.4 2.9 -23.2 8.6 -22.9C14.4 -22.7 20 -22.4 25.6 -22C31.3 -21.6 37 -21.2 42.6 -20.6C48.1 -20 53.9 -19.2 58.9 -18.3C63.9 -17.3 68.7 -16.1 72.5 -14.7C76.2 -13.3 79.2 -11.7 81.3 -10.1C83.4 -8.5 84.5 -6.7 85.1 -5C85.7 -3.4 85.5 -1.7 85.1 0Z"/><path class="bio-blob-shade" d="M76.6 0C76.2 1.5 75.4 3 74.2 4.4C73 5.8 71.5 7.3 69.5 8.6C67.4 10 64.8 11.3 61.7 12.5C58.6 13.7 54.9 14.8 51 15.8C47.1 16.8 42.7 17.7 38.2 18.5C33.7 19.2 28.9 19.9 23.9 20.5C18.9 21.1 13.6 21.6 8.3 21.9C2.9 22.2 -2.9 22.4 -8.4 22.3C-13.9 22.2 -19.7 21.8 -24.8 21.3C-29.9 20.7 -34.8 19.8 -39.1 18.9C-43.4 18 -47.1 16.8 -50.6 15.7C-54.1 14.6 -57.1 13.4 -60 12.2C-62.9 11 -65.8 9.8 -68.2 8.5C-70.7 7.2 -73.2 5.9 -74.8 4.4C-76.5 3 -77.8 1.5 -78.2 0C-78.6 -1.5 -78.2 -3.1 -77.2 -4.6C-76.2 -6.1 -74.2 -7.6 -72 -8.9C-69.7 -10.3 -66.8 -11.7 -63.5 -12.9C-60.3 -14.1 -56.6 -15.3 -52.6 -16.3C-48.5 -17.3 -44 -18.2 -39.2 -19C-34.4 -19.7 -29.2 -20.2 -23.9 -20.6C-18.7 -20.9 -13.2 -21 -7.9 -21C-2.6 -21 2.6 -20.9 7.8 -20.6C12.9 -20.4 18 -20.2 23.1 -19.8C28.2 -19.5 33.3 -19.1 38.3 -18.5C43.3 -18 48.5 -17.3 53 -16.4C57.5 -15.5 61.9 -14.4 65.2 -13.2C68.6 -12 71.3 -10.5 73.2 -9.1C75.1 -7.6 76 -6.1 76.6 -4.5C77.2 -3 77 -1.5 76.6 0Z"/><path class="bio-blob-highlight" d="M59.6 0C59.3 1.2 58.7 2.3 57.7 3.4C56.8 4.5 55.6 5.7 54 6.7C52.4 7.8 50.4 8.8 48 9.7C45.6 10.7 42.7 11.5 39.7 12.3C36.6 13.1 33.2 13.7 29.7 14.4C26.2 15 22.5 15.5 18.6 16C14.7 16.4 10.6 16.8 6.4 17.1C2.2 17.3 -2.3 17.4 -6.5 17.4C-10.8 17.3 -15.3 17 -19.3 16.5C-23.2 16.1 -27 15.4 -30.4 14.7C-33.7 14 -36.6 13.1 -39.3 12.2C-42.1 11.3 -44.4 10.4 -46.7 9.5C-49 8.5 -51.1 7.6 -53.1 6.6C-55 5.6 -56.9 4.6 -58.2 3.5C-59.5 2.4 -60.5 1.2 -60.8 0C-61.1 -1.2 -60.9 -2.4 -60 -3.6C-59.2 -4.7 -57.7 -5.9 -56 -7C-54.2 -8 -51.9 -9.1 -49.4 -10C-46.9 -11 -44 -11.9 -40.9 -12.7C-37.7 -13.5 -34.2 -14.2 -30.5 -14.7C-26.8 -15.3 -22.7 -15.7 -18.6 -16C-14.6 -16.3 -10.3 -16.3 -6.2 -16.4C-2 -16.4 2 -16.2 6 -16.1C10.1 -15.9 14 -15.7 17.9 -15.4C21.9 -15.1 25.9 -14.8 29.8 -14.4C33.7 -14 37.7 -13.5 41.2 -12.8C44.7 -12.1 48.1 -11.2 50.7 -10.3C53.4 -9.3 55.5 -8.2 56.9 -7.1C58.4 -5.9 59.1 -4.7 59.6 -3.5C60 -2.4 59.9 -1.2 59.6 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M85.1 0C84.6 1.7 83.8 3.3 82.5 4.9C81.2 6.5 79.5 8.1 77.2 9.6C74.9 11.1 72 12.6 68.6 13.9C65.1 15.2 61 16.5 56.7 17.6C52.3 18.7 47.4 19.6 42.4 20.5C37.4 21.4 32.1 22.2 26.6 22.8C21 23.5 15.2 24 9.2 24.4C3.2 24.7 -3.2 24.9 -9.3 24.8C-15.5 24.7 -21.8 24.3 -27.5 23.6C-33.2 23 -38.6 22 -43.4 21C-48.2 20 -52.3 18.7 -56.2 17.4C-60.1 16.2 -63.4 14.9 -66.7 13.5C-69.9 12.2 -73.1 10.8 -75.8 9.4C-78.5 8 -81.3 6.5 -83.1 4.9C-85 3.4 -86.5 1.7 -86.9 0C-87.4 -1.7 -86.9 -3.4 -85.8 -5.1C-84.6 -6.7 -82.5 -8.4 -80 -9.9C-77.4 -11.5 -74.2 -13 -70.6 -14.3C-67 -15.7 -62.9 -17 -58.4 -18.1C-53.9 -19.2 -48.9 -20.3 -43.6 -21.1C-38.3 -21.9 -32.4 -22.5 -26.6 -22.8C-20.8 -23.2 -14.7 -23.3 -8.8 -23.4C-2.9 -23.4 2.9 -23.2 8.6 -22.9C14.4 -22.7 20 -22.4 25.6 -22C31.3 -21.6 37 -21.2 42.6 -20.6C48.1 -20 53.9 -19.2 58.9 -18.3C63.9 -17.3 68.7 -16.1 72.5 -14.7C76.2 -13.3 79.2 -11.7 81.3 -10.1C83.4 -8.5 84.5 -6.7 85.1 -5C85.7 -3.4 85.5 -1.7 85.1 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Acetylcholine</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">vagus nerve</text></g><g class="hot dr-node dr-n-mid" id="nd-par" tabindex="0" data-info="The parietal cell adds the signals from its three receptors: H2, CCK2 (gastrin) and M3 (acetylcholine). Histamine and gastrin act through cAMP and calcium and both end at the proton pump." transform="translate(480 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M108.4 0C107.6 1.6 106.2 3.2 104.7 4.8C103.1 6.3 101.6 7.9 99.2 9.5C96.8 11 94.2 12.6 90.4 14.1C86.7 15.5 82 17 76.6 18.2C71.1 19.4 64.4 20.5 57.5 21.4C50.7 22.2 42.9 22.8 35.3 23.3C27.7 23.7 19.7 24 11.8 24.1C4 24.3 -4 24.2 -11.8 24C-19.5 23.8 -27.4 23.5 -34.7 22.9C-42 22.3 -49.2 21.5 -55.6 20.6C-61.9 19.7 -67.8 18.6 -73.1 17.4C-78.4 16.2 -83 14.9 -87.4 13.6C-91.8 12.3 -95.9 10.9 -99.6 9.5C-103.3 8.1 -107.1 6.6 -109.8 5C-112.4 3.4 -114.9 1.7 -115.6 0C-116.4 -1.7 -116.1 -3.5 -114.4 -5.2C-112.7 -6.9 -109.4 -8.6 -105.4 -10.1C-101.5 -11.5 -96.1 -12.9 -90.8 -14.1C-85.4 -15.4 -79.4 -16.4 -73.3 -17.5C-67.3 -18.5 -61 -19.4 -54.5 -20.2C-47.9 -21 -41.1 -21.8 -33.9 -22.4C-26.8 -22.9 -19.2 -23.4 -11.6 -23.6C-4 -23.8 3.9 -23.9 11.6 -23.7C19.3 -23.6 27 -23.2 34.5 -22.8C42 -22.3 49.4 -21.7 56.4 -21C63.5 -20.2 70.6 -19.3 76.8 -18.3C83 -17.2 89.1 -16 93.8 -14.6C98.5 -13.2 102.4 -11.6 105 -10C107.6 -8.4 108.8 -6.7 109.3 -5C109.9 -3.3 109.1 -1.6 108.4 0Z"/><path class="bio-blob-shade" d="M97.5 0C96.8 1.5 95.6 2.9 94.2 4.3C92.8 5.7 91.4 7.1 89.3 8.5C87.1 9.9 84.8 11.4 81.4 12.7C78 14 73.8 15.3 68.9 16.4C64 17.5 58 18.5 51.8 19.2C45.6 20 38.6 20.5 31.8 21C24.9 21.4 17.7 21.6 10.7 21.7C3.6 21.8 -3.6 21.8 -10.6 21.6C-17.6 21.4 -24.7 21.1 -31.2 20.6C-37.8 20.1 -44.2 19.4 -50 18.6C-55.8 17.7 -61 16.7 -65.8 15.7C-70.5 14.6 -74.7 13.4 -78.7 12.2C-82.6 11.1 -86.3 9.8 -89.7 8.6C-93 7.3 -96.4 5.9 -98.8 4.5C-101.2 3.1 -103.4 1.5 -104.1 0C-104.8 -1.5 -104.5 -3.2 -103 -4.7C-101.5 -6.2 -98.5 -7.7 -94.9 -9.1C-91.4 -10.4 -86.5 -11.6 -81.7 -12.7C-76.9 -13.8 -71.4 -14.8 -66 -15.7C-60.5 -16.6 -54.9 -17.5 -49 -18.2C-43.1 -18.9 -37 -19.6 -30.5 -20.1C-24.1 -20.6 -17.3 -21 -10.4 -21.2C-3.6 -21.4 3.6 -21.5 10.5 -21.3C17.4 -21.2 24.3 -20.9 31.1 -20.5C37.8 -20.1 44.5 -19.5 50.8 -18.9C57.1 -18.2 63.5 -17.4 69.1 -16.5C74.7 -15.5 80.2 -14.4 84.4 -13.1C88.7 -11.9 92.2 -10.5 94.5 -9C96.8 -7.6 97.9 -6 98.4 -4.5C98.9 -3 98.2 -1.5 97.5 0Z"/><path class="bio-blob-highlight" d="M75.9 0C75.3 1.1 74.3 2.2 73.3 3.3C72.2 4.4 71.1 5.5 69.4 6.6C67.8 7.7 66 8.8 63.3 9.9C60.7 10.9 57.4 11.9 53.6 12.8C49.8 13.6 45.1 14.4 40.3 15C35.5 15.5 30 16 24.7 16.3C19.4 16.6 13.8 16.8 8.3 16.9C2.8 17 -2.8 17 -8.2 16.8C-13.7 16.7 -19.2 16.4 -24.3 16C-29.4 15.6 -34.4 15.1 -38.9 14.4C-43.4 13.8 -47.4 13 -51.2 12.2C-54.9 11.4 -58.1 10.4 -61.2 9.5C-64.3 8.6 -67.1 7.7 -69.7 6.7C-72.3 5.6 -75 4.6 -76.8 3.5C-78.7 2.4 -80.4 1.2 -80.9 0C-81.5 -1.2 -81.3 -2.5 -80.1 -3.6C-78.9 -4.8 -76.6 -6 -73.8 -7C-71.1 -8.1 -67.3 -9 -63.5 -9.9C-59.8 -10.8 -55.6 -11.5 -51.3 -12.2C-47.1 -12.9 -42.7 -13.6 -38.1 -14.1C-33.5 -14.7 -28.7 -15.3 -23.7 -15.7C-18.7 -16.1 -13.4 -16.4 -8.1 -16.5C-2.8 -16.7 2.8 -16.7 8.1 -16.6C13.5 -16.5 18.9 -16.3 24.2 -15.9C29.4 -15.6 34.6 -15.2 39.5 -14.7C44.4 -14.1 49.4 -13.5 53.8 -12.8C58.1 -12.1 62.4 -11.2 65.7 -10.2C69 -9.3 71.7 -8.1 73.5 -7C75.3 -5.9 76.1 -4.7 76.5 -3.5C76.9 -2.3 76.4 -1.1 75.9 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M108.4 0C107.6 1.6 106.2 3.2 104.7 4.8C103.1 6.3 101.6 7.9 99.2 9.5C96.8 11 94.2 12.6 90.4 14.1C86.7 15.5 82 17 76.6 18.2C71.1 19.4 64.4 20.5 57.5 21.4C50.7 22.2 42.9 22.8 35.3 23.3C27.7 23.7 19.7 24 11.8 24.1C4 24.3 -4 24.2 -11.8 24C-19.5 23.8 -27.4 23.5 -34.7 22.9C-42 22.3 -49.2 21.5 -55.6 20.6C-61.9 19.7 -67.8 18.6 -73.1 17.4C-78.4 16.2 -83 14.9 -87.4 13.6C-91.8 12.3 -95.9 10.9 -99.6 9.5C-103.3 8.1 -107.1 6.6 -109.8 5C-112.4 3.4 -114.9 1.7 -115.6 0C-116.4 -1.7 -116.1 -3.5 -114.4 -5.2C-112.7 -6.9 -109.4 -8.6 -105.4 -10.1C-101.5 -11.5 -96.1 -12.9 -90.8 -14.1C-85.4 -15.4 -79.4 -16.4 -73.3 -17.5C-67.3 -18.5 -61 -19.4 -54.5 -20.2C-47.9 -21 -41.1 -21.8 -33.9 -22.4C-26.8 -22.9 -19.2 -23.4 -11.6 -23.6C-4 -23.8 3.9 -23.9 11.6 -23.7C19.3 -23.6 27 -23.2 34.5 -22.8C42 -22.3 49.4 -21.7 56.4 -21C63.5 -20.2 70.6 -19.3 76.8 -18.3C83 -17.2 89.1 -16 93.8 -14.6C98.5 -13.2 102.4 -11.6 105 -10C107.6 -8.4 108.8 -6.7 109.3 -5C109.9 -3.3 109.1 -1.6 108.4 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Parietal cell stimulated</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">the three signals add</text></g><g class="hot dr-node dr-n-out" id="nd-acid" tabindex="0" data-info="Hydrochloric acid secreted into the stomach lumen." transform="translate(850 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M87.8 0C87.6 1.6 86.7 3.2 85.5 4.8C84.4 6.4 82.9 8 81 9.6C79 11.2 76.8 12.8 73.7 14.3C70.7 15.8 67 17.3 62.5 18.5C58.1 19.8 52.6 20.9 47 21.7C41.3 22.5 34.7 23 28.4 23.3C22.2 23.7 15.6 23.7 9.3 23.6C3.1 23.6 -3.1 23.4 -9.1 23.1C-15.1 22.9 -21.1 22.5 -26.9 22.1C-32.8 21.6 -38.7 21.1 -44.2 20.4C-49.7 19.7 -55.2 18.8 -60 17.8C-64.8 16.7 -69.3 15.5 -73.1 14.2C-76.9 12.8 -80.1 11.3 -82.8 9.8C-85.5 8.3 -87.7 6.7 -89.2 5.1C-90.8 3.4 -92 1.7 -92.2 0C-92.4 -1.7 -92 -3.5 -90.6 -5.1C-89.1 -6.8 -86.6 -8.4 -83.5 -9.9C-80.4 -11.4 -76.1 -12.7 -71.9 -13.9C-67.6 -15.1 -62.7 -16.2 -57.9 -17.1C-53.1 -18.1 -48.2 -19 -43 -19.9C-37.9 -20.7 -32.8 -21.6 -27.2 -22.3C-21.6 -23 -15.6 -23.7 -9.5 -24.1C-3.3 -24.5 3.3 -24.7 9.7 -24.6C16.1 -24.5 22.7 -24.1 28.7 -23.6C34.7 -23 40.5 -22.1 45.8 -21.2C51.1 -20.2 56 -19.1 60.4 -17.9C64.9 -16.7 69 -15.4 72.6 -14.1C76.1 -12.7 79.3 -11.2 81.7 -9.7C84.1 -8.2 85.8 -6.5 86.8 -4.9C87.8 -3.3 88 -1.6 87.8 0Z"/><path class="bio-blob-shade" d="M79 0C78.8 1.5 78 2.9 77 4.4C75.9 5.8 74.6 7.2 72.9 8.7C71.1 10.1 69.1 11.5 66.4 12.9C63.6 14.2 60.3 15.6 56.3 16.7C52.3 17.8 47.4 18.8 42.3 19.5C37.1 20.2 31.2 20.7 25.6 21C19.9 21.3 14 21.3 8.4 21.3C2.8 21.2 -2.8 21 -8.2 20.8C-13.6 20.6 -19 20.3 -24.2 19.9C-29.5 19.5 -34.8 19 -39.8 18.4C-44.7 17.7 -49.7 16.9 -54 16C-58.3 15.1 -62.3 13.9 -65.8 12.7C-69.2 11.5 -72.1 10.2 -74.5 8.8C-76.9 7.5 -78.9 6 -80.3 4.6C-81.7 3.1 -82.8 1.5 -83 0C-83.2 -1.5 -82.8 -3.1 -81.5 -4.6C-80.2 -6.1 -77.9 -7.6 -75.1 -8.9C-72.3 -10.2 -68.5 -11.4 -64.7 -12.5C-60.9 -13.6 -56.4 -14.5 -52.1 -15.4C-47.8 -16.3 -43.4 -17.1 -38.7 -17.9C-34.1 -18.7 -29.5 -19.4 -24.5 -20.1C-19.4 -20.7 -14.1 -21.3 -8.5 -21.7C-3 -22 3 -22.2 8.7 -22.2C14.5 -22.1 20.4 -21.7 25.8 -21.2C31.3 -20.7 36.5 -19.9 41.2 -19.1C46 -18.2 50.4 -17.2 54.4 -16.1C58.4 -15 62.1 -13.9 65.3 -12.7C68.5 -11.4 71.4 -10.1 73.5 -8.7C75.6 -7.4 77.2 -5.9 78.1 -4.4C79.1 -3 79.2 -1.5 79 0Z"/><path class="bio-blob-highlight" d="M61.5 0C61.3 1.1 60.7 2.3 59.9 3.4C59.1 4.5 58 5.6 56.7 6.7C55.3 7.8 53.8 9 51.6 10C49.5 11 46.9 12.1 43.8 13C40.7 13.8 36.8 14.6 32.9 15.2C28.9 15.7 24.3 16.1 19.9 16.3C15.5 16.6 10.9 16.6 6.5 16.5C2.1 16.5 -2.2 16.4 -6.4 16.2C-10.6 16 -14.7 15.8 -18.8 15.5C-22.9 15.1 -27.1 14.8 -30.9 14.3C-34.8 13.8 -38.6 13.2 -42 12.4C-45.4 11.7 -48.5 10.8 -51.1 9.9C-53.8 9 -56 7.9 -57.9 6.9C-59.8 5.8 -61.4 4.7 -62.5 3.5C-63.6 2.4 -64.4 1.2 -64.5 0C-64.7 -1.2 -64.4 -2.4 -63.4 -3.6C-62.4 -4.7 -60.6 -5.9 -58.4 -6.9C-56.3 -8 -53.3 -8.9 -50.3 -9.7C-47.3 -10.6 -43.9 -11.3 -40.5 -12C-37.2 -12.7 -33.7 -13.3 -30.1 -13.9C-26.6 -14.5 -22.9 -15.1 -19 -15.6C-15.1 -16.1 -11 -16.6 -6.6 -16.9C-2.3 -17.1 2.3 -17.3 6.8 -17.2C11.3 -17.2 15.9 -16.9 20.1 -16.5C24.3 -16.1 28.4 -15.5 32.1 -14.8C35.8 -14.2 39.2 -13.4 42.3 -12.5C45.4 -11.7 48.3 -10.8 50.8 -9.8C53.3 -8.9 55.5 -7.9 57.2 -6.8C58.8 -5.7 60.1 -4.6 60.8 -3.4C61.5 -2.3 61.6 -1.1 61.5 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M87.8 0C87.6 1.6 86.7 3.2 85.5 4.8C84.4 6.4 82.9 8 81 9.6C79 11.2 76.8 12.8 73.7 14.3C70.7 15.8 67 17.3 62.5 18.5C58.1 19.8 52.6 20.9 47 21.7C41.3 22.5 34.7 23 28.4 23.3C22.2 23.7 15.6 23.7 9.3 23.6C3.1 23.6 -3.1 23.4 -9.1 23.1C-15.1 22.9 -21.1 22.5 -26.9 22.1C-32.8 21.6 -38.7 21.1 -44.2 20.4C-49.7 19.7 -55.2 18.8 -60 17.8C-64.8 16.7 -69.3 15.5 -73.1 14.2C-76.9 12.8 -80.1 11.3 -82.8 9.8C-85.5 8.3 -87.7 6.7 -89.2 5.1C-90.8 3.4 -92 1.7 -92.2 0C-92.4 -1.7 -92 -3.5 -90.6 -5.1C-89.1 -6.8 -86.6 -8.4 -83.5 -9.9C-80.4 -11.4 -76.1 -12.7 -71.9 -13.9C-67.6 -15.1 -62.7 -16.2 -57.9 -17.1C-53.1 -18.1 -48.2 -19 -43 -19.9C-37.9 -20.7 -32.8 -21.6 -27.2 -22.3C-21.6 -23 -15.6 -23.7 -9.5 -24.1C-3.3 -24.5 3.3 -24.7 9.7 -24.6C16.1 -24.5 22.7 -24.1 28.7 -23.6C34.7 -23 40.5 -22.1 45.8 -21.2C51.1 -20.2 56 -19.1 60.4 -17.9C64.9 -16.7 69 -15.4 72.6 -14.1C76.1 -12.7 79.3 -11.2 81.7 -9.7C84.1 -8.2 85.8 -6.5 86.8 -4.9C87.8 -3.3 88 -1.6 87.8 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Gastric acid</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">H⁺ into the lumen</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">drug (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lab value is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Meal or stimulus</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="usual meal"><span class="dr-ticks"><i>fasting</i><i>meal</i><i>large</i></span></label>
+  <label class="dr-range"><span>Drug class (generic)</span><select id="drug"><option value="0">none</option><option value="1">H2 blocker (famotidine or ranitidine type)</option><option value="2">proton pump inhibitor (omeprazole type)</option><option value="3">antimuscarinic (pirenzepine or atropine type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>The three signals and the pump.</strong> Histamine (H2), gastrin (CCK2) and acetylcholine (M3) all stimulate the parietal cell, and the H⁺/K⁺ ATPase is the final step; H2 blockers and antimuscarinics each block one input, and proton pump inhibitors bind the pump irreversibly. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> Somatostatin and prostaglandin inhibition, the mucosal defence (mucus, bicarbonate), Helicobacter pylori, antacids and sucralfate, the delay and acid-activation of proton pump inhibitors (which are best taken before meals), rebound acid, nocturnal acid and the effect of long-term use are left out. The three inputs are drawn as equal in strength for teaching; real contributions vary. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Meal or stimulus","a":[0.3,0.65,0.95],"names":["fasting","usual meal","large meal"],"ticks":["fasting","meal","large"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"H2 blocker (famotidine or ranitidine type)","blocks":{"e_h":0.85}},{"label":"proton pump inhibitor (omeprazole type)","blocks":{"e_pump":0.85}},{"label":"antimuscarinic (pirenzepine or atropine type)","blocks":{"e_m":0.85}}],"nodes":[{"id":"his","kind":"source"},{"id":"gas","kind":"source"},{"id":"ach","kind":"source"},{"id":"par","kind":"mid"},{"id":"acid","kind":"out"}],"edges":[{"id":"e_h","from":"his","to":"par","w":0.34},{"id":"e_g","from":"gas","to":"par","w":0.34},{"id":"e_m","from":"ach","to":"par","w":0.34},{"id":"e_pump","from":"par","to":"acid"}],"outputs":[{"node":"acid","words":["low","moderate","high"],"cuts":[0.25,0.55]}],"readout":"gastric acid {0}","status":"Stimulus: {level} · {drug} ·","drugNames":["no drug","H2 blocker","proton pump inhibitor","antimuscarinic"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_h","p0":[149.32750363754272,132.45926850968831],"p1":[428.3446501743502,273.82795608833743]},{"id":"e_g","p0":[189,300],"p1":[359,300]},{"id":"e_m","p0":[150.05916050270812,467.17002534529456],"p1":[428.3446501743502,326.17204391166257]},{"id":"e_pump","p0":[596,300],"p1":[751,300]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

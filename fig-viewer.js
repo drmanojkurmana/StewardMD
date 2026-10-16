@@ -66,7 +66,9 @@
       var names = Object.keys(f.drugs || {});
       var parts = names.map(esc2).concat((f.terms || []).map(String));
       var rx = null; try { rx = parts.length ? new RegExp("(?:^|[^a-z])(" + parts.join("|") + ")(?![a-z])", "gi") : null; } catch (e) { rx = null; }
-      return { id: String(f.id), title: String(f.title || "Interactive figure"), blurb: String(f.blurb || ""), page: String(f.page), drugs: f.drugs || {}, rx: rx };
+      var weak = {}; (f.weak || []).forEach(function (w) { weak[String(w).toLowerCase()] = 1; });
+      var ctx = null; try { ctx = f.ctx ? new RegExp(f.ctx, "i") : null; } catch (e) { ctx = null; }
+      return { id: String(f.id), title: String(f.title || "Interactive figure"), blurb: String(f.blurb || ""), page: String(f.page), drugs: f.drugs || {}, rx: rx, weak: weak, ctx: ctx };
     });
   }
   function ready() {
@@ -85,7 +87,7 @@
       if (!f.rx) return;
       f.rx.lastIndex = 0;
       var m, hits = 0, first = "";
-      while ((m = f.rx.exec(t))) { hits++; var nm = String(m[1]).toLowerCase(); if (!first && f.drugs[nm]) first = f.drugs[nm] + "&name=" + encodeURIComponent(nm.charAt(0).toUpperCase() + nm.slice(1)); if (hits > 50) break; }
+      while ((m = f.rx.exec(t))) { var nm = String(m[1]).toLowerCase(); if (f.weak[nm] && f.ctx && !f.ctx.test(t)) continue; hits++; if (!first && f.drugs[nm]) first = f.drugs[nm] + "&name=" + encodeURIComponent(nm.charAt(0).toUpperCase() + nm.slice(1)); if (hits > 50) break; }
       if (hits) out.push({ id: f.id, title: f.title, blurb: f.blurb, hits: hits, query: first });
     });
     out.sort(function (a, b) { return b.hits - a.hits; });

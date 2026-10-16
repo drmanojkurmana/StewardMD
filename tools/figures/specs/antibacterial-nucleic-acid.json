@@ -1,0 +1,297 @@
+{
+ "id": "antibacterial-nucleic-acid",
+ "title": "Antibacterials that block folate, DNA and RNA synthesis",
+ "ariaLabel": "Schematic of bacterial nucleic acid synthesis: PABA becomes dihydrofolate (dihydropteroate synthase) and then tetrahydrofolate (dihydrofolate reductase), which supplies nucleotides for DNA; DNA gyrase and topoisomerase IV unwind the DNA template for replication; RNA polymerase makes mRNA from the template. Sulfonamides block the first folate step, trimethoprim the second, quinolones gyrase and topoisomerase IV, and rifampicin RNA polymerase.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or MIC is shown or implied.",
+ "level": {
+  "label": "Bacterial growth",
+  "a": [
+   0.4,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antibiotic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antibiotic"
+  },
+  {
+   "label": "sulfonamide type",
+   "status": "sulfonamide",
+   "blocks": {
+    "e_dhps": 0.85
+   }
+  },
+  {
+   "label": "trimethoprim type",
+   "status": "trimethoprim",
+   "blocks": {
+    "e_dhfr": 0.85
+   }
+  },
+  {
+   "label": "sulfonamide plus trimethoprim (co-trimoxazole type)",
+   "status": "sulfonamide plus trimethoprim",
+   "blocks": {
+    "e_dhps": 0.85,
+    "e_dhfr": 0.85
+   }
+  },
+  {
+   "label": "fluoroquinolone type",
+   "status": "fluoroquinolone",
+   "blocks": {
+    "e_gyr": 0.85
+   }
+  },
+  {
+   "label": "rifampicin type",
+   "status": "rifamycin",
+   "blocks": {
+    "e_rna": 0.85
+   }
+  }
+ ],
+ "readout": "DNA replication {0} · mRNA made {1}",
+ "outputs": [
+  {
+   "node": "dna",
+   "words": [
+    "stopped",
+    "slowed",
+    "normal"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  },
+  {
+   "node": "rna",
+   "words": [
+    "stopped",
+    "slowed",
+    "normal"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Growth: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "DNA replication normal · mRNA made normal"
+  ],
+  [
+   1,
+   4,
+   "DNA replication slowed · mRNA made normal"
+  ],
+  [
+   1,
+   5,
+   "DNA replication normal · mRNA made stopped"
+  ]
+ ],
+ "blockInfo": "An antibacterial of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made.",
+ "blockKey": "antibacterial (generic)",
+ "nodes": [
+  {
+   "id": "paba",
+   "kind": "source",
+   "label": "PABA",
+   "sub": "made by the bacterium",
+   "x": 110,
+   "y": 110,
+   "rx": 100,
+   "info": "Para-aminobenzoic acid: bacteria must make their own folate from it. Human cells take folate in the diet and have no such pathway. The slider sets how fast the cell is growing."
+  },
+  {
+   "id": "dhf",
+   "kind": "mid",
+   "label": "Dihydrofolate",
+   "x": 430,
+   "y": 110,
+   "rx": 86,
+   "info": "Dihydrofolic acid: the first folate."
+  },
+  {
+   "id": "thf",
+   "kind": "mid",
+   "label": "Tetrahydrofolate",
+   "sub": "active folate",
+   "x": 760,
+   "y": 110,
+   "rx": 92,
+   "info": "Tetrahydrofolic acid: carries the one-carbon units needed for purines and thymidine."
+  },
+  {
+   "id": "nuc",
+   "kind": "mid",
+   "label": "Nucleotides",
+   "sub": "purines and thymidine",
+   "x": 760,
+   "y": 270,
+   "rx": 92,
+   "info": "Nucleotides for DNA synthesis. Without folate, thymidine and purines run short."
+  },
+  {
+   "id": "tmpl",
+   "kind": "source",
+   "label": "DNA template",
+   "sub": "the chromosome",
+   "x": 110,
+   "y": 340,
+   "rx": 92,
+   "info": "The bacterial chromosome: the template for both replication and transcription."
+  },
+  {
+   "id": "unw",
+   "kind": "mid",
+   "label": "Unwound DNA",
+   "sub": "gyrase and topoisomerase IV",
+   "x": 470,
+   "y": 340,
+   "rx": 110,
+   "info": "DNA gyrase (topoisomerase II) relieves the supercoiling ahead of the replication fork, and topoisomerase IV separates the daughter chromosomes."
+  },
+  {
+   "id": "dna",
+   "kind": "calc",
+   "base": 0,
+   "terms": [
+    [
+     "n:nuc",
+     0.5
+    ],
+    [
+     "n:unw",
+     0.5
+    ]
+   ],
+   "label": "DNA replication",
+   "sub": "needs nucleotides and unwinding",
+   "x": 760,
+   "y": 450,
+   "rx": 130,
+   "info": "DNA replication needs both nucleotides and an unwound template, so losing either one slows it. The two inputs are added in this figure to show that."
+  },
+  {
+   "id": "rna",
+   "kind": "out",
+   "label": "mRNA made",
+   "sub": "transcription",
+   "x": 470,
+   "y": 550,
+   "rx": 90,
+   "info": "Messenger RNA made by the bacterial DNA-dependent RNA polymerase from the DNA template."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_dhps",
+   "from": "paba",
+   "to": "dhf",
+   "label": "DHPS",
+   "info": "Dihydropteroate synthase (DHPS). Sulfonamides resemble PABA and compete with it for the enzyme."
+  },
+  {
+   "id": "e_dhfr",
+   "from": "dhf",
+   "to": "thf",
+   "label": "DHFR",
+   "info": "Dihydrofolate reductase (DHFR). Trimethoprim inhibits the bacterial enzyme far more strongly than the human one."
+  },
+  {
+   "id": "e_nuc",
+   "from": "thf",
+   "to": "nuc",
+   "blockable": false,
+   "info": "Folate supplies the one-carbon units for nucleotides."
+  },
+  {
+   "id": "e_gyr",
+   "from": "tmpl",
+   "to": "unw",
+   "label": "gyrase / topo IV",
+   "info": "DNA gyrase and topoisomerase IV. Fluoroquinolones trap them on the DNA, so replication stalls and the chromosome breaks. Gyrase is the main target in Gram-negative bacteria and topoisomerase IV in many Gram-positive ones."
+  },
+  {
+   "id": "e_rna",
+   "from": "tmpl",
+   "to": "rna",
+   "label": "RNA polymerase",
+   "info": "Bacterial DNA-dependent RNA polymerase. Rifampicin binds it and physically blocks the growing RNA chain."
+  },
+  {
+   "id": "e_n2d",
+   "from": "nuc",
+   "to": "dna",
+   "blockable": false,
+   "info": "Nucleotides feed DNA replication."
+  },
+  {
+   "id": "e_u2d",
+   "from": "unw",
+   "to": "dna",
+   "blockable": false,
+   "info": "An unwound template lets the replication fork move."
+  }
+ ],
+ "sources": [
+  "<strong>Rifampicin.</strong> It inhibits bacterial DNA-dependent RNA polymerase, obstructing the growing RNA chain (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK557488/\">Rifampin, NCBI Bookshelf</a>).",
+  "<strong>Sulfonamides, trimethoprim and quinolones.</strong> Sulfonamides are PABA analogues that block dihydropteroate synthase, trimethoprim blocks dihydrofolate reductase far more strongly in bacteria than in human cells, and fluoroquinolones inhibit DNA gyrase and topoisomerase IV. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "The sequential block that makes co-trimoxazole synergistic and its bactericidal effect, bacterial resistance (altered enzymes, efflux, target protection), human folate and the need for folinic acid rescue in some settings, pyrimidine and purine detail, rifampicin enzyme induction and other drugs of this kind (metronidazole, nitrofurantoin) are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antibacterials that block folate, DNA and RNA synthesis",
+  "blurb": "Interactive figure: sulfonamides, trimethoprim, quinolones and rifampicin, step by step",
+  "drugs": {
+   "sulfamethoxazole": "d=1",
+   "sulfadiazine": "d=1",
+   "sulfacetamide": "d=1",
+   "trimethoprim": "d=2",
+   "cotrimoxazole": "d=3",
+   "ciprofloxacin": "d=4",
+   "levofloxacin": "d=4",
+   "moxifloxacin": "d=4",
+   "ofloxacin": "d=4",
+   "norfloxacin": "d=4",
+   "gatifloxacin": "d=4",
+   "nalidixic": "d=4",
+   "gemifloxacin": "d=4",
+   "rifampicin": "d=5",
+   "rifampin": "d=5",
+   "rifabutin": "d=5",
+   "rifapentine": "d=5",
+   "rifaximin": "d=5"
+  },
+  "terms": [
+   "sulfonamides?",
+   "sulphonamides?",
+   "quinolones?",
+   "fluoroquinolones?",
+   "rifamycins?",
+   "DNA gyrase",
+   "topoisomerase IV",
+   "dihydrofolate reductase"
+  ]
+ }
+}

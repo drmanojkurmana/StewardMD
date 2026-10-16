@@ -55,3 +55,13 @@ test("registry: drugs shared by two figures list both", async () => {
   assert.equal(F.matchText("Aspirin and clopidogrel after stenting", 1)[0].id, "antiplatelets");
   assert.equal(F.matchText("Rivaroxaban versus warfarin", 1)[0].id, "anticoagulants");
 });
+
+test("registry: ambiguous drug names need their context, common words never match", async () => {
+  const F = load(); await F.ready();
+  assert.equal(F.matchText("Lidocaine is used for local infiltration before a procedure", 3).filter((m) => m.id === "antiarrhythmics").length, 0, "lidocaine alone is not an arrhythmia question");
+  assert.equal(F.matchText("Lidocaine for ventricular tachycardia after myocardial infarction", 3).filter((m) => m.id === "antiarrhythmics").length, 1);
+  for (const w of ["Hypokalaemia with potassium loss", "The state of the art", "Lithium toxicity causes tremor", "iodide uptake in the thyroid cell"]) {
+    const ms = F.matchText(w, 5).filter((m) => m.id === "thyroid-drugs" || m.id === "antiretrovirals");
+    assert.equal(ms.length, 0, w);
+  }
+});

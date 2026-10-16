@@ -1,0 +1,312 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Antibiotics that attack the bacterial cell wall</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Antibiotics that attack the bacterial cell wall</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>cell wall strong · bacterial lysis unlikely</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of bacterial cell wall building: precursors are made in the cytoplasm, carried across the membrane on a lipid carrier as lipid II, joined into glycan chains by transglycosylase, and cross-linked by transpeptidases (the penicillin-binding proteins) into a strong wall. Fosfomycin and cycloserine act on early precursors, bacitracin on the lipid carrier, vancomycin on the substrate of the later steps, and beta-lactams on the transpeptidase. A beta-lactamase destroys a beta-lactam, and a beta-lactamase inhibitor protects it."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_pre" d="M223 110L373 110"/><path class="dr-flowhead" d="M373 110l-8.1 3.9M373 110l-8.1 -3.9"/><g id="pt-e_pre"></g><g class="hot dr-enz" tabindex="0" data-info="Early cytoplasmic steps (the Mur enzymes). Fosfomycin blocks the first, MurA; cycloserine blocks alanine racemase and D-alanine ligase, which make the D-Ala-D-Ala end."><rect class="dr-enz-r" x="249.3" y="99" width="97.4" height="22" rx="11"/><text class="dr-prot" x="298" y="114" text-anchor="middle">Mur enzymes</text></g><g class="hot dr-block" id="blk-e_pre" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-block-hex" d="M307 85L302.5 92.8L293.5 92.8L289 85L293.5 77.2L302.5 77.2Z"/><path class="dr-block-x" d="M294.4 81.4L301.6 88.6M301.6 81.4L294.4 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_pre" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-ag-hex" d="M329 85L324.5 92.8L315.5 92.8L311 85L315.5 77.2L324.5 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_car" d="M582 110L740 110"/><path class="dr-flowhead" d="M740 110l-8.1 3.9M740 110l-8.1 -3.9"/><g id="pt-e_car"></g><g class="hot dr-enz" tabindex="0" data-info="Attachment to the lipid carrier and its recycling. Bacitracin blocks the dephosphorylation that recycles the carrier."><rect class="dr-enz-r" x="604.9" y="99" width="112.2" height="22" rx="11"/><text class="dr-prot" x="661" y="114" text-anchor="middle">lipid carrier</text></g><g class="hot dr-block" id="blk-e_car" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-block-hex" d="M670 85L665.5 92.8L656.5 92.8L652 85L656.5 77.2L665.5 77.2Z"/><path class="dr-block-x" d="M657.4 81.4L664.6 88.6M664.6 81.4L657.4 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_car" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-ag-hex" d="M692 85L687.5 92.8L678.5 92.8L674 85L678.5 77.2L687.5 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_tg" d="M835 138L835 257"/><path class="dr-flowhead" d="M835 257l-3.9 -8.1M835 257l3.9 -8.1"/><g id="pt-e_tg"></g><g class="hot dr-enz" tabindex="0" data-info="Transglycosylation: joining sugar units into glycan chains. Vancomycin binds the D-Ala-D-Ala end of the building blocks and so blocks this step (and, by hiding the peptide, the cross-linking)."><rect class="dr-enz-r" x="767.8" y="186.5" width="134.4" height="22" rx="11"/><text class="dr-prot" x="835" y="201.5" text-anchor="middle">transglycosylase</text></g><g class="hot dr-block" id="blk-e_tg" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-block-hex" d="M844 172.5L839.5 180.3L830.5 180.3L826 172.5L830.5 164.7L839.5 164.7Z"/><path class="dr-block-x" d="M831.4 168.9L838.6 176.1M838.6 168.9L831.4 176.1"/></g><g class="hot dr-block dr-enh" id="enh-e_tg" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-ag-hex" d="M866 172.5L861.5 180.3L852.5 180.3L848 172.5L852.5 164.7L861.5 164.7Z"/></g><path class="dr-rail dr-flowline" id="ln-e_tp" d="M835 318L835 437"/><path class="dr-flowhead" d="M835 437l-3.9 -8.1M835 437l3.9 -8.1"/><g id="pt-e_tp"></g><g class="hot dr-enz" tabindex="0" data-info="Transpeptidation by the penicillin-binding proteins. A beta-lactam resembles the D-Ala-D-Ala end and binds the enzyme's active site permanently, so cross-links are not made. A beta-lactamase breaks the beta-lactam ring first; a beta-lactamase inhibitor such as clavulanate stops it doing so."><rect class="dr-enz-r" x="753" y="366.5" width="164" height="22" rx="11"/><text class="dr-prot" x="835" y="381.5" text-anchor="middle">transpeptidase (PBP)</text></g><g class="hot dr-block" id="blk-e_tp" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-block-hex" d="M844 352.5L839.5 360.3L830.5 360.3L826 352.5L830.5 344.7L839.5 344.7Z"/><path class="dr-block-x" d="M831.4 348.9L838.6 356.1M838.6 348.9L831.4 356.1"/></g><g class="hot dr-block dr-enh" id="enh-e_tp" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure."><path class="dr-ag-hex" d="M866 352.5L861.5 360.3L852.5 360.3L848 352.5L852.5 344.7L861.5 344.7Z"/></g><g class="hot dr-node dr-n-source" id="nd-pre" tabindex="0" data-info="Building blocks of the wall made in the bacterial cytoplasm: UDP-N-acetylglucosamine and UDP-N-acetylmuramic acid, with a pentapeptide ending in D-alanyl-D-alanine. The slider sets how fast the cell is growing." transform="translate(115 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/><path class="bio-blob-shade" d="M96.7 0C97.3 1.5 97.1 3.2 95.7 4.7C94.2 6.2 91.4 7.7 88.1 9C84.8 10.4 80.2 11.6 75.7 12.7C71.2 13.8 66.1 14.7 61 15.6C55.9 16.5 50.7 17.4 45.3 18.1C39.8 18.8 34.2 19.6 28.3 20.1C22.4 20.6 16 21.1 9.7 21.3C3.4 21.5 -3.3 21.6 -9.8 21.5C-16.2 21.3 -22.8 21 -29 20.6C-35.3 20.2 -41.4 19.6 -47.3 18.9C-53.1 18.2 -58.9 17.4 -64.1 16.4C-69.2 15.5 -74.2 14.3 -78.1 13.1C-82 11.9 -85.3 10.4 -87.4 9C-89.6 7.5 -90.7 6 -91.2 4.5C-91.7 3 -91.1 1.5 -90.5 0C-89.9 -1.5 -88.7 -2.9 -87.4 -4.3C-86.2 -5.7 -84.9 -7.1 -82.9 -8.5C-81 -9.9 -78.9 -11.4 -75.8 -12.7C-72.6 -14 -68.8 -15.4 -64.3 -16.5C-59.7 -17.6 -54.1 -18.6 -48.3 -19.3C-42.5 -20.1 -36 -20.6 -29.6 -21C-23.1 -21.4 -16.4 -21.6 -9.9 -21.7C-3.3 -21.7 3.3 -21.7 9.8 -21.5C16.2 -21.3 22.8 -21 28.8 -20.5C34.9 -20 40.9 -19.3 46.3 -18.5C51.7 -17.7 56.7 -16.7 61.2 -15.7C65.7 -14.6 69.6 -13.5 73.4 -12.3C77.1 -11.1 80.5 -9.9 83.6 -8.6C86.7 -7.3 89.7 -5.9 91.9 -4.5C94.1 -3.1 96.1 -1.5 96.7 0Z"/><path class="bio-blob-highlight" d="M75.2 0C75.7 1.2 75.5 2.5 74.4 3.6C73.3 4.8 71.1 6 68.5 7C65.9 8.1 62.4 9 58.9 9.9C55.4 10.7 51.4 11.5 47.5 12.2C43.5 12.9 39.5 13.5 35.2 14.1C31 14.7 26.6 15.2 22 15.6C17.4 16 12.5 16.4 7.5 16.6C2.6 16.7 -2.6 16.8 -7.6 16.7C-12.6 16.6 -17.7 16.4 -22.6 16C-27.4 15.7 -32.2 15.2 -36.8 14.7C-41.3 14.2 -45.8 13.5 -49.8 12.8C-53.8 12 -57.7 11.1 -60.7 10.2C-63.8 9.2 -66.3 8.1 -68 7C-69.7 5.9 -70.5 4.6 -70.9 3.5C-71.3 2.3 -70.9 1.1 -70.4 0C-69.9 -1.1 -69 -2.2 -68 -3.3C-67 -4.4 -66 -5.5 -64.5 -6.6C-63 -7.7 -61.3 -8.8 -58.9 -9.9C-56.5 -10.9 -53.5 -12 -50 -12.8C-46.4 -13.7 -42.1 -14.4 -37.6 -15C-33.1 -15.6 -28 -16 -23 -16.3C-18 -16.6 -12.8 -16.8 -7.7 -16.8C-2.6 -16.9 2.6 -16.9 7.6 -16.7C12.6 -16.6 17.7 -16.3 22.4 -15.9C27.2 -15.5 31.8 -15 36 -14.4C40.2 -13.8 44.1 -13 47.6 -12.2C51.1 -11.4 54.1 -10.5 57.1 -9.6C60 -8.6 62.6 -7.7 65 -6.7C67.4 -5.7 69.8 -4.6 71.5 -3.5C73.2 -2.4 74.7 -1.2 75.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Cytoplasmic precursors</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">UDP-sugars, amino acids</text></g><g class="hot dr-node dr-n-mid" id="nd-pent" tabindex="0" data-info="UDP-muramyl pentapeptide: the finished building block. Its D-alanyl-D-alanine end is the part later steps and some antibiotics recognise." transform="translate(480 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M100.1 0C100.2 1.7 99.7 3.5 98.1 5.1C96.5 6.8 93.9 8.4 90.6 9.9C87.2 11.3 82.7 12.7 78.2 13.9C73.6 15.1 68.3 16.2 63.1 17.2C57.9 18.2 52.5 19 46.9 19.9C41.4 20.8 35.7 21.6 29.6 22.3C23.6 23.1 17.1 23.8 10.4 24.2C3.7 24.6 -3.6 24.8 -10.6 24.7C-17.6 24.6 -24.8 24.2 -31.4 23.6C-37.9 23 -44.2 22.1 -49.9 21.2C-55.6 20.2 -60.8 19 -65.6 17.8C-70.3 16.6 -74.7 15.3 -78.5 14C-82.3 12.6 -85.8 11.2 -88.5 9.6C-91.1 8.1 -93.2 6.5 -94.5 4.9C-95.7 3.3 -96.1 1.6 -95.9 0C-95.8 -1.6 -94.9 -3.3 -93.6 -4.9C-92.4 -6.5 -90.7 -8.1 -88.5 -9.6C-86.3 -11.2 -83.8 -12.8 -80.4 -14.3C-77 -15.8 -73 -17.3 -68.1 -18.5C-63.2 -19.7 -57.3 -20.9 -51.1 -21.7C-44.9 -22.5 -37.7 -23 -30.9 -23.3C-24.1 -23.6 -16.9 -23.6 -10.1 -23.6C-3.3 -23.5 3.3 -23.3 9.9 -23C16.4 -22.8 22.8 -22.4 29.2 -22C35.6 -21.6 42 -21.1 48.1 -20.4C54.2 -19.7 60.3 -18.9 65.6 -17.8C70.9 -16.8 75.9 -15.6 80.1 -14.2C84.2 -12.9 87.7 -11.4 90.6 -9.9C93.4 -8.3 95.7 -6.7 97.2 -5.1C98.8 -3.4 99.9 -1.7 100.1 0Z"/><path class="bio-blob-shade" d="M90.1 0C90.2 1.5 89.7 3.1 88.3 4.6C86.9 6.1 84.5 7.6 81.5 8.9C78.5 10.2 74.5 11.4 70.4 12.5C66.2 13.6 61.5 14.5 56.8 15.4C52.1 16.3 47.3 17.1 42.2 17.9C37.2 18.7 32.2 19.5 26.7 20.1C21.2 20.7 15.4 21.4 9.3 21.7C3.3 22.1 -3.3 22.3 -9.5 22.2C-15.8 22.2 -22.3 21.8 -28.2 21.3C-34.1 20.7 -39.8 19.9 -44.9 19.1C-50 18.2 -54.7 17.1 -59 16C-63.3 15 -67.2 13.8 -70.7 12.6C-74.1 11.3 -77.2 10 -79.6 8.7C-82 7.3 -83.9 5.9 -85 4.4C-86.1 3 -86.5 1.5 -86.3 0C-86.2 -1.5 -85.4 -2.9 -84.3 -4.4C-83.1 -5.8 -81.6 -7.3 -79.6 -8.7C-77.7 -10.1 -75.4 -11.5 -72.4 -12.9C-69.3 -14.2 -65.7 -15.6 -61.3 -16.7C-56.9 -17.8 -51.5 -18.8 -46 -19.5C-40.4 -20.2 -34 -20.7 -27.8 -21C-21.7 -21.3 -15.2 -21.3 -9.1 -21.2C-3 -21.2 3 -21 8.9 -20.7C14.8 -20.5 20.6 -20.2 26.3 -19.8C32 -19.4 37.8 -19 43.3 -18.4C48.7 -17.7 54.2 -17 59 -16.1C63.8 -15.1 68.3 -14 72 -12.8C75.8 -11.6 78.9 -10.3 81.5 -8.9C84.1 -7.5 86.1 -6 87.5 -4.6C88.9 -3.1 89.9 -1.5 90.1 0Z"/><path class="bio-blob-highlight" d="M70 0C70.1 1.2 69.8 2.4 68.7 3.6C67.6 4.7 65.7 5.9 63.4 6.9C61.1 7.9 57.9 8.9 54.7 9.7C51.5 10.6 47.8 11.3 44.2 12C40.5 12.7 36.8 13.3 32.9 13.9C29 14.5 25 15.1 20.8 15.6C16.5 16.1 12 16.6 7.3 16.9C2.6 17.2 -2.6 17.4 -7.4 17.3C-12.3 17.2 -17.4 17 -22 16.5C-26.5 16.1 -30.9 15.5 -34.9 14.8C-38.9 14.1 -42.6 13.3 -45.9 12.5C-49.2 11.6 -52.3 10.7 -55 9.8C-57.6 8.8 -60.1 7.8 -61.9 6.8C-63.8 5.7 -65.3 4.6 -66.1 3.4C-67 2.3 -67.3 1.1 -67.2 0C-67.1 -1.1 -66.4 -2.3 -65.5 -3.4C-64.7 -4.5 -63.5 -5.7 -61.9 -6.8C-60.4 -7.9 -58.7 -9 -56.3 -10C-53.9 -11 -51.1 -12.1 -47.7 -13C-44.2 -13.8 -40.1 -14.6 -35.7 -15.2C-31.4 -15.7 -26.4 -16.1 -21.6 -16.3C-16.9 -16.5 -11.8 -16.5 -7.1 -16.5C-2.3 -16.5 2.3 -16.3 6.9 -16.1C11.5 -15.9 16 -15.7 20.4 -15.4C24.9 -15.1 29.4 -14.8 33.7 -14.3C37.9 -13.8 42.2 -13.2 45.9 -12.5C49.6 -11.8 53.1 -10.9 56 -10C59 -9 61.4 -8 63.4 -6.9C65.4 -5.8 67 -4.7 68.1 -3.5C69.2 -2.4 69.9 -1.2 70 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M100.1 0C100.2 1.7 99.7 3.5 98.1 5.1C96.5 6.8 93.9 8.4 90.6 9.9C87.2 11.3 82.7 12.7 78.2 13.9C73.6 15.1 68.3 16.2 63.1 17.2C57.9 18.2 52.5 19 46.9 19.9C41.4 20.8 35.7 21.6 29.6 22.3C23.6 23.1 17.1 23.8 10.4 24.2C3.7 24.6 -3.6 24.8 -10.6 24.7C-17.6 24.6 -24.8 24.2 -31.4 23.6C-37.9 23 -44.2 22.1 -49.9 21.2C-55.6 20.2 -60.8 19 -65.6 17.8C-70.3 16.6 -74.7 15.3 -78.5 14C-82.3 12.6 -85.8 11.2 -88.5 9.6C-91.1 8.1 -93.2 6.5 -94.5 4.9C-95.7 3.3 -96.1 1.6 -95.9 0C-95.8 -1.6 -94.9 -3.3 -93.6 -4.9C-92.4 -6.5 -90.7 -8.1 -88.5 -9.6C-86.3 -11.2 -83.8 -12.8 -80.4 -14.3C-77 -15.8 -73 -17.3 -68.1 -18.5C-63.2 -19.7 -57.3 -20.9 -51.1 -21.7C-44.9 -22.5 -37.7 -23 -30.9 -23.3C-24.1 -23.6 -16.9 -23.6 -10.1 -23.6C-3.3 -23.5 3.3 -23.3 9.9 -23C16.4 -22.8 22.8 -22.4 29.2 -22C35.6 -21.6 42 -21.1 48.1 -20.4C54.2 -19.7 60.3 -18.9 65.6 -17.8C70.9 -16.8 75.9 -15.6 80.1 -14.2C84.2 -12.9 87.7 -11.4 90.6 -9.9C93.4 -8.3 95.7 -6.7 97.2 -5.1C98.8 -3.4 99.9 -1.7 100.1 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Muramyl pentapeptide</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">ends in D-Ala-D-Ala</text></g><g class="hot dr-node dr-n-mid" id="nd-lip" tabindex="0" data-info="Lipid II: the building block attached to a lipid carrier (bactoprenol) that carries it across the cell membrane to the growing wall. The carrier must be recycled to be used again." transform="translate(835 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M85.1 0C84.6 1.7 83.8 3.3 82.5 4.9C81.2 6.5 79.5 8.1 77.2 9.6C74.9 11.1 72 12.6 68.6 13.9C65.1 15.2 61 16.5 56.7 17.6C52.3 18.7 47.4 19.6 42.4 20.5C37.4 21.4 32.1 22.2 26.6 22.8C21 23.5 15.2 24 9.2 24.4C3.2 24.7 -3.2 24.9 -9.3 24.8C-15.5 24.7 -21.8 24.3 -27.5 23.6C-33.2 23 -38.6 22 -43.4 21C-48.2 20 -52.3 18.7 -56.2 17.4C-60.1 16.2 -63.4 14.9 -66.7 13.5C-69.9 12.2 -73.1 10.8 -75.8 9.4C-78.5 8 -81.3 6.5 -83.1 4.9C-85 3.4 -86.5 1.7 -86.9 0C-87.4 -1.7 -86.9 -3.4 -85.8 -5.1C-84.6 -6.7 -82.5 -8.4 -80 -9.9C-77.4 -11.5 -74.2 -13 -70.6 -14.3C-67 -15.7 -62.9 -17 -58.4 -18.1C-53.9 -19.2 -48.9 -20.3 -43.6 -21.1C-38.3 -21.9 -32.4 -22.5 -26.6 -22.8C-20.8 -23.2 -14.7 -23.3 -8.8 -23.4C-2.9 -23.4 2.9 -23.2 8.6 -22.9C14.4 -22.7 20 -22.4 25.6 -22C31.3 -21.6 37 -21.2 42.6 -20.6C48.1 -20 53.9 -19.2 58.9 -18.3C63.9 -17.3 68.7 -16.1 72.5 -14.7C76.2 -13.3 79.2 -11.7 81.3 -10.1C83.4 -8.5 84.5 -6.7 85.1 -5C85.7 -3.4 85.5 -1.7 85.1 0Z"/><path class="bio-blob-shade" d="M76.6 0C76.2 1.5 75.4 3 74.2 4.4C73 5.8 71.5 7.3 69.5 8.6C67.4 10 64.8 11.3 61.7 12.5C58.6 13.7 54.9 14.8 51 15.8C47.1 16.8 42.7 17.7 38.2 18.5C33.7 19.2 28.9 19.9 23.9 20.5C18.9 21.1 13.6 21.6 8.3 21.9C2.9 22.2 -2.9 22.4 -8.4 22.3C-13.9 22.2 -19.7 21.8 -24.8 21.3C-29.9 20.7 -34.8 19.8 -39.1 18.9C-43.4 18 -47.1 16.8 -50.6 15.7C-54.1 14.6 -57.1 13.4 -60 12.2C-62.9 11 -65.8 9.8 -68.2 8.5C-70.7 7.2 -73.2 5.9 -74.8 4.4C-76.5 3 -77.8 1.5 -78.2 0C-78.6 -1.5 -78.2 -3.1 -77.2 -4.6C-76.2 -6.1 -74.2 -7.6 -72 -8.9C-69.7 -10.3 -66.8 -11.7 -63.5 -12.9C-60.3 -14.1 -56.6 -15.3 -52.6 -16.3C-48.5 -17.3 -44 -18.2 -39.2 -19C-34.4 -19.7 -29.2 -20.2 -23.9 -20.6C-18.7 -20.9 -13.2 -21 -7.9 -21C-2.6 -21 2.6 -20.9 7.8 -20.6C12.9 -20.4 18 -20.2 23.1 -19.8C28.2 -19.5 33.3 -19.1 38.3 -18.5C43.3 -18 48.5 -17.3 53 -16.4C57.5 -15.5 61.9 -14.4 65.2 -13.2C68.6 -12 71.3 -10.5 73.2 -9.1C75.1 -7.6 76 -6.1 76.6 -4.5C77.2 -3 77 -1.5 76.6 0Z"/><path class="bio-blob-highlight" d="M59.6 0C59.3 1.2 58.7 2.3 57.7 3.4C56.8 4.5 55.6 5.7 54 6.7C52.4 7.8 50.4 8.8 48 9.7C45.6 10.7 42.7 11.5 39.7 12.3C36.6 13.1 33.2 13.7 29.7 14.4C26.2 15 22.5 15.5 18.6 16C14.7 16.4 10.6 16.8 6.4 17.1C2.2 17.3 -2.3 17.4 -6.5 17.4C-10.8 17.3 -15.3 17 -19.3 16.5C-23.2 16.1 -27 15.4 -30.4 14.7C-33.7 14 -36.6 13.1 -39.3 12.2C-42.1 11.3 -44.4 10.4 -46.7 9.5C-49 8.5 -51.1 7.6 -53.1 6.6C-55 5.6 -56.9 4.6 -58.2 3.5C-59.5 2.4 -60.5 1.2 -60.8 0C-61.1 -1.2 -60.9 -2.4 -60 -3.6C-59.2 -4.7 -57.7 -5.9 -56 -7C-54.2 -8 -51.9 -9.1 -49.4 -10C-46.9 -11 -44 -11.9 -40.9 -12.7C-37.7 -13.5 -34.2 -14.2 -30.5 -14.7C-26.8 -15.3 -22.7 -15.7 -18.6 -16C-14.6 -16.3 -10.3 -16.3 -6.2 -16.4C-2 -16.4 2 -16.2 6 -16.1C10.1 -15.9 14 -15.7 17.9 -15.4C21.9 -15.1 25.9 -14.8 29.8 -14.4C33.7 -14 37.7 -13.5 41.2 -12.8C44.7 -12.1 48.1 -11.2 50.7 -10.3C53.4 -9.3 55.5 -8.2 56.9 -7.1C58.4 -5.9 59.1 -4.7 59.6 -3.5C60 -2.4 59.9 -1.2 59.6 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M85.1 0C84.6 1.7 83.8 3.3 82.5 4.9C81.2 6.5 79.5 8.1 77.2 9.6C74.9 11.1 72 12.6 68.6 13.9C65.1 15.2 61 16.5 56.7 17.6C52.3 18.7 47.4 19.6 42.4 20.5C37.4 21.4 32.1 22.2 26.6 22.8C21 23.5 15.2 24 9.2 24.4C3.2 24.7 -3.2 24.9 -9.3 24.8C-15.5 24.7 -21.8 24.3 -27.5 23.6C-33.2 23 -38.6 22 -43.4 21C-48.2 20 -52.3 18.7 -56.2 17.4C-60.1 16.2 -63.4 14.9 -66.7 13.5C-69.9 12.2 -73.1 10.8 -75.8 9.4C-78.5 8 -81.3 6.5 -83.1 4.9C-85 3.4 -86.5 1.7 -86.9 0C-87.4 -1.7 -86.9 -3.4 -85.8 -5.1C-84.6 -6.7 -82.5 -8.4 -80 -9.9C-77.4 -11.5 -74.2 -13 -70.6 -14.3C-67 -15.7 -62.9 -17 -58.4 -18.1C-53.9 -19.2 -48.9 -20.3 -43.6 -21.1C-38.3 -21.9 -32.4 -22.5 -26.6 -22.8C-20.8 -23.2 -14.7 -23.3 -8.8 -23.4C-2.9 -23.4 2.9 -23.2 8.6 -22.9C14.4 -22.7 20 -22.4 25.6 -22C31.3 -21.6 37 -21.2 42.6 -20.6C48.1 -20 53.9 -19.2 58.9 -18.3C63.9 -17.3 68.7 -16.1 72.5 -14.7C76.2 -13.3 79.2 -11.7 81.3 -10.1C83.4 -8.5 84.5 -6.7 85.1 -5C85.7 -3.4 85.5 -1.7 85.1 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Lipid II</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">on the lipid carrier</text></g><g class="hot dr-node dr-n-mid" id="nd-gly" tabindex="0" data-info="Glycan chains: transglycosylases join the sugar units of lipid II into long chains." transform="translate(835 290)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M89 0C88.4 1.6 87.2 3.2 86 4.8C84.7 6.3 83.4 7.9 81.5 9.5C79.5 11 77.4 12.6 74.3 14.1C71.2 15.5 67.4 17 62.9 18.2C58.4 19.4 52.9 20.5 47.3 21.4C41.6 22.2 35.3 22.8 29 23.3C22.7 23.7 16.2 24 9.7 24.1C3.3 24.3 -3.3 24.2 -9.7 24C-16.1 23.8 -22.5 23.5 -28.5 22.9C-34.5 22.3 -40.4 21.5 -45.6 20.6C-50.9 19.7 -55.7 18.6 -60 17.4C-64.4 16.2 -68.2 14.9 -71.8 13.6C-75.4 12.3 -78.8 10.9 -81.8 9.5C-84.9 8.1 -88 6.6 -90.2 5C-92.4 3.4 -94.4 1.7 -95 0C-95.6 -1.7 -95.4 -3.5 -94 -5.2C-92.6 -6.9 -89.9 -8.6 -86.6 -10.1C-83.4 -11.5 -79 -12.9 -74.6 -14.1C-70.2 -15.4 -65.2 -16.4 -60.2 -17.5C-55.3 -18.5 -50.1 -19.4 -44.7 -20.2C-39.3 -21 -33.7 -21.8 -27.9 -22.4C-22 -22.9 -15.7 -23.4 -9.5 -23.6C-3.3 -23.8 3.2 -23.9 9.6 -23.7C15.9 -23.6 22.2 -23.2 28.3 -22.8C34.5 -22.3 40.6 -21.7 46.4 -21C52.2 -20.2 58 -19.3 63.1 -18.3C68.2 -17.2 73.2 -16 77.1 -14.6C80.9 -13.2 84.1 -11.6 86.3 -10C88.4 -8.4 89.4 -6.7 89.8 -5C90.3 -3.3 89.6 -1.6 89 0Z"/><path class="bio-blob-shade" d="M80.1 0C79.5 1.5 78.5 2.9 77.4 4.3C76.2 5.7 75.1 7.1 73.3 8.5C71.6 9.9 69.7 11.4 66.9 12.7C64.1 14 60.7 15.3 56.6 16.4C52.5 17.5 47.6 18.5 42.5 19.2C37.5 20 31.7 20.5 26.1 21C20.5 21.4 14.6 21.6 8.7 21.7C2.9 21.8 -3 21.8 -8.7 21.6C-14.4 21.4 -20.3 21.1 -25.7 20.6C-31.1 20.1 -36.3 19.4 -41.1 18.6C-45.8 17.7 -50.1 16.7 -54 15.7C-57.9 14.6 -61.3 13.4 -64.6 12.2C-67.9 11.1 -70.9 9.8 -73.6 8.6C-76.4 7.3 -79.2 5.9 -81.1 4.5C-83.1 3.1 -84.9 1.5 -85.5 0C-86.1 -1.5 -85.9 -3.2 -84.6 -4.7C-83.3 -6.2 -80.9 -7.7 -78 -9.1C-75 -10.4 -71.1 -11.6 -67.1 -12.7C-63.2 -13.8 -58.7 -14.8 -54.2 -15.7C-49.7 -16.6 -45.1 -17.5 -40.3 -18.2C-35.4 -18.9 -30.4 -19.6 -25.1 -20.1C-19.8 -20.6 -14.2 -21 -8.6 -21.2C-2.9 -21.4 2.9 -21.5 8.6 -21.3C14.3 -21.2 20 -20.9 25.5 -20.5C31 -20.1 36.5 -19.5 41.7 -18.9C46.9 -18.2 52.2 -17.4 56.8 -16.5C61.4 -15.5 65.9 -14.4 69.4 -13.1C72.8 -11.9 75.7 -10.5 77.6 -9C79.5 -7.6 80.4 -6 80.8 -4.5C81.2 -3 80.7 -1.5 80.1 0Z"/><path class="bio-blob-highlight" d="M62.3 0C61.9 1.1 61.1 2.2 60.2 3.3C59.3 4.4 58.4 5.5 57 6.6C55.7 7.7 54.2 8.8 52 9.9C49.8 10.9 47.2 11.9 44 12.8C40.9 13.6 37 14.4 33.1 15C29.1 15.5 24.7 16 20.3 16.3C15.9 16.6 11.3 16.8 6.8 16.9C2.3 17 -2.3 17 -6.8 16.8C-11.2 16.7 -15.8 16.4 -20 16C-24.2 15.6 -28.3 15.1 -31.9 14.4C-35.6 13.8 -39 13 -42 12.2C-45.1 11.4 -47.7 10.4 -50.3 9.5C-52.8 8.6 -55.1 7.7 -57.3 6.7C-59.4 5.6 -61.6 4.6 -63.1 3.5C-64.6 2.4 -66 1.2 -66.5 0C-66.9 -1.2 -66.8 -2.5 -65.8 -3.6C-64.8 -4.8 -62.9 -6 -60.6 -7C-58.4 -8.1 -55.3 -9 -52.2 -9.9C-49.1 -10.8 -45.6 -11.5 -42.2 -12.2C-38.7 -12.9 -35.1 -13.6 -31.3 -14.1C-27.5 -14.7 -23.6 -15.3 -19.5 -15.7C-15.4 -16.1 -11 -16.4 -6.7 -16.5C-2.3 -16.7 2.3 -16.7 6.7 -16.6C11.1 -16.5 15.5 -16.3 19.8 -15.9C24.1 -15.6 28.4 -15.2 32.5 -14.7C36.5 -14.1 40.6 -13.5 44.2 -12.8C47.7 -12.1 51.2 -11.2 53.9 -10.2C56.7 -9.3 58.9 -8.1 60.4 -7C61.9 -5.9 62.6 -4.7 62.9 -3.5C63.2 -2.3 62.8 -1.1 62.3 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M89 0C88.4 1.6 87.2 3.2 86 4.8C84.7 6.3 83.4 7.9 81.5 9.5C79.5 11 77.4 12.6 74.3 14.1C71.2 15.5 67.4 17 62.9 18.2C58.4 19.4 52.9 20.5 47.3 21.4C41.6 22.2 35.3 22.8 29 23.3C22.7 23.7 16.2 24 9.7 24.1C3.3 24.3 -3.3 24.2 -9.7 24C-16.1 23.8 -22.5 23.5 -28.5 22.9C-34.5 22.3 -40.4 21.5 -45.6 20.6C-50.9 19.7 -55.7 18.6 -60 17.4C-64.4 16.2 -68.2 14.9 -71.8 13.6C-75.4 12.3 -78.8 10.9 -81.8 9.5C-84.9 8.1 -88 6.6 -90.2 5C-92.4 3.4 -94.4 1.7 -95 0C-95.6 -1.7 -95.4 -3.5 -94 -5.2C-92.6 -6.9 -89.9 -8.6 -86.6 -10.1C-83.4 -11.5 -79 -12.9 -74.6 -14.1C-70.2 -15.4 -65.2 -16.4 -60.2 -17.5C-55.3 -18.5 -50.1 -19.4 -44.7 -20.2C-39.3 -21 -33.7 -21.8 -27.9 -22.4C-22 -22.9 -15.7 -23.4 -9.5 -23.6C-3.3 -23.8 3.2 -23.9 9.6 -23.7C15.9 -23.6 22.2 -23.2 28.3 -22.8C34.5 -22.3 40.6 -21.7 46.4 -21C52.2 -20.2 58 -19.3 63.1 -18.3C68.2 -17.2 73.2 -16 77.1 -14.6C80.9 -13.2 84.1 -11.6 86.3 -10C88.4 -8.4 89.4 -6.7 89.8 -5C90.3 -3.3 89.6 -1.6 89 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Glycan chains</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">sugar backbone grows</text></g><g class="hot dr-node dr-n-out" id="nd-wall" tabindex="0" data-info="Transpeptidases (the penicillin-binding proteins) cross-link the peptides of neighbouring chains into a strong net that resists the osmotic pressure inside the cell." transform="translate(835 470)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M107.3 0C107 1.6 105.9 3.2 104.5 4.8C103.1 6.4 101.3 8 98.9 9.6C96.5 11.2 93.9 12.8 90.1 14.3C86.4 15.8 81.9 17.3 76.4 18.5C71 19.8 64.3 20.9 57.4 21.7C50.4 22.5 42.4 23 34.8 23.3C27.1 23.7 19 23.7 11.4 23.6C3.7 23.6 -3.8 23.4 -11.1 23.1C-18.5 22.9 -25.7 22.5 -32.9 22.1C-40 21.6 -47.2 21.1 -54 20.4C-60.7 19.7 -67.4 18.8 -73.3 17.8C-79.2 16.7 -84.7 15.5 -89.3 14.2C-93.9 12.8 -97.9 11.3 -101.2 9.8C-104.5 8.3 -107.1 6.7 -109.1 5.1C-111 3.4 -112.4 1.7 -112.7 0C-113 -1.7 -112.5 -3.5 -110.7 -5.1C-108.9 -6.8 -105.8 -8.4 -102 -9.9C-98.2 -11.4 -93.1 -12.7 -87.9 -13.9C-82.6 -15.1 -76.6 -16.2 -70.8 -17.1C-64.9 -18.1 -58.9 -19 -52.6 -19.9C-46.4 -20.7 -40.1 -21.6 -33.2 -22.3C-26.4 -23 -19.1 -23.7 -11.6 -24.1C-4.1 -24.5 4.1 -24.7 11.9 -24.6C19.6 -24.5 27.7 -24.1 35.1 -23.6C42.5 -23 49.6 -22.1 56 -21.2C62.5 -20.2 68.4 -19.1 73.9 -17.9C79.3 -16.7 84.4 -15.4 88.7 -14.1C93 -12.7 96.9 -11.2 99.8 -9.7C102.7 -8.2 104.9 -6.5 106.1 -4.9C107.4 -3.3 107.6 -1.6 107.3 0Z"/><path class="bio-blob-shade" d="M96.6 0C96.3 1.5 95.3 2.9 94.1 4.4C92.8 5.8 91.2 7.2 89 8.7C86.9 10.1 84.5 11.5 81.1 12.9C77.7 14.2 73.7 15.6 68.8 16.7C63.9 17.8 57.9 18.8 51.6 19.5C45.4 20.2 38.2 20.7 31.3 21C24.4 21.3 17.1 21.3 10.2 21.3C3.4 21.2 -3.4 21 -10 20.8C-16.7 20.6 -23.2 20.3 -29.6 19.9C-36 19.5 -42.5 19 -48.6 18.4C-54.7 17.7 -60.7 16.9 -66 16C-71.3 15.1 -76.2 13.9 -80.4 12.7C-84.5 11.5 -88.1 10.2 -91 8.8C-94 7.5 -96.4 6 -98.2 4.6C-99.9 3.1 -101.2 1.5 -101.4 0C-101.7 -1.5 -101.2 -3.1 -99.6 -4.6C-98 -6.1 -95.3 -7.6 -91.8 -8.9C-88.4 -10.2 -83.8 -11.4 -79.1 -12.5C-74.4 -13.6 -69 -14.5 -63.7 -15.4C-58.4 -16.3 -53 -17.1 -47.4 -17.9C-41.7 -18.7 -36.1 -19.4 -29.9 -20.1C-23.8 -20.7 -17.2 -21.3 -10.4 -21.7C-3.7 -22 3.7 -22.2 10.7 -22.2C17.7 -22.1 25 -21.7 31.6 -21.2C38.2 -20.7 44.6 -19.9 50.4 -19.1C56.2 -18.2 61.6 -17.2 66.5 -16.1C71.4 -15 75.9 -13.9 79.8 -12.7C83.7 -11.4 87.2 -10.1 89.8 -8.7C92.5 -7.4 94.4 -5.9 95.5 -4.4C96.6 -3 96.8 -1.5 96.6 0Z"/><path class="bio-blob-highlight" d="M75.1 0C74.9 1.1 74.1 2.3 73.2 3.4C72.2 4.5 70.9 5.6 69.3 6.7C67.6 7.8 65.7 9 63.1 10C60.5 11 57.3 12.1 53.5 13C49.7 13.8 45 14.6 40.2 15.2C35.3 15.7 29.7 16.1 24.3 16.3C19 16.6 13.3 16.6 8 16.5C2.6 16.5 -2.6 16.4 -7.8 16.2C-13 16 -18 15.8 -23 15.5C-28 15.1 -33.1 14.8 -37.8 14.3C-42.5 13.8 -47.2 13.2 -51.3 12.4C-55.5 11.7 -59.3 10.8 -62.5 9.9C-65.8 9 -68.5 7.9 -70.8 6.9C-73.1 5.8 -75 4.7 -76.3 3.5C-77.7 2.4 -78.7 1.2 -78.9 0C-79.1 -1.2 -78.7 -2.4 -77.5 -3.6C-76.2 -4.7 -74.1 -5.9 -71.4 -6.9C-68.8 -8 -65.1 -8.9 -61.5 -9.7C-57.9 -10.6 -53.6 -11.3 -49.5 -12C-45.4 -12.7 -41.2 -13.3 -36.8 -13.9C-32.5 -14.5 -28 -15.1 -23.3 -15.6C-18.5 -16.1 -13.4 -16.6 -8.1 -16.9C-2.9 -17.1 2.9 -17.3 8.3 -17.2C13.8 -17.2 19.4 -16.9 24.6 -16.5C29.7 -16.1 34.7 -15.5 39.2 -14.8C43.7 -14.2 47.9 -13.4 51.7 -12.5C55.5 -11.7 59.1 -10.8 62.1 -9.8C65.1 -8.9 67.8 -7.9 69.9 -6.8C71.9 -5.7 73.4 -4.6 74.3 -3.4C75.2 -2.3 75.3 -1.1 75.1 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M107.3 0C107 1.6 105.9 3.2 104.5 4.8C103.1 6.4 101.3 8 98.9 9.6C96.5 11.2 93.9 12.8 90.1 14.3C86.4 15.8 81.9 17.3 76.4 18.5C71 19.8 64.3 20.9 57.4 21.7C50.4 22.5 42.4 23 34.8 23.3C27.1 23.7 19 23.7 11.4 23.6C3.7 23.6 -3.8 23.4 -11.1 23.1C-18.5 22.9 -25.7 22.5 -32.9 22.1C-40 21.6 -47.2 21.1 -54 20.4C-60.7 19.7 -67.4 18.8 -73.3 17.8C-79.2 16.7 -84.7 15.5 -89.3 14.2C-93.9 12.8 -97.9 11.3 -101.2 9.8C-104.5 8.3 -107.1 6.7 -109.1 5.1C-111 3.4 -112.4 1.7 -112.7 0C-113 -1.7 -112.5 -3.5 -110.7 -5.1C-108.9 -6.8 -105.8 -8.4 -102 -9.9C-98.2 -11.4 -93.1 -12.7 -87.9 -13.9C-82.6 -15.1 -76.6 -16.2 -70.8 -17.1C-64.9 -18.1 -58.9 -19 -52.6 -19.9C-46.4 -20.7 -40.1 -21.6 -33.2 -22.3C-26.4 -23 -19.1 -23.7 -11.6 -24.1C-4.1 -24.5 4.1 -24.7 11.9 -24.6C19.6 -24.5 27.7 -24.1 35.1 -23.6C42.5 -23 49.6 -22.1 56 -21.2C62.5 -20.2 68.4 -19.1 73.9 -17.9C79.3 -16.7 84.4 -15.4 88.7 -14.1C93 -12.7 96.9 -11.2 99.8 -9.7C102.7 -8.2 104.9 -6.5 106.1 -4.9C107.4 -3.3 107.6 -1.6 107.3 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Cross-linked cell wall</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">peptidoglycan</text></g><g class="hot dr-node dr-n-calc" id="nd-lysis" tabindex="0" data-info="Without a strong wall a growing bacterium swells and bursts. Wall-active antibiotics are therefore bactericidal against growing cells. Lysis here rises when less wall is built while the cell keeps growing." transform="translate(470 470)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M90.5 0C90.9 1.7 90.4 3.4 89.2 5.1C88 6.7 85.9 8.4 83.4 9.9C80.8 11.4 77.6 12.9 73.9 14.3C70.3 15.7 66.1 17.1 61.4 18.2C56.8 19.3 51.4 20.4 45.9 21.2C40.3 22 34 22.6 27.9 22.9C21.8 23.3 15.4 23.4 9.2 23.4C3 23.4 -3 23.1 -9 22.9C-15 22.7 -20.8 22.3 -26.8 22C-32.7 21.6 -38.7 21.2 -44.5 20.5C-50.3 19.9 -56.3 19.2 -61.5 18.2C-66.7 17.2 -71.8 16 -75.7 14.7C-79.6 13.3 -82.7 11.7 -85 10.1C-87.2 8.5 -88.4 6.7 -89.2 5.1C-89.9 3.4 -89.8 1.7 -89.5 0C-89.1 -1.7 -88.2 -3.3 -86.8 -4.9C-85.4 -6.5 -83.6 -8.1 -81.1 -9.6C-78.5 -11.1 -75.4 -12.6 -71.7 -13.9C-68 -15.2 -63.6 -16.4 -59 -17.5C-54.4 -18.6 -49.4 -19.5 -44.1 -20.4C-38.9 -21.3 -33.4 -22.1 -27.7 -22.7C-21.9 -23.4 -15.9 -24 -9.6 -24.4C-3.4 -24.7 3.4 -25 9.8 -24.8C16.2 -24.7 22.9 -24.3 28.9 -23.7C34.8 -23.1 40.5 -22.1 45.5 -21C50.6 -20 54.9 -18.7 59 -17.5C63 -16.2 66.5 -14.9 70 -13.6C73.4 -12.2 76.6 -10.9 79.5 -9.4C82.3 -8 85.1 -6.5 86.9 -4.9C88.7 -3.4 90.2 -1.7 90.5 0Z"/><path class="bio-blob-shade" d="M81.5 0C81.8 1.5 81.4 3.1 80.3 4.6C79.2 6 77.3 7.5 75 8.9C72.7 10.3 69.8 11.6 66.6 12.9C63.3 14.1 59.5 15.3 55.3 16.4C51.1 17.4 46.3 18.4 41.3 19.1C36.3 19.8 30.6 20.3 25.1 20.6C19.6 21 13.8 21 8.3 21C2.7 21 -2.7 20.8 -8.1 20.6C-13.5 20.4 -18.8 20.1 -24.1 19.8C-29.4 19.4 -34.8 19 -40 18.5C-45.2 17.9 -50.7 17.3 -55.3 16.4C-60 15.5 -64.6 14.4 -68.1 13.2C-71.6 12 -74.5 10.5 -76.5 9.1C-78.5 7.6 -79.6 6.1 -80.3 4.5C-80.9 3 -80.9 1.5 -80.5 0C-80.2 -1.5 -79.4 -3 -78.1 -4.4C-76.9 -5.9 -75.2 -7.3 -73 -8.7C-70.7 -10 -67.8 -11.3 -64.5 -12.5C-61.2 -13.7 -57.2 -14.8 -53.1 -15.7C-49 -16.7 -44.4 -17.6 -39.7 -18.3C-35 -19.1 -30.1 -19.9 -24.9 -20.5C-19.7 -21.1 -14.3 -21.6 -8.6 -21.9C-3 -22.3 3 -22.5 8.8 -22.4C14.6 -22.3 20.6 -21.9 26 -21.3C31.3 -20.8 36.5 -19.9 41 -18.9C45.5 -18 49.4 -16.8 53.1 -15.7C56.7 -14.6 59.9 -13.4 63 -12.2C66 -11 69 -9.8 71.5 -8.5C74.1 -7.2 76.5 -5.8 78.2 -4.4C79.9 -3 81.1 -1.5 81.5 0Z"/><path class="bio-blob-highlight" d="M63.4 0C63.7 1.2 63.3 2.4 62.5 3.5C61.6 4.7 60.1 5.8 58.4 6.9C56.6 8 54.3 9.1 51.8 10C49.2 11 46.3 11.9 43 12.7C39.7 13.5 36 14.3 32.1 14.8C28.2 15.4 23.8 15.8 19.6 16C15.3 16.3 10.8 16.4 6.4 16.4C2.1 16.3 -2.1 16.2 -6.3 16C-10.5 15.9 -14.6 15.6 -18.7 15.4C-22.9 15.1 -27.1 14.8 -31.1 14.4C-35.2 13.9 -39.4 13.4 -43 12.7C-46.7 12.1 -50.2 11.2 -53 10.3C-55.7 9.3 -57.9 8.2 -59.5 7.1C-61.1 5.9 -61.9 4.7 -62.4 3.5C-62.9 2.4 -62.9 1.2 -62.6 0C-62.3 -1.2 -61.8 -2.3 -60.8 -3.4C-59.8 -4.6 -58.5 -5.7 -56.7 -6.7C-55 -7.8 -52.7 -8.8 -50.2 -9.7C-47.6 -10.6 -44.5 -11.5 -41.3 -12.2C-38.1 -13 -34.5 -13.7 -30.9 -14.3C-27.2 -14.9 -23.4 -15.4 -19.4 -15.9C-15.4 -16.4 -11.1 -16.8 -6.7 -17.1C-2.4 -17.3 2.4 -17.5 6.9 -17.4C11.3 -17.3 16 -17 20.2 -16.6C24.4 -16.1 28.4 -15.5 31.9 -14.7C35.4 -14 38.4 -13.1 41.3 -12.2C44.1 -11.4 46.6 -10.4 49 -9.5C51.4 -8.6 53.6 -7.6 55.6 -6.6C57.6 -5.6 59.5 -4.5 60.8 -3.4C62.1 -2.3 63.1 -1.2 63.4 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M90.5 0C90.9 1.7 90.4 3.4 89.2 5.1C88 6.7 85.9 8.4 83.4 9.9C80.8 11.4 77.6 12.9 73.9 14.3C70.3 15.7 66.1 17.1 61.4 18.2C56.8 19.3 51.4 20.4 45.9 21.2C40.3 22 34 22.6 27.9 22.9C21.8 23.3 15.4 23.4 9.2 23.4C3 23.4 -3 23.1 -9 22.9C-15 22.7 -20.8 22.3 -26.8 22C-32.7 21.6 -38.7 21.2 -44.5 20.5C-50.3 19.9 -56.3 19.2 -61.5 18.2C-66.7 17.2 -71.8 16 -75.7 14.7C-79.6 13.3 -82.7 11.7 -85 10.1C-87.2 8.5 -88.4 6.7 -89.2 5.1C-89.9 3.4 -89.8 1.7 -89.5 0C-89.1 -1.7 -88.2 -3.3 -86.8 -4.9C-85.4 -6.5 -83.6 -8.1 -81.1 -9.6C-78.5 -11.1 -75.4 -12.6 -71.7 -13.9C-68 -15.2 -63.6 -16.4 -59 -17.5C-54.4 -18.6 -49.4 -19.5 -44.1 -20.4C-38.9 -21.3 -33.4 -22.1 -27.7 -22.7C-21.9 -23.4 -15.9 -24 -9.6 -24.4C-3.4 -24.7 3.4 -25 9.8 -24.8C16.2 -24.7 22.9 -24.3 28.9 -23.7C34.8 -23.1 40.5 -22.1 45.5 -21C50.6 -20 54.9 -18.7 59 -17.5C63 -16.2 66.5 -14.9 70 -13.6C73.4 -12.2 76.6 -10.9 79.5 -9.4C82.3 -8 85.1 -6.5 86.9 -4.9C88.7 -3.4 90.2 -1.7 90.5 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Cell lysis</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">swells and bursts</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">antibiotic (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or MIC is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Bacterial growth</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="active"><span class="dr-ticks"><i>slow</i><i>active</i><i>fast</i></span></label>
+  <label class="dr-range"><span>Antibiotic class (generic)</span><select id="drug"><option value="0">none</option><option value="1">fosfomycin or cycloserine type (early steps)</option><option value="2">bacitracin type (lipid carrier)</option><option value="3">vancomycin type (glycopeptide)</option><option value="4">beta-lactam type (penicillin or cephalosporin)</option><option value="5">beta-lactam against a beta-lactamase producer</option><option value="6">beta-lactam plus beta-lactamase inhibitor (clavulanate type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Beta-lactams.</strong> They block the final step of peptidoglycan assembly: they bind the penicillin-binding proteins (the transpeptidases), stop cross-linking, and the cell loses viability and lyses (<a href="https://ncbi.nlm.nih.gov/books/NBK545311/">Beta-lactam antibiotics, StatPearls</a>).</li>
+<li><strong>Beta-lactamase inhibitors.</strong> Clavulanate-type agents are given with a beta-lactam to prevent resistance by inhibiting serine beta-lactamases (<a href="https://www.statpearls.com/point-of-care/18237">Beta-lactamase inhibitors, StatPearls</a>).</li>
+<li><strong>Fosfomycin, cycloserine, bacitracin and vancomycin.</strong> Fosfomycin inhibits MurA, cycloserine the enzymes making D-alanyl-D-alanine, bacitracin the recycling of the lipid carrier, and vancomycin binds the D-Ala-D-Ala end of the precursors. These are standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> The Gram-negative outer membrane and porins, efflux pumps, altered penicillin-binding proteins (MRSA), other beta-lactamases (ESBL, carbapenemases, metallo-enzymes), vancomycin resistance by D-Ala-D-Lac, autolysins, the tolerance of non-growing cells, and the differences between penicillins, cephalosporins, carbapenems and monobactams are left out. Lysis is drawn as the opposite of wall strength in a growing cell. Levels, flow and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Bacterial growth","a":[0.4,0.7,0.95],"names":["slow","active","fast"],"ticks":["slow","active","fast"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"fosfomycin or cycloserine type (early steps)","blocks":{"e_pre":0.85}},{"label":"bacitracin type (lipid carrier)","blocks":{"e_car":0.85}},{"label":"vancomycin type (glycopeptide)","blocks":{"e_tg":0.85,"e_tp":0.4}},{"label":"beta-lactam type (penicillin or cephalosporin)","blocks":{"e_tp":0.85}},{"label":"beta-lactam against a beta-lactamase producer","blocks":{"e_tp":0.1}},{"label":"beta-lactam plus beta-lactamase inhibitor (clavulanate type)","blocks":{"e_tp":0.85}}],"nodes":[{"id":"pre","kind":"source"},{"id":"pent","kind":"mid"},{"id":"lip","kind":"mid"},{"id":"gly","kind":"mid"},{"id":"wall","kind":"out"},{"id":"lysis","kind":"calc","base":1,"terms":[["e:e_tp",-1]]}],"edges":[{"id":"e_pre","from":"pre","to":"pent"},{"id":"e_car","from":"pent","to":"lip"},{"id":"e_tg","from":"lip","to":"gly"},{"id":"e_tp","from":"gly","to":"wall"}],"outputs":[{"node":"wall","words":["weak","partly built","strong"],"cuts":[0.2,0.5]},{"node":"lysis","words":["unlikely","possible","likely"],"cuts":[0.5,0.75]}],"readout":"cell wall {0} · bacterial lysis {1}","status":"Growth: {level} · {drug} ·","drugNames":["no antibiotic","early-step inhibitor","bacitracin","glycopeptide","beta-lactam","beta-lactam against a beta-lactamase producer","beta-lactam plus beta-lactamase inhibitor"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { v += t[1] * (t[0].charAt(0) === "e" ? flux[t[0].slice(2)] : lv[t[0].slice(2)]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_pre","p0":[223,110],"p1":[373,110]},{"id":"e_car","p0":[582,110],"p1":[740,110]},{"id":"e_tg","p0":[835,138],"p1":[835,257]},{"id":"e_tp","p0":[835,318],"p1":[835,437]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

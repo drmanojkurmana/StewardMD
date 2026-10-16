@@ -1,0 +1,239 @@
+{
+ "id": "protein-synthesis-inhibitors",
+ "title": "Antibiotics that stop the bacterial ribosome",
+ "ariaLabel": "Schematic of bacterial protein synthesis on the ribosome: the 30S and 50S subunits and mRNA form an initiation complex, aminoacyl tRNA enters the A site, the peptide bond forms, and the ribosome translocates along the mRNA, making protein. Aminoglycosides and linezolid act at initiation, tetracyclines at the A site, chloramphenicol at peptide bond formation, and macrolides and clindamycin at translocation.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or MIC is shown or implied.",
+ "level": {
+  "label": "Bacterial growth",
+  "a": [
+   0.4,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antibiotic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antibiotic"
+  },
+  {
+   "label": "aminoglycoside type (30S)",
+   "status": "aminoglycoside",
+   "blocks": {
+    "e_init": 0.6
+   }
+  },
+  {
+   "label": "tetracycline type (30S)",
+   "status": "tetracycline",
+   "blocks": {
+    "e_a": 0.85
+   }
+  },
+  {
+   "label": "chloramphenicol type (50S)",
+   "status": "chloramphenicol",
+   "blocks": {
+    "e_pt": 0.85
+   }
+  },
+  {
+   "label": "macrolide or clindamycin type (50S)",
+   "status": "macrolide or lincosamide",
+   "blocks": {
+    "e_tr": 0.85
+   }
+  },
+  {
+   "label": "linezolid type (50S)",
+   "status": "oxazolidinone",
+   "blocks": {
+    "e_init": 0.85
+   }
+  }
+ ],
+ "readout": "protein synthesis {0}",
+ "outputs": [
+  {
+   "node": "prot",
+   "words": [
+    "stopped",
+    "slowed",
+    "normal"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Growth: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "protein synthesis normal"
+  ],
+  [
+   1,
+   2,
+   "protein synthesis stopped"
+  ],
+  [
+   1,
+   1,
+   "protein synthesis slowed"
+  ]
+ ],
+ "blockInfo": "An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made.",
+ "blockKey": "antibiotic (generic)",
+ "nodes": [
+  {
+   "id": "src",
+   "kind": "source",
+   "label": "mRNA and subunits",
+   "sub": "30S + 50S ribosome",
+   "x": 125,
+   "y": 110,
+   "rx": 104,
+   "info": "Messenger RNA and the two subunits of the bacterial 70S ribosome (30S and 50S). The slider sets how fast the cell is growing."
+  },
+  {
+   "id": "init",
+   "kind": "mid",
+   "label": "Initiation complex",
+   "sub": "30S + mRNA + first tRNA",
+   "x": 480,
+   "y": 110,
+   "rx": 104,
+   "info": "The initiation complex: the 30S subunit binds the mRNA and the first tRNA, then the 50S subunit joins."
+  },
+  {
+   "id": "asite",
+   "kind": "mid",
+   "label": "tRNA in the A site",
+   "sub": "next amino acid arrives",
+   "x": 835,
+   "y": 110,
+   "rx": 96,
+   "info": "An aminoacyl tRNA enters the A (acceptor) site of the ribosome, matched to the next codon."
+  },
+  {
+   "id": "pept",
+   "kind": "mid",
+   "label": "Peptide bond",
+   "sub": "chain gets one longer",
+   "x": 835,
+   "y": 300,
+   "rx": 88,
+   "info": "The peptidyl transferase centre of the 50S subunit joins the new amino acid to the growing chain."
+  },
+  {
+   "id": "trans",
+   "kind": "mid",
+   "label": "Translocation",
+   "sub": "ribosome moves one codon",
+   "x": 480,
+   "y": 300,
+   "rx": 96,
+   "info": "The ribosome moves one codon along the mRNA, freeing the A site for the next tRNA."
+  },
+  {
+   "id": "prot",
+   "kind": "out",
+   "label": "Protein made",
+   "sub": "the cycle repeats",
+   "x": 125,
+   "y": 300,
+   "rx": 90,
+   "info": "Protein made by repeating the cycle. Bacteria need it for growth and repair."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_init",
+   "from": "src",
+   "to": "init",
+   "label": "initiation",
+   "info": "Initiation. Aminoglycosides bind the 30S subunit, interfere with initiation and make the ribosome misread mRNA (so they kill rather than only stop growth). Linezolid binds the 50S subunit and stops the initiation complex forming."
+  },
+  {
+   "id": "e_a",
+   "from": "init",
+   "to": "asite",
+   "label": "A-site binding",
+   "info": "Binding of the aminoacyl tRNA to the A site. Tetracyclines bind the 30S subunit and block it."
+  },
+  {
+   "id": "e_pt",
+   "from": "asite",
+   "to": "pept",
+   "label": "peptidyl transferase",
+   "info": "Peptide bond formation by the peptidyl transferase of the 50S subunit. Chloramphenicol blocks it."
+  },
+  {
+   "id": "e_tr",
+   "from": "pept",
+   "to": "trans",
+   "label": "translocation",
+   "info": "Translocation of the ribosome along the mRNA. Macrolides and clindamycin bind the 50S subunit near the exit tunnel and block it."
+  },
+  {
+   "id": "e_pr",
+   "from": "trans",
+   "to": "prot",
+   "blockable": false,
+   "info": "Cycle repeats and the chain is released."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Aminoglycosides, tetracyclines, macrolides, lincosamides, chloramphenicol and linezolid each bind the bacterial 30S or 50S subunit and block initiation, tRNA binding, peptide bond formation or translocation. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Aminoglycoside uptake and oxygen dependence, concentration-dependent killing, post-antibiotic effect, the difference between bacteriostatic and bactericidal drugs, ribosome protection and methylation, efflux, tigecycline, streptogramins, aminoglycoside toxicity, and the differences within each class are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antibiotics that stop the bacterial ribosome",
+  "blurb": "Interactive figure: aminoglycosides, tetracyclines, chloramphenicol, macrolides, clindamycin and linezolid, step by step",
+  "drugs": {
+   "gentamicin": "d=1",
+   "amikacin": "d=1",
+   "tobramycin": "d=1",
+   "streptomycin": "d=1",
+   "neomycin": "d=1",
+   "kanamycin": "d=1",
+   "netilmicin": "d=1",
+   "doxycycline": "d=2",
+   "tetracycline": "d=2",
+   "minocycline": "d=2",
+   "tigecycline": "d=2",
+   "chloramphenicol": "d=3",
+   "erythromycin": "d=4",
+   "azithromycin": "d=4",
+   "clarithromycin": "d=4",
+   "roxithromycin": "d=4",
+   "clindamycin": "d=4",
+   "lincomycin": "d=4",
+   "linezolid": "d=5",
+   "tedizolid": "d=5"
+  },
+  "terms": [
+   "aminoglycosides?",
+   "tetracyclines?",
+   "macrolides?",
+   "lincosamides?",
+   "oxazolidinones?",
+   "protein synthesis inhibitors?"
+  ]
+ }
+}

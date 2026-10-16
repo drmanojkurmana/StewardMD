@@ -128,7 +128,6 @@
    "lidocaine": "d=2",
    "lignocaine": "d=2",
    "mexiletine": "d=2",
-   "phenytoin": "d=2",
    "flecainide": "d=3",
    "propafenone": "d=3",
    "amiodarone": "d=5",
@@ -145,6 +144,14 @@
    "Vaughan[- ]Williams",
    "class I(?:a|b|c)? (?:antiarrhythmic|drugs?)",
    "class III (?:antiarrhythmic|drugs?)"
-  ]
+  ],
+  "weak": [
+   "lidocaine",
+   "lignocaine",
+   "mexiletine",
+   "sotalol",
+   "amiodarone"
+  ],
+  "ctx": "arrhythm|tachycardia|fibrillation|flutter|ventricular|QRS|QT|ECG|torsade|cardioversion"
  }
 }

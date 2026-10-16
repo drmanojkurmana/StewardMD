@@ -360,7 +360,7 @@ for (const light of [false, true]) {
 }
 if (process.argv.includes("--register") && S.registry) {
   const fp = join(ROOT, "prep/figures/figures.json"), J = JSON.parse(readFileSync(fp, "utf8"));
-  const entry = { id: S.id, title: S.registry.title || S.title, blurb: S.registry.blurb, page: "prep/figures/" + S.id + ".html", drugs: S.registry.drugs, terms: S.registry.terms || [] };
+  const entry = { id: S.id, title: S.registry.title || S.title, blurb: S.registry.blurb, page: "prep/figures/" + S.id + ".html", drugs: S.registry.drugs, terms: S.registry.terms || [], weak: S.registry.weak, ctx: S.registry.ctx };
   const k = J.figures.findIndex((f) => f.id === S.id);
   if (k >= 0) J.figures[k] = entry; else J.figures.push(entry);
   writeFileSync(fp, JSON.stringify(J, null, 1) + "\n");
