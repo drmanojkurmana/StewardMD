@@ -1,4 +1,4 @@
-// JNI shim: bridges `in.stewardmd.llama.LlamaNative` (Java) <-> llama.cpp (b10502, MIT).
+// JNI shim: bridges `in.stewardmd.llama.LlamaNative` (Java) <-> llama.cpp (b11696, MIT).
 //
 // Mirrors capacitor-whisper's whisper_jni.cpp in shape and intent: the JNIEXPORT symbols stay in
 // lockstep with the `native` declarations in LlamaNative.java, nothing here touches the network,
@@ -654,6 +654,74 @@ Java_in_stewardmd_llama_LlamaNative_pick(
     return out;
 }
 
+/* ────────────────────────────────────────────────────────────────────────────────
+ * ON-PHONE SEARCH EMBEDDING (EmbeddingGemma 2, kb/ai/embed-local.js). Mirrors
+ * LlamaEngine.swift embedOnWork so the two platforms cannot drift.
+ *
+ * `text` already carries the bank prefix ("task: search result | query: " for kind "query",
+ * "title: none | text: " for kind "doc" — applied by LlamaEngine.java, where it stays visible).
+ * Creates a transient EMBEDDING context (n_ctx/n_batch 512, embeddings=true, pooling UNSPECIFIED
+ * so the MODEL's GGUF metadata decides — MEAN for EmbeddingGemma 2, exactly what llama-server
+ * /v1/embeddings used for the ground-truth vectors), decodes once, reads the pooled sequence
+ * embedding and L2-normalises it (the server's embd_normalize=2 default), frees the context and
+ * returns the floats. The MODEL handle stays owned by Java (kept mmapped across calls) and the
+ * chat KV-reuse statics above are never touched, so chat behaviour is byte-for-byte unchanged.
+ * Returns null on any failure.
+ */
+JNIEXPORT jfloatArray JNICALL
+Java_in_stewardmd_llama_LlamaNative_embed(
+        JNIEnv* env, jobject, jlong modelHandle, jstring textStr, jint nThreads) {
+    auto* mdl = reinterpret_cast<llama_model*>(modelHandle);
+    if (mdl == nullptr || textStr == nullptr) return nullptr;
+    const llama_vocab* vocab = llama_model_get_vocab(mdl);
+
+    // Tokenise (negative return = required capacity), add_special + parse_special like the server.
+    const char* text = env->GetStringUTFChars(textStr, nullptr);
+    if (text == nullptr) return nullptr;
+    const int tlen = (int) strlen(text);
+    int need = -llama_tokenize(vocab, text, tlen, nullptr, 0, /*add_special=*/true, /*parse_special=*/true);
+    std::vector<llama_token> toks(need > 0 ? (size_t) need : 0);
+    int ntok = need > 0 ? llama_tokenize(vocab, text, tlen, toks.data(), need, true, true) : 0;
+    env->ReleaseStringUTFChars(textStr, text);
+    if (ntok <= 0) { LOGE("embed: tokenize failed"); return nullptr; }
+    toks.resize((size_t) ntok);
+
+    static const int kNCtx = 512, kNBatch = 512;
+    if (ntok >= kNCtx) { LOGE("embed: %d tokens >= n_ctx %d", ntok, kNCtx); return nullptr; }
+
+    llama_context_params cp = llama_context_default_params();
+    cp.n_ctx      = (uint32_t) kNCtx;
+    cp.n_batch    = (uint32_t) kNBatch;
+    cp.n_ubatch   = (uint32_t) kNBatch;
+    cp.n_threads  = nThreads > 0 ? (int32_t) nThreads : 2;
+    cp.embeddings = true;   // pooling stays UNSPECIFIED: the model's GGUF metadata decides (MEAN here)
+    llama_context* ctx = llama_init_from_model(mdl, cp);
+    if (ctx == nullptr) { LOGE("embed: context allocation failed"); return nullptr; }
+
+    llama_batch batch = llama_batch_get_one(toks.data(), (int32_t) toks.size());
+    const bool ok = llama_decode(ctx, batch) == 0;
+    const float* emb = ok ? llama_get_embeddings_seq(ctx, 0) : nullptr;
+    const int nOut = (int) llama_model_n_embd_out(mdl);
+    std::vector<float> out;
+    if (emb != nullptr && nOut > 0) {
+        // L2-normalise (euclidean): the bank vectors are unit length, so cosine is the dot product.
+        double sum = 0;
+        for (int i = 0; i < nOut; i++) sum += (double) emb[i] * (double) emb[i];
+        const double norm = std::sqrt(sum);
+        if (norm > 1e-12) {
+            out.assign(emb, emb + nOut);
+            for (auto& x : out) x = (float) (x / norm);
+        } else {
+            LOGE("embed: empty embedding");
+        }
+    }
+    llama_free(ctx);   // transient context: freed on every path before returning
+    if (out.empty()) return nullptr;
+    jfloatArray ret = env->NewFloatArray(nOut);
+    if (ret != nullptr) env->SetFloatArrayRegion(ret, 0, nOut, out.data());
+    return ret;
+}
+
 } // extern "C"
 
 /* ────────────────────────────────────────────────────────────────────────────────────────────────
@@ -714,7 +782,9 @@ Java_in_stewardmd_llama_LlamaNative_generateWithImage(
         if (js == nullptr) continue;
         const char* path = env->GetStringUTFChars(js, nullptr);
         if (path != nullptr) {
-            mtmd_helper_bitmap_wrapper w = mtmd_helper_bitmap_init_from_file(mctx, path, false);
+            // b11696 takes a 4th init-options arg (video/ffmpeg tuning); default keeps file behaviour.
+            mtmd_helper_bitmap_wrapper w = mtmd_helper_bitmap_init_from_file(
+                mctx, path, false, mtmd_helper_init_opt_default());
             if (w.bitmap != nullptr) bitmaps.push_back(w.bitmap);
             else LOGE("mtmd: could not read image %s", path);
             env->ReleaseStringUTFChars(js, path);
