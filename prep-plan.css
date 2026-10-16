@@ -4,7 +4,20 @@
 /* ---- home: the readiness card ----
    The Prussian moment card in both themes (prep.css Apple pass): the score out of 100 as the amber figure, the days to
    the exam beside it, one amber bar under the pair. The whole card opens "How this is computed". */
-.pn-root .pl-top { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .pl-top { position: relative; display: flex; flex-direction: column; gap: 12px; }
+/* Brand watermark: PrepNucleus mark + "Powered by StewardMD", top right of the home header on wide screens. Faint and inert:
+   no pointer events (the readiness card under it stays tappable), not selectable, hidden where the header needs the width. */
+.pn-root .pl-wm { display: none; }
+@media (min-width: 760px) {
+  .pn-root .pl-wm { display: flex; position: absolute; top: 6px; right: 4px; z-index: 0; flex-direction: column; align-items: flex-end; gap: 10px; opacity: .3; pointer-events: none; -webkit-user-select: none; user-select: none; }
+  .pn-root .pl-wm-pn { display: block; width: 84px; height: 84px; }
+  .pn-root .pl-wm-by { display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 600; letter-spacing: .06em; line-height: 1; color: var(--pn-text); }
+  .pn-root .pl-wm-by span { text-transform: uppercase; }
+  .pn-root .pl-wm-by img { display: block; width: 20px; height: 20px; border-radius: 5px; }
+  .pn-root .pl-wm-by b { font-weight: 700; letter-spacing: .02em; }
+  body.dark .pn-root .pl-wm { opacity: .36; }
+  body.dark .pn-root .pl-wm-pn { filter: brightness(0) invert(1); }   /* the mark is dark green on transparent: white on the dark field */
+}
 .pn-root .pl-top > .pn-h { padding-top: 14px; }
 .pn-root .pl-hero { position: relative; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 16px; row-gap: 16px; padding: 18px 18px 14px; border: 0; border-radius: var(--pn-r-hero, 20px); background: var(--pn-hero); color: var(--pn-hero-ink); box-shadow: var(--pn-sh-hero); text-align: left;
   transition: transform var(--pn-d-snap) var(--pn-spring-snap), background-color var(--pn-d-press) ease; }

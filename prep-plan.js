@@ -390,10 +390,17 @@
   }
   // Home's top: the readiness line, then Today's plan. Drawn at once from what is known; homeMounted() redraws it
   // once the subject indexes and the lesson index are in.
+  /* Brand watermark (owner 2026-10-16): the PrepNucleus mark with "Powered by StewardMD" in the empty right side of the home
+   * header on wide screens (CSS shows it from 760 px). Decorative only: aria-hidden, no alt text, not clickable (clicks fall
+   * through to the readiness card under it), faint by design. Two small files at the repo root so build-www bundles them. */
+  function wmHtml() {
+    return '<div class="pl-wm" aria-hidden="true"><img class="pl-wm-pn" src="/prepnucleus-wm.png" alt="" width="84" height="84" decoding="async">' +
+      '<span class="pl-wm-by"><span>Powered by</span><img src="/stewardmd-wm.png" alt="" width="20" height="20" decoding="async"><b>StewardMD</b></span></div>';
+  }
   function homeHtml(h) {
     H = h;
     var s = store();
-    return '<div id="pnPlanTop" class="pl-top">' + heroHtml(computeReadiness()) + planHead() + planHtml(planValid(s) ? s.pt : null) + "</div>";
+    return '<div id="pnPlanTop" class="pl-top">' + wmHtml() + heroHtml(computeReadiness()) + planHead() + planHtml(planValid(s) ? s.pt : null) + "</div>";
   }
   function homeMounted(h) {
     H = h;
@@ -401,7 +408,7 @@
       var box = root() && root().querySelector("#pnPlanTop");
       if (!box) return;
       var s = store(), pt = planValid(s) ? s.pt : makePlan(lessons);
-      box.innerHTML = heroHtml(computeReadiness()) + planHead() + planHtml(pt, true);
+      box.innerHTML = wmHtml() + heroHtml(computeReadiness()) + planHead() + planHtml(pt, true);
       if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     });
   }
