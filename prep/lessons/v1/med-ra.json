@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-ra",
-  "subject": "medicine",
-  "title": "Rheumatoid arthritis: symmetric erosive polyarthritis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**symmetric** small-joint polyarthritis sparing distal interphalangeals, **stiffness** morning hours easing with use, **swan** neck boutonniere Z-thumb ulnar drift, **nodules** pressure-point rheumatoid, **neck** atlantoaxial migration myelopathy, **dry** eyes mouth secondary Sjogren, **lung** fibrosis nodules Caplan miners, **drugs** NSAID steroid DMARD asks) with **viva** (**erosive** deformed nodular, **atlantoaxial** neck-pain myelopathic) profiles; **smoking** (shared-epitope risk) asks. Joints ache.",
-      "say": "Symmetrics stiffnesses swans nodules is history: necks threaten drys grit lungs scar smokers risk erosives deform atlantoaxials slip steroids bridge DMARDs calm wishes respect. Hands claw.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**MCP** PIP symmetric swelling sparing DIP, **ulnar** drift volar subluxation, **swan** hyperextended PIP boutonniere flexed, **Z-thumb** hitchhiker IP, **nodules** olecranon Achilles, **neck** instability neurology screens, **eye** scleritis episcleritis checks, **vasculitis** nailfold leg ulcers) with **bedside** (**squeeze** tender metacarpals, **grip** weakens dynamometer, **DAS28** counts activity) scores; **skin** (nodules ulcers) maps. Fingers drift.",
-      "say": "MCPs ulnars swans Zs is exam: nodules stud necks wobble eyes redden vasculitides dot squeezes hurt grips fade DAS counts flares steroids ease biologics rescue. Joints swell.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**anti-CCP** specific early erosive, **rheumatoid** factor sensitive seropositive, **CRP** ESR activity tracks, **X-ray** periarticular osteopenia erosions, **ultrasound** Doppler synovitis guides, **MRI** pre-erosive marrow oedema, **neck** flexion-extension instability films, **eye** slit-lamp scleritis screens) with **differentials** (**psoriatic** DIP nails dactylitis, **lupus** Jaccoud nonerosive, **gout** podagra tophi, **septic** monoarticular cultures) sorts; **rheumatology** (biologic switches) meets. Serologies confirm.",
-      "say": "CCPs factors CRPs rays is Ix: ultrasounds glow MRIs brew necks flex eyes lamp psoriatics dip lupuses bend gouts burst septics seed rheumatologists meet treats adjust wishes respect. Erosions show.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**methotrexate** anchor folate liver lungs watches, **steroid** bridge taper calcium guards, **biologic** anti-TNF rituximab after DMARDs, **JAK** inhibitor clot lipid checks, **physio** splints grip aids, **surgery** synovectomy arthroplasty late, **vaccine** killed before biologics, **pregnancy** stop methotrexate leflunomide) with **traps** (**neck** manipulation anaesthesia, **infection** biologic holds, **liver** methotrexate fibrosis) closes; **follow** (DAS CRP erosions) tracks. Joints cool.",
-      "say": "Methotrexates steroids biologics JAKs is Rx: physios splint surgeons fuse vaccines shield pregnancies pause necks guard infections halt livers watch follows track DAS sinks wishes respect. Pains ease.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-671",
-    "bk2-med-672",
-    "bk2-med-673",
-    "bk2-med-674",
-    "bk2-med-675",
-    "bk2-med-676",
-    "bk2-med-677",
-    "bk2-med-678",
-    "bk2-med-679",
-    "bk2-med-680"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon8",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-ra",
+ "subject": "medicine",
+ "title": "Rheumatoid arthritis: symmetric erosive polyarthritis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**symmetric** small-joint polyarthritis sparing distal interphalangeals, **stiffness** morning hours easing with use, **swan** neck boutonniere Z-thumb ulnar drift, **nodules** pressure-point rheumatoid, **neck** atlantoaxial migration myelopathy, **dry** eyes mouth secondary Sjogren, **lung** fibrosis nodules Caplan miners, **drugs** NSAID steroid DMARD asks) with **viva** (**erosive** deformed nodular, **atlantoaxial** neck-pain myelopathic) profiles; **smoking** (shared-epitope risk) asks. Joints ache.",
+   "say": "Symmetrics stiffnesses swans nodules is history: necks threaten drys grit lungs scar smokers risk erosives deform atlantoaxials slip steroids bridge DMARDs calm wishes respect. Hands claw.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**MCP** PIP symmetric swelling sparing DIP, **ulnar** drift volar subluxation, **swan** hyperextended PIP boutonniere flexed, **Z-thumb** hitchhiker IP, **nodules** olecranon Achilles, **neck** instability neurology screens, **eye** scleritis episcleritis checks, **vasculitis** nailfold leg ulcers) with **bedside** (**squeeze** tender metacarpals, **grip** weakens dynamometer, **DAS28** counts activity) scores; **skin** (nodules ulcers) maps. Fingers drift.",
+   "say": "MCPs ulnars swans Zs is exam: nodules stud necks wobble eyes redden vasculitides dot squeezes hurt grips fade DAS counts flares steroids ease biologics rescue. Joints swell.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-ra-fig1.webp",
+    "alt": "Illustration showing rheumatoid arthritis hand deformities: ulnar drift, swan neck, boutonniere, Z-thumb, and an olecranon nodule.",
+    "caption": "Key clinical examination findings in rheumatoid arthritis",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**anti-CCP** specific early erosive, **rheumatoid** factor sensitive seropositive, **CRP** ESR activity tracks, **X-ray** periarticular osteopenia erosions, **ultrasound** Doppler synovitis guides, **MRI** pre-erosive marrow oedema, **neck** flexion-extension instability films, **eye** slit-lamp scleritis screens) with **differentials** (**psoriatic** DIP nails dactylitis, **lupus** Jaccoud nonerosive, **gout** podagra tophi, **septic** monoarticular cultures) sorts; **rheumatology** (biologic switches) meets. Serologies confirm.",
+   "say": "CCPs factors CRPs rays is Ix: ultrasounds glow MRIs brew necks flex eyes lamp psoriatics dip lupuses bend gouts burst septics seed rheumatologists meet treats adjust wishes respect. Erosions show.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**methotrexate** anchor folate liver lungs watches, **steroid** bridge taper calcium guards, **biologic** anti-TNF rituximab after DMARDs, **JAK** inhibitor clot lipid checks, **physio** splints grip aids, **surgery** synovectomy arthroplasty late, **vaccine** killed before biologics, **pregnancy** stop methotrexate leflunomide) with **traps** (**neck** manipulation anaesthesia, **infection** biologic holds, **liver** methotrexate fibrosis) closes; **follow** (DAS CRP erosions) tracks. Joints cool.",
+   "say": "Methotrexates steroids biologics JAKs is Rx: physios splint surgeons fuse vaccines shield pregnancies pause necks guard infections halt livers watch follows track DAS sinks wishes respect. Pains ease.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-671",
+  "bk2-med-672",
+  "bk2-med-673",
+  "bk2-med-674",
+  "bk2-med-675",
+  "bk2-med-676",
+  "bk2-med-677",
+  "bk2-med-678",
+  "bk2-med-679",
+  "bk2-med-680"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon8",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
