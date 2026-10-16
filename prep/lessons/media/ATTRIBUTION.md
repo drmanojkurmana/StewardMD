@@ -1977,3 +1977,44 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | fmt-virginity-pregnancy-fig1.webp (R2) | Criminal abortion: Illustration of an abortion stick introduced into the os | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
 | mcc-hp-lowvalue-fig1.webp (R2) | Decision framework for avoiding low-value screening | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
 | mcc-pb-grief-fig1.webp (R2) | Inherited cardiac conditions: ECG and family history clues after sudden death | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-aging-cellular-senescence-fig1.webp (R2) | Pathway of telomere attrition leading to cellular senescence | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-apoptosis-cell-cycle-fig1.webp (R2) | Intrinsic mitochondrial pathway of apoptosis | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-cell-membrane-fig1.webp (R2) | Mechanisms of solute transport across biological membranes | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-cholesterol-steroids-fig1.webp (R2) | HMG-CoA reductase pathway and competitive statin inhibition | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-coagulation-cascade-fig1.webp (R2) | Extrinsic tissue factor pathway and prothrombinase assembly | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-digestion-absorption-fig1.webp (R2) | Enterocyte transport pathways for monosaccharide absorption | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-endocrine-biochemistry-fig1.webp (R2) | Metabolic diversion in 21-hydroxylase congenital adrenal hyperplasia | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-fatty-acid-synthesis-fig1.webp (R2) | Citrate shuttle for cytosolic transfer of acetyl-CoA in lipogenesis | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-fluids-electrolytes-fig1.webp (R2) | Partitioning of total body water into fluid compartments | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-fuel-metabolism-fig1.webp (R2) | Hepatic ketogenesis driven by fatty acid oxidation and starvation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-gene-regulation-fig1.webp (R2) | Epigenetic regulation of euchromatin and heterochromatin states | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-genetics-fig1.webp (R2) | Genomic imprinting on chromosome 15q11-q13 and clinical syndromes | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-glycogen-gluconeogenesis-fig1.webp (R2) | Reciprocal regulation of glycolysis and gluconeogenesis by PFK-2/FBPase-2 | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-haemoglobin-fig1.webp (R2) | Allosteric modulation of haemoglobin oxygen affinity | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-immunochemistry-mhc-fig1.webp (R2) | Divergent pathways of MHC Class I and Class II antigen presentation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-intro-principles-fig1.webp (R2) | Intracellular compartmentalization of primary metabolic pathways | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-membrane-transport-fig1.webp (R2) | Coupling of primary active Na+/K+-ATPase to secondary cotransport | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-neurochemistry-bbb-fig1.webp (R2) | Glutamate excitotoxicity cascade and calcium-mediated apoptosis | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-neurotransmitters-fig1.webp (R2) | Sequential enzymatic biosynthesis of catecholamines from tyrosine | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-nucleotides-fig1.webp (R2) | Purine salvage pathway and metabolic block in Lesch-Nyhan syndrome | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-nutrition-energy-fig1.webp (R2) | Clinical and nutritional differentiation of kwashiorkor and marasmus | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-nutrition-integration-fig1.webp (R2) | Pathophysiological cascade of refeeding syndrome and hypophosphataemia | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-omics-diagnostics-fig1.webp (R2) | Pre-therapeutic pharmacogenomic screening targets and drug safety | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-protein-folding-fig1.webp (R2) | Conformational transition to insoluble cross-beta sheet amyloid | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-rbc-metabolism-fig1.webp (R2) | Erythrocyte G6PD antioxidant defense failure and haemolytic mechanism | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-recombinant-techniques-fig1.webp (R2) | Three-step cycle of polymerase chain reaction DNA amplification | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-signal-transduction-fig1.webp (R2) | G-alpha-q phospholipase C cascade and protein kinase C activation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-sphingolipids-lysosomal-fig1.webp (R2) | Key enzymatic deficiencies and pathology of classic sphingolipidoses | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-storage-disorders-fig1.webp (R2) | Clinical distinction between Tay-Sachs and Niemann-Pick diseases | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-transcription-splicing-fig1.webp (R2) | Nuclear post-transcriptional processing of eukaryotic pre-mRNA | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| bio-translation-proteasome-fig1.webp (R2) | Targeted protein degradation via the ubiquitin-proteasome system | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| cm-international-health-fig1.webp (R2) | Principal United Nations health agencies and headquarter locations | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| cm-mixed-fig1.webp (R2) | Anthropometric differentiation of childhood stunting and wasting | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| cm-planning-management-fig1.webp (R2) | Sequential phases of the public health planning cycle | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mcc-cc-sleep-fig1.webp (R2) | Clinical assessment and positive airway pressure therapy for sleep apnoea | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-cvd-fig1.webp (R2) | Mechanism of statin lipid lowering and hepatic LDL receptor upregulation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mcc-hp-tbscreen-fig1.webp (R2) | Latent tuberculosis screening algorithm using interferon-gamma release assay | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mendo-gonadal-fig1.webp (R2) | Gonadotrophin differentiation of primary and secondary hypogonadism | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mphar-analgesia-fig1.webp (R2) | Maintenance and rescue opioid formulation strategy in palliative care | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| mphar-special-fig1.webp (R2) | Morphine active metabolite accumulation and toxicity in renal impairment | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| pat-benign-wbc-lymph-node-fig1.webp (R2) | Pathogenesis of Epstein-Barr virus infectious mononucleosis | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
