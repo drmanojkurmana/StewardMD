@@ -71,3 +71,29 @@ test("hedged: a stalled first call does not sink the question, the second call a
     assert.equal(aborted, 1, "the stalled call was aborted");
   } finally { globalThis.fetch = real; }
 });
+
+/* free-quota tier: Workers AI first (binding CF_AI_FREE, old bge index), Vertex when the cap is hit or it fails */
+const OLD = { query: async () => ({ matches: [{ id: "c1", score: 0.7, metadata: { diseaseId: "old-uti" } }] }) };
+const aiOk = (calls) => ({ run: async (m, a) => { calls.push([m, a]); return { data: [new Array(768).fill(0.01)] }; } });
+
+test("free tier answers first from the old index; Vertex is not called", async () => {
+  const s = stub(), calls = [];
+  try {
+    const j = await post({ CF_AI_FREE: aiOk(calls), KB_VECTORIZE_OLD: OLD, VERTEX_API_KEY: "k", KB_VECTORIZE: VEC, MAIK_KV: kvOf() });
+    assert.deepEqual(j.matches.map((m) => m.diseaseId), ["old-uti"]);
+    assert.equal(calls.length, 1); assert.equal(calls[0][0], "@cf/baai/bge-base-en-v1.5"); assert.equal(s.calls.length, 0);
+  } finally { s.restore(); }
+});
+
+test("free tier over its daily cap or erroring falls through to Vertex, and without a KV counter it never spends", async () => {
+  const s = stub(), calls = [];
+  try {
+    const kv = kvOf(); kv.m.set("retrieve:wai:" + new Date().toISOString().slice(0, 10), "3000");
+    let j = await post({ CF_AI_FREE: aiOk(calls), KB_VECTORIZE_OLD: OLD, VERTEX_API_KEY: "k", KB_VECTORIZE: VEC, MAIK_KV: kv });
+    assert.deepEqual(j.matches.map((m) => m.diseaseId), ["uti"]); assert.equal(calls.length, 0);
+    j = await post({ CF_AI_FREE: { run: async () => { throw new Error("boom"); } }, KB_VECTORIZE_OLD: OLD, VERTEX_API_KEY: "k", KB_VECTORIZE: VEC, MAIK_KV: kvOf() });
+    assert.deepEqual(j.matches.map((m) => m.diseaseId), ["uti"]);
+    j = await post({ CF_AI_FREE: aiOk(calls), KB_VECTORIZE_OLD: OLD });
+    assert.deepEqual(j.matches, []); assert.equal(calls.length, 0, "no MAIK_KV, no spend");
+  } finally { s.restore(); }
+});

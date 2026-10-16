@@ -1,0 +1,68 @@
+{
+ "id": "muscarinic",
+ "title": "Muscarinic receptors: agonists, antagonists and anticholinesterases",
+ "ariaLabel": "Schematic of a parasympathetic nerve terminal releasing acetylcholine onto two cells: a heart pacemaker cell with M2 receptors coupled to Gi, which inhibit adenylyl cyclase and slow the heart, and a smooth muscle or gland cell with M3 receptors coupled to Gq, which stimulate phospholipase C and raise calcium. A muscarinic agonist adds to the signal, an antimuscarinic blocks the receptor, and a cholinesterase inhibitor raises acetylcholine.",
+ "caption": "Schematic, not to scale. A parasympathetic nerve terminal and two target cells drawn side by side to compare receptor types. Response levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": { "label": "Parasympathetic drive", "a": [0.15, 0.5, 0.85], "names": ["rest", "active", "high parasympathetic drive"], "ticks": ["rest", "active", "high"], "start": 1 },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  { "label": "none", "status": "no drug" },
+  { "label": "muscarinic agonist (pilocarpine or bethanechol type)", "status": "muscarinic agonist", "cols": [{ "g": 0.5 }, { "g": 0.5 }] },
+  { "label": "antimuscarinic (atropine type)", "status": "antimuscarinic", "cols": [{ "b": 0.85 }, { "b": 0.85 }] },
+  { "label": "cholinesterase inhibitor (neostigmine type)", "status": "cholinesterase inhibitor", "cols": [{ "g": 0.3 }, { "g": 0.3 }] }
+ ],
+ "words": ["baseline", "modest", "strong"],
+ "readout": "heart {0} · smooth muscle and glands {1}",
+ "status": "Parasympathetic drive: {level} · {drug} ·",
+ "tests": [
+  [1, 0, "heart slowed · smooth muscle and glands active"],
+  [1, 1, "heart markedly slowed · smooth muscle and glands strongly active"],
+  [1, 2, "heart baseline · smooth muscle and glands baseline"],
+  [1, 3, "heart markedly slowed · smooth muscle and glands strongly active"],
+  [0, 3, "heart slowed · smooth muscle and glands active"],
+  [2, 2, "heart slowed · smooth muscle and glands active"]
+ ],
+ "blockInfo": "An antimuscarinic molecule (generic teaching symbol, not a named drug's shape) in the receptor's binding pocket. It occupies the pocket without activating the receptor, so acetylcholine cannot bind where it sits. The block is competitive: a lot of acetylcholine can partly outcompete it. The brightness of the symbol shows how many receptors it holds.",
+ "blockKey": "antimuscarinic (generic)",
+ "agonistInfo": "A muscarinic agonist molecule (generic teaching symbol) in the binding pocket. It activates the receptor like acetylcholine does, adding to the natural signal. A cholinesterase inhibitor works differently: it does not touch the receptor but lets acetylcholine last longer, which also raises the signal (drawn here as extra drive, in the same cells).",
+ "agonistKey": "agonist or more acetylcholine",
+ "terminal": {
+  "label": "parasympathetic nerve terminal", "vesicle": "acetylcholine", "keyLabel": "acetylcholine",
+  "info": "Parasympathetic nerve terminal. Acetylcholine is packed into vesicles and released by exocytosis; acetylcholinesterase in the cleft breaks it down within moments (not drawn). Acetylcholine also acts on nicotinic receptors at ganglia and the neuromuscular junction, which this figure leaves out."
+ },
+ "molecule": {
+  "draw": "acetylcholine", "name": "acetylcholine",
+  "formula": "C<tspan class=\"dr-sub\" dy=\"3\">7</tspan><tspan dy=\"-3\">H</tspan><tspan class=\"dr-sub\" dy=\"3\">16</tspan><tspan dy=\"-3\">NO</tspan><tspan class=\"dr-sub\" dy=\"3\">2</tspan><tspan dy=\"-3\">⁺</tspan>",
+  "info": "Acetylcholine, 2-acetyloxyethyl(trimethyl)azanium, C7H16NO2+ (PubChem CID 187): an ester of acetic acid and choline with a permanently charged quaternary ammonium. It is the transmitter of parasympathetic nerves and of the neuromuscular junction. Flat skeletal formula, bond angles and lengths drawn schematically. In the cleft below it is drawn as a small bright dot."
+ },
+ "cols": [
+  { "key": "m2", "name": "M2", "organ": "heart (pacemaker)", "gprot": "Gαi", "eff": "AC", "sign": "−", "msg": "cAMP", "inv": true, "end": { "kind": "pka" }, "out": "heart rate and conduction ↓", "sub": "Gαi · inhibits AC · cAMP ↓",
+    "words": ["baseline", "slowed", "markedly slowed"],
+    "info": {
+     "cell": "Sinoatrial node pacemaker cell, patch of its membrane in flat cross-section, schematic and not to scale. The heart carries mostly M2 receptors; vagal stimulation slows the rate and the conduction through the AV node.",
+     "rec": "Muscarinic M2 receptor: a seven-transmembrane G protein-coupled receptor coupled to Gαi. Acetylcholine binds from outside. In the heart the βγ pair also opens potassium channels, which hyperpolarises the cell (not drawn).",
+     "end": "Protein kinase A (PKA): two regulatory (R) and two catalytic (C) subunits. With less cAMP the C subunits stay bound to R, so less phosphorylation of calcium channels and less pacemaker current (drawn: C stays close). In anchored complexes the C subunits may stay near R even when active, so this is a simplification."
+    } },
+  { "key": "m3", "name": "M3", "organ": "smooth muscle and glands", "gprot": "Gαq", "eff": "PLC", "sign": "+", "msg": "ca", "end": { "kind": "node", "label": "Ca²⁺" }, "out": "contraction and secretion ↑", "sub": "Gαq · stimulates PLC · Ca²⁺ ↑",
+    "words": ["baseline", "active", "strongly active"],
+    "info": {
+     "cell": "Smooth muscle or gland cell (for example in the bladder, gut, airway or a salivary gland), patch of its membrane. These tissues carry mostly M3 receptors. Drawn beside the heart cell only to compare receptor types.",
+     "rec": "Muscarinic M3 receptor: a seven-transmembrane G protein-coupled receptor coupled to Gαq. Acetylcholine binds from outside. M1 and M5 receptors couple to Gαq as well.",
+     "end": "Calcium: IP3 from phospholipase C opens calcium release channels on the endoplasmic reticulum, and the rise in calcium contracts smooth muscle and drives secretion (drawn: the node lights up). Diacylglycerol and protein kinase C are not drawn."
+    } }
+ ],
+ "sources": [
+  "<strong>Muscarinic subtypes and coupling (well established).</strong> M1, M3 and M5 receptors couple to Gq and stimulate phospholipase C; M2 and M4 couple to Gi and inhibit adenylyl cyclase, lowering cAMP and PKA activity, and Gi βγ can open potassium channels. M1, M2 and M3 are the clinically important ones (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK553130/\">Cholinergic agonists, StatPearls</a>; <a href=\"https://pubmed.ncbi.nlm.nih.gov/7504306/\">Caulfield 1993, Muscarinic receptors: characterization, coupling and function, Pharmacol Ther</a>).",
+  "<strong>Tissues.</strong> The heart carries mainly M2 receptors, so vagal activity slows the rate and conduction; smooth muscle and exocrine glands carry mainly M3, so stimulation contracts smooth muscle and increases secretion (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK553130/\">Cholinergic agonists, StatPearls</a>).",
+  "<strong>Antimuscarinics.</strong> Atropine is a competitive, reversible muscarinic antagonist used for bradycardia, as an anti-sialagogue and in organophosphate or muscarinic poisoning; blocking the vagus raises the heart rate and blocking M3 dries secretions (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK470551/\">Atropine, StatPearls</a>).",
+  "<strong>Cholinesterase inhibitors and agonists.</strong> Indirect cholinomimetics such as neostigmine stop acetylcholinesterase breaking acetylcholine down, so the natural signal lasts longer; direct agonists such as pilocarpine and bethanechol bind the receptor themselves (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK553130/\">Cholinergic agonists, StatPearls</a>). Both are drawn here as extra drive in the same two cells.",
+  "<strong>Molecule.</strong> Acetylcholine, 2-acetyloxyethyl(trimethyl)azanium, C7H16NO2+ (<a href=\"https://pubchem.ncbi.nlm.nih.gov/compound/187\">PubChem CID 187</a>)."
+ ],
+ "simplified": "Only M2 in the heart and M3 in smooth muscle and glands are drawn. M1 and M5 receptors, M4 receptors, presynaptic muscarinic autoreceptors, nicotinic receptors at ganglia and the neuromuscular junction, nitric oxide release by M3 on endothelium (which dilates vessels), the effect of M2 on atrial and ventricular force, and the differences between individual drugs (selectivity, central effects, quaternary versus tertiary amines) are all left out. The two cells are drawn side by side only to compare receptor types. Levels, the size of the block and timing are illustrative; protein shapes are cartoons, not structures. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How muscarinic drugs work",
+  "blurb": "Interactive figure: heart (M2) and smooth muscle or glands (M3), with agonists, atropine-type blockers and cholinesterase inhibitors",
+  "drugs": { "atropine": "d=2", "hyoscine": "d=2", "scopolamine": "d=2", "glycopyrrolate": "d=2", "glycopyrronium": "d=2", "ipratropium": "d=2", "tiotropium": "d=2", "umeclidinium": "d=2", "aclidinium": "d=2", "oxybutynin": "d=2", "tolterodine": "d=2", "solifenacin": "d=2", "darifenacin": "d=2", "trospium": "d=2", "fesoterodine": "d=2", "propantheline": "d=2", "dicyclomine": "d=2", "dicycloverine": "d=2", "tropicamide": "d=2", "cyclopentolate": "d=2", "homatropine": "d=2", "benztropine": "d=2", "trihexyphenidyl": "d=2", "pirenzepine": "d=2", "pilocarpine": "d=1", "bethanechol": "d=1", "carbachol": "d=1", "cevimeline": "d=1", "methacholine": "d=1", "neostigmine": "d=3", "physostigmine": "d=3", "pyridostigmine": "d=3", "edrophonium": "d=3", "rivastigmine": "d=3", "donepezil": "d=3", "galantamine": "d=3" },
+  "terms": ["antimuscarinics?", "anticholinergics?", "muscarinic (?:agonists?|antagonists?|receptors?|blockers?)", "anticholinesterases?", "cholinesterase inhibitors?", "parasympathomimetics?"]
+ }
+}

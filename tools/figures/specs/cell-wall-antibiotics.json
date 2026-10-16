@@ -1,0 +1,286 @@
+{
+ "id": "cell-wall-antibiotics",
+ "title": "Antibiotics that attack the bacterial cell wall",
+ "ariaLabel": "Schematic of bacterial cell wall building: precursors are made in the cytoplasm, carried across the membrane on a lipid carrier as lipid II, joined into glycan chains by transglycosylase, and cross-linked by transpeptidases (the penicillin-binding proteins) into a strong wall. Fosfomycin and cycloserine act on early precursors, bacitracin on the lipid carrier, vancomycin on the substrate of the later steps, and beta-lactams on the transpeptidase. A beta-lactamase destroys a beta-lactam, and a beta-lactamase inhibitor protects it.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or MIC is shown or implied.",
+ "level": {
+  "label": "Bacterial growth",
+  "a": [
+   0.4,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "active",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antibiotic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antibiotic"
+  },
+  {
+   "label": "fosfomycin or cycloserine type (early steps)",
+   "status": "early-step inhibitor",
+   "blocks": {
+    "e_pre": 0.85
+   }
+  },
+  {
+   "label": "bacitracin type (lipid carrier)",
+   "status": "bacitracin",
+   "blocks": {
+    "e_car": 0.85
+   }
+  },
+  {
+   "label": "vancomycin type (glycopeptide)",
+   "status": "glycopeptide",
+   "blocks": {
+    "e_tg": 0.85,
+    "e_tp": 0.4
+   }
+  },
+  {
+   "label": "beta-lactam type (penicillin or cephalosporin)",
+   "status": "beta-lactam",
+   "blocks": {
+    "e_tp": 0.85
+   }
+  },
+  {
+   "label": "beta-lactam against a beta-lactamase producer",
+   "status": "beta-lactam against a beta-lactamase producer",
+   "blocks": {
+    "e_tp": 0.1
+   }
+  },
+  {
+   "label": "beta-lactam plus beta-lactamase inhibitor (clavulanate type)",
+   "status": "beta-lactam plus beta-lactamase inhibitor",
+   "blocks": {
+    "e_tp": 0.85
+   }
+  }
+ ],
+ "readout": "cell wall {0} · bacterial lysis {1}",
+ "outputs": [
+  {
+   "node": "wall",
+   "words": [
+    "weak",
+    "partly built",
+    "strong"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  },
+  {
+   "node": "lysis",
+   "words": [
+    "unlikely",
+    "possible",
+    "likely"
+   ],
+   "cuts": [
+    0.5,
+    0.75
+   ]
+  }
+ ],
+ "status": "Growth: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "cell wall strong · bacterial lysis unlikely"
+  ],
+  [
+   1,
+   4,
+   "cell wall weak · bacterial lysis likely"
+  ],
+  [
+   1,
+   5,
+   "cell wall strong · bacterial lysis unlikely"
+  ],
+  [
+   1,
+   6,
+   "cell wall weak · bacterial lysis likely"
+  ]
+ ],
+ "blockInfo": "An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so the wall behind it is built less. A growing cell with a weak wall swells and bursts in its own osmotic pressure.",
+ "blockKey": "antibiotic (generic)",
+ "nodes": [
+  {
+   "id": "pre",
+   "kind": "source",
+   "label": "Cytoplasmic precursors",
+   "sub": "UDP-sugars, amino acids",
+   "x": 115,
+   "y": 110,
+   "rx": 104,
+   "info": "Building blocks of the wall made in the bacterial cytoplasm: UDP-N-acetylglucosamine and UDP-N-acetylmuramic acid, with a pentapeptide ending in D-alanyl-D-alanine. The slider sets how fast the cell is growing."
+  },
+  {
+   "id": "pent",
+   "kind": "mid",
+   "label": "Muramyl pentapeptide",
+   "sub": "ends in D-Ala-D-Ala",
+   "x": 480,
+   "y": 110,
+   "rx": 98,
+   "info": "UDP-muramyl pentapeptide: the finished building block. Its D-alanyl-D-alanine end is the part later steps and some antibiotics recognise."
+  },
+  {
+   "id": "lip",
+   "kind": "mid",
+   "label": "Lipid II",
+   "sub": "on the lipid carrier",
+   "x": 835,
+   "y": 110,
+   "rx": 86,
+   "info": "Lipid II: the building block attached to a lipid carrier (bactoprenol) that carries it across the cell membrane to the growing wall. The carrier must be recycled to be used again."
+  },
+  {
+   "id": "gly",
+   "kind": "mid",
+   "label": "Glycan chains",
+   "sub": "sugar backbone grows",
+   "x": 835,
+   "y": 290,
+   "rx": 92,
+   "info": "Glycan chains: transglycosylases join the sugar units of lipid II into long chains."
+  },
+  {
+   "id": "wall",
+   "kind": "out",
+   "label": "Cross-linked cell wall",
+   "sub": "peptidoglycan",
+   "x": 835,
+   "y": 470,
+   "rx": 110,
+   "info": "Transpeptidases (the penicillin-binding proteins) cross-link the peptides of neighbouring chains into a strong net that resists the osmotic pressure inside the cell."
+  },
+  {
+   "id": "lysis",
+   "kind": "calc",
+   "base": 1,
+   "terms": [
+    [
+     "e:e_tp",
+     -1
+    ]
+   ],
+   "label": "Cell lysis",
+   "sub": "swells and bursts",
+   "x": 470,
+   "y": 470,
+   "rx": 90,
+   "info": "Without a strong wall a growing bacterium swells and bursts. Wall-active antibiotics are therefore bactericidal against growing cells. Lysis here rises when less wall is built while the cell keeps growing."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_pre",
+   "from": "pre",
+   "to": "pent",
+   "label": "Mur enzymes",
+   "info": "Early cytoplasmic steps (the Mur enzymes). Fosfomycin blocks the first, MurA; cycloserine blocks alanine racemase and D-alanine ligase, which make the D-Ala-D-Ala end."
+  },
+  {
+   "id": "e_car",
+   "from": "pent",
+   "to": "lip",
+   "label": "lipid carrier",
+   "info": "Attachment to the lipid carrier and its recycling. Bacitracin blocks the dephosphorylation that recycles the carrier."
+  },
+  {
+   "id": "e_tg",
+   "from": "lip",
+   "to": "gly",
+   "label": "transglycosylase",
+   "info": "Transglycosylation: joining sugar units into glycan chains. Vancomycin binds the D-Ala-D-Ala end of the building blocks and so blocks this step (and, by hiding the peptide, the cross-linking)."
+  },
+  {
+   "id": "e_tp",
+   "from": "gly",
+   "to": "wall",
+   "label": "transpeptidase (PBP)",
+   "info": "Transpeptidation by the penicillin-binding proteins. A beta-lactam resembles the D-Ala-D-Ala end and binds the enzyme's active site permanently, so cross-links are not made. A beta-lactamase breaks the beta-lactam ring first; a beta-lactamase inhibitor such as clavulanate stops it doing so."
+  }
+ ],
+ "sources": [
+  "<strong>Beta-lactams.</strong> They block the final step of peptidoglycan assembly: they bind the penicillin-binding proteins (the transpeptidases), stop cross-linking, and the cell loses viability and lyses (<a href=\"https://ncbi.nlm.nih.gov/books/NBK545311/\">Beta-lactam antibiotics, StatPearls</a>).",
+  "<strong>Beta-lactamase inhibitors.</strong> Clavulanate-type agents are given with a beta-lactam to prevent resistance by inhibiting serine beta-lactamases (<a href=\"https://www.statpearls.com/point-of-care/18237\">Beta-lactamase inhibitors, StatPearls</a>).",
+  "<strong>Fosfomycin, cycloserine, bacitracin and vancomycin.</strong> Fosfomycin inhibits MurA, cycloserine the enzymes making D-alanyl-D-alanine, bacitracin the recycling of the lipid carrier, and vancomycin binds the D-Ala-D-Ala end of the precursors. These are standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "The Gram-negative outer membrane and porins, efflux pumps, altered penicillin-binding proteins (MRSA), other beta-lactamases (ESBL, carbapenemases, metallo-enzymes), vancomycin resistance by D-Ala-D-Lac, autolysins, the tolerance of non-growing cells, and the differences between penicillins, cephalosporins, carbapenems and monobactams are left out. Lysis is drawn as the opposite of wall strength in a growing cell. Levels, flow and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antibiotics that attack the bacterial cell wall",
+  "blurb": "Interactive figure: beta-lactams, glycopeptides, fosfomycin, cycloserine, bacitracin and beta-lactamase inhibitors, step by step",
+  "drugs": {
+   "fosfomycin": "d=1",
+   "cycloserine": "d=1",
+   "bacitracin": "d=2",
+   "vancomycin": "d=3",
+   "teicoplanin": "d=3",
+   "telavancin": "d=3",
+   "dalbavancin": "d=3",
+   "oritavancin": "d=3",
+   "penicillin": "d=4",
+   "benzylpenicillin": "d=4",
+   "ampicillin": "d=4",
+   "amoxicillin": "d=4",
+   "cloxacillin": "d=4",
+   "flucloxacillin": "d=4",
+   "piperacillin": "d=4",
+   "cefazolin": "d=4",
+   "cefalexin": "d=4",
+   "cephalexin": "d=4",
+   "cefuroxime": "d=4",
+   "ceftriaxone": "d=4",
+   "cefotaxime": "d=4",
+   "ceftazidime": "d=4",
+   "cefepime": "d=4",
+   "cefixime": "d=4",
+   "cefoperazone": "d=4",
+   "ceftaroline": "d=4",
+   "meropenem": "d=4",
+   "imipenem": "d=4",
+   "ertapenem": "d=4",
+   "doripenem": "d=4",
+   "aztreonam": "d=4",
+   "clavulanate": "d=6",
+   "clavulanic": "d=6",
+   "sulbactam": "d=6",
+   "tazobactam": "d=6",
+   "avibactam": "d=6"
+  },
+  "terms": [
+   "beta[- ]?lactams?",
+   "β[- ]?lactams?",
+   "penicillins?",
+   "cephalosporins?",
+   "carbapenems?",
+   "glycopeptides?",
+   "beta[- ]?lactamase(?: inhibitors?)?",
+   "cell wall (?:synthesis|inhibitors?)",
+   "penicillin[- ]binding proteins?",
+   "PBPs?"
+  ]
+ }
+}

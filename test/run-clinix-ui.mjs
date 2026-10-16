@@ -529,6 +529,22 @@ try {
   ok(/Finished in \d+:\d\d of \d+:\d\d/.test(await ev("document.querySelector('#clinixRoot .cx-result-time').textContent")), "the result says how long the station took");
   ok((await ev("document.querySelectorAll('#clinixRoot .cx-phaserow').length")) >= 4, "the result breaks the score down by skill");
 
+  /* ── 8a1. PREPNUCLEUS LOOK (smd_clinix_pn, default on) ────────────────── */
+  console.log("\n--- PrepNucleus look ---");
+  await attach(BASE + "?clinix=1");
+  await openCx(); await sleep(500);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === true, "CliniX opens in the PrepNucleus look by default");
+  ok((await ev("getComputedStyle(document.getElementById('clinixRoot')).getPropertyValue('--cx-bg').trim().toLowerCase()")) === "#eef2f5", "on the CliniX Mist background, not the PrepNucleus paper");
+  ok((await ev("getComputedStyle(document.querySelector('#clinixRoot .cx-sec-h')).textTransform")) === "none", "section titles are sentence case, not small capitals");
+  ok(/^\d+ systems\d+ topicsOSCE and viva$/.test(await ev("(document.querySelector('#clinixRoot .cx-hero-facts') || {}).textContent || ''")), "the home banner states systems and topics counted from the catalog");
+  ok((await ev("!document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "the bar starts transparent on the wash");
+  await ev("(document.getElementById('clinixScroll').scrollTop = 600, true)"); await sleep(250);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "and turns solid once the screen scrolls");
+  ok((await ev("!/[A-Z]{4,}/.test(document.querySelector('#clinixRoot .cx-resume-t') ? document.querySelector('#clinixRoot .cx-resume-t').textContent.replace(/COPD/g, '') : '')")) === true, "Up next shows the topic's title, not its id in capitals");
+  await attach(BASE + "?clinix=1&clinixpn=0");
+  await openCx(); await sleep(400);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === false, "?clinixpn=0 restores the teal look");
+
   /* ── 8a2. OSCE PICKER: the home row opens topics, not a toast ──────────── */
   console.log("\n--- osce picker ---");
   await attach(BASE + "?clinix=1");

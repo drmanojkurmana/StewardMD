@@ -31,7 +31,7 @@
   function load(id) {
     var b = bucketOf(id);
     if (!cache[b]) {
-      cache[b] = fetch("/kb/dist/v2/b" + pad2(b) + ".json?v=kbv22")
+      cache[b] = fetch("/kb/dist/v2/b" + pad2(b) + ".json?v=kbv23")
         .then(function (r) { return r.ok ? r.json() : {}; })
         .catch(function () { return {}; });
     }
@@ -70,14 +70,34 @@
       '<div class="kbv2-scroll" tabindex="0" role="region" aria-label="' + esc(vt.title || "Table") + '"><table class="kbv2-tbl"' + floor + "><thead><tr>" + head + "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
       (vt.footnote ? '<p class="kbv2-foot">' + hy(vt.footnote) + "</p>" : "") + "</section>";
   }
+  /* Illustrations for the disease page (figures[] in kb/reference and kb/diseases, carried by
+   * kb/tools/build-kb-v2.mjs): drawn svg-spec pathways plus image figures. Images reuse the
+   * page's own kbr-fig figure (the same shape as kbrDiagram in reasoning.js); anything
+   * KBFigure.isImage rejects renders nothing. Image files ride /api/prep/bank/ like lesson
+   * media, immutable and cached. */
+  function figuresHTML(figs) {
+    return ((figs || []).map(function (f) {
+      if (f && f.type === "svg-spec" && window.KBFigure) {
+        return '<section class="kbv2-sec"><h4 class="kbv2-h">' + esc(f.title || f.id || "Figure") + "</h4>" +
+          window.KBFigure.render(f) + (f.caption ? '<p class="kbv2-foot">' + hy(f.caption) + "</p>" : "") + "</section>";
+      }
+      if (window.KBFigure && window.KBFigure.isImage && window.KBFigure.isImage(f)) {
+        var src = window.KBFigure.imgUrl(f.src, window.SMD_PREP_BANK_API, window.SMD_API_BASE);
+        return '<section class="kbv2-sec">' + window.KBFigure.imageKbrHTML(f, src) + "</section>";
+      }
+      return "";
+    }).join(""));
+  }
   /* kind (data-kbv2-kind on the slot) picks what this slot shows, so the reader can place each kind
-   * in its own section: diagnostic | ddx | treatment (valueTables), flowchart | flowchart-dx, foot
-   * (the AI-drafted note, once). No kind = everything plus the note, the original single-slot form. */
+   * in its own section: diagnostic | ddx | treatment (valueTables), flowchart | flowchart-dx, figures,
+   * foot (the AI-drafted note, once). No kind = flowcharts and tables plus the note, the original
+   * single-slot form. */
   function render(x, kind) {
     var cites = {};
     (x.citations || []).forEach(function (c) { cites[c.id] = c.label || c.id; });
     var fcs = x.flowcharts || [], vts = x.valueTables || [];
     if (kind === "foot") return (fcs.length || vts.length) ? NOTE : "";
+    if (kind === "figures") return figuresHTML(x.figures);
     var html = "";
     fcs.forEach(function (fc) {
       if (!window.KBFlowchart) return;

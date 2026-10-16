@@ -102,7 +102,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1-pf1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
 <link rel="stylesheet" href="/insulin.css?v=ins15-fr1">
-<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1-osce1">
+<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1-osce1-pn6">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1-pf1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2366,7 +2366,8 @@ window.openExternal = function (u) {
 <script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1-pf1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
-<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1" defer></script>
+<script src="/fig-viewer.js?v=fig1" defer></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -2381,24 +2382,24 @@ window.openExternal = function (u) {
 <script src="/clinical-nlp.js?v=gold363-nlpv2a-kbv2a-nlp2r-allon-r79" defer></script>
 <script src="/id-token.js?v=idtok2-quota1" defer></script>
 <link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20">
-<link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1">
+<link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1-fig1">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp5">
 <link rel="stylesheet" href="/specialty-kits.css?v=kits5">
 <link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
 <script src="/kb-search.js?v=kbs1" defer></script>
-<script src="/cancer-protocols-map.js?v=oncolinks1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1" defer></script>
+<script src="/cancer-protocols-map.js?v=oncolinks1-fig1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1-kbfig1-fig1" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
 <script src="/kb-protocols-flags.js?v=kbpf3" defer></script>
 <script src="/kb-highyield.js?v=kbhy1" defer></script>
 <script src="/kb-flowchart.js?v=kbfc3" defer></script>
-<script src="/kb-figure.js?v=kbfg1" defer></script>
-<script src="/kb-v2-loader.js?v=kbv24-rl1" defer></script>
-<script src="/kb-protocols.js?v=kbp10.bd81955dcc91" defer></script>
+<script src="/kb-figure.js?v=kbfg2" defer></script>
+<script src="/kb-v2-loader.js?v=kbv25-rl1" defer></script>
+<script src="/kb-protocols.js?v=kbp11.bd81955dcc91" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
 <script src="/clinical-docs.js?v=docs4.598e7e3c41bc-pm1" defer></script>
@@ -2750,12 +2751,12 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx14r925d928-media" defer></script>
+<script src="/clinix-flags.js?v=cx14r925d928-media-pn2" defer></script>
 <!-- The other 13 CliniX scripts (lexicon, model, dx, content, diagrams, audio, store, tutor, engine,
      physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
      order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
      SCRIPTS - bump the token THERE when you edit one of them. -->
-<script src="/clinix.js?v=cx13-lazy1-own4-obg1-cel1-nk1-mkai1-osce1" defer></script>
+<script src="/clinix.js?v=cx13-lazy1-own4-obg1-cel1-nk1-mkai1-osce1-pn2" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
      SMD_SURGX_* globals. Flag off = clinix-style total no-op: surgx.js never mounts the root and
@@ -2957,7 +2958,7 @@ window.openExternal = function (u) {
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot6" defer></script>
 <script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1" defer></script>
-<script src="/protocol-sheet.js?v=ps6-fr1-oncolinks1" defer></script>
+<script src="/protocol-sheet.js?v=ps6-fr1-oncolinks1-fig1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
      UNIVERSAL: minted on sign-in for every user (kill switch smd_steward_id_mint,

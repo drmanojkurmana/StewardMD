@@ -1,0 +1,331 @@
+{
+ "id": "diuretics",
+ "title": "Where diuretics act along the nephron",
+ "ariaLabel": "Schematic of sodium handling along the nephron: filtered sodium passes the proximal tubule, the thick ascending limb of the loop, the distal convoluted tubule and the collecting duct; each segment returns part of it to the blood through a transporter (carbonic anhydrase and the Na/H exchanger, NKCC2, NCC, ENaC). A diuretic blocks one transporter, so more sodium and water reach the urine.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or exact percentage is shown or implied.",
+ "level": {
+  "label": "Sodium and fluid delivered to the nephron",
+  "a": [
+   0.5,
+   0.75,
+   1
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Diuretic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no diuretic"
+  },
+  {
+   "label": "carbonic anhydrase inhibitor (acetazolamide type)",
+   "status": "carbonic anhydrase inhibitor",
+   "blocks": {
+    "r_pct": 0.5
+   }
+  },
+  {
+   "label": "loop diuretic (furosemide type)",
+   "status": "loop diuretic",
+   "blocks": {
+    "r_loop": 0.85
+   }
+  },
+  {
+   "label": "thiazide (hydrochlorothiazide type)",
+   "status": "thiazide",
+   "blocks": {
+    "r_dct": 0.85
+   }
+  },
+  {
+   "label": "potassium-sparing ENaC blocker (amiloride type)",
+   "status": "ENaC blocker",
+   "blocks": {
+    "r_cd": 0.6
+   }
+  },
+  {
+   "label": "aldosterone antagonist (spironolactone type)",
+   "status": "aldosterone antagonist",
+   "blocks": {
+    "r_cd": 0.5
+   }
+  },
+  {
+   "label": "loop plus thiazide together",
+   "status": "loop plus thiazide",
+   "blocks": {
+    "r_loop": 0.85,
+    "r_dct": 0.85
+   }
+  }
+ ],
+ "readout": "sodium and water in the urine: {0}",
+ "outputs": [
+  {
+   "node": "urine",
+   "words": [
+    "low",
+    "slightly raised",
+    "raised",
+    "high",
+    "marked"
+   ],
+   "cuts": [
+    0.2,
+    0.3,
+    0.4,
+    0.6
+   ]
+  }
+ ],
+ "status": "Delivery: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "sodium and water in the urine: low"
+  ],
+  [
+   1,
+   2,
+   "sodium and water in the urine: high"
+  ],
+  [
+   1,
+   3,
+   "sodium and water in the urine: raised"
+  ],
+  [
+   1,
+   4,
+   "sodium and water in the urine: slightly raised"
+  ],
+  [
+   1,
+   6,
+   "sodium and water in the urine: marked"
+  ]
+ ],
+ "blockInfo": "A diuretic of the chosen class blocking this transporter (generic teaching symbol, not a named drug's shape). Less sodium is returned to the blood here, so more passes on to the next segment and finally into the urine. Water follows the sodium.",
+ "blockKey": "diuretic blocking a transporter (generic)",
+ "nodes": [
+  {
+   "id": "filt",
+   "kind": "source",
+   "label": "Filtrate",
+   "sub": "from the glomerulus",
+   "x": 85,
+   "y": 130,
+   "rx": 74,
+   "info": "The glomerular filtrate: sodium, other salts and water filtered from the blood. The slider sets how much arrives."
+  },
+  {
+   "id": "pct",
+   "kind": "mid",
+   "label": "Proximal tubule",
+   "x": 265,
+   "y": 130,
+   "rx": 68,
+   "info": "Proximal convoluted tubule: reclaims most of the filtered sodium, bicarbonate, glucose and water. Bicarbonate reabsorption depends on carbonic anhydrase."
+  },
+  {
+   "id": "loop",
+   "kind": "mid",
+   "label": "Thick ascending limb",
+   "sub": "loop of Henle",
+   "x": 450,
+   "y": 130,
+   "rx": 84,
+   "info": "Thick ascending limb of the loop of Henle: reclaims a large share of sodium with NKCC2, which also builds the concentrated medulla that lets the collecting duct make concentrated urine. Water cannot follow here."
+  },
+  {
+   "id": "dct",
+   "kind": "mid",
+   "label": "Distal tubule",
+   "x": 635,
+   "y": 130,
+   "rx": 64,
+   "info": "Distal convoluted tubule: reclaims a smaller share of sodium with the NaCl cotransporter (NCC), and also calcium reabsorption is regulated here."
+  },
+  {
+   "id": "cd",
+   "kind": "mid",
+   "label": "Collecting duct",
+   "x": 805,
+   "y": 130,
+   "rx": 68,
+   "info": "Late distal tubule and collecting duct: fine-tunes sodium through ENaC under the control of aldosterone, in exchange for potassium and hydrogen ion loss. Water follows through channels controlled by ADH."
+  },
+  {
+   "id": "s_pct",
+   "kind": "mid",
+   "label": "Back to blood",
+   "x": 265,
+   "y": 310,
+   "rx": 62,
+   "info": "Sodium returned to the blood by the proximal tubule."
+  },
+  {
+   "id": "s_loop",
+   "kind": "mid",
+   "label": "Back to blood",
+   "x": 450,
+   "y": 310,
+   "rx": 62,
+   "info": "Sodium returned to the blood by the thick ascending limb."
+  },
+  {
+   "id": "s_dct",
+   "kind": "mid",
+   "label": "Back to blood",
+   "x": 635,
+   "y": 310,
+   "rx": 62,
+   "info": "Sodium returned to the blood by the distal tubule."
+  },
+  {
+   "id": "s_cd",
+   "kind": "mid",
+   "label": "Back to blood",
+   "x": 905,
+   "y": 300,
+   "rx": 56,
+   "info": "Sodium returned to the blood by the collecting duct."
+  },
+  {
+   "id": "urine",
+   "kind": "out",
+   "label": "Urine",
+   "sub": "sodium and water lost",
+   "x": 805,
+   "y": 490,
+   "rx": 120,
+   "scale": 4.5,
+   "info": "What is left at the end of the nephron is passed as urine. A diuretic works by letting more sodium, and so more water, reach this point."
+  }
+ ],
+ "edges": [
+  {
+   "id": "f_pct",
+   "from": "filt",
+   "to": "pct",
+   "blockable": false,
+   "info": "Filtrate entering the proximal tubule."
+  },
+  {
+   "id": "r_pct",
+   "from": "pct",
+   "to": "s_pct",
+   "label": "NHE + CA",
+   "w": 0.6,
+   "info": "Proximal sodium reabsorption (NHE: the Na⁺/H⁺ exchanger; CA: carbonic anhydrase): the Na⁺/H⁺ exchanger and the bicarbonate handling that depends on carbonic anhydrase. A carbonic anhydrase inhibitor blocks the bicarbonate part, so sodium bicarbonate and water are lost, but later segments take up much of the extra, so the effect is mild and brief."
+  },
+  {
+   "id": "o_pct",
+   "from": "pct",
+   "to": "loop",
+   "rest": "r_pct",
+   "blockable": false,
+   "info": "What the proximal tubule does not reclaim passes to the loop."
+  },
+  {
+   "id": "r_loop",
+   "from": "loop",
+   "to": "s_loop",
+   "label": "NKCC2",
+   "w": 0.6,
+   "info": "The Na⁺-K⁺-2Cl⁻ cotransporter NKCC2 of the thick ascending limb. Loop diuretics block it from the lumen side; the loss of the concentrated medulla means water is not pulled back, so urine flow is large."
+  },
+  {
+   "id": "o_loop",
+   "from": "loop",
+   "to": "dct",
+   "rest": "r_loop",
+   "blockable": false,
+   "info": "What the loop does not reclaim passes to the distal tubule."
+  },
+  {
+   "id": "r_dct",
+   "from": "dct",
+   "to": "s_dct",
+   "label": "NCC",
+   "w": 0.5,
+   "info": "The Na⁺-Cl⁻ cotransporter (NCC) of the distal convoluted tubule, blocked by thiazides."
+  },
+  {
+   "id": "o_dct",
+   "from": "dct",
+   "to": "cd",
+   "rest": "r_dct",
+   "blockable": false,
+   "info": "What the distal tubule does not reclaim passes to the collecting duct."
+  },
+  {
+   "id": "r_cd",
+   "from": "cd",
+   "to": "s_cd",
+   "label": "ENaC / MR",
+   "w": 0.3,
+   "info": "The epithelial sodium channel (ENaC) of the collecting duct, driven by aldosterone acting on the mineralocorticoid receptor (MR). Amiloride-type drugs block the channel; spironolactone-type drugs block the receptor, so the channel works less."
+  },
+  {
+   "id": "o_cd",
+   "from": "cd",
+   "to": "urine",
+   "rest": "r_cd",
+   "blockable": false,
+   "info": "What is left leaves as urine."
+  }
+ ],
+ "sources": [
+  "<strong>Loop diuretics.</strong> They inhibit the Na⁺-K⁺-2Cl⁻ cotransporter NKCC2 on the luminal membrane of the thick ascending limb; without a hypertonic medulla water has less pull to leave the collecting duct, so urine flow rises. They also disturb potassium recycling and so magnesium and calcium reabsorption (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK545258/\">Loop diuretics, NCBI Bookshelf</a>).",
+  "<strong>Thiazides.</strong> Hydrochlorothiazide, chlorthalidone and indapamide reduce sodium reabsorption in the distal convoluted tubule by blocking the sodium-chloride cotransporter (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK532918/\">Thiazide diuretics, StatPearls</a>).",
+  "<strong>Aldosterone antagonists.</strong> Spironolactone blocks the mineralocorticoid receptor, so aldosterone has less effect on the collecting duct (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK554421/\">Spironolactone, StatPearls</a>).",
+  "<strong>Carbonic anhydrase inhibitors and ENaC blockers.</strong> Acetazolamide inhibits carbonic anhydrase in the proximal tubule and so bicarbonate reabsorption, making the urine alkaline; amiloride blocks ENaC in the late distal tubule and collecting duct. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung's Basic and Clinical Pharmacology; KD Tripathi, Essentials of Medical Pharmacology) and was not checked against a linked source here, so it is flagged for review."
+ ],
+ "simplified": "The shares of sodium returned by each segment and the size of each drug's block are illustrative and are not shown as numbers; real values vary with the person, the diet and the dose. Compensation (more reabsorption downstream after a block, the effect of lost volume on renin and aldosterone), potassium, magnesium, calcium, uric acid and acid-base effects, the secretion of loop and thiazide diuretics into the tubule, tolerance, osmotic diuretics (mannitol), vasopressin antagonists and SGLT2 inhibitors are all left out. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Where diuretics act along the nephron",
+  "blurb": "Interactive figure: loop, thiazide, potassium-sparing, aldosterone antagonist and carbonic anhydrase inhibitor, by site",
+  "drugs": {
+   "acetazolamide": "d=1",
+   "dorzolamide": "d=1",
+   "furosemide": "d=2",
+   "frusemide": "d=2",
+   "torsemide": "d=2",
+   "torasemide": "d=2",
+   "bumetanide": "d=2",
+   "ethacrynic": "d=2",
+   "hydrochlorothiazide": "d=3",
+   "chlorthalidone": "d=3",
+   "indapamide": "d=3",
+   "metolazone": "d=3",
+   "chlorothiazide": "d=3",
+   "bendroflumethiazide": "d=3",
+   "amiloride": "d=4",
+   "triamterene": "d=4",
+   "spironolactone": "d=5",
+   "eplerenone": "d=5"
+  },
+  "terms": [
+   "loop diuretics?",
+   "thiazide(?: diuretics?)?",
+   "diuretics?",
+   "potassium[- ]sparing",
+   "carbonic anhydrase inhibitors?"
+  ]
+ }
+}

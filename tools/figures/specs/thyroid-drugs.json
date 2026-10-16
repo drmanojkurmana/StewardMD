@@ -1,0 +1,220 @@
+{
+ "id": "thyroid-drugs",
+ "title": "Thyroid hormone: making it and the drugs that change it",
+ "ariaLabel": "Schematic of thyroid hormone: iodide is trapped by the thyroid cell, thyroid peroxidase builds it into thyroglobulin to make T4 and T3, the hormones are released, and the tissues convert T4 to active T3. Perchlorate blocks iodide uptake, thionamides block thyroid peroxidase, iodide and lithium block release, propranolol and propylthiouracil reduce peripheral conversion, and levothyroxine replaces the hormone.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lab value is shown or implied.",
+ "level": {
+  "label": "Thyroid gland activity",
+  "a": [
+   0.25,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "underactive",
+   "normal",
+   "overactive"
+  ],
+  "ticks": [
+   "under",
+   "normal",
+   "over"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "perchlorate type (blocks iodide uptake)",
+   "status": "iodide uptake blocker",
+   "blocks": {
+    "e_nis": 0.7
+   }
+  },
+  {
+   "label": "thionamide (carbimazole or propylthiouracil type)",
+   "status": "thionamide",
+   "blocks": {
+    "e_tpo": 0.6
+   }
+  },
+  {
+   "label": "iodide or lithium (blocks release)",
+   "status": "iodide or lithium",
+   "blocks": {
+    "e_rel": 0.6
+   }
+  },
+  {
+   "label": "propranolol or glucocorticoid (less T4 to T3 conversion)",
+   "status": "conversion blocker",
+   "blocks": {
+    "e_cnv": 0.4
+   }
+  },
+  {
+   "label": "levothyroxine (replacement)",
+   "status": "levothyroxine",
+   "blocks": {
+    "e_rel": -1
+   }
+  }
+ ],
+ "readout": "thyroid hormone effect {0}",
+ "outputs": [
+  {
+   "node": "t3",
+   "words": [
+    "low",
+    "normal",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.8
+   ]
+  }
+ ],
+ "status": "Gland: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "thyroid hormone effect normal"
+  ],
+  [
+   2,
+   0,
+   "thyroid hormone effect high"
+  ],
+  [
+   2,
+   2,
+   "thyroid hormone effect normal"
+  ],
+  [
+   0,
+   5,
+   "thyroid hormone effect normal"
+  ],
+  [
+   0,
+   0,
+   "thyroid hormone effect low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less active hormone reaches the tissues.",
+ "blockKey": "drug lowering this step (generic)",
+ "enhanceInfo": "Levothyroxine (generic teaching symbol): the hormone itself, taken by mouth, adds to what the gland makes.",
+ "enhanceKey": "hormone replacement (generic)",
+ "nodes": [
+  {
+   "id": "iod",
+   "kind": "source",
+   "label": "Iodide",
+   "sub": "from the diet",
+   "x": 100,
+   "y": 110,
+   "rx": 76,
+   "info": "Dietary iodide. The slider sets how active the thyroid gland is (underactive, normal or overactive)."
+  },
+  {
+   "id": "cell",
+   "kind": "mid",
+   "label": "Iodide in the thyroid cell",
+   "x": 410,
+   "y": 110,
+   "rx": 108,
+   "info": "Iodide concentrated in the follicular cell against a gradient by the sodium-iodide symporter."
+  },
+  {
+   "id": "hor",
+   "kind": "mid",
+   "label": "T4 and T3 on thyroglobulin",
+   "sub": "made in the colloid",
+   "x": 770,
+   "y": 110,
+   "rx": 120,
+   "info": "Thyroid peroxidase oxidises iodide, attaches it to tyrosines of thyroglobulin and couples them into T4 and T3, stored in the colloid."
+  },
+  {
+   "id": "rel",
+   "kind": "mid",
+   "label": "T4 and T3 released",
+   "sub": "mostly T4",
+   "x": 770,
+   "y": 300,
+   "rx": 100,
+   "info": "The cell takes thyroglobulin back in and releases T4 (mostly) and T3 into the blood."
+  },
+  {
+   "id": "t3",
+   "kind": "out",
+   "label": "Active T3 in the tissues",
+   "sub": "thyroid hormone effect",
+   "x": 440,
+   "y": 300,
+   "rx": 116,
+   "info": "Peripheral deiodinases convert T4 to the active T3, which binds nuclear receptors and sets the metabolic rate, heart rate and many other functions."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_nis",
+   "from": "iod",
+   "to": "cell",
+   "label": "NIS trap",
+   "info": "The sodium-iodide symporter. Perchlorate and similar anions compete with iodide for it."
+  },
+  {
+   "id": "e_tpo",
+   "from": "cell",
+   "to": "hor",
+   "label": "thyroid peroxidase",
+   "info": "Oxidation, iodination and coupling by thyroid peroxidase. Thionamides (carbimazole, methimazole, propylthiouracil) inhibit it."
+  },
+  {
+   "id": "e_rel",
+   "from": "hor",
+   "to": "rel",
+   "label": "release",
+   "info": "Release of stored hormone. Large amounts of iodide and lithium reduce it. Levothyroxine taken by mouth adds hormone straight into the blood at this level, which is how replacement works in an underactive gland."
+  },
+  {
+   "id": "e_cnv",
+   "from": "rel",
+   "to": "t3",
+   "label": "T4 → T3",
+   "info": "Peripheral conversion of T4 to T3 by 5'-deiodinase. Propylthiouracil, propranolol and glucocorticoids reduce it."
+  }
+ ],
+ "sources": [
+  "<strong>The synthesis steps and the drugs.</strong> Iodide uptake (NIS), thyroid peroxidase, hormone release and peripheral T4-to-T3 conversion are the four steps; perchlorate blocks the first, thionamides the second, iodide and lithium the third, and propylthiouracil, propranolol and glucocorticoids the fourth; levothyroxine replaces the hormone. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "The pituitary and TSH feedback (which raises the gland's drive when the hormone falls and is the main way levothyroxine is monitored), the Wolff-Chaikoff and Jod-Basedow effects, thyroid storm, pregnancy, radioactive iodine, selenium, the different actions of propranolol on symptoms, and drug adverse effects are left out. In the figure, thionamides and conversion blockers are drawn as partial blocks because dose is titrated to a normal level. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Thyroid hormone: making it and the drugs that change it",
+  "blurb": "Interactive figure: antithyroid drugs, iodide, propranolol and levothyroxine, step by step",
+  "drugs": {
+   "perchlorate": "d=1",
+   "carbimazole": "d=2",
+   "methimazole": "d=2",
+   "thiamazole": "d=2",
+   "propylthiouracil": "d=2",
+   "lugol": "d=3",
+   "levothyroxine": "d=5",
+   "thyroxine": "d=5",
+   "liothyronine": "d=5"
+  },
+  "terms": [
+   "antithyroid(?: drugs?)?",
+   "thionamides?",
+   "thyroid hormones?",
+   "thyroid peroxidase"
+  ]
+ }
+}

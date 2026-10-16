@@ -1,0 +1,318 @@
+{
+ "id": "antidiabetics",
+ "title": "Blood glucose: insulin and the oral antidiabetic drugs",
+ "ariaLabel": "Schematic of what sets blood glucose: glucose from a meal and from the liver raise it, and glucose reabsorbed by the kidney returns to it; insulin release and tissue uptake lower it, and glucose lost in the urine lowers it too. Sulfonylureas and incretin drugs raise insulin release, thiazolidinediones raise insulin action, metformin lowers liver output and a little insulin resistance, and SGLT2 inhibitors block renal glucose reabsorption so more is lost in the urine.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or glucose value is shown or implied.",
+ "level": {
+  "label": "Glucose from a meal",
+  "a": [
+   0.3,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "small meal",
+   "usual meal",
+   "large meal"
+  ],
+  "ticks": [
+   "small",
+   "usual",
+   "large"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antidiabetic class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antidiabetic drug"
+  },
+  {
+   "label": "sulfonylurea type",
+   "status": "sulfonylurea",
+   "blocks": {
+    "e_ins": -0.6
+   }
+  },
+  {
+   "label": "metformin type",
+   "status": "metformin",
+   "blocks": {
+    "e_liv": 0.6,
+    "e_up": -0.2
+   }
+  },
+  {
+   "label": "thiazolidinedione type (pioglitazone)",
+   "status": "thiazolidinedione",
+   "blocks": {
+    "e_up": -0.5
+   }
+  },
+  {
+   "label": "DPP-4 inhibitor or GLP-1 agonist type",
+   "status": "incretin-based drug",
+   "blocks": {
+    "e_ins": -0.35,
+    "e_liv": 0.25
+   }
+  },
+  {
+   "label": "SGLT2 inhibitor type",
+   "status": "SGLT2 inhibitor",
+   "blocks": {
+    "e_sglt": 0.85
+   }
+  }
+ ],
+ "readout": "blood glucose {0}",
+ "outputs": [
+  {
+   "node": "bg",
+   "words": [
+    "lower",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Meal: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "blood glucose high"
+  ],
+  [
+   1,
+   1,
+   "blood glucose moderate"
+  ],
+  [
+   1,
+   5,
+   "blood glucose moderate"
+  ],
+  [
+   0,
+   0,
+   "blood glucose moderate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class blocking this step (generic teaching symbol, not a named drug's shape): less passes here.",
+ "blockKey": "drug lowering this step (generic)",
+ "enhanceInfo": "A drug of the chosen class increasing this step (generic teaching symbol, not a named drug's shape): more passes here.",
+ "enhanceKey": "drug raising this step (generic)",
+ "nodes": [
+  {
+   "id": "meal",
+   "kind": "source",
+   "label": "Glucose from a meal",
+   "sub": "absorbed from the gut",
+   "x": 110,
+   "y": 100,
+   "rx": 100,
+   "info": "Glucose absorbed from food. The slider sets how much arrives."
+  },
+  {
+   "id": "liver",
+   "kind": "source",
+   "fixed": 0.2,
+   "label": "Liver glucose output",
+   "sub": "gluconeogenesis, glycogen",
+   "x": 330,
+   "y": 420,
+   "rx": 100,
+   "info": "The liver releases glucose between meals and during fasting, and does not switch off fully in type 2 diabetes. Insulin normally restrains it; glucagon drives it."
+  },
+  {
+   "id": "bg",
+   "kind": "calc",
+   "base": 0,
+   "terms": [
+    [
+     "e:ab",
+     0.9
+    ],
+    [
+     "e:e_liv",
+     0.55
+    ],
+    [
+     "e:e_re",
+     0.6
+    ],
+    [
+     "e:e_up",
+     -0.7
+    ]
+   ],
+   "label": "Blood glucose",
+   "x": 480,
+   "y": 250,
+   "rx": 96,
+   "info": "Blood glucose: raised by food and by the liver, lowered by uptake into muscle and fat (and, above the renal threshold, by loss in the urine). The slider and the drug choice change the balance."
+  },
+  {
+   "id": "ins",
+   "kind": "mid",
+   "label": "Insulin released",
+   "sub": "from the beta cell",
+   "x": 110,
+   "y": 520,
+   "rx": 90,
+   "info": "Insulin: released by pancreatic beta cells as glucose rises. Sulfonylureas and incretin-based drugs raise its release."
+  },
+  {
+   "id": "upt",
+   "kind": "mid",
+   "label": "Tissue uptake",
+   "sub": "muscle and fat",
+   "x": 520,
+   "y": 520,
+   "rx": 110,
+   "info": "Insulin moves GLUT4 transporters to the surface of muscle and fat cells so glucose can enter. Resistance of this step is the heart of type 2 diabetes."
+  },
+  {
+   "id": "kid",
+   "kind": "source",
+   "fixed": 0.2,
+   "label": "Filtered glucose",
+   "sub": "in the kidney",
+   "x": 820,
+   "y": 90,
+   "rx": 86,
+   "info": "Glucose filtered by the kidney. When blood glucose is normal the proximal tubule reclaims nearly all of it."
+  },
+  {
+   "id": "reab",
+   "kind": "mid",
+   "label": "Reabsorbed to blood",
+   "x": 720,
+   "y": 290,
+   "rx": 100,
+   "info": "Glucose taken back from the tubule into the blood by SGLT2 (mostly) and SGLT1."
+  },
+  {
+   "id": "lost",
+   "kind": "mid",
+   "label": "Lost in urine",
+   "sub": "removes glucose",
+   "x": 870,
+   "y": 400,
+   "rx": 76,
+   "info": "What SGLT2 does not reclaim leaves in the urine. This is how SGLT2 inhibitors lower blood glucose, independent of insulin."
+  }
+ ],
+ "edges": [
+  {
+   "id": "ab",
+   "from": "meal",
+   "to": "bg",
+   "blockable": false,
+   "info": "Absorbed glucose entering the blood."
+  },
+  {
+   "id": "e_liv",
+   "from": "liver",
+   "to": "bg",
+   "label": "liver output",
+   "info": "Glucose output by the liver. Metformin lowers it (mainly by reducing gluconeogenesis); incretin-based drugs lower glucagon and so lower it too."
+  },
+  {
+   "id": "e_ins",
+   "from": "meal",
+   "to": "ins",
+   "label": "beta cell",
+   "w": 0.8,
+   "info": "Insulin release by the beta cell in response to glucose. Sulfonylureas close K-ATP channels, depolarise the cell and release insulin whatever the glucose (so hypoglycaemia is possible); DPP-4 inhibitors and GLP-1 agonists raise release in a glucose-dependent way."
+  },
+  {
+   "id": "e_up",
+   "from": "ins",
+   "to": "upt",
+   "label": "insulin · GLUT4",
+   "w": 0.8,
+   "info": "Insulin action on muscle and fat. Thiazolidinediones act on PPAR-gamma, mainly in fat, and raise insulin sensitivity over weeks; metformin raises it a little."
+  },
+  {
+   "id": "e_sglt",
+   "from": "kid",
+   "to": "reab",
+   "label": "SGLT2",
+   "w": 0.9,
+   "info": "The sodium-glucose cotransporter SGLT2 of the proximal tubule reclaims most filtered glucose. An SGLT2 inhibitor blocks it, so more glucose is lost in the urine, independent of insulin."
+  },
+  {
+   "id": "e_re",
+   "from": "reab",
+   "to": "bg",
+   "blockable": false,
+   "info": "Reclaimed glucose returning to the blood."
+  },
+  {
+   "id": "e_lost",
+   "from": "kid",
+   "to": "lost",
+   "rest": "e_sglt",
+   "blockable": false,
+   "info": "Filtered glucose that is not reclaimed."
+  }
+ ],
+ "sources": [
+  "<strong>Sulfonylureas and thiazolidinediones.</strong> Sulfonylureas bind the sulfonylurea receptor 1 of the K-ATP channel on beta cells, close it, depolarise the cell, open calcium channels and trigger insulin release whatever the glucose, which is why hypoglycaemia occurs; thiazolidinediones activate PPAR-gamma, mainly in fat, raising insulin sensitivity over weeks (<a href=\"https://www.ncbi.nlm.nih.gov/sites/books/NBK482386/\">Oral antidiabetic medications, StatPearls</a>).",
+  "<strong>Metformin and SGLT2 inhibitors.</strong> Metformin mainly reduces hepatic glucose output and to a lesser extent raises insulin sensitivity; SGLT2 inhibitors block renal glucose reabsorption in the proximal tubule, an effect independent of insulin and so less likely to cause hypoglycaemia (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4034109/\">Oral hypoglycemic drugs: pathophysiological basis of their mechanism of action, PMC</a>; <a href=\"https://www.aafp.org/pubs/afp/issues/2001/0501/p1747.html\">Oral agents in type 2 diabetes, AAFP</a>).",
+  "<strong>Incretin-based drugs.</strong> DPP-4 inhibitors and GLP-1 receptor agonists raise glucose-dependent insulin release and lower glucagon; this is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review."
+ ],
+ "simplified": "Insulin itself (and its types) is shown only as the natural signal: injected insulin acts at the same uptake step, with hypoglycaemia as its main risk. Not drawn: glucagon, fat and muscle effects on weight, alpha-glucosidase inhibitors, meglitinides, amylin analogues, the feedback of glucose on insulin release, lactate, ketones, kidney threshold effects, heart and kidney outcomes, genital infection and volume effects of SGLT2 inhibitors, and the slow onset of thiazolidinediones. The blood glucose level is a teaching score, not a measured value. Levels, flow and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Blood glucose: insulin and the oral antidiabetic drugs",
+  "blurb": "Interactive figure: sulfonylureas, metformin, thiazolidinediones, incretin drugs and SGLT2 inhibitors",
+  "drugs": {
+   "glibenclamide": "d=1",
+   "glyburide": "d=1",
+   "glimepiride": "d=1",
+   "gliclazide": "d=1",
+   "glipizide": "d=1",
+   "tolbutamide": "d=1",
+   "chlorpropamide": "d=1",
+   "metformin": "d=2",
+   "phenformin": "d=2",
+   "pioglitazone": "d=3",
+   "rosiglitazone": "d=3",
+   "sitagliptin": "d=4",
+   "vildagliptin": "d=4",
+   "saxagliptin": "d=4",
+   "linagliptin": "d=4",
+   "teneligliptin": "d=4",
+   "alogliptin": "d=4",
+   "exenatide": "d=4",
+   "liraglutide": "d=4",
+   "semaglutide": "d=4",
+   "dulaglutide": "d=4",
+   "tirzepatide": "d=4",
+   "empagliflozin": "d=5",
+   "dapagliflozin": "d=5",
+   "canagliflozin": "d=5",
+   "ertugliflozin": "d=5"
+  },
+  "terms": [
+   "sulfonylureas?",
+   "sulphonylureas?",
+   "biguanides?",
+   "thiazolidinediones?",
+   "DPP[- ]?4 inhibitors?",
+   "GLP[- ]?1 (?:receptor )?agonists?",
+   "SGLT[- ]?2 inhibitors?",
+   "oral hypoglycaemics?",
+   "oral hypoglycemics?",
+   "oral antidiabetics?",
+   "incretin"
+  ]
+ }
+}

@@ -10,10 +10,19 @@ compatibility_date = "2025-01-01"
 # Every env.AI caller is fail-safe: re-rank falls back to the lexical order, /api/retrieve returns no semantic matches,
 # grounding verification reports "not checked", PDF to markdown falls back to TinyFish. Do not re-add without the owner.
 
+# FREE-QUOTA Workers AI (owner 2026-10-16: "use the plan quota first"). The binding is named CF_AI_FREE, not AI, so no other
+# function can reach it; only functions/api/retrieve uses it, behind a KV daily cap (WAI_DAY_CAP 3000 questions). Test: no-workers-ai.test.mjs.
+[ai]
+binding = "CF_AI_FREE"
+
 # Vectorize (NEW) — KB disease-vector index for the semantic arm (functions/api/retrieve)
 [[vectorize]]
 binding = "KB_VECTORIZE"
 index_name = "stewardmd-kb-t5"   # Vertex text-embedding-005 vectors (768-d); the old bge index stewardmd-kb is kept as rollback
+
+[[vectorize]]
+binding = "KB_VECTORIZE_OLD"
+index_name = "stewardmd-kb"   # bge-base-en-v1.5 vectors, queried by the free-quota tier
 
 # D1 — offline NMC register mirror; doctor verification falls back to it when live NMC is down
 [[d1_databases]]
@@ -273,6 +282,13 @@ binding = "MAIK_KV"
 [[env.production.kv_namespaces]]
 id = "48a600aeff5b4500a2ae73e632eafe3f"
 binding = "UPDATES_KV"
+
+[env.production.ai]
+binding = "CF_AI_FREE"
+
+[[env.production.vectorize]]
+binding = "KB_VECTORIZE_OLD"
+index_name = "stewardmd-kb"
 
 # Vectorize must also be declared for the production env (KV lives here too)
 [[env.production.vectorize]]

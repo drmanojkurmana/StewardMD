@@ -1,0 +1,242 @@
+{
+ "id": "anticoagulants",
+ "title": "Anticoagulants and the clotting cascade",
+ "ariaLabel": "Schematic of the clotting cascade reduced to its key steps: a clotting trigger makes factor Xa, Xa makes thrombin from prothrombin, thrombin turns fibrinogen into fibrin, and fibrin forms the clot. Warfarin lowers the vitamin K dependent factors, heparin and its relatives act through antithrombin on Xa and thrombin, factor Xa inhibitors block Xa, and a direct thrombin inhibitor blocks thrombin.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Clotting trigger",
+  "a": [
+   0.3,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "weak",
+   "usual",
+   "strong"
+  ],
+  "ticks": [
+   "weak",
+   "usual",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Anticoagulant class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no anticoagulant"
+  },
+  {
+   "label": "warfarin type (vitamin K antagonist)",
+   "status": "vitamin K antagonist",
+   "blocks": {
+    "e_x": 0.5,
+    "e_t": 0.5
+   }
+  },
+  {
+   "label": "unfractionated heparin type",
+   "status": "unfractionated heparin",
+   "blocks": {
+    "e_t": 0.7,
+    "e_f": 0.7
+   }
+  },
+  {
+   "label": "low molecular weight heparin or fondaparinux type",
+   "status": "low molecular weight heparin or fondaparinux",
+   "blocks": {
+    "e_t": 0.8,
+    "e_f": 0.3
+   }
+  },
+  {
+   "label": "direct factor Xa inhibitor (rivaroxaban or apixaban type)",
+   "status": "factor Xa inhibitor",
+   "blocks": {
+    "e_t": 0.85
+   }
+  },
+  {
+   "label": "direct thrombin inhibitor (dabigatran type)",
+   "status": "direct thrombin inhibitor",
+   "blocks": {
+    "e_f": 0.85
+   }
+  }
+ ],
+ "readout": "thrombin {0} · clot formation {1}",
+ "outputs": [
+  {
+   "node": "thr",
+   "words": [
+    "low",
+    "reduced",
+    "high"
+   ],
+   "cuts": [
+    0.15,
+    0.4
+   ]
+  },
+  {
+   "node": "clot",
+   "words": [
+    "little",
+    "reduced",
+    "firm"
+   ],
+   "cuts": [
+    0.12,
+    0.45
+   ]
+  }
+ ],
+ "status": "Trigger: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "thrombin high · clot formation firm"
+  ],
+  [
+   1,
+   1,
+   "thrombin reduced · clot formation reduced"
+  ],
+  [
+   1,
+   4,
+   "thrombin low · clot formation little"
+  ],
+  [
+   1,
+   5,
+   "thrombin high · clot formation little"
+  ]
+ ],
+ "blockInfo": "An anticoagulant of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so everything after the step is reduced. Warfarin works by lowering the amount of clotting factors made, which is why it is drawn on the early steps and takes days to act.",
+ "blockKey": "anticoagulant (generic)",
+ "nodes": [
+  {
+   "id": "trig",
+   "kind": "source",
+   "label": "Clotting trigger",
+   "sub": "injury, stasis, inflammation",
+   "x": 110,
+   "y": 130,
+   "rx": 100,
+   "info": "What starts clotting: exposed tissue factor, damaged vessel wall, or contact activation. The slider sets how strong it is."
+  },
+  {
+   "id": "fxa",
+   "kind": "mid",
+   "label": "Factor Xa",
+   "sub": "the common pathway",
+   "x": 350,
+   "y": 130,
+   "rx": 80,
+   "info": "Factor Xa: formed when the extrinsic (tissue factor and VIIa) and intrinsic (XII, XI, IX and VIII) pathways meet. It sits at the start of the common pathway."
+  },
+  {
+   "id": "thr",
+   "kind": "out",
+   "label": "Thrombin (IIa)",
+   "x": 590,
+   "y": 130,
+   "rx": 84,
+   "info": "Thrombin: made from prothrombin by factor Xa with factor Va. It converts fibrinogen to fibrin and also activates platelets and more factors (positive feedback, not drawn)."
+  },
+  {
+   "id": "fib",
+   "kind": "mid",
+   "label": "Fibrin",
+   "sub": "fibrinogen turned into fibrin",
+   "x": 590,
+   "y": 330,
+   "rx": 110,
+   "info": "Fibrin: thrombin cuts fibrinogen to fibrin monomers that polymerise into a mesh."
+  },
+  {
+   "id": "clot",
+   "kind": "out",
+   "label": "Clot",
+   "sub": "stabilised by factor XIII",
+   "x": 590,
+   "y": 520,
+   "rx": 90,
+   "info": "The fibrin mesh with platelets, made firm by factor XIIIa."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_x",
+   "from": "trig",
+   "to": "fxa",
+   "label": "VIIa · IXa",
+   "info": "Activation of factor X by the tissue factor and intrinsic complexes. Vitamin K dependent factors II, VII, IX and X are all needed; warfarin lowers their amount, so this step and the next both fall."
+  },
+  {
+   "id": "e_t",
+   "from": "fxa",
+   "to": "thr",
+   "label": "Xa + Va",
+   "info": "Prothrombinase: factor Xa with Va converts prothrombin (II) to thrombin. Factor Xa inhibitors block Xa itself; heparins and fondaparinux act through antithrombin, which inhibits Xa (and, for heparin, thrombin)."
+  },
+  {
+   "id": "e_f",
+   "from": "thr",
+   "to": "fib",
+   "label": "thrombin",
+   "info": "Thrombin converting fibrinogen to fibrin. Direct thrombin inhibitors block thrombin itself; heparin, through antithrombin, also inhibits thrombin when a long enough chain binds both."
+  },
+  {
+   "id": "e_c",
+   "from": "fib",
+   "to": "clot",
+   "blockable": false,
+   "info": "Fibrin cross-linked by factor XIIIa becomes a firm clot."
+  }
+ ],
+ "sources": [
+  "<strong>Warfarin.</strong> A vitamin K antagonist: it blocks the vitamin K cycle that the liver needs to activate factors II, VII, IX and X (and proteins C and S), so its effect appears over days as existing factors are cleared (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK441964/\">Warfarin, NCBI Bookshelf</a>).",
+  "<strong>Direct oral anticoagulants.</strong> Rivaroxaban, apixaban, edoxaban and betrixaban inhibit factor Xa; dabigatran, argatroban and bivalirudin inhibit thrombin directly (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK560651/\">Anticoagulation, NCBI Bookshelf</a>).",
+  "<strong>Heparins.</strong> Heparin acts through antithrombin, speeding its inhibition of thrombin and factor Xa; low molecular weight heparins and fondaparinux act mainly on factor Xa because their chains are too short to bridge antithrombin to thrombin. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review."
+ ],
+ "simplified": "The intrinsic and extrinsic pathways are drawn as one step; factors V, VIII and XI, thrombin's own feedback, protein C and S, tissue factor pathway inhibitor, fibrinolysis, platelets, monitoring (INR, aPTT, anti-Xa), reversal agents, interactions and bleeding risk are left out. Levels, flow and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Anticoagulants and the clotting cascade",
+  "blurb": "Interactive figure: warfarin, heparins, factor Xa inhibitors and thrombin inhibitors, step by step",
+  "drugs": {
+   "warfarin": "d=1",
+   "acenocoumarol": "d=1",
+   "phenindione": "d=1",
+   "heparin": "d=2",
+   "enoxaparin": "d=3",
+   "dalteparin": "d=3",
+   "tinzaparin": "d=3",
+   "nadroparin": "d=3",
+   "fondaparinux": "d=3",
+   "rivaroxaban": "d=4",
+   "apixaban": "d=4",
+   "edoxaban": "d=4",
+   "betrixaban": "d=4",
+   "dabigatran": "d=5",
+   "argatroban": "d=5",
+   "bivalirudin": "d=5"
+  },
+  "terms": [
+   "anticoagulants?",
+   "vitamin K antagonists?",
+   "direct oral anticoagulants?",
+   "DOACs?",
+   "NOACs?",
+   "factor Xa inhibitors?",
+   "direct thrombin inhibitors?",
+   "low molecular weight heparins?",
+   "LMWH"
+  ]
+ }
+}

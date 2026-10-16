@@ -660,6 +660,16 @@
       '<div class="db-brand-price">' + (b.mrp != null ? esc(inr(b.mrp)) : '<span class="db-na">—</span>') + '</div>' +
       '</div>';
   }
+  /* Drugs that have an interactive "how it works" figure (fig-viewer.js registry, prep/figures/figures.json) get a card, preset to the
+     drug's class. Matching is on the generic's first word, else on the class text (a class phrase the figure lists). */
+  function figCard(d) {
+    var F = window.SMD_FIG; if (!F || !F.forDrugs) return "";
+    var ms = F.forDrugs(d.composition);
+    if (!ms.length) ms = F.matchText([d["class"], d.action_class].join(" "), 1);
+    return ms.slice(0, 3).map(function (m) {
+      return '<button type="button" class="db-fig" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><i class="db-fig-i" aria-hidden="true">&#9654;</i><span><b>' + esc(m.title) + '</b><small>' + esc(m.blurb) + '</small></span></button>';
+    }).join("");
+  }
   function renderDetail() {
     var d = st.info, b = detailHost();
     var cls = compClass(d.composition, d["class"]);
@@ -673,7 +683,9 @@
         ((window.SMD_RENAL_DOSE && SMD_RENAL_DOSE.buttonHTML) ? SMD_RENAL_DOSE.buttonHTML(d.composition) : '') +
         ((window.SMD_DOSECALC && SMD_DOSECALC.buttonHTML) ? SMD_DOSECALC.buttonHTML(d.composition) : '') + '</div>' +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
+      figCard(d) +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
+    b.querySelectorAll(".db-fig").forEach(function (fg) { fg.addEventListener("click", function () { window.SMD_FIG.openFig(fg.getAttribute("data-f"), fg.getAttribute("data-q"), fg); }); });
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =
@@ -1115,6 +1127,10 @@
       ".db-dwsearch-i:focus{outline:none;border-color:var(--teal,#0a9396)}",
       ".db-head{margin-bottom:12px}.db-gen{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25}",
       ".db-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}",
+      ".db-fig{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;margin:10px 0 4px;padding:10px 14px;border:1px solid var(--line,#d7dee3);border-radius:14px;background:var(--panel,#fff);color:var(--ink,#14202b);font:inherit;text-align:left;cursor:pointer}",
+      ".db-fig-i{flex:0 0 auto;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:var(--teal,#0e6e63);color:#fff;font-style:normal;font-size:14px}",
+      ".db-fig span{display:flex;flex-direction:column;gap:2px;min-width:0}.db-fig small{color:var(--slate-soft,#5a7184)}",
+      ".db-fig:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}",
       ".db-chip{font:700 10.5px var(--sans,system-ui);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:7px;padding:3px 9px;text-transform:capitalize}",
       ".db-sec{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 13px;margin-bottom:9px}",
       ".db-sec-h{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin-bottom:5px}",

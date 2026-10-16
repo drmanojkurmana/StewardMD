@@ -1,0 +1,198 @@
+{
+ "id": "alpha-adrenergic",
+ "title": "Alpha-1 receptors: agonists and alpha-blockers",
+ "ariaLabel": "Schematic of a sympathetic nerve terminal releasing noradrenaline onto two cells that both carry alpha-1 receptors coupled to Gq: a blood vessel smooth muscle cell and a smooth muscle cell of the prostate and bladder neck. Each receptor activates phospholipase C and raises calcium, which contracts the muscle. An alpha-1 agonist adds to the signal, a non-selective alpha-1 blocker relaxes both cells, and an alpha-1A selective blocker mainly relaxes the prostate.",
+ "caption": "Schematic, not to scale. A sympathetic nerve terminal and two target cells drawn side by side to compare tissues. Response levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Sympathetic drive",
+  "a": [
+   0.15,
+   0.5,
+   0.85
+  ],
+  "names": [
+   "rest",
+   "stress or exercise",
+   "high sympathetic drive"
+  ],
+  "ticks": [
+   "rest",
+   "stress",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "alpha-1 agonist (phenylephrine type)",
+   "status": "alpha-1 agonist",
+   "cols": [
+    {
+     "g": 0.5
+    },
+    {
+     "g": 0.5
+    }
+   ]
+  },
+  {
+   "label": "non-selective alpha-1 blocker (prazosin or doxazosin type)",
+   "status": "non-selective alpha-1 blocker",
+   "cols": [
+    {
+     "b": 0.85
+    },
+    {
+     "b": 0.85
+    }
+   ]
+  },
+  {
+   "label": "alpha-1A selective blocker (tamsulosin type)",
+   "status": "alpha-1A selective blocker",
+   "cols": [
+    {
+     "b": 0.2
+    },
+    {
+     "b": 0.85
+    }
+   ]
+  }
+ ],
+ "readout": "blood vessels {0} · prostate and bladder neck {1}",
+ "words": [
+  "baseline",
+  "modest",
+  "strong"
+ ],
+ "status": "Sympathetic drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "blood vessels usual tone · prostate and bladder neck usual tone"
+  ],
+  [
+   1,
+   1,
+   "blood vessels constricted · prostate and bladder neck contracted"
+  ],
+  [
+   1,
+   2,
+   "blood vessels relaxed · prostate and bladder neck relaxed"
+  ],
+  [
+   1,
+   3,
+   "blood vessels usual tone · prostate and bladder neck relaxed"
+  ]
+ ],
+ "blockInfo": "An alpha-1 blocker molecule (generic teaching symbol, not a named drug's shape) in the receptor's binding pocket. It occupies the pocket without activating the receptor, so noradrenaline cannot bind where it sits. The block is competitive: a lot of noradrenaline can partly outcompete it. The brightness of the symbol shows how many receptors it holds.",
+ "blockKey": "alpha-1 blocker (generic)",
+ "agonistInfo": "An alpha-1 agonist molecule (generic teaching symbol) in the binding pocket. It activates the receptor like noradrenaline does, adding to the natural signal.",
+ "agonistKey": "alpha-1 agonist (generic)",
+ "terminal": {
+  "label": "sympathetic nerve terminal",
+  "vesicle": "noradrenaline",
+  "keyLabel": "noradrenaline",
+  "info": "Sympathetic nerve terminal (a varicosity). Noradrenaline is packed into vesicles and released by exocytosis; most is taken back up by the noradrenaline transporter (not drawn)."
+ },
+ "molecule": {
+  "draw": "noradrenaline",
+  "name": "noradrenaline",
+  "formula": "C<tspan class=\"dr-sub\" dy=\"3\">8</tspan><tspan dy=\"-3\">H</tspan><tspan class=\"dr-sub\" dy=\"3\">11</tspan><tspan dy=\"-3\">NO</tspan><tspan class=\"dr-sub\" dy=\"3\">3</tspan>",
+  "info": "Noradrenaline (norepinephrine), 4-(2-amino-1-hydroxyethyl)benzene-1,2-diol, C8H11NO3 (PubChem CID 439260): a catechol ring with an ethanolamine side chain. Flat skeletal formula, bond angles and lengths drawn schematically; stereochemistry is not shown. In the cleft below it is drawn as a small bright dot."
+ },
+ "cols": [
+  {
+   "key": "a1v",
+   "name": "α1",
+   "organ": "blood vessel",
+   "gprot": "Gαq",
+   "eff": "PLC",
+   "sign": "+",
+   "msg": "ca",
+   "end": {
+    "kind": "node",
+    "label": "Ca²⁺"
+   },
+   "out": "vessel constricts, pressure ↑",
+   "sub": "Gαq · stimulates PLC · Ca²⁺ ↑",
+   "words": [
+    "relaxed",
+    "usual tone",
+    "constricted"
+   ],
+   "info": {
+    "cell": "Vascular smooth muscle cell of an arteriole or vein, patch of its membrane in flat cross-section, schematic and not to scale. Alpha-1 receptors are the main route by which sympathetic nerves and circulating catecholamines constrict vessels.",
+    "rec": "Alpha-1 adrenoceptor (α1): a seven-transmembrane G protein-coupled receptor coupled to Gαq. Noradrenaline binds from outside. The α1A, α1B and α1D subtypes are not distinguished in vessels here.",
+    "end": "Calcium: IP3 from phospholipase C opens calcium release channels on the endoplasmic reticulum, and the rise in calcium contracts the smooth muscle through calmodulin and myosin light chain kinase (drawn: the node lights up). Diacylglycerol and protein kinase C are not drawn."
+   }
+  },
+  {
+   "key": "a1p",
+   "name": "α1A",
+   "organ": "prostate and bladder neck",
+   "gprot": "Gαq",
+   "eff": "PLC",
+   "sign": "+",
+   "msg": "ca",
+   "end": {
+    "kind": "node",
+    "label": "Ca²⁺"
+   },
+   "out": "outflow resistance ↑",
+   "sub": "Gαq · stimulates PLC · Ca²⁺ ↑",
+   "words": [
+    "relaxed",
+    "usual tone",
+    "contracted"
+   ],
+   "info": {
+    "cell": "Smooth muscle cell of the prostate or bladder neck, patch of its membrane. The α1A subtype is the main one here; its contraction narrows the urethra. Drawn beside the vessel cell only to compare tissues.",
+    "rec": "Alpha-1A adrenoceptor: the α1 subtype that predominates in prostatic and bladder neck smooth muscle, coupled to Gαq. Blockers that prefer α1A relax these tissues with less effect on vessels.",
+    "end": "Calcium: IP3 from phospholipase C releases calcium from the endoplasmic reticulum, and the smooth muscle contracts (drawn: the node lights up)."
+   }
+  }
+ ],
+ "sources": [
+  "<strong>Alpha-1 receptors and the Gq pathway.</strong> Alpha-1 receptors signal through Gq: phospholipase C splits PIP2 into IP3 and DAG, and IP3 releases calcium from stores, which contracts smooth muscle. Phenylephrine is a direct-acting alpha-1 agonist that constricts veins and arteries and raises blood pressure with little effect on cardiac muscle (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK534801/\">Alpha-1 receptor agonists, NCBI Bookshelf</a>).",
+  "<strong>Alpha-1 blockers.</strong> Alfuzosin, doxazosin, prazosin, silodosin, tamsulosin and terazosin are selective alpha-1 blockers used for benign prostatic hyperplasia and hypertension; doxazosin, prazosin and terazosin cause more orthostatic hypotension, while alfuzosin, tamsulosin and silodosin affect the vasculature less and are first-line for prostatic symptoms (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK556066/\">Selective alpha-blockers, StatPearls</a>).",
+  "<strong>Molecule.</strong> Noradrenaline, C8H11NO3 (<a href=\"https://pubchem.ncbi.nlm.nih.gov/compound/439260\">PubChem CID 439260</a>)."
+ ],
+ "simplified": "Only the alpha-1 receptor is drawn: alpha-2 receptors (presynaptic autoreceptors, clonidine), beta receptors, the individual alpha-1 subtypes in each tissue, non-competitive blockers (phenoxybenzamine), reflex responses to a change in blood pressure, ejaculation effects and first-dose hypotension are left out. The two cells are drawn side by side only to compare tissues. Levels, the size of the block and timing are illustrative; protein shapes are cartoons, not structures. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Alpha-1 receptors: agonists and alpha-blockers",
+  "blurb": "Interactive figure: blood vessels and prostate, with agonists, non-selective and selective alpha-blockers",
+  "drugs": {
+   "phenylephrine": "d=1",
+   "midodrine": "d=1",
+   "methoxamine": "d=1",
+   "oxymetazoline": "d=1",
+   "xylometazoline": "d=1",
+   "naphazoline": "d=1",
+   "prazosin": "d=2",
+   "doxazosin": "d=2",
+   "terazosin": "d=2",
+   "urapidil": "d=2",
+   "phentolamine": "d=2",
+   "phenoxybenzamine": "d=2",
+   "tamsulosin": "d=3",
+   "silodosin": "d=3",
+   "alfuzosin": "d=3"
+  },
+  "terms": [
+   "alpha[- ]?blockers?",
+   "alpha[- ]?1 (?:adrenergic )?(?:receptor )?(?:blockers?|antagonists?|agonists?)",
+   "α[- ]?blockers?",
+   "alpha[- ]adrenergic (?:blockers?|antagonists?)"
+  ]
+ }
+}

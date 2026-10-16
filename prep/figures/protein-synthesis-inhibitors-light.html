@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Antibiotics that stop the bacterial ribosome</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Antibiotics that stop the bacterial ribosome</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>protein synthesis normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of bacterial protein synthesis on the ribosome: the 30S and 50S subunits and mRNA form an initiation complex, aminoacyl tRNA enters the A site, the peptide bond forms, and the ribosome translocates along the mRNA, making protein. Aminoglycosides and linezolid act at initiation, tetracyclines at the A site, chloramphenicol at peptide bond formation, and macrolides and clindamycin at translocation."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_init" d="M233 110L367 110"/><path class="dr-flowhead" d="M367 110l-8.1 3.9M367 110l-8.1 -3.9"/><g id="pt-e_init"></g><g class="hot dr-enz" tabindex="0" data-info="Initiation. Aminoglycosides bind the 30S subunit, interfere with initiation and make the ribosome misread mRNA (so they kill rather than only stop growth). Linezolid binds the 50S subunit and stops the initiation complex forming."><rect class="dr-enz-r" x="255" y="99" width="90" height="22" rx="11"/><text class="dr-prot" x="300" y="114" text-anchor="middle">initiation</text></g><g class="hot dr-block" id="blk-e_init" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-block-hex" d="M309 85L304.5 92.8L295.5 92.8L291 85L295.5 77.2L304.5 77.2Z"/><path class="dr-block-x" d="M296.4 81.4L303.6 88.6M303.6 81.4L296.4 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_init" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-ag-hex" d="M331 85L326.5 92.8L317.5 92.8L313 85L317.5 77.2L326.5 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_a" d="M588 110L730 110"/><path class="dr-flowhead" d="M730 110l-8.1 3.9M730 110l-8.1 -3.9"/><g id="pt-e_a"></g><g class="hot dr-enz" tabindex="0" data-info="Binding of the aminoacyl tRNA to the A site. Tetracyclines bind the 30S subunit and block it."><rect class="dr-enz-r" x="599.2" y="99" width="119.6" height="22" rx="11"/><text class="dr-prot" x="659" y="114" text-anchor="middle">A-site binding</text></g><g class="hot dr-block" id="blk-e_a" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-block-hex" d="M668 85L663.5 92.8L654.5 92.8L650 85L654.5 77.2L663.5 77.2Z"/><path class="dr-block-x" d="M655.4 81.4L662.6 88.6M662.6 81.4L655.4 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_a" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-ag-hex" d="M690 85L685.5 92.8L676.5 92.8L672 85L676.5 77.2L685.5 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_pt" d="M835 138L835 267"/><path class="dr-flowhead" d="M835 267l-3.9 -8.1M835 267l3.9 -8.1"/><g id="pt-e_pt"></g><g class="hot dr-enz" tabindex="0" data-info="Peptide bond formation by the peptidyl transferase of the 50S subunit. Chloramphenicol blocks it."><rect class="dr-enz-r" x="753" y="191.5" width="164" height="22" rx="11"/><text class="dr-prot" x="835" y="206.5" text-anchor="middle">peptidyl transferase</text></g><g class="hot dr-block" id="blk-e_pt" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-block-hex" d="M844 177.5L839.5 185.3L830.5 185.3L826 177.5L830.5 169.7L839.5 169.7Z"/><path class="dr-block-x" d="M831.4 173.9L838.6 181.1M838.6 173.9L831.4 181.1"/></g><g class="hot dr-block dr-enh" id="enh-e_pt" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-ag-hex" d="M866 177.5L861.5 185.3L852.5 185.3L848 177.5L852.5 169.7L861.5 169.7Z"/></g><path class="dr-rail dr-flowline" id="ln-e_tr" d="M743 300L585 300"/><path class="dr-flowhead" d="M585 300l8.1 -3.9M585 300l8.1 3.9"/><g id="pt-e_tr"></g><g class="hot dr-enz" tabindex="0" data-info="Translocation of the ribosome along the mRNA. Macrolides and clindamycin bind the 50S subunit near the exit tunnel and block it."><rect class="dr-enz-r" x="607.9" y="289" width="112.2" height="22" rx="11"/><text class="dr-prot" x="664" y="304" text-anchor="middle">translocation</text></g><g class="hot dr-block" id="blk-e_tr" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-block-hex" d="M673 275L668.5 282.8L659.5 282.8L655 275L659.5 267.2L668.5 267.2Z"/><path class="dr-block-x" d="M660.4 271.4L667.6 278.6M667.6 271.4L660.4 278.6"/></g><g class="hot dr-block dr-enh" id="enh-e_tr" tabindex="0" data-info="An antibiotic of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less protein is made."><path class="dr-ag-hex" d="M695 275L690.5 282.8L681.5 282.8L677 275L681.5 267.2L690.5 267.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_pr" d="M380 300L224 300"/><path class="dr-flowhead" d="M224 300l8.1 -3.9M224 300l8.1 3.9"/><g id="pt-e_pr"></g><g class="hot dr-node dr-n-source" id="nd-src" tabindex="0" data-info="Messenger RNA and the two subunits of the bacterial 70S ribosome (30S and 50S). The slider sets how fast the cell is growing." transform="translate(125 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/><path class="bio-blob-shade" d="M96.7 0C97.3 1.5 97.1 3.2 95.7 4.7C94.2 6.2 91.4 7.7 88.1 9C84.8 10.4 80.2 11.6 75.7 12.7C71.2 13.8 66.1 14.7 61 15.6C55.9 16.5 50.7 17.4 45.3 18.1C39.8 18.8 34.2 19.6 28.3 20.1C22.4 20.6 16 21.1 9.7 21.3C3.4 21.5 -3.3 21.6 -9.8 21.5C-16.2 21.3 -22.8 21 -29 20.6C-35.3 20.2 -41.4 19.6 -47.3 18.9C-53.1 18.2 -58.9 17.4 -64.1 16.4C-69.2 15.5 -74.2 14.3 -78.1 13.1C-82 11.9 -85.3 10.4 -87.4 9C-89.6 7.5 -90.7 6 -91.2 4.5C-91.7 3 -91.1 1.5 -90.5 0C-89.9 -1.5 -88.7 -2.9 -87.4 -4.3C-86.2 -5.7 -84.9 -7.1 -82.9 -8.5C-81 -9.9 -78.9 -11.4 -75.8 -12.7C-72.6 -14 -68.8 -15.4 -64.3 -16.5C-59.7 -17.6 -54.1 -18.6 -48.3 -19.3C-42.5 -20.1 -36 -20.6 -29.6 -21C-23.1 -21.4 -16.4 -21.6 -9.9 -21.7C-3.3 -21.7 3.3 -21.7 9.8 -21.5C16.2 -21.3 22.8 -21 28.8 -20.5C34.9 -20 40.9 -19.3 46.3 -18.5C51.7 -17.7 56.7 -16.7 61.2 -15.7C65.7 -14.6 69.6 -13.5 73.4 -12.3C77.1 -11.1 80.5 -9.9 83.6 -8.6C86.7 -7.3 89.7 -5.9 91.9 -4.5C94.1 -3.1 96.1 -1.5 96.7 0Z"/><path class="bio-blob-highlight" d="M75.2 0C75.7 1.2 75.5 2.5 74.4 3.6C73.3 4.8 71.1 6 68.5 7C65.9 8.1 62.4 9 58.9 9.9C55.4 10.7 51.4 11.5 47.5 12.2C43.5 12.9 39.5 13.5 35.2 14.1C31 14.7 26.6 15.2 22 15.6C17.4 16 12.5 16.4 7.5 16.6C2.6 16.7 -2.6 16.8 -7.6 16.7C-12.6 16.6 -17.7 16.4 -22.6 16C-27.4 15.7 -32.2 15.2 -36.8 14.7C-41.3 14.2 -45.8 13.5 -49.8 12.8C-53.8 12 -57.7 11.1 -60.7 10.2C-63.8 9.2 -66.3 8.1 -68 7C-69.7 5.9 -70.5 4.6 -70.9 3.5C-71.3 2.3 -70.9 1.1 -70.4 0C-69.9 -1.1 -69 -2.2 -68 -3.3C-67 -4.4 -66 -5.5 -64.5 -6.6C-63 -7.7 -61.3 -8.8 -58.9 -9.9C-56.5 -10.9 -53.5 -12 -50 -12.8C-46.4 -13.7 -42.1 -14.4 -37.6 -15C-33.1 -15.6 -28 -16 -23 -16.3C-18 -16.6 -12.8 -16.8 -7.7 -16.8C-2.6 -16.9 2.6 -16.9 7.6 -16.7C12.6 -16.6 17.7 -16.3 22.4 -15.9C27.2 -15.5 31.8 -15 36 -14.4C40.2 -13.8 44.1 -13 47.6 -12.2C51.1 -11.4 54.1 -10.5 57.1 -9.6C60 -8.6 62.6 -7.7 65 -6.7C67.4 -5.7 69.8 -4.6 71.5 -3.5C73.2 -2.4 74.7 -1.2 75.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">mRNA and subunits</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">30S + 50S ribosome</text></g><g class="hot dr-node dr-n-mid" id="nd-init" tabindex="0" data-info="The initiation complex: the 30S subunit binds the mRNA and the first tRNA, then the 50S subunit joins." transform="translate(480 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M106.2 0C106.3 1.7 105.8 3.5 104.1 5.1C102.4 6.8 99.6 8.4 96.1 9.9C92.6 11.3 87.8 12.7 83 13.9C78.1 15.1 72.5 16.2 66.9 17.2C61.4 18.2 55.7 19 49.8 19.9C43.9 20.8 37.9 21.6 31.5 22.3C25 23.1 18.1 23.8 11 24.2C3.9 24.6 -3.9 24.8 -11.3 24.7C-18.6 24.6 -26.3 24.2 -33.3 23.6C-40.2 23 -46.9 22.1 -53 21.2C-59 20.2 -64.5 19 -69.6 17.8C-74.6 16.6 -79.3 15.3 -83.3 14C-87.4 12.6 -91.1 11.2 -93.9 9.6C-96.7 8.1 -98.9 6.5 -100.3 4.9C-101.6 3.3 -102 1.6 -101.8 0C-101.7 -1.6 -100.7 -3.3 -99.3 -4.9C-98 -6.5 -96.3 -8.1 -93.9 -9.6C-91.6 -11.2 -88.9 -12.8 -85.3 -14.3C-81.7 -15.8 -77.4 -17.3 -72.2 -18.5C-67.1 -19.7 -60.8 -20.9 -54.2 -21.7C-47.6 -22.5 -40.1 -23 -32.8 -23.3C-25.6 -23.6 -18 -23.6 -10.7 -23.6C-3.5 -23.5 3.5 -23.3 10.5 -23C17.4 -22.8 24.2 -22.4 31 -22C37.7 -21.6 44.6 -21.1 51 -20.4C57.5 -19.7 64 -18.9 69.6 -17.8C75.3 -16.8 80.5 -15.6 85 -14.2C89.4 -12.9 93.1 -11.4 96.1 -9.9C99.2 -8.3 101.5 -6.7 103.2 -5.1C104.9 -3.4 106 -1.7 106.2 0Z"/><path class="bio-blob-shade" d="M95.6 0C95.7 1.5 95.2 3.1 93.7 4.6C92.2 6.1 89.7 7.6 86.5 8.9C83.3 10.2 79 11.4 74.7 12.5C70.3 13.6 65.2 14.5 60.2 15.4C55.3 16.3 50.1 17.1 44.8 17.9C39.5 18.7 34.1 19.5 28.3 20.1C22.5 20.7 16.3 21.4 9.9 21.7C3.5 22.1 -3.5 22.3 -10.1 22.2C-16.8 22.2 -23.7 21.8 -30 21.3C-36.2 20.7 -42.2 19.9 -47.7 19.1C-53.1 18.2 -58.1 17.1 -62.6 16C-67.2 15 -71.3 13.8 -75 12.6C-78.6 11.3 -82 10 -84.5 8.7C-87.1 7.3 -89 5.9 -90.2 4.4C-91.4 3 -91.8 1.5 -91.6 0C-91.5 -1.5 -90.6 -2.9 -89.4 -4.4C-88.2 -5.8 -86.6 -7.3 -84.5 -8.7C-82.4 -10.1 -80 -11.5 -76.8 -12.9C-73.5 -14.2 -69.7 -15.6 -65 -16.7C-60.3 -17.8 -54.7 -18.8 -48.8 -19.5C-42.9 -20.2 -36 -20.7 -29.5 -21C-23 -21.3 -16.2 -21.3 -9.7 -21.2C-3.2 -21.2 3.2 -21 9.4 -20.7C15.7 -20.5 21.8 -20.2 27.9 -19.8C34 -19.4 40.1 -19 45.9 -18.4C51.7 -17.7 57.6 -17 62.6 -16.1C67.7 -15.1 72.5 -14 76.5 -12.8C80.4 -11.6 83.8 -10.3 86.5 -8.9C89.2 -7.5 91.4 -6 92.9 -4.6C94.4 -3.1 95.4 -1.5 95.6 0Z"/><path class="bio-blob-highlight" d="M74.3 0C74.4 1.2 74.1 2.4 72.9 3.6C71.7 4.7 69.7 5.9 67.3 6.9C64.8 7.9 61.5 8.9 58.1 9.7C54.7 10.6 50.7 11.3 46.9 12C43 12.7 39 13.3 34.9 13.9C30.7 14.5 26.6 15.1 22 15.6C17.5 16.1 12.7 16.6 7.7 16.9C2.7 17.2 -2.7 17.4 -7.9 17.3C-13 17.2 -18.4 17 -23.3 16.5C-28.2 16.1 -32.8 15.5 -37.1 14.8C-41.3 14.1 -45.2 13.3 -48.7 12.5C-52.2 11.6 -55.5 10.7 -58.3 9.8C-61.2 8.8 -63.8 7.8 -65.7 6.8C-67.7 5.7 -69.3 4.6 -70.2 3.4C-71.1 2.3 -71.4 1.1 -71.3 0C-71.2 -1.1 -70.5 -2.3 -69.5 -3.4C-68.6 -4.5 -67.4 -5.7 -65.7 -6.8C-64.1 -7.9 -62.3 -9 -59.7 -10C-57.2 -11 -54.2 -12.1 -50.6 -13C-46.9 -13.8 -42.5 -14.6 -37.9 -15.2C-33.3 -15.7 -28 -16.1 -23 -16.3C-17.9 -16.5 -12.6 -16.5 -7.5 -16.5C-2.5 -16.5 2.5 -16.3 7.3 -16.1C12.2 -15.9 17 -15.7 21.7 -15.4C26.4 -15.1 31.2 -14.8 35.7 -14.3C40.2 -13.8 44.8 -13.2 48.7 -12.5C52.7 -11.8 56.4 -10.9 59.5 -10C62.6 -9 65.1 -8 67.3 -6.9C69.4 -5.8 71.1 -4.7 72.2 -3.5C73.4 -2.4 74.2 -1.2 74.3 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M106.2 0C106.3 1.7 105.8 3.5 104.1 5.1C102.4 6.8 99.6 8.4 96.1 9.9C92.6 11.3 87.8 12.7 83 13.9C78.1 15.1 72.5 16.2 66.9 17.2C61.4 18.2 55.7 19 49.8 19.9C43.9 20.8 37.9 21.6 31.5 22.3C25 23.1 18.1 23.8 11 24.2C3.9 24.6 -3.9 24.8 -11.3 24.7C-18.6 24.6 -26.3 24.2 -33.3 23.6C-40.2 23 -46.9 22.1 -53 21.2C-59 20.2 -64.5 19 -69.6 17.8C-74.6 16.6 -79.3 15.3 -83.3 14C-87.4 12.6 -91.1 11.2 -93.9 9.6C-96.7 8.1 -98.9 6.5 -100.3 4.9C-101.6 3.3 -102 1.6 -101.8 0C-101.7 -1.6 -100.7 -3.3 -99.3 -4.9C-98 -6.5 -96.3 -8.1 -93.9 -9.6C-91.6 -11.2 -88.9 -12.8 -85.3 -14.3C-81.7 -15.8 -77.4 -17.3 -72.2 -18.5C-67.1 -19.7 -60.8 -20.9 -54.2 -21.7C-47.6 -22.5 -40.1 -23 -32.8 -23.3C-25.6 -23.6 -18 -23.6 -10.7 -23.6C-3.5 -23.5 3.5 -23.3 10.5 -23C17.4 -22.8 24.2 -22.4 31 -22C37.7 -21.6 44.6 -21.1 51 -20.4C57.5 -19.7 64 -18.9 69.6 -17.8C75.3 -16.8 80.5 -15.6 85 -14.2C89.4 -12.9 93.1 -11.4 96.1 -9.9C99.2 -8.3 101.5 -6.7 103.2 -5.1C104.9 -3.4 106 -1.7 106.2 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Initiation complex</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">30S + mRNA + first tRNA</text></g><g class="hot dr-node dr-n-mid" id="nd-asite" tabindex="0" data-info="An aminoacyl tRNA enters the A (acceptor) site of the ribosome, matched to the next codon." transform="translate(835 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M95 0C94.5 1.7 93.5 3.3 92.1 4.9C90.6 6.5 88.7 8.1 86.1 9.6C83.6 11.1 80.3 12.6 76.5 13.9C72.7 15.2 68.1 16.5 63.3 17.6C58.4 18.7 53 19.6 47.4 20.5C41.8 21.4 35.8 22.2 29.6 22.8C23.5 23.5 16.9 24 10.2 24.4C3.6 24.7 -3.6 24.9 -10.4 24.8C-17.3 24.7 -24.4 24.3 -30.7 23.6C-37.1 23 -43.1 22 -48.5 21C-53.8 20 -58.4 18.7 -62.7 17.4C-67.1 16.2 -70.8 14.9 -74.4 13.5C-78.1 12.2 -81.6 10.8 -84.6 9.4C-87.7 8 -90.7 6.5 -92.8 4.9C-94.9 3.4 -96.5 1.7 -97 0C-97.5 -1.7 -97 -3.4 -95.7 -5.1C-94.5 -6.7 -92.1 -8.4 -89.3 -9.9C-86.4 -11.5 -82.8 -13 -78.8 -14.3C-74.8 -15.7 -70.2 -17 -65.2 -18.1C-60.2 -19.2 -54.6 -20.3 -48.6 -21.1C-42.7 -21.9 -36.2 -22.5 -29.7 -22.8C-23.2 -23.2 -16.4 -23.3 -9.8 -23.4C-3.3 -23.4 3.2 -23.2 9.6 -22.9C16 -22.7 22.3 -22.4 28.6 -22C34.9 -21.6 41.3 -21.2 47.5 -20.6C53.7 -20 60.2 -19.2 65.7 -18.3C71.3 -17.3 76.7 -16.1 80.9 -14.7C85.1 -13.3 88.4 -11.7 90.8 -10.1C93.1 -8.5 94.3 -6.7 95 -5C95.7 -3.4 95.5 -1.7 95 0Z"/><path class="bio-blob-shade" d="M85.5 0C85 1.5 84.2 3 82.9 4.4C81.5 5.8 79.9 7.3 77.5 8.6C75.2 10 72.3 11.3 68.9 12.5C65.4 13.7 61.3 14.8 56.9 15.8C52.6 16.8 47.7 17.7 42.6 18.5C37.6 19.2 32.2 19.9 26.7 20.5C21.1 21.1 15.2 21.6 9.2 21.9C3.2 22.2 -3.2 22.4 -9.4 22.3C-15.5 22.2 -21.9 21.8 -27.7 21.3C-33.4 20.7 -38.8 19.8 -43.6 18.9C-48.4 18 -52.6 16.8 -56.5 15.7C-60.4 14.6 -63.7 13.4 -67 12.2C-70.3 11 -73.4 9.8 -76.2 8.5C-78.9 7.2 -81.7 5.9 -83.5 4.4C-85.4 3 -86.9 1.5 -87.3 0C-87.8 -1.5 -87.3 -3.1 -86.2 -4.6C-85 -6.1 -82.9 -7.6 -80.3 -8.9C-77.8 -10.3 -74.5 -11.7 -70.9 -12.9C-67.3 -14.1 -63.2 -15.3 -58.7 -16.3C-54.2 -17.3 -49.1 -18.2 -43.8 -19C-38.5 -19.7 -32.5 -20.2 -26.7 -20.6C-20.9 -20.9 -14.7 -21 -8.8 -21C-2.9 -21 2.9 -20.9 8.7 -20.6C14.4 -20.4 20.1 -20.2 25.7 -19.8C31.4 -19.5 37.2 -19.1 42.8 -18.5C48.3 -18 54.2 -17.3 59.2 -16.4C64.2 -15.5 69.1 -14.4 72.8 -13.2C76.6 -12 79.6 -10.5 81.7 -9.1C83.8 -7.6 84.9 -6.1 85.5 -4.5C86.1 -3 85.9 -1.5 85.5 0Z"/><path class="bio-blob-highlight" d="M66.5 0C66.1 1.2 65.5 2.3 64.4 3.4C63.4 4.5 62.1 5.7 60.3 6.7C58.5 7.8 56.2 8.8 53.6 9.7C50.9 10.7 47.7 11.5 44.3 12.3C40.9 13.1 37.1 13.7 33.1 14.4C29.2 15 25.1 15.5 20.7 16C16.4 16.4 11.8 16.8 7.2 17.1C2.5 17.3 -2.5 17.4 -7.3 17.4C-12.1 17.3 -17.1 17 -21.5 16.5C-25.9 16.1 -30.2 15.4 -33.9 14.7C-37.7 14 -40.9 13.1 -43.9 12.2C-46.9 11.3 -49.5 10.4 -52.1 9.5C-54.6 8.5 -57.1 7.6 -59.2 6.6C-61.4 5.6 -63.5 4.6 -65 3.5C-66.4 2.4 -67.6 1.2 -67.9 0C-68.3 -1.2 -67.9 -2.4 -67 -3.6C-66.1 -4.7 -64.5 -5.9 -62.5 -7C-60.5 -8 -58 -9.1 -55.2 -10C-52.4 -11 -49.2 -11.9 -45.7 -12.7C-42.1 -13.5 -38.2 -14.2 -34.1 -14.7C-29.9 -15.3 -25.3 -15.7 -20.8 -16C-16.3 -16.3 -11.5 -16.3 -6.9 -16.4C-2.3 -16.4 2.3 -16.2 6.8 -16.1C11.2 -15.9 15.6 -15.7 20 -15.4C24.4 -15.1 28.9 -14.8 33.3 -14.4C37.6 -14 42.1 -13.5 46 -12.8C49.9 -12.1 53.7 -11.2 56.6 -10.3C59.6 -9.3 61.9 -8.2 63.5 -7.1C65.2 -5.9 66 -4.7 66.5 -3.5C67 -2.4 66.8 -1.2 66.5 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M95 0C94.5 1.7 93.5 3.3 92.1 4.9C90.6 6.5 88.7 8.1 86.1 9.6C83.6 11.1 80.3 12.6 76.5 13.9C72.7 15.2 68.1 16.5 63.3 17.6C58.4 18.7 53 19.6 47.4 20.5C41.8 21.4 35.8 22.2 29.6 22.8C23.5 23.5 16.9 24 10.2 24.4C3.6 24.7 -3.6 24.9 -10.4 24.8C-17.3 24.7 -24.4 24.3 -30.7 23.6C-37.1 23 -43.1 22 -48.5 21C-53.8 20 -58.4 18.7 -62.7 17.4C-67.1 16.2 -70.8 14.9 -74.4 13.5C-78.1 12.2 -81.6 10.8 -84.6 9.4C-87.7 8 -90.7 6.5 -92.8 4.9C-94.9 3.4 -96.5 1.7 -97 0C-97.5 -1.7 -97 -3.4 -95.7 -5.1C-94.5 -6.7 -92.1 -8.4 -89.3 -9.9C-86.4 -11.5 -82.8 -13 -78.8 -14.3C-74.8 -15.7 -70.2 -17 -65.2 -18.1C-60.2 -19.2 -54.6 -20.3 -48.6 -21.1C-42.7 -21.9 -36.2 -22.5 -29.7 -22.8C-23.2 -23.2 -16.4 -23.3 -9.8 -23.4C-3.3 -23.4 3.2 -23.2 9.6 -22.9C16 -22.7 22.3 -22.4 28.6 -22C34.9 -21.6 41.3 -21.2 47.5 -20.6C53.7 -20 60.2 -19.2 65.7 -18.3C71.3 -17.3 76.7 -16.1 80.9 -14.7C85.1 -13.3 88.4 -11.7 90.8 -10.1C93.1 -8.5 94.3 -6.7 95 -5C95.7 -3.4 95.5 -1.7 95 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">tRNA in the A site</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">next amino acid arrives</text></g><g class="hot dr-node dr-n-mid" id="nd-pept" tabindex="0" data-info="The peptidyl transferase centre of the 50S subunit joins the new amino acid to the growing chain." transform="translate(835 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M85.1 0C84.5 1.6 83.4 3.2 82.2 4.8C81 6.3 79.8 7.9 77.9 9.5C76.1 11 74 12.6 71.1 14.1C68.1 15.5 64.5 17 60.2 18.2C55.8 19.4 50.6 20.5 45.2 21.4C39.8 22.2 33.7 22.8 27.7 23.3C21.8 23.7 15.5 24 9.3 24.1C3.1 24.3 -3.2 24.2 -9.3 24C-15.4 23.8 -21.5 23.5 -27.3 22.9C-33 22.3 -38.6 21.5 -43.6 20.6C-48.7 19.7 -53.2 18.6 -57.4 17.4C-61.6 16.2 -65.2 14.9 -68.7 13.6C-72.1 12.3 -75.3 10.9 -78.3 9.5C-81.2 8.1 -84.1 6.6 -86.2 5C-88.3 3.4 -90.2 1.7 -90.9 0C-91.5 -1.7 -91.3 -3.5 -89.9 -5.2C-88.6 -6.9 -86 -8.6 -82.9 -10.1C-79.8 -11.5 -75.5 -12.9 -71.3 -14.1C-67.1 -15.4 -62.4 -16.4 -57.6 -17.5C-52.9 -18.5 -47.9 -19.4 -42.8 -20.2C-37.6 -21 -32.3 -21.8 -26.6 -22.4C-21 -22.9 -15.1 -23.4 -9.1 -23.6C-3.1 -23.8 3.1 -23.9 9.1 -23.7C15.2 -23.6 21.2 -23.2 27.1 -22.8C33 -22.3 38.8 -21.7 44.4 -21C49.9 -20.2 55.5 -19.3 60.4 -18.3C65.2 -17.2 70 -16 73.7 -14.6C77.4 -13.2 80.5 -11.6 82.5 -10C84.5 -8.4 85.5 -6.7 85.9 -5C86.4 -3.3 85.8 -1.6 85.1 0Z"/><path class="bio-blob-shade" d="M76.6 0C76.1 1.5 75.1 2.9 74 4.3C72.9 5.7 71.8 7.1 70.1 8.5C68.5 9.9 66.6 11.4 64 12.7C61.3 14 58 15.3 54.1 16.4C50.3 17.5 45.6 18.5 40.7 19.2C35.8 20 30.4 20.5 25 21C19.6 21.4 13.9 21.6 8.4 21.7C2.8 21.8 -2.8 21.8 -8.3 21.6C-13.8 21.4 -19.4 21.1 -24.5 20.6C-29.7 20.1 -34.8 19.4 -39.3 18.6C-43.8 17.7 -47.9 16.7 -51.7 15.7C-55.4 14.6 -58.7 13.4 -61.8 12.2C-64.9 11.1 -67.8 9.8 -70.4 8.6C-73.1 7.3 -75.7 5.9 -77.6 4.5C-79.5 3.1 -81.2 1.5 -81.8 0C-82.3 -1.5 -82.1 -3.2 -80.9 -4.7C-79.7 -6.2 -77.4 -7.7 -74.6 -9.1C-71.8 -10.4 -68 -11.6 -64.2 -12.7C-60.4 -13.8 -56.1 -14.8 -51.9 -15.7C-47.6 -16.6 -43.2 -17.5 -38.5 -18.2C-33.9 -18.9 -29 -19.6 -24 -20.1C-18.9 -20.6 -13.6 -21 -8.2 -21.2C-2.8 -21.4 2.8 -21.5 8.2 -21.3C13.7 -21.2 19.1 -20.9 24.4 -20.5C29.7 -20.1 34.9 -19.5 39.9 -18.9C44.9 -18.2 49.9 -17.4 54.3 -16.5C58.7 -15.5 63 -14.4 66.3 -13.1C69.7 -11.9 72.4 -10.5 74.3 -9C76.1 -7.6 76.9 -6 77.3 -4.5C77.7 -3 77.2 -1.5 76.6 0Z"/><path class="bio-blob-highlight" d="M59.6 0C59.2 1.1 58.4 2.2 57.6 3.3C56.7 4.4 55.9 5.5 54.6 6.6C53.2 7.7 51.8 8.8 49.7 9.9C47.7 10.9 45.1 11.9 42.1 12.8C39.1 13.6 35.4 14.4 31.7 15C27.9 15.5 23.6 16 19.4 16.3C15.2 16.6 10.8 16.8 6.5 16.9C2.2 17 -2.2 17 -6.5 16.8C-10.7 16.7 -15.1 16.4 -19.1 16C-23.1 15.6 -27 15.1 -30.6 14.4C-34.1 13.8 -37.3 13 -40.2 12.2C-43.1 11.4 -45.6 10.4 -48.1 9.5C-50.5 8.6 -52.7 7.7 -54.8 6.7C-56.8 5.6 -58.9 4.6 -60.4 3.5C-61.8 2.4 -63.2 1.2 -63.6 0C-64 -1.2 -63.9 -2.5 -62.9 -3.6C-62 -4.8 -60.2 -6 -58 -7C-55.8 -8.1 -52.9 -9 -49.9 -9.9C-47 -10.8 -43.7 -11.5 -40.3 -12.2C-37 -12.9 -33.6 -13.6 -29.9 -14.1C-26.3 -14.7 -22.6 -15.3 -18.7 -15.7C-14.7 -16.1 -10.5 -16.4 -6.4 -16.5C-2.2 -16.7 2.2 -16.7 6.4 -16.6C10.6 -16.5 14.9 -16.3 19 -15.9C23.1 -15.6 27.2 -15.2 31 -14.7C34.9 -14.1 38.8 -13.5 42.2 -12.8C45.7 -12.1 49 -11.2 51.6 -10.2C54.2 -9.3 56.3 -8.1 57.8 -7C59.2 -5.9 59.8 -4.7 60.1 -3.5C60.4 -2.3 60 -1.1 59.6 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M85.1 0C84.5 1.6 83.4 3.2 82.2 4.8C81 6.3 79.8 7.9 77.9 9.5C76.1 11 74 12.6 71.1 14.1C68.1 15.5 64.5 17 60.2 18.2C55.8 19.4 50.6 20.5 45.2 21.4C39.8 22.2 33.7 22.8 27.7 23.3C21.8 23.7 15.5 24 9.3 24.1C3.1 24.3 -3.2 24.2 -9.3 24C-15.4 23.8 -21.5 23.5 -27.3 22.9C-33 22.3 -38.6 21.5 -43.6 20.6C-48.7 19.7 -53.2 18.6 -57.4 17.4C-61.6 16.2 -65.2 14.9 -68.7 13.6C-72.1 12.3 -75.3 10.9 -78.3 9.5C-81.2 8.1 -84.1 6.6 -86.2 5C-88.3 3.4 -90.2 1.7 -90.9 0C-91.5 -1.7 -91.3 -3.5 -89.9 -5.2C-88.6 -6.9 -86 -8.6 -82.9 -10.1C-79.8 -11.5 -75.5 -12.9 -71.3 -14.1C-67.1 -15.4 -62.4 -16.4 -57.6 -17.5C-52.9 -18.5 -47.9 -19.4 -42.8 -20.2C-37.6 -21 -32.3 -21.8 -26.6 -22.4C-21 -22.9 -15.1 -23.4 -9.1 -23.6C-3.1 -23.8 3.1 -23.9 9.1 -23.7C15.2 -23.6 21.2 -23.2 27.1 -22.8C33 -22.3 38.8 -21.7 44.4 -21C49.9 -20.2 55.5 -19.3 60.4 -18.3C65.2 -17.2 70 -16 73.7 -14.6C77.4 -13.2 80.5 -11.6 82.5 -10C84.5 -8.4 85.5 -6.7 85.9 -5C86.4 -3.3 85.8 -1.6 85.1 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Peptide bond</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">chain gets one longer</text></g><g class="hot dr-node dr-n-mid" id="nd-trans" tabindex="0" data-info="The ribosome moves one codon along the mRNA, freeing the A site for the next tRNA." transform="translate(480 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M93.6 0C93.4 1.6 92.4 3.2 91.2 4.8C90 6.4 88.4 8 86.4 9.6C84.3 11.2 81.9 12.8 78.7 14.3C75.4 15.8 71.5 17.3 66.7 18.5C62 19.8 56.1 20.9 50.1 21.7C44 22.5 37 23 30.3 23.3C23.6 23.7 16.6 23.7 9.9 23.6C3.3 23.6 -3.3 23.4 -9.7 23.1C-16.2 22.9 -22.5 22.5 -28.7 22.1C-34.9 21.6 -41.2 21.1 -47.1 20.4C-53 19.7 -58.9 18.8 -64 17.8C-69.1 16.7 -73.9 15.5 -77.9 14.2C-82 12.8 -85.4 11.3 -88.3 9.8C-91.2 8.3 -93.5 6.7 -95.2 5.1C-96.9 3.4 -98.1 1.7 -98.4 0C-98.6 -1.7 -98.1 -3.5 -96.6 -5.1C-95 -6.8 -92.4 -8.4 -89 -9.9C-85.7 -11.4 -81.2 -12.7 -76.7 -13.9C-72.1 -15.1 -66.9 -16.2 -61.8 -17.1C-56.6 -18.1 -51.4 -19 -45.9 -19.9C-40.5 -20.7 -35 -21.6 -29 -22.3C-23 -23 -16.7 -23.7 -10.1 -24.1C-3.6 -24.5 3.6 -24.7 10.4 -24.6C17.1 -24.5 24.2 -24.1 30.6 -23.6C37.1 -23 43.2 -22.1 48.9 -21.2C54.5 -20.2 59.7 -19.1 64.5 -17.9C69.2 -16.7 73.6 -15.4 77.4 -14.1C81.2 -12.7 84.6 -11.2 87.1 -9.7C89.7 -8.2 91.5 -6.5 92.6 -4.9C93.7 -3.3 93.9 -1.6 93.6 0Z"/><path class="bio-blob-shade" d="M84.3 0C84.1 1.5 83.2 2.9 82.1 4.4C81 5.8 79.6 7.2 77.7 8.7C75.8 10.1 73.7 11.5 70.8 12.9C67.8 14.2 64.3 15.6 60 16.7C55.8 17.8 50.5 18.8 45.1 19.5C39.6 20.2 33.3 20.7 27.3 21C21.3 21.3 15 21.3 8.9 21.3C2.9 21.2 -3 21 -8.7 20.8C-14.5 20.6 -20.2 20.3 -25.8 19.9C-31.4 19.5 -37.1 19 -42.4 18.4C-47.7 17.7 -53 16.9 -57.6 16C-62.2 15.1 -66.5 13.9 -70.1 12.7C-73.8 11.5 -76.9 10.2 -79.5 8.8C-82 7.5 -84.2 6 -85.7 4.6C-87.2 3.1 -88.3 1.5 -88.5 0C-88.7 -1.5 -88.3 -3.1 -86.9 -4.6C-85.5 -6.1 -83.1 -7.6 -80.1 -8.9C-77.2 -10.2 -73.1 -11.4 -69 -12.5C-64.9 -13.6 -60.2 -14.5 -55.6 -15.4C-51 -16.3 -46.2 -17.1 -41.3 -17.9C-36.4 -18.7 -31.5 -19.4 -26.1 -20.1C-20.7 -20.7 -15 -21.3 -9.1 -21.7C-3.2 -22 3.2 -22.2 9.3 -22.2C15.4 -22.1 21.8 -21.7 27.6 -21.2C33.3 -20.7 38.9 -19.9 44 -19.1C49.1 -18.2 53.7 -17.2 58 -16.1C62.3 -15 66.3 -13.9 69.7 -12.7C73.1 -11.4 76.1 -10.1 78.4 -8.7C80.7 -7.4 82.4 -5.9 83.4 -4.4C84.3 -3 84.5 -1.5 84.3 0Z"/><path class="bio-blob-highlight" d="M65.6 0C65.4 1.1 64.7 2.3 63.9 3.4C63 4.5 61.9 5.6 60.4 6.7C59 7.8 57.3 9 55.1 10C52.8 11 50 12.1 46.7 13C43.4 13.8 39.3 14.6 35.1 15.2C30.8 15.7 25.9 16.1 21.2 16.3C16.6 16.6 11.6 16.6 7 16.5C2.3 16.5 -2.3 16.4 -6.8 16.2C-11.3 16 -15.7 15.8 -20.1 15.5C-24.5 15.1 -28.9 14.8 -33 14.3C-37.1 13.8 -41.2 13.2 -44.8 12.4C-48.4 11.7 -51.7 10.8 -54.6 9.9C-57.4 9 -59.8 7.9 -61.8 6.9C-63.8 5.8 -65.5 4.7 -66.6 3.5C-67.8 2.4 -68.7 1.2 -68.8 0C-69 -1.2 -68.7 -2.4 -67.6 -3.6C-66.5 -4.7 -64.7 -5.9 -62.3 -6.9C-60 -8 -56.9 -8.9 -53.7 -9.7C-50.5 -10.6 -46.8 -11.3 -43.2 -12C-39.6 -12.7 -36 -13.3 -32.1 -13.9C-28.3 -14.5 -24.5 -15.1 -20.3 -15.6C-16.1 -16.1 -11.7 -16.6 -7.1 -16.9C-2.5 -17.1 2.5 -17.3 7.2 -17.2C12 -17.2 16.9 -16.9 21.4 -16.5C25.9 -16.1 30.3 -15.5 34.2 -14.8C38.2 -14.2 41.8 -13.4 45.1 -12.5C48.5 -11.7 51.5 -10.8 54.2 -9.8C56.8 -8.9 59.2 -7.9 61 -6.8C62.8 -5.7 64.1 -4.6 64.8 -3.4C65.6 -2.3 65.7 -1.1 65.6 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M93.6 0C93.4 1.6 92.4 3.2 91.2 4.8C90 6.4 88.4 8 86.4 9.6C84.3 11.2 81.9 12.8 78.7 14.3C75.4 15.8 71.5 17.3 66.7 18.5C62 19.8 56.1 20.9 50.1 21.7C44 22.5 37 23 30.3 23.3C23.6 23.7 16.6 23.7 9.9 23.6C3.3 23.6 -3.3 23.4 -9.7 23.1C-16.2 22.9 -22.5 22.5 -28.7 22.1C-34.9 21.6 -41.2 21.1 -47.1 20.4C-53 19.7 -58.9 18.8 -64 17.8C-69.1 16.7 -73.9 15.5 -77.9 14.2C-82 12.8 -85.4 11.3 -88.3 9.8C-91.2 8.3 -93.5 6.7 -95.2 5.1C-96.9 3.4 -98.1 1.7 -98.4 0C-98.6 -1.7 -98.1 -3.5 -96.6 -5.1C-95 -6.8 -92.4 -8.4 -89 -9.9C-85.7 -11.4 -81.2 -12.7 -76.7 -13.9C-72.1 -15.1 -66.9 -16.2 -61.8 -17.1C-56.6 -18.1 -51.4 -19 -45.9 -19.9C-40.5 -20.7 -35 -21.6 -29 -22.3C-23 -23 -16.7 -23.7 -10.1 -24.1C-3.6 -24.5 3.6 -24.7 10.4 -24.6C17.1 -24.5 24.2 -24.1 30.6 -23.6C37.1 -23 43.2 -22.1 48.9 -21.2C54.5 -20.2 59.7 -19.1 64.5 -17.9C69.2 -16.7 73.6 -15.4 77.4 -14.1C81.2 -12.7 84.6 -11.2 87.1 -9.7C89.7 -8.2 91.5 -6.5 92.6 -4.9C93.7 -3.3 93.9 -1.6 93.6 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Translocation</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">ribosome moves one codon</text></g><g class="hot dr-node dr-n-out" id="nd-prot" tabindex="0" data-info="Protein made by repeating the cycle. Bacteria need it for growth and repair." transform="translate(125 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M90.5 0C90.9 1.7 90.4 3.4 89.2 5.1C88 6.7 85.9 8.4 83.4 9.9C80.8 11.4 77.6 12.9 73.9 14.3C70.3 15.7 66.1 17.1 61.4 18.2C56.8 19.3 51.4 20.4 45.9 21.2C40.3 22 34 22.6 27.9 22.9C21.8 23.3 15.4 23.4 9.2 23.4C3 23.4 -3 23.1 -9 22.9C-15 22.7 -20.8 22.3 -26.8 22C-32.7 21.6 -38.7 21.2 -44.5 20.5C-50.3 19.9 -56.3 19.2 -61.5 18.2C-66.7 17.2 -71.8 16 -75.7 14.7C-79.6 13.3 -82.7 11.7 -85 10.1C-87.2 8.5 -88.4 6.7 -89.2 5.1C-89.9 3.4 -89.8 1.7 -89.5 0C-89.1 -1.7 -88.2 -3.3 -86.8 -4.9C-85.4 -6.5 -83.6 -8.1 -81.1 -9.6C-78.5 -11.1 -75.4 -12.6 -71.7 -13.9C-68 -15.2 -63.6 -16.4 -59 -17.5C-54.4 -18.6 -49.4 -19.5 -44.1 -20.4C-38.9 -21.3 -33.4 -22.1 -27.7 -22.7C-21.9 -23.4 -15.9 -24 -9.6 -24.4C-3.4 -24.7 3.4 -25 9.8 -24.8C16.2 -24.7 22.9 -24.3 28.9 -23.7C34.8 -23.1 40.5 -22.1 45.5 -21C50.6 -20 54.9 -18.7 59 -17.5C63 -16.2 66.5 -14.9 70 -13.6C73.4 -12.2 76.6 -10.9 79.5 -9.4C82.3 -8 85.1 -6.5 86.9 -4.9C88.7 -3.4 90.2 -1.7 90.5 0Z"/><path class="bio-blob-shade" d="M81.5 0C81.8 1.5 81.4 3.1 80.3 4.6C79.2 6 77.3 7.5 75 8.9C72.7 10.3 69.8 11.6 66.6 12.9C63.3 14.1 59.5 15.3 55.3 16.4C51.1 17.4 46.3 18.4 41.3 19.1C36.3 19.8 30.6 20.3 25.1 20.6C19.6 21 13.8 21 8.3 21C2.7 21 -2.7 20.8 -8.1 20.6C-13.5 20.4 -18.8 20.1 -24.1 19.8C-29.4 19.4 -34.8 19 -40 18.5C-45.2 17.9 -50.7 17.3 -55.3 16.4C-60 15.5 -64.6 14.4 -68.1 13.2C-71.6 12 -74.5 10.5 -76.5 9.1C-78.5 7.6 -79.6 6.1 -80.3 4.5C-80.9 3 -80.9 1.5 -80.5 0C-80.2 -1.5 -79.4 -3 -78.1 -4.4C-76.9 -5.9 -75.2 -7.3 -73 -8.7C-70.7 -10 -67.8 -11.3 -64.5 -12.5C-61.2 -13.7 -57.2 -14.8 -53.1 -15.7C-49 -16.7 -44.4 -17.6 -39.7 -18.3C-35 -19.1 -30.1 -19.9 -24.9 -20.5C-19.7 -21.1 -14.3 -21.6 -8.6 -21.9C-3 -22.3 3 -22.5 8.8 -22.4C14.6 -22.3 20.6 -21.9 26 -21.3C31.3 -20.8 36.5 -19.9 41 -18.9C45.5 -18 49.4 -16.8 53.1 -15.7C56.7 -14.6 59.9 -13.4 63 -12.2C66 -11 69 -9.8 71.5 -8.5C74.1 -7.2 76.5 -5.8 78.2 -4.4C79.9 -3 81.1 -1.5 81.5 0Z"/><path class="bio-blob-highlight" d="M63.4 0C63.7 1.2 63.3 2.4 62.5 3.5C61.6 4.7 60.1 5.8 58.4 6.9C56.6 8 54.3 9.1 51.8 10C49.2 11 46.3 11.9 43 12.7C39.7 13.5 36 14.3 32.1 14.8C28.2 15.4 23.8 15.8 19.6 16C15.3 16.3 10.8 16.4 6.4 16.4C2.1 16.3 -2.1 16.2 -6.3 16C-10.5 15.9 -14.6 15.6 -18.7 15.4C-22.9 15.1 -27.1 14.8 -31.1 14.4C-35.2 13.9 -39.4 13.4 -43 12.7C-46.7 12.1 -50.2 11.2 -53 10.3C-55.7 9.3 -57.9 8.2 -59.5 7.1C-61.1 5.9 -61.9 4.7 -62.4 3.5C-62.9 2.4 -62.9 1.2 -62.6 0C-62.3 -1.2 -61.8 -2.3 -60.8 -3.4C-59.8 -4.6 -58.5 -5.7 -56.7 -6.7C-55 -7.8 -52.7 -8.8 -50.2 -9.7C-47.6 -10.6 -44.5 -11.5 -41.3 -12.2C-38.1 -13 -34.5 -13.7 -30.9 -14.3C-27.2 -14.9 -23.4 -15.4 -19.4 -15.9C-15.4 -16.4 -11.1 -16.8 -6.7 -17.1C-2.4 -17.3 2.4 -17.5 6.9 -17.4C11.3 -17.3 16 -17 20.2 -16.6C24.4 -16.1 28.4 -15.5 31.9 -14.7C35.4 -14 38.4 -13.1 41.3 -12.2C44.1 -11.4 46.6 -10.4 49 -9.5C51.4 -8.6 53.6 -7.6 55.6 -6.6C57.6 -5.6 59.5 -4.5 60.8 -3.4C62.1 -2.3 63.1 -1.2 63.4 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M90.5 0C90.9 1.7 90.4 3.4 89.2 5.1C88 6.7 85.9 8.4 83.4 9.9C80.8 11.4 77.6 12.9 73.9 14.3C70.3 15.7 66.1 17.1 61.4 18.2C56.8 19.3 51.4 20.4 45.9 21.2C40.3 22 34 22.6 27.9 22.9C21.8 23.3 15.4 23.4 9.2 23.4C3 23.4 -3 23.1 -9 22.9C-15 22.7 -20.8 22.3 -26.8 22C-32.7 21.6 -38.7 21.2 -44.5 20.5C-50.3 19.9 -56.3 19.2 -61.5 18.2C-66.7 17.2 -71.8 16 -75.7 14.7C-79.6 13.3 -82.7 11.7 -85 10.1C-87.2 8.5 -88.4 6.7 -89.2 5.1C-89.9 3.4 -89.8 1.7 -89.5 0C-89.1 -1.7 -88.2 -3.3 -86.8 -4.9C-85.4 -6.5 -83.6 -8.1 -81.1 -9.6C-78.5 -11.1 -75.4 -12.6 -71.7 -13.9C-68 -15.2 -63.6 -16.4 -59 -17.5C-54.4 -18.6 -49.4 -19.5 -44.1 -20.4C-38.9 -21.3 -33.4 -22.1 -27.7 -22.7C-21.9 -23.4 -15.9 -24 -9.6 -24.4C-3.4 -24.7 3.4 -25 9.8 -24.8C16.2 -24.7 22.9 -24.3 28.9 -23.7C34.8 -23.1 40.5 -22.1 45.5 -21C50.6 -20 54.9 -18.7 59 -17.5C63 -16.2 66.5 -14.9 70 -13.6C73.4 -12.2 76.6 -10.9 79.5 -9.4C82.3 -8 85.1 -6.5 86.9 -4.9C88.7 -3.4 90.2 -1.7 90.5 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Protein made</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">the cycle repeats</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">antibiotic (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or MIC is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Bacterial growth</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="active"><span class="dr-ticks"><i>slow</i><i>active</i><i>fast</i></span></label>
+  <label class="dr-range"><span>Antibiotic class (generic)</span><select id="drug"><option value="0">none</option><option value="1">aminoglycoside type (30S)</option><option value="2">tetracycline type (30S)</option><option value="3">chloramphenicol type (50S)</option><option value="4">macrolide or clindamycin type (50S)</option><option value="5">linezolid type (50S)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Where each class acts.</strong> Aminoglycosides, tetracyclines, macrolides, lincosamides, chloramphenicol and linezolid each bind the bacterial 30S or 50S subunit and block initiation, tRNA binding, peptide bond formation or translocation. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> Aminoglycoside uptake and oxygen dependence, concentration-dependent killing, post-antibiotic effect, the difference between bacteriostatic and bactericidal drugs, ribosome protection and methylation, efflux, tigecycline, streptogramins, aminoglycoside toxicity, and the differences within each class are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Bacterial growth","a":[0.4,0.7,0.95],"names":["slow","active","fast"],"ticks":["slow","active","fast"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"aminoglycoside type (30S)","blocks":{"e_init":0.6}},{"label":"tetracycline type (30S)","blocks":{"e_a":0.85}},{"label":"chloramphenicol type (50S)","blocks":{"e_pt":0.85}},{"label":"macrolide or clindamycin type (50S)","blocks":{"e_tr":0.85}},{"label":"linezolid type (50S)","blocks":{"e_init":0.85}}],"nodes":[{"id":"src","kind":"source"},{"id":"init","kind":"mid"},{"id":"asite","kind":"mid"},{"id":"pept","kind":"mid"},{"id":"trans","kind":"mid"},{"id":"prot","kind":"out"}],"edges":[{"id":"e_init","from":"src","to":"init"},{"id":"e_a","from":"init","to":"asite"},{"id":"e_pt","from":"asite","to":"pept"},{"id":"e_tr","from":"pept","to":"trans"},{"id":"e_pr","from":"trans","to":"prot"}],"outputs":[{"node":"prot","words":["stopped","slowed","normal"],"cuts":[0.2,0.5]}],"readout":"protein synthesis {0}","status":"Growth: {level} · {drug} ·","drugNames":["no antibiotic","aminoglycoside","tetracycline","chloramphenicol","macrolide or lincosamide","oxazolidinone"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_init","p0":[233,110],"p1":[367,110]},{"id":"e_a","p0":[588,110],"p1":[730,110]},{"id":"e_pt","p0":[835,138],"p1":[835,267]},{"id":"e_tr","p0":[743,300],"p1":[585,300]},{"id":"e_pr","p0":[380,300],"p1":[224,300]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

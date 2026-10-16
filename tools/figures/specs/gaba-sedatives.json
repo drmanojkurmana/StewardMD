@@ -1,0 +1,205 @@
+{
+ "id": "gaba-sedatives",
+ "title": "GABA-A receptors: how sedatives and benzodiazepines calm a neuron",
+ "ariaLabel": "Schematic of a GABA-A receptor on a neuron: GABA released by inhibitory nerves opens a chloride channel, chloride enters, and the neuron fires less. Benzodiazepines make the channel open more often, barbiturates make it stay open longer, and flumazenil blocks the benzodiazepine effect.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "GABA release",
+  "a": [
+   0.4,
+   0.55,
+   0.7
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no sedative"
+  },
+  {
+   "label": "benzodiazepine type",
+   "status": "benzodiazepine",
+   "blocks": {
+    "e_cl": -0.8
+   }
+  },
+  {
+   "label": "barbiturate type",
+   "status": "barbiturate",
+   "blocks": {
+    "e_cl": -1.5
+   }
+  },
+  {
+   "label": "benzodiazepine, then flumazenil",
+   "status": "benzodiazepine reversed by flumazenil",
+   "blocks": {
+    "e_cl": 0.0
+   }
+  },
+  {
+   "label": "benzodiazepine plus barbiturate type",
+   "status": "two GABA enhancers",
+   "blocks": {
+    "e_cl": -2.0
+   }
+  }
+ ],
+ "readout": "Neuron firing: {0}",
+ "outputs": [
+  {
+   "node": "fire",
+   "words": [
+    "strongly reduced",
+    "reduced",
+    "normal"
+   ],
+   "cuts": [
+    0.25,
+    0.45
+   ]
+  }
+ ],
+ "status": "GABA release: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Neuron firing: normal"
+  ],
+  [
+   1,
+   1,
+   "Neuron firing: reduced"
+  ],
+  [
+   1,
+   2,
+   "Neuron firing: strongly reduced"
+  ],
+  [
+   1,
+   3,
+   "Neuron firing: normal"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "gaba",
+   "kind": "source",
+   "label": "GABA",
+   "sub": "from the nerve",
+   "x": 105,
+   "y": 110,
+   "rx": 80,
+   "info": "The main inhibitory transmitter of the brain, released by inhibitory nerve endings. The slider sets how much is released."
+  },
+  {
+   "id": "chan",
+   "kind": "mid",
+   "label": "GABA-A chloride channel",
+   "sub": "receptor opens",
+   "x": 450,
+   "y": 110,
+   "rx": 125,
+   "info": "GABA binds the GABA-A receptor and the chloride channel opens. Benzodiazepines bind a separate site and make opening more frequent; barbiturates make it last longer."
+  },
+  {
+   "id": "cl",
+   "kind": "mid",
+   "label": "Chloride enters",
+   "x": 800,
+   "y": 110,
+   "rx": 95,
+   "info": "Chloride flows into the neuron and makes it harder to fire."
+  },
+  {
+   "id": "fire",
+   "kind": "calc",
+   "base": 0.8,
+   "terms": [
+    [
+     "n:cl",
+     -1.1
+    ]
+   ],
+   "label": "Neuron firing",
+   "x": 800,
+   "y": 300,
+   "rx": 100,
+   "info": "A teaching score for how readily the neuron fires. More chloride entry means less firing."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cl",
+   "from": "gaba",
+   "to": "chan",
+   "label": "GABA-A receptor",
+   "w": 0.4,
+   "info": "The GABA-A receptor channel. Enhancers (benzodiazepines, barbiturates) increase the effect of a given amount of GABA, shown as a stronger flow. Flumazenil blocks the benzodiazepine site so the benzodiazepine effect goes."
+  },
+  {
+   "id": "e_flow",
+   "from": "chan",
+   "to": "cl",
+   "label": "opens",
+   "blockable": false,
+   "info": "Open channels let chloride in."
+  },
+  {
+   "id": "e_fire",
+   "from": "cl",
+   "to": "fire",
+   "label": "inhibits",
+   "blockable": false,
+   "info": "Chloride entry lowers firing."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Benzodiazepines increase how often GABA-A channels open, barbiturates increase how long they stay open, and flumazenil is a benzodiazepine-site antagonist. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Z-drugs, alcohol, anaesthetics at GABA-A, direct channel opening by barbiturates at high levels, receptor subunits, tolerance and dependence, withdrawal, respiratory depression, flumazenil limits and adverse effects are left out. Neuron firing is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "GABA-A receptors: how sedatives and benzodiazepines calm a neuron",
+  "blurb": "Interactive figure: benzodiazepines, barbiturates and flumazenil",
+  "drugs": {
+   "diazepam": "d=1",
+   "lorazepam": "d=1",
+   "midazolam": "d=1",
+   "alprazolam": "d=1",
+   "clonazepam": "d=1",
+   "chlordiazepoxide": "d=1",
+   "oxazepam": "d=1",
+   "temazepam": "d=1",
+   "nitrazepam": "d=1",
+   "phenobarbitone": "d=2",
+   "phenobarbital": "d=2",
+   "thiopentone": "d=2",
+   "thiopental": "d=2",
+   "pentobarbital": "d=2",
+   "flumazenil": "d=3"
+  },
+  "terms": [
+   "benzodiazepines?",
+   "barbiturates?",
+   "GABA[- ]?A",
+   "sedative[- ]hypnotics?",
+   "hypnotics?"
+  ]
+ }
+}

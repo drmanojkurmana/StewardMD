@@ -1,0 +1,252 @@
+{
+ "id": "antidepressants",
+ "title": "Antidepressants at the monoamine synapse",
+ "ariaLabel": "Schematic of a serotonin or noradrenaline synapse: nerve firing releases transmitter into the cleft, the transporter takes most of it back into the terminal where monoamine oxidase breaks it down, and what stays in the cleft stimulates postsynaptic receptors. SSRIs, SNRIs and tricyclics block the transporter, MAO inhibitors raise the amount stored and released, and alpha-2 antagonists such as mirtazapine raise release by blocking the autoreceptor.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or level is shown or implied.",
+ "level": {
+  "label": "Nerve firing",
+  "a": [
+   0.3,
+   0.6,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Antidepressant class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antidepressant"
+  },
+  {
+   "label": "SSRI or SNRI type (blocks the transporter)",
+   "status": "SSRI or SNRI",
+   "blocks": {
+    "e_re": 0.85
+   }
+  },
+  {
+   "label": "tricyclic type (blocks the transporter)",
+   "status": "tricyclic",
+   "blocks": {
+    "e_re": 0.7
+   }
+  },
+  {
+   "label": "MAO inhibitor type",
+   "status": "MAO inhibitor",
+   "blocks": {
+    "e_mao": 0.85,
+    "e_rel": -0.9
+   }
+  },
+  {
+   "label": "alpha-2 antagonist (mirtazapine type)",
+   "status": "alpha-2 antagonist",
+   "blocks": {
+    "e_rel": -0.6
+   }
+  }
+ ],
+ "readout": "transmitter in the cleft {0} · postsynaptic stimulation {1}",
+ "outputs": [
+  {
+   "node": "cleft",
+   "words": [
+    "usual",
+    "raised",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.6
+   ]
+  },
+  {
+   "node": "rec",
+   "words": [
+    "usual",
+    "raised",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.6
+   ]
+  }
+ ],
+ "status": "Firing: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "transmitter in the cleft usual · postsynaptic stimulation usual"
+  ],
+  [
+   1,
+   1,
+   "transmitter in the cleft raised · postsynaptic stimulation raised"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, so more transmitter is left in the cleft or more is stored.",
+ "blockKey": "drug blocking this step (generic)",
+ "enhanceInfo": "A drug of the chosen class increasing this step (generic teaching symbol, not a named drug's shape): more transmitter is released, either because more is stored (MAO inhibitors) or because the brake of the alpha-2 autoreceptor is removed.",
+ "enhanceKey": "drug raising this step (generic)",
+ "nodes": [
+  {
+   "id": "fire",
+   "kind": "source",
+   "label": "Nerve firing",
+   "sub": "serotonin or noradrenaline neuron",
+   "x": 120,
+   "y": 110,
+   "rx": 110,
+   "info": "Impulses in a serotonin (raphe) or noradrenaline (locus coeruleus) neuron. The slider sets how active the neuron is."
+  },
+  {
+   "id": "rel",
+   "kind": "mid",
+   "label": "Released into the cleft",
+   "sub": "by exocytosis",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Transmitter released from vesicles into the synaptic cleft. Alpha-2 autoreceptors on the terminal normally hold release back."
+  },
+  {
+   "id": "back",
+   "kind": "mid",
+   "label": "Taken back up",
+   "sub": "into the terminal",
+   "x": 840,
+   "y": 110,
+   "rx": 86,
+   "info": "Reuptake by the serotonin transporter (SERT) or noradrenaline transporter (NET) ends most of the signal."
+  },
+  {
+   "id": "mao",
+   "kind": "mid",
+   "label": "Broken down",
+   "sub": "by MAO in the terminal",
+   "x": 840,
+   "y": 300,
+   "rx": 86,
+   "info": "Monoamine oxidase on mitochondria in the terminal breaks down the transmitter that is not stored again."
+  },
+  {
+   "id": "cleft",
+   "kind": "out",
+   "label": "Left in the cleft",
+   "sub": "free transmitter",
+   "x": 480,
+   "y": 300,
+   "rx": 88,
+   "info": "The transmitter that is not taken back up stays in the cleft and reaches the receptors."
+  },
+  {
+   "id": "rec",
+   "kind": "out",
+   "label": "Postsynaptic receptors",
+   "sub": "stimulated",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Serotonin and noradrenaline receptors on the next neuron. Clinical benefit takes weeks and involves adaptations beyond this first effect (not drawn)."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_rel",
+   "from": "fire",
+   "to": "rel",
+   "label": "release",
+   "w": 0.8,
+   "info": "Release. Alpha-2 autoreceptors on the terminal slow it; mirtazapine blocks them and so increases release. MAO inhibitors stop breakdown inside the terminal, so more transmitter is stored and released."
+  },
+  {
+   "id": "e_re",
+   "from": "rel",
+   "to": "back",
+   "label": "SERT / NET",
+   "w": 0.6,
+   "info": "The transporters. SSRIs block the serotonin transporter, SNRIs both, and tricyclic drugs both (with other receptor effects not drawn)."
+  },
+  {
+   "id": "e_cl",
+   "from": "rel",
+   "to": "cleft",
+   "rest": "e_re",
+   "blockable": false,
+   "info": "What is not taken back up stays in the cleft."
+  },
+  {
+   "id": "e_mao",
+   "from": "back",
+   "to": "mao",
+   "label": "MAO",
+   "info": "Monoamine oxidase. MAO inhibitors block it, so less is destroyed in the terminal and more is stored."
+  },
+  {
+   "id": "e_rc",
+   "from": "cleft",
+   "to": "rec",
+   "blockable": false,
+   "info": "Transmitter in the cleft stimulates the postsynaptic receptors."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> SSRIs and SNRIs block the serotonin or noradrenaline transporters, tricyclics block both, MAO inhibitors block monoamine oxidase so that more transmitter is stored and released, and mirtazapine blocks alpha-2 autoreceptors and so increases release. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Receptor blockade by tricyclics and mirtazapine (muscarinic, histamine, alpha-1, 5-HT2 and 5-HT3), the delay of weeks before benefit and the adaptations behind it, neurotrophic and other hypotheses of depression, the serotonin syndrome, the tyramine reaction with MAO inhibitors, discontinuation, bupropion and other agents, and the difference between serotonin and noradrenaline neurons are left out. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antidepressants at the monoamine synapse",
+  "blurb": "Interactive figure: SSRIs, tricyclics, MAO inhibitors and mirtazapine, step by step",
+  "drugs": {
+   "fluoxetine": "d=1",
+   "sertraline": "d=1",
+   "paroxetine": "d=1",
+   "citalopram": "d=1",
+   "escitalopram": "d=1",
+   "fluvoxamine": "d=1",
+   "venlafaxine": "d=1",
+   "desvenlafaxine": "d=1",
+   "duloxetine": "d=1",
+   "milnacipran": "d=1",
+   "amitriptyline": "d=2",
+   "imipramine": "d=2",
+   "nortriptyline": "d=2",
+   "clomipramine": "d=2",
+   "dosulepin": "d=2",
+   "doxepin": "d=2",
+   "desipramine": "d=2",
+   "phenelzine": "d=3",
+   "tranylcypromine": "d=3",
+   "moclobemide": "d=3",
+   "isocarboxazid": "d=3",
+   "selegiline": "d=3",
+   "rasagiline": "d=3",
+   "mirtazapine": "d=4",
+   "mianserin": "d=4"
+  },
+  "terms": [
+   "antidepressants?",
+   "SSRIs?",
+   "SNRIs?",
+   "tricyclic antidepressants?",
+   "TCAs?",
+   "MAO inhibitors?",
+   "MAOIs?",
+   "monoamine oxidase"
+  ]
+ }
+}

@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Anticancer drugs and the cell cycle</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Anticancer drugs and the cell cycle</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>dividing cells many</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of the cell cycle: a growth signal drives a cell through G1, S (DNA synthesis), G2 and M (mitosis) to division. Targeted kinase inhibitors act on the growth signal, antimetabolites on S phase, topoisomerase inhibitors and bleomycin on S and G2, microtubule drugs (vinca alkaloids, taxanes) on mitosis, and alkylating agents and platinum drugs damage DNA in any phase."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_g1" d="M218 110L367 110"/><path class="dr-flowhead" d="M367 110l-8.1 3.9M367 110l-8.1 -3.9"/><g id="pt-e_g1"></g><g class="hot dr-enz" tabindex="0" data-info="The growth signal pathway. Kinase inhibitors block it. Alkylating agents and platinum drugs damage DNA at any phase and so stop cells at the checkpoints."><rect class="dr-enz-r" x="236.4" y="99" width="112.2" height="22" rx="11"/><text class="dr-prot" x="292.5" y="114" text-anchor="middle">growth signal</text></g><g class="hot dr-block" id="blk-e_g1" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-block-hex" d="M301.5 85L297 92.8L288 92.8L283.5 85L288 77.2L297 77.2Z"/><path class="dr-block-x" d="M288.9 81.4L296.1 88.6M296.1 81.4L288.9 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_g1" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-ag-hex" d="M323.5 85L319 92.8L310 92.8L305.5 85L310 77.2L319 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_s" d="M508 110L639 110"/><path class="dr-flowhead" d="M639 110l-8.1 3.9M639 110l-8.1 -3.9"/><g id="pt-e_s"></g><g class="hot dr-enz" tabindex="0" data-info="Entry into DNA synthesis. Antimetabolites (methotrexate, fluorouracil, cytarabine, mercaptopurine) block the making of nucleotides or DNA and act mainly in S phase."><rect class="dr-enz-r" x="543.3" y="99" width="60.4" height="22" rx="11"/><text class="dr-prot" x="573.5" y="114" text-anchor="middle">into S</text></g><g class="hot dr-block" id="blk-e_s" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-block-hex" d="M582.5 85L578 92.8L569 92.8L564.5 85L569 77.2L578 77.2Z"/><path class="dr-block-x" d="M569.9 81.4L577.1 88.6M577.1 81.4L569.9 88.6"/></g><g class="hot dr-block dr-enh" id="enh-e_s" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-ag-hex" d="M604.5 85L600 92.8L591 92.8L586.5 85L591 77.2L600 77.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_g2" d="M737 136.9L820.4 269"/><path class="dr-flowhead" d="M820.4 269l-7.6 -4.8M820.4 269l-1 -8.9"/><g id="pt-e_g2"></g><g class="hot dr-enz" tabindex="0" data-info="Completion of DNA copying and the G2 checkpoint. Topoisomerase inhibitors act in S and G2; bleomycin breaks DNA and acts mainly in G2."><rect class="dr-enz-r" x="744.8" y="191.9" width="67.8" height="22" rx="11"/><text class="dr-prot" x="778.7" y="206.9" text-anchor="middle">S to G2</text></g><g class="hot dr-block" id="blk-e_g2" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-block-hex" d="M787.7 177.9L783.2 185.7L774.2 185.7L769.7 177.9L774.2 170.1L783.2 170.1Z"/><path class="dr-block-x" d="M775.1 174.3L782.3 181.5M782.3 174.3L775.1 181.5"/></g><g class="hot dr-block dr-enh" id="enh-e_g2" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-ag-hex" d="M809.7 177.9L805.2 185.7L796.2 185.7L791.7 177.9L796.2 170.1L805.2 170.1Z"/></g><path class="dr-rail dr-flowline" id="ln-e_m" d="M768 300L633 300"/><path class="dr-flowhead" d="M633 300l8.1 -3.9M633 300l8.1 3.9"/><g id="pt-e_m"></g><g class="hot dr-enz" tabindex="0" data-info="Entry into mitosis. Vinca alkaloids stop the spindle forming and taxanes freeze it, so the cell cannot separate its chromosomes."><rect class="dr-enz-r" x="670.3" y="289" width="60.4" height="22" rx="11"/><text class="dr-prot" x="700.5" y="304" text-anchor="middle">into M</text></g><g class="hot dr-block" id="blk-e_m" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-block-hex" d="M709.5 275L705 282.8L696 282.8L691.5 275L696 267.2L705 267.2Z"/><path class="dr-block-x" d="M696.9 271.4L704.1 278.6M704.1 271.4L696.9 278.6"/></g><g class="hot dr-block dr-enh" id="enh-e_m" tabindex="0" data-info="A drug of the chosen class acting at this phase (generic teaching symbol, not a named drug's shape). Fewer cells pass, so fewer divide. Phase-specific drugs act only on cells that are in their phase."><path class="dr-ag-hex" d="M731.5 275L727 282.8L718 282.8L713.5 275L718 267.2L727 267.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_d" d="M492 300L345 300"/><path class="dr-flowhead" d="M345 300l8.1 -3.9M345 300l8.1 3.9"/><g id="pt-e_d"></g><g class="hot dr-node dr-n-source" id="nd-sig" tabindex="0" data-info="Growth factors and the receptor tyrosine kinase pathways that push a cell into the cycle. Cancer cells often have these switched on all the time." transform="translate(110 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/><path class="bio-blob-shade" d="M96.7 0C97.3 1.5 97.1 3.2 95.7 4.7C94.2 6.2 91.4 7.7 88.1 9C84.8 10.4 80.2 11.6 75.7 12.7C71.2 13.8 66.1 14.7 61 15.6C55.9 16.5 50.7 17.4 45.3 18.1C39.8 18.8 34.2 19.6 28.3 20.1C22.4 20.6 16 21.1 9.7 21.3C3.4 21.5 -3.3 21.6 -9.8 21.5C-16.2 21.3 -22.8 21 -29 20.6C-35.3 20.2 -41.4 19.6 -47.3 18.9C-53.1 18.2 -58.9 17.4 -64.1 16.4C-69.2 15.5 -74.2 14.3 -78.1 13.1C-82 11.9 -85.3 10.4 -87.4 9C-89.6 7.5 -90.7 6 -91.2 4.5C-91.7 3 -91.1 1.5 -90.5 0C-89.9 -1.5 -88.7 -2.9 -87.4 -4.3C-86.2 -5.7 -84.9 -7.1 -82.9 -8.5C-81 -9.9 -78.9 -11.4 -75.8 -12.7C-72.6 -14 -68.8 -15.4 -64.3 -16.5C-59.7 -17.6 -54.1 -18.6 -48.3 -19.3C-42.5 -20.1 -36 -20.6 -29.6 -21C-23.1 -21.4 -16.4 -21.6 -9.9 -21.7C-3.3 -21.7 3.3 -21.7 9.8 -21.5C16.2 -21.3 22.8 -21 28.8 -20.5C34.9 -20 40.9 -19.3 46.3 -18.5C51.7 -17.7 56.7 -16.7 61.2 -15.7C65.7 -14.6 69.6 -13.5 73.4 -12.3C77.1 -11.1 80.5 -9.9 83.6 -8.6C86.7 -7.3 89.7 -5.9 91.9 -4.5C94.1 -3.1 96.1 -1.5 96.7 0Z"/><path class="bio-blob-highlight" d="M75.2 0C75.7 1.2 75.5 2.5 74.4 3.6C73.3 4.8 71.1 6 68.5 7C65.9 8.1 62.4 9 58.9 9.9C55.4 10.7 51.4 11.5 47.5 12.2C43.5 12.9 39.5 13.5 35.2 14.1C31 14.7 26.6 15.2 22 15.6C17.4 16 12.5 16.4 7.5 16.6C2.6 16.7 -2.6 16.8 -7.6 16.7C-12.6 16.6 -17.7 16.4 -22.6 16C-27.4 15.7 -32.2 15.2 -36.8 14.7C-41.3 14.2 -45.8 13.5 -49.8 12.8C-53.8 12 -57.7 11.1 -60.7 10.2C-63.8 9.2 -66.3 8.1 -68 7C-69.7 5.9 -70.5 4.6 -70.9 3.5C-71.3 2.3 -70.9 1.1 -70.4 0C-69.9 -1.1 -69 -2.2 -68 -3.3C-67 -4.4 -66 -5.5 -64.5 -6.6C-63 -7.7 -61.3 -8.8 -58.9 -9.9C-56.5 -10.9 -53.5 -12 -50 -12.8C-46.4 -13.7 -42.1 -14.4 -37.6 -15C-33.1 -15.6 -28 -16 -23 -16.3C-18 -16.6 -12.8 -16.8 -7.7 -16.8C-2.6 -16.9 2.6 -16.9 7.6 -16.7C12.6 -16.6 17.7 -16.3 22.4 -15.9C27.2 -15.5 31.8 -15 36 -14.4C40.2 -13.8 44.1 -13 47.6 -12.2C51.1 -11.4 54.1 -10.5 57.1 -9.6C60 -8.6 62.6 -7.7 65 -6.7C67.4 -5.7 69.8 -4.6 71.5 -3.5C73.2 -2.4 74.7 -1.2 75.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M107.5 0C108.2 1.7 107.9 3.5 106.3 5.2C104.7 6.9 101.6 8.6 97.9 10.1C94.2 11.5 89.1 12.9 84.1 14.1C79.1 15.3 73.4 16.4 67.8 17.4C62.2 18.4 56.4 19.3 50.3 20.1C44.3 20.9 38 21.7 31.4 22.3C24.8 22.9 17.8 23.4 10.8 23.7C3.7 23.9 -3.7 24 -10.9 23.9C-18 23.7 -25.3 23.4 -32.2 22.9C-39.2 22.4 -46 21.8 -52.5 21C-59 20.2 -65.5 19.3 -71.2 18.2C-76.9 17.2 -82.4 15.9 -86.8 14.5C-91.1 13.2 -94.7 11.6 -97.2 10C-99.6 8.4 -100.8 6.6 -101.3 5C-101.9 3.3 -101.2 1.6 -100.5 0C-99.8 -1.6 -98.6 -3.2 -97.2 -4.8C-95.8 -6.3 -94.3 -7.9 -92.1 -9.5C-90 -11 -87.6 -12.6 -84.2 -14.1C-80.7 -15.6 -76.5 -17.1 -71.4 -18.3C-66.3 -19.5 -60.1 -20.6 -53.7 -21.5C-47.2 -22.3 -40 -22.9 -32.8 -23.3C-25.7 -23.8 -18.2 -24 -11 -24.1C-3.7 -24.2 3.7 -24.1 10.9 -23.9C18 -23.7 25.3 -23.3 32 -22.8C38.8 -22.2 45.5 -21.5 51.5 -20.6C57.5 -19.7 63 -18.6 68 -17.4C73 -16.3 77.4 -15 81.5 -13.7C85.6 -12.4 89.4 -11 92.9 -9.5C96.3 -8.1 99.7 -6.6 102.1 -5C104.6 -3.4 106.8 -1.7 107.5 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Growth signal</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">growth factors</text></g><g class="hot dr-node dr-n-mid" id="nd-g1" tabindex="0" data-info="G1: the cell grows and decides to divide." transform="translate(440 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M65.3 0C65.4 1.7 65.1 3.5 64.1 5.1C63 6.8 61.3 8.4 59.1 9.9C57 11.3 54 12.7 51 13.9C48.1 15.1 44.6 16.2 41.2 17.2C37.8 18.2 34.3 19 30.6 19.9C27 20.8 23.3 21.6 19.4 22.3C15.4 23.1 11.2 23.8 6.8 24.2C2.4 24.6 -2.4 24.8 -6.9 24.7C-11.5 24.6 -16.2 24.2 -20.5 23.6C-24.8 23 -28.9 22.1 -32.6 21.2C-36.3 20.2 -39.7 19 -42.8 17.8C-45.9 16.6 -48.8 15.3 -51.3 14C-53.8 12.6 -56.1 11.2 -57.8 9.6C-59.5 8.1 -60.9 6.5 -61.7 4.9C-62.5 3.3 -62.7 1.6 -62.7 0C-62.6 -1.6 -61.9 -3.3 -61.1 -4.9C-60.3 -6.5 -59.2 -8.1 -57.8 -9.6C-56.4 -11.2 -54.7 -12.8 -52.5 -14.3C-50.3 -15.8 -47.6 -17.3 -44.5 -18.5C-41.3 -19.7 -37.4 -20.9 -33.4 -21.7C-29.3 -22.5 -24.6 -23 -20.2 -23.3C-15.7 -23.6 -11 -23.6 -6.6 -23.6C-2.2 -23.5 2.2 -23.3 6.5 -23C10.7 -22.8 14.9 -22.4 19.1 -22C23.2 -21.6 27.4 -21.1 31.4 -20.4C35.4 -19.7 39.4 -18.9 42.8 -17.8C46.3 -16.8 49.6 -15.6 52.3 -14.2C55 -12.9 57.3 -11.4 59.1 -9.9C61 -8.3 62.5 -6.7 63.5 -5.1C64.5 -3.4 65.3 -1.7 65.3 0Z"/><path class="bio-blob-shade" d="M58.8 0C58.9 1.5 58.6 3.1 57.7 4.6C56.7 6.1 55.2 7.6 53.2 8.9C51.3 10.2 48.6 11.4 45.9 12.5C43.3 13.6 40.1 14.5 37.1 15.4C34 16.3 30.9 17.1 27.6 17.9C24.3 18.7 21 19.5 17.4 20.1C13.8 20.7 10 21.4 6.1 21.7C2.2 22.1 -2.1 22.3 -6.2 22.2C-10.3 22.2 -14.6 21.8 -18.4 21.3C-22.3 20.7 -26 19.9 -29.3 19.1C-32.7 18.2 -35.7 17.1 -38.5 16C-41.3 15 -43.9 13.8 -46.1 12.6C-48.4 11.3 -50.4 10 -52 8.7C-53.6 7.3 -54.8 5.9 -55.5 4.4C-56.3 3 -56.5 1.5 -56.4 0C-56.3 -1.5 -55.8 -2.9 -55 -4.4C-54.3 -5.8 -53.3 -7.3 -52 -8.7C-50.7 -10.1 -49.3 -11.5 -47.3 -12.9C-45.3 -14.2 -42.9 -15.6 -40 -16.7C-37.1 -17.8 -33.7 -18.8 -30 -19.5C-26.4 -20.2 -22.2 -20.7 -18.2 -21C-14.2 -21.3 -9.9 -21.3 -5.9 -21.2C-2 -21.2 2 -21 5.8 -20.7C9.7 -20.5 13.4 -20.2 17.2 -19.8C20.9 -19.4 24.7 -19 28.3 -18.4C31.8 -17.7 35.4 -17 38.5 -16.1C41.7 -15.1 44.6 -14 47.1 -12.8C49.5 -11.6 51.5 -10.3 53.2 -8.9C54.9 -7.5 56.2 -6 57.2 -4.6C58.1 -3.1 58.7 -1.5 58.8 0Z"/><path class="bio-blob-highlight" d="M45.7 0C45.8 1.2 45.6 2.4 44.8 3.6C44.1 4.7 42.9 5.9 41.4 6.9C39.9 7.9 37.8 8.9 35.7 9.7C33.6 10.6 31.2 11.3 28.8 12C26.5 12.7 24 13.3 21.5 13.9C18.9 14.5 16.3 15.1 13.6 15.6C10.8 16.1 7.8 16.6 4.7 16.9C1.7 17.2 -1.7 17.4 -4.8 17.3C-8 17.2 -11.3 17 -14.3 16.5C-17.3 16.1 -20.2 15.5 -22.8 14.8C-25.4 14.1 -27.8 13.3 -30 12.5C-32.2 11.6 -34.1 10.7 -35.9 9.8C-37.6 8.8 -39.2 7.8 -40.5 6.8C-41.7 5.7 -42.6 4.6 -43.2 3.4C-43.8 2.3 -43.9 1.1 -43.9 0C-43.8 -1.1 -43.4 -2.3 -42.8 -3.4C-42.2 -4.5 -41.5 -5.7 -40.5 -6.8C-39.4 -7.9 -38.3 -9 -36.8 -10C-35.2 -11 -33.4 -12.1 -31.1 -13C-28.9 -13.8 -26.2 -14.6 -23.3 -15.2C-20.5 -15.7 -17.3 -16.1 -14.1 -16.3C-11 -16.5 -7.7 -16.5 -4.6 -16.5C-1.5 -16.5 1.5 -16.3 4.5 -16.1C7.5 -15.9 10.4 -15.7 13.4 -15.4C16.3 -15.1 19.2 -14.8 22 -14.3C24.8 -13.8 27.5 -13.2 30 -12.5C32.4 -11.8 34.7 -10.9 36.6 -10C38.5 -9 40.1 -8 41.4 -6.9C42.7 -5.8 43.7 -4.7 44.5 -3.5C45.2 -2.4 45.7 -1.2 45.7 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M65.3 0C65.4 1.7 65.1 3.5 64.1 5.1C63 6.8 61.3 8.4 59.1 9.9C57 11.3 54 12.7 51 13.9C48.1 15.1 44.6 16.2 41.2 17.2C37.8 18.2 34.3 19 30.6 19.9C27 20.8 23.3 21.6 19.4 22.3C15.4 23.1 11.2 23.8 6.8 24.2C2.4 24.6 -2.4 24.8 -6.9 24.7C-11.5 24.6 -16.2 24.2 -20.5 23.6C-24.8 23 -28.9 22.1 -32.6 21.2C-36.3 20.2 -39.7 19 -42.8 17.8C-45.9 16.6 -48.8 15.3 -51.3 14C-53.8 12.6 -56.1 11.2 -57.8 9.6C-59.5 8.1 -60.9 6.5 -61.7 4.9C-62.5 3.3 -62.7 1.6 -62.7 0C-62.6 -1.6 -61.9 -3.3 -61.1 -4.9C-60.3 -6.5 -59.2 -8.1 -57.8 -9.6C-56.4 -11.2 -54.7 -12.8 -52.5 -14.3C-50.3 -15.8 -47.6 -17.3 -44.5 -18.5C-41.3 -19.7 -37.4 -20.9 -33.4 -21.7C-29.3 -22.5 -24.6 -23 -20.2 -23.3C-15.7 -23.6 -11 -23.6 -6.6 -23.6C-2.2 -23.5 2.2 -23.3 6.5 -23C10.7 -22.8 14.9 -22.4 19.1 -22C23.2 -21.6 27.4 -21.1 31.4 -20.4C35.4 -19.7 39.4 -18.9 42.8 -17.8C46.3 -16.8 49.6 -15.6 52.3 -14.2C55 -12.9 57.3 -11.4 59.1 -9.9C61 -8.3 62.5 -6.7 63.5 -5.1C64.5 -3.4 65.3 -1.7 65.3 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">G1</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">growth</text></g><g class="hot dr-node dr-n-mid" id="nd-s" tabindex="0" data-info="S phase: the DNA is copied." transform="translate(720 110)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M71.2 0C70.9 1.7 70.1 3.3 69 4.9C67.9 6.5 66.6 8.1 64.6 9.6C62.7 11.1 60.3 12.6 57.4 13.9C54.5 15.2 51.1 16.5 47.4 17.6C43.8 18.7 39.7 19.6 35.5 20.5C31.3 21.4 26.9 22.2 22.2 22.8C17.6 23.5 12.7 24 7.7 24.4C2.7 24.7 -2.7 24.9 -7.8 24.8C-12.9 24.7 -18.3 24.3 -23 23.6C-27.8 23 -32.4 22 -36.4 21C-40.4 20 -43.8 18.7 -47.1 17.4C-50.3 16.2 -53.1 14.9 -55.8 13.5C-58.5 12.2 -61.2 10.8 -63.5 9.4C-65.8 8 -68.1 6.5 -69.6 4.9C-71.2 3.4 -72.4 1.7 -72.8 0C-73.1 -1.7 -72.8 -3.4 -71.8 -5.1C-70.8 -6.7 -69.1 -8.4 -66.9 -9.9C-64.8 -11.5 -62.1 -13 -59.1 -14.3C-56.1 -15.7 -52.7 -17 -48.9 -18.1C-45.1 -19.2 -40.9 -20.3 -36.5 -21.1C-32 -21.9 -27.1 -22.5 -22.3 -22.8C-17.4 -23.2 -12.3 -23.3 -7.4 -23.4C-2.4 -23.4 2.4 -23.2 7.2 -22.9C12 -22.7 16.7 -22.4 21.5 -22C26.2 -21.6 31 -21.2 35.6 -20.6C40.3 -20 45.1 -19.2 49.3 -18.3C53.5 -17.3 57.6 -16.1 60.7 -14.7C63.8 -13.3 66.3 -11.7 68.1 -10.1C69.8 -8.5 70.7 -6.7 71.2 -5C71.8 -3.4 71.6 -1.7 71.2 0Z"/><path class="bio-blob-shade" d="M64.1 0C63.8 1.5 63.1 3 62.1 4.4C61.1 5.8 59.9 7.3 58.2 8.6C56.4 10 54.2 11.3 51.7 12.5C49.1 13.7 46 14.8 42.7 15.8C39.4 16.8 35.7 17.7 32 18.5C28.2 19.2 24.2 19.9 20 20.5C15.8 21.1 11.4 21.6 6.9 21.9C2.4 22.2 -2.4 22.4 -7 22.3C-11.6 22.2 -16.5 21.8 -20.7 21.3C-25 20.7 -29.1 19.8 -32.7 18.9C-36.3 18 -39.4 16.8 -42.3 15.7C-45.3 14.6 -47.8 13.4 -50.2 12.2C-52.7 11 -55 9.8 -57.1 8.5C-59.2 7.2 -61.3 5.9 -62.6 4.4C-64 3 -65.2 1.5 -65.5 0C-65.8 -1.5 -65.5 -3.1 -64.6 -4.6C-63.8 -6.1 -62.1 -7.6 -60.2 -8.9C-58.3 -10.3 -55.9 -11.7 -53.2 -12.9C-50.5 -14.1 -47.4 -15.3 -44 -16.3C-40.6 -17.3 -36.8 -18.2 -32.8 -19C-28.8 -19.7 -24.4 -20.2 -20 -20.6C-15.7 -20.9 -11.1 -21 -6.6 -21C-2.2 -21 2.2 -20.9 6.5 -20.6C10.8 -20.4 15 -20.2 19.3 -19.8C23.6 -19.5 27.9 -19.1 32.1 -18.5C36.3 -18 40.6 -17.3 44.4 -16.4C48.1 -15.5 51.8 -14.4 54.6 -13.2C57.4 -12 59.7 -10.5 61.3 -9.1C62.9 -7.6 63.6 -6.1 64.1 -4.5C64.6 -3 64.4 -1.5 64.1 0Z"/><path class="bio-blob-highlight" d="M49.9 0C49.6 1.2 49.1 2.3 48.3 3.4C47.6 4.5 46.6 5.7 45.2 6.7C43.9 7.8 42.2 8.8 40.2 9.7C38.2 10.7 35.8 11.5 33.2 12.3C30.7 13.1 27.8 13.7 24.9 14.4C21.9 15 18.8 15.5 15.6 16C12.3 16.4 8.9 16.8 5.4 17.1C1.9 17.3 -1.9 17.4 -5.5 17.4C-9.1 17.3 -12.8 17 -16.1 16.5C-19.5 16.1 -22.6 15.4 -25.4 14.7C-28.2 14 -30.7 13.1 -32.9 12.2C-35.2 11.3 -37.2 10.4 -39.1 9.5C-41 8.5 -42.8 7.6 -44.4 6.6C-46 5.6 -47.6 4.6 -48.7 3.5C-49.8 2.4 -50.7 1.2 -50.9 0C-51.2 -1.2 -50.9 -2.4 -50.3 -3.6C-49.6 -4.7 -48.3 -5.9 -46.9 -7C-45.4 -8 -43.5 -9.1 -41.4 -10C-39.3 -11 -36.9 -11.9 -34.2 -12.7C-31.6 -13.5 -28.6 -14.2 -25.5 -14.7C-22.4 -15.3 -19 -15.7 -15.6 -16C-12.2 -16.3 -8.6 -16.3 -5.2 -16.4C-1.7 -16.4 1.7 -16.2 5.1 -16.1C8.4 -15.9 11.7 -15.7 15 -15.4C18.3 -15.1 21.7 -14.8 25 -14.4C28.2 -14 31.6 -13.5 34.5 -12.8C37.4 -12.1 40.3 -11.2 42.5 -10.3C44.7 -9.3 46.4 -8.2 47.7 -7.1C48.9 -5.9 49.5 -4.7 49.9 -3.5C50.2 -2.4 50.1 -1.2 49.9 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M71.2 0C70.9 1.7 70.1 3.3 69 4.9C67.9 6.5 66.6 8.1 64.6 9.6C62.7 11.1 60.3 12.6 57.4 13.9C54.5 15.2 51.1 16.5 47.4 17.6C43.8 18.7 39.7 19.6 35.5 20.5C31.3 21.4 26.9 22.2 22.2 22.8C17.6 23.5 12.7 24 7.7 24.4C2.7 24.7 -2.7 24.9 -7.8 24.8C-12.9 24.7 -18.3 24.3 -23 23.6C-27.8 23 -32.4 22 -36.4 21C-40.4 20 -43.8 18.7 -47.1 17.4C-50.3 16.2 -53.1 14.9 -55.8 13.5C-58.5 12.2 -61.2 10.8 -63.5 9.4C-65.8 8 -68.1 6.5 -69.6 4.9C-71.2 3.4 -72.4 1.7 -72.8 0C-73.1 -1.7 -72.8 -3.4 -71.8 -5.1C-70.8 -6.7 -69.1 -8.4 -66.9 -9.9C-64.8 -11.5 -62.1 -13 -59.1 -14.3C-56.1 -15.7 -52.7 -17 -48.9 -18.1C-45.1 -19.2 -40.9 -20.3 -36.5 -21.1C-32 -21.9 -27.1 -22.5 -22.3 -22.8C-17.4 -23.2 -12.3 -23.3 -7.4 -23.4C-2.4 -23.4 2.4 -23.2 7.2 -22.9C12 -22.7 16.7 -22.4 21.5 -22C26.2 -21.6 31 -21.2 35.6 -20.6C40.3 -20 45.1 -19.2 49.3 -18.3C53.5 -17.3 57.6 -16.1 60.7 -14.7C63.8 -13.3 66.3 -11.7 68.1 -10.1C69.8 -8.5 70.7 -6.7 71.2 -5C71.8 -3.4 71.6 -1.7 71.2 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">S</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">DNA synthesis</text></g><g class="hot dr-node dr-n-mid" id="nd-g2" tabindex="0" data-info="G2: the cell checks the copied DNA and prepares to divide." transform="translate(840 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M65.8 0C65.3 1.6 64.5 3.2 63.5 4.8C62.6 6.3 61.7 7.9 60.2 9.5C58.8 11 57.2 12.6 54.9 14.1C52.6 15.5 49.8 17 46.5 18.2C43.2 19.4 39.1 20.5 34.9 21.4C30.8 22.2 26.1 22.8 21.4 23.3C16.8 23.7 12 24 7.2 24.1C2.4 24.3 -2.4 24.2 -7.2 24C-11.9 23.8 -16.6 23.5 -21.1 22.9C-25.5 22.3 -29.8 21.5 -33.7 20.6C-37.6 19.7 -41.1 18.6 -44.4 17.4C-47.6 16.2 -50.4 14.9 -53.1 13.6C-55.7 12.3 -58.2 10.9 -60.5 9.5C-62.7 8.1 -65 6.6 -66.6 5C-68.3 3.4 -69.7 1.7 -70.2 0C-70.7 -1.7 -70.5 -3.5 -69.5 -5.2C-68.5 -6.9 -66.4 -8.6 -64 -10.1C-61.6 -11.5 -58.4 -12.9 -55.1 -14.1C-51.9 -15.4 -48.2 -16.4 -44.5 -17.5C-40.8 -18.5 -37 -19.4 -33.1 -20.2C-29.1 -21 -24.9 -21.8 -20.6 -22.4C-16.3 -22.9 -11.6 -23.4 -7 -23.6C-2.4 -23.8 2.4 -23.9 7.1 -23.7C11.7 -23.6 16.4 -23.2 21 -22.8C25.5 -22.3 30 -21.7 34.3 -21C38.6 -20.2 42.9 -19.3 46.6 -18.3C50.4 -17.2 54.1 -16 57 -14.6C59.8 -13.2 62.2 -11.6 63.8 -10C65.3 -8.4 66 -6.7 66.4 -5C66.7 -3.3 66.3 -1.6 65.8 0Z"/><path class="bio-blob-shade" d="M59.2 0C58.8 1.5 58 2.9 57.2 4.3C56.4 5.7 55.5 7.1 54.2 8.5C52.9 9.9 51.5 11.4 49.4 12.7C47.4 14 44.8 15.3 41.8 16.4C38.8 17.5 35.2 18.5 31.4 19.2C27.7 20 23.5 20.5 19.3 21C15.1 21.4 10.8 21.6 6.5 21.7C2.2 21.8 -2.2 21.8 -6.4 21.6C-10.7 21.4 -15 21.1 -19 20.6C-23 20.1 -26.9 19.4 -30.4 18.6C-33.8 17.7 -37 16.7 -39.9 15.7C-42.8 14.6 -45.3 13.4 -47.8 12.2C-50.2 11.1 -52.4 9.8 -54.4 8.6C-56.5 7.3 -58.5 5.9 -60 4.5C-61.4 3.1 -62.8 1.5 -63.2 0C-63.6 -1.5 -63.5 -3.2 -62.5 -4.7C-61.6 -6.2 -59.8 -7.7 -57.6 -9.1C-55.5 -10.4 -52.5 -11.6 -49.6 -12.7C-46.7 -13.8 -43.4 -14.8 -40.1 -15.7C-36.8 -16.6 -33.3 -17.5 -29.8 -18.2C-26.2 -18.9 -22.4 -19.6 -18.5 -20.1C-14.6 -20.6 -10.5 -21 -6.3 -21.2C-2.2 -21.4 2.2 -21.5 6.4 -21.3C10.6 -21.2 14.8 -20.9 18.9 -20.5C22.9 -20.1 27 -19.5 30.8 -18.9C34.7 -18.2 38.6 -17.4 42 -16.5C45.4 -15.5 48.7 -14.4 51.3 -13.1C53.8 -11.9 56 -10.5 57.4 -9C58.8 -7.6 59.4 -6 59.7 -4.5C60.1 -3 59.6 -1.5 59.2 0Z"/><path class="bio-blob-highlight" d="M46.1 0C45.7 1.1 45.1 2.2 44.5 3.3C43.8 4.4 43.2 5.5 42.2 6.6C41.1 7.7 40 8.8 38.4 9.9C36.8 10.9 34.9 11.9 32.5 12.8C30.2 13.6 27.4 14.4 24.5 15C21.5 15.5 18.2 16 15 16.3C11.8 16.6 8.4 16.8 5 16.9C1.7 17 -1.7 17 -5 16.8C-8.3 16.7 -11.7 16.4 -14.8 16C-17.9 15.6 -20.9 15.1 -23.6 14.4C-26.3 13.8 -28.8 13 -31.1 12.2C-33.3 11.4 -35.3 10.4 -37.1 9.5C-39 8.6 -40.8 7.7 -42.3 6.7C-43.9 5.6 -45.5 4.6 -46.6 3.5C-47.8 2.4 -48.8 1.2 -49.1 0C-49.5 -1.2 -49.4 -2.5 -48.6 -3.6C-47.9 -4.8 -46.5 -6 -44.8 -7C-43.1 -8.1 -40.9 -9 -38.6 -9.9C-36.3 -10.8 -33.7 -11.5 -31.2 -12.2C-28.6 -12.9 -25.9 -13.6 -23.1 -14.1C-20.4 -14.7 -17.5 -15.3 -14.4 -15.7C-11.4 -16.1 -8.1 -16.4 -4.9 -16.5C-1.7 -16.7 1.7 -16.7 4.9 -16.6C8.2 -16.5 11.5 -16.3 14.7 -15.9C17.8 -15.6 21 -15.2 24 -14.7C27 -14.1 30 -13.5 32.6 -12.8C35.3 -12.1 37.9 -11.2 39.9 -10.2C41.9 -9.3 43.5 -8.1 44.6 -7C45.7 -5.9 46.2 -4.7 46.5 -3.5C46.7 -2.3 46.4 -1.1 46.1 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M65.8 0C65.3 1.6 64.5 3.2 63.5 4.8C62.6 6.3 61.7 7.9 60.2 9.5C58.8 11 57.2 12.6 54.9 14.1C52.6 15.5 49.8 17 46.5 18.2C43.2 19.4 39.1 20.5 34.9 21.4C30.8 22.2 26.1 22.8 21.4 23.3C16.8 23.7 12 24 7.2 24.1C2.4 24.3 -2.4 24.2 -7.2 24C-11.9 23.8 -16.6 23.5 -21.1 22.9C-25.5 22.3 -29.8 21.5 -33.7 20.6C-37.6 19.7 -41.1 18.6 -44.4 17.4C-47.6 16.2 -50.4 14.9 -53.1 13.6C-55.7 12.3 -58.2 10.9 -60.5 9.5C-62.7 8.1 -65 6.6 -66.6 5C-68.3 3.4 -69.7 1.7 -70.2 0C-70.7 -1.7 -70.5 -3.5 -69.5 -5.2C-68.5 -6.9 -66.4 -8.6 -64 -10.1C-61.6 -11.5 -58.4 -12.9 -55.1 -14.1C-51.9 -15.4 -48.2 -16.4 -44.5 -17.5C-40.8 -18.5 -37 -19.4 -33.1 -20.2C-29.1 -21 -24.9 -21.8 -20.6 -22.4C-16.3 -22.9 -11.6 -23.4 -7 -23.6C-2.4 -23.8 2.4 -23.9 7.1 -23.7C11.7 -23.6 16.4 -23.2 21 -22.8C25.5 -22.3 30 -21.7 34.3 -21C38.6 -20.2 42.9 -19.3 46.6 -18.3C50.4 -17.2 54.1 -16 57 -14.6C59.8 -13.2 62.2 -11.6 63.8 -10C65.3 -8.4 66 -6.7 66.4 -5C66.7 -3.3 66.3 -1.6 65.8 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">G2</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">check and prepare</text></g><g class="hot dr-node dr-n-mid" id="nd-m" tabindex="0" data-info="M phase: the chromosomes are separated by the microtubule spindle." transform="translate(560 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M62.4 0C62.3 1.6 61.6 3.2 60.8 4.8C60 6.4 59 8 57.6 9.6C56.2 11.2 54.6 12.8 52.4 14.3C50.3 15.8 47.7 17.3 44.5 18.5C41.3 19.8 37.4 20.9 33.4 21.7C29.3 22.5 24.7 23 20.2 23.3C15.8 23.7 11.1 23.7 6.6 23.6C2.2 23.6 -2.2 23.4 -6.5 23.1C-10.8 22.9 -15 22.5 -19.1 22.1C-23.3 21.6 -27.5 21.1 -31.4 20.4C-35.3 19.7 -39.2 18.8 -42.7 17.8C-46.1 16.7 -49.3 15.5 -52 14.2C-54.7 12.8 -56.9 11.3 -58.9 9.8C-60.8 8.3 -62.3 6.7 -63.5 5.1C-64.6 3.4 -65.4 1.7 -65.6 0C-65.7 -1.7 -65.4 -3.5 -64.4 -5.1C-63.4 -6.8 -61.6 -8.4 -59.4 -9.9C-57.2 -11.4 -54.2 -12.7 -51.1 -13.9C-48.1 -15.1 -44.6 -16.2 -41.2 -17.1C-37.8 -18.1 -34.3 -19 -30.6 -19.9C-27 -20.7 -23.3 -21.6 -19.3 -22.3C-15.4 -23 -11.1 -23.7 -6.8 -24.1C-2.4 -24.5 2.4 -24.7 6.9 -24.6C11.4 -24.5 16.1 -24.1 20.4 -23.6C24.7 -23 28.8 -22.1 32.6 -21.2C36.4 -20.2 39.8 -19.1 43 -17.9C46.2 -16.7 49.1 -15.4 51.6 -14.1C54.1 -12.7 56.4 -11.2 58.1 -9.7C59.8 -8.2 61 -6.5 61.7 -4.9C62.5 -3.3 62.6 -1.6 62.4 0Z"/><path class="bio-blob-shade" d="M56.2 0C56 1.5 55.5 2.9 54.7 4.4C54 5.8 53.1 7.2 51.8 8.7C50.6 10.1 49.2 11.5 47.2 12.9C45.2 14.2 42.9 15.6 40 16.7C37.2 17.8 33.7 18.8 30 19.5C26.4 20.2 22.2 20.7 18.2 21C14.2 21.3 10 21.3 6 21.3C2 21.2 -2 21 -5.8 20.8C-9.7 20.6 -13.5 20.3 -17.2 19.9C-21 19.5 -24.7 19 -28.3 18.4C-31.8 17.7 -35.3 16.9 -38.4 16C-41.5 15.1 -44.3 13.9 -46.8 12.7C-49.2 11.5 -51.2 10.2 -53 8.8C-54.7 7.5 -56.1 6 -57.1 4.6C-58.1 3.1 -58.9 1.5 -59 0C-59.2 -1.5 -58.9 -3.1 -58 -4.6C-57 -6.1 -55.4 -7.6 -53.4 -8.9C-51.4 -10.2 -48.7 -11.4 -46 -12.5C-43.3 -13.6 -40.1 -14.5 -37.1 -15.4C-34 -16.3 -30.8 -17.1 -27.6 -17.9C-24.3 -18.7 -21 -19.4 -17.4 -20.1C-13.8 -20.7 -10 -21.3 -6.1 -21.7C-2.1 -22 2.1 -22.2 6.2 -22.2C10.3 -22.1 14.5 -21.7 18.4 -21.2C22.2 -20.7 25.9 -19.9 29.3 -19.1C32.7 -18.2 35.8 -17.2 38.7 -16.1C41.5 -15 44.2 -13.9 46.4 -12.7C48.7 -11.4 50.7 -10.1 52.3 -8.7C53.8 -7.4 54.9 -5.9 55.6 -4.4C56.2 -3 56.3 -1.5 56.2 0Z"/><path class="bio-blob-highlight" d="M43.7 0C43.6 1.1 43.1 2.3 42.6 3.4C42 4.5 41.3 5.6 40.3 6.7C39.3 7.8 38.2 9 36.7 10C35.2 11 33.4 12.1 31.1 13C28.9 13.8 26.2 14.6 23.4 15.2C20.5 15.7 17.3 16.1 14.2 16.3C11 16.6 7.8 16.6 4.6 16.5C1.5 16.5 -1.5 16.4 -4.5 16.2C-7.5 16 -10.5 15.8 -13.4 15.5C-16.3 15.1 -19.2 14.8 -22 14.3C-24.7 13.8 -27.5 13.2 -29.9 12.4C-32.3 11.7 -34.5 10.8 -36.4 9.9C-38.3 9 -39.9 7.9 -41.2 6.9C-42.5 5.8 -43.6 4.7 -44.4 3.5C-45.2 2.4 -45.8 1.2 -45.9 0C-46 -1.2 -45.8 -2.4 -45.1 -3.6C-44.4 -4.7 -43.1 -5.9 -41.6 -6.9C-40 -8 -37.9 -8.9 -35.8 -9.7C-33.7 -10.6 -31.2 -11.3 -28.8 -12C-26.4 -12.7 -24 -13.3 -21.4 -13.9C-18.9 -14.5 -16.3 -15.1 -13.5 -15.6C-10.7 -16.1 -7.8 -16.6 -4.7 -16.9C-1.7 -17.1 1.7 -17.3 4.8 -17.2C8 -17.2 11.3 -16.9 14.3 -16.5C17.3 -16.1 20.2 -15.5 22.8 -14.8C25.4 -14.2 27.9 -13.4 30.1 -12.5C32.3 -11.7 34.4 -10.8 36.1 -9.8C37.9 -8.9 39.5 -7.9 40.7 -6.8C41.8 -5.7 42.7 -4.6 43.2 -3.4C43.7 -2.3 43.8 -1.1 43.7 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M62.4 0C62.3 1.6 61.6 3.2 60.8 4.8C60 6.4 59 8 57.6 9.6C56.2 11.2 54.6 12.8 52.4 14.3C50.3 15.8 47.7 17.3 44.5 18.5C41.3 19.8 37.4 20.9 33.4 21.7C29.3 22.5 24.7 23 20.2 23.3C15.8 23.7 11.1 23.7 6.6 23.6C2.2 23.6 -2.2 23.4 -6.5 23.1C-10.8 22.9 -15 22.5 -19.1 22.1C-23.3 21.6 -27.5 21.1 -31.4 20.4C-35.3 19.7 -39.2 18.8 -42.7 17.8C-46.1 16.7 -49.3 15.5 -52 14.2C-54.7 12.8 -56.9 11.3 -58.9 9.8C-60.8 8.3 -62.3 6.7 -63.5 5.1C-64.6 3.4 -65.4 1.7 -65.6 0C-65.7 -1.7 -65.4 -3.5 -64.4 -5.1C-63.4 -6.8 -61.6 -8.4 -59.4 -9.9C-57.2 -11.4 -54.2 -12.7 -51.1 -13.9C-48.1 -15.1 -44.6 -16.2 -41.2 -17.1C-37.8 -18.1 -34.3 -19 -30.6 -19.9C-27 -20.7 -23.3 -21.6 -19.3 -22.3C-15.4 -23 -11.1 -23.7 -6.8 -24.1C-2.4 -24.5 2.4 -24.7 6.9 -24.6C11.4 -24.5 16.1 -24.1 20.4 -23.6C24.7 -23 28.8 -22.1 32.6 -21.2C36.4 -20.2 39.8 -19.1 43 -17.9C46.2 -16.7 49.1 -15.4 51.6 -14.1C54.1 -12.7 56.4 -11.2 58.1 -9.7C59.8 -8.2 61 -6.5 61.7 -4.9C62.5 -3.3 62.6 -1.6 62.4 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">M</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">mitosis</text></g><g class="hot dr-node dr-n-out" id="nd-div" tabindex="0" data-info="Cells that complete the cycle divide. Cancer drugs lower the fraction that do." transform="translate(240 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M96.6 0C97 1.7 96.5 3.4 95.2 5.1C93.9 6.7 91.6 8.4 88.9 9.9C86.2 11.4 82.8 12.9 78.9 14.3C75 15.7 70.5 17.1 65.5 18.2C60.5 19.3 54.9 20.4 48.9 21.2C43 22 36.3 22.6 29.8 22.9C23.3 23.3 16.4 23.4 9.8 23.4C3.3 23.4 -3.2 23.1 -9.6 22.9C-16 22.7 -22.2 22.3 -28.5 22C-34.8 21.6 -41.3 21.2 -47.4 20.5C-53.6 19.9 -60 19.2 -65.6 18.2C-71.1 17.2 -76.5 16 -80.7 14.7C-84.9 13.3 -88.2 11.7 -90.6 10.1C-93 8.5 -94.3 6.7 -95.1 5.1C-95.9 3.4 -95.8 1.7 -95.4 0C-95 -1.7 -94.1 -3.3 -92.6 -4.9C-91.1 -6.5 -89.2 -8.1 -86.5 -9.6C-83.8 -11.1 -80.4 -12.6 -76.5 -13.9C-72.5 -15.2 -67.8 -16.4 -62.9 -17.5C-58 -18.6 -52.6 -19.5 -47.1 -20.4C-41.5 -21.3 -35.7 -22.1 -29.5 -22.7C-23.4 -23.4 -16.9 -24 -10.2 -24.4C-3.6 -24.7 3.6 -25 10.4 -24.8C17.3 -24.7 24.4 -24.3 30.8 -23.7C37.2 -23.1 43.2 -22.1 48.6 -21C53.9 -20 58.5 -18.7 62.9 -17.5C67.2 -16.2 71 -14.9 74.6 -13.6C78.3 -12.2 81.7 -10.9 84.8 -9.4C87.8 -8 90.7 -6.5 92.7 -4.9C94.7 -3.4 96.2 -1.7 96.6 0Z"/><path class="bio-blob-shade" d="M86.9 0C87.3 1.5 86.8 3.1 85.7 4.6C84.5 6 82.5 7.5 80 8.9C77.6 10.3 74.5 11.6 71 12.9C67.5 14.1 63.5 15.3 59 16.4C54.5 17.4 49.4 18.4 44 19.1C38.7 19.8 32.7 20.3 26.8 20.6C20.9 21 14.8 21 8.8 21C2.9 21 -2.9 20.8 -8.7 20.6C-14.4 20.4 -20 20.1 -25.7 19.8C-31.4 19.4 -37.1 19 -42.7 18.5C-48.2 17.9 -54 17.3 -59 16.4C-64 15.5 -68.9 14.4 -72.6 13.2C-76.4 12 -79.4 10.5 -81.6 9.1C-83.7 7.6 -84.9 6.1 -85.6 4.5C-86.3 3 -86.3 1.5 -85.9 0C-85.5 -1.5 -84.7 -3 -83.4 -4.4C-82 -5.9 -80.3 -7.3 -77.8 -8.7C-75.4 -10 -72.3 -11.3 -68.8 -12.5C-65.3 -13.7 -61.1 -14.8 -56.6 -15.7C-52.2 -16.7 -47.4 -17.6 -42.4 -18.3C-37.4 -19.1 -32.1 -19.9 -26.6 -20.5C-21.1 -21.1 -15.2 -21.6 -9.2 -21.9C-3.2 -22.3 3.2 -22.5 9.4 -22.4C15.6 -22.3 22 -21.9 27.7 -21.3C33.4 -20.8 38.9 -19.9 43.7 -18.9C48.5 -18 52.7 -16.8 56.6 -15.7C60.5 -14.6 63.9 -13.4 67.2 -12.2C70.4 -11 73.6 -9.8 76.3 -8.5C79 -7.2 81.7 -5.8 83.4 -4.4C85.2 -3 86.5 -1.5 86.9 0Z"/><path class="bio-blob-highlight" d="M67.6 0C67.9 1.2 67.5 2.4 66.6 3.5C65.7 4.7 64.2 5.8 62.2 6.9C60.3 8 57.9 9.1 55.2 10C52.5 11 49.4 11.9 45.9 12.7C42.4 13.5 38.4 14.3 34.2 14.8C30.1 15.4 25.4 15.8 20.9 16C16.3 16.3 11.5 16.4 6.9 16.4C2.3 16.3 -2.3 16.2 -6.7 16C-11.2 15.9 -15.6 15.6 -20 15.4C-24.4 15.1 -28.9 14.8 -33.2 14.4C-37.5 13.9 -42 13.4 -45.9 12.7C-49.8 12.1 -53.6 11.2 -56.5 10.3C-59.4 9.3 -61.8 8.2 -63.5 7.1C-65.1 5.9 -66 4.7 -66.6 3.5C-67.1 2.4 -67.1 1.2 -66.8 0C-66.5 -1.2 -65.9 -2.3 -64.8 -3.4C-63.8 -4.6 -62.4 -5.7 -60.5 -6.7C-58.6 -7.8 -56.3 -8.8 -53.5 -9.7C-50.8 -10.6 -47.5 -11.5 -44.1 -12.2C-40.6 -13 -36.9 -13.7 -33 -14.3C-29.1 -14.9 -25 -15.4 -20.7 -15.9C-16.4 -16.4 -11.8 -16.8 -7.2 -17.1C-2.5 -17.3 2.5 -17.5 7.3 -17.4C12.1 -17.3 17.1 -17 21.6 -16.6C26 -16.1 30.3 -15.5 34 -14.7C37.7 -14 41 -13.1 44 -12.2C47.1 -11.4 49.7 -10.4 52.2 -9.5C54.8 -8.6 57.2 -7.6 59.3 -6.6C61.4 -5.6 63.5 -4.5 64.9 -3.4C66.3 -2.3 67.3 -1.2 67.6 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M96.6 0C97 1.7 96.5 3.4 95.2 5.1C93.9 6.7 91.6 8.4 88.9 9.9C86.2 11.4 82.8 12.9 78.9 14.3C75 15.7 70.5 17.1 65.5 18.2C60.5 19.3 54.9 20.4 48.9 21.2C43 22 36.3 22.6 29.8 22.9C23.3 23.3 16.4 23.4 9.8 23.4C3.3 23.4 -3.2 23.1 -9.6 22.9C-16 22.7 -22.2 22.3 -28.5 22C-34.8 21.6 -41.3 21.2 -47.4 20.5C-53.6 19.9 -60 19.2 -65.6 18.2C-71.1 17.2 -76.5 16 -80.7 14.7C-84.9 13.3 -88.2 11.7 -90.6 10.1C-93 8.5 -94.3 6.7 -95.1 5.1C-95.9 3.4 -95.8 1.7 -95.4 0C-95 -1.7 -94.1 -3.3 -92.6 -4.9C-91.1 -6.5 -89.2 -8.1 -86.5 -9.6C-83.8 -11.1 -80.4 -12.6 -76.5 -13.9C-72.5 -15.2 -67.8 -16.4 -62.9 -17.5C-58 -18.6 -52.6 -19.5 -47.1 -20.4C-41.5 -21.3 -35.7 -22.1 -29.5 -22.7C-23.4 -23.4 -16.9 -24 -10.2 -24.4C-3.6 -24.7 3.6 -25 10.4 -24.8C17.3 -24.7 24.4 -24.3 30.8 -23.7C37.2 -23.1 43.2 -22.1 48.6 -21C53.9 -20 58.5 -18.7 62.9 -17.5C67.2 -16.2 71 -14.9 74.6 -13.6C78.3 -12.2 81.7 -10.9 84.8 -9.4C87.8 -8 90.7 -6.5 92.7 -4.9C94.7 -3.4 96.2 -1.7 96.6 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Cell division</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">two daughter cells</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">anticancer drug (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or level is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Growth signal</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="active"><span class="dr-ticks"><i>low</i><i>active</i><i>high</i></span></label>
+  <label class="dr-range"><span>Drug class (generic)</span><select id="drug"><option value="0">none</option><option value="1">targeted kinase inhibitor type</option><option value="2">antimetabolite (methotrexate or fluorouracil type)</option><option value="3">alkylating agent or platinum type</option><option value="4">topoisomerase inhibitor type (etoposide or irinotecan)</option><option value="5">bleomycin type</option><option value="6">microtubule drug (vincristine or paclitaxel type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Phases and drug classes.</strong> Antimetabolites act in S phase, topoisomerase inhibitors in S and G2, bleomycin in G2, vinca alkaloids and taxanes in M, alkylating and platinum agents in any phase, and targeted kinase inhibitors on the growth signal. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> Checkpoint biology (p53, CDK and cyclins), apoptosis, hormonal, immunological and antibody-based treatment, differences between cycle-specific and cycle-nonspecific action in detail, resistance, the effect on normal fast-dividing tissue (marrow, gut, hair) and the main toxicity of each class are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Growth signal","a":[0.4,0.7,0.95],"names":["low","active","high"],"ticks":["low","active","high"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"targeted kinase inhibitor type","blocks":{"e_g1":0.7}},{"label":"antimetabolite (methotrexate or fluorouracil type)","blocks":{"e_s":0.8}},{"label":"alkylating agent or platinum type","blocks":{"e_g1":0.4,"e_s":0.5,"e_g2":0.3}},{"label":"topoisomerase inhibitor type (etoposide or irinotecan)","blocks":{"e_s":0.45,"e_g2":0.5}},{"label":"bleomycin type","blocks":{"e_g2":0.8}},{"label":"microtubule drug (vincristine or paclitaxel type)","blocks":{"e_m":0.85}}],"nodes":[{"id":"sig","kind":"source"},{"id":"g1","kind":"mid"},{"id":"s","kind":"mid"},{"id":"g2","kind":"mid"},{"id":"m","kind":"mid"},{"id":"div","kind":"out"}],"edges":[{"id":"e_g1","from":"sig","to":"g1"},{"id":"e_s","from":"g1","to":"s"},{"id":"e_g2","from":"s","to":"g2"},{"id":"e_m","from":"g2","to":"m"},{"id":"e_d","from":"m","to":"div"}],"outputs":[{"node":"div","words":["few","some","many"],"cuts":[0.2,0.5]}],"readout":"dividing cells {0}","status":"Growth signal: {level} · {drug} ·","drugNames":["no anticancer drug","kinase inhibitor","antimetabolite","alkylating or platinum drug","topoisomerase inhibitor","bleomycin","microtubule drug"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_g1","p0":[218,110],"p1":[367,110]},{"id":"e_s","p0":[508,110],"p1":[639,110]},{"id":"e_g2","p0":[736.9687266011406,136.86715045180586],"p1":[820.3992810504383,268.96552832986055]},{"id":"e_m","p0":[768,300],"p1":[633,300]},{"id":"e_d","p0":[492,300],"p1":[345,300]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

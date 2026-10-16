@@ -37,7 +37,13 @@
   {
    "tx": "**Predictive values** answer a different question: given a result, how likely is the disease? The **positive predictive value** (PPV) is the chance of disease after a positive test, and the **negative predictive value** (NPV) is the chance of health after a negative test. Unlike sensitivity and specificity, predictive values depend strongly on **prevalence**. As prevalence falls, PPV drops even when specificity stays high, so a screening test in a low-prevalence group produces many false positives.",
    "say": "Predictive values answer a different question: given a result, how likely is the disease? The positive predictive value is the chance of disease after a positive test, and the negative predictive value is the chance of health after a negative test. Unlike sensitivity and specificity, predictive values depend strongly on prevalence. As prevalence falls, the positive predictive value drops even when specificity stays high, so a screening test in a low-prevalence group produces many false positives.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-diagnostic-tests-fig1.webp",
+    "alt": "A graph showing how Positive Predictive Value (PPV) and Negative Predictive Value (NPV) vary with changing disease prevalence.",
+    "caption": "Predictive values depend on disease prevalence, unlike sensitivity and specificity",
+    "ar": 1.8349
+   }
   },
   {
    "tx": "The **likelihood ratio** combines sensitivity and specificity into a single figure that does not depend on how common the disease is in the population tested. The **positive likelihood ratio** is sensitivity divided by the false positive fraction, while the **negative likelihood ratio** is the false negative fraction divided by specificity. A large positive value strengthens the case for disease, whereas a value close to zero strengthens the case against it. Clinicians multiply the **pretest odds** by the appropriate ratio to reach a revised, **posttest probability**.",
