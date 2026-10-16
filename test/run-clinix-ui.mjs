@@ -485,10 +485,24 @@ try {
   await sleep(600);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true, "station opens with a running clock");
 
+  // Layout: labels start at the left (the icon span used to grow too and centre them), steps are
+  // grouped by skill, and the status bar counts what is ticked.
+  ok((await ev("(function(){ var b = document.querySelector('#clinixRoot .cx-check'), t = b.querySelector('.cx-check-t'); return t.getBoundingClientRect().left - b.getBoundingClientRect().left; })()")) < 60,
+    "OSCE checklist labels are left-aligned, next to the box");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-cgroup-h').length")) >= 4, "the station checklist is grouped by skill");
+  ok((await ev("(function(){ var r = document.querySelector('#clinixRoot .cx-station').getBoundingClientRect(), c = document.querySelector('#clinixRoot .cx-check').getBoundingClientRect(); return c.left >= 12 && innerWidth - c.right >= 12; })()")) === true,
+    "the checklist sits on the 16px gutter, not edge to edge");
+  const clock0 = await ev("document.querySelector('#clinixRoot .cx-timer-t').textContent");
+
   // Scroll down, then wait out MORE than one timer tick.
   await ev("(function(){ var h = document.getElementById('clinixScroll'); h.scrollTop = 400; return h.scrollTop; })()");
   const before = await ev("document.getElementById('clinixScroll').scrollTop");
   await sleep(2600);
+  const clock1 = await ev("document.querySelector('#clinixRoot .cx-timer-t').textContent");
+  ok(/^\d+:\d\d$/.test(clock1) && clock1 !== clock0, `FROZEN-CLOCK REGRESSION: the visible clock counts down (${clock0} -> ${clock1})`);
+  ok((await ev("document.querySelector('#clinixRoot .cx-timer .material-symbols-rounded').textContent")) === "timer", "and the timer icon keeps its glyph");
+  ok((await ev("(function(){ var b = document.querySelector('#clinixRoot .cx-stbar').getBoundingClientRect(); return b.top >= 0 && b.bottom <= 200; })()")) === true,
+    "the clock and step count stay pinned at the top while scrolled");
   const after = await ev("document.getElementById('clinixScroll').scrollTop");
   ok(Number(before) > 100, `scrolled down first (${before})`);
   ok(Number(after) === Number(before),
@@ -502,6 +516,53 @@ try {
   const afterTick = await ev("document.getElementById('clinixScroll').scrollTop");
   ok(Number(afterTick) === Number(before),
     `ticking a checkbox keeps your place (was ${before}, now ${afterTick})`);
+  ok(/^1 of \d+ steps$/.test(await ev("document.querySelector('#clinixRoot .cx-stbar-n').textContent")), "the status bar counts the ticked step");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-check[aria-checked=\"true\"]').length")) === 1, "a ticked step reads as checked to a screen reader");
+
+  // Result: critical misses listed once, inside the critical block; the rest grouped by skill.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-finish\"]').click()");
+  await sleep(500);
+  const crit = await ev("[...document.querySelectorAll('#clinixRoot .cx-critlist li')].map(x => x.textContent)");
+  const other = await ev("[...document.querySelectorAll('#clinixRoot .cx-missgroup li')].map(x => x.textContent)");
+  ok(Array.isArray(crit) && crit.length > 0, "the result lists the missed critical steps");
+  ok(Array.isArray(other) && other.length > 0 && !crit.some(t => other.includes(t)), "and does not repeat them under the other missed steps");
+  ok(/Finished in \d+:\d\d of \d+:\d\d/.test(await ev("document.querySelector('#clinixRoot .cx-result-time').textContent")), "the result says how long the station took");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-phaserow').length")) >= 4, "the result breaks the score down by skill");
+
+  /* ── 8a1. PREPNUCLEUS LOOK (smd_clinix_pn, default on) ────────────────── */
+  console.log("\n--- PrepNucleus look ---");
+  await attach(BASE + "?clinix=1");
+  await openCx(); await sleep(500);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === true, "CliniX opens in the PrepNucleus look by default");
+  ok((await ev("getComputedStyle(document.getElementById('clinixRoot')).getPropertyValue('--cx-bg').trim().toLowerCase()")) === "#eef2f5", "on the CliniX Mist background, not the PrepNucleus paper");
+  ok((await ev("getComputedStyle(document.querySelector('#clinixRoot .cx-sec-h')).textTransform")) === "none", "section titles are sentence case, not small capitals");
+  ok(/^\d+ systems\d+ topicsOSCE and viva$/.test(await ev("(document.querySelector('#clinixRoot .cx-hero-facts') || {}).textContent || ''")), "the home banner states systems and topics counted from the catalog");
+  ok((await ev("!document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "the bar starts transparent on the wash");
+  await ev("(document.getElementById('clinixScroll').scrollTop = 600, true)"); await sleep(250);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-scrolled')")) === true, "and turns solid once the screen scrolls");
+  ok((await ev("!/[A-Z]{4,}/.test(document.querySelector('#clinixRoot .cx-resume-t') ? document.querySelector('#clinixRoot .cx-resume-t').textContent.replace(/COPD/g, '') : '')")) === true, "Up next shows the topic's title, not its id in capitals");
+  await attach(BASE + "?clinix=1&clinixpn=0");
+  await openCx(); await sleep(400);
+  ok((await ev("document.getElementById('clinixRoot').classList.contains('cx-pn')")) === false, "?clinixpn=0 restores the teal look");
+
+  /* ── 8a2. OSCE PICKER: the home row opens topics, not a toast ──────────── */
+  console.log("\n--- osce picker ---");
+  await attach(BASE + "?clinix=1");
+  await openCx(); await sleep(500);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-practice-osce\"]').click()");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-practice-open\"]').length")) >= 20, "the OSCE row opens a topic picker covering every pathway");
+  ok((await ev("(document.querySelector('#clinixRoot .cx-head-title')||{}).textContent")) === "OSCE stations", "titled OSCE stations");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-row--locked').length")) > 0, "locked systems stay listed with a lock, not hidden");
+  await ev("[...document.querySelectorAll('#clinixRoot [data-act=\"cx-practice-open\"]')].find(b => b.textContent.includes('Pneumonia')).click()");
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.getElementById('cxAssess')")) break; await sleep(250); }
+  await sleep(200);
+  ok((await ev("(function(){ var a = document.getElementById('cxAssess').getBoundingClientRect(); return a.top < innerHeight && a.bottom > 0; })()")) === true,
+    "picking a topic lands on its stations, not the top of the pathway");
+  await ev("document.querySelector('#clinixRoot .cx-back').click()"); await sleep(200);
+  await ev("document.querySelector('#clinixRoot .cx-back').click()"); await sleep(200);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-practice-viva\"]').click()"); await sleep(300);
+  ok((await ev("(document.querySelector('#clinixRoot .cx-head-title')||{}).textContent")) === "Viva voce", "the viva row opens the same picker, titled Viva voce");
 
   /* ── 8b. CASE MODE: the simulated patient ──────────────────────────────── */
   console.log("\n--- clinical case ---");
@@ -773,6 +834,56 @@ try {
   await sleep(400);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
     "with Pro a formerly locked system opens normally");
+
+  // An early-access plan (Ultimate, Clinician Pro) is Pro in CliniX too, as it is in ThoreX and SknX,
+  // even when the billing verdict does not mark it pro. It used to lock the systems and ask to sign in.
+  await lockPage(false, null);
+  await ev("(SMD_PRO.hasEarlyAccess = () => true, window.dispatchEvent(new CustomEvent('smd:tier', { detail: { tier: 'ultimate' } })), true)");
+  for (let i = 0; i < 20; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-sys-pro').length === 0")) break; await sleep(150); }
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-sys-pro').length")) === 0, "an Ultimate / Clinician Pro plan unlocks every system, live, when the tier arrives");
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  await sleep(400);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
+    "and a formerly locked system opens with no notice");
+
+  // LOGIN-TWICE REGRESSION: just after launch the account is signed in but Firebase has not restored
+  // its user yet. The Pro check must wait for the user instead of asking the server as a guest.
+  await lockPage(false, null);
+  await ev(`(function () {
+    window.__proCalls = [];
+    window.SMD_ACCOUNT = { profile: function () { return { signedIn: true, isGuest: false }; } };
+    window.SMD_AUTH = { currentUser: null };
+    SMD_PRO.isPro = function () {
+      var hasUser = !!window.SMD_AUTH.currentUser;
+      window.__proCalls.push(hasUser);
+      if (hasUser) SMD_PRO.isProSync = function () { return true; };
+      return Promise.resolve(hasUser);
+    };
+    return true;
+  })()`);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  await sleep(700);
+  ok((await ev("window.__proCalls.length")) === 0 && (await ev("!document.getElementById('smdProNotice')")) === true,
+    "while Firebase restores the session, CliniX waits instead of checking Pro as a guest");
+  await ev("(window.SMD_AUTH.currentUser = { uid: 'restored' }, true)");
+  for (let i = 0; i < 20; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-modcard')")) break; await sleep(150); }
+  ok(JSON.stringify(await ev("window.__proCalls")) === "[true]", "the Pro check runs once, after the user is restored");
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard') && !document.getElementById('smdProNotice')")) === true,
+    "and the Pro doctor gets the system, with no sign-in prompt");
+
+  // A signed-in account the server could not identify is not asked to sign in again.
+  await lockPage(false, null);
+  await ev(`(function () {
+    window.SMD_ACCOUNT = { profile: function () { return { signedIn: true, isGuest: false }; } };
+    window.SMD_AUTH = { currentUser: { uid: 'x' } };
+    SMD_PRO.isPro = function () { return Promise.resolve(false); };
+    SMD_PRO.proState = function () { return { signedIn: false, pro: false }; };
+    return true;
+  })()`);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Cardiovascular')).click()");
+  ok(await noticeUp(), "a refused check still explains itself");
+  ok(!/sign in/i.test((await ev("(document.querySelector('#smdProNotice .pn-go') || {}).textContent || ''")) || ""),
+    "but never asks an already signed-in account to sign in again");
 
   // The O&G OSCE and viva stations (Tokos deep link id tokos-osce).
   console.log("\n--- O&G OSCE stations ---");

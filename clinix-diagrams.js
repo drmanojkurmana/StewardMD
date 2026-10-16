@@ -162,9 +162,9 @@
       : "cx-dia--float";
 
     var measurementText = isFloat ? "Symmetric Normal Excursion: ≥ 5.0 cm (2.5 cm lateral per side)"
-      : isUnilateral ? "Unilateral Lag: Right lags (0.5 cm) vs Left (3.5 cm) — Effusion / Collapse"
-      : isBilateral ? "Bilateral Limitation: Symmetrical < 3.0 cm excursion — Emphysema / Ankylosing Spondylitis"
-      : "Technical Error: Thumbs anchored to skin travel with ribs (0 cm gap) — Asymmetry masked!";
+      : isUnilateral ? "Unilateral Lag: Right lags (0.5 cm) vs Left (3.5 cm). Effusion / Collapse"
+      : isBilateral ? "Bilateral Limitation: Symmetrical < 3.0 cm excursion. Emphysema / Ankylosing Spondylitis"
+      : "Technical Error: Thumbs anchored to skin travel with ribs (0 cm gap). Asymmetry masked!";
 
     var html = '<svg class="cx-dia cx-dia--anim ' + animClass + '" viewBox="0 0 360 250" role="img" aria-label="Thoracic chest expansion with floating thumbs vs anchored technical error">';
 
@@ -757,15 +757,15 @@
   /* ── 18. Dermatomes & deep tendon reflex landmarks ───────────────────────── */
 
   var DERMATOMES = [
-    { id: "c5", cy: 68, cx: 80, label: "C5 Dermatome", root: "C5", landmark: "Lateral shoulder / deltoid", reflex: "Biceps reflex (C5, C6) — Musculocutaneous nerve", pearl: "Test pinprick over the lateral deltoid. Motor check: shoulder abduction (deltoid)." },
-    { id: "c6", cy: 96, cx: 70, label: "C6 Dermatome", root: "C6", landmark: "Lateral forearm, thumb and index finger", reflex: "Supinator / Brachioradialis reflex (C5, C6) — Radial nerve", pearl: "Sensory check on the volar tip of the thumb. Motor check: elbow flexion and wrist extension." },
-    { id: "c7", cy: 122, cx: 62, label: "C7 Dermatome", root: "C7", landmark: "Middle finger (dorsal and palmar)", reflex: "Triceps reflex (C7, C8) — Radial nerve", pearl: "Sensory check on the middle finger. Motor check: elbow extension and wrist flexion." },
-    { id: "c8", cy: 146, cx: 66, label: "C8 Dermatome", root: "C8", landmark: "Little finger, medial border of hand", reflex: "Finger flexors (C8, T1) — Median / Ulnar nerves", pearl: "Sensory check over hypothenar eminence. Motor check: finger flexion (grip strength)." },
+    { id: "c5", cy: 68, cx: 80, label: "C5 Dermatome", root: "C5", landmark: "Lateral shoulder / deltoid", reflex: "Biceps reflex (C5, C6), Musculocutaneous nerve", pearl: "Test pinprick over the lateral deltoid. Motor check: shoulder abduction (deltoid)." },
+    { id: "c6", cy: 96, cx: 70, label: "C6 Dermatome", root: "C6", landmark: "Lateral forearm, thumb and index finger", reflex: "Supinator / Brachioradialis reflex (C5, C6), Radial nerve", pearl: "Sensory check on the volar tip of the thumb. Motor check: elbow flexion and wrist extension." },
+    { id: "c7", cy: 122, cx: 62, label: "C7 Dermatome", root: "C7", landmark: "Middle finger (dorsal and palmar)", reflex: "Triceps reflex (C7, C8), Radial nerve", pearl: "Sensory check on the middle finger. Motor check: elbow extension and wrist flexion." },
+    { id: "c8", cy: 146, cx: 66, label: "C8 Dermatome", root: "C8", landmark: "Little finger, medial border of hand", reflex: "Finger flexors (C8, T1), Median / Ulnar nerves", pearl: "Sensory check over hypothenar eminence. Motor check: finger flexion (grip strength)." },
     { id: "t4", cy: 92, cx: 160, label: "T4 Sensory Level", root: "T4", landmark: "Nipple line (4th intercostal space)", reflex: "No peripheral tendon reflex (Cord level landmark)", pearl: "Crucial landmark for acute spinal cord lesions (e.g. transverse myelitis, epidural compression)." },
     { id: "t10", cy: 136, cx: 160, label: "T10 Sensory Level", root: "T10", landmark: "Umbilicus", reflex: "Superficial abdominal reflex (T9-T11)", pearl: "Umbilical level. Visceral referred pain of acute appendicitis starts at T10 before somatic localization." },
-    { id: "l4", cy: 198, cx: 142, label: "L4 Dermatome", root: "L4", landmark: "Anterior knee, medial shin & malleolus", reflex: "Knee jerk / Patellar reflex (L3, L4) — Femoral nerve", pearl: "Sensory check over medial malleolus. Motor check: knee extension (quadriceps) and ankle dorsiflexion." },
-    { id: "l5", cy: 236, cx: 138, label: "L5 Dermatome", root: "L5", landmark: "Dorsum of foot, first webspace, great toe", reflex: "No distinct tendon reflex (Hamstrings medial L5/S1)", pearl: "Sensory check in webspace between great and 2nd toe. Motor check: great toe dorsiflexion (EHL) — look for foot drop!" },
-    { id: "s1", cy: 264, cx: 132, label: "S1 Dermatome", root: "S1", landmark: "Lateral border of foot, sole, Achilles", reflex: "Ankle jerk / Achilles reflex (S1, S2) — Tibial nerve", pearl: "Sensory check over lateral heel. Motor check: plantarflexion (gastrocnemius/soleus) and eversion." }
+    { id: "l4", cy: 198, cx: 142, label: "L4 Dermatome", root: "L4", landmark: "Anterior knee, medial shin & malleolus", reflex: "Knee jerk / Patellar reflex (L3, L4), Femoral nerve", pearl: "Sensory check over medial malleolus. Motor check: knee extension (quadriceps) and ankle dorsiflexion." },
+    { id: "l5", cy: 236, cx: 138, label: "L5 Dermatome", root: "L5", landmark: "Dorsum of foot, first webspace, great toe", reflex: "No distinct tendon reflex (Hamstrings medial L5/S1)", pearl: "Sensory check in webspace between great and 2nd toe. Motor check: great toe dorsiflexion (EHL), look for foot drop!" },
+    { id: "s1", cy: 264, cx: 132, label: "S1 Dermatome", root: "S1", landmark: "Lateral border of foot, sole, Achilles", reflex: "Ankle jerk / Achilles reflex (S1, S2), Tibial nerve", pearl: "Sensory check over lateral heel. Motor check: plantarflexion (gastrocnemius/soleus) and eversion." }
   ];
 
   function dermatomeMap(o) {
@@ -1222,7 +1222,7 @@
     html += '</div>';
 
     html += '<div class="cx-dia-note">' +
-      '<div style="font-size:14px; font-weight:800; color:var(--cx-primary); margin-bottom:4px;">' + esc(chosen.letter) + ' — ' + esc(chosen.title) + '</div>' +
+      '<div style="font-size:14px; font-weight:800; color:var(--cx-primary); margin-bottom:4px;">' + esc(chosen.letter) + '. ' + esc(chosen.title) + '</div>' +
       '<b>Bedside Examination Test:</b> ' + esc(chosen.test) + '<br><br>' +
       '<b>Pathophysiology & Clinical Pearl:</b> ' + esc(chosen.pearl) + '<br><br>' +
       '<i style="color:var(--cx-teach); font-weight:600;">The Golden Rule of Cerebellar Signs: Unlike cerebral lesions which are contralateral, cerebellar hemisphere lesions are ALWAYS <b>IPSILATERAL</b> (signs appear on the same side as the lesion due to double decussation)!</i>' +
@@ -1409,7 +1409,7 @@
       '</div>' +
       '<div class="cx-dia-note">' +
       (mode === "normal"
-        ? "<b>Normal Pattern</b>: FEV1/FVC ≥ 0.70 (70–80%). Rapid emptying of >75% lung volume in the very first second, with linear expiratory descent."
+        ? "<b>Normal Pattern</b>: FEV1/FVC ≥ 0.70 (70 to 80%). Rapid emptying of >75% lung volume in the very first second, with linear expiratory descent."
         : mode === "obstructive"
           ? "<b>Obstructive Defect (COPD / Asthma)</b>: FEV1/FVC < 0.70. Airway collapse on forced expiration creates the hallmark <i>concave scooping</i>. Volume-time curve shows prolonged slow exhalation."
           : "<b>Restrictive Defect (Pulmonary Fibrosis, Kyphoscoliosis)</b>: FEV1/FVC normal or increased (≥ 0.70), but both FEV1 and FVC are proportionally reduced (<80% predicted). Produces a shrunken 'miniature' loop.") +
@@ -1899,7 +1899,7 @@
     html += '<div class="cx-dia-note">' + (mode === "supine"
       ? '<b>Supine:</b> Intraperitoneal fluid is governed by gravity. Free fluid fills the paracolic gutters in both flanks, giving a <b>dull note</b>, while gas-filled loops of bowel float to the surface around the umbilicus, giving a <b>tympanitic note</b>.'
       : (mode === "shift"
-        ? '<b>Shifting Dullness:</b> Roll the patient towards you. Gravity moves the fluid column to the bottom (now duller), while buoyant bowel floats to the top flank—which switches from <b>dull to resonant</b>! Wait 30 seconds before percussing.'
+        ? '<b>Shifting Dullness:</b> Roll the patient towards you. Gravity moves the fluid column to the bottom (now duller), while buoyant bowel floats to the top flank, which switches from <b>dull to resonant</b>! Wait 30 seconds before percussing.'
         : '<b>Fluid Thrill:</b> Detects tense, massive ascites (> 1.5 - 2 Litres). The assistant\'s ulnar border firmly dampens fat ripples across the abdominal wall. An impulse reaching the opposite palm confirms a true fluid wave.')) + '</div>';
 
     return html;

@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "med-bleeding",
-  "subject": "medicine",
-  "title": "Bleeding disorders: platelets, von Willebrand and haemophilia",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**History** (**mucosal** epistaxis gums menorrhagia post-op, **purpura** petechiae bruises ITP, **haemarthrosis** knees ankles elbows boys, **muscle** pseudotumour iliopsoas tingling, **vWD** family epistaxis extraction bleed, **drugs** aspirin clopidogrel NSAID, **liver** alcohol coagulopathy) with **viva** (**thrombocytopenic** petechial menorrhagic, **haemophilic** haemarthrotic inhibitor) profiles; **pattern** (mucosal joints sorts) maps. Bloods ooze.",
-      "say": "Mucosals purpuras haemarthroses muscles is history: vWDs bleed drugs thin livers fail patterns map thrombocytopenics spot haemophilics limp joints bleed inhibitors block. Clots fail.",
-      "vis": null
-    },
-    {
-      "tx": "**Examination** (**petechiae** palate legs tourniquet, **purpura** palpable vasculitic differs, **haemarthrosis** swollen warm limited, **muscle** iliopsoas femoral numb, **epistaxis** Kiesselbach cauterised, **menorrhagia** clots anaemic, **liver** spider palmar flaps, **inhibitor** target joints bleed) with **bedside** (**platelets** counts smear clumps, **BT** prolonged mucosal, **joints** aspirate factor) taps; **mouth** (gum oozes) looks. Joints bleed.",
-      "say": "Petechiaes purpuras haemarthroses muscles is exam: epistaxes drip menorrhagias flood livers stigmata inhibitors persist platelets dip BTs stretch joints tap mouths ooze factors replace. Knees swell.",
-      "vis": null
-    },
-    {
-      "tx": "**Investigations** (**platelets** ITP TTP HIT counts, **PT** warfarin liver vitamin K, **APTT** haemophilia heparin lupus, **vWF** ristocetin multimers types, **factor** VIII IX levels carriers, **inhibitor** Bethesda fails) with **differentials** (**ITP** isolated mucosal, **vWD** ristocetin family, **haemophilia** X-linked joints, **liver** PT all factors) sorts; **haematology** (factor decides) meets. Cascades break.",
-      "say": "Platelets PTs APTTs vWFs is Ix: factors dip inhibitors rise ITPs isolate vWDs fail haemophilias link livers scar haematologists meet concentrates push emicizumabs bridge. Clotting stalls.",
-      "vis": null
-    },
-    {
-      "tx": "**Management** (**platelets** thresholds steroids IVIg, **tranexamic** mucosal menorrhagia guards, **DDAVP** vWD minor releases, **factor** haemophilia prophylaxis treats, **inhibitor** bypassing emicizumab, **warfarin** vitamin K PCC reverses, **liver** transplant corrects) with **traps** (**platelets** TTP worsens, **IM** haematoma avoids, **surgery** factor covers) closes; **follow** (counts joints inhibitors) tracks. Clots hold.",
-      "say": "Platelets tranexamics DDAVPs factors is Rx: inhibitors bypass warfarins reverse livers fail TTPs worsen IMs bruise surgeries cover follows track counts steady wishes respect. Bleeds stop.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-med-651",
-    "bk2-med-652",
-    "bk2-med-653",
-    "bk2-med-654",
-    "bk2-med-655",
-    "bk2-med-656",
-    "bk2-med-657",
-    "bk2-med-658",
-    "bk2-med-659",
-    "bk2-med-660"
-  ],
-  "src": [],
-  "refs": [
-    "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-lon7",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "med-bleeding",
+ "subject": "medicine",
+ "title": "Bleeding disorders: platelets, von Willebrand and haemophilia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**History** (**mucosal** epistaxis gums menorrhagia post-op, **purpura** petechiae bruises ITP, **haemarthrosis** knees ankles elbows boys, **muscle** pseudotumour iliopsoas tingling, **vWD** family epistaxis extraction bleed, **drugs** aspirin clopidogrel NSAID, **liver** alcohol coagulopathy) with **viva** (**thrombocytopenic** petechial menorrhagic, **haemophilic** haemarthrotic inhibitor) profiles; **pattern** (mucosal joints sorts) maps. Bloods ooze.",
+   "say": "Mucosals purpuras haemarthroses muscles is history: vWDs bleed drugs thin livers fail patterns map thrombocytopenics spot haemophilics limp joints bleed inhibitors block. Clots fail.",
+   "vis": null
+  },
+  {
+   "tx": "**Examination** (**petechiae** palate legs tourniquet, **purpura** palpable vasculitic differs, **haemarthrosis** swollen warm limited, **muscle** iliopsoas femoral numb, **epistaxis** Kiesselbach cauterised, **menorrhagia** clots anaemic, **liver** spider palmar flaps, **inhibitor** target joints bleed) with **bedside** (**platelets** counts smear clumps, **BT** prolonged mucosal, **joints** aspirate factor) taps; **mouth** (gum oozes) looks. Joints bleed.",
+   "say": "Petechiaes purpuras haemarthroses muscles is exam: epistaxes drip menorrhagias flood livers stigmata inhibitors persist platelets dip BTs stretch joints tap mouths ooze factors replace. Knees swell.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-bleeding-fig1.webp",
+    "alt": "Composite image showing petechiae, purpura, haemarthrosis in a knee, and gum oozing, illustrating clinical signs of bleeding disorders.",
+    "caption": "Key physical examination findings in bleeding disorders",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Investigations** (**platelets** ITP TTP HIT counts, **PT** warfarin liver vitamin K, **APTT** haemophilia heparin lupus, **vWF** ristocetin multimers types, **factor** VIII IX levels carriers, **inhibitor** Bethesda fails) with **differentials** (**ITP** isolated mucosal, **vWD** ristocetin family, **haemophilia** X-linked joints, **liver** PT all factors) sorts; **haematology** (factor decides) meets. Cascades break.",
+   "say": "Platelets PTs APTTs vWFs is Ix: factors dip inhibitors rise ITPs isolate vWDs fail haemophilias link livers scar haematologists meet concentrates push emicizumabs bridge. Clotting stalls.",
+   "vis": null
+  },
+  {
+   "tx": "**Management** (**platelets** thresholds steroids IVIg, **tranexamic** mucosal menorrhagia guards, **DDAVP** vWD minor releases, **factor** haemophilia prophylaxis treats, **inhibitor** bypassing emicizumab, **warfarin** vitamin K PCC reverses, **liver** transplant corrects) with **traps** (**platelets** TTP worsens, **IM** haematoma avoids, **surgery** factor covers) closes; **follow** (counts joints inhibitors) tracks. Clots hold.",
+   "say": "Platelets tranexamics DDAVPs factors is Rx: inhibitors bypass warfarins reverse livers fail TTPs worsen IMs bruise surgeries cover follows track counts steady wishes respect. Bleeds stop.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-med-651",
+  "bk2-med-652",
+  "bk2-med-653",
+  "bk2-med-654",
+  "bk2-med-655",
+  "bk2-med-656",
+  "bk2-med-657",
+  "bk2-med-658",
+  "bk2-med-659",
+  "bk2-med-660"
+ ],
+ "src": [],
+ "refs": [
+  "Long Cases in Clinical Medicine (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-lon7",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

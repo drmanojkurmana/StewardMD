@@ -57,6 +57,12 @@
       desc: "Load the CliniX scripts on the first open instead of on every app launch (2026-09-27). " +
         "Off = the old eager load at startup (clinix.js). Either way flag-off CliniX loads nothing."
     },
+    smd_clinix_pn: {
+      type: "bool", def: true, query: "clinixpn",
+      desc: "PrepNucleus look for CliniX (owner 2026-10-16: clean, neat, professional, like PrepNucleus): " +
+        "the PrepNucleus layout (top wash, round header buttons, grouped cards, capsule buttons) in CliniX's " +
+        "own palette: Candle, Juniper, Coral, Leaf. Off (?clinixpn=0) restores the teal CliniX look. CSS only, scoped to #clinixRoot.cx-pn."
+    },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",
       desc: "Haptic feedback on lesson turns and answer checks (iOS native only)."

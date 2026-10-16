@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-safety-contrast",
-  "subject": "radiology",
-  "title": "Contrast safety: kidneys and allergy",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Kidneys fail when dye overloads. **Contrast-associated kidney injury** rises with pre-existing renal impairment, dehydration and large dye loads. **Pre-hydration with isotonic fluids** per ESUR guidance protects high-risk kidneys. **Metformin review** pauses the drug where kidneys may fail, restarting after checks. **Staged procedures** split dye loads where single sittings would overwhelm.",
-      "say": "Kidneys fail when dye overloads. Contrast kidney injury rises with prior impairment, dehydration and large loads. Pre-hydration with isotonic fluids protects high-risk kidneys. Metformin pauses where kidneys may fail, restarting after checks. Staged procedures split loads.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Check the kidneys"
-          },
-          {
-            "id": "b",
-            "label": "Hydrate high-risk"
-          },
-          {
-            "id": "c",
-            "label": "Limit the dye"
-          },
-          {
-            "id": "d",
-            "label": "Review metformin"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Allergy strikes suddenly without any warning. **Prior contrast reactions** predict recurrence needing premedication with steroids. **Anaphylaxis drills** with adrenaline drawn keep labs ready. **Premedication protocols** dose steroids hours before elective dye. **Alternative imaging** with ultrasound or CO2 suits severe reactors.",
-      "say": "Allergy strikes without warning. Prior reactions predict recurrence needing steroid cover. Anaphylaxis drills with drawn adrenaline keep labs ready. Premedication doses steroids hours before elective dye. Ultrasound or gas suits severe reactors.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Risk",
-          "Move"
-        ],
-        "rows": [
-          [
-            "Prior reaction",
-            "Premedicate"
-          ],
-          [
-            "Anaphylaxis",
-            "Adrenaline ready"
-          ],
-          [
-            "Severe reactor",
-            "Alternative imaging"
-          ],
-          [
-            "Emergency",
-            "Treat then image"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Thyroid and hearts react too. **Thyroid storm** rarely follows iodine loads in uncontrolled hyperthyroidism needing endocrine cover. **Heart failure** decompensates with large osmotic loads needing slow injections. **Lactic acidosis** threatens where metformin meets failing kidneys. **Delayed skin rashes** days later settle with antihistamines.",
-      "say": "Thyroid and hearts react too. Iodine loads rarely storm uncontrolled hyperthyroidism needing endocrine cover. Heart failure decompensates with large loads needing slow injections. Metformin with failing kidneys threatens lactic acidosis. Delayed rashes settle with antihistamines.",
-      "vis": null
-    },
-    {
-      "tx": "Records prevent repeat harm everywhere. **Allergy bands with notes** flag reactors across every encounter. **Dye volumes logged** track cumulative loads over staged work. **Creatinine rechecks** after high-risk cases catch injury early. **Patient cards** tell reactors what to declare next time.",
-      "say": "Records prevent repeat harm. Allergy bands with notes flag reactors everywhere. Logged dye volumes track cumulative loads. Creatinine rechecks catch injury early. Patient cards tell reactors what to declare.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Band the allergy"
-          },
-          {
-            "id": "b",
-            "label": "Log the volume"
-          },
-          {
-            "id": "c",
-            "label": "Recheck kidneys"
-          },
-          {
-            "id": "d",
-            "label": "Card the patient"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-676",
-    "maikir2-677",
-    "maikir2-678",
-    "maikir2-679",
-    "maikir2-680",
-    "maikir2-681",
-    "maikir2-682",
-    "maikir2-683",
-    "maikir2-684",
-    "maikir2-685",
-    "maikir2-686",
-    "maikir2-687",
-    "maikir2-688",
-    "maikir2-689",
-    "maikir2-690",
-    "maikir2-691",
-    "maikir2-692",
-    "maikir2-693",
-    "maikir2-694",
-    "maikir2-695",
-    "maikir2-696",
-    "maikir2-697",
-    "maikir2-698",
-    "maikir2-699",
-    "maikir2-700"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-safety-contrast",
+ "subject": "radiology",
+ "title": "Contrast safety: kidneys and allergy",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Kidneys fail when dye overloads. **Contrast-associated kidney injury** rises with pre-existing renal impairment, dehydration and large dye loads. **Pre-hydration with isotonic fluids** per ESUR guidance protects high-risk kidneys. **Metformin review** pauses the drug where kidneys may fail, restarting after checks. **Staged procedures** split dye loads where single sittings would overwhelm.",
+   "say": "Kidneys fail when dye overloads. Contrast kidney injury rises with prior impairment, dehydration and large loads. Pre-hydration with isotonic fluids protects high-risk kidneys. Metformin pauses where kidneys may fail, restarting after checks. Staged procedures split loads.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Check the kidneys"
+     },
+     {
+      "id": "b",
+      "label": "Hydrate high-risk"
+     },
+     {
+      "id": "c",
+      "label": "Limit the dye"
+     },
+     {
+      "id": "d",
+      "label": "Review metformin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Allergy strikes suddenly without any warning. **Prior contrast reactions** predict recurrence needing premedication with steroids. **Anaphylaxis drills** with adrenaline drawn keep labs ready. **Premedication protocols** dose steroids hours before elective dye. **Alternative imaging** with ultrasound or CO2 suits severe reactors.",
+   "say": "Allergy strikes without warning. Prior reactions predict recurrence needing steroid cover. Anaphylaxis drills with drawn adrenaline keep labs ready. Premedication doses steroids hours before elective dye. Ultrasound or gas suits severe reactors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Move"
+    ],
+    "rows": [
+     [
+      "Prior reaction",
+      "Premedicate"
+     ],
+     [
+      "Anaphylaxis",
+      "Adrenaline ready"
+     ],
+     [
+      "Severe reactor",
+      "Alternative imaging"
+     ],
+     [
+      "Emergency",
+      "Treat then image"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid and hearts react too. **Thyroid storm** rarely follows iodine loads in uncontrolled hyperthyroidism needing endocrine cover. **Heart failure** decompensates with large osmotic loads needing slow injections. **Lactic acidosis** threatens where metformin meets failing kidneys. **Delayed skin rashes** days later settle with antihistamines.",
+   "say": "Thyroid and hearts react too. Iodine loads rarely storm uncontrolled hyperthyroidism needing endocrine cover. Heart failure decompensates with large loads needing slow injections. Metformin with failing kidneys threatens lactic acidosis. Delayed rashes settle with antihistamines.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-safety-contrast-fig1.webp",
+    "alt": "A diagram showing a patient experiencing delayed skin rash, peripheral edema from heart failure, and highlighting risks of thyroid storm and metformin-induced lactic acidosis.",
+    "caption": "Systemic contrast reactions: skin, heart, thyroid, and metformin risks",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Records prevent repeat harm everywhere. **Allergy bands with notes** flag reactors across every encounter. **Dye volumes logged** track cumulative loads over staged work. **Creatinine rechecks** after high-risk cases catch injury early. **Patient cards** tell reactors what to declare next time.",
+   "say": "Records prevent repeat harm. Allergy bands with notes flag reactors everywhere. Logged dye volumes track cumulative loads. Creatinine rechecks catch injury early. Patient cards tell reactors what to declare.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Band the allergy"
+     },
+     {
+      "id": "b",
+      "label": "Log the volume"
+     },
+     {
+      "id": "c",
+      "label": "Recheck kidneys"
+     },
+     {
+      "id": "d",
+      "label": "Card the patient"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-676",
+  "maikir2-677",
+  "maikir2-678",
+  "maikir2-679",
+  "maikir2-680",
+  "maikir2-681",
+  "maikir2-682",
+  "maikir2-683",
+  "maikir2-684",
+  "maikir2-685",
+  "maikir2-686",
+  "maikir2-687",
+  "maikir2-688",
+  "maikir2-689",
+  "maikir2-690",
+  "maikir2-691",
+  "maikir2-692",
+  "maikir2-693",
+  "maikir2-694",
+  "maikir2-695",
+  "maikir2-696",
+  "maikir2-697",
+  "maikir2-698",
+  "maikir2-699",
+  "maikir2-700"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }

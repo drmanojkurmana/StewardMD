@@ -1,7 +1,7 @@
 ---
 tags: [module, education, respiratory]
-status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
-flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off; the "Draft, pending clinician review" line was REMOVED 2026-09-28 (owner), so nothing on screen marks it as unreviewed
+flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_pn (def:true, PrepNucleus look, ?clinixpn=0 restores teal) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
 ---
 # CliniX
 
@@ -10,6 +10,18 @@ other systems need Pro. Rule lives in `clinix-model.js` (`systemLocked`, `openPa
 `clinix-screens.js` at the system card, `openDisease()`, `resume()`, and via `loadAllSkills(pro)`.
 Locked systems are shown with a "Pro" badge, never hidden. Asserted both ways in
 `test/run-clinix-ui.mjs` ("Pro lock"). See [[Decisions]].
+
+**"Asked to sign in twice" (fixed 2026-10-16).** A Pro doctor signed in to the app was asked to sign
+in again inside CliniX. Two causes:
+1. `isPro()` read only `SMD_PRO.isProSync()`. ThoreX/SknX/SurgX also accept `hasEarlyAccess()`
+   (Ultimate, Clinician Pro) and `body.pro-verified`, so a comp plan the billing verdict does not
+   mark pro was Pro everywhere except CliniX. `isPro()` now uses the same three-way rule and the
+   screen repaints on `smd:tier` as well as `smd:pro`.
+2. `showLocked()` asked `/api/billing/status` immediately. Just after launch Firebase has not restored
+   its user, so the request had no token, the server answered as for a guest, and `pro-notice.js`
+   showed "Sign in". CliniX now waits (up to 5 s, `waitForSession`) for the Firebase user when
+   `SMD_ACCOUNT` says signed in, and `pro-notice.js` `reason()` never returns `signin` for an
+   account `SMD_ACCOUNT` holds as signed in (it says the plan could not be confirmed instead).
 
 Clinical learning for medical students: patient approach → history → examination → reasoning →
 investigations → diagnosis → treatment → case → OSCE → viva. Design spec:
@@ -92,6 +104,41 @@ library seam, and the missing `atlas` tier chip was added — the lessons always
 they are the load-bearing half of this argument.
 CliniX follows **RadioAnatome** instead (`atlas/` + `atlas.js:308-323` + `atlas-pipeline/`): a small
 catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared sources.
+
+## OSCE station UI (2026-10-16)
+- **The clock was frozen for every student until 2026-10-16.** `tickTimer()` wrote into
+  `el.querySelector("span")`, the FIRST span, which is the timer icon (`ic()` renders a span). The
+  countdown went into the icon glyph and the visible time stayed at the starting value. The time now
+  has its own `.cx-timer-t`; `run-clinix-ui.mjs` asserts the text changes across a tick.
+- **Checklist labels were centred** because `.cx-check span { flex: 1 }` also grew the checkbox
+  icon's span. Rows now come from one `checkRow()` (lesson self-check and station) with
+  `.cx-check-box` + `.cx-check-t`, and `role="checkbox"` / `aria-checked`.
+- The station's header and status bar (`.cx-stick`: clock + "n of N steps") stick as one block.
+  Steps are grouped by skill (`compileStation` items now carry `skillTitle`). The result shows one
+  verdict card with a pass-mark tick, critical misses once (inside the critical block), a per-skill
+  breakdown, the other misses by skill, and the time used.
+- Home "OSCE stations" / "Viva voce" open `renderPractice` (topics by system, locked ones listed with
+  a lock) instead of a toast. Picking a topic sets `state.jumpAssess`, and `openDisease` scrolls to
+  `#cxAssess` once the pathway loads.
+
+## PrepNucleus look (2026-10-16, owner: "PrepNucleus alike UI, clean, neat, professional")
+Flag `smd_clinix_pn` (default ON, `?clinixpn=0` or localStorage `0` restores the teal look). `clinix.js open()`
+toggles `.cx-pn` on `#clinixRoot` every open. Everything lives in the "PrepNucleus pass" block at the END of
+`clinix.css`, scoped to `#clinixRoot.cx-pn`, mirroring `prep.css` "Apple pass" in LAYOUT but with CliniX's OWN
+palette (owner, same day: "use different colour palettes so it differs from PrepNucleus"). Current: the
+owner's pair Deep Teal `#004e64` (buttons, accents, tile ink; text `#10303b`) and Mist Gray `#e0e5e9`
+(surfaces; page `#eef2f5`), white cards; dark mode on teal-black `#06171d` with `#7cc4d8` accents. Tried and
+replaced the same day: Candle/Juniper/Coral/Leaf. Every text pair is WCAG AA (comment in the token block). The static wash on the root, a transparent bar that turns to glass once the screen scrolls
+(`.cx-scrolled`, toggled by the scroll listener in `init()` and in `show()`), round header buttons, rows grouped
+into one card with hairlines and pale-blue icon squircles, sentence-case 21px section titles, capsule buttons.
+Gotchas: dark-mode token overrides must be `body.dark #clinixRoot.cx-pn` (the plain `body.dark #clinixRoot`
+block outranks `#clinixRoot.cx-pn`); the logo colour is CSS now (`.cx-hero-logo` filter), not inline;
+`drug-link.js` turns words like "electrolytes" into monograph links anywhere, so screen titles carry
+`no-druglink` (its SKIP list).
+Home banner (owner: "keep this banner or design a better one, professional premium"; then "background too dark,
+give a pleasant, lively gradient with light colours", Marrow as the reference): `.cx-hero` is transparent on a light
+`--cx-wash` (icy teal-to-Mist sky with a white glow top right, 460px tall, on every screen), dark teal type, frosted chips with a facts line from `heroFacts(cat)` (systems, topics, "OSCE and viva") counted from
+the catalog and hidden in the teal look. A dark Juniper band was tried first and rejected.
 
 ## Gotchas
 - **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked

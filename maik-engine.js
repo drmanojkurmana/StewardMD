@@ -1084,7 +1084,13 @@
     if (!M || !M.PACKS || !M.state || !M.sizeLabel) return "";
     var active = M.activePack ? M.activePack() : PACK_ID;
     var ids = (M.packIds ? M.packIds() : Object.keys(M.PACKS));
-    if (!ids.length) return "";
+    // The search pack is not a chat model: it never joins the shelves below or the picker.
+    // It gets its own download row further down (searchSectionHTML), with no select affordance.
+    var isEm = function (id) { try { return !!(M.isEmbed && M.isEmbed(id)); } catch (e) { return false; } };
+    var searchIds = [];
+    try { ((M.embedIds && M.embedIds()) || []).forEach(function (id) { if (M.pack(id)) searchIds.push(id); }); } catch (e) {}
+    ids = ids.filter(function (id) { return !isEm(id); });
+    if (!ids.length && !searchIds.length) return "";
     var fits = fitMap();
 
     function rowFor(id, i) {
@@ -1147,6 +1153,64 @@
       '</div>';
     }
 
+    /* ON-PHONE SEARCH ROW (2026-10-16): the EmbeddingGemma download row.
+     *
+     * Same download / pause / resume / delete machinery and the same row language as the chat
+     * packs (same tokens, same smd-nav-btn buttons, so the existing wireSettings serves it with
+     * no new handlers), but it is NOT a chat model: no radio, no grade pill, no Selected state,
+     * and the tap target never calls setActivePack. The status line always names what it is for:
+     * "Search on this phone". The fit rule matches the chat rows: a pack this phone cannot run
+     * gets no download button. */
+    function searchRowHTML(id) {
+      var M = window.SMD_MAIK_MODELS, p = null;
+      try { p = M.pack(id); } catch (e) { return ""; }
+      if (!p) return "";
+      var have = M.installedCached(id);
+      var st = M.state(id);
+      var size = M.sizeLabel(id);
+      var fit = null;
+      try { if (M.suitability) fit = M.suitability(id, M.device ? M.device() : null); } catch (e) {}
+      var status;
+      if (st.queued) status = (st.note || "Waiting") + " · " + size;
+      else if (st.downloading) status = (st.frac * 100).toFixed(1) + "% of " + size +
+        " · " + (st.mbps || 0).toFixed(1) + " MB/s" + (st.etaS != null ? " · " + fmtETA(st.etaS) : "");
+      else if (have) status = "Downloaded · " + size;
+      else if (st.err) status = st.note + " · tap Download to resume";
+      else if (st.frac > 0) status = "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume";
+      else status = "Search on this phone · " + size + (p.note ? " · " + p.note : "");
+      var bar = (!st.queued && (st.downloading || (st.frac > 0 && !have)))
+        ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
+            '<div style="height:100%;width:' + (st.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63);transition:width .3s"></div>' +
+          '</div>'
+        : "";
+      var unfit = !!(fit && fit.level === "no" && !have);
+      // Plain action buttons only: never the upgrade path (that marks a pack PENDING for answering,
+      // and this pack must never answer).
+      var actions = unfit
+        ? '<div style="font:600 12px/1.4 var(--sans,system-ui);color:#991b1b">Not for this phone. ' + esc((fit.reasons || []).join(" ")) + " MaiK Cloud can do this instead.</div>"
+        : actionBtnHTML(id, st, have) +
+          (!st.downloading && !st.queued && (have || st.frac > 0)
+            ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "");
+      return '<div data-me-search-row="' + id + '" style="padding:12px 14px">' +
+        '<div style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;color:var(--ink,#14202b)">' +
+          '<span style="flex:1;min-width:0">' +
+            '<span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;font:700 14px/1.3 var(--sans,system-ui)">' + esc(p.label) + " " + pill("SEARCH", "#0e6e63", "#ffffff") + "</span>" +
+            '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">' + esc(status) + "</span>" +
+          "</span>" +
+        "</div>" +
+        '<div data-me-bar="' + id + '">' + bar + "</div>" +
+        '<div style="display:flex;gap:8px;margin-top:9px" data-me-actions="' + id + '">' + actions + "</div>" +
+      "</div>";
+    }
+    function searchSectionHTML() {
+      if (!searchIds.length) return "";
+      var body = searchIds.map(searchRowHTML).join("");
+      if (!body) return "";
+      return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-phone search</div>' +
+        '<div class="smd-nav-note" style="margin-bottom:6px">Disease search that runs on this phone. Downloads the search pack once, then finds Knowledge Base diseases with no network and no AI tokens, even in Local mode. It never answers chat.</div>' +
+        '<div aria-label="On-phone search" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + body + "</div>";
+    }
+
     /* THREE SHELVES, derived from the registry (grade), never hand-kept: a pack added to
      * maik-models.js lands on the right shelf without touching this file, and cannot silently vanish
      * because "general" claims everything the first two do not.
@@ -1192,6 +1256,7 @@
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Not sure? Start with MAiK Lite, our own model, the smallest download and the fastest answers. Move to a medical specialist when you want more depth. ' +
         'Nothing downloads without your tap. Downloads resume if interrupted and keep going when you leave this screen.</div>' +
+      searchSectionHTML() +
       '<details class="mk-grp" data-mk-grp="advanced" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-top:12px">' +
         '<summary style="list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:11px 14px;font:700 13px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' +
           '<span class="mk-grp-cv" aria-hidden="true" style="font-size:10px">▸</span><span style="flex:1">Advanced</span>' +
@@ -1495,6 +1560,8 @@
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
       (M.packIds ? M.packIds() : Object.keys(M.PACKS)).forEach(function (pid) {
+        // The search pack never answers, so it never joins the answering picker.
+        try { if (M.isEmbed && M.isEmbed(pid)) return; } catch (e) {}
         var st = M.state(pid), have = M.installedCached(pid);
         out.push({
           id: "local:" + pid, label: M.PACKS[pid].label,

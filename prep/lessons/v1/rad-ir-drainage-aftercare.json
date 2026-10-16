@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-drainage-aftercare",
-  "subject": "radiology",
-  "title": "Drain aftercare: tubes, skin and freedom",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Flushes keep lumens living. **Daily gentle flushing** with small saline volumes clears debris without bursting tracts. **Output charts** with colour and volume catch failing tubes early. **Fixation checks** with secure dressings prevent pull-outs on wards. **Patient handling** teaches families to keep bags below entry levels always.",
-      "say": "Flushes keep lumens living. Gentle daily saline clears debris without bursting. Output charts with colour catch failing tubes early. Secure dressings prevent pull-outs. Families learn to keep bags below entry levels always.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Flush gently"
-          },
-          {
-            "id": "b",
-            "label": "Chart outputs"
-          },
-          {
-            "id": "c",
-            "label": "Fix securely"
-          },
-          {
-            "id": "d",
-            "label": "Teach families"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Exchanges pre-empt blocks. **Scheduled tube swaps** every few months clear crusts before occlusion strands organs. **Tract inspection** at exchanges spots granulation and infection early. **Upsizing narrowed tracts** restores flows where downsizing served healing. **Removal criteria** of free internal flow with resolved disease retire tubes confidently.",
-      "say": "Exchanges pre-empt blocks. Scheduled swaps clear crusts before occlusion. Tract inspection spots granulation early. Upsizing restores narrowed flows. Free internal flow with resolved disease retires tubes confidently.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Tube",
-          "Rhythm"
-        ],
-        "rows": [
-          [
-            "Biliary",
-            "Months"
-          ],
-          [
-            "Nephrostomy",
-            "Quarterly"
-          ],
-          [
-            "Abscess",
-            "Till resolved"
-          ],
-          [
-            "Cholecystostomy",
-            "Till surgery"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Skin suffers around leaks. **Barrier creams with bag seals** protect skin bathed in bile or urine. **Peritubal leak checks** distinguish loose tracks needing upsizing from infection needing drugs. **Granulation tissue** from chronic irritation trims with silver nitrate. **Allergy to dressings** switches tapes where rashes mimic infection.",
-      "say": "Skin suffers around leaks. Barrier creams with sealed bags protect bathed skin. Leak checks separate loose tracks from infection. Granulation tissue trims with silver nitrate. Dressing allergy switches tapes where rashes mimic infection.",
-      "vis": null
-    },
-    {
-      "tx": "Freedom follows proven flow. **Capping and clamping trials** prove internal drainage before bag removal. **Post-removal watches** catch re-blockage with fever and pain early. **Clinic with imaging** confirms lasting patency after tube freedom. **Red-flag cards** tell families when falling output means return.",
-      "say": "Freedom follows proven flow. Capping trials prove internal drainage before bag removal. Post-removal watches catch re-blockage early. Clinic with imaging confirms lasting patency. Red-flag cards tell families when to return.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Trial without bags"
-          },
-          {
-            "id": "b",
-            "label": "Remove confidently"
-          },
-          {
-            "id": "c",
-            "label": "Watch after"
-          },
-          {
-            "id": "d",
-            "label": "Card the flags"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-451",
-    "maikir2-452",
-    "maikir2-453",
-    "maikir2-454",
-    "maikir2-455",
-    "maikir2-456",
-    "maikir2-457",
-    "maikir2-458",
-    "maikir2-459",
-    "maikir2-460",
-    "maikir2-461",
-    "maikir2-462",
-    "maikir2-463",
-    "maikir2-464",
-    "maikir2-465",
-    "maikir2-466",
-    "maikir2-467",
-    "maikir2-468",
-    "maikir2-469",
-    "maikir2-470",
-    "maikir2-471",
-    "maikir2-472",
-    "maikir2-473",
-    "maikir2-474",
-    "maikir2-475"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-drainage-aftercare",
+ "subject": "radiology",
+ "title": "Drain aftercare: tubes, skin and freedom",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Flushes keep lumens living. **Daily gentle flushing** with small saline volumes clears debris without bursting tracts. **Output charts** with colour and volume catch failing tubes early. **Fixation checks** with secure dressings prevent pull-outs on wards. **Patient handling** teaches families to keep bags below entry levels always.",
+   "say": "Flushes keep lumens living. Gentle daily saline clears debris without bursting. Output charts with colour catch failing tubes early. Secure dressings prevent pull-outs. Families learn to keep bags below entry levels always.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Flush gently"
+     },
+     {
+      "id": "b",
+      "label": "Chart outputs"
+     },
+     {
+      "id": "c",
+      "label": "Fix securely"
+     },
+     {
+      "id": "d",
+      "label": "Teach families"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exchanges pre-empt blocks. **Scheduled tube swaps** every few months clear crusts before occlusion strands organs. **Tract inspection** at exchanges spots granulation and infection early. **Upsizing narrowed tracts** restores flows where downsizing served healing. **Removal criteria** of free internal flow with resolved disease retire tubes confidently.",
+   "say": "Exchanges pre-empt blocks. Scheduled swaps clear crusts before occlusion. Tract inspection spots granulation early. Upsizing restores narrowed flows. Free internal flow with resolved disease retires tubes confidently.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tube",
+     "Rhythm"
+    ],
+    "rows": [
+     [
+      "Biliary",
+      "Months"
+     ],
+     [
+      "Nephrostomy",
+      "Quarterly"
+     ],
+     [
+      "Abscess",
+      "Till resolved"
+     ],
+     [
+      "Cholecystostomy",
+      "Till surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Skin suffers around leaks. **Barrier creams with bag seals** protect skin bathed in bile or urine. **Peritubal leak checks** distinguish loose tracks needing upsizing from infection needing drugs. **Granulation tissue** from chronic irritation trims with silver nitrate. **Allergy to dressings** switches tapes where rashes mimic infection.",
+   "say": "Skin suffers around leaks. Barrier creams with sealed bags protect bathed skin. Leak checks separate loose tracks from infection. Granulation tissue trims with silver nitrate. Dressing allergy switches tapes where rashes mimic infection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-drainage-aftercare-fig1.webp",
+    "alt": "Diagram illustrating skin complications around a drainage tube, showing leakage, granulation, and rash, alongside solutions like barrier cream and bag seals.",
+    "caption": "Managing peritubal skin complications: leaks, irritation, granulation, and allergy",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Freedom follows proven flow. **Capping and clamping trials** prove internal drainage before bag removal. **Post-removal watches** catch re-blockage with fever and pain early. **Clinic with imaging** confirms lasting patency after tube freedom. **Red-flag cards** tell families when falling output means return.",
+   "say": "Freedom follows proven flow. Capping trials prove internal drainage before bag removal. Post-removal watches catch re-blockage early. Clinic with imaging confirms lasting patency. Red-flag cards tell families when to return.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Trial without bags"
+     },
+     {
+      "id": "b",
+      "label": "Remove confidently"
+     },
+     {
+      "id": "c",
+      "label": "Watch after"
+     },
+     {
+      "id": "d",
+      "label": "Card the flags"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-451",
+  "maikir2-452",
+  "maikir2-453",
+  "maikir2-454",
+  "maikir2-455",
+  "maikir2-456",
+  "maikir2-457",
+  "maikir2-458",
+  "maikir2-459",
+  "maikir2-460",
+  "maikir2-461",
+  "maikir2-462",
+  "maikir2-463",
+  "maikir2-464",
+  "maikir2-465",
+  "maikir2-466",
+  "maikir2-467",
+  "maikir2-468",
+  "maikir2-469",
+  "maikir2-470",
+  "maikir2-471",
+  "maikir2-472",
+  "maikir2-473",
+  "maikir2-474",
+  "maikir2-475"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }

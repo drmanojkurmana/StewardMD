@@ -55,6 +55,8 @@ const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.js
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries: v<n>/img/<name>.webp
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
+// KB article illustrations (tools/kb-img-engine.mjs): v<n>/kb/media/<name>.webp, immutable
+const KB_MEDIA_RE = /^v\d{1,3}\/kb\/media\/[a-z0-9-]{2,80}\.webp$/;
 // Radiology notes & figures
 const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|overlay\/(?:radnotes|radmax)(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json)$/;
 // Medicine coverage MCQs
@@ -75,7 +77,11 @@ const QUALITY_RE = /^quality\/(?:index\.json|v\d{1,3}\/[a-z0-9-]{2,60}\.json)$/;
 const TESTS_RE = /^v\d{1,3}\/tests\/(?:index\.json|[a-z0-9-]{2,60}\/[a-z0-9_-]{2,60}\/[a-z0-9-]{2,120}\.json)$/;
 // Attribution credits for freely licensed images: image-credits.json
 const CREDITS_RE = /^image-credits\.json$/;
-
+// On-phone search vectors (kb/ai/embed-local.js): the EmbeddingGemma disease vectors,
+// v<n>/kb/kb-vectors-q5.json (the id list plus dims/scale) and v<n>/kb/kb-vectors-q5.i8
+// (the raw int8 rows). Immutable like every other versioned bank file: a rebuild goes to
+// a new version folder, never new bytes under the same name.
+const KB_RE = /^v\d{1,3}\/kb\/kb-vectors-q5\.(?:json|i8)$/;
 const PREFIX = "prep-bank/";
 
 function notFound() {
@@ -106,6 +112,7 @@ export function bankPath(params) {
     PYQ_RE.test(p) ||
     STUDY_RE.test(p) ||
     IMG_RE.test(p) ||
+    KB_MEDIA_RE.test(p) ||
     RADNOTES_RE.test(p) ||
     MEDCOV_RE.test(p) ||
     MAIK_RE.test(p) ||
@@ -116,6 +123,7 @@ export function bankPath(params) {
     LINKS_RE.test(p) ||
     QUALITY_RE.test(p) ||
     TESTS_RE.test(p) ||
+    KB_RE.test(p) ||
     CREDITS_RE.test(p)
     ? p
     : null;
@@ -147,6 +155,8 @@ async function serveR2Object(env, p, request, cacheControl) {
       ? (obj.httpMetadata && /^image\/(?:webp|jpeg|png)$/.test(obj.httpMetadata.contentType || "") ? obj.httpMetadata.contentType : "image/webp")
       : /\.svg$/.test(p)
       ? "image/svg+xml"
+      : /\.i8$/.test(p)
+      ? "application/octet-stream"
       : "application/json; charset=utf-8",
     "Cache-Control": cacheControl,
     "X-Content-Type-Options": "nosniff",

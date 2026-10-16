@@ -54,6 +54,11 @@
   function proState() {
     try { return (window.SMD_PRO && window.SMD_PRO.proState && window.SMD_PRO.proState()) || null; } catch (e) { return null; }
   }
+  // The app's own account record (account.js SMD_ACCOUNT): Firebase user OR the stored signed-in
+  // account. A guest is not signed in.
+  function accountSignedIn() {
+    try { var p = window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile(); return !!(p && p.signedIn && !p.isGuest); } catch (e) { return false; }
+  }
   function isPro() {
     try { return !!(window.SMD_PRO && window.SMD_PRO.isProSync && window.SMD_PRO.isProSync()); } catch (e) { return false; }
   }
@@ -83,9 +88,12 @@
     var st = proState();
     // Signed out is not a failed lookup. Trust the server's signedIn when it answered; otherwise the
     // auth client (a restored session can lag Firebase boot, so the server answer wins when present).
+    // But never ask an account the app already holds as signed in to sign in again: that verdict is
+    // the server not recognising a request (no token yet while Firebase restores, or a lapsed token),
+    // not a signed-out doctor. Say we could not confirm the plan instead.
     try {
-      if (st && typeof st === "object" && typeof st.signedIn === "boolean") { if (!st.signedIn) return "signin"; }
-      else if (window.SMD_AUTH && !window.SMD_AUTH.currentUser) return "signin";
+      if (st && typeof st === "object" && typeof st.signedIn === "boolean") { if (!st.signedIn) return accountSignedIn() ? "unknown" : "signin"; }
+      else if (window.SMD_AUTH && !window.SMD_AUTH.currentUser) return accountSignedIn() ? "unknown" : "signin";
     } catch (e) {}
     if (!st || typeof st !== "object") return "unknown";
     return normalise(st);

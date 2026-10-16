@@ -4553,7 +4553,7 @@
     var secs = [
       ["causes", o.causes || "", o.causes || ""],
       ["patho", pathoRest + put.patho, pathoRest + put.patho],
-      ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging],
+      ["dx", dxText + put.dx + legacyTbl.dx + imaging, dxText + v2("diagnostic") + v2("flowchart-dx") + put.dx + legacyTbl.dx + imaging + v2("figures")],
       ["ddx", ddxText + legacyTbl.ddx, ddxText + v2("ddx") + legacyTbl.ddx],
       ["mgmt", (o.mgmt || "") + calcTx + put.mgmt + legacyTbl.mgmt + other, (o.mgmt || "") + calcTx + v2("treatment") + v2("flowchart") + put.mgmt + legacyTbl.mgmt + other],
       ["protocols", protoHtml, protoHtml],

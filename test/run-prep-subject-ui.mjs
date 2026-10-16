@@ -214,6 +214,24 @@ try {
   await click("#pnPlanSheet [data-act=p-save]");
   ok(await until(`return /INI-SS/.test(document.querySelector("#smdPrep .pn-t p").textContent) && !!document.querySelector('#smdPrep [data-act=subject][data-s="ss-radiology"]');`, 5000), "Settings changes the exam (INI-SS, the NEET-SS bank)");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return s.pl.exam + "|" + s.exam;`) === "ini-ss|neet-ss", "the store keeps ini-ss on the neet-ss tab");
+  // Owner 2026-10-16 (Marrow comparison): an INI-SS course shows only what that paper asks, the course, its degree's
+  // general subject and Biostatistics, never every SS subject; a NEET-SS Medical group shows no surgical subject.
+  const homeSubs = `return [].map.call(document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]"), function(b){ return b.getAttribute("data-s"); }).join(",");`;
+  // Set the plan directly so these checks stand on their own (the onboarding checks above can fail independently).
+  const setPlan = (pl) => ev(`PREP.close(); var s=JSON.parse(localStorage.getItem("smd_prep_v1")||"{}")||{}; s.v=1; s.exam="neet-ss"; s.pl=Object.assign({}, s.pl||{}, {ob:1}, ${JSON.stringify(pl)}); if(!("subject" in ${JSON.stringify(pl)})) delete s.pl.subject; localStorage.setItem("smd_prep_v1", JSON.stringify(s)); return 1;`).then(() => boot()).then(() => ev(`PREP.open(); return 1;`));
+  await setPlan({ exam: "ini-ss", subject: "ss-medical-oncology" });
+  ok(await until(`return !!document.querySelector('#smdPrep #pnGrid [data-act=subject][data-s="ss-medical-oncology"]');`, 15000), "INI-SS Medical Oncology: home draws");
+  await until(`var a=[].map.call(document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]"), function(b){ return b.getAttribute("data-s"); }).join(","); return a === "ss-medical-oncology,ss-general-medicine,ss-biostatistics";`, 15000);
+  const iniSubs = await ev(homeSubs);
+  ok(iniSubs === "ss-medical-oncology,ss-general-medicine,ss-biostatistics", "INI-SS Medical Oncology: home shows the course, General Medicine and Biostatistics only: " + iniSubs);
+  ok(/Medical Oncology course/.test(await ev(`return document.querySelector("#smdPrep #pnHome").textContent;`)) && /Change course/.test(await ev(`return document.querySelector("#smdPrep #pnHome").textContent;`)), "INI-SS home names the course and offers Change course");
+  await shot("p1024", "ini-ss-course");
+  await setPlan({ exam: "ini-ss", subject: "ss-urology" });
+  ok(await until(`var a=[].map.call(document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]"), function(b){ return b.getAttribute("data-s"); }).join(","); return a === "ss-urology,ss-general-surgery,ss-biostatistics";`, 15000), "INI-SS Urology: Urology, General Surgery and Biostatistics only: " + await ev(homeSubs));
+  await setPlan({ exam: "neet-ss", group: "medical" });
+  ok(await until(`return document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]").length > 0;`, 15000), "NEET-SS Medical group: home draws");
+  const medSubs = (await ev(homeSubs)).split(",");
+  ok(medSubs.includes("ss-general-medicine") && !medSubs.some((x) => /ss-urology|surgery|ctvs|neonat|paediatric/.test(x)), "NEET-SS Medical group: no surgical or paediatric subject on home: " + medSubs.filter((x) => /ss-urology|surgery|ctvs|neonat|paediatric/.test(x)).join(",") + " of " + medSubs.length);
   await ev(`PREP.close(); return 1;`);
   ok(!errors.length, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
 } catch (e) {

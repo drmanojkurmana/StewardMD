@@ -1,89 +1,95 @@
 {
-  "v": 1,
-  "module": "phm-antimalarials",
-  "subject": "pharmacology",
-  "title": "Antimalarials: ACT, severe artesunate, primaquine and prophylaxis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Chloroquine** (blood schizont vivax, ovale, malariae; **pruritus** dark skin, **retinopathy** chronic cumulative, cardiomyopathy, hypoglycaemia) still cures sensitive vivax while **falciparum resistance** (pfcrt) surrendered tropics; rheumatology doses eye screen annually. Overdose (QT, seizures, hypokalaemia) kills fast with diazepam debated. Pregnancy safe old standby.",
-      "say": "Vivax sensitive still chloroquine; falciparum resistant tropics. Chronic eyes screen; overdose QT seizes.",
-      "vis": null
-    },
-    {
-      "tx": "**ACT** (**artemether with lumefantrine** 3 days **fatty food**, DHA with piperaquine QT longer, artesunate with amodiaquine neutropenia, pyronaridine newcomer) clears falciparum fast with lumefantrine tail; **vomiting redose**, QT with ECG selected. **Kelch13 artemisinin resistance** (SE Asia delayed clearance, triple ACT debated) surveils; counterfeit drugs fail. Weight bands dose children.",
-      "say": "Fatty food 3 days clears falciparum; vomited redoses. Kelch13 delays SE Asia: triple debates.",
-      "vis": null
-    },
-    {
-      "tx": "**Severe malaria** (cerebral, acidosis, hyperparasitaemia, renal, ARDS, hypoglycaemia) gets **IV artesunate** (**superior to quinine**, faster, safer, hypoglycaemia rarer; **delayed haemolysis** weeks PADH watched) with ICU support; **quinine** (cinchonism tinnitus, **hypoglycaemia** insulin, QT, loading doses) infuses when artesunate absent. Exchange transfusion retired; fluids conservative ARDS. Parasite density with lactate gates.",
-      "say": "Cerebral severe IV artesunate beats quinine safer faster; delayed haemolysis weeks watches. Quinine deafens hypoglycaemias.",
-      "vis": null
-    },
-    {
-      "tx": "**Primaquine** (**hypnozoite radical cure** vivax ovale, **gametocytocidal** falciparum single low dose, **G6PD haemolysis** screened, pregnancy banned) with **tafenoquine** (single dose G6PD quantitative) finishes; **prophylaxis** (**doxycycline** sun sensitive, **mefloquine** vivid dreams psychosis banned, **atovaquone with proguanil** pricey safe, primaquine terminal) by resistance and trip. **SP-IPTp** (sulfadoxine pyrimethamine pregnancy, folate high dose avoided) protects; standby emergency treatment travellers carry.",
-      "say": "G6PD screens primaquine radical cure; single low sterilises falciparum sex. Dreams ban mefloquine psychosis.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Antimalarial",
-          "Pearl",
-          "Watch"
-        ],
-        "rows": [
-          [
-            "Chloroquine",
-            "Vivax sensitive",
-            "Eyes"
-          ],
-          [
-            "ACT",
-            "3d fatty",
-            "Vomit QT"
-          ],
-          [
-            "Artesunate",
-            "Severe best",
-            "Haemolysis"
-          ],
-          [
-            "Primaquine",
-            "Radical",
-            "G6PD"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "bk2-phm-351",
-    "bk2-phm-352",
-    "bk2-phm-353",
-    "bk2-phm-354",
-    "bk2-phm-355",
-    "bk2-phm-356",
-    "bk2-phm-357",
-    "bk2-phm-358",
-    "bk2-phm-359",
-    "bk2-phm-360"
-  ],
-  "src": [],
-  "refs": [
-    "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-pharma4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "phm-antimalarials",
+ "subject": "pharmacology",
+ "title": "Antimalarials: ACT, severe artesunate, primaquine and prophylaxis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Chloroquine** (blood schizont vivax, ovale, malariae; **pruritus** dark skin, **retinopathy** chronic cumulative, cardiomyopathy, hypoglycaemia) still cures sensitive vivax while **falciparum resistance** (pfcrt) surrendered tropics; rheumatology doses eye screen annually. Overdose (QT, seizures, hypokalaemia) kills fast with diazepam debated. Pregnancy safe old standby.",
+   "say": "Vivax sensitive still chloroquine; falciparum resistant tropics. Chronic eyes screen; overdose QT seizes.",
+   "vis": null
+  },
+  {
+   "tx": "**ACT** (**artemether with lumefantrine** 3 days **fatty food**, DHA with piperaquine QT longer, artesunate with amodiaquine neutropenia, pyronaridine newcomer) clears falciparum fast with lumefantrine tail; **vomiting redose**, QT with ECG selected. **Kelch13 artemisinin resistance** (SE Asia delayed clearance, triple ACT debated) surveils; counterfeit drugs fail. Weight bands dose children.",
+   "say": "Fatty food 3 days clears falciparum; vomited redoses. Kelch13 delays SE Asia: triple debates.",
+   "vis": null
+  },
+  {
+   "tx": "**Severe malaria** (cerebral, acidosis, hyperparasitaemia, renal, ARDS, hypoglycaemia) gets **IV artesunate** (**superior to quinine**, faster, safer, hypoglycaemia rarer; **delayed haemolysis** weeks PADH watched) with ICU support; **quinine** (cinchonism tinnitus, **hypoglycaemia** insulin, QT, loading doses) infuses when artesunate absent. Exchange transfusion retired; fluids conservative ARDS. Parasite density with lactate gates.",
+   "say": "Cerebral severe IV artesunate beats quinine safer faster; delayed haemolysis weeks watches. Quinine deafens hypoglycaemias.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phm-antimalarials-fig1.webp",
+    "alt": "Flowchart illustrating severe malaria management, prioritizing IV artesunate, detailing complications, alternative quinine use, ICU support, and monitoring.",
+    "caption": "Severe Malaria Management: IV Artesunate is First-Line, with ICU Support",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Primaquine** (**hypnozoite radical cure** vivax ovale, **gametocytocidal** falciparum single low dose, **G6PD haemolysis** screened, pregnancy banned) with **tafenoquine** (single dose G6PD quantitative) finishes; **prophylaxis** (**doxycycline** sun sensitive, **mefloquine** vivid dreams psychosis banned, **atovaquone with proguanil** pricey safe, primaquine terminal) by resistance and trip. **SP-IPTp** (sulfadoxine pyrimethamine pregnancy, folate high dose avoided) protects; standby emergency treatment travellers carry.",
+   "say": "G6PD screens primaquine radical cure; single low sterilises falciparum sex. Dreams ban mefloquine psychosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antimalarial",
+     "Pearl",
+     "Watch"
+    ],
+    "rows": [
+     [
+      "Chloroquine",
+      "Vivax sensitive",
+      "Eyes"
+     ],
+     [
+      "ACT",
+      "3d fatty",
+      "Vomit QT"
+     ],
+     [
+      "Artesunate",
+      "Severe best",
+      "Haemolysis"
+     ],
+     [
+      "Primaquine",
+      "Radical",
+      "G6PD"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "bk2-phm-351",
+  "bk2-phm-352",
+  "bk2-phm-353",
+  "bk2-phm-354",
+  "bk2-phm-355",
+  "bk2-phm-356",
+  "bk2-phm-357",
+  "bk2-phm-358",
+  "bk2-phm-359",
+  "bk2-phm-360"
+ ],
+ "src": [],
+ "refs": [
+  "KD Tripathi Essentials of Medical Pharmacology 8th Edition (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-pharma4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }

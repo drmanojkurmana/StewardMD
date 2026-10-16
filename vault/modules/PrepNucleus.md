@@ -1663,7 +1663,7 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - Tests: `test/prep-fix.test.mjs`, `test/run-prepfix-ui.mjs`. Not built: editing from inside PrepNucleus itself (only from the Review Desk reports).
 
 
-## Author: PDF source and publish to students (2026-10-16, prep79)
+## Author: PDF source and publish to students (2026-10-16, prep81)
 - **Source:** the owner's Author screen has "Make it from": A topic, Notes, A PDF. The PDF picker, page window, chapter list
   and previews are the SAME code as Create a module (`pdfPicker`/`bindPdf`/`readGround` in `prep-qgen.js`, state in `cs`,
   `pdfUi` says which screen it paints on). PDF text is scrubbed (`prepScrub`) and capped at 200,000 characters, then goes
@@ -1707,3 +1707,24 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   positives cannot be scanned offline; `/tmp`-style scan of lesson text is the proxy.
 - **Review state:** all figure text is AI-assisted. Each spec's `sources` says which claims have a linked source and which are textbook teaching
   flagged for review. Nothing is called "reviewed" until the owner signs it in the Review Desk.
+
+## SS scope: NEET-SS group, INI-SS course (2026-10-16, prep81)
+- **NEET-SS:** the plan's group (`prep-ss-groups.js`, Medical default) narrows Home (`ssScope` / `ssHomeSubjects`), Tests,
+  Coach, custom module and mixed practice. Unchanged.
+- **INI-SS:** the plan's course now narrows the same places. `prep-plan.js` `iniSubjects(id)` = the course, its degree's
+  general subject (`ss-general-medicine` / `ss-general-surgery` when an SS group holds both; none for `ss-radiology` or
+  `ss-biostatistics`), then `ss-biostatistics`. `prep.js` `planSubjects()` returns them course first; `ssScope()` returns
+  a scope `{ ini: true, label: "<course> course", subjects }`, so Home reads "Change course" and "Mixed practice across
+  your course". Before this, INI-SS Home showed every SS subject (owner's Marrow comparison).
+- **Follow-up (owner 2026-10-16, prep82):** NEET-SS Medical group now includes Critical Care Medicine (medicine
+  residents; `prep/ss-groups.json` medical `own`, rebuilt with `tools/prep-ss-groups-build.mjs`); the Critical Care group
+  stays for anaesthesia residents. INI-SS paediatric courses take MBBS `paediatrics` as their feeder (no SS General
+  Paediatrics in the bank); `planSubjects` resolves a feeder outside the NEET-SS tab with `subjectById`. Paediatric
+  Surgery keeps General Surgery.
+- **Progress score and today's plan** (`prep-plan.js` `examSubjects`) use `H.planSubjects()` when it narrows, else the
+  whole tab; before, they ranked every subject on the tab (a urology student got an acid-base lesson).
+- **Skipped minutes step:** the plan footer read "of your undefined minutes"; the plan stores and shows 30 (the default
+  `planDay` already used).
+- Tests: `test/prep-plan-scope.test.mjs` (iniSubjects for every course), `test/run-prep-subject-ui.mjs` (INI-SS Medical
+  Oncology and Urology homes, NEET-SS Medical home has no surgical subject). That browser test's older checks (six exams,
+  Radiology bank v16 counts, Learn lists) fail on `main` too and were not touched here.
