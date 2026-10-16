@@ -20,6 +20,16 @@ public final class LlamaEngine {
     /** Cap the answer so a slow device cannot cook itself on one question. */
     public static final int DEFAULT_N_PREDICT = 512;
 
+    /** GGUF file of the search pack (maik-models.js EMBED_PACK, pack id "embedding-gemma-2"). */
+    public static final String EMBED_FILE_NAME = "embeddinggemma-2-UD-Q5_K_XL.gguf";
+    /** Prefixes the kb-vectors-q5 bank was built with (see its .json sidecar). Must match byte-for-byte. */
+    public static final String EMBED_QUERY_PREFIX = "task: search result | query: ";
+    public static final String EMBED_DOC_PREFIX = "title: none | text: ";
+    /** File bytes + this headroom must be free (availMem) before the embed model loads. */
+    public static final long EMBED_HEADROOM = 512L << 20;
+    /** Defensive input cap; longer text is still cut by the native n_ctx guard. */
+    public static final int EMBED_MAX_CHARS = 2000;
+
     private final Object lock = new Object();
     private long model = 0;
     private long ctx = 0;
@@ -30,6 +40,10 @@ public final class LlamaEngine {
     private long draftCtx = 0;
     private String loadedDraftPath = null;
     private volatile boolean generating = false;
+    /** Embedding model for on-phone search (EmbeddingGemma 2, 210 MB). Same mmapped discipline as
+     *  the chat model; dropped by releaseEmbed() (memory pressure), never by the chat release(). */
+    private long embedModel = 0;
+    private String loadedEmbedPath = null;
 
     public boolean isAvailable() {
         return LlamaNative.isAvailable();
@@ -221,6 +235,59 @@ public final class LlamaEngine {
     public long lastPrefillMs() { return LlamaNative.isAvailable() ? LlamaNative.lastPrefillMs() : -1; }
     public int lastPromptTokens() { return LlamaNative.isAvailable() ? LlamaNative.lastPromptTokens() : -1; }
 
+    /**
+     * Embed one short text on device. Returns the L2-normalised floats (768 for EmbeddingGemma 2).
+     * kind "query" (default) embeds a question, "doc" a document. BUSY while a generation runs;
+     * MODEL_MISSING when the pack is not downloaded; LOW_MEMORY when it would not fit beside what
+     * is resident (the caller passes the availMem it just read; 0 = unknown, no opinion).
+     *
+     * The embed model stays mmapped across calls; only its per-call native context is transient.
+     * The native side never touches the chat KV-reuse statics, so chat behaviour is unchanged.
+     */
+    public float[] embed(String path, String text, String kind, int nThreads, long availMem) throws LlamaException {
+        if (!LlamaNative.isAvailable()) throw new LlamaException(LlamaErr.UNSUPPORTED_ARCHITECTURE, "libllama_jni.so missing for this ABI");
+        if (text == null || text.trim().isEmpty()) throw new LlamaException(LlamaErr.BAD_ARGUMENTS, "missing text");
+        if (path == null || path.isEmpty()) throw new LlamaException(LlamaErr.BAD_ARGUMENTS, "missing path");
+        String t = text.length() > EMBED_MAX_CHARS ? text.substring(0, EMBED_MAX_CHARS) : text;
+        String input = ("doc".equals(kind) ? EMBED_DOC_PREFIX : EMBED_QUERY_PREFIX) + t;
+        synchronized (lock) {
+            if (generating) throw new LlamaException(LlamaErr.BUSY, "a generation is already running");
+            generating = true;
+        }
+        try {
+            long m = ensureEmbedModel(path, availMem);
+            float[] v = LlamaNative.embed(m, input, nThreads);
+            if (v == null || v.length == 0) throw new LlamaException(LlamaErr.GENERATION_FAILURE, "embedding failed");
+            return v;
+        } finally {
+            synchronized (lock) { generating = false; }
+        }
+    }
+
+    private synchronized long ensureEmbedModel(String path, long availMem) throws LlamaException {
+        File f = new File(path);
+        if (!f.exists() || f.length() == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "embedding model not downloaded");
+        if (embedModel == 0 || !path.equals(loadedEmbedPath)) {
+            if (embedModel != 0) { LlamaNative.freeModel(embedModel); embedModel = 0; loadedEmbedPath = null; }
+            if (availMem > 0 && availMem <= f.length() + EMBED_HEADROOM)
+                throw new LlamaException(LlamaErr.LOW_MEMORY, "not enough free memory for the embedding model");
+            LlamaNative.initBackend();
+            // n_gpu_layers = 0: CPU-only; keeps no GPU buffers beside the chat model.
+            embedModel = LlamaNative.loadModel(path, 0);
+            if (embedModel == 0) throw new LlamaException(LlamaErr.MODEL_CORRUPTED, "embedding model failed to load");
+            loadedEmbedPath = path;
+        }
+        return embedModel;
+    }
+
+    /** Drop the embedding model (memory pressure). The chat model is untouched. */
+    public void releaseEmbed() {
+        synchronized (lock) {
+            if (embedModel != 0) { LlamaNative.freeModel(embedModel); embedModel = 0; }
+            loadedEmbedPath = null;
+        }
+    }
+
     public void cancel() {
         if (LlamaNative.isAvailable()) LlamaNative.cancelGenerate();
     }
@@ -234,6 +301,8 @@ public final class LlamaEngine {
     }
 
     private void releaseLocked() {
+        // Deliberately leaves the embed model alone (releaseEmbed() owns it): backgrounding must not
+        // punish the next search with a reload, and 210 MB mmapped is cheap next to the chat model.
         if (ctx != 0) { LlamaNative.freeContext(ctx); ctx = 0; }
         if (model != 0) { LlamaNative.freeModel(model); model = 0; }
         if (draftCtx != 0) { LlamaNative.freeContext(draftCtx); draftCtx = 0; }

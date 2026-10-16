@@ -11,7 +11,9 @@ on:
 jobs:
   unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 15 was enough at 6 minutes; the suite now takes 7 to 14 minutes depending on the runner and was cancelled at the cap
+    # on four PRs in a row (2026-10-17), no assertion failing. 30 keeps a real hang bounded without cancelling a healthy run.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

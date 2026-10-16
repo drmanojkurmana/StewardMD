@@ -75,7 +75,8 @@ final class LlamaVision {
         var bitmaps: [OpaquePointer] = []
         defer { bitmaps.forEach { mtmd_bitmap_free($0) } }
         for path in imagePaths {
-            let w = mtmd_helper_bitmap_init_from_file(m, path, false)
+            // b11696 takes a 4th init-options arg (video/ffmpeg tuning); default keeps file behaviour.
+            let w = mtmd_helper_bitmap_init_from_file(m, path, false, mtmd_helper_init_opt_default())
             guard let bmp = w.bitmap else {
                 throw LlamaError(.badArguments, "could not read the image")
             }

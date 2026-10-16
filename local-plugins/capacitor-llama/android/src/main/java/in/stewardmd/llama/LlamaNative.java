@@ -1,7 +1,7 @@
 package in.stewardmd.llama;
 
 /**
- * JNI boundary to llama.cpp (b10502). The native library {@code libllama_jni.so} is built from the
+ * JNI boundary to llama.cpp (b11696). The native library {@code libllama_jni.so} is built from the
  * vendored llama.cpp submodule + cpp/llama_jni.cpp via CMake/NDK (see build.gradle and
  * src/main/cpp/). If the {@code .so} is missing for the running ABI, {@link #isAvailable()} is
  * false and the engine reports {@code unsupported-architecture} instead of crashing.
@@ -119,6 +119,14 @@ public final class LlamaNative {
      * No decode loop, no grammar. Null when a choice is not exactly one token or the prefill failed.
      */
     public static native float[] pick(long ctx, long model, String prompt, String[] choices);
+
+    /**
+     * Embed one short text for on-phone search (EmbeddingGemma 2). {@code text} already carries
+     * the bank prefix (see {@link LlamaEngine}; "query" for a question, "doc" for a document).
+     * Creates and frees its own embedding context; the model handle stays open across calls.
+     * Returns the L2-normalised floats (768 for EmbeddingGemma 2), or null on failure.
+     */
+    public static native float[] embed(long model, String text, int nThreads);
 
     /**
      * Generate up to {@code nPredict} tokens, streaming each detokenised piece to
