@@ -169,9 +169,9 @@ export function buildTeachPrompt(req) {
     const y = LETTERS[req.key];
     if (req.chosen >= 0 && req.chosen !== req.key) {
       const x = LETTERS[req.chosen];
-      task = "The student chose " + x + ". Explain why " + x + " is wrong and why " + y + " is the correct answer, using only the grounding.";
-    } else task = "Explain why " + y + " is the correct answer and why the other options are not, using only the grounding.";
-  } else task = "Explain this step again in simpler words, using only the grounding.";
+      task = "The student chose " + x + ". Explain why " + x + " is wrong and why " + y + " is the correct answer, using the grounding first.";
+    } else task = "Explain why " + y + " is the correct answer and why the other options are not, using the grounding first.";
+  } else task = "Explain this step again in simpler words, using the grounding first.";
   let user = "GROUNDING:\n" + req.ground + "\n\n";
   if (kbGround) user += "KNOWLEDGE BASE (Reference guidelines and protocols):\n" + kbGround + "\n\n";
   user += "TASK: " + task;
