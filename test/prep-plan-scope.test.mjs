@@ -170,7 +170,9 @@ test("INI-SS course scope: the course, its degree's general subject, Biostatisti
   assert.deepEqual([...ini("ss-urology")], ["ss-urology", "ss-general-surgery", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-critical-care")], ["ss-critical-care", "ss-general-medicine", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-radiology")], ["ss-radiology", "ss-biostatistics"], "radiology's degree is not Medicine");
-  assert.deepEqual([...ini("ss-neonatology")], ["ss-neonatology", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-neonatology")], ["ss-neonatology", "paediatrics", "ss-biostatistics"], "paediatric courses: MBBS Paediatrics is the feeder (owner 2026-10-16)");
+  assert.deepEqual([...ini("ss-paediatric-cardiology")], ["ss-paediatric-cardiology", "paediatrics", "ss-biostatistics"]);
+  assert.deepEqual([...ini("ss-paediatric-surgery")], ["ss-paediatric-surgery", "ss-general-surgery", "ss-biostatistics"], "M.Ch. Paediatric Surgery: General Surgery");
   assert.deepEqual([...ini("ss-general-medicine")], ["ss-general-medicine", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-biostatistics")], ["ss-biostatistics"]);
   assert.deepEqual([...ini("")], []);
@@ -182,7 +184,11 @@ test("INI-SS course scope: the course, its degree's general subject, Biostatisti
     if (med.has(id) && id !== "ss-biostatistics") assert.ok(!out.some((x) => sur.has(x) && x !== "ss-biostatistics"), id + " has a surgical subject");
     if (sur.has(id) && id !== "ss-biostatistics") assert.ok(!out.some((x) => med.has(x) && x !== "ss-biostatistics"), id + " has a medicine subject");
   }
+  // Owner 2026-10-16: Critical Care is in the Medical group (medicine residents) and keeps its own group (anaesthesia residents).
+  assert.ok(SSG.find((g) => g.id === "medical").subjects.includes("ss-critical-care"), "Medical group has Critical Care");
+  assert.ok(SSG.find((g) => g.id === "critical-care").subjects.includes("ss-critical-care"), "the Critical Care group stays");
   const src = fs.readFileSync(path.join(ROOT, "prep.js"), "utf8");
+  assert.match(src, /return subjectById\(id\); \}\)\.filter\(Boolean\)/, "a feeder outside the NEET-SS tab is looked up in the taxonomy");
   assert.match(src, /PP\.iniSubjects \? PP\.iniSubjects\(pl\.subject\)/, "planSubjects uses the course scope");
   assert.match(src, /s\.pl\.exam === "ini-ss" && s\.pl\.subject && PP\.iniSubjects/, "Home (ssScope) narrows INI-SS to the course");
 });
