@@ -25,6 +25,9 @@ places:
 - Organism headings break between words only (`.abg-pro .abg-ch-btn{word-break:normal}`, column uncapped): they used
   to split mid-word ("Streptoc / occi", "aerugino / sa").
 - My hospital: from 760 px the form fields stop at 640 px and the Check button sits under the text box.
+- Organism, drug and cell sheets: from 760 px a centred card (760 px wide, at most 88dvh). Owner: "click on any organism
+  or drug, it goes out of screen". The cause was app-wide: the iPad page zoom of 1.08/1.15 made the 88vh cap taller than
+  the screen; tablets now run at zoom 1.0 (Decisions 2026-10-16, home.js autoFitD, `smd_tablet_zoom=1` restores it).
 - `test/run-ipad-fit.mjs` opens every Home action at 820x1180, 1180x820, 1024x1366 and 1366x1024 with the tablet zoom
   and touch on; all 58 fit in headless Chrome on 2026-10-16 (it is not WebKit, and it sees the first screen only).
 

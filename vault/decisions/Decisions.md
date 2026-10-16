@@ -5,6 +5,20 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-16 · No page zoom above 1.0 on iPad (owner: "many modules go out of screen and are not operable")
+
+**Decision.** On a large touch screen (`bigTouchD`: touch points > 1, shorter screen side >= 600) the Display auto fit no
+longer zooms the page above 1.0. It used to set `documentElement.style.zoom` to 1.08 (600 to 899 px) or 1.15 (900+ px).
+**Why.** A root zoom is not taken back out of `vh` units: every panel capped at `88vh`, `92vh` or `100vh` (75 files)
+drew 8 to 15% taller than the screen. The owner saw it as "click any organism or drug, it goes out of screen" in
+Antibiogram: at 1.15 the 88vh organism sheet filled the whole iPad Pro screen with no top gap and its Done button at
+the edge. At 1.0 every module lays out as it does on a phone, which is what each was built and tested at.
+**Trade-off.** Text on iPad is 8 to 15% smaller than before (iOS standard size); the Settings text-size slider still
+scales it, and a manual choice is kept. PrepNucleus's iPad layout was drawn at 1.08/1.15 (`test/run-prep-ipad.mjs`
+now expects 1.0; its 9 failures are the same on main before this change).
+**Status.** Default on. `?tabletzoom=1` or localStorage `smd_tablet_zoom=1` restores the old zoom. Headless Chrome is
+not WebKit: confirm on a device.
+
 ## 2026-10-16 · CliniX wears the PrepNucleus look, behind a flag (owner)
 
 **Decision.** CliniX adopts PrepNucleus's layout language (wash, round bar buttons, grouped cards, capsule

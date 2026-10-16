@@ -49,6 +49,9 @@ const MEASURE = `(function(){
       if (el.parentElement && bad.has(el.parentElement)) { bad.add(el); continue; }
       bad.add(el); rows.push({ el: name(el), l: Math.round(r.left), r: Math.round(r.right), w: Math.round(r.width), txt: (el.innerText||'').trim().slice(0,40) });
     }
+    // A fixed panel (sheet, card, full-screen module) taller than the screen or starting above it: its top or its
+    // bottom bar is off the glass. This is what a vh height under a page zoom above 1.0 does.
+    if (s.position === 'fixed' && r.width > 200 && (r.top < -2 || r.bottom > H + 2) && !(r.top >= H || r.bottom <= 0)) rows.push({ el: name(el), t: Math.round(r.top), b: Math.round(r.bottom), h: Math.round(r.height), H: H, why: 'taller than the screen' });
     if ((s.position === 'fixed') && r.height > 100 && el.scrollHeight > el.clientHeight + 8 && !/(auto|scroll)/.test(s.overflowY) && r.bottom > H - 2){
       cut.push({ el: name(el), sh: el.scrollHeight, ch: el.clientHeight });
     }

@@ -82,7 +82,10 @@ const metrics = async ({ w, h }) => {
   await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: true, ...screen });
   await call("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
 };
-const zoomFor = (w) => w < 600 ? 1 : w < 900 ? 1.08 : 1.15;   // autoFitD at DPR 1 (the 0.9 and 0.95 steps never on an iPad)
+// autoFitD at DPR 1 on an iPad: 1.0 at every size since 2026-10-16 (a root zoom above 1 made vh-capped sheets taller than
+// the screen across the app; ?tabletzoom=1 restores 1.08 / 1.15). The 0.9 and 0.95 steps never apply on an iPad.
+const TABLET_ZOOM = /[?&]tabletzoom=1/.test(process.env.QS || "");
+const zoomFor = (w) => !TABLET_ZOOM ? 1 : w < 600 ? 1 : w < 900 ? 1.08 : 1.15;
 
 // Arena and social calls answered in the browser: not joined yet, so Friends asks consent first.
 function api(url, method) {
@@ -292,7 +295,7 @@ try {
       await metrics({ w: 507, h: 820 });
       ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - 1) < 0.001;`, 3000), "8. resize 1180 to 507: zoom recomputes to 1 (was " + z0 + ")");
       await metrics(S);
-      ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - 1.15) < 0.001;`, 3000), "8. and back to 1.15 at 1180");
+      ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - ${zoomFor(1180)}) < 0.001;`, 3000), "8. and back to " + zoomFor(1180) + " at 1180");
       await ev(`var s=JSON.parse(localStorage.getItem("smd_display_v1")||"{}"); s.autoFit=false; s.fontScale=1.3; localStorage.setItem("smd_display_v1", JSON.stringify(s)); return 1;`);
       await boot();
       await metrics({ w: 507, h: 820 }); await sleep(600);

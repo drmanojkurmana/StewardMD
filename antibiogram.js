@@ -1957,6 +1957,9 @@
       ".abg-pro .abg-empty-filter{border-radius:10px}.abg-pro .abg-reset-filter-btn{border-radius:8px;font:600 13px var(--f);padding:8px 14px}",
       ".abg-pro .abg-modal-sheet{background:rgba(15,23,42,.36);-webkit-backdrop-filter:none;backdrop-filter:none}",
       ".abg-pro .abg-picker-card,.abg-pro .abg-dossier-card,.abg-pro .abg-cell-action-card{border-radius:16px 16px 0 0;box-shadow:0 -10px 30px rgba(15,23,42,.16)}",
+      // iPad: the organism, drug and cell sheets are a centred card, not a strip across a 1,366 px screen, and they never
+      // grow past the screen (dvh where supported; the page zoom on tablets is 1.0 since 2026-10-16, home.js autoFitD).
+      "@media (min-width:760px){.abg-pro .abg-picker-card,.abg-pro .abg-dossier-card,.abg-pro .abg-cell-action-card{width:min(760px,100%);margin:0 auto;max-height:min(88vh,88dvh)}}",
       ".abg-pro .abg-picker-title,.abg-pro .abg-cell-action-title{font:600 17px var(--f)}.abg-pro .abg-picker-close{background:var(--track)}.abg-pro .abg-picker-item{border-radius:8px;background:var(--panel);font:600 13.5px var(--f)}",
       ".abg.abg-pro .abg-dossier-head{background:var(--panel);color:var(--ink);border-top:3px solid var(--gc,var(--tl));border-bottom:1px solid var(--line);border-radius:0;margin-top:6px}",
       ".abg-pro .abg-dossier-badge{background:var(--tls);color:var(--tl);border-radius:4px;letter-spacing:.02em}.abg-pro .abg-dossier-gram{color:var(--mut);opacity:1}",

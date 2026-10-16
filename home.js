@@ -10191,7 +10191,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   /* PrepNucleus renders at full size (owner 2026-10-10: "1.0 in PrepNucleus only"). Auto fit shrinks small phones to
      0.95 (0.9 under 340 px), so a 44 px target drew at ~42. While PrepNucleus is open (html.pn-open, set and cleared by
      prep.js open()/close(); its sheets, the Ask MaiK sheet and the image viewer only open inside it) the shrink comes
-     off: auto fit -> max(1, scale) (an iPad's 1.08/1.15 is kept); a size the user chose (Settings slider or preset, or
+     off: auto fit -> max(1, scale) (an iPad is 1.0 since 2026-10-16, 1.08/1.15 with smd_tablet_zoom=1); a size the user chose (Settings slider or preset, or
      the OS text size) -> scale / 0.95, so only the default shrink is removed. Still ONE zoom, on html, so every
      getBoundingClientRect / clientX conversion that reads documentElement.style.zoom stays right. */
   var PN_SHRINK = .95;
@@ -10228,8 +10228,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // An iPad in Split View or Slide Over (a narrow window on a large touch screen) keeps zoom 1.0 and default density,
     // so 44 px targets stay 44 px; the 0.9 and 0.95 steps are for small phones only.
     if (fs < 1 && bigTouchD()) { fs = 1; d = "default"; }
+    // iPad and iPad Pro (owner 2026-10-16: "many modules go out of screen and are not operable"): no page zoom ABOVE 1.0
+    // on a large touch screen. A root zoom of 1.08 / 1.15 is not taken back out of vh units, so every sheet capped at
+    // 88vh, 92vh or 100vh (75 files) drew 8 to 15% taller than the screen: the Antibiogram organism and drug sheets lost
+    // their top and their Done button, full-screen modules pushed their bottom bar off the glass. At 1.0 every module
+    // lays out as it does on a phone. ?tabletzoom=1 or localStorage smd_tablet_zoom=1 restores 1.08 / 1.15.
+    if (fs > 1 && bigTouchD() && !tabletZoomD()) fs = 1;
     if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); return; }   // nothing to re-zoom (a resize that kept the band)
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
+  }
+  function tabletZoomD() {
+    try { var q = (location.search.match(/[?&]tabletzoom=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_tablet_zoom") === "1"; } catch (e) { return false; }
   }
   function bigTouchD() {
     try { var sc = window.screen || {}; return (navigator.maxTouchPoints || 0) > 1 && Math.min(sc.width || 0, sc.height || 0) >= 600; } catch (e) { return false; }
