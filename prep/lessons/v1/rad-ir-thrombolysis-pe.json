@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-thrombolysis-pe",
+  "subject": "radiology",
+  "title": "Pulmonary embolism and venous de-bulking",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Clots strain right hearts fast. **Massive pulmonary embolism** with shock and pressor needs demands instant reperfusion beyond heparin alone. **Submassive PE** with right-heart strain but stable pressure earns monitored escalation. **Catheter-directed therapy** delivers lytic into pulmonary trunks with ultrasound-assisted loosening. **Systemic lysis** suits arrests and collapse where catheters take too long.",
+      "say": "Clots strain right hearts fast. Massive embolism with shock demands instant reperfusion beyond heparin. Submassive strain with stable pressure earns monitored escalation. Catheter therapy delivers lytic into pulmonary trunks. Systemic lysis suits arrests where catheters take too long.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sort shock versus strain"
+          },
+          {
+            "id": "b",
+            "label": "Heparinise at once"
+          },
+          {
+            "id": "c",
+            "label": "Lyase by route"
+          },
+          {
+            "id": "d",
+            "label": "Watch right hearts"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Legs threaten lungs when clots float. **Phlegmasia with threatened limbs** from massive iliofemoral clots needs urgent de-bulking. **Pharmacomechanical thrombectomy** macerates with aspiration plus lytic for faster clearance. **May-Thurner stenting** scaffolds compressions behind cleared clots. **IVC procedures** pair filters with clot removal where emboli threaten.",
+      "say": "Legs threaten lungs when clots float. Phlegmasia with threatened limbs needs urgent de-bulking. Mechanical maceration with aspiration plus lytic clears faster. Iliac compression scaffolds behind cleared clots. Caval filters pair with removal where emboli threaten.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clot",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Massive PE",
+            "Catheter lytic"
+          ],
+          [
+            "Phlegmasia",
+            "De-bulk urgently"
+          ],
+          [
+            "Compression",
+            "Stent behind"
+          ],
+          [
+            "Emboli risk",
+            "Filter with removal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Brains and bellies forbid lytics. **Absolute blocks** mirror limb rules with recent brain bleeds and neurosurgery. **Pregnancy with collapse** individualises where mothers dying outweigh fetal lytic risks. **Postoperative windows** weigh days since knives against dying lungs. **Half-dose catheter regimens** trim bleeding where full systemic doses threaten.",
+      "say": "Brains and bellies forbid lytics. Recent brain bleeds and neurosurgery forbid outright. Collapsing mothers individualise where dying outweighs fetal risks. Operative windows weigh days since knives against dying lungs. Catheter half-doses trim bleeding.",
+      "vis": null
+    },
+    {
+      "tx": "Hearts recover slowly under watching. **Echo with troponin** tracks right-heart recovery carefully after reperfusion. **Anticoagulation bridges** continue once lytics stop, preventing re-clots. **Retrievable filters remove** once drugs resume and traps clear. **Thrombophilia with cancer screens** follow unprovoked clots for lifelong answers.",
+      "say": "Hearts recover under watching. Echo with troponin tracks right-heart recovery. Anticoagulation bridges continue once lytics stop. Retrievable filters leave once drugs resume. Thrombophilia with cancer screens follow unprovoked clots.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Echo the heart"
+          },
+          {
+            "id": "b",
+            "label": "Bridge with drugs"
+          },
+          {
+            "id": "c",
+            "label": "Remove filters"
+          },
+          {
+            "id": "d",
+            "label": "Screen for causes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-376",
+    "maikir2-377",
+    "maikir2-378",
+    "maikir2-379",
+    "maikir2-380",
+    "maikir2-381",
+    "maikir2-382",
+    "maikir2-383",
+    "maikir2-384",
+    "maikir2-385",
+    "maikir2-386",
+    "maikir2-387",
+    "maikir2-388",
+    "maikir2-389",
+    "maikir2-390",
+    "maikir2-391",
+    "maikir2-392",
+    "maikir2-393",
+    "maikir2-394",
+    "maikir2-395",
+    "maikir2-396",
+    "maikir2-397",
+    "maikir2-398",
+    "maikir2-399",
+    "maikir2-400"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

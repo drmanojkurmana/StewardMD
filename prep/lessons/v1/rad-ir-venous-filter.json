@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-venous-filter",
+  "subject": "radiology",
+  "title": "IVC filters: indications and retrieval",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Filters catch clots when drugs cannot. **Absolute indications** for **IVC filters** centre on venous thromboembolism with **anticoagulation contraindicated** or failed, under Society of Interventional Radiology guidance. **Relative indications** cover massive clot burdens with poor reserve and perioperative high-risk windows. **Prophylactic filters** without clot stay controversial and need documented justification. **Ultrasound surveillance** confirms caval patency before and after placement.",
+      "say": "Filters catch clots when drugs cannot. Absolute indications centre on clots with anticoagulation contraindicated or failed. Relative indications cover massive burdens with poor reserve. Prophylactic filters without clot stay controversial. Ultrasound confirms caval patency before and after.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Prove the clot"
+          },
+          {
+            "id": "b",
+            "label": "Fail or forbid drugs"
+          },
+          {
+            "id": "c",
+            "label": "Place the filter"
+          },
+          {
+            "id": "d",
+            "label": "Plan retrieval"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Retrievable beats permanent when possible. **Retrievable filters** suit temporary contraindications with active retrieval planning from day one. **Permanent devices** serve lifelong contraindications or very limited life expectancy. **Dwell time** matters since tilt, embedment and perforation rise with months in situ. **Filter clinics** track every device so none drift into forgotten permanence.",
+      "say": "Retrievable beats permanent when possible. Retrievable filters suit temporary contraindications with retrieval planned from day one. Permanent devices serve lifelong blocks. Dwell time matters since tilt and embedment rise with months. Filter clinics track every device.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Device",
+          "Use"
+        ],
+        "rows": [
+          [
+            "Retrievable",
+            "Temporary blocks"
+          ],
+          [
+            "Permanent",
+            "Lifelong blocks"
+          ],
+          [
+            "Early retrieval",
+            "Weeks not years"
+          ],
+          [
+            "Clinic",
+            "Track all"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Retrieval is a planned procedure. **Standard snare retrieval** loops the hook through jugular access once clot clears and drugs resume. **Advanced techniques** with forceps or laser sheaths free tilted and embedded apices. **Residual clot in filters** postpones retrieval until anticoagulation clears the trap. **Cavagram before and after** maps tilt, thrombus and caval injury.",
+      "say": "Retrieval is planned. Snare loops hook filters through jugular access once clots clear and drugs resume. Forceps or laser sheaths free tilted apices. Residual trapped clot postpones retrieval until drugs clear it. Cavagrams map tilt and injury before and after.",
+      "vis": null
+    },
+    {
+      "tx": "Complications declare through symptoms. **Filter tilt with strut perforation** aches with back pain and needs urgent assessment. **Migration to hearts or lungs** announces with chest pain and arrhythmia needing snare rescue. **IVC thrombosis** swells both legs with collaterals across the abdomen. **Anticoagulate when possible** after placement since filters never treat clots themselves.",
+      "say": "Complications declare through symptoms. Tilted struts ache with back pain needing assessment. Migration to hearts announces with chest pain needing snare rescue. Caval thrombosis swells both legs with abdominal collaterals. Anticoagulate when possible since filters never treat clots.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Watch for pain"
+          },
+          {
+            "id": "b",
+            "label": "Scan both legs"
+          },
+          {
+            "id": "c",
+            "label": "Rescue migrants"
+          },
+          {
+            "id": "d",
+            "label": "Resume drugs"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-226",
+    "maikir2-227",
+    "maikir2-228",
+    "maikir2-229",
+    "maikir2-230",
+    "maikir2-231",
+    "maikir2-232",
+    "maikir2-233",
+    "maikir2-234",
+    "maikir2-235",
+    "maikir2-236",
+    "maikir2-237",
+    "maikir2-238",
+    "maikir2-239",
+    "maikir2-240",
+    "maikir2-241",
+    "maikir2-242",
+    "maikir2-243",
+    "maikir2-244",
+    "maikir2-245",
+    "maikir2-246",
+    "maikir2-247",
+    "maikir2-248",
+    "maikir2-249",
+    "maikir2-250"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

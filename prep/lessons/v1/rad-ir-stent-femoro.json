@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-stent-femoro",
+  "subject": "radiology",
+  "title": "Femoropopliteal and tibial revascularisation",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Calves cramp when femorals fail. **Femoropopliteal disease** aches calves with absent popliteal pulses, progressing to rest pain and ulcers. **Drug-coated balloons** deliver antiproliferative drug without permanent metal for focal lesions. **Nitinol scaffolds** suit long dissections and recoil where balloons alone fail. **No-stent zones** behind knees and at hip flexion points avoid fractures.",
+      "say": "Calves cramp when femorals fail. Femoropopliteal disease aches calves with absent pulses, progressing to rest pain. Drug-coated balloons treat focal lesions without permanent metal. Nitinol scaffolds suit long dissections where balloons fail. Hinge zones behind knees avoid metal.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map the lesion"
+          },
+          {
+            "id": "b",
+            "label": "Balloon focal disease"
+          },
+          {
+            "id": "c",
+            "label": "Scaffold long recoil"
+          },
+          {
+            "id": "d",
+            "label": "Spare hinge zones"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Calcium and length dictate tools. **Vessel preparation** with scoring or lithotripsy cracks calcium so balloons expand fully. **Dissection flaps** that limit flow earn spot stents rather than full coverage. **Drug-coated scaffolds** pair drug with support for complex lesions. **Bypass surgery** serves long occlusions with good veins where endovascular fails.",
+      "say": "Calcium and length dictate tools. Scoring or lithotripsy cracks calcium so balloons open fully. Flow-limiting flaps earn spot stents rather than full metal. Drug-coated scaffolds pair drug with support. Bypass serves long blocks with good veins where wires fail.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lesion",
+          "Tool"
+        ],
+        "rows": [
+          [
+            "Focal soft",
+            "Drug balloon"
+          ],
+          [
+            "Calcified",
+            "Prepare first"
+          ],
+          [
+            "Long recoil",
+            "Nitinol scaffold"
+          ],
+          [
+            "Failed wires",
+            "Bypass"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Below knees feed healing. **Infrapopliteal angioplasty** opens tibial trunks for non-healing ulcers where straight-line flow to feet matters. **Angiosome targeting** aims the feeding trunk of the wound where possible. **Pedal access** retrogradely crosses uncrossable caps from below. **Wound care with offloading** continues since flow alone never heals ulcers.",
+      "say": "Below knees feed healing. Tibial angioplasty opens trunks for non-healing ulcers where straight flow to feet matters. Wound-targeted trunks aim at ulcers where possible. Foot access crosses uncrossable caps from below. Wound care continues since flow alone never heals.",
+      "vis": null
+    },
+    {
+      "tx": "Restenosis returns silently first. **Duplex surveillance** with ABI catches narrowing well before claudication ever returns. **Target-lesion re-ballooning** treats focal recurrence without stacking metal. **Stent fracture checks** X-ray hinge zones where breaks cluster. **Lifelong tablets with walking** guard every femoropopliteal fix.",
+      "say": "Restenosis returns silently first. Duplex with ABI catches narrowing before symptoms return. Focal recurrence re-balloons without stacking extra metal layers. X-rays check hinge zones where breaks cluster. Lifelong tablets with walking guard every fix.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Scan with ABI"
+          },
+          {
+            "id": "b",
+            "label": "Re-balloon focal"
+          },
+          {
+            "id": "c",
+            "label": "X-ray hinges"
+          },
+          {
+            "id": "d",
+            "label": "Walk with tablets"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-326",
+    "maikir2-327",
+    "maikir2-328",
+    "maikir2-329",
+    "maikir2-330",
+    "maikir2-331",
+    "maikir2-332",
+    "maikir2-333",
+    "maikir2-334",
+    "maikir2-335",
+    "maikir2-336",
+    "maikir2-337",
+    "maikir2-338",
+    "maikir2-339",
+    "maikir2-340",
+    "maikir2-341",
+    "maikir2-342",
+    "maikir2-343",
+    "maikir2-344",
+    "maikir2-345",
+    "maikir2-346",
+    "maikir2-347",
+    "maikir2-348",
+    "maikir2-349",
+    "maikir2-350"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

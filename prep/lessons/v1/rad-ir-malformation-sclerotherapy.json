@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-malformation-sclerotherapy",
+  "subject": "radiology",
+  "title": "Sclerotherapy for slow-flow malformations",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Slow-flow lesions sclerose beautifully. **Venous malformations** with soft compressible blue masses and **lymphatic malformations** with cystic spaces suit **sclerotherapy** over surgery. **D-dimer with fibrinogen** screens localised clotting that flares with treatment. **Foam with ultrasound** spreads sclerosant across walls better than liquid alone. **Compression after** keeps walls apposed while scarring seals.",
+      "say": "Slow-flow lesions sclerose beautifully. Soft blue venous masses with cystic lymphatic spaces suit sclerotherapy over surgery. Blood screens catch local clotting that flares with treatment. Ultrasound foam spreads sclerosant across walls. Compression after keeps walls apposed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Map slow flow"
+          },
+          {
+            "id": "b",
+            "label": "Screen clotting"
+          },
+          {
+            "id": "c",
+            "label": "Foam the walls"
+          },
+          {
+            "id": "d",
+            "label": "Compress after"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Agents injure linings deliberately. **Sodium tetradecyl sulphate foam** scars venous walls with controlled inflammation. **Doxycycline with bleomycin** suit lymphatic cysts with lower skin risk. **Ethanol reserved** for resistant lesions given nerve and skin toxicity. **Dose limits** by weight and lesion size prevent haemolysis and renal injury.",
+      "say": "Agents injure linings deliberately. Sulphate foam scars venous walls with controlled inflammation. Doxycycline with bleomycin suit lymphatic cysts with lower skin risk. Ethanol stays reserved given nerve toxicity. Weight-based dose limits prevent blood breakdown.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Use"
+        ],
+        "rows": [
+          [
+            "STS foam",
+            "Venous walls"
+          ],
+          [
+            "Doxycycline",
+            "Lymphatic cysts"
+          ],
+          [
+            "Bleomycin",
+            "Low skin risk"
+          ],
+          [
+            "Ethanol",
+            "Resistant only"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clots and nerves complicate foam work. **Localised intravascular coagulopathy** consumes factors where heparin bridges dangerous flare periods. **Nerve mapping** avoids motor branches in complex mixed lesions. **Skin blistering** from superficial spill needs elevation with careful wound care. **Haemoglobinuria** after large sessions marks haemolysis needing urgent fluids.",
+      "say": "Clots and nerves complicate. Local clotting consumes factors where heparin bridges flares. Nerve mapping avoids motor branches. Superficial spills blister skin needing elevation. Dark urine after large sessions marks blood breakdown needing fluids.",
+      "vis": null
+    },
+    {
+      "tx": "Shrinkage proves slowly over many months. **Ultrasound volumes** shrink steadily where repeat sessions space over many months. **Pain with heaviness** lifts gradually as channels fibrose. **Repeat foam sessions** continue while lesions shrink safely. **Surgery for residuals** removes fibrosed remnants cleanly.",
+      "say": "Shrinkage proves over months. Ultrasound volumes shrink steadily where sessions space over months. Pain with heaviness lifts as channels scar. Repeat foam continues while lesions shrink safely. Surgery removes fibrosed remnants cleanly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure volumes"
+          },
+          {
+            "id": "b",
+            "label": "Foam repeatedly"
+          },
+          {
+            "id": "c",
+            "label": "Ease the pain"
+          },
+          {
+            "id": "d",
+            "label": "Resect remnants"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-551",
+    "maikir2-552",
+    "maikir2-553",
+    "maikir2-554",
+    "maikir2-555",
+    "maikir2-556",
+    "maikir2-557",
+    "maikir2-558",
+    "maikir2-559",
+    "maikir2-560",
+    "maikir2-561",
+    "maikir2-562",
+    "maikir2-563",
+    "maikir2-564",
+    "maikir2-565",
+    "maikir2-566",
+    "maikir2-567",
+    "maikir2-568",
+    "maikir2-569",
+    "maikir2-570",
+    "maikir2-571",
+    "maikir2-572",
+    "maikir2-573",
+    "maikir2-574",
+    "maikir2-575"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

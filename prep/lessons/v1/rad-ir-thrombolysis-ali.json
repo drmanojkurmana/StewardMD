@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-thrombolysis-ali",
+  "subject": "radiology",
+  "title": "Acute limb ischaemia: lysis and rescue",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Time decides salvageability. **Acute limb ischaemia** with sudden pallor, pain and pulselessness sorts by **Rutherford categories** where viable limbs sense and move. **Symptom windows** within roughly fourteen days suit lysis while dead nerves and rigor mark irreversibility. **Embolic versus thrombotic** causes split healthy hearts with atrial fibrillation from diseased arteries. **Heparin at diagnosis** halts clot spread while plans form.",
+      "say": "Time decides salvageability. Sudden pallor with pain and lost pulses sorts by Rutherford categories where viable limbs sense and move. Recent symptoms suit lysis while dead nerves mark irreversibility. Embolic hearts differ from diseased arteries. Heparin at diagnosis halts spread while plans form.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Feel no pulse"
+          },
+          {
+            "id": "b",
+            "label": "Sort Rutherford"
+          },
+          {
+            "id": "c",
+            "label": "Heparinise at once"
+          },
+          {
+            "id": "d",
+            "label": "Lyase or operate"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Drips dissolve from inside. **Catheter-directed thrombolysis** parks multi-sidehole catheters inside clots infusing lytic low and slow. **Lacing with pulse-spray** primes thrombus before drips continue overnight. **Angiographic checks** every several hours track lysis against bleeding. **Unmasking culprits** reveals stenoses beneath cleared clot needing balloons or stents.",
+      "say": "Drips dissolve from inside. Multi-hole catheters parked inside clots infuse lytic low and slow. Pulse-spray priming precedes overnight drips. Regular angiographic checks track lysis against bleeding. Cleared clot unmasks stenoses needing balloons or stents.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Move"
+        ],
+        "rows": [
+          [
+            "Park catheter",
+            "Inside clot"
+          ],
+          [
+            "Prime",
+            "Pulse-spray lace"
+          ],
+          [
+            "Maintain",
+            "Overnight drip"
+          ],
+          [
+            "Unmask",
+            "Treat culprits"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bleeding limits every drip. **Absolute blocks** of recent intracranial bleeds, strokes and neurosurgery forbid lysis outright. **Relative cautions** of recent surgery, punctures and ulcers weigh case by case. **Fibrinogen watches** with haemoglobin track consumption before catastrophe. **Stop triggers** of falling fibrinogen, major bleeding or neuro change halt drips at once.",
+      "say": "Bleeding limits every drip. Recent brain bleeds, strokes and neurosurgery forbid lysis outright. Recent surgery and ulcers weigh case by case. Fibrinogen with haemoglobin tracks consumption. Falling levels, major bleeding or neuro change halt drips at once.",
+      "vis": null
+    },
+    {
+      "tx": "Compartments swell as flow returns. **Reperfusion swelling** after successful lysis tightens calves needing pressure checks. **Fasciotomy thresholds** open calves where pain with tense compartments and late signs threaten muscle. **Myoglobin with potassium** released from dying muscle injures kidneys needing fluids. **Completion runoff** proves durable channels with treated culprits before closure.",
+      "say": "Compartments swell as flow returns. Successful lysis tightens calves needing pressure checks. Pain with tense compartments threatens muscle needing release. Dying muscle releases toxins injuring kidneys needing fluids. Final runoff proves durable channels before closure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Watch calves"
+          },
+          {
+            "id": "b",
+            "label": "Release tight ones"
+          },
+          {
+            "id": "c",
+            "label": "Flush kidneys"
+          },
+          {
+            "id": "d",
+            "label": "Prove runoff"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-351",
+    "maikir2-352",
+    "maikir2-353",
+    "maikir2-354",
+    "maikir2-355",
+    "maikir2-356",
+    "maikir2-357",
+    "maikir2-358",
+    "maikir2-359",
+    "maikir2-360",
+    "maikir2-361",
+    "maikir2-362",
+    "maikir2-363",
+    "maikir2-364",
+    "maikir2-365",
+    "maikir2-366",
+    "maikir2-367",
+    "maikir2-368",
+    "maikir2-369",
+    "maikir2-370",
+    "maikir2-371",
+    "maikir2-372",
+    "maikir2-373",
+    "maikir2-374",
+    "maikir2-375"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

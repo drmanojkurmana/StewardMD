@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-access-radial",
+  "subject": "radiology",
+  "title": "Transradial access: selection and wrist care",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "The wrist offers a second front door. **Transradial access** enters the **radial artery** two fingerbreadths above the wrist crease, favouring coronary and selected visceral work with faster ambulation. **Collateral flow** through the palmar arch from the ulnar artery protects the hand, checked by **Barbeau plethysmography** or the older Allen squeeze test. **Small-calibre radial arteries** under two millimetres, Raynaud disease and dialysis fistula arms rule the wrist out. **Patient preference** for sitting up early makes radial popular.",
+      "say": "The wrist offers a second front door. Radial access enters the wrist artery for coronary and selected gut work with faster walking. Ulnar collateral flow through the palm protects the hand, checked by Barbeau or Allen testing. Tiny arteries, Raynaud disease and fistula arms rule the wrist out. Patients prefer sitting up early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Check collateral flow"
+          },
+          {
+            "id": "b",
+            "label": "Puncture at wrist"
+          },
+          {
+            "id": "c",
+            "label": "Do the case"
+          },
+          {
+            "id": "d",
+            "label": "Band and walk early"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Spasm is the wrist's signature trouble. **Radial spasm** grips catheters when the small artery meets friction, pain or cold, and prevention beats rescue every time. **Vasodilator cocktails** of verapamil with nitroglycerin through the sheath relax the wall, while adequate **local anaesthesia** and gentle wire handling avoid provoking grip. **Hydrophilic sheaths** glide with less friction than bare plastic. **Forced catheter pushing** through grip dissects the artery, so pause and medicate instead.",
+      "say": "Spasm is the wrist signature trouble. The small artery grips catheters with friction, pain or cold, so prevention beats rescue. Vasodilator cocktails relax the wall while good local anaesthesia and gentle handling avoid provoking grip. Slippery coated sheaths glide better. Never force catheters through grip.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trigger",
+          "Prevention"
+        ],
+        "rows": [
+          [
+            "Friction",
+            "Coated sheaths"
+          ],
+          [
+            "Pain",
+            "Local anaesthetic"
+          ],
+          [
+            "Cold",
+            "Warm room"
+          ],
+          [
+            "Grip",
+            "Vasodilators"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The hand usually forgives, but watch it closely. **Radial artery occlusion** silences the wrist pulse silently in a fraction of cases, usually without hand ischaemia thanks to ulnar collateral flow. **Patent haemostasis** with a pressure band keeps a trickle of flow during compression and cuts occlusion rates under CIRSE guidance. **Compartment syndrome** from forearm bleeding brings severe pain with a tense forearm and needs urgent surgical release. **Granuloma and numbness** near the scar mark superficial branch irritation.",
+      "say": "The hand usually forgives but watch it. Radial occlusion silently removes the wrist pulse, usually without harm thanks to ulnar flow. Patent haemostasis bands keep a trickle flowing during compression and cut occlusion. Severe pain with a tense forearm means compartment syndrome needing urgent release. Scar numbness marks small branch irritation.",
+      "vis": null
+    },
+    {
+      "tx": "Groin keeps its place for big work. **Large-bore devices** above six French, complex below-knee recanalisation and emergency bleeding control still favour the **common femoral artery** with its calibre and straight track. **Failed radial loops and high brachial take-offs** convert to femoral rather than forcing tortuous anatomy. **Exam traps** contrast radial benefits for coronary comfort against femoral necessity for size, while **crossover** is framed as wisdom rather than failure. **Document the switch** so the next operator starts correctly.",
+      "say": "Groin keeps its place for big work. Large devices, complex leg work and emergency bleeding still favour the femoral artery with its size and straight run. Tortuous arm loops convert to groin rather than forcing anatomy. Exams contrast radial comfort against femoral necessity for size, and crossover counts as wisdom. Document the switch.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Judge the size needed"
+          },
+          {
+            "id": "b",
+            "label": "Start radial when suitable"
+          },
+          {
+            "id": "c",
+            "label": "Cross to femoral when stuck"
+          },
+          {
+            "id": "d",
+            "label": "Record the route"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-026",
+    "maikir2-027",
+    "maikir2-028",
+    "maikir2-029",
+    "maikir2-030",
+    "maikir2-031",
+    "maikir2-032",
+    "maikir2-033",
+    "maikir2-034",
+    "maikir2-035",
+    "maikir2-036",
+    "maikir2-037",
+    "maikir2-038",
+    "maikir2-039",
+    "maikir2-040",
+    "maikir2-041",
+    "maikir2-042",
+    "maikir2-043",
+    "maikir2-044",
+    "maikir2-045",
+    "maikir2-046",
+    "maikir2-047",
+    "maikir2-048",
+    "maikir2-049",
+    "maikir2-050"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

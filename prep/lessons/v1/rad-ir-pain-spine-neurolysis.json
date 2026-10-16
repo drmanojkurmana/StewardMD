@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-pain-spine-neurolysis",
+  "subject": "radiology",
+  "title": "Blocks and neurolysis for pain",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Nerves carry facet pain faithfully. **Medial branch blocks** with local anaesthetic diagnose facet joints as pain sources. **Dual blocks** confirm where single shots mislead with placebo. **Radiofrequency denervation** burns proven branches for months of relief. **Whiplash with axial ache** suits denervation after blocks prove.",
+      "say": "Nerves carry facet pain faithfully. Medial branch blocks diagnose facet joints as pain sources. Dual blocks confirm where single shots mislead. Radiofrequency burns proven branches for months. Whiplash axial ache suits denervation after proof.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Block the branch"
+          },
+          {
+            "id": "b",
+            "label": "Confirm with dual"
+          },
+          {
+            "id": "c",
+            "label": "Burn proven nerves"
+          },
+          {
+            "id": "d",
+            "label": "Track the relief"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Roots need steroids not knives. **Transforaminal epidurals** bathe angry roots with steroid where imaging maps. **Interlaminar routes** suit bilateral symptoms with central stenosis. **Particulate versus non-particulate** steroids split cord-risk beds needing dexamethasone. **Surgery for deficits** follows weakness with red flags, never injections alone.",
+      "say": "Roots need steroids not knives. Foraminal epidurals bathe angry roots where imaging maps. Interlaminar routes suit bilateral central stenosis. Cord-risk beds need non-particulate steroids. Weakness with red flags needs surgery, never injections alone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Route",
+          "Use"
+        ],
+        "rows": [
+          [
+            "Transforaminal",
+            "Single root"
+          ],
+          [
+            "Interlaminar",
+            "Bilateral"
+          ],
+          [
+            "Non-particulate",
+            "Cord-risk beds"
+          ],
+          [
+            "Surgery",
+            "Deficits"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sympathetic blocks calm wild pain. **Coeliac plexus neurolysis** with alcohol eases pancreatic cancer pain where opiates fail. **Superior hypogastric blocks** calm pelvic cancer pain. **Stellate ganglion blocks** reset sympathetically maintained arm pain. **Hypotension with diarrhoea** follows coeliac work needing fluids.",
+      "say": "Sympathetic blocks calm wild pain. Coeliac alcohol eases pancreatic cancer pain where opiates fail. Hypogastric blocks calm pelvic cancer pain. Stellate blocks reset sympathetically maintained arm pain. Coeliac work drops pressure with diarrhoea needing fluids.",
+      "vis": null
+    },
+    {
+      "tx": "Relief proves itself with restored function. **Pain with function diaries** track burning with walking after blocks. **Repeat denervation** follows regrown nerves where relief fades. **Physiotherapy alongside** rebuilds movement that pain had frozen. **Opioid weaning** follows relief where doses fall stepwise.",
+      "say": "Relief proves with function. Diaries track burning with walking after blocks. Regrown nerves earn repeat denervation where relief fades. Physiotherapy rebuilds movement pain had frozen. Opioid weaning follows relief stepwise.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diary the relief"
+          },
+          {
+            "id": "b",
+            "label": "Repeat regrowth"
+          },
+          {
+            "id": "c",
+            "label": "Move with physio"
+          },
+          {
+            "id": "d",
+            "label": "Wean the opiates"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-651",
+    "maikir2-652",
+    "maikir2-653",
+    "maikir2-654",
+    "maikir2-655",
+    "maikir2-656",
+    "maikir2-657",
+    "maikir2-658",
+    "maikir2-659",
+    "maikir2-660",
+    "maikir2-661",
+    "maikir2-662",
+    "maikir2-663",
+    "maikir2-664",
+    "maikir2-665",
+    "maikir2-666",
+    "maikir2-667",
+    "maikir2-668",
+    "maikir2-669",
+    "maikir2-670",
+    "maikir2-671",
+    "maikir2-672",
+    "maikir2-673",
+    "maikir2-674",
+    "maikir2-675"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}

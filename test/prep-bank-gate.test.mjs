@@ -564,3 +564,19 @@ test("guard test: client does not write question files to persistent caches (cac
   assert.ok(!prepPyqJs.includes('host.cachePut("pyq/index.json"'), "prep-pyq.js loadIndex must not put pyq index in IDB cache");
 });
 
+
+test("gate [KV flag]: billing:cfg flags.PREP_BANK_ENFORCE=1 enforces with no env binding; clearing it returns to shadow", async () => {
+  const files = { "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}' };
+  const url = "https://stewardmd.in/api/prep/bank/v1/anatomy/mcq/ana-gametogenesis.json";
+  const call = (env) => bank.onRequestGet({ env, params: { path: ["v1", "anatomy", "mcq", "ana-gametogenesis.json"] }, request: new Request(url, { method: "GET" }) });
+  const store = kv();
+  store.m.set("billing:cfg", { flags: { PREP_BANK_ENFORCE: "1" }, prices: {} });
+  const on = { PREP_BANK_R2: r2(files), MAIK_KV: { get: async (k, t) => store.get(k) } };
+  const billing = await import("../functions/_billingcfg.js");
+  await billing.setBillingCfg(null, { flags: { PREP_BANK_ENFORCE: "1" } });   // refreshes this isolate's cache like the owner route does
+  gate.resetBankGateMemory();
+  assert.equal((await call(on)).status, 401, "KV flag on: anonymous read refused");
+  await billing.setBillingCfg(null, { flags: { PREP_BANK_ENFORCE: "" } });
+  gate.resetBankGateMemory();
+  assert.equal((await call({ PREP_BANK_R2: r2(files) })).status, 200, "flag cleared and no env: shadow mode serves");
+});

@@ -1,0 +1,167 @@
+{
+  "v": 1,
+  "module": "rad-ir-access-closure",
+  "subject": "radiology",
+  "title": "Haemostasis and closure after arterial access",
+  "minutes": 7,
+  "steps": [
+    {
+      "tx": "Pressing by hand still closes most punctures. **Manual compression** holds pressure over the **common femoral artery** for fifteen to twenty minutes after sheath removal, then the patient lies flat with the leg straight while a nurse watches the groin. **Haematoma** forms when pressure slips too early or too high above the ligament. **Bed rest** with head-end low continues for a few hours before first ambulation. **Reuse of the same groin** within days favours the opposite side.",
+      "say": "Hand pressure still closes most holes. Press over the femoral artery for fifteen to twenty minutes after the sheath comes out, then lie flat with the leg straight while the groin is watched. Early release causes haematoma. Rest flat for a few hours before walking, and use the other groin if restuck within days.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sheath out"
+          },
+          {
+            "id": "b",
+            "label": "Press fifteen minutes"
+          },
+          {
+            "id": "c",
+            "label": "Lie flat and watch"
+          },
+          {
+            "id": "d",
+            "label": "Walk when stable"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Plugs and stitches speed haemostasis in busy labs. **Suture-mediated closure** places a stitch at the arterial wall for large sheaths and lets selected patients walk sooner under Society of Interventional Radiology standards. **Collagen plug devices** seal the track outside the artery where infection risk stays low. **Clip devices** suit calcified walls that needles cross poorly. **Device failure** always falls back to manual compression, so pressure skills stay mandatory.",
+      "say": "Plugs and stitches speed closure. Suture devices stitch the wall for large sheaths and allow earlier walking. Collagen plugs seal the track outside the artery. Clips suit calcified walls. When a device fails, fall back to hand pressure, so compression skills stay mandatory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Method",
+          "Best for"
+        ],
+        "rows": [
+          [
+            "Manual pressure",
+            "Small sheaths"
+          ],
+          [
+            "Suture device",
+            "Large sheaths"
+          ],
+          [
+            "Collagen plug",
+            "Quick seal"
+          ],
+          [
+            "Clip",
+            "Calcified wall"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thin blood changes sheath timing. **Heparin reversal** with protamine is reserved for bleeding punctures because routine reversal invites thrombosis, following CIRSE peri-procedural guidance. **Sheath removal** waits until clotting recovers after heparinised cases, with the activated clotting time checked at the bedside. **Antiplatelet drugs** usually continue through diagnostic work but pause for large-bore closure by cardiology advice. **Warfarin** bridges only when thrombotic risk outweighs groin bleeding.",
+      "say": "Thin blood changes sheath timing. Protamine reverses heparin only for bleeding holes because routine reversal invites clots. Sheaths come out once clotting recovers, checked at the bedside. Antiplatelets usually continue for diagnostic cases but pause for large sheaths. Warfarin bridges only when clot risk outweighs bleeding.",
+      "vis": null
+    },
+    {
+      "tx": "The leg tells the truth after the lab. **Distal pulse checks** compare foot pulses with the opposite side every fifteen minutes at first, since a lost pulse means thrombosis or dissection. **Groin inspection** looks for swelling, bruit and falling haemoglobin that mark retroperitoneal bleeding. **Pseudoaneurysm** presents days later as a painful pulsing lump and needs ultrasound-guided thrombin. **Discharge advice** warns that spreading bruise, numbness or pallor means return at once.",
+      "say": "The leg tells the truth after the procedure. Compare foot pulses with the other side every fifteen minutes at first, since a lost pulse means clot or tear. Inspect the groin for swelling, bruit and falling haemoglobin. A painful pulsing lump days later is pseudoaneurysm needing thrombin injection. Spreading bruise, numbness or pallor means return at once.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Check pulses"
+          },
+          {
+            "id": "b",
+            "label": "Inspect groin"
+          },
+          {
+            "id": "c",
+            "label": "Watch haemoglobin"
+          },
+          {
+            "id": "d",
+            "label": "Safety-net discharge"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "maikir2-001",
+    "maikir2-002",
+    "maikir2-003",
+    "maikir2-004",
+    "maikir2-005",
+    "maikir2-006",
+    "maikir2-007",
+    "maikir2-008",
+    "maikir2-009",
+    "maikir2-010",
+    "maikir2-011",
+    "maikir2-012",
+    "maikir2-013",
+    "maikir2-014",
+    "maikir2-015",
+    "maikir2-016",
+    "maikir2-017",
+    "maikir2-018",
+    "maikir2-019",
+    "maikir2-020",
+    "maikir2-021",
+    "maikir2-022",
+    "maikir2-023",
+    "maikir2-024",
+    "maikir2-025"
+  ],
+  "src": [],
+  "refs": [
+    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+  ],
+  "gen": "AI",
+  "run": "ir-depth",
+  "model": "muse-wonder (local authoring, no external API)",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true,
+    "redone": 0,
+    "dropped": 0,
+    "kbWords": 0,
+    "itemN": 25
+  }
+}
