@@ -1,167 +1,173 @@
 {
-  "v": 1,
-  "module": "rad-ir-ablation-liver-directed",
-  "subject": "radiology",
-  "title": "Liver-directed therapy: TACE and Y-90",
-  "minutes": 7,
-  "steps": [
-    {
-      "tx": "Livers take chemo straight. **Transarterial chemoembolisation** mixes drug with embolic, bathing tumours while sparing systemic bodies. **DEB-TACE with beads** loads drug onto spheres for sustained release. **Patient selection** favours preserved liver function without portal invasion. **Post-embolisation care** watches pain, fever and liver failure after each session.",
-      "say": "Livers take chemo straight. Chemoembolisation mixes drug with embolic, bathing tumours while sparing bodies. Drug beads release slowly for sustained effect. Selection favours preserved function without portal invasion. Post-procedure care watches pain, fever and failure.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Select preserved livers"
-          },
-          {
-            "id": "b",
-            "label": "Mix drug with embolic"
-          },
-          {
-            "id": "c",
-            "label": "Bathe the tumour"
-          },
-          {
-            "id": "d",
-            "label": "Watch the aftermath"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Beads and oil carry drugs differently. **Lipiodol TACE** floats drug-oil emulsion into tumours visible on CT afterwards. **DEB beads** in calibrated sizes lodge predictably with steady elution. **Selectivity matters** since lobar floods injure whole livers while segmental spares. **Repeat sessions** continue while tumours respond and livers tolerate.",
-      "say": "Beads and oil carry drugs differently. Oily emulsion floats into tumours visible afterwards. Calibrated beads lodge predictably with steady release. Segmental beats lobar since floods injure whole livers. Repeat sessions continue while tumours respond.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Technique",
-          "Trait"
-        ],
-        "rows": [
-          [
-            "Lipiodol TACE",
-            "Visible oil"
-          ],
-          [
-            "DEB beads",
-            "Steady release"
-          ],
-          [
-            "Segmental",
-            "Spares liver"
-          ],
-          [
-            "Repeat",
-            "While responding"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Radiation rides microspheres inside. **Yttrium-90 radioembolisation** delivers beta rays through arterial spheres lodging in tumour beds. **Lung-shunt studies** with technetium albumin precede, limiting pulmonary dose. **Gastrointestinal shunts** to stomach or duodenum ulcerate unless coiled first. **Radiation segmentectomy** blasts small tumours with curative doses.",
-      "say": "Radiation rides microspheres inside. Yttrium spheres deliver beta rays lodging in tumour beds. Lung-shunt studies precede, limiting pulmonary dose. Gut shunts ulcerate unless coiled first. Segmental blasts cure small tumours with high doses.",
-      "vis": null
-    },
-    {
-      "tx": "Choices follow livers and veins. **TACE versus Y-90** splits preserved livers with focal disease against portal invasion where Y-90 still works. **Bridging to transplant** with either holds listed tumours inside criteria. **Downstaging** shrinks beyond-criteria disease into transplant range. **Systemic therapy** with immunotherapy follows where locoregional alone cannot hold.",
-      "say": "Choices follow livers and veins. TACE suits preserved focal disease while Y-90 works through portal invasion. Bridging holds listed tumours inside criteria. Downstaging shrinks disease into transplant range. Systemic drugs follow where local alone cannot hold.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Stage the liver"
-          },
-          {
-            "id": "b",
-            "label": "Pick TACE or Y-90"
-          },
-          {
-            "id": "c",
-            "label": "Bridge or downstage"
-          },
-          {
-            "id": "d",
-            "label": "Add systemic drugs"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    }
-  ],
-  "quiz": [
-    "maikir2-501",
-    "maikir2-502",
-    "maikir2-503",
-    "maikir2-504",
-    "maikir2-505",
-    "maikir2-506",
-    "maikir2-507",
-    "maikir2-508",
-    "maikir2-509",
-    "maikir2-510",
-    "maikir2-511",
-    "maikir2-512",
-    "maikir2-513",
-    "maikir2-514",
-    "maikir2-515",
-    "maikir2-516",
-    "maikir2-517",
-    "maikir2-518",
-    "maikir2-519",
-    "maikir2-520",
-    "maikir2-521",
-    "maikir2-522",
-    "maikir2-523",
-    "maikir2-524",
-    "maikir2-525"
-  ],
-  "src": [],
-  "refs": [
-    "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "ir-depth",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 25
+ "v": 1,
+ "module": "rad-ir-ablation-liver-directed",
+ "subject": "radiology",
+ "title": "Liver-directed therapy: TACE and Y-90",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "Livers take chemo straight. **Transarterial chemoembolisation** mixes drug with embolic, bathing tumours while sparing systemic bodies. **DEB-TACE with beads** loads drug onto spheres for sustained release. **Patient selection** favours preserved liver function without portal invasion. **Post-embolisation care** watches pain, fever and liver failure after each session.",
+   "say": "Livers take chemo straight. Chemoembolisation mixes drug with embolic, bathing tumours while sparing bodies. Drug beads release slowly for sustained effect. Selection favours preserved function without portal invasion. Post-procedure care watches pain, fever and failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Select preserved livers"
+     },
+     {
+      "id": "b",
+      "label": "Mix drug with embolic"
+     },
+     {
+      "id": "c",
+      "label": "Bathe the tumour"
+     },
+     {
+      "id": "d",
+      "label": "Watch the aftermath"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Beads and oil carry drugs differently. **Lipiodol TACE** floats drug-oil emulsion into tumours visible on CT afterwards. **DEB beads** in calibrated sizes lodge predictably with steady elution. **Selectivity matters** since lobar floods injure whole livers while segmental spares. **Repeat sessions** continue while tumours respond and livers tolerate.",
+   "say": "Beads and oil carry drugs differently. Oily emulsion floats into tumours visible afterwards. Calibrated beads lodge predictably with steady release. Segmental beats lobar since floods injure whole livers. Repeat sessions continue while tumours respond.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "Trait"
+    ],
+    "rows": [
+     [
+      "Lipiodol TACE",
+      "Visible oil"
+     ],
+     [
+      "DEB beads",
+      "Steady release"
+     ],
+     [
+      "Segmental",
+      "Spares liver"
+     ],
+     [
+      "Repeat",
+      "While responding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiation rides microspheres inside. **Yttrium-90 radioembolisation** delivers beta rays through arterial spheres lodging in tumour beds. **Lung-shunt studies** with technetium albumin precede, limiting pulmonary dose. **Gastrointestinal shunts** to stomach or duodenum ulcerate unless coiled first. **Radiation segmentectomy** blasts small tumours with curative doses.",
+   "say": "Radiation rides microspheres inside. Yttrium spheres deliver beta rays lodging in tumour beds. Lung-shunt studies precede, limiting pulmonary dose. Gut shunts ulcerate unless coiled first. Segmental blasts cure small tumours with high doses.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/rad-ir-ablation-liver-directed-fig1.webp",
+    "alt": "Diagram showing Y-90 radioembolisation in the liver, with arterial microsphere delivery to a tumor, and pre-treatment assessment for lung and GI shunts.",
+    "caption": "Y-90 radioembolisation: arterial microspheres deliver radiation to liver tumours",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Choices follow livers and veins. **TACE versus Y-90** splits preserved livers with focal disease against portal invasion where Y-90 still works. **Bridging to transplant** with either holds listed tumours inside criteria. **Downstaging** shrinks beyond-criteria disease into transplant range. **Systemic therapy** with immunotherapy follows where locoregional alone cannot hold.",
+   "say": "Choices follow livers and veins. TACE suits preserved focal disease while Y-90 works through portal invasion. Bridging holds listed tumours inside criteria. Downstaging shrinks disease into transplant range. Systemic drugs follow where local alone cannot hold.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stage the liver"
+     },
+     {
+      "id": "b",
+      "label": "Pick TACE or Y-90"
+     },
+     {
+      "id": "c",
+      "label": "Bridge or downstage"
+     },
+     {
+      "id": "d",
+      "label": "Add systemic drugs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [
+  "maikir2-501",
+  "maikir2-502",
+  "maikir2-503",
+  "maikir2-504",
+  "maikir2-505",
+  "maikir2-506",
+  "maikir2-507",
+  "maikir2-508",
+  "maikir2-509",
+  "maikir2-510",
+  "maikir2-511",
+  "maikir2-512",
+  "maikir2-513",
+  "maikir2-514",
+  "maikir2-515",
+  "maikir2-516",
+  "maikir2-517",
+  "maikir2-518",
+  "maikir2-519",
+  "maikir2-520",
+  "maikir2-521",
+  "maikir2-522",
+  "maikir2-523",
+  "maikir2-524",
+  "maikir2-525"
+ ],
+ "src": [],
+ "refs": [
+  "Safari reference; Handbook of Interventional Radiological Procedure; Interventional Radiology Cases (topic maps only; prose rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "ir-depth",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 25
+ }
 }
