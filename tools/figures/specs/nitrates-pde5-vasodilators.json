@@ -1,0 +1,262 @@
+{
+ "id": "nitrates-pde5-vasodilators",
+ "title": "Nitric oxide, cGMP and the vasodilator drugs",
+ "ariaLabel": "Schematic of vessel tone: nitric oxide (from nitrates or from the vessel wall) makes cGMP in smooth muscle, phosphodiesterase type 5 breaks cGMP down, and cGMP that is kept relaxes the vessel. Potassium channel openers relax smooth muscle by hyperpolarising it. Nitrates raise nitric oxide, PDE5 inhibitors slow cGMP breakdown, and minoxidil-type drugs open potassium channels. Nitrates with PDE5 inhibitors together can cause a dangerous fall in pressure.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Natural nitric oxide",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no vasodilator"
+  },
+  {
+   "label": "nitrate type",
+   "status": "nitrate",
+   "blocks": {
+    "e_no": -1.5
+   }
+  },
+  {
+   "label": "PDE5 inhibitor type",
+   "status": "PDE5 inhibitor",
+   "blocks": {
+    "e_pde": 0.85
+   }
+  },
+  {
+   "label": "potassium channel opener type (minoxidil)",
+   "status": "potassium channel opener",
+   "blocks": {
+    "e_k": 0.85
+   }
+  },
+  {
+   "label": "nitrate with PDE5 inhibitor (dangerous)",
+   "status": "nitrate with PDE5 inhibitor",
+   "blocks": {
+    "e_no": -1.5,
+    "e_pde": 0.85
+   }
+  }
+ ],
+ "readout": "Vessel tone: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "profoundly low",
+    "relaxed",
+    "normal"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Nitric oxide: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Vessel tone: normal"
+  ],
+  [
+   1,
+   1,
+   "Vessel tone: relaxed"
+  ],
+  [
+   1,
+   2,
+   "Vessel tone: relaxed"
+  ],
+  [
+   1,
+   3,
+   "Vessel tone: relaxed"
+  ],
+  [
+   1,
+   4,
+   "Vessel tone: profoundly low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "no",
+   "kind": "source",
+   "label": "Nitric oxide",
+   "sub": "nitrates add more",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Nitric oxide made in the vessel wall or released from nitrate drugs. The slider sets how much is naturally present."
+  },
+  {
+   "id": "made",
+   "kind": "mid",
+   "label": "cGMP made",
+   "x": 450,
+   "y": 110,
+   "rx": 100,
+   "info": "Nitric oxide activates guanylyl cyclase, which makes cGMP. Organic nitrates are converted to nitric oxide in the vessel wall."
+  },
+  {
+   "id": "kept",
+   "kind": "mid",
+   "label": "cGMP kept",
+   "x": 800,
+   "y": 110,
+   "rx": 95,
+   "info": "cGMP that is not broken down keeps the vessel smooth muscle relaxed."
+  },
+  {
+   "id": "broken",
+   "kind": "mid",
+   "label": "cGMP broken down",
+   "x": 450,
+   "y": 300,
+   "rx": 115,
+   "info": "Phosphodiesterase type 5 breaks cGMP down. PDE5 inhibitors slow this."
+  },
+  {
+   "id": "tone",
+   "kind": "source",
+   "fixed": 0.6,
+   "label": "Resting tone",
+   "x": 105,
+   "y": 490,
+   "rx": 84,
+   "info": "The baseline tone of vascular smooth muscle from calcium entry and sympathetic activity."
+  },
+  {
+   "id": "kmid",
+   "kind": "mid",
+   "label": "Channels opened",
+   "x": 450,
+   "y": 490,
+   "rx": 100,
+   "info": "Potassium channel opening hyperpolarises the smooth muscle and relaxes it."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.75,
+   "terms": [
+    [
+     "n:kept",
+     -0.9
+    ],
+    [
+     "b:e_k",
+     -0.4
+    ]
+   ],
+   "label": "Vessel tone",
+   "x": 800,
+   "y": 300,
+   "rx": 100,
+   "info": "A teaching score for how constricted the vessels are. Lower means more relaxed and a lower pressure."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_no",
+   "from": "no",
+   "to": "made",
+   "label": "guanylyl cyclase",
+   "w": 0.4,
+   "info": "Nitric oxide activates guanylyl cyclase to make cGMP. A nitrate raises nitric oxide, shown as a stronger flow."
+  },
+  {
+   "id": "e_pde",
+   "from": "made",
+   "to": "broken",
+   "label": "PDE5",
+   "w": 0.6,
+   "info": "Phosphodiesterase 5 breaks cGMP down. PDE5 inhibitors (sildenafil type) block this, so cGMP lasts longer. The effect needs nitric oxide to be present, which is why a nitrate with a PDE5 inhibitor is dangerous."
+  },
+  {
+   "id": "e_keep",
+   "from": "made",
+   "to": "kept",
+   "blockable": false,
+   "rest": "e_pde",
+   "info": "The part of the cGMP that is not broken down."
+  },
+  {
+   "id": "e_k",
+   "from": "tone",
+   "to": "kmid",
+   "label": "K+ channels",
+   "info": "Minoxidil (as its active sulfate) opens potassium channels, which hyperpolarises smooth muscle and relaxes it."
+  },
+  {
+   "id": "e_c1",
+   "from": "kept",
+   "to": "out",
+   "blockable": false,
+   "info": "More cGMP kept relaxes the vessel and lowers tone."
+  },
+  {
+   "id": "e_c2",
+   "from": "kmid",
+   "to": "out",
+   "blockable": false,
+   "info": "Open potassium channels relax the vessel."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Nitrates raise nitric oxide and cGMP, PDE5 inhibitors slow cGMP breakdown, minoxidil-type drugs open potassium channels, and nitrates with PDE5 inhibitors together can cause a profound fall in pressure. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Hydralazine and diazoxide mechanisms, calcium channel blockers (own figure), beta-blockers and ranolazine in angina, tolerance to nitrates, reflex tachycardia, headache, pulmonary hypertension use, erectile dysfunction, adverse effects and contraindications are left out. Vessel tone is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Nitric oxide, cGMP and the vasodilator drugs",
+  "blurb": "Interactive figure: nitrates, PDE5 inhibitors and potassium channel openers",
+  "drugs": {
+   "nitroglycerin": "d=1",
+   "glyceryl": "d=1",
+   "isosorbide": "d=1",
+   "nitroprusside": "d=1",
+   "nicorandil": "d=1",
+   "trinitrate": "d=1",
+   "sildenafil": "d=2",
+   "tadalafil": "d=2",
+   "vardenafil": "d=2",
+   "avanafil": "d=2",
+   "minoxidil": "d=3",
+   "diazoxide": "d=3",
+   "hydralazine": "d=3"
+  },
+  "terms": [
+   "nitrates?",
+   "nitric oxide donors?",
+   "PDE[- ]?5 inhibitors?",
+   "phosphodiesterase[- ]5",
+   "vasodilators?",
+   "antianginal drugs?"
+  ]
+ }
+}

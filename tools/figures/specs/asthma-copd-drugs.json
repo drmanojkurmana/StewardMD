@@ -1,0 +1,283 @@
+{
+ "id": "asthma-copd-drugs",
+ "title": "Airway narrowing: which inhaled and oral drugs open the airway",
+ "ariaLabel": "Schematic of airway narrowing: parasympathetic tone and airway inflammation narrow the airway, while beta-2 receptor activation raises cAMP and relaxes airway smooth muscle. Beta-2 agonists and theophylline increase relaxation, antimuscarinics reduce parasympathetic tone, and inhaled corticosteroids reduce inflammation.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Airway trigger",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no airway drug"
+  },
+  {
+   "label": "short-acting beta-2 agonist type",
+   "status": "beta-2 agonist",
+   "blocks": {
+    "e_b2": -0.9
+   }
+  },
+  {
+   "label": "antimuscarinic type",
+   "status": "antimuscarinic",
+   "blocks": {
+    "e_m3": 0.85
+   }
+  },
+  {
+   "label": "inhaled corticosteroid type",
+   "status": "inhaled corticosteroid",
+   "blocks": {
+    "e_inf": 0.85
+   }
+  },
+  {
+   "label": "theophylline type",
+   "status": "theophylline",
+   "blocks": {
+    "e_b2": -0.4
+   }
+  },
+  {
+   "label": "inhaled corticosteroid plus long-acting beta-2 agonist",
+   "status": "corticosteroid plus long-acting beta-2",
+   "blocks": {
+    "e_inf": 0.85,
+    "e_b2": -0.9
+   }
+  }
+ ],
+ "readout": "Airway narrowing: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "open",
+    "mild",
+    "marked"
+   ],
+   "cuts": [
+    0.12,
+    0.37
+   ]
+  }
+ ],
+ "status": "Trigger: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Airway narrowing: marked"
+  ],
+  [
+   1,
+   1,
+   "Airway narrowing: mild"
+  ],
+  [
+   1,
+   2,
+   "Airway narrowing: mild"
+  ],
+  [
+   1,
+   3,
+   "Airway narrowing: mild"
+  ],
+  [
+   1,
+   4,
+   "Airway narrowing: mild"
+  ],
+  [
+   1,
+   5,
+   "Airway narrowing: open"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Parasympathetic tone",
+   "sub": "vagal acetylcholine",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Acetylcholine from the vagus acts on muscarinic receptors of airway smooth muscle and glands."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Bronchoconstriction",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Smooth muscle tightening and mucus."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Airway inflammation",
+   "sub": "eosinophils, mediators",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Inflammation of the airway wall, which also makes the airway more twitchy."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Wall swelling and mucus",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Swollen, mucus-filled airway wall."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Beta-2 signalling",
+   "sub": "adrenaline, agonists",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Beta-2 receptors on airway smooth muscle respond to adrenaline and to inhaled agonists."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Smooth muscle relaxed",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Relaxation of airway smooth muscle widens the airway."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.2,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     -0.4
+    ]
+   ],
+   "label": "Airway narrowing",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for airway narrowing and breathlessness, from tightening and swelling against relaxation."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_m3",
+   "from": "s0",
+   "to": "m0",
+   "label": "M3 receptors",
+   "info": "Antimuscarinics (ipratropium, tiotropium) block M3 receptors, so the airway is less narrowed by vagal tone."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More tightening means more airway narrowing."
+  },
+  {
+   "id": "e_inf",
+   "from": "s1",
+   "to": "m1",
+   "label": "inflammatory genes",
+   "info": "Inhaled corticosteroids lower the inflammatory gene expression and so swelling, mucus and twitchiness over days, not minutes."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More swelling means more airway narrowing."
+  },
+  {
+   "id": "e_b2",
+   "from": "s2",
+   "to": "m2",
+   "label": "beta-2 and cAMP",
+   "info": "Salbutamol-type (short-acting) and formoterol or salmeterol-type (long-acting) agonists raise cAMP and relax smooth muscle. Theophylline adds relaxation by blocking phosphodiesterase, and is drawn here as a smaller enhancing effect.",
+   "w": 0.7
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More relaxation means less airway narrowing."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Beta-2 agonists raise cAMP and relax airway smooth muscle, antimuscarinics block vagal narrowing, inhaled corticosteroids lower airway inflammation, and theophylline adds relaxation through phosphodiesterase inhibition. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Leukotriene antagonists and biologics (drawn in the allergy figure and elsewhere), step-up and step-down plans, inhaler technique, acute severe attacks and magnesium, oxygen, adverse effects (tremor, hypokalaemia, oral thrush, theophylline levels) and COPD-specific care are left out. Airway narrowing is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Airway narrowing: which inhaled and oral drugs open the airway",
+  "blurb": "Interactive figure: beta-2 agonists, antimuscarinics, inhaled steroids and theophylline",
+  "drugs": {
+   "salbutamol": "d=1",
+   "albuterol": "d=1",
+   "terbutaline": "d=1",
+   "levosalbutamol": "d=1",
+   "formoterol": "d=1",
+   "salmeterol": "d=1",
+   "indacaterol": "d=1",
+   "vilanterol": "d=1",
+   "olodaterol": "d=1",
+   "budesonide": "d=3",
+   "beclometasone": "d=3",
+   "beclomethasone": "d=3",
+   "fluticasone": "d=3",
+   "ciclesonide": "d=3",
+   "mometasone": "d=3",
+   "theophylline": "d=4",
+   "aminophylline": "d=4",
+   "doxofylline": "d=4"
+  },
+  "terms": [
+   "asthma (?:drugs?|treatment|therapy|inhalers?)",
+   "bronchodilators?",
+   "beta[- ]?2 (?:adrenergic )?agonists?",
+   "inhaled corticosteroids?",
+   "methylxanthines?",
+   "COPD (?:drugs?|treatment|therapy|inhalers?)",
+   "relievers? and preventers?"
+  ]
+ }
+}

@@ -1,0 +1,267 @@
+{
+ "id": "general-anaesthetics",
+ "title": "How general anaesthetic drugs switch off the brain",
+ "ariaLabel": "Schematic of consciousness: excitatory glutamate signalling through NMDA receptors keeps the brain aroused, and inhibitory GABA signalling through GABA-A receptors quietens it. Propofol and thiopentone-type drugs strengthen GABA-A inhibition, ketamine blocks NMDA receptors, and volatile agents act on several channels including GABA-A.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Brain arousal drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no anaesthetic"
+  },
+  {
+   "label": "propofol or thiopentone type (GABA-A)",
+   "status": "propofol or thiopentone type",
+   "blocks": {
+    "e_gaba": -0.9
+   }
+  },
+  {
+   "label": "ketamine type (NMDA blocker)",
+   "status": "ketamine type",
+   "blocks": {
+    "e_nmda": 0.85
+   }
+  },
+  {
+   "label": "volatile agent type",
+   "status": "volatile agent",
+   "blocks": {
+    "e_vol": -1.5
+   }
+  },
+  {
+   "label": "propofol type plus volatile agent",
+   "status": "two quieting agents",
+   "blocks": {
+    "e_gaba": -0.9,
+    "e_vol": -1.5
+   }
+  }
+ ],
+ "readout": "Consciousness: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "unconscious",
+    "sedated",
+    "awake"
+   ],
+   "cuts": [
+    0.15,
+    0.4
+   ]
+  }
+ ],
+ "status": "Arousal drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Consciousness: awake"
+  ],
+  [
+   1,
+   1,
+   "Consciousness: sedated"
+  ],
+  [
+   1,
+   2,
+   "Consciousness: sedated"
+  ],
+  [
+   1,
+   3,
+   "Consciousness: sedated"
+  ],
+  [
+   1,
+   4,
+   "Consciousness: unconscious"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "GABA inhibition",
+   "sub": "GABA-A receptors",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Inhibitory signalling through GABA-A receptors."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Neurons quietened",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Inhibition lowers neuron firing."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Glutamate",
+   "sub": "NMDA receptors",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "The main excitatory signal of the brain acting on NMDA receptors."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Neurons excited",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Excitation keeps the brain aroused."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Volatile agent",
+   "sub": "in the brain",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "An inhaled anaesthetic agent that has reached the brain."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Wide quieting",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Quieting of neurons across several systems."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.4,
+   "terms": [
+    [
+     "n:m0",
+     -0.4
+    ],
+    [
+     "n:m1",
+     0.45
+    ],
+    [
+     "n:m2",
+     -0.3
+    ]
+   ],
+   "label": "Consciousness",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the level of consciousness, set by excitation and inhibition in the brain."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_gaba",
+   "from": "s0",
+   "to": "m0",
+   "label": "GABA-A receptors",
+   "info": "Propofol, thiopentone and etomidate-type drugs strengthen the chloride current of GABA-A receptors, which quietens neurons.",
+   "w": 0.6
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More inhibition lowers consciousness."
+  },
+  {
+   "id": "e_nmda",
+   "from": "s1",
+   "to": "m1",
+   "label": "NMDA receptors",
+   "info": "Ketamine blocks the NMDA receptor channel. This causes dissociative anaesthesia rather than classic sedation."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More excitation raises consciousness."
+  },
+  {
+   "id": "e_vol",
+   "from": "s2",
+   "to": "m2",
+   "label": "multiple channels",
+   "info": "Volatile agents act on several targets, including GABA-A receptors, glycine receptors and two-pore potassium channels, so the effect is drawn as one enhancing step.",
+   "w": 0.5
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More quieting lowers consciousness."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Propofol and thiopentone-type drugs strengthen GABA-A inhibition, ketamine blocks NMDA receptors, and volatile agents act on several channels including GABA-A. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Nitrous oxide, opioids and muscle relaxants in anaesthesia, MAC and partition coefficients, uptake and distribution, dexmedetomidine, haemodynamic and respiratory effects, malignant hyperthermia, depth monitoring and adverse effects are left out. Consciousness is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How general anaesthetic drugs switch off the brain",
+  "blurb": "Interactive figure: GABA-A enhancers, ketamine and volatile agents",
+  "drugs": {
+   "propofol": "d=1",
+   "thiopentone": "d=1",
+   "thiopental": "d=1",
+   "etomidate": "d=1",
+   "methohexital": "d=1",
+   "fospropofol": "d=1",
+   "ketamine": "d=2",
+   "esketamine": "d=2",
+   "halothane": "d=3",
+   "isoflurane": "d=3",
+   "sevoflurane": "d=3",
+   "desflurane": "d=3",
+   "enflurane": "d=3"
+  },
+  "terms": [
+   "general anaesthetics?",
+   "general anesthetics?",
+   "inhalational anaesthetics?",
+   "inhalation anaesthetics?",
+   "intravenous induction agents?",
+   "induction agents?",
+   "volatile anaesthetics?"
+  ]
+ }
+}

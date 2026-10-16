@@ -1,0 +1,289 @@
+{
+ "id": "local-anaesthetics",
+ "title": "Local anaesthetics: why pain goes first and movement last",
+ "ariaLabel": "Schematic of nerve conduction: local anaesthetics block voltage-gated sodium channels, so impulses stop. Thin pain fibres are blocked first, touch fibres need more, and thick motor fibres are blocked last. A light block removes pain and leaves movement; a heavy block removes all three.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Nerve activity",
+  "a": [
+   0.6,
+   0.8,
+   1.0
+  ],
+  "names": [
+   "quiet",
+   "usual",
+   "busy"
+  ],
+  "ticks": [
+   "quiet",
+   "usual",
+   "busy"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no local anaesthetic"
+  },
+  {
+   "label": "light block (low strength)",
+   "status": "light block",
+   "blocks": {
+    "e_pain": 0.9,
+    "e_touch": 0.5,
+    "e_motor": 0.1
+   }
+  },
+  {
+   "label": "heavy block (high strength)",
+   "status": "heavy block",
+   "blocks": {
+    "e_pain": 0.95,
+    "e_touch": 0.95,
+    "e_motor": 0.9
+   }
+  }
+ ],
+ "readout": "{0} · {1} · {2}",
+ "outputs": [
+  {
+   "node": "pain",
+   "words": [
+    "pain gone",
+    "pain reduced",
+    "pain felt"
+   ],
+   "cuts": [
+    0.15,
+    0.4
+   ]
+  },
+  {
+   "node": "touch",
+   "words": [
+    "touch gone",
+    "touch reduced",
+    "touch felt"
+   ],
+   "cuts": [
+    0.15,
+    0.55
+   ]
+  },
+  {
+   "node": "motor",
+   "words": [
+    "no movement",
+    "weak",
+    "movement kept"
+   ],
+   "cuts": [
+    0.15,
+    0.55
+   ]
+  }
+ ],
+ "status": "Nerve activity: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "pain felt · touch felt · movement kept"
+  ],
+  [
+   1,
+   1,
+   "pain gone · touch reduced · movement kept"
+  ],
+  [
+   1,
+   2,
+   "pain gone · touch gone · no movement"
+  ]
+ ],
+ "blockInfo": "A local anaesthetic acting at this nerve fibre type (generic teaching symbol, not a named drug's shape). Less passes here.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Pain fibres",
+   "sub": "small, thin",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Small thin fibres (A-delta and C) carrying pain. They are blocked first."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Pain signal",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Pain signal travelling to the spinal cord."
+  },
+  {
+   "id": "pain",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     1.0
+    ]
+   ],
+   "label": "Pain felt",
+   "x": 820,
+   "y": 110,
+   "rx": 85,
+   "info": "A teaching score for how much pain is felt."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Touch fibres",
+   "sub": "medium",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Medium-sized fibres carrying touch and pressure."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Touch signal",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Touch and pressure signal."
+  },
+  {
+   "id": "touch",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m1",
+     1.0
+    ]
+   ],
+   "label": "Touch felt",
+   "x": 820,
+   "y": 300,
+   "rx": 85,
+   "info": "A teaching score for how much touch and pressure is felt."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Motor fibres",
+   "sub": "large, thick",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Large thick fibres that carry movement commands. They are blocked last."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Movement signal",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Movement command to the muscle."
+  },
+  {
+   "id": "motor",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m2",
+     1.0
+    ]
+   ],
+   "label": "Movement kept",
+   "x": 820,
+   "y": 490,
+   "rx": 85,
+   "info": "A teaching score for how well the muscles can move."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_pain",
+   "from": "s0",
+   "to": "m0",
+   "label": "conduction",
+   "info": "Local anaesthetics block voltage-gated sodium channels from inside the nerve, so impulses cannot be conducted. Thin pain fibres are blocked at the lowest strength."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "pain",
+   "blockable": false,
+   "info": "This signal reaches the brain or muscle unless the nerve is blocked."
+  },
+  {
+   "id": "e_touch",
+   "from": "s1",
+   "to": "m1",
+   "label": "conduction",
+   "info": "Touch and pressure fibres need a stronger block than pain fibres."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "touch",
+   "blockable": false,
+   "info": "This signal reaches the brain or muscle unless the nerve is blocked."
+  },
+  {
+   "id": "e_motor",
+   "from": "s2",
+   "to": "m2",
+   "label": "conduction",
+   "info": "Large motor fibres are the last to be blocked, so a light block leaves movement."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "motor",
+   "blockable": false,
+   "info": "This signal reaches the brain or muscle unless the nerve is blocked."
+  }
+ ],
+ "sources": [
+  "<strong>Where it acts.</strong> Local anaesthetics block voltage-gated sodium channels from inside the nerve; small thin fibres are blocked before large thick ones. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Ionisation and pKa, vasoconstrictors, toxicity (cardiac and neurological) and lipid rescue, esters and amides, sympathetic block, antiarrhythmic use (lidocaine) and which technique suits which operation are left out. Fibre types are grouped into three. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Local anaesthetics: why pain goes first and movement last",
+  "blurb": "Interactive figure: sodium channel block and the order in which fibres are blocked",
+  "drugs": {
+   "lidocaine": "d=1",
+   "lignocaine": "d=1",
+   "bupivacaine": "d=1",
+   "ropivacaine": "d=1",
+   "levobupivacaine": "d=1",
+   "prilocaine": "d=1",
+   "procaine": "d=1",
+   "chloroprocaine": "d=1",
+   "mepivacaine": "d=1",
+   "articaine": "d=1",
+   "tetracaine": "d=1",
+   "benzocaine": "d=1"
+  },
+  "terms": [
+   "local anaesthetics?",
+   "local anesthetics?",
+   "sodium channel blockers?",
+   "nerve blocks?",
+   "differential (?:nerve )?block"
+  ]
+ }
+}

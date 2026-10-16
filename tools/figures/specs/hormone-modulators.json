@@ -1,0 +1,305 @@
+{
+ "id": "hormone-modulators",
+ "title": "Drugs that block sex hormone action in breast, prostate and prostate growth",
+ "ariaLabel": "Schematic of four steps of sex hormone signalling: aromatase makes oestrogen from androgens, oestrogen acts on its receptor in breast tissue, 5-alpha reductase makes dihydrotestosterone from testosterone, and androgens act on the androgen receptor. Aromatase inhibitors block the first step, tamoxifen blocks the oestrogen receptor in breast, finasteride blocks 5-alpha reductase, and antiandrogens block the androgen receptor.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Hormone drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no hormone-modulating drug"
+  },
+  {
+   "label": "aromatase inhibitor type",
+   "status": "aromatase inhibitor",
+   "blocks": {
+    "e_aro": 0.85
+   }
+  },
+  {
+   "label": "tamoxifen type (oestrogen receptor blocker)",
+   "status": "tamoxifen type",
+   "blocks": {
+    "e_er": 0.85
+   }
+  },
+  {
+   "label": "5-alpha reductase inhibitor type",
+   "status": "5-alpha reductase inhibitor",
+   "blocks": {
+    "e_5ar": 0.85
+   }
+  },
+  {
+   "label": "antiandrogen type (androgen receptor blocker)",
+   "status": "antiandrogen",
+   "blocks": {
+    "e_ar": 0.85
+   }
+  }
+ ],
+ "readout": "Hormone-driven growth: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "low",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.3,
+    0.6
+   ]
+  }
+ ],
+ "status": "Hormone drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Hormone-driven growth: active"
+  ],
+  [
+   1,
+   1,
+   "Hormone-driven growth: reduced"
+  ],
+  [
+   1,
+   2,
+   "Hormone-driven growth: reduced"
+  ],
+  [
+   1,
+   3,
+   "Hormone-driven growth: reduced"
+  ],
+  [
+   1,
+   4,
+   "Hormone-driven growth: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Androgens",
+   "sub": "to oestrogen",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Androgens in fat and other tissues that can be turned into oestrogen."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Oestrogen made",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Oestrogen made in the body."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Oestrogen",
+   "sub": "in breast tissue",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Oestrogen acting in breast tissue."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Oestrogen signal",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Signals for growth of oestrogen-sensitive cells."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Testosterone",
+   "sub": "in the prostate",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Testosterone in prostate tissue."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "DHT made",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Dihydrotestosterone, the potent androgen of the prostate."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Androgen signal",
+   "sub": "prostate cells",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Androgen acting on the androgen receptor."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Androgen effect",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Androgen-driven growth of prostate cells."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Hormone-driven growth",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for hormone-driven growth signals in the tissue."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_aro",
+   "from": "s0",
+   "to": "m0",
+   "label": "aromatase",
+   "info": "Aromatase inhibitors (letrozole, anastrozole, exemestane) block conversion of androgens to oestrogen. They are used after menopause, when this is the main source of oestrogen."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_er",
+   "from": "s1",
+   "to": "m1",
+   "label": "oestrogen receptor",
+   "info": "Tamoxifen blocks the oestrogen receptor in breast tissue (it is a partial agonist elsewhere, for example in the womb and bone). Fulvestrant blocks and degrades the receptor."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_5ar",
+   "from": "s2",
+   "to": "m2",
+   "label": "5-alpha reductase",
+   "info": "Finasteride and dutasteride block 5-alpha reductase, so less dihydrotestosterone (DHT) is made, and the prostate shrinks."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_ar",
+   "from": "s3",
+   "to": "m3",
+   "label": "androgen receptor",
+   "info": "Antiandrogens (flutamide, bicalutamide, enzalutamide) block the androgen receptor, so androgen signals do not reach the cell's DNA."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Aromatase inhibitors block oestrogen synthesis, tamoxifen blocks the oestrogen receptor in breast, 5-alpha reductase inhibitors block DHT synthesis, and antiandrogens block the androgen receptor. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "GnRH agonists and antagonists, abiraterone, oophorectomy, premenopausal use, partial agonist effects of tamoxifen and raloxifene, receptor status, adverse effects (thrombosis, endometrial effects, bone loss) and monitoring are left out. Hormone-driven growth is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Drugs that block sex hormone action in breast, prostate and prostate growth",
+  "blurb": "Interactive figure: aromatase inhibitors, tamoxifen, 5-alpha reductase inhibitors and antiandrogens",
+  "drugs": {
+   "letrozole": "d=1",
+   "anastrozole": "d=1",
+   "exemestane": "d=1",
+   "tamoxifen": "d=2",
+   "fulvestrant": "d=2",
+   "raloxifene": "d=2",
+   "toremifene": "d=2",
+   "finasteride": "d=3",
+   "dutasteride": "d=3",
+   "flutamide": "d=4",
+   "bicalutamide": "d=4",
+   "enzalutamide": "d=4",
+   "cyproterone": "d=4",
+   "abiraterone": "d=4",
+   "apalutamide": "d=4",
+   "darolutamide": "d=4"
+  },
+  "terms": [
+   "aromatase inhibitors?",
+   "anti[- ]?oestrogens?",
+   "anti[- ]?estrogens?",
+   "anti[- ]?androgens?",
+   "5[- ]?alpha reductase inhibitors?",
+   "SERMs?",
+   "selective oestrogen receptor modulators?",
+   "endocrine therapy"
+  ]
+ }
+}

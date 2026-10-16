@@ -1,0 +1,266 @@
+{
+ "id": "migraine-drugs",
+ "title": "Migraine: where acute and preventive drugs act",
+ "ariaLabel": "Schematic of a migraine attack: trigeminal nerve endings release CGRP, which widens meningeal vessels and causes neurogenic inflammation, and pain signals are amplified in the brainstem. Triptans act on 5-HT1B and 1D receptors to constrict vessels and reduce CGRP release, CGRP antagonists and antibodies block CGRP, and NSAIDs lower pain signalling.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Attack trigger",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no migraine drug"
+  },
+  {
+   "label": "triptan type (5-HT1B/1D agonist)",
+   "status": "triptan",
+   "blocks": {
+    "e_cgrp": 0.6,
+    "e_dil": 0.85
+   }
+  },
+  {
+   "label": "CGRP antagonist or antibody type",
+   "status": "CGRP blocker",
+   "blocks": {
+    "e_cgrp": 0.9
+   }
+  },
+  {
+   "label": "NSAID type",
+   "status": "NSAID",
+   "blocks": {
+    "e_pain": 0.7
+   }
+  },
+  {
+   "label": "triptan plus NSAID",
+   "status": "triptan plus NSAID",
+   "blocks": {
+    "e_cgrp": 0.6,
+    "e_dil": 0.85,
+    "e_pain": 0.7
+   }
+  }
+ ],
+ "readout": "Migraine pain: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "relieved",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.25,
+    0.45
+   ]
+  }
+ ],
+ "status": "Attack trigger: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Migraine pain: marked"
+  ],
+  [
+   1,
+   1,
+   "Migraine pain: reduced"
+  ],
+  [
+   1,
+   2,
+   "Migraine pain: reduced"
+  ],
+  [
+   1,
+   3,
+   "Migraine pain: marked"
+  ],
+  [
+   1,
+   4,
+   "Migraine pain: relieved"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "CGRP release",
+   "sub": "trigeminal nerve",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Calcitonin gene-related peptide released from trigeminal nerve endings."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Neurogenic inflammation",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Inflammation around meningeal vessels."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Vessel widening",
+   "sub": "meningeal vessels",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Widening of meningeal vessels in an attack."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Dilated vessels",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Widened vessels add to the throbbing pain."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Pain signals",
+   "sub": "trigeminal and brainstem",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Pain signals travelling to the brainstem and thalamus."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Pain felt",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Throbbing headache and sensitivity to light and sound."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.2
+    ],
+    [
+     "n:m2",
+     0.3
+    ]
+   ],
+   "label": "Migraine pain",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the pain of the attack."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cgrp",
+   "from": "s0",
+   "to": "m0",
+   "label": "CGRP signalling",
+   "info": "CGRP antagonists (gepants) and CGRP antibodies block CGRP or its receptor. Triptans also lower its release through 5-HT1D receptors."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_dil",
+   "from": "s1",
+   "to": "m1",
+   "label": "5-HT1B receptors",
+   "info": "Triptans act on 5-HT1B receptors of vessels and constrict them. They are contraindicated in coronary disease because of this effect."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_pain",
+   "from": "s2",
+   "to": "m2",
+   "label": "pain amplification",
+   "info": "NSAIDs lower prostaglandin-driven sensitisation of pain pathways. Antiemetics help nausea and speed absorption."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Triptans act on 5-HT1B and 1D receptors, CGRP antagonists and antibodies block CGRP, and NSAIDs lower pain signalling. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Ergotamine, antiemetics, preventive drugs (propranolol, topiramate, amitriptyline), aura, medication-overuse headache, other headaches, cardiovascular contraindications and adverse effects are left out. Migraine pain is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Migraine: where acute and preventive drugs act",
+  "blurb": "Interactive figure: triptans, CGRP blockers and NSAIDs",
+  "drugs": {
+   "sumatriptan": "d=1",
+   "rizatriptan": "d=1",
+   "zolmitriptan": "d=1",
+   "eletriptan": "d=1",
+   "naratriptan": "d=1",
+   "almotriptan": "d=1",
+   "frovatriptan": "d=1",
+   "erenumab": "d=2",
+   "fremanezumab": "d=2",
+   "galcanezumab": "d=2",
+   "eptinezumab": "d=2",
+   "rimegepant": "d=2",
+   "ubrogepant": "d=2",
+   "atogepant": "d=2"
+  },
+  "terms": [
+   "triptans?",
+   "anti[- ]?migraine drugs?",
+   "CGRP (?:antagonists?|antibodies|inhibitors?|blockers?)",
+   "gepants?",
+   "migraine (?:treatment|therapy|drugs?)"
+  ]
+ }
+}
