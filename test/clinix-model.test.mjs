@@ -310,6 +310,7 @@ test("compileStation: builds a checklist from skills, with no station authoring"
   assert.equal(st.criticalCount, 1);
   assert.equal(st.items[0].id, "skill.exam.resp.expansion/consent");
   assert.equal(st.passMark, 50, "default pass mark, unchanged for every existing station");
+  assert.equal(st.items[0].skillTitle, skill().title, "each item names its skill, so the station can group steps by phase");
 });
 
 test("compileStation: a high-stakes station can author a stricter pass mark", () => {
