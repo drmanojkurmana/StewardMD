@@ -1,60 +1,66 @@
 {
-  "v": 1,
-  "module": "ped-chronic-respiratory",
-  "subject": "paediatrics",
-  "title": "Chronic respiratory disorders: asthma cystic fibrosis bronchiectasis",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "**Asthma** (**wheeze** episodic night exercise laugh, **triggers** viral dust smoke pets, **atopy** eczema rhinitis family, **spirometry** reversible obstruction, **severity** control questionnaires, **reliever** SABA as-needed, **controller** ICS daily steps, **technique** spacer checks) with **plans** (**written** action traffic-lights, **peak** flow diaries) steadies; **review** (control visits) tightens. Airways twitch.",
-      "say": "Wheezes triggers atopies spirometries is asthma: nights cough exercises provoke dusts stir smokes choke reverses show relievers puff controllers puff techniques check spacers hold plans write traffic review tightens controls track. Twitches calm.",
-      "vis": null
-    },
-    {
-      "tx": "**CF** (**meconium** ileus newborn screens, **sweat** chloride diagnostic thresholds, **pancreas** steatorrhoea enzymes growth, **lungs** pseudomonas exacerbations, **liver** biliary cirrhosis, **diabetes** CFRD OGTT screens, **genes** F508del modulators, **salt** heat losses) with **teams** (**physio** airway clearance, **dietitian** high-energy) shares; **vaccinate** (flu RSV shields) guards. Chloride fails.",
-      "say": "Meconiums sweats pancreases lungs is CF: ileus blocks chlorides sweat enzymes replace greases pass pseudomonads colonise livers scar diabetics screen genes name modulators fix salts lose teams share physios clap vaccinates shield flus block. Channels clog.",
-      "vis": null
-    },
-    {
-      "tx": "**Bronchiectasis** (**wet** chronic productive cough, **HRCT** signet tramline confirms, **causes** post-TB immunodeficiency PCD, **sputum** cultures sensitivities, **drainage** postural percussion devices, **antibiotics** exacerbation courses prophylaxis, **vaccines** flu pneumococcal, **surgery** localised lobes) with **monitors** (**spirometry** declines, **growth** nutrition) tracks; **smoke** (free homes) clears. Airways scar.",
-      "say": "Wets HRCTs causes sputums is bronchiectasis: coughs persist signets ring cultures grow drainages tippercussions clear antibiotics course exacerbations treat vaccines guard surgeries resect lobes spare monitors track spirometries slide smokes clear airs clean. Scars dilate.",
-      "vis": null
-    },
-    {
-      "tx": "**Control** (**step-up** ICS-LABA montelukast, **step-down** stable weans, **severe** tiotropium biologic referrals, **adherence** dose counters refills, **inhaler** technique retrains, **comorbidity** rhinitis reflux obesity, **exercise** warm-up pre-dose, **audit** admission reviews) with **traps** (**over-reliance** SABA deaths, **steroid** growth thrush, **missed** CF newborn) closes; **transition** (adolescent self-care) hands. Breaths steady.",
-      "say": "Step-ups step-downs severes adherences is control: combos climb weans taper biologics target counters count techniques retrain comorbidities treat exercises warm audits review admissions probe over-reliances kill steroids stunt misses hide transitions hand teens own. Controls hold.",
-      "vis": null
-    }
-  ],
-  "quiz": [
-    "bk2-paed-301",
-    "bk2-paed-302",
-    "bk2-paed-303",
-    "bk2-paed-304",
-    "bk2-paed-305",
-    "bk2-paed-306",
-    "bk2-paed-307",
-    "bk2-paed-308",
-    "bk2-paed-309",
-    "bk2-paed-310"
-  ],
-  "src": [],
-  "refs": [
-    "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "AI",
-  "run": "books2-nel4",
-  "model": "muse-wonder (local authoring, no external API)",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+ "v": 1,
+ "module": "ped-chronic-respiratory",
+ "subject": "paediatrics",
+ "title": "Chronic respiratory disorders: asthma cystic fibrosis bronchiectasis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "**Asthma** (**wheeze** episodic night exercise laugh, **triggers** viral dust smoke pets, **atopy** eczema rhinitis family, **spirometry** reversible obstruction, **severity** control questionnaires, **reliever** SABA as-needed, **controller** ICS daily steps, **technique** spacer checks) with **plans** (**written** action traffic-lights, **peak** flow diaries) steadies; **review** (control visits) tightens. Airways twitch.",
+   "say": "Wheezes triggers atopies spirometries is asthma: nights cough exercises provoke dusts stir smokes choke reverses show relievers puff controllers puff techniques check spacers hold plans write traffic review tightens controls track. Twitches calm.",
+   "vis": null
+  },
+  {
+   "tx": "**CF** (**meconium** ileus newborn screens, **sweat** chloride diagnostic thresholds, **pancreas** steatorrhoea enzymes growth, **lungs** pseudomonas exacerbations, **liver** biliary cirrhosis, **diabetes** CFRD OGTT screens, **genes** F508del modulators, **salt** heat losses) with **teams** (**physio** airway clearance, **dietitian** high-energy) shares; **vaccinate** (flu RSV shields) guards. Chloride fails.",
+   "say": "Meconiums sweats pancreases lungs is CF: ileus blocks chlorides sweat enzymes replace greases pass pseudomonads colonise livers scar diabetics screen genes name modulators fix salts lose teams share physios clap vaccinates shield flus block. Channels clog.",
+   "vis": null
+  },
+  {
+   "tx": "**Bronchiectasis** (**wet** chronic productive cough, **HRCT** signet tramline confirms, **causes** post-TB immunodeficiency PCD, **sputum** cultures sensitivities, **drainage** postural percussion devices, **antibiotics** exacerbation courses prophylaxis, **vaccines** flu pneumococcal, **surgery** localised lobes) with **monitors** (**spirometry** declines, **growth** nutrition) tracks; **smoke** (free homes) clears. Airways scar.",
+   "say": "Wets HRCTs causes sputums is bronchiectasis: coughs persist signets ring cultures grow drainages tippercussions clear antibiotics course exacerbations treat vaccines guard surgeries resect lobes spare monitors track spirometries slide smokes clear airs clean. Scars dilate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ped-chronic-respiratory-fig1.webp",
+    "alt": "High-resolution CT scan of the lung showing characteristic features of bronchiectasis, including dilated bronchi (signet ring sign) and thickened bronchial walls (tramline sign), indicating chronic airway scarring.",
+    "caption": "Bronchiectasis: HRCT shows dilated, scarred airways with signet ring and tramline signs. Image: Avani R. Patel, Amar R. Patel, Shivank Singh, Shantanu Singh, Imran Kh, CC BY 3.0, Wikimedia Commons.",
+    "ar": 1.1497
+   }
+  },
+  {
+   "tx": "**Control** (**step-up** ICS-LABA montelukast, **step-down** stable weans, **severe** tiotropium biologic referrals, **adherence** dose counters refills, **inhaler** technique retrains, **comorbidity** rhinitis reflux obesity, **exercise** warm-up pre-dose, **audit** admission reviews) with **traps** (**over-reliance** SABA deaths, **steroid** growth thrush, **missed** CF newborn) closes; **transition** (adolescent self-care) hands. Breaths steady.",
+   "say": "Step-ups step-downs severes adherences is control: combos climb weans taper biologics target counters count techniques retrain comorbidities treat exercises warm audits review admissions probe over-reliances kill steroids stunt misses hide transitions hand teens own. Controls hold.",
+   "vis": null
   }
+ ],
+ "quiz": [
+  "bk2-paed-301",
+  "bk2-paed-302",
+  "bk2-paed-303",
+  "bk2-paed-304",
+  "bk2-paed-305",
+  "bk2-paed-306",
+  "bk2-paed-307",
+  "bk2-paed-308",
+  "bk2-paed-309",
+  "bk2-paed-310"
+ ],
+ "src": [],
+ "refs": [
+  "Nelson Textbook of Pediatrics 22nd Edition Vol 1+2 (topic map; text rewritten, no verbatim copy)"
+ ],
+ "gen": "AI",
+ "run": "books2-nel4",
+ "model": "muse-wonder (local authoring, no external API)",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "dashes": true,
+  "verify": true,
+  "redone": 0,
+  "dropped": 0,
+  "kbWords": 0,
+  "itemN": 10
+ }
 }
