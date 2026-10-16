@@ -157,6 +157,7 @@ try {
   await load(BASE + "?prep=1");
   await ev(SIGN_IN);
   ok(await openPrep(), "PrepNucleus opens with the fixture bank");
+  ok(await until(`return !!document.querySelector("#pnQotd") && !document.querySelector("#pnQotd").hidden && /Question of the day/.test(document.querySelector("#pnQotd").textContent);`, 8000), "Question of the day shows on a fresh phone (no module cached)");
   ok(await ev(`return PREP_ARENA.enabled();`) === false, "smd_prep_arena=0 turns the Arena off");
   ok(await ev(`return !document.getElementById("pnCompete") && !Array.from(document.querySelectorAll("#smdPrep .pn-h")).some(function(h){return /Compete/.test(h.textContent);});`) === true, "arena off: no Compete section");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-h")).map(function(h){return h.textContent;}).join("|");`) === "Today's plan|IQoach|Practise|Subjects|Your progress", "home sections (quiet home, 2026-10-10): Today's plan, My coaching, Practise, Subjects, Your progress");

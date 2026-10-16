@@ -897,7 +897,12 @@
     if (!PP || !pl.exam) return all;
     var want = {}, out;
     if (pl.exam === "neet-ss") PP.ssGroupSubjects(PP.planGroup(pl)).forEach(function (id) { want[id] = 1; });
-    else if (pl.exam === "ini-ss" && pl.subject) want[pl.subject] = 1;
+    else if (pl.exam === "ini-ss" && pl.subject) {
+      // The course, its degree's general subject and Biostatistics (prep-plan.js iniSubjects), course first.
+      var ids = PP.iniSubjects ? PP.iniSubjects(pl.subject) : [pl.subject];
+      // A feeder can sit outside the NEET-SS tab (MBBS Paediatrics for a paediatric course): look it up in the taxonomy.
+      return ids.map(function (id) { for (var i = 0; i < all.length; i++) if (all[i].id === id) return all[i]; return subjectById(id); }).filter(Boolean);
+    }
     else if (pl.exam === "ini-ss") return [];
     else return all;
     out = all.filter(function (x) { return want[x.id]; });
@@ -1868,16 +1873,22 @@
      nothing else (history, bookmarks and confidence stay in the store). */
   function ssScope() {
     var PP = planPure(), s = load();
-    if (!PP || !s.pl || s.pl.exam !== "neet-ss") return null;
-    return PP.ssGroupOf(PP.planGroup(s.pl));
+    if (!PP || !s.pl) return null;
+    if (s.pl.exam === "neet-ss") return PP.ssGroupOf(PP.planGroup(s.pl));
+    // INI-SS: the chosen course scopes Home like a NEET-SS group (owner 2026-10-16: the whole SS list was shown).
+    if (s.pl.exam === "ini-ss" && s.pl.subject && PP.iniSubjects) {
+      var sb = subjectById(s.pl.subject);
+      return { id: "ini:" + s.pl.subject, ini: true, label: (sb ? tx(sb.name) : s.pl.subject) + " course", subjects: PP.iniSubjects(s.pl.subject) };
+    }
+    return null;
   }
   // Home's Subjects block for a NEET-SS student: the Step 2 shortlist (the mixed row first), a Change group
   // control and See all subjects on its own page, never the whole scroll inline.
   function ssHomeSubjects(scope, subs, known) {
-    var short = scope.label.replace(/ group$/, "");
+    var short = scope.label.replace(/ (group|course)$/, ""), unit = scope.ini ? "course" : "group";
     return '<h2 class="pn-h">Subjects</h2>' +
-      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change group</button></p>' +
-      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your group") + "</div>" +
+      '<p class="pn-mut pn-small">' + esc(scope.label) + ' · <button type="button" class="pn-link" data-act="p-settings">Change ' + unit + '</button></p>' +
+      '<div class="pn-group">' + row("ss-mixed", ico("grid"), esc("All " + short + " subjects"), "Mixed practice across your " + unit) + "</div>" +
       '<div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>" +
       '<button type="button" class="pn-btn" data-act="ss-all">See all subjects</button>';
   }
@@ -1967,22 +1978,31 @@
     var pool = [];
     subs.forEach(function (sb) { var ix = st.ix[sb.id]; if (ix) ix.topics.forEach(function (t) { if (t.group !== "mixed" && countFor(t, s.exam) > 0) pool.push({ s: sb.id, m: t.id }); }); });
     if (!pool.length) return Promise.resolve(null);
-    var d = today(), hid = hidden(), pick = null;
-    // Only modules already on this phone (opened or downloaded): no download for it, and it works offline.
-    return Promise.resolve(cacheKeys()).then(null, function () { return null; }).then(function (keys) {
-      var have = {}; (keys || []).forEach(function (k) { have[k] = 1; });
-      var mine = pool.filter(function (x) { var p = modulePath(x.s, x.m); return have[p] || st.mem[p]; });
-      if (!mine.length) return null;
-      pick = mine[dayHash(d, 7) % mine.length];
-      return loadModule(pick.s, pick.m);
-    }).then(function (items) {
-      if (!items) return null;
-      var ok = (items || []).filter(function (it) {
-        return usable(it, hid) && it.o && it.o.length === 4 && !(it.img && it.img.length) && !it._py && !/\b(image|shown|figure|photograph|picture|x-?ray below|graph)\b/i.test(it.q || "") &&
-          !(G.PREP_RAD && G.PREP_RAD.figure(it, HOST));
+    // Sorted, so every student with the same subjects gets the same module and question on the same day.
+    pool.sort(function (a, b) { return a.s + "/" + a.m < b.s + "/" + b.m ? -1 : 1; });
+    var d = today(), hid = hidden();
+    var from = function (x) {
+      return loadModule(x.s, x.m).then(function (items) {
+        var ok = (items || []).filter(function (it) {
+          return it.id && it.o && it.o.length === 4 && !(it.img && it.img.length) && !it._py && !/\b(image|shown|figure|photograph|picture|x-?ray below|graph)\b/i.test(it.q || "") &&
+            !(G.PREP_RAD && G.PREP_RAD.figure(it, HOST));
+        }).sort(function (a, b) { return a.id < b.id ? -1 : 1; });
+        if (!ok.length) return null;
+        var k = dayHash(d, 13) % ok.length;
+        for (var i = 0; i < ok.length; i++) { var it = ok[(k + i) % ok.length]; if (usable(it, hid)) return it; }
+        return null;
       });
-      return ok.length ? ok[dayHash(d, 13) % ok.length] : null;
-    }).then(null, function () { return null; });
+    };
+    var first = pool[dayHash(d, 7) % pool.length];
+    return from(first).then(null, function () { return null; }).then(function (it) {
+      if (it) return it;
+      // Offline or an empty module: a module already on this phone, so the card still shows.
+      return Promise.resolve(cacheKeys()).then(null, function () { return null; }).then(function (keys) {
+        var have = {}; (keys || []).forEach(function (k) { have[k] = 1; });
+        var mine = pool.filter(function (x) { var p = modulePath(x.s, x.m); return have[p] || st.mem[p]; });
+        return mine.length ? from(mine[dayHash(d, 7) % mine.length]).then(null, function () { return null; }) : null;
+      });
+    });
   }
   function qotdHtml(it) {
     var q = qotdState(), done = q && q.id === it.id ? q : null, L = ["A", "B", "C", "D"], sb = subjectById(it._s);

@@ -545,6 +545,7 @@
         items.push({
           id: s.id + "/" + rub[j].id,
           skillId: s.id,
+          skillTitle: s.title || "",
           text: rub[j].text,
           critical: crit,
           weight: typeof rub[j].weight === "number" ? rub[j].weight : 1

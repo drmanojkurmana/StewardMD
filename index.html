@@ -102,7 +102,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1-pf1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
 <link rel="stylesheet" href="/insulin.css?v=ins15-fr1">
-<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1">
+<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1-osce1">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1-pf1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -2287,7 +2287,7 @@ window.openExternal = function (u) {
 <script src="/pro-badge.js?v=gold692" defer></script>
 <!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
      RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
-<script src="/pro-notice.js?v=gold1202-signin-used1-roles1" defer></script>
+<script src="/pro-notice.js?v=gold1202-signin-used1-roles1-login1" defer></script>
 <script src="/signout-fix.js?v=gold342-bkstatus-wsqfu3" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles-auth1-resync1-wsqfu3-energy1-once1-trainee1-hub1-pfdraw1-vfx1-three1-nop1" defer></script>
@@ -2461,7 +2461,12 @@ window.openExternal = function (u) {
 <!-- MaiK AI mark: the icon on every "Ask MaiK" entry (one SVG in assets/maik-ai-mark.svg). Before home.js. -->
 <script src="/maik-ai-mark.js?v=mkai7" defer></script>
 <script src="/maik-local.js?v=hardlocal3-opdcols1-cont2-tworags1-raglink1-raghybrid1-thread1-webretry1-fu2-scribe18-c4-perf1-nerdrugs2-len1-mem1-bal1-audOff-nopass1-litemeta1-literet1-literx1-mlx1-convo1002-liteproto1-litedrug1-ntb1-tools1-eng1-liteval1-fgwarm1-adultref1" defer></script>
-<script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1" defer></script>
+<!-- On-phone semantic search (window.SMD_EMBED_LOCAL): EmbeddingGemma disease vectors through
+     the prep-bank API plus IndexedDB cache, read lazily by steward-ai.browser.js (only when the
+     smd_local_embed flag is on and the search pack is on disk). Defining the global is harmless
+     when off. -->
+<script src="/kb/ai/embed-local.js?v=embed1" defer></script>
+<script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1-embedlocal1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
 <script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5" defer></script>
@@ -2750,7 +2755,7 @@ window.openExternal = function (u) {
      physiology, profile, examiner, screens; ~590 KB) are NOT tagged here: clinix.js loads them in
      order on the first open (flag smd_clinix_lazy, default ON). Their ?v= tokens live in clinix.js
      SCRIPTS - bump the token THERE when you edit one of them. -->
-<script src="/clinix.js?v=cx13-lazy1-own4-obg1-cel1-nk1-mkai1" defer></script>
+<script src="/clinix.js?v=cx13-lazy1-own4-obg1-cel1-nk1-mkai1-osce1" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
      SMD_SURGX_* globals. Flag off = clinix-style total no-op: surgx.js never mounts the root and
@@ -3285,7 +3290,7 @@ window.openExternal = function (u) {
 <script src="/tokos-loader.js?v=tok10" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
-<script src="/prep-loader.js?v=prep80" defer></script>
+<script src="/prep-loader.js?v=prep82" defer></script>
 <!-- Narkē (Anaesthesia): only the loader at boot; the engine and Narkē files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk9" defer></script>
 </body>

@@ -13,7 +13,7 @@ compatibility_date = "2025-01-01"
 # Vectorize (NEW) — KB disease-vector index for the semantic arm (functions/api/retrieve)
 [[vectorize]]
 binding = "KB_VECTORIZE"
-index_name = "stewardmd-kb"
+index_name = "stewardmd-kb-t5"   # Vertex text-embedding-005 vectors (768-d); the old bge index stewardmd-kb is kept as rollback
 
 # D1 — offline NMC register mirror; doctor verification falls back to it when live NMC is down
 [[d1_databases]]
@@ -277,7 +277,7 @@ binding = "UPDATES_KV"
 # Vectorize must also be declared for the production env (KV lives here too)
 [[env.production.vectorize]]
 binding = "KB_VECTORIZE"
-index_name = "stewardmd-kb"
+index_name = "stewardmd-kb-t5"   # Vertex text-embedding-005 vectors (768-d); the old bge index stewardmd-kb is kept as rollback
 
 [[env.production.d1_databases]]
 binding = "stewardmd_nmc"

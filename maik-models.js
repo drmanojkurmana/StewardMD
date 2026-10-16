@@ -152,6 +152,36 @@
       bytes: 291557792, sha256: "83940d4dd9676710856f43523bed096164a595a96f6b34771610a03937de5270" }] };
   var DRAFT_QWEN3 = { name: "Qwen3-0.6B-Q8_0.gguf", url: HF + "/Qwen/Qwen3-0.6B-GGUF/resolve/main/Qwen3-0.6B-Q8_0.gguf?download=true", bytes: 639446688 };
 
+  /* ON-PHONE SEARCH PACK (owner, 2026-10-16): EmbeddingGemma 2, NOT a chat model.
+   *
+   * A 210 MB embedding model that turns a question into a 768-float vector on the phone, so
+   * disease search runs fully offline (kb/ai/embed-local.js). It lives BESIDE PACKS, not in it:
+   * pack() resolves it, so the download / verify / delete machinery and the Settings row serve it
+   * unchanged, but packIds(), recommend(), the chat picker and setActivePack() never see a model
+   * that cannot answer. The existing tests pin PACKS order and shape, which is why this stays out.
+   *
+   * Prefixes are the ones the vector set was built with (see the kb-vectors-q5.json sidecar):
+   * documents "title: none | text: ", queries "task: search result | query: ". The NATIVE embed
+   * implementation applies the query prefix before encoding (kb/ai/embed-local.js kind "query").
+   * Size and sha256 measured from a complete download on MKK, 2026-10-16. */
+  var EMBED_ID = "embedding-gemma-2";
+  var EMBED_PACK = {
+    label: "On-phone search",
+    actual: "EmbeddingGemma 2 (UD-Q5_K_XL)",
+    embed: true,
+    note: "Finds Knowledge Base diseases with no network and no AI tokens. It never answers chat.",
+    files: [{
+      name: "embeddinggemma-2-UD-Q5_K_XL.gguf",
+      url: HF + "/unsloth/embeddinggemma-2-GGUF/resolve/main/embeddinggemma-2-UD-Q5_K_XL.gguf?download=true",
+      bytes: 210055680,   // exact, measured on MKK
+      sha256: "a9d7a3b7eb421113f05e964e10882676f10fff83811b7876d5bb983db7c7ac41"   // VERIFIED against the complete file on MKK
+    }]
+  };
+  /** True for the search pack (and any future "<id>#vision"-style suffix of it, of which it has none). */
+  function isEmbed(id) { return baseIdOf(id) === EMBED_ID; }
+  /** Every search-pack id the Settings row should offer. One today; a function so a second cannot sneak past the picker. */
+  function embedIds() { return [EMBED_ID]; }
+
   /* MLX ON iPHONE (owner, 2026-09-28: "ios version have MLX and android have existing one"). Flag
    * smd_maik_mlx, default OFF; iOS only; needs the separate capacitor-mlx plugin linked (it is not,
    * until the owner raises the app to iOS 17 - MLX will not build below it). See
@@ -586,7 +616,11 @@
     "bonsai-27b":        { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
     "bonsai2-27b":       { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 1.30, lang: [] },
     // Cortex: only 8 of 32 layers keep a KV cache (2x8x4x256x2 B x 4096 = 0.13 GB); +0.02 recurrent state
-    "mimo-cortex-9b":    { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 0.15, lang: [] }
+    "mimo-cortex-9b":    { medical: false, kb: true,  json: 2, reasoning: 3, ramGB: 12, kvGBat4k: 0.15, lang: [] },
+    // Search pack: 210 MB of weights and a short embedding context, so the floor is generous (6 GB,
+    // the lowest chat tier). It never answers, so medical/kb/json/reasoning describe nothing and stay
+    // at their falsy defaults; recommend() never offers it (it iterates chat packIds only).
+    "embedding-gemma-2": { medical: false, kb: false, json: 0, reasoning: 0, ramGB: 6,  kvGBat4k: 0.05, lang: [] }
   };
   // ponytail: one constant for llama.cpp scratch + the app beside the weights. Tune from device data.
   var RUNTIME_GB = 0.4;
@@ -594,7 +628,9 @@
   /** Everything a feature needs to decide whether pack `id` can do its job. Null for an unknown id. */
   function caps(id) {
     var base = baseIdOf(id), p = PACKS[base], c = CAPS[base] || {};
-    if (!p) return null;
+    // Side registries (the search pack, the edge pack) resolve through pack(), not PACKS: a
+    // genuinely unknown id still throws there and stays null (medmo-4b, removed, still does).
+    if (!p) { try { p = pack(base); } catch (e) { return null; } }
     var out = {};
     for (var k in c) if (Object.prototype.hasOwnProperty.call(c, k)) out[k] = c[k];
     out.id = base; out.label = p.label; out.vision = !!p.vision; out.nCtx = p.nCtx || 4096;
@@ -867,6 +903,7 @@
                files: [mf], mlxOf: baseIdOf(id) };
     }
     if (id === EDGE_FG_ID) return EDGE_FG;
+    if (id === EMBED_ID) return EMBED_PACK;   // search pack: same machinery, never a chat model
     var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
   }
   function relPath(f) { return SUBDIR + "/" + f; }
@@ -923,6 +960,7 @@
     var ids = Object.keys(PACKS);
     Object.keys(PACKS).forEach(function (b) { if (PACKS[b].vision) ids.push(b + VISION_SUFFIX); });
     ids.push(EDGE_FG_ID);
+    ids.push(EMBED_ID);   // the 210 MB search pack resumes the same way a chat pack does
     // MLX files too, but only where MLX is on: with the flag off nothing ever started one.
     if (mlxEnabled()) Object.keys(PACKS).forEach(function (b) { ids = ids.concat(mlxIdsOf(b)); });
     return ids.reduce(function (chain, id) {
@@ -978,7 +1016,9 @@
   // Default pin (audit T27, 2026-09-25): MaiK Lite, our own model and the smallest and fastest
   // pack, not MxCore. A clinician's own choice (KEY_ACTIVE) is untouched.
   function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-lite"; }
-  function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
+  // The search pack can never answer, so it can never be the active pack. Refusing here (not just
+  // hiding the row) keeps a stray id out of the answering engine even if a caller passes it raw.
+  function setActivePack(id) { if (isEmbed(id)) return activePack(); if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -1516,6 +1556,7 @@
 
   var API = {
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
+    EMBED_ID: EMBED_ID, isEmbed: isEmbed, embedIds: embedIds, pack: pack,
     hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
     hasDraft: hasDraft, draftFile: draftFile, draftIdOf: draftIdOf, isDraftId: isDraftId,
     // MLX build for iPhone (2026-09-28, flag smd_maik_mlx)

@@ -39,6 +39,20 @@
   }
   function hybridBase() { return window.AI_PROXY ? String(window.AI_PROXY).replace(/\/ai\b/, "/retrieve") : "/api/retrieve"; }
   var _vecSections = {};   // diseaseId -> the section the vector arm matched (chunk-level), used to bias grounding
+  // On-phone embedding tier (flag smd_local_embed, default OFF): disease ids from the
+  // EmbeddingGemma vectors on this phone. No network, so unlike vectorDiseaseIds() below it
+  // takes NO cloud-policy gate and stays available in Local and KB-only modes, where the
+  // server arm is blocked. [] on any missing piece (flag off, no search pack, no native
+  // embed yet, vectors unreachable), so callers fall through unchanged.
+  function localDiseaseIds(query, k) {
+    try {
+      var E = window.SMD_EMBED_LOCAL;
+      if (!E || typeof E.localTier !== "function") return Promise.resolve([]);
+      return E.localTier(query, k || RETRIEVE_K).then(function (ids) {
+        return Array.isArray(ids) ? ids.filter(function (d) { return typeof d === "string" && d; }) : [];
+      }, function () { return []; });
+    } catch (e) { return Promise.resolve([]); }
+  }
   function vectorDiseaseIds(query, k) {
     _vecSections = {};
     if (!vectorAllowed()) return Promise.resolve([]);   // the choke point: no caller can bypass the policy
@@ -740,8 +754,13 @@
         // "Heart Failure: Management" (which just mentions hyperkalemia); the vector arm must still run
         // to route it to the actual Hyperkalaemia entry.
         var nameSure = chosen && chosen.confident && (chosen.nameHit || chosen.nameToksAll);
-        if (distinctive.length && !nameSure && smdHybridOn() && _rrf && (opts.question || "").trim()) {
-          var vecIds = await vectorDiseaseIds(opts.question, RETRIEVE_K);
+        if (distinctive.length && !nameSure && _rrf && (opts.question || "").trim()) {
+          // Tier order: on-phone embedding first (offline and policy-free), then the server
+          // vector arm (needs smdHybridOn, which carries the cloudAllowed policy gate), then
+          // keyword only. Either vector tier feeds the same RRF fusion; when the local tier is
+          // off or unavailable the server path below runs exactly as before.
+          var vecIds = await localDiseaseIds(opts.question, RETRIEVE_K);
+          if (!vecIds.length && smdHybridOn()) vecIds = await vectorDiseaseIds(opts.question, RETRIEVE_K);
           if (vecIds.length) {
             var fusedChosen = pick(_rrf(lexIds, vecIds).slice(0, 8));
             // adopt the fused pick when it's a stronger match (confident, or a hit where lexical had none)
