@@ -19,6 +19,15 @@ places:
 - **Syndrome reasoning** (`reasoning.js` `regionSuscHTML`): resistance chips for the lead syndrome.
 - **Profiles** (`policy.js` `window.HOSPITAL`): one active profile app-wide (ICMR default).
 
+## iPad and spectrum polish (2026-10-16, owner)
+- Spectrum grid: "not covered" is a red cross on a white cell (`--no-f`, `--no-b` on `.abg.abg-pro`), so a gap reads as
+  clearly as a green "covered" block; the legend swatch matches. Owner: "add wrong with red indicating not covered".
+- Organism headings break between words only (`.abg-pro .abg-ch-btn{word-break:normal}`, column uncapped): they used
+  to split mid-word ("Streptoc / occi", "aerugino / sa").
+- My hospital: from 760 px the form fields stop at 640 px and the Check button sits under the text box.
+- `test/run-ipad-fit.mjs` opens every Home action at 820x1180, 1180x820, 1024x1366 and 1366x1024 with the tablet zoom
+  and touch on; all 58 fit in headless Chrome on 2026-10-16 (it is not WebKit, and it sees the first screen only).
+
 ## Files
 | File | Role |
 |---|---|

@@ -1913,8 +1913,8 @@
          theme, light and dark. Hairlines instead of shadows, sentence case, 8-10px radii, no gradients.
          --panel, --ink and --line are inherited from the page instead of the overlay's own copies. */
       ".abg.abg-pro,body.dark .abg.abg-pro{--bg:var(--paper,#f6f7f5);--panel:inherit;--ink:inherit;--line:inherit;--mut:var(--slate-soft,#5a7184);--ink2:var(--slate,#2d4356);--tl:var(--teal,#0e6e63);--tls:var(--teal-soft,#e3f1ee);--f:var(--sans,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,system-ui,sans-serif);--track:color-mix(in srgb,var(--ink) 7%,transparent)}",
-      ".abg.abg-pro{--h5b:#d4eedd;--h5f:#13502b;--h5s:#2f8f5b;--h4b:#e7f1cc;--h4f:#3c5a0e;--h4s:#7ea428;--h3b:#fbefc1;--h3f:#664705;--h3s:#d4a21a;--h2b:#fbdcc4;--h2f:#77300c;--h2s:#e07b33;--h1b:#f7cfd3;--h1f:#7c1522;--h1s:#c24141;--on-b:#d6ede5;--on-f:#0f5b45}",
-      "body.dark .abg.abg-pro{--h5b:#123524;--h5f:#8ae0ab;--h5s:#3fae72;--h4b:#25320f;--h4f:#c4e27d;--h4s:#8fb536;--h3b:#3a2f09;--h3f:#f2d36d;--h3s:#d9a92a;--h2b:#3d200d;--h2f:#f6ab74;--h2s:#e58644;--h1b:#43151d;--h1f:#f59ea9;--h1s:#d65a61;--on-b:#10352b;--on-f:#86dcc0}",
+      ".abg.abg-pro{--h5b:#d4eedd;--h5f:#13502b;--h5s:#2f8f5b;--h4b:#e7f1cc;--h4f:#3c5a0e;--h4s:#7ea428;--h3b:#fbefc1;--h3f:#664705;--h3s:#d4a21a;--h2b:#fbdcc4;--h2f:#77300c;--h2s:#e07b33;--h1b:#f7cfd3;--h1f:#7c1522;--h1s:#c24141;--on-b:#d6ede5;--on-f:#0f5b45;--no-b:#fdf0ef;--no-f:#c0281d}",
+      "body.dark .abg.abg-pro{--h5b:#123524;--h5f:#8ae0ab;--h5s:#3fae72;--h4b:#25320f;--h4f:#c4e27d;--h4s:#8fb536;--h3b:#3a2f09;--h3f:#f2d36d;--h3s:#d9a92a;--h2b:#3d200d;--h2f:#f6ab74;--h2s:#e58644;--h1b:#43151d;--h1f:#f59ea9;--h1s:#d65a61;--on-b:#10352b;--on-f:#86dcc0;--no-b:#2c1619;--no-f:#f4877d}",
       ".abg-pro{font-family:var(--f)}",
       ".abg-pro :focus-visible{outline:2px solid var(--tl);outline-offset:2px}.abg-pro button:focus:not(:focus-visible){outline:none}",
       ".abg-pro .abg-top,body.dark .abg-pro .abg-top{background:var(--panel);-webkit-backdrop-filter:none;backdrop-filter:none;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;gap:8px}",
@@ -1935,6 +1935,9 @@
       ".abg-pro .abg-clear{background:var(--track);color:var(--ink)}.abg-pro .abg-cls-badge,body.dark .abg-pro .abg-cls-badge{background:var(--tls);color:var(--tl);border-radius:4px;letter-spacing:.02em}",
       ".abg-pro .abg-sum-title-text{font:600 16px/1.3 var(--f)}.abg-pro .abg-sum-note,.abg-pro .abg-sum-pathogen-card{border-radius:8px}",
       ".abg-pro .abg-scroll{border-radius:10px;box-shadow:none}.abg-pro .abg-grid{font:600 11px var(--f)}",
+      // Organism headings break between words only: "Streptococci" and "aeruginosa" were split mid-word ("Streptoc / occi")
+      // because the column was capped at 74 px and break-word was on. The column now widens to its longest word.
+      ".abg-pro .abg-ch{max-width:none}.abg-pro .abg-ch-btn{word-break:normal;overflow-wrap:normal;hyphens:none}",
       ".abg-pro .abg-rowh{box-shadow:none;border-right:1px solid var(--line)}.abg-pro .abg-corner{font:600 11.5px var(--f);text-transform:none;letter-spacing:0}",
       ".abg-pro .abg-cls{font:600 9.5px var(--f);color:var(--mut);letter-spacing:.04em}.abg-pro .abg-agent-btn{font:600 12.5px/1.25 var(--f)}",
       ".abg-pro .abg-drug-link-btn{background:none;color:var(--mut)}.abg-pro .abg-drug-link-btn:active{background:var(--track);color:var(--tl);transform:none}.abg-pro .abg-link-arrow{display:none}",
@@ -1944,9 +1947,12 @@
       ".abg-pro .abg-cell:active{transform:none;opacity:.7}",
       ".abg-pro .abg-cell.on,body.dark .abg-pro .abg-cell.on{background:var(--on-b);color:var(--on-f)}",
       ".abg-pro .abg-cell.part,body.dark .abg-pro .abg-cell.part{background:var(--h3b);color:var(--h3f)}.abg-pro .abg-cell.part .abg-cell-sym,body.dark .abg-pro .abg-cell.part .abg-cell-sym{color:var(--h3f);font-size:12px}",
-      ".abg-pro .abg-cell.no{background:var(--panel);opacity:1}.abg-pro .abg-cell.no .abg-cell-sym{color:color-mix(in srgb,var(--mut) 55%,transparent);font-size:10px}",
+      // Not covered reads as a red cross (owner 2026-10-16), so "no" is as clear as "yes"; the cell stays white so the
+      // green "covered" blocks still read as the pattern.
+      ".abg-pro .abg-cell.no{background:var(--panel);opacity:1}.abg-pro .abg-cell.no .abg-cell-sym{color:var(--no-f);font-size:13px;font-weight:800}",
+      ".abg-pro .abg-cell.part .abg-cell-sym,body.dark .abg-pro .abg-cell.part .abg-cell-sym{font-size:15px;line-height:1}",
       ".abg-pro .abg-drow.sel .abg-rowh{background:var(--tls)}.abg-pro .abg-cell.hit{box-shadow:inset 0 0 0 2px var(--tl)}",
-      ".abg-pro .abg-legend{font:500 11.5px var(--f)}.abg-pro .abg-legend .sw.on{background:var(--on-b);border-color:color-mix(in srgb,var(--on-f) 30%,transparent)}.abg-pro .abg-legend .sw.part{background:var(--h3b);border-color:color-mix(in srgb,var(--h3f) 30%,transparent)}",
+      ".abg-pro .abg-legend{font:500 11.5px var(--f)}.abg-pro .abg-legend .sw.on{background:var(--on-b);border-color:color-mix(in srgb,var(--on-f) 30%,transparent)}.abg-pro .abg-legend .sw.part{background:var(--h3b);border-color:color-mix(in srgb,var(--h3f) 30%,transparent)}.abg-pro .abg-legend .sw.no{background:var(--no-b);border-color:color-mix(in srgb,var(--no-f) 35%,transparent)}",
       ".abg-pro .abg-src{font:500 11px var(--f);margin-left:0;flex-basis:100%}",
       ".abg-pro .abg-empty-filter{border-radius:10px}.abg-pro .abg-reset-filter-btn{border-radius:8px;font:600 13px var(--f);padding:8px 14px}",
       ".abg-pro .abg-modal-sheet{background:rgba(15,23,42,.36);-webkit-backdrop-filter:none;backdrop-filter:none}",
