@@ -1280,3 +1280,18 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | med-viral-fig1.webp (R2) | CT scan: ground-glass, crazy-paving in COVID-19. Image: Jin, Y., Cai, L., Cheng, Z. et al., CC BY 4.0, Wikimedia Commons. | Jin, Y., Cai, L., Cheng, Z. et al.; https://commons.wikimedia.org/wiki/File:COVID19CT1.webp | CC BY 4.0 |
 | med-viral-hepatitis-fig1.webp (R2) | Acute Hepatitis B serology: key markers and diagnostic window | StewardMD (original, AI-generated with Vertex Gemini image) | CC BY 4.0 (StewardMD original) |
 | med-zoonoses-toxin-fig1.webp (R2) | Classic examination findings: Tetanus (opisthotonos, risus sardonicus) and Diphtheria (bull-neck). Image: Photo Credit: Content Providers(s): CDC, CC0/PD, Wikimedia Commons. | Photo Credit: Content Providers(s): CDC; https://commons.wikimedia.org/wiki/File:Diphtheria_bull_neck.5325_lores.jpg | Public domain |
+| cm-biomedical-waste-fig1.webp (R2) | Segregation at source: the foundation of biomedical waste management | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| mhaem-oncology-fig1.webp (R2) | Upper GI cancer: symptom-based referral pathways | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| mrheu-crystal-fig1.webp (R2) | Knee radiograph showing chondrocalcinosis in calcium pyrophosphate deposition | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| obg-maternal-health-fig1.webp (R2) | Key definitions for pregnancy outcomes and periods | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| pat-mixed-fig1.webp (R2) | Adrenal steroid pathway defects: enzyme, precursor, and clinical features | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| phm-antivirals-fig1.webp (R2) | HCV, HBV, COVID antivirals: indications, interactions, and key considerations | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| phm-contraceptives-uterine-fig1.webp (R2) | Key features of progestin-only and copper LARC methods | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| php-cholestasis-fig1.webp (R2) | Diagnostic algorithm for infantile cholestasis | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| psy-antidepressants-mood-stabilisers-fig1.webp (R2) | Lithium: monitoring, toxicity, and narrow therapeutic index | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| scc-infections-icu-fig1.webp (R2) | Reassessment and de-escalation of empirical antibiotics in ICU | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| sgm-hypertension-fig1.webp (R2) | Comparative blood pressure targets by major guidelines | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| snp-pd-peritonitis-fig1.webp (R2) | Severe peritonitis: Indications for PD catheter removal | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| srd-hn-skullbase-fig1.webp (R2) | Cholesteatoma: scutum erosion, pneumolabyrinth | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| srh-outcome-measures-fig1.webp (R2) | EULAR response criteria for DAS28 | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
+| tan-renal-crit-fig1.webp (R2) | Renal transplant graft placement, perfusion, and key perioperative medications | StewardMD (owner redraw of a rejected figure) | CC BY 4.0 (StewardMD original) |
