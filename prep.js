@@ -1624,9 +1624,15 @@
   }
   // My coaching (IQoach) compares against the selected plan's exam, never the tab it shares.
   function coachExam(s) { var p = planProfileId(); return p || s.exam; }
+  function prettyId(id) { var w = String(id || "?").replace(/^[a-z]{2,4}-(?=.)/, "").replace(/-/g, " "); return w.charAt(0).toUpperCase() + w.slice(1); }
   function coachTopicName(t) {
     var p = String(t || "").split("|"), sb = subjectById(p[0]), tp = topicOf(p[0], p[1]);
-    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(p[1] || "?");
+    // A subject whose topic list is not loaded yet would show the raw id ("son-cervix"): load it and redraw the screen.
+    if (p[0] && !tp && !st.ix[p[0]] && !(st.cnLoad && st.cnLoad[p[0]])) {
+      (st.cnLoad = st.cnLoad || {})[p[0]] = 1;
+      loadIndex(p[0]).then(function () { var h = st.stack && st.stack[st.stack.length - 1]; if (h && G.document && G.document.querySelector("#smdPrep .ky-sec")) rerender(); }, function () {});
+    }
+    var sn = sb ? tx(sb.name) : esc(p[0] || "?"), tn = tp ? tx(tp.title) : esc(prettyId(p[1]));
     return sn === tn ? sn : sn + " · " + tn;
   }
   function kyMark(size) {
@@ -1652,8 +1658,8 @@
     var grouped = view.topics.filter(function (x) { return x.group !== "fresh"; });
     var freshN = view.topics.length - grouped.length;
     var h = '<section class="ky-sec" aria-label="My coaching"><div class="ky-head">' + kyMark(28) +
-      '<h2 class="pn-h">My coaching</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About IQoach" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
-      '<p class="ky-sub">' + esc(K.NAME) + " · " + esc(K.TAGLINE) + "</p>";
+      '<h2 class="pn-h">' + esc(K.NAME) + '</h2><button type="button" class="ky-ib" data-act="kyinfo" aria-label="About IQoach" aria-pressed="' + !!st.kySecInfo + '">' + ico("info") + "</button></div>" +
+      '<p class="ky-sub">' + esc(K.TAGLINE) + "</p>";
     if (st.kySecInfo) h += '<p class="ky-note">' + esc(K.NOTEST) + ' Groups build from your own answers on this phone: answer ' + K.MIN_N + " questions on a topic to see its group and tier.</p>";
     if (!view.topics.length) {
       return h + '<p class="ky-empty">Answer ' + K.MIN_N + " questions on a topic to see your group. Tap how sure you are on each question, or skip it: skipping changes nothing.</p></section>";
@@ -1680,7 +1686,7 @@
         }).join("") + '<p class="ky-note">Why they differ, with KB comparisons when the question links any, shows with each question.</p></div></div>';
       }
     }
-    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    if (grouped.length && G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME + " pattern", "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
   /* coachResultHtml(r): this run's confidence outcomes (honest counts) plus where to revise first. */
@@ -1709,7 +1715,7 @@
       '<div class="ky-card"><div class="ky-b" style="border-top:0"><p class="ky-empty">You tagged ' + n.tagged + " of " + r.items.length + ": " + (bits.join(" · ") || "no misconceptions, confused or lucky answers.") + "</p>" +
       (first ? '<p class="ky-empty">Revise first: <b>' + coachTopicName(first.t) + "</b>" + kyTierChip(first) + " <small>" + esc(first.tierWhy || first.why) + "</small></p>" : "") +
       "</div></div>";
-    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME, "").replace("pa-ask", "pa-ask ky-ask");
+    if (G.PREP_ASK) h += askBtn("kyAsk", "Ask MaiK about my " + K.NAME + " pattern", "").replace("pa-ask", "pa-ask ky-ask");
     return h + "</section>";
   }
   /* ---------- IQoach insight (prep-insight.js): the result screen after a set. No AI call. ---------- */
