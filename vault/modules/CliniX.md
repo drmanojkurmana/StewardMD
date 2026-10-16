@@ -1,6 +1,6 @@
 ---
 tags: [module, education, respiratory]
-status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off, so every lesson keeps its "Draft, pending clinician review" line
+status: RELEASED to all users 2026-09-25 (owner decision), no longer labelled Beta; phases 1-3,5-9 built (22 diseases in 5 systems, 5 presentations, 6 skill packs); content still ai_drafted pending R1 clinical sign-off; the "Draft, pending clinician review" line was REMOVED 2026-09-28 (owner), so nothing on screen marks it as unreviewed
 flag: smd_clinix (client, def:TRUE for all users since 2026-09-25, ?clinix=0 hides) + smd_clinix_draft (def:TRUE; must stay on while content is ai_drafted, else every pathway reads "Awaiting clinical review") + smd_clinix_tutor (def:TRUE) + smd_clinix_ai_patient (def:TRUE, owner 2026-09-27; server /clinix-patient) + smd_clinix_lazy (def:TRUE) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true) + smd_clinix_viva_voice (def:true)
 ---
 # CliniX
@@ -92,6 +92,22 @@ library seam, and the missing `atlas` tier chip was added — the lessons always
 they are the load-bearing half of this argument.
 CliniX follows **RadioAnatome** instead (`atlas/` + `atlas.js:308-323` + `atlas-pipeline/`): a small
 catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared sources.
+
+## OSCE station UI (2026-10-16)
+- **The clock was frozen for every student until 2026-10-16.** `tickTimer()` wrote into
+  `el.querySelector("span")`, the FIRST span, which is the timer icon (`ic()` renders a span). The
+  countdown went into the icon glyph and the visible time stayed at the starting value. The time now
+  has its own `.cx-timer-t`; `run-clinix-ui.mjs` asserts the text changes across a tick.
+- **Checklist labels were centred** because `.cx-check span { flex: 1 }` also grew the checkbox
+  icon's span. Rows now come from one `checkRow()` (lesson self-check and station) with
+  `.cx-check-box` + `.cx-check-t`, and `role="checkbox"` / `aria-checked`.
+- The station's header and status bar (`.cx-stick`: clock + "n of N steps") stick as one block.
+  Steps are grouped by skill (`compileStation` items now carry `skillTitle`). The result shows one
+  verdict card with a pass-mark tick, critical misses once (inside the critical block), a per-skill
+  breakdown, the other misses by skill, and the time used.
+- Home "OSCE stations" / "Viva voce" open `renderPractice` (topics by system, locked ones listed with
+  a lock) instead of a toast. Picking a topic sets `state.jumpAssess`, and `openDisease` scrolls to
+  `#cxAssess` once the pathway loads.
 
 ## Gotchas
 - **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked

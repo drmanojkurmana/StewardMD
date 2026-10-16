@@ -18,10 +18,10 @@
 
   var SCRIPTS = [
     "/clinix-lexicon.js?v=cxa927-lex1-lazy1",
-    "/clinix-model.js?v=cx21a927-lex1-prolock-lazy1-open1",
+    "/clinix-model.js?v=cx21a927-lex1-prolock-lazy1-open1-osce1",
     "/clinix-dx.js?v=cxa927-dx1-lazy1-obg1",
     "/clinix-content.js?v=cx16a927-dxvocab-prolock-lazy1-own4",
-    "/clinix-diagrams.js?v=cx13-lazy1-own4-iso1",
+    "/clinix-diagrams.js?v=cx13-lazy1-own4-iso1-dash1",
     "/clinix-audio.js?v=cx-stridor3-api1-snd1-lazy1",
     "/clinix-store.js?v=cx12a927-lazy1",
     "/clinix-tutor.js?v=cx14a927-lazy1",
@@ -29,7 +29,7 @@
     "/clinix-physiology.js?v=cx11a927-sandbox1-lazy1",
     "/clinix-profile.js?v=cx10a927-lazy1",
     "/clinix-examiner.js?v=cx10a927-lazy1",
-    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1"
+    "/clinix-screens.js?v=cx26a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }

@@ -105,6 +105,8 @@
     stationChecked: {},
     stationEndsAt: 0,
     stationTimer: null,
+    stationTimeUp: false, // the clock ran out (vs the student pressing Finish)
+    stationUsed: 0,       // seconds used, for the result card
     ytFailed: {},
     ytOk: {},
     diaFocus: "both",
@@ -198,19 +200,15 @@
     // Persona Track Switcher: MBBS Exam vs PG Resident
     var isPg = state.mode === "pg";
     html += '<div class="cx-mode-bar">' +
-      '<button type="button" class="cx-mode-btn' + (!isPg ? " cx-mode-btn--active" : "") + '" data-act="cx-mode" data-id="mbbs">' +
-      ic("school") + " MBBS Exam Track</button>" +
-      '<button type="button" class="cx-mode-btn' + (isPg ? " cx-mode-btn--active" : "") + '" data-act="cx-mode" data-id="pg">' +
-      ic("clinical_notes") + " PG Resident Track</button></div>";
+      '<button type="button" class="cx-mode-btn' + (!isPg ? " cx-mode-btn--active" : "") + '" aria-pressed="' + !isPg + '" data-act="cx-mode" data-id="mbbs">' +
+      ic("school") + "MBBS exam</button>" +
+      '<button type="button" class="cx-mode-btn' + (isPg ? " cx-mode-btn--active" : "") + '" aria-pressed="' + isPg + '" data-act="cx-mode" data-id="pg">' +
+      ic("clinical_notes") + "PG resident</button></div>";
 
-    // Track guidance chip
-    html += '<div class="cx-sec" style="padding-top:10px;"><div class="cx-notice" style="margin:0;font-size:12.5px;">' +
-      ic(isPg ? "auto_awesome" : "verified") +
-      "<div><b>" + (isPg ? "PG Resident / Clinic Track active" : "MBBS Clinical Exam Track active") + "</b>" +
-      "<span>" + (isPg
-        ? "Focus: Diagnostic dilemmas, POCUS (BLUE/FOCUS), invasive hemodynamics, and clinical trials."
-        : "Focus: NMC CBME practical syllabus, Long/Short cases, bedside maneuvers, and viva traps.") +
-      "</span></div></div></div>";
+    // What the selected track changes, in one line. The segmented control above already says which is on.
+    html += '<div class="cx-mode-note">' + (isPg
+        ? "Diagnostic dilemmas, POCUS (BLUE, FOCUS), invasive haemodynamics and the trials behind them."
+        : "NMC CBME practical syllabus: long and short cases, bedside manoeuvres and viva traps.") + "</div>";
 
     // Continue where you left off.
     if (pos && pos.diseaseId) {
@@ -254,14 +252,16 @@
     html += "</div></section>";
 
     // Practice modes & simulation
-    html += '<section class="cx-sec"><div class="cx-sec-h">Practice & Simulation</div><div class="cx-rows">' +
-      row("cx-practice-osce", "assignment_turned_in", "OSCE stations", "Timed, with an objective marking scheme") +
-      row("cx-practice-viva", "record_voice_over", "Viva Voce", "Adaptive examiner questioning") +
-      row("cx-chief", "military_tech", "The Chief's Ward Round", "Strict Professor viva under exam pressure") +
-      row("cx-spotter", "timer", "Spotter Arena", "60-second rapid-fire visual challenge") +
-      row("cx-abg", "science", "ABG Simulator", "Winter's formula, anion gap, and triple acid-base disorders") +
-      row("cx-soundlab", "hearing", "Auscultation Sound Lab", "Cardiac and pulmonary acoustic stethoscope library") +
-      row("cx-sandbox", "tune", "Physiology sandbox", "Interactive hemodynamic and gas exchange simulator") +
+    html += '<section class="cx-sec"><div class="cx-sec-h">Practise for the exam</div><div class="cx-rows">' +
+      row("cx-practice-osce", "assignment_turned_in", "OSCE stations", "Timed checklists, where a missed critical step fails you") +
+      row("cx-practice-viva", "record_voice_over", "Viva voce", "One question at a time, harder as you get them right") +
+      row("cx-chief", "military_tech", "Chief's ward round", "A strict professor's viva under exam pressure") +
+      row("cx-spotter", "timer", "Spotter arena", "Name what you see, 60 seconds a round") +
+      "</div></section>";
+    html += '<section class="cx-sec"><div class="cx-sec-h">Tools to explore</div><div class="cx-rows">' +
+      row("cx-abg", "science", "ABG simulator", "Winter's formula, anion gap and mixed disorders") +
+      row("cx-soundlab", "hearing", "Auscultation sound lab", "Heart and lung sounds to listen and compare") +
+      row("cx-sandbox", "tune", "Physiology sandbox", "Change one variable, watch haemodynamics and gas exchange") +
       "</div></section>";
 
     // Weak areas, driven by the same competency records every mode writes.
@@ -348,11 +348,46 @@
       var d = ds[i];
       html += '<button type="button" class="cx-row cx-row--dz" data-act="cx-disease" data-id="' + esc(d.id) + '">' +
         '<span class="cx-row-txt"><span class="cx-row-t">' + esc(d.title) + "</span>" +
-        '<span class="cx-row-s">' + esc(d.subtitle || "") + "</span>" +
+        (d.subtitle && d.subtitle !== d.title ? '<span class="cx-row-s">' + esc(d.subtitle) + "</span>" : "") +
         '<span class="cx-row-meta">' + esc(String(d.chapters || 0)) + " chapters &middot; about " + esc(String(d.estMinutes || 0)) + " min</span>" +
         "</span>" + ic("chevron_right") + "</button>";
     }
     html += "</div></section>";
+    host.innerHTML = html;
+  }
+
+  /* ── screen: PRACTICE PICKER (home "OSCE stations" / "Viva voce") ────────── */
+
+  // Every disease pathway and system module carries its own stations and viva, so the picker is a
+  // list of topics by system. Locked systems stay visible with the Pro badge, never hidden.
+  function practiceTopics(sys) {
+    var out = [];
+    if (sys.module && sys.module.id) out.push({ id: sys.module.id, title: sys.module.title || "Stations", sub: sys.module.subtitle || "" });
+    var ds = sys.diseases || [];
+    for (var i = 0; i < ds.length; i++) out.push({ id: ds[i].id, title: ds[i].title, sub: ds[i].subtitle && ds[i].subtitle !== ds[i].title ? ds[i].subtitle : "" });
+    return out;
+  }
+  function renderPractice(host) {
+    var viva = state.practiceMode === "viva";
+    var html = header(viva ? "Viva voce" : "OSCE stations", "Pick a topic");
+    html += '<div class="cx-blurb cx-practice-blurb">' + (viva
+      ? "Each topic opens at its viva. The examiner starts at the basics and asks harder questions as you answer well."
+      : "Each topic opens at its stations. You get the task, a clock and the marking checklist. Critical steps fail the station on their own.") + "</div>";
+    var sys = (state.catalog && state.catalog.systems) || [];
+    for (var i = 0; i < sys.length; i++) {
+      var topics = practiceTopics(sys[i]);
+      if (!topics.length) continue;
+      var lock = locked(sys[i]);
+      html += '<section class="cx-sec"><div class="cx-sec-h cx-sec-h--row"><span>' + esc(sys[i].title) + "</span>" +
+        (lock ? '<span class="cx-sys-pro">' + ic("lock") + "Pro</span>" : "") + '</div><div class="cx-rows">';
+      for (var t = 0; t < topics.length; t++) {
+        html += '<button type="button" class="cx-row' + (lock ? " cx-row--locked" : "") + '" data-act="cx-practice-open" data-id="' + esc(topics[t].id) + '">' +
+          '<span class="cx-row-txt"><span class="cx-row-t">' + esc(topics[t].title) + "</span>" +
+          (topics[t].sub ? '<span class="cx-row-s">' + esc(topics[t].sub) + "</span>" : "") + "</span>" +
+          ic(lock ? "lock" : "chevron_right") + "</button>";
+      }
+      html += "</div></section>";
+    }
     host.innerHTML = html;
   }
 
@@ -502,7 +537,7 @@
 
     var sts = (d.osce && d.osce.stations) || [];
     if (sts.length) {
-      html += '<section class="cx-sec"><div class="cx-sec-h">Assess yourself</div><div class="cx-rows">';
+      html += '<section class="cx-sec" id="cxAssess"><div class="cx-sec-h">Assess yourself</div><div class="cx-rows">';
       for (var s = 0; s < sts.length; s++) {
         html += '<button type="button" class="cx-row" data-act="cx-station" data-id="' + esc(sts[s].id) + '">' +
           '<span class="cx-row-ic">' + ic("timer") + "</span>" +
@@ -960,6 +995,14 @@
     return html;
   }
 
+  // One tickable step, shared by the lesson self-check and the OSCE station.
+  function checkRow(act, id, text, on, critical) {
+    return '<button type="button" class="cx-check' + (on ? " cx-check--on" : "") + '" role="checkbox" aria-checked="' + (on ? "true" : "false") + '" data-act="' + act + '" data-id="' + esc(id) + '">' +
+      '<span class="cx-check-box" aria-hidden="true">' + (on ? ic("check") : "") + "</span>" +
+      '<span class="cx-check-t">' + esc(text) + "</span>" +
+      (critical ? '<span class="cx-crit">Critical</span>' : "") + "</button>";
+  }
+
   function doitTurn(t, i) {
     var html = '<div class="cx-eyebrow">' + esc(t.heading || "Now you do it") + "</div>" +
       '<p class="cx-body">' + esc(t.body || "") + "</p>";
@@ -968,9 +1011,7 @@
       for (var k = 0; k < t.rubric.length; k++) {
         var r = t.rubric[k];
         var on = !!state.stationChecked["doit:" + r.id];
-        html += '<button type="button" class="cx-check' + (on ? " cx-check--on" : "") + '" data-act="cx-selfcheck" data-id="' + esc(r.id) + '">' +
-          ic(on ? "check_box" : "check_box_outline_blank") + "<span>" + esc(r.text) + "</span>" +
-          (r.critical ? '<span class="cx-crit">critical</span>' : "") + "</button>";
+        html += checkRow("cx-selfcheck", r.id, r.text, on, r.critical);
       }
       html += "</div>";
     }
@@ -1010,61 +1051,135 @@
 
   /* ── screen: OSCE station ────────────────────────────────────────────────── */
 
+  function fmtClock(sec) { sec = Math.max(0, sec | 0); var m = Math.floor(sec / 60), x = sec % 60; return m + ":" + (x < 10 ? "0" : "") + x; }
+  function stationLeft() { return Math.max(0, Math.ceil((state.stationEndsAt - Date.now()) / 1000)); }
+
+  // Consecutive items of one skill form a group, in authored order (compileStation pushes them
+  // skill by skill), so a 34-step checklist reads as six phases of an examination, not one wall.
+  function stationGroups(items) {
+    var out = [], cur = null;
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      if (!cur || cur.skillId !== it.skillId) {
+        cur = { skillId: it.skillId, title: it.skillTitle || prettySkill(it.skillId || "Steps"), items: [] };
+        out.push(cur);
+      }
+      cur.items.push(it);
+    }
+    return out;
+  }
+
   function renderStation(host) {
     var st = state.station;
     if (!st) { host.innerHTML = header("Station") + emptyState("error", "Station unavailable", "Go back and try again."); return; }
 
     if (state.stationResult) return renderStationResult(host, st);
 
-    var left = Math.max(0, Math.ceil((state.stationEndsAt - Date.now()) / 1000));
-    var mm = Math.floor(left / 60), ss = left % 60;
-    var html = header(st.title, "OSCE station");
-    html += '<div class="cx-timer' + (left <= 30 ? " cx-timer--low" : "") + '">' + ic("timer") +
-      "<span>" + mm + ":" + (ss < 10 ? "0" : "") + ss + "</span></div>";
-    html += '<div class="cx-task">' + esc(st.task) + "</div>";
-    html += '<div class="cx-checklist"><div class="cx-checklist-h">Tick what you did</div>';
-    for (var i = 0; i < st.items.length; i++) {
-      var it = st.items[i];
-      var on = !!state.stationChecked[it.id];
-      html += '<button type="button" class="cx-check' + (on ? " cx-check--on" : "") + '" data-act="cx-station-check" data-id="' + esc(it.id) + '">' +
-        ic(on ? "check_box" : "check_box_outline_blank") + "<span>" + esc(it.text) + "</span>" +
-        (it.critical ? '<span class="cx-crit">critical</span>' : "") + "</button>";
+    var left = stationLeft(), total = st.items.length, done = 0, i;
+    for (i = 0; i < total; i++) if (state.stationChecked[st.items[i].id]) done++;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+
+    // Header and status bar stick together, so the clock and the count stay in view down a long list.
+    var html = '<div class="cx-stick">' + header(st.title, "OSCE station") +
+      '<div class="cx-stbar">' +
+        '<div class="cx-timer' + (left <= 30 ? " cx-timer--low" : "") + '" role="timer" aria-label="Time left">' + ic("timer") +
+          '<span class="cx-timer-t">' + fmtClock(left) + "</span></div>" +
+        '<div class="cx-stbar-prog"><span class="cx-stbar-n"><b>' + done + "</b> of " + total + " steps</span>" +
+          '<span class="cx-stbar-track" aria-hidden="true"><span class="cx-stbar-fill" style="width:' + pct + '%"></span></span></div>' +
+      "</div></div>";
+    html += '<div class="cx-station">';
+    html += '<div class="cx-task"><div class="cx-task-h">Your task</div>' + esc(st.task) + "</div>";
+    html += '<div class="cx-sr" aria-live="polite" id="cxStationLive"></div>';
+    html += '<div class="cx-checklist"><div class="cx-checklist-h">Tick each step as you do it</div>';
+    var groups = stationGroups(st.items);
+    for (var g = 0; g < groups.length; g++) {
+      var grp = groups[g], gd = 0;
+      for (i = 0; i < grp.items.length; i++) if (state.stationChecked[grp.items[i].id]) gd++;
+      html += '<div class="cx-cgroup' + (gd === grp.items.length ? " cx-cgroup--done" : "") + '">' +
+        '<div class="cx-cgroup-h"><span>' + esc(grp.title) + '</span><span class="cx-cgroup-n">' + gd + "/" + grp.items.length + "</span></div>";
+      for (i = 0; i < grp.items.length; i++) {
+        var it = grp.items[i], on = !!state.stationChecked[it.id];
+        html += checkRow("cx-station-check", it.id, it.text, on, it.critical);
+      }
+      html += "</div>";
     }
     html += "</div>";
     html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-station-finish">Finish station</button></div>';
+    html += "</div>";
     host.innerHTML = html;
   }
 
   function renderStationResult(host, st) {
-    var r = state.stationResult;
-    var html = header(st.title, "Result");
-    html += '<div class="cx-score ' + (r.passed ? "cx-score--pass" : "cx-score--fail") + '">' +
-      '<div class="cx-score-pct">' + r.pct + "%</div>" +
-      '<div class="cx-score-l">' + r.score + " of " + r.maxScore + " marks</div>" +
-      '<div class="cx-score-v">' + (r.passed ? "Pass" : r.failedOnCritical ? "Fail on a critical step" : "Below the pass mark") + "</div></div>";
+    var r = state.stationResult, pass = typeof st.passMark === "number" ? st.passMark : 50;
+    var verdict = r.passed ? "Pass" : r.failedOnCritical ? "Fail on a critical step" : "Below the pass mark";
+    var used = state.stationUsed || 0;
+    var html = header(st.title, "Result") + '<div class="cx-station">';
+
+    // One verdict card. The colour lives on the verdict and the bar, not a full red slab, so the
+    // critical-step block below is the only filled alarm on the page.
+    html += '<div class="cx-result ' + (r.passed ? "cx-result--pass" : "cx-result--fail") + '">' +
+      '<div class="cx-result-v">' + ic(r.passed ? "check_circle" : "cancel") + "<span>" + verdict + "</span></div>" +
+      '<div class="cx-result-row"><span class="cx-score-pct">' + r.pct + "%</span>" +
+        '<span class="cx-result-meta">' + r.score + " of " + r.maxScore + " marks<br>Pass mark " + pass + "%</span></div>" +
+      '<div class="cx-result-bar" aria-hidden="true"><span class="cx-result-fill" style="width:' + Math.max(0, Math.min(100, r.pct)) + '%"></span>' +
+        '<span class="cx-result-mark" style="left:' + pass + '%"></span></div>' +
+      '<div class="cx-result-time">' + ic("timer") + (state.stationTimeUp ? "Time ran out after " + fmtClock(st.seconds) : "Finished in " + fmtClock(used) + " of " + fmtClock(st.seconds)) + "</div>" +
+      "</div>";
 
     // A critical miss is reported as its own thing. Losing a mark and failing on safety are not the
     // same event, and a score alone would hide the difference.
     if (r.failedOnCritical) {
       html += '<div class="cx-notice cx-notice--crit">' + ic("gpp_bad") +
-        "<div><b>Critical steps missed</b><span>You would fail this station regardless of your total, because these are safety steps.</span></div></div>";
-      html += '<ul class="cx-misslist">';
-      for (var c = 0; c < r.missedCritical.length; c++) html += '<li class="cx-miss--crit">' + esc(r.missedCritical[c].text) + "</li>";
-      html += "</ul>";
+        "<div><b>Critical steps missed</b><span>You would fail this station regardless of your total, because these are safety steps.</span>" +
+        '<ul class="cx-critlist">';
+      for (var c = 0; c < r.missedCritical.length; c++) html += "<li>" + esc(r.missedCritical[c].text) + "</li>";
+      html += "</ul></div></div>";
     }
-    if (r.missed.length) {
-      html += '<div class="cx-sec-h">Everything you missed</div><ul class="cx-misslist">';
-      for (var m = 0; m < r.missed.length; m++) html += "<li>" + esc(r.missed[m].text) + "</li>";
-      html += "</ul>";
+
+    // How each phase went, from the same per-skill tallies the competency store receives.
+    var groups = stationGroups(st.items), missedOther = {};
+    for (var m = 0; m < r.missed.length; m++) if (!r.missed[m].critical) missedOther[r.missed[m].id] = 1;
+    if (groups.length > 1) {
+      html += '<div class="cx-sec-h">Step by step</div><div class="cx-phaselist">';
+      for (var g = 0; g < groups.length; g++) {
+        var ps = r.perSkill[groups[g].skillId] || { seen: groups[g].items.length, correct: 0 };
+        var gp = ps.seen ? Math.round((ps.correct / ps.seen) * 100) : 0;
+        var full = ps.correct === ps.seen;
+        // A complete phase gets a tick; only the phases with gaps carry a bar, so they stand out.
+        html += '<div class="cx-phaserow' + (full ? " cx-phaserow--full" : "") + '"><span class="cx-phaserow-t">' + esc(groups[g].title) + "</span>" +
+          '<span class="cx-phaserow-n">' + (full ? ic("check") : "") + ps.correct + "/" + ps.seen + "</span>" +
+          (full ? "" : '<span class="cx-phaserow-bar" aria-hidden="true"><span style="width:' + gp + '%"></span></span>') + "</div>";
+      }
+      html += "</div>";
     }
+
+    // Everything else missed, by phase. Critical steps are already listed above, so not repeated.
+    var anyOther = false;
+    for (var k in missedOther) { anyOther = true; break; }
+    if (anyOther) {
+      html += '<div class="cx-sec-h">Other steps you missed</div><div class="cx-missgroups">';
+      for (var h = 0; h < groups.length; h++) {
+        var its = [];
+        for (var j = 0; j < groups[h].items.length; j++) if (missedOther[groups[h].items[j].id]) its.push(groups[h].items[j]);
+        if (!its.length) continue;
+        html += '<div class="cx-missgroup"><div class="cx-missgroup-h">' + esc(groups[h].title) + '</div><ul class="cx-misslist">';
+        for (var q2 = 0; q2 < its.length; q2++) html += "<li>" + esc(its[q2].text) + "</li>";
+        html += "</ul></div>";
+      }
+      html += "</div>";
+    } else if (!r.missed.length) {
+      html += '<div class="cx-allclear">' + ic("verified") + "<span>Every step done. Now say it out loud, in order, the way you would to an examiner.</span></div>";
+    }
+
     var qs = (state.stationDef && state.stationDef.examinerQuestions) || [];
     if (qs.length) {
-      html += '<div class="cx-sec-h">The examiner would then ask</div><ul class="cx-qlist">';
+      html += '<div class="cx-sec-h">The examiner would then ask</div><ol class="cx-qlist">';
       for (var q = 0; q < qs.length; q++) html += "<li>" + esc(qs[q]) + "</li>";
-      html += "</ul>";
+      html += "</ol>";
     }
     html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--ghost" data-act="cx-station-retry">Try again</button>' +
       '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-back">Done</button></div>';
+    html += "</div>";
     host.innerHTML = html;
   }
 
@@ -1341,7 +1456,7 @@
     }
     var html = '<div class="cx-turn"><p class="cx-q">What is your differential? Pick every diagnosis you would seriously consider.</p></div>';
     html += '<div class="cx-picked" id="cxDdxPicked">' + ddxPickedHTML() + "</div>";
-    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="Search 365 diagnoses" value="' + esc(state.ddxQuery || "") + '"></div>';
+    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="' + dxSearchHint() + '" value="' + esc(state.ddxQuery || "") + '"></div>';
     html += dxSystemBar();
     html += '<div class="cx-dxlist" id="cxDxResults">' + dxResultsHTML(true) + "</div>";
     html += dxHintBlock();
@@ -1385,7 +1500,7 @@
       html += "</div>";
     }
     html += '<div class="cx-sec-h">Or search the full list</div>';
-    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="Search 365 diagnoses" value="' + esc(state.ddxQuery || "") + '"></div>';
+    html += '<div class="cx-dx-search"><input class="cx-input" id="cxDdxQ" type="search" autocomplete="off" placeholder="' + dxSearchHint() + '" value="' + esc(state.ddxQuery || "") + '"></div>';
     html += '<div class="cx-dxlist" id="cxDxResults">' + dxResultsHTML(false) + "</div>";
     html += dxHintBlock();
     html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Give your management</button></div>';
@@ -1574,7 +1689,13 @@
     go("case");
   }
 
-  /* The 365-diagnosis vocabulary is fetched the first time a student reaches the differential, not
+  // The count comes from the vocabulary itself, so it cannot go stale as diagnoses are added.
+  function dxSearchHint() {
+    var n = state.dxVocab && state.dxVocab.dx && state.dxVocab.dx.length;
+    return n ? "Search " + n + " diagnoses" : "Search diagnoses";
+  }
+
+  /* The diagnosis vocabulary is fetched the first time a student reaches the differential, not
    * at launch: it is content, and CliniX's rule is that content is lazy. While it loads the picker
    * shows a loading row rather than an empty box, and if it fails the stage falls back to free
    * text so the case can always be finished. */
@@ -3233,7 +3354,8 @@
     lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency,
     tutor: renderTutor, case: renderCase, skills: renderSkills, sandbox: renderPhysiologySandbox,
     presentations: renderPresentations, presentation: renderPresentation, script: renderScript,
-    abg: renderAbg, spotter: renderSpotter, chief: renderChief, soundlab: renderSoundLab
+    abg: renderAbg, spotter: renderSpotter, chief: renderChief, soundlab: renderSoundLab,
+    practice: renderPractice
   };
 
   function host() { return document.getElementById("clinixScroll"); }
@@ -3399,8 +3521,16 @@
       state.loading = false;
       if (built && locked(built.system)) { state.built = null; back(); showLocked(function () { if (!locked(built.system)) openDisease(id); }); return; }
       state.built = built;
-      if (!built) { toast("Could not load this topic"); back(); return; }
+      if (!built) { state.jumpAssess = false; toast("Could not load this topic"); back(); return; }
       repaint();
+      // Arrived from the OSCE or viva picker: land on the stations, not the top of the pathway.
+      if (state.jumpAssess) {
+        state.jumpAssess = false;
+        try {
+          var as = document.getElementById("cxAssess"), sc = host();
+          if (as && sc) sc.scrollTop = Math.max(0, as.offsetTop - 72);
+        } catch (e) {}
+      }
     });
   }
 
@@ -3472,6 +3602,8 @@
     state.station = st;
     state.stationChecked = {};
     state.stationResult = null;
+    state.stationTimeUp = false;
+    state.stationUsed = 0;
     state.stationEndsAt = Date.now() + st.seconds * 1000;
     go("station");
     startTimer();
@@ -3482,18 +3614,25 @@
   function tickTimer() {
     var el = document.querySelector("#clinixRoot .cx-timer");
     if (!el) { repaint(); return; }
-    var left = Math.max(0, Math.ceil((state.stationEndsAt - Date.now()) / 1000));
-    var mm = Math.floor(left / 60), ss = left % 60;
-    var span = el.querySelector("span");
-    if (span) span.textContent = mm + ":" + (ss < 10 ? "0" : "") + ss;
+    var left = stationLeft();
+    // The time has its own span. Writing into the FIRST span put the countdown into the timer
+    // icon's glyph and left the visible clock frozen at the starting time.
+    var t = el.querySelector(".cx-timer-t");
+    if (t) t.textContent = fmtClock(left);
     if (left <= 30) el.classList.add("cx-timer--low"); else el.classList.remove("cx-timer--low");
+    // Screen readers hear two warnings, not a number every second.
+    if (left === 60 || left === 30) {
+      var live = document.getElementById("cxStationLive");
+      if (live) live.textContent = (left === 60 ? "One minute" : "30 seconds") + " left";
+      haptic("light");
+    }
   }
 
   function startTimer() {
     stopTimer();
     state.stationTimer = setInterval(function () {
       if (state.stack[state.stack.length - 1] !== "station" || state.stationResult) { stopTimer(); return; }
-      if (Date.now() >= state.stationEndsAt) { finishStation(); return; }
+      if (Date.now() >= state.stationEndsAt) { state.stationTimeUp = true; finishStation(); return; }
       tickTimer();
     }, 1000);
   }
@@ -3501,6 +3640,7 @@
 
   function finishStation() {
     stopTimer();
+    state.stationUsed = Math.min(state.station.seconds, state.station.seconds - stationLeft());
     var checked = [];
     for (var k in state.stationChecked) if (state.stationChecked[k]) checked.push(k);
     var r = M().scoreStation(state.station, checked);
@@ -4093,7 +4233,9 @@
 
       case "cx-practice-osce":
       case "cx-practice-viva":
-        toast("Open a topic first, then choose a station or viva from its page"); return;
+        haptic("tap"); state.practiceMode = act === "cx-practice-viva" ? "viva" : "osce"; go("practice"); return;
+      case "cx-practice-open":
+        haptic("tap"); state.jumpAssess = !diseaseLocked(id); openDisease(id); return;
 
       case "cx-sandbox": haptic("tap"); go("sandbox"); return;
       case "cx-physio-mode": state.physioMode = id; state.physioPreset = ""; haptic("tap"); repaint(); return;

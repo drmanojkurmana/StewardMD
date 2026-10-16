@@ -485,10 +485,24 @@ try {
   await sleep(600);
   ok((await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true, "station opens with a running clock");
 
+  // Layout: labels start at the left (the icon span used to grow too and centre them), steps are
+  // grouped by skill, and the status bar counts what is ticked.
+  ok((await ev("(function(){ var b = document.querySelector('#clinixRoot .cx-check'), t = b.querySelector('.cx-check-t'); return t.getBoundingClientRect().left - b.getBoundingClientRect().left; })()")) < 60,
+    "OSCE checklist labels are left-aligned, next to the box");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-cgroup-h').length")) >= 4, "the station checklist is grouped by skill");
+  ok((await ev("(function(){ var r = document.querySelector('#clinixRoot .cx-station').getBoundingClientRect(), c = document.querySelector('#clinixRoot .cx-check').getBoundingClientRect(); return c.left >= 12 && innerWidth - c.right >= 12; })()")) === true,
+    "the checklist sits on the 16px gutter, not edge to edge");
+  const clock0 = await ev("document.querySelector('#clinixRoot .cx-timer-t').textContent");
+
   // Scroll down, then wait out MORE than one timer tick.
   await ev("(function(){ var h = document.getElementById('clinixScroll'); h.scrollTop = 400; return h.scrollTop; })()");
   const before = await ev("document.getElementById('clinixScroll').scrollTop");
   await sleep(2600);
+  const clock1 = await ev("document.querySelector('#clinixRoot .cx-timer-t').textContent");
+  ok(/^\d+:\d\d$/.test(clock1) && clock1 !== clock0, `FROZEN-CLOCK REGRESSION: the visible clock counts down (${clock0} -> ${clock1})`);
+  ok((await ev("document.querySelector('#clinixRoot .cx-timer .material-symbols-rounded').textContent")) === "timer", "and the timer icon keeps its glyph");
+  ok((await ev("(function(){ var b = document.querySelector('#clinixRoot .cx-stbar').getBoundingClientRect(); return b.top >= 0 && b.bottom <= 200; })()")) === true,
+    "the clock and step count stay pinned at the top while scrolled");
   const after = await ev("document.getElementById('clinixScroll').scrollTop");
   ok(Number(before) > 100, `scrolled down first (${before})`);
   ok(Number(after) === Number(before),
@@ -502,6 +516,37 @@ try {
   const afterTick = await ev("document.getElementById('clinixScroll').scrollTop");
   ok(Number(afterTick) === Number(before),
     `ticking a checkbox keeps your place (was ${before}, now ${afterTick})`);
+  ok(/^1 of \d+ steps$/.test(await ev("document.querySelector('#clinixRoot .cx-stbar-n').textContent")), "the status bar counts the ticked step");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-check[aria-checked=\"true\"]').length")) === 1, "a ticked step reads as checked to a screen reader");
+
+  // Result: critical misses listed once, inside the critical block; the rest grouped by skill.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station-finish\"]').click()");
+  await sleep(500);
+  const crit = await ev("[...document.querySelectorAll('#clinixRoot .cx-critlist li')].map(x => x.textContent)");
+  const other = await ev("[...document.querySelectorAll('#clinixRoot .cx-missgroup li')].map(x => x.textContent)");
+  ok(Array.isArray(crit) && crit.length > 0, "the result lists the missed critical steps");
+  ok(Array.isArray(other) && other.length > 0 && !crit.some(t => other.includes(t)), "and does not repeat them under the other missed steps");
+  ok(/Finished in \d+:\d\d of \d+:\d\d/.test(await ev("document.querySelector('#clinixRoot .cx-result-time').textContent")), "the result says how long the station took");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-phaserow').length")) >= 4, "the result breaks the score down by skill");
+
+  /* ── 8a2. OSCE PICKER: the home row opens topics, not a toast ──────────── */
+  console.log("\n--- osce picker ---");
+  await attach(BASE + "?clinix=1");
+  await openCx(); await sleep(500);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-practice-osce\"]').click()");
+  await sleep(300);
+  ok((await ev("document.querySelectorAll('#clinixRoot [data-act=\"cx-practice-open\"]').length")) >= 20, "the OSCE row opens a topic picker covering every pathway");
+  ok((await ev("(document.querySelector('#clinixRoot .cx-head-title')||{}).textContent")) === "OSCE stations", "titled OSCE stations");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-row--locked').length")) > 0, "locked systems stay listed with a lock, not hidden");
+  await ev("[...document.querySelectorAll('#clinixRoot [data-act=\"cx-practice-open\"]')].find(b => b.textContent.includes('Pneumonia')).click()");
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.getElementById('cxAssess')")) break; await sleep(250); }
+  await sleep(200);
+  ok((await ev("(function(){ var a = document.getElementById('cxAssess').getBoundingClientRect(); return a.top < innerHeight && a.bottom > 0; })()")) === true,
+    "picking a topic lands on its stations, not the top of the pathway");
+  await ev("document.querySelector('#clinixRoot .cx-back').click()"); await sleep(200);
+  await ev("document.querySelector('#clinixRoot .cx-back').click()"); await sleep(200);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-practice-viva\"]').click()"); await sleep(300);
+  ok((await ev("(document.querySelector('#clinixRoot .cx-head-title')||{}).textContent")) === "Viva voce", "the viva row opens the same picker, titled Viva voce");
 
   /* ── 8b. CASE MODE: the simulated patient ──────────────────────────────── */
   console.log("\n--- clinical case ---");
