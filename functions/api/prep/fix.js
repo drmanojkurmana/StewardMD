@@ -27,7 +27,7 @@ export async function onRequestGet({ request, env }) {
   if (m != null) {
     if (!SLUG_RE.test(m)) return json({ error: "bad-request" }, 400);
     const rec = kv ? await kvJson(kv, MOD(m), { q: {}, l: {} }) : { q: {}, l: {} };
-    return json({ q: rec.q || {}, l: rec.l || {} }, 200, { "Cache-Control": "public, max-age=120" });
+    return json({ q: rec.q || {}, l: rec.l || {}, a: Array.isArray(rec.a) ? rec.a : [] }, 200, { "Cache-Control": "public, max-age=120" });
   }
   const who = await editorIdentity(request, env);
   if (sp.get("me") === "1") return json(who.ok ? { editor: true, role: who.role, name: who.name } : { editor: false });
@@ -97,7 +97,7 @@ export async function onRequestDelete({ request, env }) {
   const log = (await kvJson(kv, LOG(kind, id), [])).slice(-(LIMITS.log - 1));
   log.push({ ts: now, by: who.uid, name: who.name, role: who.role, before, after: null });
   const ix = await kvJson(kv, IX, {});
-  const empty = !Object.keys(rec.q).length && !Object.keys(rec.l).length;
+  const empty = !Object.keys(rec.q).length && !Object.keys(rec.l).length && !(Array.isArray(rec.a) && rec.a.length);
   if (empty) delete ix[mod]; else ix[mod] = now;
   await Promise.all([empty && kv.delete ? kv.delete(MOD(mod)) : kv.put(MOD(mod), JSON.stringify(rec)), kv.put(LOG(kind, id), JSON.stringify(log), { expirationTtl: KEEP_S }), kv.put(IX, JSON.stringify(ix))]);
   return json({ ok: true, ts: now });

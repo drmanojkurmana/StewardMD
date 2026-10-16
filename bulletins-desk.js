@@ -561,15 +561,20 @@
     return '<button type="button" class="bl-left' + (fix.length ? " fix" : "") + '" data-bl-act="jump">' + ms(fix.length ? "error" : "checklist") + "<span>" + t + "</span>" + ms("arrow_forward") + "</button>";
   }
 
-  function diseasePicker(c) {
+  function diseaseHits(c) {
     var b = (G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId) || {}, q = DS.dq.toLowerCase().trim(), hits = [];
-    if (q.length >= 2) {
+    if (q.length >= 1) {
       var keys = Object.keys(b);
       for (var i = 0; i < keys.length && hits.length < 8; i++) {
         var nm = String((b[keys[i]] && b[keys[i]].name) || keys[i]);
         if (nm.toLowerCase().indexOf(q) >= 0 && c.disease_ids.indexOf(keys[i]) < 0) hits.push([keys[i], nm]);
       }
+      if (!hits.length) return '<p class="bl-hint">No disease in the library matches "' + esc(DS.dq.trim()) + '".</p>';
     }
+    return hits.length ? hits.map(function (h) { return '<button type="button" class="bl-hit" data-bl-act="dz:' + esc(h[0]) + '">' + ms("add") + "<span>" + esc(h[1]) + "</span></button>"; }).join("") : "";
+  }
+  // The hits list is the only part that changes while typing, so the input itself is never replaced (replacing it closes the keyboard).
+  function diseasePicker(c) {
     var sug = (c._suggest || []).filter(function (x) { return c.disease_ids.indexOf(x[0]) < 0; });
     return '<div class="bl-grp"><span class="bl-lab"><span class="kit-fl">Diseases this applies to</span><span class="bl-cnt' + (c.disease_ids.length ? "" : " bad") + '">' + c.disease_ids.length + " / 5</span></span>" +
       (c.disease_ids.length ? '<div class="bl-chips">' + c.disease_ids.map(function (d) {
@@ -578,8 +583,8 @@
       (sug.length ? '<span class="bl-hint">Named in the source, tap to add:</span><div class="bl-chips">' + sug.map(function (x) {
         return '<button type="button" class="bl-chip" data-bl-act="dz:' + esc(x[0]) + '">' + ms("add") + esc(x[1]) + "</button>";
       }).join("") + "</div>" : "") +
-      '<input id="bl_dq" type="search" class="kit-inp" placeholder="' + (c.disease_ids.length >= 5 ? "Five is the limit. Remove one to add another." : "Search the library to add a disease") + '" autocomplete="off" value="' + esc(DS.dq) + '"' + (c.disease_ids.length >= 5 ? " disabled" : "") + ">" +
-      (hits.length ? '<div class="bl-hits">' + hits.map(function (h) { return '<button type="button" class="bl-hit" data-bl-act="dz:' + esc(h[0]) + '">' + ms("add") + "<span>" + esc(h[1]) + "</span></button>"; }).join("") + "</div>" : "") + "</div>";
+      '<input id="bl_dq" type="search" class="kit-inp" enterkeyhint="search" placeholder="' + (c.disease_ids.length >= 5 ? "Five is the limit. Remove one to add another." : "Search the library to add a disease") + '" autocomplete="off" autocapitalize="none" spellcheck="false" value="' + esc(DS.dq) + '"' + (c.disease_ids.length >= 5 ? " disabled" : "") + ">" +
+      '<div class="bl-hits" id="bl_hits" aria-live="polite">' + diseaseHits(c) + "</div></div>";
   }
 
   function editView() {
@@ -833,7 +838,7 @@
     "#smdReview .bl-chips{display:flex;flex-wrap:wrap;gap:8px}",
     "#smdReview .bl-chip{display:inline-flex;align-items:center;gap:4px;max-width:100%;min-height:48px;padding:8px 14px;border:1px solid var(--outline-variant);border-radius:999px;background:var(--surface);color:var(--on-surface);font:600 14px/1.25 var(--q-sans);text-align:left;overflow-wrap:anywhere;cursor:pointer}",
     "@media (hover:hover){#smdReview .bl-chip:hover,#smdReview .bl-hit:hover{border-color:var(--primary)}}#smdReview .bl-chip .kit-ic{font-size:18px}#smdReview .bl-chip.on{border-color:var(--primary);background:color-mix(in srgb,var(--primary) 14%,var(--sc-lowest));color:var(--primary)}",
-    "#smdReview .bl-hits{display:flex;flex-direction:column;border:1px solid var(--outline-variant);border-radius:12px;overflow:hidden}",
+    "#smdReview .bl-hits:empty{display:none}#smdReview .bl-hits{display:flex;flex-direction:column;border:1px solid var(--outline-variant);border-radius:12px;overflow:hidden}",
     "#smdReview .bl-hit{display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 12px;border:0;border-top:1px solid var(--sc-high);background:var(--sc-lowest);color:var(--on-surface);font:500 14px/1.3 var(--q-sans);text-align:left;cursor:pointer}#smdReview .bl-hit:first-child{border-top:0}#smdReview .bl-hit .kit-ic{color:var(--primary)}",
     "#smdReview .bl-cdsco{margin:6px 0;padding:8px 10px;border-radius:10px;background:var(--sc-low);font:500 13px/1.45 var(--q-sans)}#smdReview .bl-cdsco.found{background:color-mix(in srgb,var(--primary) 10%,var(--sc-lowest))}#smdReview .bl-cdsco ul{margin:6px 0 0;padding-left:18px}",
     "#smdReview .bl-fmt{display:flex;align-items:center;gap:6px;flex-wrap:wrap}",
@@ -1108,8 +1113,8 @@
   function onInput(e) {
     var el = e.target; if (!el || !el.id || el.id.indexOf("bl_") !== 0) return;
     if (el.id === "bl_dq") {
-      collect(); DS.dq = el.value; var pos = el.selectionStart; rerender();
-      var q = D.getElementById("bl_dq"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} }
+      DS.dq = el.value; var h = D.getElementById("bl_hits");
+      if (h && DS.cur) h.innerHTML = diseaseHits(DS.cur);
       return;
     }
     if (DS.view !== "edit" || !DS.cur) return;

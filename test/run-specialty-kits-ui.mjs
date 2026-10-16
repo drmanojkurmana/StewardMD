@@ -341,6 +341,9 @@ try{
  ok(await until(`document.querySelectorAll('#smdReview.on .rv-row').length>=200`,15000),'review desk lists the protocols');
  await click('#smdReview [data-rv-act="kind:kit"]');
  ok(await until(`document.querySelectorAll('#smdReview .rv-row').length===${BUNDLE.kits.length}`),'and the specialty kits');
+ await ev(`(function(){var q=document.getElementById('rv_q');window.__rq=q;q.focus();q.value='a';q.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
+ ok(await ev(`document.getElementById('rv_q')===window.__rq&&document.activeElement===window.__rq`),'review search keeps the same focused input after one letter');
+ await ev(`(function(){var q=window.__rq;q.value='';q.dispatchEvent(new Event('input',{bubbles:true}));return true})()`);
  await click('#smdReview [data-rv-act="sel:obgyn"]');
  await until(`!!document.querySelector('#rv_dec')`);
  await ev(`document.getElementById('rv_dec').value='changes';document.getElementById('rv_comment').value='Section 2: add the FOGSI anaemia cut-off';document.getElementById('rv_name').value='Dr Test Reviewer';1`);

@@ -75,6 +75,11 @@ function qgenReply(body, auth) {
     if (!api.status.owner) return [403, { error: "owner-only" }];
     return [200, { stageId: "s20261010-abc123", n: body.items.length, cmd: "node tools/prep-qgen.mjs publish --stage s20261010-abc123" }];
   }
+  if (body.op === "publish") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    return [200, { ok: true, batch: "pb20261016abcdef", n: body.items.length, added: body.items.length * body.targets.length, targets: body.targets }];
+  }
+  if (body.op === "unpublish") return [200, { ok: true, removed: 3 }];
   return [400, { error: "bad-input" }];
 }
 
@@ -362,6 +367,39 @@ try {
   const sg = qgCalls("stage")[0];
   ok(sg && sg.body.items.length === 3 && sg.body.items[0].q === "Edited stem by the owner?" && sg.body.items.every((x) => x.qg.v === "ok"), "stage sends only the 3 approved items, with the edit");
   ok(/node tools\/prep-qgen\.mjs publish --stage s20261010-abc123/.test(await screenText()), "the command is shown to copy");
+
+  // ---- owner Author: PDF source, then publish one set to two modules
+  await ev(`PREP_QGEN._au().list = []; PREP_QGEN._au().pub = null; PREP_QGEN._au().targets = []; return 1;`);
+  ok(await ev(`return !!document.getElementById("qgAuthView");`) === true, "author: back on the Author screen");
+  await click('#smdPrep [data-act="g-asrc"][data-v="pdf"]');
+  ok(await until(`return !!document.getElementById("qgFile") && !!document.getElementById("qgAuthView");`, 3000), "author: A PDF shows the file button");
+  const aName = "author-" + PORT + ".pdf", aPath = join(tmpdir(), aName);
+  writeFileSync(aPath, makeQgBigPdf(30));
+  await setQgFile(aPath);
+  ok(await until(`return !!document.getElementById("qgFrom") && !!document.getElementById("qgAuthView");`, 20000), "author: From/To fields open on the Author screen");
+  ok(/pages selected/.test(await screenText()), "author: the page counter shows");
+  await click('#smdPrep [data-act="g-arun"]');
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act="g-areview"]') && PREP_QGEN._au().list.length >= 5;`, 15000), "author: a PDF run lists questions" + (await ev(`var e=document.getElementById("qgAErr"); return e ? " ERR " + e.textContent : "";`)));
+  const pg = qgCalls("gen").slice(-1)[0];
+  ok(pg && typeof pg.body.ground === "string" && pg.body.ground.length > 200, "author: the PDF text is sent as the grounding");
+  await click('#smdPrep [data-act="g-areview"]');
+  await until(`return !!document.getElementById("qgRevView");`, 4000);
+  await click('#smdPrep [data-act="g-abulk"]');
+  ok(await ev(`return !!document.querySelector("#qgRevView .qg-pub");`) === true, "publish: the section shows in Review");
+  ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 1, "publish: the chosen module is already a target");
+  await ev(`var s=document.getElementById("qgPSub"); s.value=PREP_QGEN._au().subject; s.dispatchEvent(new Event("change")); return 1;`);
+  await until(`return document.querySelectorAll("#qgPMod option").length > 2;`, 8000);
+  await ev(`var m=document.getElementById("qgPMod"); m.value=Array.prototype.filter.call(m.options,function(x){return x.value&&x.value!==PREP_QGEN._au().module;})[0].value; m.dispatchEvent(new Event("change")); return 1;`);
+  await click('#smdPrep [data-act="g-atadd"]');
+  ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 2, "publish: a second subject and module is added");
+  await ev(`window.confirm=function(){return true;}; return 1;`);
+  await shots("publish");
+  await click('#smdPrep [data-act="g-apub"]');
+  ok(await until(`return !!document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000), "publish: confirmed, with a take-down button");
+  const pb = qgCalls("publish")[0];
+  ok(pb && pb.body.targets.length === 2 && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends both targets and only approved items");
+  await click('#smdPrep [data-act="g-aundo"]');
+  ok(await until(`return !document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000) && qgCalls("unpublish").length === 1, "take-down calls unpublish for the batch");
 
   // ---- text and errors
   const all = await screenText();

@@ -228,6 +228,11 @@
   function statusPill(st) { return st === "reviewed" || st === "approved" ? '<span class="rv-pill ok">' + (st === "approved" ? "Approved" : "Reviewed") + "</span>" : '<span class="rv-pill">Pending review</span>'; }
   function decPill(d) { if (!d) return ""; var lab = { approve: "You approved", "approve-minor": "You approved with edits", changes: "You asked for changes" }[d.decision]; return '<span class="rv-pill mine">' + esc(lab) + "</span>"; }
 
+  function rowsHtml(shown, dec) {
+    return shown.map(function (x) {
+      return '<button type="button" class="rv-row" data-rv-act="sel:' + esc(x.id) + '"><span class="rv-t">' + esc(x.title) + '</span><span class="rv-s">' + esc(x.sub || "") + "</span><span>" + statusPill(x.status) + decPill(dec[S.kind + ":" + x.id]) + "</span></button>";
+    }).join("");
+  }
   function render() {
     var el = D && D.getElementById("smdReview"); if (!el) return;
     var body = el.querySelector(".kit-sheet-body"), top = body.scrollTop, dec = loadDecisions(), n = Object.keys(dec).length, html;
@@ -260,9 +265,7 @@
         '<div class="kit-row"><button type="button" class="kit-add" data-rv-act="export"' + (n ? "" : " disabled") + ">" + ms("ios_share") + "Export " + n + " decision" + (n === 1 ? "" : "s") + "</button>" +
         (G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on() ? '<button type="button" class="kit-pill" data-rv-act="sync"' + (n ? "" : " disabled") + ">" + ms("cloud_upload") + "Send to StewardMD</button>" : "") + "</div>" + tabs +
         '<label class="kit-field wide" for="rv_q"><span class="kit-fl">Search</span><input id="rv_q" type="search" class="kit-inp" value="' + esc(S.q) + '" autocomplete="off"></label>' +
-        '<p class="kit-muted">' + shown.length + " of " + list.length + "</p><div class=\"rv-list\">" + shown.map(function (x) {
-          return '<button type="button" class="rv-row" data-rv-act="sel:' + esc(x.id) + '"><span class="rv-t">' + esc(x.title) + '</span><span class="rv-s">' + esc(x.sub || "") + "</span><span>" + statusPill(x.status) + decPill(dec[S.kind + ":" + x.id]) + "</span></button>";
-        }).join("") + "</div>";
+        '<p class="kit-muted" id="rv_cnt">' + shown.length + " of " + list.length + '</p><div class="rv-list" id="rv_list">' + rowsHtml(shown, dec) + "</div>";
     }
     body.innerHTML = '<div class="kit dl">' + html + "</div>"; body.scrollTop = top;
   }
@@ -380,7 +383,16 @@
       share(JSON.stringify(ex, null, 2), "stewardmd-review-" + ex.exportedAt.slice(0, 10) + ".json");
     }
   }
-  function onInput(e) { var el = e.target; if (el && el.id === "rv_q") { S.q = el.value; var pos = el.selectionStart; render(); var q = D.getElementById("rv_q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (x) {} } } }
+  // Typing in Search only replaces the list under it: replacing the input itself closes the phone keyboard after one letter.
+  function onInput(e) {
+    var el = e.target; if (!el || el.id !== "rv_q") return;
+    S.q = el.value;
+    var list = S.items[S.kind], box = D.getElementById("rv_list"), cnt = D.getElementById("rv_cnt");
+    if (!list || !box) return render();
+    var q = S.q.toLowerCase(), shown = list.filter(function (x) { return !q || (x.title + " " + x.id).toLowerCase().indexOf(q) >= 0; });
+    box.innerHTML = rowsHtml(shown, loadDecisions());
+    if (cnt) cnt.textContent = shown.length + " of " + list.length;
+  }
   if (D && D.addEventListener && !G.__smdReviewWired) { G.__smdReviewWired = true; D.addEventListener("click", onClick, false); D.addEventListener("input", onInput, false); }
 
   // Weekly review push (/?rvtab=bulletins) lands here: open the desk on the Clinical updates tab.

@@ -1053,6 +1053,14 @@
       // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
       return fixesFor(mid).then(function (fx) {
         items.forEach(function (it) { if (fx.q && fx.q[it.id]) applyFix(it, fx.q[it.id]); });
+        // Questions the owner published straight to this module (functions/api/ai/_prep-qgen.js op publish).
+        if (fx.a && fx.a.length) {
+          var have = {}; items.forEach(function (it) { have[it.id] = 1; });
+          fx.a.forEach(function (n) {
+            if (!n || n.sub !== sid || have[n.id] || !n.q || !n.o || n.o.length !== 4) return;
+            var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
+          });
+        }
         if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
@@ -1062,7 +1070,7 @@
    * /api/prep/fix?ix=1 says which modules carry fixes (asked at most every 30 min, the last answer kept offline); a module with
    * fixes asks /api/prep/fix?module=<id> once per edit (cached by the edit's timestamp). A slow or failed ask never blocks a
    * module: after 2 s the module opens without its fixes and the next open has them. */
-  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {} };
+  var FIX_API = G.SMD_PREP_FIX_API || "/api/prep/fix", FIX_TTL = 30 * 60e3, NOFIX = { q: {}, l: {}, a: [] };
   function raceTo(p, ms, fb) { return new Promise(function (res) { var done = false, t = setTimeout(function () { if (!done) { done = true; res(fb); } }, ms); p.then(function (v) { if (!done) { done = true; clearTimeout(t); res(v); } }, function () { if (!done) { done = true; clearTimeout(t); res(fb); } }); }); }
   function fixIndex() {
     var s = load(), last = (s.fxix && s.fxix.mods) || {};
@@ -1084,7 +1092,7 @@
         if (hit && hit.fx) return (st.mem[key] = hit.fx);
         return G.fetch(FIX_API + "?module=" + encodeURIComponent(mid)).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
           if (!j) return NOFIX;
-          var fx = { q: j.q || {}, l: j.l || {} }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
+          var fx = { q: j.q || {}, l: j.l || {}, a: j.a || [] }; st.mem[key] = fx; cachePut(key, { fx: fx, ts: Date.now() }); return fx;
         });
       }), 2000, NOFIX);
     });

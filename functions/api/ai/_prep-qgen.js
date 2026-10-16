@@ -20,6 +20,10 @@
  *   bpoll   { job }           -> { job: { stage: gen | verify | done | failed, ... }, items? (when done), usage }
  *   stage   { title, exam, subject, module, items: [reviewed items] } -> { stageId, cmd }: the reviewed batch to R2
  *           prep-qgen/staging/<stageId>.json (never served by the bank route); publishing is the CLI's job (see cmd).
+ *   publish { targets: [{ subject, module }] (1..12, existing modules), items: [reviewed items] (1..200) } -> { batch, n, targets }:
+ *           the reviewed questions go live for every student at once, in each target module (KV prep:fixmod:<module>.a,
+ *           the same public per-module record as content fixes; the app appends them to the module). One question set
+ *           can sit in several subjects or modules. unpublish { batch } removes that batch from every module it reached.
  *
  * Gate order (gen): sign-in, flag, size, input, idempotent replay (free), the
  * student caps (modules a day, questions a module, the daily USD breaker for all students), checkQuota "prep" (breaker, rate), gateAndCount("prep_qgen",
@@ -39,6 +43,7 @@ import { bump, istDay } from "../../_counters.js";
 import { ownerOK } from "../../_adminauth.js";
 import { verifiedClaimsFor, verifiedEmailOf } from "../../_fbauth.js";
 import { cleanText, normText } from "../../_prep-core.js";
+import { kvOf, kvJson, sha16, SLUG_RE } from "../../_prepfix.js";
 import { idemSeal, idemOpen } from "./_prep-teach.js";
 import { QGEN, qgenConfig, readGen, runRound, estimate, batchGenRequests, batchCreate, batchGet, batchResults,
   batchGenToItems, batchVerifyRequests, batchApplyVerify, addUsage, usdToInr, QgenError } from "../../_prep-qgen.js";
@@ -120,7 +125,7 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "status") return json(await statusOf(env, store, signed ? who : null, owner, cfg, now));
   if (!signed) return fail(401, "sign-in", "sign-in", { message: "Sign in to create a module with MaiK." });
   if (!cfg.on) return fail(503, "not-configured", "off", { message: "Creating modules with MaiK is not switched on yet." });
-  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage";
+  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage" || b.op === "publish" || b.op === "unpublish";
   if (ownerOp && !owner) return fail(403, "owner-only", "owner-only");
   if (!owner && !cfg.student) return fail(403, "off", "student-off", { message: "Creating modules with MaiK is not open yet." });
 
@@ -143,6 +148,8 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "bsubmit") return ownerSubmit(env, store, b, cfg, now);
   if (b.op === "bpoll") return ownerPoll(env, store, b, cfg, now, later);
   if (b.op === "stage") return ownerStage(env, b, uid, now);
+  if (b.op === "publish") return ownerPublish(env, b, uid, now);
+  if (b.op === "unpublish") return ownerUnpublish(env, b, uid, now);
   if (b.op !== "gen") return fail(400, "bad-input", "op");
 
   // ---- gen ----
@@ -302,6 +309,68 @@ function cleanItem(it) {
     tg: Array.isArray(it.tg) ? it.tg.slice(0, 4).map((x) => s(x, 40)) : [], qg: it.qg && typeof it.qg === "object" ? { g: it.qg.g ? 1 : 0, v: s(it.qg.v, 10), why: Array.isArray(it.qg.why) ? it.qg.why.slice(0, 6).map((x) => s(x, 30)) : undefined, ed: it.qg.ed ? 1 : undefined } : undefined };
   if (!o.id || !o.q || o.o.some((x) => !x) || new Set(o.o.map(normText)).size !== 4) return null;
   return o;
+}
+const ADD_CAP = 300, ADD_TARGETS = 12, ADD_ITEMS = 200;
+/* publish: live additions live next to the content fixes (functions/_prepfix.js): prep:fixmod:<module> = { q, l, a: [items] },
+ * prep:fixix lists the modules with changes so the app fetches a module's record only when it changed. Each item keeps the
+ * subject it was published to (sub) because module ids are only unique inside a subject. */
+async function ownerPublish(env, b, uid, now) {
+  const kv = kvOf(env);
+  if (!kv) return fail(503, "not-configured", "kv");
+  const items = Array.isArray(b.items) ? b.items.map(cleanItem) : [];
+  if (!items.length || items.length > ADD_ITEMS || items.some((x) => !x)) return fail(400, "bad-input", "items");
+  const tg = Array.isArray(b.targets) ? b.targets : [];
+  const seen = new Set(), targets = [];
+  for (const t of tg) {
+    const subject = String((t && t.subject) || ""), module = String((t && t.module) || "");
+    if (!SLUG_RE.test(subject) || !SLUG_RE.test(module)) return fail(400, "bad-input", "target");
+    if (!seen.has(subject + "/" + module)) { seen.add(subject + "/" + module); targets.push({ subject, module }); }
+  }
+  if (!targets.length || targets.length > ADD_TARGETS) return fail(400, "bad-input", "targets");
+  const batch = "pb" + istDay(now).replace(/-/g, "") + Math.random().toString(36).slice(2, 8);
+  const stamped = [];
+  for (const it of items) {
+    const h = (await sha16(new TextEncoder().encode(normText(it.q)))).slice(0, 12);
+    stamped.push({ id: "mk-" + h, q: it.q, o: it.o, a: it.a, exp: it.exp || it.r[it.a] || "", r: it.r, kp: it.kp, d: it.d, cog: it.cog, tg: it.tg,
+      prov: "SMD", gen: "AI", pv: "qg1", src: { maik: 1 }, qg: it.qg ? { g: it.qg.g, v: it.qg.v, ed: it.qg.ed } : undefined, pb: batch, pby: uid.slice(0, 12), pts: now });
+  }
+  const ix = await kvJson(kv, "prep:fixix", {});
+  let added = 0;
+  for (const t of targets) {
+    const key = "prep:fixmod:" + t.module, rec = await kvJson(kv, key, { q: {}, l: {} });
+    rec.q = rec.q || {}; rec.l = rec.l || {}; rec.a = Array.isArray(rec.a) ? rec.a : [];
+    const have = new Set(rec.a.filter((x) => x.sub === t.subject).map((x) => x.id));
+    const fresh = stamped.filter((x) => !have.has(x.id)).map((x) => Object.assign({}, x, { sub: t.subject, t: t.module }));
+    if (rec.a.length + fresh.length > ADD_CAP) return fail(400, "bad-input", "module-full");
+    rec.a = rec.a.concat(fresh); added += fresh.length;
+    await kv.put(key, JSON.stringify(rec));
+    ix[t.module] = now;
+  }
+  await kv.put("prep:fixix", JSON.stringify(ix));
+  return json({ ok: true, batch, n: items.length, added, targets });
+}
+async function ownerUnpublish(env, b, uid, now) {
+  const kv = kvOf(env);
+  if (!kv) return fail(503, "not-configured", "kv");
+  const batch = String(b.batch || "");
+  if (!/^pb[a-z0-9]{6,24}$/.test(batch)) return fail(400, "bad-input", "batch");
+  const tg = Array.isArray(b.targets) ? b.targets.slice(0, ADD_TARGETS) : [];
+  const ix = await kvJson(kv, "prep:fixix", {});
+  let removed = 0;
+  for (const t of tg) {
+    const module = String((t && t.module) || "");
+    if (!SLUG_RE.test(module)) continue;
+    const key = "prep:fixmod:" + module, rec = await kvJson(kv, key, null);
+    if (!rec || !Array.isArray(rec.a)) continue;
+    const keep = rec.a.filter((x) => x.pb !== batch);
+    if (keep.length === rec.a.length) continue;
+    removed += rec.a.length - keep.length; rec.a = keep;
+    const empty = !keep.length && !Object.keys(rec.q || {}).length && !Object.keys(rec.l || {}).length;
+    if (empty) { if (kv.delete) await kv.delete(key); else await kv.put(key, JSON.stringify(rec)); delete ix[module]; }
+    else { await kv.put(key, JSON.stringify(rec)); ix[module] = now; }
+  }
+  await kv.put("prep:fixix", JSON.stringify(ix));
+  return json({ ok: true, removed });
 }
 async function ownerStage(env, b, uid, now) {
   const bucket = env && env.PREP_BANK_R2;
