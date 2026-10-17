@@ -2138,3 +2138,27 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-salivary-s1.webp (R2) | Salivary glands, pleomorphic adenoma pseudopodia, and the clinical rule of eighty. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-testis-s3.webp (R2) | Radical inguinal orchiectomy with high cord clamping at the internal inguinal ring. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | ans-monitoring-s4.webp (R2) | Ulnar nerve stimulation of adductor pollicis and train-of-four twitch height graph. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-abdominal-wall-s4.webp (R2) | Hesselbach triangle boundaries and sites of indirect, direct, and femoral hernias. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-abdominal-wall-s1.webp (R2) | Cross-sections of the rectus sheath above and below the arcuate line. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-cranial-nerves-s1.webp (R2) | Basal view of the brain showing cranial nerve origins along the brainstem. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-kidney-posterior-wall-s1.webp (R2) | Renal hilum relations and the three anatomical constrictions of the ureter. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-shoulder-s5.webp (R2) | Winging of the scapula from long thoracic nerve palsy of serratus anterior. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-shoulder-s3.webp (R2) | Arterial scapular anastomosis linking subclavian and axillary artery branches. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-thigh-s3.webp (R2) | Boundaries and neurovascular contents of the adductor (subsartorial) canal. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-thigh-s2.webp (R2) | Femoral triangle contents and compartments of the fascial femoral sheath. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-urogenital-s4.webp (R2) | Urogenital sinus origin of the bladder, mesodermal trigone, and urachus remnant. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-urogenital-s3.webp (R2) | Male mesonephric duct and female paramesonephric duct derivatives. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-wall-diaphragm-s3.webp (R2) | Inferior view of the diaphragm showing its three major openings and contents. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ort-elbow-injuries-s5.webp (R2) | Cubitus varus gunstock deformity vs cubitus valgus with tardy ulnar nerve palsy. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ort-elbow-injuries-s4.webp (R2) | Supracondylar fracture nerve impingement and Volkmann ischaemic contracture. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ort-hip-injuries-s5.webp (R2) | Intracapsular femoral neck fracture fixation with cannulated screws vs hemiarthroplasty. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ort-hip-injuries-s2.webp (R2) | Posterior hip dislocation threatening the sciatic nerve and superior gluteal artery. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| phy-cardiac-cycle-s4.webp (R2) | First and second heart sounds correlated with atrioventricular and semilunar valves. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| phy-hypothalamus-limbic-s4.webp (R2) | Circadian pathway from the retina to the suprachiasmatic nucleus and pineal gland. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-appendix-s3.webp (R2) | Laparoscopic appendectomy showing appendicular artery and Endoloop base ligation. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-hernia-s4.webp (R2) | Laparoscopic view of the triangle of doom and triangle of pain in the groin. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-hernia-s1.webp (R2) | Indirect and direct inguinal hernias relative to the inferior epigastric artery. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-liver-s1.webp (R2) | Couinaud hepatic vasculature and the Cantlie line from gallbladder fossa to IVC. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-neck-face-trauma-s2.webp (R2) | Anatomical Zones I, II, and III of penetrating neck trauma and landmarks. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-prostate-s1.webp (R2) | Benign prostatic hyperplasia in transition zone vs carcinoma in peripheral zone. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-skin-s1.webp (R2) | Cutaneous melanoma histology showing Breslow thickness from granular layer. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
