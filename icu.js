@@ -3841,14 +3841,15 @@
       // PATIENT-scoped tools ONLY. Unit/app settings (Group mode, notification preferences, test
       // notification) now live on the unit Settings screen (bottom bar → Settings), so per-patient
       // actions and app-level settings are no longer mixed. Grouped: this patient · library · danger.
-      return '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("codeblue", "🫀") + ' Emergency</div>' +
-            (window.SMD_HAS_WATCH
-              ? '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
-                '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button>'
-              : '') +
-            '<p class="icu-doc-sub" style="margin:10px 0">Practice aids. Training only, never written to a patient record.</p>' +
-            '<button class="icu-btn ghost" data-icu-act="cbtrain">' + ico("codeblue", "🫀") + ' Megacode and ACLS practice</button>' +
-            '<button class="icu-btn ghost" data-icu-act="cbecg">' + ico("codeblue", "🫀") + ' ECG rhythm course</button></div>' +
+      return (window.SMD_HAS_WATCH
+          ? '<div class="icu-card" style="border-color:var(--danger)"><div class="icu-sec-lbl" style="color:var(--danger)">' + ico("codeblue", "🫀") + ' Emergency</div>' +
+            '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
+            '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'
+          : '') +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("codeblue", "🫀") + ' Code Blue practice</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Practice aids. Training only, never written to a patient record.</p>' +
+        '<button class="icu-btn ghost" data-icu-act="cbtrain">' + ico("codeblue", "🫀") + ' Megacode and ACLS practice</button>' +
+        '<button class="icu-btn ghost" data-icu-act="cbecg">' + ico("codeblue", "🫀") + ' ECG rhythm course</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
