@@ -713,6 +713,12 @@
       // Export tap on the native Command Center → append to the open ICU patient timeline.
       if (p && p.addListener) p.addListener("codeBlueExport", function (ev) {
         try {
+          var v2 = (ev && (ev.payload || ev.json)) || null;
+          if (v2 && window.CodeBlueSheet && window.CodeBlueSheet.open) {
+            try { window.CodeBlueSheet.open(v2); } catch (e2) {}
+          }
+        } catch (e3) {}
+        try {
           var detail = (ev && ev.detail) || "";
           var api = groupsApi();
           if (api && api.currentOpenPatient && api.addTimelineEvent) {
