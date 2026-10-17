@@ -1,0 +1,30 @@
+/* tablet-fit.css: width caps and fixes for iPad and iPad Pro, for screens whose layout lives in inline styles or
+ * minified markup (owner 2026-10-16: "make the whole app iPad ready, every module and page").
+ * Found by the inner-page iPad audit at 820x1180, 1180x820 and 1366x1024 (test/run-ipad-fit.mjs covers the first
+ * screen of every tool). Phones are untouched: every rule is behind a tablet-width media query unless noted. */
+
+/* Recent cases: cards and their buttons ran 1,336 px wide. */
+@media (min-width: 1000px) {
+  #myCasesPanel .mcp-case-card { max-width: 760px; margin-left: auto; margin-right: auto; }
+}
+
+/* Ward Sync (GHIS): the patient list and the lab drawer were one 1,330 px column, a test name 1,300 px from its value. */
+@media (min-width: 1000px) {
+  #ghisWard.ghis-body { max-width: 880px; margin-left: auto; margin-right: auto; width: 100%; }
+}
+
+/* Patient connect: the form stretched edge to edge (1,338 px hospital picker) with 34 px controls. */
+@media (min-width: 900px) {
+  #smdConnectPtOverlay > div[style*="overflow:auto"] { padding-left: max(14px, calc(50% - 360px)) !important; padding-right: max(14px, calc(50% - 360px)) !important; }
+}
+#smdConnectPtOverlay select, #smdConnectPtOverlay input { min-height: 44px; }
+
+/* ICU "Admit a patient" sheet: a 560 px card instead of 1,330 px option buttons. */
+@media (min-width: 700px) {
+  #cptAdmitChooser { justify-content: center; }
+  #cptAdmitChooser > div { max-width: 560px; margin-left: auto; margin-right: auto; }
+}
+
+/* PG logbook: the sticky Save / Submit bar floated 88 px above the bottom (the scroll's bottom padding), with the form
+   showing under it. A screen that has the bar needs no padding under it. Any width. */
+#pglogRoot .pgl-scroll:has(.pgl-actionbar) { padding-bottom: 0; }

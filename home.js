@@ -794,7 +794,7 @@
       ov.setAttribute("role", "dialog");
       ov.setAttribute("aria-modal", "true");
       ov.setAttribute("aria-label", "AgentConnect Hub");
-      ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column;font-family:var(--sans,-apple-system,BlinkMacSystemFont,system-ui,sans-serif);color:var(--ink,#17252b);overflow:hidden";
+      ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,var(--paper,#f6f7f5));display:flex;flex-direction:column;font-family:var(--sans,-apple-system,BlinkMacSystemFont,system-ui,sans-serif);color:var(--ink,#17252b);overflow:hidden";
 
       var bar = document.createElement("div");
       bar.style.cssText = "display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e2e8f0);box-shadow:0 1px 4px rgba(0,0,0,0.06);flex-shrink:0";
@@ -1305,7 +1305,7 @@
         var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
         ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true"); ov.setAttribute("aria-label","EMR Connect");
-        ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
+        ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,var(--paper,#f6f7f5));display:flex;flex-direction:column";
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
