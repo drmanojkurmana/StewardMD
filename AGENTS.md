@@ -5,6 +5,14 @@ repo root; Capacitor 8 wraps it for iOS + Android (native shells render the loca
 call `stewardmd.in/api/*`). Backend: Cloudflare Pages Functions (`functions/`) + Worker `stewardmd-api`
 (`worker/`, api.stewardmd.in, D1 drug DB). Firebase auth (project `stewardmd-498ec`), Firestore, KV, R2.
 
+## It is a MOBILE APP. Never call it a web app.
+StewardMD ships ONLY as the iOS and Android app (Capacitor renders the local `www/` bundle). There is no web
+product, no web users and no web version to test on. Never write, say or suggest "web app", "web version",
+"on the web", "open it in a browser" or "hard refresh" as how the owner uses or checks the product.
+`stewardmd.in` is only the API and deploy host. A headless browser is a test harness for the bundle, nothing more.
+When a fix works in the repo but the owner cannot see it, the first suspects are the `www/` bundle (`scripts/build-www.sh`
+must copy every file the app reads) and the native rebuild or OTA, never the web. Say "the app" or "the phone".
+
 ## Read before touching anything
 - `vault/modules/<Module>.md` first — flag + default, key files, status, gotchas. Map: `vault/Home.md`.
 - Architectural decisions (don't re-litigate): `vault/decisions/Decisions.md`. Deferred work: `vault/Roadmap.md`.
