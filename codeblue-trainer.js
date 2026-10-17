@@ -49,11 +49,12 @@
   }
 
   // Guided: wrong picks explained, learner continues until correct.
+  // A wrong pick costs 30 sim seconds when the caller passes the sim clock.
   function newGuided(id) {
     var scn = findScenario(id); if (!scn) return null;
-    return { scn: scn, idx: 0, wrong: 0, picks: 0, done: false };
+    return { scn: scn, idx: 0, wrong: 0, picks: 0, done: false, penaltySec: 0 };
   }
-  function pickGuided(sess, optIdx) {
+  function pickGuided(sess, optIdx, simSec) {
     if (!sess || sess.done) return { status: "done" };
     var st = sess.scn.states[sess.idx];
     if (!st || !st.o[optIdx]) return { status: "invalid" };
@@ -65,7 +66,33 @@
       return { status: "correct", coach: st.c, done: sess.done };
     }
     sess.wrong++;
+    if (typeof simSec === "number" && isFinite(simSec)) {
+      sess.penaltySec += 30;
+      return { status: "wrong", why: st.o[optIdx][2], costSec: 30 };
+    }
     return { status: "wrong", why: st.o[optIdx][2] };
+  }
+
+  // Practice case rhythm: hard cases hide it until the learner asks.
+  function caseRhythm(c) {
+    if (!c) return null;
+    if (c.conceal) return { hidden: true, rhythm: c.rhythm || "" };
+    return { hidden: false, rhythm: c.rhythm || "" };
+  }
+  function rhythmText(c) {
+    if (!c || !c.rhythm) return "";
+    if (c.mode === "neonatal") return "Heart rate check: " + c.rhythm + ".";
+    return "Monitor shows " + c.rhythm + ".";
+  }
+  function newCaseSession(c) {
+    if (!c) return null;
+    return { c: c, qi: 0, answers: [], rhythmRevealed: !c.conceal, revealAt: null };
+  }
+  function revealRhythm(sess, simSec) {
+    if (!sess || sess.rhythmRevealed) return false;
+    sess.rhythmRevealed = true;
+    sess.revealAt = (typeof simSec === "number" && isFinite(simSec)) ? simSec : null;
+    return true;
   }
 
   // Test station: one pick per state, timed on the sped-up clock, no coaching.
@@ -170,6 +197,74 @@
   function trend(s, n) {
     return s.hist.slice(Math.max(0, s.hist.length - (n || 10)));
   }
+  function weekKey(ts) {
+    var d = new Date(ts), day = (d.getDay() + 6) % 7;
+    var mon = new Date(d.getFullYear(), d.getMonth(), d.getDate() - day);
+    function p(x) { return (x < 10 ? "0" + x : "" + x); }
+    return mon.getFullYear() + "-" + p(mon.getMonth() + 1) + "-" + p(mon.getDate());
+  }
+  // Weekly trend: per Monday-starting week, attempts and mean score.
+  function weeklyTrend(s, nWeeks) {
+    var groups = {};
+    (s.hist || []).forEach(function (h) {
+      if (!h || !(h.at > 0)) return;
+      var k = weekKey(h.at);
+      if (!groups[k]) groups[k] = { n: 0, sum: 0 };
+      groups[k].n++;
+      groups[k].sum += (+h.pct || 0);
+    });
+    var weeks = Object.keys(groups).sort();
+    if (nWeeks) weeks = weeks.slice(Math.max(0, weeks.length - nWeeks));
+    return weeks.map(function (k) {
+      return { week: k, n: groups[k].n, avg: Math.round(groups[k].sum / groups[k].n) };
+    });
+  }
+  // Weakest topic proposes the next case: unplayed first, then lowest best.
+  function suggestNext(s, caseList) {
+    var w = weakSpots(s).filter(function (x) { return x.asked > 0; });
+    if (!w.length || !caseList || !caseList.length) return null;
+    for (var i = 0; i < w.length; i++) {
+      var cands = caseList.filter(function (c) {
+        return (c.quiz || []).some(function (q) { return q.topic === w[i].topic; });
+      });
+      if (!cands.length) continue;
+      cands.sort(function (a, b) {
+        var ba = s.best[a.id], bb = s.best[b.id];
+        var pa = (ba == null) ? -1 : ba, pb = (bb == null) ? -1 : bb;
+        if (pa !== pb) return pa - pb;
+        return a.id < b.id ? -1 : 1;
+      });
+      return { caseId: cands[0].id, topic: w[i].topic, missed: w[i].missed, asked: w[i].asked };
+    }
+    return null;
+  }
+  function exportText(s, D) {
+    function title(id) {
+      if (!D) return id;
+      var scn = null, cs = null;
+      try {
+        scn = findScenario(id);
+        cs = scn || findCase(id);
+      } catch (e) { cs = null; }
+      return (cs && cs.title) ? cs.title + " (" + id + ")" : id;
+    }
+    var lines = ["Code Blue training results", "Exported " + new Date().toISOString().slice(0, 10), ""];
+    var keys = Object.keys(s.best || {}).sort();
+    lines.push("Best scores (" + keys.length + " completed):");
+    if (!keys.length) lines.push("None yet.");
+    keys.forEach(function (k) { lines.push(title(k) + ": " + s.best[k] + "%"); });
+    lines.push("");
+    lines.push("Weekly trend:");
+    var wt = weeklyTrend(s, 8);
+    if (!wt.length) lines.push("No dated attempts yet.");
+    wt.forEach(function (x) { lines.push(x.week + ": " + x.n + " attempts, mean " + x.avg + "%"); });
+    lines.push("");
+    lines.push("Weak topics:");
+    var w = weakSpots(s).slice(0, 5);
+    if (!w.length) lines.push("None yet.");
+    w.forEach(function (x) { lines.push(x.topic + ": missed " + x.missed + " of " + x.asked); });
+    return lines.join("\n");
+  }
   function resetStore(s) {
     var b = blankStore();
     s.best = b.best; s.hist = b.hist; s.topics = b.topics;
@@ -177,10 +272,11 @@
   }
 
   // Content validity: run by the unit test and usable in-app.
-  function validateContent(D) {
+  // extra (test only): {lessons:[ids], modules:[ids]} to verify PrepNucleus links exist.
+  function validateContent(D, extra) {
     var errs = [];
     if (!D) return ["no data"];
-    var need = { adult: 6, paediatric: 4, neonatal: 3 };
+    var need = { adult: 14, paediatric: 9, neonatal: 7 };
     MODES.forEach(function (m) {
       var n = D.SCENARIOS.filter(function (s) { return s.mode === m; }).length;
       if (n < need[m]) errs.push("scenarios " + m + ": " + n + " < " + need[m]);
@@ -190,6 +286,7 @@
         if (!D.CASES.some(function (x) { return x.mode === m && x.level === lv; })) errs.push("cases " + m + " missing " + lv);
       });
     });
+    if (D.CASES.length < 48) errs.push("cases total " + D.CASES.length + " < 48");
     var quizTotal = 0, ids = {};
     D.SCENARIOS.forEach(function (s, si) {
       if (!s.id || ids[s.id]) errs.push("scenario[" + si + "] bad/duplicate id");
@@ -204,6 +301,11 @@
         if (nCorrect !== 1) errs.push(s.id + " s" + i + ": " + nCorrect + " correct options");
         if (!st.c) errs.push(s.id + " s" + i + ": no coach line");
         if (!(st.due > 0)) errs.push(s.id + " s" + i + ": bad due");
+        if (s.mode === "neonatal") {
+          if (st.due !== 60) errs.push(s.id + " s" + i + ": neonatal due must be 60 s, got " + st.due);
+        } else if ([60, 90, 120, 180].indexOf(st.due) < 0) {
+          errs.push(s.id + " s" + i + ": adult/paediatric due must be 60, 90, 120 or 180 s, got " + st.due);
+        }
         if (!Array.isArray(st.t) || !st.t.length) errs.push(s.id + " s" + i + ": no topics");
         (st.t || []).forEach(function (t) { if (D.TOPICS.indexOf(t) < 0) errs.push(s.id + " s" + i + ": unknown topic " + t); });
       });
@@ -214,15 +316,42 @@
       if (!c.vignette) errs.push(c.id + ": no vignette");
       if (!Array.isArray(c.clues) || !c.clues.length) errs.push(c.id + ": no clues");
       if (!Array.isArray(c.quiz) || !c.quiz.length) errs.push(c.id + ": no quiz");
+      if (c.level === "hard") {
+        if (c.conceal !== true) errs.push(c.id + ": hard case must conceal its rhythm");
+        if (!c.rhythm || typeof c.rhythm !== "string") errs.push(c.id + ": hard case needs a rhythm label");
+        if ((c.quiz || []).length < 4) errs.push(c.id + ": hard case needs at least 4 questions");
+      }
       quizTotal += (c.quiz || []).length;
       (c.quiz || []).forEach(function (q, i) {
         if (!q.q || !Array.isArray(q.o) || q.o.length !== 4) errs.push(c.id + " q" + i + ": bad stem/options");
         if (!(q.a >= 0 && q.a < 4)) errs.push(c.id + " q" + i + ": bad answer");
         if (!q.why) errs.push(c.id + " q" + i + ": no rationale");
+        else {
+          var body = q.why.replace(/\.\s*$/, "");
+          if (/[.!?]/.test(body)) errs.push(c.id + " q" + i + ": rationale must be one sentence");
+        }
         if (D.TOPICS.indexOf(q.topic) < 0) errs.push(c.id + " q" + i + ": unknown topic");
+        if (q.link != null) {
+          if ((q.link.kind !== "lesson" && q.link.kind !== "module") || typeof q.link.id !== "string" || !q.link.id) {
+            errs.push(c.id + " q" + i + ": bad link");
+          } else {
+            var dest = (D.LINK_DEST || {})[q.link.id];
+            if (!dest || typeof dest.s !== "string" || typeof dest.m !== "string") {
+              errs.push(c.id + " q" + i + ": link id has no PREP destination: " + q.link.id);
+            }
+            if (extra) {
+              if (q.link.kind === "lesson" && extra.lessons.indexOf(q.link.id) < 0) {
+                errs.push(c.id + " q" + i + ": lesson link does not exist: " + q.link.id);
+              }
+              if (q.link.kind === "module" && extra.modules.indexOf(q.link.id) < 0) {
+                errs.push(c.id + " q" + i + ": module link does not exist: " + q.link.id);
+              }
+            }
+          }
+        }
       });
     });
-    if (quizTotal < 60) errs.push("quiz total " + quizTotal + " < 60");
+    if (quizTotal < 150) errs.push("quiz total " + quizTotal + " < 150");
     var texts = [];
     JSON.stringify(D, function (k, v) { if (typeof v === "string") texts.push(v); return v; });
     var banned = [/[0-9]\s?(mg|mcg|microgram|mmol|millimol)/i, /joule/i, /[0-9]\s?J(\/| |$)/, /mg\/kg/i, /\u2014/, /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u];
@@ -238,9 +367,12 @@
   var _engine = { scenarios: scenarios, cases: cases, findScenario: findScenario, findCase: findCase,
     newGuided: newGuided, pickGuided: pickGuided, newTest: newTest, pickTest: pickTest,
     finishTest: finishTest, gradeCase: gradeCase, fmtClock: fmtClock, correctIdx: correctIdx,
+    caseRhythm: caseRhythm, rhythmText: rhythmText, newCaseSession: newCaseSession, revealRhythm: revealRhythm,
     STORE_KEY: STORE_KEY, DISCLAIMER: DISCLAIMER, MODES: MODES, MODE_LABEL: MODE_LABEL,
     blankStore: blankStore, loadStore: loadStore, saveStore: saveStore, recordResult: recordResult,
-    weakSpots: weakSpots, trend: trend, resetStore: resetStore, validateContent: validateContent,
+    weakSpots: weakSpots, trend: trend, weeklyTrend: weeklyTrend, weekKey: weekKey,
+    suggestNext: suggestNext, exportText: exportText,
+    resetStore: resetStore, validateContent: validateContent,
     memStorage: memStorage };
 
   // ---------------- UI layer (browser only) ----------------
@@ -339,25 +471,32 @@
     show(shell(0, "Practice cases", html), "list");
   }
 
-  // ---- guided run ----
+  // ---- guided run (sped-up clock; a wrong pick costs 30 sim seconds) ----
   var guided = null;
   function showGuided() {
     var st = guided.scn.states[guided.idx];
     var n = guided.scn.states.length;
-    var html = '<p class="cbt-step">Step ' + (guided.idx + 1) + " of " + n + ". " + esc(guided.scn.src) + "</p>" +
+    var html = clockBar('<span class="cbt-step">Step ' + (guided.idx + 1) + " of " + n + ". " + esc(guided.scn.src) + "</span>") +
       '<div class="cbt-state"><p class="cbt-p">' + esc(st.p) + "</p></div>" +
       '<div class="cbt-opts" role="group" aria-label="Choose the next action">';
     st.o.forEach(function (o, i) {
       html += '<button type="button" class="cbt-opt" data-act="g-pick" data-i="' + i + '">' + esc(o[0]) + "</button>";
     });
     show(shell(0, guided.scn.title, html + '</div><div class="cbt-fb" id="cbtFb" aria-live="polite"></div>'), "guided");
+    startClock(function (sim) {
+      var t = rootEl.querySelector("#cbtTime");
+      if (t) t.textContent = fmtClock(sim);
+    });
+    clockSim = guided.keptSim || 0;
   }
   function guidedPick(btn) {
-    var r = pickGuided(guided, +(btn.getAttribute("data-i")));
+    guided.keptSim = clockSim;
+    var r = pickGuided(guided, +(btn.getAttribute("data-i")), clockSim);
     var fb = rootEl.querySelector("#cbtFb");
     if (r.status === "wrong") {
       btn.disabled = true; btn.classList.add("off");
-      fb.innerHTML = '<p class="cbt-why"><b>Not quite.</b> ' + esc(r.why) + " Try again.</p>";
+      fb.innerHTML = '<p class="cbt-why"><b>Not quite.</b> ' + esc(r.why) +
+        " That cost about 30 seconds of sim time. Try again.</p>";
     } else if (r.status === "correct") {
       var opts = rootEl.querySelectorAll(".cbt-opt");
       for (var i = 0; i < opts.length; i++) opts[i].disabled = true;
@@ -365,7 +504,9 @@
       fb.innerHTML = '<p class="cbt-coach"><b>Coach.</b> ' + esc(r.coach) + "</p>" +
         (r.done ? "" : '<button type="button" class="cbt-next" data-act="g-next">Next step</button>');
       if (r.done) {
-        fb.innerHTML += '<p class="cbt-done">Scenario complete.</p>' +
+        stopClock();
+        fb.innerHTML += '<p class="cbt-done">Scenario complete' +
+          (guided.penaltySec > 0 ? " with " + fmtClock(guided.penaltySec) + " lost to wrong picks." : ".") + "</p>" +
           '<button type="button" class="cbt-next" data-act="go-guided">More scenarios</button>';
       }
     }
@@ -439,11 +580,36 @@
     show(shell(0, "Test debrief", html), "debrief");
   }
 
-  // ---- practice case run ----
+  // ---- practice case run (hard cases hide the rhythm until asked) ----
   var caseSess = null;
+  function prepOpen() {
+    try {
+      if (typeof window !== "undefined" && window.PREP && window.PREP.open) return window.PREP;
+    } catch (e) {}
+    return null;
+  }
+  function reviewBtn(link) {
+    if (!link || !prepOpen()) return "";
+    var D = getData();
+    if (!D || !D.LINK_DEST || !D.LINK_DEST[link.id]) return "";
+    return '<button type="button" class="cbt-review" data-act="c-review" data-kind="' + esc(link.kind) +
+      '" data-id="' + esc(link.id) + '">Review this in PrepNucleus</button>';
+  }
+  function rhythmBox() {
+    if (!caseSess) return "";
+    if (caseSess.rhythmRevealed) {
+      var t = rhythmText(caseSess.c);
+      if (!t) return "";
+      return '<div class="cbt-state" id="cbtRhythm"><p class="cbt-p">' + esc(t) + "</p></div>";
+    }
+    var label = caseSess.c.mode === "neonatal" ? "Ask for a heart rate check" : "Ask for a rhythm check";
+    return '<div class="cbt-state" id="cbtRhythm"><p class="cbt-p">The rhythm is hidden. ' + esc(label) +
+      ' when ready.</p><button type="button" class="cbt-next" data-act="c-rhythm">' + esc(label) + "</button></div>";
+  }
   function showCaseRun() {
     var html = clockBar('<span class="cbt-step">' + levelTag(caseSess.c.level) + "</span>") +
       '<div class="cbt-state"><p class="cbt-p">' + esc(caseSess.c.vignette) + "</p></div>" +
+      rhythmBox() +
       '<h3 class="cbt-sub">Clues</h3><ul class="cbt-log" id="cbtClues" aria-live="polite"></ul>' +
       '<div id="cbtQuiz"></div>';
     show(shell(0, caseSess.c.title, html), "case");
@@ -454,6 +620,15 @@
     });
     renderClues(0);
     renderQuiz();
+  }
+  function rhythmAsk() {
+    if (!caseSess || caseSess.rhythmRevealed) return;
+    revealRhythm(caseSess, clockSim);
+    var box = rootEl.querySelector("#cbtRhythm");
+    if (box) {
+      box.innerHTML = '<p class="cbt-p">' + esc(rhythmText(caseSess.c)) + "</p>";
+      try { box.querySelector(".cbt-p").setAttribute("tabindex", "-1"); box.querySelector(".cbt-p").focus({ preventScroll: true }); } catch (e) {}
+    }
   }
   function renderClues(sim) {
     var box = rootEl.querySelector("#cbtClues");
@@ -483,7 +658,8 @@
     for (var k = 0; k < opts.length; k++) opts[k].disabled = true;
     btn.classList.add(ok ? "hit" : "off");
     fb.innerHTML = '<p class="' + (ok ? "cbt-coach" : "cbt-why") + '"><b>' + (ok ? "Correct." : "Not quite.") +
-      "</b> " + esc(q.why) + "</p>" + '<button type="button" class="cbt-next" data-act="c-next">Continue</button>';
+      "</b> " + esc(q.why) + "</p>" + reviewBtn(q.link) +
+      '<button type="button" class="cbt-next" data-act="c-next">Continue</button>';
   }
   function finishCase() {
     stopClock();
@@ -493,8 +669,10 @@
     recordResult(getStore(), caseSess.c.id, pct, topics);
     persist();
     var html = '<p class="cbt-score">' + res.score + " of " + res.total + "</p>" +
-      "<ul>" + res.per.map(function (p) {
-        return "<li><b>" + (p.ok ? "Correct" : "Missed") + " (" + esc(p.topic) + ")</b><span>" + esc(p.why) + "</span></li>";
+      "<ul>" + res.per.map(function (p, j) {
+        var link = (caseSess.c.quiz[j] || {}).link;
+        return "<li><b>" + (p.ok ? "Correct" : "Missed") + " (" + esc(p.topic) + ")</b><span>" + esc(p.why) + "</span>" +
+          (reviewBtn(link) || "") + "</li>";
       }).join("") + "</ul>" +
       '<button type="button" class="cbt-next" data-act="go-cases">More cases</button> ' +
       '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button>';
@@ -502,30 +680,71 @@
     show(shell(0, "Case result", html), "result");
   }
 
-  // ---- my training ----
+  // ---- my training: best per scenario, weekly trend, weak topics, export ----
   function showMine() {
     stopClock();
-    var s = getStore(), keys = Object.keys(s.best);
+    var s = getStore(), keys = Object.keys(s.best).sort();
+    var D = getData();
     var html = "";
     if (!keys.length) {
       html = '<p class="cbt-note">No training recorded yet. Finish a test station or a practice case to start your record.</p>';
     } else {
-      html += '<h3 class="cbt-sub">Best scores</h3><ul class="cbt-log">' + keys.sort().map(function (k) {
-        var scn = findScenario(k), cs = scn || findCase(k);
-        return "<li>" + esc(cs ? cs.title : k) + " . <b>" + s.best[k] + "%</b></li>";
-      }).join("") + "</ul>";
+      var scnKeys = keys.filter(function (k) { return !!findScenario(k); });
+      var caseKeys = keys.filter(function (k) { return !findScenario(k); });
+      function bestList(list) {
+        return '<ul class="cbt-log">' + list.map(function (k) {
+          var cs = findScenario(k) || findCase(k);
+          return "<li>" + esc(cs ? cs.title : k) + " . <b>" + s.best[k] + "%</b></li>";
+        }).join("") + "</ul>";
+      }
+      if (scnKeys.length) html += '<h3 class="cbt-sub">Best scenario scores</h3>' + bestList(scnKeys);
+      if (caseKeys.length) html += '<h3 class="cbt-sub">Best case scores</h3>' + bestList(caseKeys);
       var t = trend(s, 10);
       html += '<h3 class="cbt-sub">Recent trend</h3><ul class="cbt-log">' + t.map(function (h) {
         return "<li>" + esc(h.id) + " . " + h.pct + "%</li>";
       }).join("") + "</ul>";
-      var w = weakSpots(s);
+      var wt = weeklyTrend(s, 8);
+      html += '<h3 class="cbt-sub">Weekly trend</h3>';
+      html += wt.length ? '<ul class="cbt-log">' + wt.map(function (x) {
+        return "<li>Week of " + esc(x.week) + " . " + x.n + " attempts, mean <b>" + x.avg + "%</b></li>";
+      }).join("") + "</ul>" : '<p class="cbt-note">No dated attempts yet.</p>';
+      var w = weakSpots(s).slice(0, 5);
       html += '<h3 class="cbt-sub">Weak spots by topic</h3>';
       html += w.length ? '<ul class="cbt-log">' + w.map(function (x) {
         return "<li>" + esc(x.topic) + " . missed " + x.missed + " of " + x.asked + "</li>";
       }).join("") + "</ul>" : "<p>None yet.</p>";
+      var sug = (D && D.CASES) ? suggestNext(s, D.CASES) : null;
+      if (sug) {
+        var sugCase = findCase(sug.caseId);
+        html += '<div class="cbt-state"><p class="cbt-p">Suggested next: <b>' + esc(sugCase ? sugCase.title : sug.caseId) +
+          "</b> for weak topic " + esc(sug.topic) + " (missed " + sug.missed + " of " + sug.asked + ").</p>" +
+          '<button type="button" class="cbt-next" data-act="start-case" data-id="' + esc(sug.caseId) + '">Practise this case</button></div>';
+      }
+      html += '<h3 class="cbt-sub">Export results</h3>' +
+        '<label class="cbt-step" for="cbtExport">Plain text summary, ready to copy.</label>' +
+        '<textarea class="cbt-export" id="cbtExport" rows="8" readonly>' + esc(exportText(s, D)) + "</textarea>" +
+        '<button type="button" class="cbt-next ghost" data-act="copy-export">Copy results</button>';
     }
     html += '<button type="button" class="cbt-next danger" data-act="reset">Reset my training</button>';
     show(shell(0, "My training", html), "mine");
+  }
+  function copyExport() {
+    var box = rootEl.querySelector("#cbtExport");
+    if (!box) return;
+    function done(btn, label) {
+      if (!btn) return;
+      btn.textContent = label;
+      setTimeout(function () { try { btn.textContent = "Copy results"; } catch (e) {} }, 2000);
+    }
+    var btn = rootEl.querySelector('[data-act="copy-export"]');
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(box.value).then(function () { done(btn, "Copied"); }, function () { done(btn, "Copy failed: select manually"); });
+        return;
+      }
+    } catch (e) {}
+    try { box.focus(); box.select(); document.execCommand("copy"); done(btn, "Copied"); }
+    catch (e) { done(btn, "Copy failed: select manually"); }
   }
 
   function onClick(e) {
@@ -538,14 +757,22 @@
     if (act === "go-cases") { showCaseList(); return; }
     if (act === "go-mine") { showMine(); return; }
     if (act === "mode") { uiMode = el.getAttribute("data-mode") || "adult"; var st = rootEl.getAttribute("data-station"); if (st === "list") { if (rootEl.querySelector('[data-act="start-test"]')) showTestList(); else if (rootEl.querySelector('[data-act="start-case"]')) showCaseList(); else showGuidedList(); } return; }
-    if (act === "start-guided") { guided = newGuided(id); if (guided) showGuided(); return; }
+    if (act === "start-guided") { guided = newGuided(id); clockSim = 0; if (guided) { guided.keptSim = 0; showGuided(); } return; }
     if (act === "g-pick") { guidedPick(el); return; }
-    if (act === "g-next") { showGuided(); return; }
+    if (act === "g-next") { if (guided) guided.keptSim = clockSim; showGuided(); return; }
     if (act === "start-test") { testSess = newTest(id); clockSim = 0; if (testSess) showTest(); return; }
     if (act === "t-pick") { testPick(el); return; }
-    if (act === "start-case") { var c = findCase(id); if (c) { caseSess = { c: c, qi: 0, answers: [] }; clockSim = 0; showCaseRun(); } return; }
+    if (act === "start-case") { var c = findCase(id); if (c) { caseSess = newCaseSession(c); clockSim = 0; showCaseRun(); } return; }
     if (act === "c-pick") { casePick(el); return; }
     if (act === "c-next") { caseSess.qi++; renderQuiz(); return; }
+    if (act === "c-rhythm") { rhythmAsk(); return; }
+    if (act === "c-review") {
+      var P = prepOpen(), D = getData();
+      var dest = D && D.LINK_DEST ? D.LINK_DEST[el.getAttribute("data-id")] : null;
+      if (P && dest) { try { P.open({ subject: dest.s, module: dest.m }); } catch (e) {} }
+      return;
+    }
+    if (act === "copy-export") { copyExport(); return; }
     if (act === "reset") {
       try {
         if (window.confirm && !window.confirm("Reset all training records?")) return;

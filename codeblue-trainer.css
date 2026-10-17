@@ -112,6 +112,19 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-log li { padding: 8px 0; border-bottom: 1px solid var(--cbt-line); }
 #cbtRoot .cbt-score { font-size: 40px; font-weight: 800; margin: 8px 0; font-variant-numeric: tabular-nums; }
 
+#cbtRoot .cbt-review {
+  display: inline-block; margin: 10px 8px 0 0; min-height: 44px; padding: 10px 16px;
+  border: 1px solid var(--cbt-line); border-radius: 8px; cursor: pointer;
+  background: transparent; color: var(--cbt-ink); font-size: 14px; font-weight: 600;
+}
+#cbtRoot .cbt-export {
+  display: block; width: 100%; box-sizing: border-box; margin: 0 0 10px;
+  border: 1px solid var(--cbt-line); border-radius: 8px; padding: 12px;
+  background: var(--cbt-surface); color: var(--cbt-ink);
+  font-size: 13px; line-height: 1.5; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  white-space: pre-wrap;
+}
+
 #cbtRoot button:focus-visible { outline: 3px solid var(--cbt-accent); outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
