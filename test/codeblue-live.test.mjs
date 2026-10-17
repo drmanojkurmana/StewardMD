@@ -92,6 +92,16 @@ test("epinephrine timer restarts from the latest dose", () => {
   assert.equal(E.epiStatus(s, 380).state, "due");
 });
 
+test("epinephrine timing runs from the logged dose, not from code start", () => {
+  const s = E.newSession("adult", { wallNow: 0 });
+  E.logEvent(s, "rhythm", "PEA", 100);
+  E.logEvent(s, "drug", "Epinephrine", 125);
+  assert.equal(E.epiStatus(s, 190).state, "countdown");
+  assert.equal(E.epiStatus(s, 305).state, "due");
+  assert.equal(E.epiStatus(s, 424).state, "due");
+  assert.equal(E.epiStatus(s, 425).state, "overdue");
+});
+
 /* ---------- due strip ---------- */
 
 test("due strip: CPR in progress, rhythm due, epi due and overdue, shock, ROSC, paused", () => {
@@ -112,6 +122,15 @@ test("due strip: CPR in progress, rhythm due, epi due and overdue, shock, ROSC, 
   assert.deepEqual(E.dueStrip(s, 60), { text: "ROSC", level: "rosc" });
   s = E.newSession("adult", { wallNow: 0 });
   assert.deepEqual(E.dueStrip(s, 60, { paused: true }), { text: "Paused", level: "paused" });
+});
+
+test("fresh sessions start with an empty event log", () => {
+  for (const mode of E.MODES) {
+    const s = E.newSession(mode, { wallNow: 0 });
+    assert.deepEqual(s.events, []);
+  }
+  const s = E.newSession("adult", { wallNow: 0 });
+  assert.deepEqual(E.dueStrip(s, 10), { text: "CPR in progress", level: "running" });
 });
 
 test("due strip shows the nearest countdown", () => {
@@ -280,6 +299,19 @@ test("counts recompute after edit, delete and undo; edit keeps elapsed", () => {
   assert.equal(E.undoDelete(s).id, shock.id);
   assert.deepEqual(E.computeCounts(s.events), { epi: 1, shocks: 1 });
   assert.equal(E.undoDelete(s), null);
+});
+
+test("delete stages one undo entry; undoDelete restores it in place", () => {
+  const s = E.newSession("adult", { wallNow: 0 });
+  const a = E.logEvent(s, "shock", null, 30);
+  const b = E.logEvent(s, "drug", "Epinephrine", 60);
+  assert.equal(s.undo.length, 0);
+  assert.equal(E.deleteEvent(s, a.id), true);
+  assert.equal(s.undo.length, 1);
+  assert.deepEqual(s.events.map((e) => e.id), [b.id]);
+  assert.equal(E.undoDelete(s).id, a.id);
+  assert.deepEqual(s.events.map((e) => e.id), [a.id, b.id]);
+  assert.equal(s.undo.length, 0);
 });
 
 /* ---------- re-arrest ---------- */

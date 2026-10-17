@@ -145,12 +145,23 @@ try {
   await ev(`document.querySelector('${CBL} [data-act="sheet-close"]').click(); return 1;`);
 
   await click(`${CBL} [data-act="tile-epi"]`);
-  await ev(`CodeBlueLive._rt.setElapsed(190); return 1;`);
+  /* Epinephrine timing runs from the logged dose, not from code start, so
+   * measure offsets from the dose. Reset the rhythm cycle first so the
+   * rhythm strip does not cover the epinephrine states. */
+  const epiAt = await ev(`return CodeBlueLive._rt.session().events.filter(function (e) { return e.kind === "drug"; }).pop().elapsed;`);
+  await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 70); return 1;`);
+  await click(`${CBL} [data-act="tile-rhythm"]`);
+  await ev(`Array.from(document.querySelectorAll('${CBL} [data-act="rhythm-pick"]')).filter(function (b) { return b.textContent === "PEA"; })[0].click(); return 1;`);
+  await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 182); return 1;`);
   ok(await until(`return document.querySelector('${CBL} .cbl-duetext').textContent === "Epinephrine due";`, 5000), "epinephrine due after 180 s");
   await shot("epi-due", false);
-  await ev(`CodeBlueLive._rt.setElapsed(310); return 1;`);
+  await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 192); return 1;`);
+  await click(`${CBL} [data-act="tile-rhythm"]`);
+  await ev(`Array.from(document.querySelectorAll('${CBL} [data-act="rhythm-pick"]')).filter(function (b) { return b.textContent === "PEA"; })[0].click(); return 1;`);
+  await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 302); return 1;`);
   ok(await until(`return document.querySelector('${CBL} .cbl-duetext').textContent === "Epinephrine overdue";`, 5000), "epinephrine overdue after 300 s");
   ok(await ev(`return document.querySelector('${CBL} .cbl-dueword').textContent === "Overdue";`) === true, "overdue word present, colour never alone");
+  ok(await ev(`return document.querySelector('${CBL} .cbl-due').classList.contains("cbl-due-overdue");`) === true, "overdue strip restyles the border, colour never alone");
   await shot("epi-overdue", true);
 
   await click(`${CBL} [data-act="tile-rosc"]`);
@@ -184,8 +195,8 @@ try {
   await click(`${CBL} [data-act="sheet-log"]`);
   await ev(`var b=document.querySelector('${CBL} [data-act="log-edit"]'); if(b) b.click(); return 1;`);
   ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.edited === true; });`, 5000), "log edit marks edited");
-  await ev(`var b=document.querySelector('${CBL} [data-act="log-del"]'); if(b) b.click(); return 1;`);
   const nBefore = await ev(`return CodeBlueLive._rt.session().events.length;`);
+  await ev(`var b=document.querySelector('${CBL} [data-act="log-del"]'); if(b) b.click(); return 1;`);
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="toast"].on');`) === true, "delete offers undo");
   await ev(`var b=document.querySelector('${CBL} [data-act="toast-undo"]'); if(b) b.click(); return 1;`);
   ok(await until(`return CodeBlueLive._rt.session().events.length === ${JSON.stringify(nBefore)};`, 5000), "undo restores the deleted event");

@@ -1138,8 +1138,6 @@
     fired = {};
     storeError = false;
     view = "running";
-    logEvent(sess, "modeSet", "Mode: " + MODE_LABEL[sess.mode], 0);
-    logEvent(sess, "cprStart", null, 0);
     persist();
     render();
     if (A && !sess.training) {
@@ -1341,9 +1339,8 @@
       var did = el.getAttribute("data-id");
       if (deleteEvent(sess, did)) {
         persist();
-        refreshLogSheet();
-        toast("Event deleted. ", did);
         render();
+        toast("Event deleted. ", did);
         openLogSheet();
       }
       return;
