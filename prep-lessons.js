@@ -816,7 +816,14 @@
       var list = pickQuiz(host.pool(items), les.quiz);
       if (!list.length) return host.toast("These questions are not available right now. Practise the module instead.");
       host.run(list, "study", "Quick questions: " + les.title);
-    }, function () { host.toast("The questions need a connection the first time. Try again online."); });
+    }, function (e) {
+      // say what actually failed: a server refusal is not "no connection" (owner's phone showed this toast on a 429)
+      var c = e && e.code, st = e && e.status;
+      host.toast(c === "account-flagged" ? "Question access is paused for this account. Try again later."
+        : (st === 429 || c === "minute-limit" || c === "hour-limit" || c === "daily-limit" || c === "enumeration-detected") ? "Too many question files at once. Wait a minute and try again."
+        : (st === 401 || c === "login-required" || c === "invalid-session") ? "Sign in again to open the questions."
+        : "The questions need a connection the first time. Try again online.");
+    });
   }
 
   /* ---------- public ---------- */

@@ -62,7 +62,6 @@ test("registry: pinned, hashed, weights last, no name collisions", () => {
   const withMlx = M.packIds().filter((id) => M.hasMlx(id));
   // Only MAiK Prime: the 8.62 GB MAiK Max 2 MLX build was dropped (owner, 2026-09-28).
   assert.deepEqual(withMlx.sort(), ["bonsai-ternary-8b"]);
-  assert.equal(M.hasMlx("bonsai2-27b"), false);
   const ggufNames = new Set(M.packIds().flatMap((id) => M.PACKS[id].files.map((f) => f.name)));
   const seen = new Set();
   for (const id of withMlx) {

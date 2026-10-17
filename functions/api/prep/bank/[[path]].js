@@ -173,6 +173,25 @@ async function serveR2Object(env, p, request, cacheControl) {
   return withCors(request, new Response(obj.body, { status: 200, headers }));
 }
 
+/* TOOLS CREDENTIAL (owner 2026-10-17: fix the 401 for CI `gaps` and prep-ids verify). A repo tool or CI job sends
+ * X-SMD-Tool: <secret>; the function hashes it (SHA-256, hex) and compares with KV key bank:tool-hash (MAIK_KV) in
+ * constant time. Match = read-only bank GET without user login or app proof. No KV key, no header or any mismatch
+ * falls through to the normal gate. The secret itself lives only in the GitHub secret SMD_TOOL_TOKEN and
+ * ~/.config/stewardmd/tool-token; the KV holds only its hash. Answers are never public-cacheable. */
+async function toolOK(env, request) {
+  const tok = request && request.headers && request.headers.get("X-SMD-Tool");
+  const kv = env && env.MAIK_KV;
+  if (!tok || tok.length < 24 || tok.length > 200 || !kv) return false;
+  let want = "";
+  try { want = String((await kv.get("bank:tool-hash")) || "").trim().toLowerCase(); } catch (e) { return false; }
+  if (!/^[0-9a-f]{64}$/.test(want)) return false;
+  const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(tok));
+  const got = [...new Uint8Array(d)].map((x) => x.toString(16).padStart(2, "0")).join("");
+  let diff = 0;
+  for (let i = 0; i < 64; i++) diff |= got.charCodeAt(i) ^ want.charCodeAt(i);
+  return diff === 0;
+}
+
 export async function onRequestGet(ctx) {
   const { env, params, request, waitUntil } = ctx;
   const p = bankPath(params);
@@ -200,6 +219,11 @@ export async function onRequestGet(ctx) {
     const isShortCache = /(?:manifest|(?:pyq|lessons|cards|ids|links|quality|maik|tests)\/index)\.json$/.test(p);
     const cc = isShortCache ? "public, max-age=300" : "public, max-age=31536000, immutable";
     return serveR2Object(env, p, request, cc);
+  }
+
+  // Tools credential: a repo tool or CI job holding the secret reads the bank without a user login (read-only GET).
+  if (request && request.headers.get("X-SMD-Tool") && (await toolOK(env, request))) {
+    return serveR2Object(env, p, request, "private, no-store");
   }
 
   // --- Gated paths: authentication, app proof & rate limits ---

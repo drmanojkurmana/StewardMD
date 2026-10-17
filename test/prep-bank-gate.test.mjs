@@ -580,3 +580,48 @@ test("gate [KV flag]: billing:cfg flags.PREP_BANK_ENFORCE=1 enforces with no env
   gate.resetBankGateMemory();
   assert.equal((await call({ PREP_BANK_R2: r2(files) })).status, 200, "flag cleared and no env: shadow mode serves");
 });
+
+test("gate [ENFORCE=1]: tools credential reads the bank without login; wrong, missing or unset hash is refused", async () => {
+  gate.resetBankGateMemory();
+  const secret = "tool-secret-0123456789abcdef0123456789";
+  const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret)))].map((b) => b.toString(16).padStart(2, "0")).join("");
+  const file = { "prep-bank/v1/anatomy/mcq/ana-gametogenesis.json": '{"topic":"ana-gametogenesis","items":[]}' };
+  const mk = (kvStore) => ({ PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(file), MAIK_KV: kvStore });
+  const get = (env, hdr) => bank.onRequestGet({ env, params: { path: ["v1", "anatomy", "mcq", "ana-gametogenesis.json"] }, request: new Request("https://stewardmd.in/api/prep/bank/v1/anatomy/mcq/ana-gametogenesis.json", { method: "GET", headers: hdr }) });
+  const k = kv(); k.m.set("bank:tool-hash", hash);
+  const ok = await get(mk(k), { "X-SMD-Tool": secret });
+  assert.equal(ok.status, 200);
+  assert.equal(ok.headers.get("Cache-Control"), "private, no-store");
+  assert.equal((await get(mk(k), { "X-SMD-Tool": secret + "x" })).status, 401);
+  assert.equal((await get(mk(k), {})).status, 401);
+  assert.equal((await get(mk(kv()), { "X-SMD-Tool": secret })).status, 401, "no hash in KV: the header opens nothing");
+  assert.equal((await get({ PREP_BANK_ENFORCE: "1", PREP_BANK_R2: r2(file) }, { "X-SMD-Tool": secret })).status, 401, "no KV: refused");
+});
+
+test("gate [ENFORCE=1]: opening a module with 26 overlay sets is ONE open, not 27 files toward the lockouts", async () => {
+  gate.resetBankGateMemory();
+  const env = { PREP_BANK_ENFORCE: "1", MAIK_KV: kv(), PREP_BANK_R2: r2({}) };
+  const user = { id: "fb:u-real" }, now = Date.now();
+  // five modules in one minute, each = 1 bank file + 26 overlay files (135 requests): normal reading, must all pass
+  for (let m = 0; m < 5; m++) {
+    const rl0 = await gate.checkBankRateLimits(env, user, `v5/ss-endocrinology/mcq/mod-${m}.json`, null, now);
+    assert.equal(rl0.ok, true);
+    for (let s = 0; s < 26; s++) {
+      const rl = await gate.checkBankRateLimits(env, user, `overlay/set${s}/ss-endocrinology/mod-${m}.json`, null, now);
+      assert.equal(rl.ok, true, "module " + m + " overlay " + s);
+    }
+  }
+  assert.equal(gate.moduleUnitOf("v5/ss-endocrinology/mcq/mod-1.json"), "ss-endocrinology/mod-1");
+  assert.equal(gate.moduleUnitOf("overlay/maiknuc3/ss-endocrinology/mod-1.json"), "ss-endocrinology/mod-1");
+  assert.equal(gate.moduleUnitOf("v1/anatomy/search.json"), null);
+  // enumeration across MANY modules is still caught: the 31st distinct module in a minute flags the account
+  const bot = { id: "fb:u-bot" };
+  for (let i = 0; i < 30; i++) assert.equal((await gate.checkBankRateLimits(env, bot, `v5/ss-endocrinology/mcq/m-${i}.json`, null, now)).ok, true);
+  const denied = await gate.checkBankRateLimits(env, bot, "v5/ss-endocrinology/mcq/m-31.json", null, now);
+  assert.equal(denied.code, "enumeration-detected");
+  // the same file again does not ride free
+  gate.resetBankGateMemory();
+  const rep = { id: "fb:u-rep" };
+  for (let i = 0; i < 30; i++) assert.equal((await gate.checkBankRateLimits(env, rep, "v5/ss-endocrinology/mcq/same.json", null, now)).ok, true);
+  assert.equal((await gate.checkBankRateLimits(env, rep, "v5/ss-endocrinology/mcq/same.json", null, now)).code, "enumeration-detected", "hammering one file still counts");
+});

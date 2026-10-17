@@ -151,6 +151,12 @@ final class LlamaEngine {
     /// context. nil when the pack has none, it is not downloaded, or its vocabulary did not match.
     private var draftModel: OpaquePointer?
     private var draftCtx: OpaquePointer?
+    /// Embedding model for on-phone search (EmbeddingGemma 2, 210 MB). Loaded on first embed(), kept
+    /// mmapped (file-backed clean pages the kernel can evict), dropped on memory warning or
+    /// releaseEmbed(). The chat model/context above are never touched by the embed path, and
+    /// releaseLocked() below deliberately leaves this alone.
+    private var embedModel: OpaquePointer?
+    private var loadedEmbedPath: String?
     private var loadedDraftPath: String?
     /// The tokens each context's KV cache currently holds, in order. The next prompt keeps the
     /// longest common prefix and prefills only the rest (perf plan #2). Emptied by an image answer,
@@ -330,7 +336,147 @@ final class LlamaEngine {
 
     func cancel() { cancelFlag.value = true }
 
-    deinit { releaseLocked() }
+    deinit { releaseLocked(); releaseEmbedLocked() }
+
+    // MARK: - Embeddings (on-phone search, EmbeddingGemma 2, llama.cpp b11696)
+
+    /// GGUF file of the search pack (maik-models.js EMBED_PACK, pack id "embedding-gemma-2").
+    /// Resolved through ModelDownloader like a chat pack, so download/verify/delete serve it unchanged.
+    static let embedFileName = "embeddinggemma-2-UD-Q5_K_XL.gguf"
+    /// Prefixes the kb-vectors-q5 bank was built with (see its .json sidecar: docPrefix/queryPrefix).
+    /// kind "query" embeds a question, kind "doc" a document; the ground-truth vectors came from
+    /// llama-server /v1/embeddings with these same prefixes, so they must match byte-for-byte.
+    static let embedQueryPrefix = "task: search result | query: "
+    static let embedDocPrefix = "title: none | text: "
+    static let embedNCtx: Int32 = 512
+    static let embedNBatch: Int32 = 512
+    /// The embed model file (210 MB) plus this headroom must be free (os_proc_available_memory, the
+    /// same jetsam gauge available() reports) before the embed model loads. The chat model may already
+    /// be resident, so this refuses rather than risk a jetsam kill mid-answer.
+    static let embedHeadroom: UInt64 = 512 * 1024 * 1024
+    /// Defensive input cap. 2,000 chars tokenise to well under embedNCtx for this vocabulary; anything
+    /// longer is still cut by the n_ctx guard in embedOnWork.
+    static let embedMaxChars = 2000
+
+    /// Embed one short text on device. Returns L2-normalised floats (llama_model_n_embd_out long, 768
+    /// for EmbeddingGemma 2). Throws .busy when a chat generation is running, .modelMissing when the
+    /// pack is not (fully) downloaded, .lowMemory when it would not fit beside what is resident.
+    /// Runs on `work`, the same serial queue as generation, so the two can never overlap in C++.
+    func embed(path: String, text: String, kind: String) throws -> [Float] {
+        // Pre-enqueue check, so a question asked mid-answer gets "busy" instead of silently queueing
+        // behind it. The serial queue keeps the C++ itself safe against the residual race.
+        if isGenerating { throw LlamaError(.busy, "a generation is already running") }
+        dispatchPrecondition(condition: .notOnQueue(work))
+        return try work.sync { try embedOnWork(path: path, text: text, kind: kind) }
+    }
+
+    /// Drop the embedding model. Called on memory warning; the next embed() reloads it (mmap reload is
+    /// cheap). Async barrier on `work` like release(), so it never frees under an in-flight embed.
+    /// The chat model is left alone, so an in-flight answer is never cut.
+    func releaseEmbed(completion: (() -> Void)? = nil) {
+        work.async { [weak self] in
+            if let self { self.lock.lock(); self.releaseEmbedLocked(); self.lock.unlock() }
+            completion?()
+        }
+    }
+
+    private func releaseEmbedLocked() {
+        if let m = embedModel { llama_model_free(m); embedModel = nil }
+        loadedEmbedPath = nil
+    }
+
+    private func embedOnWork(path: String, text: String, kind: String) throws -> [Float] {
+        guard FileManager.default.fileExists(atPath: path) else {
+            throw LlamaError(.modelMissing, "embedding model not downloaded")
+        }
+        if embedModel == nil || loadedEmbedPath != path {
+            releaseEmbedLocked()
+            // The chunked downloader preallocates the FULL length up front, so size alone cannot say
+            // the file is complete. The ".parts" sidecar beside it is the authority (ModelDownloader
+            // deletes it only when every part has landed); a partial file must never reach the loader.
+            if FileManager.default.fileExists(atPath: path + ".parts") {
+                throw LlamaError(.modelMissing, "embedding model download is incomplete")
+            }
+            let size = (try? FileManager.default.attributesOfItem(atPath: path)[.size] as? UInt64) ?? 0
+            let avail = UInt64(os_proc_available_memory())
+            guard avail > size + Self.embedHeadroom else {
+                throw LlamaError(.lowMemory, "not enough free memory for the embedding model")
+            }
+            if !backendReady { llama_backend_init(); backendReady = true }
+            var mp = llama_model_default_params()
+            mp.load_mode = LLAMA_LOAD_MODE_MMAP
+            // CPU only. A 210 MB quantised embed runs in milliseconds on the big cores; spending Metal
+            // buffers on it would only crowd the chat model's jetsam budget.
+            mp.n_gpu_layers = 0
+            guard let m = llama_model_load_from_file(path, mp) else {
+                throw LlamaError(.modelCorrupted, "embedding model failed to load")
+            }
+            embedModel = m
+            loadedEmbedPath = path
+            llamaPerf("PERF embed model loaded \(Int(size) >> 20) MB")
+        }
+        guard let m = embedModel else { throw LlamaError(.modelCorrupted, "embedding model failed to load") }
+
+        // EMBEDDING context, freed after this one call (defer). pooling_type stays UNSPECIFIED so the
+        // MODEL's metadata decides (llama falls back to the GGUF's pooling): MEAN for EmbeddingGemma 2,
+        // exactly what llama-server /v1/embeddings used for the ground-truth vectors. Flash attention
+        // and quantised KV are left at their defaults: this context lives for one short decode.
+        var cp = llama_context_default_params()
+        cp.n_ctx = UInt32(Self.embedNCtx)
+        cp.n_batch = UInt32(Self.embedNBatch)
+        cp.n_ubatch = UInt32(Self.embedNBatch)
+        cp.n_threads = Self.embedThreads()
+        cp.embeddings = true
+        guard let c = llama_init_from_model(m, cp) else {
+            throw LlamaError(.lowMemory, "embedding context allocation failed")
+        }
+        defer { llama_free(c) }
+
+        // add_special=true, parse_special=true: the same flags llama-server used for the bank vectors
+        // (no BOS trickery, per EMBED-LOCAL-DONE.md).
+        let vocab = llama_model_get_vocab(m)
+        let input = ((kind == "doc") ? Self.embedDocPrefix : Self.embedQueryPrefix)
+            + String(text.prefix(Self.embedMaxChars))
+        var toks = [llama_token]()
+        try input.withCString { cstr in
+            let len = Int32(strlen(cstr))
+            let need = -llama_tokenize(vocab, cstr, len, nil, 0, true, true)
+            guard need > 0 else { throw LlamaError(.generationFailure, "tokenize sizing failed") }
+            toks = [llama_token](repeating: 0, count: Int(need))
+            let n = llama_tokenize(vocab, cstr, len, &toks, need, true, true)
+            guard n > 0 else { throw LlamaError(.generationFailure, "tokenize failed") }
+            toks = Array(toks.prefix(Int(n)))
+        }
+        guard Int32(toks.count) < Self.embedNCtx else {
+            throw LlamaError(.generationFailure, "text longer than the embedding context")
+        }
+        var slice = toks
+        let batch = llama_batch_get_one(&slice, Int32(slice.count))
+        guard llama_decode(c, batch) == 0 else {
+            throw LlamaError(.generationFailure, "embedding decode failed")
+        }
+        // Pooled sequence embedding, the same read llama-server does for /v1/embeddings.
+        let nOut = Int(llama_model_n_embd_out(m))
+        guard nOut > 0, let ptr = llama_get_embeddings_seq(c, 0) else {
+            throw LlamaError(.generationFailure, "no pooled embedding")
+        }
+        var v = [Float](repeating: 0, count: nOut)
+        for i in 0..<nOut { v[i] = ptr[i] }
+        // L2-normalise (euclidean, llama-server's embd_normalize=2 default): the bank vectors are unit
+        // length, so cosine similarity is the dot product. JS normalises defensively too, but top-5
+        // quality needs unit vectors from here, not from the caller.
+        var sum = 0.0
+        for x in v { sum += Double(x) * Double(x) }
+        let norm = sum.squareRoot()
+        guard norm > 1e-12 else { throw LlamaError(.generationFailure, "empty embedding") }
+        for i in 0..<nOut { v[i] /= Float(norm) }
+        return v
+    }
+
+    /// Big cores only, same formula as the chat path's defaultThreads (LlamaPlugin).
+    private static func embedThreads() -> Int32 {
+        Int32(max(2, min(4, ProcessInfo.processInfo.activeProcessorCount / 2)))
+    }
 
     // MARK: - Generation
 

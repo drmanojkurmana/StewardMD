@@ -1,7 +1,7 @@
 // swift-tools-version: 5.9
 import PackageDescription
 
-// StewardmdCapacitorLlama — on-device LLM inference plugin (llama.cpp b10502).
+// StewardmdCapacitorLlama — on-device LLM inference plugin (llama.cpp b11696).
 //
 // The C/C++ inference engine is linked as a PREBUILT XCFramework release asset from llama.cpp
 // (Metal accelerated on-device, CPU fallback). Importable Swift module: `llama`.
@@ -36,16 +36,25 @@ let package = Package(
         .package(url: "https://github.com/ionic-team/capacitor-swift-pm.git", from: "8.0.0")
     ],
     targets: [
-        // 2026-09-19 (owner): moved from mainline b10502 to PrismML's fork, release
-        // prism-b10685-7dffb15 (mainline b10685 base + the ternary PTQ1_0/PQ2_0 types and the Hadamard
-        // activation runtime that Ternary Bonsai 2 needs; every earlier pack is a plain GGUF and loads
-        // unchanged). Same zip layout as mainline (build-apple/llama.xcframework/) with ios-arm64,
-        // macos, PLUS ios simulator, tvOS and visionOS slices. 322,127,363 bytes; checksum is the
-        // SHA-256 of the release zip. Android vendors the SAME fork tag as its submodule.
+        // 2026-10-16 (embed-native): mainline b11696 (commit ceefd16daa2093730bf3340315fa2b84b286ddbc),
+        // the newest release whose published asset includes an xcframework (b11699 has none yet).
+        // WHY UPSTREAM: the 210 MB EmbeddingGemma 2 search pack needs architecture "gemma-embedding2",
+        // supported since 4fbc76d (2026-10-06, +244 commits below b11696, verified ancestor); no
+        // PrismML fork build (newest prism-b10777) knows it. Same zip layout as before
+        // (build-apple/llama.xcframework/), 66,813,675 bytes; checksum is `swift package
+        // compute-checksum` of the release zip (== SHA-256). Slices are ios-arm64 + macos, minos 16.4
+        // (verified with vtool: matches the app's IPHONEOS_DEPLOYMENT_TARGET, no change needed).
+        // There is NO SIMULATOR slice (same limitation as the old mainline b10502 zip): test embed()
+        // and chat on a real device. Android vendors the SAME commit as its submodule.
+        //
+        // REGRESSION, owner call before device build: upstream has no PTQ1_0/PQ2_0 tensor types, so the
+        // Labs pack bonsai2-27b ("Stock llama.cpp will not run these files") no longer loads. Every
+        // other pack is a plain GGUF and is unaffected. Revert path: repin this target + the Android
+        // submodule to the fork and drop LlamaPlugin.embed.
         .binaryTarget(
             name: "LlamaFramework",
-            url: "https://github.com/PrismML-Eng/llama.cpp/releases/download/prism-b10685-7dffb15/llama-prism-b10685-7dffb15-xcframework.zip",
-            checksum: "c9c83d407299ebeb2c0c349cedd932e927f8d00340e9903f4d8d1d63829e652c"
+            url: "https://github.com/ggml-org/llama.cpp/releases/download/b11696/llama-b11696-xcframework.zip",
+            checksum: "556dfee9c19b62a6db6fb625d0f20d09ccca030ee3f75cf39ac09d0f25e5fe3d"
         ),
         .target(
             name: "LlamaPlugin",
