@@ -1,0 +1,21 @@
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
