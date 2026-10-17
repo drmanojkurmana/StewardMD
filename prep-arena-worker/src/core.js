@@ -6,12 +6,14 @@
  * due. Time comes only from `now`, so tests control the clock.
  */
 import { elo } from "../../functions/_prep-arena.js";
+import { mulberry32, seedFrom } from "../../functions/_prep-core.js";
 
 export const N_ROUNDS = 7, ROUND_SECS = 20;
 export const LEAD_MS = 3000;          // match screen before the first question
 export const GAP_MS = 2500;           // round result before the next question
 export const GRACE_MS = 10e3;         // disconnect grace, then forfeit
 export const WIDEN_MS = 15e3, NOBODY_MS = 30e3, NEAR = 200;
+export const BOT_MIN_MS = 9e3, BOT_SPAN_MS = 6e3;   // a lone player waits 9 to 15 s for a real opponent, then gets a practice opponent
 export const ROOM_WAIT_MS = 180e3;   // a challenged friend gets 3 minutes to turn up
 export const ROOM_RE = /^[A-HJ-NP-Z2-9]{16}$/;   // functions/_prep-social.js randomCode(16)
 const roomOf = (w) => w.room || null;
@@ -46,8 +48,8 @@ export function allowQueue(log, uidh, now, limit = QUEUE_PER_MIN) {
  * points while both have waited under 15 s, anyone after that. Returns { pairs: [[a, b]], nobody: [uidh] } and removes
  * them; nobody = waited 30 s with no opponent (no bots). A room (a friend challenge) pairs only with the same room, at
  * once and at any rating, and waits ROOM_WAIT_MS for the friend; a room-less waiter never pairs into a room. */
-export function matchQueue(waiting, now) {
-  const pairs = [], nobody = [];
+export function matchQueue(waiting, now, opts = {}) {
+  const pairs = [], nobody = [], bots = [];
   for (let i = 0; i < waiting.length; i++) {
     const a = waiting[i];
     let best = -1, bestD = Infinity;
@@ -60,23 +62,65 @@ export function matchQueue(waiting, now) {
     }
     if (best >= 0) { pairs.push([a, waiting[best]]); waiting.splice(best, 1); waiting.splice(i, 1); i--; }
   }
+  // Real players always pair first (above). A public waiter nobody real has joined by its botAt gets a practice
+  // opponent (opts.bots); a friend challenge (room) never does, it waits for the friend.
+  if (opts.bots) for (let i = waiting.length - 1; i >= 0; i--) if (!roomOf(waiting[i]) && now >= (waiting[i].botAt || waiting[i].at + BOT_MIN_MS)) bots.unshift(waiting.splice(i, 1)[0]);
   for (let i = waiting.length - 1; i >= 0; i--) if (now - waiting[i].at >= (roomOf(waiting[i]) ? ROOM_WAIT_MS : NOBODY_MS)) nobody.unshift(waiting.splice(i, 1)[0].uidh);
-  return { pairs, nobody };
+  return opts.bots ? { pairs, nobody, bots } : { pairs, nobody };   // the old shape unless practice opponents are on
 }
 // Next moment the queue needs a look (a widen or a timeout), or null when empty.
-export function queueWakeAt(waiting, now) {
+export function queueWakeAt(waiting, now, opts = {}) {
   let t = null;
-  for (const w of waiting) for (const x of roomOf(w) ? [w.at + ROOM_WAIT_MS] : [w.at + WIDEN_MS, w.at + NOBODY_MS]) if (x > now && (t === null || x < t)) t = x;
+  for (const w of waiting) for (const x of roomOf(w) ? [w.at + ROOM_WAIT_MS] : [w.at + WIDEN_MS, w.at + NOBODY_MS].concat(opts.bots ? [w.botAt || w.at + BOT_MIN_MS] : [])) if (x > now && (t === null || x < t)) t = x;
   return t;
+}
+
+/* ---------- practice opponent ----------
+ * A player who finds nobody real is matched with a practice opponent that looks like any other doctor: a plausible
+ * name and a rating near theirs. Its outcome alternates by design (the first battle the player wins, the second the
+ * opponent wins, then they alternate) and it answers like a person: after a few seconds, sometimes wrong. The battle
+ * state machine below treats it as an ordinary second player; only botPlan() below knows better. */
+const FIRST = ["Aarav", "Ananya", "Rohit", "Kavya", "Vikram", "Priya", "Arjun", "Sneha", "Karthik", "Meera", "Rahul", "Divya", "Nikhil", "Isha", "Siddharth", "Neha", "Aditya", "Pooja", "Harsh", "Riya", "Varun", "Shruti", "Manish", "Tanvi", "Abhishek", "Lakshmi", "Gaurav", "Swathi", "Deepak", "Nandini", "Sanjay", "Aparna", "Mohan", "Fatima", "Imran", "Gurpreet", "Joseph", "Anjali", "Suresh", "Bhavna"];
+const LAST = ["Sharma", "Reddy", "Nair", "Iyer", "Patel", "Menon", "Gupta", "Rao", "Kulkarni", "Singh", "Das", "Pillai", "Joshi", "Mehta", "Banerjee", "Chatterjee", "Verma", "Naidu", "Kapoor", "Bhat", "Shetty", "Agarwal", "Thomas", "Khan", "Desai", "Hegde", "Mishra", "Yadav", "Jain", "Krishnan"];
+export function botFor(seed, userRating) {
+  const r = mulberry32(seedFrom("bot:" + seed));
+  const name = FIRST[Math.floor(r() * FIRST.length)] + " " + LAST[Math.floor(r() * LAST.length)];
+  const rating = Math.max(800, Math.round((Number(userRating) || 1200) + (r() * 120 - 60)));
+  return { uidh: "bot:" + seedFrom("u" + seed).toString(16), name, rating, bot: true };
+}
+/* Which way a practice battle should go: n = this player's earlier practice battles. 0: the player wins, 1: the
+ * opponent wins, then alternating. */
+export const botWinsFor = (n) => n % 2 === 1;
+/* The bot's answer to the question just sent: { k, at }. It reads the score so far: when it must win it answers right
+ * and fast unless comfortably ahead (then now and then it slips); when it must lose it answers right only while it is
+ * well behind, and wrong when answering right could lift it level. Always inside the round, after a human-looking
+ * pause. */
+export function botPlan(s, now) {
+  const r = mulberry32(seedFrom(s.id + ":" + s.i));
+  const it = s.items[s.i], remaining = s.n - s.i, b = s.score[1], u = s.score[0], lead = b - u;
+  const wrong = () => { let k = Math.floor(r() * 3); if (k >= it.a) k++; return k; };
+  const secs = s.secs * 1000;
+  let correct, delay;
+  if (s.bot.wins) {
+    correct = lead > 20 + 4 * remaining ? r() > 0.3 : true;
+    delay = 3000 + r() * 5500;
+  } else {
+    const last = remaining === 1;
+    correct = !last && b + 14 <= u * 0.85 + 6 && r() > 0.12;
+    delay = 6000 + r() * 8000;
+  }
+  delay = Math.min(delay, secs - 2500);
+  return { k: correct ? it.a : wrong(), at: now + Math.round(delay) };
 }
 
 /* ---------- battle ---------- */
 /* players: [{uidh, name, rating}, {..}]; items: [{id, q, o, a}] (N_ROUNDS of them). */
-export function newBattle({ id, exam, players, items, now }) {
+export function newBattle({ id, exam, players, items, now, bot }) {
   return {
     id, exam, n: Math.min(N_ROUNDS, items.length), secs: ROUND_SECS,
     items: items.slice(0, N_ROUNDS).map((it) => ({ id: it.id, q: it.q, o: it.o, a: it.a })),
-    p: players.map((x) => ({ uidh: x.uidh, name: x.name, rating: x.rating, gone: null })),
+    p: players.map((x) => ({ uidh: x.uidh, name: x.name, rating: x.rating, gone: null, ...(x.bot ? { bot: true } : {}) })),
+    ...(bot ? { bot: { side: 1, wins: !!bot.wins, plan: null } } : {}),
     phase: "new", i: -1, at: now, deadline: 0, next: 0,
     ans: [[], []], pts: [[], []], score: [0, 0], result: null,
   };
@@ -91,6 +135,7 @@ function sendQ(s, now, out) {
   s.i++; s.phase = "q"; s.deadline = now + s.secs * 1000;
   const it = s.items[s.i];
   for (const to of [0, 1]) out.push({ to, msg: { t: "q", i: s.i, q: it.q, o: it.o, deadline: s.deadline } });
+  if (s.bot) s.bot.plan = botPlan(s, now);
 }
 function closeRound(s, now, out) {
   const it = s.items[s.i];
@@ -152,6 +197,10 @@ export function battleEvent(s, ev, now) {
     // disconnect grace first: a player gone for 10 s forfeits (both gone: a draw)
     const g0 = s.p[0].gone !== null && now - s.p[0].gone >= GRACE_MS, g1 = s.p[1].gone !== null && now - s.p[1].gone >= GRACE_MS;
     if (g0 || g1) { finish(s, now, g0 && g1 ? "both" : g0 ? 0 : 1, out); return out; }
+    if (s.bot && s.phase === "q" && s.bot.plan && !s.ans[s.bot.side][s.i] && now >= s.bot.plan.at && now <= s.deadline) {
+      s.ans[s.bot.side][s.i] = { k: s.bot.plan.k, at: now };
+      if (s.ans[0][s.i] && s.ans[1][s.i]) { closeRound(s, now, out); return out; }
+    }
     if ((s.phase === "lead" || s.phase === "gap") && now >= s.next) sendQ(s, now, out);
     else if (s.phase === "q" && now > s.deadline) closeRound(s, now, out);
   }
@@ -161,6 +210,7 @@ export function battleEvent(s, ev, now) {
 export function wakeAt(s) {
   if (s.phase === "end" || s.phase === "new") return null;
   const ts = [s.phase === "q" ? s.deadline + 1 : s.next];
+  if (s.bot && s.phase === "q" && s.bot.plan && !s.ans[s.bot.side][s.i]) ts.push(s.bot.plan.at);
   for (const x of s.p) if (x.gone !== null) ts.push(x.gone + GRACE_MS);
   return Math.min(...ts);
 }
