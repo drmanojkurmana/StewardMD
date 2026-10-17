@@ -2137,3 +2137,4 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-neck-s2.webp (R2) | Thyroglossal duct cyst tract and en bloc resection in the Sistrunk procedure. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-salivary-s1.webp (R2) | Salivary glands, pleomorphic adenoma pseudopodia, and the clinical rule of eighty. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-testis-s3.webp (R2) | Radical inguinal orchiectomy with high cord clamping at the internal inguinal ring. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ans-monitoring-s4.webp (R2) | Ulnar nerve stimulation of adductor pollicis and train-of-four twitch height graph. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
