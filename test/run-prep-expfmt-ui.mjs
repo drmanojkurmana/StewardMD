@@ -99,9 +99,7 @@ try {
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-fb .pn-why > li").length === 3;`) === true, "why-the-others-wrong lists 3 bullets");
   ok(await ev(`var k=document.querySelector("#smdPrep .pn-fb .pn-kp"); return !!k && k.textContent.indexOf("Mid-artery beads")>=0;`) === true, "Remember callout shows the key point");
   ok(await ev(`var c=document.querySelector("#smdPrep .pn-fb .pn-xchip"); return !!c && c.textContent.indexOf("Harrison")>=0;`) === true, "reference chip shows the book line");
-  await click("#smdPrep .pn-fb [data-act=why-opt]");
-  ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-why-card");`, 8000), "Why chip opens its reason panel");
-  ok(await ev(`var p=document.querySelector("#smdPrep .pn-fb .pn-why-body"); return !!p && !!p.querySelector("strong") && p.textContent.indexOf("Atheroma")>=0;`) === true, "Why panel formats the reason with emphasis");
+  ok(await ev(`return !document.querySelector("#smdPrep .pn-fb .pn-why-chip") && !document.querySelector("#smdPrep .pn-fb [data-act=why-opt]");`) === true, "no Why chips under the answer (removed 2026-10-17)");
   ok(await ev(`return !!document.querySelector('#smdPrep .pn-fb .pn-exp strong') && document.querySelector("#smdPrep .pn-fb .pn-exp").tagName === "DIV";`) === true, "explanation uses strong semantics in its block");
   // The explanation sits below the fold: bring the key line to the middle before shooting.
   await ev(`var k=document.querySelector("#smdPrep .pn-fb .pn-xkey"); if(k) k.scrollIntoView({block:"center"}); return 1;`);
