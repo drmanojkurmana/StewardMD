@@ -65,3 +65,8 @@ test("registry: ambiguous drug names need their context, common words never matc
     assert.equal(ms.length, 0, w);
   }
 });
+
+test("build-www ships the registry beside the figure pages (native app has no other way to read it)", () => {
+  const sh = readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
+  assert.match(sh, /cp prep\/figures\/\*\.html prep\/figures\/figures\.json /);
+});
