@@ -42,7 +42,7 @@
     ".bio-sources{margin:12px 0 0}.bio-sources summary{font:600 14px system-ui,sans-serif;color:var(--anatomy-text);min-height:44px;display:flex;align-items:center;cursor:pointer}.bio-sources h2{display:none}.hot{cursor:pointer}";
 
   /* colour layer: membranes blue, start/step/result/damage each their own hue, so the parts can be told apart at a glance */
-  var COLOR_CSS = "body{--k-mem:#4c8dff;--k-src:#2fd4a0;--k-mid:#4fb3ff;--k-out:#ffb43a;--k-bad:#ff6b7a;--k-enz:#a78bfa;--k-rec:#34d399;--k-gp:#8b7bff;--k-vs:#ffb86b}" +
+  var COLOR_CSS = "body.iso{--anatomy-mono:-apple-system,BlinkMacSystemFont,\"SF Pro Text\",\"Segoe UI\",Roboto,system-ui,sans-serif;--k-mem:#4c8dff;--k-src:#2fd4a0;--k-mid:#4fb3ff;--k-out:#ffb43a;--k-bad:#ff6b7a;--k-enz:#a78bfa;--k-rec:#34d399;--k-gp:#8b7bff;--k-vs:#ffb86b}" +
     "body[data-theme='light']{--k-mem:#2563eb;--k-src:#0f9f76;--k-mid:#0a7fd1;--k-out:#d98300;--k-bad:#dc3545;--k-enz:#6d4fd6;--k-rec:#16a05f;--k-gp:#5b46d6;--k-vs:#d9772b}" +
     ".dr-n-source .bio-blob-base{fill:color-mix(in srgb,var(--k-src) 42%,var(--anatomy-shade-2))}.dr-n-source .bio-blob-edge{stroke:var(--k-src)}" +
     ".dr-n-mid .bio-blob-base{fill:color-mix(in srgb,var(--k-mid) 38%,var(--anatomy-shade-2))}.dr-n-mid .bio-blob-edge{stroke:var(--k-mid)}" +
@@ -71,6 +71,69 @@
     d.innerHTML = items.map(function (it) { return '<span style="color:var(' + it[1] + ')"><i></i><b style="font-weight:500;color:var(--anatomy-text)">' + it[0] + "</b></span>"; }).join("");
     host.appendChild(d);
   }
+
+  var CMP_CSS = ".smdc{margin:0 0 10px;border-radius:14px;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-faint);overflow:hidden}" +
+    ".smdc-t{display:flex;padding:4px;gap:4px}.smdc-t button{flex:1;min-height:44px;border:0;border-radius:10px;background:transparent;color:var(--anatomy-text);font:600 15px system-ui,-apple-system,sans-serif}" +
+    ".smdc-t button[aria-pressed='true']{background:var(--anatomy-top);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint),0 2px 6px rgba(0,0,0,.18)}" +
+    ".smdc-r{display:flex;gap:10px;align-items:baseline;padding:9px 14px;border-top:1px solid var(--anatomy-faint);font:15px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
+    ".smdc-r b{flex:none;min-width:92px;font:600 12px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--anatomy-muted)}.smdc-r span{color:var(--anatomy-strong);font-weight:600}.smdc-r.on{background:color-mix(in srgb,var(--k-mid) 10%,transparent)}" +
+    "[data-readout]{display:none!important}";
+  /* with and without the drug: a two-way switch, and both readouts side by side */
+  function compare(doc) {
+    var sel = doc.getElementById("drug"), ro = doc.querySelector("[data-readout]"), lv = doc.getElementById("level"), host = doc.querySelector(".iso-plate-corners");
+    if (!sel || !ro || !host || sel.options.length < 2) return;
+    var st = doc.createElement("style"); st.textContent = CMP_CSS; doc.body.appendChild(st);
+    var box = doc.createElement("div"); box.className = "smdc";
+    box.innerHTML = '<div class="smdc-t" role="group" aria-label="Show without or with the drug"><button type="button" data-w="0">Without drug</button><button type="button" data-w="1">With drug</button></div>' +
+      '<div class="smdc-r" data-r="0"><b>Without</b><span></span></div><div class="smdc-r" data-r="1"><b>With</b><span></span></div>';
+    host.parentNode.insertBefore(box, host);
+    var last = sel.value !== "0" ? sel.value : "1", busy = false, ts = box.querySelectorAll(".smdc-t button"), rows = box.querySelectorAll(".smdc-r");
+    function fire() { sel.dispatchEvent(new doc.defaultView.Event("change", { bubbles: true })); }
+    function read(v) { var cur = sel.value; busy = true; sel.value = v; fire(); var t = ro.textContent; sel.value = cur; fire(); busy = false; return t; }
+    function paint() {
+      var on = sel.value !== "0"; if (on) last = sel.value;
+      ts[0].setAttribute("aria-pressed", on ? "false" : "true"); ts[1].setAttribute("aria-pressed", on ? "true" : "false");
+      var w = read("0"), d = on ? ro.textContent : read(last), dn = sel.options[+last] ? sel.options[+last].text : "drug";
+      rows[0].querySelector("span").textContent = w; rows[1].querySelector("span").textContent = d; rows[1].querySelector("b").textContent = "With";
+      rows[0].className = "smdc-r" + (on ? "" : " on"); rows[1].className = "smdc-r" + (on ? " on" : "");
+      rows[1].title = dn;
+    }
+    ts[0].addEventListener("click", function () { if (sel.value !== "0") last = sel.value; sel.value = "0"; fire(); });
+    ts[1].addEventListener("click", function () { sel.value = last || "1"; fire(); });
+    sel.addEventListener("change", function () { if (!busy) setTimeout(paint, 0); });
+    if (lv) { lv.addEventListener("input", function () { if (!busy) setTimeout(paint, 0); }); lv.addEventListener("change", function () { if (!busy) setTimeout(paint, 0); }); }
+    paint();
+  }
+  /* "heart rate and force \u2191" reads as "\u2665 Heart rate and force increased (\u2191)": a heart for heart text, the arrow in brackets.
+     Output lines (.dr-out) follow the drawing: when the drug leaves them dim, the text says it was not raised or lowered. */
+  function arrows(doc) {
+    var svg = doc.querySelector("svg.dr-fig, svg.iso-svg"); if (!svg) return;
+    var busy = false;
+    function xform(x, strong) {
+      var up = x.indexOf("\u2191") > -1, core = x.replace(/\s*[\u2191\u2193]\s*/g, " ").trim(), a = up ? "\u2191" : "\u2193";
+      if (/^heart rate/i.test(core)) {
+        var c2 = core.charAt(0).toUpperCase() + core.slice(1);
+        return "\u2665 " + c2 + (strong ? (up ? " increased (\u2191)" : " decreased (\u2193)") : (up ? " not increased" : " not decreased"));
+      }
+      var pre = /heart/i.test(core) ? "\u2665 " : "";
+      return pre + core + (strong ? " (" + a + ")" : (up ? " (not raised)" : " (not lowered)"));
+    }
+    function fix() {
+      if (busy) return; busy = true;
+      Array.prototype.forEach.call(svg.querySelectorAll("text"), function (t) {
+        if (t.children.length) return;
+        var o = t.getAttribute("data-o"), x = o || t.textContent;
+        if (!/[\u2191\u2193]/.test(x)) return;
+        if (!o) { if (/\([\u2191\u2193]\)/.test(x)) return; t.setAttribute("data-o", x); }
+        var out = /\bdr-out\b/.test(t.getAttribute("class") || ""), op = out ? parseFloat(t.style.opacity || "1") : 1;
+        var y = xform(x, !out || op >= 0.55);
+        if (y !== t.textContent) t.textContent = y;
+      });
+      busy = false;
+    }
+    fix();
+    try { new doc.defaultView.MutationObserver(fix).observe(svg, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["style"] }); } catch (e) {}
+  }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
     var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS; doc.body.appendChild(st);
@@ -83,7 +146,7 @@
     }
     /* a tap on a labelled part shows its explanation (touch has no hover) */
     Array.prototype.forEach.call(doc.querySelectorAll(".hot"), function (h) { h.addEventListener("touchend", function () { try { h.focus(); } catch (e) {} }, { passive: true }); });
-    legend(doc); zoomer(doc, win);
+    legend(doc); arrows(doc); compare(doc); zoomer(doc, win);
   }
   function zoomer(doc, win) {
     var box = doc.querySelector(".dr-svg") || doc.querySelector(".iso-plate"), svg = box && box.querySelector("svg");
