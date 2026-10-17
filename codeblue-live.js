@@ -1,10 +1,12 @@
-/* codeblue-live.js: phone live code screen (StewardMD Code Blue).
+/* codeblue-live.js: live code screen (StewardMD Code Blue, phone and iPad).
  * Vanilla JS, no framework, fully offline. State in localStorage key smd.cbl.v1 (try/catch).
  * Exposes window.CodeBlueLive = { open(opts), close(), isOpen(), _engine }.
  * Pure domain logic first (DOM-free, unit tested in node); the overlay UI sits
  * below. Calls window.CodeBlueSheet.open(payload) on End when present, never
  * in training. Audio lives in codeblue-audio.js (window.CodeBlueAudio).
- * No drug doses anywhere. British spelling. Plain punctuation throughout.
+ * Adult reference dose labels live on the adult drug buttons only (v3 owner
+ * override, docs/codeblue/DESIGN.md); paediatric and neonatal show no doses
+ * and nothing is ever calculated. British spelling. Plain punctuation throughout.
  */
 (function (root, factory) {
   if (typeof module !== "undefined" && module.exports) module.exports = factory();
@@ -93,13 +95,32 @@
 
   /* ---------------- session and events (pure) ---------------- */
 
+  /* Adult reference dose text (v3 owner override). Fixed strings from the
+   * AHA adult algorithm, shown on the adult drug buttons only. Paediatric
+   * and neonatal return null: no doses shown, nothing calculated. The owner
+   * reviews this text. Kept out of allCopySamples so the no-dose scan over
+   * the shared engine copy stays green; doseRefFor is the only source. */
+  var DOSE_REF_ADULT = {
+    epi: "1 mg IV/IO every 3 to 5 min",
+    amio: "300 mg then 150 mg",
+    lido: "1 to 1.5 mg/kg then 0.5 to 0.75 mg/kg"
+  };
+
+  function doseRefFor(mode) {
+    if (normMode(mode) !== "adult") return null;
+    return { epi: DOSE_REF_ADULT.epi, amio: DOSE_REF_ADULT.amio, lido: DOSE_REF_ADULT.lido };
+  }
+
+  var VENT_RATIO = { adult: "30:2", paediatric: "15:2", neonatal: "3:1" };
+
   function newSession(mode, opts) {
     opts = opts || {};
     var wall = (opts.wallNow != null) ? opts.wallNow : Date.now();
     return {
       v: 1, mode: normMode(mode), training: opts.training === true,
       events: [], rosc: false, hadRosc: false, checks: {},
-      cycleStart: 0, seq: 0, undo: [], createdWall: wall
+      cycleStart: 0, seq: 0, undo: [], createdWall: wall,
+      link: null, ventCue: true
     };
   }
 
@@ -177,6 +198,73 @@
 
   function isEpiDrug(ev) {
     return ev.kind === "drug" && !/amiodarone|lidocaine|lignocaine|atropine|adenosine|vasopressin|calcium|bicarb|magnesium|sodium|fluid|oxygen/i.test(ev.label || "");
+  }
+
+  function isAmioDrug(ev) {
+    return ev.kind === "drug" && /amiodarone/i.test(ev.label || "");
+  }
+
+  function isLidoDrug(ev) {
+    return ev.kind === "drug" && /lidocaine|lignocaine/i.test(ev.label || "");
+  }
+
+  /* Per-drug counters for the EPI AMIO LIDO SHOCK chips. Recomputed from
+   * the event list like computeCounts. computeCounts itself is unchanged. */
+  function drugCounts(events) {
+    var epi = 0, amio = 0, lido = 0, shocks = 0;
+    (events || []).forEach(function (ev) {
+      if (ev.kind === "shock") shocks++;
+      else if (isAmioDrug(ev)) amio++;
+      else if (isLidoDrug(ev)) lido++;
+      else if (isEpiDrug(ev)) epi++;
+    });
+    return { epi: epi, amio: amio, lido: lido, shocks: shocks };
+  }
+
+  function lastDrugBy(sess, pred) { return lastBy(sess, pred); }
+
+  function hasAirway(sess) {
+    return sess.events.some(function (e) {
+      return e.kind === "procedure" && /advanced airway/i.test(e.label || "");
+    });
+  }
+
+  /* Ventilation state for the vent panel and the VENT strip cell. With an
+   * advanced airway: continuous compressions, 1 breath every 6 s (a 6 s
+   * repeating countdown). Otherwise the mode ratio (30:2, 15:2, 3:1). */
+  function ventInfo(sess, elapsed) {
+    var airway = hasAirway(sess);
+    if (airway) {
+      var into = Math.max(0, Math.floor(elapsed || 0)) % 6;
+      return { airway: true, label: "1 breath every 6 s", remaining: 6 - into, ratio: VENT_RATIO[normMode(sess.mode)] };
+    }
+    return { airway: false, label: VENT_RATIO[normMode(sess.mode)], remaining: null, ratio: VENT_RATIO[normMode(sess.mode)] };
+  }
+
+  /* Everything the persistent status strip shows, in one pure call. */
+  function stripInfo(sess, elapsed, opts) {
+    opts = opts || {};
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
+    var epi = epiStatus(sess, elapsed);
+    var dc = drugCounts(sess.events);
+    var vent = ventInfo(sess, elapsed);
+    var rhythmText, rhythmState;
+    if (sess.rosc) { rhythmText = "ROSC"; rhythmState = "rosc"; }
+    else if (opts.paused) { rhythmText = "Paused"; rhythmState = "paused"; }
+    else if (cyc.due) { rhythmText = "Check due"; rhythmState = "due"; }
+    else { rhythmText = "in " + fmtShort(Math.max(0, cyc.remaining)); rhythmState = "run"; }
+    var epiText, epiState;
+    if (epi.state === "none") { epiText = "Not logged"; epiState = "run"; }
+    else if (epi.state === "overdue") { epiText = "Overdue"; epiState = "overdue"; }
+    else if (epi.state === "due") { epiText = "Due"; epiState = "due"; }
+    else { epiText = "in " + fmtShort(epi.remaining); epiState = "run"; }
+    return {
+      code: fmtMMSS(elapsed),
+      rhythm: { text: rhythmText, state: rhythmState },
+      epi: { text: epiText, state: epiState },
+      shocks: dc.shocks,
+      vent: vent.airway ? { text: "Breath " + vent.remaining + " s", state: "run" } : { text: vent.label, state: "run" }
+    };
   }
 
   /* Counts are always recomputed from the event list, after any edit. */
@@ -478,6 +566,7 @@
       adrenalineCount: counts.epi, shockCount: counts.shocks,
       rosc: sess.rosc, hadRosc: sess.hadRosc, checklistTicks: sess.checks,
       cycleStart: sess.cycleStart, seq: sess.seq,
+      link: sess.link || null, ventCue: sess.ventCue !== false,
       savedAtWallClock: (wallNow != null) ? wallNow : Date.now()
     };
   }
@@ -523,6 +612,8 @@
     sess.rosc = snap.rosc === true;
     sess.hadRosc = snap.hadRosc === true || sess.rosc;
     sess.checks = (snap.checklistTicks && typeof snap.checklistTicks === "object") ? snap.checklistTicks : {};
+    sess.link = (snap.link && typeof snap.link === "object") ? snap.link : null;
+    sess.ventCue = snap.ventCue !== false;
     sess.cycleStart = Math.max(0, Math.floor(snap.cycleStart || 0));
     sess.seq = snap.seq || sess.events.length;
     sess.undo = [];
@@ -558,7 +649,10 @@
     };
   }
 
-  /* Every user-visible string the engine can emit, for the no-dose scan. */
+  /* Every shared user-visible string the engine can emit, for the no-dose
+   * scan. Adult reference dose labels are intentionally NOT listed here:
+   * they ship only via doseRefFor (adult drug buttons) under the v3 owner
+   * override, and the scan above keeps covering everything else. */
   function allCopySamples() {
     var out = [DISCLAIMER, MOTION_NOTE];
     PROCEDURES.forEach(function (p) { out.push(p); });
@@ -593,9 +687,13 @@
     TRAINING_SPEED: TRAINING_SPEED, DISCLAIMER: DISCLAIMER, MOTION_NOTE: MOTION_NOTE,
     MODES: MODES, MODE_LABEL: MODE_LABEL, MODE_CONFIG: MODE_CONFIG,
     PROCEDURES: PROCEDURES, RHYTHMS: RHYTHMS,
+    VENT_RATIO: VENT_RATIO, DOSE_REF_ADULT: DOSE_REF_ADULT,
     normMode: normMode, fmtMMSS: fmtMMSS, fmtShort: fmtShort, fmtAgo: fmtAgo,
+    doseRefFor: doseRefFor,
     newSession: newSession, logEvent: logEvent, editEvent: editEvent,
     deleteEvent: deleteEvent, undoDelete: undoDelete, computeCounts: computeCounts,
+    drugCounts: drugCounts, lastDrugBy: lastDrugBy,
+    hasAirway: hasAirway, ventInfo: ventInfo, stripInfo: stripInfo,
     lastEpi: lastEpi, lastShock: lastShock, lastRhythm: lastRhythm,
     epiStatus: epiStatus, cycleInfo: cycleInfo, shockAdvised: shockAdvised,
     dueStrip: dueStrip, guideFor: guideFor,
@@ -616,6 +714,9 @@
   var toastTimer = null, lastFocus = null, sheetFocus = null;
   var fired = {};
   var storeError = false;
+  /* v3 run UI state: active tab, phone timeline drawer, pending patient
+   * link chosen on idle, and the last patient-record export outcome. */
+  var rtab = "timer", timelineOpen = false, pendingLink = null, exportState = null;
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
   function Audio() {
@@ -639,6 +740,99 @@
       if (typeof localStorage !== "undefined") return localStorage;
     } catch (e) {}
     return memStorage();
+  }
+
+  /* The existing shared patient machinery (icu.js ward picker plus
+   * icu-collab.js groups API). Reused, never reinvented. */
+  function groupsApi() {
+    try { return (typeof window !== "undefined" && window.SMD_ICU_GROUPS) || null; }
+    catch (e) { return null; }
+  }
+
+  function readOpenPatient() {
+    try {
+      var api = groupsApi();
+      if (api && api.currentOpenPatient) {
+        var pt = api.currentOpenPatient();
+        if (pt && pt.gid && pt.pid) return { gid: pt.gid, pid: pt.pid };
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  function openWardPicker() {
+    try {
+      if (typeof window !== "undefined" && typeof window.openGHIS === "function") {
+        window.openGHIS();
+        return true;
+      }
+      if (typeof window !== "undefined" && window.SMD_setGhis) {
+        window.SMD_setGhis(true);
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  /* One Code Blue on phone and watch: starting or ending a code here tells
+   * the paired watch through the existing WatchBridge sendMessage path
+   * (native-watch.js clinix pattern). Silent no-op on web or without it. */
+  function notifyWatch(running) {
+    try {
+      if (typeof window === "undefined") return false;
+      var C = window.Capacitor;
+      var p = (C && C.Plugins && C.Plugins.WatchBridge) || null;
+      if (p && p.sendMessage && sess) {
+        p.sendMessage({
+          type: "codeblue_active", running: running === true,
+          mode: sess.mode, training: sess.training === true,
+          elapsed: Math.max(0, Math.floor(nowElapsed()))
+        });
+      }
+    } catch (e) {}
+    try {
+      if (typeof window !== "undefined" && window.dispatchEvent && sess) {
+        window.dispatchEvent(new CustomEvent("codeblue:active", {
+          detail: { running: running === true, mode: sess.mode, training: sess.training === true }
+        }));
+      }
+    } catch (e2) {}
+    return true;
+  }
+
+  /* LIVE End with a linked patient: open the code sheet and write the code
+   * sheet to the patient timeline exactly the way native-watch.js handles
+   * the watch codeBlueExport (type codeblue, title Code Blue summary).
+   * Practice, unlinked and sheet-less runs return ok false with a reason. */
+  function exportToPatient() {
+    if (!sess || sess.training) return { ok: false, reason: "training" };
+    if (!sess.link || !sess.link.gid || !sess.link.pid) return { ok: false, reason: "unlinked" };
+    var payload = buildPayload(sess, {
+      elapsed: Math.max(0, Math.floor(elapsedOffset)),
+      startedAtISO: new Date(sess.createdWall).toISOString()
+    });
+    var opened = false, written = false;
+    try {
+      if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.open) {
+        window.CodeBlueSheet.open(payload);
+        opened = true;
+      }
+    } catch (e) {}
+    try {
+      var api = groupsApi();
+      var detail = "";
+      try {
+        if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.renderText) {
+          detail = window.CodeBlueSheet.renderText(window.CodeBlueSheet.parsePayload(payload));
+        }
+      } catch (e2) {}
+      if (api && api.addTimelineEvent) {
+        api.addTimelineEvent(sess.link.gid, sess.link.pid,
+          { type: "codeblue", title: "Code Blue summary", detail: detail });
+        written = true;
+      }
+    } catch (e3) {}
+    return { ok: opened || written, opened: opened, written: written, reason: (opened || written) ? null : "unavailable" };
   }
 
   function nowElapsed() {
@@ -770,23 +964,147 @@
       '<button type="button" class="cbl-practice' + (idleTraining ? " on" : "") +
       '" data-act="idle-training" aria-pressed="' + idleTraining + '">' +
       "<b>Practice run</b><span>Sped up clock, badged TRAINING. Nothing writes to a patient record.</span></button>" +
+      linkRowView("idle") +
       '<button type="button" class="cbl-btn cbl-primary cbl-start" data-act="start">Start</button>' +
       audioNotice() +
       "</div></div>";
   }
 
+  /* CPR ring card: the elapsed clock plus a circular cycle ring with the
+   * metronome beat and the vent panel beside it. Keeps the cbl-clock and
+   * cbl-elapsed hooks (tests and the repaint path read them). */
   function clockView(elapsed) {
     var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
     var frac = Math.max(0, Math.min(1, cyc.remaining / cyc.interval));
     var cls = paused ? "paused" : "running";
-    return '<div class="cbl-clock ' + cls + '" data-state="' + (paused ? "paused" : "running") + '">' +
-      '<div class="cbl-elapsed" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
-      '<div class="cbl-cycle">Cycle ' + cyc.cycleNumber + " <span aria-hidden='true'>|</span> " +
+    var epi = epiStatus(sess, elapsed);
+    var ringState = epi.state === "overdue" ? "overdue" : "run";
+    var beat = Math.floor(elapsed * 110 / 60) % 2;
+    var R = 54, C = 2 * Math.PI * R;
+    var arc = C * (1 - frac);
+    var vent = ventInfo(sess, elapsed);
+    var cueOn = sess.ventCue !== false;
+    return '<div class="cbl-ringrow"><div class="cbl-ringcard cbl-clock ' + cls +
+      '" data-state="' + (paused ? "paused" : "running") + '">' +
+      '<svg class="cbl-ring" viewBox="0 0 132 132" role="img" aria-label="CPR cycle ring">' +
+      "<defs><linearGradient id='cblRingBlue' x1='0' y1='0' x2='1' y2='1'>" +
+      "<stop offset='0' stop-color='#3B82F6'/><stop offset='1' stop-color='#1D4ED8'/></linearGradient>" +
+      "<linearGradient id='cblRingRed' x1='0' y1='0' x2='1' y2='1'>" +
+      "<stop offset='0' stop-color='#EF4444'/><stop offset='1' stop-color='#B91C1C'/></linearGradient></defs>" +
+      "<circle class='cbl-track' cx='66' cy='66' r='" + R + "'/>" +
+      "<circle class='cbl-arc' data-s='" + ringState + "' cx='66' cy='66' r='" + R + "' " +
+      "stroke-dasharray='" + C.toFixed(1) + "' stroke-dashoffset='" + arc.toFixed(1) + "' transform='rotate(-90 66 66)'/></svg>" +
+      '<div class="cbl-ringmeta">' +
+      '<div class="cbl-elapsed cbl-ringtime" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
+      '<div class="cbl-ringline"><span class="cbl-beat" data-beat="' + beat + '" aria-hidden="true"></span>' +
+      "110 per min <span aria-hidden='true'>|</span> " +
       (sess.mode === "neonatal" ? "Heart rate check " : "Rhythm check ") +
       (cyc.due ? "due" : "in " + fmtShort(Math.max(0, cyc.remaining))) + "</div>" +
       '<div class="cbl-bar" role="progressbar" aria-label="Time to next rhythm check" aria-valuemin="0" aria-valuemax="' +
       cyc.interval + '" aria-valuenow="' + Math.max(0, Math.round(cyc.remaining)) + '">' +
-      '<span class="cbl-barfill" style="width:' + Math.round(frac * 100) + '%"></span></div></div>';
+      '<span class="cbl-barfill" style="width:' + Math.round(frac * 100) + '%"></span></div></div></div>' +
+      '<div class="cbl-vent" data-state="vent">' +
+      '<span class="cbl-ventk">Vent</span>' +
+      '<span class="cbl-ventv">' + esc(vent.airway ? vent.remaining + " s" : vent.label) + "</span>" +
+      '<span class="cbl-vents">' + esc(vent.airway ? "1 breath every 6 s" : airwayHint()) + "</span>" +
+      '<button type="button" class="cbl-ventcue" data-act="vent-cue" aria-pressed="' + cueOn + '">' +
+      (cueOn ? "Cue on" : "Cue off") + "</button></div></div>";
+  }
+
+  function airwayHint() {
+    if (sess.mode === "neonatal") return "3:1 compressions and breaths";
+    return "Log Advanced airway for 6 s breath cues";
+  }
+
+  /* Persistent status strip: CODE time, RHYTHM countdown, EPINEPHRINE
+   * countdown, SHOCK count, VENT timer. Rendered above every tab. */
+  function stripView(elapsed) {
+    var s = stripInfo(sess, elapsed, { paused: paused });
+    var cell = function (k, v, st) {
+      return '<div class="cbl-cell" data-s="' + st + '"><span class="cbl-cellk">' + k +
+        '</span><span class="cbl-cellv">' + v + "</span></div>";
+    };
+    return '<div class="cbl-strip" data-state="strip" role="status" aria-label="Code status">' +
+      cell("Code", esc(s.code), sess.rosc ? "rosc" : (paused ? "paused" : "run")) +
+      cell("Rhythm", esc(s.rhythm.text), s.rhythm.state) +
+      cell("Epinephrine", esc(s.epi.text), s.epi.state) +
+      cell("Shock", esc(String(s.shocks)), "run") +
+      cell("Vent", esc(s.vent.text), s.vent.state) +
+      "</div>";
+  }
+
+  /* Per-drug counter chips: EPI AMIO LIDO SHOCK. */
+  function countsView() {
+    var dc = drugCounts(sess.events);
+    return '<div class="cbl-counts" data-state="counts" aria-label="Drug and shock counts">' +
+      '<span class="cbl-count">EPI<b>' + dc.epi + "</b></span>" +
+      '<span class="cbl-count">AMIO<b>' + dc.amio + "</b></span>" +
+      '<span class="cbl-count">LIDO<b>' + dc.lido + "</b></span>" +
+      '<span class="cbl-count">SHOCK<b>' + dc.shocks + "</b></span></div>";
+  }
+
+  /* Drug buttons with counters, last-given line and adult dose reference
+   * text. Paediatric and neonatal show no dose line at all. */
+  function drugsView(elapsed) {
+    var dc = drugCounts(sess.events);
+    var dose = doseRefFor(sess.mode);
+    var lastLine = function (pred, n) {
+      var last = lastDrugBy(sess, pred);
+      if (!n) return "Not logged yet";
+      return n + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
+    };
+    var btn = function (act, drug, label, doseText, sub) {
+      return '<button type="button" class="cbl-drug" data-drug="' + drug + '" data-act="' + act + '"' +
+        ' aria-label="' + esc(label) + (doseText ? ", " + esc(doseText) : "") + '">' +
+        '<span class="cbl-druglabel">' + esc(label) + "</span>" +
+        (doseText ? '<span class="cbl-drugdose">' + esc(doseText) + "</span>" : "") +
+        '<span class="cbl-drugsub">' + esc(sub) + "</span></button>";
+    };
+    return '<div class="cbl-drugs" data-state="drugs">' +
+      btn("drug-epi", "epi", "Epinephrine", dose ? dose.epi : null, lastLine(isEpiDrug, dc.epi)) +
+      btn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio)) +
+      btn("drug-lido", "lido", "Lidocaine", dose ? dose.lido : null, lastLine(isLidoDrug, dc.lido)) +
+      "</div>";
+  }
+
+  var TL_WORD = {
+    shock: "SHOCK", drug: "DRUG", rhythm: "RHYTHM", rosc: "ROSC",
+    pauseStart: "PAUSED", resume: "RESUMED", procedure: "TASK",
+    reArrest: "RE-ARREST", note: "NOTE", cprStart: "START", cprEnd: "END",
+    modeSet: "MODE", switchCompressor: "SWITCH"
+  };
+
+  /* Live colour-coded timeline. Word plus border shape carry every state. */
+  function timelineView() {
+    var rows = sess.events.slice().sort(function (a, b) { return b.elapsed - a.elapsed; });
+    var items = rows.map(function (e) {
+      var k = e.kind;
+      var word = TL_WORD[k] || "LOG";
+      return '<li class="cbl-tlitem" data-k="' + esc(k) + '">' +
+        '<span class="cbl-tltime">' + esc(fmtMMSS(e.elapsed)) + "</span>" +
+        '<span class="cbl-tllabel">' + esc(e.label) + "</span>" +
+        '<span class="cbl-tlword">' + esc(word) + "</span></li>";
+    }).join("");
+    if (!rows.length) {
+      items = '<li class="cbl-tlempty" data-state="empty-timeline">No events yet. Logged actions will appear here.</li>';
+    }
+    return '<aside class="cbl-timeline' + (timelineOpen ? " open" : "") + '" data-state="timeline" aria-label="Live timeline">' +
+      '<div class="cbl-tlhead"><span>Timeline</span>' +
+      '<button type="button" class="cbl-mini" data-act="sheet-log">Open log</button></div>' +
+      '<ul class="cbl-tllist">' + items + "</ul></aside>";
+  }
+
+  function linkRowView(ctx) {
+    var link = (ctx === "idle") ? (pendingLink || readOpenPatient()) : sess.link;
+    var state = link
+      ? "<b>Linked to patient record</b><span>On End the code sheet is written to the patient timeline.</span>"
+      : "<b>No patient linked</b><span>Kept on this device only.</span>";
+    return '<div class="cbl-linkrow" data-state="patient-link">' +
+      '<div class="cbl-linkstate">' + state + "</div>" +
+      (link
+        ? '<button type="button" class="cbl-mini" data-act="link-clear">Unlink</button>'
+        : '<button type="button" class="cbl-mini" data-act="link-open">Link patient</button>') +
+      '<button type="button" class="cbl-mini" data-act="link-refresh">Refresh</button></div>';
   }
 
   function dueView(elapsed) {
@@ -877,13 +1195,65 @@
     return html + "</ul></div>";
   }
 
-  function footerView() {
+  /* Bottom tab bar: Timer, Log, Notes, Settings, End. The strip above
+   * stays visible on every tab. */
+  function tabsView() {
+    var tab = function (id, label, icon) {
+      return '<button type="button" class="cbl-tab" role="tab" data-act="tab-' + id + '"' +
+        ' aria-selected="' + (rtab === id) + '">' + icon + "<span>" + label + "</span></button>";
+    };
+    return '<div class="cbl-tabs" role="tablist" aria-label="Code sections" data-state="tabs">' +
+      tab("timer", "Timer", ICONS.rearrest) +
+      tab("log", "Log", ICONS.log) +
+      tab("notes", "Notes", ICONS.note) +
+      tab("settings", "Settings", ICONS.gear) +
+      '<button type="button" class="cbl-tab cbl-tabend" data-act="end">End</button></div>';
+  }
+
+  function timerTabView(elapsed) {
     var showChecks = sess.rosc || sess.hadRosc;
-    return '<div class="cbl-foot">' +
-      '<button type="button" class="cbl-footbtn" data-act="sheet-log">' + ICONS.log + "<span>Log</span></button>" +
-      (showChecks ? '<button type="button" class="cbl-footbtn" data-act="sheet-checks" data-state="checklist-open">' +
-        ICONS.check + "<span>Checklist</span></button>" : "") +
-      '<button type="button" class="cbl-footbtn cbl-end" data-act="end">End</button></div>';
+    return '<div class="cbl-runpad" data-tabpanel="timer" role="tabpanel" aria-label="Timer">' +
+      clockView(elapsed) + dueView(elapsed) + errorView() +
+      '<button type="button" class="cbl-btn" data-act="timeline-toggle" aria-expanded="' + timelineOpen + '">' +
+      (timelineOpen ? "Hide timeline" : "Show timeline") + "</button>" +
+      countsView() + drugsView(elapsed) + tilesView(elapsed) + guideView(elapsed) +
+      (showChecks
+        ? '<button type="button" class="cbl-btn" data-act="sheet-checks" data-state="checklist-open">' +
+          "Open post ROSC checklist</button>"
+        : "") +
+      audioNotice() + "</div>";
+  }
+
+  function logTabView() {
+    return '<div class="cbl-tabpad" data-tabpanel="log" role="tabpanel" aria-label="Log">' +
+      "<h2 class='cbl-h'>Log</h2>" +
+      '<div data-sheet="log">' + logRows() + "</div></div>";
+  }
+
+  function notesTabView() {
+    var notes = sess.events.filter(function (e) { return e.kind === "note"; })
+      .slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
+    var items = notes.map(function (e) {
+      return "<li><span class='cbl-tltime'>" + esc(fmtMMSS(e.elapsed)) + "</span>" +
+        "<span>" + esc(e.label) + "</span></li>";
+    }).join("");
+    return '<div class="cbl-tabpad" data-tabpanel="notes" role="tabpanel" aria-label="Notes">' +
+      "<h2 class='cbl-h'>Notes</h2>" +
+      (items ? '<ul class="cbl-noteslist">' + items + "</ul>"
+        : '<p class="cbl-empty" data-state="empty-notes">No notes yet.</p>') +
+      '<label class="cbl-label" for="cblNoteTab">Free text note</label>' +
+      '<input id="cblNoteTab" class="cbl-input" type="text" maxlength="280" placeholder="Free text note" />' +
+      '<div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="note-add">Add note</button></div></div>';
+  }
+
+  function settingsTabView() {
+    return '<div class="cbl-tabpad" data-tabpanel="settings" role="tabpanel" aria-label="Settings">' +
+      "<h2 class='cbl-h'>Settings</h2>" +
+      '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>" +
+      linkRowView("run") +
+      '<button type="button" class="cbl-btn" data-act="audio">Sound settings</button>' +
+      '<button type="button" class="cbl-btn" data-cbp-settings>Display settings</button>' +
+      '<p class="cbl-note">Stored on this device only. Training runs never write anywhere.</p></div>';
   }
 
   function errorView() {
@@ -891,11 +1261,21 @@
     return '<p class="cbl-error" data-state="error" role="alert">Storage full. The log stays on screen but will not resume after close.</p>';
   }
 
+  /* One component tree for phone and iPad: status strip on top (always
+   * visible on every tab), the active tab panel in the centre, the live
+   * timeline beside it (right column on iPad, drawer on phone), tab bar
+   * at the bottom. The same engine drives both layouts; CSS switches them. */
   function runView() {
     var elapsed = nowElapsed();
-    return statusRow() + '<div class="cbl-scroll"><div class="cbl-run">' +
-      clockView(elapsed) + dueView(elapsed) + errorView() +
-      tilesView(elapsed) + guideView(elapsed) + audioNotice() + "</div></div>" + footerView() +
+    var panel = rtab === "log" ? logTabView()
+      : rtab === "notes" ? notesTabView()
+      : rtab === "settings" ? settingsTabView()
+      : timerTabView(elapsed);
+    return statusRow() + stripView(elapsed) +
+      '<div class="cbl-runbody"><div class="cbl-maincol"><div class="cbl-scroll">' + panel + "</div></div>" +
+      '<div class="cbl-tlscrim' + (timelineOpen ? " open" : "") + '" data-act="timeline-toggle"></div>' +
+      timelineView() + "</div>" +
+      tabsView() +
       '<div class="cbl-toast" data-state="toast" role="status" aria-live="polite"></div>' +
       '<div class="cbl-sheetwrap"></div>';
   }
@@ -905,6 +1285,16 @@
     var counts = computeCounts(sess.events);
     var interval = MODE_CONFIG[sess.mode].rhythmInterval;
     var canSheet = !sess.training;
+    var exportLine;
+    if (sess.training) {
+      exportLine = '<p class="cbl-disc">Practice only. Nothing was written to a patient record.</p>';
+    } else if (exportState && exportState.written) {
+      exportLine = '<p class="cbl-disc">Written to the linked patient timeline.</p>';
+    } else if (sess.link) {
+      exportLine = '<p class="cbl-disc">The patient timeline write did not go through. The log stays on this device.</p>';
+    } else {
+      exportLine = '<p class="cbl-disc">No patient linked. Kept on this device only.</p>';
+    }
     return statusRow() + '<div class="cbl-scroll"><div class="cbl-endview" data-state="ended">' +
       "<h2 class='cbl-h'>Code ended</h2>" +
       '<dl class="cbl-sum">' +
@@ -913,9 +1303,8 @@
       "<div><dt>Shocks</dt><dd>" + counts.shocks + "</dd></div>" +
       "<div><dt>Epinephrine</dt><dd>" + counts.epi + "</dd></div>" +
       "<div><dt>ROSC</dt><dd>" + (sess.rosc ? "Yes" : "No") + "</dd></div></dl>" +
-      (sess.training
-        ? '<p class="cbl-disc">Practice only. Nothing was written to a patient record.</p>'
-        : '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>") +
+      exportLine +
+      (sess.training ? "" : '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>") +
       (canSheet ? '<button type="button" class="cbl-btn cbl-primary" data-act="open-sheet">Open code sheet</button>' : "") +
       '<button type="button" class="cbl-btn" data-act="close">Done</button>' +
       "</div></div>";
@@ -1141,12 +1530,12 @@
     tickTimer = null;
   }
 
-  /* Repaint only the clock and strip between full renders. */
+  /* Repaint only the ring card, strips and vent between full renders. */
   function paintClock() {
     if (!rootEl || !sess || view !== "running") return;
     var elapsed = nowElapsed();
-    var c = rootEl.querySelector(".cbl-clock");
-    if (c) {
+    var c = rootEl.querySelector(".cbl-ringrow");
+    if (c && rtab === "timer") {
       var tmp = document.createElement("div");
       tmp.innerHTML = clockView(elapsed);
       var fresh = tmp.firstChild;
@@ -1165,6 +1554,13 @@
         }
       }
     }
+    var s = rootEl.querySelector(".cbl-strip");
+    if (s) {
+      var t3 = document.createElement("div");
+      t3.innerHTML = stripView(elapsed);
+      var fs = t3.firstChild;
+      if (fs && fs.textContent !== s.textContent) s.parentNode.replaceChild(fs, s);
+    }
   }
 
   /* ---------------- actions ---------------- */
@@ -1173,12 +1569,17 @@
     var A = Audio();
     if (A) { try { A.unlock(); A.ensureWakeLock(); } catch (e) {} }
     sess = newSession(idleMode, { training: idleTraining });
+    /* LIVE captures the linked patient at Start; practice never links. */
+    sess.link = sess.training ? null : (pendingLink || readOpenPatient());
     speed = sess.training ? TRAINING_SPEED : 1;
     elapsedOffset = 0;
     runStartWall = Date.now();
     paused = false;
     fired = {};
     storeError = false;
+    exportState = null;
+    rtab = "timer";
+    timelineOpen = false;
     view = "running";
     logEvent(sess, "modeSet", "Mode: " + MODE_LABEL[sess.mode], 0);
     logEvent(sess, "cprStart", null, 0);
@@ -1192,6 +1593,7 @@
       } catch (e2) {}
     }
     startTick();
+    notifyWatch(true);
   }
 
   function doPauseToggle() {
@@ -1232,8 +1634,14 @@
     if (A) { try { A.shutdown(); } catch (e2) {} }
     if (!sess.training) {
       try { clearSnapshot(defaultStorage()); } catch (e3) {}
+      /* LIVE End with a linked patient writes the code sheet to the
+       * patient timeline (native-watch codeBlueExport parity). */
+      exportState = exportToPatient();
+    } else {
+      exportState = null;
     }
     render();
+    notifyWatch(false);
   }
 
   function openCodeSheet() {
@@ -1282,9 +1690,13 @@
         runStartWall = Date.now();
         paused = false;
         fired = {};
+        exportState = null;
+        rtab = "timer";
+        timelineOpen = false;
         view = "running";
         render();
         startTick();
+        notifyWatch(true);
       } else {
         try { clearSnapshot(defaultStorage()); } catch (err2) {}
         render();
@@ -1309,10 +1721,47 @@
       return;
     }
     if (act === "sheet-close" || act === "sheet-scrim") { closeSheet(); return; }
+    if (act === "link-open") {
+      pendingLink = readOpenPatient() || pendingLink;
+      if (!pendingLink) openWardPicker();
+      render();
+      return;
+    }
+    if (act === "link-refresh") { render(); return; }
+    if (act === "link-clear") {
+      if (sess && view === "running") { sess.link = null; persist(); }
+      else pendingLink = null;
+      render();
+      return;
+    }
     if (!sess) return;
 
+    if (act === "tab-timer" || act === "tab-log" || act === "tab-notes" || act === "tab-settings") {
+      rtab = act.slice(4);
+      render();
+      return;
+    }
+    if (act === "timeline-toggle") { timelineOpen = !timelineOpen; render(); return; }
+    if (act === "vent-cue") {
+      sess.ventCue = sess.ventCue === false;
+      var AU = Audio();
+      if (AU && !sess.training) {
+        try {
+          AU.setMuted("breaths", !sess.ventCue);
+          if (sess.ventCue && hasAirway(sess) && !paused) AU.startBreathTicks();
+        } catch (errv) {}
+      }
+      persist();
+      render();
+      return;
+    }
     if (act === "tile-shock") { afterEvent(logEvent(sess, "shock", null, elapsed), "shockLogged"); return; }
-    if (act === "tile-epi") { afterEvent(logEvent(sess, "drug", "Epinephrine", elapsed), null); return; }
+    if (act === "tile-epi" || act === "drug-epi") {
+      afterEvent(logEvent(sess, "drug", "Epinephrine", elapsed), null);
+      return;
+    }
+    if (act === "drug-amio") { afterEvent(logEvent(sess, "drug", "Amiodarone", elapsed), null); return; }
+    if (act === "drug-lido") { afterEvent(logEvent(sess, "drug", "Lidocaine", elapsed), null); return; }
     if (act === "tile-rhythm") { openRhythmSheet(); return; }
     if (act === "tile-pause" || act === "tile-paused") { doPauseToggle(); return; }
     if (act === "tile-rearrest") {
@@ -1360,7 +1809,7 @@
       return;
     }
     if (act === "note-add") {
-      var inp = rootEl.querySelector("#cblNoteIn");
+      var inp = rootEl.querySelector("#cblNoteIn") || rootEl.querySelector("#cblNoteTab");
       var txt = inp ? String(inp.value || "").trim().slice(0, 280) : "";
       if (!txt) { if (inp) inp.focus(); return; }
       closeSheet();
@@ -1388,22 +1837,30 @@
         if (typeof window !== "undefined" && window.prompt) next = window.prompt("Edit label", cur);
       } catch (err6) {}
       if (next == null) return;
-      if (editEvent(sess, eid, next)) { persist(); refreshLogSheet(); render(); openLogSheet(); }
+      /* Reopen the overlay sheet only when the edit came from it; the Log
+       * tab re-renders inline instead so navigation never jumps. */
+      var wasEditSheet = sheetOpen();
+      if (editEvent(sess, eid, next)) {
+        persist();
+        render();
+        if (wasEditSheet) openLogSheet();
+      }
       return;
     }
     if (act === "log-del") {
       var did = el.getAttribute("data-id");
+      var wasDelSheet = sheetOpen();
       if (deleteEvent(sess, did)) {
         persist();
         render();
-        openLogSheet();
+        if (wasDelSheet) openLogSheet();
         toast("Event deleted. ", did);
       }
       return;
     }
     if (act === "toast-undo") {
       var uid = el.getAttribute("data-id");
-      var wasLog = !!(rootEl.querySelector && rootEl.querySelector('[data-sheet="log"]'));
+      var wasLog = sheetOpen();
       if (uid) {
         var undone = null;
         for (var i = sess.undo.length - 1; i >= 0; i--) {
@@ -1461,6 +1918,10 @@
     paused = false;
     pendingResume = null;
     storeError = false;
+    rtab = "timer";
+    timelineOpen = false;
+    exportState = null;
+    pendingLink = readOpenPatient();
     lastFocus = document.activeElement;
     if (!opts.training && idleTraining !== true) {
       var snap = loadSnapshot(defaultStorage());
@@ -1499,6 +1960,9 @@
   var _rt = {
     session: function () { return sess; },
     view: function () { return view; },
+    tab: function () { return rtab; },
+    link: function () { return (sess && sess.link) || pendingLink; },
+    exportState: function () { return exportState; },
     elapsed: function () { return nowElapsed(); },
     setElapsed: function (s) {
       elapsedOffset = Math.max(0, s);

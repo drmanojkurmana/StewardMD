@@ -1,24 +1,47 @@
-/* Code Blue ECG rhythm course: restrained dark-green palette (#071318 / #0D1D23 / #42CDB5).
- * Light theme is the default; body.dark selects the dark theme. No glows, no gradients,
+/* Code Blue ECG rhythm course: v3 palette (Carbon, Graphite, Cool Silver,
+ * Frost White, Electric Blue) via the shared --cbp-* tokens. Light theme is
+ * the default; body.dark selects the dark theme. No glows, no gradients,
  * no backdrop filters. 44 px minimum touch targets, visible focus, reduced-motion support. */
 .cbecg{
-  --cb-bg:#F2F6F4; --cb-card:#FFFFFF; --cb-s1:#E4EDEA; --cb-s2:#D5E3DE;
-  --cb-text:#0D1D23; --cb-mut:#3E5A53; --cb-line:#C4D4CE;
-  --cb-fill:#0D5C4F; --cb-on-fill:#FFFFFF; --cb-soft:#DDEEE9; --cb-ink-line:#0D1D23;
-  --cb-grid-minor:#D8E4E0; --cb-grid-major:#B7CBC5; --cb-trace:#0D1D23;
-  --cb-up:#B3261E; --cb-dn:#0D5C4F; --cb-ok:#0D5C4F; --cb-bad:#B3261E;
+  --cb-bg:var(--cbp-bg, #F4F7FA); --cb-card:var(--cbp-surface, #FFFFFF);
+  --cb-s1:var(--cbp-bg, #F4F7FA); --cb-s2:var(--cbp-line, #D5DBE3);
+  --cb-text:var(--cbp-ink, #101317); --cb-mut:var(--cbp-muted, #4A5560);
+  --cb-line:var(--cbp-line, #D5DBE3);
+  --cb-fill:var(--cbp-accent, #2563EB); --cb-on-fill:var(--cbp-accent-ink, #FFFFFF);
+  --cb-soft:var(--cbp-bg, #F4F7FA); --cb-ink-line:var(--cbp-ink, #101317);
+  --cb-grid-minor:var(--cbp-grid-minor, #E2E8EF); --cb-grid-major:var(--cbp-grid-major, #C3CDD8);
+  --cb-trace:var(--cbp-trace, #101317);
+  --cb-up:var(--cbp-overdue, #B91C1C); --cb-dn:var(--cbp-running, #2563EB);
+  --cb-ok:var(--cbp-rosc, #17803A); --cb-bad:var(--cbp-overdue, #B91C1C);
   --cb-r-md:12px; --cb-r-xl:20px; --cb-r-pill:999px;
   --cb-ease:cubic-bezier(.23,1,.32,1); --cb-d:120ms;
   position:fixed; inset:0; z-index:90; overflow-y:auto; overscroll-behavior:contain;
   background:var(--cb-bg); color:var(--cb-text);
   font-size:16px; line-height:1.5;
 }
+.cbecg[data-cb-theme]{
+  --cb-bg:var(--cbp-bg); --cb-card:var(--cbp-surface);
+  --cb-s1:var(--cbp-bg); --cb-s2:var(--cbp-line);
+  --cb-text:var(--cbp-ink); --cb-mut:var(--cbp-muted);
+  --cb-line:var(--cbp-line);
+  --cb-fill:var(--cbp-accent); --cb-on-fill:var(--cbp-accent-ink);
+  --cb-soft:var(--cbp-bg); --cb-ink-line:var(--cbp-ink);
+  --cb-grid-minor:var(--cbp-grid-minor); --cb-grid-major:var(--cbp-grid-major);
+  --cb-trace:var(--cbp-trace);
+  --cb-up:var(--cbp-overdue); --cb-dn:var(--cbp-running);
+  --cb-ok:var(--cbp-rosc); --cb-bad:var(--cbp-overdue);
+}
 body.dark .cbecg{
-  --cb-bg:#071318; --cb-card:#0D1D23; --cb-s1:#142930; --cb-s2:#1E333B;
-  --cb-text:#EDF5F2; --cb-mut:#94B4AB; --cb-line:#1E333B;
-  --cb-fill:#42CDB5; --cb-on-fill:#071318; --cb-soft:#16383E; --cb-ink-line:#EDF5F2;
-  --cb-grid-minor:#1A2E34; --cb-grid-major:#2A444C; --cb-trace:#42CDB5;
-  --cb-up:#FF8A80; --cb-dn:#7ED9C6; --cb-ok:#42CDB5; --cb-bad:#FF8A80;
+  --cb-bg:var(--cbp-bg, #101317); --cb-card:var(--cbp-surface, #171B20);
+  --cb-s1:var(--cbp-bg, #101317); --cb-s2:var(--cbp-line, #343A40);
+  --cb-text:var(--cbp-ink, #F4F7FA); --cb-mut:var(--cbp-muted, #AAB2BD);
+  --cb-line:var(--cbp-line, #343A40);
+  --cb-fill:var(--cbp-accent, #3B82F6); --cb-on-fill:var(--cbp-accent-ink, #0A0F16);
+  --cb-soft:var(--cbp-bg, #101317); --cb-ink-line:var(--cbp-ink, #F4F7FA);
+  --cb-grid-minor:var(--cbp-grid-minor, #232A31); --cb-grid-major:var(--cbp-grid-major, #39424B);
+  --cb-trace:var(--cbp-trace, #3B82F6);
+  --cb-up:var(--cbp-overdue, #EF4444); --cb-dn:var(--cbp-running, #3B82F6);
+  --cb-ok:var(--cbp-rosc, #34C759); --cb-bad:var(--cbp-overdue, #EF4444);
 }
 .cbecg-sheet{max-width:560px; margin:0 auto; padding:12px 12px 32px; box-sizing:border-box;}
 .cbecg-head{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:4px 0 8px;}
@@ -43,7 +66,7 @@ body.dark .cbecg{
 body.dark .cbecg-x:focus-visible,body.dark .cbecg-btn:focus-visible,
 body.dark .cbecg-tab:focus-visible,body.dark .cbecg-sel:focus-visible,
 body.dark .cbecg-dot:focus-visible,body.dark .cbecg-line:focus-visible,
-body.dark .cbecg-flash:focus-visible,body.dark .cbecg-opt:focus-within{outline-color:#42CDB5;}
+body.dark .cbecg-flash:focus-visible,body.dark .cbecg-opt:focus-within{outline-color:var(--cb-fill);}
 .cbecg-dis,.cbecg-edu{font-size:12.5px; color:var(--cb-mut); margin:0 0 6px;}
 .cbecg-tabs{display:flex; gap:6px; margin:8px 0 12px; overflow-x:auto;}
 .cbecg-tab{
@@ -87,8 +110,8 @@ body.dark .cbecg-flash:focus-visible,body.dark .cbecg-opt:focus-within{outline-c
 }
 /* ECG strips: pale grid card in light mode, dark monitor card in dark mode. */
 .cbecg-trace,.cbecg-lead{display:block; width:100%; height:auto;}
-.cbecg-grid-bg{fill:#FBFDFC;}
-body.dark .cbecg-grid-bg{fill:#0A1519;}
+.cbecg-grid-bg{fill:var(--cb-card);}
+body.dark .cbecg-grid-bg{fill:var(--cb-card);}
 .cbecg-grid-minor line{stroke:var(--cb-grid-minor); stroke-width:.12;}
 .cbecg-grid-major line{stroke:var(--cb-grid-major); stroke-width:.25;}
 .cbecg-ink{fill:none; stroke:var(--cb-trace); stroke-width:.45; stroke-linejoin:round; stroke-linecap:round;}

@@ -53,30 +53,37 @@
   var MAX_CUSTOM = 4;
   var MAX_LABEL = 14;
 
-  /* Canonical tokens per theme. Surfaces, lines and text only; the five
-   * state colours keep their hue family in every theme except Mono, where
-   * words and border shapes carry the state. Auto resolves in CSS: dark
-   * tokens by default, light tokens under prefers-color-scheme: light. */
+  /* Canonical tokens per theme (v3 palette, docs/codeblue/DESIGN.md owner
+   * overrides). Night Shift is Carbon and Graphite with Electric Blue;
+   * Ward Light is Frost White with a darker blue accent. Surfaces, lines
+   * and text only; the five state colours keep their hue family in every
+   * theme except Mono, where words and border shapes carry the state.
+   * Auto resolves in CSS: dark tokens by default, light tokens under
+   * prefers-color-scheme: light. The two quiet gradients (blue for Start,
+   * the CPR ring and the primary action; red for Shock, overdue and End)
+   * are shared constants, identical on every theme. */
+  var GRAD_BLUE = ["#3B82F6", "#1D4ED8"];
+  var GRAD_RED = ["#EF4444", "#B91C1C"];
   var THEMES = {
-    "night-shift": { bg: "#071318", surface: "#0D1D23", ink: "#E8F1EE",
-      muted: "#9DB8B1", line: "#1E343B", accent: "#42CDB5", accentInk: "#071318",
-      running: "#42CDB5", due: "#FFC53D", overdue: "#FF453A",
-      rosc: "#30D158", paused: "#9DB8B1", trace: "#42CDB5",
-      gridMinor: "#1A2E34", gridMajor: "#2A444C", scheme: "dark" },
-    "ward-light": { bg: "#F4F6F5", surface: "#FFFFFF", ink: "#10211D",
-      muted: "#3D5650", line: "#CFDBD7", accent: "#0C6E5E", accentInk: "#FFFFFF",
-      running: "#0C6E5E", due: "#8A5A00", overdue: "#B3261E",
-      rosc: "#17803A", paused: "#3D5650", trace: "#10211D",
-      gridMinor: "#D8E4E0", gridMajor: "#B7CBC5", scheme: "light" },
+    "night-shift": { bg: "#101317", surface: "#171B20", ink: "#F4F7FA",
+      muted: "#AAB2BD", line: "#343A40", accent: "#3B82F6", accentInk: "#0A0F16",
+      running: "#3B82F6", due: "#F5B544", overdue: "#EF4444",
+      rosc: "#34C759", paused: "#AAB2BD", trace: "#3B82F6",
+      gridMinor: "#232A31", gridMajor: "#39424B", scheme: "dark" },
+    "ward-light": { bg: "#F4F7FA", surface: "#FFFFFF", ink: "#101317",
+      muted: "#4A5560", line: "#D5DBE3", accent: "#2563EB", accentInk: "#FFFFFF",
+      running: "#2563EB", due: "#8A5A00", overdue: "#B91C1C",
+      rosc: "#17803A", paused: "#5B6B7A", trace: "#101317",
+      gridMinor: "#E2E8EF", gridMajor: "#C3CDD8", scheme: "light" },
     "high-contrast": { bg: "#000000", surface: "#000000", ink: "#FFFFFF",
-      muted: "#E8E8E8", line: "#FFFFFF", accent: "#00E5C0", accentInk: "#000000",
-      running: "#00E5C0", due: "#FFD60A", overdue: "#FF6B61",
-      rosc: "#3DFF6E", paused: "#D8D8D8", trace: "#00E5C0",
+      muted: "#E8E8E8", line: "#FFFFFF", accent: "#5AA9F0", accentInk: "#000000",
+      running: "#5AA9F0", due: "#FFD60A", overdue: "#FF6B61",
+      rosc: "#3DFF6E", paused: "#D8D8D8", trace: "#5AA9F0",
       gridMinor: "#3A3A3A", gridMajor: "#8A8A8A", scheme: "dark" },
     "red-room": { bg: "#150A0C", surface: "#221016", ink: "#F5E9E2",
-      muted: "#D3ABA0", line: "#43222B", accent: "#FF9B87", accentInk: "#22060A",
-      running: "#7FD9C6", due: "#FFC53D", overdue: "#FF6B61",
-      rosc: "#4ADE80", paused: "#D3ABA0", trace: "#7FD9C6",
+      muted: "#D3ABA0", line: "#43222B", accent: "#7FB0F5", accentInk: "#22060A",
+      running: "#7FB0F5", due: "#FFC53D", overdue: "#FF6B61",
+      rosc: "#4ADE80", paused: "#D3ABA0", trace: "#7FB0F5",
       gridMinor: "#331820", gridMajor: "#5A2C36", scheme: "dark" },
     "mono": { bg: "#0B0B0C", surface: "#161617", ink: "#F2F2F2",
       muted: "#C9C9C9", line: "#3A3A3D", accent: "#FFFFFF", accentInk: "#0B0B0C",
@@ -84,8 +91,8 @@
       rosc: "#FFFFFF", paused: "#C9C9C9", trace: "#F2F2F2",
       gridMinor: "#232326", gridMajor: "#4A4A4E", scheme: "dark" },
     "sepia-light": { bg: "#F3ECDD", surface: "#FFFDF4", ink: "#2A2114",
-      muted: "#5D5040", line: "#D3C6A8", accent: "#0C6E5E", accentInk: "#FFFFFF",
-      running: "#0B6B5C", due: "#7A5200", overdue: "#A3241B",
+      muted: "#5D5040", line: "#D3C6A8", accent: "#2563EB", accentInk: "#FFFFFF",
+      running: "#2563EB", due: "#7A5200", overdue: "#A3241B",
       rosc: "#166B32", paused: "#5D5040", trace: "#2A2114",
       gridMinor: "#E2D6BC", gridMajor: "#C0B08A", scheme: "light" },
     "auto": { scheme: "auto" }
@@ -677,6 +684,7 @@
     open: open, close: close, isOpen: isOpen,
     THEME_IDS: THEME_IDS, TILE_IDS: TILE_IDS,
     MAX_CUSTOM: MAX_CUSTOM, MAX_LABEL: MAX_LABEL,
+    GRAD_BLUE: GRAD_BLUE, GRAD_RED: GRAD_RED,
     _themes: THEMES, _defaults: defaults,
     _normalise: normalise, _copy: allCopySamples,
     _selectorFor: selectorFor, _pickFocusTarget: pickFocusTarget

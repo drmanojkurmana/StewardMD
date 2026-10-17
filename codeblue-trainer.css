@@ -1,21 +1,35 @@
 /* codeblue-trainer.css — Megacode and ACLS practice presentation layer.
- * Scoped under #cbtRoot. Flat colours only: no gradients, no glows, no backdrops.
- * Light by default; body.dark selects the restrained dark green theme. */
+ * Scoped under #cbtRoot. v3 palette via the shared --cbp-* tokens: when
+ * codeblue-prefs.css has applied [data-cb-theme], the mapping below wins;
+ * the local defaults match Ward Light v3 (and Night Shift v3 under
+ * body.dark) so the screen also stands alone. Flat colours only: no
+ * gradients, no glows, no backdrops. */
 
 #cbtRoot {
   position: fixed; inset: 0; z-index: 10000;
   display: none; flex-direction: column; overflow: hidden;
-  --cbt-bg: #f4f6f5; --cbt-surface: #ffffff; --cbt-ink: #10211d;
-  --cbt-muted: #3d5650; --cbt-line: #cfdbd7; --cbt-accent: #0c6e5e;
-  --cbt-accent-ink: #ffffff; --cbt-wrong: #8f2d22; --cbt-right: #0c6e5e;
+  --cbt-bg: var(--cbp-bg, #f4f7fa); --cbt-surface: var(--cbp-surface, #ffffff);
+  --cbt-ink: var(--cbp-ink, #101317); --cbt-muted: var(--cbp-muted, #4a5560);
+  --cbt-line: var(--cbp-line, #d5dbe3); --cbt-accent: var(--cbp-accent, #2563eb);
+  --cbt-accent-ink: var(--cbp-accent-ink, #ffffff);
+  --cbt-wrong: var(--cbp-overdue, #b91c1c); --cbt-right: var(--cbp-rosc, #17803a);
   background: var(--cbt-bg); color: var(--cbt-ink);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+#cbtRoot[data-cb-theme] {
+  --cbt-bg: var(--cbp-bg); --cbt-surface: var(--cbp-surface);
+  --cbt-ink: var(--cbp-ink); --cbt-muted: var(--cbp-muted);
+  --cbt-line: var(--cbp-line); --cbt-accent: var(--cbp-accent);
+  --cbt-accent-ink: var(--cbp-accent-ink);
+  --cbt-wrong: var(--cbp-overdue); --cbt-right: var(--cbp-rosc);
+}
 body.dark #cbtRoot {
-  --cbt-bg: #071318; --cbt-surface: #0d1d23; --cbt-ink: #e8f1ee;
-  --cbt-muted: #9db8b1; --cbt-line: #1e343b; --cbt-accent: #42cdb5;
-  --cbt-accent-ink: #071318; --cbt-wrong: #e8988a; --cbt-right: #42cdb5;
+  --cbt-bg: var(--cbp-bg, #101317); --cbt-surface: var(--cbp-surface, #171b20);
+  --cbt-ink: var(--cbp-ink, #f4f7fa); --cbt-muted: var(--cbp-muted, #aab2bd);
+  --cbt-line: var(--cbp-line, #343a40); --cbt-accent: var(--cbp-accent, #3b82f6);
+  --cbt-accent-ink: var(--cbp-accent-ink, #0a0f16);
+  --cbt-wrong: var(--cbp-overdue, #ef4444); --cbt-right: var(--cbp-rosc, #34c759);
 }
 #cbtRoot.on { display: flex; }
 body.cbt-lock { overflow: hidden; }

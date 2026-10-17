@@ -170,6 +170,21 @@ try {
   ok(scroll === true, "360: no horizontal scroll");
   await targets("sheet-360", CBP);
   await shot("sheet-360", false);
+  await ev(`CodeBlueLive.close(); return 1;`);
+
+  /* iPad: settings sheet holds at 820x1180 and 1194x834, light and dark. */
+  for (const [w, h, tag] of [[820, 1180, "820"], [1194, 834, "1194"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await ev(`CodeBlueLive.open(); return 1;`);
+    await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
+    ok(await until(`return CodeBlueLive._rt.view() === "running";`, 5000), `running at ${tag}`);
+    await ev(`document.querySelector('${CBL} [data-cbp-settings]').click(); return 1;`);
+    ok(await until(`return !!document.querySelector('${CBP} [role="dialog"]');`, 5000), `sheet opens at ${tag}`);
+    ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, `${tag}: no horizontal scroll`);
+    await targets(`sheet-${tag}`, CBP);
+    await shot(`sheet-${tag}`, false); await shot(`sheet-${tag}`, true);
+    await ev(`var d = document.querySelector('${CBP} [data-cbp-done]'); if (d) d.click(); CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
+  }
 
   console.log(fails === 0 ? "ALL UI CHECKS PASSED" : fails + " UI CHECKS FAILED");
   try { chrome.kill(); } catch {}

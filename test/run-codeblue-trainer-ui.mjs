@@ -154,6 +154,17 @@ try {
   ok(await ev(`return Array.from(document.styleSheets).some(function(s){try{return Array.from(s.cssRules).some(function(r){return r.media && /prefers-reduced-motion/.test(r.media.mediaText);});}catch(e){return false;}});`) === true, "stylesheet honours prefers-reduced-motion");
   await call("Emulation.setEmulatedMedia", { media: "", features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
   ok(await ev(`return window.matchMedia("(prefers-reduced-motion: reduce)").matches === true;`) === true, "reduced-motion emulation matches");
+  /* iPad: trainer holds at 820x1180 and 1194x834, light and dark. */
+  for (const [w, h, tag] of [[820, 1180, "820"], [1194, 834, "1194"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300);
+    await ev(`CodeBlueTrainer.open(); return 1;`);
+    ok(await until(`return !!document.querySelector("#cbtRoot.on");`, 5000), `trainer opens at ${tag}`);
+    ok(await ev(`return document.getElementById("cbtRoot").scrollWidth <= ${w} + 1;`) === true, `${tag}: no horizontal scroll`);
+    ok(await ev(`return Array.from(document.querySelectorAll("#cbtRoot button")).every(function(b){return b.getBoundingClientRect().height >= 44;});`) === true, `${tag}: all touch targets at least 44 px`);
+    await ev(`CodeBlueTrainer.close(); return 1;`);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await ev(`document.body.classList.remove("dark"); CodeBlueTrainer.close(); return 1;`);
   ok(await until(`return !CodeBlueTrainer.isOpen();`, 5000), "close() hides the overlay");
   await ev(`CodeBlueTrainer.open(); return 1;`);

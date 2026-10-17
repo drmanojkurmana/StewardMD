@@ -1,10 +1,15 @@
 /* Code Blue live screen in headless Chrome over CDP: idle (mode picker,
- * disclaimer, audio-blocked notice), running, paused, rhythm due, epinephrine
- * due and overdue, ROSC with post-ROSC checklist, re-arrest, log with edit
- * and undo, empty log, procedures and rhythm pickers, sound sheet with
- * independent mutes, resume prompt, ended summary opening the code sheet,
- * training mode (badged, never touches the sheet), storage-full error.
- * 390 and 360 px, light and dark. Screenshots go to SHOTS=<dir>.
+ * disclaimer, audio-blocked notice, patient link row), running with the
+ * persistent status strip, CPR ring plus vent panel, drug buttons with dose
+ * text and EPI/AMIO/LIDO/SHOCK counters, colour-coded live timeline, bottom
+ * tab bar (Timer, Log, Notes, Settings) with the strip above every tab,
+ * paused, rhythm due, epinephrine due and overdue, ROSC with post-ROSC
+ * checklist, re-arrest, log with edit and undo, empty log, procedures and
+ * rhythm pickers, sound sheet with independent mutes, resume prompt, ended
+ * summary opening the code sheet, LIVE patient-link export to the timeline,
+ * training mode (badged, never touches the sheet or a record),
+ * storage-full error. Phone 390 and 360 px, iPad 820x1180, 1194x834 and
+ * 1366x1024, light and dark. Screenshots go to SHOTS=<dir>.
  *
  * USAGE: node test/run-codeblue-live-ui.mjs   (BASE=http://localhost:PORT/ for a running server; SHOTS=<dir> saves PNGs)
  */
@@ -116,10 +121,51 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="running"] .cbl-elapsed');`) === true, "clock block renders");
   ok(await ev(`return document.querySelector('${CBL} .cbl-due').getAttribute("data-level") === "running";`) === true, "due strip reads CPR in progress");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-tile').length === 7;`) === true, "7 action tiles");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "status strip renders");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-strip .cbl-cell').length === 5;`) === true, "strip has CODE, RHYTHM, EPI, SHOCK, VENT cells");
+  ok(await ev(`return !!document.querySelector('${CBL} svg.cbl-ring');`) === true, "CPR ring renders");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="vent"]');`) === true, "vent panel renders");
+  ok(await ev(`return document.querySelector('${CBL} [data-act="vent-cue"]').textContent === "Cue on";`) === true, "vent cue on by default");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drug').length === 3;`) === true, "3 drug buttons");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="epi"] .cbl-drugdose').textContent.indexOf("1 mg") >= 0;`) === true, "adult epi dose text");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugdose').textContent.indexOf("300 mg") >= 0;`) === true, "adult amiodarone dose text");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="lido"] .cbl-drugdose').textContent.indexOf("mg/kg") >= 0;`) === true, "adult lidocaine dose text");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="counts"]').textContent.indexOf("AMIO") >= 0;`) === true, "EPI AMIO LIDO SHOCK counters");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="tabs"] [role="tab"]').length === 4;`) === true, "Timer, Log, Notes, Settings tabs");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="timeline"]');`) === true, "live timeline renders");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-guide li').length >= 3;`) === true, "guide prompts render with sources");
   ok(await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-gsrc')).every(function (e) { return e.textContent.length > 5; });`) === true, "every prompt cites a source");
   await shot("running", false); await shot("running", true);
   await metrics("running-390"); await contrast("running-390-dark");
+
+  /* Tabs keep the status strip visible; each tab shell renders. */
+  await click(`${CBL} [data-act="tab-log"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "log tab opens");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "strip stays above the Log tab");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-tabpanel="log"] [data-state="empty-log"]');`) === true, "log tab shows the empty state");
+  await click(`${CBL} [data-act="tab-notes"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "notes";`, 5000), "notes tab opens");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "strip stays above the Notes tab");
+  ok(await ev(`return !!document.querySelector('${CBL} #cblNoteTab');`) === true, "notes composer renders");
+  await ev(`document.querySelector('${CBL} #cblNoteTab').value = "Tab note"; document.querySelector('${CBL} [data-act="note-add"]').click(); return 1;`);
+  ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.kind === "note" && e.label === "Tab note"; });`, 5000), "note added from the Notes tab");
+  await click(`${CBL} [data-act="tab-settings"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "settings";`, 5000), "settings tab opens");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "strip stays above the Settings tab");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-tabpanel="settings"] [data-state="patient-link"]');`) === true, "settings reuses the patient link row");
+  await click(`${CBL} [data-act="tab-timer"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "timer";`, 5000), "back to the Timer tab");
+
+  /* Timeline drawer opens on phone; drug buttons log with undo. */
+  await click(`${CBL} [data-act="timeline-toggle"]`);
+  ok(await ev(`return document.querySelector('${CBL} [data-state="timeline"]').classList.contains("open");`) === true, "timeline drawer opens on phone");
+  await click(`${CBL} [data-act="timeline-toggle"]`);
+  await click(`${CBL} [data-act="drug-amio"]`);
+  ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Amiodarone"; });`, 5000), "amiodarone logs with undo toast");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="counts"]').textContent.indexOf("AMIO1") >= 0;`) === true, "AMIO counter increments");
+  await click(`${CBL} [data-act="drug-lido"]`);
+  ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Lidocaine"; });`, 5000), "lidocaine logs");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="toast"].on');`) === true, "one-tap drug has a 5 s undo toast");
 
   await click(`${CBL} [data-act="tile-pause"]`);
   ok(await until(`return document.querySelector('${CBL} .cbl-due').getAttribute("data-level") === "paused";`, 5000), "paused: strip shows Paused with word");
@@ -259,6 +305,71 @@ try {
   await click(`${CBL} [data-act="sheet-log"]`);
   ok(await until(`return !!document.querySelector('${CBL} .cbl-sheet');`, 5000), "sheet opens at 360 px");
   await shot("log-360", false);
+  await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
+
+  /* Paediatric: no dose lines anywhere. */
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await ev(`CodeBlueLive.open(); return 1;`);
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="patient-link"]');`) === true, "idle shows the patient link row");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="patient-link"]').textContent.indexOf("No patient linked") >= 0;`) === true, "unlinked run says it stays on device");
+  await ev(`document.querySelector('${CBL} [data-act="idle-mode"][data-mode="paediatric"]').click(); return 1;`);
+  await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
+  ok(await until(viewIs("running"), 5000), "paediatric code starts");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drugdose').length === 0;`) === true, "paediatric drug buttons show no doses");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drug').length === 3;`) === true, "paediatric keeps counters and last-given lines");
+  await click(`${CBL} [data-act="end"]`);
+  ok(await until(viewIs("ended"), 5000), "paediatric code ends");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Kept on this device only") >= 0;`) === true, "unlinked end says kept on device");
+  await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
+
+  /* LIVE with a linked patient: End writes the code sheet to the timeline. */
+  await ev(`window.__tlWrites = []; window.SMD_ICU_GROUPS = { currentOpenPatient: function () { return { gid: "g1", pid: "p1" }; }, addTimelineEvent: function (g, p, e) { window.__tlWrites.push({ g: g, p: p, e: e }); } }; return 1;`);
+  await ev(`CodeBlueLive.open(); return 1;`);
+  ok(await ev(`return document.querySelector('${CBL} [data-state="patient-link"]').textContent.indexOf("Linked to patient record") >= 0;`) === true, "idle picks up the open ICU patient");
+  await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
+  ok(await until(viewIs("running"), 5000), "linked code starts");
+  ok(await ev(`return !!(CodeBlueLive._rt.link() && CodeBlueLive._rt.link().gid === "g1");`) === true, "link captured at Start");
+  await click(`${CBL} [data-act="tile-shock"]`);
+  await click(`${CBL} [data-act="end"]`);
+  ok(await until(viewIs("ended"), 5000), "linked code ends");
+  ok(await until(`return window.__tlWrites.length === 1;`, 5000), "code sheet written to the patient timeline");
+  ok(await ev(`return window.__tlWrites[0].e.type === "codeblue" && window.__tlWrites[0].e.title === "Code Blue summary";`) === true, "timeline event matches the watch export shape");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Written to the linked patient timeline") >= 0;`) === true, "ended state confirms the timeline write");
+  ok(await ev(`return !!document.querySelector(".cb-sheet-ov, .cb-sheet");`) === true, "linked end opens the code sheet");
+  await ev(`var o = document.querySelector(".cb-sheet-ov"); if (o) o.remove(); CodeBlueLive.close(); try{localStorage.clear();}catch(e){} delete window.SMD_ICU_GROUPS; return 1;`);
+
+  /* iPad: 820x1180 portrait, three zones, timeline as a right column. */
+  await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });
+  await ev(`CodeBlueLive.open(); return 1;`);
+  await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
+  ok(await until(viewIs("running"), 5000), "running at 820x1180");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad portrait: timeline is a right column");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-grid')).gridTemplateColumns.split(" ").length === 3;`) === true, "iPad portrait: 3 column action grid");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip visible");
+  await click(`${CBL} [data-act="tab-log"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "iPad portrait: log tab opens");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
+  await click(`${CBL} [data-act="tab-timer"]`);
+  await metrics("running-820"); await contrast("running-820-dark");
+  await shot("running-820", false); await shot("running-820", true);
+
+  /* iPad: 1194x834 landscape. */
+  await call("Emulation.setDeviceMetricsOverride", { width: 1194, height: 834, deviceScaleFactor: 2, mobile: true });
+  await sleep(400);
+  ok(await until(viewIs("running"), 5000), "running at 1194x834");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad landscape: timeline is a right column");
+  ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, "iPad landscape: no horizontal scroll");
+  await metrics("running-1194");
+  await shot("running-1194", false); await shot("running-1194", true);
+
+  /* iPad: 1366x1024 landscape. */
+  await call("Emulation.setDeviceMetricsOverride", { width: 1366, height: 1024, deviceScaleFactor: 2, mobile: true });
+  await sleep(400);
+  ok(await until(viewIs("running"), 5000), "running at 1366x1024");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "1366: timeline is a right column");
+  await metrics("running-1366");
+  await shot("running-1366", true);
+  await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
 
   console.log(fails === 0 ? "ALL UI CHECKS PASSED" : fails + " UI CHECKS FAILED");
   try { chrome.kill(); } catch {}

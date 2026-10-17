@@ -146,6 +146,15 @@ try {
   ok(crDark >= 4.5, "dark: body-text contrast " + (bD === undefined ? String(await ev(cols)) : crDark.toFixed(2) + ":1"));
   ok(await ev(`return document.documentElement.clientWidth <= 390 && document.querySelector(".cbecg-sheet").scrollWidth <= 391;`) === true, "390 px: no horizontal scroll");
   ok(await ev(`return Array.from(document.querySelectorAll(".cbecg-btn,.cbecg-tab")).every(function(b){var r=b.getBoundingClientRect(); return r.height >= 44 || r.width === 0;});`) === true, "touch targets at least 44 px");
+  /* iPad: ECG holds at 820x1180 and 1194x834. */
+  for (const [w, h, tag] of [[820, 1180, "820"], [1194, 834, "1194"]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300);
+    ok(await ev(`return document.querySelector(".cbecg-sheet").scrollWidth <= ${w} + 1;`) === true, `${tag}: no horizontal scroll`);
+    ok(await ev(`return Array.from(document.querySelectorAll(".cbecg-btn,.cbecg-tab")).every(function(b){var r=b.getBoundingClientRect(); return r.height >= 44 || r.width === 0;});`) === true, `${tag}: touch targets at least 44 px`);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
   ok(await ev(`return CodeBlueECG.isOpen(); CodeBlueECG.close(); return !CodeBlueECG.isOpen() && !document.querySelector(".cbecg");`) === true, "close() removes the dialog");
   ok(errors.length === 0, "no page errors" + (errors.length ? ": " + errors.slice(0, 2).join(" | ") : ""));
   console.log(fails ? `FAILED ${fails}` : "ALL PASS");

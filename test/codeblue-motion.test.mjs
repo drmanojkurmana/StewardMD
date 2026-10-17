@@ -62,8 +62,14 @@ for (const f of FILES) {
       "animations switch off");
   });
 
-  test(f + ": no glow, gradient, backdrop or blur decoration", () => {
-    assert.doesNotMatch(css[f], /linear-gradient|radial-gradient|conic-gradient/, "flat colours only");
+  test(f + ": no glow, backdrop or blur decoration; only the two v3 gradients", () => {
+    /* v3 owner override (docs/codeblue/DESIGN.md): the only gradients
+     * allowed anywhere are the two quiet 2-stop fills, blue for Start, the
+     * CPR ring and the primary action, red for Shock, overdue and End. */
+    assert.doesNotMatch(css[f], /radial-gradient|conic-gradient/, "no radial or conic gradients");
+    const allowed = /linear-gradient\(\s*160deg\s*,\s*#3b82f6\s*,\s*#1d4ed8\s*\)|linear-gradient\(\s*160deg\s*,\s*#ef4444\s*,\s*#b91c1c\s*\)/gi;
+    const stripped = css[f].replace(allowed, "");
+    assert.doesNotMatch(stripped, /linear-gradient/i, "only the two v3 gradient fills in " + f);
     assert.doesNotMatch(css[f], /backdrop-filter/, "no backdrop blur");
     assert.doesNotMatch(css[f], /text-shadow/, "no text glow");
     assert.doesNotMatch(css[f], /blur\s*\(/, "no blur filter");
