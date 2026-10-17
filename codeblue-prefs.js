@@ -295,7 +295,64 @@
 
   /* ---------------- settings sheet (browser only) ---------------- */
 
-  var overlay = null, lastFocus = null;
+  var overlay = null, lastFocus = null, lastFocusSelector = null;
+
+  /* A CSS selector that re-finds the element that opened the sheet, or
+   * null when no stable selector exists. The opener lives in a screen
+   * root that re-renders its innerHTML (prefs changes refresh the live
+   * grid, the trainer and ECG rebuild their headers), so a stored node
+   * goes stale while the sheet is open; a selector does not. Only simple
+   * id and data attribute values are used, never user text. */
+  function selectorFor(el) {
+    if (!el || typeof el.getAttribute !== "function") return null;
+    var safe = function (v) { return typeof v === "string" && /^[A-Za-z0-9_-]+$/.test(v); };
+    var target = el;
+    var isSettings = target.getAttribute("data-cbp-settings") !== null;
+    if (!isSettings && target.closest) {
+      var opener = null;
+      try { opener = target.closest("[data-cbp-settings]"); } catch (e) {}
+      if (opener) { target = opener; isSettings = true; }
+    }
+    if (isSettings) {
+      var rootEl = null;
+      if (target.closest) {
+        try { rootEl = target.closest("#cblRoot, #cbtRoot, .cbecg, .cb-sheet"); } catch (e2) {}
+      }
+      if (rootEl && rootEl.id && safe(rootEl.id)) return "#" + rootEl.id + " [data-cbp-settings]";
+      if (rootEl && rootEl.classList) {
+        if (rootEl.classList.contains("cbecg")) return ".cbecg [data-cbp-settings]";
+        if (rootEl.classList.contains("cb-sheet")) return ".cb-sheet [data-cbp-settings]";
+      }
+      return "[data-cbp-settings]";
+    }
+    if (target.id && safe(target.id)) return "#" + target.id;
+    var act = target.getAttribute("data-act");
+    if (act && safe(act)) {
+      var host = null;
+      if (target.closest) {
+        try { host = target.closest("#cblRoot, #cbtRoot, .cbecg"); } catch (e3) {}
+      }
+      if (host && host.id && safe(host.id)) return "#" + host.id + ' [data-act="' + act + '"]';
+      if (host && host.classList && host.classList.contains("cbecg")) return '.cbecg [data-act="' + act + '"]';
+      return '[data-act="' + act + '"]';
+    }
+    return null;
+  }
+
+  /* The element to focus when the sheet closes: the fresh node matching
+   * the stored selector wins, then a still connected stored node. */
+  function pickFocusTarget(doc, selector, fallback) {
+    var found = null;
+    if (doc && selector && doc.querySelector) {
+      try { found = doc.querySelector(selector); } catch (e) { found = null; }
+    }
+    if (found) return found;
+    if (fallback) {
+      if (doc && doc.contains) { try { if (doc.contains(fallback)) return fallback; } catch (e2) {} }
+      else if (fallback.isConnected) return fallback;
+    }
+    return null;
+  }
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
 
@@ -534,11 +591,12 @@
     }
   }
 
-  function open() {
+  function open(opener) {
     if (!hasDOM()) return false;
     if (isOpen()) return true;
     ensureCss();
-    try { lastFocus = document.activeElement; } catch (e) { lastFocus = null; }
+    try { lastFocus = opener || document.activeElement; } catch (e) { lastFocus = opener || null; }
+    lastFocusSelector = selectorFor(lastFocus);
     overlay = document.createElement("div");
     overlay.id = "cbpRoot";
     overlay.setAttribute("data-cbp-overlay", "1");
@@ -570,10 +628,12 @@
       try { overlay.parentNode.removeChild(overlay); } catch (e2) {}
     }
     overlay = null;
-    if (lastFocus && lastFocus.focus) {
-      try { lastFocus.focus({ preventScroll: true }); } catch (e3) {}
+    var back = pickFocusTarget(typeof document !== "undefined" ? document : null, lastFocusSelector, lastFocus);
+    if (back && back.focus) {
+      try { back.focus({ preventScroll: true }); } catch (e3) {}
     }
     lastFocus = null;
+    lastFocusSelector = null;
   }
 
   /* One delegated listener so the live, trainer and ECG headers only need
@@ -587,7 +647,7 @@
         if (!el) return;
         if (el.tagName === "LINK") return;
         e.preventDefault();
-        open();
+        open(el);
       });
     } catch (e2) {}
   }
@@ -618,6 +678,7 @@
     THEME_IDS: THEME_IDS, TILE_IDS: TILE_IDS,
     MAX_CUSTOM: MAX_CUSTOM, MAX_LABEL: MAX_LABEL,
     _themes: THEMES, _defaults: defaults,
-    _normalise: normalise, _copy: allCopySamples
+    _normalise: normalise, _copy: allCopySamples,
+    _selectorFor: selectorFor, _pickFocusTarget: pickFocusTarget
   };
 });

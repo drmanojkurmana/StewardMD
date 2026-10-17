@@ -256,6 +256,61 @@ test("apply sets the data attribute hook and size tokens", () => {
   assert.equal(Prefs.apply(null), false);
 });
 
+/* ---------- focus return: a selector, never a stale node ---------- */
+
+/* Minimal element stub: only the surface selectorFor reads. */
+function stubEl({ id = "", attrs = {}, rootEl = null, openerEl = null } = {}) {
+  const el = {
+    id,
+    getAttribute(name) { return Object.prototype.hasOwnProperty.call(attrs, name) ? attrs[name] : null; },
+    closest(sel) {
+      if (sel.includes("[data-cbp-settings]")) return openerEl;
+      return rootEl;
+    },
+  };
+  return el;
+}
+function stubRootEl({ id = "", classes = [] } = {}) {
+  return { id, classList: { contains(c) { return classes.includes(c); } } };
+}
+
+test("focus selector re-finds the Display settings opener on each screen", () => {
+  const live = stubEl({ attrs: { "data-cbp-settings": "" }, rootEl: stubRootEl({ id: "cblRoot" }) });
+  assert.equal(Prefs._selectorFor(live), "#cblRoot [data-cbp-settings]");
+  const trainer = stubEl({ attrs: { "data-cbp-settings": "" }, rootEl: stubRootEl({ id: "cbtRoot" }) });
+  assert.equal(Prefs._selectorFor(trainer), "#cbtRoot [data-cbp-settings]");
+  const ecg = stubEl({ attrs: { "data-cbp-settings": "" }, rootEl: stubRootEl({ classes: ["cbecg"] }) });
+  assert.equal(Prefs._selectorFor(ecg), ".cbecg [data-cbp-settings]");
+  /* A tap on the icon inside the button resolves to the button. */
+  const icon = stubEl({ openerEl: live });
+  icon.closest = (sel) => (sel.includes("[data-cbp-settings]") ? live : stubRootEl({ id: "cblRoot" }));
+  live.closest = (sel) => stubRootEl({ id: "cblRoot" });
+  assert.equal(Prefs._selectorFor(icon), "#cblRoot [data-cbp-settings]");
+  assert.equal(typeof Prefs._selectorFor(live), "string");
+});
+
+test("focus selector falls back to id and data-act, else null", () => {
+  assert.equal(Prefs._selectorFor(stubEl({ id: "someBtn" })), "#someBtn");
+  const start = stubEl({ attrs: { "data-act": "start" }, rootEl: stubRootEl({ id: "cblRoot" }) });
+  assert.equal(Prefs._selectorFor(start), "#cblRoot [data-act=\"start\"]");
+  assert.equal(Prefs._selectorFor(stubEl({})), null);
+  assert.equal(Prefs._selectorFor(null), null);
+  assert.equal(Prefs._selectorFor({}), null);
+});
+
+test("focus target prefers the re-rendered node over a detached opener", () => {
+  const stale = { isConnected: false };
+  const fresh = { isConnected: true };
+  const doc = { querySelector: (sel) => (sel === "#cblRoot [data-cbp-settings]" ? fresh : null), contains: (n) => n === fresh };
+  assert.equal(Prefs._pickFocusTarget(doc, "#cblRoot [data-cbp-settings]", stale), fresh);
+  /* Selector matches nothing and the stored node is gone: no target. */
+  assert.equal(Prefs._pickFocusTarget(doc, "#gone [data-cbp-settings]", stale), null);
+  /* No selector: a still connected opener is used. */
+  const liveDoc = { querySelector: () => null, contains: (n) => n === fresh };
+  assert.equal(Prefs._pickFocusTarget(liveDoc, null, fresh), fresh);
+  assert.equal(Prefs._pickFocusTarget(null, null, null), null);
+});
+
 /* ---------- copy scan: no doses, no emojis, no em-dashes ---------- */
 
 test("user-visible copy has no doses, emojis, em-dashes or American color", () => {
