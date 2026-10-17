@@ -69,7 +69,25 @@
     { id: "third-degree", name: "Third-degree (complete) AV block", rate: 45, regular: true, cls: "pulse-present",
       features: ["P waves and QRS complexes fully dissociated", "Atrial rate faster than the slow escape rhythm", "Regular escape rhythm, often wide"] },
     { id: "asystole", name: "Asystole", rate: 0, regular: true, cls: "non-shockable",
-      features: ["Near-flat baseline, no QRS complexes", "Non-shockable arrest rhythm", "Confirm in more than one lead in practice"] }
+      features: ["Near-flat baseline, no QRS complexes", "Non-shockable arrest rhythm", "Confirm in more than one lead in practice"] },
+    { id: "junctional", name: "Junctional rhythm", rate: 50, regular: true, cls: "pulse-present",
+      features: ["Regular narrow QRS near 40 to 60 per min", "No P wave before the QRS (hidden or inverted)", "Impulse starts near the AV junction, not the sinus node"] },
+    { id: "pac", name: "Premature atrial complexes", rate: 72, regular: false, cls: "pulse-present",
+      features: ["Early narrow beat after a premature P wave", "Early beat comes before the expected sinus beat", "Short pause follows the premature beat"] },
+    { id: "pvc", name: "Premature ventricular complexes", rate: 72, regular: false, cls: "pulse-present",
+      features: ["Early wide beat with no P wave before it", "Wide QRS looks different from the sinus beats", "Full compensatory pause follows the early beat"] },
+    { id: "pvc-bigeminy", name: "Ventricular bigeminy", rate: 72, regular: false, cls: "pulse-present",
+      features: ["Every sinus beat is followed by a wide premature beat", "Sinus and ventricular beats alternate in pairs", "Pattern repeats beat after beat"] },
+    { id: "paced-atrial", name: "Atrial paced rhythm", rate: 70, regular: true, cls: "pulse-present",
+      features: ["Pacing spike just before every P wave", "Normal narrow QRS follows each paced P wave", "Regular rhythm set by the pacemaker"] },
+    { id: "paced-ventricular", name: "Ventricular paced rhythm", rate: 70, regular: true, cls: "pulse-present",
+      features: ["Pacing spike just before every wide QRS", "Wide QRS with no P wave driving it", "Regular rhythm set by the pacemaker"] },
+    { id: "wpw", name: "Wolff-Parkinson-White pattern", rate: 75, regular: true, cls: "pulse-present",
+      features: ["Short PR interval below 120 ms", "Delta wave slurs the start of the QRS", "QRS slightly wide from early ventricular activation"] },
+    { id: "hyperkalaemia", name: "Hyperkalaemia pattern", rate: 65, regular: true, cls: "pulse-present",
+      features: ["Tall, narrow, peaked T waves", "Wide QRS with flattened P waves", "Pattern taught with raised potassium in mind"] },
+    { id: "sinus-arrest", name: "Sinus arrest", rate: 55, regular: false, cls: "pulse-present",
+      features: ["Sudden pause with no P wave and no QRS", "Pause is longer than two normal cycles", "Sinus beats resume after the pause"] }
   ];
   var RHYTHM_BY_ID = {};
   (function () { for (var i = 0; i < RHYTHMS.length; i++) RHYTHM_BY_ID[RHYTHMS[i].id] = RHYTHMS[i]; })();
@@ -85,6 +103,7 @@
     if (!meta) return null;
     var WIN = 12, pTimes = [], qrsTimes = [], prList = [], i, t;
     var qrsWidth = 80, hasP = true;
+    var beatKinds = [], spikeTimes = [];
     function regularTrain(rate, pr) {
       var rr = 60000 / rate, off = 400;
       for (t = off; t < WIN * 1000; t += rr) {
@@ -149,7 +168,49 @@
         qrsWidth = 120;
         break;
       }
+      case "junctional": regularTrain(50, null); hasP = false; break;
+      case "wpw": regularTrain(75, 90); qrsWidth = 110; break;
+      case "hyperkalaemia": regularTrain(65, 180); qrsWidth = 130; break;
+      case "paced-atrial": {
+        regularTrain(70, 160);
+        for (i = 0; i < pTimes.length; i++) spikeTimes.push(pTimes[i] - 20);
+        break;
+      }
+      case "paced-ventricular": {
+        hasP = false; qrsWidth = 160;
+        for (t = 400; t < WIN * 1000; t += 60000 / 70) { qrsTimes.push(t); spikeTimes.push(t - 20); }
+        break;
+      }
+      case "pac": case "pvc": case "pvc-bigeminy": {
+        /* Sinus beats at 830 ms with premature beats. PAC: early narrow beat
+         * after a premature P. PVC: early wide beat, no P, compensatory pause.
+         * Bigeminy: every sinus beat is followed by a PVC. */
+        var bt = 600, bk = 0;
+        while (bt < WIN * 1000) {
+          pTimes.push(bt - 160); prList.push(160); qrsTimes.push(bt); beatKinds.push("sinus");
+          if (id === "pvc-bigeminy") {
+            var bv = bt + 520; qrsTimes.push(bv); beatKinds.push("pvc"); bt += 1360;
+          } else if (bk % 4 === 3) {
+            if (id === "pac") {
+              var bp = bt + 500; pTimes.push(bp - 140); prList.push(140); qrsTimes.push(bp); beatKinds.push("pac"); bt += 500 + 1130;
+            } else {
+              var bq = bt + 480; qrsTimes.push(bq); beatKinds.push("pvc"); bt += 480 + 1180;
+            }
+          } else { bt += 830; }
+          bk++;
+        }
+        break;
+      }
+      case "sinus-arrest": {
+        /* Three sinus beats, a 2600 ms pause with nothing, then sinus resumes. */
+        var at = 600, ai;
+        for (ai = 0; ai < 3; ai++) { pTimes.push(at - 160); prList.push(160); qrsTimes.push(at); beatKinds.push("sinus"); at += 830; }
+        at += 1770;
+        while (at < WIN * 1000) { pTimes.push(at - 160); prList.push(160); qrsTimes.push(at); beatKinds.push("sinus"); at += 830; }
+        break;
+      }
     }
+    if (!beatKinds.length) for (i = 0; i < qrsTimes.length; i++) beatKinds.push(id === "paced-ventricular" ? "paced-v" : (id === "paced-atrial" ? "paced-a" : "sinus"));
     var rrList = [];
     for (i = 1; i < qrsTimes.length; i++) rrList.push(qrsTimes[i] - qrsTimes[i - 1]);
     var rate = 0;
@@ -157,8 +218,12 @@
       var mean = 0; for (i = 0; i < rrList.length; i++) mean += rrList[i];
       mean /= rrList.length; rate = Math.round(60000 / mean);
     }
+    var qtMs = qrsWidth > 100 ? 440 : 380;
+    if (id === "wpw") qtMs = 360;
+    if (id === "hyperkalaemia") qtMs = 400;
     return { id: id, pTimes: pTimes, qrsTimes: qrsTimes, prList: prList, rrList: rrList,
-      qrsWidth: qrsWidth, hasP: hasP, rate: rate, regular: meta.regular };
+      qrsWidth: qrsWidth, hasP: hasP, rate: rate, regular: meta.regular,
+      beatKinds: beatKinds, spikeTimes: spikeTimes, qtMs: qtMs };
   }
 
   function gauss(t, c, w, a) {
@@ -203,7 +268,7 @@
         var p0 = Math.round((pt * SAMPLE_HZ) / 1000) - 40, p1 = p0 + 80;
         for (i = Math.max(0, p0); i < Math.min(n, p1); i++) {
           t = (i * 1000) / SAMPLE_HZ;
-          out[i] += gauss(t, pt, 16, 0.14);
+          out[i] += gauss(t, pt, 16, id === "hyperkalaemia" ? 0.05 : 0.14);
         }
       }
     }
@@ -216,18 +281,22 @@
         amp = Math.sin((2 * Math.PI * qt) / 4200) * 1.1;
         if (Math.abs(amp) < 0.15) amp = amp < 0 ? -0.15 : 0.15;
       }
+      var kind = (d.beatKinds && d.beatKinds[qi]) || "sinus";
+      var beatWide = wide || kind === "pvc" || kind === "paced-v";
       var c0 = Math.round((qt * SAMPLE_HZ) / 1000) - 60, c1 = c0 + 130;
       for (i = Math.max(0, c0); i < Math.min(n, c1); i++) {
         t = (i * 1000) / SAMPLE_HZ;
-        if (wide) {
-          v = gauss(t, qt - 22, 22, -0.25 * amp) + gauss(t, qt + 12, qw, 1.15 * amp) +
+        if (beatWide) {
+          v = gauss(t, qt - 22, 22, -0.25 * amp) + gauss(t, qt + 12, 26, 1.15 * amp) +
             gauss(t, qt + 48, 24, -0.35 * amp);
         } else {
           v = gauss(t, qt - 12, 7, -0.12 * amp) + gauss(t, qt, qw, 1.0 * amp * qrsScale) +
             gauss(t, qt + 12, 7, -0.22 * amp);
+          if (id === "wpw") v += gauss(t, qt - 30, 18, 0.32 * amp); /* delta wave slur */
         }
-        /* T wave. */
-        v += gauss(t, qt + (wide ? 300 : 240), wide ? 42 : 34, 0.28 * (amp < 0 ? -1 : 1));
+        /* T wave. Peaked and narrow in the hyperkalaemia pattern. */
+        if (id === "hyperkalaemia") v += gauss(t, qt + 280, 24, 0.58);
+        else v += gauss(t, qt + (beatWide ? 300 : 240), beatWide ? 42 : 34, (kind === "pvc" || kind === "paced-v" ? -0.3 : 0.28) * (amp < 0 ? -1 : 1));
         out[i] += v;
       }
       /* ST segment offset (territory elevation or reciprocal depression). */
@@ -236,6 +305,12 @@
         for (i = Math.max(0, s0); i < Math.min(n, s1); i++) out[i] += stElev;
       }
       void r;
+    }
+    /* Pacing spikes: brief vertical deflections just before the paced beat. */
+    for (qi = 0; qi < d.spikeTimes.length; qi++) {
+      var st = d.spikeTimes[qi];
+      var sA = Math.max(0, Math.round((st * SAMPLE_HZ) / 1000) - 3), sB = Math.min(n, sA + 7);
+      for (i = sA; i < sB; i++) out[i] += gauss((i * 1000) / SAMPLE_HZ, st, 3, 0.8);
     }
     return { hz: SAMPLE_HZ, seconds: STRIP_S, data: out, desc: d };
   }
@@ -290,29 +365,76 @@
   /* ---- Schematic 12-lead view: territory ST elevation, reciprocal depression. ----
    * Offsets in mm (1 mm = 0.1 mV). Only the named territory leads elevate. */
   var LEADS = ["I", "II", "III", "aVR", "aVL", "aVF", "V1", "V2", "V3", "V4", "V5", "V6"];
-  var LEAD_SETS = {
-    normal: { label: "Normal (schematic)", st: {} },
-    anterior: { label: "Anterior STEMI (schematic)", st: { V1: 2, V2: 3, V3: 3, V4: 2, "II": -0.5, "III": -0.5, aVF: -0.5 } },
-    inferior: { label: "Inferior STEMI (schematic)", st: { II: 2, III: 3, aVF: 2.5, aVL: -1, I: -0.5 } },
-    lateral: { label: "Lateral STEMI (schematic)", st: { I: 2, aVL: 2.5, V5: 2, V6: 2, II: -0.5, III: -0.5, aVF: -0.5 } }
+  /* Per-lead morphology from a normal heart vector (QRS axis near 60 degrees).
+   * Signed amplitudes in mV: p, q, r, s, t. aVR is inverted. Precordial leads
+   * show R-wave progression from rS in V1 to qR in V6, with transition (R
+   * greater than S) near V3 to V4. T is inverted in aVR and V1 only. */
+  var LEAD_MODEL = {
+    "I":   { p: 0.12, q: -0.05, r: 0.80, s: -0.15, t: 0.25 },
+    "II":  { p: 0.15, q: -0.05, r: 1.10, s: -0.10, t: 0.30 },
+    "III": { p: 0.08, q: -0.03, r: 0.70, s: -0.20, t: 0.18 },
+    "aVR": { p: -0.12, q: 0.08, r: -0.75, s: 0.10, t: -0.20 },
+    "aVL": { p: 0.08, q: -0.04, r: 0.55, s: -0.10, t: 0.16 },
+    "aVF": { p: 0.12, q: -0.04, r: 0.90, s: -0.12, t: 0.24 },
+    "V1":  { p: 0.08, q: 0.00, r: 0.25, s: -0.90, t: -0.10 },
+    "V2":  { p: 0.10, q: 0.00, r: 0.40, s: -0.75, t: 0.35 },
+    "V3":  { p: 0.10, q: -0.02, r: 0.60, s: -0.55, t: 0.40 },
+    "V4":  { p: 0.10, q: -0.04, r: 1.00, s: -0.25, t: 0.35 },
+    "V5":  { p: 0.10, q: -0.08, r: 1.10, s: -0.10, t: 0.30 },
+    "V6":  { p: 0.10, q: -0.10, r: 0.95, s: -0.05, t: 0.25 }
   };
+  function leadMorph(lead) { return LEAD_MODEL[lead] || LEAD_MODEL.II; }
+  var LEAD_SETS = {
+    normal: { label: "Normal (schematic)", territory: "No territory", st: {}, note: "Normal schematic 12-lead. Note the R-wave progression from V1 to V6 and the inverted beat in aVR." },
+    anterior: { label: "Anterior STEMI (schematic)", territory: "Anterior wall (V1 to V4)", st: { V1: 2, V2: 3, V3: 3, V4: 2, "II": -0.5, "III": -0.5, aVF: -0.5 }, note: "Anterior territory: ST elevation in V1 to V4, with reciprocal depression in II, III and aVF." },
+    inferior: { label: "Inferior STEMI (schematic)", territory: "Inferior wall (II, III, aVF)", st: { II: 2, III: 3, aVF: 2.5, aVL: -1, I: -0.5 }, note: "Inferior territory: ST elevation in II, III and aVF, with reciprocal depression in aVL and I." },
+    lateral: { label: "Lateral STEMI (schematic)", territory: "Lateral wall (I, aVL, V5, V6)", st: { I: 2, aVL: 2.5, V5: 2, V6: 2, II: -0.5, III: -0.5, aVF: -0.5 }, note: "Lateral territory: ST elevation in I, aVL, V5 and V6, with reciprocal depression in II, III and aVF." },
+    posterior: { label: "Posterior STEMI pattern (schematic)", territory: "Posterior wall (seen in V1 to V3)", st: { V1: -1.5, V2: -2, V3: -1.5 }, rBoost: { V1: 1.8, V2: 1.6, V3: 1.4 }, note: "Posterior pattern: ST depression in V1 to V3 with tall R waves and upright T waves. In practice this is checked with posterior leads V7 to V9." },
+    rv: { label: "Right ventricular STEMI pattern (schematic)", territory: "Right ventricle (inferior leads plus V1)", st: { II: 2, III: 3, aVF: 2.5, aVL: -1, I: -0.5, V1: 1 }, note: "Right ventricular pattern: inferior ST elevation with ST elevation in V1. In practice this is checked with right-sided leads V3R and V4R, which are not part of the standard 12 leads shown here." },
+    lbbb: { label: "Left bundle branch block (pattern, schematic)", territory: "Conduction pattern, not a territory", qrsWide: true, st: { V1: -1, V2: -1, V3: -0.5, I: 0.5, aVL: 0.5, V5: 0.5, V6: 0.5 }, note: "Left bundle branch block pattern: wide QRS with discordant ST changes (ST moves opposite to the main QRS direction). This is a pattern card, not a territory map." },
+    wellens: { label: "Wellens pattern (schematic)", territory: "Anterior T-wave pattern (V2, V3)", st: {}, tWave: { V2: -1, V3: -1, V1: -0.5 }, note: "Wellens pattern: deeply inverted T waves in V2 and V3 (sometimes V1), taught as a warning pattern for the anterior wall. This is a pattern card, not a territory map." }
+  };
+  var PATTERNS = [
+    { id: "lbbb", set: "lbbb", name: "Left bundle branch block", features: ["Wide QRS from delayed left ventricular activation", "Discordant ST changes opposite to the QRS", "Deep S waves in V1 to V3, broad R waves in V5 and V6"] },
+    { id: "wellens", set: "wellens", name: "Wellens pattern", features: ["Deeply inverted T waves in V2 and V3", "Little or no ST elevation", "Taught as a warning pattern for the anterior wall"] }
+  ];
   function leadSt(setId, lead) {
     var set = LEAD_SETS[setId];
     if (!set) return 0;
     return set.st[lead] || 0;
   }
-  /* One beat per lead cell, drawn from the sinus model with the lead ST offset. */
+  /* One beat for one lead, built from that lead morphology plus the set
+   * ST offset, tall-R boost, T-wave override and wide-QRS flag. QRS at 400 ms. */
+  function sampleLead(lead, setId) {
+    var set = LEAD_SETS[setId] || LEAD_SETS.normal;
+    var m0 = leadMorph(lead);
+    var m = { p: m0.p, q: m0.q, r: m0.r, s: m0.s, t: m0.t };
+    if (set.rBoost && set.rBoost[lead]) m.r = m.r * set.rBoost[lead];
+    if (set.tWave && set.tWave[lead] != null) m.t = set.tWave[lead] * 0.35;
+    var stMv = (set.st[lead] || 0) / 10;
+    var wide = !!set.qrsWide;
+    var beatMs = 830, n = Math.round((beatMs / 1000) * SAMPLE_HZ), out = [], i;
+    for (i = 0; i < n; i++) {
+      var t = (i * 1000) / SAMPLE_HZ, rel = t - 400, v;
+      var qw = wide ? 22 : 7, rw = wide ? 26 : 11;
+      v = gauss(rel, -160, 16, m.p) + gauss(rel, -14, qw, m.q) + gauss(rel, 0, rw, m.r) +
+        gauss(rel, 16, qw, m.s) + gauss(rel, 240, wide ? 44 : 34, m.t);
+      if (rel >= 60 && rel <= 200) v += stMv;
+      out.push(v);
+    }
+    return { hz: SAMPLE_HZ, data: out, morph: m, stMm: set.st[lead] || 0, qrsMs: 400 };
+  }
+  /* One beat per lead cell, drawn from that lead morphology with the set ST offset. */
   function leadSvg(setId, lead) {
     var offMm = leadSt(setId, lead);
-    var smp = sample("sinus", { stElev: offMm / 10 });
+    var smp = sampleLead(lead, setId);
     var hMm = 22, base = 12, x0 = 2, beatMs = 830;
-    var i0 = Math.round((0.4 * SAMPLE_HZ)), i1 = Math.round(((0.4 + beatMs / 1000) * SAMPLE_HZ));
+    var i0 = 0, i1 = smp.data.length;
     var wMm = (beatMs / 1000) * MM_PER_S + 4;
     var d = "";
     for (var i = i0; i < i1; i++) {
       var x = x0 + ((i - i0) / SAMPLE_HZ) * MM_PER_S;
       var v = smp.data[i];
-      if (lead === "aVR") v = -v;   /* aVR looks at the heart from the right shoulder: upright beat in other leads reads inverted */
       if (v > 2.5) v = 2.5; if (v < -2.5) v = -2.5;
       d += (i === i0 ? "M" : "L") + x.toFixed(2) + " " + (base - v * MM_PER_MV).toFixed(2);
     }
@@ -322,6 +444,31 @@
       gridInner(Math.ceil(wMm), hMm) +
       '<path class="cbecg-ink ' + cls + '" d="' + d + '"/>' +
       '<text class="cbecg-lead-lbl" x="2" y="6">' + lead + "</text></svg>";
+  }
+
+  /* ---- Measuring mode: schematic PR, QRS and QT with teaching flags only. ---- */
+  function flagInterval(kind, ms) {
+    if (ms == null) return { flag: "none", text: "Not present in this schematic rhythm. Teaching note only." };
+    if (kind === "pr") {
+      if (ms < 120) return { flag: "short", text: "Short for teaching (teaching range 120 to 200 ms). Teaching note only, not a diagnosis." };
+      if (ms > 200) return { flag: "long", text: "Long for teaching (teaching range 120 to 200 ms). Teaching note only, not a diagnosis." };
+      return { flag: "normal", text: "Within the teaching range (120 to 200 ms). Teaching note only, not a diagnosis." };
+    }
+    if (kind === "qrs") {
+      if (ms >= 120) return { flag: "long", text: "Wide for teaching (teaching range under 120 ms). Teaching note only, not a diagnosis." };
+      return { flag: "normal", text: "Within the teaching range (under 120 ms). Teaching note only, not a diagnosis." };
+    }
+    if (ms < 350) return { flag: "short", text: "Short for teaching (teaching range about 350 to 450 ms). Teaching note only, not a diagnosis." };
+    if (ms > 450) return { flag: "long", text: "Long for teaching (teaching range about 350 to 450 ms). Teaching note only, not a diagnosis." };
+    return { flag: "normal", text: "Within the teaching range (about 350 to 450 ms). Teaching note only, not a diagnosis." };
+  }
+  function intervalsFor(id) {
+    var d = describe(id);
+    if (!d) return null;
+    var conducted = d.prList.filter(function (p) { return p != null; });
+    var pr = conducted.length ? conducted.slice().sort(function (a, b) { return a - b; })[Math.floor(conducted.length / 2)] : null;
+    return { pr: pr, qrs: d.qrsWidth, qt: d.qtMs,
+      prFlag: flagInterval("pr", pr), qrsFlag: flagInterval("qrs", d.qrsWidth), qtFlag: flagInterval("qt", d.qtMs) };
   }
 
   /* ---- Six-step reading course. Each step: title, body, diagram rhythm, takeaway. ---- */
@@ -375,8 +522,50 @@
     { rhythm: "sinus-tach", q: "Regular rhythm at 130 per min with a P wave before every QRS. Which rhythm?",
       choices: ["Sinus tachycardia", "Ventricular tachycardia", "Atrial fibrillation", "Third-degree block"], a: 0 },
     { rhythm: "sinus", q: "Normal PR, narrow QRS, regular at 72 per min. Which rhythm?",
-      choices: ["Sinus rhythm", "Sinus bradycardia", "Atrial flutter", "Ventricular fibrillation"], a: 0 }
+      choices: ["Sinus rhythm", "Sinus bradycardia", "Atrial flutter", "Ventricular fibrillation"], a: 0 },
+    { rhythm: "junctional", level: "medium", q: "Regular narrow rhythm near 50 per min with no P wave before the QRS. Which rhythm?",
+      choices: ["Junctional rhythm", "Sinus bradycardia", "Third-degree block", "Atrial fibrillation"], a: 0 },
+    { rhythm: "pac", level: "medium", q: "Early narrow beat after a premature P wave, then a short pause. Which pattern?",
+      choices: ["Premature atrial complexes", "Premature ventricular complexes", "Mobitz II", "Sinus arrest"], a: 0 },
+    { rhythm: "pvc", level: "medium", q: "Early wide beat with no P wave before it and a full pause after. Which pattern?",
+      choices: ["Premature ventricular complexes", "Premature atrial complexes", "Ventricular tachycardia", "Atrial paced rhythm"], a: 0 },
+    { rhythm: "pvc-bigeminy", level: "hard", q: "Every sinus beat is followed by a wide premature beat, in repeating pairs. Which pattern?",
+      choices: ["Ventricular bigeminy", "Mobitz I (Wenckebach)", "Atrial fibrillation", "Torsades de pointes"], a: 0 },
+    { rhythm: "paced-atrial", level: "medium", q: "A pacing spike appears just before every P wave, then a narrow QRS. Which rhythm?",
+      choices: ["Atrial paced rhythm", "Ventricular paced rhythm", "Sinus rhythm", "Junctional rhythm"], a: 0 },
+    { rhythm: "paced-ventricular", level: "medium", q: "A pacing spike appears just before every wide QRS. Which rhythm?",
+      choices: ["Ventricular paced rhythm", "Atrial paced rhythm", "Ventricular tachycardia", "Third-degree block"], a: 0 },
+    { rhythm: "wpw", level: "hard", q: "Short PR with a slurred start to the QRS (delta wave). Which pattern?",
+      choices: ["Wolff-Parkinson-White pattern", "First-degree AV block", "Hyperkalaemia pattern", "Sinus tachycardia"], a: 0 },
+    { rhythm: "hyperkalaemia", level: "hard", q: "Tall narrow peaked T waves with a wide QRS and flattened P waves. Which pattern?",
+      choices: ["Hyperkalaemia pattern", "Wolff-Parkinson-White pattern", "Anterior STEMI", "Sinus rhythm"], a: 0 },
+    { rhythm: "sinus-arrest", level: "medium", q: "Sinus beats, then a long pause with no P wave and no QRS, then sinus beats resume. Which pattern?",
+      choices: ["Sinus arrest", "Mobitz II", "Premature atrial complexes", "Asystole"], a: 0 },
+    { rhythm: "mobitz1", level: "hard", q: "Hard: PR lengthens beat by beat, then one QRS is dropped. Pick the block from these similar blocks.",
+      choices: ["Mobitz I (Wenckebach)", "Mobitz II", "Third-degree (complete) block", "First-degree AV block"], a: 0 },
+    { rhythm: "mobitz2", level: "hard", q: "Hard: PR stays fixed, then one QRS drops without warning. Pick the block from these similar blocks.",
+      choices: ["Mobitz II", "Mobitz I (Wenckebach)", "Third-degree (complete) block", "Sinus arrest"], a: 0 },
+    { rhythm: "third-degree", level: "hard", q: "Hard: P waves march through at their own rate, unrelated to a slow regular QRS. Pick the block from these similar blocks.",
+      choices: ["Third-degree (complete) block", "Mobitz II", "Junctional rhythm", "First-degree AV block"], a: 0 },
+    { rhythm: "pvc", level: "hard", q: "Hard: one early wide beat stands out among narrow sinus beats. Pick the pattern from these similar patterns.",
+      choices: ["Premature ventricular complexes", "Ventricular bigeminy", "Ventricular tachycardia", "Premature atrial complexes"], a: 0 },
+    { type: "lead", setId: "anterior", rhythm: "sinus", level: "hard", q: "Hard: in this schematic anterior set, which lead shows ST elevation?",
+      choices: ["V2", "II", "aVR", "V6"], a: 0 },
+    { type: "lead", setId: "inferior", rhythm: "sinus", level: "hard", q: "Hard: in this schematic inferior set, which lead shows ST elevation?",
+      choices: ["III", "aVL", "V2", "I"], a: 0 },
+    { type: "lead", setId: "lateral", rhythm: "sinus", level: "hard", q: "Hard: in this schematic lateral set, which lead shows ST elevation?",
+      choices: ["aVL", "III", "V3", "aVR"], a: 0 },
+    { type: "lead", setId: "posterior", rhythm: "sinus", level: "hard", q: "Hard: in this schematic posterior pattern, which lead shows ST depression?",
+      choices: ["V2", "II", "V5", "aVL"], a: 0 }
   ];
+  (function () {
+    var easy = { sinus: 1, "sinus-brady": 1, "sinus-tach": 1, afib: 1, flutter: 1, vfib: 1, asystole: 1, vt: 1, svt: 1, "first-degree": 1 };
+    var medium = { torsades: 1, mobitz1: 1, mobitz2: 1, "third-degree": 1 };
+    for (var i = 0; i < QUIZ.length; i++) {
+      if (!QUIZ[i].level) QUIZ[i].level = easy[QUIZ[i].rhythm] ? "easy" : (medium[QUIZ[i].rhythm] ? "medium" : "medium");
+      if (!QUIZ[i].type) QUIZ[i].type = "rhythm";
+    }
+  })();
 
   function shuffledIdx(n, rand) {
     var a = [], i, j, tmp;
@@ -387,9 +576,10 @@
 
   /* buildQuiz(n, seed, misses): misses maps quiz index to miss count; missed
    * questions are drawn first so they repeat (spaced repetition). */
-  function buildQuiz(n, seed, misses) {
+  function buildQuiz(n, seed, misses, level) {
     var rand = rng(seed == null ? (Date.now() % 2147483647) : seed);
-    var order = shuffledIdx(QUIZ.length, rand);
+    var all = shuffledIdx(QUIZ.length, rand);
+    var order = level ? all.filter(function (qi) { return QUIZ[qi].level === level; }) : all;
     var missed = [], rest = [], i;
     for (i = 0; i < order.length; i++) {
       if (misses && misses[order[i]] > 0) missed.push(order[i]); else rest.push(order[i]);
@@ -400,7 +590,8 @@
       var src = QUIZ[qi];
       var co = shuffledIdx(src.choices.length, rand);
       var nc = co.map(function (k) { return src.choices[k]; });
-      return { qi: qi, rhythm: src.rhythm, q: src.q, choices: nc, a: co.indexOf(src.a) };
+      return { qi: qi, rhythm: src.rhythm, q: src.q, choices: nc, a: co.indexOf(src.a),
+        level: src.level || "medium", type: src.type || "rhythm", setId: src.setId || null };
     });
   }
 
@@ -442,7 +633,7 @@
     if (typeof document === "undefined") return false;
     if (isOpen()) return true;
     state = { tab: "course", step: 0, rhythm: "sinus", leadSet: "anterior",
-      quiz: null, answers: [], card: 0, revealed: false, cal: false,
+      quiz: null, answers: [], card: 0, revealed: false, cal: false, quizLevel: "easy",
       store: loadStore(), seed: (opts && opts.seed) || 7 };
     root = document.createElement("div");
     root.className = "cbecg";
@@ -522,7 +713,22 @@
       '<dl class="cbecg-meta"><dt>Rate</dt><dd>' + (m.rate ? "about " + m.rate + " per min" : "no complexes") + "</dd>" +
       "<dt>Regularity</dt><dd>" + (m.regular ? "regular" : "irregular") + "</dd>" +
       "<dt>ACLS category</dt><dd>" + escH(CLS_LABEL[m.cls]) + "</dd></dl>" +
-      '<ul class="cbecg-feats">' + m.features.map(function (f) { return "<li>" + escH(f) + "</li>"; }).join("") + "</ul>";
+      '<ul class="cbecg-feats">' + m.features.map(function (f) { return "<li>" + escH(f) + "</li>"; }).join("") + "</ul>" +
+      measureHtml();
+  }
+
+  function measureHtml() {
+    var iv = intervalsFor(state.rhythm);
+    if (!iv) return "";
+    function row(label, ms, f) {
+      return '<div class="cbecg-meas-row"><span class="cbecg-meas-lbl">' + label + '</span>' +
+        '<span class="cbecg-meas-val">' + (ms == null ? "not present" : ms + " ms") + '</span>' +
+        '<span class="cbecg-chip ' + escH(f.flag) + '">' + escH(f.flag) + '</span>' +
+        '<span class="cbecg-meas-txt">' + escH(f.text) + "</span></div>";
+    }
+    return '<div class="cbecg-meas" data-cbecg-measure><h3>Measuring mode (schematic)</h3>' +
+      row("PR", iv.pr, iv.prFlag) + row("QRS", iv.qrs, iv.qrsFlag) + row("QT", iv.qt, iv.qtFlag) +
+      '<p class="cbecg-note">Values come from the schematic drawing model for this rhythm. Teaching text only. This says nothing about any real ECG.</p></div>';
   }
 
   function leadsHtml() {
@@ -535,10 +741,16 @@
         (leadSt(state.leadSet, L) ? '<span class="cbecg-st">ST ' + (leadSt(state.leadSet, L) > 0 ? "+" : "") + leadSt(state.leadSet, L) + " mm</span>" : "") +
         "</div>";
     }).join("");
+    var set = LEAD_SETS[state.leadSet];
+    var patterns = PATTERNS.map(function (p) {
+      return '<div class="cbecg-pattern"><h3>' + escH(p.name) + ' (pattern card, schematic)</h3><ul class="cbecg-feats">' +
+        p.features.map(function (f) { return "<li>" + escH(f) + "</li>"; }).join("") + "</ul></div>";
+    }).join("");
     return '<label class="cbecg-lbl" for="cbecg-set">12-lead set (schematic)</label>' +
       '<select id="cbecg-set" class="cbecg-sel" data-cbecg-leadset>' + sets + "</select>" +
       '<div class="cbecg-grid12">' + cells + "</div>" +
-      '<p class="cbecg-note">ST elevation is drawn only in the territory leads, with reciprocal depression where standard. Schematic teaching drawings: every lead shares one simplified beat shape (aVR inverted), so only the ST change differs between leads.</p>';
+      '<p class="cbecg-note" data-cbecg-leadnote>' + escH(set.note || "") + " Territory: " + escH(set.territory || "") + '.</p>' +
+      '<p class="cbecg-note">Each lead has its own schematic beat shape. aVR is inverted, and the chest leads show R-wave progression with transition near V3 to V4. Schematic teaching drawings only.</p>' + patterns;
   }
 
   function cardsHtml() {
@@ -558,7 +770,11 @@
 
   function quizHtml() {
     if (!state.quiz) {
-      return '<p>Ten questions, randomised. Missed questions repeat next time.</p>' +
+      var lv = [["easy", "Easy"], ["medium", "Medium"], ["hard", "Hard"]].map(function (l) {
+        return '<button class="cbecg-btn' + (state.quizLevel === l[0] ? " pri" : "") + '" data-cbecg-level="' + l[0] + '" aria-pressed="' + (state.quizLevel === l[0]) + '">' + l[1] + "</button>";
+      }).join("");
+      return '<p>Ten questions, randomised. Missed questions repeat next time. Hard questions ask you to tell similar rhythms apart, or to find the lead with the ST change.</p>' +
+        '<div class="cbecg-row" role="group" aria-label="Quiz level">' + lv + "</div>" +
         (state.store.quizBest ? '<p class="cbecg-note">Best score so far: ' + state.store.quizBest + " of 10.</p>" : "") +
         '<button class="cbecg-btn pri" data-cbecg-start>Start quiz</button>';
     }
@@ -566,8 +782,10 @@
     for (i = 0; i < state.quiz.length; i++) {
       (function (qi) {
         var q = state.quiz[qi];
-        h += '<fieldset class="cbecg-qset"><legend>' + (qi + 1) + ". " + escH(q.q) + "</legend>" +
-          stripSvg(q.rhythm, 150, { heightMm: 26 }) +
+        var visual = q.type === "lead"
+          ? '<div class="cbecg-grid12">' + LEADS.map(function (L) { return '<div class="cbecg-cell' + (leadSt(q.setId, L) > 0 ? " up" : (leadSt(q.setId, L) < 0 ? " dn" : "")) + '">' + leadSvg(q.setId, L) + "</div>"; }).join("") + "</div>"
+          : stripSvg(q.rhythm, 150, { heightMm: 26 });
+        h += '<fieldset class="cbecg-qset"><legend>' + (qi + 1) + ". " + escH(q.q) + "</legend>" + visual +
           q.choices.map(function (c, k) {
             var mark = state.answers[qi] == null ? "" : (k === q.a ? " ok" : (state.answers[qi] === k ? " bad" : ""));
             return '<label class="cbecg-opt' + mark + '"><input type="radio" name="cbecg-q' + qi + '" value="' + k + '"' +
@@ -710,8 +928,11 @@
     on("[data-cbecg-cardnext]", "click", function () {
       state.card = (state.card + 1) % RHYTHMS.length; state.revealed = false; render();
     });
+    on("[data-cbecg-level]", "click", function (e) {
+      state.quizLevel = e.currentTarget.getAttribute("data-cbecg-level"); render();
+    });
     on("[data-cbecg-start]", "click", function () {
-      state.quiz = buildQuiz(10, (state.seed = (state.seed * 1103515245 + 12345) % 2147483647), state.store.misses);
+      state.quiz = buildQuiz(10, (state.seed = (state.seed * 1103515245 + 12345) % 2147483647), state.store.misses, state.quizLevel);
       state.answers = new Array(state.quiz.length);
       for (var i = 0; i < state.answers.length; i++) state.answers[i] = null;
       render();
@@ -749,6 +970,8 @@
     DISCLAIMER: DISCLAIMER, EDU_NOTE: EDU_NOTE,
     describe: describe, sample: sample, stripPath: stripPath, stripSvg: stripSvg,
     gridInner: gridInner, leadSt: leadSt, leadSvg: leadSvg,
+    LEAD_MODEL: LEAD_MODEL, leadMorph: leadMorph, sampleLead: sampleLead, PATTERNS: PATTERNS,
+    flagInterval: flagInterval, intervalsFor: intervalsFor,
     buildQuiz: buildQuiz, gradeQuiz: gradeQuiz,
     loadStore: loadStore, saveStore: saveStore
   };
