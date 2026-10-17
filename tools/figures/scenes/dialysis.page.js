@@ -40,9 +40,9 @@ function drawChamber(flow) { const c = SC.CH; lvl.setAttribute("d", ringPath([c[
 
 /* ---- particles travelling in the tubes ---- */
 const lineLayer = $("line-live");
-const routes = [["ART", "rbc"], ["VEN", "rbc"], ["DIN", "bic"], ["DOUT", "ure"]].map(([k, t]) => { const pts = SC[k], cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return { pts, cum, len: cum[cum.length - 1], type: t, dots: [] }; });
+const routes = [["ART", "rbc"], ["VEN", "rbc"], ["DIN", "bic"], ["DOUT", "ure"], ["SAL", "sal"]].map(([k, t]) => { const pts = SC[k], cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1])); return { pts, cum, len: cum[cum.length - 1], type: t, dots: [] }; });
 const at = (R, u) => { const d = u * R.len; let i = 1; while (i < R.cum.length - 1 && R.cum[i] < d) i++; const f = (d - R.cum[i - 1]) / Math.max(0.001, R.cum[i] - R.cum[i - 1]); return [R.pts[i - 1][0] + (R.pts[i][0] - R.pts[i - 1][0]) * f, R.pts[i - 1][1] + (R.pts[i][1] - R.pts[i - 1][1]) * f]; };
-routes.forEach((R, ri) => { for (let i = 0; i < 16; i++) { const kind = R.type === "rbc" ? (i % 4 === 3 ? "ure" : "rbc") : R.type === "bic" ? "bic" : (i % 2 ? "ure" : i % 4 === 0 ? "pot" : "bic"); const e = mk("circle", { class: "p-" + kind, r: kind === "rbc" ? 2.5 : 1.9 }, lineLayer); R.dots.push({ e, u: i / 16, kind, ri }); } });
+routes.forEach((R, ri) => { for (let i = 0; i < 16; i++) { const kind = R.type === "sal" ? "sal" : R.type === "rbc" ? (i % 4 === 3 ? "ure" : "rbc") : R.type === "bic" ? "bic" : (i % 2 ? "ure" : i % 4 === 0 ? "pot" : "bic"); const e = mk("circle", { class: "p-" + kind, r: kind === "rbc" ? 2.5 : kind === "sal" ? 1.5 : 1.9 }, lineLayer); R.dots.push({ e, u: i / 16, kind, ri }); } });
 
 /* ---- one fibre, enlarged ---- */
 const F = SC.FIB, live = $("fibre-live"), parts = [];
@@ -107,6 +107,16 @@ const G = { u: $("g-urea"), k: $("g-pot"), f: $("g-flu") };
 const GV = { u: $("gv-urea"), k: $("gv-pot"), f: $("gv-flu") };
 const gy0 = SC.PT.y + 164, gh = 124;
 function drawGauges() { [["u", U.u], ["k", U.k], ["f", U.f]].forEach(([k, v]) => { const h = Math.max(0, v) * gh; G[k].setAttribute("y", (gy0 - h).toFixed(1)); G[k].setAttribute("height", h.toFixed(1)); GV[k].textContent = v > 0.62 ? "high" : v > 0.38 ? "raised" : "near normal"; }); }
+/* ---- pressure dials and the two dialysate containers ---- */
+const nd = {}, ndv = { art: -70, dia: -70, ven: -70 }; SC.DIALS.forEach((d) => { nd[d.id] = { g: $("nd-" + d.id), x: d.x, y: d.y }; });
+const jf = { fresh: $("jf-fresh"), used: $("jf-used") }; let jl = 0;
+function drawDials(dt) {
+  const tg = { art: flow.b > 0.05 ? -22 - 26 * flow.b : -70, dia: flow.d > 0.05 ? -6 + 14 * flow.d : -70, ven: flow.b > 0.05 ? 4 + 34 * flow.b : -70 };
+  for (const id in nd) { ndv[id] += (tg[id] - ndv[id]) * Math.min(1, dt * 3); const j = flow.b > 0.05 ? Math.sin(tm / 380 + id.length) * 1.6 : 0; nd[id].g.setAttribute("transform", "rotate(" + (ndv[id] + j).toFixed(1) + " " + nd[id].x + " " + nd[id].y + ")"); }
+  jl += dt * 0.012 * flow.d; if (jl > 1) jl = 0;
+  const fr = 0.92 - 0.8 * jl, us = 0.12 + 0.8 * jl;
+  jf.fresh.setAttribute("y", (1 - fr).toFixed(3)); jf.fresh.setAttribute("height", fr.toFixed(3)); jf.used.setAttribute("y", (1 - us).toFixed(3)); jf.used.setAttribute("height", us.toFixed(3));
+}
 const scr = { bp: $("scr-bp"), dp: $("scr-dp"), cd: $("scr-cd"), led: $("scr-led") };
 function drawScreen() { [["bp", flow.b * 0.9], ["dp", flow.d * 0.8], ["cd", flow.d * 0.7]].forEach(([k, v]) => { const h = 0.6 * Math.max(0.02, v); scr[k].setAttribute("y", (0.8 - h).toFixed(3)); scr[k].setAttribute("height", h.toFixed(3)); }); scr.led.style.fill = flow.b > 0.1 ? "#3ddc97" : "#6b6b6b"; }
 
@@ -118,7 +128,7 @@ function step(dt) {
   rotA += flow.b * dt * 3.6; hp = (hp + dt * 0.012 * (flow.b > 0.05 ? 1 : 0)) % 1;
   routes.forEach((R) => { const sp = (R.type === "bic" || R.type === "ure") ? flow.d : flow.b; R.dots.forEach((d) => { d.u = (d.u + dt * 0.16 * sp + (d.u > 1 ? -1 : 0)); if (d.u > 1) d.u -= 1; const p = at(R, d.ri === 3 || d.ri === 2 ? (R.type === "bic" ? d.u : d.u) : d.u); d.e.setAttribute("cx", p[0].toFixed(1)); d.e.setAttribute("cy", p[1].toFixed(1));
     d.e.style.opacity = (d.ri === 1 && d.kind === "ure" ? Math.max(0, 0.9 - 0.7 * (1 - U.u)) * (M.eff ? 0.3 : 1) : 0.92) * (sp > 0.03 ? 1 : 0.35); }); });
-  drawRotor(); drawPlunger(); drawChamber(flow.b); drawGauges(); drawScreen(); fibreStep(dt);
+  drawRotor(); drawPlunger(); drawChamber(flow.b); drawGauges(); drawScreen(); drawDials(dt); fibreStep(dt);
 }
 function publish() {
   M = modelOf(S, level, drug);

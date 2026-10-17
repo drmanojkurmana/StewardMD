@@ -23,8 +23,10 @@ const ARM = { x: -200, y: -20, w: 78, d: 40, r: 16 }, ARM_H = 18;
 const PUMP = { x: -108, y: -30, w: 58, d: 60, r: 6 }, PUMP_H = 14, ROTOR = [-79, 0], ROTOR_R = 17, ROTOR_Z = PUMP_H + 3;
 const HEP = { x: -96, y: 38, w: 70, d: 26, r: 4 }, HEP_H = 14;
 const DZ = 36, DX0 = -28, DX1 = 132, DR = 14;               // dialyser axis height, ends, radius
-const CH = [166, 0];                                          // drip chamber centre
-const P = k.fitProjection([...k.boxCorners(BASE, -12, 0), [CAB.x + CAB.w, CAB.y + CAB.d, CAB_H + 34], [ARM.x, ARM.y, 30]], W, H - INSET_H, { pad: 8, azimuth: 66, elevation: 27 });
+const CH = [166, 0];
+const JF = { x: 150, y: 40, w: 26, d: 20, r: 4 }, JU = { x: 10, y: 48, w: 26, d: 20, r: 4 }, JUG_H = 30;   // fresh and used dialysate containers
+const POLE = [-172, -58];                                      // saline stand                                          // drip chamber centre
+const P = k.fitProjection([...k.boxCorners(BASE, -12, 0), [CAB.x + CAB.w, CAB.y + CAB.d, CAB_H + 34], [ARM.x, ARM.y, 30], [POLE[0], POLE[1], 92]], W, H - INSET_H, { pad: 8, azimuth: 66, elevation: 27 });
 P.origin[1] += INSET_H - 6;
 const at = (p) => k.iso(p, P);
 const S = (paths, style) => k.solidSvg(paths, style);
@@ -34,6 +36,7 @@ const V = G.viewOf(P);
 const items = [];
 const put = (centre, svg, bias = 0) => items.push({ key: G.dot3(centre, V) + bias, svg });
 const f1 = (v) => +v.toFixed(1);
+const arcD = (cx, cy, r, a0, a1) => { const p = (a) => [cx + r * Math.sin(a * Math.PI / 180), cy - r * Math.cos(a * Math.PI / 180)]; const [x0, y0] = p(a0), [x1, y1] = p(a1); return `M${f1(x0)} ${f1(y0)}A${r} ${r} 0 0 1 ${f1(x1)} ${f1(y1)}`; };
 const hot = (info, inner) => `<g class="hot" tabindex="0" data-info="${esc(info)}">${inner}</g>`;
 
 /* ---- floor ---- */
@@ -66,8 +69,9 @@ const arcPts = (cx, cy, R, z, a0, a1, n = 14) => Array.from({ length: n + 1 }, (
 const ART_ARC = arcPts(ROTOR[0], ROTOR[1], ROTOR_R + 5, ROTOR_Z + 1.5, 168, 12, 16);
 const ART = route([[-140, -7, ARM_H + 6], [-130, -7, 28], ...G.fillet([[-130, -7, 28], [-118, -7, 28], [-112, 4, ROTOR_Z + 1.5], ART_ARC[0]], 6, 6, { P, tube: 2.6 }), ...ART_ARC, [-50, 4, ROTOR_Z + 1.5], [-42, 0, DZ - 4], [DX0 - 6, 0, DZ]], 2.6, { sharp: true });
 const VEN = route([[DX1 + 6, 0, DZ], [CH[0] - 12, 0, DZ], [CH[0] - 12, 0, 60], [CH[0] - 12, 12, 62], [-110, 14, 62], [-126, 10, 40], [-136, 7, ARM_H + 6]], 2.6);
-const DIA_IN = route([[CAB.x + 4, -40, 44], [CAB.x - 22, -40, 44], [CAB.x - 22, -40, 74], [DX1 - 14, -40, 74], [DX1 - 14, -2, 74], [DX1 - 14, 0, DZ + DR + 2]], 2.2);
-const DIA_OUT = route([[DX0 + 12, 0, DZ + DR + 2], [DX0 + 12, 0, 82], [DX0 + 12, 46, 82], [CAB.x - 30, 46, 82], [CAB.x - 30, 46, 36], [CAB.x + 6, 46, 36]], 2.2);
+const DIA_IN = route([[JF.x + JF.w * 0.3, JF.y + JF.d / 2, JUG_H + 5], [JF.x + JF.w * 0.3, JF.y + JF.d / 2, 74], [DX1 - 14, JF.y + JF.d / 2, 74], [DX1 - 14, -2, 74], [DX1 - 14, 0, DZ + DR + 2]], 2.2);
+const DIA_OUT = route([[DX0 + 12, 0, DZ + DR + 2], [DX0 + 12, 0, 82], [DX0 + 12, 46, 82], [JU.x + JU.w * 0.3, 46, 82], [JU.x + JU.w * 0.3, JU.y + JU.d / 2, JUG_H + 5]], 2.2);
+const SAL = route([[POLE[0], POLE[1] + 1, 50], [POLE[0], POLE[1] + 1, 40], [-150, -30, 34], [-130, -7, 28]], 1.7);
 const pushRoute = (R, centreBias = 0) => R.pieces.forEach((pc) => put(pc.mid, T.tubeSvg(pc, { tone: "mid" }), centreBias));
 
 /* ---- blood pump (peristaltic roller pump) ---- */
@@ -150,9 +154,46 @@ const faceMatrix = (x, z, w, h) => {
   [[CAB.x + 14, 8], [CAB.x + 28, 8]].forEach(([x, z]) => { const q = at([x, faceY, z]); f += `<circle class="dr-vent" cx="${f1(q[0])}" cy="${f1(q[1])}" r="3.2"/>`; });
   put([CAB.x + 20, faceY, 8], f, 7);
 }
+
+/* ---- fresh and used dialysate containers, each with a level window ---- */
+const faceAt = (fy, x, z, w, h) => { const a = at([x, fy, z]), b = at([x + w, fy, z]), c = at([x, fy, z + h]);
+  return `matrix(${[b[0] - a[0], b[1] - a[1], c[0] - a[0], c[1] - a[1], a[0], a[1]].map((v) => +v.toFixed(4)).join(" ")})`; };
+const jug = (J, id, info) => {
+  let s = S(k.slabOf(J, 0, JUG_H, P, 3, 0.6), { tone: "hi" });
+  s += S(k.cylinder(J.x + J.w * 0.3, J.y + J.d / 2, 4, JUG_H, 4, P, 20), { tone: "mid" });
+  s += S(k.slabOf({ x: J.x + J.w * 0.6, y: J.y + 3, w: 9, d: J.d - 6, r: 2 }, JUG_H, 3, P, 2, 0.4), { tone: "lo" });
+  s += `<g transform="${faceAt(J.y + J.d, J.x + 4, 4, J.w - 8, JUG_H - 10)}"><rect class="dr-jwin" x="0" y="0" width="1" height="1" rx="0.08"/><rect class="dr-jfill dr-j-${id}" id="jf-${id}" x="0" y="0.5" width="1" height="0.5" rx="0.08"/></g>`;
+  put([J.x + J.w / 2, J.y + J.d / 2, JUG_H / 2], hot(info, s), 0.4);
+};
+jug(JF, "fresh", "Fresh dialysate container (standing for the machine's own mixing of purified water and concentrate). The level falls as dialysate is pumped to the dialyser.");
+jug(JU, "used", "Used dialysate container (standing for the drain). It fills with the waste the blood gave up: urea, potassium and extra water.");
+
+/* ---- saline stand: a bag on a pole, running into the arterial line ---- */
+{
+  let s = S(k.cylinder(POLE[0], POLE[1], 7, 0, 3, P, 24), { tone: "lo" });
+  s += S(k.cylinder(POLE[0], POLE[1], 1.4, 88, 3, P, 14), { tone: "mid" });
+  s += S(k.slabOf({ x: POLE[0] - 10, y: POLE[1] - 1.5, w: 20, d: 3, r: 1 }, 84, 3, P, 1, 0.3), { tone: "mid" });
+  s += S(k.slabOf({ x: POLE[0] - 8, y: POLE[1] - 2.5, w: 16, d: 5, r: 2.2 }, 50, 30, P, 3, 0.5), { tone: "hi" });
+  put([POLE[0], POLE[1], 64], hot("Saline bag on its stand. Salt solution runs into the arterial line to prime the circuit before dialysis starts, and can be given to top up blood volume if the pressure drops.", s), 0.5);
+}
+
+/* ---- three pressure dials: arterial (before the pump), inflow (dialysate) and venous (return) ---- */
+const DIAL = [
+  { id: "art", name: "Arterial pressure", a: [-42, 0, DZ - 4], off: [-6, -88], info: "Arterial pressure monitor. The pump pulls blood from the fistula, so this reading sits below zero. If it drops too far the access is not giving enough blood." },
+  { id: "dia", name: "Inflow pressure", a: [DX1 - 14, 24, 74], off: [-92, 46], info: "Dialysate inflow pressure monitor. It confirms dialysate is reaching the dialyser at a steady pressure." },
+  { id: "ven", name: "Venous pressure", a: [100, 13, 62], off: [56, -64], info: "Venous pressure monitor, on the line that returns blood. A rise warns of a clot or a kinked line; a sudden fall warns that the needle may have come out." },
+].map((d) => { const q = at(d.a); return { ...d, x: q[0] + d.off[0], y: q[1] + d.off[1], ax: q[0], ay: q[1] }; });
+const dials = DIAL.map((d) => {
+  let s = `<g class="hot dr-dial" tabindex="0" data-info="${esc(d.info)}"><path class="dr-leader" d="M${f1(d.ax)} ${f1(d.ay)}L${f1(d.x)} ${f1(d.y)}"/><circle class="dr-dot" cx="${f1(d.ax)}" cy="${f1(d.ay)}" r="1.6"/><circle class="dr-bez" cx="${f1(d.x)}" cy="${f1(d.y)}" r="15"/><circle class="dr-face" cx="${f1(d.x)}" cy="${f1(d.y)}" r="12"/>`;
+  s += `<path class="dr-ok" d="${arcD(d.x, d.y, 9.6, -22, 22)}"/>`;
+  for (let a = -60; a <= 60; a += 20) { const r = a * Math.PI / 180; s += `<path class="dr-tick" d="M${f1(d.x + 10.4 * Math.sin(r))} ${f1(d.y - 10.4 * Math.cos(r))}L${f1(d.x + 12 * Math.sin(r))} ${f1(d.y - 12 * Math.cos(r))}"/>`; }
+  s += `<g id="nd-${d.id}" transform="rotate(0 ${f1(d.x)} ${f1(d.y)})"><path class="dr-needle" d="M${f1(d.x)} ${f1(d.y + 2)}L${f1(d.x)} ${f1(d.y - 10.5)}"/></g><circle class="dr-hub" cx="${f1(d.x)}" cy="${f1(d.y)}" r="1.7"/>`;
+  const lw = d.name.length * 5.9 + 12; s += `<rect class="dr-lab-r" x="${f1(d.x - lw / 2)}" y="${f1(d.y + 17)}" width="${f1(lw)}" height="15" rx="7.5"/><text class="dr-dl" x="${f1(d.x)}" y="${f1(d.y + 27.5)}" text-anchor="middle">${esc(d.name)}</text></g>`;
+  return s;
+}).join("");
 const ISO = { origin: P.origin, scale: P.scale, azimuth: P.azimuth, elevation: P.elevation };
 const wrapRoute = (R, cls, bias) => R.pieces.forEach((pc) => items.push({ key: G.dot3(pc.mid, V) + bias, svg: `<g class="${cls}">${T.tubeSvg(pc, { tone: "mid" })}</g>` }));
-wrapRoute(ART, "t-art", 1.5); wrapRoute(VEN, "t-ven", 1.5); wrapRoute(DIA_IN, "t-dia", 1.5); wrapRoute(DIA_OUT, "t-dia t-out", 1.5);
+wrapRoute(ART, "t-art", 1.5); wrapRoute(VEN, "t-ven", 1.5); wrapRoute(DIA_IN, "t-dia", 1.5); wrapRoute(DIA_OUT, "t-dia t-out", 1.5); wrapRoute(SAL, "t-sal", 1.5);
 items.push({ key: G.dot3([ROTOR[0], ROTOR[1], ROTOR_Z], V) + 0.6, svg: `<g id="rotor"></g>` });
 items.push({ key: G.dot3([HEP.x + 40, HEP.y + 13, HEP_H + 8], V) + 1.2, svg: `<g id="plunger"></g>` });
 items.push({ key: G.dot3([CH[0] - 12, 0, 66], V) + 3.5, svg: `<g id="chamber"></g>` });
@@ -162,13 +203,14 @@ const art = items.map((i) => i.svg).join("");
 /* ---- labels: small pills tied to a part by a short leader ---- */
 const LAB = [
   ["Arterial line", [-110, -7, 28], [-6, -30], "Arterial line: blood from the arm to the dialyser. It is called arterial because blood leaves the patient, not because of the vessel it comes from."],
-  ["Venous line", [40, 12, 62], [0, -30], "Venous line: cleaned blood going back to the patient's vein. Pressure here is watched, because a rise can mean a clot or a kinked line."],
+  ["Venous line", [20, 13, 62], [0, -30], "Venous line: cleaned blood going back to the patient's vein. Pressure here is watched, because a rise can mean a clot or a kinked line."],
   ["Blood pump", [ROTOR[0], ROTOR[1] - 20, PUMP_H], [-4, 34], "Blood pump. It sets how fast blood goes through the circuit."],
   ["Heparin", [HEP.x + 38, HEP.y + 26, HEP_H + 12], [10, 24], "Heparin syringe pump: a slow drip of anticoagulant into the circuit."],
   ["Dialyser", [60, 0, DZ + DR], [0, 22], "Hollow-fibre dialyser: where blood and dialysate meet across the membrane."],
-  ["Dialysate in", [DX1 - 14, -40, 74], [8, -28], "Fresh dialysate going to the dialyser. It flows opposite to the blood so the gradient stays steep along the whole length."],
-  ["Dialysate out", [DX0 + 12, 46, 82], [-30, -24], "Used dialysate, carrying urea, potassium and extra water, going to drain."],
-  ["Air trap", [CH[0] - 12, 0, 70], [26, -22], "Air trap and air detector on the venous line."],
+    ["Air trap", [CH[0] - 12, 0, 70], [26, -22], "Air trap and air detector on the venous line."],
+  ["Fresh dialysate", [JF.x + JF.w / 2, JF.y + JF.d, JUG_H - 6], [6, 26], "Fresh dialysate: clean, warm fluid with the right salts, on its way to the dialyser."],
+  ["Used dialysate", [JU.x + JU.w / 2, JU.y + JU.d, JUG_H - 6], [6, 26], "Used dialysate: the same fluid after it has collected waste from the blood."],
+  ["Saline", [POLE[0], POLE[1], 82], [28, -4], "Saline bag: primes the circuit and can top up blood volume."],
   ["Fistula", [-150, 0, ARM_H + 4], [-4, 40], "The AV fistula: the access to the blood."],
 ];
 let labels = "";
@@ -205,7 +247,7 @@ const gauges = (() => {
   });
   return s;
 })();
-const bodySvg = `<ellipse class="dr-halo" cx="480" cy="${H - 6}" rx="440" ry="12"/>${art}${labels}${zoom}${inset}${gauges}<g id="line-live"></g>`;
+const bodySvg = `<ellipse class="dr-halo" cx="480" cy="${H - 6}" rx="440" ry="12"/>${art}${dials}${labels}${zoom}${inset}${gauges}<g id="line-live"></g>`;
 const SVG = k.figureSvg({ width: W, height: H, label: "A haemodialysis machine: blood from an arm fistula goes through a roller pump into a hollow-fibre dialyser, where it exchanges small molecules and water with dialysate across a membrane, then back through an air trap to the arm. Dialysate flows the opposite way and goes to drain. Three gauges show urea, potassium and fluid in the patient.", body: bodySvg, className: "dr-fig" });
 
 /* ---------------- model ---------------- */
@@ -233,7 +275,7 @@ const TESTS = [[1, 0, "urea rising · potassium rising · fluid building up"], [
 TESTS.forEach(([l, d, t]) => { const r = modelOf(MD, l, d).readout; if (r !== t) throw new Error(`hemodialysis: model readout "${r}" != "${t}" at level ${l}, drug ${d}`); });
 
 /* ---------------- page ---------------- */
-const SCENE = { ISO, ART: ART.screen, VEN: VEN.screen, DIN: DIA_IN.screen, DOUT: DIA_OUT.screen, ROTOR: [ROTOR[0], ROTOR[1], ROTOR_Z + 0.5], ROTOR_R, HEP: [HEP.x + 8, HEP.y + 13, HEP_H + 6], CH: [CH[0] - 12, 0, 54], IN, FIB, PT, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
+const SCENE = { ISO, ART: ART.screen, VEN: VEN.screen, DIN: DIA_IN.screen, DOUT: DIA_OUT.screen, SAL: SAL.screen, DIALS: DIAL.map((d) => ({ id: d.id, x: +d.x.toFixed(1), y: +d.y.toFixed(1) })), ROTOR: [ROTOR[0], ROTOR[1], ROTOR_Z + 0.5], ROTOR_R, HEP: [HEP.x + 8, HEP.y + 13, HEP_H + 6], CH: [CH[0] - 12, 0, 54], IN, FIB, PT, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
 const framed = k.plateHtml({ fig: "Fig 1", title: "Haemodialysis: a working machine", hint: "tap a part · space: pause", readout: modelOf(MD, 1, 0).readout, caption: "Schematic, not to scale. Flow, clearance and fluid removal are qualitative and illustrative; no flow rate, dose or treatment time is shown or implied.", body: `<div class="dr-svg">${SVG}</div>` });
 const controls = `
 <div class="dr-controls">
