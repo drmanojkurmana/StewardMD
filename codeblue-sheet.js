@@ -587,6 +587,11 @@
 
     renderBody(handle);
     document.body.appendChild(overlay);
+    try {
+      if (typeof window !== "undefined" && window.CodeBluePrefs) {
+        window.CodeBluePrefs.apply(card);
+      }
+    } catch (e) {}
     _openHandle = handle;
     if (close.focus) { try { close.focus(); } catch (e) {} }
     return handle;

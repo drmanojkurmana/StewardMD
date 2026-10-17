@@ -279,6 +279,7 @@
     return '<div class="cbt-top">' +
       '<button type="button" class="cbt-back" data-act="home" aria-label="Back to trainer home">Back</button>' +
       '<span class="cbt-badge">TRAINING</span>' +
+      '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
       '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">' + esc(title) + "</h2>" + body + "</div>";
   }
@@ -304,6 +305,7 @@
   function showHome() {
     stopClock();
     var html = '<div class="cbt-top"><span class="cbt-badge">TRAINING</span>' +
+      '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
       '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">Megacode and ACLS practice</h2>' +
       '<p class="cbt-disc">' + esc(DISCLAIMER) + "</p>" +
@@ -570,6 +572,11 @@
     try { document.body.classList.add("cbt-lock"); } catch (e) {}
     uiMode = "adult";
     showHome();
+    try {
+      if (typeof window !== "undefined" && window.CodeBluePrefs) {
+        window.CodeBluePrefs.apply(rootEl);
+      }
+    } catch (e2) {}
     return true;
   }
   function close() {
