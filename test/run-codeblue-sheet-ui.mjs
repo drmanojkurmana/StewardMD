@@ -172,7 +172,7 @@ ok(/max-width:\s*430px/.test(CSS), "sheet fits a 390 px viewport");
 ok(CSS.includes("min-height:44px") && CSS.includes("min-height:52px"), "44 px quiet and 52 px primary targets");
 ok(CSS.includes(":focus-visible"), "visible focus on controls and inputs");
 ok(CSS.includes("prefers-reduced-motion"), "reduced motion honoured");
-ok(CSS.includes("#071318") && CSS.includes("#0D1D23") && CSS.includes("#42CDB5"), "fixed project palette");
+ok(CSS.includes("#101317") && CSS.includes("#171B20") && CSS.includes("#343A40") && CSS.includes("#F4F7FA") && CSS.includes("#3B82F6"), "fixed project palette (v3 Carbon)");
 ok(!/linear-gradient|box-shadow|backdrop-filter|text-shadow/.test(CSS), "no glows, gradients, shadows or backdrops");
 ok(!/[\u2014\u{1F300}-\u{1FAFF}]/u.test(SRC), "no em dashes or emoji in the module");
 ok(SRC.includes("Paediatric"), "British spelling in mode labels");
@@ -186,12 +186,12 @@ function lum(hex) {
   return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
 }
 function ratio(a, b) { const x = lum(a), y = lum(b); return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05); }
-ok(ratio("#EDF5F2", "#0D1D23") >= 4.5, "dark body text contrast AA");
-ok(ratio("#42CDB5", "#0D1D23") >= 4.5, "dark accent timestamps contrast AA");
-ok(ratio("#94B4AB", "#0D1D23") >= 4.5, "dark secondary text contrast AA");
-ok(ratio("#0D1D23", "#FFFFFF") >= 4.5, "light body text contrast AA");
-ok(ratio("#3E5A53", "#FFFFFF") >= 4.5, "light secondary text contrast AA");
-ok(ratio("#071318", "#42CDB5") >= 4.5, "primary button text contrast AA");
+ok(ratio("#F4F7FA", "#171B20") >= 4.5, "dark body text contrast AA");
+ok(ratio("#3B82F6", "#171B20") >= 4.5, "dark accent timestamps contrast AA");
+ok(ratio("#AAB2BD", "#171B20") >= 4.5, "dark secondary text contrast AA");
+ok(ratio("#101317", "#FFFFFF") >= 4.5, "light body text contrast AA");
+ok(ratio("#4A5560", "#FFFFFF") >= 4.5, "light secondary text contrast AA");
+ok(ratio("#101317", "#3B82F6") >= 4.5, "primary button text contrast AA");
 
 console.log(`\n${passes} passed, ${fails} failed.`);
 process.exit(fails ? 1 : 0);

@@ -101,9 +101,9 @@
    * reviews this text. Kept out of allCopySamples so the no-dose scan over
    * the shared engine copy stays green; doseRefFor is the only source. */
   var DOSE_REF_ADULT = {
-    epi: "1 mg IV/IO every 3 to 5 min",
+    epi: "1 mg IV/IO q3 to 5 min",
     amio: "300 mg then 150 mg",
-    lido: "1 to 1.5 mg/kg then 0.5 to 0.75 mg/kg"
+    lido: "1 to 1.5 mg/kg"
   };
 
   function doseRefFor(mode) {
@@ -251,19 +251,19 @@
     var rhythmText, rhythmState;
     if (sess.rosc) { rhythmText = "ROSC"; rhythmState = "rosc"; }
     else if (opts.paused) { rhythmText = "Paused"; rhythmState = "paused"; }
-    else if (cyc.due) { rhythmText = "Check due"; rhythmState = "due"; }
-    else { rhythmText = "in " + fmtShort(Math.max(0, cyc.remaining)); rhythmState = "run"; }
+    else if (cyc.due) { rhythmText = "Due"; rhythmState = "due"; }
+    else { rhythmText = fmtShort(Math.max(0, cyc.remaining)); rhythmState = "run"; }
     var epiText, epiState;
-    if (epi.state === "none") { epiText = "Not logged"; epiState = "run"; }
+    if (epi.state === "none") { epiText = "None"; epiState = "run"; }
     else if (epi.state === "overdue") { epiText = "Overdue"; epiState = "overdue"; }
     else if (epi.state === "due") { epiText = "Due"; epiState = "due"; }
-    else { epiText = "in " + fmtShort(epi.remaining); epiState = "run"; }
+    else { epiText = fmtShort(epi.remaining); epiState = "run"; }
     return {
       code: fmtMMSS(elapsed),
       rhythm: { text: rhythmText, state: rhythmState },
       epi: { text: epiText, state: epiState },
       shocks: dc.shocks,
-      vent: vent.airway ? { text: "Breath " + vent.remaining + " s", state: "run" } : { text: vent.label, state: "run" }
+      vent: vent.airway ? { text: vent.remaining + " s", state: "run" } : { text: vent.label, state: "run" }
     };
   }
 
@@ -803,36 +803,50 @@
   /* LIVE End with a linked patient: open the code sheet and write the code
    * sheet to the patient timeline exactly the way native-watch.js handles
    * the watch codeBlueExport (type codeblue, title Code Blue summary).
-   * Practice, unlinked and sheet-less runs return ok false with a reason. */
+   * Practice, unlinked and sheet-less runs return ok false with a reason.
+   * Never throws: End must always land on the summary, even when the
+   * export machinery fails. */
   function exportToPatient() {
-    if (!sess || sess.training) return { ok: false, reason: "training" };
-    if (!sess.link || !sess.link.gid || !sess.link.pid) return { ok: false, reason: "unlinked" };
-    var payload = buildPayload(sess, {
-      elapsed: Math.max(0, Math.floor(elapsedOffset)),
-      startedAtISO: new Date(sess.createdWall).toISOString()
-    });
-    var opened = false, written = false;
     try {
-      if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.open) {
-        window.CodeBlueSheet.open(payload);
-        opened = true;
-      }
-    } catch (e) {}
-    try {
-      var api = groupsApi();
-      var detail = "";
+      if (!sess || sess.training) return { ok: false, reason: "training" };
+      if (!sess.link || !sess.link.gid || !sess.link.pid) return { ok: false, reason: "unlinked" };
+      var payload = buildPayload(sess, {
+        elapsed: Math.max(0, Math.floor(elapsedOffset)),
+        startedAtISO: new Date(sess.createdWall).toISOString()
+      });
+      var opened = false, written = false;
       try {
-        if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.renderText) {
-          detail = window.CodeBlueSheet.renderText(window.CodeBlueSheet.parsePayload(payload));
+        if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.open) {
+          window.CodeBlueSheet.open(payload);
+          opened = true;
         }
-      } catch (e2) {}
-      if (api && api.addTimelineEvent) {
-        api.addTimelineEvent(sess.link.gid, sess.link.pid,
-          { type: "codeblue", title: "Code Blue summary", detail: detail });
-        written = true;
-      }
-    } catch (e3) {}
-    return { ok: opened || written, opened: opened, written: written, reason: (opened || written) ? null : "unavailable" };
+      } catch (e) {}
+      try {
+        var api = groupsApi();
+        var detail = "";
+        try {
+          if (typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.renderText) {
+            detail = window.CodeBlueSheet.renderText(window.CodeBlueSheet.parsePayload(payload));
+          }
+        } catch (e2) {}
+        if (api && api.addTimelineEvent) {
+          /* The shared groups API returns a promise; test stubs record
+           * synchronously. Either way the call being accepted counts as
+           * written, matching the watch handler's fire-and-forget shape. */
+          var res = api.addTimelineEvent(sess.link.gid, sess.link.pid,
+            { type: "codeblue", title: "Code Blue summary", detail: detail });
+          written = true;
+          try {
+            if (res && typeof res.then === "function") {
+              res.then(null, function () {});
+            }
+          } catch (e4) {}
+        }
+      } catch (e3) {}
+      return { ok: opened || written, opened: opened, written: written, reason: (opened || written) ? null : "unavailable" };
+    } catch (fatal) {
+      return { ok: false, opened: false, written: false, reason: "unavailable" };
+    }
   }
 
   function nowElapsed() {
@@ -970,9 +984,10 @@
       "</div></div>";
   }
 
-  /* CPR ring card: the elapsed clock plus a circular cycle ring with the
-   * metronome beat and the vent panel beside it. Keeps the cbl-clock and
-   * cbl-elapsed hooks (tests and the repaint path read them). */
+  /* CPR ring card: the elapsed clock with the metronome beat, a thin
+   * linear countdown bar beneath it, and the vent readout below the card
+   * on phone (ring plus vent panel beside the clock on iPad). Keeps the
+   * cbl-clock and cbl-elapsed hooks (tests and the repaint path read them). */
   function clockView(elapsed) {
     var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart);
     var frac = Math.max(0, Math.min(1, cyc.remaining / cyc.interval));
@@ -1021,30 +1036,23 @@
   function stripView(elapsed) {
     var s = stripInfo(sess, elapsed, { paused: paused });
     var cell = function (k, v, st) {
+      var long = String(v).length > 5 ? ' data-long="1"' : "";
       return '<div class="cbl-cell" data-s="' + st + '"><span class="cbl-cellk">' + k +
-        '</span><span class="cbl-cellv">' + v + "</span></div>";
+        '</span><span class="cbl-cellv"' + long + ">" + v + "</span></div>";
     };
     return '<div class="cbl-strip" data-state="strip" role="status" aria-label="Code status">' +
       cell("Code", esc(s.code), sess.rosc ? "rosc" : (paused ? "paused" : "run")) +
       cell("Rhythm", esc(s.rhythm.text), s.rhythm.state) +
-      cell("Epinephrine", esc(s.epi.text), s.epi.state) +
+      cell("Epi", esc(s.epi.text), s.epi.state) +
       cell("Shock", esc(String(s.shocks)), "run") +
       cell("Vent", esc(s.vent.text), s.vent.state) +
       "</div>";
   }
 
-  /* Per-drug counter chips: EPI AMIO LIDO SHOCK. */
-  function countsView() {
-    var dc = drugCounts(sess.events);
-    return '<div class="cbl-counts" data-state="counts" aria-label="Drug and shock counts">' +
-      '<span class="cbl-count">EPI<b>' + dc.epi + "</b></span>" +
-      '<span class="cbl-count">AMIO<b>' + dc.amio + "</b></span>" +
-      '<span class="cbl-count">LIDO<b>' + dc.lido + "</b></span>" +
-      '<span class="cbl-count">SHOCK<b>' + dc.shocks + "</b></span></div>";
-  }
-
   /* Drug buttons with counters, last-given line and adult dose reference
-   * text. Paediatric and neonatal show no dose line at all. */
+   * text. Paediatric and neonatal show no dose line at all. Counts live
+   * on the buttons themselves ("2 given, last 3:10 ago"), never as
+   * separate pills. */
   function drugsView(elapsed) {
     var dc = drugCounts(sess.events);
     var dose = doseRefFor(sess.mode);
@@ -1060,6 +1068,13 @@
         (doseText ? '<span class="cbl-drugdose">' + esc(doseText) + "</span>" : "") +
         '<span class="cbl-drugsub">' + esc(sub) + "</span></button>";
     };
+    /* Paediatric and neonatal run Epinephrine only: no doses, no extra
+     * drug buttons. */
+    if (normMode(sess.mode) !== "adult") {
+      return '<div class="cbl-drugs" data-state="drugs">' +
+        btn("drug-epi", "epi", "Epinephrine", null, lastLine(isEpiDrug, dc.epi)) +
+        "</div>";
+    }
     return '<div class="cbl-drugs" data-state="drugs">' +
       btn("drug-epi", "epi", "Epinephrine", dose ? dose.epi : null, lastLine(isEpiDrug, dc.epi)) +
       btn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio)) +
@@ -1111,21 +1126,24 @@
     var d = dueStrip(sess, elapsed, { paused: paused });
     return '<div class="cbl-due cbl-due-' + d.level + '" data-level="' + d.level +
       '" data-state="due-strip" role="status" aria-live="polite">' +
-      '<span class="cbl-dueword">' + esc(dueWord(d.level)) + "</span>" +
+      '<span class="cbl-dueword">' + esc(dueWord(d.level, d.text)) + "</span>" +
       '<span class="cbl-duetext">' + esc(d.text) + "</span></div>";
   }
 
-  function dueWord(level) {
+  function dueWord(level, text) {
     if (level === "overdue") return "Overdue";
     if (level === "due") return "Due";
     if (level === "rosc") return "ROSC";
     if (level === "paused") return "Paused";
-    return "CPR";
+    if (text === "Give breath") return "Now";
+    if (text === "CPR in progress") return "CPR";
+    return "Next";
   }
 
   /* Tile layout comes from window.CodeBluePrefs when present: order,
-   * hidden set and up to 4 custom buttons. Defaults keep the section 4
-   * order with nothing hidden and no custom buttons. */
+   * hidden set and up to 4 custom buttons. Defaults are Shock, Rhythm,
+   * Pause, Procedure, Note, ROSC with nothing hidden and no custom
+   * buttons; Epinephrine lives in the drug row only, never in the grid. */
   function prefTiles() {
     try {
       if (typeof window !== "undefined" && window.CodeBluePrefs && window.CodeBluePrefs.tiles) {
@@ -1144,7 +1162,7 @@
     note: { icon: "note", label: "Note" },
     rosc: { icon: "rosc", label: "ROSC" }
   };
-  var TILE_ORDER_DEFAULT = ["shock", "epi", "rhythm", "pause", "proc", "note", "rosc"];
+  var TILE_ORDER_DEFAULT = ["shock", "rhythm", "pause", "proc", "note", "rosc"];
 
   function tilesView(elapsed) {
     var order = TILE_ORDER_DEFAULT.slice(), hidden = {}, custom = [];
@@ -1156,7 +1174,8 @@
     }
     var tiles = [];
     order.forEach(function (id) {
-      if (hidden[id] || !TILE_DEFS[id]) return;
+      /* One Epinephrine button only: it lives in the drug row, never here. */
+      if (id === "epi" || hidden[id] || !TILE_DEFS[id]) return;
       if (id === "pause" && !paused && (sess.rosc || sess.hadRosc)) {
         tiles.push({ kind: "rearrest", icon: "rearrest", label: "Re-arrest" });
       } else {
@@ -1195,8 +1214,9 @@
     return html + "</ul></div>";
   }
 
-  /* Bottom tab bar: Timer, Log, Notes, Settings, End. The strip above
-   * stays visible on every tab. */
+  /* Bottom tab bar: Timer, Log, Notes, Settings, equal widths, icons
+   * over labels. End is never inside the tab bar: it sits in its own
+   * slim bar above it. The strip above stays visible on every tab. */
   function tabsView() {
     var tab = function (id, label, icon) {
       return '<button type="button" class="cbl-tab" role="tab" data-act="tab-' + id + '"' +
@@ -1206,21 +1226,26 @@
       tab("timer", "Timer", ICONS.rearrest) +
       tab("log", "Log", ICONS.log) +
       tab("notes", "Notes", ICONS.note) +
-      tab("settings", "Settings", ICONS.gear) +
-      '<button type="button" class="cbl-tab cbl-tabend" data-act="end">End</button></div>';
+      tab("settings", "Settings", ICONS.gear) + "</div>";
+  }
+
+  /* Distinct slim End control above the tab bar, visible on every tab. */
+  function endBarView() {
+    return '<div class="cbl-endwrap"><button type="button" class="cbl-endbar" data-act="end">' +
+      "End code</button></div>";
   }
 
   function timerTabView(elapsed) {
     var showChecks = sess.rosc || sess.hadRosc;
     return '<div class="cbl-runpad" data-tabpanel="timer" role="tabpanel" aria-label="Timer">' +
       clockView(elapsed) + dueView(elapsed) + errorView() +
-      '<button type="button" class="cbl-btn" data-act="timeline-toggle" aria-expanded="' + timelineOpen + '">' +
-      (timelineOpen ? "Hide timeline" : "Show timeline") + "</button>" +
-      countsView() + drugsView(elapsed) + tilesView(elapsed) + guideView(elapsed) +
+      drugsView(elapsed) + tilesView(elapsed) + guideView(elapsed) +
       (showChecks
         ? '<button type="button" class="cbl-btn" data-act="sheet-checks" data-state="checklist-open">' +
           "Open post ROSC checklist</button>"
         : "") +
+      '<button type="button" class="cbl-tlhandle" data-act="timeline-toggle" aria-expanded="' + timelineOpen + '">' +
+      "<span>Timeline</span></button>" +
       audioNotice() + "</div>";
   }
 
@@ -1275,7 +1300,7 @@
       '<div class="cbl-runbody"><div class="cbl-maincol"><div class="cbl-scroll">' + panel + "</div></div>" +
       '<div class="cbl-tlscrim' + (timelineOpen ? " open" : "") + '" data-act="timeline-toggle"></div>' +
       timelineView() + "</div>" +
-      tabsView() +
+      endBarView() + tabsView() +
       '<div class="cbl-toast" data-state="toast" role="status" aria-live="polite"></div>' +
       '<div class="cbl-sheetwrap"></div>';
   }
@@ -1635,8 +1660,13 @@
     if (!sess.training) {
       try { clearSnapshot(defaultStorage()); } catch (e3) {}
       /* LIVE End with a linked patient writes the code sheet to the
-       * patient timeline (native-watch codeBlueExport parity). */
-      exportState = exportToPatient();
+       * patient timeline (native-watch codeBlueExport parity). Guarded
+       * so the summary always renders even if the export path fails. */
+      try {
+        exportState = exportToPatient();
+      } catch (e4) {
+        exportState = { ok: false, opened: false, written: false, reason: "unavailable" };
+      }
     } else {
       exportState = null;
     }

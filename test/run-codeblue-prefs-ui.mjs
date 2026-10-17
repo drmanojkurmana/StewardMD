@@ -95,7 +95,7 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} [data-cbp-settings]');`) === true, "live status row has Display settings");
   await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
   ok(await until(`return CodeBlueLive._rt.view() === "running";`, 5000), "clock runs");
-  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-tile').length === 7;`) === true, "defaults render 7 tiles");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-tile').length === 6;`) === true, "defaults render 6 tiles (Epinephrine lives in the drug row)");
 
   /* Open the settings sheet from the live screen. */
   await ev(`document.querySelector('${CBL} [data-cbp-settings]').click(); return 1;`);
@@ -121,7 +121,7 @@ try {
 
   /* Hide, reorder, custom buttons. */
   await ev(`document.querySelector('${CBP} [data-cbp-hide][data-id="epi"]').click(); return 1;`);
-  ok(await until(`return document.querySelectorAll('${CBL} .cbl-tile').length === 6;`, 5000), "hiding Epinephrine removes its tile");
+  ok(await until(`return document.querySelectorAll('${CBL} .cbl-tile').length === 6;`, 5000), "hiding Epinephrine keeps 6 tiles (the drug row owns it)");
   await ev(`var b = document.querySelector('${CBP} [data-cbp-up][data-id="note"]'); b.click(); return 1;`);
   ok(await ev(`return document.querySelector('${CBL} .cbl-tile').getAttribute("aria-label") !== null;`) === true, "grid still renders after reorder");
   await ev(`var i = document.querySelector('${CBP} #cbpCustomIn'); i.value = "Airway"; document.querySelector('${CBP} [data-cbp-addcustom]').click(); return 1;`);
@@ -133,7 +133,7 @@ try {
 
   /* Restore defaults and keyboard close. */
   await ev(`document.querySelector('${CBP} [data-cbp-restore]').click(); return 1;`);
-  ok(await until(`return document.querySelectorAll('${CBL} .cbl-tile').length === 7 && Array.from(document.querySelectorAll('${CBL} .cbl-tile'))[0].getAttribute("aria-label") === "Shock";`, 8000), "restore defaults brings back 7 tiles starting with Shock");
+  ok(await until(`return document.querySelectorAll('${CBL} .cbl-tile').length === 6 && Array.from(document.querySelectorAll('${CBL} .cbl-tile'))[0].getAttribute("aria-label") === "Shock";`, 8000), "restore defaults brings back 6 tiles starting with Shock");
   await ev(`document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); return 1;`);
   ok(await until(`return !document.querySelector('${CBP}');`, 5000), "Escape closes the sheet");
   ok(await ev(`return document.activeElement === document.querySelector('${CBL} [data-cbp-settings]');`) === true, "focus returns to Display settings");

@@ -1,8 +1,9 @@
 /* Code Blue live screen in headless Chrome over CDP: idle (mode picker,
  * disclaimer, audio-blocked notice, patient link row), running with the
  * persistent status strip, CPR ring plus vent panel, drug buttons with dose
- * text and EPI/AMIO/LIDO/SHOCK counters, colour-coded live timeline, bottom
- * tab bar (Timer, Log, Notes, Settings) with the strip above every tab,
+ * text and on-button counts (no counter pills), colour-coded live timeline,
+ * bottom tab bar (Timer, Log, Notes, Settings) with the strip above every
+ * tab and a slim End bar above the tabs,
  * paused, rhythm due, epinephrine due and overdue, ROSC with post-ROSC
  * checklist, re-arrest, log with edit and undo, empty log, procedures and
  * rhythm pickers, sound sheet with independent mutes, resume prompt, ended
@@ -63,6 +64,59 @@ async function metrics(tag) {
   ok(scroll === true, tag + ": no horizontal scroll");
 }
 
+/* Layout audit that would have caught the broken phone and iPad screens:
+ * at 390 and 360 no tile, clock, strip-cell, drug-button or tab text is
+ * clipped, no two visible interactive elements overlap, every target is
+ * at least 44 px; on iPad every grid cell has content and the timeline
+ * column is visible with no toggle button. */
+async function layoutAudit(tag, mode) {
+  mode = mode || "phone";
+  const clip = await ev(`return (function () {
+    var bad = [];
+    var sels = ".cbl-tilelabel,.cbl-tilesub,.cbl-ringtime,.cbl-ringline,.cbl-cellk,.cbl-cellv,.cbl-druglabel,.cbl-drugdose,.cbl-drugsub,.cbl-duetext,.cbl-dueword,.cbl-tab span";
+    Array.from(document.querySelectorAll("${CBL} " + sels)).forEach(function (el) {
+      if (el.scrollWidth > el.clientWidth + 1) bad.push(el.className + ":" + el.textContent.slice(0, 24));
+    });
+    return bad;
+  })();`);
+  ok(Array.isArray(clip) && clip.length === 0, tag + ": no clipped text (" + (clip || []).join("|") + ")");
+  const doseLines = await ev(`return Array.from(document.querySelectorAll("${CBL} .cbl-drugdose")).filter(function (el) { return el.scrollHeight > el.clientHeight + 2; }).length;`);
+  ok(doseLines === 0, tag + ": dose text on one line");
+  const overlap = await ev(`return (function () {
+    function vis(el) {
+      var r = el.getBoundingClientRect();
+      if (r.width < 1 || r.height < 1) return null;
+      var cs = getComputedStyle(el);
+      if (cs.display === "none" || cs.visibility === "hidden" || parseFloat(cs.opacity) === 0) return null;
+      if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return null;
+      return r;
+    }
+    var els = Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { return [b, vis(b)]; }).filter(function (p) { return p[1]; });
+    var bad = [];
+    for (var i = 0; i < els.length; i++) for (var j = i + 1; j < els.length; j++) {
+      var a = els[i][1], b = els[j][1];
+      if (a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1) {
+        bad.push((els[i][0].getAttribute("data-act") || "?") + "/" + (els[j][0].getAttribute("data-act") || "?"));
+      }
+    }
+    return bad;
+  })();`);
+  ok(Array.isArray(overlap) && overlap.length === 0, tag + ": no overlapping tap targets (" + (overlap || []).join("|") + ")");
+  const small = await ev(`return Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { var r = b.getBoundingClientRect(); return Math.round(Math.min(r.width, r.height)); }).filter(function (n) { return n < 44; }).length;`);
+  ok(small === 0, tag + ": every interactive target at least 44 px (small=" + small + ")");
+  if (mode === "ipad") {
+    const tlw = await ev(`return document.querySelector('${CBL} .cbl-timeline').getBoundingClientRect().width;`);
+    ok(tlw > 200, tag + ": timeline column visible without a toggle (" + tlw + " px)");
+    const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
+    ok(handle === "none", tag + ": no timeline toggle on iPad");
+    const empty = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-grid > *, ${CBL} .cbl-drugs > *')).filter(function (el) { return el.textContent.trim().length === 0; }).length;`);
+    ok(empty === 0, tag + ": every grid cell has content");
+  } else {
+    const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
+    ok(handle !== "none", tag + ": slim timeline handle present on phone");
+  }
+}
+
 async function contrast(tag) {
   const ratios = await ev(`return (function () {
     function lum(r, g, b) {
@@ -120,7 +174,8 @@ try {
   ok(await until(viewIs("running"), 5000), "start: clock runs");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="running"] .cbl-elapsed');`) === true, "clock block renders");
   ok(await ev(`return document.querySelector('${CBL} .cbl-due').getAttribute("data-level") === "running";`) === true, "due strip reads CPR in progress");
-  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-tile').length === 7;`) === true, "7 action tiles");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-tile').length === 6;`) === true, "6 action tiles, Epinephrine only in the drug row");
+  ok(await ev(`return !document.querySelector('${CBL} [data-act="tile-epi"]');`) === true, "no Epinephrine action tile");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "status strip renders");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-strip .cbl-cell').length === 5;`) === true, "strip has CODE, RHYTHM, EPI, SHOCK, VENT cells");
   ok(await ev(`return !!document.querySelector('${CBL} svg.cbl-ring');`) === true, "CPR ring renders");
@@ -130,13 +185,15 @@ try {
   ok(await ev(`return document.querySelector('${CBL} [data-drug="epi"] .cbl-drugdose').textContent.indexOf("1 mg") >= 0;`) === true, "adult epi dose text");
   ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugdose').textContent.indexOf("300 mg") >= 0;`) === true, "adult amiodarone dose text");
   ok(await ev(`return document.querySelector('${CBL} [data-drug="lido"] .cbl-drugdose').textContent.indexOf("mg/kg") >= 0;`) === true, "adult lidocaine dose text");
-  ok(await ev(`return document.querySelector('${CBL} [data-state="counts"]').textContent.indexOf("AMIO") >= 0;`) === true, "EPI AMIO LIDO SHOCK counters");
+  ok(await ev(`return !document.querySelector('${CBL} [data-state="counts"]');`) === true, "no counter pills; counts live on the buttons");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugsub').textContent.indexOf("Not logged yet") >= 0;`) === true, "drug buttons carry their own counts");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="tabs"] [role="tab"]').length === 4;`) === true, "Timer, Log, Notes, Settings tabs");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="timeline"]');`) === true, "live timeline renders");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-guide li').length >= 3;`) === true, "guide prompts render with sources");
   ok(await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-gsrc')).every(function (e) { return e.textContent.length > 5; });`) === true, "every prompt cites a source");
   await shot("running", false); await shot("running", true);
   await metrics("running-390"); await contrast("running-390-dark");
+  await layoutAudit("running-390", "phone");
 
   /* Tabs keep the status strip visible; each tab shell renders. */
   await click(`${CBL} [data-act="tab-log"]`);
@@ -156,13 +213,14 @@ try {
   await click(`${CBL} [data-act="tab-timer"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "timer";`, 5000), "back to the Timer tab");
 
-  /* Timeline drawer opens on phone; drug buttons log with undo. */
+  /* Timeline drawer opens on phone from the slim handle; drug buttons log with undo. */
+  ok(await ev(`return !!document.querySelector('${CBL} .cbl-tlhandle[data-act="timeline-toggle"]');`) === true, "timeline opens from the slim handle, not a loose button");
   await click(`${CBL} [data-act="timeline-toggle"]`);
   ok(await ev(`return document.querySelector('${CBL} [data-state="timeline"]').classList.contains("open");`) === true, "timeline drawer opens on phone");
   await click(`${CBL} [data-act="timeline-toggle"]`);
   await click(`${CBL} [data-act="drug-amio"]`);
   ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Amiodarone"; });`, 5000), "amiodarone logs with undo toast");
-  ok(await ev(`return document.querySelector('${CBL} [data-state="counts"]').textContent.indexOf("AMIO1") >= 0;`) === true, "AMIO counter increments");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugsub').textContent.indexOf("1 given") >= 0;`) === true, "amiodarone count lives on its button");
   await click(`${CBL} [data-act="drug-lido"]`);
   ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Lidocaine"; });`, 5000), "lidocaine logs");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="toast"].on');`) === true, "one-tap drug has a 5 s undo toast");
@@ -190,7 +248,7 @@ try {
   ok(await until(`return !!document.querySelector('${CBL} [data-sheet="log"] .cbl-log');`, 5000), "log sheet lists events");
   await ev(`document.querySelector('${CBL} [data-act="sheet-close"]').click(); return 1;`);
 
-  await click(`${CBL} [data-act="tile-epi"]`);
+  await click(`${CBL} [data-act="drug-epi"]`);
   /* Epinephrine timing runs from the logged dose, not from code start, so
    * measure offsets from the dose. Reset the rhythm cycle first so the
    * rhythm strip does not cover the epinephrine states. */
@@ -301,6 +359,7 @@ try {
   await ev(`document.body.classList.remove("dark"); return 1;`);
   await sleep(300);
   await metrics("running-360-light"); await contrast("running-360-light");
+  await layoutAudit("running-360", "phone");
   await shot("running-360", false);
   await click(`${CBL} [data-act="sheet-log"]`);
   ok(await until(`return !!document.querySelector('${CBL} .cbl-sheet');`, 5000), "sheet opens at 360 px");
@@ -316,7 +375,8 @@ try {
   await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
   ok(await until(viewIs("running"), 5000), "paediatric code starts");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drugdose').length === 0;`) === true, "paediatric drug buttons show no doses");
-  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drug').length === 3;`) === true, "paediatric keeps counters and last-given lines");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-drug').length === 1;`) === true, "paediatric runs Epinephrine only");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-drug="epi"] .cbl-drugsub');`) === true, "paediatric keeps the last-given line");
   await click(`${CBL} [data-act="end"]`);
   ok(await until(viewIs("ended"), 5000), "paediatric code ends");
   ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Kept on this device only") >= 0;`) === true, "unlinked end says kept on device");
@@ -351,6 +411,7 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
   await click(`${CBL} [data-act="tab-timer"]`);
   await metrics("running-820"); await contrast("running-820-dark");
+  await layoutAudit("running-820", "ipad");
   await shot("running-820", false); await shot("running-820", true);
 
   /* iPad: 1194x834 landscape. */
@@ -360,6 +421,7 @@ try {
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad landscape: timeline is a right column");
   ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, "iPad landscape: no horizontal scroll");
   await metrics("running-1194");
+  await layoutAudit("running-1194", "ipad");
   await shot("running-1194", false); await shot("running-1194", true);
 
   /* iPad: 1366x1024 landscape. */
@@ -368,6 +430,7 @@ try {
   ok(await until(viewIs("running"), 5000), "running at 1366x1024");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "1366: timeline is a right column");
   await metrics("running-1366");
+  await layoutAudit("running-1366", "ipad");
   await shot("running-1366", true);
   await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
 
