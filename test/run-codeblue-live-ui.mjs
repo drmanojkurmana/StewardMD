@@ -54,6 +54,8 @@ const shot = async (name, dark) => {
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const viewIs = (v) => `return window.CodeBlueLive && CodeBlueLive._rt.view() === ${JSON.stringify(v)};`;
 const CBL = `#cblRoot`;
+// Shared in-page helper: the rect of an element only when it is really on screen (not display:none, not hidden, not translated fully off the viewport).
+const VIS = `function visRect(el){var r=el.getBoundingClientRect();var cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden"||r.width===0||r.height===0)return null;if(r.right<=0||r.bottom<=0||r.left>=innerWidth||r.top>=innerHeight)return null;return r;}`;
 
 async function metrics(tag) {
   const small = await ev(`return (function () { ${VIS}
