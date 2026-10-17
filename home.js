@@ -1094,6 +1094,7 @@
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { openWardSync(); },
+    codeblue: function () { if (window.CodeBlueLive && CodeBlueLive.open) CodeBlueLive.open(); else toast("Code Blue loading…"); },
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     // The WardSynQ inpatient ward (window.WARD, ward.js). Distinct from `ward` above, which is the
     // older Ward Sync / GHIS import screen - this is the native admission-to-discharge record.
@@ -1160,6 +1161,7 @@
         tile("icu", "ICU &amp; Ward", "Critical care &amp; inpatients", "icu", true) +
         (queueOn ? tile("list", "OPD Queue", "Outpatient visits", "opd") : "") +
         tile("ward", "Ward Sync", "Labs &amp; imaging (GHIS)", "ward") +
+        tile("heart", "Code Blue", "Resuscitation timer and practice", "codeblue") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         (wardsynqWorkplace()
           ? tile("receipt_long", "Hospital Billing", "OPD & IPD cashier & bills", "billing")
@@ -1206,7 +1208,7 @@
             }
             if (a === "pharmacy") { location.href = "/clinic-billing?station=pharmacy"; return; }
             if (a === "agentconnect" || a === "connect") { ACT.agentconnect(); return; }
-            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.agentconnect)();
+            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "codeblue" ? ACT.codeblue : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.agentconnect)();
           }, 70);
         });
       });
@@ -2188,6 +2190,7 @@
       eligible: function () { return govschemesOn(); } },
     { act: "icdsearch", ic: "search", tt: "Search ICD", sub: "ICD-10 / ICD-11 diagnosis codes", defOn: true },
     { act: "icu", ic: "monitor_heart", tt: "ICU & Ward", sub: "Critical care", defOn: false },
+    { act: "codeblue", ic: "monitor_heart", tt: "Code Blue", sub: "Resuscitation timer", defOn: false },
     { act: "ward", ic: "bed", tt: "Ward Sync", sub: "Inpatient GHIS", defOn: false },
     { act: "agentconnect", ic: "hub", tt: "AgentConnect", sub: "Connect your hospital's EMR", defOn: true },
     { act: "startcase", ic: "stethoscope", tt: "Start Case", sub: "Assessment", defOn: false },
