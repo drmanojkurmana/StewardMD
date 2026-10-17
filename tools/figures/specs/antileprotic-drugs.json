@@ -1,0 +1,255 @@
+{
+ "id": "antileprotic-drugs",
+ "title": "Leprosy: how dapsone, rifampicin and clofazimine hit the bacillus",
+ "ariaLabel": "Schematic of Mycobacterium leprae: it makes folate, copies RNA with its RNA polymerase, and relies on its membrane and redox systems. Dapsone blocks folate synthesis, rifampicin blocks RNA polymerase, and clofazimine disturbs the membrane and redox balance. The three together are used so that no one drug is used alone.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Bacterial growth drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antileprotic drug"
+  },
+  {
+   "label": "dapsone type",
+   "status": "dapsone",
+   "blocks": {
+    "e_dps": 0.85
+   }
+  },
+  {
+   "label": "rifampicin type",
+   "status": "rifampicin",
+   "blocks": {
+    "e_rif": 0.9
+   }
+  },
+  {
+   "label": "clofazimine type",
+   "status": "clofazimine",
+   "blocks": {
+    "e_clo": 0.85
+   }
+  },
+  {
+   "label": "multidrug therapy (three drugs)",
+   "status": "multidrug therapy",
+   "blocks": {
+    "e_dps": 0.85,
+    "e_rif": 0.9,
+    "e_clo": 0.85
+   }
+  }
+ ],
+ "readout": "Leprosy bacilli: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "killed",
+    "reduced",
+    "growing"
+   ],
+   "cuts": [
+    0.2,
+    0.55
+   ]
+  }
+ ],
+ "status": "Growth drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Leprosy bacilli: growing"
+  ],
+  [
+   1,
+   1,
+   "Leprosy bacilli: reduced"
+  ],
+  [
+   1,
+   2,
+   "Leprosy bacilli: reduced"
+  ],
+  [
+   1,
+   3,
+   "Leprosy bacilli: reduced"
+  ],
+  [
+   1,
+   4,
+   "Leprosy bacilli: killed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Folate precursors",
+   "sub": "PABA",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "The bacillus makes folate from PABA."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Folate made",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Folate for DNA building."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Nucleotides",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Building blocks for bacterial RNA."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Bacterial RNA",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "RNA for bacterial proteins."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Membrane, redox",
+   "sub": "bacillus",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "The bacillus's membrane and redox systems."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Membrane function",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Membrane function that keeps the bacillus alive."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0",
+     0.25
+    ],
+    [
+     "n:m1",
+     0.4
+    ],
+    [
+     "n:m2",
+     0.2
+    ]
+   ],
+   "label": "Leprosy bacilli",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how well the bacilli survive and grow."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_dps",
+   "from": "s0",
+   "to": "m0",
+   "label": "folate synthesis",
+   "info": "Dapsone is a sulfone that competes with PABA at dihydropteroate synthase, like the sulfonamides."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_rif",
+   "from": "s1",
+   "to": "m1",
+   "label": "RNA polymerase",
+   "info": "Rifampicin binds the beta subunit of bacterial RNA polymerase and stops RNA being made. It is the most rapidly bactericidal drug of the three."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_clo",
+   "from": "s2",
+   "to": "m2",
+   "label": "membrane and redox",
+   "info": "Clofazimine is a lipophilic dye that disturbs the membrane and redox balance of the bacillus; it also has an anti-inflammatory effect."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Dapsone blocks folate synthesis, rifampicin blocks RNA polymerase, and clofazimine disturbs membrane and redox balance. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Paucibacillary and multibacillary regimens, durations and doses, leprosy reactions and steroids, thalidomide, resistance, G6PD and haemolysis with dapsone, skin discolouration with clofazimine and contact tracing are left out. Bacilli are drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Leprosy: how dapsone, rifampicin and clofazimine hit the bacillus",
+  "blurb": "Interactive figure: dapsone, rifampicin and clofazimine",
+  "drugs": {
+   "dapsone": "d=1",
+   "rifampicin": "d=2",
+   "rifampin": "d=2",
+   "clofazimine": "d=3"
+  },
+  "terms": [
+   "leprosy (?:treatment|drugs?|therapy)",
+   "anti[- ]?leprosy",
+   "anti[- ]?leprotic",
+   "multidrug therapy",
+   "multi[- ]?drug therapy",
+   "MDT"
+  ]
+ }
+}

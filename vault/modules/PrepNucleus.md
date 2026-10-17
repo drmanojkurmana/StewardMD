@@ -1741,3 +1741,9 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   class in the plan is covered; remaining ideas (vasopressin, mannitol, vitamins) are optional. Registry terms that match many lessons (insulin) are the
   first place to tighten if the chips feel noisy.
 - **Colour layer (2026-10-17):** `fig-viewer.js` `COLOR_CSS` + `legend()` colour every figure at open time (membranes blue, receptors green, G proteins violet, start green, step sky, result amber, damage red, enzyme pills violet, vesicles orange; AP curves blue vs dashed grey), dark and light, with a colour key under the drawing. No page rebuild needed; edit the hues in the `--k-*` variables.
+
+- **Figures complete (2026-10-17): 63 figures.** Final batch (13): fibrinolytics-antifibrinolytics, gout-drugs, inflammatory-arthritis-bowel-drugs, cancer-antibodies-targeted,
+  fluid-balance-hormones, central-sympatholytics-pressors, antileprotic-drugs, dementia-drugs, spasticity-muscle-relaxants, stimulants-sleep-drugs, bladder-storage-drugs,
+  antibiotics-membrane-dna, gi-protectants-bile. Every drug class on the Drugs page with a distinct mechanism now has a figure; remaining untouched are single-drug
+  topics (octreotide, mannitol, riluzole, griseofulvin). All figure text still waits for the owner's Review Desk pass. About 34% of lesson steps now show a figure chip;
+  tighten registry terms first if that feels noisy.

@@ -1,0 +1,198 @@
+{
+ "id": "fibrinolytics-antifibrinolytics",
+ "title": "Clot breakdown: fibrinolytics, tranexamic acid and why clots form",
+ "ariaLabel": "Schematic of a clot: platelets and fibrin build it, and plasmin, made from plasminogen, breaks fibrin down. Fibrinolytics such as alteplase and streptokinase make more plasmin, and tranexamic acid blocks plasminogen from binding fibrin so less plasmin acts.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Clotting drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no fibrinolytic or antifibrinolytic"
+  },
+  {
+   "label": "fibrinolytic type (alteplase, streptokinase)",
+   "status": "fibrinolytic",
+   "blocks": {
+    "e_pl": -1.5
+   }
+  },
+  {
+   "label": "tranexamic acid type",
+   "status": "tranexamic acid type",
+   "blocks": {
+    "e_pl": 0.85
+   }
+  }
+ ],
+ "readout": "Clot in the vessel: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "small",
+    "moderate",
+    "large"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Clotting drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Clot in the vessel: moderate"
+  ],
+  [
+   1,
+   1,
+   "Clot in the vessel: small"
+  ],
+  [
+   1,
+   2,
+   "Clot in the vessel: moderate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Clotting drive",
+   "sub": "injury, platelets",
+   "x": 105,
+   "y": 170,
+   "rx": 92,
+   "info": "Platelet plug and the clotting cascade build a fibrin clot after injury or on a ruptured plaque."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Clot built",
+   "x": 480,
+   "y": 170,
+   "rx": 100,
+   "info": "Fibrin and platelets making a stable clot."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Plasminogen",
+   "sub": "in plasma",
+   "x": 105,
+   "y": 430,
+   "rx": 92,
+   "info": "The inactive precursor of plasmin, bound to fibrin in the clot."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Plasmin made",
+   "x": 480,
+   "y": 430,
+   "rx": 100,
+   "info": "The enzyme that digests fibrin."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m0",
+     0.6
+    ],
+    [
+     "n:m1",
+     -0.5
+    ]
+   ],
+   "label": "Clot in the vessel",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the amount of clot that is present."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_fib",
+   "from": "s0",
+   "to": "m0",
+   "label": "fibrin formation",
+   "info": "Thrombin turns fibrinogen into fibrin, which mesh holds the clot together. Anticoagulants and antiplatelet drugs act earlier (see their own figures)."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "A bigger clot raises the amount of clot in the vessel."
+  },
+  {
+   "id": "e_pl",
+   "from": "s1",
+   "to": "m1",
+   "label": "plasmin formation",
+   "info": "Tissue plasminogen activator turns plasminogen into plasmin. Alteplase, tenecteplase and streptokinase make more plasmin. Tranexamic acid occupies the lysine binding sites of plasminogen so it cannot bind fibrin, and so less plasmin acts on the clot.",
+   "w": 0.6
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More plasmin digests the clot and lowers the amount of clot."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Fibrinolytics raise plasmin and so digest fibrin, and tranexamic acid blocks plasminogen binding to fibrin. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Which clots to treat and the time window, contraindications and bleeding risk, anticoagulants and antiplatelets (own figures), antidotes, streptokinase antibodies and allergy, stroke versus infarct use and dosing are left out. Clot amount is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Clot breakdown: fibrinolytics, tranexamic acid and why clots form",
+  "blurb": "Interactive figure: alteplase-type fibrinolytics and tranexamic acid",
+  "drugs": {
+   "alteplase": "d=1",
+   "tenecteplase": "d=1",
+   "reteplase": "d=1",
+   "streptokinase": "d=1",
+   "urokinase": "d=1",
+   "anistreplase": "d=1",
+   "tranexamic": "d=2",
+   "aminocaproic": "d=2"
+  },
+  "terms": [
+   "fibrinolytics?",
+   "thrombolytics?",
+   "thrombolysis",
+   "antifibrinolytics?",
+   "plasminogen activators?",
+   "clot[- ]busters?"
+  ]
+ }
+}

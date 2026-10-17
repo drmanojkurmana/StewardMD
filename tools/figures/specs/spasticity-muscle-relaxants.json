@@ -1,0 +1,241 @@
+{
+ "id": "spasticity-muscle-relaxants",
+ "title": "Spasticity: where baclofen, tizanidine, dantrolene and botulinum toxin act",
+ "ariaLabel": "Schematic of muscle tone: the spinal cord drives the motor nerve, the nerve ending releases acetylcholine, and the muscle releases calcium to contract. Baclofen acts at GABA-B receptors and tizanidine at alpha-2 receptors in the cord, botulinum toxin blocks acetylcholine release at the nerve ending, and dantrolene blocks calcium release inside muscle.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Spastic drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antispastic drug"
+  },
+  {
+   "label": "baclofen or tizanidine type (spinal)",
+   "status": "baclofen or tizanidine",
+   "blocks": {
+    "e_cord": 0.85
+   }
+  },
+  {
+   "label": "botulinum toxin type (nerve ending)",
+   "status": "botulinum toxin",
+   "blocks": {
+    "e_rel": 0.9
+   }
+  },
+  {
+   "label": "dantrolene type (muscle)",
+   "status": "dantrolene",
+   "blocks": {
+    "e_ca": 0.85
+   }
+  }
+ ],
+ "readout": "Muscle tone: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "low",
+    "reduced",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Spastic drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Muscle tone: high"
+  ],
+  [
+   1,
+   1,
+   "Muscle tone: reduced"
+  ],
+  [
+   1,
+   2,
+   "Muscle tone: reduced"
+  ],
+  [
+   1,
+   3,
+   "Muscle tone: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Spinal cord drive",
+   "sub": "motor neuron input",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Excitatory input to motor neurons in the spinal cord, raised in spasticity."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Motor neuron firing",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Impulses sent down the motor nerve."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Acetylcholine",
+   "sub": "at the nerve ending",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Acetylcholine packaged in vesicles at the neuromuscular junction."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "ACh released",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Transmitter that reaches the muscle."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Calcium store",
+   "sub": "in muscle",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Calcium stored in the sarcoplasmic reticulum of muscle."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Calcium released",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Calcium that triggers contraction."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.3
+    ]
+   ],
+   "label": "Muscle tone",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for muscle tone and spasm."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cord",
+   "from": "s0",
+   "to": "m0",
+   "label": "GABA-B and alpha-2",
+   "info": "Baclofen is a GABA-B agonist and tizanidine an alpha-2 agonist; both lower excitatory transmission in the cord."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_rel",
+   "from": "s1",
+   "to": "m1",
+   "label": "ACh release",
+   "info": "Botulinum toxin cleaves SNARE proteins, so acetylcholine is not released and the injected muscle weakens. The effect wears off over months."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_ca",
+   "from": "s2",
+   "to": "m2",
+   "label": "ryanodine receptor",
+   "info": "Dantrolene blocks the ryanodine receptor, so less calcium is released inside muscle and contraction is weaker. It acts on the muscle, not the nerve."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Baclofen and tizanidine lower spinal excitation, botulinum toxin blocks acetylcholine release, and dantrolene blocks calcium release in muscle. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Diazepam, intrathecal baclofen, malignant hyperthermia and neuroleptic malignant syndrome use of dantrolene, withdrawal of baclofen, cause of spasticity, physiotherapy, sedation, weakness and adverse effects are left out. Muscle tone is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Spasticity: where baclofen, tizanidine, dantrolene and botulinum toxin act",
+  "blurb": "Interactive figure: baclofen, tizanidine, botulinum toxin and dantrolene",
+  "drugs": {
+   "baclofen": "d=1",
+   "tizanidine": "d=1",
+   "botulinum": "d=2",
+   "botox": "d=2",
+   "dantrolene": "d=3"
+  },
+  "terms": [
+   "antispastics?",
+   "spasticity (?:drugs?|treatment)",
+   "skeletal muscle relaxants?",
+   "centrally acting muscle relaxants?"
+  ]
+ }
+}

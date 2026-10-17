@@ -1,0 +1,206 @@
+{
+ "id": "gi-protectants-bile",
+ "title": "Gut lining protectants and bile acids: sucralfate, bismuth and ursodeoxycholic acid",
+ "ariaLabel": "Schematic of two protective ideas: acid and pepsin injure the lining, and a barrier over the ulcer protects it, as sucralfate and bismuth do; and toxic bile acids injure liver and bile ducts, so ursodeoxycholic acid makes bile less toxic. Sucralfate and bismuth coat the ulcer base, and ursodeoxycholic acid dilutes toxic bile acids and helps bile flow.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Injury drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no protectant"
+  },
+  {
+   "label": "barrier type (sucralfate, bismuth)",
+   "status": "barrier type",
+   "blocks": {
+    "e_bar": 0.85
+   }
+  },
+  {
+   "label": "ursodeoxycholic acid type",
+   "status": "ursodeoxycholic acid",
+   "blocks": {
+    "e_bile": 0.8
+   }
+  },
+  {
+   "label": "both",
+   "status": "both",
+   "blocks": {
+    "e_bar": 0.85,
+    "e_bile": 0.8
+   }
+  }
+ ],
+ "readout": "Tissue injury: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "minimal",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.2,
+    0.45
+   ]
+  }
+ ],
+ "status": "Injury drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Tissue injury: marked"
+  ],
+  [
+   1,
+   1,
+   "Tissue injury: reduced"
+  ],
+  [
+   1,
+   2,
+   "Tissue injury: reduced"
+  ],
+  [
+   1,
+   3,
+   "Tissue injury: minimal"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Acid and pepsin",
+   "sub": "on the lining",
+   "x": 105,
+   "y": 170,
+   "rx": 92,
+   "info": "Acid and pepsin attacking the gastric or duodenal lining."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Lining injured",
+   "x": 480,
+   "y": 170,
+   "rx": 100,
+   "info": "Injury to the lining of the stomach or duodenum."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Toxic bile acids",
+   "sub": "in cholestasis",
+   "x": 105,
+   "y": 430,
+   "rx": 92,
+   "info": "Hydrophobic bile acids that injure liver cells and bile ducts when bile flow is poor."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Liver and duct injury",
+   "x": 480,
+   "y": 430,
+   "rx": 100,
+   "info": "Damage to liver cells and bile ducts."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.4
+    ],
+    [
+     "n:m1",
+     0.3
+    ]
+   ],
+   "label": "Tissue injury",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for injury to the gut lining or to liver and bile ducts."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_bar",
+   "from": "s0",
+   "to": "m0",
+   "label": "ulcer barrier",
+   "info": "Sucralfate becomes a sticky paste at acid pH and coats the ulcer base; bismuth forms a similar coat and also has antibacterial action against Helicobacter. Both need acid, so they are not given with acid-suppressing drugs at the same time."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More injury is more ulcer damage."
+  },
+  {
+   "id": "e_bile",
+   "from": "s1",
+   "to": "m1",
+   "label": "bile acid toxicity",
+   "info": "Ursodeoxycholic acid is a hydrophilic bile acid. It makes the bile acid pool less toxic, helps bile flow and can dissolve small cholesterol gallstones."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More injury is more liver damage."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Sucralfate and bismuth coat the ulcer base, and ursodeoxycholic acid makes bile less toxic and helps its flow. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Acid suppression (own figure), Helicobacter eradication regimens, misoprostol, gallstone and cholestasis selection, aluminium accumulation in kidney disease, interactions that reduce absorption of other drugs and adverse effects are left out. Tissue injury is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Gut lining protectants and bile acids: sucralfate, bismuth and ursodeoxycholic acid",
+  "blurb": "Interactive figure: sucralfate, bismuth and ursodeoxycholic acid",
+  "drugs": {
+   "sucralfate": "d=1",
+   "bismuth": "d=1",
+   "ursodeoxycholic": "d=2",
+   "ursodiol": "d=2",
+   "chenodeoxycholic": "d=2",
+   "obeticholic": "d=2"
+  },
+  "terms": [
+   "ulcer protectants?",
+   "cytoprotective (?:agents?|drugs?)",
+   "mucosal protectants?",
+   "bile acid (?:therapy|drugs?)"
+  ]
+ }
+}

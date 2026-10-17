@@ -1,0 +1,257 @@
+{
+ "id": "fluid-balance-hormones",
+ "title": "Vasopressin, desmopressin and fludrocortisone: what keeps water and salt",
+ "ariaLabel": "Schematic of water and salt balance: vasopressin acting on V2 receptors in the collecting duct inserts water channels and keeps water, aldosterone-type action keeps sodium and so water, and vasopressin on V1 receptors narrows vessels. Desmopressin acts mainly on V2 receptors, vasopressin on both, fludrocortisone on mineralocorticoid receptors, and tolvaptan blocks V2 receptors.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Natural hormone level",
+  "a": [
+   0.4,
+   0.6,
+   0.8
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no hormone drug"
+  },
+  {
+   "label": "desmopressin type (V2 agonist)",
+   "status": "desmopressin type",
+   "blocks": {
+    "e_v2": -1.0
+   }
+  },
+  {
+   "label": "vasopressin type (V1 and V2)",
+   "status": "vasopressin",
+   "blocks": {
+    "e_v2": -1.0,
+    "e_v1": -1.0
+   }
+  },
+  {
+   "label": "fludrocortisone type",
+   "status": "fludrocortisone type",
+   "blocks": {
+    "e_mr": -1.0
+   }
+  },
+  {
+   "label": "tolvaptan type (V2 blocker)",
+   "status": "tolvaptan type",
+   "blocks": {
+    "e_v2": 0.85
+   }
+  }
+ ],
+ "readout": "Water, salt and pressure kept: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "reduced",
+    "normal",
+    "increased"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Natural hormone: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Water, salt and pressure kept: normal"
+  ],
+  [
+   1,
+   1,
+   "Water, salt and pressure kept: increased"
+  ],
+  [
+   1,
+   2,
+   "Water, salt and pressure kept: increased"
+  ],
+  [
+   1,
+   3,
+   "Water, salt and pressure kept: increased"
+  ],
+  [
+   1,
+   4,
+   "Water, salt and pressure kept: normal"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "ADH signal",
+   "sub": "vasopressin, V2",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Vasopressin from the posterior pituitary."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Water kept",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Water reabsorbed in the collecting duct, giving concentrated urine."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Aldosterone",
+   "sub": "mineralocorticoid",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Aldosterone and similar hormones."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Salt kept",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Sodium reabsorbed in the distal nephron, with water following."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "V1 signal",
+   "sub": "vasopressin",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Vasopressin acting on vessel smooth muscle."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Vessels narrowed",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Higher vessel tone raises the pressure."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.25
+    ]
+   ],
+   "label": "Water and salt kept",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how much water, salt and pressure the body keeps."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_v2",
+   "from": "s0",
+   "to": "m0",
+   "label": "V2 receptors",
+   "info": "V2 receptors in the collecting duct insert aquaporin-2 water channels. Desmopressin and vasopressin raise this effect; tolvaptan blocks it."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More water kept raises fluid retention."
+  },
+  {
+   "id": "e_mr",
+   "from": "s1",
+   "to": "m1",
+   "label": "MR receptors",
+   "info": "Fludrocortisone acts on mineralocorticoid receptors to keep sodium (and so water) and lose potassium."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More salt kept raises fluid retention."
+  },
+  {
+   "id": "e_v1",
+   "from": "s2",
+   "to": "m2",
+   "label": "V1 receptors",
+   "info": "Vasopressin (but not desmopressin) acts on V1 receptors to narrow vessels. This is why vasopressin is used as a pressor in shock."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Narrower vessels raise the pressure."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Desmopressin acts on V2 receptors, vasopressin on V1 and V2, fludrocortisone on mineralocorticoid receptors, and tolvaptan blocks V2 receptors. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Oxytocin and other posterior pituitary actions, SIADH and diabetes insipidus work-up, sodium correction speed, osmotic demyelination, adrenal insufficiency, potassium effects, hypertension and adverse effects are left out. Water, salt and pressure kept is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Vasopressin, desmopressin and fludrocortisone: what keeps water and salt",
+  "blurb": "Interactive figure: desmopressin, vasopressin, fludrocortisone and tolvaptan",
+  "drugs": {
+   "desmopressin": "d=1",
+   "vasopressin": "d=2",
+   "terlipressin": "d=2",
+   "argipressin": "d=2",
+   "fludrocortisone": "d=3",
+   "tolvaptan": "d=4",
+   "conivaptan": "d=4"
+  },
+  "terms": [
+   "antidiuretic hormone",
+   "ADH (?:antagonists?|analogues?)",
+   "vasopressin (?:analogues?|antagonists?|receptor)",
+   "mineralocorticoids?",
+   "diabetes insipidus"
+  ]
+ }
+}

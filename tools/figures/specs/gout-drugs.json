@@ -1,0 +1,249 @@
+{
+ "id": "gout-drugs",
+ "title": "Gout: uric acid production, loss in urine and the inflammatory attack",
+ "ariaLabel": "Schematic of gout: purines are turned into uric acid by xanthine oxidase, the kidney clears uric acid in the urine, and crystals in a joint set off neutrophil inflammation. Allopurinol and febuxostat block xanthine oxidase, probenecid raises uric acid loss in urine, and colchicine quiets the neutrophil response.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Purine load",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no gout drug"
+  },
+  {
+   "label": "xanthine oxidase inhibitor type (allopurinol, febuxostat)",
+   "status": "xanthine oxidase inhibitor",
+   "blocks": {
+    "e_xo": 0.85
+   }
+  },
+  {
+   "label": "uricosuric type (probenecid)",
+   "status": "uricosuric",
+   "blocks": {
+    "e_ur": 0.85
+   }
+  },
+  {
+   "label": "colchicine type",
+   "status": "colchicine",
+   "blocks": {
+    "e_neu": 0.85
+   }
+  }
+ ],
+ "readout": "Gout activity: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "quiet",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Purine load: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Gout activity: active"
+  ],
+  [
+   1,
+   1,
+   "Gout activity: reduced"
+  ],
+  [
+   1,
+   2,
+   "Gout activity: reduced"
+  ],
+  [
+   1,
+   3,
+   "Gout activity: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Purines",
+   "sub": "diet, cell turnover",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Purines from food and cell breakdown. The slider sets the load."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Uric acid made",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Uric acid, the end product of human purine breakdown."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Kidney clearance",
+   "sub": "of uric acid",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "The kidney filters uric acid and reabsorbs much of it."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Uric acid retained",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Uric acid held back by the kidney."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Neutrophils",
+   "sub": "at crystals",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Neutrophils that gather round urate crystals in the joint."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Joint inflammation",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "The painful hot swollen joint of an acute attack."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.45
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.3
+    ]
+   ],
+   "label": "Gout activity",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for crystals and joint attacks."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_xo",
+   "from": "s0",
+   "to": "m0",
+   "label": "xanthine oxidase",
+   "info": "Xanthine oxidase turns hypoxanthine and xanthine into uric acid. Allopurinol (as oxypurinol) and febuxostat block it."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More uric acid raises the risk of crystals."
+  },
+  {
+   "id": "e_ur",
+   "from": "s1",
+   "to": "m1",
+   "label": "urate reabsorption",
+   "info": "Probenecid blocks the URAT1 transporter, so less uric acid is reabsorbed and more is lost in urine.",
+   "w": 0.7
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More uric acid retained raises the risk of crystals."
+  },
+  {
+   "id": "e_neu",
+   "from": "s2",
+   "to": "m2",
+   "label": "neutrophils",
+   "info": "Colchicine binds tubulin and blunts neutrophil movement and the inflammasome response. It treats and prevents the attack but does not lower uric acid."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More neutrophil activity raises the attack."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Allopurinol and febuxostat block xanthine oxidase, probenecid blocks urate reabsorption, and colchicine blunts neutrophil responses. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "NSAIDs and steroids for attacks, pegloticase and rasburicase, starting therapy and flare prophylaxis, diet and alcohol, kidney stones, allopurinol hypersensitivity, drug interactions and dose limits are left out. Gout activity is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Gout: uric acid production, loss in urine and the inflammatory attack",
+  "blurb": "Interactive figure: allopurinol, probenecid and colchicine",
+  "drugs": {
+   "allopurinol": "d=1",
+   "febuxostat": "d=1",
+   "oxypurinol": "d=1",
+   "topiroxostat": "d=1",
+   "probenecid": "d=2",
+   "benzbromarone": "d=2",
+   "lesinurad": "d=2",
+   "sulfinpyrazone": "d=2",
+   "colchicine": "d=3"
+  },
+  "terms": [
+   "gout",
+   "anti[- ]?gout drugs?",
+   "uricosurics?",
+   "xanthine oxidase inhibitors?",
+   "hyperuricaemia",
+   "hyperuricemia",
+   "urate[- ]lowering"
+  ]
+ }
+}

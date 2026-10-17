@@ -1,0 +1,250 @@
+{
+ "id": "bladder-storage-drugs",
+ "title": "Bladder drugs: urgency, voiding and the outlet",
+ "ariaLabel": "Schematic of bladder control: parasympathetic input to M3 receptors contracts the detrusor and causes urgency, beta-3 receptors relax the detrusor so it stores more, and alpha-1 receptors at the outlet keep it tight. Antimuscarinics such as oxybutynin block M3 receptors, mirabegron stimulates beta-3 receptors, and tamsulosin blocks alpha-1 receptors at the outlet.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Bladder irritability",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no bladder drug"
+  },
+  {
+   "label": "antimuscarinic type",
+   "status": "antimuscarinic",
+   "blocks": {
+    "e_m3": 0.85
+   }
+  },
+  {
+   "label": "beta-3 agonist type (mirabegron)",
+   "status": "beta-3 agonist",
+   "blocks": {
+    "e_b3": -0.9
+   }
+  },
+  {
+   "label": "alpha-1 blocker type (tamsulosin)",
+   "status": "alpha-1 blocker",
+   "blocks": {
+    "e_a1": 0.85
+   }
+  }
+ ],
+ "readout": "Bladder symptoms: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "settled",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.25,
+    0.38
+   ]
+  }
+ ],
+ "status": "Irritability: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Bladder symptoms: marked"
+  ],
+  [
+   1,
+   1,
+   "Bladder symptoms: settled"
+  ],
+  [
+   1,
+   2,
+   "Bladder symptoms: reduced"
+  ],
+  [
+   1,
+   3,
+   "Bladder symptoms: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Vagal drive",
+   "sub": "M3 receptors",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Acetylcholine acting on M3 receptors of the bladder wall."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Detrusor contraction",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Bladder wall contraction that causes urgency."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Sympathetic input",
+   "sub": "beta-3 receptors",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Noradrenaline acting on beta-3 receptors of the detrusor."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Detrusor relaxation",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Relaxation that lets the bladder fill."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Outlet tone",
+   "sub": "alpha-1 receptors",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Alpha-1 receptors in the prostate and bladder neck keep the outlet tight."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Outlet tight",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "A tight outlet causes poor flow and, with an irritable bladder, urgency and incomplete emptying."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.15,
+   "terms": [
+    [
+     "n:m0",
+     0.35
+    ],
+    [
+     "n:m1",
+     -0.3
+    ],
+    [
+     "n:m2",
+     0.2
+    ]
+   ],
+   "label": "Bladder symptoms",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for urgency, frequency and poor flow."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_m3",
+   "from": "s0",
+   "to": "m0",
+   "label": "M3 receptors",
+   "info": "Antimuscarinics (oxybutynin, tolterodine, solifenacin) block M3 receptors, so the detrusor contracts less and urgency falls. Dry mouth and constipation are common."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More contraction raises urgency."
+  },
+  {
+   "id": "e_b3",
+   "from": "s1",
+   "to": "m1",
+   "label": "beta-3 receptors",
+   "info": "Mirabegron stimulates beta-3 receptors, relaxing the detrusor during storage so the bladder holds more.",
+   "w": 0.6
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More relaxation lowers urgency."
+  },
+  {
+   "id": "e_a1",
+   "from": "s2",
+   "to": "m2",
+   "label": "alpha-1 receptors",
+   "info": "Tamsulosin and other alpha-1 blockers relax the outlet so urine flows more easily, helping obstruction from an enlarged prostate. Postural hypotension can occur."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "A tight outlet adds to bladder symptoms."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Antimuscarinics block M3 receptors, mirabegron stimulates beta-3 receptors, and alpha-1 blockers relax the bladder outlet. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "5-alpha reductase inhibitors (own figure), desmopressin for nocturia, botulinum toxin, bladder training, urinary retention, blood pressure effects of mirabegron, anticholinergic burden and cognition, dry mouth and adverse effects are left out. Bladder symptoms are drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Bladder drugs: urgency, voiding and the outlet",
+  "blurb": "Interactive figure: antimuscarinics, mirabegron and alpha-1 blockers",
+  "drugs": {
+   "mirabegron": "d=2",
+   "vibegron": "d=2",
+   "oxybutynin": "d=1",
+   "tolterodine": "d=1",
+   "solifenacin": "d=1",
+   "darifenacin": "d=1",
+   "fesoterodine": "d=1",
+   "trospium": "d=1",
+   "tamsulosin": "d=3",
+   "silodosin": "d=3",
+   "alfuzosin": "d=3",
+   "doxazosin": "d=3"
+  },
+  "terms": [
+   "overactive bladder",
+   "urinary antispasmodics?",
+   "bladder (?:drugs?|antimuscarinics?)",
+   "LUTS",
+   "lower urinary tract symptoms"
+  ]
+ }
+}

@@ -1025,6 +1025,7 @@
     "zanamivir": "d=2",
     "peramivir": "d=2",
     "remdesivir": "d=3",
+    "ribavirin": "d=3",
     "favipiravir": "d=3",
     "sofosbuvir": "d=3",
     "molnupiravir": "d=3"
@@ -1134,7 +1135,8 @@
     "mecobalamin": "d=2",
     "epoetin": "d=3",
     "darbepoetin": "d=3",
-    "folate": "d=2"
+    "folate": "d=2",
+    "folic": "d=2"
    },
    "terms": [
     "haematinics?",
@@ -1602,6 +1604,314 @@
     "amebicides?",
     "luminal amoebicides?",
     "amoebiasis (?:treatment|drugs?)"
+   ]
+  },
+  {
+   "id": "fibrinolytics-antifibrinolytics",
+   "title": "Clot breakdown: fibrinolytics, tranexamic acid and why clots form",
+   "blurb": "Interactive figure: alteplase-type fibrinolytics and tranexamic acid",
+   "page": "prep/figures/fibrinolytics-antifibrinolytics.html",
+   "drugs": {
+    "alteplase": "d=1",
+    "tenecteplase": "d=1",
+    "reteplase": "d=1",
+    "streptokinase": "d=1",
+    "urokinase": "d=1",
+    "anistreplase": "d=1",
+    "tranexamic": "d=2",
+    "aminocaproic": "d=2"
+   },
+   "terms": [
+    "fibrinolytics?",
+    "thrombolytics?",
+    "thrombolysis",
+    "antifibrinolytics?",
+    "plasminogen activators?",
+    "clot[- ]busters?"
+   ]
+  },
+  {
+   "id": "gout-drugs",
+   "title": "Gout: uric acid production, loss in urine and the inflammatory attack",
+   "blurb": "Interactive figure: allopurinol, probenecid and colchicine",
+   "page": "prep/figures/gout-drugs.html",
+   "drugs": {
+    "allopurinol": "d=1",
+    "febuxostat": "d=1",
+    "oxypurinol": "d=1",
+    "topiroxostat": "d=1",
+    "probenecid": "d=2",
+    "benzbromarone": "d=2",
+    "lesinurad": "d=2",
+    "sulfinpyrazone": "d=2",
+    "colchicine": "d=3"
+   },
+   "terms": [
+    "gout",
+    "anti[- ]?gout drugs?",
+    "uricosurics?",
+    "xanthine oxidase inhibitors?",
+    "hyperuricaemia",
+    "hyperuricemia",
+    "urate[- ]lowering"
+   ]
+  },
+  {
+   "id": "inflammatory-arthritis-bowel-drugs",
+   "title": "Rheumatoid arthritis and IBD: where the immune-modifying drugs act",
+   "blurb": "Interactive figure: anti-TNF drugs, aminosalicylates, hydroxychloroquine and methotrexate",
+   "page": "prep/figures/inflammatory-arthritis-bowel-drugs.html",
+   "drugs": {
+    "infliximab": "d=1",
+    "adalimumab": "d=1",
+    "etanercept": "d=1",
+    "golimumab": "d=1",
+    "certolizumab": "d=1",
+    "sulfasalazine": "d=2",
+    "mesalazine": "d=2",
+    "mesalamine": "d=2",
+    "balsalazide": "d=2",
+    "olsalazine": "d=2",
+    "hydroxychloroquine": "d=3",
+    "chloroquine": "d=3",
+    "methotrexate": "d=4"
+   },
+   "terms": [
+    "dmards?",
+    "disease[- ]modifying (?:anti[- ]?rheumatic )?drugs?",
+    "anti[- ]?TNF",
+    "TNF (?:inhibitors?|blockers?|antagonists?)",
+    "aminosalicylates?",
+    "biologics?"
+   ]
+  },
+  {
+   "id": "cancer-antibodies-targeted",
+   "title": "Targeted cancer drugs: antibodies and checkpoint blockers",
+   "blurb": "Interactive figure: trastuzumab, bevacizumab, rituximab and checkpoint inhibitors",
+   "page": "prep/figures/cancer-antibodies-targeted.html",
+   "drugs": {
+    "trastuzumab": "d=1",
+    "pertuzumab": "d=1",
+    "bevacizumab": "d=2",
+    "ramucirumab": "d=2",
+    "rituximab": "d=3",
+    "obinutuzumab": "d=3",
+    "pembrolizumab": "d=4",
+    "nivolumab": "d=4",
+    "atezolizumab": "d=4",
+    "durvalumab": "d=4",
+    "cemiplimab": "d=4"
+   },
+   "terms": [
+    "monoclonal antibodies",
+    "immune checkpoint inhibitors?",
+    "checkpoint (?:inhibitors?|blockade)",
+    "targeted therapy",
+    "targeted (?:cancer )?(?:drugs?|therapy)"
+   ]
+  },
+  {
+   "id": "fluid-balance-hormones",
+   "title": "Vasopressin, desmopressin and fludrocortisone: what keeps water and salt",
+   "blurb": "Interactive figure: desmopressin, vasopressin, fludrocortisone and tolvaptan",
+   "page": "prep/figures/fluid-balance-hormones.html",
+   "drugs": {
+    "desmopressin": "d=1",
+    "vasopressin": "d=2",
+    "terlipressin": "d=2",
+    "argipressin": "d=2",
+    "fludrocortisone": "d=3",
+    "tolvaptan": "d=4",
+    "conivaptan": "d=4"
+   },
+   "terms": [
+    "antidiuretic hormone",
+    "ADH (?:antagonists?|analogues?)",
+    "vasopressin (?:analogues?|antagonists?|receptor)",
+    "mineralocorticoids?",
+    "diabetes insipidus"
+   ]
+  },
+  {
+   "id": "central-sympatholytics-pressors",
+   "title": "Clonidine, methyldopa and noradrenaline: lowering or raising sympathetic tone",
+   "blurb": "Interactive figure: clonidine, methyldopa and noradrenaline",
+   "page": "prep/figures/central-sympatholytics-pressors.html",
+   "drugs": {
+    "clonidine": "d=1",
+    "dexmedetomidine": "d=1",
+    "guanfacine": "d=1",
+    "moxonidine": "d=1",
+    "methyldopa": "d=2",
+    "noradrenaline": "d=3",
+    "norepinephrine": "d=3"
+   },
+   "terms": [
+    "centrally[- ]acting (?:antihypertensives?|drugs?)",
+    "alpha[- ]?2 (?:adrenergic )?agonists?",
+    "central sympatholytics?",
+    "vasopressors?",
+    "inotropes and vasopressors"
+   ]
+  },
+  {
+   "id": "antileprotic-drugs",
+   "title": "Leprosy: how dapsone, rifampicin and clofazimine hit the bacillus",
+   "blurb": "Interactive figure: dapsone, rifampicin and clofazimine",
+   "page": "prep/figures/antileprotic-drugs.html",
+   "drugs": {
+    "dapsone": "d=1",
+    "rifampicin": "d=2",
+    "rifampin": "d=2",
+    "clofazimine": "d=3"
+   },
+   "terms": [
+    "leprosy (?:treatment|drugs?|therapy)",
+    "anti[- ]?leprosy",
+    "anti[- ]?leprotic",
+    "multidrug therapy",
+    "multi[- ]?drug therapy",
+    "MDT"
+   ]
+  },
+  {
+   "id": "dementia-drugs",
+   "title": "Dementia drugs: acetylcholine and glutamate",
+   "blurb": "Interactive figure: cholinesterase inhibitors and memantine",
+   "page": "prep/figures/dementia-drugs.html",
+   "drugs": {
+    "donepezil": "d=1",
+    "rivastigmine": "d=1",
+    "galantamine": "d=1",
+    "tacrine": "d=1",
+    "memantine": "d=2"
+   },
+   "terms": [
+    "dementia (?:drugs?|treatment|therapy)",
+    "anti[- ]?dementia",
+    "anti[- ]?alzheimer",
+    "alzheimer(?:'s)? (?:drugs?|treatment|therapy)",
+    "cognitive enhancers?"
+   ]
+  },
+  {
+   "id": "spasticity-muscle-relaxants",
+   "title": "Spasticity: where baclofen, tizanidine, dantrolene and botulinum toxin act",
+   "blurb": "Interactive figure: baclofen, tizanidine, botulinum toxin and dantrolene",
+   "page": "prep/figures/spasticity-muscle-relaxants.html",
+   "drugs": {
+    "baclofen": "d=1",
+    "tizanidine": "d=1",
+    "botulinum": "d=2",
+    "botox": "d=2",
+    "dantrolene": "d=3"
+   },
+   "terms": [
+    "antispastics?",
+    "spasticity (?:drugs?|treatment)",
+    "skeletal muscle relaxants?",
+    "centrally acting muscle relaxants?"
+   ]
+  },
+  {
+   "id": "stimulants-sleep-drugs",
+   "title": "Alertness and sleep drugs: monoamine reuptake, GABA-A and melatonin",
+   "blurb": "Interactive figure: stimulants, atomoxetine, zolpidem and melatonin agonists",
+   "page": "prep/figures/stimulants-sleep-drugs.html",
+   "drugs": {
+    "methylphenidate": "d=1",
+    "dexamfetamine": "d=1",
+    "dexamphetamine": "d=1",
+    "amphetamine": "d=1",
+    "lisdexamfetamine": "d=1",
+    "modafinil": "d=1",
+    "armodafinil": "d=1",
+    "atomoxetine": "d=2",
+    "viloxazine": "d=2",
+    "zolpidem": "d=3",
+    "zopiclone": "d=3",
+    "eszopiclone": "d=3",
+    "zaleplon": "d=3",
+    "melatonin": "d=4",
+    "ramelteon": "d=4",
+    "agomelatine": "d=4",
+    "tasimelteon": "d=4"
+   },
+   "terms": [
+    "CNS stimulants?",
+    "stimulants?",
+    "ADHD (?:drugs?|treatment|medications?)",
+    "hypnotics?",
+    "Z[- ]drugs?",
+    "sleep (?:drugs?|aids?)"
+   ]
+  },
+  {
+   "id": "bladder-storage-drugs",
+   "title": "Bladder drugs: urgency, voiding and the outlet",
+   "blurb": "Interactive figure: antimuscarinics, mirabegron and alpha-1 blockers",
+   "page": "prep/figures/bladder-storage-drugs.html",
+   "drugs": {
+    "mirabegron": "d=2",
+    "vibegron": "d=2",
+    "oxybutynin": "d=1",
+    "tolterodine": "d=1",
+    "solifenacin": "d=1",
+    "darifenacin": "d=1",
+    "fesoterodine": "d=1",
+    "trospium": "d=1",
+    "tamsulosin": "d=3",
+    "silodosin": "d=3",
+    "alfuzosin": "d=3",
+    "doxazosin": "d=3"
+   },
+   "terms": [
+    "overactive bladder",
+    "urinary antispasmodics?",
+    "bladder (?:drugs?|antimuscarinics?)",
+    "LUTS",
+    "lower urinary tract symptoms"
+   ]
+  },
+  {
+   "id": "antibiotics-membrane-dna",
+   "title": "Colistin, daptomycin and nitrofurantoin: three other ways to kill a bacterium",
+   "blurb": "Interactive figure: colistin, daptomycin and nitrofurantoin",
+   "page": "prep/figures/antibiotics-membrane-dna.html",
+   "drugs": {
+    "colistin": "d=1",
+    "colistimethate": "d=1",
+    "polymyxin": "d=1",
+    "daptomycin": "d=2",
+    "nitrofurantoin": "d=3",
+    "fosfomycin": "d=3"
+   },
+   "terms": [
+    "polymyxins?",
+    "lipopeptide antibiotics?",
+    "last[- ]?resort antibiotics?",
+    "reserve antibiotics?"
+   ]
+  },
+  {
+   "id": "gi-protectants-bile",
+   "title": "Gut lining protectants and bile acids: sucralfate, bismuth and ursodeoxycholic acid",
+   "blurb": "Interactive figure: sucralfate, bismuth and ursodeoxycholic acid",
+   "page": "prep/figures/gi-protectants-bile.html",
+   "drugs": {
+    "sucralfate": "d=1",
+    "bismuth": "d=1",
+    "ursodeoxycholic": "d=2",
+    "ursodiol": "d=2",
+    "chenodeoxycholic": "d=2",
+    "obeticholic": "d=2"
+   },
+   "terms": [
+    "ulcer protectants?",
+    "cytoprotective (?:agents?|drugs?)",
+    "mucosal protectants?",
+    "bile acid (?:therapy|drugs?)"
    ]
   }
  ]
