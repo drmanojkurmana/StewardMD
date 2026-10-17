@@ -95,7 +95,7 @@ public struct CodeSummary: Codable, Sendable, Equatable {
         return lines.joined(separator: "\n")
     }
 
-    static func codeLabel(_ e: CodeEvent) -> String {
+    public static func codeLabel(_ e: CodeEvent) -> String {
         switch e.kind {
         case .cprStart: return "CPR started"
         case .cprEnd: return "CPR ended"
@@ -106,6 +106,10 @@ public struct CodeSummary: Codable, Sendable, Equatable {
         case .resume: return "Resumed"
         case .switchCompressor: return "Switch compressor"
         case .rosc: return "ROSC"
+        case .procedure: return e.label.isEmpty ? "Procedure" : "Procedure — \(e.label)"
+        case .reArrest: return "Re-arrest"
+        case .note: return e.label.isEmpty ? "Note" : "Note — \(e.label)"
+        case .modeSet: return e.label.isEmpty ? "Mode set" : e.label
         }
     }
 }

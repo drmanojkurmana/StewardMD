@@ -25,7 +25,9 @@ public struct CodeBluePresentation: Sendable {
         return age < 1 ? "Watch updated just now" : "Last watch update \(TimeFormat.mmss(age)) ago"
     }
     public var rhythmCountdown: String {
-        var timer = CodeBlueTimer(); timer.set(state.elapsed)
+        var timer = CodeBlueTimer()
+        timer.cycleLength = state.resolvedMode.rhythmCheckInterval
+        timer.set(state.elapsed)
         return TimeFormat.mmss(timer.secondsToNextRhythmCheck)
     }
     public var shockCount: Int { state.events.filter { $0.kind == .shock }.count }
