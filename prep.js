@@ -3228,7 +3228,7 @@
   function loadMany(pairs, onStep) {
     var done = 0;
     return Promise.all(pairs.map(function (x) {
-      return loadModule(x.s, x.m).then(function (items) { done++; if (onStep) onStep(done, pairs.length); return { s: x.s, m: x.m, items: items }; }, function () { done++; return { s: x.s, m: x.m, items: [] }; });
+      return loadModule(x.s, x.m).then(function (items) { done++; if (onStep) onStep(done, pairs.length); return { s: x.s, m: x.m, items: items }; }, function (e) { done++; return { s: x.s, m: x.m, items: [], err: (e && e.status) || 1 }; });
     }));
   }
   function subjectOfModule(mid) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (sb) { sb.sections.forEach(function (sec) { sec.modules.forEach(function (m) { if (m.id === mid) r = sb.id; }); }); }); }); if (!r && st.xl) { var g = xgroupById(st.xl, mid); if (g && g.members && g.members[0]) r = g.members[0][0]; } return r || (/-mixed$/.test(mid) ? subjectByCode(mid.split("-")[0]) : null); }

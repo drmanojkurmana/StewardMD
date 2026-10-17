@@ -356,7 +356,13 @@
         if (!weak.length) { H.stack().pop(); H.toast("No weak concepts marked yet. Tap Unsure or Guess on a concept first."); return openOutline(topic); }
       }
       var order = orderForStudy(outline, matched.assign, mode === "test" ? "test" : mode === "revise" ? "revise" : "learn", topic.id + ":" + mode, weak);
-      if (!order.length) { H.stack().pop(); H.toast("No questions for this topic yet."); return openOutline(topic); }
+      if (!order.length) {
+        // A load that failed is not an empty topic: say what went wrong so it is never mistaken for missing content.
+        var failed = lists.filter(function (l) { return l.err; });
+        H.stack().pop();
+        H.toast(failed.length && failed.length === lists.length ? (failed.some(function (l) { return l.err === 401; }) ? "Sign in again to open the questions." : "The questions could not load. Check the connection and try again.") : "No questions for this topic yet.");
+        return openOutline(topic);
+      }
       var ids = [];
       order.forEach(function (r) { r.items.forEach(function (id) { ids.push(id); }); });
       var byId = {};
