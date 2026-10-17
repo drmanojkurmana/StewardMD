@@ -12,8 +12,8 @@
  */
 import { DurableObject } from "cloudflare:workers";
 import { verifyFirebaseClaims } from "../../functions/_fbauth.js";
-import { EXAMS, uidHash, bankFrom, drawItems } from "../../functions/_prep-arena.js";
-import { N_ROUNDS, ROOM_RE, parseClient, tokenFromProtocol, allowQueue, matchQueue, queueWakeAt, newBattle, battleEvent, wakeAt, sideOf } from "./core.js";
+import { EXAMS, uidHash, bankFrom, drawItems, drawFromPool } from "../../functions/_prep-arena.js";
+import { N_ROUNDS, BOT_MIN_MS, BOT_SPAN_MS, ROOM_RE, parseClient, tokenFromProtocol, allowQueue, matchQueue, queueWakeAt, newBattle, battleEvent, wakeAt, sideOf, botFor, botWinsFor } from "./core.js";
 
 const text = (s, status) => new Response(s, { status, headers: { "Content-Type": "text/plain", "Cache-Control": "no-store" } });
 
@@ -97,7 +97,8 @@ export class Matchmaker extends DurableObject {
       if (this.inMatch.has(uidh)) return send(me.ws, { t: "busy" });                  // one active battle per uid
       if (this.waiting.some((w) => w.uidh === uidh)) return send(me.ws, { t: "waiting" });
       if (!allowQueue(this.rl, uidh, Date.now())) return send(me.ws, { t: "slow" });   // 10 joins a minute
-      this.waiting.push({ uidh, rating: me.rating, at: Date.now(), room: me.room });
+      const at = Date.now();
+      this.waiting.push({ uidh, rating: me.rating, at, room: me.room, botAt: at + BOT_MIN_MS + Math.floor(Math.random() * BOT_SPAN_MS) });
       send(me.ws, { t: "waiting" });
       return this.pump();
     }
@@ -114,18 +115,45 @@ export class Matchmaker extends DurableObject {
     if (mid) this.deliver(await this.room(mid).disconnect(uidh));
   }
 
+  botsOn() { return this.env.ARENA_BOTS !== "0"; }
   async pump() {
-    const now = Date.now(), { pairs, nobody } = matchQueue(this.waiting, now);
+    const now = Date.now(), { pairs, nobody, bots } = matchQueue(this.waiting, now, { bots: this.botsOn() });
     for (const u of nobody) { const s = this.socks.get(u); if (s) send(s.ws, { t: "nobody" }); }
     for (const [a, b] of pairs) await this.startMatch(a, b);
-    const t = queueWakeAt(this.waiting, Date.now());
+    for (const w of bots) await this.startBotMatch(w);
+    const t = queueWakeAt(this.waiting, Date.now(), { bots: this.botsOn() });
     if (t) await this.ctx.storage.setAlarm(t);
   }
   async alarm() { await this.pump(); }
 
+  // N_ROUNDS questions for this exam: the bank first, then the exam's prebuilt pool (subjects that live only in overlays,
+  // such as most NEET-SS subjects, have no bank questions and used to end every pairing in "nobody").
+  async drawFor(id) {
+    const bank = bankFrom(this.env.PREP_BANK_R2);
+    let items = await drawItems(bank, this.exam, N_ROUNDS, id);
+    if (items.length < N_ROUNDS) items = await drawFromPool(bank, this.exam, N_ROUNDS, id);
+    return items;
+  }
+
+  // Nobody real turned up: a practice opponent. The first practice battle a player has, they win; the second, the
+  // opponent wins; then they alternate (the count is kept per player in this Durable Object's storage).
+  async startBotMatch(w) {
+    const sa = this.socks.get(w.uidh);
+    if (!sa) return;
+    const id = crypto.randomUUID(), key = "bots:" + w.uidh;
+    const items = await this.drawFor(id);
+    if (items.length < N_ROUNDS) return send(sa.ws, { t: "nobody" });
+    const n = Number(await this.ctx.storage.get(key)) || 0;
+    await this.ctx.storage.put(key, n + 1);
+    const bot = botFor(id, sa.rating);
+    this.inMatch.set(w.uidh, id);
+    const players = [{ uidh: w.uidh, name: sa.name, rating: sa.rating }, bot];
+    this.deliver(await this.room(id).begin({ id, exam: this.exam, players, items, bot: { wins: botWinsFor(n) } }));
+  }
+
   async startMatch(a, b) {
     const id = crypto.randomUUID();
-    const items = await drawItems(bankFrom(this.env.PREP_BANK_R2), this.exam, N_ROUNDS, id);
+    const items = await this.drawFor(id);
     const sa = this.socks.get(a.uidh), sb = this.socks.get(b.uidh);
     if (items.length < N_ROUNDS || !sa || !sb) {
       for (const s of [sa, sb]) if (s) send(s.ws, { t: "nobody" });
@@ -173,7 +201,7 @@ export class BattleRoom extends DurableObject {
     return this.addr(s, out);
   }
 
-  async begin({ id, exam, players, items }) {
+  async begin({ id, exam, players, items, bot }) {
     if (await this.state()) return [];
     // fresh ratings: the Matchmaker's copy is from connect time and a socket can play several battles
     try {
@@ -181,7 +209,7 @@ export class BattleRoom extends DurableObject {
       for (const r of results || []) for (const p of players) if (p.uidh === r.uidh) p.rating = r.rating;
     } catch (e) {}
     if (await this.state()) return [];
-    const s = (this.s = newBattle({ id, exam, players, items, now: Date.now() }));
+    const s = (this.s = newBattle({ id, exam, players, items, now: Date.now(), bot }));
     return this.after(s, battleEvent(s, { type: "start" }, Date.now()));
   }
   async answer(uidh, i, k) { return this.on(uidh, { type: "answer", i, k }); }

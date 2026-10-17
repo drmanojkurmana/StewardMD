@@ -32,10 +32,11 @@ struct CodeBlueView: View {
     @State private var showLog = false
     @State private var showResume = false
     @State private var selectedMode: CodeMode = .adult
+    @State private var lastCueElapsed: TimeInterval = 0
     @Environment(\.scenePhase) private var scenePhase
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    // Haptic metronome at the mid-target rate (110/min ≈ every 0.545 s).
-    private let metronome = Timer.publish(every: 60.0 / 110.0, on: .main, in: .common).autoconnect()
+    // Injected speech output for audio cues; haptics cover ticks and fallback.
+    private let cueSpeech: SpeechOutput = AVSpeechOutput()
 
     private func syncTick() {
         guard running, let s = startDate else { return }
@@ -46,6 +47,32 @@ struct CodeBlueView: View {
         WatchConnectivityManager.shared.streamCodeBlue(model.snapshot(batteryLevel: WKDeviceId.battery))
         // Epinephrine haptics fire once per transition into due / overdue.
         fireEpiHapticIfNeeded()
+        drainCues()
+    }
+
+    /// Computes the cues due since the last tick and renders them: spoken
+    /// phrases through the injected SpeechOutput, ticks as haptics. The
+    /// metronome toggle drives the metronome mute class; voice and breaths
+    /// stay on so the due strip is never the only signal.
+    private func drainCues() {
+        let cues = CueEngine.cuesDue(
+            mode: model.mode,
+            from: lastCueElapsed,
+            to: model.elapsed,
+            lastEpinephrineAt: EpiSchedule.lastDoseElapsed(events: model.events),
+            advancedAirway: model.events.contains {
+                $0.kind == .procedure && $0.label == CodeProcedure.advancedAirway.rawValue
+            },
+            paused: model.paused,
+            rosc: model.rosc,
+            settings: CueSettings(voice: true, metronome: metronomeOn, breaths: true))
+        CueAnnouncer.announce(cues, speech: cueSpeech) { kind in
+            switch kind {
+            case .voice: HapticManager.play(.warning)
+            case .metronome, .breath: WKInterfaceDevice.current().play(.click)
+            }
+        }
+        lastCueElapsed = model.elapsed
     }
 
     @State private var lastEpiStatus: EpiStatus = .none
@@ -105,9 +132,6 @@ struct CodeBlueView: View {
         .focusable(running)
         .digitalCrownRotation($crown)
         .onReceive(ticker) { _ in syncTick() }
-        .onReceive(metronome) { _ in
-            if metronomeOn && running && !model.paused { WKInterfaceDevice.current().play(.click) }
-        }
         .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
         .confirmationDialog("Log rhythm", isPresented: $showRhythmPicker, titleVisibility: .visible) {
             ForEach(CodeRhythm.allCases, id: \.rawValue) { rhythm in
@@ -334,7 +358,8 @@ struct CodeBlueView: View {
 
     private func logRhythm(_ r: String) { model.recordRhythm(r); HapticManager.play(.warning) }
 
-    /// Haptic metronome toggle — ticks the wrist at the mid-target rate to pace CPR.
+    /// Haptic metronome toggle — ticks the wrist at the mid-target rate to pace
+    /// CPR. Driven by the cue engine now, so pausing silences it with the rest.
     private var metronomeButton: some View {
         Button(metronomeOn ? "Pacing 110/min" : "Metronome 110/min") {
             metronomeOn.toggle()
@@ -351,6 +376,7 @@ struct CodeBlueView: View {
                 startDate = Date().addingTimeInterval(-model.elapsed)
                 model.startCode(mode: selectedMode)
                 lastEpiStatus = .none
+                lastCueElapsed = model.elapsed
                 if captureOn { CaptureLog.shared.begin(); captureNote = nil }   // fresh trace per code
                 // Guaranteed alert to the iPhone even when the app is force-quit: a
                 // direct backend push (only APNs shows on a terminated/locked phone).
@@ -378,6 +404,7 @@ struct CodeBlueView: View {
             summary = nil
             selectedMode = model.mode
             lastEpiStatus = model.epiStatus
+            lastCueElapsed = model.elapsed
             startDate = Date().addingTimeInterval(-model.elapsed)
             WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
             ResusAlerts.requestAuth()
@@ -399,6 +426,7 @@ struct CodeBlueView: View {
             running = false
             ResusAlerts.cancel(["codeblue-cycle"])
             model.reset()
+            lastCueElapsed = 0
             summary = nil
             captureOn = false
             WatchConnectivityManager.shared.sendCodeBlueReset()

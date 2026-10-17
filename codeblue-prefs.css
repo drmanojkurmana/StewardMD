@@ -1,0 +1,414 @@
+/* codeblue-prefs.css: shared customisation tokens for the Code Blue web screens.
+ * One block of CSS custom properties per theme, applied by a data-cb-theme
+ * attribute on the screen root. Only surfaces, lines and text change; the
+ * five state colours keep their hue family (Mono carries state by words).
+ * Flat colours only. No gradients, glows, blur or shadows.
+ * Type: system stack, tabular figures for numbers.
+ */
+
+/* ---- 1. Canonical tokens: Night Shift (default dark) ---- */
+#cblRoot[data-cb-theme="night-shift"], #cbtRoot[data-cb-theme="night-shift"],
+.cbecg[data-cb-theme="night-shift"], .cb-sheet[data-cb-theme="night-shift"],
+#cbpRoot[data-cb-theme="night-shift"] {
+  --cbp-bg: #071318; --cbp-surface: #0d1d23; --cbp-ink: #e8f1ee;
+  --cbp-muted: #9db8b1; --cbp-line: #1e343b;
+  --cbp-accent: #42cdb5; --cbp-accent-ink: #071318;
+  --cbp-running: #42cdb5; --cbp-due: #ffc53d; --cbp-overdue: #ff453a;
+  --cbp-rosc: #30d158; --cbp-paused: #9db8b1;
+  --cbp-trace: #42cdb5; --cbp-grid-minor: #1a2e34; --cbp-grid-major: #2a444c;
+  color-scheme: dark;
+}
+
+/* ---- Ward Light ---- */
+#cblRoot[data-cb-theme="ward-light"], #cbtRoot[data-cb-theme="ward-light"],
+.cbecg[data-cb-theme="ward-light"], .cb-sheet[data-cb-theme="ward-light"],
+#cbpRoot[data-cb-theme="ward-light"] {
+  --cbp-bg: #f4f6f5; --cbp-surface: #ffffff; --cbp-ink: #10211d;
+  --cbp-muted: #3d5650; --cbp-line: #cfdbd7;
+  --cbp-accent: #0c6e5e; --cbp-accent-ink: #ffffff;
+  --cbp-running: #0c6e5e; --cbp-due: #8a5a00; --cbp-overdue: #b3261e;
+  --cbp-rosc: #17803a; --cbp-paused: #3d5650;
+  --cbp-trace: #10211d; --cbp-grid-minor: #d8e4e0; --cbp-grid-major: #b7cbc5;
+  color-scheme: light;
+}
+
+/* ---- High Contrast: white on black ---- */
+#cblRoot[data-cb-theme="high-contrast"], #cbtRoot[data-cb-theme="high-contrast"],
+.cbecg[data-cb-theme="high-contrast"], .cb-sheet[data-cb-theme="high-contrast"],
+#cbpRoot[data-cb-theme="high-contrast"] {
+  --cbp-bg: #000000; --cbp-surface: #000000; --cbp-ink: #ffffff;
+  --cbp-muted: #e8e8e8; --cbp-line: #ffffff;
+  --cbp-accent: #00e5c0; --cbp-accent-ink: #000000;
+  --cbp-running: #00e5c0; --cbp-due: #ffd60a; --cbp-overdue: #ff6b61;
+  --cbp-rosc: #3dff6e; --cbp-paused: #d8d8d8;
+  --cbp-trace: #00e5c0; --cbp-grid-minor: #3a3a3a; --cbp-grid-major: #8a8a8a;
+  color-scheme: dark;
+}
+
+/* ---- Red Room: dim red tint for dark adaptation ---- */
+#cblRoot[data-cb-theme="red-room"], #cbtRoot[data-cb-theme="red-room"],
+.cbecg[data-cb-theme="red-room"], .cb-sheet[data-cb-theme="red-room"],
+#cbpRoot[data-cb-theme="red-room"] {
+  --cbp-bg: #150a0c; --cbp-surface: #221016; --cbp-ink: #f5e9e2;
+  --cbp-muted: #d3aba0; --cbp-line: #43222b;
+  --cbp-accent: #ff9b87; --cbp-accent-ink: #22060a;
+  --cbp-running: #7fd9c6; --cbp-due: #ffc53d; --cbp-overdue: #ff6b61;
+  --cbp-rosc: #4ade80; --cbp-paused: #d3aba0;
+  --cbp-trace: #7fd9c6; --cbp-grid-minor: #331820; --cbp-grid-major: #5a2c36;
+  color-scheme: dark;
+}
+
+/* ---- Mono: greyscale, state words and border shapes carry meaning ---- */
+#cblRoot[data-cb-theme="mono"], #cbtRoot[data-cb-theme="mono"],
+.cbecg[data-cb-theme="mono"], .cb-sheet[data-cb-theme="mono"],
+#cbpRoot[data-cb-theme="mono"] {
+  --cbp-bg: #0b0b0c; --cbp-surface: #161617; --cbp-ink: #f2f2f2;
+  --cbp-muted: #c9c9c9; --cbp-line: #3a3a3d;
+  --cbp-accent: #ffffff; --cbp-accent-ink: #0b0b0c;
+  --cbp-running: #ffffff; --cbp-due: #ffffff; --cbp-overdue: #ffffff;
+  --cbp-rosc: #ffffff; --cbp-paused: #c9c9c9;
+  --cbp-trace: #f2f2f2; --cbp-grid-minor: #232326; --cbp-grid-major: #4a4a4e;
+  color-scheme: dark;
+}
+
+/* ---- Sepia Light ---- */
+#cblRoot[data-cb-theme="sepia-light"], #cbtRoot[data-cb-theme="sepia-light"],
+.cbecg[data-cb-theme="sepia-light"], .cb-sheet[data-cb-theme="sepia-light"],
+#cbpRoot[data-cb-theme="sepia-light"] {
+  --cbp-bg: #f3ecdd; --cbp-surface: #fffdf4; --cbp-ink: #2a2114;
+  --cbp-muted: #5d5040; --cbp-line: #d3c6a8;
+  --cbp-accent: #0c6e5e; --cbp-accent-ink: #ffffff;
+  --cbp-running: #0b6b5c; --cbp-due: #7a5200; --cbp-overdue: #a3241b;
+  --cbp-rosc: #166b32; --cbp-paused: #5d5040;
+  --cbp-trace: #2a2114; --cbp-grid-minor: #e2d6bc; --cbp-grid-major: #c0b08a;
+  color-scheme: light;
+}
+
+/* ---- Auto: dark tokens, light tokens under the system setting ---- */
+#cblRoot[data-cb-theme="auto"], #cbtRoot[data-cb-theme="auto"],
+.cbecg[data-cb-theme="auto"], .cb-sheet[data-cb-theme="auto"],
+#cbpRoot[data-cb-theme="auto"] {
+  --cbp-bg: #071318; --cbp-surface: #0d1d23; --cbp-ink: #e8f1ee;
+  --cbp-muted: #9db8b1; --cbp-line: #1e343b;
+  --cbp-accent: #42cdb5; --cbp-accent-ink: #071318;
+  --cbp-running: #42cdb5; --cbp-due: #ffc53d; --cbp-overdue: #ff453a;
+  --cbp-rosc: #30d158; --cbp-paused: #9db8b1;
+  --cbp-trace: #42cdb5; --cbp-grid-minor: #1a2e34; --cbp-grid-major: #2a444c;
+  color-scheme: dark light;
+}
+@media (prefers-color-scheme: light) {
+  #cblRoot[data-cb-theme="auto"], #cbtRoot[data-cb-theme="auto"],
+  .cbecg[data-cb-theme="auto"], .cb-sheet[data-cb-theme="auto"],
+  #cbpRoot[data-cb-theme="auto"] {
+    --cbp-bg: #f4f6f5; --cbp-surface: #ffffff; --cbp-ink: #10211d;
+    --cbp-muted: #3d5650; --cbp-line: #cfdbd7;
+    --cbp-accent: #0c6e5e; --cbp-accent-ink: #ffffff;
+    --cbp-running: #0c6e5e; --cbp-due: #8a5a00; --cbp-overdue: #b3261e;
+    --cbp-rosc: #17803a; --cbp-paused: #3d5650;
+    --cbp-trace: #10211d; --cbp-grid-minor: #d8e4e0; --cbp-grid-major: #b7cbc5;
+  }
+}
+/* ---- 2. Live screen: map canonical tokens onto --cbl-* (token only) ---- */
+#cblRoot[data-cb-theme] {
+  --cbl-bg: var(--cbp-bg); --cbl-surface: var(--cbp-surface);
+  --cbl-ink: var(--cbp-ink); --cbl-muted: var(--cbp-muted);
+  --cbl-line: var(--cbp-line);
+  --cbl-accent: var(--cbp-accent); --cbl-accent-ink: var(--cbp-accent-ink);
+  --cbl-running: var(--cbp-running); --cbl-due: var(--cbp-due);
+  --cbl-overdue: var(--cbp-overdue); --cbl-rosc: var(--cbp-rosc);
+  --cbl-paused: var(--cbp-paused);
+}
+
+/* ---- 3. Trainer: map canonical tokens onto --cbt-* (token only) ---- */
+#cbtRoot[data-cb-theme] {
+  --cbt-bg: var(--cbp-bg); --cbt-surface: var(--cbp-surface);
+  --cbt-ink: var(--cbp-ink); --cbt-muted: var(--cbp-muted);
+  --cbt-line: var(--cbp-line);
+  --cbt-accent: var(--cbp-accent); --cbt-accent-ink: var(--cbp-accent-ink);
+  --cbt-right: var(--cbp-rosc); --cbt-wrong: var(--cbp-overdue);
+}
+
+/* ---- 4. ECG: map canonical tokens onto --cb-* (token only) ---- */
+.cbecg[data-cb-theme] {
+  --cb-bg: var(--cbp-bg); --cb-card: var(--cbp-surface);
+  --cb-text: var(--cbp-ink); --cb-mut: var(--cbp-muted);
+  --cb-line: var(--cbp-line);
+  --cb-fill: var(--cbp-accent); --cb-on-fill: var(--cbp-accent-ink);
+  --cb-trace: var(--cbp-trace);
+  --cb-grid-minor: var(--cbp-grid-minor); --cb-grid-major: var(--cbp-grid-major);
+  --cb-s1: var(--cbp-surface); --cb-soft: var(--cbp-surface);
+  --cb-ink-line: var(--cbp-ink);
+  --cb-up: var(--cbp-overdue); --cb-bad: var(--cbp-overdue);
+  --cb-dn: var(--cbp-running); --cb-ok: var(--cbp-running);
+}
+
+/* ---- 5. Code sheet: map canonical tokens (token only, no restructure) ---- */
+.cb-sheet-ov .cb-sheet[data-cb-theme] {
+  background: var(--cbp-surface); color: var(--cbp-ink);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-sub,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-attach,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-edited,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-kind,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-dk,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-disc,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-empty { color: var(--cbp-muted); }
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-x:focus-visible,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-btn:focus-visible,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-note:focus-visible,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-edit:focus-visible {
+  outline: 2px solid var(--cbp-accent); outline-offset: 2px;
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-x {
+  background: var(--cbp-bg); color: var(--cbp-ink);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-row,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-dt { background: var(--cbp-bg); }
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-t { color: var(--cbp-running); }
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-btn {
+  background: var(--cbp-bg); color: var(--cbp-ink);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-btn.cb-quiet { color: var(--cbp-muted); }
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-btn.cb-primary {
+  background: var(--cbp-accent); color: var(--cbp-accent-ink);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-edit,
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-note {
+  background: var(--cbp-surface); color: var(--cbp-ink);
+  border-color: var(--cbp-line);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-undo {
+  background: var(--cbp-bg); color: var(--cbp-running);
+}
+.cb-sheet-ov .cb-sheet[data-cb-theme] .cb-status { color: var(--cbp-running); }
+/* ---- 6. Text size 90 to 130 percent (root font plus key text) ---- */
+#cblRoot { font-size: calc(16px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-elapsed { font-size: calc(64px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-h { font-size: calc(28px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-sheeth { font-size: calc(20px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-tilelabel { font-size: calc(20px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-duetext { font-size: calc(16px * var(--cbp-ts, 1)); }
+#cbtRoot { font-size: calc(16px * var(--cbp-ts, 1)); }
+#cbtRoot .cbt-h { font-size: calc(22px * var(--cbp-ts, 1)); }
+#cbtRoot .cbt-p { font-size: calc(16px * var(--cbp-ts, 1)); }
+#cbtRoot .cbt-time { font-size: calc(20px * var(--cbp-ts, 1)); }
+.cbecg[data-cb-theme] { font-size: calc(16px * var(--cbp-ts, 1)); }
+.cbecg[data-cb-theme] .cbecg-body p { font-size: calc(15px * var(--cbp-ts, 1)); }
+.cb-sheet-ov .cb-sheet[data-cb-theme] { font-size: calc(16px * var(--cbp-ts, 1)); }
+
+/* ---- 7. Button size: tiles 56 / 64 / 76 px ---- */
+#cblRoot[data-cb-size="small"] { --cbp-tile: 56px; }
+#cblRoot[data-cb-size="standard"] { --cbp-tile: 64px; }
+#cblRoot[data-cb-size="large"] { --cbp-tile: 76px; }
+#cblRoot .cbl-tile { min-height: var(--cbp-tile, 64px); }
+
+/* ---- 8. Reduced motion: colour changes only ---- */
+#cblRoot[data-cb-motion="reduced"] .cbl-due,
+#cblRoot[data-cb-motion="reduced"] .cbl-tile,
+#cblRoot[data-cb-motion="reduced"] .cbl-toast { transition: none; }
+#cblRoot[data-cb-motion="reduced"] .cbl-sheet { animation: none; }
+#cblRoot[data-cb-motion="reduced"] .cbl-due-overdue { animation: none; }
+#cblRoot[data-cb-motion="reduced"] button:active { transform: none; }
+#cbtRoot[data-cb-motion="reduced"] *,
+.cbecg[data-cb-motion="reduced"] *,
+.cb-sheet-ov .cb-sheet[data-cb-motion="reduced"] *,
+#cbpRoot[data-cb-motion="reduced"] * {
+  transition: none !important; animation: none !important;
+}
+/* Press feedback is transform based, so it needs its own reset: with
+ * motion reduced there is no scale jump, colour change only. */
+#cbtRoot[data-cb-motion="reduced"] *:active,
+.cbecg[data-cb-motion="reduced"] *:active,
+.cb-sheet-ov .cb-sheet[data-cb-motion="reduced"] *:active,
+#cbpRoot[data-cb-motion="reduced"] *:active {
+  transform: none !important;
+}
+/* The in-app switch mirrors the system setting onto data-cb-motion, but
+ * the settings sheet itself must also stay still when it cannot. */
+@media (prefers-reduced-motion: reduce) {
+  #cbpRoot .cbp-sheet { animation: none; }
+  #cbpRoot .cbp-btn { transition: none; }
+  #cbpRoot .cbp-btn:active { transform: none; }
+}
+/* ---- 9. Settings sheet: calm instrument, bottom-bar language.
+ * 52 px primary, 44 px quiet, 8 px gaps, press scale 0.97, 120 ms ease.
+ * Flat fills, radius 12, no shadows or backdrops on the card. ---- */
+#cbpRoot {
+  position: fixed; inset: 0; z-index: 10001;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: calc(16px * var(--cbp-ts, 1));
+  line-height: 1.5;
+  color: var(--cbp-ink, #e8f1ee);
+}
+#cbpRoot .cbp-scrim { position: absolute; inset: 0; }
+#cbpRoot .cbp-sheet {
+  position: relative;
+  width: 100%; max-width: 560px; max-height: 88vh;
+  display: flex; flex-direction: column;
+  background: var(--cbp-bg, #071318); color: var(--cbp-ink, #e8f1ee);
+  border-top: 1px solid var(--cbp-line, #1e343b);
+  border-top-left-radius: 12px; border-top-right-radius: 12px;
+  animation: cbp-sheetin 200ms ease-out;
+}
+@keyframes cbp-sheetin {
+  from { transform: translateY(24px); opacity: 0.6; }
+  to { transform: none; opacity: 1; }
+}
+#cbpRoot .cbp-head {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  padding: 12px 16px; border-bottom: 1px solid var(--cbp-line, #1e343b);
+}
+#cbpRoot .cbp-title { font-size: 20px; font-weight: 700; margin: 0; }
+#cbpRoot .cbp-title:focus { outline: none; }
+#cbpRoot .cbp-status {
+  font-size: 13px; font-weight: 600; color: var(--cbp-running, #42cdb5);
+  min-height: 20px; margin: 8px 16px 0;
+}
+#cbpRoot .cbp-status:empty { display: none; }
+#cbpRoot .cbp-body {
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 12px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+#cbpRoot .cbp-label {
+  font-size: 12px; font-weight: 700; color: var(--cbp-muted, #9db8b1);
+  margin: 16px 0 8px; letter-spacing: 0.02em;
+}
+#cbpRoot .cbp-label:first-child { margin-top: 0; }
+#cbpRoot .cbp-note { font-size: 14px; color: var(--cbp-muted, #9db8b1); margin: 8px 0; }
+#cbpRoot .cbp-count { font-weight: 400; }
+#cbpRoot .cbp-sr {
+  position: absolute; width: 1px; height: 1px;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+/* Live preview: clock, strip and tile follow the chosen tokens. */
+#cbpRoot .cbp-prev {
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  background: var(--cbp-surface, #0d1d23); padding: 12px 14px; margin-bottom: 4px;
+}
+#cbpRoot .cbp-prev-clock {
+  font-size: calc(40px * var(--cbp-ts, 1)); line-height: 1; font-weight: 800;
+  font-variant-numeric: tabular-nums; color: var(--cbp-running, #42cdb5);
+}
+#cbpRoot .cbp-prev-due {
+  display: flex; align-items: baseline; gap: 10px; margin-top: 10px;
+  border: 1px solid var(--cbp-line, #1e343b);
+  border-left: 4px solid var(--cbp-due, #ffc53d);
+  border-radius: 8px; padding: 10px 12px;
+}
+#cbpRoot .cbp-prev-word {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--cbp-due, #ffc53d);
+}
+#cbpRoot .cbp-prev-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+#cbpRoot .cbp-prev-tile {
+  display: flex; align-items: center;
+  min-height: var(--cbp-tile, 64px);
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  padding: 8px 12px; font-size: 16px; font-weight: 600;
+}
+/* Controls: every target at least 44 px, visible focus. */
+/* Blanket floor so no interactive element in the sheet can render under
+ * 44 px in either dimension (WCAG 2.2 target size, contract section 9).
+ * The text input keeps its flex basis below; this floor only sets minima. */
+#cbpRoot button, #cbpRoot input, #cbpRoot select, #cbpRoot textarea {
+  min-width: 44px; min-height: 44px; box-sizing: border-box;
+}
+#cbpRoot .cbp-group { display: grid; gap: 8px; }
+#cbpRoot .cbp-group.cbp-row { grid-template-columns: repeat(3, 1fr); }
+#cbpRoot .cbp-radio {
+  position: relative;
+  display: flex; align-items: center; gap: 10px;
+  min-width: 44px; min-height: 44px; padding: 8px 12px; box-sizing: border-box;
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  background: var(--cbp-surface, #0d1d23);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+}
+/* The native radio covers the whole label so its hit area is the full
+ * 44 px row, never the 20 px circle. It stays keyboard and screen-reader
+ * operable; the visible circle is drawn on the label text instead. */
+#cbpRoot .cbp-radio input {
+  position: absolute; inset: 0; margin: 0; padding: 0;
+  /* Explicit 100 percent size: inset with auto size does not reliably
+   * stretch a native radio in Chrome, leaving a 20 px target. */
+  width: 100%; height: 100%; min-width: 44px; min-height: 44px;
+  opacity: 0; cursor: pointer;
+}
+#cbpRoot .cbp-radio-t { position: relative; display: block; padding-left: 30px; }
+#cbpRoot .cbp-radio-t::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 20px; height: 20px; margin-top: -10px;
+  border-radius: 50%; border: 2px solid var(--cbp-muted, #9db8b1);
+  box-sizing: border-box; background: transparent;
+}
+#cbpRoot .cbp-radio-t::after {
+  content: ""; position: absolute; left: 5px; top: 50%;
+  width: 10px; height: 10px; margin-top: -5px;
+  border-radius: 50%; background: var(--cbp-accent, #42cdb5);
+  opacity: 0;
+}
+#cbpRoot .cbp-radio:has(input:checked) .cbp-radio-t::before {
+  border-color: var(--cbp-accent, #42cdb5);
+}
+#cbpRoot .cbp-radio:has(input:checked) .cbp-radio-t::after { opacity: 1; }
+#cbpRoot .cbp-radio-s { display: block; font-size: 12px; font-weight: 400; color: var(--cbp-muted, #9db8b1); }
+#cbpRoot .cbp-radio:has(input:checked) { border-color: var(--cbp-accent, #42cdb5); }
+#cbpRoot .cbp-radio:has(input:focus-visible) {
+  outline: 2px solid var(--cbp-accent, #42cdb5); outline-offset: 2px;
+}
+#cbpRoot .cbp-range {
+  width: 100%; box-sizing: border-box; height: 44px; min-height: 44px; margin: 0;
+  accent-color: var(--cbp-accent, #42cdb5);
+}
+#cbpRoot .cbp-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; min-width: 44px; padding: 0 16px;
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  background: transparent; color: var(--cbp-ink, #e8f1ee);
+  font: inherit; font-size: 14px; font-weight: 600;
+  cursor: pointer; touch-action: manipulation;
+  transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+#cbpRoot .cbp-btn:active { transform: scale(0.97); }
+#cbpRoot .cbp-btn:disabled { opacity: 0.45; cursor: default; }
+#cbpRoot .cbp-btn.cbp-primary {
+  background: var(--cbp-accent, #42cdb5); border-color: var(--cbp-accent, #42cdb5);
+  color: var(--cbp-accent-ink, #071318); min-height: 52px;
+}
+#cbpRoot .cbp-btn:focus-visible, #cbpRoot .cbp-input:focus-visible,
+#cbpRoot .cbp-range:focus-visible {
+  outline: 2px solid var(--cbp-accent, #42cdb5); outline-offset: 2px;
+}
+#cbpRoot .cbp-tiles { list-style: none; margin: 0 0 4px; padding: 0; display: grid; gap: 8px; }
+#cbpRoot .cbp-tile {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  background: var(--cbp-surface, #0d1d23); padding: 6px 6px 6px 12px;
+  font-size: 15px; font-weight: 600;
+}
+#cbpRoot .cbp-tile-a { display: flex; gap: 6px; flex: none; }
+/* Up, Down and Hide must never be flex-shrunk under 44 px on narrow
+ * screens: they keep their 44 px box and the tile row wraps instead. */
+#cbpRoot .cbp-tile-a .cbp-btn {
+  padding: 0 12px; flex: 0 0 auto; height: 44px; min-width: 44px; min-height: 44px;
+}
+#cbpRoot .cbp-head .cbp-btn, #cbpRoot .cbp-addrow .cbp-btn { flex: 0 0 auto; }
+#cbpRoot .cbp-addrow { display: flex; gap: 8px; margin-top: 8px; }
+#cbpRoot .cbp-input {
+  flex: 1; min-width: 0; min-height: 44px; box-sizing: border-box;
+  border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
+  background: var(--cbp-surface, #0d1d23); color: var(--cbp-ink, #e8f1ee);
+  font: inherit; font-size: 16px; padding: 10px 12px;
+}
+@media (max-width: 480px) {
+  /* Tile actions get their own line early enough that the three 44 px
+   * buttons are never compressed by a long tile name at 360 px. */
+  #cbpRoot .cbp-tile { flex-wrap: wrap; }
+  #cbpRoot .cbp-tile-a { flex-wrap: wrap; }
+}
+@media (max-width: 380px) {
+  #cbpRoot .cbp-group.cbp-row { grid-template-columns: 1fr; }
+  #cbpRoot .cbp-prev-tiles { grid-template-columns: 1fr; }
+  #cbpRoot .cbp-tile { flex-wrap: wrap; }
+}

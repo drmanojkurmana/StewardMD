@@ -1,0 +1,371 @@
+/* codeblue-live.css: phone live code screen presentation layer.
+ * Scoped under #cblRoot. Flat colours only, per section 9 of the design
+ * contract. Night Shift (dark) by default; Ward Light follows the
+ * app body class or an explicit data-theme. Later themes override tokens only.
+ * Type: system stack, tabular figures for numbers.
+ */
+
+#cblRoot {
+  position: fixed; inset: 0; z-index: 10000;
+  display: none; flex-direction: column; overflow: hidden;
+  /* Night Shift tokens (default dark) */
+  --cbl-bg: #071318; --cbl-surface: #0d1d23; --cbl-ink: #e8f1ee;
+  --cbl-muted: #9db8b1; --cbl-line: #1e343b;
+  --cbl-accent: #42cdb5; --cbl-accent-ink: #071318;
+  --cbl-running: #42cdb5; --cbl-due: #ffc53d; --cbl-overdue: #ff453a;
+  --cbl-rosc: #30d158; --cbl-paused: #9db8b1;
+  background: var(--cbl-bg); color: var(--cbl-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px; line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ward Light when the app is in light mode. */
+body:not(.dark) #cblRoot {
+  --cbl-bg: #f4f6f5; --cbl-surface: #ffffff; --cbl-ink: #10211d;
+  --cbl-muted: #3d5650; --cbl-line: #cfdbd7;
+  --cbl-accent: #0c6e5e; --cbl-accent-ink: #ffffff;
+  --cbl-running: #0c6e5e; --cbl-due: #8a5a00; --cbl-overdue: #b3261e;
+  --cbl-rosc: #17803a; --cbl-paused: #3d5650;
+}
+
+/* Explicit theme pins win over the body class; future themes add one block. */
+#cblRoot[data-theme="night-shift"] {
+  --cbl-bg: #071318; --cbl-surface: #0d1d23; --cbl-ink: #e8f1ee;
+  --cbl-muted: #9db8b1; --cbl-line: #1e343b;
+  --cbl-accent: #42cdb5; --cbl-accent-ink: #071318;
+  --cbl-running: #42cdb5; --cbl-due: #ffc53d; --cbl-overdue: #ff453a;
+  --cbl-rosc: #30d158; --cbl-paused: #9db8b1;
+}
+#cblRoot[data-theme="ward-light"] {
+  --cbl-bg: #f4f6f5; --cbl-surface: #ffffff; --cbl-ink: #10211d;
+  --cbl-muted: #3d5650; --cbl-line: #cfdbd7;
+  --cbl-accent: #0c6e5e; --cbl-accent-ink: #ffffff;
+  --cbl-running: #0c6e5e; --cbl-due: #8a5a00; --cbl-overdue: #b3261e;
+  --cbl-rosc: #17803a; --cbl-paused: #3d5650;
+}
+
+#cblRoot.on { display: flex; }
+body.cbl-lock { overflow: hidden; }
+
+#cblRoot button { font-family: inherit; touch-action: manipulation; }
+#cblRoot button:active { transform: scale(0.97); transition: transform 80ms ease-out; }
+#cblRoot :focus-visible {
+  outline: 2px solid var(--cbl-accent); outline-offset: 2px;
+}
+#cblRoot svg {
+  width: 22px; height: 22px; flex: none;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* Status row: 44 px controls, mode chip, badge, sound, close. */
+#cblRoot .cbl-status {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  min-height: 44px; padding: 6px 12px;
+  padding-top: calc(6px + env(safe-area-inset-top, 0px));
+  background: var(--cbl-surface); border-bottom: 1px solid var(--cbl-line);
+}
+#cblRoot .cbl-mode {
+  font-size: 14px; font-weight: 600;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  padding: 8px 12px; min-height: 44px;
+  display: inline-flex; align-items: center; box-sizing: border-box;
+}
+#cblRoot .cbl-badge {
+  display: inline-flex; align-items: center; min-height: 24px; padding: 2px 10px;
+  border-radius: 4px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+  background: var(--cbl-accent); color: var(--cbl-accent-ink);
+}
+#cblRoot .cbl-iconbtn {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; min-width: 44px; padding: 0 12px;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: transparent; color: var(--cbl-ink);
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  box-sizing: border-box;
+}
+#cblRoot .cbl-status .cbl-iconbtn:last-child { margin-left: auto; }
+
+/* Scrolling body, single column, thumb friendly. */
+#cblRoot .cbl-scroll {
+  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+#cblRoot .cbl-run, #cblRoot .cbl-idle, #cblRoot .cbl-endview {
+  max-width: 560px; width: 100%; margin: 0 auto; box-sizing: border-box;
+  padding: 16px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+#cblRoot .cbl-h { font-size: 28px; line-height: 1.25; font-weight: 700; margin: 4px 0 12px; }
+#cblRoot .cbl-label { font-size: 12px; font-weight: 600; color: var(--cbl-muted); margin: 14px 0 6px; }
+#cblRoot .cbl-note { font-size: 14px; line-height: 1.5; color: var(--cbl-muted); margin: 0 0 12px; }
+#cblRoot .cbl-disc {
+  border: 1px solid var(--cbl-line); border-left: 4px solid var(--cbl-accent);
+  border-radius: 8px; padding: 12px; font-size: 14px; line-height: 1.5;
+  background: var(--cbl-surface); margin: 0 0 12px;
+}
+#cblRoot .cbl-anotice {
+  font-size: 14px; color: var(--cbl-muted); margin: 12px 0 0;
+  border: 1px dashed var(--cbl-line); border-radius: 8px; padding: 10px 12px;
+}
+#cblRoot .cbl-error {
+  font-size: 14px; font-weight: 600; margin: 12px 0 0;
+  border: 1px solid var(--cbl-overdue); border-left-width: 4px;
+  border-radius: 8px; padding: 10px 12px; color: var(--cbl-overdue);
+}
+
+/* Clock block: 64 px tabular elapsed, cycle line, 4 px linear bar. */
+#cblRoot .cbl-clock {
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); padding: 12px 14px; margin-bottom: 12px;
+}
+#cblRoot .cbl-elapsed {
+  font-size: 64px; line-height: 1; font-weight: 800;
+  font-variant-numeric: tabular-nums; letter-spacing: 0.01em;
+}
+#cblRoot .cbl-clock.running .cbl-elapsed { color: var(--cbl-running); }
+#cblRoot .cbl-clock.paused .cbl-elapsed { color: var(--cbl-paused); }
+#cblRoot .cbl-cycle {
+  font-size: 14px; color: var(--cbl-muted); margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+#cblRoot .cbl-bar {
+  height: 4px; border-radius: 2px; margin-top: 10px;
+  background: var(--cbl-line); overflow: hidden;
+}
+#cblRoot .cbl-barfill {
+  display: block; height: 100%; background: var(--cbl-accent);
+}
+
+/* Due strip: state word plus 4 px left border, colour never alone. */
+#cblRoot .cbl-due {
+  display: flex; align-items: baseline; gap: 10px;
+  border: 1px solid var(--cbl-line); border-left: 4px solid var(--cbl-running);
+  border-radius: 8px; background: var(--cbl-surface);
+  padding: 12px 14px; margin-bottom: 12px;
+  transition: border-color 140ms ease-out, color 140ms ease-out;
+}
+#cblRoot .cbl-dueword {
+  font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--cbl-running);
+}
+#cblRoot .cbl-duetext { font-size: 16px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#cblRoot .cbl-due-due { border-left-color: var(--cbl-due); }
+#cblRoot .cbl-due-due .cbl-dueword { color: var(--cbl-due); }
+#cblRoot .cbl-due-overdue { border-left-color: var(--cbl-overdue); border-style: solid; border-top-style: dashed; border-right-style: dashed; border-bottom-style: dashed; }
+#cblRoot .cbl-due-overdue .cbl-dueword { color: var(--cbl-overdue); }
+#cblRoot .cbl-due-rosc { border-left-color: var(--cbl-rosc); }
+#cblRoot .cbl-due-rosc .cbl-dueword { color: var(--cbl-rosc); }
+#cblRoot .cbl-due-paused { border-left-color: var(--cbl-paused); border-left-style: double; }
+#cblRoot .cbl-due-paused .cbl-dueword { color: var(--cbl-paused); }
+
+/* One attention pulse on the overdue strip, two beats, then static. */
+@keyframes cbl-pulse { 0% { opacity: 1; } 50% { opacity: 0.55; } 100% { opacity: 1; } }
+#cblRoot .cbl-due-overdue { animation: cbl-pulse 600ms ease-out 2; }
+
+/* Action grid: 2 columns, 12 px gap, tiles at least 64 px tall. */
+#cblRoot .cbl-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 12px;
+}
+#cblRoot .cbl-tile {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  min-height: 64px; padding: 12px 14px; box-sizing: border-box;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 16px; cursor: pointer; text-align: left;
+  transition: transform 80ms ease-out;
+}
+#cblRoot .cbl-tileicon { color: var(--cbl-accent); display: inline-flex; }
+#cblRoot .cbl-tilelabel { font-size: 20px; font-weight: 600; line-height: 1.3; }
+#cblRoot .cbl-tilesub {
+  font-size: 12px; color: var(--cbl-muted);
+  font-variant-numeric: tabular-nums;
+}
+#cblRoot .cbl-tile-re { border-color: var(--cbl-rosc); }
+
+/* Guide prompts: plain list, urgency word free, source line per prompt. */
+#cblRoot .cbl-guide { margin-bottom: 12px; }
+#cblRoot .cbl-guide ul { list-style: none; margin: 0; padding: 0; }
+#cblRoot .cbl-guide li {
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); padding: 10px 12px; margin-bottom: 8px;
+  font-size: 14px; line-height: 1.5;
+}
+#cblRoot .cbl-guide li span:first-child { display: block; }
+#cblRoot .cbl-gsrc { display: block; font-size: 12px; color: var(--cbl-muted); margin-top: 4px; }
+#cblRoot .cbl-g-due { border-left: 4px solid var(--cbl-due); }
+#cblRoot .cbl-g-overdue { border-left: 4px solid var(--cbl-overdue); }
+
+/* Footer: Log, Checklist, End. */
+#cblRoot .cbl-foot {
+  display: flex; gap: 12px; align-items: stretch;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--cbl-surface); border-top: 1px solid var(--cbl-line);
+  max-width: 560px; width: 100%; margin: 0 auto; box-sizing: border-box;
+}
+#cblRoot .cbl-footbtn {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 44px; border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: transparent; color: var(--cbl-ink);
+  font-size: 16px; font-weight: 600; cursor: pointer;
+}
+#cblRoot .cbl-footbtn.cbl-end { border-color: var(--cbl-overdue); color: var(--cbl-overdue); }
+
+/* Undo toast: 160 ms fade, 5 s on screen. */
+#cblRoot .cbl-toast {
+  position: absolute; left: 16px; right: 16px;
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+  display: none; align-items: center; justify-content: space-between; gap: 12px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  padding: 10px 12px; font-size: 14px;
+  opacity: 0; transition: opacity 160ms ease-out;
+}
+#cblRoot .cbl-toast.on { display: flex; opacity: 1; }
+#cblRoot .cbl-mini {
+  min-height: 44px; min-width: 44px; padding: 0 12px;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: transparent; color: var(--cbl-accent);
+  font-size: 14px; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+
+/* Sheets: 200 ms ease-out slide from the bottom, radius 12. */
+#cblRoot .cbl-scrim {
+  position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45);
+}
+#cblRoot .cbl-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  max-height: 82%; display: flex; flex-direction: column;
+  background: var(--cbl-bg); color: var(--cbl-ink);
+  border-top: 1px solid var(--cbl-line);
+  border-top-left-radius: 12px; border-top-right-radius: 12px;
+  animation: cbl-sheetin 200ms ease-out;
+}
+@keyframes cbl-sheetin { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+#cblRoot .cbl-sheethead {
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  padding: 12px 16px; border-bottom: 1px solid var(--cbl-line);
+}
+#cblRoot .cbl-sheeth { font-size: 20px; font-weight: 700; margin: 0; }
+#cblRoot .cbl-sheeth:focus { outline: none; }
+#cblRoot .cbl-sheetbody {
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 14px 16px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+#cblRoot .cbl-pick { display: grid; gap: 8px; }
+#cblRoot .cbl-pickbtn {
+  min-height: 44px; padding: 12px 14px; text-align: left;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 16px; font-weight: 600; cursor: pointer;
+}
+#cblRoot .cbl-log { list-style: none; margin: 0; padding: 0; }
+#cblRoot .cbl-log li {
+  display: flex; align-items: center; gap: 10px;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); padding: 8px 10px; margin-bottom: 8px;
+}
+#cblRoot .cbl-logt { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; flex: none; }
+#cblRoot .cbl-logl { font-size: 14px; flex: 1; min-width: 0; overflow-wrap: break-word; }
+#cblRoot .cbl-edited { font-size: 12px; color: var(--cbl-muted); }
+#cblRoot .cbl-logacts { display: flex; gap: 6px; flex: none; }
+#cblRoot .cbl-empty {
+  border: 1px dashed var(--cbl-line); border-radius: 8px;
+  padding: 16px; font-size: 14px; color: var(--cbl-muted); text-align: center;
+}
+#cblRoot .cbl-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+#cblRoot .cbl-check {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%;
+  min-height: 44px; padding: 10px 12px; box-sizing: border-box; text-align: left;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 14px; cursor: pointer;
+}
+#cblRoot .cbl-check.on { border-color: var(--cbl-rosc); }
+#cblRoot .cbl-box {
+  flex: none; width: 22px; height: 22px; margin-top: 1px;
+  border: 1px solid var(--cbl-muted); border-radius: 4px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--cbl-rosc);
+}
+#cblRoot .cbl-box svg { width: 16px; height: 16px; }
+
+/* Idle: mode picker with disclaimer, practice toggle, start. */
+#cblRoot .cbl-modes { display: flex; gap: 8px; margin-bottom: 4px; }
+#cblRoot .cbl-modepick {
+  flex: 1; min-height: 44px; border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+}
+#cblRoot .cbl-modepick.on {
+  background: var(--cbl-accent); border-color: var(--cbl-accent); color: var(--cbl-accent-ink);
+}
+#cblRoot .cbl-practice {
+  display: block; width: 100%; text-align: left; cursor: pointer; box-sizing: border-box;
+  min-height: 44px; padding: 12px 14px; margin: 10px 0;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink); font-size: 15px;
+}
+#cblRoot .cbl-practice b { display: block; font-weight: 700; }
+#cblRoot .cbl-practice span { display: block; font-size: 13px; color: var(--cbl-muted); margin-top: 2px; }
+#cblRoot .cbl-practice.on { border-color: var(--cbl-accent); }
+#cblRoot .cbl-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 18px; margin: 4px 8px 4px 0;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 16px; font-weight: 600; cursor: pointer;
+}
+#cblRoot .cbl-btn.cbl-primary {
+  background: var(--cbl-accent); border-color: var(--cbl-accent); color: var(--cbl-accent-ink);
+}
+#cblRoot .cbl-start { width: 100%; margin: 6px 0 0; min-height: 52px; font-size: 18px; }
+#cblRoot .cbl-row { display: flex; gap: 8px; margin-top: 8px; }
+#cblRoot .cbl-resume {
+  border: 1px solid var(--cbl-accent); border-radius: 8px;
+  background: var(--cbl-surface); padding: 12px 14px; margin-bottom: 12px;
+}
+#cblRoot .cbl-resume p { margin: 0 0 6px; font-size: 15px; }
+#cblRoot .cbl-input {
+  width: 100%; box-sizing: border-box; min-height: 44px;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); color: var(--cbl-ink);
+  font-size: 16px; padding: 10px 12px; font-family: inherit;
+}
+
+/* Ended summary. */
+#cblRoot .cbl-sum { margin: 0 0 12px; display: grid; gap: 8px; }
+#cblRoot .cbl-sum div {
+  display: flex; justify-content: space-between; gap: 12px;
+  border: 1px solid var(--cbl-line); border-radius: 8px;
+  background: var(--cbl-surface); padding: 10px 12px;
+}
+#cblRoot .cbl-sum dt { font-size: 14px; color: var(--cbl-muted); }
+#cblRoot .cbl-sum dd {
+  margin: 0; font-size: 16px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Small screens: keep two columns down to 360 px, no horizontal scroll. */
+@media (max-width: 380px) {
+  #cblRoot .cbl-elapsed { font-size: 56px; }
+  #cblRoot .cbl-tilelabel { font-size: 18px; }
+  #cblRoot .cbl-run, #cblRoot .cbl-idle, #cblRoot .cbl-endview { padding-left: 12px; padding-right: 12px; }
+  /* Footer buttons share two rows rather than squeezing one-word labels. */
+  #cblRoot .cbl-foot { flex-wrap: wrap; }
+  #cblRoot .cbl-footbtn { flex: 1 1 140px; }
+}
+
+/* Reduced motion: colour changes only. */
+@media (prefers-reduced-motion: reduce) {
+  #cblRoot .cbl-due, #cblRoot .cbl-tile, #cblRoot .cbl-toast { transition: none; }
+  #cblRoot .cbl-sheet { animation: none; }
+  #cblRoot .cbl-due-overdue { animation: none; }
+  #cblRoot button:active { transform: none; }
+}
+#cblRoot.cbl-reduced .cbl-due,
+#cblRoot.cbl-reduced .cbl-tile,
+#cblRoot.cbl-reduced .cbl-toast { transition: none; }
+#cblRoot.cbl-reduced .cbl-sheet { animation: none; }
+#cblRoot.cbl-reduced .cbl-due-overdue { animation: none; }
+#cblRoot.cbl-reduced button:active { transform: none; }

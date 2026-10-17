@@ -3847,7 +3847,8 @@
             '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'
           : '') +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("codeblue", "🫀") + ' Code Blue practice</div>' +
-        '<p class="icu-doc-sub" style="margin:0 0 10px">Practice aids. Training only, never written to a patient record.</p>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">A timer, reminder and documentation aid for the phone, and practice tools. Practice is training only and never written to a patient record.</p>' +
+        '<button class="icu-btn" data-icu-act="cblive">' + ico("codeblue", "🫀") + ' Start a code (phone timer)</button>' +
         '<button class="icu-btn ghost" data-icu-act="cbtrain">' + ico("codeblue", "🫀") + ' Megacode and ACLS practice</button>' +
         '<button class="icu-btn ghost" data-icu-act="cbecg">' + ico("codeblue", "🫀") + ' ECG rhythm course</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
@@ -9094,6 +9095,7 @@
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
       case "codeblue": try { var cbp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.WatchBridge; if (cbp && cbp.openCodeBlue) cbp.openCodeBlue(); } catch (x) {} break;
+      case "cblive": try { if (window.CodeBlueLive) CodeBlueLive.open(); } catch (x) {} break;
       case "cbtrain": try { if (window.CodeBlueTrainer) CodeBlueTrainer.open(); } catch (x) {} break;
       case "cbecg": try { if (window.CodeBlueECG) CodeBlueECG.open(); } catch (x) {} break;
       case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
