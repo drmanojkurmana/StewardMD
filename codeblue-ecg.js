@@ -312,6 +312,7 @@
     for (var i = i0; i < i1; i++) {
       var x = x0 + ((i - i0) / SAMPLE_HZ) * MM_PER_S;
       var v = smp.data[i];
+      if (lead === "aVR") v = -v;   /* aVR looks at the heart from the right shoulder: upright beat in other leads reads inverted */
       if (v > 2.5) v = 2.5; if (v < -2.5) v = -2.5;
       d += (i === i0 ? "M" : "L") + x.toFixed(2) + " " + (base - v * MM_PER_MV).toFixed(2);
     }
@@ -531,7 +532,7 @@
     return '<label class="cbecg-lbl" for="cbecg-set">12-lead set (schematic)</label>' +
       '<select id="cbecg-set" class="cbecg-sel" data-cbecg-leadset>' + sets + "</select>" +
       '<div class="cbecg-grid12">' + cells + "</div>" +
-      '<p class="cbecg-note">ST elevation is drawn only in the territory leads, with reciprocal depression where standard. Schematic teaching drawings.</p>';
+      '<p class="cbecg-note">ST elevation is drawn only in the territory leads, with reciprocal depression where standard. Schematic teaching drawings: every lead shares one simplified beat shape (aVR inverted), so only the ST change differs between leads.</p>';
   }
 
   function cardsHtml() {

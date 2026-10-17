@@ -116,7 +116,7 @@ try {
   await click('[data-cbecg-tab="quiz"]');
   await click("[data-cbecg-start]");
   ok(await ev(`return document.querySelectorAll(".cbecg-qset").length === 10;`) === true, "quiz asks 10 questions");
-  await ev(`var qs=document.querySelectorAll(".cbecg-qset"); for(var i=0;i<qs.length;i++){qs[i].querySelector("input[value='0']").click();} return 1;`);
+  for (let i = 0; i < 10; i++) await ev(`var qs=document.querySelectorAll(".cbecg-qset"); var q=qs[${i}]; if(q){var r=q.querySelector("input[value='0']"); if(r) r.click();} return 1;`);
   ok(await until(`return !!document.querySelector(".cbecg-score");`, 8000), "quiz reports a score");
   console.log("quiz: " + await ev(`return document.querySelector(".cbecg-score").textContent;`));
   ok(await ev(`try{var s=JSON.parse(localStorage.getItem("smd.cbecg.v1")); return typeof s.quizBest === "number" && typeof s.misses === "object";}catch(e){return false;}`) === true, "quiz best and misses persist");
