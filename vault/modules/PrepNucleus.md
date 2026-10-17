@@ -1740,3 +1740,4 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - **Wave 3 final batch (4):** insulin-glucose, cardiac-inotropes, mood-stabilisers-antipsychotics, antiprotozoal-amoebicides. **Total 50 figures.** Every high-yield
   class in the plan is covered; remaining ideas (vasopressin, mannitol, vitamins) are optional. Registry terms that match many lessons (insulin) are the
   first place to tighten if the chips feel noisy.
+- **Colour layer (2026-10-17):** `fig-viewer.js` `COLOR_CSS` + `legend()` colour every figure at open time (membranes blue, receptors green, G proteins violet, start green, step sky, result amber, damage red, enzyme pills violet, vesicles orange; AP curves blue vs dashed grey), dark and light, with a colour key under the drawing. No page rebuild needed; edit the hues in the `--k-*` variables.

@@ -40,9 +40,40 @@
     ".dr-status{font:13px/1.4 system-ui,sans-serif;margin:4px 0}" +
     ".dr-info{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 8px);z-index:3;min-height:0;margin:12px 0;padding:12px 14px;border:0;border-radius:14px;background:var(--anatomy-top);box-shadow:0 0 0 1px var(--anatomy-faint),0 6px 18px rgba(0,0,0,.28);font:14px/1.45 system-ui,-apple-system,sans-serif}" +
     ".bio-sources{margin:12px 0 0}.bio-sources summary{font:600 14px system-ui,sans-serif;color:var(--anatomy-text);min-height:44px;display:flex;align-items:center;cursor:pointer}.bio-sources h2{display:none}.hot{cursor:pointer}";
+
+  /* colour layer: membranes blue, start/step/result/damage each their own hue, so the parts can be told apart at a glance */
+  var COLOR_CSS = "body{--k-mem:#4c8dff;--k-src:#2fd4a0;--k-mid:#4fb3ff;--k-out:#ffb43a;--k-bad:#ff6b7a;--k-enz:#a78bfa;--k-rec:#34d399;--k-gp:#8b7bff;--k-vs:#ffb86b}" +
+    "body[data-theme='light']{--k-mem:#2563eb;--k-src:#0f9f76;--k-mid:#0a7fd1;--k-out:#d98300;--k-bad:#dc3545;--k-enz:#6d4fd6;--k-rec:#16a05f;--k-gp:#5b46d6;--k-vs:#d9772b}" +
+    ".dr-n-source .bio-blob-base{fill:color-mix(in srgb,var(--k-src) 42%,var(--anatomy-shade-2))}.dr-n-source .bio-blob-edge{stroke:var(--k-src)}" +
+    ".dr-n-mid .bio-blob-base{fill:color-mix(in srgb,var(--k-mid) 38%,var(--anatomy-shade-2))}.dr-n-mid .bio-blob-edge{stroke:var(--k-mid)}" +
+    ".dr-n-calc .bio-blob-base{fill:color-mix(in srgb,var(--k-out) 46%,var(--anatomy-shade-2))}.dr-n-calc .bio-blob-edge{stroke:var(--k-out)}" +
+    ".dr-n-inv .bio-blob-base{fill:color-mix(in srgb,var(--k-bad) 44%,var(--anatomy-shade-2))}.dr-n-inv .bio-blob-edge{stroke:var(--k-bad)}" +
+    ".dr-enz-r{fill:color-mix(in srgb,var(--k-enz) 26%,var(--anatomy-paper));stroke:var(--k-enz)}" +
+    ".dr-flowline{stroke:color-mix(in srgb,var(--k-mid) 80%,var(--anatomy-mid))}.dr-flowhead{stroke:var(--k-mid)}" +
+    ".dr-memband,.dr-memfill{fill:color-mix(in srgb,var(--k-mem) 55%,var(--anatomy-shade-1))}.dr-memedge{stroke:var(--k-mem);stroke-width:1.2}" +
+    ".dr-cell{fill:color-mix(in srgb,var(--k-mem) 9%,var(--anatomy-shade-3));stroke:var(--k-mem)}.dr-head{stroke:var(--k-mem);fill:color-mix(in srgb,var(--k-mem) 16%,var(--anatomy-paper))}" +
+    ".bio-membrane-base{fill:color-mix(in srgb,var(--k-mem) 50%,var(--anatomy-shade-1))}" +
+    ".dr-rec .dr-hx,.dr-rec .dr-hx-hi{stroke:var(--k-rec)}.dr-rec .dr-hx{fill:color-mix(in srgb,var(--k-rec) 32%,var(--anatomy-shade-2))}" +
+    ".dr-bg .bio-blob-base,.dr-alpha .bio-blob-base{fill:color-mix(in srgb,var(--k-gp) 40%,var(--anatomy-shade-2))}.dr-bg .bio-blob-edge,.dr-alpha .bio-blob-edge{stroke:var(--k-gp)}" +
+    ".dr-ac .bio-blob-base{fill:color-mix(in srgb,var(--k-mid) 38%,var(--anatomy-shade-2))}.dr-ac .bio-blob-edge{stroke:var(--k-mid)}" +
+    ".dr-pkac .bio-blob-base{fill:color-mix(in srgb,var(--k-out) 38%,var(--anatomy-shade-2))}.dr-pkac .bio-blob-edge{stroke:var(--k-out)}" +
+    ".dr-ves .bio-blob-base{fill:color-mix(in srgb,var(--k-vs) 40%,var(--anatomy-shade-2))}.dr-ves .bio-blob-edge{stroke:var(--k-vs)}" +
+    ".dr-vdot,.dr-da{fill:var(--k-vs)}.dr-rail-green{stroke:var(--k-rec)}.dr-rail-head.dr-rail-green{fill:var(--k-rec)}.dr-rail-red{stroke:var(--k-bad)}.dr-rail-head.dr-rail-red{fill:var(--k-bad)}" +
+    ".dr-cur{stroke:var(--k-mid);stroke-width:2.2}.dr-cur2{stroke:var(--k-mid)}.dr-zone{fill:color-mix(in srgb,var(--k-mem) 12%,var(--anatomy-shade-3))}.dr-ghost{stroke:var(--anatomy-mid)}" +
+    ".smdk{display:flex;flex-wrap:wrap;gap:8px 14px;margin:10px 0 0;font:12.5px/1.2 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}.smdk span{display:inline-flex;align-items:center;gap:6px}.smdk i{width:14px;height:14px;border-radius:50%;display:inline-block;border:2px solid currentColor}";
+  function legend(doc) {
+    var items = null;
+    if (doc.querySelector(".dr-n-source")) items = [["Start", "--k-src"], ["Step", "--k-mid"], ["Result", "--k-out"], ["Damage", "--k-bad"], ["Enzyme or receptor step", "--k-enz"]];
+    else if (doc.querySelector(".dr-memband, .dr-memedge")) items = [["Cell membrane", "--k-mem"], ["Receptor", "--k-rec"], ["G protein", "--k-gp"], ["Enzyme", "--k-mid"], ["Vesicle", "--k-vs"]];
+    else if (doc.querySelector(".dr-cur")) items = [["With the drug class", "--k-mid"], ["Normal (dashed)", "--anatomy-mid"]];
+    var host = doc.querySelector(".iso-legend"); if (!items || !host) return;
+    var d = doc.createElement("div"); d.className = "smdk"; d.setAttribute("aria-hidden", "true");
+    d.innerHTML = items.map(function (it) { return '<span style="color:var(' + it[1] + ')"><i></i><b style="font-weight:500;color:var(--anatomy-text)">' + it[0] + "</b></span>"; }).join("");
+    host.appendChild(d);
+  }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
-    var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS; doc.body.appendChild(st);
+    var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS; doc.body.appendChild(st);
     var vp = doc.querySelector('meta[name="viewport"]'); if (vp) vp.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover");
     var info = doc.getElementById("info"); if (info) info.textContent = "Tap a labelled part for a one-line explanation.";
     var src = doc.querySelector(".bio-sources");
@@ -52,7 +83,7 @@
     }
     /* a tap on a labelled part shows its explanation (touch has no hover) */
     Array.prototype.forEach.call(doc.querySelectorAll(".hot"), function (h) { h.addEventListener("touchend", function () { try { h.focus(); } catch (e) {} }, { passive: true }); });
-    zoomer(doc, win);
+    legend(doc); zoomer(doc, win);
   }
   function zoomer(doc, win) {
     var box = doc.querySelector(".dr-svg") || doc.querySelector(".iso-plate"), svg = box && box.querySelector("svg");
