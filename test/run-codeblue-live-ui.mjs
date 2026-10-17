@@ -54,8 +54,11 @@ const shot = async (name, dark) => {
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const viewIs = (v) => `return window.CodeBlueLive && CodeBlueLive._rt.view() === ${JSON.stringify(v)};`;
 const CBL = `#cblRoot`;
-// Shared in-page helper: the rect of an element only when it is really on screen (not display:none, not hidden, not translated fully off the viewport).
-const VIS = `function visRect(el){var r=el.getBoundingClientRect();var cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden"||r.width===0||r.height===0)return null;if(r.right<=0||r.bottom<=0||r.left>=innerWidth||r.top>=innerHeight)return null;return r;}`;
+// Shared in-page helper: the rect of an element only when it is really on screen.
+// The raw rect is intersected with every scrolling/clipping ancestor and with
+// the viewport, so tiles inside the secondary scroll region (or a closed
+// timeline drawer) only report the part that is actually visible.
+const VIS = `function visRect(el){var r=el.getBoundingClientRect();var cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden"||r.width===0||r.height===0)return null;var L=r.left,T=r.top,R=r.right,B=r.bottom;var n=el.parentElement;while(n){var s=getComputedStyle(n);if(/(auto|scroll|hidden|clip)/.test(s.overflowY+" "+s.overflowX)){var a=n.getBoundingClientRect();L=Math.max(L,a.left);T=Math.max(T,a.top);R=Math.min(R,a.right);B=Math.min(B,a.bottom);}n=n.parentElement;}L=Math.max(L,0);T=Math.max(T,0);R=Math.min(R,innerWidth);B=Math.min(B,innerHeight);if(R-L<=0||B-T<=0)return null;return {left:L,top:T,right:R,bottom:B,width:R-L,height:B-T};}`;
 
 async function metrics(tag) {
   const small = await ev(`return (function () { ${VIS}
@@ -192,7 +195,8 @@ async function contrast(tag) {
 }
 
 async function visualAudit(tag) {
-  const fontOk = await ev(`try { return document.fonts.check('250 96px "Inter CodeBlue"'); } catch (e) { return false; }`);
+  await ev(`try { document.fonts.load('250 96px "Inter CodeBlue"'); document.fonts.load('600 16px "Inter CodeBlue"'); } catch (e) {} return 1;`);
+  const fontOk = await until(`try { return document.fonts.check('250 96px "Inter CodeBlue"'); } catch (e) { return false; }`, 8000);
   ok(fontOk === true, tag + ": Inter CodeBlue font loaded (document.fonts.check)");
   const clock = await ev(`var el = document.querySelector('${CBL} .cbl-ringtime'); if (!el) return null; var cs = getComputedStyle(el); return { fam: cs.fontFamily, num: cs.fontVariantNumeric, ls: cs.letterSpacing, fs: parseFloat(cs.fontSize) };`);
   ok(!!clock && /Inter CodeBlue/.test(clock.fam), tag + ": clock is Inter (" + (clock && clock.fam) + ")");
@@ -244,7 +248,7 @@ try {
   ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugdose').textContent.indexOf("300 mg") >= 0;`) === true, "adult amiodarone dose text");
   ok(await ev(`return document.querySelector('${CBL} [data-drug="lido"] .cbl-drugdose').textContent.indexOf("mg/kg") >= 0;`) === true, "adult lidocaine dose text");
   ok(await ev(`return !document.querySelector('${CBL} [data-state="counts"]');`) === true, "no counter pills; counts live on the buttons");
-  ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugsub').textContent.indexOf("Not logged yet") >= 0;`) === true, "drug buttons carry their own counts");
+  ok(await ev(`return document.querySelector('${CBL} [data-drug="amio"] .cbl-drugsub').textContent.trim() === "" && document.querySelector('${CBL} [data-drug="amio"] .cbl-drugdose').textContent.indexOf("300 mg") >= 0;`) === true, "drug tiles show only the dose text until logged");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="tabs"] [role="tab"]').length === 4;`) === true, "Timer, Log, Notes, Settings tabs");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="timeline"]');`) === true, "live timeline renders");
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-guide li').length >= 3;`) === true, "guide prompts render with sources");

@@ -42,6 +42,16 @@ const shot = async (name, dark) => {
   const r = await shotCall({ format: "png" });
   if (r.result) fsx.writeFileSync(join(process.env.SHOTS, "cbt-" + name + "-" + (dark ? "dark" : "light") + ".png"), Buffer.from(r.result.data, "base64"));
 };
+const shotWidths = async (name) => {
+  for (const w of [820, 1194]) {
+    const h = w === 820 ? 1180 : 834;
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await sleep(300);
+    await shot(name + "-" + w, false); await shot(name + "-" + w, true);
+  }
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await ev(`document.body.classList.remove("dark"); return 1;`); await sleep(300);
+};
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
 const clickNth = (sel, n) => ev(`var b=document.querySelectorAll(${JSON.stringify(sel)})[${n}]; if(!b) return "missing"; b.click(); return 1;`);
 const badgeEverywhere = `return (function(){var r=document.getElementById("cbtRoot"); if(!r||!r.classList.contains("on")) return false; return !!r.querySelector(".cbt-badge");})();`;
@@ -67,6 +77,7 @@ try {
   ok(await ev(`return document.querySelector("#cbtRoot .cbt-disc").textContent.indexOf("Not a substitute for clinical judgement") >= 0;`) === true, "disclaimer shown on entry");
   ok(await ev(badgeEverywhere) === true, "home shows TRAINING badge");
   await shot("home", false); await shot("home", true);
+  await shotWidths("home");
 
   // ---- guided: wrong pick explained, correct pick coached ----
   await click('#cbtRoot [data-act="go-guided"]');
@@ -104,6 +115,7 @@ try {
   ok(await ev(`return document.querySelector("#cbtRoot").textContent.indexOf("epinephrine due 180 s") >= 0;`) === true, "debrief cites SPEC timings");
   ok(await ev(badgeEverywhere) === true, "debrief shows TRAINING badge");
   await shot("debrief", false); await shot("debrief", true);
+  await shotWidths("debrief");
 
   // ---- practice case: clues plus quiz to a result ----
   await click('#cbtRoot [data-act="home"]');
@@ -119,7 +131,8 @@ try {
     await sleep(250);
   }
   ok(await until(`return !!document.querySelector("#cbtRoot .cbt-score") && /of/.test(document.querySelector("#cbtRoot .cbt-score").textContent);`, 8000), "case ends with a result");
-  await shot("case", false);
+  await shot("case", false); await shot("case", true);
+  await shotWidths("case");
 
   // ---- my training: best, trend, weak spots, reset ----
   await click('#cbtRoot [data-act="go-mine"]');

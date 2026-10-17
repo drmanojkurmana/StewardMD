@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Inter CodeBlue";
-  src: url("/fonts/inter-codeblue-opsz.woff2") format("woff2");
+  src: url("fonts/inter-codeblue-opsz.woff2") format("woff2");
   font-weight: 100 900; font-style: normal; font-display: swap;
 }
 /* codeblue-live.css: live code screen presentation layer (phone and iPad).
@@ -31,7 +31,9 @@
   --cbl-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   --cbl-clock: 68px;
   background: var(--cbl-bg); color: var(--cbl-ink);
-  font-family: "Inter CodeBlue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
+  font-family: var(--cbp-font);
+  font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1, "cv11" 1;
   font-size: 16px; line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -908,4 +910,25 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 }
 @media (max-width: 767px) {
   #cblRoot .cbl-ring { display: none; }
+}
+/* cb4-E finishing: quiet tile subs, ring, Note bar, next-due edge. */
+#cblRoot .cbl-tilesub:empty, #cblRoot .cbl-drugsub:empty { display: none; }
+#cblRoot .cbl-dueword:empty { display: none; }
+#cblRoot .cbl-ring .cbl-track { stroke-width: 4.5; }
+#cblRoot .cbl-ring .cbl-arc { stroke-width: 4.5; }
+#cblRoot .cbl-ring .cbl-knob { fill: var(--cbl-accent); stroke: var(--cbl-s1); stroke-width: 1.5; }
+#cblRoot .cbl-vent { padding: 6px 10px 6px 14px; }
+#cblRoot .cbl-ventcue { margin-right: 2px; }
+#cblRoot .cbl-drug.cbl-nextdue {
+  border-color: var(--cbl-accent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28), 0 0 0 1px var(--cbl-accent);
+}
+@media (min-width: 768px) {
+  #cblRoot .cbl-ringtime { font-size: clamp(44px, 8cqw, 64px); }
+  #cblRoot .cbl-ringmeta { flex: 1 1 auto; min-width: 0; }
+  #cblRoot .cbl-actions [data-kind="note"] {
+    grid-column: 1 / -1; min-height: 64px;
+    display: flex; flex-direction: row; align-items: center; gap: 10px;
+  }
+  #cblRoot .cbl-actions [data-kind="note"] .cbl-tileicon { grid-row: auto; }
 }

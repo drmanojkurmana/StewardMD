@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Inter CodeBlue";
+  src: url("fonts/inter-codeblue-opsz.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
 /* Code Blue ECG rhythm course: v3 palette (Carbon, Graphite, Cool Silver,
  * Frost White, Electric Blue) via the shared --cbp-* tokens. Light theme is
  * the default; body.dark selects the dark theme. No glows, no gradients,
@@ -17,8 +22,13 @@
   --cb-ease:cubic-bezier(.23,1,.32,1); --cb-d:120ms;
   position:fixed; inset:0; z-index:90; overflow-y:auto; overscroll-behavior:contain;
   background:var(--cb-bg); color:var(--cb-text);
+  --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
+  font-family: var(--cbp-font);
+  font-variant-numeric: tabular-nums;
   font-size:16px; line-height:1.5;
+  -webkit-font-smoothing: antialiased;
 }
+.cbecg button, .cbecg select, .cbecg input { font-family: inherit; }
 .cbecg[data-cb-theme]{
   --cb-bg:var(--cbp-bg); --cb-card:var(--cbp-surface);
   --cb-s1:var(--cbp-bg); --cb-s2:var(--cbp-line);
@@ -133,8 +143,9 @@ body.dark .cbecg-grid-bg{fill:var(--cb-card);}
 .cbecg-meta{display:grid; grid-template-columns:auto 1fr; gap:4px 12px; margin:12px 0 4px; font-size:14px;}
 .cbecg-meta dt{color:var(--cb-mut);}
 .cbecg-meta dd{margin:0; font-weight:600;}
-.cbecg-feats{margin:6px 0 0; padding-left:20px; font-size:14.5px;}
-.cbecg-feats li{margin-bottom:4px;}
+.cbecg-feats{margin:6px 0 0; padding:0; list-style:none; font-size:14.5px;}
+.cbecg-feats li{margin-bottom:6px; position:relative; padding-left:18px;}
+.cbecg-feats li::before{content:""; position:absolute; left:2px; top:0.55em; width:6px; height:6px; border-radius:50%; background:var(--cb-fill);}
 .cbecg-cat{font-weight:700;}
 .cbecg-grid12{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
 .cbecg-cell{border:1px solid var(--cb-line); border-radius:var(--cb-r-md); padding:4px; min-width:0;}
@@ -161,15 +172,51 @@ body.dark .cbecg-grid-bg{fill:var(--cb-card);}
 .cbecg-score{font-size:17px; font-weight:800;}
 .cbecg-pattern{border:1px solid var(--cb-line); border-radius:var(--cb-r-md); padding:10px; margin:10px 0 0;}
 .cbecg-pattern h3{font-size:15px; margin:0 0 6px;}
-.cbecg-meas{border:1px solid var(--cb-line); border-radius:var(--cb-r-md); padding:10px; margin:12px 0 0;}
+.cbecg-meas{border:1px solid var(--cb-line); border-radius:14px; padding:14px 16px; margin:12px 0 0; background:var(--cb-soft);}
 .cbecg-meas h3{font-size:15px; margin:0 0 8px;}
 .cbecg-meas-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:6px 0; border-top:1px solid var(--cb-line);}
 .cbecg-meas-row:first-of-type{border-top:0;}
 .cbecg-meas-lbl{font-weight:700; min-width:36px;}
 .cbecg-meas-val{font-weight:700; font-variant-numeric:tabular-nums;}
-.cbecg-chip{font-size:12px; font-weight:700; border:1px solid var(--cb-line); border-radius:var(--cb-r-pill); padding:2px 8px;}
+.cbecg-chip{font-size:12px; font-weight:700; border:1px solid var(--cb-line); border-radius:var(--cb-r-pill); padding:2px 8px; background:var(--cb-card);}
+.cbecg-chip.normal{color:var(--cb-ok); border-color:var(--cb-ok);}
 .cbecg-chip.short,.cbecg-chip.long{color:var(--cb-up); border-color:var(--cb-up);}
 .cbecg-meas-txt{color:var(--cb-mut); font-size:13.5px; flex:1 1 220px;}
+/* Premium instrument language shared with the live screen. */
+.cbecg-head{margin:0 0 10px;}
+.cbecg-title{font-size:20px; letter-spacing:-0.01em;}
+.cbecg-train{border-radius:6px; font-size:11px; font-weight:600; letter-spacing:0.06em; padding:3px 8px;}
+.cbecg-x{border-radius:10px; background:var(--cb-s1); border:1px solid var(--cb-line);}
+.cbecg-dis,.cbecg-edu{
+  position:relative; padding:10px 12px 10px 38px; border:1px solid var(--cb-line); border-radius:10px;
+  background:var(--cb-card); font-size:13px;
+}
+.cbecg-dis::before,.cbecg-edu::before{
+  content:"i"; position:absolute; left:11px; top:10px; width:17px; height:17px;
+  border:1.5px solid currentColor; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700; line-height:1;
+}
+.cbecg-tab{border-radius:10px; background:var(--cb-card); border:1px solid var(--cb-line);}
+.cbecg-tab.on{background:var(--cb-fill); color:var(--cb-on-fill); border-color:var(--cb-fill);}
+.cbecg-body{border:1px solid var(--cb-line); border-radius:14px; padding:20px;}
+.cbecg-btn{border-radius:10px; background:var(--cb-card); border:1px solid var(--cb-line);}
+.cbecg-btn.pri{background:var(--cb-fill); color:var(--cb-on-fill); border-color:var(--cb-fill);}
+.cbecg-sel{border-radius:10px; background:var(--cb-card);}
+.cbecg-stripwrap{
+  border:1px solid var(--cb-line); border-radius:14px; overflow:hidden; background:var(--cb-card);
+}
+.cbecg-line::before{
+  content:""; position:absolute; top:8px; left:50%; width:14px; height:14px; margin-left:-7px;
+  border-radius:50%; background:var(--cb-fill); border:2px solid var(--cb-card); box-sizing:border-box;
+}
+.cbecg-panes{display:flex; flex-direction:column; gap:0; min-width:0;}
+.cbecg-stripcol,.cbecg-detailcol{min-width:0;}
+@media (min-width:768px){
+  .cbecg-sheet{max-width:1120px; padding:20px 24px 40px;}
+  .cbecg-body{padding:24px;}
+  .cbecg-panes{display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,0.85fr); gap:20px; align-items:start;}
+  .cbecg-grid12{grid-template-columns:repeat(3,1fr); gap:10px;}
+}
 @media (prefers-reduced-motion:reduce){
   .cbecg *{transition:none !important; animation:none !important;}
   .cbecg *:active{transform:none !important;}

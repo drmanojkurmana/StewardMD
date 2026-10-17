@@ -885,30 +885,30 @@
     var last, sub;
     if (kind === "shock") {
       last = lastShock(sess);
-      sub = counts.shocks === 0 ? "Not logged yet"
+      sub = counts.shocks === 0 ? "Ready"
         : counts.shocks + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
       return sub;
     }
     if (kind === "epi") {
       last = lastEpi(sess);
-      return counts.epi === 0 ? "Not logged yet"
+      return counts.epi === 0 ? ""
         : counts.epi + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
     }
     if (kind === "rhythm") {
       last = lastRhythm(sess);
-      return last ? last.label + ", " + fmtAgo(elapsed - last.elapsed) : "Not logged yet";
+      return last ? last.label + ", " + fmtAgo(elapsed - last.elapsed) : "";
     }
     if (kind === "proc") {
       var n = sess.events.filter(function (e) { return e.kind === "procedure"; }).length;
-      return n === 0 ? "None logged yet" : n + " logged";
+      return n === 0 ? "" : n + " logged";
     }
     if (kind === "note") {
       var nn = sess.events.filter(function (e) { return e.kind === "note"; }).length;
       return nn === 0 ? "Add a note" : nn + (nn === 1 ? " note" : " notes");
     }
-    if (kind === "pause") return paused ? "Paused now" : "Pause compressions";
-    if (kind === "rosc") return sess.rosc ? "ROSC logged" : "Log ROSC";
-    if (kind === "rearrest") return "Restart CPR cycle";
+    if (kind === "pause") return paused ? "Paused now" : "";
+    if (kind === "rosc") return sess.rosc ? "ROSC logged" : "";
+    if (kind === "rearrest") return "";
     return "";
   }
 
@@ -1001,6 +1001,8 @@
     var beat = Math.floor(elapsed * 110 / 60) % 2;
     var R = 54, C = 2 * Math.PI * R;
     var arc = C * (1 - frac);
+    var knobA = -Math.PI / 2 + 2 * Math.PI * frac;
+    var knobX = 66 + R * Math.cos(knobA), knobY = 66 + R * Math.sin(knobA);
     var vent = ventInfo(sess, elapsed);
     var cueOn = sess.ventCue !== false;
     var ticks = "";
@@ -1019,7 +1021,8 @@
       "<g class='cbl-ticks' aria-hidden='true'>" + ticks + "</g>" +
       "<circle class='cbl-track' cx='66' cy='66' r='" + R + "'/>" +
       "<circle class='cbl-arc' data-s='" + ringState + "' cx='66' cy='66' r='" + R + "' " +
-      "stroke-dasharray='" + C.toFixed(1) + "' stroke-dashoffset='" + arc.toFixed(1) + "' transform='rotate(-90 66 66)'/></svg>" +
+      "stroke-dasharray='" + C.toFixed(1) + "' stroke-dashoffset='" + arc.toFixed(1) + "' transform='rotate(-90 66 66)'/>" +
+      "<circle class='cbl-knob' cx='" + knobX.toFixed(1) + "' cy='" + knobY.toFixed(1) + "' r='4'/></svg>" +
       '<div class="cbl-ringmeta">' +
       '<div class="cbl-elapsed cbl-ringtime" data-cbfx-counter data-cbfx-key="clock" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
       '<div class="cbl-ringline"><span class="cbl-beat" data-beat="' + beat + '" aria-hidden="true"></span>' +
@@ -1123,7 +1126,7 @@
     if (level === "rosc") return "ROSC";
     if (level === "paused") return "Paused";
     if (text === "Give breath") return "Now";
-    if (text === "CPR in progress") return "CPR";
+    if (text === "CPR in progress") return "";
     return "Next";
   }
 
@@ -1184,7 +1187,7 @@
     var adult = normMode(sess.mode) === "adult";
     var lastLine = function (pred, n) {
       var last = lastDrugBy(sess, pred);
-      if (!n) return "Not logged yet";
+      if (!n) return "";
       return n + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
     };
     var epiBtn = drugBtn("drug-epi", "epi", "Epinephrine", adult && dose ? dose.epi : null,
@@ -1230,9 +1233,10 @@
 
   function tileInner(kind, label, elapsed) {
     var icon = ICONS[kind === "epi" ? "epi" : kind === "proc" ? "proc" : kind === "rearrest" ? "rearrest" : kind] || ICONS.note;
+    var sub = tileSub(kind === "rearrest" ? "rearrest" : kind, elapsed);
     return '<span class="cbl-tileicon">' + icon + "</span>" +
       '<span class="cbl-tilelabel">' + esc(label) + "</span>" +
-      '<span class="cbl-tilesub">' + esc(tileSub(kind === "rearrest" ? "rearrest" : kind, elapsed)) + "</span>";
+      '<span class="cbl-tilesub">' + esc(sub) + "</span>";
   }
 
   function guideView(elapsed) {

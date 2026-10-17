@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Inter CodeBlue";
+  src: url("fonts/inter-codeblue-opsz.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
 /* codeblue-prefs.css: shared customisation tokens for the Code Blue web screens.
  * One block of CSS custom properties per theme, applied by a data-cb-theme
  * attribute on the screen root. Only surfaces, lines and text change; the
@@ -249,7 +254,9 @@
   position: fixed; inset: 0; z-index: 10001;
   display: flex; align-items: flex-end; justify-content: center;
   background: rgba(0, 0, 0, 0.45);
-  font-family: "Inter CodeBlue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
+  font-family: var(--cbp-font);
+  font-variant-numeric: tabular-nums;
   font-size: calc(16px * var(--cbp-ts, 1));
   line-height: 1.5;
   color: var(--cbp-ink, #f4f7fa);

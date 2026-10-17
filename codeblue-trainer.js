@@ -409,11 +409,12 @@
 
   function shell(activeStation, title, body) {
     return '<div class="cbt-top">' +
-      '<button type="button" class="cbt-back" data-act="home" aria-label="Back to trainer home">Back</button>' +
+      '<span class="cbt-title">' + esc(title) + '</span>' +
       '<span class="cbt-badge">TRAINING</span>' +
+      '<button type="button" class="cbt-back" data-act="home" aria-label="Back to trainer home">Back</button>' +
       '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
-      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">' + esc(title) + "</h2>" + body + "</div>";
+      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">' + esc(title) + '</h2><div class="cbt-layout">' + body + "</div></div>";
   }
   function modeTabs() {
     var html = '<div class="cbt-modes" role="tablist" aria-label="Mode">';
@@ -436,16 +437,16 @@
 
   function showHome() {
     stopClock();
-    var html = '<div class="cbt-top"><span class="cbt-badge">TRAINING</span>' +
+    var html = '<div class="cbt-top"><span class="cbt-title">Code Blue Trainer</span><span class="cbt-badge">TRAINING</span>' +
       '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
-      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">Megacode and ACLS practice</h2>' +
+      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">Megacode and ACLS practice</h2><div class="cbt-layout">' +
       '<p class="cbt-disc">' + esc(DISCLAIMER) + "</p>" +
       '<p class="cbt-note">Practice only. The clock runs sped up and labelled TRAINING. Nothing here writes to a patient record.</p>' +
       '<button type="button" class="cbt-station" data-act="go-guided"><b>Guided Megacode</b><span>Step through arrest scenarios with coaching.</span></button>' +
       '<button type="button" class="cbt-station" data-act="go-test"><b>Test station</b><span>Same scenarios, timed, no coaching, scored debrief.</span></button>' +
       '<button type="button" class="cbt-station" data-act="go-cases"><b>Practice cases</b><span>Timed clues plus quiz questions.</span></button>' +
-      '<button type="button" class="cbt-station" data-act="go-mine"><b>My training</b><span>Best scores, trend and weak spots.</span></button></div>';
+      '<button type="button" class="cbt-station" data-act="go-mine"><b>My training</b><span>Best scores, trend and weak spots.</span></button></div></div>';
     show(html, "home");
   }
 

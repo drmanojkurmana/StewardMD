@@ -1,9 +1,10 @@
+@font-face{font-family:"Inter CodeBlue";src:url("fonts/inter-codeblue-opsz.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
 /* Code sheet review. Operate-mode clinical surface: flat fills, pill radii,
  * bottom-bar token language (52 px primary / 44 px quiet, 8 px gaps, press
  * scale .97, 120 ms ease). No shadows, gradients, glows or backdrops.
  * Fits a 390 px phone in light and dark. */
 .cb-sheet-ov{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(0, 0, 0, 0.45);padding:12px 12px max(12px,env(safe-area-inset-bottom,0px));box-sizing:border-box}
-.cb-sheet{background:var(--cbp-surface, #171B20);color:var(--cbp-ink, #F4F7FA);border-radius:12px;padding:20px;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
+.cb-sheet{--cbp-font:"Inter CodeBlue", system-ui, sans-serif;background:var(--cbp-surface, #171B20);color:var(--cbp-ink, #F4F7FA);border-radius:12px;padding:20px;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;font-family:var(--cbp-font);font-variant-numeric:tabular-nums;font-size:16px;line-height:1.5}
 .cb-sheet[data-cb-theme="light"]{background:#FFFFFF;color:#171B20}
 @media (prefers-color-scheme:light){.cb-sheet:not([data-cb-theme="dark"]){background:#FFFFFF;color:#171B20}}
 .cb-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}

@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Inter CodeBlue";
+  src: url("fonts/inter-codeblue-opsz.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
 /* codeblue-trainer.css — Megacode and ACLS practice presentation layer.
  * Scoped under #cbtRoot. v3 palette via the shared --cbp-* tokens: when
  * codeblue-prefs.css has applied [data-cb-theme], the mapping below wins;
@@ -14,7 +19,12 @@
   --cbt-accent-ink: var(--cbp-accent-ink, #ffffff);
   --cbt-wrong: var(--cbp-overdue, #b91c1c); --cbt-right: var(--cbp-rosc, #17803a);
   background: var(--cbt-bg); color: var(--cbt-ink);
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
+  font-family: var(--cbp-font);
+  font-variant-numeric: tabular-nums;
+  --cbt-s1: var(--cbt-surface); --cbt-s2: var(--cbt-bg);
+  --cbt-hairline: var(--cbt-line);
+  --cbt-radius: 14px; --cbt-radius-sm: 10px;
   -webkit-font-smoothing: antialiased;
 }
 #cbtRoot[data-cb-theme] {
@@ -70,9 +80,16 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-h:focus { outline: none; }
 #cbtRoot .cbt-sub { font-size: 16px; font-weight: 700; margin: 18px 0 8px; }
 #cbtRoot .cbt-disc {
-  border: 1px solid var(--cbt-line); border-left: 4px solid var(--cbt-accent);
-  border-radius: 8px; padding: 12px; font-size: 14px; line-height: 1.5;
-  background: var(--cbt-surface); margin: 0 0 12px;
+  position: relative;
+  border: 1px solid var(--cbt-hairline);
+  border-radius: var(--cbt-radius-sm, 10px); padding: 12px 12px 12px 40px; font-size: 14px; line-height: 1.5;
+  background: var(--cbt-s1); color: var(--cbt-muted); margin: 0 0 12px;
+}
+#cbtRoot .cbt-disc::before, #cbtRoot .cbt-coach::before, #cbtRoot .cbt-why::before {
+  content: "i"; position: absolute; left: 12px; top: 12px;
+  width: 18px; height: 18px; border: 1.5px solid currentColor; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; font-style: normal; line-height: 1;
 }
 #cbtRoot .cbt-note { font-size: 14px; line-height: 1.5; color: var(--cbt-muted); margin: 0 0 12px; }
 #cbtRoot .cbt-step { font-size: 13px; font-weight: 600; color: var(--cbt-muted); margin: 0 0 8px; }
@@ -114,11 +131,12 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-opt.off { border-color: var(--cbt-wrong); color: var(--cbt-muted); }
 #cbtRoot .cbt-fb { margin-top: 12px; }
 #cbtRoot .cbt-coach, #cbtRoot .cbt-why {
-  border-radius: 8px; padding: 12px; font-size: 14px; line-height: 1.5; margin: 0 0 10px;
-  border: 1px solid var(--cbt-line); background: var(--cbt-surface);
+  position: relative;
+  border-radius: var(--cbt-radius-sm, 10px); padding: 12px 12px 12px 40px; font-size: 14px; line-height: 1.5; margin: 0 0 10px;
+  border: 1px solid var(--cbt-hairline); background: var(--cbt-s1); color: var(--cbt-muted);
 }
-#cbtRoot .cbt-coach { border-left: 4px solid var(--cbt-right); }
-#cbtRoot .cbt-why { border-left: 4px solid var(--cbt-wrong); }
+#cbtRoot .cbt-coach { color: var(--cbt-muted); }
+#cbtRoot .cbt-why { color: var(--cbt-muted); }
 #cbtRoot .cbt-done { font-weight: 700; }
 #cbtRoot .cbt-next {
   min-height: 48px; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer;
@@ -146,11 +164,55 @@ body.cbt-lock { overflow: hidden; }
   display: block; width: 100%; box-sizing: border-box; margin: 0 0 10px;
   border: 1px solid var(--cbt-line); border-radius: 8px; padding: 12px;
   background: var(--cbt-surface); color: var(--cbt-ink);
-  font-size: 13px; line-height: 1.5; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px; line-height: 1.5; font-family: inherit;
   white-space: pre-wrap;
 }
 
-#cbtRoot button:focus-visible { outline: 3px solid var(--cbt-accent); outline-offset: 2px; }
+#cbtRoot button:focus-visible { outline: 2px solid var(--cbt-accent); outline-offset: 2px; }
+#cbtRoot button { font-family: inherit; }
+#cbtRoot svg { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+/* Premium instrument language shared with the live screen: tonal
+ * surfaces, 14 px cards, 10 px controls, 8 pt spacing rhythm. */
+#cbtRoot .cbt-top {
+  min-height: 52px; padding: 6px 12px; padding-top: calc(6px + env(safe-area-inset-top, 0px));
+  background: var(--cbt-s1); border-bottom: 1px solid var(--cbt-hairline); flex-wrap: wrap;
+}
+#cbtRoot .cbt-title { font-size: 17px; font-weight: 700; flex: 1 1 140px; min-width: 0; white-space: nowrap; overflow: hidden; }
+#cbtRoot .cbt-back, #cbtRoot .cbt-close {
+  border-radius: var(--cbt-radius-sm, 10px); background: var(--cbt-s2); font-size: 14px; flex: none;
+}
+#cbtRoot .cbt-badge { border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; flex: none; }
+#cbtRoot .cbt-h { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+#cbtRoot .cbt-station, #cbtRoot .cbt-card {
+  border: 1px solid var(--cbt-hairline); border-radius: var(--cbt-radius, 14px);
+  background: var(--cbt-s1); padding: 16px; margin: 0 0 12px;
+}
+#cbtRoot .cbt-state {
+  border: 1px solid var(--cbt-hairline); border-radius: var(--cbt-radius, 14px);
+  background: var(--cbt-s1); padding: 16px;
+}
+#cbtRoot .cbt-opt {
+  border: 1px solid var(--cbt-hairline); border-radius: var(--cbt-radius-sm, 10px);
+  background: var(--cbt-s1); padding: 12px 16px;
+}
+#cbtRoot .cbt-clock {
+  border: 1px solid var(--cbt-hairline); border-radius: var(--cbt-radius, 14px);
+  background: var(--cbt-s1); padding: 10px 14px;
+}
+#cbtRoot .cbt-next { border-radius: var(--cbt-radius-sm, 10px); }
+#cbtRoot .cbt-mode { border-radius: var(--cbt-radius-sm, 10px); background: var(--cbt-s1); }
+#cbtRoot .cbt-layout { display: flex; flex-direction: column; min-width: 0; }
+@media (min-width: 768px) {
+  #cbtRoot .cbt-scroll { max-width: 1120px; padding: 24px; }
+  #cbtRoot .cbt-layout {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; align-items: start;
+  }
+  #cbtRoot .cbt-layout > .cbt-clock, #cbtRoot .cbt-layout > .cbt-disc,
+  #cbtRoot .cbt-layout > .cbt-note, #cbtRoot .cbt-layout > .cbt-modes,
+  #cbtRoot .cbt-layout > .cbt-sub, #cbtRoot .cbt-layout > .cbt-fb,
+  #cbtRoot .cbt-layout > .cbt-score { grid-column: 1 / -1; }
+  #cbtRoot .cbt-layout > .cbt-card, #cbtRoot .cbt-layout > .cbt-station { margin: 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   #cbtRoot *, #cbtRoot *::before, #cbtRoot *::after {
