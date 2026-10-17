@@ -2064,3 +2064,9 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-salivary-s2.webp (R2) | Superficial parotidectomy and surgical landmarks for the facial nerve trunk (CN VII). | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-small-bowel-s1.webp (R2) | Meckel diverticulum on the antimesenteric border of the ileum (Rule of 2s). | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-wound-healing-s3.webp (R2) | Hypertrophic scar (confined to incision) vs keloid scar (extends beyond margins). | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-mixed-s3.webp (R2) | Major collagen types: Type I, Type II, Type III, and Type IV tissue distribution. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-skull-cranial-cavity-s4.webp (R2) | Foramina and transmitted structures of the middle and posterior cranial fossae. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| oph-cataract-s3.webp (R2) | Phacoemulsification cataract extraction and in-the-bag intraocular lens implantation. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| oph-cornea-s4.webp (R2) | Corneal ulcer with descemetocele and full-thickness penetrating keratoplasty. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-bile-duct-s3.webp (R2) | Strasberg type E bile duct injury and end-to-side Roux-en-Y hepaticojejunostomy. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-pancreas-s3.webp (R2) | Pancreatic head adenocarcinoma causing common bile duct obstruction (Courvoisier sign). | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
