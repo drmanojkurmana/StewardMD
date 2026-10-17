@@ -82,10 +82,10 @@ const metrics = async ({ w, h }) => {
   await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: true, ...screen });
   await call("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
 };
-// autoFitD at DPR 1 on an iPad: 1.0 at every size since 2026-10-16 (a root zoom above 1 made vh-capped sheets taller than
-// the screen across the app; ?tabletzoom=1 restores 1.08 / 1.15). The 0.9 and 0.95 steps never apply on an iPad.
-const TABLET_ZOOM = /[?&]tabletzoom=1/.test(process.env.QS || "");
-const zoomFor = (w) => !TABLET_ZOOM ? 1 : w < 600 ? 1 : w < 900 ? 1.08 : 1.15;
+const zoomFor = (w) => w < 600 ? 1 : w < 900 ? 1.08 : 1.15;   // PrepNucleus's own scale on an iPad (autoFitD at DPR 1; the 0.9 and 0.95 steps never on an iPad)
+// The rest of the app stays at 1.0 on an iPad since 2026-10-16 (a root zoom above 1 made vh-capped sheets taller than the
+// screen); PrepNucleus keeps zoomFor() while it is open (home.js zoomOfD, ds.tabletScale).
+const appZoomFor = () => 1;
 
 // Arena and social calls answered in the browser: not joined yet, so Friends asks consent first.
 function api(url, method) {
@@ -138,13 +138,16 @@ try {
 
     // 8. zoom at boot (a split pane on an iPad keeps 1.0)
     const z0 = await ev(`return parseFloat(document.documentElement.style.zoom)||1;`);
-    if (S.w !== 390) ok(Math.abs(z0 - Z) < 0.001, "8. auto fit zoom " + z0 + " (want " + Z + ")" + at);
+    if (S.w !== 390) ok(Math.abs(z0 - appZoomFor(S.w)) < 0.001, "8. app zoom outside PrepNucleus " + z0 + " (want " + appZoomFor(S.w) + ")" + at);
 
     // ---- home
     await ev(`PREP.open(); return 1;`);
     ok(await until(`return !!document.querySelector("#smdPrep .pn-tile[data-s=anatomy]") && /MCQs/.test(document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").textContent);`, 20000), "home opens" + at);
     await sleep(400);
     ok(await geo(OVER) === "", "1. home: no horizontal overflow " + (await geo(OVER)) + at);
+    // PrepNucleus is "perfect on iPad already" (owner 2026-10-16): it keeps its iPad scale while open.
+    const zIn = await ev(`return parseFloat(document.documentElement.style.zoom)||1;`);
+    if (S.w !== 390) ok(Math.abs(zIn - Z) < 0.001, "8. PrepNucleus open: its own iPad zoom " + zIn + " (want " + Z + ")" + at);
     const al = await geo(`var t=RT.querySelector(".pn-home > .pn-next + .pn-group"), c=RT.querySelector("#pnGrid"); var a=R(t), b=R(c); return Math.abs(a.l-b.l).toFixed(1)+"|"+Math.abs(a.r-b.r).toFixed(1);`);
     ok(+al.split("|")[0] <= 1 && +al.split("|")[1] <= 1, "2. home: the Practise group shares the column's edges (left|right off by " + al + ")" + at);
     // Quiet home (2026-10-10): Practise is one list, two columns inside its card from 700 CSS px; subjects are rows, a
@@ -295,7 +298,7 @@ try {
       await metrics({ w: 507, h: 820 });
       ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - 1) < 0.001;`, 3000), "8. resize 1180 to 507: zoom recomputes to 1 (was " + z0 + ")");
       await metrics(S);
-      ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - ${zoomFor(1180)}) < 0.001;`, 3000), "8. and back to " + zoomFor(1180) + " at 1180");
+      ok(await until(`return Math.abs((parseFloat(document.documentElement.style.zoom)||1) - ${appZoomFor(1180)}) < 0.001;`, 3000), "8. and back to " + appZoomFor(1180) + " at 1180");
       await ev(`var s=JSON.parse(localStorage.getItem("smd_display_v1")||"{}"); s.autoFit=false; s.fontScale=1.3; localStorage.setItem("smd_display_v1", JSON.stringify(s)); return 1;`);
       await boot();
       await metrics({ w: 507, h: 820 }); await sleep(600);

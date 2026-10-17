@@ -10201,7 +10201,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   function zoomOfD() {
     var s = Math.min(2, Math.max(.8, +ds.fontScale || 1));
-    return document.documentElement.classList.contains("pn-open") ? prepZoomD(s, ds.autoFit) : s;
+    if (!document.documentElement.classList.contains("pn-open")) return s;
+    return ds.autoFit && ds.tabletScale > 1 ? prepZoomD(ds.tabletScale, true) : prepZoomD(s, ds.autoFit);
   }
   function zoomNowD() {
     var z = zoomOfD(), de = document.documentElement;
@@ -10233,8 +10234,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // 88vh, 92vh or 100vh (75 files) drew 8 to 15% taller than the screen: the Antibiogram organism and drug sheets lost
     // their top and their Done button, full-screen modules pushed their bottom bar off the glass. At 1.0 every module
     // lays out as it does on a phone. ?tabletzoom=1 or localStorage smd_tablet_zoom=1 restores 1.08 / 1.15.
-    if (fs > 1 && bigTouchD() && !tabletZoomD()) fs = 1;
-    if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); return; }   // nothing to re-zoom (a resize that kept the band)
+    // PrepNucleus keeps its iPad scale (owner 2026-10-16: "PrepNucleus is perfect on iPad already"): its layout was
+    // drawn and tested at 1.08 / 1.15 and has no vh-capped sheet problem, so zoomOfD() uses this while it is open.
+    var tab = fs > 1 && bigTouchD() && !tabletZoomD() ? fs : 0, tabWas = ds.tabletScale || 0;
+    ds.tabletScale = tab;
+    if (tab) fs = 1;
+    if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); if (tab !== tabWas) zoomNowD(); return; }   // nothing to re-zoom (a resize that kept the band)
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
   }
   function tabletZoomD() {
