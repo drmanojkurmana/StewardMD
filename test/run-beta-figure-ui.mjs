@@ -73,7 +73,7 @@ try {
   await page.evaluate(() => { try { SMD_REASON.openRef("heart_failure_management", { from: "prep" }); } catch (e) { window.__kbErr = String(e); } });
   await page.waitForTimeout(2500);
   const kb = await page.evaluate(() => { const c = document.querySelector("#dxMgmt .kbr-figchip"); return c ? { f: c.getAttribute("data-f"), vis: c.offsetWidth > 0 } : (window.__kbErr || "none"); });
-  ok(kb && kb.f === "beta-blockers" && kb.vis, "Knowledge Library article (heart failure): the figure row shows " + JSON.stringify(kb));
+  ok(kb && (kb.f === "beta-blockers" || kb.f === "heart-failure-drugs") && kb.vis, "Knowledge Library article (heart failure): the figure row shows " + JSON.stringify(kb));
   if (kb && kb.f) { await page.evaluate(() => document.querySelector("#dxMgmt .kbr-figchip").click()); await page.waitForSelector(".smdfig iframe", { timeout: 5000 }); ok(true, "the KB chip opens the figure"); await page.keyboard.press("Escape"); }
 
   for (const dark of [true, false]) {

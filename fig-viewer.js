@@ -137,31 +137,38 @@
 
   /* ---- organ icons (drawn, 24 x 24) and premium type ---- */
   var IC = {
-    heart: '<path d="M12 20.3C5.6 15.4 3 12.1 3 8.8 3 6.3 5 4.5 7.3 4.5c1.8 0 3.4 1 4.7 2.8 1.3-1.8 2.9-2.8 4.7-2.8C19 4.5 21 6.3 21 8.8c0 3.300-2.600 6.600-9 11.500z"/><path d="M7.500 10.500h2l1.200-2.200 1.800 4 1.200-1.800h2.300" fill="none"/>',
-    lungs: '<path d="M10.300 8.600c-3 .3-5.300 4.700-5.800 8.700-.3 2.400.8 3.600 2.500 3.500 1.900-.1 3.300-1.300 3.300-3.700V8.600z"/><path d="M13.700 8.600c3 .3 5.300 4.700 5.800 8.700.3 2.400-.8 3.600-2.500 3.500-1.900-.1-3.300-1.300-3.300-3.700V8.600z"/><path d="M12 3.200v7.300M12 10.500l-2.300 2.300M12 10.500l2.300 2.300" fill="none"/>',
-    kidney: '<path d="M15.200 4c-3.700 0-7.200 2.600-7.200 8s3.500 8 7.200 8c2.100 0 3.200-1.400 2.600-3.100-.5-1.500-2.500-1.900-2.500-4.900s2-3.400 2.500-4.900C18.400 5.400 17.300 4 15.200 4z"/>',
-    brain: '<path d="M9 4.500C6.500 4.500 5 6.300 5 8c-1.700.7-2.500 2.200-2 3.800.3 1 1 1.700 1.600 2.100-.2 1.800.9 3.100 2.400 3.400C7.300 19 8.500 20 10 20h2V5.300c-.6-.5-1.800-.8-3-.8z"/><path d="M15 4.500c2.500 0 4 1.800 4 3.500 1.700.7 2.500 2.200 2 3.800-.3 1-1 1.700-1.600 2.100.2 1.800-.9 3.100-2.400 3.400-.3 1.700-1.500 2.700-3 2.700h-2V5.300c.6-.5 1.800-.8 3-.8z"/>',
-    liver: '<path d="M3 9.500C3 7.800 4.100 6.700 5.800 6.700H19.500c1.100 0 1.800.9 1.500 2-1 4-3.400 8.300-9 8.300-3.400 0-5.200-1-6.300-3.100C5.300 12.500 3 12 3 9.500z"/><path d="M12.500 6.800c.2 2.300 1 4.200 2.500 5.500" fill="none"/>',
-    stomach: '<path d="M8 3.500c0 2.500 2 3.100 4.500 4.100 2.800 1.100 5.500 2.700 5.500 6 0 3.600-2.600 6.200-6 6.200-3.200 0-5.500-2.300-5.500-5.500 0-2.800 1.500-3.800 1.500-5.800" /><path d="M11 3.500h-3" fill="none"/>',
-    gut: '<path d="M5 7.500h11a3 3 0 010 6H8a3 3 0 000 6h11" fill="none" stroke-width="2.600"/>',
-    bone: '<path d="M8 16l8-8" fill="none" stroke-width="3.200"/><circle cx="6.300" cy="15.200" r="2.100"/><circle cx="8.800" cy="17.700" r="2.100"/><circle cx="15.200" cy="6.300" r="2.100"/><circle cx="17.700" cy="8.800" r="2.100"/>',
-    bladder: '<path d="M12 3.500v3.200" fill="none"/><path d="M7 11.500c0-2.600 2.200-4.700 5-4.700s5 2.100 5 4.700c0 3.600-1.500 6.800-5 8.700-3.500-1.900-5-5.100-5-8.700z"/>',
-    uterus: '<path d="M12 5c2 0 3.200 1.100 3.200 3.100 0 1.600-.6 2.200-.6 3.700 0 1.600 1.700 2.200 2.700 3.700 1 1.500.4 3.600-1.200 4.100-1.500.5-2.600-.6-4.100-.6s-2.600 1.100-4.100.6c-1.600-.5-2.200-2.600-1.200-4.100 1-1.500 2.700-2.100 2.700-3.700 0-1.500-.6-2.100-.6-3.700C8.800 6.100 10 5 12 5z"/>',
-    thyroid: '<path d="M12 8.500v8" fill="none"/><path d="M12 10.500C9 8.300 5.500 8.800 5 11.800c-.4 2.600 1.500 5 4.500 5 1.500 0 2.500-.6 2.500-2.100zM12 10.500c3-2.200 6.500-1.700 7 1.300.4 2.600-1.500 5-4.500 5-1.500 0-2.500-.6-2.500-2.100z"/>',
-    vessel: '<path d="M12 3.500c3.600 4.300 6 7.300 6 10.600a6 6 0 01-12 0c0-3.300 2.400-6.300 6-10.600z"/><path d="M9 14.500a3 3 0 003 3" fill="none"/>',
-    muscle: '<path d="M3.500 14c2.300-5.500 5.500-5.500 8.500-1s6.200 4.500 8.500-1" fill="none" stroke-width="2.800"/>'
-  };
-  var IC_RE = [["heart", /heart|cardiac|myocyte|ventric|atri(?:al|um)|sinoatrial|\bAV\b|\bSA\b/i], ["lungs", /airway|lung|bronch|respirat|breath|pulmon|alveol/i], ["kidney", /kidney|renal|nephron|tubule|collecting duct|urine/i],
-    ["brain", /brain|neuron|cognit|seizure|cortex|mood|manic|alertness|consciousness|nerve fib/i], ["liver", /liver|hepat/i], ["stomach", /stomach|gastric|parietal|\bacid\b/i], ["gut", /\bgut\b|bowel|intestin|stool|lumen|colon/i],
-    ["bone", /\bbone|osteo/i], ["bladder", /bladder|detrusor/i], ["uterus", /uter|labou?r/i], ["thyroid", /thyroid/i], ["vessel", /vessel|blood pressure|vascular|clot|\bpressure/i], ["muscle", /muscle|spasm|\btone\b|contraction/i]];
-  var IC_CSS = ".smdi{fill:var(--ic);fill-opacity:.28;stroke:var(--ic);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}svg.smdi-h{width:1.25em;height:1.25em;vertical-align:-.28em;margin-right:.18em;display:inline-block;fill:var(--ic);fill-opacity:.28;stroke:var(--ic);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}" +
-    ".ic-heart{--ic:#ef4444}.ic-lungs{--ic:#f472b6}.ic-kidney{--ic:#d9622b}.ic-brain{--ic:#c084fc}.ic-liver{--ic:#c2763a}.ic-stomach{--ic:#fb923c}.ic-gut{--ic:#f5b342}.ic-bone{--ic:#94a3b8}.ic-bladder{--ic:#e3b92e}.ic-uterus{--ic:#fb7185}.ic-thyroid{--ic:#a78bfa}.ic-vessel{--ic:#f87171}.ic-muscle{--ic:#f97316}" +
+heart:'<path class="a" d="M32 57C14 43 6 33 6 22 6 13 13 8 21 8c5 0 9 3 11 7 2-4 6-7 11-7 8 0 15 5 15 14 0 11-8 21-26 35z"/><path class="b" d="M32 15c-1 14 2 29 0 42C16 45 8 35 7 24c3 9 12 15 25 16z"/><path class="a" d="M25 14c-1-7 4-11 10-10 6 1 8 6 8 11" fill="none" stroke-width="5"/><path class="d" d="M43 8c3-1 7 0 9 3M21 9c-3-2-7 0-8 3" fill="none"/><path class="c" d="M12 18c2-5 6-7 10-6M34 24c1 6 0 12-1 17" fill="none"/><path class="d" d="M24 24c3 3 3 8 1 12M44 22c-2 4-2 9 1 13" fill="none"/>',
+lungs:'<path class="a" d="M26 20c-8 1-15 14-17 28-1 7 3 11 8 10 6-1 10-5 10-12V20z"/><path class="a" d="M38 20c8 1 15 14 17 28 1 7-3 11-8 10-6-1-10-5-10-12V20z"/><path class="b" d="M26 20c-8 1-15 14-17 28 5-4 12-4 17 0zM38 20c8 1 15 14 17 28-5-4-12-4-17 0z"/><path class="c" d="M32 4v22M32 26l-9 9M32 26l9 9M23 35l-5 7M23 35l6 6M41 35l5 7M41 35l-6 6" fill="none" stroke-width="2.4"/><path class="d" d="M18 42l-4 5M46 42l4 5M20 30l-3 3M44 30l3 3" fill="none"/>',
+kidney:'<path class="a" d="M38 5C21 5 9 17 9 32s12 27 29 27c8 0 11-6 8-11-3-6-8-9-8-16s5-10 8-16c3-5 0-11-8-11z"/><path class="b" d="M38 5C21 5 9 17 9 32c6-6 14-9 22-9 4 0 8 1 13 3-3-7 0-12 2-17 1-3 0-4-8-4z"/><path class="c" d="M20 22c4-3 9-4 13-3M18 36c4 3 9 4 14 3M20 46c5 3 10 3 14 1" fill="none"/><path class="d" d="M46 30h9c3 0 5 2 5 5v22" fill="none" stroke-width="4"/>',
+brain:'<path class="a" d="M10 35C5 25 11 10 26 8c8-4 20-2 26 6 8 4 9 16 3 22-2 8-9 12-16 10l-1 8H27v-8C18 46 13 42 10 35z"/><path class="b" d="M10 35C5 25 11 10 26 8c-8 8-9 20-5 30-5 0-9-1-11-3z"/><path class="c" d="M24 14c4 4 3 9 7 11s3 8-1 10M38 12c-3 4-2 8 2 10s5 6 3 11M46 20c1 4 5 5 6 9M16 28c4 0 7-2 9-5" fill="none"/><path class="d" d="M38 46c6 2 12-1 13-7" fill="none"/>',
+liver:'<path class="a" d="M5 26c0-9 8-14 19-12l28 5c7 2 9 8 5 16-7 14-19 20-33 17C13 50 5 42 5 26z"/><path class="b" d="M5 26c0-9 8-14 19-12l8 1c-6 10-6 22-1 36C13 50 5 42 5 26z"/><path class="c" d="M30 16c1 8 3 15 8 21" fill="none"/><path class="d" d="M20 28c4 3 10 4 15 3" fill="none"/><path class="a" d="M38 46c0 6 6 10 11 6 2-2 0-8-4-9z"/>',
+stomach:'<path class="a" d="M22 5c0 7 5 9 13 12 12 4 19 11 19 23 0 11-8 18-20 18-12 0-20-8-20-19 0-8 6-12 6-18 0-6-3-11 2-16z"/><path class="b" d="M22 5c0 7 5 9 13 12 12 4 19 11 19 23-8-5-16-5-24-2-8 3-12 8-12 14-6-14 6-20 6-30 0-6-3-12-2-17z"/><path class="c" d="M28 24c5 2 9 5 12 9M24 34c6 0 11 2 15 6M26 44c5-1 9 0 12 2" fill="none"/><path class="d" d="M15 6h10" fill="none" stroke-width="5"/>',
+gut:'<path class="s1" d="M10 15h37c8 0 8 14 0 14H18c-9 0-9 14 0 14h31c9 0 9 12 0 12H13"/><path class="s2" d="M10 15h37c8 0 8 14 0 14H18c-9 0-9 14 0 14h31c9 0 9 12 0 12H13"/>',
+bone:'<g transform="rotate(-45 32 32)"><rect class="a" x="13" y="26.5" width="38" height="11" rx="5"/><circle class="a" cx="11" cy="25" r="6.5"/><circle class="a" cx="11" cy="39" r="6.5"/><circle class="a" cx="53" cy="25" r="6.5"/><circle class="a" cx="53" cy="39" r="6.5"/><path class="b" d="M13 33h38v4.500a5 5 0 01-5 0H18a5 5 0 01-5 0z"/><path class="c" d="M18 29.500h28" fill="none"/><path class="d" d="M8 25h5M8 39h5M51 25h5M51 39h5" fill="none"/></g>',
+bladder:'<path class="a" d="M32 56c-17 0-21-14-17-24 3-7 9-9 9-17V8h16v7c0 8 6 10 9 17 4 10 0 24-17 24z"/><path class="b" d="M15 32c3-7 9-9 9-17V8l8 0c-3 12-1 30 0 48-17 0-21-14-17-24z"/><path class="c" d="M24 8v8M40 8v8" fill="none" stroke-width="3"/><path class="d" d="M24 38c4 4 12 4 16 0" fill="none"/><path class="a" d="M32 56v6" fill="none" stroke-width="4"/>',
+uterus:'<path class="a" d="M22 20c0-8 5-13 10-13s10 5 10 13c0 12 5 22-4 31-3 3-9 3-12 0-9-9-4-19-4-31z"/><path class="b" d="M22 20c0-8 5-13 10-13-3 14-2 30 1 44-3 0-6-1-8-3-9-9-4-19-4-31z"/><path class="c" d="M22 19c-6-2-10-6-14-6M42 19c6-2 10-6 14-6" fill="none" stroke-width="3"/><circle class="a" cx="8" cy="14" r="4"/><circle class="a" cx="56" cy="14" r="4"/><path class="d" d="M27 28c3 2 7 2 10 0" fill="none"/>',
+thyroid:'<path class="a" d="M32 18c-9-8-22-4-23 8-1 11 7 20 17 20 4 0 6-3 6-7zM32 18c9-8 22-4 23 8 1 11-7 20-17 20-4 0-6-3-6-7z"/><path class="b" d="M32 18c-9-8-22-4-23 8 4-4 10-5 15-3 4 1 6 4 8 8zM32 18c9-8 22-4 23 8-4-4-10-5-15-3-4 1-6 4-8 8z"/><path class="c" d="M32 18v22" fill="none" stroke-width="3"/><path class="d" d="M30 6v10M34 6v10M30 50v10M34 50v10" fill="none"/>',
+vessel:'<circle class="a" cx="32" cy="32" r="28"/><circle class="b" cx="32" cy="32" r="22"/><circle class="a" cx="32" cy="32" r="15"/><circle class="e" cx="32" cy="32" r="11"/><ellipse class="r" cx="28" cy="30" rx="4.5" ry="2.8"/><ellipse class="r" cx="36" cy="35" rx="4.5" ry="2.8"/><ellipse class="r" cx="34" cy="27" rx="3.6" ry="2.4"/><path class="c" d="M12 24c3-8 10-13 18-14" fill="none"/>',
+eye:'<circle class="a" cx="36" cy="32" r="24"/><path class="b" d="M36 8c13 0 24 11 24 24S49 56 36 56c9-6 11-18 7-27-2-7-4-14-7-21z"/><path class="a" d="M12 32c0-9 5-14 11-17v34c-6-3-11-8-11-17z"/><ellipse class="e" cx="24" cy="32" rx="5" ry="12"/><path class="c" d="M20 20c-3 2-5 6-5 12M23 16v32" fill="none"/><path class="d" d="M26 18c6 2 10 6 12 14M26 46c6-2 10-6 12-14" fill="none"/>',
+muscle:'<path class="a" d="M4 32c0-9 9-14 20-14h16c11 0 20 5 20 14S51 46 40 46H24C13 46 4 41 4 32z"/><path class="b" d="M4 32c0-9 9-14 20-14h16c11 0 20 5 20 14-12-3-24-2-56 0z"/><path class="c" d="M12 24v16M20 21v22M28 20v24M36 20v24M44 21v22M52 24v16" fill="none"/><ellipse class="e" cx="20" cy="26" rx="3.5" ry="1.8"/><ellipse class="e" cx="46" cy="38" rx="3.5" ry="1.8"/>',
+neuron:'<path class="a" d="M32 22c-6 0-10 4-10 10s4 10 10 10 10-4 10-10-4-10-10-10z"/><path class="a" d="M26 25L12 12M12 12l-6-2M12 12l2-7M24 38L10 50M10 50l-5 1M10 50l2 6M38 25l12-12M50 13l6-1M50 13l-1-7" fill="none" stroke-width="3"/><path class="a" d="M40 36l16 18" fill="none" stroke-width="3.4"/><circle class="b" cx="58" cy="57" r="4"/><circle class="e" cx="31" cy="31" r="4.6"/><path class="c" d="M25 28c2-4 6-6 10-5" fill="none"/>',
+skin:'<rect class="a" x="4" y="6" width="56" height="9" rx="3"/><rect class="b" x="4" y="15" width="56" height="26"/><rect class="a" x="4" y="41" width="56" height="17" rx="3"/><path class="c" d="M38 15V1" fill="none" stroke-width="2.4"/><path class="d" d="M36 15c0 8 1 16 4 20" fill="none" stroke-width="3"/><ellipse class="e" cx="30" cy="26" rx="6" ry="9"/><circle class="e" cx="46" cy="30" r="3"/><circle class="e" cx="14" cy="28" r="3"/>',
+joint:'<path class="a" d="M14 3h22v13c0 9-4 12-11 12S14 25 14 16z"/><path class="a" d="M10 46h30c4 0 7 3 7 7v9H8v-9c0-4 0-7 2-7z" transform="translate(0 -1)"/><path class="b" d="M13 31h24v6H13z"/><path class="c" d="M16 14c0-4 2-7 6-8" fill="none"/><path class="d" d="M44 18c5 2 8 8 8 16M44 44c4-3 7-6 8-10" fill="none" stroke-width="2"/>',
+cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx="32" cy="32" rx="22" ry="16"/><circle class="e" cx="36" cy="30" r="8"/><circle class="d" cx="22" cy="38" r="3"/><circle class="d" cx="44" cy="40" r="2.4"/>'
+};
+  var IC_RE = [["eye", /\beye|aqueous|intraocular|retina|pupil/i], ["heart", /heart|cardiac|myocyte|ventric|atri(?:al|um)|sinoatrial|\bAV\b|\bSA\b/i], ["lungs", /airway|lung|bronch|respirat|breath|pulmon|alveol/i], ["kidney", /kidney|renal|nephron|tubule|collecting duct|urine/i],
+    ["neuron", /neuron|nerve|synap|axon/i], ["brain", /brain|cognit|seizure|cortex|mood|manic|alertness|consciousness|dementia/i], ["liver", /liver|hepat/i], ["stomach", /stomach|gastric|parietal|\bacid\b|nausea|vomit/i], ["gut", /\bgut\b|bowel|intestin|stool|lumen|colon/i],
+    ["bone", /\bbone|osteo/i], ["bladder", /bladder|detrusor/i], ["uterus", /uter|labou?r|womb/i], ["thyroid", /thyroid/i], ["skin", /\bskin|acne|follicle|sebum/i], ["joint", /\bjoint|gout|arthritis|synovi/i], ["vessel", /vessel|blood pressure|vascular|clot/i], ["muscle", /muscle|spasm|\btone\b|contraction/i]];
+  var IC_CSS = ".smdi .a,svg.smdi-h .a{fill:color-mix(in srgb,var(--ic) 62%,var(--anatomy-paper));stroke:var(--ic);stroke-width:1.4;stroke-linejoin:round;stroke-linecap:round}.smdi .b,svg.smdi-h .b{fill:color-mix(in srgb,var(--ic) 40%,var(--anatomy-shade-0));stroke:none;opacity:.55}.smdi .c,svg.smdi-h .c{fill:none;stroke:#fff;stroke-opacity:.5;stroke-width:1.5;stroke-linecap:round}.smdi .d,svg.smdi-h .d{fill:none;stroke:var(--ic);stroke-opacity:.9;stroke-width:1.1;stroke-linecap:round}.smdi .e,svg.smdi-h .e{fill:color-mix(in srgb,var(--ic) 30%,var(--anatomy-shade-0));stroke:var(--ic);stroke-width:1}.smdi .r,svg.smdi-h .r{fill:#ef4444;stroke:#7f1d1d;stroke-width:.6}.smdi .s1,svg.smdi-h .s1{fill:none;stroke:var(--ic);stroke-width:10;stroke-linecap:round;stroke-linejoin:round}.smdi .s2,svg.smdi-h .s2{fill:none;stroke:color-mix(in srgb,var(--ic) 55%,var(--anatomy-paper));stroke-width:7;stroke-linecap:round;stroke-linejoin:round}.smdi{pointer-events:none}svg.smdi-h{width:1.5em;height:1.5em;vertical-align:-.4em;margin-right:.15em;display:inline-block;overflow:visible}" +
+    ".ic-heart{--ic:#ef4444}.ic-lungs{--ic:#f472b6}.ic-kidney{--ic:#d9622b}.ic-brain{--ic:#c084fc}.ic-liver{--ic:#c2763a}.ic-stomach{--ic:#fb923c}.ic-gut{--ic:#f5b342}.ic-bone{--ic:#cbd5e1}.ic-bladder{--ic:#e3b92e}.ic-uterus{--ic:#fb7185}.ic-thyroid{--ic:#a78bfa}.ic-vessel{--ic:#f87171}.ic-muscle{--ic:#f97316}.ic-eye{--ic:#38bdf8}.ic-neuron{--ic:#e879f9}.ic-skin{--ic:#fdba74}.ic-joint{--ic:#94a3b8}.ic-cell{--ic:#4c8dff}" +
     "@font-face{font-family:'Inter Variable';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-variable.woff2) format('woff2')}@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/bricolage-grotesque.woff2) format('woff2')}" +
     "body.iso{--anatomy-mono:'Inter Variable',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,system-ui,sans-serif;--k-disp:'Bricolage Grotesque','Inter Variable',-apple-system,system-ui,sans-serif}" +
     ".dr-label{letter-spacing:0;font-weight:450}.dr-label.dr-name,.dr-step{font-weight:560}.dr-prot,.dr-nl{font-family:var(--k-disp);font-weight:600;letter-spacing:.005em}.dr-title,.dr-out{font-family:var(--k-disp);font-weight:650;letter-spacing:.005em}.dr-sub{letter-spacing:.01em}" +
-    ".dr-chip text,.dr-enz text{font-family:'Inter Variable',system-ui,sans-serif}";
+    ".dr-chip text,.dr-enz text{font-family:'Inter Variable',system-ui,sans-serif}" + ".smds-head{fill:var(--k-mem);fill-opacity:.9}.smds-head.smds-in{fill-opacity:.65}.smds-tail{fill:none;stroke:var(--k-mem);stroke-opacity:.5;stroke-width:.9;stroke-linecap:round}.smds-nuc{fill:color-mix(in srgb,var(--k-gp) 55%,transparent);stroke:var(--k-gp);stroke-width:1}" +
+    ".smds-src .smds-head,.smds-src .smds-tail{fill:var(--k-src);stroke:var(--k-src)}.smds-src .smds-tail{fill:none}.smds-cargo{fill:var(--k-vs);stroke:none}.smds-tissue{fill:none;stroke:var(--k-out);stroke-opacity:.55;stroke-width:1.3;stroke-dasharray:1 3.2;stroke-linecap:round}.smds-cell{fill:color-mix(in srgb,var(--k-out) 38%,transparent);stroke:var(--k-out);stroke-opacity:.7;stroke-width:.8}.smds-hole{fill:none;stroke:var(--k-bad);stroke-width:2;stroke-dasharray:7 5;stroke-linecap:round}" +
+    ".smds-rec rect{fill:color-mix(in srgb,var(--k-rec) 45%,var(--anatomy-paper));stroke:var(--k-rec);stroke-width:1.2}.smds-mid~.bio-blob-edge{opacity:.4}g.dr-node:has(.smds) .bio-blob-edge{opacity:.35}g.dr-node:has(.smds) .bio-blob-highlight{opacity:.25}";
   function iconKey(t) { for (var i = 0; i < IC_RE.length; i++) if (IC_RE[i][1].test(t)) return IC_RE[i][0]; return null; }
-  function iconHtml(k) { return '<svg class="smdi-h ic-' + k + '" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + "</svg>"; }
+  function iconHtml(k) { return '<svg class="smdi-h ic-' + k + '" viewBox="0 0 64 64" aria-hidden="true">' + IC[k] + "</svg>"; }
   /* in text shown in HTML (the comparison rows): put the drawn icon before the first word of each organ */
   function withIcons(txt) {
     var out = String(txt).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), used = {};
@@ -175,11 +182,12 @@
     function place() {
       if (busy) return; busy = true;
       Array.prototype.forEach.call(svg.querySelectorAll("text.dr-out, text.dr-title, .dr-n-calc text.dr-nl, .dr-n-calc text.dr-prot"), function (t) {
+        if (t.closest && t.closest(".smds-art")) return;
         var k = iconKey(t.textContent), g = t.previousSibling, has = g && g.nodeType === 1 && g.getAttribute && g.getAttribute("data-ic") !== null;
         if (!k) { if (has) g.parentNode.removeChild(g); return; }
         var bb; try { bb = t.getBBox(); } catch (e) { return; } if (!bb || !bb.width) return;
         if (!has) { g = doc.createElementNS(NS, "g"); g.setAttribute("data-ic", ""); t.parentNode.insertBefore(g, t); }
-        var sz = Math.max(15, Math.min(20, bb.height * 1.25)), tr = "translate(" + (bb.x - sz - 4).toFixed(1) + " " + (bb.y + bb.height / 2 - sz / 2).toFixed(1) + ") scale(" + (sz / 24).toFixed(3) + ")";
+        var sz = Math.max(20, Math.min(30, bb.height * 1.9)), tr = "translate(" + (bb.x - sz - 4).toFixed(1) + " " + (bb.y + bb.height / 2 - sz / 2).toFixed(1) + ") scale(" + (sz / 64).toFixed(3) + ")";
         var cl = "smdi ic-" + k; if (g.getAttribute("class") !== cl) { g.setAttribute("class", cl); g.innerHTML = IC[k]; }
         if (g.getAttribute("transform") !== tr) g.setAttribute("transform", tr);
         var op = t.style.opacity || "1"; if (g.style.opacity !== op) g.style.opacity = op;
@@ -189,6 +197,55 @@
     place();
     try { new doc.defaultView.MutationObserver(place).observe(svg, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["style"] }); } catch (e) {}
     try { if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { place(); setTimeout(place, 250); }); } catch (e) {}
+  }
+
+  /* ---- scenery: cells with a real lipid bilayer, vesicles, tissue, and receptors crossing the membrane (flow-chart figures) ---- */
+  var MEM_RE = /receptor|channel|transporter|pump|exchang|ENaC|NKCC|NCC\b|SGLT|URAT|NPC1L1|P2Y12|SERT|reuptake|NHE|ATPase|M3|AT1|V1|V2|NK1|MT1|alpha-|beta-|GABA-A|NMDA|5-HT|D2|H1|CysLT|GLUT|aquaporin|TRP|integrin|IL-6/i;
+  function scenery(doc) {
+    var svg = doc.querySelector("svg.dr-fig, svg.iso-svg"); if (!svg || !svg.querySelector("g.dr-node")) return;
+    var NS = "http://www.w3.org/2000/svg";
+    function el(n, a, p) { var e = doc.createElementNS(NS, n); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
+    function ring(cx, cy, a, b, gap) { var pts = [], t = 0, g = 0; while (t < 6.2832 && g++ < 400) { pts.push([cx + a * Math.cos(t), cy + b * Math.sin(t), t]); var ds = Math.sqrt(a * a * Math.sin(t) * Math.sin(t) + b * b * Math.cos(t) * Math.cos(t)); t += gap / Math.max(ds, 1); } return pts; }
+    function heads(pts, r) { var d = ""; pts.forEach(function (q) { d += "M" + (q[0] + r).toFixed(1) + " " + q[1].toFixed(1) + "a" + r + " " + r + " 0 1 0 " + (-2 * r) + " 0a" + r + " " + r + " 0 1 0 " + (2 * r) + " 0"; }); return d; }
+    Array.prototype.forEach.call(svg.querySelectorAll("g.dr-node"), function (g) {
+      var cls = g.getAttribute("class") || "", base = g.querySelector("path.bio-blob-base"), blob = g.querySelector("g.bio-blob"); if (!base || !blob || g.querySelector(".smds")) return;
+      var bb = base.getBBox(), cx = bb.x + bb.width / 2, cy = bb.y + bb.height / 2, a = bb.width / 2 - 1.5, b = bb.height / 2 - 1.5;
+      var kind = /dr-n-source/.test(cls) ? "src" : /dr-n-calc/.test(cls) ? "out" : /dr-n-inv/.test(cls) ? "bad" : "mid";
+      var gs = el("g", { "class": "smds smds-" + kind, "pointer-events": "none" });
+      var oa = a, ob = b, ia = a - 5.5, ib = Math.max(b - 5.5, 5);
+      var o = ring(cx, cy, oa, ob, 6.2), n = ring(cx, cy, ia, ib, 6.2);
+      if (kind === "mid" || kind === "src") {
+        el("path", { "class": "smds-tail", d: o.map(function (q, i) { var w = n[Math.min(n.length - 1, Math.round(i * (n.length - 1) / Math.max(1, o.length - 1)))]; return "M" + q[0].toFixed(1) + " " + q[1].toFixed(1) + "L" + w[0].toFixed(1) + " " + w[1].toFixed(1); }).join("") }, gs);
+        el("path", { "class": "smds-head", d: heads(o, 1.7) }, gs);
+        if (kind === "mid") el("path", { "class": "smds-head smds-in", d: heads(n, 1.5) }, gs);
+        if (kind === "src") { [[-0.86, -0.1], [-0.8, 0.22], [0.84, -0.12], [0.78, 0.2]].forEach(function (c) { el("circle", { "class": "smds-cargo", cx: (cx + c[0] * ia).toFixed(1), cy: (cy + c[1] * ib).toFixed(1), r: 2.1 }, gs); }); }
+        else { el("ellipse", { "class": "smds-nuc", cx: (cx + ia * 0.74).toFixed(1), cy: cy.toFixed(1), rx: 5.5, ry: Math.max(3, ib * 0.5) }, gs); }
+      } else if (kind === "out") {
+        el("ellipse", { "class": "smds-tissue", cx: cx, cy: cy, rx: (a - 3.5).toFixed(1), ry: (b - 3.5).toFixed(1) }, gs);
+        [[-0.7, -0.3], [-0.5, 0.35], [0.66, -0.25], [0.52, 0.38], [0.8, 0.05], [-0.82, 0.08]].forEach(function (c) { el("ellipse", { "class": "smds-cell", cx: (cx + c[0] * a * 0.9).toFixed(1), cy: (cy + c[1] * b * 0.9).toFixed(1), rx: 4.2, ry: 3 }, gs); });
+      } else {
+        el("ellipse", { "class": "smds-hole", cx: cx, cy: cy, rx: (a - 2).toFixed(1), ry: (b - 2).toFixed(1) }, gs);
+      }
+      blob.parentNode.insertBefore(gs, blob.nextSibling);
+      var lt = g.querySelector("text.dr-nl, text.dr-prot"), key = lt ? iconKey(lt.textContent) : null;
+      if (key) {
+        var sz = Math.min(58, b * 2 + 12), ag = el("g", { "class": "smdi ic-" + key, transform: "translate(" + (cx - a + 8).toFixed(1) + " " + (cy - sz / 2).toFixed(1) + ") scale(" + (sz / 64).toFixed(3) + ")" }, null);
+        ag.innerHTML = IC[key]; g.insertBefore(ag, lt);
+        Array.prototype.forEach.call(g.querySelectorAll("text"), function (tx) { tx.setAttribute("transform", "translate(" + Math.round(sz / 2 - 2) + " 0)"); });
+        g.setAttribute("class", cls + " smds-art");
+      }
+    });
+    /* a receptor, channel or transporter step: three helices crossing the cell's membrane where the arrow enters */
+    Array.prototype.forEach.call(svg.querySelectorAll("g.dr-enz"), function (pill) {
+      var t = pill.querySelector("text"), info = pill.getAttribute("data-info") || ""; if (!t || !MEM_RE.test(t.textContent)) return;
+      var ln = pill.previousSibling, guard = 0; while (ln && guard++ < 6 && !(ln.getAttribute && /flowline/.test(ln.getAttribute("class") || ""))) ln = ln.previousSibling;
+      if (!ln || !ln.getAttribute) return;
+      var nums = (ln.getAttribute("d") || "").match(/-?\d+(?:\.\d+)?/g); if (!nums || nums.length < 4) return;
+      var x1 = +nums[0], y1 = +nums[1], x2 = +nums[nums.length - 2], y2 = +nums[nums.length - 1], ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+      var gr = el("g", { "class": "smds-rec", "pointer-events": "none", transform: "translate(" + x2.toFixed(1) + " " + y2.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")" });
+      [-7, 0, 7].forEach(function (dy) { el("rect", { x: -11, y: dy - 2.8, width: 22, height: 5.6, rx: 2.8 }, gr); });
+      svg.appendChild(gr);
+    });
   }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
@@ -202,7 +259,7 @@
     }
     /* a tap on a labelled part shows its explanation (touch has no hover) */
     Array.prototype.forEach.call(doc.querySelectorAll(".hot"), function (h) { h.addEventListener("touchend", function () { try { h.focus(); } catch (e) {} }, { passive: true }); });
-    legend(doc); arrows(doc); organIcons(doc); compare(doc); zoomer(doc, win);
+    legend(doc); arrows(doc); scenery(doc); organIcons(doc); compare(doc); zoomer(doc, win);
   }
   function zoomer(doc, win) {
     var box = doc.querySelector(".dr-svg") || doc.querySelector(".iso-plate"), svg = box && box.querySelector("svg");
