@@ -451,6 +451,11 @@
     root.setAttribute("aria-label", "ECG rhythm course");
     render();
     document.body.appendChild(root);
+    try {
+      if (typeof window !== "undefined" && window.CodeBluePrefs) {
+        window.CodeBluePrefs.apply(root);
+      }
+    } catch (e) {}
     var c = root.querySelector("[data-cbecg-close]");
     if (c) c.focus();
     return true;
@@ -474,6 +479,7 @@
   function headHtml() {
     return '<div class="cbecg-head"><span class="cbecg-train">TRAINING</span>' +
       '<span class="cbecg-title">ECG rhythm course</span>' +
+      '<button class="cbecg-x" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button class="cbecg-x" data-cbecg-close aria-label="Close ECG course">Close</button></div>' +
       '<p class="cbecg-dis">' + escH(DISCLAIMER) + "</p>" +
       '<p class="cbecg-edu">' + escH(EDU_NOTE) + "</p>";

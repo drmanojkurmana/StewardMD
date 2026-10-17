@@ -667,6 +667,7 @@
     rearrest: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>',
     sound: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h4l5 4V6l-5 4H4z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
+    gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3h-4l-.4 2.5a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2.4l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.5h4l.4-2.5a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.06-.4.1-.8.1-1.2z"/></svg>',
     log: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 7"/></svg>'
   };
@@ -725,6 +726,8 @@
     return '<div class="cbl-status">' + modeChip + badge +
       '<button type="button" class="cbl-iconbtn" data-act="audio" aria-label="Sound settings">' +
       ICONS.sound + '<span>Sound</span></button>' +
+      '<button type="button" class="cbl-iconbtn" data-cbp-settings aria-label="Display settings">' +
+      ICONS.gear + "</button>" +
       '<button type="button" class="cbl-iconbtn" data-act="close" aria-label="Close live code">' +
       ICONS.close + "</button></div>";
   }
@@ -802,23 +805,57 @@
     return "CPR";
   }
 
+  /* Tile layout comes from window.CodeBluePrefs when present: order,
+   * hidden set and up to 4 custom buttons. Defaults keep the section 4
+   * order with nothing hidden and no custom buttons. */
+  function prefTiles() {
+    try {
+      if (typeof window !== "undefined" && window.CodeBluePrefs && window.CodeBluePrefs.tiles) {
+        return window.CodeBluePrefs.tiles();
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  var TILE_DEFS = {
+    shock: { icon: "shock", label: "Shock" },
+    epi: { icon: "epi", label: "Epinephrine" },
+    rhythm: { icon: "rhythm", label: "Rhythm" },
+    pause: { icon: "pause", label: "Pause" },
+    proc: { icon: "proc", label: "Procedure" },
+    note: { icon: "note", label: "Note" },
+    rosc: { icon: "rosc", label: "ROSC" }
+  };
+  var TILE_ORDER_DEFAULT = ["shock", "epi", "rhythm", "pause", "proc", "note", "rosc"];
+
   function tilesView(elapsed) {
-    var tiles = [
-      { kind: "shock", icon: "shock", label: "Shock" },
-      { kind: "epi", icon: "epi", label: "Epinephrine" },
-      { kind: "rhythm", icon: "rhythm", label: "Rhythm" },
-      !paused && (sess.rosc || sess.hadRosc)
-        ? { kind: "rearrest", icon: "rearrest", label: "Re-arrest" }
-        : { kind: "pause", icon: "pause", label: "Pause" },
-      { kind: "proc", icon: "proc", label: "Procedure" },
-      { kind: "note", icon: "note", label: "Note" },
-      { kind: "rosc", icon: "rosc", label: "ROSC" }
-    ];
+    var order = TILE_ORDER_DEFAULT.slice(), hidden = {}, custom = [];
+    var pref = prefTiles();
+    if (pref) {
+      if (pref.order && pref.order.length) order = pref.order.slice();
+      if (pref.hidden) hidden = pref.hidden;
+      if (pref.custom) custom = pref.custom;
+    }
+    var tiles = [];
+    order.forEach(function (id) {
+      if (hidden[id] || !TILE_DEFS[id]) return;
+      if (id === "pause" && !paused && (sess.rosc || sess.hadRosc)) {
+        tiles.push({ kind: "rearrest", icon: "rearrest", label: "Re-arrest" });
+      } else {
+        tiles.push({ kind: id, icon: TILE_DEFS[id].icon, label: TILE_DEFS[id].label });
+      }
+    });
     /* Re-arrest replaces Pause once ROSC has happened; otherwise Pause shows. */
+    custom.forEach(function (c) {
+      if (c && c.id && c.label) tiles.push({ kind: "custom", icon: "note", label: c.label, cid: c.id });
+    });
     var html = '<div class="cbl-grid">';
     tiles.forEach(function (t) {
+      var extra = t.kind === "custom"
+        ? '" data-act="tile-custom" data-id="' + esc(t.cid)
+        : '" data-act="tile-' + t.kind;
       html += '<button type="button" class="cbl-tile' + (t.kind === "rearrest" ? " cbl-tile-re" : "") +
-        '" data-act="tile-' + t.kind + '" aria-label="' + esc(t.label) + '">' + tileInner(t.kind, t.label, elapsed) + "</button>";
+        extra + '" aria-label="' + esc(t.label) + '">' + tileInner(t.kind, t.label, elapsed) + "</button>";
     });
     return html + "</div>";
   }
@@ -931,10 +968,15 @@
 
   function logRows() {
     var elapsed = nowElapsed();
-    if (!sess.events.length) {
+    /* System entries seeded at Start stay in the payload but never fill
+     * the visible log, so a fresh code keeps the empty-log state. */
+    var visible = sess.events.filter(function (e) {
+      return e.kind !== "modeSet" && e.kind !== "cprStart";
+    });
+    if (!visible.length) {
       return '<p class="cbl-empty" data-state="empty-log">No events yet. Logged actions will appear here.</p>';
     }
-    var rows = sess.events.slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
+    var rows = visible.slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
     return '<ul class="cbl-log">' + rows.map(function (e) {
       return '<li data-id="' + esc(e.id) + '"><span class="cbl-logt">' + esc(fmtMMSS(e.elapsed)) + "</span>" +
         '<span class="cbl-logl">' + esc(e.label) + (e.edited ? ' <span class="cbl-edited">edited</span>' : "") + "</span>" +
@@ -1138,6 +1180,8 @@
     fired = {};
     storeError = false;
     view = "running";
+    logEvent(sess, "modeSet", "Mode: " + MODE_LABEL[sess.mode], 0);
+    logEvent(sess, "cprStart", null, 0);
     persist();
     render();
     if (A && !sess.training) {
@@ -1280,6 +1324,18 @@
     }
     if (act === "tile-proc") { openProcSheet(); return; }
     if (act === "tile-note") { openNoteSheet(); return; }
+    if (act === "tile-custom") {
+      var customId = el.getAttribute("data-id");
+      var customLabel = null;
+      var pt = prefTiles();
+      if (pt && pt.custom) {
+        for (var ci = 0; ci < pt.custom.length; ci++) {
+          if (pt.custom[ci].id === customId) customLabel = pt.custom[ci].label;
+        }
+      }
+      if (customLabel) afterEvent(logEvent(sess, "note", String(customLabel).slice(0, 14), elapsed), null);
+      return;
+    }
     if (act === "tile-rosc") {
       if (!sess.rosc) {
         sess.rosc = true;
@@ -1339,8 +1395,9 @@
       var did = el.getAttribute("data-id");
       if (deleteEvent(sess, did)) {
         persist();
-        render();
+        refreshLogSheet();
         toast("Event deleted. ", did);
+        render();
         openLogSheet();
       }
       return;
@@ -1413,6 +1470,11 @@
     }
     rootEl.classList.add("on");
     try { document.body.classList.add("cbl-lock"); } catch (e2) {}
+    try {
+      if (typeof window !== "undefined" && window.CodeBluePrefs) {
+        window.CodeBluePrefs.apply(rootEl);
+      }
+    } catch (e3) {}
     render();
     return true;
   }
@@ -1444,7 +1506,15 @@
     storeError: function () { return storeError; }
   };
 
-  return { open: open, close: close, isOpen: isOpen, _engine: _engine, _rt: _rt };
+  /* Re-render the grid after a prefs change. Skipped while one of the
+   * live screen's own sheets is open so the sheet is never wiped. */
+  function refresh() {
+    if (!rootEl || !rootEl.classList.contains("on")) return;
+    if (sheetOpen()) return;
+    render();
+  }
+
+  return { open: open, close: close, isOpen: isOpen, _engine: _engine, _rt: _rt, _refresh: refresh };
 });
 
 
