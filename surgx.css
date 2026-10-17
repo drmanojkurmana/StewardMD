@@ -539,3 +539,6 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot .sgx-fld input:focus, #surgxRoot .sgx-fld textarea:focus {
   outline: none; border-color: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.25);
 }
+
+/* iPad pass (2026-10-16): the "Ask the senior surgeon" box had no styling (171 px, monospace, browser border). */
+#surgxRoot #sgxMentorQ { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line, #d7dee3); border-radius: 10px; margin: 8px 0; background: var(--panel, #fff); color: inherit; }

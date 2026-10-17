@@ -652,7 +652,7 @@
     function r(org, label, drugs, note) {
       var d = byOrg[org]; if (!d) return;
       for (var i = 0; i < drugs.length; i++) if (d[drugs[i]] && typeof d[drugs[i]].s === "number") {
-        out.push({ org: org, label: label, pct: Math.round(10 * (100 - d[drugs[i]].s)) / 10, n: d[drugs[i]].n || null, k: d[drugs[i]].k || null, basis: drugLabel(drugs[i]) + " resistance", note: note || null }); return;
+        out.push({ org: org, drug: drugs[i], label: label, pct: Math.round(10 * (100 - d[drugs[i]].s)) / 10, n: d[drugs[i]].n || null, k: d[drugs[i]].k || null, basis: drugLabel(drugs[i]) + " resistance", note: note || null }); return;
       }
     }
     r("saureus", "MRSA", ["cefoxitin", "oxacillin"]);

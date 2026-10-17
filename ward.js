@@ -1834,7 +1834,7 @@
        * server, which refuses and says why. A UI that hides a refusal teaches people the feature does
        * not exist. */
       '<div class="w-sub"><h4>' + ms("add") + wTH("ward.add-a-problem", "Add a problem") + "</h4>" +
-      "<div class=\"w-prob\"><div style=\"position:relative; flex:1; display:inline-flex; align-items:center;\"><input id=\"wProbText\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.diagnosis-in-words", "Diagnosis, in words") + "\" value=\"" + esc(state.probText || "") + '" style="width:100%; padding-right:60px;"><div style="position:absolute; right:4px; top:50%; transform:translateY(-50%);">' + micBtn("wProbText") + '</div></div>' +
+      "<div class=\"w-prob\"><div style=\"position:relative; flex:2 1 200px; min-width:0; display:inline-flex; align-items:center;\"><input id=\"wProbText\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.diagnosis-in-words", "Diagnosis, in words") + "\" value=\"" + esc(state.probText || "") + '" style="width:100%; padding-right:60px;"><div style="position:absolute; right:4px; top:50%; transform:translateY(-50%);">' + micBtn("wProbText") + '</div></div>' +
       "<input id=\"wProbCode\" type=\"text\" autocomplete=\"off\" placeholder=\"" + wTA("ward.icd-code-optional", "ICD code (optional)") + "\" value=\"" + esc(state.probCode || "") + '">' +
       '<select id="wProbVs">' + opts + "</select>" +
       '<button class="w-btn ghost" data-w-act="icd">' + ms("search") + wTH("ward.find-code", "Find code") + "</button>" +

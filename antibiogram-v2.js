@@ -136,7 +136,9 @@
     if (!p.length) return "";
     return '<div class="v2-ph" role="list" aria-label="Resistance phenotypes">' + p.map(function (x) {
       var cls = x.pct >= 50 ? "hi" : x.pct >= 20 ? "mid" : "lo";
-      return '<div class="v2-phc ' + cls + '" role="listitem"><div class="v2-php">' + num(x.pct) + '%</div><div class="v2-phl">' + esc(x.label) + '</div><div class="v2-phn">' + esc(x.basis) + (x.n ? ", " + fmtN(x.n) + " isolates" : "") + (x.k ? ", " + x.k + " institutions" : "") + "</div></div>";
+      // Tapping a headline figure opens the same sheet as its table cell (source, trend across editions).
+      var act = x.drug ? ' data-v2="cell" data-org="' + esc(x.org) + '" data-pheno="" data-drug="' + esc(x.drug) + '" tabindex="0" aria-label="' + esc(x.label + ", " + num(x.pct) + "%, open details") + '"' : "";
+      return '<div class="v2-phc ' + cls + (x.drug ? " tap" : "") + '" role="listitem"' + act + '><div class="v2-php">' + num(x.pct) + '%</div><div class="v2-phl">' + esc(x.label) + '</div><div class="v2-phn">' + esc(x.basis) + (x.n ? ", " + fmtN(x.n) + " isolates" : "") + (x.k ? ", " + x.k + " institutions" : "") + "</div></div>";
     }).join("") + "</div>";
   }
   function cellHtml(o, d) {
@@ -792,10 +794,14 @@
     ".abg-pro .v2-seg button{background:transparent;border-radius:7px;min-height:30px;padding:5px 12px;font:600 12.5px var(--f);color:var(--ink2)}",
     ".abg-pro .v2-seg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 2px rgba(15,23,42,.1)}",
     ".abg-pro .v2-meta,.abg-pro .v2-wis,.abg-pro .v2-card{border-radius:10px;padding:14px;box-shadow:none}.abg-pro .v2-meta{font:500 12.5px/1.5 var(--f)}",
+    // iPad and wider: form fields keep a readable width instead of stretching across a 1,300 px screen, so the period
+    // pickers and the Check button sit together under the label they belong to (owner 2026-10-16, iPad pass).
+    "@media (min-width:760px){.abg-pro .v2-card>.v2-in,.abg-pro .v2-card>textarea.v2-in,.abg-pro .v2-card .v2-per{max-width:640px}.abg-pro .v2-card>textarea.v2-in{display:block;width:100%;box-sizing:border-box}.abg-pro .v2-card>.v2-pri{margin-top:12px}.abg-pro .v2-card>p,.abg-pro .v2-card>.v2-mut{max-width:78ch}}",
     ".abg-pro .v2-mt{font:600 14.5px/1.35 var(--f)}.abg-pro .v2-mn{padding-top:8px;border-top:1px solid var(--line)}",
     ".abg-pro .v2-mut{color:var(--mut)}.abg-pro .v2-link{font:600 12.5px var(--f);text-decoration:none;color:var(--tl);padding:4px 0}",
     ".abg-pro .v2-ph{gap:8px;scrollbar-width:none}.abg-pro .v2-ph::-webkit-scrollbar{display:none}",
     ".abg-pro .v2-phc{flex:0 0 156px;border-radius:10px;border:1px solid var(--line);padding:10px 12px}",
+    ".v2-phc.tap{cursor:pointer;-webkit-user-select:none;user-select:none}.v2-phc.tap:active{transform:scale(.98)}.v2-phc.tap:focus-visible{outline:2px solid var(--ink);outline-offset:2px}",
     ".abg-pro .v2-php::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--sev,var(--mut));margin-right:7px;vertical-align:.18em}",
     ".abg-pro .v2-phc.hi{--sev:#c24141}.abg-pro .v2-phc.mid{--sev:#cf8a1f}.abg-pro .v2-phc.lo{--sev:#2f8f5b}",
     ".abg-pro .v2-phc .v2-php,body.dark .abg-pro .v2-phc .v2-php{color:var(--ink);font:700 20px var(--f);font-variant-numeric:tabular-nums}",

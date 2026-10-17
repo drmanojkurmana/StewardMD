@@ -54,3 +54,6 @@ body.us-open{overflow:hidden}
 @media (prefers-reduced-motion:reduce){.us-panel{transition:opacity 150ms ease;transform:none}.us-skel i{animation:none}.us-flash{animation:none;background:var(--teal-soft)}}
 @media (prefers-reduced-transparency:reduce){.us-head{background:var(--panel);backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media (prefers-contrast:more){.us-row,.us-chip,.us-field{border-color:var(--ink)}}
+
+/* iPad landscape (iPad pass 2026-10-16): the search field was 1,270 px and each result's chevron 1,000 px from its label. */
+@media (min-width:900px){.us-head,.us-body{padding-left:max(12px,calc(50% - 400px));padding-right:max(12px,calc(50% - 400px))}}

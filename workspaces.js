@@ -180,6 +180,8 @@
       // bottom sheet / popover
       ".sw-scrim{position:fixed;inset:0;background:rgba(8,16,22,.5);z-index:16040;opacity:0;pointer-events:none;transition:opacity .2s}.sw-scrim.on{opacity:1;pointer-events:auto}",
       ".sw-sheet{position:fixed;left:0;right:0;bottom:0;z-index:16041;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.24);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:88vh;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;font-family:var(--sans,system-ui);padding-bottom:calc(14px + env(safe-area-inset-bottom))}.sw-sheet.on{transform:none}",
+      // iPad (2026-10-16): a 600 px sheet in the centre, not a 1,366 px strip; offsets, not transform, so open/close keep working.
+      "@media(min-width:700px){.sw-sheet{left:max(0px,calc(50% - 300px));right:max(0px,calc(50% - 300px))}}",
       ".sw-grab{width:40px;height:5px;border-radius:3px;background:var(--line,#d7dee3);margin:9px auto 2px}",
       ".sw-sheet h3{font:800 17px var(--sans);margin:6px 18px 4px;color:var(--ink)}",
       ".sw-opt{display:flex;align-items:center;gap:13px;width:100%;box-sizing:border-box;border:none;background:none;text-align:left;padding:13px 18px;cursor:pointer;color:var(--ink,#14202b);font-family:inherit;border-top:1px solid var(--line,#eef1f4)}",

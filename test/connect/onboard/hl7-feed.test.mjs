@@ -142,7 +142,9 @@ test("audit is PHI-free: no secret, no raw HL7 (name / MRN) in the audit table",
   const actions = audit.map((a) => a.action);
   assert.ok(actions.includes("connect.onboard.hl7-feed.created"));
   assert.ok(actions.includes("connect.onboard.hl7-feed.deleted"));
-  const blob = JSON.stringify(audit);
+  // Scan every field that could carry message content. Not the row id (a random UUID can contain "718-7") or ts (an
+  // ISO time such as "13:28:19.247Z" contains "9.2"): those matched by chance and failed about 1 run in 30.
+  const blob = JSON.stringify(audit.map(({ id, ts, ...rest }) => rest));
   for (const leak of [secret, "Doe", "Jane", "MRN1", "718-7", "9.2"]) assert.equal(blob.includes(leak), false);
 });
 

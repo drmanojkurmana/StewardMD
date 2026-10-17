@@ -197,3 +197,9 @@ body:not(.dark):not(.v3-dark) .tok-root {
 @media (min-width: 720px) {
   .tok-scroll > .tok-pad, .tok-strip-head, .tok-cal-bar, #tokChecklist, .tok-reveal, .tok-foot.tok-pad { padding-left: max(16px, calc((100% - 720px) / 2)); padding-right: max(16px, calc((100% - 720px) / 2)); }
 }
+
+/* iPad (2026-10-16 iPad pass): the CTG axis labels are sized in viewBox units, so they grew with the screen (about 36 px
+   at 1366) and painted over the start of the trace; and in landscape the sticky chart plus footer left ~150 px for
+   the answers. */
+@media (min-width: 700px) { .tk-axis { font-size: calc(14px / var(--k)); } }
+@media (orientation: landscape) and (min-width: 900px) { .tok-hold svg.tk-svg { max-height: 38vh; } }

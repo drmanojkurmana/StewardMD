@@ -384,7 +384,7 @@
       "#doseCalc details summary{font:600 13.5px var(--dc-f);color:var(--dc-acc);cursor:pointer;min-height:36px;display:flex;align-items:center}",
       "#doseCalc .dc-foot{font:500 12px var(--dc-f);color:var(--dc-mut);text-align:center;padding:4px 8px}",
       "#doseCalc .dc-plist{display:flex;flex-direction:column;gap:2px;max-height:50vh;overflow:auto}#doseCalc .dc-pl{text-align:left;border:0;border-top:1px solid var(--dc-line);background:none;color:var(--dc-ink);padding:10px 2px;cursor:pointer;font:600 15px var(--dc-f)}#doseCalc .dc-pl small{display:block;font:500 12.5px var(--dc-f);color:var(--dc-mut)}",
-      "@media(min-width:720px){#doseCalc .dc-body{max-width:720px;margin:0 auto;width:100%}#doseCalc .dc-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}"
+      "@media(min-width:720px){#doseCalc .dc-body{max-width:720px;margin:0 auto;width:100%}#doseCalc .dc-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#doseCalc .dc-grid>label:has(.dc-age){grid-column:span 2}}"
     ].join("\n");
     D.head.appendChild(s);
   }
