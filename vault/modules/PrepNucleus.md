@@ -1756,6 +1756,6 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 
 ### Scene figures (machines, not cascades)
 - `hemodialysis` (tools/figures/scenes/dialysis.mjs, `.page.js`, `.css`): original animated haemodialysis machine built from the Anatomy kit (iso solids, lathe, tubes) plus Anima styling. Run `ANIMA_DIR=... node tools/figures/scenes/dialysis.mjs`. Registry entry has `scene:true` and no drug names; spec file is a stub with `kind:"scene"`.
-- Parts: AV fistula, roller pump, heparin syringe, dialyser with fibre cut-away, air trap, saline bag and line, fresh and used dialysate containers with level windows, three pressure dials (arterial, inflow, venous), patient gauges. Reference schematic checked for missing components only; all drawing is original.
+- Layout: a dialysis chair with the patient and access arm beside a floor-standing machine (pump and syringe on its front face, upright dialyser, drip chamber, saline pole), three pressure dials, fibre cut-away and patient gauges. Reference schematic checked for missing components only; all drawing is original.
 - `compare()` in fig-viewer.js reads `data-without` / `data-with` on `#drug` for the switch labels (viewer token fig7).
 - Next scenes planned: sepsis pathogenesis, airway type-2 vs non-type-2 inflammation, graft rejection.
