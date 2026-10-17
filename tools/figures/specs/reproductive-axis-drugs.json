@@ -1,0 +1,298 @@
+{
+ "id": "reproductive-axis-drugs",
+ "title": "GnRH, clomiphene and gonadotropins: how drugs push or switch off the reproductive axis",
+ "ariaLabel": "Schematic of the reproductive axis: pulses of GnRH make the pituitary release LH and FSH, which drive the ovary or testis, and sex hormones feed back to lower GnRH and LH and FSH. Pulsatile GnRH restores the axis, continuous GnRH agonists and GnRH antagonists switch the pituitary off, clomiphene blocks oestrogen feedback so LH and FSH rise, oestrogen or progestin strengthen the feedback, and injected gonadotropins act on the gonad directly.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Natural GnRH pulses",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "weak",
+   "usual",
+   "strong"
+  ],
+  "ticks": [
+   "weak",
+   "usual",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no reproductive-axis drug"
+  },
+  {
+   "label": "pulsatile GnRH",
+   "status": "pulsatile GnRH",
+   "blocks": {
+    "e_pit": -0.5
+   }
+  },
+  {
+   "label": "continuous GnRH agonist type (leuprolide)",
+   "status": "continuous GnRH agonist",
+   "blocks": {
+    "e_pit": 0.95
+   }
+  },
+  {
+   "label": "GnRH antagonist type",
+   "status": "GnRH antagonist",
+   "blocks": {
+    "e_pit": 0.95
+   }
+  },
+  {
+   "label": "clomiphene type (blocks oestrogen feedback)",
+   "status": "clomiphene type",
+   "blocks": {
+    "e_fb": 0.9
+   }
+  },
+  {
+   "label": "oestrogen plus progestin (strong feedback)",
+   "status": "oestrogen plus progestin",
+   "blocks": {
+    "e_fb": -1.0
+   }
+  },
+  {
+   "label": "gonadotropin injection (FSH, hCG)",
+   "status": "gonadotropin injection",
+   "blocks": {
+    "e_gon": -4.0
+   }
+  }
+ ],
+ "readout": "Gonad stimulation: {0}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "suppressed",
+    "normal",
+    "stimulated"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "GnRH: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Gonad stimulation: normal"
+  ],
+  [
+   1,
+   1,
+   "Gonad stimulation: stimulated"
+  ],
+  [
+   1,
+   2,
+   "Gonad stimulation: suppressed"
+  ],
+  [
+   1,
+   3,
+   "Gonad stimulation: suppressed"
+  ],
+  [
+   1,
+   4,
+   "Gonad stimulation: stimulated"
+  ],
+  [
+   1,
+   5,
+   "Gonad stimulation: normal"
+  ],
+  [
+   1,
+   6,
+   "Gonad stimulation: stimulated"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "GnRH pulses",
+   "sub": "hypothalamus",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "GnRH released in pulses from the hypothalamus. The slider sets the strength."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "LH and FSH released",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "LH and FSH from the pituitary."
+  },
+  {
+   "id": "s0_1",
+   "kind": "source",
+   "fixed": 0.5,
+   "label": "Sex hormone feedback",
+   "sub": "oestrogen, testosterone",
+   "x": 105,
+   "y": 310,
+   "rx": 92,
+   "info": "Sex hormones act on the hypothalamus and pituitary to lower GnRH, LH and FSH."
+  },
+  {
+   "id": "m0_1",
+   "kind": "mid",
+   "label": "Feedback brake",
+   "x": 480,
+   "y": 310,
+   "rx": 100,
+   "info": "The brake that sex hormones apply to the axis."
+  },
+  {
+   "id": "s0_2",
+   "kind": "source",
+   "fixed": 0.1,
+   "label": "Gonadotropin injection",
+   "sub": "given directly",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "Gonadotropins (FSH, hCG) act on the gonad without needing the pituitary."
+  },
+  {
+   "id": "m0_2",
+   "kind": "mid",
+   "label": "Direct stimulation",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Stimulation of the gonad by injected hormone."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0_0",
+     0.9
+    ],
+    [
+     "n:m0_1",
+     -0.4
+    ],
+    [
+     "n:m0_2",
+     0.5
+    ]
+   ],
+   "label": "Gonad stimulation",
+   "x": 820,
+   "y": 310,
+   "rx": 100,
+   "info": "A teaching score for how strongly the ovary or testis is stimulated (egg or sperm development and sex hormone output)."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_pit",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "pituitary response",
+   "info": "Pulsatile GnRH keeps the pituitary responsive. Continuous GnRH agonists (leuprolide) first stimulate then desensitise the receptors; GnRH antagonists block them at once. Both lower LH and FSH.",
+   "w": 0.9
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More LH and FSH stimulates the gonad."
+  },
+  {
+   "id": "e_fb",
+   "from": "s0_1",
+   "to": "m0_1",
+   "label": "negative feedback",
+   "info": "Clomiphene blocks oestrogen receptors in the hypothalamus, so the brain thinks oestrogen is low and raises GnRH, LH and FSH. Oestrogen and progestin (as in contraceptives) strengthen this feedback."
+  },
+  {
+   "id": "c0_1",
+   "from": "m0_1",
+   "to": "out0",
+   "blockable": false,
+   "info": "More brake lowers gonad stimulation."
+  },
+  {
+   "id": "e_gon",
+   "from": "s0_2",
+   "to": "m0_2",
+   "label": "gonad receptors",
+   "info": "Injected FSH and hCG stimulate the ovary or testis directly, bypassing the pituitary. They are used for ovulation induction and for hypogonadotropic hypogonadism."
+  },
+  {
+   "id": "c0_2",
+   "from": "m0_2",
+   "to": "out0",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Pulsatile GnRH restores the axis, continuous GnRH agonists and antagonists switch the pituitary off, clomiphene blocks oestrogen feedback, and injected gonadotropins act on the gonad directly. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Specific protocols for IVF, ovarian hyperstimulation, male hypogonadism care, testosterone therapy, cancer uses of GnRH analogues (prostate, breast), flare with agonists, endometriosis and fibroid uses, bone loss and adverse effects are left out. Gonad stimulation is a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "GnRH, clomiphene and gonadotropins: how drugs push or switch off the reproductive axis",
+  "blurb": "Interactive figure: GnRH analogues, clomiphene and gonadotropins",
+  "drugs": {
+   "leuprolide": "d=2",
+   "leuprorelin": "d=2",
+   "goserelin": "d=2",
+   "triptorelin": "d=2",
+   "nafarelin": "d=2",
+   "buserelin": "d=2",
+   "cetrorelix": "d=3",
+   "ganirelix": "d=3",
+   "degarelix": "d=3",
+   "elagolix": "d=3",
+   "relugolix": "d=3",
+   "clomiphene": "d=4",
+   "clomifene": "d=4",
+   "letrozole": "d=4",
+   "follitropin": "d=6",
+   "menotropin": "d=6",
+   "gonadotropin": "d=6",
+   "hcg": "d=6",
+   "urofollitropin": "d=6",
+   "choriogonadotropin": "d=6",
+   "gnrh": "d=1"
+  },
+  "terms": [
+   "GnRH (?:agonists?|analogues?|antagonists?)",
+   "gonadotropins?",
+   "gonadotrophins?",
+   "ovulation induction",
+   "reproductive axis",
+   "hypothalamic[- ]pituitary[- ]gonadal"
+  ]
+ }
+}

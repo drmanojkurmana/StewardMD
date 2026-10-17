@@ -1,0 +1,413 @@
+{
+ "id": "sympathomimetics-receptors",
+ "title": "Adrenaline, noradrenaline, isoprenaline, dobutamine, phenylephrine and salbutamol compared",
+ "ariaLabel": "Schematic of what sympathomimetic drugs do through alpha-1, beta-1 and beta-2 receptors: alpha-1 narrows vessels and raises pressure, beta-1 raises heart rate and force, and beta-2 widens airway and muscle vessels. Adrenaline acts on all three, noradrenaline mostly on alpha-1 and beta-1, isoprenaline on beta-1 and beta-2, phenylephrine on alpha-1, dobutamine on beta-1, and salbutamol on beta-2.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Natural sympathetic tone",
+  "a": [
+   0.4,
+   0.6,
+   0.8
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no sympathomimetic drug"
+  },
+  {
+   "label": "adrenaline type (alpha and beta)",
+   "status": "adrenaline type",
+   "blocks": {
+    "e_a1": -1.0,
+    "e_b1": -1.0,
+    "e_b2": -1.0,
+    "e_b2v": -1.0
+   }
+  },
+  {
+   "label": "noradrenaline type (alpha-1 and beta-1)",
+   "status": "noradrenaline type",
+   "blocks": {
+    "e_a1": -1.4,
+    "e_b1": -0.8
+   }
+  },
+  {
+   "label": "isoprenaline type (beta-1 and beta-2)",
+   "status": "isoprenaline type",
+   "blocks": {
+    "e_b1": -1.0,
+    "e_b2": -1.0,
+    "e_b2v": -1.2
+   }
+  },
+  {
+   "label": "phenylephrine type (alpha-1)",
+   "status": "phenylephrine type",
+   "blocks": {
+    "e_a1": -1.5
+   }
+  },
+  {
+   "label": "dobutamine type (beta-1)",
+   "status": "dobutamine type",
+   "blocks": {
+    "e_b1": -1.2
+   }
+  },
+  {
+   "label": "salbutamol type (beta-2)",
+   "status": "salbutamol type",
+   "blocks": {
+    "e_b2": -1.4,
+    "e_b2v": -0.4
+   }
+  }
+ ],
+ "readout": "Heart {0} · pressure {1} · airway {2}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "lowered",
+    "usual",
+    "raised"
+   ],
+   "cuts": [
+    0.28,
+    0.45
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "lowered",
+    "usual",
+    "raised"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  },
+  {
+   "node": "out2",
+   "words": [
+    "narrowed",
+    "usual",
+    "wider"
+   ],
+   "cuts": [
+    0.3,
+    0.65
+   ]
+  }
+ ],
+ "status": "Sympathetic tone: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Heart usual · pressure usual · airway usual"
+  ],
+  [
+   1,
+   1,
+   "Heart raised · pressure raised · airway wider"
+  ],
+  [
+   1,
+   2,
+   "Heart usual · pressure raised · airway usual"
+  ],
+  [
+   1,
+   3,
+   "Heart raised · pressure usual · airway wider"
+  ],
+  [
+   1,
+   4,
+   "Heart lowered · pressure raised · airway usual"
+  ],
+  [
+   1,
+   5,
+   "Heart raised · pressure usual · airway usual"
+  ],
+  [
+   1,
+   6,
+   "Heart usual · pressure usual · airway wider"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "Beta-1 signal",
+   "sub": "heart",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Receptors on heart cells that respond to adrenaline, noradrenaline, isoprenaline and dobutamine."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Heart stimulated",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Beta-1 signalling in the heart."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "label": "Alpha-1 signal",
+   "sub": "vessels",
+   "x": 105,
+   "y": 238,
+   "rx": 92,
+   "info": "Receptors on vessel muscle that respond to noradrenaline, adrenaline and phenylephrine."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "Vessels narrowed",
+   "x": 480,
+   "y": 238,
+   "rx": 100,
+   "info": "Alpha-1 signalling narrows vessels."
+  },
+  {
+   "id": "s1_1",
+   "kind": "source",
+   "label": "Beta-2 signal",
+   "sub": "vessels",
+   "x": 105,
+   "y": 382,
+   "rx": 92,
+   "info": "Beta-2 receptors on muscle vessels, which widen them."
+  },
+  {
+   "id": "m1_1",
+   "kind": "mid",
+   "label": "Vessels widened",
+   "x": 480,
+   "y": 382,
+   "rx": 100,
+   "info": "Beta-2 signalling widens muscle vessels."
+  },
+  {
+   "id": "s2_0",
+   "kind": "source",
+   "label": "Beta-2 signal",
+   "sub": "airway",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "Beta-2 receptors on airway muscle."
+  },
+  {
+   "id": "m2_0",
+   "kind": "mid",
+   "label": "Airway relaxed",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Airway muscle relaxation."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.25,
+   "terms": [
+    [
+     "n:m0_0",
+     0.5
+    ],
+    [
+     "n:m1_0",
+     -0.25
+    ]
+   ],
+   "label": "Heart rate and force",
+   "x": 820,
+   "y": 95,
+   "rx": 100,
+   "info": "A teaching score for heart rate and force. Beta-1 stimulation raises it; a rise in pressure slows it through the baroreceptor reflex."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m1_0",
+     0.5
+    ],
+    [
+     "n:m1_1",
+     -0.15
+    ],
+    [
+     "n:out0",
+     0.25
+    ]
+   ],
+   "label": "Blood pressure",
+   "x": 820,
+   "y": 310,
+   "rx": 100,
+   "info": "A teaching score for blood pressure from vessel tone and heart output."
+  },
+  {
+   "id": "out2",
+   "kind": "calc",
+   "base": 0.25,
+   "terms": [
+    [
+     "n:m2_0",
+     0.5
+    ]
+   ],
+   "label": "Airway width",
+   "x": 820,
+   "y": 525,
+   "rx": 100,
+   "info": "A teaching score for airway width."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_b1",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "beta-1 receptor",
+   "info": "Beta-1 agonists raise heart rate and force. Isoprenaline and dobutamine are mainly beta-1 and beta-2; adrenaline acts on alpha and beta receptors.",
+   "w": 0.8
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More heart stimulation raises heart rate and force."
+  },
+  {
+   "id": "e_a1",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "alpha-1 receptor",
+   "info": "Alpha-1 agonists (phenylephrine, noradrenaline, adrenaline) narrow vessels and raise pressure.",
+   "w": 0.8
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "Narrower vessels raise pressure."
+  },
+  {
+   "id": "e_b2v",
+   "from": "s1_1",
+   "to": "m1_1",
+   "label": "beta-2 vessel effect",
+   "info": "Beta-2 stimulation (isoprenaline, adrenaline at low levels) widens vessels in muscle and can lower diastolic pressure.",
+   "w": 0.8
+  },
+  {
+   "id": "c1_1",
+   "from": "m1_1",
+   "to": "out1",
+   "blockable": false,
+   "info": "Wider vessels lower pressure."
+  },
+  {
+   "id": "e_b2",
+   "from": "s2_0",
+   "to": "m2_0",
+   "label": "beta-2 receptor",
+   "info": "Beta-2 agonists (salbutamol, terbutaline, adrenaline, isoprenaline) relax airway muscle and widen the airway.",
+   "w": 0.8
+  },
+  {
+   "id": "c2_0",
+   "from": "m2_0",
+   "to": "out2",
+   "blockable": false,
+   "info": "More relaxation widens the airway."
+  },
+  {
+   "id": "x0_m1_0",
+   "from": "m1_0",
+   "to": "out0",
+   "label": "reflex",
+   "blockable": false,
+   "info": "A rise in pressure triggers the baroreceptor reflex, which slows the heart. This is why phenylephrine and noradrenaline can slow the pulse."
+  },
+  {
+   "id": "x1_out0",
+   "from": "out0",
+   "to": "out1",
+   "label": "cardiac output",
+   "blockable": false,
+   "info": "A faster, stronger heart raises pressure."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Adrenaline acts on alpha-1, beta-1 and beta-2, noradrenaline mostly alpha-1 and beta-1, isoprenaline beta-1 and beta-2, phenylephrine alpha-1, dobutamine beta-1, and salbutamol beta-2. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Dopamine and its dose-related effects, ephedrine and indirect agents, amphetamines, dose and route, tachyphylaxis, extravasation injury, arrhythmia risk, use in shock, anaphylaxis and cardiac arrest protocols, and alpha-2 and beta-3 effects are left out. Heart, pressure and airway are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Adrenaline, noradrenaline, isoprenaline, dobutamine, phenylephrine and salbutamol compared",
+  "blurb": "Interactive figure: adrenaline, noradrenaline, isoprenaline, phenylephrine, dobutamine and salbutamol compared",
+  "drugs": {
+   "adrenaline": "d=1",
+   "epinephrine": "d=1",
+   "noradrenaline": "d=2",
+   "norepinephrine": "d=2",
+   "isoprenaline": "d=3",
+   "isoproterenol": "d=3",
+   "phenylephrine": "d=4",
+   "midodrine": "d=4",
+   "metaraminol": "d=4",
+   "methoxamine": "d=4",
+   "dobutamine": "d=5",
+   "salbutamol": "d=6",
+   "albuterol": "d=6",
+   "terbutaline": "d=6",
+   "salmeterol": "d=6",
+   "formoterol": "d=6",
+   "ritodrine": "d=6"
+  },
+  "terms": [
+   "sympathomimetics?",
+   "adrenergic agonists?",
+   "adrenoceptor agonists?",
+   "catecholamines?",
+   "vasopressors?",
+   "inotropes?",
+   "adrenaline",
+   "epinephrine"
+  ]
+ }
+}

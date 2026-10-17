@@ -1,0 +1,430 @@
+{
+ "id": "heart-failure-drugs",
+ "title": "Heart failure: how the main drug classes work together",
+ "ariaLabel": "Schematic of heart failure drugs: angiotensin, sympathetic activity, aldosterone, falling natriuretic peptides and kidney sodium handling all load a failing heart, and fluid builds up as congestion. ACE inhibitors, receptor blockers and ARNI act on the angiotensin system, beta-blockers on the sympathetic system, spironolactone and eplerenone on aldosterone, sacubitril on natriuretic peptide breakdown, SGLT2 inhibitors on kidney sodium and glucose, and loop diuretics on salt and water.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Neurohormonal activation",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no heart failure drug"
+  },
+  {
+   "label": "ACE inhibitor or ARB type",
+   "status": "ACE inhibitor or ARB",
+   "blocks": {
+    "e_raas": 0.85
+   }
+  },
+  {
+   "label": "ARNI type (sacubitril with valsartan)",
+   "status": "ARNI",
+   "blocks": {
+    "e_raas": 0.85,
+    "e_nep": 0.85
+   }
+  },
+  {
+   "label": "beta-blocker type",
+   "status": "beta-blocker",
+   "blocks": {
+    "e_symp": 0.85
+   }
+  },
+  {
+   "label": "mineralocorticoid antagonist type",
+   "status": "mineralocorticoid antagonist",
+   "blocks": {
+    "e_mra": 0.85
+   }
+  },
+  {
+   "label": "SGLT2 inhibitor type",
+   "status": "SGLT2 inhibitor",
+   "blocks": {
+    "e_sglt": 0.85,
+    "e_loop": 0.15
+   }
+  },
+  {
+   "label": "loop diuretic type",
+   "status": "loop diuretic",
+   "blocks": {
+    "e_loop": 0.85
+   }
+  },
+  {
+   "label": "four drug classes together (not a prescription)",
+   "status": "four classes together",
+   "blocks": {
+    "e_raas": 0.85,
+    "e_symp": 0.85,
+    "e_mra": 0.85,
+    "e_sglt": 0.85
+   }
+  }
+ ],
+ "readout": "Heart strain {0} · congestion {1}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "lower",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "low",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.35,
+    0.65
+   ]
+  }
+ ],
+ "status": "Activation: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Heart strain high · congestion moderate"
+  ],
+  [
+   1,
+   1,
+   "Heart strain moderate · congestion moderate"
+  ],
+  [
+   1,
+   2,
+   "Heart strain moderate · congestion moderate"
+  ],
+  [
+   1,
+   3,
+   "Heart strain moderate · congestion moderate"
+  ],
+  [
+   1,
+   4,
+   "Heart strain moderate · congestion moderate"
+  ],
+  [
+   1,
+   5,
+   "Heart strain high · congestion moderate"
+  ],
+  [
+   1,
+   6,
+   "Heart strain high · congestion low"
+  ],
+  [
+   1,
+   7,
+   "Heart strain lower · congestion moderate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "RAAS activation",
+   "sub": "angiotensin II",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Angiotensin II raised in heart failure. The slider sets how strongly the neurohormonal systems are switched on."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Angiotensin effect",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Angiotensin II drives vessel narrowing, fibrosis and salt retention."
+  },
+  {
+   "id": "s0_1",
+   "kind": "source",
+   "label": "Sympathetic activation",
+   "sub": "noradrenaline",
+   "x": 105,
+   "y": 181,
+   "rx": 92,
+   "info": "Chronic sympathetic over-activity in heart failure."
+  },
+  {
+   "id": "m0_1",
+   "kind": "mid",
+   "label": "Sympathetic effect",
+   "x": 480,
+   "y": 181,
+   "rx": 100,
+   "info": "Raised heart rate and long-term damage to heart cells."
+  },
+  {
+   "id": "s0_2",
+   "kind": "source",
+   "label": "Aldosterone",
+   "sub": "mineralocorticoid",
+   "x": 105,
+   "y": 267,
+   "rx": 92,
+   "info": "Aldosterone raised through angiotensin and other signals."
+  },
+  {
+   "id": "m0_2",
+   "kind": "mid",
+   "label": "Aldosterone effect",
+   "x": 480,
+   "y": 267,
+   "rx": 100,
+   "info": "Fibrosis and salt retention."
+  },
+  {
+   "id": "s0_3",
+   "kind": "source",
+   "fixed": 0.6,
+   "label": "Natriuretic peptide",
+   "sub": "protective",
+   "x": 105,
+   "y": 353,
+   "rx": 92,
+   "info": "Peptides made by the stretched heart that widen vessels and make the kidney lose salt."
+  },
+  {
+   "id": "m0_3",
+   "kind": "mid",
+   "label": "Peptide lost",
+   "x": 480,
+   "y": 353,
+   "rx": 100,
+   "info": "Protective peptide that has been broken down."
+  },
+  {
+   "id": "s0_4",
+   "kind": "source",
+   "label": "Kidney SGLT2",
+   "sub": "glucose, sodium",
+   "x": 105,
+   "y": 439,
+   "rx": 92,
+   "info": "The kidney reabsorbs filtered glucose and sodium through SGLT2."
+  },
+  {
+   "id": "m0_4",
+   "kind": "mid",
+   "label": "Sodium kept",
+   "x": 480,
+   "y": 439,
+   "rx": 100,
+   "info": "Sodium and glucose returned to the blood."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "label": "Salt and water retention",
+   "sub": "kidney",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "The kidney keeps salt and water when the heart pumps poorly."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "Salt and water kept",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Fluid held in the body."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0_0",
+     0.25
+    ],
+    [
+     "n:m0_1",
+     0.25
+    ],
+    [
+     "n:m0_2",
+     0.2
+    ],
+    [
+     "n:m0_3",
+     0.15
+    ],
+    [
+     "n:m0_4",
+     0.15
+    ]
+   ],
+   "label": "Heart strain",
+   "x": 820,
+   "y": 267,
+   "rx": 100,
+   "info": "A teaching score for the neurohormonal strain on a failing heart: remodelling, stiffening and wasted energy."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m1_0",
+     0.6
+    ]
+   ],
+   "label": "Congestion",
+   "x": 820,
+   "y": 525,
+   "rx": 100,
+   "info": "A teaching score for fluid congestion: breathlessness, ankle swelling and fluid in the lungs."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_raas",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "ACE, AT1",
+   "info": "ACE inhibitors stop angiotensin II being made and angiotensin receptor blockers block its receptor; sacubitril with valsartan (ARNI) blocks the receptor and also raises natriuretic peptides."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More angiotensin effect raises strain."
+  },
+  {
+   "id": "e_symp",
+   "from": "s0_1",
+   "to": "m0_1",
+   "label": "beta receptors",
+   "info": "Beta-blockers (bisoprolol, carvedilol, metoprolol succinate) block beta-1 receptors, lowering the rate and the harmful long-term drive on the heart."
+  },
+  {
+   "id": "c0_1",
+   "from": "m0_1",
+   "to": "out0",
+   "blockable": false,
+   "info": "More sympathetic effect raises strain."
+  },
+  {
+   "id": "e_mra",
+   "from": "s0_2",
+   "to": "m0_2",
+   "label": "MR receptor",
+   "info": "Spironolactone and eplerenone block the mineralocorticoid receptor, lowering fibrosis and salt retention."
+  },
+  {
+   "id": "c0_2",
+   "from": "m0_2",
+   "to": "out0",
+   "blockable": false,
+   "info": "More aldosterone effect raises strain."
+  },
+  {
+   "id": "e_nep",
+   "from": "s0_3",
+   "to": "m0_3",
+   "label": "neprilysin",
+   "info": "Neprilysin breaks natriuretic peptides down. Sacubitril blocks neprilysin so more peptide survives. It is only used with an angiotensin receptor blocker, never with an ACE inhibitor.",
+   "w": 0.8
+  },
+  {
+   "id": "c0_3",
+   "from": "m0_3",
+   "to": "out0",
+   "blockable": false,
+   "info": "More peptide lost raises strain."
+  },
+  {
+   "id": "e_sglt",
+   "from": "s0_4",
+   "to": "m0_4",
+   "label": "SGLT2",
+   "info": "SGLT2 inhibitors (dapagliflozin, empagliflozin) increase sodium and glucose loss in urine. Their heart-failure benefit goes beyond glucose and is not fully explained.",
+   "w": 0.6
+  },
+  {
+   "id": "c0_4",
+   "from": "m0_4",
+   "to": "out0",
+   "blockable": false,
+   "info": "More reabsorption raises strain."
+  },
+  {
+   "id": "e_loop",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "loop of Henle",
+   "info": "Loop diuretics (furosemide) block sodium and chloride reabsorption in the loop of Henle and give fast relief of congestion; they do not by themselves improve long-term outcomes."
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "More fluid kept raises congestion."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> ACE inhibitors, receptor blockers and ARNI act on angiotensin, beta-blockers on sympathetic drive, spironolactone and eplerenone on aldosterone, sacubitril on natriuretic peptide breakdown, SGLT2 inhibitors on kidney sodium and glucose, and loop diuretics on salt and water. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Ejection-fraction types, digoxin, ivabradine, vericiguat, hydralazine with nitrate, device therapy, doses and titration, potassium and kidney monitoring, contraindications (for example ARNI with an ACE inhibitor), outcome evidence, the mild diuretic effect of aldosterone blockers and acute decompensation care are left out. The figure does not say who should take any drug. Heart strain and congestion are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Heart failure: how the main drug classes work together",
+  "blurb": "Interactive figure: ACE inhibitor, ARNI, beta-blocker, spironolactone, SGLT2 inhibitor and loop diuretic",
+  "drugs": {
+   "sacubitril": "d=2",
+   "entresto": "d=2"
+  },
+  "terms": [
+   "heart failure (?:drugs?|treatment|therapy)",
+   "HFrEF",
+   "guideline[- ]directed medical therapy",
+   "neprilysin inhibitors?",
+   "ARNI"
+  ]
+ }
+}

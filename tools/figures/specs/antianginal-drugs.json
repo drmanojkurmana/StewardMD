@@ -1,0 +1,320 @@
+{
+ "id": "antianginal-drugs",
+ "title": "Angina: how the antianginal drugs improve the heart's oxygen balance",
+ "ariaLabel": "Schematic of heart oxygen balance: the heart's demand is set by heart rate, how hard it squeezes against the pressure in the aorta, and the filling pressure of the heart, and supply depends on coronary flow and on the cell's tolerance of low oxygen. Beta-blockers and ivabradine lower heart rate, calcium channel blockers lower the afterload and widen coronary arteries, nitrates lower the filling pressure and widen coronary arteries, and ranolazine reduces the late sodium current.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Exertion",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "rest",
+   "walking",
+   "exercise"
+  ],
+  "ticks": [
+   "rest",
+   "walking",
+   "exercise"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antianginal drug"
+  },
+  {
+   "label": "beta-blocker type",
+   "status": "beta-blocker",
+   "blocks": {
+    "e_hr": 0.85
+   }
+  },
+  {
+   "label": "ivabradine type (If blocker)",
+   "status": "ivabradine",
+   "blocks": {
+    "e_hr": 0.6
+   }
+  },
+  {
+   "label": "calcium channel blocker type",
+   "status": "calcium channel blocker",
+   "blocks": {
+    "e_ca": 0.85,
+    "e_hr": 0.2
+   }
+  },
+  {
+   "label": "nitrate type",
+   "status": "nitrate",
+   "blocks": {
+    "e_nit": 0.85,
+    "e_ca": 0.2
+   }
+  },
+  {
+   "label": "ranolazine type",
+   "status": "ranolazine",
+   "blocks": {
+    "e_na": 0.85
+   }
+  },
+  {
+   "label": "beta-blocker plus nitrate",
+   "status": "beta-blocker plus nitrate",
+   "blocks": {
+    "e_hr": 0.85,
+    "e_nit": 0.85
+   }
+  }
+ ],
+ "readout": "Oxygen balance: {0}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "ischaemia likely",
+    "improved",
+    "balanced"
+   ],
+   "cuts": [
+    0.3,
+    0.5
+   ]
+  }
+ ],
+ "status": "Exertion: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Oxygen balance: ischaemia likely"
+  ],
+  [
+   1,
+   1,
+   "Oxygen balance: improved"
+  ],
+  [
+   1,
+   2,
+   "Oxygen balance: improved"
+  ],
+  [
+   1,
+   3,
+   "Oxygen balance: improved"
+  ],
+  [
+   1,
+   4,
+   "Oxygen balance: improved"
+  ],
+  [
+   1,
+   5,
+   "Oxygen balance: improved"
+  ],
+  [
+   1,
+   6,
+   "Oxygen balance: balanced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "Heart rate and force",
+   "sub": "sympathetic",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Heart rate and force of contraction set by sympathetic drive and the sinus node."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Demand from rate",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Oxygen demand from heart rate and contractility."
+  },
+  {
+   "id": "s0_1",
+   "kind": "source",
+   "label": "Afterload",
+   "sub": "pressure to push against",
+   "x": 105,
+   "y": 238,
+   "rx": 92,
+   "info": "Pressure the heart pumps against."
+  },
+  {
+   "id": "m0_1",
+   "kind": "mid",
+   "label": "Demand from afterload",
+   "x": 480,
+   "y": 238,
+   "rx": 100,
+   "info": "Oxygen demand from afterload."
+  },
+  {
+   "id": "s0_2",
+   "kind": "source",
+   "label": "Filling pressure",
+   "sub": "preload",
+   "x": 105,
+   "y": 382,
+   "rx": 92,
+   "info": "Pressure that fills the heart."
+  },
+  {
+   "id": "m0_2",
+   "kind": "mid",
+   "label": "Demand from preload",
+   "x": 480,
+   "y": 382,
+   "rx": 100,
+   "info": "Oxygen demand from filling pressure and wall tension."
+  },
+  {
+   "id": "s0_3",
+   "kind": "source",
+   "label": "Cell oxygen tolerance",
+   "sub": "late sodium current",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "In ischaemia a late sodium current causes sodium and then calcium overload in heart cells."
+  },
+  {
+   "id": "m0_3",
+   "kind": "mid",
+   "label": "Calcium overload",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Calcium overload that stiffens and strains the heart cell."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.9,
+   "terms": [
+    [
+     "n:m0_0",
+     -0.35
+    ],
+    [
+     "n:m0_1",
+     -0.25
+    ],
+    [
+     "n:m0_2",
+     -0.2
+    ],
+    [
+     "n:m0_3",
+     -0.15
+    ]
+   ],
+   "label": "Oxygen balance",
+   "x": 820,
+   "y": 310,
+   "rx": 100,
+   "info": "A teaching score for the balance between oxygen supply and demand. Higher means closer to balanced; low means ischaemia (angina) is likely."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_hr",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "beta-1 and If",
+   "info": "Beta-blockers lower rate and force through beta-1 receptors. Ivabradine slows the sinus node by blocking the If (funny) current without changing contractility; it is used when beta-blockers are not tolerated."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More demand lowers the balance."
+  },
+  {
+   "id": "e_ca",
+   "from": "s0_1",
+   "to": "m0_1",
+   "label": "calcium entry (arteries)",
+   "info": "Dihydropyridine calcium channel blockers (amlodipine, nifedipine) widen arteries, lowering the pressure the heart pushes against; verapamil and diltiazem also slow the heart."
+  },
+  {
+   "id": "c0_1",
+   "from": "m0_1",
+   "to": "out0",
+   "blockable": false,
+   "info": "More afterload lowers the balance."
+  },
+  {
+   "id": "e_nit",
+   "from": "s0_2",
+   "to": "m0_2",
+   "label": "venous widening",
+   "info": "Nitrates widen veins, so less blood returns and the filling pressure falls, lowering wall tension and demand."
+  },
+  {
+   "id": "c0_2",
+   "from": "m0_2",
+   "to": "out0",
+   "blockable": false,
+   "info": "More filling pressure lowers the balance."
+  },
+  {
+   "id": "e_na",
+   "from": "s0_3",
+   "to": "m0_3",
+   "label": "late sodium current",
+   "info": "Ranolazine blocks the late sodium current, which lowers calcium overload without changing heart rate or pressure."
+  },
+  {
+   "id": "c0_3",
+   "from": "m0_3",
+   "to": "out0",
+   "blockable": false,
+   "info": "More overload lowers the balance."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Beta-blockers and ivabradine lower heart rate, calcium channel blockers lower afterload, nitrates lower filling pressure, and ranolazine lowers calcium overload. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Coronary anatomy and revascularisation, antiplatelet and statin therapy, nicorandil and trimetazidine, vasospastic angina, acute coronary syndrome care, exercise testing, contraindications (for example nitrates with PDE5 inhibitors, shown in their own figure) and adverse effects are left out. Oxygen balance is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Angina: how the antianginal drugs improve the heart's oxygen balance",
+  "blurb": "Interactive figure: beta-blockers, ivabradine, calcium channel blockers, nitrates and ranolazine",
+  "drugs": {
+   "ivabradine": "d=2",
+   "ranolazine": "d=5",
+   "trimetazidine": "d=5",
+   "nicorandil": "d=4",
+   "isosorbide": "d=4",
+   "nitroglycerin": "d=4",
+   "glyceryl": "d=4"
+  },
+  "terms": [
+   "antianginals?",
+   "anti[- ]?anginal drugs?",
+   "angina (?:treatment|drugs?|therapy)",
+   "ivabradine",
+   "If (?:channel )?inhibitors?"
+  ]
+ }
+}

@@ -1,0 +1,385 @@
+{
+ "id": "glucocorticoid-effects",
+ "title": "Glucocorticoids compared: anti-inflammatory power, metabolic harm, adrenal suppression and salt retention",
+ "ariaLabel": "Schematic of what systemic glucocorticoids do: they lower inflammatory gene expression, they raise glucose and break down bone and muscle, they switch off the body's own cortisol production by negative feedback, and some of them also act on mineralocorticoid receptors to retain salt and water. Hydrocortisone, prednisolone, dexamethasone and fludrocortisone differ in how strongly they do each.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Inflammatory drive",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no glucocorticoid"
+  },
+  {
+   "label": "hydrocortisone type",
+   "status": "hydrocortisone type",
+   "blocks": {
+    "e_gene": 0.4,
+    "e_met": -1.5,
+    "e_fb": -1.5,
+    "e_mr": -2.5
+   }
+  },
+  {
+   "label": "prednisolone type",
+   "status": "prednisolone type",
+   "blocks": {
+    "e_gene": 0.7,
+    "e_met": -3.0,
+    "e_fb": -3.0,
+    "e_mr": -0.5
+   }
+  },
+  {
+   "label": "dexamethasone type",
+   "status": "dexamethasone type",
+   "blocks": {
+    "e_gene": 0.9,
+    "e_met": -5.0,
+    "e_fb": -5.0,
+    "e_mr": 0.0
+   }
+  },
+  {
+   "label": "fludrocortisone type (mineralocorticoid)",
+   "status": "fludrocortisone type",
+   "blocks": {
+    "e_gene": 0.0,
+    "e_met": -1.0,
+    "e_fb": -0.5,
+    "e_mr": -6.0
+   }
+  }
+ ],
+ "readout": "Inflammation {0} · harm {1} · cortisol {2} · salt {3}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "suppressed",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "small",
+    "moderate",
+    "marked"
+   ],
+   "cuts": [
+    0.18,
+    0.35
+   ]
+  },
+  {
+   "node": "out2",
+   "words": [
+    "normal",
+    "suppressed",
+    "strongly suppressed"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  },
+  {
+   "node": "out3",
+   "words": [
+    "none",
+    "some",
+    "marked"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Inflammation active · harm small · cortisol normal · salt none"
+  ],
+  [
+   1,
+   1,
+   "Inflammation reduced · harm moderate · cortisol suppressed · salt some"
+  ],
+  [
+   1,
+   2,
+   "Inflammation suppressed · harm marked · cortisol strongly suppressed · salt none"
+  ],
+  [
+   1,
+   3,
+   "Inflammation suppressed · harm marked · cortisol strongly suppressed · salt none"
+  ],
+  [
+   1,
+   4,
+   "Inflammation active · harm moderate · cortisol normal · salt marked"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "Inflammatory drive",
+   "sub": "cytokines, NF-kB",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Inflammatory signals in the tissue. The slider sets how strong they are."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Inflammatory genes on",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Production of cytokines and mediators."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "fixed": 0.1,
+   "label": "Metabolic effect",
+   "sub": "glucose, bone, muscle",
+   "x": 105,
+   "y": 238,
+   "rx": 92,
+   "info": "Glucocorticoid actions on liver, muscle, bone and skin."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "Metabolic effect",
+   "x": 480,
+   "y": 238,
+   "rx": 100,
+   "info": "Hyperglycaemia, bone loss and muscle wasting."
+  },
+  {
+   "id": "s2_0",
+   "kind": "source",
+   "fixed": 0.15,
+   "label": "Negative feedback",
+   "sub": "hypothalamus, pituitary",
+   "x": 105,
+   "y": 382,
+   "rx": 92,
+   "info": "Cortisol (and steroid drugs) tell the hypothalamus and pituitary to lower CRH and ACTH."
+  },
+  {
+   "id": "m2_0",
+   "kind": "mid",
+   "label": "ACTH switched off",
+   "x": 480,
+   "y": 382,
+   "rx": 100,
+   "info": "Low ACTH leaves the adrenal glands under-driven."
+  },
+  {
+   "id": "s3_0",
+   "kind": "source",
+   "fixed": 0.1,
+   "label": "Mineralocorticoid signal",
+   "sub": "kidney",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "Mineralocorticoid receptors in the kidney distal tubule."
+  },
+  {
+   "id": "m3_0",
+   "kind": "mid",
+   "label": "Salt kept",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Sodium kept (and potassium lost)."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0_0",
+     0.8
+    ]
+   ],
+   "label": "Inflammation",
+   "x": 820,
+   "y": 95,
+   "rx": 100,
+   "info": "A teaching score for inflammation. Glucocorticoids lower it by changing gene expression."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m1_0",
+     1.0
+    ]
+   ],
+   "label": "Metabolic harm",
+   "x": 820,
+   "y": 238,
+   "rx": 100,
+   "info": "A teaching score for metabolic and tissue harm from steroids: raised glucose, bone loss, muscle wasting, thin skin."
+  },
+  {
+   "id": "out2",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m2_0",
+     1.0
+    ]
+   ],
+   "label": "Own cortisol production",
+   "x": 820,
+   "y": 382,
+   "rx": 100,
+   "info": "A teaching score for how much cortisol the adrenal glands still make. Steroids switch off ACTH and so the adrenal glands shrink; stopping suddenly after long use can cause adrenal crisis."
+  },
+  {
+   "id": "out3",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m3_0",
+     1.0
+    ]
+   ],
+   "label": "Salt and water retention",
+   "x": 820,
+   "y": 525,
+   "rx": 100,
+   "info": "A teaching score for sodium and water retention through the mineralocorticoid receptor."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_gene",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "GR genes",
+   "info": "Glucocorticoids bind the intracellular receptor and lower transcription of many inflammatory genes (and raise anti-inflammatory ones such as lipocortin). The effect takes hours to days.",
+   "w": 1.0
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More active genes means more inflammation."
+  },
+  {
+   "id": "e_met",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "metabolic receptors",
+   "info": "Glucocorticoids raise glucose output, break down muscle protein, reduce bone formation and thin skin. These effects grow with dose and duration."
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "More effect is more harm."
+  },
+  {
+   "id": "e_fb",
+   "from": "s2_0",
+   "to": "m2_0",
+   "label": "feedback on ACTH",
+   "info": "Any glucocorticoid drug switches off ACTH through negative feedback, so the adrenal cortex rests and shrinks. Dexamethasone is the strongest suppressor."
+  },
+  {
+   "id": "c2_0",
+   "from": "m2_0",
+   "to": "out2",
+   "blockable": false,
+   "info": "More feedback means more suppression."
+  },
+  {
+   "id": "e_mr",
+   "from": "s3_0",
+   "to": "m3_0",
+   "label": "mineralocorticoid receptor",
+   "info": "Hydrocortisone and fludrocortisone have strong mineralocorticoid action; prednisolone has less; dexamethasone almost none."
+  },
+  {
+   "id": "c3_0",
+   "from": "m3_0",
+   "to": "out3",
+   "blockable": false,
+   "info": "More signal keeps more salt and water."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Glucocorticoids lower inflammatory gene expression, raise glucose and break down bone and muscle, suppress the body's own cortisol by negative feedback, and (hydrocortisone, fludrocortisone) retain salt through the mineralocorticoid receptor. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Inhaled, topical and intra-articular routes, relative potency tables and equivalent doses, stress dosing, tapering schedules, infection and eye effects, mood and sleep effects, growth suppression in children, adrenal insufficiency care and many interactions are left out. All four results are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Glucocorticoids compared: anti-inflammatory power, metabolic harm, adrenal suppression and salt retention",
+  "blurb": "Interactive figure: hydrocortisone, prednisolone, dexamethasone and fludrocortisone compared",
+  "drugs": {
+   "hydrocortisone": "d=1",
+   "cortisone": "d=1",
+   "prednisolone": "d=2",
+   "prednisone": "d=2",
+   "methylprednisolone": "d=2",
+   "deflazacort": "d=2",
+   "dexamethasone": "d=3",
+   "betamethasone": "d=3",
+   "triamcinolone": "d=2",
+   "fludrocortisone": "d=4"
+  },
+  "terms": [
+   "glucocorticoids?",
+   "corticosteroids?",
+   "systemic steroids?",
+   "steroid (?:therapy|treatment|taper|withdrawal)",
+   "adrenal suppression",
+   "cushing"
+  ]
+ }
+}

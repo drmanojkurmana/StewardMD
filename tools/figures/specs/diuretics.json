@@ -70,6 +70,14 @@
     "r_loop": 0.85,
     "r_dct": 0.85
    }
+  },
+  {
+   "label": "osmotic diuretic (mannitol type)",
+   "status": "osmotic diuretic",
+   "blocks": {
+    "r_pct": 0.3,
+    "r_loop": 0.25
+   }
   }
  ],
  "readout": "sodium and water in the urine: {0}",
@@ -296,7 +304,7 @@
   "<strong>Aldosterone antagonists.</strong> Spironolactone blocks the mineralocorticoid receptor, so aldosterone has less effect on the collecting duct (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK554421/\">Spironolactone, StatPearls</a>).",
   "<strong>Carbonic anhydrase inhibitors and ENaC blockers.</strong> Acetazolamide inhibits carbonic anhydrase in the proximal tubule and so bicarbonate reabsorption, making the urine alkaline; amiloride blocks ENaC in the late distal tubule and collecting duct. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung's Basic and Clinical Pharmacology; KD Tripathi, Essentials of Medical Pharmacology) and was not checked against a linked source here, so it is flagged for review."
  ],
- "simplified": "The shares of sodium returned by each segment and the size of each drug's block are illustrative and are not shown as numbers; real values vary with the person, the diet and the dose. Compensation (more reabsorption downstream after a block, the effect of lost volume on renin and aldosterone), potassium, magnesium, calcium, uric acid and acid-base effects, the secretion of loop and thiazide diuretics into the tubule, tolerance, osmotic diuretics (mannitol), vasopressin antagonists and SGLT2 inhibitors are all left out. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "simplified": "The shares of sodium returned by each segment and the size of each drug's block are illustrative and are not shown as numbers; real values vary with the person, the diet and the dose. Compensation (more reabsorption downstream after a block, the effect of lost volume on renin and aldosterone), potassium, magnesium, calcium, uric acid and acid-base effects, the secretion of loop and thiazide diuretics into the tubule, tolerance, osmotic diuretics (mannitol), vasopressin antagonists and SGLT2 inhibitors are all left out. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them. The osmotic diuretic is shown as a drug that holds water in the tubule so less is reabsorbed in the proximal tubule and loop; it is given by infusion and also lowers brain and eye pressure by drawing water out of tissue, which is not drawn.",
  "registry": {
   "title": "Where diuretics act along the nephron",
   "blurb": "Interactive figure: loop, thiazide, potassium-sparing, aldosterone antagonist and carbonic anhydrase inhibitor, by site",
@@ -318,14 +326,18 @@
    "amiloride": "d=4",
    "triamterene": "d=4",
    "spironolactone": "d=5",
-   "eplerenone": "d=5"
+   "eplerenone": "d=5",
+   "mannitol": "d=7",
+   "glycerol": "d=7"
   },
   "terms": [
    "loop diuretics?",
    "thiazide(?: diuretics?)?",
    "diuretics?",
    "potassium[- ]sparing",
-   "carbonic anhydrase inhibitors?"
+   "carbonic anhydrase inhibitors?",
+   "osmotic diuretics?",
+   "mannitol"
   ]
  }
 }

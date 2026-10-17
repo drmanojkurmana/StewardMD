@@ -152,14 +152,18 @@
     "amiloride": "d=4",
     "triamterene": "d=4",
     "spironolactone": "d=5",
-    "eplerenone": "d=5"
+    "eplerenone": "d=5",
+    "mannitol": "d=7",
+    "glycerol": "d=7"
    },
    "terms": [
     "loop diuretics?",
     "thiazide(?: diuretics?)?",
     "diuretics?",
     "potassium[- ]sparing",
-    "carbonic anhydrase inhibitors?"
+    "carbonic anhydrase inhibitors?",
+    "osmotic diuretics?",
+    "mannitol"
    ]
   },
   {
@@ -308,7 +312,13 @@
     "empagliflozin": "d=5",
     "dapagliflozin": "d=5",
     "canagliflozin": "d=5",
-    "ertugliflozin": "d=5"
+    "ertugliflozin": "d=5",
+    "acarbose": "d=6",
+    "miglitol": "d=6",
+    "voglibose": "d=6",
+    "repaglinide": "d=7",
+    "nateglinide": "d=7",
+    "mitiglinide": "d=7"
    },
    "terms": [
     "sulfonylureas?",
@@ -321,7 +331,10 @@
     "oral hypoglycaemics?",
     "oral hypoglycemics?",
     "oral antidiabetics?",
-    "incretin"
+    "incretin",
+    "alpha[- ]glucosidase inhibitors?",
+    "meglitinides?",
+    "glinides?"
    ]
   },
   {
@@ -657,13 +670,22 @@
     "apomorphine": "d=3",
     "rotigotine": "d=3",
     "levodopa": "d=4",
-    "carbidopa": "d=4"
+    "carbidopa": "d=4",
+    "selegiline": "d=5",
+    "rasagiline": "d=5",
+    "safinamide": "d=5",
+    "entacapone": "d=5",
+    "tolcapone": "d=5",
+    "opicapone": "d=5"
    },
    "terms": [
     "antipsychotics?",
     "neuroleptics?",
     "dopamine (?:receptor )?(?:antagonists?|agonists?)",
-    "D2 (?:receptor )?(?:antagonists?|blockers?)"
+    "D2 (?:receptor )?(?:antagonists?|blockers?)",
+    "MAO[- ]?B inhibitors?",
+    "COMT inhibitors?",
+    "anti[- ]?parkinson(?:ian)? drugs?"
    ]
   },
   {
@@ -1912,6 +1934,233 @@
     "cytoprotective (?:agents?|drugs?)",
     "mucosal protectants?",
     "bile acid (?:therapy|drugs?)"
+   ]
+  },
+  {
+   "id": "adrenergic-blockers-compared",
+   "title": "Beta-blockers and alpha-blockers compared: heart, airway and pressure",
+   "blurb": "Interactive figure: propranolol, metoprolol, carvedilol, nebivolol, pindolol and prazosin types compared",
+   "page": "prep/figures/adrenergic-blockers-compared.html",
+   "drugs": {
+    "carvedilol": "d=3",
+    "labetalol": "d=3",
+    "nebivolol": "d=4",
+    "pindolol": "d=5",
+    "acebutolol": "d=5",
+    "prazosin": "d=6",
+    "doxazosin": "d=6",
+    "terazosin": "d=6",
+    "propranolol": "d=1",
+    "nadolol": "d=1",
+    "timolol": "d=1",
+    "sotalol": "d=1",
+    "metoprolol": "d=2",
+    "atenolol": "d=2",
+    "bisoprolol": "d=2",
+    "esmolol": "d=2",
+    "betaxolol": "d=2"
+   },
+   "terms": [
+    "beta[- ]?blockers?",
+    "alpha[- ]?blockers?",
+    "adrenergic (?:blockers?|antagonists?)",
+    "adrenoceptor (?:blockers?|antagonists?)",
+    "cardioselective",
+    "beta[- ]?adrenergic"
+   ]
+  },
+  {
+   "id": "sympathomimetics-receptors",
+   "title": "Adrenaline, noradrenaline, isoprenaline, dobutamine, phenylephrine and salbutamol compared",
+   "blurb": "Interactive figure: adrenaline, noradrenaline, isoprenaline, phenylephrine, dobutamine and salbutamol compared",
+   "page": "prep/figures/sympathomimetics-receptors.html",
+   "drugs": {
+    "adrenaline": "d=1",
+    "epinephrine": "d=1",
+    "noradrenaline": "d=2",
+    "norepinephrine": "d=2",
+    "isoprenaline": "d=3",
+    "isoproterenol": "d=3",
+    "phenylephrine": "d=4",
+    "midodrine": "d=4",
+    "metaraminol": "d=4",
+    "methoxamine": "d=4",
+    "dobutamine": "d=5",
+    "salbutamol": "d=6",
+    "albuterol": "d=6",
+    "terbutaline": "d=6",
+    "salmeterol": "d=6",
+    "formoterol": "d=6",
+    "ritodrine": "d=6"
+   },
+   "terms": [
+    "sympathomimetics?",
+    "adrenergic agonists?",
+    "adrenoceptor agonists?",
+    "catecholamines?",
+    "vasopressors?",
+    "inotropes?",
+    "adrenaline",
+    "epinephrine"
+   ]
+  },
+  {
+   "id": "antianginal-drugs",
+   "title": "Angina: how the antianginal drugs improve the heart's oxygen balance",
+   "blurb": "Interactive figure: beta-blockers, ivabradine, calcium channel blockers, nitrates and ranolazine",
+   "page": "prep/figures/antianginal-drugs.html",
+   "drugs": {
+    "ivabradine": "d=2",
+    "ranolazine": "d=5",
+    "trimetazidine": "d=5",
+    "nicorandil": "d=4",
+    "isosorbide": "d=4",
+    "nitroglycerin": "d=4",
+    "glyceryl": "d=4"
+   },
+   "terms": [
+    "antianginals?",
+    "anti[- ]?anginal drugs?",
+    "angina (?:treatment|drugs?|therapy)",
+    "ivabradine",
+    "If (?:channel )?inhibitors?"
+   ]
+  },
+  {
+   "id": "triglyceride-hdl-drugs",
+   "title": "Fibrates, niacin and omega-3: triglycerides and HDL",
+   "blurb": "Interactive figure: fibrates, niacin, omega-3 and statins on triglycerides and HDL",
+   "page": "prep/figures/triglyceride-hdl-drugs.html",
+   "drugs": {
+    "fenofibrate": "d=1",
+    "gemfibrozil": "d=1",
+    "bezafibrate": "d=1",
+    "clofibrate": "d=1",
+    "ciprofibrate": "d=1",
+    "niacin": "d=2",
+    "nicotinic": "d=2",
+    "icosapent": "d=3",
+    "omacor": "d=3"
+   },
+   "terms": [
+    "fibrates?",
+    "triglyceride[- ]lowering",
+    "hypertriglyceridaemia",
+    "hypertriglyceridemia",
+    "niacin",
+    "omega[- ]?3",
+    "HDL[- ]raising"
+   ]
+  },
+  {
+   "id": "glaucoma-drugs",
+   "title": "Glaucoma: lowering eye pressure by making less fluid or draining more",
+   "blurb": "Interactive figure: timolol, dorzolamide, brimonidine, latanoprost and pilocarpine",
+   "page": "prep/figures/glaucoma-drugs.html",
+   "drugs": {
+    "timolol": "d=1",
+    "betaxolol": "d=1",
+    "carteolol": "d=1",
+    "levobunolol": "d=1",
+    "dorzolamide": "d=2",
+    "brinzolamide": "d=2",
+    "acetazolamide": "d=2",
+    "methazolamide": "d=2",
+    "brimonidine": "d=3",
+    "apraclonidine": "d=3",
+    "latanoprost": "d=4",
+    "bimatoprost": "d=4",
+    "travoprost": "d=4",
+    "tafluprost": "d=4",
+    "pilocarpine": "d=5",
+    "carbachol": "d=5"
+   },
+   "terms": [
+    "glaucoma",
+    "anti[- ]?glaucoma",
+    "intraocular pressure",
+    "ocular hypertension",
+    "aqueous humou?r"
+   ]
+  },
+  {
+   "id": "glucocorticoid-effects",
+   "title": "Glucocorticoids compared: anti-inflammatory power, metabolic harm, adrenal suppression and salt retention",
+   "blurb": "Interactive figure: hydrocortisone, prednisolone, dexamethasone and fludrocortisone compared",
+   "page": "prep/figures/glucocorticoid-effects.html",
+   "drugs": {
+    "hydrocortisone": "d=1",
+    "cortisone": "d=1",
+    "prednisolone": "d=2",
+    "prednisone": "d=2",
+    "methylprednisolone": "d=2",
+    "deflazacort": "d=2",
+    "dexamethasone": "d=3",
+    "betamethasone": "d=3",
+    "triamcinolone": "d=2",
+    "fludrocortisone": "d=4"
+   },
+   "terms": [
+    "glucocorticoids?",
+    "corticosteroids?",
+    "systemic steroids?",
+    "steroid (?:therapy|treatment|taper|withdrawal)",
+    "adrenal suppression",
+    "cushing"
+   ]
+  },
+  {
+   "id": "reproductive-axis-drugs",
+   "title": "GnRH, clomiphene and gonadotropins: how drugs push or switch off the reproductive axis",
+   "blurb": "Interactive figure: GnRH analogues, clomiphene and gonadotropins",
+   "page": "prep/figures/reproductive-axis-drugs.html",
+   "drugs": {
+    "leuprolide": "d=2",
+    "leuprorelin": "d=2",
+    "goserelin": "d=2",
+    "triptorelin": "d=2",
+    "nafarelin": "d=2",
+    "buserelin": "d=2",
+    "cetrorelix": "d=3",
+    "ganirelix": "d=3",
+    "degarelix": "d=3",
+    "elagolix": "d=3",
+    "relugolix": "d=3",
+    "clomiphene": "d=4",
+    "clomifene": "d=4",
+    "letrozole": "d=4",
+    "follitropin": "d=6",
+    "menotropin": "d=6",
+    "gonadotropin": "d=6",
+    "hcg": "d=6",
+    "urofollitropin": "d=6",
+    "choriogonadotropin": "d=6",
+    "gnrh": "d=1"
+   },
+   "terms": [
+    "GnRH (?:agonists?|analogues?|antagonists?)",
+    "gonadotropins?",
+    "gonadotrophins?",
+    "ovulation induction",
+    "reproductive axis",
+    "hypothalamic[- ]pituitary[- ]gonadal"
+   ]
+  },
+  {
+   "id": "heart-failure-drugs",
+   "title": "Heart failure: how the main drug classes work together",
+   "blurb": "Interactive figure: ACE inhibitor, ARNI, beta-blocker, spironolactone, SGLT2 inhibitor and loop diuretic",
+   "page": "prep/figures/heart-failure-drugs.html",
+   "drugs": {
+    "sacubitril": "d=2",
+    "entresto": "d=2"
+   },
+   "terms": [
+    "heart failure (?:drugs?|treatment|therapy)",
+    "HFrEF",
+    "guideline[- ]directed medical therapy",
+    "neprilysin inhibitors?",
+    "ARNI"
    ]
   }
  ]

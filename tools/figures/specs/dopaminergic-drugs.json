@@ -72,6 +72,18 @@
      "g": 0.35
     }
    ]
+  },
+  {
+   "label": "MAO-B or COMT inhibitor (selegiline or entacapone type)",
+   "status": "MAO-B or COMT inhibitor",
+   "cols": [
+    {
+     "g": 0.15
+    },
+    {
+     "g": 0.15
+    }
+   ]
   }
  ],
  "readout": "D1 signal {0} · D2 signal {1}",
@@ -170,7 +182,7 @@
   "<strong>Molecule.</strong> Dopamine, C8H11NO2 (<a href=\"https://pubchem.ncbi.nlm.nih.gov/compound/681\">PubChem CID 681</a>).",
   "<strong>The drug classes.</strong> D2 antagonists (typical and atypical antipsychotics), partial agonists, dopamine agonists and levodopa. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
  ],
- "simplified": "The pathways of the brain (nigrostriatal, mesolimbic, mesocortical, tuberoinfundibular), serotonin receptors (5-HT2A) that atypical antipsychotics also block, muscarinic, histaminic and alpha-adrenergic effects of antipsychotics, the effects on prolactin, the loss of dopamine neurons in Parkinson's disease, dopamine breakdown (MAO-B, COMT inhibitors and decarboxylase inhibitors), dyskinesia and receptor changes with long-term use are left out. D1 and D2 are drawn on separate cells with separate effectors; the shared pathway of the original teaching diagram is not used. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "simplified": "The pathways of the brain (nigrostriatal, mesolimbic, mesocortical, tuberoinfundibular), serotonin receptors (5-HT2A) that atypical antipsychotics also block, muscarinic, histaminic and alpha-adrenergic effects of antipsychotics, the effects on prolactin, the loss of dopamine neurons in Parkinson's disease, dopamine breakdown (MAO-B, COMT inhibitors and decarboxylase inhibitors), dyskinesia and receptor changes with long-term use are left out. D1 and D2 are drawn on separate cells with separate effectors; the shared pathway of the original teaching diagram is not used. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them. MAO-B and COMT inhibitors are shown as a smaller rise in dopamine because less is broken down; carbidopa, amantadine and anticholinergics for tremor are not drawn.",
  "registry": {
   "title": "Dopamine receptors: antipsychotics, levodopa and dopamine agonists",
   "blurb": "Interactive figure: D1 and D2 receptors with D2 blockers, partial agonists, dopamine agonists and levodopa",
@@ -201,13 +213,22 @@
    "apomorphine": "d=3",
    "rotigotine": "d=3",
    "levodopa": "d=4",
-   "carbidopa": "d=4"
+   "carbidopa": "d=4",
+   "selegiline": "d=5",
+   "rasagiline": "d=5",
+   "safinamide": "d=5",
+   "entacapone": "d=5",
+   "tolcapone": "d=5",
+   "opicapone": "d=5"
   },
   "terms": [
    "antipsychotics?",
    "neuroleptics?",
    "dopamine (?:receptor )?(?:antagonists?|agonists?)",
-   "D2 (?:receptor )?(?:antagonists?|blockers?)"
+   "D2 (?:receptor )?(?:antagonists?|blockers?)",
+   "MAO[- ]?B inhibitors?",
+   "COMT inhibitors?",
+   "anti[- ]?parkinson(?:ian)? drugs?"
   ]
  }
 }

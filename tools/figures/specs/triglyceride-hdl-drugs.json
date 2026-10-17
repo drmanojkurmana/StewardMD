@@ -1,0 +1,288 @@
+{
+ "id": "triglyceride-hdl-drugs",
+ "title": "Fibrates, niacin and omega-3: triglycerides and HDL",
+ "ariaLabel": "Schematic of triglyceride and HDL handling: the liver makes VLDL rich in triglyceride, lipoprotein lipase clears triglyceride from the blood, and apoA-I drives HDL. Fibrates activate PPAR-alpha, which raises lipoprotein lipase and apoA-I; niacin lowers VLDL production and raises HDL; omega-3 fatty acids lower VLDL production; statins lower triglyceride modestly.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Dietary fat and carbohydrate load",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no triglyceride-lowering drug"
+  },
+  {
+   "label": "fibrate type (PPAR-alpha agonist)",
+   "status": "fibrate",
+   "blocks": {
+    "e_lpl": -1.5,
+    "e_hdl": -0.7
+   }
+  },
+  {
+   "label": "niacin type",
+   "status": "niacin",
+   "blocks": {
+    "e_vldl": 0.6,
+    "e_hdl": -1.0
+   }
+  },
+  {
+   "label": "omega-3 fatty acid type",
+   "status": "omega-3",
+   "blocks": {
+    "e_vldl": 0.5
+   }
+  },
+  {
+   "label": "statin type",
+   "status": "statin",
+   "blocks": {
+    "e_vldl": 0.3
+   }
+  }
+ ],
+ "readout": "Triglycerides {0} · HDL {1}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "low",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.12,
+    0.25
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "low",
+    "moderate",
+    "higher"
+   ],
+   "cuts": [
+    0.28,
+    0.4
+   ]
+  }
+ ],
+ "status": "Load: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Triglycerides high · HDL low"
+  ],
+  [
+   1,
+   1,
+   "Triglycerides low · HDL higher"
+  ],
+  [
+   1,
+   2,
+   "Triglycerides low · HDL higher"
+  ],
+  [
+   1,
+   3,
+   "Triglycerides low · HDL low"
+  ],
+  [
+   1,
+   4,
+   "Triglycerides moderate · HDL low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "VLDL production",
+   "sub": "liver",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "The liver packages triglyceride into VLDL. The slider sets the fat and carbohydrate load."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "VLDL triglyceride",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Triglyceride-rich VLDL particles in the blood."
+  },
+  {
+   "id": "s0_1",
+   "kind": "source",
+   "label": "Lipoprotein lipase",
+   "sub": "clearance",
+   "x": 105,
+   "y": 310,
+   "rx": 92,
+   "info": "Lipoprotein lipase on vessel walls breaks down triglyceride-rich particles."
+  },
+  {
+   "id": "m0_1",
+   "kind": "mid",
+   "label": "Triglyceride cleared",
+   "x": 480,
+   "y": 310,
+   "rx": 100,
+   "info": "Triglyceride removed from the blood by lipoprotein lipase."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "label": "ApoA-I synthesis",
+   "sub": "liver",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "ApoA-I is the main protein of HDL, made by the liver and gut."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "HDL formed",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "HDL particles that carry cholesterol back to the liver."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0_0",
+     0.5
+    ],
+    [
+     "n:m0_1",
+     -0.35
+    ]
+   ],
+   "label": "Triglycerides",
+   "x": 820,
+   "y": 202,
+   "rx": 100,
+   "info": "A teaching score for blood triglyceride."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m1_0",
+     0.7
+    ]
+   ],
+   "label": "HDL cholesterol",
+   "x": 820,
+   "y": 525,
+   "rx": 100,
+   "info": "A teaching score for HDL cholesterol."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_vldl",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "VLDL secretion",
+   "info": "Niacin lowers VLDL secretion by blocking triglyceride synthesis in the liver and fat release from adipose tissue. Omega-3 fatty acids lower triglyceride synthesis. Statins lower VLDL modestly."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More VLDL raises triglycerides."
+  },
+  {
+   "id": "e_lpl",
+   "from": "s0_1",
+   "to": "m0_1",
+   "label": "lipase activity",
+   "info": "Fibrates activate PPAR-alpha, which raises lipoprotein lipase and lowers apoC-III, so triglyceride is cleared faster.",
+   "w": 0.5
+  },
+  {
+   "id": "c0_1",
+   "from": "m0_1",
+   "to": "out0",
+   "blockable": false,
+   "info": "More clearance lowers triglycerides."
+  },
+  {
+   "id": "e_hdl",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "apoA-I production",
+   "info": "Fibrates (via PPAR-alpha) and niacin raise HDL by raising apoA-I production and slowing HDL clearance.",
+   "w": 0.5
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "More HDL raises the HDL score."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Fibrates activate PPAR-alpha to raise lipoprotein lipase and apoA-I, niacin lowers VLDL secretion and raises HDL, and omega-3 fatty acids lower VLDL production. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "LDL-lowering drugs (own figure), CETP inhibitors, pancreatitis risk with very high triglyceride, diet and alcohol, insulin resistance, myopathy with fibrate and statin, flushing and glucose effects of niacin, and outcome evidence are left out. Triglyceride and HDL are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Fibrates, niacin and omega-3: triglycerides and HDL",
+  "blurb": "Interactive figure: fibrates, niacin, omega-3 and statins on triglycerides and HDL",
+  "drugs": {
+   "fenofibrate": "d=1",
+   "gemfibrozil": "d=1",
+   "bezafibrate": "d=1",
+   "clofibrate": "d=1",
+   "ciprofibrate": "d=1",
+   "niacin": "d=2",
+   "nicotinic": "d=2",
+   "icosapent": "d=3",
+   "omacor": "d=3"
+  },
+  "terms": [
+   "fibrates?",
+   "triglyceride[- ]lowering",
+   "hypertriglyceridaemia",
+   "hypertriglyceridemia",
+   "niacin",
+   "omega[- ]?3",
+   "HDL[- ]raising"
+  ]
+ }
+}

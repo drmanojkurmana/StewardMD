@@ -64,6 +64,20 @@
    "blocks": {
     "e_sglt": 0.85
    }
+  },
+  {
+   "label": "alpha-glucosidase inhibitor (acarbose type)",
+   "status": "alpha-glucosidase inhibitor",
+   "blocks": {
+    "ab": 0.5
+   }
+  },
+  {
+   "label": "meglitinide (repaglinide or nateglinide type)",
+   "status": "meglitinide",
+   "blocks": {
+    "e_ins": -0.45
+   }
   }
  ],
  "readout": "blood glucose {0}",
@@ -214,8 +228,8 @@
    "id": "ab",
    "from": "meal",
    "to": "bg",
-   "blockable": false,
-   "info": "Absorbed glucose entering the blood."
+   "info": "Glucose absorbed from the meal in the small intestine. Alpha-glucosidase inhibitors (acarbose, miglitol) delay the breakdown of starch to glucose, so absorption is slower and the rise after a meal is smaller.",
+   "label": "gut absorption"
   },
   {
    "id": "e_liv",
@@ -269,7 +283,7 @@
   "<strong>Metformin and SGLT2 inhibitors.</strong> Metformin mainly reduces hepatic glucose output and to a lesser extent raises insulin sensitivity; SGLT2 inhibitors block renal glucose reabsorption in the proximal tubule, an effect independent of insulin and so less likely to cause hypoglycaemia (<a href=\"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4034109/\">Oral hypoglycemic drugs: pathophysiological basis of their mechanism of action, PMC</a>; <a href=\"https://www.aafp.org/pubs/afp/issues/2001/0501/p1747.html\">Oral agents in type 2 diabetes, AAFP</a>).",
   "<strong>Incretin-based drugs.</strong> DPP-4 inhibitors and GLP-1 receptor agonists raise glucose-dependent insulin release and lower glucagon; this is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review."
  ],
- "simplified": "Insulin itself (and its types) is shown only as the natural signal: injected insulin acts at the same uptake step, with hypoglycaemia as its main risk. Not drawn: glucagon, fat and muscle effects on weight, alpha-glucosidase inhibitors, meglitinides, amylin analogues, the feedback of glucose on insulin release, lactate, ketones, kidney threshold effects, heart and kidney outcomes, genital infection and volume effects of SGLT2 inhibitors, and the slow onset of thiazolidinediones. The blood glucose level is a teaching score, not a measured value. Levels, flow and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "simplified": "Insulin itself (and its types) is shown only as the natural signal: injected insulin acts at the same uptake step, with hypoglycaemia as its main risk. Not drawn: glucagon, fat and muscle effects on weight, alpha-glucosidase inhibitors, meglitinides, amylin analogues, the feedback of glucose on insulin release, lactate, ketones, kidney threshold effects, heart and kidney outcomes, genital infection and volume effects of SGLT2 inhibitors, and the slow onset of thiazolidinediones. The blood glucose level is a teaching score, not a measured value. Levels, flow and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them. Alpha-glucosidase inhibitors and meglitinides are shown as simple options: delayed absorption and a quick, short insulin release.",
  "registry": {
   "title": "Blood glucose: insulin and the oral antidiabetic drugs",
   "blurb": "Interactive figure: sulfonylureas, metformin, thiazolidinediones, incretin drugs and SGLT2 inhibitors",
@@ -299,7 +313,13 @@
    "empagliflozin": "d=5",
    "dapagliflozin": "d=5",
    "canagliflozin": "d=5",
-   "ertugliflozin": "d=5"
+   "ertugliflozin": "d=5",
+   "acarbose": "d=6",
+   "miglitol": "d=6",
+   "voglibose": "d=6",
+   "repaglinide": "d=7",
+   "nateglinide": "d=7",
+   "mitiglinide": "d=7"
   },
   "terms": [
    "sulfonylureas?",
@@ -312,7 +332,10 @@
    "oral hypoglycaemics?",
    "oral hypoglycemics?",
    "oral antidiabetics?",
-   "incretin"
+   "incretin",
+   "alpha[- ]glucosidase inhibitors?",
+   "meglitinides?",
+   "glinides?"
   ]
  }
 }

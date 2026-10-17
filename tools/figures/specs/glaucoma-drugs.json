@@ -1,0 +1,293 @@
+{
+ "id": "glaucoma-drugs",
+ "title": "Glaucoma: lowering eye pressure by making less fluid or draining more",
+ "ariaLabel": "Schematic of eye pressure: the ciliary body makes aqueous humour, which drains through the trabecular meshwork and the uveoscleral route. Timolol-type beta-blockers, dorzolamide-type carbonic anhydrase inhibitors and brimonidine-type alpha-2 agonists reduce production; latanoprost-type prostaglandin analogues and brimonidine increase uveoscleral outflow; pilocarpine increases trabecular outflow.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Fluid production",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no glaucoma drug"
+  },
+  {
+   "label": "beta-blocker type (timolol)",
+   "status": "beta-blocker",
+   "blocks": {
+    "e_prod": 0.6
+   }
+  },
+  {
+   "label": "carbonic anhydrase inhibitor type (dorzolamide, acetazolamide)",
+   "status": "carbonic anhydrase inhibitor",
+   "blocks": {
+    "e_prod": 0.6
+   }
+  },
+  {
+   "label": "alpha-2 agonist type (brimonidine)",
+   "status": "alpha-2 agonist",
+   "blocks": {
+    "e_prod": 0.5,
+    "e_uv": -0.5
+   }
+  },
+  {
+   "label": "prostaglandin analogue type (latanoprost)",
+   "status": "prostaglandin analogue",
+   "blocks": {
+    "e_uv": -2.0
+   }
+  },
+  {
+   "label": "miotic type (pilocarpine)",
+   "status": "miotic",
+   "blocks": {
+    "e_tm": -1.2
+   }
+  },
+  {
+   "label": "prostaglandin analogue plus beta-blocker",
+   "status": "prostaglandin plus beta-blocker",
+   "blocks": {
+    "e_uv": -2.0,
+    "e_prod": 0.6
+   }
+  }
+ ],
+ "readout": "Eye pressure: {0}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "lowered",
+    "borderline",
+    "raised"
+   ],
+   "cuts": [
+    0.42,
+    0.6
+   ]
+  }
+ ],
+ "status": "Fluid production: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Eye pressure: borderline"
+  ],
+  [
+   1,
+   1,
+   "Eye pressure: lowered"
+  ],
+  [
+   1,
+   2,
+   "Eye pressure: lowered"
+  ],
+  [
+   1,
+   3,
+   "Eye pressure: lowered"
+  ],
+  [
+   1,
+   4,
+   "Eye pressure: lowered"
+  ],
+  [
+   1,
+   5,
+   "Eye pressure: borderline"
+  ],
+  [
+   1,
+   6,
+   "Eye pressure: lowered"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "Aqueous production",
+   "sub": "ciliary body",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "The ciliary body makes aqueous humour using sodium transport and carbonic anhydrase. The slider sets the production."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Fluid made",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Aqueous humour made by the ciliary body."
+  },
+  {
+   "id": "s0_1",
+   "kind": "source",
+   "label": "Trabecular outflow",
+   "sub": "conventional route",
+   "x": 105,
+   "y": 310,
+   "rx": 92,
+   "info": "The main drainage route through the trabecular meshwork."
+  },
+  {
+   "id": "m0_1",
+   "kind": "mid",
+   "label": "Fluid drained (trabecular)",
+   "x": 480,
+   "y": 310,
+   "rx": 100,
+   "info": "Fluid leaving by the trabecular route."
+  },
+  {
+   "id": "s0_2",
+   "kind": "source",
+   "label": "Uveoscleral outflow",
+   "sub": "unconventional route",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "A second drainage route through the ciliary muscle and sclera."
+  },
+  {
+   "id": "m0_2",
+   "kind": "mid",
+   "label": "Fluid drained (uveoscleral)",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Fluid leaving by the uveoscleral route."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.4,
+   "terms": [
+    [
+     "n:m0_0",
+     0.6
+    ],
+    [
+     "n:m0_1",
+     -0.25
+    ],
+    [
+     "n:m0_2",
+     -0.4
+    ]
+   ],
+   "label": "Eye pressure",
+   "x": 820,
+   "y": 310,
+   "rx": 100,
+   "info": "A teaching score for intraocular pressure: production raises it, drainage lowers it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_prod",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "aqueous production",
+   "info": "Beta-blockers (timolol), carbonic anhydrase inhibitors (dorzolamide, acetazolamide) and alpha-2 agonists (brimonidine) lower aqueous production."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More fluid raises eye pressure."
+  },
+  {
+   "id": "e_tm",
+   "from": "s0_1",
+   "to": "m0_1",
+   "label": "trabecular drainage",
+   "info": "Pilocarpine contracts the ciliary muscle, which pulls the trabecular meshwork open and improves drainage. It also constricts the pupil.",
+   "w": 0.5
+  },
+  {
+   "id": "c0_1",
+   "from": "m0_1",
+   "to": "out0",
+   "blockable": false,
+   "info": "More drainage lowers eye pressure."
+  },
+  {
+   "id": "e_uv",
+   "from": "s0_2",
+   "to": "m0_2",
+   "label": "uveoscleral drainage",
+   "info": "Prostaglandin analogues (latanoprost, bimatoprost, travoprost) increase uveoscleral outflow by remodelling the extracellular matrix, and are often the first choice. Brimonidine adds a smaller effect.",
+   "w": 0.5
+  },
+  {
+   "id": "c0_2",
+   "from": "m0_2",
+   "to": "out0",
+   "blockable": false,
+   "info": "More drainage lowers eye pressure."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Beta-blockers, carbonic anhydrase inhibitors and alpha-2 agonists reduce aqueous production, prostaglandin analogues raise uveoscleral outflow, and pilocarpine opens trabecular outflow. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Angle-closure and open-angle differences, laser and surgery, osmotic agents (mannitol), rho kinase inhibitors, preservatives, systemic absorption of timolol (asthma, bradycardia), eye colour change with prostaglandins and monitoring are left out. Eye pressure is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Glaucoma: lowering eye pressure by making less fluid or draining more",
+  "blurb": "Interactive figure: timolol, dorzolamide, brimonidine, latanoprost and pilocarpine",
+  "drugs": {
+   "timolol": "d=1",
+   "betaxolol": "d=1",
+   "carteolol": "d=1",
+   "levobunolol": "d=1",
+   "dorzolamide": "d=2",
+   "brinzolamide": "d=2",
+   "acetazolamide": "d=2",
+   "methazolamide": "d=2",
+   "brimonidine": "d=3",
+   "apraclonidine": "d=3",
+   "latanoprost": "d=4",
+   "bimatoprost": "d=4",
+   "travoprost": "d=4",
+   "tafluprost": "d=4",
+   "pilocarpine": "d=5",
+   "carbachol": "d=5"
+  },
+  "terms": [
+   "glaucoma",
+   "anti[- ]?glaucoma",
+   "intraocular pressure",
+   "ocular hypertension",
+   "aqueous humou?r"
+  ]
+ }
+}

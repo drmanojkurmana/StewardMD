@@ -1,0 +1,396 @@
+{
+ "id": "adrenergic-blockers-compared",
+ "title": "Beta-blockers and alpha-blockers compared: heart, airway and pressure",
+ "ariaLabel": "Schematic comparing adrenergic blockers: beta-1 receptors in the heart, beta-2 receptors in the airway, and alpha-1 receptors in vessels. Propranolol blocks both beta receptors, metoprolol mostly beta-1, carvedilol and labetalol block beta and alpha-1, nebivolol blocks beta-1 and adds nitric oxide release, pindolol is a partial agonist, and prazosin blocks only alpha-1.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Sympathetic drive",
+  "a": [
+   0.3,
+   0.6,
+   0.9
+  ],
+  "names": [
+   "rest",
+   "stress",
+   "high"
+  ],
+  "ticks": [
+   "rest",
+   "stress",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no adrenergic blocker"
+  },
+  {
+   "label": "non-selective beta-blocker (propranolol type)",
+   "status": "non-selective beta-blocker",
+   "blocks": {
+    "e_b1": 0.85,
+    "e_b2": 0.85
+   }
+  },
+  {
+   "label": "beta-1 selective (metoprolol, atenolol, bisoprolol type)",
+   "status": "beta-1 selective",
+   "blocks": {
+    "e_b1": 0.85,
+    "e_b2": 0.1
+   }
+  },
+  {
+   "label": "beta and alpha-1 blocker (carvedilol, labetalol type)",
+   "status": "beta plus alpha-1 blocker",
+   "blocks": {
+    "e_b1": 0.85,
+    "e_b2": 0.8,
+    "e_a1": 0.8
+   }
+  },
+  {
+   "label": "nebivolol type (beta-1 plus nitric oxide)",
+   "status": "nebivolol type",
+   "blocks": {
+    "e_b1": 0.85,
+    "e_b2": 0.1,
+    "e_no": -1.5
+   }
+  },
+  {
+   "label": "partial agonist beta-blocker (pindolol type)",
+   "status": "partial agonist beta-blocker",
+   "blocks": {
+    "e_b1": 0.5,
+    "e_b2": 0.5
+   }
+  },
+  {
+   "label": "alpha-1 blocker (prazosin type)",
+   "status": "alpha-1 blocker",
+   "blocks": {
+    "e_a1": 0.85
+   }
+  }
+ ],
+ "readout": "Heart {0} · pressure {1} · airway {2}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "lowered",
+    "reduced",
+    "raised"
+   ],
+   "cuts": [
+    0.2,
+    0.45
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "lowered",
+    "usual",
+    "raised"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  },
+  {
+   "node": "out2",
+   "words": [
+    "narrowed",
+    "slightly narrowed",
+    "open"
+   ],
+   "cuts": [
+    0.25,
+    0.4
+   ]
+  }
+ ],
+ "status": "Sympathetic drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Heart raised · pressure usual · airway open"
+  ],
+  [
+   1,
+   1,
+   "Heart lowered · pressure usual · airway narrowed"
+  ],
+  [
+   1,
+   2,
+   "Heart lowered · pressure usual · airway open"
+  ],
+  [
+   1,
+   3,
+   "Heart lowered · pressure lowered · airway slightly narrowed"
+  ],
+  [
+   1,
+   4,
+   "Heart lowered · pressure lowered · airway open"
+  ],
+  [
+   1,
+   5,
+   "Heart reduced · pressure usual · airway slightly narrowed"
+  ],
+  [
+   1,
+   6,
+   "Heart raised · pressure lowered · airway open"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "label": "Sympathetic signal",
+   "sub": "to the heart",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Noradrenaline and adrenaline reaching beta-1 receptors on heart cells. The slider sets the level."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Heart stimulated",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Beta-1 signalling in the heart."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "label": "Vessel alpha-1 signal",
+   "sub": "to vessels",
+   "x": 105,
+   "y": 238,
+   "rx": 92,
+   "info": "Noradrenaline acting on alpha-1 receptors of vessel muscle."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "Vessels narrowed",
+   "x": 480,
+   "y": 238,
+   "rx": 100,
+   "info": "Alpha-1 signalling narrows vessels."
+  },
+  {
+   "id": "s1_1",
+   "kind": "source",
+   "label": "Endothelial nitric oxide",
+   "sub": "vessel lining",
+   "x": 105,
+   "y": 382,
+   "rx": 92,
+   "info": "Nitric oxide made by the vessel lining, which widens vessels."
+  },
+  {
+   "id": "m1_1",
+   "kind": "mid",
+   "label": "Vessels widened",
+   "x": 480,
+   "y": 382,
+   "rx": 100,
+   "info": "Nitric oxide widens vessels."
+  },
+  {
+   "id": "s2_0",
+   "kind": "source",
+   "label": "Sympathetic signal",
+   "sub": "to the airway",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "Noradrenaline and adrenaline reaching beta-2 receptors on airway smooth muscle."
+  },
+  {
+   "id": "m2_0",
+   "kind": "mid",
+   "label": "Airway relaxed",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Beta-2 signalling relaxes airway smooth muscle."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m0_0",
+     0.6
+    ]
+   ],
+   "label": "Heart rate and force",
+   "x": 820,
+   "y": 95,
+   "rx": 100,
+   "info": "A teaching score for heart rate and force of contraction, driven by beta-1 receptors in the heart."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m1_0",
+     0.4
+    ],
+    [
+     "n:m1_1",
+     -0.25
+    ],
+    [
+     "n:out0",
+     0.3
+    ]
+   ],
+   "label": "Blood pressure",
+   "x": 820,
+   "y": 310,
+   "rx": 100,
+   "info": "A teaching score for blood pressure, from cardiac output and vessel tone."
+  },
+  {
+   "id": "out2",
+   "kind": "calc",
+   "base": 0.2,
+   "terms": [
+    [
+     "n:m2_0",
+     0.5
+    ]
+   ],
+   "label": "Airway width",
+   "x": 820,
+   "y": 525,
+   "rx": 100,
+   "info": "A teaching score for how wide the airway is, kept open by beta-2 receptors on airway muscle."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_b1",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "beta-1 receptor",
+   "info": "Beta-1 blockade lowers heart rate and force. Selective blockers (metoprolol type) act mostly here; non-selective blockers and carvedilol or labetalol also block beta-2."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More heart stimulation raises heart rate and force."
+  },
+  {
+   "id": "e_a1",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "alpha-1 receptor",
+   "info": "Alpha-1 blockade (carvedilol, labetalol, prazosin) widens vessels, which lowers pressure and can cause a fall on standing."
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "Narrower vessels raise pressure."
+  },
+  {
+   "id": "e_no",
+   "from": "s1_1",
+   "to": "m1_1",
+   "label": "NO release",
+   "info": "Nebivolol raises nitric oxide release from the vessel lining in addition to beta-1 blockade, which widens vessels. Most other beta-blockers do not.",
+   "w": 0.5
+  },
+  {
+   "id": "c1_1",
+   "from": "m1_1",
+   "to": "out1",
+   "blockable": false,
+   "info": "Wider vessels lower pressure."
+  },
+  {
+   "id": "e_b2",
+   "from": "s2_0",
+   "to": "m2_0",
+   "label": "beta-2 receptor",
+   "info": "Beta-2 blockade lets the airway muscle tighten. This is why non-selective blockers are avoided in asthma; selective blockers are safer, though not risk-free."
+  },
+  {
+   "id": "c2_0",
+   "from": "m2_0",
+   "to": "out2",
+   "blockable": false,
+   "info": "More relaxation widens the airway."
+  },
+  {
+   "id": "x1_out0",
+   "from": "out0",
+   "to": "out1",
+   "label": "cardiac output",
+   "blockable": false,
+   "info": "A faster, stronger heart raises pressure."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Propranolol type blocks beta-1 and beta-2, metoprolol type mostly beta-1, carvedilol and labetalol add alpha-1 blockade, nebivolol adds nitric oxide release, pindolol is a partial agonist, and prazosin blocks only alpha-1. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Intrinsic sympathomimetic activity in detail, membrane stabilising effect, lipid solubility and brain effects, half-lives, the benefit in heart failure and after infarction, cautions (asthma, heart block, diabetes, abrupt stopping), alpha-2 effects and the reflex rise in sympathetic drive are left out. Heart rate, airway width and pressure are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Beta-blockers and alpha-blockers compared: heart, airway and pressure",
+  "blurb": "Interactive figure: propranolol, metoprolol, carvedilol, nebivolol, pindolol and prazosin types compared",
+  "drugs": {
+   "carvedilol": "d=3",
+   "labetalol": "d=3",
+   "nebivolol": "d=4",
+   "pindolol": "d=5",
+   "acebutolol": "d=5",
+   "prazosin": "d=6",
+   "doxazosin": "d=6",
+   "terazosin": "d=6",
+   "propranolol": "d=1",
+   "nadolol": "d=1",
+   "timolol": "d=1",
+   "sotalol": "d=1",
+   "metoprolol": "d=2",
+   "atenolol": "d=2",
+   "bisoprolol": "d=2",
+   "esmolol": "d=2",
+   "betaxolol": "d=2"
+  },
+  "terms": [
+   "beta[- ]?blockers?",
+   "alpha[- ]?blockers?",
+   "adrenergic (?:blockers?|antagonists?)",
+   "adrenoceptor (?:blockers?|antagonists?)",
+   "cardioselective",
+   "beta[- ]?adrenergic"
+  ]
+ }
+}
