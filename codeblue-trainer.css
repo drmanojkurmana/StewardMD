@@ -21,7 +21,6 @@
   background: var(--cbt-bg); color: var(--cbt-ink);
   --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
   font-family: var(--cbp-font);
-  font-variant-numeric: tabular-nums;
   --cbt-s1: var(--cbt-surface); --cbt-s2: var(--cbt-bg);
   --cbt-hairline: var(--cbt-line);
   --cbt-radius: 14px; --cbt-radius-sm: 10px;
@@ -45,9 +44,12 @@ body.dark #cbtRoot {
 body.cbt-lock { overflow: hidden; }
 
 #cbtRoot .cbt-top {
-  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  display: flex; align-items: center; flex-wrap: nowrap; gap: 8px;
   padding: 12px 14px; padding-top: calc(12px + env(safe-area-inset-top, 0px));
   background: var(--cbt-surface); border-bottom: 1px solid var(--cbt-line);
+}
+#cbtRoot .cbt-title {
+  flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 /* Press feedback on every pressable: scale 0.97 over 80 ms, transform only. */
 #cbtRoot .cbt-station, #cbtRoot .cbt-card, #cbtRoot .cbt-opt,
@@ -175,9 +177,9 @@ body.cbt-lock { overflow: hidden; }
  * surfaces, 14 px cards, 10 px controls, 8 pt spacing rhythm. */
 #cbtRoot .cbt-top {
   min-height: 52px; padding: 6px 12px; padding-top: calc(6px + env(safe-area-inset-top, 0px));
-  background: var(--cbt-s1); border-bottom: 1px solid var(--cbt-hairline); flex-wrap: wrap;
+  background: var(--cbt-s1); border-bottom: 1px solid var(--cbt-hairline); flex-wrap: nowrap;
 }
-#cbtRoot .cbt-title { font-size: 17px; font-weight: 700; flex: 1 1 140px; min-width: 0; white-space: nowrap; overflow: hidden; }
+#cbtRoot .cbt-title { font-size: 17px; font-weight: 700; flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #cbtRoot .cbt-back, #cbtRoot .cbt-close {
   border-radius: var(--cbt-radius-sm, 10px); background: var(--cbt-s2); font-size: 14px; flex: none;
 }
@@ -212,6 +214,32 @@ body.cbt-lock { overflow: hidden; }
   #cbtRoot .cbt-layout > .cbt-sub, #cbtRoot .cbt-layout > .cbt-fb,
   #cbtRoot .cbt-layout > .cbt-score { grid-column: 1 / -1; }
   #cbtRoot .cbt-layout > .cbt-card, #cbtRoot .cbt-layout > .cbt-station { margin: 0; }
+}
+
+/* Trainer result and debrief: calm summary, verdict rows, no bullets. */
+#cbtRoot .cbt-result { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+#cbtRoot .cbt-result-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+#cbtRoot .cbt-result-score { font-size: 44px; line-height: 1; font-weight: 300; font-variant-numeric: tabular-nums; }
+#cbtRoot .cbt-result-label { font-size: 17px; font-weight: 600; color: var(--cbt-muted); }
+#cbtRoot .cbt-result-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#cbtRoot .cbt-result-rows { min-width: 0; }
+#cbtRoot .cbt-rrow {
+  display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+  padding: 12px 0; border-top: 1px solid var(--cbt-hairline);
+}
+#cbtRoot .cbt-rrow:first-child { border-top: 0; padding-top: 0; }
+#cbtRoot .cbt-rrow-label { font-size: 15px; font-weight: 700; flex: 1 1 160px; min-width: 0; }
+#cbtRoot .cbt-rrow-text { font-size: 14px; line-height: 1.5; color: var(--cbt-muted); flex: 2 1 220px; min-width: 0; }
+#cbtRoot .cbt-chip {
+  flex: none; font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;
+  border: 1px solid var(--cbt-line); color: var(--cbt-muted);
+}
+#cbtRoot .cbt-chip-correct { color: var(--cbt-right); border-color: var(--cbt-right); }
+#cbtRoot .cbt-chip-missed { color: var(--cbt-wrong); border-color: var(--cbt-wrong); }
+#cbtRoot .cbt-chip-late { color: var(--cbt-muted); border-color: var(--cbt-muted); }
+@media (min-width: 768px) {
+  #cbtRoot .cbt-result { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+  #cbtRoot .cbt-result-side { position: sticky; top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -709,12 +709,13 @@
       "</div></div>" +
       '<div class="cbecg-row"><button class="cbecg-btn" data-cbecg-calbtn aria-pressed="' + state.cal + '">' +
       (state.cal ? "Hide calipers" : "Show calipers") + "</button>" +
-      '<span class="cbecg-read" data-cbecg-read role="status"></span></div></div><div class="cbecg-detailcol">' +
+      '<span class="cbecg-read" data-cbecg-read role="status"></span></div>' +
+      measureHtml() + '</div><div class="cbecg-detailcol">' +
       '<dl class="cbecg-meta"><dt>Rate</dt><dd>' + (m.rate ? "about " + m.rate + " per min" : "no complexes") + "</dd>" +
       "<dt>Regularity</dt><dd>" + (m.regular ? "regular" : "irregular") + "</dd>" +
       "<dt>ACLS category</dt><dd>" + escH(CLS_LABEL[m.cls]) + "</dd></dl>" +
       '<ul class="cbecg-feats">' + m.features.map(function (f) { return "<li>" + escH(f) + "</li>"; }).join("") + "</ul>" +
-      measureHtml() + "</div></div>";
+      "</div></div>";
   }
 
   function measureHtml() {

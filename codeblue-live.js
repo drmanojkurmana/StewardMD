@@ -120,7 +120,7 @@
       v: 1, mode: normMode(mode), training: opts.training === true,
       events: [], rosc: false, hadRosc: false, checks: {},
       cycleStart: 0, seq: 0, undo: [], createdWall: wall,
-      link: null, ventCue: true
+      link: null, ventCue: true, scene: normScene(opts.scene)
     };
   }
 
@@ -275,6 +275,180 @@
       if (isEpiDrug(ev)) epi++;
     });
     return { epi: epi, shocks: shocks };
+  }
+
+  /* ---------------- scene, debrief, past codes (pure) ---------------- */
+
+  var SCENE_SETTINGS = ["In-hospital", "Out-of-hospital"];
+  var SCENE_ARREST = ["Witnessed", "Unwitnessed"];
+  var SCENE_YESNO = ["Yes", "No"];
+  var PAST_KEY = "smd.cbl.past.v1";
+  var TEAM_KEY = "smd.cbl.team.v1";
+  var PRESETS_KEY = "smd.cbl.presets.v1";
+  var PAST_MAX = 50;
+
+  function defaultScene() {
+    return {
+      weightKg: null, setting: "", arrest: "", bystanderCpr: "",
+      downTimeMin: null, shocksBeforeArrival: null, location: "", team: []
+    };
+  }
+
+  function sceneNum(x) {
+    if (x == null || x === "") return null;
+    var n = Number(x);
+    return isFinite(n) && n >= 0 ? n : null;
+  }
+
+  /* Sanitise a scene object. Weight is stored only: it is never read by
+   * any calculation in this engine. Unknown values become empty. */
+  function normScene(raw) {
+    var out = defaultScene();
+    if (!raw || typeof raw !== "object") return out;
+    out.weightKg = sceneNum(raw.weightKg);
+    out.downTimeMin = sceneNum(raw.downTimeMin);
+    out.shocksBeforeArrival = sceneNum(raw.shocksBeforeArrival);
+    if (SCENE_SETTINGS.indexOf(raw.setting) >= 0) out.setting = raw.setting;
+    if (SCENE_ARREST.indexOf(raw.arrest) >= 0) out.arrest = raw.arrest;
+    if (SCENE_YESNO.indexOf(raw.bystanderCpr) >= 0) out.bystanderCpr = raw.bystanderCpr;
+    out.location = String(raw.location == null ? "" : raw.location).slice(0, 80);
+    if (Array.isArray(raw.team)) {
+      out.team = raw.team.map(function (n) { return String(n == null ? "" : n).trim().slice(0, 40); })
+        .filter(function (n) { return !!n; }).slice(0, 20);
+    }
+    return out;
+  }
+
+  function firstElapsedOf(events, pred) {
+    var t = null;
+    (events || []).forEach(function (ev) {
+      if (pred(ev) && (t === null || ev.elapsed < t)) t = ev.elapsed;
+    });
+    return t;
+  }
+
+  /* Debrief figures from the logged events only. Pauses pair pauseStart
+   * with the next resume; a pause still open at the end counts to the
+   * duration. CPR fraction is estimated from those logged pauses. */
+  function debriefStats(events, durationSeconds) {
+    var dur = Math.max(0, Math.floor(Number(durationSeconds) || 0));
+    var pauses = 0, pauseSeconds = 0, longestPause = 0, openAt = null;
+    (events || []).forEach(function (ev) {
+      if (ev.kind === "pauseStart") {
+        pauses++;
+        if (openAt === null) openAt = ev.elapsed;
+      } else if (ev.kind === "resume" && openAt !== null) {
+        var len = Math.max(0, ev.elapsed - openAt);
+        pauseSeconds += len;
+        if (len > longestPause) longestPause = len;
+        openAt = null;
+      }
+    });
+    if (openAt !== null) {
+      var openLen = Math.max(0, dur - openAt);
+      pauseSeconds += openLen;
+      if (openLen > longestPause) longestPause = openLen;
+    }
+    var counts = computeCounts(events);
+    var frac = dur > 0 ? Math.max(0, Math.min(100, Math.round((dur - pauseSeconds) / dur * 100))) : null;
+    return {
+      durationSeconds: dur,
+      timeToFirstShock: firstElapsedOf(events, function (e) { return e.kind === "shock"; }),
+      timeToFirstEpi: firstElapsedOf(events, isEpiDrug),
+      pauseCount: pauses,
+      longestPauseSeconds: Math.round(longestPause),
+      pauseSeconds: Math.round(pauseSeconds),
+      cprFractionPct: frac,
+      shocks: counts.shocks,
+      epi: counts.epi,
+      rosc: (events || []).some(function (e) { return e.kind === "rosc"; })
+    };
+  }
+
+  var LOG_FILTERS = [
+    { id: "all", label: "All" }, { id: "drugs", label: "Drugs" },
+    { id: "shocks", label: "Shocks" }, { id: "rhythms", label: "Rhythms" },
+    { id: "procedures", label: "Procedures" }, { id: "notes", label: "Notes" }
+  ];
+
+  function eventMatchesFilter(ev, filter) {
+    switch (filter) {
+      case "drugs": return ev.kind === "drug";
+      case "shocks": return ev.kind === "shock";
+      case "rhythms": return ev.kind === "rhythm";
+      case "procedures": return ev.kind === "procedure";
+      case "notes": return ev.kind === "note";
+      default: return true;
+    }
+  }
+
+  function shortLinkId(link) {
+    if (!link || typeof link !== "object") return "";
+    var id = link.pid || link.id || "";
+    return String(id).slice(0, 6);
+  }
+
+  function pastEntryFromPayload(payload, opts) {
+    opts = opts || {};
+    var p = payload || {};
+    var counts = computeCounts(p.events || []);
+    return {
+      id: String(opts.id || ("past-" + (opts.savedWall || Date.now()))),
+      savedWall: opts.savedWall || Date.now(),
+      date: String(p.startedAt || ""),
+      mode: normMode(p.mode),
+      durationSeconds: Math.max(0, Math.floor(p.durationSeconds || 0)),
+      shocks: counts.shocks, epi: counts.epi,
+      rosc: !!(p.summary && p.summary.rosc),
+      training: p.training === true,
+      linkShort: shortLinkId(opts.link),
+      payload: p
+    };
+  }
+
+  function addPastEntry(list, entry) {
+    var out = [entry].concat((list || []).filter(function (e) { return e && e.id !== entry.id; }));
+    return out.slice(0, PAST_MAX);
+  }
+
+  function loadPast(storage) {
+    try {
+      var raw = storage.getItem(PAST_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return Array.isArray(list) ? list.filter(function (e) { return e && typeof e === "object" && e.payload; }) : [];
+    } catch (e) { return []; }
+  }
+
+  function savePast(storage, list) {
+    try { storage.setItem(PAST_KEY, JSON.stringify((list || []).slice(0, PAST_MAX))); return true; }
+    catch (e) { return false; }
+  }
+
+  function loadTeam(storage) {
+    try {
+      var raw = storage.getItem(TEAM_KEY);
+      var team = raw ? JSON.parse(raw) : [];
+      return Array.isArray(team) ? team.map(function (n) { return String(n).slice(0, 40); }).filter(Boolean) : [];
+    } catch (e) { return []; }
+  }
+
+  function saveTeam(storage, team) {
+    try { storage.setItem(TEAM_KEY, JSON.stringify(normScene({ team: team || [] }).team)); return true; }
+    catch (e) { return false; }
+  }
+
+  function loadPresets(storage) {
+    try {
+      var raw = storage.getItem(PRESETS_KEY);
+      var list = raw ? JSON.parse(raw) : [];
+      return Array.isArray(list) ? list.filter(function (p) { return p && p.name && p.scene; })
+        .map(function (p) { return { name: String(p.name).slice(0, 40), scene: normScene(p.scene) }; }) : [];
+    } catch (e) { return []; }
+  }
+
+  function savePresets(storage, list) {
+    try { storage.setItem(PRESETS_KEY, JSON.stringify(list || [])); return true; }
+    catch (e) { return false; }
   }
 
   function lastEpi(sess) { return lastBy(sess, isEpiDrug); }
@@ -567,6 +741,7 @@
       rosc: sess.rosc, hadRosc: sess.hadRosc, checklistTicks: sess.checks,
       cycleStart: sess.cycleStart, seq: sess.seq,
       link: sess.link || null, ventCue: sess.ventCue !== false,
+      scene: normScene(sess.scene),
       savedAtWallClock: (wallNow != null) ? wallNow : Date.now()
     };
   }
@@ -613,6 +788,7 @@
     sess.hadRosc = snap.hadRosc === true || sess.rosc;
     sess.checks = (snap.checklistTicks && typeof snap.checklistTicks === "object") ? snap.checklistTicks : {};
     sess.link = (snap.link && typeof snap.link === "object") ? snap.link : null;
+    sess.scene = normScene(snap.scene);
     sess.ventCue = snap.ventCue !== false;
     sess.cycleStart = Math.max(0, Math.floor(snap.cycleStart || 0));
     sess.seq = snap.seq || sess.events.length;
@@ -645,6 +821,7 @@
         adrenalineCount: counts.epi, rosc: sess.rosc === true
       },
       training: sess.training === true,
+      scene: normScene(sess.scene),
       disclaimer: MOTION_NOTE
     };
   }
@@ -697,6 +874,13 @@
     lastEpi: lastEpi, lastShock: lastShock, lastRhythm: lastRhythm,
     epiStatus: epiStatus, cycleInfo: cycleInfo, shockAdvised: shockAdvised,
     dueStrip: dueStrip, guideFor: guideFor,
+    SCENE_SETTINGS: SCENE_SETTINGS, SCENE_ARREST: SCENE_ARREST, SCENE_YESNO: SCENE_YESNO,
+    PAST_KEY: PAST_KEY, TEAM_KEY: TEAM_KEY, PRESETS_KEY: PRESETS_KEY, PAST_MAX: PAST_MAX,
+    defaultScene: defaultScene, normScene: normScene, debriefStats: debriefStats,
+    LOG_FILTERS: LOG_FILTERS, eventMatchesFilter: eventMatchesFilter,
+    shortLinkId: shortLinkId, pastEntryFromPayload: pastEntryFromPayload,
+    addPastEntry: addPastEntry, loadPast: loadPast, savePast: savePast,
+    loadTeam: loadTeam, saveTeam: saveTeam, loadPresets: loadPresets, savePresets: savePresets,
     checklistFor: checklistFor, toggleCheck: toggleCheck, reArrest: reArrest,
     takeSnapshot: takeSnapshot, saveSnapshot: saveSnapshot,
     loadSnapshot: loadSnapshot, clearSnapshot: clearSnapshot,
@@ -717,6 +901,7 @@
   /* v3 run UI state: active tab, phone timeline drawer, pending patient
    * link chosen on idle, and the last patient-record export outcome. */
   var rtab = "timer", timelineOpen = false, pendingLink = null, exportState = null;
+  var logSeg = "log", logFilter = "all", endedPast = false;
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
   function Audio() {
@@ -1277,10 +1462,108 @@
       "<span>Timeline</span></button></div>";
   }
 
+  function segBtn(id, label) {
+    return '<button type="button" class="cbl-segbtn" data-act="log-seg" data-seg="' + id +
+      '" aria-selected="' + (logSeg === id) + '">' + label + "</button>";
+  }
+
   function logTabView() {
+    var body;
+    if (logSeg === "team") body = teamView();
+    else if (logSeg === "past") body = pastView();
+    else body = logSegView();
     return '<div class="cbl-tabpad" data-tabpanel="log" role="tabpanel" aria-label="Log">' +
       "<h2 class='cbl-h'>Log</h2>" +
-      '<div data-sheet="log">' + logRows() + "</div></div>";
+      '<div class="cbl-segs" role="tablist" aria-label="Log sections">' +
+      segBtn("log", "Log") + segBtn("team", "Team and scene") + segBtn("past", "Past codes") + "</div>" +
+      body + "</div>";
+  }
+
+  function logSegView() {
+    var chips = LOG_FILTERS.map(function (f) {
+      return '<button type="button" class="cbl-chip' + (logFilter === f.id ? " on" : "") +
+        '" data-act="log-filter" data-f="' + f.id + '" aria-pressed="' + (logFilter === f.id) + '">' + f.label + "</button>";
+    }).join("");
+    return '<div class="cbl-chips" role="group" aria-label="Filter log">' + chips + "</div>" +
+      '<div data-sheet="log">' + logRows(logFilter) + "</div>" +
+      '<div class="cbl-manual"><p class="cbl-label">Add a missed event</p>' +
+      '<label class="cbl-label" for="cblManualLabel">Label</label>' +
+      '<input id="cblManualLabel" class="cbl-input" type="text" maxlength="140" placeholder="Event label" />' +
+      '<label class="cbl-label" for="cblManualTime">Time (minutes:seconds)</label>' +
+      '<input id="cblManualTime" class="cbl-input" type="text" inputmode="numeric" placeholder="0:00" />' +
+      '<label class="cbl-label" for="cblManualKind">Type</label>' +
+      '<select id="cblManualKind" class="cbl-input">' +
+      '<option value="note">Note</option><option value="drug">Drug</option>' +
+      '<option value="shock">Shock</option><option value="rhythm">Rhythm</option>' +
+      '<option value="procedure">Procedure</option></select>' +
+      '<div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="log-add-manual">Add event</button></div></div>';
+  }
+
+  function sceneSelect(field, label, options) {
+    var cur = sess && sess.scene ? sess.scene[field] : "";
+    var opts = ['<option value="">Not set</option>'].concat(options.map(function (o) {
+      return '<option value="' + esc(o) + '"' + (o === cur ? " selected" : "") + ">" + esc(o) + "</option>";
+    })).join("");
+    return '<label class="cbl-label" for="cblScene-' + field + '">' + label + '</label>' +
+      '<select id="cblScene-' + field + '" class="cbl-input" data-scene="' + field + '">' + opts + "</select>";
+  }
+
+  function sceneNumInput(field, label, ph) {
+    var cur = sess && sess.scene && sess.scene[field] != null ? sess.scene[field] : "";
+    return '<label class="cbl-label" for="cblScene-' + field + '">' + label + '</label>' +
+      '<input id="cblScene-' + field + '" class="cbl-input" type="number" min="0" inputmode="decimal" ' +
+      'data-scene="' + field + '" value="' + esc(cur) + '" placeholder="' + esc(ph) + '" />';
+  }
+
+  function teamView() {
+    var sc = sess ? normScene(sess.scene) : defaultScene();
+    var members = sc.team.map(function (n, i) {
+      return '<span class="cbl-member">' + esc(n) +
+        '<button type="button" class="cbl-mini" data-act="scene-team-del" data-i="' + i + '" aria-label="Remove ' + esc(n) + '">Remove</button></span>';
+    }).join("");
+    var presets = loadPresets(defaultStorage());
+    var presetRows = presets.map(function (p, i) {
+      return '<div class="cbl-pastrow"><span class="cbl-pastmain">' + esc(p.name) + '</span>' +
+        '<button type="button" class="cbl-mini" data-act="preset-apply" data-i="' + i + '">Apply</button>' +
+        '<button type="button" class="cbl-mini" data-act="preset-del" data-i="' + i + '">Delete</button></div>';
+    }).join("");
+    return '<div data-state="team-scene">' +
+      sceneNumInput("weightKg", "Patient weight (kg, optional)", "kg") +
+      sceneSelect("setting", "Setting", SCENE_SETTINGS) +
+      sceneSelect("arrest", "Arrest", SCENE_ARREST) +
+      sceneSelect("bystanderCpr", "Bystander CPR", SCENE_YESNO) +
+      sceneNumInput("downTimeMin", "Down time (minutes)", "min") +
+      sceneNumInput("shocksBeforeArrival", "Shocks before arrival", "0") +
+      '<label class="cbl-label" for="cblScene-location">Location</label>' +
+      '<input id="cblScene-location" class="cbl-input" type="text" maxlength="80" data-scene="location" ' +
+      'value="' + esc(sc.location) + '" placeholder="Ward 3B" />' +
+      '<p class="cbl-label">Team members</p><div class="cbl-members">' + (members || '<span class="cbl-note">No team members yet.</span>') + "</div>" +
+      '<label class="cbl-label" for="cblTeamName">Add team member</label>' +
+      '<input id="cblTeamName" class="cbl-input" type="text" maxlength="40" placeholder="Name" />' +
+      '<div class="cbl-row"><button type="button" class="cbl-btn" data-act="scene-team-add">Add member</button>' +
+      '<button type="button" class="cbl-btn" data-act="scene-team-clear">Clear team</button></div>' +
+      '<p class="cbl-label">Team presets</p>' + (presetRows || '<p class="cbl-note">No presets saved.</p>') +
+      '<label class="cbl-label" for="cblPresetName">Preset name</label>' +
+      '<input id="cblPresetName" class="cbl-input" type="text" maxlength="40" placeholder="Preset name" />' +
+      '<div class="cbl-row"><button type="button" class="cbl-btn" data-act="preset-save">Save preset</button></div></div>';
+  }
+
+  function pastView() {
+    var list = loadPast(defaultStorage());
+    if (!list.length) {
+      return '<p class="cbl-empty" data-state="past-empty">No finished codes on this device yet.</p>';
+    }
+    var rows = list.map(function (e) {
+      var when = e.date ? esc(String(e.date).slice(0, 10)) : "";
+      return '<div class="cbl-pastrow" data-past="' + esc(e.id) + '"><span class="cbl-pastmain">' +
+        when + " " + esc(MODE_LABEL[normMode(e.mode)] || e.mode) + ", " + esc(fmtMMSS(e.durationSeconds)) +
+        ", shocks " + e.shocks + ", epinephrine " + e.epi + ", ROSC " + (e.rosc ? "yes" : "no") + ", " +
+        (e.training ? "TRAINING" : "LIVE") + (e.linkShort ? ", patient " + esc(e.linkShort) : "") + "</span>" +
+        '<button type="button" class="cbl-mini" data-act="past-open" data-id="' + esc(e.id) + '">Open</button>' +
+        '<button type="button" class="cbl-mini" data-act="past-del" data-id="' + esc(e.id) + '">Delete</button></div>';
+    }).join("");
+    return '<div data-state="past-list">' + rows +
+      '<div class="cbl-row"><button type="button" class="cbl-btn" data-act="past-clear">Delete all</button></div></div>';
   }
 
   function notesTabView() {
@@ -1341,8 +1624,7 @@
 
   function endedView() {
     var elapsed = elapsedOffset;
-    var counts = computeCounts(sess.events);
-    var interval = MODE_CONFIG[sess.mode].rhythmInterval;
+    var d = debriefStats(sess.events, elapsed);
     var canSheet = !sess.training;
     var exportLine;
     if (sess.training) {
@@ -1354,18 +1636,31 @@
     } else {
       exportLine = '<p class="cbl-disc">No patient linked. Kept on this device only.</p>';
     }
+    var dash = "Not logged";
+    var rows = [
+      ["Duration", fmtMMSS(d.durationSeconds)],
+      ["Time to first shock", d.timeToFirstShock === null ? dash : fmtMMSS(d.timeToFirstShock)],
+      ["Time to first epinephrine", d.timeToFirstEpi === null ? dash : fmtMMSS(d.timeToFirstEpi)],
+      ["Pauses", d.pauseCount + " (longest " + fmtMMSS(d.longestPauseSeconds) + ")"],
+      ["Estimated CPR fraction (estimated from logged pauses)", d.cprFractionPct === null ? "Not available" : d.cprFractionPct + "%"],
+      ["Shocks", String(d.shocks)],
+      ["Epinephrine doses", String(d.epi)],
+      ["ROSC", sess.rosc ? "Yes" : "No"]
+    ];
+    var sum = rows.map(function (r) {
+      return "<div><dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd></div>";
+    }).join("");
     return statusRow() + '<div class="cbl-scroll"><div class="cbl-endview" data-state="ended">' +
-      "<h2 class='cbl-h'>Code ended</h2>" +
-      '<dl class="cbl-sum">' +
-      "<div><dt>Duration</dt><dd>" + esc(fmtMMSS(elapsed)) + "</dd></div>" +
-      "<div><dt>Cycles</dt><dd>" + Math.floor(elapsed / interval) + "</dd></div>" +
-      "<div><dt>Shocks</dt><dd>" + counts.shocks + "</dd></div>" +
-      "<div><dt>Epinephrine</dt><dd>" + counts.epi + "</dd></div>" +
-      "<div><dt>ROSC</dt><dd>" + (sess.rosc ? "Yes" : "No") + "</dd></div></dl>" +
+      "<h2 class='cbl-h'>Debrief</h2>" +
+      '<dl class="cbl-sum">' + sum + "</dl>" +
       exportLine +
       (sess.training ? "" : '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>") +
-      (canSheet ? '<button type="button" class="cbl-btn cbl-primary" data-act="open-sheet">Open code sheet</button>' : "") +
+      (canSheet
+        ? '<button type="button" class="cbl-btn cbl-primary" data-act="open-sheet">Share code sheet</button>'
+        : '<button type="button" class="cbl-btn cbl-primary" data-act="debrief-share">Share code sheet</button>') +
+      '<button type="button" class="cbl-btn" data-act="debrief-past">Past codes</button>' +
       '<button type="button" class="cbl-btn" data-act="close">Done</button>' +
+      (endedPast ? pastView() : "") +
       "</div></div>";
   }
 
@@ -1429,12 +1724,12 @@
     return !!(w && w.querySelector(".cbl-sheet"));
   }
 
-  function logRows() {
+  function logRows(filter) {
     var elapsed = nowElapsed();
     /* System entries seeded at Start stay in the payload but never fill
      * the visible log, so a fresh code keeps the empty-log state. */
     var visible = sess.events.filter(function (e) {
-      return e.kind !== "modeSet" && e.kind !== "cprStart";
+      return e.kind !== "modeSet" && e.kind !== "cprStart" && eventMatchesFilter(e, filter || "all");
     });
     if (!visible.length) {
       return '<p class="cbl-empty" data-state="empty-log">No events yet. Logged actions will appear here.</p>';
@@ -1644,6 +1939,8 @@
     var A = Audio();
     if (A) { try { A.unlock(); A.ensureWakeLock(); } catch (e) {} }
     sess = newSession(idleMode, { training: idleTraining });
+    /* Team members persist for back-to-back codes on this device. */
+    sess.scene.team = loadTeam(defaultStorage());
     /* LIVE captures the linked patient at Start; practice never links. */
     sess.link = sess.training ? null : (pendingLink || readOpenPatient());
     speed = sess.training ? TRAINING_SPEED : 1;
@@ -1704,6 +2001,15 @@
     }
     elapsedOffset = Math.floor(elapsed);
     view = "ended";
+    endedPast = false;
+    try {
+      var pastPayload = buildPayload(sess, {
+        elapsed: Math.floor(elapsed),
+        startedAtISO: new Date(sess.createdWall).toISOString()
+      });
+      var pastEntry = pastEntryFromPayload(pastPayload, { link: sess.link, savedWall: Date.now() });
+      savePast(defaultStorage(), addPastEntry(loadPast(defaultStorage()), pastEntry));
+    } catch (ePast) {}
     stopTick();
     var A = Audio();
     if (A) { try { A.shutdown(); } catch (e2) {} }
@@ -1959,6 +2265,95 @@
       toast("Event restored. ", null);
       return;
     }
+    if (act === "log-seg") { logSeg = el.getAttribute("data-seg") || "log"; render(); return; }
+    if (act === "log-filter") { logFilter = el.getAttribute("data-f") || "all"; render(); return; }
+    if (act === "log-add-manual") {
+      var ml = rootEl.querySelector("#cblManualLabel");
+      var mt = rootEl.querySelector("#cblManualTime");
+      var mk = rootEl.querySelector("#cblManualKind");
+      var label = ml ? String(ml.value || "").trim().slice(0, 140) : "";
+      var tval = mt ? String(mt.value || "").trim() : "";
+      var mm = /^(\d+):([0-5]?\d)$/.exec(tval);
+      var secs = mm ? (+mm[1]) * 60 + (+mm[2]) : (/^\d+$/.test(tval) ? +tval : null);
+      if (!label || secs === null) { if (!label && ml) ml.focus(); else if (mt) mt.focus(); return; }
+      var kind = mk && ["drug", "shock", "rhythm", "procedure", "note"].indexOf(mk.value) >= 0 ? mk.value : "note";
+      sess.events.push({ id: "ev-" + (++sess.seq), elapsed: Math.max(0, Math.floor(secs)), kind: kind, label: label, edited: false });
+      sess.events.sort(function (a, b) { return a.elapsed - b.elapsed; });
+      persist(); render(); toast("Event added. ", null);
+      return;
+    }
+    if (act === "scene-team-add") {
+      var tn = rootEl.querySelector("#cblTeamName");
+      var name = tn ? String(tn.value || "").trim().slice(0, 40) : "";
+      if (!name) { if (tn) tn.focus(); return; }
+      sess.scene = normScene(sess.scene); sess.scene.team.push(name);
+      sess.scene = normScene(sess.scene);
+      saveTeam(defaultStorage(), sess.scene.team); persist(); render(); return;
+    }
+    if (act === "scene-team-del") {
+      sess.scene = normScene(sess.scene);
+      sess.scene.team.splice(+(el.getAttribute("data-i") || 0), 1);
+      saveTeam(defaultStorage(), sess.scene.team); persist(); render(); return;
+    }
+    if (act === "scene-team-clear") {
+      sess.scene = normScene(sess.scene); sess.scene.team = [];
+      saveTeam(defaultStorage(), []); persist(); render(); return;
+    }
+    if (act === "preset-save") {
+      var pn = rootEl.querySelector("#cblPresetName");
+      var pname = pn ? String(pn.value || "").trim().slice(0, 40) : "";
+      if (!pname) { if (pn) pn.focus(); return; }
+      var plist = loadPresets(defaultStorage());
+      plist = plist.filter(function (p) { return p.name !== pname; });
+      plist.push({ name: pname, scene: normScene(sess.scene) });
+      savePresets(defaultStorage(), plist); render(); return;
+    }
+    if (act === "preset-apply") {
+      var pres = loadPresets(defaultStorage())[+(el.getAttribute("data-i") || 0)];
+      if (pres) {
+        sess.scene = normScene(pres.scene);
+        saveTeam(defaultStorage(), sess.scene.team); persist();
+      }
+      render(); return;
+    }
+    if (act === "preset-del") {
+      var pdel = loadPresets(defaultStorage());
+      pdel.splice(+(el.getAttribute("data-i") || 0), 1);
+      savePresets(defaultStorage(), pdel); render(); return;
+    }
+    if (act === "past-open") {
+      var pid = el.getAttribute("data-id");
+      var entry = loadPast(defaultStorage()).filter(function (e) { return e.id === pid; })[0];
+      try {
+        if (entry && typeof window !== "undefined" && window.CodeBlueSheet && window.CodeBlueSheet.open) {
+          window.CodeBlueSheet.open(entry.payload);
+        }
+      } catch (eOpen) {}
+      return;
+    }
+    if (act === "past-del") {
+      var didPast = el.getAttribute("data-id");
+      savePast(defaultStorage(), loadPast(defaultStorage()).filter(function (e) { return e.id !== didPast; }));
+      render(); return;
+    }
+    if (act === "past-clear") {
+      try {
+        if (typeof window !== "undefined" && window.confirm && !window.confirm("Delete all past codes on this device?")) return;
+      } catch (eClear) {}
+      savePast(defaultStorage(), []); render(); return;
+    }
+    if (act === "debrief-past") { endedPast = !endedPast; if (!endedPast) { logSeg = "past"; } render(); return; }
+    if (act === "debrief-share") {
+      var dpayload = buildPayload(sess, { elapsed: Math.floor(elapsedOffset), startedAtISO: new Date(sess.createdWall).toISOString() });
+      try {
+        var SheetApi = (typeof window !== "undefined" && window.CodeBlueSheet) || null;
+        var dtext = SheetApi && SheetApi.renderText ? SheetApi.renderText(SheetApi.parsePayload(dpayload)) : JSON.stringify(dpayload);
+        var nav2 = (typeof navigator !== "undefined") ? navigator : {};
+        if (typeof nav2.share === "function") nav2.share({ text: dtext });
+        else if (nav2.clipboard && nav2.clipboard.writeText) nav2.clipboard.writeText(dtext);
+      } catch (eShare) {}
+      return;
+    }
     if (act === "end") { doEnd(true); return; }
     if (act === "open-sheet") { openCodeSheet(); return; }
   }
@@ -1984,8 +2379,22 @@
       rootEl.addEventListener("click", onClick);
       rootEl.addEventListener("change", function (e) {
         var t = e.target;
-        if (!t || !t.getAttribute || !t.getAttribute("data-fx-setting")) return;
-        try { localStorage.setItem("smd.cbl.fx." + t.getAttribute("data-fx-setting"), String(t.value)); } catch (err) {}
+        if (!t || !t.getAttribute) return;
+        if (t.getAttribute("data-fx-setting")) {
+          try { localStorage.setItem("smd.cbl.fx." + t.getAttribute("data-fx-setting"), String(t.value)); } catch (err) {}
+          return;
+        }
+        var field = t.getAttribute("data-scene");
+        if (field && sess) {
+          sess.scene = normScene(sess.scene);
+          if (field === "weightKg" || field === "downTimeMin" || field === "shocksBeforeArrival") {
+            sess.scene[field] = t.value === "" ? null : Number(t.value);
+          } else {
+            sess.scene[field] = String(t.value || "");
+          }
+          sess.scene = normScene(sess.scene);
+          persist();
+        }
       });
       document.addEventListener("keydown", onKey);
       var css = document.createElement("link");
@@ -2045,6 +2454,9 @@
     session: function () { return sess; },
     view: function () { return view; },
     tab: function () { return rtab; },
+    logSeg: function () { return logSeg; },
+    setLogSeg: function (s) { logSeg = s; if (view === "running") render(); },
+    setTab: function (t) { rtab = t; if (view === "running") render(); },
     link: function () { return (sess && sess.link) || pendingLink; },
     exportState: function () { return exportState; },
     elapsed: function () { return nowElapsed(); },

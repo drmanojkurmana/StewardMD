@@ -563,22 +563,21 @@
     });
     recordResult(getStore(), testSess.scn.id, res.pct, topics);
     persist();
-    function rows(kind, title) {
-      var items = res.rows.filter(function (r) { return r.kind === kind; });
-      if (!items.length) return "<p>None.</p>";
-      return "<ul>" + items.map(function (r) {
-        var s = "<b>" + esc(r.expected) + "</b><span>" + esc(r.prompt) + "</span>";
-        if (r.at != null) s += '<span class="cbt-meta">at ' + fmtClock(r.at) + " sim" + (r.due != null ? ", allowed " + r.due + " s" : "") + "</span>";
-        if (r.picked) s += '<span class="cbt-meta">you picked: ' + esc(r.picked) + "</span>";
-        return "<li>" + s + "</li>";
-      }).join("") + "</ul>";
-    }
-    var html = '<p class="cbt-score">' + res.pct + '%</p><p class="cbt-note">' + esc(ref) + "</p>" +
-      '<h3 class="cbt-sub">Correct</h3>' + rows("correct", 0) +
-      '<h3 class="cbt-sub">Late</h3>' + rows("late", 0) +
-      '<h3 class="cbt-sub">Missed</h3>' + rows("missed", 0) +
-      '<button type="button" class="cbt-next" data-act="start-test" data-id="' + esc(testSess.scn.id) + '">Try again</button> ' +
-      '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button>';
+    var chipFor = { correct: "Correct", late: "Late", missed: "Missed" };
+    var allRows = res.rows.map(function (r) {
+      var meta = "";
+      if (r.at != null) meta = "At " + fmtClock(r.at) + " sim" + (r.due != null ? ", allowed " + r.due + " s" : "") + ". ";
+      if (r.picked) meta += "You picked: " + r.picked + ". ";
+      return '<div class="cbt-rrow"><span class="cbt-rrow-label">' + esc(r.expected) + '</span>' +
+        '<span class="cbt-chip cbt-chip-' + esc(r.kind) + '">' + esc(chipFor[r.kind] || r.kind) + '</span>' +
+        '<span class="cbt-rrow-text">' + esc(meta + r.prompt) + "</span></div>";
+    }).join("");
+    var html = '<div class="cbt-result"><div class="cbt-result-side"><div class="cbt-result-head">' +
+      '<span class="cbt-result-score">' + res.pct + '%</span><span class="cbt-result-label">Test debrief</span></div>' +
+      '<p class="cbt-note">' + esc(ref) + '</p><div class="cbt-result-actions">' +
+      '<button type="button" class="cbt-next" data-act="start-test" data-id="' + esc(testSess.scn.id) + '">Try again</button>' +
+      '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button></div></div>' +
+      '<div class="cbt-result-rows">' + (allRows || '<p class="cbt-note">No steps scored.</p>') + "</div></div>";
     testSess = null;
     show(shell(0, "Test debrief", html), "debrief");
   }
@@ -671,14 +670,18 @@
     var topics = res.per.map(function (p) { return { topic: p.topic, asked: 1, missed: p.ok ? 0 : 1 }; });
     recordResult(getStore(), caseSess.c.id, pct, topics);
     persist();
-    var html = '<p class="cbt-score">' + res.score + " of " + res.total + "</p>" +
-      "<ul>" + res.per.map(function (p, j) {
+    var caseRows = res.per.map(function (p, j) {
         var link = (caseSess.c.quiz[j] || {}).link;
-        return "<li><b>" + (p.ok ? "Correct" : "Missed") + " (" + esc(p.topic) + ")</b><span>" + esc(p.why) + "</span>" +
-          (reviewBtn(link) || "") + "</li>";
-      }).join("") + "</ul>" +
-      '<button type="button" class="cbt-next" data-act="go-cases">More cases</button> ' +
-      '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button>';
+        return '<div class="cbt-rrow"><span class="cbt-rrow-label">' + esc(p.topic) + '</span>' +
+          '<span class="cbt-chip cbt-chip-' + (p.ok ? "correct" : "missed") + '">' + (p.ok ? "Correct" : "Missed") + '</span>' +
+          '<span class="cbt-rrow-text">' + esc(p.why) + "</span>" + (reviewBtn(link) || "") + "</div>";
+      }).join("");
+    var html = '<div class="cbt-result"><div class="cbt-result-side"><div class="cbt-result-head">' +
+      '<span class="cbt-result-score">' + res.score + " of " + res.total + '</span><span class="cbt-result-label">Case result</span></div>' +
+      '<div class="cbt-result-actions">' +
+      '<button type="button" class="cbt-next" data-act="go-cases">More cases</button>' +
+      '<button type="button" class="cbt-next ghost" data-act="go-mine">My training</button></div></div>' +
+      '<div class="cbt-result-rows">' + caseRows + "</div></div>";
     caseSess = null;
     show(shell(0, "Case result", html), "result");
   }

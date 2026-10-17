@@ -39,7 +39,11 @@ for (const f of FILES) {
   });
   test(f + ": text root uses the one shared token", () => {
     const root = ROOTS[f].replace(/[.#]/g, "\\$&");
-    const re = new RegExp(root + "\\s*\\{[^}]*--cbp-font:\\s*\"Inter CodeBlue\", system-ui, sans-serif[^}]*font-family:\\s*var\\(--cbp-font\\)[^}]*font-variant-numeric:\\s*tabular-nums");
+    const re = new RegExp(root + "\\s*\\{[^}]*--cbp-font:\\s*\"Inter CodeBlue\", system-ui, sans-serif[^}]*font-family:\\s*var\\(--cbp-font\\)");
     assert.match(css[f], re, ROOTS[f] + " shared font token in " + f);
+    const rootBlock = new RegExp(root + "\\s*\\{([^}]*)\\}").exec(css[f]);
+    assert.ok(rootBlock, ROOTS[f] + " root block in " + f);
+    assert.doesNotMatch(rootBlock[1], /font-variant-numeric\s*:\s*tabular-nums|font-feature-settings[^;]*tnum/,
+      ROOTS[f] + " root must not set tabular figures on running text in " + f);
   });
 }

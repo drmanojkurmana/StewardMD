@@ -277,6 +277,27 @@ try {
   await click(`${CBL} [data-act="tab-timer"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "timer";`, 5000), "back to the Timer tab");
 
+  /* cb4-F: Log segments (Log, Team and scene, Past codes), filters, manual entry. */
+  await click(`${CBL} [data-act="tab-log"]`);
+  ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "log tab reopens for segments");
+  ok(await ev(`return document.querySelectorAll('${CBL} .cbl-segbtn').length === 3;`) === true, "three log segments render");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-act="log-add-manual"]');`) === true, "manual entry renders");
+  await ev(`document.querySelector('${CBL} #cblManualLabel').value = "Missed shock"; document.querySelector('${CBL} #cblManualTime').value = "1:00"; document.querySelector('${CBL} #cblManualKind').value = "shock"; document.querySelector('${CBL} [data-act="log-add-manual"]').click(); return 1;`);
+  ok(await until(`return CodeBlueLive._rt.session().events.some(function (e) { return e.label === "Missed shock" && e.elapsed === 60; });`, 5000), "manual missed event added at its time");
+  ok(await ev(`return CodeBlueLive._engine.computeCounts(CodeBlueLive._rt.session().events).shocks >= 1;`) === true, "counts recomputed after manual entry");
+  await click(`${CBL} [data-act="log-filter"][data-f="drugs"]`);
+  ok(await ev(`return !!document.querySelector('${CBL} [data-f="drugs"].on');`) === true, "filter chip selects Drugs");
+  await shot("logtab", false); await shot("logtab", true);
+  await click(`${CBL} [data-seg="team"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="team-scene"]');`, 5000), "team and scene segment renders");
+  ok(await ev(`return !!document.querySelector('${CBL} #cblScene-location');`) === true, "scene location field renders");
+  await shot("team", false); await shot("team", true);
+  await click(`${CBL} [data-seg="past"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="past-empty"], ${CBL} [data-state="past-list"]');`, 5000), "past codes segment renders");
+  await shot("past-empty", false); await shot("past-empty", true);
+  await click(`${CBL} [data-seg="log"]`);
+  await click(`${CBL} [data-act="tab-timer"]`);
+
   /* Timeline drawer opens on phone from the slim handle; drug buttons log with undo. */
   ok(await ev(`return !!document.querySelector('${CBL} .cbl-tlhandle[data-act="timeline-toggle"]');`) === true, "timeline opens from the slim handle, not a loose button");
   await click(`${CBL} [data-act="timeline-toggle"]`);
@@ -373,7 +394,13 @@ try {
   await click(`${CBL} [data-act="end"]`);
   ok(await until(viewIs("ended"), 5000), "end shows the summary (confirmed)");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="ended"]');`) === true, "ended summary renders");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Estimated CPR fraction") >= 0;`) === true, "debrief shows estimated CPR fraction");
   await shot("ended", false);
+  await shot("debrief", false); await shot("debrief", true);
+  await click(`${CBL} [data-act="debrief-past"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="past-list"], ${CBL} [data-state="past-empty"]');`, 5000), "debrief past codes renders");
+  await shot("past-filled", false); await shot("past-filled", true);
+  await click(`${CBL} [data-act="debrief-past"]`);
   await click(`${CBL} [data-act="open-sheet"]`);
   ok(await until(`return !!document.querySelector(".cb-sheet-ov, .cb-sheet");`, 8000), "End opens the code sheet payload");
   await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);

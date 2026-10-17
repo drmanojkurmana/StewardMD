@@ -24,7 +24,6 @@
   background:var(--cb-bg); color:var(--cb-text);
   --cbp-font: "Inter CodeBlue", system-ui, sans-serif;
   font-family: var(--cbp-font);
-  font-variant-numeric: tabular-nums;
   font-size:16px; line-height:1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -54,13 +53,15 @@ body.dark .cbecg{
   --cb-ok:var(--cbp-rosc, #34C759); --cb-bad:var(--cbp-overdue, #EF4444);
 }
 .cbecg-sheet{max-width:560px; margin:0 auto; padding:12px 12px 32px; box-sizing:border-box;}
-.cbecg-head{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:4px 0 8px;}
+.cbecg-head{display:flex; align-items:center; flex-wrap:nowrap; gap:8px; margin:4px 0 8px;}
+.cbecg-title{white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.cbecg-train,.cbecg-x{flex:none;}
 .cbecg-train{
   font-size:12px; font-weight:800; letter-spacing:.06em;
   background:var(--cb-fill); color:var(--cb-on-fill);
   border-radius:6px; padding:4px 8px; white-space:nowrap;
 }
-.cbecg-title{font-size:17px; font-weight:700; flex:1; min-width:0;}
+.cbecg-title{font-size:17px; font-weight:700; flex:1 1 auto; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .cbecg-x{
   min-height:44px; min-width:44px; padding:0 14px; border:0; cursor:pointer;
   border-radius:var(--cb-r-pill); background:var(--cb-s1); color:var(--cb-text);
