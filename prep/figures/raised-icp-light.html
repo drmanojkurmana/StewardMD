@@ -1,0 +1,1004 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Raised intracranial pressure: Monro-Kellie and herniation</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.icp-bone{fill:color-mix(in srgb,#f0e6d6 55%,var(--anatomy-paper));stroke:#8c7b66;stroke-width:2.2;stroke-linejoin:round}
+.icp-dura{fill:none;stroke:#6c7d93;stroke-width:2.2;stroke-linecap:round}
+.icp-brain{fill:color-mix(in srgb,var(--c-endo) 28%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 50%,#000);stroke-width:1}
+.icp-sulcus{fill:none;stroke:color-mix(in srgb,var(--c-endo) 45%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.7}
+.icp-stem{fill:color-mix(in srgb,var(--c-mac) 26%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-mac) 45%,#000);stroke-width:1}
+.icp-csf{fill:color-mix(in srgb,var(--c-fl) 38%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:.8}
+.icp-mass{fill:color-mix(in srgb,var(--c-bad) 70%,#150505);stroke:var(--c-bad);stroke-width:1.5}
+.icp-oedema{fill:var(--c-fl);opacity:.35}
+.icp-vess{fill:none;stroke-linecap:round}
+.icp-vess.art{stroke:var(--c-rbc);stroke-width:2.4}
+.icp-vess.ven{stroke:var(--c-fl);stroke-width:3}
+.icp-flap{fill:color-mix(in srgb,#f0e6d6 65%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:2}
+.icp-evd{fill:none;stroke:var(--anatomy-strong);stroke-width:1.8;stroke-dasharray:3 2}
+.icp-chamber{fill:color-mix(in srgb,var(--anatomy-card) 85%,transparent);stroke:var(--anatomy-mid);stroke-width:1.2}
+.icp-fluid{fill:color-mix(in srgb,var(--c-fl) 50%,var(--anatomy-paper))}
+.icp-iris{fill:#4a7698;stroke:var(--anatomy-mid);stroke-width:1}
+.icp-aperture{fill:#06060c}
+.icp-grid{fill:none;stroke:var(--anatomy-faint);stroke-width:.5;opacity:.35}
+.icp-grid.major{opacity:.65}
+.icp-curve{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
+.icp-curve-comp{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-dasharray:4 3;opacity:.8}
+.icp-trace-bp{fill:none;stroke:var(--c-rbc);stroke-width:1.8;stroke-linejoin:round}
+.icp-trace-hr{fill:none;stroke:var(--c-good);stroke-width:1.6;stroke-linejoin:round}
+.icp-trace-resp{fill:none;stroke:var(--c-cyt);stroke-width:1.6;stroke-linejoin:round}
+.p-art{--cc:var(--c-rbc)}
+.p-ven{--cc:var(--c-fl)}
+.p-csf{--cc:#7ab8ff}
+.p-osm{--cc:#38d1ff}
+.mk-brain{fill:color-mix(in srgb,var(--c-endo) 45%,var(--anatomy-paper))}
+.mk-csf{fill:var(--c-fl)}
+.mk-blood{fill:var(--c-rbc)}
+.mk-mass{fill:var(--c-bad)}
+.x-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Raised intracranial pressure: Monro-Kellie and herniation</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>ICP elevated · perfusion threatened · brain shift midline shift · Cushing reflex impending</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated coronal view of the brain inside the rigid cranium, with Monro-Kellie volume compliance, cerebral perfusion pressure, herniation pathways and the Cushing response. An expanding mass or oedema initially displaces venous blood and CSF. Once compliance buffers are exhausted, intracranial pressure spikes exponentially, causing subfalcine, uncal and tonsillar herniation. Medullary compression triggers the Cushing triad: severe hypertension, bradycardia and respiratory depression. A dynamic pupil monitor shows uncal third nerve compression. Gauges display intracranial pressure, perfusion pressure, compliance, midline shift, herniation and the Cushing reflex. Treatments include head elevation, osmotic agents, ventricular CSF drainage and decompressive craniectomy."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="560" height="396" rx="18"/>
+<rect class="sc-tissue" x="584" y="44" width="362" height="194" rx="18"/>
+<rect class="sc-tissue" x="584" y="246" width="362" height="194" rx="18"/>
+<text class="sc-zone" x="34" y="60">CRANIAL VAULT</text>
+<text class="sc-zone" x="604" y="60">MONRO-KELLIE DOCTRINE</text>
+<text class="sc-zone" x="604" y="262">CUSHING RESPONSE</text>
+<g id="cranium"></g>
+<g id="brain"></g>
+<g id="mass"></g>
+<g id="devices"></g>
+<g id="pupil"></g>
+<g id="monro"></g>
+<g id="cushing"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Waveforms, speeds and gauge levels are qualitative and illustrative; no doses, pressures or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Space-occupying mass or brain swelling</span><input id="level" type="range" min="0" max="3" step="1" value="2" aria-valuetext="expanding mass: compliance exhausted"><span class="dr-ticks"><i>normal</i><i>compensated</i><i>decompensated</i><i>herniation</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With tiered care bundle"><option value="0">no treatment</option><option value="1">head elevation (raised head of bed, neutral neck)</option><option value="2">osmotic therapy (mannitol or hypertonic saline)</option><option value="3">CSF drainage (external ventricular drain)</option><option value="4">surgical decompression (craniectomy or mass evacuation)</option><option value="5">tiered neurocritical care bundle: all measures</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>The Monro-Kellie doctrine and intracranial compliance.</strong> The rigid cranium contains brain tissue, blood and cerebrospinal fluid in fixed total volume. When an expanding mass or cerebral oedema develops, compensation initially displaces venous blood into jugular veins and CSF into the spinal subarachnoid space. Once these compensatory buffers are exhausted, intracranial compliance drops to zero, and small additional volume increments cause steep exponential spikes in intracranial pressure (ICP). This is standard teaching in neurology, neurosurgery and neurocritical care texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Cerebral perfusion and herniation syndromes.</strong> Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. As ICP climbs, perfusion pressure collapses, precipitating cerebral ischaemia. Pressure gradients between compartments drive brain herniation: subfalcine under the falx cerebri, transtentorial uncal herniation compressing the midbrain and third cranial nerve (causing pupillary dilatation), and tonsillar herniation through the foramen magnum compressing the medulla oblongata. Medullary ischaemia triggers the Cushing response: severe hypertension, reflex bradycardia and respiratory depression.</li><li><strong>Treatment mechanisms shown.</strong> Head elevation promotes jugular venous drainage without lowering arterial pressure; osmotic agents draw free water from brain parenchyma across an intact blood-brain barrier into the circulation; an external ventricular drain directly vents CSF; and decompressive craniectomy removes the rigid bone boundary to eliminate spatial constraint and relieve brainstem compression.</li></ul>
+<p><strong>What was simplified.</strong> Specific intracranial pressure targets, osmolality thresholds, hyperventilation and carbon dioxide reactivity, neuromuscular blockade, barbiturate coma, hypothermia, underlying lesion aetiologies (such as traumatic contusion, extradural or subdural haematoma, intracerebral haemorrhage, ischaemic stroke or neoplasm), specific surgical techniques, and all drug doses are omitted. The anatomy is a schematic coronal representation, and the waveforms are qualitative teaching illustrations. This figure does not provide clinical guidance or treatment recommendations for any patient.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Space-occupying mass or brain swelling","a":[0,1,2,3],"names":["normal cranial state","early mass: compensated by venous and CSF displacement","expanding mass: compliance exhausted","critical mass: herniation and brainstem coning"],"ticks":["normal","compensated","decompensated","herniation"],"start":2},"settings":[{"label":"no treatment"},{"label":"head elevation (raised head of bed, neutral neck)"},{"label":"osmotic therapy (mannitol or hypertonic saline)"},{"label":"CSF drainage (external ventricular drain)"},{"label":"surgical decompression (craniectomy or mass evacuation)"},{"label":"tiered neurocritical care bundle: all measures"}],"drugNames":["no treatment","head elevation","osmotic therapy","CSF drainage","surgical decompression","the full tiered bundle"],"status":"Intracranial mass: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  // level: 0 = normal, 1 = compensated, 2 = decompensated, 3 = herniation
+  const massBase = [0, 0.28, 0.62, 1.0][level];
+  const headUp = drug === 1 || drug === 5 ? 1 : 0;
+  const osm    = drug === 2 || drug === 5 ? 1 : 0;
+  const evd    = drug === 3 || drug === 5 ? 1 : 0;
+  const decomp = drug === 4 || drug === 5 ? 1 : 0;
+
+  // Mass volume after osmotic shrinkage or surgical evacuation/decompression
+  const mass = cl(massBase * (decomp ? 0.10 : 1) * (osm ? 0.65 : 1));
+
+  // Monro-Kellie compensatory buffer reserves (venous blood and CSF)
+  const venReserve = cl(1 - massBase * 1.05 + 0.25 * headUp);
+  const csfReserve = cl(1 - massBase * 1.15 + 0.45 * evd);
+  const compReserve = cl(0.5 * venReserve + 0.5 * csfReserve + (decomp ? 0.8 : 0));
+
+  // ICP on the Monro-Kellie curve:
+  // Flat initial plateau while buffers compensate, then steep exponential rise
+  let icp = cl(0.10 + 0.12 * massBase + 0.78 * Math.pow(mass, 2.0));
+  if (level === 1 && drug === 0) icp = 0.22; // compensated plateau
+  if (headUp) icp = cl(icp - 0.10);
+  if (osm)    icp = cl(icp - 0.22);
+  if (evd)    icp = cl(icp - 0.28);
+  if (decomp) icp = cl(icp * 0.18);
+  if (drug === 5) icp = cl(0.08);
+
+  // Herniation risk & brainstem compression:
+  const shift = cl(massBase * (decomp ? 0.08 : 1) * (osm ? 0.65 : 1) * (evd ? 0.85 : 1));
+  const hernia = cl((shift - 0.60) * 2.5 * (decomp ? 0.1 : 1));
+
+  // Cushing reflex triggers from severe ICP / brainstem ischaemia
+  const cushingTrigger = cl((icp - 0.58) / 0.35);
+  const cushing = hernia > 0.4 ? cl(0.45 + 0.55 * cushingTrigger) : (icp > 0.45 && shift > 0.5 ? 0.30 : 0);
+
+  // Mean arterial pressure surges during Cushing response to overcome ICP
+  const map = cl(0.74 + 0.24 * cushing);
+  // CPP = MAP - ICP. If ICP rises without Cushing, CPP collapses. Even with Cushing, microperfusion drops.
+  const cpp = cl(map - icp * 0.90);
+
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const icpWord = w(icp, 0.26, 0.58, ["normal", "elevated", "critical"]);
+  const cppWord = w(cpp, 0.35, 0.54, ["compromised", "threatened", "adequate"]);
+  const shiftWord = hernia > 0.45 ? "herniating" : shift > 0.25 ? "midline shift" : "none";
+  const cushWord = cushing > 0.6 ? "active" : cushing > 0.2 ? "impending" : "absent";
+
+  const words = [icpWord, cppWord, shiftWord, cushWord];
+  const readout = "ICP " + words[0] + " · perfusion " + words[1] + " · brain shift " + words[2] + " · Cushing reflex " + words[3];
+  return { mass, icp, cpp, compReserve, shift, hernia, cushing, map, headUp, osm, evd, decomp, words, readout };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* ICP scene: cranial vault, Monro-Kellie volume compliance, brain herniation pathways,
+ * Cushing vital signs waveforms, dynamic pupil monitor, and patient gauges. */
+const CX = 280;                                                 // midline of the cranium
+const L = {
+  cranium: $("cranium"),
+  brain: $("brain"),
+  mass: $("mass"),
+  devices: $("devices"),
+  pupil: $("pupil"),
+  monro: $("monro"),
+  cushing: $("cushing"),
+  over: $("over"),
+  panel: $("panel"),
+};
+
+const sm = {
+  mass: 0.62,
+  icp: 0.45,
+  cpp: 0.40,
+  compReserve: 0.45,
+  shift: 0.62,
+  hernia: 0.05,
+  cushing: 0.0,
+  map: 0.74,
+  headUp: 0,
+  osm: 0,
+  evd: 0,
+  decomp: 0,
+};
+
+let crn = {}, brn = {}, mss = {}, dev = {}, eye = {}, mkG = {}, csh = {}, gg = {};
+let pArt = [], pVen = [], pCsf = [], pOsm = [];
+
+function pool(n, build) {
+  return Array.from({ length: n }, () => {
+    const e = build();
+    e.setAttribute("opacity", "0");
+    return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 };
+  });
+}
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) {
+  p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0;
+  p.e.setAttribute("opacity", "1");
+}
+function kill(p) {
+  p.on = false;
+  p.e.setAttribute("opacity", "0");
+}
+
+function init() {
+  /* ================= 1. Cranium & Neck Vessels ================= */
+  // Jugular veins & Carotid arteries in neck
+  mk("path", { class: "icp-vess ven", d: "M232 350C232 375 224 400 220 426" }, L.cranium);
+  mk("path", { class: "icp-vess ven", d: "M328 350C328 375 336 400 340 426" }, L.cranium);
+  mk("path", { class: "icp-vess art", d: "M248 426C248 395 254 370 258 350" }, L.cranium);
+  mk("path", { class: "icp-vess art", d: "M312 426C312 395 306 370 302 350" }, L.cranium);
+
+  // Skull bone: compound path between outer and inner tables
+  const skullPath = "M160 326 C145 220 190 76 280 76 C370 76 415 220 400 326 L366 342 L340 338 L330 354 L330 422 L230 422 L230 354 L220 338 L194 342 Z " +
+                    "M174 322 L204 334 L234 334 L242 348 L318 348 L326 334 L356 334 L386 322 C400 224 358 90 280 90 C202 90 160 224 174 322 Z";
+  crn.skull = mk("path", { class: "icp-bone", "fill-rule": "evenodd", d: skullPath }, L.cranium);
+
+  // Superior sagittal sinus at vertex
+  mk("path", { class: "icp-csf", d: "M268 86C275 80 285 80 292 86L280 96Z" }, L.cranium);
+
+  // Craniectomy bone flap on right calvarium (visible/closed initially)
+  crn.flap = mk("path", { class: "icp-flap", d: "M398 126 C416 195 408 245 396 295 L384 290 C394 242 402 195 386 128 Z" }, L.cranium);
+
+  /* ================= 2. Brain Parenchyma & Ventricles ================= */
+  // Cerebral hemispheres (left & right)
+  brn.hemiL = mk("path", { class: "icp-brain" }, L.brain);
+  brn.hemiR = mk("path", { class: "icp-brain" }, L.brain);
+
+  // Cortical sulci decorative lines
+  brn.sulci = mk("g", {}, L.brain);
+  [
+    "M188 180 C202 186 214 182 225 188",
+    "M182 230 C196 235 210 230 222 238",
+    "M195 135 C208 142 218 138 230 144",
+    "M212 102 C222 112 232 110 240 120",
+    "M372 180 C358 186 346 182 335 188",
+    "M378 230 C364 235 350 230 338 238",
+    "M365 135 C352 142 342 138 330 144",
+    "M348 102 C338 112 328 110 320 120",
+  ].forEach((d) => mk("path", { class: "icp-sulcus", d }, brn.sulci));
+
+  // Tentorium cerebelli (dural shelf with central notch)
+  crn.tentL = mk("path", { class: "icp-dura", d: "M174 268 L254 252" }, L.brain);
+  crn.tentR = mk("path", { class: "icp-dura", d: "M386 268 L306 252" }, L.brain);
+
+  // Cerebellum (in posterior fossa)
+  brn.cerebL = mk("path", { class: "icp-stem", d: "M184 274 C184 330 230 344 256 342 L254 256 Z" }, L.brain);
+  brn.cerebR = mk("path", { class: "icp-stem", d: "M376 274 C376 330 330 344 304 342 L306 256 Z" }, L.brain);
+
+  // Cerebellar tonsils (protrude down into foramen magnum during coning)
+  brn.tonsilL = mk("path", { class: "icp-stem" }, L.brain);
+  brn.tonsilR = mk("path", { class: "icp-stem" }, L.brain);
+
+  // Brainstem: midbrain (incisura), pons, medulla (foramen magnum), upper cervical cord
+  brn.stem = mk("path", { class: "icp-stem" }, L.brain);
+
+  // Ventricles: Lateral ventricles (L & R), Third ventricle, Aqueduct, Fourth ventricle
+  brn.ventL = mk("path", { class: "icp-csf" }, L.brain);
+  brn.ventR = mk("path", { class: "icp-csf" }, L.brain);
+  brn.vent3 = mk("path", { class: "icp-csf" }, L.brain);
+  brn.vent4 = mk("path", { class: "icp-csf", d: "M276 288 L284 288 L282 324 L278 324 Z" }, L.brain);
+
+  // Falx cerebri (midline dural partition down to corpus callosum)
+  brn.falx = mk("path", { class: "icp-dura" }, L.brain);
+
+  // Oculomotor nerve (CN III) running from midbrain past uncus
+  brn.cn3 = mk("path", { class: "icp-dura", stroke: "var(--c-neut)", "stroke-width": "1.4" }, L.brain);
+
+  // Uncal herniation protrusion past tentorial edge
+  brn.uncus = mk("path", { class: "icp-brain" }, L.brain);
+
+  /* ================= 3. Space-Occupying Mass & Oedema ================= */
+  // Oedema halo around mass
+  mss.oedema = mk("ellipse", { class: "icp-oedema", cx: 342, cy: 172 }, L.mass);
+  // Mass lesion core
+  mss.core = mk("ellipse", { class: "icp-mass", cx: 342, cy: 172 }, L.mass);
+
+  /* ================= 4. Devices & Interventions ================= */
+  // EVD: catheter, drip chamber, collection burette
+  dev.g = mk("g", { opacity: "0" }, L.devices);
+  mk("path", { class: "icp-evd", d: "M242 162 C230 110 220 90 212 88 L140 70 C100 60 70 80 66 110" }, dev.g);
+  // Drip burette at x=66, y=110
+  mk("rect", { class: "icp-chamber", x: 54, y: 110, width: 24, height: 60, rx: 5 }, dev.g);
+  mk("rect", { class: "icp-fluid", x: 56, y: 145, width: 20, height: 23, rx: 2 }, dev.g);
+  mk("line", { x1: 58, y1: 125, x2: 64, y2: 125, stroke: "var(--anatomy-mid)", "stroke-width": "0.8" }, dev.g);
+  mk("line", { x1: 58, y1: 135, x2: 66, y2: 135, stroke: "var(--anatomy-mid)", "stroke-width": "0.8" }, dev.g);
+  mk("line", { x1: 58, y1: 145, x2: 64, y2: 145, stroke: "var(--anatomy-mid)", "stroke-width": "0.8" }, dev.g);
+
+  // Particle pools
+  pArt = pool(12, () => mk("circle", { class: "sc-p p-art", r: 2.2 }, L.cranium));
+  pVen = pool(12, () => mk("circle", { class: "sc-p p-ven", r: 2.4 }, L.cranium));
+  pCsf = pool(10, () => mk("circle", { class: "sc-p p-csf", r: 2.0 }, dev.g));
+  pOsm = pool(12, () => mk("circle", { class: "sc-p p-osm", r: 1.8 }, L.mass));
+
+  /* ================= 5. Right Pupil Monitor ================= */
+  const epX = 505, epY = 356;
+  mk("rect", { class: "dr-panel", x: epX - 40, y: epY - 44, width: 80, height: 86, rx: 8 }, L.pupil);
+  mk("circle", { cx: epX, cy: epY - 4, r: 20, fill: "var(--anatomy-paper)", stroke: "var(--anatomy-mid)", "stroke-width": "1" }, L.pupil);
+  mk("circle", { class: "icp-iris", cx: epX, cy: epY - 4, r: 17 }, L.pupil);
+  eye.aperture = mk("circle", { class: "icp-aperture", cx: epX, cy: epY - 4, r: 5 }, L.pupil);
+  eye.txt = mk("text", { class: "dr-pt2", x: epX, y: epY + 30, "text-anchor": "middle", fill: "var(--anatomy-strong)" }, L.pupil);
+  eye.txt.textContent = "reactive";
+
+  /* ================= 6. Monro-Kellie Box (Right Top) ================= */
+  const MB = { x: 604, y: 78, w: 322, h: 20 };
+  // Volume Stack Bar
+  mk("rect", { class: "dr-panel", x: MB.x, y: MB.y, width: MB.w, height: MB.h, rx: 4 }, L.monro);
+  mkG.bBrain = mk("rect", { class: "mk-brain", x: MB.x, y: MB.y, width: 250, height: MB.h, rx: 3 }, L.monro);
+  mkG.bCsf = mk("rect", { class: "mk-csf", x: MB.x + 250, y: MB.y, width: 36, height: MB.h }, L.monro);
+  mkG.bVen = mk("rect", { class: "mk-blood", x: MB.x + 286, y: MB.y, width: 36, height: MB.h }, L.monro);
+  mkG.bMass = mk("rect", { class: "mk-mass", x: MB.x + 322, y: MB.y, width: 0, height: MB.h, rx: 3 }, L.monro);
+
+  // Legend under stack bar
+  const lgY = MB.y + MB.h + 14;
+  const leg = [
+    ["Brain", "mk-brain", MB.x + 20],
+    ["CSF", "mk-csf", MB.x + 105],
+    ["Blood", "mk-blood", MB.x + 185],
+    ["Mass", "mk-mass", MB.x + 265],
+  ];
+  leg.forEach(([name, cls, lx]) => {
+    mk("rect", { class: cls, x: lx - 14, y: lgY - 7, width: 9, height: 9, rx: 2 }, L.monro);
+    const lt = mk("text", { class: "dr-pt2", x: lx, y: lgY }, L.monro);
+    lt.textContent = name;
+  });
+
+  // Volume-Pressure Curve Mini-Plot
+  const CV = { x: 604, y: 132, w: 322, h: 94 };
+  mk("rect", { class: "dr-panel", x: CV.x, y: CV.y, width: CV.w, height: CV.h, rx: 6 }, L.monro);
+  for (let gy = CV.y + 18; gy < CV.y + CV.h; gy += 18) {
+    mk("line", { class: "icp-grid", x1: CV.x, y1: gy, x2: CV.x + CV.w, y2: gy }, L.monro);
+  }
+  for (let gx = CV.x + 40; gx < CV.x + CV.w; gx += 50) {
+    mk("line", { class: "icp-grid", x1: gx, y1: CV.y, x2: gx, y2: CV.y + CV.h }, L.monro);
+  }
+  mk("text", { class: "dr-pt2", x: CV.x + 8, y: CV.y + 14 }, L.monro).textContent = "ICP vs volume curve";
+  mkG.compCurve = mk("path", { class: "icp-curve-comp", opacity: "0" }, L.monro);
+  mk("path", { class: "icp-curve", d: "M" + (CV.x + 15) + " " + (CV.y + CV.h - 10) +
+                                   " C " + (CV.x + 150) + " " + (CV.y + CV.h - 10) + ", " +
+                                   (CV.x + 210) + " " + (CV.y + CV.h - 16) + ", " +
+                                   (CV.x + 250) + " " + (CV.y + CV.h - 36) +
+                                   " S " + (CV.x + 295) + " " + (CV.y + 16) + ", " +
+                                   (CV.x + 308) + " " + (CV.y + 14) }, L.monro);
+  mkG.dot = mk("circle", { cx: CV.x + 15, cy: CV.y + CV.h - 10, r: 5, fill: "var(--c-bad)", stroke: "var(--anatomy-paper)", "stroke-width": "1.5" }, L.monro);
+
+  /* ================= 7. Cushing Response & Perfusion Box (Right Bottom) ================= */
+  const CB = { x: 604, y: 280, w: 322, h: 22 };
+  mk("rect", { class: "dr-panel", x: CB.x, y: CB.y, width: CB.w, height: CB.h, rx: 4 }, L.cushing);
+  csh.mapBar = mk("rect", { class: "dr-g-fill g-good", x: CB.x, y: CB.y, width: 220, height: 10, rx: 2 }, L.cushing);
+  csh.icpBar = mk("rect", { class: "dr-g-fill g-bad", x: CB.x, y: CB.y + 12, width: 40, height: 10, rx: 2 }, L.cushing);
+  csh.cppTxt = mk("text", { class: "dr-pt2", x: CB.x + CB.w - 6, y: CB.y + 15, "text-anchor": "end" }, L.cushing);
+  csh.cppTxt.textContent = "CPP: adequate";
+
+  // Waveforms canvas (Arterial BP, Heart rate, Respiration)
+  const WF = { x: 604, y: 318, w: 322, h: 110 };
+  mk("rect", { class: "dr-panel", x: WF.x, y: WF.y, width: WF.w, height: WF.h, rx: 6 }, L.cushing);
+  mk("line", { class: "icp-grid", x1: WF.x + 82, y1: WF.y, x2: WF.x + 82, y2: WF.y + WF.h }, L.cushing);
+  for (let gy = WF.y + 18; gy < WF.y + WF.h; gy += 18) {
+    mk("line", { class: "icp-grid", x1: WF.x, y1: gy, x2: WF.x + WF.w, y2: gy }, L.cushing);
+  }
+  csh.traceBp = mk("path", { class: "icp-trace-bp" }, L.cushing);
+  csh.traceHr = mk("path", { class: "icp-trace-hr" }, L.cushing);
+  csh.traceResp = mk("path", { class: "icp-trace-resp" }, L.cushing);
+
+  mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 26, fill: "var(--c-rbc)" }, L.cushing).textContent = "Arterial BP";
+  mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 60, fill: "var(--c-good)" }, L.cushing).textContent = "Heart rate";
+  mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 94, fill: "var(--c-cyt)" }, L.cushing).textContent = "Respiration";
+
+  /* ================= 8. Label Pills ================= */
+  const o = L.over;
+  pill(o, "Rigid cranium", 175, 95, 95, 86, "The inextensible bony skull. Because its volume is fixed, any expansion in brain, blood, CSF or a new mass must displace another component.");
+  pill(o, "Falx cerebri", 280, 115, 280, 72, "The tough midline dural partition between the cerebral hemispheres. Lateral mass effect forces brain tissue underneath its free edge.");
+  pill(o, "Mass or oedema", 350, 150, 460, 72, "An expanding space-occupying lesion such as a haematoma, contusion, tumour or cerebral oedema that takes up intracranial volume.");
+
+  pill(o, "Lateral ventricle", 235, 165, 95, 150, "CSF-filled lateral ventricular horns. The ipsilateral ventricle is effaced by mass effect, while CSF is displaced into the spinal space.");
+  pill(o, "Subfalcine shift", 270, 175, 480, 135, "The cingulate gyrus herniates across the midline beneath the rigid falx cerebri, compressing pericallosal anterior cerebral arteries.");
+
+  pill(o, "Tentorium", 220, 260, 85, 235, "The rigid dural shelf dividing supratentorial hemispheres from the cerebellum and brainstem. Its central opening is the tentorial notch.");
+  pill(o, "Uncal herniation", 320, 260, 480, 195, "The medial temporal uncus herniates downward through the tentorial notch, squeezing the midbrain and ipsilateral oculomotor nerve.");
+
+  pill(o, "Foramen magnum", 240, 345, 95, 320, "The large skull base opening through which the brainstem connects to the spinal cord. Rigid bone surrounds this critical exit.");
+  pill(o, "Pupil (CN III)", 505, 335, 495, 260, "Compression of the third cranial nerve by the herniating uncus paralyzes parasympathetic pupillomotor fibers, causing a dilated, unreactive pupil.");
+
+  pill(o, "Brainstem", 275, 370, 185, 395, "Contains the midbrain, pons and medulla oblongata, housing vital cardiovascular and respiratory pacemaker nuclei.");
+  pill(o, "Tonsillar coning", 312, 355, 475, 395, "Cerebellar tonsils are forced downward into the foramen magnum, directly compressing the medulla oblongata and causing respiratory arrest.");
+
+  pill(o, "Volume buffer", 750, 88, 845, 80, "Monro-Kellie doctrine: intracranial volume is shared between brain, venous blood, CSF and mass. Venous blood and CSF serve as initial buffers.");
+  pill(o, "Compliance curve", 790, 180, 845, 142, "Volume-pressure relationship: flat during initial compensation, then steep exponential pressure rise once compensatory buffers are exhausted.");
+
+  pill(o, "Perfusion margin", 740, 290, 845, 280, "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. As ICP rises, perfusion margin narrows.");
+  pill(o, "Cushing triad", 760, 355, 845, 338, "Life-threatening autonomic response to medullary ischaemia: severe arterial hypertension, reflex bradycardia and respiratory irregularity.");
+
+  // Treatment indicator pills
+  const pillHead = pill(o, "Head elevation", 232, 380, 85, 395, "Head elevation with neutral neck alignment accelerates jugular venous drainage and reduces intracranial venous blood volume without dropping arterial pressure.");
+  pillHead.setAttribute("id", "p-head"); pillHead.style.opacity = "0";
+
+  const pillOsm = pill(o, "Osmotic therapy", 342, 140, 360, 105, "Mannitol or hypertonic saline creates an intravascular osmotic gradient, drawing free water from swollen brain parenchyma across the blood-brain barrier.");
+  pillOsm.setAttribute("id", "p-osm"); pillOsm.style.opacity = "0";
+
+  const pillEvd = pill(o, "CSF drainage", 212, 88, 180, 105, "An external ventricular drain in the lateral ventricle directly vents CSF, immediately decompressing intracranial volume.");
+  pillEvd.setAttribute("id", "p-evd"); pillEvd.style.opacity = "0";
+
+  const pillDec = pill(o, "Craniectomy", 396, 210, 410, 155, "Surgical removal of a cranial bone flap converts the closed rigid cranium into an open compliant space, letting swollen brain expand outward.");
+  pillDec.setAttribute("id", "p-dec"); pillDec.style.opacity = "0";
+
+  /* ================= 9. Bottom Gauges Panel ================= */
+  const P = L.panel, y0 = 486;
+  mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
+  mk("text", { class: "dr-pt", x: 40, y: 476 }, P).textContent = "The patient";
+
+  [
+    ["icp", "ICP", "g-bad", "Intracranial pressure: normal in health; rises steeply once compensatory reserve is exhausted."],
+    ["cpp", "CPP", "g-good", "Cerebral perfusion pressure: MAP minus ICP. Collapses as ICP climbs, causing brain ischaemia."],
+    ["comp", "Compliance", "g-good", "Cranial volume reserve: ability of the intracranial space to accommodate added volume without a pressure spike."],
+    ["shift", "Midline shift", "g-clot", "Lateral displacement of cerebral hemispheres across the falx cerebri from unilateral mass effect."],
+    ["hernia", "Herniation", "g-bad", "Transtentorial uncal and foramen magnum tonsillar descent compressing brainstem structures."],
+    ["cush", "Cushing reflex", "g-cyt", "Autonomic response to medullary compression: arterial hypertension, reflex bradycardia and respiratory irregularity."],
+  ].forEach(([id, name, cls, tip], i) => {
+    gg[id] = gauge(P, 100 + i * 145, y0, 60, 18, cls, name, tip);
+  });
+}
+
+function updateAnatomy(dt) {
+  const sh = sm.shift * 18;                     // lateral midline displacement in px
+  const hn = sm.hernia;                         // herniation intensity (0 to 1)
+  const dec = sm.decomp;                        // surgical decompression intensity (0 to 1)
+
+  // Calvarium bone flap (craniectomy)
+  if (dec > 0.05) {
+    crn.flap.setAttribute("transform", "translate(" + f1(dec * 32) + " " + f1(-dec * 12) + ") rotate(" + f1(dec * 18) + " 396 295)");
+    crn.flap.setAttribute("opacity", (1 - dec * 0.7).toFixed(2));
+  } else {
+    crn.flap.setAttribute("transform", "");
+    crn.flap.setAttribute("opacity", "1");
+  }
+
+  // Falx cerebri bowing
+  const fxD = "M280 90 Q" + f1(280 - sh * 0.6) + " 135 " + f1(280 - sh) + " 180";
+  brn.falx.setAttribute("d", fxD);
+
+  // Left & Right Hemispheres (with durotomy bulge outward on right if decompressed)
+  const rBulge = dec * 22;
+  const hemiLD = "M280 90 C202 90 174 224 174 266 L254 252 L" + f1(280 - sh) + " 180 Q" + f1(280 - sh * 0.6) + " 135 280 90 Z";
+  const hemiRD = "M280 90 Q" + f1(280 - sh * 0.6) + " 135 " + f1(280 - sh) + " 180 L306 252 L386 266 C" +
+                 f1(386 + rBulge) + " 224 " + f1(358 + rBulge * 0.8) + " 90 280 90 Z";
+  brn.hemiL.setAttribute("d", hemiLD);
+  brn.hemiR.setAttribute("d", hemiRD);
+
+  // Color shade change on cortex with severe ischaemia (dusky hue)
+  const isch = clamp((0.50 - sm.cpp) * 2.2);
+  const cortexColor = "color-mix(in srgb, var(--c-endo) " + f1(28 - isch * 12) + "%, color-mix(in srgb, #605060 " + f1(isch * 45) + "%, var(--anatomy-paper)))";
+  brn.hemiL.style.fill = cortexColor;
+  brn.hemiR.style.fill = cortexColor;
+
+  // Lateral Ventricles: left shifts, right effaces
+  const vlX = 236 - sh * 0.8;
+  const vlW = 14 + (sm.evd > 0.3 ? -3 : 0);
+  brn.ventL.setAttribute("d", "M" + f1(vlX) + " 142 C" + f1(vlX - vlW) + " 160 " + f1(vlX - vlW) + " 178 " + f1(vlX) + " 188 C" + f1(vlX + 4) + " 172 " + f1(vlX + 4) + " 155 " + f1(vlX) + " 142 Z");
+
+  const vrX = 324 - sh * 0.9;
+  const vrW = Math.max(1.8, 14 * (1 - sm.mass * 0.9));  // effacement
+  brn.ventR.setAttribute("d", "M" + f1(vrX) + " 142 C" + f1(vrX + vrW) + " 160 " + f1(vrX + vrW) + " 178 " + f1(vrX) + " 188 C" + f1(vrX - 2) + " 172 " + f1(vrX - 2) + " 155 " + f1(vrX) + " 142 Z");
+
+  // Third Ventricle on midline
+  const v3X = 280 - sh * 0.95;
+  brn.vent3.setAttribute("d", "M" + f1(v3X - 2) + " 192 L" + f1(v3X + 2) + " 192 L" + f1(v3X + 2) + " 226 L" + f1(v3X - 2) + " 226 Z");
+
+  // Brainstem: midbrain shifts slightly, medulla compressed
+  const stmX = 280 - sh * 0.25;
+  brn.stem.setAttribute("d", "M" + f1(stmX - 12) + " 250 L" + f1(stmX + 12) + " 250 " +
+                             "C" + f1(stmX + 16) + " 270 " + f1(stmX + 16) + " 305 " + f1(stmX + 10) + " 315 " +
+                             "L" + f1(stmX + 9 - hn * 3) + " 348 L" + f1(stmX + 8) + " 416 " +
+                             "L" + f1(stmX - 8) + " 416 L" + f1(stmX - 9 + hn * 2) + " 348 " +
+                             "L" + f1(stmX - 10) + " 315 C" + f1(stmX - 16) + " 305 " + f1(stmX - 16) + " 270 " + f1(stmX - 12) + " 250 Z");
+
+  // Cerebellar Tonsils: coning down past foramen magnum (y=348)
+  const tonsilDrop = hn * 18;
+  brn.tonsilL.setAttribute("d", "M248 335 C244 344 246 " + f1(348 + tonsilDrop * 0.7) + " 254 " + f1(348 + tonsilDrop * 0.7) + " C260 " + f1(348 + tonsilDrop * 0.7) + " 262 342 260 335 Z");
+  brn.tonsilR.setAttribute("d", "M300 335 C298 342 300 " + f1(348 + tonsilDrop) + " 306 " + f1(348 + tonsilDrop) + " C314 " + f1(348 + tonsilDrop) + " 316 344 312 335 Z");
+
+  // Uncal herniation (medial temporal uncus descending past tentorium into posterior fossa)
+  const uncY = 250 + hn * 18;
+  brn.uncus.setAttribute("d", "M304 248 C318 248 322 " + f1(uncY) + " 312 " + f1(uncY) + " C304 " + f1(uncY) + " 298 254 304 248 Z");
+  brn.uncus.setAttribute("opacity", (hn > 0.05 ? clamp(hn * 1.5).toFixed(2) : "0"));
+
+  // Oculomotor nerve (CN III) stretched and compressed by uncus
+  const cn3Y = 254 + hn * 14;
+  brn.cn3.setAttribute("d", "M" + f1(stmX + 10) + " 252 Q312 " + f1(cn3Y) + " 350 274");
+
+  // Mass core & Oedema halo
+  const mR = sm.mass * 30;
+  mss.core.setAttribute("rx", f1(Math.max(0.1, mR)));
+  mss.core.setAttribute("ry", f1(Math.max(0.1, mR * 0.88)));
+  mss.core.setAttribute("opacity", clamp(sm.mass * 1.5).toFixed(2));
+
+  const oedR = sm.mass * 52 * (1 - sm.osm * 0.35);
+  mss.oedema.setAttribute("rx", f1(Math.max(0.1, oedR)));
+  mss.oedema.setAttribute("ry", f1(Math.max(0.1, oedR * 0.85)));
+  mss.oedema.setAttribute("opacity", clamp(sm.mass * 1.1).toFixed(2));
+
+  // Right Pupil aperture
+  const pRad = 4.5 + hn * 10.5;
+  eye.aperture.setAttribute("r", f1(pRad));
+  const pWord = hn > 0.45 ? "blown" : hn > 0.15 ? "sluggish" : "reactive";
+  if (eye.txt.textContent !== pWord) eye.txt.textContent = pWord;
+  eye.txt.setAttribute("fill", hn > 0.45 ? "var(--c-bad)" : hn > 0.15 ? "var(--c-neut)" : "var(--anatomy-strong)");
+
+  // EVD device visibility
+  dev.g.setAttribute("opacity", sm.evd > 0.05 ? "1" : "0");
+
+  // Treatment badges / pills opacity
+  const opF = (v) => clamp(v).toFixed(2);
+  const pHead = $("p-head"), pOsm = $("p-osm"), pEvd = $("p-evd"), pDec = $("p-dec");
+  if (pHead) pHead.style.opacity = opF(sm.headUp);
+  if (pOsm) pOsm.style.opacity = opF(sm.osm);
+  if (pEvd) pEvd.style.opacity = opF(sm.evd);
+  if (pDec) pDec.style.opacity = opF(sm.decomp);
+}
+
+function updateMonroKellie() {
+  const MB = { x: 604, w: 322 };
+  // Proportions of Monro-Kellie compartments
+  const mFrac = clamp(sm.mass * 0.24);
+  const cFrac = clamp(0.10 * (1 - sm.mass * 1.05 + 0.45 * sm.evd));
+  const vFrac = clamp(0.10 * (1 - sm.mass * 1.0 + 0.30 * sm.headUp));
+  const bFrac = clamp(1 - (mFrac + cFrac + vFrac));
+
+  const wBrain = bFrac * MB.w;
+  const wCsf = cFrac * MB.w;
+  const wVen = vFrac * MB.w;
+  const wMass = mFrac * MB.w;
+
+  mkG.bBrain.setAttribute("width", f1(wBrain));
+  mkG.bCsf.setAttribute("x", f1(MB.x + wBrain));
+  mkG.bCsf.setAttribute("width", f1(wCsf));
+  mkG.bVen.setAttribute("x", f1(MB.x + wBrain + wCsf));
+  mkG.bVen.setAttribute("width", f1(wVen));
+  mkG.bMass.setAttribute("x", f1(MB.x + wBrain + wCsf + wVen));
+  mkG.bMass.setAttribute("width", f1(wMass));
+
+  // Compliance Curve Cursor Position
+  const CV = { x: 604, y: 132, w: 322, h: 94 };
+  const uVol = clamp(mFrac / 0.24);
+  // Path formula calculation
+  const dotX = CV.x + 15 + uVol * (CV.w - 30);
+  const curveNorm = Math.pow(uVol, 2.6);
+  const decompRelief = sm.decomp * 0.65;
+  const dotY = CV.y + CV.h - 10 - clamp(curveNorm * (1 - decompRelief)) * (CV.h - 22);
+
+  mkG.dot.setAttribute("cx", f1(dotX));
+  mkG.dot.setAttribute("cy", f1(dotY));
+  mkG.dot.setAttribute("fill", sm.icp > 0.58 ? "var(--c-bad)" : sm.icp > 0.26 ? "var(--c-neut)" : "var(--c-good)");
+}
+
+function updateCushing(dt) {
+  const CB = { x: 604, w: 322 };
+  // MAP and ICP bars
+  const wMap = clamp(sm.map) * (CB.w - 70);
+  const wIcp = clamp(sm.icp) * (CB.w - 70);
+  csh.mapBar.setAttribute("width", f1(wMap));
+  csh.icpBar.setAttribute("width", f1(wIcp));
+
+  const cppWord = "CPP: " + (sm.cpp < 0.35 ? "compromised" : sm.cpp < 0.54 ? "threatened" : "adequate");
+  if (csh.cppTxt.textContent !== cppWord) csh.cppTxt.textContent = cppWord;
+  csh.cppTxt.setAttribute("fill", sm.cpp < 0.35 ? "var(--c-bad)" : sm.cpp < 0.54 ? "var(--c-neut)" : "var(--c-good)");
+
+  // Waveforms drawing (dedicated label column on left, traces run x = 690 to 920)
+  const WF = { x: 604, y: 318, w: 322, h: 110 };
+  const cshAct = sm.cushing;
+
+  // Waveform frequencies and amplitudes
+  // 1. Blood Pressure: surges with hypertension
+  const bpAmp = 6 + cshAct * 9;
+  const bpBase = WF.y + 24 - cshAct * 7;
+
+  // 2. Heart Rate: bradycardia slows down frequency
+  const hrRate = 1.0 - cshAct * 0.55;           // slower rhythm in bradycardia
+  const hrBase = WF.y + 60;
+
+  // 3. Respiration: irregular, shallow, apnoeic in severe coning
+  const respBase = WF.y + 96;
+  const respAmp = Math.max(2, 6 * (1 - cshAct * 0.6));
+
+  const xStart = WF.x + 86, xEnd = WF.x + WF.w - 6;
+  let dBp = "", dHr = "", dResp = "";
+  for (let x = xStart; x <= xEnd; x += 3) {
+    const age = (xEnd - x) / 75;
+    const t = tm / 1000 - age;
+
+    // BP pulse waveform
+    const pBp = ((t * 1.3) % 1 + 1) % 1;
+    const yBp = bpBase - bpAmp * (pBp < 0.25 ? Math.sin(pBp / 0.25 * Math.PI) : -0.2 * Math.sin((pBp - 0.25) / 0.75 * Math.PI));
+    dBp += (x === xStart ? "M" : "L") + x + " " + f1(yBp);
+
+    // HR rhythm wave (ECG QRS spikes)
+    const pHr = ((t * hrRate * 1.4) % 1 + 1) % 1;
+    let yHr = hrBase;
+    if (pHr > 0.20 && pHr < 0.24) yHr -= 12;
+    else if (pHr >= 0.24 && pHr < 0.28) yHr += 4;
+    dHr += (x === xStart ? "M" : "L") + x + " " + f1(yHr);
+
+    // Breathing rhythm wave (irregular ataxic breaths with high cushing)
+    const pResp = ((t * 0.35) % 1 + 1) % 1;
+    const irreg = cshAct > 0.4 ? 0.4 * Math.sin(t * 1.8) : 0;
+    const yResp = respBase + respAmp * Math.sin(pResp * 6.283 + irreg);
+    dResp += (x === xStart ? "M" : "L") + x + " " + f1(yResp);
+  }
+  csh.traceBp.setAttribute("d", dBp);
+  csh.traceHr.setAttribute("d", dHr);
+  csh.traceResp.setAttribute("d", dResp);
+}
+
+function updateParticles(dt) {
+  // Arterial particles into skull base
+  if (Math.random() < dt * 6) {
+    const p = free(pArt);
+    if (p) emit(p, pick([254, 306]) + rnd(-3, 3), 422, rnd(-2, 2), -rnd(45, 75));
+  }
+  pArt.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.t > 1.8 || p.y < 280) kill(p);
+  });
+
+  // Jugular venous particles down neck (accelerated by head elevation)
+  const venRate = 4 + sm.headUp * 10;
+  if (Math.random() < dt * venRate) {
+    const p = free(pVen);
+    if (p) emit(p, pick([228, 332]) + rnd(-4, 4), 350, rnd(-2, 2), rnd(40, 70 + sm.headUp * 50));
+  }
+  pVen.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.t > 1.6 || p.y > 426) kill(p);
+  });
+
+  // EVD drops dripping in burette
+  if (sm.evd > 0.3 && Math.random() < dt * 4) {
+    const p = free(pCsf);
+    if (p) emit(p, 66 + rnd(-2, 2), 116, 0, rnd(25, 45));
+  }
+  pCsf.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.t > 1.0 || p.y > 146) kill(p);
+  });
+
+  // Osmotic draw particles from swollen tissue into capillaries
+  if (sm.osm > 0.3 && Math.random() < dt * sm.osm * 6) {
+    const p = free(pOsm);
+    if (p) emit(p, 342 + rnd(-25, 25), 172 + rnd(-25, 25), rnd(-15, 15), rnd(-15, 15));
+  }
+  pOsm.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.t > 1.4) kill(p);
+  });
+}
+
+function step(dt, m) {
+  const kFast = Math.min(1, dt * 2.0);
+  const kSlow = Math.min(1, dt * 1.0);
+
+  ["mass", "headUp", "osm", "evd", "decomp"].forEach((q) => {
+    sm[q] = lerp(sm[q], m[q], kFast);
+  });
+  ["icp", "cpp", "compReserve", "shift", "hernia", "cushing", "map"].forEach((q) => {
+    sm[q] = lerp(sm[q], m[q], kSlow);
+  });
+
+  updateAnatomy(dt);
+  updateMonroKellie();
+  updateCushing(dt);
+  updateParticles(dt);
+
+  // Update Gauges
+  gg.icp.set(sm.icp, wordOf(sm.icp, 0.26, 0.58, ["normal", "elevated", "critical"]));
+  gg.cpp.set(sm.cpp, wordOf(sm.cpp, 0.35, 0.54, ["poor", "reduced", "normal"]));
+  gg.comp.set(sm.compReserve, wordOf(sm.compReserve, 0.30, 0.65, ["exhausted", "reduced", "normal"]));
+  gg.shift.set(sm.shift, wordOf(sm.shift, 0.25, 0.55, ["none", "moderate", "severe"]));
+  gg.hernia.set(sm.hernia, wordOf(sm.hernia, 0.20, 0.50, ["none", "impending", "severe"]));
+  gg.cush.set(sm.cushing, wordOf(sm.cushing, 0.25, 0.60, ["absent", "impending", "active"]));
+}
+
+run({ init, step });
+</script></body></html>
