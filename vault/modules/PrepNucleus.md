@@ -1731,3 +1731,8 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - Tests: `test/prep-plan-scope.test.mjs` (iniSubjects for every course), `test/run-prep-subject-ui.mjs` (INI-SS Medical
   Oncology and Urology homes, NEET-SS Medical home has no surgical subject). That browser test's older checks (six exams,
   Radiology bank v16 counts, Learn lists) fail on `main` too and were not touched here.
+
+- **Figure viewer is app-like (2026-10-17):** `fig-viewer.js` `appMode()` injects CSS and a zoomer into the same-origin figure iframe: the drawing fits the
+  screen width (no sideways scroll), the page scrolls up and down inside the iframe, and the drawing zooms by pinch, double-tap or the +/- buttons and pans with
+  one finger only while zoomed. Controls are full width (48 px select, 16 px font), the explanation is a sticky bottom card, sources are a collapsed section.
+  Works on every figure page without rebuilding them. Test: `test/run-figure-gestures.mjs` (real touch events) and a 92-page sweep.
