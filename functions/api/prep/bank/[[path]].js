@@ -62,7 +62,10 @@ const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|
 // Medicine coverage MCQs
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Owner-reviewed MaiK questions
-const MAIK_RE = /^overlay\/(?:maikfill\d|maik(?:img)?[1-9]\d{0,2}|(?!(?:radnotes|radmax|medcov)\d)[a-z]{2,12}[1-9]\d{0,2}[a-z]?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+/* Overlay set names: letters plus a 1-3 digit number plus an optional letter, plus the two families the pattern missed:
+ * maikir (IR wave 1) and gap1013a..f. They were uploaded and then never served (404): 84 modules without their questions
+ * (owner 2026-10-17). Any other name stays refused (test/prep-server.test.mjs, prep-radss.test.mjs). */
+const MAIK_RE = /^overlay\/(?:maikfill\d|maik(?:img)?[1-9]\d{0,2}|(?!(?:radnotes|radmax|medcov)\d)[a-z]{2,12}[1-9]\d{0,2}[a-z]?|maikir[1-9]?|gap[1-9]\d{3}[a-z])\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Openly licensed images for image MCQs: img/maikimg/i-<hash>.webp
 const MAIK_IMG_RE = /^img\/maikimg\/i-[a-z0-9-]{8,40}\.webp$/;
 // MaiK overlay manifest

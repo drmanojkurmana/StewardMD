@@ -50,13 +50,18 @@
   var SS_GROUPS = SS_DATA.groups || [];
   function ssGroupOf(id) { for (var gi = 0; gi < SS_GROUPS.length; gi++) if (SS_GROUPS[gi].id === id) return SS_GROUPS[gi]; return null; }
   function ssGroupSubjects(id) { var g = ssGroupOf(id); return g ? g.subjects.slice() : []; }
+  /* Subjects that sit outside the NEET-SS tab but belong to a group's feeder degree (looked up by subject id, shown after
+   * the group's own list). The Radio-diagnosis group's feeder is MD Radiodiagnosis: its Radiology subject. */
+  var SS_EXTRA = { "radio-diagnosis": ["radiology"] };
+  function ssGroupExtras(id) { return (SS_EXTRA[id] || []).slice(); }
   function defaultSsGroup() { return "medical"; }
   /* INI-SS is one course (DM/M.Ch.), and its paper draws on "the general/basic component of the qualifying degree and
    * the sub-specialty of the course applied for" (prospectus, prep/assess/profiles/ini-ss.json). Owner 2026-10-16:
    * "INI-SS med onco needs med onco, biostats and general medicine"; "INI-SS uro" does not need all surgery and medicine.
    * So the course scope is: the course, its degree's general subject (General Medicine when a NEET-SS group pairs the
-   * course with it, General Surgery likewise; MBBS Paediatrics for a paediatric course; none for Radiology, whose degree
-   * is not Medicine), then Biostatistics. */
+   * course with it, General Surgery likewise; MBBS Paediatrics for a paediatric course; the Radiology subject for a
+   * Radiology course, whose qualifying degree is MD Radiodiagnosis and whose interventional radiology lessons and MCQs
+   * live there: owner 2026-10-17, "why can I not see the 1000+ IR MCQs, module and lessons"), then Biostatistics. */
   var INI_GENERAL = ["ss-general-medicine", "ss-general-surgery"];
   function iniSubjects(id) {
     if (!id) return [];
@@ -72,6 +77,8 @@
     // (owner 2026-10-16: "Use MBBS Paediatrics"). It lives on the NEET-PG tab; prep.js planSubjects looks it up there.
     var pg = ssGroupOf("paediatric");
     if (pg && pg.subjects.indexOf(id) >= 0 && id !== "ss-biostatistics") out.push("paediatrics");
+    // Radiology course: the qualifying degree's subject (MD Radiodiagnosis) holds the 42 interventional radiology modules.
+    if (id === "ss-radiology") out.push("radiology");
     if (id !== "ss-biostatistics") out.push("ss-biostatistics");
     return out;
   }
@@ -240,7 +247,7 @@
   }
 
   var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, SS_GROUPS: SS_GROUPS, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf,
-    ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, iniSubjects: iniSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
+    ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, ssGroupExtras: ssGroupExtras, iniSubjects: iniSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
     newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }

@@ -356,7 +356,13 @@
         if (!weak.length) { H.stack().pop(); H.toast("No weak concepts marked yet. Tap Unsure or Guess on a concept first."); return openOutline(topic); }
       }
       var order = orderForStudy(outline, matched.assign, mode === "test" ? "test" : mode === "revise" ? "revise" : "learn", topic.id + ":" + mode, weak);
-      if (!order.length) { H.stack().pop(); H.toast("No questions for this topic yet."); return openOutline(topic); }
+      if (!order.length) {
+        // A load that failed is not an empty topic: say what went wrong so it is never mistaken for missing content.
+        var failed = lists.filter(function (l) { return l.err; });
+        H.stack().pop();
+        H.toast(failed.length && failed.length === lists.length ? (failed.some(function (l) { return l.err === 401; }) ? "Sign in again to open the questions." : "The questions could not load. Check the connection and try again.") : "No questions for this topic yet.");
+        return openOutline(topic);
+      }
       var ids = [];
       order.forEach(function (r) { r.items.forEach(function (id) { ids.push(id); }); });
       var byId = {};
@@ -390,14 +396,14 @@
         pairs.forEach(function (p) { var x = ix[p.s]; if (x) x.topics.forEach(function (t) { if (t.id === p.m) n += H.pure.countFor(t, H.exam().id); }); });
         cov = { total: outline.length, covered: n > 0 ? outline.length : 0 };
       } catch (e) {}
-      var rows = outline.map(function (c, i) {
-        var cf = confOf(topic.id, c.id);
-        var chip = cf ? ' <span class="pn-t2b' + (cf === "sure" ? " ok" : "") + '">' + escH(cf === "sure" ? "Sure" : cf === "unsure" ? "Unsure" : "Guess") + "</span>" : "";
-        return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + (i + 1) + ". " + escH(c.title) + "</b><small>" + escH(c.tier === "core" ? "Core" : c.tier === "high" ? "High-yield" : "Extra") + chip + "</small></span>" +
-          '<span class="pn-cf" role="group" aria-label="Confidence for ' + escH(c.title) + '">' +
-          ["sure", "unsure", "guess"].map(function (v) { return '<button type="button" class="pn-chip' + (cf === v ? " on" : "") + '" data-act="n360-conf" data-t="' + escH(topic.id) + '" data-c="' + escH(c.id) + '" data-v="' + v + '">' + v + "</button>"; }).join("") + "</span></div></li>";
-      }).join("");
       H.push(function () {
+        var rows = outline.map(function (c, i) {
+          var cf = confOf(topic.id, c.id);
+          var chip = cf ? ' <span class="pn-t2b' + (cf === "sure" ? " ok" : "") + '">' + escH(cf === "sure" ? "Sure" : cf === "unsure" ? "Unsure" : "Guess") + "</span>" : "";
+          return '<li><div class="pn-mod static"><span class="pn-mb"><b>' + (i + 1) + ". " + escH(c.title) + "</b><small>" + escH(c.tier === "core" ? "Core" : c.tier === "high" ? "High-yield" : "Extra") + chip + "</small></span>" +
+            '<span class="pn-cf" role="group" aria-label="Confidence for ' + escH(c.title) + '">' +
+            ["sure", "unsure", "guess"].map(function (v) { return '<button type="button" class="pn-cfb' + (cf === v ? " on" : "") + '" aria-pressed="' + (cf === v) + '" data-v="' + v + '" data-act="n360-conf" data-t="' + escH(topic.id) + '" data-c="' + escH(c.id) + '" data-v="' + v + '">' + v + "</button>"; }).join("") + "</span></div></li>";
+        }).join("");
         H.paint(H.bar(escH(NUCLEUS360.name), escH(topic.title), "back") + '<div class="pn-body">' +
           '<section class="pn-panel"><p class="pn-t2eb">' + escH(NUCLEUS360.tagline) + '</p><h2 class="pn-h">' + escH(topic.title) + "</h2>" +
           '<p class="pn-mut">Chapter map: ' + outline.length + ' concepts in chapter order. Coverage ' + cov.covered + "/" + cov.total + ' concepts.</p>' +
@@ -522,7 +528,18 @@
     if (a === "n360-hub") return openHub("", b && b.getAttribute ? b.getAttribute("data-s") : "");
     if (a === "n360-topic") { var id = b.getAttribute("data-t"); return topicById(id).then(function (t) { if (t) openOutline(t); }); }
     if (a === "n360-go") { var m = b.getAttribute("data-m"), tid = b.getAttribute("data-t"); return topicById(tid).then(function (t) { if (t) startTopic(t, m); }); }
-    if (a === "n360-conf") { tapConf(b.getAttribute("data-t"), b.getAttribute("data-c"), b.getAttribute("data-v")); return H.rerender(); }
+    if (a === "n360-conf") {
+      var cv = b.getAttribute("data-v");
+      tapConf(b.getAttribute("data-t"), b.getAttribute("data-c"), cv);
+      // Update this row in place: a full repaint would send a long concept list back to the top on every tap.
+      try {
+        var grp = b.parentNode, row = grp && grp.parentNode;
+        [].forEach.call(grp.querySelectorAll("button[data-v]"), function (x) { var on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+        var small = row && row.querySelector("small");
+        if (small) { var old = small.querySelector(".pn-t2b"); if (old) old.remove(); var chip = D.createElement("span"); chip.className = "pn-t2b" + (cv === "sure" ? " ok" : ""); chip.textContent = cv === "sure" ? "Sure" : cv === "unsure" ? "Unsure" : "Guess"; small.appendChild(D.createTextNode(" ")); small.appendChild(chip); }
+        return;
+      } catch (e) { return H.rerender(); }
+    }
     if (a === "n360-summary") { var sid2 = b.getAttribute("data-t"); return topicById(sid2).then(function (t) { if (t) openSummary(t); }); }
   }
   function init(host) { H = host; ses(); }

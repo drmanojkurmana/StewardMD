@@ -251,3 +251,18 @@
   .pn-root .pn-t2ghead { padding: 12px 18px; }
   .pn-root .pn-t2ginner { padding: 0 18px 16px; }
 }
+
+/* Nucleus360 concept confidence: Sure / Unsure / Guess as one segmented control, right of the concept title.
+   Equal-width segments, 44 px tall, the chosen one filled and marked aria-pressed; colour is never the only signal
+   (the label and the "Sure/Unsure/Guess" chip under the title say it too). Stacks under the title on narrow screens. */
+.pn-root .pn-mod.static { flex-wrap: wrap; align-items: center; row-gap: 10px; }
+.pn-root .pn-mod.static .pn-mb { flex: 1 1 240px; min-width: 0; }
+.pn-root .pn-cf { display: grid; grid-template-columns: repeat(3, 1fr); flex: 0 0 auto; width: 252px; max-width: 100%; margin-left: auto; border: 1px solid var(--pn-edge); border-radius: 12px; overflow: hidden; background: var(--pn-card); }
+.pn-root .pn-cfb { min-height: 44px; padding: 0 8px; border: 0; border-left: 1px solid var(--pn-edge); background: transparent; color: var(--pn-mut); font: inherit; font-size: 14px; font-weight: 600; text-transform: capitalize; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.pn-root .pn-cfb:first-child { border-left: 0; }
+.pn-root .pn-cfb:active { background: var(--pn-fill-press, var(--pn-pri-soft)); }
+.pn-root .pn-cfb.on { background: var(--pn-pri-soft); color: var(--pn-pri-ink); box-shadow: inset 0 0 0 2px var(--pn-pri); }
+.pn-root .pn-cfb[data-v="sure"].on { background: var(--pn-ok-bg); color: var(--pn-ok); box-shadow: inset 0 0 0 2px var(--pn-ok); }
+.pn-root .pn-cfb:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: -2px; }
+@media (max-width: 560px) { .pn-root .pn-cf { width: 100%; margin-left: 0; } }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-cfb { transition: none; } }

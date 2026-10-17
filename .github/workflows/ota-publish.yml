@@ -2,6 +2,11 @@ name: OTA — publish live
 
 on:
   workflow_dispatch:
+    inputs:
+      skip_parity:
+        description: "Publish even though R2 is missing files the repo lists (code-only emergency fix). Leave false for any content."
+        type: boolean
+        default: false
 
 jobs:
   publish:
@@ -11,6 +16,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
+      - name: PrepNucleus content is in R2 (a gap would hide modules and MCQs on every phone)
+        if: ${{ !inputs.skip_parity }}
+        env:
+          SMD_TOOL_TOKEN: ${{ secrets.SMD_TOOL_TOKEN }}
+        run: node tools/prep-r2-parity.mjs
       - name: Install wrangler
         run: npm install -g wrangler@4.107.0
       - name: Publish staged candidate live to devices
