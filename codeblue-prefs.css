@@ -215,6 +215,21 @@
 #cbpRoot[data-cb-motion="reduced"] * {
   transition: none !important; animation: none !important;
 }
+/* Press feedback is transform based, so it needs its own reset: with
+ * motion reduced there is no scale jump, colour change only. */
+#cbtRoot[data-cb-motion="reduced"] *:active,
+.cbecg[data-cb-motion="reduced"] *:active,
+.cb-sheet-ov .cb-sheet[data-cb-motion="reduced"] *:active,
+#cbpRoot[data-cb-motion="reduced"] *:active {
+  transform: none !important;
+}
+/* The in-app switch mirrors the system setting onto data-cb-motion, but
+ * the settings sheet itself must also stay still when it cannot. */
+@media (prefers-reduced-motion: reduce) {
+  #cbpRoot .cbp-sheet { animation: none; }
+  #cbpRoot .cbp-btn { transition: none; }
+  #cbpRoot .cbp-btn:active { transform: none; }
+}
 /* ---- 9. Settings sheet: calm instrument, bottom-bar language.
  * 52 px primary, 44 px quiet, 8 px gaps, press scale 0.97, 120 ms ease.
  * Flat fills, radius 12, no shadows or backdrops on the card. ---- */
@@ -242,7 +257,7 @@
   to { transform: none; opacity: 1; }
 }
 #cbpRoot .cbp-head {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;
   padding: 12px 16px; border-bottom: 1px solid var(--cbp-line, #1e343b);
 }
 #cbpRoot .cbp-title { font-size: 20px; font-weight: 700; margin: 0; }

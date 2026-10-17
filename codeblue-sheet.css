@@ -3,7 +3,7 @@
  * scale .97, 120 ms ease). No shadows, gradients, glows or backdrops.
  * Fits a 390 px phone in light and dark. */
 .cb-sheet-ov{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(7,19,24,.72);padding:12px 12px max(12px,env(safe-area-inset-bottom,0px));box-sizing:border-box}
-.cb-sheet{background:#0D1D23;color:#EDF5F2;border-radius:28px;padding:20px;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
+.cb-sheet{background:#0D1D23;color:#EDF5F2;border-radius:12px;padding:20px;width:100%;max-width:430px;max-height:92vh;overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.5}
 .cb-sheet[data-cb-theme="light"]{background:#FFFFFF;color:#0D1D23}
 @media (prefers-color-scheme:light){.cb-sheet:not([data-cb-theme="dark"]){background:#FFFFFF;color:#0D1D23}}
 .cb-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}
@@ -15,7 +15,7 @@
 .cb-x{flex:0 0 auto;min-width:44px;min-height:44px;padding:0 14px;border:0;border-radius:999px;background:#071318;color:#EDF5F2;font:inherit;font-size:14px;font-weight:600;cursor:pointer;touch-action:manipulation;transition:transform 120ms cubic-bezier(.23,1,.32,1),background-color 120ms ease}
 .cb-sheet[data-cb-theme="light"] .cb-x{background:#E7EFEc;color:#0D1D23}
 @media (prefers-color-scheme:light){.cb-sheet:not([data-cb-theme="dark"]) .cb-x{background:#E7EFEc;color:#0D1D23}}
-.cb-x:active{transform:scale(.95)}
+.cb-x:active{transform:scale(.97)}
 .cb-x:focus-visible,.cb-btn:focus-visible,.cb-note:focus-visible,.cb-edit:focus-visible{outline:2px solid #42CDB5;outline-offset:2px}
 .cb-attach{font-size:13px;color:#94B4AB;margin:0 0 12px}
 .cb-sheet[data-cb-theme="light"] .cb-attach{color:#3E5A53}
@@ -65,4 +65,4 @@
 .cb-actions{display:flex;gap:8px;margin-top:14px}
 .cb-actions .cb-btn:last-child{flex:1;min-height:52px;font-size:15px}
 .cb-status{font-size:13px;font-weight:600;color:#42CDB5;min-height:20px;margin:8px 0 0}
-@media (prefers-reduced-motion:reduce){.cb-sheet-ov *{transition:none;animation:none}}
+@media (prefers-reduced-motion:reduce){.cb-sheet-ov *{transition:none;animation:none}.cb-sheet-ov *:active{transform:none}}
