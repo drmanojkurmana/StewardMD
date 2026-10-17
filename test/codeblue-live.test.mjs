@@ -314,6 +314,23 @@ test("delete stages one undo entry; undoDelete restores it in place", () => {
   assert.equal(s.undo.length, 0);
 });
 
+test("undo restores the deleted event with its edited flag and label", () => {
+  const s = E.newSession("adult", { wallNow: 0 });
+  E.logEvent(s, "shock", null, 30);
+  const note = E.logEvent(s, "note", "Airway check", 60);
+  const nBefore = s.events.length;
+  assert.equal(E.editEvent(s, note.id, "Edited label"), true);
+  assert.equal(E.deleteEvent(s, note.id), true);
+  assert.equal(s.events.length, nBefore - 1);
+  const back = E.undoDelete(s);
+  assert.ok(back && back.id === note.id);
+  assert.equal(s.events.length, nBefore);
+  assert.equal(back.edited, true);
+  assert.equal(back.label, "Edited label");
+  assert.equal(back.elapsed, 60);
+  assert.deepEqual(s.events.map((e) => e.id), ["ev-1", "ev-2"]);
+});
+
 /* ---------- re-arrest ---------- */
 
 test("re-arrest clears ROSC, logs, restarts the cycle, epi timer continues", () => {

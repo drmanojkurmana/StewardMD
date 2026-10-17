@@ -297,14 +297,37 @@
 #cbpRoot .cbp-group { display: grid; gap: 8px; }
 #cbpRoot .cbp-group.cbp-row { grid-template-columns: repeat(3, 1fr); }
 #cbpRoot .cbp-radio {
+  position: relative;
   display: flex; align-items: center; gap: 10px;
   min-height: 44px; padding: 8px 12px; box-sizing: border-box;
   border: 1px solid var(--cbp-line, #1e343b); border-radius: 8px;
   background: var(--cbp-surface, #0d1d23);
   font-size: 15px; font-weight: 600; cursor: pointer;
 }
-#cbpRoot .cbp-radio input { width: 20px; height: 20px; accent-color: var(--cbp-accent, #42cdb5); flex: none; }
-#cbpRoot .cbp-radio-t { display: block; }
+/* The native radio covers the whole label so its hit area is the full
+ * 44 px row, never the 20 px circle. It stays keyboard and screen-reader
+ * operable; the visible circle is drawn on the label text instead. */
+#cbpRoot .cbp-radio input {
+  position: absolute; inset: 0; margin: 0; padding: 0;
+  width: auto; height: auto; opacity: 0; cursor: pointer;
+}
+#cbpRoot .cbp-radio-t { position: relative; display: block; padding-left: 30px; }
+#cbpRoot .cbp-radio-t::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 20px; height: 20px; margin-top: -10px;
+  border-radius: 50%; border: 2px solid var(--cbp-muted, #9db8b1);
+  box-sizing: border-box; background: transparent;
+}
+#cbpRoot .cbp-radio-t::after {
+  content: ""; position: absolute; left: 5px; top: 50%;
+  width: 10px; height: 10px; margin-top: -5px;
+  border-radius: 50%; background: var(--cbp-accent, #42cdb5);
+  opacity: 0;
+}
+#cbpRoot .cbp-radio:has(input:checked) .cbp-radio-t::before {
+  border-color: var(--cbp-accent, #42cdb5);
+}
+#cbpRoot .cbp-radio:has(input:checked) .cbp-radio-t::after { opacity: 1; }
 #cbpRoot .cbp-radio-s { display: block; font-size: 12px; font-weight: 400; color: var(--cbp-muted, #9db8b1); }
 #cbpRoot .cbp-radio:has(input:checked) { border-color: var(--cbp-accent, #42cdb5); }
 #cbpRoot .cbp-radio:has(input:focus-visible) {

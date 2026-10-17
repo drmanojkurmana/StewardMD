@@ -1395,15 +1395,15 @@
       var did = el.getAttribute("data-id");
       if (deleteEvent(sess, did)) {
         persist();
-        refreshLogSheet();
-        toast("Event deleted. ", did);
         render();
         openLogSheet();
+        toast("Event deleted. ", did);
       }
       return;
     }
     if (act === "toast-undo") {
       var uid = el.getAttribute("data-id");
+      var wasLog = !!(rootEl.querySelector && rootEl.querySelector('[data-sheet="log"]'));
       if (uid) {
         var undone = null;
         for (var i = sess.undo.length - 1; i >= 0; i--) {
@@ -1418,6 +1418,8 @@
         if (undone) persist();
       } else if (undoDelete(sess)) persist();
       render();
+      if (wasLog) openLogSheet();
+      toast("Event restored. ", null);
       return;
     }
     if (act === "end") { doEnd(true); return; }
