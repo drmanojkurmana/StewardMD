@@ -410,7 +410,7 @@
       ".ece-patient-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;border-top:1px solid var(--ece-line);padding-top:13px}",
       ".ece-patient-detail .ece-f:last-child{grid-column:1/-1}",
       ".ece-sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}.ece-sec-h>h2{margin-bottom:13px}",
-      ".ece-units{display:inline-flex;gap:16px;align-items:center;padding-bottom:12px}.ece-units button{border:0;background:none;color:var(--ece-muted);font-size:13px;font-weight:600;min-height:32px;padding:2px 0;cursor:pointer}.ece-units button.on{color:var(--ece-accent);font-weight:750;text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}",
+      ".ece-units{display:inline-flex;gap:16px;align-items:center;padding-bottom:12px}.ece-units button{border:0;background:none;color:var(--ece-muted);font-size:13px;font-weight:600;min-height:44px;min-width:44px;padding:2px 8px;cursor:pointer}.ece-units button.on{color:var(--ece-accent);font-weight:750;text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}",
       ".ece-lab-surface{background:var(--ece-surface);border:1px solid var(--ece-line);border-radius:18px;padding:5px 17px 4px;overflow:hidden}",
       ".ece-lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,auto);align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--ece-line);font-size:14px;cursor:text}",
       ".ece-lab-name{font-weight:650;color:var(--ece-ink)}.ece-lab-reading{display:flex;justify-content:flex-end;align-items:baseline;gap:8px;min-width:0}",

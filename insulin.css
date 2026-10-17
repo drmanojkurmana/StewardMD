@@ -722,3 +722,7 @@ html.ins-lock, body.ins-lock { overflow: hidden !important; }
   width: 100%; margin-top: 8px; border: 1px solid var(--ins-line); background: none; cursor: pointer;
   border-radius: var(--ins-r-ctl); padding: 10px; font-family: inherit; font-size: 13px; color: var(--ins-muted);
 }
+
+/* iPad (owner 2026-10-16, iPad pass): the tool was a 560 px phone column in an empty screen with its tab and chip rows
+   cut off and swiped sideways. Wider on a tablet so both rows fit. */
+@media (min-width: 768px) { .ins-wrap { max-width: 820px; } }
