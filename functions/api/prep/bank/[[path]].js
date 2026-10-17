@@ -50,7 +50,7 @@ const PATH_RE = /^v\d{1,3}\/(?:manifest\.json|[a-z0-9-]{2,60}\/(?:index|search|s
 // PYQ (tools/prep-pyq.mjs): v<n>/pyq/index.json, items-<8 hex>.json and img/<name>.webp
 const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z0-9-]{2,80}\.webp)$/;
 // Lessons and Flashcards (tools/prep-lessons.mjs, tools/prep-cards.mjs)
-const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp))$/;
+const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
 // Radiology media (tools/prep-rad.mjs): img/<name>.webp and scroll stacks stack/<id>/<window>/<NNN>.webp
 const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries: v<n>/img/<name>.webp

@@ -440,6 +440,9 @@ test("guard test: all bank paths classified public or gated; no question file is
     { path: "v1/lessons/sur-thyroid.json", expected: "public" },
     { path: "v1/lessons/media/neck-us.webp", expected: "public" },
     { path: "v1/lessons/media/neck-flow.svg", expected: "public" },
+    { path: "v1/kb/media/heart-failure-management-fig1.webp", expected: "public" },
+    { path: "v1/kb/media/x.png", expected: "gated" },
+    { path: "v1/kb/media/../x.webp", expected: "gated" },
     { path: "v1/cards/index.json", expected: "public" },
     { path: "v1/cards/sur-thyroid.json", expected: "public" },
 
@@ -624,4 +627,21 @@ test("gate [ENFORCE=1]: opening a module with 26 overlay sets is ONE open, not 2
   const rep = { id: "fb:u-rep" };
   for (let i = 0; i < 30; i++) assert.equal((await gate.checkBankRateLimits(env, rep, "v5/ss-endocrinology/mcq/same.json", null, now)).ok, true);
   assert.equal((await gate.checkBankRateLimits(env, rep, "v5/ss-endocrinology/mcq/same.json", null, now)).code, "enumeration-detected", "hammering one file still counts");
+});
+
+test("KB figure images are public and immutable: an unsigned <img> request is served even with the gate enforced", async () => {
+  gate.resetBankGateMemory();
+  const env = {
+    PREP_BANK_ENFORCE: "1",
+    PREP_BANK_R2: r2({ "prep-bank/v1/kb/media/heart-failure-management-fig1.webp": "RIFF" }),
+  };
+  const route = await import("../functions/api/prep/bank/[[path]].js");
+  const res = await route.onRequestGet({
+    env,
+    params: { path: ["v1", "kb", "media", "heart-failure-management-fig1.webp"] },
+    request: new Request("https://stewardmd.in/api/prep/bank/v1/kb/media/heart-failure-management-fig1.webp"),
+    waitUntil() {},
+  });
+  assert.equal(res.status, 200);
+  assert.match(res.headers.get("Cache-Control"), /public.*immutable/);
 });

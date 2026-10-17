@@ -51,7 +51,7 @@ export function withCors(request, resp) {
   return new Response(resp.body, { status: resp.status, statusText: resp.statusText, headers: h });
 }
 
-export const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp))$/;
+export const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp)|kb\/media\/[a-z0-9-]{2,80}\.webp)$/;
 export const CREDITS_RE = /^image-credits\.json$/;
 
 export function classifyBankPath(p) {
