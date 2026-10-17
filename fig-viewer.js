@@ -42,7 +42,7 @@
     ".bio-sources{margin:12px 0 0}.bio-sources summary{font:600 14px system-ui,sans-serif;color:var(--anatomy-text);min-height:44px;display:flex;align-items:center;cursor:pointer}.bio-sources h2{display:none}.hot{cursor:pointer}";
 
   /* colour layer: membranes blue, start/step/result/damage each their own hue, so the parts can be told apart at a glance */
-  var COLOR_CSS = "body.iso{--anatomy-mono:-apple-system,BlinkMacSystemFont,\"SF Pro Text\",\"Segoe UI\",Roboto,system-ui,sans-serif;--k-mem:#4c8dff;--k-src:#2fd4a0;--k-mid:#4fb3ff;--k-out:#ffb43a;--k-bad:#ff6b7a;--k-enz:#a78bfa;--k-rec:#34d399;--k-gp:#8b7bff;--k-vs:#ffb86b}" +
+  var COLOR_CSS = "body{--k-mem:#4c8dff;--k-src:#2fd4a0;--k-mid:#4fb3ff;--k-out:#ffb43a;--k-bad:#ff6b7a;--k-enz:#a78bfa;--k-rec:#34d399;--k-gp:#8b7bff;--k-vs:#ffb86b}" +
     "body[data-theme='light']{--k-mem:#2563eb;--k-src:#0f9f76;--k-mid:#0a7fd1;--k-out:#d98300;--k-bad:#dc3545;--k-enz:#6d4fd6;--k-rec:#16a05f;--k-gp:#5b46d6;--k-vs:#d9772b}" +
     ".dr-n-source .bio-blob-base{fill:color-mix(in srgb,var(--k-src) 42%,var(--anatomy-shade-2))}.dr-n-source .bio-blob-edge{stroke:var(--k-src)}" +
     ".dr-n-mid .bio-blob-base{fill:color-mix(in srgb,var(--k-mid) 38%,var(--anatomy-shade-2))}.dr-n-mid .bio-blob-edge{stroke:var(--k-mid)}" +
@@ -75,8 +75,8 @@
   var CMP_CSS = ".smdc{margin:0 0 10px;border-radius:14px;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-faint);overflow:hidden}" +
     ".smdc-t{display:flex;padding:4px;gap:4px}.smdc-t button{flex:1;min-height:44px;border:0;border-radius:10px;background:transparent;color:var(--anatomy-text);font:600 15px system-ui,-apple-system,sans-serif}" +
     ".smdc-t button[aria-pressed='true']{background:var(--anatomy-top);color:var(--anatomy-strong);box-shadow:0 0 0 1px var(--anatomy-faint),0 2px 6px rgba(0,0,0,.18)}" +
-    ".smdc-r{display:flex;gap:10px;align-items:baseline;padding:9px 14px;border-top:1px solid var(--anatomy-faint);font:15px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
-    ".smdc-r b{flex:none;min-width:92px;font:600 12px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--anatomy-muted)}.smdc-r span{color:var(--anatomy-strong);font-weight:600}.smdc-r.on{background:color-mix(in srgb,var(--k-mid) 10%,transparent)}" +
+    ".smdc-r{display:flex;flex-direction:column;gap:3px;padding:9px 14px 10px;border-top:1px solid var(--anatomy-faint);font:15px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
+    ".smdc-r b{flex:none;font:600 12px system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:var(--anatomy-muted)}.smdc-r span{color:var(--anatomy-strong);font-weight:600}.smdc-r.on{background:color-mix(in srgb,var(--k-mid) 10%,transparent)}" +
     "[data-readout]{display:none!important}";
   /* with and without the drug: a two-way switch, and both readouts side by side */
   function compare(doc) {
@@ -94,7 +94,7 @@
       var on = sel.value !== "0"; if (on) last = sel.value;
       ts[0].setAttribute("aria-pressed", on ? "false" : "true"); ts[1].setAttribute("aria-pressed", on ? "true" : "false");
       var w = read("0"), d = on ? ro.textContent : read(last), dn = sel.options[+last] ? sel.options[+last].text : "drug";
-      rows[0].querySelector("span").textContent = w; rows[1].querySelector("span").textContent = d; rows[1].querySelector("b").textContent = "With";
+      rows[0].querySelector("span").innerHTML = withIcons(w); rows[1].querySelector("span").innerHTML = withIcons(d); rows[1].querySelector("b").textContent = "With";
       rows[0].className = "smdc-r" + (on ? "" : " on"); rows[1].className = "smdc-r" + (on ? " on" : "");
       rows[1].title = dn;
     }
@@ -113,9 +113,9 @@
       var up = x.indexOf("\u2191") > -1, core = x.replace(/\s*[\u2191\u2193]\s*/g, " ").trim(), a = up ? "\u2191" : "\u2193";
       if (/^heart rate/i.test(core)) {
         var c2 = core.charAt(0).toUpperCase() + core.slice(1);
-        return "\u2665 " + c2 + (strong ? (up ? " increased (\u2191)" : " decreased (\u2193)") : (up ? " not increased" : " not decreased"));
+        return c2 + (strong ? (up ? " increased (\u2191)" : " decreased (\u2193)") : (up ? " not increased" : " not decreased"));
       }
-      var pre = /heart/i.test(core) ? "\u2665 " : "";
+      var pre = "";
       return pre + core + (strong ? " (" + a + ")" : (up ? " (not raised)" : " (not lowered)"));
     }
     function fix() {
@@ -134,9 +134,65 @@
     fix();
     try { new doc.defaultView.MutationObserver(fix).observe(svg, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["style"] }); } catch (e) {}
   }
+
+  /* ---- organ icons (drawn, 24 x 24) and premium type ---- */
+  var IC = {
+    heart: '<path d="M12 20.3C5.6 15.4 3 12.1 3 8.8 3 6.3 5 4.5 7.3 4.5c1.8 0 3.4 1 4.7 2.8 1.3-1.8 2.9-2.8 4.7-2.8C19 4.5 21 6.3 21 8.8c0 3.300-2.600 6.600-9 11.500z"/><path d="M7.500 10.500h2l1.200-2.200 1.800 4 1.200-1.800h2.300" fill="none"/>',
+    lungs: '<path d="M10.300 8.600c-3 .3-5.300 4.700-5.800 8.700-.3 2.400.8 3.600 2.500 3.500 1.900-.1 3.300-1.300 3.300-3.700V8.600z"/><path d="M13.700 8.600c3 .3 5.300 4.700 5.800 8.700.3 2.400-.8 3.600-2.500 3.500-1.900-.1-3.300-1.300-3.300-3.700V8.600z"/><path d="M12 3.200v7.300M12 10.500l-2.300 2.300M12 10.500l2.300 2.300" fill="none"/>',
+    kidney: '<path d="M15.200 4c-3.700 0-7.200 2.600-7.200 8s3.500 8 7.200 8c2.100 0 3.200-1.400 2.600-3.100-.5-1.500-2.500-1.900-2.500-4.900s2-3.400 2.500-4.900C18.400 5.400 17.300 4 15.200 4z"/>',
+    brain: '<path d="M9 4.500C6.500 4.500 5 6.300 5 8c-1.700.7-2.500 2.200-2 3.800.3 1 1 1.700 1.600 2.100-.2 1.800.9 3.100 2.400 3.400C7.300 19 8.500 20 10 20h2V5.300c-.6-.5-1.800-.8-3-.8z"/><path d="M15 4.500c2.500 0 4 1.800 4 3.500 1.700.7 2.500 2.200 2 3.800-.3 1-1 1.700-1.600 2.100.2 1.800-.9 3.100-2.400 3.400-.3 1.700-1.500 2.700-3 2.700h-2V5.300c.6-.5 1.800-.8 3-.8z"/>',
+    liver: '<path d="M3 9.500C3 7.800 4.100 6.700 5.800 6.700H19.500c1.100 0 1.800.9 1.500 2-1 4-3.400 8.300-9 8.300-3.400 0-5.200-1-6.300-3.100C5.300 12.500 3 12 3 9.500z"/><path d="M12.500 6.800c.2 2.300 1 4.200 2.500 5.500" fill="none"/>',
+    stomach: '<path d="M8 3.500c0 2.500 2 3.100 4.500 4.100 2.800 1.100 5.500 2.700 5.500 6 0 3.600-2.600 6.200-6 6.200-3.200 0-5.500-2.300-5.500-5.500 0-2.800 1.500-3.800 1.500-5.800" /><path d="M11 3.500h-3" fill="none"/>',
+    gut: '<path d="M5 7.500h11a3 3 0 010 6H8a3 3 0 000 6h11" fill="none" stroke-width="2.600"/>',
+    bone: '<path d="M8 16l8-8" fill="none" stroke-width="3.200"/><circle cx="6.300" cy="15.200" r="2.100"/><circle cx="8.800" cy="17.700" r="2.100"/><circle cx="15.200" cy="6.300" r="2.100"/><circle cx="17.700" cy="8.800" r="2.100"/>',
+    bladder: '<path d="M12 3.500v3.200" fill="none"/><path d="M7 11.500c0-2.600 2.200-4.700 5-4.700s5 2.100 5 4.700c0 3.600-1.500 6.800-5 8.700-3.500-1.900-5-5.100-5-8.700z"/>',
+    uterus: '<path d="M12 5c2 0 3.200 1.100 3.200 3.100 0 1.600-.6 2.200-.6 3.700 0 1.600 1.700 2.200 2.700 3.700 1 1.500.4 3.600-1.200 4.100-1.500.5-2.600-.6-4.100-.6s-2.600 1.100-4.100.6c-1.600-.5-2.200-2.600-1.200-4.100 1-1.500 2.700-2.100 2.700-3.700 0-1.500-.6-2.100-.6-3.700C8.800 6.100 10 5 12 5z"/>',
+    thyroid: '<path d="M12 8.500v8" fill="none"/><path d="M12 10.500C9 8.300 5.500 8.800 5 11.800c-.4 2.600 1.500 5 4.500 5 1.500 0 2.500-.6 2.500-2.100zM12 10.500c3-2.200 6.500-1.700 7 1.300.4 2.600-1.500 5-4.500 5-1.500 0-2.500-.6-2.500-2.100z"/>',
+    vessel: '<path d="M12 3.500c3.600 4.300 6 7.300 6 10.600a6 6 0 01-12 0c0-3.300 2.400-6.300 6-10.600z"/><path d="M9 14.500a3 3 0 003 3" fill="none"/>',
+    muscle: '<path d="M3.500 14c2.300-5.500 5.500-5.500 8.500-1s6.200 4.500 8.500-1" fill="none" stroke-width="2.800"/>'
+  };
+  var IC_RE = [["heart", /heart|cardiac|myocyte|ventric|atri(?:al|um)|sinoatrial|\bAV\b|\bSA\b/i], ["lungs", /airway|lung|bronch|respirat|breath|pulmon|alveol/i], ["kidney", /kidney|renal|nephron|tubule|collecting duct|urine/i],
+    ["brain", /brain|neuron|cognit|seizure|cortex|mood|manic|alertness|consciousness|nerve fib/i], ["liver", /liver|hepat/i], ["stomach", /stomach|gastric|parietal|\bacid\b/i], ["gut", /\bgut\b|bowel|intestin|stool|lumen|colon/i],
+    ["bone", /\bbone|osteo/i], ["bladder", /bladder|detrusor/i], ["uterus", /uter|labou?r/i], ["thyroid", /thyroid/i], ["vessel", /vessel|blood pressure|vascular|clot|\bpressure/i], ["muscle", /muscle|spasm|\btone\b|contraction/i]];
+  var IC_CSS = ".smdi{fill:var(--ic);fill-opacity:.28;stroke:var(--ic);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round;pointer-events:none}svg.smdi-h{width:1.25em;height:1.25em;vertical-align:-.28em;margin-right:.18em;display:inline-block;fill:var(--ic);fill-opacity:.28;stroke:var(--ic);stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}" +
+    ".ic-heart{--ic:#ef4444}.ic-lungs{--ic:#f472b6}.ic-kidney{--ic:#d9622b}.ic-brain{--ic:#c084fc}.ic-liver{--ic:#c2763a}.ic-stomach{--ic:#fb923c}.ic-gut{--ic:#f5b342}.ic-bone{--ic:#94a3b8}.ic-bladder{--ic:#e3b92e}.ic-uterus{--ic:#fb7185}.ic-thyroid{--ic:#a78bfa}.ic-vessel{--ic:#f87171}.ic-muscle{--ic:#f97316}" +
+    "@font-face{font-family:'Inter Variable';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-variable.woff2) format('woff2')}@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/bricolage-grotesque.woff2) format('woff2')}" +
+    "body.iso{--anatomy-mono:'Inter Variable',-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,system-ui,sans-serif;--k-disp:'Bricolage Grotesque','Inter Variable',-apple-system,system-ui,sans-serif}" +
+    ".dr-label{letter-spacing:0;font-weight:450}.dr-label.dr-name,.dr-step{font-weight:560}.dr-prot,.dr-nl{font-family:var(--k-disp);font-weight:600;letter-spacing:.005em}.dr-title,.dr-out{font-family:var(--k-disp);font-weight:650;letter-spacing:.005em}.dr-sub{letter-spacing:.01em}" +
+    ".dr-chip text,.dr-enz text{font-family:'Inter Variable',system-ui,sans-serif}";
+  function iconKey(t) { for (var i = 0; i < IC_RE.length; i++) if (IC_RE[i][1].test(t)) return IC_RE[i][0]; return null; }
+  function iconHtml(k) { return '<svg class="smdi-h ic-' + k + '" viewBox="0 0 24 24" aria-hidden="true">' + IC[k] + "</svg>"; }
+  /* in text shown in HTML (the comparison rows): put the drawn icon before the first word of each organ */
+  function withIcons(txt) {
+    var out = String(txt).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"), used = {};
+    IC_RE.forEach(function (r) { if (used[r[0]]) return; var m = r[1].exec(out); if (m && m[0].length > 2) { used[r[0]] = 1; out = out.slice(0, m.index) + iconHtml(r[0]) + out.slice(m.index); } });
+    return out;
+  }
+  /* in the drawing: an icon just left of output lines, cell titles and result nodes whose text names an organ */
+  function organIcons(doc) {
+    var svg = doc.querySelector("svg.dr-fig, svg.iso-svg"); if (!svg) return;
+    var busy = false, NS = "http://www.w3.org/2000/svg";
+    function place() {
+      if (busy) return; busy = true;
+      Array.prototype.forEach.call(svg.querySelectorAll("text.dr-out, text.dr-title, .dr-n-calc text.dr-nl, .dr-n-calc text.dr-prot"), function (t) {
+        var k = iconKey(t.textContent), g = t.previousSibling, has = g && g.nodeType === 1 && g.getAttribute && g.getAttribute("data-ic") !== null;
+        if (!k) { if (has) g.parentNode.removeChild(g); return; }
+        var bb; try { bb = t.getBBox(); } catch (e) { return; } if (!bb || !bb.width) return;
+        if (!has) { g = doc.createElementNS(NS, "g"); g.setAttribute("data-ic", ""); t.parentNode.insertBefore(g, t); }
+        var sz = Math.max(15, Math.min(20, bb.height * 1.25)), tr = "translate(" + (bb.x - sz - 4).toFixed(1) + " " + (bb.y + bb.height / 2 - sz / 2).toFixed(1) + ") scale(" + (sz / 24).toFixed(3) + ")";
+        var cl = "smdi ic-" + k; if (g.getAttribute("class") !== cl) { g.setAttribute("class", cl); g.innerHTML = IC[k]; }
+        if (g.getAttribute("transform") !== tr) g.setAttribute("transform", tr);
+        var op = t.style.opacity || "1"; if (g.style.opacity !== op) g.style.opacity = op;
+      });
+      busy = false;
+    }
+    place();
+    try { new doc.defaultView.MutationObserver(place).observe(svg, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ["style"] }); } catch (e) {}
+    try { if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { place(); setTimeout(place, 250); }); } catch (e) {}
+  }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
-    var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS; doc.body.appendChild(st);
+    var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS + IC_CSS; doc.body.appendChild(st);
     var vp = doc.querySelector('meta[name="viewport"]'); if (vp) vp.setAttribute("content", "width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover");
     var info = doc.getElementById("info"); if (info) info.textContent = "Tap a labelled part for a one-line explanation.";
     var src = doc.querySelector(".bio-sources");
@@ -146,7 +202,7 @@
     }
     /* a tap on a labelled part shows its explanation (touch has no hover) */
     Array.prototype.forEach.call(doc.querySelectorAll(".hot"), function (h) { h.addEventListener("touchend", function () { try { h.focus(); } catch (e) {} }, { passive: true }); });
-    legend(doc); arrows(doc); compare(doc); zoomer(doc, win);
+    legend(doc); arrows(doc); organIcons(doc); compare(doc); zoomer(doc, win);
   }
   function zoomer(doc, win) {
     var box = doc.querySelector(".dr-svg") || doc.querySelector(".iso-plate"), svg = box && box.querySelector("svg");
