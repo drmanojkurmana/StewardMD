@@ -228,6 +228,17 @@ try {
   await shot("p1024", "ini-ss-course");
   await setPlan({ exam: "ini-ss", subject: "ss-urology" });
   ok(await until(`var a=[].map.call(document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]"), function(b){ return b.getAttribute("data-s"); }).join(","); return a === "ss-urology,ss-general-surgery,ss-biostatistics";`, 15000), "INI-SS Urology: Urology, General Surgery and Biostatistics only: " + await ev(homeSubs));
+  // Owner 2026-10-17: the 42 interventional radiology modules live in the Radiology subject; a Radiology course must reach it.
+  await setPlan({ exam: "ini-ss", subject: "ss-radiology" });
+  ok(await until(`var a=[].map.call(document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]"), function(b){ return b.getAttribute("data-s"); }).join(","); return a === "ss-radiology,radiology,ss-biostatistics";`, 15000), "INI-SS Radiology: home shows SS Radiology, Radiology (IR modules) and Biostatistics");
+  await click(`#smdPrep #pnGrid [data-act=subject][data-s="radiology"]`);
+  ok(await until(`return document.querySelectorAll('#smdPrep [data-act=module][data-m^="rad-ir"]').length >= 42;`, 20000), "INI-SS Radiology: the Radiology subject lists the 42 IR modules");
+  console.log("IRDEBUG2 " + await ev(`return fetch("/api/prep/bank/v5/radiology/index.json").then(function(r){return r.status+" "+r.headers.get("content-type")}).catch(function(e){return "ERR "+e});`) + " | " + await ev(`return fetch("/prep/bank/v5/radiology/index.json").then(function(r){return r.json()}).then(function(d){return d.topics.length+" topics, ir="+d.topics.filter(function(t){return /^rad-ir/.test(t.id)}).length}).catch(function(e){return "ERR "+e});`));
+  console.log("IRDEBUG " + await ev(`var m=[].map.call(document.querySelectorAll("#smdPrep .pn-mod[data-act=module]"), function(b){return b.getAttribute("data-m")}); return m.length + " modules; rad-ir: " + m.filter(function(x){return /^rad-ir/.test(x)}).length + "; first: " + m.slice(0,5).join(",");`));
+  await shot("p1024", "ini-ss-radiology-ir");
+  await ev(`PREP.close(); PREP.open(); return 1;`);
+  await setPlan({ exam: "neet-ss", group: "radio-diagnosis" });
+  ok(await until(`return !!document.querySelector('#smdPrep #pnGrid [data-act=subject][data-s="radiology"]');`, 15000), "NEET-SS Radio-diagnosis group: home also shows the Radiology subject");
   await setPlan({ exam: "neet-ss", group: "medical" });
   ok(await until(`return document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]").length > 0;`, 15000), "NEET-SS Medical group: home draws");
   const medSubs = (await ev(homeSubs)).split(",");

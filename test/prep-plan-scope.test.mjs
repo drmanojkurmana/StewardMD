@@ -169,7 +169,7 @@ test("INI-SS course scope: the course, its degree's general subject, Biostatisti
   assert.deepEqual([...ini("ss-medical-oncology")], ["ss-medical-oncology", "ss-general-medicine", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-urology")], ["ss-urology", "ss-general-surgery", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-critical-care")], ["ss-critical-care", "ss-general-medicine", "ss-biostatistics"]);
-  assert.deepEqual([...ini("ss-radiology")], ["ss-radiology", "ss-biostatistics"], "radiology's degree is not Medicine");
+  assert.deepEqual([...ini("ss-radiology")], ["ss-radiology", "radiology", "ss-biostatistics"], "radiology course: its degree's Radiology subject holds the IR modules");
   assert.deepEqual([...ini("ss-neonatology")], ["ss-neonatology", "paediatrics", "ss-biostatistics"], "paediatric courses: MBBS Paediatrics is the feeder (owner 2026-10-16)");
   assert.deepEqual([...ini("ss-paediatric-cardiology")], ["ss-paediatric-cardiology", "paediatrics", "ss-biostatistics"]);
   assert.deepEqual([...ini("ss-paediatric-surgery")], ["ss-paediatric-surgery", "ss-general-surgery", "ss-biostatistics"], "M.Ch. Paediatric Surgery: General Surgery");
@@ -328,3 +328,7 @@ test("INI-SS subjectless plan: planSubjects is empty and planNeed asks for subje
   assert.equal(hWith.planNeed(), null, "no need once subject is picked");
 });
 
+test("the Radio-diagnosis group also lists the Radiology subject (it holds the interventional radiology modules)", () => {
+  assert.deepEqual(PLAN.ssGroupExtras("radio-diagnosis"), ["radiology"]);
+  assert.deepEqual(PLAN.ssGroupExtras("medical"), []);
+});

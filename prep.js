@@ -899,6 +899,10 @@
     else if (pl.exam === "ini-ss") return [];
     else return all;
     out = all.filter(function (x) { return want[x.id]; });
+    // Feeder-degree subjects outside the NEET-SS tab (Radio-diagnosis group: Radiology, which holds the IR modules).
+    if (pl.exam === "neet-ss" && PP.ssGroupExtras) PP.ssGroupExtras(PP.planGroup(pl)).forEach(function (id) {
+      var sb = subjectById(id); if (sb && !out.some(function (x) { return x.id === id; })) out.push(sb);
+    });
     return out;
   }
   function planNeed() {
