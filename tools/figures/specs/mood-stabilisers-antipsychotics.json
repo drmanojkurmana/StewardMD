@@ -1,0 +1,257 @@
+{
+ "id": "mood-stabilisers-antipsychotics",
+ "title": "Lithium, anticonvulsant mood stabilisers and antipsychotics: three routes to a calmer mood",
+ "ariaLabel": "Schematic of three drivers of mania: inositol and GSK-3 signalling inside neurons, excitability through sodium channels, and dopamine signalling. Lithium acts on inositol and GSK-3 signalling, valproate and carbamazepine reduce sodium channel excitability, and antipsychotics block dopamine D2 receptors.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Mood episode drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no mood-stabilising drug"
+  },
+  {
+   "label": "lithium",
+   "status": "lithium",
+   "blocks": {
+    "e_li": 0.85
+   }
+  },
+  {
+   "label": "valproate or carbamazepine type",
+   "status": "valproate or carbamazepine",
+   "blocks": {
+    "e_na": 0.85
+   }
+  },
+  {
+   "label": "antipsychotic type (D2 blocker)",
+   "status": "antipsychotic",
+   "blocks": {
+    "e_d2": 0.85
+   }
+  },
+  {
+   "label": "lithium plus antipsychotic",
+   "status": "lithium plus antipsychotic",
+   "blocks": {
+    "e_li": 0.85,
+    "e_d2": 0.85
+   }
+  }
+ ],
+ "readout": "Manic symptoms: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "settled",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.3,
+    0.65
+   ]
+  }
+ ],
+ "status": "Episode drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Manic symptoms: marked"
+  ],
+  [
+   1,
+   1,
+   "Manic symptoms: reduced"
+  ],
+  [
+   1,
+   2,
+   "Manic symptoms: reduced"
+  ],
+  [
+   1,
+   3,
+   "Manic symptoms: reduced"
+  ],
+  [
+   1,
+   4,
+   "Manic symptoms: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Inositol and GSK-3",
+   "sub": "inside neurons",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Intracellular signalling that lithium is thought to damp."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Over-active signalling",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Signalling that drives manic excitation."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Sodium channel firing",
+   "sub": "neuron excitability",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Rapid firing through voltage-gated sodium channels."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Neuron excitability",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Excitability that contributes to a manic episode."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Dopamine signal",
+   "sub": "mesolimbic",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Dopamine signalling in the limbic system."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Dopamine effect",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Dopamine-driven agitation and psychotic symptoms."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.1,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.3
+    ]
+   ],
+   "label": "Manic symptoms",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the intensity of manic symptoms."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_li",
+   "from": "s0",
+   "to": "m0",
+   "label": "IMPase and GSK-3",
+   "info": "Lithium inhibits inositol monophosphatase and glycogen synthase kinase 3, which lowers over-active second messenger signalling. This is the leading explanation; the full mechanism is not settled."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_na",
+   "from": "s1",
+   "to": "m1",
+   "label": "sodium channels",
+   "info": "Valproate and carbamazepine block voltage-gated sodium channels in rapidly firing neurons (valproate also raises GABA)."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_d2",
+   "from": "s2",
+   "to": "m2",
+   "label": "D2 receptors",
+   "info": "Antipsychotics block dopamine D2 receptors (second-generation drugs also block 5-HT2A receptors), which lowers agitation and psychotic symptoms."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Lithium acts on inositol and GSK-3 signalling, valproate and carbamazepine reduce sodium channel firing, and antipsychotics block dopamine D2 receptors. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Lamotrigine for bipolar depression, antidepressants, levels and toxicity of lithium (narrow range, kidney and thyroid effects), pregnancy risks, interactions, long-term maintenance and adverse effects are left out. Manic symptoms are drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Lithium, anticonvulsant mood stabilisers and antipsychotics: three routes to a calmer mood",
+  "blurb": "Interactive figure: lithium, valproate or carbamazepine, and antipsychotics",
+  "drugs": {
+   "lithium": "d=1",
+   "valproate": "d=2",
+   "valproic": "d=2",
+   "divalproex": "d=2",
+   "carbamazepine": "d=2",
+   "oxcarbazepine": "d=2",
+   "lamotrigine": "d=2"
+  },
+  "terms": [
+   "mood stabili[sz]ers?",
+   "antimanic",
+   "anti[- ]?manic drugs?",
+   "bipolar (?:disorder )?(?:drugs?|treatment|therapy)",
+   "lithium"
+  ]
+ }
+}

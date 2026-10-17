@@ -1,0 +1,211 @@
+{
+ "id": "antiprotozoal-amoebicides",
+ "title": "Amoebiasis and giardiasis: tissue and gut-lumen drugs",
+ "ariaLabel": "Schematic of two places the amoeba lives: the tissue, where trophozoites invade the gut wall and liver, and the gut lumen, where cysts form. Metronidazole-type nitroimidazoles act on trophozoites in tissue and lumen, while luminal amoebicides such as diloxanide and paromomycin act only in the lumen.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Parasite burden",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "light",
+   "moderate",
+   "heavy"
+  ],
+  "ticks": [
+   "light",
+   "moderate",
+   "heavy"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiprotozoal"
+  },
+  {
+   "label": "nitroimidazole type (metronidazole, tinidazole)",
+   "status": "nitroimidazole",
+   "blocks": {
+    "e_tis": 0.9,
+    "e_lum": 0.3
+   }
+  },
+  {
+   "label": "luminal amoebicide type (diloxanide, paromomycin)",
+   "status": "luminal amoebicide",
+   "blocks": {
+    "e_lum": 0.9
+   }
+  },
+  {
+   "label": "nitroimidazole then luminal amoebicide",
+   "status": "both",
+   "blocks": {
+    "e_tis": 0.9,
+    "e_lum": 0.9
+   }
+  }
+ ],
+ "readout": "Amoebae remaining: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "cleared",
+    "some left",
+    "many"
+   ],
+   "cuts": [
+    0.15,
+    0.5
+   ]
+  }
+ ],
+ "status": "Parasite burden: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Amoebae remaining: many"
+  ],
+  [
+   1,
+   1,
+   "Amoebae remaining: some left"
+  ],
+  [
+   1,
+   2,
+   "Amoebae remaining: some left"
+  ],
+  [
+   1,
+   3,
+   "Amoebae remaining: cleared"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Trophozoites in tissue",
+   "sub": "gut wall, liver",
+   "x": 105,
+   "y": 170,
+   "rx": 92,
+   "info": "Invasive amoebae in the gut wall and, in liver abscess, the liver."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Tissue parasites",
+   "x": 480,
+   "y": 170,
+   "rx": 100,
+   "info": "Amoebae causing dysentery or abscess."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Cysts in the lumen",
+   "sub": "gut lumen",
+   "x": 105,
+   "y": 430,
+   "rx": 92,
+   "info": "Amoebae in the gut lumen, including cysts that spread infection."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Luminal parasites",
+   "x": 480,
+   "y": 430,
+   "rx": 100,
+   "info": "Amoebae and cysts in the lumen, the source of spread."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.45
+    ],
+    [
+     "n:m1",
+     0.4
+    ]
+   ],
+   "label": "Amoebae remaining",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the amoebae that remain in the body."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_tis",
+   "from": "s0",
+   "to": "m0",
+   "label": "nitroimidazole activation",
+   "info": "Metronidazole and tinidazole are activated in anaerobic organisms, where their reduced form damages DNA. They reach tissue well."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_lum",
+   "from": "s1",
+   "to": "m1",
+   "label": "luminal killing",
+   "info": "Luminal amoebicides (diloxanide furoate, paromomycin, iodoquinol) are not well absorbed and act in the lumen; nitroimidazoles act here too but are not enough alone to clear cysts."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Nitroimidazoles act on trophozoites in tissue, and luminal amoebicides act in the gut lumen. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Giardia, trichomonas and anaerobic bacteria, chloroquine for liver abscess, aspiration, resistance, alcohol and other adverse effects of nitroimidazoles, pregnancy and which drug suits which syndrome are left out. Amoebae remaining is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Amoebiasis and giardiasis: tissue and gut-lumen drugs",
+  "blurb": "Interactive figure: nitroimidazoles and luminal amoebicides",
+  "drugs": {
+   "metronidazole": "d=1",
+   "tinidazole": "d=1",
+   "secnidazole": "d=1",
+   "ornidazole": "d=1",
+   "diloxanide": "d=2",
+   "paromomycin": "d=2",
+   "iodoquinol": "d=2",
+   "nitazoxanide": "d=2"
+  },
+  "terms": [
+   "antiamoebics?",
+   "anti[- ]?amoebic drugs?",
+   "amoebicides?",
+   "amebicides?",
+   "luminal amoebicides?",
+   "amoebiasis (?:treatment|drugs?)"
+  ]
+ }
+}

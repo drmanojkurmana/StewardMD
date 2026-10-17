@@ -1,0 +1,235 @@
+{
+ "id": "insulin-glucose",
+ "title": "Insulin and blood glucose: what it opens and what it shuts",
+ "ariaLabel": "Schematic of blood glucose: glucose absorbed from a meal raises it, the liver releasing its own glucose raises it, and muscle and fat taking glucose in lowers it. Insulin opens glucose uptake into muscle and fat and shuts liver glucose release, so more insulin than needed lowers glucose too far.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Meal size",
+  "a": [
+   0.6,
+   0.8,
+   1.0
+  ],
+  "names": [
+   "small",
+   "usual",
+   "large"
+  ],
+  "ticks": [
+   "small",
+   "usual",
+   "large"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no insulin (insulin deficiency)"
+  },
+  {
+   "label": "insulin at the right amount",
+   "status": "insulin at the right amount",
+   "blocks": {
+    "e_liver": 0.7,
+    "e_up": -1.0
+   }
+  },
+  {
+   "label": "more insulin than needed",
+   "status": "more insulin than needed",
+   "blocks": {
+    "e_liver": 0.95,
+    "e_up": -2.5
+   }
+  }
+ ],
+ "readout": "Blood glucose: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "too low",
+    "in range",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.65
+   ]
+  }
+ ],
+ "status": "Meal: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Blood glucose: high"
+  ],
+  [
+   1,
+   1,
+   "Blood glucose: in range"
+  ],
+  [
+   1,
+   2,
+   "Blood glucose: too low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Glucose from a meal",
+   "sub": "absorbed from the gut",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Glucose absorbed after eating. The slider sets the size of the meal."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Glucose entering blood",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Glucose arriving in the blood after the meal."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Liver glucose release",
+   "sub": "from stores",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "The liver releases glucose from glycogen and by making new glucose."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Glucose from the liver",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Glucose put into the blood by the liver."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Glucose uptake",
+   "sub": "muscle and fat",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Muscle and fat take glucose in through GLUT4 transporters."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Glucose taken up",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Glucose moved from blood into muscle and fat."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.5,
+   "terms": [
+    [
+     "n:m0",
+     0.4
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     -0.55
+    ]
+   ],
+   "label": "Blood glucose",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for blood glucose: meal and liver output raise it, uptake into muscle and fat lowers it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_meal",
+   "from": "s0",
+   "to": "m0",
+   "label": "absorption",
+   "info": "Absorption of the meal's glucose into the blood."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More glucose in the blood raises blood glucose."
+  },
+  {
+   "id": "e_liver",
+   "from": "s1",
+   "to": "m1",
+   "label": "liver output",
+   "info": "Insulin shuts liver glucose release. Without insulin the liver keeps releasing glucose even when blood glucose is high.",
+   "w": 0.7
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More liver glucose raises blood glucose."
+  },
+  {
+   "id": "e_up",
+   "from": "s2",
+   "to": "m2",
+   "label": "GLUT4 uptake",
+   "info": "Insulin moves GLUT4 transporters to the surface of muscle and fat cells, so they take glucose in and blood glucose falls.",
+   "w": 0.35
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More uptake lowers blood glucose."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Insulin moves GLUT4 transporters to the surface of muscle and fat cells and shuts liver glucose release; too much insulin lowers glucose too far. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Types and timing of insulin, sulfonylureas and other drugs (own figure), glucagon, ketones and ketoacidosis, insulin resistance, exercise and illness, hypoglycaemia care, adverse effects and monitoring are left out. Blood glucose is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Insulin and blood glucose: what it opens and what it shuts",
+  "blurb": "Interactive figure: insulin, glucose uptake, liver output and hypoglycaemia",
+  "drugs": {
+   "insulin": "d=1",
+   "glargine": "d=1",
+   "detemir": "d=1",
+   "degludec": "d=1",
+   "lispro": "d=1",
+   "aspart": "d=1",
+   "glulisine": "d=1",
+   "regular": "d=1",
+   "nph": "d=1"
+  },
+  "terms": [
+   "insulins?",
+   "insulin (?:therapy|analogues?|analogs?)"
+  ]
+ }
+}

@@ -1736,3 +1736,7 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   screen width (no sideways scroll), the page scrolls up and down inside the iframe, and the drawing zooms by pinch, double-tap or the +/- buttons and pans with
   one finger only while zoomed. Controls are full width (48 px select, 16 px font), the explanation is a sticky bottom card, sources are a collapsed section.
   Works on every figure page without rebuilding them. Test: `test/run-figure-gestures.mjs` (real touch events) and a 92-page sweep.
+
+- **Wave 3 final batch (4):** insulin-glucose, cardiac-inotropes, mood-stabilisers-antipsychotics, antiprotozoal-amoebicides. **Total 50 figures.** Every high-yield
+  class in the plan is covered; remaining ideas (vasopressin, mannitol, vitamins) are optional. Registry terms that match many lessons (insulin) are the
+  first place to tighten if the chips feel noisy.
