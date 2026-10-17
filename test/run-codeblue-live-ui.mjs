@@ -56,7 +56,8 @@ const viewIs = (v) => `return window.CodeBlueLive && CodeBlueLive._rt.view() ===
 const CBL = `#cblRoot`;
 
 async function metrics(tag) {
-  const small = await ev(`return Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { var r = b.getBoundingClientRect(); return Math.round(Math.min(r.width, r.height)); }).filter(function (n) { return n < 44; }).length;`);
+  const small = await ev(`return (function () { ${VIS}
+    return Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { var r = visRect(b); return r ? Math.round(Math.min(r.width, r.height)) : null; }).filter(function (n) { return n !== null && n < 44; }).length; })();`);
   ok(small === 0, tag + ": all tap targets at least 44 px (small=" + small + ")");
   const tiles = await ev(`return Array.from(document.querySelectorAll("${CBL} .cbl-tile")).map(function (b) { return Math.round(b.getBoundingClientRect().height); });`);
   ok(Array.isArray(tiles) && tiles.length > 0 && tiles.every((h) => h >= 64), tag + ": tiles at least 64 px (" + (tiles || []).join(",") + ")");
@@ -83,14 +84,8 @@ async function layoutAudit(tag, mode) {
   const doseLines = await ev(`return Array.from(document.querySelectorAll("${CBL} .cbl-drugdose")).filter(function (el) { return el.scrollHeight > el.clientHeight + 2; }).length;`);
   ok(doseLines === 0, tag + ": dose text on one line");
   const overlap = await ev(`return (function () {
-    function vis(el) {
-      var r = el.getBoundingClientRect();
-      if (r.width < 1 || r.height < 1) return null;
-      var cs = getComputedStyle(el);
-      if (cs.display === "none" || cs.visibility === "hidden" || parseFloat(cs.opacity) === 0) return null;
-      if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return null;
-      return r;
-    }
+    ${VIS}
+    function vis(el) { return visRect(el); }
     var els = Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { return [b, vis(b)]; }).filter(function (p) { return p[1]; });
     var bad = [];
     for (var i = 0; i < els.length; i++) for (var j = i + 1; j < els.length; j++) {
@@ -102,19 +97,68 @@ async function layoutAudit(tag, mode) {
     return bad;
   })();`);
   ok(Array.isArray(overlap) && overlap.length === 0, tag + ": no overlapping tap targets (" + (overlap || []).join("|") + ")");
-  const small = await ev(`return Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { var r = b.getBoundingClientRect(); return Math.round(Math.min(r.width, r.height)); }).filter(function (n) { return n < 44; }).length;`);
+  const small = await ev(`return (function () { ${VIS}
+    return Array.from(document.querySelectorAll("${CBL} button")).map(function (b) { var r = visRect(b); return r ? Math.round(Math.min(r.width, r.height)) : null; }).filter(function (n) { return n !== null && n < 44; }).length; })();`);
   ok(small === 0, tag + ": every interactive target at least 44 px (small=" + small + ")");
   if (mode === "ipad") {
     const tlw = await ev(`return document.querySelector('${CBL} .cbl-timeline').getBoundingClientRect().width;`);
     ok(tlw > 200, tag + ": timeline column visible without a toggle (" + tlw + " px)");
     const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
     ok(handle === "none", tag + ": no timeline toggle on iPad");
-    const empty = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-grid > *, ${CBL} .cbl-drugs > *')).filter(function (el) { return el.textContent.trim().length === 0; }).length;`);
+    const empty = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *')).filter(function (el) { return el.textContent.trim().length === 0; }).length;`);
     ok(empty === 0, tag + ": every grid cell has content");
   } else {
     const handle = await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-tlhandle')).display;`);
     ok(handle !== "none", tag + ": slim timeline handle present on phone");
   }
+}
+
+/* Layout-contract shell audit: priority tiles fully inside the viewport
+ * and above the tab bar, page itself never scrolls, nothing covers a
+ * priority tile centre, and the clock never overflows its card. At
+ * 820 px and above every tile must be visible without scrolling. */
+async function shellAudit(tag) {
+  const prio = await ev(`return (function () {
+    var tabs = document.querySelector('${CBL} .cbl-tabs');
+    var tabTop = tabs ? tabs.getBoundingClientRect().top : window.innerHeight;
+    var out = {};
+    [["shock", '[data-act="tile-shock"]'], ["epi", '[data-drug="epi"]'], ["rhythm", '[data-act="tile-rhythm"]'], ["pause", '[data-act="tile-pause"]']].forEach(function (pair) {
+      var el = document.querySelector('${CBL} ' + pair[1]);
+      if (!el) { out[pair[0]] = null; return; }
+      var r = el.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      var hit = document.elementFromPoint(cx, cy);
+      out[pair[0]] = {
+        inside: r.left >= -1 && r.top >= -1 && r.right <= window.innerWidth + 1 && r.bottom <= window.innerHeight + 1,
+        aboveTabs: r.bottom <= tabTop + 1,
+        hit: !!(hit && (hit === el || el.contains(hit)))
+      };
+    });
+    return out;
+  })();`);
+  for (const k of ["shock", "epi", "rhythm", "pause"]) {
+    ok(!!(prio && prio[k] && prio[k].inside && prio[k].aboveTabs), tag + ": priority " + k + " fully in viewport above tab bar " + JSON.stringify(prio && prio[k]));
+    ok(!!(prio && prio[k] && prio[k].hit), tag + ": priority " + k + " centre is tappable (elementFromPoint)");
+  }
+  const noScroll = await ev(`return document.documentElement.scrollHeight <= window.innerHeight + 1;`);
+  ok(noScroll === true, tag + ": page does not scroll (scrollHeight <= innerHeight)");
+  const clockFit = await ev(`return (function () { var t = document.querySelector('${CBL} .cbl-ringtime'); var c = document.querySelector('${CBL} .cbl-ringcard'); if (!t || !c) return false; return t.scrollWidth <= c.clientWidth + 1 && t.getBoundingClientRect().right <= c.getBoundingClientRect().right + 1; })();`);
+  ok(clockFit === true, tag + ": clock fits inside its card");
+  const w = await ev(`return window.innerWidth;`);
+  if (w >= 820) {
+    const allVis = await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-tile, ${CBL} .cbl-drug')).every(function (el) { var r = el.getBoundingClientRect(); return r.left >= -1 && r.top >= -1 && r.right <= window.innerWidth + 1 && r.bottom <= window.innerHeight + 1; });`);
+    ok(allVis === true, tag + ": all tiles visible without scrolling");
+  }
+  const overlap2 = await ev(`return (function () {
+    var els = Array.from(document.querySelectorAll('${CBL} .cbl-priority > *, ${CBL} .cbl-secgrid > *, ${CBL} .cbl-tab, ${CBL} .cbl-endbtn')).filter(function (el) { var cs = getComputedStyle(el); var r = el.getBoundingClientRect(); return cs.display !== "none" && cs.visibility !== "hidden" && r.width > 0 && r.height > 0; });
+    var bad = [];
+    for (var i = 0; i < els.length; i++) for (var j = i + 1; j < els.length; j++) {
+      var a = els[i].getBoundingClientRect(), b = els[j].getBoundingClientRect();
+      if (a.left < b.right - 1 && b.left < a.right - 1 && a.top < b.bottom - 1 && b.top < a.bottom - 1) bad.push((els[i].getAttribute("data-kind") || els[i].textContent.trim().slice(0, 8)) + "/" + (els[j].getAttribute("data-kind") || els[j].textContent.trim().slice(0, 8)));
+    }
+    return bad;
+  })();`);
+  ok(Array.isArray(overlap2) && overlap2.length === 0, tag + ": no overlapping interactive rects (" + (overlap2 || []).join("|") + ")");
 }
 
 async function contrast(tag) {
@@ -205,7 +249,9 @@ try {
   ok(await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-gsrc')).every(function (e) { return e.textContent.length > 5; });`) === true, "every prompt cites a source");
   await shot("running", false); await shot("running", true);
   await metrics("running-390"); await contrast("running-390-dark"); await visualAudit("running-390");
-  await layoutAudit("running-390", "phone");
+  await layoutAudit("running-390", "phone"); await shellAudit("running-390");
+  await ev(`document.body.classList.add("dark"); return 1;`); await sleep(200); await shellAudit("running-390-dark");
+  await ev(`document.body.classList.remove("dark"); return 1;`); await sleep(200);
 
   /* Tabs keep the status strip visible; each tab shell renders. */
   await click(`${CBL} [data-act="tab-log"]`);
@@ -371,7 +417,7 @@ try {
   await ev(`document.body.classList.remove("dark"); return 1;`);
   await sleep(300);
   await metrics("running-360-light"); await contrast("running-360-light");
-  await layoutAudit("running-360", "phone");
+  await layoutAudit("running-360", "phone"); await shellAudit("running-360");
   await shot("running-360", false);
   await click(`${CBL} [data-act="sheet-log"]`);
   ok(await until(`return !!document.querySelector('${CBL} .cbl-sheet');`, 5000), "sheet opens at 360 px");
@@ -391,6 +437,7 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} [data-drug="epi"] .cbl-drugsub');`) === true, "paediatric keeps the last-given line");
   await click(`${CBL} [data-act="end"]`);
   ok(await until(viewIs("ended"), 5000), "paediatric code ends");
+  console.log("DIAG unlinked-end: " + JSON.stringify(await ev(`return (function () { var ended = document.querySelector('${CBL} [data-state="ended"]'); var sess = null, err = null; try { sess = CodeBlueLive._rt.session(); } catch (e) { err = String(e && e.message || e); } return { endedText: ended ? ended.textContent.trim().slice(0, 300) : null, training: sess ? sess.training : null, link: sess ? sess.link : null, exportState: (function () { try { return CodeBlueLive._rt.exportState(); } catch (e2) { return String(e2); } })(), err: err }; })();`)));
   ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Kept on this device only") >= 0;`) === true, "unlinked end says kept on device");
   await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
 
@@ -404,6 +451,7 @@ try {
   await click(`${CBL} [data-act="tile-shock"]`);
   await click(`${CBL} [data-act="end"]`);
   ok(await until(viewIs("ended"), 5000), "linked code ends");
+  console.log("DIAG linked-end: " + JSON.stringify(await ev(`return (function () { var ended = document.querySelector('${CBL} [data-state="ended"]'); var sess = null, err = null; try { sess = CodeBlueLive._rt.session(); } catch (e) { err = String(e && e.message || e); } var writes = null; try { writes = window.__tlWrites ? window.__tlWrites.length : "no __tlWrites"; } catch (e3) { writes = "read error: " + String(e3 && e3.message || e3); } var first = null; try { first = window.__tlWrites && window.__tlWrites[0] ? window.__tlWrites[0].e : null; } catch (e4) { first = "read error: " + String(e4 && e4.message || e4); } return { endedText: ended ? ended.textContent.trim().slice(0, 300) : null, tlWrites: writes, firstEvent: first, training: sess ? sess.training : null, link: sess ? sess.link : null, exportState: (function () { try { return CodeBlueLive._rt.exportState(); } catch (e2) { return String(e2); } })(), err: err }; })();`)));
   ok(await until(`return window.__tlWrites.length === 1;`, 5000), "code sheet written to the patient timeline");
   ok(await ev(`return window.__tlWrites[0].e.type === "codeblue" && window.__tlWrites[0].e.title === "Code Blue summary";`) === true, "timeline event matches the watch export shape");
   ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Written to the linked patient timeline") >= 0;`) === true, "ended state confirms the timeline write");
@@ -416,14 +464,14 @@ try {
   await ev(`document.querySelector('${CBL} [data-act="start"]').click(); return 1;`);
   ok(await until(viewIs("running"), 5000), "running at 820x1180");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad portrait: timeline is a right column");
-  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-grid')).gridTemplateColumns.split(" ").length === 3;`) === true, "iPad portrait: 3 column action grid");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-actions')).gridTemplateColumns.split(" ").length === 4;`) === true, "iPad portrait: 4 column action grid");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip visible");
   await click(`${CBL} [data-act="tab-log"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "iPad portrait: log tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
   await click(`${CBL} [data-act="tab-timer"]`);
   await metrics("running-820"); await contrast("running-820-dark"); await visualAudit("running-820");
-  await layoutAudit("running-820", "ipad");
+  await layoutAudit("running-820", "ipad"); await shellAudit("running-820");
   await shot("running-820", false); await shot("running-820", true);
 
   /* iPad: 1194x834 landscape. */
@@ -433,7 +481,9 @@ try {
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad landscape: timeline is a right column");
   ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, "iPad landscape: no horizontal scroll");
   await metrics("running-1194"); await visualAudit("running-1194");
-  await layoutAudit("running-1194", "ipad");
+  await layoutAudit("running-1194", "ipad"); await shellAudit("running-1194");
+  await ev(`document.body.classList.add("dark"); return 1;`); await sleep(200); await shellAudit("running-1194-dark");
+  await ev(`document.body.classList.remove("dark"); return 1;`); await sleep(200);
   await shot("running-1194", false); await shot("running-1194", true);
 
   /* iPad: 1366x1024 landscape. */
@@ -442,7 +492,7 @@ try {
   ok(await until(viewIs("running"), 5000), "running at 1366x1024");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "1366: timeline is a right column");
   await metrics("running-1366");
-  await layoutAudit("running-1366", "ipad");
+  await layoutAudit("running-1366", "ipad"); await shellAudit("running-1366");
   await shot("running-1366", true);
   await ev(`CodeBlueLive.close(); try{localStorage.clear();}catch(e){} return 1;`);
 

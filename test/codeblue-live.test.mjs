@@ -404,3 +404,51 @@ test("payload opens in codeblue-sheet.js with matching counts", () => {
   assert.equal(counts.shocks, 1);
   assert.equal(counts.epi, 2);
 });
+
+/* ---------- fresh open resets mode and training (runner regression) ----------
+ * A training (or paediatric) session must not leak into the next open:
+ * the Chrome runner ends a training code, then starts unlinked and
+ * linked live codes in later opens. Uses a minimal DOM stub only;
+ * layout itself is covered by test/run-codeblue-live-ui.mjs. */
+test("open resets training and mode from the previous session", () => {
+  class El {
+    constructor(t) {
+      this.tagName = t; this.children = []; this.attrs = {}; this.innerHTML = ""; this._ev = {};
+      const s = new Set();
+      this.classList = { add: (c) => s.add(c), remove: (c) => s.delete(c), contains: (c) => s.has(c) };
+    }
+    setAttribute(k, v) { this.attrs[k] = v; }
+    getAttribute(k) { return this.attrs[k] ?? null; }
+    addEventListener(t, f) { this._ev[t] = f; }
+    appendChild(c) { this.children.push(c); return c; }
+    querySelector() { return null; }
+    querySelectorAll() { return []; }
+    contains() { return true; }
+    focus() {}
+  }
+  globalThis.document = {
+    createElement: (t) => new El(t), body: new El("body"), head: new El("head"),
+    addEventListener() {}, activeElement: null
+  };
+  try {
+    const root = () => globalThis.document.body.children.find((c) => c.id === "cblRoot");
+    const click = (act) => {
+      const btn = { getAttribute: (k) => (k === "data-act" ? act : null) };
+      root()._ev.click({ target: { closest: () => btn } });
+    };
+    assert.equal(Live.open({ training: true, mode: "paediatric" }), true);
+    click("start");
+    assert.equal(Live._rt.session().training, true);
+    Live.close();
+    assert.equal(Live.open(), true);
+    click("start");
+    assert.equal(Live._rt.session().training, false);
+    assert.equal(Live._rt.session().mode, "adult");
+    assert.match(root().innerHTML, /data-state="priority"/);
+    assert.ok(root().innerHTML.indexOf('data-act="tile-shock"') < root().innerHTML.indexOf('data-drug="epi"'));
+    assert.ok(!root().innerHTML.includes("End code"));
+    Live.close();
+  } finally {
+    delete globalThis.document;
+  }
+});

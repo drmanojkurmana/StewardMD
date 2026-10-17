@@ -14,7 +14,7 @@
  */
 
 #cblRoot {
-  position: fixed; inset: 0; z-index: 10000;
+  position: fixed; inset: 0; height: 100dvh; z-index: 10000;
   display: none; flex-direction: column; overflow: hidden;
   /* Night Shift v3 tokens (default dark) */
   --cbl-bg: #101317; --cbl-surface: #171b20; --cbl-ink: #f4f7fa;
@@ -411,7 +411,7 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
   #cblRoot .cbl-due-overdue { animation: none; }
   #cblRoot button:active { transform: none; }
   #cblRoot .cbl-tab, #cblRoot .cbl-drug, #cblRoot .cbl-timeline,
-  #cblRoot .cbl-tlhandle, #cblRoot .cbl-endbar { transition: none; }
+  #cblRoot .cbl-tlhandle { transition: none; }
   #cblRoot .cbl-beat { animation: none; opacity: 1; }
 }
 #cblRoot.cbl-reduced .cbl-due,
@@ -423,7 +423,6 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 #cblRoot.cbl-reduced .cbl-tab,
 #cblRoot.cbl-reduced .cbl-drug,
 #cblRoot.cbl-reduced .cbl-tlhandle,
-#cblRoot.cbl-reduced .cbl-endbar,
 #cblRoot.cbl-reduced .cbl-timeline { transition: none; }
 #cblRoot.cbl-reduced .cbl-beat { animation: none; opacity: 1; }
 
@@ -662,17 +661,6 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 }
 #cblRoot .cbl-tab svg { width: 20px; height: 20px; flex: none; }
 #cblRoot .cbl-tab[aria-selected="true"] { color: var(--cbl-accent); border-color: var(--cbl-line); }
-/* ---- Distinct slim End control above the tab bar ---- */
-#cblRoot .cbl-endwrap {
-  padding: 8px 12px 0;
-  max-width: 560px; width: 100%; margin: 0 auto; box-sizing: border-box;
-}
-#cblRoot .cbl-endbar {
-  display: block; width: 100%; min-height: 44px; box-sizing: border-box;
-  border: 1px solid var(--cbl-overdue); border-radius: var(--cbl-radius-sm, 10px);
-  background: transparent; color: var(--cbl-overdue);
-  font-size: 15px; font-weight: 700; cursor: pointer;
-}
 /* ---- Slim timeline handle at the bottom of the content (phone only).
  * On iPad the timeline column is always visible, so no handle renders. ---- */
 #cblRoot .cbl-tlhandle {
@@ -734,7 +722,6 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
   #cblRoot .cbl-tlscrim { display: none; }
   #cblRoot .cbl-tllist { flex: 1; }
   #cblRoot .cbl-tabs { max-width: none; }
-  #cblRoot .cbl-endwrap { max-width: none; }
   #cblRoot .cbl-idle, #cblRoot .cbl-endview { max-width: 720px; }
   #cblRoot .cbl-strip .cbl-cell { padding: 8px 16px; }
   #cblRoot .cbl-cellv { font-size: 22px; }
@@ -770,3 +757,155 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 @media (max-width: 380px) { #cblRoot { --cbl-clock: 64px; } #cblRoot .cbl-ringtime { font-size: var(--cbl-clock); } }
 #cblRoot .cbl-grid, #cblRoot .cbl-drugs { gap: 16px; margin-bottom: 24px; }
 #cblRoot .cbl-barfill { background: var(--cbl-accent); }
+
+/* ---- cb4-D fixed app shell (layout contract) ----
+ * #cblRoot is a 100dvh flex column: header, status strip, content
+ * region (flex 1, min-height 0), tab bar. The page never scrolls.
+ * Only the secondary tiles region scrolls, inside itself. No fixed
+ * bars overlap content: End lives in the header, tabs in flow. */
+#cblRoot .cbl-status {
+  height: calc(52px + env(safe-area-inset-top, 0px)); min-height: 52px; flex: none; flex-wrap: nowrap;
+  padding: calc(4px + env(safe-area-inset-top, 0px)) 10px 4px; box-sizing: border-box; gap: 6px;
+}
+#cblRoot .cbl-spacer { flex: 1 1 auto; min-width: 4px; }
+#cblRoot .cbl-status .cbl-iconbtn:last-child { margin-left: 0; }
+#cblRoot .cbl-mode { min-height: 40px; padding: 6px 10px; }
+#cblRoot .cbl-endbtn {
+  height: 44px; min-height: 44px; min-width: 52px; padding: 0 14px; flex: none;
+  border: 1px solid var(--cbl-overdue); border-radius: 10px;
+  background: transparent; color: var(--cbl-overdue);
+  font-size: 15px; font-weight: 700; cursor: pointer; box-sizing: border-box;
+}
+@media (max-width: 380px) {
+  #cblRoot .cbl-status .cbl-iconbtn[data-act="audio"] span { display: none; }
+  #cblRoot .cbl-status .cbl-iconbtn { padding: 0 8px; }
+}
+#cblRoot .cbl-strip { height: 64px; flex: none; box-sizing: border-box; }
+#cblRoot .cbl-cell { padding: 4px 5px; }
+#cblRoot .cbl-cellv { font-size: 20px; }
+#cblRoot .cbl-cellv[data-long] { font-size: 17px; }
+#cblRoot .cbl-runbody { position: relative; }
+#cblRoot .cbl-maincol { overflow: hidden; display: flex; flex-direction: column; }
+#cblRoot .cbl-runpad, #cblRoot .cbl-tabpad { max-width: none; }
+#cblRoot .cbl-tabpad { flex: 1; min-height: 0; overflow-y: auto; width: 100%; box-sizing: border-box; }
+#cblRoot .cbl-timer {
+  display: flex; flex-direction: column; gap: 8px;
+  flex: 1; min-height: 0; height: 100%; width: 100%; box-sizing: border-box;
+  padding: 10px 12px; margin: 0;
+}
+/* Clock block (phone about 150 px including the inline Vent row). */
+#cblRoot .cbl-ringrow { flex-direction: column; gap: 0; margin: 0; flex: none; }
+#cblRoot .cbl-ringcard {
+  container-type: inline-size;
+  flex-direction: column; align-items: stretch; gap: 2px;
+  padding: 10px 14px 8px; margin: 0;
+  border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+}
+#cblRoot .cbl-ringtime { font-size: clamp(56px, 13cqw, 104px); }
+#cblRoot .cbl-ringline { margin-top: 4px; font-size: 13px; }
+#cblRoot .cbl-bar { margin-top: 6px; }
+#cblRoot .cbl-vent {
+  min-height: 44px; padding: 2px 6px 2px 14px; margin: 0;
+  background: var(--cbl-s1); border-top: 0;
+  border-top-left-radius: 0; border-top-right-radius: 0;
+  border-bottom-left-radius: var(--cbl-radius, 14px); border-bottom-right-radius: var(--cbl-radius, 14px);
+  box-shadow: var(--cbl-shadow);
+}
+#cblRoot .cbl-due { min-height: 48px; height: 48px; padding: 6px 12px; margin: 0; flex: none; box-sizing: border-box; }
+/* Actions: priority fixed, secondary scrolls inside itself. */
+#cblRoot .cbl-actions { display: flex; flex-direction: column; gap: 8px; flex: 1; min-height: 0; }
+#cblRoot .cbl-priority { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: none; }
+#cblRoot .cbl-secondary {
+  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; position: relative;
+}
+#cblRoot .cbl-secondary::after {
+  content: ""; display: block; position: sticky; bottom: 0; height: 16px; margin-top: -4px;
+  background: transparent; box-shadow: inset 0 -18px 14px -10px var(--cbl-bg); pointer-events: none;
+}
+#cblRoot .cbl-secgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+#cblRoot .cbl-tile, #cblRoot .cbl-drug { min-height: 68px; }
+#cblRoot .cbl-priority .cbl-tile, #cblRoot .cbl-priority .cbl-drug,
+#cblRoot .cbl-secgrid .cbl-tile, #cblRoot .cbl-secgrid .cbl-drug {
+  padding: 8px 12px; margin: 0;
+}
+#cblRoot .cbl-tile {
+  display: grid; grid-template-columns: 20px 1fr; grid-template-rows: auto auto;
+  column-gap: 10px; align-items: center; align-content: center;
+}
+#cblRoot .cbl-tileicon { grid-row: 1 / 3; }
+#cblRoot .cbl-tilelabel { font-size: 16px; line-height: 1.25; }
+#cblRoot .cbl-tilesub { font-size: 12px; line-height: 1.3; }
+#cblRoot .cbl-drug { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; }
+#cblRoot .cbl-drugmain { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+#cblRoot .cbl-druglabel { font-size: 16px; }
+#cblRoot .cbl-drugdose { font-size: 11px; white-space: nowrap; }
+#cblRoot .cbl-drugsub { font-size: 12px; }
+#cblRoot .cbl-drug:only-child { grid-column: auto; }
+#cblRoot .cbl-guide { margin: 10px 0 4px; }
+#cblRoot .cbl-checkbtn { flex: none; min-height: 44px; margin: 0; }
+#cblRoot .cbl-tlhandle { flex: none; margin: 0; }
+/* Tab bar in flow: phone 60 px plus safe area. */
+#cblRoot .cbl-tabwrap { flex: none; background: var(--cbl-surface); border-top: 1px solid var(--cbl-line); }
+#cblRoot .cbl-tabs {
+  height: calc(60px + env(safe-area-inset-bottom, 0px)); max-width: none; margin: 0;
+  border: 0; border-radius: 0; box-shadow: none; background: transparent;
+  padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px)); box-sizing: border-box;
+}
+#cblRoot .cbl-tab { min-height: 48px; }
+#cblRoot .cbl-toast { bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 768px) {
+  #cblRoot .cbl-status { height: 60px; min-height: 60px; padding: 6px 14px; }
+  #cblRoot .cbl-strip { height: 76px; }
+  #cblRoot .cbl-cellv { font-size: 24px; }
+  #cblRoot .cbl-cellv[data-long] { font-size: 20px; }
+  #cblRoot .cbl-timer { padding: 12px 16px; gap: 8px; }
+  #cblRoot .cbl-ringrow { flex-direction: row; gap: 12px; height: 220px; }
+  #cblRoot .cbl-ringcard {
+    flex: 1 1 auto; flex-direction: row; align-items: center; gap: 16px;
+    padding: 16px 18px; border-bottom: 1px solid var(--cbl-hairline);
+    border-bottom-left-radius: var(--cbl-radius, 14px); border-bottom-right-radius: var(--cbl-radius, 14px);
+  }
+  #cblRoot .cbl-ring { display: block; width: clamp(72px, 34cqw, 208px); height: auto; flex: none; }
+  #cblRoot .cbl-vent {
+    flex: 0 0 232px; flex-direction: column; align-items: stretch; gap: 4px;
+    padding: 16px 18px; border-top: 1px solid var(--cbl-line);
+    border-radius: var(--cbl-radius, 14px); box-shadow: none; margin: 0;
+  }
+  #cblRoot .cbl-vents { display: block; }
+  #cblRoot .cbl-ventcue { margin-left: 0; margin-top: auto; }
+  #cblRoot .cbl-due { height: 56px; min-height: 56px; }
+  /* One flattened 4 column tile grid in contract order. */
+  #cblRoot .cbl-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; flex: none; }
+  #cblRoot .cbl-priority, #cblRoot .cbl-secondary, #cblRoot .cbl-secgrid { display: contents; }
+  #cblRoot .cbl-secondary { overflow: visible; }
+  #cblRoot .cbl-secondary::after { display: none; }
+  #cblRoot .cbl-actions [data-kind="shock"] { order: 1; }
+  #cblRoot .cbl-actions [data-kind="epi"] { order: 2; }
+  #cblRoot .cbl-actions [data-kind="amio"] { order: 3; }
+  #cblRoot .cbl-actions [data-kind="lido"] { order: 4; }
+  #cblRoot .cbl-actions [data-kind="rhythm"] { order: 5; }
+  #cblRoot .cbl-actions [data-kind="pause"] { order: 6; }
+  #cblRoot .cbl-actions [data-kind="proc"] { order: 7; }
+  #cblRoot .cbl-actions [data-kind="rosc"] { order: 8; }
+  #cblRoot .cbl-actions [data-kind="note"] { order: 9; }
+  #cblRoot .cbl-actions [data-kind="rearrest"] { order: 10; }
+  #cblRoot .cbl-actions [data-kind="custom"] { order: 11; }
+  #cblRoot .cbl-tile, #cblRoot .cbl-drug { min-height: 92px; }
+  #cblRoot .cbl-guide, #cblRoot .cbl-timer .cbl-anotice { display: none; }
+  /* Floating segmented tab bar: content region ends above it. */
+  #cblRoot .cbl-tabwrap { height: 88px; background: transparent; border-top: 0; box-sizing: border-box; }
+  #cblRoot .cbl-tabs {
+    width: min(520px, calc(100% - 24px)); height: 64px; margin: 12px auto 12px;
+    border: 1px solid var(--cbl-hairline); border-radius: 14px;
+    background: var(--cbl-s1); box-shadow: var(--cbl-shadow); padding: 6px;
+  }
+  #cblRoot .cbl-toast { bottom: 104px; }
+}
+@container (max-width: 460px) {
+  #cblRoot .cbl-ringcard { flex-direction: column; align-items: flex-start; }
+  #cblRoot .cbl-ring { width: 76px; }
+}
+@media (max-width: 767px) {
+  #cblRoot .cbl-ring { display: none; }
+}

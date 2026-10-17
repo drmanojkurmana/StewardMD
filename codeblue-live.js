@@ -925,7 +925,7 @@
 
   /* ---------------- rendering ---------------- */
 
-  function statusRow() {
+  function statusRow(showEnd) {
     var modeChip = sess
       ? '<span class="cbl-mode" aria-label="Mode">' + esc(MODE_LABEL[sess.mode]) + "</span>"
       : '<span class="cbl-mode" aria-label="Mode">Code Blue</span>';
@@ -936,6 +936,10 @@
       ICONS.sound + '<span>Sound</span></button>' +
       '<button type="button" class="cbl-iconbtn" data-cbp-settings aria-label="Display settings">' +
       ICONS.gear + "</button>" +
+      '<span class="cbl-spacer"></span>' +
+      (showEnd
+        ? '<button type="button" class="cbl-endbtn" data-act="end">End</button>'
+        : "") +
       '<button type="button" class="cbl-iconbtn" data-act="close" aria-label="Close live code">' +
       ICONS.close + "</button></div>";
   }
@@ -1060,38 +1064,6 @@
    * text. Paediatric and neonatal show no dose line at all. Counts live
    * on the buttons themselves ("2 given, last 3:10 ago"), never as
    * separate pills. */
-  function drugsView(elapsed) {
-    var dc = drugCounts(sess.events);
-    var dose = doseRefFor(sess.mode);
-    var lastLine = function (pred, n) {
-      var last = lastDrugBy(sess, pred);
-      if (!n) return "Not logged yet";
-      return n + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
-    };
-    var epiSt = epiStatus(sess, elapsed);
-    var btn = function (act, drug, label, doseText, sub) {
-      var next = drug === "epi" && (epiSt.state === "due" || epiSt.state === "overdue");
-      return '<button type="button" class="cbl-drug' + (next ? " cbl-nextdue" : "") + '" data-drug="' + drug + '" data-act="' + act + '"' +
-        (next ? ' data-cbfx-specular="1"' : "") +
-        ' aria-label="' + esc(label) + (doseText ? ", " + esc(doseText) : "") + '">' +
-        '<span class="cbl-druglabel">' + esc(label) + "</span>" +
-        (doseText ? '<span class="cbl-drugdose">' + esc(doseText) + "</span>" : "") +
-        '<span class="cbl-drugsub">' + esc(sub) + "</span></button>";
-    };
-    /* Paediatric and neonatal run Epinephrine only: no doses, no extra
-     * drug buttons. */
-    if (normMode(sess.mode) !== "adult") {
-      return '<div class="cbl-drugs" data-state="drugs">' +
-        btn("drug-epi", "epi", "Epinephrine", null, lastLine(isEpiDrug, dc.epi)) +
-        "</div>";
-    }
-    return '<div class="cbl-drugs" data-state="drugs">' +
-      btn("drug-epi", "epi", "Epinephrine", dose ? dose.epi : null, lastLine(isEpiDrug, dc.epi)) +
-      btn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio)) +
-      btn("drug-lido", "lido", "Lidocaine", dose ? dose.lido : null, lastLine(isLidoDrug, dc.lido)) +
-      "</div>";
-  }
-
   var TL_WORD = {
     shock: "SHOCK", drug: "DRUG", rhythm: "RHYTHM", rosc: "ROSC",
     pauseStart: "PAUSED", resume: "RESUMED", procedure: "TASK",
@@ -1179,37 +1151,81 @@
   };
   var TILE_ORDER_DEFAULT = ["shock", "rhythm", "pause", "proc", "note", "rosc"];
 
-  function tilesView(elapsed) {
-    var order = TILE_ORDER_DEFAULT.slice(), hidden = {}, custom = [];
-    var pref = prefTiles();
-    if (pref) {
-      if (pref.order && pref.order.length) order = pref.order.slice();
-      if (pref.hidden) hidden = pref.hidden;
-      if (pref.custom) custom = pref.custom;
+  /* Unified action area. Priority tiles (Shock, Epinephrine, Rhythm,
+   * Pause) sit in a fixed grid that never scrolls. Secondary actions
+   * (Amiodarone and Lidocaine in adults, Procedure, ROSC, Note, custom
+   * buttons and Re-arrest after ROSC) live in a region that scrolls
+   * inside itself. Drug buttons keep the cbl-drug hooks and adult dose
+   * text; action tiles keep the cbl-tile hooks. On iPad CSS flattens
+   * both grids into one 4 column grid in contract order. */
+  function drugBtn(act, drug, label, doseText, sub, elapsed) {
+    var epiSt = epiStatus(sess, elapsed);
+    var next = drug === "epi" && (epiSt.state === "due" || epiSt.state === "overdue");
+    return '<button type="button" class="cbl-drug' + (next ? " cbl-nextdue" : "") +
+      '" data-drug="' + drug + '" data-kind="' + drug + '" data-act="' + act + '"' +
+      (next ? ' data-cbfx-specular="1"' : "") +
+      ' aria-label="' + esc(label) + (doseText ? ", " + esc(doseText) : "") + '">' +
+      '<span class="cbl-drugmain"><span class="cbl-druglabel">' + esc(label) + "</span>" +
+      (doseText ? '<span class="cbl-drugdose">' + esc(doseText) + "</span>" : "") + "</span>" +
+      '<span class="cbl-drugsub">' + esc(sub) + "</span></button>";
+  }
+
+  function actionTile(kind, label, elapsed) {
+    var act = kind === "rearrest" ? "tile-rearrest" : "tile-" + kind;
+    return '<button type="button" class="cbl-tile' + (kind === "rearrest" ? " cbl-tile-re" : "") +
+      '" data-kind="' + kind + '" data-act="' + act + '" aria-label="' + esc(label) + '"' +
+      (kind === "shock" ? ' data-cbfx-specular="1"' : "") + ">" +
+      tileInner(kind, label, elapsed) + "</button>";
+  }
+
+  function actionsView(elapsed) {
+    var dc = drugCounts(sess.events);
+    var dose = doseRefFor(sess.mode);
+    var adult = normMode(sess.mode) === "adult";
+    var lastLine = function (pred, n) {
+      var last = lastDrugBy(sess, pred);
+      if (!n) return "Not logged yet";
+      return n + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
+    };
+    var epiBtn = drugBtn("drug-epi", "epi", "Epinephrine", adult && dose ? dose.epi : null,
+      lastLine(isEpiDrug, dc.epi), elapsed);
+    var priority = '<div class="cbl-priority" data-state="priority">' +
+      actionTile("shock", "Shock", elapsed) + epiBtn +
+      actionTile("rhythm", "Rhythm", elapsed) +
+      actionTile("pause", "Pause", elapsed) + "</div>";
+    var sec = [];
+    if (adult) {
+      sec.push(drugBtn("drug-amio", "amio", "Amiodarone", dose ? dose.amio : null, lastLine(isAmioDrug, dc.amio), elapsed));
+      sec.push(drugBtn("drug-lido", "lido", "Lidocaine", dose ? dose.lido : null, lastLine(isLidoDrug, dc.lido), elapsed));
     }
-    var tiles = [];
+    var pref = prefTiles();
+    var hidden = (pref && pref.hidden) || {};
+    var order = ["proc", "rosc", "note"];
+    if (pref && pref.order && pref.order.length) {
+      var seen = {};
+      pref.order.forEach(function (id) {
+        if (order.indexOf(id) >= 0 && !seen[id]) { seen[id] = 1; }
+      });
+      var reordered = pref.order.filter(function (id) { return order.indexOf(id) >= 0; });
+      order.forEach(function (id) { if (reordered.indexOf(id) < 0) reordered.push(id); });
+      order = reordered;
+    }
     order.forEach(function (id) {
-      /* One Epinephrine button only: it lives in the drug row, never here. */
-      if (id === "epi" || hidden[id] || !TILE_DEFS[id]) return;
-      if (id === "pause" && !paused && (sess.rosc || sess.hadRosc)) {
-        tiles.push({ kind: "rearrest", icon: "rearrest", label: "Re-arrest" });
-      } else {
-        tiles.push({ kind: id, icon: TILE_DEFS[id].icon, label: TILE_DEFS[id].label });
-      }
+      if (hidden[id]) return;
+      sec.push(actionTile(id, TILE_DEFS[id].label, elapsed));
     });
-    /* Re-arrest replaces Pause once ROSC has happened; otherwise Pause shows. */
-    custom.forEach(function (c) {
-      if (c && c.id && c.label) tiles.push({ kind: "custom", icon: "note", label: c.label, cid: c.id });
-    });
-    var html = '<div class="cbl-grid">';
-    tiles.forEach(function (t) {
-      var extra = t.kind === "custom"
-        ? '" data-act="tile-custom" data-id="' + esc(t.cid)
-        : '" data-act="tile-' + t.kind;
-      html += '<button type="button" class="cbl-tile' + (t.kind === "rearrest" ? " cbl-tile-re" : "") +
-        extra + '" aria-label="' + esc(t.label) + '"' + (t.kind === "shock" ? ' data-cbfx-specular="1"' : "") + ">" + tileInner(t.kind, t.label, elapsed) + "</button>";
-    });
-    return html + "</div>";
+    if (sess.rosc || sess.hadRosc) sec.push(actionTile("rearrest", "Re-arrest", elapsed));
+    if (pref && pref.custom) {
+      pref.custom.forEach(function (c) {
+        if (c && c.id && c.label) {
+          sec.push('<button type="button" class="cbl-tile" data-kind="custom" data-act="tile-custom" data-id="' +
+            esc(c.id) + '" aria-label="' + esc(c.label) + '">' + tileInner("note", c.label, elapsed) + "</button>");
+        }
+      });
+    }
+    return '<div class="cbl-actions">' + priority +
+      '<div class="cbl-secondary" data-state="secondary"><div class="cbl-secgrid">' +
+      sec.join("") + "</div>" + guideView(elapsed) + audioNotice() + "</div></div>";
   }
 
   function tileInner(kind, label, elapsed) {
@@ -1244,24 +1260,17 @@
       tab("settings", "Settings", ICONS.gear) + "</div>";
   }
 
-  /* Distinct slim End control above the tab bar, visible on every tab. */
-  function endBarView() {
-    return '<div class="cbl-endwrap"><button type="button" class="cbl-endbar" data-act="end">' +
-      "End code</button></div>";
-  }
-
   function timerTabView(elapsed) {
     var showChecks = sess.rosc || sess.hadRosc;
-    return '<div class="cbl-runpad" data-tabpanel="timer" role="tabpanel" aria-label="Timer">' +
+    return '<div class="cbl-runpad cbl-timer" data-tabpanel="timer" role="tabpanel" aria-label="Timer">' +
       clockView(elapsed) + dueView(elapsed) + errorView() +
-      drugsView(elapsed) + tilesView(elapsed) + guideView(elapsed) +
+      actionsView(elapsed) +
       (showChecks
-        ? '<button type="button" class="cbl-btn" data-act="sheet-checks" data-state="checklist-open">' +
+        ? '<button type="button" class="cbl-btn cbl-checkbtn" data-act="sheet-checks" data-state="checklist-open">' +
           "Open post ROSC checklist</button>"
         : "") +
       '<button type="button" class="cbl-tlhandle" data-act="timeline-toggle" aria-expanded="' + timelineOpen + '">' +
-      "<span>Timeline</span></button>" +
-      audioNotice() + "</div>";
+      "<span>Timeline</span></button></div>";
   }
 
   function logTabView() {
@@ -1317,11 +1326,11 @@
       : rtab === "notes" ? notesTabView()
       : rtab === "settings" ? settingsTabView()
       : timerTabView(elapsed);
-    return statusRow() + stripView(elapsed) +
-      '<div class="cbl-runbody"><div class="cbl-maincol"><div class="cbl-scroll">' + panel + "</div></div>" +
+    return statusRow(true) + stripView(elapsed) +
+      '<div class="cbl-runbody"><div class="cbl-maincol">' + panel + "</div>" +
       '<div class="cbl-tlscrim' + (timelineOpen ? " open" : "") + '" data-act="timeline-toggle"></div>' +
       timelineView() + "</div>" +
-      endBarView() + tabsView() +
+      '<div class="cbl-tabwrap">' + tabsView() + "</div>" +
       '<div class="cbl-toast" data-state="toast" role="status" aria-live="polite"></div>' +
       '<div class="cbl-sheetwrap"></div>';
   }
@@ -1512,7 +1521,7 @@
       (undoId ? ' <button type="button" class="cbl-mini" data-act="toast-undo" data-id="' + esc(undoId) + '">Undo</button>' : "");
     t.classList.add("on");
     toastTimer = setTimeout(function () {
-      try { t.classList.remove("on"); } catch (e) {}
+      try { t.classList.remove("on"); t.innerHTML = ""; } catch (e) {}
     }, UNDO_MS);
   }
 
@@ -1981,9 +1990,8 @@
       document.head.appendChild(css);
     }
     if (opts.theme) rootEl.setAttribute("data-theme", opts.theme);
-    if (opts.mode) idleMode = normMode(opts.mode);
-    if (opts.training === true) idleTraining = true;
-    if (opts.training === false) idleTraining = false;
+    idleMode = opts.mode ? normMode(opts.mode) : "adult";
+    idleTraining = opts.training === true;
     sess = null;
     view = "idle";
     elapsedOffset = 0;
@@ -1995,7 +2003,7 @@
     exportState = null;
     pendingLink = readOpenPatient();
     lastFocus = document.activeElement;
-    if (!opts.training && idleTraining !== true) {
+    if (opts.training !== true) {
       var snap = loadSnapshot(defaultStorage());
       if (snap) {
         var r = restoreSnapshot(snap, Date.now());
