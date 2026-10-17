@@ -1,4 +1,16 @@
-# Code Blue design contract (v2.1)
+# Code Blue design contract (v3, 2026-10-18)
+
+## v3 OWNER OVERRIDES (win over everything below where they conflict)
+Owner, 2026-10-18, after comparing with CodeTick on his iPad: "build for both iPad and iPhone", "professional cool premium and MINIMALISTIC", "use Red or Blue gradient", one Code Blue for real patients and practice, integrated with the existing watch Command Center. The old rules "no gradient", teal accent and phone-only layout are replaced by this section. No glows, no blur, no glass, no neon, no emoji, no em-dashes still stand.
+- Palette (reference: Dopely "Carbon, Graphite, Cool Silver, Frost White, Electric Blue"): canvas Carbon #101317, raised Graphite-dark #171B20, lines and pressed #343A40, secondary text Cool Silver #AAB2BD, primary text Frost White #F4F7FA, action accent Electric Blue #3B82F6. Light theme: canvas Frost White #F4F7FA, raised #FFFFFF, text Carbon, lines #D5DBE3, accent #2563EB.
+- Gradient is allowed only as a quiet linear 2-stop fill on a few hero elements, never on backgrounds or cards: Blue (#3B82F6 to #1D4ED8, 160 deg) for Start, the CPR ring arc and the primary action; Red (#EF4444 to #B91C1C) for Shock, overdue epinephrine and End. At most two gradient elements visible at once. Flat everywhere else.
+- State colours: running = Electric Blue, due = amber #F5B544, overdue and shock = Red, ROSC = green #34C759, paused = Cool Silver. Colour is never the only signal (word plus shape).
+- Devices: iPhone (360 to 430 wide) AND iPad (768 to 1366 wide, portrait and landscape). Phone: single column as in section 4. iPad: three zones in one screen, no navigation during a code: status strip on top (code time, rhythm-check countdown, epinephrine countdown, shock count, vent timer, always visible on every tab), centre CPR ring with metronome plus vent panel and the drug and action buttons below, right column live colour-coded timeline with undo toast. Bottom tab bar (Timer, Log, Notes, Settings) on both; the status strip stays above all tabs.
+- One Code Blue, two modes in one engine: LIVE (real patient: can link a patient or ward bed, writes the code sheet to the patient timeline, mirrors to the watch) and PRACTICE (badged TRAINING, sped-up clock, never touches a record). The existing watch Command Center and this screen are the same product: starting a code on either shows on the other.
+- Adult drug buttons show fixed reference dose text from the AHA adult algorithm (owner: keep adult doses): Epinephrine 1 mg IV/IO every 3 to 5 min, Amiodarone 300 mg then 150 mg, Lidocaine 1 to 1.5 mg/kg then 0.5 to 0.75 mg/kg. Paediatric and neonatal: no doses and no calculation. Never calculate a dose. Owner reviews the dose text.
+- Premium means restraint: generous spacing, one type family (system UI stack, tabular figures), 1px hairlines in #343A40, radius 10 to 14, motion only as in section 7.
+
+# Older v2.1 sections (superseded where v3 conflicts)
 
 Binding for every Code Blue screen on web, Apple Watch and Wear OS. Produced from the brand, design, anti-ui-slop and ui-ux-pro-max passes. Owner rules win over generated suggestions: restrained, no glows, gradients, backdrops or logo banners; no emojis; no em-dashes in text.
 
