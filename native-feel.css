@@ -1,0 +1,43 @@
+/* native-feel.css: what makes StewardMD behave like an iOS / Android app rather than a web page, app-wide.
+ * Owner 2026-10-16: "mobile native, it should feel like a mobile app, not a webpage".
+ *
+ * Global, loaded right after redesign-system.css, and deliberately small: behaviour only, no colours or layout,
+ * so no module's look changes. Each rule is one thing a native app does and a web page does not:
+ *   - no grey tap flash, no long-press "copy / look up" menu on controls and images, no image drag;
+ *   - controls are not text-selectable (a long press on a button selects nothing), reading text and inputs still are;
+ *   - taps fire at once and a double tap never zooms the page (touch-action: manipulation);
+ *   - the page itself never rubber-bands or pull-to-refreshes; scroll areas inside modules keep their own bounce;
+ *   - the OS text size does not silently rescale a layout (the app has its own text-size setting).
+ * Kill switch: html.no-native-feel (set by localStorage smd_native_feel=0, see the inline script in index.html). */
+
+html:not(.no-native-feel) {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+html:not(.no-native-feel),
+html:not(.no-native-feel) body {
+  overscroll-behavior: none;
+}
+
+/* Controls: immediate taps, no double-tap zoom, no selection or callout on a long press. */
+html:not(.no-native-feel) :is(button, [role="button"], [role="tab"], [role="switch"], [role="checkbox"], [role="menuitem"], [data-act], label, summary, select, a[href]) {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Images and icons are not draggable or long-press-saveable chrome. */
+html:not(.no-native-feel) :is(img, svg, canvas, video) {
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* Anything you type into stays fully selectable and editable. */
+html:not(.no-native-feel) :is(input, textarea, [contenteditable], [contenteditable] *) {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+  touch-action: manipulation;
+}
