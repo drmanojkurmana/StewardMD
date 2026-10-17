@@ -62,7 +62,10 @@ const RADNOTES_RE = /^(?:img\/(?:radnotes\/rn|radmax\/rm)-[a-z0-9-]{2,80}\.webp|
 // Medicine coverage MCQs
 const MEDCOV_RE = /^overlay\/medcov(?:[2-9]|[1-9]\d)?\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Owner-reviewed MaiK questions
-const MAIK_RE = /^overlay\/(?:maikfill\d|maik(?:img)?[1-9]\d{0,2}|(?!(?:radnotes|radmax|medcov)\d)[a-z]{2,12}[1-9]\d{0,2}[a-z]?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
+/* Overlay set names: letters, an optional number up to 4 digits, an optional letter (maikir, maikir2, maikbook2, gap1013a).
+ * The old pattern needed 1 to 3 digits and no letters before them, so maikir and gap1013a..f were uploaded and then never
+ * served (404): 84 modules without their questions (owner 2026-10-17). */
+const MAIK_RE = /^overlay\/(?:maikfill\d|maik(?:img)?[1-9]\d{0,2}|(?!(?:radnotes|radmax|medcov)\d)[a-z]{2,12}(?:[1-9]\d{0,3})?[a-z]?)\/[a-z0-9-]{2,60}\/[a-z0-9-]{2,80}\.json$/;
 // Openly licensed images for image MCQs: img/maikimg/i-<hash>.webp
 const MAIK_IMG_RE = /^img\/maikimg\/i-[a-z0-9-]{8,40}\.webp$/;
 // MaiK overlay manifest

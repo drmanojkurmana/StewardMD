@@ -3,7 +3,8 @@
  * any piece below fails this test. */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, readdirSync } from "node:fs";
+import { bankPath } from "../functions/api/prep/bank/[[path]].js";
 
 const rd = (p) => readFileSync(new URL("../" + p, import.meta.url), "utf8");
 
@@ -31,4 +32,19 @@ test("the sync tool only ever adds files and never drops a live topic", () => {
   assert.match(s, /would drop live topics/);
   assert.ok(existsSync(new URL("../.github/CODEOWNERS", import.meta.url)));
   assert.match(rd(".github/CODEOWNERS"), /prep-r2-parity\.mjs/);
+});
+
+test("every overlay set in overlay-counts.json is a path the bank route will serve (maikir and gap1013a were uploaded and then 404ed)", () => {
+  const sets = JSON.parse(rd("prep/bank/overlay-counts.json")).sets;
+  const bad = [];
+  for (const [set, subs] of Object.entries(sets)) for (const [sid, mods] of Object.entries(subs)) for (const mid of Object.keys(mods)) {
+    const p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
+    if (!bankPath({ path: p.split("/") })) bad.push(p);
+  }
+  assert.deepEqual(bad.slice(0, 5), [], bad.length + " overlay file(s) the app asks for are refused by the route");
+});
+test("every overlay directory in the repo is a set the route serves", () => {
+  for (const set of readdirSync(new URL("../prep/overlays", import.meta.url))) {
+    assert.ok(bankPath({ path: ["overlay", set, "radiology", "rad-xray.json"] }), "set not served: " + set);
+  }
 });
