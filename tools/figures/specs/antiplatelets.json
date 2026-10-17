@@ -56,6 +56,13 @@
    "blocks": {
     "e_agg": 0.9
    }
+  },
+  {
+   "label": "PDE inhibitor (dipyridamole or cilostazol type)",
+   "status": "PDE inhibitor",
+   "blocks": {
+    "e_agg": 0.5
+   }
   }
  ],
  "readout": "platelet activation {0} · aggregation {1}",
@@ -249,7 +256,7 @@
   "<strong>The drug classes.</strong> Aspirin was the first antiplatelet and is a cyclooxygenase inhibitor; clopidogrel and the other thienopyridines block the P2Y12 receptor; glycoprotein IIb/IIIa inhibitors such as tirofiban and eptifibatide are given parenterally in the acute phase of acute coronary syndromes (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK537062/\">Platelet aggregation inhibitors, StatPearls</a>).",
   "<strong>The pathway details.</strong> COX-1 to thromboxane A2 for aspirin, ADP and P2Y12 for the thienopyridines, and the final glycoprotein IIb/IIIa receptor are standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
  ],
- "simplified": "Platelet adhesion receptors, secondary mediators beyond thromboxane A2 and ADP (serotonin, PAR-1 and the thrombin receptor drugs), phosphodiesterase inhibitors (dipyridamole, cilostazol), reversible versus irreversible binding, prodrug activation (including CYP2C19), and the effect on bleeding, gastric injury and dual therapy are left out. Splitting the activators into three equal streams is a teaching device; real contributions vary. Levels, flow and the size of the block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "simplified": "Platelet adhesion receptors, secondary mediators beyond thromboxane A2 and ADP (serotonin, PAR-1 and the thrombin receptor drugs), phosphodiesterase inhibitors (dipyridamole, cilostazol), reversible versus irreversible binding, prodrug activation (including CYP2C19), and the effect on bleeding, gastric injury and dual therapy are left out. Splitting the activators into three equal streams is a teaching device; real contributions vary. Levels, flow and the size of the block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them. Dipyridamole and cilostazol raise platelet cAMP and are shown as a partial block of the final aggregation step.",
  "registry": {
   "title": "Antiplatelet drugs: three ways to stop a platelet plug",
   "blurb": "Interactive figure: aspirin, P2Y12 blockers and glycoprotein IIb/IIIa inhibitors, step by step",
@@ -262,7 +269,10 @@
    "cangrelor": "d=2",
    "tirofiban": "d=4",
    "eptifibatide": "d=4",
-   "abciximab": "d=4"
+   "abciximab": "d=4",
+   "dipyridamole": "d=5",
+   "cilostazol": "d=5",
+   "pentoxifylline": "d=5"
   },
   "terms": [
    "antiplatelets?",

@@ -1,0 +1,296 @@
+{
+ "id": "ms-immunotherapy",
+ "title": "Multiple sclerosis disease-modifying drugs",
+ "ariaLabel": "Schematic of multiple sclerosis: immune cells are activated, leave lymph nodes, cross the blood-brain barrier, and attack myelin. Interferon beta and glatiramer shift the immune balance, fingolimod traps lymphocytes in lymph nodes, natalizumab blocks entry across the blood-brain barrier, and anti-CD20 antibodies deplete B cells.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Disease activity",
+  "a": [
+   0.45,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no disease-modifying drug"
+  },
+  {
+   "label": "interferon beta or glatiramer type",
+   "status": "interferon or glatiramer",
+   "blocks": {
+    "e_ifn": 0.6
+   }
+  },
+  {
+   "label": "S1P modulator type (fingolimod)",
+   "status": "S1P modulator",
+   "blocks": {
+    "e_s1p": 0.85
+   }
+  },
+  {
+   "label": "integrin blocker type (natalizumab)",
+   "status": "natalizumab type",
+   "blocks": {
+    "e_int": 0.9
+   }
+  },
+  {
+   "label": "anti-CD20 antibody type",
+   "status": "anti-CD20 antibody",
+   "blocks": {
+    "e_cd20": 0.9
+   }
+  }
+ ],
+ "readout": "Relapse activity: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "quiet",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Disease drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Relapse activity: active"
+  ],
+  [
+   1,
+   1,
+   "Relapse activity: active"
+  ],
+  [
+   1,
+   2,
+   "Relapse activity: reduced"
+  ],
+  [
+   1,
+   3,
+   "Relapse activity: reduced"
+  ],
+  [
+   1,
+   4,
+   "Relapse activity: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Immune activation",
+   "sub": "peripheral",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Autoreactive T and B cells become active outside the brain."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Autoreactive cells",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Activated autoreactive immune cells."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Lymph node exit",
+   "sub": "S1P",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Lymphocytes leave lymph nodes along a sphingosine-1-phosphate gradient."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Lymphocytes in blood",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Circulating lymphocytes that can reach the brain."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Brain entry",
+   "sub": "alpha-4 integrin",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Lymphocytes stick to and cross the blood-brain barrier using alpha-4 integrin."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Cells in the brain",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Immune cells that have entered the brain."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "B cells",
+   "sub": "CD20",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "B cells that carry CD20 take part in the immune attack."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "B cell effect",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "B cell activity in the disease."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.2
+    ],
+    [
+     "n:m2",
+     0.25
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Relapse activity",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for new immune attack on the brain's myelin. It does not show reversal of existing disability."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_ifn",
+   "from": "s0",
+   "to": "m0",
+   "label": "immune balance",
+   "info": "Interferon beta and glatiramer acetate shift the immune balance towards anti-inflammatory activity and lower new relapses modestly. Interferon beta causes flu-like symptoms."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_s1p",
+   "from": "s1",
+   "to": "m1",
+   "label": "lymphocyte exit",
+   "info": "Fingolimod and similar drugs act on S1P receptors so lymphocytes are trapped in lymph nodes and fewer reach the brain. They can slow the heart at the first dose."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_int",
+   "from": "s2",
+   "to": "m2",
+   "label": "integrin adhesion",
+   "info": "Natalizumab blocks alpha-4 integrin so fewer cells enter the brain. It carries a risk of progressive multifocal leucoencephalopathy (JC virus)."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_cd20",
+   "from": "s3",
+   "to": "m3",
+   "label": "B cell depletion",
+   "info": "Ocrelizumab, ofatumumab and rituximab remove CD20 B cells. They raise infection risk and can lower antibody levels."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Interferon beta and glatiramer shift immune balance, fingolimod traps lymphocytes in lymph nodes, natalizumab blocks entry to the brain, and anti-CD20 antibodies remove B cells. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Steroids for relapses, cladribine, teriflunomide, dimethyl fumarate, progressive disease, symptomatic treatment, pregnancy planning, PML and infection monitoring, MRI follow-up and cost are left out. Relapse activity is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Multiple sclerosis disease-modifying drugs",
+  "blurb": "Interactive figure: interferon beta, fingolimod, natalizumab and anti-CD20 antibodies",
+  "drugs": {
+   "interferon": "d=1",
+   "glatiramer": "d=1",
+   "fingolimod": "d=2",
+   "siponimod": "d=2",
+   "ozanimod": "d=2",
+   "ponesimod": "d=2",
+   "natalizumab": "d=3",
+   "ocrelizumab": "d=4",
+   "ofatumumab": "d=4",
+   "rituximab": "d=4",
+   "ublituximab": "d=4"
+  },
+  "terms": [
+   "multiple sclerosis (?:drugs?|treatment|therapy)",
+   "disease[- ]modifying (?:drugs?|therapy) (?:for|in) (?:multiple sclerosis|MS)",
+   "DMTs?",
+   "S1P (?:receptor )?modulators?"
+  ]
+ }
+}

@@ -241,7 +241,10 @@
     "cangrelor": "d=2",
     "tirofiban": "d=4",
     "eptifibatide": "d=4",
-    "abciximab": "d=4"
+    "abciximab": "d=4",
+    "dipyridamole": "d=5",
+    "cilostazol": "d=5",
+    "pentoxifylline": "d=5"
    },
    "terms": [
     "antiplatelets?",
@@ -755,7 +758,11 @@
     "selegiline": "d=3",
     "rasagiline": "d=3",
     "mirtazapine": "d=4",
-    "mianserin": "d=4"
+    "mianserin": "d=4",
+    "bupropion": "d=5",
+    "amfebutamone": "d=5",
+    "vortioxetine": "d=1",
+    "vilazodone": "d=1"
    },
    "terms": [
     "antidepressants?",
@@ -779,7 +786,7 @@
     "oxcarbazepine": "d=1",
     "lamotrigine": "d=1",
     "lacosamide": "d=1",
-    "zonisamide": "d=1",
+    "zonisamide": "d=6",
     "rufinamide": "d=1",
     "gabapentin": "d=2",
     "pregabalin": "d=2",
@@ -796,7 +803,11 @@
     "vigabatrin": "d=3",
     "tiagabine": "d=3",
     "valproate": "d=4",
-    "valproic": "d=4"
+    "valproic": "d=4",
+    "ethosuximide": "d=5",
+    "methsuximide": "d=5",
+    "topiramate": "d=6",
+    "felbamate": "d=6"
    },
    "terms": [
     "antiepileptics?",
@@ -804,7 +815,9 @@
     "antiseizure",
     "anticonvulsants?",
     "antiepileptic drugs?",
-    "AEDs?"
+    "AEDs?",
+    "absence seizures?",
+    "T[- ]type calcium"
    ]
   },
   {
@@ -940,7 +953,8 @@
     "succinylcholine": "d=2",
     "neostigmine": "d=3",
     "pyridostigmine": "d=3",
-    "edrophonium": "d=3"
+    "edrophonium": "d=3",
+    "sugammadex": "d=5"
    },
    "terms": [
     "neuromuscular block(?:ers?|ing agents?|ade)",
@@ -1408,7 +1422,10 @@
     "ergometrine": "d=3",
     "methylergometrine": "d=3",
     "ergonovine": "d=3",
-    "atosiban": "d=4"
+    "atosiban": "d=4",
+    "nifedipine": "d=5",
+    "indomethacin": "d=6",
+    "mifepristone": "d=7"
    },
    "terms": [
     "uterotonics?",
@@ -2161,6 +2178,251 @@
     "guideline[- ]directed medical therapy",
     "neprilysin inhibitors?",
     "ARNI"
+   ]
+  },
+  {
+   "id": "sex-steroid-replacement",
+   "title": "Sex hormone replacement: testosterone, oestrogen and progestin",
+   "blurb": "Interactive figure: testosterone, oestrogen, progestin and danazol",
+   "page": "prep/figures/sex-steroid-replacement.html",
+   "drugs": {
+    "testosterone": "d=1",
+    "nandrolone": "d=1",
+    "oxandrolone": "d=1",
+    "estradiol": "d=2",
+    "oestradiol": "d=2",
+    "estrogen": "d=2",
+    "oestrogen": "d=2",
+    "conjugated": "d=2",
+    "estriol": "d=2",
+    "tibolone": "d=3",
+    "progesterone": "d=4",
+    "dydrogesterone": "d=4",
+    "norethisterone": "d=4",
+    "medroxyprogesterone": "d=4",
+    "danazol": "d=5"
+   },
+   "terms": [
+    "hormone replacement",
+    "HRT",
+    "menopausal hormone therapy",
+    "hormone therapy",
+    "androgen therapy",
+    "testosterone replacement",
+    "anabolic steroids?"
+   ]
+  },
+  {
+   "id": "targeted-immunomodulators",
+   "title": "Targeted immune drugs: JAK inhibitors, IL-6, IL-17 and co-stimulation blockers",
+   "blurb": "Interactive figure: JAK inhibitors, tocilizumab, secukinumab, ustekinumab and abatacept",
+   "page": "prep/figures/targeted-immunomodulators.html",
+   "drugs": {
+    "tofacitinib": "d=1",
+    "baricitinib": "d=1",
+    "upadacitinib": "d=1",
+    "ruxolitinib": "d=1",
+    "filgotinib": "d=1",
+    "tocilizumab": "d=2",
+    "sarilumab": "d=2",
+    "satralizumab": "d=2",
+    "secukinumab": "d=3",
+    "ixekizumab": "d=3",
+    "ustekinumab": "d=3",
+    "guselkumab": "d=3",
+    "risankizumab": "d=3",
+    "brodalumab": "d=3",
+    "bimekizumab": "d=3",
+    "abatacept": "d=4",
+    "belatacept": "d=4"
+   },
+   "terms": [
+    "JAK inhibitors?",
+    "janus kinase",
+    "interleukin[- ]?6",
+    "IL[- ]?6",
+    "IL[- ]?17",
+    "IL[- ]?23",
+    "co[- ]?stimulation"
+   ]
+  },
+  {
+   "id": "acne-skin-drugs",
+   "title": "Acne: sebum, blocked follicles, bacteria and inflammation",
+   "blurb": "Interactive figure: isotretinoin, topical retinoids, benzoyl peroxide and antibiotics in acne",
+   "page": "prep/figures/acne-skin-drugs.html",
+   "drugs": {
+    "isotretinoin": "d=1",
+    "acitretin": "d=1",
+    "alitretinoin": "d=1",
+    "tretinoin": "d=2",
+    "adapalene": "d=2",
+    "tazarotene": "d=2",
+    "trifarotene": "d=2",
+    "benzoyl": "d=3",
+    "doxycycline": "d=4",
+    "clindamycin": "d=4",
+    "minocycline": "d=4",
+    "lymecycline": "d=4",
+    "erythromycin": "d=4"
+   },
+   "terms": [
+    "acne (?:drugs?|treatment|therapy)",
+    "retinoids?",
+    "comedolytics?",
+    "anti[- ]?acne"
+   ]
+  },
+  {
+   "id": "cough-mucus-drugs",
+   "title": "Cough and mucus: suppressants, expectorants and mucolytics",
+   "blurb": "Interactive figure: antitussives, expectorants and mucolytics",
+   "page": "prep/figures/cough-mucus-drugs.html",
+   "drugs": {
+    "codeine": "d=1",
+    "dextromethorphan": "d=1",
+    "pholcodine": "d=1",
+    "noscapine": "d=1",
+    "benzonatate": "d=1",
+    "levodropropizine": "d=1",
+    "acetylcysteine": "d=2",
+    "carbocisteine": "d=2",
+    "bromhexine": "d=2",
+    "ambroxol": "d=2",
+    "erdosteine": "d=2",
+    "guaifenesin": "d=3",
+    "guaiphenesin": "d=3"
+   },
+   "terms": [
+    "antitussives?",
+    "expectorants?",
+    "mucolytics?",
+    "cough (?:suppressants?|drugs?|syrup)"
+   ]
+  },
+  {
+   "id": "antidotes-specific",
+   "title": "More antidotes: fomepizole, protamine, digoxin Fab, hydroxocobalamin, methylene blue and glucagon",
+   "blurb": "Interactive figure: fomepizole, protamine, digoxin Fab, hydroxocobalamin, methylene blue and glucagon",
+   "page": "prep/figures/antidotes-specific.html",
+   "drugs": {
+    "fomepizole": "d=1",
+    "ethanol": "d=1",
+    "protamine": "d=2",
+    "digifab": "d=3",
+    "digibind": "d=3",
+    "hydroxocobalamin": "d=4",
+    "thiosulphate": "d=4",
+    "thiosulfate": "d=4",
+    "methylene": "d=5",
+    "glucagon": "d=6"
+   },
+   "terms": [
+    "antidotes?",
+    "methanol poisoning",
+    "ethylene glycol",
+    "cyanide poisoning",
+    "methaemoglobinaemia",
+    "methemoglobinemia",
+    "digoxin toxicity",
+    "beta[- ]?blocker overdose"
+   ]
+  },
+  {
+   "id": "dependence-drugs",
+   "title": "Nicotine and alcohol dependence drugs: reward, craving and acetaldehyde",
+   "blurb": "Interactive figure: nicotine replacement, varenicline, naltrexone, acamprosate and disulfiram",
+   "page": "prep/figures/dependence-drugs.html",
+   "drugs": {
+    "nicotine": "d=1",
+    "varenicline": "d=2",
+    "cytisine": "d=2",
+    "bupropion": "d=2",
+    "naltrexone": "d=3",
+    "acamprosate": "d=3",
+    "baclofen": "d=3",
+    "disulfiram": "d=4"
+   },
+   "terms": [
+    "nicotine replacement",
+    "smoking cessation",
+    "alcohol dependence (?:drugs?|treatment)",
+    "anti[- ]?craving",
+    "aversive therapy"
+   ]
+  },
+  {
+   "id": "anti-obesity-drugs",
+   "title": "Weight-loss drugs: appetite, fat absorption and energy use",
+   "blurb": "Interactive figure: GLP-1 agonists, phentermine and orlistat",
+   "page": "prep/figures/anti-obesity-drugs.html",
+   "drugs": {
+    "orlistat": "d=3",
+    "phentermine": "d=2",
+    "diethylpropion": "d=2",
+    "liraglutide": "d=1",
+    "semaglutide": "d=1",
+    "tirzepatide": "d=1",
+    "sibutramine": "d=2",
+    "lorcaserin": "d=2"
+   },
+   "terms": [
+    "anti[- ]?obesity",
+    "weight[- ]?loss drugs?",
+    "anorectic",
+    "appetite suppressants?",
+    "obesity (?:drugs?|treatment|pharmacotherapy)"
+   ]
+  },
+  {
+   "id": "chemotherapy-supportive-drugs",
+   "title": "Rescue and protective drugs used with chemotherapy",
+   "blurb": "Interactive figure: leucovorin, mesna, rasburicase and filgrastim",
+   "page": "prep/figures/chemotherapy-supportive-drugs.html",
+   "drugs": {
+    "leucovorin": "d=1",
+    "folinic": "d=1",
+    "levoleucovorin": "d=1",
+    "mesna": "d=2",
+    "rasburicase": "d=3",
+    "filgrastim": "d=4",
+    "pegfilgrastim": "d=4",
+    "lenograstim": "d=4",
+    "dexrazoxane": "d=1",
+    "amifostine": "d=2"
+   },
+   "terms": [
+    "chemoprotect(?:ive|ants?)",
+    "rescue (?:therapy|drug)",
+    "tumou?r lysis",
+    "febrile neutropenia",
+    "G[- ]?CSF",
+    "growth factor support"
+   ]
+  },
+  {
+   "id": "ms-immunotherapy",
+   "title": "Multiple sclerosis disease-modifying drugs",
+   "blurb": "Interactive figure: interferon beta, fingolimod, natalizumab and anti-CD20 antibodies",
+   "page": "prep/figures/ms-immunotherapy.html",
+   "drugs": {
+    "interferon": "d=1",
+    "glatiramer": "d=1",
+    "fingolimod": "d=2",
+    "siponimod": "d=2",
+    "ozanimod": "d=2",
+    "ponesimod": "d=2",
+    "natalizumab": "d=3",
+    "ocrelizumab": "d=4",
+    "ofatumumab": "d=4",
+    "rituximab": "d=4",
+    "ublituximab": "d=4"
+   },
+   "terms": [
+    "multiple sclerosis (?:drugs?|treatment|therapy)",
+    "disease[- ]modifying (?:drugs?|therapy) (?:for|in) (?:multiple sclerosis|MS)",
+    "DMTs?",
+    "S1P (?:receptor )?modulators?"
    ]
   }
  ]

@@ -1,0 +1,312 @@
+{
+ "id": "chemotherapy-supportive-drugs",
+ "title": "Rescue and protective drugs used with chemotherapy",
+ "ariaLabel": "Schematic of four chemotherapy toxicities and their protective drugs: methotrexate blocks folate in normal cells too and leucovorin rescues them; cyclophosphamide's acrolein irritates the bladder and mesna binds it; tumour breakdown makes uric acid and rasburicase breaks it down; and chemotherapy lowers neutrophils which filgrastim raises. Antiemetics are shown in their own figure.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Chemotherapy intensity",
+  "a": [
+   0.4,
+   0.7,
+   1.0
+  ],
+  "names": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "ticks": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no protective drug"
+  },
+  {
+   "label": "leucovorin type",
+   "status": "leucovorin",
+   "blocks": {
+    "e_leu": 0.9
+   }
+  },
+  {
+   "label": "mesna type",
+   "status": "mesna",
+   "blocks": {
+    "e_mes": 0.9
+   }
+  },
+  {
+   "label": "rasburicase type",
+   "status": "rasburicase",
+   "blocks": {
+    "e_ras": 0.9
+   }
+  },
+  {
+   "label": "filgrastim type (G-CSF)",
+   "status": "filgrastim",
+   "blocks": {
+    "e_gcsf": 0.85
+   }
+  },
+  {
+   "label": "all four together",
+   "status": "all four together",
+   "blocks": {
+    "e_leu": 0.9,
+    "e_mes": 0.9,
+    "e_ras": 0.9,
+    "e_gcsf": 0.85
+   }
+  }
+ ],
+ "readout": "Treatment toxicity: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "low",
+    "moderate",
+    "marked"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Intensity: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Treatment toxicity: marked"
+  ],
+  [
+   1,
+   1,
+   "Treatment toxicity: moderate"
+  ],
+  [
+   1,
+   2,
+   "Treatment toxicity: moderate"
+  ],
+  [
+   1,
+   3,
+   "Treatment toxicity: moderate"
+  ],
+  [
+   1,
+   4,
+   "Treatment toxicity: moderate"
+  ],
+  [
+   1,
+   5,
+   "Treatment toxicity: low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Methotrexate effect",
+   "sub": "folate block",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Methotrexate blocks dihydrofolate reductase in tumour and normal cells."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Folate-deficient normal cells",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Mucositis and marrow damage in normal tissue."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Acrolein",
+   "sub": "from cyclophosphamide",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Cyclophosphamide and ifosfamide make acrolein, which is toxic to the bladder lining."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Bladder irritation",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Haemorrhagic cystitis."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Tumour breakdown",
+   "sub": "uric acid",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Rapid tumour cell death releases purines that become uric acid."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Uric acid high",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Risk of kidney injury in tumour lysis syndrome."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Neutrophil production",
+   "sub": "bone marrow",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Chemotherapy suppresses the marrow so neutrophils fall."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Neutropenia",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Low neutrophils and infection risk."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.2
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Treatment toxicity",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the toxicities of chemotherapy that these drugs prevent. The figure shows four separate toxicities side by side and each protective drug acts only on its own."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_leu",
+   "from": "s0",
+   "to": "m0",
+   "label": "folate rescue",
+   "info": "Leucovorin (folinic acid) supplies the reduced folate that methotrexate blocks, so normal cells are rescued while the tumour is not (timing matters). It is also given with fluorouracil to raise its effect."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mes",
+   "from": "s1",
+   "to": "m1",
+   "label": "bladder contact",
+   "info": "Mesna is a thiol that is concentrated in urine and binds acrolein, preventing haemorrhagic cystitis. It does not protect other organs. Fluids also help."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_ras",
+   "from": "s2",
+   "to": "m2",
+   "label": "uric acid",
+   "info": "Rasburicase is an enzyme (urate oxidase) that turns uric acid into allantoin, which is soluble. It is used for tumour lysis syndrome; allopurinol only prevents new uric acid. It is avoided in G6PD deficiency."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_gcsf",
+   "from": "s3",
+   "to": "m3",
+   "label": "G-CSF receptor",
+   "info": "Filgrastim (G-CSF) pushes marrow progenitors to make neutrophils, shortening neutropenia and lowering infection risk. It can cause bone pain."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Leucovorin rescues normal cells from methotrexate, mesna binds acrolein in the bladder, rasburicase breaks down uric acid, and filgrastim raises neutrophils. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Dexrazoxane for anthracycline heart damage, amifostine, antiemetics (own figure), erythropoietin and transfusion, antimicrobial prophylaxis, timing rules for methotrexate rescue, glucarpidase and monitoring are left out. Toxicity is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Rescue and protective drugs used with chemotherapy",
+  "blurb": "Interactive figure: leucovorin, mesna, rasburicase and filgrastim",
+  "drugs": {
+   "leucovorin": "d=1",
+   "folinic": "d=1",
+   "levoleucovorin": "d=1",
+   "mesna": "d=2",
+   "rasburicase": "d=3",
+   "filgrastim": "d=4",
+   "pegfilgrastim": "d=4",
+   "lenograstim": "d=4",
+   "dexrazoxane": "d=1",
+   "amifostine": "d=2"
+  },
+  "terms": [
+   "chemoprotect(?:ive|ants?)",
+   "rescue (?:therapy|drug)",
+   "tumou?r lysis",
+   "febrile neutropenia",
+   "G[- ]?CSF",
+   "growth factor support"
+  ]
+ }
+}

@@ -1,0 +1,316 @@
+{
+ "id": "acne-skin-drugs",
+ "title": "Acne: sebum, blocked follicles, bacteria and inflammation",
+ "ariaLabel": "Schematic of acne: oil glands make sebum, the hair follicle lining sheds and blocks the follicle, Cutibacterium acnes grows in the plugged follicle, and the immune response causes inflammation. Isotretinoin lowers sebum, topical retinoids normalise follicle shedding, benzoyl peroxide and antibiotics reduce bacteria, and antibiotics and retinoids also lower inflammation.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Disease drive",
+  "a": [
+   0.45,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "severe"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no acne treatment"
+  },
+  {
+   "label": "isotretinoin type (oral retinoid)",
+   "status": "isotretinoin type",
+   "blocks": {
+    "e_seb": 0.9,
+    "e_kera": 0.4,
+    "e_inf": 0.4
+   }
+  },
+  {
+   "label": "topical retinoid type (tretinoin, adapalene)",
+   "status": "topical retinoid",
+   "blocks": {
+    "e_kera": 0.85,
+    "e_inf": 0.3
+   }
+  },
+  {
+   "label": "benzoyl peroxide type",
+   "status": "benzoyl peroxide",
+   "blocks": {
+    "e_bac": 0.85
+   }
+  },
+  {
+   "label": "antibiotic type (doxycycline, clindamycin)",
+   "status": "antibiotic",
+   "blocks": {
+    "e_bac": 0.7,
+    "e_inf": 0.5
+   }
+  },
+  {
+   "label": "topical retinoid plus benzoyl peroxide",
+   "status": "retinoid plus benzoyl peroxide",
+   "blocks": {
+    "e_kera": 0.85,
+    "e_inf": 0.3,
+    "e_bac": 0.85
+   }
+  }
+ ],
+ "readout": "Acne severity: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "clear",
+    "mild",
+    "marked"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Disease drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Acne severity: marked"
+  ],
+  [
+   1,
+   1,
+   "Acne severity: mild"
+  ],
+  [
+   1,
+   2,
+   "Acne severity: mild"
+  ],
+  [
+   1,
+   3,
+   "Acne severity: marked"
+  ],
+  [
+   1,
+   4,
+   "Acne severity: mild"
+  ],
+  [
+   1,
+   5,
+   "Acne severity: mild"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Oil gland drive",
+   "sub": "androgens",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Androgens drive sebaceous glands to make sebum."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Sebum made",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Oil that feeds bacteria and plugs follicles."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Follicle shedding",
+   "sub": "keratinisation",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Cells lining the follicle shed abnormally and stick together."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Plugged follicle",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "A comedone (blackhead or whitehead)."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "C. acnes",
+   "sub": "bacteria",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Cutibacterium acnes grows in the sebum-rich plugged follicle."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Bacteria",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Bacterial load in the follicle."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Immune response",
+   "sub": "inflammation",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "The immune system reacts to bacteria and ruptured follicles."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Inflamed lesion",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Papules, pustules and nodules."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Acne severity",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for acne severity."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_seb",
+   "from": "s0",
+   "to": "m0",
+   "label": "sebum production",
+   "info": "Isotretinoin shrinks sebaceous glands and sharply cuts sebum. It is teratogenic, so pregnancy must be prevented. Anti-androgen hormone treatments act here too."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More sebum worsens acne."
+  },
+  {
+   "id": "e_kera",
+   "from": "s1",
+   "to": "m1",
+   "label": "follicle plugging",
+   "info": "Topical retinoids (tretinoin, adapalene) normalise shedding so comedones do not form. They cause dryness and irritation and are avoided in pregnancy."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More plugging worsens acne."
+  },
+  {
+   "id": "e_bac",
+   "from": "s2",
+   "to": "m2",
+   "label": "bacterial growth",
+   "info": "Benzoyl peroxide kills the bacteria and does not cause resistance. Antibiotics (doxycycline, clindamycin) lower bacteria and inflammation but should be combined with benzoyl peroxide to limit resistance."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More bacteria worsens acne."
+  },
+  {
+   "id": "e_inf",
+   "from": "s3",
+   "to": "m3",
+   "label": "inflammation",
+   "info": "Tetracycline antibiotics and retinoids also lower inflammation. Oral steroids are rarely used."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "More inflammation worsens acne."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Isotretinoin lowers sebum, topical retinoids stop follicle plugging, benzoyl peroxide kills bacteria, and antibiotics lower bacteria and inflammation. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Hormonal treatment (oestrogen-progestin, spironolactone), azelaic acid, isotretinoin monitoring (lipids, liver, mood) and the pregnancy prevention programme, scarring, rosacea, resistance, other skin conditions and sun protection are left out. Acne severity is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Acne: sebum, blocked follicles, bacteria and inflammation",
+  "blurb": "Interactive figure: isotretinoin, topical retinoids, benzoyl peroxide and antibiotics in acne",
+  "drugs": {
+   "isotretinoin": "d=1",
+   "acitretin": "d=1",
+   "alitretinoin": "d=1",
+   "tretinoin": "d=2",
+   "adapalene": "d=2",
+   "tazarotene": "d=2",
+   "trifarotene": "d=2",
+   "benzoyl": "d=3",
+   "doxycycline": "d=4",
+   "clindamycin": "d=4",
+   "minocycline": "d=4",
+   "lymecycline": "d=4",
+   "erythromycin": "d=4"
+  },
+  "terms": [
+   "acne (?:drugs?|treatment|therapy)",
+   "retinoids?",
+   "comedolytics?",
+   "anti[- ]?acne"
+  ]
+ }
+}

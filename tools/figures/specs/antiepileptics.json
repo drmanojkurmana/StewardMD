@@ -56,6 +56,22 @@
     "e_na": 0.4,
     "e_gaba": -0.5
    }
+  },
+  {
+   "label": "T-type calcium channel blocker (ethosuximide type, absence seizures)",
+   "status": "T-type calcium channel blocker",
+   "blocks": {
+    "e_rel": 0.6
+   }
+  },
+  {
+   "label": "multiple-action drug (topiramate type)",
+   "status": "multiple-action drug",
+   "blocks": {
+    "e_na": 0.35,
+    "e_gaba": -0.4,
+    "e_rel": 0.2
+   }
   }
  ],
  "readout": "seizure activity {0}",
@@ -193,7 +209,7 @@
  "sources": [
   "<strong>Where each class acts.</strong> Sodium channel blockers (phenytoin, carbamazepine, lamotrigine), calcium channel alpha-2-delta ligands (gabapentin, pregabalin), SV2A binding (levetiracetam), and GABA enhancers (benzodiazepines, barbiturates, vigabatrin, tiagabine, valproate in part). This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
  ],
- "simplified": "Ethosuximide and T-type calcium channels in absence seizures, AMPA and NMDA receptor drugs, carbonic anhydrase and other mechanisms, kinetics and drug interactions, seizure types and drug choice by type (including drugs that worsen some types), teratogenicity and the many adverse effects are left out. Excitation and inhibition are added in a simple balance. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "simplified": "Ethosuximide and T-type calcium channels in absence seizures, AMPA and NMDA receptor drugs, carbonic anhydrase and other mechanisms, kinetics and drug interactions, seizure types and drug choice by type (including drugs that worsen some types), teratogenicity and the many adverse effects are left out. Excitation and inhibition are added in a simple balance. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them. Ethosuximide is drawn as a calcium-channel step and topiramate as a mix of effects; thalamic circuits, carbonic anhydrase and AMPA actions are not drawn.",
  "registry": {
   "title": "Antiseizure drugs: slowing excitation, raising inhibition",
   "blurb": "Interactive figure: sodium channel blockers, release reducers and GABA enhancers",
@@ -203,7 +219,7 @@
    "oxcarbazepine": "d=1",
    "lamotrigine": "d=1",
    "lacosamide": "d=1",
-   "zonisamide": "d=1",
+   "zonisamide": "d=6",
    "rufinamide": "d=1",
    "gabapentin": "d=2",
    "pregabalin": "d=2",
@@ -220,7 +236,11 @@
    "vigabatrin": "d=3",
    "tiagabine": "d=3",
    "valproate": "d=4",
-   "valproic": "d=4"
+   "valproic": "d=4",
+   "ethosuximide": "d=5",
+   "methsuximide": "d=5",
+   "topiramate": "d=6",
+   "felbamate": "d=6"
   },
   "terms": [
    "antiepileptics?",
@@ -228,7 +248,9 @@
    "antiseizure",
    "anticonvulsants?",
    "antiepileptic drugs?",
-   "AEDs?"
+   "AEDs?",
+   "absence seizures?",
+   "T[- ]type calcium"
   ]
  }
 }

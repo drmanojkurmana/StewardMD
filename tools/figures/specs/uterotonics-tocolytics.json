@@ -69,6 +69,14 @@
    "blocks": {
     "e_pg": 0.85
    }
+  },
+  {
+   "label": "mifepristone type (progesterone blocker, sensitises to prostaglandins)",
+   "status": "mifepristone",
+   "blocks": {
+    "e_pg": -0.8,
+    "e_oxt": -0.3
+   }
   }
  ],
  "readout": "Uterine contraction: {0}",
@@ -121,6 +129,11 @@
   [
    1,
    6,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   7,
    "Uterine contraction: moderate"
   ]
  ],
@@ -308,7 +321,10 @@
    "ergometrine": "d=3",
    "methylergometrine": "d=3",
    "ergonovine": "d=3",
-   "atosiban": "d=4"
+   "atosiban": "d=4",
+   "nifedipine": "d=5",
+   "indomethacin": "d=6",
+   "mifepristone": "d=7"
   },
   "terms": [
    "uterotonics?",

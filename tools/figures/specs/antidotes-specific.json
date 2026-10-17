@@ -1,0 +1,397 @@
+{
+ "id": "antidotes-specific",
+ "title": "More antidotes: fomepizole, protamine, digoxin Fab, hydroxocobalamin, methylene blue and glucagon",
+ "ariaLabel": "Schematic of six poisonings and the antidote that acts on each: toxic alcohols are turned into toxic acids by alcohol dehydrogenase, which fomepizole blocks; heparin's anticoagulant effect is neutralised by protamine; digoxin is bound by digoxin antibody fragments; cyanide stops cell respiration and hydroxocobalamin binds it; methaemoglobin cannot carry oxygen and methylene blue reduces it back; and beta-blocker overdose lowers cyclic AMP which glucagon restores.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Poison exposure",
+  "a": [
+   0.5,
+   0.75,
+   1.0
+  ],
+  "names": [
+   "small",
+   "moderate",
+   "large"
+  ],
+  "ticks": [
+   "small",
+   "moderate",
+   "large"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antidote"
+  },
+  {
+   "label": "fomepizole",
+   "status": "fomepizole",
+   "blocks": {
+    "e_adh": 0.9
+   }
+  },
+  {
+   "label": "protamine",
+   "status": "protamine",
+   "blocks": {
+    "e_prot": 0.9
+   }
+  },
+  {
+   "label": "digoxin Fab",
+   "status": "digoxin Fab",
+   "blocks": {
+    "e_fab": 0.9
+   }
+  },
+  {
+   "label": "hydroxocobalamin",
+   "status": "hydroxocobalamin",
+   "blocks": {
+    "e_cn": 0.9
+   }
+  },
+  {
+   "label": "methylene blue",
+   "status": "methylene blue",
+   "blocks": {
+    "e_mb": 0.9
+   }
+  },
+  {
+   "label": "glucagon",
+   "status": "glucagon",
+   "blocks": {
+    "e_glu": 0.85
+   }
+  }
+ ],
+ "readout": "Poisoning effect: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "largely reversed",
+    "partly reversed",
+    "marked"
+   ],
+   "cuts": [
+    0.35,
+    0.7
+   ]
+  }
+ ],
+ "status": "Exposure: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Poisoning effect: marked"
+  ],
+  [
+   1,
+   1,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   2,
+   "Poisoning effect: marked"
+  ],
+  [
+   1,
+   3,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   4,
+   "Poisoning effect: partly reversed"
+  ],
+  [
+   1,
+   5,
+   "Poisoning effect: marked"
+  ],
+  [
+   1,
+   6,
+   "Poisoning effect: partly reversed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Methanol or glycol",
+   "sub": "toxic alcohol",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Methanol and ethylene glycol are only mildly toxic until they are broken down."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Toxic acids",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Acids that cause acidosis, blindness and kidney injury."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Heparin effect",
+   "sub": "in the blood",
+   "x": 105,
+   "y": 181,
+   "rx": 92,
+   "info": "The anticoagulant effect of heparin."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Anticoagulation",
+   "x": 480,
+   "y": 181,
+   "rx": 100,
+   "info": "Impaired clotting from heparin."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Digoxin",
+   "sub": "at the heart",
+   "x": 105,
+   "y": 267,
+   "rx": 92,
+   "info": "Digoxin bound to the sodium-potassium pump."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Digoxin toxicity",
+   "x": 480,
+   "y": 267,
+   "rx": 100,
+   "info": "Arrhythmia and raised potassium from digoxin."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Cyanide",
+   "sub": "blocks respiration",
+   "x": 105,
+   "y": 353,
+   "rx": 92,
+   "info": "Cyanide blocks cytochrome oxidase so cells cannot use oxygen."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Cell asphyxia",
+   "x": 480,
+   "y": 353,
+   "rx": 100,
+   "info": "Cells starve for oxygen despite normal blood oxygen."
+  },
+  {
+   "id": "s4",
+   "kind": "source",
+   "label": "Methaemoglobin",
+   "sub": "oxidised haemoglobin",
+   "x": 105,
+   "y": 439,
+   "rx": 92,
+   "info": "Haemoglobin with oxidised iron cannot carry oxygen."
+  },
+  {
+   "id": "m4",
+   "kind": "mid",
+   "label": "Oxygen carrying lost",
+   "x": 480,
+   "y": 439,
+   "rx": 100,
+   "info": "Blue-brown skin and low oxygen carrying."
+  },
+  {
+   "id": "s5",
+   "kind": "source",
+   "label": "Beta-blocker overdose",
+   "sub": "lowers cAMP",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "An overdose of a beta-blocker lowers cAMP in the heart."
+  },
+  {
+   "id": "m5",
+   "kind": "mid",
+   "label": "Heart failure effect",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Slow heart rate and low pressure from low cAMP."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.15
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ],
+    [
+     "n:m4",
+     0.15
+    ],
+    [
+     "n:m5",
+     0.2
+    ]
+   ],
+   "label": "Poisoning effect",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the harm done by the poison. The figure shows six separate poisonings side by side, and each antidote reverses only its own."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_adh",
+   "from": "s0",
+   "to": "m0",
+   "label": "alcohol dehydrogenase",
+   "info": "Fomepizole blocks alcohol dehydrogenase so the toxic acids (formic acid, glycolate and oxalate) are not made. Ethanol competes for the same enzyme and was used before."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_prot",
+   "from": "s1",
+   "to": "m1",
+   "label": "heparin binding",
+   "info": "Protamine is a positively charged protein that binds the negatively charged heparin and cancels it. It neutralises unfractionated heparin fully and low molecular weight heparin only partly."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_fab",
+   "from": "s2",
+   "to": "m2",
+   "label": "digoxin binding",
+   "info": "Digoxin-specific antibody fragments (Fab) bind free digoxin and carry it out in urine. They are used for serious arrhythmia from digoxin toxicity."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_cn",
+   "from": "s3",
+   "to": "m3",
+   "label": "cyanide binding",
+   "info": "Hydroxocobalamin (vitamin B12a) binds cyanide to make cyanocobalamin, which is passed out in urine. Sodium nitrite and thiosulphate are alternatives."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mb",
+   "from": "s4",
+   "to": "m4",
+   "label": "reduction of iron",
+   "info": "Methylene blue is reduced in red cells and then reduces methaemoglobin back to haemoglobin. It is avoided in G6PD deficiency."
+  },
+  {
+   "id": "c4",
+   "from": "m4",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_glu",
+   "from": "s5",
+   "to": "m5",
+   "label": "glucagon receptor",
+   "info": "Glucagon raises cAMP through its own receptor, bypassing the blocked beta receptors, and raises heart rate and force."
+  },
+  {
+   "id": "c5",
+   "from": "m5",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Fomepizole blocks alcohol dehydrogenase, protamine neutralises heparin, digoxin Fab binds digoxin, hydroxocobalamin binds cyanide, methylene blue reduces methaemoglobin, and glucagon raises cAMP in beta-blocker overdose. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Naloxone, acetylcysteine, atropine with pralidoxime and vitamin K (own figure), flumazenil, activated charcoal, dialysis, timing, supportive care, poison centre advice and doses are left out. Poisoning effect is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "More antidotes: fomepizole, protamine, digoxin Fab, hydroxocobalamin, methylene blue and glucagon",
+  "blurb": "Interactive figure: fomepizole, protamine, digoxin Fab, hydroxocobalamin, methylene blue and glucagon",
+  "drugs": {
+   "fomepizole": "d=1",
+   "ethanol": "d=1",
+   "protamine": "d=2",
+   "digifab": "d=3",
+   "digibind": "d=3",
+   "hydroxocobalamin": "d=4",
+   "thiosulphate": "d=4",
+   "thiosulfate": "d=4",
+   "methylene": "d=5",
+   "glucagon": "d=6"
+  },
+  "terms": [
+   "antidotes?",
+   "methanol poisoning",
+   "ethylene glycol",
+   "cyanide poisoning",
+   "methaemoglobinaemia",
+   "methemoglobinemia",
+   "digoxin toxicity",
+   "beta[- ]?blocker overdose"
+  ]
+ }
+}

@@ -56,6 +56,13 @@
     "e_nach": 0.6,
     "e_ache": 0.85
    }
+  },
+  {
+   "label": "non-depolarising blocker, then sugammadex (encapsulates the blocker)",
+   "status": "blocker then sugammadex",
+   "blocks": {
+    "e_nach": 0.1
+   }
   }
  ],
  "readout": "Muscle contraction: {0}",
@@ -215,7 +222,8 @@
    "succinylcholine": "d=2",
    "neostigmine": "d=3",
    "pyridostigmine": "d=3",
-   "edrophonium": "d=3"
+   "edrophonium": "d=3",
+   "sugammadex": "d=5"
   },
   "terms": [
    "neuromuscular block(?:ers?|ing agents?|ade)",

@@ -1,0 +1,370 @@
+{
+ "id": "sex-steroid-replacement",
+ "title": "Sex hormone replacement: testosterone, oestrogen and progestin",
+ "ariaLabel": "Schematic of sex steroid replacement: testosterone acts on androgen receptors, oestrogen acts on oestrogen receptors in bone, brain and vagina and also makes the womb lining grow, and a progestin acting on progesterone receptors protects the lining. Oestrogen given alone raises the risk of womb lining overgrowth, so women with a womb are given a progestin as well.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Natural hormone level",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no hormone replacement"
+  },
+  {
+   "label": "testosterone type (androgen)",
+   "status": "testosterone type",
+   "blocks": {
+    "e_ar": -1.5
+   }
+  },
+  {
+   "label": "oestrogen alone",
+   "status": "oestrogen alone",
+   "blocks": {
+    "e_er": -1.5,
+    "e_lin": -4.0
+   }
+  },
+  {
+   "label": "oestrogen plus progestin",
+   "status": "oestrogen plus progestin",
+   "blocks": {
+    "e_er": -1.5,
+    "e_lin": -4.0,
+    "e_pr": -12.0
+   }
+  },
+  {
+   "label": "progestin alone",
+   "status": "progestin alone",
+   "blocks": {
+    "e_pr": -12.0
+   }
+  },
+  {
+   "label": "danazol type (androgenic)",
+   "status": "danazol type",
+   "blocks": {
+    "e_ar": -1.0
+   }
+  }
+ ],
+ "readout": "Androgen {0} · oestrogen {1} · womb lining {2}",
+ "outputs": [
+  {
+   "node": "out0",
+   "words": [
+    "low",
+    "normal",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  },
+  {
+   "node": "out1",
+   "words": [
+    "low",
+    "normal",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  },
+  {
+   "node": "out2",
+   "words": [
+    "low",
+    "raised",
+    "high"
+   ],
+   "cuts": [
+    0.15,
+    0.3
+   ]
+  }
+ ],
+ "status": "Hormone level: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Androgen normal · oestrogen low · womb lining low"
+  ],
+  [
+   1,
+   1,
+   "Androgen high · oestrogen low · womb lining low"
+  ],
+  [
+   1,
+   2,
+   "Androgen normal · oestrogen high · womb lining high"
+  ],
+  [
+   1,
+   3,
+   "Androgen normal · oestrogen high · womb lining low"
+  ],
+  [
+   1,
+   4,
+   "Androgen normal · oestrogen low · womb lining low"
+  ],
+  [
+   1,
+   5,
+   "Androgen high · oestrogen low · womb lining low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0_0",
+   "kind": "source",
+   "fixed": 0.35,
+   "label": "Androgen signal",
+   "sub": "testosterone",
+   "x": 105,
+   "y": 95,
+   "rx": 92,
+   "info": "Testosterone and its active form dihydrotestosterone acting on the androgen receptor."
+  },
+  {
+   "id": "m0_0",
+   "kind": "mid",
+   "label": "Androgen action",
+   "x": 480,
+   "y": 95,
+   "rx": 100,
+   "info": "Androgen receptor signalling."
+  },
+  {
+   "id": "s1_0",
+   "kind": "source",
+   "fixed": 0.3,
+   "label": "Oestrogen signal",
+   "sub": "oestradiol",
+   "x": 105,
+   "y": 238,
+   "rx": 92,
+   "info": "Oestradiol acting on the oestrogen receptor in bone, brain, vagina and womb."
+  },
+  {
+   "id": "m1_0",
+   "kind": "mid",
+   "label": "Oestrogen action",
+   "x": 480,
+   "y": 238,
+   "rx": 100,
+   "info": "Oestrogen receptor signalling."
+  },
+  {
+   "id": "s2_0",
+   "kind": "source",
+   "fixed": 0.1,
+   "label": "Oestrogen drive",
+   "sub": "on the lining",
+   "x": 105,
+   "y": 382,
+   "rx": 92,
+   "info": "Oestrogen makes the womb lining thicken."
+  },
+  {
+   "id": "m2_0",
+   "kind": "mid",
+   "label": "Lining growth",
+   "x": 480,
+   "y": 382,
+   "rx": 100,
+   "info": "Thickening of the womb lining."
+  },
+  {
+   "id": "s2_1",
+   "kind": "source",
+   "fixed": 0.05,
+   "label": "Progestin protection",
+   "sub": "on the lining",
+   "x": 105,
+   "y": 525,
+   "rx": 92,
+   "info": "Progestin turns the lining from growth to shedding."
+  },
+  {
+   "id": "m2_1",
+   "kind": "mid",
+   "label": "Lining protected",
+   "x": 480,
+   "y": 525,
+   "rx": 100,
+   "info": "Protection of the womb lining."
+  },
+  {
+   "id": "out0",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0_0",
+     0.8
+    ]
+   ],
+   "label": "Androgen effect",
+   "x": 820,
+   "y": 95,
+   "rx": 100,
+   "info": "A teaching score for androgen action (muscle, libido, body hair, voice)."
+  },
+  {
+   "id": "out1",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m1_0",
+     0.8
+    ]
+   ],
+   "label": "Oestrogen effect",
+   "x": 820,
+   "y": 238,
+   "rx": 100,
+   "info": "A teaching score for oestrogen action on bone, vessels and menopausal symptoms (hot flushes, vaginal dryness)."
+  },
+  {
+   "id": "out2",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m2_0",
+     0.8
+    ],
+    [
+     "n:m2_1",
+     -0.8
+    ]
+   ],
+   "label": "Womb lining risk",
+   "x": 820,
+   "y": 454,
+   "rx": 100,
+   "info": "A teaching score for overgrowth of the womb lining. Oestrogen alone makes the lining grow and raises the risk of hyperplasia and cancer; a progestin balances it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_ar",
+   "from": "s0_0",
+   "to": "m0_0",
+   "label": "androgen receptor",
+   "info": "Testosterone replacement and androgenic drugs such as danazol act on the androgen receptor. High levels cause acne, hair growth, polycythaemia and, in women, virilisation."
+  },
+  {
+   "id": "c0_0",
+   "from": "m0_0",
+   "to": "out0",
+   "blockable": false,
+   "info": "More androgen action raises the androgen effect."
+  },
+  {
+   "id": "e_er",
+   "from": "s1_0",
+   "to": "m1_0",
+   "label": "oestrogen receptor",
+   "info": "Menopausal hormone therapy gives oestrogen for hot flushes, vaginal dryness and bone protection. Tibolone has oestrogen, progestin and androgen effects."
+  },
+  {
+   "id": "c1_0",
+   "from": "m1_0",
+   "to": "out1",
+   "blockable": false,
+   "info": "More oestrogen action raises the oestrogen effect."
+  },
+  {
+   "id": "e_lin",
+   "from": "s2_0",
+   "to": "m2_0",
+   "label": "lining growth",
+   "info": "Oestrogen makes the lining grow. A progestin (or a progestin-releasing device) counters this, which is why women with a womb are given oestrogen with a progestin."
+  },
+  {
+   "id": "c2_0",
+   "from": "m2_0",
+   "to": "out2",
+   "blockable": false,
+   "info": "More growth raises the lining risk."
+  },
+  {
+   "id": "e_pr",
+   "from": "s2_1",
+   "to": "m2_1",
+   "label": "progesterone receptor",
+   "info": "Progesterone and progestins act on the lining to stop growth and make it shed."
+  },
+  {
+   "id": "c2_1",
+   "from": "m2_1",
+   "to": "out2",
+   "blockable": false,
+   "info": "More progestin lowers the lining risk."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Testosterone acts on androgen receptors, oestrogen on oestrogen receptors (and makes the womb lining grow), and progestin protects the womb lining. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Transdermal versus oral routes, thrombosis and breast cancer risk, timing of menopause therapy, vaginal oestrogen, selective modulators (own figure), cyproterone and anti-androgens (own figure), puberty induction, gender-affirming care, doping, contraindications and monitoring are left out. The three results are teaching scores. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Sex hormone replacement: testosterone, oestrogen and progestin",
+  "blurb": "Interactive figure: testosterone, oestrogen, progestin and danazol",
+  "drugs": {
+   "testosterone": "d=1",
+   "nandrolone": "d=1",
+   "oxandrolone": "d=1",
+   "estradiol": "d=2",
+   "oestradiol": "d=2",
+   "estrogen": "d=2",
+   "oestrogen": "d=2",
+   "conjugated": "d=2",
+   "estriol": "d=2",
+   "tibolone": "d=3",
+   "progesterone": "d=4",
+   "dydrogesterone": "d=4",
+   "norethisterone": "d=4",
+   "medroxyprogesterone": "d=4",
+   "danazol": "d=5"
+  },
+  "terms": [
+   "hormone replacement",
+   "HRT",
+   "menopausal hormone therapy",
+   "hormone therapy",
+   "androgen therapy",
+   "testosterone replacement",
+   "anabolic steroids?"
+  ]
+ }
+}

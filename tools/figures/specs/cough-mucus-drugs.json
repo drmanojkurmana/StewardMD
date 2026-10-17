@@ -1,0 +1,250 @@
+{
+ "id": "cough-mucus-drugs",
+ "title": "Cough and mucus: suppressants, expectorants and mucolytics",
+ "ariaLabel": "Schematic of cough: airway irritation and thick mucus trigger the cough reflex through the cough centre in the brainstem. Codeine and dextromethorphan act on the cough centre to suppress it, guaifenesin loosens mucus, and acetylcysteine, carbocisteine, bromhexine and ambroxol thin it.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Airway irritation",
+  "a": [
+   0.45,
+   0.7,
+   0.95
+  ],
+  "names": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "ticks": [
+   "mild",
+   "moderate",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no cough drug"
+  },
+  {
+   "label": "centrally acting suppressant type (codeine, dextromethorphan)",
+   "status": "cough suppressant",
+   "blocks": {
+    "e_cns": 0.85
+   }
+  },
+  {
+   "label": "mucolytic type (acetylcysteine, carbocisteine, ambroxol)",
+   "status": "mucolytic",
+   "blocks": {
+    "e_mucin": 0.85
+   }
+  },
+  {
+   "label": "expectorant type (guaifenesin)",
+   "status": "expectorant",
+   "blocks": {
+    "e_hyd": -1.5
+   }
+  }
+ ],
+ "readout": "Cough: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "settled",
+    "reduced",
+    "marked"
+   ],
+   "cuts": [
+    0.25,
+    0.5
+   ]
+  }
+ ],
+ "status": "Irritation: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Cough: marked"
+  ],
+  [
+   1,
+   1,
+   "Cough: settled"
+  ],
+  [
+   1,
+   2,
+   "Cough: reduced"
+  ],
+  [
+   1,
+   3,
+   "Cough: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Cough reflex",
+   "sub": "cough centre",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Irritation of the airway triggers signals to the cough centre in the brainstem."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Cough drive",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Signals that cause coughing."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Thick mucus",
+   "sub": "sticky sputum",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Thick, sticky mucus that is hard to clear."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Mucus thick",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Thick mucus that provokes cough and traps infection."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Airway water",
+   "sub": "surface liquid",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "The watery layer on the airway surface."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Airway wet",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Hydrated airway surface."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.5
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     -0.15
+    ]
+   ],
+   "label": "Cough",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for cough."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cns",
+   "from": "s0",
+   "to": "m0",
+   "label": "cough centre",
+   "info": "Codeine acts on opioid receptors, and dextromethorphan on NMDA and sigma receptors, in the cough centre to suppress dry cough. They should not be used when sputum has to be cleared."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More cough drive means more coughing."
+  },
+  {
+   "id": "e_mucin",
+   "from": "s1",
+   "to": "m1",
+   "label": "mucus thickness",
+   "info": "Acetylcholine-related and sulphur-based mucolytics (acetylcysteine, carbocisteine) break mucus bonds or change its make-up, and bromhexine and ambroxol raise its watery part, so it is easier to clear."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Thicker mucus means more cough."
+  },
+  {
+   "id": "e_hyd",
+   "from": "s2",
+   "to": "m2",
+   "label": "surface hydration",
+   "info": "Expectorants such as guaifenesin are thought to raise airway fluid and make mucus easier to cough up, though the evidence is limited. Drinking fluid and humidified air also help.",
+   "w": 0.5
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "A wetter airway means less cough."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Codeine and dextromethorphan suppress the cough centre, guaifenesin loosens mucus, and acetylcysteine, carbocisteine, bromhexine and ambroxol thin it. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Causes of cough and when it needs investigation, ACE inhibitor cough, opioid dependence and constipation with codeine, cough in children and the age limits on these drugs, bronchodilators for wheeze and honey are left out. Cough is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Cough and mucus: suppressants, expectorants and mucolytics",
+  "blurb": "Interactive figure: antitussives, expectorants and mucolytics",
+  "drugs": {
+   "codeine": "d=1",
+   "dextromethorphan": "d=1",
+   "pholcodine": "d=1",
+   "noscapine": "d=1",
+   "benzonatate": "d=1",
+   "levodropropizine": "d=1",
+   "acetylcysteine": "d=2",
+   "carbocisteine": "d=2",
+   "bromhexine": "d=2",
+   "ambroxol": "d=2",
+   "erdosteine": "d=2",
+   "guaifenesin": "d=3",
+   "guaiphenesin": "d=3"
+  },
+  "terms": [
+   "antitussives?",
+   "expectorants?",
+   "mucolytics?",
+   "cough (?:suppressants?|drugs?|syrup)"
+  ]
+ }
+}
