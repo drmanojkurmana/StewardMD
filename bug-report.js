@@ -275,6 +275,8 @@
       "#" + C + " .bc-ic{width:40px;height:40px;border:0;border-radius:12px;background:var(--soft);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}",
       "#" + C + " .bc-ic svg{width:20px;height:20px}",
       "#" + C + " .bc-body{flex:1;overflow-y:auto;padding:16px 16px calc(env(safe-area-inset-bottom,0px) + 20px);-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
+      // iPad (2026-10-16): the cards and the Shake row stretched 1,340 px; a 720 px column in the centre.
+      "@media(min-width:900px){#" + C + " .bc-body>*{max-width:720px;margin-left:auto;margin-right:auto}}",
       "#" + C + " .bc-body.chat{padding-bottom:12px;background:var(--soft)}",
       "#" + C + " .hs-hero{padding:6px 2px 16px}",
       "#" + C + " .hs-hi{font:700 15px var(--f);color:var(--mut)}#" + C + " .hs-q{font:800 26px/1.15 var(--f);letter-spacing:-.02em;margin:2px 0 10px}",

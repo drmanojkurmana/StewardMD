@@ -1498,6 +1498,9 @@
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
       ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      // iPad (2026-10-16): More, All tools, Customize, Settings sheets: a 560 px sheet in the centre (its content is a
+      // 480 px column) instead of a 1,366 px white strip. Offsets, not transform: sheet-drag.js drives the transform.
+      "@media(min-width:700px){.hv-sheet{left:max(0px,calc(50% - 280px));right:max(0px,calc(50% - 280px))}}",
       // BUG (2026-08-23, WhatsApp bug report): .hv-sheet (the "More" sheet + every other sheet
       // openSheet() builds) is appended to document.body, not #homeV2 - so the dark-mode token
       // overrides scoped to "body.dark #homeV2" never reached it, and the sheet stayed light-

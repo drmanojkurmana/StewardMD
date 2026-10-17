@@ -170,3 +170,7 @@ html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose){background:color
 html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose):active{transform:scale(.94);background:color-mix(in srgb,var(--mk-bg) 78%,transparent)!important;box-shadow:inset 0 1px 2px rgba(0,0,0,.18),0 1px 2px rgba(0,0,0,.10)!important}
 html body #maikSheet.maik-polished #maikClose{box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 1px 2px rgba(0,0,0,.14),0 6px 16px -6px rgba(0,0,0,.35)!important}
 @media(prefers-reduced-transparency:reduce){html body #maikSheet.maik-polished .maik-hd-btn:not(#maikClose){-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--mk-bg)}}
+
+/* iPad landscape (owner 2026-10-16, iPad pass): the transcript and the composer spanned 1,366 px, the question box was
+   1,324 px wide and your messages sat 300 px from MaiK's. A centred 800 px reading column, like the empty state. */
+@media(min-width:900px){html body #maikSheet.maik-polished .maik-body{padding-left:max(32px,calc(50% - 400px));padding-right:max(32px,calc(50% - 400px))}html body #maikSheet.maik-polished .maik-cmp{padding-left:max(16px,calc(50% - 400px));padding-right:max(16px,calc(50% - 400px))}}

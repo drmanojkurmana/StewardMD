@@ -1036,6 +1036,8 @@
   var _rotateDismissed = false;  // once dismissed (auto or manual), never re-show until next open()
   function showRotateHint() {
     if (_rotateDismissed || !root || root.querySelector("#abgRotate")) return;
+    // A phone hint: on an iPad the portrait grid is already wide enough (2026-10-16).
+    try { var _sc = window.screen || {}; if (Math.min(_sc.width || 0, _sc.height || 0) >= 700) return; } catch (e) {}
     // Once per device: a hint that returns on every portrait open only covers the screen.
     try { if (localStorage.getItem("smd_abg_rotate_seen") === "1") return; localStorage.setItem("smd_abg_rotate_seen", "1"); } catch (e) {}
     var h = document.createElement("div");
