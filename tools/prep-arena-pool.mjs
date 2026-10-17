@@ -24,7 +24,6 @@ const OUT = arg("--out", ""), APPLY = argv.includes("--apply");
 const PER_SUBJECT = 70, FILES_PER_SUBJECT = 16, PER_FILE = 6;
 const tokenFile = path.join(os.homedir(), ".config/stewardmd/tool-token");
 const TOKEN = process.env.SMD_TOOL_TOKEN || (fs.existsSync(tokenFile) ? fs.readFileSync(tokenFile, "utf8").trim() : "");
-if (!TOKEN) { console.error("no tools credential"); process.exit(2); }
 const BASE = (process.env.BASE || "https://stewardmd.in") + "/api/prep/bank/";
 
 export const usable = (it) => !!it && typeof it.q === "string" && it.q.length >= 30 && it.q.length <= 700 && Array.isArray(it.o) && it.o.length === 4 && it.o.every((x) => typeof x === "string" && x.length > 0 && x.length <= 200) &&
@@ -41,6 +40,7 @@ async function pool(items, n, fn) { let i = 0; await Promise.all(Array.from({ le
 
 if (!(import.meta.url === `file://${process.argv[1]}` || process.argv[1].endsWith("prep-arena-pool.mjs"))) { /* imported for tests */ }
 else {
+  if (!TOKEN) { console.error("no tools credential"); process.exit(2); }
   const counts = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/bank/overlay-counts.json"), "utf8")).sets;
   const files = {};   // subject -> [{ set, mid }]
   for (const [set, subs] of Object.entries(counts)) for (const [sid, mods] of Object.entries(subs)) for (const mid of Object.keys(mods)) (files[sid] = files[sid] || []).push({ set, mid });
