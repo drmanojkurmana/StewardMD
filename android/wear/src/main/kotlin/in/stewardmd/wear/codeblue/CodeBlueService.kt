@@ -35,16 +35,30 @@ data class CodeBlueUi(
     val paused: Boolean = false,
     val elapsedSeconds: Int = 0,
     val cycle: Int = 1,
-    val cycleProgress: Float = 0f,   // 0..1 within the current 2-min rhythm-check cycle (drives the ring)
+    val cycleProgress: Float = 0f,   // 0..1 within the current rhythm-check cycle (drives the ring)
     val prompt: String = "",
     val shocks: Int = 0,
+    // v2 additions (all defaulted so existing readers keep working)
+    val mode: CodeMode = CodeMode.Adult,
+    val modeLabel: String = "Adult",
+    val epiLabel: String = "",
+    val epiStatus: EpiStatus = EpiStatus.NotStarted,
+    val epiCount: Int = 0,
+    val guidePrompts: List<GuidePrompt> = emptyList(),
+    val rosc: Boolean = false,
+    val lastRhythm: String? = null,
+    val compressionLabel: String = "",
+    val checklistTicks: Set<String> = emptySet(),
+    val logEvents: List<CodeEvent> = emptyList(),
+    val canUndo: Boolean = false,
 )
 
 /**
  * Foreground service that owns the compression sensing + code timer so it survives the wrist dropping /
  * screen-off for a whole code (WatchCore used a HealthKit workout session; Wear uses a health foreground
  * service). Feeds [CompressionAnalyzer] (rate only). On start, best-effort alerts the phone Command
- * Center via /api/watch/codeblue. Screen observes [state].
+ * Center via /api/watch/codeblue. Screen observes [state]. v2: the timer/log state lives in
+ * [CodeBlueController] so the UI can log events without binding; snapshots persist here.
  */
 class CodeBlueService : Service(), SensorEventListener {
 
@@ -57,13 +71,60 @@ class CodeBlueService : Service(), SensorEventListener {
         fun start(ctx: Context) =
             ContextCompat.startForegroundService(ctx, Intent(ctx, CodeBlueService::class.java))
 
+        /** Start a fresh code in the given mode. */
+        fun begin(ctx: Context, mode: CodeMode) {
+            CodeBlueController.startNew(mode)
+            start(ctx)
+        }
+
+        /** Resume a snapshotted code, then start the service. */
+        fun resumeFromSnapshot(ctx: Context, snap: SessionSnapshot, nowWallClock: Long): Boolean {
+            if (!CodeBlueController.restore(snap, nowWallClock)) return false
+            start(ctx)
+            return true
+        }
+
         fun stop(ctx: Context) = ctx.stopService(Intent(ctx, CodeBlueService::class.java))
+
+        /** Republish immediately after a UI action so the screen reflects it without waiting a tick. */
+        fun refreshNow() {
+            _state.value = snapshot()
+        }
+
+        private fun snapshot(): CodeBlueUi {
+            val model = CodeBlueController.model
+            val analyzer = CodeBlueController.analyzer
+            val interval = model.cycleIntervalSeconds
+            return CodeBlueUi(
+                active = true,
+                rateCpm = analyzer.rateCpm,
+                zone = RateCoach.zone(analyzer.rateCpm, active = !analyzer.paused),
+                paused = analyzer.paused,
+                elapsedSeconds = model.elapsedSeconds,
+                cycle = model.cycle,
+                cycleProgress = if (interval > 0) (model.elapsedSeconds % interval) / interval.toFloat() else 0f,
+                prompt = model.drugPrompt,
+                shocks = model.shockCount,
+                mode = model.mode,
+                modeLabel = CodeBlueModel.modeLabel(model.mode),
+                epiLabel = model.epiLabel(),
+                epiStatus = model.epiStatus,
+                epiCount = model.adrenalineCount,
+                guidePrompts = model.guidePrompts(),
+                rosc = model.rosc,
+                lastRhythm = model.lastRhythmLabel,
+                compressionLabel = model.compressionLabel(),
+                checklistTicks = model.checklistTicks.toSet(),
+                logEvents = model.events.toList(),
+                canUndo = model.hasDeletedToUndo(),
+            )
+        }
     }
 
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     private lateinit var sensors: SensorManager
-    private val analyzer = CompressionAnalyzer()
-    private val model = CodeBlueModel()
+    private var lastSaveMillis = 0L
+    private var lastSavedEventCount = -1
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -81,11 +142,13 @@ class CodeBlueService : Service(), SensorEventListener {
         scope.launch {
             while (isActive) {
                 delay(1000)
-                model.tick(1)
+                CodeBlueController.model.tick(1)
                 publish()
+                saveSnapshotThrottled(force = false)
             }
         }
         publish()
+        saveSnapshotThrottled(force = true)
     }
 
     override fun onDestroy() {
@@ -96,23 +159,27 @@ class CodeBlueService : Service(), SensorEventListener {
     }
 
     override fun onSensorChanged(event: SensorEvent) {
-        analyzer.add(event.values[2].toDouble())   // z-axis proxy; tuned on device
+        CodeBlueController.analyzer.add(event.values[2].toDouble())   // z-axis proxy; tuned on device
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
 
     private fun publish() {
-        _state.value = CodeBlueUi(
-            active = true,
-            rateCpm = analyzer.rateCpm,
-            zone = RateCoach.zone(analyzer.rateCpm, active = !analyzer.paused),
-            paused = analyzer.paused,
-            elapsedSeconds = model.elapsedSeconds,
-            cycle = model.cycle,
-            cycleProgress = (model.elapsedSeconds % 120) / 120f,
-            prompt = model.drugPrompt,
-            shocks = model.shockCount,
-        )
+        _state.value = snapshot()
+    }
+
+    /**
+     * Saved on every event and at most every 5 s on tick. Called from the 1 s loop: an event
+     * changes the event count (save at once), otherwise throttle to 5 s.
+     */
+    private fun saveSnapshotThrottled(force: Boolean) {
+        val model = CodeBlueController.model
+        val now = System.currentTimeMillis()
+        val eventCount = model.events.size
+        if (!force && eventCount == lastSavedEventCount && now - lastSaveMillis < 5000) return
+        lastSavedEventCount = eventCount
+        lastSaveMillis = now
+        runCatching { CodeBlueSessionStore.forContext(applicationContext).save(model) }
     }
 
     private fun startForegroundCompat() {
