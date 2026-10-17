@@ -1,4 +1,6 @@
 ---
+
+> **Mobile app only. Never call it a web app** (see CLAUDE.md). `stewardmd.in` is the API host, not a product.
 tags: [moc]
 ---
 # StewardMD — Home

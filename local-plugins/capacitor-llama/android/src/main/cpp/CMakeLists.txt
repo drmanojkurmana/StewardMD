@@ -1,7 +1,9 @@
 # llama_jni — native library for the Android on-device MaiK model plugin.
-# Builds cpp/llama_jni.cpp against the vendored llama.cpp submodule (llama-cpp/, PrismML fork tag prism-b10685-7dffb15 since 2026-09-19, was mainline b10502 —
-# the SAME tag as the pinned iOS XCFramework in Package.swift, so both platforms run identical
-# inference code).
+# Builds cpp/llama_jni.cpp against the vendored llama.cpp submodule (llama-cpp/, upstream mainline
+# b11696 / ceefd16 since 2026-10-16, was PrismML fork prism-b10685-7dffb15 — the SAME commit as the
+# pinned iOS XCFramework in Package.swift, so both platforms run identical inference code).
+# REGRESSION: upstream has no PTQ1_0/PQ2_0 types, so Labs pack bonsai2-27b no longer loads (see
+# Package.swift; owner call before device build).
 cmake_minimum_required(VERSION 3.22.1)
 project(llama_jni CXX)
 

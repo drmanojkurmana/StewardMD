@@ -1,0 +1,301 @@
+{
+ "id": "hormonal-contraception",
+ "title": "How hormonal and copper contraceptives stop pregnancy",
+ "ariaLabel": "Schematic of four ways pregnancy is prevented: ovulation, sperm passage through cervical mucus, sperm survival and fertilisation, and implantation in the womb lining. Combined pills suppress the LH surge and so ovulation and also thicken mucus; progestin-only methods mainly thicken mucus and change the womb lining; copper devices harm sperm; emergency levonorgestrel mainly delays ovulation.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Chance of conception drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "ticks": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no contraception"
+  },
+  {
+   "label": "combined pill type",
+   "status": "combined pill",
+   "blocks": {
+    "e_ov": 0.9,
+    "e_mucus": 0.6,
+    "e_imp": 0.5
+   }
+  },
+  {
+   "label": "progestin-only type",
+   "status": "progestin-only",
+   "blocks": {
+    "e_ov": 0.5,
+    "e_mucus": 0.85,
+    "e_imp": 0.6
+   }
+  },
+  {
+   "label": "copper device type",
+   "status": "copper device",
+   "blocks": {
+    "e_sperm": 0.95
+   }
+  },
+  {
+   "label": "emergency levonorgestrel type",
+   "status": "emergency levonorgestrel",
+   "blocks": {
+    "e_ov": 0.8
+   }
+  }
+ ],
+ "readout": "Chance of pregnancy: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "very low",
+    "lowered",
+    "not lowered"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Conception drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Chance of pregnancy: not lowered"
+  ],
+  [
+   1,
+   1,
+   "Chance of pregnancy: lowered"
+  ],
+  [
+   1,
+   2,
+   "Chance of pregnancy: lowered"
+  ],
+  [
+   1,
+   3,
+   "Chance of pregnancy: lowered"
+  ],
+  [
+   1,
+   4,
+   "Chance of pregnancy: lowered"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "LH surge",
+   "sub": "from the pituitary",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "The mid-cycle surge of luteinising hormone that triggers release of the egg."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Egg released",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Ovulation."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Sperm",
+   "sub": "in the vagina",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Sperm deposited in the vagina."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Sperm reach the womb",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Sperm that pass the cervix."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Sperm in the womb",
+   "sub": "and tubes",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Sperm that have reached the womb and tubes."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Sperm able to fertilise",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Sperm that are still motile and able to fertilise an egg."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Fertilised egg",
+   "sub": "if formed",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "A fertilised egg that reaches the womb."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Embryo implants",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "The embryo attaches to the womb lining."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.15
+    ],
+    [
+     "n:m2",
+     0.4
+    ],
+    [
+     "n:m3",
+     0.1
+    ]
+   ],
+   "label": "Chance of pregnancy",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how likely pregnancy is: it needs an egg, sperm that reach and fertilise it, and an embryo that implants."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_ov",
+   "from": "s0",
+   "to": "m0",
+   "label": "ovulation",
+   "info": "Oestrogen with progestin, and progestin alone in higher amounts, suppress the LH surge, so the egg is not released."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mucus",
+   "from": "s1",
+   "to": "m1",
+   "label": "cervical mucus",
+   "info": "Progestin makes cervical mucus thick and scant so sperm cannot pass easily."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_sperm",
+   "from": "s2",
+   "to": "m2",
+   "label": "sperm survival",
+   "info": "A copper device releases copper ions that are toxic to sperm and make fertilisation unlikely."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_imp",
+   "from": "s3",
+   "to": "m3",
+   "label": "implantation",
+   "info": "Progestin thins the womb lining so it is less receptive to an embryo."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Combined pills suppress ovulation and thicken mucus, progestin-only methods mainly thicken mucus, copper devices harm sperm, and levonorgestrel emergency contraception mainly delays ovulation. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Implants, injectables, vaginal rings, barrier methods and sterilisation, ulipristal and the copper device used after unprotected sex, efficacy figures, medical eligibility, risks (thrombosis), drug interactions and counselling are left out. Pregnancy chance is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How hormonal and copper contraceptives stop pregnancy",
+  "blurb": "Interactive figure: combined pills, progestin-only methods, copper devices and emergency contraception",
+  "drugs": {
+   "ethinylestradiol": "d=1",
+   "drospirenone": "d=1",
+   "norethisterone": "d=1",
+   "levonorgestrel": "d=2",
+   "desogestrel": "d=2",
+   "medroxyprogesterone": "d=2",
+   "norgestrel": "d=2",
+   "copper": "d=3",
+   "ulipristal": "d=4"
+  },
+  "terms": [
+   "hormonal contracepti(?:on|ves?)",
+   "oral contraceptives?",
+   "combined oral contraceptives?",
+   "contraceptive pills?",
+   "emergency contracepti(?:on|ves?)",
+   "intrauterine devices?",
+   "IUCDs?"
+  ]
+ }
+}

@@ -1,0 +1,180 @@
+{
+ "id": "beta-blockers",
+ "title": "Beta-blockers at β1 and β2 receptors",
+ "ariaLabel": "Schematic of a sympathetic nerve terminal releasing noradrenaline onto two cells: a cardiac myocyte with beta-1 receptors and an airway smooth muscle cell with beta-2 receptors. Each receptor couples to Gs, which stimulates adenylyl cyclase, raises cAMP and activates PKA. A beta-blocker, non-selective or beta-1 selective, occupies the receptor pocket and reduces the response.",
+ "caption": "Schematic, not to scale. A sympathetic nerve terminal and two target cells drawn side by side to compare receptor types. Activation levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Sympathetic drive",
+  "a": [
+   0.15,
+   0.5,
+   0.85
+  ],
+  "names": [
+   "rest",
+   "stress or exercise",
+   "high sympathetic drive"
+  ],
+  "ticks": [
+   "rest",
+   "stress",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Beta-blocker (generic class)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no beta-blocker"
+  },
+  {
+   "label": "non-selective (propranolol type)",
+   "status": "non-selective beta-blocker",
+   "cols": [
+    {
+     "b": 0.85
+    },
+    {
+     "b": 0.85
+    }
+   ]
+  },
+  {
+   "label": "β1-selective (metoprolol type)",
+   "status": "beta-1 selective beta-blocker",
+   "cols": [
+    {
+     "b": 0.85
+    },
+    {
+     "b": 0.2
+    }
+   ]
+  }
+ ],
+ "readout": "heart {0} · airway {1}",
+ "status": "Sympathetic drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "heart modest · airway modest"
+  ],
+  [
+   1,
+   1,
+   "heart baseline · airway baseline"
+  ],
+  [
+   1,
+   2,
+   "heart baseline · airway modest"
+  ],
+  [
+   2,
+   0,
+   "heart strong · airway strong"
+  ],
+  [
+   2,
+   2,
+   "heart modest · airway strong"
+  ]
+ ],
+ "blockInfo": "A beta-blocker molecule (generic teaching symbol, not a named drug's shape) sitting in the receptor's binding pocket. It occupies the pocket without activating the receptor, so noradrenaline and adrenaline cannot bind where it sits. The block is competitive: a lot of agonist can partly outcompete it. The brightness of the symbol shows how many receptors it holds.",
+ "blockKey": "beta-blocker (generic)",
+ "terminal": {
+  "label": "sympathetic nerve terminal",
+  "vesicle": "noradrenaline",
+  "keyLabel": "noradrenaline / adrenaline",
+  "info": "Sympathetic nerve terminal (a varicosity). Noradrenaline is packed into vesicles and released by exocytosis; most is taken back up by the noradrenaline transporter (not drawn). Adrenaline from the adrenal medulla reaches the same receptors through the blood."
+ },
+ "molecule": {
+  "draw": "noradrenaline",
+  "name": "noradrenaline",
+  "formula": "C<tspan class=\"dr-sub\" dy=\"3\">8</tspan><tspan dy=\"-3\">H</tspan><tspan class=\"dr-sub\" dy=\"3\">11</tspan><tspan dy=\"-3\">NO</tspan><tspan class=\"dr-sub\" dy=\"3\">3</tspan>",
+  "info": "Noradrenaline (norepinephrine), 4-(2-amino-1-hydroxyethyl)benzene-1,2-diol, C8H11NO3 (PubChem CID 439260): a catechol ring with an ethanolamine side chain. It is the main transmitter of sympathetic nerves; adrenaline from the adrenal medulla acts on the same receptors. Flat skeletal formula, bond angles and lengths drawn schematically; stereochemistry is not shown. In the cleft below it is drawn as a small bright dot."
+ },
+ "cols": [
+  {
+   "key": "b1",
+   "name": "β1",
+   "organ": "cardiac myocyte",
+   "gprot": "Gαs",
+   "eff": "AC",
+   "sign": "+",
+   "msg": "cAMP",
+   "end": {
+    "kind": "pka"
+   },
+   "out": "heart rate and force ↑",
+   "sub": "Gαs · stimulates AC · cAMP ↑",
+   "info": {
+    "cell": "Cardiac myocyte (heart muscle cell), patch of its membrane in flat cross-section, schematic and not to scale. The heart carries mostly beta-1 receptors; beta-2 receptors are present too, but beta-1 dominates the rate and force response.",
+    "rec": "Beta-1 adrenoceptor (β1): a seven-transmembrane G protein-coupled receptor. Noradrenaline or adrenaline binds from outside and the receptor couples to Gαs. It is the main adrenergic receptor of the heart.",
+    "end": "Protein kinase A (PKA): two regulatory (R) and two catalytic (C) subunits. cAMP binds R, which frees the C subunits to phosphorylate their targets (drawn: C swings outward). In heart muscle the targets include the L-type calcium channel, so more calcium enters with each beat, which raises rate and force. In anchored complexes the C subunits may stay near R, so this is a simplification."
+   }
+  },
+  {
+   "key": "b2",
+   "name": "β2",
+   "organ": "airway smooth muscle",
+   "gprot": "Gαs",
+   "eff": "AC",
+   "sign": "+",
+   "msg": "cAMP",
+   "end": {
+    "kind": "pka"
+   },
+   "out": "airway relaxes",
+   "sub": "Gαs · stimulates AC · cAMP ↑",
+   "info": {
+    "cell": "Airway smooth muscle cell, patch of its membrane. Airway smooth muscle carries mostly beta-2 receptors; their activation relaxes the muscle and widens the airway. Drawn beside the heart cell only to compare the two receptor types.",
+    "rec": "Beta-2 adrenoceptor (β2): the same kind of seven-transmembrane receptor, also coupled to Gαs. It is the main adrenergic receptor of airway smooth muscle and is found in many other tissues too.",
+    "end": "Protein kinase A (PKA): two regulatory (R) and two catalytic (C) subunits. cAMP binds R, which frees the C subunits to phosphorylate their targets (drawn: C swings outward). In airway smooth muscle PKA phosphorylation leads to relaxation of the muscle. In anchored complexes the C subunits may stay near R, so this is a simplification."
+   }
+  }
+ ],
+ "sources": [
+  "<strong>Beta-blockers and selectivity (well established).</strong> Beta-blockers are competitive antagonists at beta-adrenoceptors. Non-selective agents such as propranolol block both beta-1 and beta-2 receptors; cardioselective agents such as metoprolol act mainly on beta-1 receptors, which sit mainly in the heart, whereas beta-2 receptors are spread across many organs and relax smooth muscle. The negative chronotropic and inotropic effects lower the heart's oxygen demand (<a href=\"https://www.ncbi.nlm.nih.gov/books/NBK532906/\">Beta Blockers, StatPearls</a>).",
+  "<strong>Selectivity is relative, not absolute.</strong> In binding studies on human receptors expressed in one cell line, clinically used antagonists ranged from modest beta-1 selectivity to modest beta-2 selectivity and most showed little selectivity, so “beta-1 selective” describes a preference that can be lost at higher exposure (<a href=\"https://pubmed.ncbi.nlm.nih.gov/15655528/\">Baker 2005, Br J Pharmacol</a>). The figure therefore leaves a small residual block of beta-2 under the beta-1 selective setting and shows no affinity numbers.",
+  "<strong>Receptor and G protein.</strong> Beta-adrenoceptors are seven-transmembrane G protein-coupled receptors; the beta-2 and beta-1 receptor structures were among the first solved for ligand-activated GPCRs (<a href=\"https://doi.org/10.1038/nature08144\">Rosenbaum, Rasmussen &amp; Kobilka 2009, Nature</a>). Activation makes Gαs swap GDP for GTP, Gαs·GTP stimulates adenylyl cyclase, and the GTPase of Gα ends the signal.",
+  "<strong>Heart downstream.</strong> Sympathetic stimulation raises cardiac L-type calcium current through beta-adrenergic signalling, cAMP and PKA phosphorylation of the channel; calcium entry triggers release from the sarcoplasmic reticulum (<a href=\"https://doi.org/10.1038/415198a\">Bers 2002, Nature</a>; PKA raises the open probability of the channel, Ginsburg &amp; Bers 2004).",
+  "<strong>Molecule.</strong> Noradrenaline (norepinephrine), 4-(2-amino-1-hydroxyethyl)benzene-1,2-diol, C8H11NO3 (<a href=\"https://pubchem.ncbi.nlm.nih.gov/compound/439260\">PubChem CID 439260</a>)."
+ ],
+ "simplified": "Only beta-1 in the heart and beta-2 in the airway are drawn. Beta-1 receptors also sit in the kidney and beta-2 receptors also in the heart, vessels, liver and muscle; beta-3 receptors, intrinsic sympathomimetic activity, vasodilating beta-blockers (carvedilol, labetalol), inverse agonism, beta-arrestin signalling, phosphodiesterases, Gi coupling of beta-2 in the heart, receptor desensitisation and the reflex rise in sympathetic drive are all left out. The two cells are drawn side by side only to compare receptor types. Activation levels, the size of the block and timing are illustrative; protein shapes are cartoons, not structures. “Non-selective” and “β1-selective” are drug classes shown as teaching toggles: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take a beta-blocker (for example in asthma or heart failure).",
+ "registry": {
+  "title": "How beta-blockers work",
+  "blurb": "Interactive figure: heart and airway, with or without a blocker",
+  "drugs": {
+   "propranolol": "d=1",
+   "nadolol": "d=1",
+   "timolol": "d=1",
+   "sotalol": "d=1",
+   "pindolol": "d=1",
+   "oxprenolol": "d=1",
+   "penbutolol": "d=1",
+   "carteolol": "d=1",
+   "levobunolol": "d=1",
+   "bopindolol": "d=1",
+   "carvedilol": "d=1",
+   "labetalol": "d=1",
+   "atenolol": "d=2",
+   "metoprolol": "d=2",
+   "bisoprolol": "d=2",
+   "nebivolol": "d=2",
+   "esmolol": "d=2",
+   "betaxolol": "d=2",
+   "acebutolol": "d=2",
+   "celiprolol": "d=2",
+   "landiolol": "d=2",
+   "bevantolol": "d=2"
+  },
+  "terms": [
+   "beta[- ]?blockers?",
+   "beta[- ]?adrenergic (?:receptor )?(?:blockers?|antagonists?|blocking)",
+   "β[- ]?blockers?"
+  ]
+ }
+}

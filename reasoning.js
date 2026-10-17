@@ -4427,6 +4427,15 @@
     var s = String(a.title || "").toLowerCase();
     return (/diagnos|work-?\s?up|evaluat|approach to|investigat/.test(s) && !/manag|treat/.test(s)) ? "dx" : "mgmt";
   }
+  /* Interactive figures (fig-viewer.js registry): when the treatment text names a drug or class that has one, a "how it works"
+     button sits under the summary. A link only; nothing else on the page changes. */
+  function kbFigRow(name, mgmt, body) {
+    var F = window.SMD_FIG; if (!F || !F.matchText) return "";
+    var txt = String(name || "") + " " + String(mgmt || "").replace(/<[^>]*>/g, " ") + " " + String(body || "").replace(/<[^>]*>/g, " ");
+    var ms = F.matchText(txt, 2);
+    if (!ms.length) return "";
+    return '<div class="kbr-figrow"><span class="kbr-figlab">Interactive figures</span>' + ms.map(function (m) { return F.chipHtml(m, "kbr-figchip", "fig-open"); }).join("") + "</div>";
+  }
   function kbReaderBodyHTML(id, H, o) {
     evEnsure();   // the bold high-yield styles and the other-source viewers' toggles
     o = o || {};
@@ -4716,10 +4725,11 @@
         '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
         rd.jump +
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
-        rd.glance +
+        rd.glance + kbFigRow(name, rdMgmt, rd.body) +
         '<div class="dx-reader-content">' + (rd.body || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') + '</div>' +
       '</div>';
     kbDedupeReader(el);
+    try { el.querySelectorAll("[data-act='fig-open']").forEach(function (b) { b.addEventListener("click", function () { if (window.SMD_FIG) window.SMD_FIG.openFig(b.getAttribute("data-f"), b.getAttribute("data-q"), b); }); }); } catch (e) {}
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
     try { kbWireRelated(el, id, opts); } catch (e) {}
     if (!el.__kbProtoWired) {

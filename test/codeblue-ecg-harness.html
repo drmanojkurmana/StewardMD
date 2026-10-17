@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CodeBlueECG harness</title>
+<link rel="stylesheet" href="../codeblue-ecg.css">
+</head>
+<body>
+<script src="../codeblue-ecg.js"></script>
+<script>
+/* Harness driver (test use only): ?open=1 opens the course, ?dark=1 uses the
+ * dark theme, ?tab=rhythms|leads|cards|quiz selects a tab after opening. */
+(function () {
+  try {
+    var q = new URLSearchParams(location.search);
+    if (q.get("dark") === "1") document.body.classList.add("dark");
+    if (q.get("open") === "1" && window.CodeBlueECG) {
+      CodeBlueECG.open();
+      var tab = q.get("tab");
+      if (tab) {
+        var b = document.querySelector('[data-cbecg-tab="' + tab + '"]');
+        if (b) b.click();
+      }
+      if (q.get("cal") === "1") {
+        var c = document.querySelector("[data-cbecg-calbtn]");
+        if (c) c.click();
+      }
+    }
+  } catch (e) { document.title = "HARNESS ERR " + e; }
+})();
+</script>
+</body>
+</html>

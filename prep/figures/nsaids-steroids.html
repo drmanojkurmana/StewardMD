@@ -1,0 +1,310 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>NSAIDs and corticosteroids: the arachidonic acid pathway</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-ag-hex{fill:var(--anatomy-green);stroke:var(--anatomy-green);stroke-width:1.2}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">NSAIDs and corticosteroids: the arachidonic acid pathway</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>gastric protection normal · pain and inflammation high · leukotrienes high</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of the arachidonic acid pathway: phospholipase A2 frees arachidonic acid from membrane phospholipids; COX-1 makes the prostaglandins and thromboxane that protect the stomach and help platelets; COX-2 makes the prostaglandins of pain, fever and inflammation; 5-lipoxygenase makes leukotrienes. Corticosteroids act on the first step, non-selective NSAIDs and aspirin on COX-1 and COX-2, COX-2 selective drugs on COX-2 only, and zileuton on 5-lipoxygenase."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_pla" d="M186 300L357 300"/><path class="dr-flowhead" d="M357 300l-8.1 3.9M357 300l-8.1 -3.9"/><g id="pt-e_pla"></g><g class="hot dr-enz" tabindex="0" data-info="Phospholipase A2. Corticosteroids lower its activity (partly through lipocortin-type proteins), so less arachidonic acid is freed for every pathway. They also lower COX-2 and cytokine gene expression, which this figure does not draw."><rect class="dr-enz-r" x="204.3" y="289" width="134.4" height="22" rx="11"/><text class="dr-prot" x="271.5" y="304" text-anchor="middle">phospholipase A2</text></g><g class="hot dr-block" id="blk-e_pla" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-block-hex" d="M280.5 275L276 282.8L267 282.8L262.5 275L267 267.2L276 267.2Z"/><path class="dr-block-x" d="M267.9 271.4L275.1 278.6M275.1 271.4L267.9 278.6"/></g><g class="hot dr-block dr-enh" id="enh-e_pla" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-ag-hex" d="M302.5 275L298 282.8L289 282.8L284.5 275L289 267.2L298 267.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_c1" d="M491.7 276.7L741.7 137"/><path class="dr-flowhead" d="M741.7 137l-5.2 7.4M741.7 137l-9 0.5"/><g id="pt-e_c1"></g><g class="hot dr-enz" tabindex="0" data-info="Cyclooxygenase-1: present in most tissues all the time. Aspirin acetylates it irreversibly; non-selective NSAIDs block it reversibly."><rect class="dr-enz-r" x="590.2" y="195.8" width="53" height="22" rx="11"/><text class="dr-prot" x="616.7" y="210.8" text-anchor="middle">COX-1</text></g><g class="hot dr-block" id="blk-e_c1" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-block-hex" d="M625.7 181.8L621.2 189.6L612.2 189.6L607.7 181.8L612.2 174L621.2 174Z"/><path class="dr-block-x" d="M613.1 178.2L620.3 185.4M620.3 178.2L613.1 185.4"/></g><g class="hot dr-block dr-enh" id="enh-e_c1" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-ag-hex" d="M647.7 181.8L643.2 189.6L634.2 189.6L629.7 181.8L634.2 174L643.2 174Z"/></g><path class="dr-rail dr-flowline" id="ln-e_c2" d="M538 300L657 300"/><path class="dr-flowhead" d="M657 300l-8.1 3.9M657 300l-8.1 -3.9"/><g id="pt-e_c2"></g><g class="hot dr-enz" tabindex="0" data-info="Cyclooxygenase-2: induced by inflammation. All NSAIDs block it; COX-2 selective drugs block it with little effect on COX-1."><rect class="dr-enz-r" x="571" y="289" width="53" height="22" rx="11"/><text class="dr-prot" x="597.5" y="304" text-anchor="middle">COX-2</text></g><g class="hot dr-block" id="blk-e_c2" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-block-hex" d="M606.5 275L602 282.8L593 282.8L588.5 275L593 267.2L602 267.2Z"/><path class="dr-block-x" d="M593.9 271.4L601.1 278.6M601.1 271.4L593.9 278.6"/></g><g class="hot dr-block dr-enh" id="enh-e_c2" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-ag-hex" d="M628.5 275L624 282.8L615 282.8L610.5 275L615 267.2L624 267.2Z"/></g><path class="dr-rail dr-flowline" id="ln-e_lox" d="M491.7 323.3L742.1 463.3"/><path class="dr-flowhead" d="M742.1 463.3l-9 -0.5M742.1 463.3l-5.2 -7.4"/><g id="pt-e_lox"></g><g class="hot dr-enz" tabindex="0" data-info="5-lipoxygenase. Zileuton inhibits it. NSAIDs do not, and in a few people blocking COX sends more arachidonic acid down this route (aspirin-sensitive asthma, not drawn)."><rect class="dr-enz-r" x="590.4" y="382.3" width="53" height="22" rx="11"/><text class="dr-prot" x="616.9" y="397.3" text-anchor="middle">5-LOX</text></g><g class="hot dr-block" id="blk-e_lox" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-block-hex" d="M625.9 368.3L621.4 376.1L612.4 376.1L607.9 368.3L612.4 360.5L621.4 360.5Z"/><path class="dr-block-x" d="M613.3 364.7L620.5 371.9M620.5 364.7L613.3 371.9"/></g><g class="hot dr-block dr-enh" id="enh-e_lox" tabindex="0" data-info="A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made."><path class="dr-ag-hex" d="M647.9 368.3L643.4 376.1L634.4 376.1L629.9 368.3L634.4 360.5L643.4 360.5Z"/></g><g class="hot dr-node dr-n-source" id="nd-pl" tabindex="0" data-info="Phospholipids of the cell membrane. Injury and inflammation activate phospholipase A2, which frees arachidonic acid from them." transform="translate(92 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M93 0C93.6 1.7 93.4 3.5 92 5.2C90.6 6.9 87.9 8.6 84.7 10.1C81.5 11.5 77.1 12.9 72.8 14.1C68.4 15.3 63.5 16.4 58.7 17.4C53.8 18.4 48.8 19.3 43.6 20.1C38.3 20.9 32.9 21.7 27.2 22.3C21.5 22.9 15.4 23.4 9.3 23.7C3.2 23.9 -3.2 24 -9.4 23.9C-15.6 23.7 -21.9 23.4 -27.9 22.9C-33.9 22.4 -39.8 21.8 -45.5 21C-51.1 20.2 -56.7 19.3 -61.6 18.2C-66.5 17.2 -71.3 15.9 -75.1 14.5C-78.8 13.2 -82 11.6 -84.1 10C-86.2 8.4 -87.2 6.6 -87.7 5C-88.2 3.3 -87.6 1.6 -87 0C-86.4 -1.6 -85.3 -3.2 -84.1 -4.8C-82.9 -6.3 -81.6 -7.9 -79.7 -9.5C-77.9 -11 -75.8 -12.6 -72.8 -14.1C-69.9 -15.6 -66.2 -17.1 -61.8 -18.3C-57.4 -19.5 -52 -20.6 -46.4 -21.5C-40.9 -22.3 -34.6 -22.9 -28.4 -23.3C-22.3 -23.8 -15.8 -24 -9.5 -24.1C-3.2 -24.2 3.2 -24.1 9.4 -23.9C15.6 -23.7 21.9 -23.3 27.7 -22.8C33.6 -22.2 39.4 -21.5 44.5 -20.6C49.7 -19.7 54.5 -18.6 58.8 -17.4C63.2 -16.3 66.9 -15 70.5 -13.7C74.1 -12.4 77.4 -11 80.4 -9.5C83.3 -8.1 86.3 -6.6 88.4 -5C90.5 -3.4 92.4 -1.7 93 0Z"/><path class="bio-blob-shade" d="M83.7 0C84.2 1.5 84 3.2 82.8 4.7C81.5 6.2 79.1 7.7 76.2 9C73.3 10.4 69.4 11.6 65.5 12.7C61.6 13.8 57.2 14.7 52.8 15.6C48.4 16.5 43.9 17.4 39.2 18.1C34.5 18.8 29.6 19.6 24.5 20.1C19.3 20.6 13.9 21.1 8.4 21.3C2.9 21.5 -2.9 21.6 -8.5 21.5C-14 21.3 -19.7 21 -25.1 20.6C-30.5 20.2 -35.9 19.6 -40.9 18.9C-46 18.2 -51 17.4 -55.5 16.4C-59.9 15.5 -64.2 14.3 -67.6 13.1C-71 11.9 -73.8 10.4 -75.7 9C-77.6 7.5 -78.5 6 -78.9 4.5C-79.3 3 -78.8 1.5 -78.3 0C-77.8 -1.5 -76.8 -2.9 -75.7 -4.3C-74.6 -5.7 -73.5 -7.1 -71.8 -8.5C-70.1 -9.9 -68.3 -11.4 -65.6 -12.7C-62.9 -14 -59.6 -15.4 -55.6 -16.5C-51.6 -17.6 -46.8 -18.6 -41.8 -19.3C-36.8 -20.1 -31.1 -20.6 -25.6 -21C-20 -21.4 -14.2 -21.6 -8.5 -21.7C-2.9 -21.7 2.9 -21.7 8.5 -21.5C14.1 -21.3 19.7 -21 25 -20.5C30.2 -20 35.4 -19.3 40.1 -18.5C44.7 -17.7 49.1 -16.7 52.9 -15.7C56.8 -14.6 60.2 -13.5 63.5 -12.3C66.7 -11.1 69.6 -9.9 72.3 -8.6C75 -7.3 77.7 -5.9 79.5 -4.5C81.4 -3.1 83.2 -1.5 83.7 0Z"/><path class="bio-blob-highlight" d="M65.1 0C65.5 1.2 65.4 2.5 64.4 3.6C63.4 4.8 61.5 6 59.3 7C57 8.1 54 9 50.9 9.9C47.9 10.7 44.5 11.5 41.1 12.2C37.7 12.9 34.2 13.5 30.5 14.1C26.8 14.7 23 15.2 19 15.6C15 16 10.8 16.4 6.5 16.6C2.3 16.7 -2.2 16.8 -6.6 16.7C-10.9 16.6 -15.3 16.4 -19.5 16C-23.7 15.7 -27.9 15.2 -31.8 14.7C-35.8 14.2 -39.7 13.5 -43.1 12.8C-46.6 12 -49.9 11.1 -52.6 10.2C-55.2 9.2 -57.4 8.1 -58.9 7C-60.3 5.9 -61 4.6 -61.4 3.5C-61.7 2.3 -61.3 1.1 -60.9 0C-60.5 -1.1 -59.7 -2.2 -58.9 -3.3C-58 -4.4 -57.1 -5.5 -55.8 -6.6C-54.5 -7.7 -53.1 -8.8 -51 -9.9C-48.9 -10.9 -46.3 -12 -43.2 -12.8C-40.2 -13.7 -36.4 -14.4 -32.5 -15C-28.6 -15.6 -24.2 -16 -19.9 -16.3C-15.6 -16.6 -11.1 -16.8 -6.6 -16.8C-2.2 -16.9 2.2 -16.9 6.6 -16.7C10.9 -16.6 15.3 -16.3 19.4 -15.9C23.5 -15.5 27.5 -15 31.2 -14.4C34.8 -13.8 38.2 -13 41.2 -12.2C44.2 -11.4 46.9 -10.5 49.4 -9.6C51.9 -8.6 54.2 -7.7 56.3 -6.7C58.3 -5.7 60.4 -4.6 61.9 -3.5C63.3 -2.4 64.7 -1.2 65.1 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M93 0C93.6 1.7 93.4 3.5 92 5.2C90.6 6.9 87.9 8.6 84.7 10.1C81.5 11.5 77.1 12.9 72.8 14.1C68.4 15.3 63.5 16.4 58.7 17.4C53.8 18.4 48.8 19.3 43.6 20.1C38.3 20.9 32.9 21.7 27.2 22.3C21.5 22.9 15.4 23.4 9.3 23.7C3.2 23.9 -3.2 24 -9.4 23.9C-15.6 23.7 -21.9 23.4 -27.9 22.9C-33.9 22.4 -39.8 21.8 -45.5 21C-51.1 20.2 -56.7 19.3 -61.6 18.2C-66.5 17.2 -71.3 15.9 -75.1 14.5C-78.8 13.2 -82 11.6 -84.1 10C-86.2 8.4 -87.2 6.6 -87.7 5C-88.2 3.3 -87.6 1.6 -87 0C-86.4 -1.6 -85.3 -3.2 -84.1 -4.8C-82.9 -6.3 -81.6 -7.9 -79.7 -9.5C-77.9 -11 -75.8 -12.6 -72.8 -14.1C-69.9 -15.6 -66.2 -17.1 -61.8 -18.3C-57.4 -19.5 -52 -20.6 -46.4 -21.5C-40.9 -22.3 -34.6 -22.9 -28.4 -23.3C-22.3 -23.8 -15.8 -24 -9.5 -24.1C-3.2 -24.2 3.2 -24.1 9.4 -23.9C15.6 -23.7 21.9 -23.3 27.7 -22.8C33.6 -22.2 39.4 -21.5 44.5 -20.6C49.7 -19.7 54.5 -18.6 58.8 -17.4C63.2 -16.3 66.9 -15 70.5 -13.7C74.1 -12.4 77.4 -11 80.4 -9.5C83.3 -8.1 86.3 -6.6 88.4 -5C90.5 -3.4 92.4 -1.7 93 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Membrane phospholipids</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">released by injury</text></g><g class="hot dr-node dr-n-mid" id="nd-aa" tabindex="0" data-info="Arachidonic acid: the 20-carbon fatty acid from which the eicosanoids are made." transform="translate(450 300)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M85.8 0C85.9 1.7 85.4 3.5 84.1 5.1C82.7 6.8 80.5 8.4 77.6 9.9C74.8 11.3 70.9 12.7 67 13.9C63.1 15.1 58.5 16.2 54.1 17.2C49.6 18.2 45 19 40.2 19.9C35.5 20.8 30.6 21.6 25.4 22.3C20.2 23.1 14.6 23.8 8.9 24.2C3.1 24.6 -3.1 24.8 -9.1 24.7C-15.1 24.6 -21.3 24.2 -26.9 23.6C-32.5 23 -37.9 22.1 -42.8 21.2C-47.7 20.2 -52.1 19 -56.2 17.8C-60.3 16.6 -64 15.3 -67.3 14C-70.6 12.6 -73.6 11.2 -75.8 9.6C-78.1 8.1 -79.9 6.5 -81 4.9C-82 3.3 -82.4 1.6 -82.2 0C-82.1 -1.6 -81.3 -3.3 -80.2 -4.9C-79.2 -6.5 -77.7 -8.1 -75.9 -9.6C-74 -11.2 -71.8 -12.8 -68.9 -14.3C-66 -15.8 -62.5 -17.3 -58.3 -18.5C-54.2 -19.7 -49.1 -20.9 -43.8 -21.7C-38.5 -22.5 -32.4 -23 -26.5 -23.3C-20.7 -23.6 -14.5 -23.6 -8.7 -23.6C-2.8 -23.5 2.9 -23.3 8.5 -23C14.1 -22.8 19.6 -22.4 25 -22C30.5 -21.6 36 -21.1 41.2 -20.4C46.4 -19.7 51.7 -18.9 56.2 -17.8C60.8 -16.8 65 -15.6 68.6 -14.2C72.2 -12.9 75.2 -11.4 77.6 -9.9C80.1 -8.3 82 -6.7 83.4 -5.1C84.7 -3.4 85.6 -1.7 85.8 0Z"/><path class="bio-blob-shade" d="M77.2 0C77.3 1.5 76.9 3.1 75.7 4.6C74.5 6.1 72.4 7.6 69.9 8.9C67.3 10.2 63.8 11.4 60.3 12.5C56.8 13.6 52.7 14.5 48.7 15.4C44.6 16.3 40.5 17.1 36.2 17.9C31.9 18.7 27.6 19.5 22.9 20.1C18.2 20.7 13.2 21.4 8 21.7C2.8 22.1 -2.8 22.3 -8.2 22.2C-13.5 22.2 -19.1 21.8 -24.2 21.3C-29.2 20.7 -34.1 19.9 -38.5 19.1C-42.9 18.2 -46.9 17.1 -50.6 16C-54.3 15 -57.6 13.8 -60.6 12.6C-63.5 11.3 -66.2 10 -68.3 8.7C-70.3 7.3 -71.9 5.9 -72.9 4.4C-73.8 3 -74.1 1.5 -74 0C-73.9 -1.5 -73.2 -2.9 -72.2 -4.4C-71.3 -5.8 -70 -7.3 -68.3 -8.7C-66.6 -10.1 -64.6 -11.5 -62 -12.9C-59.4 -14.2 -56.3 -15.6 -52.5 -16.7C-48.7 -17.8 -44.2 -18.8 -39.4 -19.5C-34.6 -20.2 -29.1 -20.7 -23.9 -21C-18.6 -21.3 -13.1 -21.3 -7.8 -21.2C-2.6 -21.2 2.6 -21 7.6 -20.7C12.7 -20.5 17.6 -20.2 22.5 -19.8C27.4 -19.4 32.4 -19 37.1 -18.4C41.8 -17.7 46.5 -17 50.6 -16.1C54.7 -15.1 58.5 -14 61.8 -12.8C65 -11.6 67.7 -10.3 69.9 -8.9C72.1 -7.5 73.8 -6 75 -4.6C76.2 -3.1 77.1 -1.5 77.2 0Z"/><path class="bio-blob-highlight" d="M60 0C60.1 1.2 59.8 2.4 58.9 3.6C57.9 4.7 56.3 5.9 54.3 6.9C52.3 7.9 49.6 8.9 46.9 9.7C44.2 10.6 41 11.3 37.8 12C34.7 12.7 31.5 13.3 28.2 13.9C24.8 14.5 21.4 15.1 17.8 15.6C14.1 16.1 10.2 16.6 6.2 16.9C2.2 17.2 -2.2 17.4 -6.4 17.3C-10.5 17.2 -14.9 17 -18.8 16.5C-22.7 16.1 -26.5 15.5 -29.9 14.8C-33.4 14.1 -36.5 13.3 -39.3 12.5C-42.2 11.6 -44.8 10.7 -47.1 9.8C-49.4 8.8 -51.5 7.8 -53.1 6.8C-54.7 5.7 -55.9 4.6 -56.7 3.4C-57.4 2.3 -57.6 1.1 -57.6 0C-57.5 -1.1 -56.9 -2.3 -56.2 -3.4C-55.4 -4.5 -54.4 -5.7 -53.1 -6.8C-51.8 -7.9 -50.3 -9 -48.2 -10C-46.2 -11 -43.8 -12.1 -40.8 -13C-37.9 -13.8 -34.4 -14.6 -30.6 -15.2C-26.9 -15.7 -22.6 -16.1 -18.6 -16.3C-14.5 -16.5 -10.2 -16.5 -6.1 -16.5C-2 -16.5 2 -16.3 5.9 -16.1C9.9 -15.9 13.7 -15.7 17.5 -15.4C21.3 -15.1 25.2 -14.8 28.9 -14.3C32.5 -13.8 36.2 -13.2 39.4 -12.5C42.5 -11.8 45.5 -10.9 48 -10C50.5 -9 52.6 -8 54.3 -6.9C56.1 -5.8 57.4 -4.7 58.3 -3.5C59.3 -2.4 60 -1.2 60 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M85.8 0C85.9 1.7 85.4 3.5 84.1 5.1C82.7 6.8 80.5 8.4 77.6 9.9C74.8 11.3 70.9 12.7 67 13.9C63.1 15.1 58.5 16.2 54.1 17.2C49.6 18.2 45 19 40.2 19.9C35.5 20.8 30.6 21.6 25.4 22.3C20.2 23.1 14.6 23.8 8.9 24.2C3.1 24.6 -3.1 24.8 -9.1 24.7C-15.1 24.6 -21.3 24.2 -26.9 23.6C-32.5 23 -37.9 22.1 -42.8 21.2C-47.7 20.2 -52.1 19 -56.2 17.8C-60.3 16.6 -64 15.3 -67.3 14C-70.6 12.6 -73.6 11.2 -75.8 9.6C-78.1 8.1 -79.9 6.5 -81 4.9C-82 3.3 -82.4 1.6 -82.2 0C-82.1 -1.6 -81.3 -3.3 -80.2 -4.9C-79.2 -6.5 -77.7 -8.1 -75.9 -9.6C-74 -11.2 -71.8 -12.8 -68.9 -14.3C-66 -15.8 -62.5 -17.3 -58.3 -18.5C-54.2 -19.7 -49.1 -20.9 -43.8 -21.7C-38.5 -22.5 -32.4 -23 -26.5 -23.3C-20.7 -23.6 -14.5 -23.6 -8.7 -23.6C-2.8 -23.5 2.9 -23.3 8.5 -23C14.1 -22.8 19.6 -22.4 25 -22C30.5 -21.6 36 -21.1 41.2 -20.4C46.4 -19.7 51.7 -18.9 56.2 -17.8C60.8 -16.8 65 -15.6 68.6 -14.2C72.2 -12.9 75.2 -11.4 77.6 -9.9C80.1 -8.3 82 -6.7 83.4 -5.1C84.7 -3.4 85.6 -1.7 85.8 0Z"/></g><text class="dr-prot dr-nl" x="0" y="4" text-anchor="middle">Arachidonic acid</text></g><g class="hot dr-node dr-n-out" id="nd-pg1" tabindex="0" data-info="Prostaglandins and thromboxane made by COX-1: they protect the stomach lining with mucus and bicarbonate, support kidney blood flow and (as thromboxane A2) help platelets aggregate. Losing them explains the stomach, kidney and bleeding effects of non-selective NSAIDs." transform="translate(790 110)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M118.7 0C118.1 1.7 116.9 3.3 115.1 4.9C113.2 6.5 110.9 8.1 107.7 9.6C104.5 11.1 100.4 12.6 95.7 13.9C90.9 15.2 85.1 16.5 79.1 17.6C73 18.7 66.2 19.6 59.2 20.5C52.2 21.4 44.8 22.2 37.1 22.8C29.3 23.5 21.2 24 12.8 24.4C4.5 24.7 -4.5 24.9 -13 24.8C-21.6 24.7 -30.5 24.3 -38.4 23.6C-46.3 23 -53.9 22 -60.6 21C-67.3 20 -73 18.7 -78.4 17.4C-83.8 16.2 -88.5 14.9 -93 13.5C-97.6 12.2 -101.9 10.8 -105.8 9.4C-109.6 8 -113.4 6.5 -116 4.9C-118.6 3.4 -120.7 1.7 -121.3 0C-121.9 -1.7 -121.3 -3.4 -119.7 -5.1C-118.1 -6.7 -115.1 -8.4 -111.6 -9.9C-108 -11.5 -103.5 -13 -98.5 -14.3C-93.5 -15.7 -87.8 -17 -81.5 -18.1C-75.2 -19.2 -68.2 -20.3 -60.8 -21.1C-53.4 -21.9 -45.2 -22.5 -37.1 -22.8C-29 -23.2 -20.5 -23.3 -12.3 -23.4C-4.1 -23.4 4.1 -23.2 12.1 -22.9C20.1 -22.7 27.9 -22.4 35.8 -22C43.6 -21.6 51.7 -21.2 59.4 -20.6C67.1 -20 75.2 -19.2 82.2 -18.3C89.1 -17.3 95.9 -16.1 101.1 -14.7C106.4 -13.3 110.5 -11.7 113.5 -10.1C116.4 -8.5 117.9 -6.7 118.7 -5C119.6 -3.4 119.3 -1.7 118.7 0Z"/><path class="bio-blob-shade" d="M106.9 0C106.3 1.5 105.2 3 103.6 4.4C101.9 5.8 99.8 7.3 96.9 8.6C94 10 90.4 11.3 86.1 12.5C81.8 13.7 76.6 14.8 71.2 15.8C65.7 16.8 59.6 17.7 53.3 18.5C47 19.2 40.3 19.9 33.3 20.5C26.4 21.1 19 21.6 11.5 21.9C4 22.2 -4 22.4 -11.7 22.3C-19.4 22.2 -27.4 21.8 -34.6 21.3C-41.7 20.7 -48.5 19.8 -54.5 18.9C-60.5 18 -65.7 16.8 -70.6 15.7C-75.4 14.6 -79.6 13.4 -83.7 12.2C-87.8 11 -91.7 9.8 -95.2 8.5C-98.6 7.2 -102.1 5.9 -104.4 4.4C-106.7 3 -108.6 1.5 -109.1 0C-109.7 -1.5 -109.2 -3.1 -107.7 -4.6C-106.3 -6.1 -103.6 -7.6 -100.4 -8.9C-97.2 -10.3 -93.2 -11.7 -88.7 -12.9C-84.2 -14.1 -79 -15.3 -73.4 -16.3C-67.7 -17.3 -61.4 -18.2 -54.7 -19C-48.1 -19.7 -40.7 -20.2 -33.4 -20.6C-26.1 -20.9 -18.4 -21 -11 -21C-3.7 -21 3.6 -20.9 10.9 -20.6C18.1 -20.4 25.1 -20.2 32.2 -19.8C39.3 -19.5 46.5 -19.1 53.5 -18.5C60.4 -18 67.7 -17.3 73.9 -16.4C80.2 -15.5 86.3 -14.4 91 -13.2C95.7 -12 99.5 -10.5 102.1 -9.1C104.8 -7.6 106.1 -6.1 106.9 -4.5C107.7 -3 107.4 -1.5 106.9 0Z"/><path class="bio-blob-highlight" d="M83.1 0C82.7 1.2 81.8 2.3 80.6 3.4C79.3 4.5 77.6 5.7 75.4 6.7C73.1 7.8 70.3 8.8 67 9.7C63.6 10.7 59.6 11.5 55.3 12.3C51.1 13.1 46.3 13.7 41.4 14.4C36.5 15 31.3 15.5 25.9 16C20.5 16.4 14.8 16.8 9 17.1C3.1 17.3 -3.1 17.4 -9.1 17.4C-15.1 17.3 -21.3 17 -26.9 16.5C-32.4 16.1 -37.7 15.4 -42.4 14.7C-47.1 14 -51.1 13.1 -54.9 12.2C-58.7 11.3 -61.9 10.4 -65.1 9.5C-68.3 8.5 -71.4 7.6 -74 6.6C-76.7 5.6 -79.4 4.6 -81.2 3.5C-83 2.4 -84.5 1.2 -84.9 0C-85.3 -1.2 -84.9 -2.4 -83.8 -3.6C-82.6 -4.7 -80.6 -5.9 -78.1 -7C-75.6 -8 -72.5 -9.1 -69 -10C-65.5 -11 -61.5 -11.9 -57.1 -12.7C-52.7 -13.5 -47.7 -14.2 -42.6 -14.7C-37.4 -15.3 -31.6 -15.7 -26 -16C-20.3 -16.3 -14.3 -16.3 -8.6 -16.4C-2.9 -16.4 2.8 -16.2 8.4 -16.1C14 -15.9 19.5 -15.7 25 -15.4C30.6 -15.1 36.2 -14.8 41.6 -14.4C47 -14 52.6 -13.5 57.5 -12.8C62.4 -12.1 67.1 -11.2 70.8 -10.3C74.5 -9.3 77.4 -8.2 79.4 -7.1C81.5 -5.9 82.5 -4.7 83.1 -3.5C83.7 -2.4 83.5 -1.2 83.1 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M118.7 0C118.1 1.7 116.9 3.3 115.1 4.9C113.2 6.5 110.9 8.1 107.7 9.6C104.5 11.1 100.4 12.6 95.7 13.9C90.9 15.2 85.1 16.5 79.1 17.6C73 18.7 66.2 19.6 59.2 20.5C52.2 21.4 44.8 22.2 37.1 22.8C29.3 23.5 21.2 24 12.8 24.4C4.5 24.7 -4.5 24.9 -13 24.8C-21.6 24.7 -30.5 24.3 -38.4 23.6C-46.3 23 -53.9 22 -60.6 21C-67.3 20 -73 18.7 -78.4 17.4C-83.8 16.2 -88.5 14.9 -93 13.5C-97.6 12.2 -101.9 10.8 -105.8 9.4C-109.6 8 -113.4 6.5 -116 4.9C-118.6 3.4 -120.7 1.7 -121.3 0C-121.9 -1.7 -121.3 -3.4 -119.7 -5.1C-118.1 -6.7 -115.1 -8.4 -111.6 -9.9C-108 -11.5 -103.5 -13 -98.5 -14.3C-93.5 -15.7 -87.8 -17 -81.5 -18.1C-75.2 -19.2 -68.2 -20.3 -60.8 -21.1C-53.4 -21.9 -45.2 -22.5 -37.1 -22.8C-29 -23.2 -20.5 -23.3 -12.3 -23.4C-4.1 -23.4 4.1 -23.2 12.1 -22.9C20.1 -22.7 27.9 -22.4 35.8 -22C43.6 -21.6 51.7 -21.2 59.4 -20.6C67.1 -20 75.2 -19.2 82.2 -18.3C89.1 -17.3 95.9 -16.1 101.1 -14.7C106.4 -13.3 110.5 -11.7 113.5 -10.1C116.4 -8.5 117.9 -6.7 118.7 -5C119.6 -3.4 119.3 -1.7 118.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Protective prostanoids</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">stomach, kidney, platelets</text></g><g class="hot dr-node dr-n-out" id="nd-pg2" tabindex="0" data-info="Prostaglandins made by COX-2 (induced at sites of inflammation): they sensitise pain nerves, raise the hypothalamic set point (fever) and dilate vessels. This is the effect NSAIDs are used for." transform="translate(790 300)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M120 0C119.1 1.6 117.6 3.2 115.9 4.8C114.2 6.3 112.4 7.9 109.8 9.5C107.2 11 104.3 12.6 100.1 14.1C96 15.5 90.8 17 84.8 18.2C78.7 19.4 71.3 20.5 63.7 21.4C56.1 22.2 47.5 22.8 39.1 23.3C30.7 23.7 21.8 24 13.1 24.1C4.4 24.3 -4.5 24.2 -13 24C-21.6 23.8 -30.4 23.5 -38.4 22.9C-46.5 22.3 -54.4 21.5 -61.5 20.6C-68.6 19.7 -75 18.6 -80.9 17.4C-86.8 16.2 -91.9 14.9 -96.8 13.6C-101.7 12.3 -106.2 10.9 -110.3 9.5C-114.4 8.1 -118.6 6.6 -121.5 5C-124.5 3.4 -127.2 1.7 -128 0C-128.9 -1.7 -128.6 -3.5 -126.7 -5.2C-124.8 -6.9 -121.1 -8.6 -116.7 -10.1C-112.4 -11.5 -106.4 -12.9 -100.5 -14.1C-94.6 -15.4 -87.9 -16.4 -81.2 -17.5C-74.5 -18.5 -67.6 -19.4 -60.3 -20.2C-53 -21 -45.5 -21.8 -37.5 -22.4C-29.6 -22.9 -21.2 -23.4 -12.8 -23.6C-4.4 -23.8 4.4 -23.9 12.9 -23.7C21.4 -23.6 29.9 -23.2 38.2 -22.8C46.5 -22.3 54.7 -21.7 62.5 -21C70.3 -20.2 78.1 -19.3 85 -18.3C91.9 -17.2 98.7 -16 103.9 -14.6C109.1 -13.2 113.4 -11.6 116.3 -10C119.1 -8.4 120.4 -6.7 121.1 -5C121.7 -3.3 120.8 -1.6 120 0Z"/><path class="bio-blob-shade" d="M108 0C107.2 1.5 105.8 2.9 104.3 4.3C102.8 5.7 101.2 7.1 98.8 8.5C96.5 9.9 93.9 11.4 90.1 12.7C86.4 14 81.7 15.3 76.3 16.4C70.8 17.5 64.2 18.5 57.3 19.2C50.5 20 42.8 20.5 35.2 21C27.6 21.4 19.6 21.6 11.8 21.7C4 21.8 -4 21.8 -11.7 21.6C-19.5 21.4 -27.3 21.1 -34.6 20.6C-41.9 20.1 -49 19.4 -55.4 18.6C-61.7 17.7 -67.5 16.7 -72.8 15.7C-78.1 14.6 -82.7 13.4 -87.1 12.2C-91.5 11.1 -95.5 9.8 -99.3 8.6C-103 7.3 -106.7 5.9 -109.4 4.5C-112 3.1 -114.5 1.5 -115.2 0C-116 -1.5 -115.7 -3.2 -114 -4.7C-112.3 -6.2 -109 -7.7 -105.1 -9.1C-101.1 -10.4 -95.8 -11.6 -90.5 -12.7C-85.1 -13.8 -79.1 -14.8 -73.1 -15.7C-67 -16.6 -60.8 -17.5 -54.3 -18.2C-47.7 -18.9 -40.9 -19.6 -33.8 -20.1C-26.7 -20.6 -19.1 -21 -11.5 -21.2C-4 -21.4 3.9 -21.5 11.6 -21.3C19.2 -21.2 26.9 -20.9 34.4 -20.5C41.8 -20.1 49.2 -19.5 56.2 -18.9C63.3 -18.2 70.3 -17.4 76.5 -16.5C82.7 -15.5 88.8 -14.4 93.5 -13.1C98.2 -11.9 102.1 -10.5 104.6 -9C107.2 -7.6 108.4 -6 109 -4.5C109.5 -3 108.7 -1.5 108 0Z"/><path class="bio-blob-highlight" d="M84 0C83.4 1.1 82.3 2.2 81.1 3.3C79.9 4.4 78.7 5.5 76.9 6.6C75 7.7 73 8.8 70.1 9.9C67.2 10.9 63.6 11.9 59.3 12.8C55.1 13.6 49.9 14.4 44.6 15C39.3 15.5 33.3 16 27.4 16.3C21.5 16.6 15.3 16.8 9.2 16.9C3.1 17 -3.1 17 -9.1 16.8C-15.1 16.7 -21.2 16.4 -26.9 16C-32.6 15.6 -38.1 15.1 -43.1 14.4C-48 13.8 -52.5 13 -56.6 12.2C-60.7 11.4 -64.3 10.4 -67.7 9.5C-71.2 8.6 -74.3 7.7 -77.2 6.7C-80.1 5.6 -83 4.6 -85.1 3.5C-87.1 2.4 -89 1.2 -89.6 0C-90.2 -1.2 -90 -2.5 -88.7 -3.6C-87.4 -4.8 -84.8 -6 -81.7 -7C-78.7 -8.1 -74.5 -9 -70.4 -9.9C-66.2 -10.8 -61.5 -11.5 -56.8 -12.2C-52.1 -12.9 -47.3 -13.6 -42.2 -14.1C-37.1 -14.7 -31.8 -15.3 -26.3 -15.7C-20.7 -16.1 -14.9 -16.4 -9 -16.5C-3.1 -16.7 3.1 -16.7 9 -16.6C15 -16.5 21 -16.3 26.7 -15.9C32.5 -15.6 38.3 -15.2 43.7 -14.7C49.2 -14.1 54.7 -13.5 59.5 -12.8C64.4 -12.1 69.1 -11.2 72.7 -10.2C76.4 -9.3 79.4 -8.1 81.4 -7C83.4 -5.9 84.3 -4.7 84.7 -3.5C85.2 -2.3 84.6 -1.1 84 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M120 0C119.1 1.6 117.6 3.2 115.9 4.8C114.2 6.3 112.4 7.9 109.8 9.5C107.2 11 104.3 12.6 100.1 14.1C96 15.5 90.8 17 84.8 18.2C78.7 19.4 71.3 20.5 63.7 21.4C56.1 22.2 47.5 22.8 39.1 23.3C30.7 23.7 21.8 24 13.1 24.1C4.4 24.3 -4.5 24.2 -13 24C-21.6 23.8 -30.4 23.5 -38.4 22.9C-46.5 22.3 -54.4 21.5 -61.5 20.6C-68.6 19.7 -75 18.6 -80.9 17.4C-86.8 16.2 -91.9 14.9 -96.8 13.6C-101.7 12.3 -106.2 10.9 -110.3 9.5C-114.4 8.1 -118.6 6.6 -121.5 5C-124.5 3.4 -127.2 1.7 -128 0C-128.9 -1.7 -128.6 -3.5 -126.7 -5.2C-124.8 -6.9 -121.1 -8.6 -116.7 -10.1C-112.4 -11.5 -106.4 -12.9 -100.5 -14.1C-94.6 -15.4 -87.9 -16.4 -81.2 -17.5C-74.5 -18.5 -67.6 -19.4 -60.3 -20.2C-53 -21 -45.5 -21.8 -37.5 -22.4C-29.6 -22.9 -21.2 -23.4 -12.8 -23.6C-4.4 -23.8 4.4 -23.9 12.9 -23.7C21.4 -23.6 29.9 -23.2 38.2 -22.8C46.5 -22.3 54.7 -21.7 62.5 -21C70.3 -20.2 78.1 -19.3 85 -18.3C91.9 -17.2 98.7 -16 103.9 -14.6C109.1 -13.2 113.4 -11.6 116.3 -10C119.1 -8.4 120.4 -6.7 121.1 -5C121.7 -3.3 120.8 -1.6 120 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Inflammatory prostaglandins</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">pain, fever, swelling</text></g><g class="hot dr-node dr-n-out" id="nd-ltr" tabindex="0" data-info="Leukotrienes made by 5-lipoxygenase: they narrow the airways, increase mucus and attract inflammatory cells. Receptor blockers such as montelukast act on their receptor instead (not drawn)." transform="translate(790 490)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M107.3 0C107 1.6 105.9 3.2 104.5 4.8C103.1 6.4 101.3 8 98.9 9.6C96.5 11.2 93.9 12.8 90.1 14.3C86.4 15.8 81.9 17.3 76.4 18.5C71 19.8 64.3 20.9 57.4 21.7C50.4 22.5 42.4 23 34.8 23.3C27.1 23.7 19 23.7 11.4 23.6C3.7 23.6 -3.8 23.4 -11.1 23.1C-18.5 22.9 -25.7 22.5 -32.9 22.1C-40 21.6 -47.2 21.1 -54 20.4C-60.7 19.7 -67.4 18.8 -73.3 17.8C-79.2 16.7 -84.7 15.5 -89.3 14.2C-93.9 12.8 -97.9 11.3 -101.2 9.8C-104.5 8.3 -107.1 6.7 -109.1 5.1C-111 3.4 -112.4 1.7 -112.7 0C-113 -1.7 -112.5 -3.5 -110.7 -5.1C-108.9 -6.8 -105.8 -8.4 -102 -9.9C-98.2 -11.4 -93.1 -12.7 -87.9 -13.9C-82.6 -15.1 -76.6 -16.2 -70.8 -17.1C-64.9 -18.1 -58.9 -19 -52.6 -19.9C-46.4 -20.7 -40.1 -21.6 -33.2 -22.3C-26.4 -23 -19.1 -23.7 -11.6 -24.1C-4.1 -24.5 4.1 -24.7 11.9 -24.6C19.6 -24.5 27.7 -24.1 35.1 -23.6C42.5 -23 49.6 -22.1 56 -21.2C62.5 -20.2 68.4 -19.1 73.9 -17.9C79.3 -16.7 84.4 -15.4 88.7 -14.1C93 -12.7 96.9 -11.2 99.8 -9.7C102.7 -8.2 104.9 -6.5 106.1 -4.9C107.4 -3.3 107.6 -1.6 107.3 0Z"/><path class="bio-blob-shade" d="M96.6 0C96.3 1.5 95.3 2.9 94.1 4.4C92.8 5.8 91.2 7.2 89 8.7C86.9 10.1 84.5 11.5 81.1 12.9C77.7 14.2 73.7 15.6 68.8 16.7C63.9 17.8 57.9 18.8 51.6 19.5C45.4 20.2 38.2 20.7 31.3 21C24.4 21.3 17.1 21.3 10.2 21.3C3.4 21.2 -3.4 21 -10 20.8C-16.7 20.6 -23.2 20.3 -29.6 19.9C-36 19.5 -42.5 19 -48.6 18.4C-54.7 17.7 -60.7 16.9 -66 16C-71.3 15.1 -76.2 13.9 -80.4 12.7C-84.5 11.5 -88.1 10.2 -91 8.8C-94 7.5 -96.4 6 -98.2 4.6C-99.9 3.1 -101.2 1.5 -101.4 0C-101.7 -1.5 -101.2 -3.1 -99.6 -4.6C-98 -6.1 -95.3 -7.6 -91.8 -8.9C-88.4 -10.2 -83.8 -11.4 -79.1 -12.5C-74.4 -13.6 -69 -14.5 -63.7 -15.4C-58.4 -16.3 -53 -17.1 -47.4 -17.9C-41.7 -18.7 -36.1 -19.4 -29.9 -20.1C-23.8 -20.7 -17.2 -21.3 -10.4 -21.7C-3.7 -22 3.7 -22.2 10.7 -22.2C17.7 -22.1 25 -21.7 31.6 -21.2C38.2 -20.7 44.6 -19.9 50.4 -19.1C56.2 -18.2 61.6 -17.2 66.5 -16.1C71.4 -15 75.9 -13.9 79.8 -12.7C83.7 -11.4 87.2 -10.1 89.8 -8.7C92.5 -7.4 94.4 -5.9 95.5 -4.4C96.6 -3 96.8 -1.5 96.6 0Z"/><path class="bio-blob-highlight" d="M75.1 0C74.9 1.1 74.1 2.3 73.2 3.4C72.2 4.5 70.9 5.6 69.3 6.7C67.6 7.8 65.7 9 63.1 10C60.5 11 57.3 12.1 53.5 13C49.7 13.8 45 14.6 40.2 15.2C35.3 15.7 29.7 16.1 24.3 16.3C19 16.6 13.3 16.6 8 16.5C2.6 16.5 -2.6 16.4 -7.8 16.2C-13 16 -18 15.8 -23 15.5C-28 15.1 -33.1 14.8 -37.8 14.3C-42.5 13.8 -47.2 13.2 -51.3 12.4C-55.5 11.7 -59.3 10.8 -62.5 9.9C-65.8 9 -68.5 7.9 -70.8 6.9C-73.1 5.8 -75 4.7 -76.3 3.5C-77.7 2.4 -78.7 1.2 -78.9 0C-79.1 -1.2 -78.7 -2.4 -77.5 -3.6C-76.2 -4.7 -74.1 -5.9 -71.4 -6.9C-68.8 -8 -65.1 -8.9 -61.5 -9.7C-57.9 -10.6 -53.6 -11.3 -49.5 -12C-45.4 -12.7 -41.2 -13.3 -36.8 -13.9C-32.5 -14.5 -28 -15.1 -23.3 -15.6C-18.5 -16.1 -13.4 -16.6 -8.1 -16.9C-2.9 -17.1 2.9 -17.3 8.3 -17.2C13.8 -17.2 19.4 -16.9 24.6 -16.5C29.7 -16.1 34.7 -15.5 39.2 -14.8C43.7 -14.2 47.9 -13.4 51.7 -12.5C55.5 -11.7 59.1 -10.8 62.1 -9.8C65.1 -8.9 67.8 -7.9 69.9 -6.8C71.9 -5.7 73.4 -4.6 74.3 -3.4C75.2 -2.3 75.3 -1.1 75.1 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M107.3 0C107 1.6 105.9 3.2 104.5 4.8C103.1 6.4 101.3 8 98.9 9.6C96.5 11.2 93.9 12.8 90.1 14.3C86.4 15.8 81.9 17.3 76.4 18.5C71 19.8 64.3 20.9 57.4 21.7C50.4 22.5 42.4 23 34.8 23.3C27.1 23.7 19 23.7 11.4 23.6C3.7 23.6 -3.8 23.4 -11.1 23.1C-18.5 22.9 -25.7 22.5 -32.9 22.1C-40 21.6 -47.2 21.1 -54 20.4C-60.7 19.7 -67.4 18.8 -73.3 17.8C-79.2 16.7 -84.7 15.5 -89.3 14.2C-93.9 12.8 -97.9 11.3 -101.2 9.8C-104.5 8.3 -107.1 6.7 -109.1 5.1C-111 3.4 -112.4 1.7 -112.7 0C-113 -1.7 -112.5 -3.5 -110.7 -5.1C-108.9 -6.8 -105.8 -8.4 -102 -9.9C-98.2 -11.4 -93.1 -12.7 -87.9 -13.9C-82.6 -15.1 -76.6 -16.2 -70.8 -17.1C-64.9 -18.1 -58.9 -19 -52.6 -19.9C-46.4 -20.7 -40.1 -21.6 -33.2 -22.3C-26.4 -23 -19.1 -23.7 -11.6 -24.1C-4.1 -24.5 4.1 -24.7 11.9 -24.6C19.6 -24.5 27.7 -24.1 35.1 -23.6C42.5 -23 49.6 -22.1 56 -21.2C62.5 -20.2 68.4 -19.1 73.9 -17.9C79.3 -16.7 84.4 -15.4 88.7 -14.1C93 -12.7 96.9 -11.2 99.8 -9.7C102.7 -8.2 104.9 -6.5 106.1 -4.9C107.4 -3.3 107.6 -1.6 107.3 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Leukotrienes</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">airway narrowing, inflammation</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 578L55.5 584.1L48.5 584.1L45 578L48.5 571.9L55.5 571.9Z" style="opacity:1"/><text class="dr-label" x="68" y="582">drug (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or viral load is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Tissue injury or inflammation</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="usual"><span class="dr-ticks"><i>slight</i><i>usual</i><i>strong</i></span></label>
+  <label class="dr-range"><span>Drug class (generic)</span><select id="drug"><option value="0">none</option><option value="1">corticosteroid type</option><option value="2">non-selective NSAID (ibuprofen or diclofenac type)</option><option value="3">aspirin type (irreversible COX inhibitor)</option><option value="4">COX-2 selective (celecoxib type)</option><option value="5">5-lipoxygenase inhibitor (zileuton type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>The pathway and the drugs.</strong> Phospholipase A2 frees arachidonic acid; COX-1 and COX-2 make prostaglandins and thromboxane; 5-lipoxygenase makes leukotrienes. Corticosteroids lower the first step, aspirin acetylates COX irreversibly, other NSAIDs block COX reversibly, COX-2 selective drugs spare COX-1, and zileuton inhibits 5-lipoxygenase. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> Differences between individual NSAIDs, the central action of paracetamol, COX-3 and other isoforms, the gastric and cardiovascular risk balance of COX-2 selective drugs, the effect of prostaglandins on the kidney and blood pressure, aspirin's low-dose antiplatelet use (see the antiplatelet figure), leukotriene receptor antagonists, and the many non-eicosanoid effects of corticosteroids are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Tissue injury or inflammation","a":[0.3,0.65,0.95],"names":["slight","usual","strong"],"ticks":["slight","usual","strong"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"corticosteroid type","blocks":{"e_pla":0.85}},{"label":"non-selective NSAID (ibuprofen or diclofenac type)","blocks":{"e_c1":0.85,"e_c2":0.85}},{"label":"aspirin type (irreversible COX inhibitor)","blocks":{"e_c1":0.9,"e_c2":0.5}},{"label":"COX-2 selective (celecoxib type)","blocks":{"e_c1":0.05,"e_c2":0.85}},{"label":"5-lipoxygenase inhibitor (zileuton type)","blocks":{"e_lox":0.85}}],"nodes":[{"id":"pl","kind":"source"},{"id":"aa","kind":"mid"},{"id":"pg1","kind":"out"},{"id":"pg2","kind":"out"},{"id":"ltr","kind":"out"}],"edges":[{"id":"e_pla","from":"pl","to":"aa"},{"id":"e_c1","from":"aa","to":"pg1","w":0.9},{"id":"e_c2","from":"aa","to":"pg2","w":0.9},{"id":"e_lox","from":"aa","to":"ltr","w":0.9}],"outputs":[{"node":"pg1","words":["lost","reduced","normal"],"cuts":[0.2,0.5]},{"node":"pg2","words":["low","reduced","high"],"cuts":[0.2,0.5]},{"node":"ltr","words":["low","moderate","high"],"cuts":[0.2,0.5]}],"readout":"gastric protection {0} · pain and inflammation {1} · leukotrienes {2}","status":"Injury: {level} · {drug} ·","drugNames":["no drug","corticosteroid","non-selective NSAID","aspirin","COX-2 selective NSAID","5-lipoxygenase inhibitor"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = n.fixed != null ? n.fixed : Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * Math.max(0, blocked[n.inv] || 0); });
+  S.nodes.forEach((n) => { if (n.kind === "calc") { let v = n.base || 0; (n.terms || []).forEach((t) => { const c0 = t[0].charAt(0), id = t[0].slice(2); v += t[1] * (c0 === "e" ? flux[id] : c0 === "b" ? Math.max(0, blocked[id] || 0) : lv[id]); }); lv[n.id] = Math.max(0, Math.min(1, v)); } });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_pla","p0":[186,300],"p1":[357,300]},{"id":"e_c1","p0":[491.7310107506181,276.6797292864193],"p1":[741.707810653768,136.98681169348262]},{"id":"e_c2","p0":[538,300],"p1":[657,300]},{"id":"e_lox","p0":[491.7310107506181,323.3202707135807],"p1":[742.1372317841236,463.25315893818674]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), enh: $("enh-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    if (e.enh) e.enh.style.opacity = (e.b < -0.02 ? 0.35 + 0.65 * clamp(-e.b) : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

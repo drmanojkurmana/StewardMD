@@ -1,0 +1,224 @@
+{
+ "id": "opioids",
+ "title": "Opioids at the mu receptor: pain and breathing",
+ "ariaLabel": "Schematic of an opioid-releasing nerve terminal acting on two cells that carry mu opioid receptors coupled to Gi: a pain-pathway neuron in the spinal cord and brain, where activation lowers pain transmission, and a respiratory neuron in the brainstem, where activation lowers breathing drive. A full agonist acts on both, a partial agonist acts less on breathing, and a competitive antagonist such as naloxone blocks the receptor and reverses an overdose.",
+ "caption": "Schematic, not to scale. Response levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.",
+ "level": {
+  "label": "Natural opioid signalling (endorphins, enkephalins)",
+  "a": [
+   0.05,
+   0.15,
+   0.4
+  ],
+  "names": [
+   "low",
+   "usual",
+   "raised (stress, pain)"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "raised"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "full agonist (morphine or fentanyl type)",
+   "status": "full agonist",
+   "cols": [
+    {
+     "g": 0.5
+    },
+    {
+     "g": 0.5
+    }
+   ]
+  },
+  {
+   "label": "partial agonist (buprenorphine type)",
+   "status": "partial agonist",
+   "cols": [
+    {
+     "g": 0.4
+    },
+    {
+     "g": 0.1
+    }
+   ]
+  },
+  {
+   "label": "antagonist (naloxone type)",
+   "status": "antagonist",
+   "cols": [
+    {
+     "b": 0.85
+    },
+    {
+     "b": 0.85
+    }
+   ]
+  },
+  {
+   "label": "full agonist in overdose, then naloxone type",
+   "status": "agonist overdose reversed by an antagonist",
+   "cols": [
+    {
+     "g": 0.55,
+     "b": 0.85
+    },
+    {
+     "g": 0.55,
+     "b": 0.85
+    }
+   ]
+  }
+ ],
+ "readout": "pain transmission {0} · breathing drive {1}",
+ "words": [
+  "usual",
+  "reduced",
+  "markedly reduced"
+ ],
+ "status": "Natural opioid signalling: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "pain transmission usual · breathing drive usual"
+  ],
+  [
+   1,
+   1,
+   "pain transmission markedly reduced · breathing drive markedly reduced"
+  ],
+  [
+   1,
+   2,
+   "pain transmission reduced · breathing drive reduced"
+  ],
+  [
+   1,
+   3,
+   "pain transmission usual · breathing drive usual"
+  ],
+  [
+   1,
+   4,
+   "pain transmission reduced · breathing drive reduced"
+  ]
+ ],
+ "blockInfo": "An opioid antagonist molecule (generic teaching symbol, not a named drug's shape) in the receptor's binding pocket. It occupies the pocket without activating the receptor, so opioids and endorphins cannot bind where it sits. The block is competitive: a large amount of agonist can partly outcompete it. The brightness of the symbol shows how many receptors it holds.",
+ "blockKey": "opioid antagonist (generic)",
+ "agonistInfo": "An opioid agonist molecule (generic teaching symbol) in the binding pocket. It activates the mu receptor like an endorphin does, adding to the natural signal. A partial agonist activates less, which is why its effect on breathing levels off.",
+ "agonistKey": "opioid agonist (generic)",
+ "terminal": {
+  "label": "opioid peptide-releasing neuron",
+  "vesicle": "enkephalin",
+  "keyLabel": "endogenous opioid",
+  "info": "Interneuron that releases enkephalins and other opioid peptides (endorphins and dynorphins come from other neurons and the pituitary). Opioid drugs reach the same receptors through the blood, so they act on every cell that carries them."
+ },
+ "molecule": {
+  "draw": "none",
+  "name": "",
+  "formula": "",
+  "info": ""
+ },
+ "cols": [
+  {
+   "key": "mp",
+   "name": "μ",
+   "organ": "pain pathway neuron",
+   "gprot": "Gαi",
+   "eff": "AC",
+   "sign": "−",
+   "msg": "cAMP",
+   "inv": true,
+   "end": {
+    "kind": "pka"
+   },
+   "out": "pain transmission ↓",
+   "sub": "Gαi · inhibits AC · cAMP ↓",
+   "words": [
+    "usual",
+    "reduced",
+    "markedly reduced"
+   ],
+   "info": {
+    "cell": "Neuron of the pain pathway (spinal dorsal horn, brainstem and thalamus), and the terminals of pain fibres that reach it, patch of membrane in flat cross-section, schematic and not to scale.",
+    "rec": "Mu opioid receptor: a seven-transmembrane G protein-coupled receptor coupled to Gαi/o. Its βγ pair opens potassium channels and closes calcium channels, so neurons fire less and release less transmitter (not drawn). Delta and kappa receptors are left out.",
+    "end": "Protein kinase A (PKA): with less cAMP the catalytic subunits stay bound to the regulatory ones (drawn: C stays close). The main effects of opioids on firing and release come from the βγ pair acting on ion channels, not drawn here."
+   }
+  },
+  {
+   "key": "mr",
+   "name": "μ",
+   "organ": "respiratory neuron",
+   "gprot": "Gαi",
+   "eff": "AC",
+   "sign": "−",
+   "msg": "cAMP",
+   "inv": true,
+   "end": {
+    "kind": "pka"
+   },
+   "out": "breathing drive ↓",
+   "sub": "Gαi · inhibits AC · cAMP ↓",
+   "words": [
+    "usual",
+    "reduced",
+    "markedly reduced"
+   ],
+   "info": {
+    "cell": "Neuron of the brainstem respiratory centres (for example the pre-Bötzinger complex), patch of membrane. The same mu receptor sits here, so breathing is slowed along with pain.",
+    "rec": "Mu opioid receptor on a respiratory neuron: the same receptor as in the pain pathway, coupled to Gαi/o. Its activation lowers the rate and depth of breathing and the response to carbon dioxide, which is the main cause of death in overdose.",
+    "end": "Protein kinase A (PKA): with less cAMP the catalytic subunits stay bound to the regulatory ones. The effects on neuronal firing mainly come from the βγ pair acting on ion channels, not drawn here."
+   }
+  }
+ ],
+ "sources": [
+  "<strong>Antagonists and partial agonists.</strong> Naloxone and naltrexone are competitive inhibitors that bind central opioid receptors without activating them, with the highest affinity for the mu receptor, and reverse respiratory depression, analgesia and sedation; naloxone is approved for opioid overdose (<a href=\"https://www.statpearls.com/point-of-care/26215\">Opioid antagonists, StatPearls</a>). Buprenorphine is a mu partial agonist with slow dissociation and high affinity, which can prevent full activation by more potent opioids and limits respiratory depression (NCBI Bookshelf).",
+  "<strong>Receptor coupling and the two effects.</strong> Mu receptors couple to Gi/o, and the same receptor mediates analgesia and respiratory depression; the βγ effects on potassium and calcium channels. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Kappa and delta receptors, receptor desensitisation and tolerance, withdrawal, nausea, constipation, miosis and itching (other mu effects), biased signalling at beta-arrestin, differences between individual opioids (metabolism, duration, active metabolites), opioids that also act on other targets (tramadol, tapentadol), the short duration of naloxone compared with long-acting opioids, and dependence and misuse are left out. The partial agonist is drawn with a smaller effect on breathing than on pain, which is an idealisation. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Opioids at the mu receptor: pain and breathing",
+  "blurb": "Interactive figure: full and partial agonists, and naloxone reversal, in pain and respiratory neurons",
+  "drugs": {
+   "morphine": "d=1",
+   "fentanyl": "d=1",
+   "codeine": "d=1",
+   "oxycodone": "d=1",
+   "hydromorphone": "d=1",
+   "pethidine": "d=1",
+   "meperidine": "d=1",
+   "methadone": "d=1",
+   "tramadol": "d=1",
+   "tapentadol": "d=1",
+   "diamorphine": "d=1",
+   "heroin": "d=1",
+   "remifentanil": "d=1",
+   "sufentanil": "d=1",
+   "alfentanil": "d=1",
+   "buprenorphine": "d=2",
+   "butorphanol": "d=2",
+   "nalbuphine": "d=2",
+   "pentazocine": "d=2",
+   "naloxone": "d=3",
+   "naltrexone": "d=3",
+   "nalmefene": "d=3"
+  },
+  "terms": [
+   "opioids?",
+   "opiates?",
+   "mu[- ]opioid",
+   "μ[- ]opioid",
+   "opioid (?:receptor|overdose|antagonists?|agonists?)"
+  ]
+ }
+}

@@ -1,0 +1,309 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Anticoagulants and the clotting cascade</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+.dr-zone{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint);stroke-width:.8;stroke-dasharray:3 4}
+.dr-flowline{stroke:var(--anatomy-mid);stroke-width:1.5}
+.dr-flowhead{fill:none;stroke:var(--anatomy-mid);stroke-width:1.5;stroke-linecap:round}
+.dr-enz-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.dr-node{--on:0}
+.dr-node .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-node{filter:drop-shadow(0 0 calc(var(--on,0) * 6px) var(--anatomy-lit))}
+.dr-n-out .dr-nl{fill:var(--anatomy-strong)}
+.dr-nl{pointer-events:none}.dr-ns{pointer-events:none;font-size:10.5px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Anticoagulants and the clotting cascade</span><span class="iso-plate-corner" data-corner="hint">hover or focus a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>thrombin high · clot formation firm</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 640" role="img" aria-label="Schematic of the clotting cascade reduced to its key steps: a clotting trigger makes factor Xa, Xa makes thrombin from prothrombin, thrombin turns fibrinogen into fibrin, and fibrin forms the clot. Warfarin lowers the vitamin K dependent factors, heparin and its relatives act through antithrombin on Xa and thrombin, factor Xa inhibitors block Xa, and a direct thrombin inhibitor blocks thrombin."><ellipse class="dr-halo" cx="480" cy="626" rx="430" ry="16"/><path class="dr-rail dr-flowline" id="ln-e_x" d="M214 130L261 130"/><path class="dr-flowhead" d="M261 130l-8.1 3.9M261 130l-8.1 -3.9"/><g id="pt-e_x"></g><g class="hot dr-enz" tabindex="0" data-info="Activation of factor X by the tissue factor and intrinsic complexes. Vitamin K dependent factors II, VII, IX and X are all needed; warfarin lowers their amount, so this step and the next both fall."><rect class="dr-enz-r" x="192.5" y="119" width="90" height="22" rx="11"/><text class="dr-prot" x="237.5" y="134" text-anchor="middle">VIIa · IXa</text></g><g class="hot dr-block" id="blk-e_x" tabindex="0" data-info="An anticoagulant of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so everything after the step is reduced. Warfarin works by lowering the amount of clotting factors made, which is why it is drawn on the early steps and takes days to act."><path class="dr-block-hex" d="M246.5 105L242 112.8L233 112.8L228.5 105L233 97.2L242 97.2Z"/><path class="dr-block-x" d="M233.9 101.4L241.1 108.6M241.1 101.4L233.9 108.6"/></g><path class="dr-rail dr-flowline" id="ln-e_t" d="M434 130L497 130"/><path class="dr-flowhead" d="M497 130l-8.1 3.9M497 130l-8.1 -3.9"/><g id="pt-e_t"></g><g class="hot dr-enz" tabindex="0" data-info="Prothrombinase: factor Xa with Va converts prothrombin (II) to thrombin. Factor Xa inhibitors block Xa itself; heparins and fondaparinux act through antithrombin, which inhibits Xa (and, for heparin, thrombin)."><rect class="dr-enz-r" x="431.6" y="119" width="67.8" height="22" rx="11"/><text class="dr-prot" x="465.5" y="134" text-anchor="middle">Xa + Va</text></g><g class="hot dr-block" id="blk-e_t" tabindex="0" data-info="An anticoagulant of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so everything after the step is reduced. Warfarin works by lowering the amount of clotting factors made, which is why it is drawn on the early steps and takes days to act."><path class="dr-block-hex" d="M474.5 105L470 112.8L461 112.8L456.5 105L461 97.2L470 97.2Z"/><path class="dr-block-x" d="M461.9 101.4L469.1 108.6M469.1 101.4L461.9 108.6"/></g><path class="dr-rail dr-flowline" id="ln-e_f" d="M590 158L590 297"/><path class="dr-flowhead" d="M590 297l-3.9 -8.1M590 297l3.9 -8.1"/><g id="pt-e_f"></g><g class="hot dr-enz" tabindex="0" data-info="Thrombin converting fibrinogen to fibrin. Direct thrombin inhibitors block thrombin itself; heparin, through antithrombin, also inhibits thrombin when a long enough chain binds both."><rect class="dr-enz-r" x="552.4" y="216.5" width="75.2" height="22" rx="11"/><text class="dr-prot" x="590" y="231.5" text-anchor="middle">thrombin</text></g><g class="hot dr-block" id="blk-e_f" tabindex="0" data-info="An anticoagulant of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so everything after the step is reduced. Warfarin works by lowering the amount of clotting factors made, which is why it is drawn on the early steps and takes days to act."><path class="dr-block-hex" d="M599 202.5L594.5 210.3L585.5 210.3L581 202.5L585.5 194.7L594.5 194.7Z"/><path class="dr-block-x" d="M586.4 198.9L593.6 206.1M593.6 198.9L586.4 206.1"/></g><path class="dr-rail dr-flowline" id="ln-e_c" d="M590 358L590 487"/><path class="dr-flowhead" d="M590 487l-3.9 -8.1M590 487l3.9 -8.1"/><g id="pt-e_c"></g><g class="hot dr-node dr-n-source" id="nd-trig" tabindex="0" data-info="What starts clotting: exposed tissue factor, damaged vessel wall, or contact activation. The slider sets how strong it is." transform="translate(110 130)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M103.3 0C104 1.7 103.7 3.5 102.2 5.2C100.7 6.9 97.7 8.6 94.1 10.1C90.5 11.5 85.7 12.9 80.9 14.1C76 15.3 70.6 16.4 65.2 17.4C59.8 18.4 54.2 19.3 48.4 20.1C42.6 20.9 36.6 21.7 30.2 22.3C23.9 22.9 17.1 23.4 10.4 23.7C3.6 23.9 -3.6 24 -10.4 23.9C-17.3 23.7 -24.3 23.4 -31 22.9C-37.7 22.4 -44.3 21.8 -50.5 21C-56.8 20.2 -63 19.3 -68.5 18.2C-73.9 17.2 -79.3 15.9 -83.4 14.5C-87.6 13.2 -91.1 11.6 -93.4 10C-95.8 8.4 -96.9 6.6 -97.4 5C-98 3.3 -97.3 1.6 -96.7 0C-96 -1.6 -94.8 -3.2 -93.4 -4.8C-92.1 -6.3 -90.7 -7.9 -88.6 -9.5C-86.5 -11 -84.3 -12.6 -80.9 -14.1C-77.6 -15.6 -73.5 -17.1 -68.6 -18.3C-63.8 -19.5 -57.8 -20.6 -51.6 -21.5C-45.4 -22.3 -38.4 -22.9 -31.6 -23.3C-24.7 -23.8 -17.5 -24 -10.5 -24.1C-3.5 -24.2 3.6 -24.1 10.5 -23.9C17.4 -23.7 24.3 -23.3 30.8 -22.8C37.3 -22.2 43.7 -21.5 49.5 -20.6C55.2 -19.7 60.6 -18.6 65.4 -17.4C70.2 -16.3 74.4 -15 78.4 -13.7C82.4 -12.4 86 -11 89.3 -9.5C92.6 -8.1 95.9 -6.6 98.2 -5C100.5 -3.4 102.7 -1.7 103.3 0Z"/><path class="bio-blob-shade" d="M93 0C93.6 1.5 93.4 3.2 92 4.7C90.6 6.2 87.9 7.7 84.7 9C81.5 10.4 77.1 11.6 72.8 12.7C68.4 13.8 63.5 14.7 58.7 15.6C53.8 16.5 48.8 17.4 43.6 18.1C38.3 18.8 32.9 19.6 27.2 20.1C21.5 20.6 15.4 21.1 9.3 21.3C3.2 21.5 -3.2 21.6 -9.4 21.5C-15.6 21.3 -21.9 21 -27.9 20.6C-33.9 20.2 -39.8 19.6 -45.5 18.9C-51.1 18.2 -56.7 17.4 -61.6 16.4C-66.5 15.5 -71.3 14.3 -75.1 13.1C-78.8 11.9 -82 10.4 -84.1 9C-86.2 7.5 -87.2 6 -87.7 4.5C-88.2 3 -87.6 1.5 -87 0C-86.4 -1.5 -85.3 -2.9 -84.1 -4.3C-82.9 -5.7 -81.6 -7.1 -79.7 -8.5C-77.9 -9.9 -75.8 -11.4 -72.8 -12.7C-69.9 -14 -66.2 -15.4 -61.8 -16.5C-57.4 -17.6 -52 -18.6 -46.4 -19.3C-40.9 -20.1 -34.6 -20.6 -28.4 -21C-22.3 -21.4 -15.8 -21.6 -9.5 -21.7C-3.2 -21.7 3.2 -21.7 9.4 -21.5C15.6 -21.3 21.9 -21 27.7 -20.5C33.6 -20 39.4 -19.3 44.5 -18.5C49.7 -17.7 54.5 -16.7 58.8 -15.7C63.2 -14.6 66.9 -13.5 70.5 -12.3C74.1 -11.1 77.4 -9.9 80.4 -8.6C83.3 -7.3 86.3 -5.9 88.4 -4.5C90.5 -3.1 92.4 -1.5 93 0Z"/><path class="bio-blob-highlight" d="M72.3 0C72.8 1.2 72.6 2.5 71.5 3.6C70.5 4.8 68.4 6 65.9 7C63.4 8.1 60 9 56.6 9.9C53.2 10.7 49.4 11.5 45.6 12.2C41.8 12.9 38 13.5 33.9 14.1C29.8 14.7 25.6 15.2 21.2 15.6C16.7 16 12 16.4 7.3 16.6C2.5 16.7 -2.5 16.8 -7.3 16.7C-12.1 16.6 -17 16.4 -21.7 16C-26.4 15.7 -31 15.2 -35.4 14.7C-39.7 14.2 -44.1 13.5 -47.9 12.8C-51.8 12 -55.5 11.1 -58.4 10.2C-61.3 9.2 -63.8 8.1 -65.4 7C-67 5.9 -67.8 4.6 -68.2 3.5C-68.6 2.3 -68.1 1.1 -67.7 0C-67.2 -1.1 -66.3 -2.2 -65.4 -3.3C-64.5 -4.4 -63.5 -5.5 -62 -6.6C-60.6 -7.7 -59 -8.8 -56.7 -9.9C-54.3 -10.9 -51.5 -12 -48.1 -12.8C-44.6 -13.7 -40.4 -14.4 -36.1 -15C-31.8 -15.6 -26.9 -16 -22.1 -16.3C-17.3 -16.6 -12.3 -16.8 -7.4 -16.8C-2.5 -16.9 2.5 -16.9 7.3 -16.7C12.1 -16.6 17 -16.3 21.6 -15.9C26.1 -15.5 30.6 -15 34.6 -14.4C38.7 -13.8 42.4 -13 45.8 -12.2C49.1 -11.4 52.1 -10.5 54.9 -9.6C57.6 -8.6 60.2 -7.7 62.5 -6.7C64.8 -5.7 67.1 -4.6 68.7 -3.5C70.4 -2.4 71.9 -1.2 72.3 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M103.3 0C104 1.7 103.7 3.5 102.2 5.2C100.7 6.9 97.7 8.6 94.1 10.1C90.5 11.5 85.7 12.9 80.9 14.1C76 15.3 70.6 16.4 65.2 17.4C59.8 18.4 54.2 19.3 48.4 20.1C42.6 20.9 36.6 21.7 30.2 22.3C23.9 22.9 17.1 23.4 10.4 23.7C3.6 23.9 -3.6 24 -10.4 23.9C-17.3 23.7 -24.3 23.4 -31 22.9C-37.7 22.4 -44.3 21.8 -50.5 21C-56.8 20.2 -63 19.3 -68.5 18.2C-73.9 17.2 -79.3 15.9 -83.4 14.5C-87.6 13.2 -91.1 11.6 -93.4 10C-95.8 8.4 -96.9 6.6 -97.4 5C-98 3.3 -97.3 1.6 -96.7 0C-96 -1.6 -94.8 -3.2 -93.4 -4.8C-92.1 -6.3 -90.7 -7.9 -88.6 -9.5C-86.5 -11 -84.3 -12.6 -80.9 -14.1C-77.6 -15.6 -73.5 -17.1 -68.6 -18.3C-63.8 -19.5 -57.8 -20.6 -51.6 -21.5C-45.4 -22.3 -38.4 -22.9 -31.6 -23.3C-24.7 -23.8 -17.5 -24 -10.5 -24.1C-3.5 -24.2 3.6 -24.1 10.5 -23.9C17.4 -23.7 24.3 -23.3 30.8 -22.8C37.3 -22.2 43.7 -21.5 49.5 -20.6C55.2 -19.7 60.6 -18.6 65.4 -17.4C70.2 -16.3 74.4 -15 78.4 -13.7C82.4 -12.4 86 -11 89.3 -9.5C92.6 -8.1 95.9 -6.6 98.2 -5C100.5 -3.4 102.7 -1.7 103.3 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Clotting trigger</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">injury, stasis, inflammation</text></g><g class="hot dr-node dr-n-mid" id="nd-fxa" tabindex="0" data-info="Factor Xa: formed when the extrinsic (tissue factor and VIIa) and intrinsic (XII, XI, IX and VIII) pathways meet. It sits at the start of the common pathway." transform="translate(350 130)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M81.7 0C81.8 1.7 81.4 3.5 80.1 5.1C78.8 6.8 76.6 8.4 73.9 9.9C71.2 11.3 67.6 12.7 63.8 13.9C60.1 15.1 55.7 16.2 51.5 17.2C47.2 18.2 42.9 19 38.3 19.9C33.8 20.8 29.2 21.6 24.2 22.3C19.2 23.1 13.9 23.8 8.5 24.2C3 24.6 -3 24.8 -8.7 24.7C-14.3 24.6 -20.3 24.2 -25.6 23.6C-31 23 -36.1 22.1 -40.7 21.2C-45.4 20.2 -49.6 19 -53.5 17.8C-57.4 16.6 -61 15.3 -64.1 14C-67.2 12.6 -70.1 11.2 -72.2 9.6C-74.4 8.1 -76.1 6.5 -77.1 4.9C-78.1 3.3 -78.4 1.6 -78.3 0C-78.2 -1.6 -77.4 -3.3 -76.4 -4.9C-75.4 -6.5 -74 -8.1 -72.2 -9.6C-70.4 -11.2 -68.4 -12.8 -65.6 -14.3C-62.9 -15.8 -59.6 -17.3 -55.6 -18.5C-51.6 -19.7 -46.7 -20.9 -41.7 -21.7C-36.6 -22.5 -30.8 -23 -25.2 -23.3C-19.7 -23.6 -13.8 -23.6 -8.3 -23.6C-2.7 -23.5 2.7 -23.3 8.1 -23C13.4 -22.8 18.6 -22.4 23.8 -22C29 -21.6 34.3 -21.1 39.3 -20.4C44.2 -19.7 49.2 -18.9 53.5 -17.8C57.9 -16.8 61.9 -15.6 65.3 -14.2C68.7 -12.9 71.6 -11.4 73.9 -9.9C76.3 -8.3 78.1 -6.7 79.4 -5.1C80.7 -3.4 81.6 -1.7 81.7 0Z"/><path class="bio-blob-shade" d="M73.5 0C73.6 1.5 73.2 3.1 72.1 4.6C70.9 6.1 69 7.6 66.5 8.9C64.1 10.2 60.8 11.4 57.4 12.5C54.1 13.6 50.2 14.5 46.3 15.4C42.5 16.3 38.6 17.1 34.5 17.9C30.4 18.7 26.3 19.5 21.8 20.1C17.3 20.7 12.5 21.4 7.6 21.7C2.7 22.1 -2.7 22.3 -7.8 22.2C-12.9 22.2 -18.2 21.8 -23 21.3C-27.9 20.7 -32.5 19.9 -36.7 19.1C-40.9 18.2 -44.7 17.1 -48.2 16C-51.7 15 -54.9 13.8 -57.7 12.6C-60.5 11.3 -63.1 10 -65 8.7C-67 7.3 -68.5 5.9 -69.4 4.4C-70.3 3 -70.6 1.5 -70.5 0C-70.4 -1.5 -69.7 -2.9 -68.8 -4.4C-67.9 -5.8 -66.6 -7.3 -65 -8.7C-63.4 -10.1 -61.6 -11.5 -59.1 -12.9C-56.6 -14.2 -53.6 -15.6 -50 -16.7C-46.4 -17.8 -42.1 -18.8 -37.5 -19.5C-33 -20.2 -27.7 -20.7 -22.7 -21C-17.7 -21.3 -12.4 -21.3 -7.4 -21.2C-2.4 -21.2 2.4 -21 7.3 -20.7C12.1 -20.5 16.8 -20.2 21.5 -19.8C26.1 -19.4 30.9 -19 35.3 -18.4C39.8 -17.7 44.3 -17 48.2 -16.1C52.1 -15.1 55.8 -14 58.8 -12.8C61.9 -11.6 64.4 -10.3 66.5 -8.9C68.6 -7.5 70.3 -6 71.4 -4.6C72.6 -3.1 73.4 -1.5 73.5 0Z"/><path class="bio-blob-highlight" d="M57.2 0C57.3 1.2 57 2.4 56.1 3.6C55.2 4.7 53.6 5.9 51.7 6.9C49.8 7.9 47.3 8.9 44.7 9.7C42.1 10.6 39 11.3 36 12C33.1 12.7 30 13.3 26.8 13.9C23.6 14.5 20.4 15.1 16.9 15.6C13.5 16.1 9.8 16.6 5.9 16.9C2.1 17.2 -2.1 17.4 -6.1 17.3C-10 17.2 -14.2 17 -17.9 16.5C-21.7 16.1 -25.3 15.5 -28.5 14.8C-31.8 14.1 -34.7 13.3 -37.5 12.5C-40.2 11.6 -42.7 10.7 -44.9 9.8C-47 8.8 -49 7.8 -50.6 6.8C-52.1 5.7 -53.3 4.6 -54 3.4C-54.7 2.3 -54.9 1.1 -54.8 0C-54.7 -1.1 -54.2 -2.3 -53.5 -3.4C-52.8 -4.5 -51.8 -5.7 -50.6 -6.8C-49.3 -7.9 -47.9 -9 -45.9 -10C-44 -11 -41.7 -12.1 -38.9 -13C-36.1 -13.8 -32.7 -14.6 -29.2 -15.2C-25.6 -15.7 -21.6 -16.1 -17.7 -16.3C-13.8 -16.5 -9.7 -16.5 -5.8 -16.5C-1.9 -16.5 1.9 -16.3 5.6 -16.1C9.4 -15.9 13 -15.7 16.7 -15.4C20.3 -15.1 24 -14.8 27.5 -14.3C30.9 -13.8 34.4 -13.2 37.5 -12.5C40.5 -11.8 43.4 -10.9 45.7 -10C48.1 -9 50.1 -8 51.8 -6.9C53.4 -5.8 54.7 -4.7 55.6 -3.5C56.5 -2.4 57.1 -1.2 57.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M81.7 0C81.8 1.7 81.4 3.5 80.1 5.1C78.8 6.8 76.6 8.4 73.9 9.9C71.2 11.3 67.6 12.7 63.8 13.9C60.1 15.1 55.7 16.2 51.5 17.2C47.2 18.2 42.9 19 38.3 19.9C33.8 20.8 29.2 21.6 24.2 22.3C19.2 23.1 13.9 23.8 8.5 24.2C3 24.6 -3 24.8 -8.7 24.7C-14.3 24.6 -20.3 24.2 -25.6 23.6C-31 23 -36.1 22.1 -40.7 21.2C-45.4 20.2 -49.6 19 -53.5 17.8C-57.4 16.6 -61 15.3 -64.1 14C-67.2 12.6 -70.1 11.2 -72.2 9.6C-74.4 8.1 -76.1 6.5 -77.1 4.9C-78.1 3.3 -78.4 1.6 -78.3 0C-78.2 -1.6 -77.4 -3.3 -76.4 -4.9C-75.4 -6.5 -74 -8.1 -72.2 -9.6C-70.4 -11.2 -68.4 -12.8 -65.6 -14.3C-62.9 -15.8 -59.6 -17.3 -55.6 -18.5C-51.6 -19.7 -46.7 -20.9 -41.7 -21.7C-36.6 -22.5 -30.8 -23 -25.2 -23.3C-19.7 -23.6 -13.8 -23.6 -8.3 -23.6C-2.7 -23.5 2.7 -23.3 8.1 -23C13.4 -22.8 18.6 -22.4 23.8 -22C29 -21.6 34.3 -21.1 39.3 -20.4C44.2 -19.7 49.2 -18.9 53.5 -17.8C57.9 -16.8 61.9 -15.6 65.3 -14.2C68.7 -12.9 71.6 -11.4 73.9 -9.9C76.3 -8.3 78.1 -6.7 79.4 -5.1C80.7 -3.4 81.6 -1.7 81.7 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Factor Xa</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">the common pathway</text></g><g class="hot dr-node dr-n-out" id="nd-thr" tabindex="0" data-info="Thrombin: made from prothrombin by factor Xa with factor Va. It converts fibrinogen to fibrin and also activates platelets and more factors (positive feedback, not drawn)." transform="translate(590 130)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M83.1 0C82.7 1.7 81.8 3.3 80.6 4.9C79.3 6.5 77.6 8.1 75.4 9.6C73.1 11.1 70.3 12.6 67 13.9C63.6 15.2 59.6 16.5 55.3 17.6C51.1 18.7 46.3 19.6 41.4 20.5C36.5 21.4 31.3 22.2 25.9 22.8C20.5 23.5 14.8 24 9 24.4C3.1 24.7 -3.1 24.9 -9.1 24.8C-15.1 24.7 -21.3 24.3 -26.9 23.6C-32.4 23 -37.7 22 -42.4 21C-47.1 20 -51.1 18.7 -54.9 17.4C-58.7 16.2 -61.9 14.9 -65.1 13.5C-68.3 12.2 -71.4 10.8 -74 9.4C-76.7 8 -79.4 6.5 -81.2 4.9C-83 3.4 -84.5 1.7 -84.9 0C-85.3 -1.7 -84.9 -3.4 -83.8 -5.1C-82.6 -6.7 -80.6 -8.4 -78.1 -9.9C-75.6 -11.5 -72.5 -13 -69 -14.3C-65.5 -15.7 -61.5 -17 -57.1 -18.1C-52.7 -19.2 -47.7 -20.3 -42.6 -21.1C-37.4 -21.9 -31.6 -22.5 -26 -22.8C-20.3 -23.2 -14.3 -23.3 -8.6 -23.4C-2.9 -23.4 2.8 -23.2 8.4 -22.9C14 -22.7 19.5 -22.4 25 -22C30.6 -21.6 36.2 -21.2 41.6 -20.6C47 -20 52.6 -19.2 57.5 -18.3C62.4 -17.3 67.1 -16.1 70.8 -14.7C74.5 -13.3 77.4 -11.7 79.4 -10.1C81.5 -8.5 82.5 -6.7 83.1 -5C83.7 -3.4 83.5 -1.7 83.1 0Z"/><path class="bio-blob-shade" d="M74.8 0C74.4 1.5 73.7 3 72.5 4.4C71.3 5.8 69.9 7.3 67.8 8.6C65.8 10 63.3 11.3 60.3 12.5C57.3 13.7 53.6 14.8 49.8 15.8C46 16.8 41.7 17.7 37.3 18.5C32.9 19.2 28.2 19.9 23.3 20.5C18.5 21.1 13.3 21.6 8.1 21.9C2.8 22.2 -2.8 22.4 -8.2 22.3C-13.6 22.2 -19.2 21.8 -24.2 21.3C-29.2 20.7 -34 19.8 -38.2 18.9C-42.4 18 -46 16.8 -49.4 15.7C-52.8 14.6 -55.7 13.4 -58.6 12.2C-61.5 11 -64.2 9.8 -66.6 8.5C-69.1 7.2 -71.5 5.9 -73.1 4.4C-74.7 3 -76 1.5 -76.4 0C-76.8 -1.5 -76.4 -3.1 -75.4 -4.6C-74.4 -6.1 -72.5 -7.6 -70.3 -8.9C-68.1 -10.3 -65.2 -11.7 -62.1 -12.9C-58.9 -14.1 -55.3 -15.3 -51.4 -16.3C-47.4 -17.3 -43 -18.2 -38.3 -19C-33.6 -19.7 -28.5 -20.2 -23.4 -20.6C-18.3 -20.9 -12.9 -21 -7.7 -21C-2.6 -21 2.6 -20.9 7.6 -20.6C12.6 -20.4 17.6 -20.2 22.5 -19.8C27.5 -19.5 32.6 -19.1 37.4 -18.5C42.3 -18 47.4 -17.3 51.8 -16.4C56.1 -15.5 60.4 -14.4 63.7 -13.2C67 -12 69.6 -10.5 71.5 -9.1C73.3 -7.6 74.3 -6.1 74.8 -4.5C75.4 -3 75.2 -1.5 74.8 0Z"/><path class="bio-blob-highlight" d="M58.2 0C57.9 1.2 57.3 2.3 56.4 3.4C55.5 4.5 54.4 5.7 52.8 6.7C51.2 7.8 49.2 8.8 46.9 9.7C44.5 10.7 41.7 11.5 38.7 12.3C35.8 13.1 32.4 13.7 29 14.4C25.6 15 21.9 15.5 18.2 16C14.4 16.4 10.4 16.8 6.3 17.1C2.2 17.3 -2.2 17.4 -6.4 17.4C-10.6 17.3 -14.9 17 -18.8 16.5C-22.7 16.1 -26.4 15.4 -29.7 14.7C-33 14 -35.8 13.1 -38.4 12.2C-41.1 11.3 -43.3 10.4 -45.6 9.5C-47.8 8.5 -50 7.6 -51.8 6.6C-53.7 5.6 -55.6 4.6 -56.8 3.5C-58.1 2.4 -59.1 1.2 -59.4 0C-59.7 -1.2 -59.4 -2.4 -58.6 -3.6C-57.9 -4.7 -56.4 -5.9 -54.7 -7C-52.9 -8 -50.7 -9.1 -48.3 -10C-45.8 -11 -43 -11.9 -39.9 -12.7C-36.9 -13.5 -33.4 -14.2 -29.8 -14.7C-26.2 -15.3 -22.1 -15.7 -18.2 -16C-14.2 -16.3 -10 -16.3 -6 -16.4C-2 -16.4 2 -16.2 5.9 -16.1C9.8 -15.9 13.7 -15.7 17.5 -15.4C21.4 -15.1 25.3 -14.8 29.1 -14.4C32.9 -14 36.9 -13.5 40.3 -12.8C43.7 -12.1 47 -11.2 49.6 -10.3C52.1 -9.3 54.2 -8.2 55.6 -7.1C57 -5.9 57.8 -4.7 58.2 -3.5C58.6 -2.4 58.5 -1.2 58.2 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M83.1 0C82.7 1.7 81.8 3.3 80.6 4.9C79.3 6.5 77.6 8.1 75.4 9.6C73.1 11.1 70.3 12.6 67 13.9C63.6 15.2 59.6 16.5 55.3 17.6C51.1 18.7 46.3 19.6 41.4 20.5C36.5 21.4 31.3 22.2 25.9 22.8C20.5 23.5 14.8 24 9 24.4C3.1 24.7 -3.1 24.9 -9.1 24.8C-15.1 24.7 -21.3 24.3 -26.9 23.6C-32.4 23 -37.7 22 -42.4 21C-47.1 20 -51.1 18.7 -54.9 17.4C-58.7 16.2 -61.9 14.9 -65.1 13.5C-68.3 12.2 -71.4 10.8 -74 9.4C-76.7 8 -79.4 6.5 -81.2 4.9C-83 3.4 -84.5 1.7 -84.9 0C-85.3 -1.7 -84.9 -3.4 -83.8 -5.1C-82.6 -6.7 -80.6 -8.4 -78.1 -9.9C-75.6 -11.5 -72.5 -13 -69 -14.3C-65.5 -15.7 -61.5 -17 -57.1 -18.1C-52.7 -19.2 -47.7 -20.3 -42.6 -21.1C-37.4 -21.9 -31.6 -22.5 -26 -22.8C-20.3 -23.2 -14.3 -23.3 -8.6 -23.4C-2.9 -23.4 2.8 -23.2 8.4 -22.9C14 -22.7 19.5 -22.4 25 -22C30.6 -21.6 36.2 -21.2 41.6 -20.6C47 -20 52.6 -19.2 57.5 -18.3C62.4 -17.3 67.1 -16.1 70.8 -14.7C74.5 -13.3 77.4 -11.7 79.4 -10.1C81.5 -8.5 82.5 -6.7 83.1 -5C83.7 -3.4 83.5 -1.7 83.1 0Z"/></g><text class="dr-prot dr-nl" x="0" y="4" text-anchor="middle">Thrombin (IIa)</text></g><g class="hot dr-node dr-n-mid" id="nd-fib" tabindex="0" data-info="Fibrin: thrombin cuts fibrinogen to fibrin monomers that polymerise into a mesh." transform="translate(590 330)"><g class="bio-blob" data-tone="mid"><path class="bio-blob-base" d="M106.4 0C105.7 1.6 104.3 3.2 102.8 4.8C101.3 6.3 99.7 7.9 97.4 9.5C95.1 11 92.5 12.6 88.8 14.1C85.1 15.5 80.6 17 75.2 18.2C69.8 19.4 63.3 20.5 56.5 21.4C49.8 22.2 42.2 22.8 34.7 23.3C27.2 23.7 19.3 24 11.6 24.1C3.9 24.3 -4 24.2 -11.6 24C-19.2 23.8 -26.9 23.5 -34.1 22.9C-41.3 22.3 -48.3 21.5 -54.6 20.6C-60.8 19.7 -66.6 18.6 -71.8 17.4C-77 16.2 -81.5 14.9 -85.8 13.6C-90.2 12.3 -94.2 10.9 -97.8 9.5C-101.5 8.1 -105.2 6.6 -107.8 5C-110.4 3.4 -112.8 1.7 -113.6 0C-114.3 -1.7 -114.1 -3.5 -112.4 -5.2C-110.7 -6.9 -107.4 -8.6 -103.6 -10.1C-99.7 -11.5 -94.4 -12.9 -89.2 -14.1C-83.9 -15.4 -78 -16.4 -72 -17.5C-66.1 -18.5 -59.9 -19.4 -53.5 -20.2C-47 -21 -40.3 -21.8 -33.3 -22.4C-26.3 -22.9 -18.8 -23.4 -11.4 -23.6C-3.9 -23.8 3.9 -23.9 11.4 -23.7C19 -23.6 26.6 -23.2 33.9 -22.8C41.2 -22.3 48.5 -21.7 55.4 -21C62.4 -20.2 69.3 -19.3 75.4 -18.3C81.6 -17.2 87.5 -16 92.1 -14.6C96.8 -13.2 100.6 -11.6 103.1 -10C105.7 -8.4 106.8 -6.7 107.4 -5C107.9 -3.3 107.2 -1.6 106.4 0Z"/><path class="bio-blob-shade" d="M95.8 0C95.1 1.5 93.9 2.9 92.5 4.3C91.2 5.7 89.8 7.1 87.7 8.5C85.6 9.9 83.3 11.4 79.9 12.7C76.6 14 72.5 15.3 67.7 16.4C62.8 17.5 56.9 18.5 50.9 19.2C44.8 20 37.9 20.5 31.2 21C24.5 21.4 17.4 21.6 10.5 21.7C3.5 21.8 -3.6 21.8 -10.4 21.6C-17.3 21.4 -24.2 21.1 -30.7 20.6C-37.1 20.1 -43.5 19.4 -49.1 18.6C-54.8 17.7 -59.9 16.7 -64.6 15.7C-69.3 14.6 -73.3 13.4 -77.3 12.2C-81.2 11.1 -84.8 9.8 -88.1 8.6C-91.4 7.3 -94.7 5.9 -97 4.5C-99.4 3.1 -101.5 1.5 -102.2 0C-102.9 -1.5 -102.7 -3.2 -101.2 -4.7C-99.7 -6.2 -96.7 -7.7 -93.2 -9.1C-89.7 -10.4 -85 -11.6 -80.2 -12.7C-75.5 -13.8 -70.2 -14.8 -64.8 -15.7C-59.5 -16.6 -53.9 -17.5 -48.1 -18.2C-42.3 -18.9 -36.3 -19.6 -30 -20.1C-23.7 -20.6 -16.9 -21 -10.2 -21.2C-3.5 -21.4 3.5 -21.5 10.3 -21.3C17.1 -21.2 23.9 -20.9 30.5 -20.5C37.1 -20.1 43.7 -19.5 49.9 -18.9C56.1 -18.2 62.4 -17.4 67.9 -16.5C73.4 -15.5 78.8 -14.4 82.9 -13.1C87.1 -11.9 90.5 -10.5 92.8 -9C95.1 -7.6 96.2 -6 96.7 -4.5C97.1 -3 96.5 -1.5 95.8 0Z"/><path class="bio-blob-highlight" d="M74.5 0C74 1.1 73 2.2 72 3.3C70.9 4.4 69.8 5.5 68.2 6.6C66.6 7.7 64.8 8.8 62.2 9.9C59.6 10.9 56.4 11.9 52.6 12.8C48.9 13.6 44.3 14.4 39.6 15C34.8 15.5 29.5 16 24.3 16.3C19 16.6 13.5 16.8 8.1 16.9C2.7 17 -2.8 17 -8.1 16.8C-13.4 16.7 -18.8 16.4 -23.9 16C-28.9 15.6 -33.8 15.1 -38.2 14.4C-42.6 13.8 -46.6 13 -50.2 12.2C-53.9 11.4 -57 10.4 -60.1 9.5C-63.1 8.6 -65.9 7.7 -68.5 6.7C-71.1 5.6 -73.6 4.6 -75.5 3.5C-77.3 2.4 -79 1.2 -79.5 0C-80 -1.2 -79.8 -2.5 -78.7 -3.6C-77.5 -4.8 -75.2 -6 -72.5 -7C-69.8 -8.1 -66.1 -9 -62.4 -9.9C-58.7 -10.8 -54.6 -11.5 -50.4 -12.2C-46.2 -12.9 -42 -13.6 -37.4 -14.1C-32.9 -14.7 -28.2 -15.3 -23.3 -15.7C-18.4 -16.1 -13.2 -16.4 -8 -16.5C-2.7 -16.7 2.7 -16.7 8 -16.6C13.3 -16.5 18.6 -16.3 23.7 -15.9C28.9 -15.6 34 -15.2 38.8 -14.7C43.7 -14.1 48.5 -13.5 52.8 -12.8C57.1 -12.1 61.3 -11.2 64.5 -10.2C67.7 -9.3 70.4 -8.1 72.2 -7C74 -5.9 74.8 -4.7 75.2 -3.5C75.6 -2.3 75 -1.1 74.5 0Z"/><path class="iso-line bio-blob-edge" data-tone="mid" d="M106.4 0C105.7 1.6 104.3 3.2 102.8 4.8C101.3 6.3 99.7 7.9 97.4 9.5C95.1 11 92.5 12.6 88.8 14.1C85.1 15.5 80.6 17 75.2 18.2C69.8 19.4 63.3 20.5 56.5 21.4C49.8 22.2 42.2 22.8 34.7 23.3C27.2 23.7 19.3 24 11.6 24.1C3.9 24.3 -4 24.2 -11.6 24C-19.2 23.8 -26.9 23.5 -34.1 22.9C-41.3 22.3 -48.3 21.5 -54.6 20.6C-60.8 19.7 -66.6 18.6 -71.8 17.4C-77 16.2 -81.5 14.9 -85.8 13.6C-90.2 12.3 -94.2 10.9 -97.8 9.5C-101.5 8.1 -105.2 6.6 -107.8 5C-110.4 3.4 -112.8 1.7 -113.6 0C-114.3 -1.7 -114.1 -3.5 -112.4 -5.2C-110.7 -6.9 -107.4 -8.6 -103.6 -10.1C-99.7 -11.5 -94.4 -12.9 -89.2 -14.1C-83.9 -15.4 -78 -16.4 -72 -17.5C-66.1 -18.5 -59.9 -19.4 -53.5 -20.2C-47 -21 -40.3 -21.8 -33.3 -22.4C-26.3 -22.9 -18.8 -23.4 -11.4 -23.6C-3.9 -23.8 3.9 -23.9 11.4 -23.7C19 -23.6 26.6 -23.2 33.9 -22.8C41.2 -22.3 48.5 -21.7 55.4 -21C62.4 -20.2 69.3 -19.3 75.4 -18.3C81.6 -17.2 87.5 -16 92.1 -14.6C96.8 -13.2 100.6 -11.6 103.1 -10C105.7 -8.4 106.8 -6.7 107.4 -5C107.9 -3.3 107.2 -1.6 106.4 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Fibrin</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">fibrinogen turned into fibrin</text></g><g class="hot dr-node dr-n-out" id="nd-clot" tabindex="0" data-info="The fibrin mesh with platelets, made firm by factor XIIIa." transform="translate(590 520)"><g class="bio-blob" data-tone="hi"><path class="bio-blob-base" d="M87.8 0C87.6 1.6 86.7 3.2 85.5 4.8C84.4 6.4 82.9 8 81 9.6C79 11.2 76.8 12.8 73.7 14.3C70.7 15.8 67 17.3 62.5 18.5C58.1 19.8 52.6 20.9 47 21.7C41.3 22.5 34.7 23 28.4 23.3C22.2 23.7 15.6 23.7 9.3 23.6C3.1 23.6 -3.1 23.4 -9.1 23.1C-15.1 22.9 -21.1 22.5 -26.9 22.1C-32.8 21.6 -38.7 21.1 -44.2 20.4C-49.7 19.7 -55.2 18.8 -60 17.8C-64.8 16.7 -69.3 15.5 -73.1 14.2C-76.9 12.8 -80.1 11.3 -82.8 9.8C-85.5 8.3 -87.7 6.7 -89.2 5.1C-90.8 3.4 -92 1.7 -92.2 0C-92.4 -1.7 -92 -3.5 -90.6 -5.1C-89.1 -6.8 -86.6 -8.4 -83.5 -9.9C-80.4 -11.4 -76.1 -12.7 -71.9 -13.9C-67.6 -15.1 -62.7 -16.2 -57.9 -17.1C-53.1 -18.1 -48.2 -19 -43 -19.9C-37.9 -20.7 -32.8 -21.6 -27.2 -22.3C-21.6 -23 -15.6 -23.7 -9.5 -24.1C-3.3 -24.5 3.3 -24.7 9.7 -24.6C16.1 -24.5 22.7 -24.1 28.7 -23.6C34.7 -23 40.5 -22.1 45.8 -21.2C51.1 -20.2 56 -19.1 60.4 -17.9C64.9 -16.7 69 -15.4 72.6 -14.1C76.1 -12.7 79.3 -11.2 81.7 -9.7C84.1 -8.2 85.8 -6.5 86.8 -4.9C87.8 -3.3 88 -1.6 87.8 0Z"/><path class="bio-blob-shade" d="M79 0C78.8 1.5 78 2.9 77 4.4C75.9 5.8 74.6 7.2 72.9 8.7C71.1 10.1 69.1 11.5 66.4 12.9C63.6 14.2 60.3 15.6 56.3 16.7C52.3 17.8 47.4 18.8 42.3 19.5C37.1 20.2 31.2 20.7 25.6 21C19.9 21.3 14 21.3 8.4 21.3C2.8 21.2 -2.8 21 -8.2 20.8C-13.6 20.6 -19 20.3 -24.2 19.9C-29.5 19.5 -34.8 19 -39.8 18.4C-44.7 17.7 -49.7 16.9 -54 16C-58.3 15.1 -62.3 13.9 -65.8 12.7C-69.2 11.5 -72.1 10.2 -74.5 8.8C-76.9 7.5 -78.9 6 -80.3 4.6C-81.7 3.1 -82.8 1.5 -83 0C-83.2 -1.5 -82.8 -3.1 -81.5 -4.6C-80.2 -6.1 -77.9 -7.6 -75.1 -8.9C-72.3 -10.2 -68.5 -11.4 -64.7 -12.5C-60.9 -13.6 -56.4 -14.5 -52.1 -15.4C-47.8 -16.3 -43.4 -17.1 -38.7 -17.9C-34.1 -18.7 -29.5 -19.4 -24.5 -20.1C-19.4 -20.7 -14.1 -21.3 -8.5 -21.7C-3 -22 3 -22.2 8.7 -22.2C14.5 -22.1 20.4 -21.7 25.8 -21.2C31.3 -20.7 36.5 -19.9 41.2 -19.1C46 -18.2 50.4 -17.2 54.4 -16.1C58.4 -15 62.1 -13.9 65.3 -12.7C68.5 -11.4 71.4 -10.1 73.5 -8.7C75.6 -7.4 77.2 -5.9 78.1 -4.4C79.1 -3 79.2 -1.5 79 0Z"/><path class="bio-blob-highlight" d="M61.5 0C61.3 1.1 60.7 2.3 59.9 3.4C59.1 4.5 58 5.6 56.7 6.7C55.3 7.8 53.8 9 51.6 10C49.5 11 46.9 12.1 43.8 13C40.7 13.8 36.8 14.6 32.9 15.2C28.9 15.7 24.3 16.1 19.9 16.3C15.5 16.6 10.9 16.6 6.5 16.5C2.1 16.5 -2.2 16.4 -6.4 16.2C-10.6 16 -14.7 15.8 -18.8 15.5C-22.9 15.1 -27.1 14.8 -30.9 14.3C-34.8 13.8 -38.6 13.2 -42 12.4C-45.4 11.7 -48.5 10.8 -51.1 9.9C-53.8 9 -56 7.9 -57.9 6.9C-59.8 5.8 -61.4 4.7 -62.5 3.5C-63.6 2.4 -64.4 1.2 -64.5 0C-64.7 -1.2 -64.4 -2.4 -63.4 -3.6C-62.4 -4.7 -60.6 -5.9 -58.4 -6.9C-56.3 -8 -53.3 -8.9 -50.3 -9.7C-47.3 -10.6 -43.9 -11.3 -40.5 -12C-37.2 -12.7 -33.7 -13.3 -30.1 -13.9C-26.6 -14.5 -22.9 -15.1 -19 -15.6C-15.1 -16.1 -11 -16.6 -6.6 -16.9C-2.3 -17.1 2.3 -17.3 6.8 -17.2C11.3 -17.2 15.9 -16.9 20.1 -16.5C24.3 -16.1 28.4 -15.5 32.1 -14.8C35.8 -14.2 39.2 -13.4 42.3 -12.5C45.4 -11.7 48.3 -10.8 50.8 -9.8C53.3 -8.9 55.5 -7.9 57.2 -6.8C58.8 -5.7 60.1 -4.6 60.8 -3.4C61.5 -2.3 61.6 -1.1 61.5 0Z"/><path class="iso-line bio-blob-edge" data-tone="hi" d="M87.8 0C87.6 1.6 86.7 3.2 85.5 4.8C84.4 6.4 82.9 8 81 9.6C79 11.2 76.8 12.8 73.7 14.3C70.7 15.8 67 17.3 62.5 18.5C58.1 19.8 52.6 20.9 47 21.7C41.3 22.5 34.7 23 28.4 23.3C22.2 23.7 15.6 23.7 9.3 23.6C3.1 23.6 -3.1 23.4 -9.1 23.1C-15.1 22.9 -21.1 22.5 -26.9 22.1C-32.8 21.6 -38.7 21.1 -44.2 20.4C-49.7 19.7 -55.2 18.8 -60 17.8C-64.8 16.7 -69.3 15.5 -73.1 14.2C-76.9 12.8 -80.1 11.3 -82.8 9.8C-85.5 8.3 -87.7 6.7 -89.2 5.1C-90.8 3.4 -92 1.7 -92.2 0C-92.4 -1.7 -92 -3.5 -90.6 -5.1C-89.1 -6.8 -86.6 -8.4 -83.5 -9.9C-80.4 -11.4 -76.1 -12.7 -71.9 -13.9C-67.6 -15.1 -62.7 -16.2 -57.9 -17.1C-53.1 -18.1 -48.2 -19 -43 -19.9C-37.9 -20.7 -32.8 -21.6 -27.2 -22.3C-21.6 -23 -15.6 -23.7 -9.5 -24.1C-3.3 -24.5 3.3 -24.7 9.7 -24.6C16.1 -24.5 22.7 -24.1 28.7 -23.6C34.7 -23 40.5 -22.1 45.8 -21.2C51.1 -20.2 56 -19.1 60.4 -17.9C64.9 -16.7 69 -15.4 72.6 -14.1C76.1 -12.7 79.3 -11.2 81.7 -9.7C84.1 -8.2 85.8 -6.5 86.8 -4.9C87.8 -3.3 88 -1.6 87.8 0Z"/></g><text class="dr-prot dr-nl" x="0" y="-1" text-anchor="middle">Clot</text><text class="dr-label dr-muted dr-ns" x="0" y="13" text-anchor="middle">stabilised by factor XIII</text></g><g class="dr-key"><path class="dr-block-hex" d="M59 600L55.5 606.1L48.5 606.1L45 600L48.5 593.9L55.5 593.9Z" style="opacity:1"/><text class="dr-label" x="68" y="604">anticoagulant (generic)</text><circle class="dr-camp" cx="52" cy="622" r="4.4"/><text class="dr-label" x="68" y="626">flow: more dots, more passes this step</text></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or affinity is shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Clotting trigger</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="usual"><span class="dr-ticks"><i>weak</i><i>usual</i><i>strong</i></span></label>
+  <label class="dr-range"><span>Anticoagulant class (generic)</span><select id="drug"><option value="0">none</option><option value="1">warfarin type (vitamin K antagonist)</option><option value="2">unfractionated heparin type</option><option value="3">low molecular weight heparin or fondaparinux type</option><option value="4">direct factor Xa inhibitor (rivaroxaban or apixaban type)</option><option value="5">direct thrombin inhibitor (dabigatran type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul>
+<li><strong>Warfarin.</strong> A vitamin K antagonist: it blocks the vitamin K cycle that the liver needs to activate factors II, VII, IX and X (and proteins C and S), so its effect appears over days as existing factors are cleared (<a href="https://www.ncbi.nlm.nih.gov/books/NBK441964/">Warfarin, NCBI Bookshelf</a>).</li>
+<li><strong>Direct oral anticoagulants.</strong> Rivaroxaban, apixaban, edoxaban and betrixaban inhibit factor Xa; dabigatran, argatroban and bivalirudin inhibit thrombin directly (<a href="https://www.ncbi.nlm.nih.gov/books/NBK560651/">Anticoagulation, NCBI Bookshelf</a>).</li>
+<li><strong>Heparins.</strong> Heparin acts through antithrombin, speeding its inhibition of thrombin and factor Xa; low molecular weight heparins and fondaparinux act mainly on factor Xa because their chains are too short to bridge antithrombin to thrombin. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and was not checked against a linked source here, so it is flagged for review.</li>
+</ul>
+<p><strong>What was simplified.</strong> The intrinsic and extrinsic pathways are drawn as one step; factors V, VIII and XI, thrombin's own feedback, protein C and S, tissue factor pathway inhibitor, fibrinolysis, platelets, monitoring (INR, aPTT, anti-Xa), reversal agents, interactions and bleeding risk are left out. Levels, flow and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.</p>
+<p>Interactive figure drawn with the <a href="https://github.com/Garinmckayl/anima">Anima</a> kit (MIT licence).</p>
+<p>For education only; this figure is not medical advice and says nothing about any person’s treatment or any medicine.</p>
+</footer></main><script type="module">
+const S = {"level":{"label":"Clotting trigger","a":[0.3,0.65,0.95],"names":["weak","usual","strong"],"ticks":["weak","usual","strong"],"start":1},"drugs":[{"label":"none","blocks":{}},{"label":"warfarin type (vitamin K antagonist)","blocks":{"e_x":0.5,"e_t":0.5}},{"label":"unfractionated heparin type","blocks":{"e_t":0.7,"e_f":0.7}},{"label":"low molecular weight heparin or fondaparinux type","blocks":{"e_t":0.8,"e_f":0.3}},{"label":"direct factor Xa inhibitor (rivaroxaban or apixaban type)","blocks":{"e_t":0.85}},{"label":"direct thrombin inhibitor (dabigatran type)","blocks":{"e_f":0.85}}],"nodes":[{"id":"trig","kind":"source"},{"id":"fxa","kind":"mid"},{"id":"thr","kind":"out"},{"id":"fib","kind":"mid"},{"id":"clot","kind":"out"}],"edges":[{"id":"e_x","from":"trig","to":"fxa"},{"id":"e_t","from":"fxa","to":"thr"},{"id":"e_f","from":"thr","to":"fib"},{"id":"e_c","from":"fib","to":"clot"}],"outputs":[{"node":"thr","words":["low","reduced","high"],"cuts":[0.15,0.4]},{"node":"clot","words":["little","reduced","firm"],"cuts":[0.12,0.45]}],"readout":"thrombin {0} · clot formation {1}","status":"Trigger: {level} · {drug} ·","drugNames":["no anticoagulant","vitamin K antagonist","unfractionated heparin","low molecular weight heparin or fondaparinux","factor Xa inhibitor","direct thrombin inhibitor"]};
+const modelOf = function modelOf(S, level, drug) {
+  const dr = S.drugs[drug], lv = {}, flux = {}, blocked = {};
+  S.nodes.forEach((n) => { lv[n.id] = 0; });
+  S.nodes.forEach((n) => { if (n.kind === "source") lv[n.id] = Math.min(1, S.level.a[level] * (n.gain == null ? 1 : n.gain)); });
+  S.edges.forEach((e) => {
+    const b = (dr.blocks && dr.blocks[e.id]) || 0;
+    blocked[e.id] = b;
+    flux[e.id] = e.rest ? Math.max(0, lv[e.from] - flux[e.rest]) : Math.max(0, Math.min(1, lv[e.from] * (e.w == null ? 1 : e.w) * (1 - b)));
+    lv[e.to] += flux[e.id];
+  });
+  S.nodes.forEach((n) => { lv[n.id] = Math.min(1, lv[n.id] * (n.scale == null ? 1 : n.scale)); });
+  S.nodes.forEach((n) => { if (n.kind === "inv") lv[n.id] = 0.15 + 0.8 * (blocked[n.inv] || 0); });
+  const word = (v, w, cuts) => { const c = cuts || [0.2, 0.6]; let k = 0; while (k < c.length && v >= c[k]) k++; return w[k]; };
+  const words = S.outputs.map((o) => word(lv[o.node], o.words, o.cuts));
+  return { lv, flux, blocked, words, readout: S.readout.replace(/\{(\d)\}/g, (_, k) => words[+k]) };
+};
+const GEO = [{"id":"e_x","p0":[214,130],"p1":[261,130]},{"id":"e_t","p0":[434,130],"p1":[497,130]},{"id":"e_f","p0":[590,158],"p1":[590,297]},{"id":"e_c","p0":[590,358],"p1":[590,487]}];
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const clamp = (v) => Math.max(0, Math.min(1, v));
+const frac = (v) => v - Math.floor(v);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); parent.appendChild(el); return el; };
+let level = 1, drug = 0, playing = !reduce.matches, visible = true, sim = reduce.matches ? 4000 : 0, last = 0, frame = 0;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), nm = (q.get("name") || "").replace(/[^A-Za-z0-9 \-]/g, "").slice(0, 40);
+  if (d0 > 0 && d0 < S.drugs.length) { drug = d0; drugBox.value = String(d0); }
+  const l0 = q.get("l"); if (l0 === "0" || l0 === "2") { level = +l0; levelBox.value = l0; levelBox.setAttribute("aria-valuetext", S.level.names[level]); }
+  if (nm) { const p = document.createElement("p"); p.className = "dr-status"; p.textContent = nm + ": the selector below is set to this drug's class. Drug classes overlap, so check the drug's own details."; statusEl.before(p); } }
+let M = modelOf(S, level, drug);
+const NP = 8;
+const E = GEO.map((g) => ({ g, blk: $("blk-" + g.id), pool: $("pt-" + g.id), line: $("ln-" + g.id), f: 0, b: 0, dots: [] }));
+E.forEach((e) => { for (let i = 0; i < NP; i++) { const c = mk("g", { class: "dr-particle" }, e.pool); mk("circle", { class: "dr-camp", r: 4.4 }, c); mk("circle", { class: "dr-camp-dot", r: 1.5 }, c); e.dots.push({ g: c, a: 0 }); } });
+const N = S.nodes.map((n) => ({ n, el: $("nd-" + n.id), v: 0 }));
+function draw(dt) {
+  const k = dt >= 1000 ? 1 : 1 - Math.exp(-dt / 600);
+  E.forEach((e) => {
+    const f = M.flux[e.g.id], b = M.blocked[e.g.id];
+    e.f += (f - e.f) * k; e.b += (b - e.b) * k;
+    if (e.blk) e.blk.style.opacity = (e.b > 0.02 ? 0.35 + 0.65 * e.b : 0).toFixed(2);
+    e.line.style.opacity = (0.35 + 0.65 * clamp(e.f * 1.4)).toFixed(2);
+    const nd = Math.round(clamp(e.f) * NP);
+    e.dots.forEach((d, i) => {
+      d.a += ((i < nd ? 1 : 0) - d.a) * (dt >= 1000 ? 1 : 1 - Math.exp(-dt / 400));
+      if (d.a < 0.02) { d.g.style.opacity = 0; return; }
+      const u = frac(sim / 3600 + i / NP);
+      d.g.setAttribute("transform", "translate(" + (e.g.p0[0] + (e.g.p1[0] - e.g.p0[0]) * u).toFixed(1) + " " + (e.g.p0[1] + (e.g.p1[1] - e.g.p0[1]) * u).toFixed(1) + ")");
+      d.g.style.opacity = (d.a * (u < 0.1 ? u / 0.1 : u > 0.9 ? (1 - u) / 0.1 : 1)).toFixed(2);
+    });
+  });
+  N.forEach((o) => { o.v += (M.lv[o.n.id] - o.v) * k; o.el.style.setProperty("--on", o.v.toFixed(2)); });
+}
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(64, now - (last || now)); last = now; sim += dt; draw(dt); frame = requestAnimationFrame(tick); }
+function still() { draw(1000); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) still(); });
+drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else { stop(); still(); } }
+pauseBtn.addEventListener("click", () => setPlaying(!playing));
+document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+const idle = info.textContent;
+svg.querySelectorAll(".hot").forEach((el) => {
+  const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); };
+  const off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+  el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off);
+});
+new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+publish(); still(); start();
+</script></body></html>

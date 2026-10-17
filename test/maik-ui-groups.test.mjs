@@ -23,7 +23,6 @@ const PACKS = {
   "bonsai-ternary-8b": { label: "MAiK Prime", tier: 0.5, flagship: true },
   "bonsai-8b": { label: "MAiK Swift", tier: 0.7 },
   "bonsai-27b": { label: "MAiK Max", tier: 5 },
-  "bonsai2-27b": { label: "MAiK Max 2", tier: 5.5 },
 };
 const MEDICAL = { "maik-lite": 1, "maik-mxcore": 1, "maik-neural": 1, "maik-apex": 1 };
 const INSTALLED = { "maik-lite": 1 };

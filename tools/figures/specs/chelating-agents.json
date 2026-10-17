@@ -1,0 +1,246 @@
+{
+ "id": "chelating-agents",
+ "title": "Chelating agents: which drug binds which metal",
+ "ariaLabel": "Schematic of three metal burdens in the body: iron, lead with arsenic and mercury, and copper. Each chelator binds its metals and lets them be passed out: desferrioxamine and deferasirox bind iron, dimercaprol, succimer and calcium disodium edetate bind lead and other heavy metals, and penicillamine and trientine bind copper.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Metal exposure",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "moderate",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no chelator"
+  },
+  {
+   "label": "iron chelator type (desferrioxamine)",
+   "status": "iron chelator",
+   "blocks": {
+    "e_fe": 0.85
+   }
+  },
+  {
+   "label": "thiol or edetate type (dimercaprol, succimer, edetate)",
+   "status": "heavy metal chelator",
+   "blocks": {
+    "e_hm": 0.85
+   }
+  },
+  {
+   "label": "copper chelator type (penicillamine)",
+   "status": "copper chelator",
+   "blocks": {
+    "e_cu": 0.85
+   }
+  }
+ ],
+ "readout": "Metal burden: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "low",
+    "reduced",
+    "high"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Exposure: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Metal burden: high"
+  ],
+  [
+   1,
+   1,
+   "Metal burden: reduced"
+  ],
+  [
+   1,
+   2,
+   "Metal burden: reduced"
+  ],
+  [
+   1,
+   3,
+   "Metal burden: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Iron",
+   "sub": "overload, poisoning",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Excess iron, for example in iron poisoning or after repeated transfusions."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Iron in tissues",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Free iron damages tissues, for example the liver, heart and endocrine glands."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Lead, arsenic, mercury",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Heavy metals from exposure at work, home or by accident."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Heavy metals in tissues",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Heavy metals bind enzymes and damage the nervous system, kidneys and blood."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Copper",
+   "sub": "in Wilson disease",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Copper that builds up because the liver cannot excrete it."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Copper in tissues",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Copper builds up in the liver and brain."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.4
+    ],
+    [
+     "n:m2",
+     0.25
+    ]
+   ],
+   "label": "Metal burden",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the body burden of metal that can cause harm."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_fe",
+   "from": "s0",
+   "to": "m0",
+   "label": "iron binding",
+   "info": "Desferrioxamine and deferasirox bind iron and carry it out in urine or stool."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the metal burden shown at the right."
+  },
+  {
+   "id": "e_hm",
+   "from": "s1",
+   "to": "m1",
+   "label": "metal binding",
+   "info": "Dimercaprol and succimer bind these metals through their thiol groups. Calcium disodium edetate binds lead."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the metal burden shown at the right."
+  },
+  {
+   "id": "e_cu",
+   "from": "s2",
+   "to": "m2",
+   "label": "copper binding",
+   "info": "Penicillamine and trientine bind copper and increase its loss in urine."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the metal burden shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Desferrioxamine and deferasirox bind iron, dimercaprol, succimer and edetate bind lead and other heavy metals, and penicillamine and trientine bind copper. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Which metal and which chelator for which poisoning, route and monitoring, zinc and other agents, dialysis, adverse effects (for example redistribution and kidney injury), pregnancy and the supportive care of poisoning are left out. Metal burden is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Chelating agents: which drug binds which metal",
+  "blurb": "Interactive figure: iron, heavy metal and copper chelators",
+  "drugs": {
+   "desferrioxamine": "d=1",
+   "deferoxamine": "d=1",
+   "deferasirox": "d=1",
+   "deferiprone": "d=1",
+   "dimercaprol": "d=2",
+   "succimer": "d=2",
+   "edetate": "d=2",
+   "edta": "d=2",
+   "unithiol": "d=2",
+   "penicillamine": "d=3",
+   "trientine": "d=3"
+  },
+  "terms": [
+   "chelating agents?",
+   "chelators?",
+   "chelation therapy",
+   "heavy metal poisoning"
+  ]
+ }
+}

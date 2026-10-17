@@ -1,0 +1,230 @@
+{
+ "id": "neuromuscular-blockers",
+ "title": "The neuromuscular junction: blockers, depolarisers and reversal",
+ "ariaLabel": "Schematic of the neuromuscular junction: a motor nerve releases acetylcholine into the gap, acetylcholinesterase breaks it down, and acetylcholine opens nicotinic receptors on the muscle end plate so the muscle contracts. Non-depolarising blockers and suxamethonium both stop the end plate responding; anticholinesterases such as neostigmine let acetylcholine build up and so reverse a non-depolarising block.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Acetylcholine released",
+  "a": [
+   0.7,
+   0.85,
+   1.0
+  ],
+  "names": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "ticks": [
+   "lower",
+   "usual",
+   "higher"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no neuromuscular drug"
+  },
+  {
+   "label": "non-depolarising blocker type (receptor antagonist)",
+   "status": "non-depolarising blocker",
+   "blocks": {
+    "e_nach": 0.9
+   }
+  },
+  {
+   "label": "depolarising blocker type (suxamethonium)",
+   "status": "depolarising blocker",
+   "blocks": {
+    "e_nach": 0.9
+   }
+  },
+  {
+   "label": "anticholinesterase type (neostigmine)",
+   "status": "anticholinesterase",
+   "blocks": {
+    "e_ache": 0.85
+   }
+  },
+  {
+   "label": "non-depolarising blocker, then anticholinesterase",
+   "status": "blocker then reversal",
+   "blocks": {
+    "e_nach": 0.6,
+    "e_ache": 0.85
+   }
+  }
+ ],
+ "readout": "Muscle contraction: {0}",
+ "outputs": [
+  {
+   "node": "con",
+   "words": [
+    "paralysed",
+    "weak",
+    "normal"
+   ],
+   "cuts": [
+    0.12,
+    0.5
+   ]
+  }
+ ],
+ "status": "Acetylcholine released: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Muscle contraction: normal"
+  ],
+  [
+   1,
+   1,
+   "Muscle contraction: paralysed"
+  ],
+  [
+   1,
+   3,
+   "Muscle contraction: normal"
+  ],
+  [
+   1,
+   4,
+   "Muscle contraction: weak"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "ach",
+   "kind": "source",
+   "label": "Acetylcholine",
+   "sub": "from the nerve",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Acetylcholine released by the motor nerve ending when the nerve fires. The slider sets how much is released."
+  },
+  {
+   "id": "gap",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:ach",
+     1.0
+    ],
+    [
+     "b:e_ache",
+     0.5
+    ]
+   ],
+   "label": "Acetylcholine in the gap",
+   "x": 420,
+   "y": 110,
+   "rx": 110,
+   "info": "The acetylcholine that reaches the muscle end plate. It rises when acetylcholinesterase is blocked, because less is broken down."
+  },
+  {
+   "id": "plate",
+   "kind": "mid",
+   "label": "Muscle end plate",
+   "sub": "nicotinic receptors",
+   "x": 830,
+   "y": 110,
+   "rx": 100,
+   "info": "The muscle membrane under the nerve ending, rich in nicotinic receptors. Enough receptor activation depolarises it and starts contraction."
+  },
+  {
+   "id": "ache",
+   "kind": "inv",
+   "inv": "e_ache",
+   "label": "Cholinesterase breakdown",
+   "x": 420,
+   "y": 300,
+   "rx": 115,
+   "info": "Acetylcholinesterase breaks acetylcholine down in the gap. Anticholinesterases such as neostigmine inhibit it."
+  },
+  {
+   "id": "con",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:plate",
+     1.0
+    ]
+   ],
+   "label": "Muscle contraction",
+   "x": 830,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how strongly the muscle contracts, set by how much the end plate is activated."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_rel",
+   "from": "ach",
+   "to": "gap",
+   "blockable": false,
+   "info": "Acetylcholine crosses the gap."
+  },
+  {
+   "id": "e_ache",
+   "from": "gap",
+   "to": "ache",
+   "label": "breakdown",
+   "info": "Acetylcholinesterase removes acetylcholine from the gap. Blocking this step lets acetylcholine build up."
+  },
+  {
+   "id": "e_nach",
+   "from": "gap",
+   "to": "plate",
+   "label": "nicotinic receptor",
+   "info": "Acetylcholine binds nicotinic receptors on the end plate. Non-depolarising blockers compete for these receptors. Suxamethonium acts like acetylcholine but is not broken down quickly, so the end plate stays depolarised and cannot respond again; this figure shows the end result, not the first twitching."
+  },
+  {
+   "id": "e_con",
+   "from": "plate",
+   "to": "con",
+   "blockable": false,
+   "info": "An activated end plate makes the muscle contract."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Non-depolarising blockers compete with acetylcholine at the nicotinic receptor, suxamethonium depolarises the end plate and holds it so it cannot respond, and anticholinesterases such as neostigmine raise acetylcholine in the gap to reverse a non-depolarising block. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Fasciculations and phase II block, plasma cholinesterase and prolonged suxamethonium action, sugammadex, antimuscarinic cover with reversal, train-of-four monitoring, drug and disease interactions, myasthenia and adverse effects are left out. Contraction is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "The neuromuscular junction: blockers, depolarisers and reversal",
+  "blurb": "Interactive figure: non-depolarising blockers, suxamethonium and neostigmine reversal",
+  "drugs": {
+   "atracurium": "d=1",
+   "cisatracurium": "d=1",
+   "rocuronium": "d=1",
+   "vecuronium": "d=1",
+   "pancuronium": "d=1",
+   "mivacurium": "d=1",
+   "tubocurarine": "d=1",
+   "suxamethonium": "d=2",
+   "succinylcholine": "d=2",
+   "neostigmine": "d=3",
+   "pyridostigmine": "d=3",
+   "edrophonium": "d=3"
+  },
+  "terms": [
+   "neuromuscular block(?:ers?|ing agents?|ade)",
+   "muscle relaxants?",
+   "depolari[sz]ing (?:blockers?|muscle relaxants?)",
+   "non[- ]depolari[sz]ing",
+   "neuromuscular junction",
+   "anticholinesterases?",
+   "cholinesterase inhibitors?"
+  ]
+ }
+}

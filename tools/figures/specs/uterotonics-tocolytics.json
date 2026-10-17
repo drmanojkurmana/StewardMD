@@ -1,0 +1,320 @@
+{
+ "id": "uterotonics-tocolytics",
+ "title": "Drugs that make the uterus contract or relax",
+ "ariaLabel": "Schematic of uterine muscle contraction: oxytocin receptors, prostaglandin receptors, alpha and serotonin receptors and calcium entry all add to contraction. Oxytocin, prostaglandin analogues and ergometrine strengthen contraction, atosiban blocks oxytocin receptors, indomethacin lowers prostaglandins, and nifedipine blocks calcium entry.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Spontaneous contraction drive",
+  "a": [
+   0.3,
+   0.45,
+   0.6
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no uterine drug"
+  },
+  {
+   "label": "oxytocin type",
+   "status": "oxytocin",
+   "blocks": {
+    "e_oxt": -1.0
+   }
+  },
+  {
+   "label": "prostaglandin analogue type",
+   "status": "prostaglandin analogue",
+   "blocks": {
+    "e_pg": -1.0
+   }
+  },
+  {
+   "label": "ergometrine type",
+   "status": "ergometrine",
+   "blocks": {
+    "e_erg": -1.0
+   }
+  },
+  {
+   "label": "atosiban type (oxytocin antagonist)",
+   "status": "atosiban",
+   "blocks": {
+    "e_oxt": 0.85
+   }
+  },
+  {
+   "label": "nifedipine type (calcium blocker)",
+   "status": "nifedipine",
+   "blocks": {
+    "e_ca": 0.85
+   }
+  },
+  {
+   "label": "indomethacin type (prostaglandin synthesis blocker)",
+   "status": "indomethacin",
+   "blocks": {
+    "e_pg": 0.85
+   }
+  }
+ ],
+ "readout": "Uterine contraction: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "weak",
+    "moderate",
+    "strong"
+   ],
+   "cuts": [
+    0.3,
+    0.55
+   ]
+  }
+ ],
+ "status": "Contraction drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   1,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   2,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   3,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   4,
+   "Uterine contraction: weak"
+  ],
+  [
+   1,
+   5,
+   "Uterine contraction: moderate"
+  ],
+  [
+   1,
+   6,
+   "Uterine contraction: moderate"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Oxytocin signal",
+   "sub": "posterior pituitary",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Oxytocin from the posterior pituitary, rising in labour."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Oxytocin effect",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Rhythmic uterine contraction and milk ejection."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Prostaglandins",
+   "sub": "locally made",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Prostaglandins made in the uterus and cervix."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Prostaglandin effect",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Contraction and cervical ripening."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Alpha and 5-HT signals",
+   "sub": "uterine muscle",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Alpha-adrenergic and serotonin receptors on uterine muscle."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Sustained contraction",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "A strong, prolonged contraction that squeezes the uterine vessels."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Calcium entry",
+   "sub": "L-type channels",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Calcium entering uterine muscle cells."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Calcium available",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Calcium that drives contraction."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.25
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.15
+    ]
+   ],
+   "label": "Uterine contraction",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the strength of uterine contraction."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_oxt",
+   "from": "s0",
+   "to": "m0",
+   "label": "oxytocin receptors",
+   "info": "Oxytocin acts on its receptor to raise calcium in uterine muscle. Atosiban blocks this receptor to stop contractions."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_pg",
+   "from": "s1",
+   "to": "m1",
+   "label": "prostaglandin receptors",
+   "info": "Prostaglandin analogues (misoprostol, carboprost, dinoprostone) strengthen contraction and soften the cervix. NSAIDs such as indomethacin lower prostaglandin synthesis and can slow preterm labour."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_erg",
+   "from": "s2",
+   "to": "m2",
+   "label": "alpha and 5-HT receptors",
+   "info": "Ergometrine acts on alpha-adrenergic, serotonin and dopamine receptors and causes a sustained contraction used to control bleeding after delivery."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_ca",
+   "from": "s3",
+   "to": "m3",
+   "label": "calcium channels",
+   "info": "Nifedipine blocks L-type calcium channels, so uterine muscle contracts less. This is used as a tocolytic."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Oxytocin acts at oxytocin receptors, prostaglandin analogues act at prostaglandin receptors, ergometrine acts on alpha and serotonin receptors, atosiban blocks oxytocin receptors, nifedipine blocks calcium entry and indomethacin lowers prostaglandins. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Magnesium sulphate, beta-2 agonist tocolytics, tranexamic acid, mifepristone, the third stage of labour and postpartum haemorrhage protocols, contraindications (for example ergometrine in hypertension), timing, adverse effects and monitoring are left out. Contraction is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Drugs that make the uterus contract or relax",
+  "blurb": "Interactive figure: oxytocin, prostaglandins, ergometrine and the tocolytics",
+  "drugs": {
+   "oxytocin": "d=1",
+   "carbetocin": "d=1",
+   "syntocinon": "d=1",
+   "misoprostol": "d=2",
+   "carboprost": "d=2",
+   "dinoprostone": "d=2",
+   "dinoprost": "d=2",
+   "ergometrine": "d=3",
+   "methylergometrine": "d=3",
+   "ergonovine": "d=3",
+   "atosiban": "d=4"
+  },
+  "terms": [
+   "uterotonics?",
+   "oxytocics?",
+   "tocolytics?",
+   "ergot alkaloids?"
+  ]
+ }
+}

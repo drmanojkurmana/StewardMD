@@ -1,0 +1,259 @@
+{
+ "id": "nsaids-steroids",
+ "title": "NSAIDs and corticosteroids: the arachidonic acid pathway",
+ "ariaLabel": "Schematic of the arachidonic acid pathway: phospholipase A2 frees arachidonic acid from membrane phospholipids; COX-1 makes the prostaglandins and thromboxane that protect the stomach and help platelets; COX-2 makes the prostaglandins of pain, fever and inflammation; 5-lipoxygenase makes leukotrienes. Corticosteroids act on the first step, non-selective NSAIDs and aspirin on COX-1 and COX-2, COX-2 selective drugs on COX-2 only, and zileuton on 5-lipoxygenase.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or viral load is shown or implied.",
+ "level": {
+  "label": "Tissue injury or inflammation",
+  "a": [
+   0.3,
+   0.65,
+   0.95
+  ],
+  "names": [
+   "slight",
+   "usual",
+   "strong"
+  ],
+  "ticks": [
+   "slight",
+   "usual",
+   "strong"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no drug"
+  },
+  {
+   "label": "corticosteroid type",
+   "status": "corticosteroid",
+   "blocks": {
+    "e_pla": 0.85
+   }
+  },
+  {
+   "label": "non-selective NSAID (ibuprofen or diclofenac type)",
+   "status": "non-selective NSAID",
+   "blocks": {
+    "e_c1": 0.85,
+    "e_c2": 0.85
+   }
+  },
+  {
+   "label": "aspirin type (irreversible COX inhibitor)",
+   "status": "aspirin",
+   "blocks": {
+    "e_c1": 0.9,
+    "e_c2": 0.5
+   }
+  },
+  {
+   "label": "COX-2 selective (celecoxib type)",
+   "status": "COX-2 selective NSAID",
+   "blocks": {
+    "e_c1": 0.05,
+    "e_c2": 0.85
+   }
+  },
+  {
+   "label": "5-lipoxygenase inhibitor (zileuton type)",
+   "status": "5-lipoxygenase inhibitor",
+   "blocks": {
+    "e_lox": 0.85
+   }
+  }
+ ],
+ "readout": "gastric protection {0} · pain and inflammation {1} · leukotrienes {2}",
+ "outputs": [
+  {
+   "node": "pg1",
+   "words": [
+    "lost",
+    "reduced",
+    "normal"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  },
+  {
+   "node": "pg2",
+   "words": [
+    "low",
+    "reduced",
+    "high"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  },
+  {
+   "node": "ltr",
+   "words": [
+    "low",
+    "moderate",
+    "high"
+   ],
+   "cuts": [
+    0.2,
+    0.5
+   ]
+  }
+ ],
+ "status": "Injury: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "gastric protection normal · pain and inflammation high · leukotrienes high"
+  ],
+  [
+   1,
+   2,
+   "gastric protection lost · pain and inflammation low · leukotrienes high"
+  ],
+  [
+   1,
+   4,
+   "gastric protection normal · pain and inflammation low · leukotrienes high"
+  ],
+  [
+   1,
+   1,
+   "gastric protection lost · pain and inflammation low · leukotrienes low"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less of what follows is made.",
+ "blockKey": "drug (generic)",
+ "nodes": [
+  {
+   "id": "pl",
+   "kind": "source",
+   "label": "Membrane phospholipids",
+   "sub": "released by injury",
+   "x": 92,
+   "y": 300,
+   "rx": 90,
+   "info": "Phospholipids of the cell membrane. Injury and inflammation activate phospholipase A2, which frees arachidonic acid from them."
+  },
+  {
+   "id": "aa",
+   "kind": "mid",
+   "label": "Arachidonic acid",
+   "x": 450,
+   "y": 300,
+   "rx": 84,
+   "info": "Arachidonic acid: the 20-carbon fatty acid from which the eicosanoids are made."
+  },
+  {
+   "id": "pg1",
+   "kind": "out",
+   "label": "Protective prostanoids",
+   "sub": "stomach, kidney, platelets",
+   "x": 790,
+   "y": 110,
+   "rx": 120,
+   "info": "Prostaglandins and thromboxane made by COX-1: they protect the stomach lining with mucus and bicarbonate, support kidney blood flow and (as thromboxane A2) help platelets aggregate. Losing them explains the stomach, kidney and bleeding effects of non-selective NSAIDs."
+  },
+  {
+   "id": "pg2",
+   "kind": "out",
+   "label": "Inflammatory prostaglandins",
+   "sub": "pain, fever, swelling",
+   "x": 790,
+   "y": 300,
+   "rx": 124,
+   "info": "Prostaglandins made by COX-2 (induced at sites of inflammation): they sensitise pain nerves, raise the hypothalamic set point (fever) and dilate vessels. This is the effect NSAIDs are used for."
+  },
+  {
+   "id": "ltr",
+   "kind": "out",
+   "label": "Leukotrienes",
+   "sub": "airway narrowing, inflammation",
+   "x": 790,
+   "y": 490,
+   "rx": 110,
+   "info": "Leukotrienes made by 5-lipoxygenase: they narrow the airways, increase mucus and attract inflammatory cells. Receptor blockers such as montelukast act on their receptor instead (not drawn)."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_pla",
+   "from": "pl",
+   "to": "aa",
+   "label": "phospholipase A2",
+   "info": "Phospholipase A2. Corticosteroids lower its activity (partly through lipocortin-type proteins), so less arachidonic acid is freed for every pathway. They also lower COX-2 and cytokine gene expression, which this figure does not draw."
+  },
+  {
+   "id": "e_c1",
+   "from": "aa",
+   "to": "pg1",
+   "label": "COX-1",
+   "w": 0.9,
+   "info": "Cyclooxygenase-1: present in most tissues all the time. Aspirin acetylates it irreversibly; non-selective NSAIDs block it reversibly."
+  },
+  {
+   "id": "e_c2",
+   "from": "aa",
+   "to": "pg2",
+   "label": "COX-2",
+   "w": 0.9,
+   "info": "Cyclooxygenase-2: induced by inflammation. All NSAIDs block it; COX-2 selective drugs block it with little effect on COX-1."
+  },
+  {
+   "id": "e_lox",
+   "from": "aa",
+   "to": "ltr",
+   "label": "5-LOX",
+   "w": 0.9,
+   "info": "5-lipoxygenase. Zileuton inhibits it. NSAIDs do not, and in a few people blocking COX sends more arachidonic acid down this route (aspirin-sensitive asthma, not drawn)."
+  }
+ ],
+ "sources": [
+  "<strong>The pathway and the drugs.</strong> Phospholipase A2 frees arachidonic acid; COX-1 and COX-2 make prostaglandins and thromboxane; 5-lipoxygenase makes leukotrienes. Corticosteroids lower the first step, aspirin acetylates COX irreversibly, other NSAIDs block COX reversibly, COX-2 selective drugs spare COX-1, and zileuton inhibits 5-lipoxygenase. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Differences between individual NSAIDs, the central action of paracetamol, COX-3 and other isoforms, the gastric and cardiovascular risk balance of COX-2 selective drugs, the effect of prostaglandins on the kidney and blood pressure, aspirin's low-dose antiplatelet use (see the antiplatelet figure), leukotriene receptor antagonists, and the many non-eicosanoid effects of corticosteroids are left out. Levels and the size of each block are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "NSAIDs and corticosteroids: the arachidonic acid pathway",
+  "blurb": "Interactive figure: corticosteroids, aspirin, NSAIDs, COX-2 selective drugs and zileuton, step by step",
+  "drugs": {
+   "prednisolone": "d=1",
+   "prednisone": "d=1",
+   "hydrocortisone": "d=1",
+   "dexamethasone": "d=1",
+   "methylprednisolone": "d=1",
+   "betamethasone": "d=1",
+   "triamcinolone": "d=1",
+   "deflazacort": "d=1",
+   "ibuprofen": "d=2",
+   "diclofenac": "d=2",
+   "naproxen": "d=2",
+   "indomethacin": "d=2",
+   "ketorolac": "d=2",
+   "piroxicam": "d=2",
+   "mefenamic": "d=2",
+   "ketoprofen": "d=2",
+   "aceclofenac": "d=2",
+   "nimesulide": "d=4",
+   "celecoxib": "d=4",
+   "etoricoxib": "d=4",
+   "parecoxib": "d=4",
+   "zileuton": "d=5",
+   "aspirin": "d=3"
+  },
+  "terms": [
+   "NSAIDs?",
+   "non[- ]?steroidal anti[- ]?inflammatory",
+   "cyclooxygenase",
+   "COX[- ]?[12]",
+   "corticosteroids?",
+   "glucocorticoids?"
+  ]
+ }
+}

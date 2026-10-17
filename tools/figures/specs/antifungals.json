@@ -1,0 +1,286 @@
+{
+ "id": "antifungals",
+ "title": "How antifungal drugs hit the fungal cell",
+ "ariaLabel": "Schematic of a fungal cell: squalene becomes lanosterol through squalene epoxidase, lanosterol becomes ergosterol through lanosterol demethylase, and ergosterol is built into the cell membrane. Glucan synthase builds the cell wall. Terbinafine blocks squalene epoxidase, azoles block lanosterol demethylase, polyenes bind ergosterol and make holes in the membrane, and echinocandins block glucan synthase.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Fungal growth drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antifungal"
+  },
+  {
+   "label": "azole type (lanosterol demethylase)",
+   "status": "azole",
+   "blocks": {
+    "e_dem": 0.85
+   }
+  },
+  {
+   "label": "terbinafine type (squalene epoxidase)",
+   "status": "allylamine",
+   "blocks": {
+    "e_sq": 0.85
+   }
+  },
+  {
+   "label": "polyene type (binds ergosterol)",
+   "status": "polyene",
+   "blocks": {
+    "e_poly": 0.9
+   }
+  },
+  {
+   "label": "echinocandin type (glucan synthase)",
+   "status": "echinocandin",
+   "blocks": {
+    "e_glu": 0.85
+   }
+  }
+ ],
+ "readout": "Fungal growth: {0}",
+ "outputs": [
+  {
+   "node": "grow",
+   "words": [
+    "stopped or killed",
+    "slowed",
+    "continues"
+   ],
+   "cuts": [
+    0.2,
+    0.52
+   ]
+  }
+ ],
+ "status": "Growth drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Fungal growth: continues"
+  ],
+  [
+   1,
+   1,
+   "Fungal growth: slowed"
+  ],
+  [
+   1,
+   3,
+   "Fungal growth: stopped or killed"
+  ],
+  [
+   1,
+   4,
+   "Fungal growth: slowed"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "sq",
+   "kind": "source",
+   "label": "Squalene",
+   "sub": "precursor",
+   "x": 105,
+   "y": 110,
+   "rx": 84,
+   "info": "The starting sterol precursor. The slider sets how fast the fungus is growing and so how hard it drives membrane and wall building."
+  },
+  {
+   "id": "lan",
+   "kind": "mid",
+   "label": "Lanosterol",
+   "x": 450,
+   "y": 110,
+   "rx": 90,
+   "info": "The intermediate that lanosterol demethylase converts toward ergosterol."
+  },
+  {
+   "id": "erg",
+   "kind": "mid",
+   "label": "Ergosterol",
+   "x": 800,
+   "y": 110,
+   "rx": 90,
+   "info": "The main sterol of the fungal cell membrane. Human cells use cholesterol instead, which is why drugs aimed at ergosterol can spare human cells more than fungal ones."
+  },
+  {
+   "id": "memb",
+   "kind": "mid",
+   "label": "Cell membrane",
+   "sub": "built with ergosterol",
+   "x": 800,
+   "y": 300,
+   "rx": 100,
+   "info": "The membrane is built from ergosterol. Less ergosterol makes a weak, leaky membrane."
+  },
+  {
+   "id": "holes",
+   "kind": "inv",
+   "inv": "e_poly",
+   "label": "Holes in membrane",
+   "x": 105,
+   "y": 300,
+   "rx": 100,
+   "info": "Polyenes bind ergosterol and form pores, so the contents leak out."
+  },
+  {
+   "id": "glc",
+   "kind": "source",
+   "label": "Glucose units",
+   "sub": "for the wall",
+   "x": 105,
+   "y": 490,
+   "rx": 90,
+   "info": "Sugar units that glucan synthase joins into the beta-glucan of the cell wall."
+  },
+  {
+   "id": "wall",
+   "kind": "mid",
+   "label": "Cell wall",
+   "x": 800,
+   "y": 490,
+   "rx": 100,
+   "info": "The wall holds the fungal cell's shape and protects it from bursting. Human cells have no cell wall."
+  },
+  {
+   "id": "grow",
+   "kind": "calc",
+   "base": 0.15,
+   "terms": [
+    [
+     "n:memb",
+     0.5
+    ],
+    [
+     "n:wall",
+     0.45
+    ],
+    [
+     "n:holes",
+     -0.8
+    ]
+   ],
+   "label": "Fungal growth",
+   "x": 450,
+   "y": 300,
+   "rx": 100,
+   "info": "A teaching score for how well the fungus keeps growing: it needs a sound membrane and wall, and pores in the membrane harm it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_sq",
+   "from": "sq",
+   "to": "lan",
+   "label": "squalene epoxidase",
+   "info": "Squalene epoxidase, an early step toward lanosterol. Terbinafine (an allylamine) inhibits it."
+  },
+  {
+   "id": "e_dem",
+   "from": "lan",
+   "to": "erg",
+   "label": "demethylase",
+   "info": "Lanosterol 14-alpha-demethylase, a cytochrome P450 enzyme. Azoles inhibit it, so ergosterol falls and abnormal sterols build up."
+  },
+  {
+   "id": "e_mem",
+   "from": "erg",
+   "to": "memb",
+   "blockable": false,
+   "info": "Ergosterol is built into the membrane."
+  },
+  {
+   "id": "e_poly",
+   "from": "erg",
+   "to": "holes",
+   "label": "binds ergosterol",
+   "info": "Polyenes bind ergosterol in the membrane and form pores. Blocking the step here means the polyene is binding ergosterol."
+  },
+  {
+   "id": "e_glu",
+   "from": "glc",
+   "to": "wall",
+   "label": "glucan synthase",
+   "info": "1,3-beta-D-glucan synthase builds the wall. Echinocandins inhibit it, so the wall weakens."
+  },
+  {
+   "id": "e_m2g",
+   "from": "memb",
+   "to": "grow",
+   "blockable": false,
+   "info": "A sound membrane supports growth."
+  },
+  {
+   "id": "e_h2g",
+   "from": "holes",
+   "to": "grow",
+   "label": "harms",
+   "blockable": false,
+   "info": "Pores in the membrane harm the fungus."
+  },
+  {
+   "id": "e_w2g",
+   "from": "wall",
+   "to": "grow",
+   "blockable": false,
+   "info": "A sound wall supports growth."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Azoles inhibit lanosterol demethylase, terbinafine inhibits squalene epoxidase, polyenes bind ergosterol, and echinocandins inhibit glucan synthase. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Flucytosine and griseofulvin, resistance, fungal species and which drug fits which infection, drug interactions (notably the azoles and cytochrome P450), adverse effects and monitoring are left out. Fungal growth is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How antifungal drugs hit the fungal cell",
+  "blurb": "Interactive figure: azoles, terbinafine, polyenes and echinocandins",
+  "drugs": {
+   "fluconazole": "d=1",
+   "itraconazole": "d=1",
+   "voriconazole": "d=1",
+   "posaconazole": "d=1",
+   "ketoconazole": "d=1",
+   "clotrimazole": "d=1",
+   "miconazole": "d=1",
+   "isavuconazole": "d=1",
+   "terbinafine": "d=2",
+   "naftifine": "d=2",
+   "amphotericin": "d=3",
+   "nystatin": "d=3",
+   "caspofungin": "d=4",
+   "micafungin": "d=4",
+   "anidulafungin": "d=4"
+  },
+  "terms": [
+   "antifungals?",
+   "azole antifungals?",
+   "echinocandins?",
+   "polyene",
+   "ergosterol",
+   "lanosterol",
+   "allylamines?"
+  ]
+ }
+}

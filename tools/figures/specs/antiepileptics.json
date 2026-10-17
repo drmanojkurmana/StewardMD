@@ -1,0 +1,234 @@
+{
+ "id": "antiepileptics",
+ "title": "Antiseizure drugs: slowing excitation, raising inhibition",
+ "ariaLabel": "Schematic of seizure activity as a balance: seizure drive makes neurons fire through sodium channels and release glutamate through calcium channel and vesicle proteins, while GABA inhibition opposes it. Sodium channel blockers slow firing, gabapentinoids and levetiracetam reduce release, and benzodiazepines, barbiturates and valproate raise GABA inhibition.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or level is shown or implied.",
+ "level": {
+  "label": "Seizure drive",
+  "a": [
+   0.3,
+   0.6,
+   0.9
+  ],
+  "names": [
+   "low",
+   "raised",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "raised",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antiseizure drug"
+  },
+  {
+   "label": "sodium channel blocker (phenytoin, carbamazepine or lamotrigine type)",
+   "status": "sodium channel blocker",
+   "blocks": {
+    "e_na": 0.7
+   }
+  },
+  {
+   "label": "release reducer (gabapentin or levetiracetam type)",
+   "status": "release reducer",
+   "blocks": {
+    "e_rel": 0.6
+   }
+  },
+  {
+   "label": "GABA enhancer (benzodiazepine or phenobarbital type)",
+   "status": "GABA enhancer",
+   "blocks": {
+    "e_gaba": -1.5
+   }
+  },
+  {
+   "label": "valproate type (several actions)",
+   "status": "valproate",
+   "blocks": {
+    "e_na": 0.4,
+    "e_gaba": -0.5
+   }
+  }
+ ],
+ "readout": "seizure activity {0}",
+ "outputs": [
+  {
+   "node": "act",
+   "words": [
+    "controlled",
+    "raised",
+    "high"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Drive: {level} · {drug} ·",
+ "tests": [],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes, so less excitation reaches the next neuron.",
+ "blockKey": "drug lowering this step (generic)",
+ "enhanceInfo": "A drug of the chosen class increasing this step (generic teaching symbol, not a named drug's shape): more inhibition by GABA.",
+ "enhanceKey": "drug raising inhibition (generic)",
+ "nodes": [
+  {
+   "id": "drive",
+   "kind": "source",
+   "label": "Seizure drive",
+   "sub": "hyperexcitable network",
+   "x": 110,
+   "y": 110,
+   "rx": 90,
+   "info": "The tendency of an epileptic network to fire in bursts. The slider sets how strong it is (sleep loss, fever or low threshold raise it)."
+  },
+  {
+   "id": "fire",
+   "kind": "mid",
+   "label": "Repetitive firing",
+   "sub": "through sodium channels",
+   "x": 470,
+   "y": 110,
+   "rx": 104,
+   "info": "Neurons fire in rapid bursts. Voltage-gated sodium channels carry the action potentials."
+  },
+  {
+   "id": "glut",
+   "kind": "mid",
+   "label": "Glutamate released",
+   "sub": "onto the next neuron",
+   "x": 835,
+   "y": 110,
+   "rx": 100,
+   "info": "Excitatory transmitter released from the terminal, spreading the seizure to the next neurons."
+  },
+  {
+   "id": "gaba",
+   "kind": "source",
+   "fixed": 0.4,
+   "label": "GABA inhibition",
+   "sub": "the brake",
+   "x": 110,
+   "y": 430,
+   "rx": 90,
+   "info": "GABA released by inhibitory interneurons. It opens chloride channels on the next neuron and holds it back."
+  },
+  {
+   "id": "inh",
+   "kind": "mid",
+   "label": "Inhibition at GABA-A",
+   "sub": "chloride in",
+   "x": 470,
+   "y": 430,
+   "rx": 100,
+   "info": "GABA acting on GABA-A receptors lets chloride in and quiets the neuron."
+  },
+  {
+   "id": "act",
+   "kind": "calc",
+   "base": 0.15,
+   "terms": [
+    [
+     "n:glut",
+     1
+    ],
+    [
+     "n:inh",
+     -0.5
+    ]
+   ],
+   "label": "Seizure activity",
+   "sub": "excitation minus inhibition",
+   "x": 835,
+   "y": 430,
+   "rx": 110,
+   "info": "The balance of excitation and inhibition decides whether a seizure spreads. This is a teaching score, not a measured value."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_na",
+   "from": "drive",
+   "to": "fire",
+   "label": "Na⁺ channel",
+   "info": "Voltage-gated sodium channels. Phenytoin, carbamazepine and lamotrigine bind them in the inactivated state, so fast repetitive firing is cut while normal firing is largely spared (use dependence)."
+  },
+  {
+   "id": "e_rel",
+   "from": "fire",
+   "to": "glut",
+   "label": "Ca²⁺ · SV2A",
+   "info": "Calcium entry and vesicle release. Gabapentin and pregabalin bind the alpha-2-delta subunit of calcium channels; levetiracetam binds the vesicle protein SV2A."
+  },
+  {
+   "id": "e_gaba",
+   "from": "gaba",
+   "to": "inh",
+   "label": "GABA-A",
+   "info": "GABA-A receptor and GABA handling. Benzodiazepines raise how often the chloride channel opens and barbiturates raise how long it stays open; vigabatrin and tiagabine raise GABA itself. Valproate has several actions, including raising GABA."
+  },
+  {
+   "id": "e_g2a",
+   "from": "glut",
+   "to": "act",
+   "blockable": false,
+   "info": "Excitation adds to seizure activity."
+  },
+  {
+   "id": "e_i2a",
+   "from": "inh",
+   "to": "act",
+   "blockable": false,
+   "info": "Inhibition subtracts from seizure activity."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Sodium channel blockers (phenytoin, carbamazepine, lamotrigine), calcium channel alpha-2-delta ligands (gabapentin, pregabalin), SV2A binding (levetiracetam), and GABA enhancers (benzodiazepines, barbiturates, vigabatrin, tiagabine, valproate in part). This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Ethosuximide and T-type calcium channels in absence seizures, AMPA and NMDA receptor drugs, carbonic anhydrase and other mechanisms, kinetics and drug interactions, seizure types and drug choice by type (including drugs that worsen some types), teratogenicity and the many adverse effects are left out. Excitation and inhibition are added in a simple balance. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Antiseizure drugs: slowing excitation, raising inhibition",
+  "blurb": "Interactive figure: sodium channel blockers, release reducers and GABA enhancers",
+  "drugs": {
+   "phenytoin": "d=1",
+   "carbamazepine": "d=1",
+   "oxcarbazepine": "d=1",
+   "lamotrigine": "d=1",
+   "lacosamide": "d=1",
+   "zonisamide": "d=1",
+   "rufinamide": "d=1",
+   "gabapentin": "d=2",
+   "pregabalin": "d=2",
+   "levetiracetam": "d=2",
+   "brivaracetam": "d=2",
+   "phenobarbital": "d=3",
+   "phenobarbitone": "d=3",
+   "primidone": "d=3",
+   "clobazam": "d=3",
+   "clonazepam": "d=3",
+   "diazepam": "d=3",
+   "lorazepam": "d=3",
+   "midazolam": "d=3",
+   "vigabatrin": "d=3",
+   "tiagabine": "d=3",
+   "valproate": "d=4",
+   "valproic": "d=4"
+  },
+  "terms": [
+   "antiepileptics?",
+   "anti[- ]epileptics?",
+   "antiseizure",
+   "anticonvulsants?",
+   "antiepileptic drugs?",
+   "AEDs?"
+  ]
+ }
+}

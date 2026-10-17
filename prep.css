@@ -1685,6 +1685,15 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-qbank .pn-group { margin-bottom: 4px; }
 .pn-root .pn-qbs { margin: -4px 2px 10px; font-variant-numeric: tabular-nums; }
 
+.pn-root .pn-figrow { margin: 12px 0 4px; }
+.pn-root .pn-figchip { min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+/* Interactive figure card (prep-lessons.js figureHtml); the full-screen page is fig-viewer.js. */
+.pn-root .pn-figgo { display: flex; align-items: center; gap: 12px; width: 100%; min-height: 56px; padding: 12px 14px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-lg); background: var(--pn-card); color: var(--pn-text); font: inherit; text-align: left; cursor: pointer; }
+.pn-root .pn-figgo-i { flex: 0 0 auto; display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--pn-pri); color: var(--pn-text); }
+.pn-root .pn-figgo-t { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.pn-root .pn-figgo-t small { color: var(--pn-mut); }
+.pn-root .pn-vfigx figcaption { padding: 8px 2px 0; }
+
 /* ---- Reasoning explanations (prep-reason.js): scannable sections, collapsed wrong-option rows, Learn more,
    the one next action, related questions. Old items never match these selectors, so they render as before. ---- */
 .pn-root .pn-rlo { display: flex; flex-direction: column; gap: 2px; font-size: 14.5px; line-height: 1.55; color: var(--pn-text); }

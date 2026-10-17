@@ -4,6 +4,14 @@ Clinician-only medical decision-support app. **Mobile-only** (Capacitor 8: iOS +
 local `www/` bundle; only `stewardmd.in/api/*` is called). Buildless PWA — ES5 IIFEs, `?v=goldNNN`
 cache-bust tokens, `scripts/build-www.sh` assembles `www/`, `sw.js` is stale-while-revalidate.
 
+## It is a MOBILE APP. Never call it a web app.
+StewardMD ships ONLY as the iOS and Android app (Capacitor renders the local `www/` bundle). There is no web
+product, no web users and no web version to test on. Never write, say or suggest "web app", "web version",
+"on the web", "open it in a browser" or "hard refresh" as how the owner uses or checks the product.
+`stewardmd.in` is only the API and deploy host. A headless browser is a test harness for the bundle, nothing more.
+When a fix works in the repo but the owner cannot see it, the first suspects are the `www/` bundle (`scripts/build-www.sh`
+must copy every file the app reads) and the native rebuild or OTA, never the web. Say "the app" or "the phone".
+
 ## Read this before working on a module
 The architecture/knowledge lives in the Obsidian vault at **`vault/`** (git-tracked, 404'd from the web):
 - **Before touching a module**, read `vault/modules/<Module>.md` — it lists the module's flag + default,

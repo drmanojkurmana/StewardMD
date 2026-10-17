@@ -1,0 +1,304 @@
+{
+ "id": "antitubercular-drugs",
+ "title": "How first-line antitubercular drugs hit Mycobacterium tuberculosis",
+ "ariaLabel": "Schematic of the tubercle bacillus: it makes mycolic acid and the arabinogalactan of its wall, makes RNA with its RNA polymerase, and keeps its membrane energy in acid conditions. Isoniazid blocks mycolic acid synthesis, ethambutol blocks arabinogalactan synthesis, rifampicin blocks RNA polymerase and pyrazinamide disturbs membrane energy in acid. The four together stop growth far more than any one alone.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Bacterial growth drive",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antitubercular drug"
+  },
+  {
+   "label": "isoniazid type",
+   "status": "isoniazid",
+   "blocks": {
+    "e_myc": 0.85
+   }
+  },
+  {
+   "label": "rifampicin type",
+   "status": "rifampicin",
+   "blocks": {
+    "e_rna": 0.85
+   }
+  },
+  {
+   "label": "ethambutol type",
+   "status": "ethambutol",
+   "blocks": {
+    "e_ara": 0.85
+   }
+  },
+  {
+   "label": "pyrazinamide type",
+   "status": "pyrazinamide",
+   "blocks": {
+    "e_pza": 0.85
+   }
+  },
+  {
+   "label": "all four first-line drugs",
+   "status": "four-drug combination",
+   "blocks": {
+    "e_myc": 0.85,
+    "e_rna": 0.85,
+    "e_ara": 0.85,
+    "e_pza": 0.85
+   }
+  }
+ ],
+ "readout": "Bacterial growth: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "stopped",
+    "slowed",
+    "continues"
+   ],
+   "cuts": [
+    0.3,
+    0.7
+   ]
+  }
+ ],
+ "status": "Growth drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Bacterial growth: continues"
+  ],
+  [
+   1,
+   1,
+   "Bacterial growth: slowed"
+  ],
+  [
+   1,
+   2,
+   "Bacterial growth: slowed"
+  ],
+  [
+   1,
+   3,
+   "Bacterial growth: slowed"
+  ],
+  [
+   1,
+   4,
+   "Bacterial growth: slowed"
+  ],
+  [
+   1,
+   5,
+   "Bacterial growth: stopped"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Mycolic acid precursors",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Building blocks of mycolic acids, the waxy outer layer of the mycobacterial wall."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Mycolic acid wall layer",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "The waxy wall layer that protects the bacillus."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Arabinose units",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Sugar units for the arabinogalactan of the wall."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Arabinogalactan",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "A wall polysaccharide that anchors the mycolic acids."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Nucleotides",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Building blocks for bacterial RNA."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Bacterial RNA and proteins",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Without new RNA the bacillus cannot make proteins."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Membrane energy",
+   "sub": "in acid",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Energy and transport of the bacillus in acidic, slow-growing conditions, as inside macrophages and in caseous foci."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Bacterial survival in acid",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "Slow-growing bacilli survive in acidic sites."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.15,
+   "terms": [
+    [
+     "n:m0",
+     0.2
+    ],
+    [
+     "n:m1",
+     0.15
+    ],
+    [
+     "n:m2",
+     0.3
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Tubercle bacilli",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how well the bacilli keep growing: it falls as more of their wall, RNA and membrane energy steps are blocked."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_myc",
+   "from": "s0",
+   "to": "m0",
+   "label": "InhA (mycolic acid)",
+   "info": "Isoniazid (a prodrug activated by the bacterial KatG enzyme) blocks mycolic acid synthesis."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the bacterial growth shown at the right."
+  },
+  {
+   "id": "e_ara",
+   "from": "s1",
+   "to": "m1",
+   "label": "arabinosyl transf.",
+   "info": "Ethambutol blocks arabinosyl transferase, so the wall's arabinogalactan is not built."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the bacterial growth shown at the right."
+  },
+  {
+   "id": "e_rna",
+   "from": "s2",
+   "to": "m2",
+   "label": "RNA polymerase",
+   "info": "Rifampicin binds the beta subunit of bacterial RNA polymerase and stops RNA being made."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the bacterial growth shown at the right."
+  },
+  {
+   "id": "e_pza",
+   "from": "s3",
+   "to": "m3",
+   "label": "membrane energy",
+   "info": "Pyrazinamide is converted to pyrazinoic acid, which disturbs membrane energy and transport in acid, helping to kill slow bacilli."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the bacterial growth shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Isoniazid blocks mycolic acid synthesis, ethambutol blocks arabinogalactan synthesis, rifampicin blocks RNA polymerase and pyrazinamide disturbs membrane energy in acid. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Streptomycin, second-line and newer drugs, resistance and how combinations stop it, intensive and continuation phases, doses and durations, adverse effects and monitoring (hepatitis, neuropathy, optic neuritis), drug interactions and latent infection are left out. Bacterial growth is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How first-line antitubercular drugs hit Mycobacterium tuberculosis",
+  "blurb": "Interactive figure: isoniazid, rifampicin, ethambutol and pyrazinamide",
+  "drugs": {
+   "isoniazid": "d=1",
+   "rifampicin": "d=2",
+   "rifampin": "d=2",
+   "ethambutol": "d=3",
+   "pyrazinamide": "d=4"
+  },
+  "terms": [
+   "antitubercular drugs?",
+   "anti[- ]?tuberculosis drugs?",
+   "anti[- ]?TB drugs?",
+   "first[- ]line (?:anti[- ]?)?(?:TB|tubercular) drugs?",
+   "RIPE",
+   "HRZE"
+  ]
+ }
+}

@@ -11865,3 +11865,10 @@ Older tests that pinned the old layout were updated. [[modules/Refined Look]]
 - User-facing name is now **IQoach** (`prep-coach.js` `KYIQ.NAME`, `TAGLINE`, `NOTEST`; headings, aria labels, the Ask MaiK button and pattern title in `prep.js`). The tagline replaces "Know what you know."
 - Internal names are unchanged on purpose: `window.PREP_COACH`, `KYIQ` config, `PREP_KYIQ_DATA`, `prep-knowyouriq-data.js`, flag `smd_kyiq_insight`, `ky-*` CSS classes, `data-act="ky*"`, art files `knowyouriq-mark-*`. Old vault notes still say KnowYourIQ.
 - Still no IQ number, score, rank or prediction anywhere; the intro line says IQoach is not an intelligence test.
+
+
+## 2026-10-17 - StewardMD is a mobile app; agents must never call it a web app
+The owner ruled it twice: the product is the iOS and Android app only. An agent told the owner to "test the web version" when the figures
+were missing from the Drugs page. The real cause was `build-www.sh` not copying `prep/figures/figures.json` into `www/`. Rule added to
+CLAUDE.md, AGENTS.md and vault/Home.md: say "the app" or "the phone"; when a repo fix is not visible, check the `www/` bundle and the native
+rebuild or OTA first. Do not re-litigate.

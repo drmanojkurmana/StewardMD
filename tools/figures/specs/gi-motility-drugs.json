@@ -1,0 +1,265 @@
+{
+ "id": "gi-motility-drugs",
+ "title": "Laxatives, prokinetics and antidiarrhoeals: what changes stool movement",
+ "ariaLabel": "Schematic of gut transit: propulsive movement of the gut wall, water kept in the lumen, and fluid secreted by the gut lining all add to stool frequency. Stimulant laxatives and prokinetics increase propulsion, osmotic laxatives hold water in the gut, opioid antidiarrhoeals such as loperamide reduce propulsion, and antisecretory drugs lower fluid secretion.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Gut activity",
+  "a": [
+   0.55,
+   0.7,
+   0.85
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no gut drug"
+  },
+  {
+   "label": "stimulant laxative or prokinetic type",
+   "status": "stimulant laxative or prokinetic",
+   "blocks": {
+    "e_prop": -0.8,
+    "e_sec": -0.5
+   }
+  },
+  {
+   "label": "osmotic laxative type",
+   "status": "osmotic laxative",
+   "blocks": {
+    "e_water": -1.0
+   }
+  },
+  {
+   "label": "loperamide type (opioid antidiarrhoeal)",
+   "status": "loperamide type",
+   "blocks": {
+    "e_prop": 0.85,
+    "e_sec": 0.4
+   }
+  },
+  {
+   "label": "antisecretory type (racecadotril)",
+   "status": "antisecretory",
+   "blocks": {
+    "e_sec": 0.85
+   }
+  }
+ ],
+ "readout": "Stool frequency: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "reduced",
+    "normal",
+    "increased"
+   ],
+   "cuts": [
+    0.3,
+    0.65
+   ]
+  }
+ ],
+ "status": "Gut activity: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Stool frequency: normal"
+  ],
+  [
+   1,
+   1,
+   "Stool frequency: increased"
+  ],
+  [
+   1,
+   2,
+   "Stool frequency: increased"
+  ],
+  [
+   1,
+   3,
+   "Stool frequency: normal"
+  ],
+  [
+   1,
+   4,
+   "Stool frequency: normal"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Gut wall activity",
+   "sub": "enteric nerves",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Propulsive movement of the gut wall."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Gut movement",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Waves of movement that push contents on."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Water in the gut",
+   "sub": "in the lumen",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Water held in the gut lumen."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Soft, bulky stool",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Water in the stool makes it softer and larger."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Fluid secretion",
+   "sub": "from the lining",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Fluid and chloride secreted by gut lining cells."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Fluid in the gut",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Secreted fluid adds to stool water."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.4
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.2
+    ]
+   ],
+   "label": "Stool frequency",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how loose and frequent the stools are."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_prop",
+   "from": "s0",
+   "to": "m0",
+   "label": "propulsion",
+   "info": "Prokinetics (metoclopramide, domperidone) and stimulant laxatives (senna, bisacodyl) raise propulsion; loperamide acts on opioid receptors of the gut to lower it."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_water",
+   "from": "s1",
+   "to": "m1",
+   "label": "luminal water",
+   "info": "Osmotic laxatives (lactulose, macrogol, magnesium salts) keep water in the lumen and soften stool. Bulk-forming agents also hold water."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_sec",
+   "from": "s2",
+   "to": "m2",
+   "label": "secretion",
+   "info": "Racecadotril lowers secretion by blocking enkephalinase; stimulant laxatives raise it. Cholera toxin drives it."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Stimulant laxatives raise propulsion, osmotic laxatives hold water in the gut, loperamide lowers propulsion, and antisecretory drugs lower fluid secretion. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Oral rehydration, causes of diarrhoea and constipation, antibiotics and infection, bulk-forming and lubricant laxatives, lubiprostone and linaclotide, 5-HT3 and 5-HT4 drugs, contraindications (toxic megacolon, infective diarrhoea), adverse effects and electrolyte loss are left out. Stool frequency is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Laxatives, prokinetics and antidiarrhoeals: what changes stool movement",
+  "blurb": "Interactive figure: stimulant and osmotic laxatives, loperamide and antisecretory drugs",
+  "drugs": {
+   "senna": "d=1",
+   "bisacodyl": "d=1",
+   "sennosides": "d=1",
+   "docusate": "d=1",
+   "picosulfate": "d=1",
+   "lactulose": "d=2",
+   "macrogol": "d=2",
+   "polyethylene": "d=2",
+   "magnesium": "d=2",
+   "lactitol": "d=2",
+   "loperamide": "d=3",
+   "diphenoxylate": "d=3",
+   "codeine": "d=3",
+   "racecadotril": "d=4"
+  },
+  "terms": [
+   "laxatives?",
+   "antidiarrh(?:o)?eals?",
+   "antidiarrhoeal drugs?",
+   "prokinetics?",
+   "motility drugs?"
+  ]
+ }
+}
