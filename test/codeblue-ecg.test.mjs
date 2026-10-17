@@ -22,10 +22,10 @@ const cv = (a) => {
 };
 const maxAbs = (a) => Math.max(...a.map((v) => Math.abs(v)));
 
-test("catalogue: 14 rhythms, 6 course steps, 14 quiz items", () => {
-  assert.equal(X.RHYTHMS.length, 14);
+test("catalogue: 23 rhythms, 6 course steps, 31 quiz items", () => {
+  assert.equal(X.RHYTHMS.length, 23);
   assert.equal(X.STEPS.length, 6);
-  assert.equal(X.QUIZ.length, 14);
+  assert.equal(X.QUIZ.length, 31);
   assert.equal(X.LEADS.length, 12);
   for (const r of X.RHYTHMS) {
     assert.ok(r.id && r.name && r.features.length >= 3, r.id);
@@ -173,7 +173,7 @@ test("strips are labelled schematic", () => {
 });
 
 test("12-lead ST offsets per set (mm)", () => {
-  assert.deepEqual(Object.keys(X.LEAD_SETS), ["normal", "anterior", "inferior", "lateral"]);
+  assert.deepEqual(Object.keys(X.LEAD_SETS), ["normal", "anterior", "inferior", "lateral", "posterior", "rv", "lbbb", "wellens"]);
   for (const L of X.LEADS) assert.equal(X.leadSt("normal", L), 0);
   assert.equal(X.leadSt("anterior", "V2"), 3);
   for (const L of ["V1", "V2", "V3", "V4"]) assert.ok(X.leadSt("anterior", L) > 0, L);
@@ -222,11 +222,106 @@ test("store key and disclaimer text", () => {
   assert.ok(X.EDU_NOTE.includes("says nothing about your own ECG"));
 });
 
+test("per-lead morphology: aVR inverted, R-wave progression, transition V3 to V4", () => {
+  assert.ok(X.leadMorph("aVR").r < 0, "aVR main deflection inverted");
+  assert.ok(X.leadMorph("aVR").t < 0, "aVR T inverted");
+  const rs = ["V1", "V2", "V3", "V4", "V5"].map((L) => X.leadMorph(L).r);
+  for (let i = 1; i < rs.length; i++) assert.ok(rs[i] > rs[i - 1], "R grows V1 to V5: " + rs);
+  assert.ok(Math.abs(X.leadMorph("V1").s) > X.leadMorph("V1").r, "V1 is rS");
+  assert.ok(X.leadMorph("V6").q < 0 && X.leadMorph("V6").r > 0.8, "V6 is qR");
+  assert.ok(Math.abs(X.leadMorph("V3").s) >= X.leadMorph("V3").r * 0.8, "V3 near transition");
+  assert.ok(X.leadMorph("V4").r > Math.abs(X.leadMorph("V4").s), "V4 past transition");
+  for (const L of ["I", "II", "III", "aVL", "aVF", "V2", "V3", "V4", "V5", "V6"]) assert.ok(X.leadMorph(L).t > 0, L + " T upright");
+  assert.ok(X.leadMorph("V1").t <= 0, "V1 T not upright");
+  const avr = X.sampleLead("aVR", "normal").data;
+  const ii = X.sampleLead("II", "normal").data;
+  assert.ok(Math.min(...avr) < -0.5 && Math.max(...ii) > 0.9, "drawn aVR inverted, II upright");
+});
+
+test("STEMI sets: posterior, right ventricular, LBBB and Wellens patterns", () => {
+  for (const L of ["V1", "V2", "V3"]) assert.ok(X.leadSt("posterior", L) < 0, "posterior depression " + L);
+  assert.ok(X.sampleLead("V1", "posterior").morph.r > X.sampleLead("V1", "normal").morph.r, "posterior tall R in V1");
+  for (const L of ["II", "III", "aVF"]) assert.ok(X.leadSt("rv", L) > 0, "rv inferior " + L);
+  assert.ok(X.leadSt("rv", "V1") > 0, "rv V1 elevation");
+  assert.ok(X.LEAD_SETS.rv.note.includes("V4R"), "rv note names right-sided leads");
+  assert.ok(X.LEAD_SETS.posterior.note.includes("V7 to V9"), "posterior note names posterior leads");
+  assert.equal(X.LEAD_SETS.lbbb.qrsWide, true);
+  assert.ok(X.leadSt("lbbb", "V1") < 0 && X.leadSt("lbbb", "V5") > 0, "lbbb discordant ST");
+  assert.ok(X.sampleLead("V2", "wellens").morph.t < -0.3, "wellens inverted T in V2");
+  assert.ok(X.sampleLead("V3", "wellens").morph.t < -0.3, "wellens inverted T in V3");
+  assert.equal(X.leadSt("wellens", "V2"), 0, "wellens has no ST elevation");
+  assert.equal(X.PATTERNS.length, 2);
+});
+
+test("new rhythms: timing logic for junctional, ectopics, paced, WPW, hyperkalaemia, sinus arrest", () => {
+  const j = X.describe("junctional");
+  assert.equal(j.hasP, false); assert.ok(j.qrsWidth < 120); assert.ok(Math.abs(j.rate - 50) <= 3);
+  const pac = X.describe("pac");
+  assert.ok(pac.rrList.some((r) => r < 600), "PAC has a premature interval");
+  assert.ok(pac.beatKinds.includes("pac"));
+  assert.equal(pac.pTimes.length, pac.qrsTimes.length, "PAC beats have a P wave");
+  const pvc = X.describe("pvc");
+  assert.ok(pvc.rrList.some((r) => r < 600), "PVC has a premature interval");
+  assert.ok(pvc.rrList.some((r) => r > 1000), "PVC has a compensatory pause");
+  assert.ok(pvc.beatKinds.includes("pvc"));
+  assert.ok(pvc.pTimes.length < pvc.qrsTimes.length, "PVC beats have no P wave");
+  const big = X.describe("pvc-bigeminy");
+  for (let i = 0; i + 1 < big.beatKinds.length; i += 2) {
+    assert.equal(big.beatKinds[i], "sinus"); assert.equal(big.beatKinds[i + 1], "pvc");
+  }
+  const pa = X.describe("paced-atrial");
+  assert.equal(pa.spikeTimes.length, pa.qrsTimes.length);
+  assert.ok(pa.spikeTimes[0] < pa.pTimes[0], "atrial spike before P");
+  assert.ok(pa.qrsWidth < 120);
+  const pv = X.describe("paced-ventricular");
+  assert.equal(pv.spikeTimes.length, pv.qrsTimes.length);
+  assert.ok(pv.qrsWidth >= 120); assert.equal(pv.hasP, false);
+  const wpw = X.describe("wpw");
+  assert.ok(wpw.prList.every((p) => p < 120), "WPW short PR");
+  const hk = X.describe("hyperkalaemia");
+  assert.ok(hk.qrsWidth >= 120, "hyperkalaemia wide QRS");
+  const hkS = X.sample("hyperkalaemia").data, snS = X.sample("sinus").data;
+  assert.ok(maxAbs(hkS) > 0.9 && maxAbs(snS) > 0.9);
+  const arr = X.describe("sinus-arrest");
+  assert.ok(Math.max(...arr.rrList) > 2000, "sinus arrest pause over 2 s: " + arr.rrList);
+  for (const id of ["junctional", "pac", "pvc", "pvc-bigeminy", "paced-atrial", "paced-ventricular", "wpw", "hyperkalaemia", "sinus-arrest"]) {
+    const m = X.RHYTHMS.find((r) => r.id === id);
+    assert.ok(m && m.features.length >= 3 && m.cls === "pulse-present", id);
+  }
+});
+
+test("quiz levels: 10 per level, hard mixes similar rhythms and lead questions", () => {
+  for (const lv of ["easy", "medium", "hard"]) {
+    const q = X.buildQuiz(10, 7, {}, lv);
+    assert.equal(q.length, 10, lv);
+    assert.ok(q.every((x) => x.level === lv), lv + " purity");
+  }
+  const hard = X.buildQuiz(10, 7, {}, "hard");
+  assert.ok(hard.some((x) => x.type === "lead"), "hard has lead questions");
+  const leadQ = X.QUIZ.find((q) => q.type === "lead" && q.setId === "anterior");
+  assert.ok(X.leadSt(leadQ.setId, leadQ.choices[leadQ.a]) > 0, "lead answer lead is elevated");
+});
+
+test("measuring mode: PR, QRS and QT flags are teaching text only", () => {
+  const s = X.intervalsFor("sinus");
+  assert.equal(s.pr, 160); assert.equal(s.prFlag.flag, "normal");
+  assert.equal(X.intervalsFor("wpw").prFlag.flag, "short");
+  assert.equal(X.intervalsFor("first-degree").prFlag.flag, "long");
+  assert.equal(X.intervalsFor("vt").qrsFlag.flag, "long");
+  assert.equal(X.intervalsFor("vt").pr, null);
+  for (const id of ["sinus", "wpw", "vt"]) {
+    const iv = X.intervalsFor(id);
+    for (const f of [iv.prFlag, iv.qrsFlag, iv.qtFlag]) assert.ok(f.text.includes("Teaching"), f.text);
+  }
+});
+
 test("content rules: no doses, no emojis, no em-dashes", () => {
   const texts = [
     ...X.STEPS.map((s) => s.title + " " + s.body + " " + s.takeaway),
     ...X.QUIZ.map((q) => q.q + " " + q.choices.join(" ")),
     ...X.RHYTHMS.map((r) => r.name + " " + r.features.join(" ")),
+    ...X.PATTERNS.map((p) => p.name + " " + p.features.join(" ")),
+    ...Object.values(X.LEAD_SETS).map((s) => s.label + " " + (s.note || "")),
   ].join(" \n ");
   assert.ok(!/\d+\s*(mg|mcg|units|mmol)\b/i.test(texts), "no doses");
   assert.ok(!/—/.test(texts), "no em-dashes");

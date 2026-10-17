@@ -123,8 +123,8 @@ try {
 
   // ---- my training: best, trend, weak spots, reset ----
   await click('#cbtRoot [data-act="go-mine"]');
-  ok(await until(`return /Best scores|No training/.test(document.querySelector("#cbtRoot").textContent);`, 8000), "my training renders");
-  ok(await ev(`return /Best scores/.test(document.querySelector("#cbtRoot").textContent);`) === true, "completions recorded best scores");
+  ok(await until(`return /Best (scenario|case) scores|No training/.test(document.querySelector("#cbtRoot").textContent);`, 8000), "my training renders");
+  ok(await ev(`return /Best (scenario|case) scores/.test(document.querySelector("#cbtRoot").textContent);`) === true, "completions recorded best scores");
   ok(await ev(`return /Weak spots/.test(document.querySelector("#cbtRoot").textContent);`) === true, "weak spots by topic render");
   await shot("mine", true);
   await ev(`window.confirm=function(){return true;}; return 1;`);

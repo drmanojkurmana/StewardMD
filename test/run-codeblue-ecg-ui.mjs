@@ -1,5 +1,5 @@
 /* Code Blue ECG rhythm course in headless Chrome over CDP: the overlay opens with its
- * TRAINING badge and disclaimer, the six-step course advances, all 14 strips render on
+ * TRAINING badge and disclaimer, the six-step course advances, all 23 strips render on
  * a 1 mm/5 mm grid labelled schematic, calipers read ms plus rate via keyboard and a
  * synthetic touch drag, the 12-lead view shows territory ST elevation, flashcards reveal,
  * and the quiz scores 10 randomised questions with misses persisted. 390 px, light and
@@ -77,7 +77,8 @@ try {
 
   // ---- strips + grid + calipers
   await click('[data-cbecg-tab="rhythms"]');
-  ok(await ev(`return document.querySelectorAll("#cbecg-rhy option").length === 14;`) === true, "14 rhythm strips offered");
+  ok(await ev(`return document.querySelectorAll("#cbecg-rhy option").length === 23;`) === true, "23 rhythm strips offered");
+  ok(await ev(`return !!document.querySelector("[data-cbecg-measure]") && document.querySelector("[data-cbecg-measure]").textContent.indexOf("PR") >= 0 && document.querySelector("[data-cbecg-measure]").textContent.indexOf("Teaching") >= 0;`) === true, "measuring mode shows PR QRS QT with teaching flags");
   ok(await ev(`var s=document.querySelector(".cbecg-stripwrap svg"); return !!s && !!s.querySelector(".cbecg-grid-minor") && !!s.querySelector(".cbecg-grid-major");`) === true, "strip draws 1 mm and 5 mm grid");
   ok(await ev(`return document.querySelector(".cbecg-stripwrap svg text").textContent === "schematic";`) === true, "strip labelled schematic");
   await ev(`document.querySelector("#cbecg-rhy").value = "mobitz1"; document.querySelector("#cbecg-rhy").dispatchEvent(new Event("change", { bubbles: true })); return 1;`);
@@ -103,6 +104,9 @@ try {
   ok(await ev(`return document.querySelectorAll(".cbecg-cell.up").length === 4 && document.querySelectorAll(".cbecg-cell.dn").length === 3;`) === true, "anterior set: 4 elevated, 3 reciprocal");
   await ev(`document.querySelector("#cbecg-set").value = "inferior"; document.querySelector("#cbecg-set").dispatchEvent(new Event("change", { bubbles: true })); return 1;`);
   ok(await ev(`return document.querySelectorAll(".cbecg-cell.up").length === 3;`) === true, "inferior set: 3 elevated");
+  await ev(`document.querySelector("#cbecg-set").value = "posterior"; document.querySelector("#cbecg-set").dispatchEvent(new Event("change", { bubbles: true })); return 1;`);
+  ok(await ev(`return document.querySelectorAll(".cbecg-cell.dn").length === 3 && document.querySelector("[data-cbecg-leadnote]").textContent.indexOf("V7 to V9") >= 0;`) === true, "posterior set: 3 depressed with posterior-lead note");
+  ok(await ev(`return document.querySelectorAll(".cbecg-pattern").length === 2;`) === true, "LBBB and Wellens pattern cards render");
   await shot("leads", false); await shot("leads", true);
 
   // ---- flashcards
@@ -114,6 +118,8 @@ try {
 
   // ---- quiz
   await click('[data-cbecg-tab="quiz"]');
+  ok(await ev(`return document.querySelectorAll("[data-cbecg-level]").length === 3;`) === true, "quiz offers easy medium hard levels");
+  await click('[data-cbecg-level="hard"]');
   await click("[data-cbecg-start]");
   ok(await ev(`return document.querySelectorAll(".cbecg-qset").length === 10;`) === true, "quiz asks 10 questions");
   for (let i = 0; i < 10; i++) await ev(`var qs=document.querySelectorAll(".cbecg-qset"); var q=qs[${i}]; if(q){var r=q.querySelector("input[value='0']"); if(r) r.click();} return 1;`);

@@ -133,6 +133,17 @@ body.dark .cbecg-grid-bg{fill:#0A1519;}
 .cbecg-opt.ok{background:var(--cb-soft); font-weight:700;}
 .cbecg-opt.bad{opacity:.65;}
 .cbecg-score{font-size:17px; font-weight:800;}
+.cbecg-pattern{border:1px solid var(--cb-line); border-radius:var(--cb-r-md); padding:10px; margin:10px 0 0;}
+.cbecg-pattern h3{font-size:15px; margin:0 0 6px;}
+.cbecg-meas{border:1px solid var(--cb-line); border-radius:var(--cb-r-md); padding:10px; margin:12px 0 0;}
+.cbecg-meas h3{font-size:15px; margin:0 0 8px;}
+.cbecg-meas-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; padding:6px 0; border-top:1px solid var(--cb-line);}
+.cbecg-meas-row:first-of-type{border-top:0;}
+.cbecg-meas-lbl{font-weight:700; min-width:36px;}
+.cbecg-meas-val{font-weight:700; font-variant-numeric:tabular-nums;}
+.cbecg-chip{font-size:12px; font-weight:700; border:1px solid var(--cb-line); border-radius:var(--cb-r-pill); padding:2px 8px;}
+.cbecg-chip.short,.cbecg-chip.long{color:var(--cb-up); border-color:var(--cb-up);}
+.cbecg-meas-txt{color:var(--cb-mut); font-size:13.5px; flex:1 1 220px;}
 @media (prefers-reduced-motion:reduce){
   .cbecg *{transition:none !important; animation:none !important;}
 }
