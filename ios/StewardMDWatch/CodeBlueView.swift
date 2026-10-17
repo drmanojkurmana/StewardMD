@@ -3,10 +3,16 @@ import Combine
 import WatchKit
 import StewardMDWatchCore
 
-/// Code Blue toolkit + CPR Assist (design §3.3). Preserves the ACLS timer, 2-min
-/// cycle haptic, next-drug prompt, and Start/End; adds a live compression counter,
-/// rate coach, pause banner, and event logging while a code is running. Motion is
-/// captured through an injected detector — this view never imports CoreMotion.
+/// Entry disclaimer, shown on the mode picker wherever the feature is entered.
+/// Timer, reminder, documentation and practice aid only.
+private let codeBlueEntryDisclaimer =
+    "Timer, reminder, documentation and practice aid only. Not a substitute for clinical judgement, formal resuscitation training or your institution's protocol."
+
+/// Code Blue toolkit + CPR Assist (design §3.3) with v2 modes, epinephrine
+/// timing, algorithm guide, procedures, post-ROSC checklist and an editable
+/// log. Built for the 41 mm screen: the running view stays glanceable and
+/// everything else lives in sheets and menus. Uses SMDPalette and the existing
+/// HapticManager only; no new libraries.
 struct CodeBlueView: View {
     @StateObject private var model = CodeBlueModel(
         detector: CoreMotionCompressionDetector(),
@@ -20,6 +26,12 @@ struct CodeBlueView: View {
     @State private var captureNote: String?
     @State private var metronomeOn = false
     @State private var showRhythmPicker = false
+    @State private var showProcedures = false
+    @State private var showGuide = false
+    @State private var showChecklist = false
+    @State private var showLog = false
+    @State private var showResume = false
+    @State private var selectedMode: CodeMode = .adult
     @Environment(\.scenePhase) private var scenePhase
     private let ticker = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     // Haptic metronome at the mid-target rate (110/min ≈ every 0.545 s).
@@ -32,6 +44,19 @@ struct CodeBlueView: View {
             model.markSwitchCompressor()          // 2-min boundary → "Switch Compressor"
         }
         WatchConnectivityManager.shared.streamCodeBlue(model.snapshot(batteryLevel: WKDeviceId.battery))
+        // Epinephrine haptics fire once per transition into due / overdue.
+        fireEpiHapticIfNeeded()
+    }
+
+    @State private var lastEpiStatus: EpiStatus = .none
+
+    private func fireEpiHapticIfNeeded() {
+        let now = model.epiStatus
+        if now != lastEpiStatus {
+            if now == .due { HapticManager.play(.warning) }
+            if now == .overdue { HapticManager.play(.critical) }
+            lastEpiStatus = now
+        }
     }
 
     var body: some View {
@@ -42,14 +67,23 @@ struct CodeBlueView: View {
                     .font(.system(size: 40, weight: .bold, design: .rounded))
                     .monospacedDigit().foregroundStyle(SMDPalette.text1.color)
 
-                // Live tools show only while a code runs — keeps the idle screen glanceable.
                 if running {
                     Text("cycle \(model.cycle) · rhythm in \(model.rhythmCountdownLabel)")
                         .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                    epiChip
+                    guideStrip
                     cprDashboard
                     metronomeButton
                     nextDrugCard
                     drugButtons
+                    proceduresButton
+                    logButton
+                    if model.rosc {
+                        checklistButton
+                        reArrestButton
+                    }
+                } else {
+                    modePicker
                 }
 
                 startEndButton
@@ -76,18 +110,168 @@ struct CodeBlueView: View {
         }
         .onChange(of: scenePhase) { _, phase in if phase == .active { syncTick() } }
         .confirmationDialog("Log rhythm", isPresented: $showRhythmPicker, titleVisibility: .visible) {
-            Button("VF") { logRhythm("VF") }
-            Button("VT") { logRhythm("VT") }
-            Button("PEA") { logRhythm("PEA") }
-            Button("Asystole") { logRhythm("Asystole") }
+            ForEach(CodeRhythm.allCases, id: \.rawValue) { rhythm in
+                Button(rhythm.rawValue) { logRhythm(rhythm.rawValue) }
+            }
             Button("Cancel", role: .cancel) {}
         }
-        // Clear any orphaned cycle reminder from a prior session on entry; the
-        // repeating notification lives in the system but `running` is view-local.
-        .onAppear { if !running { ResusAlerts.cancel(["codeblue-cycle"]) } }
+        .confirmationDialog("Procedure", isPresented: $showProcedures, titleVisibility: .visible) {
+            ForEach(CodeProcedure.allCases, id: \.rawValue) { procedure in
+                Button(procedure.rawValue) { model.recordProcedure(procedure); HapticManager.play(.success) }
+            }
+            Button("Cancel", role: .cancel) {}
+        }
+        .confirmationDialog("Resume code in progress?",
+                            isPresented: $showResume, titleVisibility: .visible) {
+            Button("Resume") { resumeSession() }
+            Button("Discard", role: .destructive) { model.discardSession() }
+        } message: {
+            Text("A code was left running on this watch.")
+        }
+        .sheet(isPresented: $showGuide) { GuideSheet(prompts: model.guidePrompts) }
+        .sheet(isPresented: $showChecklist) { ChecklistSheet(model: model) }
+        .sheet(isPresented: $showLog) { LogSheet(model: model) }
+        .onAppear {
+            model.sessionStore = CodeSessionStore(storage: .userDefaults())
+            if !running { ResusAlerts.cancel(["codeblue-cycle"]) }
+            if !running, !model.isRunning, summary == nil, model.hasResumableSession() {
+                showResume = true
+            }
+        }
         // Leaving the Code Blue screen ends the reminder — a code session is tied to
         // this view being present, so the repeating alert must never outlive it.
         .onDisappear { ResusAlerts.cancel(["codeblue-cycle"]) }
+    }
+
+    // MARK: - Mode picker (before Start)
+
+    private var modePicker: some View {
+        VStack(spacing: 4) {
+            HStack(spacing: 4) {
+                ForEach(CodeMode.allCases, id: \.rawValue) { mode in
+                    Button(mode.displayName) { selectedMode = mode }
+                        .buttonStyle(.bordered)
+                        .tint(selectedMode == mode ? SMDPalette.accent.color : SMDPalette.text2.color)
+                        .font(.caption)
+                }
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityLabel("Resuscitation mode")
+            Text(selectedMode.compressionVentilationLabel)
+                .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                .multilineTextAlignment(.center)
+            Text(codeBlueEntryDisclaimer)
+                .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity).padding(SMDSpacing.cardPadding)
+        .background(SMDPalette.surface.color, in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+    }
+
+    // MARK: - Epinephrine countdown chip
+
+    private var epiChip: some View {
+        HStack(spacing: 4) {
+            Text(epiChipText)
+                .font(.caption).bold()
+                .foregroundStyle(epiChipColor)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(SMDSpacing.cardPadding)
+        .background(SMDPalette.surface.color,
+                    in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(epiAccessibilityLabel)
+    }
+
+    private var epiChipText: String {
+        switch model.epiStatus {
+        case .none: return "Epi: log first dose"
+        case .notDue: return "Epi in \(TimeFormat.mmss(model.secondsToEpiDue ?? 0))"
+        case .due: return "Epi due"
+        case .overdue:
+            let over = (model.secondsSinceLastEpinephrine ?? 0) - EpiSchedule.overdueAfter
+            return "Epi overdue \(TimeFormat.mmss(over))"
+        }
+    }
+
+    private var epiAccessibilityLabel: String {
+        switch model.epiStatus {
+        case .none: return "Epinephrine: no dose logged yet"
+        case .notDue: return "Epinephrine due in \(TimeFormat.mmss(model.secondsToEpiDue ?? 0))"
+        case .due: return "Epinephrine due now"
+        case .overdue: return "Epinephrine overdue"
+        }
+    }
+
+    private var epiChipColor: Color {
+        switch model.epiStatus {
+        case .due: return SMDPalette.warning.color
+        case .overdue: return SMDPalette.critical.color
+        case .none, .notDue: return SMDPalette.info.color
+        }
+    }
+
+    // MARK: - Algorithm guide strip
+
+    private var guideStrip: some View {
+        Button { showGuide = true } label: {
+            HStack(spacing: 4) {
+                Circle()
+                    .fill(guideDotColor)
+                    .frame(width: 8, height: 8)
+                    .accessibilityHidden(true)
+                Text(model.guidePrompts.first?.text ?? "Guide")
+                    .font(.caption).foregroundStyle(SMDPalette.text1.color)
+                    .lineLimit(2).multilineTextAlignment(.leading)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(SMDSpacing.cardPadding)
+            .background(SMDPalette.surface.color,
+                        in: RoundedRectangle(cornerRadius: SMDSpacing.radiusCard))
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Resuscitation guide: \(model.guidePrompts.first?.text ?? "none")")
+        .accessibilityHint("Opens the full prompt list")
+    }
+
+    private var guideDotColor: Color {
+        switch model.guidePrompts.first?.urgency {
+        case .overdue: return SMDPalette.critical.color
+        case .due: return SMDPalette.warning.color
+        default: return SMDPalette.info.color
+        }
+    }
+
+    // MARK: - Running-screen buttons
+
+    private var proceduresButton: some View {
+        Button("Procedures") { showProcedures = true }
+            .buttonStyle(.bordered).font(.caption)
+            .tint(SMDPalette.info.color)
+    }
+
+    private var logButton: some View {
+        Button("Log (\(model.events.count))") { showLog = true }
+            .buttonStyle(.bordered).font(.caption)
+            .tint(SMDPalette.text2.color)
+    }
+
+    private var checklistButton: some View {
+        Button("Checklist (\(model.checklistTicks.count))") { showChecklist = true }
+            .buttonStyle(.bordered).font(.caption)
+            .tint(SMDPalette.success.color)
+    }
+
+    private var reArrestButton: some View {
+        Button("Re-arrest") {
+            model.reArrest()
+            syncTick()
+            HapticManager.play(.warning)
+        }
+        .buttonStyle(.bordered).font(.caption)
+        .tint(SMDPalette.critical.color)
+        .accessibilityHint("Clears ROSC and starts a new CPR cycle at the same mode")
     }
 
     private var cprDashboard: some View {
@@ -152,7 +336,7 @@ struct CodeBlueView: View {
 
     /// Haptic metronome toggle — ticks the wrist at the mid-target rate to pace CPR.
     private var metronomeButton: some View {
-        Button(metronomeOn ? "♪ Pacing 110/min" : "♪ Metronome 110/min") {
+        Button(metronomeOn ? "Pacing 110/min" : "Metronome 110/min") {
             metronomeOn.toggle()
             if metronomeOn { WKInterfaceDevice.current().play(.start) }
         }
@@ -165,7 +349,8 @@ struct CodeBlueView: View {
             running.toggle()
             if running {
                 startDate = Date().addingTimeInterval(-model.elapsed)
-                model.startCode()
+                model.startCode(mode: selectedMode)
+                lastEpiStatus = .none
                 if captureOn { CaptureLog.shared.begin(); captureNote = nil }   // fresh trace per code
                 // Guaranteed alert to the iPhone even when the app is force-quit: a
                 // direct backend push (only APNs shows on a terminated/locked phone).
@@ -187,8 +372,23 @@ struct CodeBlueView: View {
         .tint(running ? SMDPalette.critical.color : SMDPalette.success.color)
     }
 
+    private func resumeSession() {
+        if model.restoreSession() {
+            running = true
+            summary = nil
+            selectedMode = model.mode
+            lastEpiStatus = model.epiStatus
+            startDate = Date().addingTimeInterval(-model.elapsed)
+            WatchConnectivityManager.shared.streamCodeBlueSnapshot(model.snapshot(batteryLevel: WKDeviceId.battery))
+            ResusAlerts.requestAuth()
+            ResusAlerts.schedule(id: "codeblue-cycle", after: 120,
+                                 title: "Code Blue", body: "Rhythm check — switch compressor.", repeats: true)
+            HapticManager.play(.success)
+        }
+    }
+
     private func summaryLine(_ s: CodeSummary) -> some View {
-        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · CCF ~\(s.compressionFractionPct)% · tgt ~\(s.targetRatePct)% · \(s.shockCount) shock\(s.rosc ? " · ROSC ✓" : "")")
+        Text("Duration \(s.durationLabel) · \(s.totalCompressions) comp · ~\(s.averageRateCPM)/min · CCF ~\(s.compressionFractionPct)% · tgt ~\(s.targetRatePct)% · \(s.shockCount) shock\(s.rosc ? " · ROSC" : "")")
             .font(.caption2).foregroundStyle(SMDPalette.text2.color)
     }
 
@@ -213,7 +413,7 @@ struct CodeBlueView: View {
     /// DEV: capture the raw motion trace to tune the detector (prints to console).
     private var captureControls: some View {
         VStack(spacing: 2) {
-            Button(captureOn ? "◉ Capturing…" : "○ Capture trace (dev)") {
+            Button(captureOn ? "Capturing…" : "Capture trace (dev)") {
                 captureOn.toggle()
                 if captureOn { CaptureLog.shared.begin(); captureNote = nil }
                 else { captureNote = CaptureLog.shared.end(appCount: model.compressionCount) }
@@ -225,6 +425,184 @@ struct CodeBlueView: View {
                     .multilineTextAlignment(.center)
             }
         }
+    }
+}
+
+// MARK: - Algorithm guide sheet
+
+/// Full prompt list behind the guide strip. Text only; urgency is a coloured
+/// dot plus the prompt wording, never colour alone.
+private struct GuideSheet: View {
+    let prompts: [GuidePrompt]
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: SMDSpacing.s) {
+                Text("GUIDE")
+                    .font(.caption2).foregroundStyle(SMDPalette.text2.color)
+                ForEach(prompts, id: \.id) { prompt in
+                    HStack(alignment: .top, spacing: 6) {
+                        Circle()
+                            .fill(dotColor(for: prompt.urgency))
+                            .frame(width: 8, height: 8)
+                            .padding(.top, 4)
+                            .accessibilityHidden(true)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(prompt.text)
+                                .font(.caption).foregroundStyle(SMDPalette.text1.color)
+                            Text(prompt.source)
+                                .font(.system(size: 10)).foregroundStyle(SMDPalette.text2.color)
+                        }
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityLabel("\(prompt.text). Source: \(prompt.source)")
+                }
+            }
+            .padding(SMDSpacing.screenMargin)
+        }
+        .navigationTitle("Guide")
+    }
+
+    private func dotColor(for urgency: GuidePrompt.Urgency) -> Color {
+        switch urgency {
+        case .overdue: return SMDPalette.critical.color
+        case .due: return SMDPalette.warning.color
+        case .info: return SMDPalette.info.color
+        }
+    }
+}
+
+// MARK: - Post-ROSC checklist sheet
+
+private struct ChecklistSheet: View {
+    @ObservedObject var model: CodeBlueModel
+
+    var body: some View {
+        List {
+            ForEach(PostROSCChecklist.items(mode: model.mode), id: \.id) { item in
+                Button {
+                    model.toggleChecklistItem(item)
+                    HapticManager.play(.success)
+                } label: {
+                    HStack(spacing: 6) {
+                        Image(systemName: model.checklistTicks.contains(item.id)
+                              ? "checkmark.circle.fill" : "circle")
+                            .foregroundStyle(model.checklistTicks.contains(item.id)
+                                             ? SMDPalette.success.color : SMDPalette.text2.color)
+                            .accessibilityHidden(true)
+                        Text(item.text)
+                            .font(.caption).foregroundStyle(SMDPalette.text1.color)
+                            .multilineTextAlignment(.leading)
+                    }
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(item.text), \(model.checklistTicks.contains(item.id) ? "ticked" : "not ticked")")
+            }
+        }
+        .navigationTitle("Checklist")
+    }
+}
+
+// MARK: - Editable log sheet
+
+private struct LogSheet: View {
+    @ObservedObject var model: CodeBlueModel
+    @State private var noteText = ""
+
+    private var ordered: [CodeEvent] {
+        model.events.sorted(by: { $0.elapsed < $1.elapsed })
+    }
+
+    var body: some View {
+        NavigationStack {
+            VStack(spacing: 4) {
+                HStack {
+                    TextField("Note", text: $noteText)
+                        .font(.caption)
+                        .accessibilityLabel("New note text")
+                    Button("Add") {
+                        let text = noteText.trimmingCharacters(in: .whitespacesAndNewlines)
+                        guard !text.isEmpty else { return }
+                        model.recordNote(text)
+                        noteText = ""
+                        HapticManager.play(.success)
+                    }
+                    .font(.caption)
+                    .tint(SMDPalette.accent.color)
+                    .disabled(noteText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                }
+                .padding(.horizontal, SMDSpacing.screenMargin)
+                if model.canUndoDelete {
+                    Button("Undo delete") {
+                        model.undoDelete()
+                        HapticManager.play(.success)
+                    }
+                    .font(.caption).buttonStyle(.bordered)
+                    .tint(SMDPalette.warning.color)
+                }
+                List {
+                    ForEach(ordered) { event in
+                        NavigationLink {
+                            LogEditView(model: model, eventId: event.id,
+                                        draft: event.label, elapsed: event.elapsed)
+                        } label: {
+                            HStack {
+                                Text(TimeFormat.mmss(event.elapsed))
+                                    .font(.caption2).monospacedDigit()
+                                    .foregroundStyle(SMDPalette.text2.color)
+                                Text(CodeSummary.codeLabel(event))
+                                    .font(.caption).foregroundStyle(SMDPalette.text1.color)
+                                    .lineLimit(2)
+                                if event.edited {
+                                    Text("edited")
+                                        .font(.system(size: 9)).foregroundStyle(SMDPalette.warning.color)
+                                        .accessibilityLabel("Edited")
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Log")
+        }
+    }
+}
+
+/// Edit or delete a single log row. The elapsed time is never changed.
+private struct LogEditView: View {
+    @ObservedObject var model: CodeBlueModel
+    let eventId: String
+    @State var draft: String
+    let elapsed: TimeInterval
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: SMDSpacing.s) {
+                Text(TimeFormat.mmss(elapsed))
+                    .font(.headline).monospacedDigit()
+                    .foregroundStyle(SMDPalette.text2.color)
+                TextField("Label", text: $draft)
+                    .font(.caption)
+                    .accessibilityLabel("Event label")
+                Button("Save") {
+                    model.editEvent(id: eventId, newLabel: draft)
+                    HapticManager.play(.success)
+                    dismiss()
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(SMDPalette.success.color)
+                Button("Delete", role: .destructive) {
+                    model.deleteEvent(id: eventId)
+                    HapticManager.play(.warning)
+                    dismiss()
+                }
+                .buttonStyle(.bordered)
+                .tint(SMDPalette.critical.color)
+            }
+            .padding(SMDSpacing.screenMargin)
+        }
+        .navigationTitle("Edit row")
     }
 }
 

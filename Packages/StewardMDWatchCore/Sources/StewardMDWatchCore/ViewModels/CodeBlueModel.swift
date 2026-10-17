@@ -31,6 +31,19 @@ public final class CodeBlueModel: ObservableObject {
     @Published public private(set) var events: [CodeEvent] = []
     @Published public private(set) var isRunning = false
 
+    // MARK: v2 (Code Blue v2 spec)
+    @Published public private(set) var mode: CodeMode = .adult
+    @Published public private(set) var checklistTicks: Set<String> = []
+    @Published public private(set) var canUndoDelete = false
+
+    /// Injectable session persistence (resume prompt) and clock for tests.
+    public var sessionStore = CodeSessionStore(storage: .inMemory())
+    public var clock: () -> Date = { Date() }
+
+    private var startedAtWallClock: Date?
+    private var lastTickSaveAt: Date?
+    private var deletedStack: [(event: CodeEvent, index: Int)] = []
+
     private var timer = CodeBlueTimer()
     private var detector: CompressionDetecting?
     private var workout: WorkoutKeepAlive?
@@ -73,6 +86,7 @@ public final class CodeBlueModel: ObservableObject {
         let crossed = timer.tick(dt)
         elapsed = timer.elapsed
         accountRate(to: elapsed)
+        maybeSaveOnTick()
         return crossed
     }
 
@@ -84,6 +98,7 @@ public final class CodeBlueModel: ObservableObject {
         let crossed = timer.set(seconds)
         elapsed = timer.elapsed
         accountRate(to: elapsed)
+        maybeSaveOnTick()
         return crossed
     }
 
@@ -119,6 +134,7 @@ public final class CodeBlueModel: ObservableObject {
     private func append(_ kind: CodeEventKind, _ label: String = "") {
         events.append(CodeEvent(id: nextId(kind), elapsed: elapsed, kind: kind,
                                 label: label, sourceDeviceId: deviceId))
+        saveSession()
     }
 
     /// Apply a detector batch: update measured stats + emit pause/resume events.
@@ -158,15 +174,27 @@ public final class CodeBlueModel: ObservableObject {
         activeRateSeconds = 0
         onTargetSeconds = 0
         lastRateElapsed = 0
+        mode = .adult
+        checklistTicks = []
+        deletedStack = []
+        canUndoDelete = false
+        startedAtWallClock = nil
+        lastTickSaveAt = nil
+        sessionStore.clear()
     }
 
     /// Begin a code: reset to a clean slate first (each code stands alone), then
-    /// start sensors + keep-alive and log the start event.
-    public func startCode() {
+    /// start sensors + keep-alive and log the mode + start events.
+    /// `mode` defaults to adult so existing call sites are unchanged.
+    public func startCode(mode: CodeMode = .adult) {
         reset()
+        self.mode = mode
+        timer.cycleLength = mode.rhythmCheckInterval
         isRunning = true
+        startedAtWallClock = clock()
         workout?.begin()
         detector?.start()
+        append(.modeSet, "Mode — \(mode.displayName)")
         append(.cprStart)
     }
 
@@ -176,6 +204,7 @@ public final class CodeBlueModel: ObservableObject {
         isRunning = false
         detector?.stop()
         workout?.end()
+        sessionStore.clear()
         return CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
                                  totalCompressions: compressionCount, averageRateCPM: averageRateCPM,
                                  targetRatePct: targetRatePct)
@@ -196,6 +225,216 @@ public final class CodeBlueModel: ObservableObject {
                       averageRateCPM: averageRateCPM, coachZone: coachZone, paused: paused,
                       pauseSeconds: pauseSeconds, adrenalineCount: adrenalineCount,
                       shockCount: shockCount, rosc: rosc, batteryLevel: batteryLevel,
-                      targetRatePct: targetRatePct, events: events, updatedElapsed: elapsed)
+                      targetRatePct: targetRatePct, events: events, updatedElapsed: elapsed,
+                      mode: mode)
+    }
+
+    // MARK: v2 — procedures, notes, re-arrest
+
+    public func recordProcedure(_ procedure: CodeProcedure) {
+        append(.procedure, procedure.rawValue)
+    }
+
+    public func recordNote(_ text: String) {
+        append(.note, text)
+    }
+
+    /// One action after ROSC: clears rosc, appends reArrest, starts a new CPR
+    /// cycle at the same mode. The epinephrine timer continues from the last dose.
+    public func reArrest() {
+        rosc = false
+        append(.reArrest, "Re-arrest")
+        append(.cprStart, "CPR restarted")
+    }
+
+    // MARK: v2 — epinephrine timing + guide
+
+    /// Seconds since the last logged epinephrine dose, if any.
+    public var secondsSinceLastEpinephrine: TimeInterval? {
+        EpiSchedule.lastDoseElapsed(events: events).map { elapsed - $0 }
+    }
+
+    public var epiStatus: EpiStatus {
+        EpiSchedule.status(secondsSinceLastDose: secondsSinceLastEpinephrine)
+    }
+
+    /// Seconds until epinephrine is due (nil before the first dose).
+    public var secondsToEpiDue: TimeInterval? {
+        secondsSinceLastEpinephrine.map { max(0, EpiSchedule.dueAfter - $0) }
+    }
+
+    public var guidePrompts: [GuidePrompt] {
+        let lastRhythm = events.last(where: { $0.kind == .rhythm })?.label
+        return AlgorithmGuide.prompts(mode: mode, lastRhythm: lastRhythm,
+                                      shockCount: shockCount,
+                                      epinephrineCount: adrenalineCount,
+                                      secondsSinceLastEpinephrine: secondsSinceLastEpinephrine,
+                                      rosc: rosc)
+    }
+
+    // MARK: v2 — post-ROSC checklist
+
+    /// Tick (or untick) a checklist item. Each tick logs a note event.
+    public func toggleChecklistItem(_ item: PostROSCItem) {
+        if checklistTicks.contains(item.id) {
+            checklistTicks.remove(item.id)
+        } else {
+            checklistTicks.insert(item.id)
+            append(.note, item.text)
+        }
+        saveSession()
+    }
+
+    // MARK: v2 — editable log
+
+    /// Rename an event row. Sets the `edited` flag; the elapsed time is kept.
+    @discardableResult
+    public func editEvent(id: String, newLabel: String) -> Bool {
+        guard let i = events.firstIndex(where: { $0.id == id }) else { return false }
+        let e = events[i]
+        events[i] = CodeEvent(id: e.id, elapsed: e.elapsed, kind: e.kind,
+                              label: newLabel, sourceDeviceId: e.sourceDeviceId,
+                              edited: true)
+        recount()
+        saveSession()
+        return true
+    }
+
+    /// Delete an event row (deletion removes the event) and recount.
+    @discardableResult
+    public func deleteEvent(id: String) -> Bool {
+        guard let i = events.firstIndex(where: { $0.id == id }) else { return false }
+        deletedStack.append((event: events[i], index: i))
+        events.remove(at: i)
+        canUndoDelete = true
+        recount()
+        saveSession()
+        return true
+    }
+
+    /// Restore the last deleted event at its original position. Returns false
+    /// when there is nothing to undo.
+    @discardableResult
+    public func undoDelete() -> Bool {
+        guard let last = deletedStack.popLast() else { return false }
+        events.insert(last.event, at: min(last.index, events.count))
+        canUndoDelete = !deletedStack.isEmpty
+        recount()
+        saveSession()
+        return true
+    }
+
+    /// Recompute epinephrine/shock counts from the event list after any edit.
+    /// ROSC follows the latest of the rosc/re-arrest events.
+    private func recount() {
+        adrenalineCount = events.filter { EpiSchedule.isEpinephrineEvent($0) }.count
+        shockCount = events.filter { $0.kind == .shock }.count
+        var latestROSC: Bool?
+        for e in events {
+            if e.kind == .rosc { latestROSC = true }
+            else if e.kind == .reArrest { latestROSC = false }
+        }
+        if let latestROSC { rosc = latestROSC }
+    }
+
+    // MARK: v2 — session snapshot (resume)
+
+    private func currentSnapshot(now: Date) -> CodeSessionSnapshot? {
+        guard isRunning, let started = startedAtWallClock else { return nil }
+        return CodeSessionSnapshot(mode: mode, startedAtWallClock: started,
+                                   elapsedAtSave: elapsed, events: events,
+                                   adrenalineCount: adrenalineCount, shockCount: shockCount,
+                                   rosc: rosc, checklistTicks: Array(checklistTicks),
+                                   savedAtWallClock: now)
+    }
+
+    private func saveSession() {
+        guard let snap = currentSnapshot(now: clock()) else { return }
+        sessionStore.save(snap)
+        lastTickSaveAt = clock()
+    }
+
+    /// Throttled tick save: at most every 5 s. Event saves are immediate.
+    private func maybeSaveOnTick() {
+        guard isRunning else { return }
+        let now = clock()
+        if let last = lastTickSaveAt, now.timeIntervalSince(last) < 5 { return }
+        saveSession()
+    }
+
+    public func hasResumableSession(now: Date? = nil) -> Bool {
+        sessionStore.restore(now: now ?? clock()) != nil
+    }
+
+    /// Restore a saved session into this model. Returns false when there is no
+    /// session or it is older than 6 h.
+    @discardableResult
+    public func restoreSession(now: Date? = nil) -> Bool {
+        let at = now ?? clock()
+        guard let restored = sessionStore.restore(now: at) else { return false }
+        let snap = restored.snapshot
+        resetKeepingSession()
+        mode = snap.mode
+        timer.cycleLength = mode.rhythmCheckInterval
+        timer.set(restored.resumedElapsed)
+        elapsed = timer.elapsed
+        lastRateElapsed = elapsed
+        events = snap.events
+        eventSeq = snap.events.count
+        adrenalineCount = snap.adrenalineCount
+        shockCount = snap.shockCount
+        rosc = snap.rosc
+        checklistTicks = Set(snap.checklistTicks)
+        startedAtWallClock = snap.startedAtWallClock
+        isRunning = true
+        workout?.begin()
+        detector?.start()
+        saveSession()
+        return true
+    }
+
+    public func discardSession() {
+        sessionStore.clear()
+    }
+
+    /// Like reset but keeps the stored snapshot (used by restore).
+    private func resetKeepingSession() {
+        detector?.stop()
+        workout?.end()
+        timer = CodeBlueTimer()
+        elapsed = 0
+        adrenalineCount = 0
+        shockCount = 0
+        rosc = false
+        compressionCount = 0
+        instantaneousRateCPM = 0
+        averageRateCPM = 0
+        paused = false
+        pauseSeconds = 0
+        coachZone = .idle
+        events = []
+        isRunning = false
+        eventSeq = 0
+        activeRateSeconds = 0
+        onTargetSeconds = 0
+        lastRateElapsed = 0
+        mode = .adult
+        checklistTicks = []
+        deletedStack = []
+        canUndoDelete = false
+        startedAtWallClock = nil
+        lastTickSaveAt = nil
+    }
+
+    // MARK: v2 — code sheet payload
+
+    public func codeSheetPayload(startedAt: Date? = nil) -> CodeSheetPayload? {
+        let summary = CodeSummary.build(events: events, durationSeconds: elapsed, cycles: cycle,
+                                        totalCompressions: compressionCount,
+                                        averageRateCPM: averageRateCPM,
+                                        targetRatePct: targetRatePct)
+        return CodeSheet.payload(summary: summary, events: events, mode: mode,
+                                 startedAt: startedAt ?? startedAtWallClock ?? clock(),
+                                 durationSeconds: elapsed, cycles: cycle)
     }
 }
