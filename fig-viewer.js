@@ -84,8 +84,10 @@
     if (!sel || !ro || !host || sel.options.length < 2) return;
     var st = doc.createElement("style"); st.textContent = CMP_CSS; doc.body.appendChild(st);
     var box = doc.createElement("div"); box.className = "smdc";
-    box.innerHTML = '<div class="smdc-t" role="group" aria-label="Show without or with the drug"><button type="button" data-w="0">Without drug</button><button type="button" data-w="1">With drug</button></div>' +
+    var LW = sel.getAttribute("data-without") || "Without drug", LD = sel.getAttribute("data-with") || "With drug";
+    box.innerHTML = '<div class="smdc-t" role="group" aria-label="Show without or with"><button type="button" data-w="0"></button><button type="button" data-w="1"></button></div>' +
       '<div class="smdc-r" data-r="0"><b>Without</b><span></span></div><div class="smdc-r" data-r="1"><b>With</b><span></span></div>';
+    box.querySelector('[data-w="0"]').textContent = LW; box.querySelector('[data-w="1"]').textContent = LD;
     host.parentNode.insertBefore(box, host);
     var last = sel.value !== "0" ? sel.value : "1", busy = false, ts = box.querySelectorAll(".smdc-t button"), rows = box.querySelectorAll(".smdc-r");
     function fire() { sel.dispatchEvent(new doc.defaultView.Event("change", { bubbles: true })); }

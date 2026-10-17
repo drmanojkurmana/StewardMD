@@ -16,7 +16,7 @@ test("registry: figures.json is well formed", () => {
   for (const f of cfg.figures) {
     assert.match(f.id, /^[a-z0-9-]{2,40}$/); assert.ok(!ids.has(f.id), "unique id " + f.id); ids.add(f.id);
     assert.match(f.page, /^prep\/figures\/[a-z0-9-]{2,60}\.html$/);
-    assert.ok(Object.keys(f.drugs).length > 0, f.id + " names drugs");
+    assert.ok(f.scene || Object.keys(f.drugs).length > 0, f.id + " names drugs");
     for (const k of Object.keys(f.drugs)) assert.match(k, /^[a-z]+$/, "drug key is one lower-case word: " + k);
   }
 });
