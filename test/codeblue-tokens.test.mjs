@@ -34,7 +34,7 @@ for (const f of FILES) css[f] = readFileSync(join(HERE, "..", f), "utf8");
  * per-theme shades both themes need for contrast, the gradient stops, the
  * sibling accessibility themes, and plain white. */
 const APPROVED = new Set([
-  "#101317", "#171b20", "#343a40", "#aab2bd", "#f4f7fa",
+  "#101317", "#171b20", "#151a1f", "#1b2127", "#343a40", "#aab2bd", "#f4f7fa",
   "#3b82f6", "#1d4ed8", "#2563eb", "#0a0f16",
   "#f5b544", "#8a5a00", "#ef4444", "#b91c1c", "#34c759", "#17803a",
   "#5b6b7a", "#4a5560", "#ffffff",

@@ -145,6 +145,18 @@ async function contrast(tag) {
   ok(ratios && ratios.muted >= 3, tag + ": contrast muted >= 3 (" + (ratios && ratios.muted) + ")");
 }
 
+async function visualAudit(tag) {
+  const fontOk = await ev(`try { return document.fonts.check('250 96px "Inter CodeBlue"'); } catch (e) { return false; }`);
+  ok(fontOk === true, tag + ": Inter CodeBlue font loaded (document.fonts.check)");
+  const clock = await ev(`var el = document.querySelector('${CBL} .cbl-ringtime'); if (!el) return null; var cs = getComputedStyle(el); return { fam: cs.fontFamily, num: cs.fontVariantNumeric, ls: cs.letterSpacing, fs: parseFloat(cs.fontSize) };`);
+  ok(!!clock && /Inter CodeBlue/.test(clock.fam), tag + ": clock is Inter (" + (clock && clock.fam) + ")");
+  ok(!!clock && /tabular/.test(clock.num), tag + ": clock is tabular (" + (clock && clock.num) + ")");
+  const thick = await ev(`return Array.from(document.querySelectorAll('${CBL} *')).filter(function (el) { var cs = getComputedStyle(el); return parseFloat(cs.borderLeftWidth) > 1 && cs.borderLeftStyle !== 'none'; }).length;`);
+  ok(thick === 0, tag + ": no thick coloured border-left (thick=" + thick + ")");
+  const blue = await ev(`return Array.from(document.querySelectorAll('${CBL} *')).filter(function (el) { var cs = getComputedStyle(el); var bg = cs.backgroundColor; return /rgb\(59, 130, 246\)|rgb\(37, 99, 235\)|rgb\(29, 78, 216\)/.test(bg); }).length;`);
+  ok(typeof blue === "number" && blue <= 4, tag + ": filled-blue elements at most 4 (blue=" + blue + ")");
+}
+
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
   if (!ver) throw new Error("Chrome did not start within 60 s: " + chromeErr.slice(-800));
@@ -192,7 +204,7 @@ try {
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-guide li').length >= 3;`) === true, "guide prompts render with sources");
   ok(await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-gsrc')).every(function (e) { return e.textContent.length > 5; });`) === true, "every prompt cites a source");
   await shot("running", false); await shot("running", true);
-  await metrics("running-390"); await contrast("running-390-dark");
+  await metrics("running-390"); await contrast("running-390-dark"); await visualAudit("running-390");
   await layoutAudit("running-390", "phone");
 
   /* Tabs keep the status strip visible; each tab shell renders. */
@@ -410,7 +422,7 @@ try {
   ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "iPad portrait: log tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
   await click(`${CBL} [data-act="tab-timer"]`);
-  await metrics("running-820"); await contrast("running-820-dark");
+  await metrics("running-820"); await contrast("running-820-dark"); await visualAudit("running-820");
   await layoutAudit("running-820", "ipad");
   await shot("running-820", false); await shot("running-820", true);
 
@@ -420,7 +432,7 @@ try {
   ok(await until(viewIs("running"), 5000), "running at 1194x834");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad landscape: timeline is a right column");
   ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, "iPad landscape: no horizontal scroll");
-  await metrics("running-1194");
+  await metrics("running-1194"); await visualAudit("running-1194");
   await layoutAudit("running-1194", "ipad");
   await shot("running-1194", false); await shot("running-1194", true);
 

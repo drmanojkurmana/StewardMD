@@ -979,7 +979,7 @@
       '" data-act="idle-training" aria-pressed="' + idleTraining + '">' +
       "<b>Practice run</b><span>Sped up clock, badged TRAINING. Nothing writes to a patient record.</span></button>" +
       linkRowView("idle") +
-      '<button type="button" class="cbl-btn cbl-primary cbl-start" data-act="start">Start</button>' +
+      '<button type="button" class="cbl-btn cbl-primary cbl-start" data-act="start" data-cbfx-specular="1">Start</button>' +
       audioNotice() +
       "</div></div>";
   }
@@ -999,6 +999,12 @@
     var arc = C * (1 - frac);
     var vent = ventInfo(sess, elapsed);
     var cueOn = sess.ventCue !== false;
+    var ticks = "";
+    for (var ti = 0; ti < 60; ti++) {
+      var ta = ti * Math.PI / 30, tx1 = 66 + 60 * Math.cos(ta), ty1 = 66 + 60 * Math.sin(ta);
+      var tx2 = 66 + 63 * Math.cos(ta), ty2 = 66 + 63 * Math.sin(ta);
+      ticks += "<line x1='" + tx1.toFixed(1) + "' y1='" + ty1.toFixed(1) + "' x2='" + tx2.toFixed(1) + "' y2='" + ty2.toFixed(1) + "'/>";
+    }
     return '<div class="cbl-ringrow"><div class="cbl-ringcard cbl-clock ' + cls +
       '" data-state="' + (paused ? "paused" : "running") + '">' +
       '<svg class="cbl-ring" viewBox="0 0 132 132" role="img" aria-label="CPR cycle ring">' +
@@ -1006,11 +1012,12 @@
       "<stop offset='0' stop-color='#3B82F6'/><stop offset='1' stop-color='#1D4ED8'/></linearGradient>" +
       "<linearGradient id='cblRingRed' x1='0' y1='0' x2='1' y2='1'>" +
       "<stop offset='0' stop-color='#EF4444'/><stop offset='1' stop-color='#B91C1C'/></linearGradient></defs>" +
+      "<g class='cbl-ticks' aria-hidden='true'>" + ticks + "</g>" +
       "<circle class='cbl-track' cx='66' cy='66' r='" + R + "'/>" +
       "<circle class='cbl-arc' data-s='" + ringState + "' cx='66' cy='66' r='" + R + "' " +
       "stroke-dasharray='" + C.toFixed(1) + "' stroke-dashoffset='" + arc.toFixed(1) + "' transform='rotate(-90 66 66)'/></svg>" +
       '<div class="cbl-ringmeta">' +
-      '<div class="cbl-elapsed cbl-ringtime" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
+      '<div class="cbl-elapsed cbl-ringtime" data-cbfx-counter data-cbfx-key="clock" aria-label="Elapsed time">' + esc(fmtMMSS(elapsed)) + "</div>" +
       '<div class="cbl-ringline"><span class="cbl-beat" data-beat="' + beat + '" aria-hidden="true"></span>' +
       "110 per min <span aria-hidden='true'>|</span> " +
       (sess.mode === "neonatal" ? "Heart rate check " : "Rhythm check ") +
@@ -1061,8 +1068,11 @@
       if (!n) return "Not logged yet";
       return n + " given" + (last ? ", last " + fmtAgo(elapsed - last.elapsed) : "");
     };
+    var epiSt = epiStatus(sess, elapsed);
     var btn = function (act, drug, label, doseText, sub) {
-      return '<button type="button" class="cbl-drug" data-drug="' + drug + '" data-act="' + act + '"' +
+      var next = drug === "epi" && (epiSt.state === "due" || epiSt.state === "overdue");
+      return '<button type="button" class="cbl-drug' + (next ? " cbl-nextdue" : "") + '" data-drug="' + drug + '" data-act="' + act + '"' +
+        (next ? ' data-cbfx-specular="1"' : "") +
         ' aria-label="' + esc(label) + (doseText ? ", " + esc(doseText) : "") + '">' +
         '<span class="cbl-druglabel">' + esc(label) + "</span>" +
         (doseText ? '<span class="cbl-drugdose">' + esc(doseText) + "</span>" : "") +
@@ -1106,7 +1116,7 @@
     return '<aside class="cbl-timeline' + (timelineOpen ? " open" : "") + '" data-state="timeline" aria-label="Live timeline">' +
       '<div class="cbl-tlhead"><span>Timeline</span>' +
       '<button type="button" class="cbl-mini" data-act="sheet-log">Open log</button></div>' +
-      '<ul class="cbl-tllist">' + items + "</ul></aside>";
+      '<ul class="cbl-tllist" data-cbfx-list>' + items + "</ul></aside>";
   }
 
   function linkRowView(ctx) {
@@ -1124,10 +1134,15 @@
 
   function dueView(elapsed) {
     var d = dueStrip(sess, elapsed, { paused: paused });
+    var main = d.text, count = "";
+    var cm = /(\d+:\d+)\s*$/.exec(d.text);
+    if (cm && d.level === "running") { count = cm[1]; main = d.text.slice(0, cm.index).replace(/\s+$/, ""); }
     return '<div class="cbl-due cbl-due-' + d.level + '" data-level="' + d.level +
       '" data-state="due-strip" role="status" aria-live="polite">' +
+      '<span class="cbl-duedot" aria-hidden="true"></span>' +
       '<span class="cbl-dueword">' + esc(dueWord(d.level, d.text)) + "</span>" +
-      '<span class="cbl-duetext">' + esc(d.text) + "</span></div>";
+      '<span class="cbl-duetext">' + esc(main) + "</span>" +
+      (count ? '<span class="cbl-duecount">' + esc(count) + "</span>" : "") + "</div>";
   }
 
   function dueWord(level, text) {
@@ -1192,7 +1207,7 @@
         ? '" data-act="tile-custom" data-id="' + esc(t.cid)
         : '" data-act="tile-' + t.kind;
       html += '<button type="button" class="cbl-tile' + (t.kind === "rearrest" ? " cbl-tile-re" : "") +
-        extra + '" aria-label="' + esc(t.label) + '">' + tileInner(t.kind, t.label, elapsed) + "</button>";
+        extra + '" aria-label="' + esc(t.label) + '"' + (t.kind === "shock" ? ' data-cbfx-specular="1"' : "") + ">" + tileInner(t.kind, t.label, elapsed) + "</button>";
     });
     return html + "</div>";
   }
@@ -1278,6 +1293,12 @@
       linkRowView("run") +
       '<button type="button" class="cbl-btn" data-act="audio">Sound settings</button>' +
       '<button type="button" class="cbl-btn" data-cbp-settings>Display settings</button>' +
+      '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">Compression rate</span><span data-cbfx-value>110 per min</span></div>' +
+      '<input type="range" min="100" max="120" step="1" value="110" data-cbfx-slider data-unit=" per min" data-fx-setting="rate" aria-label="Compression rate, 100 to 120 per minute">' +
+      '<div class="cbfx-marker" aria-hidden="true"><span style="left:50%"><i></i>110 default</span></div></div>' +
+      '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">Cycle length</span><span data-cbfx-value>120 s</span></div>' +
+      '<input type="range" min="60" max="180" step="10" value="120" data-cbfx-slider data-unit=" s" data-fx-setting="cycle" aria-label="Cycle length in seconds">' +
+      '<div class="cbfx-marker" aria-hidden="true"><span style="left:50%"><i></i>120 default</span></div></div>' +
       '<p class="cbl-note">Stored on this device only. Training runs never write anywhere.</p></div>';
   }
 
@@ -1335,12 +1356,27 @@
       "</div></div>";
   }
 
+  function fxEnhance() {
+    try {
+      if (typeof window === "undefined" || !window.CodeBlueFX || !rootEl) return;
+      if (window.CodeBlueFX.counter) window.CodeBlueFX.counter.enhanceAll(rootEl);
+      if (window.CodeBlueFX.specular) window.CodeBlueFX.specular.enhanceAll(rootEl);
+      if (window.CodeBlueFX.list) window.CodeBlueFX.list.enhanceAll(rootEl);
+      var sliders = rootEl.querySelectorAll("[data-fx-setting]");
+      for (var si = 0; si < sliders.length; si++) {
+        try { var sv = localStorage.getItem("smd.cbl.fx." + sliders[si].getAttribute("data-fx-setting")); if (sv) sliders[si].value = sv; } catch (err2) {}
+      }
+      if (window.CodeBlueFX.slider) window.CodeBlueFX.slider.enhanceAll(rootEl);
+    } catch (e) {}
+  }
+
   function render() {
     if (!rootEl) return;
     if (view === "idle") rootEl.innerHTML = idleView();
     else if (view === "ended") rootEl.innerHTML = endedView();
     else rootEl.innerHTML = runView();
     rootEl.setAttribute("data-view", view);
+    fxEnhance();
   }
 
   /* ---------------- sheets ---------------- */
@@ -1391,7 +1427,7 @@
       return '<p class="cbl-empty" data-state="empty-log">No events yet. Logged actions will appear here.</p>';
     }
     var rows = visible.slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
-    return '<ul class="cbl-log">' + rows.map(function (e) {
+    return '<ul class="cbl-log" data-cbfx-list>' + rows.map(function (e) {
       return '<li data-id="' + esc(e.id) + '"><span class="cbl-logt">' + esc(fmtMMSS(e.elapsed)) + "</span>" +
         '<span class="cbl-logl">' + esc(e.label) + (e.edited ? ' <span class="cbl-edited">edited</span>' : "") + "</span>" +
         '<span class="cbl-logacts"><button type="button" class="cbl-mini" data-act="log-edit" data-id="' + esc(e.id) + '">Edit</button>' +
@@ -1586,6 +1622,7 @@
       var fs = t3.firstChild;
       if (fs && fs.textContent !== s.textContent) s.parentNode.replaceChild(fs, s);
     }
+    fxEnhance();
   }
 
   /* ---------------- actions ---------------- */
@@ -1932,6 +1969,11 @@
       rootEl.id = "cblRoot";
       document.body.appendChild(rootEl);
       rootEl.addEventListener("click", onClick);
+      rootEl.addEventListener("change", function (e) {
+        var t = e.target;
+        if (!t || !t.getAttribute || !t.getAttribute("data-fx-setting")) return;
+        try { localStorage.setItem("smd.cbl.fx." + t.getAttribute("data-fx-setting"), String(t.value)); } catch (err) {}
+      });
       document.addEventListener("keydown", onKey);
       var css = document.createElement("link");
       css.rel = "stylesheet";

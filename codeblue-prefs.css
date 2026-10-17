@@ -195,7 +195,7 @@
 .cb-sheet-ov .cb-sheet[data-cb-theme] .cb-status { color: var(--cbp-running); }
 /* ---- 6. Text size 90 to 130 percent (root font plus key text) ---- */
 #cblRoot { font-size: calc(16px * var(--cbp-ts, 1)); }
-#cblRoot .cbl-elapsed { font-size: calc(64px * var(--cbp-ts, 1)); }
+#cblRoot .cbl-elapsed { font-size: calc(var(--cbl-clock, 68px) * var(--cbp-ts, 1)); }
 #cblRoot .cbl-h { font-size: calc(28px * var(--cbp-ts, 1)); }
 #cblRoot .cbl-sheeth { font-size: calc(20px * var(--cbp-ts, 1)); }
 #cblRoot .cbl-tilelabel { font-size: calc(20px * var(--cbp-ts, 1)); }
@@ -249,7 +249,7 @@
   position: fixed; inset: 0; z-index: 10001;
   display: flex; align-items: flex-end; justify-content: center;
   background: rgba(0, 0, 0, 0.45);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: "Inter CodeBlue", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: calc(16px * var(--cbp-ts, 1));
   line-height: 1.5;
   color: var(--cbp-ink, #f4f7fa);
@@ -306,7 +306,7 @@
 #cbpRoot .cbp-prev-due {
   display: flex; align-items: baseline; gap: 10px; margin-top: 10px;
   border: 1px solid var(--cbp-line, #343a40);
-  border-left: 4px solid var(--cbp-due, #f5b544);
+  border-left: 1px solid var(--cbp-due, #f5b544);
   border-radius: 8px; padding: 10px 12px;
 }
 #cbpRoot .cbp-prev-word {

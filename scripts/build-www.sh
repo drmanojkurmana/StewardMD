@@ -65,6 +65,9 @@ for f in connect-agent/discovery.mjs connect-agent/policy.mjs connect-agent/camo
   [ -f "$f" ] && mkdir -p "$WWW/connect-agent" && cp "$f" "$WWW/connect-agent/"
 done
 
+# Code Blue Inter variable font (self-hosted, OFL): must ship in www/fonts.
+if [ -d fonts ]; then mkdir -p "$WWW/fonts"; cp fonts/* "$WWW/fonts/" 2>/dev/null || true; fi
+
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
 [ -f sw.js ] && cp sw.js "$WWW/"
