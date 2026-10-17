@@ -2130,3 +2130,11 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-colorectal-cancer-s3.webp (R2) | Total mesorectal excision plane between mesorectal and presacral fasciae. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-paed-uro-s3.webp (R2) | Posterior urethral valves showing the keyhole sign and hydroureteronephrosis. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-transplant-s4.webp (R2) | Renal allograft in the iliac fossa with iliac vascular anastomoses and bladder implant. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-axilla-plexus-s1.webp (R2) | Axillary artery parts divided by pectoralis minor and boundaries of the axillary apex. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| obg-pelvis-fetal-skull-s3.webp (R2) | Four Caldwell-Moloy female pelvic inlet shapes with contrasting brim outlines. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ort-mixed-s2.webp (R2) | Fat embolism syndrome triad following long bone fracture with snowstorm lungs. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-abdominal-trauma-s5.webp (R2) | Extraperitoneal and intraperitoneal bladder rupture and urethral injury warning. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-neck-s2.webp (R2) | Thyroglossal duct cyst tract and en bloc resection in the Sistrunk procedure. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-salivary-s1.webp (R2) | Salivary glands, pleomorphic adenoma pseudopodia, and the clinical rule of eighty. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-testis-s3.webp (R2) | Radical inguinal orchiectomy with high cord clamping at the internal inguinal ring. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ans-monitoring-s4.webp (R2) | Ulnar nerve stimulation of adductor pollicis and train-of-four twitch height graph. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
