@@ -1,0 +1,121 @@
+/* codeblue-trainer.css — Megacode and ACLS practice presentation layer.
+ * Scoped under #cbtRoot. Flat colours only: no gradients, no glows, no backdrops.
+ * Light by default; body.dark selects the restrained dark green theme. */
+
+#cbtRoot {
+  position: fixed; inset: 0; z-index: 10000;
+  display: none; flex-direction: column; overflow: hidden;
+  --cbt-bg: #f4f6f5; --cbt-surface: #ffffff; --cbt-ink: #10211d;
+  --cbt-muted: #3d5650; --cbt-line: #cfdbd7; --cbt-accent: #0c6e5e;
+  --cbt-accent-ink: #ffffff; --cbt-wrong: #8f2d22; --cbt-right: #0c6e5e;
+  background: var(--cbt-bg); color: var(--cbt-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+body.dark #cbtRoot {
+  --cbt-bg: #071318; --cbt-surface: #0d1d23; --cbt-ink: #e8f1ee;
+  --cbt-muted: #9db8b1; --cbt-line: #1e343b; --cbt-accent: #42cdb5;
+  --cbt-accent-ink: #071318; --cbt-wrong: #e8988a; --cbt-right: #42cdb5;
+}
+#cbtRoot.on { display: flex; }
+body.cbt-lock { overflow: hidden; }
+
+#cbtRoot .cbt-top {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px; padding-top: calc(12px + env(safe-area-inset-top, 0px));
+  background: var(--cbt-surface); border-bottom: 1px solid var(--cbt-line);
+}
+#cbtRoot .cbt-badge {
+  display: inline-flex; align-items: center; min-height: 24px; padding: 2px 10px;
+  border-radius: 4px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+  background: var(--cbt-accent); color: var(--cbt-accent-ink);
+}
+#cbtRoot .cbt-back, #cbtRoot .cbt-close {
+  min-height: 44px; min-width: 44px; padding: 0 14px; border: 1px solid var(--cbt-line);
+  border-radius: 8px; background: transparent; color: var(--cbt-ink);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+}
+#cbtRoot .cbt-close { margin-left: auto; }
+#cbtRoot .cbt-scroll {
+  flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 16px 16px calc(32px + env(safe-area-inset-bottom, 0px));
+  max-width: 560px; width: 100%; margin: 0 auto; box-sizing: border-box;
+}
+#cbtRoot .cbt-h { font-size: 22px; line-height: 1.25; font-weight: 800; margin: 4px 0 12px; }
+#cbtRoot .cbt-h:focus { outline: none; }
+#cbtRoot .cbt-sub { font-size: 16px; font-weight: 700; margin: 18px 0 8px; }
+#cbtRoot .cbt-disc {
+  border: 1px solid var(--cbt-line); border-left: 4px solid var(--cbt-accent);
+  border-radius: 8px; padding: 12px; font-size: 14px; line-height: 1.5;
+  background: var(--cbt-surface); margin: 0 0 12px;
+}
+#cbtRoot .cbt-note { font-size: 14px; line-height: 1.5; color: var(--cbt-muted); margin: 0 0 12px; }
+#cbtRoot .cbt-step { font-size: 13px; font-weight: 600; color: var(--cbt-muted); margin: 0 0 8px; }
+
+#cbtRoot .cbt-station, #cbtRoot .cbt-card {
+  display: block; width: 100%; text-align: left; cursor: pointer; box-sizing: border-box;
+  min-height: 44px; padding: 14px; margin: 0 0 10px;
+  border: 1px solid var(--cbt-line); border-radius: 10px;
+  background: var(--cbt-surface); color: var(--cbt-ink); font-size: 16px;
+}
+#cbtRoot .cbt-station b, #cbtRoot .cbt-card b { display: block; font-size: 16px; font-weight: 700; }
+#cbtRoot .cbt-station span, #cbtRoot .cbt-card span { display: block; font-size: 13px; color: var(--cbt-muted); margin-top: 2px; }
+#cbtRoot .cbt-card .cbt-meta { font-size: 12px; }
+#cbtRoot .cbt-lv {
+  display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 4px;
+  font-size: 12px; font-weight: 700; border: 1px solid var(--cbt-line); color: var(--cbt-muted);
+}
+
+#cbtRoot .cbt-modes { display: flex; gap: 8px; margin-bottom: 12px; }
+#cbtRoot .cbt-mode {
+  flex: 1; min-height: 44px; border: 1px solid var(--cbt-line); border-radius: 8px;
+  background: var(--cbt-surface); color: var(--cbt-ink); font-size: 14px; font-weight: 600; cursor: pointer;
+}
+#cbtRoot .cbt-mode.on { background: var(--cbt-accent); border-color: var(--cbt-accent); color: var(--cbt-accent-ink); }
+
+#cbtRoot .cbt-state {
+  border: 1px solid var(--cbt-line); border-radius: 10px; padding: 14px;
+  background: var(--cbt-surface); margin-bottom: 12px;
+}
+#cbtRoot .cbt-p { font-size: 16px; line-height: 1.55; margin: 0; }
+#cbtRoot .cbt-opts { display: flex; flex-direction: column; gap: 8px; }
+#cbtRoot .cbt-opt {
+  min-height: 48px; padding: 12px 14px; text-align: left; cursor: pointer;
+  border: 1px solid var(--cbt-line); border-radius: 8px;
+  background: var(--cbt-surface); color: var(--cbt-ink); font-size: 15px; line-height: 1.4;
+}
+#cbtRoot .cbt-opt:disabled { cursor: default; opacity: 0.75; }
+#cbtRoot .cbt-opt.hit { border: 2px solid var(--cbt-right); padding: 11px 13px; }
+#cbtRoot .cbt-opt.off { border-color: var(--cbt-wrong); color: var(--cbt-muted); }
+#cbtRoot .cbt-fb { margin-top: 12px; }
+#cbtRoot .cbt-coach, #cbtRoot .cbt-why {
+  border-radius: 8px; padding: 12px; font-size: 14px; line-height: 1.5; margin: 0 0 10px;
+  border: 1px solid var(--cbt-line); background: var(--cbt-surface);
+}
+#cbtRoot .cbt-coach { border-left: 4px solid var(--cbt-right); }
+#cbtRoot .cbt-why { border-left: 4px solid var(--cbt-wrong); }
+#cbtRoot .cbt-done { font-weight: 700; }
+#cbtRoot .cbt-next {
+  min-height: 48px; padding: 12px 20px; border: none; border-radius: 8px; cursor: pointer;
+  background: var(--cbt-accent); color: var(--cbt-accent-ink); font-size: 16px; font-weight: 700;
+}
+#cbtRoot .cbt-next.ghost { background: transparent; border: 1px solid var(--cbt-line); color: var(--cbt-ink); }
+#cbtRoot .cbt-next.danger { background: transparent; border: 1px solid var(--cbt-wrong); color: var(--cbt-wrong); }
+
+#cbtRoot .cbt-clock {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+  border: 1px solid var(--cbt-line); border-radius: 8px; padding: 8px 12px;
+  background: var(--cbt-surface);
+}
+#cbtRoot .cbt-time { font-size: 20px; font-weight: 800; font-variant-numeric: tabular-nums; }
+#cbtRoot .cbt-log { list-style: none; margin: 0 0 12px; padding: 0; font-size: 14px; line-height: 1.5; }
+#cbtRoot .cbt-log li { padding: 8px 0; border-bottom: 1px solid var(--cbt-line); }
+#cbtRoot .cbt-score { font-size: 40px; font-weight: 800; margin: 8px 0; font-variant-numeric: tabular-nums; }
+
+#cbtRoot button:focus-visible { outline: 3px solid var(--cbt-accent); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  #cbtRoot *, #cbtRoot *::before, #cbtRoot *::after {
+    transition: none !important; animation: none !important;
+  }
+}
