@@ -46,7 +46,14 @@ ok("changing drug updates the readout", /./.test(await fr.evaluate(()=>document.
 // tap a part shows its text
 const shown=await fr.evaluate(()=>{const h=document.querySelector(".hot");h.dispatchEvent(new Event("touchend"));return document.getElementById("info").textContent});
 ok("tapping a labelled part shows its explanation", shown.length>10 && !/Tap a labelled/.test(shown), shown.slice(0,50));
-await p.screenshot({path:"/tmp/w3/g-bb.png"});
+// with / without switch and arrows in brackets
+const sw=await fr.evaluate(()=>{const b=[...document.querySelectorAll(".smdc-t button")];const sel=document.getElementById("drug");const out={};out.hasToggle=b.length===2;b[0].click();out.afterWithout=sel.value;out.rowWithout=document.querySelectorAll(".smdc-r")[0].textContent;b[1].click();out.afterWith=sel.value;out.rowWith=document.querySelectorAll(".smdc-r")[1].textContent;out.out=document.getElementById("b1-out").textContent;out.icon=!!document.querySelector(".smdi.ic-heart")&&!!document.querySelector(".smdc svg.ic-heart");out.font=getComputedStyle(document.querySelector(".dr-label")).fontFamily;return out;});
+ok("switch: Without drug sets the selector to none", sw.hasToggle && sw.afterWithout==="0", JSON.stringify(sw.afterWithout));
+ok("switch: With drug restores a drug", sw.afterWith!=="0", sw.afterWith);
+ok("both readouts shown", sw.rowWithout.length>12 && sw.rowWith.length>12 && sw.rowWithout!==sw.rowWith, sw.rowWithout+" | "+sw.rowWith);
+ok("heart output has a drawn heart icon and the arrow in brackets", sw.icon && /\([\u2191\u2193]\)|not (in|de)creased/.test(sw.out), sw.out);
+ok("figure text is not the code font", !/mono|Menlo|Consolas/i.test(sw.font), sw.font.slice(0,40));
+await p.screenshot({path:"/tmp/figure-gestures.png"});
 console.log(res.join("\n")); console.log("errors:",errs.join("|")||"none");
 if(res.some(r=>r.startsWith("FAIL"))||errs.length)process.exitCode=1;
 await b.close();srv.close();

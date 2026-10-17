@@ -1,0 +1,252 @@
+{
+ "id": "cardiac-inotropes",
+ "title": "How digoxin and other inotropes strengthen the heartbeat",
+ "ariaLabel": "Schematic of cardiac contractility: the sodium-potassium pump keeps intracellular sodium low, which lets the heart cell push calcium out, beta-1 receptor signalling raises cAMP, and phosphodiesterase 3 breaks cAMP down. Digoxin blocks the sodium-potassium pump so calcium stays in and contraction is stronger, beta-1 agonists such as dobutamine raise cAMP, and milrinone blocks phosphodiesterase 3.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Sympathetic drive",
+  "a": [
+   0.4,
+   0.6,
+   0.8
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no inotrope"
+  },
+  {
+   "label": "digoxin type (Na/K ATPase blocker)",
+   "status": "digoxin type",
+   "blocks": {
+    "e_pump": 0.85
+   }
+  },
+  {
+   "label": "beta-1 agonist type (dobutamine)",
+   "status": "beta-1 agonist",
+   "blocks": {
+    "e_b1": -0.9
+   }
+  },
+  {
+   "label": "PDE3 inhibitor type (milrinone)",
+   "status": "PDE3 inhibitor",
+   "blocks": {
+    "e_pde3": 0.85
+   }
+  }
+ ],
+ "readout": "Contractility: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "weak",
+    "improved",
+    "strong"
+   ],
+   "cuts": [
+    0.32,
+    0.6
+   ]
+  }
+ ],
+ "status": "Sympathetic drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Contractility: weak"
+  ],
+  [
+   1,
+   1,
+   "Contractility: improved"
+  ],
+  [
+   1,
+   2,
+   "Contractility: improved"
+  ],
+  [
+   1,
+   3,
+   "Contractility: improved"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "fixed": 0.8,
+   "label": "Sodium-potassium pump",
+   "sub": "Na/K ATPase",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "The pump that keeps sodium low inside heart cells."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Calcium pushed out",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Calcium removed from the cell by the exchanger when the pump works normally."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Beta-1 signal",
+   "sub": "adrenaline, dobutamine",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Beta-1 receptor stimulation on heart cells."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "cAMP made",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "cAMP raises calcium entry and contraction."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "fixed": 0.7,
+   "label": "cAMP breakdown",
+   "sub": "phosphodiesterase 3",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Phosphodiesterase 3 breaks cAMP down in heart and vessels."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "cAMP lost",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "cAMP broken down by PDE3."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.4,
+   "terms": [
+    [
+     "n:m0",
+     -0.3
+    ],
+    [
+     "n:m1",
+     0.4
+    ],
+    [
+     "n:m2",
+     -0.25
+    ]
+   ],
+   "label": "Contractility",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the strength of the heart cell's contraction."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_pump",
+   "from": "s0",
+   "to": "m0",
+   "label": "Na/K ATPase",
+   "info": "Digoxin blocks the pump, so sodium rises inside the cell, the sodium-calcium exchanger pushes less calcium out, and more calcium is stored and released with each beat.",
+   "w": 0.7
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More calcium pushed out lowers contraction."
+  },
+  {
+   "id": "e_b1",
+   "from": "s1",
+   "to": "m1",
+   "label": "beta-1 and cAMP",
+   "info": "Beta-1 agonists (dobutamine) raise cAMP, which opens calcium channels and strengthens contraction.",
+   "w": 0.6
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More cAMP raises contraction."
+  },
+  {
+   "id": "e_pde3",
+   "from": "s2",
+   "to": "m2",
+   "label": "PDE3",
+   "info": "Milrinone blocks PDE3, so cAMP lasts longer. It also widens vessels.",
+   "w": 0.7
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "More cAMP lost lowers contraction."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Digoxin blocks the sodium-potassium pump so more calcium is stored, beta-1 agonists raise cAMP, and milrinone blocks phosphodiesterase 3. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Heart failure drugs that improve survival (shown in the beta-blocker, RAAS and diuretic figures), digoxin effects on rhythm and the vagus, toxicity and levels, potassium interactions, vasopressors, levosimendan, dose and monitoring are left out. Contractility is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "How digoxin and other inotropes strengthen the heartbeat",
+  "blurb": "Interactive figure: digoxin, dobutamine and milrinone",
+  "drugs": {
+   "digoxin": "d=1",
+   "digitoxin": "d=1",
+   "dobutamine": "d=2",
+   "dopamine": "d=2",
+   "isoprenaline": "d=2",
+   "isoproterenol": "d=2",
+   "adrenaline": "d=2",
+   "epinephrine": "d=2",
+   "milrinone": "d=3",
+   "amrinone": "d=3",
+   "enoximone": "d=3"
+  },
+  "terms": [
+   "inotropes?",
+   "inotropic (?:drugs?|agents?|support)",
+   "cardiac glycosides?",
+   "digitalis"
+  ]
+ }
+}

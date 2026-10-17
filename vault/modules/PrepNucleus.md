@@ -1736,3 +1736,16 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
   screen width (no sideways scroll), the page scrolls up and down inside the iframe, and the drawing zooms by pinch, double-tap or the +/- buttons and pans with
   one finger only while zoomed. Controls are full width (48 px select, 16 px font), the explanation is a sticky bottom card, sources are a collapsed section.
   Works on every figure page without rebuilding them. Test: `test/run-figure-gestures.mjs` (real touch events) and a 92-page sweep.
+
+- **Wave 3 final batch (4):** insulin-glucose, cardiac-inotropes, mood-stabilisers-antipsychotics, antiprotozoal-amoebicides. **Total 50 figures.** Every high-yield
+  class in the plan is covered; remaining ideas (vasopressin, mannitol, vitamins) are optional. Registry terms that match many lessons (insulin) are the
+  first place to tighten if the chips feel noisy.
+- **Colour layer (2026-10-17):** `fig-viewer.js` `COLOR_CSS` + `legend()` colour every figure at open time (membranes blue, receptors green, G proteins violet, start green, step sky, result amber, damage red, enzyme pills violet, vesicles orange; AP curves blue vs dashed grey), dark and light, with a colour key under the drawing. No page rebuild needed; edit the hues in the `--k-*` variables.
+
+- **Figures complete (2026-10-17): 63 figures.** Final batch (13): fibrinolytics-antifibrinolytics, gout-drugs, inflammatory-arthritis-bowel-drugs, cancer-antibodies-targeted,
+  fluid-balance-hormones, central-sympatholytics-pressors, antileprotic-drugs, dementia-drugs, spasticity-muscle-relaxants, stimulants-sleep-drugs, bladder-storage-drugs,
+  antibiotics-membrane-dna, gi-protectants-bile. Every drug class on the Drugs page with a distinct mechanism now has a figure; remaining untouched are single-drug
+  topics (octreotide, mannitol, riluzole, griseofulvin). All figure text still waits for the owner's Review Desk pass. About 34% of lesson steps now show a figure chip;
+  tighten registry terms first if that feels noisy.
+- **Viewer v4 (2026-10-17):** figure text uses the system font, not the code font (`--anatomy-mono` overridden on `body.iso`); output lines read as e.g. `heart Heart rate and force increased (up)` with the arrow in brackets and say "not increased" when the drug leaves the line dim (`arrows()`); a Without drug / With drug switch plus a two-row readout comparison sit above the drawing (`compare()`), driven through the page's own drug selector (index 0 is always the no-drug state). Test: `test/run-figure-gestures.mjs`.
+- **Viewer v5 (2026-10-17):** organ icons are drawn SVGs (`IC` in `fig-viewer.js`: heart, lungs, kidney, brain, liver, stomach, gut, bone, bladder, uterus, thyroid, vessel, muscle), shown beside output lines, cell titles and result nodes (`organIcons()`) and in the comparison rows (`withIcons()`), chosen by keyword (`IC_RE`; add a row to cover a new organ). Type inside the drawing: Inter Variable for labels, Bricolage Grotesque for titles and outputs, both from `/assets/fonts/` (already in the bundle).

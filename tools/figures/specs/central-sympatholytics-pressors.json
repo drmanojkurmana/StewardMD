@@ -1,0 +1,245 @@
+{
+ "id": "central-sympatholytics-pressors",
+ "title": "Clonidine, methyldopa and noradrenaline: lowering or raising sympathetic tone",
+ "ariaLabel": "Schematic of sympathetic control of vessels: the brainstem sends sympathetic outflow, nerve endings release noradrenaline, and noradrenaline acts on alpha-1 receptors to narrow vessels. Clonidine and methyldopa act on alpha-2 receptors in the brainstem and nerve endings to lower outflow and release, and noradrenaline given as a drug acts on vascular receptors.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Baseline sympathetic tone",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no sympathetic drug"
+  },
+  {
+   "label": "clonidine type (central alpha-2 agonist)",
+   "status": "clonidine type",
+   "blocks": {
+    "e_cns": 0.85,
+    "e_rel": 0.6
+   }
+  },
+  {
+   "label": "methyldopa type",
+   "status": "methyldopa type",
+   "blocks": {
+    "e_cns": 0.8
+   }
+  },
+  {
+   "label": "noradrenaline type (pressor)",
+   "status": "noradrenaline",
+   "blocks": {
+    "e_a1": -1.0
+   }
+  }
+ ],
+ "readout": "Blood pressure: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "lowered",
+    "usual",
+    "raised"
+   ],
+   "cuts": [
+    0.45,
+    0.65
+   ]
+  }
+ ],
+ "status": "Baseline tone: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Blood pressure: usual"
+  ],
+  [
+   1,
+   1,
+   "Blood pressure: lowered"
+  ],
+  [
+   1,
+   2,
+   "Blood pressure: lowered"
+  ],
+  [
+   1,
+   3,
+   "Blood pressure: raised"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Brainstem outflow",
+   "sub": "sympathetic centres",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Sympathetic outflow from the brainstem."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Sympathetic outflow",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Impulses to nerve endings in vessels and heart."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "NA release",
+   "sub": "nerve endings",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Noradrenaline released from sympathetic nerve endings."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Noradrenaline",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Noradrenaline reaching vessel receptors."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Vessel alpha-1",
+   "sub": "vessel muscle",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Alpha-1 receptors on vascular smooth muscle."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Vessels narrowed",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Narrowed vessels raise pressure."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.25
+    ]
+   ],
+   "label": "Blood pressure",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the blood pressure produced by sympathetic tone."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_cns",
+   "from": "s0",
+   "to": "m0",
+   "label": "alpha-2 (brain)",
+   "info": "Clonidine acts on alpha-2 receptors in the brainstem; methyldopa is converted to alpha-methylnoradrenaline, which does the same. Outflow falls."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More outflow raises vessel tone."
+  },
+  {
+   "id": "e_rel",
+   "from": "s1",
+   "to": "m1",
+   "label": "alpha-2 (ending)",
+   "info": "Alpha-2 receptors on nerve endings reduce further release. Clonidine adds to this brake."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More noradrenaline raises vessel tone."
+  },
+  {
+   "id": "e_a1",
+   "from": "s2",
+   "to": "m2",
+   "label": "alpha-1 receptors",
+   "info": "Noradrenaline given as a drug acts on alpha-1 receptors (and beta-1 in the heart) and raises pressure; it is a first-line pressor in shock."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Narrower vessels raise the pressure."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Clonidine and methyldopa act on alpha-2 receptors to lower sympathetic outflow and release, and noradrenaline acts on alpha-1 receptors to narrow vessels. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Adrenaline, phenylephrine, dopamine and vasopressin as pressors, rebound after stopping clonidine, methyldopa in pregnancy, haemolysis and liver effects, sedation, shock management and dosing are left out. Blood pressure is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Clonidine, methyldopa and noradrenaline: lowering or raising sympathetic tone",
+  "blurb": "Interactive figure: clonidine, methyldopa and noradrenaline",
+  "drugs": {
+   "clonidine": "d=1",
+   "dexmedetomidine": "d=1",
+   "guanfacine": "d=1",
+   "moxonidine": "d=1",
+   "methyldopa": "d=2",
+   "noradrenaline": "d=3",
+   "norepinephrine": "d=3"
+  },
+  "terms": [
+   "centrally[- ]acting (?:antihypertensives?|drugs?)",
+   "alpha[- ]?2 (?:adrenergic )?agonists?",
+   "central sympatholytics?",
+   "vasopressors?",
+   "inotropes and vasopressors"
+  ]
+ }
+}

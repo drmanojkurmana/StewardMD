@@ -1,0 +1,297 @@
+{
+ "id": "cancer-antibodies-targeted",
+ "title": "Targeted cancer drugs: antibodies and checkpoint blockers",
+ "ariaLabel": "Schematic of four cancer targets: growth factor receptors such as HER2 drive tumour cell division, VEGF drives new blood vessels, CD20 marks B cells for destruction, and PD-1 lets tumours switch off T cells. Trastuzumab blocks HER2, bevacizumab blocks VEGF, rituximab targets CD20 cells, and pembrolizumab frees T cells by blocking PD-1.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Tumour drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no targeted drug"
+  },
+  {
+   "label": "anti-HER2 antibody type",
+   "status": "anti-HER2 antibody",
+   "blocks": {
+    "e_her": 0.9
+   }
+  },
+  {
+   "label": "anti-VEGF antibody type",
+   "status": "anti-VEGF antibody",
+   "blocks": {
+    "e_vegf": 0.9
+   }
+  },
+  {
+   "label": "anti-CD20 antibody type",
+   "status": "anti-CD20 antibody",
+   "blocks": {
+    "e_cd20": 0.9
+   }
+  },
+  {
+   "label": "anti-PD-1 antibody type",
+   "status": "anti-PD-1 antibody",
+   "blocks": {
+    "e_pd1": 0.9
+   }
+  }
+ ],
+ "readout": "Tumour activity: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "reduced",
+    "partly reduced",
+    "active"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Tumour drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Tumour activity: active"
+  ],
+  [
+   1,
+   1,
+   "Tumour activity: partly reduced"
+  ],
+  [
+   1,
+   2,
+   "Tumour activity: partly reduced"
+  ],
+  [
+   1,
+   3,
+   "Tumour activity: partly reduced"
+  ],
+  [
+   1,
+   4,
+   "Tumour activity: partly reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "HER2 signalling",
+   "sub": "growth signal",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Growth signals through HER2 in tumours that over-express it."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Tumour cell division",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Cell division driven by the HER2 signal."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "VEGF signal",
+   "sub": "new vessels",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "Vascular endothelial growth factor made by tumours to grow new vessels."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "New blood vessels",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Vessels that feed the tumour."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "CD20 B cells",
+   "sub": "in lymphoma",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "B cells that carry the CD20 marker."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Tumour B cells",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Malignant B cells carrying CD20."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "PD-1 brake",
+   "sub": "on T cells",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "PD-1 is a brake on T cells that tumours use by showing PD-L1."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "T cell brake",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "The PD-1 brake that switches T cells off."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.25
+    ],
+    [
+     "n:m1",
+     0.2
+    ],
+    [
+     "n:m2",
+     0.2
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Tumour activity",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for tumour growth and escape from immune attack."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_her",
+   "from": "s0",
+   "to": "m0",
+   "label": "HER2 receptor",
+   "info": "Trastuzumab binds HER2, blocks its signalling and marks the cell for immune attack."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_vegf",
+   "from": "s1",
+   "to": "m1",
+   "label": "VEGF",
+   "info": "Bevacizumab binds VEGF so the tumour gets less new blood supply."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_cd20",
+   "from": "s2",
+   "to": "m2",
+   "label": "CD20 target",
+   "info": "Rituximab binds CD20 and these cells are destroyed by antibody-dependent and complement-dependent killing."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_pd1",
+   "from": "s3",
+   "to": "m3",
+   "label": "PD-1 pathway",
+   "info": "Pembrolizumab and nivolumab block PD-1, so T cells are released from the brake and can attack the tumour. Blocking the brake raises immune-related adverse effects."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Trastuzumab blocks HER2, bevacizumab blocks VEGF, rituximab targets CD20 cells, and pembrolizumab blocks PD-1. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Tyrosine kinase inhibitors such as imatinib, EGFR and ALK drugs, CAR-T cells, biomarkers and who is eligible, combination regimens, immune-related adverse effects, cardiotoxicity of trastuzumab, infusion reactions and cost are left out. Tumour activity is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Targeted cancer drugs: antibodies and checkpoint blockers",
+  "blurb": "Interactive figure: trastuzumab, bevacizumab, rituximab and checkpoint inhibitors",
+  "drugs": {
+   "trastuzumab": "d=1",
+   "pertuzumab": "d=1",
+   "bevacizumab": "d=2",
+   "ramucirumab": "d=2",
+   "rituximab": "d=3",
+   "obinutuzumab": "d=3",
+   "pembrolizumab": "d=4",
+   "nivolumab": "d=4",
+   "atezolizumab": "d=4",
+   "durvalumab": "d=4",
+   "cemiplimab": "d=4"
+  },
+  "terms": [
+   "monoclonal antibodies",
+   "immune checkpoint inhibitors?",
+   "checkpoint (?:inhibitors?|blockade)",
+   "targeted therapy",
+   "targeted (?:cancer )?(?:drugs?|therapy)"
+  ]
+ }
+}

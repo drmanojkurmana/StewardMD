@@ -1,0 +1,270 @@
+{
+ "id": "stimulants-sleep-drugs",
+ "title": "Alertness and sleep drugs: monoamine reuptake, GABA-A and melatonin",
+ "ariaLabel": "Schematic of arousal: dopamine and noradrenaline at synapses keep the brain alert and are removed by transporters, GABA-A inhibition quietens it, and melatonin signals night. Methylphenidate blocks the dopamine and noradrenaline transporters, atomoxetine blocks the noradrenaline transporter, zolpidem enhances GABA-A receptors, and melatonin agonists act on MT1 and MT2 receptors.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Baseline alertness",
+  "a": [
+   0.4,
+   0.6,
+   0.8
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no alertness or sleep drug"
+  },
+  {
+   "label": "stimulant type (methylphenidate)",
+   "status": "stimulant",
+   "blocks": {
+    "e_dat": -0.9
+   }
+  },
+  {
+   "label": "noradrenaline reuptake blocker type (atomoxetine)",
+   "status": "atomoxetine type",
+   "blocks": {
+    "e_dat": -0.4
+   }
+  },
+  {
+   "label": "Z-drug type (zolpidem)",
+   "status": "Z-drug",
+   "blocks": {
+    "e_gaba": -1.5
+   }
+  },
+  {
+   "label": "melatonin agonist type",
+   "status": "melatonin agonist",
+   "blocks": {
+    "e_mel": -1.5
+   }
+  }
+ ],
+ "readout": "Alertness: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "asleep-prone",
+    "usual",
+    "alert"
+   ],
+   "cuts": [
+    0.38,
+    0.55
+   ]
+  }
+ ],
+ "status": "Baseline alertness: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Alertness: usual"
+  ],
+  [
+   1,
+   1,
+   "Alertness: alert"
+  ],
+  [
+   1,
+   2,
+   "Alertness: usual"
+  ],
+  [
+   1,
+   3,
+   "Alertness: asleep-prone"
+  ],
+  [
+   1,
+   4,
+   "Alertness: asleep-prone"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Catecholamines",
+   "sub": "DA, NA",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "Catecholamines released in frontal and subcortical circuits."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Catecholamine signal",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "Signal that supports attention and alertness."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "GABA inhibition",
+   "sub": "GABA-A receptors",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "Inhibitory signalling in sleep circuits."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Neurons quietened",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "Inhibition of arousal circuits."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Melatonin signal",
+   "sub": "night signal",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Melatonin from the pineal gland, released at night."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Night signal",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Timing signal that favours sleep."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.45,
+   "terms": [
+    [
+     "n:m0",
+     0.4
+    ],
+    [
+     "n:m1",
+     -0.3
+    ],
+    [
+     "n:m2",
+     -0.2
+    ]
+   ],
+   "label": "Alertness",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for alertness: catecholamines raise it, GABA and the night signal lower it."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_dat",
+   "from": "s0",
+   "to": "m0",
+   "label": "reuptake",
+   "info": "Methylphenidate blocks the dopamine and noradrenaline transporters, so more transmitter stays in the synapse; atomoxetine blocks the noradrenaline transporter. Both raise alertness and attention.",
+   "w": 0.6
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "More catecholamine signal raises alertness."
+  },
+  {
+   "id": "e_gaba",
+   "from": "s1",
+   "to": "m1",
+   "label": "GABA-A receptors",
+   "info": "Zolpidem and other Z-drugs enhance GABA-A receptors, mainly those with the alpha-1 subunit, and so promote sleep.",
+   "w": 0.5
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "More inhibition lowers alertness."
+  },
+  {
+   "id": "e_mel",
+   "from": "s2",
+   "to": "m2",
+   "label": "MT1, MT2",
+   "info": "Melatonin and agonists such as ramelteon act on MT1 and MT2 receptors in the suprachiasmatic nucleus to shift and time the sleep rhythm.",
+   "w": 0.5
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "A stronger night signal lowers alertness."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Methylphenidate blocks dopamine and noradrenaline transporters, atomoxetine blocks the noradrenaline transporter, zolpidem enhances GABA-A receptors, and melatonin agonists act on MT1 and MT2 receptors. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Orexin antagonists, antihistamine and sedating antidepressant hypnotics, benzodiazepines (own figure), modafinil mechanisms, abuse and dependence, cardiovascular effects, sleep hygiene, complex sleep behaviours and adverse effects are left out. Alertness is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Alertness and sleep drugs: monoamine reuptake, GABA-A and melatonin",
+  "blurb": "Interactive figure: stimulants, atomoxetine, zolpidem and melatonin agonists",
+  "drugs": {
+   "methylphenidate": "d=1",
+   "dexamfetamine": "d=1",
+   "dexamphetamine": "d=1",
+   "amphetamine": "d=1",
+   "lisdexamfetamine": "d=1",
+   "modafinil": "d=1",
+   "armodafinil": "d=1",
+   "atomoxetine": "d=2",
+   "viloxazine": "d=2",
+   "zolpidem": "d=3",
+   "zopiclone": "d=3",
+   "eszopiclone": "d=3",
+   "zaleplon": "d=3",
+   "melatonin": "d=4",
+   "ramelteon": "d=4",
+   "agomelatine": "d=4",
+   "tasimelteon": "d=4"
+  },
+  "terms": [
+   "CNS stimulants?",
+   "stimulants?",
+   "ADHD (?:drugs?|treatment|medications?)",
+   "hypnotics?",
+   "Z[- ]drugs?",
+   "sleep (?:drugs?|aids?)"
+  ]
+ }
+}

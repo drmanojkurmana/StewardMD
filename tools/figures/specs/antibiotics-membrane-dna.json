@@ -1,0 +1,242 @@
+{
+ "id": "antibiotics-membrane-dna",
+ "title": "Colistin, daptomycin and nitrofurantoin: three other ways to kill a bacterium",
+ "ariaLabel": "Schematic of three bacterial weak points: the outer membrane of gram-negative bacteria, the cytoplasmic membrane of gram-positive bacteria, and the bacterial DNA. Colistin disrupts the outer membrane, daptomycin depolarises the cytoplasmic membrane, and nitrofurantoin is activated inside bacteria into reactive forms that damage DNA and ribosomes.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Bacterial growth drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "ticks": [
+   "slow",
+   "usual",
+   "fast"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no antibiotic"
+  },
+  {
+   "label": "polymyxin type (colistin)",
+   "status": "colistin type",
+   "blocks": {
+    "e_out": 0.9
+   }
+  },
+  {
+   "label": "lipopeptide type (daptomycin)",
+   "status": "daptomycin type",
+   "blocks": {
+    "e_mem": 0.9
+   }
+  },
+  {
+   "label": "nitrofurantoin type",
+   "status": "nitrofurantoin type",
+   "blocks": {
+    "e_dna": 0.9
+   }
+  }
+ ],
+ "readout": "Bacterial survival: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "killed",
+    "reduced",
+    "survives"
+   ],
+   "cuts": [
+    0.25,
+    0.55
+   ]
+  }
+ ],
+ "status": "Growth drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Bacterial survival: survives"
+  ],
+  [
+   1,
+   1,
+   "Bacterial survival: reduced"
+  ],
+  [
+   1,
+   2,
+   "Bacterial survival: reduced"
+  ],
+  [
+   1,
+   3,
+   "Bacterial survival: reduced"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "Outer membrane",
+   "sub": "gram-negative",
+   "x": 105,
+   "y": 110,
+   "rx": 92,
+   "info": "The lipopolysaccharide outer membrane of gram-negative bacteria."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Outer membrane intact",
+   "x": 480,
+   "y": 110,
+   "rx": 100,
+   "info": "A sound outer membrane protects the bacterium."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Cell membrane",
+   "sub": "gram-positive",
+   "x": 105,
+   "y": 300,
+   "rx": 92,
+   "info": "The cytoplasmic membrane of gram-positive bacteria."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Potential kept",
+   "x": 480,
+   "y": 300,
+   "rx": 100,
+   "info": "The membrane potential bacteria need to survive."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Bacterial DNA",
+   "sub": "and ribosomes",
+   "x": 105,
+   "y": 490,
+   "rx": 92,
+   "info": "Bacterial DNA and ribosomes."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "DNA kept intact",
+   "x": 480,
+   "y": 490,
+   "rx": 100,
+   "info": "Intact bacterial DNA and ribosomes."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.05,
+   "terms": [
+    [
+     "n:m0",
+     0.3
+    ],
+    [
+     "n:m1",
+     0.3
+    ],
+    [
+     "n:m2",
+     0.3
+    ]
+   ],
+   "label": "Bacterial survival",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for how well the bacteria survive."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_out",
+   "from": "s0",
+   "to": "m0",
+   "label": "outer membrane",
+   "info": "Colistin (polymyxin) binds the negatively charged lipopolysaccharide and disrupts the outer membrane. It is kept for resistant gram-negative infections and can harm the kidney and nerves."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mem",
+   "from": "s1",
+   "to": "m1",
+   "label": "membrane potential",
+   "info": "Daptomycin inserts into the membrane in a calcium-dependent way and depolarises it, so the bacterium cannot make macromolecules. It is not active against the lung because surfactant inactivates it."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_dna",
+   "from": "s2",
+   "to": "m2",
+   "label": "reactive forms",
+   "info": "Nitrofurantoin is reduced by bacterial nitroreductases into reactive intermediates that damage DNA and ribosomes. It reaches useful levels only in urine, so it is used for lower urinary infection."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Colistin disrupts the gram-negative outer membrane, daptomycin depolarises the gram-positive cell membrane, and nitrofurantoin damages DNA after activation inside bacteria. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Fosfomycin (cell wall) and other agents, spectrum of each drug, resistance, kidney and nerve toxicity of colistin, lung inactivation of daptomycin, nitrofurantoin limits in kidney impairment, stewardship, doses and sites of infection are left out. Bacterial survival is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Colistin, daptomycin and nitrofurantoin: three other ways to kill a bacterium",
+  "blurb": "Interactive figure: colistin, daptomycin and nitrofurantoin",
+  "drugs": {
+   "colistin": "d=1",
+   "colistimethate": "d=1",
+   "polymyxin": "d=1",
+   "daptomycin": "d=2",
+   "nitrofurantoin": "d=3",
+   "fosfomycin": "d=3"
+  },
+  "terms": [
+   "polymyxins?",
+   "lipopeptide antibiotics?",
+   "last[- ]?resort antibiotics?",
+   "reserve antibiotics?"
+  ]
+ }
+}

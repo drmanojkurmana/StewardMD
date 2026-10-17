@@ -1,0 +1,313 @@
+{
+ "id": "inflammatory-arthritis-bowel-drugs",
+ "title": "Rheumatoid arthritis and IBD: where the immune-modifying drugs act",
+ "ariaLabel": "Schematic of chronic inflammation: TNF and other cytokines drive inflammation in joints and gut, the gut and joint lining are inflamed locally, and lysosomal and antigen-presenting steps feed the immune loop. Anti-TNF antibodies bind TNF, sulfasalazine and mesalazine act on the inflamed lining, hydroxychloroquine interferes with antigen presentation, and methotrexate lowers immune cell growth.",
+ "caption": "Schematic, not to scale. Flow and levels are qualitative and illustrative; no dose, concentration or lipid value is shown or implied.",
+ "level": {
+  "label": "Disease activity drive",
+  "a": [
+   0.5,
+   0.7,
+   0.9
+  ],
+  "names": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "ticks": [
+   "low",
+   "usual",
+   "high"
+  ],
+  "start": 1
+ },
+ "drugLabel": "Drug class (generic)",
+ "drugs": [
+  {
+   "label": "none",
+   "status": "no immune-modifying drug"
+  },
+  {
+   "label": "anti-TNF type (infliximab, adalimumab, etanercept)",
+   "status": "anti-TNF",
+   "blocks": {
+    "e_tnf": 0.9
+   }
+  },
+  {
+   "label": "aminosalicylate type (sulfasalazine, mesalazine)",
+   "status": "aminosalicylate",
+   "blocks": {
+    "e_5asa": 0.85
+   }
+  },
+  {
+   "label": "hydroxychloroquine type",
+   "status": "hydroxychloroquine",
+   "blocks": {
+    "e_hcq": 0.85
+   }
+  },
+  {
+   "label": "methotrexate type",
+   "status": "methotrexate",
+   "blocks": {
+    "e_mtx": 0.85
+   }
+  },
+  {
+   "label": "methotrexate plus anti-TNF",
+   "status": "methotrexate plus anti-TNF",
+   "blocks": {
+    "e_mtx": 0.85,
+    "e_tnf": 0.9
+   }
+  }
+ ],
+ "readout": "Inflammation: {0}",
+ "outputs": [
+  {
+   "node": "out",
+   "words": [
+    "quiet",
+    "reduced",
+    "active"
+   ],
+   "cuts": [
+    0.3,
+    0.6
+   ]
+  }
+ ],
+ "status": "Disease drive: {level} · {drug} ·",
+ "tests": [
+  [
+   1,
+   0,
+   "Inflammation: active"
+  ],
+  [
+   1,
+   1,
+   "Inflammation: reduced"
+  ],
+  [
+   1,
+   2,
+   "Inflammation: reduced"
+  ],
+  [
+   1,
+   3,
+   "Inflammation: reduced"
+  ],
+  [
+   1,
+   4,
+   "Inflammation: reduced"
+  ],
+  [
+   1,
+   5,
+   "Inflammation: quiet"
+  ]
+ ],
+ "blockInfo": "A drug of the chosen class acting at this step (generic teaching symbol, not a named drug's shape). Less passes here, with the effects shown at the cholesterol and the LDL receptors.",
+ "blockKey": "drug blocking this step (generic)",
+ "nodes": [
+  {
+   "id": "s0",
+   "kind": "source",
+   "label": "TNF and cytokines",
+   "sub": "from immune cells",
+   "x": 105,
+   "y": 90,
+   "rx": 92,
+   "info": "Tumour necrosis factor alpha and other cytokines released by activated immune cells."
+  },
+  {
+   "id": "m0",
+   "kind": "mid",
+   "label": "Cytokine inflammation",
+   "x": 480,
+   "y": 90,
+   "rx": 100,
+   "info": "Inflammation driven by TNF."
+  },
+  {
+   "id": "s1",
+   "kind": "source",
+   "label": "Inflamed lining",
+   "sub": "joint or gut",
+   "x": 105,
+   "y": 230,
+   "rx": 92,
+   "info": "The inflamed synovium or gut lining."
+  },
+  {
+   "id": "m1",
+   "kind": "mid",
+   "label": "Lining inflammation",
+   "x": 480,
+   "y": 230,
+   "rx": 100,
+   "info": "Local inflammation in the gut lining or joint."
+  },
+  {
+   "id": "s2",
+   "kind": "source",
+   "label": "Antigen handling",
+   "sub": "lysosomes",
+   "x": 105,
+   "y": 370,
+   "rx": 92,
+   "info": "Immune cells present antigens and respond through lysosomal and toll-like receptor steps."
+  },
+  {
+   "id": "m2",
+   "kind": "mid",
+   "label": "Immune activation",
+   "x": 480,
+   "y": 370,
+   "rx": 100,
+   "info": "Activation of the immune loop that sustains the disease."
+  },
+  {
+   "id": "s3",
+   "kind": "source",
+   "label": "Dividing cells",
+   "sub": "lymphocytes",
+   "x": 105,
+   "y": 510,
+   "rx": 92,
+   "info": "Lymphocytes dividing in the disease."
+  },
+  {
+   "id": "m3",
+   "kind": "mid",
+   "label": "Immune cell numbers",
+   "x": 480,
+   "y": 510,
+   "rx": 100,
+   "info": "More dividing cells sustain inflammation."
+  },
+  {
+   "id": "out",
+   "kind": "calc",
+   "base": 0.0,
+   "terms": [
+    [
+     "n:m0",
+     0.35
+    ],
+    [
+     "n:m1",
+     0.2
+    ],
+    [
+     "n:m2",
+     0.15
+    ],
+    [
+     "n:m3",
+     0.2
+    ]
+   ],
+   "label": "Inflammation",
+   "x": 800,
+   "y": 300,
+   "rx": 105,
+   "info": "A teaching score for the activity of the inflammatory disease."
+  }
+ ],
+ "edges": [
+  {
+   "id": "e_tnf",
+   "from": "s0",
+   "to": "m0",
+   "label": "TNF signalling",
+   "info": "Infliximab and adalimumab are antibodies that bind TNF; etanercept is a receptor fusion protein that mops it up. Less TNF signalling means less inflammation."
+  },
+  {
+   "id": "c0",
+   "from": "m0",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_5asa",
+   "from": "s1",
+   "to": "m1",
+   "label": "local action",
+   "info": "Sulfasalazine and mesalazine (5-ASA) act locally on the inflamed gut lining; sulfasalazine is also used in arthritis. Their exact mechanisms are not settled."
+  },
+  {
+   "id": "c1",
+   "from": "m1",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_hcq",
+   "from": "s2",
+   "to": "m2",
+   "label": "immune activation",
+   "info": "Hydroxychloroquine raises the pH of lysosomes and interferes with antigen processing and toll-like receptor signalling."
+  },
+  {
+   "id": "c2",
+   "from": "m2",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  },
+  {
+   "id": "e_mtx",
+   "from": "s3",
+   "to": "m3",
+   "label": "cell growth",
+   "info": "Methotrexate blocks dihydrofolate reductase and, in low doses, has anti-inflammatory effects (adenosine) as well as slowing immune cell growth."
+  },
+  {
+   "id": "c3",
+   "from": "m3",
+   "to": "out",
+   "blockable": false,
+   "info": "Adds to the effect shown at the right."
+  }
+ ],
+ "sources": [
+  "<strong>Where each class acts.</strong> Anti-TNF drugs bind TNF, aminosalicylates act on the inflamed lining, hydroxychloroquine interferes with antigen presentation, and methotrexate slows immune cell growth. This is standard teaching in the pharmacology texts the PrepNucleus lessons cite (Katzung; KD Tripathi) and were not checked against a linked source here, so they are flagged for review."
+ ],
+ "simplified": "Leflunomide, JAK inhibitors, tocilizumab, abatacept, rituximab, steroids, ustekinumab and vedolizumab, screening for TB and hepatitis before biologics, infection and cancer risks, monitoring and adverse effects are left out. Inflammation is drawn as a teaching score. Levels and the size of each effect are illustrative. The drug choices are teaching toggles of a class: no named drug, dose or schedule is shown or implied, and the figure does not say who should or should not take any of them.",
+ "registry": {
+  "title": "Rheumatoid arthritis and IBD: where the immune-modifying drugs act",
+  "blurb": "Interactive figure: anti-TNF drugs, aminosalicylates, hydroxychloroquine and methotrexate",
+  "drugs": {
+   "infliximab": "d=1",
+   "adalimumab": "d=1",
+   "etanercept": "d=1",
+   "golimumab": "d=1",
+   "certolizumab": "d=1",
+   "sulfasalazine": "d=2",
+   "mesalazine": "d=2",
+   "mesalamine": "d=2",
+   "balsalazide": "d=2",
+   "olsalazine": "d=2",
+   "hydroxychloroquine": "d=3",
+   "chloroquine": "d=3",
+   "methotrexate": "d=4"
+  },
+  "terms": [
+   "dmards?",
+   "disease[- ]modifying (?:anti[- ]?rheumatic )?drugs?",
+   "anti[- ]?TNF",
+   "TNF (?:inhibitors?|blockers?|antagonists?)",
+   "aminosalicylates?",
+   "biologics?"
+  ]
+ }
+}
