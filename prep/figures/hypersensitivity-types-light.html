@@ -1,0 +1,605 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hypersensitivity types I to IV</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.sc-card-r{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.sc-card.on .sc-card-r{stroke:var(--anatomy-lit);stroke-width:2;fill:color-mix(in srgb,var(--anatomy-lit) 10%,var(--anatomy-card))}
+.sc-dim2{opacity:.75}
+.cl-rbc2{--cc:var(--c-rbc)}
+.p-allergen{--cc:#ff9a3d}.p-hist{--cc:#ff5e8a}.p-gran{--cc:#c978c9}.p-comp{--cc:#7fd3ff}.p-ifn{--cc:#c084fc}.p-perf{--cc:#ff7a45}.p-frag{--cc:var(--c-rbc)}.p-cplx{--cc:#ff9a3d}.p-enz{--cc:#ffd24a}
+.ab-p{fill:none;stroke:var(--c-ab);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ag{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 50%,#000);stroke-width:.5}
+.sc-wall{fill:color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
+.sc-lum2{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}
+.mk-c{fill:var(--anatomy-card);stroke:var(--c-bad);stroke-width:1.4}.mk-x{fill:none;stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cl-tgt{--cc:var(--c-graft)}.cl-act .cl-b{stroke:var(--c-bad)}
+.clk{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}.clk-h{stroke:var(--anatomy-strong);stroke-width:2;stroke-linecap:round}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Hypersensitivity types I to IV</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>mediators high · tissue damage marked · severity severe</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="Four animated panels in one: type I (IgE on mast cells, histamine release), type II (antibody on cell surfaces, complement and phagocytes), type III (immune complexes in vessel walls with complement and neutrophils) and type IV (delayed T cell and macrophage attack). A strip compares onset and examples. Gauges show mediator release, tissue damage, onset speed and severity. Treatment choices include adrenaline, antihistamine, corticosteroid, immunosuppressant and removing the trigger."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="126" width="932" height="316" rx="18"/>
+<g class="hot sc-card" id="card0" tabindex="0" data-info="Type I: IgE on mast cells meets allergen and the cell releases histamine within minutes."><rect class="sc-card-r" x="22" y="46" width="220" height="72" rx="12"/><text class="sc-zone" x="34" y="66">TYPE I  immediate (IgE)</text><text class="sc-lab" x="34" y="86">onset: minutes</text><text class="sc-lab sc-dim2" x="34" y="104">allergy, anaphylaxis, asthma</text></g><g class="hot sc-card" id="card1" tabindex="0" data-info="Type II: antibody binds a cell-surface or tissue antigen and complement or phagocytes damage the target, or the antibody disturbs a receptor."><rect class="sc-card-r" x="254" y="46" width="220" height="72" rx="12"/><text class="sc-zone" x="266" y="66">TYPE II  antibody to cell</text><text class="sc-lab" x="266" y="86">onset: minutes to hours</text><text class="sc-lab sc-dim2" x="266" y="104">transfusion, haemolysis, Graves</text></g><g class="hot sc-card" id="card2" tabindex="0" data-info="Type III: circulating antigen-antibody complexes lodge in vessel walls and complement and neutrophils injure the wall."><rect class="sc-card-r" x="486" y="46" width="220" height="72" rx="12"/><text class="sc-zone" x="498" y="66">TYPE III  immune complex</text><text class="sc-lab" x="498" y="86">onset: hours to days</text><text class="sc-lab sc-dim2" x="498" y="104">serum sickness, SLE, PSGN</text></g><g class="hot sc-card" id="card3" tabindex="0" data-info="Type IV: T cells and macrophages, not antibody. It is slow, peaking after one to three days."><rect class="sc-card-r" x="718" y="46" width="220" height="72" rx="12"/><text class="sc-zone" x="730" y="66">TYPE IV  T cell, delayed</text><text class="sc-lab" x="730" y="86">onset: one to three days</text><text class="sc-lab sc-dim2" x="730" y="104">contact dermatitis, TB test</text></g>
+<g id="stage"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, levels or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Hypersensitivity type shown</span><input id="level" type="range" min="0" max="3" step="1" value="0" aria-valuetext="type I"><span class="dr-ticks"><i>I</i><i>II</i><i>III</i><i>IV</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">none</option><option value="1">adrenaline (rescue for type I)</option><option value="2">antihistamine</option><option value="3">corticosteroid</option><option value="4">immunosuppressant or biologic</option><option value="5">remove or avoid the trigger</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>The four types.</strong> The Gell and Coombs scheme groups immune-mediated tissue reactions. Type I: allergen cross-links IgE on mast cells, which release histamine and other mediators within minutes (allergy, anaphylaxis). Type II: antibody against a cell-surface or tissue antigen causes damage through complement, phagocytes, or by disturbing a receptor (transfusion reaction, autoimmune haemolysis, Goodpasture, Graves, myasthenia gravis). Type III: soluble antigen-antibody complexes deposit in vessel walls and trigger complement and neutrophils (serum sickness, SLE, post-streptococcal glomerulonephritis). Type IV: delayed, T cell and macrophage mediated (contact dermatitis, tuberculin test, graft rejection). This is standard teaching in immunology and pathology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Adrenaline for anaphylaxis, antihistamines for histamine effects, corticosteroids and immunosuppressants for broader immune reactions, and removing the trigger. They are teaching toggles that show which step each class acts on.</li></ul>
+<p><strong>What was simplified.</strong> Real reactions overlap (many diseases mix types), Th2 and other cell types, the late-phase type I response, the full complement pathways, genetics and every drug and dose are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"S":{"level":{"label":"Hypersensitivity type shown","a":[0,1,2,3],"names":["type I","type II","type III","type IV"],"ticks":["I","II","III","IV"],"start":0},"settings":[{"label":"none"},{"label":"adrenaline (rescue for type I)"},{"label":"antihistamine"},{"label":"corticosteroid"},{"label":"immunosuppressant or biologic"},{"label":"remove or avoid the trigger"}],"drugNames":["no treatment","adrenaline","an antihistamine","a corticosteroid","an immunosuppressant or biologic","trigger removed"],"status":"{level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const t = S.level.a[level];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const R0 = [0.9, 0.7, 0.75, 0.65][t], D0 = [0.6, 0.85, 0.8, 0.7][t], speed = [1, 0.6, 0.4, 0.15][t];
+  const eR = [[0, 0, 0, 0], [0.1, 0, 0, 0], [0, 0, 0, 0], [0.3, 0.45, 0.5, 0.55], [0.2, 0.5, 0.55, 0.65], [0.85, 0.75, 0.75, 0.75]][drug][t];
+  const eD = [[0, 0, 0, 0], [0.75, 0.05, 0.05, 0], [0.6, 0, 0, 0], [0.4, 0.5, 0.55, 0.6], [0.3, 0.55, 0.6, 0.7], [0.85, 0.75, 0.75, 0.75]][drug][t];
+  const R = cl(R0 * (1 - eR)), D = cl(D0 * (1 - eD)), Sv = cl(0.4 * R + 0.6 * D);
+  const w = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+  const words = [w(R, 0.25, 0.6, ["low", "moderate", "high"]), w(D, 0.25, 0.55, ["little", "some", "marked"]), w(Sv, 0.25, 0.55, ["mild", "moderate", "severe"])];
+  return { type: t, drug, R, D, S: Sv, speed, words, readout: "mediators " + words[0] + " · tissue damage " + words[1] + " · severity " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Hypersensitivity scene: one stage, the active type (I to IV) is animated, with treatment marks and gauges. */
+const ease = (u) => u * u * (3 - 2 * u), ramp = (t, a, b) => clamp((t - a) / (b - a));
+const LY = { stage: $("stage"), over: $("over"), panel: $("panel") };
+const CYC = [10, 12, 14, 20], W = SC.W;
+function mkPool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const freeP = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+function abY(parent, x, y, rot, sc) { const g = mk("g", {}, parent); mk("path", { class: "ab-p", d: "M0 7L0 0M0 0L-5.5 -6.5M0 0L5.5 -6.5" }, g); place(g, x, y, rot, sc || 1); return g; }
+function hexAt(parent, r, cls) { const pts = []; for (let i = 0; i < 6; i++) { const a = i * 1.0472 + 0.5; pts.push(f1(r * Math.cos(a)) + " " + f1(r * Math.sin(a))); } return mk("path", { class: cls || "ag", d: "M" + pts.join("L") + "Z" }, parent); }
+const dotP = (parent, cls, r) => mk("circle", { class: "sc-p " + cls, r: r || 2.6 }, parent);
+const droplet = (parent) => mk("path", { class: "p-fl", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, parent);
+const types = [], marks = [], labels = [];
+function addLabel(ty, text, x, y, tx, ty2, tip) { const g = pill(LY.over, text, x, y, tx, ty2, tip); labels.push({ g, ty }); return g; }
+function addMark(ty, drugs, x, y, text, tx, tyy, tip, good) {
+  const g = mk("g", {}, LY.over);
+  if (good) { mk("path", { class: "mk-g", d: "M" + f1(x - 6) + " " + f1(y) + "l4 5l8 -10" }, g); } else { mk("circle", { class: "mk-c", cx: f1(x), cy: f1(y), r: 8 }, g); mk("path", { class: "mk-x", d: "M" + f1(x - 4) + " " + f1(y - 4) + "l8 8M" + f1(x + 4) + " " + f1(y - 4) + "l-8 8" }, g); }
+  pill(g, text, x, y, tx, tyy, tip); marks.push({ g, ty, drugs }); return g;
+}
+
+/* ================= TYPE I: IgE, mast cell, histamine ================= */
+(function () {
+  const g = mk("g", {}, LY.stage), MX = 250, MY = 270;
+  const oed = mk("rect", { class: "sc-oed", x: 440, y: 150, width: 490, height: 190, rx: 14, opacity: 0 }, g);
+  const vl = mk("rect", { class: "sc-lum2", x: 440, y: 356, width: 490, height: 48 }, g);
+  const wt = mk("rect", { class: "sc-wall", x: 440, y: 349, width: 490, height: 8, rx: 4 }, g), wb = mk("rect", { class: "sc-wall", x: 440, y: 403, width: 490, height: 8, rx: 4 }, g);
+  const rbs = Array.from({ length: 8 }, (_, i) => { const e = mk("g", { class: "cl cl-rbc" }, g); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, e); return { e, x: 440 + i * 62, y: 380 + (i % 3 - 1) * 8 }; });
+  const mast = mk("g", {}, g); cell(mast, { cls: "mast", r: 40, nuc: 0.32, seed: 4, wob: 0.07 }); place(mast, MX, MY, 0, 1);
+  const grans = Array.from({ length: 14 }, (_, i) => { const a = i * 2.4, r = 10 + (i % 4) * 6; return mk("circle", { class: "sc-p p-gran", cx: f1(MX + Math.cos(a) * r), cy: f1(MY + Math.sin(a) * r), r: 3.2 }, g); });
+  for (let i = 0; i < 9; i++) { const a = i * 0.698 - 1.2; abY(g, MX + Math.cos(a) * 46, MY + Math.sin(a) * 46, a * 57.3 + 90, 1); }
+  const aller = [0.6, 2.1, 3.6].map((a) => ({ e: hexAt(g, 7, "ag"), a }));
+  const hist = mkPool(70, () => dotP(g, "p-hist", 2.3)), leak = mkPool(24, () => droplet(g));
+  let acc = 0, accL = 0, hh = 24;
+  types.push({ g, upd(dt, ph, m) {
+    const deg = ramp(ph, 3.2, 4.4) * (1 - ramp(ph, 8.2, 9.6)) * m.R, bound = ramp(ph, 1.6, 3.2), trig = m.drug === 5 ? 0.15 : 1;
+    aller.forEach((al) => { const a = al.a - 1.2 + 0.2, tx = MX + Math.cos(a) * 54, tyy = MY + Math.sin(a) * 54, u = ease(clamp(bound * trig * 1.2)), sx = 40, sy = 190 + al.a * 20;
+      al.e.setAttribute("transform", "translate(" + f1(lerp(sx, tx, u)) + " " + f1(lerp(sy, tyy, u)) + ") rotate(" + f1(tm / 9) + ")"); al.e.setAttribute("opacity", (m.drug === 5 ? 0.25 : 1).toFixed(2)); });
+    mast.setAttribute("transform", "translate(" + MX + " " + MY + ") scale(" + (1 + 0.05 * Math.sin(tm / 90) * deg).toFixed(3) + ")");
+    grans.forEach((gr, i) => gr.setAttribute("opacity", (1 - 0.8 * ramp(ph, 3.4 + (i % 7) * 0.15, 6) * m.R).toFixed(2)));
+    acc += dt * deg * 26; while (acc >= 1) { acc--; const p = freeP(hist), a = rnd(-0.9, 0.9); if (p) emit(p, MX + Math.cos(a) * 44, MY + Math.sin(a) * 44, Math.cos(a) * 46 + 20, Math.sin(a) * 30 + 22, 0); }
+    hist.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx += (620 - p.x) * dt * 0.1; p.vy += (355 - p.y) * dt * 0.28; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 346 || p.t > 6) kill(p); });
+    const dil = clamp(ramp(ph, 4.6, 7) * (1 - ramp(ph, 9, 10)) * m.D * 1.1);
+    hh = lerp(hh, 24 + 16 * dil, Math.min(1, dt * 2));
+    vl.setAttribute("y", f1(380 - hh)); vl.setAttribute("height", f1(hh * 2)); wt.setAttribute("y", f1(373 - hh)); wb.setAttribute("y", f1(379 + hh));
+    rbs.forEach((r) => { r.x += dt * 34; if (r.x > 930) r.x = 444; place(r.e, r.x, 380 + (r.y - 380) * (hh / 24), 0, 1); });
+    oed.setAttribute("opacity", (0.5 * dil * m.D).toFixed(2));
+    accL += dt * dil * m.D * 7; while (accL >= 1) { accL--; const p = freeP(leak); if (p) emit(p, rnd(480, 900), 345, rnd(-3, 3), -rnd(14, 22), 0); }
+    leak.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 3.2) kill(p); });
+  } });
+  addLabel(0, "Mast cell", MX - 20, MY - 38, MX - 60, 164, "Mast cell: a tissue cell packed with granules of histamine. IgE antibodies on its surface act as sensors.");
+  addLabel(0, "IgE", MX + 46, MY - 8, MX + 64, 340, "IgE antibody bound to the mast cell. Each one carries a site that recognises one allergen.");
+  addLabel(0, "Allergen", 100, 214, 80, 164, "The allergen bridges two IgE molecules. That cross-linking is the trigger.");
+  addLabel(0, "Histamine", 420, 305, 410, 200, "Histamine and other mediators spread into the tissue within minutes.");
+  addLabel(0, "Leaky, widened vessel", 700, 349, 760, 316, "Histamine widens the vessel and makes it leaky. This causes swelling, redness, itching and, if widespread, a fall in blood pressure (anaphylaxis).");
+  addMark(0, [1], 690, 405, "Adrenaline narrows vessels", 780, 430, "Adrenaline tightens vessels, relaxes airways and calms mast cells: rescue treatment in anaphylaxis.", true);
+  addMark(0, [2], 560, 349, "H1 receptor blocked", 640, 172, "An antihistamine blocks the H1 receptor, so histamine reaches the vessel but cannot act. It does not stop the release itself.");
+  addMark(0, [3, 4], 340, 235, "Fewer mediators made", 380, 150, "Steroids and immunosuppressants reduce the cells, cytokines and later-phase response. Little effect on the first minutes.");
+  addMark(0, [5], 90, 200, "Allergen avoided", 130, 140, "Removing the trigger stops the cross-linking: no allergen, no reaction.");
+})();
+
+/* ================= TYPE II: antibody on a cell or receptor ================= */
+(function () {
+  const g = mk("g", {}, LY.stage), AX = 210, AY = 270;
+  const cellA = mk("g", {}, g); cell(cellA, { cls: "rbc2", r: 42, seed: 9, wob: 0.05 });
+  const sq = Array.from({ length: 10 }, (_, i) => { const a = i * 0.628; return mk("rect", { class: "ag", x: -2.6, y: -2.6, width: 5.2, height: 5.2, transform: "translate(" + f1(AX + Math.cos(a) * 44) + " " + f1(AY + Math.sin(a) * 44) + ") rotate(" + f1(a * 57.3) + ")" }, g); });
+  const abs = Array.from({ length: 8 }, (_, i) => { const a = i * 0.785 + 0.3; return { g: abY(g, AX + Math.cos(a) * 80, AY + Math.sin(a) * 80, a * 57.3 + 90, 1), a }; });
+  const comp = Array.from({ length: 10 }, (_, i) => ({ e: dotP(g, "p-comp", 3.4), a: i * 0.628 + 0.2 }));
+  const pores = Array.from({ length: 4 }, (_, i) => { const a = i * 1.57 + 0.6; return mk("circle", { class: "mk-c", cx: f1(AX + Math.cos(a) * 42), cy: f1(AY + Math.sin(a) * 42), r: 3.4 }, g); });
+  const frag = mkPool(10, () => mk("ellipse", { class: "sc-p p-frag", rx: 4, ry: 2.6 }, g));
+  const cellB = mk("g", {}, g); cell(cellB, { cls: "rbc2", r: 32, seed: 3, wob: 0.05 });
+  const opso = Array.from({ length: 7 }, () => dotP(g, "p-comp", 2.6));
+  const mac = mk("g", {}, g); cell(mac, { cls: "mac", r: 30, nuc: 0.4, seed: 5, wob: 0.12 });
+  const CX = 790, CYY = 372, rec = mk("g", {}, g); cell(rec, { cls: "endo", r: 30, nuc: 0.3, seed: 12, wob: 0.06 }); place(rec, CX, CYY, 0, 1);
+  for (let i = 0; i < 5; i++) { const a = -0.9 + i * 0.5; mk("path", { class: "mk-x rcp", d: "M" + f1(CX + Math.cos(a) * 30) + " " + f1(CYY + Math.sin(a) * 30) + "l" + f1(Math.cos(a) * 9) + " " + f1(Math.sin(a) * 9) }, g); }
+  const abR = abY(g, CX + 52, CYY - 20, -60, 1.1), ring = mk("circle", { class: "mk-g", cx: CX, cy: CYY, r: 40, opacity: 0 }, g);
+  let lysed = 0;
+  types.push({ g, upd(dt, ph, m) {
+    const bind = ramp(ph, 1, 3), comps = ramp(ph, 3, 5), lyse = ramp(ph, 5.4, 6.4) * (m.D > 0.25 ? 1 : 0), back = ramp(ph, 10.4, 11.4), trig = m.drug === 5 ? 0.15 : 1;
+    abs.forEach((a) => { const r = lerp(88, 56, ease(clamp(bind * trig))); a.g.setAttribute("transform", "translate(" + f1(AX + Math.cos(a.a) * r) + " " + f1(AY + Math.sin(a.a) * r) + ") rotate(" + f1(a.a * 57.3 + 90) + ")"); a.g.setAttribute("opacity", (0.2 + 0.8 * bind * trig).toFixed(2)); });
+    comp.forEach((c, i) => { const r = 54 + (i % 2) * 4; c.e.setAttribute("transform", "translate(" + f1(AX + Math.cos(c.a) * r) + " " + f1(AY + Math.sin(c.a) * r) + ")"); c.e.setAttribute("opacity", (comps * m.R * trig > 0.2 ? Math.min(1, comps * 1.2) : 0).toFixed(2)); });
+    pores.forEach((p) => p.setAttribute("opacity", (comps > 0.9 && m.D > 0.25 ? 1 : 0).toFixed(2)));
+    const gone = lyse * (1 - back);
+    cellA.setAttribute("transform", "translate(" + AX + " " + AY + ") scale(" + f1(1 - 0.9 * gone) + ")"); cellA.setAttribute("opacity", (1 - gone).toFixed(2));
+    sq.forEach((s) => s.setAttribute("opacity", (1 - gone).toFixed(2)));
+    if (lyse > 0.5 && lysed === 0) { lysed = 1; frag.forEach((p) => emit(p, AX, AY, rnd(-60, 60), rnd(-60, 60), 0)); } if (ph < 1) lysed = 0;
+    frag.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.97; p.vy *= 0.97; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 3).toFixed(2)); if (p.t > 3) kill(p); });
+    const ph2 = ramp(ph, 3, 9) * m.D, mx = lerp(760, 568, ease(ph2)), eat = ramp(ph, 7, 10) * m.D;
+    place(mac, mx, 290 + Math.sin(tm / 600) * 3, 0, 1 + 0.12 * eat); place(cellB, 520, 300, 0, 1 - 0.8 * eat); cellB.setAttribute("opacity", (1 - 0.9 * eat).toFixed(2));
+    opso.forEach((o, i) => { const a = i * 0.9; o.setAttribute("transform", "translate(" + f1(520 + Math.cos(a) * 34 * (1 - 0.8 * eat)) + " " + f1(300 + Math.sin(a) * 34 * (1 - 0.8 * eat)) + ")"); o.setAttribute("opacity", (ramp(ph, 2, 4) * (1 - eat) * trig).toFixed(2)); });
+    const pulse = 0.5 + 0.5 * Math.sin(tm / 300); ring.setAttribute("opacity", (m.R * 0.7 * pulse * trig).toFixed(2)); ring.setAttribute("r", f1(38 + 5 * pulse));
+    abR.setAttribute("opacity", trig > 0.5 ? 1 : 0.2);
+  } });
+  addLabel(1, "Target cell", AX, AY - 44, AX - 20, 160, "A cell carrying a surface antigen (for example a red cell with a foreign blood group, or a drug stuck to its surface).");
+  addLabel(1, "Antibody (IgG)", AX + 80, AY + 40, AX + 110, 380, "IgG binds the antigen on the cell. Binding on its own does no harm; what follows is the damage.");
+  addLabel(1, "Complement", AX - 56, AY + 24, AX - 100, 350, "Complement proteins settle on the bound antibody and can punch holes (membrane attack complex) so the cell bursts.");
+  addLabel(1, "Macrophage eats it", 640, 258, 660, 180, "Coated cells (opsonised by antibody and complement) are eaten by macrophages, mostly in the spleen and liver.");
+  addLabel(1, "Antibody to a receptor", CX, CYY + 30, CX - 10, 428, "Some antibodies do not kill but disturb a receptor: stimulating the TSH receptor (Graves) or blocking the acetylcholine receptor (myasthenia gravis).");
+  addMark(1, [3, 4], 400, 395, "Antibody and attack reduced", 420, 424, "Steroids and immunosuppressants lower antibody production and phagocyte activity. They help slowly.");
+  addMark(1, [5], 110, 200, "Trigger removed", 140, 140, "Stopping the offending drug or avoiding the incompatible blood removes the antigen target.");
+})();
+
+/* ================= TYPE III: immune complexes in a vessel wall ================= */
+(function () {
+  const g = mk("g", {}, LY.stage), YT = 232, YB = 322;
+  mk("rect", { class: "sc-lum2", x: 14, y: YT + 6, width: W - 28, height: YB - YT - 12 }, g);
+  mk("rect", { class: "sc-wall", x: 14, y: YT - 4, width: W - 28, height: 10, rx: 5 }, g); mk("rect", { class: "sc-wall", x: 14, y: YB - 6, width: W - 28, height: 10, rx: 5 }, g);
+  const dmg = mk("rect", { class: "dmg", x: 300, y: YB - 6, width: 500, height: 10, rx: 5, opacity: 0 }, g);
+  const hem = mkPool(22, () => mk("ellipse", { class: "sc-p p-frag", rx: 4.4, ry: 2.8 }, g));
+  const cplx = mkPool(18, () => { const e = mk("g", {}, g); hexAt(e, 4.4, "ag"); abY(e, -7, -6, -50, 0.7); abY(e, 7, -6, 50, 0.7); abY(e, 0, 8, 180, 0.7); return e; });
+  const comps = mkPool(30, () => dotP(g, "p-comp", 2.6));
+  const neuts = [0, 1, 2].map((i) => { const e = mk("g", {}, g); cell(e, { cls: "neut", r: 15, nuc: 0.55, seed: i + 30, wob: 0.14 }); e.setAttribute("opacity", "0"); return { e, st: 0, x: 40, tx: 0, t: 0 }; });
+  const enz = mkPool(30, () => dotP(g, "p-enz", 2));
+  const rbs = Array.from({ length: 10 }, (_, i) => { const e = mk("g", { class: "cl cl-rbc" }, g); mk("ellipse", { class: "cl-b", rx: 9, ry: 5.4 }, e); return { e, x: i * 96, y: YT + 26 + (i * 17 % 36) }; });
+  let accC = 0, acc2 = 0, dep = [], hemAcc = 0, enzAcc = 0;
+  types.push({ g, upd(dt, ph, m) {
+    const trig = m.drug === 5 ? 0.15 : 1;
+    if (ph < 0.15 && dep.length) { dep.forEach((d) => kill(d)); dep = []; }
+    rbs.forEach((r) => { r.x += dt * 52; if (r.x > W) r.x = -10; place(r.e, r.x, r.y, 0, 1); });
+    accC += dt * 1.8 * m.R * trig * (ph < 7 ? 1 : 0.2); while (accC >= 1) { accC--; const p = freeP(cplx); if (p) emit(p, -10, rnd(YT + 18, YB - 28), 70, 0, Math.random() < 0.55 ? 1 : 0); }
+    cplx.forEach((p) => { if (!p.on) return;
+      if (p.st === 0) { p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.x) + ")");
+        if (p.k && p.x > 300 && p.x < 800 && dep.length < 12 && Math.random() < dt * 1.4) { p.st = 1; p.y = YB - 14 - (dep.length % 3) * 8; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); dep.push(p); }
+        if (p.x > W + 12) kill(p); } });
+    const attack = ramp(ph, 4, 6) * m.D;
+    acc2 += dt * attack * 9; while (acc2 >= 1) { acc2--; if (!dep.length) continue; const d = pick(dep), p = freeP(comps); if (p) emit(p, d.x + rnd(-10, 10), d.y - rnd(8, 18), rnd(-6, 6), rnd(-4, 4), 0); }
+    comps.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 2.4) kill(p); });
+    neuts.forEach((n, i) => { const want = attack > 0.15 && dep.length > i;
+      if (n.st === 0) { n.e.setAttribute("opacity", "0"); if (want) { n.st = 1; n.x = 40; n.tx = dep[i].x - 10; n.t = 0; } }
+      else { n.e.setAttribute("opacity", "1"); n.x += (n.tx - n.x) * dt * 0.9 + 18 * dt; n.t += dt; place(n.e, n.x, YB - 26 + Math.sin(tm / 300 + i) * 2, Math.sin(tm / 400 + i) * 10, 1); if (n.t > 9 || !want) n.st = 0; } });
+    hemAcc += attack * 5 * dt; while (hemAcc >= 1) { hemAcc--; const p = freeP(hem); if (p && dep.length) { const d = pick(dep); emit(p, d.x, YB + 8, rnd(-8, 8), rnd(8, 22), 0); } }
+    hem.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 3.5).toFixed(2)); if (p.t > 3.5) kill(p); });
+    enzAcc += attack * 10 * dt; while (enzAcc >= 1) { enzAcc--; const n = neuts.find((q) => q.st === 1), p = freeP(enz); if (p && n) emit(p, n.x, YB - 10, rnd(-10, 10), rnd(10, 24), 0); }
+    enz.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 1.2) kill(p); });
+    dmg.setAttribute("opacity", (attack * 0.85).toFixed(2));
+  } });
+  addLabel(2, "Immune complex", 220, 270, 160, 190, "Soluble antigen bound to antibody. Normally cleared, but when the complexes are too many or too small they settle in vessel walls, kidney glomeruli, joints and skin.");
+  addLabel(2, "Deposit in the wall", 520, 308, 520, 392, "The deposited complexes activate complement in the wall.");
+  addLabel(2, "Complement", 560, 290, 650, 178, "Complement attracts neutrophils and makes the wall inflamed.");
+  addLabel(2, "Neutrophils", 330, 296, 280, 392, "Neutrophils cannot swallow the deposits stuck to the wall, so they release enzymes that injure the wall itself.");
+  addLabel(2, "Wall damage and bleeding", 700, 330, 790, 392, "Injured vessel wall: inflammation (vasculitis), leak, haemorrhage and fibrin. In the kidney this shows as glomerulonephritis.");
+  addMark(2, [3, 4], 420, 190, "Inflammation reduced", 520, 160, "Steroids and immunosuppressants calm the complement and neutrophil attack and lower antibody production.");
+  addMark(2, [5], 80, 200, "Antigen source removed", 140, 160, "Stopping the antigen (the drug, the infection) lets the complexes clear.");
+})();
+
+/* ================= TYPE IV: delayed T cell and macrophage attack ================= */
+(function () {
+  const g = mk("g", {}, LY.stage);
+  const apc = mk("g", {}, g); cell(apc, { cls: "mac", r: 26, nuc: 0.4, seed: 21, wob: 0.15 }); place(apc, 130, 250, 0, 1);
+  const ag = hexAt(g, 6, "ag"); ag.setAttribute("transform", "translate(110 232)");
+  const th = mk("g", {}, g); cell(th, { cls: "th2", r: 22, nuc: 0.45, seed: 22, wob: 0.1 }); place(th, 280, 250, 0, 1);
+  const mac = mk("g", {}, g); cell(mac, { cls: "mac", r: 28, nuc: 0.4, seed: 23, wob: 0.12 });
+  const tg = Array.from({ length: 6 }, (_, i) => { const e = mk("g", {}, g); cell(e, { cls: "tgt", r: 20, nuc: 0.4, seed: 40 + i, wob: 0.08 }); place(e, 650 + (i % 3) * 78, 330 + Math.floor(i / 3) * 52 - 26, 0, 1); return e; });
+  const tc = mk("g", {}, g); cell(tc, { cls: "lymph", r: 22, nuc: 0.5, seed: 24, wob: 0.1 });
+  const ifn = mkPool(36, () => dotP(g, "p-ifn", 2.4)), perf = mkPool(14, () => dotP(g, "p-perf", 2));
+  const clk = mk("g", {}, g); mk("circle", { class: "clk", cx: 880, cy: 190, r: 22 }, clk); const hand = mk("path", { class: "clk-h", d: "M880 190L880 174" }, clk); const ct = mk("text", { class: "dr-pt2", x: 880, y: 228, "text-anchor": "middle" }, clk); ct.textContent = "day 0";
+  let acc = 0, accP = 0;
+  types.push({ g, upd(dt, ph, m) {
+    const trig = m.drug === 5 ? 0.15 : 1, prime = ramp(ph, 1, 4) * trig, act = ramp(ph, 5, 9) * m.R, kill2 = ramp(ph, 10, 17) * m.D;
+    hand.setAttribute("transform", "rotate(" + f1(ph / 20 * 360 * 0.75) + " 880 190)"); const d = Math.floor(ph / 20 * 3.2); if (ct.textContent !== "day " + d) ct.textContent = "day " + d;
+    ag.setAttribute("opacity", (m.drug === 5 ? 0.25 : 1).toFixed(2));
+    place(th, lerp(330, 280, ease(prime)), 250 + Math.sin(tm / 700) * 3, 0, 1 + 0.12 * prime * m.R);
+    acc += dt * act * 16; while (acc >= 1) { acc--; const p = freeP(ifn); if (p) emit(p, 290, 250, rnd(24, 44), rnd(-12, 12), 0); }
+    ifn.forEach((p) => { if (!p.on) return; p.t += dt; const dx = 480 - p.x, dy = 262 - p.y, dd = Math.hypot(dx, dy) || 1; p.x += (dx / dd) * 60 * dt + p.vx * dt * 0.2; p.y += (dy / dd) * 60 * dt + p.vy * dt * 0.2; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (dd < 22 || p.t > 6) kill(p); });
+    place(mac, 480, 262 + Math.sin(tm / 800) * 3, 0, 1 + 0.35 * act);
+    mac.querySelectorAll(".cl-b").forEach((e) => (e.style.fill = "color-mix(in srgb,var(--c-bad) " + Math.round(55 * act) + "%,var(--c-mac))"));
+    const kk = ease(clamp(kill2 * 1.6)), tcx = lerp(640, 800, kk), tcy = lerp(190, 300, kk);
+    place(tc, tcx, tcy + Math.sin(tm / 500) * 2, 0, 1); tc.setAttribute("opacity", (m.drug === 4 || m.drug === 3 ? 0.55 : 1).toFixed(2));
+    accP += dt * kill2 * 10; while (accP >= 1) { accP--; const p = freeP(perf); if (p) emit(p, tcx + 14, tcy + 10, rnd(8, 18), rnd(6, 18), 0); }
+    perf.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.t > 1.6) kill(p); });
+    tg.forEach((t, i) => { const dm = clamp(m.D * (act * 0.5 + kill2 * 0.7) * 1.3 - i * 0.07); t.setAttribute("opacity", (1 - 0.75 * dm).toFixed(2)); t.querySelectorAll(".cl-b").forEach((e) => (e.style.stroke = dm > 0.4 ? "var(--c-bad)" : "")); });
+  } });
+  addLabel(3, "Antigen-presenting cell", 130, 224, 150, 160, "A dendritic cell shows a piece of antigen on MHC molecules to T cells in a lymph node or the skin.");
+  addLabel(3, "Th1 cell", 280, 226, 300, 160, "A Th1 CD4 T cell recognises the antigen and releases interferon-gamma. It takes a day or more to build up, so the reaction is delayed.");
+  addLabel(3, "Activated macrophage", 480, 232, 470, 170, "Interferon-gamma activates macrophages, which release enzymes and cytokines that damage tissue (granuloma, tuberculin test, contact dermatitis).");
+  addLabel(3, "Killer T cell", 700, 190, 700, 150, "CD8 T cells kill target cells directly with perforin and granzymes (graft rejection, some skin reactions).");
+  addLabel(3, "Target cells", 720, 400, 740, 430, "Cells in the tissue that carry the antigen, such as skin cells with a contact allergen or graft cells.");
+  addLabel(3, "Slow clock", 880, 168, 880, 140, "Type IV is delayed: it peaks one to three days after exposure, unlike the minutes of type I.");
+  addMark(3, [3, 4], 380, 330, "T cell activity reduced", 420, 400, "Steroids and immunosuppressants (calcineurin inhibitors, anti-proliferatives, biologics) turn down T cells and macrophages. This is where they work best.");
+  addMark(3, [5], 105, 218, "Trigger avoided", 120, 176, "Avoiding the contact allergen (for example nickel) removes the antigen.");
+  addMark(3, [1, 2], 500, 330, "Little effect", 540, 400, "Adrenaline and antihistamines act on type I mediators, not on T cells, so they do little here.", true);
+})();
+
+/* ---- gauges and status ---- */
+const gg = {};
+function initPanel() {
+  const P = LY.panel, y0 = 478;
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: W - 48, height: 142, rx: 14 }, P);
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "The reaction";
+  [["rel", "Mediator release", "g-cyt", "How much histamine, complement, cytokines or killing molecules are released."], ["dmg", "Tissue damage", "g-bad", "How much tissue is injured: swelling, cell loss, vessel wall damage."], ["spd", "Onset speed", "g-fl", "How fast the reaction starts: minutes for type I, one to three days for type IV."], ["sev", "Severity", "g-clot", "Overall severity of the reaction."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 170 + i * 200, y0 + 2, 52, 18, cls, name, tip); });
+}
+let curType = -1, clk = 0;
+function init() { types.forEach((t) => (t.g.style.opacity = 0)); initPanel(); }
+function setType(m) { curType = m.type; clk = 0; document.querySelectorAll(".sc-card").forEach((c, i) => c.classList.toggle("on", i === m.type)); }
+function step(dt, m) {
+  if (m.type !== curType) setType(m);
+  clk += dt; const ph = clk % CYC[m.type];
+  types.forEach((t, i) => { const want = i === m.type ? 1 : 0, cur = parseFloat(t.g.style.opacity || 0), nx = cur + (want - cur) * Math.min(1, dt * 5); t.g.style.opacity = nx.toFixed(3); t.g.style.display = nx < 0.01 && !want ? "none" : ""; });
+  types[m.type].upd(dt, ph, m);
+  labels.forEach((l) => { l.g.style.display = l.ty === m.type ? "" : "none"; });
+  marks.forEach((k2) => { k2.g.style.display = k2.ty === m.type && k2.drugs.indexOf(m.drug) > -1 ? "" : "none"; });
+  gg.rel.set(m.R, wordOf(m.R, 0.25, 0.6, ["low", "moderate", "high"])); gg.dmg.set(m.D, wordOf(m.D, 0.25, 0.55, ["little", "some", "marked"]));
+  gg.spd.set(m.speed, wordOf(m.speed, 0.3, 0.7, ["slow", "hours", "minutes"])); gg.sev.set(m.S, wordOf(m.S, 0.25, 0.55, ["mild", "moderate", "severe"]));
+}
+run({ init, step });
+</script></body></html>
