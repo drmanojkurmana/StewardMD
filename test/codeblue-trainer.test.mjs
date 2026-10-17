@@ -171,3 +171,126 @@ test("SPEC timings match the shared domain model", () => {
   assert.equal(D.TIMINGS.epiDueSec, 180);
   assert.equal(D.TIMINGS.epiOverdueSec, 300);
 });
+
+test("deepened content meets the brief: 30 scenarios, 48 cases, 150 questions", () => {
+  const by = (list, m) => list.filter((x) => x.mode === m).length;
+  assert.ok(E.scenarios("adult").length >= 14, "adult scenarios");
+  assert.ok(E.scenarios("paediatric").length >= 9, "paediatric scenarios");
+  assert.ok(E.scenarios("neonatal").length >= 7, "neonatal scenarios");
+  assert.ok(E.scenarios().length >= 30, "scenarios total");
+  assert.ok(E.cases().length >= 48, "cases total " + E.cases().length);
+  for (const m of ["adult", "paediatric", "neonatal"]) {
+    assert.ok(by(E.cases(), m) >= 8, m + " cases");
+  }
+  let n = 0;
+  for (const c of E.cases()) n += c.quiz.length;
+  assert.ok(n >= 150, "quiz total " + n);
+});
+
+test("hard cases hide the rhythm and carry at least 4 questions", () => {
+  const hards = E.cases().filter((c) => c.level === "hard");
+  assert.ok(hards.length >= 8, "hard cases " + hards.length);
+  for (const c of hards) {
+    assert.equal(c.conceal, true, c.id + " conceals rhythm");
+    assert.ok(typeof c.rhythm === "string" && c.rhythm.length > 0, c.id + " rhythm label");
+    assert.ok(c.quiz.length >= 4, c.id + " questions");
+  }
+});
+
+test("PrepNucleus links all resolve to existing lessons or modules", async () => {
+  const { readdirSync, readFileSync } = await import("node:fs");
+  const { dirname, join } = await import("node:path");
+  const { fileURLToPath } = await import("node:url");
+  const here = dirname(fileURLToPath(import.meta.url));
+  const lessons = readdirSync(join(here, "..", "prep", "lessons", "v1"))
+    .filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5));
+  const tax = JSON.parse(readFileSync(join(here, "..", "prep", "taxonomy.json"), "utf8"));
+  const modules = [];
+  for (const b of tax.branches || []) {
+    for (const s of b.subjects || []) {
+      for (const sec of s.sections || []) {
+        for (const m of sec.modules || []) modules.push(m.id);
+      }
+    }
+  }
+  assert.ok(lessons.length > 1000, "lesson index loads");
+  assert.ok(modules.length > 100, "module index loads");
+  assert.deepEqual(E.validateContent(D, { lessons, modules }), []);
+  let linked = 0;
+  for (const c of E.cases()) {
+    for (const q of c.quiz) {
+      if (q.link == null) continue;
+      linked++;
+      assert.ok(q.link.kind === "lesson" || q.link.kind === "module", c.id + " link kind");
+      const dest = D.LINK_DEST[q.link.id];
+      assert.ok(dest && dest.s && dest.m, c.id + " link destination");
+    }
+  }
+  assert.ok(linked >= 150, "linked questions " + linked);
+});
+
+test("guided: wrong pick costs 30 sim seconds when the clock is passed", () => {
+  const g = E.newGuided("adult-vf-1");
+  const st = g.scn.states[0];
+  const wrong = st.o.findIndex((o) => o[1] === 0);
+  const r1 = E.pickGuided(g, wrong, 45);
+  assert.equal(r1.status, "wrong");
+  assert.equal(r1.costSec, 30);
+  assert.equal(g.penaltySec, 30);
+  assert.equal(g.idx, 0);
+  const g2 = E.newGuided("adult-vf-1");
+  const r2 = E.pickGuided(g2, wrong);
+  assert.equal(r2.status, "wrong");
+  assert.equal(r2.costSec, undefined);
+  assert.equal(g2.penaltySec, 0);
+});
+
+test("case rhythm hides until the learner asks", () => {
+  const hard = E.findCase("ac-h1");
+  assert.equal(E.caseRhythm(hard).hidden, true);
+  assert.ok(E.caseRhythm(hard).rhythm.length > 0);
+  assert.equal(E.rhythmText(hard), "Monitor shows VF.");
+  const sess = E.newCaseSession(hard);
+  assert.equal(sess.rhythmRevealed, false);
+  assert.equal(E.revealRhythm(sess, 60), true);
+  assert.equal(sess.rhythmRevealed, true);
+  assert.equal(sess.revealAt, 60);
+  assert.equal(E.revealRhythm(sess, 90), false);
+  const easy = E.findCase("ac-e1");
+  assert.equal(E.caseRhythm(easy).hidden, false);
+  assert.equal(E.newCaseSession(easy).rhythmRevealed, true);
+  const neo = E.findCase("nc-h3");
+  assert.ok(E.rhythmText(neo).startsWith("Heart rate check:"));
+});
+
+test("weekly trend groups attempts by Monday week", () => {
+  const s = E.blankStore();
+  const monday = Date.UTC(2026, 9, 12, 12, 0, 0); // a Monday
+  s.hist.push({ id: "a", pct: 60, at: monday });
+  s.hist.push({ id: "b", pct: 100, at: monday + 2 * 86400000 });
+  s.hist.push({ id: "c", pct: 50, at: monday + 8 * 86400000 });
+  const wt = E.weeklyTrend(s, 8);
+  assert.equal(wt.length, 2);
+  assert.equal(wt[0].n, 2);
+  assert.equal(wt[0].avg, 80);
+  assert.equal(wt[1].n, 1);
+  assert.ok(/^\d{4}-\d{2}-\d{2}$/.test(wt[0].week));
+});
+
+test("weak topics propose the next case; export renders text", () => {
+  const s = E.blankStore();
+  E.recordResult(s, "ac-e1", 40, [
+    { topic: "defibrillation", asked: 3, missed: 3 },
+    { topic: "team roles", asked: 1, missed: 0 },
+  ]);
+  const sug = E.suggestNext(s, E.cases());
+  assert.ok(sug && sug.caseId, "suggestion");
+  assert.equal(sug.topic, "defibrillation");
+  const sugCase = E.findCase(sug.caseId);
+  assert.ok(sugCase.quiz.some((q) => q.topic === "defibrillation"));
+  assert.equal(E.suggestNext(E.blankStore(), E.cases()), null);
+  const text = E.exportText(s, D);
+  assert.ok(text.includes("Code Blue training results"));
+  assert.ok(text.includes("defibrillation"));
+  assert.ok(text.includes("Weekly trend"));
+});
