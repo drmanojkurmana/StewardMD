@@ -2162,3 +2162,4 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | sur-neck-face-trauma-s2.webp (R2) | Anatomical Zones I, II, and III of penetrating neck trauma and landmarks. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-prostate-s1.webp (R2) | Benign prostatic hyperplasia in transition zone vs carcinoma in peripheral zone. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | sur-skin-s1.webp (R2) | Cutaneous melanoma histology showing Breslow thickness from granular layer. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-kidney-posterior-wall-s2.webp (R2) | Abdominal aorta branches showing SMA origin above the left renal vein and renal arteries. | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
