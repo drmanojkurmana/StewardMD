@@ -1,0 +1,544 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Malaria: the parasite life cycle</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.mal-zone{fill:var(--c-tis);opacity:.5}.mal-liver{fill:color-mix(in srgb,#b36b3a 30%,var(--c-tis))}.mal-blood{fill:color-mix(in srgb,var(--c-rbc) 8%,var(--c-tis))}
+.mal-lumen{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper))}.mal-wall{fill:none;stroke:var(--c-endo);stroke-width:3;opacity:.8}
+.cl-hep{--cc:#c88a5a}.cl-mos{--cc:#8a8f9c}
+.p-spz{fill:var(--c-bac);stroke:color-mix(in srgb,var(--c-bac) 50%,#000);stroke-width:.5}
+.p-mer{fill:#ff9a3d}.p-gam{fill:#b46ad9}.p-par{fill:none;stroke:#8a5cd6;stroke-width:2.2}.p-pig{fill:#3a2a1a}.p-dot{fill:#8a5cd6}
+.p-hyp{fill:#3a2a1a;stroke:#b36b3a;stroke-width:1.2}.p-pillm{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pillm2{fill:var(--c-good)}
+.mal-mark{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.mal-markx{stroke:var(--c-bad);stroke-width:1.8;stroke-linecap:round}
+.mal-temp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linejoin:round}.mal-norm{stroke:var(--anatomy-mid);stroke-dasharray:3 4;stroke-width:1}
+.mal-gut{fill:color-mix(in srgb,#8a8f9c 35%,var(--anatomy-paper));stroke:var(--anatomy-mid)}.mal-gland{fill:color-mix(in srgb,var(--c-bac) 25%,var(--anatomy-paper));stroke:var(--anatomy-mid)}
+.mal-body{fill:color-mix(in srgb,#8a8f9c 50%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}.mal-wing{fill:var(--anatomy-card);stroke:var(--anatomy-mid);opacity:.7}
+.mal-route{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 5;opacity:.7}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Malaria: the parasite life cycle</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>parasites moderate · periodic fever · relapse risk high</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated malaria life cycle. A mosquito injects sporozoites, which travel to the liver and infect liver cells. The liver stage releases merozoites into the blood, where they invade red cells and repeat a cycle of ring, trophozoite and schizont that bursts the cell and causes a fever paroxysm. Some parasites become gametocytes taken up by a mosquito. Vivax can also leave dormant hypnozoites in the liver. Gauges show parasites, anaemia, fever, hypnozoite reservoir and severity."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="mal-zone" x="14" y="44" width="296" height="210" rx="16"/>
+<rect class="mal-zone mal-liver" x="322" y="44" width="318" height="210" rx="16"/>
+<rect class="mal-zone" x="652" y="44" width="294" height="210" rx="16"/>
+<rect class="mal-zone mal-blood" x="14" y="266" width="932" height="176" rx="16"/>
+<text class="sc-zone" x="34" y="68">MOSQUITO</text><text class="sc-zone" x="342" y="68">HUMAN LIVER</text><text class="sc-zone" x="672" y="68">FEVER</text><text class="sc-zone sc-dim" x="34" y="288">BLOOD</text>
+<g id="mosq"></g>
+<rect class="mal-lumen" x="14" y="326" width="932" height="92"/>
+<path class="mal-wall" d="M14 326H946M14 418H946"/>
+<g id="routes"></g><g id="liver"></g><g id="rbcs"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Timing, counts and gauge levels are qualitative and illustrative; no doses, schedules or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Species and severity</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="P. vivax (relapsing)"><span class="dr-ticks"><i>vivax</i><i>falciparum</i><i>severe</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">blood schizonticide (for example an artemisinin combination)</option><option value="2">primaquine-type drug only</option><option value="3">chemoprophylaxis (blood-stage cover)</option><option value="4">radical cure (blood schizonticide plus primaquine-type)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>The life cycle.</strong> An infected female Anopheles mosquito injects sporozoites. They reach the liver within minutes and enter liver cells. There they multiply as a liver schizont (no symptoms), which bursts and releases merozoites into the blood. In P. vivax and P. ovale some liver forms stay dormant as hypnozoites and can reactivate weeks or months later, causing relapse. In the blood, merozoites invade red cells and pass through ring, trophozoite and schizont stages. The red cell bursts, releasing merozoites that infect new cells, and the pigment and cytokines released cause the periodic fever paroxysm. Some parasites become male and female gametocytes, which a mosquito takes up so the sexual cycle can continue. This is standard teaching in microbiology, medicine and tropical-medicine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Severe falciparum malaria.</strong> Infected red cells stick to the lining of small vessels (cytoadherence and sequestration), including in the brain, and haemolysis causes anaemia. Treatment ideas shown are by class only: blood schizonticides clear the blood stage, primaquine-type drugs clear hypnozoites and gametocytes, and chemoprophylaxis covers the blood stage. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Species other than vivax and falciparum, drug resistance, G6PD testing before primaquine-type drugs, pregnancy and child dosing, severe-malaria management, vector control and vaccines, and all doses and schedules are left out. Counts, timing and gauge levels are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"CY":372,"HH":46,"W":960,"H":610,"S":{"level":{"label":"Species and severity","a":[0,1,2],"names":["P. vivax (relapsing)","P. falciparum (uncomplicated)","P. falciparum (severe)"],"ticks":["vivax","falciparum","severe"],"start":0},"settings":[{"label":"no treatment"},{"label":"blood schizonticide (for example an artemisinin combination)"},{"label":"primaquine-type drug only"},{"label":"chemoprophylaxis (blood-stage cover)"},{"label":"radical cure (blood schizonticide plus primaquine-type)"}],"drugNames":["no treatment","a blood schizonticide","a primaquine-type drug alone","chemoprophylaxis","radical cure"],"status":"{level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const base = [0.45, 0.5, 0.95][level], vivax = level === 0, severe = level === 2;
+  const blood = drug === 1 || drug === 3 || drug === 4 ? 1 : 0, pq = drug === 2 || drug === 4 ? 1 : 0;
+  const Pa = blood ? base * (drug === 3 ? 0.06 : 0.1) : base;
+  const Hy = vivax ? (pq ? 0.02 : 0.85) : 0;
+  const Gm = cl([0.5, 0.7, 0.75][level] * (blood ? 0.6 : 1) * (pq ? 0.1 : 1));
+  const An = cl(0.08 + 0.85 * Pa * (severe ? 1 : 0.7));
+  const F = cl(0.1 + 0.9 * Pa);
+  const Sv = cl(Pa * [0.1, 0.25, 1][level]);
+  const w = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+  const words = [w(Pa, 0.15, 0.55, ["cleared", "moderate", "heavy"]), w(F, 0.25, 0.7, ["no fever", "periodic fever", "high periodic fever"]), w(Hy, 0.05, 0.4, ["none", "low", "high"])];
+  return { Pa, Hy, Gm, An, F, Sv, blood, pq, prophy: drug === 3 ? 1 : 0, words, readout: "parasites " + words[0] + " · " + words[1] + " · relapse risk " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Malaria scene: mosquito, sporozoites, liver stage (and hypnozoites), the red-cell cycle with synchronised rupture, fever trace and gauges. */
+const CY = SC.CY, HH = SC.HH, WW = SC.W;
+const L = { mosq: $("mosq"), routes: $("routes"), liver: $("liver"), rbcs: $("rbcs"), parts: $("parts"), over: $("over"), panel: $("panel") };
+/* ---- mosquito (abstract): body, wing, proboscis, gut with oocyst, salivary gland ---- */
+const GLAND = [212, 150], GUT = [120, 150], TIP = [292, 168];
+{
+  const g = L.mosq;
+  mk("ellipse", { class: "mal-wing", cx: 112, cy: 100, rx: 56, ry: 18, transform: "rotate(-18 112 100)" }, g);
+  mk("ellipse", { class: "mal-body", cx: 130, cy: 160, rx: 108, ry: 38 }, g);
+  mk("circle", { class: "mal-body", cx: 236, cy: 160, r: 24 }, g);
+  mk("path", { class: "mal-route", d: "M254 164L" + TIP[0] + " " + TIP[1], style: "stroke-dasharray:none;opacity:1;stroke-width:2.4;stroke:var(--anatomy-strong)" }, g);
+  for (let i = 0; i < 4; i++) mk("path", { class: "mal-leg", d: "M" + (70 + i * 34) + " 196L" + (60 + i * 34) + " 232", style: "fill:none;stroke:var(--anatomy-mid);stroke-width:1.6" }, g);
+  mk("ellipse", { class: "mal-gut", cx: GUT[0], cy: GUT[1], rx: 52, ry: 24 }, g);
+  mk("ellipse", { class: "mal-gland", cx: GLAND[0], cy: GLAND[1], rx: 24, ry: 15 }, g);
+}
+const oocyst = mk("circle", { class: "p-spz", cx: GUT[0] + 4, cy: GUT[1], r: 4 }, L.mosq);
+const gland = Array.from({ length: 7 }, (_, i) => mk("ellipse", { class: "p-spz", rx: 5, ry: 1.7 }, L.mosq));
+/* ---- routes: mosquito to liver, liver to blood, blood to mosquito ---- */
+const ROUTE_SPZ = track([[TIP[0], TIP[1]], [298, 250], [330, CY - HH - 6], [400, CY - HH - 10], [400, 196]]);
+const ROUTE_MER = track([[420, 196], [420, CY - HH - 4], [430, CY - 16]]);
+const ROUTE_GAM = track([[180, CY - HH + 4], [160, 230], [GUT[0] + 20, GUT[1] + 20]]);
+mk("path", { class: "mal-route", d: "M" + TIP[0] + " " + TIP[1] + "L298 250L330 " + (CY - HH - 6) + "L400 " + (CY - HH - 10) + "L400 196" }, L.routes);
+mk("path", { class: "mal-route", d: "M180 " + (CY - HH + 4) + "L160 230L" + (GUT[0] + 20) + " " + (GUT[1] + 20) }, L.routes);
+/* ---- liver: four liver cells; one hosts the schizont, one holds a hypnozoite ---- */
+const HEP = [[392, 156], [486, 200], [560, 142], [604, 214]].map(([x, y], i) => { const g = mk("g", {}, L.liver); cell(g, { cls: "hep", r: 33, nuc: 0.3, seed: i * 3 + 1, wob: 0.07 }); place(g, x, y); return { x, y, g }; });
+const schizont = mk("g", {}, L.liver), sdots = Array.from({ length: 14 }, () => mk("circle", { class: "p-mer", r: 2.2 }, schizont));
+sdots.forEach((d, i) => { const a = i * 2.4, r = 3 + (i % 4) * 5; d.setAttribute("cx", f1(Math.cos(a) * r)); d.setAttribute("cy", f1(Math.sin(a) * r)); });
+const hyp = mk("g", {}, L.liver); mk("circle", { class: "p-hyp", r: 5.5 }, hyp); mk("circle", { class: "p-pig", r: 1.6 }, hyp); place(hyp, HEP[2].x + 8, HEP[2].y + 4);
+const sporoIn = mk("ellipse", { class: "p-spz", rx: 6, ry: 2 }, L.liver);
+/* ---- red cells: ring, trophozoite, schizont, gametocyte, rupture ---- */
+const NR = 22, rb = [];
+for (let i = 0; i < NR; i++) { const g = mk("g", { class: "cl cl-rbc" }, L.rbcs); mk("ellipse", { class: "cl-b", rx: 13, ry: 9 }, g); mk("ellipse", { class: "cl-s", rx: 5, ry: 2.6 }, g);
+  const par = mk("g", {}, g), ring = mk("circle", { class: "p-par", r: 3.4, cx: -2 }, par), pig = mk("circle", { class: "p-pig", r: 1.6, cx: 3 }, par), dots = Array.from({ length: 7 }, (_, j) => { const d = mk("circle", { class: "p-dot", r: 1.6, cx: f1(Math.cos(j * 0.9) * 5), cy: f1(Math.sin(j * 0.9) * 3.6) }, par); return d; });
+  const gam = mk("path", { class: "p-gam", d: "M-8 0Q0 -9 8 0Q0 -3 -8 0Z" }, g);
+  rb.push({ g, par, ring, pig, dots, gam, x: (i / NR) * WW, y: rnd(-0.7, 0.7), v: rnd(0.9, 1.1), st: "h", ph: 0, vis: 1, die: 0, stuck: false, rot: rnd(-15, 15) }); }
+const mers = Array.from({ length: 40 }, () => { const e = mk("ellipse", { class: "p-mer", rx: 3, ry: 1.7 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0 }; });
+const spz = Array.from({ length: 10 }, () => { const e = mk("ellipse", { class: "p-spz", rx: 6, ry: 1.9 }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, u: 0, kind: 0 }; });
+const pillsB = Array.from({ length: 12 }, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pillm", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pillm2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); g.setAttribute("opacity", "0"); return { e: g, on: false, x: 0, y: 0, t: 0, k: 0 }; });
+const gams = Array.from({ length: 4 }, () => { const e = mk("path", { class: "p-gam", d: "M-7 0Q0 -8 7 0Q0 -3 -7 0Z" }, L.parts); e.setAttribute("opacity", "0"); return { e, on: false, u: 0 }; });
+/* ---- fever panel ---- */
+const FP = { x: 668, y: 90, w: 262, h: 140 }, NS_ = 150, temps = new Array(NS_).fill(0);
+mk("line", { class: "mal-norm", x1: FP.x, x2: FP.x + FP.w, y1: FP.y + FP.h * 0.72, y2: FP.y + FP.h * 0.72 }, L.over);
+const tline = mk("path", { class: "mal-temp" }, L.over);
+const fev = mk("text", { class: "dr-pt2", x: FP.x + FP.w, y: FP.y - 6, "text-anchor": "end" }, L.over); fev.textContent = "temperature";
+/* ---- marks for drug targets ---- */
+function mark(x, y) { const g = mk("g", { opacity: "0" }, L.over); mk("circle", { class: "mal-mark", r: 8, cx: x, cy: y }, g); mk("path", { class: "mal-markx", d: "M" + (x - 3.5) + " " + (y - 3.5) + "l7 7M" + (x + 3.5) + " " + (y - 3.5) + "l-7 7" }, g); return g; }
+const mkBlood = mark(300, CY + HH - 14), mkHyp = mark(HEP[2].x + 8, HEP[2].y - 20), mkGam = mark(180, CY - HH - 14);
+/* ---- labels and gauges ---- */
+const gg = {};
+function initPanel() {
+  const P = L.panel, y0 = 478, h = 70, xs = [90, 270, 450, 630, 810];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: WW - 48, height: 142, rx: 14 }, P);
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "The patient";
+  [["pa", "Parasites", "g-bac", "Parasites in the blood. Blood schizonticides clear them quickly."], ["an", "Anaemia", "g-bad", "Red cells destroyed when infected cells burst, plus cells removed by the spleen."], ["fv", "Fever", "g-neu", "Each synchronised burst releases parasite material and cytokines, causing the periodic fever paroxysm."], ["hy", "Relapse risk", "g-cyt", "Dormant liver hypnozoites in vivax and ovale can reactivate later. Blood schizonticides do not remove them; a primaquine-type drug does."], ["sv", "Severity", "g-clot", "Severe falciparum: infected cells stick in small vessels (sequestration), including in the brain, causing cerebral malaria, anaemia and organ damage."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const o = L.over;
+  pill(o, "Anopheles mosquito", 130, 146, 128, 100, "The female Anopheles mosquito passes the parasite between people when she takes a blood meal.");
+  pill(o, "Sporozoites", 292, 168, 258, 214, "Slender sporozoites in the saliva are injected into the skin. They travel in the blood to the liver within minutes.");
+  pill(o, "Salivary gland", GLAND[0], GLAND[1], 218, 118, "Sporozoites collect in the salivary glands, ready for the next bite.");
+  pill(o, "Liver cell", HEP[1].x, HEP[1].y + 28, 480, 244, "A liver cell (hepatocyte) hosts the first stage of the parasite. This stage causes no symptoms.");
+  pill(o, "Liver schizont", HEP[0].x, HEP[0].y - 26, 392, 96, "Inside the liver cell one sporozoite multiplies into thousands of merozoites, then the cell bursts and releases them into the blood.");
+  pill(o, "Hypnozoite", HEP[2].x + 8, HEP[2].y + 4, 590, 96, "In P. vivax and P. ovale some liver forms stay dormant as hypnozoites and can wake weeks or months later, causing relapse. Only a primaquine-type drug removes them.");
+  pill(o, "Merozoites", 428, CY - HH - 4, 500, 300, "Merozoites leave the liver and invade red cells.");
+  pill(o, "Infected red cell", 700, CY - 4, 700, CY + HH + 14, "Inside the red cell the parasite goes through ring, trophozoite and schizont stages, about every two days. Then the cell bursts.");
+  pill(o, "Gametocyte", 140, CY - HH + 6, 110, 300, "Some parasites become gametocytes. A mosquito that takes them up starts the sexual cycle. Primaquine-type drugs reduce them.");
+  pill(o, "Fever paroxysm", FP.x + 120, FP.y + 20, FP.x + 130, FP.y - 16, "When infected red cells burst together, a wave of parasite material and cytokines causes a spike of fever, then sweating.");
+  const sq = pill(o, "Sequestration", 860, CY - HH + 6, 868, CY - HH - 22, "In severe falciparum malaria, infected red cells stick to the lining of small vessels and block them, including in the brain."); sq.setAttribute("id", "sq-pill");
+  const b1 = pill(o, "Blood schizonticide", 300, CY + HH - 14, 340, CY + HH + 14, "Blood schizonticides kill the parasites growing inside red cells, which stops the fever."); b1.setAttribute("id", "bl-pill");
+  const b2 = pill(o, "Primaquine-type", HEP[2].x + 8, HEP[2].y - 20, 570, 232, "A primaquine-type drug kills dormant liver hypnozoites and the gametocytes."); b2.setAttribute("id", "pq-pill");
+}
+/* ---- state ---- */
+const sm = { Pa: 0.4, Hy: 0.8, Gm: 0.5, An: 0.2, F: 0.4, Sv: 0.1, blood: 0, pq: 0, prophy: 0, sev: 0, fresh: 0 };
+const cyc = { pulse: 0, relapse: 0, ls: 0, lt: 0, hs: 0, ht: rnd(4, 8), tick: 0, accS: 0, accG: 0, accP: 0, reinf: 0 };
+function emitMer(x, y, n, sprd) { for (let i = 0; i < n; i++) { const p = mers.find((q) => !q.on); if (!p) return; p.on = true; p.x = x; p.y = y; const a = rnd(0, 6.28), s = rnd(10, sprd || 40); p.vx = Math.cos(a) * s; p.vy = Math.sin(a) * s; p.t = 0; p.e.setAttribute("opacity", "1"); } }
+function parasitePose(r) { const ph = r.ph; r.ring.style.display = ph < 0.4 ? "" : "none"; r.pig.style.display = ph >= 0.25 ? "" : "none"; r.ring.setAttribute("r", (3 + ph * 7).toFixed(1));
+  r.dots.forEach((d, j) => d.style.display = ph > 0.62 && j < Math.round((ph - 0.6) * 20) ? "" : "none"); r.pig.setAttribute("r", (1.4 + ph * 2.2).toFixed(1)); r.gam.style.display = "none"; }
+function setState(r, st, ph) { r.st = st; r.ph = ph || 0; r.die = 0; r.par.style.display = st === "i" ? "" : "none"; r.gam.style.display = st === "g" ? "" : "none"; if (st === "i") parasitePose(r); if (st !== "i") r.stuck = false; }
+function seedInfection() { let k = 0; rb.forEach((r) => { if (k < Math.round(sm.Pa * 11) && r.vis > 0.5 && r.st === "h") { setState(r, "i", rnd(0.35, 0.55)); k++; } }); }
+function init() { initPanel(); rb.forEach((r) => setState(r, "h", 0)); seedInfection(); gland.forEach((e, i) => { e.dataset.i = i; }); }
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9);
+  ["Pa", "Hy", "Gm", "An", "F", "Sv"].forEach((k) => sm[k] = lerp(sm[k], m[k], Math.min(1, dt * (k === "Pa" ? 0.5 : 0.4))));
+  sm.blood = lerp(sm.blood, m.blood, k1); sm.pq = lerp(sm.pq, m.pq, k1); sm.prophy = lerp(sm.prophy, m.prophy, k1); sm.sev = lerp(sm.sev, SC_isSevere() ? 1 : 0, k1);
+  const flow = 1;
+  /* red cells */
+  const visN = Math.round(NR * (1 - 0.55 * sm.An)), target = Math.round(sm.Pa * 11) + (cyc.relapse > 0 ? 2 : 0), gamTarget = Math.round(sm.Gm * 4);
+  let inf = rb.filter((r) => r.st === "i").length, gamN = rb.filter((r) => r.st === "g").length;
+  rb.forEach((r, i) => { r.vis = lerp(r.vis, i < visN || r.st === "i" ? 1 : 0, Math.min(1, dt * 1.5)); });
+  rb.forEach((r) => {
+    if (r.st === "i") { r.ph += dt / 6.2 * (r.stuck ? 1 : 1);
+      if (sm.sev > 0.5 && r.ph > 0.5 && r.ph < 0.96 && !r.stuck && Math.random() < dt * 0.9 && rb.filter((q) => q.stuck).length < 5) { r.stuck = true; r.y = -0.9; }
+      if (r.ph >= 1) { /* rupture: merozoites, fever pulse */ emitMer(r.x, CY + r.y * (HH - 14), 6, 46); cyc.pulse = 1; setState(r, "h", 0); r.die = 0.6; inf--; if (inf < target) cyc.reinf += 2; }
+      else parasitePose(r);
+      if (inf > target + 0 && sm.Pa < 0.3 && Math.random() < dt * (0.35 + 1.6 * sm.blood)) { r.st = "d"; r.die = 1; inf--; } }
+    else if (r.st === "d") { r.die -= dt * 0.8; r.par.style.opacity = clamp(r.die); if (r.die <= 0) { setState(r, "h", 0); r.par.style.opacity = 1; } }
+    else if (r.st === "g" && gamN > gamTarget && Math.random() < dt * 0.6) { setState(r, "h", 0); gamN--; }
+    else if (r.st === "h" && gamN < gamTarget && r.vis > 0.9 && Math.random() < dt * 0.25) { setState(r, "g", 0); gamN++; }
+  });
+  /* reinvade: after bursts, merozoites take new cells while the infection is below target */
+  while (cyc.reinf > 0 && inf < target) { cyc.reinf--; const c = rb.filter((r) => r.st === "h" && r.vis > 0.8); if (!c.length) break; setState(pick(c), "i", 0); inf++; }
+  cyc.reinf = 0;
+  cyc.tick += dt; if (cyc.tick > 1.8 && inf < target) { cyc.tick = 0; const c = rb.filter((r) => r.st === "h" && r.vis > 0.8); if (c.length) { setState(pick(c), "i", rnd(0, 0.3)); inf++; } }
+  rb.forEach((r) => { if (!r.stuck) r.x += r.v * 62 * flow * dt; if (r.x > WW + 16) { r.x = -16; if (r.st !== "i") r.y = rnd(-0.7, 0.7); }
+    const yy = r.stuck ? CY - HH + 14 : CY + r.y * (HH - 14); place(r.g, r.x, yy, r.stuck ? 0 : r.rot + Math.sin(tm / 600 + r.x) * 8, 0.35 + 0.65 * r.vis); r.g.style.opacity = r.vis > 0.04 ? 1 : 0; });
+  /* merozoites wander and fade */
+  mers.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt + 22 * dt; p.y += p.vy * dt; p.vx *= 0.97; p.vy *= 0.97; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 160) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 0.7) / 0.7).toFixed(2)); if (p.t > 1.4) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  /* mosquito: oocyst grows and bursts, gland sporozoites wiggle, sporozoites are injected */
+  const og = (tm / 9000) % 1; oocyst.setAttribute("r", (3 + og * 9).toFixed(1)); oocyst.setAttribute("opacity", og > 0.96 ? "0" : "1");
+  gland.forEach((e, i) => { const a = i * 0.9 + tm / 700; e.setAttribute("cx", f1(GLAND[0] + Math.cos(a) * 11)); e.setAttribute("cy", f1(GLAND[1] + Math.sin(a * 1.3) * 6)); e.setAttribute("transform", "rotate(" + f1(a * 60) + " " + f1(GLAND[0] + Math.cos(a) * 11) + " " + f1(GLAND[1] + Math.sin(a * 1.3) * 6) + ")"); });
+  cyc.accS += dt * 0.3; while (cyc.accS >= 1) { cyc.accS--; const p = spz.find((q) => !q.on); if (p) { p.on = true; p.u = 0; p.e.setAttribute("opacity", "1"); } }
+  spz.forEach((p) => { if (!p.on) return; p.u += dt * 0.16; const q = ROUTE_SPZ.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); cyc.ls = 1; cyc.lt = 0; } });
+  /* gametocytes are taken up by the mosquito */
+  cyc.accG += dt * sm.Gm * 0.7; while (cyc.accG >= 1) { cyc.accG--; const p = gams.find((q) => !q.on); if (p) { p.on = true; p.u = 0; p.e.setAttribute("opacity", "1"); } }
+  gams.forEach((p) => { if (!p.on) return; p.u += dt * 0.18; const q = ROUTE_GAM.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ") rotate(" + f1(q.a) + ")"); if (p.u >= 1) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  /* liver stage: sporozoite enters, schizont grows, bursts; hypnozoite wakes now and then */
+  const H0 = HEP[0], H2 = HEP[2];
+  if (cyc.ls === 0 && cyc.lt > 6) { cyc.ls = 1; cyc.lt = 0; }
+  cyc.lt += dt;
+  let sc = 0; if (cyc.ls === 1) { sc = clamp(cyc.lt / 8); if (cyc.lt > 9) { cyc.ls = 2; cyc.lt = 0; emitMer(H0.x, H0.y, 12, 50); /* merozoites leave toward the blood */ for (let k = 0; k < 6; k++) { const p = mers.find((q) => !q.on); if (p) { p.on = true; p.x = H0.x + 20; p.y = H0.y + 10; p.vx = rnd(-6, 12); p.vy = rnd(40, 70); p.t = 0; p.e.setAttribute("opacity", "1"); } } } }
+  else if (cyc.ls === 2 && cyc.lt > 3) { cyc.ls = 0; cyc.lt = 0; }
+  const killLiver = sm.prophy > 0.5 ? 1 : 0; schizont.style.display = cyc.ls === 1 ? "" : "none"; place(schizont, H0.x, H0.y, 0, (0.3 + 0.7 * sc) * (1 - 0.7 * killLiver * sc)); sdots.forEach((d, i) => d.style.display = i < Math.round(sc * 14) ? "" : "none");
+  sporoIn.setAttribute("opacity", cyc.ls === 1 && cyc.lt < 1.2 ? "1" : "0"); sporoIn.setAttribute("transform", "translate(" + f1(H0.x - 36 + cyc.lt * 36) + " " + f1(H0.y - 24 + cyc.lt * 24) + ") rotate(40)");
+  hyp.style.display = sm.Hy > 0.04 ? "" : "none"; place(hyp, H2.x + 8, H2.y + 4, 0, 0.4 + 0.9 * clamp(sm.Hy));
+  cyc.ht -= dt * (sm.Hy > 0.3 ? 1 : 0); if (cyc.ht < 0 && sm.Hy > 0.3) { cyc.ht = rnd(14, 20); cyc.relapse = 5; emitMer(H2.x, H2.y, 8, 50); }
+  if (cyc.relapse > 0) cyc.relapse -= dt;
+  /* drug visuals */
+  pillsB.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (p.k ? 16 : 54) * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 5) / 1.5).toFixed(2)); if (p.t > 6.5 || p.x > WW) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  cyc.accP += dt * (sm.blood * 1.6 + sm.pq * 0.8); while (cyc.accP >= 1) { cyc.accP--; const pq = Math.random() < sm.pq / (sm.pq + sm.blood + 0.001), p = pillsB.find((q) => !q.on); if (p) { p.on = true; p.t = 0; p.k = pq ? 1 : 0; p.x = pq ? rnd(340, 380) : rnd(20, 120); p.y = pq ? rnd(104, 126) : CY + rnd(-30, 30); } }
+  mkBlood.setAttribute("opacity", sm.blood.toFixed(2)); mkHyp.setAttribute("opacity", (sm.pq * (sm.Hy > 0.001 || m.Hy === 0 ? 1 : 1)).toFixed(2)); mkGam.setAttribute("opacity", sm.pq.toFixed(2));
+  $("bl-pill").style.opacity = sm.blood.toFixed(2); $("pq-pill").style.opacity = sm.pq.toFixed(2); $("sq-pill").style.opacity = sm.sev.toFixed(2);
+  /* fever trace */
+  cyc.pulse = Math.max(0, cyc.pulse - dt * 0.5);
+  cyc.fev = (cyc.fev || 0) + (cyc.pulse * sm.F * 1.2 - (cyc.fev || 0)) * Math.min(1, dt * 3);
+  cyc.acc = (cyc.acc || 0) + dt; if (cyc.acc > 0.1) { cyc.acc = 0; temps.push(0.08 + 0.92 * clamp(cyc.fev)); temps.shift(); let d = ""; temps.forEach((v, i) => { d += (i ? "L" : "M") + f1(FP.x + (i / (NS_ - 1)) * FP.w) + " " + f1(FP.y + FP.h - v * FP.h * 0.9 - 6); }); tline.setAttribute("d", d); }
+  gg.pa.set(sm.Pa, wordOf(sm.Pa, 0.15, 0.55, ["cleared", "moderate", "heavy"])); gg.an.set(sm.An, wordOf(sm.An, 0.25, 0.55, ["mild", "moderate", "marked"])); gg.fv.set(sm.F, wordOf(sm.F, 0.25, 0.7, ["none", "periodic", "high"]));
+  gg.hy.set(sm.Hy, wordOf(sm.Hy, 0.05, 0.4, ["none", "low", "high"])); gg.sv.set(sm.Sv, wordOf(sm.Sv, 0.2, 0.55, ["low", "raised", "severe"]));
+}
+function SC_isSevere() { return level === 2; }
+run({ init, step });
+</script></body></html>
