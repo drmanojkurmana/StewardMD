@@ -647,17 +647,10 @@
     if (isKey && it.exp && String(it.exp).trim()) return String(it.exp).trim();
     return "";
   }
-  function whyRowHtml(it, chosen, i) {
-    if (!it || !it.o || !it.o.length) return "";
-    var a = it.a, iAttr = i != null ? String(i) : "";
-    var chips = it.o.map(function (o, k) {
-      var L = optLetter(k);
-      var isKey = k === a;
-      var label = isKey ? ("Why " + L + " is right") : ("Why " + L + "?");
-      return '<button type="button" class="pn-why-chip' + (isKey ? " pn-why-key" : "") + '" data-act="why-opt" data-opt="' + k + '"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + ' aria-pressed="false">' + esc(label) + '</button>';
-    }).join("");
-    return '<div class="pn-why-wrap"' + (iAttr ? ' data-i="' + esc(iAttr) + '"' : "") + '><div class="pn-why-row" role="group" aria-label="Why each option">' + chips + '</div><div class="pn-why-box" style="display:none;" role="region" aria-live="polite"></div></div>';
-  }
+  /* The "Why A is right / Why B?" chip row under an answered question was REMOVED (owner 2026-10-17: "Remove why chips").
+     The reasons still show in the explanation ("Why the others are wrong"). Kept as a function returning "" so every caller and
+     the exported API stay unchanged; the click handlers and styles for the chips are now unreachable. */
+  function whyRowHtml() { return ""; }
   /* Module files of a bank version can be republished in place (explanations added to v5 items), but a module once
      opened is kept in IndexedDB. bankStamps(manifest) -> { subject: stamp } from prep/bank/<ver>/manifest.json (each
      subject's bytes and items, which change when its files do); cacheFresh(hit, stamp) says whether a cached copy can be

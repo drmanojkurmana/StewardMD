@@ -1,4 +1,4 @@
-/* PrepNucleus separate free "Why A/B/C/D" option chips and separate Ask MaiK.
+/* PrepNucleus separate free "Why A/B/C/D" option chips (REMOVED 2026-10-17 at the owner's request: the chip row no longer renders) and separate Ask MaiK.
  * Owner requirements (2026-10-12):
  * - Per-option chips under every answered MCQ (Why A?, Why B?, Why C?, Why D?, and E.. for 5-9 option exams).
  * - Keyed option reads "Why <Key> is right".
@@ -74,48 +74,14 @@ test("storedForOption extracts stored text from r, x.others, x.key, others, opt_
   assert.equal(P.storedForOption(itEmpty, 1), "");
 });
 
-/* ---------- 3. whyRowHtml layout, keyed option label, and 5-9 option exams ---------- */
-test("whyRowHtml: standard 4-option MCQ has chips with 'Why <Key> is right' and 'Why <Letter>?'", () => {
-  const it = {
-    id: "q4", q: "Diagnosis?", o: ["Asthma", "COPD", "Bronchiectasis", "Pneumonia"], a: 0,
-    r: ["Reversible airway obstruction", "Irreversible", "Signet ring sign", "Consolidation"]
-  };
-  const html = P.whyRowHtml(it, 1, 0);
-
-  assert.ok(html.includes('class="pn-why-wrap"'), "wrap exists");
-  assert.ok(html.includes('class="pn-why-box" style="display:none;"'), "box exists and is hidden initially");
-
-  // Chip 0 is key (a = 0)
-  assert.ok(html.includes('data-act="why-opt" data-opt="0"'), "chip 0 has data attributes");
-  assert.ok(html.includes("Why A is right"), "keyed chip says Why A is right");
-  assert.ok(html.includes("pn-why-key"), "keyed chip has pn-why-key class");
-
-  // Other chips are Why B?, Why C?, Why D?
-  assert.ok(html.includes("Why B?"));
-  assert.ok(html.includes("Why C?"));
-  assert.ok(html.includes("Why D?"));
-  assert.ok(!html.includes("Why B is right"));
-});
-
-test("whyRowHtml: 5 to 9 option exams generate real letters up to option I", () => {
-  const it9 = {
-    id: "q9", q: "Select 1 of 9:",
-    o: ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
-    a: 4 // E is key
-  };
-  const html = P.whyRowHtml(it9, 0, 0);
-
-  // Check all letters A through I are present
-  assert.ok(html.includes("Why A?"));
-  assert.ok(html.includes("Why B?"));
-  assert.ok(html.includes("Why C?"));
-  assert.ok(html.includes("Why D?"));
-  assert.ok(html.includes("Why E is right"), "E is keyed option");
-  assert.ok(html.includes("Why F?"));
-  assert.ok(html.includes("Why G?"));
-  assert.ok(html.includes("Why H?"));
-  assert.ok(html.includes("Why I?"));
-  assert.ok(!html.includes("Why J?"));
+/* ---------- 3. The chip row is gone (owner 2026-10-17: "Remove why chips") ---------- */
+test("whyRowHtml: renders nothing for 4-option and 9-option questions, so no Why chips appear", () => {
+  const it = { id: "q4", q: "Diagnosis?", o: ["Asthma", "COPD", "Bronchiectasis", "Pneumonia"], a: 0, r: ["Reversible airway obstruction", "Irreversible", "Signet ring sign", "Consolidation"] };
+  const it9 = { id: "q9", q: "Select 1 of 9:", o: ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"], a: 4 };
+  for (const q of [it, it9]) {
+    const html = P.whyRowHtml(q, 1, 0);
+    assert.equal(html, "", "no chip row markup");
+  }
 });
 
 /* ---------- 4. Chip click shows stored text with ZERO network or model calls ---------- */
@@ -138,7 +104,7 @@ test("zero calls: tapping a why-opt chip reveals stored text without calling any
 
   // Simulate rendering the question and why row
   const rowHtml = P.whyRowHtml(it, 0, 0);
-  assert.ok(rowHtml.includes('data-act="why-opt"'));
+  assert.equal(rowHtml, "", "the chip row is removed");
 
   // Assert 0 network/model calls made during rendering
   assert.equal(networkCalls, 0, "no network calls during render");
@@ -165,9 +131,8 @@ test("missing stored note shows honest line and one-tap Ask MaiK why with prefil
 
   assert.equal(P.storedForOption(it, 2), "", "Option C (2) has no note");
 
-  // In whyRowHtml, chips are rendered
-  const html = P.whyRowHtml(it, 2, 0);
-  assert.ok(html.includes('data-opt="2"'));
+  // the chip row is removed; the stored-note lookup itself still works for the explanation
+  assert.equal(P.whyRowHtml(it, 2, 0), "");
 
   // Test prefill logic when opening Ask MaiK for missing note
   const L = P.optLetter(2);
@@ -266,15 +231,10 @@ test("cache-busting: index.html and prep-loader.js at prep75 or later, sw.js has
  * Regression guard for the Narkē browser failure (EtCO2 trend row width): the Why chips must never
  * restyle anything outside .pn-root, never reuse generic .pn-chip/.pn-btn classes, and never install
  * a document-level handler, so Prep styles/handlers cannot shift other modules' layouts. */
-test("isolation: why chips use only pn-why* classes and why-opt/why-ask actions", () => {
+test("isolation: the removed why chip row leaves no pn-why markup behind", () => {
   const it = { id: "q-iso", q: "Q?", o: ["A1", "B1", "C1", "D1"], a: 0, r: ["ra", "rb", "rc", "rd"] };
   const html = P.whyRowHtml(it, 1, 0);
-  assert.ok(!/class="pn-chip[ "]/.test(html), "chips must not carry the generic pn-chip class");
-  assert.ok(!html.includes("pn-btn"), "chips must not carry the generic pn-btn class");
-  const acts = [...html.matchAll(/data-act="([^"]+)"/g)].map((m) => m[1]);
-  assert.ok(acts.length === 4 && acts.every((a) => a === "why-opt"), "only data-act=why-opt in the row");
-  const classes = [...html.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/));
-  assert.ok(classes.every((c) => c.startsWith("pn-why")), "every class is pn-why* prefixed: " + classes.join(","));
+  assert.ok(!html.includes("pn-why") && !html.includes("data-act"), "no chip markup, no actions");
 });
 
 test("isolation: why CSS is fully scoped under .pn-root with pn-why* selectors only", () => {
