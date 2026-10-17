@@ -794,7 +794,7 @@
       ov.setAttribute("role", "dialog");
       ov.setAttribute("aria-modal", "true");
       ov.setAttribute("aria-label", "AgentConnect Hub");
-      ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column;font-family:var(--sans,-apple-system,BlinkMacSystemFont,system-ui,sans-serif);color:var(--ink,#17252b);overflow:hidden";
+      ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,var(--paper,#f6f7f5));display:flex;flex-direction:column;font-family:var(--sans,-apple-system,BlinkMacSystemFont,system-ui,sans-serif);color:var(--ink,#17252b);overflow:hidden";
 
       var bar = document.createElement("div");
       bar.style.cssText = "display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e2e8f0);box-shadow:0 1px 4px rgba(0,0,0,0.06);flex-shrink:0";
@@ -1073,7 +1073,7 @@
         });
       });
     },
-    electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
+    electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open({ from: "home" }); else toast("Electrolyte engine loading…"); },
     dosing: function () {
       // Bedside-dosing hub: groups the Insulin module + Electrolyte correction behind one tile.
       // Insulin row respects its flag (smd_insulin, DEFAULT ON; hide with ?insulin=0 / localStorage "0").
@@ -1305,7 +1305,7 @@
         var previousFocus=document.activeElement, previousOverflow=document.body.style.overflow;
         var ov = document.createElement("div"); ov.id = "smdConnectOverlay";
         ov.setAttribute("role","dialog"); ov.setAttribute("aria-modal","true"); ov.setAttribute("aria-label","EMR Connect");
-        ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,#0b1016);display:flex;flex-direction:column";
+        ov.style.cssText = "position:fixed;inset:0;z-index:100000;background:var(--bg,var(--paper,#f6f7f5));display:flex;flex-direction:column";
         var bar = document.createElement("div");
         bar.style.cssText = "display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px;background:var(--panel,#111820);border-bottom:1px solid var(--line,#22303c)";
         var t = document.createElement("div"); t.textContent = "Connect EMR"; t.style.cssText = "flex:1;font:800 15px var(--hfont,sans-serif);color:var(--ink,#e8eef4)";
@@ -1498,6 +1498,9 @@
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
       ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      // iPad (2026-10-16): More, All tools, Customize, Settings sheets: a 560 px sheet in the centre (its content is a
+      // 480 px column) instead of a 1,366 px white strip. Offsets, not transform: sheet-drag.js drives the transform.
+      "@media(min-width:700px){.hv-sheet{left:max(0px,calc(50% - 280px));right:max(0px,calc(50% - 280px))}}",
       // BUG (2026-08-23, WhatsApp bug report): .hv-sheet (the "More" sheet + every other sheet
       // openSheet() builds) is appended to document.body, not #homeV2 - so the dark-mode token
       // overrides scoped to "body.dark #homeV2" never reached it, and the sheet stayed light-
@@ -10191,7 +10194,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   /* PrepNucleus renders at full size (owner 2026-10-10: "1.0 in PrepNucleus only"). Auto fit shrinks small phones to
      0.95 (0.9 under 340 px), so a 44 px target drew at ~42. While PrepNucleus is open (html.pn-open, set and cleared by
      prep.js open()/close(); its sheets, the Ask MaiK sheet and the image viewer only open inside it) the shrink comes
-     off: auto fit -> max(1, scale) (an iPad's 1.08/1.15 is kept); a size the user chose (Settings slider or preset, or
+     off: auto fit -> max(1, scale) (an iPad is 1.0 since 2026-10-16, 1.08/1.15 with smd_tablet_zoom=1); a size the user chose (Settings slider or preset, or
      the OS text size) -> scale / 0.95, so only the default shrink is removed. Still ONE zoom, on html, so every
      getBoundingClientRect / clientX conversion that reads documentElement.style.zoom stays right. */
   var PN_SHRINK = .95;
@@ -10201,7 +10204,8 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   function zoomOfD() {
     var s = Math.min(2, Math.max(.8, +ds.fontScale || 1));
-    return document.documentElement.classList.contains("pn-open") ? prepZoomD(s, ds.autoFit) : s;
+    if (!document.documentElement.classList.contains("pn-open")) return s;
+    return ds.autoFit && ds.tabletScale > 1 ? prepZoomD(ds.tabletScale, true) : prepZoomD(s, ds.autoFit);
   }
   function zoomNowD() {
     var z = zoomOfD(), de = document.documentElement;
@@ -10228,8 +10232,22 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // An iPad in Split View or Slide Over (a narrow window on a large touch screen) keeps zoom 1.0 and default density,
     // so 44 px targets stay 44 px; the 0.9 and 0.95 steps are for small phones only.
     if (fs < 1 && bigTouchD()) { fs = 1; d = "default"; }
-    if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); return; }   // nothing to re-zoom (a resize that kept the band)
+    // iPad and iPad Pro (owner 2026-10-16: "many modules go out of screen and are not operable"): no page zoom ABOVE 1.0
+    // on a large touch screen. A root zoom of 1.08 / 1.15 is not taken back out of vh units, so every sheet capped at
+    // 88vh, 92vh or 100vh (75 files) drew 8 to 15% taller than the screen: the Antibiogram organism and drug sheets lost
+    // their top and their Done button, full-screen modules pushed their bottom bar off the glass. At 1.0 every module
+    // lays out as it does on a phone. ?tabletzoom=1 or localStorage smd_tablet_zoom=1 restores 1.08 / 1.15.
+    // PrepNucleus keeps its iPad scale (owner 2026-10-16: "PrepNucleus is perfect on iPad already"): its layout was
+    // drawn and tested at 1.08 / 1.15 and has no vh-capped sheet problem, so zoomOfD() uses this while it is open.
+    var tab = fs > 1 && bigTouchD() && !tabletZoomD() ? fs : 0, tabWas = ds.tabletScale || 0;
+    ds.tabletScale = tab;
+    if (tab) fs = 1;
+    if (fs === ds.fontScale && d === ds.density) { saveD(); refreshD(); if (tab !== tabWas) zoomNowD(); return; }   // nothing to re-zoom (a resize that kept the band)
     ds.fontScale = fs; ds.density = d; applyD(); refreshD();
+  }
+  function tabletZoomD() {
+    try { var q = (location.search.match(/[?&]tabletzoom=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_tablet_zoom") === "1"; } catch (e) { return false; }
   }
   function bigTouchD() {
     try { var sc = window.screen || {}; return (navigator.maxTouchPoints || 0) > 1 && Math.min(sc.width || 0, sc.height || 0) >= 600; } catch (e) { return false; }
@@ -10308,7 +10326,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       s.classList.add("settings-display");
       displayOnClose = options && options.onClose;
       var done = document.createElement("button"); done.className = "settings-done"; done.textContent = displayOnClose ? "Back to Settings" : "Done";
-      done.addEventListener("click", closeSheet); s.querySelector(".hv-sheet-wrap").insertBefore(done, s.querySelector(".hv-sheet-wrap").firstChild);
+      done.addEventListener("click", closeSheet);
+      // Below the grab handle, not above it on the sheet's top edge (iPad audit 2026-10-17: it looked detached).
+      var _wrap = s.querySelector(".hv-sheet-wrap"), _grab = _wrap.querySelector(":scope > .hv-grab");
+      _wrap.insertBefore(done, _grab ? _grab.nextSibling : _wrap.firstChild);
       done.focus({ preventScroll: true });
       var atmosphere = s.querySelector("#hvMaikAtmoSec");
       if (atmosphere) {

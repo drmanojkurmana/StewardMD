@@ -18,13 +18,14 @@
 
   function gir(rateMlH, dexPct, wKg) {
     var r = num(rateMlH), p = num(dexPct), w = num(wKg);
-    if (!(r >= 0) || !(p >= 0) || !(w > 0)) return null;
+    // null >= 0 is true in JS, so an empty box must be rejected explicitly (it read as 0 and showed "null mL/h").
+    if (r == null || p == null || !(r >= 0) || !(p >= 0) || !(w > 0)) return null;
     return r * p * 10 / (60 * w);          // mg/kg/min
   }
   /* The dextrose % that gives a target GIR at a rate. */
   function pctFor(targetGir, rateMlH, wKg) {
     var g = num(targetGir), r = num(rateMlH), w = num(wKg);
-    if (!(g >= 0) || !(r > 0) || !(w > 0)) return null;
+    if (g == null || !(g >= 0) || !(r > 0) || !(w > 0)) return null;
     return g * 60 * w / (r * 10);
   }
   /* Mix `volMl` of `pct` % dextrose from a high and a low stock, leaving `addMl` for additives.
@@ -44,7 +45,7 @@
   /* mmol (or mEq) per bag for a per-kg-per-day requirement, and the stock volume. */
   function additive(reqPerKgDay, wKg, bagMl, dailyMl, stockPerMl) {
     var q = num(reqPerKgDay), w = num(wKg), V = num(bagMl), Dd = num(dailyMl), s = num(stockPerMl);
-    if (!(q >= 0) || !(w > 0) || !(V > 0) || !(Dd > 0)) return null;
+    if (q == null || !(q >= 0) || !(w > 0) || !(V > 0) || !(Dd > 0)) return null;
     var amt = q * w * V / Dd, ml = s > 0 ? amt / s : null;
     return { amount: amt, ml: ml };
   }

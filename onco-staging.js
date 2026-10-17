@@ -292,9 +292,11 @@
 
   function openSite(id) {
     stg.site = id;
-    var entry = indexEntry(id);
     stg.version = null;
-    loadSiteFile(entry).then(function (f) {
+    // Wait for the index: OncoTree opens a site straight away (open(id)), before the index fetch has landed, and
+    // indexEntry() then found nothing and every site showed "Content gap" (Breast included; iPad audit 2026-10-17).
+    loadIndex().then(function () { return loadSiteFile(indexEntry(id)); }).then(function (f) {
+      if (stg.site !== id) return;
       if (f && f.versions && f.versions[0]) stg.version = f.versions[0].version;
       render();
     });

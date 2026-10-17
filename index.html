@@ -57,7 +57,9 @@
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=hit1-spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1-maikmark3-glow20">
 <!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
-<link rel="stylesheet" href="/refined.css?v=rf1">
+<link rel="stylesheet" href="/refined.css?v=rf1-ipad2">
+<!-- Native-app behaviour app-wide (no tap flash, no double-tap zoom, no selectable buttons, no page rubber-band). Owner 2026-10-16. localStorage smd_native_feel=0 turns it off. -->
+<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf4"><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
 <link rel="stylesheet" href="/motion.css?v=gold1-pf2">
 <script src="/smd-num.js?v=num2" defer></script>
 <!-- B2 privacy mode (window.SMD_PRIVACY_MODE; not privacy-config.js's SMD_PRIVACY): one tap in the home header masks patient names, IDs, phones and photos ON
@@ -77,7 +79,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432-sd1">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
 <link rel="stylesheet" href="/queue.css?v=q13-profilescroll-prio1-fr1">
-<link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1-pf2">
+<link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1-pf2-ipad1">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms-fr1">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
@@ -91,19 +93,19 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ophthalmos-learn.css?v=oph14">
 <link rel="stylesheet" href="/ophthalmos-explore.css?v=oph14">
 <link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
-<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1">
+<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1">
 <link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1">
 <link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1">
-<link rel="stylesheet" href="/fundx.css?v=sar1-fr1">
+<link rel="stylesheet" href="/fundx.css?v=sar1-fr1-ipad1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark-fr1">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7-fr1-pf1">
 <link rel="stylesheet" href="/thorex.css?v=tx2">
 <link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1-pf1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
-<link rel="stylesheet" href="/insulin.css?v=ins15-fr1">
-<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1-osce1-pn6">
-<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1">
+<link rel="stylesheet" href="/insulin.css?v=ins15-fr1-ipad1">
+<link rel="stylesheet" href="/clinix.css?v=cx19b927-sandbox1-prolock-fr1-osce1-pn6-ipad1">
+<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1-ipad1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1-pf1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
 <link rel="stylesheet" href="/icd.css?v=icd1">
@@ -269,8 +271,8 @@ body.smd-ddi-open #infFab,
 body.smd-ddi-open .ghis-ward-fab,
 body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
-<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB-fr1-mkclose1-tblscroll1-glass1-convo1002">
-<link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1-fr1">
+<link rel="stylesheet" href="/maik-polish.css?v=mkcomposer1-chip1-side1-side2-audA-audB-fr1-mkclose1-tblscroll1-glass1-convo1002-ipad1">
+<link rel="stylesheet" href="/prescription-mobile.css?v=rxfull1-fr1-ipad1">
 <style>/* Boot splash first paint. Its full styles sit after the markup in <body>, and a device recording
    (2026-10-03) caught ~300ms of the unstyled splash (giant black mark on light) before they parsed. Until
    then it is only a plain surface in the launch color (#FFFFFF / #08302B, same as the native launch). */
@@ -2272,11 +2274,11 @@ window.openExternal = function (u) {
      native-only, no-op unless the plugin + app-check-compat are present. Loads after app.js (which
      calls firebase.initializeApp); it polls until firebase is booted, then activates. -->
 <script src="/app-check-init.js?v=appcheck4" defer></script>
-<script src="/antibiogram-data.js?v=abgd1.232ca2a37294" defer></script>
+<script src="/antibiogram-data.js?v=abgd1.a5e6e86a9e8f" defer></script>
 <!-- Antibiogram rules + store (v2): validation rules shared with the build, and the data layer that
      fetches kb/antibiogram/antibiogram.json. Must load before policy.js (profiles) and antibiogram.js. -->
-<script src="/antibiogram-rules.js?v=abgr2.232ca2a37294" defer></script>
-<script src="/antibiogram-store.js?v=abgs1.232ca2a37294" defer></script>
+<script src="/antibiogram-rules.js?v=abgr2.a5e6e86a9e8f" defer></script>
+<script src="/antibiogram-store.js?v=abgs1.a5e6e86a9e8f" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
 <script src="/account.js?v=gold365-pronotice1-thread-vclaim1-proevt1-boot1-wsqfu3-tier1-gate1-energy1-roles1" defer></script>
@@ -2367,7 +2369,7 @@ window.openExternal = function (u) {
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
 <script src="/fig-viewer.js?v=fig5" defer></script>
-<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1" defer></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -2384,7 +2386,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1-fig1">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp5">
-<link rel="stylesheet" href="/specialty-kits.css?v=kits5">
+<link rel="stylesheet" href="/specialty-kits.css?v=kits5-ipad1">
 <link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
@@ -2423,11 +2425,11 @@ window.openExternal = function (u) {
 <script src="/specialty-kits.js?v=kits8.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Dose calculator (dose-calc.js): flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it. Rules: data/dose-rules.json.gz (scripts/build-dose-rules.mjs). vault/modules/Dose Calculator.md -->
-<script src="/dose-calc.js?v=dc5-gzfb1-pm1" defer></script>
+<script src="/dose-calc.js?v=dc5-gzfb1-pm1-ipad1" defer></script>
 <!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01); off: Settings > Experimental Features, ?neo=0.
      neo-flags.js loads the rest only when the flag is on. Data: data/neo/*.json (quoted sources,
      ai_drafted). vault/modules/Neonatal.md -->
-<script src="/neo-flags.js?v=neo3-pm1-iso1-ui3" defer></script>
+<script src="/neo-flags.js?v=neo3-pm1-iso1-ui3-gir1" defer></script>
 <!-- Adult normal values (adult-ref.js): sourced adult lab reference ranges, data/ref/adult-ref-values.json,
      review pending. Search "Adult normal values"; MaiK value questions use it as evidence. -->
 <script src="/adult-ref.js?v=aref2" defer></script>
@@ -2478,10 +2480,10 @@ window.openExternal = function (u) {
 <script src="/kb/ai/ambig-abbrev.js?v=gold1057-lang" defer></script><script src="/kb/ai/maik-brain.js?v=brain-ambig1-find1-pf1" defer></script>
 <script src="/kb/ai/maik-evidence.js?v=gold1052-brain-audA" defer></script>
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
-<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1" defer></script>
+<script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg1" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2502,11 +2504,11 @@ window.openExternal = function (u) {
 <script src="/power-state.js?v=pwr2-text1" defer></script>
 <script src="/haptics.js?v=gold348-hap3-and1" defer></script>
 <script src="/antibiogram-flags.js?v=abgf3" defer></script>
-<script src="/antibiogram-v2.js?v=abgv20-pro1-qa2-undo1" defer></script>
-<script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1-abg6-pro1" defer></script>
+<script src="/antibiogram-v2.js?v=abgv20-pro1-qa2-undo1-ipad3" defer></script>
+<script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1-abg6-pro1-red1-ipad2" defer></script>
 <script src="/govschemes.js?v=gs4-catsearch" defer></script>
 <script src="/icd.js?v=hardlocal3-us1-conv5" defer></script>
-<link rel="stylesheet" href="/search.css?v=us2">
+<link rel="stylesheet" href="/search.css?v=us2-ipad1">
 <script src="/search.js?v=us2-nodash1-kbproto2-kits1-alltools1-neo1-pf1-adultref1-mkai1-mkw1" defer></script>
 <script src="/asp-region.js?v=gold363-abg7-r4" defer></script>
 <script src="/swipe-back.js?v=gold482-edgeback-gestnav1-wsqp1-energy1-pip1-tokos2-pf14-prep1-nrk1" defer></script>
@@ -2531,12 +2533,12 @@ window.openExternal = function (u) {
 <script src="/undo.js?v=pm2" defer></script>
 <script src="/swipe-actions.js?v=pm2" defer></script>
 <script src="/tab-bar.js?v=pm4" defer></script>
-<script src="/az-scrubber.js?v=pm2" defer></script>
+<script src="/az-scrubber.js?v=pm2-ipad1" defer></script>
 <script src="/keyboard-aware.js?v=pm2" defer></script>
 <script src="/blur-up.js?v=pm2" defer></script>
 <script src="/launch-morph.js?v=pm2" defer></script>
 <script src="/empty-states.js?v=rf1" defer></script>
-<script src="/workspaces.js?v=gold1051-wsroute-surgx1-energy1-esc1-neo1-mkai1-mkw1" defer></script>
+<script src="/workspaces.js?v=gold1051-wsroute-surgx1-energy1-esc1-neo1-mkai1-mkw1-ipad1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
 <script src="/ws-ophthalmology.js?v=gold363" defer></script>
@@ -2876,7 +2878,7 @@ window.openExternal = function (u) {
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/ward.js?v=ward76-tele1-pm1-mkai1-mkw1" defer></script>
+<script src="/ward.js?v=ward76-tele1-pm1-mkai1-mkw1-ipad1" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -2923,7 +2925,7 @@ window.openExternal = function (u) {
      honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
      read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=op7" defer></script>
+<script src="/onco-staging.js?v=op7-race1" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
@@ -3288,7 +3290,7 @@ window.openExternal = function (u) {
 <script src="/ophthalmos-learn.js?v=oph14" defer></script>
 <script src="/ophthalmos-explore.js?v=oph14" defer></script>
 <!-- Tokós: only the loader at boot; the engine and Tokós files load on first open (tokos-loader.js) -->
-<script src="/tokos-loader.js?v=tok10" defer></script>
+<script src="/tokos-loader.js?v=tok11" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
 <script src="/prep-loader.js?v=prep83" defer></script>

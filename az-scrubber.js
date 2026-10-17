@@ -115,6 +115,9 @@
   function sync() {
     timer = 0;
     var ch = findChips(), show = !!(ch && overlayVisible(ch.row));
+    // iPad split view (list left, detail right): the strip would sit on the right edge of the DETAIL pane, over its
+    // text, and the A-Z chips are already on screen in the list. Only show it when the list reaches the right edge.
+    if (show) { try { if (ch.row.getBoundingClientRect().right < window.innerWidth * 0.75) show = false; } catch (e) {} }
     if (!show) { if (strip) { strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)"; } return; }
     if (!strip || !strip.isConnected) build();
     ABC.forEach(function (L, i) { strip.children[i].style.opacity = ch.map[L] ? "1" : ".28"; });

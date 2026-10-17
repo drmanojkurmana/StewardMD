@@ -493,3 +493,6 @@ body.dark .oh-overlay, body.v3-dark .oh-overlay { background: var(--rds-bg, var(
 #smdOncoFlow .oe-btn.primary { background: var(--teal, #0e6e63); color: #fff; border-color: var(--teal, #0e6e63); box-shadow: var(--rds-el-cta, 0 6px 18px rgba(15,118,110,.22)); }
 #smdOncoFlow .oe-btn.on { background: var(--teal, #0e6e63); color: #fff; border-color: var(--teal, #0e6e63); }
 #smdOncoFlow .oe-btn[disabled] { opacity: .45; cursor: not-allowed; box-shadow: none; }
+
+/* iPad pass (2026-10-16): the sticky "Licensed content" banner floated 52 px above the bottom (.oh-body padding). */
+.oh-body > .stg-license:last-child, .oh-body .stg-license { margin-bottom: calc(-52px - env(safe-area-inset-bottom, 0px)); }

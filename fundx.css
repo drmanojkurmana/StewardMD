@@ -424,3 +424,6 @@ body.fundx-gpu #fundxNativeCanvas { display: none !important; }
 #fundxRoot.fundx-ar-off .fundx-chips,
 #fundxRoot.fundx-ar-off .fundx-step,
 #fundxRoot.fundx-ar-off .fundx-corridor-host { display: none !important; }
+
+/* iPad pass (2026-10-16): the one imaging module without a centred column; match KardiQ X / ThoreX / SknX (760 px). */
+#fundxRoot .fundx-scroll > * { max-width: 760px; margin-left: auto; margin-right: auto; }

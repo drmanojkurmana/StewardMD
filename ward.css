@@ -739,3 +739,11 @@ body.dark #smdWard { --bg: #0d1211; --on-surface: #e8edeb; --on-surface-variant:
 .w-camscan video { width: 100%; max-height: 60vh; border-radius: 12px; background: #000; object-fit: cover; }
 .w-camscan p { margin: 0; }
 .w-camscan button { min-height: 44px; padding: 0 20px; border-radius: 22px; border: 1px solid #fff; background: transparent; color: #fff; font: inherit; cursor: pointer; }
+
+/* Consultation (iPad pass 2026-10-16): the diagnosis, prescription and investigation inputs sat directly in .w-sub
+   with no rule, so they rendered as bare 21 px browser fields next to styled 44 px ones, and Dose / Unit ran 650 px
+   each at 1366. Same field look as the problem entry, one per line, at a readable width. */
+#smdWard .w-sub > input, #smdWard .w-sub > select { display: block; width: 100%; max-width: 560px; box-sizing: border-box; margin-top: 8px;
+  border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-low); color: var(--on-surface);
+  font: 400 14px var(--w-sans); padding: 11px 12px; min-height: 44px; height: auto; }
+#smdWard .w-sub > .w-grid { max-width: 560px; }

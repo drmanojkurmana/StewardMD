@@ -1159,7 +1159,7 @@
       ".gd-h .gd-q{margin-left:auto;font-weight:600;letter-spacing:0;text-transform:none;color:var(--slate-soft,#8aa0ab);font-size:10px}",
       ".gd-2{display:grid;grid-template-columns:minmax(0,1fr);gap:9px}@media(min-width:620px){.gd-2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}",
       ".gd-b{margin:0;padding-left:16px}.gd-b li{margin:2px 0;font-size:13px}",
-      ".gd-qf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}@media(min-width:620px){.gd-qf{grid-template-columns:repeat(4,minmax(0,1fr))}}",
+      ".gd-qf{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:7px}",   // fits the pane, not the window: in the iPad split view a window-width rule gave 4 columns of 107 px and broke words mid-word
       ".gd-qf>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:7px 9px;min-width:0}",
       ".gd-qk{font:700 9px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#8aa0ab);overflow-wrap:anywhere}",
       ".gd-qv{font:800 12.5px var(--sans,system-ui);color:var(--ink,#15242b);margin-top:2px;line-height:1.3;overflow-wrap:anywhere}",

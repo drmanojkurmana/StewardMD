@@ -240,3 +240,13 @@ test("scores data: every score computes; Finnegan bands and N-PASS sign follow t
   const cap = D.scores.find((s) => s.id === "capurro");
   assert.equal(SC.compute(cap, Object.fromEntries(cap.items.map((it) => [it.id, "0"]))).unit, cap.formula.unit);
 });
+
+test("GIR: empty drip rate or dextrose box gives no result, not 0 (iPad audit 2026-10-17)", () => {
+  const F = load("neo-fluids.js");
+  assert.equal(F.gir("", "", 1.65), null);
+  assert.equal(F.gir("5", "", 1.65), null);
+  assert.equal(F.gir("", "10", 1.65), null);
+  assert.equal(F.pctFor("", 5, 1.65), null);
+  assert.equal(F.additive("", 1.65, 100, 250, 1), null);
+  assert.ok(Math.abs(F.gir("5", "10", 1.65) - 5.0505) < 0.001);
+});

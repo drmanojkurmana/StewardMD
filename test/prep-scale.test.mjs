@@ -27,7 +27,10 @@ test("a size the user chose: only the default shrink is removed (scale / 0.95), 
   assert.equal(prepZoom("x", false), 1.0526);
 });
 test("one zoom on html, switched by html.pn-open (prep.js open/close), restored on close", () => {
-  assert.match(SRC, /classList\.contains\("pn-open"\) \? prepZoomD\(s, ds\.autoFit\) : s/);
+  // Outside PrepNucleus the plain scale; inside it the PrepNucleus scale, from the iPad scale when the app runs at 1.0
+  // on a tablet (2026-10-16: PrepNucleus keeps 1.08 / 1.15, the rest of the app does not).
+  assert.match(SRC, /if \(!document\.documentElement\.classList\.contains\("pn-open"\)\) return s;/);
+  assert.match(SRC, /ds\.autoFit && ds\.tabletScale > 1 \? prepZoomD\(ds\.tabletScale, true\) : prepZoomD\(s, ds\.autoFit\)/);
   assert.match(SRC, /attributeFilter: \["class"\]/);
   const prep = readFileSync(new URL("../prep.js", import.meta.url), "utf8");
   assert.match(prep, /classList\.add\("pn-open"\)/);

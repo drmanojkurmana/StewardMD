@@ -61,10 +61,12 @@ try {
   ok(await ev(`var b=document.querySelectorAll('.tok-block'); return b.length===2;`) === true, "trace features and real outcome are two separate blocks (Review Focus)");
 
   // Spent-trial gate: must not fetch when the trial is already used.
+  // The app analytics beacon (/api/analytics) flushes on its own timer and can land in this window on a cold run, so
+  // it is not counted: only a Tokós fetch would mean the gate let the clinic load.
   await ev(`localStorage.setItem("smd_tokos_v1", JSON.stringify({v:1,cards:{},conf:{},days:{},trials:{"clinic.ctg":1}})); localStorage.setItem("smd_tokos_prefs", JSON.stringify({level:"resident",lang:"en",tab:"test"})); TOKOS.close(); TOKOS.open(); return 1;`);
   await until(`return !!document.querySelector('[data-act=clinic][data-t=ctg]');`);
   let paywallShown = false;
-  await ev(`window.__fc = 0; var of = window.fetch; window.fetch = function(){ window.__fc++; return of.apply(this, arguments); }; return 1;`);
+  await ev(`window.__fc = 0; var of = window.fetch; window.fetch = function(u){ if (String((u&&u.url)||u).indexOf("/api/analytics") < 0) window.__fc++; return of.apply(this, arguments); }; return 1;`);
   await ev(`window.SMD_PRO_NOTICE = { show: function(){ window.__paywall = true; } }; return 1;`);
   await ev(`document.querySelector('[data-act=clinic]').click(); return 1;`);
   paywallShown = await ev(`return !!window.__paywall;`);

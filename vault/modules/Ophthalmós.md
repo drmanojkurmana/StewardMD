@@ -238,3 +238,10 @@ quizzes; English and Hindi). Full text with examples: `ophthalmos/CONTENT-RULES.
   with the renderer, glossary and test, before the next sync. Cache token `?v=oph14`.
 
 - **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
+
+## Gotcha: app-side fixes go in tablet-fit.css (2026-10-17)
+The `ophthalmos*` files are byte-identical copies of the module repo (`test/ophthalmos-sync.json` pins their sha256, and
+every tag must carry the same `?v=oph14`). Do not edit them here. The iPad fixes (hide the broken clinic image once
+"Skip patient" shows; centred answers and Next button in iPad portrait) live in `tablet-fit.css`; upstream them to the
+module repo, then drop the overrides.
+

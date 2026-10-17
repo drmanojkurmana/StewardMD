@@ -271,6 +271,8 @@
   // stored as-is (NOT re-converted as SI — that was BUG-03, which corrupted every prefilled value).
   // Physiologically impossible values are dropped so stale/mis-mapped placeholders never appear.
   function open(prefill){
+    var from = prefill && prefill.from==="home" ? "home" : "icu";
+    if(from!==S.from){ S.from=from; var ob=root&&root.querySelector(".ece-back"); if(ob) ob.outerHTML=backBtn(); }
     if(prefill && (prefill.labs || prefill.pt)){
       if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=parseFloat(prefill.labs[k]); if(!isNaN(v)&&inRange(k,v)) S.labs[k]=v; });
       if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[(k==="dx"?"diagnosis":k)]=prefill.pt[k]; });
@@ -300,10 +302,12 @@
     return '<label class="ece-lab"><span class="ece-lab-name">'+esc(f.l)+'</span><span class="ece-lab-reading"><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(disp==null?"":disp)+'" aria-label="'+esc(f.l)+(unit?' in '+esc(unit):'')+'">'+(unit?'<i>'+esc(unit)+'</i>':'')+'</span></label>';
   }
 
+  // The back link names where the engine was opened from: Home opens it with {from:"home"}, the ICU dashboard without.
+  function backBtn(){ var t = S.from==="home" ? "Home" : "ICU Dashboard"; return '<button class="ece-back" data-act="close" aria-label="Back to '+t+'">‹ <span>'+t+'</span></button>'; }
   function view(){
     return ''
     + '<div class="ece-top">'
-    +   '<button class="ece-back" data-act="close" aria-label="Back to ICU Dashboard">‹ <span>ICU Dashboard</span></button>'
+    +   backBtn()
     + '</div>'
     + '<div class="ece-scroll" id="eceScroll">'
     +   '<header class="ece-hero"><h1 class="ece-h1">Electrolyte Correction Engine</h1><p class="ece-sub">Patient details, labs and a plan in one place.</p></header>'
@@ -410,7 +414,7 @@
       ".ece-patient-detail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 20px;border-top:1px solid var(--ece-line);padding-top:13px}",
       ".ece-patient-detail .ece-f:last-child{grid-column:1/-1}",
       ".ece-sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}.ece-sec-h>h2{margin-bottom:13px}",
-      ".ece-units{display:inline-flex;gap:16px;align-items:center;padding-bottom:12px}.ece-units button{border:0;background:none;color:var(--ece-muted);font-size:13px;font-weight:600;min-height:32px;padding:2px 0;cursor:pointer}.ece-units button.on{color:var(--ece-accent);font-weight:750;text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}",
+      ".ece-units{display:inline-flex;gap:16px;align-items:center;padding-bottom:12px}.ece-units button{border:0;background:none;color:var(--ece-muted);font-size:13px;font-weight:600;min-height:44px;min-width:44px;padding:2px 8px;cursor:pointer}.ece-units button.on{color:var(--ece-accent);font-weight:750;text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}",
       ".ece-lab-surface{background:var(--ece-surface);border:1px solid var(--ece-line);border-radius:18px;padding:5px 17px 4px;overflow:hidden}",
       ".ece-lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(120px,auto);align-items:center;gap:12px;min-height:64px;border-bottom:1px solid var(--ece-line);font-size:14px;cursor:text}",
       ".ece-lab-name{font-weight:650;color:var(--ece-ink)}.ece-lab-reading{display:flex;justify-content:flex-end;align-items:baseline;gap:8px;min-width:0}",
