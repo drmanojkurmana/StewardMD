@@ -3846,6 +3846,10 @@
             '<p class="icu-doc-sub" style="margin:0 0 10px">Live CPR command center on your Apple Watch — compressions, rate, shocks, drugs &amp; ROSC.</p>' +
             '<button class="icu-btn" data-icu-act="codeblue">' + ico("codeblue", "🫀") + ' Open Code Blue</button></div>'
           : '') +
+        '<div class="icu-card"><div class="icu-sec-lbl">' + ico("codeblue", "🫀") + ' Code Blue practice</div>' +
+        '<p class="icu-doc-sub" style="margin:0 0 10px">Practice aids. Training only, never written to a patient record.</p>' +
+        '<button class="icu-btn ghost" data-icu-act="cbtrain">' + ico("codeblue", "🫀") + ' Megacode and ACLS practice</button>' +
+        '<button class="icu-btn ghost" data-icu-act="cbecg">' + ico("codeblue", "🫀") + ' ECG rhythm course</button></div>' +
         '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "🧑") + ' This patient</div>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient">' + ico("user", "🧑") + ' Patient details</button>' +
         '<button class="icu-btn ghost" data-icu-act="savept">' + ico("save", "💾") + ' Save / update this patient</button>' +
@@ -9090,6 +9094,8 @@
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
       case "codeblue": try { var cbp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.WatchBridge; if (cbp && cbp.openCodeBlue) cbp.openCodeBlue(); } catch (x) {} break;
+      case "cbtrain": try { if (window.CodeBlueTrainer) CodeBlueTrainer.open(); } catch (x) {} break;
+      case "cbecg": try { if (window.CodeBlueECG) CodeBlueECG.open(); } catch (x) {} break;
       case "autofetch": try { if (window.SMD_AUTOFETCH) SMD_AUTOFETCH.openManager((_raw.wardSync && _raw.wardSync.patientId) || "", (_raw.patient && _raw.patient.name) || ""); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;

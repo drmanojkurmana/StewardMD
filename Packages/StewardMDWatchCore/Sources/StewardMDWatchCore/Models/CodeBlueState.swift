@@ -19,19 +19,26 @@ public struct CodeBlueState: Codable, Sendable, Equatable {
     public var targetRatePct: Int     // % of active time with rate in the 100–120 band
     public var events: [CodeEvent]
     public var updatedElapsed: TimeInterval
+    /// v2: resuscitation mode. Optional so phone and watch stay compatible:
+    /// absent in old JSON decodes as nil, which resolves to adult.
+    public var mode: CodeMode?
 
     public init(running: Bool, elapsed: TimeInterval, cycle: Int, compressionCount: Int,
                 instantaneousRateCPM: Int, averageRateCPM: Int, coachZone: RateZone,
                 paused: Bool, pauseSeconds: TimeInterval, adrenalineCount: Int,
                 shockCount: Int, rosc: Bool, batteryLevel: Double, targetRatePct: Int = 0,
-                events: [CodeEvent], updatedElapsed: TimeInterval) {
+                events: [CodeEvent], updatedElapsed: TimeInterval, mode: CodeMode? = nil) {
         self.running = running; self.elapsed = elapsed; self.cycle = cycle
         self.compressionCount = compressionCount; self.instantaneousRateCPM = instantaneousRateCPM
         self.averageRateCPM = averageRateCPM; self.coachZone = coachZone; self.paused = paused
         self.pauseSeconds = pauseSeconds; self.adrenalineCount = adrenalineCount
         self.shockCount = shockCount; self.rosc = rosc; self.batteryLevel = batteryLevel
         self.targetRatePct = targetRatePct; self.events = events; self.updatedElapsed = updatedElapsed
+        self.mode = mode
     }
+
+    /// Effective mode for behaviour: adult when unset (old payloads).
+    public var resolvedMode: CodeMode { mode ?? .adult }
 
     public static var empty: CodeBlueState {
         CodeBlueState(running: false, elapsed: 0, cycle: 1, compressionCount: 0,
