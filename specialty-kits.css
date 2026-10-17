@@ -226,3 +226,7 @@ body.dark .kit .kit-foot { background: var(--sc-lowest); }
 
 /* The legal line at the foot of every kit: smallest readable size, one line of space (2026-09-27). */
 .kit .kit-duty { margin: 6px 0 0; color: var(--on-surface-variant); opacity: .75; font: 500 9.5px/1.35 var(--q-sans); }
+
+/* iPad pass (2026-10-16): the sticky kit switcher floated 28 px above the bottom with content showing under it
+   (the sheet body's bottom padding). */
+.kit .kit-foot { margin-bottom: -28px; }

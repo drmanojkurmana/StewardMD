@@ -174,3 +174,8 @@ html.smd-refined body.v3-dark > :not(#homeV2) [data-smd-empty="error"]:not([data
  * app (where Google sign-in is native) it stays empty and left a blank gap above the first button. :empty means
  * it collapses exactly when nothing is inside, and returns the moment Google renders its button. */
 html.smd-refined #accountGate .google-btn-container:empty { display: none; }
+
+/* KardiQ X / ThoreX empty state ("No analyses yet"): it has its own icon and a title + subtitle stack. The block rule
+   above ran them into one line and added a second icon. Keep its column and its own icon. */
+html.smd-refined body > :not(#homeV2) .kx-empty[data-smd-empty] { display: flex !important; flex-direction: column; align-items: center; gap: 6px; }
+html.smd-refined body > :not(#homeV2) .kx-empty[data-smd-empty]::before { display: none !important; }
