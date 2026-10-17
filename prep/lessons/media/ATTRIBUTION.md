@@ -2018,3 +2018,25 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | mphar-analgesia-fig1.webp (R2) | Maintenance and rescue opioid formulation strategy in palliative care | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | mphar-special-fig1.webp (R2) | Morphine active metabolite accumulation and toxicity in renal impairment | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
 | pat-benign-wbc-lymph-node-fig1.webp (R2) | Pathogenesis of Epstein-Barr virus infectious mononucleosis | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-forearm-hand-s6.webp (R2) | Intrinsic hand musculature and dual motor innervation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-mixed-s5.webp (R2) | Mesenteric arterial arcade: middle colic and marginal arteries | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-parotid-infratemporal-s2.webp (R2) | Parasympathetic secretomotor pathway to the parotid gland | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-parotid-infratemporal-s1.webp (R2) | Parotid bed relations and traversing neurovascular structures | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-pharyngeal-s1.webp (R2) | Pharyngeal arch topography and constituent structural anatomy | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| ana-skull-cranial-cavity-s3.webp (R2) | The pterion: bony surface landmarks and underlying middle meningeal artery | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| obg-anatomy-development-s3.webp (R2) | Perineal body central muscular convergence and structural integrity | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| obg-anatomy-development-s2.webp (R2) | Cardinal ligament anatomy and uterine artery crossing the ureter | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| oph-anatomy-s3.webp (R2) | Extraocular muscle insertions and cranial nerve innervation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| oph-anatomy-s1.webp (R2) | Histological layer architecture of the human cornea | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| oph-glaucoma-s4.webp (R2) | Trabeculectomy surgical anatomy: guarded scleral flap and filtering bleb | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| pat-oral-salivary-s4.webp (R2) | Adenoid cystic carcinoma cribriform architecture and perineural invasion | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| rad-chest-s1.webp (R2) | Chest radiographic silhouette sign in right middle lobe consolidation | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| rad-musculoskeletal-s6.webp (R2) | Metabolic vertebral signs: rugger jersey spine vs picture frame vertebra | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| rad-musculoskeletal-s2.webp (R2) | Classical radiographic signs of distal femoral osteosarcoma | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| rad-neuroradiology-s2.webp (R2) | Computed tomography features of extradural versus subdural haematoma | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-bile-duct-s4.webp (R2) | Bismuth-Corlette classification of perihilar cholangiocarcinoma | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-gallbladder-s3.webp (R2) | Strasberg classification of iatrogenic biliary duct injuries | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-gallbladder-s2.webp (R2) | Strasberg's Critical View of Safety in laparoscopic cholecystectomy | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-head-injury-s4.webp (R2) | Uncal transtentorial herniation and midbrain peduncular compression | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-head-injury-s2.webp (R2) | Pathomechanics of bridging vein shearing in acute subdural haematoma | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
+| sur-thyroid-s3.webp (R2) | Follicular thyroid carcinoma capsular and vascular invasion | StewardMD (original, AI-generated with Gemini image) | CC BY 4.0 (StewardMD original) |
