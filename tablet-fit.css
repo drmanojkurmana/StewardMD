@@ -28,3 +28,32 @@
 /* PG logbook: the sticky Save / Submit bar floated 88 px above the bottom (the scroll's bottom padding), with the form
    showing under it. A screen that has the bar needs no padding under it. Any width. */
 #pglogRoot .pgl-scroll:has(.pgl-actionbar) { padding-bottom: 0; }
+
+/* Ophthalmos (synced byte-for-byte from its module repo, so the fix lives here). When the clinic image fails, the load
+   line gains a "Skip patient" button: hide the broken image then, or its alt text runs across the message. On iPad
+   portrait the answers and the Next button sit in a centred column instead of edge to edge. */
+#ophStage:has(#ophLoad .oph-link) img { visibility: hidden; }
+@media (min-width: 700px) and (orientation: portrait) {
+  .oph-enc .oph-panel, .oph-enc .oph-foot { padding-left: max(16px, calc(50% - 360px)) !important; padding-right: max(16px, calc(50% - 360px)) !important; }
+}
+
+/* ICU patient view: a 560 px phone column in the middle of a 1366 px iPad Pro screen. Give it the room on iPad. */
+@media (min-width: 1000px) {
+  #icuRoot .icu-wrap { max-width: 820px; }
+}
+
+/* OPD EMR: on iPad portrait the tab strip ran off the right edge ("N..." cut, no hint more tabs exist). On a tablet
+   wrap the tabs onto a second row so every tab is visible and tappable; phones keep the swipeable strip. */
+@media (min-width: 700px) {
+  #smdOpdEmr .oe-tabs { flex-wrap: wrap; overflow-x: visible; row-gap: 2px; }
+}
+
+/* My Clinic: the shared empty-state card is capped at 360 px, so on iPad it sat narrower than the 640 px "+ New patient"
+   button above it. Let it take the column's width so the two line up. */
+html.smd-refined body > :not(#homeV2) #smdClinic .pc-empty[data-smd-empty] { max-width: none; box-sizing: border-box; }
+
+/* Start case > Plan: the "Save this case?" form stretched to about 1050 px on iPad Pro landscape (one name field and a
+   button the width of the screen). Keep it a readable 720 px block, centred in the wizard. */
+@media (min-width: 900px) {
+  #saveCasePrompt { max-width: 720px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+}

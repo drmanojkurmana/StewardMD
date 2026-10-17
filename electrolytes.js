@@ -271,6 +271,8 @@
   // stored as-is (NOT re-converted as SI — that was BUG-03, which corrupted every prefilled value).
   // Physiologically impossible values are dropped so stale/mis-mapped placeholders never appear.
   function open(prefill){
+    var from = prefill && prefill.from==="home" ? "home" : "icu";
+    if(from!==S.from){ S.from=from; var ob=root&&root.querySelector(".ece-back"); if(ob) ob.outerHTML=backBtn(); }
     if(prefill && (prefill.labs || prefill.pt)){
       if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=parseFloat(prefill.labs[k]); if(!isNaN(v)&&inRange(k,v)) S.labs[k]=v; });
       if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[(k==="dx"?"diagnosis":k)]=prefill.pt[k]; });
@@ -300,10 +302,12 @@
     return '<label class="ece-lab"><span class="ece-lab-name">'+esc(f.l)+'</span><span class="ece-lab-reading"><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(disp==null?"":disp)+'" aria-label="'+esc(f.l)+(unit?' in '+esc(unit):'')+'">'+(unit?'<i>'+esc(unit)+'</i>':'')+'</span></label>';
   }
 
+  // The back link names where the engine was opened from: Home opens it with {from:"home"}, the ICU dashboard without.
+  function backBtn(){ var t = S.from==="home" ? "Home" : "ICU Dashboard"; return '<button class="ece-back" data-act="close" aria-label="Back to '+t+'">‹ <span>'+t+'</span></button>'; }
   function view(){
     return ''
     + '<div class="ece-top">'
-    +   '<button class="ece-back" data-act="close" aria-label="Back to ICU Dashboard">‹ <span>ICU Dashboard</span></button>'
+    +   backBtn()
     + '</div>'
     + '<div class="ece-scroll" id="eceScroll">'
     +   '<header class="ece-hero"><h1 class="ece-h1">Electrolyte Correction Engine</h1><p class="ece-sub">Patient details, labs and a plan in one place.</p></header>'

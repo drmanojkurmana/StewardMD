@@ -1073,7 +1073,7 @@
         });
       });
     },
-    electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
+    electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open({ from: "home" }); else toast("Electrolyte engine loading…"); },
     dosing: function () {
       // Bedside-dosing hub: groups the Insulin module + Electrolyte correction behind one tile.
       // Insulin row respects its flag (smd_insulin, DEFAULT ON; hide with ?insulin=0 / localStorage "0").
@@ -10326,7 +10326,10 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       s.classList.add("settings-display");
       displayOnClose = options && options.onClose;
       var done = document.createElement("button"); done.className = "settings-done"; done.textContent = displayOnClose ? "Back to Settings" : "Done";
-      done.addEventListener("click", closeSheet); s.querySelector(".hv-sheet-wrap").insertBefore(done, s.querySelector(".hv-sheet-wrap").firstChild);
+      done.addEventListener("click", closeSheet);
+      // Below the grab handle, not above it on the sheet's top edge (iPad audit 2026-10-17: it looked detached).
+      var _wrap = s.querySelector(".hv-sheet-wrap"), _grab = _wrap.querySelector(":scope > .hv-grab");
+      _wrap.insertBefore(done, _grab ? _grab.nextSibling : _wrap.firstChild);
       done.focus({ preventScroll: true });
       var atmosphere = s.querySelector("#hvMaikAtmoSec");
       if (atmosphere) {

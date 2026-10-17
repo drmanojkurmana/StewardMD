@@ -30,6 +30,9 @@ places:
   the screen; tablets now run at zoom 1.0 (Decisions 2026-10-16, home.js autoFitD, `smd_tablet_zoom=1` restores it).
 - `test/run-ipad-fit.mjs` opens every Home action at 820x1180, 1180x820, 1024x1366 and 1366x1024 with the tablet zoom
   and touch on; all 58 fit in headless Chrome on 2026-10-16 (it is not WebKit, and it sees the first screen only).
+- Resistance headline cards (MRSA, carbapenem-resistant Klebsiella, ...) open the same cell sheet as the table (2026-10-17):
+  `phenoRates()` now returns the `drug` behind each figure. Editing `antibiogram-rules.js` changes the bundle hash, so run
+  `node scripts/build-antibiogram.mjs` (never hand-edit the `abgr2.<hash>` token; the build test checks it).
 
 ## Files
 | File | Role |

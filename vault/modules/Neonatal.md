@@ -100,3 +100,8 @@ the engines convert (g/kg, mcg/mg, mg/kg/min <-> g/kg/day).
   (CC BY-NC-ND), BAPM and several CC BY-NC papers are non-commercial or unclear.
 
 - **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
+
+## Fixed 2026-10-17: empty GIR boxes read as 0
+`null >= 0` is true in JS, so `gir()`/`pctFor()`/`additive()` in `neo-fluids.js` took an empty box as 0 and printed
+"0 mg/kg/min" and "null mL/h x null%". They now return null until the boxes are filled (test in `neo-engines.test.mjs`).
+
