@@ -136,7 +136,18 @@ export function bankFrom(r2, defaultVer = "v5") {
     if (v) { if (_cache.size > 400) _cache.clear(); _cache.set(cacheKey, v); }
     return v;
   };
-  return { index: (s) => read(s, "index.json"), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(s, file) : Promise.resolve(null)) };
+  // The exam's prebuilt arena pool (tools/prep-arena-pool.mjs): questions from the overlays too, for subjects whose
+  // questions live only there. prep-bank/arena/pool-<exam>.json; null when it has not been built.
+  const pool = async (exam) => {
+    if (!/^[a-z0-9-]{2,20}$/.test(String(exam))) return null;
+    const ck = "pool:" + exam;
+    if (_cache.has(ck)) return _cache.get(ck);
+    let v = null;
+    try { const o = r2 && (await r2.get(`prep-bank/arena/pool-${exam}.json`)); v = o ? JSON.parse(await (o.text ? o.text() : new Response(o.body).text())) : null; } catch (e) { v = null; }
+    if (v) { if (_cache.size > 400) _cache.clear(); _cache.set(ck, v); }
+    return v;
+  };
+  return { index: (s) => read(s, "index.json"), module: (s, file) => (/^mcq\/[a-z0-9-]{2,80}\.json$/.test(file) ? read(s, file) : Promise.resolve(null)), pool };
 }
 const usable = (it) => !!it && !(it.flags && it.flags.length) && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4 && typeof it.id === "string";
 // prep.js poolFor: flagged items out; for USMLE, vignettes when a module has at least 5.
@@ -234,4 +245,24 @@ export async function drawItems(bank, exam, n, seed) {
     }
   }
   return diverseOrder(out, rnd);
+}
+
+/* drawFromPool(bank, exam, n, seed) -> n questions from the exam's prebuilt pool, spread across its subjects, in a
+ * seeded order; [] when there is no pool or it holds fewer than n usable questions. Items are { id, q, o, a, s, m }. */
+export async function drawFromPool(bank, exam, n, seed) {
+  const pool = bank && bank.pool ? await bank.pool(exam) : null;
+  const items = pool && Array.isArray(pool.items) ? pool.items.filter((it) => it && it.q && Array.isArray(it.o) && it.o.length === 4 && Number.isInteger(it.a) && it.a >= 0 && it.a < 4) : [];
+  if (items.length < n) return [];
+  const rnd = mulberry32(seedFrom("pool:" + String(seed)));
+  const bySubject = new Map();
+  for (const it of items) { if (!bySubject.has(it.s)) bySubject.set(it.s, []); bySubject.get(it.s).push(it); }
+  const subjects = shuffle([...bySubject.keys()], rnd);
+  for (const k of subjects) shuffle(bySubject.get(k), rnd);
+  const out = [], seen = new Set();
+  for (let round = 0; out.length < n && round < n * 4; round++) {
+    const k = subjects[round % subjects.length], q = bySubject.get(k);
+    while (q.length) { const it = q.shift(); if (!seen.has(it.id)) { seen.add(it.id); out.push({ id: it.id, q: String(it.q), o: it.o.map(String), a: it.a, s: it.s, m: it.m }); break; } }
+    if (subjects.every((x) => !bySubject.get(x).length)) break;
+  }
+  return out.length >= n ? out.slice(0, n) : [];
 }
