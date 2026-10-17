@@ -99,7 +99,12 @@ class CodeBlueModel(
 
     /** ACLS cadence reminder for the current cycle (odd → adrenaline, even → antiarrhythmic if shockable). */
     val drugPrompt: String
-        get() = if (cycle % 2 == 1) "Adrenaline 1 mg" else "Amiodarone 300 mg (if shockable)"
+        get() = when (mode) {
+            CodeMode.Adult -> if (cycle % 2 == 1) "Adrenaline 1 mg" else "Amiodarone 300 mg (if shockable)"
+            // Paediatric and neonatal doses are weight-based: never show the adult figure there.
+            CodeMode.Paediatric -> if (cycle % 2 == 1) "Epinephrine due (dose per weight, local protocol)" else "Antiarrhythmic if shockable (per local protocol)"
+            CodeMode.Neonatal -> "Epinephrine if heart rate stays below 60 after effective ventilation and compressions (dose per protocol)"
+        }
 
     fun setMode(newMode: CodeMode) {
         if (newMode == mode) return
@@ -117,7 +122,7 @@ class CodeBlueModel(
     fun recordAdrenaline() {
         adrenalineCount++
         lastEpiElapsed = elapsedSeconds
-        append(EventKind.Drug, "Adrenaline 1 mg (#$adrenalineCount)")
+        append(EventKind.Drug, if (mode == CodeMode.Adult) "Adrenaline 1 mg (#$adrenalineCount)" else "Adrenaline (#$adrenalineCount)")
     }
 
     fun recordRhythm(label: String) {

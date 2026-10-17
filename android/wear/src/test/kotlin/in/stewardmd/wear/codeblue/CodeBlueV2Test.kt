@@ -400,4 +400,14 @@ class CodeSheetTest {
         assertTrue(text.contains(MOTION_DISCLAIMER))
         assertFalse(text.contains("mg"))
     }
+
+    @Test fun drugPromptNeverShowsAdultDoseOutsideAdultMode() {
+        val m = CodeBlueModel()
+        m.setMode(CodeMode.Paediatric)
+        assertFalse(m.drugPrompt.contains(" mg"))
+        m.setMode(CodeMode.Neonatal)
+        assertFalse(m.drugPrompt.contains(" mg"))
+        m.setMode(CodeMode.Adult)
+        assertTrue(m.drugPrompt.contains("1 mg"))
+    }
 }

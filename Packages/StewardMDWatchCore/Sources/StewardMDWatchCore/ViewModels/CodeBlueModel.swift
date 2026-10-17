@@ -76,7 +76,12 @@ public final class CodeBlueModel: ObservableObject {
     /// Next drug prompt: adrenaline on odd cycles (~every 3–5 min); otherwise the
     /// shockable-rhythm antiarrhythmic reminder.
     public var nextDrug: String {
-        cycle % 2 == 1 ? "Adrenaline 1 mg" : "Amiodarone 300 mg (if shockable)"
+        switch mode {
+        case .adult: return cycle % 2 == 1 ? "Adrenaline 1 mg" : "Amiodarone 300 mg (if shockable)"
+        // Paediatric and neonatal doses are weight-based: never show the adult figure there.
+        case .paediatric: return cycle % 2 == 1 ? "Epinephrine due (dose per weight, local protocol)" : "Antiarrhythmic if shockable (per local protocol)"
+        case .neonatal: return "Epinephrine if heart rate stays below 60 after effective ventilation and compressions (dose per protocol)"
+        }
     }
 
     /// Advances the clock; returns true when a 2-minute rhythm-check boundary is

@@ -387,4 +387,15 @@ final class CodeBlueV2Tests: XCTestCase {
         m.startCode(mode: .neonatal)
         XCTAssertEqual(m.snapshot(batteryLevel: 0.5).resolvedMode, .neonatal)
     }
+
+    @MainActor
+    func test_drugPromptNeverShowsAdultDoseOutsideAdultMode() {
+        let m = CodeBlueModel()
+        m.setMode(.paediatric)
+        XCTAssertFalse(m.nextDrug.contains(" mg"))
+        m.setMode(.neonatal)
+        XCTAssertFalse(m.nextDrug.contains(" mg"))
+        m.setMode(.adult)
+        XCTAssertTrue(m.nextDrug.contains("1 mg"))
+    }
 }
