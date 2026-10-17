@@ -255,13 +255,14 @@ const TESTS = [[1, 0, "urea rising · potassium rising · fluid building up"], [
 TESTS.forEach(([l, d, t]) => { const r = modelOf(MD, l, d).readout; if (r !== t) throw new Error(`hemodialysis: model readout "${r}" != "${t}" at level ${l}, drug ${d}`); });
 
 /* ---------------- page ---------------- */
-const SCENE = { ISO, ART: ART.screen, VEN: VEN.screen, DIN: DIA_IN.screen, DOUT: DIA_OUT.screen, SAL: SAL.screen, DIALS: DIAL.map((d) => ({ id: d.id, x: +d.x.toFixed(1), y: +d.y.toFixed(1) })), ROTOR, ROTOR_R, HEP: HEPC, CH, IN, FIB, PT, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
+const SCENE = { PLANE: "xz", ISO, ART: ART.screen, VEN: VEN.screen, DIN: DIA_IN.screen, DOUT: DIA_OUT.screen, SAL: SAL.screen, DIALS: DIAL.map((d) => ({ id: d.id, x: +d.x.toFixed(1), y: +d.y.toFixed(1) })), ROTOR, ROTOR_R, HEP: HEPC, CH, IN, FIB, PT, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
 const framed = k.plateHtml({ fig: "Fig 1", title: "Haemodialysis: a working machine", hint: "tap a part · space: pause", readout: modelOf(MD, 1, 0).readout, caption: "Schematic, not to scale. Flow, clearance and fluid removal are qualitative and illustrative; no flow rate, dose or treatment time is shown or implied.", body: `<div class="dr-svg">${SVG}</div>` });
 const controls = `
 <div class="dr-controls">
   <label class="dr-range"><span>${esc(MD.level.label)}</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="${esc(MD.level.names[1])}"><span class="dr-ticks">${MD.level.ticks.map((t) => `<i>${esc(t)}</i>`).join("")}</span></label>
   <label class="dr-range"><span>${esc(MD.drugLabel)}</span><select id="drug" data-without="Without dialysis" data-with="With dialysis">${MD.settings.map((d, i) => `<option value="${i}">${esc(d.label)}</option>`).join("")}</select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+  <button id="altview" type="button" data-href="%%ALT%%">Show simple bench view</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p>`;
@@ -277,7 +278,7 @@ const sources = `<footer class="bio-sources">
 const script = `const SC = ${JSON.stringify(SCENE)};\nconst modelOf = ${modelOf.toString()};\n` + readFileSync(join(HERE, "dialysis.page.js"), "utf8");
 const CSS = readFileSync(join(HERE, "../figure.css"), "utf8") + readFileSync(join(HERE, "dialysis.css"), "utf8");
 for (const light of [false, true]) {
-  const html = k.pageHtml({ title: "Haemodialysis: a working machine", theme: light ? "light" : "dark", width: W + 40, body: `<style>${BIO_CSS}${CSS}</style>${framed}${controls}${sources}`, script });
+  const html = k.pageHtml({ title: "Haemodialysis: a working machine", theme: light ? "light" : "dark", width: W + 40, body: `<style>${BIO_CSS}${CSS}</style>${framed}${controls.replace('%%ALT%%', 'hemodialysis-simple' + (light ? '-light' : '') + '.html')}${sources}`, script });
   writeFileSync(join(ROOT, "prep/figures", "hemodialysis" + (light ? "-light" : "") + ".html"), html);
   console.log("wrote prep/figures/hemodialysis" + (light ? "-light" : "") + ".html " + html.length);
 }

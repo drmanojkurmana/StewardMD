@@ -28,8 +28,14 @@ let rotA = 0;
 const ringXZ = (c, r, dy, n = 36) => { let d = ""; for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, q = iso([c[0] + r * Math.cos(t), c[1] + dy, c[2] + r * Math.sin(t)]); d += (i ? "L" : "M") + q[0].toFixed(1) + " " + q[1].toFixed(1); } return d + "Z"; };
 function drawRotor() {
   const c = SC.ROTOR;
-  disc.setAttribute("d", ringXZ(c, SC.ROTOR_R, 0.6)); hub.setAttribute("d", ringXZ(c, 3.4, 1.4, 14));
-  rolls.forEach((r, i) => { const t = rotA + i * 2.0944; r.setAttribute("d", ringXZ([c[0] + (SC.ROTOR_R - 4.8) * Math.cos(t), c[1], c[2] + (SC.ROTOR_R - 4.8) * Math.sin(t)], 3.1, 1.8, 12)); });
+  if (SC.PLANE === "xz") {
+    disc.setAttribute("d", ringXZ(c, SC.ROTOR_R, 0.6)); hub.setAttribute("d", ringXZ(c, 3.4, 1.4, 14));
+    rolls.forEach((r, i) => { const t = rotA + i * 2.0944; r.setAttribute("d", ringXZ([c[0] + (SC.ROTOR_R - 4.8) * Math.cos(t), c[1], c[2] + (SC.ROTOR_R - 4.8) * Math.sin(t)], 3.1, 1.8, 12)); });
+  } else {
+    const z = c[2];
+    disc.setAttribute("d", ringPath(c, SC.ROTOR_R, z)); hub.setAttribute("d", ringPath(c, 3.4, z + 0.4, 14));
+    rolls.forEach((r, i) => { const t = rotA + i * 2.0944; r.setAttribute("d", ringPath([c[0] + (SC.ROTOR_R - 4.8) * Math.cos(t), c[1] + (SC.ROTOR_R - 4.8) * Math.sin(t)], 3.1, z + 1.2, 12)); });
+  }
 }
 /* ---- heparin syringe: the plunger creeps in ---- */
 const plunger = $("plunger"), rod = mk("path", { class: "p-plunger" }, plunger), pad = mk("path", { class: "p-pad" }, plunger);
@@ -112,9 +118,13 @@ function drawGauges() { [["u", U.u], ["k", U.k], ["f", U.f]].forEach(([k, v]) =>
 /* ---- pressure dials and the two dialysate containers ---- */
 const nd = {}, ndv = { art: -70, dia: -70, ven: -70 }; SC.DIALS.forEach((d) => { nd[d.id] = { g: $("nd-" + d.id), x: d.x, y: d.y }; });
 
+const jf = { fresh: $("jf-fresh"), used: $("jf-used") }; let jl = 0;
 function drawDials(dt) {
   const tg = { art: flow.b > 0.05 ? -22 - 26 * flow.b : -70, dia: flow.d > 0.05 ? -6 + 14 * flow.d : -70, ven: flow.b > 0.05 ? 4 + 34 * flow.b : -70 };
   for (const id in nd) { ndv[id] += (tg[id] - ndv[id]) * Math.min(1, dt * 3); const j = flow.b > 0.05 ? Math.sin(tm / 380 + id.length) * 1.6 : 0; nd[id].g.setAttribute("transform", "rotate(" + (ndv[id] + j).toFixed(1) + " " + nd[id].x + " " + nd[id].y + ")"); }
+  if (jf.fresh) { jl += dt * 0.012 * flow.d; if (jl > 1) jl = 0;
+    const fr = 0.92 - 0.8 * jl, us = 0.12 + 0.8 * jl;
+    jf.fresh.setAttribute("y", (1 - fr).toFixed(3)); jf.fresh.setAttribute("height", fr.toFixed(3)); jf.used.setAttribute("y", (1 - us).toFixed(3)); jf.used.setAttribute("height", us.toFixed(3)); }
 }
 const scr = { bp: $("scr-bp"), dp: $("scr-dp"), cd: $("scr-cd"), led: $("scr-led") };
 function drawScreen() { [["bp", flow.b * 0.9], ["dp", flow.d * 0.8], ["cd", flow.d * 0.7]].forEach(([k, v]) => { const h = 0.6 * Math.max(0.02, v); scr[k].setAttribute("y", (0.8 - h).toFixed(3)); scr[k].setAttribute("height", h.toFixed(3)); }); scr.led.style.fill = flow.b > 0.1 ? "#3ddc97" : "#6b6b6b"; }
@@ -143,6 +153,8 @@ levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.set
 drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) still(); });
 function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
 pauseBtn.addEventListener("click", () => setPlaying(!playing));
+const altBtn = document.getElementById("altview");
+if (altBtn) altBtn.addEventListener("click", () => { location.href = altBtn.dataset.href + "?d=" + drug + "&l=" + level; });
 document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
 reduce.addEventListener("change", () => setPlaying(!reduce.matches));
 const idle = info.textContent;

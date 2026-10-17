@@ -1759,3 +1759,4 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - Layout: a dialysis chair with the patient and access arm beside a floor-standing machine (pump and syringe on its front face, upright dialyser, drip chamber, saline pole), three pressure dials, fibre cut-away and patient gauges. Reference schematic checked for missing components only; all drawing is original.
 - `compare()` in fig-viewer.js reads `data-without` / `data-with` on `#drug` for the switch labels (viewer token fig7).
 - Next scenes planned: sepsis pathogenesis, airway type-2 vs non-type-2 inflammation, graft rejection.
+- `hemodialysis-simple` (tools/figures/scenes/dialysis-bench.mjs): the first, flat bench layout of the same figure, reached by the "Show simple bench view" button on the unit page (and back). Not in the registry; the button carries the Without/With setting and blood flow across via `?d=&l=`. Both generators share `dialysis.page.js` and `dialysis.css`.
