@@ -266,3 +266,7 @@
 .pn-root .pn-cfb:focus-visible { outline: 2px solid var(--pn-pri); outline-offset: -2px; }
 @media (max-width: 560px) { .pn-root .pn-cf { width: 100%; margin-left: 0; } }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-cfb { transition: none; } }
+
+/* Universal search (Home): the scope control sits between the box and the results. */
+.pn-root .pn-seg4.pn-fscope { margin: 10px 0 14px; }
+.pn-root #pnFound .pn-sec { margin-top: 14px; }

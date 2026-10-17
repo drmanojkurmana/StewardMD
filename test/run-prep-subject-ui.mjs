@@ -243,6 +243,19 @@ try {
   ok(await until(`return document.querySelectorAll("#smdPrep #pnGrid [data-act=subject]").length > 0;`, 15000), "NEET-SS Medical group: home draws");
   const medSubs = (await ev(homeSubs)).split(",");
   ok(medSubs.includes("ss-general-medicine") && !medSubs.some((x) => /ss-urology|surgery|ctvs|neonat|paediatric/.test(x)), "NEET-SS Medical group: no surgical or paediatric subject on home: " + medSubs.filter((x) => /ss-urology|surgery|ctvs|neonat|paediatric/.test(x)).join(",") + " of " + medSubs.length);
+  // Owner 2026-10-17: one search for questions, lessons, pearls and IDs, from Home.
+  await setPlan({ exam: "neet-ss", group: "medical" });
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=find]');`, 15000), "Home has the universal search button");
+  await click(`#smdPrep [data-act=find]`);
+  ok(await until(`return !!document.querySelector("#smdPrep #pnFind");`, 5000), "the search screen opens with its box");
+  await ev(`var i=document.querySelector("#smdPrep #pnFind"); i.value="q"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
+  ok(await until(`return /at least 2 letters/.test(document.querySelector("#smdPrep #pnFound").textContent);`, 3000), "one letter asks for two");
+  await ev(`var i=document.querySelector("#smdPrep #pnFind"); i.value="arrhythmia"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
+  ok(await until(`var t=document.querySelector("#smdPrep #pnFound").textContent; return /No question matches|found|need a connection|Lessons and pearls|Modules/.test(t);`, 12000), "a word search settles on results or a clear message");
+  await click(`#smdPrep [data-act=find-scope][data-v=all]`);
+  ok(await until(`return document.querySelector('#smdPrep [data-act=find-scope][data-v=all]').getAttribute("aria-pressed")==="true" && !!document.querySelector("#smdPrep #pnFind").value;`, 5000), "All subjects scope is chosen and the typed word is kept");
+  await ev(`var i=document.querySelector("#smdPrep #pnFind"); i.value="PN-0000"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
+  ok(await until(`return /No pearl has that ID|Lessons and pearls/.test(document.querySelector("#smdPrep #pnFound").textContent);`, 8000), "a pearl ID answers: opens it or says none has it");
   await ev(`PREP.close(); return 1;`);
   ok(!errors.length, "no uncaught PrepNucleus error" + (errors.length ? ": " + errors.join(" | ").slice(0, 400) : ""));
 } catch (e) {
