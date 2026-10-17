@@ -15,10 +15,10 @@
   var ROLE_ORDER = ["student", "intern", "resident", "doctor"];
   var GROUPS = [
     { role: "student", tt: "Students", sub: "Learn and practise",
-      acts: ["clinix", "prep", "kxlearn", "atlas", "ophthalmos", "tokos", "narke", "guidelines"] },
+      acts: ["clinix", "prep", "kxlearn", "atlas", "ophthalmos", "tokos", "narke", "guidelines", "codeblue"] },
     { role: "intern", tt: "Interns", sub: "Bedside and ward work",
       acts: ["startcase", "reasoning", "askai", "drugmenu", "calculators", "dosecalc", "dosing", "insulin", "electrolytes",
-        "interactions", "syndromes", "antibiogram", "neo", "icu", "speckit", "codeblue", "docs", "dictate", "icdsearch"] },
+        "interactions", "syndromes", "antibiogram", "neo", "icu", "speckit", "docs", "dictate", "icdsearch"] },
     { role: "resident", tt: "Residents", sub: "Specialty and training",
       acts: ["pglog", "surgx", "staging", "oncohome", "oncotree", "retinalscan", "kardiox", "thorex", "sknx", "ward", "hospital", "kxinbox"] },
     { role: "doctor", tt: "Doctors", sub: "Practice and clinic",
@@ -76,7 +76,7 @@
   // Case, Dx Patient, Drugs, Calculators; chips: Syndromes, Antibiogram, Dosing, Hospital; the Ask MaiK tab), so the grid adds to them.
   var ON_HOME_ALREADY = ["startcase", "reasoning", "drugmenu", "calculators", "syndromes", "antibiogram", "dosing", "hospital", "askai"];
   var STARTER = {
-    student: ["clinix", "prep", "kxlearn", "askai", "atlas", "speckit", "guidelines", "ophthalmos", "tokos", "narke"],
+    student: ["clinix", "prep", "kxlearn", "askai", "codeblue", "atlas", "speckit", "guidelines", "ophthalmos", "tokos", "narke"],
     intern: ["askai", "dosecalc", "icu", "docs", "interactions", "speckit", "dictate", "neo", "icdsearch"],
     resident: ["pglog", "askai", "speckit", "kxinbox", "docs", "dictate", "ward", "dosecalc", "icdsearch"],
     doctor: ["askai", "speckit", "docs", "followcare", "kxinbox", "dictate", "maitri", "govschemes", "icdsearch"],
