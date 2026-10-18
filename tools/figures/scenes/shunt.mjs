@@ -83,16 +83,16 @@ const body = `
   <rect class="sh-outer" x="340" y="190" width="280" height="200" rx="22"/>
   <rect class="sh-septum" x="468" y="202" width="24" height="184"/>
   <rect class="sh-septum" x="352" y="290" width="256" height="8"/>
-  <g class="hot" tabindex="0" data-info="Left atrium: receives oxygen rich blood from the lungs. In a right to left shunt its blood mixes with oxygen poor blood and saturation falls."><rect id="chLA" class="sh-ch" x="352" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="410" y="240" text-anchor="middle">Left atrium</text><text id="satLA" class="sh-sat" x="410" y="258" text-anchor="middle">oxygen rich</text></g>
-  <g class="hot" tabindex="0" data-info="Right atrium: receives oxygen poor blood from the body. An atrial septal defect lets oxygen rich blood cross into it from the left."><rect id="chRA" class="sh-ch" x="492" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="550" y="240" text-anchor="middle">Right atrium</text><text id="satRA" class="sh-sat" x="550" y="258" text-anchor="middle">oxygen poor</text></g>
-  <g class="hot" tabindex="0" data-info="Left ventricle: pumps oxygen rich blood into the aorta to the body. A ventricular septal defect connects it to the right ventricle."><rect id="chLV" class="sh-ch" x="352" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="410" y="336" text-anchor="middle">Left ventricle</text><text id="satLV" class="sh-sat" x="410" y="354" text-anchor="middle">oxygen rich</text></g>
-  <g class="hot" tabindex="0" data-info="Right ventricle: pumps oxygen poor blood to the lungs. It thickens when pulmonary pressure is high or its outlet is narrowed, as in tetralogy."><rect id="chRV" class="sh-ch" x="492" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="550" y="336" text-anchor="middle">Right ventricle</text><text id="satRV" class="sh-sat" x="550" y="354" text-anchor="middle">oxygen poor</text></g>
-  <g id="defASD"><rect class="sh-hole" x="468" y="234" width="24" height="22" rx="6"/></g>
-  <g id="defVSD"><rect class="sh-hole" x="468" y="330" width="24" height="22" rx="6"/></g>
+  <g class="hot" tabindex="0" data-info="Left atrium: receives oxygen rich blood from the lungs. In a right to left shunt its blood mixes with oxygen poor blood and saturation falls."><rect id="chLA" class="sh-ch" x="352" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="415" y="222" text-anchor="middle">Left atrium</text><text id="satLA" class="sh-sat" x="415" y="238" text-anchor="middle">oxygen rich</text></g>
+  <g class="hot" tabindex="0" data-info="Right atrium: receives oxygen poor blood from the body. An atrial septal defect lets oxygen rich blood cross into it from the left."><rect id="chRA" class="sh-ch" x="492" y="202" width="116" height="88" rx="12"/><text class="sh-chlab" x="540" y="222" text-anchor="middle">Right atrium</text><text id="satRA" class="sh-sat" x="540" y="238" text-anchor="middle">oxygen poor</text></g>
+  <g class="hot" tabindex="0" data-info="Left ventricle: pumps oxygen rich blood into the aorta to the body. A ventricular septal defect connects it to the right ventricle."><rect id="chLV" class="sh-ch" x="352" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="415" y="318" text-anchor="middle">Left ventricle</text><text id="satLV" class="sh-sat" x="415" y="334" text-anchor="middle">oxygen rich</text></g>
+  <g class="hot" tabindex="0" data-info="Right ventricle: pumps oxygen poor blood to the lungs. It thickens when pulmonary pressure is high or its outlet is narrowed, as in tetralogy."><rect id="chRV" class="sh-ch" x="492" y="298" width="116" height="88" rx="12"/><text class="sh-chlab" x="540" y="318" text-anchor="middle">Right ventricle</text><text id="satRV" class="sh-sat" x="540" y="334" text-anchor="middle">oxygen poor</text></g>
+  <g id="defASD"><rect class="sh-hole" x="468" y="255" width="24" height="22" rx="6"/></g>
+  <g id="defVSD"><rect class="sh-hole" x="468" y="351" width="24" height="22" rx="6"/></g>
 </g>
 <g id="bodybox">
   <g class="hot" tabindex="0" data-info="Body tissues: use oxygen and return oxygen poor blood to the right atrium. Blue colour here means cyanosis from a right to left shunt.">
-    <rect id="bodyRect" class="sh-body" x="350" y="398" width="280" height="30" rx="15"/><text class="sh-chlab" x="490" y="418" text-anchor="middle">BODY</text>
+    <rect id="bodyRect" class="sh-body" x="350" y="398" width="280" height="30" rx="15"/><text class="sh-chlab" x="490" y="412" text-anchor="middle">BODY</text>
   </g>
 </g>
 <g id="flow"></g><g id="shuntflow"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;

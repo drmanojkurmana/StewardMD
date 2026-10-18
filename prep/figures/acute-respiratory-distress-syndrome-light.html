@@ -1,0 +1,525 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Acute respiratory distress syndrome: flooded, stiff lungs</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body{--c-epi:#7fc4e8;--c-fibro:#d8b36a;--c-coll:#c9a86a;--c-prot:#ff9a3d;--c-surf:#3ddc97}
+body[data-theme="light"]{--c-epi:#3fa0d4;--c-fibro:#b98f2e;--c-coll:#a9822e;--c-prot:#d96f12;--c-surf:#0f9f76}
+.cl-epi{--cc:var(--c-epi)}.cl-fibro{--cc:var(--c-fibro)}.cl-type2{--cc:var(--c-surf)}
+.ards-arrow{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round;marker-end:none;opacity:.75}
+.ards-node{fill:color-mix(in srgb,var(--c-bad) 24%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.6}
+.ards-icon{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.7}
+.ards-airway{fill:color-mix(in srgb,var(--c-fl) 20%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
+.ards-alv-out{fill:color-mix(in srgb,var(--c-endo) 20%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1.4}
+.ards-alv-air{fill:color-mix(in srgb,var(--c-epi) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-epi) 65%,#000);stroke-width:1.2}
+.ards-hyal{fill:none;stroke:#e8d36a;stroke-width:6;stroke-dasharray:10 5;opacity:0}
+.ards-fluid{fill:var(--c-fl);opacity:0}
+.ards-cap{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1.2}
+.ards-mini{fill:color-mix(in srgb,var(--c-epi) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-epi) 65%,#000);stroke-width:1.4}
+.ards-shunt{fill:color-mix(in srgb,#5c426e 34%,var(--anatomy-paper));stroke:#5c426e;stroke-width:1.2}
+.ards-coll{fill:none;stroke:var(--c-coll);stroke-width:2;stroke-linecap:round;opacity:0}
+.ards-surf{fill:#3ddc97;stroke:color-mix(in srgb,#3ddc97 55%,#000);stroke-width:.5}
+.p-prot{--cc:var(--c-prot)}.p-air2{--cc:#9fd8f2}.p-inj{--cc:var(--c-bad)}
+.dr-g-fill.g-oed{fill:var(--c-fl)}.dr-g-fill.g-oxy{fill:var(--c-good)}.dr-g-fill.g-shunt{fill:#8f6fc8}.dr-g-fill.g-stiff{fill:var(--c-bad)}.dr-g-fill.g-fib{fill:var(--c-coll)}.dr-g-fill.g-neut{fill:var(--c-neut)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Acute respiratory distress syndrome: flooded, stiff lungs</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>oedema marked · oxygen very low · stiffness high · fibrosis low</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated alveolar capillary unit in acute respiratory distress syndrome. Direct injury from the air side and indirect injury from the blood side damage alveolar epithelium and capillary endothelium. The barrier leaks protein rich fluid into the alveolus, hyaline membranes line the wall, surfactant is lost, neutrophils enter, and blood passing flooded alveoli stays oxygen poor, giving shunt and refractory hypoxaemia. The lung becomes stiff. Later phases show repair by type II cells and then interstitial fibrosis. Gauges show oedema, neutrophils, shunt, oxygen, stiffness and fibrosis. Treatment choices are lung-protective ventilation, prone positioning and treating the underlying cause."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="362" rx="18"/>
+<text class="sc-zone" x="34" y="68">ALVEOLAR CAPILLARY UNIT</text>
+<path class="ards-arrow" d="M143 145L312 182"/>
+<path class="ards-arrow" d="M143 285L312 292"/>
+<circle class="ards-node" cx="105" cy="145" r="38"/>
+<circle class="ards-node" cx="105" cy="285" r="38"/>
+<g class="ards-icon">
+  <circle cx="94" cy="134" r="6"/><circle cx="112" cy="142" r="5"/><circle cx="100" cy="154" r="4"/>
+  <path d="M84 292Q105 272 126 292Q105 302 84 292Z"/>
+</g>
+<rect class="ards-airway" x="466" y="70" width="28" height="58" rx="10"/>
+<ellipse id="alvOuter" class="ards-alv-out" cx="480" cy="225" rx="165" ry="110"/>
+<ellipse id="alvAir" class="ards-alv-air" cx="480" cy="225" rx="145" ry="92"/>
+<ellipse id="hyal" class="ards-hyal" cx="480" cy="225" rx="136" ry="84"/>
+<ellipse id="fluidEl" class="ards-fluid" cx="480" cy="278" rx="118" ry="36"/>
+<rect id="capLumen" class="ards-cap" x="330" y="325" width="300" height="34" rx="17"/>
+<ellipse id="miniLung" class="ards-mini" cx="800" cy="210" rx="58" ry="42"/>
+<rect class="ards-airway" x="788" y="150" width="24" height="24" rx="8"/>
+<rect id="shuntVessel" class="ards-shunt" x="720" y="290" width="180" height="28" rx="14"/>
+<g id="surfG"></g>
+<g id="collG"></g>
+<g id="cellsG"></g>
+<g id="rbcsG"></g>
+<g id="parts"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Phase of lung injury</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="exudative"><span class="dr-ticks"><i>exudative</i><i>proliferative</i><i>fibrotic</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">lung-protective ventilation</option><option value="2">prone positioning</option><option value="3">treat the underlying cause</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How ARDS develops.</strong> Acute respiratory distress syndrome follows direct pulmonary injury (for example pneumonia or aspiration) or indirect vascular injury from a systemic illness. In the early exudative phase the alveolar epithelial and capillary endothelial barrier is injured, vascular leak lets protein rich edema fluid flood the interstitial space and alveoli, hyaline membranes form on the alveolar wall, surfactant is lost and neutrophils enter. Flooded and collapsed alveoli still receive blood, so that blood bypasses gas exchange as a shunt and oxygen stays low despite added oxygen (refractory hypoxaemia). The chest shows widespread shadowing and the lung is stiff, so breathing or ventilation needs more pressure. A proliferative phase follows, with type II alveolar cell growth and early repair, and in some patients a fibrotic phase with interstitial fibrosis. This is standard teaching in critical care and respiratory medicine and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Lung-protective ventilation limits further injury from overstretch while the lung is stiff and uneven. Prone positioning makes ventilation and blood flow match more evenly and reduces shunt, so oxygen often rises. Treating the underlying cause removes the driver of epithelial and endothelial injury and lets leak, oedema and neutrophil influx settle. These are teaching toggles only and show direction of effect, not how any patient should be treated.</li></ul>
+<p><strong>What was simplified.</strong> Diagnostic criteria and timing, oxygen thresholds and ratios, ventilator settings and pressures, fluid strategy, steroids and other adjuncts, extracorporeal support, the separate roles of each mediator, and right heart and vascular effects are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Phase of lung injury","a":[1,0.65,0.9],"names":["exudative","proliferative","fibrotic"],"ticks":["exudative","proliferative","fibrotic"],"start":0},"settings":[{"label":"no treatment"},{"label":"lung-protective ventilation"},{"label":"prone positioning"},{"label":"treat the underlying cause"}],"drugNames":["no treatment","lung-protective ventilation","prone positioning","treating the underlying cause"],"status":"Phase: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const cause = drug === 3 ? 1 : 0, prone = drug === 2 ? 1 : 0, lpv = drug === 1 ? 1 : 0;
+  const leakB = [0.95, 0.55, 0.3][level], neutB = [0.9, 0.6, 0.35][level], fluidB = [0.92, 0.55, 0.32][level];
+  const fibB = [0.08, 0.45, 0.92][level], stiffB = [0.72, 0.68, 0.95][level], shuntB = [0.9, 0.62, 0.52][level];
+  const hyalB = [0.88, 0.38, 0.12][level], surfLossB = [0.85, 0.45, 0.6][level];
+  const Leak = cl(leakB * (cause ? 0.45 : 1) * (lpv ? 0.85 : 1));
+  const Fluid = cl(fluidB * (cause ? 0.55 : 1) * (prone ? 0.85 : 1));
+  const Neut = cl(neutB * (cause ? 0.4 : 1));
+  const Fib = cl(fibB * (cause ? (level === 2 ? 0.9 : 0.75) : 1) * (lpv ? 0.88 : 1));
+  const Sh = cl(shuntB * (prone ? 0.45 : 1) * (lpv ? 0.85 : 1) * (cause ? 0.7 : 1));
+  const Ox = cl(0.98 - 0.92 * Sh - 0.15 * Fluid);
+  const Stiff = cl(stiffB * (lpv ? 0.82 : 1) * (cause && level < 2 ? 0.92 : 1));
+  const Comp = cl(1 - Stiff);
+  const Hyal = cl(hyalB * (cause ? 0.6 : 1));
+  const Surf = cl(1 - surfLossB * (cause ? 0.7 : 1) + (level === 1 ? 0.1 : 0));
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(Fluid, 0.35, 0.65, ["little", "some", "marked"]), w(Ox, 0.25, 0.55, ["very low", "low", "near normal"]), w(Stiff, 0.45, 0.7, ["low", "raised", "high"]), w(Fib, 0.25, 0.6, ["low", "some", "marked"])];
+  return { phase: level, cause, prone, lpv, Leak, Fluid, Neut, Fib, Sh, Ox, Stiff, Comp, Hyal, Surf, words, readout: "oedema " + words[0] + " · oxygen " + words[1] + " · stiffness " + words[2] + " · fibrosis " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* ARDS scene: injured alveolar capillary barrier, protein rich oedema, hyaline membranes, neutrophils, shunt, stiff lung and fibrosis. */
+const layers = { cells: $("cellsG"), coll: $("collG"), rbcs: $("rbcsG"), parts: $("parts"), over: $("over"), panel: $("panel"), surf: $("surfG"), fluid: $("fluidEl"), hyal: $("hyal"), air: $("alvAir"), outer: $("alvOuter"), mini: $("miniLung"), cap: $("capLumen") };
+/* ---- epithelial cells around the alveolus ---- */
+const epi = [];
+function initEpi() { for (let i = 0; i < 16; i++) { const t = (i / 16) * 6.283, g = cell(layers.cells, { cls: i % 4 === 0 ? "type2" : "epi", r: i % 4 === 0 ? 10 : 8, nuc: 0.4, seed: i + 3, wob: 0.1 }); epi.push({ g, t, type2: i % 4 === 0 }); } }
+/* ---- endothelium along the capillary ---- */
+const endo = [];
+function initEndo() { for (let i = 0; i < 12; i++) { const x = 348 + i * 24; [325, 359].forEach((y, r) => { const g = cell(layers.cells, { cls: "endo", r: 7, nuc: 0.3, seed: i + r * 20, wob: 0.08, n: 8 }); endo.push({ g, x, y }); }); } }
+/* ---- surfactant dots on the inner alveolar surface ---- */
+const surfDots = [];
+function initSurf() { for (let i = 0; i < 14; i++) { const t = (i / 14) * 6.283; surfDots.push(mk("circle", { class: "ards-surf", r: 2.4, cx: f1(480 + Math.cos(t) * 126), cy: f1(225 + Math.sin(t) * 74) }, layers.surf)); } }
+/* ---- collagen strands and fibroblasts in the interstitium ---- */
+const colls = [];
+function initColl() { for (let i = 0; i < 12; i++) { const t = (i / 12) * 6.283, x = 480 + Math.cos(t) * 155, y = 225 + Math.sin(t) * 101; const p = mk("path", { class: "ards-coll", d: "M" + f1(x - 12) + " " + f1(y) + "Q" + f1(x) + " " + f1(y - 6) + " " + f1(x + 12) + " " + f1(y) }, layers.coll); colls.push(p); } }
+const fibros = Array.from({ length: 5 }, (_, i) => { const g = cell(layers.cells, { cls: "fibro", r: 9, nuc: 0.4, seed: i + 30, wob: 0.14 }); const t = 0.6 + i * 1.1; return { g, x: 480 + Math.cos(t) * 155, y: 225 + Math.sin(t) * 101 }; });
+/* ---- neutrophils that leave the capillary for the alveolus ---- */
+const neus = Array.from({ length: 6 }, (_, i) => ({ g: cell(layers.cells, { cls: "neut", r: 10, nuc: 0.55, nucCls: "multi", seed: i + 50, wob: 0.14 }), x: 360 + i * 40, y: 342, tx: 390 + i * 32, ty: 245 + (i % 3) * 22, ph: i * 1.3 }));
+/* ---- red cells in the capillary and in shunted blood ---- */
+const rbcs = Array.from({ length: 14 }, (_, i) => { const g = mk("g", { class: "cl cl-rbc" }, layers.rbcs); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); return { g, x: 330 + i * 22, y: rnd(-8, 8), v: rnd(0.8, 1.2) }; });
+const shuntRbcs = Array.from({ length: 6 }, (_, i) => { const e = mk("ellipse", { rx: 7, ry: 4.2, fill: "#4a3560", stroke: "#2c1e3e", "stroke-width": 0.7 }, layers.rbcs); return { e, x: 728 + i * 28, y: 304 + rnd(-5, 5) }; });
+/* ---- particle pools ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const prots = pool(28, () => mk("circle", { class: "sc-p p-prot", r: 2.6 }, layers.parts));
+const airs = pool(18, () => mk("circle", { class: "sc-p p-air2", r: 2.8 }, layers.parts));
+const injs = pool(12, () => mk("path", { class: "sc-p p-inj", d: "M0 -3L3 0L0 3L-3 0Z" }, layers.parts));
+const freeP = (pl) => pl.find((p) => !p.on);
+function emitP(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* ---- labels and gauges ---- */
+const gg = {};
+function initPanel() {
+  const P = layers.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The lung injury";
+  [["oed", "Oedema", "g-oed", "Protein rich fluid in the alveolus. It floods the air space, blocks gas exchange and washes out surfactant."], ["neut", "Neutrophils", "g-neut", "Neutrophils drawn into the injured lung. They help defence but their products add to epithelial and endothelial damage."], ["shunt", "Shunt", "g-shunt", "Blood that passes flooded or collapsed alveoli without picking up oxygen. It mixes with oxygenated blood and lowers arterial oxygen."], ["oxy", "Oxygen", "g-oxy", "Oxygen in the blood. It stays low in shunt even when more oxygen is given, which is refractory hypoxaemia."], ["stiff", "Stiffness", "g-stiff", "How stiff the lung is. Flooded, collapsed and later fibrotic lung needs more pressure for the same breath, so compliance is low."], ["fib", "Fibrosis", "g-fib", "Collagen laid down in the interstitial space in the later fibrotic phase. It thickens the barrier and keeps the lung stiff."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const ox = layers.over;
+  pill(ox, "Direct injury", 105, 120, 110, 92, "Direct injury from the air side, for example pneumonia or aspiration, hits the alveolar epithelium first.");
+  pill(ox, "Indirect injury", 105, 310, 110, 370, "Indirect injury from the blood side, for example a severe systemic infection or pancreatitis, hits the capillary endothelium first.");
+  pill(ox, "Epithelium", 375, 155, 270, 92, "Alveolar epithelium: the thin lining of the air sac. Type I cells form most of the surface and type II cells make surfactant and can grow to repair it.");
+  pill(ox, "Airway", 480, 85, 430, 92, "Airway: brings air to the alveolus. In a stiff, flooded lung each breath moves less air for the same pressure.");
+  pill(ox, "Hyaline membrane", 575, 165, 570, 92, "Hyaline membrane: protein and cell debris plastered on the injured alveolar wall in the exudative phase. It thickens the barrier to gas exchange.");
+  pill(ox, "Alveolar fluid", 530, 285, 770, 92, "Alveolar fluid: protein rich oedema that has leaked through the damaged epithelial and endothelial barrier and flooded the air space.");
+  pill(ox, "Neutrophil", 410, 260, 210, 225, "Neutrophil: a white cell that leaves the capillary and enters the alveolus during the exudative phase, adding to barrier injury.");
+  pill(ox, "Stiff lung", 800, 175, 800, 140, "Stiff lung: the small lung drawing barely expands with each breath when compliance is low, in flooding early and in fibrosis later.");
+  pill(ox, "Shunted blood", 810, 304, 800, 350, "Shunted blood: dark, oxygen poor blood that has passed flooded alveoli without gas exchange and mixes into the arterial blood.");
+  pill(ox, "Surfactant loss", 450, 295, 380, 382, "Surfactant loss: surfactant is washed out and not replaced when type II cells are injured, so alveoli collapse more easily and the lung stiffens.");
+  pill(ox, "Capillary", 480, 342, 550, 382, "Pulmonary capillary: blood flowing past the alveolus. When the alveolus is flooded this blood leaves still oxygen poor.");
+  pill(ox, "Endothelium", 600, 328, 680, 382, "Capillary endothelium: the vessel lining. When it is injured the barrier leaks protein rich fluid toward the alveolus.");
+}
+const sm = { Leak: 0.8, Fluid: 0.8, Neut: 0.8, Fib: 0.1, Sh: 0.8, Ox: 0.2, Stiff: 0.7, Comp: 0.3, Hyal: 0.8, Surf: 0.2, prone: 0, lpv: 0, cause: 0, phase: 0 };
+const acc = { prot: 0, air: 0, inj: 0 };
+function init() { initEpi(); initEndo(); initSurf(); initColl(); initPanel(); }
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
+  ["Leak", "Fluid", "Neut", "Fib", "Sh", "Ox", "Stiff", "Comp", "Hyal", "Surf"].forEach((n) => { sm[n] = lerp(sm[n], m[n], k2); });
+  sm.prone = lerp(sm.prone, m.prone, k1); sm.lpv = lerp(sm.lpv, m.lpv, k1); sm.cause = lerp(sm.cause, m.cause, k1); sm.phase = m.phase;
+  const breath = 0.5 - 0.5 * Math.cos(tm * 0.0016), amp = sm.Comp * (1 - 0.4 * sm.lpv);
+  const orx = 165 * (1 + 0.05 * breath * amp), ory = 110 * (1 + 0.07 * breath * amp), arx = 145 * (1 + 0.05 * breath * amp), ary = 92 * (1 + 0.07 * breath * amp);
+  layers.outer.setAttribute("rx", f1(orx)); layers.outer.setAttribute("ry", f1(ory));
+  layers.air.setAttribute("rx", f1(arx)); layers.air.setAttribute("ry", f1(ary));
+  layers.hyal.setAttribute("rx", f1(arx - 9)); layers.hyal.setAttribute("ry", f1(ary - 8)); layers.hyal.setAttribute("opacity", (0.85 * sm.Hyal).toFixed(2));
+  layers.fluid.setAttribute("opacity", (0.6 * sm.Fluid).toFixed(2)); layers.fluid.setAttribute("ry", f1(14 + 26 * sm.Fluid)); layers.fluid.setAttribute("cy", f1(296 - 18 * sm.Fluid));
+  layers.mini.setAttribute("rx", f1(58 * (1 + 0.09 * breath * amp))); layers.mini.setAttribute("ry", f1(42 * (1 + 0.11 * breath * amp)));
+  /* epithelium: gaps when damaged, type II growth in the proliferative phase */
+  epi.forEach((e) => { const x = 480 + Math.cos(e.t) * arx, y = 225 + Math.sin(e.t) * ary; const dmg = sm.phase === 0 ? 0.62 : sm.phase === 1 ? (e.type2 ? 1.35 : 0.95) : 0.85; place(e.g, x, y, 0, dmg); e.g.style.opacity = sm.phase === 0 ? "0.75" : "1"; });
+  endo.forEach((e) => place(e.g, e.x, e.y, 0, 1 - 0.22 * sm.Leak));
+  surfDots.forEach((d, i) => { const t = (i / 14) * 6.283; d.setAttribute("cx", f1(480 + Math.cos(t) * (arx - 19))); d.setAttribute("cy", f1(225 + Math.sin(t) * (ary - 18))); d.setAttribute("opacity", (0.15 + 0.85 * sm.Surf).toFixed(2)); });
+  colls.forEach((c) => c.setAttribute("opacity", (0.9 * sm.Fib).toFixed(2)));
+  fibros.forEach((f) => { place(f.g, f.x, f.y, 0, 0.25 + 0.75 * sm.Fib); f.g.style.opacity = sm.Fib > 0.12 ? "1" : "0"; });
+  /* neutrophils cross from capillary into the alveolus */
+  const nn = Math.round(sm.Neut * neus.length);
+  neus.forEach((n, i) => { const on = i < nn, f = on ? clamp((sm.Neut * neus.length - i)) : 0; const cx = lerp(n.x, n.tx, 0.5 + 0.5 * Math.sin(tm / 1400 + n.ph)), cy = lerp(n.y, n.ty, on ? 0.55 + 0.2 * Math.sin(tm / 900 + n.ph) : 0); place(n.g, clamp(cx, 350, 610), clamp(cy, 190, 345), Math.sin(tm / 400 + i) * 10, 0.4 + 0.6 * f); n.g.style.opacity = on ? "1" : "0"; });
+  /* red cells: flow slows and colour stays dark when shunt is high */
+  rbcs.forEach((r) => { r.x += r.v * 52 * (0.35 + 0.65 * sm.Ox) * dt; if (r.x > 634) { r.x = 326; r.y = rnd(-8, 8); } place(r.g, clamp(r.x, 326, 634), clamp(342 + r.y, 332, 352), 0, 1); r.g.style.opacity = "1"; });
+  shuntRbcs.forEach((r, i) => { r.x += 34 * dt; if (r.x > 904) r.x = 724; r.e.setAttribute("cx", f1(clamp(r.x, 724, 904))); r.e.setAttribute("cy", f1(clamp(r.y, 294, 314))); r.e.setAttribute("opacity", (0.25 + 0.75 * sm.Sh).toFixed(2)); });
+  /* protein leak: dots rise from the capillary into the alveolus */
+  acc.prot += dt * sm.Leak * 11; while (acc.prot >= 1) { acc.prot--; const p = freeP(prots); if (p) emitP(p, rnd(370, 590), 322, rnd(-5, 5), -rnd(18, 30), 0); }
+  prots.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 352, 608); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y < 195 || p.t > 4) killP(p); });
+  /* air: enters down the airway, less when the lung is stiff, steadier with lung-protective ventilation */
+  acc.air += dt * (2 + 7 * sm.Comp) * (sm.lpv ? 0.8 : 1); while (acc.air >= 1) { acc.air--; const p = freeP(airs); if (p) emitP(p, 480 + rnd(-5, 5), 76, rnd(-3, 3), rnd(30, 44), 0); }
+  airs.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt + Math.sin(tm / 300 + p.y) * 0.25, 360, 600); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 285 || p.t > 4) killP(p); });
+  /* injury signals from the two injury nodes toward the barrier */
+  acc.inj += dt * (0.6 + 3.4 * sm.Leak); while (acc.inj >= 1) { acc.inj--; const p = freeP(injs), top = Math.random() < 0.5; if (p) emitP(p, 143, top ? 145 : 285, rnd(26, 36), top ? rnd(6, 12) : rnd(0, 6), top ? 0 : 1); }
+  injs.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 40, 330); p.y = clamp(p.y + p.vy * dt, 90, 320); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.x > 325 || p.t > 6) killP(p); });
+  /* gauges */
+  gg.oed.set(sm.Fluid, wordOf(sm.Fluid, 0.35, 0.65, ["little", "some", "marked"])); gg.neut.set(sm.Neut, wordOf(sm.Neut, 0.3, 0.6, ["few", "some", "many"])); gg.shunt.set(sm.Sh, wordOf(sm.Sh, 0.3, 0.6, ["low", "raised", "high"]));
+  gg.oxy.set(sm.Ox, wordOf(sm.Ox, 0.25, 0.55, ["very low", "low", "near normal"])); gg.stiff.set(sm.Stiff, wordOf(sm.Stiff, 0.45, 0.7, ["low", "raised", "high"])); gg.fib.set(sm.Fib, wordOf(sm.Fib, 0.25, 0.6, ["low", "some", "marked"]));
+}
+run({ init, step });
+</script></body></html>

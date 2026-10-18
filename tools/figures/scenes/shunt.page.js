@@ -5,37 +5,37 @@ function head(parent, x, y, ang, col) { const p = mk("path", { d: "M0 0L-8 -4.5L
 /* ---- vessels (drawn under the heart so their in-heart segments are hidden) ---- */
 const V = {};
 function vessel(id, pts, col, w) { const d = pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(""), e = mk("path", { class: "sh-vessel", d, stroke: col, "stroke-width": w }, L.vessels); V[id] = e; return e; }
-vessel("pa", [[550, 342], [575, 298], [575, 168], [478, 162], [398, 138]], "var(--c-cyt2)", 9);
-vessel("pab", [[478, 162], [562, 138]], "var(--c-cyt2)", 8);
-vessel("pvL", [[398, 142], [400, 175], [414, 202]], "var(--c-rbc)", 7);
-vessel("pvR", [[562, 142], [545, 172], [460, 202]], "var(--c-rbc)", 7);
-vessel("ao", [[410, 342], [395, 298], [392, 215], [410, 160], [478, 138], [600, 150], [652, 215], [652, 398], [630, 408]], "var(--c-rbc)", 9);
-vessel("vein", [[430, 398], [300, 385], [300, 246], [492, 246]], "var(--c-cyt2)", 8);
-const ductPath = mk("path", { class: "sh-duct", d: "M478 138L478 162" }, L.vessels);
-head(L.vessels, 398, 138, -155, "var(--c-cyt2)"); head(L.vessels, 562, 138, -25, "var(--c-cyt2)");
-head(L.vessels, 414, 202, 90, "var(--c-rbc)"); head(L.vessels, 630, 408, 160, "var(--c-rbc)"); head(L.vessels, 492, 246, 0, "var(--c-cyt2)");
+vessel("pa", [[595, 340], [595, 125], [398, 125]], "var(--c-cyt2)", 9);
+vessel("pab", [[595, 125], [595, 98]], "var(--c-cyt2)", 8);
+vessel("pvL", [[390, 142], [430, 175], [462, 202]], "var(--c-rbc)", 7);
+vessel("pvR", [[540, 142], [505, 175], [462, 202]], "var(--c-rbc)", 7);
+vessel("ao", [[366, 362], [366, 202], [320, 185], [310, 168], [310, 62], [700, 62], [700, 420], [630, 420]], "var(--c-rbc)", 9);
+vessel("vein", [[430, 420], [300, 385], [300, 266], [492, 266]], "var(--c-cyt2)", 8);
+const ductPath = mk("path", { class: "sh-duct", d: "M480 62L480 125" }, L.vessels);
+head(L.vessels, 398, 125, 180, "var(--c-cyt2)"); head(L.vessels, 595, 98, -90, "var(--c-cyt2)");
+head(L.vessels, 462, 202, 80, "var(--c-rbc)"); head(L.vessels, 632, 420, 180, "var(--c-rbc)"); head(L.vessels, 492, 266, 0, "var(--c-cyt2)");
 /* stenosis mark at the right ventricular outlet (tetralogy) */
 const sten = mk("g", { class: "hot", tabindex: "0", "data-info": "Narrowed pulmonary outlet in tetralogy of Fallot: blood leaving the right ventricle meets resistance, so it crosses the ventricular septal defect into the aorta instead." }, L.marks);
-mk("path", { class: "sh-sten", d: "M566 282L584 290L566 298Z" }, sten); mk("path", { class: "sh-sten", d: "M584 282L566 290L584 298Z" }, sten);
+mk("path", { class: "sh-sten", d: "M577 282L597 290L577 298Z" }, sten); mk("path", { class: "sh-sten", d: "M597 282L577 290L597 298Z" }, sten);
 /* close mark and note */
 const closeG = mk("g", { opacity: "0" }, L.marks);
 mk("circle", { class: "sh-x", r: 9 }, closeG); mk("path", { class: "sh-xx", d: "M-4 -4l8 8M4 -4l-8 8" }, closeG);
-const closeNote = mk("text", { class: "sh-note", x: 480, y: 184, "text-anchor": "middle", opacity: "0" }, L.marks); closeNote.textContent = "defect closed";
+const closeNote = mk("text", { class: "sh-note", x: 175, y: 155, "text-anchor": "middle", opacity: "0" }, L.marks); closeNote.textContent = "defect closed";
 /* ---- circuit particles ---- */
 const SEGS = [
-  { pts: [[430, 413], [300, 385], [300, 246], [492, 246], [550, 246]], kind: "deoxy", flow: "Qs" },
-  { pts: [[550, 246], [550, 342]], kind: "deoxy", flow: "Qs" },
-  { pts: [[550, 342], [575, 298], [575, 168], [478, 162], [398, 138]], kind: "pa", flow: "Qp" },
-  { pts: [[398, 138], [400, 175], [414, 202], [410, 246]], kind: "oxy", flow: "Qp" },
-  { pts: [[410, 246], [410, 342]], kind: "oxy", flow: "Qs" },
-  { pts: [[410, 342], [395, 298], [392, 215], [410, 160], [478, 138], [600, 150], [652, 215], [652, 398], [620, 413], [540, 413]], kind: "art", flow: "Qs" },
-  { pts: [[540, 413], [490, 413]], kind: "art", flow: "Qs" },
-  { pts: [[490, 413], [430, 413]], kind: "deoxy", flow: "Qs" },
+  { pts: [[430, 420], [300, 385], [300, 266], [594, 266]], kind: "deoxy", flow: "Qs" },
+  { pts: [[594, 266], [594, 362]], kind: "deoxy", flow: "Qs" },
+  { pts: [[604, 362], [604, 310], [595, 300], [595, 125], [390, 125]], kind: "pa", flow: "Qp" },
+  { pts: [[390, 142], [430, 175], [462, 210], [462, 266], [356, 266]], kind: "oxy", flow: "Qp" },
+  { pts: [[356, 266], [356, 362]], kind: "oxy", flow: "Qs" },
+  { pts: [[366, 362], [366, 202], [320, 185], [310, 168], [310, 62], [700, 62], [700, 420], [630, 420], [540, 420]], kind: "art", flow: "Qs" },
+  { pts: [[540, 420], [490, 420]], kind: "art", flow: "Qs" },
+  { pts: [[490, 420], [430, 420]], kind: "deoxy", flow: "Qs" },
 ];
 SEGS.forEach((s) => { s.tr = track(s.pts); });
 const dots = Array.from({ length: 26 }, (_, i) => { const e = mk("circle", { class: "p-blood", r: 3.2 }, L.flow); const seg = i % SEGS.length; return { e, seg, d: (i * 37) % Math.max(20, SEGS[seg].tr.len), sp: rnd(0.85, 1.15) }; });
 /* ---- shunt particles ---- */
-const SHROUTES = { ASD: [[410, 246], [550, 246]], VSD: [[410, 342], [550, 342]], PDA: [[478, 138], [478, 162]] };
+const SHROUTES = { ASD: [[400, 266], [560, 266]], VSD: [[400, 362], [560, 362]], PDA: [[480, 62], [480, 125]] };
 const shDots = Array.from({ length: 12 }, (_, i) => { const e = mk("circle", { class: "p-blood", r: 2.8, opacity: "0" }, L.shuntflow); return { e, u: i / 12, duct: i >= 8 }; });
 /* ---- labels ---- */
 const pillRefs = {};
@@ -46,15 +46,15 @@ function initPanel() {
   [["qp", "Pulm. flow", "g-pulm", "How much blood flows through the lungs. Left to right shunts raise it; tetralogy and Eisenmenger physiology lower effective flow."], ["pap", "Pulm. pressure", "g-press", "Pressure in the pulmonary artery. It rises with large left to right shunts and is very high in Eisenmenger physiology."], ["sat", "Saturation", "g-good", "Oxygen saturation of blood reaching the body. It falls when oxygen poor blood shunts right to left, causing cyanosis."], ["qs", "Body flow", "g-fl", "How much blood reaches the body tissues. It can fall if a needed relief shunt is closed in Eisenmenger physiology."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h, 18, cls, name, tip); });
   const ox = L.over;
-  pillRefs.lungs = pill(ox, "Lungs", 390, 95, 170, 100, "Lungs: blood picks up oxygen here. Extra shunt flow overloads them; too little flow leaves blood poorly oxygenated.");
-  pillRefs.pa = pill(ox, "Pulm. artery", 500, 162, 170, 160, "Pulmonary artery: carries blood from the right ventricle to the lungs. A patent ductus joins it to the aorta.");
-  pillRefs.ao = pill(ox, "Aorta", 560, 142, 790, 160, "Aorta: carries blood from the left ventricle to the body. Its saturation sets the saturation gauge.");
-  pillRefs.duct = pill(ox, "Ductus", 478, 150, 480, 58, "Ductus arteriosus: a fetal channel between the aorta and pulmonary artery. When it stays open after birth (patent ductus) blood shunts between them. Prostaglandin keeps it open.");
-  pillRefs.asd = pill(ox, "ASD", 480, 246, 185, 232, "Atrial septal defect: a hole between the atria. Blood usually shunts left to right into the right heart and lungs.");
-  pillRefs.vsd = pill(ox, "VSD", 480, 342, 185, 300, "Ventricular septal defect: a hole between the ventricles. In tetralogy and Eisenmenger physiology blood shunts right to left through it.");
-  pillRefs.vein = pill(ox, "Veins", 300, 320, 170, 360, "Systemic veins: return oxygen poor blood from the body to the right atrium.");
-  pillRefs.outlet = pill(ox, "Narrowed outlet", 575, 290, 790, 235, "Narrowed pulmonary outlet in tetralogy of Fallot: resistance here drives the right to left shunt and limits lung flow.");
-  pillRefs.body = pill(ox, "Body", 630, 413, 790, 410, "Body tissues: use oxygen and return oxygen poor blood. Blue colour means cyanosis.");
+  pillRefs.lungs = pill(ox, "Lungs", 605, 115, 640, 158, "Lungs: blood picks up oxygen here. Extra shunt flow overloads them; too little flow leaves blood poorly oxygenated.");
+  pillRefs.pa = pill(ox, "Pulm. artery", 460, 125, 240, 175, "Pulmonary artery: carries blood from the right ventricle to the lungs. A patent ductus joins it to the aorta.");
+  pillRefs.ao = pill(ox, "Aorta", 310, 100, 195, 78, "Aorta: carries blood from the left ventricle to the body. Its saturation sets the saturation gauge.");
+  pillRefs.duct = pill(ox, "Ductus", 480, 93, 480, 148, "Ductus arteriosus: a fetal channel between the aorta and pulmonary artery. When it stays open after birth (patent ductus) blood shunts between them. Prostaglandin keeps it open.");
+  pillRefs.asd = pill(ox, "ASD", 480, 266, 185, 232, "Atrial septal defect: a hole between the atria. Blood usually shunts left to right into the right heart and lungs.");
+  pillRefs.vsd = pill(ox, "VSD", 480, 362, 185, 305, "Ventricular septal defect: a hole between the ventricles. In tetralogy and Eisenmenger physiology blood shunts right to left through it.");
+  pillRefs.vein = pill(ox, "Veins", 300, 320, 170, 362, "Systemic veins: return oxygen poor blood from the body to the right atrium.");
+  pillRefs.outlet = pill(ox, "Narrowed outlet", 587, 290, 790, 235, "Narrowed pulmonary outlet in tetralogy of Fallot: resistance here drives the right to left shunt and limits lung flow.");
+  pillRefs.body = pill(ox, "Body", 630, 420, 790, 410, "Body tissues: use oxygen and return oxygen poor blood. Blue colour means cyanosis.");
 }
 const gg = {};
 const sm = { Qp: 0.6, Qs: 0.7, PAP: 0.4, satArt: 0.9, satR: 0.3, satPA: 0.3, satL: 0.9, cyan: 0.1, shunt: 0.5, mag: 0.5, closed: 0, ductOpen: 0, obstruct: 0, rvLoad: 0.4 };
@@ -86,7 +86,7 @@ function step(dt, m) {
   const isASD = m.defect === "ASD", showHole = sm.closed < 0.5;
   $("defASD").style.opacity = isASD && showHole ? "1" : "0";
   $("defVSD").style.opacity = !isASD && m.level !== 2 && showHole ? "1" : "0";
-  const cpos = m.level === 0 ? [480, 246] : m.level === 2 ? [478, 150] : [480, 342];
+  const cpos = m.level === 0 ? [480, 266] : m.level === 2 ? [480, 93] : [480, 362];
   closeG.setAttribute("transform", "translate(" + cpos[0] + " " + cpos[1] + ")"); closeG.setAttribute("opacity", sm.closed.toFixed(2));
   closeNote.setAttribute("opacity", sm.closed.toFixed(2));
   pillRefs.asd.style.opacity = m.level === 0 ? "1" : "0.18";
