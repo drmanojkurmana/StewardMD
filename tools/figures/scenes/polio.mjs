@@ -15,11 +15,11 @@ const MD = {
   settings: [
     { label: "no prevention or support" },
     { label: "supportive care" },
-    { label: "vaccine prevention" },
     { label: "ventilation (breathing support)" },
+    { label: "vaccine prevention" },
   ],
   status: "Stage: {level} · {drug} ·",
-  drugNames: ["no prevention or support", "supportive care", "vaccine prevention", "ventilation"],
+  drugNames: ["no prevention or support", "supportive care", "ventilation", "vaccine prevention"],
 };
 function modelOf(S, level, drug) {
   const STAGE = [
@@ -28,12 +28,12 @@ function modelOf(S, level, drug) {
     { g: 0.08, v: 0.04, n: 0.90, p: 0.75, r: 0.45, at: 0.90 }
   ];
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const s = STAGE[level], vacc = drug === 2 ? 1 : 0, sup = drug === 1 ? 1 : 0, vent = drug === 3 ? 1 : 0;
+  const s = STAGE[level], vacc = drug === 3 ? 1 : 0, sup = drug === 1 ? 1 : 0, vent = drug === 2 ? 1 : 0;
   const G = cl(s.g * (vacc ? 0.2 : 1));
   const V = cl(s.v * (vacc ? 0.15 : 1));
   const N = cl(s.n * (vacc ? 0.1 : 1));
   const P = cl(s.p * (vacc ? 0.1 : 1) * (sup ? 0.85 : 1));
-  const R = cl(s.r * (vacc ? 0.1 : 1) * (sup ? 0.75 : 1) * (vent ? 0.25 : 1));
+  const R = cl(s.r * (vacc ? 0.1 : 1) * (sup ? 0.5 : 1) * (vent ? 0.25 : 1));
   const At = cl(s.at * (vacc ? 0.15 : 1));
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(G, 0.25, 0.65, ["cleared", "present", "high"]), w(V, 0.2, 0.45, ["none", "low", "present"]), w(N, 0.3, 0.65, ["low", "some", "high"]), w(P, 0.25, 0.6, ["none", "some", "severe"]), w(R, 0.25, 0.5, ["ok", "strained", "failing"])];
@@ -42,28 +42,24 @@ function modelOf(S, level, drug) {
 const TESTS = [
   [0, 0, "gut virus high · viraemia present · neuron loss low · paralysis none · breathing ok"],
   [1, 0, "gut virus present · viraemia low · neuron loss high · paralysis severe · breathing failing"],
-  [1, 2, "gut virus cleared · viraemia none · neuron loss low · paralysis none · breathing ok"],
+  [1, 1, "gut virus present · viraemia low · neuron loss high · paralysis severe · breathing strained"],
+  [1, 3, "gut virus cleared · viraemia none · neuron loss low · paralysis none · breathing ok"],
   [2, 0, "gut virus cleared · viraemia none · neuron loss high · paralysis severe · breathing strained"],
-  [1, 3, "gut virus present · viraemia low · neuron loss high · paralysis severe · breathing ok"],
+  [2, 1, "gut virus cleared · viraemia none · neuron loss high · paralysis severe · breathing ok"],
+  [1, 2, "gut virus present · viraemia low · neuron loss high · paralysis severe · breathing ok"],
 ];
 
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <rect class="po-node po-gut" x="36" y="92" width="196" height="168" rx="16"/>
-<rect class="po-node po-blood" x="268" y="132" width="188" height="96" rx="48"/>
+<rect class="po-node po-blood" x="268" y="92" width="188" height="168" rx="16"/>
 <rect class="po-node po-cord" x="492" y="92" width="168" height="220" rx="24"/>
 <rect class="po-node po-muscle" x="696" y="92" width="224" height="130" rx="16"/>
-<rect class="po-node po-breath" x="696" y="256" width="224" height="142" rx="16"/>
-<path class="po-axon" d="M640 190C680 175 700 160 730 155M640 250C680 245 700 220 730 205"/>
-<path class="po-axon" d="M610 130C650 95 690 82 740 78" opacity="0"/>
-<text class="sc-zone" x="48" y="112">GUT</text>
-<text class="sc-zone" x="282" y="154">BLOOD</text>
-<text class="sc-zone" x="506" y="112">SPINAL CORD</text>
-<text class="sc-zone" x="710" y="112">MUSCLE</text>
-<text class="sc-zone" x="710" y="276">BRAINSTEM AND BREATHING</text>
-<rect class="po-lumen" x="50" y="126" width="168" height="52" rx="12"/>
-<ellipse class="po-follicle" cx="150" cy="224" rx="52" ry="26"/>
-<g id="gutparts"></g><g id="parts"></g><g id="neurons"></g><g id="muscle"></g><g id="lungs"></g><g id="over"></g><g id="panel"></g>`;
+<rect class="po-node po-breath" x="696" y="250" width="224" height="160" rx="16"/>
+<rect class="po-cordcol" x="542" y="100" width="56" height="200" rx="28"/>
+<path class="po-gray" d="M570 122 L570 278"/>
+<g id="gutSlot"></g><g id="bloodSlot"></g><g id="muscleSlot"></g><g id="brainSlot"></g><g id="lungSlot"></g>
+<g id="gutparts"></g><g id="parts"></g><g id="neurons"></g><g id="dyn"></g><g id="over"></g><g id="panel"></g>`;
 
 const extraCss = `
 .cl-mot{--cc:#e9b84a}.cl-vircell{--cc:var(--c-lymph)}
@@ -73,23 +69,25 @@ const extraCss = `
 .po-cord{fill:color-mix(in srgb,var(--c-neut) 20%,var(--anatomy-paper))}
 .po-muscle{fill:color-mix(in srgb,var(--c-rbc) 24%,var(--anatomy-paper))}
 .po-breath{fill:color-mix(in srgb,var(--c-fl) 18%,var(--anatomy-paper))}
-.po-lumen{fill:color-mix(in srgb,var(--c-fl) 16%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 45%,var(--anatomy-mid));stroke-width:1}
-.po-follicle{fill:color-mix(in srgb,var(--c-lymph) 35%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-lymph) 60%,#000);stroke-width:1}
-.po-axon{fill:none;stroke:var(--c-neut);stroke-width:2.2;stroke-linecap:round;opacity:.75}
-.po-fibre{fill:color-mix(in srgb,var(--c-rbc) 62%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.8}
-.po-lung{fill:color-mix(in srgb,var(--c-fl) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:1}
-.po-diaph{fill:none;stroke:var(--c-rbc);stroke-width:2.4;stroke-linecap:round}
+.po-cordcol{fill:color-mix(in srgb,var(--c-neut) 30%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:1}
+.po-gray{fill:none;stroke:color-mix(in srgb,var(--c-neut) 60%,#000);stroke-width:1.2;opacity:.6}
+.po-shield{fill:none;stroke:var(--c-good);stroke-width:2.5}
+.po-halo{fill:color-mix(in srgb,var(--c-good) 22%,transparent);stroke:var(--c-good);stroke-width:2}
+.po-splint{fill:color-mix(in srgb,var(--c-good) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-good) 60%,#000);stroke-width:1}
+.po-bglow{fill:var(--c-fl);stroke:none}
+.po-flow{fill:none;stroke:var(--c-fl);stroke-width:2;stroke-dasharray:5 4;stroke-linecap:round}
 .po-tube{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
-.po-cap{fill:var(--anatomy-text);font-size:10.5px;pointer-events:none}
+.po-diaph{fill:none;stroke:var(--c-rbc);stroke-width:2.4;stroke-linecap:round}
+.po-capline{fill:var(--anatomy-strong);font-size:12px}
 .p-virus{--cc:var(--c-bac)}.p-signal{--cc:var(--c-neut)}.p-air{--cc:var(--c-fl)}.p-ab{--cc:var(--c-ab)}
 .dr-g-fill.g-vir{fill:var(--c-bac)}.dr-g-fill.g-via{fill:#ff9a3d}.dr-g-fill.g-neur{fill:var(--c-neut)}.dr-g-fill.g-par{fill:var(--c-bad)}.dr-g-fill.g-resp{fill:var(--c-fl)}
 `;
 
 buildScene({
   id: "poliomyelitis", fig: "Fig 1", title: "Poliomyelitis: gut virus to flaccid paralysis", W, H, body, extraCss,
-  label: "An animated pathway for poliomyelitis. Poliovirus is swallowed by the faecal oral route, multiplies in gut lymphoid tissue, enters the blood as viraemia and invades anterior horn motor neurons in the spinal cord. Loss of those neurons causes asymmetric flaccid paralysis of muscle, and bulbar involvement can threaten swallowing and breathing. The level slider moves from infection to paralytic disease to post-polio change. Treatments are supportive care, vaccine prevention and ventilation. Gauges show gut virus, viraemia, neuron loss, paralysis and breathing trouble.",
+  label: "An animated pathway for poliomyelitis. Poliovirus is swallowed by the faecal oral route, multiplies in gut lymphoid tissue, enters the blood as viraemia and invades anterior horn motor neurons in the spinal cord. Loss of those neurons causes asymmetric flaccid paralysis of muscle, and bulbar involvement can threaten swallowing and breathing. The level slider moves from infection to paralytic disease to post-polio change. Treatments are supportive care, ventilation and vaccine prevention. Gauges show gut virus, viraemia, neuron loss, paralysis and breathing trouble.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, numbers or patient specific advice are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "polio.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "polio.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without prevention or support", withLabel: "With vaccine prevention",
   sourcesLis: [
     "<strong>How poliomyelitis develops.</strong> Poliovirus is an enterovirus spread mainly by the faecal oral route. It first multiplies in the throat and gut, including gut associated lymphoid tissue, then can enter the blood. In a minority the virus reaches the central nervous system and destroys anterior horn motor neurons in the spinal cord and motor nuclei in the brainstem. The clinical result is acute asymmetric flaccid paralysis with reduced tone and reflexes, often with intact sensation. Bulbar involvement can impair swallowing, the airway and breathing. This is standard teaching in medicine, neurology and infectious disease texts and was not checked against a linked source here, so it is flagged for review.",
