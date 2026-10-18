@@ -147,7 +147,7 @@
     var ev = {
       id: "ev-" + sess.seq,
       elapsed: Math.max(0, Math.floor(elapsed || 0)),
-      kind: kind, label: label || defaultLabel(kind), edited: false
+      kind: kind, label: label || defaultLabel(kind), edited: false, source: "phone"
     };
     sess.events.push(ev);
     if (kind === "rhythm") sess.cycleStart = ev.elapsed;
@@ -874,6 +874,73 @@
     return out;
   }
 
+  /* ---------------- native cues and watch link (pure) ---------------- */
+  var NATIVE_PHRASES = { rhythmSoon: "Rhythm check in ten seconds", rhythmDue: "Rhythm check. Switch compressor", epiDue: "Epinephrine due", epiOverdue: "Epinephrine overdue" };
+  function nativeCueSchedule(sess, elapsed, opts) {
+    opts = opts || {};
+    if (!sess || sess.training || opts.training || opts.paused || opts.rosc || sess.rosc) return [];
+    elapsed = Math.max(0, Number(elapsed) || 0);
+    var nowMs = (opts.nowMs != null ? Number(opts.nowMs) : Date.now());
+    var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, opts);
+    var interval = cyc.interval;
+    var headsUp = (opts.headsUpSec != null ? Number(opts.headsUpSec) : 30);
+    var cues = [];
+    function push(dueElapsed, speak, tone) {
+      if (!(dueElapsed > elapsed)) return;
+      var c = { atMs: Math.round(nowMs + (dueElapsed - elapsed) * 1000) };
+      if (speak) c.speak = speak; if (tone) c.tone = tone; cues.push(c);
+    }
+    for (var k = 0; k < 4; k++) {
+      var due = (sess.cycleStart || 0) + (k + 1) * interval;
+      if (headsUp > 0) push(due - headsUp, NATIVE_PHRASES.rhythmSoon, null);
+      push(due, NATIVE_PHRASES.rhythmDue, null);
+    }
+    var le = lastEpi(sess);
+    if (le) {
+      var dueS = EPI_DUE_S, overdueS = EPI_OVERDUE_S;
+      if (isFinite(Number(opts.epiIntervalMin))) { var mins = Math.max(3, Math.min(5, Number(opts.epiIntervalMin))); dueS = (mins - 1) * 60; overdueS = dueS + 120; }
+      push(le.elapsed + dueS, NATIVE_PHRASES.epiDue, null);
+      push(le.elapsed + overdueS, NATIVE_PHRASES.epiOverdue, "overdue");
+    }
+    cues.sort(function (a, b) { return a.atMs - b.atMs; });
+    return cues.slice(0, 64);
+  }
+  var WATCH_KINDS = ["cprStart", "shock", "drug", "pauseStart", "resume", "switchCompressor", "rosc", "cprEnd", "rhythm", "procedure", "reArrest", "note", "modeSet"];
+  function mapWatchEvent(e) {
+    if (!e || e.id == null || e.id === "") return null;
+    if (WATCH_KINDS.indexOf(e.kind) < 0) return null;
+    var id = String(e.id); if (id.indexOf("w-") !== 0) id = "w-" + id;
+    return { id: id, elapsed: Math.max(0, Math.floor(Number(e.elapsed) || 0)), kind: e.kind, label: String(e.label || defaultLabel(e.kind)).slice(0, 280), source: "watch", edited: false };
+  }
+  function mergeWatchEvents(sess, events) {
+    if (!sess || !Array.isArray(events)) return [];
+    var seen = {}; sess.events.forEach(function (e) { seen[e.id] = 1; });
+    var added = [];
+    events.map(mapWatchEvent).filter(Boolean).sort(function (a, b) { return a.elapsed - b.elapsed; }).forEach(function (ev) {
+      if (seen[ev.id]) return; seen[ev.id] = 1; sess.events.push(ev); added.push(ev);
+      if (ev.kind === "rosc") { sess.rosc = true; sess.hadRosc = true; }
+    });
+    if (added.length) { sess.events.sort(function (a, b) { return a.elapsed - b.elapsed; }); syncCycleStart(sess); }
+    return added;
+  }
+  function watchElapsed(state, nowMs) {
+    if (!state) return 0;
+    var base = Math.max(0, Number(state.elapsed) || 0);
+    var recv = Number(state.receivedAtMs);
+    var now = (nowMs != null ? Number(nowMs) : Date.now());
+    if (!isFinite(recv) || !isFinite(now)) return base;
+    return base + Math.max(0, (now - recv) / 1000);
+  }
+  function buildWatchSession(state, nowMs) {
+    var elapsed = watchElapsed(state, nowMs);
+    var now = (nowMs != null ? Number(nowMs) : Date.now());
+    var sess2 = newSession(state && state.mode, { wallNow: Math.round(now - elapsed * 1000) });
+    mergeWatchEvents(sess2, (state && state.events) || []);
+    sess2.seq = sess2.events.length;
+    if (state && state.rosc) { sess2.rosc = true; sess2.hadRosc = true; }
+    return { session: sess2, elapsed: elapsed };
+  }
+
   var _engine = {
     STORE_KEY: STORE_KEY, STALENESS_MS: STALENESS_MS,
     EPI_DUE_S: EPI_DUE_S, EPI_OVERDUE_S: EPI_OVERDUE_S,
@@ -901,6 +968,8 @@
     takeSnapshot: takeSnapshot, saveSnapshot: saveSnapshot,
     loadSnapshot: loadSnapshot, clearSnapshot: clearSnapshot,
     restoreSnapshot: restoreSnapshot, buildPayload: buildPayload,
+    nativeCueSchedule: nativeCueSchedule, mapWatchEvent: mapWatchEvent,
+    mergeWatchEvents: mergeWatchEvents, watchElapsed: watchElapsed, buildWatchSession: buildWatchSession,
     allCopySamples: allCopySamples
   };
 
@@ -920,6 +989,7 @@
   var logSeg = "log", logFilter = "all", endedPast = false;
   var notesAlgo = "arrest", settingsGroup = null, settingsQuery = "", logManualOpen = false;
   var notesBranch = "shockable", refSheetId = null;
+  var watchState = null, watchJoined = false, watchEndedPrompt = false, watchTimer = null, watchListening = false;
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
   function Audio() {
@@ -927,6 +997,79 @@
       if (typeof window !== "undefined" && window.CodeBlueAudio) return window.CodeBlueAudio;
     } catch (e) {}
     try { return require("./codeblue-audio.js"); } catch (e2) { return null; }
+  }
+
+  function WatchPlugin() {
+    try {
+      if (typeof window === "undefined" || !window.Capacitor) return null;
+      var C = window.Capacitor;
+      if (typeof C.isNativePlatform === "function" && !C.isNativePlatform()) return null;
+      return (C.Plugins && C.Plugins.WatchBridge) || null;
+    } catch (e) { return null; }
+  }
+  function nativeAudioActive() { var A = Audio(); try { return !!(A && A.nativeActive && A.nativeActive()); } catch (e) { return false; } }
+  function scheduleNativeCues() {
+    var A = Audio();
+    if (!A || !A.setCues || !sess || sess.training) return false;
+    try {
+      if (!A.nativeActive || !A.nativeActive()) return false;
+      if (view !== "running" || paused || sess.rosc) { A.setCues([]); return true; }
+      var o = engOpts();
+      return A.setCues(nativeCueSchedule(sess, nowElapsed(), { nowMs: Date.now(), intervalSec: o.intervalSec, headsUpSec: o.headsUpSec, epiIntervalMin: o.epiIntervalMin, paused: paused }));
+    } catch (e) { return false; }
+  }
+  function clearNativeCues() { var A = Audio(); try { if (A && A.setCues && A.nativeActive && A.nativeActive()) A.setCues([]); } catch (e) {} }
+  function watchLog(kind, label, energyJ) {
+    if (!watchJoined) return;
+    var p = WatchPlugin(); if (!p || !p.codeBlueLog) return;
+    try { var a = { kind: kind, label: label || "" }; if (energyJ != null) a.energyJ = energyJ; var r = p.codeBlueLog(a); if (r && r.catch) r.catch(function () {}); } catch (e) {}
+  }
+  function onWatchState(st) {
+    if (!st || typeof st !== "object") return;
+    watchState = st;
+    if (watchJoined && sess && view === "running") {
+      if (st.running) {
+        watchEndedPrompt = false;
+        var added = mergeWatchEvents(sess, st.events || []);
+        var target = watchElapsed(st, Date.now());
+        var drift = target - nowElapsed();
+        if (Math.abs(drift) > 2) { elapsedOffset += drift; }
+        if (added.length) { persist(); scheduleNativeCues(); }
+        render();
+      } else {
+        watchEndedPrompt = true;
+        render();
+      }
+      return;
+    }
+    if (isOpen() && view === "idle") render();
+  }
+  function ensureWatchLink() {
+    var p = WatchPlugin(); if (!p) return;
+    if (!watchListening && p.addListener) {
+      watchListening = true;
+      try { p.addListener("codeBlueState", onWatchState); } catch (e) {}
+    }
+    try { if (p.codeBlueGetState) { var r = p.codeBlueGetState(); if (r && r.then) r.then(onWatchState, function () {}); } } catch (e2) {}
+    if (!watchTimer) {
+      watchTimer = setInterval(function () {
+        if (isOpen() && view === "idle" && watchState && watchState.running && !watchState.rosc) render();
+      }, 1000);
+    }
+  }
+  function doJoinWatch(st) {
+    st = st || watchState; if (!st || !st.running) return false;
+    var built = buildWatchSession(st, Date.now());
+    sess = built.session;
+    sess.ventCue = prefVal("breathCue", true) !== false;
+    idleMode = sess.mode; idleTraining = false;
+    speed = 1; elapsedOffset = built.elapsed; runStartWall = Date.now();
+    paused = !!st.paused; fired = {}; storeError = false; exportState = null; rtab = "timer"; timelineOpen = false;
+    watchJoined = true; watchEndedPrompt = false; view = "running";
+    var A = Audio();
+    if (A) { try { var u = A.unlock(); A.ensureWakeLock(); if (u && u.then) u.then(function () { applyAudioPrefs(); scheduleNativeCues(); }, function () {}); } catch (e) {} }
+    applyAudioPrefs(); persist(); render(); startTick(); scheduleNativeCues();
+    return true;
   }
 
   function memStorage() {
@@ -1142,7 +1285,8 @@
       : '<span class="cbl-mode" aria-label="Mode">Code Blue</span>';
     var badge = (sess && sess.training) || (!sess && idleTraining)
       ? '<span class="cbl-badge">TRAINING</span>' : "";
-    return '<div class="cbl-status">' + modeChip + badge +
+    var watchChip = watchJoined ? '<span class="cbl-watchchip" data-state="watch-chip">Watch</span>' : "";
+    return '<div class="cbl-status">' + modeChip + badge + watchChip +
       '<button type="button" class="cbl-iconbtn" data-act="audio" aria-label="Sound settings">' +
       ICONS.sound + '<span>Sound</span></button>' +
       '<button type="button" class="cbl-iconbtn" data-cbp-settings aria-label="Display settings">' +
@@ -1183,11 +1327,19 @@
         '<div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="resume-yes">Resume</button>' +
         '<button type="button" class="cbl-btn" data-act="resume-no">Discard</button></div></div>';
     }
+    var joinCard = "";
+    if (watchState && watchState.running && !watchState.rosc) {
+      var wElapsed = watchElapsed(watchState, Date.now());
+      joinCard = '<div class="cbl-joincard" data-state="watch-join" role="group" aria-label="Watch code in progress">' +
+        "<p><b>Watch code in progress</b></p>" +
+        "<p>" + esc(fmtMMSS(wElapsed)) + ", " + esc(MODE_LABEL[normMode(watchState.mode)]) + "</p>" +
+        '<button type="button" class="cbl-btn cbl-primary" data-act="watch-join">Join</button></div>';
+    }
     return statusRow() +
       '<div class="cbl-scroll"><div class="cbl-idle" data-state="idle">' +
       "<h2 class='cbl-h'>Live code timer</h2>" +
       '<p class="cbl-disc">' + esc(DISCLAIMER) + "</p>" +
-      resume +
+      resume + joinCard +
       '<p class="cbl-label" id="cblModeLabel">Mode</p>' +
       '<div class="cbl-modes" role="group" aria-labelledby="cblModeLabel">' + modes + "</div>" +
       '<button type="button" class="cbl-practice' + (idleTraining ? " on" : "") +
@@ -1291,9 +1443,10 @@
     return rows.map(function (e) {
       var k = e.kind;
       var word = TL_WORD[k] || "LOG";
+      var src = e.source === "watch" ? '<span class="cbl-tlsrc">Watch</span>' : "";
       return '<li class="cbl-tlitem" data-k="' + esc(k) + '">' +
         '<span class="cbl-tltime">' + esc(fmtMMSS(e.elapsed)) + "</span>" +
-        '<span class="cbl-tllabel">' + esc(e.label) + "</span>" +
+        '<span class="cbl-tllabel">' + esc(e.label) + "</span>" + src +
         '<span class="cbl-tlword">' + esc(word) + "</span></li>";
     }).join("");
   }
@@ -1656,6 +1809,7 @@
       if (prefVal("metronome", true) === false) A.stopMetronome();
       else if (view === "running" && !paused && sess && !sess.training) A.startMetronome();
     } catch (e) {}
+    scheduleNativeCues();
   }
   function algoPrompts() {
     var elapsed = nowElapsed();
@@ -1855,14 +2009,14 @@
     var rows = "";
     if (group === "Patient and CPR") rows = sliderRow("compressionRate", "Compression rate", 100, 120, pref.compressionRate, 110, " per min") + '<p class="cbl-note">Mode: ' + esc(MODE_LABEL[sess.mode]) + ". Change mode from the idle screen.</p>";
     else if (group === "Rhythm check") rows = sliderRow("cycleMin", "CPR cycle length", 1, 3, pref.cycleMin, 2, " min") + sliderRow("autoResumeSec", "Auto-resume after pause", 3, 10, pref.autoResumeSec, 6, " s") + segRow("headsUpSec", "Rhythm check heads-up", [[0, "Off"], [10, "10 s"], [15, "15 s"], [30, "30 s"], [60, "60 s"]], pref.headsUpSec) + toggleRow("rhythmPictures", "Rhythm pictures", pref.rhythmPictures);
-    else if (group === "Voice and sound") rows = toggleRow("voice", "Voice prompts", pref.voice) + sliderRow("voiceSpeed", "Voice speed", 50, 150, pref.voiceSpeed, 100, "%") + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("breathCue", "Breath cue", pref.breathCue) + toggleRow("lowAlert", "Low alert", pref.lowAlert);
+    else if (group === "Voice and sound") rows = toggleRow("voice", "Voice prompts", pref.voice) + sliderRow("voiceSpeed", "Voice speed", 50, 150, pref.voiceSpeed, 100, "%") + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("breathCue", "Breath cue", pref.breathCue) + toggleRow("lowAlert", "Low alert", pref.lowAlert) + (nativeAudioActive() ? '<p class="cbl-note" data-state="native-audio-note">Cues continue with the screen locked</p>' : "");
     else if (group === "Medications") rows = sliderRow("epiIntervalMin", "Epinephrine reminder interval", 3, 5, pref.epiIntervalMin, 4, " min") + toggleRow("showAmio", "Show amiodarone button", pref.showAmio) + toggleRow("showLido", "Show lidocaine button", pref.showLido);
     else if (group === "Shock and airway") rows = toggleRow("shockSplit", "Split VF and pulseless VT", pref.shockSplit) + segRow("shockWaveform", "Shock waveform", ["biphasic", "monophasic"], pref.shockWaveform);
     else if (group === "Appearance") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-cbp-settings>Display settings (themes, text and UI size)</button></div>' + toggleRow("time24", "24-hour time", pref.time24) + '<p class="cbl-note">Theme, text size, UI size, reduced motion: use Display settings.</p>';
     else if (group === "Layout and buttons") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-cbp-settings>Reorder, hide and custom buttons</button><p class="cbl-setexplain">Use Display settings to reorder, hide or add custom buttons.</p></div>';
     else if (group === "Training") rows = toggleRow("training", "Training mode default", pref.training);
     else if (group === "Code history") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-act="past-clear">Delete all past codes</button></div>';
-    else if (group === "About and disclaimer") rows = '<div class="cbl-setcard"><p class="cbl-setexplain">' + esc(DISCLAIMER) + '</p><p class="cbl-setexplain">Stored on this device only.</p></div>';
+    else if (group === "About and disclaimer") rows = '<div class="cbl-setcard"><p class="cbl-setexplain">' + esc(DISCLAIMER) + '</p><p class="cbl-setexplain">Stored on this device only.</p></div>' + (WatchPlugin() ? '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-act="open-watch-cc">Open watch Command Center</button></div>' : "");
     return '<div class="cbl-setdetail" data-settings-detail="' + esc(group) + '"><button type="button" class="cbl-btn cbl-backbtn" data-act="settings-back">Back</button><h3 class="cbl-seth">' + esc(group) + "</h3>" + rows + "</div>";
   }
   function quickChip(id, label, icon, on) {
@@ -1906,7 +2060,10 @@
       : rtab === "notes" ? notesTabView()
       : rtab === "settings" ? settingsTabView()
       : timerTabView(elapsed);
-    return statusRow(true) + stripView(elapsed) +
+    var watchPrompt = watchEndedPrompt
+      ? '<div class="cbl-watchprompt" data-state="watch-ended" role="group" aria-label="Watch ended the code"><p>Watch ended the code. End here too?</p><div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="watch-end-yes">End</button><button type="button" class="cbl-btn" data-act="watch-end-no">Keep going</button></div></div>'
+      : "";
+    return statusRow(true) + stripView(elapsed) + watchPrompt +
       '<div class="cbl-runbody"><div class="cbl-maincol">' + panel + "</div>" +
       '<div class="cbl-tlscrim' + (timelineOpen ? " open" : "") + '" data-act="timeline-toggle"></div>' +
       timelineView() + "</div>" +
@@ -2127,6 +2284,7 @@
 
   function afterEvent(ev, speakKey) {
     persist();
+    scheduleNativeCues();
     var A = Audio();
     if (A && speakKey && !sess.training) {
       try { A.speak(speakKey); } catch (e) {}
@@ -2141,6 +2299,8 @@
 
   function fireCues(elapsed) {
     var A = Audio();
+    if (!A) return;
+    if (sess && !sess.training && nativeAudioActive()) return;
     if (!A || sess.training) {
       if (sess && sess.training) return;
     }
@@ -2239,7 +2399,9 @@
 
   function doStart() {
     var A = Audio();
-    if (A) { try { A.unlock(); A.ensureWakeLock(); } catch (e) {} }
+    var unlockRes = null;
+    if (A) { try { unlockRes = A.unlock(); A.ensureWakeLock(); } catch (e) {} }
+    watchJoined = false; watchEndedPrompt = false;
     sess = newSession(idleMode, { training: idleTraining });
     sess.ventCue = prefVal("breathCue", true) !== false;
     applyAudioPrefs();
@@ -2270,6 +2432,18 @@
     }
     startTick();
     notifyWatch(true);
+    scheduleNativeCues();
+    if (unlockRes && typeof unlockRes.then === "function") {
+      unlockRes.then(function () {
+        if (view !== "running" || !sess || sess.training) return;
+        try {
+          applyAudioPrefs();
+          var A2 = Audio();
+          if (A2) { var m2 = A2.mutes(); if (!m2.metronome && prefVal("metronome", true) !== false) A2.startMetronome(); }
+        } catch (e3) {}
+        scheduleNativeCues();
+      }, function () {});
+    }
   }
 
   function doPauseToggle() {
@@ -2281,6 +2455,7 @@
       logEvent(sess, "resume", null, elapsed);
       persist();
       render();
+      scheduleNativeCues();
     } else {
       elapsedOffset = elapsed;
       paused = true;
@@ -2288,6 +2463,7 @@
       logEvent(sess, "pauseStart", null, elapsedOffset);
       persist();
       render();
+      clearNativeCues();
       clearAutoResume();
       var autoSec = Number(prefVal("autoResumeSec", 6));
       if (isFinite(autoSec) && autoSec > 0) {
@@ -2315,6 +2491,8 @@
     }
     elapsedOffset = Math.floor(elapsed);
     view = "ended";
+    watchJoined = false; watchEndedPrompt = false;
+    clearNativeCues();
     endedPast = false;
     try {
       var pastPayload = buildPayload(sess, {
@@ -2397,12 +2575,17 @@
         render();
         startTick();
         notifyWatch(true);
+        scheduleNativeCues();
       } else {
         try { clearSnapshot(defaultStorage()); } catch (err2) {}
         render();
       }
       return;
     }
+    if (act === "watch-join") { doJoinWatch(); return; }
+    if (act === "watch-end-yes") { watchEndedPrompt = false; doEnd(false); return; }
+    if (act === "watch-end-no") { watchEndedPrompt = false; watchJoined = false; render(); return; }
+    if (act === "open-watch-cc") { var wp = WatchPlugin(); if (wp && wp.openCodeBlue) { try { var wr = wp.openCodeBlue(); if (wr && wr.catch) wr.catch(function () {}); } catch (eW) {} } return; }
     if (act === "resume-no") {
       pendingResume = null;
       try { clearSnapshot(defaultStorage()); } catch (err3) {}
@@ -2458,15 +2641,16 @@
       render();
       return;
     }
-    if (act === "tile-shock-vf") { afterEvent(logEvent(sess, "rhythm", "VF", elapsed), null); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); return; }
-    if (act === "tile-shock-vt") { afterEvent(logEvent(sess, "rhythm", "VT (pulseless)", elapsed), null); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); return; }
-    if (act === "tile-shock") { afterEvent(logEvent(sess, "shock", null, elapsed), "shockLogged"); return; }
+    if (act === "tile-shock-vf") { afterEvent(logEvent(sess, "rhythm", "VF", elapsed), null); watchLog("rhythm", "VF"); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); watchLog("shock", "Shock delivered"); return; }
+    if (act === "tile-shock-vt") { afterEvent(logEvent(sess, "rhythm", "VT (pulseless)", elapsed), null); watchLog("rhythm", "VT (pulseless)"); afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged"); watchLog("shock", "Shock delivered"); return; }
+    if (act === "tile-shock") { afterEvent(logEvent(sess, "shock", null, elapsed), "shockLogged"); watchLog("shock", "Shock delivered"); return; }
     if (act === "tile-epi" || act === "drug-epi") {
       afterEvent(logEvent(sess, "drug", "Epinephrine", elapsed), null);
+      watchLog("drug", "Epinephrine");
       return;
     }
-    if (act === "drug-amio") { afterEvent(logEvent(sess, "drug", "Amiodarone", elapsed), null); return; }
-    if (act === "drug-lido") { afterEvent(logEvent(sess, "drug", "Lidocaine", elapsed), null); return; }
+    if (act === "drug-amio") { afterEvent(logEvent(sess, "drug", "Amiodarone", elapsed), null); watchLog("drug", "Amiodarone"); return; }
+    if (act === "drug-lido") { afterEvent(logEvent(sess, "drug", "Lidocaine", elapsed), null); watchLog("drug", "Lidocaine"); return; }
     if (act === "tile-rhythm") { openRhythmSheet(); return; }
     if (act === "tile-pause" || act === "tile-paused") { doPauseToggle(); return; }
     if (act === "tile-rearrest") {
@@ -2495,6 +2679,8 @@
         sess.rosc = true;
         sess.hadRosc = true;
         afterEvent(logEvent(sess, "rosc", null, elapsed), "roscLogged");
+        watchLog("rosc", "ROSC");
+        clearNativeCues();
       }
       return;
     }
@@ -2511,6 +2697,7 @@
       var rl = el.getAttribute("data-label") || "Rhythm check";
       closeSheet();
       afterEvent(logEvent(sess, "rhythm", rl, nowElapsed()), null);
+      watchLog("rhythm", rl);
       return;
     }
     if (act === "note-add") {
@@ -2806,11 +2993,20 @@
       }
     } catch (e3) {}
     render();
+    ensureWatchLink();
+    if (opts.watchState) { onWatchState(opts.watchState); if (opts.join) doJoinWatch(opts.watchState); }
+    else if (opts.join && watchState && watchState.running) doJoinWatch(watchState);
+    else if (opts.join) {
+      var wp2 = WatchPlugin();
+      try { if (wp2 && wp2.codeBlueGetState) { var gr = wp2.codeBlueGetState(); if (gr && gr.then) gr.then(function (st) { onWatchState(st); if (st && st.running && !st.rosc && view === "idle") doJoinWatch(st); }, function () {}); } } catch (e4) {}
+    }
     return true;
   }
 
   function close() {
     stopTick();
+    if (watchTimer) { try { clearInterval(watchTimer); } catch (eW2) {} watchTimer = null; }
+    watchJoined = false; watchEndedPrompt = false;
     var A = Audio();
     if (A) { try { A.shutdown(); } catch (e) {} }
     if (rootEl) rootEl.classList.remove("on");
@@ -2838,6 +3034,10 @@
     setSettingsQuery: function (q) { settingsQuery = q; if (view === "running") render(); },
     notesBranch: function () { return notesBranch; },
     setNotesBranch: function (b) { notesBranch = b; if (view === "running") render(); },
+    watchState: function () { return watchState; },
+    setWatchState: function (st) { onWatchState(st); },
+    joinWatch: function (st) { return doJoinWatch(st); },
+    watchJoined: function () { return watchJoined; },
     link: function () { return (sess && sess.link) || pendingLink; },
     exportState: function () { return exportState; },
     elapsed: function () { return nowElapsed(); },

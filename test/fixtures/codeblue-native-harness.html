@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeBlue Native harness</title>
+<link rel="stylesheet" href="../../codeblue-live.css">
+<link rel="stylesheet" href="../../codeblue-prefs.css">
+</head>
+<body>
+<script>
+window.__watchCalls = [];
+window.__watchListeners = {};
+window.__watchState = { running: true, paused: false, rosc: false, elapsed: 252, receivedAtMs: Date.now(), mode: "adult", cycle: 3, shockCount: 1, adrenalineCount: 1, events: [
+  { id: "1", elapsed: 5, kind: "cprStart", label: "CPR started", source: "watch" },
+  { id: "2", elapsed: 30, kind: "shock", label: "Shock delivered", source: "watch" },
+  { id: "3", elapsed: 60, kind: "drug", label: "Epinephrine", source: "watch" }
+] };
+window.__emitWatch = function (st) {
+  window.__watchState = st;
+  (window.__watchListeners.codeBlueState || []).forEach(function (cb) { cb(st); });
+};
+window.Capacitor = {
+  isNativePlatform: function () { return true; },
+  getPlatform: function () { return "ios"; },
+  Plugins: { WatchBridge: {
+    audioBegin: function () { window.__watchCalls.push(["audioBegin"]); return Promise.resolve({ active: true }); },
+    audioEnd: function () { window.__watchCalls.push(["audioEnd"]); return Promise.resolve(); },
+    audioConfigure: function (a) { window.__watchCalls.push(["audioConfigure", a]); return Promise.resolve(); },
+    audioMutes: function (a) { window.__watchCalls.push(["audioMutes", a]); return Promise.resolve(); },
+    audioMetronome: function (a) { window.__watchCalls.push(["audioMetronome", a]); return Promise.resolve(); },
+    audioBreaths: function (a) { window.__watchCalls.push(["audioBreaths", a]); return Promise.resolve(); },
+    audioTone: function (a) { window.__watchCalls.push(["audioTone", a]); return Promise.resolve(); },
+    audioSpeak: function (a) { window.__watchCalls.push(["audioSpeak", a]); return Promise.resolve(); },
+    audioSetCues: function (a) { window.__watchCalls.push(["audioSetCues", a]); return Promise.resolve(); },
+    codeBlueGetState: function () { window.__watchCalls.push(["codeBlueGetState"]); return Promise.resolve(window.__watchState); },
+    codeBlueLog: function (a) { window.__watchCalls.push(["codeBlueLog", a]); return Promise.resolve(); },
+    openCodeBlue: function () { window.__watchCalls.push(["openCodeBlue"]); return Promise.resolve(); },
+    addListener: function (name, cb) { (window.__watchListeners[name] = window.__watchListeners[name] || []).push(cb); return Promise.resolve({ remove: function () { return Promise.resolve(); } }); }
+  } }
+};
+</script>
+<script src="../../codeblue-audio.js"></script>
+<script src="../../codeblue-live.js"></script>
+<script src="../../codeblue-prefs.js"></script>
+</body>
+</html>

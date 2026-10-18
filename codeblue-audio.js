@@ -50,8 +50,27 @@
     speaking: false,
     metroBpm: 110, voiceRate: 1, lowAlert: true,
     wakeLock: null,
-    overdueTonePlayed: false
+    overdueTonePlayed: false,
+    native: false, nativePending: false, breathInterval: 6
   };
+
+  function nativePlugin() {
+    try {
+      if (typeof window === "undefined" || !window.Capacitor) return null;
+      var C = window.Capacitor;
+      var isNative = (typeof C.isNativePlatform === "function") ? C.isNativePlatform() : false;
+      if (!isNative) return null;
+      return (C.Plugins && C.Plugins.WatchBridge) || null;
+    } catch (e) { return null; }
+  }
+  function ncall(method, args) {
+    var p = nativePlugin();
+    if (!p || typeof p[method] !== "function") return null;
+    try { var r = p[method](args); if (r && typeof r.catch === "function") r.catch(function () {}); return r; } catch (e) { return null; }
+  }
+  function nativeActive() { return state.native === true; }
+  function pushNativeConfig() { ncall("audioConfigure", { bpm: state.metroBpm, voiceRate: state.voiceRate, lowAlert: state.lowAlert }); }
+  function pushNativeMutes() { ncall("audioMutes", mutes()); }
 
   function hasWindow() { return typeof window !== "undefined"; }
 
@@ -88,8 +107,34 @@
     return state.ctx;
   }
 
-  /* Must be called from a user tap (Start). Resumes a suspended context. */
+  /* Must be called from a user tap (Start). Resumes a suspended context.
+   * Native: audioBegin() decides; only active:true switches to native. */
   function unlock() {
+    var p = nativePlugin();
+    if (p && typeof p.audioBegin === "function") {
+      state.nativePending = true;
+      var self = this;
+      var promise;
+      try { promise = p.audioBegin(); } catch (e) { promise = null; }
+      if (promise && typeof promise.then === "function") {
+        return promise.then(function (res) {
+          state.nativePending = false;
+          if (res && res.active === true) {
+            state.native = true; state.unlocked = true; state.blocked = false;
+            pushNativeConfig(); pushNativeMutes();
+            if (state.metronomeOn) ncall("audioMetronome", { on: true });
+            if (state._wantBreaths) ncall("audioBreaths", { on: true, intervalSeconds: state.breathInterval || 6 });
+            return true;
+          }
+          state.native = false;
+          return unlockWeb();
+        }, function () { state.nativePending = false; state.native = false; return unlockWeb(); });
+      }
+      state.nativePending = false;
+    }
+    return unlockWeb();
+  }
+  function unlockWeb() {
     var ctx = ensureCtx();
     if (!ctx) {
       /* No Web Audio here: voice may still work, or nothing plays. */
@@ -110,6 +155,7 @@
   }
 
   function status() {
+    if (state.native) return "ok";
     if (!audioAvailable() && !speechAvailable()) return "unavailable";
     if (!state.unlocked) return "blocked";
     return "ok";
@@ -135,9 +181,17 @@
   }
 
   function beatInterval() { return 60 / (state.metroBpm || METRONOME_BPM); }
-  function setMetronomeBpm(bpm) { var n = Number(bpm); if (isFinite(n)) state.metroBpm = Math.max(100, Math.min(120, Math.round(n))); return state.metroBpm; }
-  function setVoiceRate(r) { var n = Number(r); if (isFinite(n)) state.voiceRate = Math.max(0.5, Math.min(1.5, n)); return state.voiceRate; }
-  function setLowAlert(on) { state.lowAlert = on !== false; return state.lowAlert; }
+  function setMetronomeBpm(bpm) { var n = Number(bpm); if (isFinite(n)) state.metroBpm = Math.max(100, Math.min(120, Math.round(n))); if (state.native) pushNativeConfig(); return state.metroBpm; }
+  function setVoiceRate(r) { var n = Number(r); if (isFinite(n)) state.voiceRate = Math.max(0.5, Math.min(1.5, n)); if (state.native) pushNativeConfig(); return state.voiceRate; }
+  function setLowAlert(on) { state.lowAlert = on !== false; if (state.native) pushNativeConfig(); return state.lowAlert; }
+  function setCues(list) {
+    if (!state.native) return false;
+    var cues = (Array.isArray(list) ? list : []).slice(0, 64).map(function (c) {
+      var o = { atMs: Number(c && c.atMs) }; if (c && c.speak) o.speak = String(c.speak).slice(0, 80); if (c && c.tone) o.tone = String(c.tone); return o;
+    }).filter(function (c) { return isFinite(c.atMs); });
+    ncall("audioSetCues", { cues: cues });
+    return true;
+  }
 
   function scheduleAhead() {
     var ctx = state.ctx;
@@ -152,6 +206,8 @@
   }
 
   function startMetronome() {
+    if (state.native) { state.metronomeOn = true; ncall("audioMetronome", { on: true }); return true; }
+    if (state.nativePending) { state.metronomeOn = true; return true; }
     if (state.metronomeOn) return true;
     var ctx = ensureCtx();
     if (!ctx || !state.unlocked) return false;
@@ -167,30 +223,43 @@
   }
 
   function stopMetronome() {
+    if (state.native) ncall("audioMetronome", { on: false });
     state.metronomeOn = false;
     if (state.schedTimer) { try { clearInterval(state.schedTimer); } catch (e) {} }
     state.schedTimer = null;
   }
 
   function breathTick() {
+    if (state.native) { if (state.unlocked && !state.breathMuted) ncall("audioTone", { kind: "breath" }); return; }
+    if (state.nativePending) return;
     var ctx = state.ctx;
     if (!ctx || !state.unlocked || state.breathMuted) return;
     blip(BREATH_HZ, 60, 0, 0.3);
   }
 
   /* One soft tick every 6 s for an advanced airway. Caller starts/stops. */
-  function startBreathTicks() {
+  function startBreathTicks(intervalSeconds) {
+    if (state.native || state.nativePending) {
+      state.breathInterval = Number(intervalSeconds) > 0 ? Number(intervalSeconds) : 6;
+      state._wantBreaths = true;
+      if (state.native) ncall("audioBreaths", { on: true, intervalSeconds: state.breathInterval });
+      return;
+    }
     stopBreathTicks();
     state.breathTimer = setInterval(breathTick, 6000);
   }
 
   function stopBreathTicks() {
+    state._wantBreaths = false;
+    if (state.native) ncall("audioBreaths", { on: false, intervalSeconds: state.breathInterval || 6 });
     if (state.breathTimer) { try { clearInterval(state.breathTimer); } catch (e) {} }
     state.breathTimer = null;
   }
 
   /* Neonatal 3:1 three-count tick: three soft ticks now. */
   function threeCount() {
+    if (state.native) { if (state.unlocked && !state.breathMuted) ncall("audioTone", { kind: "threeCount" }); return; }
+    if (state.nativePending) return;
     var ctx = state.ctx;
     if (!ctx || !state.unlocked || state.breathMuted) return;
     try {
@@ -203,6 +272,11 @@
 
   /* One distinct two-tone for overdue epinephrine. Played once per code. */
   function overdueTone() {
+    if (state.native) {
+      if (state.lowAlert === false || state.overdueTonePlayed) return;
+      state.overdueTonePlayed = true; ncall("audioTone", { kind: "overdue" }); return;
+    }
+    if (state.nativePending) return;
     var ctx = state.ctx;
     if (state.lowAlert === false) return;
     if (!ctx || !state.unlocked || state.overdueTonePlayed) return;
@@ -214,7 +288,7 @@
     } catch (e) {}
   }
 
-  function resetOverdueTone() { state.overdueTonePlayed = false; }
+  function resetOverdueTone() { state.overdueTonePlayed = false; if (state.native) ncall("audioTone", { kind: "resetOverdue" }); }
 
   function pickVoice() {
     try {
@@ -243,6 +317,8 @@
   function speak(key) {
     var text = PHRASES[key];
     if (!text || !state.voiceOn || !state.unlocked) return false;
+    if (state.native) { ncall("audioSpeak", { text: String(text).slice(0, 80) }); return true; }
+    if (state.nativePending) return false;
     if (!speechAvailable()) return false;
     try {
       var synth = window.speechSynthesis;
@@ -267,6 +343,7 @@
   }
 
   function cancelSpeech() {
+    if (state.native) { state.speaking = false; return; }
     try {
       if (hasWindow() && window.speechSynthesis) window.speechSynthesis.cancel();
     } catch (e) {}
@@ -284,6 +361,7 @@
     } else if (which === "breaths") {
       state.breathMuted = !!muted;
     }
+    if (state.native) pushNativeMutes();
     return mutes();
   }
 
@@ -292,6 +370,7 @@
   }
 
   function isMetroAudible() {
+    if (state.native) return state.metronomeOn && !state.metroMuted && state.unlocked;
     return state.metronomeOn && !state.metroMuted && state.unlocked && !!state.ctx;
   }
 
@@ -316,9 +395,11 @@
   }
 
   function shutdown() {
+    var wasNative = state.native;
     stopMetronome();
     stopBreathTicks();
     cancelSpeech();
+    if (wasNative) { ncall("audioSetCues", { cues: [] }); ncall("audioEnd"); state.native = false; }
     releaseWakeLock();
   }
 
@@ -328,6 +409,7 @@
     state.unlocked = false; state.blocked = false;
     state.voiceOn = true; state.metroMuted = false; state.breathMuted = false;
     state.speaking = false; state.nextTickAt = 0; state.overdueTonePlayed = false; state.metroBpm = 110; state.voiceRate = 1; state.lowAlert = true;
+    state.native = false; state.nativePending = false; state.breathInterval = 6; state.metronomeOn = false;
   }
 
   return {
@@ -344,6 +426,7 @@
     setMuted: setMuted, mutes: mutes, setMetronomeBpm: setMetronomeBpm, setVoiceRate: setVoiceRate, setLowAlert: setLowAlert,
     metronomeBpm: function () { return state.metroBpm || METRONOME_BPM; }, voiceRate: function () { return state.voiceRate || 1; }, lowAlert: function () { return state.lowAlert !== false; },
     ensureWakeLock: ensureWakeLock, releaseWakeLock: releaseWakeLock,
+    nativeActive: nativeActive, setCues: setCues,
     shutdown: shutdown, _reset: _reset
   };
 });
