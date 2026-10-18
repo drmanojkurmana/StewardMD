@@ -1,0 +1,827 @@
+{
+ "v": 1,
+ "id": "instruments",
+ "review": "ai_drafted",
+ "title": {
+  "en": "Obstetric and gynaecological instruments",
+  "hi": "प्रसूति और स्त्री रोग के उपकरण"
+ },
+ "source": {
+  "credit": "instruments-sheet",
+  "dataset": "Owner-supplied practicals sheet (Instruments)",
+  "licence": "unconfirmed",
+  "note": "Images with a credit object are either photographs from Wikimedia Commons under the licence shown (CC0, CC BY, CC BY-SA or public domain) or illustrations created with MaiK (StewardMD AI); show the credit with the image. The remaining images are TEMPORARY placeholders cropped from an owner-supplied practicals sheet: the original photo sources are unknown, some show manufacturer marks and the licence is unconfirmed, so they must be replaced (same file names) before public release. Vendor catalogue numbers and one watermark were removed from the placeholders. The text is rewritten from that sheet and checked against standard references; items marked in docs/tokos/instruments-review.md need an obstetrician's check."
+ },
+ "groups": [
+  {
+   "id": "speculum",
+   "label": {
+    "en": "Speculums and vaginal retractors",
+    "hi": "योनि स्पेकुलम और रिट्रैक्टर"
+   }
+  },
+  {
+   "id": "holding",
+   "label": {
+    "en": "Holding and clamping forceps",
+    "hi": "पकड़ने और क्लैंप करने वाले फ़ॉरसेप्स"
+   }
+  },
+  {
+   "id": "uterine",
+   "label": {
+    "en": "Cervical and uterine instruments",
+    "hi": "गर्भाशय-ग्रीवा और गर्भाशय के उपकरण"
+   }
+  },
+  {
+   "id": "surgical",
+   "label": {
+    "en": "General surgical instruments",
+    "hi": "सामान्य शल्य उपकरण"
+   }
+  },
+  {
+   "id": "catheter",
+   "label": {
+    "en": "Catheters",
+    "hi": "कैथेटर"
+   }
+  },
+  {
+   "id": "delivery",
+   "label": {
+    "en": "Delivery and newborn instruments",
+    "hi": "प्रसव और नवजात के उपकरण"
+   }
+  }
+ ],
+ "levels": {
+  "mbbs": {
+   "options": 4,
+   "answer": "name"
+  },
+  "resident": {
+   "options": 6,
+   "answer": "name"
+  }
+ },
+ "cases": [
+  {
+   "id": "in-01",
+   "img": "instruments/in-01.webp",
+   "w": 960,
+   "h": 720,
+   "name": {
+    "en": "Sim's speculum"
+   },
+   "group": "speculum",
+   "identify": [
+    "Two blades with a groove between them that lets secretions drain.",
+    "The blades are unequal in width: the narrow blade suits a woman who has not delivered, the wider blade a woman who has."
+   ],
+   "uses": [
+    "Retracts the posterior vaginal wall to inspect the cervix, for example in bleeding or discharge per vagina.",
+    "Minor procedures: dilatation and curettage, cervical cautery, cryosurgery.",
+    "Hysterectomy and cervical encirclage.",
+    "Inserting an intrauterine contraceptive device.",
+    "Showing an enterocele, a bulge in the upper third of the vaginal wall.",
+    "Applying cervical ripening gel.",
+    "Removing a cerclage stitch at 38 weeks.",
+    "Looking for a vesicovaginal fistula."
+   ],
+   "cautions": [
+    "An anterior vaginal wall retractor is needed with it.",
+    "An assistant is required."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Sim's double-bladed vaginal speculum1.jpg",
+    "author": "Sarindam7",
+    "licence": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Sim%27s_double-bladed_vaginal_speculum1.jpg"
+   }
+  },
+  {
+   "id": "in-02",
+   "img": "instruments/in-02.webp",
+   "w": 960,
+   "h": 1203,
+   "name": {
+    "en": "Cusco's self-retaining speculum"
+   },
+   "group": "speculum",
+   "identify": [
+    "A bivalve speculum with a screw that locks the blades open, so it holds itself and leaves both hands free."
+   ],
+   "uses": [
+    "Inserting an intrauterine contraceptive device.",
+    "Taking a Pap smear.",
+    "Cryosurgery, because the anterior and posterior vaginal walls are protected (a condom over the blades protects the side walls).",
+    "Colposcopy."
+   ],
+   "aka": [
+    "Cusco's bivalve speculum",
+    "Cusco's speculum"
+   ],
+   "cautions": [
+    "The anterior and posterior vaginal walls cannot be seen.",
+    "The speed of work is limited."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Speculum en métal.jpg",
+    "author": "See the Commons file page",
+    "licence": "CC BY-SA 2.0 fr",
+    "url": "https://commons.wikimedia.org/wiki/File:Speculum_en_m%C3%A9tal.jpg"
+   }
+  },
+  {
+   "id": "in-03",
+   "img": "instruments/in-03.webp",
+   "w": 900,
+   "h": 502,
+   "name": {
+    "en": "Anterior vaginal wall retractor"
+   },
+   "group": "speculum",
+   "identify": [
+    "Long handle with a ring at each end; the rings have serrations that improve grip."
+   ],
+   "uses": [
+    "Held against the anterior vaginal wall while a Sim's speculum retracts the posterior wall.",
+    "The source sheet adds that it can be used as a curette after delivery."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-04",
+   "img": "instruments/in-04.webp",
+   "w": 960,
+   "h": 721,
+   "name": {
+    "en": "Vulsellum"
+   },
+   "group": "holding",
+   "identify": [
+    "Curved blades ending in teeth that grip the cervix.",
+    "A single-toothed tenaculum is used instead for the cervix of a woman who has not delivered."
+   ],
+   "uses": [
+    "Holds the anterior lip of the cervix, usually in women who have delivered before.",
+    "Culdocentesis.",
+    "Tubal sterilisation by the vaginal route: the posterior lip of the cervix is held.",
+    "Culdoscopy.",
+    "Drainage of a pelvic abscess."
+   ],
+   "aka": [
+    "Vulsellum forceps"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Vulsellum 01.jpg",
+    "author": "AfroBrazilian",
+    "licence": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Vulsellum_01.jpg"
+   }
+  },
+  {
+   "id": "in-05",
+   "img": "instruments/in-05.webp",
+   "w": 900,
+   "h": 672,
+   "name": {
+    "en": "Sinus forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Long forceps with a blunt tip.",
+    "There is no catch at the handles."
+   ],
+   "uses": [
+    "Opens an abscess cavity: the closed tip is pushed in and the blades are spread."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-06",
+   "img": "instruments/in-06.webp",
+   "w": 960,
+   "h": 640,
+   "name": {
+    "en": "Allis tissue forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Narrow jaws with a row of small interlocking teeth at the tip; ratchet catch at the handles."
+   ],
+   "uses": [
+    "Holds the anterior lip of the cervix in dilatation and evacuation.",
+    "Holds the apex of an episiotomy wound during repair.",
+    "Holds the edges of the peritoneum, rectus sheath and vaginal mucosa during repair.",
+    "Holds the torn ends of the external anal sphincter before suturing a complete perineal tear.",
+    "Holds the margins and angles of the uterine flaps in a lower segment caesarean section after the baby is delivered."
+   ],
+   "aka": [
+    "Allis forceps"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Allis Tissue Forceps of Dr. James M. Whittico, Jr. - DPLA - 8aa5cccfabef1dbbebe87fa21121859b (page 1).jpg",
+    "author": "See the Commons file page",
+    "licence": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Allis_Tissue_Forceps_of_Dr._James_M._Whittico,_Jr._-_DPLA_-_8aa5cccfabef1dbbebe87fa21121859b_(page_1).jpg"
+   }
+  },
+  {
+   "id": "in-07",
+   "img": "instruments/in-07.webp",
+   "w": 960,
+   "h": 418,
+   "name": {
+    "en": "Uterine sound"
+   },
+   "group": "uterine",
+   "identify": [
+    "Slender, malleable metal rod with a blunt olive tip, graduated in centimetres or inches.",
+    "A pelvic examination must come first to know whether the uterus is anteverted or retroverted."
+   ],
+   "uses": [
+    "Gives the position of the uterus and the length of the cavity before dilatation and evacuation.",
+    "Shows cervical length before Fothergill's operation.",
+    "Helps diagnose supravaginal elongation of the cervix in uterovaginal prolapse.",
+    "Checks the cavity for a foreign body."
+   ],
+   "cautions": [
+    "The source sheet gives a normal cavity length of 7.5 to 8 cm; textbooks give a range, so check your own."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Uterine sound (single use).jpg",
+    "author": "Whispyhistory",
+    "licence": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Uterine_sound_(single_use).jpg"
+   }
+  },
+  {
+   "id": "in-08",
+   "img": "instruments/in-08.webp",
+   "w": 960,
+   "h": 705,
+   "name": {
+    "en": "Hegar's dilators"
+   },
+   "group": "uterine",
+   "identify": [
+    "Metal rods with a different size at each end, sold as a graded set; the number is the diameter in millimetres.",
+    "Both ends are used, smaller number first, and the dilator is held like a pen."
+   ],
+   "uses": [
+    "Dilating the cervical canal before evacuation of the uterus.",
+    "Dilating a stenosed cervix (dilatation only).",
+    "Assessing an incompetent cervical os: a No. 8 passes without resistance in the premenstrual phase.",
+    "Before inserting an intrauterine contraceptive device.",
+    "Draining a pyometra or haematometra."
+   ],
+   "aka": [
+    "Hegar dilator"
+   ],
+   "cautions": [
+    "Neurogenic (vagal) shock.",
+    "Perforation of the uterus.",
+    "Injury to the bladder or rectum."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Dilatatoren-Hegar.jpg",
+    "author": "Citizen",
+    "licence": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Dilatatoren-Hegar.jpg"
+   }
+  },
+  {
+   "id": "in-09",
+   "img": "instruments/in-09.webp",
+   "w": 960,
+   "h": 1280,
+   "name": {
+    "en": "Curette"
+   },
+   "group": "uterine",
+   "identify": [
+    "Two ends: one sharp, one blunt.",
+    "The sharp end is used in a non-pregnant uterus, the blunt end in a pregnant uterus."
+   ],
+   "uses": [
+    "Therapeutic dilatation and curettage for dysfunctional uterine bleeding.",
+    "Sampling the endometrium to look for carcinoma or tuberculosis."
+   ],
+   "aka": [
+    "Uterine curette"
+   ],
+   "cautions": [
+    "Asherman's syndrome (intrauterine adhesions).",
+    "Perforation of the uterus."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Uterine Curette 01.jpg",
+    "author": "SnowBink",
+    "licence": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Uterine_Curette_01.jpg"
+   }
+  },
+  {
+   "id": "in-10",
+   "img": "instruments/in-10.webp",
+   "w": 960,
+   "h": 720,
+   "name": {
+    "en": "Sponge holding forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Ring-shaped, serrated, fenestrated jaws with a ratchet catch."
+   ],
+   "uses": [
+    "Painting and draping.",
+    "Cervical encirclage.",
+    "Applying cervical ripening gel.",
+    "Finding a cervical tear.",
+    "Removing retained bits of placenta.",
+    "Compressing the uterine artery during myomectomy."
+   ],
+   "aka": [
+    "Rampley's sponge holder"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Sponge Rampley Forceps Clamp 01.JPG",
+    "author": "Saltanat",
+    "licence": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Sponge_Rampley_Forceps_Clamp_01.JPG"
+   }
+  },
+  {
+   "id": "in-11",
+   "img": "instruments/in-11.webp",
+   "w": 900,
+   "h": 672,
+   "name": {
+    "en": "Ovum forceps"
+   },
+   "group": "uterine",
+   "identify": [
+    "Fenestrated blades that bend slightly; there is no catch.",
+    "The missing catch lowers the chance of uterine injury if tissue is caught by mistake and avoids crushing the products of conception."
+   ],
+   "uses": [
+    "Passed into the uterine cavity with the blades closed, opened inside to grasp the products of conception, then withdrawn with a slight twisting movement."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-12",
+   "img": "instruments/in-12.webp",
+   "w": 900,
+   "h": 502,
+   "name": {
+    "en": "Endometrial biopsy curette (Novak curette)"
+   },
+   "group": "uterine",
+   "identify": [
+    "A narrow curette with openings near the tip, used for outpatient sampling."
+   ],
+   "uses": [
+    "Taking an endometrial biopsy without dilating the cervix or sedating the patient."
+   ],
+   "aka": [
+    "Novak curette"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-13",
+   "img": "instruments/in-13.webp",
+   "w": 960,
+   "h": 511,
+   "name": {
+    "en": "Needle holder"
+   },
+   "group": "surgical",
+   "identify": [
+    "Short, strong jaws with a small tip, designed to hold a suturing needle."
+   ],
+   "uses": [
+    "Holding the needle while suturing."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Naaldvoerder Mayo-hegar.jpg",
+    "author": "Rschiedon at Dutch Wikipedia",
+    "licence": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Naaldvoerder_Mayo-hegar.jpg"
+   }
+  },
+  {
+   "id": "in-14",
+   "img": "instruments/in-14.webp",
+   "w": 960,
+   "h": 720,
+   "name": {
+    "en": "Towel clips"
+   },
+   "group": "surgical",
+   "identify": [
+    "Short, sharp-pointed clips with a ratchet catch."
+   ],
+   "uses": [
+    "Securing drapes before surgery."
+   ],
+   "aka": [
+    "Towel clip"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Towel Clips.jpg",
+    "author": "SnowBink",
+    "licence": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Towel_Clips.jpg"
+   }
+  },
+  {
+   "id": "in-15",
+   "img": "instruments/in-15.webp",
+   "w": 960,
+   "h": 639,
+   "name": {
+    "en": "Straight artery forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Straight, serrated jaws with a ratchet catch."
+   ],
+   "uses": [
+    "Clamping the pedicle when removing the uterus.",
+    "Clamping bleeding points.",
+    "Clamping the umbilical cord."
+   ],
+   "aka": [
+    "Straight haemostat",
+    "Straight artery forceps"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Spencer Wells-type artery forceps, London, England, 1880-190 Wellcome L0058075.jpg",
+    "author": "Wellcome Collection",
+    "licence": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Spencer_Wells-type_artery_forceps,_London,_England,_1880-190_Wellcome_L0058075.jpg"
+   }
+  },
+  {
+   "id": "in-16",
+   "img": "instruments/in-16.webp",
+   "w": 960,
+   "h": 720,
+   "name": {
+    "en": "Kocher's forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Heavy straight forceps with teeth at the tip."
+   ],
+   "uses": [
+    "Clamping the umbilical cord.",
+    "Rupturing the membranes low down, for surgical induction or augmentation of labour."
+   ],
+   "aka": [
+    "Kocher's artery forceps"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Kocher's forceps with toothed jaw.jpg",
+    "author": "Sarindam7",
+    "licence": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Kocher%27s_forceps_with_toothed_jaw.jpg"
+   }
+  },
+  {
+   "id": "in-17",
+   "img": "instruments/in-17.webp",
+   "w": 900,
+   "h": 672,
+   "name": {
+    "en": "Episiotomy scissors"
+   },
+   "group": "delivery",
+   "identify": [
+    "The blades are angled to one side; the blade with the blunt tip goes inside the vagina."
+   ],
+   "uses": [
+    "Cutting an episiotomy."
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-18",
+   "img": "instruments/in-18.webp",
+   "w": 385,
+   "h": 61,
+   "name": {
+    "en": "Metal catheter"
+   },
+   "group": "catheter",
+   "identify": [
+    "Short, rigid, slightly curved metal tube."
+   ],
+   "uses": [
+    "Emptying the bladder before surgery."
+   ],
+   "aka": [
+    "Female metal catheter"
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-19",
+   "img": "instruments/in-19.webp",
+   "w": 360,
+   "h": 320,
+   "name": {
+    "en": "Malecot's catheter"
+   },
+   "group": "catheter",
+   "identify": [
+    "Self-retaining catheter with a four-winged mushroom tip."
+   ],
+   "uses": [
+    "Drain after laparotomy.",
+    "Suprapubic cystotomy.",
+    "Draining a pelvic abscess."
+   ],
+   "aka": [
+    "Malecot catheter"
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-20",
+   "img": "instruments/in-20.webp",
+   "w": 192,
+   "h": 132,
+   "name": {
+    "en": "Red rubber catheter"
+   },
+   "group": "catheter",
+   "identify": [
+    "Soft, red, open-ended rubber tube."
+   ],
+   "uses": [
+    "Short-term catheterisation, for example during manual removal of the placenta, correction of uterine inversion, or before delivery."
+   ],
+   "aka": [
+    "Rubber catheter",
+    "Nelaton catheter"
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-21",
+   "img": "instruments/in-21.webp",
+   "w": 960,
+   "h": 720,
+   "name": {
+    "en": "Foley's self-retaining catheter"
+   },
+   "group": "catheter",
+   "identify": [
+    "Two channels and an inflatable balloon near the tip that holds it in the bladder."
+   ],
+   "uses": [
+    "Continuous drainage over a longer period, for example after abdominal hysterectomy.",
+    "Keeping the bladder empty for 4 to 5 days after cystocele repair.",
+    "Keeping the bladder empty for 14 days after repair of a vesicovaginal fistula or after Wertheim's hysterectomy.",
+    "Balloon tamponade."
+   ],
+   "aka": [
+    "Foley catheter"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Urinary catheterization 02.JPG",
+    "author": "Saltanat ebli",
+    "licence": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Urinary_catheterization_02.JPG"
+   }
+  },
+  {
+   "id": "in-22",
+   "img": "instruments/in-22.webp",
+   "w": 960,
+   "h": 469,
+   "name": {
+    "en": "Smellie's perforator"
+   },
+   "group": "delivery",
+   "identify": [
+    "Scissor-shaped, with a pointed tip and a shoulder on the blades that stops it going in too far."
+   ],
+   "uses": [
+    "A destructive operation: obstructed labour with a dead fetus, or hydrocephalus with a dead fetus (craniotomy through a bony point).",
+    "Empty the bladder first and avoid injury to the bladder and maternal soft tissues; the fetal skull must be fixed."
+   ],
+   "aka": [
+    "Smellie's scissors",
+    "Craniotomy scissors"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Smellie's obstetrical perforator Wellcome L0037230.jpg",
+    "author": "Wellcome Collection",
+    "licence": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Smellie%27s_obstetrical_perforator_Wellcome_L0037230.jpg"
+   }
+  },
+  {
+   "id": "in-23",
+   "img": "instruments/in-23.webp",
+   "w": 288,
+   "h": 194,
+   "name": {
+    "en": "Mucus sucker (De Lee mucus extractor)"
+   },
+   "group": "delivery",
+   "identify": [
+    "Used to suck mucus from the nose and throat of the baby."
+   ],
+   "uses": [
+    "Clearing the nasopharynx and oropharynx after the head is delivered. The mucus should be sucked out before the first breath, otherwise the airway can be blocked and the baby develops asphyxia.",
+    "The picture shows a rubber bulb type."
+   ],
+   "aka": [
+    "De Lee mucus extractor",
+    "Dee's mucus sucker"
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-24",
+   "img": "instruments/in-24.webp",
+   "w": 372,
+   "h": 119,
+   "name": {
+    "en": "Wrigley's outlet forceps"
+   },
+   "group": "delivery",
+   "identify": [
+    "Short, light forceps with a small pelvic curve."
+   ],
+   "uses": [
+    "Outlet forceps only, to deliver the head by extension.",
+    "Forceps deliveries are classified by station and rotation: outlet (head on the perineum, scalp visible between contractions), low (head at +2 station or lower), mid (head above +2 station but engaged), high (head not engaged; not done in modern practice)."
+   ],
+   "aka": [
+    "Wrigley's forceps"
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-25",
+   "img": "instruments/in-25.webp",
+   "w": 369,
+   "h": 100,
+   "name": {
+    "en": "Kielland's forceps"
+   },
+   "group": "delivery",
+   "identify": [
+    "Almost no pelvic curve and a sliding lock at the articulation."
+   ],
+   "uses": [
+    "Probably the forceps used most often for rotation.",
+    "The sliding lock helps when the head is tilted to one side (asynclitism)."
+   ],
+   "aka": [
+    "Kielland forceps"
+   ],
+   "cautions": [
+    "With almost no pelvic curve they give little traction."
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-26",
+   "img": "instruments/in-26.webp",
+   "w": 960,
+   "h": 1458,
+   "name": {
+    "en": "Pinard's fetoscope"
+   },
+   "group": "delivery",
+   "identify": [
+    "A hollow horn with a wide flat end for the abdomen and a smaller ear end."
+   ],
+   "uses": [
+    "Listening to the fetal heart through the abdominal wall: hold it firmly at right angles to the abdomen, close the ear tightly on it, and let go of it with the hands while listening."
+   ],
+   "aka": [
+    "Pinard stethoscope"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "title": "Pinard type foetal stethoscope, London, England, 1870-1920 Wellcome L0065367.jpg",
+    "author": "Wellcome Collection",
+    "licence": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pinard_type_foetal_stethoscope,_London,_England,_1870-1920_Wellcome_L0065367.jpg"
+   }
+  },
+  {
+   "id": "in-27",
+   "img": "instruments/in-27.webp",
+   "w": 480,
+   "h": 147,
+   "name": {
+    "en": "Menstrual regulation syringe"
+   },
+   "group": "uterine",
+   "identify": [
+    "A large hand-held syringe with a locking plunger that makes suction."
+   ],
+   "uses": [
+    "Manual vacuum aspiration in early pregnancy (the source sheet says up to 8 weeks).",
+    "Check curettage.",
+    "Quicker than sharp curettage."
+   ],
+   "aka": [
+    "MVA syringe",
+    "Manual vacuum aspirator"
+   ],
+   "cautions": [
+    "Evacuation may be incomplete."
+   ],
+   "review": "ai_drafted"
+  },
+  {
+   "id": "in-28",
+   "img": "instruments/in-28.webp",
+   "w": 900,
+   "h": 672,
+   "name": {
+    "en": "Babcock's forceps"
+   },
+   "group": "holding",
+   "identify": [
+    "Atraumatic forceps with a wide, rounded, fenestrated tip."
+   ],
+   "uses": [
+    "Holding the round ligament.",
+    "Holding the fallopian tube during tubal sterilisation.",
+    "Holding the ureters in Wertheim's hysterectomy.",
+    "Holding the appendix."
+   ],
+   "aka": [
+    "Babcock forceps"
+   ],
+   "review": "ai_drafted",
+   "credit": {
+    "generated": "Illustration created with MaiK (StewardMD AI) and checked against the real instrument shape"
+   }
+  },
+  {
+   "id": "in-29",
+   "img": "instruments/in-29.webp",
+   "w": 320,
+   "h": 126,
+   "name": {
+    "en": "Ventouse"
+   },
+   "group": "delivery",
+   "identify": [
+    "A cup that attaches to the fetal scalp, with a tube and pump that create suction, and a handle for traction."
+   ],
+   "uses": [
+    "A vacuum device that assists delivery when labour has not progressed enough; the alternative to forceps or caesarean section.",
+    "Also called vacuum-assisted vaginal delivery or vacuum extraction."
+   ],
+   "aka": [
+    "Vacuum extractor"
+   ],
+   "review": "ai_drafted"
+  }
+ ]
+}

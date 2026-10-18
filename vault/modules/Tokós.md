@@ -167,9 +167,16 @@ Owner items from this pass (unverified sources, Tokós thresholds, wording choic
 
 ## Roadmap (not built)
 
-Phase 2 candidates: Bishop score calculator, labour-room simulator, fetal ultrasound plane recognition
-(HC18 and FETAL_PLANES_DB, both CC BY 4.0, licence-clear). Dataset licence findings for other specialties (WHO and
-IAP charts, Kermany, MURA blocked) are in memory note `specialty-module-dataset-licenses.md`.
+## Instruments
+
+Added 2026-10-18 (`tokos-clinic-instruments.js` + `.css`, loaded by `tokos-loader.js` at `?v=tok12`): 29 obstetric and
+gynaecological instruments in 6 groups from an owner-supplied practicals sheet (`tokos/decks/instruments.json`,
+`tokos/media/instruments/in-01.webp` .. `in-29.webp`). Dual registration: "Instrument atlas" explorer (`host.registerExplorer`,
+group filter, search by name/aka, 1/2/3 column responsive cards, zoom stage, detail with image above and text below,
+Ask MaiK, prev/next) and "Instruments" spotter clinic (`host.registerClinic`, id `instruments`, FSRS-6, MBBS 4 options,
+Resident 6 options with 2-step use matching; same-group distractor preference, deterministic). All images are a temporary
+base with unconfirmed licence to be replaced prior to public release. Clinical text `ai_drafted` pending obstetrician review
+(`docs/tokos/instruments-review.md`).
 
 ## Gotchas
 
