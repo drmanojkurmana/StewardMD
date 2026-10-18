@@ -1,0 +1,536 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lymphoma: Hodgkin and B-cell non-Hodgkin</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.node-out{fill:color-mix(in srgb,var(--c-lymph) 12%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:2}
+.node-in{fill:color-mix(in srgb,var(--c-lymph) 7%,transparent);stroke:color-mix(in srgb,var(--c-lymph) 55%,transparent);stroke-width:1}
+.foll{fill:color-mix(in srgb,var(--c-b) 20%,var(--anatomy-paper));stroke:var(--c-b);stroke-width:1}
+.gc{fill:color-mix(in srgb,var(--c-b) 45%,var(--anatomy-paper))}
+.cl-rs{--cc:#b565d8}.cl-sheet{--cc:var(--c-b)}.cl-react{--cc:var(--c-lymph)}.cl-plasma{--cc:#e88bb0}
+.rs-nuc{fill:#4a245e;opacity:.9}
+.rs-dot{fill:#e9d5ff;opacity:.95}
+.cd20{fill:var(--c-good);stroke:color-mix(in srgb,var(--c-good) 50%,#000);stroke-width:.4}
+.body-o{fill:color-mix(in srgb,var(--anatomy-mid) 12%,transparent);stroke:var(--anatomy-mid);stroke-width:1.6}
+.diaph{stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:6 5}
+.site{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.site.on{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000)}
+.site.sp{fill:var(--c-plt)}
+.organ{fill:color-mix(in srgb,var(--c-endo) 35%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
+.beam{fill:var(--c-plt);opacity:.16}
+.field{fill:none;stroke:var(--c-plt);stroke-width:1.6;stroke-dasharray:7 5}
+.arr{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;marker-end:url(#arrh)}
+.p-chemo{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}
+.ab2{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Lymphoma: Hodgkin and B-cell non-Hodgkin</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>clone moderate · spread confined · B symptoms mild</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated lymph node section and spread map. In Hodgkin lymphoma a few large Reed-Sternberg cells sit in a rich reactive background and the node architecture is partly kept. In B-cell non-Hodgkin lymphoma sheets of similar B cells carrying CD20 fill and efface the node. Limited disease stays in one region; advanced disease crosses the diaphragm or reaches organs and marrow. Gauges show clone burden, node swelling, B symptoms and spread. Treatments are chemotherapy, anti-CD20 antibody and radiotherapy."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<text class="sc-zone" x="34" y="68">LYMPH NODE, SECTION</text>
+<text class="sc-zone" x="612" y="68">SPREAD MAP</text>
+<g id="stage"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Counts, speeds and gauge levels are qualitative and illustrative; no doses or treatment schedules are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Type and stage</span><input id="level" type="range" min="0" max="3" step="1" value="0" aria-valuetext="Hodgkin lymphoma, limited stage"><span class="dr-ticks"><i>HL limited</i><i>HL advanced</i><i>NHL limited</i><i>NHL advanced</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">chemotherapy</option><option value="2">anti-CD20 antibody</option><option value="3">radiotherapy</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>Hodgkin lymphoma.</strong> The malignant Reed-Sternberg cells (large, often with two nuclei like owl eyes, CD30 positive and usually CD15 positive, typically without CD20) are a minority scattered in a reactive mix of lymphocytes, eosinophils, plasma cells and histiocytes. It tends to spread in an orderly way to neighbouring node groups. This is standard teaching in pathology and haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>B-cell non-Hodgkin lymphoma.</strong> A clonal sheet of B cells (CD20 positive) grows monotonously and effaces the normal follicles and zones of the node. Spread is less orderly and organs or bone marrow may be involved early. Subtypes, grading and molecular groups are not shown.</li><li><strong>Stage and B symptoms.</strong> Limited stage means disease confined to one side of the diaphragm in a small number of node regions; advanced stage means both sides of the diaphragm, or spread to organs such as liver or bone marrow (the Ann Arbor idea, shown in words rather than numerals). The B symptoms are fever, drenching night sweats and weight loss, and they make the outlook and the treatment plan more urgent.</li><li><strong>Treatment ideas shown.</strong> Chemotherapy acts throughout the body in both kinds. An anti-CD20 antibody (such as rituximab) binds CD20, so it helps in B-cell non-Hodgkin lymphoma and not in classic Hodgkin lymphoma. Radiotherapy is a local field, strongest for limited disease and unable on its own to reach widespread disease. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Lymphoma subtypes and grading, PET and other imaging, biopsy markers beyond the few named, bone marrow biopsy detail, prognosis scores, relapsed disease, stem cell transplant, targeted and immune treatments other than anti-CD20, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Type and stage","a":[0,1,2,3],"names":["Hodgkin lymphoma, limited stage","Hodgkin lymphoma, advanced stage","B-cell non-Hodgkin lymphoma, limited stage","B-cell non-Hodgkin lymphoma, advanced stage"],"ticks":["HL limited","HL advanced","NHL limited","NHL advanced"],"start":0},"settings":[{"label":"no treatment"},{"label":"chemotherapy"},{"label":"anti-CD20 antibody"},{"label":"radiotherapy"}],"drugNames":["no treatment","chemotherapy","an anti-CD20 antibody","radiotherapy"],"status":"Lymphoma: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const type = level < 2 ? 0 : 1;              // 0 Hodgkin, 1 B-cell non-Hodgkin
+  const adv = level % 2 === 1;
+  const base = adv ? 0.86 : 0.48;
+  let eff = 0, sysEff = 0;                     // eff on the clone in the node, sysEff on spread and symptoms
+  if (drug === 1) { eff = 0.68; sysEff = 0.68; }
+  else if (drug === 2) { eff = type === 1 ? 0.66 : 0.04; sysEff = eff; }
+  else if (drug === 3) { eff = adv ? 0.18 : 0.62; sysEff = adv ? 0.05 : 0.5; }
+  const C = cl(base * (1 - eff));
+  const N = cl((adv ? 0.84 : 0.5) * (1 - eff * 0.85));
+  const Sp = cl((adv ? 0.88 : 0.18) * (1 - sysEff));
+  const Bs = cl((adv ? 0.78 : 0.24) * (1 - sysEff * 0.9) + C * 0.08);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(C, 0.25, 0.55, ["low", "moderate", "high"]), w(Sp, 0.25, 0.55, ["confined", "regional", "widespread"]), w(Bs, 0.25, 0.55, ["absent", "mild", "marked"])];
+  return { type, adv, drug, eff, sysEff, C, N, Sp, Bs, words, readout: "clone " + words[0] + " · spread " + words[1] + " · B symptoms " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Lymphoma scene: node architecture, Reed-Sternberg cells or CD20 B-cell sheets, spread map and gauges. */
+const LY = { stage: $("stage"), over: $("over"), panel: $("panel") };
+const W = SC.W;
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const freeP = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+function abY(parent, sc) { const g = mk("g", {}, parent); mk("path", { class: "ab2", d: "M0 8L0 0M0 0L-6 -7M0 0L6 -7" }, g); if (sc) place(g, 0, 0, 0, sc); return g; }
+const NX = 275, NY = 252; // node centre
+
+/* ---- node contents, built once; visibility follows the model ---- */
+const nodeG = mk("g", {}, LY.stage);
+mk("ellipse", { class: "node-out", cx: NX, cy: NY, rx: 158, ry: 122 }, nodeG);
+mk("ellipse", { class: "node-in", cx: NX, cy: NY, rx: 138, ry: 104 }, nodeG);
+mk("path", { class: "arr", d: "M96 190L132 218" }, nodeG);
+mk("path", { class: "arr", d: "M418 286L452 306" }, nodeG);
+const follPos = [[205, 180], [300, 160], [360, 215], [225, 300], [330, 322]];
+const folls = follPos.map(([x, y], i) => { const g = mk("g", {}, nodeG); mk("circle", { class: "foll", cx: x, cy: y, r: 30 }, g); mk("circle", { class: "gc", cx: x, cy: y, r: 15 }, g); return g; });
+/* reactive background: many small mixed cells, always present in Hodgkin, crowded out in NHL */
+const react = [];
+for (let i = 0; i < 34; i++) { const a = i * 2.399, r = 24 + (i * 37 % 100), cls = i % 5 === 0 ? "eos" : i % 7 === 0 ? "plasma" : i % 4 === 0 ? "mac" : "react";
+  const g = cell(nodeG, { cls, r: cls === "mac" ? 11 : 7.5, nuc: 0.45, seed: i + 3, wob: 0.14 }); react.push({ g, x: NX + Math.cos(a) * r * 1.25, y: NY + Math.sin(a) * r * 0.92 }); }
+/* Reed-Sternberg cells: few, large, two owl-eye nuclei */
+const rsPos = [[330, 262], [238, 214], [292, 330], [368, 190], [196, 282]];
+const rsCells = rsPos.map(([x, y], i) => { const g = mk("g", {}, nodeG); cell(g, { cls: "rs", r: 21, nuc: 0, seed: i + 11, wob: 0.08 });
+  mk("circle", { class: "rs-nuc", cx: -7, cy: -3, r: 5.4 }, g); mk("circle", { class: "rs-nuc", cx: 7, cy: -3, r: 5.4 }, g);
+  mk("circle", { class: "rs-dot", cx: -7, cy: -3, r: 1.6 }, g); mk("circle", { class: "rs-dot", cx: 7, cy: -3, r: 1.6 }, g); place(g, x, y, 0, 1); return { g, x, y, i }; });
+/* B-cell sheet: monotonous cells filling the node, CD20 dots on the rim */
+const sheet = [];
+for (let i = 0; i < 44; i++) { const gx = 165 + (i % 8) * 32 + ((i * 13) % 9), gy = 168 + Math.floor(i / 8) * 30 + ((i * 7) % 8);
+  if (Math.hypot((gx - NX) / 140, (gy - NY) / 105) > 0.96) continue;
+  const g = mk("g", {}, nodeG); cell(g, { cls: "sheet", r: 12, nuc: 0.5, seed: i + 30, wob: 0.07 });
+  for (let j = 0; j < 3; j++) { const a = j * 2.1 + i; mk("circle", { class: "cd20", cx: f1(Math.cos(a) * 11), cy: f1(Math.sin(a) * 11), r: 1.7 }, g); }
+  place(g, gx, gy, 0, 1); sheet.push({ g, x: gx, y: gy, i }); }
+
+/* ---- spread map: body, diaphragm, node groups, organs ---- */
+const mapG = mk("g", {}, LY.stage);
+mk("circle", { class: "body-o", cx: 762, cy: 104, r: 20 }, mapG);
+mk("path", { class: "body-o", d: "M728 132C716 190 720 250 736 306L742 392L762 392L768 318L774 392L794 392L800 306C816 250 820 190 796 132C786 124 738 124 728 132Z" }, mapG);
+mk("path", { class: "diaph", d: "M716 252L808 252" }, mapG);
+mk("ellipse", { class: "organ", cx: 736, cy: 272, rx: 15, ry: 10 }, mapG);   // spleen
+mk("ellipse", { class: "organ", cx: 788, cy: 270, rx: 17, ry: 11 }, mapG);   // liver
+/* flags: [Hodgkin limited, Hodgkin advanced, NHL limited, NHL advanced] */
+const sites = [
+  { x: 744, y: 140, f: [1, 1, 0, 1] }, { x: 780, y: 140, f: [1, 1, 0, 1] },
+  { x: 762, y: 196, f: [1, 1, 1, 1] },
+  { x: 712, y: 178, f: [0, 1, 0, 1] }, { x: 812, y: 178, f: [0, 1, 0, 1] },
+  { x: 736, y: 272, f: [0, 1, 0, 1], sp: 1 }, { x: 788, y: 270, f: [0, 1, 0, 1] },
+  { x: 748, y: 302, f: [0, 1, 0, 1] }, { x: 776, y: 302, f: [0, 1, 1, 1] },
+  { x: 730, y: 344, f: [0, 1, 0, 1] }, { x: 794, y: 344, f: [0, 1, 0, 1] },
+  { x: 762, y: 330, f: [0, 0, 0, 1] },
+].map((s) => { s.e = mk("circle", { class: "site" + (s.sp ? " sp" : ""), cx: s.x, cy: s.y, r: s.sp ? 6 : 7 }, mapG); return s; });
+const beam = mk("path", { class: "beam", d: "M470 84L560 84L452 330L392 330Z", opacity: "0" }, LY.stage);
+const field = mk("rect", { class: "field", x: 130, y: 138, width: 290, height: 228, rx: 20, opacity: "0" }, LY.stage);
+
+/* ---- treatment particles ---- */
+const chemo = pool(10, () => { const g = mk("g", {}, LY.stage); mk("rect", { class: "p-chemo", x: -5, y: -2.4, width: 10, height: 4.8, rx: 2.4 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2.4, width: 5, height: 4.8, rx: 2 }, g); return g; });
+const abs = pool(12, () => abY(LY.stage, 1));
+const acc = { c: 0, a: 0 };
+
+/* ---- labels ---- */
+const labels = [], marks = [];
+function addLabel(ty, text, x, y, tx, ty2, tip) { const g = pill(LY.over, text, x, y, tx, ty2, tip); labels.push({ g, ty }); return g; }
+function addMark(drugs, tys, text, x, y, tx, ty2, tip) { const g = pill(LY.over, text, x, y, tx, ty2, tip); marks.push({ g, drugs, tys }); return g; }
+addLabel(-1, "Node capsule", 140, 168, 104, 92, "The capsule of the lymph node. Inside are follicles in the cortex, a T-cell paracortex and sinuses. Lymphoma grows from lymphocytes inside this architecture.");
+addLabel(-1, "Germinal centre", 205, 180, 196, 116, "A follicle with a germinal centre, where B cells normally mature. In non-Hodgkin lymphoma the follicles are overrun and the architecture is effaced; in Hodgkin lymphoma much of it remains.");
+addLabel(0, "Reed-Sternberg cell", 330, 262, 398, 128, "The malignant cell of classic Hodgkin lymphoma: large, often with two mirror-image nuclei like owl eyes. It is CD30 positive and usually lacks CD20, so anti-CD20 antibody does not bind it.");
+addLabel(0, "Reactive background", 238, 330, 150, 402, "Most of the Hodgkin node is not cancer: reactive lymphocytes, eosinophils, plasma cells and histiocytes gather around the few Reed-Sternberg cells and cause the swelling and symptoms.");
+addLabel(1, "Sheets of B cells", 275, 240, 285, 92, "In B-cell non-Hodgkin lymphoma one clone of B cells grows as monotonous sheets, filling the node and wiping out its normal zones.");
+addLabel(1, "CD20 on B cells", 330, 190, 430, 128, "CD20 is a marker on the surface of B cells, shown as green dots. An anti-CD20 antibody binds here and marks the cell for destruction.");
+addLabel(-1, "Node groups", 744, 140, 636, 96, "Chains of lymph nodes in the neck, armpits, chest, abdomen and groin (pale dots). Red dots are involved groups. Hodgkin lymphoma tends to march to the next group; non-Hodgkin spread is less orderly.");
+addLabel(-1, "Diaphragm", 808, 252, 884, 224, "The diaphragm divides limited from advanced disease. Disease on both sides of it, or in organs, is advanced stage.");
+addLabel(-1, "Spleen and organs", 788, 270, 884, 316, "The spleen counts as lymphoid tissue. Spread to liver or bone marrow (extranodal disease) is advanced and needs treatment throughout the body, not a local field.");
+addLabel(-1, "B symptoms", 762, 392, 648, 402, "B symptoms: fever, drenching night sweats and weight loss without trying. They come from inflammatory signals released by the lymphoma and its reactive background.");
+addMark([1], [-1], "Chemotherapy acts everywhere", 452, 306, 500, 402, "Chemotherapy travels in the blood to every node group and organ, so it is the backbone for advanced disease in both kinds of lymphoma.");
+addMark([2], [1], "Anti-CD20 binds the sheet", 360, 300, 452, 402, "The antibody coats CD20 on the B-cell sheet and immune cells clear the coated cells. It is added to chemotherapy in B-cell non-Hodgkin lymphoma.");
+addMark([2], [0], "No CD20 target here", 360, 300, 452, 402, "Reed-Sternberg cells usually lack CD20, so an anti-CD20 antibody drifts past without binding. It has no useful role in classic Hodgkin lymphoma.");
+addMark([3], [-1], "Radiotherapy field", 420, 138, 500, 92, "Radiotherapy treats one local field (dashed outline). It can control limited disease in that field but cannot reach involved groups elsewhere.");
+
+/* ---- gauges ---- */
+const gg = {};
+function initPanel() {
+  const P = LY.panel, y0 = 478;
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: W - 48, height: 142, rx: 14 }, P);
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "The patient";
+  [["C", "Clone burden", "g-bad", "How much malignant clone is present: a few Reed-Sternberg cells in Hodgkin lymphoma, a whole sheet of B cells in non-Hodgkin lymphoma."], ["N", "Node swelling", "g-fl", "Enlargement of involved lymph nodes, from the clone plus the reactive cells it attracts."], ["Bs", "B symptoms", "g-eos", "Fever, drenching night sweats and weight loss. More likely with advanced disease."], ["Sp", "Spread", "g-cyt", "From one node region, to neighbouring groups, to both sides of the diaphragm and organs or marrow."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 170 + i * 200, y0 + 2, 52, 18, cls, name, tip); });
+}
+const sm = { C: 0.4, N: 0.4, Bs: 0.2, Sp: 0.2, hl: 1, nhl: 0 };
+function init() { initPanel(); }
+function step(dt, m) {
+  const k = Math.min(1, dt * 1.6);
+  sm.C = lerp(sm.C, m.C, k); sm.N = lerp(sm.N, m.N, k); sm.Bs = lerp(sm.Bs, m.Bs, k); sm.Sp = lerp(sm.Sp, m.Sp, k);
+  sm.hl = lerp(sm.hl, m.type === 0 ? 1 : 0, k); sm.nhl = 1 - sm.hl;
+  const grow = 0.95 + 0.1 * sm.N;
+  nodeG.setAttribute("transform", "translate(" + f1(NX * (1 - grow)) + " " + f1(NY * (1 - grow)) + ") scale(" + grow.toFixed(3) + ")");
+  /* follicles fade as either clone effaces them */
+  const efface = clamp(sm.C * (m.type === 1 ? 1.15 : 0.55));
+  folls.forEach((f, i) => { const s = clamp(1 - efface + 0.12 * Math.sin(tm / 700 + i)); f.setAttribute("opacity", clamp(1.15 - efface).toFixed(2)); f.setAttribute("transform", "translate(" + f1(follPos[i][0] * (1 - s)) + " " + f1(follPos[i][1] * (1 - s)) + ") scale(" + s.toFixed(3) + ")"); });
+  react.forEach((r, i) => { const vis = sm.hl * clamp(1.1 - sm.C * 0.35) + (1 - sm.C) * 0.25; place(r.g, r.x + Math.sin(tm / 900 + i) * 2, r.y + Math.cos(tm / 1100 + i * 2) * 2, 0, 1); r.g.style.opacity = clamp(vis).toFixed(2); });
+  const rsWant = Math.round(sm.C * 1.4 * rsPos.length);
+  rsCells.forEach((r, i) => { const on = i < rsWant; place(r.g, r.x, r.y + Math.sin(tm / 800 + i * 2) * 2.5, Math.sin(tm / 2000 + i) * 8, on ? 0.4 + 0.6 * sm.hl : 0.1); r.g.style.opacity = (on ? sm.hl : 0).toFixed(2); });
+  const shWant = Math.round(clamp(sm.C * 1.5) * sheet.length);
+  sheet.forEach((s, i) => { const on = i < shWant; place(s.g, s.x + Math.sin(tm / 1000 + i) * 1.4, s.y, 0, on ? 1 : 0.3); s.g.style.opacity = (on ? sm.nhl * clamp(0.35 + sm.C) : sm.nhl * 0.1).toFixed(2); });
+  /* spread map: lit sites follow the pattern for this type and stage, dimmed by systemic treatment */
+  const lvl = m.type * 2 + (m.adv ? 1 : 0);
+  sites.forEach((s, i) => { const lit = s.f[lvl] && sm.Sp > 0.12 + i * 0.045; s.e.classList.toggle("on", !!lit); s.e.setAttribute("opacity", lit ? "1" : "0.45"); s.e.setAttribute("r", lit ? (s.sp ? 6.5 : 7.5) : (s.sp ? 6 : 7)); });
+  /* treatments */
+  beam.setAttribute("opacity", m.drug === 3 ? (0.12 + 0.05 * Math.sin(tm / 240)).toFixed(2) : "0");
+  field.setAttribute("opacity", m.drug === 3 ? "0.9" : "0");
+  acc.c += dt * (m.drug === 1 ? 3.2 : 0); while (acc.c >= 1) { acc.c--; const p = freeP(chemo); if (p) emit(p, 60, rnd(170, 330), rnd(55, 80), rnd(-8, 8), 0); }
+  chemo.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt + Math.sin(tm / 300 + p.x) * 0.12; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 70) + ")"); if (p.x > 430 || p.t > 6) kill(p); });
+  acc.a += dt * (m.drug === 2 ? 3.4 : 0); while (acc.a >= 1) { acc.a--; const p = freeP(abs); if (p) { const tgt = sheet[Math.floor(Math.random() * Math.max(1, sheet.length))]; emit(p, 90, rnd(160, 340), 0, 0, tgt ? sheet.indexOf(tgt) : 0); } }
+  abs.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (m.type === 1) { const tgt = sheet[p.k] || sheet[0]; const dx = tgt.x - p.x, dy = tgt.y - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 62 * dt; p.y += (dy / d) * 62 * dt; if (d < 13) kill(p); }
+    else { p.x += 52 * dt; p.y += Math.sin(tm / 350 + p.k) * 0.25; if (p.x > 450 || p.t > 7) kill(p); }
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(Math.sin(tm / 400 + p.k) * 24) + ")"); });
+  labels.forEach((l) => { l.g.style.display = l.ty === -1 || l.ty === m.type ? "" : "none"; });
+  marks.forEach((mk2) => { mk2.g.style.display = mk2.drugs.indexOf(m.drug) > -1 && (mk2.tys[0] === -1 || mk2.tys[0] === m.type) ? "" : "none"; });
+  gg.C.set(sm.C, wordOf(sm.C, 0.25, 0.55, ["low", "moderate", "high"])); gg.N.set(sm.N, wordOf(sm.N, 0.3, 0.6, ["normal", "enlarged", "bulky"]));
+  gg.Bs.set(sm.Bs, wordOf(sm.Bs, 0.25, 0.55, ["absent", "mild", "marked"])); gg.Sp.set(sm.Sp, wordOf(sm.Sp, 0.25, 0.55, ["confined", "regional", "widespread"]));
+}
+run({ init, step });
+</script></body></html>

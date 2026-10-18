@@ -31,7 +31,7 @@ try{
  const idx=await (await fetch('http://localhost:9041/kb/clinical-protocols/index.json')).json();
 
  // 1. The fifth tab appears on every original tab (app.js renders four).
- for(const tab of ['syndromes','antibiogram','aware','guidelines']){
+ for(const tab of ['syndromes','ilearn','antibiogram','aware','guidelines']){
   await ev(`SB.openRef('${tab}')`);await sleep(150);
   ok(await ev(`document.querySelectorAll('#sbrefBody .sbref-tabs [data-kbp-tab]').length===1`),`Protocols tab present on ${tab}`);
  }

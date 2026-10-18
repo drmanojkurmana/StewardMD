@@ -1,0 +1,1428 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Semaglutide and tirzepatide: GLP-1 and GIP receptor agonists</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body {
+  --c-glp1: #2dd4bf;
+  --c-gip: #f59e0b;
+  --c-beta: #38bdf8;
+  --c-alpha: #fb923c;
+  --c-ins: #60a5fa;
+  --c-gcg: #f97316;
+  --c-camp: #facc15;
+  --c-alb: #94a3b8;
+  --c-dpp4: #f43f5e;
+  --c-brain: #c084fc;
+  --c-stomach: #f472b6;
+  --c-chyme: #fdba74;
+  --c-vessel: #881337;
+  --c-lumen: #4c0519;
+  --c-depot: #06b6d4;
+  --c-skin: #d4a373;
+  --c-pen: #334155;
+  --c-pen-accent: #0284c7;
+  --c-shield: #38bdf8;
+}
+body[data-theme="light"] {
+  --c-glp1: #0d9488;
+  --c-gip: #d97706;
+  --c-beta: #0284c7;
+  --c-alpha: #ea580c;
+  --c-ins: #2563eb;
+  --c-gcg: #c2410c;
+  --c-camp: #ca8a04;
+  --c-alb: #64748b;
+  --c-dpp4: #be123c;
+  --c-brain: #7e22ce;
+  --c-stomach: #be185d;
+  --c-chyme: #c2410c;
+  --c-vessel: #9f1239;
+  --c-lumen: #ffe4e6;
+  --c-depot: #0891b2;
+  --c-skin: #bc7c54;
+  --c-pen: #64748b;
+  --c-pen-accent: #0369a1;
+  --c-shield: #0284c7;
+}
+
+.sc-skin-stratum { fill: color-mix(in srgb, var(--c-skin) 80%, #000); }
+.sc-skin-dermis { fill: color-mix(in srgb, var(--c-skin) 65%, var(--anatomy-card)); }
+.sc-skin-subq { fill: color-mix(in srgb, var(--c-skin) 40%, var(--anatomy-card)); }
+.sc-subq-fat { fill: color-mix(in srgb, var(--c-skin) 55%, var(--anatomy-paper)); stroke: var(--c-skin); stroke-width: 0.6; opacity: 0.55; }
+.sc-capillary-bg { fill: none; stroke: var(--c-vessel); stroke-width: 5; stroke-linecap: round; opacity: 0.75; }
+.sc-capillary-lumen { fill: none; stroke: var(--c-lumen); stroke-width: 2.4; stroke-linecap: round; }
+
+.pen-needle { stroke: #94a3b8; stroke-width: 1.2; stroke-linecap: round; }
+.pen-hub { fill: #475569; stroke: #334155; stroke-width: 0.6; }
+.pen-barrel { stroke: color-mix(in srgb, var(--c-pen) 50%, #000); stroke-width: 1; }
+.pen-window { fill: var(--anatomy-paper); stroke: #475569; stroke-width: 0.6; }
+.pen-liquid { fill: var(--c-glp1); opacity: 0.85; }
+.pen-clip { fill: #94a3b8; }
+.pen-plunger-shaft { fill: #64748b; }
+.pen-plunger-btn { fill: var(--c-pen-accent); stroke: #0284c7; stroke-width: 0.8; }
+
+.gut-lumen-bg { fill: color-mix(in srgb, var(--c-chyme) 15%, var(--anatomy-card)); stroke: var(--anatomy-faint); stroke-width: 0.8; }
+.gut-wall { fill: none; stroke: var(--anatomy-mid); stroke-width: 1.4; stroke-linecap: round; }
+.cell-l-body { fill: var(--c-glp1); stroke: color-mix(in srgb, var(--c-glp1) 50%, #000); stroke-width: 0.8; }
+.cell-k-body { fill: var(--c-gip); stroke: color-mix(in srgb, var(--c-gip) 50%, #000); stroke-width: 0.8; }
+.cell-nuc { fill: var(--anatomy-paper); opacity: 0.75; }
+
+.dpp4-jaw { fill: var(--c-dpp4); stroke: color-mix(in srgb, var(--c-dpp4) 50%, #000); stroke-width: 0.8; transform-origin: 0px 0px; }
+.dpp4-eye { fill: var(--anatomy-paper); }
+
+.albumin-blob { fill: color-mix(in srgb, var(--c-alb) 40%, var(--anatomy-card)); stroke: var(--c-alb); stroke-width: 1; opacity: 0.9; }
+.alb-label { font-size: 7.5px; font-weight: 700; fill: var(--anatomy-strong); pointer-events: none; }
+.fatty-tail { fill: none; stroke: var(--c-glp1); stroke-width: 1.5; stroke-linecap: round; }
+.alb-drug-head { fill: var(--c-glp1); stroke: color-mix(in srgb, var(--c-glp1) 50%, #000); stroke-width: 0.8; }
+.drug-shield { fill: none; stroke: var(--c-shield); stroke-width: 1.4; stroke-linejoin: round; }
+
+.islet-border { fill: none; stroke: var(--c-beta); stroke-width: 1.2; stroke-dasharray: 4 3; opacity: 0.8; }
+.islet-cap { fill: none; stroke: var(--c-vessel); stroke-width: 1.2; opacity: 0.45; }
+.cl-alpha { fill: var(--c-alpha); stroke: color-mix(in srgb, var(--c-alpha) 50%, #000); stroke-width: 0.9; }
+.cl-beta { fill: var(--c-beta); stroke: color-mix(in srgb, var(--c-beta) 50%, #000); stroke-width: 0.9; }
+.cl-beta.is-zoomed { stroke: var(--anatomy-lit); stroke-width: 1.6; }
+
+.zoom-guide { fill: none; stroke: var(--anatomy-mid); stroke-width: 0.9; stroke-dasharray: 3 3; opacity: 0.65; }
+.zoom-inset-border { fill: none; stroke: var(--anatomy-strong); stroke-width: 1.5; }
+.cytoplasm-bg { fill: color-mix(in srgb, var(--c-beta) 15%, var(--anatomy-card)); }
+.cyto-label { font-size: 6.5px; fill: var(--anatomy-strong); pointer-events: none; }
+.extra-label { font-size: 6.5px; fill: var(--anatomy-strong); pointer-events: none; }
+.bilayer-core { fill: color-mix(in srgb, var(--anatomy-mid) 40%, var(--anatomy-paper)); }
+.phospho-heads { fill: none; stroke: var(--anatomy-mid); stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1 3; }
+
+.rec-tm { fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.glp1-tm { stroke: var(--c-glp1); }
+.gip-tm { stroke: var(--c-gip); }
+.rec-pocket { fill: none; stroke-width: 2.2; stroke-linecap: round; }
+.glp1-pocket { stroke: var(--c-glp1); }
+.gip-pocket { stroke: var(--c-gip); }
+.rec-tail { fill: none; stroke-width: 1.5; stroke-linecap: round; }
+.glp1-tail { stroke: var(--c-glp1); }
+.gip-tail { stroke: var(--c-gip); }
+
+.lig-glp1-dot { fill: var(--c-glp1); stroke: color-mix(in srgb, var(--c-glp1) 50%, #000); stroke-width: 0.8; }
+.lig-gip-dot { fill: var(--c-gip); stroke: color-mix(in srgb, var(--c-gip) 50%, #000); stroke-width: 0.8; }
+.lig-key-notch { fill: none; stroke: var(--c-glp1); stroke-width: 1.6; stroke-linecap: round; }
+.tirz-bridge { fill: none; stroke: var(--anatomy-strong); stroke-width: 1.8; stroke-linecap: round; }
+
+.brain-outline { fill: color-mix(in srgb, var(--c-brain) 25%, var(--anatomy-card)); stroke: var(--c-brain); stroke-width: 1.2; }
+.brain-sulci { fill: none; stroke: var(--c-brain); stroke-width: 0.9; opacity: 0.45; }
+.brain-cerebellum { fill: color-mix(in srgb, var(--c-brain) 35%, var(--anatomy-card)); stroke: var(--c-brain); stroke-width: 1; }
+.brain-stem { fill: none; stroke: var(--c-vessel); stroke-width: 3.5; opacity: 0.6; }
+.hypo-core { fill: var(--c-brain); stroke: var(--anatomy-paper); stroke-width: 1; }
+.app-ring { fill: none; stroke-linecap: round; pointer-events: none; }
+
+.stomach-bg { fill: color-mix(in srgb, var(--c-stomach) 25%, var(--anatomy-card)); }
+.stomach-wall { fill: none; stroke: var(--c-stomach); stroke-width: 1.2; }
+.pylorus-muscle { fill: none; stroke: color-mix(in srgb, var(--c-stomach) 60%, #000); stroke-width: 3.5; stroke-linecap: round; }
+
+.vessel-shadow { fill: color-mix(in srgb, var(--c-vessel) 70%, #000); opacity: 0.45; }
+.vessel-highlight { stroke: rgba(255, 255, 255, 0.45); stroke-width: 1.4; stroke-linecap: round; }
+.vessel-midlight { stroke: rgba(255, 255, 255, 0.12); stroke-width: 1; }
+
+.dr-g-fill.g-sugar { fill: var(--c-bad); }
+.dr-g-fill.g-ins { fill: var(--c-ins); }
+.dr-g-fill.g-gcg { fill: var(--c-gcg); }
+.dr-g-fill.g-emp { fill: var(--c-stomach); }
+.dr-g-fill.g-app { fill: var(--c-brain); }
+.dr-g-fill.g-wt { fill: var(--c-good); }
+
+/* Ad mode styles */
+body.is-ad .dr-controls,
+body.is-ad .dr-status,
+body.is-ad .dr-info,
+body.is-ad .bio-sources,
+body.is-ad .dr-caption,
+body.is-ad .iso-caption,
+body.is-ad .iso-legend,
+body.is-ad .dr-lab {
+  display: none !important;
+}
+/* Key cards: one key vs two keys */
+.key-card { opacity: 0.45; transition: opacity 0.45s ease; }
+.key-card.is-active { opacity: 1; }
+.key-card-bg {
+  fill: var(--anatomy-card);
+  stroke: var(--anatomy-mid);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.35));
+}
+.key-card.is-active .key-card-bg { stroke: var(--anatomy-lit); stroke-width: 1.6; }
+.key-title { font-size: 11.5px; font-weight: 600; letter-spacing: 0.01em; fill: var(--anatomy-strong); }
+.key-sub { font-size: 8.5px; fill: var(--anatomy-strong); }
+.ad-banner-bg {
+  fill: var(--anatomy-card);
+  stroke: var(--anatomy-strong);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.45));
+}
+.ad-banner-txt {
+  fill: var(--anatomy-strong);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Semaglutide and tirzepatide: GLP-1 and GIP receptor agonists</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>blood sugar high · appetite high · weight trend stable</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated multi-organ incretin pharmacology scene. A weekly subcutaneous injection pen releases long-acting incretin agonist into the bloodstream. In the gut, intestinal L and K cells release native GLP-1 and GIP after food, which are cleaved within minutes by DPP-4. Synthetic agonists carry a fatty acid diacid tail that binds albumin and resists DPP-4. In the pancreatic islet, glucose-dependent insulin secretion rises while glucagon is suppressed. A zoom inset displays single GLP-1 receptor docking by semaglutide versus dual GLP-1 and GIP receptor docking by tirzepatide, sparking cAMP and insulin vesicle exocytosis. In the brain, hypothalamic appetite signals calm into satiety. In the stomach, gastric emptying slows. Gauges monitor blood sugar, insulin, glucagon, gastric emptying, appetite and weight trend under semaglutide or tirzepatide."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<defs>
+  <!-- Soft gradients -->
+  <linearGradient id="grad-vessel" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="var(--c-vessel)" stop-opacity="0.95"/>
+    <stop offset="35%" stop-color="var(--c-lumen)" stop-opacity="0.98"/>
+    <stop offset="70%" stop-color="var(--c-lumen)" stop-opacity="0.98"/>
+    <stop offset="100%" stop-color="var(--c-vessel)" stop-opacity="0.95"/>
+  </linearGradient>
+  <radialGradient id="grad-depot" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--c-glp1)" stop-opacity="0.85"/>
+    <stop offset="60%" stop-color="var(--c-depot)" stop-opacity="0.45"/>
+    <stop offset="100%" stop-color="var(--c-depot)" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="grad-islet" cx="45%" cy="45%" r="55%">
+    <stop offset="0%" stop-color="var(--c-beta)" stop-opacity="0.22"/>
+    <stop offset="75%" stop-color="var(--anatomy-card)" stop-opacity="0.7"/>
+    <stop offset="100%" stop-color="var(--c-beta)" stop-opacity="0.35"/>
+  </radialGradient>
+  <radialGradient id="grad-hypo" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--c-brain)" stop-opacity="0.75"/>
+    <stop offset="50%" stop-color="var(--c-brain)" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="var(--c-brain)" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="grad-zoom" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="var(--anatomy-card)" stop-opacity="0.95"/>
+    <stop offset="85%" stop-color="var(--anatomy-paper)" stop-opacity="0.9"/>
+    <stop offset="100%" stop-color="var(--anatomy-mid)" stop-opacity="0.3"/>
+  </radialGradient>
+  <linearGradient id="grad-pen" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0%" stop-color="var(--c-pen)"/>
+    <stop offset="40%" stop-color="color-mix(in srgb, var(--c-pen) 70%, #fff)"/>
+    <stop offset="100%" stop-color="var(--c-pen)"/>
+  </linearGradient>
+  <!-- Clip paths -->
+  <clipPath id="clip-zoom">
+    <circle cx="585" cy="135" r="61"/>
+  </clipPath>
+</defs>
+
+<!-- Panoramic tissue canvas -->
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<g id="bg-specks"></g>
+
+<!-- 1. Pen and skin (top left) -->
+<g id="skin-zone">
+  <!-- Skin layers -->
+  <rect class="sc-skin-stratum" x="24" y="142" width="180" height="5" rx="2"/>
+  <rect class="sc-skin-dermis" x="24" y="147" width="180" height="15"/>
+  <rect class="sc-skin-subq" x="24" y="162" width="180" height="36" rx="6"/>
+  <!-- Subcutaneous fat cells -->
+  <circle class="sc-subq-fat" cx="42" cy="178" r="8"/>
+  <circle class="sc-subq-fat" cx="62" cy="184" r="7"/>
+  <circle class="sc-subq-fat" cx="82" cy="176" r="9"/>
+  <circle class="sc-subq-fat" cx="106" cy="182" r="8"/>
+  <circle class="sc-subq-fat" cx="180" cy="180" r="9"/>
+  <!-- Subcutaneous depot -->
+  <ellipse id="sc-depot" class="sc-depot" cx="152" cy="174" rx="18" ry="9" fill="url(#grad-depot)"/>
+  <!-- Capillary from depot to central vessel -->
+  <path class="sc-capillary-bg" d="M165 176 C180 185, 192 205, 192 234"/>
+  <path class="sc-capillary-lumen" d="M165 176 C180 185, 192 205, 192 234"/>
+  <!-- Injection Pen tilted at 35 degrees -->
+  <g id="pen-rig" transform="translate(136, 142) rotate(-35)">
+    <line class="pen-needle" x1="0" y1="0" x2="0" y2="40"/>
+    <path class="pen-hub" d="M-5 0 L5 0 L3 -12 L-3 -12 Z"/>
+    <rect class="pen-barrel" x="-9" y="-82" width="18" height="70" rx="3" fill="url(#grad-pen)"/>
+    <rect class="pen-window" x="-6" y="-68" width="12" height="34" rx="2"/>
+    <rect id="pen-liquid" class="pen-liquid" x="-5" y="-66" width="10" height="30" rx="1"/>
+    <rect class="pen-clip" x="9" y="-80" width="3" height="36" rx="1.5"/>
+    <g id="pen-plunger">
+      <rect class="pen-plunger-shaft" x="-4" y="-96" width="8" height="14" rx="1"/>
+      <rect class="pen-plunger-btn" x="-8" y="-102" width="16" height="6" rx="3"/>
+    </g>
+  </g>
+</g>
+
+<!-- 2. Gut (bottom left) -->
+<g id="gut-zone">
+  <!-- Gut lumen background -->
+  <rect class="gut-lumen-bg" x="24" y="340" width="236" height="70" rx="8"/>
+  <!-- Epithelial brush border with villi -->
+  <path class="gut-wall" d="M24 336 C35 328, 45 328, 55 336 C65 328, 75 328, 85 336 C95 328, 105 328, 115 336 C125 328, 135 328, 145 336 C155 328, 165 328, 175 336 C185 328, 195 328, 205 336 C215 328, 225 328, 235 336 C245 328, 255 328, 260 336"/>
+  <!-- Enteroendocrine L cells (teal) and K cells (amber) -->
+  <g class="gut-cell l-cell" transform="translate(85, 332)">
+    <path class="cell-l-body" d="M-8 4 C-8 -12, 8 -12, 8 4 Z"/>
+    <circle class="cell-nuc" cx="0" cy="-2" r="3"/>
+  </g>
+  <g class="gut-cell k-cell" transform="translate(145, 332)">
+    <path class="cell-k-body" d="M-8 4 C-8 -12, 8 -12, 8 4 Z"/>
+    <circle class="cell-nuc" cx="0" cy="-2" r="3"/>
+  </g>
+  <g class="gut-cell l-cell" transform="translate(205, 332)">
+    <path class="cell-l-body" d="M-8 4 C-8 -12, 8 -12, 8 4 Z"/>
+    <circle class="cell-nuc" cx="0" cy="-2" r="3"/>
+  </g>
+  <!-- DPP-4 Chomping Enzymes -->
+  <g id="dpp4-1" class="dpp4-group" transform="translate(115, 305)">
+    <path id="dpp4-1-top" class="dpp4-jaw" d="M0 0 L10 -8 A12 12 0 0 0 -12 -3 Z"/>
+    <path id="dpp4-1-bot" class="dpp4-jaw" d="M0 0 L10 8 A12 12 0 0 1 -12 3 Z"/>
+    <circle class="dpp4-eye" cx="-4" cy="-5" r="1.4"/>
+  </g>
+  <g id="dpp4-2" class="dpp4-group" transform="translate(225, 310)">
+    <path id="dpp4-2-top" class="dpp4-jaw" d="M0 0 L10 -8 A12 12 0 0 0 -12 -3 Z"/>
+    <path id="dpp4-2-bot" class="dpp4-jaw" d="M0 0 L10 8 A12 12 0 0 1 -12 3 Z"/>
+    <circle class="dpp4-eye" cx="-4" cy="-5" r="1.4"/>
+  </g>
+  <!-- Albumin-Bound Drug Complex with Shield -->
+  <g id="alb-complex" transform="translate(180, 298)">
+    <path class="albumin-blob" d="M-14 0 C-14 -10, -4 -12, 4 -8 C12 -4, 16 4, 10 12 C4 18, -8 16, -14 6 Z"/>
+    <text class="alb-label" x="-2" y="3" text-anchor="middle">ALB</text>
+    <path class="fatty-tail" d="M12 2 C8 6, 2 8, -6 6"/>
+    <circle id="alb-drug-head" class="alb-drug-head" cx="16" cy="0" r="4.5"/>
+    <path class="drug-shield" d="M22 -6 L27 -4 L26 2 L22 6 L18 2 L17 -4 Z"/>
+  </g>
+  <!-- Capillary connecting gut to circulation -->
+  <path class="sc-capillary-bg" d="M245 320 C245 285, 235 270, 235 266"/>
+  <path class="sc-capillary-lumen" d="M245 320 C245 285, 235 270, 235 266"/>
+</g>
+
+<!-- 3. Pancreatic islet (top centre) -->
+<g id="islet-zone" class="islet-group" transform="translate(405, 130)">
+  <ellipse class="islet-bg" cx="0" cy="0" rx="66" ry="56" fill="url(#grad-islet)"/>
+  <ellipse class="islet-border" cx="0" cy="0" rx="66" ry="56"/>
+  <path class="islet-cap" d="M-40 -10 Q0 -5 40 -15 M-30 20 Q5 15 35 25 M0 -45 L0 45"/>
+  <!-- Alpha cells (mantle) -->
+  <circle class="cl-alpha" cx="-38" cy="-28" r="10.5"/>
+  <circle class="cl-alpha" cx="36" cy="-26" r="10.5"/>
+  <circle class="cl-alpha" cx="-45" cy="12" r="10"/>
+  <circle class="cl-alpha" cx="42" cy="14" r="10"/>
+  <circle class="cl-alpha" cx="0" cy="-38" r="9.5"/>
+  <!-- Beta cells (core) -->
+  <circle class="cl-beta" cx="-18" cy="-12" r="12"/>
+  <circle class="cl-beta" cx="16" cy="-10" r="12"/>
+  <circle class="cl-beta" cx="-24" cy="16" r="11.5"/>
+  <circle class="cl-beta" cx="20" cy="18" r="12"/>
+  <circle id="zoomed-beta" class="cl-beta is-zoomed" cx="0" cy="8" r="13"/>
+  <!-- Efferent islet microvessel -->
+  <path class="sc-capillary-bg" d="M0 56 L0 104"/>
+  <path class="sc-capillary-lumen" d="M0 56 L0 104"/>
+</g>
+
+<!-- 4. Receptor zoom inset (circle beside islet) -->
+<g id="zoom-zone">
+  <!-- Thin zoom lines from beta cell to inset -->
+  <path class="zoom-guide" d="M405 138 L524 105 M405 138 L524 165"/>
+  <circle class="zoom-inset-bg" cx="585" cy="135" r="62" fill="url(#grad-zoom)"/>
+  <g clip-path="url(#clip-zoom)">
+    <rect class="cytoplasm-bg" x="520" y="135" width="130" height="65"/>
+    <text class="cyto-label" x="585" y="184" text-anchor="middle">Beta cell cytoplasm</text>
+    <text class="extra-label" x="610" y="103" text-anchor="middle">Extracellular</text>
+    <rect class="bilayer-core" x="520" y="131" width="130" height="8"/>
+    <path class="phospho-heads" d="M523 130 H647 M523 140 H647"/>
+    <!-- GLP-1 Receptor (teal) -->
+    <g id="rec-glp1" class="rec-group" transform="translate(558, 135)">
+      <path class="rec-tm glp1-tm" d="M-8 -6 V8 M-4 -6 V8 M0 -6 V8 M4 -6 V8 M8 -6 V8"/>
+      <path id="glp1-pocket" class="rec-pocket glp1-pocket" d="M-9 -6 C-9 -16, 9 -16, 9 -6"/>
+      <path class="rec-tail glp1-tail" d="M-3 8 C-3 14, 5 14, 5 8"/>
+    </g>
+    <!-- GIP Receptor (amber) -->
+    <g id="rec-gip" class="rec-group" transform="translate(612, 135)">
+      <path class="rec-tm gip-tm" d="M-8 -6 V8 M-4 -6 V8 M0 -6 V8 M4 -6 V8 M8 -6 V8"/>
+      <path id="gip-pocket" class="rec-pocket gip-pocket" d="M-9 -6 C-9 -16, 9 -16, 9 -6"/>
+      <path class="rec-tail gip-tail" d="M-3 8 C-3 14, 5 14, 5 8"/>
+    </g>
+    <!-- Semaglutide single key -->
+    <g id="sema-key" class="ligand-key" opacity="0">
+      <circle class="lig-glp1-dot" cx="558" cy="123" r="5.5"/>
+      <path class="lig-key-notch" d="M558 125 V129"/>
+    </g>
+    <!-- Tirzepatide dual key -->
+    <g id="tirz-key" class="ligand-key" opacity="0">
+      <path class="tirz-bridge" d="M558 116 Q585 110 612 116"/>
+      <circle class="lig-glp1-dot" cx="558" cy="123" r="5.5"/>
+      <circle class="lig-gip-dot" cx="612" cy="123" r="5.5"/>
+    </g>
+  </g>
+  <circle class="zoom-inset-border" cx="585" cy="135" r="62"/>
+</g>
+
+<!-- 5. Brain / Hypothalamus (top right) -->
+<g id="brain-zone" class="brain-group" transform="translate(730, 70)">
+  <path class="brain-outline" d="M40 95 C20 90, 5 70, 8 45 C10 20, 35 5, 75 5 C115 5, 145 25, 150 55 C155 75, 145 95, 125 102 C115 106, 105 125, 95 130 C85 130, 85 110, 75 105 C60 105, 50 102, 40 95 Z"/>
+  <path class="brain-sulci" d="M30 45 C50 35, 70 50, 90 35 M50 20 C75 12, 105 22, 125 35 M95 65 C115 60, 135 70, 140 85"/>
+  <path class="brain-cerebellum" d="M125 102 C135 110, 130 128, 115 128 C105 128, 100 115, 105 108 Z"/>
+  <path class="brain-stem" d="M85 110 V164"/>
+  <circle id="hypo-core" class="hypo-core" cx="70" cy="65" r="9"/>
+  <circle id="hypo-glow" class="hypo-glow" cx="70" cy="65" r="22" fill="url(#grad-hypo)"/>
+  <circle id="app-ring-1" class="app-ring" cx="70" cy="65" r="15"/>
+  <circle id="app-ring-2" class="app-ring" cx="70" cy="65" r="28"/>
+  <circle id="app-ring-3" class="app-ring" cx="70" cy="65" r="42"/>
+</g>
+
+<!-- 6. Stomach and Pylorus (bottom right) -->
+<g id="stomach-zone" class="stomach-group" transform="translate(700, 310)">
+  <path class="stomach-bg" d="M15 15 C35 -15, 95 -10, 115 25 C125 45, 130 65, 135 65 C140 65, 142 62, 148 62 C160 62, 175 75, 175 95 C175 110, 155 118, 140 105 C130 95, 122 80, 112 80 C85 80, 45 105, 15 75 C-10 50, -5 25, 15 15 Z"/>
+  <path class="stomach-wall" d="M15 15 C35 -15, 95 -10, 115 25 C125 45, 130 65, 135 65 C140 65, 142 62, 148 62 C160 62, 175 75, 175 95 C175 110, 155 118, 140 105 C130 95, 122 80, 112 80 C85 80, 45 105, 15 75 C-10 50, -5 25, 15 15 Z"/>
+  <g class="pylorus-sphincter">
+    <path id="pylorus-top" class="pylorus-muscle" d="M132 56 Q137 63 142 56"/>
+    <path id="pylorus-bot" class="pylorus-muscle" d="M132 74 Q137 67 142 74"/>
+  </g>
+  <path class="sc-capillary-bg" d="M40 -44 V15"/>
+  <path class="sc-capillary-lumen" d="M40 -44 V15"/>
+</g>
+
+<!-- Central Bloodstream (horizontal glossy vessel at y = 250) -->
+<rect class="vessel-shadow" x="14" y="233" width="932" height="34" rx="4"/>
+<rect id="vessel-lumen" class="vessel-lumen" x="14" y="234" width="932" height="32" fill="url(#grad-vessel)"/>
+<line class="vessel-highlight" x1="14" y1="237" x2="946" y2="237"/>
+<line class="vessel-midlight" x1="14" y1="248" x2="946" y2="248"/>
+
+<!-- Dynamic particle pools -->
+<g id="rbcs"></g>
+<g id="glucose"></g>
+<g id="drug-stream"></g>
+<g id="gut-particles"></g>
+<g id="incretin-particles"></g>
+<g id="islet-granules"></g>
+<g id="stomach-particles"></g>
+<g id="zoom-particles"></g>
+
+<!-- Key cards: one key vs two keys (lower middle dead space) -->
+<g id="key-cards">
+  <g id="key-card-sema" class="key-card hot" tabindex="0" data-info="Semaglutide is one key for one lock: the GLP-1 receptor, switching on glucose-dependent insulin release.">
+    <rect class="key-card-bg" x="280" y="335" width="197" height="100" rx="10"/>
+    <text class="key-title" x="292" y="356">Semaglutide: one key</text>
+    <rect class="bilayer-core" x="318" y="383" width="121" height="4"/>
+    <path class="phospho-heads" d="M318 383 H439 M318 387 H439"/>
+    <g transform="translate(378.5, 385)">
+      <path class="rec-tm glp1-tm" d="M-8 -6 V8 M-4 -6 V8 M0 -6 V8 M4 -6 V8 M8 -6 V8"/>
+      <path class="rec-pocket glp1-pocket" d="M-9 -6 C-9 -16, 9 -16, 9 -6"/>
+      <path class="rec-tail glp1-tail" d="M-3 8 C-3 14, 5 14, 5 8"/>
+      <circle class="lig-glp1-dot" cx="0" cy="-12" r="5.5"/>
+      <path class="lig-key-notch" d="M0 -10 V-6"/>
+    </g>
+    <text class="key-sub" x="378.5" y="420" text-anchor="middle">the GLP-1 receptor</text>
+  </g>
+  <g id="key-card-tirz" class="key-card hot" tabindex="0" data-info="Tirzepatide is two keys in one molecule: the GLP-1 and GIP receptors together, a stronger combined signal.">
+    <rect class="key-card-bg" x="488" y="335" width="197" height="100" rx="10"/>
+    <text class="key-title" x="500" y="356">Tirzepatide: two keys</text>
+    <rect class="bilayer-core" x="526" y="383" width="121" height="4"/>
+    <path class="phospho-heads" d="M526 383 H647 M526 387 H647"/>
+    <g transform="translate(559.5, 385)">
+      <path class="rec-tm glp1-tm" d="M-8 -6 V8 M-4 -6 V8 M0 -6 V8 M4 -6 V8 M8 -6 V8"/>
+      <path class="rec-pocket glp1-pocket" d="M-9 -6 C-9 -16, 9 -16, 9 -6"/>
+      <path class="rec-tail glp1-tail" d="M-3 8 C-3 14, 5 14, 5 8"/>
+      <circle class="lig-glp1-dot" cx="0" cy="-12" r="5.5"/>
+    </g>
+    <g transform="translate(613.5, 385)">
+      <path class="rec-tm gip-tm" d="M-8 -6 V8 M-4 -6 V8 M0 -6 V8 M4 -6 V8 M8 -6 V8"/>
+      <path class="rec-pocket gip-pocket" d="M-9 -6 C-9 -16, 9 -16, 9 -6"/>
+      <path class="rec-tail gip-tail" d="M-3 8 C-3 14, 5 14, 5 8"/>
+      <circle class="lig-gip-dot" cx="0" cy="-12" r="5.5"/>
+    </g>
+    <path class="tirz-bridge" d="M559.5 367.5 Q586.5 361.5 613.5 367.5"/>
+    <text class="key-sub" x="586.5" y="420" text-anchor="middle">the GLP-1 and GIP receptors</text>
+  </g>
+</g>
+
+<!-- Overlays: label pills, gauges panel, and ad banner -->
+<g id="over"></g>
+<g id="panel"></g>
+<g id="ad-banner" class="ad-banner" opacity="0" pointer-events="none">
+  <rect class="ad-banner-bg" x="255" y="290" width="450" height="38" rx="19"/>
+  <text id="ad-text" class="ad-banner-txt" x="480" y="314" text-anchor="middle">No medicine</text>
+</g>
+</svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numerical values are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Metabolic state</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="type 2 diabetes"><span class="dr-ticks"><i>healthy after meal</i><i>type 2 diabetes</i><i>diabetes with obesity</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="No medicine" data-with="With medicine"><option value="0">no medicine</option><option value="1">semaglutide (GLP-1 receptor agonist)</option><option value="2">tirzepatide (dual GIP and GLP-1 receptor agonist)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How incretins and their agonists act.</strong> Gut enteroendocrine cells release incretins after meals: L cells make glucagon-like peptide-1 (GLP-1) and K cells make glucose-dependent insulinotropic polypeptide (GIP). In the pancreas, both stimulate beta-cell insulin secretion in a glucose-dependent manner (low intrinsic hypoglycaemia risk when used alone), and GLP-1 suppresses inappropriate glucagon secretion from alpha cells. In the stomach, GLP-1 slows gastric emptying, blunting postprandial glucose spikes. In the hypothalamus and brainstem, GLP-1 and GIP signal satiety and reduce hunger cravings. Endogenous GLP-1 and GIP are rapidly cleaved within minutes by dipeptidyl peptidase-4 (DPP-4). Semaglutide (a GLP-1 receptor agonist) and tirzepatide (a dual GIP and GLP-1 receptor agonist) are engineered with fatty diacid side chains that bind albumin and resist DPP-4, extending their half-lives to about one week.</li><li><strong>Dual incretin agonism.</strong> Tirzepatide engages both GIP and GLP-1 receptors. Synergy between GIP and GLP-1 receptor pathways produces potent glucose-dependent insulin release, prominent central appetite suppression and marked weight reduction, often with slightly less acute gastric slowing than selective GLP-1 agonism.</li><li><strong>What follows from the action (flagged for clinician review).</strong> Common adverse effects reflect the pharmacology: gastrointestinal symptoms including nausea, vomiting, diarrhoea or constipation (from slowed gastrointestinal transit and vagal signaling), reduced appetite, gallbladder events (such as cholelithiasis from rapid weight loss and gallbladder stasis), and rare pancreatitis. Hypoglycaemia risk is low with monotherapy because insulin secretion is glucose-dependent, but increases when combined with insulin or sulfonylureas. Caution is advised with personal or family history of medullary thyroid carcinoma or multiple endocrine neoplasia syndrome type 2 (MEN2), and in severe gastrointestinal disease.</li></ul>
+<p><strong>What was simplified.</strong> Peptide amino-acid sequences, detailed intracellular phosphorylation cascades, dose escalation schedules, specific trial percentages, oral co-formulation mechanisms, renal and cardiovascular trial endpoints in detail, and all numerical doses are omitted. Speeds and particle counts are illustrative.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Metabolic state","a":[0,1,2],"names":["healthy after a meal","type 2 diabetes","type 2 diabetes with obesity"],"ticks":["healthy after meal","type 2 diabetes","diabetes with obesity"],"start":1},"settings":[{"label":"no medicine"},{"label":"semaglutide (GLP-1 receptor agonist)"},{"label":"tirzepatide (dual GIP and GLP-1 receptor agonist)"}],"drugNames":["no medicine","semaglutide","tirzepatide"],"status":"Metabolic state: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const l = S.level.a[level];
+  const d = drug;
+
+  // Blood sugar
+  let sugar = 0.22;
+  if (l === 1) sugar = d === 0 ? 0.82 : (d === 1 ? 0.28 : 0.22);
+  else if (l === 2) sugar = d === 0 ? 0.90 : (d === 1 ? 0.30 : 0.24);
+
+  // Insulin secretion matched to need
+  let insulin = 0.50;
+  if (l === 1) insulin = d === 0 ? 0.30 : (d === 1 ? 0.68 : 0.74);
+  else if (l === 2) insulin = d === 0 ? 0.34 : (d === 1 ? 0.70 : 0.76);
+
+  // Glucagon
+  let glucagon = 0.22;
+  if (l === 1) glucagon = d === 0 ? 0.76 : (d === 1 ? 0.20 : 0.18);
+  else if (l === 2) glucagon = d === 0 ? 0.86 : (d === 1 ? 0.22 : 0.19);
+
+  // Gastric emptying rate
+  let emptying = 0.50;
+  if (l >= 1) {
+    if (d === 0) emptying = l === 1 ? 0.55 : 0.58;
+    else if (d === 1) emptying = 0.18;
+    else emptying = 0.28;
+  } else {
+    if (d === 1) emptying = 0.22;
+    else if (d === 2) emptying = 0.30;
+  }
+
+  // Appetite / hunger drive
+  let appetite = 0.44;
+  if (l === 1) appetite = d === 0 ? 0.72 : (d === 1 ? 0.30 : 0.14);
+  else if (l === 2) appetite = d === 0 ? 0.94 : (d === 1 ? 0.32 : 0.15);
+
+  // Weight trend
+  let weight = 0.50;
+  if (l === 1) weight = d === 0 ? 0.55 : (d === 1 ? 0.26 : 0.14);
+  else if (l === 2) weight = d === 0 ? 0.86 : (d === 1 ? 0.28 : 0.15);
+
+  let sugarWord = "normal";
+  if (l === 0) {
+    sugarWord = "normal";
+  } else {
+    sugarWord = sugar > 0.5 ? "high" : "controlled";
+  }
+
+  let appetiteWord = "normal";
+  if (appetite < 0.20) appetiteWord = "suppressed";
+  else if (appetite < 0.40) appetiteWord = "reduced";
+  else if (appetite < 0.60) appetiteWord = "normal";
+  else appetiteWord = "high";
+
+  let weightWord = "stable";
+  if (weight < 0.20) weightWord = "falling fast";
+  else if (weight < 0.40) weightWord = "falling";
+  else if (weight < 0.70) weightWord = "stable";
+  else weightWord = "rising";
+
+  const words = [sugarWord, appetiteWord, weightWord];
+  const readout = "blood sugar " + sugarWord + " · appetite " + appetiteWord + " · weight trend " + weightWord;
+
+  return {
+    l, d, sugar, insulin, glucagon, emptying, appetite, weight, words, readout
+  };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Incretin scene runtime: pen injection, L and K cells, DPP-4 chomping,
+ * dual receptor docking, insulin vesicle fusion, hypothalamic appetite calm,
+ * delayed gastric emptying and systemic circulation. Plain globals, ES2015. */
+const WW = SC.W;
+const layers = {
+  bg: $("bg-specks"),
+  rbc: $("rbcs"),
+  glu: $("glucose"),
+  drug: $("drug-stream"),
+  gut: $("gut-particles"),
+  inc: $("incretin-particles"),
+  islet: $("islet-granules"),
+  stom: $("stomach-particles"),
+  zoom: $("zoom-particles"),
+  over: $("over"),
+  panel: $("panel")
+};
+
+/* ---- particle pool utility ---- */
+function pool(n, build) {
+  return Array.from({ length: n }, () => {
+    const e = build();
+    e.setAttribute("opacity", "0");
+    return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, branch: 0 };
+  });
+}
+function emit(p, x, y, vx, vy, k, branch) {
+  p.on = true;
+  p.x = x;
+  p.y = y;
+  p.vx = vx;
+  p.vy = vy;
+  p.t = 0;
+  p.k = k || 0;
+  p.branch = branch || 0;
+  p.e.setAttribute("opacity", "1");
+}
+function kill(p) {
+  p.on = false;
+  p.e.setAttribute("opacity", "0");
+}
+const free = (pl) => pl.find((p) => !p.on);
+
+/* ---- background subtle specks ---- */
+const bgSpecks = [];
+function initBgSpecks() {
+  for (let i = 0; i < 24; i++) {
+    const x = rnd(30, WW - 30), y = rnd(50, 430), r = rnd(1.1, 2.0);
+    const e = mk("circle", { cx: f1(x), cy: f1(y), r: f1(r), fill: "var(--anatomy-strong)", opacity: f1(rnd(0.04, 0.10)) }, layers.bg);
+    bgSpecks.push({ e, x, y, vx: rnd(-2.5, 2.5), vy: rnd(-1.8, 1.8) });
+  }
+}
+
+/* ---- red blood cells in central vessel ---- */
+const rbcs = [];
+function initRbc() {
+  for (let i = 0; i < 16; i++) {
+    const g = mk("g", {}, layers.rbc);
+    mk("ellipse", { rx: 7.5, ry: 4.5, fill: "var(--c-vessel)", stroke: "color-mix(in srgb, var(--c-vessel) 40%, #000)", "stroke-width": "0.7" }, g);
+    mk("ellipse", { rx: 2.8, ry: 1.6, fill: "var(--c-lumen)" }, g);
+    rbcs.push({ g, x: (i / 16) * WW, y: rnd(242, 258), v: rnd(42, 58), rot: rnd(-15, 15) });
+  }
+}
+
+/* ---- glucose particles ---- */
+const glucose = pool(24, () => mk("polygon", {
+  points: "-3,0 -1.5,-2.6 1.5,-2.6 3,0 1.5,2.6 -1.5,2.6",
+  fill: "#f59e0b",
+  stroke: "#b45309",
+  "stroke-width": "0.5"
+}, layers.glu));
+
+/* ---- drug stream particles (depot -> vessel -> organs) ---- */
+const drugStream = pool(36, () => {
+  const g = mk("g", {}, layers.drug);
+  mk("circle", { class: "drug-p-glp1", cx: 0, cy: 0, r: 2.8, fill: "var(--c-glp1)", stroke: "color-mix(in srgb, var(--c-glp1) 50%, #000)", "stroke-width": "0.6" }, g);
+  mk("circle", { class: "drug-p-gip", cx: 2.8, cy: 0, r: 2.8, fill: "var(--c-gip)", stroke: "color-mix(in srgb, var(--c-gip) 50%, #000)", "stroke-width": "0.6" }, g);
+  return g;
+});
+
+/* ---- gut lumen chyme particles ---- */
+const gutChyme = pool(16, () => mk("circle", { r: 2.4, fill: "var(--c-chyme)", stroke: "#c2410c", "stroke-width": "0.5" }, layers.gut));
+
+/* ---- native incretins and DPP-4 fragments ---- */
+const nativeGlp = pool(12, () => mk("circle", { r: 2.2, fill: "var(--c-glp1)", stroke: "#0f766e", "stroke-width": "0.6" }, layers.inc));
+const nativeGip = pool(12, () => mk("circle", { r: 2.2, fill: "var(--c-gip)", stroke: "#b45309", "stroke-width": "0.6" }, layers.inc));
+const dpp4Frags = pool(16, () => mk("line", { x1: -1.8, y1: 0, x2: 1.8, y2: 0, stroke: "#f43f5e", "stroke-width": "1.2", "stroke-linecap": "round" }, layers.inc));
+
+/* ---- islet granules: insulin and glucagon ---- */
+const insulinGranules = pool(24, () => mk("circle", { r: 2.3, fill: "var(--c-ins)", stroke: "#1d4ed8", "stroke-width": "0.6" }, layers.islet));
+const glucagonGranules = pool(16, () => mk("circle", { r: 2.3, fill: "var(--c-gcg)", stroke: "#c2410c", "stroke-width": "0.6" }, layers.islet));
+
+/* ---- stomach chyme & pylorus transit ---- */
+const stomachChyme = pool(22, () => mk("circle", { r: 2.6, fill: "var(--c-chyme)", stroke: "#ea580c", "stroke-width": "0.6" }, layers.stom));
+
+/* ---- receptor zoom inset particles ---- */
+const campSparks = pool(14, () => mk("path", { d: "M0 -2.5 L0.8 -0.8 L2.5 0 L0.8 0.8 L0 2.5 L-0.8 0.8 L-2.5 0 L-0.8 -0.8 Z", fill: "var(--c-camp)" }, layers.zoom));
+const zoomVesicles = pool(10, () => {
+  const g = mk("g", {}, layers.zoom);
+  mk("circle", { r: 4.5, fill: "var(--c-beta)", stroke: "var(--anatomy-paper)", "stroke-width": "0.8" }, g);
+  mk("circle", { r: 2, fill: "var(--c-ins)" }, g);
+  return g;
+});
+
+/* ---- tracks for anatomical transit ---- */
+const trDepot = track([[152, 174], [168, 182], [182, 204], [192, 234]]);
+const trStomachEmpty = track([[735, 355], [765, 362], [800, 366], [835, 370], [865, 372], [885, 385], [910, 405]]);
+
+/* ---- gauges and labels ---- */
+const gg = {};
+function initPanel() {
+  const P = layers.panel, y0 = 478, h = 68, xs = [90, 245, 400, 555, 710, 865];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 28, width: WW - 48, height: 138, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P);
+  t.textContent = "The patient";
+  [
+    ["sugar", "Blood sugar", "g-sugar", "Blood glucose level. Incretins promote glucose-dependent insulin secretion, controlling glucose without intrinsic hypoglycaemia."],
+    ["insulin", "Insulin (matched)", "g-ins", "Insulin secretion from pancreatic beta cells, amplified by GLP-1 and GIP strictly when blood sugar is elevated."],
+    ["glucagon", "Glucagon", "g-gcg", "Glucagon secretion from pancreatic alpha cells. Inappropriately elevated in type 2 diabetes, suppressed by GLP-1."],
+    ["emptying", "Gastric emptying", "g-emp", "Rate of food transit from stomach to duodenum. Slowed by incretins, which flattens post-meal glucose spikes."],
+    ["appetite", "Appetite", "g-app", "Central hunger and food craving signals in the hypothalamus, reduced by GLP-1 and GIP agonism to promote satiety."],
+    ["weight", "Weight trend", "g-wt", "Long term weight trajectory driven by sustained satiety, reduced calorie intake and enhanced metabolic control."]
+  ].forEach(([id, name, cls, tip], i) => {
+    gg[id] = gauge(P, xs[i], y0 + 4, h - 22, 16, cls, name, tip);
+  });
+
+  const ox = layers.over;
+  pill(ox, "Weekly pen", 124, 118, 95, 68, "Pre-filled weekly pen delivering a long-acting incretin receptor agonist subcutaneously.");
+  pill(ox, "Subcutaneous depot", 152, 174, 175, 215, "Subcutaneous depot from which the fatty-acid acylated drug slowly enters capillaries over days.");
+  pill(ox, "Gut L and K cells", 104, 332, 95, 415, "Intestinal endocrine cells: L cells secrete GLP-1 and K cells secrete GIP in response to nutrients.");
+  pill(ox, "DPP-4 enzyme", 225, 310, 230, 415, "Dipeptidyl peptidase-4 cleaves native GLP-1 and GIP within 2 to 3 minutes, limiting their natural duration.");
+  pill(ox, "Albumin bound", 180, 298, 235, 275, "Semaglutide and tirzepatide carry a fatty acid diacid tail that binds albumin, shielding them from DPP-4.");
+  pill(ox, "Pancreatic islet", 405, 125, 385, 68, "Beta cells produce insulin and alpha cells produce glucagon; incretins enhance glucose-dependent insulin release.");
+  pill(ox, "GLP-1 & GIP receptors", 585, 125, 585, 68, "Semaglutide binds GLP-1 receptors; tirzepatide is a dual agonist binding both GLP-1 and GIP receptors.");
+  pill(ox, "Hypothalamus", 800, 135, 805, 68, "Hypothalamic appetite centers receive incretin signals that increase satiety and reduce hunger drive.");
+  pill(ox, "Central vessel", 480, 250, 480, 280, "Glossy systemic bloodstream carrying circulating incretins, red blood cells and glucose to target organs.");
+  pill(ox, "Stomach & pylorus", 825, 365, 810, 415, "Gastric emptying through the pyloric sphincter slows under GLP-1 agonism, smoothing postprandial glucose.");
+}
+
+/* ---- ad mode setup ---- */
+const isAd = new URLSearchParams(location.search).get("ad") === "1";
+let adTimer = 0;
+let adIdx = 0;
+let lastCardD = -1;
+const adSteps = [
+  { level: 2, drug: 0, caption: "No medicine" },
+  { level: 2, drug: 1, caption: "Semaglutide: GLP-1 receptor agonist" },
+  { level: 2, drug: 2, caption: "Tirzepatide: dual GIP and GLP-1 receptor agonist" }
+];
+
+/* ---- state smoothing & accumulators ---- */
+const sm = { sugar: 0.5, insulin: 0.5, glucagon: 0.5, emptying: 0.5, appetite: 0.5, weight: 0.5, drug: 0 };
+const acc = { depot: 0, glu: 0, gut: 0, inc: 0, ins: 0, gcg: 0, stom: 0, spark: 0, ves: 0 };
+let penTimer = 0;
+
+function init() {
+  initBgSpecks();
+  initRbc();
+  initPanel();
+
+  if (isAd) {
+    document.body.classList.add("is-ad");
+    levelBox.value = "2";
+    levelBox.dispatchEvent(new Event("input"));
+    drugBox.value = "0";
+    drugBox.dispatchEvent(new Event("change"));
+    const b = $("ad-banner"), bt = $("ad-text");
+    if (b) b.setAttribute("opacity", "1");
+    if (bt) {
+      bt.textContent = adSteps[0].caption;
+      bt.setAttribute("opacity", "1");
+    }
+  }
+}
+
+function step(dt, m) {
+  /* Smooth model values */
+  const k1 = Math.min(1, dt * 2.2);
+  sm.sugar = lerp(sm.sugar, m.sugar, k1);
+  sm.insulin = lerp(sm.insulin, m.insulin, k1);
+  sm.glucagon = lerp(sm.glucagon, m.glucagon, k1);
+  sm.emptying = lerp(sm.emptying, m.emptying, k1);
+  sm.appetite = lerp(sm.appetite, m.appetite, k1);
+  sm.weight = lerp(sm.weight, m.weight, k1);
+  sm.drug = lerp(sm.drug, m.d, Math.min(1, dt * 3.0));
+
+  /* 0. Background subtle specks */
+  bgSpecks.forEach((s) => {
+    s.x += s.vx * dt;
+    s.y += s.vy * dt;
+    if (s.x < 20) s.x = WW - 25;
+    else if (s.x > WW - 20) s.x = 25;
+    if (s.y < 46) s.y = 435;
+    else if (s.y > 438) s.y = 48;
+    s.e.setAttribute("cx", f1(s.x));
+    s.e.setAttribute("cy", f1(s.y));
+  });
+
+  /* 1. Pen plunger and subcutaneous depot */
+  penTimer += dt;
+  if (penTimer > 4.5) penTimer = 0;
+  const pProg = penTimer < 0.6 ? Math.sin((penTimer / 0.6) * Math.PI) : 0;
+  const plEl = $("pen-plunger");
+  if (plEl) plEl.setAttribute("transform", "translate(0, " + f1(pProg * 7) + ")");
+
+  const depotEl = $("sc-depot");
+  if (depotEl) {
+    const dActive = m.d > 0;
+    const baseOp = dActive ? 0.65 + 0.35 * pProg : 0.12;
+    depotEl.setAttribute("opacity", baseOp.toFixed(2));
+    depotEl.setAttribute("rx", f1(18 + (dActive ? pProg * 4 : 0)));
+  }
+
+  /* 2. Drug particles emitted from depot */
+  acc.depot += dt * (m.d > 0 ? 3.6 : 0);
+  while (acc.depot >= 1) {
+    acc.depot--;
+    const p = free(drugStream);
+    if (p) {
+      emit(p, 152, 174, 0, 0, m.d, Math.floor(Math.random() * 3));
+      const g1 = p.e.querySelector(".drug-p-glp1");
+      const g2 = p.e.querySelector(".drug-p-gip");
+      if (m.d === 1) {
+        if (g1) g1.setAttribute("opacity", "1");
+        if (g2) g2.setAttribute("opacity", "0");
+      } else {
+        if (g1) g1.setAttribute("opacity", "1");
+        if (g2) g2.setAttribute("opacity", "1");
+      }
+    }
+  }
+
+  drugStream.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    /* Phase 1: depot capillary transit (0 to 1.2s) */
+    if (p.t <= 1.2) {
+      const u = p.t / 1.2;
+      const pt = trDepot.at(u);
+      p.x = pt.x;
+      p.y = pt.y;
+    } else {
+      /* Phase 2: central vessel flow and organ branching */
+      const vt = p.t - 1.2;
+      p.x = 192 + vt * 85;
+
+      /* Organ branching */
+      if (p.branch === 0 && p.x > 405) {
+        /* Branch upward to pancreatic islet */
+        p.x = 405 + Math.sin(vt * 6) * 3;
+        p.y = 240 - (p.x - 405) * 1.4 - (vt - (405 - 192) / 85) * 70;
+        if (p.y < 135) kill(p);
+      } else if (p.branch === 1 && p.x > 740) {
+        /* Branch downward to stomach */
+        p.x = 740 + Math.sin(vt * 5) * 3;
+        p.y = 260 + (vt - (740 - 192) / 85) * 65;
+        if (p.y > 360) kill(p);
+      } else if (p.branch === 2 && p.x > 800) {
+        /* Branch upward to hypothalamus */
+        p.x = 800 + Math.sin(vt * 5) * 3;
+        p.y = 240 - (vt - (800 - 192) / 85) * 75;
+        if (p.y < 140) kill(p);
+      } else {
+        p.y = 250 + Math.sin(tm / 300 + p.x) * 4;
+        if (p.x > WW - 18) kill(p);
+      }
+    }
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+  });
+
+  /* 3. RBCs and Glucose in central vessel */
+  rbcs.forEach((r) => {
+    r.x += r.v * dt;
+    if (r.x > WW + 14) r.x = 10;
+    place(r.g, r.x, r.y + Math.sin(tm / 400 + r.x) * 2, r.rot, 1);
+  });
+
+  acc.glu += dt * (sm.sugar * 18);
+  while (acc.glu >= 1) {
+    acc.glu--;
+    const p = free(glucose);
+    if (p) emit(p, rnd(16, 40), rnd(240, 260), rnd(55, 75), 0, 0);
+  }
+  glucose.forEach((p) => {
+    if (!p.on) return;
+    p.x += p.vx * dt;
+    p.y += Math.sin(tm / 250 + p.x) * 0.4;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 4) + ")");
+    if (p.x > WW - 16) kill(p);
+  });
+
+  /* 4. Gut lumen chyme */
+  acc.gut += dt * 3.2;
+  while (acc.gut >= 1) {
+    acc.gut--;
+    const p = free(gutChyme);
+    if (p) emit(p, 26, rnd(355, 395), rnd(28, 44), 0, 0);
+  }
+  gutChyme.forEach((p) => {
+    if (!p.on) return;
+    p.x += p.vx * dt;
+    p.y += Math.sin(tm / 350 + p.x) * 0.3;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.x > 255) kill(p);
+  });
+
+  /* 5. Native incretins emitted from L and K cells */
+  acc.inc += dt * 3.8;
+  while (acc.inc >= 1) {
+    acc.inc--;
+    const isGlp = Math.random() < 0.55;
+    const pl = isGlp ? nativeGlp : nativeGip;
+    const p = free(pl);
+    if (p) {
+      const srcX = isGlp ? (Math.random() < 0.5 ? 85 : 205) : 145;
+      emit(p, srcX + rnd(-4, 4), 326, rnd(-4, 4), -rnd(16, 28), isGlp ? 1 : 2);
+    }
+  }
+
+  /* DPP-4 enzymes chomping */
+  const jawAngle = Math.abs(Math.sin(tm / 200)) * 26;
+  ["dpp4-1", "dpp4-2"].forEach((id) => {
+    const top = $(id + "-top"), bot = $(id + "-bot");
+    if (top) top.setAttribute("transform", "rotate(" + f1(-jawAngle) + ")");
+    if (bot) bot.setAttribute("transform", "rotate(" + f1(jawAngle) + ")");
+  });
+
+  const dppLocs = [{ x: 115, y: 305 }, { x: 225, y: 310 }];
+  [nativeGlp, nativeGip].forEach((pl) => {
+    pl.forEach((p) => {
+      if (!p.on) return;
+      p.t += dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+
+      /* Check DPP-4 proximity: snip within moments! */
+      for (const dpp of dppLocs) {
+        if (Math.hypot(p.x - dpp.x, p.y - dpp.y) < 18) {
+          kill(p);
+          /* Emit fading fragments */
+          for (let f = 0; f < 2; f++) {
+            const fr = free(dpp4Frags);
+            if (fr) emit(fr, p.x, p.y, (f === 0 ? -1 : 1) * rnd(14, 24), rnd(-12, 12), 0);
+          }
+          break;
+        }
+      }
+      if (p.y < 275 || p.t > 2.8) kill(p);
+    });
+  });
+
+  dpp4Frags.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    const op = Math.max(0, 1 - p.t / 0.7);
+    p.e.setAttribute("opacity", op.toFixed(2));
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 180) + ")");
+    if (p.t > 0.7) kill(p);
+  });
+
+  /* Albumin complex bobbing */
+  const albComp = $("alb-complex");
+  if (albComp) {
+    albComp.setAttribute("transform", "translate(180, " + f1(298 + Math.sin(tm / 700) * 1.6) + ")");
+  }
+  const albHead = $("alb-drug-head");
+  if (albHead) {
+    albHead.setAttribute("opacity", m.d > 0 ? "1" : "0.15");
+    albHead.setAttribute("fill", m.d === 2 ? "var(--c-gip)" : "var(--c-glp1)");
+  }
+
+  /* 6. Pancreatic Islet: Insulin and Glucagon granules */
+  acc.ins += dt * (sm.insulin * sm.sugar * 16);
+  while (acc.ins >= 1) {
+    acc.ins--;
+    const p = free(insulinGranules);
+    if (p) {
+      const bx = 405 + rnd(-22, 22), by = 130 + rnd(-16, 20);
+      emit(p, bx, by, rnd(-3, 3), rnd(28, 48), 0);
+    }
+  }
+  insulinGranules.forEach((p) => {
+    if (!p.on) return;
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.y > 248) kill(p);
+  });
+
+  acc.gcg += dt * (sm.glucagon * 14);
+  while (acc.gcg >= 1) {
+    acc.gcg--;
+    const p = free(glucagonGranules);
+    if (p) {
+      const ax = 405 + (Math.random() < 0.5 ? -38 : 36) + rnd(-6, 6);
+      const ay = 130 + rnd(-30, 15);
+      emit(p, ax, ay, rnd(-4, 4), rnd(24, 40), 0);
+    }
+  }
+  glucagonGranules.forEach((p) => {
+    if (!p.on) return;
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.y > 248) kill(p);
+  });
+
+  /* 7. Receptor Zoom Inset: docking, cAMP sparks, vesicle fusion */
+  const semaKey = $("sema-key"), tirzKey = $("tirz-key");
+  const pGlp = $("glp1-pocket"), pGip = $("gip-pocket");
+  if (m.d === 1) {
+    if (semaKey) semaKey.setAttribute("opacity", "1");
+    if (tirzKey) tirzKey.setAttribute("opacity", "0");
+    if (pGlp) pGlp.style.stroke = "var(--anatomy-lit)";
+    if (pGip) pGip.style.stroke = "var(--c-gip)";
+  } else if (m.d === 2) {
+    if (semaKey) semaKey.setAttribute("opacity", "0");
+    if (tirzKey) tirzKey.setAttribute("opacity", "1");
+    if (pGlp) pGlp.style.stroke = "var(--anatomy-lit)";
+    if (pGip) pGip.style.stroke = "var(--anatomy-lit)";
+  } else {
+    if (semaKey) semaKey.setAttribute("opacity", "0");
+    if (tirzKey) tirzKey.setAttribute("opacity", "0");
+    if (pGlp) pGlp.style.stroke = "var(--c-glp1)";
+    if (pGip) pGip.style.stroke = "var(--c-gip)";
+  }
+
+  /* cAMP sparks */
+  acc.spark += dt * (m.d === 2 ? 14 : m.d === 1 ? 8 : 1.2);
+  while (acc.spark >= 1) {
+    acc.spark--;
+    const p = free(campSparks);
+    if (p) {
+      const srcX = m.d === 2 ? (Math.random() < 0.5 ? 558 : 612) : 558;
+      emit(p, srcX + rnd(-6, 6), 146, rnd(-16, 16), rnd(14, 30), 0);
+    }
+  }
+  campSparks.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    p.x += p.vx * dt;
+    p.y += p.vy * dt;
+    const op = Math.max(0, 1 - p.t / 0.85);
+    p.e.setAttribute("opacity", op.toFixed(2));
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") scale(" + (1 + p.t * 0.8).toFixed(2) + ")");
+    if (p.t > 0.85) kill(p);
+  });
+
+  /* Insulin vesicle fusion */
+  acc.ves += dt * (sm.insulin * 4.5);
+  while (acc.ves >= 1) {
+    acc.ves--;
+    const p = free(zoomVesicles);
+    if (p) emit(p, rnd(550, 620), 170, 0, -rnd(16, 26), 0);
+  }
+  zoomVesicles.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (p.y <= 140) kill(p);
+  });
+
+  /* 8. Brain / Hypothalamus Appetite Ripple Rings */
+  const rings = [
+    { el: $("app-ring-1"), ph: 0 },
+    { el: $("app-ring-2"), ph: 0.33 },
+    { el: $("app-ring-3"), ph: 0.67 }
+  ];
+  const hunger = sm.appetite;
+  const ringSpeed = lerp(12, 38, hunger);
+  const maxR = lerp(26, 52, hunger);
+  const ringCol = hunger > 0.45 ? "var(--c-bad)" : "var(--c-good)";
+  rings.forEach((r) => {
+    if (!r.el) return;
+    const progress = ((tm / 1000 * ringSpeed / maxR + r.ph) % 1);
+    const radius = 8 + progress * (maxR - 8);
+    const op = (1 - progress) * lerp(0.35, 0.85, hunger);
+    r.el.setAttribute("r", f1(radius));
+    r.el.setAttribute("stroke", ringCol);
+    r.el.setAttribute("stroke-width", f1(lerp(1.1, 2.0, hunger)));
+    r.el.setAttribute("opacity", op.toFixed(2));
+  });
+
+  /* 9. Stomach chyme and pylorus transit */
+  acc.stom += dt * (sm.emptying * 5.5);
+  while (acc.stom >= 1) {
+    acc.stom--;
+    const p = free(stomachChyme);
+    if (p) emit(p, 735, 355, 0, 0, 0);
+  }
+  stomachChyme.forEach((p) => {
+    if (!p.on) return;
+    p.t += dt;
+    const duration = lerp(4.5, 1.8, sm.emptying);
+    const u = p.t / duration;
+    if (u >= 1) {
+      kill(p);
+    } else {
+      const pt = trStomachEmpty.at(u);
+      p.x = pt.x + Math.sin(tm / 300 + p.t * 5) * 2;
+      p.y = pt.y + Math.cos(tm / 300 + p.t * 5) * 2;
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    }
+  });
+
+  /* Pyloric sphincter muscle constriction */
+  const pGap = lerp(1.5, 6.5, sm.emptying);
+  const pTop = $("pylorus-top"), pBot = $("pylorus-bot");
+  if (pTop) pTop.setAttribute("d", "M132 " + f1(63 - pGap) + " Q137 63 142 " + f1(63 - pGap));
+  if (pBot) pBot.setAttribute("d", "M132 " + f1(63 + pGap) + " Q137 63 142 " + f1(63 + pGap));
+
+  /* 10. Gauges readout */
+  gg.sugar.set(sm.sugar, sm.sugar < 0.26 ? (m.l === 0 ? "normal" : "controlled") : sm.sugar < 0.5 ? "controlled" : "high");
+  gg.insulin.set(sm.insulin, sm.insulin < 0.45 ? "inadequate" : "matched");
+  gg.glucagon.set(sm.glucagon, sm.glucagon < 0.3 ? "low" : sm.glucagon < 0.6 ? "raised" : "high");
+  gg.emptying.set(sm.emptying, sm.emptying < 0.22 ? "slow" : sm.emptying < 0.35 ? "delayed" : "normal");
+  gg.appetite.set(sm.appetite, sm.appetite < 0.20 ? "suppressed" : sm.appetite < 0.40 ? "reduced" : sm.appetite < 0.60 ? "normal" : "high");
+  gg.weight.set(sm.weight, sm.weight < 0.20 ? "falling fast" : sm.weight < 0.40 ? "falling" : sm.weight < 0.70 ? "stable" : "rising");
+
+  /* Key cards: the active treatment card is bright, the other dimmed */
+  if (m.d !== lastCardD) {
+    lastCardD = m.d;
+    const cS = $("key-card-sema"), cT = $("key-card-tirz");
+    if (cS) cS.classList.toggle("is-active", m.d === 1);
+    if (cT) cT.classList.toggle("is-active", m.d === 2);
+  }
+
+  /* 11. Ad mode automatic loop (7s cycle, only advances during live playback) */
+  if (isAd && tm > 0) {
+    adTimer += dt;
+    const banner = $("ad-banner"), bannerTxt = $("ad-text");
+    if (banner) banner.setAttribute("opacity", "1");
+    if (adTimer >= 7) {
+      adTimer = 0;
+      adIdx = (adIdx + 1) % adSteps.length;
+      const st = adSteps[adIdx];
+      if (levelBox.value !== String(st.level)) {
+        levelBox.value = String(st.level);
+        levelBox.dispatchEvent(new Event("input"));
+      }
+      if (drugBox.value !== String(st.drug)) {
+        drugBox.value = String(st.drug);
+        drugBox.dispatchEvent(new Event("change"));
+      }
+    }
+    if (bannerTxt) {
+      const curCaption = adSteps[adIdx].caption;
+      if (bannerTxt.textContent !== curCaption && adTimer < 3.5) {
+        bannerTxt.textContent = curCaption;
+      }
+      let op = 1;
+      if (adTimer < 0.5) op = 0.2 + 0.8 * (adTimer / 0.5);
+      else if (adTimer > 6.5) op = 0.2 + 0.8 * ((7 - adTimer) / 0.5);
+      bannerTxt.setAttribute("opacity", op.toFixed(2));
+    }
+  }
+}
+
+run({ init, step });
+</script></body></html>

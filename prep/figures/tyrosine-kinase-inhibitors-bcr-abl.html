@@ -1,0 +1,633 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Tyrosine kinase inhibitors: blocking BCR-ABL</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body{--c-kin:#8fb8f2;--c-subs:#9fe0b8;--c-norm:#cfd6de;--c-leuk:#e0855a;--c-mut:#e5484d;--c-atp:#ffd94a;--c-ps:#c084fc}
+body[data-theme="light"]{--c-kin:#3a76c4;--c-subs:#2f9f6c;--c-norm:#9aa6b2;--c-leuk:#c46434;--c-mut:#c42a3d;--c-atp:#d9a92c;--c-ps:#7c3aed}
+.cl-kin{--cc:var(--c-kin)}.cl-subs{--cc:var(--c-subs)}.cl-norm{--cc:var(--c-norm)}.cl-leuk{--cc:var(--c-leuk)}
+.chr-f{fill:var(--anatomy-mid)}
+.chr-ph{fill:var(--c-kin);stroke:color-mix(in srgb,var(--c-kin) 55%,#000);stroke-width:.8}
+.chr-fu{fill:var(--c-bad,#e5484d);stroke:var(--anatomy-paper);stroke-width:1}
+.pocket{fill:color-mix(in srgb,#1a1030 72%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.gate{fill:var(--c-good,#3ddc97);stroke:color-mix(in srgb,var(--c-good,#3ddc97) 50%,#000);stroke-width:.7}
+.gate.mut{fill:var(--c-mut);stroke:color-mix(in srgb,var(--c-mut) 50%,#000)}
+.loop-o{fill:none;stroke:var(--c-kin);stroke-width:2;stroke-linecap:round}
+.loop-c{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-linecap:round}
+.p-atp{--cc:var(--c-atp)}.p-ps{--cc:var(--c-ps)}.p-sig{--cc:var(--c-cyt)}
+.node-halo{fill:none;stroke:var(--c-subs);stroke-width:1.6}
+.sc-cap{fill:var(--anatomy-strong);font-size:11px;text-anchor:middle;pointer-events:none}
+.drugI{fill:#f2f5f7;stroke:var(--anatomy-mid);stroke-width:1}
+.drugI-b{fill:var(--c-bad,#e5484d)}
+.drugD{fill:#24344d;stroke:var(--anatomy-mid);stroke-width:1}
+.drugD-b{fill:var(--c-cyt2,#38d1ff)}
+.mut-rim{fill:none;stroke:var(--c-mut);stroke-width:2.4}
+.ecg-bg{fill:color-mix(in srgb,var(--c-rbc) 10%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
+.ecg{fill:none;stroke:var(--c-good,#3ddc97);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ecg-long{fill:none;stroke:var(--c-mut);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.drop{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:.8}
+.rip{fill:none;stroke:var(--c-fl);stroke-width:1.2;stroke-linecap:round}
+.clash{stroke:var(--c-mut);stroke-width:2;stroke-linecap:round}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Tyrosine kinase inhibitors: blocking BCR-ABL</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>signalling high · growth high · side effects few</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated leukaemic cell and marrow clone. A swap between chromosomes 9 and 22 (the Philadelphia chromosome) fuses BCR to ABL, leaving the ABL kinase stuck on. The kinase scoops ATP into its pocket and tags substrates with phosphate, which drives the clone to grow and survive. Imatinib locks the closed form of the pocket while dasatinib fits both forms, but a gatekeeper swap (T315I) rejects both drugs. Gauges show kinase activity, signalling, growth, blockade, the mutant share and side effects."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="548" height="394" rx="18"/>
+<rect class="sc-tissue" x="574" y="44" width="372" height="394" rx="18"/>
+<text class="sc-zone" x="34" y="68">LEUKAEMIC CELL: BCR-ABL</text>
+<text class="sc-zone" x="594" y="68">MARROW: THE CLONE</text>
+<g id="chr">
+<g transform="translate(80 132)"><rect class="chr-f" x="-9" y="-16" width="7" height="32" rx="3.5"/><rect class="chr-f" x="2" y="-16" width="7" height="32" rx="3.5"/></g>
+<g transform="translate(112 132)"><rect class="chr-f" x="-9" y="-16" width="7" height="32" rx="3.5"/><rect class="chr-f" x="2" y="-16" width="7" height="32" rx="3.5"/></g>
+<g transform="translate(160 136)"><rect class="chr-ph" x="-9" y="-11" width="7" height="22" rx="3.5"/><rect class="chr-ph" x="2" y="-11" width="7" height="22" rx="3.5"/><circle class="chr-fu" cx="0" cy="-14" r="3.4"/></g>
+</g>
+<g id="cellbase"></g><g id="kin"></g><g id="nodes"></g><g id="marrow"></g><g id="se"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses or schedules are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Clone state</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="untreated"><span class="dr-ticks"><i>untreated</i><i>responding</i><i>resistant</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">imatinib</option><option value="2">dasatinib</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>What the figure shows.</strong> The Philadelphia chromosome is a swap of material between chromosomes 9 and 22 that fuses the BCR gene to the ABL tyrosine kinase. The fusion protein is constitutively active: its ATP binding pocket keeps loading ATP and tagging substrates with phosphate, which drives proliferation and survival of the leukaemic clone. Imatinib occupies the pocket when the kinase rests in its inactive (closed) form; dasatinib fits both the active and inactive forms and so also works against some imatinib resistant mutants. A single gatekeeper swap (T315I) changes the pocket mouth so that both drugs are rejected while ATP still fits. Fluid retention and pleural effusion, low blood counts from marrow suppression, and QT prolongation are shown as treatment related effects. This is standard teaching in haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> No drug, imatinib, or dasatinib, crossed with an untreated, responding, or gatekeeper mutant clone. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Second and later generation drugs beyond dasatinib, combination regimens, transplant, blast crisis, monitoring of transcript levels, and all doses, targets and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Clone state","a":[0.92,0.9,0.95],"names":["untreated","responding","resistant mutation"],"ticks":["untreated","responding","resistant"],"start":0},"settings":[{"label":"no treatment"},{"label":"imatinib"},{"label":"dasatinib"}],"drugNames":["no treatment","imatinib","dasatinib"],"status":"Clone: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const base = S.level.a[level];
+  const burden = [0.78, 0.4, 0.92][level];
+  const ae = [0.06, 0.42, 0.55][drug];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  let B;
+  if (drug === 0) B = 0;
+  else if (level === 2) B = drug === 1 ? 0.04 : 0.06;
+  else if (drug === 1) B = level === 0 ? 0.6 : 0.88;
+  else B = level === 0 ? 0.85 : 0.9;
+  const K = base * (1 - B);
+  const P = cl(K * 1.03);
+  const G = cl(burden * (0.3 + 0.7 * P));
+  const Mut = level === 2 ? 0.95 : 0.04;
+  const A = ae;
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(P, 0.3, 0.6, ["low", "raised", "high"]), w(G, 0.35, 0.6, ["low", "raised", "high"]), w(A, 0.3, 0.7, ["few", "some", "many"])];
+  return { base, B, K, P, G, Mut, A, lvl: level, dg: drug, words, readout: "signalling " + words[0] + " · growth " + words[1] + " · side effects " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* TKI scene: Philadelphia chromosome, BCR-ABL kinase with its ATP pocket and gatekeeper,
+ * imatinib and dasatinib binding, substrate phosphorylation, marrow clone growth and side effects. */
+const TK = { chr: $("chr"), cell: $("cellbase"), kin: $("kin"), nodes: $("nodes"), marrow: $("marrow"), se: $("se"), parts: $("parts"), over: $("over"), panel: $("panel") };
+let kinCX = 290, kinCY = 250;
+const POCK = { x: 288, y: 250 };
+/* ---- big leukaemic cell ---- */
+let cellG = null;
+function initCellBase() {
+  cellG = cell(TK.cell, { cls: "leuk", r: 120, nuc: 0, seed: 5, wob: 0.07 });
+  place(cellG, 290, 262, 0, 1);
+}
+/* ---- kinase: two lobes, pocket, gatekeeper, activation loop, two drugs ---- */
+const kinG = mk("g", {}, TK.kin);
+const nLobe = mk("g", {}, kinG);
+const cLobe = mk("g", {}, kinG);
+let gateC = null, loopO = null, loopC = null, drugI = null, drugD = null;
+const drugPos = { ix: -80, iy: 40, dx: -70, dy: -46 };
+function initKin() {
+  kinG.setAttribute("transform", "translate(290 250)");
+  cell(nLobe, { cls: "kin", r: 26, seed: 3, wob: 0.1 });
+  cell(cLobe, { cls: "kin", r: 34, seed: 4, wob: 0.1 });
+  mk("rect", { class: "pocket", x: -11, y: -9, width: 22, height: 18, rx: 6 }, kinG);
+  loopO = mk("path", { class: "loop-o", d: "M-22 -12C-10 -28 10 -28 22 -10" }, kinG);
+  loopC = mk("path", { class: "loop-c", d: "M-22 -12C-10 -4 8 -4 20 -14" }, kinG);
+  gateC = mk("circle", { class: "gate", cx: 15, cy: 0, r: 3 }, kinG);
+  drugI = mk("g", { opacity: "0" }, kinG);
+  mk("rect", { class: "drugI", x: -13, y: -5, width: 26, height: 10, rx: 5 }, drugI);
+  mk("rect", { class: "drugI-b", x: 0, y: -5, width: 13, height: 10, rx: 5 }, drugI);
+  drugD = mk("g", { opacity: "0" }, kinG);
+  mk("circle", { class: "drugD", r: 8.5 }, drugD);
+  mk("circle", { class: "drugD-b", r: 3.4 }, drugD);
+  place(nLobe, 0, -26, 0, 1); place(cLobe, 0, 28, 0, 1);
+}
+/* ---- substrate nodes ---- */
+const nodesArr = [];
+function initNodes() {
+  [["Proliferation", 220], ["Survival", 380]].forEach(([name, x], i) => {
+    const g = mk("g", {}, TK.nodes);
+    const halo = mk("circle", { class: "node-halo", r: 16, opacity: "0.2" }, g);
+    cell(g, { cls: "subs", r: 12, seed: 20 + i, wob: 0.12 });
+    const cap = mk("text", { class: "sc-cap", x: x, y: 398 }, TK.nodes); cap.textContent = name;
+    place(g, x, 368, 0, 1);
+    nodesArr.push({ g, halo, x, y: 368, glow: 0 });
+  });
+}
+/* ---- marrow clone grid ---- */
+const clones = [];
+function initMarrow() {
+  [640, 720, 800, 880].forEach((x, c) => [140, 200, 260].forEach((y, r) => {
+    const i = clones.length, g = mk("g", {}, TK.marrow);
+    const norm = cell(g, { cls: "norm", r: 20, nuc: 0.4, seed: i + 1, wob: 0.1 });
+    const leuk = mk("g", {}, g); cell(leuk, { cls: "leuk", r: 20, nuc: 0.45, seed: i + 30, wob: 0.12 });
+    const rim = mk("circle", { class: "mut-rim", r: 22, opacity: "0" }, g);
+    place(g, x, y, 0, 1);
+    clones.push({ g, norm, leuk, rim, x, y, thr: i / 12 });
+  }));
+}
+/* ---- side effect icons ---- */
+let ripG = null, marDim = null, qtN = null, qtL = null;
+function initSE() {
+  const d = mk("g", { transform: "translate(640 350)" }, TK.se);
+  mk("path", { class: "drop", d: "M0 -10C6.6 -1.8 8.4 2.4 8.4 5.4A8.4 8.4 0 0 1 -8.4 5.4C-8.4 2.4 -6.6 -1.8 0 -10Z", transform: "scale(1.15)" }, d);
+  ripG = mk("g", { opacity: "0" }, TK.se);
+  mk("path", { class: "rip", d: "M622 366q18 8 36 0" }, ripG);
+  mk("path", { class: "rip", d: "M616 373q24 10 48 0" }, ripG);
+  marDim = mk("g", {}, TK.se);
+  [715, 740, 765].forEach((x, i) => { const g = cell(marDim, { cls: "norm", r: 9, nuc: 0.4, seed: 60 + i, wob: 0.12 }); place(g, x, 352, 0, 1); });
+  const box = mk("g", {}, TK.se);
+  mk("rect", { class: "ecg-bg", x: 805, y: 330, width: 90, height: 50, rx: 8 }, box);
+  qtN = mk("polyline", { class: "ecg", points: "810,358 822,358 826,344 832,368 836,358 852,358 856,350 864,350 868,358 890,358" }, box);
+  qtL = mk("polyline", { class: "ecg-long", points: "810,358 822,358 826,344 832,368 836,358 850,358 856,346 872,346 878,358 890,358", opacity: "0" }, box);
+  [["fluid", 640], ["marrow", 740], ["QT", 850]].forEach(([name, x]) => { const t = mk("text", { class: "sc-cap", x, y: 392 }, TK.se); t.textContent = name; });
+}
+/* ---- particle pools (elements exposed as p.e) ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const atp = pool(10, () => mk("rect", { class: "sc-p p-atp", x: -3, y: -3, width: 6, height: 6, rx: 1, transform: "rotate(45)" }, TK.parts));
+const pss = pool(26, () => mk("circle", { class: "sc-p p-ps", r: 3 }, TK.parts));
+const sigs = pool(12, () => mk("circle", { class: "sc-p p-sig", r: 2.2 }, TK.parts));
+const clash = pool(6, () => { const g = mk("g", {}, TK.parts); mk("path", { class: "clash", d: "M-6 0L6 0M0 -6L0 6M-4 -4L4 4M-4 4L4 -4" }, g); return g; });
+/* ---- labels and gauges ---- */
+const gg = {};
+let drugPill = null;
+function initTKPanel() {
+  const P = TK.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The clone";
+  [["kin", "Kinase", "g-bad", "BCR-ABL kinase activity. The Philadelphia swap leaves the kinase stuck on."],
+    ["sig", "Signals", "g-cyt", "Phosphate flow to substrates. Active kinase loads ATP into its pocket and tags substrates that drive growth and survival."],
+    ["gro", "Growth", "g-clot", "How fast the leukaemic clone expands in the marrow. It follows signalling and the mutant share."],
+    ["blk", "Blocked", "g-good", "How much drug sits in the ATP pocket. Imatinib locks the closed form; dasatinib fits both forms but the gatekeeper mutant rejects both."],
+    ["mut", "Mutant", "g-eos", "Share of the clone carrying the gatekeeper swap (T315I). It blocks drug binding while ATP still fits."],
+    ["sef", "Side effects", "g-neu", "Fluid retention and pleural effusion, low blood counts and QT prolongation rise with treatment."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const O = TK.over;
+  pill(O, "Philadelphia", 160, 124, 150, 100, "Philadelphia chromosome: a swap between chromosomes 9 and 22 fuses BCR to ABL. The short swapped chromosome is the visible mark of it.");
+  pill(O, "BCR-ABL", 322, 232, 486, 140, "BCR-ABL fusion protein. The ABL kinase part is stuck on, so it signals without normal controls.");
+  pill(O, "ATP pocket", 288, 250, 118, 190, "ATP binding pocket. The kinase scoops ATP here and uses its phosphate to tag substrates.");
+  pill(O, "Gatekeeper", 305, 250, 478, 300, "Gatekeeper spot at the pocket mouth. The T315I swap puts a bulkier block here that rejects both drugs while ATP still fits.");
+  drugPill = pill(O, "Imatinib", 235, 285, 118, 326, "Drug capsule heading for the pocket. Imatinib locks the closed form; dasatinib fits both forms. Neither fits the gatekeeper mutant.");
+  drugPill.setAttribute("id", "tkdrug");
+  pill(O, "Substrates", 300, 378, 300, 414, "Substrates tagged with phosphate. Their signals tell the cell to divide (proliferation) and to stay alive (survival).");
+  pill(O, "Clone", 720, 140, 852, 100, "Leukaemic clone in the marrow. Pale cells are normal; orange cells are BCR-ABL driven; red rims carry the gatekeeper mutant.");
+  pill(O, "Side effects", 740, 340, 746, 300, "Treatment related effects: fluid retention and fluid around the lung, low blood counts from marrow suppression, and QT prolongation on the heart trace.");
+}
+const sm = { K: 0.9, P: 0.9, G: 0.7, B: 0, Mut: 0.04, A: 0.06 };
+const acc = { atp: 0, ps: 0, sig: 0, clash: 0 };
+const drugNames = ["", "Imatinib", "Dasatinib"];
+function init() { initCellBase(); initKin(); initNodes(); initMarrow(); initSE(); initTKPanel(); }
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
+  sm.K = lerp(sm.K, m.K, k2); sm.P = lerp(sm.P, m.P, k2); sm.G = lerp(sm.G, m.G, Math.min(1, dt * 0.3));
+  sm.B = lerp(sm.B, m.B, k1); sm.Mut = lerp(sm.Mut, m.Mut, k2); sm.A = lerp(sm.A, m.A, k1);
+  const lvl = m.lvl, dg = m.dg, conf = clamp(sm.K * 1.1);
+  /* cell and kinase bob; lobes open with activity */
+  place(cellG, 290 + Math.sin(tm / 1400) * 2, 262 + Math.cos(tm / 1700) * 2, 0, 1);
+  kinCX = 290 + Math.sin(tm / 1400) * 2; kinCY = 250 + Math.cos(tm / 1700) * 2;
+  kinG.setAttribute("transform", "translate(" + f1(kinCX) + " " + f1(kinCY) + ")");
+  place(nLobe, -4, -26 - 6 * conf, -10 * conf, 1);
+  place(cLobe, 4, 28 + 5 * conf, 8 * conf, 1);
+  loopO.setAttribute("opacity", (0.1 + 0.9 * conf).toFixed(2));
+  loopC.setAttribute("opacity", (1 - 0.85 * conf).toFixed(2));
+  gateC.setAttribute("r", (3 + 2.5 * sm.Mut).toFixed(1));
+  if (sm.Mut > 0.5) gateC.setAttribute("class", "gate mut"); else gateC.setAttribute("class", "gate");
+  POCK.x = kinCX - 2; POCK.y = kinCY;
+  /* drugs: imatinib docks only in the closed form, dasatinib in either; neither fits the mutant */
+  const dockI = dg === 1 && lvl === 1, dockD = dg === 2 && lvl !== 2;
+  drugI.setAttribute("opacity", dg === 1 ? "1" : "0");
+  drugD.setAttribute("opacity", dg === 2 ? "1" : "0");
+  if (dg === 1) {
+    const tx = dockI ? -4 : -80, ty = dockI ? 2 : 40;
+    drugPos.ix = lerp(drugPos.ix, tx, k1); drugPos.iy = lerp(drugPos.iy, ty, k1);
+    drugI.setAttribute("transform", "translate(" + f1(drugPos.ix) + " " + f1(drugPos.iy) + ") rotate(15)");
+  }
+  if (dg === 2) {
+    const tx = dockD ? -4 : -70, ty = dockD ? -2 : -46;
+    drugPos.dx = lerp(drugPos.dx, tx, k1); drugPos.dy = lerp(drugPos.dy, ty, k1);
+    const jig = lvl === 2 ? Math.sin(tm / 90) * 3 : 0;
+    drugD.setAttribute("transform", "translate(" + f1(drugPos.dx + jig) + " " + f1(drugPos.dy) + ")");
+  }
+  /* drug pill follows the select */
+  if (dg === 0) drugPill.setAttribute("opacity", "0");
+  else {
+    drugPill.setAttribute("opacity", "1");
+    const tp = drugPill.querySelector("text"), rp = drugPill.querySelector("rect"), nm = drugNames[dg];
+    if (tp.textContent !== nm) {
+      tp.textContent = nm;
+      const lw = nm.length * 6.2 + 14;
+      rp.setAttribute("x", f1(118 - lw / 2)); rp.setAttribute("width", f1(lw));
+      tp.setAttribute("x", f1(118));
+    }
+  }
+  /* ATP drifts into the pocket */
+  acc.atp += dt * 3; while (acc.atp >= 1) { acc.atp--; const p = free(atp); if (p) emit(p, rnd(220, 360), rnd(148, 165), 0, 0, 0); }
+  atp.forEach((p) => { if (!p.on) return;
+    const dx = POCK.x - p.x, dy = POCK.y - p.y, d = Math.hypot(dx, dy) || 1;
+    p.x += (dx / d) * 60 * dt; p.y += (dy / d) * 60 * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(45)");
+    if (d < 12) kill(p); });
+  /* phosphate substrates fly to the nodes when the kinase is active */
+  acc.ps += dt * sm.K * 14; while (acc.ps >= 1) { acc.ps--; const p = free(pss); if (p) { const n = nodesArr[Math.floor(Math.random() * nodesArr.length)]; emit(p, POCK.x + rnd(-6, 6), POCK.y + rnd(-6, 6), 0, 0, nodesArr.indexOf(n)); } }
+  pss.forEach((p) => { if (!p.on) return;
+    const n = nodesArr[p.k], dx = n.x - p.x, dy = n.y - p.y, d = Math.hypot(dx, dy) || 1;
+    p.x += (dx / d) * 110 * dt; p.y += (dy / d) * 110 * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (d < 14) { n.glow = 1; kill(p); } });
+  nodesArr.forEach((n, i) => { n.glow = Math.max(0, n.glow - dt * 1.5);
+    n.halo.setAttribute("opacity", clamp(0.12 + 0.75 * sm.P * (0.6 + 0.4 * Math.sin(tm / 300 + i * 2)) + n.glow).toFixed(2)); });
+  /* signals cross to the marrow */
+  acc.sig += dt * sm.P * 6; while (acc.sig >= 1) { acc.sig--; const p = free(sigs), c = clones[Math.floor(Math.random() * clones.length)]; if (p && c) emit(p, 450, 330, 0, 0, clones.indexOf(c)); }
+  sigs.forEach((p) => { if (!p.on) return;
+    const c = clones[p.k], dx = c.x - p.x, dy = c.y - p.y, d = Math.hypot(dx, dy) || 1;
+    p.x += (dx / d) * 130 * dt; p.y += (dy / d) * 130 * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (d < 16) kill(p); });
+  /* clash sparks at the mutant gatekeeper when drug is tried */
+  if (lvl === 2 && dg > 0) { acc.clash += dt * 4; while (acc.clash >= 1) { acc.clash--; const p = free(clash); if (p) emit(p, kinCX + 15 + rnd(-3, 3), kinCY + rnd(-4, 4), 0, 0, 0); } }
+  clash.forEach((p) => { if (!p.on) return; p.t += dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") scale(" + (1 + p.t * 1.6).toFixed(2) + ")");
+    p.e.setAttribute("opacity", clamp(1 - p.t / 0.6).toFixed(2));
+    if (p.t > 0.6) kill(p); });
+  /* marrow clone follows growth; rims mark the mutant */
+  clones.forEach((c, i) => {
+    const s = clamp((sm.G - c.thr * 0.75) * 3, 0, 1);
+    place(c.leuk, 0, 0, 0, 0.12 + 0.88 * s);
+    c.leuk.setAttribute("opacity", s > 0.06 ? "1" : "0");
+    c.rim.setAttribute("opacity", (sm.Mut * (s > 0.3 ? 1 : 0)).toFixed(2));
+    place(c.g, c.x + Math.sin(tm / 1300 + i) * 0.8, c.y + Math.cos(tm / 1700 + i) * 0.8, 0, 1);
+  });
+  /* side effects follow treatment */
+  ripG.setAttribute("opacity", sm.A.toFixed(2));
+  marDim.setAttribute("opacity", (1 - 0.45 * sm.A).toFixed(2));
+  qtL.setAttribute("opacity", clamp((sm.A - 0.15) * 2).toFixed(2));
+  qtN.setAttribute("opacity", (1 - 0.5 * sm.A).toFixed(2));
+  /* gauges */
+  gg.kin.set(sm.K, wordOf(sm.K, 0.3, 0.6, ["low", "raised", "high"]));
+  gg.sig.set(sm.P, wordOf(sm.P, 0.3, 0.6, ["low", "raised", "high"]));
+  gg.gro.set(sm.G, wordOf(sm.G, 0.35, 0.6, ["low", "raised", "high"]));
+  gg.blk.set(sm.B, wordOf(sm.B, 0.3, 0.7, ["open", "closing", "blocked"]));
+  gg.mut.set(sm.Mut, wordOf(sm.Mut, 0.3, 0.7, ["absent", "present", "dominant"]));
+  gg.sef.set(sm.A, wordOf(sm.A, 0.3, 0.7, ["few", "some", "many"]));
+}
+run({ init, step });
+</script></body></html>

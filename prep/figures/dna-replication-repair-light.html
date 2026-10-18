@@ -1,0 +1,522 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>DNA replication and repair</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.dn-dmgzone{opacity:.38}
+.dn-parent{fill:none;stroke:var(--anatomy-strong);stroke-width:3;stroke-linecap:round;opacity:.85}
+.dn-rung{stroke:var(--anatomy-mid);stroke-width:1.2;opacity:.6}
+.dn-temp{fill:none;stroke:var(--anatomy-mid);stroke-width:2.4;stroke-linecap:round}
+.dn-lead{fill:none;stroke:var(--c-good);stroke-width:3.4;stroke-linecap:round}
+.dn-lag{fill:none;stroke:var(--c-cyt2);stroke-width:3.4;stroke-linecap:round}
+.dn-primer{fill:none;stroke:var(--c-bad);stroke-width:4;stroke-linecap:round}
+.dn-dna2{fill:none;stroke:var(--anatomy-strong);stroke-width:2.6;stroke-linecap:round;opacity:.85}
+.dn-sister{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-dasharray:5 4;opacity:.7}
+.cl-heli{--cc:#e9b84a}.cl-pol{--cc:#5fa8d3}.cl-prim{--cc:#f08a4b}.cl-lig{--cc:#3ddc97}.cl-rep{--cc:#b7a1e6}
+.p-nuc{--cc:#ffd24a}.p-uv{--cc:#ffe95e}.p-fix{--cc:#3ddc97}.p-mut{--cc:var(--c-bad)}
+.dn-dimer{fill:#ffe95e;stroke:color-mix(in srgb,#ffe95e 50%,#000);stroke-width:.7}
+.dn-mis{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 50%,#000);stroke-width:.7}
+.dn-sun{fill:#ffe95e;stroke:#d9a92c;stroke-width:1}
+.dn-shield{fill:none;stroke:var(--c-good);stroke-width:2.4;stroke-linecap:round}
+.dr-g-fill.g-rep{fill:var(--c-good)}.dr-g-fill.g-dmg{fill:#ffe95e}.dr-g-fill.g-mut{fill:var(--c-bad)}.dr-g-fill.g-kill{fill:#c084fc}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">DNA replication and repair</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>replication steady · damage low · mutations rare</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated replication fork and a damaged DNA segment. At the fork helicase unwinds the parental strands, primase lays primers, DNA polymerase builds a continuous leading strand and a lagging strand in Okazaki pieces joined by ligase, and proofreading removes errors. Below, ultraviolet light makes thymine dimers, copying can leave a mismatch, and a double strand break severs the DNA. Nucleotide excision repair, mismatch repair and homologous recombination fix each lesion. Gauges show replication, damage, repair, mutations and loss of defective cells. The level slider sets normal DNA, UV damage or an inherited repair defect, and the treatment choices show sunscreen and avoidance and the PARP inhibitor concept."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="212" rx="18"/>
+<rect class="sc-tissue dn-dmgzone" x="14" y="268" width="932" height="172" rx="18"/>
+<text class="sc-zone" x="34" y="68">REPLICATION FORK</text>
+<text class="sc-zone" x="34" y="292">DAMAGE AND REPAIR</text>
+<g id="fork"></g>
+<g id="dmgzone"></g>
+<g id="parts"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>DNA state</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>UV damage</i><i>repair defect</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without intervention" data-with="With intervention"><option value="0">none</option><option value="1">sunscreen and avoidance</option><option value="2">PARP inhibitor concept</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>Replication.</strong> Helicase unwinds the double helix at the fork. Primase makes a short RNA primer. DNA polymerase extends from the primer, building the leading strand continuously toward the fork and the lagging strand in short Okazaki pieces away from the fork; DNA ligase seals the pieces. Polymerase proofreading (its exonuclease activity) removes most copying errors. This is standard teaching in molecular biology and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Damage and repair.</strong> Ultraviolet light joins neighbouring thymines into a thymine dimer, fixed by nucleotide excision repair; failure causes xeroderma pigmentosum. A base mismatch left by copying is fixed by mismatch repair; failure causes Lynch syndrome. A double strand break is fixed accurately by homologous recombination using the sister chromatid; failure of BRCA1 or BRCA2 pushes the cell toward error prone repair and cancer. This is standard teaching and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Interventions shown.</strong> Sunscreen and avoidance cut the ultraviolet damage reaching DNA. The PARP inhibitor idea: blocking PARP leaves single strand breaks unrepaired, which become double strand breaks at the fork; cells lacking homologous recombination (BRCA defect) cannot cope and are lost, while normal cells can. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Single strand binding proteins, topoisomerase, sliding clamps, telomeres, base excision repair, non homologous end joining detail, checkpoint signalling and every enzyme name and step inside each repair pathway are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"DNA state","a":[0,1,2],"names":["normal","UV damage","repair defect"],"ticks":["normal","UV damage","repair defect"],"start":0},"settings":[{"label":"none"},{"label":"sunscreen and avoidance"},{"label":"PARP inhibitor concept"}],"drugNames":["no intervention","sunscreen and avoidance","a PARP inhibitor concept"],"status":"DNA state: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const baseD = [0.14, 0.78, 0.46][level];
+  const defect = level === 2 ? 1 : 0;
+  const prevent = drug === 1 && level === 1 ? 0.8 : drug === 1 ? 0.08 : 0;
+  const D = cl(baseD * (1 - prevent));
+  const cap0 = defect ? 0.22 : 0.9;
+  const parp = drug === 2 ? 1 : 0;
+  const cap = cl(cap0 * (parp ? (defect ? 0.45 : 0.78) : 1));
+  const unrep = cl(D * (1 - cap) + (parp && defect ? 0.22 : 0));
+  const R = cl(0.94 - 0.38 * D - 0.42 * unrep);
+  const M = cl(unrep * 1.5 + (defect ? 0.06 : 0));
+  const kill = cl(parp && defect ? 0.8 : parp ? 0.12 : unrep * 0.2);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(R, 0.45, 0.75, ["stalled", "slowed", "steady"]), w(D, 0.3, 0.6, ["low", "raised", "high"]), w(M, 0.25, 0.55, ["rare", "some", "frequent"])];
+  return { D, cap, unrep, R, M, kill, parp, defect, sun: drug === 1 ? 1 : 0, lvl: level, words, readout: "replication " + words[0] + " · damage " + words[1] + " · mutations " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* DNA replication and repair scene: fork enzymes, nucleotide flow, three lesions and three repair routes. */
+const L = { fork: $("fork"), dmg: $("dmgzone"), parts: $("parts"), over: $("over"), panel: $("panel") };
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const freeP = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const nuc = pool(26, () => mk("circle", { class: "sc-p p-nuc", r: 2.6 }, L.parts));
+const uvp = pool(12, () => mk("path", { class: "sc-p p-uv", d: "M0 -3.4L3 0L0 3.4L-3 0Z" }, L.parts));
+const fixp = pool(16, () => mk("circle", { class: "sc-p p-fix", r: 2.2 }, L.parts));
+const mutp = pool(12, () => mk("path", { class: "sc-p p-mut", d: "M-2.6 -2.6L2.6 2.6M2.6 -2.6L-2.6 2.6" }, L.parts));
+let heli, polLead, polLag, prim, lig, frags = [], dimerG, misC, breakG, repBlobs = [], shieldP, sunG, gg = {}, sunPill, parpPill, leadPath;
+const sm = { D: 0.14, cap: 0.9, R: 0.9, M: 0, kill: 0, parp: 0, sun: 0 };
+const acc = { nuc: 0, uv: 0, fix: 0, mut: 0 };
+function init() {
+  const F = L.fork;
+  /* parental duplex on the left */
+  mk("path", { class: "dn-parent", d: "M40 150H432" }, F); mk("path", { class: "dn-parent", d: "M40 190H432" }, F);
+  for (let x = 58; x <= 420; x += 30) mk("path", { class: "dn-rung", d: "M" + x + " 152V188" }, F);
+  /* separated template strands */
+  mk("path", { class: "dn-temp", d: "M458 158L900 108" }, F); mk("path", { class: "dn-temp", d: "M458 182L900 232" }, F);
+  /* leading strand: continuous, below the lower template */
+  leadPath = mk("path", { class: "dn-lead", d: "M472 178L898 220" }, F);
+  /* lagging strand: short pieces along the upper template, each with a primer */
+  frags = [[528, 146, 596, 138], [626, 134, 694, 127], [724, 123, 792, 116], [822, 112, 884, 107]].map(([x1, y1, x2, y2]) => {
+    mk("path", { class: "dn-primer", d: "M" + x1 + " " + y1 + "L" + (x1 + 16) + " " + (y1 - 1) }, F);
+    return mk("path", { class: "dn-lag", d: "M" + (x1 + 16) + " " + (y1 - 1) + "L" + x2 + " " + y2 }, F);
+  });
+  /* enzymes as shaded cells */
+  heli = cell(F, { cls: "heli", r: 20, nuc: 0.34, seed: 3, wob: 0.12 }); place(heli, 445, 165, 0, 1);
+  polLead = cell(F, { cls: "pol", r: 18, nuc: 0.36, seed: 5, wob: 0.1 }); place(polLead, 610, 192, 0, 1);
+  polLag = cell(F, { cls: "pol", r: 16, nuc: 0.36, seed: 7, wob: 0.1 }); place(polLag, 640, 138, 0, 1);
+  prim = cell(F, { cls: "prim", r: 11, nuc: 0.3, seed: 9, wob: 0.12 }); place(prim, 545, 128, 0, 1);
+  lig = cell(F, { cls: "lig", r: 10, nuc: 0.3, seed: 11, wob: 0.12 }); place(lig, 850, 124, 0, 1);
+  /* ---- damage zone: one DNA segment with three lesions ---- */
+  const Dg = L.dmg;
+  mk("path", { class: "dn-dna2", d: "M60 355H704M736 355H900" }, Dg); mk("path", { class: "dn-dna2", d: "M60 375H704M736 375H900" }, Dg);
+  for (let x = 76; x <= 690; x += 28) { if (x > 218 && x < 262) continue; if (x > 458 && x < 502) continue; mk("path", { class: "dn-rung", d: "M" + x + " 357V373" }, Dg); }
+  for (let x = 752; x <= 884; x += 28) mk("path", { class: "dn-rung", d: "M" + x + " 357V373" }, Dg);
+  mk("path", { class: "dn-sister", d: "M650 400H800" }, Dg);
+  sunG = mk("g", {}, Dg); mk("circle", { class: "dn-sun", cx: 95, cy: 322, r: 9 }, sunG);
+  for (let i = 0; i < 6; i++) { const a = i * 1.047; mk("path", { class: "dn-shield", d: "M" + f1(95 + Math.cos(a) * 12) + " " + f1(322 + Math.sin(a) * 12) + "L" + f1(95 + Math.cos(a) * 16) + " " + f1(322 + Math.sin(a) * 16) }, sunG); }
+  dimerG = mk("g", {}, Dg); mk("circle", { class: "dn-dimer", cx: 234, cy: 350, r: 5.5 }, dimerG); mk("circle", { class: "dn-dimer", cx: 248, cy: 350, r: 5.5 }, dimerG); mk("path", { class: "dn-dimer", d: "M234 350H248" }, dimerG);
+  misC = mk("circle", { class: "dn-mis", cx: 480, cy: 348, r: 5.5 }, Dg);
+  breakG = mk("g", {}, Dg); mk("path", { class: "dn-mis", d: "M704 355L712 365L704 375M736 355L728 365L736 375" }, breakG);
+  shieldP = mk("path", { class: "dn-shield", d: "M212 338Q240 322 268 338", opacity: "0" }, Dg);
+  repBlobs = [[240, 325], [480, 325], [720, 325]].map(([x, y], i) => { const g = cell(Dg, { cls: "rep", r: 13, nuc: 0.34, seed: 20 + i, wob: 0.12 }); place(g, x, y, 0, 1); return { g, x, y }; });
+  /* ---- label pills: top row, fork bottom row, repair row, lesion row ---- */
+  const O = L.over;
+  pill(O, "Primase", 545, 116, 500, 62, "Primase: makes a short RNA primer so DNA polymerase has a starting point on the lagging strand.");
+  pill(O, "Lagging strand", 660, 140, 640, 62, "Lagging strand: built away from the fork in short pieces, because polymerase can only build in one direction.");
+  pill(O, "Okazaki pieces", 790, 124, 790, 62, "Okazaki pieces: the short new pieces on the lagging strand, later joined into one strand.");
+  pill(O, "Ligase", 850, 112, 895, 62, "DNA ligase: seals the nicks between Okazaki pieces to finish the lagging strand.");
+  pill(O, "Helicase", 445, 186, 430, 252, "Helicase: unwinds and separates the two parental strands at the replication fork.");
+  pill(O, "Proofreading", 592, 208, 555, 252, "Proofreading: the polymerase checks each new base and removes most mismatches as it goes.");
+  pill(O, "Leading strand", 730, 204, 680, 252, "Leading strand: built continuously toward the fork as the DNA unwinds.");
+  pill(O, "Polymerase", 618, 176, 805, 252, "DNA polymerase: adds matching bases to build the new strands, on both the leading and lagging sides.");
+  pill(O, "Excision repair", 240, 340, 260, 302, "Nucleotide excision repair: cuts out a thymine dimer and fills the gap. Failure causes xeroderma pigmentosum, with severe sun sensitivity.");
+  pill(O, "Mismatch repair", 480, 340, 500, 302, "Mismatch repair: finds and fixes a wrongly paired base left by copying. Failure causes Lynch syndrome.");
+  pill(O, "Recombination", 720, 340, 730, 302, "Homologous recombination: repairs a double strand break accurately using the sister chromatid. BRCA1 and BRCA2 are needed for this route.");
+  pill(O, "Thymine dimer", 240, 362, 240, 418, "Thymine dimer: ultraviolet light joins two neighbouring thymines, kinking the DNA and blocking copying.");
+  pill(O, "Mismatch", 480, 362, 480, 418, "Base mismatch: a wrong base paired during copying. If it survives, it becomes a permanent mutation in one daughter cell.");
+  pill(O, "Strand break", 720, 362, 720, 418, "Double strand break: both strands severed. The most dangerous lesion; it needs recombination for accurate repair.");
+  sunPill = pill(O, "Sunscreen", 208, 374, 120, 408, "Sunscreen and avoidance: less ultraviolet light reaches the skin DNA, so fewer thymine dimers form.");
+  parpPill = pill(O, "PARP blocked", 748, 346, 880, 302, "PARP inhibitor concept: PARP is blocked, single strand breaks persist and become double strand breaks. Cells without recombination, such as BRCA defective cells, are lost.");
+  sunPill.style.opacity = 0; parpPill.style.opacity = 0;
+  /* ---- gauges ---- */
+  const P = L.panel, y0 = 478;
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
+  mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P).textContent = "The cell";
+  [["rep", "Replication", "g-rep", "How steadily the fork copies the DNA."], ["dmg", "Damage", "g-dmg", "How much damage is present: dimers, mismatches and breaks."], ["fix", "Repair", "g-good", "How well the repair pathways can cope."], ["mut", "Mutations", "g-mut", "Unrepaired damage left as permanent mutations."], ["kill", "Cell loss", "g-kill", "Loss of repair defective cells. With a PARP inhibitor this is the intended effect on BRCA defective cells."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 120 + i * 170, y0 + 2, 52, 18, cls, name, tip); });
+}
+function step(dt, m) {
+  const k = Math.min(1, dt * 0.7);
+  sm.D = lerp(sm.D, m.D, k); sm.cap = lerp(sm.cap, m.cap, k); sm.R = lerp(sm.R, m.R, k); sm.M = lerp(sm.M, m.M, k); sm.kill = lerp(sm.kill, m.kill, k); sm.parp = lerp(sm.parp, m.parp, k); sm.sun = lerp(sm.sun, m.sun || 0, k);
+  place(heli, 445 + Math.sin(tm / 500) * 2, 165, Math.sin(tm / 300) * 8, 1 + 0.05 * Math.sin(tm / 200));
+  place(polLead, 610 + Math.sin(tm / 700) * 6, 192 + Math.cos(tm / 600) * 2, 0, 1 + 0.06 * sm.R * Math.sin(tm / 250));
+  place(polLag, 640 + Math.sin(tm / 800 + 2) * 5, 138 + Math.cos(tm / 650) * 2, 0, 1);
+  place(prim, 545 + Math.sin(tm / 900) * 3, 128, Math.sin(tm / 500) * 10, 1);
+  place(lig, 850, 124 + Math.sin(tm / 550) * 3, 0, 1);
+  frags.forEach((fg, i) => { const ph = 0.35 + 0.65 * clamp(sm.R * 1.2 - i * 0.12 + 0.15 * Math.sin(tm / 900 + i * 1.6)); fg.setAttribute("opacity", ph.toFixed(2)); });
+  leadPath.setAttribute("opacity", (0.45 + 0.55 * sm.R).toFixed(2));
+  /* nucleotide particles flow from above the fork to the polymerases, kept inside the fork zone */
+  acc.nuc += dt * sm.R * 9; while (acc.nuc >= 1) { acc.nuc--; const p = freeP(nuc); if (p) emit(p, rnd(500, 880), 66, 0, 0, Math.random() < 0.6 ? 0 : 1); }
+  nuc.forEach((p) => { if (!p.on) return; p.t += dt; const tx = p.k ? 640 : 610, ty = p.k ? 142 : 188, dx = tx - p.x, dy = ty - p.y, d = Math.hypot(dx, dy) || 1;
+    p.x += (dx / d) * 62 * dt; p.y += (dy / d) * 62 * dt; p.x = clamp(p.x, 30, 930); p.y = clamp(p.y, 52, 248); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 16 || p.t > 7) killP(p); });
+  /* damage visuals scale with damage and unrepaired load */
+  const ds = (0.3 + sm.D).toFixed(2); dimerG.setAttribute("transform", "translate(240 350) scale(" + ds + ") translate(-240 -350)"); dimerG.setAttribute("opacity", clamp(0.25 + sm.D).toFixed(2));
+  misC.setAttribute("opacity", clamp(0.2 + sm.D * 0.9).toFixed(2)); misC.setAttribute("r", (4 + 3 * sm.D).toFixed(1));
+  breakG.setAttribute("opacity", clamp(0.15 + m.unrep * 1.1).toFixed(2));
+  shieldP.setAttribute("opacity", sm.sun.toFixed(2)); sunG.setAttribute("opacity", (1 - 0.55 * sm.sun).toFixed(2));
+  sunPill.style.opacity = sm.sun.toFixed(2); parpPill.style.opacity = sm.parp.toFixed(2);
+  repBlobs.forEach((b, i) => { place(b.g, b.x, b.y + Math.sin(tm / 600 + i * 2) * 2.5, 0, 1); b.g.style.opacity = (0.3 + 0.7 * sm.cap).toFixed(2); });
+  /* ultraviolet photons fall on the dimer when damage is high and not prevented */
+  acc.uv += dt * sm.D * (m.lvl === 1 ? 7 : 1.2); while (acc.uv >= 1) { acc.uv--; const p = freeP(uvp); if (p) emit(p, rnd(205, 275), 288, rnd(-3, 3), 34, 0); }
+  uvp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 30, 930); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.y > 348 || p.t > 2.4) killP(p); });
+  /* repair sparkles drift from each repair blob to its lesion */
+  acc.fix += dt * sm.cap * sm.D * 8 + dt * 0.4; while (acc.fix >= 1) { acc.fix--; const p = freeP(fixp); if (p) { const b = pick(repBlobs); emit(p, b.x + rnd(-8, 8), b.y + 8, rnd(-4, 4), 22, 0); } }
+  fixp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.y = clamp(p.y, 280, 432); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.8).toFixed(2)); if (p.t > 1.8) killP(p); });
+  /* mutation marks leave the fork when unrepaired damage is high */
+  acc.mut += dt * sm.M * 6; while (acc.mut >= 1) { acc.mut--; const p = freeP(mutp); if (p) emit(p, rnd(820, 880), rnd(196, 224), rnd(8, 16), rnd(4, 10), 0); }
+  mutp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 30, 938); p.y = clamp(p.y, 52, 248); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 2.6).toFixed(2)); if (p.t > 2.6) killP(p); });
+  gg.rep.set(sm.R, wordOf(sm.R, 0.45, 0.75, ["stalled", "slowed", "steady"]));
+  gg.dmg.set(sm.D, wordOf(sm.D, 0.3, 0.6, ["low", "raised", "high"]));
+  gg.fix.set(sm.cap, wordOf(sm.cap, 0.35, 0.7, ["failing", "strained", "coping"]));
+  gg.mut.set(sm.M, wordOf(sm.M, 0.25, 0.55, ["rare", "some", "frequent"]));
+  gg.kill.set(sm.kill, wordOf(sm.kill, 0.2, 0.55, ["little", "some", "marked"]));
+}
+run({ init, step });
+</script></body></html>

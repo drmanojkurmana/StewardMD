@@ -1,0 +1,521 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pre-eclampsia: placenta to maternal syndrome</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.pre-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.pre-node-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.pre-node-s{fill:var(--anatomy-text);font:9.5px var(--anatomy-mono);pointer-events:none;opacity:.85}
+.pre-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round}
+.pre-head{fill:var(--anatomy-mid)}
+.pre-ut{fill:color-mix(in srgb,var(--c-endo) 26%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-endo) 60%,#000);stroke-width:1.3}
+.pre-plac{fill:color-mix(in srgb,var(--c-bad) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 65%,#000);stroke-width:1.2}
+.pre-spiral{fill:none;stroke:var(--c-rbc);stroke-width:2;stroke-linecap:round}
+.pre-wall{fill:color-mix(in srgb,var(--c-sm) 50%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-sm) 62%,#000);stroke-width:1}
+.pre-lum{fill:color-mix(in srgb,var(--c-rbc) 13%,var(--anatomy-paper))}
+.pre-org{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.pre-org-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.pre-dmg{fill:var(--c-bad)}
+.pre-brain{fill:color-mix(in srgb,var(--c-mac) 45%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
+.pre-kid{fill:color-mix(in srgb,#b8645a 55%,var(--anatomy-paper));stroke:#8f4438;stroke-width:1.2}
+.pre-liv{fill:color-mix(in srgb,#c47b4a 52%,var(--anatomy-paper));stroke:#96582c;stroke-width:1.2}
+.pre-bolt{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 60%,#000);stroke-width:.8}
+.pre-prot{fill:var(--c-neut)}
+.pre-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
+.pre-xx{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.p-ang{--cc:var(--c-cyt)}
+.dr-g-fill.g-endo{fill:var(--c-endo)}.dr-g-fill.g-org{fill:var(--c-bad)}.dr-g-fill.g-seiz{fill:var(--c-neut)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Pre-eclampsia: placenta to maternal syndrome</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>pressure raised · protein heavy · organs stressed · seizures unlikely</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated map of pre-eclampsia. Shallow placental implantation leaves the placenta short of blood. The ischaemic placenta releases anti-angiogenic factors into the maternal circulation. Those factors injure the vessel lining everywhere, so vessels tighten and blood pressure rises, the kidney filter leaks protein, and the liver, kidney and brain are involved. Seizures mark eclampsia. Gauges show the placental factors, endothelial injury, pressure, protein leak, organ involvement and seizure risk. Treatments act by lowering pressure, preventing seizures, or delivering the placenta."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<text class="sc-zone" x="34" y="68">FROM PLACENTA TO MOTHER</text>
+<g id="drivers"></g><g id="placenta"></g><g id="vessel"></g><g id="organs"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, sizes and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Stage of the syndrome</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="severe"><span class="dr-ticks"><i>mild</i><i>severe</i><i>eclampsia</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">antihypertensive (vessels relaxed, pressure lowered)</option><option value="2">magnesium sulphate (seizures prevented)</option><option value="3">delivery (placenta delivered, cause removed)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How pre-eclampsia develops.</strong> In normal pregnancy the placenta implants deeply and remodels the uterine spiral arteries into wide, low resistance vessels. In pre-eclampsia that remodelling is shallow, so the placenta is relatively ischaemic. The stressed placenta releases excess anti-angiogenic factors (such as soluble fms-like tyrosine kinase 1 and soluble endoglin) and less pro-angiogenic placental growth factor. In the maternal blood these injure endothelium, the single-cell lining of vessels, reducing relaxing signals and making vessels tighten and leak. The result is hypertension and proteinuria, with involvement of liver, kidney, brain and other organs; seizures define eclampsia. This is standard teaching in obstetrics and medicine texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> An antihypertensive lowers pressure but does not remove the placental cause. Magnesium sulphate prevents and treats seizures. Delivery of the baby and placenta is the definitive step that removes the source of the factors, after which the syndrome settles over days. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Diagnostic thresholds and timing, fetal growth restriction and fetal monitoring, HELLP as a named variant, blood tests and their cut-offs, choice and dosing of individual drugs, timing and mode of delivery, and care after birth are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"CY":230,"S":{"level":{"label":"Stage of the syndrome","a":[0.3,0.65,1],"names":["mild","severe","eclampsia"],"ticks":["mild","severe","eclampsia"],"start":1},"settings":[{"label":"no treatment"},{"label":"antihypertensive (vessels relaxed, pressure lowered)"},{"label":"magnesium sulphate (seizures prevented)"},{"label":"delivery (placenta delivered, cause removed)"}],"drugNames":["no treatment","an antihypertensive","magnesium sulphate","delivery"],"status":"Pre-eclampsia: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const a = S.level.a[level];
+  const ah = drug === 1 ? 1 : 0, mg = drug === 2 ? 1 : 0, del = drug === 3 ? 1 : 0;
+  const isch = cl(a * (del ? 0.1 : 1));
+  const ang = cl((0.06 + 0.92 * isch) * (del ? 0.35 : 1));
+  const endo = cl(0.05 + 0.92 * ang);
+  const bp = cl(0.06 + 0.86 * endo - ah * 0.38 - del * 0.22);
+  const prot = cl((0.04 + 0.88 * endo) * (del ? 0.35 : 1) * (ah ? 0.92 : 1));
+  const org = cl((0.04 + 0.86 * endo * (0.35 + 0.65 * a)) * (del ? 0.45 : 1) * (ah ? 0.9 : 1));
+  const seiz = cl((level === 2 ? 0.12 + 0.86 * endo : 0.03 + 0.22 * endo * a) * (mg ? 0.14 : 1) * (del ? 0.3 : 1));
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(bp, 0.35, 0.65, ["controlled", "raised", "high"]), w(prot, 0.3, 0.6, ["none", "present", "heavy"]), w(org, 0.3, 0.6, ["quiet", "stressed", "involved"]), w(seiz, 0.2, 0.5, ["unlikely", "possible", "likely"])];
+  return { a, ah, mg, del, isch, ang, endo, bp, prot, org, seiz, words, readout: "pressure " + words[0] + " · protein " + words[1] + " · organs " + words[2] + " · seizures " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Pre-eclampsia scene: shallow implantation, ischaemic placenta, anti-angiogenic factors, injured endothelium, tight vessel, leaking kidney filter, liver and brain involvement, seizure bolt. */
+const CY = SC.CY, WW = SC.W;
+const L = { drivers: $("drivers"), placenta: $("placenta"), vessel: $("vessel"), organs: $("organs"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel") };
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const angP = pool(30, () => mk("circle", { class: "sc-p p-ang", r: 2.5 }, L.parts));
+/* driver nodes */
+const NODES = {
+  impl: { x: 145, y: 102, w: 190, t: "Poor placentation", s: "shallow implantation", v: "isch", tip: "In pre-eclampsia the placenta implants shallowly and the uterine spiral arteries are not remodelled into wide vessels, so placental blood flow stays restricted." },
+  isch: { x: 365, y: 102, w: 190, t: "Placental ischaemia", s: "placenta short of blood", v: "isch", tip: "The poorly perfused placenta is relatively ischaemic and stressed. It is the source of the maternal syndrome." },
+  ang: { x: 585, y: 102, w: 200, t: "Anti-angiogenic factors", s: "factors into maternal blood", v: "ang", tip: "The stressed placenta releases excess anti-angiogenic factors such as soluble fms-like tyrosine kinase 1 and soluble endoglin, with less placental growth factor available." },
+  endo: { x: 815, y: 102, w: 190, t: "Endothelial dysfunction", s: "vessel lining injured", v: "endo", tip: "Circulating factors injure endothelium, the lining of every maternal vessel. Injured endothelium relaxes vessels less, tightens them, and lets protein and fluid leak." },
+};
+const nodeEls = {};
+Object.keys(NODES).forEach((k) => { const n = NODES[k], g = mk("g", { class: "hot", tabindex: "0", "data-info": n.tip }, L.drivers);
+  mk("rect", { class: "pre-node", x: n.x - n.w / 2, y: n.y - 22, width: n.w, height: 44, rx: 12 }, g);
+  const t = mk("text", { class: "pre-node-t", x: n.x, y: n.y - 2, "text-anchor": "middle" }, g); t.textContent = n.t;
+  const s = mk("text", { class: "pre-node-s", x: n.x, y: n.y + 13, "text-anchor": "middle" }, g); s.textContent = n.s; nodeEls[k] = g; });
+[[240, 270], [460, 480], [685, 720]].forEach(([x1, x2]) => { mk("path", { class: "pre-arrow", d: "M" + x1 + " 102L" + x2 + " 102" }, L.drivers);
+  mk("path", { class: "pre-head", d: "M0 0L-8 -4.5L-8 4.5Z", transform: "translate(" + x2 + " 102) rotate(0)" }, L.drivers); });
+/* placenta and uterus */
+const placG = mk("g", { class: "hot", tabindex: "0", "data-info": "Placenta inside the uterus. Shallow implantation and narrow spiral arteries leave it short of blood, so it releases anti-angiogenic factors." }, L.placenta);
+mk("ellipse", { class: "pre-ut", cx: 140, cy: 212, rx: 68, ry: 56 }, placG);
+const placDisc = mk("ellipse", { class: "pre-plac", cx: 140, cy: 192, rx: 44, ry: 30 }, placG);
+mk("ellipse", { class: "pre-plac", cx: 122, cy: 184, rx: 12, ry: 8, opacity: 0.55 }, placG);
+mk("ellipse", { class: "pre-plac", cx: 158, cy: 200, rx: 10, ry: 7, opacity: 0.55 }, placG);
+[100, 140, 180].forEach((x) => mk("path", { class: "pre-spiral", d: "M" + x + " 246q-6 8 0 14q6 6 0 12" }, placG));
+/* maternal vessel */
+const vWallT = mk("rect", { class: "pre-wall", x: 260, y: CY - 48, width: 670, height: 18, rx: 8 }, L.vessel);
+const vWallB = mk("rect", { class: "pre-wall", x: 260, y: CY + 30, width: 670, height: 18, rx: 8 }, L.vessel);
+const vLum = mk("rect", { class: "pre-lum", x: 260, y: CY - 30, width: 670, height: 60 }, L.vessel);
+const endoTop = [], endoBot = [];
+for (let i = 0; i < 14; i++) { const x = 282 + i * 48; endoTop.push({ g: cell(L.vessel, { cls: "endo", r: 8, seed: i + 2, wob: 0.1, n: 8 }), x }); endoBot.push({ g: cell(L.vessel, { cls: "endo", r: 8, seed: i + 30, wob: 0.1, n: 8 }), x }); }
+const rbcs = [];
+for (let i = 0; i < 16; i++) { const g = mk("g", { class: "cl cl-rbc" }, L.vessel); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.8 }, g); mk("ellipse", { class: "cl-s", rx: 3, ry: 1.5 }, g); rbcs.push({ g, x: rnd(260, 930), y: rnd(-0.8, 0.8), v: rnd(0.85, 1.15), rot: rnd(-15, 15) }); }
+/* organs and signs */
+function organ(x, name, tip, build) { const g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, L.organs); mk("rect", { class: "pre-org", x: x - 90, y: 338, width: 180, height: 76, rx: 12 }, g); const inner = mk("g", {}, g); const holder = {}; build(holder, inner, x, 366); const t = mk("text", { class: "pre-org-t", x: x, y: 406, "text-anchor": "middle" }, g); t.textContent = name; return holder; }
+const orgKid = organ(320, "Kidney", "The injured kidney filter leaks protein into the urine (proteinuria) and kidney function can fall. Protein leak is a defining sign alongside hypertension.", (h, g, x, y) => {
+  mk("path", { class: "pre-kid", d: "M" + (x - 22) + " " + (y - 24) + "C" + (x + 6) + " " + (y - 30) + " " + (x + 28) + " " + (y - 12) + " " + (x + 24) + " " + (y + 6) + "C" + (x + 20) + " " + (y + 24) + " " + (x - 4) + " " + (y + 30) + " " + (x - 18) + " " + (y + 22) + "C" + (x - 30) + " " + (y + 14) + " " + (x - 30) + " " + (y - 16) + " " + (x - 22) + " " + (y - 24) + "Z" }, g);
+  h.dots = [0, 1, 2, 3, 4].map((i) => mk("circle", { class: "pre-prot", cx: x + 16 + (i % 3) * 5, cy: y + 2 + i * 5, r: 2.2, opacity: 0 }, g)); h.d = mk("circle", { class: "pre-dmg", cx: x - 8, cy: y + 2, r: 9, opacity: 0 }, g); });
+const orgLiv = organ(545, "Liver", "Endothelial injury in the liver causes pain under the ribs, abnormal liver tests and, in severe disease, bleeding problems as clotting is disturbed.", (h, g, x, y) => {
+  mk("path", { class: "pre-liv", d: "M" + (x - 34) + " " + (y - 14) + "C" + (x - 20) + " " + (y - 26) + " " + (x + 18) + " " + (y - 26) + " " + (x + 34) + " " + (y - 8) + "C" + (x + 30) + " " + (y + 12) + " " + (x + 4) + " " + (y + 20) + " " + (x - 22) + " " + (y + 18) + "C" + (x - 34) + " " + (y + 8) + " " + (x - 36) + " " + (y - 2) + " " + (x - 34) + " " + (y - 14) + "Z" }, g);
+  h.d = mk("g", { opacity: 0 }, g); [[-14, -4], [8, 4], [20, -10]].forEach(([u, v]) => mk("circle", { class: "pre-dmg", cx: x + u, cy: y + v, r: 4 }, h.d)); });
+const orgBrain = organ(770, "Brain", "Endothelial injury in the brain causes headache and visual disturbance. Seizures define eclampsia and are the most feared brain complication.", (h, g, x, y) => {
+  mk("ellipse", { class: "pre-brain", cx: x, cy: y, rx: 34, ry: 25 }, g);
+  mk("path", { class: "pre-arrow", d: "M" + (x - 18) + " " + (y - 7) + "q9 -8 18 0q9 8 18 0M" + (x - 18) + " " + (y + 8) + "q9 -8 18 0q9 8 18 0" }, g);
+  h.bolt = mk("path", { class: "pre-bolt", d: "M" + (x + 6) + " " + (y - 16) + "L" + (x - 4) + " " + (y + 2) + "L" + (x + 2) + " " + (y + 2) + "L" + (x - 5) + " " + (y + 17) + "L" + (x + 10) + " " + (y - 2) + "L" + (x + 3) + " " + (y - 2) + "Z", opacity: 0 }, g);
+  h.d = mk("circle", { class: "pre-dmg", cx: x - 14, cy: y - 6, r: 8, opacity: 0 }, g); });
+const signsG = mk("g", { class: "hot", tabindex: "0", "data-info": "The defining signs are hypertension (raised blood pressure) after mid pregnancy together with proteinuria, or with liver, kidney, blood or brain involvement in severe disease." }, L.organs);
+mk("rect", { class: "pre-org", x: 40, y: 338, width: 170, height: 76, rx: 12 }, signsG);
+const signArrow = mk("path", { class: "pre-bolt", d: "M105 388L118 362L126 374L136 356L148 388Z", opacity: 0.4 }, signsG);
+const signDots = [0, 1, 2].map((i) => mk("circle", { class: "pre-prot", cx: 82 + i * 14, cy: 392, r: 2.4, opacity: 0 }, signsG));
+{ const t = mk("text", { class: "pre-org-t", x: 125, y: 404, "text-anchor": "middle" }, signsG); t.textContent = "Signs"; }
+/* treatment marks */
+function xmark(x, y) { const g = mk("g", { opacity: 0 }, L.marks); mk("circle", { class: "pre-x", cx: x, cy: y, r: 9 }, g); mk("path", { class: "pre-xx", d: "M" + (x - 4) + " " + (y - 4) + "l8 8M" + (x + 4) + " " + (y - 4) + "l-8 8" }, g); return g; }
+const markAh = xmark(884, CY - 39), markMg = xmark(800, 352), markDel = xmark(140, 212);
+/* pills: short text, pill row below vessel (y 308) and above vessel (y 165), checked against nodes (bottom 124), vessel (182 to 278), organs (top 338) and each other */
+pill(L.over, "Placenta", 96, 188, 140, 308, "Placenta inside the uterus. Shallow implantation leaves it short of blood and it becomes the source of anti-angiogenic factors.");
+pill(L.over, "Vessel wall", 560, CY - 38, 560, 165, "Endothelium lining the maternal vessel. Injured endothelium tightens the vessel, so resistance and blood pressure rise.");
+pill(L.over, "Blood flow", 750, CY, 750, 165, "Maternal blood flow through a tightened vessel. Sustained high pressure injures organs downstream.");
+pill(L.over, "Protein leak", 336, 366, 320, 308, "Protein leaking through the injured kidney filter into urine. Together with hypertension this defines the syndrome.");
+pill(L.over, "Liver injury", 545, 360, 545, 308, "Liver involvement from endothelial injury: pain, abnormal tests and disturbed clotting in severe disease.");
+pill(L.over, "Seizure bolt", 776, 358, 770, 308, "A seizure in the brain defines eclampsia. Magnesium sulphate is used to prevent and treat these seizures.");
+/* gauges */
+const gg = {};
+{ const P = L.panel, y0 = 478, h = 52, xs = [100, 240, 380, 520, 660, 800];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: WW - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The mother";
+  [["ang", "Factors", "g-cyt", "Anti-angiogenic factors released by the ischaemic placenta into maternal blood."], ["endo", "Endothelium", "g-endo", "How widely the vessel lining is injured by circulating factors."], ["bp", "Pressure", "g-bad", "Blood pressure: tightened vessels raise resistance and pressure."], ["prot", "Protein", "g-fl", "Protein leaking through the kidney filter into urine (proteinuria)."], ["org", "Organs", "g-org", "Involvement of liver, kidney and brain as endothelial injury spreads."], ["seiz", "Seizures", "g-seiz", "Seizure risk in the brain. Seizures present means eclampsia."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h, 18, cls, name, tip); }); }
+const sm = { isch: 0.5, ang: 0.4, endo: 0.4, bp: 0.5, prot: 0.4, org: 0.3, seiz: 0.1, ah: 0, mg: 0, del: 0 };
+const acc = { ang: 0 };
+function init() {}
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.5);
+  ["isch", "ang", "endo", "bp", "prot", "org", "seiz", "ah", "mg", "del"].forEach((q) => { sm[q] = lerp(sm[q], m[q], q === "org" || q === "prot" ? k2 : k1); });
+  /* nodes glow with their driver */
+  const act = { impl: sm.isch, isch: sm.isch, ang: sm.ang, endo: sm.endo };
+  Object.keys(NODES).forEach((id) => { nodeEls[id].style.filter = "drop-shadow(0 0 " + (act[id] * 7).toFixed(1) + "px var(--c-cyt))"; });
+  placG.setAttribute("opacity", (1 - 0.82 * sm.del).toFixed(2));
+  placDisc.style.filter = "drop-shadow(0 0 " + (sm.isch * 8).toFixed(1) + "px var(--c-bad))";
+  /* vessel geometry: injured endothelium tightens it, antihypertensive and delivery reopen it */
+  const hh = Math.max(11, 29 - 8 * sm.endo + 5 * sm.ah + 4 * sm.del), thick = 14 + 6 * sm.endo;
+  vLum.setAttribute("y", f1(CY - hh)); vLum.setAttribute("height", f1(hh * 2));
+  vWallT.setAttribute("y", f1(CY - hh - thick)); vWallT.setAttribute("height", f1(thick));
+  vWallB.setAttribute("y", f1(CY + hh)); vWallB.setAttribute("height", f1(thick));
+  endoTop.forEach((e) => { place(e.g, e.x, CY - hh, 0, 1); e.g.style.setProperty("--act", sm.endo.toFixed(2)); });
+  endoBot.forEach((e) => { place(e.g, e.x, CY + hh, 0, 1); e.g.style.setProperty("--act", sm.endo.toFixed(2)); });
+  const flow = 30 + 62 * sm.bp;
+  rbcs.forEach((r) => { r.x += r.v * flow * dt; if (r.x > 938) { r.x = 252; r.y = rnd(-0.8, 0.8); } place(r.g, r.x, CY + r.y * Math.max(4, hh - 9), r.rot + Math.sin(tm / 500 + r.x) * 8, 1); });
+  /* anti-angiogenic factors: placenta to vessel, then along it */
+  acc.ang += dt * sm.ang * 9; while (acc.ang >= 1) { acc.ang--; const p = free(angP); if (p) emit(p, 208, 214 + rnd(-14, 14), rnd(38, 55), rnd(-4, 10), 0); }
+  angP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt + (CY - p.y) * dt * 0.7; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > 935 || p.t > 9) kill(p); });
+  /* organs, signs, marks */
+  orgKid.d.setAttribute("opacity", (sm.org * 0.65).toFixed(2)); orgKid.dots.forEach((d, i) => d.setAttribute("opacity", clamp(sm.prot * 1.2 - i * 0.12).toFixed(2)));
+  orgLiv.d.setAttribute("opacity", (sm.org * 0.8).toFixed(2));
+  orgBrain.d.setAttribute("opacity", (sm.org * 0.7).toFixed(2));
+  orgBrain.bolt.setAttribute("opacity", sm.seiz.toFixed(2));
+  orgBrain.bolt.setAttribute("transform", "translate(" + f1(Math.sin(tm / 55) * 2.2 * sm.seiz) + " 0)");
+  signArrow.setAttribute("opacity", (0.2 + 0.8 * sm.bp).toFixed(2));
+  signDots.forEach((d, i) => d.setAttribute("opacity", clamp(sm.prot * 1.2 - i * 0.2).toFixed(2)));
+  markAh.setAttribute("opacity", sm.ah.toFixed(2)); markMg.setAttribute("opacity", sm.mg.toFixed(2)); markDel.setAttribute("opacity", sm.del.toFixed(2));
+  /* gauges */
+  gg.ang.set(sm.ang, wordOf(sm.ang, 0.3, 0.6, ["low", "raised", "high"])); gg.endo.set(sm.endo, wordOf(sm.endo, 0.3, 0.6, ["healthy", "injured", "widespread"]));
+  gg.bp.set(sm.bp, wordOf(sm.bp, 0.35, 0.65, ["controlled", "raised", "high"])); gg.prot.set(sm.prot, wordOf(sm.prot, 0.3, 0.6, ["none", "present", "heavy"]));
+  gg.org.set(sm.org, wordOf(sm.org, 0.3, 0.6, ["quiet", "stressed", "involved"])); gg.seiz.set(sm.seiz, wordOf(sm.seiz, 0.2, 0.5, ["unlikely", "possible", "likely"]));
+}
+run({ init, step });
+</script></body></html>

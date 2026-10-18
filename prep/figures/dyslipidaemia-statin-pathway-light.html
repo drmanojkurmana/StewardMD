@@ -1,0 +1,511 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cholesterol metabolism and lipid lowering treatment</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.li-box{fill:var(--c-tis);opacity:.5}
+.li-cap{text-anchor:middle}
+.li-blood{fill:color-mix(in srgb,var(--c-rbc) 13%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
+.li-gut{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-fl) 65%,#000);stroke-width:1.2}
+.li-liver{fill:color-mix(in srgb,#d97a56 52%,var(--c-tis));stroke:color-mix(in srgb,#d97a56 60%,#000);stroke-width:1.2}
+.li-periph{fill:color-mix(in srgb,#7fc4e8 26%,var(--c-tis));stroke:color-mix(in srgb,#7fc4e8 55%,#000);stroke-width:1}
+.li-enz{fill:#ffd24a;stroke:#9a7a1f;stroke-width:1}
+.li-trans{fill:#3ddc97;stroke:#147a52;stroke-width:.8}
+.li-rec{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round}
+.li-recbad{fill:none;stroke:var(--c-bad);stroke-width:1.6;stroke-linecap:round}
+.li-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.li-xp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.cl-tiss{--cc:#7fc4e8}
+.p-chol{--cc:#ffd24a}.p-vldl{--cc:#e6c85a}.p-ldl{--cc:#f08a4b}.p-hdl{--cc:#38d1ff}.p-pcsk{--cc:#c084fc}
+.dr-g-fill.g-ldl{fill:#f08a4b}.dr-g-fill.g-hdl{fill:#38d1ff}.dr-g-fill.g-rec{fill:var(--c-good)}.dr-g-fill.g-prod{fill:#e6c85a}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Cholesterol metabolism and lipid lowering treatment</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>blood LDL raised · receptor uptake good · tissue cholesterol raised</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated map of cholesterol metabolism. The gut absorbs cholesterol from food, the liver makes cholesterol through HMG-CoA reductase and releases VLDL into the blood, VLDL becomes LDL, LDL receptors on the liver clear LDL, and HDL carries cholesterol from peripheral tissue back to the liver. In familial hypercholesterolaemia the LDL receptor is faulty. Treatment choices are a statin, ezetimibe and a PCSK9 inhibitor concept. Gauges show liver production, gut uptake, blood LDL, receptor uptake, HDL return and tissue cholesterol."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<rect class="li-box" x="30" y="108" width="150" height="150" rx="14"/>
+<rect class="li-box" x="640" y="108" width="290" height="150" rx="14"/>
+<rect class="li-blood" x="30" y="316" width="900" height="84" rx="12"/>
+<text class="sc-zone li-cap" x="105" y="248">GUT</text>
+<text class="sc-zone li-cap" x="390" y="248">LIVER</text>
+<text class="sc-zone li-cap" x="785" y="248">PERIPHERAL TISSUE</text>
+<g id="gutn"></g><g id="livn"></g><g id="pern"></g>
+<g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Cholesterol pattern</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="high LDL"><span class="dr-ticks"><i>normal</i><i>high LDL</i><i>familial</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">statin</option><option value="2">ezetimibe</option><option value="3">PCSK9 inhibitor (concept)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How cholesterol moves.</strong> The liver makes cholesterol, with HMG-CoA reductase as the controlling enzyme, and packages lipid into VLDL. In the blood VLDL loses lipid and becomes LDL, the main cholesterol carrier to tissues. Liver LDL receptors bind LDL and pull it back into the liver for clearance. HDL does the return journey, carrying cholesterol from peripheral tissues back to the liver (reverse cholesterol transport). The gut also absorbs dietary and biliary cholesterol. This is standard teaching in medicine, biochemistry and pharmacology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Familial hypercholesterolaemia and treatment ideas shown.</strong> A faulty LDL receptor gene leaves few working receptors, so LDL stays high from early life. A statin blocks HMG-CoA reductase; the liver responds by making more LDL receptors. Ezetimibe blocks cholesterol uptake from the gut. A PCSK9 inhibitor stops PCSK9 marking LDL receptors for destruction, so more receptors survive; it works best when some receptors can still be made. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Chylomicrons and their remnants, IDL detail, bile acid loss and medicines that act on it, lipoprotein(a), triglyceride pathways in detail, receptor genetics beyond the single faulty receptor idea, drug choice, combinations and all doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Cholesterol pattern","a":[0.3,0.65,1],"names":["normal","high LDL","familial"],"ticks":["normal","high LDL","familial"],"start":1},"settings":[{"label":"no treatment"},{"label":"statin"},{"label":"ezetimibe"},{"label":"PCSK9 inhibitor (concept)"}],"drugNames":["no treatment","a statin","ezetimibe","a PCSK9 inhibitor"],"status":"Pattern: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const a = S.level.a[level], statin = drug === 1 ? 1 : 0, eze = drug === 2 ? 1 : 0, pcsk9i = drug === 3 ? 1 : 0;
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const Prod = cl((0.30 + 0.45 * a) * (statin ? 0.38 : 1));
+  const Abs = cl((0.25 + 0.35 * a) * (eze ? 0.32 : 1));
+  const V = cl(0.15 + 0.6 * Prod + 0.35 * Abs);
+  const recBase = level === 2 ? 0.18 : 0.9;
+  const R = cl(recBase * (pcsk9i ? 1 : 0.72) * (statin ? 1.25 : 1) * (pcsk9i && level === 2 ? 1.6 : 1));
+  const L = cl(0.12 + 0.95 * V - 0.55 * R + (level === 2 ? 0.18 : 0));
+  const Hd = cl(0.58 - 0.16 * a + (statin ? 0.04 : 0));
+  const Per = cl(0.85 * L - 0.25 * Hd + 0.1);
+  const Pk = pcsk9i ? 0.08 : cl(0.45 + 0.25 * a);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(L, 0.35, 0.65, ["low", "raised", "high"]), w(R, 0.3, 0.6, ["very low", "reduced", "good"]), w(Per, 0.3, 0.55, ["low", "raised", "high"])];
+  return { a, statin, eze, pcsk9i, Prod, Abs, V, R, L, Hd, Per, Pk, words, readout: "blood LDL " + words[0] + " · receptor uptake " + words[1] + " · tissue cholesterol " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Lipid scene: gut uptake, liver production, VLDL to LDL, receptor clearance, HDL return and the gauges. */
+const WW = SC.W;
+const L = { gut: $("gutn"), liv: $("livn"), per: $("pern"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const xmark = (parent, x, y, id) => { const g = mk("g", { id, opacity: "0" }, parent); mk("circle", { class: "li-x", cx: x, cy: y, r: 9 }, g); mk("path", { class: "li-xp", d: "M" + (x - 4) + " " + (y - 4) + "L" + (x + 4) + " " + (y + 4) + "M" + (x + 4) + " " + (y - 4) + "L" + (x - 4) + " " + (y + 4) }, g); return g; };
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const gutTrack = track([[105, 132], [105, 215], [105, 345]]);
+const prodTrack = track([[390, 158], [345, 215], [330, 348]]);
+const pcskTrack = track([[470, 222], [462, 252], [445, 276]]);
+const hdlTrack = track([[800, 218], [800, 350], [430, 350], [398, 252]]);
+const gutP = pool(10, () => mk("circle", { class: "sc-p p-chol", r: 3.2 }, L.parts));
+const prodP = pool(10, () => mk("circle", { class: "sc-p p-chol", r: 3.2 }, L.parts));
+const pcskP = pool(10, () => mk("circle", { class: "sc-p p-pcsk", r: 3.4 }, L.parts));
+let enzX, gutX, pcskX, famX, recG;
+const liverChol = [], gutChol = [], perChol = [], recs = [];
+const lipos = [], hdls = [];
+const gg = {};
+const sm = { Prod: 0.4, Abs: 0.3, V: 0.4, L: 0.3, R: 0.6, Hd: 0.5, Per: 0.2, Pk: 0.5, statin: 0, eze: 0, pcsk9i: 0, fam: 0 };
+const acc = { gut: 0, prod: 0, pcsk: 0 };
+function initNodes() {
+  mk("rect", { class: "li-gut", x: 78, y: 122, width: 54, height: 106, rx: 27 }, L.gut);
+  [88, 105, 122].forEach((x) => mk("circle", { class: "li-trans", cx: x, cy: 220, r: 4.5 }, L.gut));
+  [[92, 145], [112, 160], [98, 178], [118, 192], [90, 200]].forEach(([x, y], i) => { const c = mk("circle", { class: "sc-p p-chol", cx: x, cy: y, r: 3.4 }, L.gut); gutChol.push({ e: c, i }); });
+  mk("path", { class: "li-liver", d: "M255 170C255 125 300 108 390 108C480 108 525 125 525 170C525 215 480 238 390 238C300 238 255 215 255 170Z" }, L.liv);
+  [[340, 155], [390, 148], [440, 158]].forEach(([x, y]) => mk("polygon", { class: "li-enz", points: (x - 9) + "," + y + " " + (x - 4.5) + "," + (y - 8) + " " + (x + 4.5) + "," + (y - 8) + " " + (x + 9) + "," + y + " " + (x + 4.5) + "," + (y + 8) + " " + (x - 4.5) + "," + (y + 8) }, L.liv));
+  [[310, 190], [360, 198], [415, 190], [465, 198], [335, 215], [440, 218]].forEach(([x, y], i) => { const c = mk("circle", { class: "sc-p p-chol", cx: x, cy: y, r: 3.6 }, L.liv); liverChol.push({ e: c, i }); });
+  mk("circle", { class: "sc-p p-vldl", cx: 330, cy: 222, r: 9 }, L.liv);
+  recG = mk("g", {}, L.liv);
+  [380, 405, 430, 455, 480].forEach((x) => { const p = mk("path", { class: "li-rec", d: "M" + x + " 276L" + x + " 264M" + x + " 264L" + (x - 6) + " 257M" + x + " 264L" + (x + 6) + " 257" }, recG); recs.push(p); });
+  [[680, 150], [740, 138], [810, 152], [880, 142], [705, 195], [775, 200], [855, 192], [905, 205]].forEach(([x, y], i) => cell(L.per, { cls: "tiss", r: 17, nuc: 0.35, seed: i + 4, wob: 0.1, x, y }));
+  [[672, 178], [722, 168], [792, 178], [848, 168], [898, 178], [742, 218], [822, 220], [688, 222]].forEach(([x, y], i) => { const c = mk("circle", { class: "sc-p p-chol", cx: x, cy: y, r: 3.4 }, L.per); perChol.push({ e: c, i }); });
+  enzX = xmark(L.liv, 390, 152, "x-enz"); gutX = xmark(L.gut, 105, 220, "x-gut"); pcskX = xmark(L.parts, 520, 318, "x-pcsk");
+  famX = mk("g", { opacity: "0" }, L.liv); mk("path", { class: "li-recbad", d: "M422 258l16 16M438 258l-16 16" }, famX);
+  for (let i = 0; i < 22; i++) { const g = mk("g", {}, L.parts); const c = mk("circle", { class: "sc-p p-vldl", r: 8 }, g); mk("circle", { class: "sc-p p-vldl", r: 2.4, cx: -2, cy: -2 }, g); lipos.push({ g, c, x: rnd(40, 920), y: rnd(338, 382), lane: rnd(-20, 20), mode: 0, tx: 0, ty: 0, i }); }
+  for (let i = 0; i < 10; i++) { const e = mk("circle", { class: "sc-p p-hdl", r: 4.4 }, L.parts); hdls.push({ e, u: i / 10, i }); }
+}
+function initPanel() {
+  const P = L.panel, y0 = 486;
+  mk("rect", { class: "dr-panel", x: 24, y: 454, width: WW - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The patient";
+  [["prod", "Liver making", "g-prod", "Cholesterol made in the liver. HMG-CoA reductase is the controlling enzyme; a statin blocks it."], ["abs", "Gut uptake", "g-fl", "Cholesterol absorbed from the gut. Ezetimibe blocks this uptake."], ["ldl", "Blood LDL", "g-ldl", "LDL cholesterol carried in the blood. High LDL drives cholesterol into artery walls."], ["rec", "Receptor uptake", "g-rec", "LDL receptors on the liver pulling LDL out of the blood. Faulty in familial hypercholesterolaemia."], ["hdl", "HDL return", "g-hdl", "HDL carrying cholesterol from peripheral tissues back to the liver: reverse cholesterol transport."], ["per", "Tissue load", "g-bad", "Cholesterol loaded into peripheral tissues. It rises when LDL is high and return is poor."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 120 + i * 140, y0, 52, 18, cls, name, tip); });
+  const o = L.over;
+  pill(o, "Gut absorption", 105, 150, 105, 82, "The gut absorbs cholesterol from food and bile through a transporter in the gut wall. Ezetimibe blocks that transporter.");
+  pill(o, "HMG-CoA reductase", 390, 155, 390, 82, "HMG-CoA reductase: the enzyme that controls cholesterol making in the liver. A statin blocks it, and the liver then makes more LDL receptors.");
+  pill(o, "Peripheral tissue", 785, 175, 785, 82, "Body tissues outside the liver. LDL delivers cholesterol here; HDL collects spare cholesterol and takes it back.");
+  const pe = pill(o, "Ezetimibe", 105, 215, 105, 296, "Ezetimibe blocks cholesterol uptake from the gut, so less cholesterol reaches the liver and blood."); pe.setAttribute("id", "p-eze");
+  const ps = pill(o, "Statin", 360, 158, 180, 296, "A statin blocks HMG-CoA reductase in the liver. The liver makes less cholesterol and puts more LDL receptors on its surface."); ps.setAttribute("id", "p-statin");
+  pill(o, "VLDL", 330, 348, 275, 296, "VLDL: the liver sends fat and cholesterol out in VLDL particles. In the blood VLDL loses fat and becomes LDL.");
+  pill(o, "LDL receptor", 430, 264, 415, 296, "LDL receptor on the liver surface. It binds LDL and pulls it into the liver. In familial hypercholesterolaemia the receptor is faulty, so clearance fails.");
+  pill(o, "PCSK9", 500, 282, 545, 296, "PCSK9: a liver protein that marks LDL receptors for destruction. Blocking it leaves more receptors working.");
+  pill(o, "LDL", 615, 360, 615, 296, "LDL: the main cholesterol carrier in blood. It delivers cholesterol to tissues; spare LDL is cleared by liver receptors.");
+  pill(o, "HDL returns", 760, 350, 715, 296, "HDL returns: HDL picks up cholesterol from peripheral tissues and carries it back to the liver. This is reverse cholesterol transport.");
+  pill(o, "Bloodstream", 70, 360, 90, 424, "The bloodstream linking gut, liver and tissues. Lipoproteins, not free cholesterol, carry the lipid here.");
+  const pf = pill(o, "Receptor defect", 445, 272, 560, 424, "Familial hypercholesterolaemia: one faulty LDL receptor gene leaves too few working receptors, so LDL stays high even with treatment that needs receptors."); pf.setAttribute("id", "p-fam");
+  const pp = pill(o, "PCSK9 blocker", 520, 330, 800, 424, "PCSK9 inhibitor concept: an antibody that stops PCSK9, so LDL receptors are recycled instead of destroyed and clear more LDL."); pp.setAttribute("id", "p-pcsk");
+}
+function follow(pl, tr, dt, speed) {
+  pl.forEach((p) => { if (!p.on) return; p.u += dt * speed; if (p.u >= 1) { kill(p); return; } const q = tr.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+}
+function step(dt, m) {
+  const k = Math.min(1, dt * 0.7), famT = (m.R < 0.3 && m.a > 0.9) ? 1 : 0;
+  sm.Prod = lerp(sm.Prod, m.Prod, k); sm.Abs = lerp(sm.Abs, m.Abs, k); sm.V = lerp(sm.V, m.V, k); sm.L = lerp(sm.L, m.L, k); sm.R = lerp(sm.R, m.R, k); sm.Hd = lerp(sm.Hd, m.Hd, k); sm.Per = lerp(sm.Per, m.Per, k); sm.Pk = lerp(sm.Pk, m.Pk, k);
+  sm.statin = lerp(sm.statin, m.statin, k); sm.eze = lerp(sm.eze, m.eze, k); sm.pcsk9i = lerp(sm.pcsk9i, m.pcsk9i, k); sm.fam = lerp(sm.fam, famT, k);
+  gutChol.forEach((c) => c.e.setAttribute("opacity", (c.i < 1 + sm.Abs * 4 ? 1 : 0.12).toFixed(2)));
+  liverChol.forEach((c) => c.e.setAttribute("opacity", (c.i < 1 + sm.Prod * 5 ? 1 : 0.12).toFixed(2)));
+  perChol.forEach((c) => c.e.setAttribute("opacity", (c.i < sm.Per * 8 ? 1 : 0.1).toFixed(2)));
+  enzX.setAttribute("opacity", sm.statin.toFixed(2)); gutX.setAttribute("opacity", sm.eze.toFixed(2)); pcskX.setAttribute("opacity", sm.pcsk9i.toFixed(2)); famX.setAttribute("opacity", sm.fam.toFixed(2));
+  recG.setAttribute("opacity", (0.3 + 0.7 * sm.R).toFixed(2));
+  $("p-eze").style.opacity = sm.eze.toFixed(2); $("p-statin").style.opacity = sm.statin.toFixed(2); $("p-pcsk").style.opacity = sm.pcsk9i.toFixed(2); $("p-fam").style.opacity = sm.fam.toFixed(2);
+  acc.gut += dt * sm.Abs * 3.2; while (acc.gut >= 1) { acc.gut--; const p = free(gutP); if (p) emit(p, 105, 132, 0, 0, 0); }
+  acc.prod += dt * sm.Prod * 3.4; while (acc.prod >= 1) { acc.prod--; const p = free(prodP); if (p) emit(p, 390, 158, 0, 0, 0); }
+  acc.pcsk += dt * sm.Pk * 2.6; while (acc.pcsk >= 1) { acc.pcsk--; const p = free(pcskP); if (p) emit(p, 470, 222, 0, 0, 0); }
+  follow(gutP, gutTrack, dt, 0.16); follow(prodP, prodTrack, dt, 0.15); follow(pcskP, pcskTrack, dt, 0.22);
+  const want = Math.round(5 + sm.L * 16);
+  lipos.forEach((p, idx) => {
+    const on = idx < want;
+    if (p.mode === 0) {
+      p.x += 46 * dt; if (p.x > 928) { p.x = 32; p.y = 360 + p.lane; }
+      if (p.x > 424 && p.x < 436 && Math.random() < sm.R * dt * 1.4) { p.mode = 1; p.tx = 380 + (idx % 5) * 25; p.ty = 278; }
+      else if (p.x > 744 && p.x < 756 && Math.random() < sm.Per * dt * 1.1) { p.mode = 2; p.tx = 760 + (idx % 4) * 22; p.ty = 262; }
+      const isL = p.x > 560 || p.x < 330, sc = on ? (isL ? 0.62 : 1) : 0.001;
+      p.c.setAttribute("class", "sc-p " + (isL ? "p-ldl" : "p-vldl")); place(p.g, p.x, 360 + p.lane, 0, sc);
+    } else {
+      p.k = Math.min(1, (p.k || 0) + dt * 0.55);
+      const curY = lerp(360 + p.lane, p.ty, p.k);
+      place(p.g, lerp(p.sx || p.x, p.tx, p.k), curY, 0, on ? 0.62 : 0.001);
+      if (p.k >= 1) { p.mode = 0; p.k = 0; p.sx = 0; p.x = 330; p.y = 360 + p.lane; }
+      if (!p.sx) { p.sx = p.x; }
+    }
+    p.g.style.opacity = on ? 1 : 0;
+  });
+  hdls.forEach((p) => { p.u += dt * 0.055 * (0.4 + sm.Hd); if (p.u > 1) p.u -= 1; const q = hdlTrack.at(p.u), vis = p.i < 2 + sm.Hd * 8; p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); p.e.setAttribute("opacity", vis ? "1" : "0"); });
+  gg.prod.set(sm.Prod, wordOf(sm.Prod, 0.3, 0.55, ["low", "usual", "high"])); gg.abs.set(sm.Abs, wordOf(sm.Abs, 0.25, 0.45, ["low", "usual", "high"]));
+  gg.ldl.set(sm.L, wordOf(sm.L, 0.35, 0.65, ["low", "raised", "high"])); gg.rec.set(sm.R, wordOf(sm.R, 0.3, 0.6, ["very low", "reduced", "good"]));
+  gg.hdl.set(sm.Hd, wordOf(sm.Hd, 0.42, 0.52, ["low", "usual", "good"])); gg.per.set(sm.Per, wordOf(sm.Per, 0.3, 0.55, ["low", "raised", "high"]));
+}
+function init() { initNodes(); initPanel(); }
+run({ init, step });
+</script></body></html>

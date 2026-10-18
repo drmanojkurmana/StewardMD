@@ -2,6 +2,7 @@
  * Opens a self-contained figure page (prep/figures/<name>.html, built with the Anima kit, MIT: prep/figures/ANIMA-LICENSE.txt)
  * full screen over whatever is open, in the app's theme: <name>.html is the dark build, <name>-light.html the light one.
  *   SMD_FIG.open({ src: "prep/figures/beta-blockers.html", title, from: element, query: "d=2&name=Metoprolol" })
+ *   A Pause / Play button in the top bar drives the figure's own #pause button and remembers the choice.
  *   SMD_FIG.close() -> true when one was open;  SMD_FIG.isOpen()
  * The page is our own static file (same origin), so it runs in an iframe that fills the sheet and scrolls only up and down.
  * appMode() restyles it to feel like part of the app (no frame, no hover text, big controls) and makes the drawing fit the screen
@@ -20,6 +21,17 @@
       ".smdfig-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px 16px}" +
       ".smdfig-top p{margin:0;font-weight:600}.smdfig-x{min-width:44px;min-height:44px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 20px/1 system-ui;cursor:pointer}" +
       ".smdfig-sc{flex:1;min-height:0;overflow:hidden}.smdfig-fr{display:block;width:100%;height:100%;border:0}" +
+      ".smdfig-tools{display:flex;align-items:center;gap:8px}.smdfig-pp{min-height:44px;padding:0 16px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 14px system-ui;cursor:pointer}.smdfig-pp[hidden]{display:none}.smdfig-pp:focus-visible{outline:2px solid currentColor;outline-offset:2px}" +
+      ".smdfig-ms{position:absolute;left:0;right:0;bottom:0;max-height:78%;overflow:auto;-webkit-overflow-scrolling:touch;background:#161616;color:#eee;border-top:1px solid rgba(128,128,128,.35);border-radius:16px 16px 0 0;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 18px);box-shadow:0 -8px 30px rgba(0,0,0,.35)}" +
+      ".smdfig.lt .smdfig-ms{background:#fbfbfa;color:#14202b;box-shadow:0 -8px 30px rgba(0,0,0,.12)}.smdfig-ms[hidden]{display:none}" +
+      ".smdfig-ms .ms-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}.smdfig-ms h2{margin:0;font:650 17px/1.3 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}" +
+      ".smdfig-ms{--ms-t:#f2b84b;--ms-g:#6aa7ff;--ms-m:#b48cff;--ms-f:#4fd1a5;--ms-i:#ff8fa3;--ms-a:#ff7a59}.smdfig.lt .smdfig-ms{--ms-t:#9a6200;--ms-g:#1f5fbf;--ms-m:#6a3fc4;--ms-f:#0f7a5c;--ms-i:#b4234a;--ms-a:#b8421d}" +
+      ".smdfig-ms dl{margin:0;display:grid;grid-template-columns:1fr;gap:10px}.smdfig-ms .ms-r{border-radius:12px;padding:11px 13px 12px;border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 9%,transparent)}" +
+      ".smdfig-ms dt{display:flex;align-items:center;gap:8px;margin:0 0 5px;font:700 11.5px/1.2 -apple-system,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--c)}" +
+      ".smdfig-ms dt i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--c);color:#111;font:700 11px/1 -apple-system,system-ui,sans-serif;letter-spacing:0}.smdfig.lt .smdfig-ms dt i{color:#fff}" +
+      ".smdfig-ms dd{margin:0;font:15.5px/1.55 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}.smdfig-ms mark{background:color-mix(in srgb,var(--c) 24%,transparent);color:inherit;font-weight:650;border-radius:4px;padding:0 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}" +
+      ".smdfig-ms .ms-r.ms-a{margin-top:2px}" +
+      ".smdfig-ms p.ms-note{margin:12px 0 0;font:12px/1.4 -apple-system,system-ui,sans-serif;opacity:.6}.smdfig-ms .ms-x{min-height:44px;min-width:44px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 14px system-ui;cursor:pointer;padding:0 14px}" +
       ".smdfig-h{display:block;font-weight:400;font-size:12px;opacity:.7}.smdfig-x:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
     D.head.appendChild(st);
   }
@@ -306,6 +318,48 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     S._api = { zoomAt: zoomAt, size: size, state: S };
     win.__smdZoom = S;
   }
+  /* Pause / Play in the viewer's top bar. The figure page has its own #pause button (below the controls); this one drives it, mirrors its
+   * state and remembers the choice (localStorage smdFigPaused) so a viewer who prefers stillness gets figures that open paused. */
+  function motionToggle(el, doc, win) {
+    var btn = el.querySelector(".smdfig-pp:not(.smdfig-ms-btn)"), pg = doc && doc.getElementById("pause"); if (!btn || !pg) return;
+    var KEY = "smdFigPaused";
+    function paused() { return pg.getAttribute("aria-pressed") === "true"; }
+    function sync() { var p = paused(); btn.textContent = p ? "Play" : "Pause"; btn.setAttribute("aria-pressed", String(p)); btn.setAttribute("aria-label", p ? "Play the motion" : "Pause the motion"); }
+    var want = null; try { want = G.localStorage.getItem(KEY); } catch (e) {}
+    if (want === "1" && !paused()) pg.click();
+    btn.hidden = false; sync();
+    btn.addEventListener("click", function () { pg.click(); });
+    if (win.MutationObserver) new win.MutationObserver(function () { sync(); try { G.localStorage.setItem(KEY, paused() ? "1" : "0"); } catch (e) {} }).observe(pg, { attributes: true, attributeFilter: ["aria-pressed"] });
+  }
+  /* Mechanism mastery (prep/figures/mastery.json): Trigger, Target, Mechanism, Manifestation, Intervention (with its adverse effects) for a figure,
+   * shown in a sheet over the figure from the "Steps" button. The button appears only when the figure has an entry. */
+  var MS = null, msP = null;
+  function msReady() {
+    if (MS) return Promise.resolve(MS);
+    if (msP) return msP;
+    var base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, "");
+    msP = G.fetch((base || "/") + "prep/figures/mastery.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { MS = (j && j.items) || {}; return MS; }, function () { MS = {}; return MS; });
+    return msP;
+  }
+  var MS_ROWS = [["trigger", "1  Trigger", "What starts the process"], ["target", "2  Target", "The cell, receptor, enzyme or pathway affected"], ["mechanism", "3  Mechanism", "What happens at the molecular or cellular level"],
+    ["manifestation", "4  Manifestation", "How it explains the symptoms, signs and tests"], ["intervention", "5  Intervention", "The drug or step that targets the mechanism"]];
+  function masteryPanel(el, src) {
+    var id = (src.match(/\/([a-z0-9-]+)\.html$/) || [])[1], btn = el.querySelector(".smdfig-ms-btn"); if (!id || !btn) return;
+    msReady().then(function (all) {
+      var m = all[id]; if (!m || !D.body.contains(el)) return;
+      var sheet = D.createElement("section"); sheet.className = "smdfig-ms"; sheet.hidden = true; sheet.setAttribute("aria-label", "Mechanism mastery");
+      function fmt(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
+      var ROW = { trigger: "--ms-t", target: "--ms-g", mechanism: "--ms-m", manifestation: "--ms-f", intervention: "--ms-i" };
+      sheet.innerHTML = '<div class="ms-head"><h2>Mechanism mastery</h2><button type="button" class="ms-x">Close</button></div><dl>' + MS_ROWS.map(function (r, n) {
+        return '<div class="ms-r" style="--c:var(' + ROW[r[0]] + ')"><dt><i>' + (n + 1) + "</i>" + esc(r[1].replace(/^\d\s+/, "")) + "</dt><dd>" + fmt(m[r[0]] || "") + "</dd></div>" +
+          (r[0] === "intervention" && m.adverse ? '<div class="ms-r ms-a" style="--c:var(--ms-a)"><dt><i>!</i>Adverse effects that follow from the action</dt><dd>' + fmt(m.adverse) + "</dd></div>" : "");
+      }).join("") + '</dl><p class="ms-note">AI-assisted summary, awaiting clinician review.</p>';
+      el.appendChild(sheet); btn.hidden = false;
+      function set(on) { sheet.hidden = !on; btn.setAttribute("aria-expanded", String(on)); if (on) { try { sheet.querySelector(".ms-x").focus(); } catch (e) {} } }
+      btn.addEventListener("click", function () { set(sheet.hidden); });
+      sheet.querySelector(".ms-x").addEventListener("click", function () { set(false); try { btn.focus(); } catch (e) {} });
+    });
+  }
   function pageOf(src, dark) {
     var base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, "");
     return (base || "/") + (dark ? src : src.replace(/\.html$/, "-light.html"));
@@ -326,12 +380,13 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     var dark = D.body.classList.contains("dark"), q = String(o.query || "").replace(/[^A-Za-z0-9=&%._ -]/g, "").slice(0, 120);
     var el = D.createElement("div");
     el.className = "smdfig" + (dark ? "" : " lt"); el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", String(o.title || "Interactive figure"));
-    el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></div>' +
+    el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><span class="smdfig-tools"><button type="button" class="smdfig-pp smdfig-ms-btn" aria-expanded="false" hidden>Steps</button><button type="button" class="smdfig-pp" aria-pressed="false" hidden>Pause</button><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></span></div>' +
       '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
     var fr = el.querySelector("iframe");
-    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} });
+    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
     el.querySelector(".smdfig-x").addEventListener("click", close);
-    var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); close(); } };
+    try { masteryPanel(el, String(o.src || "")); } catch (e) {}
+    var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); var ms = el.querySelector(".smdfig-ms"); if (ms && !ms.hidden) { ms.hidden = true; var mb = el.querySelector(".smdfig-ms-btn"); if (mb) mb.setAttribute("aria-expanded", "false"); } else close(); } };
     D.addEventListener("keydown", key, true);
     D.body.appendChild(el);
     cur = { el: el, from: o.from || null, key: key };
@@ -352,7 +407,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       var rx = null; try { rx = parts.length ? new RegExp("(?:^|[^a-z])(" + parts.join("|") + ")(?![a-z])", "gi") : null; } catch (e) { rx = null; }
       var weak = {}; (f.weak || []).forEach(function (w) { weak[String(w).toLowerCase()] = 1; });
       var ctx = null; try { ctx = f.ctx ? new RegExp(f.ctx, "i") : null; } catch (e) { ctx = null; }
-      return { id: String(f.id), title: String(f.title || "Interactive figure"), blurb: String(f.blurb || ""), page: String(f.page), drugs: f.drugs || {}, rx: rx, weak: weak, ctx: ctx };
+      return { id: String(f.id), title: String(f.title || "Interactive figure"), blurb: String(f.blurb || ""), page: String(f.page), scene: f.scene === true, drugs: f.drugs || {}, rx: rx, weak: weak, ctx: ctx };
     });
   }
   function ready() {
@@ -362,6 +417,8 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     regP = G.fetch((base || "/") + "prep/figures/figures.json").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { REG = build(j); return REG; }, function () { REG = []; return REG; });
     return regP;
   }
+  /* list() -> every registered figure { id, title, blurb, page, scene } in registry order ([] until ready()); the iLearn page reads it. */
+  function list() { return (REG || []).map(function (f) { return { id: f.id, title: f.title, blurb: f.blurb, page: f.page, scene: f.scene }; }); }
   function byId(id) { for (var i = 0; REG && i < REG.length; i++) if (REG[i].id === id) return REG[i]; return null; }
   /* matchText(text, max) -> [{ id, title, blurb, hits, query }] most hits first (sync; [] until ready()). query presets the figure
      to the first drug of that figure named in the text. */
@@ -393,6 +450,6 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     if (!m) return "";
     return '<button type="button" class="' + esc(cls || "smdfig-chip") + '" data-act="' + (act || "fig-open") + '" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><span aria-hidden="true">&#9654;</span> <b>' + esc(m.title) + "</b></button>";
   }
-  G.SMD_FIG = { open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, forDrugs: forDrugs, openFig: openFig, chipHtml: chipHtml, _build: build };
+  G.SMD_FIG = { mastery: function (id) { return (MS || {})[id] || null; }, masteryReady: msReady, list: list, open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, forDrugs: forDrugs, openFig: openFig, chipHtml: chipHtml, _build: build };
   ready();
 })(typeof window !== "undefined" ? window : this);

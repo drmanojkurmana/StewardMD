@@ -1,0 +1,566 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Immune checkpoint inhibitors: CTLA-4 and PD-1</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.sc-node{fill:var(--c-lymph);opacity:.1}
+body{--c-tum:#e0855a}
+body[data-theme="light"]{--c-tum:#c46434}
+.cl-tum{--cc:var(--c-tum)}
+.cl-tum .cl-b{fill:color-mix(in srgb,var(--cc) calc((1 - var(--dm,0)) * 100%),#4a4a4a)}
+.cl-gut{--cc:var(--c-ab)}
+.sig{stroke:var(--c-cyt2);stroke-width:1.4;fill:none}
+.sigB{stroke:var(--c-bad);stroke-width:1.4;fill:none;stroke-dasharray:4 3}
+.p-ck{fill:none;stroke:var(--c-ab);stroke-width:2;stroke-linecap:round}
+.p-perf{fill:var(--c-bad)}
+.p-il2{--cc:var(--c-cyt2)}
+.gut-bg{fill:color-mix(in srgb,var(--c-ab) 12%,var(--anatomy-paper));stroke:var(--anatomy-faint);stroke-width:1}
+.gut-vil{fill:color-mix(in srgb,var(--c-ab) 45%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-ab) 60%,#000);stroke-width:.8}
+.gut-infl{fill:var(--c-bad)}
+.r-stem{stroke:var(--anatomy-mid);stroke-width:1}
+.r-b7{fill:var(--c-donor);stroke:color-mix(in srgb,var(--c-donor) 50%,#000);stroke-width:.5}
+.r-cd28{fill:var(--c-cyt2);stroke:color-mix(in srgb,var(--c-cyt2) 50%,#000);stroke-width:.5}
+.r-ctla{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 50%,#000);stroke-width:.5}
+.r-pd1{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 50%,#000);stroke-width:.5}
+.r-pdl1{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 50%,#000);stroke-width:.5}
+.r-mhc{fill:var(--c-mac);stroke:color-mix(in srgb,var(--c-mac) 50%,#000);stroke-width:.5}
+.r-tcr{fill:var(--c-lymph);stroke:color-mix(in srgb,var(--c-lymph) 50%,#000);stroke-width:.5}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Immune checkpoint inhibitors: CTLA-4 and PD-1</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>priming low · tumour killing low · adverse effects few</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated lymph node and tumour. In the lymph node a dendritic cell primes a T cell through signal 1 (antigen on MHC) and signal 2 (B7 on CD28), while CTLA-4 competes for B7 and dampens priming until anti-CTLA-4 blocks it. Primed killer T cells travel to the tumour, where PD-1 on exhausted T cells binds PD-L1 on tumour cells until anti-PD-1 blocks it and restores killing. A healthy gut patch shows self tissue under attack. Gauges show priming, killing, tumour burden, both brakes and side effects."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-node" x="14" y="44" width="440" height="394" rx="18"/>
+<rect class="sc-tissue" x="464" y="44" width="482" height="394" rx="18"/>
+<text class="sc-zone" x="34" y="68">LYMPH NODE: PRIMING</text>
+<text class="sc-zone" x="484" y="68">TUMOUR: KILLING</text>
+<g id="base"></g><g id="links"></g><g id="parts"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses or schedules are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>T cell state</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="exhausted T cell"><span class="dr-ticks"><i>evading</i><i>exhausted</i><i>reinvigorated</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">anti-CTLA-4 (ipilimumab)</option><option value="2">anti-PD-1 (pembrolizumab, nivolumab)</option><option value="3">both (combination)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How checkpoint blockade works.</strong> Priming a naive T cell needs signal 1 (its receptor meeting antigen on MHC) plus signal 2 (CD28 on the T cell meeting B7 on the dendritic cell). CTLA-4, which appears after activation, binds B7 more strongly than CD28 and dampens priming early in the lymph node; blocking CTLA-4 with ipilimumab keeps priming going. In the tumour, exhausted T cells carry PD-1, and tumour PD-L1 binding it switches killing off; blocking PD-1 with pembrolizumab or nivolumab reinvigorates killing. Reinvigorated T cells can also attack self tissue, giving immune related effects such as colitis, pneumonitis, hepatitis and hormone gland failure. This is standard teaching in immunology and oncology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Anti-CTLA-4 acting early on priming, anti-PD-1 acting later on exhausted cells in tissue, and the combination giving more killing with more self tissue injury. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Regulatory T cells, other checkpoints (LAG-3, TIM-3), memory formation, antigen loss and other resistance routes, steroid and other management of side effects, tumour types and combinations used in practice, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"T cell state","a":[0.3,0.6,1],"names":["tumour evading","exhausted T cell","reinvigorated T cell"],"ticks":["evading","exhausted","reinvigorated"],"start":1},"settings":[{"label":"no treatment"},{"label":"anti-CTLA-4 (ipilimumab)"},{"label":"anti-PD-1 (pembrolizumab, nivolumab)"},{"label":"both (combination)"}],"drugNames":["no treatment","anti-CTLA-4","anti-PD-1","combination"],"status":"T cell state: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const a = S.level.a[level];
+  const cB = (drug === 1 || drug === 3) ? 1 : 0;
+  const pB = (drug === 2 || drug === 3) ? 1 : 0;
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const CTLA = cl((0.9 - 0.45 * a) * (1 - 0.85 * cB));
+  const PD = cl((0.95 - 0.4 * a) * (1 - 0.88 * pB));
+  const P = cl(0.1 + 0.8 * a * (cB ? 1 : 0.5) + 0.22 * cB);
+  const K = cl(P * (1 - PD) * 1.35 + 0.12 * pB * (0.4 + 0.6 * P));
+  const T = cl(1 - 0.9 * K);
+  const A = cl(0.04 + 0.18 * P + 0.3 * K + 0.16 * cB + 0.08 * pB);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(P, 0.35, 0.65, ["low", "moderate", "high"]), w(K, 0.3, 0.6, ["low", "moderate", "high"]), w(A, 0.3, 0.55, ["few", "some", "many"])];
+  return { a, cB, pB, CTLA, PD, P, K, T, A, words, readout: "priming " + words[0] + " · tumour killing " + words[1] + " · adverse effects " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Checkpoint scene: lymph node priming (CD28/B7, CTLA-4 brake), tumour killing (PD-1/PD-L1 brake), gut side effects. */
+const CK = { base: $("base"), links: $("links"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const APC = { x: 140, y: 240, r: 22 };
+const TN = { x: 330, y: 240, r: 20 };
+const TE = { x: 758, y: 195, r: 18 };
+const GUT = { x: 740, y: 315, w: 190, h: 105 };
+const EFF = track([[352, 262], [420, 300], [492, 302], [545, 262]]);
+const lolli = (g, ang, r, cls) => { const c = Math.cos(ang), s = Math.sin(ang);
+  mk("path", { class: "r-stem", d: "M" + f1(c * r) + " " + f1(s * r) + "L" + f1(c * (r + 6)) + " " + f1(s * (r + 6)) }, g);
+  mk("circle", { class: cls, cx: f1(c * (r + 8)), cy: f1(s * (r + 8)), r: 3.2 }, g); };
+const yAb = (parent, x, y, s) => { const g = mk("g", { transform: "translate(" + x + " " + y + ") scale(" + s + ")" }, parent);
+  mk("path", { class: "p-ck", d: "M0 6V1M-4.5 -5L0 1L4.5 -5" }, g); return g; };
+/* ---- lymph node cells ---- */
+const apcG = mk("g", {}, CK.base), tnG = mk("g", {}, CK.base), teG = mk("g", {}, CK.base);
+function initCells() {
+  for (let k = 0; k < 7; k++) { const t = k * 0.9 + 0.4; mk("path", { class: "r-stem", d: "M0 0L" + f1(Math.cos(t) * 30) + " " + f1(Math.sin(t) * 30), style: "stroke:var(--c-mac)" }, apcG); }
+  cell(apcG, { cls: "mac", r: APC.r, nuc: 0.4, seed: 11, wob: 0.12 });
+  lolli(apcG, -0.3, APC.r, "r-mhc"); lolli(apcG, 0.2, APC.r, "r-b7"); lolli(apcG, 0.65, APC.r, "r-b7");
+  place(apcG, APC.x, APC.y);
+  cell(tnG, { cls: "lymph", r: TN.r, nuc: 0.55, seed: 12, wob: 0.1 });
+  lolli(tnG, Math.PI + 0.3, TN.r, "r-tcr"); lolli(tnG, Math.PI - 0.15, TN.r, "r-cd28"); lolli(tnG, Math.PI - 0.65, TN.r, "r-ctla");
+  place(tnG, TN.x, TN.y);
+  cell(teG, { cls: "eos", r: TE.r, nuc: 0.5, seed: 13, wob: 0.1 });
+  lolli(teG, Math.PI + 0.25, TE.r, "r-pd1"); lolli(teG, Math.PI - 0.2, TE.r, "r-pd1");
+  place(teG, TE.x, TE.y);
+}
+/* ---- tumour cluster ---- */
+const tumours = [];
+function initTumour() {
+  [560, 620, 680].forEach((x, c) => [140, 200, 260].forEach((y, r) => {
+    const g = mk("g", {}, CK.base), inner = mk("g", {}, g);
+    cell(inner, { cls: "tum", r: 19, nuc: 0.45, seed: c * 3 + r + 1, wob: 0.12 });
+    if (c === 2) lolli(g, 0, 19, "r-pdl1");
+    if (c === 0) lolli(g, Math.PI, 19, "r-pdl1");
+    const jx = x + ((c * 7 + r * 3) % 3 - 1) * 3, jy = y + ((c * 5 + r * 7) % 3 - 1) * 3;
+    place(g, jx, jy); tumours.push({ g, inner, x: jx, y: jy, dm: 0, sens: 0.6 + ((c + r * 2) % 4) * 0.18 });
+  }));
+}
+/* ---- gut inset ---- */
+const gutCells = [];
+let gutInfl = null;
+function initGut() {
+  mk("rect", { class: "gut-bg", x: GUT.x, y: GUT.y, width: GUT.w, height: GUT.h, rx: 10 }, CK.base);
+  gutInfl = mk("rect", { class: "gut-infl", x: GUT.x, y: GUT.y, width: GUT.w, height: GUT.h, rx: 10, opacity: "0" }, CK.base);
+  [772, 812, 852].forEach((x) => mk("rect", { class: "gut-vil", x, y: 378, width: 18, height: 30, rx: 9 }, CK.base));
+  [[786, 408], [826, 408], [866, 408], [900, 408]].forEach(([x, y], i) => {
+    const g = mk("g", {}, CK.base); cell(g, { cls: "gut", r: 7, nuc: 0.4, seed: 40 + i, wob: 0.1 }); place(g, x, y); gutCells.push({ g, x, y });
+  });
+}
+/* ---- signal links and antibodies ---- */
+let s1 = null, s2 = null, brakeC = null, pd1 = null, pd2 = null, absC = null, absP = null;
+function initLinks() {
+  s1 = mk("path", { class: "sig", d: "M169 231L303 232" }, CK.links);
+  s2 = mk("path", { class: "sig", d: "M169 246L302 244" }, CK.links);
+  brakeC = mk("path", { class: "sigB", d: "M164 258L308 257" }, CK.links);
+  pd1 = mk("path", { class: "sigB", d: "M732 200L707 200" }, CK.links);
+  pd2 = mk("path", { class: "sigB", d: "M733 189L704 187" }, CK.links);
+  absC = mk("g", { opacity: "0" }, CK.links); yAb(absC, 285, 268, 1.1); yAb(absC, 290, 290, 1.1);
+  absP = mk("g", { opacity: "0" }, CK.links); yAb(absP, 722, 188, 1.1); yAb(absP, 726, 214, 1.1);
+}
+/* ---- pools ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, s: 1 }; }); }
+const free = (pl) => pl.find((p) => !p.on);
+const kill = (p) => { p.on = false; p.e.setAttribute("opacity", "0"); };
+function emit(p, x, y) { p.on = true; p.x = x; p.y = y; p.t = 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+const il2 = pool(10, () => mk("rect", { class: "sc-p p-il2", x: -2.2, y: -2.2, width: 4.4, height: 4.4, rx: 1 }, CK.parts));
+const perf = pool(12, () => mk("circle", { class: "p-perf", r: 1.8 }, CK.parts));
+const clones = pool(6, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "lymph", r: 7, nuc: 0.5, seed: 50, wob: 0.1 }); return g; });
+const effs = pool(6, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "eos", r: 9, nuc: 0.5, seed: 60, wob: 0.1 }); return g; });
+const gutT = pool(4, () => { const g = mk("g", {}, CK.parts); cell(g, { cls: "eos", r: 8, nuc: 0.5, seed: 70, wob: 0.1 }); return g; });
+/* ---- labels and gauges ---- */
+const gg = {};
+function initOver() {
+  const P = CK.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The response";
+  [["prim", "Priming", "g-cyt", "How strongly T cells are primed in the lymph node. Signal 1 plus signal 2 drives it; CTLA-4 stealing B7 holds it back."],
+    ["kill", "Killing", "g-good", "How much tumour killing restored T cells achieve. PD-1 meeting PD-L1 switches it off."],
+    ["tum", "Tumour", "g-bad", "How much living tumour remains. It falls as killing rises."],
+    ["ctla", "CTLA-4", "g-neu", "The early brake in the lymph node. CTLA-4 competes with CD28 for B7. Anti-CTLA-4 releases it."],
+    ["pd", "PD-1", "g-fl", "The late brake in the tissue. PD-1 on exhausted T cells meets PD-L1 on tumour cells. Anti-PD-1 releases it."],
+    ["ae", "Side effects", "g-eos", "Immune related side effects: reinvigorated T cells attacking self tissue such as gut, lung, liver and hormone glands."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const O = CK.over;
+  pill(O, "Dendritic cell", APC.x, APC.y - 22, 140, 100, "Dendritic cell in the lymph node. It shows tumour antigen on MHC (signal 1) and B7 (signal 2) to a naive T cell.");
+  pill(O, "Signal 1", 236, 231, 235, 150, "Signal 1: the T cell receptor recognises tumour antigen on MHC. Alone it is not enough to switch the T cell on.");
+  pill(O, "Signal 2", 235, 245, 235, 300, "Signal 2: CD28 on the T cell meets B7 on the dendritic cell. Both signals together prime the T cell to divide and hunt.");
+  pill(O, "CTLA-4 brake", 308, 257, 330, 350, "CTLA-4 appears after activation and steals B7 from CD28, which dampens priming. Anti-CTLA-4 (ipilimumab) blocks CTLA-4 so priming continues.");
+  const abC = pill(O, "Anti-CTLA-4", 288, 279, 150, 360, "Anti-CTLA-4 antibody (ipilimumab). It covers CTLA-4 so B7 stays free for CD28. Shown only when treatment includes it."); abC.setAttribute("id", "ckabC");
+  pill(O, "Tumour", 620, 122, 600, 100, "Tumour cells. They carry PD-L1 on their surface, which switches off attacking T cells.");
+  pill(O, "Killer T cell", TE.x, TE.y - 18, 830, 110, "A primed killer T cell that reached the tumour. PD-1 on its surface marks exhaustion; blocking PD-1 reinvigorates it.");
+  pill(O, "PD-1 brake", 719, 195, 745, 275, "PD-1 on the exhausted T cell binds PD-L1 on the tumour and switches killing off. Anti-PD-1 (pembrolizumab, nivolumab) blocks PD-1.");
+  const abP = pill(O, "Anti-PD-1", 726, 214, 870, 270, "Anti-PD-1 antibody (pembrolizumab, nivolumab). It covers PD-1 so the tumour cannot switch the T cell off. Shown only when treatment includes it."); abP.setAttribute("id", "ckabP");
+  pill(O, "Healthy gut", 835, 340, 800, 301, "Healthy gut lining. Reinvigorated T cells can also attack self tissue, causing colitis, pneumonitis, hepatitis or hormone gland failure.");
+}
+const sm = { P: 0.3, K: 0.1, T: 0.85, CTLA: 0.6, PD: 0.7, A: 0.1, cB: 0, pB: 0 };
+const acc = { il2: 0, perf: 0, clone: 0, eff: 0, gut: 0 };
+function init() { initCells(); initTumour(); initGut(); initLinks(); initOver(); }
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
+  sm.P = lerp(sm.P, m.P, k2); sm.K = lerp(sm.K, m.K, k2); sm.T = lerp(sm.T, m.T, Math.min(1, dt * 0.3));
+  sm.CTLA = lerp(sm.CTLA, m.CTLA, k2); sm.PD = lerp(sm.PD, m.PD, k2); sm.A = lerp(sm.A, m.A, k2);
+  sm.cB = lerp(sm.cB, m.cB, k1); sm.pB = lerp(sm.pB, m.pB, k1);
+  /* cells bob; naive cell swells with priming, effector brightens as the PD brake lifts */
+  place(apcG, APC.x + Math.sin(tm / 1200) * 2, APC.y + Math.cos(tm / 1500) * 2, Math.sin(tm / 2000) * 4, 1);
+  place(tnG, TN.x + Math.sin(tm / 1000 + 1) * 2, TN.y + Math.cos(tm / 1300) * 2, 0, 1 + 0.12 * sm.P * Math.sin(tm / 350));
+  place(teG, TE.x + Math.sin(tm / 1100 + 2) * 2, TE.y + Math.cos(tm / 1400) * 2, 0, 0.88 + 0.24 * (1 - sm.PD) + 0.05 * sm.K * Math.sin(tm / 300));
+  /* tumour cells take damage from killing */
+  tumours.forEach((c, i) => { c.dm = lerp(c.dm, clamp(sm.K * c.sens * 1.15), Math.min(1, dt * 0.35));
+    c.inner.style.setProperty("--dm", c.dm.toFixed(2));
+    place(c.g, c.x + Math.sin(tm / 1300 + i) * 0.8, c.y + Math.cos(tm / 1700 + i) * 0.8, 0, 1 - 0.16 * c.dm); });
+  /* gut inflammation and injury from side effects */
+  gutInfl.setAttribute("opacity", (sm.A * 0.4).toFixed(2));
+  gutCells.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 1200 + i) * 0.6, c.y, 0, 1 - 0.28 * sm.A));
+  /* signals strengthen with priming; brakes fade when blocked */
+  s1.setAttribute("opacity", (0.15 + 0.85 * sm.P).toFixed(2));
+  s2.setAttribute("opacity", (0.15 + 0.85 * sm.P * (1 - 0.55 * sm.CTLA)).toFixed(2));
+  brakeC.setAttribute("opacity", sm.CTLA.toFixed(2));
+  pd1.setAttribute("opacity", sm.PD.toFixed(2)); pd2.setAttribute("opacity", sm.PD.toFixed(2));
+  absC.setAttribute("opacity", sm.cB.toFixed(2)); absP.setAttribute("opacity", sm.pB.toFixed(2));
+  $("ckabC").style.opacity = sm.cB.toFixed(2); $("ckabP").style.opacity = sm.pB.toFixed(2);
+  /* IL-2 around the primed cell */
+  acc.il2 += dt * sm.P * 6; while (acc.il2 >= 1) { acc.il2--; const p = free(il2); if (p) { emit(p, TN.x + rnd(-14, 14), TN.y + rnd(-12, 12)); p.vx = rnd(-10, 10); p.vy = rnd(-26, -14); } }
+  il2.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.5).toFixed(2)); if (p.t > 1.5) kill(p); });
+  /* clones bud off the primed cell */
+  acc.clone += dt * sm.P * 1.6; while (acc.clone >= 1) { acc.clone--; const p = free(clones); if (p) { emit(p, TN.x, TN.y); p.k = rnd(0, 6.28); } }
+  clones.forEach((p) => { if (!p.on) return; p.t += dt; const r = 22 + p.t * 15;
+    place(p.e, p.x + Math.cos(p.k) * r, p.y + Math.sin(p.k) * r, 0, clamp(p.t * 2, 0, 1)); p.e.setAttribute("opacity", (1 - p.t / 2.4).toFixed(2)); if (p.t > 2.4) kill(p); });
+  /* effectors travel from node to tumour */
+  acc.eff += dt * (0.15 + sm.P * 0.85); while (acc.eff >= 1) { acc.eff--; const p = free(effs); if (p) { emit(p, 0, 0); p.s = rnd(0.8, 1.2); } }
+  effs.forEach((p) => { if (!p.on) return; p.u += dt * 0.2 * p.s; const q = EFF.at(p.u);
+    place(p.e, q.x, q.y + Math.sin(tm / 300 + p.s * 7) * 2, 0, 1); p.e.setAttribute("opacity", p.u > 0.85 ? clamp((1 - p.u) / 0.15).toFixed(2) : "1"); if (p.u >= 1) kill(p); });
+  /* perforin from the reinvigorated cell into the tumour */
+  acc.perf += dt * sm.K * 10; while (acc.perf >= 1) { acc.perf--; const p = free(perf); if (p) { emit(p, 740, TE.y + rnd(-8, 8)); p.vx = -rnd(40, 58); p.vy = rnd(-6, 6); } }
+  perf.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", (1 - p.t / 0.8).toFixed(2)); if (p.t > 0.8 || p.x < 700) kill(p); });
+  /* self reactive cells attack the gut */
+  acc.gut += dt * sm.A * 2.2; while (acc.gut >= 1) { acc.gut--; const p = free(gutT); if (p) { emit(p, rnd(775, 900), GUT.y + 8); p.k = rnd(385, 405); } }
+  gutT.forEach((p) => { if (!p.on) return; p.t += dt; p.y = lerp(p.y, p.k, dt * 1.2);
+    place(p.e, p.x + Math.sin(tm / 400 + p.k) * 2, p.y, 0, 1); p.e.setAttribute("opacity", p.t > 3 ? clamp(1 - (p.t - 3) / 1.2).toFixed(2) : "1"); if (p.t > 4.2) kill(p); });
+  /* gauges */
+  gg.prim.set(sm.P, wordOf(sm.P, 0.35, 0.65, ["low", "moderate", "high"]));
+  gg.kill.set(sm.K, wordOf(sm.K, 0.3, 0.6, ["low", "moderate", "high"]));
+  gg.tum.set(sm.T, wordOf(sm.T, 0.35, 0.65, ["small", "present", "large"]));
+  gg.ctla.set(sm.CTLA, wordOf(sm.CTLA, 0.3, 0.6, ["blocked", "some", "active"]));
+  gg.pd.set(sm.PD, wordOf(sm.PD, 0.3, 0.6, ["blocked", "some", "active"]));
+  gg.ae.set(sm.A, wordOf(sm.A, 0.3, 0.55, ["few", "some", "many"]));
+}
+run({ init, step });
+</script></body></html>

@@ -1,0 +1,27 @@
+# Premium scene brief: semaglutide and tirzepatide (GLP-1 and GIP receptor agonists)
+
+Also used as an app advert, so this one must look premium and read at a glance. Build scene `incretin`, figure id `incretin-semaglutide-tirzepatide`, with the shared framework (read tools/figures/dev/AGENT-BRIEF.md, tools/figures/scenes/bio-scene.mjs, bio.lib.js, sepsis.mjs and sepsis.page.js first; bio-scene.mjs already accepts a `disclaimer` option, use it so the footer may name these two medicines: "For education only; not medical advice about any person's treatment. AI-assisted, awaits clinician review.").
+
+## Story (one panoramic stage, W=960 H=610, scene area y 44 to 440, gauge panel below)
+1. Pen and skin (top left): a weekly injection pen tilted over a skin layer, plunger moves every few seconds, a depot under the skin releases drug into a capillary that joins the central bloodstream (horizontal glossy vessel at y about 250 with flowing red cells and glucose molecules).
+2. Gut (bottom left): intestinal wall with L cells (GLP-1, teal) and K cells (GIP, amber) releasing the body's own incretins after food (food particles moving in the lumen). Two DPP-4 enzymes drawn as small chomping shapes snip the native incretins within moments (fragments fade). The drugs are shown with a small shield and bound to a pale albumin blob (fatty acid tail hugging albumin) so they resist DPP-4 and last about a week.
+3. Pancreatic islet (top centre): beta cells (blue) and alpha cells (orange). Insulin granules leave the beta cells in proportion to need (glucose dependent); glucagon from alpha cells is suppressed.
+4. Receptor zoom inset (circle beside the islet, with thin zoom lines from a beta cell): cell membrane with a GLP-1 receptor (teal) and a GIP receptor (amber). Semaglutide docks only the GLP-1 receptor. Tirzepatide is a two-tone molecule that docks BOTH, shown as two keys in one. Docking lights the receptor and sparks cAMP, then insulin vesicles fuse at the membrane.
+5. Brain (top right): hypothalamus glows; appetite rings expand when appetite is high and calm down when the drug acts (satiety).
+6. Stomach (bottom right): chyme particles; emptying through the pylorus into the duodenum slows with the drugs.
+Drug dots travel from the vessel to islet, brain and stomach in proportion to the drug.
+
+## Controls and model
+Level slider "Metabolic state": healthy after a meal / type 2 diabetes / type 2 diabetes with obesity. Treatment select: no medicine / semaglutide (GLP-1 receptor agonist) / tirzepatide (dual GIP and GLP-1 receptor agonist). Gauges: Blood sugar, Insulin (matched to need), Glucagon, Gastric emptying, Appetite, Weight trend. Qualitative words only. Semaglutide: strong glucose, appetite and weight effect. Tirzepatide: slightly stronger glucose and weight effect and a larger appetite effect, a little less gastric slowing. 4 TESTS on the readout.
+
+## Accuracy notes (no doses, no numbers, no brand names)
+GLP-1: glucose dependent insulin rise, glucagon fall, slower gastric emptying, appetite fall via hypothalamus. GIP: glucose dependent insulin rise and adipose and appetite effects. Both native hormones are cut by DPP-4 in minutes. Common adverse effects follow from the action: nausea, vomiting, diarrhoea or constipation (slow gut), reduced appetite, gallbladder events, rare pancreatitis; caution with a history of medullary thyroid cancer or MEN2; hypoglycaemia mainly when combined with insulin or sulfonylureas. Put these in the sources footer as "What follows from the action", flagged for clinician review. Never state a dose.
+
+## Premium look (this is the point)
+Soft radial and linear gradients (defs with classes whose stop-color uses CSS variables so dark and light themes both work), gentle glow on the drug particles (limit the number of glowing elements for performance), glossy vessel with a highlight line, smooth easing, subtle slow background drifting specks. Dark theme first, light theme must also look good. Typography is inherited sans, never monospace, never set font-family. Pills must not overlap.
+
+## Ad mode
+When the URL has `ad=1`: hide `.dr-controls`, `.dr-status`, `.dr-info`, `.bio-sources` and the caption, keep the stage and gauges, and run a gentle automatic loop (about 7 s each): type 2 diabetes with obesity and no medicine, then semaglutide, then tirzepatide, driving the level and treatment inputs and dispatching their events. Show a large soft caption inside the stage naming the current state ("No medicine", "Semaglutide: GLP-1 receptor agonist", "Tirzepatide: dual GIP and GLP-1 receptor agonist") that fades between states.
+
+## Rules
+Follow the rest of AGENT-BRIEF.md and these house rules: any lookup table used by modelOf MUST live inside modelOf (it is serialised into the page); pool items expose their element as p.e; do not declare top-level identifiers named stop, start, loop or frame in the page script; no em or en dashes. Create only scenes/incretin.mjs, incretin.page.js, incretin.reg.json (terms: semaglutide, tirzepatide, GLP-1, GIP, incretin, liraglutide, dulaglutide, exenatide; a `drugs` map is fine for these names pointing at presets d=1 and d=2), specs/incretin-semaglutide-tirzepatide.json and the generated prep/figures pages. You may run screenshots if your sandbox allows (node tools/figures/dev/shot.mjs incretin-semaglutide-tirzepatide "?d=2&l=2" tag); otherwise reason carefully about coordinates. Finish with a short report.

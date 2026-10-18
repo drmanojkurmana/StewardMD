@@ -1,0 +1,579 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Cardiac arrest: rhythms, CPR and the chain of survival</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.ar-ecgbg{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.ac-grid{stroke:var(--anatomy-faint);stroke-width:.5;opacity:.35;fill:none}.ac-grid.major{opacity:.7}
+.ar-trace{fill:none;stroke:var(--c-good);stroke-width:1.8;stroke-linejoin:round}
+.ar-art{fill:none;stroke:var(--c-rbc);stroke-width:5;stroke-linecap:round;opacity:.75}
+.ar-vein{fill:none;stroke:var(--c-fl);stroke-width:4;stroke-linecap:round;opacity:.6}
+.ar-heart{fill:#d94f5c;stroke:#8f2432;stroke-width:1.4}
+.ar-heartHi{fill:#f0838f;opacity:.7}
+.ar-dark{fill:#3d363d}
+.ar-brain{fill:#e9a2b3;stroke:#a85a72;stroke-width:1.2}
+.ar-gyrus{fill:none;stroke:#a85a72;stroke-width:1.1;opacity:.7}
+.ar-organ{fill:#c9788a;stroke:#8f4458;stroke-width:1.2}
+.ar-pad{fill:#ffd24a;stroke:#9a7a14;stroke-width:1.2}
+.ar-bolt{fill:#9a7a14}
+.ar-wire{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.ar-hand{fill:#f0c8a0;stroke:#a87848;stroke-width:1.1}
+.ar-chain{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.ar-chainOn{fill:var(--c-good);stroke:#1f7a4d;stroke-width:1.2}
+.ar-chainLine{stroke:var(--anatomy-mid);stroke-width:2;fill:none}
+.ar-cap{fill:var(--anatomy-text);font:9px var(--anatomy-mono);pointer-events:none}
+.ar-token{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.ar-tokenOn{fill:#ffd24a;stroke:#9a7a14;stroke-width:1.4}
+.ar-tokT{fill:var(--anatomy-strong);font:700 11px var(--anatomy-mono);pointer-events:none}
+.ar-syrB{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1}
+.ar-syrF{fill:var(--c-bad);opacity:.75}
+.ar-needle{stroke:var(--anatomy-strong);stroke-width:1.4}
+.p-spark{--cc:#ffe27a}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Cardiac arrest: rhythms, CPR and the chain of survival</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>rhythm VF shockable · output absent · brain ischaemic</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated scene of cardiac arrest. The heart shows ventricular fibrillation, asystole, pulseless electrical activity or return of circulation. Without a heartbeat there is no cardiac output, so the brain and organs become ischaemic within a short time. Hands give chest compressions, pads deliver a shock for shockable rhythms, adrenaline and treatment of reversible causes are shown, and the chain of survival links recognition, CPR, defibrillation and post-arrest care. Gauges show output, brain and organ flow, ischaemia and the chance of return of circulation."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="560" height="266" rx="18"/>
+<rect class="sc-tissue" x="584" y="44" width="362" height="396" rx="18"/>
+<rect class="ar-ecgbg" x="14" y="312" width="560" height="128" rx="14"/>
+<g clip-path="url(#arrclip)"><path class="ac-grid major" d="M24 322V432"/><path class="ac-grid" d="M42 322V432"/><path class="ac-grid" d="M60 322V432"/><path class="ac-grid" d="M78 322V432"/><path class="ac-grid" d="M96 322V432"/><path class="ac-grid major" d="M114 322V432"/><path class="ac-grid" d="M132 322V432"/><path class="ac-grid" d="M150 322V432"/><path class="ac-grid" d="M168 322V432"/><path class="ac-grid" d="M186 322V432"/><path class="ac-grid major" d="M204 322V432"/><path class="ac-grid" d="M222 322V432"/><path class="ac-grid" d="M240 322V432"/><path class="ac-grid" d="M258 322V432"/><path class="ac-grid" d="M276 322V432"/><path class="ac-grid major" d="M294 322V432"/><path class="ac-grid" d="M312 322V432"/><path class="ac-grid" d="M330 322V432"/><path class="ac-grid" d="M348 322V432"/><path class="ac-grid" d="M366 322V432"/><path class="ac-grid major" d="M384 322V432"/><path class="ac-grid" d="M402 322V432"/><path class="ac-grid" d="M420 322V432"/><path class="ac-grid" d="M438 322V432"/><path class="ac-grid" d="M456 322V432"/><path class="ac-grid major" d="M474 322V432"/><path class="ac-grid" d="M492 322V432"/><path class="ac-grid" d="M510 322V432"/><path class="ac-grid" d="M528 322V432"/><path class="ac-grid" d="M546 322V432"/><path class="ac-grid major" d="M564 322V432"/><path class="ac-grid major" d="M24 322H566"/><path class="ac-grid" d="M24 340H566"/><path class="ac-grid" d="M24 358H566"/><path class="ac-grid" d="M24 376H566"/><path class="ac-grid" d="M24 394H566"/><path class="ac-grid major" d="M24 412H566"/><path class="ac-grid" d="M24 430H566"/></g>
+<clipPath id="arrclip"><rect x="24" y="322" width="542" height="110"/></clipPath>
+<text class="sc-zone" x="34" y="68">HEART AND CIRCULATION</text>
+<text class="sc-zone" x="604" y="68">BRAIN AND ORGANS</text>
+<text class="sc-zone sc-dim" x="34" y="340">ECG, ONE LEAD</text>
+<g id="vessels"></g><g id="flow"></g><g id="heart"></g><g id="brainG"></g><g id="organG"></g><g id="chain"></g><g id="causes"></g><g id="pads"></g><g id="hands"></g><g id="syr"></g><g id="ecg"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Heart rhythm</span><input id="level" type="range" min="0" max="3" step="1" value="0" aria-valuetext="VF"><span class="dr-ticks"><i>VF</i><i>asystole</i><i>PEA</i><i>ROSC</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">CPR only</option><option value="1">CPR with defibrillation</option><option value="2">CPR with drugs and treat reversible cause</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How cardiac arrest develops.</strong> In cardiac arrest the heart stops pumping effectively, so circulation and cardiac output are lost and the brain and other organs become ischaemic very quickly. Ventricular fibrillation and pulseless ventricular tachycardia are shockable rhythms, where a defibrillation shock may restore an organised rhythm. Asystole and pulseless electrical activity are non-shockable rhythms, where a shock does not help and the focus is on compressions, adrenaline and finding a reversible cause. This is standard teaching in resuscitation and cardiovascular texts, including the Harrison chapter on cardiovascular collapse, cardiac arrest and sudden cardiac death, and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> The chain of survival: early recognition and call for help, high quality chest compressions with minimal interruption, early defibrillation for a shockable rhythm, adrenaline, treatment of reversible causes (the Hs and Ts: hypoxia, hypovolaemia, electrolyte disturbance, hypothermia, tamponade, toxins, tension pneumothorax and thrombosis), and post-arrest care after return of spontaneous circulation. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Airway and breathing detail, compression depth and rate targets, drug doses and timing, rhythm checks, airway devices, mechanical CPR, extracorporeal CPR, individual reversible cause treatments, targeted temperature and other post-arrest care detail, and all prognostic scoring are left out. The ECG is a single schematic lead and the heart, brain and kidney are simple symbols. The figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"ECG":{"x":24,"y":322,"w":542,"h":110},"S":{"level":{"label":"Heart rhythm","a":[1,1,1,1],"names":["VF","asystole","PEA","return of circulation"],"ticks":["VF","asystole","PEA","ROSC"],"start":0},"settings":[{"label":"CPR only"},{"label":"CPR with defibrillation"},{"label":"CPR with drugs and treat reversible cause"}],"drugNames":["CPR only","CPR with defibrillation","CPR with drugs and cause treated"],"status":"Rhythm: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const TAB = [
+    { shock: 1, rec: [0.06, 0.82, 0.92] },
+    { shock: 0, rec: [0.03, 0.03, 0.55] },
+    { shock: 0, rec: [0.06, 0.06, 0.72] },
+    { shock: 0, rec: [1, 1, 1] },
+  ];
+  const RN = ["VF shockable", "asystole non-shockable", "PEA non-shockable", "ROSC organised"];
+  const R = TAB[level];
+  const rec = R.rec[drug];
+  const spont = level === 3 ? 1 : 0;
+  const shockGiven = drug >= 1 ? 1 : 0;
+  const defib = shockGiven && R.shock ? 1 : 0;
+  const drugs = drug === 2 ? 1 : 0;
+  const out = spont ? 0.92 : cl(0.18 + 0.74 * rec);
+  const brain = cl(out * 0.95 - (spont ? 0 : 0.02));
+  const organ = cl(out * 0.9);
+  const isch = cl(1 - out * 1.02);
+  const surv = cl(rec * (0.35 + 0.65 * brain));
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [RN[level], w(out, 0.35, 0.7, ["absent", "partial", "restored"]), w(isch, 0.3, 0.65, ["perfused", "at risk", "ischaemic"])];
+  return { shock: R.shock, rec, spont, shockGiven, defib, drugs, out, brain, organ, isch, surv, words, readout: "rhythm " + words[0] + " · output " + words[1] + " · brain " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Cardiac arrest scene: heart rhythm, CPR, defibrillation, brain and organ ischaemia, reversible causes and gauges. */
+const E = SC.ECG, EB = E.y + 68;
+const L = { ves: $("vessels"), flow: $("flow"), heart: $("heart"), brain: $("brainG"), organ: $("organG"), chain: $("chain"), causes: $("causes"), pads: $("pads"), hands: $("hands"), syr: $("syr"), ecg: $("ecg"), over: $("over"), panel: $("panel") };
+const HX = 260, HY = 195, BX = 765, BY = 145, OX = 765, OY = 262;
+const sm = { out: 0.2, rec: 0.05, brain: 0.18, organ: 0.16, isch: 0.8, surv: 0.05, defib: 0, drugs: 0, shockGiven: 0, spont: 0 };
+let heartG, heartDark, brainDark, organDark, handsG, syrG, ecgPath, ecgTxt, padBolt;
+const chainNodes = [], causeTokens = [], gg = {};
+const trBrain = track([[322, 178], [450, 118], [580, 102], [682, 128]]);
+const trOrgan = track([[322, 232], [470, 268], [600, 268], [706, 262]]);
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+const freeP = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const flowB = pool(8, () => mk("circle", { class: "sc-p", r: 3, style: "--cc:var(--c-rbc)" }, L.flow));
+const flowO = pool(8, () => mk("circle", { class: "sc-p", r: 3, style: "--cc:var(--c-rbc)" }, L.flow));
+const sparks = pool(12, () => mk("circle", { class: "sc-p p-spark", r: 2.2 }, L.flow));
+flowB.forEach((p, i) => { p.k = i / 8; p.on = true; p.e.setAttribute("opacity", "1"); });
+flowO.forEach((p, i) => { p.k = i / 8; p.on = true; p.e.setAttribute("opacity", "1"); });
+function qrs(t) {
+  const p = ((t / 0.9) % 1 + 1) % 1;
+  let v = 0;
+  if (p > 0.08 && p < 0.2) v += 0.1 * Math.sin(Math.PI * (p - 0.08) / 0.12);
+  if (p > 0.26 && p < 0.29) v -= 0.14 * Math.sin(Math.PI * (p - 0.26) / 0.03);
+  if (p > 0.29 && p < 0.34) v += 1 * Math.sin(Math.PI * (p - 0.29) / 0.05);
+  if (p > 0.34 && p < 0.37) v -= 0.2 * Math.sin(Math.PI * (p - 0.34) / 0.03);
+  if (p > 0.5 && p < 0.74) v += 0.28 * Math.sin(Math.PI * (p - 0.5) / 0.24);
+  return v;
+}
+function init() {
+  mk("path", { class: "ar-art", d: "M322 178C450 118 580 102 682 128" }, L.ves);
+  mk("path", { class: "ar-art", d: "M322 232C470 268 600 268 706 262" }, L.ves);
+  mk("path", { class: "ar-vein", d: "M682 168C560 215 430 245 322 218" }, L.ves);
+  heartG = mk("g", {}, L.heart);
+  mk("path", { class: "ar-heart", d: "M0 73C-55 30 -72 -17 -48 -47C-30 -69 -4 -61 0 -41C4 -61 30 -69 48 -47C72 -17 55 30 0 73Z" }, heartG);
+  mk("ellipse", { class: "ar-heartHi", cx: -22, cy: -28, rx: 16, ry: 10, transform: "rotate(-24)" }, heartG);
+  heartDark = mk("path", { class: "ar-dark", d: "M0 73C-55 30 -72 -17 -48 -47C-30 -69 -4 -61 0 -41C4 -61 30 -69 48 -47C72 -17 55 30 0 73Z", opacity: "0.5" }, heartG);
+  const bg = mk("g", {}, L.brain);
+  mk("ellipse", { class: "ar-brain", cx: BX, cy: BY, rx: 82, ry: 46 }, bg);
+  mk("path", { class: "ar-gyrus", d: "M712 128C730 112 752 122 758 136M742 158C758 144 782 150 788 164M778 118C796 122 806 134 804 148" }, bg);
+  brainDark = mk("ellipse", { class: "ar-dark", cx: BX, cy: BY, rx: 82, ry: 46, opacity: "0.5" }, bg);
+  const og = mk("g", {}, L.organ);
+  mk("path", { class: "ar-organ", d: "M765 226C796 226 816 247 813 268C810 291 788 306 762 304C732 302 712 284 714 262C716 241 736 226 765 226Z" }, og);
+  mk("path", { class: "ar-gyrus", d: "M742 248C730 258 730 274 742 286" }, og);
+  organDark = mk("path", { class: "ar-dark", d: "M765 226C796 226 816 247 813 268C810 291 788 306 762 304C732 302 712 284 714 262C716 241 736 226 765 226Z", opacity: "0.5" }, og);
+  mk("path", { class: "ar-chainLine", d: "M380 108H530" }, L.chain);
+  [["Call", "Early recognition and calling for help starts the chain of survival."], ["CPR", "High quality chest compressions keep some blood moving to the brain and heart."], ["Shock", "Early defibrillation for a shockable rhythm gives the best chance of restarting the heart."], ["Care", "Post-arrest care after return of circulation protects the brain and treats the cause."]].forEach(([cap, tip], i) => {
+    const x = 380 + i * 50, g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, L.chain);
+    const c = mk("circle", { class: "ar-chain", cx: x, cy: 108, r: 13 }, g);
+    const t = mk("text", { class: "ar-cap", x: x, y: 136, "text-anchor": "middle" }, g); t.textContent = cap;
+    chainNodes.push(c);
+  });
+  const causeInfo = ["Hypoxia: low oxygen, a reversible cause in the Hs group.", "Hypovolaemia: low circulating volume, a reversible cause in the Hs group.", "Electrolyte disturbance: potassium and metabolic problems, a reversible cause in the Hs group.", "Hypothermia: low body temperature, a reversible cause in the Hs group.", "Tamponade: fluid around the heart stopping it filling, a reversible cause in the Ts group.", "Toxins: poisoning or drug effects, a reversible cause in the Ts group.", "Tension pneumothorax: trapped air crushing the lung and vessels, a reversible cause in the Ts group.", "Thrombosis: a clot in the heart or lung circulation, a reversible cause in the Ts group."];
+  causeInfo.forEach((tip, i) => {
+    const x = 650 + (i % 4) * 60, y = i < 4 ? 350 : 392, g = mk("g", { class: "hot", tabindex: "0", "data-info": tip }, L.causes);
+    const c = mk("circle", { class: "ar-token", cx: x, cy: y, r: 15 }, g);
+    const t = mk("text", { class: "ar-tokT", x: x, y: y + 4, "text-anchor": "middle" }, g); t.textContent = i < 4 ? "H" : "T";
+    causeTokens.push(c);
+  });
+  mk("path", { class: "ar-wire", d: "M202 141L226 112" }, L.pads);
+  const pa = mk("g", { transform: "translate(202 152) rotate(-18)" }, L.pads);
+  mk("rect", { class: "ar-pad", x: -17, y: -11, width: 34, height: 22, rx: 6 }, pa);
+  padBolt = mk("path", { class: "ar-bolt", d: "M2 -7L-4 1L0 1L-2 7L5 -1L1 -1Z", opacity: "0" }, pa);
+  const pb = mk("g", { transform: "translate(318 238) rotate(24)" }, L.pads);
+  mk("rect", { class: "ar-pad", x: -17, y: -11, width: 34, height: 22, rx: 6 }, pb);
+  handsG = mk("g", {}, L.hands);
+  mk("rect", { class: "ar-hand", x: -26, y: -22, width: 52, height: 17, rx: 8 }, handsG);
+  mk("rect", { class: "ar-hand", x: -22, y: -8, width: 46, height: 15, rx: 7 }, handsG);
+  mk("rect", { class: "ar-hand", x: -7, y: -52, width: 14, height: 32, rx: 6 }, handsG);
+  syrG = mk("g", {}, L.syr);
+  mk("rect", { class: "ar-syrB", x: -28, y: -7, width: 42, height: 14, rx: 3 }, syrG);
+  mk("rect", { class: "ar-syrF", x: -28, y: -7, width: 26, height: 14, rx: 3 }, syrG);
+  mk("path", { class: "ar-needle", d: "M14 0H38" }, syrG);
+  mk("rect", { class: "ar-syrB", x: -38, y: -3, width: 10, height: 6, rx: 2 }, syrG);
+  place(syrG, 120, 285, 0, 1);
+  ecgPath = mk("path", { class: "ar-trace" }, L.ecg);
+  ecgTxt = mk("text", { class: "sc-zone", x: E.x + E.w - 10, y: E.y + 18, "text-anchor": "end" }, L.ecg);
+  const eh = mk("g", { class: "hot", tabindex: "0", "data-info": "One ECG lead. VF is chaotic with no pulse, asystole is flat, PEA shows complexes with no pulse, and return of circulation shows complexes with a pulse." }, L.ecg);
+  mk("rect", { x: E.x, y: E.y, width: E.w, height: E.h, fill: "transparent" }, eh);
+  const o = L.over;
+  pill(o, "Heart", 235, 180, 140, 105, "The heart. In arrest it quivers in VF, is still in asystole, or twitches without a pulse in PEA. When circulation returns it beats and pumps.");
+  pill(o, "CPR", 260, 118, 170, 80, "Chest compressions by hand. High quality CPR keeps a small flow going to the brain and heart until the heart can restart.");
+  pill(o, "Defib pads", 202, 152, 105, 155, "Defibrillator pads. A shock helps only a shockable rhythm (VF or pulseless VT). It does not help asystole or PEA.");
+  pill(o, "Chain", 430, 95, 455, 72, "Chain of survival: recognition and call, CPR, early defibrillation, then post-arrest care. Each link strengthens the next.");
+  pill(o, "ECG", 60, 360, 55, 298, "The ECG lead below. The rhythm decides whether a shock is advised. PEA has ECG complexes but no pulse.");
+  const adr = pill(o, "Adrenaline", 120, 285, 120, 250, "Adrenaline in a syringe. It tightens vessels and raises the pressure driving blood to the heart during CPR."); adr.setAttribute("id", "p-adr");
+  pill(o, "Brain", 725, 118, 645, 88, "The brain. It is injured fastest when circulation stops. CPR and early return of circulation protect it.");
+  pill(o, "Organs", 795, 255, 885, 255, "Organs such as the kidney. Without cardiac output they become ischaemic. Flow returning with CPR and ROSC reperfuses them.");
+  pill(o, "4 Hs and 4 Ts", 710, 350, 765, 318, "Reversible causes to find and treat: the Hs (hypoxia, hypovolaemia, electrolyte disturbance, hypothermia) and the Ts (tamponade, toxins, tension pneumothorax, thrombosis).");
+  const P = L.panel, y0 = 486;
+  mk("rect", { class: "dr-panel", x: 24, y: 454, width: 912, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The patient";
+  [["out", "Output", "g-good", "Cardiac output: blood pumped by the heart. Absent in arrest, partly replaced by CPR, restored at ROSC."], ["brain", "Brain flow", "g-good", "Blood flow to the brain. It falls to zero without CPR and recovers when circulation returns."], ["organ", "Organ flow", "g-good", "Blood flow to organs such as the kidney."], ["isch", "Ischaemia", "g-bad", "Lack of oxygen to tissues. It climbs within a short time of arrest and falls when flow returns."], ["rec", "ROSC chance", "g-good", "Chance of return of spontaneous circulation with the chosen rhythm and treatment."], ["surv", "Recovery", "g-good", "Overall recovery outlook: return of circulation with the brain protected."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 120 + i * 140, y0, 60, 18, cls, name, tip); });
+}
+function ecgStep() {
+  const pulse = sm.spont > 0.5 || sm.rec > 0.55 ? 1 : 0;
+  let d = "";
+  for (let x = E.x; x <= E.x + E.w; x += 3) {
+    const age = (E.x + E.w - x) / 110, tt = tm / 1000 - age;
+    let v = 0;
+    if (pulse || level === 2) v = qrs(tt);
+    else if (level === 0) v = 0.36 * Math.sin(tt * 11) + 0.24 * Math.sin(tt * 19 + 1.3) + 0.12 * Math.sin(tt * 31);
+    else v = 0.015 * Math.sin(tt * 5) + (sm.spont < 0.5 ? 0.07 * Math.pow(0.5 + 0.5 * Math.sin(tt * 6.8), 6) : 0);
+    const y = clamp(EB - 42 * v, E.y + 4, E.y + E.h - 4);
+    d += (x === E.x ? "M" : "L") + x + " " + f1(y);
+  }
+  ecgPath.setAttribute("d", d);
+  const w = level === 3 ? "ROSC" : pulse ? "organised with pulse" : ["VF", "asystole", "PEA, no pulse", "ROSC"][level];
+  if (ecgTxt.textContent !== w) ecgTxt.textContent = w;
+}
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 1.1), k2 = Math.min(1, dt * 0.55);
+  ["out", "brain", "organ", "isch", "surv"].forEach((q) => { sm[q] = lerp(sm[q], m[q], k2); });
+  ["rec", "defib", "drugs", "shockGiven", "spont"].forEach((q) => { sm[q] = lerp(sm[q], m[q], k1); });
+  const pulse = clamp((sm.out - 0.38) / 0.4) * (sm.spont > 0.4 || sm.rec > 0.5 ? 1 : 0.35);
+  const beat = Math.pow(Math.max(0, Math.sin(tm / 300)), 2);
+  const comp = Math.pow(0.5 + 0.5 * Math.sin(tm / 280), 2);
+  const cprOn = sm.spont > 0.5 || pulse > 0.7 ? 0 : 1;
+  let rot = 0, sc = 1;
+  if (level === 0 && pulse < 0.5) { rot = Math.sin(tm / 37) * 3; sc = 1 + 0.02 * Math.sin(tm / 53); }
+  else if (level === 1) { sc = 1 - 0.03 * comp * cprOn; }
+  else if (level === 2 && pulse < 0.5) { sc = 1 + 0.012 * Math.sin(tm / 300); }
+  else { sc = 1 + 0.09 * beat * pulse; }
+  place(heartG, HX, HY, rot, sc);
+  heartDark.setAttribute("opacity", (sm.isch * 0.55).toFixed(2));
+  brainDark.setAttribute("opacity", (sm.isch * 0.65).toFixed(2));
+  organDark.setAttribute("opacity", (sm.isch * 0.6).toFixed(2));
+  place(handsG, HX, 108 + comp * 12 * cprOn, 0, 1);
+  handsG.style.opacity = (1 - pulse * 0.9).toFixed(2);
+  padBolt.setAttribute("opacity", (sm.defib * (0.5 + 0.5 * Math.sin(tm / 160))).toFixed(2));
+  syrG.style.opacity = sm.drugs.toFixed(2);
+  $("p-adr").style.opacity = sm.drugs.toFixed(2);
+  const chainOn = [1, cprOn || pulse, sm.shockGiven, pulse];
+  chainNodes.forEach((c, i) => { c.setAttribute("class", chainOn[i] > 0.4 ? "ar-chainOn" : "ar-chain"); });
+  causeTokens.forEach((c) => { c.setAttribute("class", sm.drugs > 0.4 ? "ar-tokenOn" : "ar-token"); });
+  const spd = 0.02 + 0.14 * sm.out;
+  flowB.forEach((p) => { p.k = (p.k + dt * spd) % 1; const a = trBrain.at(p.k); p.e.setAttribute("transform", "translate(" + f1(a.x) + " " + f1(a.y) + ")"); p.e.setAttribute("opacity", clamp(0.25 + sm.out).toFixed(2)); });
+  flowO.forEach((p) => { p.k = (p.k + dt * spd * 0.85) % 1; const a = trOrgan.at(p.k); p.e.setAttribute("transform", "translate(" + f1(a.x) + " " + f1(a.y) + ")"); p.e.setAttribute("opacity", clamp(0.25 + sm.out).toFixed(2)); });
+  if (Math.random() < dt * sm.brain * 7) { const p = freeP(sparks); if (p) emit(p, BX + rnd(-58, 58), BY + rnd(-28, 28), rnd(-7, 7), rnd(-7, 7), 0); }
+  sparks.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.8).toFixed(2)); if (p.t > 1.8 || Math.abs(p.x - BX) > 76 || Math.abs(p.y - BY) > 42) kill(p); });
+  ecgStep();
+  gg.out.set(sm.out, wordOf(sm.out, 0.35, 0.7, ["absent", "by CPR", "restored"]));
+  gg.brain.set(sm.brain, wordOf(sm.brain, 0.3, 0.65, ["none", "low", "good"]));
+  gg.organ.set(sm.organ, wordOf(sm.organ, 0.3, 0.65, ["none", "low", "good"]));
+  gg.isch.set(sm.isch, wordOf(sm.isch, 0.3, 0.65, ["low", "rising", "high"]));
+  gg.rec.set(sm.rec, wordOf(sm.rec, 0.25, 0.6, ["low", "possible", "likely"]));
+  gg.surv.set(sm.surv, wordOf(sm.surv, 0.25, 0.6, ["poor", "guarded", "better"]));
+}
+run({ init, step });
+</script></body></html>

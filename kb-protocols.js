@@ -27,7 +27,7 @@
   // Guideline basis: which family of guidance a protocol follows (schema field "basis").
   var BASIS = { international: "International", india: "India" };
   var BASIS_LONG = { international: "International guidelines", india: "India national guidelines" };
-  var TABS = [["syndromes", "Syndromes"], ["antibiogram", "Antibiogram"], ["aware", "AWaRe"], ["guidelines", "Guidelines"], ["protocols", "Protocols"]];
+  var TABS = [["syndromes", "Syndromes"], ["ilearn", "iLearn"], ["aware", "AWaRe"], ["guidelines", "Guidelines"], ["protocols", "Protocols"]];
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function plural(n, w) { return n + " " + w + (n === 1 ? "" : "s"); }
