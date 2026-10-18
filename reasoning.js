@@ -5721,6 +5721,7 @@
     var orig = window.SB.openRef;
     window.SB.__smdKbWrapped = true;
     window.SB.openRef = function (tab) {
+      if (tab === "ilearn") { var ri = orig.call(this, "guidelines"); try { if (window.SMD_ILEARN) SMD_ILEARN.render(); } catch (e) {} return ri; }
       var r = orig.apply(this, arguments);
       if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
       else { try { kbPolishReference(tab); } catch (e) {} }
