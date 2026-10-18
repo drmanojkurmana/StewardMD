@@ -1,0 +1,596 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>SVT and WPW: the bypass tract and the re-entry circuit</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body{--c-ch:#6b3a4a;--c-flash:#ff9a7a}body[data-theme="light"]{--c-ch:#e9b8c2;--c-flash:#ff6a4a}
+.wp-ch{fill:color-mix(in srgb,var(--c-flash) calc(var(--act,0) * 100%),var(--c-ch));stroke:var(--anatomy-mid);stroke-width:1.3}
+.wp-ecgbg{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.wp-grid{stroke:var(--anatomy-faint);stroke-width:.5;fill:none;stroke-opacity:.35}.wp-grid.major{stroke-opacity:.7}
+.wp-base{stroke:var(--anatomy-mid);stroke-width:.8;stroke-dasharray:3 4;fill:none}
+.wp-trace{fill:none;stroke:var(--c-good);stroke-width:1.9;stroke-linejoin:round;stroke-linecap:round}
+.wp-septum{stroke:var(--anatomy-mid);stroke-width:1.2;fill:none}
+.wp-wire{fill:none;stroke:var(--anatomy-hi);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.wp-acc{fill:none;stroke:var(--c-neut);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.wp-node{fill:#f2b84a;stroke:color-mix(in srgb,#f2b84a 55%,#000);stroke-width:1}
+.wp-node2{fill:var(--c-neut);stroke:color-mix(in srgb,var(--c-neut) 55%,#000);stroke-width:1}
+.wp-imp{fill:#fff;stroke:var(--c-neut);stroke-width:2}
+.wp-inset{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.wp-inode{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 50%,#000);stroke-width:1}
+.wp-inode2{fill:#f2b84a;stroke:color-mix(in srgb,#f2b84a 55%,#000);stroke-width:1}
+.wp-mag{fill:color-mix(in srgb,var(--c-flash) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.3}
+.wp-dual{fill:none;stroke:var(--anatomy-hi);stroke-width:1.6;stroke-linecap:round}
+.wp-dual2{fill:none;stroke:var(--c-neut);stroke-width:1.6;stroke-linecap:round;stroke-dasharray:3 3}
+.wp-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.wp-xp{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.wp-ok{fill:none;stroke:var(--c-good);stroke-width:2.2;stroke-linecap:round}
+.dr-g-fill.g-circ{fill:var(--c-neut)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">SVT and WPW: the bypass tract and the re-entry circuit</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>rate fast · rhythm re-entrant SVT · delta wave absent · danger raised</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated heart with an accessory pathway that bypasses the AV node. In sinus rhythm the ventricle starts early through the bypass, giving a short PR interval and a delta wave. In orthodromic SVT the impulse goes down the AV node and back up the bypass in a loop, and AVNRT is shown as dual pathways inside the compact AV node. Adenosine blocks the AV node and breaks AV node dependent SVT, but in AF with pre-excitation it can push more impulses down the bypass. A live ECG, a re-entry close-up and gauges show rate, circuit activity, delta wave and danger. Treatment choices are a vagal manoeuvre, adenosine and catheter ablation."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="526" height="396" rx="18"/>
+<rect class="sc-tissue" x="546" y="44" width="400" height="396" rx="18"/>
+<rect class="wp-ecgbg" x="546" y="82" width="400" height="170" rx="14"/>
+<text class="sc-zone" x="34" y="68">HEART: NODES AND BYPASS</text>
+<text class="sc-zone" x="566" y="68">ECG, ONE LEAD</text>
+<clipPath id="ecgclip"><rect x="566" y="92" width="360" height="150"/></clipPath>
+<g clip-path="url(#ecgclip)"><path class="wp-grid major" d="M566 92V242"/><path class="wp-grid" d="M584 92V242"/><path class="wp-grid" d="M602 92V242"/><path class="wp-grid" d="M620 92V242"/><path class="wp-grid" d="M638 92V242"/><path class="wp-grid major" d="M656 92V242"/><path class="wp-grid" d="M674 92V242"/><path class="wp-grid" d="M692 92V242"/><path class="wp-grid" d="M710 92V242"/><path class="wp-grid" d="M728 92V242"/><path class="wp-grid major" d="M746 92V242"/><path class="wp-grid" d="M764 92V242"/><path class="wp-grid" d="M782 92V242"/><path class="wp-grid" d="M800 92V242"/><path class="wp-grid" d="M818 92V242"/><path class="wp-grid major" d="M836 92V242"/><path class="wp-grid" d="M854 92V242"/><path class="wp-grid" d="M872 92V242"/><path class="wp-grid" d="M890 92V242"/><path class="wp-grid" d="M908 92V242"/><path class="wp-grid major" d="M926 92V242"/><path class="wp-grid major" d="M566 92H926"/><path class="wp-grid" d="M566 110H926"/><path class="wp-grid" d="M566 128H926"/><path class="wp-grid" d="M566 146H926"/><path class="wp-grid" d="M566 164H926"/><path class="wp-grid major" d="M566 182H926"/><path class="wp-grid" d="M566 200H926"/><path class="wp-grid" d="M566 218H926"/><path class="wp-grid" d="M566 236H926"/></g>
+<path class="wp-base" d="M566 178H926"/>
+<rect class="wp-inset" x="560" y="292" width="372" height="138" rx="14"/>
+<text class="sc-zone" x="575" y="315">RE-ENTRY CLOSE-UP</text>
+<path id="ch-ra" class="wp-ch" d="M130 100Q130 88 150 88H232Q252 88 252 110V176Q252 200 230 200H150Q130 200 130 180Z"/>
+<path id="ch-la" class="wp-ch" d="M270 110Q270 88 292 88H372Q392 88 392 110V180Q392 200 370 200H292Q270 200 270 180Z"/>
+<path id="ch-rv" class="wp-ch" d="M102 238Q102 214 128 214H255V396Q190 428 140 386Q102 340 102 238Z"/>
+<path id="ch-lv" class="wp-ch" d="M265 214H402Q438 214 438 256Q438 340 394 394Q330 432 265 396Z"/>
+<path class="wp-septum" d="M260 214V400"/>
+<path class="wp-wire" d="M150 112L210 98L300 98L350 120"/><path class="wp-wire" d="M150 112L190 160L240 200L260 214"/><path class="wp-wire" d="M260 214L260 252"/><path class="wp-wire" d="M260 252L292 318L330 388"/><path class="wp-wire" d="M260 252L226 318L188 388"/>
+<path id="accPath" class="wp-acc" d="M350 138L405 180L418 250L398 312L352 362L330 388"/>
+<circle class="wp-node" cx="150" cy="112" r="8"/><circle class="wp-node" cx="260" cy="214" r="9"/><circle class="wp-node" cx="260" cy="252" r="5"/>
+<circle id="accNode" class="wp-node2" cx="415" cy="252" r="5"/>
+<g id="inset"></g><g id="marks"></g><g id="imps"></g><g id="ecg"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, rates in numbers or targets are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Rhythm shown</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="SVT circuit"><span class="dr-ticks"><i>sinus</i><i>SVT</i><i>AF + WPW</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">vagal manoeuvre</option><option value="2">adenosine</option><option value="3">catheter ablation</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>Pre-excitation and WPW.</strong> An accessory pathway (bypass tract) connects atrium to ventricle outside the AV node, so it bypasses the normal AV nodal delay. In sinus rhythm part of the ventricle is activated early (pre-excitation): the PR interval is short, the QRS starts with a slurred delta wave and is widened by fusion with conduction through the AV node and His-Purkinje system. Many people with a delta wave have no symptoms; WPW syndrome means pre-excitation with tachyarrhythmia symptoms. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Re-entrant SVT.</strong> In orthodromic atrioventricular re-entrant tachycardia the impulse goes antegrade down the AV node and His-Purkinje system (narrow QRS, no delta wave during the tachycardia) and retrograde up the accessory pathway, in a repeating circuit. In antidromic forms it goes down the pathway and up the AV node (wide QRS). AV nodal re-entrant tachycardia (AVNRT) instead uses dual pathways, a fast and a slow pathway, inside and around the compact AV node, with near simultaneous atrial and ventricular activation. Focal atrial tachycardia and junctional forms are other supraventricular mechanisms. Recurrent episodes, their forms and inferior and coronary sinus clues on the ECG guide catheter ablation of the pathway or the slow pathway. This is standard teaching and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> Vagal manoeuvres and adenosine increase AV nodal block: adenosine administration transiently blocks the AV node, so it terminates SVT that needs the AV node (orthodromic AVRT and AVNRT) and can unmask atrial activity. In AF with pre-excitation, blocking the AV node does not stop the atria and can shunt more impulses down the accessory pathway to a very fast ventricular response, so AV nodal blockers are avoided and urgent rhythm treatment is sought. Catheter ablation destroys the accessory pathway (or the slow pathway in AVNRT), removes pre-excitation and prevents recurrence. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Antidromic detail, multiple and septal pathways, pathway localisation from delta polarity, Mahaim and other variants, focal and junctional tachycardia detail, drug choice beyond adenosine, cardioversion and pacing detail, risk stratification and asymptomatic pre-excitation management, and all doses and targets are left out. The ECG is one schematic lead, the heart is simplified, and timing is illustrative. The figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"GEO":{"sa":[150,112],"av":[260,214],"his":[260,252],"bach":[[150,112],[210,98],[300,98],[350,120]],"inter":[[150,112],[190,160],[240,200],[260,214]],"hisTrack":[[260,214],[260,252]],"lbb":[[260,252],[292,318],[330,388]],"rbb":[[260,252],[226,318],[188,388]],"accDown":[[350,138],[405,180],[418,250],[398,312],[352,362],[330,388]],"accUp":[[330,388],[352,362],[398,312],[418,250],[405,180],[350,138]],"downFull":[[320,130],[275,185],[260,214],[260,252],[330,388]]},"ECG":{"x":566,"y":92,"w":360,"h":150,"base":178},"S":{"level":{"label":"Rhythm shown","a":[0,1,2],"names":["sinus rhythm","SVT circuit","AF with pre-excitation"],"ticks":["sinus","SVT","AF + WPW"],"start":1},"settings":[{"label":"no treatment"},{"label":"vagal manoeuvre"},{"label":"adenosine"},{"label":"catheter ablation"}],"drugNames":["no treatment","a vagal manoeuvre","adenosine","catheter ablation"],"status":"Rhythm: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const TAB = [
+    [ { rate: 0.48, delta: 0.78, circ: 0.05, danger: 0.12, avBlock: 0.05, bypass: 1, chaos: 0, irreg: 0.05, ablated: 0, code: 0, rhythm: "pre-excited sinus" },
+      { rate: 0.36, delta: 0.88, circ: 0.05, danger: 0.10, avBlock: 0.38, bypass: 1, chaos: 0, irreg: 0.05, ablated: 0, code: 0, rhythm: "pre-excited sinus" },
+      { rate: 0.22, delta: 0.95, circ: 0, danger: 0.18, avBlock: 0.92, bypass: 1, chaos: 0, irreg: 0.05, ablated: 0, code: 0, rhythm: "pre-excited sinus" },
+      { rate: 0.48, delta: 0.02, circ: 0, danger: 0.05, avBlock: 0, bypass: 0, chaos: 0, irreg: 0.05, ablated: 1, code: 1, rhythm: "sinus" } ],
+    [ { rate: 0.92, delta: 0.05, circ: 0.95, danger: 0.55, avBlock: 0.05, bypass: 1, chaos: 0.05, irreg: 0.05, ablated: 0, code: 2, rhythm: "re-entrant SVT" },
+      { rate: 0.48, delta: 0.78, circ: 0.08, danger: 0.12, avBlock: 0.38, bypass: 1, chaos: 0, irreg: 0.05, ablated: 0, code: 0, rhythm: "pre-excited sinus" },
+      { rate: 0.48, delta: 0.78, circ: 0.02, danger: 0.10, avBlock: 0.92, bypass: 1, chaos: 0, irreg: 0.05, ablated: 0, code: 0, rhythm: "pre-excited sinus" },
+      { rate: 0.48, delta: 0.02, circ: 0, danger: 0.05, avBlock: 0, bypass: 0, chaos: 0, irreg: 0.05, ablated: 1, code: 1, rhythm: "sinus" } ],
+    [ { rate: 0.96, delta: 0.85, circ: 0.25, danger: 0.95, avBlock: 0.05, bypass: 1, chaos: 0.95, irreg: 0.95, ablated: 0, code: 3, rhythm: "AF pre-excited" },
+      { rate: 0.94, delta: 0.90, circ: 0.25, danger: 0.93, avBlock: 0.38, bypass: 1, chaos: 0.95, irreg: 0.95, ablated: 0, code: 3, rhythm: "AF pre-excited" },
+      { rate: 0.99, delta: 0.98, circ: 0.25, danger: 1, avBlock: 0.92, bypass: 1, chaos: 0.95, irreg: 0.95, ablated: 0, code: 3, rhythm: "AF pre-excited" },
+      { rate: 0.58, delta: 0.02, circ: 0.25, danger: 0.30, avBlock: 0, bypass: 0, chaos: 0.90, irreg: 0.85, ablated: 1, code: 4, rhythm: "AF via AV node" } ],
+  ];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const kind = S.level.a[level];
+  const r = TAB[kind][drug];
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const rateW = w(r.rate, 0.38, 0.68, ["slow", "normal", "fast"]);
+  const deltaW = w(r.delta, 0.15, 0.55, ["absent", "faint", "clear"]);
+  const dangerW = w(r.danger, 0.25, 0.6, ["low", "raised", "high"]);
+  return { kind, drug, rate: cl(r.rate), delta: cl(r.delta), circ: cl(r.circ), danger: cl(r.danger), avBlock: cl(r.avBlock), bypass: r.bypass, chaos: cl(r.chaos), irreg: cl(r.irreg), ablated: r.ablated, code: r.code, rhythm: r.rhythm, words: [rateW, r.rhythm, deltaW, dangerW], readout: "rate " + rateW + " · rhythm " + r.rhythm + " · delta wave " + deltaW + " · danger " + dangerW };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* WPW scene: SA node, AV node with dual pathways, accessory bypass, orthodromic circuit, AF pre-excitation, ECG and gauges. */
+const G = SC.GEO, E = SC.ECG, WW = SC.W;
+const L = { imps: $("imps"), marks: $("marks"), ecg: $("ecg"), over: $("over"), panel: $("panel"), inset: $("inset") };
+const chEls = { ra: $("ch-ra"), la: $("ch-la"), rv: $("ch-rv"), lv: $("ch-lv") };
+const act = { ra: 0, la: 0, rv: 0, lv: 0 };
+const trk = { bach: track(G.bach), inter: track(G.inter), his: track(G.hisTrack), lbb: track(G.lbb), rbb: track(G.rbb), accDown: track(G.accDown), accUp: track(G.accUp), downFull: track(G.downFull) };
+const sm = { rate: 0.7, delta: 0.1, circ: 0.5, danger: 0.3, avBlock: 0, bypass: 1, chaos: 0, irreg: 0.1, abl: 0, code: 2 };
+const gg = {};
+let beatT = 0.4, afT = 0.3, circT = 0.2, Tsec = 0;
+const holdQ = [];
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0, tr: null, sp: 1, cb: null }; }); }
+const freeP = (pl) => pl.find((p) => !p.on);
+function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const dots = pool(12, () => mk("circle", { class: "wp-imp", r: 5 }, L.imps));
+function launch(tr, dur, cb) { const p = freeP(dots); if (!p) { if (cb) cb(); return; } p.on = true; p.tr = tr; p.u = 0; p.sp = 1 / Math.max(0.05, dur); p.cb = cb || null; p.e.setAttribute("opacity", "1"); const q = tr.at(0); p.e.setAttribute("cx", f1(q.x)); p.e.setAttribute("cy", f1(q.y)); }
+function flashA() { act.ra = 1; act.la = 1; }
+function flashV() { act.rv = 1; act.lv = 1; }
+const wavelets = [];
+let ecgPath = null, ecgTxt = null, insetDot = null, dualDot = null, avMark = null, ablMark = null;
+function intervalOf() { return 1.25 - 0.78 * sm.rate; }
+function phaseAt(tSec) {
+  const code = sm.code;
+  if (code === 3 || code === 4) {
+    const RR = [0.36, 0.5, 0.42, 0.58, 0.39, 0.52];
+    const fac = code === 3 ? 0.92 : 1.35, sum = RR.reduce((s, v) => s + v * fac, 0);
+    let tt = ((tSec % sum) + sum) % sum;
+    for (let i = 0; i < RR.length; i++) { const iv = RR[i] * fac; if (tt < iv) return tt / iv; tt -= iv; }
+    return 0;
+  }
+  const per = intervalOf();
+  return ((tSec % per) + per) % per / per;
+}
+function ecgVal(tSec) {
+  const p = phaseAt(tSec), code = sm.code; let v = 0;
+  if (code === 3 || code === 4) v += 0.05 * Math.sin(tSec * 31) + 0.04 * Math.sin(tSec * 47 + 1.2);
+  if (code === 0 || code === 1) {
+    if (p > 0.06 && p < 0.18) v += 0.13 * Math.sin(Math.PI * (p - 0.06) / 0.12);
+    if (sm.delta > 0.25 && p > 0.20 && p < 0.34) v += sm.delta * 0.34 * ((p - 0.20) / 0.14);
+    if (p > 0.29 && p < 0.315) v -= 0.10 * Math.sin(Math.PI * (p - 0.29) / 0.025);
+    if (p > 0.315 && p < 0.355) v += 0.95 * Math.sin(Math.PI * (p - 0.315) / 0.04);
+    if (p > 0.355 && p < 0.38) v -= 0.20 * Math.sin(Math.PI * (p - 0.355) / 0.025);
+    if (p > 0.48 && p < 0.72) v += 0.26 * Math.sin(Math.PI * (p - 0.48) / 0.24);
+  } else if (code === 2) {
+    if (p > 0.05 && p < 0.075) v -= 0.10 * Math.sin(Math.PI * (p - 0.05) / 0.025);
+    if (p > 0.075 && p < 0.115) v += 1.0 * Math.sin(Math.PI * (p - 0.075) / 0.04);
+    if (p > 0.115 && p < 0.14) v -= 0.20 * Math.sin(Math.PI * (p - 0.115) / 0.025);
+    if (p > 0.26 && p < 0.50) v += 0.24 * Math.sin(Math.PI * (p - 0.26) / 0.24);
+  } else {
+    const wide = code === 3;
+    if (wide) { if (p > 0.04 && p < 0.16) v += 0.92 * Math.sin(Math.PI * (p - 0.04) / 0.12); if (p > 0.30 && p < 0.56) v += 0.22 * Math.sin(Math.PI * (p - 0.30) / 0.26); }
+    else { if (p > 0.05 && p < 0.09) v += 1.0 * Math.sin(Math.PI * (p - 0.05) / 0.04); if (p > 0.09 && p < 0.115) v -= 0.18 * Math.sin(Math.PI * (p - 0.09) / 0.025); if (p > 0.26 && p < 0.50) v += 0.24 * Math.sin(Math.PI * (p - 0.26) / 0.24); }
+  }
+  return v;
+}
+function initInset() {
+  const I = L.inset;
+  mk("path", { class: "wp-wire", d: "M640 352L618 366L612 380L618 394L640 408" }, I);
+  mk("path", { class: "wp-acc", id: "insetAcc", d: "M640 352L668 366L682 380L668 394L640 408" }, I);
+  mk("circle", { class: "wp-inode", cx: 640, cy: 350, r: 15 }, I);
+  mk("circle", { class: "wp-inode", cx: 640, cy: 410, r: 15 }, I);
+  mk("circle", { class: "wp-node", cx: 612, cy: 380, r: 7 }, I);
+  mk("circle", { class: "wp-node2", cx: 682, cy: 380, r: 5 }, I);
+  const ta = mk("text", { class: "sc-lab", x: 640, y: 354, "text-anchor": "middle" }, I); ta.textContent = "A";
+  const tv = mk("text", { class: "sc-lab", x: 640, y: 414, "text-anchor": "middle" }, I); tv.textContent = "V";
+  mk("circle", { class: "wp-mag", cx: 838, cy: 368, r: 30 }, I);
+  mk("path", { class: "wp-dual", d: "M826 348L838 368L826 388" }, I);
+  mk("path", { class: "wp-dual2", d: "M850 348Q838 368 850 388" }, I);
+  mk("circle", { class: "wp-node", cx: 838, cy: 368, r: 5 }, I);
+  const tf = mk("text", { class: "sc-lab", x: 818, y: 342, "text-anchor": "middle" }, I); tf.textContent = "fast";
+  const ts = mk("text", { class: "sc-lab", x: 858, y: 342, "text-anchor": "middle" }, I); ts.textContent = "slow";
+  insetDot = mk("circle", { class: "wp-imp", r: 4.5 }, I);
+  dualDot = mk("circle", { class: "wp-imp", r: 3.5 }, I);
+  const wc = [[205, 145], [235, 170], [320, 140], [355, 168], [300, 175]];
+  wc.forEach(([x, y], i) => { const e = mk("circle", { class: "wp-node2", r: 3 }, L.imps); wavelets.push({ e, cx: x, cy: y, r: 8 + (i % 3) * 3, sp: 1.8 + (i % 3) * 0.6, ph: i * 1.2 }); });
+}
+function initPanel() {
+  initInset();
+  ecgPath = mk("path", { class: "wp-trace" }, L.ecg);
+  ecgTxt = mk("text", { class: "sc-zone", x: E.x + E.w - 10, y: E.y + 16, "text-anchor": "end" }, L.ecg);
+  const eh = mk("g", { class: "hot", tabindex: "0", "data-info": "One ECG lead. Sinus rhythm with pre-excitation: short PR interval and a slurred delta wave at the start of a widened QRS. Orthodromic SVT: regular narrow QRS with no delta wave. AF with pre-excitation: irregular, very fast, wide and varying QRS complexes." }, L.ecg);
+  mk("rect", { x: E.x, y: E.y, width: E.w, height: E.h, fill: "transparent" }, eh);
+  avMark = mk("g", { opacity: "0" }, L.marks);
+  mk("circle", { class: "wp-x", cx: G.av[0] + 18, cy: G.av[1] - 14, r: 8 }, avMark); mk("path", { class: "wp-xp", d: "M" + (G.av[0] + 14) + " " + (G.av[1] - 18) + "l8 8m0 -8l-8 8" }, avMark);
+  mk("circle", { class: "wp-x", cx: 624, cy: 366, r: 7 }, avMark); mk("path", { class: "wp-xp", d: "M621 363l6 6m0 -6l-6 6" }, avMark);
+  ablMark = mk("g", { opacity: "0" }, L.marks);
+  mk("circle", { class: "wp-x", cx: 415, cy: 252, r: 9 }, ablMark); mk("path", { class: "wp-xp", d: "M411 248l8 8m0 -8l-8 8" }, ablMark);
+  mk("circle", { class: "wp-x", cx: 682, cy: 380, r: 8 }, ablMark); mk("path", { class: "wp-xp", d: "M679 377l6 6m0 -6l-6 6" }, ablMark);
+  const o = L.over;
+  pill(o, "SA node", G.sa[0], G.sa[1], 80, 132, "Sinoatrial node: the normal pacemaker. It fires, the atria activate, and the impulse then reaches both the AV node and the accessory pathway.");
+  pill(o, "Atria", 340, 120, 480, 110, "Atria: the top chambers. Their activation is the P wave. In AF they fibrillate with chaotic, rapid activity and no organised P wave.");
+  pill(o, "AV node", G.av[0], G.av[1], 480, 225, "Compact AV node: the normal gateway to the ventricles. It delays the impulse so the ventricles can fill. Inside it, dual pathways (a fast and a slow pathway) can sustain AVNRT.");
+  pill(o, "Bypass tract", 415, 252, 485, 305, "Accessory pathway (bypass tract): an extra muscle bridge from atrium to ventricle that bypasses the AV node. It conducts fast and without the normal delay, so the ventricle starts early.");
+  pill(o, "His bundle", G.his[0], G.his[1], 480, 365, "Bundle of His and bundle branches: the fast route from the AV node that activates both ventricles together, giving a narrow QRS when it is the only route used.");
+  pill(o, "Ventricle", 150, 330, 62, 300, "Ventricles: the pumping chambers. Early activation through the bypass gives the delta wave; activation only through the His-Purkinje system gives a narrow QRS.");
+  pill(o, "Delta wave", 640, 155, 640, 275, "Delta wave: the slurred, slow start of the QRS in pre-excitation. Part of the ventricle starts through the bypass (slow muscle to muscle spread), then the rest follows fast through the His-Purkinje system.");
+  pill(o, "Fast wide QRS", 800, 150, 835, 275, "In AF with pre-excitation many atrial impulses race down the bypass without AV nodal filtering: the ventricular rate is very fast, irregular and wide, and it can collapse or degenerate. This is the dangerous form.");
+  pill(o, "Re-entry loop", 647, 380, 750, 332, "Orthodromic re-entry: down the AV node and His-Purkinje system to the ventricles (narrow QRS), then back up the accessory pathway to the atria, round and round. It needs the AV node, so AV nodal block can break it.");
+  pill(o, "Dual pathways", 838, 368, 838, 440, "AVNRT: dual AV nodal pathways, a fast and a slow pathway in and around the compact AV node. The impulse loops between them, activating atria and ventricles almost together. Ablation targets the slow pathway.");
+  const pv = pill(o, "Vagal slows AV node", G.av[0], G.av[1], 660, 440, "A vagal manoeuvre raises vagal tone and slows the AV node. It can terminate SVT that needs the AV node, but it does not stop AF racing down the bypass."); pv.setAttribute("id", "p-vagal"); pv.style.opacity = 0;
+  const pa = pill(o, "AV node blocked", G.av[0], G.av[1], 660, 440, "Adenosine transiently blocks the AV node. That breaks orthodromic AVRT and AVNRT, but in AF with pre-excitation it can shunt more impulses down the bypass, so it is avoided there."); pa.setAttribute("id", "p-adeno"); pa.style.opacity = 0;
+  const pb = pill(o, "Pathway ablated", 415, 252, 660, 440, "Catheter ablation destroys the accessory pathway (or the slow pathway in AVNRT). Pre-excitation and the re-entry circuit are removed, so SVT does not recur and AF can only reach the ventricles through the AV node."); pb.setAttribute("id", "p-abl"); pb.style.opacity = 0;
+  const P = L.panel, y0 = 486;
+  mk("rect", { class: "dr-panel", x: 24, y: 454, width: WW - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: 476 }, P); t.textContent = "The rhythm";
+  [["rate", "Ventricular rate", "g-bad", "How fast the ventricles beat. Orthodromic SVT is fast and regular; AF with pre-excitation is very fast and irregular."], ["circ", "Re-entry circuit", "g-circ", "How strongly the re-entry loop (or the dual pathway loop in AVNRT) is running."], ["delta", "Delta wave", "g-cyt", "Pre-excitation: how much ventricle is started early through the bypass. Present in sinus rhythm with WPW, absent during orthodromic SVT and after ablation."], ["danger", "Danger", "g-bad", "Risk from a very fast pre-excited response in AF, which can cause collapse. Blocking the AV node alone does not remove it."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, 180 + i * 200, y0 + 2, 52, 18, cls, name, tip); });
+}
+function init() { initPanel(); }
+function step(dt, m) {
+  Tsec += dt;
+  const k1 = Math.min(1, dt * 1.4), k2 = Math.min(1, dt * 0.7);
+  sm.rate = lerp(sm.rate, m.rate, k1); sm.delta = lerp(sm.delta, m.delta, k2); sm.circ = lerp(sm.circ, m.circ, k2);
+  sm.danger = lerp(sm.danger, m.danger, k2); sm.avBlock = lerp(sm.avBlock, m.avBlock, k1); sm.bypass = lerp(sm.bypass, m.bypass, k2);
+  sm.chaos = lerp(sm.chaos, m.chaos, k2); sm.irreg = lerp(sm.irreg, m.irreg, k2); sm.abl = lerp(sm.abl, m.ablated, k1); sm.code = m.code;
+  for (let i = holdQ.length - 1; i >= 0; i--) { holdQ[i].t -= dt; if (holdQ[i].t <= 0) { const cb = holdQ[i].cb; holdQ.splice(i, 1); cb(); } }
+  dots.forEach((p) => { if (!p.on) return; p.u += dt * p.sp; const q = p.tr.at(clamp(p.u)); p.e.setAttribute("cx", f1(q.x)); p.e.setAttribute("cy", f1(q.y)); if (p.u >= 1) { killP(p); if (p.cb) p.cb(); } });
+  if (sm.code === 0 || sm.code === 1) {
+    beatT -= dt;
+    if (beatT <= 0) { beatT += intervalOf(); flashA(); launch(trk.bach, 0.16, null); launch(trk.inter, 0.12, null);
+      if (sm.bypass > 0.4) launch(trk.accDown, 0.22, () => flashV());
+      holdQ.push({ t: 0.34, cb: () => { launch(trk.his, 0.04, null); launch(trk.lbb, 0.08, () => flashV()); launch(trk.rbb, 0.08, null); } });
+    }
+  } else if (sm.code === 2) {
+    circT -= dt;
+    if (circT <= 0) { circT += intervalOf(); flashA();
+      launch(trk.downFull, 0.20, () => { flashV(); launch(trk.accUp, 0.20, () => flashA()); });
+    }
+  } else {
+    afT -= dt;
+    if (afT <= 0) { afT += rnd(0.26, 0.5) * (sm.code === 3 ? 0.85 : 1.3);
+      if (sm.bypass > 0.4) launch(trk.accDown, 0.16, () => flashV());
+      else launch(trk.downFull, 0.24, () => flashV());
+    }
+    act.ra = Math.max(act.ra, 0.2 + Math.random() * 0.25); act.la = Math.max(act.la, 0.2 + Math.random() * 0.25);
+  }
+  const dec = Math.exp(-dt * 3.4);
+  ["ra", "la", "rv", "lv"].forEach((n) => { act[n] *= dec; chEls[n].style.setProperty("--act", act[n].toFixed(2)); });
+  wavelets.forEach((wv) => { const a = tm / 1000 * wv.sp + wv.ph, x = wv.cx + Math.cos(a) * wv.r, y = wv.cy + Math.sin(a * 1.3) * wv.r * 0.7; wv.e.setAttribute("cx", f1(x)); wv.e.setAttribute("cy", f1(y)); wv.e.setAttribute("opacity", sm.chaos > 0.15 ? "0.9" : "0"); });
+  const accEl = $("accPath"); if (accEl) accEl.setAttribute("opacity", (0.15 + 0.85 * sm.bypass).toFixed(2));
+  const accN = $("accNode"); if (accN) accN.setAttribute("opacity", (0.2 + 0.8 * sm.bypass).toFixed(2));
+  const inAcc = $("insetAcc"); if (inAcc) inAcc.setAttribute("opacity", (0.15 + 0.85 * sm.bypass).toFixed(2));
+  if (avMark) avMark.setAttribute("opacity", clamp(sm.avBlock * 1.1).toFixed(2));
+  if (ablMark) ablMark.setAttribute("opacity", sm.abl.toFixed(2));
+  $("p-vagal").style.opacity = m.drug === 1 ? "1" : "0"; $("p-adeno").style.opacity = m.drug === 2 ? "1" : "0"; $("p-abl").style.opacity = m.drug === 3 ? "1" : "0";
+  if (insetDot) { const a = tm / 1000 * 2.4, show = sm.code === 2 ? 1 : 0; insetDot.setAttribute("cx", f1(647 + Math.cos(a) * 36)); insetDot.setAttribute("cy", f1(380 + Math.sin(a) * 28)); insetDot.setAttribute("opacity", show ? (0.35 + 0.65 * sm.circ).toFixed(2) : "0"); }
+  if (dualDot) { const a = -tm / 1000 * 3.1, show = sm.code === 2 ? 1 : 0; dualDot.setAttribute("cx", f1(838 + Math.cos(a) * 17)); dualDot.setAttribute("cy", f1(368 + Math.sin(a) * 17)); dualDot.setAttribute("opacity", show ? (0.35 + 0.65 * sm.circ).toFixed(2) : "0"); }
+  let d = "";
+  for (let x = E.x; x <= E.x + E.w; x += 3) { const age = (E.x + E.w - x) / 110, v = ecgVal(Tsec - age), y = clamp(E.base - 44 * v, E.y + 4, E.y + E.h - 4); d += (x === E.x ? "M" : "L") + x + " " + f1(y); }
+  ecgPath.setAttribute("d", d);
+  const ew = sm.code === 2 ? "SVT: narrow, regular" : sm.code === 3 ? "AF: fast, wide, irregular" : sm.code === 4 ? "AF via AV node" : sm.delta > 0.3 ? "sinus: delta wave" : "sinus rhythm";
+  if (ecgTxt.textContent !== ew) ecgTxt.textContent = ew;
+  gg.rate.set(sm.rate, wordOf(sm.rate, 0.38, 0.68, ["slow", "normal", "fast"]));
+  gg.circ.set(sm.circ, wordOf(sm.circ, 0.25, 0.6, ["off", "weak", "running"]));
+  gg.delta.set(sm.delta, wordOf(sm.delta, 0.15, 0.55, ["absent", "faint", "clear"]));
+  gg.danger.set(sm.danger, wordOf(sm.danger, 0.25, 0.6, ["low", "raised", "high"]));
+}
+run({ init, step });
+</script></body></html>
