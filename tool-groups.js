@@ -76,7 +76,7 @@
   // Case, Dx Patient, Drugs, Calculators; chips: Syndromes, Antibiogram, Dosing, Hospital; the Ask MaiK tab), so the grid adds to them.
   var ON_HOME_ALREADY = ["startcase", "reasoning", "drugmenu", "calculators", "syndromes", "antibiogram", "dosing", "hospital", "askai"];
   var STARTER = {
-    student: ["clinix", "prep", "kxlearn", "askai", "codeblue", "atlas", "speckit", "guidelines", "ophthalmos", "tokos", "narke"],
+    student: ["clinix", "prep", "kxlearn", "askai", "codeblue", "atlas", "guidelines", "ophthalmos", "tokos", "narke"],
     intern: ["askai", "dosecalc", "icu", "docs", "interactions", "speckit", "dictate", "neo", "icdsearch"],
     resident: ["pglog", "askai", "speckit", "kxinbox", "docs", "dictate", "ward", "dosecalc", "icdsearch"],
     doctor: ["askai", "speckit", "docs", "followcare", "kxinbox", "dictate", "maitri", "govschemes", "icdsearch"],
