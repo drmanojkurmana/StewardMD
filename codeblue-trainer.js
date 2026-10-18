@@ -475,9 +475,9 @@
     if (nb && nb.item) {
       var it = nb.item, isG = nb.kind === "guided";
       hero = '<section class="cbt-hero" data-state="continue" aria-label="Continue training">' +
-        '<p class="cbt-herok">Continue</p><h3 class="cbt-herot">' + esc(it.title) + "</h3>" +
-        '<p class="cbt-herom">' + esc(MODE_LABEL[it.mode] || it.mode) + " . " + esc(it.level || "") +
-        (nb.topic ? " . Weak topic: " + esc(nb.topic) : "") + "</p>" +
+        '<div class="cbt-heroinfo"><h3 class="cbt-herot">' + esc(it.title) + "</h3>" +
+        '<p class="cbt-herom">' + esc(MODE_LABEL[it.mode] || it.mode) + ", " + esc(it.level || "") +
+        (nb.topic ? ", weak topic: " + esc(nb.topic) : "") + "</p></div>" +
         '<button type="button" class="cbt-next cbt-herobtn" data-act="' + (isG ? "start-guided" : "start-case") + '" data-id="' + esc(it.id) + '">' +
         (isG ? "Start guided scenario" : "Start practice case") + "</button></section>";
     }
@@ -515,7 +515,6 @@
       tile("go-cases", "cases", "Practice cases", "Timed clues plus quiz questions.", allCases.length + " cases") +
       tile("go-mine", "mine", "My training", "Best scores, trend and weak spots.", mineMeta) +
       "</div>" + recent +
-      '<p class="cbt-note">Practice only. The clock runs sped up and labelled TRAINING. Nothing here writes to a patient record.</p>' +
       '<p class="cbt-disc cbt-footnote">' + esc(DISCLAIMER) + "</p></div></div>";
     show(html, "home");
   }

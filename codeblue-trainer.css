@@ -76,7 +76,7 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-scroll {
   flex: 1; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch;
   padding: 16px 16px calc(32px + env(safe-area-inset-bottom, 0px));
-  max-width: 560px; width: 100%; margin: 0 auto; box-sizing: border-box;
+  max-width: 560px; width: 100%; margin-block: 0; margin-inline: auto; box-sizing: border-box;
 }
 #cbtRoot .cbt-h { font-size: 22px; line-height: 1.25; font-weight: 800; margin: 4px 0 12px; }
 #cbtRoot .cbt-h:focus { outline: none; }
@@ -212,6 +212,7 @@ body.cbt-lock { overflow: hidden; }
   #cbtRoot .cbt-layout > .cbt-clock, #cbtRoot .cbt-layout > .cbt-disc,
   #cbtRoot .cbt-layout > .cbt-note, #cbtRoot .cbt-layout > .cbt-modes,
   #cbtRoot .cbt-layout > .cbt-sub, #cbtRoot .cbt-layout > .cbt-fb,
+  #cbtRoot .cbt-layout > .cbt-log, #cbtRoot .cbt-layout > #cbtQuiz,
   #cbtRoot .cbt-layout > .cbt-score { grid-column: 1 / -1; }
   #cbtRoot .cbt-layout > .cbt-card, #cbtRoot .cbt-layout > .cbt-station { margin: 0; }
 }
@@ -259,9 +260,10 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-rrow-text{grid-column:1/-1}
 /* cb4-J hub, calm empty, 920px measure */
 #cbtRoot .cbt-hero{grid-column:1/-1;border:1px solid var(--cbt-hairline);border-radius:var(--cbt-radius,14px);background:var(--cbt-s1);padding:20px}
-#cbtRoot .cbt-herok{font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--cbt-muted);margin:0 0 6px;text-transform:uppercase}
+#cbtRoot .cbt-heroinfo{flex:1 1 auto;min-width:0}
 #cbtRoot .cbt-herot{font-size:22px;font-weight:700;margin:0 0 6px;line-height:1.25}
 #cbtRoot .cbt-herom{font-size:14px;color:var(--cbt-muted);margin:0 0 14px}
+#cbtRoot .cbt-herobtn{flex:none}
 #cbtRoot .cbt-tiles{display:grid;grid-template-columns:1fr;gap:12px;grid-column:1/-1}
 #cbtRoot .cbt-tile{padding:18px;min-height:120px;margin:0}
 #cbtRoot .cbt-tileicon{display:block;color:var(--cbt-accent);margin-bottom:10px}
@@ -274,7 +276,9 @@ body.cbt-lock { overflow: hidden; }
 #cbtRoot .cbt-calmicon{color:var(--cbt-muted)}
 #cbtRoot .cbt-calmicon svg{width:40px;height:40px;stroke-width:1.25}
 @media(min-width:768px){
- #cbtRoot .cbt-scroll{max-width:920px}
+ #cbtRoot .cbt-scroll{max-width:920px;margin-inline:auto}
+ #cbtRoot .cbt-hero{display:flex;align-items:center;gap:16px}
+ #cbtRoot .cbt-herom{margin:0}
  #cbtRoot .cbt-tiles{grid-template-columns:1fr 1fr}
  #cbtRoot[data-station="home"] .cbt-layout{display:flex;flex-direction:column}
 }
