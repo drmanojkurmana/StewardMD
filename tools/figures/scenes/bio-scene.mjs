@@ -12,7 +12,7 @@ const { BIO_CSS } = await import(pathToFileURL(join(process.env.ANIMA_DIR || "/h
 export const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 export function buildScene(o) {
-  const { id, fig = "Fig 1", title, hint = "tap a part · space: pause", caption, W, H, body, label, scene = {}, pageJs, modelOf, MD, tests = [], withLabel, withoutLabel, sourcesLis = [], simplified, extraCss = "", extraControls = "" } = o;
+  const { id, fig = "Fig 1", title, hint = "tap a part · space: pause", caption, W, H, body, label, scene = {}, pageJs, modelOf, MD, tests = [], withLabel, withoutLabel, sourcesLis = [], simplified, extraCss = "", extraControls = "", organs = false } = o;
   if (process.argv.includes("--print-model")) { for (let l = 0; l < MD.level.a.length; l++) for (let d = 0; d < MD.settings.length; d++) console.log(JSON.stringify([l, d, modelOf(MD, l, d).readout])); process.exit(0); }
   for (const [l, d, t] of tests) { const r = modelOf(MD, l, d).readout; if (r !== t) throw new Error(`${id}: model readout "${r}" != "${t}" at level ${l}, drug ${d}`); }
   const start = modelOf(MD, MD.level.start, 0).readout;
@@ -34,7 +34,7 @@ export function buildScene(o) {
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer>`;
   const SC = { ...scene, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };
-  const script = `const SC = ${JSON.stringify(SC)};\nconst modelOf = ${modelOf.toString()};\n` + readFileSync(join(HERE, "bio.lib.js"), "utf8") + "\n" + pageJs;
+  const script = `const SC = ${JSON.stringify(SC)};\nconst modelOf = ${modelOf.toString()};\n` + readFileSync(join(HERE, "bio.lib.js"), "utf8") + "\n" + (organs ? readFileSync(join(HERE, "organs.lib.js"), "utf8") + "\n" : "") + pageJs;
   const CSS = readFileSync(join(HERE, "../figure.css"), "utf8") + readFileSync(join(HERE, "dialysis.css"), "utf8") + readFileSync(join(HERE, "bio-scene.css"), "utf8") + extraCss;
   for (const light of [false, true]) {
     const html = k.pageHtml({ title, theme: light ? "light" : "dark", width: W + 40, body: `<style>${BIO_CSS}${CSS}</style>${framed}${controls}${sources}`, script });
