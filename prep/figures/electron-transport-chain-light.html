@@ -1,0 +1,524 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Electron transport chain: protons to ATP</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="light"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body{--etc1:#e9a2b3;--etc2:#7fc4e8;--etc3:#b7a1e6;--etc4:#7fcf6a;--etc-memb:#c98a5e;--etc-prot:#7ab8ff;--etc-elec:#ffd24a;--etc-atp:#3ddc97;--etc-o2:#7fd3ff;--etc-heat:#ff7a45}
+body[data-theme="light"]{--etc1:#d9788f;--etc2:#3fa0d4;--etc3:#8f72d0;--etc4:#4fa63c;--etc-memb:#b06f3e;--etc-prot:#2f7ad8;--etc-elec:#c9a010;--etc-atp:#0f9f76;--etc-o2:#0a7fd1;--etc-heat:#e06a25}
+.etc-mito{fill:color-mix(in srgb,var(--etc3) 12%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
+.etc-memb{fill:none;stroke:var(--etc-memb);stroke-width:24;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
+.etc-cx{stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:1}
+.etc-c1{--cc:var(--etc1);fill:var(--etc1)}.etc-c2{--cc:var(--etc2);fill:var(--etc2)}.etc-c3{--cc:var(--etc3);fill:var(--etc3)}.etc-c4{--cc:var(--etc4);fill:var(--etc4)}
+.etc-sub{fill:color-mix(in srgb,var(--anatomy-paper) 35%,transparent);stroke:none;opacity:.5}
+.etc-chan{fill:var(--etc-atp);stroke:color-mix(in srgb,var(--etc-atp) 50%,#000);stroke-width:1}
+.etc-head{fill:color-mix(in srgb,var(--etc-atp) 65%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--etc-atp) 50%,#000);stroke-width:1}
+.etc-spoke{stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}
+.etc-hub{fill:var(--anatomy-strong)}
+.etc-o2path,.etc-atppath{fill:none;stroke:var(--anatomy-mid);stroke-width:1.1;stroke-dasharray:3 4;opacity:.6}
+.p-elec{fill:var(--etc-elec);stroke:color-mix(in srgb,var(--etc-elec) 50%,#000);stroke-width:.5}
+.p-nadh{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 50%,#000);stroke-width:.5}
+.p-fadh{fill:#ff5e8a;stroke:color-mix(in srgb,#ff5e8a 50%,#000);stroke-width:.5}
+.p-prot{fill:var(--etc-prot);stroke:color-mix(in srgb,var(--etc-prot) 50%,#000);stroke-width:.5}
+.p-atpp{fill:var(--etc-atp);stroke:color-mix(in srgb,var(--etc-atp) 50%,#000);stroke-width:.5}
+.p-o2p{fill:var(--etc-o2);stroke:color-mix(in srgb,var(--etc-o2) 50%,#000);stroke-width:.5}
+.p-water{fill:var(--etc-o2)}
+.p-heatp{fill:none;stroke:var(--etc-heat);stroke-width:1.4;stroke-linecap:round}
+.p-ant{fill:var(--etc-atp);stroke:color-mix(in srgb,var(--etc-atp) 50%,#000);stroke-width:.5}
+.etc-uncdot{fill:#ff9a3d;stroke:color-mix(in srgb,#ff9a3d 50%,#000);stroke-width:.6}
+.etc-blk-c{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.8}
+.etc-blk-l{stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.dr-g-fill.g-oxy{fill:var(--etc-o2)}.dr-g-fill.g-heat{fill:var(--etc-heat)}.dr-g-fill.g-atp{fill:var(--etc-atp)}.dr-g-fill.g-elec{fill:var(--etc-elec)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Electron transport chain: protons to ATP</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>electron flow high · proton gradient high · ATP production high · oxygen use high</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated mitochondrion cut across its inner membrane. In the matrix, NADH donates electrons at complex I and FADH2 at complex II. Electrons flow through complexes III and IV to oxygen, which becomes water. Complexes I, III and IV pump protons into the intermembrane space. The proton gradient drives ATP synthase, which makes ATP that leaves for the cytosol. Inhibitors block complex I, complex IV and ATP synthase; an uncoupler leaks protons back and releases heat. Gauges show electron flow, proton gradient, ATP production, oxygen use and heat."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<text class="sc-zone sc-dim" x="30" y="68">CYTOSOL</text>
+<rect class="etc-mito" x="130" y="62" width="700" height="352" rx="48"/>
+<path class="etc-o2path" d="M900 150 Q830 170 690 198"/>
+<path class="etc-atppath" d="M782 300 Q840 322 902 344"/>
+<text class="sc-zone" x="150" y="88">MITOCHONDRION</text>
+<text class="sc-zone" x="590" y="88">INTERMEMBRANE SPACE</text>
+<text class="sc-zone" x="150" y="410">MATRIX</text>
+<path class="etc-memb" d="M150 240 L210 232 L270 248 L330 232 L390 248 L450 232 L510 248 L570 232 L630 248 L690 232 L750 248 L810 240"/>
+<g id="etcCx1"><rect class="etc-cx etc-c1" x="192" y="212" width="76" height="56" rx="14"/><circle class="etc-sub" cx="216" cy="232" r="8"/><circle class="etc-sub" cx="243" cy="248" r="9"/><circle class="etc-sub" cx="246" cy="228" r="5"/></g><g id="etcCx2"><rect class="etc-cx etc-c2" x="332" y="212" width="76" height="56" rx="14"/><circle class="etc-sub" cx="356" cy="232" r="8"/><circle class="etc-sub" cx="383" cy="248" r="9"/><circle class="etc-sub" cx="386" cy="228" r="5"/></g><g id="etcCx3"><rect class="etc-cx etc-c3" x="472" y="212" width="76" height="56" rx="14"/><circle class="etc-sub" cx="496" cy="232" r="8"/><circle class="etc-sub" cx="523" cy="248" r="9"/><circle class="etc-sub" cx="526" cy="228" r="5"/></g><g id="etcCx4"><rect class="etc-cx etc-c4" x="612" y="212" width="76" height="56" rx="14"/><circle class="etc-sub" cx="636" cy="232" r="8"/><circle class="etc-sub" cx="663" cy="248" r="9"/><circle class="etc-sub" cx="666" cy="228" r="5"/></g>
+<g id="etcSynth"><rect class="etc-chan" x="746" y="212" width="28" height="56" rx="8"/><circle class="etc-head" cx="760" cy="284" r="20"/><g id="etcRotor"><path class="etc-spoke" d="M760 284 L760 268 M760 284 L774 292 M760 284 L746 292"/></g><circle class="etc-hub" cx="760" cy="284" r="4"/></g>
+<g id="etcRes"></g><g id="etcUnc"></g><g id="etcParts"></g><g id="etcOver"></g><g id="etcPanel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>State of the chain</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>inhibitor</i><i>uncoupler</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">none</option><option value="1">antidote (removes the inhibitor or uncoupler)</option><option value="2">supportive oxygen</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How the chain works.</strong> NADH donates electrons at complex I and FADH2 (from succinate dehydrogenase) at complex II. Electrons pass through complex III and complex IV, where oxygen is the final acceptor and is reduced to water. Complexes I, III and IV use the energy to pump protons from the matrix into the intermembrane space. The resulting proton gradient (chemiosmosis) drives protons back through ATP synthase, which makes ATP from ADP and phosphate. Rotenone blocks complex I, cyanide blocks complex IV, and oligomycin blocks ATP synthase; uncouplers carry protons back across the membrane so energy is released as heat instead of ATP. Supportive oxygen keeps the final acceptor supplied, and an antidote is shown as a conceptual removal of the blocking agent. This is standard teaching in biochemistry and pharmacology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> An antidote that removes the inhibitor or uncoupler, and supportive oxygen. These are teaching toggles that show which step each idea acts on, not a recommendation for any patient or any specific drug.</li></ul>
+<p><strong>What was simplified.</strong> Mobile carriers (ubiquinone and cytochrome c), the Q cycle, proton counts per complex, ATP yield per donor, reactive oxygen species, brown fat and regulated uncoupling proteins, specific antidotes for each poison, and all doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"CX":[230,370,510,650],"S":{"level":{"label":"State of the chain","a":[0,1,2],"names":["normal","inhibitor","uncoupler"],"ticks":["normal","inhibitor","uncoupler"],"start":0},"settings":[{"label":"none"},{"label":"antidote (removes the inhibitor or uncoupler)"},{"label":"supportive oxygen"}],"drugNames":["no treatment","an antidote","supportive oxygen"],"status":"Chain: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const t = S.level.a[level];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  let E = [0.78, 0.12, 0.92][t], G = [0.78, 0.1, 0.12][t], A = [0.82, 0.08, 0.1][t], O = [0.75, 0.12, 0.9][t], Heat = [0.16, 0.08, 0.88][t];
+  let inh = t === 1 ? 0.9 : 0, unc = t === 2 ? 0.9 : 0;
+  const ant = drug === 1 && t !== 0 ? 1 : 0;
+  if (ant && t === 1) { const k = 0.88; E = E + (0.78 - E) * k; G = G + (0.78 - G) * k; A = A + (0.82 - A) * k; O = O + (0.75 - O) * k; Heat = Heat + (0.16 - Heat) * k; inh = inh * 0.12; }
+  if (ant && t === 2) { const k = 0.82; E = E + (0.78 - E) * k; G = G + (0.78 - G) * k; A = A + (0.82 - A) * k; O = O + (0.75 - O) * k; Heat = Heat + (0.16 - Heat) * k; unc = unc * 0.18; }
+  const oxy = drug === 2 ? 1 : 0;
+  if (oxy) { E = cl(E + 0.06); O = cl(O + 0.2); A = cl(A + (t === 0 ? 0.06 : t === 1 ? 0.03 : 0.01)); Heat = cl(Heat + (t === 2 ? 0.08 : 0.02)); }
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(E, 0.3, 0.6, ["low", "moderate", "high"]), w(G, 0.3, 0.6, ["low", "moderate", "high"]), w(A, 0.3, 0.6, ["low", "moderate", "high"]), w(O, 0.3, 0.6, ["low", "moderate", "high"])];
+  return { t, drug, E, G, A, O, Heat, inh, unc, oxy: drug === 2 ? 1 : 0.35, ant, words, readout: "electron flow " + words[0] + " · proton gradient " + words[1] + " · ATP production " + words[2] + " · oxygen use " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Electron transport chain scene: donors, complexes I to IV, proton pumping and leak, ATP synthase, oxygen to water, ATP export, inhibitors, uncoupler and heat. */
+const etcL = { res: $("etcRes"), unc: $("etcUnc"), parts: $("etcParts"), over: $("etcOver"), panel: $("etcPanel"), rotor: $("etcRotor") };
+const etcCX = SC.CX;
+const etcETrack = track([[230, 240], [370, 240], [510, 240], [650, 240]]);
+const etcATrack = track([[760, 305], [825, 330], [902, 344]]);
+function etcPool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, k: 0, s: 1, tx: 0, ty: 0 }; }); }
+const etcFree = (pl) => pl.find((p) => !p.on);
+function etcEmit(p, x, y, k) { p.on = true; p.x = x; p.y = y; p.t = 0; p.u = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function etcKill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+const etcElecs = etcPool(22, () => mk("circle", { class: "p-elec", r: 3 }, etcL.parts));
+const etcNadh = etcPool(12, () => mk("circle", { class: "p-nadh", r: 3.4 }, etcL.parts));
+const etcFadh = etcPool(10, () => mk("rect", { class: "p-fadh", x: -3, y: -3, width: 6, height: 6, rx: 1.2 }, etcL.parts));
+const etcPump = etcPool(20, () => mk("circle", { class: "p-prot", r: 2.8 }, etcL.parts));
+const etcBack = etcPool(14, () => mk("circle", { class: "p-prot", r: 2.8 }, etcL.parts));
+const etcLeak = etcPool(14, () => mk("circle", { class: "p-prot", r: 2.8 }, etcL.parts));
+const etcAtpP = etcPool(16, () => mk("circle", { class: "p-atpp", r: 3.4 }, etcL.parts));
+const etcO2P = etcPool(12, () => mk("circle", { class: "p-o2p", r: 3.2 }, etcL.parts));
+const etcWat = etcPool(10, () => mk("path", { class: "p-water", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, etcL.parts));
+const etcHeatP = etcPool(10, () => mk("path", { class: "p-heatp", d: "M0 6 Q-4 0 0 -6 Q4 0 0 6" }, etcL.parts));
+const etcAntP = etcPool(8, () => mk("circle", { class: "p-ant", r: 3 }, etcL.parts));
+const etcResDots = [], etcUncDots = [], etcBlk = {};
+let etcPillRot = null, etcPillCya = null, etcPillOli = null, etcPillUnc = null, etcPillAnt = null;
+function etcBlock(id, x, y) { const g = mk("g", { opacity: "0" }, etcL.over); mk("circle", { class: "etc-blk-c", cx: x, cy: y, r: 9 }, g); mk("path", { class: "etc-blk-l", d: "M" + (x - 4.5) + " " + (y - 4.5) + "L" + (x + 4.5) + " " + (y + 4.5) + "M" + (x + 4.5) + " " + (y - 4.5) + "L" + (x - 4.5) + " " + (y + 4.5) }, g); etcBlk[id] = g; }
+const etcGG = {};
+function etcInit() {
+  for (let r = 0; r < 2; r++) for (let i = 0; i < 15; i++) { const c = mk("circle", { class: "p-prot", r: 2.8, cx: 172 + i * 42 + r * 18, cy: 104 + r * 20, opacity: "0" }, etcL.res); etcResDots.push(c); }
+  for (let i = 0; i < 8; i++) { const c = mk("circle", { class: "p-prot", r: 2.6, cx: 200 + i * 72, cy: 174, opacity: "0" }, etcL.res); etcResDots.push(c); }
+  [180, 285, 425, 565, 705].forEach((x) => { const c = mk("circle", { class: "etc-uncdot", cx: x, cy: 240, r: 5, opacity: "0" }, etcL.unc); etcUncDots.push(c); });
+  etcBlock("rot", 230, 212); etcBlock("cya", 650, 212); etcBlock("oli", 760, 212);
+  const O = etcL.over;
+  pill(O, "Complex I", 230, 214, 230, 150, "Complex I (NADH dehydrogenase). NADH donates electrons here. It pumps protons into the intermembrane space. Rotenone blocks it.");
+  pill(O, "Complex II", 370, 214, 370, 150, "Complex II (succinate dehydrogenase). FADH2 donates electrons here. It does not pump protons.");
+  pill(O, "Complex III", 510, 214, 510, 150, "Complex III. Electrons pass through it on the way to complex IV, and it pumps protons into the intermembrane space.");
+  pill(O, "Complex IV", 650, 214, 650, 150, "Complex IV. It passes electrons to oxygen and pumps protons. Cyanide blocks it, so oxygen cannot be used.");
+  pill(O, "ATP synthase", 760, 214, 760, 150, "ATP synthase. Protons flow back through it into the matrix and its rotor turns, making ATP. Oligomycin blocks it.");
+  pill(O, "Protons", 430, 106, 430, 88, "Protons pumped into the intermembrane space. Their build up is the proton gradient that drives ATP synthase.");
+  pill(O, "Oxygen", 675, 198, 882, 140, "Oxygen is the final electron acceptor at complex IV. It joins electrons and protons to form water.");
+  pill(O, "Inner membrane", 440, 238, 440, 302, "The inner mitochondrial membrane. The complexes sit in it. It holds back protons, except through ATP synthase, unless an uncoupler leaks them across.");
+  pill(O, "Electrons", 300, 240, 300, 302, "Electrons donated by NADH and FADH2, carried along the chain from complex to complex toward oxygen.");
+  pill(O, "NADH", 200, 326, 165, 378, "NADH, made in the matrix, donates electrons at complex I and becomes NAD plus a proton.");
+  pill(O, "FADH2", 345, 326, 350, 378, "FADH2, made at complex II itself in the citric acid cycle, donates electrons at complex II and becomes FAD.");
+  pill(O, "Water", 650, 295, 640, 378, "Water, formed at complex IV when oxygen accepts electrons and joins protons.");
+  pill(O, "ATP", 760, 302, 760, 378, "ATP made by ATP synthase in the matrix. It leaves the mitochondrion to supply the cytosol.");
+  etcPillRot = pill(O, "Rotenone", 222, 218, 172, 195, "Rotenone blocks complex I, so NADH electrons cannot enter the chain.");
+  etcPillCya = pill(O, "Cyanide", 642, 218, 590, 195, "Cyanide blocks complex IV, so electrons cannot reach oxygen and the whole chain backs up.");
+  etcPillOli = pill(O, "Oligomycin", 750, 218, 785, 195, "Oligomycin blocks ATP synthase, so protons cannot flow back and ATP is not made, even though the gradient builds.");
+  etcPillUnc = pill(O, "Uncoupler", 440, 238, 440, 195, "An uncoupler carries protons back across the inner membrane, bypassing ATP synthase. The gradient is lost as heat.");
+  etcPillAnt = pill(O, "Antidote", 130, 180, 65, 180, "An antidote, shown here as a concept: it removes or neutralises the inhibitor or uncoupler so the chain can run again.");
+  [etcPillRot, etcPillCya, etcPillOli, etcPillUnc, etcPillAnt].forEach((g) => { g.style.opacity = "0"; g.style.pointerEvents = "none"; });
+  const P = etcL.panel, y0 = 478, h = 52, xs = [140, 320, 500, 680, 840];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: SC.W - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The mitochondrion";
+  [["ef", "Electron flow", "g-elec", "How fast electrons move from NADH and FADH2 through the complexes to oxygen."], ["pg", "Proton gradient", "g-fl", "How many protons are held in the intermembrane space compared with the matrix."], ["atp", "ATP made", "g-atp", "How fast ATP synthase makes ATP for the cell."], ["oxy", "Oxygen used", "g-oxy", "How fast oxygen is used as the final electron acceptor at complex IV."], ["heat", "Heat", "g-heat", "Energy released as heat. An uncoupler turns the proton gradient into heat instead of ATP."]]
+    .forEach(([id, name, cls, tip], i) => { etcGG[id] = gauge(P, xs[i], y0 + 2, h, 20, cls, name, tip); });
+}
+const etcSm = { E: 0.7, G: 0.7, A: 0.7, O: 0.7, Heat: 0.2, inh: 0, unc: 0, oxy: 0.35, ant: 0 };
+const etcAcc = { elec: 0, nadh: 0, fadh: 0, pump: 0, back: 0, leak: 0, atp: 0, o2: 0, wat: 0, heat: 0, ant: 0 };
+function etcStep(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
+  etcSm.E = lerp(etcSm.E, m.E, k2); etcSm.G = lerp(etcSm.G, m.G, k2); etcSm.A = lerp(etcSm.A, m.A, k2); etcSm.O = lerp(etcSm.O, m.O, k2); etcSm.Heat = lerp(etcSm.Heat, m.Heat, k2); etcSm.inh = lerp(etcSm.inh, m.inh, k1); etcSm.unc = lerp(etcSm.unc, m.unc, k1); etcSm.oxy = lerp(etcSm.oxy, m.oxy, k1); etcSm.ant = lerp(etcSm.ant, m.ant, k1);
+  etcResDots.forEach((c, i) => { const th = (i + 1) / etcResDots.length; c.setAttribute("opacity", clamp((etcSm.G - th * 0.85) * 5).toFixed(2)); });
+  etcUncDots.forEach((c) => c.setAttribute("opacity", etcSm.unc.toFixed(2)));
+  Object.keys(etcBlk).forEach((id) => etcBlk[id].setAttribute("opacity", etcSm.inh.toFixed(2)));
+  etcPillRot.style.opacity = etcSm.inh.toFixed(2); etcPillCya.style.opacity = etcSm.inh.toFixed(2); etcPillOli.style.opacity = etcSm.inh.toFixed(2);
+  etcPillUnc.style.opacity = etcSm.unc.toFixed(2); etcPillAnt.style.opacity = etcSm.ant.toFixed(2);
+  [etcPillRot, etcPillCya, etcPillOli].forEach((g) => { g.style.pointerEvents = etcSm.inh > 0.4 ? "auto" : "none"; });
+  etcPillUnc.style.pointerEvents = etcSm.unc > 0.4 ? "auto" : "none"; etcPillAnt.style.pointerEvents = etcSm.ant > 0.4 ? "auto" : "none";
+  etcL.rotor.setAttribute("transform", "rotate(" + f1((tm / 6 * clamp(etcSm.A * 1.4)) % 360) + " 760 284)");
+  /* donors in the matrix move to their complex */
+  etcAcc.nadh += dt * (0.5 + etcSm.E * 3.2); while (etcAcc.nadh >= 1) { etcAcc.nadh--; const p = etcFree(etcNadh); if (p) { etcEmit(p, rnd(150, 262), rnd(336, 364)); p.tx = 230; p.ty = 272; } }
+  etcNadh.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 44 * dt; p.y += (dy / d) * 44 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 7) etcKill(p); });
+  etcAcc.fadh += dt * (0.4 + etcSm.E * 2.4); while (etcAcc.fadh >= 1) { etcAcc.fadh--; const p = etcFree(etcFadh); if (p) { etcEmit(p, rnd(312, 428), rnd(336, 364)); p.tx = 370; p.ty = 272; } }
+  etcFadh.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 44 * dt; p.y += (dy / d) * 44 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 7) etcKill(p); });
+  /* electrons along the membrane, entering at I or at II */
+  etcAcc.elec += dt * (0.4 + etcSm.E * 5); while (etcAcc.elec >= 1) { etcAcc.elec--; const p = etcFree(etcElecs); if (p) { const fromII = Math.random() < 0.35; etcEmit(p, 0, 0, fromII ? 1 : 0); p.u = fromII ? 140 / 420 : 0; } }
+  etcElecs.forEach((p) => { if (!p.on) return; p.u += dt * 0.22 * (0.35 + etcSm.E); const q = etcETrack.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y + Math.sin(tm / 180 + p.u * 9) * 2.5) + ")"); if (p.u >= 1) etcKill(p); });
+  /* protons pumped at I, III and IV from matrix to intermembrane space */
+  etcAcc.pump += dt * etcSm.E * (1 - etcSm.inh * 0.6) * 5; while (etcAcc.pump >= 1) { etcAcc.pump--; const p = etcFree(etcPump); if (p) { const cx = pick([230, 510, 650]); etcEmit(p, cx + rnd(-9, 9), 272); p.tx = cx + rnd(-12, 12); p.ty = rnd(100, 132); } }
+  etcPump.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 56 * dt; p.y += (dy / d) * 56 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 7) etcKill(p); });
+  /* protons return through ATP synthase */
+  etcAcc.back += dt * (0.3 + etcSm.A * 5); while (etcAcc.back >= 1) { etcAcc.back--; const p = etcFree(etcBack); if (p) { etcEmit(p, 760 + rnd(-7, 7), 176); p.tx = 760; p.ty = 288; } }
+  etcBack.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 68 * dt; p.y += (dy / d) * 68 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 7) etcKill(p); });
+  /* uncoupler leak straight back across the membrane */
+  etcAcc.leak += dt * etcSm.unc * 7; while (etcAcc.leak >= 1) { etcAcc.leak--; const p = etcFree(etcLeak); if (p) { etcEmit(p, rnd(175, 720), 176); p.tx = p.x; p.ty = rnd(292, 318); } }
+  etcLeak.forEach((p) => { if (!p.on) return; p.y += 62 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.y - 240) / 90).toFixed(2)); if (p.y > p.ty) etcKill(p); });
+  /* ATP leaves the synthase head for the cytosol */
+  etcAcc.atp += dt * (0.2 + etcSm.A * 3.4); while (etcAcc.atp >= 1) { etcAcc.atp--; const p = etcFree(etcAtpP); if (p) { etcEmit(p, 760, 305); p.u = 0; } }
+  etcAtpP.forEach((p) => { if (!p.on) return; p.u += dt * 0.3; const q = etcATrack.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); p.e.setAttribute("opacity", p.u > 0.85 ? clamp(1 - (p.u - 0.85) / 0.15).toFixed(2) : "1"); if (p.u >= 1) etcKill(p); });
+  /* oxygen from the cytosol to complex IV, then water into the matrix */
+  etcAcc.o2 += dt * (0.8 + etcSm.O * 3 + etcSm.oxy * 1.6); while (etcAcc.o2 >= 1) { etcAcc.o2--; const p = etcFree(etcO2P); if (p) { etcEmit(p, 908, rnd(148, 176)); p.tx = 668; p.ty = 204; } }
+  etcO2P.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 72 * dt; p.y += (dy / d) * 72 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 8) etcKill(p); });
+  etcAcc.wat += dt * etcSm.O * 3; while (etcAcc.wat >= 1) { etcAcc.wat--; const p = etcFree(etcWat); if (p) etcEmit(p, 650 + rnd(-8, 8), 274); }
+  etcWat.forEach((p) => { if (!p.on) return; p.y += 42 * dt; p.t += dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.6).toFixed(2)); if (p.t > 1.6) etcKill(p); });
+  /* heat rises off the membrane, mostly with an uncoupler */
+  etcAcc.heat += dt * (0.3 + etcSm.Heat * 5); while (etcAcc.heat >= 1) { etcAcc.heat--; const p = etcFree(etcHeatP); if (p) { etcEmit(p, rnd(175, 790), 224); p.t = 0; } }
+  etcHeatP.forEach((p) => { if (!p.on) return; p.t += dt; p.y -= 36 * dt; p.x += Math.sin(tm / 220 + p.t * 4) * 12 * dt; p.e.setAttribute("transform", "translate(" + f1(clamp(p.x, 150, 815)) + " " + f1(Math.max(92, p.y)) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 3).toFixed(2)); if (p.t > 3 || p.y < 94) etcKill(p); });
+  /* antidote particles travel to the blocked sites */
+  etcAcc.ant += dt * etcSm.ant * 3.4; while (etcAcc.ant >= 1) { etcAcc.ant--; const p = etcFree(etcAntP); if (p) { etcEmit(p, 48, 182); const tgt = m.t === 1 ? pick([[230, 212], [650, 212], [760, 212]]) : [440, 240]; p.tx = tgt[0]; p.ty = tgt[1]; } }
+  etcAntP.forEach((p) => { if (!p.on) return; const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy) || 1; p.x += (dx / d) * 76 * dt; p.y += (dy / d) * 76 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 9) etcKill(p); });
+  etcGG.ef.set(etcSm.E, wordOf(etcSm.E, 0.3, 0.6, ["low", "moderate", "high"])); etcGG.pg.set(etcSm.G, wordOf(etcSm.G, 0.3, 0.6, ["low", "moderate", "high"])); etcGG.atp.set(etcSm.A, wordOf(etcSm.A, 0.3, 0.6, ["low", "moderate", "high"])); etcGG.oxy.set(etcSm.O, wordOf(etcSm.O, 0.3, 0.6, ["low", "moderate", "high"])); etcGG.heat.set(etcSm.Heat, wordOf(etcSm.Heat, 0.3, 0.6, ["low", "moderate", "high"]));
+}
+run({ init: etcInit, step: etcStep });
+</script></body></html>
