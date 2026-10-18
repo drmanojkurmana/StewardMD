@@ -52,13 +52,14 @@ const body = `
 <path class="ty-glass" d="M58 88L106 88L100 146L64 146Z"/>
 <path class="ty-water" d="M62 104L102 104L99 142L65 142Z"/>
 <path class="ty-arrow" d="M112 118C135 128 150 140 168 158"/>
-<path class="ty-bowel" d="M190 260C180 180 230 122 312 120C392 118 440 164 426 232C416 286 360 316 300 306C254 298 224 284 218 250"/>
+<g id="bowelSlot"></g>
 <ellipse class="ty-peyer" cx="272" cy="296" rx="20" ry="9" transform="rotate(-12 272 296)"/>
 <ellipse class="ty-peyer" cx="332" cy="302" rx="20" ry="9" transform="rotate(-4 332 302)"/>
 <ellipse class="ty-peyer" cx="392" cy="278" rx="18" ry="8" transform="rotate(38 392 278)"/>
+<ellipse id="gutHot" class="ty-guthot" cx="300" cy="215" rx="105" ry="105" opacity="0"/>
 <rect class="ty-skin" x="545" y="76" width="180" height="140" rx="12"/>
-<path class="ty-liver" d="M758 108C790 82 880 78 922 100C934 122 928 148 900 156L772 156C754 142 748 124 758 108Z"/>
-<path class="ty-gb" d="M824 152C812 172 816 196 832 206C850 200 856 174 846 152Z"/>
+<ellipse id="heat" class="ty-heat" cx="635" cy="146" rx="95" ry="72" opacity="0"/>
+<g id="liverSlot"></g>
 <rect class="sc-lumen" x="520" y="300" width="412" height="52" rx="10"/>
 <g id="bac"></g><g id="vbac"></g><g id="rbcs"></g><g id="macs"></g>
 <g id="rose"></g><g id="gbdots"></g><g id="ulcer"></g><g id="parts"></g>
@@ -69,9 +70,9 @@ buildScene({
   id: "typhoid-fever", fig: "Fig 1", title: "Typhoid fever: bowel to bloodstream and back", W, H, body,
   label: "An animated small bowel, bloodstream, skin and gallbladder in typhoid fever. Salmonella Typhi is taken in with food or water, invades the small bowel over the Peyer patches, rides inside macrophages into the blood, and causes a stepwise fever and rose spots. Later the patches ulcerate and may perforate, and bacteria may settle in the gallbladder as a carrier state. Gauges show bacteraemia, fever, rose spots, bowel ulceration, perforation and the carrier state. Treatment choices include an antibiotic, fluids and surgery for perforation.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "typhoid.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
-  extraCss: `.ty-glass{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6}.ty-water{fill:var(--c-fl);opacity:.45}.ty-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-dasharray:4 3;marker-end:url(#arr)}.ty-bowel{fill:none;stroke:var(--c-endo);stroke-width:30;stroke-linecap:round;opacity:.8}.ty-peyer{fill:var(--c-mac);opacity:.65;stroke:color-mix(in srgb,var(--c-mac) 55%,#000);stroke-width:.8}.ty-skin{fill:color-mix(in srgb,var(--c-eos) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}.ty-rose{fill:var(--c-bad);opacity:.55}.ty-liver{fill:color-mix(in srgb,var(--c-bad) 42%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}.ty-gb{fill:var(--c-no);opacity:.75;stroke:color-mix(in srgb,var(--c-no) 55%,#000);stroke-width:1}.ty-gbdot{--cc:var(--c-bac)}.ty-ulcer-rim{fill:var(--c-bad);opacity:.55}.ty-ulcer-hole{fill:#2a1215}.ty-stitch{stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}.ty-leak{fill:var(--c-bad);opacity:.8}`,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "typhoid.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antibiotic",
+  extraCss: `.ty-glass{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6}.ty-water{fill:var(--c-fl);opacity:.45}.ty-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-dasharray:4 3;marker-end:url(#arr)}.ty-peyer{fill:var(--c-mac);opacity:.65;stroke:color-mix(in srgb,var(--c-mac) 55%,#000);stroke-width:.8}.ty-guthot{fill:var(--c-bad);stroke:none}.ty-skin{fill:color-mix(in srgb,var(--c-eos) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}.ty-heat{fill:var(--c-bad);stroke:none}.ty-rose{fill:var(--c-bad);stroke:none;opacity:.55}.ty-ulcer-rim{fill:var(--c-bad);opacity:.55}.ty-ulcer-hole{fill:#2a1215;stroke:none}.ty-stitch{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}.ty-leak{fill:var(--c-bad);stroke:none;opacity:.8}.p-tybac{--cc:var(--c-bac)}.ty-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}`,
   sourcesLis: [
     "<strong>How typhoid fever develops.</strong> Salmonella Typhi is taken in with contaminated food or water, reaches the small bowel and invades the lining over the Peyer patches. It is taken up by macrophages but can survive inside them, riding to lymph tissue and into the blood. The resulting bacteraemia gives a fever that climbs in steps and then stays high, with faint pink rose spots on the trunk. As the swollen Peyer patches break down, the bowel wall ulcerates and may bleed or perforate, usually later in the illness. After recovery, bacteria may persist in the gallbladder and be shed in stool as a carrier state. This is standard teaching in medicine and infectious-disease texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> An antibiotic clears bacteria from the blood and bowel; fluids alone support the patient without clearing the infection; surgery is shown for perforation, closing the hole without clearing bacteria elsewhere. These are teaching toggles only.",

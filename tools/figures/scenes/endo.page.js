@@ -1,10 +1,50 @@
-/* Endocarditis scene: damaged valve, bacteraemia, vegetation, septic emboli, regurgitation, immune complexes and gauges. */
+/* Endocarditis scene: infected valve inside a real heart, septic emboli to brain, kidney and skin. */
 const layers = { flow: $("flow"), veg: $("veg"), parts: $("parts"), over: $("over"), panel: $("panel") };
-const flowTrack = track([[118, 198], [200, 198], [252, 244], [260, 282], [268, 334], [360, 330], [470, 328], [612, 328]]);
-const brainTrack = track([[612, 328], [662, 262], [700, 196], [746, 164]]);
-const kidneyTrack = track([[612, 328], [664, 302], [700, 290], [730, 284]]);
-const skinTrack = track([[612, 328], [658, 350], [690, 364], [716, 374]]);
-const organTracks = [brainTrack, kidneyTrack, skinTrack];
+let heartO = null, brainO = null, kidneyO = null, skinO = null;
+let VX = 245, VY = 256, JX = 612, JY = 328, AX = 456, AY = 136;
+let flowTrack = null, embTrack = null, organTracks = [];
+let brainDot = [780, 128], kidneyDot = [769, 273], skinDot = [790, 400];
+let brainAnchor = [780, 128], kidneyAnchor = [809, 278], skinAnchor = [790, 400];
+let capEl = null, capDrug = -1;
+function initOrgans() {
+  heartO = organ($("heartSlot"), "heart", 245, 250, 190, {});
+  brainO = organ($("brainSlot"), "brain", 795, 140, 185, {});
+  kidneyO = organ($("kidneySlot"), "kidney", 795, 285, 120, {});
+  skinO = organ($("skinSlot"), "skin", 795, 396, 170, { h: 80 });
+  VX = Math.round(heartO.x); VY = Math.round(heartO.y + 6);
+  const HP = heartO.ports, ao = HP.aorta || HP.out, inp = HP.in || HP.out;
+  const J = [JX, JY];
+  const mx = (ao[0] + J[0]) / 2 + 60, my = Math.min(ao[1], J[1]) - 70;
+  const q = (t) => { const u = 1 - t; return [u * u * ao[0] + 2 * u * t * mx + t * t * J[0], u * u * ao[1] + 2 * u * t * my + t * t * J[1]]; };
+  const q1 = q(0.33), q2 = q(0.66), qm = q(0.5);
+  AX = qm[0]; AY = qm[1];
+  $("vesselIn").setAttribute("d", "M40 " + f1(inp[1]) + " L" + f1(inp[0]) + " " + f1(inp[1]));
+  $("vesselOut").setAttribute("d", "M" + f1(ao[0]) + " " + f1(ao[1]) + " Q" + f1(mx) + " " + f1(my) + " " + f1(J[0]) + " " + f1(J[1]));
+  flowTrack = track([[40, inp[1]], inp, [VX, VY], ao, q1, q2, J]);
+  embTrack = track([[VX, VY], ao, q1, q2, J]);
+  const bc = brainO.ports.carotid || brainO.ports.parenchyma;
+  const kc = kidneyO.ports.hilum || kidneyO.ports.cortex;
+  const sd = skinO.ports.dermis || [skinO.x, skinO.y];
+  const bp = brainO.ports.parenchyma || bc, kp = kidneyO.ports.cortex || kc;
+  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  organTracks = [track([J, mid(J, bc), bc]), track([J, mid(J, kc), kc]), track([J, mid(J, sd), sd])];
+  const bd = (p) => "M" + f1(J[0]) + " " + f1(J[1]) + " L" + f1(p[0]) + " " + f1(p[1]);
+  $("brBrain").setAttribute("d", bd(bc));
+  $("brKidney").setAttribute("d", bd(kc));
+  $("brSkin").setAttribute("d", bd(sd));
+  brainDot = [bp[0], bp[1]]; kidneyDot = [kc[0], kc[1]]; skinDot = [sd[0], sd[1]];
+  brainAnchor = [bp[0], bp[1]]; kidneyAnchor = [kp[0], kp[1]]; skinAnchor = [sd[0], sd[1]];
+  $("valveSite").setAttribute("transform", "translate(" + VX + " " + VY + ")");
+  $("brainSpot").setAttribute("transform", "translate(" + f1(bp[0]) + " " + f1(bp[1]) + ")");
+  $("kidneySpot").setAttribute("transform", "translate(" + f1(kp[0]) + " " + f1(kp[1]) + ")");
+  $("skinSpot").setAttribute("transform", "translate(" + f1(sd[0]) + " " + f1(sd[1]) + ")");
+}
+function capText(d) {
+  if (d === 1) return "Antibiotic kills bacteria in the blood. The growth shrinks but the torn valve still leaks.";
+  if (d === 2) return "Valve surgery removes the infected mass and stops the leak. Bacteria remain in the blood.";
+  if (d === 3) return "Antibiotic plus valve surgery. Bacteria cleared, mass removed and the leak fixed.";
+  return "No treatment. Bacteria coat the valve and clots travel to the brain, kidney and skin.";
+}
 /* ---- red cells and bacteria riding the flow ---- */
 const rbcs = [], bacs = [];
 function initFlow() {
@@ -15,23 +55,26 @@ function initFlow() {
 }
 /* ---- vegetation: a friable cluster sitting on the leaflet ---- */
 const vegCells = [];
+let fibrinG = null;
 function initVeg() {
+  fibrinG = mk("g", {}, layers.veg);
+  for (let j = 0; j < 7; j++) mk("path", { class: "fibrin", d: "M" + f1(-20 + j * 6.5) + " -14L" + f1(-15 + j * 6) + " 12" }, fibrinG);
   [[0, 0, 13], [-14, -6, 9], [13, -7, 10], [-8, 8, 8], [11, 7, 9], [0, -13, 8], [-20, 3, 7], [20, -1, 7]].forEach(([x, y, r], i) => {
     const g = cell(layers.veg, { cls: i % 3 === 0 ? "bac" : "plt", r, seed: i * 2 + 1, wob: 0.18, n: 8 });
-    vegCells.push({ g, x: 262 + x, y: 258 + y });
+    vegCells.push({ g, dx: x, dy: y });
   });
-  for (let j = 0; j < 7; j++) mk("path", { class: "fibrin", d: "M" + f1(244 + j * 6) + " 246L" + f1(250 + j * 5) + " 268" }, layers.veg);
+  fibrinG.setAttribute("transform", "translate(" + VX + " " + VY + ")");
 }
 /* ---- particle pools ---- */
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0, tr: null }; }); }
 const emboli = pool(16, () => { const g = mk("g", {}, layers.parts); mk("circle", { class: "sc-p p-emb", r: 4.2 }, g); mk("circle", { class: "cl-h", r: 1.3, cx: -1, cy: -1 }, g); return g; });
 const icx = pool(22, () => mk("path", { class: "sc-p p-icx", d: "M0 -4L1.4 -1.4L4 0L1.4 1.4L0 4L-1.4 1.4L-4 0L-1.4 -1.4Z" }, layers.parts));
-const reg = pool(18, () => mk("circle", { class: "p-reg", r: 2.6 }, layers.parts));
-const pills = pool(10, () => { const g = mk("g", {}, layers.parts); mk("rect", { class: "p-pill", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); return g; });
+const reg = pool(18, () => mk("circle", { class: "p-reg", r: 3 }, layers.parts));
+const caps = pool(12, () => { const g = mk("g", {}, layers.parts); mk("rect", { class: "p-pill", x: -4, y: -2, width: 8, height: 4, rx: 2 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2, width: 4, height: 4, rx: 2 }, g); return g; });
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.tr = null; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-/* ---- labels and gauges ---- */
+/* ---- labels, caption and gauges ---- */
 const gg = {};
 function initPanel() {
   const P = layers.panel, y0 = 478, h = 52, xs = [100, 240, 380, 520, 660, 800];
@@ -45,61 +88,69 @@ function initPanel() {
     ["hf", "Heart failure", "g-eos", "The ventricle fails when a severe regurgitant leak overloads it. This is the main reason for urgent valve surgery."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Damaged valve", 226, 248, 170, 108, "Damaged valve leaflet: a previously abnormal or injured leaflet loses its smooth lining, so platelets and fibrin settle on it and bacteria can stick. A normal valve can still be attacked in acute disease.");
-  pill(ox, "Vegetation", 262, 252, 170, 428, "Vegetation: the friable infected mass on the leaflet, made of bacteria buried in fibrin and platelets. It grows, sheds emboli and eats into the valve.");
-  pill(ox, "Bacteraemia", 470, 322, 520, 108, "Bacteraemia: bacteria circulating in the blood, from a portal such as teeth, skin, a catheter line or injecting. They stick to the damaged valve and also form immune complexes over time.");
-  pill(ox, "Septic emboli", 640, 300, 565, 185, "Septic emboli: infected fragments that break off the vegetation and travel downstream to lodge in the brain, kidney, skin and other organs, causing infarcts and abscesses.");
-  pill(ox, "Immune complexes", 560, 330, 565, 255, "Immune complexes: antigen and antibody clumps formed during prolonged bacteraemia. They deposit in glomeruli and small skin vessels. They are a feature of the slow subacute course.");
-  pill(ox, "Valve regurgitation", 268, 300, 520, 428, "Valve regurgitation: the perforated or torn leaflet no longer seals, so blood jets backward into the atrium each beat. A severe leak causes heart failure.");
-  pill(ox, "Brain embolus", 800, 142, 795, 84, "Brain: an embolus here causes a stroke, and infected emboli can seed a brain abscess or a mycotic aneurysm.");
-  pill(ox, "Kidney infarct", 800, 278, 795, 330, "Kidney: an embolus causes a wedge infarct and loin pain with blood in the urine. Immune complex deposition separately causes glomerulonephritis.");
-  pill(ox, "Skin lesions", 800, 375, 795, 428, "Skin: small haemorrhagic spots and painful or painless nodules from septic emboli and immune complex vasculitis, classically on the fingers, toes, palms and soles.");
-  const ab = pill(ox, "Antibiotic", 480, 322, 520, 150, "An antibiotic kills the bacteria in the blood and inside the vegetation. It cannot repair a leaflet that has already been destroyed.");
-  ab.setAttribute("id", "ab-pill");
-  const sx = pill(ox, "Valve surgery", 300, 262, 340, 428, "Valve surgery removes the infected vegetation and tissue and repairs or replaces the valve, restoring its seal. It does not by itself sterilise the blood.");
-  sx.setAttribute("id", "sx-pill");
+  pill(ox, "Valve infection", VX, VY - 26, 170, 96, "Valve infection: bacteria stick to a damaged leaflet and grow into an infected mass that eats into the valve.");
+  pill(ox, "Leaky valve", VX - 54, VY - 84, 72, 345, "Leaky valve: the torn leaflet no longer seals, so blood jets backward each beat. A severe leak causes heart failure.");
+  pill(ox, "Bacteria in blood", AX, AY, 480, 70, "Bacteria in blood: bacteria circulating from a portal such as teeth, skin, a line or injecting. They seed the valve.");
+  pill(ox, "Clots break off", JX, JY, 565, 212, "Clots break off: infected fragments leave the vegetation and travel in the aorta to the brain, kidney and skin.");
+  pill(ox, "Brain", brainDot[0], brainDot[1], 838, 78, "Brain: a lodged fragment blocks a brain vessel and causes a stroke. Infected fragments can seed an abscess.");
+  pill(ox, "Kidney", kidneyDot[0], kidneyDot[1], 795, 360, "Kidney: a lodged fragment causes an infarct with loin pain and blood in the urine. Immune complexes inflame the filters.");
+  pill(ox, "Skin spots", skinDot[0], skinDot[1], 640, 408, "Skin spots: small bleeding spots and tender nodules on fingers, toes, palms and soles from emboli and vessel inflammation.");
+  capEl = mk("text", { class: "en-cap", x: 30, y: 428 }, ox); capEl.textContent = capText(0);
 }
 const sm = { B: 0.2, Vg: 0.4, D: 0.3, R: 0.3, E: 0.2, I: 0.6, HF: 0.3, abx: 0, surg: 0 };
-const acc = { emb: 0, icx: 0, reg: 0, pill: 0 };
-function init() { initFlow(); initVeg(); initPanel(); }
+const acc = { emb: 0, icx: 0, reg: 0, cap: 0 };
+function init() { initOrgans(); initFlow(); initVeg(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 1.1), k2 = Math.min(1, dt * 0.55);
   sm.B = lerp(sm.B, m.B, k2); sm.Vg = lerp(sm.Vg, m.Vg, k2); sm.D = lerp(sm.D, m.D, k2); sm.R = lerp(sm.R, m.R, k1); sm.E = lerp(sm.E, m.E, k2); sm.I = lerp(sm.I, m.I, k2); sm.HF = lerp(sm.HF, m.HF, k2); sm.abx = lerp(sm.abx, m.abx, k1); sm.surg = lerp(sm.surg, m.surg, k1);
-  /* flow: red cells always, bacteria in proportion to bacteraemia */
+  /* flow: red cells always, bacteria in proportion to bacteraemia; antibiotic shrinks them */
   const speed = (0.028 + 0.02 * (1 - sm.HF * 0.5)) * (0.7 + 0.5 * sm.B + 0.3 * m.a);
   rbcs.forEach((r) => { r.u = (r.u + dt * speed * r.v) % 1; const p = flowTrack.at(r.u); place(r.g, p.x, p.y, r.rot + p.a, 1); });
-  const wantB = Math.round(sm.B * bacs.length);
-  bacs.forEach((b, i) => { b.u = (b.u + dt * speed * b.v) % 1; const p = flowTrack.at(b.u); const on = i < wantB; place(b.g, p.x + Math.sin(tm / 300 + i) * 5, p.y + Math.cos(tm / 340 + i) * 5, b.rot + p.a, on ? 1 : 0.001); b.g.style.opacity = on ? 1 : 0; });
-  /* vegetation sways and scales; damage marks and prosthesis follow the model */
+  const wantB = Math.round(sm.B * bacs.length), bScale = 1 - 0.55 * sm.abx;
+  bacs.forEach((b, i) => { b.u = (b.u + dt * speed * b.v) % 1; const p = flowTrack.at(b.u); const on = i < wantB;
+    place(b.g, p.x + Math.sin(tm / 300 + i) * 5, p.y + Math.cos(tm / 340 + i) * 5, b.rot + p.a, on ? bScale : 0.001); b.g.style.opacity = on ? 1 : 0; });
+  /* vegetation sways and scales; glow, damage marks and prosthesis follow the model */
   const vs = 0.25 + 0.95 * sm.Vg;
-  vegCells.forEach((c, i) => place(c.g, c.x + Math.sin(tm / 420 + i * 1.7) * 1.6 * sm.Vg, c.y + Math.cos(tm / 500 + i) * 1.2, Math.sin(tm / 600 + i) * 8, vs));
-  layers.veg.style.opacity = (1 - sm.surg * 0.85).toFixed(2);
-  $("dmgMark").setAttribute("opacity", clamp(sm.D * (1 - sm.surg * 0.6)).toFixed(2));
-  $("leaflets").style.opacity = (1 - sm.surg * 0.55).toFixed(2);
-  $("prosth").setAttribute("opacity", sm.surg.toFixed(2));
+  vegCells.forEach((c, i) => place(c.g, VX + c.dx + Math.sin(tm / 420 + i * 1.7) * 1.6 * sm.Vg, VY + c.dy + Math.cos(tm / 500 + i) * 1.2, Math.sin(tm / 600 + i) * 8, vs));
+  layers.veg.style.opacity = (1 - sm.surg * 0.95).toFixed(2);
+  $("glow").setAttribute("opacity", clamp(sm.Vg * 0.45 + sm.B * 0.2).toFixed(2));
+  $("dmgMark").setAttribute("opacity", clamp(sm.D * (1 - sm.surg)).toFixed(2));
+  $("leaflets").style.opacity = (1 - sm.surg * 0.9).toFixed(2);
+  const pr = $("prosth");
+  pr.setAttribute("opacity", sm.surg.toFixed(2));
+  pr.setAttribute("transform", "scale(" + (0.7 + 0.3 * sm.surg).toFixed(3) + ")");
+  $("jetCone").setAttribute("opacity", clamp(sm.R * 0.85).toFixed(2));
   /* septic emboli shed from the vegetation and travel to the organs */
-  acc.emb += dt * sm.E * 2.6; while (acc.emb >= 1) { acc.emb--; const p = free(emboli); if (p) emit(p, 268, 258, 0, 0, Math.floor(Math.random() * 3)); }
+  acc.emb += dt * (0.4 + sm.E * 2.6); while (acc.emb >= 1) { acc.emb--; const p = free(emboli); if (p) { emit(p, VX, VY, 0, 0, Math.floor(Math.random() * 3)); p.tr = organTracks[p.k]; } }
   emboli.forEach((p) => { if (!p.on) return; p.t += dt;
-    if (p.t < 0.7) { const q = flowTrack.at(0.52 + p.t * 0.55); p.x = q.x; p.y = q.y; }
-    else { p.u = Math.min(1, (p.t - 0.7) / 1.5); const q = organTracks[p.k].at(p.u); p.x = q.x; p.y = q.y; }
+    if (p.t < 0.8) { const p2 = embTrack.at(p.t / 0.8); p.x = p2.x; p.y = p2.y; }
+    else { p.u = Math.min(1, (p.t - 0.8) / 1.4); const p2 = p.tr.at(p.u); p.x = p2.x; p.y = p2.y; }
     p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")");
-    p.e.setAttribute("opacity", p.u >= 1 ? clamp(1 - (p.t - 2.2)).toFixed(2) : "1"); if (p.t > 3) kill(p); });
-  $("brainSpot").setAttribute("opacity", clamp(sm.E * 1.15).toFixed(2));
-  $("kidSpot").setAttribute("opacity", clamp(Math.max(sm.E, sm.I * 0.85)).toFixed(2));
-  $("skinSpot").setAttribute("opacity", clamp(Math.max(sm.E, sm.I)).toFixed(2));
-  /* immune complexes drift in the aorta and settle toward kidney and skin */
-  acc.icx += dt * sm.I * 5; while (acc.icx >= 1) { acc.icx--; const p = free(icx); if (p) emit(p, rnd(440, 600), rnd(316, 342), rnd(6, 16), rnd(-5, 5), Math.random() < 0.5 ? 1 : 2); }
-  icx.forEach((p) => { if (!p.on) return; p.t += dt; p.u = Math.min(1, p.t / 2.4); const q = organTracks[p.k].at(p.u * 0.9); p.x = lerp(p.x, q.x, dt * 0.8); p.y = lerp(p.y, q.y, dt * 0.8);
+    p.e.setAttribute("opacity", p.t > 2 ? clamp(1 - (p.t - 2)).toFixed(2) : "1"); if (p.t > 3) kill(p); });
+  const bop = clamp(sm.E * 1.15), kop = clamp(Math.max(sm.E, sm.I * 0.85)), sop = clamp(Math.max(sm.E, sm.I));
+  place($("brainSpot"), brainAnchor[0], brainAnchor[1], 0, 0.75 + 0.45 * sm.E);
+  place($("kidneySpot"), kidneyAnchor[0], kidneyAnchor[1], 0, 0.75 + 0.45 * Math.max(sm.E, sm.I * 0.5));
+  place($("skinSpot"), skinAnchor[0], skinAnchor[1], 0, 0.75 + 0.45 * Math.max(sm.E, sm.I * 0.5));
+  $("brainSpot").setAttribute("opacity", bop.toFixed(2));
+  $("kidneySpot").setAttribute("opacity", kop.toFixed(2));
+  $("skinSpot").setAttribute("opacity", sop.toFixed(2));
+  /* immune complexes drift from the aorta and settle toward kidney and skin */
+  acc.icx += dt * sm.I * 5; while (acc.icx >= 1) { acc.icx--; const p = free(icx); if (p) { emit(p, JX, JY, 0, 0, Math.random() < 0.5 ? 1 : 2); p.tr = organTracks[p.k]; } }
+  icx.forEach((p) => { if (!p.on) return; p.t += dt; p.u = Math.min(1, p.t / 2.2); const p2 = p.tr.at(p.u); p.x = p2.x; p.y = p2.y;
     p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 9) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 3).toFixed(2)); if (p.t > 3) kill(p); });
   /* regurgitant jet: particles thrown backward into the atrium */
-  acc.reg += dt * sm.R * 11; while (acc.reg >= 1) { acc.reg--; const p = free(reg); if (p) emit(p, 260 + rnd(-9, 9), 282, rnd(-9, 9), -rnd(45, 70), 0); }
-  reg.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 26 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.1).toFixed(2)); if (p.t > 1.1) kill(p); });
-  /* antibiotic capsules enter the aorta and hunt the vegetation */
-  acc.pill += dt * sm.abx * 2.2; while (acc.pill >= 1) { acc.pill--; const p = free(pills); if (p) emit(p, rnd(430, 500), 328, 0, 0, 0); }
-  pills.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (262 - p.x) * dt * 0.45 - 14 * dt; p.y += (258 - p.y) * dt * 0.55; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 3.4) / 1.2).toFixed(2)); if (p.t > 4.6) kill(p); });
-  $("ab-pill").style.opacity = sm.abx.toFixed(2); $("sx-pill").style.opacity = sm.surg.toFixed(2);
+  acc.reg += dt * sm.R * 12; while (acc.reg >= 1) { acc.reg--; const p = free(reg); if (p) emit(p, VX + rnd(-6, 6), VY - 4, rnd(-20, -4), -rnd(45, 75), 0); }
+  reg.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 30 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.2).toFixed(2)); if (p.t > 1.2) kill(p); });
+  /* antibiotic capsules enter the aorta, home to the vegetation, sit on it, then fade */
+  acc.cap += dt * sm.abx * 2.4; while (acc.cap >= 1) { acc.cap--; const p = free(caps); if (p) emit(p, rnd(430, 500), 322, 0, 0, 0); }
+  caps.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.k === 0) { p.x += ((VX - p.x) * 0.6 - 14) * dt; p.y += (VY - p.y) * 0.6 * dt;
+      if (Math.hypot(VX - p.x, VY - p.y) < 14) { p.k = 1; p.t = 0; p.vx = rnd(-18, 18); p.vy = rnd(-14, 10); } }
+    if (p.k === 1) { p.e.setAttribute("transform", "translate(" + f1(VX + p.vx) + " " + f1(VY + p.vy) + ") rotate(" + f1(p.t * 40) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.4).toFixed(2)); if (p.t > 1.4) kill(p); }
+    else { p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); if (p.t > 5) kill(p); } });
   /* gauges */
   gg.bac.set(sm.B, wordOf(sm.B, 0.15, 0.45, ["cleared", "low", "high"])); gg.veg.set(sm.Vg, wordOf(sm.Vg, 0.25, 0.6, ["small", "present", "large"])); gg.reg.set(sm.R, wordOf(sm.R, 0.25, 0.6, ["mild", "moderate", "severe"]));
   gg.emb.set(sm.E, wordOf(sm.E, 0.2, 0.5, ["few", "some", "many"])); gg.imm.set(sm.I, wordOf(sm.I, 0.3, 0.6, ["few", "some", "many"])); gg.hf.set(sm.HF, wordOf(sm.HF, 0.25, 0.55, ["none", "strain", "failure"]));
+  if (drug !== capDrug) { capDrug = drug; const t = capText(drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
