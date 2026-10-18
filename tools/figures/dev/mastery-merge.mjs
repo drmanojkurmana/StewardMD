@@ -7,12 +7,18 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const PARTS = path.join(ROOT, "prep/figures/mastery-part"), OUT = path.join(ROOT, "prep/figures/mastery.json");
 export const FIELDS = ["trigger", "target", "mechanism", "manifestation", "intervention", "adverse"];
+const plainLen = (v) => (typeof v === "string" ? v.replace(/\*\*/g, "").trim().length : 0);
 export function problems(e) {
   const out = [];
   for (const f of FIELDS) {
     const v = e && e[f];
-    if (typeof v !== "string" || v.trim().length < 12) { out.push(`${f} missing or too short`); continue; }
-    if (v.trim().split(/\s+/).length > 60) out.push(`${f} over 60 words`);
+    if (typeof v !== "string" || plainLen(v) < 12) { out.push(`${f} missing or too short`); continue; }
+    const plain = v.replace(/\*\*/g, "");
+    if (plain.trim().split(/\s+/).length > 60) out.push(`${f} over 60 words`);
+    const marks = (v.match(/\*\*/g) || []).length;
+    if (marks % 2 || marks > 10) out.push(`${f} has unbalanced or too many ** key-term marks`);
+    if (/\*/.test(plain)) out.push(`${f} has stray asterisks`);
+    if (marks === 0) out.push(`${f} marks no key terms with **`);
     if (/[–—]/.test(v)) out.push(`${f} has an em or en dash`);
     if (/\b\d+(\.\d+)?\s?(mg|mcg|ug|g|ml|mL|units?|IU|mmol|mEq|%)(\/|\b)/.test(v)) out.push(`${f} has a dose or lab number`);
   }

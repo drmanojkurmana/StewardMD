@@ -17,9 +17,11 @@ test("the five framework steps plus adverse effects are all present on every ent
 });
 test("the entries are flagged as AI-assisted pending clinician review", () => { assert.match(String(MS.gen || ""), /awaiting clinician review/); });
 test("problems() rejects dashes, doses and thin text", () => {
-  const ok = Object.fromEntries(FIELDS.map((f) => [f, "A plain accurate sentence for the test."]));
+  const ok = Object.fromEntries(FIELDS.map((f) => [f, "A plain accurate **sentence** for the test."]));
   assert.deepEqual(problems(ok), []);
   assert.ok(problems({ ...ok, trigger: "Em dash — here is not allowed in text." }).length);
   assert.ok(problems({ ...ok, adverse: "Given 500 mg twice daily it causes harm." }).length);
   assert.ok(problems({ ...ok, target: "short" }).length);
+  assert.ok(problems({ ...ok, target: "No key terms are marked in this sentence at all." }).length);
+  assert.ok(problems({ ...ok, target: "An **unbalanced mark in this sentence." }).length);
 });

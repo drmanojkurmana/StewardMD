@@ -25,8 +25,12 @@
       ".smdfig-ms{position:absolute;left:0;right:0;bottom:0;max-height:78%;overflow:auto;-webkit-overflow-scrolling:touch;background:#161616;color:#eee;border-top:1px solid rgba(128,128,128,.35);border-radius:16px 16px 0 0;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 18px);box-shadow:0 -8px 30px rgba(0,0,0,.35)}" +
       ".smdfig.lt .smdfig-ms{background:#fbfbfa;color:#14202b;box-shadow:0 -8px 30px rgba(0,0,0,.12)}.smdfig-ms[hidden]{display:none}" +
       ".smdfig-ms .ms-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 10px}.smdfig-ms h2{margin:0;font:650 17px/1.3 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}" +
-      ".smdfig-ms dl{margin:0;display:grid;grid-template-columns:1fr;gap:10px}.smdfig-ms dt{font:700 11px/1.2 -apple-system,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;opacity:.65;margin:0 0 3px}" +
-      ".smdfig-ms dd{margin:0;font:15px/1.5 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}.smdfig-ms .ms-adv{padding-top:8px;border-top:1px solid rgba(128,128,128,.3)}" +
+      ".smdfig-ms{--ms-t:#f2b84b;--ms-g:#6aa7ff;--ms-m:#b48cff;--ms-f:#4fd1a5;--ms-i:#ff8fa3;--ms-a:#ff7a59}.smdfig.lt .smdfig-ms{--ms-t:#9a6200;--ms-g:#1f5fbf;--ms-m:#6a3fc4;--ms-f:#0f7a5c;--ms-i:#b4234a;--ms-a:#b8421d}" +
+      ".smdfig-ms dl{margin:0;display:grid;grid-template-columns:1fr;gap:10px}.smdfig-ms .ms-r{border-radius:12px;padding:11px 13px 12px;border-left:4px solid var(--c);background:color-mix(in srgb,var(--c) 9%,transparent)}" +
+      ".smdfig-ms dt{display:flex;align-items:center;gap:8px;margin:0 0 5px;font:700 11.5px/1.2 -apple-system,system-ui,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--c)}" +
+      ".smdfig-ms dt i{font-style:normal;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--c);color:#111;font:700 11px/1 -apple-system,system-ui,sans-serif;letter-spacing:0}.smdfig.lt .smdfig-ms dt i{color:#fff}" +
+      ".smdfig-ms dd{margin:0;font:15.5px/1.55 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}.smdfig-ms mark{background:color-mix(in srgb,var(--c) 24%,transparent);color:inherit;font-weight:650;border-radius:4px;padding:0 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}" +
+      ".smdfig-ms .ms-r.ms-a{margin-top:2px}" +
       ".smdfig-ms p.ms-note{margin:12px 0 0;font:12px/1.4 -apple-system,system-ui,sans-serif;opacity:.6}.smdfig-ms .ms-x{min-height:44px;min-width:44px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 14px system-ui;cursor:pointer;padding:0 14px}" +
       ".smdfig-h{display:block;font-weight:400;font-size:12px;opacity:.7}.smdfig-x:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
     D.head.appendChild(st);
@@ -344,8 +348,11 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     msReady().then(function (all) {
       var m = all[id]; if (!m || !D.body.contains(el)) return;
       var sheet = D.createElement("section"); sheet.className = "smdfig-ms"; sheet.hidden = true; sheet.setAttribute("aria-label", "Mechanism mastery");
-      sheet.innerHTML = '<div class="ms-head"><h2>Mechanism mastery</h2><button type="button" class="ms-x">Close</button></div><dl>' + MS_ROWS.map(function (r) {
-        return "<div><dt>" + esc(r[1]) + "</dt><dd>" + esc(m[r[0]] || "") + "</dd></div>" + (r[0] === "intervention" && m.adverse ? '<div class="ms-adv"><dt>Adverse effects that follow from the action</dt><dd>' + esc(m.adverse) + "</dd></div>" : "");
+      function fmt(t) { return esc(t).replace(/\*\*(.+?)\*\*/g, "<mark>$1</mark>"); }
+      var ROW = { trigger: "--ms-t", target: "--ms-g", mechanism: "--ms-m", manifestation: "--ms-f", intervention: "--ms-i" };
+      sheet.innerHTML = '<div class="ms-head"><h2>Mechanism mastery</h2><button type="button" class="ms-x">Close</button></div><dl>' + MS_ROWS.map(function (r, n) {
+        return '<div class="ms-r" style="--c:var(' + ROW[r[0]] + ')"><dt><i>' + (n + 1) + "</i>" + esc(r[1].replace(/^\d\s+/, "")) + "</dt><dd>" + fmt(m[r[0]] || "") + "</dd></div>" +
+          (r[0] === "intervention" && m.adverse ? '<div class="ms-r ms-a" style="--c:var(--ms-a)"><dt><i>!</i>Adverse effects that follow from the action</dt><dd>' + fmt(m.adverse) + "</dd></div>" : "");
       }).join("") + '</dl><p class="ms-note">AI-assisted summary, awaiting clinician review.</p>';
       el.appendChild(sheet); btn.hidden = false;
       function set(on) { sheet.hidden = !on; btn.setAttribute("aria-expanded", String(on)); if (on) { try { sheet.querySelector(".ms-x").focus(); } catch (e) {} } }
