@@ -14,8 +14,8 @@ const MD = {
   level: { label: "Lesion site", a: [0, 1, 2, 3, 4, 5], names: ["optic nerve", "chiasm", "optic tract", "temporal loop", "parietal fibres", "occipital cortex"], ticks: ["nerve", "chiasm", "tract", "temporal", "parietal", "occipital"], start: 1 },
   drugLabel: "Treatment",
   settings: [
-    { label: "none" },
-    { label: "treat cause" },
+    { label: "no treatment" },
+    { label: "treat the cause" },
     { label: "visual rehabilitation" },
   ],
   status: "Lesion: {level} · {drug} ·",
@@ -56,33 +56,30 @@ const body = `
 <text class="sc-zone" x="34" y="68">VISUAL PATHWAY, FROM ABOVE</text>
 <text class="sc-zone" x="650" y="68">VISUAL FIELDS</text>
 <text class="sc-lab" x="650" y="84">one circle for each eye</text>
-<path class="vp-fibre" d="M94 125L165 145L255 200L330 250L405 265L462 292L540 265"/>
-<path class="vp-fibre" d="M94 125L165 145L255 200L330 150L405 135L478 125L540 135"/>
-<path class="vp-fibre" d="M94 275L165 255L255 200L330 150L405 135L478 125L540 135"/>
-<path class="vp-fibre" d="M94 275L165 255L255 200L330 250L405 265L462 292L540 265"/>
-<path class="vp-fibre vp-fibre2" d="M405 135L478 125L540 135"/>
-<path class="vp-fibre vp-fibre2" d="M405 265L462 292L540 265"/>
+<path id="fib0" class="vp-fibre" d="M107 125L165 145L255 200L330 250L405 265L462 292L600 222"/>
+<path id="fib1" class="vp-fibre" d="M107 125L165 145L255 200L330 150L405 135L478 125L600 195"/>
+<path id="fib2" class="vp-fibre" d="M107 275L165 255L255 200L330 150L405 135L478 125L600 195"/>
+<path id="fib3" class="vp-fibre" d="M107 275L165 255L255 200L330 250L405 265L462 292L600 222"/>
+<path id="fibHealU" class="vp-heal-fibre" d="M255 200L330 150L405 135L478 125L600 195"/>
+<path id="fibHealD" class="vp-heal-fibre" d="M255 200L330 250L405 265L462 292L600 222"/>
 <g id="nodes">
-<circle class="vp-node vp-retina" cx="72" cy="125" r="22"/><circle class="vp-pupil" cx="72" cy="125" r="8"/><circle class="vp-node vp-retina" cx="72" cy="275" r="22"/><circle class="vp-pupil" cx="72" cy="275" r="8"/>
 <ellipse class="vp-node vp-nerve" cx="165" cy="145" rx="16" ry="11"/><ellipse class="vp-node vp-nerve" cx="165" cy="255" rx="16" ry="11"/>
 <circle class="vp-node vp-chiasm" cx="255" cy="200" r="17"/><path class="vp-x" d="M246 191L264 209M264 191L246 209"/>
 <ellipse class="vp-node vp-tract" cx="330" cy="150" rx="15" ry="10"/><ellipse class="vp-node vp-tract" cx="330" cy="250" rx="15" ry="10"/>
 <ellipse class="vp-node vp-lgn" cx="405" cy="135" rx="18" ry="13"/><ellipse class="vp-node vp-lgn" cx="405" cy="265" rx="18" ry="13"/>
 <ellipse class="vp-node vp-rad" cx="478" cy="125" rx="14" ry="10"/><ellipse class="vp-node vp-rad" cx="462" cy="292" rx="14" ry="10"/>
-<rect class="vp-node vp-occ" x="528" y="112" width="24" height="46" rx="8"/><rect class="vp-node vp-occ" x="528" y="242" width="24" height="46" rx="8"/>
 </g>
-<text class="sc-lab" x="72" y="162" text-anchor="middle">eyes</text>
-<text class="sc-lab" x="540" y="176" text-anchor="middle">cortex</text>
-<text class="sc-lab" x="540" y="306" text-anchor="middle">cortex</text>
+<g id="eyeSlotU"></g><g id="eyeSlotL"></g><g id="brainSlot"></g>
+<g id="glow"></g>
 <g id="fields"></g>
 <g id="parts"></g><g id="lesion"></g><g id="over"></g><g id="panel"></g>`;
 
 buildScene({
   id: "visual-pathway-field-defects", fig: "Fig 1", title: "Visual pathway: lesion site and field defect", W, H, body,
-  label: "An animated visual pathway seen from above. Light signals travel from the two retinas through the optic nerves, chiasm, optic tracts and lateral geniculate bodies, then through temporal and parietal optic radiations to the occipital cortex. Moving the lesion site changes which fibres are blocked and blackens the matching part of the two visual field circles. Gauges show signal reaching cortex, field intact, compensation and daily function.",
+  label: "An animated visual pathway seen from above. Light signals travel from the two eyes through the optic nerves, chiasm, optic tracts and geniculate bodies, then through the optic radiations into the brain to the visual cortex. Moving the lesion site changes which fibres are blocked and blackens the matching part of the two visual field circles. Treating the cause reopens fibres and shrinks the dark area, while rehabilitation trains scanning without restoring the field. Gauges show signal reaching cortex, field intact, compensation and daily function.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "visualp.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "visualp.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With visual rehabilitation",
   sourcesLis: [
     "<strong>How the visual pathway is organised.</strong> Retinal ganglion cell fibres leave each eye in the optic nerve. At the chiasm, fibres from the nasal half of each retina cross, so each optic tract carries fibres for the opposite half of the visual field from both eyes. After the lateral geniculate body, fibres fan out as the optic radiations: the temporal loop carries fibres for the upper field and the parietal fibres carry fibres for the lower field, ending in the occipital cortex around the calcarine sulcus. The central macular field has a large cortical area and often a dual blood supply, so occipital lesions may spare it. This is standard teaching in neuroanatomy and neurology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Lesion patterns shown.</strong> An optic nerve lesion blinds one eye. A chiasm lesion damages crossing nasal fibres and loses the temporal field of each eye. A tract, radiation or occipital lesion loses the same side of the field in both eyes: a full homonymous hemianopia, an upper quadrantanopia from the temporal loop, a lower quadrantanopia from the parietal fibres, and a homonymous hemianopia with macular sparing from the occipital cortex. These are teaching toggles only.",
@@ -90,18 +87,19 @@ buildScene({
   ],
   simplified: "Retinotopy within the geniculate layers, pupillary fibres leaving before the geniculate body, pretectal and suprachiasmatic branches, exact calcarine retinotopy, vascular territories, bilateral lesions, congruity grading, and all causes, investigations and treatments in detail are left out. Only one side is lesioned in the radiation and occipital examples. The figure does not say how any patient should be treated.",
   extraCss: `
-.vp-fibre{fill:none;stroke:var(--anatomy-mid);stroke-width:2.2;opacity:.55;stroke-linecap:round}
-.vp-fibre2{stroke-width:3.2;opacity:.35}
+.vp-fibre{fill:none;stroke:var(--anatomy-mid);stroke-width:2.2;opacity:.55;stroke-linecap:round;stroke-linejoin:round}
+.vp-heal-fibre{fill:none;stroke:var(--c-good);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:9 7}
+.vp-heal{fill:none;stroke:var(--c-good);stroke-width:2.5}
+.vp-comp{fill:var(--c-good);stroke:none}
+.vp-scan{fill:var(--c-good);stroke:none}
+.vp-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .vp-node{stroke:color-mix(in srgb,var(--anatomy-strong) 45%,#000);stroke-width:1}
-.vp-retina{fill:#e8b34a}
-.vp-pupil{fill:#2b2118}
 .vp-nerve{fill:#7fc4e8}
 .vp-chiasm{fill:#c084fc}
 .vp-x{fill:none;stroke:#2b2118;stroke-width:1.6;stroke-linecap:round}
 .vp-tract{fill:#5ec1a0}
 .vp-lgn{fill:#e9a2b3}
 .vp-rad{fill:#f08a4b}
-.vp-occ{fill:#d63a4a}
 .vp-field-bg{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}
 .vp-field-line{fill:none;stroke:var(--anatomy-faint);stroke-width:.8}
 .vp-loss{fill:#17121c}
