@@ -1,0 +1,564 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Heart failure with preserved ejection fraction</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.hfpef-wall{fill:color-mix(in srgb,var(--c-bad) 38%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 70%,#000);stroke-width:1.3}
+.hfpef-shade{fill:#000;opacity:.12}
+.hfpef-ch{fill:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 70%,#000);stroke-width:1}
+.hfpef-rv{fill:color-mix(in srgb,var(--c-cyt2) 38%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyt2) 60%,#000);stroke-width:1.1}
+.hfpef-at{fill:color-mix(in srgb,var(--c-bad) 24%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1}
+.hfpef-node{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.2}
+.hfpef-node-t{fill:var(--anatomy-strong);font-size:11px;font-weight:600;pointer-events:none}
+.hfpef-cap{fill:var(--anatomy-text);font-size:10px;pointer-events:none}
+.hfpef-arrow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.hfpef-back{fill:none;stroke:var(--c-fl);stroke-width:1.8;stroke-linecap:round;opacity:.65}
+.hfpef-head{fill:var(--anatomy-mid)}
+.hfpef-aorta{fill:none;stroke:var(--c-rbc);stroke-width:7;stroke-linecap:round;opacity:.5}
+.hfpef-dot{fill:var(--c-cyt)}
+.hfpef-inflow{fill:var(--c-fl)}
+.hfpef-eject{fill:var(--c-rbc)}
+.hfpef-lung{fill:color-mix(in srgb,var(--c-cyt2) 20%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.6}
+.hfpef-fluid{fill:var(--c-fl)}
+.hfpef-mini{fill:color-mix(in srgb,var(--c-cyt2) 30%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyt2) 60%,#000);stroke-width:1.1}
+.hfpef-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
+.hfpef-xx{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}
+.hfpef-mk{fill:var(--c-bad);font-size:10.5px;font-weight:600;pointer-events:none}
+.p-hfpef-drop{fill:var(--c-fl)}</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Heart failure with preserved ejection fraction</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>filling pressure high · congestion marked · ejection preserved</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated stiff left ventricle. Hypertension, diabetes, obesity and ageing thicken its wall. The chamber squeezes normally but relaxes slowly and fills at high pressure. The left atrium enlarges and pressure backs up into the lungs, causing breathlessness despite a preserved ejection fraction. A small inset contrasts this with reduced ejection fraction, where the ventricle is dilated and squeezes weakly. Gauges show stiffness, filling pressure, atrial size, congestion and ejection. Treatments shown are a diuretic, blood pressure control and an SGLT2 inhibitor concept."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="270" height="396" rx="18"/>
+<rect class="sc-tissue" x="296" y="44" width="340" height="396" rx="18"/>
+<rect class="sc-tissue" x="648" y="44" width="298" height="396" rx="18"/>
+<text class="sc-zone" x="34" y="68">WHY THE WALL THICKENS</text>
+<text class="sc-zone" x="316" y="68">STIFF LEFT VENTRICLE</text>
+<text class="sc-zone" x="668" y="68">WHEN PRESSURE BACKS UP</text>
+<g id="drivers"></g><g id="heart"></g><g id="cong"></g><g id="inset"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, sizes and gauge levels are qualitative and illustrative; no doses, targets or numbers are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>How far the disease has gone</span><input id="level" type="range" min="0" max="2" step="1" value="1" aria-valuetext="congested"><span class="dr-ticks"><i>compensated</i><i>congested</i><i>decompensated</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">diuretic</option><option value="2">blood pressure control</option><option value="3">SGLT2 inhibitor concept</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How this type of heart failure develops.</strong> Long-standing hypertension, diabetes, obesity and ageing promote concentric hypertrophy: the left ventricular wall thickens inward and the chamber stays small. The thick muscle relaxes slowly and is stiff, so filling needs a higher pressure even though the squeeze, and therefore the ejection fraction, stays preserved. Raised filling pressure enlarges the left atrium and backs up into the pulmonary veins and lungs, giving breathlessness and congestion. This is standard teaching in medicine and cardiology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Where treatments act in the drawing.</strong> A diuretic removes salt and water and lowers congestion and filling pressure. Blood pressure control lowers the load the wall thickened against and slows further hypertrophy. SGLT2 inhibitors are shown as a concept: they ease congestion and are part of modern teaching for this condition. These are teaching toggles for the mechanism only.</li><li><strong>Contrast with reduced ejection fraction.</strong> In that type the ventricle is dilated with a thin wall and a weak squeeze, so the ejection fraction falls. Here the chamber is small and thick and the squeeze is preserved; the problem is filling, not emptying.</li></ul>
+<p><strong>What was simplified.</strong> Atrial fibrillation, pulmonary hypertension and right heart involvement, kidney disease, anaemia, amyloidosis and other specific causes, valve disease, natriuretic peptides, diastolic grading, exercise testing, and every dose and target are left out. Sizes, speeds and levels are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"How far the disease has gone","a":[0.3,0.65,1],"names":["compensated","congested","decompensated"],"ticks":["compensated","congested","decompensated"],"start":1},"settings":[{"label":"no treatment"},{"label":"diuretic"},{"label":"blood pressure control"},{"label":"SGLT2 inhibitor concept"}],"drugNames":["no treatment","diuretic","blood pressure control","SGLT2 inhibitor concept"],"status":"Stage: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const TREAT = [
+    { diu: 0, bp: 0, sg: 0 },
+    { diu: 1, bp: 0, sg: 0 },
+    { diu: 0, bp: 1, sg: 0 },
+    { diu: 0, bp: 0, sg: 1 },
+  ];
+  const t = TREAT[drug] || TREAT[0];
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const a = S.level.a[level];
+  const stiff = cl(0.10 + 0.88 * a - 0.08 * t.bp - 0.05 * t.sg);
+  const fill = cl(0.06 + 0.82 * stiff + 0.10 * a - 0.40 * t.diu - 0.18 * t.bp - 0.10 * t.sg);
+  const cong = cl(0.90 * fill + 0.08 * a - 0.16 * t.diu - 0.04 * t.sg);
+  const la = cl(0.08 + 0.78 * fill + 0.10 * a - 0.06 * t.diu - 0.06 * t.bp);
+  const ef = cl(0.88 - 0.06 * a + 0.02 * t.sg);
+  const sx = cl(0.55 * cong + 0.45 * fill);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(fill, 0.25, 0.6, ["near normal", "raised", "high"]), w(cong, 0.25, 0.5, ["minimal", "mild", "marked"]), w(ef, 0.6, 0.75, ["reduced", "borderline", "preserved"])];
+  return { a, diu: t.diu, bp: t.bp, sg: t.sg, stiff, fill, cong, la, ef, sx, words, readout: "filling pressure " + words[0] + " · congestion " + words[1] + " · ejection " + words[2] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* HFpEF scene: drivers thicken the ventricle wall, slow relaxation raises filling pressure, the atrium enlarges and pressure backs up into the lungs, while the squeeze stays preserved. */
+const layers = { drivers: $("drivers"), heart: $("heart"), cong: $("cong"), inset: $("inset"), parts: $("parts"), marks: $("marks"), over: $("over"), panel: $("panel") };
+const LV = [466, 250], LA0 = [438, 162];
+/* ---- driver and chain nodes (every node has a visible fill) ---- */
+const NODES = {
+  ht: { x: 160, y: 108, w: 200, t: "Hypertension", tip: "Hypertension: years of high pressure make the ventricle pump against more load, so its wall thickens inward." },
+  dm: { x: 160, y: 156, w: 200, t: "Diabetes", tip: "Diabetes stiffens heart muscle directly and damages small vessels, so relaxation worsens." },
+  ob: { x: 160, y: 204, w: 200, t: "Obesity", tip: "Obesity adds blood volume and metabolic strain and promotes inflammation and wall thickening." },
+  age: { x: 160, y: 252, w: 200, t: "Ageing", tip: "Ageing replaces elastic muscle with stiffer fibrous tissue, so the ventricle relaxes more slowly." },
+  thick: { x: 160, y: 312, w: 180, t: "Thick wall", tip: "Concentric hypertrophy: the wall thickens inward. The chamber stays small instead of dilating." },
+  stiff: { x: 160, y: 356, w: 210, t: "Stiff, slow to relax", tip: "A thick, fibrous wall relaxes slowly and resists filling. Filling therefore needs a higher pressure." },
+};
+const nodeEls = {};
+Object.keys(NODES).forEach((k) => { const n = NODES[k], g = mk("g", { class: "hot", tabindex: "0", "data-info": n.tip }, layers.drivers);
+  mk("rect", { class: "hfpef-node", x: n.x - n.w / 2, y: n.y - 17, width: n.w, height: 34, rx: 12 }, g);
+  const t = mk("text", { class: "hfpef-node-t", x: n.x, y: n.y + 4, "text-anchor": "middle" }, g); t.textContent = n.t; nodeEls[k] = g; });
+{ const c = mk("text", { class: "hfpef-cap", x: 160, y: 408, "text-anchor": "middle" }, layers.drivers); c.textContent = "Drivers add up over years"; }
+/* arrows: drivers down the chain, then into the heart */
+function arrow(parent, pts) { const d = pts.map((p, i) => (i ? "L" : "M") + p[0] + " " + p[1]).join(""); const e = mk("path", { class: "hfpef-arrow", d }, parent);
+  const p1 = pts[pts.length - 2], p2 = pts[pts.length - 1], ang = Math.atan2(p2[1] - p1[1], p2[0] - p1[0]) * 57.2958;
+  mk("path", { class: "hfpef-head", d: "M0 0L-8 -4.5L-8 4.5Z", transform: "translate(" + p2[0] + " " + p2[1] + ") rotate(" + f1(ang) + ")" }, parent); return e; }
+arrow(layers.drivers, [[160, 269], [160, 293]]);
+arrow(layers.drivers, [[160, 329], [160, 337]]);
+const drvArrows = [[108], [156], [204], [252]].map(([y]) => { const e = mk("path", { class: "hfpef-arrow", d: "M260 " + y + "C300 " + y + " 320 238 396 250", opacity: "0.35" }, layers.drivers); return e; });
+mk("path", { class: "hfpef-arrow", d: "M265 356C305 345 350 305 398 274" }, layers.drivers);
+mk("path", { class: "hfpef-head", d: "M0 0L-8 -4.5L-8 4.5Z", transform: "translate(398 274) rotate(-38)" }, layers.drivers);
+/* ---- the heart ---- */
+const hg = mk("g", {}, layers.heart);
+const aortaEl = mk("path", { class: "hfpef-aorta", d: "M492 198C500 152 515 132 540 130C555 132 558 148 556 164" }, hg);
+const rv = mk("ellipse", { class: "hfpef-rv", cx: 392, cy: 256, rx: 19, ry: 44 }, hg);
+const wall = mk("ellipse", { class: "hfpef-wall", cx: LV[0], cy: LV[1] }, hg);
+const wsh = mk("ellipse", { class: "hfpef-shade", cx: LV[0] + 5, cy: LV[1] + 6 }, hg);
+const ch = mk("ellipse", { class: "hfpef-ch", cx: LV[0], cy: LV[1] }, hg);
+const la = mk("ellipse", { class: "hfpef-at", cx: LA0[0], cy: LA0[1] }, hg);
+const chev = mk("g", { opacity: "0" }, hg);
+[448, 466, 484].forEach((x) => mk("path", { class: "hfpef-head", d: "M" + (x - 5) + " 232l5 -7l5 7", fill: "none", stroke: "var(--c-fl)", "stroke-width": "1.6" }, chev));
+const backPath = mk("path", { class: "hfpef-back", d: "M470 158C560 146 640 168 716 204" }, hg);
+mk("path", { class: "hfpef-head", d: "M0 0L-8 -4.5L-8 4.5Z", transform: "translate(716 204) rotate(28)" }, hg);
+/* ---- lungs and consequences ---- */
+const LUNG_D = "M766 182q-8 30 8 52q20 8 28 -8l0 -52q-20 -10 -36 8zM834 182q8 30 -8 52q-20 8 -28 -8l0 -52q20 -10 36 8z";
+{ const clip = mk("clipPath", { id: "hfpefLungClip" }, layers.cong); mk("path", { d: LUNG_D }, clip); }
+const lungG = mk("g", { class: "hot", tabindex: "0", "data-info": "Pulmonary congestion: pressure behind the stiff ventricle pushes fluid into the lungs. That gives breathlessness, worse lying flat and on effort." }, layers.cong);
+mk("path", { class: "hfpef-arrow", d: "M800 158L800 180" }, lungG);
+mk("path", { class: "hfpef-lung", d: LUNG_D }, lungG);
+const lungFill = mk("rect", { class: "hfpef-fluid", x: 758, y: 242, width: 84, height: 0, "clip-path": "url(#hfpefLungClip)", opacity: "0.75" }, lungG);
+{ const t = mk("text", { class: "hfpef-cap", x: 800, y: 264, "text-anchor": "middle" }, layers.cong); t.textContent = "Lungs"; }
+const CONS = {
+  breath: { x: 797, y: 352, w: 210, t: "Breathless on effort", tip: "Breathlessness: fluid in the lungs makes them stiff, so breathing takes more work, especially on effort or lying flat." },
+  tired: { x: 797, y: 398, w: 220, t: "Tired legs, swelling", tip: "Congestion and poor reserve give tiredness and swollen ankles as fluid collects in the tissues." },
+};
+Object.keys(CONS).forEach((k) => { const n = CONS[k], g = mk("g", { class: "hot", tabindex: "0", "data-info": n.tip }, layers.cong);
+  mk("rect", { class: "hfpef-node", x: n.x - n.w / 2, y: n.y - 16, width: n.w, height: 32, rx: 12 }, g);
+  const t = mk("text", { class: "hfpef-node-t", x: n.x, y: n.y + 4, "text-anchor": "middle" }, g); t.textContent = n.t; });
+/* ---- contrast inset: reduced ejection fraction ---- */
+{ const g = mk("g", { class: "hot", tabindex: "0", "data-info": "Reduced ejection fraction, for contrast: the ventricle dilates, its wall thins and the squeeze weakens, so the ejection fraction falls. In preserved ejection fraction the chamber is small and thick and the squeeze stays normal; filling is the problem." }, layers.inset);
+  mk("rect", { class: "hfpef-node", x: 316, y: 364, width: 320, height: 62, rx: 12 }, g);
+  mk("ellipse", { class: "hfpef-mini", cx: 362, cy: 395, rx: 34, ry: 24 }, g);
+  mk("ellipse", { class: "hfpef-ch", cx: 362, cy: 395, rx: 27, ry: 18 }, g);
+  const t1 = mk("text", { class: "hfpef-node-t", x: 408, y: 390 }, g); t1.textContent = "Reduced EF, for contrast";
+  const t2 = mk("text", { class: "hfpef-cap", x: 408, y: 408 }, g); t2.textContent = "dilated, thin wall, weak squeeze"; }
+/* ---- particle pools (items expose their element as p.e) ---- */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0, u: 0 }; }); }
+const drvTr = [108, 156, 204, 252].map((y) => track([[260, y], [320, 238], [396, 250]]));
+const aortaTr = track([[492, 198], [508, 142], [540, 130], [556, 162]]);
+const backTr = track([[470, 158], [560, 146], [640, 168], [716, 204]]);
+const drvP = pool(16, () => mk("circle", { class: "hfpef-dot", r: 2.4 }, layers.parts));
+const inP = pool(12, () => mk("circle", { class: "hfpef-inflow", r: 2.6 }, layers.parts));
+const ejP = pool(10, () => mk("circle", { class: "hfpef-eject", r: 2.6 }, layers.parts));
+const bkP = pool(16, () => mk("circle", { class: "hfpef-inflow", r: 2.4 }, layers.parts));
+const dropP = pool(18, () => mk("path", { class: "p-hfpef-drop", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, layers.parts));
+const free = (pl) => pl.find((p) => !p.on);
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.u = 0; p.e.setAttribute("opacity", "1"); }
+function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+/* ---- treatment marks ---- */
+const MARKS = { bp: [260, 108, "BP control", 160, 82], diu: [852, 178, "Diuretic", 800, 318], sg: [505, 308, "SGLT2 inhibitor", 575, 345] };
+const marks = {};
+Object.keys(MARKS).forEach((id) => { const m = MARKS[id], g = mk("g", { opacity: 0 }, layers.marks);
+  mk("circle", { class: "hfpef-x", cx: m[0], cy: m[1], r: 8.5 }, g); mk("path", { class: "hfpef-xx", d: "M" + (m[0] - 4) + " " + (m[1] - 4) + "l8 8M" + (m[0] + 4) + " " + (m[1] - 4) + "l-8 8" }, g);
+  const t = mk("text", { class: "hfpef-mk", x: m[2 + 1], y: m[2 + 2], "text-anchor": "middle" }, g); t.textContent = m[2]; marks[id] = g; });
+/* ---- labels and gauges ---- */
+pill(layers.over, "Thick wall", 410, 255, 352, 342, "Concentric hypertrophy: the wall thickens inward, so the chamber stays small. This is thickening, not dilation.");
+pill(layers.over, "Left atrium", 452, 150, 565, 118, "Left atrium: it stretches and enlarges because it must push blood into a stiff ventricle at high pressure. An enlarged atrium also favours atrial fibrillation.");
+pill(layers.over, "Preserved squeeze", 470, 250, 580, 305, "Preserved ejection fraction: the chamber still ejects a normal fraction of its contents. The squeeze is fine; filling is the problem.");
+pill(layers.over, "Raised pressure", 600, 168, 605, 225, "Raised filling pressure: the stiff ventricle only fills when pressure behind it rises. That pressure is felt in the atrium and lungs.");
+pill(layers.over, "Lung fluid", 800, 210, 795, 135, "Fluid in the lungs from back pressure. It rises as congestion worsens and eases with a diuretic.");
+const gg = {};
+{ const P = layers.panel, y0 = 478, h = 52, xs = [130, 290, 450, 610, 770];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: SC.W - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
+  [["stiff", "Stiffness", "g-cyt", "How thick and stiff the ventricle wall is. Stiffer muscle relaxes more slowly."], ["fill", "Pressure", "g-bad", "Filling pressure: the pressure needed to fill the stiff ventricle."], ["la", "Atrium", "g-eos", "Left atrial size: it enlarges under years of raised filling pressure."], ["cong", "Congestion", "g-fl", "How much fluid has backed up into the lungs and tissues."], ["ef", "Ejection", "g-good", "Ejection fraction: the fraction ejected each beat. Here it stays preserved, unlike reduced ejection fraction."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i], y0 + 2, h, 18, cls, name, tip); }); }
+/* ---- animation ---- */
+const sm = { a: 0.65, stiff: 0.6, fill: 0.6, cong: 0.6, la: 0.6, ef: 0.85, diu: 0, bp: 0, sg: 0 };
+const acc = { drv: 0, inn: 0, ej: 0, bk: 0, drop: 0 };
+let beat = 0;
+function init() {}
+function step(dt, m) {
+  const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.45);
+  sm.a = lerp(sm.a, m.a, k2); sm.stiff = lerp(sm.stiff, m.stiff, k2); sm.la = lerp(sm.la, m.la, k2);
+  sm.fill = lerp(sm.fill, m.fill, k1); sm.cong = lerp(sm.cong, m.cong, k1); sm.ef = lerp(sm.ef, m.ef, k1);
+  sm.diu = lerp(sm.diu, m.diu, k1); sm.bp = lerp(sm.bp, m.bp, k1); sm.sg = lerp(sm.sg, m.sg, k1);
+  /* beat: strong squeeze (preserved), then slow, incomplete relaxation when stiff */
+  beat += dt * 1.05; const ph = beat % 1;
+  let c; if (ph < 0.35) { const u = ph / 0.35; c = Math.sin(u * Math.PI * 0.5); } else { const u = (ph - 0.35) / 0.65; c = Math.pow(1 - u, 1 + 2.2 * sm.stiff); }
+  const baseRx = 36 * (1 - 0.10 * sm.stiff), baseRy = 50 * (1 - 0.08 * sm.stiff), thick = 13 + 17 * sm.stiff;
+  const chRx = baseRx * (1 - 0.40 * sm.ef * c), chRy = baseRy * (1 - 0.40 * sm.ef * c);
+  ch.setAttribute("rx", f1(chRx)); ch.setAttribute("ry", f1(chRy));
+  wall.setAttribute("rx", f1(chRx + thick * (1 + 0.12 * c))); wall.setAttribute("ry", f1(chRy + thick * (1 + 0.12 * c)));
+  wsh.setAttribute("rx", f1(chRx + thick)); wsh.setAttribute("ry", f1(chRy + thick));
+  const laRx = 26 + 17 * sm.la, laRy = 20 + 12 * sm.la, laCy = LV[1] - (chRy + thick) - laRy - 2;
+  la.setAttribute("rx", f1(laRx)); la.setAttribute("ry", f1(laRy)); la.setAttribute("cy", f1(laCy));
+  rv.setAttribute("ry", f1(44 * (1 - 0.07 * c)));
+  aortaEl.setAttribute("opacity", (0.25 + 0.45 * sm.ef).toFixed(2));
+  chev.setAttribute("opacity", (sm.fill * (0.4 + 0.6 * (1 - c))).toFixed(2));
+  chev.setAttribute("transform", "translate(0 " + f1(-4 * sm.fill * Math.sin(tm / 300)) + ")");
+  backPath.setAttribute("opacity", (0.25 + 0.6 * sm.fill).toFixed(2));
+  /* node glow: drivers feed thickening; blood pressure control calms the hypertension node */
+  const glow = { ht: sm.a * (1 - 0.55 * sm.bp), dm: sm.a, ob: sm.a, age: sm.a, thick: sm.stiff, stiff: sm.stiff };
+  Object.keys(glow).forEach((k) => { nodeEls[k].style.filter = "drop-shadow(0 0 " + (glow[k] * 6).toFixed(1) + "px var(--c-cyt))"; });
+  marks.bp.setAttribute("opacity", sm.bp.toFixed(2)); marks.diu.setAttribute("opacity", sm.diu.toFixed(2)); marks.sg.setAttribute("opacity", sm.sg.toFixed(2));
+  /* driver signals travelling into the wall */
+  acc.drv += dt * sm.a * 7; while (acc.drv >= 1) { acc.drv--; const p = free(drvP); if (p) { emit(p, 260, 0, 0, 0, Math.floor(rnd(0, 4))); const q = drvTr[p.k].at(0); p.x = q.x; p.y = q.y; } }
+  drvP.forEach((p) => { if (!p.on) return; p.u += dt * 0.35; if (p.u >= 1) { kill(p); return; } const q = drvTr[p.k].at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  /* inflow from atrium into ventricle: slower and later when stiff */
+  acc.inn += dt * (2 + 5 * (1 - sm.stiff * 0.5)) * (ph > 0.35 ? 1 : 0.15); while (acc.inn >= 1) { acc.inn--; const p = free(inP); if (p) emit(p, LA0[0] + rnd(-8, 8), laCy + laRy - 2, rnd(-3, 3), rnd(22, 34) * (1 - 0.45 * sm.stiff), 0); }
+  inP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(clamp(p.x, 420, 500)) + " " + f1(clamp(p.y, 120, 252)) + ")"); if (p.y > 250 || p.t > 2.4) kill(p); });
+  /* ejection along the aorta: brisk, because the squeeze is preserved */
+  acc.ej += dt * 6 * sm.ef; while (acc.ej >= 1) { acc.ej--; const p = free(ejP); if (p) emit(p, 492, 198, 0, 0, 0); }
+  ejP.forEach((p) => { if (!p.on) return; p.u += dt * (0.5 + 0.5 * c); if (p.u >= 1) { kill(p); return; } const q = aortaTr.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  /* back pressure: signals travel from the atrium toward the lungs */
+  acc.bk += dt * sm.fill * 8; while (acc.bk >= 1) { acc.bk--; const p = free(bkP); if (p) emit(p, 470, 158, 0, 0, 0); }
+  bkP.forEach((p) => { if (!p.on) return; p.u += dt * 0.4; if (p.u >= 1) { kill(p); return; } const q = backTr.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); });
+  /* lung fluid level and droplets, kept inside the lung shape */
+  lungFill.setAttribute("height", f1(52 * sm.cong)); lungFill.setAttribute("y", f1(242 - 52 * sm.cong));
+  acc.drop += dt * sm.cong * 5; while (acc.drop >= 1) { acc.drop--; const p = free(dropP); if (p) emit(p, rnd(774, 826), rnd(188, 210), 0, rnd(10, 16), 0); }
+  dropP.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.x = clamp(p.x, 770, 830); p.y = clamp(p.y, 184, 238); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y >= 238) kill(p); });
+  /* gauges */
+  gg.stiff.set(sm.stiff, wordOf(sm.stiff, 0.3, 0.6, ["mild", "stiff", "very stiff"])); gg.fill.set(sm.fill, wordOf(sm.fill, 0.25, 0.6, ["near normal", "raised", "high"]));
+  gg.la.set(sm.la, wordOf(sm.la, 0.3, 0.6, ["normal", "enlarged", "large"])); gg.cong.set(sm.cong, wordOf(sm.cong, 0.25, 0.5, ["minimal", "mild", "marked"]));
+  gg.ef.set(sm.ef, wordOf(sm.ef, 0.6, 0.75, ["reduced", "borderline", "preserved"]));
+}
+run({ init, step });
+</script></body></html>
