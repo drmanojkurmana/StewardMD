@@ -46,7 +46,6 @@ function initPanel() {
   [["qp", "Pulm. flow", "g-pulm", "How much blood flows through the lungs. Left to right shunts raise it; tetralogy and Eisenmenger physiology lower effective flow."], ["pap", "Pulm. pressure", "g-press", "Pressure in the pulmonary artery. It rises with large left to right shunts and is very high in Eisenmenger physiology."], ["sat", "Saturation", "g-good", "Oxygen saturation of blood reaching the body. It falls when oxygen poor blood shunts right to left, causing cyanosis."], ["qs", "Body flow", "g-fl", "How much blood reaches the body tissues. It can fall if a needed relief shunt is closed in Eisenmenger physiology."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h, 18, cls, name, tip); });
   const ox = L.over;
-  pillRefs.lungs = pill(ox, "Lungs", 605, 115, 640, 158, "Lungs: blood picks up oxygen here. Extra shunt flow overloads them; too little flow leaves blood poorly oxygenated.");
   pillRefs.pa = pill(ox, "Pulm. artery", 460, 125, 240, 175, "Pulmonary artery: carries blood from the right ventricle to the lungs. A patent ductus joins it to the aorta.");
   pillRefs.ao = pill(ox, "Aorta", 310, 100, 195, 78, "Aorta: carries blood from the left ventricle to the body. Its saturation sets the saturation gauge.");
   pillRefs.duct = pill(ox, "Ductus", 480, 93, 480, 148, "Ductus arteriosus: a fetal channel between the aorta and pulmonary artery. When it stays open after birth (patent ductus) blood shunts between them. Prostaglandin keeps it open.");
@@ -54,7 +53,6 @@ function initPanel() {
   pillRefs.vsd = pill(ox, "VSD", 480, 362, 185, 305, "Ventricular septal defect: a hole between the ventricles. In tetralogy and Eisenmenger physiology blood shunts right to left through it.");
   pillRefs.vein = pill(ox, "Veins", 300, 320, 170, 362, "Systemic veins: return oxygen poor blood from the body to the right atrium.");
   pillRefs.outlet = pill(ox, "Narrowed outlet", 587, 290, 790, 235, "Narrowed pulmonary outlet in tetralogy of Fallot: resistance here drives the right to left shunt and limits lung flow.");
-  pillRefs.body = pill(ox, "Body", 630, 420, 790, 410, "Body tissues: use oxygen and return oxygen poor blood. Blue colour means cyanosis.");
 }
 const gg = {};
 const sm = { Qp: 0.6, Qs: 0.7, PAP: 0.4, satArt: 0.9, satR: 0.3, satPA: 0.3, satL: 0.9, cyan: 0.1, shunt: 0.5, mag: 0.5, closed: 0, ductOpen: 0, obstruct: 0, rvLoad: 0.4 };

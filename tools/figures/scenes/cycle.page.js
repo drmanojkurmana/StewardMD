@@ -49,8 +49,8 @@ function initPanel() {
   pill(o, "Aorta", 390, 129, 398, 84, "Aorta: the great artery leaving the heart. During ejection it receives the stroke volume and carries it to the body.");
   pill(o, "Heart sounds", 332, 300, 386, 282, "Heart sounds: S1 as the mitral valve shuts at the start of contraction, and S2 as the aortic valve shuts at the start of relaxation. The badges light up in those phases.");
   pill(o, "Blood ejected", 735, 228, 730, 88, "Ejection across the top of the loop: the aortic valve is open, volume falls and pressure first rises, then falls as ejection slows.");
-  pill(o, "Pressure falls", 683, 278, 538, 252, "Isovolumetric relaxation down the left side: both valves are shut, so volume stays fixed while pressure falls after the aortic valve closes.");
-  pill(o, "Volume fixed", 758, 278, 872, 240, "Isovolumetric contraction up the right side: both valves are shut, so volume stays fixed while pressure climbs after the mitral valve closes.");
+  pill(o, "Pressure falls", 683, 278, 600, 368, "Isovolumetric relaxation down the left side: both valves are shut, so volume stays fixed while pressure falls after the aortic valve closes.");
+  pill(o, "Volume fixed", 758, 278, 884, 180, "Isovolumetric contraction up the right side: both valves are shut, so volume stays fixed while pressure climbs after the mitral valve closes.");
   pill(o, "Filling flow", 720, 312, 735, 400, "Filling along the bottom of the loop: the mitral valve is open, volume rises at low pressure, and atrial systole gives the last top-up.");
   const names = ["Atrial systole", "Iso contraction", "Ejection", "Iso relaxation", "Filling"];
   names.forEach((n, i) => { const x = 30 + i * 89; const r = mk("rect", { class: "cy-ph", x: x, y: 404, width: 84, height: 26, rx: 8 }, o); const tx = mk("text", { class: "cy-ph-t", x: x + 42, y: 420, "text-anchor": "middle" }, o); tx.textContent = n; phBoxes.push(r); phTexts.push(tx); });
@@ -95,7 +95,7 @@ function step(dt, m) {
   s1Arc.setAttribute("opacity", s1on ? (0.4 + 0.6 * Math.sin(s * 3.14)).toFixed(2) : "0");
   s2Arc.setAttribute("opacity", s2on ? (0.4 + 0.6 * Math.sin(s * 3.14)).toFixed(2) : "0");
   /* pressure-volume loop and the moving point */
-  const EDVx = 600 + sm.EDV * 260, ESVx = 600 + sm.ESV * 260, lowY = 312, peakY = 340 - sm.peak * 230, openY = 340 - sm.peak * 0.8 * 230, endY = openY + 12;
+  const EDVx = 580 + sm.EDV * 300, ESVx = 580 + sm.ESV * 300, lowY = 312, peakY = 340 - sm.peak * 230, openY = 340 - sm.peak * 0.8 * 230, endY = openY + 12;
   pvPath.setAttribute("d", "M" + f1(EDVx) + " " + lowY + "L" + f1(EDVx) + " " + f1(openY) + "C" + f1(EDVx - 6) + " " + f1(peakY) + " " + f1(ESVx + 34) + " " + f1(peakY) + " " + f1(ESVx) + " " + f1(endY) + "L" + f1(ESVx) + " " + lowY + "Q" + f1((EDVx + ESVx) / 2) + " 324 " + f1(EDVx) + " " + lowY + "Z");
   svLine.setAttribute("d", "M" + f1(ESVx) + " 332H" + f1(EDVx));
   svHL.setAttribute("d", "M" + f1(ESVx) + " 332l9 -4v8Z"); svHR.setAttribute("d", "M" + f1(EDVx) + " 332l-9 -4v8Z");

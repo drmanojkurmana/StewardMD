@@ -21,12 +21,16 @@ function initNodes() {
   const N = layers.nodes;
   const prot = mk("g", {}, N); cell(prot, { cls: "bac", r: 22, nuc: 0.35, seed: 3, wob: 0.12 }); prot.setAttribute("transform", "translate(110 210)");
   E.prot = prot;
-  [[315, 158], [420, 158]].forEach(([x, y]) => { mk("path", { class: "ur-enz", d: "M0 -13L13 0L0 13L-13 0Z", transform: "translate(" + x + " " + y + ")" }, N); });
-  [[505, 214, "p-cit"], [582, 272, "p-cit"], [505, 332, "p-cit"]].forEach(([x, y]) => { mk("circle", { class: "ur-node", cx: x, cy: y, r: 11 }, N); });
-  mk("circle", { class: "ur-node", cx: 368, cy: 332, r: 10 }, N);
-  mk("circle", { class: "ur-node", cx: 652, cy: 302, r: 10 }, N);
+  [["CPS", 315, 158], ["OTC", 420, 158]].forEach(([lab, x, y]) => { mk("path", { class: "ur-enz", d: "M0 -13L13 0L0 13L-13 0Z", transform: "translate(" + x + " " + y + ")" }, N); const t = mk("text", { class: "ur-enz-t", x, y: y + 2.5, "text-anchor": "middle" }, N); t.textContent = lab; });
+  [["Cit", 505, 214], ["ArgS", 582, 272], ["Arg", 505, 332]].forEach(([lab, x, y]) => { mk("circle", { class: "ur-node", cx: x, cy: y, r: 13 }, N); const t = mk("text", { class: "ur-node-t", x, y: y + 3, "text-anchor": "middle" }, N); t.textContent = lab; });
+  mk("circle", { class: "ur-node", cx: 368, cy: 332, r: 12 }, N);
+  { const t = mk("text", { class: "ur-node-t", x: 368, y: 335, "text-anchor": "middle" }, N); t.textContent = "Orn"; }
+  mk("circle", { class: "ur-node", cx: 652, cy: 302, r: 12 }, N);
+  { const t = mk("text", { class: "ur-node-t", x: 652, y: 305, "text-anchor": "middle" }, N); t.textContent = "Urea"; }
   mk("ellipse", { class: "ur-node", cx: 830, cy: 132, rx: 34, ry: 20 }, N);
+  { const t = mk("text", { class: "ur-node-t", x: 830, y: 135, "text-anchor": "middle" }, N); t.textContent = "Brain"; }
   mk("ellipse", { class: "ur-node", cx: 830, cy: 336, rx: 38, ry: 26 }, N);
+  { const t = mk("text", { class: "ur-node-t", x: 830, y: 334, "text-anchor": "middle" }, N); t.textContent = "Kidney"; const s = mk("text", { class: "ur-node-t", x: 830, y: 345, "text-anchor": "middle", opacity: "0.7" }, N); s.textContent = "urea out"; }
   E.block = mk("g", { opacity: "0" }, N);
   mk("path", { class: "ur-block", d: "M-10 -10L10 10M10 -10L-10 10", transform: "translate(420 158)" }, E.block);
   E.dialG = mk("g", { opacity: "0" }, N);

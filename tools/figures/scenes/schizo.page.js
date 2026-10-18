@@ -4,14 +4,14 @@ const LANES = [135, 210, 285, 360];
 const TRK = LANES.map((y) => track([[178, y], [752, y]]));
 const UB = (470 - 178) / 574;
 const NODEDEF = [
-  ["vta1", "vta", 150, 135, 26, "VTA", "Ventral tegmental area (VTA): dopamine neurons that supply the mesolimbic and mesocortical pathways."],
-  ["vta2", "vta", 150, 210, 26, "VTA", "Ventral tegmental area (VTA): the same dopamine cell group, drawn again for the mesocortical lane. Its cortical signal is too weak in schizophrenia."],
-  ["nigra", "nigra", 150, 285, 26, "Nigra", "Substantia nigra: dopamine neurons of the nigrostriatal pathway. This pathway starts near normal; trouble comes from blocking it."],
-  ["arc", "arc", 150, 360, 26, "Arcuate", "Arcuate nucleus of the hypothalamus: dopamine neurons of the tuberoinfundibular pathway. Their dopamine normally restrains prolactin."],
-  ["limb", "limb", 790, 135, 34, "Limbic", "Limbic area including the nucleus accumbens. Excess dopamine signal here is linked to positive symptoms."],
-  ["pfc", "pfc", 790, 210, 34, "Prefrontal", "Prefrontal cortex. Too little dopamine signal here is linked to negative and cognitive symptoms."],
-  ["stri", "stri", 790, 285, 34, "Striatum", "Striatum: the movement control target of the nigrostriatal pathway. D2 blockade here causes extrapyramidal movement effects."],
-  ["pit", "pit", 790, 360, 34, "Pituitary", "Pituitary gland. Dopamine normally holds prolactin down; D2 blockade releases that restraint and prolactin rises."],
+  ["vta1", "vta", 150, 135, 28, "VTA", "Ventral tegmental area (VTA): dopamine neurons that supply the mesolimbic and mesocortical pathways."],
+  ["vta2", "vta", 150, 210, 28, "VTA", "Ventral tegmental area (VTA): the same dopamine cell group, drawn again for the mesocortical lane. Its cortical signal is too weak in schizophrenia."],
+  ["nigra", "nigra", 150, 285, 28, "Nigra", "Substantia nigra: dopamine neurons of the nigrostriatal pathway. This pathway starts near normal; trouble comes from blocking it."],
+  ["arc", "arc", 150, 360, 28, "Arcuate", "Arcuate nucleus of the hypothalamus: dopamine neurons of the tuberoinfundibular pathway. Their dopamine normally restrains prolactin."],
+  ["limb", "limb", 790, 135, 38, "Limbic", "Limbic area including the nucleus accumbens. Excess dopamine signal here is linked to positive symptoms."],
+  ["pfc", "pfc", 790, 210, 38, "Prefrontal", "Prefrontal cortex. Too little dopamine signal here is linked to negative and cognitive symptoms."],
+  ["stri", "stri", 790, 285, 38, "Striatum", "Striatum: the movement control target of the nigrostriatal pathway. D2 blockade here causes extrapyramidal movement effects."],
+  ["pit", "pit", 790, 360, 38, "Pituitary", "Pituitary gland. Dopamine normally holds prolactin down; D2 blockade releases that restraint and prolactin rises."],
 ];
 const nodeG = {};
 const gates = [];

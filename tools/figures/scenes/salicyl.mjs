@@ -113,6 +113,7 @@ buildScene({
 .sl-char{fill:#2b2b2b;stroke:#111;stroke-width:.6}
 .sl-alk{fill:#7fc4a8;stroke:#3a7a63;stroke-width:.7}
 .p-sal{--cc:#e8d36a}.p-co2{--cc:#7fc4e8}.p-acid{--cc:#e5484d}.p-heatp{--cc:#f08a4b}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .dr-g-fill.g-sal{fill:#e8d36a}.dr-g-fill.g-resp{fill:#7fc4e8}.dr-g-fill.g-acid{fill:var(--c-bad)}.dr-g-fill.g-heat{fill:#f08a4b}.dr-g-fill.g-brain{fill:var(--c-cyt)}
 `,
 });

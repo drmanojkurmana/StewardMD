@@ -88,8 +88,9 @@ const extraCss = `
 .cl-snc{--cc:#e9b84a}.cl-stri{--cc:#7fc4e8}.cl-gpe{--cc:#f08a4b}.cl-stn{--cc:#e8a04c}.cl-gpi{--cc:#e5484d}.cl-thal{--cc:#3ec6b8}.cl-cor{--cc:#b7a1e6}
 .p-dopa{--cc:#e9b84a}.p-dir{--cc:#3ddc97}.p-ind{--cc:#f08a4b}.p-gpi{--cc:#e5484d}.p-thal{--cc:#2fd4c4}
 .g-dopa{fill:#e9b84a}.g-dir{fill:#3ddc97}.g-ind{fill:#f08a4b}.g-gpi{fill:#e5484d}.g-move{fill:#2fd4c4}
-.pk-node-t{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono);pointer-events:none}
-.pk-node-s{fill:var(--anatomy-text);font:9.5px var(--anatomy-mono);pointer-events:none}
+.pk-node-t{fill:var(--anatomy-strong);font:600 10px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.pk-node-s{fill:var(--anatomy-text);font:9px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .pk-limb{fill:none;stroke:var(--anatomy-strong);stroke-width:5;stroke-linecap:round}
 .pk-hand{fill:var(--anatomy-paper);stroke:var(--anatomy-strong);stroke-width:1.4}
 .pk-rest{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
