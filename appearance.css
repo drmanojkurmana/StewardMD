@@ -1105,3 +1105,21 @@ html[data-appearance] #sbrefBody:not(#_):is(:has(.kblib-discover),.kblib-tool-pa
 html[data-appearance] #sbrefBody:not(#_):is(:has(.kblib-discover),.kblib-tool-page) .sbref-tab.active {
   background: color-mix(in srgb, var(--panel,#fff) 92%, transparent) !important; box-shadow: 0 1px 3px rgba(15,23,42,.10) !important;
 }
+
+/* Liquid and Tinted 3D: the Clinical tools tiles sit directly on the page, no card box (owner 2026-10-18).
+   Last in the file on purpose so it wins over the shared glass / material rules above. The icon discs, labels and the tile
+   press feedback are untouched; Frosted and Blend keep their cards. */
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile),
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile) {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::before,
+html[data-appearance="liquid"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::after,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::before,
+html[data-appearance="tinted3d"] #homeV2.rnav .rnav-tile:not(.kx-tile):not(.fx-tile):not(.tx-tile)::after {
+  display: none !important;
+}
