@@ -1,0 +1,1167 @@
+{
+  "_comment": "Obstetrics pathway. Same architecture as pneumonia: shared core and obgyn skills carry the examination and history method, and this file adds the disease mechanism (abnormal placentation with widespread endothelial dysfunction), the severe-feature anchor, and delivery as the definitive treatment.",
+  "id": "pre-eclampsia",
+  "name": "Pre-eclampsia and eclampsia",
+  "fullName": "Pre-eclampsia and eclampsia",
+  "subtitle": "Hypertensive disorders of pregnancy",
+  "system": "obstetrics",
+  "kbRef": "preeclampsia",
+  "oneLine": "New-onset hypertension after 20 weeks with organ or placental involvement, and the decision of when to deliver",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What pre-eclampsia and eclampsia are, and where they sit in hypertension in pregnancy",
+      "id": "basics",
+      "skills": [
+        "skill.preeclampsia.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age and parity set the risk before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected pre-eclampsia, age at the extremes of reproductive life and a first ongoing pregnancy carry real weight. Note whether she is booked for antenatal care or has come unbooked, and where she was referred from, because an unbooked woman from a primary centre may arrive with no prior blood pressure record to compare against."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Days, not months, and the warning symptoms that herald a fit",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in days: headache for two days, swelling of the face and hands for three days, reduced urine or upper abdominal pain of recent onset. That short tempo in the second half of pregnancy should move you towards a hypertensive disorder before anything else is known."
+        },
+        "skill.hx.obg.booking_lmp": {
+          "expect": "Dates decide everything here: confirm the gestation from the last menstrual period and an early scan, because the diagnosis only applies after 20 weeks and the delivery decision turns on whether she is preterm, early term or term."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.booking_lmp",
+        "skill.hx.preeclampsia.symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The background that raises the risk, and the drugs she is already on",
+      "emphasis": {
+        "skill.hx.obg.medical_family_drug": {
+          "expect": "Ask directly about raised blood pressure before this pregnancy, kidney disease, diabetes and autoimmune disease, and about aspirin or calcium she may already have been advised, since each changes both the risk and the plan."
+        },
+        "skill.hx.obg.previous_pregnancies": {
+          "expect": "A previous pregnancy with raised blood pressure, fits, a small baby, a stillbirth or an early delivery is one of the strongest predictors of recurrence. Record what happened, at what gestation, and how that baby was delivered."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.medical_family_drug",
+        "skill.hx.obg.previous_pregnancies",
+        "skill.hx.preeclampsia.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "Blood pressure first, then the face, hands and reflexes that grade it",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for facial puffiness and tight rings or footwear, rapid weight gain she has noticed, and restlessness or drowsiness. Pallor with jaundice or petechiae points towards HELLP or a clotting problem rather than uncomplicated disease."
+        },
+        "skill.gen.vitals": {
+          "expect": "Blood pressure is the vital sign everything turns on: measure it seated after rest with the right cuff, repeat it, and record both arms at first contact. A rising trend matters as much as a single high value, and severe hypertension changes the plan on its own."
+        },
+        "skill.gen.edema": {
+          "expect": "Expect pitting oedema of the feet, with puffiness of the face and hands that was not there before. Some ankle swelling is common in late pregnancy, so it is the suddenness, the facial distribution and the accompanying pressure rise that make it significant."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Not a feature of uncomplicated pre-eclampsia. Central cyanosis or breathlessness with crackles should make you think of pulmonary oedema, which is an organ complication and an emergency in its own right."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema",
+        "skill.gen.cyanosis"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "Mother and fetus examined together, since the placenta joins them",
+      "emphasis": {
+        "skill.exam.obg.preg_prep_inspect": {
+          "expect": "Inspect for a uterus large or small for the dates, for pallor and jaundice, and for marked oedema of the legs. Consent and a chaperone apply exactly as in any antenatal examination."
+        },
+        "skill.exam.obg.fundal_height": {
+          "expect": "A fundal height lagging behind the dates suggests fetal growth restriction from placental insufficiency, which counts as uteroplacental dysfunction and supports the diagnosis even when proteinuria is modest."
+        },
+        "skill.exam.obg.leopold": {
+          "expect": "Confirm lie and presentation, and feel for uterine tone and tenderness: a tense tender uterus with bleeding suggests abruption, a known complication of hypertensive disease."
+        },
+        "skill.exam.obg.fetal_heart": {
+          "expect": "Listen for the rate and rhythm. A non-reassuring pattern in a hypertensive mother moves the delivery decision forward, so this is never a formality."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.preg_prep_inspect",
+        "skill.exam.obg.fundal_height",
+        "skill.exam.obg.leopold",
+        "skill.exam.obg.fetal_heart"
+      ],
+      "title": "Obstetric abdominal examination"
+    },
+    {
+      "blurb": "One placenta, two patients, and why everything moves together",
+      "id": "disease_findings",
+      "skills": [
+        "skill.preeclampsia.findings"
+      ],
+      "title": "Putting the pre-eclampsia picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the mother, the fetus and the severity",
+      "id": "summary",
+      "skills": [
+        "skill.preeclampsia.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else raises pressure or spills protein in pregnancy",
+      "id": "differential",
+      "skills": [
+        "skill.preeclampsia.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Confirm the pressure, grade the organs, watch the fetus",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.preeclampsia.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Criteria, severe features, and the statement that drives delivery",
+      "id": "diagnosis",
+      "skills": [
+        "skill.preeclampsia.diagnosis"
+      ],
+      "title": "Diagnosis and severity"
+    },
+    {
+      "blurb": "Stabilise, protect against fits, control pressure, and deliver at the right time",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.preeclampsia",
+        "skill.tx.obg.eclampsia_abcd",
+        "skill.tx.obg.mgso4",
+        "skill.tx.obg.eclampsia_bp_delivery",
+        "skill.approach.obg.team_leader"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this mother to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.presentation.preeclampsia.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Demonstrate how you would measure her blood pressure so the reading can be trusted, and tell me what was wrong with a single hurried reading on arrival.",
+          "Her pressure is 160/110 with 2+ albumin and brisk reflexes. What is the diagnosis and the single most urgent next step?",
+          "Name two fetal assessments you would arrange tonight and what each one changes."
+        ],
+        "id": "osce.preeclampsia.assess",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.gen.vitals",
+          "skill.gen.edema",
+          "skill.exam.obg.fundal_height",
+          "skill.exam.obg.fetal_heart"
+        ],
+        "task": "This 24-year-old woman is 34 weeks pregnant with headache and swelling of the face for two days. Assess her for pre-eclampsia and present your findings with a plan.",
+        "title": "Assess suspected pre-eclampsia"
+      },
+      {
+        "examinerQuestions": [
+          "Calculate nothing here: which two facts from her history already mark her as high risk before you examined her?",
+          "She reports flashing lights and right-sided upper abdominal pain. What do these mean and how do they change urgency?",
+          "She asks whether she can go home and return next week. What do you tell her, and what referral would you arrange from a primary centre?"
+        ],
+        "id": "osce.preeclampsia.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.booking_lmp",
+          "skill.hx.preeclampsia.symptoms",
+          "skill.hx.preeclampsia.risk"
+        ],
+        "task": "This 24-year-old woman is 34 weeks pregnant in her first pregnancy. Take a focused history for a hypertensive disorder of pregnancy in six minutes and be ready to grade her risk.",
+        "title": "Take a history and grade the risk"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.preeclampsia.basics",
+      "skill.hx.preeclampsia.risk",
+      "skill.preeclampsia.findings",
+      "skill.preeclampsia.differential",
+      "skill.ix.preeclampsia.workup",
+      "skill.preeclampsia.diagnosis",
+      "skill.tx.preeclampsia",
+      "skill.exam.obg.fetal_heart"
+    ]
+  },
+  "skills": {
+    "skill.preeclampsia.basics": {
+      "body": "Pre-eclampsia is new-onset hypertension arising after 20 weeks of gestation together with proteinuria or evidence of maternal organ injury or placental compromise.",
+      "id": "skill.preeclampsia.basics",
+      "keyPoints": [
+        "Hypertension means a sustained systolic of 140 mmHg or more or a diastolic of 90 mmHg or more, measured properly and repeated. A single hurried reading on arrival is not a diagnosis.",
+        "Proteinuria is no longer mandatory. When hypertension is accompanied by low platelets, raised liver enzymes, renal impairment, pulmonary oedema, cerebral or visual symptoms, or fetal growth restriction, the diagnosis stands without it.",
+        "The spectrum runs from gestational hypertension (raised pressure alone) through pre-eclampsia to eclampsia (fits that cannot be blamed on another cause) and HELLP syndrome, where haemolysis, raised liver enzymes and low platelets dominate and the pressure rise may be modest.",
+        "The root lies in the placenta: shallow remodelling of the maternal spiral arteries leaves an under-perfused placenta, which releases factors that injure the maternal endothelium everywhere. That is why one disease raises pressure, spills protein, injures liver and brain, and starves fetal growth all at once.",
+        "Delivery of the placenta is the only definitive cure. Everything else, pressure control, seizure prophylaxis and surveillance, buys safe time to reach the right gestation for delivery.",
+        "Women at highest risk include those with a previous hypertensive pregnancy, chronic hypertension, kidney disease, diabetes, multiple pregnancy and antiphospholipid syndrome. Low-dose aspirin from early pregnancy lowers the incidence in these women."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Hypertension after 20 weeks plus organ or placental involvement, curable only by delivery",
+      "pitfalls": [
+        "Refusing the diagnosis because proteinuria is absent, when organ injury already confirms it.",
+        "Calling any raised pressure in pregnancy pre-eclampsia without checking the gestation, since chronic hypertension looks identical before 20 weeks.",
+        "Treating magnesium sulphate as a blood pressure drug rather than as seizure prophylaxis."
+      ],
+      "probes": [
+        {
+          "a": "New-onset hypertension after 20 weeks of gestation together with proteinuria or evidence of maternal organ injury (kidney, liver, brain, blood) or placental compromise such as fetal growth restriction.",
+          "accept": [
+            "20 weeks",
+            "hypertension",
+            "proteinuria",
+            "organ",
+            "placental"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Define pre-eclampsia."
+        },
+        {
+          "a": "Because shallow placentation releases factors that injure the maternal endothelium throughout the body, so vasospasm, leak and clotting injure many organs at once while the under-perfused placenta restricts fetal growth.",
+          "accept": [
+            "placenta",
+            "endothelium",
+            "organs",
+            "growth"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does one placental disease injure the brain, liver, kidney and fetal growth together?"
+        },
+        {
+          "a": "Eclampsia is new generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause, and HELLP is haemolysis with elevated liver enzymes and low platelets, which can present with only a modest pressure rise.",
+          "accept": [
+            "seizures",
+            "haemolysis",
+            "liver enzymes",
+            "platelets"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do eclampsia and HELLP syndrome each relate to pre-eclampsia?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "preeclampsia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertensive disorders of pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "What pre-eclampsia and eclampsia are",
+      "why": "Hypertension in pregnancy is several different diseases wearing one reading, and they diverge completely in management. Fixing the definition first is what stops chronic hypertension being delivered early and true pre-eclampsia being sent home."
+    },
+    "skill.ix.preeclampsia.workup": {
+      "body": "Group investigations by what they answer: confirm the pressure and protein, grade each organ, and watch the fetus.",
+      "id": "skill.ix.preeclampsia.workup",
+      "keyPoints": [
+        "CONFIRM: repeated blood pressure with the right cuff size, seated after rest, and urine protein by dipstick followed by a protein to creatinine ratio or a 24-hour collection where available. A single reading never decides anything.",
+        "GRADE THE BLOOD: full blood count for falling platelets and haemolysis, with a blood film for fragmented cells where HELLP is suspected. A dropping platelet count is one of the earliest warnings of severe disease.",
+        "GRADE LIVER AND KIDNEY: liver transaminases and lactate dehydrogenase for hepatic involvement and haemolysis, serum creatinine and urate for renal involvement. Rising values matter more than any single cutoff.",
+        "STRATIFY WHERE AVAILABLE: angiogenic markers such as the sFlt-1 to PlGF ratio help risk stratification in tertiary centres, but their absence at a primary or district centre never delays treatment or referral.",
+        "WATCH THE FETUS: ultrasound for growth and liquor volume, umbilical artery Doppler for placental resistance, and cardiotocography for immediate wellbeing. Growth restriction with abnormal Doppler is organ involvement by another name.",
+        "The single most important principle: never let the wait for a laboratory result delay control of severe hypertension, seizure prophylaxis, or referral. Bloods grade the disease, they do not gate its treatment."
+      ],
+      "kind": "investigation",
+      "media": [],
+      "oneLine": "Pressure and protein to confirm, bloods to grade organs, scans to watch the fetus",
+      "pitfalls": [
+        "Treating one raised reading as confirmed hypertension without repeating it properly.",
+        "Delaying magnesium prophylaxis or referral while waiting for laboratory values to return.",
+        "Ordering angiogenic markers or Doppler studies at a centre that cannot act on them, instead of referring on clinical grounds."
+      ],
+      "probes": [
+        {
+          "a": "Repeated blood pressure measurement, urine protein by dipstick with a protein to creatinine ratio or 24-hour collection, full blood count for platelets, liver enzymes with LDH, creatinine and urate, plus fetal growth scan with umbilical artery Doppler.",
+          "accept": [
+            "blood pressure",
+            "protein",
+            "platelets",
+            "liver",
+            "creatinine",
+            "doppler"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "List the core investigations in suspected pre-eclampsia."
+        },
+        {
+          "a": "No. Severe hypertension, seizure prophylaxis and referral proceed on clinical grounds at once, because the bloods grade the disease but never gate its treatment.",
+          "accept": [
+            "no",
+            "clinical grounds",
+            "grade",
+            "never gate"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A woman has severe hypertension but the laboratory is two hours away. Do you wait for bloods before acting?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "preeclampsia: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertension in pregnancy",
+          "source": "NICE"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Confirming and grading the illness",
+      "why": "Investigations in pre-eclampsia serve three separate jobs, confirming the diagnosis, grading each injured organ, and watching the fetus, and understanding which test does which stops a student waiting for a platelet count before treating a pressure that threatens a stroke."
+    },
+    "skill.preeclampsia.diagnosis": {
+      "body": "The diagnosis needs hypertension after 20 weeks plus proteinuria or organ or placental involvement, and the statement is incomplete without the severity.",
+      "id": "skill.preeclampsia.diagnosis",
+      "keyPoints": [
+        "CRITERION ONE: new-onset hypertension after 20 weeks, meaning a sustained systolic of 140 mmHg or more or a diastolic of 90 mmHg or more in a woman previously normotensive. Earlier onset points to chronic hypertension instead.",
+        "CRITERION TWO: proteinuria or any one of thrombocytopenia, raised transaminases, renal impairment, pulmonary oedema, new cerebral or visual symptoms, or uteroplacental compromise such as growth restriction. One is enough.",
+        "SEVERE FEATURES: severe hypertension of 160/110 mmHg or more, persistent headache or visual loss, brisk reflexes with clonus, right upper quadrant pain with abnormal enzymes, falling platelets, rising creatinine or falling urine output, pulmonary oedema, and growth restriction with abnormal Doppler. Any one of these escalates care.",
+        "ECLAMPSIA: new generalised tonic-clonic seizures in a woman with pre-eclampsia that cannot be attributed to another cause. Fits may come before, during or after labour, and a substantial share arise after delivery.",
+        "HELLP: haemolysis with fragmented cells and raised LDH, elevated liver enzymes, and low platelets, often with nausea, vomiting and upper abdominal pain while the pressure rise stays modest. Suspect it whenever the blood picture worsens out of proportion to the pressure.",
+        "A complete diagnostic statement names the disorder, the gestation, the parity, the severity and the fetal status: severe pre-eclampsia at 34 weeks in a primigravida with growth restriction, for example. That sentence is the delivery decision in words."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Criteria plus severe features, stated in one delivery-driving sentence",
+      "pitfalls": [
+        "Excluding the diagnosis for want of proteinuria when platelets are falling and enzymes are rising.",
+        "Calling severe disease mild because the pressure is only modestly raised, missing HELLP behind it.",
+        "Stopping surveillance at delivery, when eclampsia and severe hypertension can still strike postpartum."
+      ],
+      "probes": [
+        {
+          "a": "New-onset hypertension after 20 weeks plus proteinuria or organ involvement such as low platelets, raised enzymes, renal impairment, pulmonary oedema, cerebral symptoms or fetal growth restriction.",
+          "accept": [
+            "20 weeks",
+            "hypertension",
+            "proteinuria",
+            "organ",
+            "growth restriction"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the diagnostic criteria for pre-eclampsia."
+        },
+        {
+          "a": "Severe hypertension of 160/110 or more, persistent headache or visual symptoms, clonus, upper abdominal pain with abnormal enzymes, falling platelets, rising creatinine, pulmonary oedema, or growth restriction with abnormal Doppler.",
+          "accept": [
+            "160/110",
+            "headache",
+            "clonus",
+            "platelets",
+            "oedema",
+            "doppler"
+          ],
+          "level": 2,
+          "minMatch": 3,
+          "q": "Name four severe features that escalate care."
+        },
+        {
+          "a": "No. Thrombocytopenia with raised transaminases and haemolysis makes HELLP syndrome, a severe variant that can present with only a modest pressure rise, and it needs delivery planning, not reassurance.",
+          "accept": [
+            "no",
+            "hellp",
+            "haemolysis",
+            "delivery"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A woman at 35 weeks has a pressure of 148/96 but falling platelets and rising enzymes. Is she mild and safe to send home?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "criteria",
+          "text": "States both diagnostic criteria correctly"
+        },
+        {
+          "id": "severe",
+          "text": "Lists severe features that escalate care"
+        },
+        {
+          "id": "statement",
+          "text": "Frames a complete diagnostic statement with gestation and fetal status"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "preeclampsia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Pre-eclampsia and eclampsia",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Diagnosis and severity",
+      "why": "A diagnosis of pre-eclampsia without a severity is like a pneumonia diagnosis without CURB-65: it does not say whether she stays, is referred, or is delivered tonight. The severe-feature list is the tool that converts findings into that decision."
+    },
+    "skill.preeclampsia.differential": {
+      "body": "For new hypertension with proteinuria or organ injury after 20 weeks, work through chronic, gestational, renal, hepatic and haematological mimics.",
+      "id": "skill.preeclampsia.differential",
+      "keyPoints": [
+        "Chronic hypertension: raised pressure known before pregnancy or found before 20 weeks, often with no proteinuria. The old antenatal card or an early reading settles it, and this is the commonest confusion in an unbooked woman.",
+        "Gestational hypertension: new raised pressure after 20 weeks without proteinuria or organ injury. It needs the same surveillance because a substantial share, especially early and higher readings, progress to pre-eclampsia.",
+        "Chronic kidney disease with proteinuria: long-standing proteinuria and bland renal impairment without the tempo of pre-eclampsia. Old urine reports and pre-pregnancy creatinine are the discriminators.",
+        "Acute fatty liver of pregnancy: nausea, vomiting, abdominal pain and jaundice with liver failure and coagulopathy, typically late third trimester. It shares pain and enzymes with HELLP but the liver failure dominates.",
+        "Thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome: falling platelets with haemolysis but usually without the hypertension that defines pre-eclampsia. Atypical or refractory cases need this considered.",
+        "Systemic lupus erythematosus flare: proteinuria with active urinary sediment and extrarenal lupus features in a woman known to have lupus. It mimics the renal face of pre-eclampsia.",
+        "Eclampsia itself must be separated from epilepsy, cerebral malaria where endemic, and other causes of fits in pregnancy: no prior seizure disorder, hypertension with proteinuria or organ injury, and laboratory evidence of HELLP all point to eclampsia."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Chronic, gestational, renal, hepatic and haematological mimics",
+      "pitfalls": [
+        "Labelling every raised pressure after 20 weeks as pre-eclampsia without asking about pressure before pregnancy.",
+        "Sending home gestational hypertension as benign without surveillance for progression.",
+        "Missing thrombotic microangiopathy in a refractory case because HELLP was assumed without question."
+      ],
+      "probes": [
+        {
+          "a": "Chronic hypertension, gestational hypertension, chronic kidney disease with proteinuria, acute fatty liver of pregnancy, thrombotic thrombocytopenic purpura or haemolytic uraemic syndrome, and lupus flare.",
+          "accept": [
+            "chronic hypertension",
+            "gestational",
+            "kidney",
+            "fatty liver",
+            "thrombocytopenic",
+            "lupus"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four differentials for hypertension with proteinuria in pregnancy."
+        },
+        {
+          "a": "Chronic hypertension is present before pregnancy or before 20 weeks, while pre-eclampsia is new after 20 weeks; old records, an early booking pressure and the presence of organ injury separate them.",
+          "accept": [
+            "before 20 weeks",
+            "new",
+            "old records",
+            "organ injury"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do you separate chronic hypertension from pre-eclampsia in an unbooked woman?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning chronic, gestational, renal, hepatic and haematological causes"
+        },
+        {
+          "id": "discriminator",
+          "text": "States the gestation and record-based discriminator for chronic hypertension"
+        },
+        {
+          "id": "progress",
+          "text": "Recognises that gestational hypertension needs surveillance for progression"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "preeclampsia: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertensive disorders of pregnancy",
+          "source": "FOGSI"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Differential diagnosis",
+      "why": "Most raised pressures in pregnancy are what they look like, but the ones that are not are dangerous in both directions: chronic hypertension delivered too early, and fatty liver or TTP treated as routine pre-eclampsia. The differential protects both the mother from the wrong delivery and the fetus from the wrong delay."
+    },
+    "skill.preeclampsia.findings": {
+      "body": "One injured endothelium explains the pressure, the protein, the blood picture and the small baby together.",
+      "id": "skill.preeclampsia.findings",
+      "keyPoints": [
+        "BLOOD PRESSURE: a sustained 140/90 mmHg or more after 20 weeks makes the diagnosis with proteinuria or organ injury, and 160/110 mmHg or more is severe on its own. Measure seated after rest with the right cuff, repeat the reading, and respect a rising trend.",
+        "URINE: protein on dipstick confirmed by a protein to creatinine ratio or a 24-hour collection. Falling urine output signals renal involvement and needs hourly monitoring in severe disease.",
+        "OEDEMA AND WEIGHT: sudden puffiness of the face and hands with rapid weight gain. Gradual ankle swelling alone is common in late pregnancy and means little without the pressure rise.",
+        "REFLEXES: brisk deep tendon reflexes, and clonus where present, herald eclampsia. Loss of reflexes later warns of magnesium toxicity, so the same examination both predicts fits and monitors their treatment.",
+        "ABDOMEN: right upper quadrant or epigastric tenderness reflects liver swelling and warns of HELLP or haematoma. A tense tender uterus with bleeding means abruption, not labour.",
+        "FETUS: fundal height lagging the dates, reduced liquor and an abnormal umbilical artery Doppler all mean uteroplacental compromise, which is organ involvement counted on the fetal side.",
+        "BLOOD PICTURE: falling platelets, fragmented red cells with raised LDH, rising transaminases and rising creatinine complete the picture of HELLP and renal injury even when the pressure looks modest."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Pressure, protein, reflexes, liver, blood and fetus as one syndrome",
+      "pitfalls": [
+        "Calling oedema significant on its own, without the pressure rise and suddenness that give it meaning.",
+        "Checking reflexes once and never again, when they are the bedside monitor for both imminent fits and magnesium toxicity.",
+        "Being reassured by a modest pressure while platelets fall and enzymes rise, which is exactly how HELLP presents."
+      ],
+      "probes": [
+        {
+          "a": "Sustained pressure of 140/90 or more with proteinuria or organ injury, sudden facial swelling, brisk reflexes with clonus, upper abdominal tenderness, falling platelets with rising enzymes, and a growth-restricted fetus with abnormal Doppler.",
+          "accept": [
+            "140/90",
+            "proteinuria",
+            "clonus",
+            "tenderness",
+            "platelets",
+            "doppler"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "List the bedside and laboratory findings that complete the pre-eclampsia picture."
+        },
+        {
+          "a": "Because HELLP injures blood and liver out of proportion to vasospasm, so the pressure can stay modest while platelets fall, cells fragment and enzymes rise toward rupture or coagulopathy.",
+          "accept": [
+            "blood",
+            "liver",
+            "modest",
+            "rupture"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why can HELLP be severe with only a modest pressure rise?"
+        },
+        {
+          "a": "Brisk reflexes with clonus predict the fit, and the same reflexes disappear with magnesium toxicity, so serial examination both warns of eclampsia and guards the treatment.",
+          "accept": [
+            "predict",
+            "toxicity",
+            "serial",
+            "guards"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Explain the double role of tendon reflexes in eclampsia care."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "preeclampsia: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Pre-eclampsia and eclampsia",
+          "source": "RCOG"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The pre-eclampsia picture",
+      "why": "Pre-eclampsia is the cleanest example in obstetrics of one mechanism generating a coherent set of findings across mother, blood and fetus. Seeing them as one syndrome is what stops a student treating the pressure, the platelets and the small baby as three separate problems."
+    },
+    "skill.preeclampsia.summary": {
+      "body": "State the mother with the risk that matters, the gestation, the syndrome in abstract terms, and the severity with the fetal status, in that order.",
+      "id": "skill.preeclampsia.summary",
+      "keyPoints": [
+        "Name the mother with the relevant risk: age, parity, booking status and the risk factor that matters, such as a previous hypertensive pregnancy or chronic hypertension.",
+        "State the gestation and the tempo: 34 weeks with two days of headache and swelling. Gestation drives delivery and tempo separates acute disease from chronic hypertension.",
+        "State the syndrome in abstract terms: new-onset hypertension with proteinuria and cerebral warning symptoms, with examination findings of severe hypertension, brisk reflexes and a growth-restricted fetus.",
+        "Include severity and fetal status in the same summary, since they determine the plan: with severe features and an abnormal Doppler, warranting stabilisation and delivery.",
+        "A worked example: A 24-year-old primigravida at 34 weeks presents with two days of headache and facial swelling. Blood pressure is 160/110, urine shows 2+ albumin, reflexes are brisk with clonus, and the fetus is growth restricted with an abnormal Doppler. This is severe pre-eclampsia needing stabilisation and delivery."
+      ],
+      "kind": "reasoning",
+      "media": [],
+      "oneLine": "Mother, gestation, syndrome and severity in three sentences",
+      "pitfalls": [
+        "Omitting the gestation from the summary, leaving the listener unable to judge the delivery decision.",
+        "Describing findings without grading severity, so the plan could be anything from reassurance to tonight.",
+        "Leaving out the fetal status, which is half the disease."
+      ],
+      "probes": [
+        {
+          "a": "The gestation, because it decides whether delivery means prematurity or term, and the severity with fetal status, because they decide whether she is stabilised, referred or delivered.",
+          "accept": [
+            "gestation",
+            "severity",
+            "fetal",
+            "delivery"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What two elements must a pre-eclampsia summary carry that a pneumonia summary does not?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "mother",
+          "text": "States the mother with relevant risk factors"
+        },
+        {
+          "id": "gestation",
+          "text": "States the gestation and tempo"
+        },
+        {
+          "id": "severity",
+          "text": "Includes severity with fetal status"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "preeclampsia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertensive disorders of pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "The clinical summary",
+      "why": "The summary for pre-eclampsia has a different shape from a medical one: gestation and fetal status belong in the same sentence as the syndrome, because the plan that follows is a delivery decision, not a prescription."
+    },
+    "skill.tx.preeclampsia": {
+      "body": "Stabilise the mother, protect her against fits, control dangerous pressure, mature the fetal lungs where preterm, and deliver at the right time by the right route.",
+      "dosingNote": "This module teaches management at the level of drug class and principle. Specific agents, doses, routes and regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.preeclampsia",
+      "keyPoints": [
+        "DELIVERY is the only definitive cure, and its timing balances gestation against maternal and fetal risk: severe disease, eclampsia, HELLP, pulmonary oedema or a non-reassuring fetus means delivery without delay for gestation, while stable preterm disease without severe features may gain time under close surveillance.",
+        "SEIZURE PROPHYLAXIS with magnesium sulphate in severe disease, and to treat eclamptic fits. It is not a blood pressure drug, and reflexes, breathing and urine output are watched while it runs, with calcium gluconate kept ready as antidote.",
+        "BLOOD PRESSURE CONTROL with agents considered suitable in pregnancy such as labetalol, nifedipine or methyldopa, and a rapid-acting agent for acute severe hypertension to reduce the risk of stroke. Lower firmly but not aggressively, preserving placental perfusion.",
+        "CORTICOSTEROIDS for fetal lung maturity when preterm delivery is anticipated. They mature the fetal lungs; they do not treat the maternal syndrome, including HELLP.",
+        "SURVEILLANCE of both patients: repeated pressure, platelets, liver and renal function with fluid balance and urine output in the mother, and growth scans with umbilical artery Doppler plus cardiotocography in the fetus. Manage in a unit that can deliver at any hour, escalating to a higher centre early.",
+        "AFTER DELIVERY: continue pressure and fit surveillance postpartum, when eclampsia can still strike. Counsel on recurrence, start low-dose aspirin early in the next pregnancy for high-risk women, and flag the lifelong cardiovascular and renal risk for follow-up.",
+        "IN INDIAN PRACTICE: stabilise and refer early from a primary centre to a first referral unit or district hospital with blood, operating and newborn facilities, using free ambulance transport and cashless mother-child schemes where available. Never keep severe disease waiting for daylight or a senior who is hours away."
+      ],
+      "kind": "treatment",
+      "media": [],
+      "oneLine": "Delivery cures, magnesium prevents fits, pressure control prevents stroke",
+      "pitfalls": [
+        "Using magnesium sulphate to bring the pressure down, which wastes the drug that prevents fits and leaves the stroke risk untreated.",
+        "Lowering pressure so fast and far that placental perfusion collapses and the fetal heart pays for it.",
+        "Discharging surveillance at delivery, when postpartum eclampsia and severe hypertension are still ahead.",
+        "Keeping severe disease at a primary centre for want of transport planning, instead of stabilising and referring at once."
+      ],
+      "probes": [
+        {
+          "a": "Delivery of the placenta is the only definitive cure, with timing balancing gestation against maternal and fetal risk, alongside seizure prophylaxis, pressure control, steroids where preterm, and close surveillance of both patients.",
+          "accept": [
+            "delivery",
+            "prophylaxis",
+            "pressure",
+            "steroids",
+            "surveillance"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the principles of managing pre-eclampsia."
+        },
+        {
+          "a": "Because magnesium prevents and treats fits but does not lower blood pressure, while uncontrolled severe hypertension threatens maternal stroke, so each needs its own drug.",
+          "accept": [
+            "fits",
+            "blood pressure",
+            "stroke",
+            "own drug"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does a woman on magnesium prophylaxis still need antihypertensives?"
+        },
+        {
+          "a": "Stabilise her with seizure prophylaxis and pressure control, give steroids for the fetal lungs if preterm, and deliver without delay for gestation, because severe features mean the placenta must come out.",
+          "accept": [
+            "stabilise",
+            "steroids",
+            "deliver",
+            "severe"
+          ],
+          "level": 3,
+          "q": "A 30-week mother has clonus, upper abdominal pain and falling platelets. What is the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [],
+      "sources": [
+        {
+          "locator": "preeclampsia: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertension in pregnancy",
+          "source": "WHO"
+        }
+      ],
+      "system": "obstetrics",
+      "title": "Managing pre-eclampsia and eclampsia",
+      "why": "The management of pre-eclampsia is a balancing act between two patients joined by one placenta: every day gained helps the fetal lungs but risks the maternal brain. Getting the order right, stabilise, protect, control, then deliver, is what keeps both alive."
+    }
+  },
+  "cases": [
+    {
+      "differentialModel": {
+        "accept": [
+          "pre-eclampsia",
+          "chronic hypertension",
+          "gestational",
+          "kidney disease",
+          "fatty liver",
+          "hellp",
+          "eclampsia"
+        ],
+        "answer": "Severe pre-eclampsia at 34 weeks in a primigravida. Consider chronic hypertension with superimposed disease, gestational hypertension progressing, chronic kidney disease, and HELLP syndrome."
+      },
+      "diagnosis": {
+        "accept": [
+          "severe pre-eclampsia",
+          "pre-eclampsia"
+        ],
+        "answer": "Severe pre-eclampsia at 34 weeks gestation in a primigravida, with fetal growth restriction.",
+        "minMatch": 1
+      },
+      "essentialInvestigations": [
+        "urine",
+        "fbc",
+        "lft",
+        "kft",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.obg.fetal_heart": {
+          "abnormal": true,
+          "finding": "Fetal heart rate 148 per minute, regular. No decelerations heard on brief auscultation; continuous monitoring planned."
+        },
+        "skill.exam.obg.fundal_height": {
+          "abnormal": true,
+          "finding": "Fundal height 30 weeks by tape, lagging 4 weeks behind the dates. Symphysis-fundal height 30 cm."
+        },
+        "skill.exam.obg.leopold": {
+          "abnormal": false,
+          "finding": "Longitudinal lie, cephalic presentation, head mobile above the brim. Uterus relaxed between contractions with no tenderness and no bleeding."
+        },
+        "skill.exam.obg.preg_prep_inspect": {
+          "abnormal": true,
+          "finding": "Uterus small for the stated 34 weeks. Pitting oedema of both legs to the mid shin. No pallor, no jaundice, no bleeding per vaginam."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Anxious young woman with marked puffiness of the face and eyelids. Rings tight on swollen fingers. Alert and oriented, no drowsiness."
+        },
+        "skill.gen.cyanosis": {
+          "abnormal": false,
+          "finding": "No central or peripheral cyanosis. Lungs clear on auscultation."
+        },
+        "skill.gen.edema": {
+          "abnormal": true,
+          "finding": "Pitting pedal oedema to the mid shin with puffiness of the face and hands. Ankle swelling alone would mean little; this facial distribution with hypertension makes it significant."
+        },
+        "skill.gen.vitals": {
+          "abnormal": true,
+          "finding": "Blood pressure 160/110, repeated after rest at 162/108. Pulse 96 regular. Respiratory rate 22. SpO2 97 percent on room air. Temperature 37.1 C. Deep tendon reflexes brisk with sustained ankle clonus."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "anc": {
+          "cues": [
+            "antenatal checkup",
+            "anc visits",
+            "booked",
+            "unbooked",
+            "checkup during pregnancy"
+          ],
+          "reply": "I went twice to the village health centre. Both times they said my pressure was a little high but did not give any tablets. Nobody tested my urine."
+        },
+        "bleeding": {
+          "cues": [
+            "bleeding",
+            "bleed per vaginam",
+            "blood loss",
+            "spotting",
+            "leaking"
+          ],
+          "reply": "No bleeding and no leaking of watery fluid till now."
+        },
+        "bp_readings": {
+          "cues": [
+            "blood pressure",
+            "bp",
+            "pressure reading",
+            "high bp",
+            "when was it first high"
+          ],
+          "key": true,
+          "reply": "At seven months they said the upper reading was 140 and asked me to come again, but my husband was away so I could not go back."
+        },
+        "contraception": {
+          "cues": [
+            "contraception",
+            "family planning",
+            "copper t"
+          ],
+          "reply": "This is my first pregnancy, we did not use anything before it."
+        },
+        "diabetes_renal": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "kidney",
+            "renal",
+            "urine problem before",
+            "swelling before pregnancy"
+          ],
+          "key": true,
+          "reply": "No sugar problem and no kidney problem before this pregnancy. My urine was always normal earlier."
+        },
+        "diet": {
+          "cues": [
+            "diet",
+            "food",
+            "salt",
+            "eating",
+            "weight gain"
+          ],
+          "reply": "I eat the usual home food. My weight has gone up fast in the last two weeks, my slippers do not fit any more."
+        },
+        "drugs": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablets",
+            "iron tablets",
+            "folic acid",
+            "calcium",
+            "aspirin",
+            "taking anything"
+          ],
+          "key": true,
+          "reply": "Only the iron tablets from the health centre, which I take most days. No pressure tablets, no aspirin."
+        },
+        "epigastric": {
+          "cues": [
+            "upper abdomen",
+            "stomach pain",
+            "pain below ribs",
+            "right side pain",
+            "epigastric",
+            "nausea",
+            "vomiting"
+          ],
+          "key": true,
+          "reply": "Yes, there is a tight pain just below my ribs on the right side since this morning. I vomited once."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "mother",
+            "sister",
+            "anyone else"
+          ],
+          "reply": "My mother says she also had swelling and high pressure when she carried my younger brother."
+        },
+        "fetal_movements": {
+          "cues": [
+            "baby movements",
+            "fetal movements",
+            "baby moving",
+            "kick count",
+            "movements reduced"
+          ],
+          "key": true,
+          "reply": "The baby is moving, but since yesterday the kicks feel fewer and weaker than before."
+        },
+        "fits": {
+          "cues": [
+            "fits",
+            "seizure",
+            "convulsion",
+            "unconscious",
+            "jerking",
+            "frothing",
+            "eclampsia"
+          ],
+          "key": true,
+          "reply": "No fits, doctor. My husband is sitting outside, you can ask him too, I have not fallen unconscious."
+        },
+        "headache": {
+          "cues": [
+            "headache",
+            "head pain",
+            "head heaviness"
+          ],
+          "key": true,
+          "reply": "A tight headache over the whole head for two days. It did not go away even after rest and the paracetamol from the shop."
+        },
+        "lmp_dates": {
+          "cues": [
+            "last period",
+            "lmp",
+            "months pregnant",
+            "weeks pregnant",
+            "due date",
+            "delivery date",
+            "edd"
+          ],
+          "key": true,
+          "reply": "My last period started in the middle of February, so the sister at the centre said I am in the eighth month and the delivery date is late November."
+        },
+        "occupation": {
+          "cues": [
+            "work",
+            "occupation",
+            "job",
+            "housewife",
+            "field work"
+          ],
+          "reply": "I am a housewife. I help in the wheat field in the mornings but stopped this week because of the headache."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, for two days I have a severe headache and my face looks swollen. The sister checked my pressure and said it is very high, so she sent me here."
+        },
+        "previous_pregnancies": {
+          "cues": [
+            "previous pregnancy",
+            "earlier pregnancy",
+            "first pregnancy",
+            "abortion",
+            "miscarriage",
+            "stillbirth",
+            "children"
+          ],
+          "key": true,
+          "reply": "This is my first pregnancy. I have never been pregnant before."
+        },
+        "swelling": {
+          "cues": [
+            "swelling",
+            "swollen",
+            "oedema",
+            "edema",
+            "puffiness",
+            "face swollen"
+          ],
+          "key": true,
+          "reply": "My face and hands have puffed up over three days. My rings are tight and my slippers do not fit."
+        },
+        "tobacco": {
+          "cues": [
+            "tobacco",
+            "smoke",
+            "smoking",
+            "gutka",
+            "alcohol",
+            "drink"
+          ],
+          "reply": "No, I never use tobacco and I do not drink."
+        },
+        "urine": {
+          "cues": [
+            "urine",
+            "urination",
+            "passing urine",
+            "reduced urine",
+            "oliguria",
+            "urine output"
+          ],
+          "key": true,
+          "reply": "Since yesterday I am passing less urine than usual, and it looks a little dark."
+        },
+        "visual": {
+          "cues": [
+            "vision",
+            "visual",
+            "flashing lights",
+            "blurring",
+            "blurred",
+            "blind spots",
+            "seeing"
+          ],
+          "key": true,
+          "reply": "Yes, since this morning I see flashing lights again and again, and everything looks a little blurred."
+        }
+      },
+      "id": "case.preeclampsia.sunita",
+      "initialVitals": {
+        "bpDiastolic": 110,
+        "bpSystolic": 160,
+        "gcs": 15,
+        "hr": 96,
+        "rr": 22,
+        "spo2": 97,
+        "temp": 37.1
+      },
+      "investigations": {
+        "ctg": {
+          "indicated": true,
+          "label": "Cardiotocography",
+          "note": "Immediate fetal wellbeing alongside the growth picture; a non-reassuring trace moves delivery forward.",
+          "result": "Reactive trace at admission with a baseline of 145. No prolonged decelerations during the monitoring period."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "Platelets are the early warning of severe disease and HELLP; a falling count changes urgency faster than pressure alone.",
+          "result": "Haemoglobin 11.2 g/dL. Platelet count low and falling on repeat testing, with Burr cells on the smear suggesting haemolysis."
+        },
+        "kft": {
+          "indicated": true,
+          "label": "Kidney function tests",
+          "note": "Rising creatinine and urate confirm renal involvement and help grade severity.",
+          "result": "Serum creatinine raised above her booking baseline. Serum urate raised. Urine output charted hourly."
+        },
+        "lft": {
+          "indicated": true,
+          "label": "Liver function tests with LDH",
+          "note": "Transaminases with LDH confirm hepatic involvement and haemolysis; together with low platelets they make HELLP.",
+          "result": "Transaminases raised to more than twice normal. LDH raised. Bilirubin mildly raised."
+        },
+        "sflt": {
+          "indicated": false,
+          "label": "Angiogenic markers (sFlt-1/PlGF ratio)",
+          "note": "Not available at this centre and never a reason to delay stabilisation or referral; the clinical picture already decides care.",
+          "result": "Not done; test not available here."
+        },
+        "urine": {
+          "indicated": true,
+          "label": "Urine albumin and protein to creatinine ratio",
+          "note": "This confirms the protein half of the diagnosis; a bedside dipstick starts it and the ratio quantifies it.",
+          "result": "Bedside dipstick 2+ albumin. Protein to creatinine ratio in the nephrotic range equivalent, confirming significant proteinuria."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Obstetric ultrasound with umbilical artery Doppler",
+          "note": "Growth restriction with abnormal Doppler is uteroplacental dysfunction and counts toward both diagnosis and delivery timing.",
+          "result": "Single live fetus, estimated weight below the 10th centile for 34 weeks. Liquor reduced. Umbilical artery Doppler shows raised resistance with reduced end-diastolic flow."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "stabilise",
+          "magnesium",
+          "pressure control",
+          "steroids",
+          "delivery",
+          "referral",
+          "postpartum",
+          "monitor"
+        ],
+        "answer": "Stabilise with left lateral care, seizure prophylaxis with magnesium sulphate, control severe pressure, give corticosteroids for fetal lungs, plan delivery without delay for gestation at a centre with blood, operating and newborn facilities, and continue postpartum surveillance.",
+        "minMatch": 3
+      },
+      "opening": "Sunita Devi, 24, a primigravida at 34 weeks from a village in eastern Uttar Pradesh, has been referred by the ASHA with headache, facial swelling and a pressure of 160/110. Introduce yourself and take a history.",
+      "patient": {
+        "age": 24,
+        "name": "Sunita Devi",
+        "occupation": "Housewife, helps in the family wheat field",
+        "residence": "Rural, village in eastern Uttar Pradesh, lives with husband and mother-in-law",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you: two days of headache with three days of facial swelling at 34 weeks is a hypertensive disorder until proven otherwise.",
+        "Proteinuria was never the gatekeeper here; headache with flashing lights, clonus, upper abdominal pain and falling platelets already confirm severe disease.",
+        "Brisk reflexes with clonus are doing double duty: they warn of an imminent fit and they are the bedside monitor once magnesium prophylaxis starts.",
+        "A fundus lagging four weeks with raised Doppler resistance is uteroplacental dysfunction, the fetal half of the same placental disease.",
+        "The falling platelet count with rising enzymes means HELLP is evolving, which is why this mother is delivered rather than observed.",
+        "Postpartum surveillance is part of the plan, not an afterthought: fits and severe hypertension can still strike after the baby is born.",
+        "From a primary centre this mother is stabilised and referred, not kept: blood, an operating theatre and newborn care must be where she delivers."
+      ],
+      "title": "A primigravida at 34 weeks with headache and swelling",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

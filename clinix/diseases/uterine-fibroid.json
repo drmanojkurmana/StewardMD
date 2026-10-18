@@ -1,0 +1,1190 @@
+{
+  "_comment": "Gynaecology pilot disease. Same architecture as pneumonia: almost every finding is an emphasis overlay on a shared core/obgyn skill. Fibroid's own contribution is site decides symptoms (FIGO types 0 to 8), heavy bleeding with anaemia as the dominant axis, ultrasound as first-line imaging, and uterus preservation versus definitive surgery as the management decision.",
+  "chapters": [
+    {
+      "blurb": "What a uterine fibroid is, and what it is not",
+      "id": "basics",
+      "skills": [
+        "skill.fibroid.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age and parity set the pre-test probability before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected fibroid, reproductive age carries the weight: a firm pelvic mass with heavy bleeding in a woman in her thirties or forties is a fibroid until proved otherwise. Nulliparity, obesity and a family history of fibroids raise the prior further, while any growth after the menopause lowers it and raises concern for sarcoma instead."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Bleeding in practical terms, plus pressure and pain",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in months to years, not days: heavy periods with clots and flooding for many months, often with tiredness from anaemia. That chronic tempo alone should move you away from pregnancy related bleeding or an acute infection before anything else is known."
+        },
+        "skill.hx.obg.gynae_symptoms": {
+          "expect": "Expect the pain questions to come back cyclical or dull rather than acute: congestive dysmenorrhoea and a heavy dragging pelvic ache fit fibroid, while severe acute pain points to torsion of a pedunculated lesion or red degeneration in pregnancy. Always ask about urinary frequency and constipation, which mark bulk rather than bleeding."
+        },
+        "skill.hx.obg.menstrual_history": {
+          "expect": "Expect menorrhagia as the dominant pattern: prolonged flow, clots, flooding through clothes, night changes and days off work. Quantify in practical terms rather than millilitres. Submucosal lesions bleed most; subserosal lesions often leave the periods untouched, so a normal menstrual history never excludes a fibroid."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.obg.menstrual_history",
+        "skill.hx.obg.gynae_symptoms"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "The background that changes what you may safely do about it",
+      "emphasis": {
+        "skill.hx.obg.gynae_background": {
+          "expect": "Contraceptive need and fertility wishes drive the whole plan here: a woman who wants another child is counselled toward uterus preserving options, while completed family opens definitive ones. Exclude pregnancy in every woman of reproductive age before any investigation or procedure, and note cervical screening, since a healthy cervix on speculum inspection is part of the fibroid workup."
+        }
+      },
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.obg.gynae_background",
+        "skill.hx.fibroid.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A well woman with pale conjunctivae, and the anaemia that outranks the lump",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a generally well woman who is pale: conjunctival and palmar pallor from chronic blood loss is the commonest general sign. Acute distress is unusual and should make you think of torsion or degeneration rather than uncomplicated fibroid."
+        },
+        "skill.gen.edema": {
+          "expect": "Not a typical finding in fibroid. Bilateral oedema with a raised JVP should make you reconsider cardiac or renal disease as a contributor to the tiredness, rather than attributing everything to anaemia."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect normal vitals in uncomplicated fibroid: this is a chronic benign condition, not an acute illness. Tachycardia or postural hypotension means the anaemia is severe enough to be symptomatic at rest, and hypotension with acute pain means torsion or another emergency, not fibroid alone."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.edema"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "A firm pelvic lump that moves with the cervix",
+      "emphasis": {
+        "skill.exam.obg.bimanual": {
+          "expect": "Expect an enlarged uterus, often described in weeks of gestation, with a firm, irregular, sometimes nodular contour. The mass moves with the cervix on bimanual examination, which is the single fastest way to tell a uterine lump from an ovarian one. Fornices are usually free; a lateral mass fixed in one fornix points to ovary or broad ligament instead."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "expect": "Expect a firm, regular or nodular hypogastric mass whose lower border cannot be reached above the pubic symphysis, confirming pelvic origin. Always examine with an empty bladder, since a full bladder is the commonest mimic. Size is recorded in weeks of gestation, and mobility in both planes with movement transmitted to the cervix confirms a uterine origin."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "expect": "Expect a straightforward speculum examination in most fibroid patients: the procedure itself is unchanged, but gentleness matters because she may be actively bleeding. A fibroid polyp protruding through the cervix is the finding to look for while inserting, since it changes the diagnosis and the route of removal."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "expect": "Expect a healthy cervix with blood in the vault in a woman presenting with menorrhagia. The job here is exclusion: postcoital or intermenstrual bleeding, a suspicious cervix, or foul discharge each point away from fibroid toward cervical pathology or infection, and must not be missed while concentrating on the uterus."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "expect": "Expect a normal vulva in most fibroid patients. Pallor of the introitus may mirror the systemic anaemia, and excoriation or soiling reflects the chronic heavy flow rather than a separate vulval disease."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.obg.gynae_abdominal",
+        "skill.exam.obg.vulval_inspect",
+        "skill.exam.obg.speculum_insert",
+        "skill.exam.obg.speculum_inspect",
+        "skill.exam.obg.bimanual"
+      ],
+      "title": "Pelvic examination"
+    },
+    {
+      "blurb": "Site decides symptoms; that one fact explains everything you found",
+      "id": "disease_findings",
+      "skills": [
+        "skill.fibroid.signs"
+      ],
+      "title": "Putting the fibroid picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.fibroid.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else enlarges the uterus or bleeds like this",
+      "id": "differential",
+      "skills": [
+        "skill.fibroid.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Confirm it, grade the anaemia, and map it before deciding",
+      "id": "investigations",
+      "skills": [
+        "skill.ix.fibroid.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "FIGO types, and the statement that carries the plan",
+      "id": "diagnosis",
+      "skills": [
+        "skill.fibroid.diagnosis"
+      ],
+      "title": "Diagnosis and staging"
+    },
+    {
+      "blurb": "Preserve the uterus or treat definitively, guided by symptoms and fertility wishes",
+      "id": "treatment",
+      "skills": [
+        "skill.tx.fibroid"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.presentation.fibroid.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Uterine fibroid (leiomyoma)",
+  "id": "uterine-fibroid",
+  "kbRef": "uterine_fibroid",
+  "name": "Uterine fibroid",
+  "oneLine": "Benign smooth muscle tumour of the uterus, and the choice between preserving it and removing it",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You feel a firm midline mass above the pubis. How do you prove at the bedside that it arises from the uterus and not the ovary?",
+          "The uterus feels 14 week size and irregular. What does the irregularity tell you, and what would a symmetrically bulky tender uterus suggest instead?",
+          "Her cervix looks healthy but there is blood in the vault. Why do you still need the speculum examination when the diagnosis seems to be fibroid?"
+        ],
+        "id": "osce.fibroid.pelvic_exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.obg.intimate_consent",
+          "skill.exam.obg.gynae_abdominal",
+          "skill.exam.obg.vulval_inspect",
+          "skill.exam.obg.speculum_insert",
+          "skill.exam.obg.speculum_inspect",
+          "skill.exam.obg.bimanual",
+          "skill.approach.obg.pelvic_close"
+        ],
+        "task": "This 38 year old woman has heavy periods and a pelvic lump. Examine her abdomen and pelvis, including speculum and bimanual examination, and present your findings.",
+        "title": "Examine the pelvis in suspected fibroid"
+      },
+      {
+        "examinerQuestions": [
+          "Quantify her bleeding from what you found, and state which answers point to a submucosal rather than a subserosal lesion.",
+          "She is 38 and wants another child. How does that change the options you will offer her?",
+          "Her haemoglobin is low and she is booked for myomectomy. What must happen before surgery, and why does operating on uncorrected anaemia matter?"
+        ],
+        "id": "osce.fibroid.history",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.obg.menstrual_history",
+          "skill.hx.obg.gynae_symptoms",
+          "skill.hx.fibroid.risk"
+        ],
+        "task": "This 38 year old woman has had heavy periods for a year. Take a focused history in seven minutes and be ready to say what treatment direction fits her.",
+        "title": "Take a history and counsel on options"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "subtitle": "Leiomyoma: symptoms, imaging, options",
+  "system": "gynaecology",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.fibroid.basics",
+      "skill.exam.obg.bimanual",
+      "skill.fibroid.signs",
+      "skill.fibroid.summary",
+      "skill.fibroid.differential",
+      "skill.ix.fibroid.workup",
+      "skill.fibroid.diagnosis",
+      "skill.tx.fibroid"
+    ]
+  },
+  "skills": {
+    "skill.fibroid.basics": {
+      "id": "skill.fibroid.basics",
+      "kind": "reasoning",
+      "oneLine": "Benign smooth muscle tumour of reproductive years, driven by ovarian hormones",
+      "probes": [
+        {
+          "a": "A benign tumour of uterine smooth muscle, the commonest pelvic tumour of reproductive age women, most often without symptoms.",
+          "accept": [
+            "benign",
+            "smooth muscle",
+            "commonest",
+            "reproductive"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is a uterine fibroid, in one sentence?"
+        },
+        {
+          "a": "Oestrogen and progesterone drive growth, so fibroids enlarge in pregnancy and typically regress after the menopause.",
+          "accept": [
+            "oestrogen",
+            "progesterone",
+            "pregnancy",
+            "menopause"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does a fibroid grow during pregnancy and shrink after the menopause?"
+        },
+        {
+          "a": "Submucosal lesions distort the cavity and cause heavy bleeding and fertility problems, while subserosal lesions cause pressure symptoms and rarely bleed.",
+          "accept": [
+            "submucosal",
+            "bleed",
+            "subserosal",
+            "pressure"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "A submucosal and a subserosal fibroid of equal size behave differently. Why?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "uterine_fibroid: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Uterine leiomyoma",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "A fibroid is a benign tumour of uterine smooth muscle arising from a single transformed cell, and it is the commonest pelvic tumour of women in the reproductive years.\n\nMost fibroids cause no symptoms at all and are found by chance on examination or scan. Symptoms, when they come, follow the site of the lesion rather than its size alone.",
+          "heading": "What a fibroid is"
+        },
+        {
+          "body": "Growth is driven by oestrogen and progesterone, with overexpression of their receptors in the lesion. Lesions therefore tend to enlarge during pregnancy and typically regress after the menopause.\n\nThis hormone dependence is also why rapid enlargement, or any growth after the menopause, breaks the expected pattern and should raise concern for leiomyosarcoma, even though malignant change is exceptionally rare.",
+          "heading": "Why it grows when it does"
+        },
+        {
+          "heading": "Where it sits decides what it does",
+          "points": [
+            "Submucosal fibroids bulge into the cavity, distort the endometrium and cause heavy bleeding and fertility problems out of proportion to their size.",
+            "Intramural fibroids sit within the wall and enlarge the uterus; they bleed when they distort the cavity and press when they grow large.",
+            "Subserosal and pedunculated fibroids grow outward, cause pressure on bladder and bowel, and rarely cause heavy bleeding.",
+            "Cervical and broad ligament fibroids are uncommon but matter surgically, since they distort the ureter and vessels at operation."
+          ]
+        },
+        {
+          "body": "Cut section shows a whorled mass of smooth muscle wrapped in a pseudocapsule of compressed myometrium, which is the plane the surgeon shells the lesion out of at myomectomy.\n\nDegenerative change is common as lesions outgrow their supply: hyaline change is commonest, while red degeneration classically causes acute pain in mid pregnancy.",
+          "heading": "What it looks like and how it ages"
+        }
+      ],
+      "title": "What a uterine fibroid is",
+      "why": "Fibroid is defined by benign smooth muscle histology plus hormone dependence, not by bleeding alone. Getting that definition exact is what stops every heavy period being labelled fibroid and every pelvic lump being feared as cancer."
+    },
+    "skill.fibroid.signs": {
+      "id": "skill.fibroid.signs",
+      "kind": "reasoning",
+      "oneLine": "Bleeding from the cavity, pressure from the bulk, and a uterus that moves with the cervix",
+      "probes": [
+        {
+          "a": "Heavy menstrual bleeding with clots and flooding, iron deficiency anaemia, and an enlarged firm irregular uterus that moves with the cervix.",
+          "accept": [
+            "heavy",
+            "bleed",
+            "anaemia",
+            "enlarged"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the classic triad of a symptomatic fibroid?"
+        },
+        {
+          "a": "Check whether the mass moves with the cervix on bimanual examination. A uterine mass moves with the cervix; an ovarian mass moves independently, often with a groove between it and the uterus.",
+          "accept": [
+            "cervix",
+            "bimanual",
+            "ovarian",
+            "independently"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "A firm pelvic mass could be uterine or ovarian. What is the single fastest bedside test?"
+        },
+        {
+          "a": "Torsion of a pedunculated fibroid or red degeneration in pregnancy, and after the menopause any of these patterns should raise concern for sarcoma rather than fibroid.",
+          "accept": [
+            "torsion",
+            "degeneration",
+            "sarcoma",
+            "menopause"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When does acute pain, or bleeding after the menopause, break the fibroid pattern?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "uterine_fibroid: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Uterine leiomyoma (clinical features)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Heavy menstrual bleeding is the dominant symptom: prolonged flow, clots, flooding through clothes, night changes and days off work. It comes from distortion of the endometrial surface and disordered local haemostasis.\n\nChronic loss produces iron deficiency anaemia, often the real morbidity: tiredness, breathlessness on exertion, pallor and sometimes pica. Grade the anaemia, not just the bleeding.",
+          "heading": "Bleeding first, anaemia alongside"
+        },
+        {
+          "body": "Large or subserosal lesions press rather than bleed: urinary frequency and urgency, constipation, a heavy dragging pelvic ache, and dyspareunia from bulk.\n\nPressure on the ureter can obstruct silently, so a very large fibroid deserves a renal check even without urinary complaints. Acute severe pain is a different story: torsion of a pedunculated lesion or red degeneration in mid pregnancy.",
+          "heading": "Pressure, pain and the acute exceptions"
+        },
+        {
+          "heading": "Symptoms by site",
+          "table": {
+            "cols": [
+              "Site",
+              "Bleeding",
+              "Pressure",
+              "Fertility"
+            ],
+            "rows": [
+              [
+                "Submucosal",
+                "Heavy, often severe",
+                "Little",
+                "Miscarriage, subfertility"
+              ],
+              [
+                "Intramural",
+                "Heavy if cavity distorted",
+                "When large",
+                "Possible effect"
+              ],
+              [
+                "Subserosal",
+                "Usually normal periods",
+                "Frequency, constipation",
+                "Little effect"
+              ],
+              [
+                "Pedunculated",
+                "Usually normal",
+                "Torsion risk",
+                "Little effect"
+              ]
+            ]
+          }
+        },
+        {
+          "body": "The abdomen shows a firm midline hypogastric mass whose lower border cannot be felt, and the bimanual examination shows an enlarged, firm, often nodular uterus that moves with the cervix while the fornices stay free.\n\nPallor is the commonest general sign. Vitals are usually normal; tachycardia or postural symptoms mark severe anaemia, and fever with acute pain points to degeneration rather than simple fibroid.",
+          "heading": "What your hands add up to"
+        }
+      ],
+      "title": "The fibroid picture",
+      "why": "Fibroid is the cleanest example in gynaecology of one rule generating a coherent set of findings: site decides symptoms. Submucosal lesions bleed, subserosal lesions press, and the uterus moves with the cervix whatever the site."
+    },
+    "skill.fibroid.summary": {
+      "id": "skill.fibroid.summary",
+      "kind": "reasoning",
+      "oneLine": "Problem representation for a chronic benign lump with bleeding and anaemia",
+      "probes": [
+        {
+          "a": "The FIGO type and the fertility plan, because site decides symptoms and fertility wishes decide treatment.",
+          "accept": [
+            "figo",
+            "site",
+            "fertility",
+            "treatment"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in a fibroid summary that would not appear in most medical summaries?"
+        },
+        {
+          "a": "It separates a chronic benign process needing planned care from an acute or malignant one needing urgent action, and it carries the anaemia grade that determines fitness for any procedure.",
+          "accept": [
+            "chronic",
+            "benign",
+            "urgent",
+            "anaemia"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Why do tempo and anaemia matter so much in a fibroid summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "patient",
+          "text": "States the patient with age, parity and fertility wishes"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as chronic with bleeding quantified in practical terms"
+        },
+        {
+          "id": "anatomy",
+          "text": "States the uterine size, site impression and anaemia grade"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "Presenting the case",
+          "source": "Macleod's Clinical Examination"
+        },
+        {
+          "locator": "uterine_fibroid: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "State the patient with the facts that change the plan: age, parity and whether she wants more children, then the tempo, which is months to years.\n\nThen the syndrome in abstract terms: chronic heavy menstrual bleeding with iron deficiency anaemia and a firm pelvic mass arising from the uterus.",
+          "heading": "Order of the summary"
+        },
+        {
+          "body": "A worked example: a 38 year old woman with two children who wants no more presents with a year of heavy periods with clots and flooding, tiredness, urinary frequency, and a firm nodular uterus of 14 week size that moves with the cervix. Haemoglobin is low with iron deficiency. This is symptomatic uterine fibroid with moderate anaemia.\n\nNote what each clause is doing: fertility wishes frame the options, practical bleeding terms quantify the symptom, weeks size and mobility fix the anatomy, and the anaemia grade fixes fitness for treatment.",
+          "heading": "A worked example"
+        }
+      ],
+      "title": "The clinical summary",
+      "why": "The summary for a chronic benign gynaecological illness has a different shape from an acute one: fertility wishes and anatomic site belong in the same sentence as the syndrome, because together they determine whether the uterus stays or goes."
+    },
+    "skill.fibroid.differential": {
+      "id": "skill.fibroid.differential",
+      "kind": "reasoning",
+      "oneLine": "What else enlarges the uterus or bleeds like this, and what must never be missed",
+      "probes": [
+        {
+          "a": "Adenomyosis, endometrial polyp, ovarian or adnexal mass, leiomyosarcoma, and endometrial hyperplasia or carcinoma.",
+          "accept": [
+            "adenomyosis",
+            "polyp",
+            "ovarian",
+            "sarcoma",
+            "hyperplasia"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four differentials for a fibroid-like uterus with heavy bleeding."
+        },
+        {
+          "a": "Rapid enlargement or any growth after the menopause, postmenopausal bleeding, and a soft vascular mass that does not move cleanly with the cervix.",
+          "accept": [
+            "rapid",
+            "menopause",
+            "postmenopausal",
+            "sarcoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What features should make you suspect leiomyosarcoma rather than fibroid?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential spanning uterine, ovarian, malignant and pregnancy causes"
+        },
+        {
+          "id": "mimics",
+          "text": "Distinguishes adenomyosis and ovarian mass at the bedside"
+        },
+        {
+          "id": "safety",
+          "text": "States when to suspect sarcoma and when to exclude endometrial pathology"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "uterine_fibroid: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Uterine leiomyoma (differential diagnosis)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "For an enlarged uterus with heavy bleeding, work through uterine, ovarian, malignant and pregnancy causes before settling on fibroid.\n\nThe commonest trap is attributing all the bleeding to a known fibroid and missing coexistent endometrial hyperplasia or carcinoma, which can bleed identically.",
+          "heading": "How to work through it"
+        },
+        {
+          "heading": "The key mimics",
+          "points": [
+            "Adenomyosis: symmetrically bulky, tender uterus with severe dysmenorrhoea; often coexists with fibroid and is best separated on MRI.",
+            "Endometrial polyp: intermenstrual bleeding with a normal sized uterus; hysteroscopy sees what ultrasound suggests.",
+            "Ovarian or adnexal mass: moves independently of the cervix with a groove between mass and uterus, often cystic on scan.",
+            "Leiomyosarcoma: rapid enlargement or any postmenopausal growth; rare but the one differential that changes urgency entirely.",
+            "Endometrial hyperplasia or carcinoma: postmenopausal bleeding or risk factors such as obesity and chronic anovulation; needs histology, never assumption.",
+            "Intrauterine pregnancy: the physiological cause of an enlarged uterus that must be excluded with a pregnancy test in every case."
+          ]
+        },
+        {
+          "body": "A soft, bulky, tender uterus with severe dysmenorrhoea favours adenomyosis over the firm nodular uterus of fibroid, though the two frequently coexist.\n\nA fixed irregular mass with ascites, weight loss or a suspicious cervix points away from benign disease toward ovarian or cervical malignancy and urgent referral.",
+          "heading": "Bedside forks in the road"
+        }
+      ],
+      "title": "Differential diagnosis",
+      "why": "Most fibroids are exactly what they look like, but the ones that are not are dangerous to miss: sarcoma, endometrial cancer hiding behind a known fibroid, and a pregnancy nobody tested for. The differential does not stop once the scan says fibroid."
+    },
+    "skill.ix.fibroid.workup": {
+      "id": "skill.ix.fibroid.workup",
+      "kind": "investigation",
+      "oneLine": "Bloods for anaemia, pregnancy test always, ultrasound first, MRI to map",
+      "probes": [
+        {
+          "a": "Transvaginal with or without transabdominal ultrasound, as the first-line imaging for fibroids.",
+          "accept": [
+            "ultrasound",
+            "transvaginal",
+            "first-line"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What is the first-line imaging for suspected fibroid?"
+        },
+        {
+          "a": "Saline infusion sonohysterography delineates submucosal lesions, and hysteroscopy both confirms them and allows resection.",
+          "accept": [
+            "sonohysterography",
+            "submucosal",
+            "hysteroscopy"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Bleeding is severe but the scan shows only a small cavity shadow. What next?"
+        },
+        {
+          "a": "Correct the anaemia first and map the lesions, because operating on severe anaemia without blood in hand risks a transfusion emergency, and unmapped lesions risk incomplete surgery.",
+          "accept": [
+            "anaemia",
+            "transfusion",
+            "map",
+            "blood"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "She is severely anaemic and booked for myomectomy next week. What must happen first?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "uterine_fibroid: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Heavy menstrual bleeding: assessment and management",
+          "source": "NICE guideline: Heavy menstrual bleeding"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Group investigations by what they answer: is she pregnant, how anaemic is she, is it fibroid, and where exactly are the lesions.\n\nFull blood count with ferritin grades the anaemia that decides fitness for any procedure. A urine pregnancy test is mandatory in every woman of reproductive age before imaging or intervention.",
+          "heading": "Bloods and the pregnancy test"
+        },
+        {
+          "body": "Transvaginal with or without transabdominal ultrasound is first-line imaging: it confirms fibroids, counts and measures them, and assigns a FIGO type.\n\nSaline infusion sonohysterography delineates submucosal lesions the plain scan leaves doubtful. Hysteroscopy confirms submucosal fibroids and resects suitable ones in the same sitting.",
+          "heading": "Ultrasound first, cavity studies for the doubtful"
+        },
+        {
+          "body": "Pelvic MRI maps multiple or large lesions, distinguishes adenomyosis from fibroid, and plans embolisation or difficult surgery. It is not first-line where ultrasound answers the question.\n\nEndometrial sampling is needed when abnormal bleeding carries risk factors for hyperplasia, and always for postmenopausal bleeding, since histology is the only exclusion that counts.",
+          "heading": "MRI to map, histology to exclude"
+        }
+      ],
+      "title": "Confirming, grading and mapping the disease",
+      "why": "Investigations in fibroid serve three separate jobs: grading the anaemia that decides fitness for treatment, confirming the diagnosis, and mapping lesions so the route of treatment is chosen on anatomy rather than guesswork."
+    },
+    "skill.fibroid.diagnosis": {
+      "id": "skill.fibroid.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "FIGO types 0 to 8, and the statement that carries the plan",
+      "probes": [
+        {
+          "a": "Types 0 to 8, localising lesions from submucosal through intramural to subserosal.",
+          "accept": [
+            "0 to 8",
+            "submucosal",
+            "intramural",
+            "subserosal"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What does the FIGO leiomyoma classification describe?"
+        },
+        {
+          "a": "Submucosal types affect bleeding and fertility most, so a small type 0 or 1 lesion explains severe menorrhagia that a large subserosal lesion never would.",
+          "accept": [
+            "submucosal",
+            "bleed",
+            "fertility",
+            "type"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which FIGO types matter most for bleeding and fertility, and why?"
+        },
+        {
+          "a": "Rapid enlargement or any postmenopausal growth, severe anaemia needing transfusion, torsion or red degeneration pain, retention or hydronephrosis, and postmenopausal bleeding.",
+          "accept": [
+            "rapid",
+            "menopause",
+            "anaemia",
+            "torsion",
+            "hydronephrosis"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "List the red flags that change a fibroid from routine to urgent."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "type",
+          "text": "States the FIGO type and what it means for symptoms"
+        },
+        {
+          "id": "redflags",
+          "text": "Screens for sarcoma, severe anaemia and mass effect"
+        },
+        {
+          "id": "statement",
+          "text": "Gives a complete diagnostic statement with size, site, anaemia and fertility context"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "uterine_fibroid: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Uterine leiomyoma (FIGO classification)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "The FIGO leiomyoma classification runs from types 0 to 8, localising lesions from submucosal through intramural to subserosal. Type is not trivia: it predicts symptoms and it chooses the route of removal.\n\nSubmucosal types are resected hysteroscopically, pedunculated and subserosal types suit laparoscopy, and deep intramural disease usually needs an open or advanced laparoscopic approach.",
+          "heading": "FIGO types and why they matter"
+        },
+        {
+          "body": "A complete diagnostic statement names the disease, the uterine size, the FIGO type and number of lesions, the anaemia grade, and the fertility context.\n\nA worked example: uterine fibroid, 14 week size, FIGO type 2 with a coexistent subserosal lesion, with moderate iron deficiency anaemia, in a woman with completed family.",
+          "heading": "The diagnostic statement"
+        },
+        {
+          "heading": "Red flags",
+          "points": [
+            "Rapidly enlarging mass, or any growth after the menopause, suggesting leiomyosarcoma.",
+            "Severe symptomatic anaemia from heavy bleeding, potentially needing transfusion.",
+            "Acute severe pain from torsion of a pedunculated fibroid or red degeneration in pregnancy.",
+            "Urinary retention or hydronephrosis from mass effect.",
+            "Postmenopausal bleeding, which needs exclusion of endometrial pathology whatever the scan shows."
+          ]
+        }
+      ],
+      "title": "Diagnosis, FIGO types and red flags",
+      "why": "A diagnosis of fibroid without a FIGO type does not say which treatment route fits, and without red flags it does not say whether she can wait. Type plus red flags is what turns a label into a plan."
+    },
+    "skill.tx.fibroid": {
+      "dosingNote": "This module teaches management at the level of drug class and principle, with durations and device specifications quoted from the cited sources. Specific agents, regimens and doses must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "id": "skill.tx.fibroid",
+      "kind": "treatment",
+      "oneLine": "Expectant, medical, embolisation or surgery, matched to symptoms and fertility wishes",
+      "probes": [
+        {
+          "a": "Reassurance with surveillance, since most fibroids stay stable and regress after the menopause.",
+          "accept": [
+            "reassurance",
+            "surveillance",
+            "asymptomatic",
+            "expectant"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "How do you manage an asymptomatic fibroid found by chance?"
+        },
+        {
+          "a": "The levonorgestrel intrauterine system, tranexamic acid, NSAIDs or combined hormonal contraception, with the intrauterine system first-line where the cavity allows it.",
+          "accept": [
+            "levonorgestrel",
+            "tranexamic",
+            "nsaid",
+            "hormonal"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What medical options control heavy bleeding from fibroids?"
+        },
+        {
+          "a": "Myomectomy to preserve fertility, chosen by site, or hysterectomy for definitive treatment when family is complete, with embolisation as a uterus preserving radiological option in between.",
+          "accept": [
+            "myomectomy",
+            "hysterectomy",
+            "embolisation",
+            "fertility"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "She has completed her family and medical treatment has failed. What now?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "uterine_fibroid: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Heavy menstrual bleeding: assessment and management",
+          "source": "NICE guideline: Heavy menstrual bleeding"
+        }
+      ],
+      "system": "gynaecology",
+      "teach": [
+        {
+          "body": "Asymptomatic fibroids need reassurance with interval surveillance, not treatment: most remain stable and regress after the menopause.\n\nWatch the growth pattern at follow up and reconsider the diagnosis with rapid enlargement, since that breaks the benign course.",
+          "heading": "When to do nothing"
+        },
+        {
+          "body": "Heavy bleeding is controlled medically with the levonorgestrel intrauterine system, tranexamic acid, NSAIDs or combined hormonal contraception. The intrauterine system suits small lesions that do not distort the cavity.\n\nGonadotrophin releasing hormone analogues shrink fibroids and control bleeding, particularly for 3 to 6 months before surgery to reduce loss and buy time to correct anaemia. Iron corrects the deficiency alongside, not afterwards.",
+          "heading": "Medical control and preparing for surgery"
+        },
+        {
+          "body": "Uterine artery embolisation is a uterus preserving radiological option with a success rate of 80 to 90 percent and fibroid shrinkage of 40 to 80 percent. It suits symptomatic disease with completed family and failed medical treatment.\n\nMyomectomy preserves fertility and follows site: hysteroscopic for submucosal, laparoscopic for pedunculated and subserosal, open or laparoscopic for intramural. Hysterectomy is definitive when family is complete or disease is extensive.",
+          "heading": "Embolisation and surgery"
+        },
+        {
+          "body": "Correct anaemia with oral or parenteral iron well before the operation date, arrange blood in hand, and refer disease beyond local facilities to a centre with interventional radiology or advanced laparoscopy.\n\nLarge symptomatic fibroid with completed family is an indication for hysterectomy, while a young woman wanting fertility is referred for myomectomy rather than managed expectantly until severe anaemia forces an emergency admission.",
+          "heading": "Indian context and referral thresholds"
+        }
+      ],
+      "title": "Managing uterine fibroid",
+      "why": "Management is individualised across expectant, medical, embolisation and surgical care, guided by symptoms and fertility wishes. Getting that match wrong in either direction, operating on a woman who wanted fertility preserved or drifting for years on tablets while she becomes transfusion dependent, has real cost."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "fibroid",
+          "leiomyoma",
+          "myoma",
+          "uterine fibroid"
+        ],
+        "answer": "Uterine fibroid, 14 week size, FIGO type 2 with a coexistent subserosal lesion, with moderate iron deficiency anaemia."
+      },
+      "differentialModel": {
+        "accept": [
+          "fibroid",
+          "adenomyosis",
+          "polyp",
+          "ovarian",
+          "sarcoma",
+          "hyperplasia",
+          "pregnancy",
+          "malignancy"
+        ],
+        "answer": "Uterine fibroid with moderate iron deficiency anaemia. Consider adenomyosis, endometrial polyp, an ovarian mass, and endometrial hyperplasia.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "upt",
+        "usg"
+      ],
+      "exam": {
+        "skill.exam.obg.bimanual": {
+          "abnormal": true,
+          "finding": "Uterus enlarged to 14 week size, firm and nodular, mobile, moving with the cervix. No cervical motion tenderness. Both fornices free, no adnexal mass."
+        },
+        "skill.exam.obg.gynae_abdominal": {
+          "abnormal": true,
+          "finding": "Firm midline hypogastric mass of about 14 week size, lower border not felt above the pubic symphysis. Moves side to side, movement transmitted to the cervix. Bladder empty."
+        },
+        "skill.exam.obg.speculum_insert": {
+          "abnormal": false,
+          "finding": "Speculum passed gently without difficulty; some blood in the vault, no active spurting."
+        },
+        "skill.exam.obg.speculum_inspect": {
+          "abnormal": false,
+          "finding": "Cervix healthy, no erosion, no polyp seen, no foul discharge. Blood present in the vault from the uterine cavity."
+        },
+        "skill.exam.obg.vulval_inspect": {
+          "abnormal": false,
+          "finding": "Vulva normal, no lesions. Pallor of the introitus noted."
+        },
+        "skill.gen.appearance": {
+          "abnormal": true,
+          "finding": "Pale and tired looking but in no distress. Conjunctival and palmar pallor present. No breathlessness at rest."
+        },
+        "skill.gen.edema": {
+          "abnormal": false,
+          "finding": "No pedal oedema."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Pulse 92 regular. Blood pressure 110/70. Respiratory rate 18. SpO2 98 percent on room air. Afebrile."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "bleeding_pattern": {
+          "cues": [
+            "how heavy are",
+            "how many pads",
+            "pads per day",
+            "flow",
+            "how long do they last",
+            "days of bleeding"
+          ],
+          "key": true,
+          "reply": "They last seven to eight days now, and the first three days are very heavy. I use six to eight cloth pads a day and have to change at night."
+        },
+        "bowel": {
+          "cues": [
+            "constipation",
+            "bowels",
+            "stool",
+            "motion"
+          ],
+          "reply": "I feel constipated most days now, which is new for me. There is no bleeding with stools."
+        },
+        "clots_flooding": {
+          "cues": [
+            "clots",
+            "flooding",
+            "staining clothes",
+            "leak",
+            "gushing"
+          ],
+          "key": true,
+          "reply": "Yes, there are clots, some as big as a lemon seed. Twice the bleeding has flooded through my clothes at work in the fields."
+        },
+        "contraception": {
+          "cues": [
+            "contraception",
+            "family planning",
+            "copper t",
+            "iucd",
+            "sterilisation",
+            "operation for family"
+          ],
+          "reply": "My husband had a sterilisation operation after our second child, so we use nothing now."
+        },
+        "drugs": {
+          "cues": [
+            "medicine",
+            "medication",
+            "drugs",
+            "tablets",
+            "hormones",
+            "blood thinner"
+          ],
+          "key": true,
+          "reply": "Only iron tablets from the PHC, which I take when I remember. No hormones and no blood thinners."
+        },
+        "dysmenorrhoea": {
+          "cues": [
+            "pain with periods",
+            "period pain",
+            "cramps",
+            "dysmenorrhoea"
+          ],
+          "reply": "There is a dull aching pain on the first two days, and a heavy dragging feeling low down. It is worse than when I was young but I can still work through it."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "mother",
+            "sister",
+            "anyone in the family",
+            "hereditary"
+          ],
+          "reply": "My elder sister had an operation for a lump in the uterus five years ago. My mother had no such problem."
+        },
+        "fatigue": {
+          "cues": [
+            "tired",
+            "fatigue",
+            "weakness",
+            "breathless",
+            "dizzy",
+            "pica",
+            "eating mud"
+          ],
+          "key": true,
+          "reply": "I feel tired all the time and breathless climbing the slope to our field. Sometimes I feel like eating raw rice."
+        },
+        "intermenstrual": {
+          "cues": [
+            "bleeding between",
+            "spotting",
+            "bleeding after sex",
+            "postcoital",
+            "irregular bleeding"
+          ],
+          "key": true,
+          "reply": "No bleeding between periods and no bleeding after relations with my husband."
+        },
+        "lump": {
+          "cues": [
+            "lump",
+            "swelling",
+            "mass",
+            "something in the abdomen",
+            "stomach growing",
+            "weight in the lower abdomen"
+          ],
+          "key": true,
+          "reply": "For about six months I feel a heaviness low down, as if something is sitting there. My neighbour said my stomach looks bigger."
+        },
+        "medications_past": {
+          "cues": [
+            "transfusion",
+            "blood given",
+            "admitted",
+            "hospital before"
+          ],
+          "reply": "I have never been admitted and never needed blood. This tiredness is the worst I have felt."
+        },
+        "obstetric": {
+          "cues": [
+            "children",
+            "pregnancies",
+            "deliveries",
+            "miscarriage",
+            "abortion",
+            "preterm"
+          ],
+          "key": true,
+          "reply": "I have two children, both normal deliveries at home with a dai, now aged 14 and 11. I had one miscarriage in the third month between them. My periods returned normally after each."
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "since when",
+            "onset",
+            "gradual or sudden"
+          ],
+          "key": true,
+          "reply": "It started gradually about a year ago with slightly heavier periods, and has become much worse in the last six months."
+        },
+        "past_medical": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "thyroid",
+            "tuberculosis",
+            "jaundice",
+            "other illness",
+            "kidney"
+          ],
+          "reply": "No diabetes, no high blood pressure, no thyroid problem. I had no TB and no jaundice."
+        },
+        "personal": {
+          "cues": [
+            "work",
+            "occupation",
+            "diet",
+            "vegetarian",
+            "tobacco",
+            "alcohol",
+            "income"
+          ],
+          "reply": "I work as a farm labourer and eat a vegetarian diet at home. I use no tobacco and no alcohol."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, for one year my monthly bleeding has become very heavy with clots, and I feel a heaviness low in my stomach.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "urinary": {
+          "cues": [
+            "urine",
+            "urinary",
+            "frequency",
+            "passing urine often",
+            "leaking urine",
+            "burning"
+          ],
+          "key": true,
+          "reply": "I pass urine very often, even two or three times at night. There is no burning and no leaking."
+        },
+        "vaginal_discharge": {
+          "cues": [
+            "discharge",
+            "white discharge",
+            "foul smell",
+            "itching"
+          ],
+          "reply": "There is no white discharge, no bad smell and no itching."
+        }
+      },
+      "id": "case.fibroid.sunita",
+      "initialVitals": {
+        "bpDiastolic": 70,
+        "bpSystolic": 110,
+        "gcs": 15,
+        "hr": 92,
+        "rr": 18,
+        "spo2": 98,
+        "temp": 37
+      },
+      "investigations": {
+        "biopsy": {
+          "indicated": true,
+          "label": "Endometrial sampling",
+          "note": "Appropriate with a year of heavy bleeding at 38: histology is the only way to exclude coexistent hyperplasia.",
+          "result": "Proliferative endometrium, no hyperplasia or malignancy."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count with iron studies",
+          "note": "Grades the anaemia that decides fitness for any procedure and sets the iron replacement.",
+          "result": "Haemoglobin 8 g/dL. Microcytic hypochromic picture. Ferritin low, fitting iron deficiency from chronic loss."
+        },
+        "mri": {
+          "indicated": false,
+          "label": "Pelvic MRI",
+          "note": "Not indicated first-line: ultrasound already maps the lesions and there is no suspicion of adenomyosis or sarcoma. Reserved for surgical planning if the picture were complex.",
+          "result": "Not done."
+        },
+        "sis": {
+          "indicated": true,
+          "label": "Saline infusion sonohysterography",
+          "note": "Worth doing where available to delineate the submucosal component that decides hysteroscopic resectability.",
+          "result": "Submucosal component confirmed, bulging into the cavity."
+        },
+        "upt": {
+          "indicated": true,
+          "label": "Urine pregnancy test",
+          "note": "Mandatory before any imaging or intervention in a woman of reproductive age with an enlarged uterus.",
+          "result": "Negative."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Pelvic ultrasound",
+          "note": "First-line imaging: it confirms the diagnosis, counts the lesions and assigns the FIGO type that chooses the route of treatment.",
+          "result": "Bulky uterus of 14 week size. A 5 cm intramural lesion distorting the cavity (FIGO type 2) and a 3 cm subserosal lesion. Ovaries normal, no free fluid."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "iron",
+          "anaemia",
+          "tranexamic",
+          "levonorgestrel",
+          "myomectomy",
+          "hysterectomy",
+          "embolisation",
+          "refer",
+          "blood"
+        ],
+        "answer": "Correct the iron deficiency anaemia with iron and arrange blood cover, control bleeding medically while referring, and plan definitive care by site and family status: myomectomy routes by FIGO type or hysterectomy since family is complete.",
+        "minMatch": 3
+      },
+      "opening": "Sunita Pawar, 38, a farm labourer from a village near Satara, sits in the gynaecology outpatient room with her sister. She looks pale and tired. Introduce yourself and take a history.",
+      "patient": {
+        "age": 38,
+        "name": "Sunita Pawar",
+        "occupation": "Farm labourer",
+        "residence": "Rural, lives with her husband, two children and mother-in-law",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The tempo alone should move you toward a chronic benign process before a single test: a year of heavy periods, not the weeks of a miscarriage or the days of an acute abdomen.",
+        "A uterus that moves with the cervix is the bedside proof of uterine origin. An ovarian mass moves independently, often with a palpable groove between it and the uterus.",
+        "Submucosal site explains severity out of proportion to size: a small cavity lesion bleeds more than a large subserosal one, which is why FIGO type belongs in the diagnosis.",
+        "No intermenstrual or postcoital bleeding with a healthy cervix argues against cervical pathology without needing further tests to invoke it.",
+        "The anaemia is the real morbidity here: haemoglobin 8 with pica and exertional breathlessness must be corrected with iron and blood in hand before any operation is dated.",
+        "A negative pregnancy test is never a formality in a woman of reproductive age with an enlarged uterus; it is the one result that excludes the physiological differential.",
+        "Sterilisation in the husband plus completed family opens definitive options, while the same lesions in a nulliparous woman would point to myomectomy: fertility wishes choose preservation or removal."
+      ],
+      "title": "A farm labourer with a year of heavy periods and a pelvic heaviness",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
+}

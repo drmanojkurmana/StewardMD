@@ -11620,6 +11620,411 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.preeclampsia.risk": {
+      "asks": [
+        {
+          "text": "Was your blood pressure raised before this pregnancy, or before 20 weeks this time? Chronic hypertension changes the diagnosis to superimposed disease."
+        },
+        {
+          "text": "Have you had raised blood pressure, fits, a very small baby, a stillbirth or an early delivery in a previous pregnancy? Ask what gestation each event happened at."
+        },
+        {
+          "text": "Do you have kidney disease, diabetes, lupus or antiphospholipid syndrome? Each of these raises the risk of pre-eclampsia."
+        },
+        {
+          "text": "Is this a twin or higher-order pregnancy? Multiple pregnancy stretches the placenta and raises the risk."
+        },
+        {
+          "text": "How old are you, and is this your first ongoing pregnancy? Age under 20 or over 35 and a first pregnancy both add risk."
+        },
+        {
+          "text": "Did your mother or sister have fits or very high blood pressure in pregnancy? A family history adds to the background risk."
+        },
+        {
+          "text": "Were you advised low-dose aspirin or calcium in this pregnancy, and did you take it regularly? This tells you both her risk category and her adherence."
+        }
+      ],
+      "id": "skill.hx.preeclampsia.risk",
+      "kind": "history",
+      "oneLine": "The background conditions that mark a woman as high risk",
+      "pitfalls": [
+        "Stopping at this pregnancy and never asking about previous ones, when a prior hypertensive pregnancy is the strongest predictor.",
+        "Recording diabetes or kidney disease as incidental history without recognising them as pre-eclampsia risk factors.",
+        "Forgetting to ask about aspirin prophylaxis, which reveals whether someone already judged her high risk."
+      ],
+      "practice": "Take the risk history from a booked antenatal mother: previous pregnancies with gestation and outcome, chronic hypertension, renal disease, diabetes, autoimmune disease, multiple pregnancy, and aspirin or calcium prophylaxis.",
+      "probes": [
+        {
+          "a": "Previous pre-eclampsia or eclampsia, chronic hypertension, kidney disease, diabetes, multiple pregnancy and antiphospholipid syndrome all raise the risk, and low-dose aspirin from early pregnancy lowers it in these women.",
+          "accept": [
+            "previous pre-eclampsia",
+            "chronic hypertension",
+            "kidney disease",
+            "diabetes",
+            "multiple pregnancy",
+            "aspirin"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name three background conditions that raise the risk of pre-eclampsia."
+        },
+        {
+          "a": "Because a previous hypertensive pregnancy is the strongest predictor of recurrence, and the gestation and severity of that episode guide how closely she is watched this time.",
+          "accept": [
+            "strongest predictor",
+            "recurrence",
+            "gestation",
+            "watched"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does the previous obstetric history matter more than any other risk factor?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preeclampsia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertensive disorders of pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obgyn",
+      "title": "Risk factors for pre-eclampsia",
+      "why": "Pre-eclampsia is not equally likely in every pregnancy. A small set of background conditions concentrates most of the risk, and finding them decides who gets aspirin prophylaxis, extra surveillance and a delivery plan made early rather than in a crisis."
+    },
+    "skill.hx.preeclampsia.symptoms": {
+      "asks": [
+        {
+          "text": "Headache: where is it, how severe, how long, and does it persist despite rest and paracetamol? A persistent severe headache is a warning symptom."
+        },
+        {
+          "text": "Vision: any flashing lights, blurring, blind spots or double vision? Visual disturbance reflects cerebral involvement."
+        },
+        {
+          "text": "Upper abdomen: any pain below the ribs on the right side or in the centre, or sudden nausea and vomiting? Right upper quadrant pain reflects liver involvement."
+        },
+        {
+          "text": "Swelling: sudden puffiness of the face or hands, rings or footwear suddenly tight, rapid weight gain? Distinguish this from gradual ankle swelling."
+        },
+        {
+          "text": "Urine: has the amount passed each day fallen noticeably? Oliguria signals renal involvement."
+        },
+        {
+          "text": "Fits: any episode of loss of consciousness with jerking of the limbs, tongue biting or incontinence, witnessed by family? Ask a relative directly."
+        },
+        {
+          "text": "Baby: are fetal movements normal in number, reduced, or absent? Reduced movements reflect uteroplacental compromise."
+        },
+        {
+          "text": "Blood pressure story: when was raised pressure first noticed, what were the readings, and was protein found in the urine at the same visit?"
+        }
+      ],
+      "id": "skill.hx.preeclampsia.symptoms",
+      "kind": "history",
+      "oneLine": "The warning symptoms that herald fits and organ injury",
+      "pitfalls": [
+        "Asking about headache without asking whether it persists despite rest and simple analgesia, which is what makes it a warning symptom.",
+        "Missing visual symptoms because the student never names flashing lights and blurring for the patient.",
+        "Forgetting to ask a relative about witnessed fits, which the woman herself cannot describe."
+      ],
+      "practice": "Take the symptom history from a woman past 20 weeks with raised blood pressure: headache, visual symptoms, upper abdominal pain, sudden swelling, urine output, fits witnessed by family, and fetal movements, in that order.",
+      "probes": [
+        {
+          "a": "Persistent severe headache, visual disturbance such as flashing lights or blurring, right upper quadrant or epigastric pain, and sudden swelling of the face and hands are the warning symptoms that herald eclampsia.",
+          "accept": [
+            "headache",
+            "visual",
+            "epigastric",
+            "swelling",
+            "face"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "Name four warning symptoms of imminent eclampsia."
+        },
+        {
+          "a": "Because the fit itself causes loss of consciousness with amnesia for the event, so only a witness can describe the jerking, tongue biting or incontinence that confirms it was a seizure.",
+          "accept": [
+            "amnesia",
+            "witness",
+            "jerking",
+            "confirms"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must you ask a relative about fits rather than the woman herself?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "preeclampsia: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertension in pregnancy",
+          "source": "NICE"
+        }
+      ],
+      "system": "obgyn",
+      "title": "Symptoms of pre-eclampsia and imminent eclampsia",
+      "why": "Most women with pre-eclampsia feel well until late, and the symptoms that do appear are the direct voice of organ injury: brain, liver, kidney and placenta. Asking for them by name is what catches severe disease before the fit happens."
+    },
+    "skill.presentation.preeclampsia.case": {
+      "body": "Present an obstetric case in a fixed order: mother and gestation first, then the story, the two-patient examination, the labs, the summary, and the delivery plan.",
+      "id": "skill.presentation.preeclampsia.case",
+      "keyPoints": [
+        "Open with particulars that carry obstetric meaning: age, parity, gestation, booking status and referral source. A 24-year-old unbooked primigravida at 34 weeks tells the listener the risk before the story starts.",
+        "Follow with the presenting complaints in the order that matters: pressure story, warning symptoms, urine output, fits, then fetal movements. End the history with antenatal care, previous pregnancies and medical background.",
+        "Report examination as mother then fetus: blood pressure with cuff and posture, oedema distribution, reflexes and clonus, abdominal findings with fundal height and lie, then fetal heart and liquor. State what was normal as well as what was not.",
+        "Read the laboratories as organs: platelets and haemolysis for blood, transaminases for liver, creatinine for kidney, then growth and Doppler for the fetus. Each value earns its place by changing the plan.",
+        "Close with the summary sentence and a concrete plan: stabilise, protect against fits, control pressure, steroids if preterm, and delivery by the route the mother and cervix allow, with postpartum surveillance stated, not assumed.",
+        "Keep a focused case to about two minutes. If it runs longer, the structure is wrong, not the content."
+      ],
+      "kind": "presentation",
+      "media": [],
+      "oneLine": "Mother, gestation, two-patient findings, and a delivery plan",
+      "pitfalls": [
+        "Presenting in the order the questions were asked rather than the fixed order the listener expects.",
+        "Reading every laboratory value without saying what each one means for delivery.",
+        "Ending at the diagnosis with no plan, when the plan is the whole point of an obstetric case."
+      ],
+      "probes": [
+        {
+          "a": "Particulars with parity and gestation, presenting complaints, antenatal and previous pregnancy history, maternal then fetal examination, laboratories read as organs, summary, and a delivery plan with postpartum surveillance.",
+          "accept": [
+            "parity",
+            "gestation",
+            "examination",
+            "laboratories",
+            "delivery plan"
+          ],
+          "level": 1,
+          "minMatch": 3,
+          "q": "State the fixed order of an obstetric case presentation."
+        },
+        {
+          "a": "Because the listener uses gestation to judge prematurity, severity to judge urgency, and fetal status to judge the route and timing, so without them the plan cannot be assessed.",
+          "accept": [
+            "prematurity",
+            "urgency",
+            "route",
+            "assessed"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why must gestation, severity and fetal status appear before the plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "order",
+          "text": "Presents in the fixed obstetric order"
+        },
+        {
+          "id": "twopatient",
+          "text": "Reports maternal and fetal findings together"
+        },
+        {
+          "id": "plan",
+          "text": "Ends with a delivery plan including postpartum surveillance"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "preeclampsia: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Hypertensive disorders of pregnancy",
+          "source": "Williams Obstetrics"
+        }
+      ],
+      "system": "obgyn",
+      "title": "Presenting the pre-eclampsia case",
+      "why": "An obstetric presentation is judged on whether the listener can make the delivery decision from it. Structure carries that decision: mother, gestation, both patients examined, and a plan that names delivery and the days after it."
+    },
+    "skill.hx.fibroid.risk": {
+      "asks": [
+        {
+          "text": "How old are you, have you had children, and is there anyone in the family with fibroids or an operation for them?"
+        },
+        {
+          "text": "When did your periods start, and have you ever gone a long stretch without periods except in pregnancy?"
+        },
+        {
+          "text": "Are you taking any hormones, have you used tamoxifen, and are you on any blood thinning medicine?"
+        },
+        {
+          "text": "Tell me about each pregnancy: miscarriage, preterm birth, severe pain in mid pregnancy, heavy bleeding after delivery, or difficulty conceiving?"
+        },
+        {
+          "text": "Have your periods stopped? If yes, when, and have you had any bleeding since they stopped?"
+        }
+      ],
+      "id": "skill.hx.fibroid.risk",
+      "kind": "history",
+      "oneLine": "Age, parity, family, hormones and obstetric past that raise or lower the prior",
+      "probes": [
+        {
+          "a": "Reproductive age, nulliparity, obesity, early menarche and a family history of fibroids.",
+          "accept": [
+            "reproductive",
+            "nullipar",
+            "obes",
+            "family"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name three risk factors for fibroids."
+        },
+        {
+          "a": "Anticoagulants and hormonal treatment worsen bleeding, and tamoxifen is associated with fibroid growth, so the drug history changes both the symptom burden and the options.",
+          "accept": [
+            "anticoagulants",
+            "hormonal",
+            "tamoxifen",
+            "bleeding"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which drugs in her history change a fibroid presentation?"
+        },
+        {
+          "a": "Nulliparity raises the prior while higher parity lowers it, so a parous woman with the same lump and bleeding is slightly less likely to have fibroid than a nulliparous one, though the difference never rules anything out.",
+          "accept": [
+            "nullipar",
+            "parity",
+            "prior",
+            "parous"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "How does parity shift your thinking before you examine her?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "uterine_fibroid: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Uterine leiomyoma (epidemiology and risk factors)",
+          "source": "Berek and Novak's Gynecology"
+        }
+      ],
+      "system": "obgyn",
+      "teach": [
+        {
+          "heading": "Who gets fibroids",
+          "points": [
+            "Reproductive age is the dominant factor: lesions appear after menarche, grow through the thirties and forties, and regress after the menopause.",
+            "Nulliparity, obesity and early menarche raise the risk, while higher parity is protective.",
+            "A first degree relative with fibroids raises the risk substantially, so family history is never a formality here.",
+            "Black ethnicity carries higher prevalence and earlier onset, worth knowing when interpreting a young patient with severe disease."
+          ]
+        },
+        {
+          "body": "Anticoagulants and hormonal medicines worsen the bleeding that brings her in, and tamoxifen is associated with fibroid growth, so list every drug before attributing the blood loss to the lesion alone.\n\nA personal or family history of bleeding since menarche points to a coagulation disorder such as von Willebrand disease, which can coexist with fibroid and must be tested for rather than assumed absent.",
+          "heading": "Drugs and bleeding tendency that change the picture"
+        },
+        {
+          "body": "Fibroids are linked with subfertility, miscarriage and preterm birth, and classically with acute red degeneration pain in mid pregnancy, so each pregnancy needs one line.\n\nAfter the menopause the questions reverse: lesions should shrink, and any bleeding after the menopause needs exclusion of endometrial pathology rather than attribution to a known fibroid.",
+          "heading": "Obstetric and menopausal history"
+        }
+      ],
+      "title": "Risk factors and background that matter in fibroid",
+      "why": "Age, parity, family history and drugs shift the pre-test probability before a hand is laid on her, and fertility wishes plus menopausal status decide which treatments are even on the table."
+    },
+    "skill.presentation.fibroid.case": {
+      "id": "skill.presentation.fibroid.case",
+      "kind": "presentation",
+      "oneLine": "Present a fibroid case the way a consultant expects to hear it",
+      "probes": [
+        {
+          "a": "Age, parity and fertility wishes, bleeding quantified in practical terms, uterine size in weeks with FIGO type, and the anaemia grade.",
+          "accept": [
+            "parity",
+            "fertility",
+            "weeks",
+            "anaemia"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What five facts must a fibroid presentation contain?"
+        },
+        {
+          "a": "Whether the uterus moves with the cervix, whether the fornices are free, and the size, consistency and mobility of the uterus.",
+          "accept": [
+            "cervix",
+            "fornices",
+            "size",
+            "mobility"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "What bimanual findings does the consultant listen for?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "order",
+          "text": "Follows particulars, complaints, menstrual history, examination, investigations, diagnosis, plan"
+        },
+        {
+          "id": "numbers",
+          "text": "Quantifies bleeding, uterine size and haemoglobin rather than saying heavy, big or low"
+        },
+        {
+          "id": "plan",
+          "text": "Justifies the plan from fertility wishes, FIGO type and anaemia"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "Presenting the case",
+          "source": "Macleod's Clinical Examination"
+        },
+        {
+          "locator": "uterine_fibroid: management",
+          "source": "StewardMD Clinical KB"
+        }
+      ],
+      "system": "obgyn",
+      "teach": [
+        {
+          "body": "Open with age, parity and fertility wishes, then the chief complaints in her words with duration. Fertility wishes come first because they frame every option that follows.\n\nFollow with the menstrual history in practical terms: pads per day, clots, flooding, night changes, days off work. Never present bleeding as heavy without these numbers behind it.",
+          "heading": "Opening and the menstrual history"
+        },
+        {
+          "body": "Present the abdomen first: a firm midline mass of stated weeks size with an unreachable lower border. Then the speculum: healthy cervix with blood in the vault.\n\nThen the bimanual: uterine size, firm nodular consistency, mobility with the cervix, and free fornices. Each negative, no cervical motion tenderness, no adnexal mass, is doing real work against PID and ovarian disease.",
+          "heading": "Examination findings in order"
+        },
+        {
+          "body": "Close with investigations that matter: haemoglobin with iron studies, pregnancy test, ultrasound with FIGO type, and histology where taken. Then the diagnosis as one line.\n\nThen the plan justified from three anchors: fertility wishes choose preservation or definitive care, FIGO type chooses the route, and anaemia decides the timing. End with what you will do about the anaemia before anything else.",
+          "heading": "Investigations, diagnosis and the justified plan"
+        }
+      ],
+      "title": "Presenting the fibroid case",
+      "why": "A fibroid presentation is assessed on whether the listener can reconstruct the uterus and the plan from your words alone. Weeks size, FIGO type, anaemia grade and fertility wishes are the load bearing facts; without them the presentation is a story, not a case."
     }
   }
 }
