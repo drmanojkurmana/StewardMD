@@ -15,16 +15,16 @@ const MD = {
   drugLabel: "Treatment",
   settings: [
     { label: "no treatment" },
-    { label: "antithyroid medicine (blocks hormone making)" },
     { label: "radioiodine or surgery (removes the gland)" },
     { label: "levothyroxine replacement" },
+    { label: "antithyroid medicine (blocks hormone making)" },
   ],
   status: "Pattern: {level} \u00b7 {drug} \u00b7",
-  drugNames: ["no treatment", "an antithyroid medicine", "radioiodine or surgery", "levothyroxine replacement"],
+  drugNames: ["no treatment", "radioiodine or surgery", "levothyroxine replacement", "an antithyroid medicine"],
 };
 function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  const anti = drug === 1 ? 1 : 0, abl = drug === 2 ? 1 : 0, levo = drug === 3 ? 1 : 0;
+  const abl = drug === 1 ? 1 : 0, levo = drug === 2 ? 1 : 0, anti = drug === 3 ? 1 : 0;
   const stim = level === 0 && !abl ? 1 : 0;
   let Ab = level === 0 ? 0.9 : level === 1 ? 0.85 : 0.68;
   if (anti) Ab *= 0.85; if (abl) Ab *= 0.9;
@@ -48,65 +48,56 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "hormone high \u00b7 TSH suppressed \u00b7 gland enlarged \u00b7 eye signs present"],
-  [0, 1, "hormone normal \u00b7 TSH normal \u00b7 gland enlarged \u00b7 eye signs present"],
+  [0, 3, "hormone normal \u00b7 TSH normal \u00b7 gland enlarged \u00b7 eye signs present"],
   [2, 0, "hormone low \u00b7 TSH high \u00b7 gland small \u00b7 eye signs absent"],
-  [2, 3, "hormone normal \u00b7 TSH normal \u00b7 gland small \u00b7 eye signs absent"],
+  [2, 2, "hormone normal \u00b7 TSH normal \u00b7 gland small \u00b7 eye signs absent"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<path class="gr-track" d="M152 108C230 92 330 120 424 178"/>
-<path class="gr-track" d="M152 308C240 306 340 282 424 252"/>
-<path class="gr-track" d="M548 226C640 246 700 268 742 286"/>
-<path class="gr-track gr-track-eye" d="M536 178C620 128 690 116 742 114"/>
-<g id="trachea"><rect class="gr-trach" x="466" y="158" width="28" height="168" rx="12"/>
-<path class="gr-ring" d="M466 190h28M466 222h28M466 254h28M466 286h28M466 318h28"/></g>
-<g id="thy"><ellipse class="gr-lobe" cx="430" cy="235" rx="48" ry="62"/><ellipse class="gr-lobe" cx="530" cy="235" rx="48" ry="62"/><rect class="gr-isth" x="428" y="224" width="104" height="22" rx="10"/></g>
+<path id="tshT" class="gr-track" d="M150 110C260 95 380 110 515 160"/>
+<path id="abT" class="gr-track" d="M150 312C260 305 340 280 432 252"/>
+<path id="abEyeT" class="gr-track gr-track-eye" d="M545 185C630 135 700 118 748 115"/>
+<path id="hormT" class="gr-track" d="M528 250C620 260 690 275 745 290"/>
+<path id="rxT" class="gr-track gr-track-rx" d="M640 362C600 325 578 310 556 296"/>
+<ellipse id="bodyGlow" class="gr-glow-b" cx="800" cy="300" rx="100" ry="105" opacity="0"/>
+<ellipse id="glandGlow" class="gr-glow-g" cx="480" cy="235" rx="125" ry="105" opacity="0"/>
+<g id="thySlot"></g>
 <g id="folls"></g>
 <g id="lymphs"></g>
+<g id="docks"></g>
 <g id="pit"></g>
 <g id="plasma"></g>
-<g id="eyeG">
-<circle id="eyeHalo" class="gr-halo" cx="800" cy="115" r="52" opacity="0"/>
-<ellipse class="gr-eye" cx="800" cy="115" rx="58" ry="34"/>
-<g id="eyeball"><circle class="gr-ball" cx="800" cy="115" r="24"/><circle class="gr-iris" cx="800" cy="115" r="11"/><circle class="gr-pupil" cx="800" cy="115" r="5"/></g>
-<path class="gr-eye-lid" d="M742 115Q800 76 858 115Q800 132 742 115Z"/>
-</g>
-<g id="heartG"><path class="gr-heart" d="M800 268c-8 -16 -34 -18 -42 -4c-9 15 2 32 42 56c40 -24 51 -41 42 -56c-8 -14 -34 -12 -42 4Z"/></g>
+<circle id="eyeHalo" class="gr-halo" cx="810" cy="115" r="54" opacity="0"/>
+<g id="eyeSlot"></g>
+<g id="heartSlot"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-body{--c-thy:#e8a04c;--c-trach:#8fb8c9;--c-eye:#7fc4e8}
-body[data-theme="light"]{--c-thy:#c97e22;--c-trach:#5f96ad;--c-eye:#3fa0d4}
 .gr-track{fill:none;stroke:var(--anatomy-faint);stroke-width:1.6;stroke-dasharray:5 6}
 .gr-track-eye{stroke-dasharray:2 6}
-.gr-trach{fill:color-mix(in srgb,var(--c-trach) 28%,var(--anatomy-paper));stroke:var(--c-trach);stroke-width:1.1}
-.gr-ring{stroke:var(--c-trach);stroke-width:1;opacity:.7}
-.gr-lobe{fill:color-mix(in srgb,var(--c-thy) 58%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-thy) 70%,#000);stroke-width:1.3}
-.gr-isth{fill:color-mix(in srgb,var(--c-thy) 52%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-thy) 65%,#000);stroke-width:1}
-.gr-foll{fill:color-mix(in srgb,var(--c-thy) 30%,#fff);stroke:color-mix(in srgb,var(--c-thy) 60%,#000);stroke-width:.7}
-.gr-fib{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.6}
-.gr-eye{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.3}
-.gr-ball{fill:color-mix(in srgb,var(--c-eye) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
-.gr-iris{fill:var(--c-eye)}
-.gr-pupil{fill:var(--anatomy-strong)}
-.gr-eye-lid{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.gr-track-rx{stroke:var(--c-ab);opacity:.55}
+.gr-glow-g{fill:#ff9a3d;stroke:none}
+.gr-glow-b{fill:var(--c-rbc);stroke:none}
 .gr-halo{fill:var(--c-bad)}
-.gr-heart{fill:color-mix(in srgb,var(--c-rbc) 62%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 65%,#000);stroke-width:1.3}
-.p-tshp{--cc:var(--c-cyt2)}.p-horm{--cc:#ff9a3d}
+.gr-foll{fill:color-mix(in srgb,var(--c-thy, #e8a04c) 30%,#fff);stroke:color-mix(in srgb,var(--c-thy, #e8a04c) 60%,#000);stroke-width:.7}
+.gr-fib{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.6}
+.gr-cap{fill:var(--anatomy-strong);font-size:12px}
+.p-tshp{--cc:var(--c-cyt2)}.p-horm{--cc:#ff9a3d}.p-blockT{--cc:var(--c-ab)}.p-levo2{fill:var(--c-fl);opacity:.85}
 .p-ab-y{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round}
-.dr-g-fill.g-ab{fill:var(--c-ab)}.dr-g-fill.g-thy{fill:var(--c-thy)}.dr-g-fill.g-dmg{fill:var(--c-bad)}.dr-g-fill.g-eye{fill:var(--c-eye)}
+.p-block{fill:var(--anatomy-paper);stroke:var(--c-ab);stroke-width:1.8}
+.dr-g-fill.g-ab{fill:var(--c-ab)}.dr-g-fill.g-thy{fill:#ff9a3d}.dr-g-fill.g-dmg{fill:var(--c-bad)}.dr-g-fill.g-eye{fill:var(--c-eye, #7fc4e8)}
 `;
 
 buildScene({
   id: "thyroid-graves-hashimoto", fig: "Fig 1", title: "Thyroid autoimmunity: Graves and Hashimoto", W, H, body, extraCss,
-  label: "An animated thyroid gland in the front of the neck, with the pituitary above it on the left, antibody making plasma cells, and on the right an eye and body tissues. In Graves disease a stimulating antibody switches the TSH receptor on, so the gland grows and makes too much hormone, TSH is suppressed, and the eye is inflamed. In Hashimoto thyroiditis a thyroid peroxidase antibody pattern with lymphocytic destruction slowly removes follicles, so hormone falls and TSH rises. A slider moves from Graves to early and late Hashimoto, and a treatment menu offers an antithyroid medicine, radioiodine or surgery, or levothyroxine replacement. Gauges show antibody, gland damage, hormone, TSH, gland size and eye signs.",
+  label: "An animated thyroid gland in the front of the neck, with the pituitary above it on the left, antibody making plasma cells, and on the right an eye and body tissues. In Graves disease a stimulating antibody switches the TSH receptor on, so the gland grows and makes too much hormone, TSH is suppressed, and the eye is inflamed. In Hashimoto thyroiditis a thyroid peroxidase antibody pattern with lymphocytic destruction slowly removes follicles, so hormone falls and TSH rises. A slider moves from Graves to early and late Hashimoto, and a treatment menu offers radioiodine or surgery, levothyroxine replacement, or an antithyroid medicine. Gauges show antibody, gland damage, hormone, TSH, gland size and eye signs.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "graves.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "graves.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With antithyroid medicine",
   sourcesLis: [
     "<strong>Graves disease.</strong> A stimulating antibody against the TSH receptor (often called TRAb or TSI) binds the receptor on thyroid follicular cells and switches it on without TSH. The gland grows diffusely (goitre), makes and releases too much thyroid hormone, and the high hormone suppresses pituitary TSH by negative feedback. A related autoimmune inflammation behind the eye expands orbital tissue and muscle, pushing the eye forward and causing Graves eye disease. This is standard teaching in endocrinology texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Hashimoto thyroiditis.</strong> Antibodies against thyroid peroxidase (TPO) mark a lymphocytic attack on the gland. Lymphocytes infiltrate, follicles are destroyed and, over time, fibrous tissue replaces working gland. Early on the gland may be enlarged and hormone may still be held near normal while TSH rises to compensate. Late, with little follicle left, hormone is low and TSH is high (primary hypothyroidism). A short release of stored hormone early in destruction is left out here.",

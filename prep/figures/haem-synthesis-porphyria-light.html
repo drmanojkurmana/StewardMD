@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -263,7 +266,6 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 
 .hs-mito{fill:color-mix(in srgb,#e9a23b 20%,var(--anatomy-paper));stroke:#c47b1e;stroke-width:1.2}
 .hs-mito-in{fill:none;stroke:color-mix(in srgb,#e9a23b 55%,var(--anatomy-mid));stroke-width:1;stroke-dasharray:5 4;opacity:.8}
-.hs-note{opacity:.6;font-size:9.5px}
 .hs-flow{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-dasharray:2 5;stroke-linecap:round;opacity:.7}
 .hs-feedback{fill:none;stroke:var(--c-bad);stroke-width:1.2;stroke-dasharray:6 5;opacity:.45}
 .hs-sub{fill:#b9c4cc;stroke:#6d7b85;stroke-width:1}.hs-sub2{fill:#8fa8b8;stroke:#5d7484;stroke-width:1}
@@ -272,14 +274,20 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .hs-ala{fill:#ff9a3d;stroke:#b95f14;stroke-width:1}.hs-pbg{fill:#b07fe8;stroke:#7440b0;stroke-width:1}
 .hs-por{fill:#e87fa8;stroke:#b04070;stroke-width:1}.hs-iron{fill:#c7ccd1;stroke:#7d868e;stroke-width:1.2}
 .hs-haem{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:1.2}.hs-haem-in{fill:#5e1220;stroke:none}
-.hs-patient{fill:color-mix(in srgb,var(--anatomy-paper) 82%,var(--c-bad));stroke:var(--anatomy-mid);stroke-width:1}
-.hs-head{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6}.hs-body{fill:none;stroke:var(--anatomy-strong);stroke-width:1.6;stroke-linecap:round}
-.hs-sym{font-size:10.5px}.hs-sym-dot{fill:var(--c-bad)}
+.hs-hazeA{fill:#ff9a3d;stroke:none}
+.hs-hazeP{fill:#b07fe8;stroke:none}
+.hs-pglow{fill:var(--c-bad);stroke:none}
+.hs-halo{fill:none;stroke:var(--c-good);stroke-width:2.5;stroke-dasharray:7 5}
+.hs-shield{fill:none;stroke:var(--c-good);stroke-width:2;stroke-dasharray:4 4}
 .hs-block{fill:none;stroke:var(--c-bad);stroke-width:3.2;stroke-linecap:round}
 .hs-lead{fill:#3d4450;stroke:#14181f;stroke-width:.8}
+.hs-leadcap{fill:#3d4450;stroke:#14181f;stroke-width:.8}
+.hs-trig{fill:#ff5a3c;stroke:#a02c12;stroke-width:.6}
+.hs-exc{fill:#3d8a5f;stroke:#14301f;stroke-width:.6}
+.hs-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-sub{--cc:#9db4c2}.p-ala{--cc:#ff9a3d}.p-pbg{--cc:#b07fe8}.p-por{--cc:#e87fa8}.p-haem{--cc:var(--c-rbc)}.p-lead{--cc:#3d4450}.p-treat{--cc:var(--c-good)}
 .dr-g-fill.g-ala{fill:#e07f22}.dr-g-fill.g-pbg{fill:#8b5fd6}.dr-g-fill.g-por{fill:#d65f92}.dr-g-fill.g-haemg{fill:var(--c-good)}.dr-g-fill.g-sym{fill:var(--c-bad)}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Haem synthesis and porphyria</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>ALA low · PBG low · haem normal · symptoms none</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated haem synthesis pathway drawn across a mitochondrion, the cytosol and the mitochondrion again. Glycine and succinyl-CoA make ALA by ALA synthase. ALA dehydratase makes porphobilinogen, PBG deaminase and later steps make porphyrin intermediates, and ferrochelatase inserts iron to make haem. Lead blocks ALA dehydratase and ferrochelatase. In acute intermittent porphyria PBG deaminase is faulty, ALA and PBG build up and cause abdominal pain and neuropathy. Gauges show ALA, PBG, porphyrins, haem and symptoms. Treatments are chelation, haem and glucose, and avoiding triggers."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Haem synthesis and porphyria</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>ALA low · PBG low · haem normal · symptoms none</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated haem synthesis pathway drawn across a mitochondrion, the cytosol and the mitochondrion again. Glycine and succinyl-CoA make ALA by ALA synthase. ALA dehydratase makes porphobilinogen, PBG deaminase and later steps make porphyrin intermediates, and ferrochelatase inserts iron to make haem. Lead blocks ALA dehydratase and ferrochelatase. In acute intermittent porphyria PBG deaminase is faulty, ALA and PBG build up and cause abdominal pain and neuropathy. Below, the gut and a nerve glow where attacks cause pain. Gauges show ALA, PBG, porphyrins, haem and symptoms. Treatments are haem and glucose, chelation, and avoiding triggers."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
 <rect class="hs-mito" x="34" y="78" width="212" height="224" rx="26"/>
 <rect class="hs-mito-in" x="46" y="90" width="188" height="200" rx="20"/>
@@ -288,58 +296,59 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <text class="sc-zone" x="50" y="68">MITOCHONDRION</text>
 <text class="sc-zone" x="276" y="68">CYTOSOL</text>
 <text class="sc-zone" x="730" y="68">MITOCHONDRION</text>
-<text class="sc-lab hs-note" x="480" y="68" text-anchor="middle">same organelle, drawn twice</text>
 <path class="hs-flow" d="M78 190H882"/>
+<ellipse id="hazeAla" class="hs-hazeA" cx="270" cy="190" rx="110" ry="46" opacity="0"/>
+<ellipse id="hazePbg" class="hs-hazeP" cx="470" cy="190" rx="120" ry="52" opacity="0"/>
 <g id="nodes">
-<circle class="hs-sub" cx="78" cy="176" r="9"/><circle class="hs-sub2" cx="94" cy="200" r="7"/>
-<g id="enz1"><circle class="hs-enz" cx="150" cy="190" r="23"/><circle class="hs-enz-in" cx="150" cy="190" r="12"/></g>
-<circle class="hs-ala" cx="255" cy="190" r="11"/>
-<g id="enz2"><circle class="hs-enz" cx="350" cy="190" r="23"/><circle class="hs-enz-in" cx="350" cy="190" r="12"/></g>
-<circle class="hs-pbg" cx="440" cy="190" r="11"/>
-<g id="enz3"><circle class="hs-enz" cx="525" cy="190" r="23"/><circle class="hs-enz-in" cx="525" cy="190" r="12"/></g>
-<circle class="hs-por" cx="615" cy="190" r="11"/><circle class="hs-por" cx="648" cy="178" r="7"/><circle class="hs-por" cx="648" cy="202" r="7"/>
-<circle class="hs-iron" cx="762" cy="148" r="9"/><path class="hs-flow" d="M762 157L798 178"/>
-<g id="enz4"><circle class="hs-enz" cx="815" cy="190" r="23"/><circle class="hs-enz-in" cx="815" cy="190" r="12"/></g>
-<circle class="hs-haem" cx="882" cy="190" r="16"/><circle class="hs-haem-in" cx="882" cy="190" r="7"/>
+<g id="subN" class="hot" data-info="Glycine and succinyl-CoA, the starting materials in the mitochondrion."><circle class="hs-sub" cx="78" cy="176" r="9"/><circle class="hs-sub2" cx="94" cy="200" r="7"/></g>
+<g id="enz1" class="hot" data-info="ALA synthase, the first enzyme. Low haem or triggers drive it up. Haem and glucose switch it off."><circle class="hs-enz" cx="150" cy="190" r="23"/><circle class="hs-enz-in" cx="150" cy="190" r="12"/></g>
+<circle id="alaN" class="hs-ala hot" cx="255" cy="190" r="11" data-info="ALA. It leaves the mitochondrion for the cytosol and builds up in both diseases."/>
+<g id="enz2" class="hot" data-info="ALA dehydratase. It joins ALA units to make PBG. Lead blocks this enzyme."><circle class="hs-enz" cx="350" cy="190" r="23"/><circle class="hs-enz-in" cx="350" cy="190" r="12"/></g>
+<circle id="pbgN" class="hs-pbg hot" cx="440" cy="190" r="11" data-info="PBG. Units of PBG link into chains. They pile up before the faulty step in porphyria."/>
+<g id="enz3" class="hot" data-info="PBG deaminase. Its partial fault causes acute intermittent porphyria."><circle class="hs-enz" cx="525" cy="190" r="23"/><circle class="hs-enz-in" cx="525" cy="190" r="12"/></g>
+<g id="porN" class="hot" data-info="Porphyrin intermediates on the way to haem. They build up when the last enzyme is blocked by lead."><circle class="hs-por" cx="615" cy="190" r="11"/><circle class="hs-por" cx="648" cy="178" r="7"/><circle class="hs-por" cx="648" cy="202" r="7"/></g>
+<circle id="ironN" class="hs-iron hot" cx="762" cy="148" r="9" data-info="Iron. Ferrochelatase inserts it to finish haem."/><path class="hs-flow" d="M762 157L798 178"/>
+<g id="enz4" class="hot" data-info="Ferrochelatase. It inserts iron to finish haem. Lead blocks this enzyme."><circle class="hs-enz" cx="815" cy="190" r="23"/><circle class="hs-enz-in" cx="815" cy="190" r="12"/></g>
+<circle id="haemN" class="hs-haem hot" cx="882" cy="190" r="16" data-info="Haem, the finished product. It feeds back to restrain the first enzyme."/><circle class="hs-haem-in" cx="882" cy="190" r="7"/>
 </g>
+<circle id="halo" class="hs-halo" cx="150" cy="190" r="32" opacity="0"/>
+<path id="shield" class="hs-shield" d="M106 150 Q150 106 194 150" opacity="0"/>
 <path class="hs-feedback" d="M882 214C882 414 150 414 150 216"/>
-<g id="patientG">
-<rect class="hs-patient" x="648" y="342" width="278" height="84" rx="14"/>
-<circle class="hs-head" cx="682" cy="372" r="11"/><path class="hs-body" d="M682 383L682 404M682 390L668 398M682 390L696 396M682 404L672 420M682 404L692 420"/>
-<text class="sc-lab hs-sym" x="712" y="372">Abdominal pain</text>
-<text class="sc-lab hs-sym" x="712" y="396">Nerve pain and weakness</text>
-<circle id="symDot1" class="hs-sym-dot" cx="704" cy="368" r="3.4"/><circle id="symDot2" class="hs-sym-dot" cx="704" cy="392" r="3.4"/>
-</g>
+<ellipse id="glowGut" class="hs-pglow" cx="668" cy="380" rx="62" ry="52" opacity="0"/>
+<g id="bowelSlot"></g>
+<ellipse id="glowNerve" class="hs-pglow" cx="836" cy="380" rx="50" ry="44" opacity="0"/>
+<g id="nerveSlot"></g>
 <g id="parts"></g><g id="blocks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>Condition</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>lead poisoning</i><i>acute intermittent porphyria</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">chelation</option><option value="2">haem and glucose</option><option value="3">avoid triggers</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With haem and glucose"><option value="0">no treatment</option><option value="1">haem and glucose</option><option value="2">chelation</option><option value="3">avoid triggers</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
 <p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul><li><strong>How haem is made.</strong> The first step is in the mitochondrion: glycine and succinyl-CoA are joined by ALA synthase to make aminolaevulinic acid (ALA). In the cytosol, ALA dehydratase joins ALA molecules to make porphobilinogen (PBG), and PBG deaminase plus later cytosol steps build porphyrin intermediates. Back in the mitochondrion the last steps run, and ferrochelatase inserts iron into protoporphyrin to make haem. Haem feeds back to restrain ALA synthase. This is standard teaching in biochemistry and haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Lead and acute intermittent porphyria.</strong> Lead inhibits ALA dehydratase and ferrochelatase, so ALA and porphyrin intermediates build up while haem falls. Acute intermittent porphyria is a partial defect of PBG deaminase; when ALA synthase is driven up, ALA and PBG build up ahead of the faulty step and attacks bring abdominal pain and neuropathy. Chelation removes lead, haem and glucose restrain ALA synthase, and avoiding triggers reduces attacks. These are teaching toggles only.</li></ul>
+<ul><li><strong>How haem is made.</strong> The first step is in the mitochondrion: glycine and succinyl-CoA are joined by ALA synthase to make aminolaevulinic acid (ALA). In the cytosol, ALA dehydratase joins ALA molecules to make porphobilinogen (PBG), and PBG deaminase plus later cytosol steps build porphyrin intermediates. Back in the mitochondrion the last steps run, and ferrochelatase inserts iron into protoporphyrin to make haem. Haem feeds back to restrain ALA synthase. This is standard teaching in biochemistry and haematology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Lead and acute intermittent porphyria.</strong> Lead inhibits ALA dehydratase and ferrochelatase, so ALA and porphyrin intermediates build up while haem falls. Acute intermittent porphyria is a partial defect of PBG deaminase; when ALA synthase is driven up, ALA and PBG build up ahead of the faulty step and attacks bring abdominal pain and neuropathy. Haem and glucose restrain ALA synthase, chelation removes lead, and avoiding triggers reduces attacks. These are teaching toggles only.</li><li><strong>Organ art.</strong> Organ art is Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated.</li></ul>
 <p><strong>What was simplified.</strong> The named porphyrin intermediates between PBG and protoporphyrin, other porphyrias and their skin features, erythropoietic versus hepatic detail, zinc protoporphyrin, blood lead testing, attack precipitants in detail, and all doses and thresholds are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). Organ illustrations are Servier Medical Art by Servier (CC BY 3.0); all other drawing is original.</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
-</footer></main><script type="module">const SC = {"FY":190,"W":960,"H":610,"S":{"level":{"label":"Condition","a":[0.2,0.85,0.8],"names":["normal","lead poisoning","acute intermittent porphyria"],"ticks":["normal","lead poisoning","acute intermittent porphyria"],"start":0},"settings":[{"label":"no treatment"},{"label":"chelation"},{"label":"haem and glucose"},{"label":"avoid triggers"}],"drugNames":["no treatment","chelation","haem and glucose","avoiding triggers"],"status":"Condition: {level} · {drug} ·"}};
+</footer></main><script type="module">const SC = {"FY":190,"W":960,"H":610,"S":{"level":{"label":"Condition","a":[0.2,0.85,0.8],"names":["normal","lead poisoning","acute intermittent porphyria"],"ticks":["normal","lead poisoning","acute intermittent porphyria"],"start":0},"settings":[{"label":"no treatment"},{"label":"haem and glucose"},{"label":"chelation"},{"label":"avoid triggers"}],"drugNames":["no treatment","haem and glucose","chelation","avoiding triggers"],"status":"Condition: {level} · {drug} ·"}};
 const modelOf = function modelOf(S, level, drug) {
   const cl = (v) => Math.max(0, Math.min(1, v));
-  let D = [0.42, 0.78, 0.92][level];
-  if (drug === 2) D *= 0.38;
-  if (drug === 3) D *= level === 2 ? 0.58 : level === 1 ? 0.9 : 1;
-  if (drug === 1 && level === 1) D *= 0.9;
-  const dehyd = level === 1 ? (drug === 1 ? 0.86 : drug === 3 ? 0.38 : 0.27) : 1;
+  const D0 = [0.42, 0.78, 0.92][level];
+  let D = D0;
+  if (drug === 1 && level === 2) D *= 0.45;
+  if (drug === 3 && level === 2) D *= 0.58;
+  if (drug === 2 && level === 1) D *= 0.9;
+  const dehyd = level === 1 ? (drug === 2 ? 0.86 : 0.27) : 1;
   const deam = level === 2 ? 0.33 : 1;
-  const ferro = level === 1 ? (drug === 1 ? 0.86 : drug === 3 ? 0.4 : 0.3) : 1;
+  const ferro = level === 1 ? (drug === 2 ? 0.86 : 0.3) : 1;
   const Fpg = D * dehyd;
   const Fpor = Fpg * deam;
   const Fhaem = Fpor * ferro;
   const ALA = cl(0.08 + D * 0.35 + (D - Fpg) * 0.9 + (Fpg - Fpor) * 0.35);
   const PBG = cl(0.07 + Fpg * 0.25 + (Fpg - Fpor) * 1.0);
   const Por = cl(0.07 + Fpor * 0.25 + (Fpor - Fhaem) * 1.0 + (level === 1 ? (1 - ferro) * 0.25 : 0));
-  const Haem = cl(0.28 + Fhaem * 0.75 + (drug === 2 ? 0.28 : 0) + (level === 0 ? 0.25 : 0));
+  const Haem = cl(0.28 + Fhaem * 0.75 + (drug === 1 && level === 2 ? 0.3 : 0) + (level === 0 ? 0.25 : 0));
   const Sym = cl(ALA * 0.45 + PBG * 0.45 + (1 - Haem) * 0.25 - 0.18);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
   const words = [w(ALA, 0.3, 0.6, ["low", "raised", "high"]), w(PBG, 0.3, 0.6, ["low", "raised", "high"]), w(Haem, 0.35, 0.65, ["low", "borderline", "normal"]), w(Sym, 0.2, 0.5, ["none", "present", "severe"])];
@@ -438,67 +447,417 @@ function run(scn) {
   start();
 }
 
-/* Haem synthesis scene: substrates flow through enzyme steps across mitochondrion and cytosol to haem. */
+/* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
+ * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
+ * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
+ *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
+ *   dim (dull the art) }.
+ * Returns { g, kind, x, y, w, h, ports, art } with absolute SVG coords; ports.in/out always exist.
+ * Art keeps its own colours (a faint contrast halo keeps it readable in dark and light themes);
+ * procedural fill is a vertical gradient whose stops derive from --cc (a theme aware palette var,
+ * so dark and light both work); edge stroke and landmark lines use color-mix detail classes.
+ * Emits no text, so label font and dash rules are inherited from the calling scene. */
+if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("style"); _orgSt.id = "orgCss";
+  _orgSt.textContent = ".org-halo{filter:drop-shadow(0 0 1px rgba(0,0,0,.65)) drop-shadow(0 0 1px rgba(255,255,255,.45))}"
+  + ".org-b{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1.2;stroke-linejoin:round;stroke-linecap:round}"
+  + ".org-d{fill:none;stroke:color-mix(in srgb,var(--cc) 40%,var(--anatomy-hi));stroke-width:1;stroke-linecap:round;opacity:.8}"
+  + ".org-dk{fill:none;stroke:color-mix(in srgb,var(--cc) 62%,#000);stroke-width:1.1;stroke-linecap:round;opacity:.8}"
+  + ".org-f{stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:1;stroke-linejoin:round}"
+  + ".org-v{fill:none;stroke-linecap:round}"
+  + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
+  + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
+  document.head.appendChild(_orgSt); }
+var _orgN = 0;
+/* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
+function _orgDefs(g) {
+  _orgN++; var id = "og" + _orgN, hid = "oh" + _orgN;
+  var defs = mk("defs", {}, g);
+  var lg = mk("linearGradient", { id: id, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  var s0 = mk("stop", { offset: "0", "stop-color": "#999" }, lg); s0.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 55%,#fff)");
+  var s1 = mk("stop", { offset: ".55", "stop-color": "#888" }, lg); s1.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 78%,var(--anatomy-paper))");
+  var s2 = mk("stop", { offset: "1", "stop-color": "#666" }, lg); s2.setAttribute("style", "stop-color:color-mix(in srgb,var(--cc) 66%,#000)");
+  var hg = mk("linearGradient", { id: hid, x1: "0", y1: "0", x2: "0", y2: "1" }, defs);
+  mk("stop", { offset: "0", "stop-color": "#fff", "stop-opacity": ".2" }, hg);
+  mk("stop", { offset: ".55", "stop-color": "#fff", "stop-opacity": "0" }, hg);
+  mk("stop", { offset: "1", "stop-color": "#000", "stop-opacity": ".14" }, hg);
+  return { b: "url(#" + id + ")", h: "url(#" + hid + ")" };
+}
+/* one filled silhouette plus its shade overlay, same path data so the light stays inside */
+function _ob(g, d, G) {
+  mk("path", { class: "org-b", d: d, fill: G.b, stroke: "#666" }, g);
+  mk("path", { d: d, fill: G.h, stroke: "none", "pointer-events": "none" }, g);
+}
+function _ol(g, d, cls) { return mk("path", { class: cls || "org-d", d: d, fill: "none" }, g); }
+function _of(g, d, fillCss, cc) { var e = mk("path", { class: "org-f", d: d, stroke: "#666" }, g); e.setAttribute("style", "fill:" + fillCss + ";--cc:" + cc); return e; }
+function _ov(g, d, color, wdt) { var e = mk("path", { class: "org-v", d: d, fill: "none", stroke: "#777", "stroke-width": wdt, "stroke-linecap": "round" }, g); e.setAttribute("style", "stroke:" + color); return e; }
+function _odot(g, x, y, r, fillCss) { var e = mk("circle", { cx: x, cy: y, r: r, stroke: "none" }, g); e.setAttribute("style", "fill:" + fillCss); return e; }
+
+/* liver: big right lobe, smaller left lobe, falciform notch, gallbladder, porta hepatis stubs */
+function _orgLiver(g, G) {
+  _ov(g, "M-2 46L-2 18", "var(--d-ven)", 5); _ov(g, "M7 46L5 20", "var(--d-art)", 3); _ov(g, "M-11 46L-9 20", "var(--c-bac)", 2.5);
+  _ob(g, "M-6-30C22-33 44-25 50-7C54 9 40 25 18 30C2 33-5 22-7 6C-8-8-8-22-6-30Z", G);
+  _ob(g, "M-8-27C-24-27-40-19-48-6C-51 1-45 9-35 12C-24 15-11 9-8-1C-6-10-6-20-8-27Z", G);
+  _ol(g, "M-8-29C-7-18-6-6-4 6", "org-dk");
+  _ol(g, "M-2-28C14-29 30-24 40-14");
+  _of(g, "M10 18C16 16 22 18 23 24C24 31 19 37 14 36C9 35 7 28 8 23C8 21 9 19 10 18Z", "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  return { h0: 78, ports: { in: [-2, 46], out: [12, -30], porta: [-2, 18], gall: [16, 33], lobe: [20, 0] } };
+}
+/* heart: mass with apex down left, septum, coronary groove, aorta with arch, pulmonary split, caval stubs */
+function _orgHeart(g, G) {
+  _ov(g, "M-2-18L-2-44C-2-52-10-56-20-54C-28-52-32-46-32-38", "var(--d-art)", 8);
+  _ov(g, "M-8-52L-8-59M-15-54L-16-60M-22-53L-24-59", "var(--d-art)", 2.5);
+  _ov(g, "M12-16C8-28 2-34-4-38", "var(--d-ven)", 7);
+  _ov(g, "M-4-38C-12-40-20-38-28-34", "var(--d-ven)", 4.5); _ov(g, "M-4-38C4-40 12-38 20-34", "var(--d-ven)", 4.5);
+  _ov(g, "M20-20L20-52", "var(--d-ven)", 7); _ov(g, "M18 34L18 58", "var(--d-ven)", 7);
+  _ov(g, "M-36-2L-50-6M-34 14L-48 16", "var(--d-art)", 4);
+  _ob(g, "M-4-32C24-34 42-16 40 10C38 32 12 48-20 50C-34 44-40 24-36 2C-33-18-22-31-4-32Z", G);
+  _ol(g, "M0-30C4-10 0 14-14 44", "org-dk");
+  _ol(g, "M-34 6C-18 12 6 12 38 4");
+  _ol(g, "M-6-28C-14-18-18-6-20 8");
+  return { h0: 120, ports: { in: [20, -52], out: [-32, -38], ivc: [18, 58], apex: [-20, 50], pulm: [-28, -34] } };
+}
+/* kidney: bean with hilum, cortex rim, medulla rays, pelvis funnel, ureter, artery and vein stubs */
+function _orgKidney(g, G) {
+  _ov(g, "M-12 6C-22 12-28 18-28 30C-28 50-26 70-24 90", "var(--cc)", 4.5);
+  _ov(g, "M-50-8C-40-8-30-8-22-6", "var(--d-art)", 4); _ov(g, "M-50 10C-40 10-30 8-22 6", "var(--d-ven)", 5);
+  _ob(g, "M8-58C38-58 54-32 50 2C56 32 42 60 8 60C-8 60-16 48-19 34C-26 24-26-24-19-34C-16-48-8-58 8-58Z", G);
+  _ol(g, "M8-49C32-49 45-28 42 0C46 28 34 51 8 51C-1 51-8 43-10 32C-15 24-15-24-10-32C-8-43-1-49 8-49Z");
+  _ol(g, "M-6-30L14-38M-8-10L16-12M-8 12L16 14M-6 32L14 40");
+  _ol(g, "M16-44C30-36 38-20 38 0");
+  _of(g, "M-19-14C-8-12-2-8 2-2C-2 4-8 10-18 14C-22 8-22-8-19-14Z", "color-mix(in srgb,var(--cc) 35%,#fff)", "var(--cc)");
+  return { h0: 150, ports: { in: [-50, -8], out: [-24, 90], vein: [-50, 10], pelvis: [-12, 4], cortex: [30, 0] } };
+}
+/* lung: one lung with oblique fissure, hilum bronchus splitting into lobar and segmental branches */
+function _orgLung(g, G) {
+  _ov(g, "M-58 4L-30 4", "var(--anatomy-hi)", 6);
+  _ov(g, "M-30 4C-22-6-16-16-10-26", "var(--anatomy-hi)", 4.5); _ov(g, "M-30 4C-22 14-14 24-6 34", "var(--anatomy-hi)", 4.5);
+  _ov(g, "M-18-14L-28-22M-16-16L-8-24M-14-20L-14-32M-20 16L-30 24M-16 20L-6 28M-12 26L-10 38", "var(--anatomy-hi)", 2);
+  _ov(g, "M-58-8L-34-6", "var(--d-ven)", 4); _ov(g, "M-58 14L-34 12", "var(--d-art)", 4);
+  _ob(g, "M2-60C24-56 40-32 43 8C45 38 32 60 2 62C-24 62-40 42-42 10C-44-24-20-58 2-60Z", G);
+  _ol(g, "M-40-2C-20 8 0 22 24 40", "org-dk");
+  _ol(g, "M-8-48C8-50 22-40 30-26");
+  return { h0: 130, ports: { in: [-58, 4], out: [-58, 14], art: [-58, -8], apex: [2, -60], base: [2, 62] } };
+}
+/* stomach: J shape with fundus dome, rugae, antrum sweep, pylorus ring, oesophagus and duodenum stubs */
+function _orgStomach(g, G) {
+  _of(g, "M-38-58L-22-58L-22-36L-38-36Z", "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))", "var(--cc)");
+  _ob(g, "M-38-36C-46-24-50-8-46 10C-42 30-30 46-12 50C6 54 28 46 40 32C44 27 46 23 46 18L34 14C30 22 20 30 6 32C-8 34-22 26-28 12C-33-1-31-16-26-28C-24-32-22-34-22-36Z", G);
+  _ol(g, "M-36-10C-30 6-22 20-8 28M-28-22C-22-6-12 10 4 22M-16-30C-10-14 0 2 14 12");
+  _ol(g, "M40 15C43 19 43 25 40 29M34 14C37 18 37 26 34 30", "org-dk");
+  _ol(g, "M46 16L60 22M44 28L58 32", "org-dk");
+  return { h0: 116, ports: { in: [-30, -58], out: [60, 27], fundus: [-40, -12], antrum: [24, 38], pylorus: [40, 22] } };
+}
+/* brain lateral: cerebrum with Sylvian fissure and gyri, cerebellum with folia, tapered brainstem */
+function _orgBrain(g, G) {
+  _ov(g, "M10 50L10 64", "var(--d-art)", 5);
+  _ob(g, "M-50-6C-50-32-24-42 4-40C30-38 44-28 44-8C44 10 32 24 8 28C-18 31-50 24-50-6Z", G);
+  _ol(g, "M-12 10C2 6 18 2 34-4", "org-dk");
+  _ol(g, "M-38-20C-32-10-32 2-38 12M-26-30C-20-20-20-6-26 6M-4-32C2-22 2-8-4 2M10-30C16-20 16-6 10 4M28-22C34-14 34-2 28 8");
+  _ol(g, "M-16 6L-24-4M-10 4L-12-8", "org-dk");
+  _ob(g, "M2 24L16 24L12 56L6 56Z", G);
+  _ol(g, "M2 36C6 38 12 38 16 36");
+  _ob(g, "M22 24C34 22 46 26 48 34C50 42 42 48 32 47C24 46 20 38 20 32C20 28 20 26 22 24Z", G);
+  _ol(g, "M24 32L44 32M25 37L43 37M27 42L41 42");
+  return { h0: 110, ports: { in: [10, 64], out: [4, -40], parenchyma: [-8, -6], cereb: [34, 35], frontal: [-40, -8] } };
+}
+/* pancreas: bulky head right, tapering tail left, main duct with side branches, islet dots */
+function _orgPancreas(g, G) {
+  _ob(g, "M-50-4C-32-14-8-14 14-10C32-7 46-2 49 10C51 21 40 28 26 25C8 21-20 12-50 6Z", G);
+  _ol(g, "M-46 1C-20-2 10 0 38 10", "org-dk");
+  _ol(g, "M-30-1L-34-8M-10-1L-14-9M8 0L4-8M-28 1L-32 8M-6 1L-10 8M12 2L8 10");
+  _ol(g, "M52-6C58 4 58 16 50 24");
+  _odot(g, -20, -2, 1.6, "var(--d-art)"); _odot(g, 0, 0, 1.6, "var(--d-art)"); _odot(g, 22, 6, 1.6, "var(--d-art)");
+  return { h0: 60, ports: { in: [-10, -12], out: [49, 12], head: [36, 8], tail: [-48, 1] } };
+}
+/* spleen: crescent with top notch, trabeculae, hilar artery and vein stubs below */
+function _orgSpleen(g, G) {
+  _ov(g, "M-30 52C-28 44-26 40-22 36", "var(--d-art)", 3.5); _ov(g, "M-20 54C-19 46-17 42-13 38", "var(--d-ven)", 4.5);
+  _ob(g, "M-38-30C-8-40 28-34 44-12C52 4 44 26 20 34C-4 41-34 32-44 10C-48-4-46-22-38-30Z", G);
+  _ol(g, "M-8-36C-4-33 0-33 4-36", "org-dk");
+  _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
+  return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
+}
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
+/* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
+function _orgBladder(g, G) {
+  _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
+  _ob(g, "M0-50C26-48 40-30 40-6C40 16 26 32 8 40L-8 40C-26 32-40 16-40-6C-40-30-26-48 0-50Z", G);
+  _ob(g, "M-8 40L8 40L8 64L-8 64Z", G);
+  _ol(g, "M-8 52L8 52", "org-dk");
+  _ol(g, "M-24-8L24-8L0 24Z");
+  _ol(g, "M-28-28C-12-36 12-36 28-28M-34-12C-16-22 16-22 34-12");
+  return { h0: 120, ports: { in: [-52, -44], out: [0, 64], inR: [52, -44], trigone: [0, 8], dome: [0, -48] } };
+}
+/* uterus: fundus, cavity, cervix, tubes with fimbriae, ovaries with follicles */
+function _orgUterus(g, G) {
+  _ov(g, "M-16-16C-26-17-32-19-38-23", "var(--cc)", 3.5); _ov(g, "M16-16C26-17 32-19 38-23", "var(--cc)", 3.5);
+  _ov(g, "M-38-23L-44-27M-38-23L-45-23M-38-23L-44-19M-38-23L-42-29", "var(--cc)", 1.2);
+  _ov(g, "M38-23L44-27M38-23L45-23M38-23L44-19M38-23L42-29", "var(--cc)", 1.2);
+  var eo = mk("ellipse", { class: "org-f", cx: -45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var eo2 = mk("ellipse", { class: "org-f", cx: 45, cy: -10, rx: 7, ry: 11, stroke: "#666" }, g);
+  eo2.setAttribute("style", "fill:color-mix(in srgb,var(--c-plt) 62%,var(--anatomy-paper));--cc:var(--c-plt)");
+  var _fol = "color-mix(in srgb,var(--c-plt) 45%,#000)";
+  _odot(g, -47, -14, 1.6, _fol); _odot(g, -43, -8, 1.6, _fol); _odot(g, -46, -4, 1.4, _fol);
+  _odot(g, 47, -14, 1.6, _fol); _odot(g, 43, -8, 1.6, _fol); _odot(g, 46, -4, 1.4, _fol);
+  _ob(g, "M-16-20C-8-26 8-26 16-20C20-2 15 20 8 32L-8 32C-15 20-20-2-16-20Z", G);
+  _of(g, "M-10-14L10-14L0 22Z", "color-mix(in srgb,var(--cc) 45%,#fff)", "var(--cc)");
+  _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
+  return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
+}
+/* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
+function _orgThyroid(g, G) {
+  _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
+  _ov(g, "M-7-28L7-28M-7-12L7-12M-7 24L7 24M-7 36L7 36", "var(--anatomy-hi)", 1.2);
+  _ob(g, "M16-32C28-30 35-16 33 4C31 22 25 32 16 32C8 32 6 20 8 2C10-14 11-28 16-32Z", G);
+  _ob(g, "M-16-32C-28-30-35-16-33 4C-31 22-25 32-16 32C-8 32-6 20-8 2C-10-14-11-28-16-32Z", G);
+  _ob(g, "M-10 6L10 6L10 16L-10 16Z", G);
+  _ol(g, "M14-20C18-10 18 6 14 20M-14-20C-18-10-18 6-14 20");
+  _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
+  return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
+}
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
+/* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
+ * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
+ * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
+var _ORG_ART = {};
+var _ORG_FRAC = {
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
+  heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
+  kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
+  lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
+  stomach: { in: [.42, .00], out: [.50, .95], fundus: [.38, .10], antrum: [.52, .30], pylorus: [.60, .35] },
+  intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
+  brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
+  pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
+};
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
+/* draw the injected art centred on x,y at w px wide. The art is clipped to its
+ * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
+ * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
+ * the same organ on one page never share gradient, clip or mask ids. */
+function _orgArt(parent, kind, x, y, w, opts, A) {
+  var vb = A.vb, vw = vb[2], vh = vb[3], cx = vb[0] + vw / 2, cy = vb[1] + vh / 2;
+  _orgN++;
+  var uid = "u" + _orgN;
+  var outer = mk("g", { class: "org org-art org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var sx = w / vw, sy = opts.h ? opts.h / vh : sx, fx = opts.flip ? -1 : 1;
+  var inner = mk("g", { transform: "translate(" + f1(-fx * cx * sx) + " " + f1(-cy * sy) + ") scale(" + (fx * sx).toFixed(4) + " " + sy.toFixed(4) + ")" }, outer);
+  var defs = mk("defs", {}, inner);
+  var cid = A.pfx + uid + "-frame";
+  var cp = mk("clipPath", { id: cid }, defs);
+  mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
+  var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
+  var aid = A.pfx + uid + "-art";
+  art.setAttribute("id", aid);
+  art.innerHTML = A.body.split('id="' + A.pfx + '-').join('id="' + A.pfx + uid + '-')
+    .split('url(#' + A.pfx + '-').join('url(#' + A.pfx + uid + '-')
+    .split('href="#' + A.pfx + '-').join('href="#' + A.pfx + uid + '-');
+  if (opts.dim) art.setAttribute("opacity", ".5");
+  if (opts.tint) {
+    var mid = A.pfx + uid + "-tintm";
+    var m = mk("mask", { id: mid, maskUnits: "userSpaceOnUse", x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, defs);
+    mk("use", { href: "#" + aid }, m);
+    var tg = mk("g", { "clip-path": "url(#" + cid + ")" }, inner);
+    mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh), fill: opts.tint, mask: "url(#" + mid + ")" }, tg);
+  }
+  var ports = {}, F = _ORG_FRAC[kind], k;
+  for (k in F) ports[k] = [Math.round((x + fx * (vb[0] + F[k][0] * vw - cx) * sx) * 10) / 10, Math.round((y + (vb[1] + F[k][1] * vh - cy) * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(vh * sy * 10) / 10, ports: ports, art: true };
+}
+/* dispatcher: outer g carries the theme class and gradients, inner g the local drawing scaled to w */
+function organ(parent, kind, x, y, w, opts) {
+  opts = opts || {};
+  if (_ORG_FRAC[kind] && _ORG_ART[kind]) return _orgArt(parent, kind, x, y, w, opts, _ORG_ART[kind]);
+  var outer = mk("g", { class: "org org-" + kind + (opts.cls ? " " + opts.cls : ""), transform: "translate(" + f1(x) + " " + f1(y) + ")" }, parent);
+  if (opts.id) outer.setAttribute("id", opts.id);
+  var G = _orgDefs(outer);
+  var inner = mk("g", {}, outer);
+  var r;
+  if (kind === "liver") r = _orgLiver(inner, G);
+  else if (kind === "heart") r = _orgHeart(inner, G);
+  else if (kind === "kidney") r = _orgKidney(inner, G);
+  else if (kind === "lung") r = _orgLung(inner, G);
+  else if (kind === "stomach") r = _orgStomach(inner, G);
+  else if (kind === "brain") r = _orgBrain(inner, G);
+  else if (kind === "pancreas") r = _orgPancreas(inner, G);
+  else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
+  else if (kind === "bladder") r = _orgBladder(inner, G);
+  else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "thyroid") r = _orgThyroid(inner, G);
+  else throw new Error("organ: unknown kind " + kind);
+  var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
+  inner.setAttribute("transform", "scale(" + (fx * sx).toFixed(3) + " " + sy.toFixed(3) + ")");
+  var ports = {}, k;
+  for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
+  return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
+}
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel"];
+
+_ORG_ART["bowel"]={vb:[0,0,215.7,212.6],pfx:"oasma",body:"<defs><clipPath clipPathUnits=\"userSpaceOnUse\" id=\"oasma-a\"><path d=\"M6.8 5.2l215.4 0 0 212.7-215.4 0Z\" /></clipPath></defs><path clip-path=\"url(#oasma-a)\" d=\"M59.2 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path clip-path=\"url(#oasma-a)\" d=\"M59.3 179.5l1 7.5 3.9 8.1 7 7.2 4.7 2.8 5.5 2 6.3 1 7.1 -.1 13 -2.6 12.8 -6 7.1 -6.6 1.7 3.7 3.8 4.4 5.5 4.6 6.8 4.3 7.7 3.6 8.2 2.3 8.3 .5 8 -1.8 7.3 -4.5 6.2 -7.8 5.2 -.6 2.9 -1.2 6 -4.8 3 -3.7 5.6 -10.4 4.8 -14.9 2 -11.7 .4 -11.6 -.9 -11.2 -1.9 -10.7 -5.7 -19.1 -10.9 -23.7 2.8 -7.4 1.7 -8.1 .7 -8.5 -.2 -8.6 -2.8 -16.3 -5.4 -13.2 -3.4 -4.7 -3.8 -3.1 -4.2 -1.7 -4.2 -.6 -8.6 1.6 -9.6 5 -33 22.8 -8.2 3.8 -8.4 2.8 -16.3 2.6 -14.5 -.9 -6 -1.6 -5 -2.4 -3.7 -3 -14.3 -17.2 -7.4 -6.2 -4.1 -2.2 -4.3 -1.3 -4.5 -.2 -4.7 1 -4.9 2.5 -3.1 2.9 -4.4 8.8 -2.1 11.6 -.4 12.9 1.7 18.4 -4 5.4 -2.7 7.4 -1.5 8.9 .1 20.8 3.6 21.8 6.3 19.2 3.9 7.6 8.2 11.2 6.5 5.8 7.7 3.5 9.1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M179.6 131.1l6.2 -10.3 5.5 -15.5 3.4 -20.6 .7 -12.5 -.9 -11.5 -2.8 -10.5 -4.9 -9.5 -2.9 -3.8 -6.3 -5.1 -6.4 -1.5 -3.1 .6 -5.5 4.2 -2.3 3.6 .4 -.9 -2.2 1.4 -3.6 .4 -8.2 -1.2 -4.4 -1.5 -3.3 -2.2 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -11.3 3.5 -9.9 .2 -8.9 -2.4 -8.3 -4.4 -18.7 -13 -11.1 -4.3 -7.3 .1 -3.6 1.2 -3.2 1.9 -4 5 -.9 3.1 .2 6.8 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -18.8 21.8 -1.2 4 .4 4 1.3 2.4 2.9 2.4 7.9 2.3 6.6 -.9 3.6 -2.6 14 -15.2 3.3 11 3.1 5.4 5.2 4.8 8 3.6 8.9 1.8 11.1 .2 8.4 -1.7 12.7 -5 5.3 -.7 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 .2 5.1 1.7 4.4 3 4.6 4.4 4.2 6.7 3.2 3.8 .8 3.7 .1 6.9 -1.6 3.1 -1.6 5.3 -4.7 3.8 -6.4 2.4 -7.2 1.9 -9.2 .2 -11.2 -2.1 -11.6 -2 -5.8 -2.7 -5.3 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8Z\" fill=\"#e6c1c7\" fill-rule=\"evenodd\" /><path d=\"M111.7 140.4l-4.9 -.5 -7 -3.3 -12 -12 -4.3 -3.2 -2.6 -.9 7.9 -3.3 6.6 -6.5 1.7 7.1 3.1 6.6ZM105 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6ZM45.5 102.2C45.5 105.8 46.7 109.3 45.9 112.9A66 66 0 0 1 43.8 120.4C47.1 118.2 51.3 116.8 56.3 117.3L56.7 117.3C54.2 115.9 52.1 114.6 51.3 112.9C50 110.6 48 106.2 45.9 102.2L45.5 102.2ZM121.6 97.3l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0ZM80.4 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M135 39.6l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M147.6 164.8l-16.7 1.3 7.7 1.4Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M131.2 116.8l1.9 3 3.2 2.4 4.2 1.4 4.9 .2 5.2 -1.4 5.2 -3.3 4.9 -5.5 4.2 -8 3.2 -10.8 1.9 -14 -2.4 9.9 -2.4 6.2 -6.8 12.5 -4.4 5.2 -5 3.8 -5.5 2 -6.1 -.4ZM57.6 114.6l4.6 2.6 7.7 1.3 8.9-.4 8.3-2.5 3.3-2.2 2.5-2.8.9-9.1 2.8-6.4-7.8 11.5-6.6 5.4-6.1 2.6-6.6 1.5-6.4.1ZM162 191.8l2.9 4.4 4.7 3.7 9.1 3 6.5-.5 3.1-1.2 5.5-4.3 4.7-7.1 3.3-9.9 1.2-12.6-1.5-15.4-.2 14.9-1.9 12.5-4.6 11.5-3.6 4.5-4.7 3.3-5.9 1.7-3.6 0-8.4-2.6ZM114.2 184.8l7.6-2.1 14.7 4.9 7.7.3 7.3-3.6 12.8-10.2-3.8 1.5-12.5 7.5-3.8 1.3-3.8.1-12.7-3.7-7.1-.6-15.6 6.2-8.5 2.1-12.7.8-7.1-.7-4.9-1.5 10.8 3.6 8.3.4 10.5-1.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M107 130.6l3.9 5.1 6.9 5.4 9.5 4.3 5.6 1.4 12.6.3 6.9-1.4 6.8-2.4 11.3-7.1 8.5-9.5 6-11.3 5.3-19-5.3 15.3-6.2 11.3-8.9 10.3-5.6 4.3-6.5 3.5-7.4 2.4-7.6 1.3-7 0-6.3-1.1-10.6-4.1-7.4-4.9ZM27.9 145.7l4.8 1.7 3.7 0 4.4-1.7 9-6.6 4.5-2.1 5.3-.8 6 1.1 5 2.3 5.5 4.6 5.9 10.8 4.8 5.4 6.6 3.9 5.1 1-5.8-3.8-5.3-5.5-10.8-17.3-3.1-3-6.8-3.5-7-.7-6.3 1.4-4.8 2.8-11.2 9.5-4.2 1.4ZM37.6 119.9l-8.3 15.9 3.5-3 9.1-14.2 1.9-4.2.5-4.2-.6-6.7-1.7-4.1-2.9-3.9 1.9 5.9.7 7.6-1.1 5.4ZM36.3 71.1l4.4-.3 6.3 1.1 9.5 5.2 5.3 6.5 4.5 9.4 2.6 2 5.8-.2 3.4-1.4 1.2-1.4-4.6-3.1-3.8-8.4.4 3.5-1.6.1-3.5-2.6-7-8.3-7.8-3.7-8.8-.7-8.1 2ZM111.7 140.4l-9.1-12.4-12.5-.9 10.5 10 6.2 2.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M172.5 33l-3.4.9-3.1 1.8-3.7 5.5-2.3 10-.6 23.2-1.1 7.6-3.9 8.8-8.4 9.9-.3 2.2 1.1 1.6 1.4-2.9 9-9.7 3.4-7.2 2.9-15.3.2-19.3.9-8.3 2.7-6 2.3-1.9ZM175 85.7l-1.6 12.7-5.1 14.2-5.5 8-7.3 5.1 5.4-1.5 2.9-2.1 5.6-6.6 2.4-4.5 3.2-11.2ZM42.9 43.1l-6.6 1.4-5.3 4.4-1.4 4.9 1.3 6.6.3-5.8 2.8-6 3.6-3.3ZM26 97.8l-1.9-5.5-.6-4.7 1.9-5.7 3.3-2.9 4.8-2.2 8.1-.9 7.6 1.9 4.2 2.7 5 6.2 7.3 11.5 4.1 1.3 4.4-.4-4.8 1.1-5.2-.8-2.6-2-5.6-9.2-3.9-4.1-5.1-3.2-6.2-1.4-7.3 1.3-5.6 3.8-2.1 5.1ZM88.4 87.1l5.2-4.5 4.4-1.5 7.7.8 5.6 2.9-5.1-1.6-7.1-.4-5.3 1.2ZM40.9 125.7l6.6-4.4 7.1-1.4 12.1 2.6 15.5 1.3 2.7 1.5 2.2 2.6-3.9-2.8-15.2-.3-15.4-2.9-6.4.8ZM62.6 142.7l4.4 1.5 5.9 4.5 4.8 6.9 2.4 5.7-2.4-8.5-3.8-6.5-5.6-4.6-4.9-1.9-5.2-.1-5.2 1.6-5.1 3-7 6.4 11.3-6.6 4.8-1.3ZM180.8 156.3l-2.7-.7-6.5.8-19.6 8.8 17.6-10.6 5.9-1.1 2.7.7 2.5 1.7ZM100.1 173.7l12.3-7.1 4-1.4 5.7.4 11.3 3.8-16.4-2.1ZM183.4 152.3l3.7 4.7 2.1 6.3.3 7.1-3.3 15 1 2 1.2.5-.2-2.8 2.8-10.3.4-10.1-2-6.4Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M130.4 83.2l8.3-6 5.9-5.5 3.8-5.2 7.7-14.1-.9 23.4-1.4 6.7-2.7 5.1 1.7-7.9-.8-3-2.2-2.5-1.5-.8-3.1 0-10.4 5.7Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M123.7 149.7l9.2 3.4 4.7.9 9.5.1 9.5-2.5 4.7-2.3 9-6.8-9.3 5.5-9.2 2.8-12.4 1Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M44.6 174.2l4.8 -6.7 1.7 -4 .6 -5.4 1.6 -1.2 1.7 .4 1 2.3 -1.3 6.3 -2.8 3.3 -7 5.2Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M61.3 83.9l4.2 9.4 3.3 2.7 3.4.4 3.7-.6 3.7-2.9-3.2-2.2-2.2-3.6-.5 3.2-2.6.8-5.2-1.8-2.9-3.5ZM80.9 116.8l5.5-1.6 4.9-3.3 2-3.7.9-6.1-4.4 8.5-3.4 3.3-5.1 3.3ZM99.3 135.1l6.5 4.3 3 .8 1.7-.5-.9-2.6-3.6-4.8-.3 2.3-1.7 1.4ZM51.8 137.7l8-.5 6.8 1.7 3.4 1.7 6 5.2 4.1 8-2.8-9.3-2.8-4.3-3.8-3.3-4.8-1.8-5.9-.7-3.7.8ZM145.4 123.6l7-1.9 7.6-5.9 4.4-6.9 3.1-9.8-3 7.6-5.5 8.1-5.7 4.9Z\" fill=\"#d18293\" fill-rule=\"evenodd\" /><path d=\"M146.7 67.5l2.9-2.4 3.6-.9 2.6 2 1.2 3.6-.6-17.3ZM35.1 41.8l.7-4.2 1.6-2 2.7-.5 2.3.7 3.9 4.7-2.9-.4-6.6.9ZM172.5 30.7l4.7 -2.8 2.1 -.2 3.5 1.5 2.5 3.4 1.5 7.3 -3.8 -4.3 -6.6 -4.9ZM183.7 125.2l1.6 5.8-2.7-1-2.7 1ZM149.6 188.8l1.7 2.4 4.2 3.5 7.4 2.9-2.5-3.3-2.2-4.9-.6-6.4-4.6 3.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M200.9 81.3l6.2 13.1 7 22.4 3.2 17.7.7 18.3-2.5 15.6-3.4 10.4-7.3 13.3-6.1 6 5.3-9.3 2.2-8 .8-10.8-1.2-14.2.6.6.7-.4 1.6-3.8 1.5-12.1-1.1-18-1.2-6.1-3.2-9.2-3.7-5.1-3.5-1.3-2.6 2.4-1.5 4.7-.9.9 3.2-17.9Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M190.9 111.1l-5.2 13.2 2.2 7.1 3.1.3 4.1 2.8-3.2-4.1-1.9-5.1.6-2.9 1.7-2.2 1.5-.4 1.7 1-4.6-8.4ZM45.1 179l6.7 1 6.7-1-1.8-4.3-.7-7.2-6.7 5.3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M46.7 176.5l5.1-6 3.6-2.6 2.5 9-3.8-4.1-1.6-.2-1.7 1.1Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M70.9 189.3l2.9 1.8 9.6 1.8 12.7 .5 7.5 -.9 16.2 -5.8 5 -.3 4.4 1.7 -4.6 6 -4.3 3.8 -9.7 5.1 -8.5 2.9 4.8 -4.3 .6 -1.9 -1.1 -.8 -10.2 -1 -12.6 -2.4 -9.1 -2.7 -3.8 -2.1ZM138.4 202.1l2.3 2.5 6.3 4.3 7.9 3.1 8.3 1.6 7.7-.1 3.3-.8 6.7-2.7 4.1-3.5-11.6-.9-4.2-1.5-2.9-2.4.1 2.9-2.2 2.9-5 1.5-3.7-.2-10.3-3.2ZM129.1 193.3l2.1-2.6 1.4-.5 9.3 1.3 5.6-.9.8 3.6-4.9-1.1-4.9 1.6-2 2.5-.2 3.7-5.3-4.1-1-1.9.5-1.6ZM15.9 74.2l2.3 9.2.8 11.3 3.9 13.1 1.1 6.6-.2 4.7-3.4 12.8.2 6.4 1.8 3.9 4.4 4.4 5.7 2.5 5.9.2-9 10.4-4.3 3.8.2-3-6-9.5-2.7-8.3-.3-9.7 2.8-12.7.4-5.2-3.8-19.5 1.4-15.1-.6-4.1Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M28.4 149.7l2.4 3.6.5 6.5 1.5-3 5.6-6.7-3.1-.7-3.1.3Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M25.9 55.9l2.1 9.3 2.2 4.9 2.3 2.7-5.8 2.2-5.5 3.5 2.1-3.9 1.1-4.4-1.1-14.1.5-3.9 1.6-3Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M25.1 54.6l.1-3.5 1.3-3.3 3.1-3.8 3.5-2.7 1.2-5.3 3.1-3.5 1.8-.4 3.7 1.2 8 7.6-4.5-8.3-4.2-3.6-5.1-1.3-2.5.5-3.6 2.1-4.1 6-3 12 .5 10.7 2.1 3.7ZM70.1 53.7l9.5 6.1 9.1 3.3 10.5 1.1 5.5-.6 5.6-1.6 5.6-2.8 8.3-12.5-12.1 9.8-10.2 3.1-12.9.6-5.9-1.3-8.4-3.2ZM203.8 39.1l.8 11.8-1 14-2.6 9.4-4.8 8.8.9-15.1-.8-7.4-2.2-7.3 3.9 6.2 1.4.5 1.8-1 2.4-8.8Z\" fill=\"#dda6b0\" fill-rule=\"evenodd\" /><path d=\"M122 53.8l5.1-7.2 4.1-2.9ZM85.4 47.6l11.2 1 12.1-.8 7.8-2 6.9-3.5-9.1 2.6-13.9 2.6-8.8.8ZM38.7 12.9l-8.3.7-5.5 3.2-2.5 2.9-3.8 9.3-1.6 15 2.7-11.9 5.3-11.2 5.7-5.4ZM13.5 131.1l-2.5-12.6-1-11.8.4-15 1.4-10.5-.3 27.7ZM127.9 112.4l-3.2-10.1-.3-6 1.8-5.3 4.7-4.7-3.4 6-1.5 5.8.4 7.3ZM205.8 153.2l-4.1-12-5-7 4 2.9 3.5 5.6 1.4 4.9Z\" fill=\"#fcf8f8\" fill-rule=\"evenodd\" /><path d=\"M97.9 95.6l-2.5 7.7 -.4 5.6 1.1 6.2 2.9 7.1 10.1 15 5.9 5.4 7.2 3.9 14.4 3.2 5.4 .1 9.9 -1.3 12.8 -5.3 7.6 -5.5 7.1 -6.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M38.8 149.2l6.9 -7 7.4 -4.5 8.2 -1.1 9.1 3 4.4 3.4 3.1 4.1 2 4.6 4.7 16.9 2 2.5 3 1.2 3.5 .1 6.5 -1.7 11.6 -6.2 5.6 -1.7 5.6 .6 12.8 3.9 7.7 -.9 6.6 -3 18.2 -11.2 7.2 -1.6 3.4 .6 5.3 3.7 2.8 5.2 .7 9.2 -3.3 16.5 .8 3 2.5 .7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M168 168.9l1.3 1.1-.1 2.6-10.8 10.5M52.1 155.6l2.8.2 1.2 1.9-.3 9.5M95.5 110.7l-5.8 6.1-6.4 3-8.8 1.1-12.7-1.9-5.3-2-3.8-2.6-9.6-17.3-3-3.6-1.3-.6-1 .5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M56.3 117.3l-6.8.5-5.5 2.3-6.2 5.7-7.8 10.6-2.4 1-1.3-1.4M81.3 120.4l6.5 4.1 12 12 7 3.3 4.9.5M145.5 107.6l-2.4-3-.1-3 8.1-12.2 4.5-10.4.8-7-.1-16.1 2.3-12.7M81.3 155.9l4 6.3 6 4.5 5.9 1.4 7.9-.2\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3C45.5 105.8 46.8 109.4 45.9 112.9A63.7 63.7 0 0 1 43.8 120.4M118.4 89.3l2.1 0 2.8-1.2 8-5.9-7.4 8.2-1.6 3.3-.6 3.6M111.7 140.4l-4.9-.5-7-3.3-12-12-4.3-3.2-2.6-.9 7.9-3.3 6.6-6.5 1.7 7.1 3.1 6.6ZM105.1 167.9l-7.9.2-5.9-1.4-6-4.5-4-6.3 3.3 12.6 3.3 3.4 3.4.6 4.9-.6Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M45.5 102.3l.6 9.6-2.3 8.6 5.7-2.5 7.3-.6-4.8-3.4ZM147.6 164.8l-16.7 1.3 7.7 1.4M121.7 97.4l.6-3.6 1.6-3.3 7.4-8.3-8 6-2.8 1.2-2.5 0Z\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M176.2 69.9l-1.9-.1-1.8 3.1-1.6 22.8-2.8 9.4-4.2 8.6-4.2 5.5-4.7 3.7-5.1 2.2-5.4.7-5.6-.5-4.8-1.6-5.6-4.6-2.6-4.6-4.3-16.2-2.7-6.8-5.8-8.4-5.2-3.3-5.2-1.3-4.5 0-3.8 1.1-6.2 4.4-9.5 9.8-8.3 1.9-3.8-1.9-6.5-11-7.1-6.1-9.1-3.3-9.2-.3\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M160.4 38.6l-7.5 19-4.5 7.9-6.8 7.9-10.3 8.9M59.3 65l6.6 7M80.5 92.4l5.8-6.7-5.2-1.3-4.5-2.2-5.6-4.6-5-5.7 9.5 16.5M90.1 127.1l11.7.4M135 39.7l-5.3 2.9-4.5 4.1-5.2 7-3.3 6 5.7-3.5 5.2-4.4 4.2-5.5\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M175.9 71.6l.1-3.2-1.8-2.5-1.4 4.1.8 3.8 2.3 2.2M186.7 187.1l-.8 5.3M167.9 170.5l2.5-2.2M52.6 155.9l.9-1.7M96.8 95.9l2.9 1.4 -1.8 1.7 -1.8 -.7M58.8 66.2l2.5-2.2-.8 4.9 4.2-2.7-1.3 5.8M38.8 93.8l.9-3.5M26.7 135.1l-.3 2.6 1.6.8 1.4-2.1-.5-2.6\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M127.6 192.9l2.8-5M69.3 37.3l7.2 10.1 6.9 3.7M201.7 77.8l-7.2 10.6M20.9 83.2l-2.1-5.3-2.1-9.4M179.6 28.1l2.5.6 3.4 4 1.8 5.3-.3 3M190.8 107.6l7.7 15.7.2 5.1-2.4 2.2M183.8 124.4l.3 2.3 2.1 3.9M149.6 189.2l1 2.4 4.2 3.4 8.9 3.1M35.1 41.3l.4-3.2 3-2.6 4.5 1 3 3.1\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M82.2 53l0-4-2.9 1.3-.4-3.3-3.8 1.1-.6-1.3-1.6.9M195 127.6l3.4 2 2.2-.8-.4-1.6-3.5-2.2\" fill=\"none\" stroke=\"#e6c1c7\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M43 180.8l12.9 -13.8 3.3 11 5.4 7.9 6.5 4.3 9 2.8 8.3 1.1 10.2 -.6 5.3 -1.3 11.3 -4.6 6.8 -1.1 5.4 .6 11.7 3.3 4.5 0 6.9 -2.2 7.9 -5.2 -.2 3.1 1 4.1 4 6.8 4.4 4.2 6.7 3.2 3.8 .8 7.2 -.4 6.4 -2.7 5.3 -4.7 5.2 -10 3.2 -14.7 -.1 -9.4 -2.1 -11.6 -4.6 -11.1 -3.4 -4.5 -4.3 -3.3 -5.2 -1.8 -6.1 0 6.2 -10.3 5.5 -15.5 4 -27 -.7 -17.7 -2.8 -10.5 -4.9 -9.5 -6 -6.8 -6.4 -3.3 -6.3 .3 -5.5 4.2 -2.3 3.6 .4 -.9 -1.3 1.1 -3.2 .7 -6.1 -.5 -6.5 -1.6 -4.7 -2.8 -1.5 -2.6 -4.8 12.5 -3.4 5 -4.1 4.2 -4.8 3.5 -6.3 3.2 -5.8 2.2 -10.6 1.8 -9.4 -1.2 -8.6 -3.5 -19.1 -13.2 -11.1 -5.6 -7.3 -1.3 -3.7 .4 -6.8 3 -4 5 -1.1 6.4 .4 3.5 2.5 7.4 4.8 7.4 -4.2 .9 -5.8 3.8 -1.9 2.3 -2.1 5.2 .2 9 3.6 12.4 1 7.5 -1 7.2 -3 8.9 -.9 7 1.5 6.1 4.3 4.4 7.7 1.7 5.2 -.4 -10 12.2 -7.4 7.2 -2.1 3.7 -.6 4\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M137.5 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4 -.9 1.2 -1.3 0 -1.9 -1.3 -1.8 -5.6 -3 -12.8 -1.7 -3.1 .7Z\" fill=\"#f7eced\" fill-rule=\"evenodd\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6Z\" fill=\"#bb5a74\" fill-rule=\"evenodd\" /><path d=\"M137.6 31.1l.2 1.9 1.4 1.8 7.3 3.5 10.2 1.3 3.4-.9 1.2-1.3 0-1.9-1.3-1.8-5.6-3-12.8-1.7-3.1.7\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\"1.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" /><path d=\"M140.4 32.5l5.5 3 2.1-.3 1.1.9 6.2.7 1.9-1.1-1.2-1.8-7.2-.5-2.1-1.5-5.8.6\" fill=\"none\" stroke=\"#1a171b\" stroke-width=\".8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" />"};
+/* Haem synthesis scene: pathway flux across mitochondrion and cytosol, blocks, drug actions, gut and nerve pain. */
 const FY = SC.FY, WW = SC.W;
 const layers = { parts: $("parts"), blocks: $("blocks"), over: $("over"), panel: $("panel") };
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0, t: 0, k: 0, st: 0, u: 0, tr: null }; }); }
 const subP = pool(14, () => mk("circle", { class: "sc-p p-sub", r: 3 }, layers.parts));
 const alaP = pool(26, () => mk("circle", { class: "sc-p p-ala", r: 3.1 }, layers.parts));
 const pbgP = pool(26, () => mk("circle", { class: "sc-p p-pbg", r: 3.1 }, layers.parts));
 const porP = pool(26, () => mk("rect", { class: "sc-p p-por", x: -2.6, y: -2.6, width: 5.2, height: 5.2, rx: 1.2 }, layers.parts));
 const haemP = pool(16, () => mk("circle", { class: "sc-p p-haem", r: 3.6 }, layers.parts));
 const leadP = pool(16, () => mk("circle", { class: "hs-lead", r: 3.4 }, layers.parts));
-const treatP = pool(14, () => mk("circle", { class: "sc-p p-treat", r: 3 }, layers.parts));
+const treatP = pool(16, () => mk("circle", { class: "sc-p p-treat", r: 3 }, layers.parts));
+const excP = pool(12, () => mk("circle", { class: "hs-exc", r: 3 }, layers.parts));
+const trigP = pool(12, () => mk("circle", { class: "hs-trig", r: 2.6 }, layers.parts));
+const toxP = pool(18, () => mk("circle", { class: "sc-p p-ala", r: 3 }, layers.parts));
 const freeP = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.st = 0; p.u = 0; p.tr = null; p.e.setAttribute("opacity", "1"); }
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 function moveSeg(pl, dt, x0, x1, jamX, jam) {
   pl.forEach((p) => { if (!p.on) return; p.t += dt; const near = jam && p.x > jamX - 34 && p.x < jamX + 6; p.x += p.vx * dt * (near ? 0.22 : 1); p.y = FY + p.k + Math.sin(tm / 360 + p.x * 0.05) * 2.2; p.x = clamp(p.x, 24, WW - 24); p.y = clamp(p.y, 56, 428); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x >= x1 - 3 || p.t > 9) killP(p); });
 }
+/* ---- organs, tracks, marks ---- */
+let bowelO = null, nerveO = null, toxGut = null, toxNerve = null;
+let hazeA = null, hazeP = null, haloEl = null, shieldEl = null, glowGut = null, glowNerve = null;
 const gg = {};
-let chelPill = null, hgPill = null, avoidPill = null;
 const blockMarks = {};
+const leadcaps = [];
+let capEl = null, capKey = "";
 function blockMark(x, y) { const g = mk("g", { opacity: "0" }, layers.blocks); mk("path", { class: "hs-block", d: "M-13 -13L13 13M13 -13L-13 13" }, g); g.setAttribute("transform", "translate(" + x + " " + y + ")"); return g; }
+function capText(l, d) {
+  if (l === 0) return "No disease. The pathway runs steadily from start to haem.";
+  if (l === 1 && d === 0) return "Lead poisoning. Lead blocks enzymes in the path. ALA builds up, haem falls.";
+  if (l === 1 && d === 2) return "Chelation grabs lead and carries it away. The enzymes work again.";
+  if (l === 1) return "This treatment does not act on lead. The picture stays the same.";
+  if (l === 2 && d === 0) return "Porphyria attack. PBG deaminase is faulty. ALA and PBG pile up.";
+  if (l === 2 && d === 1) return "Haem and glucose switch off the first enzyme. The pileup drains.";
+  if (l === 2 && d === 3) return "Avoiding triggers calms the first enzyme. Smaller pileup, less pain.";
+  return "Chelation does not fix this enzyme fault. The picture stays the same.";
+}
+function initOrgans() {
+  hazeA = $("hazeAla"); hazeP = $("hazePbg"); haloEl = $("halo"); shieldEl = $("shield");
+  glowGut = $("glowGut"); glowNerve = $("glowNerve");
+  bowelO = organ($("bowelSlot"), "bowel", 668, 380, 96, {});
+  nerveO = organ($("nerveSlot"), "ganglion", 836, 380, 72, {});
+  bowelO.g.setAttribute("data-info", "Gut. In attacks, built up precursors bring severe belly pain.");
+  bowelO.g.setAttribute("class", (bowelO.g.getAttribute("class") || "") + " hot");
+  nerveO.g.setAttribute("data-info", "Nerve. In attacks, built up precursors damage nerves, causing pain and weakness.");
+  nerveO.g.setAttribute("class", (nerveO.g.getAttribute("class") || "") + " hot");
+  toxGut = track([[470, 224], [560, 300], [620, 352], bowelO.ports.coils]);
+  toxNerve = track([[505, 224], [640, 292], [745, 342], nerveO.ports.soma]);
+}
 function initPanel() {
   const P = layers.panel, y0 = 478, h = 70, xs = [90, 250, 410, 570, 730];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: WW - 48, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
-  [["ala", "ALA", "g-ala", "Aminolaevulinic acid (ALA), the first product of the pathway. It builds up when a later step is blocked or when ALA synthase is driven up."], ["pbg", "PBG", "g-pbg", "Porphobilinogen (PBG), made from ALA in the cytosol. It builds up ahead of faulty PBG deaminase in acute intermittent porphyria."], ["por", "Porphyrins", "g-por", "Porphyrin intermediates between PBG and haem. They build up when ferrochelatase is blocked by lead."], ["haem", "Haem", "g-haemg", "Haem, the finished product. Ferrochelatase inserts iron into protoporphyrin to make it. Haem restrains ALA synthase by feedback."], ["sym", "Symptoms", "g-sym", "Abdominal pain and neuropathy (nerve pain and weakness) in attacks of acute intermittent porphyria, and ill health when haem falls."]]
+  [["ala", "ALA", "g-ala", "Aminolaevulinic acid (ALA), the first product of the pathway. It builds up when a later step is blocked or when the first enzyme is driven up."], ["pbg", "PBG", "g-pbg", "Porphobilinogen (PBG), made from ALA in the cytosol. It builds up ahead of faulty PBG deaminase in acute intermittent porphyria."], ["por", "Porphyrins", "g-por", "Porphyrin intermediates between PBG and haem. They build up when ferrochelatase is blocked by lead."], ["haem", "Haem", "g-haemg", "Haem, the finished product. Ferrochelatase inserts iron into protoporphyrin to make it. Haem restrains the first enzyme by feedback."], ["sym", "Symptoms", "g-sym", "Belly pain and nerve pain with weakness in attacks of acute intermittent porphyria, and ill health when haem falls."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
   const ox = layers.over;
-  pill(ox, "Glycine + succinyl-CoA", 86, FY - 12, 118, 106, "Starting materials in the mitochondrion: glycine and succinyl-CoA from the citric acid cycle. ALA synthase joins them to make ALA.");
-  pill(ox, "ALA synthase", 150, FY + 24, 150, 318, "ALA synthase: the first and rate limiting enzyme, in the mitochondrion. Haem feeds back to restrain it, so low haem or an attack drives it up.");
-  pill(ox, "ALA", 255, FY, 262, 106, "Aminolaevulinic acid (ALA). It leaves the mitochondrion for the cytosol. It builds up in lead poisoning and in acute intermittent porphyria attacks.");
-  pill(ox, "ALA dehydratase", 350, FY + 24, 350, 318, "ALA dehydratase: joins ALA molecules in the cytosol to make porphobilinogen. Lead inhibits this enzyme.");
-  pill(ox, "Porphobilinogen", 440, FY, 442, 106, "Porphobilinogen (PBG): the building block for porphyrins. It builds up ahead of faulty PBG deaminase.");
-  pill(ox, "PBG deaminase", 525, FY + 24, 528, 318, "PBG deaminase (hydroxymethylbilane synthase): links PBG units into a chain. A partial defect causes acute intermittent porphyria.");
-  pill(ox, "Porphyrin steps", 630, FY - 10, 618, 106, "Porphyrin intermediates: the chain closes into a ring and is trimmed through several steps, first in the cytosol and then in the mitochondrion.");
-  pill(ox, "Iron", 762, 148, 758, 106, "Iron: ferrochelatase inserts iron into protoporphyrin to finish haem.");
-  pill(ox, "Ferrochelatase", 815, FY + 24, 812, 318, "Ferrochelatase: the last enzyme, in the mitochondrion. It inserts iron into protoporphyrin to make haem. Lead inhibits this enzyme.");
-  pill(ox, "Haem", 882, FY, 884, 106, "Haem: the finished product for haemoglobin and many enzymes. It feeds back along the dashed line to restrain ALA synthase.");
-  chelPill = pill(ox, "Chelation", 350, FY + 24, 140, 378, "Chelation: a treatment that binds and removes lead, so the two lead blocked enzymes can work again.");
-  hgPill = pill(ox, "Haem + glucose", 150, FY + 24, 322, 378, "Haem and glucose: they restrain ALA synthase, so less ALA and PBG are made during an attack of acute intermittent porphyria.");
-  avoidPill = pill(ox, "Avoid triggers", 525, FY + 24, 502, 378, "Avoiding triggers: steering clear of things that drive up ALA synthase, such as certain medicines, fasting and alcohol, reduces attacks.");
+  pill(ox, "Start", 86, FY - 12, 118, 106, "Start materials in the mitochondrion. The first enzyme joins them to make ALA.");
+  pill(ox, "ALA", 255, FY - 12, 262, 106, "ALA. It leaves the mitochondrion for the cytosol and builds up in both diseases.");
+  pill(ox, "PBG", 440, FY - 12, 442, 106, "PBG. Units of PBG link into chains. They pile up before the faulty step in porphyria.");
+  pill(ox, "Haem", 882, FY - 18, 884, 106, "Haem, the finished product. It feeds back to restrain the first enzyme.");
+  pill(ox, "ALA dehydratase", 350, FY + 24, 350, 318, "ALA dehydratase. It joins ALA units to make PBG. Lead blocks this enzyme.");
+  pill(ox, "Later steps", 600, FY + 24, 540, 318, "Later steps. PBG deaminase starts a chain that becomes porphyrins, then the last enzyme adds iron to finish haem. Lead blocks the last step.");
+  pill(ox, "Belly pain", 656, 348, 700, 318, "Belly pain in attacks. Built up ALA and PBG irritate gut nerves.");
+  pill(ox, "Nerve pain", 828, 350, 850, 318, "Nerve pain and weakness in attacks. Built up ALA and PBG harm nerves.");
+  capEl = mk("text", { class: "hs-cap", x: 30, y: 428 }, ox); capEl.textContent = capText(0, 0);
   blockMarks.dehyd = blockMark(350, FY); blockMarks.deam = blockMark(525, FY); blockMarks.ferro = blockMark(815, FY);
+  [[334, 174, "dehyd"], [366, 206, "dehyd"], [799, 174, "ferro"], [831, 206, "ferro"]].forEach(([x, y, w]) => {
+    const e = mk("circle", { class: "hs-leadcap", cx: x, cy: y, r: 8, opacity: "0" }, layers.blocks);
+    leadcaps.push({ e, w });
+  });
 }
-const sm = { D: 0.4, dehyd: 1, deam: 1, ferro: 1, ALA: 0.2, PBG: 0.2, Por: 0.2, Haem: 0.8, Sym: 0 };
-const acc = { sub: 0, ala: 0, pbg: 0, por: 0, haem: 0, lead: 0, treat: 0 };
-function init() { initPanel(); }
+const sm = { D: 0.4, dehyd: 1, deam: 1, ferro: 1, ALA: 0.2, PBG: 0.2, Por: 0.2, Haem: 0.8, Sym: 0, chel: 0, hg: 0, avd: 0 };
+const acc = { sub: 0, ala: 0, pbg: 0, por: 0, haem: 0, lead: 0, treat: 0, exc: 0, trig: 0, tox: 0, side: 0 };
+function init() { initOrgans(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 0.9), k2 = Math.min(1, dt * 0.55);
   sm.D = lerp(sm.D, m.D, k2); sm.dehyd = lerp(sm.dehyd, m.dehyd, k1); sm.deam = lerp(sm.deam, m.deam, k1); sm.ferro = lerp(sm.ferro, m.ferro, k1);
   sm.ALA = lerp(sm.ALA, m.ALA, k2); sm.PBG = lerp(sm.PBG, m.PBG, k2); sm.Por = lerp(sm.Por, m.Por, k2); sm.Haem = lerp(sm.Haem, m.Haem, k2); sm.Sym = lerp(sm.Sym, m.Sym, k2);
+  const chelT = m.drug === 2 && m.level === 1 ? 1 : 0, hgT = m.drug === 1 && m.level === 2 ? 1 : 0, avdT = m.drug === 3 && m.level === 2 ? 1 : 0;
+  sm.chel = lerp(sm.chel, chelT, k1); sm.hg = lerp(sm.hg, hgT, k1); sm.avd = lerp(sm.avd, avdT, k1);
   blockMarks.dehyd.setAttribute("opacity", clamp((0.72 - sm.dehyd) * 1.8).toFixed(2));
   blockMarks.deam.setAttribute("opacity", clamp((0.72 - sm.deam) * 1.8).toFixed(2));
   blockMarks.ferro.setAttribute("opacity", clamp((0.72 - sm.ferro) * 1.8).toFixed(2));
-  chelPill.style.opacity = m.drug === 1 ? "1" : "0"; hgPill.style.opacity = m.drug === 2 ? "1" : "0"; avoidPill.style.opacity = m.drug === 3 ? "1" : "0";
-  $("enz1").setAttribute("transform", "translate(150 " + FY + ") scale(" + (1 + 0.07 * sm.D * Math.sin(tm / 300)).toFixed(3) + ") translate(-150 -" + FY + ")");
+  leadcaps.forEach((c) => { const v = m.level === 1 ? clamp((0.72 - (c.w === "dehyd" ? sm.dehyd : sm.ferro)) * 1.8) : 0; c.e.setAttribute("opacity", v.toFixed(2)); });
+  haloEl.setAttribute("opacity", hgT ? "0.95" : "0");
+  shieldEl.setAttribute("opacity", avdT ? "0.9" : "0");
+  hazeA.setAttribute("opacity", clamp(0.6 * m.ALA).toFixed(2));
+  hazeA.setAttribute("rx", f1(70 + 70 * m.ALA));
+  hazeP.setAttribute("opacity", clamp(0.6 * m.PBG).toFixed(2));
+  hazeP.setAttribute("rx", f1(70 + 75 * m.PBG));
+  glowGut.setAttribute("opacity", clamp(0.5 * m.Sym).toFixed(2));
+  glowNerve.setAttribute("opacity", clamp(0.5 * m.Sym).toFixed(2));
+  const calm = 1 - 0.8 * sm.hg;
+  $("enz1").setAttribute("transform", "translate(150 " + FY + ") scale(" + (1 + 0.07 * sm.D * calm * Math.sin(tm / 300)).toFixed(3) + ") translate(-150 -" + FY + ")");
   $("enz2").setAttribute("transform", "translate(350 " + FY + ") scale(" + (0.92 + 0.1 * sm.dehyd).toFixed(3) + ") translate(-350 -" + FY + ")");
   $("enz3").setAttribute("transform", "translate(525 " + FY + ") scale(" + (0.92 + 0.1 * sm.deam).toFixed(3) + ") translate(-525 -" + FY + ")");
   $("enz4").setAttribute("transform", "translate(815 " + FY + ") scale(" + (0.92 + 0.1 * sm.ferro).toFixed(3) + ") translate(-815 -" + FY + ")");
-  $("symDot1").setAttribute("opacity", clamp(sm.Sym * 1.2).toFixed(2)); $("symDot2").setAttribute("opacity", clamp(sm.Sym * 1.2).toFixed(2));
   const fb = document.querySelector(".hs-feedback"); if (fb) fb.style.opacity = (0.14 + 0.55 * sm.Haem).toFixed(2);
-  const pg = $("patientG"); pg.setAttribute("transform", "translate(787 384) scale(" + (1 + 0.012 * sm.Sym * Math.sin(tm / 420)).toFixed(3) + ") translate(-787 -384)");
   acc.sub += dt * sm.D * 7; while (acc.sub >= 1) { acc.sub--; const p = freeP(subP); if (p) emit(p, 82, FY, rnd(26, 36), 0, rnd(-9, 9)); }
   moveSeg(subP, dt, 82, 150, 150, false);
   acc.ala += dt * sm.D * 9; while (acc.ala >= 1) { acc.ala--; const p = freeP(alaP); if (p) emit(p, 158, FY, rnd(30, 42), 0, rnd(-10, 10)); }
@@ -507,16 +866,33 @@ function step(dt, m) {
   moveSeg(pbgP, dt, 358, 525, 525, sm.deam < 0.6);
   acc.por += dt * sm.D * sm.dehyd * sm.deam * 8; while (acc.por >= 1) { acc.por--; const p = freeP(porP); if (p) emit(p, 533, FY, rnd(30, 42), 0, rnd(-11, 11)); }
   moveSeg(porP, dt, 533, 815, 815, sm.ferro < 0.6);
-  acc.haem += dt * sm.D * sm.dehyd * sm.deam * sm.ferro * 8 + dt * (m.drug === 2 ? 1.2 : 0); while (acc.haem >= 1) { acc.haem--; const p = freeP(haemP); if (p) emit(p, 823, FY, rnd(24, 34), 0, rnd(-8, 8)); }
+  acc.haem += dt * sm.D * sm.dehyd * sm.deam * sm.ferro * 8 + dt * sm.hg * 2.5; while (acc.haem >= 1) { acc.haem--; const p = freeP(haemP); if (p) emit(p, 823, FY, rnd(24, 34), 0, rnd(-8, 8)); }
   moveSeg(haemP, dt, 823, 884, 884, false);
-  const leadOn = m.level === 1 ? (m.drug === 1 ? 0.25 : 1) : 0;
-  acc.lead += dt * leadOn * 5; while (acc.lead >= 1) { acc.lead--; const p = freeP(leadP); if (p) emit(p, Math.random() < 0.5 ? 350 + rnd(-16, 16) : 815 + rnd(-16, 16), 96, rnd(-3, 3), rnd(16, 26), 0); }
+  /* lead falls onto its two enzymes in lead poisoning; chelation thins it out */
+  const leadRate = m.level === 1 ? (1 - 0.75 * sm.chel) * 5 : 0;
+  acc.lead += dt * leadRate; while (acc.lead >= 1) { acc.lead--; const p = freeP(leadP); if (p) emit(p, Math.random() < 0.5 ? 350 + rnd(-16, 16) : 815 + rnd(-16, 16), 96, rnd(-3, 3), rnd(16, 26), 0); }
   leadP.forEach((p) => { if (!p.on) return; p.t += dt; p.y += p.vy * dt; p.x = clamp(p.x + p.vx * dt, 24, WW - 24); p.y = clamp(p.y, 52, 428); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > FY - 22 || p.t > 4) killP(p); });
-  acc.treat += dt * (m.drug ? 4 : 0); while (acc.treat >= 1) { acc.treat--; const p = freeP(treatP); if (p) emit(p, m.drug === 1 ? 350 : 150, 120, rnd(-4, 4), rnd(14, 22), 0); }
-  treatP.forEach((p) => { if (!p.on) return; p.t += dt; p.y += p.vy * dt; p.x = clamp(p.x + p.vx * dt, 24, WW - 24); p.y = clamp(p.y, 52, 428); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > FY - 24 || p.t > 4) killP(p); });
+  /* chelator dots fly to the blocked enzymes; lead leaves downward */
+  acc.treat += dt * (sm.chel * 5 + sm.hg * 5); while (acc.treat >= 1) { acc.treat--; const p = freeP(treatP); if (p) {
+    if (sm.hg > sm.chel) { p.e.setAttribute("class", "sc-p p-haem"); emit(p, 150 + rnd(-50, 50), 105, 0, 0, rnd(0, 6.28)); p.st = 0; p.tx = 150 + Math.cos(p.k) * 30; p.ty = FY + Math.sin(p.k) * 30; }
+    else { p.e.setAttribute("class", "sc-p p-treat"); const left = acc.side % 2 === 0; acc.side++; emit(p, (left ? 350 : 815) + rnd(-30, 30), 100, 0, 0, 0); p.st = 0; p.tx = left ? 350 : 815; p.ty = FY; }
+  } }
+  treatP.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 0) { const dx = p.tx - p.x, dy = p.ty - p.y, d = Math.hypot(dx, dy); if (d < 7) { if (sm.hg > sm.chel) { p.st = 1; } else { killP(p); acc.exc += 1; } }
+      else { p.x += dx / d * 130 * dt; p.y += dy / d * 130 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); } }
+    else { p.k += dt * 0.6; p.x = 150 + Math.cos(p.k) * 30; p.y = FY + Math.sin(p.k) * 30; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 2.5)).toFixed(2)); if (p.t > 3.5) killP(p); } });
+  while (acc.exc >= 1) { acc.exc--; const p = freeP(excP); if (p) emit(p, (Math.random() < 0.5 ? 350 : 815) + rnd(-15, 15), 205, rnd(-4, 4), rnd(45, 65), 0); }
+  excP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 24, WW - 24); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.y - 380) / 52).toFixed(2)); if (p.y > 432) killP(p); });
+  /* trigger sparks rain onto the first enzyme until triggers are avoided */
+  acc.trig += dt * ((m.level === 2 && m.drug !== 3) ? (2 + 6 * sm.D) : 0); while (acc.trig >= 1) { acc.trig--; const p = freeP(trigP); if (p) emit(p, 100 + rnd(0, 100), 95, rnd(-4, 4), rnd(60, 90), 0); }
+  trigP.forEach((p) => { if (!p.on) return; p.t += dt; p.x = clamp(p.x + p.vx * dt, 24, WW - 24); p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > FY - 26 || p.t > 3) killP(p); });
+  /* built up precursors reach the gut and the nerve */
+  acc.tox += dt * sm.Sym * 7; while (acc.tox >= 1) { acc.tox--; const p = freeP(toxP); if (p) { const gut = acc.side % 2 === 0; acc.side++; p.e.setAttribute("class", gut ? "sc-p p-ala" : "sc-p p-pbg"); emit(p, 0, 0, 0, 0, 0); p.tr = gut ? toxGut : toxNerve; p.u = 0; const q = p.tr.at(0); p.x = q.x; p.y = q.y; } }
+  toxP.forEach((p) => { if (!p.on) return; p.t += dt; p.u += dt * 95 / p.tr.len; const q = p.tr.at(Math.min(1, p.u)); p.x = q.x; p.y = q.y; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.u >= 1 || p.t > 6) killP(p); });
   gg.ala.set(sm.ALA, wordOf(sm.ALA, 0.3, 0.6, ["low", "raised", "high"])); gg.pbg.set(sm.PBG, wordOf(sm.PBG, 0.3, 0.6, ["low", "raised", "high"]));
   gg.por.set(sm.Por, wordOf(sm.Por, 0.3, 0.6, ["low", "raised", "high"])); gg.haem.set(sm.Haem, wordOf(sm.Haem, 0.35, 0.65, ["low", "borderline", "normal"]));
   gg.sym.set(sm.Sym, wordOf(sm.Sym, 0.2, 0.5, ["none", "present", "severe"]));
+  const key = level * 10 + drug; if (key !== capKey) { capKey = key; const t = capText(level, drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>

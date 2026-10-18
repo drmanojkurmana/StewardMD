@@ -49,21 +49,10 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="362" rx="18"/>
-<text class="sc-zone" x="34" y="68">ALVEOLUS, CAPILLARY AND CHEST FILM</text>
-<path class="nrds-arrow" d="M136 150L300 190"/>
-<path class="nrds-arrow" d="M136 285L300 262"/>
-<circle class="nrds-node" cx="98" cy="150" r="38"/>
-<circle class="nrds-node" cx="98" cy="285" r="38"/>
-<g class="nrds-icon">
-  <circle cx="88" cy="140" r="6"/><circle cx="106" cy="148" r="5"/><circle cx="94" cy="160" r="4"/>
-  <path d="M74 285L90 273M122 285L106 273M74 285L90 297M122 285L106 297"/>
-  <circle cx="98" cy="285" r="7"/>
-</g>
-<rect class="nrds-chest" x="702" y="76" width="218" height="178" rx="14"/>
-<ellipse id="miniLung" class="nrds-lung" cx="811" cy="168" rx="56" ry="66"/>
-<ellipse id="hazeEl" class="nrds-haze" cx="811" cy="168" rx="56" ry="66"/>
-<path class="nrds-rib" d="M742 120Q811 138 880 120M742 168Q811 186 880 168M742 216Q811 234 880 216"/>
-<rect class="nrds-airway" x="552" y="66" width="26" height="76" rx="10"/>
+<text class="sc-zone" x="34" y="68">AIR SAC, BLOOD VESSEL AND CHEST FILM</text>
+<ellipse id="surfGlow" class="nrds-surfglow" cx="460" cy="222" rx="152" ry="108" opacity="0"/>
+<ellipse id="cpapGlow" class="nrds-cpapglow" cx="512" cy="150" rx="92" ry="82" opacity="0"/>
+<rect id="airway" class="nrds-airway" x="552" y="66" width="26" height="76" rx="10"/>
 <ellipse class="nrds-alv-out" cx="460" cy="222" rx="152" ry="108"/>
 <ellipse id="alvAir" class="nrds-alv-air" cx="460" cy="222" rx="132" ry="88"/>
 <ellipse id="hyal" class="nrds-hyal" cx="460" cy="222" rx="124" ry="81"/>
@@ -71,7 +60,14 @@ const body = `
 <g id="tensionArrows">
   <path class="nrds-tension" d="M368 160L396 182M552 160L524 182M368 284L396 262M552 284L524 262"/>
 </g>
+<circle id="sterGlow" class="nrds-sterglow" cx="565" cy="288" r="46" opacity="0"/>
 <rect class="nrds-cap" x="302" y="332" width="318" height="32" rx="16"/>
+<path id="sterVessel" class="nrds-stervessel" d="M138 348L302 348"/>
+<circle id="sterNode" class="nrds-node" cx="110" cy="348" r="28"/>
+<rect class="nrds-chest" x="702" y="76" width="218" height="178" rx="14"/>
+<g id="lungSlot"></g>
+<ellipse id="hazeEl" class="nrds-haze" cx="811" cy="168" rx="50" ry="60"/>
+<path class="nrds-rib" d="M742 120Q811 138 880 120M742 168Q811 186 880 168M742 216Q811 234 880 216"/>
 <g id="surfG"></g>
 <g id="cellsG"></g>
 <g id="rbcsG"></g>
@@ -83,11 +79,13 @@ const extraCss = `
 body{--c-type2:#3ddc97;--c-surf:#3ddc97;--c-haze:#c9d4e8;--c-hyal:#e8d36a}
 body[data-theme="light"]{--c-type2:#0f9f76;--c-surf:#0f9f76;--c-haze:#8fa3c4;--c-hyal:#bfa12e}
 .cl-type2{--cc:var(--c-type2)}
-.nrds-arrow{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round;opacity:.65}
-.nrds-node{fill:color-mix(in srgb,var(--c-bad) 22%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.6}
-.nrds-icon{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:1.4;stroke-linecap:round}
+.nrds-node{fill:color-mix(in srgb,#ff9a3d 30%,var(--anatomy-paper));stroke:#ff9a3d;stroke-width:1.6}
+.nrds-stervessel{fill:none;stroke:var(--c-fl);stroke-width:4;stroke-linecap:round;opacity:.55}
+.nrds-surfglow{fill:var(--c-surf);stroke:none}
+.nrds-cpapglow{fill:var(--c-fl);stroke:none}
+.nrds-sterglow{fill:#ff9a3d;stroke:none}
+.nrds-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .nrds-chest{fill:color-mix(in srgb,var(--anatomy-mid) 12%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
-.nrds-lung{fill:color-mix(in srgb,var(--c-epi, #7fc4e8) 24%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
 .nrds-haze{fill:var(--c-haze);opacity:0}
 .nrds-rib{fill:none;stroke:var(--anatomy-mid);stroke-width:1.1;opacity:.55}
 .nrds-airway{fill:color-mix(in srgb,var(--c-fl) 22%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.2}
@@ -107,8 +105,8 @@ buildScene({
   id: "neonatal-respiratory-distress-surfactant", fig: "Fig 1", title: "Neonatal respiratory distress: surfactant and collapse", W, H, body, extraCss,
   label: "An animated alveolus, capillary and chest film in neonatal respiratory distress syndrome. A preterm baby has immature type II pneumocytes that make too little surfactant. Without surfactant the alveolar surface tension stays high, alveoli collapse at the end of each breath, injured epithelium and protein rich fluid form hyaline membranes, and the chest film looks hazy with a ground glass pattern. Blood passing collapsed alveoli stays low in oxygen. Antenatal steroid matures the type II cells, surfactant replaces what is missing, and CPAP holds alveoli open. Gauges show surfactant, tension, collapse, hyaline membranes, chest haze and oxygen.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "nrds.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "nrds.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With surfactant",
   sourcesLis: [
     "<strong>How neonatal respiratory distress develops.</strong> In a preterm baby the pulmonary type II alveolar epithelial cells are immature, so surfactant production is low. Surfactant normally lowers surface tension at the air and fluid interface in the alveolus; without it tension stays high and the alveolus collapses into the interstitial space around it, a pattern called atelectasis. Repeated collapse injures the epithelium, protein rich edema fluid leaks in, and hyaline membranes form from that exudate and dead epithelial cells, lining the alveolar wall. Collapsed units still receive vascular blood flow, so that blood reaches the circulation low in oxygen and severe disease gives hypoxemia and hypoxia despite added oxygen. The chest film is usually bilateral and hazy with a ground glass pattern and small lung volumes. The early phase can recover as type II cells mature and proliferate in a proliferative repair phase; very preterm babies may instead go on to chronic changes. This is standard teaching in neonatal and respiratory medicine and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Antenatal steroid, given before a preterm birth, speeds type II cell maturation and surfactant production. Surfactant given after birth replaces the missing lining layer and lowers tension. CPAP, continuous positive airway pressure, holds alveoli open at the end of the breath and reduces collapse while the baby makes more surfactant; mechanical ventilation is sometimes needed in severe disease but is not drawn as a separate toggle here. These are teaching toggles only and show direction of effect, not how any baby should be treated.",
