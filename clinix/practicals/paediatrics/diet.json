@@ -1,0 +1,457 @@
+{
+  "v": 1,
+  "subject": "paediatrics",
+  "section": "diet",
+  "title": {
+    "en": "Dietary Assessment and Paediatric Nutrition"
+  },
+  "intro": {
+    "en": "Nutritional history taking, daily calorie and protein calculations, food composition reference values, and infant feeding rules."
+  },
+  "source": {
+    "book": "manipal-clinical-paediatrics",
+    "section": "3"
+  },
+  "items": [
+    {
+      "id": "paed.diet.calorie-requirements",
+      "kind": "topic",
+      "title": {
+        "en": "Paediatric calorie requirements and Holliday-Segar formula"
+      },
+      "aka": [
+        "Energy requirements",
+        "Caloric estimation formulas"
+      ],
+      "group": "Energy requirements",
+      "summary": "Estimation of daily paediatric energy requirements using rapid bedside age-based heuristics and the weight-based Holliday-Segar method.",
+      "blocks": [
+        {
+          "title": "Rapid bedside clinical calculation",
+          "bullets": [
+            "Infants up to 1 year of age: baseline requirement of 100 cal per kilogram body weight per day.",
+            "Children older than 1 year: calculate as 1000 cal baseline plus 100 cal for each additional year of age.",
+            "Worked clinical example: for an 8-year-old child, requirement is calculated as 1000 + 700 = 1700 cal per day."
+          ]
+        },
+        {
+          "title": "Holliday and Segar weight-tiered formula",
+          "bullets": [
+            "First 10 kilograms of body weight: allocate 100 cal per kilogram per day (100 x 10 = 1000 cal).",
+            "Next 11 to 20 kilograms of body weight: add 50 cal per kilogram per day for weight above 10 kg (50 x 10 = 500 cal).",
+            "Body weight exceeding 20 kilograms: add 20 cal per kilogram per day for weight above 20 kg.",
+            "Worked example for an 8-year-old child weighing 24 kilograms: 1000 cal (first 10 kg) + 500 cal (11 to 20 kg) + 80 cal (20 x 4) = 1580 cal per day."
+          ]
+        },
+        {
+          "title": "Clinical utility in disease states",
+          "bullets": [
+            "Serves as the foundation for prescribing intravenous maintenance fluids and enteral nutrition.",
+            "Requirements increase during fever, severe burns, sepsis, or catch-up growth in malnutrition.",
+            "Requirements may be restricted in congestive heart failure, renal failure, or mechanical ventilation."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "How do you quickly estimate expected daily calories at the bedside for a child older than 1 year?",
+          "a": "Prescribe 1000 cal for the first year, then add 100 cal for each additional year of age. For instance, an 8-year-old requires 1000 plus 700, yielding 1700 cal per day."
+        },
+        {
+          "q": "Explain the Holliday-Segar method for calculating daily caloric needs by body weight tiers.",
+          "a": "Allocate 100 cal per kg for the first 10 kg, 50 cal per kg for 11 to 20 kg, and 20 cal per kg for each kilogram above 20 kg."
+        }
+      ],
+      "image": {
+        "brief": "Visual infographic comparing the simple age-based calorie formula with the tiered Holliday-Segar weight calculation.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "3",
+        "no": 1
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paed.diet.protein-requirements",
+      "kind": "topic",
+      "title": {
+        "en": "Paediatric protein requirements by age group"
+      },
+      "aka": [
+        "Daily protein allowances",
+        "Protein requirements in children"
+      ],
+      "group": "Protein requirements",
+      "summary": "Recommended daily dietary protein allowances across infancy, childhood, and adolescence, alongside principles for correcting protein deficit.",
+      "blocks": [
+        {
+          "title": "Age-stratified daily protein requirements",
+          "bullets": [
+            "Infants under 1 year of age: require 2 gm of protein per kilogram body weight per day.",
+            "Children aged 1 to 9 years: require 1.5 gm of protein per kilogram body weight per day.",
+            "Older children above 9 years of age: require 1.2 gm of protein per kilogram body weight per day."
+          ]
+        },
+        {
+          "title": "Biological value and clinical considerations",
+          "bullets": [
+            "Protein quality depends on amino acid composition and net protein utilisation; animal proteins and soy provide high biological value.",
+            "Cereal and pulse combinations achieve amino acid complementarity in vegetarian diets.",
+            "Children recovering from protein-energy malnutrition require increased protein for tissue catch-up growth.",
+            "Adequate non-protein calories from carbohydrates and fats must be provided to spare dietary protein for somatic synthesis."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What are the daily dietary protein requirements for infants compared to children aged 1 to 9 years?",
+          "a": "Infants under one year require 2 gm per kilogram per day, whereas children aged 1 to 9 years require 1.5 gm per kilogram per day."
+        },
+        {
+          "q": "Why must adequate non-protein calories accompany protein supplementation during nutritional recovery?",
+          "a": "If non-protein calories from carbohydrates and fats are insufficient, dietary amino acids will be oxidised for energy production via gluconeogenesis rather than utilized for tissue building and growth."
+        }
+      ],
+      "image": {
+        "brief": "Staircase graph showing daily protein requirement declining from 2 gm/kg/day in infancy to 1.5 gm/kg/day in young children and 1.2 gm/kg/day in older children.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "3",
+        "no": 2
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paed.diet.food-composition",
+      "kind": "chart",
+      "title": {
+        "en": "Nutritional composition of common foods"
+      },
+      "aka": [
+        "Food calorie and protein values",
+        "Nutritive values of common foodstuffs"
+      ],
+      "group": "Food composition",
+      "summary": "Standard reference table providing caloric and protein content per designated portion size for common Indian staple foods, dairy, snacks, and animal products.",
+      "blocks": [
+        {
+          "title": "Nutritive values of common foods table",
+          "table": {
+            "head": [
+              "Food item",
+              "Portion measure",
+              "Calories (cal)",
+              "Protein (gm)"
+            ],
+            "rows": [
+              [
+                "Fresh cow milk",
+                "100 ml measure",
+                "67",
+                "3"
+              ],
+              [
+                "Curd (dahi)",
+                "100 gm weight",
+                "60",
+                "3.1"
+              ],
+              [
+                "Infant formula milk",
+                "30 ml volume",
+                "20",
+                "0.5"
+              ],
+              [
+                "Whole boiled egg",
+                "1 unit",
+                "60",
+                "6"
+              ],
+              [
+                "Cooked white rice",
+                "1 cup (150 cc)",
+                "175",
+                "4"
+              ],
+              [
+                "Wheat chappati",
+                "1 piece",
+                "70",
+                "2"
+              ],
+              [
+                "Deep-fried puri",
+                "1 piece",
+                "35",
+                "1"
+              ],
+              [
+                "Steamed idli",
+                "1 piece",
+                "50",
+                "1"
+              ],
+              [
+                "Crisp dosa",
+                "1 piece",
+                "70",
+                "2"
+              ],
+              [
+                "Commercial bread slice",
+                "1 piece (20 gm)",
+                "50",
+                "1.7"
+              ],
+              [
+                "Infant cereal (Cerelac, ragi, Nestum)",
+                "6 tsp",
+                "100",
+                "2"
+              ],
+              [
+                "Prepared cooked dal",
+                "1 big spoon (50 ml)",
+                "10",
+                "1"
+              ],
+              [
+                "Raw dry dal (pulses)",
+                "100 gm",
+                "320",
+                "22"
+              ],
+              [
+                "Fresh banana",
+                "1 fruit",
+                "100",
+                "1"
+              ],
+              [
+                "Ripe mango",
+                "1 fruit",
+                "50-100",
+                "0"
+              ],
+              [
+                "Whole apple",
+                "1 fruit",
+                "50-100",
+                "0"
+              ],
+              [
+                "Fresh orange",
+                "1 fruit",
+                "50",
+                "0.5"
+              ],
+              [
+                "Dried dates",
+                "100 gm",
+                "300",
+                "2.5"
+              ],
+              [
+                "Cooked leafy vegetables",
+                "One serving",
+                "65",
+                "2-4"
+              ],
+              [
+                "Mashed potato serving",
+                "One serving",
+                "40",
+                "0"
+              ],
+              [
+                "Fresh fish flesh",
+                "100 gm",
+                "150",
+                "20"
+              ],
+              [
+                "Broiler chicken meat",
+                "100 gm",
+                "220",
+                "25"
+              ],
+              [
+                "Goat meat (mutton)",
+                "100 gm",
+                "250",
+                "20"
+              ],
+              [
+                "Lean pork meat",
+                "100 gm",
+                "280",
+                "20"
+              ],
+              [
+                "Lean beef meat",
+                "100 gm",
+                "250",
+                "28"
+              ],
+              [
+                "Chicken-filled momo",
+                "1 piece",
+                "60",
+                "3"
+              ],
+              [
+                "Vegetable momo dumpling",
+                "1 piece",
+                "40",
+                "0.5"
+              ],
+              [
+                "Plain wheat biscuit",
+                "1 piece",
+                "15",
+                "0.25"
+              ],
+              [
+                "Sweet cream biscuit",
+                "1 piece",
+                "25",
+                "0.25"
+              ],
+              [
+                "Granulated white sugar",
+                "1 small tsp",
+                "20",
+                "0"
+              ],
+              [
+                "Clarified butter (ghee) or butter",
+                "1 small tsp",
+                "36",
+                "0"
+              ],
+              [
+                "Prepared milk coffee",
+                "1 cup",
+                "80",
+                "1.8"
+              ],
+              [
+                "Prepared milk tea",
+                "1 cup",
+                "60",
+                "1"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "Practical clinical notes on food values",
+          "bullets": [
+            "Milk provides 67 cal and 3 gm protein per 100 ml, while formula milk yields 20 cal and 0.5 gm protein per 30 ml.",
+            "One whole egg yields 60 cal and provides 6 gm of complete reference protein.",
+            "Meats provide concentrated protein averaging 20 to 25 gm per 100 gm portion.",
+            "Fats like ghee and butter contribute dense energy at 36 cal per teaspoon without protein."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What is the calorie and protein content of 100 ml of cow's milk?",
+          "a": "Cow's milk provides 67 cal of energy and 3 gm of protein per 100 ml."
+        },
+        {
+          "q": "How many calories and grams of protein does one egg contribute?",
+          "a": "One egg provides approximately 60 cal of energy and 6 gm of complete protein."
+        }
+      ],
+      "unsure": [
+        "The source lists 1 puri as 35 cal and 1 gm protein, whereas 1 chappati is listed as 70 cal and 2 gm protein. Deep-fried puris generally provide higher calories than dry chappatis; the source figure of 35 cal is retained verbatim as an exam fact.",
+        "Cooked dal is listed as 10 cal and 1 gm protein per 50 ml big spoon, which reflects a highly diluted home-prepared soup rather than thick lentil curry."
+      ],
+      "image": {
+        "brief": "Visual portion guide illustrating household measures alongside staple Indian foods with their respective calorie and protein labels.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "3",
+        "no": 3
+      },
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paed.diet.rules-and-measures",
+      "kind": "topic",
+      "title": {
+        "en": "Dietary rules of thumb, reference measures, and presentation syntax"
+      },
+      "aka": [
+        "Dietary rules of thumb",
+        "Nutritional reference values"
+      ],
+      "group": "Dietary rules",
+      "summary": "Practical rules for estimating macronutrients in staples, essential fatty and amino acids, standardized household volume measures, and presentation syntax for infant feeds.",
+      "blocks": [
+        {
+          "title": "Macronutrient rules of thumb for raw food groups",
+          "bullets": [
+            "Uncooked cereals (per 100 gm): rice and ragi provide 350 cal and 7 gm protein; wheat and maize provide 350 cal and 11 gm protein.",
+            "Uncooked pulses (per 100 gm): provide approximately 350 cal and 20 gm protein, except soybean which yields 450 cal and 43 gm protein.",
+            "Green leafy vegetables: contain negligible calories and proteins.",
+            "Fruits: yield approximately 50 cal per fruit with negligible protein, except banana (100 cal) and jackfruit.",
+            "Meats (fish, chicken, mutton, beef per 100 gm): provide approximately 250 cal and 20-25 gm protein.",
+            "Rice cooking expansion: cooked rice triples in weight compared to raw grain weight."
+          ]
+        },
+        {
+          "title": "Essential nutrients and physiological fuel values",
+          "bullets": [
+            "Essential fatty acids: linoleic acid, linolenic acid, and arachidonic acid.",
+            "Essential amino acids mnemonic MAT HILL PVT: methionine, arginine, threonine, histidine, isoleucine, leucine, lysine, phenylalanine, valine, and tryptophan.",
+            "Physiological energy yield: dietary fat produces 9 kcal/gram; protein produces 4 kcal/gram; carbohydrate produces 4 kcal/gram."
+          ]
+        },
+        {
+          "title": "Household measures and presentation syntax",
+          "bullets": [
+            "Standard kitchen measures: teaspoon equals 5 ml; tablespoon equals 15 ml; standard katori or cup equals 150 ml; drinking glass equals 250 ml.",
+            "Presentation formula for breastfed infants: state that child is consuming specified calories and grams of protein from complementary foods, alongside breastfeeding a specified number of times daily."
+          ]
+        }
+      ],
+      "viva": [
+        {
+          "q": "What are the physiological fuel values per gram for carbohydrates, proteins, and fats?",
+          "a": "Carbohydrates provide 4 kcal/gram, proteins provide 4 kcal/gram, and fats provide 9 kcal/gram."
+        },
+        {
+          "q": "What volumes correspond to standard household kitchen measures in dietary recall?",
+          "a": "One teaspoon is 5 ml, one tablespoon is 15 ml, one standard katori or cup is 150 ml, and one standard glass is 250 ml."
+        },
+        {
+          "q": "Name the three essential fatty acids in human nutrition.",
+          "a": "The three essential fatty acids are linoleic acid, linolenic acid, and arachidonic acid."
+        }
+      ],
+      "image": {
+        "brief": "Visual chart displaying standard household measures: 5 ml teaspoon, 15 ml tablespoon, 150 ml katori, and 250 ml glass tumbler.",
+        "file": null,
+        "mediaId": null
+      },
+      "src": {
+        "book": "manipal-clinical-paediatrics",
+        "section": "3",
+        "no": 4
+      },
+      "review": "ai_drafted"
+    }
+  ]
+}

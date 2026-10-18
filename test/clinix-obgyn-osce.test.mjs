@@ -30,6 +30,11 @@ const allSkills = {};
 for (const p of manifest.skillPacks) Object.assign(allSkills, read(p.file).skills);
 const skillsOf = (ids) => ids.map((id) => allSkills[id]);
 const stations = mod.osce.stations;
+// The 32 skills the OSCE stations were built on. The pack has grown since (final-year expansion), and the
+// stricter authoring rules below (a URL on every citation) apply to these; newer skills are checked by
+// the expansion validator and test/clinix-expansion-packs.test.mjs.
+const ORIGINAL_IDS = ["skill.hx.obg.booking_lmp","skill.hx.obg.previous_pregnancies","skill.hx.obg.medical_family_drug","skill.hx.obg.menstrual_history","skill.hx.obg.gynae_symptoms","skill.hx.obg.gynae_background","skill.hx.obg.contra_eligibility","skill.exam.obg.preg_prep_inspect","skill.exam.obg.fundal_height","skill.exam.obg.leopold","skill.exam.obg.fetal_heart","skill.approach.obg.intimate_consent","skill.exam.obg.vulval_inspect","skill.exam.obg.speculum_insert","skill.exam.obg.speculum_inspect","skill.exam.obg.bimanual","skill.approach.obg.pelvic_close","skill.approach.obg.bbn_setup","skill.approach.obg.bbn_disclose","skill.approach.obg.bbn_respond","skill.approach.obg.bbn_plan","skill.approach.obg.contra_counsel","skill.approach.obg.cs_setup","skill.approach.obg.cs_info","skill.approach.obg.cs_decision","skill.approach.obg.team_leader","skill.tx.obg.pph_recognise","skill.tx.obg.pph_first_response","skill.tx.obg.pph_atony_escalate","skill.tx.obg.eclampsia_abcd","skill.tx.obg.mgso4","skill.tx.obg.eclampsia_bp_delivery"];
+
 
 /* Registration ------------------------------------------------------------- */
 
@@ -73,8 +78,8 @@ test("the pack and its module pass full referential validation", () => {
 });
 
 test("every obgyn skill is well formed, ai_drafted, English, and cites a source that was opened", () => {
-  const ids = Object.keys(pack.skills);
-  assert.equal(ids.length, 32);
+  const ids = ORIGINAL_IDS;
+  assert.ok(ids.every((id) => pack.skills[id]), "an original skill went missing");
   for (const id of ids) {
     const s = pack.skills[id];
     assert.equal(s.system, "obgyn");
