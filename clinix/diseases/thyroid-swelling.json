@@ -1,0 +1,1164 @@
+{
+  "_comment": "Surgery pathway: thyroid swelling (goitre, nodule and carcinoma). Same architecture as pneumonia: shared core and surgery skills carry the examination method, this file adds thyroid-specific reasoning and overlays.",
+  "id": "thyroid-swelling",
+  "name": "Thyroid swelling",
+  "fullName": "Thyroid swelling: goitre, nodule and carcinoma",
+  "system": "surgery",
+  "kbRef": "thyroid_nodule",
+  "oneLine": "A swelling in the front of the neck that moves on swallowing, and the decision of which ones to watch, cool down, resect or refer",
+  "estMinutes": 60,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "blurb": "What a thyroid swelling is, and the four behaviour groups that organise everything",
+      "id": "basics",
+      "skills": [
+        "skill.reasoning.thyroid.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "Before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ],
+      "title": "Approach to the patient"
+    },
+    {
+      "blurb": "Age, sex and district set the prior probability before the swelling is described",
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics",
+        "skill.history.thyroid.particulars"
+      ],
+      "title": "Patient particulars",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a thyroid swelling, age and sex carry unusual weight. Simple goitres gather in girls near puberty, nodular goitres in women in their twenties and thirties, and cancer spans the ages: papillary disease in the young, follicular disease in mid life, anaplastic disease in the old. A swelling in a man is less common and deserves the same careful workup, not reassurance."
+        }
+      }
+    },
+    {
+      "blurb": "Tempo in years, pain, pressure symptoms and function",
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.surg.lump",
+        "skill.hx.surg.neck_swelling",
+        "skill.hx.surg.thyroid",
+        "skill.history.thyroid.toxic"
+      ],
+      "title": "History of presenting illness",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A thyroid history reads in years, not days: a painless swelling noticed five or ten years ago, growing almost imperceptibly, is the classic benign tempo. Weeks of rapid growth, new hoarseness, or sudden painful enlargement after years of quiet are the tempo breaks that change the diagnosis."
+        },
+        "skill.hx.surg.thyroid": {
+          "expect": "Expect a euthyroid patient with no functional symptoms in the common goitres. When toxicity is present on a longstanding nodular gland it is usually secondary, with cardiac symptoms leading, while a diffuse gland in a young patient with tremor, heat intolerance and eye symptoms points to primary toxicity."
+        }
+      }
+    },
+    {
+      "blurb": "Iodine, goitrogens, drugs, radiation and family",
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.history.thyroid.risk"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "The toxic face, the pulse in sleep, the moist palm",
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.surg.thyrotoxic_status",
+        "skill.exam.surg.thyroid_eye_signs"
+      ],
+      "title": "General examination",
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the two opposite faces of thyroid function. The toxic patient is thin, restless and sweating, with an intent or staring expression; the hypothyroid patient is heavy and slow, with a puffy expressionless face, dry skin and thinning hair. Carcinoma declares itself late with pallor and weight loss."
+        },
+        "skill.gen.vitals": {
+          "expect": "Feel the pulse with function in mind. A fast regular pulse that stays fast even at rest fits primary toxicity; a fast irregular pulse in an older patient with a nodular gland suggests secondary toxicity with atrial fibrillation. A slow pulse with a heavy, cold-intolerant patient points the other way, toward hypothyroidism."
+        }
+      }
+    },
+    {
+      "blurb": "Inspection, palpation, movement on swallowing, nodes and bruit",
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.surg.thyroid_inspection",
+        "skill.exam.surg.thyroid_palpation",
+        "skill.exam.surg.neck_deglutition_tongue",
+        "skill.exam.surg.cervical_nodes",
+        "skill.exam.surg.retrosternal_goitre",
+        "skill.exam.surg.thyroid_bruit"
+      ],
+      "title": "Thyroid examination",
+      "emphasis": {
+        "skill.exam.surg.thyroid_inspection": {
+          "expect": "Watch the swelling as she swallows a sip of water. Upward movement on deglutition is the single sign that marks a swelling as thyroid, because the gland is fixed to the larynx. A gland that has lost this movement is fixed by invasion or inflammation, which is itself a finding."
+        },
+        "skill.exam.surg.thyroid_palpation": {
+          "expect": "Expect a multinodular gland to feel asymmetrical and bosselated with variable consistency, firmer where old bleeding has made a nodule tense. A stony hard fixed mass that will not move on swallowing, with absent carotid pulsation behind it, is carcinoma until proved otherwise."
+        },
+        "skill.exam.surg.cervical_nodes": {
+          "expect": "Palpate the neck for nodes in every thyroid swelling, even when the gland itself feels benign. Papillary carcinoma spreads through lymph channels early, so enlarged nodes can be the presenting sign while the primary tumour is still small."
+        }
+      }
+    },
+    {
+      "blurb": "Consistency, fixity, nodes and function read together",
+      "id": "disease_findings",
+      "skills": [
+        "skill.reasoning.thyroid.signs"
+      ],
+      "title": "Putting the thyroid picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the case",
+      "id": "summary",
+      "skills": [
+        "skill.presentation.thyroid.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "What else swells in the front of the neck",
+      "id": "differential",
+      "skills": [
+        "skill.reasoning.thyroid.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Function first, then map, then sample",
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.thyroid.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Naming the swelling, the function and the risk",
+      "id": "diagnosis",
+      "skills": [
+        "skill.reasoning.thyroid.diagnosis"
+      ],
+      "title": "Diagnosis"
+    },
+    {
+      "blurb": "Watch, cool down, refer for surgery, or treat the cancer as a team",
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.thyroid.management"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this patient to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "You found the swelling moves up on swallowing but not on tongue protrusion. What does each movement prove?",
+          "Your fingers cannot get below the lower pole on one side. What does that mean and what do you do next?",
+          "You feel a stony hard fixed area with hard nodes. How does your plan change?"
+        ],
+        "id": "osce.thyroid.exam",
+        "seconds": 480,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.surg.thyroid_inspection",
+          "skill.exam.surg.thyroid_palpation",
+          "skill.exam.surg.neck_deglutition_tongue",
+          "skill.exam.surg.cervical_nodes",
+          "skill.exam.surg.retrosternal_goitre",
+          "skill.exam.surg.thyroid_bruit"
+        ],
+        "task": "This 44 year old woman has had a slowly enlarging swelling in the front of her neck for six years. Examine her thyroid gland and present your findings.",
+        "title": "Examine the thyroid swelling"
+      },
+      {
+        "examinerQuestions": [
+          "Her TSH is suppressed and the scan shows a hot nodule. Do you sample it, and why?",
+          "She reports new hoarseness and a hard fixed swelling of eight weeks. What is your next step?",
+          "An older woman with a nodular gland has a fast irregular pulse and ankle swelling but no tremor or eye signs. Primary or secondary toxicity, and why?"
+        ],
+        "id": "osce.thyroid.history",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.surg.thyroid",
+          "skill.hx.surg.neck_swelling",
+          "skill.history.thyroid.toxic",
+          "skill.history.thyroid.risk"
+        ],
+        "task": "This 60 year old woman has a nodular neck swelling with palpitations. Take a focused history in six minutes and be ready to state her functional status and red flags.",
+        "title": "Take a thyroid history and assess function"
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.reasoning.thyroid.basics",
+      "skill.history.thyroid.toxic",
+      "skill.exam.surg.thyroid_palpation",
+      "skill.reasoning.thyroid.signs",
+      "skill.reasoning.thyroid.differential",
+      "skill.investigation.thyroid.workup",
+      "skill.reasoning.thyroid.diagnosis",
+      "skill.treatment.thyroid.management"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.thyroid.basics": {
+      "id": "skill.reasoning.thyroid.basics",
+      "kind": "reasoning",
+      "oneLine": "Goitre means enlargement only; behaviour groups the causes",
+      "probes": [
+        {
+          "a": "Non-toxic goitre, toxic goitre, neoplastic disease and thyroiditis. Goitre alone says only that the gland is enlarged.",
+          "accept": [
+            "non-toxic",
+            "toxic",
+            "neoplastic",
+            "thyroiditis",
+            "enlarged"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name the four behaviour groups of thyroid swellings."
+        },
+        {
+          "a": "Because most nodules are benign and the task is to find the minority that are malignant, using function tests, ultrasound characterisation and needle sampling.",
+          "accept": [
+            "benign",
+            "malignant",
+            "ultrasound",
+            "sampling",
+            "function"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does every thyroid nodule need risk stratification rather than direct surgery?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: classification of goitre",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Goitre means enlargement, nothing more",
+          "body": "The word goitre denotes any enlargement of the thyroid gland whatever its cause. It says nothing about function, nothing about benign or malignant, and nothing about treatment.\n\nA thyroid swelling is recognised by position in the front of the neck, by shape, and above all by upward movement on swallowing, since the gland is fixed to the larynx. Loss of that movement means fixation by invasion or inflammation."
+        },
+        {
+          "table": {
+            "cols": [
+              "Group",
+              "Typical members",
+              "First question it raises"
+            ],
+            "rows": [
+              [
+                "Non-toxic goitre",
+                "Diffuse pubertal, colloid, multinodular, solitary nodule",
+                "Is it pressing on anything, and is it truly quiet in function"
+              ],
+              [
+                "Toxic goitre",
+                "Diffuse Graves disease, toxic multinodular, toxic nodule",
+                "Which system bears the brunt: nerves or heart"
+              ],
+              [
+                "Neoplastic",
+                "Adenoma, papillary, follicular, medullary, anaplastic, lymphoma",
+                "Is it contained or invading, and where has it spread"
+              ],
+              [
+                "Thyroiditis",
+                "Hashimoto, De Quervain, Riedel, suppurative",
+                "Is it painful, and what is the function doing?"
+              ]
+            ]
+          },
+          "heading": "Four behaviour groups"
+        },
+        {
+          "heading": "Three questions that organise every case",
+          "points": [
+            "Is the gland overactive, normally active or underactive in function?",
+            "Is the swelling diffuse or nodular, and does it fix to its surroundings or invade them?",
+            "Are there pressure effects on breathing, swallowing or voice, and are there nodes?"
+          ]
+        }
+      ],
+      "title": "What a thyroid swelling is",
+      "why": "Students drown in thyroid names because each swelling is taught as a separate disease. Grouping by behaviour first turns twenty names into four questions, and the right investigations then follow from the group rather than from memory."
+    },
+    "skill.reasoning.thyroid.signs": {
+      "id": "skill.reasoning.thyroid.signs",
+      "kind": "reasoning",
+      "oneLine": "One gland read through consistency, fixity, nodes and function",
+      "probes": [
+        {
+          "a": "A benign multinodular gland is asymmetrical and bosselated with variable consistency and moves on swallowing, while carcinoma is stony hard, fixed, may not move on swallowing, and may show nodes, hoarseness or carotid encasement.",
+          "accept": [
+            "bosselated",
+            "variable",
+            "hard",
+            "fixed",
+            "nodes",
+            "hoarseness"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Contrast the bedside findings of a benign nodular goitre with those of carcinoma."
+        },
+        {
+          "a": "Tremor of the outstretched fingers and protruded tongue, a fast pulse that stays fast at rest, hot moist palms, and a systolic bruit over the upper poles of the gland from increased vascularity.",
+          "accept": [
+            "tremor",
+            "pulse",
+            "moist",
+            "bruit",
+            "vascularity"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which bedside signs establish primary toxicity on examination?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid: physical signs of toxicity and malignancy",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Surface and consistency read the pathology",
+          "body": "A diffuse hyperplastic gland feels smooth and uniformly firm. A multinodular gland feels asymmetrical and bosselated with consistency that varies from nodule to nodule, firmer where old bleeding has left a tense cyst.\n\nA stony hard mass with an indistinct edge is carcinoma or Riedel thyroiditis until proved otherwise. A cyst that feels firm is not solid: fluid under tension inside a soft gland deceives the finger."
+        },
+        {
+          "heading": "Fixity, nodes and nerve signs stage it",
+          "body": "Test mobility in both planes and on swallowing. Fixity to strap muscles or trachea means infiltration, and a gland that will not move on deglutition has declared itself malignant or chronically inflamed.\n\nExamine nodes in every case, since papillary cancer seeds them early. An encased carotid sheath with lost pulsation, Horner syndrome, or venous engorgement with raised arms all mark advanced or retrosternal disease."
+        },
+        {
+          "table": {
+            "cols": [
+              "Feature",
+              "Benign pattern",
+              "Malignant pattern"
+            ],
+            "rows": [
+              [
+                "Tempo",
+                "Years of slow painless growth",
+                "Weeks of rapid growth"
+              ],
+              [
+                "Pain",
+                "Painless unless bleed or inflammation",
+                "Painless early, painful when invading nerves"
+              ],
+              [
+                "Consistency",
+                "Variable, bosselated",
+                "Stony hard, irregular edge"
+              ],
+              [
+                "Mobility",
+                "Moves freely on swallowing",
+                "Fixed, movement lost"
+              ],
+              [
+                "Nodes",
+                "Absent",
+                "Hard regional nodes"
+              ],
+              [
+                "Voice",
+                "Normal",
+                "Hoarse from nerve invasion"
+              ]
+            ]
+          },
+          "heading": "Benign against malignant at the bedside"
+        },
+        {
+          "heading": "Toxic signs and eye signs grade function",
+          "body": "In primary toxicity look for fine tremor of outstretched fingers and the protruded tongue, hot moist palms felt just after the pulse, and a fast pulse that stays fast even at rest. A systolic bruit over the upper poles marks increased vascularity and comes late.\n\nSeparate lid retraction and lid lag from true exophthalmos, where sclera shows above and below the iris. Weak eye movements and conjunctival oedema belong to infiltrative eye disease and need eye protection."
+        }
+      ],
+      "title": "The thyroid picture",
+      "why": "No single thyroid sign is decisive, but consistency, fixity, nodes and function read together rarely lie. This synthesis is what turns a list of examination findings into a diagnosis and a plan."
+    },
+    "skill.reasoning.thyroid.differential": {
+      "id": "skill.reasoning.thyroid.differential",
+      "kind": "reasoning",
+      "oneLine": "Goitres, cancers, thyroiditis and the non-thyroid mimics",
+      "probes": [
+        {
+          "a": "Thyroglossal cyst moves up when the tongue is protruded as well as on swallowing; a thyroid swelling moves only on swallowing.",
+          "accept": [
+            "tongue",
+            "protruded",
+            "swallowing",
+            "thyroglossal"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How do you separate a thyroglossal cyst from a thyroid swelling at the bedside?"
+        },
+        {
+          "a": "Painful tender gland with fever and raised ESR but low uptake in De Quervain thyroiditis; woody hard fixed gland mimicking cancer in Riedel thyroiditis; symmetrical rubbery gland with antibodies and eventual hypothyroidism in Hashimoto disease.",
+          "accept": [
+            "painful",
+            "ESR",
+            "woody",
+            "Riedel",
+            "Hashimoto",
+            "antibodies"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How do the three chronic thyroiditis forms differ from carcinoma?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: differential diagnosis of swellings",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Nodular disease first",
+          "table": {
+            "cols": [
+              "Cause",
+              "Clues for",
+              "Clues against"
+            ],
+            "rows": [
+              [
+                "Colloid or hyperplastic nodule",
+                "Soft diffuse enlargement, young, endemic belt",
+                "Rapid growth, hardness, nodes"
+              ],
+              [
+                "Multinodular goitre",
+                "Years of growth, bosselated, variable firmness",
+                "Fixity, hoarseness, hard nodes"
+              ],
+              [
+                "Follicular adenoma",
+                "Solitary smooth nodule, euthyroid",
+                "Invasion or spread, which cytology cannot judge"
+              ],
+              [
+                "Papillary carcinoma",
+                "Young woman, hard nodule, early nodes",
+                "Soft mobile gland, long stable course"
+              ],
+              [
+                "Follicular carcinoma",
+                "Middle-aged, bone pain from spread",
+                "Lymph nodes as the first sign"
+              ],
+              [
+                "Anaplastic carcinoma",
+                "Elderly, weeks of painful fixed growth",
+                "Years of quiet swelling"
+              ],
+              [
+                "Medullary carcinoma",
+                "Firm nodule with diarrhoea, family tumours",
+                "No calcitonin rise, no family history"
+              ],
+              [
+                "Lymphoma",
+                "Older woman, fast firm painless mass, Hashimoto past",
+                "Slow course over years"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Painful versus painless",
+          "body": "Goitres and cancers start painless. Pain means bleeding into a nodule, acute suppurative infection after a sore throat, or De Quervain thyroiditis with fever and neck tenderness. Late cancer pain comes from nerve invasion, not from the tumour itself.\n\nHashimoto disease brings neck discomfort rather than true pain, with a rubbery symmetrical gland. Riedel disease is painless but woody hard and fixed, which is why it mimics cancer until sampled."
+        },
+        {
+          "heading": "The non-thyroid mimics",
+          "points": [
+            "Thyroglossal cyst: midline, moves on swallowing AND on tongue protrusion; a fistula near the hyoid follows an infected cyst.",
+            "Cervical nodes: multiple, do not move on swallowing unless fixed to the airway; tuberculous nodes carry weeks of history and characteristic skin changes.",
+            "Parathyroid and other neck lumps: separated on imaging; parathyroid disease presents with calcium disturbance, never as a neck swelling alone.",
+            "Retrosternal or aberrant thyroid tissue: suspected when no cervical gland explains the pressure signs, confirmed on scan."
+          ]
+        }
+      ],
+      "title": "Differential diagnosis of thyroid swelling",
+      "why": "The front of the neck crowds thyroid, nodes, cysts and salivary tissue into a small space. A differential that moves from common goitres through cancers and thyroiditis to non-thyroid mimics stops the student anchoring on the first plausible name."
+    },
+    "skill.investigation.thyroid.workup": {
+      "id": "skill.investigation.thyroid.workup",
+      "kind": "investigation",
+      "oneLine": "Function first, then map, then sample",
+      "probes": [
+        {
+          "a": "Serum TSH is the first-line test; a suppressed value points to an autonomous nodule and warrants a radionuclide scan, while sampling is directed at non-functioning nodules.",
+          "accept": [
+            "TSH",
+            "first",
+            "suppressed",
+            "scan",
+            "non-functioning"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What is the first blood test in a thyroid nodule, and what does a suppressed value change?"
+        },
+        {
+          "a": "Marked hypoechogenicity, microcalcifications, irregular margins and a taller-than-wide shape raise concern and guide which nodule to sample.",
+          "accept": [
+            "hypoechogenicity",
+            "microcalcifications",
+            "irregular",
+            "taller-than-wide"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which ultrasound features raise concern for malignancy?"
+        },
+        {
+          "a": "Do not scan every enlarged gland; scan the solitary nodule, the suspected retrosternal goitre and ectopic tissue. A hot nodule rarely harbours cancer so aspiration targets cold nodules.",
+          "accept": [
+            "solitary",
+            "retrosternal",
+            "hot",
+            "cold",
+            "aspiration"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When is a thyroid scan helpful, and when is it not?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: special investigations",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "TSH first, always",
+          "body": "Begin every nodule workup with serum TSH with free hormones. A suppressed value points to an autonomously functioning nodule, which is usually benign and warrants a radionuclide scan rather than direct sampling.\n\nNever proceed to biopsy before checking TSH: sampling a hot nodule misses the diagnosis and wastes the procedure. TSH also sets the baseline for follow-up after any treatment."
+        },
+        {
+          "heading": "Ultrasound maps, scan sorts function, needle decides",
+          "table": {
+            "cols": [
+              "Test",
+              "What it answers",
+              "When to order"
+            ],
+            "rows": [
+              [
+                "TSH with free T4 and T3",
+                "Overactive, normal or underactive",
+                "First in every nodule"
+              ],
+              [
+                "Neck ultrasound",
+                "Nodule character, nodes, which to sample",
+                "Every nodule and goitre"
+              ],
+              [
+                "Radionuclide scan",
+                "Hot or cold function",
+                "Only when TSH is suppressed"
+              ],
+              [
+                "US guided FNAC",
+                "Cytology in standard categories",
+                "Non-functioning or suspicious nodules"
+              ],
+              [
+                "Calcitonin",
+                "Medullary cancer signal",
+                "Suspected medullary disease"
+              ],
+              [
+                "Neck X-ray",
+                "Trachea position, retrosternal shadow",
+                "Compression or impalpable lower border"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "What not to order first",
+          "body": "Do not scan all enlarged glands: scanning helps the solitary nodule, the suspected retrosternal goitre and ectopic tissue, and little else. Ultrasound separates solid from cystic and finds impalpable nodules, but alone it cannot diagnose cancer.\n\nAvoid iodinated contrast studies where an autonomous nodule could be tipped into toxicity, and never delay referral for suspected cancer while waiting for a low-yield test. Antibodies and biopsy settle Hashimoto disease against carcinoma in doubtful asymmetrical glands."
+        }
+      ],
+      "title": "Investigating the thyroid swelling",
+      "why": "Thyroid investigations have a strict order, and each test answers a different question. Function first avoids sampling a hot nodule; mapping next aims the needle; the needle result then directs management."
+    },
+    "skill.reasoning.thyroid.diagnosis": {
+      "id": "skill.reasoning.thyroid.diagnosis",
+      "kind": "reasoning",
+      "oneLine": "Function by anatomy by behaviour: the complete diagnosis",
+      "probes": [
+        {
+          "a": "A hot functioning nodule on scanning rarely harbours malignancy, so aspiration is directed at non-functioning nodules after TSH and scan have sorted function.",
+          "accept": [
+            "hot",
+            "rarely",
+            "malignancy",
+            "non-functioning",
+            "aspiration"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Why does a hot nodule usually escape needle sampling?"
+        },
+        {
+          "a": "Benign cytology means clinical and ultrasound surveillance; malignant or suspicious cytology means referral for diagnostic lobectomy or thyroidectomy through a multidisciplinary team; indeterminate cytology uses molecular testing or repeat sampling to decide.",
+          "accept": [
+            "surveillance",
+            "lobectomy",
+            "thyroidectomy",
+            "indeterminate",
+            "molecular"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "How does the cytology result decide the next step?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: diagnosis of nodules and cancer",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Three axes make the diagnosis",
+          "body": "A complete thyroid diagnosis states function, anatomy and behaviour together. Function: toxic, euthyroid or hypothyroid from TSH and clinical signs. Anatomy: diffuse or nodular, solitary or multinodular, with retrosternal extension stated or excluded.\n\nBehaviour: benign, suspicious or malignant from cytology and red flags. Any statement missing one axis is incomplete: a multinodular goitre is not a diagnosis until its function and its cytology are attached."
+        },
+        {
+          "heading": "Reading the cytology result",
+          "body": "Fine needle sampling reports in standardised categories that guide management. Benign means surveillance, not surgery. Malignant or suspicious means surgical referral, usually diagnostic lobectomy or thyroidectomy decided with the multidisciplinary team.\n\nIndeterminate results use molecular testing or repeat sampling to refine risk and avoid unnecessary operations. A non-diagnostic sample is never reassuring: repeat it rather than discharging the patient on its strength."
+        },
+        {
+          "heading": "Red flags that upgrade any diagnosis",
+          "points": [
+            "Rapidly enlarging, hard or fixed nodule with lost movement on swallowing.",
+            "New hoarseness, vocal cord palsy, stridor or dysphagia from invasion.",
+            "Hard cervical nodes, especially with a small or impalpable primary.",
+            "Childhood neck irradiation or family history of thyroid cancer.",
+            "Compressive symptoms or engorged chest veins suggesting retrosternal growth."
+          ]
+        }
+      ],
+      "title": "Diagnosis of thyroid swelling",
+      "why": "A thyroid diagnosis is a composite, not a single word, and the cytology category plus red flags decide whether the patient is watched, cooled down or referred for surgery. Getting this synthesis exact is what keeps benign disease out of the operating theatre and cancer out of follow-up."
+    },
+    "skill.treatment.thyroid.management": {
+      "dosingNote": "This module teaches management at the level of modality and principle: which nodules are watched, which are cooled to normal function first, and which go to the operating theatre or the cancer team. Specific agents, activities and durations come from your current national or institutional guideline at the time of treatment. CliniX does not prescribe.",
+      "id": "skill.treatment.thyroid.management",
+      "kind": "treatment",
+      "oneLine": "Watch the benign, cool the toxic, resect the malignant or compressing",
+      "probes": [
+        {
+          "a": "Cytologically benign nodules are managed with clinical and ultrasound surveillance rather than intervention, with defined referral thresholds for growth, new symptoms or functional change.",
+          "accept": [
+            "benign",
+            "surveillance",
+            "ultrasound",
+            "thresholds"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "How is a cytologically benign nodule managed?"
+        },
+        {
+          "a": "Render the patient euthyroid with an antithyroid drug first, control adrenergic symptoms, then offer definitive radioiodine or surgery, with surgery preferred for large, retrosternal or compressing glands.",
+          "accept": [
+            "euthyroid",
+            "antithyroid",
+            "radioiodine",
+            "surgery",
+            "retrosternal"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What is the sequence of treating a toxic nodular goitre?"
+        },
+        {
+          "a": "Suspected cancer goes to a thyroid multidisciplinary team for surgery, usually lobectomy or thyroidectomy with compartment dissection for proven nodes, then hormone replacement with suppression, selective radioiodine ablation and thyroglobulin plus ultrasound surveillance.",
+          "accept": [
+            "multidisciplinary",
+            "lobectomy",
+            "thyroidectomy",
+            "radioiodine",
+            "thyroglobulin"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Outline the management of confirmed differentiated thyroid cancer."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "multinodular_goitre: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: treatment of goitre and cancer",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Benign and euthyroid: watch, do not cut",
+          "body": "Nodules with benign cytology need clinical and ultrasound surveillance, not intervention. Re-examine the neck, repeat function tests and rescan at planned intervals, and sample again if a nodule grows or changes character.\n\nCounsel the household on iodised salt where deficiency is endemic. Reassure without discharging: give explicit return thresholds of rapid growth, new hoarseness, breathing or swallowing difficulty, or neck nodes."
+        },
+        {
+          "heading": "Toxic: cool down first, then definitive treatment",
+          "body": "A toxic nodular gland is rendered euthyroid with an antithyroid drug before any definitive step, while adrenergic symptoms are controlled and the heart is protected. Operating or ablating through uncontrolled toxicity is never the plan.\n\nDefinitive treatment is radioiodine or surgery. Surgery is preferred for large, retrosternal or compressing glands, for suspected cancer alongside toxicity, and where eye disease or patient choice argues against radioiodine. Lifelong hormone replacement follows total removal."
+        },
+        {
+          "heading": "Malignant or suspicious: the cancer team operates",
+          "body": "Nodules with malignant or suspicious cytology are referred to a thyroid multidisciplinary team. Surgery is the mainstay: lobectomy for low risk contained tumours, total removal with compartment dissection for proven nodal disease in larger or higher risk cancer.\n\nAfter total removal, hormone replacement with suppression matched to recurrence risk, selective radioiodine ablation for intermediate and high risk disease, and long term surveillance with thyroglobulin and neck ultrasound complete the plan. Medullary disease adds calcitonin follow-up and family screening."
+        },
+        {
+          "heading": "Compression and the Indian referral map",
+          "body": "Large or compressive nodules with local symptoms need surgery for the pressure itself, whatever the cytology. Assess the airway and vocal cords before operating on retrosternal or longstanding giant goitres.\n\nIn Indian practice, TSH, neck ultrasound and needle sampling are available at most district hospitals, while scanning, endocrine surgery and cancer teams sit at medical colleges and higher centres. Refer promptly for hard fixed swellings, hoarseness, nodes, stridor, rapid growth or suppressed TSH with toxicity."
+        }
+      ],
+      "title": "Managing thyroid swelling",
+      "why": "Thyroid management is allocation, not prescription: most nodules are watched, toxic glands are cooled before definitive treatment, and cancers move as a team decision to surgery with planned follow-up. Knowing which track the patient belongs on matters more than any single drug name."
+    }
+  },
+  "cases": [
+    {
+      "diagnosis": {
+        "accept": [
+          "multinodular goitre",
+          "multinodular",
+          "mng",
+          "euthyroid goitre",
+          "benign goitre",
+          "colloid goitre"
+        ],
+        "answer": "Multinodular goitre, clinically euthyroid, with benign cytology on needle sampling.",
+        "minMatch": 1
+      },
+      "differentialModel": {
+        "accept": [
+          "multinodular",
+          "colloid",
+          "adenoma",
+          "papillary",
+          "follicular",
+          "carcinoma",
+          "thyroiditis",
+          "hashimoto",
+          "solitary nodule",
+          "toxic goitre"
+        ],
+        "answer": "Multinodular goitre, euthyroid. Consider a dominant adenoma, early papillary or follicular carcinoma, Hashimoto thyroiditis, and a toxic nodule if function changes.",
+        "minMatch": 2
+      },
+      "essentialInvestigations": [
+        "tsh",
+        "usg",
+        "fnac"
+      ],
+      "exam": {
+        "skill.exam.surg.cervical_nodes": {
+          "abnormal": false,
+          "finding": "No palpable cervical lymph nodes in any group. No supraclavicular fullness."
+        },
+        "skill.exam.surg.neck_deglutition_tongue": {
+          "abnormal": false,
+          "finding": "Swelling moves freely upward on swallowing a sip of water. No upward movement on protrusion of the tongue."
+        },
+        "skill.exam.surg.retrosternal_goitre": {
+          "abnormal": false,
+          "finding": "Fingers get below both lower poles on swallowing. No venous engorgement over the upper chest. No facial congestion on raising both arms overhead."
+        },
+        "skill.exam.surg.thyroid_bruit": {
+          "abnormal": false,
+          "finding": "No bruit over either lobe. No thrill on palpation."
+        },
+        "skill.exam.surg.thyroid_eye_signs": {
+          "abnormal": false,
+          "finding": "No lid retraction, no lid lag, no exophthalmos. Eye movements full. No conjunctival oedema."
+        },
+        "skill.exam.surg.thyroid_inspection": {
+          "abnormal": true,
+          "finding": "Asymmetrical bosselated swelling over the front of the lower neck, right lobe more prominent, about the size of a small lime on the right. Skin over it normal. Swelling rises on swallowing."
+        },
+        "skill.exam.surg.thyroid_palpation": {
+          "abnormal": true,
+          "finding": "Both lobes and isthmus enlarged, surface bosselated with several firm nodules of varying size. No stony hard area. Gland mobile sideways and moves freely on swallowing. Trachea central. Carotid pulsations felt behind both lobes."
+        },
+        "skill.gen.appearance": {
+          "abnormal": false,
+          "finding": "Comfortable middle-aged woman, average build, no weight loss. Calm, no restlessness or sweating. No pallor or puffiness of the face."
+        },
+        "skill.gen.surg.thyrotoxic_status": {
+          "abnormal": false,
+          "finding": "No tremor of outstretched fingers or tongue. Palms dry and warm, not moist. Pulse regular, no hypertension."
+        },
+        "skill.gen.vitals": {
+          "abnormal": false,
+          "finding": "Temperature 36.8 C. Pulse 78 per minute regular. Blood pressure 124/80. Respiratory rate 16 per minute. SpO2 98 percent on room air."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "breathing": {
+          "cues": [
+            "breathless",
+            "difficulty breathing",
+            "breathing trouble",
+            "stridor",
+            "whistling sound",
+            "lying flat"
+          ],
+          "reply": "No difficulty in breathing, doctor. I sleep flat on my back without any trouble, and there is no whistling sound."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "heart disease",
+            "past illness",
+            "other illness",
+            "hospital before"
+          ],
+          "key": true,
+          "reply": "No diabetes, no blood pressure problem. I have never been admitted to hospital before this."
+        },
+        "diet_iodine": {
+          "cues": [
+            "salt",
+            "iodised salt",
+            "iodized",
+            "cabbage",
+            "diet",
+            "what do you eat",
+            "vegetables"
+          ],
+          "reply": "We use loose salt from the market, not the packed kind. We eat cabbage and turnip often in winter since they grow nearby."
+        },
+        "eye_symptoms": {
+          "cues": [
+            "eyes",
+            "staring",
+            "protruding eyes",
+            "double vision",
+            "closing lids",
+            "eye problem"
+          ],
+          "reply": "No, my eyes are as before. No staring, no difficulty in closing the lids, no double vision."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "anyone else",
+            "mother",
+            "sister",
+            "hereditary",
+            "runs in family"
+          ],
+          "key": true,
+          "reply": "My mother also had a swelling in the neck in her old age, but she never took treatment for it. My two sisters are fine so far."
+        },
+        "heat_weight": {
+          "cues": [
+            "weight loss",
+            "losing weight",
+            "appetite",
+            "heat",
+            "feel hot",
+            "sweating",
+            "sweat a lot"
+          ],
+          "key": true,
+          "reply": "My weight is steady and I eat as usual. I do not feel extra hot, and I do not sweat more than others at home."
+        },
+        "medications": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablets",
+            "taking anything",
+            "thyroid tablets",
+            "treatment taken"
+          ],
+          "key": true,
+          "reply": "No regular medicines. A local practitioner once gave me some tablets for a month but the swelling stayed the same, so I stopped."
+        },
+        "menstrual": {
+          "cues": [
+            "periods",
+            "menstruation",
+            "menstrual",
+            "monthly cycle"
+          ],
+          "reply": "My monthly cycles are regular and as before, nothing changed."
+        },
+        "onset_course": {
+          "cues": [
+            "when did it start",
+            "how long",
+            "since when",
+            "onset",
+            "how did it begin",
+            "noticed"
+          ],
+          "key": true,
+          "reply": "I first noticed it about six years ago, a small fullness in front of the neck. It has grown very slowly since then, without any sudden increase."
+        },
+        "pain": {
+          "cues": [
+            "pain",
+            "painful",
+            "tender",
+            "hurts",
+            "ache"
+          ],
+          "key": true,
+          "reply": "No pain at all, doctor. It has never hurt, not even when I press it."
+        },
+        "palpitation_tremor": {
+          "cues": [
+            "palpitation",
+            "heart racing",
+            "tremor",
+            "shaking hands",
+            "hands shake",
+            "nervous"
+          ],
+          "reply": "No racing of the heart, no shaking of the hands. I sleep well at night, seven hours easily."
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, I have this swelling in the front of my neck since many years. It is slowly getting bigger and now it shows, so my family asked me to come.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "radiation": {
+          "cues": [
+            "radiation",
+            "x-ray treatment",
+            "radiotherapy",
+            "neck treatment as a child"
+          ],
+          "reply": "No, I never had any radiation or special treatment to the neck as a child."
+        },
+        "residence": {
+          "cues": [
+            "where do you live",
+            "village",
+            "home",
+            "native place",
+            "how long living"
+          ],
+          "key": true,
+          "reply": "We live in a hill village in Tehri Garhwal. I was born there and have lived there all my life. Many women in our village have such neck swellings.",
+          "skillId": "skill.hx.surg.neck_swelling"
+        },
+        "swallowing": {
+          "cues": [
+            "swallowing",
+            "dysphagia",
+            "food stuck",
+            "difficulty eating",
+            "solids"
+          ],
+          "reply": "I swallow food and water normally. Sometimes I feel a heaviness but nothing gets stuck."
+        },
+        "voice": {
+          "cues": [
+            "voice",
+            "hoarseness",
+            "voice change",
+            "speaking",
+            "sound different"
+          ],
+          "key": true,
+          "reply": "My voice is as always. No hoarseness, no change while speaking."
+        }
+      },
+      "id": "case.thyroid.meena",
+      "initialVitals": {
+        "bpDiastolic": 80,
+        "bpSystolic": 124,
+        "gcs": 15,
+        "hr": 78,
+        "rr": 16,
+        "spo2": 98,
+        "temp": 36.8
+      },
+      "investigations": {
+        "calcitonin": {
+          "indicated": false,
+          "label": "Serum calcitonin",
+          "note": "Not indicated here: no diarrhoea, no family tumours, no medullary features. It is reserved for suspected medullary disease.",
+          "result": "Not sent."
+        },
+        "fnac": {
+          "indicated": true,
+          "label": "Ultrasound guided FNAC of dominant nodule",
+          "note": "The key test: benign cytology moves her to surveillance, while suspicious cytology would move her to the surgical team.",
+          "result": "Benign colloid nodule with cystic change. No malignant cells. Standardised category consistent with benign disease."
+        },
+        "scan": {
+          "indicated": false,
+          "label": "Radionuclide thyroid scan",
+          "note": "Not indicated: her TSH is normal, and scanning every enlarged gland adds nothing. Scanning is reserved for suppressed TSH or suspected retrosternal tissue.",
+          "result": "Not done."
+        },
+        "tsh": {
+          "indicated": true,
+          "label": "Serum TSH with free T4",
+          "note": "The first test in every nodule: normal function here means no scan and no cooling treatment, only structural workup.",
+          "result": "TSH normal. Free T4 within normal limits. Clinically and biochemically euthyroid."
+        },
+        "usg": {
+          "indicated": true,
+          "label": "Neck ultrasound",
+          "note": "Mapping aims the needle at the right nodule and records nodes. No suspicious nodes here, which supports the benign course.",
+          "result": "Both lobes enlarged with multiple nodules, largest on the right. No marked hypoechogenicity, no microcalcifications, no irregular margins. No suspicious cervical nodes."
+        },
+        "xray_neck": {
+          "indicated": true,
+          "label": "Neck X-ray for trachea",
+          "note": "Ordered because the gland is large: a central trachea without narrowing supports safe surveillance.",
+          "result": "Trachea central, no deviation or narrowing. No retrosternal shadow."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "surveillance",
+          "follow-up",
+          "ultrasound",
+          "iodised",
+          "iodized salt",
+          "referral",
+          "surgery if",
+          "counselling",
+          "return"
+        ],
+        "answer": "Clinical and ultrasound surveillance with repeat function tests, household iodised salt counselling, explicit return thresholds for growth, hoarseness, pressure symptoms or nodes, and surgical referral if cytology, function or compression change.",
+        "minMatch": 3
+      },
+      "opening": "Meena Devi, 44, has come to the surgery outpatient clinic with her daughter. A bosselated swelling fills the front of her lower neck. Introduce yourself and take a history.",
+      "patient": {
+        "age": 44,
+        "name": "Meena Devi",
+        "occupation": "Homemaker, hill farming household",
+        "residence": "Rural hill village, Tehri Garhwal, lives with husband and two children",
+        "sex": "female"
+      },
+      "teachingPoints": [
+        "The tempo does the first half of the diagnosis: six years of painless slow growth with preserved movement on swallowing is the classic benign multinodular course.",
+        "Endemic context matters: lifelong residence in a sub Himalayan village with affected relatives and non iodised loose salt explains a simple multinodular goitre far better than a tumour.",
+        "Movement on swallowing marks the swelling as thyroid, while absent tongue-protrusion movement excludes a thyroglossal cyst without any test.",
+        "Fingers getting below the lower poles with a central trachea excludes retrosternal extension at the bedside, which is why the X-ray only confirmed rather than discovered it.",
+        "TSH first, then mapping, then sampling: normal function meant no scan and no antithyroid treatment, and benign cytology means surveillance with thresholds, not surgery.",
+        "A solitary-feeling dominant nodule in a multinodular gland is common: about half of solitary presenters actually carry several nodules, so the whole gland is mapped, not just the lump."
+      ],
+      "title": "A hill woman with six years of neck swelling"
+    }
+  ]
+}

@@ -1,0 +1,1133 @@
+{
+  "cases": [
+    {
+      "differentialModel": {
+        "accept": [
+          "nephrotic",
+          "glomerulonephritis",
+          "nephritic",
+          "liver",
+          "cardiac",
+          "malnutrition"
+        ],
+        "answer": "Childhood nephrotic syndrome, first episode, no atypical features. Consider acute glomerulonephritis with a nephritic picture, and protein energy malnutrition with liver disease as the non-renal mimics.",
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "accept": [
+          "nephrotic syndrome",
+          "nephrotic",
+          "steroid-sensitive",
+          "minimal change"
+        ],
+        "answer": "Nephrotic syndrome, first episode, with heavy proteinuria, hypoalbuminaemia and hyperlipidaemia, normal blood pressure and no haematuria.",
+        "minMatch": 1
+      },
+      "essentialInvestigations": [
+        "urine",
+        "upcr",
+        "albumin",
+        "lipids",
+        "renal",
+        "fbc"
+      ],
+      "exam": {
+        "skill.exam.paed.cvs.pulses_bp": {
+          "abnormal": false,
+          "finding": "Blood pressure 94/58, normal for age and height on repeat measurement with a paediatric cuff. Femoral pulses felt, no radiofemoral delay."
+        },
+        "skill.exam.paed.gi.ascites": {
+          "abnormal": true,
+          "finding": "Flanks full with shifting dullness on turning to the side. Mild fluid thrill. No tenderness, no guarding."
+        },
+        "skill.exam.paed.gi.inspection": {
+          "abnormal": true,
+          "finding": "Belly uniformly swollen with shiny skin and an everted umbilicus. Scrotal swelling present, skin intact, testes palpable. No dilated veins, no jaundice."
+        },
+        "skill.exam.paed.gi.palpation_percussion": {
+          "abnormal": true,
+          "finding": "Belly soft, liver edge felt two fingers below the costal margin, pushed down and non-tender. Spleen not felt. Kidneys not ballotable. No lump."
+        },
+        "skill.exam.paed.weight": {
+          "abnormal": true,
+          "finding": "Weight 18 kg today against a recorded 16 kg a month ago at the anganwadi. Height 102 cm. Weight gain with a poor appetite means retained fluid."
+        },
+        "skill.gen.paed.appearance": {
+          "abnormal": true,
+          "finding": "Alert and playful 4-year-old with marked puffiness of the face and eyelids, pitting swelling of the feet and legs, and a swollen belly. No distress, no pallor of note, no breathlessness at rest."
+        },
+        "skill.gen.paed.edema": {
+          "abnormal": true,
+          "finding": "Soft pitting oedema over the eyelids, shins and feet. A pit held for five seconds over the shin stays visible. Worst around the eyes in the morning by the mother's account."
+        },
+        "skill.gen.paed.pallor": {
+          "abnormal": false,
+          "finding": "No severe pallor of the conjunctiva, tongue or palms."
+        },
+        "skill.gen.paed.vitals": {
+          "abnormal": false,
+          "finding": "Temperature 37.1 C. Heart rate 108 regular. Respiratory rate 24. SpO2 98 percent on room air. Blood pressure normal as above."
+        }
+      },
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "history": {
+        "appetite_weight": {
+          "cues": [
+            "appetite",
+            "eating",
+            "weight gain",
+            "clothes tight",
+            "heavier"
+          ],
+          "key": true,
+          "reply": "He eats less than before, yet his clothes have gone tight and he feels heavier when I lift him. The anganwadi weighing showed a clear gain."
+        },
+        "belly_pain": {
+          "cues": [
+            "belly pain",
+            "abdominal pain",
+            "stomach pain",
+            "tender belly",
+            "crying holding belly"
+          ],
+          "key": true,
+          "reply": "No belly pain and no fever. He plays as usual, only slower because of the swelling."
+        },
+        "breathlessness": {
+          "cues": [
+            "breathless",
+            "breathing difficulty",
+            "short of breath",
+            "cough",
+            "chest"
+          ],
+          "key": true,
+          "reply": "No breathlessness and no cough. He runs a little and then sits, but his breathing stays easy."
+        },
+        "comorbidity": {
+          "cues": [
+            "other illness",
+            "past illness",
+            "diabetes",
+            "kidney before",
+            "admitted before",
+            "hospital before"
+          ],
+          "key": true,
+          "reply": "No past admissions and no long illness. He had the usual colds, nothing with swelling before this."
+        },
+        "drugs": {
+          "cues": [
+            "medicine",
+            "medication",
+            "drugs",
+            "steroids",
+            "diuretic",
+            "given anything",
+            "treatment taken"
+          ],
+          "key": true,
+          "reply": "No medicines except a fever syrup once. Nobody has given steroids or water tablets.",
+          "skillId": "skill.history.nephrotic.background"
+        },
+        "family": {
+          "cues": [
+            "family",
+            "kidney in family",
+            "anyone else swollen",
+            "consanguinity",
+            "related marriage",
+            "deafness"
+          ],
+          "key": true,
+          "reply": "No kidney trouble in the family. My husband and I are not related by blood, and there is no deafness at home.",
+          "skillId": "skill.hx.paed.family_pedigree"
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "temperature",
+            "hot body",
+            "shivering"
+          ],
+          "key": true,
+          "reply": "No fever through this illness. Two weeks before the puffiness he had a running nose and mild fever for three days, which settled on its own."
+        },
+        "immunisation": {
+          "cues": [
+            "vaccine",
+            "vaccination",
+            "immunised",
+            "injections",
+            "pneumonia vaccine"
+          ],
+          "key": true,
+          "reply": "He had all the government injections up to his age, sister. I do not think he had any special pneumonia injection.",
+          "skillId": "skill.hx.paed.immunisation"
+        },
+        "oedema_course": {
+          "cues": [
+            "when did the swelling start",
+            "how did it spread",
+            "swelling increase",
+            "first noticed",
+            "progress"
+          ],
+          "key": true,
+          "reply": "The eyes first, three weeks ago. Then the feet by evening, and now the whole body including the belly. Mornings the face is worst, evenings the feet."
+        },
+        "oedema_pitting": {
+          "cues": [
+            "pit on pressure",
+            "press and pit",
+            "dent stays",
+            "pitting",
+            "soft or hard swelling"
+          ],
+          "key": true,
+          "reply": "It is soft. When I press his leg with my thumb the dent stays for a while."
+        },
+        "past_episodes": {
+          "cues": [
+            "swelling before",
+            "similar episode",
+            "earlier puffiness",
+            "relapse",
+            "happened before"
+          ],
+          "key": true,
+          "reply": "Never before. This is the first time his face has swollen like this.",
+          "skillId": "skill.history.nephrotic.background"
+        },
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "key": true,
+          "reply": "Doctor, my son Aarav's face has been puffy for three weeks, and now his feet and belly are swollen too. His urine looks frothy.",
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "salt_diet": {
+          "cues": [
+            "diet",
+            "salt",
+            "food",
+            "eating what",
+            "papad",
+            "pickle",
+            "protein"
+          ],
+          "key": true,
+          "reply": "He eats roti, dal, rice and vegetables with us. He likes papad and pickle with food. Milk once a day.",
+          "skillId": "skill.hx.paed.diet_calorie_protein"
+        },
+        "sore_throat_skin": {
+          "cues": [
+            "sore throat",
+            "throat pain",
+            "skin sores",
+            "boils",
+            "cola urine",
+            "dark urine",
+            "blood in urine",
+            "red urine"
+          ],
+          "key": true,
+          "reply": "No sore throat, no skin boils, and the urine is pale and frothy, never dark or red."
+        },
+        "trigger": {
+          "cues": [
+            "cold before",
+            "preceding illness",
+            "what started it",
+            "after fever",
+            "trigger"
+          ],
+          "key": true,
+          "reply": "Only that running nose two weeks before the puffiness. No new food, no new medicine, no insect bite."
+        },
+        "urine": {
+          "cues": [
+            "urine",
+            "frothy",
+            "foam",
+            "how much urine",
+            "passing less",
+            "bedwetting",
+            "burning"
+          ],
+          "key": true,
+          "reply": "The urine froths like soap water and he passes less than before, though he goes without burning. No bedwetting.",
+          "skillId": "skill.history.nephrotic.illness"
+        }
+      },
+      "id": "case.nephrotic.aarav",
+      "initialVitals": {
+        "bpDiastolic": 58,
+        "bpSystolic": 94,
+        "gcs": 15,
+        "hr": 108,
+        "rr": 24,
+        "spo2": 98,
+        "temp": 37.1
+      },
+      "investigations": {
+        "albumin": {
+          "indicated": true,
+          "label": "Serum albumin and total protein",
+          "note": "Low albumin with heavy proteinuria completes the core pattern.",
+          "result": "Albumin markedly low, total protein low."
+        },
+        "complement": {
+          "indicated": false,
+          "label": "Complement levels and autoimmune serology",
+          "note": "Not indicated first line here: no haematuria, normal pressure and preserved function. Reserved for nephritic or atypical features.",
+          "result": "Not sent."
+        },
+        "fbc": {
+          "indicated": true,
+          "label": "Full blood count",
+          "note": "Baseline before steroids, and anaemia would need its own explanation.",
+          "result": "Haemoglobin normal for age. Counts unremarkable."
+        },
+        "lipids": {
+          "indicated": true,
+          "label": "Fasting lipid profile",
+          "note": "Raised fats complete the four findings and need no biopsy to interpret.",
+          "result": "Cholesterol and triglycerides raised."
+        },
+        "renal": {
+          "indicated": true,
+          "label": "Renal function and electrolytes",
+          "note": "Preserved function keeps this case in the typical group.",
+          "result": "Creatinine and electrolytes within normal limits. No haematuria on microscopy."
+        },
+        "upcr": {
+          "indicated": true,
+          "label": "Spot urine protein to creatinine ratio",
+          "note": "Quantifying the leak is what lets you judge response later.",
+          "result": "Raised in the nephrotic range, matching the dipstick protein.",
+          "sentBefore": "urine"
+        },
+        "urine": {
+          "indicated": true,
+          "label": "Urine routine and microscopy",
+          "note": "The single test that must never be skipped in a swollen child.",
+          "result": "Protein strongly positive on dipstick. No red cells seen. No pus cells."
+        }
+      },
+      "managementModel": {
+        "accept": [
+          "steroid",
+          "corticosteroid",
+          "salt",
+          "dipstick",
+          "vaccine",
+          "pneumococcal",
+          "refer",
+          "nephrology",
+          "diuretic",
+          "albumin",
+          "monitor",
+          "relapse"
+        ],
+        "answer": "Confirm the workup, start an empirical oral corticosteroid course per guideline with family counselling on relapse, advise salt restriction with judicious diuretics only, review pneumococcal and scheduled vaccines, teach home dipstick and daily weights, and watch for infection and thrombosis.",
+        "minMatch": 3
+      },
+      "opening": "Sunita brings her 4-year-old son Aarav to the paediatric OPD of the district hospital. His face is puffy, his shoes no longer fit, and his belly looks swollen. Introduce yourself to the mother and take a history.",
+      "patient": {
+        "age": 4,
+        "name": "Aarav Pawar",
+        "occupation": "Anganwadi-going child",
+        "residence": "Semi-urban town, lives with parents and grandmother",
+        "sex": "male"
+      },
+      "teachingPoints": [
+        "The sequence tells the diagnosis: periorbital puffiness on waking spreading to dependent parts over weeks, with frothy urine, is nephrotic until proven otherwise.",
+        "Normal pressure with no haematuria keeps this case typical and steroid-first. Either finding in the opposite direction would reframe it as nephritic or atypical.",
+        "The urine test is the hinge of the whole case. Swelling without proteinuria is a different disease list.",
+        "Weight gain with poor appetite means fluid, and serial weights with dipsticks become the family's monitoring tools.",
+        "Fever with belly pain or a painful swollen limb after this visit would mean infection of the fluid or a clot, not a routine relapse.",
+        "Missing pneumococcal vaccine in a nephrotic child is a prevention gap to close at the first visit, not during a febrile crisis."
+      ],
+      "title": "A puffy face that spread to the belly",
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "chapters": [
+    {
+      "blurb": "Four linked findings, and why children usually respond to steroids",
+      "id": "basics",
+      "skills": [
+        "skill.reasoning.nephrotic.basics"
+      ],
+      "title": "Basics"
+    },
+    {
+      "blurb": "The child, the parent, and permission before a single question",
+      "id": "approach",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.paed.rapport",
+        "skill.approach.paed.consent_assent"
+      ],
+      "title": "Approach to the child"
+    },
+    {
+      "blurb": "Preschool age sets the probability before a symptom is mentioned",
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In a puffy child, age carries unusual weight: disease that starts in the preschool years is most often the steroid-sensitive form, while onset in infancy or in adolescence should make you pause and look for an atypical cause. Record who gives the history, usually the mother, and how reliable it is."
+        }
+      },
+      "id": "particulars",
+      "skills": [
+        "skill.particulars.demographics",
+        "skill.history.nephrotic.particulars"
+      ],
+      "title": "Patient particulars"
+    },
+    {
+      "blurb": "Puffiness first noticed around the eyes in the morning",
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect the complaint in the parent's words: puffiness of the face on waking, then swelling of the feet and belly over days to weeks. Frothy urine and passing less urine than usual are the associated complaints to draw out, since parents rarely volunteer them."
+        },
+        "skill.hx.paed.presenting_complaint": {
+          "expect": "Fix the sequence day by day: where the swelling was first noticed, how it spread, whether it pits on pressure, and what came with it, such as frothy urine, reduced urine volume, recent sore throat or skin sores, breathlessness, or belly pain."
+        }
+      },
+      "id": "history",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.paed.presenting_complaint",
+        "skill.history.nephrotic.illness"
+      ],
+      "title": "History of presenting illness"
+    },
+    {
+      "blurb": "Infections, immunisation, diet, drugs and the family kidney story",
+      "id": "past_personal_drug_family",
+      "skills": [
+        "skill.hx.paed.immunisation",
+        "skill.hx.paed.diet_calorie_protein",
+        "skill.hx.paed.family_pedigree",
+        "skill.history.nephrotic.background"
+      ],
+      "title": "Past, personal, drug and family history"
+    },
+    {
+      "blurb": "A well child with swelling, and the pressure that must not be missed",
+      "emphasis": {
+        "skill.gen.paed.appearance": {
+          "expect": "Expect a child who looks well apart from the swelling: alert, playful, without the wasting or distress of chronic disease. A sick, irritable child with swelling points instead towards infection, a nephritic illness, or a complication that needs urgent attention."
+        },
+        "skill.gen.paed.vitals": {
+          "expect": "Blood pressure is the vital sign that changes the category here. Most children with uncomplicated nephrotic syndrome are normotensive, so a raised pressure pushes you towards a nephritic process or an atypical cause, and it must be measured with a cuff of the right size."
+        },
+        "skill.gen.paed.edema": {
+          "expect": "Expect soft pitting oedema that starts around the eyes and is worst in the morning, then settles to the feet and legs by evening, eventually becoming generalised with a swollen belly. Press over the shin or behind the inner ankle for a full five seconds and watch for the pit."
+        }
+      },
+      "id": "general_exam",
+      "skills": [
+        "skill.gen.paed.appearance",
+        "skill.gen.paed.vitals",
+        "skill.gen.paed.edema",
+        "skill.exam.paed.weight"
+      ],
+      "title": "General examination"
+    },
+    {
+      "blurb": "The belly holds the signs: fluid, a liver edge, and full loins",
+      "emphasis": {
+        "skill.exam.paed.gi.inspection": {
+          "expect": "Expect a uniformly swollen belly with stretched, shiny skin and an everted umbilicus when ascites is present. Scrotal or labial swelling in a boy or girl is common with generalised oedema and distresses parents, so examine and explain it directly."
+        },
+        "skill.exam.paed.gi.ascites": {
+          "expect": "Expect free fluid in the belly in a child with generalised oedema: shifting dullness on turning to the side. A tense, tender belly with fever is a different and urgent finding that suggests infection of the fluid, not just its presence."
+        },
+        "skill.exam.paed.cvs.pulses_bp": {
+          "expect": "Repeat the blood pressure yourself with the correct cuff and plot it for age and height. A normal pressure supports uncomplicated disease; a raised one is one of the atypical features that changes the workup and the need for referral."
+        }
+      },
+      "id": "systemic_exam",
+      "skills": [
+        "skill.exam.paed.gi.inspection",
+        "skill.exam.paed.gi.ascites",
+        "skill.exam.paed.gi.palpation_percussion",
+        "skill.exam.paed.cvs.pulses_bp"
+      ],
+      "title": "Systemic examination"
+    },
+    {
+      "blurb": "Protein leaking away explains every finding you elicited",
+      "id": "disease_findings",
+      "skills": [
+        "skill.reasoning.nephrotic.findings"
+      ],
+      "title": "Putting the nephrotic picture together"
+    },
+    {
+      "blurb": "Three sentences that contain the child",
+      "id": "summary",
+      "skills": [
+        "skill.reasoning.nephrotic.summary"
+      ],
+      "title": "Clinical summary"
+    },
+    {
+      "blurb": "Nephritic disease first, then the rest of the swollen child",
+      "id": "differential",
+      "skills": [
+        "skill.reasoning.nephrotic.differential"
+      ],
+      "title": "Differential diagnosis"
+    },
+    {
+      "blurb": "Prove the protein loss, check the damage, rule out the mimics",
+      "id": "investigations",
+      "skills": [
+        "skill.investigation.nephrotic.workup"
+      ],
+      "title": "Investigations"
+    },
+    {
+      "blurb": "Name it, grade the response pattern, and know when to refer",
+      "id": "diagnosis",
+      "skills": [
+        "skill.reasoning.nephrotic.diagnosis"
+      ],
+      "title": "Diagnosis and response pattern"
+    },
+    {
+      "blurb": "Steroids first, salt sense always, and watch for infection and clots",
+      "id": "treatment",
+      "skills": [
+        "skill.treatment.nephrotic.care"
+      ],
+      "title": "Treatment"
+    },
+    {
+      "blurb": "Present this child to your consultant",
+      "id": "case",
+      "skills": [
+        "skill.present.case",
+        "skill.presentation.nephrotic.case"
+      ],
+      "title": "Case presentation"
+    }
+  ],
+  "estMinutes": 60,
+  "fullName": "Nephrotic syndrome (Steroid-sensitive disease)",
+  "id": "nephrotic-syndrome",
+  "kbRef": "nephrotic_syndrome_paediatric",
+  "name": "Nephrotic syndrome",
+  "oneLine": "Heavy protein loss in the urine, swelling of the body, and a disease that usually yields to steroids",
+  "osce": {
+    "stations": [
+      {
+        "examinerQuestions": [
+          "Show how you test for pitting oedema in this child, and describe what you found.",
+          "His belly is swollen and dull in the flanks. How do you confirm free fluid at the bedside?",
+          "His blood pressure plots above the 95th centile. What does that change in your plan?"
+        ],
+        "id": "osce.nephrotic.oedema_exam",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.paed.rapport",
+          "skill.gen.paed.edema",
+          "skill.exam.paed.weight",
+          "skill.exam.paed.gi.inspection",
+          "skill.exam.paed.gi.ascites",
+          "skill.exam.paed.cvs.pulses_bp"
+        ],
+        "task": "This 4-year-old boy has had puffiness of the face for ten days, now with a swollen belly and feet. Examine him for oedema and its extent, and present your findings.",
+        "title": "Examine the oedematous child"
+      },
+      {
+        "examinerQuestions": [
+          "Take me through the sequence of this swelling from the first morning the mother noticed it.",
+          "What two urine findings would confirm heavy proteinuria, and what blood results do you expect alongside?",
+          "The mother asks whether steroids are needed and whether the swelling will return. What do you tell her?"
+        ],
+        "id": "osce.nephrotic.history_plan",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.paed.consent_assent",
+          "skill.hx.chief_complaints",
+          "skill.hx.paed.presenting_complaint",
+          "skill.history.nephrotic.illness",
+          "skill.history.nephrotic.background"
+        ],
+        "task": "The mother of a 5-year-old girl says her daughter's face looks puffy every morning and the urine looks frothy. Take a focused history in six minutes and be ready to state your plan of investigations.",
+        "title": "Take a history and plan investigations"
+      }
+    ]
+  },
+  "review": {
+    "status": "ai_drafted"
+  },
+  "system": "paediatrics",
+  "version": 1,
+  "viva": {
+    "skills": [
+      "skill.reasoning.nephrotic.basics",
+      "skill.reasoning.nephrotic.findings",
+      "skill.reasoning.nephrotic.differential",
+      "skill.investigation.nephrotic.workup",
+      "skill.reasoning.nephrotic.diagnosis",
+      "skill.treatment.nephrotic.care",
+      "skill.gen.paed.edema",
+      "skill.presentation.nephrotic.case"
+    ]
+  },
+  "skills": {
+    "skill.reasoning.nephrotic.basics": {
+      "body": "Nephrotic syndrome is a pattern of findings caused by heavy leakage of protein through the kidney filters, not a single disease. Four findings travel together: large amounts of protein in the urine, low albumin in the blood, swelling of the body, and raised blood fats.",
+      "id": "skill.reasoning.nephrotic.basics",
+      "keyPoints": [
+        "The four linked findings are heavy proteinuria, hypoalbuminaemia, oedema, and hyperlipidaemia. Each follows from the protein leak, so finding one should prompt a search for the other three.",
+        "In children the cause is most often idiopathic, with no systemic disease behind it. The commonest tissue pattern in young children is minimal change disease, in which the filters look almost normal under the light microscope.",
+        "Swelling is the usual presenting feature. It typically starts around the eyes on waking and becomes generalised with dependent swelling, sometimes with fluid in the belly.",
+        "Most childhood cases respond to corticosteroids, so a trial of steroids is the standard first step in the typical age group, without an initial kidney biopsy.",
+        "A biopsy is reserved for atypical features: onset outside the usual age range, visible blood in the urine, raised blood pressure, impaired kidney function, or failure to respond to steroids.",
+        "Relapses are common. The pattern of response over time classifies the disease as steroid-sensitive, frequently relapsing, steroid-dependent, or steroid-resistant, and each pattern has its own plan."
+      ],
+      "kind": "reasoning",
+      "oneLine": "Four linked findings from a leaky kidney filter, usually steroid-sensitive",
+      "pitfalls": [
+        "Calling any swollen child nephrotic without testing the urine for protein.",
+        "Ordering a biopsy in a typical preschool child before trying steroids.",
+        "Forgetting that the disease is defined by the four findings together, not by swelling alone."
+      ],
+      "probes": [
+        {
+          "a": "Heavy proteinuria, hypoalbuminaemia, oedema, and hyperlipidaemia.",
+          "accept": [
+            "proteinuria",
+            "albumin",
+            "oedema",
+            "lipid"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Name the four findings that define the nephrotic syndrome."
+        },
+        {
+          "a": "Minimal change disease, which is why most preschool children respond to steroids without a biopsy.",
+          "accept": [
+            "minimal change",
+            "steroid",
+            "biopsy"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What is the commonest histology in young children, and what follows from it?"
+        },
+        {
+          "a": "Atypical age, gross haematuria, hypertension, impaired renal function, or steroid resistance.",
+          "accept": [
+            "atypical",
+            "haematuria",
+            "hypertension",
+            "resistan",
+            "renal function"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "When is a renal biopsy indicated rather than an empirical steroid trial?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: definition and classification",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "What nephrotic syndrome is",
+      "why": "The student who holds the four findings and their single shared cause can recognise the syndrome from the doorway, while the student who memorises swelling alone will confuse it with cardiac, liver and nutritional oedema."
+    },
+    "skill.reasoning.nephrotic.findings": {
+      "body": "Lost protein explains the whole bedside picture. Albumin leaking into the urine lowers the protein level in the blood, fluid leaves the vessels for the tissues, and the liver compensates by making extra fats. Every sign you elicited traces back to that leak.",
+      "id": "skill.reasoning.nephrotic.findings",
+      "keyPoints": [
+        "Oedema is soft, pitting and generalised, worst around the eyes in the morning and over the feet and shins by evening. In anasarca the whole body is swollen, including the genitalia, with fluid in the belly and sometimes around the lungs.",
+        "The child usually looks well nourished despite the swelling, with normal pressure and no distress. Wasting, severe pallor or breathlessness at rest argue for another cause or a complication.",
+        "Ascites gives a uniformly distended belly with full flanks, shifting dullness and a fluid thrill when tense. The liver edge may be felt, pushed down by fluid rather than enlarged by disease.",
+        "Blood pressure is typically normal. A raised pressure, visible blood in the urine, or a raised creatinine marks the case as atypical and pushes the workup towards nephritic and secondary causes.",
+        "Daily weight is the truest measure of the oedema. A rising weight with a falling urine output means fluid is accumulating; a brisk fall in weight on treatment means the diuresis has begun.",
+        "Two complications hide behind the swelling. Fever with a tender belly means infection of the fluid until proven otherwise, and a swollen painful limb, chest pain or breathlessness means a clot until proven otherwise."
+      ],
+      "kind": "reasoning",
+      "oneLine": "One leak explains the swelling, the fluid, the fats and the risks",
+      "pitfalls": [
+        "Calling the pushed-down liver edge hepatomegaly and working up liver disease.",
+        "Recording oedema without daily weights, so response to treatment cannot be judged.",
+        "Missing the tender belly with fever or the painful swollen limb while admiring the classic picture."
+      ],
+      "probes": [
+        {
+          "a": "Soft pitting oedema worst around the eyes in the morning, becoming generalised, with ascites in severe cases.",
+          "accept": [
+            "pitting",
+            "periorbital",
+            "morning",
+            "ascites"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Describe the characteristic distribution of nephrotic oedema."
+        },
+        {
+          "a": "No, it is usually normal, and a raised pressure marks the case as atypical and changes the workup.",
+          "accept": [
+            "normal",
+            "atypical",
+            "nephritic"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Is hypertension expected in uncomplicated nephrotic syndrome?"
+        },
+        {
+          "a": "Fever with a tender belly suggests infection of ascitic fluid, and a painful swollen limb suggests thrombosis.",
+          "accept": [
+            "peritonitis",
+            "infection",
+            "thrombosis",
+            "clot"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Which two complications must be excluded in a febrile oedematous child with belly pain?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: pathophysiology",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: clinical features and complications",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "The nephrotic picture",
+      "why": "A single mechanism, protein leaking through injured filters, generates the swelling, the fluid, the blood results and the two dangerous complications, and seeing that unity stops the findings being memorised as a list."
+    },
+    "skill.reasoning.nephrotic.summary": {
+      "body": "State the child with the age clue, the tempo, the syndrome in abstract terms, and the response pattern, in that order.",
+      "id": "skill.reasoning.nephrotic.summary",
+      "keyPoints": [
+        "Name the child with the age clue: a preschool child with a first episode carries a different probability from an infant or an adolescent with relapsing disease.",
+        "State the tempo: swelling that built over days to weeks, with the morning-evening rhythm and the urine findings alongside.",
+        "State the syndrome in abstract terms: generalised pitting oedema with heavy proteinuria, hypoalbuminaemia and hyperlipidaemia, with or without ascites.",
+        "Include the atypical markers or their absence: blood pressure, visible haematuria, and renal function, since these decide biopsy and referral in the same sentence.",
+        "Close with the response pattern where known: first episode, steroid-sensitive, frequently relapsing, steroid-dependent, or steroid-resistant.",
+        "A worked example: A 4-year-old boy presents with three weeks of periorbital puffiness progressing to generalised pitting oedema with ascites and frothy urine. Blood pressure is normal, there is no haematuria, and renal function is preserved. This is nephrotic syndrome, first episode, with no atypical features."
+      ],
+      "kind": "reasoning",
+      "oneLine": "Problem representation for a relapsing swelling illness",
+      "pitfalls": [
+        "Omitting the age clue, so the listener cannot judge the probability of steroid sensitivity.",
+        "Leaving out blood pressure and haematuria, the two negatives doing the most work.",
+        "Ending without the response pattern, which is what the next plan depends on."
+      ],
+      "probes": [
+        {
+          "a": "The response pattern, such as first episode or frequently relapsing, because it directly determines the next plan.",
+          "accept": [
+            "response",
+            "relaps",
+            "steroid"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What element belongs in a nephrotic summary that a pneumonia summary does not need?"
+        },
+        {
+          "a": "Blood pressure and visible haematuria, whose absence keeps the case in the typical steroid-sensitive group.",
+          "accept": [
+            "pressure",
+            "haematuria",
+            "atypical"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "Which two negatives must every nephrotic summary carry, and why?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "age",
+          "text": "States the child with the age clue"
+        },
+        {
+          "id": "tempo",
+          "text": "States the tempo as days to weeks with the diurnal rhythm"
+        },
+        {
+          "id": "atypical",
+          "text": "Includes blood pressure, haematuria and renal function or their absence"
+        },
+        {
+          "id": "pattern",
+          "text": "Closes with the response pattern"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: prognosis",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: evaluation and follow-up",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "The clinical summary",
+      "why": "The summary of a relapsing illness must carry the response pattern alongside the syndrome, because the pattern, not the swelling, decides whether this child needs steroids alone or referral."
+    },
+    "skill.investigation.nephrotic.workup": {
+      "body": "Group investigations by what they answer: prove the protein loss, show its consequences, check kidney function, and exclude the mimics that need a different plan.",
+      "id": "skill.investigation.nephrotic.workup",
+      "keyPoints": [
+        "PROVE THE LEAK: urine routine and microscopy for protein and red cells, with quantification of proteinuria by a spot urine protein to creatinine ratio or a timed collection, plus home dipstick testing that later becomes the relapse monitor.",
+        "SHOW THE CONSEQUENCES: serum albumin and total protein, which fall, and a lipid profile, which rises. These complete the four findings and need no biopsy to interpret.",
+        "CHECK KIDNEY FUNCTION: renal function and electrolytes, and a full blood count. Function is usually preserved in uncomplicated disease, and a raised creatinine marks the case as atypical.",
+        "EXCLUDE THE MIMICS: complement levels and autoimmune serology when there is haematuria, hypertension or impaired function, pointing towards nephritic and lupus disease.",
+        "RESERVE THE INVASIVE TEST: renal biopsy for atypical features or steroid resistance, arranged through paediatric nephrology, not as a first step in a typical preschool child.",
+        "Track response with daily weight, urine output, dipstick protein, blood pressure and growth. These five bedside measures matter more than repeated blood tests once treatment starts."
+      ],
+      "kind": "investigation",
+      "oneLine": "Prove the leak, show its cost, exclude the mimics",
+      "pitfalls": [
+        "Starting steroids without a baseline urine protein quantification, so response can never be measured.",
+        "Biopsying a typical preschool child before a steroid trial.",
+        "Repeating blood tests while ignoring daily weight, dipstick and blood pressure, the measures that actually steer care."
+      ],
+      "probes": [
+        {
+          "a": "Urine protein quantification with a protein to creatinine ratio or timed collection, alongside dipstick testing.",
+          "accept": [
+            "protein",
+            "creatinine",
+            "ratio",
+            "dipstick"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What urine test quantifies the protein leak?"
+        },
+        {
+          "a": "Low albumin and total protein with raised lipids, completing the nephrotic pattern.",
+          "accept": [
+            "albumin",
+            "lipid",
+            "cholesterol"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "What blood results do you expect alongside heavy proteinuria?"
+        },
+        {
+          "a": "Haematuria with hypertension or impaired function, prompting complement and autoimmune serology and referral for biopsy.",
+          "accept": [
+            "haematuria",
+            "complement",
+            "biopsy",
+            "nephritic"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "When do you extend the workup beyond albumin, lipids and renal function?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: laboratory evaluation",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Confirming and grading the illness",
+      "why": "Investigations here have four separate jobs, and knowing which test does which stops the student biopsying a typical child or missing the complement result that reframes the case."
+    },
+    "skill.reasoning.nephrotic.diagnosis": {
+      "body": "The diagnosis is made on the four findings with normal pressure and preserved function, and it is completed by the response pattern over time. Typical disease needs no biopsy; atypical disease needs referral.",
+      "id": "skill.reasoning.nephrotic.diagnosis",
+      "keyPoints": [
+        "Diagnose nephrotic syndrome when heavy proteinuria, hypoalbuminaemia, oedema and hyperlipidaemia travel together in a child with normal blood pressure and no gross haematuria.",
+        "Mark the case as atypical when any of these appear: onset in infancy or adolescence, visible blood in the urine, raised blood pressure, impaired renal function, or low complement. Atypical cases need paediatric nephrology review and usually a biopsy.",
+        "Classify by response once steroids are given: steroid-sensitive disease remits on steroids; frequently relapsing disease returns repeatedly; steroid-dependent disease returns as steroids are tapered; steroid-resistant disease never remits and needs biopsy.",
+        "A complete diagnostic statement names the syndrome, the episode, the atypical markers or their absence, and the response pattern: nephrotic syndrome, first episode, no atypical features.",
+        "Steroid-sensitive minimal change disease carries a good long-term kidney outlook despite repeated relapses. Steroid resistance, often from focal segmental glomerulosclerosis, carries a higher risk of progression to chronic kidney disease."
+      ],
+      "kind": "reasoning",
+      "oneLine": "Four findings name it, atypical markers grade it, response classifies it",
+      "pitfalls": [
+        "Calling the diagnosis from swelling and albumin alone without quantifying proteinuria.",
+        "Labelling steroid resistance before an adequate steroid course has been given and supervised.",
+        "Giving every relapse the same label instead of tracking the pattern that decides steroid-sparing treatment."
+      ],
+      "probes": [
+        {
+          "a": "Heavy proteinuria with hypoalbuminaemia, oedema and hyperlipidaemia, with normal pressure and no gross haematuria.",
+          "accept": [
+            "proteinuria",
+            "albumin",
+            "oedema",
+            "hyperlipidaemia"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "What combination of findings makes the diagnosis of nephrotic syndrome?"
+        },
+        {
+          "a": "Infantile or adolescent onset, haematuria, hypertension, impaired function, or low complement, needing nephrology referral and usually biopsy.",
+          "accept": [
+            "atypical",
+            "hypertension",
+            "haematuria",
+            "biopsy"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Name three atypical features and what they trigger."
+        },
+        {
+          "a": "Frequently relapsing, steroid-dependent, or steroid-resistant disease, each with its own plan including steroid-sparing agents and biopsy.",
+          "accept": [
+            "relapsing",
+            "dependent",
+            "resistant",
+            "pattern"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "How is the disease classified by its response to steroids?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "tetrad",
+          "text": "States the four findings that make the diagnosis"
+        },
+        {
+          "id": "atypical",
+          "text": "Checks and states the atypical markers"
+        },
+        {
+          "id": "pattern",
+          "text": "Classifies by steroid response pattern"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: prognosis",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: diagnosis and classification",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Diagnosis and response pattern",
+      "why": "The name alone does not say whether this child goes home on steroids or to a nephrology centre for biopsy, and the response pattern is the classifier that decides it."
+    },
+    "skill.reasoning.nephrotic.differential": {
+      "body": "For a swollen child with protein in the urine, exclude nephritic disease first, then inherited and secondary kidney causes, then non-renal oedema.",
+      "id": "skill.reasoning.nephrotic.differential",
+      "keyPoints": [
+        "Acute glomerulonephritis with a nephritic picture: favoured by cola-coloured urine, raised blood pressure, and impaired renal function after a sore throat or skin sores. This is the first mimic to exclude, because its management differs completely.",
+        "Focal segmental glomerulosclerosis: favoured by steroid resistance, older age at onset, and persistent heavy proteinuria. It is the usual explanation when steroids fail, and it needs biopsy and nephrology care.",
+        "Membranous nephropathy: uncommon in children, considered in adolescents and in secondary settings rather than in a typical preschool child.",
+        "Henoch Schonlein purpura nephritis: favoured by a purpuric rash over the buttocks and legs with joint and belly pain alongside the urine findings.",
+        "Lupus nephritis: favoured by fever, rash, joint pains and positive autoimmune serology, particularly in an older girl.",
+        "Congenital nephrotic syndrome: presents in the first year of life, often with a family history and consanguinity, and needs referral rather than repeated steroid courses.",
+        "Non-renal oedema: cardiac, liver and nutritional causes. Favoured by breathlessness with a gallop, jaundice with a firm liver, or wasting with classic skin and hair changes, each with little or no proteinuria."
+      ],
+      "kind": "reasoning",
+      "oneLine": "Nephritic first, inherited and secondary next, non-renal last",
+      "pitfalls": [
+        "Treating a nephritic child with an empirical steroid course meant for nephrotic disease.",
+        "Repeating steroids for resistant disease without considering focal segmental glomerulosclerosis and biopsy.",
+        "Forgetting nutritional and liver oedema in a wasted child, where proteinuria is absent."
+      ],
+      "probes": [
+        {
+          "a": "Acute glomerulonephritis, focal segmental glomerulosclerosis, Henoch Schonlein purpura nephritis, lupus nephritis, congenital nephrotic syndrome, and non-renal oedema.",
+          "accept": [
+            "glomerulonephritis",
+            "glomerulosclerosis",
+            "purpura",
+            "lupus",
+            "congenital"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Name four differentials for a swollen child with proteinuria."
+        },
+        {
+          "a": "Cola-coloured urine with hypertension and impaired function after streptococcal infection, managed as nephritic disease rather than with empirical steroids.",
+          "accept": [
+            "nephritic",
+            "hypertension",
+            "cola",
+            "streptococcal"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "How do you distinguish a nephritic mimic at the bedside?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Spans nephritic, glomerular, systemic and non-renal causes"
+        },
+        {
+          "id": "nephritic",
+          "text": "Explicitly separates nephritic disease first"
+        },
+        {
+          "id": "biopsy",
+          "text": "States when resistant or atypical disease needs biopsy"
+        }
+      ],
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: additionalDifferentials",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: differential diagnosis",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Differential diagnosis",
+      "why": "Most puffy preschool children are exactly what they look like, but the nephritic, inherited and secondary cases hiding among them need entirely different care, and the differential is what catches them."
+    },
+    "skill.treatment.nephrotic.care": {
+      "body": "Treat the protein leak first with steroids, support the child through salt sense and careful fluid handling, and guard throughout against the two great complications: infection and clotting.",
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, doses, schedules and durations must be taken from your current national or institutional guideline, such as the Indian Academy of Pediatrics guidance, and the paediatric nephrologist's prescription at the time of treatment. CliniX does not prescribe.",
+      "id": "skill.treatment.nephrotic.care",
+      "keyPoints": [
+        "First-line definitive therapy is an empirical course of oral corticosteroids, which brings remission in most children with steroid-sensitive minimal change disease. The exact schedule is set by the treating guideline and the nephrologist, not memorised here.",
+        "Manage frequently relapsing or steroid-dependent disease with steroid-sparing agents such as levamisole, a calcineurin inhibitor such as ciclosporin or tacrolimus, mycophenolate mofetil, or rituximab, chosen with paediatric nephrology.",
+        "Control oedema with sensible dietary salt restriction and judicious loop diuretics, avoiding aggressive diuresis that precipitates hypovolaemia and thrombosis. Cautious albumin infusion is reserved for severe symptomatic oedema with circulatory compromise.",
+        "Reduce infection risk through pneumococcal and other scheduled vaccination, and treat fever with belly pain as suspected infection of the ascitic fluid until proven otherwise. Review the immunisation card at the first visit, since nephrotic syndrome places the child in the high-risk vaccine group.",
+        "Mitigate the hypercoagulable state with mobilisation, avoidance of prolonged bed rest and dehydration, and thromboprophylaxis in high-risk children as advised by the treating team.",
+        "Monitor with home urine dipstick testing to catch relapse early, alongside surveillance of blood pressure, weight, growth, urine output, and corticosteroid effects such as appetite change, weight gain and behaviour change.",
+        "Refer for renal biopsy and paediatric nephrology input in atypical or steroid-resistant disease, often focal segmental glomerulosclerosis. In the Indian setting this means timely referral to the district medical college or a paediatric nephrology centre, with shared follow-up closer home.",
+        "Counsel the family from day one: relapses are common and expected, daily weights and dipsticks are their tools, salt sense continues between episodes, and the child should return promptly with fever and belly pain, swelling of one limb, breathlessness, or sharply reduced urine."
+      ],
+      "kind": "treatment",
+      "oneLine": "Steroids for the leak, sense for the salt, vigilance for infection and clots",
+      "pitfalls": [
+        "Prescribing steroid doses and tapers from memory instead of the current guideline and the nephrologist's chart.",
+        "Diuresing aggressively and precipitating hypovolaemia and thrombosis in an intravascularly depleted child.",
+        "Discharging a relapsing child without home dipsticks, a written relapse plan, and vaccine review.",
+        "Missing atypical or resistant disease and repeating steroid courses instead of referring for biopsy."
+      ],
+      "probes": [
+        {
+          "a": "An empirical course of oral corticosteroids, which induces remission in most steroid-sensitive cases.",
+          "accept": [
+            "corticosteroid",
+            "steroid",
+            "first"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What is the first-line definitive therapy for typical childhood nephrotic syndrome?"
+        },
+        {
+          "a": "Levamisole, a calcineurin inhibitor, mycophenolate mofetil or rituximab, with paediatric nephrology.",
+          "accept": [
+            "levamisole",
+            "ciclosporin",
+            "tacrolimus",
+            "mycophenolate",
+            "rituximab"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Name two steroid-sparing options for relapsing disease."
+        },
+        {
+          "a": "Home urine dipstick monitoring with blood pressure, weight, growth and steroid-effect surveillance.",
+          "accept": [
+            "dipstick",
+            "growth",
+            "pressure",
+            "weight"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "How is a child on treatment monitored between visits?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: management",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: management and vaccines in high-risk children",
+          "source": "Indian Academy of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Managing nephrotic syndrome",
+      "why": "The steroid course decides the outcome, but the salt advice, the dipsticks, the vaccines and the vigilance for infection and clots decide whether the child survives the illness unharmed, and each of these is grounded in the knowledge base."
+    }
+  }
+}

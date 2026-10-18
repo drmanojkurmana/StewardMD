@@ -15846,6 +15846,319 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.history.nephrotic.particulars": {
+      "asks": [
+        {
+          "text": "Name, age and sex of the child, and who is giving the history."
+        },
+        {
+          "text": "Reliability of the informant, usually the mother, and who looks after the child by day."
+        },
+        {
+          "text": "Residence, rural or urban, and distance from the nearest hospital."
+        },
+        {
+          "text": "Socioeconomic background and parental occupation, which affect nutrition, overcrowding and follow-up."
+        },
+        {
+          "text": "Immunisation status in brief, to be detailed later, since infection risk runs through this disease."
+        }
+      ],
+      "body": "Particulars in a puffy child do more work than in most paediatric cases, because age alone shifts the likely cause before any symptom is weighed.",
+      "id": "skill.history.nephrotic.particulars",
+      "keyPoints": [
+        "Age is the single most informative particular. Disease beginning in the preschool years is most often the idiopathic, steroid-sensitive form. Onset in the first year of life points towards a congenital or genetic cause, and onset in later childhood or adolescence should prompt a search for secondary or atypical disease.",
+        "Sex and birth order matter less for the diagnosis, but record them exactly, since referral letters and growth charts follow this child for years through repeated relapses.",
+        "Note who brings the child and who noticed the swelling first. The mother usually reports the morning puffiness, and her account of the sequence is the backbone of the history.",
+        "Residence and distance from care decide follow-up planning from the first visit. A family that travels far needs urine dipsticks at home and a clear written plan for relapse, not just a prescription."
+      ],
+      "kind": "history",
+      "oneLine": "Age first, informant next, distance from care last",
+      "pitfalls": [
+        "Writing the age without the informant, so a later reader cannot judge the history.",
+        "Treating particulars as booking clerical work and missing that preschool onset is itself a diagnostic clue."
+      ],
+      "probes": [
+        {
+          "a": "The typical age group for idiopathic steroid-sensitive disease, with onset in infancy or adolescence counting as atypical.",
+          "accept": [
+            "preschool",
+            "age",
+            "typical",
+            "atypical"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What does the age of onset tell you in a child with nephrotic-range swelling?"
+        },
+        {
+          "a": "Who noticed the swelling, who looks after the child, and how far the family lives from the hospital, because relapse care depends on it.",
+          "accept": [
+            "who noticed",
+            "who looks after",
+            "distance",
+            "hospital"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Beyond age and sex, what two particulars change your management plan?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: age distribution and classification",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Particulars of the oedematous child",
+      "why": "Age sets the pre-test probability of steroid-sensitive disease before a single symptom is described, and the informant and distance from care decide how relapse follow-up can realistically be organised."
+    },
+    "skill.history.nephrotic.background": {
+      "asks": [
+        {
+          "text": "Past episodes of similar swelling, and how each episode was treated and how long it lasted."
+        },
+        {
+          "text": "Recent infections: sore throat, skin sores, urinary complaints, tuberculosis contact, and worm infestation."
+        },
+        {
+          "text": "Immunisation history in full, including pneumococcal vaccine, since these children carry extra infection risk."
+        },
+        {
+          "text": "Dietary recall with salt intake, appetite, and any recent weight gain the mother noticed on the same clothes."
+        },
+        {
+          "text": "Drugs the child takes or recently took, including steroids, and any known drug allergy."
+        },
+        {
+          "text": "Family history of kidney disease, swelling, early hearing loss, or consanguinity."
+        }
+      ],
+      "body": "The background history sorts triggers from mimics and prepares the ground for steroids: what set this off, what the immune status is, and what runs in the family.",
+      "id": "skill.history.nephrotic.background",
+      "keyPoints": [
+        "Ask about each past episode of swelling in detail. A first episode is worked up differently from a relapse, and the response to earlier steroids predicts the response now.",
+        "Ask about recent sore throat, skin sores and dark or cola-coloured urine. A nephritic illness after streptococcal infection is the closest mimic, and it announces itself through blood and pressure rather than pure swelling.",
+        "Take the full immunisation history. Children with nephrotic syndrome are prone to pneumococcal infection, and missing vaccines change the prevention plan.",
+        "Record the diet with salt in mind rather than protein alone. Added salt worsens oedema, while overzealous protein restriction harms a growing child, so find out what the child actually eats.",
+        "List every drug, recent or current. Steroids already taken elsewhere, diuretics, and nephrotoxic medicines all alter the picture and the plan.",
+        "Draw out the family kidney story, including consanguinity. Disease in infancy, deafness, or several affected relatives points towards inherited causes that need referral rather than repeated steroid courses."
+      ],
+      "kind": "history",
+      "oneLine": "Triggers, vaccines, salt, drugs and the family kidney story",
+      "pitfalls": [
+        "Skipping the immunisation history and only discovering the missing pneumococcal vaccine during a febrile episode.",
+        "Missing a recent sore throat with dark urine, which reframes the whole case as nephritic.",
+        "Forgetting consanguinity and family deafness, the quiet clues to inherited disease."
+      ],
+      "probes": [
+        {
+          "a": "Whether this is a first episode or a relapse, and how earlier episodes responded to steroids.",
+          "accept": [
+            "relapse",
+            "first",
+            "steroid",
+            "response"
+          ],
+          "level": 1,
+          "minMatch": 1,
+          "q": "What past-history question most changes your plan in a swollen child?"
+        },
+        {
+          "a": "Recent streptococcal sore throat or skin sores with dark urine and raised pressure, favouring a nephritic mimic.",
+          "accept": [
+            "sore throat",
+            "nephritic",
+            "dark",
+            "streptococcal"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Which recent infection history would make you doubt nephrotic syndrome?"
+        },
+        {
+          "a": "Consanguinity, infantile onset, deafness or several affected relatives, suggesting inherited disease needing referral.",
+          "accept": [
+            "consanguinity",
+            "inherited",
+            "deafness",
+            "infancy"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "What family history points away from simple steroid-sensitive disease?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: additionalInvestigations",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: history and risk factors",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Background history in nephrotic syndrome",
+      "why": "Relapse versus first episode, vaccine gaps, salt load and family patterns each change the immediate plan, and none of them can be recovered from the presenting complaint alone."
+    },
+    "skill.history.nephrotic.illness": {
+      "asks": [
+        {
+          "text": "Where the swelling was first noticed, and the exact day-by-day spread from face to legs to belly."
+        },
+        {
+          "text": "Morning versus evening pattern: worse around the eyes on waking, worse in the feet by evening."
+        },
+        {
+          "text": "Urine: frothy appearance, colour, volume passed, and any burning, bedwetting or cola-coloured urine."
+        },
+        {
+          "text": "Weight change: recent gain noticed on the same clothes or scale, and appetite alongside it."
+        },
+        {
+          "text": "Associated features: belly pain, breathlessness, cough, fever, vomiting, loose stools, or reduced play."
+        },
+        {
+          "text": "Trigger in the preceding weeks: fever, cold, sore throat, skin sores, or a recent vaccination."
+        },
+        {
+          "text": "What treatment has already been given: diuretics, steroids, antibiotics, or home remedies."
+        }
+      ],
+      "body": "The history of a nephrotic child is the story of swelling told in order, with the urine as the second witness. Sequence matters more than any single symptom.",
+      "id": "skill.history.nephrotic.illness",
+      "keyPoints": [
+        "Start where the mother started: puffiness around the eyes noticed in the morning. Trace its spread to the feet, legs and belly over days to weeks, since a nephrotic course builds gradually rather than overnight.",
+        "Ask about the morning-evening shift. Oedema that is periorbital on waking and settles to the dependent parts by evening is the classic rhythm, and it helps separate renal swelling from other causes.",
+        "Ask directly about frothy urine and urine volume. Parents report swelling, not urine findings, yet persistent froth and reduced volume are the bedside echoes of heavy protein loss.",
+        "Ask about weight gain on the same scale or the same clothes. A child who eats poorly but gains weight is retaining fluid, and serial weights later become the simplest monitor of response.",
+        "Ask about belly pain with fever, breathlessness, and reduced urine output. These are complication alarms: infection of ascitic fluid, fluid around the lungs, and failing kidney function.",
+        "Ask what triggered this episode. An upper respiratory infection commonly precedes both first presentation and relapse, which is why the history routinely begins with a cold two weeks back.",
+        "Record treatment already taken. Diuretics started elsewhere mask the oedema, and steroids already given change both the urine findings and the urgency of referral."
+      ],
+      "kind": "history",
+      "oneLine": "Swelling in sequence, urine as second witness, triggers and alarms",
+      "pitfalls": [
+        "Accepting generalised swelling without fixing where it began and how it spread.",
+        "Never asking about the urine, so the protein leak goes unmentioned until the laboratory reports it.",
+        "Missing fever with belly pain, the alarm for infection of the ascitic fluid."
+      ],
+      "probes": [
+        {
+          "a": "Periorbital puffiness on waking spreading to dependent parts, with frothy urine and reduced volume.",
+          "accept": [
+            "periorbital",
+            "morning",
+            "frothy",
+            "spread"
+          ],
+          "level": 1,
+          "minMatch": 2,
+          "q": "Describe the typical opening story of childhood nephrotic syndrome."
+        },
+        {
+          "a": "Infection of the ascitic fluid, pleural effusion, or deteriorating renal function needing urgent review.",
+          "accept": [
+            "peritonitis",
+            "infection",
+            "effusion",
+            "renal"
+          ],
+          "level": 2,
+          "minMatch": 1,
+          "q": "Fever with belly pain in an oedematous child suggests what?"
+        },
+        {
+          "a": "An upper respiratory infection in the preceding weeks commonly precedes first presentation and relapse.",
+          "accept": [
+            "respiratory",
+            "infection",
+            "trigger",
+            "relapse"
+          ],
+          "level": 3,
+          "minMatch": 1,
+          "q": "What trigger commonly precedes the swelling?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: clinical presentation",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "History of the nephrotic illness",
+      "why": "The sequence of swelling plus the urine story separates nephrotic from nephritic and nutritional oedema at the bedside, days before the laboratory confirms it."
+    },
+    "skill.presentation.nephrotic.case": {
+      "body": "Present in a fixed order and keep it to about two minutes for a focused case. The listener should be able to reach nephrotic syndrome before you say it.",
+      "id": "skill.presentation.nephrotic.case",
+      "keyPoints": [
+        "Open with the problem representation: a preschool child, swelling built over weeks with a morning-evening rhythm, and the urine findings. One or two sentences.",
+        "Give the relevant positives in order: periorbital onset, spread, froth, weight gain, ascites, then the relevant negatives: no haematuria, normal pressure, preserved function.",
+        "State the response pattern and episode number, since a first episode and a fourth relapse are presented differently.",
+        "Close with the plan: urine quantification done, steroids proposed with counselling on relapse, salt advice, vaccines reviewed, and home dipstick monitoring explained.",
+        "A worked example: This 4-year-old boy, first episode, has generalised pitting oedema with ascites that built over three weeks, with frothy urine and a 2 kg weight gain. Pressure is normal, urine shows heavy protein without red cells, and albumin is low. In summary this is childhood nephrotic syndrome with no atypical features, for which I propose confirming the workup and starting oral steroids with relapse counselling."
+      ],
+      "kind": "presentation",
+      "oneLine": "Two minutes, ending with the response pattern and the plan",
+      "pitfalls": [
+        "Presenting in the order the history was collected rather than age, tempo, syndrome, atypical markers, pattern.",
+        "Omitting the episode number and response pattern, leaving the plan hanging.",
+        "Forgetting the home dipstick and vaccine plan, which is what the family actually takes home."
+      ],
+      "probes": [
+        {
+          "a": "Age clue, tempo with diurnal rhythm, syndrome in abstract terms, atypical markers or their absence, and the response pattern.",
+          "accept": [
+            "age",
+            "tempo",
+            "syndrome",
+            "pattern"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What five elements does a nephrotic case presentation carry in order?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "nephrotic_syndrome_paediatric: prognosis",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Nephrotic syndrome: evaluation and follow-up",
+          "source": "Nelson Textbook of Pediatrics"
+        }
+      ],
+      "system": "paediatrics",
+      "title": "Presenting the nephrotic child",
+      "why": "The consultant judges the case on structure as much as content, and a presentation that ends with the response pattern and a home plan shows the student is managing a relapsing illness, not just describing swelling."
     }
   }
 }

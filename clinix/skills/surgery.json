@@ -32181,6 +32181,294 @@
           }
         }
       ]
+    },
+    "skill.history.thyroid.particulars": {
+      "asks": [
+        {
+          "text": "How old are you, and did this swelling first appear near puberty, a pregnancy, or the menopause?"
+        },
+        {
+          "text": "Where have you lived all your life, and is your home district known for neck swellings in the community?"
+        },
+        {
+          "text": "Has anyone in your family had a swelling in the neck, a thyroid operation, or thyroid medicines?"
+        }
+      ],
+      "id": "skill.history.thyroid.particulars",
+      "kind": "history",
+      "oneLine": "Age, sex and home district set the prior probability of each thyroid disease",
+      "probes": [
+        {
+          "a": "Girls approaching puberty in iodine-poor districts present with diffuse simple goitre; nodular goitres present in women in their twenties and thirties; papillary carcinoma affects the young, follicular carcinoma mid life, and anaplastic carcinoma the elderly.",
+          "accept": [
+            "puberty",
+            "nodular",
+            "papillary",
+            "follicular",
+            "anaplastic",
+            "age"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "How does the expected thyroid diagnosis shift with the age of the patient?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: age and sex distribution",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Age and sex set the prior probability",
+          "body": "Most thyroid disorders favour women. Simple goitres of adolescence appear in girls near puberty, especially where iodine is scarce or need rises. Nodular and colloid goitres present in women in their twenties and thirties.\n\nCancer respects age bands rather than old age alone. Papillary carcinoma appears in young girls, follicular carcinoma in middle-aged women, and anaplastic carcinoma in the elderly. Primary toxicity affects the young, while Hashimoto disease affects middle-aged women."
+        },
+        {
+          "heading": "Place matters: the goitre belts",
+          "body": "Apart from endemic iodine-deficiency goitre, thyroid disease has little geography. But districts with iodine-poor soil and water, near rocky ranges such as the Himalayas, the Vindhyas and the Satpudas, carry whole communities with simple goitre.\n\nAsk where the patient was born and brought up, not just where she lives now. In an endemic belt, several members of one family are often affected, and that clustering points toward iodine lack or an inherited enzyme defect rather than a solitary tumour."
+        }
+      ],
+      "title": "Particulars in a thyroid swelling",
+      "why": "A thyroid swelling is one of the few surgical lumps where age, sex and home district narrow the diagnosis before the lump is touched. Puberty plus a goitre belt means something quite different from rapid growth in an elderly man."
+    },
+    "skill.history.thyroid.risk": {
+      "asks": [
+        {
+          "text": "Did you receive radiation treatment to the neck or head as a child?"
+        },
+        {
+          "text": "Has anyone in your family had thyroid cancer, or tumours of other glands?"
+        },
+        {
+          "text": "What treatment have you taken for this swelling so far, and did it shrink, stay the same, or keep growing?"
+        },
+        {
+          "text": "Do you regularly eat cabbage, kale, turnip or soy, and is your household salt iodised?"
+        }
+      ],
+      "id": "skill.history.thyroid.risk",
+      "kind": "history",
+      "oneLine": "Iodine, goitrogens, drugs, radiation and family history behind the swelling",
+      "probes": [
+        {
+          "a": "Childhood neck irradiation and a family history of thyroid cancer raise the suspicion of malignancy and lower the threshold for sampling the nodule.",
+          "accept": [
+            "irradiation",
+            "radiation",
+            "family",
+            "malignancy",
+            "sampling"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Which two background facts raise the suspicion of cancer in a thyroid nodule?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: aetiology of simple goitre",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Four background questions that change the workup",
+          "points": [
+            "Neck irradiation in childhood and a family history of thyroid cancer raise the suspicion of malignancy in any nodule.",
+            "Long residence in an iodine-poor district, or a diet heavy in brassica vegetables such as cabbage and kale, explains a diffuse simple goitre.",
+            "Goitrogenic medicines, including antithyroid drugs and iodine-containing preparations, can enlarge the gland and must be asked about by name.",
+            "A previous bursting or incised infected cyst in the midline of the neck points to a thyroglossal fistula rather than a thyroid nodule at all."
+          ]
+        },
+        {
+          "heading": "What past treatment tells you",
+          "body": "Ask what treatment the swelling has already had and what followed. A diffuse adolescent goitre that shrank with iodine supports simple hyperplasia. A nodule that kept growing despite treatment, or one that was sampled before, needs its old reports traced, not repeated blindly.\n\nAlso ask about change in voice, breathing or swallowing since any previous neck procedure, since these mark nerve or airway injury that the next plan must respect."
+        }
+      ],
+      "title": "Past, personal, drug and family history in thyroid disease",
+      "why": "The background separates an endemic nutritional goitre from a sporadic tumour, and a previously treated gland from a fresh one. Radiation, family history and goitrogen exposure each push the same lump down a different path."
+    },
+    "skill.history.thyroid.toxic": {
+      "asks": [
+        {
+          "text": "Have you lost weight although your appetite is good, and do you feel too hot when others feel comfortable?"
+        },
+        {
+          "text": "Do your hands shake when you hold a cup, and do you feel your heart racing or missing beats?"
+        },
+        {
+          "text": "Do you have difficulty breathing when you lie flat, trouble swallowing solid food, or a change in your voice?"
+        },
+        {
+          "text": "Have your eyes become staring or protruding, with difficulty closing the lids or double vision?"
+        }
+      ],
+      "id": "skill.history.thyroid.toxic",
+      "kind": "history",
+      "oneLine": "Functional symptoms and pressure effects that grade the swelling",
+      "probes": [
+        {
+          "a": "Primary toxicity brings nervous symptoms such as tremor, excitability, insomnia and heat intolerance with eye signs, while secondary toxicity on a nodular gland brings cardiac symptoms such as palpitation, irregular pulse and breathlessness.",
+          "accept": [
+            "nervous",
+            "tremor",
+            "cardiac",
+            "palpitation",
+            "eye"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "Contrast the symptoms of primary and secondary thyrotoxicosis."
+        },
+        {
+          "a": "Stridor or dyspnoea from tracheal compression, dysphagia from oesophageal pressure, and hoarseness from recurrent laryngeal nerve involvement, which strongly suggests carcinoma.",
+          "accept": [
+            "stridor",
+            "dysphagia",
+            "hoarseness",
+            "nerve",
+            "carcinoma"
+          ],
+          "level": 3,
+          "minMatch": 2,
+          "q": "Name the three pressure effects of a thyroid swelling and state what hoarseness implies."
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: redFlags",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "The thyroid gland: symptoms of thyrotoxicosis",
+          "source": "Bailey and Love's Short Practice of Surgery"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Primary toxicity is a nervous illness, secondary a cardiac one",
+          "table": {
+            "cols": [
+              "Feature",
+              "Primary toxic goitre",
+              "Secondary toxic goitre"
+            ],
+            "rows": [
+              [
+                "Gland before",
+                "Previously healthy gland",
+                "Longstanding nodular goitre"
+              ],
+              [
+                "Typical patient",
+                "Young woman",
+                "Older patient"
+              ],
+              [
+                "Leading symptoms",
+                "Tremor, excitability, insomnia, heat intolerance",
+                "Palpitation, irregular pulse, breathlessness, ankle swelling"
+              ],
+              [
+                "Eye signs",
+                "Staring, protrusion, lid lag often present",
+                "Usually absent"
+              ],
+              [
+                "Weight and appetite",
+                "Loss despite good appetite",
+                "Variable, cardiac failure may dominate"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Hypothyroid symptoms point the other way",
+          "body": "A few questions exclude the opposite state. Gain in weight despite poor appetite, intolerance of cold, dry skin, loss of hair including the outer eyebrows, puffiness of the face, constipation and dullness with failing memory all belong to hypothyroidism.\n\nMild hoarseness from oedema of the vocal cords and lethargy with muscle fatigue complete the picture. These symptoms associate with Hashimoto disease rather than with toxicity."
+        },
+        {
+          "heading": "Three pressure symptoms localise the swelling",
+          "body": "An enlarging gland can press on the trachea to cause dyspnoea and a whistling stridor, worse when the neck bends forward. It can press on the oesophagus, though true dysphagia is uncommon since the muscular tube is easily pushed aside.\n\nHoarseness means the recurrent laryngeal nerve is involved, and an infiltrating carcinoma is the usual cause. Sudden painful enlargement of a long-quiet swelling means bleeding into a nodule, which can threaten the airway."
+        }
+      ],
+      "title": "Functional and pressure symptoms of thyroid disease",
+      "why": "Function decides urgency as much as the lump does. A toxic heart can fail while the swelling looks modest, and hoarseness can be the first sign of an invasive cancer in a gland that still feels small."
+    },
+    "skill.presentation.thyroid.summary": {
+      "id": "skill.presentation.thyroid.summary",
+      "kind": "presentation",
+      "oneLine": "Tempo, function, local findings and risk in three sentences",
+      "probes": [
+        {
+          "a": "The patient with relevant risks, the tempo in years, the syndrome in abstract terms with function and local findings, and the provisional diagnosis with any severity or red flags.",
+          "accept": [
+            "tempo",
+            "function",
+            "syndrome",
+            "diagnosis",
+            "severity"
+          ],
+          "level": 2,
+          "minMatch": 2,
+          "q": "What elements belong in a thyroid case summary?"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "sources": [
+        {
+          "locator": "thyroid_nodule: clinicalPearls",
+          "source": "StewardMD Clinical KB"
+        },
+        {
+          "locator": "Examination of the thyroid gland: case summary",
+          "source": "Browse's Introduction to the Symptoms and Signs of Surgical Disease"
+        }
+      ],
+      "system": "surgery",
+      "teach": [
+        {
+          "heading": "Three sentences that contain the case",
+          "body": "Name the patient with the risks that matter: age, sex, endemic district, radiation or family history. Then state the tempo: years of painless growth separates benign goitre from weeks of rapid change.\n\nThen state the syndrome in abstract terms with function and local findings: a euthyroid multinodular swelling moving on swallowing with no nodes and no pressure effects. End with the provisional diagnosis and what is still missing, such as cytology."
+        },
+        {
+          "heading": "A worked example",
+          "body": "A 44 year old homemaker from a sub Himalayan district presents with six years of slowly enlarging painless anterior neck swelling. Examination shows an asymmetrical bosselated gland moving freely on swallowing, lower poles palpable, trachea central, no nodes, no bruit, clinically euthyroid.\n\nThis is a non-toxic multinodular goitre pending thyroid function, ultrasound mapping and needle sampling of the dominant nodule. No red flags are present, so surveillance with defined referral thresholds is the working plan."
+        },
+        {
+          "heading": "Never omit these",
+          "points": [
+            "The tempo in years, since it is the single most discriminating detail.",
+            "The functional state: toxic, euthyroid or hypothyroid, with the evidence.",
+            "Pressure effects and nodes, stated as present or explicitly absent.",
+            "What would change the plan: cytology result, toxicity, or a new red flag."
+          ]
+        }
+      ],
+      "title": "Summarising the thyroid case",
+      "why": "A thyroid summary must carry tempo, function and local staging together, because the plan follows from all three at once. Omitting any one of them leaves the listener unable to judge whether this patient needs reassurance, sampling or referral."
     }
   }
 }
