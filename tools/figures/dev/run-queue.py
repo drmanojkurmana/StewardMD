@@ -65,10 +65,16 @@ def write_prompt(scene, fid, topic):
         "No doses or numbers, no em or en dashes, flagged AI-assisted for review.\nFinish with a short report: files, termcheck counts, known issues.\n")
     return p
 
+MODEL = os.environ.get("MUSE_MODEL", "muse-wonder-1.0")
+
+def eff(e):
+    # the spark model runs at xhigh, and max for the harder scenes
+    return ("max" if e == "high" else "xhigh") if MODEL.startswith("muse-spark") else e
+
 def launch(prompt, effort, name):
     out = open(f"{TMP}/q-{name}.log", "w")
     return subprocess.Popen(["muse", "exec", "--trust-workspace", "--workspace", REPO, "--prompt-file", prompt, "--approval-mode", "never",
-                             "--user-input-auto-resolve", "--model", "muse-wonder-1.0", "--contributor-mode", "on", "--reasoning-effort", effort],
+                             "--user-input-auto-resolve", "--model", MODEL, "--contributor-mode", "on", "--reasoning-effort", eff(effort)],
                             cwd=REPO, env=ENV, stdout=out, stderr=subprocess.STDOUT, stdin=subprocess.DEVNULL)
 
 def wait_all(procs, limit=45 * 60):
