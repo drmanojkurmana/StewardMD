@@ -107,6 +107,18 @@ body.cbl-lock { overflow: hidden; }
   border-radius: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
   background: var(--cbl-accent); color: var(--cbl-accent-ink);
 }
+#cblRoot .cbl-watchchip {
+  display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px;
+  border: 1px solid var(--cbl-line); border-radius: 6px; font-size: 11px; font-weight: 600;
+  color: var(--cbl-ink-2, inherit);
+}
+#cblRoot .cbl-joincard, #cblRoot .cbl-watchprompt {
+  border: 1px solid var(--cbl-line); border-radius: var(--cbl-radius, 12px);
+  padding: 14px; margin: 0 0 14px; display: grid; gap: 8px;
+}
+#cblRoot .cbl-joincard p, #cblRoot .cbl-watchprompt p { margin: 0; font-size: 15px; }
+#cblRoot .cbl-joincard .cbl-btn, #cblRoot .cbl-watchprompt .cbl-btn { min-height: 44px; }
+#cblRoot .cbl-tlsrc { font-size: 11px; font-weight: 600; color: var(--cbl-ink-2, inherit); }
 #cblRoot .cbl-iconbtn {
   display: inline-flex; align-items: center; gap: 6px;
   min-height: 44px; min-width: 44px; padding: 0 12px;
@@ -1179,4 +1191,9 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 @media(min-width:768px){
  #cblRoot .cbl-tabpad{max-width:920px;margin:0 auto;width:100%}
  #cblRoot .cbl-refcard .cbl-star{width:44px;height:44px;min-width:44px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+}
+
+/* With the Watch chip in the header the Sound label would be clipped on a phone: keep the icon only. */
+@media (max-width: 480px) {
+  #cblRoot .cbl-status:has(.cbl-watchchip) [data-act="audio"] span { display: none; }
 }

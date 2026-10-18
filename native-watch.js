@@ -695,9 +695,14 @@
         el.id = "cbAlert"; el.setAttribute("role", "alertdialog");
         el.setAttribute("aria-label", "Code Blue active — tap to open the Command Center");
         el.innerHTML = '<div class="cbc"><div class="cbmark"></div><div class="cbl">Steward<span>MD</span></div>' +
-          '<div class="cbf">CODE BLUE</div><div class="cbh">Tap to open Command Center</div></div>';
+          '<div class="cbf">CODE BLUE</div><div class="cbh">Tap to join the code</div></div>';
         el.addEventListener("click", function (e) {
-          if (e.target.closest(".cbc")) { if (p && p.openCodeBlue) p.openCodeBlue().catch(function () {}); }
+          if (e.target.closest(".cbc")) {
+            try {
+              if (window.CodeBlueLive && window.CodeBlueLive.open) window.CodeBlueLive.open({ join: true });
+              else if (p && p.openCodeBlue) p.openCodeBlue().catch(function () {});
+            } catch (err) { if (p && p.openCodeBlue) p.openCodeBlue().catch(function () {}); }
+          }
           el.classList.remove("show");   // tapping the card (opened) or the backdrop (dismiss) both hide it
         });
         document.body.appendChild(el);
