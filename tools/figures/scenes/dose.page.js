@@ -34,9 +34,9 @@ function initCell() {
   REC_X.forEach((x, i) => { const g = mk("g", {}, C);
     mk("rect", { class: "rec-stem", x: -5, y: -18, width: 10, height: 36, rx: 4, transform: "translate(" + x + " " + MEMB_Y + ")" }, g);
     const fill = mk("circle", { class: "rec-fill", cx: x, cy: MEMB_Y - 20, r: 5.6, opacity: "0" }, g);
-    mk("circle", { class: "rec-pocket", cx: x, cy: MEMB_Y - 20, r: 6.8, fill: "none" }, g);
+    const pocket = mk("circle", { class: "rec-pocket", cx: x, cy: MEMB_Y - 20, r: 6.8, fill: "none" }, g);
     const allo = mk("rect", { class: "ant-n", x: x + 9, y: MEMB_Y + 2, width: 8, height: 8, rx: 2, opacity: "0", transform: "rotate(45 " + (x + 13) + " " + (MEMB_Y + 6) + ")" }, g);
-    recs.push({ g, fill, allo, x, i }); });
+    recs.push({ g, fill, pocket, allo, x, i, mode: "fill", ring: false }); });
 }
 /* ---- particle pools: agonist ligands, competitive blockers on the pocket, signal and resting dots inside ---- */
 function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
@@ -65,8 +65,30 @@ function initPanel() {
   const np = pill(O, "Non-competitive blocker", REC_X[5] + 4, MEMB_Y + 8, 835, 152, "Non-competitive antagonist: it binds a separate site and disables the receptor. More agonist cannot restore the response, so the ceiling falls.");
   np.setAttribute("id", "np-pill");
   pill(O, "Cell response", 655, 290, 625, 368, "Signals inside the cell. Their strength follows the response gauge and the glow of the cell interior.");
-  pill(O, "Inverse agonist", 862, 268, 825, 318, "Inverse agonist (explained, not selectable): some receptors are a little active on their own. An inverse agonist binds and lowers that resting activity; a plain antagonist only blocks other drugs.");
   pill(O, "Spare receptors", REC_X[5], MEMB_Y + 18, 825, 368, "Spare receptors: the response reaches its ceiling while some receptors are still empty, because one bound receptor is amplified into a large cell signal.");
+  capEl = mk("text", { class: "dose-cap", x: 30, y: 428 }, O); capEl.textContent = capText(0, 1);
+}
+/* one short plain-language line in the stage; it changes with the drug and the level */
+let capEl = null, capKey = -1;
+function capText(drug, level) {
+  if (drug === 1) {
+    if (level === 0) return "Little partial agonist bound, and it only half switches receptors on.";
+    if (level === 1) return "More partial agonist binds, but each receptor answers weakly.";
+    return "Receptors full, yet the response stops at a low ceiling.";
+  }
+  if (drug === 2) {
+    if (level === 0) return "The blocker sits in most pockets, so little drug binds.";
+    if (level === 1) return "More drug pushes some blocker off, and the response recovers.";
+    return "Plenty of drug pushes the blocker off. Full ceiling returns.";
+  }
+  if (drug === 3) {
+    if (level === 0) return "The blocker plugs receptors shut, so little response is possible.";
+    if (level === 1) return "More drug cannot reopen plugged receptors. Response stays small.";
+    return "Even plenty of drug cannot lift the lowered ceiling.";
+  }
+  if (level === 0) return "Little drug, few receptors bound, small response.";
+  if (level === 1) return "More drug binds more receptors, so the response climbs.";
+  return "Plenty of drug. Receptors full and response at its ceiling.";
 }
 const sm = { Occ: 0.3, Resp: 0.3, Emax: 1, Block: 0, drug: 0 };
 const acc = { lig: 0, ant: 0, sig: 0, bas: 0 };
@@ -85,14 +107,21 @@ function step(dt, m) {
   graphEls.shift.setAttribute("opacity", isComp ? "0.9" : "0");
   graphEls.low.setAttribute("opacity", (sm.drug === 1 || isNon) ? "0.9" : "0");
   const cl = $("curvelab"); if (cl && cl.textContent !== S.drugNames[sm.drug]) cl.textContent = S.drugNames[sm.drug];
-  /* receptors: pocket fills with occupancy; non-competitive block disables the last receptors and shows its site */
-  recs.forEach((r, i) => { const fill = clamp(sm.Occ * REC_X.length - i, 0, 1); r.fill.setAttribute("opacity", fill.toFixed(2));
-    const disabled = isNon && i >= 3; r.allo.setAttribute("opacity", disabled ? "0.95" : "0"); r.g.style.opacity = disabled ? 0.45 : 1; });
+  /* receptors: pocket fills with occupancy; a partial agonist only half switches them on;
+   * a competitive blocker rings the pockets it holds; a non-competitive blocker plugs its site */
+  recs.forEach((r, i) => { const fill = clamp(sm.Occ * REC_X.length - i, 0, 1);
+    const disabled = isNon && i >= 3, ring = isComp && i < Math.ceil(sm.Block * REC_X.length);
+    const mode = disabled ? "plug" : "fill";
+    if (r.mode !== mode) { r.mode = mode; r.fill.setAttribute("class", disabled ? "rec-plug" : "rec-fill"); }
+    if (r.ring !== ring) { r.ring = ring; r.pocket.style.stroke = ring ? "var(--c-comp)" : ""; }
+    r.fill.setAttribute("opacity", disabled ? "0.9" : (fill * (sm.drug === 1 ? 0.55 : 1)).toFixed(2));
+    r.allo.setAttribute("opacity", disabled ? "0.95" : "0"); r.g.style.opacity = disabled ? 0.45 : 1; });
   if (graphEls.glow) graphEls.glow.setAttribute("opacity", (sm.Resp * 0.3).toFixed(2));
   $("cp-pill").style.opacity = isComp ? 1 : 0; $("np-pill").style.opacity = isNon ? 1 : 0;
   /* agonist ligands drift outside the cell and settle on free pockets, kept inside the cell panel */
   acc.lig += dt * (2 + sm.Occ * 9); while (acc.lig >= 1) { acc.lig--; const p = freeP(ligs); if (p) emit(p, rnd(560, 905), rnd(122, 150), rnd(-5, 5), rnd(9, 16), Math.floor(rnd(0, REC_X.length))); }
-  ligs.forEach((p) => { if (!p.on) return; p.t += dt; const tx = REC_X[p.k], ty = MEMB_Y - 20; p.x += (tx - p.x) * dt * 1.6 + p.vx * dt; p.y += (ty - p.y) * dt * 1.6 + p.vy * dt * 0.3; p.x = clamp(p.x, 548, 908); p.y = clamp(p.y, 120, MEMB_Y - 14);
+  ligs.forEach((p) => { if (!p.on) return; p.t += dt; const want = sm.drug === 1 ? "lig-pp" : "lig-p"; if (p.cls !== want) { p.cls = want; p.e.setAttribute("class", want); }
+    const tx = REC_X[p.k], ty = MEMB_Y - 20; p.x += (tx - p.x) * dt * 1.6 + p.vx * dt; p.y += (ty - p.y) * dt * 1.6 + p.vy * dt * 0.3; p.x = clamp(p.x, 548, 908); p.y = clamp(p.y, 120, MEMB_Y - 14);
     p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", p.t > 3.4 ? clamp(1 - (p.t - 3.4)).toFixed(2) : "1"); if (p.t > 4.4) kill(p); });
   /* competitive blockers sit on pockets, fewer as the agonist concentration rises */
   acc.ant += dt * 5; while (acc.ant >= 1) { acc.ant--; const p = freeP(ants); if (p && isComp) emit(p, rnd(560, 905), rnd(122, 148), 0, 10, Math.floor(rnd(0, REC_X.length))); }
@@ -105,5 +134,6 @@ function step(dt, m) {
   /* gauges */
   gg.bind.set(sm.Occ, wordOf(sm.Occ, 0.35, 0.65, ["few", "some", "most"])); gg.resp.set(sm.Resp, wordOf(sm.Resp, 0.35, 0.65, ["low", "moderate", "high"]));
   gg.ceil.set(sm.Emax, sm.Emax < 0.7 ? "reduced" : "full"); gg.block.set(sm.Block, wordOf(sm.Block, 0.2, 0.5, ["none", "some", "strong"]));
+  const key = drug * 10 + level; if (key !== capKey) { capKey = key; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });

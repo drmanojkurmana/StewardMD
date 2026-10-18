@@ -1,114 +1,214 @@
-/* Addison scene: two failing routes to cortisol loss, hormone streams, skin, kidney, vessels and the gauges. */
-const L = { left: $("left"), right: $("right"), parts: $("parts"), over: $("over"), panel: $("panel") };
-const LC = 250, RC = 720;
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+/* Addison scene: primary adrenal failure, left to right. Pituitary ACTH drives the
+ * adrenal cap on the kidney; cortisol and aldosterone loss lowers pressure, wastes
+ * salt, raises potassium and lowers glucose. Replacement treatments visibly restore
+ * each stream: hydrocortisone becomes cortisol that docks on vessel receptors,
+ * fludrocortisone becomes aldosterone at the kidney, IV fluids refill the vessel. */
+const layers = { cells: $("cells"), parts: $("parts"), over: $("over"), panel: $("panel") };
+const acthVEl = $("acthV"), bloodVEl = $("bloodV"), livVEl = $("livV");
+let brainO = null, kidneyO = null, vesselO = null, liverO = null;
+let capG = null, capCrack = null, capShade = null, pitDot = null, shockEl = null, pigLay = null, capEl = null;
+let capCX = 455, capCY = 178, capDrug = -1, capLevel = -1;
+let trACTH = null, trBlood = null, trLiv = null, bloodStart = [479, 184];
+let receptors = [], rbcs = [], imms = [];
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, u: 0, tx: 0, ty: 0, tr: null, st: 0 }; }); }
 const free = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y) { p.on = true; p.x = x; p.y = y; p.vx = 0; p.vy = 0; p.t = 0; p.u = 0; p.st = 0; p.tr = null; p.e.setAttribute("opacity", "1"); }
 function kill(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
-const acth = pool(22, () => mk("circle", { class: "sc-p p-acth", r: 2.6 }, L.parts));
-const cort = pool(30, () => mk("circle", { class: "sc-p p-cort", r: 2.6 }, L.parts));
-const aldo = pool(22, () => mk("rect", { class: "sc-p p-aldo", x: -2.3, y: -2.3, width: 4.6, height: 4.6, rx: 1 }, L.parts));
-const hydro = pool(8, () => { const g = mk("g", {}, L.parts); mk("rect", { class: "p-pill", x: -5, y: -2.4, width: 10, height: 4.8, rx: 2.4 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2.4, width: 5, height: 4.8, rx: 2.4 }, g); return g; });
-const fluid = pool(20, () => mk("path", { class: "p-fl", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, L.parts));
-const cols = [];
-function buildColumn(parent, cx, primary) {
-  const g = {};
-  g.pit = cell(parent, { cls: "pit", r: 17, nuc: 0.4, seed: primary ? 3 : 8, wob: 0.1 });
-  place(g.pit, cx, 112, 0, 1);
-  g.arrow = mk("path", { class: "ad-arrow", d: "M" + (cx + 20) + " 134V202M" + (cx + 14) + " 194l6 10l6 -10" }, parent);
-  g.adr = mk("g", {}, parent);
-  mk("ellipse", { class: "ad-adr", rx: 42, ry: 21, transform: "rotate(-12)" }, g.adr);
-  mk("ellipse", { class: "ad-adr-in", rx: 28, ry: 12, transform: "rotate(-12)" }, g.adr);
-  mk("ellipse", { class: "ad-med", rx: 13, ry: 6, transform: "rotate(-12)" }, g.adr);
-  g.crack = mk("path", { class: "ad-crack", d: "M-26 -8l12 7l-8 6l14 5", opacity: "0" }, g.adr);
-  g.imm = [];
-  if (primary) [[-50, -16], [48, -20], [-6, -34]].forEach(([u, v], i) => { const c = cell(parent, { cls: "imm", r: 8, nuc: 0.45, seed: i + 4, wob: 0.14 }); g.imm.push({ c, u, v, i }); });
-  g.kid = mk("g", {}, parent);
-  mk("ellipse", { class: "ad-kidney", rx: 50, ry: 34 }, g.kid);
-  mk("circle", { class: "ad-notch", cx: 42, cy: 0, r: 13, fill: "var(--anatomy-paper)" }, g.kid);
-  place(g.kid, cx, 292, 0, 1);
-  g.skin = mk("g", {}, parent);
-  mk("rect", { class: "ad-skin", x: cx + 78, y: 248, width: 62, height: 46, rx: 10 }, g.skin);
-  g.pig = mk("rect", { class: "ad-pig", x: cx + 78, y: 248, width: 62, height: 46, rx: 10, opacity: "0" }, g.skin);
-  g.ves = mk("rect", { class: "ad-vessel", x: cx - 115, y: 370, width: 230, height: 24, rx: 12 }, parent);
-  g.rbcs = [];
-  for (let i = 0; i < 6; i++) { const r = mk("g", { class: "cl cl-rbc" }, parent); mk("ellipse", { class: "cl-b", rx: 7.5, ry: 4.4 }, r); mk("ellipse", { class: "cl-s", rx: 2.8, ry: 1.4 }, r); g.rbcs.push({ g: r, x: cx - 100 + i * 36, v: rnd(0.85, 1.15) }); }
-  g.cx = cx; g.primary = primary;
-  cols.push(g); return g;
+const acth = pool(20, () => mk("circle", { class: "sc-p p-acth", r: 2.6 }, layers.parts));
+const cort = pool(26, () => mk("circle", { class: "sc-p p-cort", r: 2.6 }, layers.parts));
+const aldo = pool(14, () => mk("rect", { class: "sc-p p-aldo", x: -2.3, y: -2.3, width: 4.6, height: 4.6, rx: 1 }, layers.parts));
+const na = pool(12, () => mk("circle", { class: "sc-p p-na", r: 2.4 }, layers.parts));
+const kp = pool(12, () => mk("circle", { class: "sc-p p-k", r: 2.4 }, layers.parts));
+const glu = pool(12, () => mk("path", { class: "sc-p p-glu", d: "M0 -3.6L2.8 0L0 3.6L-2.8 0Z" }, layers.parts));
+const hydroP = pool(8, () => { const g = mk("g", {}, layers.parts); mk("rect", { class: "p-pill", x: -5, y: -2.4, width: 10, height: 4.8, rx: 2.4 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2.4, width: 5, height: 4.8, rx: 2.4 }, g); return g; });
+const fludP = pool(6, () => mk("rect", { class: "sc-p p-aldo", x: -3.4, y: -3.4, width: 6.8, height: 6.8, rx: 2 }, layers.parts));
+const fluidP = pool(16, () => mk("path", { class: "p-fl", d: "M0 -3.4C2.2 -.6 2.8 .8 2.8 1.8A2.8 2.8 0 0 1 -2.8 1.8C-2.8 .8 -2.2 -.6 0 -3.4Z" }, layers.parts));
+function ptsD(pts) { return "M" + pts.map((q) => f1(q[0]) + " " + f1(q[1])).join(" L"); }
+function initOrgans() {
+  brainO = organ($("brainSlot"), "brain", 150, 185, 160, {});
+  kidneyO = organ($("kidneySlot"), "kidney", 455, 280, 165, {});
+  vesselO = organ($("vesselSlot"), "vessel", 735, 245, 88, { h: 180 });
+  liverO = organ($("liverSlot"), "liver", 270, 348, 135, {});
+  capCX = kidneyO.x; capCY = Math.round((kidneyO.y - kidneyO.h / 2 - 8) * 10) / 10;
+  /* adrenal cap sits on the kidney top, with damage cracks and shade */
+  capG = mk("g", {}, layers.cells);
+  mk("ellipse", { class: "ad-adr", rx: 34, ry: 15 }, capG);
+  mk("ellipse", { class: "ad-adr-in", rx: 22, ry: 8.5 }, capG);
+  mk("ellipse", { class: "ad-med", rx: 9, ry: 4 }, capG);
+  capCrack = mk("path", { class: "ad-crack", d: "M-20 -4l10 6l-7 5l11 4", opacity: "0" }, capG);
+  capShade = mk("ellipse", { class: "ad-shade", rx: 34, ry: 15, opacity: "0" }, capG);
+  place(capG, capCX, capCY, 0, 1);
+  /* immune cells attacking the cap */
+  [[-44, -14], [42, -18], [-8, -32], [30, 12]].forEach(([u, v], i) => {
+    const c = cell(layers.cells, { cls: "imm", r: 7, nuc: 0.45, seed: i + 4, wob: 0.14 });
+    imms.push({ c, u, v, i });
+  });
+  /* pituitary dot at the brain stem, where ACTH leaves */
+  const stem = brainO.ports.stem || brainO.ports.in;
+  pitDot = mk("circle", { class: "ad-pitd", r: 6 }, layers.cells);
+  pitDot.setAttribute("transform", "translate(" + f1(stem[0]) + " " + f1(stem[1]) + ")");
+  /* cortisol receptors ride inside the vessel group so they widen with it */
+  [[-34, -55], [34, -25], [-34, 5], [34, 35], [-34, 62]].forEach(([lx, ly]) => {
+    const e = mk("circle", { class: "ad-rec", cx: lx, cy: ly, r: 3.4 }, vesselO.g);
+    receptors.push({ e, hot: 0 });
+  });
+  for (let i = 0; i < 8; i++) {
+    const g = mk("g", { class: "cl cl-rbc" }, vesselO.g);
+    mk("ellipse", { class: "cl-b", rx: 7.5, ry: 4.4 }, g);
+    mk("ellipse", { class: "cl-s", rx: 2.8, ry: 1.4 }, g);
+    rbcs.push({ g, x: rnd(-20, 20), y: rnd(-85, 85), v: rnd(0.85, 1.15) });
+  }
+  /* crisis shock ring around the vessel */
+  shockEl = mk("ellipse", { class: "ad-shock", rx: 62, ry: 104, opacity: "0" }, layers.cells);
+  shockEl.setAttribute("transform", "translate(" + f1(vesselO.x) + " " + f1(vesselO.y) + ")");
+  /* skin patch with a pigment layer that darkens with ACTH */
+  const skin = mk("g", {}, layers.cells);
+  mk("rect", { class: "ad-skin", x: 770, y: 350, width: 90, height: 56, rx: 12 }, skin);
+  pigLay = mk("rect", { class: "ad-piglay", x: 770, y: 350, width: 90, height: 56, rx: 12, opacity: "0" }, skin);
+  /* hormone tracks anchored on real ports */
+  const cortex = kidneyO.ports.cortex || kidneyO.ports.pelvis;
+  const vin = vesselO.ports.in;
+  const livIn = liverO.ports.hepvein || liverO.ports.in;
+  bloodStart = [capCX + 24, capCY + 6];
+  const pACTH = [stem, [260, 268], [360, 228], [capCX - 10, capCY - 6]];
+  const pBlood = [bloodStart, [580, 196], [662, 178], [vin[0], vin[1]]];
+  const pLiv = [[capCX - 24, capCY + 4], [375, 155], [315, 220], [livIn[0], livIn[1]]];
+  acthVEl.setAttribute("d", ptsD(pACTH));
+  bloodVEl.setAttribute("d", ptsD(pBlood));
+  livVEl.setAttribute("d", ptsD(pLiv));
+  trACTH = track(pACTH); trBlood = track(pBlood); trLiv = track(pLiv);
+  return { stem, cortex };
+}
+function capText(d, l) {
+  if (d === 1) return "Stress dose hydrocortisone tops up cortisol. Sugar and pressure recover part way.";
+  if (d === 2) return "Hydrocortisone replaces cortisol and fludrocortisone replaces aldosterone. Salt and potassium recover.";
+  if (d === 3) return "IV fluids refill the vessels and hydrocortisone replaces cortisol. Pressure recovers.";
+  if (l === 2) return "No treatment. Hormones are very low and this is a crisis. Pressure, salt and sugar fall.";
+  return "No treatment. The gland makes too little hormone, so pressure, salt and sugar fall.";
 }
 const gg = {};
-let tpHydro, tpFlud, tpFluid;
+let anchors = null;
 function initPanel() {
-  const P = L.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
+  const P = layers.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
   const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
-  [["cort", "Cortisol", "g-glu", "Cortisol from the adrenal cortex. It supports blood pressure, glucose and the response to stress. It is low in both primary and secondary disease."], ["aldo", "Aldosterone", "g-aldo", "Aldosterone from the outer cortex in primary disease. It holds salt and water and removes potassium. In secondary disease it is largely kept, so this gauge follows the primary gland."], ["bp", "Pressure", "g-good", "Blood pressure. It falls when cortisol and aldosterone are lost and circulating volume shrinks."], ["na", "Sodium", "g-na", "Blood sodium. It falls when aldosterone is lost and salt and water escape through the kidney."], ["k", "Potassium", "g-k", "Blood potassium. It rises when aldosterone is lost, because the kidney cannot remove it."], ["glu", "Glucose", "g-glu", "Blood glucose. It falls when cortisol is low, because cortisol normally supports glucose making in the liver."]]
+  [["cort", "Cortisol", "g-glu", "Cortisol from the adrenal cap. It holds up pressure and sugar and answers stress. Replacement tops it up."],
+   ["aldo", "Aldosterone", "g-aldo", "Aldosterone from the cap. It makes the kidney hold salt and water and pass potassium. Fludrocortisone replaces it."],
+   ["bp", "Pressure", "g-good", "Blood pressure. It falls when cortisol and salt water are lost, and IV fluids refill the vessels."],
+   ["na", "Sodium", "g-na", "Blood sodium. It falls when the kidney cannot hold salt without aldosterone."],
+   ["k", "Potassium", "g-k", "Blood potassium. It rises when the kidney cannot pass potassium without aldosterone."],
+   ["glu", "Glucose", "g-glu", "Blood sugar. It falls when cortisol is low, because cortisol helps the liver release sugar."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const o = layers.over, stem = anchors.stem, cortex = anchors.cortex;
+  const aMid = trACTH.at(0.4), bMid = trBlood.at(0.3);
+  pill(o, "Pituitary", stem[0], stem[1], 148, 64, "The pituitary releases ACTH. When cortisol falls it releases more, trying to drive the failing gland.");
+  pill(o, "ACTH", aMid.x, aMid.y, 305, 64, "ACTH drives the adrenal cap to make cortisol. It runs high here and also darkens the skin.");
+  pill(o, "Adrenal gland", capCX, capCY, 470, 64, "The adrenal cap on the kidney. Immune attack has destroyed it, so cortisol and aldosterone run low.");
+  pill(o, "Cortisol", bMid.x, bMid.y, 630, 64, "Cortisol travelling in blood to the vessel. Hydrocortisone tops it up and it docks on vessel receptors.");
+  pill(o, "Aldosterone", cortex[0], cortex[1], 630, 104, "Aldosterone acting on the kidney. It holds salt and water and passes potassium. Fludrocortisone replaces it.");
+  pill(o, "Blood vessel", vesselO.x, vesselO.y - 40, 810, 100, "Blood vessel. Without cortisol it relaxes and pressure falls. Fluids refill it and cortisol restores its tone.");
+  pill(o, "Skin", 840, 360, 872, 336, "Skin. High ACTH also stimulates pigment cells, so the skin darkens. It pales again with treatment.");
+  pill(o, "Liver", liverO.x - 62, liverO.y, 140, 404, "Liver. Cortisol helps it release sugar. Sugar runs low in a crisis and recovers with hydrocortisone.");
+  capEl = mk("text", { class: "ad-cap", x: 30, y: 428 }, o); capEl.textContent = capText(0, 0);
 }
-function init() {
-  buildColumn(L.left, LC, true); buildColumn(L.right, RC, false);
-  const o = L.over;
-  pill(o, "Pituitary", LC - 15, 98, 110, 88, "The pituitary gland. When cortisol falls in primary disease it releases more ACTH, trying to drive the failing gland.");
-  pill(o, "ACTH high", LC + 20, 150, 360, 88, "ACTH is high in primary adrenal insufficiency. The pituitary senses low cortisol and pushes harder. ACTH also drives the pigmentation seen in primary disease.");
-  pill(o, "Adrenalitis", LC - 48, 214, 110, 195, "Autoimmune adrenalitis: immune cells attack and destroy the adrenal cortex. This is the commonest cause of primary adrenal insufficiency.");
-  pill(o, "Cortisol", LC + 38, 222, 370, 195, "Cortisol made in the middle cortex layer. It is low here because the gland itself is destroyed.");
-  pill(o, "Aldosterone low", LC - 35, 285, 120, 335, "Aldosterone from the outer cortex layer is lost in primary disease. Salt and water escape, potassium builds up, and blood pressure falls.");
-  pill(o, "Pigmentation", LC + 110, 250, 360, 335, "Darkened skin in primary disease. High ACTH comes from the same precursor as melanocyte stimulating hormone, so the skin darkens, including in skin creases and scars.");
-  pill(o, "Blood vessel", LC - 70, 382, 150, 412, "Blood vessels need cortisol to respond and hold their tone. With cortisol and volume lost, the vessel relaxes and pressure falls.");
-  pill(o, "ACTH low", RC + 20, 150, 610, 88, "ACTH is low in secondary adrenal insufficiency. The pituitary cannot drive the gland, so cortisol falls even though the gland could work.");
-  pill(o, "Pituitary", RC + 15, 98, 830, 88, "The pituitary gland in secondary disease. It makes too little ACTH, from pituitary or hypothalamic disease or long steroid treatment suppressing the axis.");
-  pill(o, "Gland shrinks", RC - 38, 214, 590, 195, "Without ACTH the cortex shrinks (atrophy). Cortisol falls, but the outer aldosterone layer is driven mainly by other signals and keeps working.");
-  pill(o, "Cortisol", RC + 38, 222, 850, 195, "Cortisol made in the middle cortex layer. It is low here because ACTH drive is missing.");
-  pill(o, "Aldosterone kept", RC - 30, 285, 600, 335, "Aldosterone is largely kept in secondary disease, because it is controlled mainly by the renin angiotensin system and potassium. Salt loss and high potassium are therefore much less marked.");
-  pill(o, "No pigmentation", RC + 110, 250, 840, 335, "No pigmentation in secondary disease. ACTH is low, so there is no extra melanocyte stimulation and the skin stays pale.");
-  pill(o, "Blood vessel", RC - 70, 382, 650, 412, "Blood vessels need cortisol to hold their tone. Pressure can fall in secondary disease too, but volume and potassium problems are milder.");
-  tpHydro = pill(o, "Hydrocortisone", 480, 228, 480, 88, "Hydrocortisone is cortisol replacement. It restores cortisol for pressure, glucose and the stress response.");
-  tpFlud = pill(o, "Fludrocortisone", LC + 35, 300, 480, 195, "Fludrocortisone is aldosterone replacement for primary disease. It holds salt and water and brings potassium down.");
-  tpFluid = pill(o, "IV fluids", 480, 382, 480, 335, "Intravenous fluids refill the circulating volume in a crisis, alongside hydrocortisone.");
-  tpHydro.setAttribute("id", "tp-hydro"); tpFlud.setAttribute("id", "tp-flud"); tpFluid.setAttribute("id", "tp-fluid");
-  initPanel();
-}
-const sm = { Cort: 0.3, AldoP: 0.26, AldoS: 0.7, BP: 0.5, Na: 0.5, K: 0.6, Glu: 0.5, deficit: 0.4, acthP: 0.5, acthS: 0.15, pig: 0.4, a: 0.35, hydroAmt: 0, flud: 0, fluids: 0 };
-const acc = { aL: 0, aR: 0, cL: 0, cR: 0, alL: 0, alR: 0, hy: 0, fl: 0 };
+const sm = { Cort: 0.3, Aldo: 0.26, BP: 0.5, Na: 0.5, K: 0.6, Glu: 0.5, deficit: 0.4, acth: 0.5, pig: 0.4, a: 0.35, hydro: 0, flud: 0, fluids: 0 };
+const acc = { acth: 0, cort: 0, cortL: 0, aldo: 0, na: 0, k: 0, glu: 0, hy: 0, fl: 0, flud: 0 };
+function init() { anchors = initOrgans(); initPanel(); }
 function step(dt, m) {
   const k1 = Math.min(1, dt * 1.1), k2 = Math.min(1, dt * 0.55);
-  sm.Cort = lerp(sm.Cort, m.Cort, k2); sm.AldoP = lerp(sm.AldoP, m.AldoP, k2); sm.AldoS = lerp(sm.AldoS, m.AldoS, k2);
+  sm.Cort = lerp(sm.Cort, m.Cort, k2); sm.Aldo = lerp(sm.Aldo, m.AldoP, k2);
   sm.BP = lerp(sm.BP, m.BP, k1); sm.Na = lerp(sm.Na, m.Na, k2); sm.K = lerp(sm.K, m.K, k2); sm.Glu = lerp(sm.Glu, m.Glu, k2);
-  sm.deficit = lerp(sm.deficit, m.deficit, k2); sm.acthP = lerp(sm.acthP, m.acthP, k2); sm.acthS = lerp(sm.acthS, m.acthS, k2);
-  sm.pig = lerp(sm.pig, m.pig, k2); sm.a = lerp(sm.a, m.a, k2); sm.hydroAmt = lerp(sm.hydroAmt, m.hydro, k1); sm.flud = lerp(sm.flud, m.flud, k1); sm.fluids = lerp(sm.fluids, m.fluids, k1);
-  cols.forEach((c) => {
-    const acth = c.primary ? sm.acthP : sm.acthS;
-    place(c.pit, c.cx, 112, 0, 1 + 0.08 * acth * Math.sin(tm / 320));
-    c.arrow.setAttribute("opacity", (0.25 + 0.75 * acth).toFixed(2));
-    const shrink = c.primary ? 1 - 0.1 * sm.a : 1 - 0.26 * sm.a;
-    place(c.adr, c.cx, 228, -4 + Math.sin(tm / 900 + c.cx) * 2, shrink);
-    c.crack.setAttribute("opacity", c.primary ? (0.25 + 0.75 * sm.a).toFixed(2) : "0");
-    c.imm.forEach((im) => place(im.c, c.cx + im.u, 228 + im.v, Math.sin(tm / 400 + im.i) * 14, 0.9 + 0.25 * sm.a * Math.sin(tm / 300 + im.i)));
-    c.pig.setAttribute("opacity", c.primary ? (sm.pig * 0.82).toFixed(2) : "0.04");
-    const flow = clamp(0.2 + 0.9 * sm.BP);
-    c.rbcs.forEach((r) => { r.x += r.v * 52 * flow * dt; if (r.x > c.cx + 106) r.x = c.cx - 106; place(r.g, r.x, 382, Math.sin(tm / 500 + r.x) * 8, 1); });
-  });
-  acc.aL += dt * sm.acthP * 7; while (acc.aL >= 1) { acc.aL--; const p = free(acth); if (p) emit(p, LC + 20, 136, 0, 46, 0); }
-  acc.aR += dt * sm.acthS * 7; while (acc.aR >= 1) { acc.aR--; const p = free(acth); if (p) emit(p, RC + 20, 136, 0, 46, 1); }
-  acth.forEach((p) => { if (!p.on) return; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 208) kill(p); });
-  acc.cL += dt * sm.Cort * 9; while (acc.cL >= 1) { acc.cL--; const p = free(cort); if (p) emit(p, LC + 24, 232, rnd(8, 22), rnd(24, 38), 0); }
-  acc.cR += dt * sm.Cort * 9; while (acc.cR >= 1) { acc.cR--; const p = free(cort); if (p) emit(p, RC + 24, 232, rnd(8, 22), rnd(24, 38), 1); }
-  cort.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 362) kill(p); });
-  acc.alL += dt * sm.AldoP * 8; while (acc.alL >= 1) { acc.alL--; const p = free(aldo); if (p) emit(p, LC - 16, 242, rnd(-4, 4), 34, 0); }
-  acc.alR += dt * sm.AldoS * 8; while (acc.alR >= 1) { acc.alR--; const p = free(aldo); if (p) emit(p, RC - 16, 242, rnd(-4, 4), 34, 1); }
-  aldo.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.y += p.vy * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y > 282) kill(p); });
-  acc.hy += dt * clamp(sm.hydroAmt * 2.2); while (acc.hy >= 1) { acc.hy--; const p = free(hydro); if (p) emit(p, 480, 118, 0, 0, Math.random() < 0.5 ? 0 : 1); }
-  hydro.forEach((p) => { if (!p.on) return; p.t += dt; const tx = p.k ? RC : LC, ty = 218; p.x += (tx - p.x) * dt * 0.9; p.y += (ty - p.y) * dt * 0.9 + 12 * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")"); p.e.setAttribute("opacity", clamp(1 - (p.t - 3.4) / 1.2).toFixed(2)); if (p.t > 4.6) kill(p); });
-  acc.fl += dt * sm.fluids * 7; while (acc.fl >= 1) { acc.fl--; const p = free(fluid); if (p) emit(p, (Math.random() < 0.5 ? LC : RC) - 108, 382, 76, 0, 0); }
-  fluid.forEach((p) => { if (!p.on) return; p.x += p.vx * dt; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.x > LC + 108 && p.x < RC - 108) kill(p); if (p.x > RC + 108) kill(p); });
-  $("tp-hydro").style.opacity = clamp(sm.hydroAmt * 2.4).toFixed(2);
-  $("tp-flud").style.opacity = sm.flud.toFixed(2);
-  $("tp-fluid").style.opacity = sm.fluids.toFixed(2);
+  sm.deficit = lerp(sm.deficit, m.deficit, k2); sm.acth = lerp(sm.acth, m.acthP, k2);
+  sm.pig = lerp(sm.pig, m.pig, k2); sm.a = lerp(sm.a, m.a, k2);
+  sm.hydro = lerp(sm.hydro, m.hydro, k1); sm.flud = lerp(sm.flud, m.flud, k1); sm.fluids = lerp(sm.fluids, m.fluids, k1);
+  /* gland damage follows severity only: treatment replaces hormones, it does not regrow the gland */
+  place(capG, capCX, capCY, Math.sin(tm / 900) * 2, 1 - 0.12 * sm.a);
+  capCrack.setAttribute("opacity", sm.a.toFixed(2));
+  capShade.setAttribute("opacity", (0.55 * sm.a).toFixed(2));
+  imms.forEach((im) => { place(im.c, capCX + im.u, capCY + im.v, Math.sin(tm / 400 + im.i) * 14, 1); im.c.style.opacity = (0.35 + 0.65 * sm.a).toFixed(2); });
+  const stem = anchors.stem;
+  pitDot.setAttribute("transform", "translate(" + f1(stem[0]) + " " + f1(stem[1]) + ") scale(" + (1 + 0.25 * sm.acth * Math.sin(tm / 320)).toFixed(3) + ")");
+  acthVEl.setAttribute("opacity", (0.15 + 0.6 * sm.acth).toFixed(2));
+  bloodVEl.setAttribute("stroke-width", f1(8 + 10 * sm.BP));
+  /* vessel widens with pressure; receptors and red cells ride inside the vessel group */
+  const sx = 0.72 + 0.45 * sm.BP;
+  vesselO.g.setAttribute("transform", "translate(" + f1(vesselO.x) + " " + f1(vesselO.y) + ") scale(" + sx.toFixed(3) + " 1)");
+  const flow = 0.25 + 1.1 * sm.BP;
+  rbcs.forEach((r) => { r.y += r.v * 46 * flow * dt; if (r.y > 88) r.y = -88; place(r.g, r.x + Math.sin(tm / 500 + r.y) * 3, r.y, Math.sin(tm / 500 + r.x) * 8, 1); });
+  receptors.forEach((r) => { r.hot = Math.max(0, r.hot - dt * 1.2); r.e.setAttribute("class", r.hot > 0.35 ? "ad-rec ad-on" : "ad-rec"); r.e.setAttribute("r", (3.4 + 2 * r.hot).toFixed(1)); });
+  shockEl.setAttribute("opacity", (sm.deficit * (0.55 + 0.25 * Math.sin(tm / 180))).toFixed(2));
+  pigLay.setAttribute("opacity", (sm.pig * 0.8).toFixed(2));
+  /* ACTH from pituitary to cap, thinning as replacement restores feedback */
+  acc.acth += dt * (1 + 9 * sm.acth);
+  while (acc.acth >= 1) { acc.acth--; const p = free(acth); if (p) { emit(p, stem[0], stem[1]); p.tr = trACTH; p.u = 0; p.st = 1; } }
+  acth.forEach((p) => { if (!p.on) return; p.u += dt * 70 / p.tr.len; const q = p.tr.at(Math.min(1, p.u)); p.x = q.x; p.y = q.y;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.u >= 1) kill(p); });
+  /* cortisol into blood, docking on vessel receptors */
+  acc.cort += dt * (0.5 + 10 * sm.Cort);
+  while (acc.cort >= 1) { acc.cort--; const p = free(cort); if (p) { emit(p, bloodStart[0], bloodStart[1]); p.tr = trBlood; p.u = 0; } }
+  cort.forEach((p) => { if (!p.on) return; p.u += dt * 95 / p.tr.len; const q = p.tr.at(Math.min(1, p.u));
+    p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")");
+    if (p.u >= 1) { const r = receptors.find((s) => s.hot <= 0); if (r) r.hot = 1; kill(p); } });
+  /* cortisol signal to the liver */
+  acc.cortL += dt * (0.3 + 4 * sm.Cort);
+  while (acc.cortL >= 1) { acc.cortL--; const p = free(cort); if (p) { emit(p, capCX - 24, capCY + 4); p.tr = trLiv; p.u = 0; } }
+  /* aldosterone made at the cap, absorbed at the kidney cortex */
+  const cortex = anchors.cortex;
+  acc.aldo += dt * (0.5 + 8 * sm.Aldo);
+  while (acc.aldo >= 1) { acc.aldo--; const p = free(aldo); if (p) { emit(p, capCX - 8, capCY + 10); p.tx = cortex[0]; p.ty = cortex[1]; p.st = 1; } }
+  aldo.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (p.tx - p.x) * dt * 2.2; p.y += (p.ty - p.y) * dt * 2.2;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - (p.t - 1.6) / 0.8).toFixed(2)); if (p.t > 2.4) kill(p); });
+  /* sodium: held into blood when aldosterone works, lost downward when it does not */
+  const kBot = kidneyO.y + kidneyO.h / 2;
+  acc.na += dt * 4;
+  while (acc.na >= 1) { acc.na--; const p = free(na); if (p) { emit(p, cortex[0] + rnd(-8, 8), cortex[1] + rnd(-8, 8)); p.t = 0; p.st = 1;
+    if (Math.random() < sm.Aldo) { p.tx = bloodStart[0]; p.ty = bloodStart[1]; } else { p.tx = cortex[0]; p.ty = kBot + 26; } } }
+  na.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (p.tx - p.x) * dt * 2.4; p.y += (p.ty - p.y) * dt * 2.4;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - (p.t - 1.4) / 0.7).toFixed(2)); if (p.t > 2.1) kill(p); });
+  /* potassium: passed out downward when aldosterone works, carried up into blood when it does not */
+  acc.k += dt * 4;
+  while (acc.k >= 1) { acc.k--; const p = free(kp); if (p) { emit(p, bloodStart[0] + rnd(-6, 6), bloodStart[1] + rnd(-4, 4)); p.t = 0;
+    if (Math.random() < sm.Aldo) { p.st = 1; p.tx = cortex[0] - 10; p.ty = kBot + 26; } else { p.st = 2; p.tr = trBlood; p.u = 0; } } }
+  kp.forEach((p) => { if (!p.on) return; p.t += dt;
+    if (p.st === 2) { p.u += dt * 80 / p.tr.len; const q = p.tr.at(Math.min(1, p.u));
+      p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")"); if (p.u >= 1) kill(p);
+    } else { p.x += (p.tx - p.x) * dt * 2.4; p.y += (p.ty - p.y) * dt * 2.4;
+      p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+      p.e.setAttribute("opacity", clamp(1 - (p.t - 1.4) / 0.7).toFixed(2)); if (p.t > 2.1) kill(p); } });
+  /* glucose released by the liver, carried away in blood */
+  acc.glu += dt * (0.5 + 7 * sm.Glu);
+  while (acc.glu >= 1) { acc.glu--; const p = free(glu); if (p) { emit(p, liverO.x + rnd(-30, 30), liverO.y + rnd(-10, 10)); p.vx = rnd(40, 70); p.t = 0; } }
+  glu.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    p.e.setAttribute("opacity", clamp(1 - (p.x - liverO.x - 90) / 90).toFixed(2)); if (p.x > vesselO.x - 70) kill(p); });
+  /* hydrocortisone capsules fall on the cap and burst into cortisol */
+  acc.hy += dt * sm.hydro * 3;
+  while (acc.hy >= 1) { acc.hy--; const p = free(hydroP); if (p) { emit(p, capCX + rnd(-40, 40), 56); p.vy = 95; p.t = 0; } }
+  hydroP.forEach((p) => { if (!p.on) return; p.t += dt; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.t * 80) + ")");
+    if (p.y >= capCY - 2) { for (let i = 0; i < 3; i++) { const c = free(cort); if (c) { emit(c, bloodStart[0], bloodStart[1]); c.tr = trBlood; c.u = 0; } } kill(p); }
+    if (p.t > 5) kill(p); });
+  /* fludrocortisone tablets fly to the kidney cortex and burst into aldosterone */
+  acc.flud += dt * sm.flud * 2.5;
+  while (acc.flud >= 1) { acc.flud--; const p = free(fludP); if (p) { emit(p, 480 + rnd(-30, 30), 56); p.tx = cortex[0]; p.ty = cortex[1]; p.t = 0; } }
+  fludP.forEach((p) => { if (!p.on) return; p.t += dt; p.x += (p.tx - p.x) * dt * 1.6; p.y += (p.ty - p.y) * dt * 1.6 + 14 * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")");
+    if (Math.hypot(p.tx - p.x, p.ty - p.y) < 8) { for (let i = 0; i < 2; i++) { const c = free(aldo); if (c) { emit(c, cortex[0], cortex[1]); c.tx = cortex[0]; c.ty = cortex[1]; } } kill(p); }
+    if (p.t > 6) kill(p); });
+  /* IV fluid drops rain into the top of the vessel */
+  const vTop = vesselO.y - 90;
+  acc.fl += dt * sm.fluids * 9;
+  while (acc.fl >= 1) { acc.fl--; const p = free(fluidP); if (p) { emit(p, vesselO.x + rnd(-24, 24), 56); p.vy = 260; } }
+  fluidP.forEach((p) => { if (!p.on) return; p.y += p.vy * dt;
+    p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (p.y >= vTop + 6) kill(p); });
   gg.cort.set(sm.Cort, wordOf(sm.Cort, 0.35, 0.6, ["low", "reduced", "ok"]));
-  gg.aldo.set(sm.AldoP, wordOf(sm.AldoP, 0.3, 0.6, ["low", "reduced", "ok"]));
-  gg.bp.set(sm.BP, wordOf(sm.BP, 0.38, 0.65, ["low", "borderline", "ok"]));
+  gg.aldo.set(sm.Aldo, wordOf(sm.Aldo, 0.3, 0.6, ["low", "reduced", "ok"]));
+  gg.bp.set(sm.BP, wordOf(sm.BP, 0.38, 0.65, ["low", "borderline", "maintained"]));
   gg.na.set(sm.Na, wordOf(sm.Na, 0.45, 0.65, ["low", "reduced", "normal"]));
   gg.k.set(sm.K, wordOf(sm.K, 0.38, 0.6, ["normal", "raised", "high"]));
   gg.glu.set(sm.Glu, wordOf(sm.Glu, 0.45, 0.65, ["low", "reduced", "normal"]));
+  if (drug !== capDrug || level !== capLevel) { capDrug = drug; capLevel = level; const t = capText(drug, level); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
