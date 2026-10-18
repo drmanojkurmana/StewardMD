@@ -1,9 +1,13 @@
 /* Shared organ art for the animated mechanism scenes. Plain globals, ES2015, no imports.
  * Inlined after bio.lib.js when buildScene gets organs:true, so mk/f1/clamp below are the shared ones.
- * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source, public domain,
- * injected as _ORG_ART by buildScene for the kinds the page uses) centred on x,y and w px wide,
- * and falls back to the existing procedural layered silhouette for kinds without art
- * (bladder, uterus, thyroid). Art ports are fractions of the art viewBox (see _ORG_FRAC).
+ * organ(parent, kind, x, y, w, opts) draws real anatomy art (NIH BioArt Source public domain,
+ * Servier Medical Art CC BY 3.0, one DBCLS CC BY 4.0 knee; injected as _ORG_ART by buildScene
+ * for the kinds the page uses) centred on x,y and w px wide, and falls back to the existing
+ * procedural layered silhouette for kinds without art (uterus, thyroid, ganglion) or when art
+ * was not injected (liver, bladder and eye keep their procedural drawings as fallback).
+ * Art ports are fractions of the art viewBox (see _ORG_FRAC). The liver-4 art is the bare mass,
+ * so the lib adds a procedural gallbladder under the gall port plus short portal and hepatic
+ * vein stubs ending at the porta and hepvein ports.
  * opts: { h (px height, else proportional), flip (mirror left/right), cls (extra class), id,
  *   tint (a CSS colour with opacity, overlaid as an organ-shaped mask for disease states),
  *   dim (dull the art) }.
@@ -21,7 +25,9 @@ if (!document.getElementById("orgCss")) { var _orgSt = document.createElement("s
   + ".org-v{fill:none;stroke-linecap:round}"
   + ".org-liver{--cc:var(--c-rbc)}.org-heart{--cc:var(--c-rbc)}.org-kidney{--cc:var(--c-eos)}.org-lung{--cc:var(--c-endo)}"
   + ".org-stomach{--cc:var(--c-graft)}.org-brain{--cc:var(--c-mac)}.org-pancreas{--cc:var(--c-plt)}.org-spleen{--cc:var(--c-sm)}"
-  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-thyroid{--cc:var(--c-neut)}";
+  + ".org-bladder{--cc:var(--c-th2)}.org-uterus{--cc:var(--c-endo)}.org-ovary{--cc:var(--c-plt)}.org-thyroid{--cc:var(--c-neut)}.org-eye{--cc:#e6e1d4}.org-ganglion{--cc:var(--c-mac)}"
+  + ".org-bowel{--cc:var(--c-graft)}.org-colon{--cc:var(--c-eos)}.org-ear{--cc:var(--c-plt)}.org-skin{--cc:#d9a58c}"
+  + ".org-muscle{--cc:var(--c-rbc)}.org-joint{--cc:#cfc8bd}.org-vessel{--cc:var(--c-rbc)}";
   document.head.appendChild(_orgSt); }
 var _orgN = 0;
 /* per instance gradients: base (light -> base -> dark of --cc) plus a white top / dark bottom shade overlay */
@@ -133,6 +139,21 @@ function _orgSpleen(g, G) {
   _ol(g, "M-30-10C-10-2 12-2 32-10M-28 8C-8 16 12 16 30 8");
   return { h0: 96, ports: { in: [-30, 52], out: [-20, 54], hilum: [-18, 37], pulp: [0, 0] } };
 }
+/* ganglion: sensory ganglion with capsule, fibre stubs, satellite glia dots, one big soma with nucleus */
+function _orgGanglion(g, G) {
+  _ov(g, "M-52 0L-30 0", "var(--anatomy-hi)", 7);
+  _ov(g, "M30 0L52 0", "var(--anatomy-hi)", 7);
+  _ob(g, "M-32-27C-12-37 13-37 30-25C43-12 43 12 30 25C13 37-12 37-32 27C-42 13-42-13-32-27Z", G);
+  _ol(g, "M-27-21C-10-29 12-29 26-19");
+  _of(g, "M-16 0C-16-9-9-16 0-16C9-16 16-9 16 0C16 9 9 16 0 16C-9 16-16 9-16 0Z", "color-mix(in srgb,var(--cc) 62%,var(--anatomy-paper))", "var(--cc)");
+  _of(g, "M-7 0C-7-4-4-7 0-7C4-7 7-4 7 0C7 4 4 7 0 7C-4 7-7 4-7 0Z", "color-mix(in srgb,var(--cc) 45%,#1a1030)", "var(--cc)");
+  _odot(g, 2, 1, 1.8, "color-mix(in srgb,var(--cc) 70%,#fff)");
+  _odot(g, -25, -13, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 25, -12, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _odot(g, 0, 28, 2.6, "color-mix(in srgb,var(--cc) 70%,var(--anatomy-paper))");
+  _ol(g, "M-13-8L-22-16M13-8L22-16");
+  return { h0: 96, ports: { in: [-52, 0], out: [52, 0], soma: [0, 0], nucleus: [0, 0] } };
+}
 /* bladder: dome with detrusor arcs, trigone, ureters in from above, urethra out below */
 function _orgBladder(g, G) {
   _ov(g, "M-52-44C-44-34-36-26-30-18", "var(--cc)", 4); _ov(g, "M52-44C44-34 36-26 30-18", "var(--cc)", 4);
@@ -160,6 +181,14 @@ function _orgUterus(g, G) {
   _ol(g, "M-11 18L11 18", "org-dk"); _ol(g, "M0 18L0 32");
   return { h0: 100, ports: { in: [-45, -22], out: [0, 33], ovL: [-45, -10], ovR: [45, -10], fundus: [0, -24] } };
 }
+/* ovary: almond body with surface arcs, hilar artery and vein stubs at the hilum */
+function _orgOvary(g, G) {
+  _ov(g, "M-52 0L-40 0", "var(--d-art)", 3); _ov(g, "M40 0L52 0", "var(--d-ven)", 3.5);
+  _ob(g, "M-40-6C-30-24-5-30 15-26C33-22 42-10 40 6C38 22 20 30 0 29C-20 28-38 14-40-6Z", G);
+  _ol(g, "M-28-12C-16-20 0-23 14-21");
+  _ol(g, "M-32 4C-20 12-2 17 14 14", "org-dk");
+  return { h0: 70, ports: { in: [-52, 0], out: [52, 0], dom: [0, 0], surf: [0, -27] } };
+}
 /* thyroid butterfly: two lobes, isthmus bridge, trachea rings behind, parathyroid dots */
 function _orgThyroid(g, G) {
   _ov(g, "M-7-40L-7 40M7-40L7 40", "var(--anatomy-hi)", 2);
@@ -171,12 +200,22 @@ function _orgThyroid(g, G) {
   _odot(g, -30, 8, 2, "var(--c-plt)"); _odot(g, 30, -4, 2, "var(--c-plt)");
   return { h0: 90, ports: { in: [16, -34], out: [0, 36], isthmus: [0, 11], lobeR: [22, 0], lobeL: [-22, 0] } };
 }
+/* eye: sclera ball with cornea bulge, iris and pupil facing left, retina arc, optic nerve stub right */
+function _orgEye(g, G) {
+  _ov(g, "M26 0L54 0", "var(--c-plt)", 8);
+  _ob(g, "M-36-4C-34-22-16-32 4-30C24-28 34-12 32 4C30 20 14 30-4 29C-22 28-36 14-36-4Z", G);
+  _of(g, "M-39 0C-39-6-35-11-30-11C-25-11-21-6-21 0C-21 6-25 11-30 11C-35 11-39 6-39 0Z", "color-mix(in srgb,var(--c-endo) 70%,var(--anatomy-paper))", "var(--c-endo)");
+  _odot(g, -30, 0, 5, "#241a12");
+  _odot(g, -32, -3.5, 1.5, "#ffffff");
+  _ol(g, "M16-15C23-5 23 7 15 17");
+  return { h0: 70, ports: { in: [-41, 0], out: [54, 0], retina: [16, 0], lens: [-20, 0] } };
+}
 /* Real-art store, filled by buildScene after this lib: _ORG_ART[kind] = { vb:[x,y,w,h],
  * pfx:"oaxxx", body:"<inner svg markup>" }. Ports are fractions of the viewBox, measured
  * off the slimmed art (see tools/figures/dev/svgslim.py); content fills the frame. */
 var _ORG_ART = {};
 var _ORG_FRAC = {
-  liver: { in: [.45, .95], out: [.46, .04], porta: [.45, .82], gall: [.30, .90], lobe: [.28, .45] },
+  liver: { in: [.35, .95], out: [.40, .01], porta: [.35, .95], hepvein: [.40, .01], gall: [.55, .66], lobe: [.15, .70] },
   heart: { in: [.30, .01], out: [.48, .01], aorta: [.48, .01], ivc: [.28, .90], apex: [.70, .97], pulm: [.60, .08] },
   kidney: { in: [.04, .36], out: [.38, .97], vein: [.04, .46], pelvis: [.36, .41], cortex: [.62, .45], hilum: [.28, .41] },
   lung: { in: [.46, .53], out: [.44, .60], art: [.44, .48], apex: [.24, .30], base: [.24, .87], trachea: [.49, .01], carina: [.49, .50], hilumL: [.42, .58], hilumR: [.56, .58], apexR: [.75, .34], baseR: [.75, .86] },
@@ -184,8 +223,34 @@ var _ORG_FRAC = {
   intestine: { in: [.58, .38], out: [.50, .95], duodenum: [.60, .40], jejunum: [.42, .60], ileum: [.50, .72], cecum: [.60, .82], colon: [.28, .60], rectum: [.50, .92] },
   brain: { in: [.60, .97], out: [.42, .04], parenchyma: [.42, .42], cereb: [.76, .78], frontal: [.08, .40], stem: [.60, .93], carotid: [.16, .75] },
   pancreas: { in: [.50, .08], out: [.95, .50], head: [.85, .45], tail: [.06, .45], body: [.50, .45] },
-  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] }
+  spleen: { in: [.38, .78], out: [.52, .78], hilum: [.45, .72], pulp: [.50, .38] },
+  bowel: { in: [.21, .03], out: [.80, .99], coils: [.52, .52] },
+  colon: { in: [.75, .72], out: [.50, .98], caecum: [.75, .72], rectum: [.50, .98], ascending: [.88, .58], transverse: [.50, .62], descending: [.23, .44], sigmoid: [.42, .82] },
+  bladder: { in: [.25, .01], out: [.50, .99], inR: [.73, .01], trigone: [.50, .70], dome: [.50, .28] },
+  eye: { in: [.02, .50], out: [.99, .55], retina: [.75, .50], lens: [.19, .51], cornea: [.08, .50], nerve: [.99, .55] },
+  ear: { in: [.35, .45], out: [.02, .55], canals: [.57, .18], vestibule: [.50, .45], cochlea: [.55, .75], nerve: [.02, .55] },
+  skin: { in: [.50, .13], out: [.50, .97], surface: [.50, .13], epidermis: [.50, .17], dermis: [.47, .55], hypodermis: [.50, .92] },
+  muscle: { in: [.02, .50], out: [.99, .71], belly: [.32, .48], fibre: [.72, .58] },
+  joint: { in: [.50, .04], out: [.52, .96], femur: [.50, .20], joint: [.54, .58], patella: [.51, .52], tibia: [.52, .80], fibula: [.40, .78] },
+  vessel: { in: [.50, .01], out: [.50, .99], lumen: [.50, .05], wall: [.90, .50] }
 };
+/* liver-4 is the bare mass, so add the missing bits procedurally in art units
+ * (fractions of the liver-4 viewBox): a gallbladder blob under the art at the
+ * gall port (its fundus peeks below the inferior edge), a portal stub rising
+ * to the porta tip and a hepatic stub leaving at the hepvein tip. Drawn before
+ * the art group so the mass covers the joins; the inner flip mirrors them. */
+function _orgLiverExtra(inner, A, opts) {
+  var vw = A.vb[2], vh = A.vb[3];
+  var X = function (f) { return f1(f * vw); }, Y = function (f) { return f1(f * vh); };
+  var g = mk("g", {}, inner);
+  if (opts.dim) g.setAttribute("opacity", ".5");
+  _ov(g, "M" + X(.35) + " " + Y(.95) + "L" + X(.35) + " " + Y(.78), "var(--d-ven)", 11);
+  _ov(g, "M" + X(.40) + " " + Y(.01) + "L" + X(.40) + " " + Y(.14), "var(--d-ven)", 11);
+  var gb = _of(g, "M" + X(.55 - 17 / vw) + " " + Y(.63) + "a17 23 0 1 0 34 0a17 23 0 1 0 -34 0",
+    "color-mix(in srgb,var(--c-bac) 62%,var(--anatomy-paper))", "var(--c-bac)");
+  gb.setAttribute("stroke-width", "2.2");
+  return g;
+}
 /* draw the injected art centred on x,y at w px wide. The art is clipped to its
  * frame; tint overlays an organ-shaped translucent mask (the art itself, reused
  * as a mask); dim dulls the art. Art ids are suffixed per instance so two of
@@ -202,6 +267,7 @@ function _orgArt(parent, kind, x, y, w, opts, A) {
   var cid = A.pfx + uid + "-frame";
   var cp = mk("clipPath", { id: cid }, defs);
   mk("rect", { x: f1(vb[0]), y: f1(vb[1]), width: f1(vw), height: f1(vh) }, cp);
+  if (kind === "liver") _orgLiverExtra(inner, A, opts);
   var art = mk("g", { class: "org-halo", "clip-path": "url(#" + cid + ")" }, inner);
   var aid = A.pfx + uid + "-art";
   art.setAttribute("id", aid);
@@ -237,8 +303,11 @@ function organ(parent, kind, x, y, w, opts) {
   else if (kind === "brain") r = _orgBrain(inner, G);
   else if (kind === "pancreas") r = _orgPancreas(inner, G);
   else if (kind === "spleen") r = _orgSpleen(inner, G);
+  else if (kind === "ganglion") r = _orgGanglion(inner, G);
+  else if (kind === "eye") r = _orgEye(inner, G);
   else if (kind === "bladder") r = _orgBladder(inner, G);
   else if (kind === "uterus") r = _orgUterus(inner, G);
+  else if (kind === "ovary") r = _orgOvary(inner, G);
   else if (kind === "thyroid") r = _orgThyroid(inner, G);
   else throw new Error("organ: unknown kind " + kind);
   var sx = w / 100, sy = opts.h ? opts.h / r.h0 : sx, fx = opts.flip ? -1 : 1;
@@ -247,4 +316,4 @@ function organ(parent, kind, x, y, w, opts) {
   for (k in r.ports) ports[k] = [Math.round((x + fx * r.ports[k][0] * sx) * 10) / 10, Math.round((y + r.ports[k][1] * sy) * 10) / 10];
   return { g: outer, kind: kind, x: x, y: y, w: w, h: Math.round(r.h0 * sy * 10) / 10, ports: ports, art: false };
 }
-organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "thyroid"];
+organ.kinds = ["liver", "heart", "kidney", "lung", "stomach", "intestine", "brain", "pancreas", "spleen", "bladder", "uterus", "ovary", "thyroid", "eye", "ganglion", "bowel", "colon", "ear", "skin", "muscle", "joint", "vessel"];

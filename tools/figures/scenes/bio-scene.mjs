@@ -6,8 +6,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const ROOT = resolve(HERE, "../../..");
-/* organ kind -> slimmed NIH BioArt file (tools/figures/assets/organs/slim/<v>.svg) */
-const ORG_SLIM = { liver: "liver-1", heart: "heart-1", kidney: "kidney-1", lung: "lung-1", stomach: "stomach-1", intestine: "intestine-1", brain: "brain-1", pancreas: "pancreas-1", spleen: "spleen-1" };
+/* organ kind -> slimmed art file (tools/figures/assets/organs/slim/<v>.svg) */
+const ORG_SLIM = { liver: "liver-4", heart: "heart-1", kidney: "kidney-1", lung: "lung-1", stomach: "stomach-1", intestine: "intestine-1", brain: "brain-1", pancreas: "pancreas-1", spleen: "spleen-1", bowel: "small-intestine-1", colon: "large-intestine-2", bladder: "bladder-1", eye: "eye-1", ear: "ear-2", skin: "skin-2", muscle: "muscle-1", joint: "joint-1", vessel: "blood-vessel-1" };
+/* organ kind -> art source for the footer credit (uterus/thyroid/ganglion are procedural: no entry) */
+const ORG_SRC = { liver: "servier", heart: "nih", kidney: "nih", lung: "nih", stomach: "nih", intestine: "nih", brain: "nih", pancreas: "nih", spleen: "nih", bowel: "servier", colon: "servier", bladder: "servier", eye: "servier", ear: "nih", skin: "nih", muscle: "servier", joint: "dbcls", vessel: "servier" };
+const ART_FULL = { nih: "NIH BioArt Source, public domain", servier: "Servier Medical Art by Servier, CC BY 3.0 (https://smart.servier.com), recoloured and animated", dbcls: "knee joint art by DataBase Center for Life Science (DBCLS), CC BY 4.0" };
+const ART_SHORT = { nih: "NIH BioArt Source (public domain)", servier: "Servier Medical Art by Servier (CC BY 3.0)", dbcls: "DBCLS knee joint art (CC BY 4.0)" };
 function organsArtJs(kinds) {
   let js = "";
   for (const k of kinds) {
@@ -44,11 +48,12 @@ export function buildScene(o) {
     if (Array.isArray(organs)) organKinds = organs.filter((k) => ORG_SLIM[k]);
     else { const seen = new Set(), re = /organ\(\s*[^,]+,\s*"([a-z]+)"/g; let m; while ((m = re.exec(pageJs))) if (ORG_SLIM[m[1]] && !seen.has(m[1])) { seen.add(m[1]); organKinds.push(m[1]); } }
   }
+  const artSrcs = ["nih", "servier", "dbcls"].filter((s) => organKinds.some((k) => ORG_SRC[k] === s));
   const sources = `<footer class="bio-sources">
 <h2>What the figure shows, and how sure we are</h2>
-<ul>${sourcesLis.map((s) => `<li>${s}</li>`).join("")}${organKinds.length ? `<li><strong>Organ art.</strong> Organ art is NIH BioArt Source, public domain.</li>` : ""}</ul>
+<ul>${sourcesLis.map((s) => `<li>${s}</li>`).join("")}${artSrcs.length ? `<li><strong>Organ art.</strong> Organ art is ${artSrcs.map((s) => ART_FULL[s]).join("; ")}.</li>` : ""}</ul>
 <p><strong>What was simplified.</strong> ${simplified}</p>
-<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). ${organKinds.length ? "Organ illustrations are NIH BioArt Source (public domain); all other drawing is original." : "All drawing is original."}</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). ${artSrcs.length ? `Organ illustrations are ${artSrcs.map((s) => ART_SHORT[s]).join("; ")}; all other drawing is original.` : "All drawing is original."}</p>
 <p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
 </footer>`;
   const SC = { ...scene, S: { level: MD.level, settings: MD.settings, drugNames: MD.drugNames, status: MD.status } };

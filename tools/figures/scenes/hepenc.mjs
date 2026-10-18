@@ -47,14 +47,14 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<path id="shunt" class="he-shunt" d="M285 250 C295 165 375 108 500 100 C600 142 650 215 700 236 C712 238 724 236 735.4 233.1"/>
-<path id="vesselIn" class="he-vessel" d="M222 255 L453.5 249.9"/>
-<path id="vesselOut" class="he-vessel" d="M455.8 128.3 C560 140 640 200 700 236"/>
-<path class="he-ureaout" d="M453.5 308 L453.5 362"/>
-<ellipse class="he-gut" cx="150" cy="242" rx="72" ry="52"/>
+<path id="shunt" class="he-shunt" d="M266 306 C256 200 265 130 330 100 C360 88 430 90 500 100 C575 88 605 92 630 125 C655 165 680 210 700 236 C712 238 724 236 735.4 233.1"/>
+<path id="vesselIn" class="he-vessel" d="M195 314.5 L430.5 285.7"/>
+<path id="vesselOut" class="he-vessel" d="M442 106.7 C522 80.7 572 80.7 612 94.7 C650 108 680 180 700 236"/>
+<path id="ureaOut" class="he-ureaout" d="M430.5 308 L430.5 362"/>
+<g id="gutSlot"></g>
 <g id="liverSlot"></g>
-<g id="scars" class="he-scars"><circle cx="410" cy="180" r="13"/><circle cx="500" cy="165" r="10"/><circle cx="535" cy="215" r="12"/><circle cx="405" cy="220" r="9"/><circle cx="480" cy="255" r="8"/></g>
-<circle class="he-cycle" cx="465" cy="222" r="27"/>
+<g id="scars" class="he-scars"><circle cx="419" cy="143" r="13"/><circle cx="453" cy="152" r="10"/><circle cx="407" cy="190" r="12"/><circle cx="442" cy="200" r="9"/><circle cx="419" cy="219" r="8"/></g>
+<circle id="cycle" class="he-cycle" cx="430" cy="190" r="24"/>
 <ellipse id="brainGlow" class="he-glow" cx="800" cy="195" rx="92" ry="78" opacity="0"/>
 <g id="brainSlot"></g>
 <g id="flow"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
@@ -72,7 +72,6 @@ buildScene({
   ],
   simplified: "Glutamine chemistry detail, other toxins and inflammatory mediators, brain imaging, clinical grading criteria, precipitant lists beyond examples in words, transplant and shunt procedures, and all doses and drug choices are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
   extraCss: `
-.he-gut{fill:color-mix(in srgb,var(--c-eos) 30%,var(--c-tis));stroke:color-mix(in srgb,var(--c-eos) 55%,#000);stroke-width:1.2}
 .he-glow{fill:var(--c-cyt2);stroke:none}
 .he-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .he-vessel{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 42%,var(--anatomy-paper));stroke-width:17;stroke-linecap:round;opacity:.8}

@@ -56,7 +56,7 @@ function loadLib() {
   return sandbox;
 }
 /* inject slim art the way bio-scene.mjs does (same files, same JSON escaping) */
-const KIND_FILE = { liver: "liver-1", heart: "heart-1", kidney: "kidney-1", lung: "lung-1", stomach: "stomach-1", intestine: "intestine-1", brain: "brain-1", pancreas: "pancreas-1", spleen: "spleen-1" };
+const KIND_FILE = { liver: "liver-4", heart: "heart-1", kidney: "kidney-1", lung: "lung-1", stomach: "stomach-1", intestine: "intestine-1", brain: "brain-1", pancreas: "pancreas-1", spleen: "spleen-1", bowel: "small-intestine-1", colon: "large-intestine-2", bladder: "bladder-1", eye: "eye-1", ear: "ear-2", skin: "skin-2", muscle: "muscle-1", joint: "joint-1", vessel: "blood-vessel-1" };
 function injectArt(box, kinds) {
   let js = "";
   for (const k of kinds) {
@@ -76,19 +76,20 @@ function walk(el, out) {
 
 const slimFiles = readdirSync(SLIM).filter((f) => f.endsWith(".svg")).sort();
 
-test("fig-organs: every slim svg parses and is under 90KB", () => {
-  assert.ok(slimFiles.length >= 9, "slim art exists: " + slimFiles.join(","));
+test("fig-organs: every slim svg parses and is under 70KB", () => {
+  assert.ok(slimFiles.length >= 18, "slim art exists: " + slimFiles.join(","));
   for (const f of slimFiles) {
     const p = join(SLIM, f), s = readFileSync(p, "utf8");
     assert.ok(xmlOk(s), f + " is well-formed XML with an svg root");
     assert.match(s, /viewBox="[^"]+"/, f + " keeps its viewBox");
-    assert.ok(statSync(p).size < 90 * 1024, f + " is under 90KB (" + statSync(p).size + "B)");
+    assert.ok(statSync(p).size < 70 * 1024, f + " is under 70KB (" + statSync(p).size + "B)");
     assert.ok(!/base64|adobe_illustrator_pgf|<image/i.test(s), f + " has no raster blob or editor data");
   }
+  for (const [k, f] of Object.entries(KIND_FILE)) assert.ok(slimFiles.includes(f + ".svg"), k + " slim file " + f + ".svg exists");
 });
 
 const EXPECTED_PORTS = {
-  liver: ["in", "out", "porta", "gall", "lobe"],
+  liver: ["in", "out", "porta", "hepvein", "gall", "lobe"],
   heart: ["in", "out", "aorta", "ivc", "apex", "pulm"],
   kidney: ["in", "out", "vein", "pelvis", "cortex", "hilum"],
   lung: ["in", "out", "trachea", "carina", "hilumL", "hilumR"],
@@ -97,9 +98,19 @@ const EXPECTED_PORTS = {
   brain: ["in", "out", "parenchyma", "cereb", "frontal", "stem", "carotid"],
   pancreas: ["in", "out", "head", "tail", "body"],
   spleen: ["in", "out", "hilum", "pulp"],
-  bladder: ["in", "out", "dome"],
+  bowel: ["in", "out", "coils"],
+  colon: ["in", "out", "caecum", "rectum", "ascending", "transverse", "descending", "sigmoid"],
+  bladder: ["in", "out", "inR", "trigone", "dome"],
   uterus: ["in", "out", "fundus"],
+  ovary: ["in", "out", "dom", "surf"],
   thyroid: ["in", "out", "isthmus"],
+  eye: ["in", "out", "retina", "lens", "cornea", "nerve"],
+  ganglion: ["in", "out", "soma", "nucleus"],
+  ear: ["in", "out", "canals", "vestibule", "cochlea", "nerve"],
+  skin: ["in", "out", "surface", "epidermis", "dermis", "hypodermis"],
+  muscle: ["in", "out", "belly", "fibre"],
+  joint: ["in", "out", "femur", "joint", "patella", "tibia", "fibula"],
+  vessel: ["in", "out", "lumen", "wall"],
 };
 
 test("fig-organs: organ() returns ports for each kind", () => {
@@ -116,7 +127,7 @@ test("fig-organs: organ() returns ports for each kind", () => {
       assert.ok(Array.isArray(o.ports[p]), k + " has port " + p);
       assert.ok(o.ports[p].every(Number.isFinite), k + "." + p + " is numeric");
     }
-    const wantArt = !(k === "bladder" || k === "uterus" || k === "thyroid");
+    const wantArt = !(k === "uterus" || k === "ovary" || k === "thyroid" || k === "ganglion");
     assert.equal(o.art, wantArt, k + (wantArt ? " uses art" : " falls back to procedural"));
   }
 });
@@ -144,6 +155,25 @@ test("fig-organs: art path inlines paths, tint masks, dim dulls, flip mirrors", 
   }
 });
 
+test("fig-organs: liver art carries procedural gallbladder and vein stubs", () => {
+  const box = loadLib();
+  injectArt(box, ["liver", "heart"]);
+  const organ = vm.runInContext("organ", box);
+  const o = organ(stubEl("g"), "liver", 100, 100, 200, {});
+  assert.ok(o.art, "liver uses art");
+  const inner = o.g.children[0].children;
+  const artIdx = inner.findIndex((c) => (c.attrs.class || "").includes("org-halo"));
+  assert.ok(artIdx > 1, "liver has an extras group before the art group");
+  const extra = inner[artIdx - 1];
+  assert.equal(extra.tag, "g");
+  assert.equal(extra.children.length, 3, "extras are two vein stubs plus the gallbladder");
+  assert.deepEqual(o.ports.in, o.ports.porta, "blood enters at the porta stub tip");
+  assert.deepEqual(o.ports.out, o.ports.hepvein, "blood leaves at the hepatic stub tip");
+  assert.ok(o.ports.gall[1] > 100, "gall port sits on the fundus below the mass centre");
+  const h = organ(stubEl("g"), "heart", 100, 100, 200, {});
+  assert.equal(h.g.children[0].children.findIndex((c) => (c.attrs.class || "").includes("org-halo")), 1, "non-liver art has no extras group");
+});
+
 test("fig-organs: hf/pe beat scales the outer g (art path has no children[1])", () => {
   const box = loadLib();
   injectArt(box, ["heart"]);
@@ -160,13 +190,17 @@ test("fig-organs: hf/pe beat scales the outer g (art path has no children[1])", 
   assert.equal(o.g.attrs.transform, "translate(175 268) scale(1.100)", "beat keeps the organ centred");
 });
 
-test("fig-organs: hepenc pages credit NIH BioArt and stay under budget", () => {
+test("fig-organs: hepenc pages credit exactly the sources they use and stay under budget", () => {
   for (const f of ["hepatic-encephalopathy.html", "hepatic-encephalopathy-light.html"]) {
     const s = readFileSync(join(ROOT, "prep/figures", f), "utf8");
-    assert.match(s, /Organ art is NIH BioArt Source, public domain/, f + " credits the art");
-    assert.ok(s.includes('_ORG_ART["liver"]') && s.includes('_ORG_ART["brain"]'), f + " embeds liver and brain art");
+    const footer = s.match(/<footer class="bio-sources">[\s\S]*?<\/footer>/)[0];
+    assert.match(footer, /Organ art is NIH BioArt Source, public domain; Servier Medical Art by Servier, CC BY 3\.0 \(https:\/\/smart\.servier\.com\), recoloured and animated\./, f + " credits NIH and Servier");
+    assert.match(footer, /Organ illustrations are NIH BioArt Source \(public domain\); Servier Medical Art by Servier \(CC BY 3\.0\); all other drawing is original\./, f + " repeats both sources in the colophon");
+    assert.ok(!footer.includes("DBCLS"), f + " names no source it does not use");
+    assert.ok(s.includes('_ORG_ART["liver"]') && s.includes('_ORG_ART["brain"]') && s.includes('_ORG_ART["bowel"]'), f + " embeds liver, brain and bowel art");
+    assert.ok(s.includes('vb:[0,0,334.9,277.2]'), f + " embeds liver-4, not liver-1");
     assert.ok(!s.includes('_ORG_ART["heart"]'), f + " embeds only the organs it uses");
   }
-  const two = statSync(join(SLIM, "liver-1.svg")).size + statSync(join(SLIM, "brain-1.svg")).size;
-  assert.ok(two < 150 * 1024, "liver+brain slim art is under 150KB (" + two + "B)");
+  const three = statSync(join(SLIM, "liver-4.svg")).size + statSync(join(SLIM, "brain-1.svg")).size + statSync(join(SLIM, "small-intestine-1.svg")).size;
+  assert.ok(three < 150 * 1024, "liver+brain+bowel slim art is under 150KB (" + three + "B)");
 });
