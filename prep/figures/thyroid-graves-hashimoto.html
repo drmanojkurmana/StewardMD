@@ -1,0 +1,536 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Thyroid autoimmunity: Graves and Hashimoto</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+body{--c-thy:#e8a04c;--c-trach:#8fb8c9;--c-eye:#7fc4e8}
+body[data-theme="light"]{--c-thy:#c97e22;--c-trach:#5f96ad;--c-eye:#3fa0d4}
+.gr-track{fill:none;stroke:var(--anatomy-faint);stroke-width:1.6;stroke-dasharray:5 6}
+.gr-track-eye{stroke-dasharray:2 6}
+.gr-trach{fill:color-mix(in srgb,var(--c-trach) 28%,var(--anatomy-paper));stroke:var(--c-trach);stroke-width:1.1}
+.gr-ring{stroke:var(--c-trach);stroke-width:1;opacity:.7}
+.gr-lobe{fill:color-mix(in srgb,var(--c-thy) 58%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-thy) 70%,#000);stroke-width:1.3}
+.gr-isth{fill:color-mix(in srgb,var(--c-thy) 52%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-thy) 65%,#000);stroke-width:1}
+.gr-foll{fill:color-mix(in srgb,var(--c-thy) 30%,#fff);stroke:color-mix(in srgb,var(--c-thy) 60%,#000);stroke-width:.7}
+.gr-fib{fill:none;stroke:var(--anatomy-mid);stroke-width:1;opacity:.6}
+.gr-eye{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1.3}
+.gr-ball{fill:color-mix(in srgb,var(--c-eye) 18%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.gr-iris{fill:var(--c-eye)}
+.gr-pupil{fill:var(--anatomy-strong)}
+.gr-eye-lid{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.gr-halo{fill:var(--c-bad)}
+.gr-heart{fill:color-mix(in srgb,var(--c-rbc) 62%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 65%,#000);stroke-width:1.3}
+.p-tshp{--cc:var(--c-cyt2)}.p-horm{--cc:#ff9a3d}
+.p-ab-y{fill:none;stroke:var(--c-ab);stroke-width:1.8;stroke-linecap:round}
+.dr-g-fill.g-ab{fill:var(--c-ab)}.dr-g-fill.g-thy{fill:var(--c-thy)}.dr-g-fill.g-dmg{fill:var(--c-bad)}.dr-g-fill.g-eye{fill:var(--c-eye)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Thyroid autoimmunity: Graves and Hashimoto</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>hormone high · TSH suppressed · gland enlarged · eye signs present</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated thyroid gland in the front of the neck, with the pituitary above it on the left, antibody making plasma cells, and on the right an eye and body tissues. In Graves disease a stimulating antibody switches the TSH receptor on, so the gland grows and makes too much hormone, TSH is suppressed, and the eye is inflamed. In Hashimoto thyroiditis a thyroid peroxidase antibody pattern with lymphocytic destruction slowly removes follicles, so hormone falls and TSH rises. A slider moves from Graves to early and late Hashimoto, and a treatment menu offers an antithyroid medicine, radioiodine or surgery, or levothyroxine replacement. Gauges show antibody, gland damage, hormone, TSH, gland size and eye signs."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<path class="gr-track" d="M152 108C230 92 330 120 424 178"/>
+<path class="gr-track" d="M152 308C240 306 340 282 424 252"/>
+<path class="gr-track" d="M548 226C640 246 700 268 742 286"/>
+<path class="gr-track gr-track-eye" d="M536 178C620 128 690 116 742 114"/>
+<g id="trachea"><rect class="gr-trach" x="466" y="158" width="28" height="168" rx="12"/>
+<path class="gr-ring" d="M466 190h28M466 222h28M466 254h28M466 286h28M466 318h28"/></g>
+<g id="thy"><ellipse class="gr-lobe" cx="430" cy="235" rx="48" ry="62"/><ellipse class="gr-lobe" cx="530" cy="235" rx="48" ry="62"/><rect class="gr-isth" x="428" y="224" width="104" height="22" rx="10"/></g>
+<g id="folls"></g>
+<g id="lymphs"></g>
+<g id="pit"></g>
+<g id="plasma"></g>
+<g id="eyeG">
+<circle id="eyeHalo" class="gr-halo" cx="800" cy="115" r="52" opacity="0"/>
+<ellipse class="gr-eye" cx="800" cy="115" rx="58" ry="34"/>
+<g id="eyeball"><circle class="gr-ball" cx="800" cy="115" r="24"/><circle class="gr-iris" cx="800" cy="115" r="11"/><circle class="gr-pupil" cx="800" cy="115" r="5"/></g>
+<path class="gr-eye-lid" d="M742 115Q800 76 858 115Q800 132 742 115Z"/>
+</g>
+<g id="heartG"><path class="gr-heart" d="M800 268c-8 -16 -34 -18 -42 -4c-9 15 2 32 42 56c40 -24 51 -41 42 -56c-8 -14 -34 -12 -42 4Z"/></g>
+<g id="parts"></g>
+<g id="over"></g>
+<g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Disease and stage</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="Graves disease"><span class="dr-ticks"><i>Graves</i><i>Hashimoto early</i><i>Hashimoto late</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">antithyroid medicine (blocks hormone making)</option><option value="2">radioiodine or surgery (removes the gland)</option><option value="3">levothyroxine replacement</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>Graves disease.</strong> A stimulating antibody against the TSH receptor (often called TRAb or TSI) binds the receptor on thyroid follicular cells and switches it on without TSH. The gland grows diffusely (goitre), makes and releases too much thyroid hormone, and the high hormone suppresses pituitary TSH by negative feedback. A related autoimmune inflammation behind the eye expands orbital tissue and muscle, pushing the eye forward and causing Graves eye disease. This is standard teaching in endocrinology texts and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Hashimoto thyroiditis.</strong> Antibodies against thyroid peroxidase (TPO) mark a lymphocytic attack on the gland. Lymphocytes infiltrate, follicles are destroyed and, over time, fibrous tissue replaces working gland. Early on the gland may be enlarged and hormone may still be held near normal while TSH rises to compensate. Late, with little follicle left, hormone is low and TSH is high (primary hypothyroidism). A short release of stored hormone early in destruction is left out here.</li><li><strong>Treatment ideas shown.</strong> An antithyroid medicine blocks new hormone making, which helps Graves but deepens a Hashimoto deficit. Radioiodine or surgery removes the overactive gland in Graves, after which hormone falls and replacement is usually needed, while eye disease may persist. Levothyroxine replaces missing hormone in Hashimoto and restores feedback, but adds to an already high hormone level in untreated Graves. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Hashitoxicosis and other transient phases, blocking and neutral TSH receptor antibodies, TPO antibody titres and testing, ultrasound and biopsy, pregnancy and neonatal effects, thyroid storm and myxoedema, eye disease grading and its own treatment, drug choice and monitoring, radioiodine precautions, surgical risks, and all doses and targets are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Disease and stage","a":[0,1,2],"names":["Graves disease","Hashimoto thyroiditis, early","Hashimoto thyroiditis, late"],"ticks":["Graves","Hashimoto early","Hashimoto late"],"start":0},"settings":[{"label":"no treatment"},{"label":"antithyroid medicine (blocks hormone making)"},{"label":"radioiodine or surgery (removes the gland)"},{"label":"levothyroxine replacement"}],"drugNames":["no treatment","an antithyroid medicine","radioiodine or surgery","levothyroxine replacement"],"status":"Pattern: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const cl = (v) => Math.max(0, Math.min(1, v));
+  const anti = drug === 1 ? 1 : 0, abl = drug === 2 ? 1 : 0, levo = drug === 3 ? 1 : 0;
+  const stim = level === 0 && !abl ? 1 : 0;
+  let Ab = level === 0 ? 0.9 : level === 1 ? 0.85 : 0.68;
+  if (anti) Ab *= 0.85; if (abl) Ab *= 0.9;
+  const D = abl ? 1 : level === 0 ? 0.16 : level === 1 ? 0.6 : 0.95;
+  const capBase = level === 0 ? 1 : level === 1 ? 0.62 : 0.16;
+  const cap = abl ? capBase * 0.07 : capBase;
+  let gs = level === 0 ? 0.88 : level === 1 ? 0.74 : 0.28;
+  if (abl) gs = 0.12; else if (anti && level === 0) gs *= 0.92; else if (levo) gs *= 0.92;
+  const Eye = level === 0 ? (abl ? 0.68 : 0.8) : 0.05;
+  let H = 0.5, P = 0.5;
+  for (let i = 0; i < 80; i++) {
+    const pT = cl(1.15 - 1.1 * H);
+    let prod = stim ? 0.95 : cap * cl(0.25 + 0.85 * pT);
+    if (anti) prod *= 0.55;
+    const hT = cl(prod * (levo && !stim ? 0.25 : 1) + (levo ? 0.48 : 0));
+    H += 0.4 * (hT - H); P += 0.4 * (pT - P);
+  }
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(H, 0.35, 0.65, ["low", "normal", "high"]), w(P, 0.35, 0.62, ["suppressed", "normal", "high"]), w(gs, 0.35, 0.65, ["small", "normal", "enlarged"]), Eye < 0.3 ? "absent" : "present"];
+  return { Ab, D, cap, stim, anti, abl, levo, H, P, gs, Eye, words, readout: "hormone " + words[0] + " \u00b7 TSH " + words[1] + " \u00b7 gland " + words[2] + " \u00b7 eye signs " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Graves and Hashimoto scene: pituitary TSH, plasma cell antibodies, the thyroid gland, eye and body tissues, and the gauges. */
+const layers = { thy: $("thy"), folls: $("folls"), lymphs: $("lymphs"), pit: $("pit"), plasma: $("plasma"), parts: $("parts"), over: $("over"), panel: $("panel"), eyeHalo: $("eyeHalo"), eyeball: $("eyeball"), heartG: $("heartG") };
+const tshTr = track([[152, 108], [230, 94], [330, 118], [424, 178]]);
+const abTr = track([[152, 308], [240, 305], [340, 282], [424, 252]]);
+const abEyeTr = track([[536, 178], [620, 128], [690, 116], [742, 114]]);
+const hormTr = track([[548, 226], [640, 246], [700, 268], [742, 286]]);
+const rxTr = track([[640, 352], [590, 312], [545, 272]]);
+/* follicles inside the two lobes */
+const follList = [];
+function initFolls() {
+  const offs = [[-34, -38], [-12, -46], [10, -40], [30, -30], [-40, -12], [-16, -18], [8, -14], [32, -6], [-36, 12], [-12, 8], [12, 12], [34, 16], [-24, 34], [0, 36], [22, 36], [-8, -2]];
+  [430, 530].forEach((cx, li) => { offs.forEach((o, i) => { const g = mk("g", {}, layers.folls); mk("circle", { class: "gr-foll", cx: cx + o[0], cy: 235 + o[1], r: 7 + ((i + li) % 3) }, g); follList.push(g); }); });
+  const fibs = [];
+  for (let i = 0; i < 6; i++) fibs.push(mk("path", { class: "gr-fib", d: "M" + (404 + i * 16) + " " + (196 + (i % 3) * 22) + "l34 " + (18 - (i % 3) * 14) + "l28 " + ((i % 2) * 16 - 8) }, layers.lymphs));
+  layers._fibs = fibs;
+}
+const lymphList = [];
+function initLymphs() {
+  const offs = [[-28, -28], [0, -34], [26, -20], [-14, -6], [16, 2], [-30, 18], [4, 22], [28, 28], [-6, -20], [12, -28]];
+  [430, 530].forEach((cx) => { offs.forEach((o) => { const g = cell(layers.lymphs, { cls: "lymph", r: 6, nuc: 0.5, seed: lymphList.length + 3, wob: 0.14 }); g.setAttribute("transform", "translate(" + (cx + o[0]) + " " + (235 + o[1]) + ")"); lymphList.push(g); }); });
+}
+let pitCell = null, plasmaCell = null, ablRing = null, rxPillEl = null;
+function initNodes() {
+  pitCell = cell(layers.pit, { cls: "mac", r: 26, nuc: 0.4, seed: 4, wob: 0.12 });
+  plasmaCell = cell(layers.plasma, { cls: "bcell", r: 24, nuc: 0.45, seed: 8, wob: 0.13 });
+  ablRing = mk("ellipse", { class: "gr-fib", cx: 480, cy: 235, rx: 92, ry: 78, opacity: "0", style: "stroke:var(--c-bad);stroke-width:1.6;stroke-dasharray:5 4;fill:none" }, layers.over);
+}
+/* particle pools */
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, u: 0, k: 0 }; }); }
+const tshP = pool(14, () => mk("circle", { class: "sc-p p-tshp", r: 2.6 }, layers.parts));
+const abP = pool(22, () => { const g = mk("g", {}, layers.parts); mk("path", { class: "p-ab-y", d: "M0 5L0 -1M0 -1L-4 -6M0 -1L4 -6" }, g); return g; });
+const hormP = pool(22, () => mk("path", { class: "sc-p p-horm", d: "M0 -3.4L3.4 0L0 3.4L-3.4 0Z" }, layers.parts));
+const capsP = pool(10, () => { const g = mk("g", {}, layers.parts); mk("rect", { class: "p-pill", x: -5, y: -2.5, width: 10, height: 5, rx: 2.5 }, g); mk("rect", { class: "p-pill2", x: 0, y: -2.5, width: 5, height: 5, rx: 2.5 }, g); return g; });
+const freeP = (pl) => pl.find((p) => !p.on);
+function emitP(p, k) { p.on = true; p.u = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
+function movePool(pl, tr, sp, rot) { pl.forEach((p) => { if (!p.on) return; const T = typeof tr === "function" ? tr(p) : tr; p.u += (sp / T.len) * dtCur; if (p.u >= 1) { killP(p); return; } const q = T.at(p.u); p.e.setAttribute("transform", "translate(" + f1(q.x) + " " + f1(q.y) + ")" + (rot ? " rotate(" + f1(q.a + 90) + ")" : "")); }); }
+let dtCur = 0.016;
+/* labels and gauges */
+const gg = {};
+function initPanel() {
+  const P = layers.panel, y0 = 478, h = 70, xs = [100, 240, 380, 520, 660, 800];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: WW - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The patient";
+  [["ab", "Antibody", "g-ab", "The autoantibody pattern: a stimulating TSH receptor antibody in Graves, and a thyroid peroxidase antibody pattern in Hashimoto."], ["dmg", "Damage", "g-dmg", "Loss of working follicles from lymphocytic destruction and fibrosis. Low in Graves, high in late Hashimoto."], ["horm", "Hormone", "g-thy", "Thyroid hormone reaching the body. High speeds tissues up; low slows them down."], ["tsh", "TSH", "g-fl", "Pituitary thyroid stimulating hormone. Suppressed when hormone is high, high when the gland cannot respond."], ["gland", "Gland", "g-good", "Size of the thyroid gland. Enlarged as a goitre in Graves and early Hashimoto, small and shrunken in late Hashimoto."], ["eye", "Eye signs", "g-eye", "Graves eye disease: autoimmune inflammation behind the eye pushes it forward. It does not follow hormone alone and may persist after the gland is removed."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const ox = layers.over;
+  pill(ox, "Pituitary", 125, 89, 125, 60, "Anterior pituitary: it makes TSH. Thyroid hormone feeds back and turns TSH down, so TSH is suppressed in Graves and raised when a Hashimoto gland cannot respond.");
+  pill(ox, "TSH", 290, 104, 290, 68, "TSH, thyroid stimulating hormone. In Graves the gland ignores the low TSH because a stimulating antibody switches its receptor on. In Hashimoto a high TSH cannot rescue destroyed follicles.");
+  pill(ox, "Plasma cell", 125, 289, 125, 245, "Plasma cell: an antibody making cell of the immune system. Autoimmunity here is aimed at the thyroid, at its TSH receptor in Graves and at thyroid peroxidase in Hashimoto.");
+  pill(ox, "Antibodies", 265, 300, 265, 338, "Autoantibodies travelling to the gland. The stimulating kind switches the TSH receptor on in Graves. In Hashimoto, antibodies mark a lymphocytic attack that destroys follicles.");
+  pill(ox, "Thyroid gland", 480, 172, 480, 118, "Thyroid gland in front of the windpipe. It grows as a goitre when stimulated or infiltrated, and shrinks when follicles are lost or the gland is removed.");
+  pill(ox, "Lymphocytes", 450, 258, 370, 385, "Lymphocytes inside the gland. In Hashimoto they infiltrate and destroy follicles; in late disease fibrous tissue replaces working gland.");
+  pill(ox, "Hormone", 665, 252, 665, 205, "Thyroid hormone leaving the gland for body tissues. It sets metabolic pace and feeds back on the pituitary to lower TSH.");
+  pill(ox, "Eye", 800, 149, 800, 178, "The eye. In Graves, autoimmune inflammation behind the eye expands tissue and muscle and pushes the eye forward. This can persist even when hormone is controlled.");
+  pill(ox, "Body tissues", 800, 330, 800, 368, "Body tissues, shown by the heart. Too much thyroid hormone speeds and drives them; too little slows them down.");
+  rxPillEl = pill(ox, "Treatment", 600, 318, 660, 382, "The treatment chosen in the menu. An antithyroid medicine blocks hormone making, radioiodine or surgery removes the gland, and levothyroxine replaces missing hormone.");
+}
+const WW = SC.W;
+const sm = { Ab: 0.9, D: 0.16, cap: 1, stim: 1, anti: 0, abl: 0, levo: 0, H: 0.9, P: 0.1, gs: 0.88, Eye: 0.8, rx: 0 };
+const acc = { tsh: 0, ab: 0, horm: 0, cap: 0 };
+function init() { initFolls(); initLymphs(); initNodes(); initPanel(); }
+function step(dt, m) {
+  dtCur = dt;
+  const k = Math.min(1, dt * 0.8);
+  ["Ab", "D", "cap", "stim", "anti", "abl", "levo", "H", "P", "gs", "Eye"].forEach((n) => { sm[n] = lerp(sm[n], m[n], k); });
+  sm.rx = lerp(sm.rx, (m.anti || m.abl || m.levo) ? 1 : 0, k);
+  /* gland size and follicle survival */
+  const gsScale = 0.72 + 0.45 * sm.gs;
+  const gtr = "translate(480 235) scale(" + gsScale.toFixed(3) + ") translate(-480 -235)";
+  layers.thy.setAttribute("transform", gtr); layers.folls.setAttribute("transform", gtr); layers.lymphs.setAttribute("transform", gtr);
+  follList.forEach((g, i) => { g.style.opacity = (i / follList.length < sm.cap ? 0.95 : 0.1).toFixed(2); });
+  lymphList.forEach((g, i) => { g.style.opacity = (i / lymphList.length < sm.D ? 1 : 0).toFixed(2); });
+  if (layers._fibs) layers._fibs.forEach((f) => f.setAttribute("opacity", (sm.D * 0.7).toFixed(2)));
+  if (ablRing) ablRing.setAttribute("opacity", (sm.abl * 0.9).toFixed(2));
+  if (rxPillEl) { rxPillEl.style.opacity = sm.rx.toFixed(2); rxPillEl.style.pointerEvents = sm.rx > 0.3 ? "auto" : "none"; }
+  /* pituitary and plasma cell activity */
+  place(pitCell, 125 + Math.sin(tm / 1600) * 2, 115 + Math.cos(tm / 1800) * 1.5, 0, 0.85 + 0.3 * sm.P);
+  place(plasmaCell, 125 + Math.sin(tm / 1500 + 2) * 2, 315 + Math.cos(tm / 1700) * 1.5, 0, 0.85 + 0.3 * sm.Ab);
+  /* eye: forward push and inflamed halo with Graves activity */
+  layers.eyeHalo.setAttribute("opacity", (sm.Eye * 0.32).toFixed(2));
+  layers.eyeball.setAttribute("transform", "translate(" + f1(800 + sm.Eye * 12) + " 115) scale(" + (1 + sm.Eye * 0.08).toFixed(3) + ") translate(-800 -115)");
+  /* heart and tissues follow hormone */
+  const beat = 1 + (0.025 + 0.05 * sm.H) * Math.sin(tm / Math.max(120, 620 - 380 * sm.H));
+  layers.heartG.setAttribute("transform", "translate(800 295) scale(" + beat.toFixed(3) + ") translate(-800 -295)");
+  /* particles */
+  acc.tsh += dt * sm.P * 6; while (acc.tsh >= 1) { acc.tsh--; const p = freeP(tshP); if (p) emitP(p); }
+  acc.ab += dt * sm.Ab * 7; while (acc.ab >= 1) { acc.ab--; const p = freeP(abP); if (p) emitP(p, sm.Eye > 0.3 && Math.random() < 0.28 ? 1 : 0); }
+  acc.horm += dt * sm.H * 8; while (acc.horm >= 1) { acc.horm--; const p = freeP(hormP); if (p) emitP(p); }
+  acc.cap += dt * (sm.anti * 3 + sm.levo * 3); while (acc.cap >= 1) { acc.cap--; const p = freeP(capsP); if (p) emitP(p, sm.levo > sm.anti ? 1 : 0); }
+  movePool(tshP, tshTr, 52, false);
+  movePool(abP, (p) => (p.k ? abEyeTr : abTr), 58, true);
+  movePool(hormP, hormTr, 58, false);
+  movePool(capsP, (p) => (p.k ? hormTr : rxTr), 52, false);
+  /* gauges */
+  gg.ab.set(sm.Ab, wordOf(sm.Ab, 0.3, 0.65, ["low", "raised", "high"])); gg.dmg.set(sm.D, wordOf(sm.D, 0.3, 0.65, ["little", "some", "severe"])); gg.horm.set(sm.H, wordOf(sm.H, 0.35, 0.65, ["low", "normal", "high"]));
+  gg.tsh.set(sm.P, wordOf(sm.P, 0.35, 0.62, ["suppressed", "normal", "high"])); gg.gland.set(sm.gs, wordOf(sm.gs, 0.35, 0.65, ["small", "normal", "enlarged"])); gg.eye.set(sm.Eye, sm.Eye < 0.3 ? "absent" : "present");
+}
+run({ init, step });
+</script></body></html>
