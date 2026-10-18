@@ -60,37 +60,31 @@ const body = `
 <text class="sc-zone" x="34" y="68">ENTRY AND CHANCRE</text>
 <text class="sc-zone" x="360" y="68">BLOOD AND SKIN</text>
 <text class="sc-zone" x="660" y="68">LATE ORGANS</text>
-<rect class="sy-mucosa" x="40" y="272" width="270" height="58" rx="12"/>
-<rect class="sy-skin" x="355" y="90" width="260" height="52" rx="10"/>
-<rect class="sy-moist" x="355" y="182" width="260" height="42" rx="10"/>
-<rect id="lumen" class="sc-lumen" x="355" y="288" width="260" height="52"/>
-<path id="aortaPath" class="sy-aorta" d="M782 248 L782 150 Q782 96 800 96 Q818 96 818 150 L818 248 Q800 258 782 248 Z"/>
-<g id="zones"></g>
-<g id="skinG"></g>
+<g id="skinSlot"></g>
+<g id="vesselSlot"></g>
+<g id="rashSlot"></g>
+<g id="brainSlot"></g>
+<g id="aortaSlot"></g>
+<g id="uterusSlot"></g>
 <g id="chancreG"></g>
 <g id="lymphG"></g>
-<g id="condylG"></g>
-<g id="mucousG"></g>
-<g id="rbcs"></g>
+<g id="rashG"></g>
 <g id="gummaG"></g>
-<g id="brainG"></g>
-<g id="congG"></g>
+<g id="brainDots"></g>
+<g id="placG"></g>
+<g id="rbcs"></g>
 <g id="parts"></g>
 <g id="over"></g>
 <g id="panel"></g>`;
 
 const extraCss = `
-.cl-mac2{--cc:var(--c-mac)}.cl-lym2{--cc:var(--c-lymph)}.cl-neur2{--cc:#e9a2b3}.cl-gum2{--cc:#e59a88}
-.sy-mucosa{fill:color-mix(in srgb,var(--c-endo) 24%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.sy-skin{fill:color-mix(in srgb,var(--c-endo) 18%,var(--anatomy-paper));stroke:var(--c-endo);stroke-width:1}
-.sy-moist{fill:color-mix(in srgb,var(--c-lymph) 14%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1}
-.sy-aorta{fill:color-mix(in srgb,var(--c-rbc) 55%,var(--anatomy-paper));stroke:var(--c-rbc);stroke-width:1.2}
+.cl-mac2{--cc:var(--c-mac)}.cl-lym2{--cc:var(--c-lymph)}
+.sy-rim{fill:color-mix(in srgb,var(--c-bad) 22%,var(--anatomy-paper));stroke:var(--anatomy-strong);stroke-width:2}
 .sy-ulcer{fill:color-mix(in srgb,var(--c-bad) 35%,var(--anatomy-paper));stroke:var(--c-bad);stroke-width:1.4}
-.sy-rim{fill:none;stroke:var(--anatomy-strong);stroke-width:2}
 .sy-rash{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 60%,#000);stroke-width:.6}
-.sy-patch{fill:var(--anatomy-paper);stroke:var(--c-lymph);stroke-width:1;opacity:.9}
 .sy-node{fill:color-mix(in srgb,var(--c-lymph) 28%,var(--anatomy-paper));stroke:var(--c-lymph);stroke-width:1.2}
 .sy-plac{fill:color-mix(in srgb,var(--c-mast) 30%,var(--anatomy-paper));stroke:var(--c-mast);stroke-width:1.2}
+.sy-cap{fill:var(--anatomy-strong);font-size:12px}
 .p-spiro{fill:none;stroke:var(--c-bac);stroke-width:1.6;stroke-linecap:round}
 .p-imm{--cc:var(--c-cyt)}
 .dr-g-fill.g-sero{fill:var(--c-lymph)}.dr-g-fill.g-late{fill:var(--c-bad)}.dr-g-fill.g-imm{fill:var(--c-mac)}.dr-g-fill.g-org{fill:var(--c-bac)}.dr-g-fill.g-les{fill:var(--c-bad)}.dr-g-fill.g-dis{fill:var(--c-cyt2)}
@@ -100,8 +94,8 @@ buildScene({
   id: "syphilis-stages", fig: "Fig 1", title: "Syphilis: chancre to late organ damage", W, H, body, extraCss,
   label: "An animated staging scene for syphilis. Spirochetes enter at a mucosal surface and form a painless chancre in primary disease. In secondary disease organisms spread in blood, with rash, condylomata lata, mucous patches, lymphadenopathy and strong serology. After a latent interval, untreated disease may cause tertiary gumma, cardiovascular aortitis and neurosyphilis, and infection in pregnancy may cause congenital disease. Gauges show organisms, lesions, spread, serology, immune response and late damage. Treatment choices include penicillin, follow-up serology only, and penicillin directed at neurosyphilis.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numeric cutoffs are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "syph.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without penicillin", withLabel: "With penicillin",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "syph.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without penicillin", withLabel: "With penicillin for neurosyphilis",
   sourcesLis: [
     "<strong>How syphilis develops.</strong> Treponema pallidum is usually sexually transmitted and enters through mucosa or broken skin. After an incubation period it causes a usually painless, nontender primary chancre at the entry site, with local lymphadenopathy; the lesion is infectious and full of organisms, then heals even without treatment. Weeks later, secondary disease follows blood-borne spread: widespread lesions including a rash, condylomata lata and mucous patches, generalised lymphadenopathy, and sometimes ocular involvement. Macrophages and the immune response partly control organisms. Serologic tests become reactive: nontreponemal tests such as VDRL track activity, while treponemal tests usually stay reactive. A latent stage with no lesions may follow. In some untreated persons, late tertiary disease develops years later: gumma lesions, cardiovascular involvement such as aortitis, and neurosyphilis. Infection in pregnancy can cross the placenta and cause congenital syphilis. This is standard teaching in medicine and infectious-disease texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>Treatment ideas shown.</strong> Penicillin clears organisms and heals lesions, and a regimen that reaches the nervous system is used when neurosyphilis is present. Follow-up serology only tracks the nontreponemal response; on its own it does not clear organisms. Existing late damage may persist even after organisms are cleared. These are teaching toggles only.",
