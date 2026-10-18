@@ -302,6 +302,8 @@ try {
   ok(await ev(`return document.querySelectorAll('${CBL} .cbl-guide li').length >= 3;`) === true, "guide prompts render with sources");
   ok(await ev(`return Array.from(document.querySelectorAll('${CBL} .cbl-gsrc')).every(function (e) { return e.textContent.length > 5; });`) === true, "every prompt cites a source");
   await shot("running", false); await shot("running", true);
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} [data-state="timeline-preview"]')).display === "none";`) === true, "phone: timeline preview stays hidden, drawer serves");
+  await shot("timer-preview-390", false); await shot("timer-preview-390", true);
   await metrics("running-390"); await contrast("running-390-dark"); await visualAudit("running-390");
   await layoutAudit("running-390", "phone"); await shellAudit("running-390");
   await ev(`document.body.classList.add("dark"); return 1;`); await sleep(200); await shellAudit("running-390-dark");
@@ -318,6 +320,14 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} #cblNoteTab');`) === true, "notes composer renders");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-act="notes-algo"]').length === 4;`) === true, "notes algorithm tabs render");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="reference-grid"] .cbl-refcard').length === 8;`) === true, "notes reference grid renders 8 cards");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="favourites-empty"]');`) === true, "notes favourites calm empty state renders");
+  ok(await ev(`var b=document.querySelector('${CBL} [data-act="notes-fav"]'); return !!b && !!b.querySelector('svg') && b.textContent.trim() === '' && b.getAttribute('aria-pressed') === 'false';`) === true, "pin is a drawn star icon toggle, not text");
+  ok(await ev(`var b=document.querySelector('${CBL} [data-act="notes-fav"]'); var r=b.getBoundingClientRect(); return r.width >= 44 && r.height >= 44;`) === true, "star toggle target at least 44 px");
+  await click(`${CBL} [data-act="notes-fav"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="favourites"]');`, 5000), "starring a card fills the favourites row");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="favourites"] .cbl-star').classList.contains('on');`) === true, "pinned star reads as filled");
+  await click(`${CBL} [data-state="favourites"] [data-act="notes-fav"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="favourites-empty"]');`, 5000), "unpinning returns the calm favourites empty state");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="flowchart"]');`) === true, "notes flowchart renders");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-node').length >= 5;`) === true, "flowchart has nodes");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-node .cbl-gsrc').length === 0;`) === true, "flowchart nodes carry no repeated citation");
@@ -596,6 +606,9 @@ try {
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "absolute";`) === true, "iPad portrait: timeline is a bottom drawer, not a right column");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-actions')).gridTemplateColumns.split(" ").length === 4;`) === true, "iPad portrait: 4 column action grid");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip visible");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="timeline-preview"]');`) === true, "iPad portrait: timeline preview card renders");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} [data-state="timeline-preview"]')).display !== "none";`) === true, "iPad portrait: timeline preview is visible in the band under the actions");
+  await shot("timer-preview-820", false); await shot("timer-preview-820", true);
   await click(`${CBL} [data-act="tab-log"]`);
   ok(await until(`return CodeBlueLive._rt.tab() === "log";`, 5000), "iPad portrait: log tab opens");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="strip"]');`) === true, "iPad portrait: strip stays above the Log tab");
@@ -621,6 +634,7 @@ try {
   await call("Emulation.setDeviceMetricsOverride", { width: 1194, height: 834, deviceScaleFactor: 2, mobile: true });
   await sleep(400);
   ok(await until(viewIs("running"), 5000), "running at 1194x834");
+  ok(await ev(`return getComputedStyle(document.querySelector('${CBL} [data-state="timeline-preview"]')).display === "none";`) === true, "iPad landscape: timeline preview stays hidden, right column serves");
   ok(await ev(`return getComputedStyle(document.querySelector('${CBL} .cbl-timeline')).position === "static";`) === true, "iPad landscape: timeline is a right column");
   ok(await ev(`return document.documentElement.scrollWidth <= window.innerWidth + 1;`) === true, "iPad landscape: no horizontal scroll");
   await metrics("running-1194"); await visualAudit("running-1194");

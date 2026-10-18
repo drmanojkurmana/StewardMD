@@ -238,6 +238,24 @@
     }
     return null;
   }
+  // Continue hero: weakest case from training history, else first Guided.
+  function nextBest(s, caseList, scenarioList) {
+    if (!s || !s.hist || !s.hist.length) {
+      return scenarioList && scenarioList.length ? { kind: "guided", id: scenarioList[0].id, item: scenarioList[0] } : null;
+    }
+    var sug = suggestNext(s, caseList || []);
+    if (sug) {
+      var sc = null;
+      (caseList || []).forEach(function (c) { if (c.id === sug.caseId) sc = c; });
+      if (sc) return { kind: "case", id: sc.id, item: sc, topic: sug.topic };
+    }
+    var cands = (caseList || []).slice().sort(function (a, b) {
+      var pa = s.best[a.id] == null ? -1 : s.best[a.id], pb = s.best[b.id] == null ? -1 : s.best[b.id];
+      if (pa !== pb) return pa - pb;
+      return a.id < b.id ? -1 : 1;
+    });
+    return cands.length ? { kind: "case", id: cands[0].id, item: cands[0] } : null;
+  }
   function exportText(s, D) {
     function title(id) {
       if (!D) return id;
@@ -371,7 +389,7 @@
     STORE_KEY: STORE_KEY, DISCLAIMER: DISCLAIMER, MODES: MODES, MODE_LABEL: MODE_LABEL,
     blankStore: blankStore, loadStore: loadStore, saveStore: saveStore, recordResult: recordResult,
     weakSpots: weakSpots, trend: trend, weeklyTrend: weeklyTrend, weekKey: weekKey,
-    suggestNext: suggestNext, exportText: exportText,
+    suggestNext: suggestNext, nextBest: nextBest, exportText: exportText,
     resetStore: resetStore, validateContent: validateContent,
     memStorage: memStorage };
 
@@ -435,18 +453,70 @@
     try { rootEl.querySelector(".cbt-scroll").scrollTop = 0; } catch (e) {}
   }
 
+  var CBT_ICONS = {
+    guided: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 5-4 1 2-5z"/></svg>',
+    test: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/></svg>',
+    cases: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
+    mine: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>',
+    chart: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2"/></svg>'
+  };
+  function fmtDate(ts) {
+    if (!ts) return "";
+    var d = new Date(ts); if (isNaN(d)) return "";
+    function p(x) { return (x < 10 ? "0" + x : "" + x); }
+    return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+  }
   function showHome() {
     stopClock();
+    var s = getStore(), D = getData();
+    var allScn = scenarios(), allCases = cases();
+    var nb = nextBest(s, allCases, allScn);
+    var hero = "";
+    if (nb && nb.item) {
+      var it = nb.item, isG = nb.kind === "guided";
+      hero = '<section class="cbt-hero" data-state="continue" aria-label="Continue training">' +
+        '<p class="cbt-herok">Continue</p><h3 class="cbt-herot">' + esc(it.title) + "</h3>" +
+        '<p class="cbt-herom">' + esc(MODE_LABEL[it.mode] || it.mode) + " . " + esc(it.level || "") +
+        (nb.topic ? " . Weak topic: " + esc(nb.topic) : "") + "</p>" +
+        '<button type="button" class="cbt-next cbt-herobtn" data-act="' + (isG ? "start-guided" : "start-case") + '" data-id="' + esc(it.id) + '">' +
+        (isG ? "Start guided scenario" : "Start practice case") + "</button></section>";
+    }
+    var bestVals = Object.keys(s.best).map(function (k) { return s.best[k]; });
+    var mineMeta = bestVals.length ? "Best " + Math.max.apply(null, bestVals) + "%" : "No results yet";
+    var tile = function (act, icon, title, line, meta) {
+      return '<button type="button" class="cbt-station cbt-tile" data-act="' + act + '">' +
+        '<span class="cbt-tileicon" aria-hidden="true">' + CBT_ICONS[icon] + "</span>" +
+        "<b>" + esc(title) + "</b><span>" + esc(line) + "</span>" +
+        '<span class="cbt-tilemeta">' + esc(meta) + "</span></button>";
+    };
+    var recent = "";
+    var last3 = (s.hist || []).slice(-3).slice().reverse();
+    if (last3.length) {
+      recent = '<section class="cbt-recent" data-state="recent" aria-label="Recent results"><h3 class="cbt-sub">Recent</h3>' +
+        last3.map(function (h) {
+          var cs = findScenario(h.id) || findCase(h.id);
+          var passed = h.pct >= 70;
+          return '<div class="cbt-rrow"><span class="cbt-rrow-label">' + esc(cs ? cs.title : h.id) + "</span>" +
+            '<span class="cbt-chip cbt-chip-' + (passed ? "correct" : "missed") + '">' + (passed ? "Passed" : "Review") + "</span>" +
+            '<span class="cbt-rrow-text">' + esc(fmtDate(h.at)) + " . " + h.pct + "%</span></div>";
+        }).join("") + "</section>";
+    } else {
+      recent = '<section class="cbt-recent" data-state="recent"><h3 class="cbt-sub">Recent</h3>' +
+        '<p class="cbt-note">No results yet. Your last three results will appear here.</p></section>';
+    }
     var html = '<div class="cbt-top"><span class="cbt-title">Code Blue Trainer</span><span class="cbt-badge">TRAINING</span>' +
       '<button type="button" class="cbt-back" data-cbp-settings aria-label="Display settings">Display</button>' +
       '<button type="button" class="cbt-close" data-act="close" aria-label="Close trainer">Close</button></div>' +
-      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">Megacode and ACLS practice</h2><div class="cbt-layout">' +
-      '<p class="cbt-disc">' + esc(DISCLAIMER) + "</p>" +
+      '<div class="cbt-scroll"><h2 class="cbt-h" tabindex="-1">Megacode and ACLS practice</h2><div class="cbt-layout cbt-home">' +
+      hero +
+      '<div class="cbt-tiles">' +
+      tile("go-guided", "guided", "Guided Megacode", "Step through arrest scenarios with coaching.", allScn.length + " scenarios") +
+      tile("go-test", "test", "Test station", "Same scenarios, timed, no coaching, scored debrief.", allScn.length + " scenarios") +
+      tile("go-cases", "cases", "Practice cases", "Timed clues plus quiz questions.", allCases.length + " cases") +
+      tile("go-mine", "mine", "My training", "Best scores, trend and weak spots.", mineMeta) +
+      "</div>" + recent +
       '<p class="cbt-note">Practice only. The clock runs sped up and labelled TRAINING. Nothing here writes to a patient record.</p>' +
-      '<button type="button" class="cbt-station" data-act="go-guided"><b>Guided Megacode</b><span>Step through arrest scenarios with coaching.</span></button>' +
-      '<button type="button" class="cbt-station" data-act="go-test"><b>Test station</b><span>Same scenarios, timed, no coaching, scored debrief.</span></button>' +
-      '<button type="button" class="cbt-station" data-act="go-cases"><b>Practice cases</b><span>Timed clues plus quiz questions.</span></button>' +
-      '<button type="button" class="cbt-station" data-act="go-mine"><b>My training</b><span>Best scores, trend and weak spots.</span></button></div></div>';
+      '<p class="cbt-disc cbt-footnote">' + esc(DISCLAIMER) + "</p></div></div>";
     show(html, "home");
   }
 
@@ -700,7 +770,7 @@
     var D = getData();
     var html = "";
     if (!keys.length) {
-      html = '<p class="cbt-note">No training recorded yet. Finish a test station or a practice case to start your record.</p>';
+      html = '<div class="cbt-calm" data-state="mine-empty"><span class="cbt-calmicon" aria-hidden="true">' + CBT_ICONS.chart + '</span><p>No training recorded yet.</p><button type="button" class="cbt-next" data-act="go-cases">Start a practice case</button></div>';
     } else {
       var scnKeys = keys.filter(function (k) { return !!findScenario(k); });
       var caseKeys = keys.filter(function (k) { return !findScenario(k); });

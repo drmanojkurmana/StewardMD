@@ -1080,8 +1080,16 @@
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
     gear: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14.2 3h-4l-.4 2.5a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2.4l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2 1.2l.4 2.5h4l.4-2.5a7 7 0 0 0 2-1.2l2.3 1 2-3.4-2-1.5c.06-.4.1-.8.1-1.2z"/></svg>',
     log: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
-    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 7"/></svg>'
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12l5 5L20 7"/></svg>',
+    star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6L12 16.7 6.6 19.6l1.1-6L3.2 9.4l6.1-.8z"/></svg>',
+    search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>',
+    clock: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
   };
+  /* One calm empty pattern: 40px drawn icon in Cool Silver, one line, optional action. */
+  function calmEmpty(state, icon, text, actionHtml) {
+    return '<div class="cbl-calm" data-state="' + state + '"><span class="cbl-calmicon" aria-hidden="true">' +
+      (ICONS[icon] || ICONS.log) + '</span><p>' + esc(text) + "</p>" + (actionHtml || "") + "</div>";
+  }
 
   function tileSub(kind, elapsed) {
     var counts = computeCounts(sess.events);
@@ -1277,10 +1285,10 @@
     modeSet: "MODE", switchCompressor: "SWITCH"
   };
 
-  /* Live colour-coded timeline. Word plus border shape carry every state. */
-  function timelineView() {
+  function tlItems(limit) {
     var rows = sess.events.slice().sort(function (a, b) { return b.elapsed - a.elapsed; });
-    var items = rows.map(function (e) {
+    if (limit) rows = rows.slice(0, limit);
+    return rows.map(function (e) {
       var k = e.kind;
       var word = TL_WORD[k] || "LOG";
       return '<li class="cbl-tlitem" data-k="' + esc(k) + '">' +
@@ -1288,13 +1296,26 @@
         '<span class="cbl-tllabel">' + esc(e.label) + "</span>" +
         '<span class="cbl-tlword">' + esc(word) + "</span></li>";
     }).join("");
-    if (!rows.length) {
+  }
+  /* Live colour-coded timeline. Word plus border shape carry every state. */
+  function timelineView() {
+    var items = tlItems(0);
+    if (!sess.events.length) {
       items = '<li class="cbl-tlempty" data-state="empty-timeline">No events yet. Logged actions will appear here.</li>';
     }
     return '<aside class="cbl-timeline' + (timelineOpen ? " open" : "") + '" data-state="timeline" aria-label="Live timeline">' +
       '<div class="cbl-tlhead"><span>Timeline</span>' +
       '<button type="button" class="cbl-mini" data-act="sheet-log">Open log</button></div>' +
       '<ul class="cbl-tllist" data-cbfx-list>' + items + "</ul></aside>";
+  }
+  /* Portrait iPad only (CSS gated): fills the band under the Note bar. */
+  function tlPreviewView() {
+    var body = sess.events.length
+      ? '<ul class="cbl-tllist">' + tlItems(6) + "</ul>"
+      : '<p class="cbl-tlprevempty" data-state="empty-timeline-preview">No events yet. Logged actions will appear here.</p>';
+    return '<section class="cbl-tlpreview" data-state="timeline-preview" aria-label="Recent events">' +
+      '<div class="cbl-tlhead"><span>Recent events</span>' +
+      '<button type="button" class="cbl-mini" data-act="sheet-log">Open log</button></div>' + body + "</section>";
   }
 
   function linkRowView(ctx) {
@@ -1480,6 +1501,7 @@
         ? '<button type="button" class="cbl-btn cbl-checkbtn" data-act="sheet-checks" data-state="checklist-open">' +
           "Open post ROSC checklist</button>"
         : "") +
+      tlPreviewView() +
       '<button type="button" class="cbl-tlhandle" data-act="timeline-toggle" aria-expanded="' + timelineOpen + '">' +
       "<span>Timeline</span></button></div>";
   }
@@ -1579,7 +1601,8 @@
   function pastView() {
     var list = loadPast(defaultStorage());
     if (!list.length) {
-      return '<p class="cbl-empty" data-state="past-empty">No finished codes on this device yet.</p>';
+      return calmEmpty("past-empty", "clock", "No finished codes on this device yet.",
+        '<button type="button" class="cbl-btn" data-act="tab-timer">Open the timer</button>');
     }
     var rows = list.map(function (e) {
       var when = e.date ? esc(String(e.date).slice(0, 10) + " " + fmtWall(e.date)) : "";
@@ -1743,17 +1766,18 @@
     var tileHtml = function (c) {
       var fav = favs.indexOf(c.id) >= 0;
       return '<div class="cbl-refcard" data-card="' + c.id + '"><button type="button" class="cbl-reftile" data-act="notes-open" data-id="' + c.id + '"><span class="cbl-reficon" aria-hidden="true">' + (ICONS[c.icon] || ICONS.note) + '</span><span class="cbl-reftitle">' + esc(c.title) + '</span><span class="cbl-refsub">' + esc(c.sub) + '</span></button>' +
-        '<button type="button" class="cbl-star' + (fav ? " on" : "") + '" data-act="notes-fav" data-id="' + c.id + '" aria-pressed="' + fav + '" aria-label="Pin ' + esc(c.title) + ' to favourites">' + (fav ? "Pinned" : "Pin") + "</button></div>";
+        '<button type="button" class="cbl-star' + (fav ? " on" : "") + '" data-act="notes-fav" data-id="' + c.id + '" aria-pressed="' + fav + '" aria-label="' + (fav ? "Unpin " : "Pin ") + esc(c.title) + (fav ? " from favourites" : " to favourites") + '">' + ICONS.star + "</button></div>";
     };
     var favCards = REF_CARDS.filter(function (c) { return favs.indexOf(c.id) >= 0; });
-    var favRow = favCards.length ? '<div class="cbl-favrow" data-state="favourites"><p class="cbl-label">Favourites</p><div class="cbl-refgrid">' + favCards.map(tileHtml).join("") + "</div></div>" : "";
+    var favRow = favCards.length ? '<div class="cbl-favrow" data-state="favourites"><p class="cbl-label">Favourites</p><div class="cbl-refgrid">' + favCards.map(tileHtml).join("") + "</div></div>"
+      : calmEmpty("favourites-empty", "star", "No favourites pinned yet. Tap the star on a card to pin it.");
     return '<div class="cbl-tabpad" data-tabpanel="notes" role="tabpanel" aria-label="Notes">' +
       "<h2 class='cbl-h'>Notes</h2>" +
       '<div class="cbl-segs cbl-notessegs" role="tablist" aria-label="Algorithm">' + algoTabs + "</div>" +
       flowchartView() +
       favRow +
       '<div class="cbl-refgrid" data-state="reference-grid">' + REF_CARDS.map(tileHtml).join("") + "</div>" +
-      (items ? '<ul class="cbl-noteslist">' + items + "</ul>" : '<p class="cbl-empty" data-state="empty-notes">No notes yet.</p>') +
+      (items ? '<ul class="cbl-noteslist">' + items + "</ul>" : calmEmpty("empty-notes", "note", "No notes yet.")) +
       '<label class="cbl-label" for="cblNoteTab">Free text note</label>' +
       '<input id="cblNoteTab" class="cbl-input" type="text" maxlength="280" placeholder="Free text note" />' +
       '<div class="cbl-row"><button type="button" class="cbl-btn cbl-primary" data-act="note-add">Add note</button></div></div>';
@@ -1853,7 +1877,7 @@
     var navBody, detailBody;
     var emptyDetail = '<div class="cbl-setempty" data-state="settings-empty"><span class="cbl-setemptyicon" aria-hidden="true">' + ICONS.gear + '</span><p>Choose a group</p></div>';
     if (results) {
-      navBody = '<div data-state="settings-results">' + (results.length ? results.map(function (s) { return '<button type="button" class="cbl-setrowbtn cbl-resultrow" data-act="settings-group" data-group="' + esc(s.group) + '"><span class="cbl-resultlabel">' + markMatch(s.label, settingsQuery) + '</span><span class="cbl-setgroup">' + esc(s.group) + "</span></button>"; }).join("") : '<p class="cbl-note" data-state="settings-no-results">No settings match that search.</p>') + "</div>";
+      navBody = '<div data-state="settings-results">' + (results.length ? results.map(function (s) { return '<button type="button" class="cbl-setrowbtn cbl-resultrow" data-act="settings-group" data-group="' + esc(s.group) + '"><span class="cbl-resultlabel">' + markMatch(s.label, settingsQuery) + '</span><span class="cbl-setgroup">' + esc(s.group) + "</span></button>"; }).join("") : calmEmpty("settings-no-results", "search", "No settings match that search.")) + "</div>";
       detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : emptyDetail;
     } else {
       navBody = '<div class="cbl-setgrouplist">' + SETTING_GROUPS.map(function (g) { return '<button type="button" class="cbl-setrowbtn' + (settingsGroup === g ? " on" : "") + '" data-act="settings-group" data-group="' + esc(g) + '" aria-selected="' + (settingsGroup === g) + '"><span>' + esc(g) + '</span><span class="cbl-setvalue">' + esc(groupSummary(g, pref)) + '</span><span class="cbl-chev" aria-hidden="true">›</span></button>'; }).join("") + "</div>" +
@@ -2003,7 +2027,8 @@
       return e.kind !== "modeSet" && e.kind !== "cprStart" && eventMatchesFilter(e, filter || "all");
     });
     if (!visible.length) {
-      return '<p class="cbl-empty cbl-empty-calm" data-state="empty-log"><span class="cbl-empty-icon" aria-hidden="true">' + (ICONS.log || "") + '</span>No events yet. Logged actions will appear here.</p>';
+      return calmEmpty("empty-log", "log", "No events yet. Logged actions will appear here.",
+        '<button type="button" class="cbl-btn" data-act="tab-timer">Open the timer</button>');
     }
     var rows = visible.slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
     return '<ul class="cbl-log" data-cbfx-list>' + rows.map(function (e) {

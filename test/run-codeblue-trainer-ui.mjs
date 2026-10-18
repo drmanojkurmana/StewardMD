@@ -78,6 +78,18 @@ try {
   ok(await ev(badgeEverywhere) === true, "home shows TRAINING badge");
   await shot("home", false); await shot("home", true);
   await shotWidths("home");
+  /* cb4-J hub: Continue hero from data, tonal tiles with real meta, Recent, footnote disclaimer */
+  ok(await ev(`return !!document.querySelector('#cbtRoot [data-state="continue"]');`) === true, "hub Continue hero renders");
+  ok(await ev(`return document.querySelectorAll('#cbtRoot .cbt-tile').length === 4;`) === true, "hub shows four mode tiles");
+  ok(await ev(`return /scenarios/.test(document.querySelector('#cbtRoot').textContent) && /cases/.test(document.querySelector('#cbtRoot').textContent);`) === true, "hub tile meta comes from scenario and case counts");
+  ok(await ev(`return !!document.querySelector('#cbtRoot [data-state="recent"]');`) === true, "hub Recent section renders");
+  ok(await ev(`var d=document.querySelector('#cbtRoot .cbt-disc'); var lay=document.querySelector('#cbtRoot .cbt-layout'); return d && lay && (lay.lastElementChild===d || d.classList.contains('cbt-footnote'));`) === true, "disclaimer sits as a footnote at the bottom");
+  ok(await ev(`return !/dashed/.test(Array.from(document.querySelectorAll('#cbtRoot .cbt-calm')).map(function(e){return getComputedStyle(e).borderStyle;}).join(' '));`) === true, "hub has no dashed empty box");
+  await click('#cbtRoot [data-act="go-mine"]');
+  ok(await until(`return !!document.querySelector('#cbtRoot [data-state="mine-empty"]');`, 8000), "my training calm empty state renders");
+  await shot("mine-empty", false); await shot("mine-empty", true);
+  await shotWidths("mine-empty");
+  await click('#cbtRoot [data-act="home"]');
 
   // ---- guided: wrong pick explained, correct pick coached ----
   await click('#cbtRoot [data-act="go-guided"]');

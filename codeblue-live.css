@@ -135,7 +135,7 @@ body.cbl-lock { overflow: hidden; }
 }
 #cblRoot .cbl-anotice {
   font-size: 14px; color: var(--cbl-muted); margin: 12px 0 0;
-  border: 1px dashed var(--cbl-line); border-radius: var(--cbl-radius-sm, 10px); padding: 10px 12px;
+  border: 1px solid var(--cbl-line); border-radius: var(--cbl-radius-sm, 10px); padding: 10px 12px;
 }
 #cblRoot .cbl-error {
   font-size: 14px; font-weight: 600; margin: 12px 0 0;
@@ -309,9 +309,18 @@ body.cbl-lock { overflow: hidden; }
 #cblRoot .cbl-edited { font-size: 12px; color: var(--cbl-muted); }
 #cblRoot .cbl-logacts { display: flex; gap: 6px; flex: none; }
 #cblRoot .cbl-empty {
-  border: 1px dashed var(--cbl-line); border-radius: var(--cbl-radius-sm, 10px);
-  padding: 16px; font-size: 14px; color: var(--cbl-muted); text-align: center;
+  border: 0; padding: 16px; font-size: 14px; color: var(--cbl-muted); text-align: center;
 }
+/* cb4-J calm empty pattern: 40px icon in Cool Silver, one line, optional action, centred, no dashed outline */
+#cblRoot .cbl-calm{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;color:var(--cbl-muted);min-height:260px;padding:32px 16px;box-sizing:border-box}
+#cblRoot .cbl-calm p{font-size:15px;line-height:1.5;margin:0}
+#cblRoot .cbl-calmicon{color:var(--cbl-muted)}
+#cblRoot .cbl-calmicon svg{width:40px;height:40px;fill:none;stroke:currentColor;stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}
+#cblRoot .cbl-star{width:44px;height:44px;min-width:44px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+#cblRoot .cbl-star svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linejoin:round}
+#cblRoot .cbl-star.on svg{fill:currentColor}
+#cblRoot .cbl-tlpreview{display:none}
+#cblRoot .cbl-tlprevempty{color:var(--cbl-muted);font-size:14px;margin:8px 0 0}
 #cblRoot .cbl-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 #cblRoot .cbl-check {
   display: flex; align-items: flex-start; gap: 10px; width: 100%;
@@ -618,8 +627,7 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
 #cblRoot .cbl-tlitem[data-k="pauseStart"], #cblRoot .cbl-tlitem[data-k="resume"] { border-color: var(--cbl-hairline); }
 #cblRoot .cbl-tlitem[data-k="pauseStart"] .cbl-tlword, #cblRoot .cbl-tlitem[data-k="resume"] .cbl-tlword { color: var(--cbl-paused); }
 #cblRoot .cbl-tlempty {
-  border: 1px dashed var(--cbl-line); border-radius: var(--cbl-radius-sm, 10px);
-  padding: 14px; font-size: 14px; color: var(--cbl-muted); text-align: center;
+  border: 0; padding: 14px; font-size: 14px; color: var(--cbl-muted); text-align: center; list-style: none;
 }
 /* Phone: the timeline is a bottom drawer, opened on demand. */
 #cblRoot .cbl-timeline {
@@ -1165,4 +1173,10 @@ body:not(.dark) #cblRoot .cbl-btn.cbl-primary {
  #cblRoot .cbl-settings.has-detail .cbl-setpane{display:block}
  #cblRoot .cbl-setdetail .cbl-backbtn{display:inline-flex}
  #cblRoot .cbl-refgrid{grid-template-columns:repeat(2,1fr)}
+ #cblRoot .cbl-tlpreview{display:block;flex:1 1 auto;min-height:0;overflow-y:auto;background:var(--cbl-s1);border:1px solid var(--cbl-line);border-radius:var(--cbl-radius,14px);padding:12px 14px;box-sizing:border-box}
+}
+/* cb4-J: cap tab panels at a comfortable measure on iPad, centred */
+@media(min-width:768px){
+ #cblRoot .cbl-tabpad{max-width:920px;margin:0 auto;width:100%}
+ #cblRoot .cbl-refcard .cbl-star{width:44px;height:44px;min-width:44px;padding:0;display:inline-flex;align-items:center;justify-content:center}
 }
