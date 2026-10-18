@@ -169,11 +169,18 @@
     return true;
   }
 
+  function syncCycleStart(sess) {
+    var lr = null;
+    sess.events.forEach(function (e) { if (e.kind === "rhythm") lr = e; });
+    sess.cycleStart = lr ? lr.elapsed : 0;
+  }
+
   function deleteEvent(sess, id) {
     for (var i = 0; i < sess.events.length; i++) {
       if (sess.events[i].id === id) {
         sess.undo.push({ ev: sess.events[i], at: i });
         sess.events.splice(i, 1);
+        syncCycleStart(sess);
         return true;
       }
     }
@@ -185,6 +192,7 @@
     if (!last) return null;
     var at = Math.min(last.at, sess.events.length);
     sess.events.splice(at, 0, last.ev);
+    syncCycleStart(sess);
     return last.ev;
   }
 
@@ -506,11 +514,12 @@
     if (sess.rosc) return { text: "ROSC", level: "rosc" };
     if (opts.paused) return { text: "Paused", level: "paused" };
     var epi = epiStatus(sess, elapsed, opts);
-    if (epi.state === "overdue") return { text: "Epinephrine overdue", level: "overdue" };
+    /* Priority when several are due: Shock, then epinephrine, then rhythm check. */
     if (shockAdvised(sess, elapsed)) return { text: "Shock", level: "overdue" };
+    if (epi.state === "overdue") return { text: "Epinephrine overdue", level: "overdue" };
+    if (epi.state === "due") return { text: "Epinephrine due", level: "due" };
     var cyc = cycleInfo(sess.mode, elapsed, sess.cycleStart, opts);
     if (cyc.due) return { text: "Rhythm check due", level: "due" };
-    if (epi.state === "due") return { text: "Epinephrine due", level: "due" };
     var cands = [];
     if (epi.state === "countdown") cands.push({ t: epi.remaining, text: "Epinephrine due " + fmtShort(epi.remaining) });
     cands.push({ t: cyc.remaining, text: "Rhythm check " + fmtShort(cyc.remaining) });
@@ -910,6 +919,7 @@
   var rtab = "timer", timelineOpen = false, pendingLink = null, exportState = null;
   var logSeg = "log", logFilter = "all", endedPast = false;
   var notesAlgo = "arrest", settingsGroup = null, settingsQuery = "", logManualOpen = false;
+  var notesBranch = "shockable", refSheetId = null;
 
   function hasDOM() { return typeof document !== "undefined" && !!document.createElement; }
   function Audio() {
@@ -1639,14 +1649,14 @@
     return idx === 0 ? "current" : "";
   }
   var REF_CARDS = [
-    { id: "arrest", title: "Cardiac arrest" },
-    { id: "hsts", title: "H's and T's" },
-    { id: "postrosc", title: "Post-ROSC care" },
-    { id: "brady", title: "Bradycardia prompts" },
-    { id: "tachy", title: "Tachycardia prompts" },
-    { id: "paed", title: "Paediatric arrest" },
-    { id: "neonatal", title: "Neonatal (NRP)" },
-    { id: "proc", title: "Procedures and access" }
+    { id: "arrest", title: "Cardiac arrest", sub: "Adult VF/pVT and asystole/PEA steps", icon: "rhythm" },
+    { id: "hsts", title: "H's and T's", sub: "Reversible causes, tap to log", icon: "note" },
+    { id: "postrosc", title: "Post-ROSC care", sub: "Checklist, ticks log notes", icon: "check" },
+    { id: "brady", title: "Bradycardia", sub: "Bradycardia prompts", icon: "rhythm" },
+    { id: "tachy", title: "Tachycardia", sub: "Tachycardia prompts", icon: "rhythm" },
+    { id: "paed", title: "Paediatric arrest", sub: "Paediatric arrest steps", icon: "rhythm" },
+    { id: "neonatal", title: "Neonatal (NRP)", sub: "Neonatal resuscitation steps", icon: "rhythm" },
+    { id: "proc", title: "Procedures", sub: "Procedures and access", icon: "proc" }
   ];
   function refCardBody(id) {
     if (id === "hsts") return '<div class="cbl-refitems">' + HS_TS.map(function (h) { return '<button type="button" class="cbl-refitem" data-act="notes-hst" data-label="' + esc(h) + '">' + esc(h) + "</button>"; }).join("") + "</div>";
@@ -1654,42 +1664,93 @@
       var items = checklistFor(sess.mode);
       return '<div class="cbl-refitems">' + items.map(function (it) {
         var ticked = !!sess.checks[it.id];
-        return '<button type="button" class="cbl-refitem' + (ticked ? " ticked" : "") + '" data-act="notes-check" data-id="' + esc(it.id) + '" aria-pressed="' + ticked + '">' + (ticked ? "Done: " : "") + esc(it.text) + "</button>";
+        return '<button type="button" class="cbl-refitem' + (ticked ? " ticked" : "") + '" data-act="notes-check" data-id="' + esc(it.id) + '" aria-pressed="' + ticked + '"><span class="cbl-box" aria-hidden="true">' + (ticked ? ICONS.check : "") + "</span><span>" + esc(it.text) + "</span></button>";
       }).join("") + "</div>";
     }
     if (id === "proc") return '<div class="cbl-refitems">' + PROCEDURES.map(function (p) { return '<button type="button" class="cbl-refitem" data-act="notes-proc" data-label="' + esc(p) + '">' + esc(p) + "</button>"; }).join("") + "</div>";
     var mode = id === "paed" ? "paediatric" : id === "neonatal" ? "neonatal" : sess.mode;
-    var rhythm = id === "brady" ? "Bradycardia (pulse)" : id === "tachy" ? "Tachycardia (pulse)" : null;
-    var prompts = id === "postrosc" ? [] : guideFor({ mode: mode, lastRhythm: rhythm, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: id === "postrosc" });
+    var rhythm = id === "brady" ? "Bradycardia (pulse)" : id === "tachy" ? "Tachycardia (pulse)" : id === "arrest" ? "VF" : null;
+    var prompts = guideFor({ mode: mode, lastRhythm: rhythm, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
     if (id === "arrest") prompts = guideFor({ mode: sess.mode, lastRhythm: null, shockCount: 0, epiCount: 0, secsSinceEpi: null, rosc: false });
     return '<ul class="cbl-refprompts">' + prompts.map(function (p) { return "<li>" + esc(p.text) + ' <span class="cbl-gsrc">' + esc(p.src) + "</span></li>"; }).join("") + "</ul>";
   }
-  function notesTabView() {
-    var elapsed = nowElapsed();
+  function openRefSheet(id) {
+    var c = null; REF_CARDS.forEach(function (x) { if (x.id === id) c = x; });
+    if (!c) return;
+    refSheetId = id;
+    openSheet(c.title, '<div data-state="reference-sheet" data-card="' + esc(id) + '"><p class="cbl-refsub">' + esc(c.sub) + "</p>" + refCardBody(id) + "</div>");
+  }
+  /* Flowchart nodes: state is done (logged), current (next prompt) or future. */
+  function flowNode(id, text, state, loggable, src) {
+    var inner = '<span class="cbl-nodecheck" aria-hidden="true">' + (state === "done" ? ICONS.check : "") + '</span><span class="cbl-nodetext">' + esc(text) + "</span>" + (src ? '<span class="cbl-gsrc">' + esc(src) + "</span>" : "");
+    if (loggable) return '<button type="button" class="cbl-node ' + state + '" data-act="notes-step" data-step="' + esc(id) + '" data-node="' + esc(id) + '">' + inner + "</button>";
+    return '<div class="cbl-node ' + state + '" data-node="' + esc(id) + '">' + inner + "</div>";
+  }
+  function flowConn() { return '<div class="cbl-conn" aria-hidden="true"><span class="cbl-connline"></span><span class="cbl-arrow"></span></div>'; }
+  function promptState(p, counts) {
+    if (p.id === "shock" && counts.shocks > 0) return "done";
+    if ((p.id === "epi-when" || p.id === "epi-now") && counts.epi > 0) return "done";
+    return "";
+  }
+  function flowchartView() {
+    var counts = computeCounts(sess.events);
+    var lr = lastRhythm(sess);
+    if (notesAlgo === "arrest") {
+      var shockPrompts = guideFor({ mode: sess.mode, lastRhythm: "VF", shockCount: counts.shocks, epiCount: counts.epi, secsSinceEpi: null, rosc: false });
+      var nonPrompts = guideFor({ mode: sess.mode, lastRhythm: "PEA", shockCount: counts.shocks, epiCount: counts.epi, secsSinceEpi: null, rosc: false });
+      var activeBranch = isShockable(lr && lr.label) ? "shockable" : (lr && (lr.label === "PEA" || lr.label === "Asystole")) ? "nonshockable" : notesBranch;
+      var branchHtml = function (key, title, prompts) {
+        var seenCurrent = false;
+        var nodes = prompts.map(function (p) {
+          var st = promptState(p, counts);
+          if (!st && !seenCurrent && (lr || key === activeBranch)) { st = "current"; seenCurrent = true; }
+          var loggable = true;
+          return flowNode(p.id, p.text, st, loggable, p.src);
+        });
+        var joined = nodes.join(flowConn());
+        return '<div class="cbl-branch' + (key === activeBranch ? " active" : "") + '" data-branch="' + key + '"><h3 class="cbl-branchtitle">' + esc(title) + "</h3>" + joined + "</div>";
+      };
+      var startState = sess.events.some(function (e) { return e.kind === "cprStart"; }) ? "done" : "current";
+      var rhythmState = lr ? "done" : (startState === "done" ? "current" : "");
+      return '<div class="cbl-flowchart" data-state="flowchart" data-algo="arrest">' +
+        flowNode("start-cpr", "Start CPR and attach monitor", startState, true, modeSrc(sess.mode)) + flowConn() +
+        flowNode("rhythm-check", "Rhythm check", rhythmState, true, modeSrc(sess.mode)) + flowConn() +
+        '<div class="cbl-branchchips" role="group" aria-label="Rhythm branch">' +
+        '<button type="button" class="cbl-bchip' + (activeBranch === "shockable" ? " on" : "") + '" data-act="notes-branch" data-branch="shockable" aria-pressed="' + (activeBranch === "shockable") + '">Shockable</button>' +
+        '<button type="button" class="cbl-bchip' + (activeBranch === "nonshockable" ? " on" : "") + '" data-act="notes-branch" data-branch="nonshockable" aria-pressed="' + (activeBranch === "nonshockable") + '">Non-shockable</button></div>' +
+        '<div class="cbl-branches">' + branchHtml("shockable", "Shockable: VF and pulseless VT", shockPrompts) + branchHtml("nonshockable", "Non-shockable: PEA and asystole", nonPrompts) + "</div>" + flowConn() +
+        flowNode("rosc", "ROSC: post-ROSC care", sess.rosc ? "done" : "", sess.rosc ? false : true, SRC.postRosc) + "</div>";
+    }
     var prompts = algoPrompts();
-    var algoTabs = [["arrest", "Arrest"], ["brady", "Bradycardia"], ["tachy", "Tachycardia"], ["postrosc", "Post-ROSC"]].map(function (t) {
+    var seen = false;
+    var nodes2 = prompts.map(function (p, i) {
+      var st = promptState(p, counts);
+      if (!st && !seen) { st = "current"; seen = true; }
+      var loggable = true;
+      return flowNode(p.id, p.text, st, loggable, p.src);
+    });
+    return '<div class="cbl-flowchart" data-state="flowchart" data-algo="' + esc(notesAlgo) + '">' + nodes2.join(flowConn()) + "</div>";
+  }
+  function notesTabView() {
+    var algoTabs = [["arrest", "Arrest"], ["brady", "Bradycardia"], ["tachy", "Tachycardia"], ["postrosc", "ROSC"]].map(function (t) {
       return '<button type="button" class="cbl-segbtn" data-act="notes-algo" data-algo="' + t[0] + '" aria-selected="' + (notesAlgo === t[0]) + '">' + t[1] + "</button>";
-    }).join("");
-    var steps = prompts.map(function (p, i) {
-      var st = algoStepState(p, i, prompts);
-      var loggable = p.id === "shock" || p.id === "epi-when" || p.id === "epi-now";
-      return '<li class="cbl-step ' + st + '"><button type="button" class="cbl-stepbtn" data-act="notes-step" data-step="' + esc(p.id) + '" ' + (loggable ? "" : "disabled") + '><span class="cbl-steptext">' + esc(p.text) + '</span><span class="cbl-gsrc">' + esc(p.src) + "</span></button></li>";
     }).join("");
     var notes = sess.events.filter(function (e) { return e.kind === "note"; }).slice().sort(function (a, b) { return a.elapsed - b.elapsed; });
     var items = notes.map(function (e) { return "<li><span class='cbl-tltime'>" + esc(fmtMMSS(e.elapsed)) + "</span><span>" + esc(e.label) + "</span></li>"; }).join("");
     var pref = prefGet(); var favs = (pref && pref.favCards) || [];
-    var cardHtml = function (c) {
+    var tileHtml = function (c) {
       var fav = favs.indexOf(c.id) >= 0;
-      return '<section class="cbl-refcard" data-card="' + c.id + '"><div class="cbl-refhead"><h3>' + esc(c.title) + '</h3><button type="button" class="cbl-star' + (fav ? " on" : "") + '" data-act="notes-fav" data-id="' + c.id + '" aria-pressed="' + fav + '" aria-label="Pin ' + esc(c.title) + ' to favourites">' + (fav ? "Pinned" : "Pin") + "</button></div>" + refCardBody(c.id) + "</section>";
+      return '<div class="cbl-refcard" data-card="' + c.id + '"><button type="button" class="cbl-reftile" data-act="notes-open" data-id="' + c.id + '"><span class="cbl-reficon" aria-hidden="true">' + (ICONS[c.icon] || ICONS.note) + '</span><span class="cbl-reftitle">' + esc(c.title) + '</span><span class="cbl-refsub">' + esc(c.sub) + '</span></button>' +
+        '<button type="button" class="cbl-star' + (fav ? " on" : "") + '" data-act="notes-fav" data-id="' + c.id + '" aria-pressed="' + fav + '" aria-label="Pin ' + esc(c.title) + ' to favourites">' + (fav ? "Pinned" : "Pin") + "</button></div>";
     };
     var favCards = REF_CARDS.filter(function (c) { return favs.indexOf(c.id) >= 0; });
-    var favRow = favCards.length ? '<div class="cbl-favrow" data-state="favourites"><p class="cbl-label">Favourites</p><div class="cbl-refgrid">' + favCards.map(cardHtml).join("") + "</div></div>" : "";
+    var favRow = favCards.length ? '<div class="cbl-favrow" data-state="favourites"><p class="cbl-label">Favourites</p><div class="cbl-refgrid">' + favCards.map(tileHtml).join("") + "</div></div>" : "";
     return '<div class="cbl-tabpad" data-tabpanel="notes" role="tabpanel" aria-label="Notes">' +
       "<h2 class='cbl-h'>Notes</h2>" +
-      '<div class="cbl-segs" role="tablist" aria-label="Algorithm">' + algoTabs + "</div>" +
-      '<div class="cbl-flow" data-algo="' + esc(notesAlgo) + '"><ol class="cbl-steps">' + steps + "</ol></div>" +
+      '<div class="cbl-segs cbl-notessegs" role="tablist" aria-label="Algorithm">' + algoTabs + "</div>" +
+      flowchartView() +
       favRow +
-      '<div class="cbl-refgrid" data-state="reference-grid">' + REF_CARDS.map(cardHtml).join("") + "</div>" +
+      '<div class="cbl-refgrid" data-state="reference-grid">' + REF_CARDS.map(tileHtml).join("") + "</div>" +
       (items ? '<ul class="cbl-noteslist">' + items + "</ul>" : '<p class="cbl-empty" data-state="empty-notes">No notes yet.</p>') +
       '<label class="cbl-label" for="cblNoteTab">Free text note</label>' +
       '<input id="cblNoteTab" class="cbl-input" type="text" maxlength="280" placeholder="Free text note" />' +
@@ -1697,43 +1758,105 @@
   }
 
   var SETTING_GROUPS = ["Patient and CPR", "Rhythm check", "Voice and sound", "Medications", "Shock and airway", "Appearance", "Layout and buttons", "Training", "Code history", "About and disclaimer"];
+  var SET_EXPLAIN = {
+    compressionRate: "Metronome rate for compressions.", cycleMin: "Minutes between rhythm checks.", autoResumeSec: "Seconds before compressions resume after a pause.",
+    headsUpSec: "Warning before a rhythm check is due.", rhythmPictures: "Schematic rhythm pictures in the picker.",
+    voice: "Spoken prompts such as rhythm check and epinephrine due.", voiceSpeed: "Speed of spoken prompts.", metronome: "Click at the compression rate while the clock runs.", breathCue: "Breath cue with an advanced airway.", lowAlert: "Sound for overdue epinephrine.",
+    epiIntervalMin: "Reminder interval after a dose. Default due at 3 min, overdue at 5 min.", showAmio: "Show the amiodarone button.", showLido: "Show the lidocaine button.",
+    shockSplit: "Separate VF and pulseless VT shock buttons.", shockWaveform: "Defibrillator waveform in use.", time24: "Show times in 24-hour format.", training: "Start in training mode by default."
+  };
+  var LOCAL_SETTINGS = [
+    { id: "compressionRate", label: "Compression rate", group: "Patient and CPR", keywords: "compression rate metronome speed" },
+    { id: "cycleMin", label: "CPR cycle length", group: "Rhythm check", keywords: "rhythm check cycle length" },
+    { id: "headsUpSec", label: "Rhythm check heads-up", group: "Rhythm check", keywords: "heads up warning rhythm" },
+    { id: "autoResumeSec", label: "Auto-resume after pause", group: "Rhythm check", keywords: "auto resume pause" },
+    { id: "rhythmPictures", label: "Rhythm pictures", group: "Rhythm check", keywords: "rhythm pictures ecg" },
+    { id: "voice", label: "Voice prompts", group: "Voice and sound", keywords: "voice speech prompts" },
+    { id: "voiceSpeed", label: "Voice speed", group: "Voice and sound", keywords: "voice speed" },
+    { id: "metronome", label: "Metronome", group: "Voice and sound", keywords: "metronome click" },
+    { id: "breathCue", label: "Breath cue", group: "Voice and sound", keywords: "breath cue" },
+    { id: "lowAlert", label: "Low alert sound", group: "Voice and sound", keywords: "low alert overdue" },
+    { id: "epiIntervalMin", label: "Epinephrine reminder interval", group: "Medications", keywords: "epinephrine adrenaline interval" },
+    { id: "showAmio", label: "Show amiodarone button", group: "Medications", keywords: "amiodarone show" },
+    { id: "showLido", label: "Show lidocaine button", group: "Medications", keywords: "lidocaine show" },
+    { id: "shockSplit", label: "Split VF and pulseless VT", group: "Shock and airway", keywords: "shock vf pulseless vt" },
+    { id: "shockWaveform", label: "Shock waveform", group: "Shock and airway", keywords: "biphasic monophasic waveform" },
+    { id: "time24", label: "24-hour time", group: "Appearance", keywords: "24 hour time" },
+    { id: "training", label: "Training mode default", group: "Training", keywords: "training practice" }
+  ];
+  function localSearchSettings(q) {
+    var s = String(q || "").trim().toLowerCase(); if (!s) return LOCAL_SETTINGS.slice();
+    return LOCAL_SETTINGS.filter(function (x) { return (x.label + " " + x.group + " " + x.keywords).toLowerCase().indexOf(s) >= 0; });
+  }
+  function markMatch(label, q) {
+    var i = label.toLowerCase().indexOf(String(q || "").trim().toLowerCase());
+    if (i < 0 || !String(q || "").trim()) return esc(label);
+    return esc(label.slice(0, i)) + "<mark>" + esc(label.slice(i, i + String(q).trim().length)) + "</mark>" + esc(label.slice(i + String(q).trim().length));
+  }
+  function settingCard(id, label, control) {
+    return '<div class="cbl-setcard"><div class="cbl-setcardhead"><span class="cbl-setlabel">' + esc(label) + '</span></div>' + (SET_EXPLAIN[id] ? '<p class="cbl-setexplain">' + esc(SET_EXPLAIN[id]) + "</p>" : "") + control + "</div>";
+  }
   function sliderRow(id, label, min, max, val, def, unit) {
     var pct = max > min ? (def - min) / (max - min) * 100 : 50;
-    return '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span class="cbl-label" style="margin:0">' + esc(label) + '</span><span data-cbfx-value>' + val + esc(unit || "") + '</span></div>' +
+    var ctrl = '<div class="cbfx-slider-row"><div class="cbfx-slider-head"><span data-cbfx-value>' + val + esc(unit || "") + '</span></div>' +
       '<input type="range" min="' + min + '" max="' + max + '" step="1" value="' + val + '" data-cbfx-slider data-unit="' + esc(unit || "") + '" data-setting="' + id + '" aria-label="' + esc(label) + '">' +
-      '<div class="cbfx-marker" aria-hidden="true"><span style="left:' + pct + '%"><i></i>' + def + " default</span></div></div>";
+      '<div class="cbl-ticks" aria-hidden="true"><span>' + min + esc(unit || "") + '</span><span>' + def + esc(unit || "") + '</span><span>' + max + esc(unit || "") + '</span></div>' +
+      '<div class="cbfx-marker" aria-hidden="true"><span style="left:' + pct + '%"><i></i>Default</span></div></div>';
+    return settingCard(id, label, ctrl);
   }
   function toggleRow(id, label, on) {
-    return '<div class="cbl-setrow"><span>' + esc(label) + '</span><button type="button" class="cbl-toggle' + (on ? " on" : "") + '" data-act="setting-toggle" data-id="' + id + '" aria-pressed="' + !!on + '">' + (on ? "On" : "Off") + "</button></div>";
+    var ctrl = '<button type="button" class="cbl-toggle cbl-switch' + (on ? " on" : "") + '" data-act="setting-toggle" data-id="' + id + '" role="switch" aria-checked="' + !!on + '" aria-label="' + esc(label) + '"><span class="cbl-knob" aria-hidden="true"></span></button>';
+    return '<div class="cbl-setcard cbl-setcardrow"><div class="cbl-setcardmain"><span class="cbl-setlabel">' + esc(label) + "</span>" + (SET_EXPLAIN[id] ? '<p class="cbl-setexplain">' + esc(SET_EXPLAIN[id]) + "</p>" : "") + "</div>" + ctrl + "</div>";
+  }
+  function segRow(id, label, options, current) {
+    var ctrl = '<div class="cbl-segctl" role="group" aria-label="' + esc(label) + '">' + options.map(function (o) {
+      var v = Array.isArray(o) ? o[0] : o, txt = Array.isArray(o) ? o[1] : o;
+      return '<button type="button" class="cbl-segctlbtn' + (String(current) === String(v) ? " on" : "") + '" data-act="setting-seg" data-id="' + id + '" data-value="' + esc(String(v)) + '" aria-pressed="' + (String(current) === String(v)) + '">' + esc(String(txt)) + "</button>";
+    }).join("") + "</div>";
+    return settingCard(id, label, ctrl);
+  }
+  function groupSummary(group, pref) {
+    if (group === "Patient and CPR") return pref.compressionRate + " per min";
+    if (group === "Rhythm check") return pref.cycleMin + " min cycle";
+    if (group === "Voice and sound") return pref.voice ? "Voice on" : "Voice off";
+    if (group === "Medications") return "Every " + pref.epiIntervalMin + " min";
+    if (group === "Shock and airway") return pref.shockWaveform;
+    if (group === "Appearance") return pref.time24 ? "24-hour" : "12-hour";
+    if (group === "Training") return pref.training ? "On" : "Off";
+    return "";
   }
   function settingsDetail(group, pref) {
     var rows = "";
     if (group === "Patient and CPR") rows = sliderRow("compressionRate", "Compression rate", 100, 120, pref.compressionRate, 110, " per min") + '<p class="cbl-note">Mode: ' + esc(MODE_LABEL[sess.mode]) + ". Change mode from the idle screen.</p>";
-    else if (group === "Rhythm check") rows = sliderRow("cycleMin", "CPR cycle length", 1, 3, pref.cycleMin, 2, " min") + sliderRow("autoResumeSec", "Auto-resume after pause", 3, 10, pref.autoResumeSec, 6, " s") + '<div class="cbl-setrow"><span>Rhythm check heads-up</span><select class="cbl-input cbl-setselect" data-setting-select="headsUpSec">' + [0, 10, 15, 30, 60].map(function (v) { return '<option value="' + v + '"' + (pref.headsUpSec === v ? " selected" : "") + ">" + (v === 0 ? "Off" : v + " s") + "</option>"; }).join("") + "</select></div>" + toggleRow("rhythmPictures", "Rhythm pictures", pref.rhythmPictures);
+    else if (group === "Rhythm check") rows = sliderRow("cycleMin", "CPR cycle length", 1, 3, pref.cycleMin, 2, " min") + sliderRow("autoResumeSec", "Auto-resume after pause", 3, 10, pref.autoResumeSec, 6, " s") + segRow("headsUpSec", "Rhythm check heads-up", [[0, "Off"], [10, "10 s"], [15, "15 s"], [30, "30 s"], [60, "60 s"]], pref.headsUpSec) + toggleRow("rhythmPictures", "Rhythm pictures", pref.rhythmPictures);
     else if (group === "Voice and sound") rows = toggleRow("voice", "Voice prompts", pref.voice) + sliderRow("voiceSpeed", "Voice speed", 50, 150, pref.voiceSpeed, 100, "%") + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("breathCue", "Breath cue", pref.breathCue) + toggleRow("lowAlert", "Low alert", pref.lowAlert);
     else if (group === "Medications") rows = sliderRow("epiIntervalMin", "Epinephrine reminder interval", 3, 5, pref.epiIntervalMin, 4, " min") + toggleRow("showAmio", "Show amiodarone button", pref.showAmio) + toggleRow("showLido", "Show lidocaine button", pref.showLido);
-    else if (group === "Shock and airway") rows = toggleRow("shockSplit", "Split VF and pulseless VT", pref.shockSplit) + '<div class="cbl-setrow"><span>Shock waveform</span><select class="cbl-input cbl-setselect" data-setting-select="shockWaveform">' + ["biphasic", "monophasic"].map(function (v) { return '<option value="' + v + '"' + (pref.shockWaveform === v ? " selected" : "") + ">" + v + "</option>"; }).join("") + "</select></div>";
-    else if (group === "Appearance") rows = '<button type="button" class="cbl-btn" data-cbp-settings>Display settings (themes, text and UI size)</button>' + toggleRow("time24", "24-hour time", pref.time24) + '<p class="cbl-note">Theme, text size, UI size, reduced motion: use Display settings.</p>';
-    else if (group === "Layout and buttons") rows = '<button type="button" class="cbl-btn" data-cbp-settings>Reorder, hide and custom buttons</button><p class="cbl-note">Use Display settings to reorder, hide or add custom buttons.</p>';
+    else if (group === "Shock and airway") rows = toggleRow("shockSplit", "Split VF and pulseless VT", pref.shockSplit) + segRow("shockWaveform", "Shock waveform", ["biphasic", "monophasic"], pref.shockWaveform);
+    else if (group === "Appearance") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-cbp-settings>Display settings (themes, text and UI size)</button></div>' + toggleRow("time24", "24-hour time", pref.time24) + '<p class="cbl-note">Theme, text size, UI size, reduced motion: use Display settings.</p>';
+    else if (group === "Layout and buttons") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-cbp-settings>Reorder, hide and custom buttons</button><p class="cbl-setexplain">Use Display settings to reorder, hide or add custom buttons.</p></div>';
     else if (group === "Training") rows = toggleRow("training", "Training mode default", pref.training);
-    else if (group === "Code history") rows = '<button type="button" class="cbl-btn" data-act="past-clear">Delete all past codes</button>';
-    else if (group === "About and disclaimer") rows = '<p class="cbl-note">' + esc(DISCLAIMER) + '</p><p class="cbl-note">Stored on this device only.</p>';
+    else if (group === "Code history") rows = '<div class="cbl-setcard"><button type="button" class="cbl-btn" data-act="past-clear">Delete all past codes</button></div>';
+    else if (group === "About and disclaimer") rows = '<div class="cbl-setcard"><p class="cbl-setexplain">' + esc(DISCLAIMER) + '</p><p class="cbl-setexplain">Stored on this device only.</p></div>';
     return '<div class="cbl-setdetail" data-settings-detail="' + esc(group) + '"><button type="button" class="cbl-btn cbl-backbtn" data-act="settings-back">Back</button><h3 class="cbl-seth">' + esc(group) + "</h3>" + rows + "</div>";
+  }
+  function quickChip(id, label, icon, on) {
+    return '<button type="button" class="cbl-quickchip cbl-toggle' + (on ? " on" : "") + '" data-act="setting-toggle" data-id="' + id + '" aria-pressed="' + !!on + '"><span class="cbl-quickicon" aria-hidden="true">' + (ICONS[icon] || "") + '</span><span class="cbl-quicklabel">' + esc(label) + '</span><span class="cbl-quickdot" aria-hidden="true"></span></button>';
   }
   function settingsTabView() {
     var pref = prefGet() || { voice: true, metronome: true, lowAlert: true, training: false, compressionRate: 110, cycleMin: 2, headsUpSec: 30, autoResumeSec: 6, rhythmPictures: true, voiceSpeed: 100, breathCue: true, epiIntervalMin: 4, showAmio: true, showLido: true, shockSplit: false, shockWaveform: "biphasic", time24: true };
     var PrefsApi = (typeof window !== "undefined" && window.CodeBluePrefs) || null;
-    var results = settingsQuery && PrefsApi && PrefsApi.searchSettings ? PrefsApi.searchSettings(settingsQuery) : null;
-    var quick = '<div class="cbl-quick" data-state="quick-toggles">' + toggleRow("voice", "Voice", pref.voice) + toggleRow("metronome", "Metronome", pref.metronome) + toggleRow("lowAlert", "Low alert", pref.lowAlert) + toggleRow("training", "Training", pref.training) + "</div>";
-    var searchHtml = '<label class="cbl-label" for="cblSettingsSearch">Search settings</label><input id="cblSettingsSearch" class="cbl-input" type="search" placeholder="Search settings" value="' + esc(settingsQuery) + '" data-settings-search />';
+    var results = settingsQuery ? (PrefsApi && PrefsApi.searchSettings ? PrefsApi.searchSettings(settingsQuery) : localSearchSettings(settingsQuery)) : null;
+    var quick = '<div class="cbl-quick" data-state="quick-toggles">' + quickChip("voice", "Voice", "sound", pref.voice) + quickChip("metronome", "Metronome", "rhythm", pref.metronome) + quickChip("lowAlert", "Low alert", "sound", pref.lowAlert) + quickChip("training", "Training", "check", pref.training) + "</div>";
+    var searchHtml = '<div class="cbl-searchwrap"><span class="cbl-searchicon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span><input id="cblSettingsSearch" class="cbl-input cbl-searchinput" type="search" placeholder="Search settings" aria-label="Search settings" value="' + esc(settingsQuery) + '" data-settings-search /></div>';
     var navBody, detailBody;
+    var emptyDetail = '<div class="cbl-setempty" data-state="settings-empty"><span class="cbl-setemptyicon" aria-hidden="true">' + ICONS.gear + '</span><p>Choose a group</p></div>';
     if (results) {
-      navBody = '<div data-state="settings-results">' + (results.length ? results.map(function (s) { return '<button type="button" class="cbl-setrowbtn" data-act="settings-group" data-group="' + esc(s.group) + '"><span>' + esc(s.label) + '</span><span class="cbl-setgroup">' + esc(s.group) + "</span></button>"; }).join("") : '<p class="cbl-note">No settings match.</p>') + "</div>";
-      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : '<p class="cbl-note cbl-setplaceholder">Select a setting.</p>';
+      navBody = '<div data-state="settings-results">' + (results.length ? results.map(function (s) { return '<button type="button" class="cbl-setrowbtn cbl-resultrow" data-act="settings-group" data-group="' + esc(s.group) + '"><span class="cbl-resultlabel">' + markMatch(s.label, settingsQuery) + '</span><span class="cbl-setgroup">' + esc(s.group) + "</span></button>"; }).join("") : '<p class="cbl-note" data-state="settings-no-results">No settings match that search.</p>') + "</div>";
+      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : emptyDetail;
     } else {
-      navBody = SETTING_GROUPS.map(function (g) { return '<button type="button" class="cbl-setrowbtn' + (settingsGroup === g ? " on" : "") + '" data-act="settings-group" data-group="' + esc(g) + '" aria-selected="' + (settingsGroup === g) + '"><span>' + esc(g) + "</span><span aria-hidden=\"true\">›</span></button>"; }).join("") +
-        '<button type="button" class="cbl-btn" data-act="settings-reset">Reset settings</button>';
-      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : '<p class="cbl-note cbl-setplaceholder">Select a setting.</p>';
+      navBody = '<div class="cbl-setgrouplist">' + SETTING_GROUPS.map(function (g) { return '<button type="button" class="cbl-setrowbtn' + (settingsGroup === g ? " on" : "") + '" data-act="settings-group" data-group="' + esc(g) + '" aria-selected="' + (settingsGroup === g) + '"><span>' + esc(g) + '</span><span class="cbl-setvalue">' + esc(groupSummary(g, pref)) + '</span><span class="cbl-chev" aria-hidden="true">›</span></button>'; }).join("") + "</div>" +
+        '<button type="button" class="cbl-btn cbl-resetbtn" data-act="settings-reset">Reset settings</button>';
+      detailBody = settingsGroup ? settingsDetail(settingsGroup, pref) : emptyDetail;
     }
     return '<div class="cbl-tabpad cbl-settings' + (settingsGroup ? " has-detail" : "") + '" data-tabpanel="settings" role="tabpanel" aria-label="Settings">' +
       "<h2 class='cbl-h'>Settings</h2>" + searchHtml + quick +
@@ -2436,15 +2559,21 @@
     }
     if (act === "log-manual-toggle") { logManualOpen = !logManualOpen; render(); return; }
     if (act === "notes-algo") { notesAlgo = el.getAttribute("data-algo") || "arrest"; render(); return; }
+    if (act === "notes-branch") { notesBranch = el.getAttribute("data-branch") || "shockable"; render(); return; }
+    if (act === "notes-open") { openRefSheet(el.getAttribute("data-id")); return; }
     if (act === "notes-step") {
       var step = el.getAttribute("data-step");
       if (step === "shock") afterEvent(logEvent(sess, "shock", null, nowElapsed()), "shockLogged");
       else if (step === "epi-when" || step === "epi-now") afterEvent(logEvent(sess, "drug", "Epinephrine", nowElapsed()), null);
+      else if (step === "start-cpr") afterEvent(logEvent(sess, "note", "Start CPR and attach monitor", nowElapsed()), null);
+      else if (step === "rhythm-check") { openRhythmSheet(); return; }
+      else if (step === "rosc") { sess.rosc = true; sess.hadRosc = true; afterEvent(logEvent(sess, "rosc", null, nowElapsed()), "roscLogged"); }
+      else afterEvent(logEvent(sess, "note", el.textContent.trim().slice(0, 140) || "Note", nowElapsed()), null);
       return;
     }
-    if (act === "notes-hst") { afterEvent(logEvent(sess, "note", el.getAttribute("data-label") || "Note", nowElapsed()), null); return; }
-    if (act === "notes-proc") { afterEvent(logEvent(sess, "procedure", el.getAttribute("data-label") || "Procedure", nowElapsed()), null); return; }
-    if (act === "notes-check") { toggleCheck(sess, el.getAttribute("data-id"), nowElapsed()); persist(); render(); return; }
+    if (act === "notes-hst") { var rh = refSheetId; afterEvent(logEvent(sess, "note", el.getAttribute("data-label") || "Note", nowElapsed()), null); if (rh) openRefSheet(rh); return; }
+    if (act === "notes-proc") { var rp = refSheetId; afterEvent(logEvent(sess, "procedure", el.getAttribute("data-label") || "Procedure", nowElapsed()), null); if (rp) openRefSheet(rp); return; }
+    if (act === "notes-check") { var rc = refSheetId; toggleCheck(sess, el.getAttribute("data-id"), nowElapsed()); persist(); render(); if (rc) openRefSheet(rc); return; }
     if (act === "notes-fav") {
       var fid = el.getAttribute("data-id"); var pf = prefGet(); var favs = pf && Array.isArray(pf.favCards) ? pf.favCards.slice() : [];
       var ix = favs.indexOf(fid); if (ix >= 0) favs.splice(ix, 1); else favs.push(fid);
@@ -2452,6 +2581,7 @@
     }
     if (act === "settings-group") { settingsGroup = el.getAttribute("data-group"); settingsQuery = ""; render(); return; }
     if (act === "settings-back") { settingsGroup = null; render(); return; }
+    if (act === "setting-seg") { var sid = el.getAttribute("data-id"); var sval = el.getAttribute("data-value"); var spatch = {}; spatch[sid] = (sid === "headsUpSec") ? Number(sval) : sval; prefSet(spatch); applyAudioPrefs(); render(); return; }
     if (act === "setting-toggle") {
       var tid = el.getAttribute("data-id"); var cur = prefGet() || {}; var patch = {}; patch[tid] = !cur[tid]; prefSet(patch); if (tid === "training") idleTraining = patch[tid]; applyAudioPrefs(); render(); return;
     }
@@ -2474,6 +2604,7 @@
       var kind = mk && ["drug", "shock", "rhythm", "procedure", "note"].indexOf(mk.value) >= 0 ? mk.value : "note";
       sess.events.push({ id: "ev-" + (++sess.seq), elapsed: Math.max(0, Math.floor(secs)), kind: kind, label: label, edited: false });
       sess.events.sort(function (a, b) { return a.elapsed - b.elapsed; });
+      if (kind === "rhythm") { var lr2 = null; sess.events.forEach(function (e2) { if (e2.kind === "rhythm") lr2 = e2; }); if (lr2) sess.cycleStart = lr2.elapsed; }
       persist(); render(); toast("Event added. ", null);
       return;
     }
@@ -2678,6 +2809,8 @@
     settingsGroup: function () { return settingsGroup; },
     setSettingsGroup: function (g) { settingsGroup = g; if (view === "running") render(); },
     setSettingsQuery: function (q) { settingsQuery = q; if (view === "running") render(); },
+    notesBranch: function () { return notesBranch; },
+    setNotesBranch: function (b) { notesBranch = b; if (view === "running") render(); },
     link: function () { return (sess && sess.link) || pendingLink; },
     exportState: function () { return exportState; },
     elapsed: function () { return nowElapsed(); },

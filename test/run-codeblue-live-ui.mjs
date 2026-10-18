@@ -282,6 +282,13 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} #cblNoteTab');`) === true, "notes composer renders");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-act="notes-algo"]').length === 4;`) === true, "notes algorithm tabs render");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="reference-grid"] .cbl-refcard').length === 8;`) === true, "notes reference grid renders 8 cards");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="flowchart"]');`) === true, "notes flowchart renders");
+  ok(await ev(`return document.querySelectorAll('${CBL} [data-state="flowchart"] .cbl-node').length >= 5;`) === true, "flowchart has nodes");
+  ok(await ev(`return !document.querySelector('${CBL} [data-state="reference-grid"] .cbl-refprompts');`) === true, "no duplicated prompts inside reference tiles");
+  await click(`${CBL} [data-act="notes-open"][data-id="hsts"]`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="reference-sheet"]');`, 5000), "reference tile opens a detail sheet");
+  await shot("notes-sheet", false); await shot("notes-sheet", true);
+  await ev(`document.querySelector('${CBL} [data-act="sheet-close"]').click(); return 1;`);
   for (const algo of ["brady", "tachy", "postrosc", "arrest"]) {
     await click(`${CBL} [data-act="notes-algo"][data-algo="${algo}"]`);
     ok(await until(`return CodeBlueLive._rt.notesAlgo() === "${algo}";`, 5000), "algorithm tab " + algo + " opens");
@@ -305,8 +312,14 @@ try {
   ok(await ev(`return !!document.querySelector('${CBL} [data-tabpanel="settings"] [data-state="patient-link"]');`) === true, "settings reuses the patient link row");
   ok(await ev(`return !!document.querySelector('${CBL} [data-settings-search]');`) === true, "settings search renders");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-state="quick-toggles"] .cbl-toggle').length === 4;`) === true, "settings quick toggles render");
-  await ev(`CodeBlueLive._rt.setSettingsQuery("compression"); return 1;`);
+  await ev(`var si=document.querySelector('${CBL} [data-settings-search]'); si.focus(); si.value="compression"; si.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
   ok(await until(`return !!document.querySelector('${CBL} [data-state="settings-results"]');`, 5000), "settings search results render");
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="settings-results"] mark');`) === true, "settings search emphasises the match");
+  await ev(`var si2=document.querySelector('${CBL} [data-settings-search]'); si2.focus(); si2.value="zzzz"; si2.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);
+  ok(await until(`return !!document.querySelector('${CBL} [data-state="settings-no-results"]');`, 5000), "settings search empty state renders");
+  await shot("settings-empty", false); await shot("settings-empty", true);
+  await ev(`CodeBlueLive._rt.setSettingsQuery(""); return 1;`);
+  ok(await ev(`return !!document.querySelector('${CBL} [data-state="settings-empty"]');`) === true, "settings empty detail state renders");
   await shot("settings-search", false); await shot("settings-search", true);
   await ev(`CodeBlueLive._rt.setSettingsQuery(""); CodeBlueLive._rt.setSettingsGroup("Rhythm check"); return 1;`);
   ok(await until(`return !!document.querySelector('${CBL} [data-settings-detail="Rhythm check"]');`, 5000), "settings detail pane renders");
@@ -362,7 +375,7 @@ try {
   await click(`${CBL} [data-act="tile-rhythm"]`);
   ok(await until(`return !!document.querySelector('${CBL} .cbl-sheet');`, 5000), "rhythm picker sheet opens");
   ok(await ev(`return document.querySelectorAll('${CBL} [data-act="rhythm-pick"]').length === 7;`) === true, "7 fixed rhythm labels");
-  await ev(`Array.from(document.querySelectorAll('${CBL} [data-act="rhythm-pick"]')).filter(function (b) { return b.textContent === "VF"; })[0].click(); return 1;`);
+  await ev(`document.querySelector('${CBL} [data-act="rhythm-pick"][data-label="VF"]').click(); return 1;`);
   ok(await until(`return document.querySelector('${CBL} .cbl-duetext').textContent === "Shock";`, 5000), "shockable rhythm advises Shock");
   await shot("shock", true);
 
@@ -380,13 +393,13 @@ try {
   const epiAt = await ev(`return CodeBlueLive._rt.session().events.filter(function (e) { return e.kind === "drug"; }).pop().elapsed;`);
   await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 70); return 1;`);
   await click(`${CBL} [data-act="tile-rhythm"]`);
-  await ev(`Array.from(document.querySelectorAll('${CBL} [data-act="rhythm-pick"]')).filter(function (b) { return b.textContent === "PEA"; })[0].click(); return 1;`);
+  await ev(`document.querySelector('${CBL} [data-act="rhythm-pick"][data-label="PEA"]').click(); return 1;`);
   await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 182); return 1;`);
   ok(await until(`return document.querySelector('${CBL} .cbl-duetext').textContent === "Epinephrine due";`, 5000), "epinephrine due after 180 s");
   await shot("epi-due", false);
   await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 192); return 1;`);
   await click(`${CBL} [data-act="tile-rhythm"]`);
-  await ev(`Array.from(document.querySelectorAll('${CBL} [data-act="rhythm-pick"]')).filter(function (b) { return b.textContent === "PEA"; })[0].click(); return 1;`);
+  await ev(`document.querySelector('${CBL} [data-act="rhythm-pick"][data-label="PEA"]').click(); return 1;`);
   await ev(`CodeBlueLive._rt.setElapsed(${epiAt} + 302); return 1;`);
   ok(await until(`return document.querySelector('${CBL} .cbl-duetext').textContent === "Epinephrine overdue";`, 5000), "epinephrine overdue after 300 s");
   ok(await ev(`return document.querySelector('${CBL} .cbl-dueword').textContent === "Overdue";`) === true, "overdue word present, colour never alone");
@@ -434,7 +447,8 @@ try {
   await click(`${CBL} [data-act="end"]`);
   ok(await until(viewIs("ended"), 5000), "end shows the summary (confirmed)");
   ok(await ev(`return !!document.querySelector('${CBL} [data-state="ended"]');`) === true, "ended summary renders");
-  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Estimated CPR fraction") >= 0;`) === true, "debrief shows estimated CPR fraction");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("CPR fraction") >= 0;`) === true, "debrief shows CPR fraction");
+  ok(await ev(`return document.querySelector('${CBL} [data-state="ended"]').textContent.indexOf("Estimated from logged pauses") >= 0;`) === true, "debrief shows estimated CPR fraction footnote");
   await shot("ended", false);
   await shot("debrief", false); await shot("debrief", true);
   await click(`${CBL} [data-act="debrief-past"]`);
