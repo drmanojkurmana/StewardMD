@@ -32,8 +32,8 @@ function modelOf(S, level, drug) {
   const base = BASE[t];
   const splint = drug === 1 ? 1 : 0, repair = drug === 2 ? 1 : 0;
   const Weak = cl(base.w * (1 - (repair ? 0.38 : splint ? 0.12 : 0)));
-  const Sens = cl(base.s * (1 - (repair ? 0.32 : splint ? 0.05 : 0)));
-  const Deform = cl(base.d * (1 - (splint ? 0.45 : repair ? 0.25 : 0)));
+  const Sens = cl(base.s * (1 - (repair ? 0.45 : splint ? 0.05 : 0)));
+  const Deform = cl(base.d * (1 - (splint ? 0.45 : repair ? 0.30 : 0)));
   const Func = cl(1 - (0.5 * Weak + 0.25 * Sens + 0.25 * Deform) + (splint ? 0.08 : repair ? 0.06 : 0));
   const Recov = cl(0.18 + (repair ? 0.48 : splint ? 0.28 : 0) * (1 - 0.2 * base.w));
   const Signal = cl(1 - 0.78 * Weak + (repair ? 0.08 : splint ? 0.03 : 0));
@@ -43,7 +43,7 @@ function modelOf(S, level, drug) {
 }
 const TESTS = [
   [0, 0, "weakness severe · sensation reduced · posture deformed"],
-  [0, 2, "weakness moderate · sensation reduced · posture altered"],
+  [0, 2, "weakness moderate · sensation preserved · posture altered"],
   [1, 1, "weakness moderate · sensation lost · posture altered"],
   [3, 0, "weakness severe · sensation reduced · posture deformed"],
 ];
@@ -73,16 +73,22 @@ const body = `
 <ellipse id="inj1" class="bp-inj" cx="235" cy="255" rx="40" ry="27"/>
 <circle id="inj2" class="bp-inj" cx="540" cy="140" r="20"/>
 <circle id="inj3" class="bp-inj" cx="540" cy="240" r="20"/>
-<g id="rep0" class="bp-rep"><path d="M228 128L242 142M242 128L228 142"/></g>
-<g id="rep1" class="bp-rep"><path d="M228 248L242 262M242 248L228 262"/></g>
-<g id="rep2" class="bp-rep"><path d="M533 133L547 147M547 133L533 147"/></g>
-<g id="rep3" class="bp-rep"><path d="M533 233L547 247M547 233L533 247"/></g>
+<g id="rep0" class="bp-rep"><path d="M228 124L228 146M235 124L235 146M242 124L242 146"/></g>
+<g id="rep1" class="bp-rep"><path d="M228 244L228 266M235 244L235 266M242 244L242 266"/></g>
+<g id="rep2" class="bp-rep"><path d="M533 130L533 150M540 130L540 150M547 130L547 150"/></g>
+<g id="rep3" class="bp-rep"><path d="M533 230L533 250M540 230L540 250M547 230L547 250"/></g>
+</g>
+<ellipse id="healGlow" class="bp-glow" cx="235" cy="135" rx="55" ry="40" opacity="0"/>
+<g id="sprouts">
+<g id="sprout0" class="bp-sprout" opacity="0"><path d="M242 128C300 122 340 120 380 118" pathLength="100"/><path d="M242 142C300 142 340 144 380 148" pathLength="100"/></g>
+<g id="sprout1" class="bp-sprout" opacity="0"><path d="M242 248C300 252 340 256 380 258" pathLength="100"/><path d="M242 262C300 264 340 266 380 268" pathLength="100"/></g>
+<g id="sprout2" class="bp-sprout" opacity="0"><path d="M550 134C562 137 572 141 584 147" pathLength="100"/><path d="M550 146C562 149 572 151 584 155" pathLength="100"/></g>
+<g id="sprout3" class="bp-sprout" opacity="0"><path d="M550 234C562 237 572 241 584 247" pathLength="100"/><path d="M550 246C562 249 572 251 584 255" pathLength="100"/></g>
 </g>
 <g id="limb">
 <circle class="bp-skin" cx="768" cy="110" r="16"/>
 <path class="bp-skinp" d="M752 124H784V214H752Z"/>
 <circle class="bp-skin" cx="768" cy="215" r="11"/>
-<text class="bp-lab" x="736" y="114" text-anchor="end">Shoulder</text><text class="bp-lab" x="736" y="219" text-anchor="end">Elbow</text><text class="bp-lab" x="736" y="304" text-anchor="end">Wrist</text>
 <g id="forearmG">
 <path class="bp-skinp" d="M754 215H782V302H754Z"/>
 <g id="handG">
@@ -90,9 +96,14 @@ const body = `
 <g id="normF"><path class="bp-finger" d="M748 356V378M761 360V382M774 360V380M786 356V374M742 322L728 336"/></g>
 <g id="clawF"><path class="bp-finger" d="M748 356Q746 370 756 374M761 360Q760 374 770 376M774 360Q776 372 784 372M786 356Q790 366 796 366M742 322L728 336"/></g>
 </g>
-<rect id="splintEl" class="bp-splint" x="742" y="272" width="52" height="72" rx="9"/>
+<g id="splintEl" class="bp-splint" opacity="0">
+<rect x="738" y="246" width="58" height="112" rx="10"/>
+<rect class="bp-strap" x="738" y="268" width="58" height="11"/>
+<rect class="bp-strap" x="738" y="322" width="58" height="11"/>
+</g>
 </g>
 <path id="waiterArrow" class="bp-arrow" d="M812 238Q838 268 812 298M812 298L804 284M812 298L824 288"/>
+<path id="physioArrow" class="bp-physio" d="M806 318Q820 340 806 362M798 356L806 362L812 354" opacity="0"/>
 </g>
 <g id="parts"></g>
 <g id="over"></g>
@@ -117,7 +128,13 @@ body[data-theme="light"]{--c-root:#2f9f7c;--c-trunk:#d99a1f;--c-cord:#8f72d0;--c
 .bp-finger{fill:none;stroke:var(--c-skin);stroke-width:7;stroke-linecap:round}
 .bp-splint{fill:var(--c-fl);stroke:color-mix(in srgb,var(--c-fl) 55%,#000);stroke-width:1;opacity:0}
 .bp-arrow{fill:none;stroke:var(--c-bad);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:0}
-.p-sig{--cc:var(--c-sig)}
+.p-sig{--cc:var(--c-sig)}.p-sig2{--cc:var(--c-good)}
+.bp-cap{fill:var(--anatomy-strong);font-size:12px}
+.bp-inj.healed{stroke:var(--c-good)}
+.bp-sprout{fill:none;stroke:var(--c-good);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:100}
+.bp-glow{fill:color-mix(in srgb,var(--c-good) 35%,transparent);stroke:none}
+.bp-physio{fill:none;stroke:var(--c-fl);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:6 5}
+.bp-strap{fill:color-mix(in srgb,var(--c-fl) 55%,#000);stroke:none}
 .dr-g-fill.g-sens{fill:var(--c-cyt)}.dr-g-fill.g-post{fill:var(--c-trunk)}.dr-g-fill.g-rec{fill:var(--c-root)}
 `;
 
@@ -126,7 +143,7 @@ buildScene({
   label: "An animated brachial plexus from roots C5 to T1 through trunks, divisions and cords to the main branches, with an arm and hand showing the posture for each injury. Upper trunk injury gives Erb palsy with a waiter's tip posture. Lower trunk injury gives Klumpke palsy with a claw hand. Radial nerve injury gives wrist drop. Ulnar nerve injury gives an ulnar claw. The median nerve and its ape hand pattern are described on its branch label. Gauges show weakness, sensory loss, posture deformity, function, recovery and nerve signal. Treatment choices are observation, splint and physiotherapy, and nerve repair.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.",
   scene: { W, H }, pageJs: readFileSync(join(HERE, "brachial.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  withoutLabel: "Without treatment", withLabel: "With nerve repair",
   sourcesLis: [
     "<strong>How the plexus is built.</strong> Ventral rami C5 to T1 form upper, middle and lower trunks. Each trunk splits into anterior and posterior divisions behind the clavicle. Divisions recombine into lateral, posterior and medial cords around the axillary artery. Cords give the main branches: musculocutaneous, axillary, radial, median and ulnar nerves. This is standard teaching in anatomy texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>The patterns shown.</strong> Erb palsy from upper trunk (C5 to C6) injury, classically after shoulder dystocia or trauma, weakens shoulder abduction and elbow flexion; the arm hangs adducted and internally rotated with the forearm pronated, the waiter's tip posture. Klumpke palsy from lower trunk (C8 to T1) injury weakens intrinsic hand muscles and gives a claw hand, sometimes with medial hand sensory loss. Radial nerve injury weakens wrist and finger extension and gives wrist drop. Ulnar nerve injury weakens intrinsic muscles, gives an ulnar claw (mainly ring and little fingers) and sensory loss in the little finger. Median nerve injury, described on the median branch label, wastes the thenar muscles and loses thumb opposition, the ape hand pattern. This is standard teaching and was not checked against a linked source here, so it is flagged for review.",

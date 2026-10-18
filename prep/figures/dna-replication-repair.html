@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -270,18 +273,20 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .dn-primer{fill:none;stroke:var(--c-bad);stroke-width:4;stroke-linecap:round}
 .dn-dna2{fill:none;stroke:var(--anatomy-strong);stroke-width:2.6;stroke-linecap:round;opacity:.85}
 .dn-sister{fill:none;stroke:var(--anatomy-mid);stroke-width:2;stroke-dasharray:5 4;opacity:.7}
-.cl-heli{--cc:#e9b84a}.cl-pol{--cc:#5fa8d3}.cl-prim{--cc:#f08a4b}.cl-lig{--cc:#3ddc97}.cl-rep{--cc:#b7a1e6}
-.p-nuc{--cc:#ffd24a}.p-uv{--cc:#ffe95e}.p-fix{--cc:#3ddc97}.p-mut{--cc:var(--c-bad)}
+.dn-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
+.dn-glow{fill:var(--c-bad);stroke:none}
+.dn-end{fill:none;stroke:var(--c-bad);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.dn-sun{fill:#ffe95e;stroke:#d9a92c;stroke-width:1}
+.dn-shield{fill:none;stroke:var(--c-good);stroke-width:6;stroke-linecap:round}
+.dn-ray{fill:none;stroke:#d9a92c;stroke-width:1.6;stroke-linecap:round;opacity:.8}
+.cl-heli{--cc:#e9b84a}.cl-pol{--cc:#5fa8d3}.cl-prim{--cc:#f08a4b}.cl-lig{--cc:#3ddc97}.cl-rep{--cc:#b7a1e6}.cl-parp{--cc:#c084fc}.cl-doom{--cc:#8a6f5c}
+.p-nuc{--cc:#ffd24a}.p-uv{--cc:#ffe95e}.p-fix{--cc:#3ddc97}.p-mut{--cc:var(--c-bad)}.p-block{--cc:#c084fc}
 .dn-dimer{fill:#ffe95e;stroke:color-mix(in srgb,#ffe95e 50%,#000);stroke-width:.7}
 .dn-mis{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 50%,#000);stroke-width:.7}
-.dn-sun{fill:#ffe95e;stroke:#d9a92c;stroke-width:1}
-.dn-shield{fill:none;stroke:var(--c-good);stroke-width:2.4;stroke-linecap:round}
 .dr-g-fill.g-rep{fill:var(--c-good)}.dr-g-fill.g-dmg{fill:#ffe95e}.dr-g-fill.g-mut{fill:var(--c-bad)}.dr-g-fill.g-kill{fill:#c084fc}
-</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">DNA replication and repair</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>replication steady · damage low · mutations rare</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated replication fork and a damaged DNA segment. At the fork helicase unwinds the parental strands, primase lays primers, DNA polymerase builds a continuous leading strand and a lagging strand in Okazaki pieces joined by ligase, and proofreading removes errors. Below, ultraviolet light makes thymine dimers, copying can leave a mismatch, and a double strand break severs the DNA. Nucleotide excision repair, mismatch repair and homologous recombination fix each lesion. Gauges show replication, damage, repair, mutations and loss of defective cells. The level slider sets normal DNA, UV damage or an inherited repair defect, and the treatment choices show sunscreen and avoidance and the PARP inhibitor concept."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">DNA replication and repair</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>replication steady · damage low · mutations rare · cell loss little</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated replication fork and a damaged DNA segment. At the fork helicase unwinds the parental strands and DNA polymerase builds the new strands, with primase starting each piece and ligase sealing the joins. Below, ultraviolet light damages the DNA into a thymine dimer, copying can leave a mismatch, and a double strand break severs the DNA. Repair crews fix each lesion. A sunscreen shield blocks the light, and a PARP blocker docks on PARP so breaks pile up in repair faulty cells and those cells are lost. Gauges show replication, damage, repair, mutations and cell loss. The level slider sets normal DNA, UV damage or an inherited repair defect, and the treatment choices show sunscreen and avoidance and the PARP inhibitor concept."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
 <rect class="sc-tissue" x="14" y="44" width="932" height="212" rx="18"/>
 <rect class="sc-tissue dn-dmgzone" x="14" y="268" width="932" height="172" rx="18"/>
-<text class="sc-zone" x="34" y="68">REPLICATION FORK</text>
-<text class="sc-zone" x="34" y="292">DAMAGE AND REPAIR</text>
 <g id="fork"></g>
 <g id="dmgzone"></g>
 <g id="parts"></g>
@@ -289,7 +294,7 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 <g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or numbers are shown or implied.</span></figcaption></figure>
 <div class="dr-controls">
   <label class="dr-range"><span>DNA state</span><input id="level" type="range" min="0" max="2" step="1" value="0" aria-valuetext="normal"><span class="dr-ticks"><i>normal</i><i>UV damage</i><i>repair defect</i></span></label>
-  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without intervention" data-with="With intervention"><option value="0">none</option><option value="1">sunscreen and avoidance</option><option value="2">PARP inhibitor concept</option></select></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without intervention" data-with="With PARP inhibitor"><option value="0">none</option><option value="1">sunscreen and avoidance</option><option value="2">PARP inhibitor concept</option></select></label>
   <button id="pause" type="button" aria-pressed="false">Pause motion</button>
 </div>
 <p id="status" class="dr-status" aria-live="polite"></p>
@@ -314,8 +319,8 @@ const modelOf = function modelOf(S, level, drug) {
   const M = cl(unrep * 1.5 + (defect ? 0.06 : 0));
   const kill = cl(parp && defect ? 0.8 : parp ? 0.12 : unrep * 0.2);
   const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
-  const words = [w(R, 0.45, 0.75, ["stalled", "slowed", "steady"]), w(D, 0.3, 0.6, ["low", "raised", "high"]), w(M, 0.25, 0.55, ["rare", "some", "frequent"])];
-  return { D, cap, unrep, R, M, kill, parp, defect, sun: drug === 1 ? 1 : 0, lvl: level, words, readout: "replication " + words[0] + " · damage " + words[1] + " · mutations " + words[2] };
+  const words = [w(R, 0.45, 0.75, ["stalled", "slowed", "steady"]), w(D, 0.3, 0.6, ["low", "raised", "high"]), w(M, 0.25, 0.55, ["rare", "some", "frequent"]), w(kill, 0.2, 0.55, ["little", "some", "marked"])];
+  return { D, cap, unrep, R, M, kill, parp, defect, sun: drug === 1 ? 1 : 0, lvl: level, words, readout: "replication " + words[0] + " · damage " + words[1] + " · mutations " + words[2] + " · cell loss " + words[3] };
 };
 /* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
 const NS = "http://www.w3.org/2000/svg";
@@ -412,16 +417,30 @@ function run(scn) {
 
 /* DNA replication and repair scene: fork enzymes, nucleotide flow, three lesions and three repair routes. */
 const L = { fork: $("fork"), dmg: $("dmgzone"), parts: $("parts"), over: $("over"), panel: $("panel") };
-function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
+function pool(n, build) { return Array.from({ length: n }, () => { const e = build(); e.setAttribute("opacity", "0"); return { e, on: false, x: 0, y: 0, sx: 0, sy: 0, vx: 0, vy: 0, t: 0, k: 0 }; }); }
 const freeP = (pl) => pl.find((p) => !p.on);
-function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
+function emit(p, x, y, vx, vy, k) { p.on = true; p.x = x; p.y = y; p.sx = x; p.sy = y; p.vx = vx; p.vy = vy; p.t = 0; p.k = k || 0; p.e.setAttribute("opacity", "1"); }
 function killP(p) { p.on = false; p.e.setAttribute("opacity", "0"); }
 const nuc = pool(26, () => mk("circle", { class: "sc-p p-nuc", r: 2.6 }, L.parts));
 const uvp = pool(12, () => mk("path", { class: "sc-p p-uv", d: "M0 -3.4L3 0L0 3.4L-3 0Z" }, L.parts));
 const fixp = pool(16, () => mk("circle", { class: "sc-p p-fix", r: 2.2 }, L.parts));
 const mutp = pool(12, () => mk("path", { class: "sc-p p-mut", d: "M-2.6 -2.6L2.6 2.6M2.6 -2.6L-2.6 2.6" }, L.parts));
-let heli, polLead, polLag, prim, lig, frags = [], dimerG, misC, breakG, repBlobs = [], shieldP, sunG, gg = {}, sunPill, parpPill, leadPath;
-const sm = { D: 0.14, cap: 0.9, R: 0.9, M: 0, kill: 0, parp: 0, sun: 0 };
+const blk = pool(10, () => mk("path", { class: "sc-p p-block", d: "M0 -4.5L3.5 0L0 4.5L-3.5 0Z" }, L.parts));
+const slots = [];
+for (let i = 0; i < 10; i++) { const a = (i / 10) * 6.2832 - 1.57; slots.push([790 + Math.cos(a) * 17, 325 + Math.sin(a) * 17]); }
+function capText(l, d) {
+  if (l === 0 && d === 0) return "Healthy DNA. Copying runs and repairs keep up.";
+  if (l === 0 && d === 1) return "Sunscreen on healthy DNA. Almost nothing changes.";
+  if (l === 0) return "PARP blocked but repair works, so the cell copes.";
+  if (l === 1 && d === 0) return "No protection. Sunlight damages the DNA and copying stalls.";
+  if (l === 1 && d === 1) return "Sunscreen blocks sunlight. Little damage forms and copying recovers.";
+  if (l === 1) return "PARP blocked in sun damaged DNA. Repair strains and errors stick.";
+  if (d === 0) return "No treatment. Faulty repair leaves breaks open and errors stick.";
+  if (d === 1) return "Sunscreen cannot fix faulty repair. Breaks stay open.";
+  return "PARP blocked. Breaks pile up and faulty cells are lost.";
+}
+let heli, polLead, polLag, prim, lig, frags = [], dimerG, misC, breakL, breakR, breakGlow, repBlobs = [], parpC, doom = [], shieldArc, sunG, gg = {}, parpPill, leadPath, capEl = null, capKey = -1;
+const sm = { D: 0.14, cap: 0.9, unrep: 0.01, R: 0.9, M: 0, kill: 0, parp: 0, sun: 0 };
 const acc = { nuc: 0, uv: 0, fix: 0, mut: 0 };
 function init() {
   const F = L.fork;
@@ -443,38 +462,34 @@ function init() {
   polLag = cell(F, { cls: "pol", r: 16, nuc: 0.36, seed: 7, wob: 0.1 }); place(polLag, 640, 138, 0, 1);
   prim = cell(F, { cls: "prim", r: 11, nuc: 0.3, seed: 9, wob: 0.12 }); place(prim, 545, 128, 0, 1);
   lig = cell(F, { cls: "lig", r: 10, nuc: 0.3, seed: 11, wob: 0.12 }); place(lig, 850, 124, 0, 1);
-  /* ---- damage zone: one DNA segment with three lesions ---- */
+  /* ---- damage zone: one DNA segment with three lesions, left to right ---- */
   const Dg = L.dmg;
+  breakGlow = mk("ellipse", { class: "dn-glow", cx: 720, cy: 365, rx: 80, ry: 45, opacity: "0" }, Dg);
   mk("path", { class: "dn-dna2", d: "M60 355H704M736 355H900" }, Dg); mk("path", { class: "dn-dna2", d: "M60 375H704M736 375H900" }, Dg);
   for (let x = 76; x <= 690; x += 28) { if (x > 218 && x < 262) continue; if (x > 458 && x < 502) continue; mk("path", { class: "dn-rung", d: "M" + x + " 357V373" }, Dg); }
   for (let x = 752; x <= 884; x += 28) mk("path", { class: "dn-rung", d: "M" + x + " 357V373" }, Dg);
   mk("path", { class: "dn-sister", d: "M650 400H800" }, Dg);
   sunG = mk("g", {}, Dg); mk("circle", { class: "dn-sun", cx: 95, cy: 322, r: 9 }, sunG);
-  for (let i = 0; i < 6; i++) { const a = i * 1.047; mk("path", { class: "dn-shield", d: "M" + f1(95 + Math.cos(a) * 12) + " " + f1(322 + Math.sin(a) * 12) + "L" + f1(95 + Math.cos(a) * 16) + " " + f1(322 + Math.sin(a) * 16) }, sunG); }
+  for (let i = 0; i < 6; i++) { const a = i * 1.047; mk("path", { class: "dn-ray", d: "M" + f1(95 + Math.cos(a) * 12) + " " + f1(322 + Math.sin(a) * 12) + "L" + f1(95 + Math.cos(a) * 17) + " " + f1(322 + Math.sin(a) * 17) }, sunG); }
+  shieldArc = mk("path", { class: "dn-shield", d: "M192 334Q240 310 288 334", opacity: "0" }, Dg);
   dimerG = mk("g", {}, Dg); mk("circle", { class: "dn-dimer", cx: 234, cy: 350, r: 5.5 }, dimerG); mk("circle", { class: "dn-dimer", cx: 248, cy: 350, r: 5.5 }, dimerG); mk("path", { class: "dn-dimer", d: "M234 350H248" }, dimerG);
   misC = mk("circle", { class: "dn-mis", cx: 480, cy: 348, r: 5.5 }, Dg);
-  breakG = mk("g", {}, Dg); mk("path", { class: "dn-mis", d: "M704 355L712 365L704 375M736 355L728 365L736 375" }, breakG);
-  shieldP = mk("path", { class: "dn-shield", d: "M212 338Q240 322 268 338", opacity: "0" }, Dg);
+  breakL = mk("g", {}, Dg); mk("path", { class: "dn-end", d: "M704 355L713 361L706 366L713 371L704 375" }, breakL);
+  breakR = mk("g", {}, Dg); mk("path", { class: "dn-end", d: "M736 355L727 361L734 366L727 371L736 375" }, breakR);
   repBlobs = [[240, 325], [480, 325], [720, 325]].map(([x, y], i) => { const g = cell(Dg, { cls: "rep", r: 13, nuc: 0.34, seed: 20 + i, wob: 0.12 }); place(g, x, y, 0, 1); return { g, x, y }; });
-  /* ---- label pills: top row, fork bottom row, repair row, lesion row ---- */
+  parpC = cell(Dg, { cls: "parp", r: 10, nuc: 0.34, seed: 31, wob: 0.12 }); place(parpC, 790, 325, 0, 1);
+  doom = [[848, 362, 15, 41], [882, 388, 12, 43], [838, 398, 10, 47]].map(([x, y, r, seed]) => { const g = cell(Dg, { cls: "doom", r, nuc: 0.4, seed, wob: 0.1 }); place(g, x, y, 0, 1); return { g, x, y }; });
+  /* ---- label pills: two at the fork, four along the damage, one for the blocker ---- */
   const O = L.over;
-  pill(O, "Primase", 545, 116, 500, 62, "Primase: makes a short RNA primer so DNA polymerase has a starting point on the lagging strand.");
-  pill(O, "Lagging strand", 660, 140, 640, 62, "Lagging strand: built away from the fork in short pieces, because polymerase can only build in one direction.");
-  pill(O, "Okazaki pieces", 790, 124, 790, 62, "Okazaki pieces: the short new pieces on the lagging strand, later joined into one strand.");
-  pill(O, "Ligase", 850, 112, 895, 62, "DNA ligase: seals the nicks between Okazaki pieces to finish the lagging strand.");
-  pill(O, "Helicase", 445, 186, 430, 252, "Helicase: unwinds and separates the two parental strands at the replication fork.");
-  pill(O, "Proofreading", 592, 208, 555, 252, "Proofreading: the polymerase checks each new base and removes most mismatches as it goes.");
-  pill(O, "Leading strand", 730, 204, 680, 252, "Leading strand: built continuously toward the fork as the DNA unwinds.");
-  pill(O, "Polymerase", 618, 176, 805, 252, "DNA polymerase: adds matching bases to build the new strands, on both the leading and lagging sides.");
-  pill(O, "Excision repair", 240, 340, 260, 302, "Nucleotide excision repair: cuts out a thymine dimer and fills the gap. Failure causes xeroderma pigmentosum, with severe sun sensitivity.");
-  pill(O, "Mismatch repair", 480, 340, 500, 302, "Mismatch repair: finds and fixes a wrongly paired base left by copying. Failure causes Lynch syndrome.");
-  pill(O, "Recombination", 720, 340, 730, 302, "Homologous recombination: repairs a double strand break accurately using the sister chromatid. BRCA1 and BRCA2 are needed for this route.");
-  pill(O, "Thymine dimer", 240, 362, 240, 418, "Thymine dimer: ultraviolet light joins two neighbouring thymines, kinking the DNA and blocking copying.");
-  pill(O, "Mismatch", 480, 362, 480, 418, "Base mismatch: a wrong base paired during copying. If it survives, it becomes a permanent mutation in one daughter cell.");
-  pill(O, "Strand break", 720, 362, 720, 418, "Double strand break: both strands severed. The most dangerous lesion; it needs recombination for accurate repair.");
-  sunPill = pill(O, "Sunscreen", 208, 374, 120, 408, "Sunscreen and avoidance: less ultraviolet light reaches the skin DNA, so fewer thymine dimers form.");
-  parpPill = pill(O, "PARP blocked", 748, 346, 880, 302, "PARP inhibitor concept: PARP is blocked, single strand breaks persist and become double strand breaks. Cells without recombination, such as BRCA defective cells, are lost.");
-  sunPill.style.opacity = 0; parpPill.style.opacity = 0;
+  pill(O, "Helicase", 445, 170, 360, 238, "Helicase unwinds the double helix so each strand can be copied.");
+  pill(O, "Polymerase", 610, 190, 600, 238, "DNA polymerase builds both new strands. Primase starts each piece, ligase seals the joins, and proofreading removes most errors.");
+  pill(O, "Sunlight", 95, 322, 110, 300, "Ultraviolet in sunlight joins two thymines into a dimer that blocks copying.");
+  pill(O, "Dimer", 241, 350, 240, 300, "Thymine dimer, fixed by excision repair, which cuts it out and fills the gap.");
+  pill(O, "Mismatch", 480, 348, 480, 300, "Wrong base, fixed by mismatch repair. Missed errors become permanent mutations.");
+  pill(O, "Break", 720, 358, 720, 300, "Both strands broken. Recombination using the sister copy fixes it. BRCA genes run this route.");
+  parpPill = pill(O, "PARP blocked", 790, 325, 838, 300, "PARP inhibitor concept. Blocked PARP traps breaks. Cells lacking recombination cannot cope and are lost.");
+  parpPill.style.opacity = 0;
+  capEl = mk("text", { class: "dn-cap", x: 30, y: 428 }, O); capEl.textContent = capText(0, 0);
   /* ---- gauges ---- */
   const P = L.panel, y0 = 478;
   mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: 912, height: 142, rx: 14 }, P);
@@ -484,7 +499,7 @@ function init() {
 }
 function step(dt, m) {
   const k = Math.min(1, dt * 0.7);
-  sm.D = lerp(sm.D, m.D, k); sm.cap = lerp(sm.cap, m.cap, k); sm.R = lerp(sm.R, m.R, k); sm.M = lerp(sm.M, m.M, k); sm.kill = lerp(sm.kill, m.kill, k); sm.parp = lerp(sm.parp, m.parp, k); sm.sun = lerp(sm.sun, m.sun || 0, k);
+  sm.D = lerp(sm.D, m.D, k); sm.cap = lerp(sm.cap, m.cap, k); sm.unrep = lerp(sm.unrep, m.unrep, k); sm.R = lerp(sm.R, m.R, k); sm.M = lerp(sm.M, m.M, k); sm.kill = lerp(sm.kill, m.kill, k); sm.parp = lerp(sm.parp, m.parp, k); sm.sun = lerp(sm.sun, m.sun || 0, k);
   place(heli, 445 + Math.sin(tm / 500) * 2, 165, Math.sin(tm / 300) * 8, 1 + 0.05 * Math.sin(tm / 200));
   place(polLead, 610 + Math.sin(tm / 700) * 6, 192 + Math.cos(tm / 600) * 2, 0, 1 + 0.06 * sm.R * Math.sin(tm / 250));
   place(polLag, 640 + Math.sin(tm / 800 + 2) * 5, 138 + Math.cos(tm / 650) * 2, 0, 1);
@@ -492,22 +507,41 @@ function step(dt, m) {
   place(lig, 850, 124 + Math.sin(tm / 550) * 3, 0, 1);
   frags.forEach((fg, i) => { const ph = 0.35 + 0.65 * clamp(sm.R * 1.2 - i * 0.12 + 0.15 * Math.sin(tm / 900 + i * 1.6)); fg.setAttribute("opacity", ph.toFixed(2)); });
   leadPath.setAttribute("opacity", (0.45 + 0.55 * sm.R).toFixed(2));
+  /* broken ends drift apart while repair fails; the danger glow grows */
+  const spread = 30 * sm.unrep;
+  breakL.setAttribute("transform", "translate(" + f1(-spread) + " 0)");
+  breakR.setAttribute("transform", "translate(" + f1(spread) + " 0)");
+  breakGlow.setAttribute("opacity", (0.05 + 0.5 * Math.max(sm.unrep, sm.kill * 0.8)).toFixed(2));
+  /* damage visuals scale with damage and unrepaired load */
+  const ds = (0.3 + sm.D).toFixed(2); dimerG.setAttribute("transform", "translate(240 350) scale(" + ds + ") translate(-240 -350)"); dimerG.setAttribute("opacity", clamp(0.25 + sm.D).toFixed(2));
+  misC.setAttribute("opacity", clamp(0.2 + sm.D * 0.9).toFixed(2)); misC.setAttribute("r", (4 + 3 * sm.D).toFixed(1));
+  shieldArc.setAttribute("opacity", sm.sun.toFixed(2)); sunG.setAttribute("opacity", (1 - 0.55 * sm.sun).toFixed(2));
+  parpPill.style.opacity = sm.parp.toFixed(2);
+  repBlobs.forEach((b, i) => { place(b.g, b.x, b.y + Math.sin(tm / 600 + i * 2) * 2.5, 0, 1); b.g.style.opacity = ((0.3 + 0.7 * sm.cap) * (i === 2 ? 1 - 0.55 * sm.parp : 1)).toFixed(2); });
+  place(parpC, 790 + Math.sin(tm / 700) * 1.5, 325, 0, 1);
+  /* faulty cells shrink and fade as the kill model rises */
+  doom.forEach((c, i) => { const s = Math.max(0.25, 1 - 0.68 * sm.kill); place(c.g, c.x, c.y + Math.sin(tm / 600 + i * 2.1) * 2, 0, s); c.g.style.opacity = (1 - 0.7 * sm.kill).toFixed(2); });
+  /* PARP blocker dots fly in and sit on PARP while the drug is on */
+  blk.forEach((p, i) => {
+    if (sm.parp < 0.05) { if (p.on) killP(p); return; }
+    if (!p.on) emit(p, slots[i][0] + rnd(-34, 34), 272 + rnd(0, 8), 0, 0, 0);
+    p.t += dt; const s = slots[i], e = Math.min(1, p.t / 1.4), ez = e * e * (3 - 2 * e);
+    const px = lerp(p.sx, s[0], ez) + (e >= 1 ? Math.sin(tm / 300 + i * 2.4) * 1.2 : 0);
+    const py = lerp(p.sy, s[1], ez) + (e >= 1 ? Math.cos(tm / 360 + i * 1.7) * 1.2 : 0);
+    p.e.setAttribute("transform", "translate(" + f1(px) + " " + f1(py) + ") rotate(" + f1(tm / 8 + i * 36) + ")");
+    p.e.setAttribute("opacity", clamp(sm.parp * (1.6 - p.t / 4)).toFixed(2));
+    if (p.t > 6) killP(p);
+  });
   /* nucleotide particles flow from above the fork to the polymerases, kept inside the fork zone */
   acc.nuc += dt * sm.R * 9; while (acc.nuc >= 1) { acc.nuc--; const p = freeP(nuc); if (p) emit(p, rnd(500, 880), 66, 0, 0, Math.random() < 0.6 ? 0 : 1); }
   nuc.forEach((p) => { if (!p.on) return; p.t += dt; const tx = p.k ? 640 : 610, ty = p.k ? 142 : 188, dx = tx - p.x, dy = ty - p.y, d = Math.hypot(dx, dy) || 1;
     p.x += (dx / d) * 62 * dt; p.y += (dy / d) * 62 * dt; p.x = clamp(p.x, 30, 930); p.y = clamp(p.y, 52, 248); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); if (d < 16 || p.t > 7) killP(p); });
-  /* damage visuals scale with damage and unrepaired load */
-  const ds = (0.3 + sm.D).toFixed(2); dimerG.setAttribute("transform", "translate(240 350) scale(" + ds + ") translate(-240 -350)"); dimerG.setAttribute("opacity", clamp(0.25 + sm.D).toFixed(2));
-  misC.setAttribute("opacity", clamp(0.2 + sm.D * 0.9).toFixed(2)); misC.setAttribute("r", (4 + 3 * sm.D).toFixed(1));
-  breakG.setAttribute("opacity", clamp(0.15 + m.unrep * 1.1).toFixed(2));
-  shieldP.setAttribute("opacity", sm.sun.toFixed(2)); sunG.setAttribute("opacity", (1 - 0.55 * sm.sun).toFixed(2));
-  sunPill.style.opacity = sm.sun.toFixed(2); parpPill.style.opacity = sm.parp.toFixed(2);
-  repBlobs.forEach((b, i) => { place(b.g, b.x, b.y + Math.sin(tm / 600 + i * 2) * 2.5, 0, 1); b.g.style.opacity = (0.3 + 0.7 * sm.cap).toFixed(2); });
-  /* ultraviolet photons fall on the dimer when damage is high and not prevented */
-  acc.uv += dt * sm.D * (m.lvl === 1 ? 7 : 1.2); while (acc.uv >= 1) { acc.uv--; const p = freeP(uvp); if (p) emit(p, rnd(205, 275), 288, rnd(-3, 3), 34, 0); }
-  uvp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 30, 930); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")"); if (p.y > 348 || p.t > 2.4) killP(p); });
-  /* repair sparkles drift from each repair blob to its lesion */
-  acc.fix += dt * sm.cap * sm.D * 8 + dt * 0.4; while (acc.fix >= 1) { acc.fix--; const p = freeP(fixp); if (p) { const b = pick(repBlobs); emit(p, b.x + rnd(-8, 8), b.y + 8, rnd(-4, 4), 22, 0); } }
+  /* ultraviolet photons fall on the dimer; the shield stops them above the DNA */
+  acc.uv += dt * sm.D * (m.lvl === 1 ? 7 : 1.2) * (1 - 0.9 * sm.sun); while (acc.uv >= 1) { acc.uv--; const p = freeP(uvp); if (p) emit(p, rnd(205, 275), 288, rnd(-3, 3), 34, 0); }
+  uvp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.x = clamp(p.x, 30, 930); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(tm / 6) + ")");
+    if (sm.sun > 0.4 && p.y >= 322 && p.x > 188 && p.x < 292) { killP(p); return; } if (p.y > 348 || p.t > 2.4) killP(p); });
+  /* repair sparkles drift from each repair blob to its lesion; blocking PARP starves the break route */
+  acc.fix += dt * sm.cap * sm.D * 8 * (1 - 0.7 * sm.parp) + dt * 0.4; while (acc.fix >= 1) { acc.fix--; const p = freeP(fixp); if (p) { const b = pick(repBlobs); emit(p, b.x + rnd(-8, 8), b.y + 8, rnd(-4, 4), 22, 0); } }
   fixp.forEach((p) => { if (!p.on) return; p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.y = clamp(p.y, 280, 432); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ")"); p.e.setAttribute("opacity", clamp(1 - p.t / 1.8).toFixed(2)); if (p.t > 1.8) killP(p); });
   /* mutation marks leave the fork when unrepaired damage is high */
   acc.mut += dt * sm.M * 6; while (acc.mut >= 1) { acc.mut--; const p = freeP(mutp); if (p) emit(p, rnd(820, 880), rnd(196, 224), rnd(8, 16), rnd(4, 10), 0); }
@@ -517,6 +551,7 @@ function step(dt, m) {
   gg.fix.set(sm.cap, wordOf(sm.cap, 0.35, 0.7, ["failing", "strained", "coping"]));
   gg.mut.set(sm.M, wordOf(sm.M, 0.25, 0.55, ["rare", "some", "frequent"]));
   gg.kill.set(sm.kill, wordOf(sm.kill, 0.2, 0.55, ["little", "some", "marked"]));
+  const ck = level * 10 + drug; if (ck !== capKey) { capKey = ck; const t = capText(level, drug); if (capEl.textContent !== t) capEl.textContent = t; }
 }
 run({ init, step });
 </script></body></html>
