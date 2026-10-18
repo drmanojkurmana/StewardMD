@@ -1,12 +1,12 @@
 /* Parkinson scene: dopamine loss, direct and indirect pathways, the GPi brake, thalamus and a moving limb. */
 const layers = { nodes: $("nodes"), snc: $("snc-cells"), parts: $("parts"), limb: $("limb"), over: $("over"), panel: $("panel") };
 const NODES = [
-  ["snc", "snc", 170, 220, 36],
-  ["stri", "stri", 480, 220, 42],
-  ["gpe", "gpe", 300, 345, 30],
-  ["stn", "stn", 480, 345, 26],
-  ["gpi", "gpi", 650, 345, 32],
-  ["thal", "thal", 650, 220, 32],
+  ["snc", "snc", 170, 220, 36, "Nigra"],
+  ["stri", "stri", 480, 220, 42, "Striatum"],
+  ["gpe", "gpe", 300, 345, 30, "GPe"],
+  ["stn", "stn", 480, 345, 26, "STN"],
+  ["gpi", "gpi", 650, 345, 32, "GPi"],
+  ["thal", "thal", 650, 220, 32, "Thalamus"],
 ];
 const nodeG = {};
 const sncCells = [];
@@ -56,9 +56,11 @@ const acc = { dopa: 0, dir: 0, ind: 0, gpi: 0, thal: 0 };
 function init() {
   const cg = mk("g", {}, layers.nodes);
   mk("rect", { class: "pk-rest", x: 390, y: 88, width: 180, height: 44, rx: 12 }, cg);
+  { const t = mk("text", { class: "pk-node-t", x: 480, y: 107, "text-anchor": "middle" }, cg); t.textContent = "Cortex"; const s = mk("text", { class: "pk-node-s", x: 480, y: 121, "text-anchor": "middle" }, cg); s.textContent = "movement command"; }
   nodeG.cor = cg;
-  NODES.forEach(([id, cls, x, y, r]) => {
+  NODES.forEach(([id, cls, x, y, r, lab]) => {
     const g = cell(layers.nodes, { cls, r, nuc: 0.34, seed: x * 0.01 + y * 0.02, wob: 0.08 });
+    const t = mk("text", { class: "pk-node-t", x: 0, y: 3.5, "text-anchor": "middle" }, g); t.textContent = lab;
     place(g, x, y, 0, 1);
     nodeG[id] = g;
   });

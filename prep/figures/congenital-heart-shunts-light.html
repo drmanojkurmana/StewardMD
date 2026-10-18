@@ -8,7 +8,7 @@
   --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
   --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
   --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
-  --anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
 }
 .iso[data-theme="light"]{
@@ -199,6 +199,9 @@ body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px
 .bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
 .bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
 @media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+/* Typography: a clean, classic system sans for every label, title and readout (owner: no code-style monospace in figures).
+   The Anatomy kit sets --anatomy-mono to a monospace stack on .iso; this later rule wins, so every figure inherits it. */
+.iso,.iso[data-theme="light"]{--anatomy-mono:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,system-ui,sans-serif}
 body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
 body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
 .t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
@@ -264,8 +267,9 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .sh-outer{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
 .sh-septum{fill:color-mix(in srgb,var(--c-rbc) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.8}
 .sh-ch{stroke:color-mix(in srgb,var(--anatomy-strong) 35%,#000);stroke-width:1}
-.sh-chlab{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
-.sh-sat{fill:var(--anatomy-text);font:9px var(--anatomy-mono);pointer-events:none;opacity:.85}
+.sh-chlab{fill:var(--anatomy-strong);font:600 10.5px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.sh-sat{fill:var(--anatomy-text);font:9px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none;opacity:.85}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .sh-lung{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
 .sh-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
 .sh-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:3 2}
@@ -273,7 +277,7 @@ body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-r
 .sh-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round}
 .sh-sten{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
 .sh-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.sh-xx{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.sh-note{fill:var(--c-bad);font:600 10px var(--anatomy-mono);pointer-events:none}
+.sh-note{fill:var(--c-bad);font:600 10px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .p-blood{stroke:color-mix(in srgb,#000 25%,transparent);stroke-width:.5}
 .dr-g-fill.g-pulm{fill:var(--c-fl)}.dr-g-fill.g-press{fill:var(--c-neut)}
 </style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Congenital heart shunts: holes, duct and reversed flow</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>shunt left to right · pulmonary flow high · saturation normal</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated heart with four chambers, lungs above and the body below. An atrial septal defect, ventricular septal defect or patent ductus arteriosus lets blood shunt left to right and overload the lungs. Raised pulmonary pressure can reverse the shunt in Eisenmenger physiology, and tetralogy of Fallot shunts right to left past a narrowed pulmonary outlet, causing cyanosis. Chamber colours show oxygen saturation and arrows show flow. Treatments shown are closing the defect and prostaglandin to keep the duct open."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
@@ -494,7 +498,6 @@ function initPanel() {
   [["qp", "Pulm. flow", "g-pulm", "How much blood flows through the lungs. Left to right shunts raise it; tetralogy and Eisenmenger physiology lower effective flow."], ["pap", "Pulm. pressure", "g-press", "Pressure in the pulmonary artery. It rises with large left to right shunts and is very high in Eisenmenger physiology."], ["sat", "Saturation", "g-good", "Oxygen saturation of blood reaching the body. It falls when oxygen poor blood shunts right to left, causing cyanosis."], ["qs", "Body flow", "g-fl", "How much blood reaches the body tissues. It can fall if a needed relief shunt is closed in Eisenmenger physiology."]]
     .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h, 18, cls, name, tip); });
   const ox = L.over;
-  pillRefs.lungs = pill(ox, "Lungs", 605, 115, 640, 158, "Lungs: blood picks up oxygen here. Extra shunt flow overloads them; too little flow leaves blood poorly oxygenated.");
   pillRefs.pa = pill(ox, "Pulm. artery", 460, 125, 240, 175, "Pulmonary artery: carries blood from the right ventricle to the lungs. A patent ductus joins it to the aorta.");
   pillRefs.ao = pill(ox, "Aorta", 310, 100, 195, 78, "Aorta: carries blood from the left ventricle to the body. Its saturation sets the saturation gauge.");
   pillRefs.duct = pill(ox, "Ductus", 480, 93, 480, 148, "Ductus arteriosus: a fetal channel between the aorta and pulmonary artery. When it stays open after birth (patent ductus) blood shunts between them. Prostaglandin keeps it open.");
@@ -502,7 +505,6 @@ function initPanel() {
   pillRefs.vsd = pill(ox, "VSD", 480, 362, 185, 305, "Ventricular septal defect: a hole between the ventricles. In tetralogy and Eisenmenger physiology blood shunts right to left through it.");
   pillRefs.vein = pill(ox, "Veins", 300, 320, 170, 362, "Systemic veins: return oxygen poor blood from the body to the right atrium.");
   pillRefs.outlet = pill(ox, "Narrowed outlet", 587, 290, 790, 235, "Narrowed pulmonary outlet in tetralogy of Fallot: resistance here drives the right to left shunt and limits lung flow.");
-  pillRefs.body = pill(ox, "Body", 630, 420, 790, 410, "Body tissues: use oxygen and return oxygen poor blood. Blue colour means cyanosis.");
 }
 const gg = {};
 const sm = { Qp: 0.6, Qs: 0.7, PAP: 0.4, satArt: 0.9, satR: 0.3, satPA: 0.3, satL: 0.9, cyan: 0.1, shunt: 0.5, mag: 0.5, closed: 0, ductOpen: 0, obstruct: 0, rvLoad: 0.4 };

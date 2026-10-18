@@ -78,7 +78,10 @@ body[data-theme="light"]{--c-nh3:#c42a3d;--c-urea:#a86e28;--c-cit:#1f8f83;--c-ar
 .ur-return{fill:none;stroke:var(--c-orn);stroke-width:1.6;stroke-dasharray:5 5;opacity:.6}
 .ur-scavline{fill:none;stroke:var(--c-scav);stroke-width:1.4;stroke-dasharray:4 5;opacity:.45}
 .ur-node{fill:var(--anatomy-card);stroke:var(--anatomy-strong);stroke-width:1.4}
+.ur-node-t{fill:var(--anatomy-strong);font:600 8px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .ur-enz{fill:color-mix(in srgb,var(--c-cit) 35%,var(--anatomy-paper));stroke:var(--c-cit);stroke-width:1.4}
+.ur-enz-t{fill:var(--anatomy-strong);font:700 7.5px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .ur-block{fill:none;stroke:var(--c-bad);stroke-width:2.4;stroke-linecap:round}
 .ur-mach{fill:var(--anatomy-card);stroke:var(--anatomy-strong);stroke-width:1.4}
 .ur-machin{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}

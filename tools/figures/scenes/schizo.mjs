@@ -73,7 +73,8 @@ const extraCss = `
 .cl-vta{--cc:#e9b84a}.cl-nigra{--cc:#d98a4b}.cl-arc{--cc:#7fb069}.cl-limb{--cc:#e07856}.cl-pfc{--cc:#5fa8a0}.cl-stri{--cc:#7fc4e8}.cl-pit{--cc:#c9788a}
 .p-da{--cc:#e9b84a}.p-prl{--cc:#e5488a}.p-drug{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
 .g-szblock{fill:#e9b84a}.g-szmeso{fill:#e07856}.g-szpos{fill:#e5484d}.g-szcort{fill:#5fa8a0}.g-szeps{fill:#f08a4b}.g-szprl{fill:#e5488a}
-.sz-node-t{fill:var(--anatomy-strong);font-size:9.5px;font-weight:600;pointer-events:none}
+.sz-node-t{fill:var(--anatomy-strong);font-size:9px;font-weight:600;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .sz-gate{fill:var(--c-bad);stroke:color-mix(in srgb,var(--c-bad) 55%,#000);stroke-width:.8}
 .sz-rec{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:1}
 body[data-theme="light"] .p-da{--cc:#b8860b}

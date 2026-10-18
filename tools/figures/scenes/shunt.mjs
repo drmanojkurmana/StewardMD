@@ -113,8 +113,9 @@ buildScene({
 .sh-outer{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1.4}
 .sh-septum{fill:color-mix(in srgb,var(--c-rbc) 34%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:.8}
 .sh-ch{stroke:color-mix(in srgb,var(--anatomy-strong) 35%,#000);stroke-width:1}
-.sh-chlab{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
-.sh-sat{fill:var(--anatomy-text);font:9px var(--anatomy-mono);pointer-events:none;opacity:.85}
+.sh-chlab{fill:var(--anatomy-strong);font:600 10.5px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
+.sh-sat{fill:var(--anatomy-text);font:9px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none;opacity:.85}
+.dr-fig text{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
 .sh-lung{fill:color-mix(in srgb,var(--c-fl) 30%,var(--anatomy-paper));stroke:var(--c-fl);stroke-width:1.3}
 .sh-body{fill:#8fb8dd;stroke:var(--anatomy-mid);stroke-width:1.2}
 .sh-hole{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.4;stroke-dasharray:3 2}
@@ -122,7 +123,7 @@ buildScene({
 .sh-duct{fill:none;stroke:#e8a13a;stroke-width:7;stroke-linecap:round}
 .sh-sten{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}
 .sh-x{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.6}.sh-xx{fill:none;stroke:var(--c-bad);stroke-width:2.2;stroke-linecap:round}
-.sh-note{fill:var(--c-bad);font:600 10px var(--anatomy-mono);pointer-events:none}
+.sh-note{fill:var(--c-bad);font:600 10px system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;pointer-events:none}
 .p-blood{stroke:color-mix(in srgb,#000 25%,transparent);stroke-width:.5}
 .dr-g-fill.g-pulm{fill:var(--c-fl)}.dr-g-fill.g-press{fill:var(--c-neut)}
 `,
