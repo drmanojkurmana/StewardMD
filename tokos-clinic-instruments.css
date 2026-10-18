@@ -1,0 +1,294 @@
+/* Tokós Instruments: Instrument Atlas & Spotter Clinic. ES5.
+   Scoped under .sp-root and .tok-root using Tokós design tokens (--tk-*, --sp-*). */
+
+/* ---- Common Instrument Stage ---- */
+.tok-root .tok-instr-stage {
+  position: relative;
+  width: 100%;
+  max-height: 50vh;
+  background: #000;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+.tok-root .tok-instr-stage:focus-visible {
+  box-shadow: inset 0 0 0 3px var(--tk-acc);
+}
+.tok-root .tok-instr-stage svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: 0 0;
+  will-change: transform;
+  display: block;
+}
+.tok-root .tok-instr-stage.zoomed {
+  cursor: grab;
+}
+
+/* ---- Atlas Filter Row ---- */
+.tok-root .tok-instr-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 16px 10px;
+  scrollbar-width: none;
+}
+.tok-root .tok-instr-filters::-webkit-scrollbar {
+  display: none;
+}
+.tok-root .tok-instr-chip {
+  flex: 0 0 auto;
+  min-height: 48px;
+  height: 48px;
+  box-sizing: border-box;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--tk-line);
+  background: var(--tk-s1);
+  color: var(--tk-text);
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease, transform 120ms var(--tk-ease);
+}
+.tok-root .tok-instr-chip:active {
+  transform: scale(0.97);
+}
+.tok-root .tok-instr-chip[aria-pressed="true"] {
+  background: var(--tk-acc);
+  color: var(--tk-on-acc);
+  border-color: var(--tk-acc);
+}
+.tok-root .tok-instr-chip:focus-visible {
+  outline: 2px solid var(--tk-acc);
+  outline-offset: 2px;
+}
+
+/* ---- Atlas Search Box ---- */
+.tok-root .tok-instr-search-wrap {
+  padding: 8px 16px;
+  position: relative;
+}
+.tok-root .tok-instr-search {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--tk-line);
+  background: var(--tk-s1);
+  color: var(--tk-text);
+  font-size: 15px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.tok-root .tok-instr-search:focus {
+  border-color: var(--tk-acc);
+  box-shadow: 0 0 0 1px var(--tk-acc);
+}
+
+/* ---- Atlas Card Grid (phone: 1 col, iPad portrait: 2 col, landscape: 3 col) ---- */
+.tok-root .tok-instr-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  padding: 8px 16px 28px;
+}
+@media (min-width: 600px) {
+  .tok-root .tok-instr-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 900px) {
+  .tok-root .tok-instr-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tok-root .tok-instr-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--tk-s1);
+  border: 1px solid var(--tk-line);
+  border-radius: 14px;
+  overflow: hidden;
+  text-align: left;
+  cursor: pointer;
+  min-height: 44px;
+  padding: 0;
+  color: var(--tk-text);
+  transition: transform 140ms var(--tk-ease), border-color 160ms ease, box-shadow 160ms ease;
+}
+.tok-root .tok-instr-card:active {
+  transform: scale(0.98);
+}
+.tok-root .tok-instr-card:focus-visible {
+  outline: 2px solid var(--tk-acc);
+  outline-offset: 2px;
+}
+.tok-root .tok-instr-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tok-root .tok-instr-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.tok-root .tok-instr-card-body {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+}
+.tok-root .tok-instr-card-group {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--tk-s2);
+  color: var(--tk-mut);
+}
+.tok-root .tok-instr-card-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--tk-text);
+}
+.tok-root .tok-instr-card-aka {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--tk-mut);
+}
+
+/* ---- Empty Search State ---- */
+.tok-root .tok-instr-empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: var(--tk-mut);
+  font-size: 15px;
+  font-weight: 550;
+  grid-column: 1 / -1;
+}
+
+/* ---- Detail Screen (Image top, text below) ---- */
+.tok-root .tok-instr-detail-body {
+  padding-top: 16px;
+  padding-bottom: 32px;
+}
+.tok-root .tok-instr-detail-title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--tk-text);
+  line-height: 1.25;
+}
+.tok-root .tok-instr-detail-aka {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--tk-mut);
+  line-height: 1.4;
+}
+.tok-root .tok-instr-group-chip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--tk-s2);
+  color: var(--tk-mut);
+  margin-bottom: 16px;
+}
+.tok-root .tok-instr-section {
+  margin: 18px 0;
+}
+.tok-root .tok-instr-section h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--tk-text);
+}
+.tok-root .tok-instr-section ul {
+  margin: 0;
+  padding: 0 0 0 20px;
+  display: grid;
+  gap: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--tk-text);
+}
+.tok-root .tok-instr-section li::marker {
+  color: var(--tk-acc);
+}
+.tok-root .tok-instr-draft {
+  margin: 16px 0 8px;
+  font-size: 12px;
+  color: var(--tk-mut);
+  font-style: italic;
+}
+.tok-root .tok-instr-credit {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--tk-mut);
+  margin: 6px 0 16px;
+  overflow-wrap: anywhere;
+}
+.tok-root .tok-instr-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+.tok-root .tok-instr-nav .tok-btn {
+  flex: 1 1 0;
+  min-height: 44px;
+}
+
+/* ---- Spotter Clinic Options & Reveal ---- */
+.tok-root .tok-opts-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tok-root .tok-opt-left {
+  text-align: left;
+  padding: 12px 14px;
+  line-height: 1.4;
+}
+.tok-root .tus-verdict.close,
+.tok-root .tus-verdict.close b {
+  color: var(--tk-warn);
+}
+
+/* ---- Reduced Motion & Hover ---- */
+@media (hover: hover) and (pointer: fine) {
+  .tok-root .tok-instr-card:hover {
+    border-color: var(--tk-acc);
+  }
+  .tok-root .tok-instr-chip:not([aria-pressed="true"]):hover {
+    background: var(--tk-s2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tok-root .tok-instr-card,
+  .tok-root .tok-instr-chip,
+  .tok-root .tok-instr-stage svg {
+    transition: none !important;
+  }
+}

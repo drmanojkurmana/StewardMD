@@ -63,19 +63,19 @@ try {
   await load(BASE);
   // lazy loading: app boot requests the loader and no engine or Tokós file
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|tokos(-core|-data|-stage|-ctg|-calipers)?\.(js|css)|tokos-models\/)/;
-  ok(reqs.some((u) => /tokos-loader\.js\?v=tok11/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
+  ok(reqs.some((u) => /tokos-loader\.js\?v=tok12/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads tokos-loader.js and no engine or Tokós file" + (reqs.filter((u) => ENG.test(u)).length ? ": " + reqs.filter((u) => ENG.test(u)).join(", ") : ""));
   ok(await until(tile, 10000), "default (no flag): the Tokós home tile renders without being added from Add Tool");
   await ev(`var t=document.querySelector('.rnav-tile[data-act=tokos]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return TOKOS.isOpen() && !!document.getElementById("smdTokos");`, 10000), "tile opens the Tokós overlay");
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=pick][data-t=test]');`, 20000), "first open loads Tokós and asks Learn or Test");
-  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok11/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok11/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
+  ok(await ev(`return !!window.SPECIALTY_CORE;`) === true && reqs.some((u) => /specialty-shell\.js\?v=tok12/.test(u)) && reqs.some((u) => /tokos-ctg\.js\?v=tok12/.test(u)), "the engine and Tokós loaded on open, at the loader's token");
   await ev(`document.querySelector('#smdTokos [data-act=pick][data-t=test]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('#smdTokos [data-act=clinic][data-t=ctg]');`, 20000), "hub shows the CTG clinic");
   // Tokós 2.0 wiring: every model in tokos/models.json is listed with its own screen (13 tools, 6 drills + the labour room
-  // + the OSCE link, 6 explorers) and the three clinics are registered.
-  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === ${drillCount + 2} && T._explore.length === 6;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 6 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.map(function(x){return x.id;}).join(",")].join(" | ");`));
+  // + the OSCE link, 7 explorers) and the four clinics are registered.
+  ok(await until(`var T=TOKOS; return T._tools.length === 13 && T._sims.length === ${drillCount + 2} && T._explore.length === 7;`, 20000), "all 13 calculators, 6 drills + labour + OSCE and 7 explorers are listed: " + await ev(`var T=TOKOS; return [T._tools.length, T._sims.map(function(x){return x.id;}).join(","), T._explore.map(function(x){return x.id;}).join(",")].join(" | ");`));
   ok(await ev(`return !TOKOS._sims.some(function(x){return x.pending;});`) === true, "the labour room has its own screen (no placeholder)");
-  ok(await ev(`return TOKOS._clinics.map(function(x){return x.id;}).join(",");`) === "ctg,fetal-planes,hc-biometry", "clinics: CTG, fetal planes, HC biometry");
+  ok(await ev(`return TOKOS._clinics.map(function(x){return x.id;}).join(",");`) === "ctg,fetal-planes,hc-biometry,instruments", "clinics: CTG, fetal planes, HC biometry, instruments");
   ok(await ev(`return !!document.querySelector('#smdTokos [data-act=sim][data-s=osce]');`) === true, "Test hub lists the OSCE link");
   await ev(`TOKOS.back(); return 1;`);
   ok(await until(`return !TOKOS.isOpen();`, 5000), "back() closes Tokós and returns to home");
