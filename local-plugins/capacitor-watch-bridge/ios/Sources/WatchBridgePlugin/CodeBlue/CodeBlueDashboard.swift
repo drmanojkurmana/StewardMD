@@ -327,6 +327,10 @@ struct CodeBlueDashboard: View {
         case .resume, .cprStart: return "play.fill"
         case .cprEnd: return "stop.fill"
         case .switchCompressor: return "person.2.fill"
+        case .procedure: return "stethoscope"
+        case .reArrest: return "arrow.counterclockwise"
+        case .note: return "text.bubble.fill"
+        case .modeSet: return "person.fill"
         }
     }
     private func eventTitle(_ kind: CodeEventKind) -> String {
@@ -340,6 +344,10 @@ struct CodeBlueDashboard: View {
         case .switchCompressor: return "Compressor switch"
         case .rosc: return "ROSC"
         case .rhythm: return "Rhythm"
+        case .procedure: return "Procedure"
+        case .reArrest: return "Re-arrest"
+        case .note: return "Note"
+        case .modeSet: return "Mode set"
         }
     }
 }
