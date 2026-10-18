@@ -60,51 +60,56 @@ const body = `
 <text class="sc-zone" x="340" y="68">MOTHER</text>
 <text class="sc-zone" x="660" y="68">FETUS</text>
 <g id="placenta">
-  <ellipse class="gdm-plac" cx="155" cy="195" rx="84" ry="66"/>
-  <circle class="gdm-villi" cx="120" cy="170" r="16"/><circle class="gdm-villi" cx="160" cy="160" r="13"/>
-  <circle class="gdm-villi" cx="190" cy="185" r="15"/><circle class="gdm-villi" cx="135" cy="215" r="14"/>
-  <circle class="gdm-villi" cx="175" cy="225" r="12"/>
+  <ellipse class="gdm-plac" cx="155" cy="200" rx="80" ry="64"/>
+  <ellipse class="gdm-pool" cx="155" cy="200" rx="62" ry="48"/>
+  <circle class="gdm-villi" cx="120" cy="176" r="16"/><circle class="gdm-villi" cx="160" cy="166" r="13"/>
+  <circle class="gdm-villi" cx="190" cy="190" r="15"/><circle class="gdm-villi" cx="135" cy="220" r="14"/>
+  <circle class="gdm-villi" cx="175" cy="230" r="12"/>
+  <path class="gdm-plate" d="M205 156 C225 180 225 220 205 244"/>
 </g>
-<g id="muscle">
-  <rect class="gdm-muscle" x="342" y="122" width="126" height="98" rx="24"/>
-  <path class="gdm-fibre" d="M358 148H452M358 172H452M358 196H452"/>
-  <circle class="gdm-receptor" cx="372" cy="122" r="5"/><circle class="gdm-receptor" cx="405" cy="122" r="5"/><circle class="gdm-receptor" cx="438" cy="122" r="5"/>
-</g>
-<g id="islet">
-  <circle class="gdm-beta" cx="548" cy="160" r="24"/><circle class="gdm-beta" cx="580" cy="150" r="19"/>
-  <circle class="gdm-beta" cx="575" cy="185" r="21"/><circle class="gdm-beta" cx="540" cy="190" r="16"/>
-  <circle class="gdm-nuc" cx="548" cy="160" r="7"/><circle class="gdm-nuc" cx="578" cy="178" r="6"/>
-</g>
+<path id="cord" class="gdm-cord" d="M232 220 C400 252 560 252 748 222"/>
+<g id="muscleSlot"></g>
+<g id="pancSlot"></g>
+<g id="recSlot"></g>
+<ellipse id="halo" class="gdm-halo" cx="810" cy="200" rx="95" ry="75" opacity="0"/>
 <g id="fetusG">
   <ellipse class="gdm-fetus" cx="0" cy="18" rx="46" ry="36"/>
   <circle class="gdm-fetus" cx="-28" cy="-28" r="27"/>
+  <ellipse class="gdm-fat" cx="0" cy="18" rx="46" ry="36" opacity="0"/>
+  <circle class="gdm-fat" cx="-28" cy="-28" r="27" opacity="0"/>
   <circle class="gdm-eye" cx="-36" cy="-32" r="3"/>
   <path class="gdm-limb" d="M18 42 Q34 58 48 48M-8 50 Q4 64 20 58"/>
   <circle class="gdm-fpan" cx="8" cy="18" r="8"/>
 </g>
 <rect id="lumen" class="gdm-vessel" x="14" y="${CY - 35}" width="${W - 28}" height="70"/>
+<rect id="wash" class="gdm-wash" x="14" y="${CY - 35}" width="${W - 28}" height="70" opacity="0"/>
 <rect class="gdm-barrier" x="632" y="${CY - 35}" width="16" height="70"/>
-<g id="parts"></g>
-<g id="over"></g>
-<g id="panel"></g>`;
+<path id="exoPath" class="gdm-exo" d="M480 62 C480 140 478 220 470 300" opacity="0.25"/>
+<g id="flow"></g><g id="cells"></g><g id="parts"></g><g id="over"></g><g id="panel"></g>`;
 
 const extraCss = `
 body{--c-plac:#c978c9;--c-horm:#f08a4b;--c-gluc:#e8d36a;--c-ins:#38d1ff;--c-fins:#3ddc97}
 body[data-theme="light"]{--c-plac:#a84fa8;--c-horm:#d96a25;--c-gluc:#b89a1e;--c-ins:#0a7fd1;--c-fins:#0f9f76}
 .gdm-div{stroke:var(--anatomy-faint);stroke-width:1;stroke-dasharray:4 5;opacity:.6}
 .gdm-plac{fill:var(--c-plac);stroke:color-mix(in srgb,var(--c-plac) 55%,#000);stroke-width:1.4;opacity:.92}
+.gdm-pool{fill:color-mix(in srgb,var(--c-plac) 45%,#fff);stroke:none;opacity:.55}
 .gdm-villi{fill:color-mix(in srgb,var(--c-plac) 62%,#fff);stroke:color-mix(in srgb,var(--c-plac) 55%,#000);stroke-width:.8;opacity:.9}
-.gdm-muscle{fill:var(--c-sm);stroke:color-mix(in srgb,var(--c-sm) 55%,#000);stroke-width:1.4;opacity:.95}
-.gdm-fibre{fill:none;stroke:color-mix(in srgb,var(--c-sm) 45%,#000);stroke-width:2;opacity:.55;stroke-linecap:round}
-.gdm-receptor{fill:var(--c-ins);stroke:color-mix(in srgb,var(--c-ins) 50%,#000);stroke-width:.8}
-.gdm-beta{fill:var(--c-cyt);stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:1;opacity:.95}
-.gdm-nuc{fill:color-mix(in srgb,var(--c-cyt) 40%,#1a1030);opacity:.85}
+.gdm-plate{fill:none;stroke:color-mix(in srgb,var(--c-plac) 55%,#000);stroke-width:2;stroke-linecap:round;opacity:.7}
+.gdm-cord{fill:none;stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-paper));stroke-width:9;stroke-linecap:round;opacity:.85}
 .gdm-fetus{fill:var(--c-endo);stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:1.3;opacity:.97}
-.gdm-eye{fill:var(--anatomy-strong)}
+.gdm-fat{fill:var(--c-donor);stroke:none}
+.gdm-eye{fill:var(--anatomy-strong);stroke:none}
 .gdm-limb{fill:none;stroke:color-mix(in srgb,var(--c-endo) 55%,#000);stroke-width:5;stroke-linecap:round}
 .gdm-fpan{fill:var(--c-fins);stroke:color-mix(in srgb,var(--c-fins) 50%,#000);stroke-width:.8}
 .gdm-vessel{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-rbc) 45%,var(--anatomy-mid));stroke-width:1.2}
+.gdm-wash{fill:var(--c-gluc);stroke:none}
 .gdm-barrier{fill:var(--c-plac);stroke:color-mix(in srgb,var(--c-plac) 55%,#000);stroke-width:1;opacity:.85}
+.gdm-exo{fill:none;stroke:var(--c-ins);stroke-width:3;stroke-linecap:round;stroke-dasharray:7 6}
+.gdm-halo{fill:var(--c-donor);stroke:none}
+.gdm-veil{fill:var(--c-horm);stroke:none}
+.gdm-rec{fill:var(--anatomy-paper);stroke:var(--c-ins);stroke-width:1.2}
+.gdm-tab{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.gdm-tab2{fill:var(--c-bad);opacity:.7}
+.gdm-cap{fill:var(--anatomy-strong);font:12px var(--anatomy-mono)}
 .p-horm{--cc:var(--c-horm)}.p-gluc{--cc:var(--c-gluc)}.p-ins{--cc:var(--c-ins)}.p-fins{--cc:var(--c-fins)}
 .dr-g-fill.g-horm{fill:var(--c-horm)}.dr-g-fill.g-gluc{fill:var(--c-gluc)}.dr-g-fill.g-ins{fill:var(--c-ins)}.dr-g-fill.g-fins{fill:var(--c-fins)}.dr-g-fill.g-plac{fill:var(--c-plac)}
 `;
@@ -113,7 +118,7 @@ buildScene({
   id: "gestational-diabetes", fig: "Fig 1", title: "Gestational diabetes: placenta to fetus", W, H, body, extraCss,
   label: "An animated placenta, mother and fetus. Placental hormones rise as pregnancy advances and make maternal tissues resist insulin. The beta cell makes more insulin but cannot fully compensate, so maternal glucose rises. Glucose crosses the placenta, the fetus makes extra insulin, and that drives extra growth and a risk of low glucose after birth. Gauges show insulin resistance, beta cell effort, maternal glucose, glucose crossing, fetal insulin and baby growth, with a note on newborn low glucose risk in the text. Treatment choices include diet and exercise, metformin and insulin.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.",
-  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "gdm.page.js"), "utf8"), modelOf, MD, tests: TESTS,
+  scene: { CY, W, H }, pageJs: readFileSync(join(HERE, "gdm.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
   withoutLabel: "Without treatment", withLabel: "With insulin",
   sourcesLis: [
     "<strong>How gestational diabetes develops.</strong> As the placenta grows it releases hormones including human placental lactogen and progesterone, with cortisol also contributing. These raise insulin resistance in maternal muscle, fat and liver, so glucose is taken up less readily and the liver releases more. The pancreatic beta cell normally compensates by making more insulin. When it cannot compensate enough, maternal glucose rises. This is standard teaching in medicine, obstetrics and endocrinology texts and was not checked against a linked source here, so it is flagged for review.",

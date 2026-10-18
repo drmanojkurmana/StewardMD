@@ -41,17 +41,16 @@ const TESTS = [
   [0, 0, "virus moderate · liver injury raised · fibrosis none · cancer risk low"],
   [1, 0, "virus high · liver injury high · fibrosis some · cancer risk low"],
   [1, 3, "virus low · liver injury low · fibrosis some · cancer risk low"],
-  [2, 0, "virus high · liver injury high · fibrosis severe · cancer risk high"],
+  [2, 3, "virus low · liver injury raised · fibrosis severe · cancer risk high"],
 ];
 
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="dr-panel" x="14" y="40" width="606" height="402" rx="16"/>
-<text class="sc-zone" x="32" y="64">A HEPATOCYTE IN THE LIVER</text>
-<text class="sc-lab hc-step" id="stepname" x="32" y="120">Step 1: entry</text>
+<text class="sc-zone" x="32" y="64">HEPATITIS C IN A LIVER CELL, LEFT TO RIGHT</text>
+<g id="liverSlot"></g>
 <g id="fib"></g>
 <g id="cellg"></g>
-<g id="steps"></g>
 <g id="over"></g>
 <rect class="dr-panel" x="632" y="40" width="314" height="402" rx="16"/>
 <text class="sc-zone" x="650" y="64">LIVER OVER TIME</text>
@@ -60,16 +59,20 @@ const body = `
 
 buildScene({
   id: "hepatitis-c-life-cycle", fig: "Fig 1", title: "Hepatitis C: life cycle, liver damage and treatment targets", W, H, body,
-  label: "An animated hepatocyte and a liver progression diagram. Hepatitis C virus enters a hepatocyte and releases its RNA genome. The RNA is translated into one long polyprotein, which the NS3 protease cleaves into working proteins. The NS5B RNA polymerase, helped by NS5A, copies the RNA on liver cell membranes, and new virions assemble and leave. Years of chronic infection and inflammation lay down fibrosis, then cirrhosis, and raise the risk of liver cancer. Treatment choices block NS3, NS5B or NS5A in combination.",
+  label: "An animated liver with a magnified hepatocyte, left to right, plus a liver progression diagram. Hepatitis C virus in blood enters the liver and then a liver cell. Inside, it releases its RNA genome. The RNA is translated into one long polyprotein, which the NS3 cutter cleaves into working proteins. The NS5B copier, helped by NS5A, copies the RNA, and new virions assemble and leave to the right. Years of chronic infection and inflammation lay down fibrosis, then cirrhosis, and raise the risk of liver cancer. Treatment choices block NS3, NS5B or NS5A in combination, and each blocker is shown sitting on its target.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or schedules are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "hcv.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "hcv.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With NS5A inhibitor combination",
   extraCss: `
 .cl-hep{--cc:#d98a6a}.cl-hnuc{--cc:#8a7ac0}
 body[data-theme="light"] .cl-hep{--cc:#c97a5e}
-.hc-step{font-size:11px}
-.hc-box{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:.8}.hc-box.on{fill:color-mix(in srgb,var(--c-no) 35%,var(--anatomy-card));stroke:var(--c-no)}
-.hc-bn{fill:var(--anatomy-text);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.hc-cap{fill:var(--anatomy-strong);font-size:12px}
+.hc-inset{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.hc-mag{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-dasharray:5 4;opacity:.7}
+.hc-infl{fill:var(--c-bad);stroke:none}
+.hc-heal{fill:var(--c-no);stroke:none}
+.hc-capk{fill:var(--c-no);stroke:#0b5c40;stroke-width:1.4}
+.hc-capk2{fill:var(--anatomy-paper);stroke:none}
 .hc-env{fill:#3a9a8c;stroke:#1e5a52;stroke-width:.8}.hc-core{fill:#f2d27a;stroke:#9a7a2a;stroke-width:.6}.hc-spk{stroke:#7ac0b8;stroke-width:1.2;stroke-linecap:round;fill:none}
 .hc-rna{fill:none;stroke:#f08a4b;stroke-width:1.8;stroke-linecap:round}.hc-rna2{fill:none;stroke:#e85a7a;stroke-width:1.6;stroke-linecap:round}
 .hc-seg{stroke:#5a3a1a;stroke-width:.6}.hc-pol{fill:#8a7ac0;stroke:#4a3a7a;stroke-width:.8}.hc-ns3{fill:#e08a3c;stroke:#8a5a1e;stroke-width:.8}.hc-ns5a{fill:#3a86e8;stroke:#1e4a7a;stroke-width:.6}

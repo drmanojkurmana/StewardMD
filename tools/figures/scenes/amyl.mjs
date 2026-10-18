@@ -44,9 +44,16 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
-<text class="sc-zone" x="34" y="68">FROM PRECURSOR TO FIBRIL</text>
-<text class="sc-zone sc-dim" x="620" y="68">DEPOSITION IN ORGANS</text>
+<text class="sc-zone" x="34" y="68">FROM CLONE TO FIBRIL</text>
+<text class="sc-zone sc-dim" x="620" y="68">DEPOSITS IN ORGANS</text>
+<path id="preArrow" class="amy-link" d="M212 270 L312 264"/>
+<path id="preArrowH" class="amy-link" d="M305 260 L312 264 L305 268"/>
+<path id="midArrow" class="amy-link" d="M384 262 L446 262"/>
+<path id="midArrowH" class="amy-link" d="M439 258 L446 262 L439 266"/>
+<path id="postArrow" class="amy-link" d="M554 262 C592 262 612 274 646 286"/>
+<path id="postArrowH" class="amy-link" d="M639 281 L646 286 L637 289"/>
 <g id="base"></g>
+<g id="orgSlot"></g>
 <g id="deps"></g>
 <g id="parts"></g>
 <g id="over"></g>
@@ -54,15 +61,28 @@ const body = `
 
 buildScene({
   id: "amyloidosis", fig: "Fig 1", title: "Amyloidosis: misfolded protein to organ deposits", W, H, body,
-  label: "An animated pathway from a precursor protein to amyloid. A normal precursor protein misfolds, stacks into a beta-pleated sheet and forms a rigid fibril. Fibrils deposit outside cells and build up in the heart, kidney and nerve. The three precursor types are AL from immunoglobulin light chains, AA from a reactive inflammatory protein, and transthyretin. A Congo red stained deposit is marked. Gauges show precursor, new fibrils, deposition and organ function. The deposition slider sets how much has built up, and treatment choices act on the precursor or support the organs.",
+  label: "An animated pathway from a precursor protein to amyloid. A plasma cell clone releases a precursor protein that misfolds, stacks into a beta-pleated sheet and forms a rigid fibril. Fibrils deposit outside cells and build up in the heart, kidney and nerve. The three precursor types are AL from immunoglobulin light chains, AA from a reactive inflammatory protein, and transthyretin. Gauges show precursor, new fibrils, deposition and organ function. The deposition slider sets how much has built up, and treatment choices act on the clone or support the organs.",
   caption: "Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or values are shown or implied.",
-  scene: { W, H }, pageJs: readFileSync(join(HERE, "amyl.page.js"), "utf8"), modelOf, MD, tests: TESTS,
-  withoutLabel: "Without treatment", withLabel: "With treatment",
-  extraCss: `.cl-prot{--cc:#7fc4e8}.cl-mis{--cc:#c084fc}.amy-strand{fill:none;stroke:var(--c-cyt);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.amy-link{stroke:var(--anatomy-mid);stroke-width:.8;opacity:.7}.amy-fib{fill:none;stroke:#e879a8;stroke-width:2.4;stroke-linecap:round}.amy-fib2{fill:none;stroke:#f2a6c6;stroke-width:1.4;stroke-linecap:round}.amy-dep{stroke:#e879a8;stroke-width:1.6;stroke-linecap:round}.amy-dep2{stroke:#f2a6c6;stroke-width:1.2;stroke-linecap:round}.amy-congo{fill:none;stroke:var(--c-no);stroke-width:1.6;opacity:.85}.amy-heart{fill:var(--c-rbc);stroke:color-mix(in srgb,var(--c-rbc) 55%,#000);stroke-width:1}.amy-kid{fill:#c98a5a;stroke:color-mix(in srgb,#c98a5a 55%,#000);stroke-width:1}.amy-nerve{fill:none;stroke:var(--c-neut);stroke-width:3;stroke-linecap:round}.amy-myelin{fill:none;stroke:var(--anatomy-paper);stroke-width:5;stroke-linecap:round;opacity:.65}.amy-ring{fill:none;stroke:#e879a8;stroke-width:2;stroke-dasharray:4 3}.p-amy{--cc:#e879a8}.g-amy{fill:#e879a8}.g-prot{fill:var(--c-lymph)}`,
+  scene: { W, H }, pageJs: readFileSync(join(HERE, "amyl.page.js"), "utf8"), modelOf, MD, tests: TESTS, organs: true,
+  withoutLabel: "Without treatment", withLabel: "With chemotherapy for AL",
+  extraCss: `.cl-prot{--cc:#7fc4e8}.cl-mis{--cc:#c084fc}.cl-plas{--cc:var(--c-b)}
+.amy-link{stroke:var(--anatomy-mid);stroke-width:.8;opacity:.7;fill:none}
+.amy-strand{fill:none;stroke:var(--c-cyt);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.amy-plate{fill:color-mix(in srgb,var(--c-cyt) 22%,var(--anatomy-paper));stroke:color-mix(in srgb,var(--c-cyt) 55%,#000);stroke-width:1}
+.amy-fib{fill:none;stroke:#e879a8;stroke-width:2.4;stroke-linecap:round}
+.amy-fib2{fill:none;stroke:#f2a6c6;stroke-width:1.4;stroke-linecap:round}
+.amy-dep{stroke:#e879a8;stroke-width:1.6;stroke-linecap:round}
+.amy-dep2{stroke:#f2a6c6;stroke-width:1.2;stroke-linecap:round}
+.amy-glow{fill:#f08a4b;stroke:none}
+.amy-sick{fill:#e879a8;stroke:none}
+.amy-halo{fill:color-mix(in srgb,var(--c-no) 35%,transparent);stroke:var(--c-no);stroke-width:4}
+.amy-cap{fill:var(--anatomy-strong);font-size:12px}
+.p-pre{--cc:#7fc4e8}.p-fib{--cc:#e879a8}.p-chemo{--cc:#b78cff}.p-block{--cc:#f0a83c}
+.g-amy{fill:#e879a8}.g-prot{fill:var(--c-lymph)}`,
   sourcesLis: [
-    "<strong>How amyloid forms.</strong> Amyloidosis is a group of conditions where a protein that should stay soluble misfolds, stacks into a beta-pleated sheet and forms rigid fibrils that deposit outside cells. The deposit resists breakdown and stiffens and disrupts the tissue it builds up in. Congo red staining of the deposit, showing apple-green colour under polarised light, is the classic tissue test. This is standard teaching in pathology and medicine texts and was not checked against a linked source here, so it is flagged for review.",
+    "<strong>How amyloid forms.</strong> Amyloidosis is a group of conditions where a protein that should stay soluble misfolds, stacks into a beta-pleated sheet and forms rigid fibrils that deposit outside cells. The deposit resists breakdown and stiffens and disrupts the tissue it builds up in. This is standard teaching in pathology and medicine texts and was not checked against a linked source here, so it is flagged for review.",
     "<strong>The main types shown.</strong> AL amyloidosis comes from immunoglobulin light chains made by a plasma cell clone. AA amyloidosis comes from serum amyloid A, a protein raised by long-standing inflammation. Transthyretin amyloidosis comes from transthyretin, either an inherited variant or the normal protein with ageing. Heart, kidney and peripheral nerve are common sites, with restrictive heart changes, kidney protein loss and a painful or numb neuropathy among the effects. Typing the deposit matters because treatment differs by type.",
-    "<strong>Treatment ideas shown.</strong> Treating the underlying cause lowers the precursor supply (for example controlling the inflammation behind AA, or treating the plasma cell clone behind AL with chemotherapy). Supportive care helps the affected organs but does not remove deposits. Existing deposits clear slowly if at all, so deposition in the figure falls only a little when the precursor is cut. These are teaching toggles only.",
+    "<strong>Treatment ideas shown.</strong> Treating the underlying cause lowers the precursor supply (for example controlling the inflammation behind AA, or treating the plasma cell clone behind AL with chemotherapy). Chemotherapy shrinks the clone itself. Supportive care helps the affected organs but does not remove deposits. Existing deposits clear slowly if at all, so deposition in the figure falls only a little when the precursor is cut. These are teaching toggles only.",
   ],
-  simplified: "How the type is proved (mass spectrometry and other typing), organ biopsy details, imaging and staging, transthyretin stabiliser and silencer treatments, transplant, dialysis and heart support details, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
+  simplified: "How the type is proved (Congo red staining, mass spectrometry and other typing), organ biopsy details, imaging and staging, transthyretin stabiliser and silencer treatments, transplant, dialysis and heart support details, and all doses and schedules are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.",
 });
