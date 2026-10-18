@@ -56,14 +56,14 @@ const TESTS = [
 /* ---------------- static layout ---------------- */
 const CARDS = [
   ["ABO ACUTE", "minutes", "IgM, complement"],
-  ["FEBRILE", "during, hours", "anti-leucocyte, cytokines"],
-  ["ALLERGIC", "minutes", "donor plasma, histamine"],
+  ["FEBRILE", "during, hours", "anti-leucocyte,\ncytokines"],
+  ["ALLERGIC", "minutes", "donor plasma,\nhistamine"],
   ["TRALI", "within hours", "lung capillary leak"],
   ["TACO", "during, hours", "volume overload"],
   ["DELAYED", "days later", "IgG, spleen"],
 ];
-const cards = CARDS.map((c, i) => { const x = 22 + i * 154;
-  return `<g class="hot sc-card" id="card${i}" tabindex="0" data-info="${esc(["ABO incompatibility: recipient IgM against donor A or B antigen fixes complement and bursts donor red cells inside vessels within minutes.", "Febrile non-haemolytic reaction: recipient antibody to donor white cells, and cytokines stored in the unit, cause fever and rigors without haemolysis.", "Allergic reaction: recipient responds to donor plasma proteins. Histamine causes urticaria and flushing; severe cases progress to anaphylaxis.", "TRALI, transfusion-related acute lung injury: donor anti-leucocyte antibodies activate neutrophils in lung capillaries, which leak protein-rich fluid into alveoli. Breathing fails without volume overload.", "TACO, transfusion-associated circulatory overload: transfused volume raises filling pressures in a susceptible heart, causing cardiogenic pulmonary oedema.", "Delayed haemolytic reaction: an anamnestic IgG response to a minor red-cell antigen days later coats donor cells, which the spleen removes. Jaundice and a falling haemoglobin follow."][i])}"><rect class="sc-card-r" x="${x}" y="46" width="146" height="72" rx="12"/><text class="sc-zone" x="${x + 10}" y="66">${esc(c[0])}</text><text class="sc-lab" x="${x + 10}" y="86">${esc(c[1])}</text><text class="sc-lab sc-dim2" x="${x + 10}" y="104">${esc(c[2])}</text></g>`; }).join("");
+const cards = CARDS.map((c, i) => { const x = 22 + i * 154; const subs = c[2].split("\n"); const subSvg = subs.map((s, j) => `<text class="sc-lab sc-dim2" x="${x + 10}" y="${subs.length > 1 ? 98 + j * 14 : 104}">${esc(s)}</text>`).join("");
+  return `<g class="hot sc-card" id="card${i}" tabindex="0" data-info="${esc(["ABO incompatibility: recipient IgM against donor A or B antigen fixes complement and bursts donor red cells inside vessels within minutes.", "Febrile non-haemolytic reaction: recipient antibody to donor white cells, and cytokines stored in the unit, cause fever and rigors without haemolysis.", "Allergic reaction: recipient responds to donor plasma proteins. Histamine causes urticaria and flushing; severe cases progress to anaphylaxis.", "TRALI, transfusion-related acute lung injury: donor anti-leucocyte antibodies activate neutrophils in lung capillaries, which leak protein-rich fluid into alveoli. Breathing fails without volume overload.", "TACO, transfusion-associated circulatory overload: transfused volume raises filling pressures in a susceptible heart, causing cardiogenic pulmonary oedema.", "Delayed haemolytic reaction: an anamnestic IgG response to a minor red-cell antigen days later coats donor cells, which the spleen removes. Jaundice and a falling haemoglobin follow."][i])}"><rect class="sc-card-r" x="${x}" y="46" width="146" height="76" rx="12"/><text class="sc-zone" x="${x + 10}" y="66">${esc(c[0])}</text><text class="sc-lab" x="${x + 10}" y="86">${esc(c[1])}</text>${subSvg}</g>`; }).join("");
 const body = `
 <rect class="sc-tissue" x="14" y="126" width="${W - 28}" height="316" rx="18"/>
 ${cards}

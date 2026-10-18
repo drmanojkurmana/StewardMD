@@ -1,0 +1,545 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Asthma: allergen to narrowed airway</title><style>
+.iso{
+  --anatomy-page:#0b0b0b;--anatomy-card:#131313;--anatomy-text:#a3a3a3;--anatomy-strong:#e6e6e6;--anatomy-muted:#6e6e6e;
+  --anatomy-paper:#131313;--anatomy-face:#1b1b1b;--anatomy-top:#1c1c1c;
+  --anatomy-shade-0:#0f0f0f;--anatomy-shade-1:#121212;--anatomy-shade-2:#151515;--anatomy-shade-3:#181818;
+  --anatomy-lit-top:#262626;--anatomy-lit-shade:#1d1d1d;
+  --anatomy-hi:#d4d4d4;--anatomy-mid:#6a6a6a;--anatomy-lo:#3e3e3e;--anatomy-faint:#2a2a2a;--anatomy-lit:#ffffff;
+  --anatomy-halo:#050505;--anatomy-halo-opacity:.9;--anatomy-dot:#e6e6e6;
+  --anatomy-red:#ff6b6b;--anatomy-green:#6be0a0;--anatomy-blue:#6b9bff;
+  --anatomy-weight:.6px;--anatomy-ease:cubic-bezier(.32,.72,0,1);
+  --anatomy-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff0a,inset 0 0 0 1px #ffffff06,0 0 0 1px #00000026,0 1px 1px -.5px #00000014,0 3px 3px -1.5px #00000014,0 6px 6px -3px #00000014,0 12px 12px -6px #00000014;
+}
+.iso[data-theme="light"]{
+  --anatomy-page:#f2f2ef;--anatomy-card:#fbfbfa;--anatomy-text:#57575a;--anatomy-strong:#18181a;--anatomy-muted:#8c8c90;
+  --anatomy-paper:#fbfbfa;--anatomy-face:#ffffff;--anatomy-top:#ffffff;
+  --anatomy-shade-0:#dcdcd9;--anatomy-shade-1:#e5e5e2;--anatomy-shade-2:#ededea;--anatomy-shade-3:#f4f4f1;
+  --anatomy-lit-top:#ffffff;--anatomy-lit-shade:#eeeeeb;
+  --anatomy-hi:#26262a;--anatomy-mid:#8a8a8f;--anatomy-lo:#b4b4b8;--anatomy-faint:#d4d4d6;--anatomy-lit:#000000;
+  --anatomy-halo:#8a8a80;--anatomy-halo-opacity:.32;--anatomy-dot:#3a3a3e;
+  --anatomy-red:#e5484d;--anatomy-green:#30a46c;--anatomy-blue:#3e63dd;
+  --anatomy-lift:inset 0 1px 0 0 #ffffff,0 0 0 1px #0000000f,0 1px 1px -.5px #0000000a,0 3px 3px -1.5px #0000000a,0 6px 6px -3px #0000000a,0 12px 12px -6px #0000000a;
+}
+.iso-svg{display:block;width:100%;height:auto;overflow:visible}
+.iso-svg path,.iso-svg circle{vector-effect:non-scaling-stroke}
+.iso-fill{fill:var(--anatomy-paper);stroke:none}
+.iso-solid[data-lit]>.iso-fill{fill:var(--anatomy-face)}
+.iso-shade,.iso-top{stroke:none}
+.iso-shade[data-shade="0"]{fill:var(--anatomy-shade-0)}
+.iso-shade[data-shade="1"]{fill:var(--anatomy-shade-1)}
+.iso-shade[data-shade="2"]{fill:var(--anatomy-shade-2)}
+.iso-shade[data-shade="3"]{fill:var(--anatomy-shade-3)}
+.iso-top{fill:var(--anatomy-top)}
+.iso-solid[data-lit]>.iso-top{fill:var(--anatomy-lit-top)}
+.iso-solid[data-lit]>.iso-shade{fill:var(--anatomy-lit-shade)}
+.iso-solid[data-seamless]>.iso-shade,.iso-solid[data-seamless]>.iso-top{stroke-width:.4;stroke-linejoin:round}
+.iso-solid[data-seamless]>.iso-shade[data-shade="0"]{stroke:var(--anatomy-shade-0)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="1"]{stroke:var(--anatomy-shade-1)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="2"]{stroke:var(--anatomy-shade-2)}
+.iso-solid[data-seamless]>.iso-shade[data-shade="3"]{stroke:var(--anatomy-shade-3)}
+.iso-solid[data-seamless]>.iso-top{stroke:var(--anatomy-top)}
+.iso-solid[data-seamless][data-lit]>.iso-top{stroke:var(--anatomy-lit-top)}
+.iso-solid[data-seamless][data-lit]>.iso-shade{stroke:var(--anatomy-lit-shade)}
+.iso-solid[data-lit]>.iso-edge{stroke:var(--anatomy-lit)}
+.iso-halo{fill:var(--anatomy-halo);stroke:none;filter:blur(9px);opacity:var(--anatomy-halo-opacity);transform:translateY(3px)}
+.iso-line{fill:none;stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight);stroke-linecap:round;stroke-linejoin:round}
+.iso-line[data-tone="hi"]{stroke:var(--anatomy-hi)}
+.iso-line[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.iso-line[data-tone="lo"]{stroke:var(--anatomy-lo)}
+.iso-line[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.iso-line[data-tone="lit"]{stroke:var(--anatomy-lit)}
+.iso-line[data-tone="red"]{stroke:var(--anatomy-red)}
+.iso-line[data-tone="green"]{stroke:var(--anatomy-green)}
+.iso-line[data-tone="blue"]{stroke:var(--anatomy-blue)}
+.iso-line[data-dotted]{stroke-dasharray:.01 3.5;stroke-width:1}
+.iso-line[data-dashed]{stroke-dasharray:3 3}
+.iso-line[data-flow]{stroke-dasharray:2 6}
+.iso-wire-end{fill:var(--anatomy-paper);stroke:var(--anatomy-lo);stroke-width:var(--anatomy-weight)}
+.iso-wire[data-tone="hi"] .iso-wire-end{stroke:var(--anatomy-hi)}
+.iso-wire[data-tone="mid"] .iso-wire-end{stroke:var(--anatomy-mid)}
+.iso-wire[data-tone="faint"] .iso-wire-end{stroke:var(--anatomy-faint)}
+.iso-wire[data-tone="lit"] .iso-wire-end{stroke:var(--anatomy-lit)}
+.iso-dots circle{fill:var(--anatomy-dot);stroke:none;opacity:.32}
+.iso-dots[data-tone="hi"] circle{opacity:.85}
+.iso-dots[data-tone="mid"] circle{opacity:.45}
+.iso-dots[data-tone="lo"] circle{opacity:.22}
+.iso-dots[data-tone="faint"] circle{opacity:.12}
+.iso-face-text{fill:var(--anatomy-mid);font-family:var(--anatomy-mono);letter-spacing:.04em}
+.iso-face-text[data-tone="hi"]{fill:var(--anatomy-hi)}
+.iso-face-text[data-tone="lo"]{fill:var(--anatomy-lo)}
+.iso-face-text[data-tone="faint"]{fill:var(--anatomy-faint)}
+.tb-body{fill:var(--anatomy-shade-2);stroke:none}
+.tb-shine{fill:var(--anatomy-top);stroke:none}
+.tb-shade{fill:var(--anatomy-shade-0);stroke:none}
+.tb-ring{fill:none;stroke:var(--anatomy-lo);stroke-width:.45;stroke-linecap:butt;stroke-linejoin:round}
+.tb-ring[data-tone="mid"]{stroke:var(--anatomy-mid)}
+.tb-ring[data-tone="faint"]{stroke:var(--anatomy-faint)}
+.tb-ring[data-tone="hi"]{stroke:var(--anatomy-hi)}
+@keyframes iso-flow{to{stroke-dashoffset:-32}}
+@keyframes iso-pulse{0%,100%{opacity:.18}12%{opacity:1}40%{opacity:.18}}
+.iso-line[data-flow]{animation:iso-flow 1600ms linear infinite}
+.iso-dots circle[data-pulse]{animation:iso-pulse 1600ms steps(1,end) infinite;animation-delay:var(--pulse-at,0ms)}
+.iso-figure{margin:32px 0 36px}
+.iso-plate{position:relative;padding:52px 24px;border-radius:0;background:var(--anatomy-card);box-shadow:0 0 0 1px var(--anatomy-mid);--anatomy-paper:var(--anatomy-card)}
+.iso-plate-corners{position:absolute;inset:18px 20px;pointer-events:none}
+.iso-plate-corner{position:absolute;color:var(--anatomy-muted);font-family:var(--anatomy-mono);font-size:10.5px;line-height:1;letter-spacing:.04em;white-space:nowrap}
+.iso-plate-corner[data-corner="fig"]{top:0;left:0;color:var(--anatomy-text)}
+.iso-plate-corner[data-corner="title"]{top:0;right:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="hint"]{bottom:0;left:0;text-transform:uppercase;letter-spacing:.1em}
+.iso-plate-corner[data-corner="readout"]{right:0;bottom:0;color:var(--anatomy-text);font-variant-numeric:tabular-nums}
+.iso-plate .iso-svg{margin:0 auto}
+.iso-legend{display:grid;gap:8px;margin-top:12px;color:var(--anatomy-muted);font-size:13px;line-height:1.55}
+.iso-keys{display:flex;flex-wrap:wrap;gap:6px 18px}
+.iso-key{display:inline-flex;align-items:center;gap:7px}
+.iso-swatch{width:16px;height:10px;flex:none;overflow:visible}
+.iso-swatch path{fill:none;stroke:var(--anatomy-hi);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.iso-swatch[data-mark="raised"] path,.iso-swatch[data-mark="flat"] path{stroke:var(--anatomy-mid)}
+.iso-swatch[data-mark="lit"] path{stroke:var(--anatomy-lit)}
+.iso-swatch[data-mark="dim"] path{stroke:var(--anatomy-lo)}
+.iso-swatch[data-mark="dotted"] path{stroke-dasharray:.01 3;stroke-width:1.4}
+.iso-swatch[data-mark="dashed"] path{stroke-dasharray:3 2.5}
+.iso-swatch[data-mark="red"] path{stroke:var(--anatomy-red)}
+.iso-swatch[data-mark="green"] path{stroke:var(--anatomy-green)}
+.iso-swatch[data-mark="blue"] path{stroke:var(--anatomy-blue)}
+.iso-swatch-crease{stroke:var(--anatomy-lo)!important}
+@media (max-width:560px){.iso-plate{padding:48px 12px 70px}.iso-plate-corner[data-corner="hint"]{bottom:18px}}
+@media (prefers-reduced-motion:reduce){.iso-line[data-flow],.iso-dots circle[data-pulse]{animation:none}}
+
+*{box-sizing:border-box}
+html{color-scheme:dark}
+body[data-theme="light"]{color-scheme:light}
+body{margin:0;background:var(--anatomy-page);color:var(--anatomy-text);font:14px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.iso-page{width:min(1000px,100% - 32px);margin:64px auto 96px}
+</style></head><body class="iso" data-theme="dark"><main class="iso-page"><style>
+.bio-blob-base,.bio-membrane-base{fill:var(--anatomy-shade-2)}
+.bio-blob-shade{fill:var(--anatomy-shade-0);opacity:.58}
+.bio-blob-highlight{fill:var(--anatomy-top);opacity:.62}
+.bio-blob-edge{fill:none}
+.bio-membrane-base{fill-rule:evenodd}
+.bio-bond{fill:none;stroke:var(--anatomy-mid);stroke-linecap:round}
+.bio-atom circle:first-child{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:.6}
+.bio-atom .bio-atom-highlight{fill:var(--anatomy-lit);stroke:none;opacity:.65}
+.bio-helix-rung{stroke-width:.65}
+.bio-ribbon{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.55;stroke-linejoin:round}
+.dr-svg{padding:0}
+.dr-fig{display:block;width:100%;height:auto}
+.dr-fig .bio-blob-base{fill:var(--anatomy-shade-2)}
+.dr-halo{fill:var(--anatomy-halo);opacity:var(--anatomy-halo-opacity);filter:blur(12px)}
+.dr-cell{fill:var(--anatomy-shade-3);stroke:var(--anatomy-mid);stroke-width:.8;vector-effect:non-scaling-stroke}
+.dr-memband{fill:var(--anatomy-shade-1)}
+.dr-memedge{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-head{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-tail{fill:none;stroke:var(--anatomy-lo);stroke-width:.7;stroke-linecap:round}
+.dr-label{fill:var(--anatomy-text);font:11.5px var(--anatomy-mono);letter-spacing:.01em}
+.dr-label.dr-name{fill:var(--anatomy-strong);font-size:12px}
+.dr-muted{fill:var(--anatomy-muted)}
+.dr-title{fill:var(--anatomy-strong);font:600 13.5px var(--anatomy-mono)}
+.dr-green{fill:var(--anatomy-green)}.dr-red{fill:var(--anatomy-red)}
+.dr-step{fill:var(--anatomy-strong);font:11.5px var(--anatomy-mono)}
+.dr-prot{fill:var(--anatomy-strong);font:600 11.5px var(--anatomy-mono);pointer-events:none}
+.dr-sub{font-size:8.5px}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.7}
+.dr-dot{fill:var(--anatomy-dot)}
+.dr-bond{fill:none;stroke:var(--anatomy-hi);stroke-width:1.5;stroke-linecap:round}
+.dr-atom-bg{fill:var(--anatomy-card)}
+.dr-atom{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono)}
+.dr-hx{fill:var(--anatomy-shade-2);stroke:var(--anatomy-hi);stroke-width:.9;vector-effect:non-scaling-stroke;transition:fill .25s}
+.dr-hx-hi{fill:none;stroke:var(--anatomy-top);stroke-width:1.2;stroke-linecap:round;opacity:.6}
+.dr-b1,.dr-b2{--c:var(--anatomy-green)}
+.dr-rec .dr-hx{stroke:color-mix(in srgb,var(--c) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-rec{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--c))}
+.dr-ac .dr-hx{stroke:var(--anatomy-hi)}
+.dr-ac .bio-blob-edge{stroke:var(--anatomy-hi)}
+.dr-sign{font:700 22px var(--anatomy-mono);pointer-events:none}
+.dr-plus{fill:var(--anatomy-green)}.dr-minus{fill:var(--anatomy-red)}
+.dr-rail{fill:none;stroke-width:1.4}
+.dr-rail-green{stroke:var(--anatomy-green)}.dr-rail-red{stroke:var(--anatomy-red)}
+.dr-rail-head{stroke:none}
+.dr-rail-head.dr-rail-green{fill:var(--anatomy-green)}.dr-rail-head.dr-rail-red{fill:var(--anatomy-red)}
+.dr-track{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2}
+.dr-track-head{fill:var(--anatomy-mid)}
+.dr-chip rect{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}
+.dr-chip text{fill:var(--anatomy-strong);font:600 11px var(--anatomy-mono)}
+.dr-gtp rect{fill:var(--anatomy-lit);stroke:var(--anatomy-lit)}
+.dr-gtp text{fill:var(--anatomy-paper)}
+.dr-chip.dr-on{opacity:1}
+.dr-gtp:not(.dr-on){opacity:0}
+.dr-da{fill:var(--anatomy-lit);stroke:var(--anatomy-paper);stroke-width:1}
+.dr-p-halo{fill:var(--anatomy-lit);opacity:.22}
+.dr-camp{fill:var(--anatomy-paper);stroke:var(--anatomy-lit);stroke-width:1.3}
+.dr-camp-dot{fill:var(--anatomy-lit)}
+.dr-vdot{fill:var(--anatomy-lit)}
+.dr-ves .bio-blob-base{fill:var(--anatomy-shade-3)}
+.dr-pkac{--on:0}
+.dr-pkac .bio-blob-edge{stroke:color-mix(in srgb,var(--anatomy-lit) calc(var(--on,0) * 100%),var(--anatomy-hi))}
+.dr-pkac{filter:drop-shadow(0 0 calc(var(--on,0) * 5px) var(--anatomy-lit))}
+.dr-block{opacity:0;transition:opacity .3s}
+.dr-block-hex{fill:var(--anatomy-paper);stroke:var(--anatomy-blue);stroke-width:1.6}
+.dr-block-x{fill:none;stroke:var(--anatomy-blue);stroke-width:1.6;stroke-linecap:round}
+.dr-particle,.dr-key{pointer-events:none}
+.dr-key .dr-block-hex{opacity:1}
+.hot{cursor:help;outline:none}
+.hot.is-hot{filter:drop-shadow(0 0 3px var(--anatomy-lit))}
+.hot:focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-controls{display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;margin:14px 2px 6px;font:12.5px var(--anatomy-mono);color:var(--anatomy-text)}
+.dr-controls button{border:1px solid var(--anatomy-faint);background:transparent;color:var(--anatomy-text);font:inherit;padding:6px 10px;cursor:pointer;margin-left:auto}
+.dr-controls input[type=checkbox]{accent-color:var(--anatomy-lit);margin-right:6px}
+.dr-controls select{border:1px solid var(--anatomy-faint);background:var(--anatomy-card);color:var(--anatomy-text);font:inherit;padding:6px 8px}
+.dr-out{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);transition:opacity .3s}
+.dr-range{display:flex;flex-direction:column;gap:2px}
+.dr-range input{accent-color:var(--anatomy-lit);width:190px}
+.dr-ticks{display:flex;justify-content:space-between;color:var(--anatomy-muted);font-size:11px}
+.dr-ticks i{font-style:normal}
+.dr-controls :focus-visible{outline:2px solid var(--anatomy-lit);outline-offset:3px}
+.dr-status{font:12px/1.5 var(--anatomy-mono);color:var(--anatomy-text);margin:6px 2px}
+.dr-info{min-height:4.6em;font:12.5px/1.55 var(--anatomy-mono);color:var(--anatomy-strong);margin:8px 2px;border-left:2px solid var(--anatomy-faint);padding-left:10px}
+.bio-sources{margin:20px 2px;color:var(--anatomy-muted);font-size:12.5px;line-height:1.65}
+.bio-sources h2{font:600 13px var(--anatomy-mono);color:var(--anatomy-text);margin:0 0 8px}
+.bio-sources ul{padding-left:18px}.bio-sources li{margin:6px 0}
+.bio-sources a{color:var(--anatomy-text);text-underline-offset:2px}
+@media(prefers-reduced-motion:reduce){.dr-hx,.dr-block{transition:none}}
+body{--c-skin:#d9a77f;--c-gown:#5fa8a0;--c-blanket:#5b7fc4;--c-chair:#7c8a9c;--c-chair2:#56626f;--c-vein:#7a8fd6;--c-mach:#c9d3e0;--c-mach2:#e4eaf2;--c-door:#8d9bb0;--d-art:#e5484d;--d-ven:#4c8dff;--d-dia:#2fd4a0;--d-ure:#ffb43a;--d-pot:#c084fc;--d-bic:#38d1ff;--d-wat:#7ab8ff;--d-rbc:#d63a4a;--d-alb:#ece7d6}
+body[data-theme="light"]{--c-skin:#e8b894;--c-gown:#58a89f;--c-blanket:#6a8fd2;--c-chair:#9aa6b4;--c-chair2:#76828f;--c-mach:#e6ebf2;--c-mach2:#f5f8fb;--c-door:#aab5c6;--d-art:#d63a45;--d-ven:#2563eb;--d-dia:#0f9f76;--d-ure:#d98300;--d-pot:#7c3aed;--d-bic:#0a7fd1;--d-wat:#2f7ad8;--d-rbc:#c42a3d;--d-alb:#c9c2a6}
+.t-art .tb-body{fill:color-mix(in srgb,var(--d-art) 62%,var(--anatomy-paper))}.t-art .tb-edge{stroke:var(--d-art)}
+.t-ven .tb-body{fill:color-mix(in srgb,var(--d-ven) 62%,var(--anatomy-paper))}.t-ven .tb-edge{stroke:var(--d-ven)}
+.t-dia .tb-body{fill:color-mix(in srgb,var(--d-dia) 55%,var(--anatomy-paper))}.t-dia .tb-edge{stroke:var(--d-dia)}
+.t-out .tb-body{fill:color-mix(in srgb,var(--d-ure) 40%,color-mix(in srgb,var(--d-dia) 40%,var(--anatomy-paper)))}
+.tb-shine{opacity:.5}
+.dr-lab-r{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.9}.dr-lab-t{fill:var(--anatomy-strong);font:600 10.5px var(--anatomy-mono);pointer-events:none}
+.dr-panel{fill:var(--anatomy-card);stroke:var(--anatomy-faint);stroke-width:1}
+.dr-pt{fill:var(--anatomy-strong);font:650 13px var(--anatomy-mono)}.dr-ps{fill:var(--anatomy-muted);font:11px var(--anatomy-mono)}.dr-pt2{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.dr-dband{fill:color-mix(in srgb,var(--d-dia) 13%,var(--anatomy-paper))}
+.dr-lumen{fill:color-mix(in srgb,var(--d-art) 15%,var(--anatomy-paper))}
+.dr-wall{fill:none;stroke:var(--anatomy-hi);stroke-width:3;stroke-linecap:round}.dr-pore{fill:var(--anatomy-card);stroke:var(--anatomy-mid);stroke-width:.8}
+.dr-beam{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-dasharray:3 4}.dr-beam-c{fill:none;stroke:var(--anatomy-hi);stroke-width:1.2}
+.dr-g-tr{fill:var(--anatomy-shade-1);stroke:var(--anatomy-faint)}.dr-g-fill{opacity:.95}
+#g-urea{fill:var(--d-ure)}#g-pot{fill:var(--d-pot)}#g-flu{fill:var(--d-wat)}
+.dr-g-v{fill:var(--anatomy-strong);font:600 10px var(--anatomy-mono);pointer-events:none}
+.dr-scr{fill:#0b1511;stroke:var(--anatomy-hi);stroke-width:.02}.dr-scr-bar{fill:#14261e}.dr-scr-fill{fill:var(--d-dia)}.dr-scr-led{fill:#555}
+.dr-vent{fill:none;stroke:var(--anatomy-mid);stroke-width:1}
+.dr-leader{fill:none;stroke:var(--anatomy-mid);stroke-width:.8}
+.p-rbc{fill:var(--d-rbc);stroke:color-mix(in srgb,var(--d-rbc) 50%,#000);stroke-width:.6}.p-rbc-c{fill:color-mix(in srgb,var(--d-rbc) 55%,#000);opacity:.55}
+.p-alb{fill:var(--d-alb);stroke:var(--anatomy-mid);stroke-width:.7}
+.p-ure{fill:var(--d-ure)}.p-pot{fill:var(--d-pot)}.p-bic{fill:var(--d-bic)}.p-wat{fill:var(--d-wat);opacity:.9}
+.p-rot-disc{fill:var(--anatomy-top);stroke:var(--anatomy-hi);stroke-width:1}.p-rot-hub{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}.p-roll{fill:var(--anatomy-paper);stroke:var(--anatomy-hi);stroke-width:1}
+.p-plunger{fill:none;stroke:var(--anatomy-hi);stroke-width:2.2;stroke-linecap:round}.p-pad{fill:var(--anatomy-mid);stroke:var(--anatomy-hi);stroke-width:.8}
+.p-level{fill:color-mix(in srgb,var(--d-ven) 55%,var(--anatomy-paper));opacity:.9}.p-bubble{fill:none;stroke:var(--anatomy-hi);stroke-width:.8}
+.dr-fig .hot.dr-lab:hover .dr-lab-r{stroke:var(--anatomy-lit)}
+
+.t-sal .tb-body{fill:color-mix(in srgb,var(--d-bic) 45%,var(--anatomy-paper))}.t-sal .tb-edge{stroke:var(--d-bic)}
+.p-sal{fill:#fff;stroke:var(--d-bic);stroke-width:.8}
+.dr-jwin{fill:var(--anatomy-shade-1);stroke:var(--anatomy-hi);stroke-width:.02}.dr-jfill.dr-j-fresh{fill:var(--d-dia)}.dr-jfill.dr-j-used{fill:var(--d-ure)}.dr-jfill{opacity:.85}
+.dr-bez{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:1.2}.dr-face{fill:var(--anatomy-card)}.dr-ok{fill:none;stroke:#3ddc97;stroke-width:2.2;opacity:.8}
+.dr-tick{stroke:var(--anatomy-mid);stroke-width:.8}.dr-needle{stroke:var(--d-art);stroke-width:1.6;stroke-linecap:round}.dr-hub{fill:var(--anatomy-strong)}
+.dr-dl{fill:var(--anatomy-text);font:600 9.5px var(--anatomy-mono);pointer-events:none}
+.dr-dial:hover .dr-bez{stroke:var(--anatomy-lit)}
+
+.c-skin .iso-fill,.c-skin .iso-top{fill:var(--c-skin)}.c-gown .iso-fill,.c-gown .iso-top{fill:var(--c-gown)}.c-blanket .iso-fill,.c-blanket .iso-top{fill:var(--c-blanket)}
+.c-chair .iso-fill,.c-chair .iso-top{fill:var(--c-chair)}.c-chair2 .iso-fill,.c-chair2 .iso-top{fill:var(--c-chair2)}.c-vein .iso-fill,.c-vein .iso-top{fill:var(--c-vein)}
+.c-mach .iso-fill,.c-mach .iso-top{fill:var(--c-mach)}.c-mach2 .iso-fill,.c-mach2 .iso-top{fill:var(--c-mach2)}.c-door .iso-fill,.c-door .iso-top{fill:var(--c-door)}
+.c-skin .iso-shade,.c-gown .iso-shade,.c-blanket .iso-shade,.c-chair .iso-shade,.c-chair2 .iso-shade,.c-vein .iso-shade,.c-mach .iso-shade,.c-mach2 .iso-shade,.c-door .iso-shade{opacity:.45}
+body{--c-neut:#e9b84a;--c-mac:#b7a1e6;--c-endo:#e9a2b3;--c-rbc:#d63a4a;--c-plt:#f2d27a;--c-bac:#7fcf6a;--c-tis:#3b2f3d;--c-lymph:#7fc4e8;--c-eos:#f08a4b;--c-mast:#c978c9;--c-th2:#5fa8d3;--c-b:#e8d36a;--c-ab:#5ec1a0;--c-graft:#e59a88;--c-donor:#f2b84a;--c-cyt:#c084fc;--c-cyt2:#38d1ff;--c-no:#3ddc97;--c-fl:#7ab8ff;--c-good:#3ddc97;--c-bad:#e5484d;--c-sm:#b66a86}
+body[data-theme="light"]{--c-neut:#d99a1f;--c-mac:#8f72d0;--c-endo:#d9788f;--c-rbc:#c42a3d;--c-plt:#d9a92c;--c-bac:#4fa63c;--c-tis:#f0e2e6;--c-lymph:#3fa0d4;--c-eos:#e06a25;--c-mast:#a84fa8;--c-th2:#3a86b8;--c-b:#c9b030;--c-ab:#2f9f7c;--c-graft:#d97a68;--c-donor:#d9961f;--c-cyt:#7c3aed;--c-cyt2:#0a7fd1;--c-no:#0f9f76;--c-fl:#2f7ad8;--c-sm:#a24d6c}
+.cl-b{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 55%,#000);stroke-width:.9}
+.cl-s{fill:color-mix(in srgb,var(--cc) 70%,#000);opacity:.5}
+.cl-h{fill:color-mix(in srgb,var(--cc) 40%,#fff);opacity:.55}
+.cl-n{fill:color-mix(in srgb,var(--cc) 40%,#1a1030);opacity:.85}
+.cl-neut{--cc:var(--c-neut)}.cl-mac{--cc:var(--c-mac)}.cl-endo{--cc:var(--c-endo)}.cl-rbc{--cc:var(--c-rbc)}.cl-plt{--cc:var(--c-plt)}.cl-bac{--cc:var(--c-bac)}
+.cl-lymph{--cc:var(--c-lymph)}.cl-eos{--cc:var(--c-eos)}.cl-mast{--cc:var(--c-mast)}.cl-th2{--cc:var(--c-th2)}.cl-bcell{--cc:var(--c-b)}.cl-graft{--cc:var(--c-graft)}.cl-donor{--cc:var(--c-donor)}.cl-sm{--cc:var(--c-sm)}
+.sc-tissue{fill:var(--c-tis);opacity:.55}
+.sc-lab{fill:var(--anatomy-text);font:10.5px var(--anatomy-mono);pointer-events:none}
+.sc-zone{fill:var(--anatomy-strong);font:600 12px var(--anatomy-mono);pointer-events:none;letter-spacing:.04em}
+.sc-p{fill:var(--cc);stroke:color-mix(in srgb,var(--cc) 50%,#000);stroke-width:.5}
+.p-cyt{--cc:var(--c-cyt)}.p-cyt2{--cc:var(--c-cyt2)}.p-no{fill:none;stroke:var(--c-no);stroke-width:1.2}.p-fl{fill:var(--c-fl)}
+.dr-g-fill.g-bad{fill:var(--c-bad)}.dr-g-fill.g-good{fill:var(--c-good)}.dr-g-fill.g-cyt{fill:var(--c-cyt)}.dr-g-fill.g-bac{fill:var(--c-bac)}.dr-g-fill.g-clot{fill:var(--c-plt)}.dr-g-fill.g-fl{fill:var(--c-fl)}.dr-g-fill.g-eos{fill:var(--c-eos)}.dr-g-fill.g-neu{fill:var(--c-neut)}
+.is-hot{filter:drop-shadow(0 0 4px var(--anatomy-lit))}
+.sc-lumen{fill:color-mix(in srgb,var(--c-rbc) 14%,var(--anatomy-paper))}.sc-oed{fill:var(--c-fl)}
+.p-lps{--cc:#ff9a3d}.p-pill{fill:var(--anatomy-paper);stroke:var(--anatomy-mid);stroke-width:.6}.p-pill2{fill:var(--c-bad);opacity:.7}.p-bolus{fill:var(--c-fl)}
+.fibrin{stroke:var(--anatomy-mid);stroke-width:.9;opacity:.8}.tlr-p{fill:none;stroke:var(--c-bad);stroke-width:1.1;stroke-linecap:round}
+.cl-endo .cl-b{stroke:color-mix(in srgb,var(--c-bad) calc(var(--act,0) * 70%),color-mix(in srgb,var(--cc) 55%,#000))}
+.cl-n.multi{opacity:.9}
+.sc-dim{opacity:.45}
+
+.cl-epi{--cc:#d7a48a}.cl-gob{--cc:#7fb5c9}.cl-dc{--cc:#4fc3b0}
+body[data-theme="light"] .cl-epi{--cc:#c98a6c}body[data-theme="light"] .cl-gob{--cc:#5a9db6}
+.sc-air{fill:color-mix(in srgb,var(--c-fl) 10%,var(--anatomy-paper))}
+.sm-c{fill:var(--c-sm);stroke:color-mix(in srgb,var(--c-sm) 55%,#000);stroke-width:.8}.sm-n{fill:color-mix(in srgb,var(--c-sm) 40%,#1a1030);opacity:.7}
+.ven{fill:color-mix(in srgb,var(--c-rbc) 16%,var(--anatomy-paper));stroke:var(--anatomy-mid);stroke-width:1}
+.mucus{fill:color-mix(in srgb,#9fd0e0 70%,var(--anatomy-paper));stroke:color-mix(in srgb,#5a9db6 80%,#000);stroke-width:.8}
+.gran{fill:color-mix(in srgb,var(--c-mast) 60%,#fff);stroke:color-mix(in srgb,var(--c-mast) 70%,#000);stroke-width:.4}
+.mg{fill:#9fd0e0;stroke:#5a9db6;stroke-width:.4}
+.cilia{fill:none;stroke:var(--anatomy-mid);stroke-width:1;stroke-linecap:round}
+.ar{fill:none;stroke:var(--anatomy-mid);stroke-width:1.2;stroke-dasharray:3 4}.arh{fill:none;stroke:var(--anatomy-mid);stroke-width:1.4;stroke-linecap:round}
+.dend{fill:none;stroke:#4fc3b0;stroke-width:1.4;stroke-linecap:round}
+.ige-y{fill:none;stroke:var(--c-ab);stroke-width:1.5;stroke-linecap:round}
+.basem{fill:color-mix(in srgb,#b8965a 65%,var(--anatomy-paper));stroke:color-mix(in srgb,#b8965a 70%,#000);stroke-width:.6}
+.gland-b{fill:color-mix(in srgb,#7fb5c9 45%,var(--anatomy-paper));stroke:color-mix(in srgb,#5a9db6 70%,#000);stroke-width:.7}
+.coll{fill:color-mix(in srgb,#b8965a 55%,var(--anatomy-paper));opacity:.8}
+.p-allergen{fill:#d9a24a;stroke:#8a5a14;stroke-width:.7}
+.p-il5{--cc:var(--c-eos)}.p-il4{--cc:var(--c-cyt2)}.p-il13{--cc:var(--c-cyt)}.p-ige{--cc:var(--c-ab)}.p-hist{--cc:#ff5c8a}
+.blk-c{fill:var(--anatomy-paper);stroke:var(--c-bad);stroke-width:1.8}.blk-x{stroke:var(--c-bad);stroke-width:2;stroke-linecap:round}.blk-y{fill:none;stroke:var(--c-ab);stroke-width:1.6;stroke-linecap:round}
+.bd-a{fill:none;stroke:var(--c-good);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mk-g{fill:none;stroke:var(--c-good);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dr-g-fill.g-mast{fill:var(--c-mast)}.dr-g-fill.g-mucus{fill:#5a9db6}.dr-g-fill.g-remod{fill:#b8965a}.dr-g-fill.g-air{fill:var(--c-good)}
+</style><figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true"><span class="iso-plate-corner" data-corner="fig">Fig 1</span><span class="iso-plate-corner" data-corner="title">Asthma: allergen to narrowed airway</span><span class="iso-plate-corner" data-corner="hint">tap a part · space: pause</span><span class="iso-plate-corner" data-corner="readout" data-readout>inflammation raised · bronchoconstriction narrowed · mucus thick · airflow reduced</span></div><div class="dr-svg"><svg xmlns="http://www.w3.org/2000/svg" class="iso-svg dr-fig" viewBox="0 0 960 610" role="img" aria-label="An animated airway wall in asthma. Inhaled allergen reaches the lining and is shown to dendritic cells. Helper T cells of the Th2 type help B cells make IgE, which arms mast cells. On re-exposure the allergen cross-links IgE, mast cells release histamine and other mediators, eosinophils are called in, goblet cells make thick mucus that can plug the lumen, and the airway smooth muscle tightens so the lumen narrows. With repeated inflammation the wall remodels: the basement membrane thickens, muscle and glands enlarge, and narrowing becomes harder to reverse. Gauges show eosinophilic inflammation, mast cell activation, mucus, bronchoconstriction, remodelling and airflow. Treatment choices include a reliever bronchodilator, an inhaled corticosteroid, both together, and an anti-IgE biologic."><ellipse class="dr-halo" cx="480" cy="604" rx="441.6" ry="12"/>
+<rect class="sc-tissue" x="14" y="44" width="932" height="396" rx="18"/>
+<rect id="lumen" class="sc-air" x="14" y="44" width="932" height="140" rx="18"/>
+<text class="sc-zone" x="34" y="68">AIRWAY LUMEN</text>
+<text class="sc-zone sc-dim" x="34" y="428">SUBMUCOSA AND MUSCLE</text>
+<g id="arrows"></g>
+<g id="mucus"></g><g id="epi"></g><g id="base"></g><g id="glands"></g><g id="vessel"></g><g id="muscle"></g>
+<g id="parts"></g><g id="immune"></g><g id="marks"></g><g id="over"></g><g id="panel"></g></svg></div></div><figcaption class="iso-legend"><span class="iso-caption">Schematic, not to scale. Speeds, counts and gauge levels are qualitative and illustrative; no doses, thresholds or drug names beyond the class are shown or implied.</span></figcaption></figure>
+<div class="dr-controls">
+  <label class="dr-range"><span>Asthma severity</span><input id="level" type="range" min="0" max="3" step="1" value="1" aria-valuetext="mild persistent"><span class="dr-ticks"><i>intermittent</i><i>mild</i><i>moderate</i><i>acute severe</i></span></label>
+  <label class="dr-range"><span>Treatment</span><select id="drug" data-without="Without treatment" data-with="With treatment"><option value="0">no treatment</option><option value="1">reliever bronchodilator only</option><option value="2">inhaled corticosteroid only</option><option value="3">reliever plus inhaled corticosteroid</option><option value="4">anti-IgE biologic (add on)</option></select></label>
+  <button id="pause" type="button" aria-pressed="false">Pause motion</button>
+</div>
+<p id="status" class="dr-status" aria-live="polite"></p>
+<p id="info" class="dr-info" aria-live="polite">Hover or focus a labelled part for a one-line explanation.</p><footer class="bio-sources">
+<h2>What the figure shows, and how sure we are</h2>
+<ul><li><strong>How asthma develops.</strong> In allergic asthma an inhaled allergen is taken up by dendritic cells in the airway lining and presented to helper T cells, which take a Th2 pattern. Th2 cytokines help B cells switch to making IgE (IL-4), call in and sustain eosinophils (IL-5), and drive goblet cell mucus and twitchy smooth muscle (IL-13). IgE sits on mast cells; when allergen cross-links it the mast cell degranulates, releasing histamine and other mediators that tighten smooth muscle, swell the wall and increase mucus. Eosinophil granule proteins injure the lining and keep inflammation going. Repeated inflammation remodels the wall, with a thicker basement membrane, more and larger smooth muscle and enlarged submucosal glands, so airflow limitation becomes less fully reversible. Airway hyperresponsiveness means the muscle tightens too easily and too much to triggers such as cold air, exercise, smoke and viral infection. This is standard teaching in respiratory medicine and was not checked against a linked source here, so it is flagged for review.</li><li><strong>Treatment ideas shown.</strong> A reliever bronchodilator relaxes smooth muscle and opens the airway quickly but does not treat the inflammation underneath. An inhaled corticosteroid switches off many inflammatory genes across lining, immune and mast cells, reducing eosinophils, mucus and hyperresponsiveness over time and slowing remodelling. Used together they give quick relief plus control of the cause. An anti-IgE biologic mops up IgE so mast cells are less well armed, which suits allergic disease. These are teaching toggles only.</li></ul>
+<p><strong>What was simplified.</strong> Non-allergic and neutrophilic asthma, aspirin-exacerbated disease, the late phase reaction in detail, neural control, small airway disease, infection and pollution triggers in detail, biomarker selection for biologics, inhaler technique, adherence, side effects, exacerbation management and all doses are left out. Counts and speeds are illustrative, and the figure does not say how any patient should be treated.</p>
+<p>Interactive figure built with the <a href="https://github.com/wheresryan22/anatomy">Anatomy</a> and <a href="https://github.com/Garinmckayl/anima">Anima</a> kits (MIT licence). All drawing is original.</p>
+<p>For education only; this figure is not medical advice and says nothing about any person's treatment or any medicine. It is AI-assisted and awaits clinician review.</p>
+</footer></main><script type="module">const SC = {"W":960,"H":610,"S":{"level":{"label":"Asthma severity","a":[0.22,0.45,0.68,1],"names":["intermittent","mild persistent","moderate persistent","acute severe"],"ticks":["intermittent","mild","moderate","acute severe"],"start":1},"settings":[{"label":"no treatment"},{"label":"reliever bronchodilator only"},{"label":"inhaled corticosteroid only"},{"label":"reliever plus inhaled corticosteroid"},{"label":"anti-IgE biologic (add on)"}],"drugNames":["no treatment","reliever only","inhaled steroid only","reliever plus inhaled steroid","anti-IgE biologic"],"status":"Severity: {level} · {drug} ·"}};
+const modelOf = function modelOf(S, level, drug) {
+  const a = S.level.a[level], cl = (v) => Math.max(0, Math.min(1, v));
+  const relief = drug === 1 || drug === 3 ? 1 : 0, ics = drug === 2 || drug === 3 ? 1 : 0, bio = drug === 4 ? 1 : 0;
+  const T2 = cl(a * (ics ? 0.42 : 1) * (bio ? 0.88 : 1));
+  const Ig = cl(a * (bio ? 0.16 : ics ? 0.58 : 1));
+  const mast = cl(0.04 + 0.88 * a * (bio ? 0.24 : 1) * (ics ? 0.6 : 1));
+  const eos = cl(0.04 + 0.9 * a * (ics ? 0.36 : 1) * (bio ? 0.52 : 1));
+  const muc = cl(0.04 + 0.82 * a * (ics ? 0.44 : 1) * (bio ? 0.68 : 1));
+  const remod = cl(0.03 + 0.88 * a * a * (ics ? 0.58 : 1) * (bio ? 0.85 : 1));
+  const rawB = cl(0.04 + 0.48 * mast + 0.26 * eos + 0.22 * muc);
+  const bron = cl(rawB * (relief ? 0.28 : 1));
+  const air = cl(1 - 0.68 * bron - 0.22 * muc - 0.18 * remod);
+  const w = (v, x, y, ws) => (v < x ? ws[0] : v < y ? ws[1] : ws[2]);
+  const words = [w(eos, 0.28, 0.58, ["low", "raised", "high"]), w(bron, 0.3, 0.58, ["relaxed", "narrowed", "tight"]), w(muc, 0.3, 0.62, ["thin", "thick", "plugging"]), w(air, 0.32, 0.62, ["low", "reduced", "open"])];
+  return { a, drug, relief, ics, bio, T2, Ig, mast, eos, muc, remod, bron, air, words, readout: "inflammation " + words[0] + " · bronchoconstriction " + words[1] + " · mucus " + words[2] + " · airflow " + words[3] };
+};
+/* Shared page runtime for the animated mechanism scenes (sepsis, airway, graft). Plain globals, ES2015. A scene script follows this file and ends with run({ init, step, onModel }). */
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.querySelector(".dr-fig");
+const $ = (id) => svg.querySelector("#" + id);
+const mk = (name, attrs, parent) => { const el = document.createElementNS(NS, name); for (const k in attrs) el.setAttribute(k, attrs[k]); if (parent) parent.appendChild(el); return el; };
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const rnd = (a, b) => a + Math.random() * (b - a);
+const lerp = (a, b, t) => a + (b - a) * t;
+const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const f1 = (v) => (+v).toFixed(1);
+const readout = document.querySelector("[data-readout]");
+const levelBox = document.getElementById("level"), drugBox = document.getElementById("drug"), pauseBtn = document.getElementById("pause");
+const info = document.getElementById("info"), statusEl = document.getElementById("status");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+const S = SC.S;
+let level = S.level.start, drug = 0, playing = !reduce.matches, visible = true, last = 0, frame = 0, tm = 0, M = null, SCN = null;
+{ const q = new URLSearchParams(location.search), d0 = +q.get("d"), l0 = q.get("l");
+  if (d0 > 0 && d0 < S.settings.length) { drug = d0; drugBox.value = String(d0); }
+  if (l0 !== null && l0 !== "" && +l0 >= 0 && +l0 < S.level.a.length) { level = +l0; levelBox.value = String(level); } }
+levelBox.setAttribute("aria-valuetext", S.level.names[level]);
+
+/* a smooth closed blob path (Catmull-Rom through points), centred on 0,0 */
+function blobD(r, seed, wob, n) {
+  n = n || 9; wob = wob === undefined ? 0.1 : wob; const pts = [];
+  for (let i = 0; i < n; i++) { const t = (i / n) * 6.2832, k = 1 + wob * Math.sin(t * 3 + seed * 1.7) + wob * 0.6 * Math.cos(t * 2 + seed * 2.3); pts.push([r * k * Math.cos(t), r * k * Math.sin(t)]); }
+  let d = "M" + f1(pts[0][0]) + " " + f1(pts[0][1]);
+  for (let i = 0; i < n; i++) { const p0 = pts[(i + n - 1) % n], p1 = pts[i], p2 = pts[(i + 1) % n], p3 = pts[(i + 2) % n];
+    d += "C" + f1(p1[0] + (p2[0] - p0[0]) / 6) + " " + f1(p1[1] + (p2[1] - p0[1]) / 6) + " " + f1(p2[0] - (p3[0] - p1[0]) / 6) + " " + f1(p2[1] - (p3[1] - p1[1]) / 6) + " " + f1(p2[0]) + " " + f1(p2[1]); }
+  return d + "Z";
+}
+/* a lit, shaded cell: body, shade ring, highlight, optional nucleus. cls colours it (CSS: .cl-<cls> .cl-b) */
+function cell(parent, o) {
+  const g = mk("g", { class: "cl cl-" + o.cls }, parent), r = o.r, seed = o.seed || Math.random() * 9;
+  mk("path", { class: "cl-b", d: blobD(r, seed, o.wob === undefined ? 0.09 : o.wob, o.n) }, g);
+  mk("path", { class: "cl-s", d: blobD(r * 0.86, seed, o.wob === undefined ? 0.09 : o.wob, o.n), transform: "translate(" + f1(r * 0.04) + " " + f1(r * 0.05) + ")" }, g);
+  mk("path", { class: "cl-h", d: blobD(r * 0.62, seed + 1, 0.05, 7), transform: "translate(" + f1(-r * 0.14) + " " + f1(-r * 0.16) + ")" }, g);
+  if (o.nuc) mk("path", { class: "cl-n" + (o.nucCls ? " " + o.nucCls : ""), d: blobD(r * o.nuc, seed + 2, 0.12, 7), transform: "translate(" + f1(r * 0.05) + " " + f1(r * 0.02) + ")" }, g);
+  if (o.x !== undefined) g.setAttribute("transform", "translate(" + f1(o.x) + " " + f1(o.y) + ")");
+  return g;
+}
+const place = (g, x, y, rot, sc) => g.setAttribute("transform", "translate(" + f1(x) + " " + f1(y) + ")" + (rot ? " rotate(" + f1(rot) + ")" : "") + (sc && sc !== 1 ? " scale(" + sc.toFixed(3) + ")" : ""));
+/* label pill with a leader; hover/focus shows `text` in the info line */
+function pill(parent, text, x, y, tx, ty, infoText) {
+  const lw = text.length * 6.2 + 14, g = mk("g", { class: "hot dr-lab", tabindex: "0", "data-info": infoText || text }, parent);
+  mk("path", { class: "dr-leader", d: "M" + f1(x) + " " + f1(y) + "L" + f1(tx) + " " + f1(ty + 8) }, g);
+  mk("circle", { class: "dr-dot", cx: f1(x), cy: f1(y), r: 1.6 }, g);
+  mk("rect", { class: "dr-lab-r", x: f1(tx - lw / 2), y: f1(ty - 8), width: f1(lw), height: 17, rx: 8.5 }, g);
+  const t = mk("text", { class: "dr-lab-t", x: f1(tx), y: f1(ty + 4), "text-anchor": "middle" }, g); t.textContent = text; return g;
+}
+/* a vertical gauge (track + fill); set(v) moves it; the value word sits under it */
+function gauge(parent, x, y, h, w, cls, name, infoText) {
+  const g = mk("g", { class: "hot", tabindex: "0", "data-info": infoText || name }, parent);
+  mk("rect", { class: "dr-g-tr", x: x - w / 2, y, width: w, height: h, rx: w / 2 }, g);
+  const fill = mk("rect", { class: "dr-g-fill " + cls, x: x - w / 2, y: y + h, width: w, height: 0, rx: w / 2 }, g);
+  const t1 = mk("text", { class: "dr-pt2", x, y: y + h + 15, "text-anchor": "middle" }, g); t1.textContent = name;
+  const t2 = mk("text", { class: "dr-g-v", x, y: y + h + 28, "text-anchor": "middle" }, g);
+  return { set(v, word) { const hh = clamp(v) * h; fill.setAttribute("y", f1(y + h - hh)); fill.setAttribute("height", f1(hh)); if (word !== undefined && t2.textContent !== word) t2.textContent = word; } };
+}
+/* a path through points, with length table; at(u) gives {x,y,a} */
+function track(pts) { const cum = [0]; for (let i = 1; i < pts.length; i++) cum.push(cum[i - 1] + Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]));
+  const len = cum[cum.length - 1];
+  return { len, at(u) { const d = clamp(u) * len; let i = 1; while (i < cum.length - 1 && cum[i] < d) i++; const f = (d - cum[i - 1]) / Math.max(0.001, cum[i] - cum[i - 1]); const a = pts[i - 1], b = pts[i];
+    return { x: lerp(a[0], b[0], f), y: lerp(a[1], b[1], f), a: Math.atan2(b[1] - a[1], b[0] - a[0]) * 57.2958 }; } };
+}
+const wordOf = (v, a, b, ws) => (v < a ? ws[0] : v < b ? ws[1] : ws[2]);
+
+function publish() {
+  M = modelOf(S, level, drug);
+  if (M.readout !== readout.textContent) readout.textContent = M.readout;
+  statusEl.textContent = S.status.replace("{level}", S.level.names[level]).replace("{drug}", S.drugNames[drug]) + " " + M.readout + ". Qualitative, illustrative.";
+  if (SCN && SCN.onModel) SCN.onModel(M);
+}
+function tick(now) { frame = 0; if (!playing || !visible) return; const dt = Math.min(0.064, (now - (last || now)) / 1000); last = now; tm += dt * 1000; SCN.step(dt, M); frame = requestAnimationFrame(tick); }
+function start() { if (playing && visible && !frame) { last = 0; frame = requestAnimationFrame(tick); } }
+function stop() { if (frame) cancelAnimationFrame(frame); frame = 0; }
+function setPlaying(v) { playing = v; pauseBtn.textContent = v ? "Pause motion" : "Play motion"; pauseBtn.setAttribute("aria-pressed", String(!v)); if (v) start(); else stop(); }
+function run(scn) {
+  SCN = scn;
+  levelBox.addEventListener("input", () => { level = +levelBox.value; levelBox.setAttribute("aria-valuetext", S.level.names[level]); publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  drugBox.addEventListener("change", () => { drug = +drugBox.value; publish(); if (!playing) for (let i = 0; i < 6; i++) SCN.step(0.05, M); });
+  pauseBtn.addEventListener("click", () => setPlaying(!playing));
+  document.addEventListener("keydown", (e) => { if (e.code !== "Space" || e.target.closest("button, a, input, textarea, select")) return; e.preventDefault(); setPlaying(!playing); });
+  reduce.addEventListener("change", () => setPlaying(!reduce.matches));
+  scn.init(); publish();
+  const idle = info.textContent;
+  svg.querySelectorAll(".hot").forEach((el) => { const on = () => { info.textContent = el.dataset.info; el.classList.add("is-hot"); }, off = () => { info.textContent = idle; el.classList.remove("is-hot"); };
+    el.addEventListener("pointerenter", on); el.addEventListener("pointerleave", off); el.addEventListener("focus", on); el.addEventListener("blur", off); });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); else stop(); }).observe(svg);
+  if (reduce.matches) { pauseBtn.textContent = "Play motion"; pauseBtn.setAttribute("aria-pressed", "true"); }
+  for (let i = 0; i < 90; i++) scn.step(0.05, M);
+  start();
+}
+
+/* Asthma scene: allergen, dendritic and Th2 cells, B cell IgE, mast cell degranulation, eosinophils, mucus, smooth muscle, remodelling and gauges. */
+const L = { lumen: $("lumen"), arrows: $("arrows"), mucus: $("mucus"), epi: $("epi"), base: $("base"), glands: $("glands"), vessel: $("vessel"), muscle: $("muscle"), parts: $("parts"), immune: $("immune"), marks: $("marks"), over: $("over"), panel: $("panel") };
+const W = SC.W, WB = 195, MY = 370, VY = 422, EPI_N = 22, EW = 932 / EPI_N;
+let wallY = WB;
+/* ---- epithelium: ciliated cells, every fifth a goblet cell ---- */
+const epi = [];
+function initEpi() {
+  for (let i = 0; i < EPI_N; i++) { const gob = i % 5 === 2, x = 14 + (i + 0.5) * EW, g = mk("g", {}, L.epi);
+    cell(g, { cls: gob ? "gob" : "epi", r: gob ? 19 : 16, nuc: gob ? 0 : 0.3, seed: i, wob: 0.05, n: 8 });
+    const gr = []; if (gob) for (let j = 0; j < 7; j++) gr.push(mk("circle", { class: "mg", r: 2.4, cx: f1(Math.cos(j * 0.9) * 9), cy: f1(Math.sin(j * 1.7) * 7) }, g));
+    const ci = gob ? null : mk("path", { class: "cilia" }, g);
+    epi.push({ g, x, gob, ci, gr, i }); }
+}
+const plugs = [];
+function initMucus() { epi.filter((e) => e.gob).forEach((e) => { for (let j = 0; j < 2; j++) plugs.push({ e: mk("ellipse", { class: "mucus", rx: 12, ry: 6.5 }, L.mucus), x: e.x + (j - 0.5) * 15, k: j }); }); }
+/* ---- basement membrane and submucosal glands and collagen (remodelling) ---- */
+let baseRect = null; const colls = [], glandG = [];
+function initBase() {
+  baseRect = mk("rect", { class: "basem", x: 14, y: WB + 20, width: W - 28, height: 3, rx: 1.5 }, L.base);
+  [[185, 300], [320, 300], [480, 300], [650, 300], [790, 300], [240, 338], [385, 338], [503, 338], [595, 338], [755, 338]].forEach(([cx, cy]) => colls.push(mk("circle", { class: "coll", r: 2.2, cx: cx, cy: cy }, L.base)));
+  [[190, 300], [800, 300]].forEach(([gx, gy]) => { const g = mk("g", {}, L.glands);
+    mk("circle", { class: "gland-b", r: 9, cx: 0, cy: 0 }, g);
+    for (let j = 0; j < 5; j++) mk("circle", { class: "gland-b", r: 6, cx: f1(Math.cos(j * 1.26) * 11), cy: f1(Math.sin(j * 1.26) * 10) }, g);
+    place(g, gx, gy, 0, 1); glandG.push(g); });
+}
+/* ---- smooth muscle band ---- */
+const sm = [];
+function initMuscle() { for (let i = 0; i < 17; i++) { const g = mk("g", {}, L.muscle); mk("ellipse", { class: "sm-c", rx: 30, ry: 9 }, g); mk("ellipse", { class: "sm-n", rx: 8, ry: 3.2 }, g); sm.push({ g, x: 40 + i * 54, y: MY + (i % 2 ? 6 : -6) }); } }
+/* ---- blood vessel ---- */
+function initVessel() { mk("rect", { class: "ven", x: 380, y: VY - 18, width: 500, height: 36, rx: 18 }, L.vessel);
+  [0, 1, 2, 3, 4, 5, 6].forEach((i) => { const g = mk("g", { class: "cl cl-rbc" }, L.vessel); mk("ellipse", { class: "cl-b", rx: 8, ry: 4.6 }, g); place(g, 410 + i * 66, VY + (i % 2 ? 4 : -4), 0, 1); }); }
+/* ---- fixed immune cells ---- */
+const POS = { dc: [110, 250], th2: [250, 265], b: [370, 235], m1: [530, 240], m2: [650, 275] };
+const fix = {}, granules = [], ige = [];
+function addFix(key, o) { const g = mk("g", {}, L.immune), c = cell(g, o); fix[key] = { g, c, x: POS[key][0], y: POS[key][1], ph: Math.random() * 6 }; return fix[key]; }
+function initImmune() {
+  const dc = addFix("dc", { cls: "dc", r: 17, nuc: 0.4, seed: 3, wob: 0.16 });
+  for (let j = 0; j < 7; j++) { const t = j * 0.9 + 0.3; mk("path", { class: "dend", d: "M" + f1(Math.cos(t) * 14) + " " + f1(Math.sin(t) * 14) + "L" + f1(Math.cos(t) * 28) + " " + f1(Math.sin(t) * 28) }, dc.g); }
+  addFix("th2", { cls: "th2", r: 13, nuc: 0.6, seed: 6 }); addFix("b", { cls: "bcell", r: 14, nuc: 0.5, seed: 7 });
+  ["m1", "m2"].forEach((k, mi) => { const f = addFix(k, { cls: "mast", r: 21, nuc: 0, seed: 9 + mi, wob: 0.1 });
+    for (let j = 0; j < 9; j++) granules.push({ e: mk("circle", { class: "gran", r: 2.6, cx: f1(Math.cos(j * 0.7 + mi) * 10), cy: f1(Math.sin(j * 1.9 + mi) * 9) }, f.g), mi });
+    for (let j = 0; j < 6; j++) { const t = j * 1.05 + mi, y = mk("path", { class: "ige-y", d: "M0 0L0 -5M-3 -9L0 -5L3 -9", transform: "translate(" + f1(Math.cos(t) * 24) + " " + f1(Math.sin(t) * 24) + ") rotate(" + f1(t * 57.3 + 90) + ")" }, f.g); ige.push({ e: y, mi }); } });
+}
+/* ---- eosinophils recruited from the vessel ---- */
+const mob = [];
+function initMobile() { for (let i = 0; i < 7; i++) mob.push({ g: cell(L.immune, { cls: "eos", r: 11.5, nuc: 0.55, nucCls: "multi", seed: 30 + i, wob: 0.1 }), hx: 500 + i * 30 + rnd(-7, 7), hy: 285 + (i % 3) * 10, st: 0, x: 0, y: 0, i });
+  mob.forEach((m) => { m.g.style.opacity = 0; place(m.g, -40, VY, 0, 0.1); }); }
+/* ---- mediator flows ---- */
+const T = { dc2th: [[128, 242], [190, 256], [236, 262]], il4: [[264, 258], [318, 246], [356, 238]], ige: [[384, 234], [455, 236], [508, 240]], il13: [[258, 250], [285, 215], [315, 198]], il5: [[264, 274], [400, 302], [520, 310]], hist1: [[530, 262], [530, 338]], hist2: [[650, 296], [650, 338]] };
+const FLOWS = [["dc2th", "p-il4", "T2", 1.6], ["il4", "p-il4", "T2", 2.4], ["ige", "p-ige", "Ig", 3], ["il13", "p-il13", "muc", 3.2], ["il5", "p-il5", "eos", 4], ["hist1", "p-hist", "mast", 5], ["hist2", "p-hist", "mast", 4]]
+  .map(([k, cls, src, rate]) => ({ k, cls, src, rate, tr: track(T[k]), acc: 0 }));
+function chev(parent, a, b) { const t = Math.atan2(b[1] - a[1], b[0] - a[0]), p = (d, o) => f1(b[0] - Math.cos(t + o) * d) + " " + f1(b[1] - Math.sin(t + o) * d); return mk("path", { class: "arh", d: "M" + p(7, 0.5) + "L" + f1(b[0]) + " " + f1(b[1]) + "L" + p(7, -0.5) }, parent); }
+function initArrows() { for (const k in T) { const pts = T[k]; mk("path", { class: "ar", d: "M" + pts.map((p) => f1(p[0]) + " " + f1(p[1])).join("L") }, L.arrows); chev(L.arrows, pts[pts.length - 2], pts[pts.length - 1]); } }
+/* ---- particles ---- */
+const parts = Array.from({ length: 130 }, () => ({ e: mk("circle", { r: 2.2, opacity: 0 }, L.parts), on: false, u: 0, f: null }));
+function emitP(f) { const p = parts.find((q) => !q.on); if (!p) return; p.on = true; p.f = f; p.u = 0; p.e.setAttribute("class", "sc-p " + f.cls); p.e.setAttribute("r", f.k === "ige" ? 3 : 2.3); p.e.setAttribute("opacity", "1"); }
+const trig = Array.from({ length: 20 }, () => { const e = mk("path", { opacity: 0 }, L.parts); return { e, on: false, x: 0, y: 0, vx: 0 }; });
+const star = "M0 -5L1.4 -1.4L5 0L1.4 1.4L0 5L-1.4 1.4L-5 0L-1.4 -1.4Z";
+/* ---- treatment marks ---- */
+const MARKS = { 1: [], 2: [[250, 252], [540, 228], [332, 200]], 3: [[250, 252], [540, 228], [332, 200]], 4: [[455, 236], [530, 216]] };
+const mk2 = {};
+function initMarks() {
+  for (const d in MARKS) { const g = mk("g", { opacity: 0 }, L.marks); mk2[d] = g;
+    MARKS[d].forEach(([x, y]) => { mk("circle", { class: "blk-c", cx: x, cy: y, r: 7.5 }, g); mk("path", { class: "blk-x", d: "M" + (x - 3.6) + " " + (y - 3.6) + "l7.2 7.2M" + (x + 3.6) + " " + (y - 3.6) + "l-7.2 7.2" }, g); });
+    if (+d === 1 || +d === 3) [300, 560, 820].forEach((x) => { mk("path", { class: "bd-a", d: "M" + x + " " + (MY - 26) + "l0 -10l-5 5M" + x + " " + (MY - 36) + "l5 5" }, g); mk("path", { class: "bd-a", d: "M" + (x + 14) + " " + (MY + 26) + "l0 10l-5 -5M" + (x + 14) + " " + (MY + 36) + "l5 -5" }, g); });
+    if (+d === 4) mk("path", { class: "blk-y", d: "M470 250l0 -7M465 238l5 5l5 -5" }, g); }
+}
+/* ---- labels and gauges ---- */
+const gg = {}, dpills = {};
+function initPanel() {
+  const P = L.panel, y0 = 478, h = 70, xs = [90, 225, 360, 495, 630, 765];
+  mk("rect", { class: "dr-panel", x: 24, y: y0 - 30, width: W - 48, height: 142, rx: 14 }, P);
+  const t = mk("text", { class: "dr-pt", x: 40, y: y0 - 8 }, P); t.textContent = "The airway";
+  [["eos", "Eosinophils", "g-eos", "Eosinophils in the airway wall, called in by IL-5 from Th2 cells. Their granule proteins damage the lining and keep inflammation going."], ["mast", "Mast cell", "g-mast", "Mast cell activation. IgE on the surface is cross-linked by allergen and the cell releases histamine and other mediators."], ["muc", "Mucus", "g-mucus", "Mucus from goblet cells and submucosal glands. It becomes thick in asthma and can plug the lumen."], ["bron", "Tightening", "g-bad", "Bronchoconstriction: how much the airway smooth muscle is tightening and narrowing the lumen."], ["remod", "Remodelling", "g-remod", "Remodelling of the wall with repeated inflammation: thicker basement membrane, larger muscle and glands. It reverses slowly, if at all."], ["air", "Airflow", "g-air", "How open the airway is. A reliever raises this fast but does not change the inflammation underneath."]]
+    .forEach(([id, name, cls, tip], i) => { gg[id] = gauge(P, xs[i] + 30, y0 + 2, h - 18, 18, cls, name, tip); });
+  const ox = L.over;
+  pill(ox, "Allergen", 620, 72, 660, 64, "Inhaled allergen such as pollen or house dust mite. It reaches the airway lining and, on re-exposure, cross-links IgE on mast cells.");
+  pill(ox, "Epithelium", 140, 168, 180, 96, "The airway lining. It senses allergen and other triggers, and its cilia sweep mucus out. Eosinophil proteins can injure it.");
+  pill(ox, "Goblet cell", 332, 168, 385, 96, "Goblet cells in the lining make mucus. IL-13 from Th2 cells turns them up and increases their number.");
+  pill(ox, "Mucus plug", 544, 148, 570, 110, "Thick mucus sitting in the lumen. When it plugs a small airway, air cannot pass and airflow falls.");
+  pill(ox, "Remodelled wall", 420, 182, 825, 96, "With repeated inflammation the wall remodels: the basement membrane thickens, smooth muscle and submucosal glands enlarge, and narrowing becomes harder to reverse fully.");
+  pill(ox, "Dendritic cell", 110, 233, 110, 298, "Dendritic cell: picks up allergen at the lining and presents it to helper T cells, starting the Th2 pattern.");
+  pill(ox, "Th2 cell", 250, 252, 250, 312, "Th2 helper T cell. It makes IL-4, IL-5 and IL-13, the cytokines that drive allergic airway inflammation.");
+  pill(ox, "B cell", 370, 221, 385, 288, "B cell. IL-4 tells it to switch to making IgE antibody, which then arms mast cells.");
+  pill(ox, "Mast cell", 548, 258, 585, 318, "Mast cell armed with IgE. Allergen cross-links the IgE and the cell degranulates, releasing histamine and other mediators that tighten muscle and swell the wall.");
+  pill(ox, "Eosinophils", 640, 300, 720, 312, "Eosinophils leave the blood vessel and gather in the wall, called in by IL-5. Their granules damage the lining.");
+  pill(ox, "Airway smooth muscle", 110, MY, 150, 405, "Smooth muscle around the airway. Histamine and other mediators, and IL-13, make it tighten too easily and too much, which narrows the lumen.");
+  pill(ox, "Blood vessel", 410, VY, 320, 425, "Vessel that supplies the wall. Eosinophils leave from here and travel into the tissue.");
+  pill(ox, "Submucosal gland", 800, 292, 875, 338, "Submucosal glands make mucus. In remodelling they enlarge and add to plugging.");
+  [["il13", "IL-13", 275, 228, 190, 338, "IL-13 from Th2 cells: more mucus, more goblet cells and twitchy smooth muscle."], ["il4", "IL-4", 315, 246, 305, 338, "IL-4 from Th2 cells: pushes B cells to make IgE and helps Th2 cells grow."], ["ige", "IgE", 455, 236, 465, 338, "IgE antibody made by B cells. It sits on mast cells and waits for allergen."], ["il5", "IL-5", 430, 300, 545, 338, "IL-5 from Th2 cells: calls eosinophils in from the blood and keeps them alive."], ["hist", "Histamine", 545, 300, 660, 338, "Histamine and other mast cell mediators. They tighten smooth muscle, widen and leak small vessels, and increase mucus."]]
+    .forEach(([k, n, x, y, tx, ty, tip]) => { pill(ox, n, x, y, tx, ty, tip); });
+  [[1, "Reliever: muscle relaxes", 560, MY, 510, 64, "A reliever bronchodilator relaxes airway smooth muscle and opens the airway quickly. It does not treat the inflammation underneath."], [2, "Steroid: calms wall", 300, 220, 500, 64, "An inhaled corticosteroid switches off many inflammatory genes in lining, immune and mast cells, so eosinophils, mucus and twitchiness fall over time."], [3, "Steroid plus reliever", 560, MY, 505, 64, "Inhaled steroid for the inflammation plus a reliever for quick muscle relaxation: control of the cause with fast relief."], [4, "Anti-IgE: IgE mopped up", 500, 226, 510, 64, "An anti-IgE biologic binds IgE so mast cells are less well armed and degranulate less on allergen exposure."]]
+    .forEach(([d, n, x, y, tx, ty, tip]) => { dpills[d] = pill(ox, n, x, y, tx, ty, tip); dpills[d].style.opacity = 0; });
+}
+const acc = { allergen: 0 };
+const s = { T2: 0.5, Ig: 0.5, mast: 0.5, eos: 0.5, muc: 0.5, remod: 0.3, bron: 0.5, air: 0.5 }, dw = [1, 0, 0, 0, 0];
+function init() { initArrows(); initVessel(); initMuscle(); initBase(); initEpi(); initMucus(); initImmune(); initMobile(); initMarks(); initPanel(); }
+function step(dt, m) {
+  const k2 = Math.min(1, dt * 0.55), k1 = Math.min(1, dt * 1.2);
+  for (const q of ["T2", "Ig", "mast", "eos", "muc", "remod", "bron", "air"]) s[q] = lerp(s[q], m[q], q === "bron" || q === "air" ? k1 : k2);
+  dw.forEach((_, d) => { dw[d] = lerp(dw[d], m.drug === d ? 1 : 0, k1); });
+  wallY = WB - 46 * s.bron - 10 * s.remod + 2 * Math.sin(tm / 1100);
+  L.lumen.setAttribute("height", f1(wallY - 44));
+  epi.forEach((e) => { place(e.g, e.x, wallY + 6 + Math.sin(tm / 900 + e.i) * 0.6, 0, 1); if (e.ci) { let d = ""; for (const o of [-6, 0, 6]) d += "M" + f1(o) + " -9q" + f1(Math.sin(tm / 260 + e.i + o) * 3) + " -5 " + f1(Math.sin(tm / 300 + o) * 3) + " -10"; e.ci.setAttribute("d", d); }
+    else e.gr.forEach((g, j) => g.setAttribute("opacity", (0.25 + 0.75 * clamp(s.muc * 1.4 - j * 0.1)).toFixed(2))); });
+  if (baseRect) { baseRect.setAttribute("y", f1(wallY + 20)); baseRect.setAttribute("height", f1(2 + 7 * s.remod)); }
+  colls.forEach((c) => c.setAttribute("opacity", (0.15 + 0.85 * s.remod).toFixed(2)));
+  glandG.forEach((g, i) => place(g, i === 0 ? 190 : 800, 300, 0, 0.7 + 0.5 * s.remod + 0.15 * s.muc));
+  plugs.forEach((p) => { const v = clamp(s.muc * 1.5 - p.k * 0.35); p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(wallY - 15 - p.k * 3) + ") scale(" + (0.15 + 0.85 * v).toFixed(2) + ")"); p.e.setAttribute("opacity", v > 0.05 ? "1" : "0"); });
+  sm.forEach((c) => { const sx = (1 - 0.28 * s.bron) * (1 + 0.15 * s.remod), sy = (1 + 0.3 * s.bron) * (1 + 0.12 * s.remod); c.g.setAttribute("transform", "translate(" + f1(c.x) + " " + f1(c.y) + ") scale(" + sx.toFixed(2) + " " + sy.toFixed(2) + ")"); });
+  for (const k in fix) { const f = fix[k], act = k === "m1" || k === "m2" ? s.mast : k === "b" ? s.Ig : s.T2; place(f.g, f.x + Math.sin(tm / 1500 + f.ph) * 2.5, f.y + Math.cos(tm / 1700 + f.ph) * 2.2, Math.sin(tm / 2400 + f.ph) * 5, 1 + 0.05 * act * Math.sin(tm / 320 + f.ph)); f.g.style.opacity = (0.55 + 0.45 * clamp(act * 1.3)).toFixed(2); }
+  granules.forEach((g) => g.e.setAttribute("opacity", (1 - 0.7 * s.mast).toFixed(2)));
+  ige.forEach((y) => { const a = clamp((1 - 0.85 * dw[4]) * (0.3 + 0.7 * s.T2)); y.e.style.opacity = a.toFixed(2); });
+  const ne = Math.round(s.eos * 7);
+  mob.forEach((o) => { const want = o.i < ne, op = parseFloat(o.g.style.opacity || 0);
+    if (o.st === 0) { if (want) { o.st = 1; o.x = o.hx + rnd(-26, 26); o.y = VY - 10; o.g.style.opacity = 1; } }
+    else if (o.st === 1) { o.y -= 46 * dt; o.x += (o.hx - o.x) * dt * 0.8; place(o.g, o.x, o.y, 0, 1); if (o.y <= o.hy) o.st = 2; if (!want) o.st = 3; }
+    else if (o.st === 2) { place(o.g, o.hx + Math.sin(tm / 700 + o.i) * 7, o.hy + Math.cos(tm / 900 + o.i * 2) * 5, Math.sin(tm / 500 + o.i) * 14, 1); if (!want) o.st = 3; }
+    else { o.g.style.opacity = Math.max(0, op - dt * 0.7); if (op < 0.06) { o.st = 0; o.g.style.opacity = 0; } } });
+  const rate = { T2: s.T2, Ig: s.Ig * (1 - 0.7 * dw[4]), eos: s.eos * (1 - 0.5 * dw[2]) * (1 - 0.5 * dw[3]), mast: s.mast, muc: s.muc * s.T2 };
+  FLOWS.forEach((f) => { let r = f.rate * (rate[f.src] || 0); if (f.k === "ige") r *= 1 - 0.6 * dw[4]; if (f.k === "hist1" || f.k === "hist2") r *= 1 - 0.65 * dw[4]; r *= 1 - 0.45 * dw[2] - 0.45 * dw[3]; f.acc += dt * r; while (f.acc >= 1) { f.acc--; emitP(f); } });
+  parts.forEach((p) => { if (!p.on) return; p.u += dt * 0.45; const a = p.f.tr.at(p.u); p.e.setAttribute("cx", f1(a.x + Math.sin(tm / 300 + p.u * 9) * 1.2)); p.e.setAttribute("cy", f1(a.y)); if (p.u > 1) { p.on = false; p.e.setAttribute("opacity", "0"); } else p.e.setAttribute("opacity", f1(Math.min(1, p.u * 6, (1 - p.u) * 6))); });
+  acc.allergen += dt * 2.6 * (0.3 + m.a);
+  while (acc.allergen >= 1) { acc.allergen--; const p = trig.find((q) => !q.on); if (p) { p.on = true; p.x = rnd(280, 780); p.y = 52; p.vx = rnd(-6, 6); p.e.setAttribute("d", star); p.e.setAttribute("class", "p-allergen"); } }
+  trig.forEach((p) => { if (!p.on) return; p.y += 30 * dt; p.x += p.vx * dt + Math.sin(tm / 500 + p.x) * 0.2; p.e.setAttribute("transform", "translate(" + f1(p.x) + " " + f1(p.y) + ") rotate(" + f1(p.y * 3) + ")"); p.e.setAttribute("opacity", "1"); if (p.y > wallY - 16) { p.on = false; p.e.setAttribute("opacity", "0"); } });
+  for (const d in mk2) mk2[d].setAttribute("opacity", dw[d].toFixed(2)); for (const d in dpills) dpills[d].style.opacity = dw[d].toFixed(2);
+  gg.eos.set(s.eos, wordOf(s.eos, 0.28, 0.58, ["low", "raised", "high"])); gg.mast.set(s.mast, wordOf(s.mast, 0.28, 0.58, ["quiet", "primed", "firing"])); gg.muc.set(s.muc, wordOf(s.muc, 0.3, 0.62, ["thin", "thick", "plugging"]));
+  gg.bron.set(s.bron, wordOf(s.bron, 0.3, 0.58, ["relaxed", "narrowed", "tight"])); gg.remod.set(s.remod, wordOf(s.remod, 0.3, 0.58, ["little", "some", "marked"])); gg.air.set(s.air, wordOf(s.air, 0.32, 0.62, ["low", "reduced", "open"]));
+}
+run({ init, step });
+</script></body></html>

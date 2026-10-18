@@ -639,7 +639,7 @@ function init() {
   });
 
   // Volume-Pressure Curve Mini-Plot
-  const CV = { x: 604, y: 132, w: 322, h: 94 };
+  const CV = { x: 604, y: 146, w: 322, h: 80 };
   mk("rect", { class: "dr-panel", x: CV.x, y: CV.y, width: CV.w, height: CV.h, rx: 6 }, L.monro);
   for (let gy = CV.y + 18; gy < CV.y + CV.h; gy += 18) {
     mk("line", { class: "icp-grid", x1: CV.x, y1: gy, x2: CV.x + CV.w, y2: gy }, L.monro);
@@ -658,7 +658,7 @@ function init() {
   mkG.dot = mk("circle", { cx: CV.x + 15, cy: CV.y + CV.h - 10, r: 5, fill: "var(--c-bad)", stroke: "var(--anatomy-paper)", "stroke-width": "1.5" }, L.monro);
 
   /* ================= 7. Cushing Response & Perfusion Box (Right Bottom) ================= */
-  const CB = { x: 604, y: 280, w: 322, h: 22 };
+  const CB = { x: 604, y: 288, w: 322, h: 22 };
   mk("rect", { class: "dr-panel", x: CB.x, y: CB.y, width: CB.w, height: CB.h, rx: 4 }, L.cushing);
   csh.mapBar = mk("rect", { class: "dr-g-fill g-good", x: CB.x, y: CB.y, width: 220, height: 10, rx: 2 }, L.cushing);
   csh.icpBar = mk("rect", { class: "dr-g-fill g-bad", x: CB.x, y: CB.y + 12, width: 40, height: 10, rx: 2 }, L.cushing);
@@ -666,7 +666,7 @@ function init() {
   csh.cppTxt.textContent = "CPP: adequate";
 
   // Waveforms canvas (Arterial BP, Heart rate, Respiration)
-  const WF = { x: 604, y: 318, w: 322, h: 110 };
+  const WF = { x: 604, y: 326, w: 322, h: 102 };
   mk("rect", { class: "dr-panel", x: WF.x, y: WF.y, width: WF.w, height: WF.h, rx: 6 }, L.cushing);
   mk("line", { class: "icp-grid", x1: WF.x + 82, y1: WF.y, x2: WF.x + 82, y2: WF.y + WF.h }, L.cushing);
   for (let gy = WF.y + 18; gy < WF.y + WF.h; gy += 18) {
@@ -678,7 +678,7 @@ function init() {
 
   mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 26, fill: "var(--c-rbc)" }, L.cushing).textContent = "Arterial BP";
   mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 60, fill: "var(--c-good)" }, L.cushing).textContent = "Heart rate";
-  mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 94, fill: "var(--c-cyt)" }, L.cushing).textContent = "Respiration";
+  mk("text", { class: "dr-pt2", x: WF.x + 8, y: WF.y + 90, fill: "var(--c-cyt)" }, L.cushing).textContent = "Respiration";
 
   /* ================= 8. Label Pills ================= */
   const o = L.over;
@@ -696,13 +696,13 @@ function init() {
   pill(o, "Pupil (CN III)", 505, 335, 495, 260, "Compression of the third cranial nerve by the herniating uncus paralyzes parasympathetic pupillomotor fibers, causing a dilated, unreactive pupil.");
 
   pill(o, "Brainstem", 275, 370, 185, 395, "Contains the midbrain, pons and medulla oblongata, housing vital cardiovascular and respiratory pacemaker nuclei.");
-  pill(o, "Tonsillar coning", 312, 355, 475, 395, "Cerebellar tonsils are forced downward into the foramen magnum, directly compressing the medulla oblongata and causing respiratory arrest.");
+  pill(o, "Tonsillar coning", 312, 355, 475, 422, "Cerebellar tonsils are forced downward into the foramen magnum, directly compressing the medulla oblongata and causing respiratory arrest.");
 
-  pill(o, "Volume buffer", 750, 88, 845, 80, "Monro-Kellie doctrine: intracranial volume is shared between brain, venous blood, CSF and mass. Venous blood and CSF serve as initial buffers.");
-  pill(o, "Compliance curve", 790, 180, 845, 142, "Volume-pressure relationship: flat during initial compensation, then steep exponential pressure rise once compensatory buffers are exhausted.");
+  pill(o, "Volume buffer", 660, 88, 680, 130, "Monro-Kellie doctrine: intracranial volume is shared between brain, venous blood, CSF and mass. Venous blood and CSF serve as initial buffers.");
+  pill(o, "Compliance curve", 790, 180, 845, 130, "Volume-pressure relationship: flat during initial compensation, then steep exponential pressure rise once compensatory buffers are exhausted.");
 
-  pill(o, "Perfusion margin", 740, 290, 845, 280, "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. As ICP rises, perfusion margin narrows.");
-  pill(o, "Cushing triad", 760, 355, 845, 338, "Life-threatening autonomic response to medullary ischaemia: severe arterial hypertension, reflex bradycardia and respiratory irregularity.");
+  pill(o, "Perfusion margin", 700, 293, 690, 274, "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. As ICP rises, perfusion margin narrows.");
+  pill(o, "Cushing triad", 760, 355, 845, 274, "Life-threatening autonomic response to medullary ischaemia: severe arterial hypertension, reflex bradycardia and respiratory irregularity.");
 
   // Treatment indicator pills
   const pillHead = pill(o, "Head elevation", 232, 380, 85, 395, "Head elevation with neutral neck alignment accelerates jugular venous drainage and reduces intracranial venous blood volume without dropping arterial pressure.");
@@ -853,7 +853,7 @@ function updateMonroKellie() {
   mkG.bMass.setAttribute("width", f1(wMass));
 
   // Compliance Curve Cursor Position
-  const CV = { x: 604, y: 132, w: 322, h: 94 };
+  const CV = { x: 604, y: 146, w: 322, h: 80 };
   const uVol = clamp(mFrac / 0.24);
   // Path formula calculation
   const dotX = CV.x + 15 + uVol * (CV.w - 30);
@@ -879,7 +879,7 @@ function updateCushing(dt) {
   csh.cppTxt.setAttribute("fill", sm.cpp < 0.35 ? "var(--c-bad)" : sm.cpp < 0.54 ? "var(--c-neut)" : "var(--c-good)");
 
   // Waveforms drawing (dedicated label column on left, traces run x = 690 to 920)
-  const WF = { x: 604, y: 318, w: 322, h: 110 };
+  const WF = { x: 604, y: 326, w: 322, h: 102 };
   const cshAct = sm.cushing;
 
   // Waveform frequencies and amplitudes
@@ -892,7 +892,7 @@ function updateCushing(dt) {
   const hrBase = WF.y + 60;
 
   // 3. Respiration: irregular, shallow, apnoeic in severe coning
-  const respBase = WF.y + 96;
+  const respBase = WF.y + 92;
   const respAmp = Math.max(2, 6 * (1 - cshAct * 0.6));
 
   const xStart = WF.x + 86, xEnd = WF.x + WF.w - 6;

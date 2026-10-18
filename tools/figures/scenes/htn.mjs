@@ -56,7 +56,7 @@ const CY = 252;
 const body = `
 <rect class="sc-tissue" x="14" y="44" width="${W - 28}" height="396" rx="18"/>
 <text class="sc-zone" x="34" y="68">WHAT RAISES THE PRESSURE</text>
-<text class="sc-zone sc-dim" x="34" y="238">ARTERIOLE: THE RESISTANCE VESSEL</text>
+<text class="sc-zone sc-dim" x="250" y="192">THE RESISTANCE VESSEL</text>
 <text class="sc-zone sc-dim" x="34" y="348">END ORGANS: WHERE SUSTAINED PRESSURE DOES DAMAGE</text>
 <g id="drivers"></g><g id="vessel"></g><g id="heart"></g><g id="organs"></g><g id="parts"></g><g id="marks"></g><g id="over"></g><g id="panel"></g>`;
 
