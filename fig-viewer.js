@@ -261,6 +261,22 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       svg.appendChild(gr);
     });
   }
+  /* Touch has no hover: a tap on a labelled part shows its one-line explanation and keeps it until another part is tapped. */
+  function tapInfo(doc, win) {
+    var info = doc.getElementById("info"); if (!info || info.getAttribute("data-tap")) return;
+    info.setAttribute("data-tap", "1");
+    if (/hover or focus/i.test(info.textContent)) info.textContent = "Tap a labelled part for a one-line explanation.";
+    var idle = info.textContent, last = null;
+    ["pointerleave", "blur"].forEach(function (t) {
+      doc.addEventListener(t, function (e) { if (e.target && e.target.closest && e.target.closest("[data-info]") && (t === "blur" || e.pointerType === "touch")) e.stopImmediatePropagation(); }, true);
+    });
+    doc.addEventListener("click", function (e) {
+      var el = e.target && e.target.closest ? e.target.closest("[data-info]") : null;
+      if (last) last.classList.remove("is-hot");
+      if (!el) { last = null; info.textContent = idle; return; }
+      last = el; el.classList.add("is-hot"); info.textContent = el.getAttribute("data-info");
+    });
+  }
   function appMode(doc, win) {
     if (!doc || !doc.body || doc.getElementById("smdAppCss")) return;
     var st = doc.createElement("style"); st.id = "smdAppCss"; st.textContent = APP_CSS + COLOR_CSS + IC_CSS; doc.body.appendChild(st);
@@ -383,7 +399,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><span class="smdfig-tools"><button type="button" class="smdfig-pp smdfig-ms-btn" aria-expanded="false" hidden>Steps</button><button type="button" class="smdfig-pp" aria-pressed="false" hidden>Pause</button><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></span></div>' +
       '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
     var fr = el.querySelector("iframe");
-    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
+    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { tapInfo(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
     el.querySelector(".smdfig-x").addEventListener("click", close);
     try { masteryPanel(el, String(o.src || "")); } catch (e) {}
     var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); var ms = el.querySelector(".smdfig-ms"); if (ms && !ms.hidden) { ms.hidden = true; var mb = el.querySelector(".smdfig-ms-btn"); if (mb) mb.setAttribute("aria-expanded", "false"); } else close(); } };
