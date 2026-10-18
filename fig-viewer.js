@@ -2,6 +2,7 @@
  * Opens a self-contained figure page (prep/figures/<name>.html, built with the Anima kit, MIT: prep/figures/ANIMA-LICENSE.txt)
  * full screen over whatever is open, in the app's theme: <name>.html is the dark build, <name>-light.html the light one.
  *   SMD_FIG.open({ src: "prep/figures/beta-blockers.html", title, from: element, query: "d=2&name=Metoprolol" })
+ *   A Pause / Play button in the top bar drives the figure's own #pause button and remembers the choice.
  *   SMD_FIG.close() -> true when one was open;  SMD_FIG.isOpen()
  * The page is our own static file (same origin), so it runs in an iframe that fills the sheet and scrolls only up and down.
  * appMode() restyles it to feel like part of the app (no frame, no hover text, big controls) and makes the drawing fit the screen
@@ -20,6 +21,7 @@
       ".smdfig-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(env(safe-area-inset-top,0px) + 8px) 12px 8px 16px}" +
       ".smdfig-top p{margin:0;font-weight:600}.smdfig-x{min-width:44px;min-height:44px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 20px/1 system-ui;cursor:pointer}" +
       ".smdfig-sc{flex:1;min-height:0;overflow:hidden}.smdfig-fr{display:block;width:100%;height:100%;border:0}" +
+      ".smdfig-tools{display:flex;align-items:center;gap:8px}.smdfig-pp{min-height:44px;padding:0 16px;border:0;border-radius:22px;background:rgba(128,128,128,.25);color:inherit;font:600 14px system-ui;cursor:pointer}.smdfig-pp[hidden]{display:none}.smdfig-pp:focus-visible{outline:2px solid currentColor;outline-offset:2px}" +
       ".smdfig-h{display:block;font-weight:400;font-size:12px;opacity:.7}.smdfig-x:focus-visible{outline:2px solid currentColor;outline-offset:2px}";
     D.head.appendChild(st);
   }
@@ -306,6 +308,19 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     S._api = { zoomAt: zoomAt, size: size, state: S };
     win.__smdZoom = S;
   }
+  /* Pause / Play in the viewer's top bar. The figure page has its own #pause button (below the controls); this one drives it, mirrors its
+   * state and remembers the choice (localStorage smdFigPaused) so a viewer who prefers stillness gets figures that open paused. */
+  function motionToggle(el, doc, win) {
+    var btn = el.querySelector(".smdfig-pp"), pg = doc && doc.getElementById("pause"); if (!btn || !pg) return;
+    var KEY = "smdFigPaused";
+    function paused() { return pg.getAttribute("aria-pressed") === "true"; }
+    function sync() { var p = paused(); btn.textContent = p ? "Play" : "Pause"; btn.setAttribute("aria-pressed", String(p)); btn.setAttribute("aria-label", p ? "Play the motion" : "Pause the motion"); }
+    var want = null; try { want = G.localStorage.getItem(KEY); } catch (e) {}
+    if (want === "1" && !paused()) pg.click();
+    btn.hidden = false; sync();
+    btn.addEventListener("click", function () { pg.click(); });
+    if (win.MutationObserver) new win.MutationObserver(function () { sync(); try { G.localStorage.setItem(KEY, paused() ? "1" : "0"); } catch (e) {} }).observe(pg, { attributes: true, attributeFilter: ["aria-pressed"] });
+  }
   function pageOf(src, dark) {
     var base = (G.SMD_PREP_BASE || "/prep/").replace(/prep\/$/, "");
     return (base || "/") + (dark ? src : src.replace(/\.html$/, "-light.html"));
@@ -326,10 +341,10 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     var dark = D.body.classList.contains("dark"), q = String(o.query || "").replace(/[^A-Za-z0-9=&%._ -]/g, "").slice(0, 120);
     var el = D.createElement("div");
     el.className = "smdfig" + (dark ? "" : " lt"); el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", String(o.title || "Interactive figure"));
-    el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></div>' +
+    el.innerHTML = '<div class="smdfig-top"><p>' + esc(o.title || "Interactive figure") + '' + '</p><span class="smdfig-tools"><button type="button" class="smdfig-pp" aria-pressed="false" hidden>Pause</button><button type="button" class="smdfig-x" aria-label="Close the figure">&#10005;</button></span></div>' +
       '<div class="smdfig-sc"><iframe class="smdfig-fr" title="' + esc(o.title || "Interactive figure") + '" src="' + esc(pageOf(src, dark) + (q ? "?" + q : "")) + '" sandbox="allow-scripts allow-same-origin"></iframe></div>';
     var fr = el.querySelector("iframe");
-    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} });
+    fr.addEventListener("load", function () { try { appMode(fr.contentDocument, fr.contentWindow); } catch (e) {} try { motionToggle(el, fr.contentDocument, fr.contentWindow); } catch (e) {} });
     el.querySelector(".smdfig-x").addEventListener("click", close);
     var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); close(); } };
     D.addEventListener("keydown", key, true);
